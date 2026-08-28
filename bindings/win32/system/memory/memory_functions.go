@@ -400,8 +400,8 @@ func AllocateUserPhysicalPagesNuma(hProcess foundation.HANDLE, NumberOfPages *ui
 // CreateFileMapping calls KERNEL32!CreateFileMappingW.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw
 // Minimum OS: windows5.1.2600.
-func CreateFileMapping(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName string) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateFileMapping(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName *string) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateFileMapping.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpFileMappingAttributes)), uintptr(flProtect), uintptr(dwMaximumSizeHigh), uintptr(dwMaximumSizeLow), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -412,8 +412,8 @@ func CreateFileMapping(hFile foundation.HANDLE, lpFileMappingAttributes *securit
 
 // CreateFileMapping2 calls api-ms-win-core-memory-l1-1-7!CreateFileMapping2.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemapping2
-func CreateFileMapping2(File foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, DesiredAccess uint32, PageProtection PAGE_PROTECTION_FLAGS, AllocationAttributes uint32, MaximumSize uint64, Name string, ExtendedParameters []MEM_EXTENDED_PARAMETER) (foundation.HANDLE, error) {
-	_Name := win32.UTF16Ptr(Name)
+func CreateFileMapping2(File foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, DesiredAccess uint32, PageProtection PAGE_PROTECTION_FLAGS, AllocationAttributes uint32, MaximumSize uint64, Name *string, ExtendedParameters []MEM_EXTENDED_PARAMETER) (foundation.HANDLE, error) {
+	_Name := win32.UTF16PtrOrNil(Name)
 	var _ExtendedParameters *MEM_EXTENDED_PARAMETER
 	if len(ExtendedParameters) > 0 {
 		_ExtendedParameters = &ExtendedParameters[0]
@@ -441,8 +441,8 @@ func CreateFileMappingA(hFile foundation.HANDLE, lpFileMappingAttributes *securi
 // CreateFileMappingFromApp calls KERNEL32!CreateFileMappingFromApp.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingfromapp
 // Minimum OS: windows8.0.
-func CreateFileMappingFromApp(hFile foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, PageProtection PAGE_PROTECTION_FLAGS, MaximumSize uint64, Name string) (foundation.HANDLE, error) {
-	_Name := win32.UTF16Ptr(Name)
+func CreateFileMappingFromApp(hFile foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, PageProtection PAGE_PROTECTION_FLAGS, MaximumSize uint64, Name *string) (foundation.HANDLE, error) {
+	_Name := win32.UTF16PtrOrNil(Name)
 	r1, _, e1 := syscall.SyscallN(procCreateFileMappingFromApp.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(SecurityAttributes)), uintptr(PageProtection), uintptr(MaximumSize), uintptr(unsafe.Pointer(_Name)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -454,8 +454,8 @@ func CreateFileMappingFromApp(hFile foundation.HANDLE, SecurityAttributes *secur
 // CreateFileMappingNuma calls KERNEL32!CreateFileMappingNumaW.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingnumaw
 // Minimum OS: windows6.0.6000.
-func CreateFileMappingNuma(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName string, nndPreferred uint32) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateFileMappingNuma(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName *string, nndPreferred uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateFileMappingNuma.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpFileMappingAttributes)), uintptr(flProtect), uintptr(dwMaximumSizeHigh), uintptr(dwMaximumSizeLow), uintptr(unsafe.Pointer(_lpName)), uintptr(nndPreferred))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -853,8 +853,8 @@ func IsBadReadPtr(lp unsafe.Pointer, ucb uintptr) bool {
 // IsBadStringPtr calls KERNEL32!IsBadStringPtrW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-isbadstringptrw
 // Minimum OS: windows5.1.2600.
-func IsBadStringPtr(lpsz string, ucchMax uintptr) bool {
-	_lpsz := win32.UTF16Ptr(lpsz)
+func IsBadStringPtr(lpsz *string, ucchMax uintptr) bool {
+	_lpsz := win32.UTF16PtrOrNil(lpsz)
 	r1, _, _ := syscall.SyscallN(procIsBadStringPtr.Addr(), uintptr(unsafe.Pointer(_lpsz)), uintptr(ucchMax))
 	return r1 != 0
 }

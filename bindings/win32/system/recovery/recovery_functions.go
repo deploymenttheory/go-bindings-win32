@@ -95,8 +95,8 @@ func RegisterApplicationRecoveryCallback(pRecoveyCallback systemwindowsprogrammi
 // RegisterApplicationRestart calls KERNEL32!RegisterApplicationRestart.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-registerapplicationrestart
 // Minimum OS: windows6.0.6000.
-func RegisterApplicationRestart(pwzCommandline string, dwFlags REGISTER_APPLICATION_RESTART_FLAGS) error {
-	_pwzCommandline := win32.UTF16Ptr(pwzCommandline)
+func RegisterApplicationRestart(pwzCommandline *string, dwFlags REGISTER_APPLICATION_RESTART_FLAGS) error {
+	_pwzCommandline := win32.UTF16PtrOrNil(pwzCommandline)
 	r1, _, _ := syscall.SyscallN(procRegisterApplicationRestart.Addr(), uintptr(unsafe.Pointer(_pwzCommandline)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }

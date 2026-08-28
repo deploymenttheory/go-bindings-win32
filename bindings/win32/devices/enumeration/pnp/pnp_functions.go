@@ -100,8 +100,8 @@ func SwDeviceInterfacePropertySet(hSwDevice HSWDEVICE, pszDeviceInterfaceId stri
 // SwDeviceInterfaceRegister calls CFGMGR32!SwDeviceInterfaceRegister.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdeviceinterfaceregister
 // Minimum OS: windows8.0.
-func SwDeviceInterfaceRegister(hSwDevice HSWDEVICE, pInterfaceClassGuid *win32.GUID, pszReferenceString string, pProperties []devicesproperties.DEVPROPERTY, fEnabled bool, ppszDeviceInterfaceId *foundation.PWSTR) error {
-	_pszReferenceString := win32.UTF16Ptr(pszReferenceString)
+func SwDeviceInterfaceRegister(hSwDevice HSWDEVICE, pInterfaceClassGuid *win32.GUID, pszReferenceString *string, pProperties []devicesproperties.DEVPROPERTY, fEnabled bool, ppszDeviceInterfaceId *foundation.PWSTR) error {
+	_pszReferenceString := win32.UTF16PtrOrNil(pszReferenceString)
 	var _pProperties *devicesproperties.DEVPROPERTY
 	if len(pProperties) > 0 {
 		_pProperties = &pProperties[0]

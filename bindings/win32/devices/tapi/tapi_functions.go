@@ -940,9 +940,9 @@ func LineConfigProvider(hwndOwner foundation.HWND, dwPermanentProviderID uint32)
 
 // LineCreateAgent calls TAPI32!lineCreateAgentW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecreateagentw
-func LineCreateAgent(hLine uint32, lpszAgentID string, lpszAgentPIN string, lphAgent *uint32) int32 {
-	_lpszAgentID := win32.UTF16Ptr(lpszAgentID)
-	_lpszAgentPIN := win32.UTF16Ptr(lpszAgentPIN)
+func LineCreateAgent(hLine uint32, lpszAgentID *string, lpszAgentPIN *string, lphAgent *uint32) int32 {
+	_lpszAgentID := win32.UTF16PtrOrNil(lpszAgentID)
+	_lpszAgentPIN := win32.UTF16PtrOrNil(lpszAgentPIN)
 	r1, _, _ := syscall.SyscallN(procLineCreateAgent.Addr(), uintptr(hLine), uintptr(unsafe.Pointer(_lpszAgentID)), uintptr(unsafe.Pointer(_lpszAgentPIN)), uintptr(unsafe.Pointer(lphAgent)))
 	return int32(r1)
 }
@@ -956,8 +956,8 @@ func LineCreateAgentA(hLine uint32, lpszAgentID foundation.PSTR, lpszAgentPIN fo
 
 // LineCreateAgentSession calls TAPI32!lineCreateAgentSessionW.
 // https://learn.microsoft.com/windows/win32/api/tapi/nf-tapi-linecreateagentsessionw
-func LineCreateAgentSession(hLine uint32, hAgent uint32, lpszAgentPIN string, dwWorkingAddressID uint32, lpGroupID *win32.GUID, lphAgentSession *uint32) int32 {
-	_lpszAgentPIN := win32.UTF16Ptr(lpszAgentPIN)
+func LineCreateAgentSession(hLine uint32, hAgent uint32, lpszAgentPIN *string, dwWorkingAddressID uint32, lpGroupID *win32.GUID, lphAgentSession *uint32) int32 {
+	_lpszAgentPIN := win32.UTF16PtrOrNil(lpszAgentPIN)
 	r1, _, _ := syscall.SyscallN(procLineCreateAgentSession.Addr(), uintptr(hLine), uintptr(hAgent), uintptr(unsafe.Pointer(_lpszAgentPIN)), uintptr(dwWorkingAddressID), uintptr(unsafe.Pointer(lpGroupID)), uintptr(unsafe.Pointer(lphAgentSession)))
 	return int32(r1)
 }

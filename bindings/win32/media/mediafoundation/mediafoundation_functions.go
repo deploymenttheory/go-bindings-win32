@@ -1639,8 +1639,8 @@ func MFCreateSensorGroup(SensorGroupSymbolicLink string, ppSensorGroup **IMFSens
 // MFCreateSensorProfile calls MFSENSORGROUP!MFCreateSensorProfile.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensorprofile
 // Minimum OS: windows10.0.17134.
-func MFCreateSensorProfile(ProfileType *win32.GUID, ProfileIndex uint32, Constraints string, ppProfile **IMFSensorProfile) error {
-	_Constraints := win32.UTF16Ptr(Constraints)
+func MFCreateSensorProfile(ProfileType *win32.GUID, ProfileIndex uint32, Constraints *string, ppProfile **IMFSensorProfile) error {
+	_Constraints := win32.UTF16PtrOrNil(Constraints)
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorProfile.Addr(), uintptr(unsafe.Pointer(ProfileType)), uintptr(ProfileIndex), uintptr(unsafe.Pointer(_Constraints)), uintptr(unsafe.Pointer(ppProfile)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1696,8 +1696,8 @@ func MFCreateSinkWriterFromMediaSink(pMediaSink *IMFMediaSink, pAttributes *IMFA
 // MFCreateSinkWriterFromURL calls MFReadWrite!MFCreateSinkWriterFromURL.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesinkwriterfromurl
 // Minimum OS: windows6.1.
-func MFCreateSinkWriterFromURL(pwszOutputURL string, pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) error {
-	_pwszOutputURL := win32.UTF16Ptr(pwszOutputURL)
+func MFCreateSinkWriterFromURL(pwszOutputURL *string, pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) error {
+	_pwszOutputURL := win32.UTF16PtrOrNil(pwszOutputURL)
 	r1, _, _ := syscall.SyscallN(procMFCreateSinkWriterFromURL.Addr(), uintptr(unsafe.Pointer(_pwszOutputURL)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSinkWriter)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2435,8 +2435,8 @@ func MFMapDXGIFormatToDX9Format(dx11 graphicsdxgicommon.DXGI_FORMAT) uint32 {
 // MFPCreateMediaPlayer calls MFPlay!MFPCreateMediaPlayer.
 // https://learn.microsoft.com/windows/win32/api/mfplay/nf-mfplay-mfpcreatemediaplayer
 // Minimum OS: windows6.1.
-func MFPCreateMediaPlayer(pwszURL string, fStartPlayback bool, creationOptions MFP_CREATION_OPTIONS, pCallback *IMFPMediaPlayerCallback, hWnd foundation.HWND, ppMediaPlayer **IMFPMediaPlayer) error {
-	_pwszURL := win32.UTF16Ptr(pwszURL)
+func MFPCreateMediaPlayer(pwszURL *string, fStartPlayback bool, creationOptions MFP_CREATION_OPTIONS, pCallback *IMFPMediaPlayerCallback, hWnd foundation.HWND, ppMediaPlayer **IMFPMediaPlayer) error {
+	_pwszURL := win32.UTF16PtrOrNil(pwszURL)
 	_fStartPlayback := win32.Bool32(fStartPlayback)
 	r1, _, _ := syscall.SyscallN(procMFPCreateMediaPlayer.Addr(), uintptr(unsafe.Pointer(_pwszURL)), uintptr(_fStartPlayback), uintptr(creationOptions), uintptr(unsafe.Pointer(pCallback)), uintptr(hWnd), uintptr(unsafe.Pointer(ppMediaPlayer)))
 	return win32.ErrIfFailed(int32(r1))

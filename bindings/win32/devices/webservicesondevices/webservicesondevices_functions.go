@@ -304,11 +304,11 @@ func WSDFreeLinkedMemory(pVoid unsafe.Pointer) {
 // WSDGenerateFault calls wsdapi!WSDGenerateFault.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdgeneratefault
 // Minimum OS: windows6.0.6000.
-func WSDGenerateFault(pszCode string, pszSubCode string, pszReason string, pszDetail string, pContext *IWSDXMLContext, ppFault **WSD_SOAP_FAULT) error {
+func WSDGenerateFault(pszCode string, pszSubCode *string, pszReason string, pszDetail *string, pContext *IWSDXMLContext, ppFault **WSD_SOAP_FAULT) error {
 	_pszCode := win32.UTF16Ptr(pszCode)
-	_pszSubCode := win32.UTF16Ptr(pszSubCode)
+	_pszSubCode := win32.UTF16PtrOrNil(pszSubCode)
 	_pszReason := win32.UTF16Ptr(pszReason)
-	_pszDetail := win32.UTF16Ptr(pszDetail)
+	_pszDetail := win32.UTF16PtrOrNil(pszDetail)
 	r1, _, _ := syscall.SyscallN(procWSDGenerateFault.Addr(), uintptr(unsafe.Pointer(_pszCode)), uintptr(unsafe.Pointer(_pszSubCode)), uintptr(unsafe.Pointer(_pszReason)), uintptr(unsafe.Pointer(_pszDetail)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppFault)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -316,8 +316,8 @@ func WSDGenerateFault(pszCode string, pszSubCode string, pszReason string, pszDe
 // WSDGenerateFaultEx calls wsdapi!WSDGenerateFaultEx.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdgeneratefaultex
 // Minimum OS: windows6.0.6000.
-func WSDGenerateFaultEx(pCode *WSDXML_NAME, pSubCode *WSDXML_NAME, pReasons *WSD_LOCALIZED_STRING_LIST, pszDetail string, ppFault **WSD_SOAP_FAULT) error {
-	_pszDetail := win32.UTF16Ptr(pszDetail)
+func WSDGenerateFaultEx(pCode *WSDXML_NAME, pSubCode *WSDXML_NAME, pReasons *WSD_LOCALIZED_STRING_LIST, pszDetail *string, ppFault **WSD_SOAP_FAULT) error {
+	_pszDetail := win32.UTF16PtrOrNil(pszDetail)
 	r1, _, _ := syscall.SyscallN(procWSDGenerateFaultEx.Addr(), uintptr(unsafe.Pointer(pCode)), uintptr(unsafe.Pointer(pSubCode)), uintptr(unsafe.Pointer(pReasons)), uintptr(unsafe.Pointer(_pszDetail)), uintptr(unsafe.Pointer(ppFault)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -383,8 +383,8 @@ func WSDXMLAddSibling(pFirst *WSDXML_ELEMENT, pSecond *WSDXML_ELEMENT) error {
 // WSDXMLBuildAnyForSingleElement calls wsdapi!WSDXMLBuildAnyForSingleElement.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdxmlbuildanyforsingleelement
 // Minimum OS: windows6.0.6000.
-func WSDXMLBuildAnyForSingleElement(pElementName *WSDXML_NAME, pszText string, ppAny **WSDXML_ELEMENT) error {
-	_pszText := win32.UTF16Ptr(pszText)
+func WSDXMLBuildAnyForSingleElement(pElementName *WSDXML_NAME, pszText *string, ppAny **WSDXML_ELEMENT) error {
+	_pszText := win32.UTF16PtrOrNil(pszText)
 	r1, _, _ := syscall.SyscallN(procWSDXMLBuildAnyForSingleElement.Addr(), uintptr(unsafe.Pointer(pElementName)), uintptr(unsafe.Pointer(_pszText)), uintptr(unsafe.Pointer(ppAny)))
 	return win32.ErrIfFailed(int32(r1))
 }

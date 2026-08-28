@@ -63,9 +63,9 @@ var Procs = struct {
 // RmAddFilter calls RstrtMgr!RmAddFilter.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmaddfilter
 // Minimum OS: windows6.0.6000.
-func RmAddFilter(dwSessionHandle uint32, strModuleName string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName string, FilterAction RM_FILTER_ACTION) foundation.WIN32_ERROR {
-	_strModuleName := win32.UTF16Ptr(strModuleName)
-	_strServiceShortName := win32.UTF16Ptr(strServiceShortName)
+func RmAddFilter(dwSessionHandle uint32, strModuleName *string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName *string, FilterAction RM_FILTER_ACTION) foundation.WIN32_ERROR {
+	_strModuleName := win32.UTF16PtrOrNil(strModuleName)
+	_strServiceShortName := win32.UTF16PtrOrNil(strServiceShortName)
 	r1, _, _ := syscall.SyscallN(procRmAddFilter.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(_strModuleName)), uintptr(unsafe.Pointer(pProcess)), uintptr(unsafe.Pointer(_strServiceShortName)), uintptr(FilterAction))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -138,9 +138,9 @@ func RmRegisterResources(dwSessionHandle uint32, rgsFileNames []foundation.PWSTR
 // RmRemoveFilter calls RstrtMgr!RmRemoveFilter.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmremovefilter
 // Minimum OS: windows6.0.6000.
-func RmRemoveFilter(dwSessionHandle uint32, strModuleName string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName string) foundation.WIN32_ERROR {
-	_strModuleName := win32.UTF16Ptr(strModuleName)
-	_strServiceShortName := win32.UTF16Ptr(strServiceShortName)
+func RmRemoveFilter(dwSessionHandle uint32, strModuleName *string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName *string) foundation.WIN32_ERROR {
+	_strModuleName := win32.UTF16PtrOrNil(strModuleName)
+	_strServiceShortName := win32.UTF16PtrOrNil(strServiceShortName)
 	r1, _, _ := syscall.SyscallN(procRmRemoveFilter.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(_strModuleName)), uintptr(unsafe.Pointer(pProcess)), uintptr(unsafe.Pointer(_strServiceShortName)))
 	return foundation.WIN32_ERROR(r1)
 }

@@ -488,8 +488,8 @@ func GetModuleFileNameA(hModule foundation.HMODULE, lpFilename foundation.PSTR, 
 // GetModuleHandle calls KERNEL32!GetModuleHandleW.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew
 // Minimum OS: windows5.1.2600.
-func GetModuleHandle(lpModuleName string) (foundation.HMODULE, error) {
-	_lpModuleName := win32.UTF16Ptr(lpModuleName)
+func GetModuleHandle(lpModuleName *string) (foundation.HMODULE, error) {
+	_lpModuleName := win32.UTF16PtrOrNil(lpModuleName)
 	r1, _, e1 := syscall.SyscallN(procGetModuleHandle.Addr(), uintptr(unsafe.Pointer(_lpModuleName)))
 	ret := foundation.HMODULE(r1)
 	if ret == 0 {
@@ -513,8 +513,8 @@ func GetModuleHandleA(lpModuleName foundation.PSTR) (foundation.HMODULE, error) 
 // GetModuleHandleEx calls KERNEL32!GetModuleHandleExW.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw
 // Minimum OS: windows5.1.2600.
-func GetModuleHandleEx(dwFlags uint32, lpModuleName string, phModule *foundation.HMODULE) error {
-	_lpModuleName := win32.UTF16Ptr(lpModuleName)
+func GetModuleHandleEx(dwFlags uint32, lpModuleName *string, phModule *foundation.HMODULE) error {
+	_lpModuleName := win32.UTF16PtrOrNil(lpModuleName)
 	r1, _, e1 := syscall.SyscallN(procGetModuleHandleEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpModuleName)), uintptr(unsafe.Pointer(phModule)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -671,8 +671,8 @@ func SetDefaultDllDirectories(DirectoryFlags LOAD_LIBRARY_FLAGS) error {
 // SetDllDirectory calls KERNEL32!SetDllDirectoryW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdlldirectoryw
 // Minimum OS: windows6.0.6000.
-func SetDllDirectory(lpPathName string) error {
-	_lpPathName := win32.UTF16Ptr(lpPathName)
+func SetDllDirectory(lpPathName *string) error {
+	_lpPathName := win32.UTF16PtrOrNil(lpPathName)
 	r1, _, e1 := syscall.SyscallN(procSetDllDirectory.Addr(), uintptr(unsafe.Pointer(_lpPathName)))
 	if r1 == 0 {
 		return win32.LastError(e1)

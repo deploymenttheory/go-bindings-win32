@@ -97,6 +97,20 @@ func UTF16Ptr(s string) *uint16 {
 	return p
 }
 
+// Str returns a pointer to s, for [Optional] string parameters typed
+// *string: nil passes NULL, Str("") passes the empty string L"".
+func Str(s string) *string { return &s }
+
+// UTF16PtrOrNil converts an optional string parameter: a nil *string yields
+// a NULL pointer, anything else its NUL-terminated UTF-16 form (panicking on
+// an embedded NUL, like UTF16Ptr).
+func UTF16PtrOrNil(s *string) *uint16 {
+	if s == nil {
+		return nil
+	}
+	return UTF16Ptr(*s)
+}
+
 // UTF16ToString converts a NUL-terminated UTF-16 pointer back to a Go string.
 // A nil pointer yields "".
 func UTF16ToString(p *uint16) string {

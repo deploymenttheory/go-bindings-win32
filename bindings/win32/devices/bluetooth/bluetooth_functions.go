@@ -172,8 +172,8 @@ var Procs = struct {
 // BluetoothAuthenticateDevice calls bthprops.cpl!BluetoothAuthenticateDevice.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothauthenticatedevice
 // Minimum OS: windows6.0.6000.
-func BluetoothAuthenticateDevice(hwndParent foundation.HWND, hRadio foundation.HANDLE, pbtbi *BLUETOOTH_DEVICE_INFO, pszPasskey string, ulPasskeyLength uint32) uint32 {
-	_pszPasskey := win32.UTF16Ptr(pszPasskey)
+func BluetoothAuthenticateDevice(hwndParent foundation.HWND, hRadio foundation.HANDLE, pbtbi *BLUETOOTH_DEVICE_INFO, pszPasskey *string, ulPasskeyLength uint32) uint32 {
+	_pszPasskey := win32.UTF16PtrOrNil(pszPasskey)
 	r1, _, _ := syscall.SyscallN(procBluetoothAuthenticateDevice.Addr(), uintptr(hwndParent), uintptr(hRadio), uintptr(unsafe.Pointer(pbtbi)), uintptr(unsafe.Pointer(_pszPasskey)), uintptr(ulPasskeyLength))
 	return uint32(r1)
 }

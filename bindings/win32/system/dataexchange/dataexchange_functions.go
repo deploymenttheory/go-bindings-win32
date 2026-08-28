@@ -265,8 +265,8 @@ var Procs = struct {
 // AddAtom calls KERNEL32!AddAtomW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-addatomw
 // Minimum OS: windows5.0.
-func AddAtom(lpString string) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func AddAtom(lpString *string) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procAddAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1
@@ -637,8 +637,8 @@ func EnumClipboardFormats(format uint32) (uint32, error) {
 // FindAtom calls KERNEL32!FindAtomW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findatomw
 // Minimum OS: windows5.0.
-func FindAtom(lpString string) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func FindAtom(lpString *string) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procFindAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1
@@ -798,8 +798,8 @@ func GetUpdatedClipboardFormats(lpuiFormats []uint32, pcFormatsOut *uint32) erro
 // GlobalAddAtom calls KERNEL32!GlobalAddAtomW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomw
 // Minimum OS: windows5.0.
-func GlobalAddAtom(lpString string) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func GlobalAddAtom(lpString *string) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procGlobalAddAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1
@@ -820,8 +820,8 @@ func GlobalAddAtomA(lpString foundation.PSTR) (uint16, error) {
 
 // GlobalAddAtomEx calls KERNEL32!GlobalAddAtomExW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomexw
-func GlobalAddAtomEx(lpString string, Flags uint32) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func GlobalAddAtomEx(lpString *string, Flags uint32) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procGlobalAddAtomEx.Addr(), uintptr(unsafe.Pointer(_lpString)), uintptr(Flags))
 	if e1 != 0 {
 		return uint16(r1), e1
@@ -853,8 +853,8 @@ func GlobalDeleteAtom(nAtom uint16) (uint16, error) {
 // GlobalFindAtom calls KERNEL32!GlobalFindAtomW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalfindatomw
 // Minimum OS: windows5.0.
-func GlobalFindAtom(lpString string) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func GlobalFindAtom(lpString *string) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procGlobalFindAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1

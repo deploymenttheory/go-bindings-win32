@@ -52,18 +52,18 @@ func CreateXmlReader(riid *win32.GUID, ppvObject **win32.IUnknown, pMalloc *syst
 }
 
 // CreateXmlReaderInputWithEncodingCodePage calls XmlLite!CreateXmlReaderInputWithEncodingCodePage.
-func CreateXmlReaderInputWithEncodingCodePage(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, nEncodingCodePage uint32, fEncodingHint bool, pwszBaseUri string, ppInput **systemcom.IUnknown) error {
+func CreateXmlReaderInputWithEncodingCodePage(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, nEncodingCodePage uint32, fEncodingHint bool, pwszBaseUri *string, ppInput **systemcom.IUnknown) error {
 	_fEncodingHint := win32.Bool32(fEncodingHint)
-	_pwszBaseUri := win32.UTF16Ptr(pwszBaseUri)
+	_pwszBaseUri := win32.UTF16PtrOrNil(pwszBaseUri)
 	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingCodePage.Addr(), uintptr(unsafe.Pointer(pInputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(nEncodingCodePage), uintptr(_fEncodingHint), uintptr(unsafe.Pointer(_pwszBaseUri)), uintptr(unsafe.Pointer(ppInput)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateXmlReaderInputWithEncodingName calls XmlLite!CreateXmlReaderInputWithEncodingName.
-func CreateXmlReaderInputWithEncodingName(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, pwszEncodingName string, fEncodingHint bool, pwszBaseUri string, ppInput **systemcom.IUnknown) error {
+func CreateXmlReaderInputWithEncodingName(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, pwszEncodingName string, fEncodingHint bool, pwszBaseUri *string, ppInput **systemcom.IUnknown) error {
 	_pwszEncodingName := win32.UTF16Ptr(pwszEncodingName)
 	_fEncodingHint := win32.Bool32(fEncodingHint)
-	_pwszBaseUri := win32.UTF16Ptr(pwszBaseUri)
+	_pwszBaseUri := win32.UTF16PtrOrNil(pwszBaseUri)
 	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingName.Addr(), uintptr(unsafe.Pointer(pInputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(unsafe.Pointer(_pwszEncodingName)), uintptr(_fEncodingHint), uintptr(unsafe.Pointer(_pwszBaseUri)), uintptr(unsafe.Pointer(ppInput)))
 	return win32.ErrIfFailed(int32(r1))
 }

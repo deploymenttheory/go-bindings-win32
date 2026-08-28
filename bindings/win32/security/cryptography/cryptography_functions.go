@@ -1934,9 +1934,9 @@ func BCryptKeyDerivation(hKey BCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDes
 // BCryptOpenAlgorithmProvider calls bcrypt!BCryptOpenAlgorithmProvider.
 // https://learn.microsoft.com/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider
 // Minimum OS: windows6.0.6000.
-func BCryptOpenAlgorithmProvider(phAlgorithm *BCRYPT_ALG_HANDLE, pszAlgId string, pszImplementation string, dwFlags BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS) foundation.NTSTATUS {
+func BCryptOpenAlgorithmProvider(phAlgorithm *BCRYPT_ALG_HANDLE, pszAlgId string, pszImplementation *string, dwFlags BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS) foundation.NTSTATUS {
 	_pszAlgId := win32.UTF16Ptr(pszAlgId)
-	_pszImplementation := win32.UTF16Ptr(pszImplementation)
+	_pszImplementation := win32.UTF16PtrOrNil(pszImplementation)
 	r1, _, _ := syscall.SyscallN(procBCryptOpenAlgorithmProvider.Addr(), uintptr(unsafe.Pointer(phAlgorithm)), uintptr(unsafe.Pointer(_pszAlgId)), uintptr(unsafe.Pointer(_pszImplementation)), uintptr(dwFlags))
 	return foundation.NTSTATUS(r1)
 }
@@ -2029,10 +2029,10 @@ func BCryptRemoveContextFunctionProvider(dwTable uint32, pszContext string, dwIn
 // BCryptResolveProviders calls bcrypt!BCryptResolveProviders.
 // https://learn.microsoft.com/windows/win32/api/bcrypt/nf-bcrypt-bcryptresolveproviders
 // Minimum OS: windows6.0.6000.
-func BCryptResolveProviders(pszContext string, dwInterface uint32, pszFunction string, pszProvider string, dwMode BCRYPT_QUERY_PROVIDER_MODE, dwFlags BCRYPT_RESOLVE_PROVIDERS_FLAGS, pcbBuffer *uint32, ppBuffer **CRYPT_PROVIDER_REFS) foundation.NTSTATUS {
-	_pszContext := win32.UTF16Ptr(pszContext)
-	_pszFunction := win32.UTF16Ptr(pszFunction)
-	_pszProvider := win32.UTF16Ptr(pszProvider)
+func BCryptResolveProviders(pszContext *string, dwInterface uint32, pszFunction *string, pszProvider *string, dwMode BCRYPT_QUERY_PROVIDER_MODE, dwFlags BCRYPT_RESOLVE_PROVIDERS_FLAGS, pcbBuffer *uint32, ppBuffer **CRYPT_PROVIDER_REFS) foundation.NTSTATUS {
+	_pszContext := win32.UTF16PtrOrNil(pszContext)
+	_pszFunction := win32.UTF16PtrOrNil(pszFunction)
+	_pszProvider := win32.UTF16PtrOrNil(pszProvider)
 	r1, _, _ := syscall.SyscallN(procBCryptResolveProviders.Addr(), uintptr(unsafe.Pointer(_pszContext)), uintptr(dwInterface), uintptr(unsafe.Pointer(_pszFunction)), uintptr(unsafe.Pointer(_pszProvider)), uintptr(dwMode), uintptr(dwFlags), uintptr(unsafe.Pointer(pcbBuffer)), uintptr(unsafe.Pointer(ppBuffer)))
 	return foundation.NTSTATUS(r1)
 }
@@ -3007,9 +3007,9 @@ func CertIsValidCRLForCertificate(pCert *CERT_CONTEXT, pCrl *CRL_CONTEXT, dwFlag
 }
 
 // CertIsWeakHash calls CRYPT32!CertIsWeakHash.
-func CertIsWeakHash(dwHashUseType uint32, pwszCNGHashAlgid string, dwChainFlags uint32, pSignerChainContext *CERT_CHAIN_CONTEXT, pTimeStamp *foundation.FILETIME, pwszFileName string) bool {
+func CertIsWeakHash(dwHashUseType uint32, pwszCNGHashAlgid string, dwChainFlags uint32, pSignerChainContext *CERT_CHAIN_CONTEXT, pTimeStamp *foundation.FILETIME, pwszFileName *string) bool {
 	_pwszCNGHashAlgid := win32.UTF16Ptr(pwszCNGHashAlgid)
-	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+	_pwszFileName := win32.UTF16PtrOrNil(pwszFileName)
 	r1, _, _ := syscall.SyscallN(procCertIsWeakHash.Addr(), uintptr(dwHashUseType), uintptr(unsafe.Pointer(_pwszCNGHashAlgid)), uintptr(dwChainFlags), uintptr(unsafe.Pointer(pSignerChainContext)), uintptr(unsafe.Pointer(pTimeStamp)), uintptr(unsafe.Pointer(_pwszFileName)))
 	return r1 != 0
 }
@@ -3419,9 +3419,9 @@ func CryptAcquireCertificatePrivateKey(pCert *CERT_CONTEXT, dwFlags CRYPT_ACQUIR
 // CryptAcquireContext calls ADVAPI32!CryptAcquireContextW.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptacquirecontextw
 // Minimum OS: windows5.1.2600.
-func CryptAcquireContext(phProv *uintptr, szContainer string, szProvider string, dwProvType uint32, dwFlags uint32) error {
-	_szContainer := win32.UTF16Ptr(szContainer)
-	_szProvider := win32.UTF16Ptr(szProvider)
+func CryptAcquireContext(phProv *uintptr, szContainer *string, szProvider *string, dwProvType uint32, dwFlags uint32) error {
+	_szContainer := win32.UTF16PtrOrNil(szContainer)
+	_szProvider := win32.UTF16PtrOrNil(szProvider)
 	r1, _, e1 := syscall.SyscallN(procCryptAcquireContext.Addr(), uintptr(unsafe.Pointer(phProv)), uintptr(unsafe.Pointer(_szContainer)), uintptr(unsafe.Pointer(_szProvider)), uintptr(dwProvType), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3713,8 +3713,8 @@ func CryptEncryptMessage(pEncryptPara *CRYPT_ENCRYPT_MESSAGE_PARA, rgpRecipientC
 // CryptEnumKeyIdentifierProperties calls CRYPT32!CryptEnumKeyIdentifierProperties.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptenumkeyidentifierproperties
 // Minimum OS: windows5.1.2600.
-func CryptEnumKeyIdentifierProperties(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName string, pvArg unsafe.Pointer, pfnEnum PFN_CRYPT_ENUM_KEYID_PROP) error {
-	_pwszComputerName := win32.UTF16Ptr(pwszComputerName)
+func CryptEnumKeyIdentifierProperties(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName *string, pvArg unsafe.Pointer, pfnEnum PFN_CRYPT_ENUM_KEYID_PROP) error {
+	_pwszComputerName := win32.UTF16PtrOrNil(pwszComputerName)
 	r1, _, e1 := syscall.SyscallN(procCryptEnumKeyIdentifierProperties.Addr(), uintptr(unsafe.Pointer(pKeyIdentifier)), uintptr(dwPropId), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszComputerName)), 0, uintptr(unsafe.Pointer(pvArg)), uintptr(pfnEnum))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3935,8 +3935,8 @@ func CryptGetDefaultOIDDllList(hFuncSet unsafe.Pointer, dwEncodingType uint32, p
 // CryptGetDefaultOIDFunctionAddress calls CRYPT32!CryptGetDefaultOIDFunctionAddress.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptgetdefaultoidfunctionaddress
 // Minimum OS: windows5.1.2600.
-func CryptGetDefaultOIDFunctionAddress(hFuncSet unsafe.Pointer, dwEncodingType uint32, pwszDll string, dwFlags uint32, ppvFuncAddr *unsafe.Pointer, phFuncAddr *unsafe.Pointer) bool {
-	_pwszDll := win32.UTF16Ptr(pwszDll)
+func CryptGetDefaultOIDFunctionAddress(hFuncSet unsafe.Pointer, dwEncodingType uint32, pwszDll *string, dwFlags uint32, ppvFuncAddr *unsafe.Pointer, phFuncAddr *unsafe.Pointer) bool {
+	_pwszDll := win32.UTF16PtrOrNil(pwszDll)
 	r1, _, _ := syscall.SyscallN(procCryptGetDefaultOIDFunctionAddress.Addr(), uintptr(unsafe.Pointer(hFuncSet)), uintptr(dwEncodingType), uintptr(unsafe.Pointer(_pwszDll)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppvFuncAddr)), uintptr(unsafe.Pointer(phFuncAddr)))
 	return r1 != 0
 }
@@ -3977,8 +3977,8 @@ func CryptGetHashParam(hHash uintptr, dwParam uint32, pbData *byte, pdwDataLen *
 // CryptGetKeyIdentifierProperty calls CRYPT32!CryptGetKeyIdentifierProperty.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptgetkeyidentifierproperty
 // Minimum OS: windows5.1.2600.
-func CryptGetKeyIdentifierProperty(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName string, pvData unsafe.Pointer, pcbData *uint32) error {
-	_pwszComputerName := win32.UTF16Ptr(pwszComputerName)
+func CryptGetKeyIdentifierProperty(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName *string, pvData unsafe.Pointer, pcbData *uint32) error {
+	_pwszComputerName := win32.UTF16PtrOrNil(pwszComputerName)
 	r1, _, e1 := syscall.SyscallN(procCryptGetKeyIdentifierProperty.Addr(), uintptr(unsafe.Pointer(pKeyIdentifier)), uintptr(dwPropId), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszComputerName)), 0, uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4042,8 +4042,8 @@ func CryptGetOIDFunctionAddress(hFuncSet unsafe.Pointer, dwEncodingType uint32, 
 // CryptGetOIDFunctionValue calls CRYPT32!CryptGetOIDFunctionValue.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptgetoidfunctionvalue
 // Minimum OS: windows5.1.2600.
-func CryptGetOIDFunctionValue(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszValueName string, pdwValueType *uint32, pbValueData *byte, pcbValueData *uint32) error {
-	_pwszValueName := win32.UTF16Ptr(pwszValueName)
+func CryptGetOIDFunctionValue(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszValueName *string, pdwValueType *uint32, pbValueData *byte, pcbValueData *uint32) error {
+	_pwszValueName := win32.UTF16PtrOrNil(pwszValueName)
 	r1, _, e1 := syscall.SyscallN(procCryptGetOIDFunctionValue.Addr(), uintptr(dwEncodingType), uintptr(unsafe.Pointer(pszFuncName)), uintptr(unsafe.Pointer(pszOID)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(pdwValueType)), uintptr(unsafe.Pointer(pbValueData)), uintptr(unsafe.Pointer(pcbValueData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4508,8 +4508,8 @@ func CryptMsgVerifyCountersignatureEncodedEx(hCryptProv HCRYPTPROV_LEGACY, dwEnc
 // CryptProtectData calls CRYPT32!CryptProtectData.
 // https://learn.microsoft.com/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata
 // Minimum OS: windows5.1.2600.
-func CryptProtectData(pDataIn *CRYPT_INTEGER_BLOB, szDataDescr string, pOptionalEntropy *CRYPT_INTEGER_BLOB, pPromptStruct *CRYPTPROTECT_PROMPTSTRUCT, dwFlags uint32, pDataOut *CRYPT_INTEGER_BLOB) error {
-	_szDataDescr := win32.UTF16Ptr(szDataDescr)
+func CryptProtectData(pDataIn *CRYPT_INTEGER_BLOB, szDataDescr *string, pOptionalEntropy *CRYPT_INTEGER_BLOB, pPromptStruct *CRYPTPROTECT_PROMPTSTRUCT, dwFlags uint32, pDataOut *CRYPT_INTEGER_BLOB) error {
+	_szDataDescr := win32.UTF16PtrOrNil(szDataDescr)
 	r1, _, e1 := syscall.SyscallN(procCryptProtectData.Addr(), uintptr(unsafe.Pointer(pDataIn)), uintptr(unsafe.Pointer(_szDataDescr)), uintptr(unsafe.Pointer(pOptionalEntropy)), 0, uintptr(unsafe.Pointer(pPromptStruct)), uintptr(dwFlags), uintptr(unsafe.Pointer(pDataOut)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4551,8 +4551,8 @@ func CryptRegisterDefaultOIDFunction(dwEncodingType uint32, pszFuncName foundati
 // CryptRegisterOIDFunction calls CRYPT32!CryptRegisterOIDFunction.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptregisteroidfunction
 // Minimum OS: windows5.1.2600.
-func CryptRegisterOIDFunction(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszDll string, pszOverrideFuncName foundation.PSTR) bool {
-	_pwszDll := win32.UTF16Ptr(pwszDll)
+func CryptRegisterOIDFunction(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszDll *string, pszOverrideFuncName foundation.PSTR) bool {
+	_pwszDll := win32.UTF16PtrOrNil(pwszDll)
 	r1, _, _ := syscall.SyscallN(procCryptRegisterOIDFunction.Addr(), uintptr(dwEncodingType), uintptr(unsafe.Pointer(pszFuncName)), uintptr(unsafe.Pointer(pszOID)), uintptr(unsafe.Pointer(_pwszDll)), uintptr(unsafe.Pointer(pszOverrideFuncName)))
 	return r1 != 0
 }
@@ -4630,8 +4630,8 @@ func CryptSetHashParam(hHash uintptr, dwParam CRYPT_SET_HASH_PARAM, pbData *byte
 // CryptSetKeyIdentifierProperty calls CRYPT32!CryptSetKeyIdentifierProperty.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptsetkeyidentifierproperty
 // Minimum OS: windows5.1.2600.
-func CryptSetKeyIdentifierProperty(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName string, pvData unsafe.Pointer) error {
-	_pwszComputerName := win32.UTF16Ptr(pwszComputerName)
+func CryptSetKeyIdentifierProperty(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName *string, pvData unsafe.Pointer) error {
+	_pwszComputerName := win32.UTF16PtrOrNil(pwszComputerName)
 	r1, _, e1 := syscall.SyscallN(procCryptSetKeyIdentifierProperty.Addr(), uintptr(unsafe.Pointer(pKeyIdentifier)), uintptr(dwPropId), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszComputerName)), 0, uintptr(unsafe.Pointer(pvData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4653,8 +4653,8 @@ func CryptSetKeyParam(hKey uintptr, dwParam CRYPT_KEY_PARAM_ID, pbData *byte, dw
 // CryptSetOIDFunctionValue calls CRYPT32!CryptSetOIDFunctionValue.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptsetoidfunctionvalue
 // Minimum OS: windows5.1.2600.
-func CryptSetOIDFunctionValue(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszValueName string, dwValueType systemregistry.REG_VALUE_TYPE, pbValueData []byte) bool {
-	_pwszValueName := win32.UTF16Ptr(pwszValueName)
+func CryptSetOIDFunctionValue(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszValueName *string, dwValueType systemregistry.REG_VALUE_TYPE, pbValueData []byte) bool {
+	_pwszValueName := win32.UTF16PtrOrNil(pwszValueName)
 	var _pbValueData *byte
 	if len(pbValueData) > 0 {
 		_pbValueData = &pbValueData[0]
@@ -4768,8 +4768,8 @@ func CryptSignCertificate(hCryptProvOrNCryptKey HCRYPTPROV_OR_NCRYPT_KEY_HANDLE,
 // CryptSignHash calls ADVAPI32!CryptSignHashW.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptsignhashw
 // Minimum OS: windows5.1.2600.
-func CryptSignHash(hHash uintptr, dwKeySpec uint32, szDescription string, dwFlags uint32, pbSignature *byte, pdwSigLen *uint32) error {
-	_szDescription := win32.UTF16Ptr(szDescription)
+func CryptSignHash(hHash uintptr, dwKeySpec uint32, szDescription *string, dwFlags uint32, pbSignature *byte, pdwSigLen *uint32) error {
+	_szDescription := win32.UTF16PtrOrNil(szDescription)
 	r1, _, e1 := syscall.SyscallN(procCryptSignHash.Addr(), uintptr(hHash), uintptr(dwKeySpec), uintptr(unsafe.Pointer(_szDescription)), uintptr(dwFlags), uintptr(unsafe.Pointer(pbSignature)), uintptr(unsafe.Pointer(pdwSigLen)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4905,8 +4905,8 @@ func CryptUnregisterOIDInfo(pInfo *CRYPT_OID_INFO) bool {
 // CryptUpdateProtectedState calls CRYPT32!CryptUpdateProtectedState.
 // https://learn.microsoft.com/windows/win32/api/dpapi/nf-dpapi-cryptupdateprotectedstate
 // Minimum OS: windows6.0.6000.
-func CryptUpdateProtectedState(pOldSid security.PSID, pwszOldPassword string, dwFlags uint32, pdwSuccessCount *uint32, pdwFailureCount *uint32) error {
-	_pwszOldPassword := win32.UTF16Ptr(pwszOldPassword)
+func CryptUpdateProtectedState(pOldSid security.PSID, pwszOldPassword *string, dwFlags uint32, pdwSuccessCount *uint32, pdwFailureCount *uint32) error {
+	_pwszOldPassword := win32.UTF16PtrOrNil(pwszOldPassword)
 	r1, _, e1 := syscall.SyscallN(procCryptUpdateProtectedState.Addr(), uintptr(pOldSid), uintptr(unsafe.Pointer(_pwszOldPassword)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwSuccessCount)), uintptr(unsafe.Pointer(pdwFailureCount)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -5018,12 +5018,12 @@ func CryptVerifyMessageSignatureWithKey(pVerifyPara *CRYPT_KEY_VERIFY_MESSAGE_PA
 // CryptVerifySignature calls ADVAPI32!CryptVerifySignatureW.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptverifysignaturew
 // Minimum OS: windows5.1.2600.
-func CryptVerifySignature(hHash uintptr, pbSignature []byte, hPubKey uintptr, szDescription string, dwFlags uint32) error {
+func CryptVerifySignature(hHash uintptr, pbSignature []byte, hPubKey uintptr, szDescription *string, dwFlags uint32) error {
 	var _pbSignature *byte
 	if len(pbSignature) > 0 {
 		_pbSignature = &pbSignature[0]
 	}
-	_szDescription := win32.UTF16Ptr(szDescription)
+	_szDescription := win32.UTF16PtrOrNil(szDescription)
 	r1, _, e1 := syscall.SyscallN(procCryptVerifySignature.Addr(), uintptr(hHash), uintptr(unsafe.Pointer(_pbSignature)), uintptr(len(pbSignature)), uintptr(hPubKey), uintptr(unsafe.Pointer(_szDescription)), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -5088,10 +5088,10 @@ func CryptXmlClose(hCryptXml unsafe.Pointer) error {
 // CryptXmlCreateReference calls CRYPTXML!CryptXmlCreateReference.
 // https://learn.microsoft.com/windows/win32/api/cryptxml/nf-cryptxml-cryptxmlcreatereference
 // Minimum OS: windows6.1.
-func CryptXmlCreateReference(hCryptXml unsafe.Pointer, dwFlags uint32, wszId string, wszURI string, wszType string, pDigestMethod *CRYPT_XML_ALGORITHM, rgTransform []CRYPT_XML_ALGORITHM, phReference *unsafe.Pointer) error {
-	_wszId := win32.UTF16Ptr(wszId)
-	_wszURI := win32.UTF16Ptr(wszURI)
-	_wszType := win32.UTF16Ptr(wszType)
+func CryptXmlCreateReference(hCryptXml unsafe.Pointer, dwFlags uint32, wszId *string, wszURI *string, wszType *string, pDigestMethod *CRYPT_XML_ALGORITHM, rgTransform []CRYPT_XML_ALGORITHM, phReference *unsafe.Pointer) error {
+	_wszId := win32.UTF16PtrOrNil(wszId)
+	_wszURI := win32.UTF16PtrOrNil(wszURI)
+	_wszType := win32.UTF16PtrOrNil(wszType)
 	var _rgTransform *CRYPT_XML_ALGORITHM
 	if len(rgTransform) > 0 {
 		_rgTransform = &rgTransform[0]
@@ -5203,8 +5203,8 @@ func CryptXmlOpenToDecode(pConfig *CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags CRY
 // CryptXmlOpenToEncode calls CRYPTXML!CryptXmlOpenToEncode.
 // https://learn.microsoft.com/windows/win32/api/cryptxml/nf-cryptxml-cryptxmlopentoencode
 // Minimum OS: windows6.1.
-func CryptXmlOpenToEncode(pConfig *CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags CRYPT_XML_FLAGS, wszId string, rgProperty []CRYPT_XML_PROPERTY, pEncoded *CRYPT_XML_BLOB, phSignature *unsafe.Pointer) error {
-	_wszId := win32.UTF16Ptr(wszId)
+func CryptXmlOpenToEncode(pConfig *CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags CRYPT_XML_FLAGS, wszId *string, rgProperty []CRYPT_XML_PROPERTY, pEncoded *CRYPT_XML_BLOB, phSignature *unsafe.Pointer) error {
+	_wszId := win32.UTF16PtrOrNil(wszId)
 	var _rgProperty *CRYPT_XML_PROPERTY
 	if len(rgProperty) > 0 {
 		_rgProperty = &rgProperty[0]
@@ -5266,12 +5266,12 @@ func Encrypt(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, fOAEP bool, pInData []byte,
 }
 
 // FindCertsByIssuer calls WINTRUST!FindCertsByIssuer.
-func FindCertsByIssuer(pCertChains *CERT_CHAIN, pcbCertChains *uint32, pcCertChains *uint32, pbEncodedIssuerName []byte, pwszPurpose string, dwKeySpec uint32) error {
+func FindCertsByIssuer(pCertChains *CERT_CHAIN, pcbCertChains *uint32, pcCertChains *uint32, pbEncodedIssuerName []byte, pwszPurpose *string, dwKeySpec uint32) error {
 	var _pbEncodedIssuerName *byte
 	if len(pbEncodedIssuerName) > 0 {
 		_pbEncodedIssuerName = &pbEncodedIssuerName[0]
 	}
-	_pwszPurpose := win32.UTF16Ptr(pwszPurpose)
+	_pwszPurpose := win32.UTF16PtrOrNil(pwszPurpose)
 	r1, _, _ := syscall.SyscallN(procFindCertsByIssuer.Addr(), uintptr(unsafe.Pointer(pCertChains)), uintptr(unsafe.Pointer(pcbCertChains)), uintptr(unsafe.Pointer(pcCertChains)), uintptr(unsafe.Pointer(_pbEncodedIssuerName)), uintptr(len(pbEncodedIssuerName)), uintptr(unsafe.Pointer(_pwszPurpose)), uintptr(dwKeySpec))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5455,9 +5455,9 @@ func NCryptCreateClaim(hSubjectKey NCRYPT_KEY_HANDLE, hAuthorityKey NCRYPT_KEY_H
 // NCryptCreatePersistedKey calls ncrypt!NCryptCreatePersistedKey.
 // https://learn.microsoft.com/windows/win32/api/ncrypt/nf-ncrypt-ncryptcreatepersistedkey
 // Minimum OS: windows6.0.6000.
-func NCryptCreatePersistedKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, pszAlgId string, pszKeyName string, dwLegacyKeySpec CERT_KEY_SPEC, dwFlags NCRYPT_FLAGS) error {
+func NCryptCreatePersistedKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, pszAlgId string, pszKeyName *string, dwLegacyKeySpec CERT_KEY_SPEC, dwFlags NCRYPT_FLAGS) error {
 	_pszAlgId := win32.UTF16Ptr(pszAlgId)
-	_pszKeyName := win32.UTF16Ptr(pszKeyName)
+	_pszKeyName := win32.UTF16PtrOrNil(pszKeyName)
 	r1, _, _ := syscall.SyscallN(procNCryptCreatePersistedKey.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(phKey)), uintptr(unsafe.Pointer(_pszAlgId)), uintptr(unsafe.Pointer(_pszKeyName)), uintptr(dwLegacyKeySpec), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5563,8 +5563,8 @@ func NCryptEnumAlgorithms(hProvider NCRYPT_PROV_HANDLE, dwAlgOperations NCRYPT_O
 // NCryptEnumKeys calls ncrypt!NCryptEnumKeys.
 // https://learn.microsoft.com/windows/win32/api/ncrypt/nf-ncrypt-ncryptenumkeys
 // Minimum OS: windows6.0.6000.
-func NCryptEnumKeys(hProvider NCRYPT_PROV_HANDLE, pszScope string, ppKeyName **NCryptKeyName, ppEnumState *unsafe.Pointer, dwFlags NCRYPT_FLAGS) error {
-	_pszScope := win32.UTF16Ptr(pszScope)
+func NCryptEnumKeys(hProvider NCRYPT_PROV_HANDLE, pszScope *string, ppKeyName **NCryptKeyName, ppEnumState *unsafe.Pointer, dwFlags NCRYPT_FLAGS) error {
+	_pszScope := win32.UTF16PtrOrNil(pszScope)
 	r1, _, _ := syscall.SyscallN(procNCryptEnumKeys.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(_pszScope)), uintptr(unsafe.Pointer(ppKeyName)), uintptr(unsafe.Pointer(ppEnumState)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5697,8 +5697,8 @@ func NCryptOpenKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, pszKe
 // NCryptOpenStorageProvider calls ncrypt!NCryptOpenStorageProvider.
 // https://learn.microsoft.com/windows/win32/api/ncrypt/nf-ncrypt-ncryptopenstorageprovider
 // Minimum OS: windows6.0.6000.
-func NCryptOpenStorageProvider(phProvider *NCRYPT_PROV_HANDLE, pszProviderName string, dwFlags uint32) error {
-	_pszProviderName := win32.UTF16Ptr(pszProviderName)
+func NCryptOpenStorageProvider(phProvider *NCRYPT_PROV_HANDLE, pszProviderName *string, dwFlags uint32) error {
+	_pszProviderName := win32.UTF16PtrOrNil(pszProviderName)
 	r1, _, _ := syscall.SyscallN(procNCryptOpenStorageProvider.Addr(), uintptr(unsafe.Pointer(phProvider)), uintptr(unsafe.Pointer(_pszProviderName)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5727,9 +5727,9 @@ func NCryptQueryProtectionDescriptorName(pwszName string, pwszDescriptorString f
 // NCryptRegisterProtectionDescriptorName calls ncrypt!NCryptRegisterProtectionDescriptorName.
 // https://learn.microsoft.com/windows/win32/api/ncryptprotect/nf-ncryptprotect-ncryptregisterprotectiondescriptorname
 // Minimum OS: windows8.0.
-func NCryptRegisterProtectionDescriptorName(pwszName string, pwszDescriptorString string, dwFlags uint32) error {
+func NCryptRegisterProtectionDescriptorName(pwszName string, pwszDescriptorString *string, dwFlags uint32) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
-	_pwszDescriptorString := win32.UTF16Ptr(pwszDescriptorString)
+	_pwszDescriptorString := win32.UTF16PtrOrNil(pwszDescriptorString)
 	r1, _, _ := syscall.SyscallN(procNCryptRegisterProtectionDescriptorName.Addr(), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszDescriptorString)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5955,32 +5955,32 @@ func SignerFreeSignerContext(pSignerContext *SIGNER_CONTEXT) error {
 
 // SignerSign calls Mssign32!SignerSign.
 // https://learn.microsoft.com/windows/win32/SecCrypto/signersign
-func SignerSign(pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer) error {
-	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
+func SignerSign(pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp *string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer) error {
+	_pwszHttpTimeStamp := win32.UTF16PtrOrNil(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSign.Addr(), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSignEx calls Mssign32!SignerSignEx.
 // https://learn.microsoft.com/windows/win32/SecCrypto/signersignex
-func SignerSignEx(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT) error {
-	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
+func SignerSignEx(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp *string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT) error {
+	_pwszHttpTimeStamp := win32.UTF16PtrOrNil(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSignEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSignEx2 calls Mssign32!SignerSignEx2.
 // https://learn.microsoft.com/windows/win32/SecCrypto/signersignex2
-func SignerSignEx2(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA) error {
-	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
+func SignerSignEx2(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp *string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA) error {
+	_pwszHttpTimeStamp := win32.UTF16PtrOrNil(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSignEx2.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(dwTimestampFlags), uintptr(unsafe.Pointer(pszTimestampAlgorithmOid)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)), uintptr(unsafe.Pointer(pCryptoPolicy)), 0)
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSignEx3 calls Mssign32!SignerSignEx3.
 // https://learn.microsoft.com/windows/win32/SecCrypto/signersignex3
-func SignerSignEx3(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA, pDigestSignInfo *SIGNER_DIGEST_SIGN_INFO) error {
-	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
+func SignerSignEx3(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp *string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA, pDigestSignInfo *SIGNER_DIGEST_SIGN_INFO) error {
+	_pwszHttpTimeStamp := win32.UTF16PtrOrNil(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSignEx3.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(dwTimestampFlags), uintptr(unsafe.Pointer(pszTimestampAlgorithmOid)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)), uintptr(unsafe.Pointer(pCryptoPolicy)), uintptr(unsafe.Pointer(pDigestSignInfo)), 0)
 	return win32.ErrIfFailed(int32(r1))
 }

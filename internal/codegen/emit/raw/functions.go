@@ -356,9 +356,20 @@ func (g *Generator) shapeParam(name string, param *win32meta.Param, resolved typ
 	if param.IsReserved {
 		return shapedParam{word: "0", spec: specWord}, true
 	}
-	// Input PWSTR/PCWSTR → Go string.
+	// Input PWSTR/PCWSTR → Go string; an [Optional] one → *string, so NULL
+	// (nil) and the empty string (win32.Str("")) stay distinguishable — the
+	// same projection as CsWin32's string? and windows-rs's Option<PCWSTR>.
 	if isWideStringPtr(resolved) && !param.IsOut {
 		local := "_" + name
+		if param.IsOptional {
+			return shapedParam{
+				decl:     name + " *string",
+				preamble: []string{local + " := win32.UTF16PtrOrNil(" + name + ")"},
+				word:     "uintptr(unsafe.Pointer(" + local + "))",
+				spec:     specWord,
+				pointer:  true,
+			}, true
+		}
 		return shapedParam{
 			decl:     name + " string",
 			preamble: []string{local + " := win32.UTF16Ptr(" + name + ")"},

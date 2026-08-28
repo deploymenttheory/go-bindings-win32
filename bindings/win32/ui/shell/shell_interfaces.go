@@ -1255,8 +1255,8 @@ func (self *IAttachmentExecute) Save() error {
 }
 
 // Execute dispatches through IAttachmentExecute's vtable slot 12.
-func (self *IAttachmentExecute) Execute(hwnd foundation.HWND, pszVerb string, phProcess *foundation.HANDLE) error {
-	_pszVerb := win32.UTF16Ptr(pszVerb)
+func (self *IAttachmentExecute) Execute(hwnd foundation.HWND, pszVerb *string, phProcess *foundation.HANDLE) error {
+	_pszVerb := win32.UTF16PtrOrNil(pszVerb)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(_pszVerb)), uintptr(unsafe.Pointer(phProcess)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1303,9 +1303,9 @@ type IAutoComplete struct {
 var IID_IAutoComplete = win32.GUID{Data1: 0x00bb2762, Data2: 0x6a77, Data3: 0x11d0, Data4: [8]byte{0xa5, 0x35, 0x00, 0xc0, 0x4f, 0xd7, 0xd0, 0x62}}
 
 // Init dispatches through IAutoComplete's vtable slot 3.
-func (self *IAutoComplete) Init(hwndEdit foundation.HWND, punkACL *systemcom.IUnknown, pwszRegKeyPath string, pwszQuickComplete string) error {
-	_pwszRegKeyPath := win32.UTF16Ptr(pwszRegKeyPath)
-	_pwszQuickComplete := win32.UTF16Ptr(pwszQuickComplete)
+func (self *IAutoComplete) Init(hwndEdit foundation.HWND, punkACL *systemcom.IUnknown, pwszRegKeyPath *string, pwszQuickComplete *string) error {
+	_pwszRegKeyPath := win32.UTF16PtrOrNil(pwszRegKeyPath)
+	_pwszQuickComplete := win32.UTF16PtrOrNil(pwszQuickComplete)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndEdit), uintptr(unsafe.Pointer(punkACL)), uintptr(unsafe.Pointer(_pwszRegKeyPath)), uintptr(unsafe.Pointer(_pwszQuickComplete)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2582,9 +2582,9 @@ type ICopyHookW struct {
 var IID_ICopyHookW = win32.GUID{Data1: 0x000214fc, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // CopyCallback dispatches through ICopyHookW's vtable slot 3.
-func (self *ICopyHookW) CopyCallback(hwnd foundation.HWND, wFunc uint32, wFlags uint32, pszSrcFile string, dwSrcAttribs uint32, pszDestFile string, dwDestAttribs uint32) uint32 {
+func (self *ICopyHookW) CopyCallback(hwnd foundation.HWND, wFunc uint32, wFlags uint32, pszSrcFile string, dwSrcAttribs uint32, pszDestFile *string, dwDestAttribs uint32) uint32 {
 	_pszSrcFile := win32.UTF16Ptr(pszSrcFile)
-	_pszDestFile := win32.UTF16Ptr(pszDestFile)
+	_pszDestFile := win32.UTF16PtrOrNil(pszDestFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(wFunc), uintptr(wFlags), uintptr(unsafe.Pointer(_pszSrcFile)), uintptr(dwSrcAttribs), uintptr(unsafe.Pointer(_pszDestFile)), uintptr(dwDestAttribs))
 	return uint32(r1)
 }
@@ -3277,29 +3277,29 @@ func (self *IDefaultExtractIconInit) SetKey(hkey systemregistry.HKEY) error {
 }
 
 // SetNormalIcon dispatches through IDefaultExtractIconInit's vtable slot 5.
-func (self *IDefaultExtractIconInit) SetNormalIcon(pszFile string, iIcon int32) error {
-	_pszFile := win32.UTF16Ptr(pszFile)
+func (self *IDefaultExtractIconInit) SetNormalIcon(pszFile *string, iIcon int32) error {
+	_pszFile := win32.UTF16PtrOrNil(pszFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFile)), uintptr(iIcon))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetOpenIcon dispatches through IDefaultExtractIconInit's vtable slot 6.
-func (self *IDefaultExtractIconInit) SetOpenIcon(pszFile string, iIcon int32) error {
-	_pszFile := win32.UTF16Ptr(pszFile)
+func (self *IDefaultExtractIconInit) SetOpenIcon(pszFile *string, iIcon int32) error {
+	_pszFile := win32.UTF16PtrOrNil(pszFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFile)), uintptr(iIcon))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetShortcutIcon dispatches through IDefaultExtractIconInit's vtable slot 7.
-func (self *IDefaultExtractIconInit) SetShortcutIcon(pszFile string, iIcon int32) error {
-	_pszFile := win32.UTF16Ptr(pszFile)
+func (self *IDefaultExtractIconInit) SetShortcutIcon(pszFile *string, iIcon int32) error {
+	_pszFile := win32.UTF16PtrOrNil(pszFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFile)), uintptr(iIcon))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultIcon dispatches through IDefaultExtractIconInit's vtable slot 8.
-func (self *IDefaultExtractIconInit) SetDefaultIcon(pszFile string, iIcon int32) error {
-	_pszFile := win32.UTF16Ptr(pszFile)
+func (self *IDefaultExtractIconInit) SetDefaultIcon(pszFile *string, iIcon int32) error {
+	_pszFile := win32.UTF16PtrOrNil(pszFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFile)), uintptr(iIcon))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -7195,8 +7195,8 @@ func (self *IKnownFolderManager) FindFolderFromIDList(pidl *uishellcommon.ITEMID
 }
 
 // Redirect dispatches through IKnownFolderManager's vtable slot 12.
-func (self *IKnownFolderManager) Redirect(rfid *win32.GUID, hwnd foundation.HWND, flags uint32, pszTargetPath string, pExclusion []win32.GUID, ppszError *foundation.PWSTR) error {
-	_pszTargetPath := win32.UTF16Ptr(pszTargetPath)
+func (self *IKnownFolderManager) Redirect(rfid *win32.GUID, hwnd foundation.HWND, flags uint32, pszTargetPath *string, pExclusion []win32.GUID, ppszError *foundation.PWSTR) error {
+	_pszTargetPath := win32.UTF16PtrOrNil(pszTargetPath)
 	var _pExclusion *win32.GUID
 	if len(pExclusion) > 0 {
 		_pExclusion = &pExclusion[0]
@@ -8362,10 +8362,10 @@ type IPackageDebugSettings struct {
 var IID_IPackageDebugSettings = win32.GUID{Data1: 0xf27c3930, Data2: 0x8029, Data3: 0x4ad1, Data4: [8]byte{0x94, 0xe3, 0x3d, 0xba, 0x41, 0x78, 0x10, 0xc1}}
 
 // EnableDebugging dispatches through IPackageDebugSettings's vtable slot 3.
-func (self *IPackageDebugSettings) EnableDebugging(packageFullName string, debuggerCommandLine string, environment string) error {
+func (self *IPackageDebugSettings) EnableDebugging(packageFullName string, debuggerCommandLine *string, environment *string) error {
 	_packageFullName := win32.UTF16Ptr(packageFullName)
-	_debuggerCommandLine := win32.UTF16Ptr(debuggerCommandLine)
-	_environment := win32.UTF16Ptr(environment)
+	_debuggerCommandLine := win32.UTF16PtrOrNil(debuggerCommandLine)
+	_environment := win32.UTF16PtrOrNil(environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(_debuggerCommandLine)), uintptr(unsafe.Pointer(_environment)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -8947,36 +8947,36 @@ type IQueryAssociations struct {
 var IID_IQueryAssociations = win32.GUID{Data1: 0xc46ca590, Data2: 0x3c3f, Data3: 0x11d2, Data4: [8]byte{0xbe, 0xe6, 0x00, 0x00, 0xf8, 0x05, 0xca, 0x57}}
 
 // Init dispatches through IQueryAssociations's vtable slot 3.
-func (self *IQueryAssociations) Init(flags ASSOCF, pszAssoc string, hkProgid systemregistry.HKEY, hwnd foundation.HWND) error {
-	_pszAssoc := win32.UTF16Ptr(pszAssoc)
+func (self *IQueryAssociations) Init(flags ASSOCF, pszAssoc *string, hkProgid systemregistry.HKEY, hwnd foundation.HWND) error {
+	_pszAssoc := win32.UTF16PtrOrNil(pszAssoc)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(_pszAssoc)), uintptr(hkProgid), uintptr(hwnd))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetString dispatches through IQueryAssociations's vtable slot 4.
-func (self *IQueryAssociations) GetString(flags ASSOCF, str ASSOCSTR, pszExtra string, pszOut foundation.PWSTR, pcchOut *uint32) error {
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+func (self *IQueryAssociations) GetString(flags ASSOCF, str ASSOCSTR, pszExtra *string, pszOut foundation.PWSTR, pcchOut *uint32) error {
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(str), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(pszOut)), uintptr(unsafe.Pointer(pcchOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetKey dispatches through IQueryAssociations's vtable slot 5.
-func (self *IQueryAssociations) GetKey(flags ASSOCF, key ASSOCKEY, pszExtra string, phkeyOut *systemregistry.HKEY) error {
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+func (self *IQueryAssociations) GetKey(flags ASSOCF, key ASSOCKEY, pszExtra *string, phkeyOut *systemregistry.HKEY) error {
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(key), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(phkeyOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetData dispatches through IQueryAssociations's vtable slot 6.
-func (self *IQueryAssociations) GetData(flags ASSOCF, data ASSOCDATA, pszExtra string, pvOut unsafe.Pointer, pcbOut *uint32) error {
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+func (self *IQueryAssociations) GetData(flags ASSOCF, data ASSOCDATA, pszExtra *string, pvOut unsafe.Pointer, pcbOut *uint32) error {
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(data), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(pvOut)), uintptr(unsafe.Pointer(pcbOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnum dispatches through IQueryAssociations's vtable slot 7.
-func (self *IQueryAssociations) GetEnum(flags ASSOCF, assocenum ASSOCENUM, pszExtra string, riid *win32.GUID, ppvOut **win32.IUnknown) error {
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+func (self *IQueryAssociations) GetEnum(flags ASSOCF, assocenum ASSOCENUM, pszExtra *string, riid *win32.GUID, ppvOut **win32.IUnknown) error {
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(assocenum), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -10755,8 +10755,8 @@ func (self *IShellIconOverlayManager) GetFileOverlayInfo(pwszPath string, dwAttr
 }
 
 // GetReservedOverlayInfo dispatches through IShellIconOverlayManager's vtable slot 4.
-func (self *IShellIconOverlayManager) GetReservedOverlayInfo(pwszPath string, dwAttrib uint32, pIndex *int32, dwflags uint32, iReservedID int32) error {
-	_pwszPath := win32.UTF16Ptr(pwszPath)
+func (self *IShellIconOverlayManager) GetReservedOverlayInfo(pwszPath *string, dwAttrib uint32, pIndex *int32, dwflags uint32, iReservedID int32) error {
+	_pwszPath := win32.UTF16PtrOrNil(pwszPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPath)), uintptr(dwAttrib), uintptr(unsafe.Pointer(pIndex)), uintptr(dwflags), uintptr(iReservedID))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -14918,8 +14918,8 @@ func (self *ITransferSource) RenameItem(psiSource *IShellItem, pszNewName string
 }
 
 // LinkItem dispatches through ITransferSource's vtable slot 11.
-func (self *ITransferSource) LinkItem(psiSource *IShellItem, psiParentDest *IShellItem, pszNewName string, flags uint32, ppsiNewDest **IShellItem) error {
-	_pszNewName := win32.UTF16Ptr(pszNewName)
+func (self *ITransferSource) LinkItem(psiSource *IShellItem, psiParentDest *IShellItem, pszNewName *string, flags uint32, ppsiNewDest **IShellItem) error {
+	_pszNewName := win32.UTF16PtrOrNil(pszNewName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psiSource)), uintptr(unsafe.Pointer(psiParentDest)), uintptr(unsafe.Pointer(_pszNewName)), uintptr(flags), uintptr(unsafe.Pointer(ppsiNewDest)))
 	return win32.ErrIfFailed(int32(r1))
 }

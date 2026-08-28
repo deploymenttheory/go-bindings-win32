@@ -734,10 +734,10 @@ var Procs = struct {
 }
 
 // AddDelBackupEntry calls ADVPACK!AddDelBackupEntryW.
-func AddDelBackupEntry(lpcszFileList string, lpcszBackupDir string, lpcszBaseName string, dwFlags uint32) error {
-	_lpcszFileList := win32.UTF16Ptr(lpcszFileList)
-	_lpcszBackupDir := win32.UTF16Ptr(lpcszBackupDir)
-	_lpcszBaseName := win32.UTF16Ptr(lpcszBaseName)
+func AddDelBackupEntry(lpcszFileList *string, lpcszBackupDir *string, lpcszBaseName *string, dwFlags uint32) error {
+	_lpcszFileList := win32.UTF16PtrOrNil(lpcszFileList)
+	_lpcszBackupDir := win32.UTF16PtrOrNil(lpcszBackupDir)
+	_lpcszBaseName := win32.UTF16PtrOrNil(lpcszBaseName)
 	r1, _, _ := syscall.SyscallN(procAddDelBackupEntry.Addr(), uintptr(unsafe.Pointer(_lpcszFileList)), uintptr(unsafe.Pointer(_lpcszBackupDir)), uintptr(unsafe.Pointer(_lpcszBaseName)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -975,10 +975,10 @@ func ExtractFilesA(pszCabName foundation.PSTR, pszExpandDir foundation.PSTR, dwF
 }
 
 // FileSaveMarkNotExist calls ADVPACK!FileSaveMarkNotExistW.
-func FileSaveMarkNotExist(lpFileList string, lpDir string, lpBaseName string) error {
-	_lpFileList := win32.UTF16Ptr(lpFileList)
-	_lpDir := win32.UTF16Ptr(lpDir)
-	_lpBaseName := win32.UTF16Ptr(lpBaseName)
+func FileSaveMarkNotExist(lpFileList *string, lpDir *string, lpBaseName *string) error {
+	_lpFileList := win32.UTF16PtrOrNil(lpFileList)
+	_lpDir := win32.UTF16PtrOrNil(lpDir)
+	_lpBaseName := win32.UTF16PtrOrNil(lpBaseName)
 	r1, _, _ := syscall.SyscallN(procFileSaveMarkNotExist.Addr(), uintptr(unsafe.Pointer(_lpFileList)), uintptr(unsafe.Pointer(_lpDir)), uintptr(unsafe.Pointer(_lpBaseName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -990,8 +990,8 @@ func FileSaveMarkNotExistA(lpFileList foundation.PSTR, lpDir foundation.PSTR, lp
 }
 
 // FileSaveRestore calls ADVPACK!FileSaveRestoreW.
-func FileSaveRestore(hDlg foundation.HWND, lpFileList string, lpDir string, lpBaseName string, dwFlags uint32) error {
-	_lpFileList := win32.UTF16Ptr(lpFileList)
+func FileSaveRestore(hDlg foundation.HWND, lpFileList *string, lpDir string, lpBaseName string, dwFlags uint32) error {
+	_lpFileList := win32.UTF16PtrOrNil(lpFileList)
 	_lpDir := win32.UTF16Ptr(lpDir)
 	_lpBaseName := win32.UTF16Ptr(lpBaseName)
 	r1, _, _ := syscall.SyscallN(procFileSaveRestore.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_lpFileList)), uintptr(unsafe.Pointer(_lpDir)), uintptr(unsafe.Pointer(_lpBaseName)), uintptr(dwFlags))
@@ -1170,10 +1170,10 @@ func GetFirmwareEnvironmentVariableExA(lpName foundation.PSTR, lpGuid foundation
 // GetPrivateProfileInt calls KERNEL32!GetPrivateProfileIntW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofileintw
 // Minimum OS: windows5.0.
-func GetPrivateProfileInt(lpAppName string, lpKeyName string, nDefault int32, lpFileName string) int32 {
+func GetPrivateProfileInt(lpAppName string, lpKeyName string, nDefault int32, lpFileName *string) int32 {
 	_lpAppName := win32.UTF16Ptr(lpAppName)
 	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileInt.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(nDefault), uintptr(unsafe.Pointer(_lpFileName)))
 	return int32(r1)
 }
@@ -1189,9 +1189,9 @@ func GetPrivateProfileIntA(lpAppName foundation.PSTR, lpKeyName foundation.PSTR,
 // GetPrivateProfileSection calls KERNEL32!GetPrivateProfileSectionW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilesectionw
 // Minimum OS: windows5.0.
-func GetPrivateProfileSection(lpAppName string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName string) uint32 {
+func GetPrivateProfileSection(lpAppName string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName *string) uint32 {
 	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileSection.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize), uintptr(unsafe.Pointer(_lpFileName)))
 	return uint32(r1)
 }
@@ -1207,8 +1207,8 @@ func GetPrivateProfileSectionA(lpAppName foundation.PSTR, lpReturnedString found
 // GetPrivateProfileSectionNames calls KERNEL32!GetPrivateProfileSectionNamesW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilesectionnamesw
 // Minimum OS: windows5.0.
-func GetPrivateProfileSectionNames(lpszReturnBuffer foundation.PWSTR, nSize uint32, lpFileName string) uint32 {
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func GetPrivateProfileSectionNames(lpszReturnBuffer foundation.PWSTR, nSize uint32, lpFileName *string) uint32 {
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileSectionNames.Addr(), uintptr(unsafe.Pointer(lpszReturnBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(_lpFileName)))
 	return uint32(r1)
 }
@@ -1224,11 +1224,11 @@ func GetPrivateProfileSectionNamesA(lpszReturnBuffer foundation.PSTR, nSize uint
 // GetPrivateProfileString calls KERNEL32!GetPrivateProfileStringW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestringw
 // Minimum OS: windows5.0.
-func GetPrivateProfileString(lpAppName string, lpKeyName string, lpDefault string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName string) (uint32, error) {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpDefault := win32.UTF16Ptr(lpDefault)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func GetPrivateProfileString(lpAppName *string, lpKeyName *string, lpDefault *string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName *string) (uint32, error) {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpKeyName := win32.UTF16PtrOrNil(lpKeyName)
+	_lpDefault := win32.UTF16PtrOrNil(lpDefault)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, e1 := syscall.SyscallN(procGetPrivateProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpDefault)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize), uintptr(unsafe.Pointer(_lpFileName)))
 	if e1 != 0 {
 		return uint32(r1), e1
@@ -1250,14 +1250,14 @@ func GetPrivateProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.PS
 // GetPrivateProfileStruct calls KERNEL32!GetPrivateProfileStructW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestructw
 // Minimum OS: windows5.0.
-func GetPrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile string) bool {
+func GetPrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile *string) bool {
 	_lpszSection := win32.UTF16Ptr(lpszSection)
 	_lpszKey := win32.UTF16Ptr(lpszKey)
 	var _lpStruct *byte
 	if len(lpStruct) > 0 {
 		_lpStruct = &lpStruct[0]
 	}
-	_szFile := win32.UTF16Ptr(szFile)
+	_szFile := win32.UTF16PtrOrNil(szFile)
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(_lpStruct)), uintptr(len(lpStruct)), uintptr(unsafe.Pointer(_szFile)))
 	return r1 != 0
 }
@@ -1312,10 +1312,10 @@ func GetProfileSectionA(lpAppName foundation.PSTR, lpReturnedString foundation.P
 // GetProfileString calls KERNEL32!GetProfileStringW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprofilestringw
 // Minimum OS: windows5.0.
-func GetProfileString(lpAppName string, lpKeyName string, lpDefault string, lpReturnedString foundation.PWSTR, nSize uint32) uint32 {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpDefault := win32.UTF16Ptr(lpDefault)
+func GetProfileString(lpAppName *string, lpKeyName *string, lpDefault *string, lpReturnedString foundation.PWSTR, nSize uint32) uint32 {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpKeyName := win32.UTF16PtrOrNil(lpKeyName)
+	_lpDefault := win32.UTF16PtrOrNil(lpDefault)
 	r1, _, _ := syscall.SyscallN(procGetProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpDefault)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize))
 	return uint32(r1)
 }
@@ -1784,8 +1784,8 @@ func RegInstallA(hmod foundation.HMODULE, pszSection foundation.PSTR, pstTable *
 }
 
 // RegRestoreAll calls ADVPACK!RegRestoreAllW.
-func RegRestoreAll(hWnd foundation.HWND, pszTitleString string, hkBckupKey systemregistry.HKEY) error {
-	_pszTitleString := win32.UTF16Ptr(pszTitleString)
+func RegRestoreAll(hWnd foundation.HWND, pszTitleString *string, hkBckupKey systemregistry.HKEY) error {
+	_pszTitleString := win32.UTF16PtrOrNil(pszTitleString)
 	r1, _, _ := syscall.SyscallN(procRegRestoreAll.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitleString)), uintptr(hkBckupKey))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2271,35 +2271,35 @@ func WinWatchOpen(hwnd foundation.HWND) HWINWATCH {
 
 // WldpCanExecuteBuffer calls Wldp!WldpCanExecuteBuffer.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutebuffer
-func WldpCanExecuteBuffer(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, buffer []byte, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
+func WldpCanExecuteBuffer(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, buffer []byte, auditInfo *string, result *WLDP_EXECUTION_POLICY) error {
 	var _buffer *byte
 	if len(buffer) > 0 {
 		_buffer = &buffer[0]
 	}
-	_auditInfo := win32.UTF16Ptr(auditInfo)
+	_auditInfo := win32.UTF16PtrOrNil(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteBuffer.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpCanExecuteFile calls Wldp!WldpCanExecuteFile.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutefile
-func WldpCanExecuteFile(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, fileHandle foundation.HANDLE, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
-	_auditInfo := win32.UTF16Ptr(auditInfo)
+func WldpCanExecuteFile(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, fileHandle foundation.HANDLE, auditInfo *string, result *WLDP_EXECUTION_POLICY) error {
+	_auditInfo := win32.UTF16PtrOrNil(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFile.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(fileHandle), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpCanExecuteFileFromDetachedSignature calls Wldp!WldpCanExecuteFileFromDetachedSignature.
-func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, contentFileHandle foundation.HANDLE, signatureFileHandle foundation.HANDLE, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
-	_auditInfo := win32.UTF16Ptr(auditInfo)
+func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, contentFileHandle foundation.HANDLE, signatureFileHandle foundation.HANDLE, auditInfo *string, result *WLDP_EXECUTION_POLICY) error {
+	_auditInfo := win32.UTF16PtrOrNil(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFileFromDetachedSignature.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(contentFileHandle), uintptr(signatureFileHandle), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpCanExecuteStream calls Wldp!WldpCanExecuteStream.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutestream
-func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, stream *systemcom.IStream, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
-	_auditInfo := win32.UTF16Ptr(auditInfo)
+func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, stream *systemcom.IStream, auditInfo *string, result *WLDP_EXECUTION_POLICY) error {
+	_auditInfo := win32.UTF16PtrOrNil(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteStream.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2449,10 +2449,10 @@ func WldpSetWindowsLockdownRestriction(LockdownRestriction WLDP_WINDOWS_LOCKDOWN
 // WritePrivateProfileSection calls KERNEL32!WritePrivateProfileSectionW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilesectionw
 // Minimum OS: windows5.0.
-func WritePrivateProfileSection(lpAppName string, lpString string, lpFileName string) error {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpString := win32.UTF16Ptr(lpString)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func WritePrivateProfileSection(lpAppName *string, lpString *string, lpFileName *string) error {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpString := win32.UTF16PtrOrNil(lpString)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileSection.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpString)), uintptr(unsafe.Pointer(_lpFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2474,11 +2474,11 @@ func WritePrivateProfileSectionA(lpAppName foundation.PSTR, lpString foundation.
 // WritePrivateProfileString calls KERNEL32!WritePrivateProfileStringW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestringw
 // Minimum OS: windows5.0.
-func WritePrivateProfileString(lpAppName string, lpKeyName string, lpString string, lpFileName string) error {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpString := win32.UTF16Ptr(lpString)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func WritePrivateProfileString(lpAppName *string, lpKeyName *string, lpString *string, lpFileName *string) error {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpKeyName := win32.UTF16PtrOrNil(lpKeyName)
+	_lpString := win32.UTF16PtrOrNil(lpString)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpString)), uintptr(unsafe.Pointer(_lpFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2500,14 +2500,14 @@ func WritePrivateProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.
 // WritePrivateProfileStruct calls KERNEL32!WritePrivateProfileStructW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestructw
 // Minimum OS: windows5.0.
-func WritePrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile string) error {
+func WritePrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile *string) error {
 	_lpszSection := win32.UTF16Ptr(lpszSection)
 	_lpszKey := win32.UTF16Ptr(lpszKey)
 	var _lpStruct *byte
 	if len(lpStruct) > 0 {
 		_lpStruct = &lpStruct[0]
 	}
-	_szFile := win32.UTF16Ptr(szFile)
+	_szFile := win32.UTF16PtrOrNil(szFile)
 	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(_lpStruct)), uintptr(len(lpStruct)), uintptr(unsafe.Pointer(_szFile)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2557,10 +2557,10 @@ func WriteProfileSectionA(lpAppName foundation.PSTR, lpString foundation.PSTR) e
 // WriteProfileString calls KERNEL32!WriteProfileStringW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprofilestringw
 // Minimum OS: windows5.0.
-func WriteProfileString(lpAppName string, lpKeyName string, lpString string) error {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpString := win32.UTF16Ptr(lpString)
+func WriteProfileString(lpAppName *string, lpKeyName *string, lpString *string) error {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpKeyName := win32.UTF16PtrOrNil(lpKeyName)
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procWriteProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpString)))
 	if r1 == 0 {
 		return win32.LastError(e1)

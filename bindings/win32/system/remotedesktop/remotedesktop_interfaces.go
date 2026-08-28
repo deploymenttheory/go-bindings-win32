@@ -2598,8 +2598,8 @@ func (self *IWRdsProtocolShadowCallback) StopShadow() error {
 }
 
 // InvokeTargetShadow dispatches through IWRdsProtocolShadowCallback's vtable slot 4.
-func (self *IWRdsProtocolShadowCallback) InvokeTargetShadow(pTargetServerName string, TargetSessionId uint32, pParam1 []byte, pParam2 []byte, pParam3 []byte, pParam4 []byte, pClientName string) error {
-	_pTargetServerName := win32.UTF16Ptr(pTargetServerName)
+func (self *IWRdsProtocolShadowCallback) InvokeTargetShadow(pTargetServerName *string, TargetSessionId uint32, pParam1 []byte, pParam2 []byte, pParam3 []byte, pParam4 []byte, pClientName string) error {
+	_pTargetServerName := win32.UTF16PtrOrNil(pTargetServerName)
 	var _pParam1 *byte
 	if len(pParam1) > 0 {
 		_pParam1 = &pParam1[0]
@@ -3247,8 +3247,8 @@ func (self *IWTSProtocolShadowCallback) StopShadow() error {
 }
 
 // InvokeTargetShadow dispatches through IWTSProtocolShadowCallback's vtable slot 4.
-func (self *IWTSProtocolShadowCallback) InvokeTargetShadow(pTargetServerName string, TargetSessionId uint32, pParam1 []byte, pParam2 []byte, pParam3 []byte, pParam4 []byte, pClientName string) error {
-	_pTargetServerName := win32.UTF16Ptr(pTargetServerName)
+func (self *IWTSProtocolShadowCallback) InvokeTargetShadow(pTargetServerName *string, TargetSessionId uint32, pParam1 []byte, pParam2 []byte, pParam3 []byte, pParam4 []byte, pClientName string) error {
+	_pTargetServerName := win32.UTF16PtrOrNil(pTargetServerName)
 	var _pParam1 *byte
 	if len(pParam1) > 0 {
 		_pParam1 = &pParam1[0]

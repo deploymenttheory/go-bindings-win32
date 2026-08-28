@@ -14,7 +14,7 @@ import (
 // handle succeeds; closing it again fails (invalid handle), proving the error
 // normalization is wired through.
 func TestHandleCloser(t *testing.T) {
-	event, err := threading.CreateEvent(nil, true, false, "")
+	event, err := threading.CreateEvent(nil, true, false, nil)
 	if err != nil {
 		t.Fatalf("CreateEvent: %v", err)
 	}

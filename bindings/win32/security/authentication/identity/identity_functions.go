@@ -708,8 +708,8 @@ func AcceptSecurityContext(phCredential *securitycredentials.SecHandle, phContex
 // AcquireCredentialsHandle calls SECUR32!AcquireCredentialsHandleW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-acquirecredentialshandlew
 // Minimum OS: windows6.0.6000.
-func AcquireCredentialsHandle(pszPrincipal string, pszPackage string, fCredentialUse SECPKG_CRED, pvLogonId unsafe.Pointer, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, phCredential *securitycredentials.SecHandle, ptsExpiry *int64) error {
-	_pszPrincipal := win32.UTF16Ptr(pszPrincipal)
+func AcquireCredentialsHandle(pszPrincipal *string, pszPackage string, fCredentialUse SECPKG_CRED, pvLogonId unsafe.Pointer, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, phCredential *securitycredentials.SecHandle, ptsExpiry *int64) error {
+	_pszPrincipal := win32.UTF16PtrOrNil(pszPrincipal)
 	_pszPackage := win32.UTF16Ptr(pszPackage)
 	r1, _, _ := syscall.SyscallN(procAcquireCredentialsHandle.Addr(), uintptr(unsafe.Pointer(_pszPrincipal)), uintptr(unsafe.Pointer(_pszPackage)), uintptr(fCredentialUse), uintptr(unsafe.Pointer(pvLogonId)), uintptr(unsafe.Pointer(pAuthData)), uintptr(pGetKeyFn), uintptr(unsafe.Pointer(pvGetKeyArgument)), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(ptsExpiry)))
 	return win32.ErrIfFailed(int32(r1))
@@ -725,8 +725,8 @@ func AcquireCredentialsHandleA(pszPrincipal foundation.PSTR, pszPackage foundati
 
 // AddCredentials calls SECUR32!AddCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-addcredentialsw
-func AddCredentials(hCredentials *securitycredentials.SecHandle, pszPrincipal string, pszPackage string, fCredentialUse uint32, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, ptsExpiry *int64) error {
-	_pszPrincipal := win32.UTF16Ptr(pszPrincipal)
+func AddCredentials(hCredentials *securitycredentials.SecHandle, pszPrincipal *string, pszPackage string, fCredentialUse uint32, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, ptsExpiry *int64) error {
+	_pszPrincipal := win32.UTF16PtrOrNil(pszPrincipal)
 	_pszPackage := win32.UTF16Ptr(pszPackage)
 	r1, _, _ := syscall.SyscallN(procAddCredentials.Addr(), uintptr(unsafe.Pointer(hCredentials)), uintptr(unsafe.Pointer(_pszPrincipal)), uintptr(unsafe.Pointer(_pszPackage)), uintptr(fCredentialUse), uintptr(unsafe.Pointer(pAuthData)), uintptr(pGetKeyFn), uintptr(unsafe.Pointer(pvGetKeyArgument)), uintptr(unsafe.Pointer(ptsExpiry)))
 	return win32.ErrIfFailed(int32(r1))
@@ -1781,10 +1781,10 @@ func RtlGenRandom(RandomBuffer []byte) foundation.BOOLEAN {
 // SLAcquireGenuineTicket calls slcext!SLAcquireGenuineTicket.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slacquiregenuineticket
 // Minimum OS: windows6.0.6000.
-func SLAcquireGenuineTicket(ppTicketBlob *unsafe.Pointer, pcbTicketBlob *uint32, pwszTemplateId string, pwszServerUrl string, pwszClientToken string) error {
+func SLAcquireGenuineTicket(ppTicketBlob *unsafe.Pointer, pcbTicketBlob *uint32, pwszTemplateId string, pwszServerUrl string, pwszClientToken *string) error {
 	_pwszTemplateId := win32.UTF16Ptr(pwszTemplateId)
 	_pwszServerUrl := win32.UTF16Ptr(pwszServerUrl)
-	_pwszClientToken := win32.UTF16Ptr(pwszClientToken)
+	_pwszClientToken := win32.UTF16PtrOrNil(pwszClientToken)
 	r1, _, _ := syscall.SyscallN(procSLAcquireGenuineTicket.Addr(), uintptr(unsafe.Pointer(ppTicketBlob)), uintptr(unsafe.Pointer(pcbTicketBlob)), uintptr(unsafe.Pointer(_pwszTemplateId)), uintptr(unsafe.Pointer(_pwszServerUrl)), uintptr(unsafe.Pointer(_pwszClientToken)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1792,8 +1792,8 @@ func SLAcquireGenuineTicket(ppTicketBlob *unsafe.Pointer, pcbTicketBlob *uint32,
 // SLActivateProduct calls slcext!SLActivateProduct.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slactivateproduct
 // Minimum OS: windows8.0.
-func SLActivateProduct(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, cbAppSpecificData uint32, pvAppSpecificData unsafe.Pointer, pActivationInfo *SL_ACTIVATION_INFO_HEADER, pwszProxyServer string, wProxyPort uint16) error {
-	_pwszProxyServer := win32.UTF16Ptr(pwszProxyServer)
+func SLActivateProduct(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, cbAppSpecificData uint32, pvAppSpecificData unsafe.Pointer, pActivationInfo *SL_ACTIVATION_INFO_HEADER, pwszProxyServer *string, wProxyPort uint16) error {
+	_pwszProxyServer := win32.UTF16PtrOrNil(pwszProxyServer)
 	r1, _, _ := syscall.SyscallN(procSLActivateProduct.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(cbAppSpecificData), uintptr(unsafe.Pointer(pvAppSpecificData)), uintptr(unsafe.Pointer(pActivationInfo)), uintptr(unsafe.Pointer(_pwszProxyServer)), uintptr(wProxyPort))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1809,8 +1809,8 @@ func SLClose(hSLC unsafe.Pointer) error {
 // SLConsumeRight calls SLC!SLConsumeRight.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slconsumeright
 // Minimum OS: windows8.0.
-func SLConsumeRight(hSLC unsafe.Pointer, pAppId *win32.GUID, pProductSkuId *win32.GUID, pwszRightName string) error {
-	_pwszRightName := win32.UTF16Ptr(pwszRightName)
+func SLConsumeRight(hSLC unsafe.Pointer, pAppId *win32.GUID, pProductSkuId *win32.GUID, pwszRightName *string) error {
+	_pwszRightName := win32.UTF16PtrOrNil(pwszRightName)
 	r1, _, _ := syscall.SyscallN(procSLConsumeRight.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pAppId)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(_pwszRightName)), 0)
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1918,8 +1918,8 @@ func SLGetLicenseInformation(hSLC unsafe.Pointer, pSLLicenseId *win32.GUID, pwsz
 // SLGetLicensingStatusInformation calls SLC!SLGetLicensingStatusInformation.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slgetlicensingstatusinformation
 // Minimum OS: windows8.0.
-func SLGetLicensingStatusInformation(hSLC unsafe.Pointer, pAppID *win32.GUID, pProductSkuId *win32.GUID, pwszRightName string, pnStatusCount *uint32, ppLicensingStatus **SL_LICENSING_STATUS) error {
-	_pwszRightName := win32.UTF16Ptr(pwszRightName)
+func SLGetLicensingStatusInformation(hSLC unsafe.Pointer, pAppID *win32.GUID, pProductSkuId *win32.GUID, pwszRightName *string, pnStatusCount *uint32, ppLicensingStatus **SL_LICENSING_STATUS) error {
+	_pwszRightName := win32.UTF16PtrOrNil(pwszRightName)
 	r1, _, _ := syscall.SyscallN(procSLGetLicensingStatusInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pAppID)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(_pwszRightName)), uintptr(unsafe.Pointer(pnStatusCount)), uintptr(unsafe.Pointer(ppLicensingStatus)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1994,10 +1994,10 @@ func SLGetSLIDList(hSLC unsafe.Pointer, eQueryIdType SLIDTYPE, pQueryId *win32.G
 // SLGetServerStatus calls slcext!SLGetServerStatus.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slgetserverstatus
 // Minimum OS: windows8.0.
-func SLGetServerStatus(pwszServerURL string, pwszAcquisitionType string, pwszProxyServer string, wProxyPort uint16, phrStatus *foundation.HRESULT) error {
+func SLGetServerStatus(pwszServerURL string, pwszAcquisitionType string, pwszProxyServer *string, wProxyPort uint16, phrStatus *foundation.HRESULT) error {
 	_pwszServerURL := win32.UTF16Ptr(pwszServerURL)
 	_pwszAcquisitionType := win32.UTF16Ptr(pwszAcquisitionType)
-	_pwszProxyServer := win32.UTF16Ptr(pwszProxyServer)
+	_pwszProxyServer := win32.UTF16PtrOrNil(pwszProxyServer)
 	r1, _, _ := syscall.SyscallN(procSLGetServerStatus.Addr(), uintptr(unsafe.Pointer(_pwszServerURL)), uintptr(unsafe.Pointer(_pwszAcquisitionType)), uintptr(unsafe.Pointer(_pwszProxyServer)), uintptr(wProxyPort), uintptr(unsafe.Pointer(phrStatus)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2207,8 +2207,8 @@ func SaslIdentifyPackageA(pInput *SecBufferDesc, PackageInfo **SecPkgInfoA) erro
 // SaslInitializeSecurityContext calls SECUR32!SaslInitializeSecurityContextW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-saslinitializesecuritycontextw
 // Minimum OS: windowsserver2003.
-func SaslInitializeSecurityContext(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pszTargetName string, fContextReq ISC_REQ_FLAGS, Reserved1 uint32, TargetDataRep uint32, pInput *SecBufferDesc, Reserved2 uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
-	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+func SaslInitializeSecurityContext(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pszTargetName *string, fContextReq ISC_REQ_FLAGS, Reserved1 uint32, TargetDataRep uint32, pInput *SecBufferDesc, Reserved2 uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
+	_pszTargetName := win32.UTF16PtrOrNil(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procSaslInitializeSecurityContext.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(_pszTargetName)), uintptr(fContextReq), uintptr(Reserved1), uintptr(TargetDataRep), uintptr(unsafe.Pointer(pInput)), uintptr(Reserved2), uintptr(unsafe.Pointer(phNewContext)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfContextAttr)), uintptr(unsafe.Pointer(ptsExpiry)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2230,12 +2230,12 @@ func SaslSetContextOption(ContextHandle *securitycredentials.SecHandle, Option u
 }
 
 // SecAllocateAndSetCallTarget calls SspiCli!SecAllocateAndSetCallTarget.
-func SecAllocateAndSetCallTarget(lpIpAddress []byte, TargetName string, FreeCallContext *int32) error {
+func SecAllocateAndSetCallTarget(lpIpAddress []byte, TargetName *string, FreeCallContext *int32) error {
 	var _lpIpAddress *byte
 	if len(lpIpAddress) > 0 {
 		_lpIpAddress = &lpIpAddress[0]
 	}
-	_TargetName := win32.UTF16Ptr(TargetName)
+	_TargetName := win32.UTF16PtrOrNil(TargetName)
 	r1, _, _ := syscall.SyscallN(procSecAllocateAndSetCallTarget.Addr(), uintptr(unsafe.Pointer(_lpIpAddress)), uintptr(len(lpIpAddress)), uintptr(unsafe.Pointer(_TargetName)), uintptr(unsafe.Pointer(FreeCallContext)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2431,10 +2431,10 @@ func SspiEncodeAuthIdentityAsStrings(pAuthIdentity unsafe.Pointer, ppszUserName 
 // SspiEncodeStringsAsAuthIdentity calls SECUR32!SspiEncodeStringsAsAuthIdentity.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-sspiencodestringsasauthidentity
 // Minimum OS: windows6.1.
-func SspiEncodeStringsAsAuthIdentity(pszUserName string, pszDomainName string, pszPackedCredentialsString string, ppAuthIdentity *unsafe.Pointer) error {
-	_pszUserName := win32.UTF16Ptr(pszUserName)
-	_pszDomainName := win32.UTF16Ptr(pszDomainName)
-	_pszPackedCredentialsString := win32.UTF16Ptr(pszPackedCredentialsString)
+func SspiEncodeStringsAsAuthIdentity(pszUserName *string, pszDomainName *string, pszPackedCredentialsString *string, ppAuthIdentity *unsafe.Pointer) error {
+	_pszUserName := win32.UTF16PtrOrNil(pszUserName)
+	_pszDomainName := win32.UTF16PtrOrNil(pszDomainName)
+	_pszPackedCredentialsString := win32.UTF16PtrOrNil(pszPackedCredentialsString)
 	r1, _, _ := syscall.SyscallN(procSspiEncodeStringsAsAuthIdentity.Addr(), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszDomainName)), uintptr(unsafe.Pointer(_pszPackedCredentialsString)), uintptr(unsafe.Pointer(ppAuthIdentity)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2523,8 +2523,8 @@ func SspiPrepareForCredRead(AuthIdentity unsafe.Pointer, pszTargetName string, p
 // SspiPrepareForCredWrite calls SECUR32!SspiPrepareForCredWrite.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-sspiprepareforcredwrite
 // Minimum OS: windows6.1.
-func SspiPrepareForCredWrite(AuthIdentity unsafe.Pointer, pszTargetName string, pCredmanCredentialType *uint32, ppszCredmanTargetName *foundation.PWSTR, ppszCredmanUserName *foundation.PWSTR, ppCredentialBlob **byte, pCredentialBlobSize *uint32) error {
-	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+func SspiPrepareForCredWrite(AuthIdentity unsafe.Pointer, pszTargetName *string, pCredmanCredentialType *uint32, ppszCredmanTargetName *foundation.PWSTR, ppszCredmanUserName *foundation.PWSTR, ppCredentialBlob **byte, pCredentialBlobSize *uint32) error {
+	_pszTargetName := win32.UTF16PtrOrNil(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procSspiPrepareForCredWrite.Addr(), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(_pszTargetName)), uintptr(unsafe.Pointer(pCredmanCredentialType)), uintptr(unsafe.Pointer(ppszCredmanTargetName)), uintptr(unsafe.Pointer(ppszCredmanUserName)), uintptr(unsafe.Pointer(ppCredentialBlob)), uintptr(unsafe.Pointer(pCredentialBlobSize)))
 	return win32.ErrIfFailed(int32(r1))
 }

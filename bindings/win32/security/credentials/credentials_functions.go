@@ -438,8 +438,8 @@ func CredDeleteA(TargetName foundation.PSTR, Type CRED_TYPE) error {
 // CredEnumerate calls ADVAPI32!CredEnumerateW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credenumeratew
 // Minimum OS: windows5.1.2600.
-func CredEnumerate(Filter string, Count *uint32, Credential ***CREDENTIALW) error {
-	_Filter := win32.UTF16Ptr(Filter)
+func CredEnumerate(Filter *string, Count *uint32, Credential ***CREDENTIALW) error {
+	_Filter := win32.UTF16PtrOrNil(Filter)
 	r1, _, e1 := syscall.SyscallN(procCredEnumerate.Addr(), uintptr(unsafe.Pointer(_Filter)), 0, uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(Credential)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -709,8 +709,8 @@ func CredRenameA(OldTargetName foundation.PSTR, NewTargetName foundation.PSTR, T
 // CredUICmdLinePromptForCredentials calls credui!CredUICmdLinePromptForCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduicmdlinepromptforcredentialsw
 // Minimum OS: windows5.1.2600.
-func CredUICmdLinePromptForCredentials(pszTargetName string, dwAuthError uint32, UserName foundation.PWSTR, ulUserBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, pfSave *foundation.BOOL, dwFlags CREDUI_FLAGS) uint32 {
-	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+func CredUICmdLinePromptForCredentials(pszTargetName *string, dwAuthError uint32, UserName foundation.PWSTR, ulUserBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, pfSave *foundation.BOOL, dwFlags CREDUI_FLAGS) uint32 {
+	_pszTargetName := win32.UTF16PtrOrNil(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procCredUICmdLinePromptForCredentials.Addr(), uintptr(unsafe.Pointer(_pszTargetName)), 0, uintptr(dwAuthError), uintptr(unsafe.Pointer(UserName)), uintptr(ulUserBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(pfSave)), uintptr(dwFlags))
 	return uint32(r1)
 }
@@ -762,8 +762,8 @@ func CredUIParseUserNameA(userName foundation.PSTR, user foundation.PSTR, userBu
 // CredUIPromptForCredentials calls credui!CredUIPromptForCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduipromptforcredentialsw
 // Minimum OS: windows5.1.2600.
-func CredUIPromptForCredentials(pUiInfo *CREDUI_INFOW, pszTargetName string, dwAuthError uint32, pszUserName foundation.PWSTR, ulUserNameBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, save *foundation.BOOL, dwFlags CREDUI_FLAGS) foundation.WIN32_ERROR {
-	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+func CredUIPromptForCredentials(pUiInfo *CREDUI_INFOW, pszTargetName *string, dwAuthError uint32, pszUserName foundation.PWSTR, ulUserNameBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, save *foundation.BOOL, dwFlags CREDUI_FLAGS) foundation.WIN32_ERROR {
+	_pszTargetName := win32.UTF16PtrOrNil(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procCredUIPromptForCredentials.Addr(), uintptr(unsafe.Pointer(pUiInfo)), uintptr(unsafe.Pointer(_pszTargetName)), 0, uintptr(dwAuthError), uintptr(unsafe.Pointer(pszUserName)), uintptr(ulUserNameBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(save)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -803,8 +803,8 @@ func CredUIPromptForWindowsCredentialsA(pUiInfo *CREDUI_INFOA, dwAuthError uint3
 // CredUIReadSSOCredW calls credui!CredUIReadSSOCredW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduireadssocredw
 // Minimum OS: windows5.1.2600.
-func CredUIReadSSOCredW(pszRealm string, ppszUsername *foundation.PWSTR) uint32 {
-	_pszRealm := win32.UTF16Ptr(pszRealm)
+func CredUIReadSSOCredW(pszRealm *string, ppszUsername *foundation.PWSTR) uint32 {
+	_pszRealm := win32.UTF16PtrOrNil(pszRealm)
 	r1, _, _ := syscall.SyscallN(procCredUIReadSSOCredW.Addr(), uintptr(unsafe.Pointer(_pszRealm)), uintptr(unsafe.Pointer(ppszUsername)))
 	return uint32(r1)
 }
@@ -812,8 +812,8 @@ func CredUIReadSSOCredW(pszRealm string, ppszUsername *foundation.PWSTR) uint32 
 // CredUIStoreSSOCredW calls credui!CredUIStoreSSOCredW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduistoressocredw
 // Minimum OS: windows5.1.2600.
-func CredUIStoreSSOCredW(pszRealm string, pszUsername string, pszPassword string, bPersist bool) uint32 {
-	_pszRealm := win32.UTF16Ptr(pszRealm)
+func CredUIStoreSSOCredW(pszRealm *string, pszUsername string, pszPassword string, bPersist bool) uint32 {
+	_pszRealm := win32.UTF16PtrOrNil(pszRealm)
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
 	_bPersist := win32.Bool32(bPersist)
@@ -1399,8 +1399,8 @@ func SCardListReaderGroupsA(hContext uintptr, mszGroups foundation.PSTR, pcchGro
 // SCardListReaders calls WinSCard!SCardListReadersW.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreadersw
 // Minimum OS: windows5.1.2600.
-func SCardListReaders(hContext uintptr, mszGroups string, mszReaders foundation.PWSTR, pcchReaders *uint32) int32 {
-	_mszGroups := win32.UTF16Ptr(mszGroups)
+func SCardListReaders(hContext uintptr, mszGroups *string, mszReaders foundation.PWSTR, pcchReaders *uint32) int32 {
+	_mszGroups := win32.UTF16PtrOrNil(mszGroups)
 	r1, _, _ := syscall.SyscallN(procSCardListReaders.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_mszGroups)), uintptr(unsafe.Pointer(mszReaders)), uintptr(unsafe.Pointer(pcchReaders)))
 	return int32(r1)
 }

@@ -390,22 +390,22 @@ type IPNPXAssociation struct {
 var IID_IPNPXAssociation = win32.GUID{Data1: 0x0bd7e521, Data2: 0x4da6, Data3: 0x42d5, Data4: [8]byte{0x81, 0xba, 0x19, 0x81, 0xb6, 0xb9, 0x40, 0x75}}
 
 // Associate dispatches through IPNPXAssociation's vtable slot 3.
-func (self *IPNPXAssociation) Associate(pszSubcategory string) error {
-	_pszSubcategory := win32.UTF16Ptr(pszSubcategory)
+func (self *IPNPXAssociation) Associate(pszSubcategory *string) error {
+	_pszSubcategory := win32.UTF16PtrOrNil(pszSubcategory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubcategory)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unassociate dispatches through IPNPXAssociation's vtable slot 4.
-func (self *IPNPXAssociation) Unassociate(pszSubcategory string) error {
-	_pszSubcategory := win32.UTF16Ptr(pszSubcategory)
+func (self *IPNPXAssociation) Unassociate(pszSubcategory *string) error {
+	_pszSubcategory := win32.UTF16PtrOrNil(pszSubcategory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubcategory)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IPNPXAssociation's vtable slot 5.
-func (self *IPNPXAssociation) Delete(pszSubcategory string) error {
-	_pszSubcategory := win32.UTF16Ptr(pszSubcategory)
+func (self *IPNPXAssociation) Delete(pszSubcategory *string) error {
+	_pszSubcategory := win32.UTF16PtrOrNil(pszSubcategory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubcategory)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -420,22 +420,22 @@ type IPNPXDeviceAssociation struct {
 var IID_IPNPXDeviceAssociation = win32.GUID{Data1: 0xeed366d0, Data2: 0x35b8, Data3: 0x4fc5, Data4: [8]byte{0x8d, 0x20, 0x7e, 0x5b, 0xd3, 0x1f, 0x6d, 0xed}}
 
 // Associate dispatches through IPNPXDeviceAssociation's vtable slot 3.
-func (self *IPNPXDeviceAssociation) Associate(pszSubCategory string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) error {
-	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+func (self *IPNPXDeviceAssociation) Associate(pszSubCategory *string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) error {
+	_pszSubCategory := win32.UTF16PtrOrNil(pszSubCategory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Unassociate dispatches through IPNPXDeviceAssociation's vtable slot 4.
-func (self *IPNPXDeviceAssociation) Unassociate(pszSubCategory string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) error {
-	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+func (self *IPNPXDeviceAssociation) Unassociate(pszSubCategory *string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) error {
+	_pszSubCategory := win32.UTF16PtrOrNil(pszSubCategory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Delete dispatches through IPNPXDeviceAssociation's vtable slot 5.
-func (self *IPNPXDeviceAssociation) Delete(pszSubcategory string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) error {
-	_pszSubcategory := win32.UTF16Ptr(pszSubcategory)
+func (self *IPNPXDeviceAssociation) Delete(pszSubcategory *string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) error {
+	_pszSubcategory := win32.UTF16PtrOrNil(pszSubcategory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubcategory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)))
 	return win32.ErrIfFailed(int32(r1))
 }

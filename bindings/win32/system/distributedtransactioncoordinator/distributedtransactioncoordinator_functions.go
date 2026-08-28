@@ -60,9 +60,9 @@ func DtcGetTransactionManagerC(i_pszHost foundation.PSTR, i_pszTmName foundation
 }
 
 // DtcGetTransactionManagerEx calls XOLEHLP!DtcGetTransactionManagerExW.
-func DtcGetTransactionManagerEx(i_pwszHost string, i_pwszTmName string, i_riid *win32.GUID, i_grfOptions uint32, i_pvConfigParams unsafe.Pointer, o_ppvObject **win32.IUnknown) error {
-	_i_pwszHost := win32.UTF16Ptr(i_pwszHost)
-	_i_pwszTmName := win32.UTF16Ptr(i_pwszTmName)
+func DtcGetTransactionManagerEx(i_pwszHost *string, i_pwszTmName *string, i_riid *win32.GUID, i_grfOptions uint32, i_pvConfigParams unsafe.Pointer, o_ppvObject **win32.IUnknown) error {
+	_i_pwszHost := win32.UTF16PtrOrNil(i_pwszHost)
+	_i_pwszTmName := win32.UTF16PtrOrNil(i_pwszTmName)
 	r1, _, _ := syscall.SyscallN(procDtcGetTransactionManagerEx.Addr(), uintptr(unsafe.Pointer(_i_pwszHost)), uintptr(unsafe.Pointer(_i_pwszTmName)), uintptr(unsafe.Pointer(i_riid)), uintptr(i_grfOptions), uintptr(unsafe.Pointer(i_pvConfigParams)), uintptr(unsafe.Pointer(o_ppvObject)))
 	return win32.ErrIfFailed(int32(r1))
 }

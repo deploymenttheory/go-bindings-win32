@@ -10,6 +10,7 @@ package acceptance
 import (
 	"testing"
 
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 )
@@ -20,7 +21,7 @@ import (
 // the BOOL+SetLastError → error returns of SetEvent/ResetEvent.
 func TestEventRoundTrip(t *testing.T) {
 	// CreateEvent: string name, bool flags, (HANDLE, error).
-	event, err := threading.CreateEvent(nil, true /*manualReset*/, false /*initialState*/, "")
+	event, err := threading.CreateEvent(nil, true /*manualReset*/, false /*initialState*/, nil)
 	if err != nil {
 		t.Fatalf("CreateEvent: %v", err)
 	}
@@ -57,7 +58,7 @@ func TestEventRoundTrip(t *testing.T) {
 // name flows through UTF-16 conversion at both CreateEvent and OpenEvent.
 func TestNamedEventCrossHandle(t *testing.T) {
 	const name = "go-bindings-win32-acceptance-event"
-	event, err := threading.CreateEvent(nil, false /*manualReset*/, false /*initialState*/, name)
+	event, err := threading.CreateEvent(nil, false /*manualReset*/, false /*initialState*/, win32.Str(name))
 	if err != nil {
 		t.Fatalf("CreateEvent(named): %v", err)
 	}

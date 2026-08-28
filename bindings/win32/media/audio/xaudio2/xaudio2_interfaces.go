@@ -199,8 +199,8 @@ func (self *IXAudio2) CreateSubmixVoice(ppSubmixVoice **IXAudio2SubmixVoice, Inp
 }
 
 // CreateMasteringVoice dispatches through IXAudio2's vtable slot 7.
-func (self *IXAudio2) CreateMasteringVoice(ppMasteringVoice **IXAudio2MasteringVoice, InputChannels uint32, InputSampleRate uint32, Flags uint32, szDeviceId string, pEffectChain *XAUDIO2_EFFECT_CHAIN, StreamCategory mediaaudio.AUDIO_STREAM_CATEGORY) error {
-	_szDeviceId := win32.UTF16Ptr(szDeviceId)
+func (self *IXAudio2) CreateMasteringVoice(ppMasteringVoice **IXAudio2MasteringVoice, InputChannels uint32, InputSampleRate uint32, Flags uint32, szDeviceId *string, pEffectChain *XAUDIO2_EFFECT_CHAIN, StreamCategory mediaaudio.AUDIO_STREAM_CATEGORY) error {
+	_szDeviceId := win32.UTF16PtrOrNil(szDeviceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMasteringVoice)), uintptr(InputChannels), uintptr(InputSampleRate), uintptr(Flags), uintptr(unsafe.Pointer(_szDeviceId)), uintptr(unsafe.Pointer(pEffectChain)), uintptr(StreamCategory))
 	return win32.ErrIfFailed(int32(r1))
 }

@@ -1523,8 +1523,8 @@ func JoySetThreshold(uJoyID uint32, uThreshold uint32) uint32 {
 // MCIWndCreate calls MSVFW32!MCIWndCreateW.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-mciwndcreatew
 // Minimum OS: windows5.0.
-func MCIWndCreate(hwndParent foundation.HWND, hInstance foundation.HINSTANCE, dwStyle uint32, szFile string) foundation.HWND {
-	_szFile := win32.UTF16Ptr(szFile)
+func MCIWndCreate(hwndParent foundation.HWND, hInstance foundation.HINSTANCE, dwStyle uint32, szFile *string) foundation.HWND {
+	_szFile := win32.UTF16PtrOrNil(szFile)
 	r1, _, _ := syscall.SyscallN(procMCIWndCreate.Addr(), uintptr(hwndParent), uintptr(hInstance), uintptr(dwStyle), uintptr(unsafe.Pointer(_szFile)))
 	return foundation.HWND(r1)
 }

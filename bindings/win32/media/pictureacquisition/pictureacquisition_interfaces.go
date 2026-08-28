@@ -34,9 +34,9 @@ func (self *IPhotoAcquire) CreatePhotoSource(pszDevice string, ppPhotoAcquireSou
 }
 
 // Acquire dispatches through IPhotoAcquire's vtable slot 4.
-func (self *IPhotoAcquire) Acquire(pPhotoAcquireSource *IPhotoAcquireSource, fShowProgress bool, hWndParent foundation.HWND, pszApplicationName string, pPhotoAcquireProgressCB *IPhotoAcquireProgressCB) error {
+func (self *IPhotoAcquire) Acquire(pPhotoAcquireSource *IPhotoAcquireSource, fShowProgress bool, hWndParent foundation.HWND, pszApplicationName *string, pPhotoAcquireProgressCB *IPhotoAcquireProgressCB) error {
 	_fShowProgress := win32.Bool32(fShowProgress)
-	_pszApplicationName := win32.UTF16Ptr(pszApplicationName)
+	_pszApplicationName := win32.UTF16PtrOrNil(pszApplicationName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhotoAcquireSource)), uintptr(_fShowProgress), uintptr(hWndParent), uintptr(unsafe.Pointer(_pszApplicationName)), uintptr(unsafe.Pointer(pPhotoAcquireProgressCB)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -149,8 +149,8 @@ type IPhotoAcquireOptionsDialog struct {
 var IID_IPhotoAcquireOptionsDialog = win32.GUID{Data1: 0x00f2b3ee, Data2: 0xbf64, Data3: 0x47ee, Data4: [8]byte{0x89, 0xf4, 0x4d, 0xed, 0xd7, 0x96, 0x43, 0xf2}}
 
 // Initialize dispatches through IPhotoAcquireOptionsDialog's vtable slot 3.
-func (self *IPhotoAcquireOptionsDialog) Initialize(pszRegistryRoot string) error {
-	_pszRegistryRoot := win32.UTF16Ptr(pszRegistryRoot)
+func (self *IPhotoAcquireOptionsDialog) Initialize(pszRegistryRoot *string) error {
+	_pszRegistryRoot := win32.UTF16PtrOrNil(pszRegistryRoot)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRegistryRoot)))
 	return win32.ErrIfFailed(int32(r1))
 }

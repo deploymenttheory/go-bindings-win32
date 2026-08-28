@@ -5056,8 +5056,8 @@ func (self *IBaseFilter) QueryFilterInfo(pInfo *FILTER_INFO) error {
 }
 
 // JoinFilterGraph dispatches through IBaseFilter's vtable slot 13.
-func (self *IBaseFilter) JoinFilterGraph(pGraph *IFilterGraph, pName string) error {
-	_pName := win32.UTF16Ptr(pName)
+func (self *IBaseFilter) JoinFilterGraph(pGraph *IFilterGraph, pName *string) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(_pName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -8478,17 +8478,17 @@ func (self *IGraphBuilder) Render(ppinOut *IPin) error {
 }
 
 // RenderFile dispatches through IGraphBuilder's vtable slot 13.
-func (self *IGraphBuilder) RenderFile(lpcwstrFile string, lpcwstrPlayList string) error {
+func (self *IGraphBuilder) RenderFile(lpcwstrFile string, lpcwstrPlayList *string) error {
 	_lpcwstrFile := win32.UTF16Ptr(lpcwstrFile)
-	_lpcwstrPlayList := win32.UTF16Ptr(lpcwstrPlayList)
+	_lpcwstrPlayList := win32.UTF16PtrOrNil(lpcwstrPlayList)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpcwstrFile)), uintptr(unsafe.Pointer(_lpcwstrPlayList)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddSourceFilter dispatches through IGraphBuilder's vtable slot 14.
-func (self *IGraphBuilder) AddSourceFilter(lpcwstrFileName string, lpcwstrFilterName string, ppFilter **IBaseFilter) error {
+func (self *IGraphBuilder) AddSourceFilter(lpcwstrFileName string, lpcwstrFilterName *string, ppFilter **IBaseFilter) error {
 	_lpcwstrFileName := win32.UTF16Ptr(lpcwstrFileName)
-	_lpcwstrFilterName := win32.UTF16Ptr(lpcwstrFilterName)
+	_lpcwstrFilterName := win32.UTF16PtrOrNil(lpcwstrFilterName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpcwstrFileName)), uintptr(unsafe.Pointer(_lpcwstrFilterName)), uintptr(unsafe.Pointer(ppFilter)))
 	return win32.ErrIfFailed(int32(r1))
 }

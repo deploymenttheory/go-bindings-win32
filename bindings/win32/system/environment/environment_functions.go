@@ -439,8 +439,8 @@ func GetEnvironmentStringsW() foundation.PWSTR {
 // GetEnvironmentVariable calls KERNEL32!GetEnvironmentVariableW.
 // https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getenvironmentvariablew
 // Minimum OS: windows5.1.2600.
-func GetEnvironmentVariable(lpName string, lpBuffer foundation.PWSTR, nSize uint32) (uint32, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func GetEnvironmentVariable(lpName *string, lpBuffer foundation.PWSTR, nSize uint32) (uint32, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procGetEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
@@ -566,9 +566,9 @@ func SetEnvironmentStrings(NewEnvironment string) bool {
 // SetEnvironmentVariable calls KERNEL32!SetEnvironmentVariableW.
 // https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-setenvironmentvariablew
 // Minimum OS: windows5.1.2600.
-func SetEnvironmentVariable(lpName string, lpValue string) error {
+func SetEnvironmentVariable(lpName string, lpValue *string) error {
 	_lpName := win32.UTF16Ptr(lpName)
-	_lpValue := win32.UTF16Ptr(lpValue)
+	_lpValue := win32.UTF16PtrOrNil(lpValue)
 	r1, _, e1 := syscall.SyscallN(procSetEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpValue)))
 	if r1 == 0 {
 		return win32.LastError(e1)

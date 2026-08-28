@@ -65,9 +65,9 @@ var IID_IVdsAdmin = win32.GUID{Data1: 0xd188e97d, Data2: 0x85aa, Data3: 0x4d33, 
 var specIVdsAdmin_RegisterProvider = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
 
 // RegisterProvider dispatches through IVdsAdmin's vtable slot 3.
-func (self *IVdsAdmin) RegisterProvider(providerId win32.GUID, providerClsid win32.GUID, pwszName string, type_ VDS_PROVIDER_TYPE, pwszMachineName string, pwszVersion string, guidVersionId win32.GUID) error {
+func (self *IVdsAdmin) RegisterProvider(providerId win32.GUID, providerClsid win32.GUID, pwszName string, type_ VDS_PROVIDER_TYPE, pwszMachineName *string, pwszVersion string, guidVersionId win32.GUID) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
-	_pwszMachineName := win32.UTF16Ptr(pwszMachineName)
+	_pwszMachineName := win32.UTF16PtrOrNil(pwszMachineName)
 	_pwszVersion := win32.UTF16Ptr(pwszVersion)
 	r1, _, _ := win32.Call(self.LpVtbl[3], specIVdsAdmin_RegisterProvider, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&providerId)), uintptr(unsafe.Pointer(&providerClsid)), uintptr(unsafe.Pointer(_pwszName)), uintptr(type_), uintptr(unsafe.Pointer(_pwszMachineName)), uintptr(unsafe.Pointer(_pwszVersion)), uintptr(unsafe.Pointer(&guidVersionId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))

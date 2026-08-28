@@ -74,9 +74,9 @@ func WslIsDistributionRegistered(distributionName string) bool {
 
 // WslLaunch calls Api-ms-win-wsl-api-l1-1-0!WslLaunch.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wsllaunch
-func WslLaunch(distributionName string, command string, useCurrentWorkingDirectory bool, stdIn foundation.HANDLE, stdOut foundation.HANDLE, stdErr foundation.HANDLE, process *foundation.HANDLE) error {
+func WslLaunch(distributionName string, command *string, useCurrentWorkingDirectory bool, stdIn foundation.HANDLE, stdOut foundation.HANDLE, stdErr foundation.HANDLE, process *foundation.HANDLE) error {
 	_distributionName := win32.UTF16Ptr(distributionName)
-	_command := win32.UTF16Ptr(command)
+	_command := win32.UTF16PtrOrNil(command)
 	_useCurrentWorkingDirectory := win32.Bool32(useCurrentWorkingDirectory)
 	r1, _, _ := syscall.SyscallN(procWslLaunch.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(_command)), uintptr(_useCurrentWorkingDirectory), uintptr(stdIn), uintptr(stdOut), uintptr(stdErr), uintptr(unsafe.Pointer(process)))
 	return win32.ErrIfFailed(int32(r1))
@@ -84,9 +84,9 @@ func WslLaunch(distributionName string, command string, useCurrentWorkingDirecto
 
 // WslLaunchInteractive calls Api-ms-win-wsl-api-l1-1-0!WslLaunchInteractive.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wsllaunchinteractive
-func WslLaunchInteractive(distributionName string, command string, useCurrentWorkingDirectory bool, exitCode *uint32) error {
+func WslLaunchInteractive(distributionName string, command *string, useCurrentWorkingDirectory bool, exitCode *uint32) error {
 	_distributionName := win32.UTF16Ptr(distributionName)
-	_command := win32.UTF16Ptr(command)
+	_command := win32.UTF16PtrOrNil(command)
 	_useCurrentWorkingDirectory := win32.Bool32(useCurrentWorkingDirectory)
 	r1, _, _ := syscall.SyscallN(procWslLaunchInteractive.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(_command)), uintptr(_useCurrentWorkingDirectory), uintptr(unsafe.Pointer(exitCode)))
 	return win32.ErrIfFailed(int32(r1))

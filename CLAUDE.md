@@ -153,7 +153,9 @@ The function and COM-method gathers (`functions.go`, `interfaces.go`) shape
 each call, then the template dispatches via `syscall.SyscallN`:
 
 - input `PWSTR`/`PCWSTR` → Go `string` (UTF-16 at the boundary:
-  `_name := win32.UTF16Ptr(name)`)
+  `_name := win32.UTF16Ptr(name)`); an `[Optional]` one (`Param.IsOptional`,
+  the ECMA-335 Optional flag CsWin32/windows-rs project too) → `*string`
+  (`win32.UTF16PtrOrNil`: nil passes NULL, `win32.Str("")` passes `L""`)
 - input `BOOL` → Go `bool` (`win32.Bool32`); plain `BOOL` return → `bool`;
   a native C `bool`/`BOOLEAN` param → `bool` (`win32.Bool8`, one byte in the
   word) and return → `bool` (`byte(r1) != 0`: only AL is defined)

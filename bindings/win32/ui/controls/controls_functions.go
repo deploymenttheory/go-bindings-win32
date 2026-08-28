@@ -2403,9 +2403,9 @@ func SetWindowFeedbackSetting(hwnd foundation.HWND, feedback FEEDBACK_TYPE, dwFl
 // SetWindowTheme calls UXTHEME!SetWindowTheme.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-setwindowtheme
 // Minimum OS: windows6.0.6000.
-func SetWindowTheme(hwnd foundation.HWND, pszSubAppName string, pszSubIdList string) error {
-	_pszSubAppName := win32.UTF16Ptr(pszSubAppName)
-	_pszSubIdList := win32.UTF16Ptr(pszSubIdList)
+func SetWindowTheme(hwnd foundation.HWND, pszSubAppName *string, pszSubIdList *string) error {
+	_pszSubAppName := win32.UTF16PtrOrNil(pszSubAppName)
+	_pszSubIdList := win32.UTF16PtrOrNil(pszSubIdList)
 	r1, _, _ := syscall.SyscallN(procSetWindowTheme.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszSubAppName)), uintptr(unsafe.Pointer(_pszSubIdList)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2445,8 +2445,8 @@ func ShowScrollBar(hWnd foundation.HWND, wBar uiwindowsandmessaging.SCROLLBAR_CO
 // Str_SetPtrW calls COMCTL32!Str_SetPtrW.
 // https://learn.microsoft.com/windows/win32/api/dpa_dsa/nf-dpa_dsa-str_setptrw
 // Minimum OS: windows6.0.6000.
-func Str_SetPtrW(ppsz *foundation.PWSTR, psz string) bool {
-	_psz := win32.UTF16Ptr(psz)
+func Str_SetPtrW(ppsz *foundation.PWSTR, psz *string) bool {
+	_psz := win32.UTF16PtrOrNil(psz)
 	r1, _, _ := syscall.SyscallN(procStr_SetPtrW.Addr(), uintptr(unsafe.Pointer(ppsz)), uintptr(unsafe.Pointer(_psz)))
 	return r1 != 0
 }
@@ -2454,11 +2454,11 @@ func Str_SetPtrW(ppsz *foundation.PWSTR, psz string) bool {
 // TaskDialog calls COMCTL32!TaskDialog.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-taskdialog
 // Minimum OS: windows6.0.6000.
-func TaskDialog(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszWindowTitle string, pszMainInstruction string, pszContent string, dwCommonButtons TASKDIALOG_COMMON_BUTTON_FLAGS, pszIcon string, pnButton *int32) error {
-	_pszWindowTitle := win32.UTF16Ptr(pszWindowTitle)
-	_pszMainInstruction := win32.UTF16Ptr(pszMainInstruction)
-	_pszContent := win32.UTF16Ptr(pszContent)
-	_pszIcon := win32.UTF16Ptr(pszIcon)
+func TaskDialog(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszWindowTitle *string, pszMainInstruction *string, pszContent *string, dwCommonButtons TASKDIALOG_COMMON_BUTTON_FLAGS, pszIcon *string, pnButton *int32) error {
+	_pszWindowTitle := win32.UTF16PtrOrNil(pszWindowTitle)
+	_pszMainInstruction := win32.UTF16PtrOrNil(pszMainInstruction)
+	_pszContent := win32.UTF16PtrOrNil(pszContent)
+	_pszIcon := win32.UTF16PtrOrNil(pszIcon)
 	r1, _, _ := syscall.SyscallN(procTaskDialog.Addr(), uintptr(hwndOwner), uintptr(hInstance), uintptr(unsafe.Pointer(_pszWindowTitle)), uintptr(unsafe.Pointer(_pszMainInstruction)), uintptr(unsafe.Pointer(_pszContent)), uintptr(dwCommonButtons), uintptr(unsafe.Pointer(_pszIcon)), uintptr(unsafe.Pointer(pnButton)))
 	return win32.ErrIfFailed(int32(r1))
 }

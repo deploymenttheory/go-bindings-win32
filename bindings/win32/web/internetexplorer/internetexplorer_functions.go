@@ -370,9 +370,9 @@ func IERefreshElevationPolicy() error {
 }
 
 // IERegCreateKeyEx calls Ieframe!IERegCreateKeyEx.
-func IERegCreateKeyEx(lpSubKey string, Reserved uint32, lpClass string, dwOptions uint32, samDesired uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, phkResult *systemregistry.HKEY, lpdwDisposition *uint32) error {
+func IERegCreateKeyEx(lpSubKey string, Reserved uint32, lpClass *string, dwOptions uint32, samDesired uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, phkResult *systemregistry.HKEY, lpdwDisposition *uint32) error {
 	_lpSubKey := win32.UTF16Ptr(lpSubKey)
-	_lpClass := win32.UTF16Ptr(lpClass)
+	_lpClass := win32.UTF16PtrOrNil(lpClass)
 	r1, _, _ := syscall.SyscallN(procIERegCreateKeyEx.Addr(), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(Reserved), uintptr(unsafe.Pointer(_lpClass)), uintptr(dwOptions), uintptr(samDesired), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(unsafe.Pointer(phkResult)), uintptr(unsafe.Pointer(lpdwDisposition)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -437,20 +437,20 @@ func IESetProtectedModeCookie(lpszURL string, lpszCookieName string, lpszCookieD
 }
 
 // IEShowOpenFileDialog calls Ieframe!IEShowOpenFileDialog.
-func IEShowOpenFileDialog(hwnd foundation.HWND, lpwstrFileName foundation.PWSTR, cchMaxFileName uint32, lpwstrInitialDir string, lpwstrFilter string, lpwstrDefExt string, dwFilterIndex uint32, dwFlags uint32, phFile *foundation.HANDLE) error {
-	_lpwstrInitialDir := win32.UTF16Ptr(lpwstrInitialDir)
-	_lpwstrFilter := win32.UTF16Ptr(lpwstrFilter)
-	_lpwstrDefExt := win32.UTF16Ptr(lpwstrDefExt)
+func IEShowOpenFileDialog(hwnd foundation.HWND, lpwstrFileName foundation.PWSTR, cchMaxFileName uint32, lpwstrInitialDir *string, lpwstrFilter *string, lpwstrDefExt *string, dwFilterIndex uint32, dwFlags uint32, phFile *foundation.HANDLE) error {
+	_lpwstrInitialDir := win32.UTF16PtrOrNil(lpwstrInitialDir)
+	_lpwstrFilter := win32.UTF16PtrOrNil(lpwstrFilter)
+	_lpwstrDefExt := win32.UTF16PtrOrNil(lpwstrDefExt)
 	r1, _, _ := syscall.SyscallN(procIEShowOpenFileDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(lpwstrFileName)), uintptr(cchMaxFileName), uintptr(unsafe.Pointer(_lpwstrInitialDir)), uintptr(unsafe.Pointer(_lpwstrFilter)), uintptr(unsafe.Pointer(_lpwstrDefExt)), uintptr(dwFilterIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(phFile)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IEShowSaveFileDialog calls Ieframe!IEShowSaveFileDialog.
-func IEShowSaveFileDialog(hwnd foundation.HWND, lpwstrInitialFileName string, lpwstrInitialDir string, lpwstrFilter string, lpwstrDefExt string, dwFilterIndex uint32, dwFlags uint32, lppwstrDestinationFilePath *foundation.PWSTR, phState *foundation.HANDLE) error {
+func IEShowSaveFileDialog(hwnd foundation.HWND, lpwstrInitialFileName string, lpwstrInitialDir *string, lpwstrFilter *string, lpwstrDefExt *string, dwFilterIndex uint32, dwFlags uint32, lppwstrDestinationFilePath *foundation.PWSTR, phState *foundation.HANDLE) error {
 	_lpwstrInitialFileName := win32.UTF16Ptr(lpwstrInitialFileName)
-	_lpwstrInitialDir := win32.UTF16Ptr(lpwstrInitialDir)
-	_lpwstrFilter := win32.UTF16Ptr(lpwstrFilter)
-	_lpwstrDefExt := win32.UTF16Ptr(lpwstrDefExt)
+	_lpwstrInitialDir := win32.UTF16PtrOrNil(lpwstrInitialDir)
+	_lpwstrFilter := win32.UTF16PtrOrNil(lpwstrFilter)
+	_lpwstrDefExt := win32.UTF16PtrOrNil(lpwstrDefExt)
 	r1, _, _ := syscall.SyscallN(procIEShowSaveFileDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_lpwstrInitialFileName)), uintptr(unsafe.Pointer(_lpwstrInitialDir)), uintptr(unsafe.Pointer(_lpwstrFilter)), uintptr(unsafe.Pointer(_lpwstrDefExt)), uintptr(dwFilterIndex), uintptr(dwFlags), uintptr(unsafe.Pointer(lppwstrDestinationFilePath)), uintptr(unsafe.Pointer(phState)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -488,15 +488,15 @@ func RatingAccessDeniedDialog2(hDlg foundation.HWND, pszUsername foundation.PSTR
 }
 
 // RatingAccessDeniedDialog2W calls MSRATING!RatingAccessDeniedDialog2W.
-func RatingAccessDeniedDialog2W(hDlg foundation.HWND, pszUsername string, pRatingDetails unsafe.Pointer) error {
-	_pszUsername := win32.UTF16Ptr(pszUsername)
+func RatingAccessDeniedDialog2W(hDlg foundation.HWND, pszUsername *string, pRatingDetails unsafe.Pointer) error {
+	_pszUsername := win32.UTF16PtrOrNil(pszUsername)
 	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialog2W.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(pRatingDetails)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // RatingAccessDeniedDialogW calls MSRATING!RatingAccessDeniedDialogW.
-func RatingAccessDeniedDialogW(hDlg foundation.HWND, pszUsername string, pszContentDescription string, pRatingDetails unsafe.Pointer) error {
-	_pszUsername := win32.UTF16Ptr(pszUsername)
+func RatingAccessDeniedDialogW(hDlg foundation.HWND, pszUsername *string, pszContentDescription string, pRatingDetails unsafe.Pointer) error {
+	_pszUsername := win32.UTF16PtrOrNil(pszUsername)
 	_pszContentDescription := win32.UTF16Ptr(pszContentDescription)
 	r1, _, _ := syscall.SyscallN(procRatingAccessDeniedDialogW.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(_pszContentDescription)), uintptr(unsafe.Pointer(pRatingDetails)))
 	return win32.ErrIfFailed(int32(r1))
@@ -527,10 +527,10 @@ func RatingCheckUserAccess(pszUsername foundation.PSTR, pszURL foundation.PSTR, 
 }
 
 // RatingCheckUserAccessW calls MSRATING!RatingCheckUserAccessW.
-func RatingCheckUserAccessW(pszUsername string, pszURL string, pszRatingInfo string, pData []byte, ppRatingDetails *unsafe.Pointer) error {
-	_pszUsername := win32.UTF16Ptr(pszUsername)
-	_pszURL := win32.UTF16Ptr(pszURL)
-	_pszRatingInfo := win32.UTF16Ptr(pszRatingInfo)
+func RatingCheckUserAccessW(pszUsername *string, pszURL *string, pszRatingInfo *string, pData []byte, ppRatingDetails *unsafe.Pointer) error {
+	_pszUsername := win32.UTF16PtrOrNil(pszUsername)
+	_pszURL := win32.UTF16PtrOrNil(pszURL)
+	_pszRatingInfo := win32.UTF16PtrOrNil(pszRatingInfo)
 	var _pData *byte
 	if len(pData) > 0 {
 		_pData = &pData[0]

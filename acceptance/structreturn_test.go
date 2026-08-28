@@ -7,8 +7,8 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
 	direct2dcommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct2d/common"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/filesystem"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/console"
 )

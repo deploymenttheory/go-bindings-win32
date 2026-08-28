@@ -569,8 +569,8 @@ func GetNetScheduleAccountInformation(pwszServerName string, ccAccount uint32, w
 
 // I_NetLogonControl2 calls NETAPI32!I_NetLogonControl2.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-i_netlogoncontrol2
-func I_NetLogonControl2(ServerName string, FunctionCode uint32, QueryLevel uint32, Data *byte, Buffer **byte) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func I_NetLogonControl2(ServerName *string, FunctionCode uint32, QueryLevel uint32, Data *byte, Buffer **byte) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	r1, _, _ := syscall.SyscallN(procI_NetLogonControl2.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(FunctionCode), uintptr(QueryLevel), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
@@ -626,8 +626,8 @@ func MprSetupProtocolFree(lpBuffer unsafe.Pointer) uint32 {
 // NetAccessAdd calls NETAPI32!NetAccessAdd.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccessadd
 // Minimum OS: windows5.0.
-func NetAccessAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetAccessAdd(servername *string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetAccessAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
@@ -645,8 +645,8 @@ func NetAccessDel(servername string, resource string) uint32 {
 // NetAccessEnum calls NETAPI32!NetAccessEnum.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccessenum
 // Minimum OS: windows5.0.
-func NetAccessEnum(servername string, BasePath string, Recursive uint32, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetAccessEnum(servername *string, BasePath string, Recursive uint32, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_BasePath := win32.UTF16Ptr(BasePath)
 	r1, _, _ := syscall.SyscallN(procNetAccessEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_BasePath)), uintptr(Recursive), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
@@ -655,8 +655,8 @@ func NetAccessEnum(servername string, BasePath string, Recursive uint32, level u
 // NetAccessGetInfo calls NETAPI32!NetAccessGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccessgetinfo
 // Minimum OS: windows5.0.
-func NetAccessGetInfo(servername string, resource string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetAccessGetInfo(servername *string, resource string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_resource := win32.UTF16Ptr(resource)
 	r1, _, _ := syscall.SyscallN(procNetAccessGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_resource)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
@@ -676,8 +676,8 @@ func NetAccessGetUserPerms(servername string, UGname string, resource string, Pe
 // NetAccessSetInfo calls NETAPI32!NetAccessSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaccesssetinfo
 // Minimum OS: windows5.0.
-func NetAccessSetInfo(servername string, resource string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetAccessSetInfo(servername *string, resource string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_resource := win32.UTF16Ptr(resource)
 	r1, _, _ := syscall.SyscallN(procNetAccessSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_resource)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
@@ -686,11 +686,11 @@ func NetAccessSetInfo(servername string, resource string, level uint32, buf *byt
 // NetAddAlternateComputerName calls NETAPI32!NetAddAlternateComputerName.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netaddalternatecomputername
 // Minimum OS: windows5.1.2600.
-func NetAddAlternateComputerName(Server string, AlternateName string, DomainAccount string, DomainAccountPassword string, Reserved uint32) uint32 {
-	_Server := win32.UTF16Ptr(Server)
+func NetAddAlternateComputerName(Server *string, AlternateName string, DomainAccount *string, DomainAccountPassword *string, Reserved uint32) uint32 {
+	_Server := win32.UTF16PtrOrNil(Server)
 	_AlternateName := win32.UTF16Ptr(AlternateName)
-	_DomainAccount := win32.UTF16Ptr(DomainAccount)
-	_DomainAccountPassword := win32.UTF16Ptr(DomainAccountPassword)
+	_DomainAccount := win32.UTF16PtrOrNil(DomainAccount)
+	_DomainAccountPassword := win32.UTF16PtrOrNil(DomainAccountPassword)
 	r1, _, _ := syscall.SyscallN(procNetAddAlternateComputerName.Addr(), uintptr(unsafe.Pointer(_Server)), uintptr(unsafe.Pointer(_AlternateName)), uintptr(unsafe.Pointer(_DomainAccount)), uintptr(unsafe.Pointer(_DomainAccountPassword)), uintptr(Reserved))
 	return uint32(r1)
 }
@@ -698,8 +698,8 @@ func NetAddAlternateComputerName(Server string, AlternateName string, DomainAcco
 // NetAddServiceAccount calls NETAPI32!NetAddServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netaddserviceaccount
 // Minimum OS: windows6.1.
-func NetAddServiceAccount(ServerName string, AccountName string, Password string, Flags uint32) foundation.NTSTATUS {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func NetAddServiceAccount(ServerName *string, AccountName string, Password string, Flags uint32) foundation.NTSTATUS {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	_AccountName := win32.UTF16Ptr(AccountName)
 	_Password := win32.UTF16Ptr(Password)
 	r1, _, _ := syscall.SyscallN(procNetAddServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(unsafe.Pointer(_Password)), uintptr(Flags))
@@ -824,8 +824,8 @@ func NetCreateProvisioningPackage(pProvisioningParams *NETSETUP_PROVISIONING_PAR
 // NetEnumerateComputerNames calls NETAPI32!NetEnumerateComputerNames.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netenumeratecomputernames
 // Minimum OS: windows5.1.2600.
-func NetEnumerateComputerNames(Server string, NameType NET_COMPUTER_NAME_TYPE, Reserved uint32, EntryCount *uint32, ComputerNames **foundation.PWSTR) uint32 {
-	_Server := win32.UTF16Ptr(Server)
+func NetEnumerateComputerNames(Server *string, NameType NET_COMPUTER_NAME_TYPE, Reserved uint32, EntryCount *uint32, ComputerNames **foundation.PWSTR) uint32 {
+	_Server := win32.UTF16PtrOrNil(Server)
 	r1, _, _ := syscall.SyscallN(procNetEnumerateComputerNames.Addr(), uintptr(unsafe.Pointer(_Server)), uintptr(NameType), uintptr(Reserved), uintptr(unsafe.Pointer(EntryCount)), uintptr(unsafe.Pointer(ComputerNames)))
 	return uint32(r1)
 }
@@ -833,26 +833,26 @@ func NetEnumerateComputerNames(Server string, NameType NET_COMPUTER_NAME_TYPE, R
 // NetEnumerateServiceAccounts calls NETAPI32!NetEnumerateServiceAccounts.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netenumerateserviceaccounts
 // Minimum OS: windows6.1.
-func NetEnumerateServiceAccounts(ServerName string, Flags uint32, AccountsCount *uint32, Accounts ***uint16) foundation.NTSTATUS {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func NetEnumerateServiceAccounts(ServerName *string, Flags uint32, AccountsCount *uint32, Accounts ***uint16) foundation.NTSTATUS {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	r1, _, _ := syscall.SyscallN(procNetEnumerateServiceAccounts.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(Flags), uintptr(unsafe.Pointer(AccountsCount)), uintptr(unsafe.Pointer(Accounts)))
 	return foundation.NTSTATUS(r1)
 }
 
 // NetErrorLogClear calls NETAPI32!NetErrorLogClear.
 // https://learn.microsoft.com/windows/win32/api/lmerrlog/nf-lmerrlog-neterrorlogclear
-func NetErrorLogClear(UncServerName string, BackupFile string, Reserved *byte) uint32 {
-	_UncServerName := win32.UTF16Ptr(UncServerName)
-	_BackupFile := win32.UTF16Ptr(BackupFile)
+func NetErrorLogClear(UncServerName *string, BackupFile *string, Reserved *byte) uint32 {
+	_UncServerName := win32.UTF16PtrOrNil(UncServerName)
+	_BackupFile := win32.UTF16PtrOrNil(BackupFile)
 	r1, _, _ := syscall.SyscallN(procNetErrorLogClear.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(_BackupFile)), uintptr(unsafe.Pointer(Reserved)))
 	return uint32(r1)
 }
 
 // NetErrorLogRead calls NETAPI32!NetErrorLogRead.
 // https://learn.microsoft.com/windows/win32/api/lmerrlog/nf-lmerrlog-neterrorlogread
-func NetErrorLogRead(UncServerName string, Reserved1 string, ErrorLogHandle *HLOG, Offset uint32, Reserved2 *uint32, Reserved3 uint32, OffsetFlag uint32, BufPtr **byte, PrefMaxSize uint32, BytesRead *uint32, TotalAvailable *uint32) uint32 {
-	_UncServerName := win32.UTF16Ptr(UncServerName)
-	_Reserved1 := win32.UTF16Ptr(Reserved1)
+func NetErrorLogRead(UncServerName *string, Reserved1 *string, ErrorLogHandle *HLOG, Offset uint32, Reserved2 *uint32, Reserved3 uint32, OffsetFlag uint32, BufPtr **byte, PrefMaxSize uint32, BytesRead *uint32, TotalAvailable *uint32) uint32 {
+	_UncServerName := win32.UTF16PtrOrNil(UncServerName)
+	_Reserved1 := win32.UTF16PtrOrNil(Reserved1)
 	r1, _, _ := syscall.SyscallN(procNetErrorLogRead.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(_Reserved1)), uintptr(unsafe.Pointer(ErrorLogHandle)), uintptr(Offset), uintptr(unsafe.Pointer(Reserved2)), uintptr(Reserved3), uintptr(OffsetFlag), uintptr(unsafe.Pointer(BufPtr)), uintptr(PrefMaxSize), uintptr(unsafe.Pointer(BytesRead)), uintptr(unsafe.Pointer(TotalAvailable)))
 	return uint32(r1)
 }
@@ -875,8 +875,8 @@ func NetFreeAadJoinInformation(pJoinInfo *DSREG_JOIN_INFO) {
 // NetGetAadJoinInformation calls NETAPI32!NetGetAadJoinInformation.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netgetaadjoininformation
 // Minimum OS: windows10.0.10240.
-func NetGetAadJoinInformation(pcszTenantId string, ppJoinInfo **DSREG_JOIN_INFO) error {
-	_pcszTenantId := win32.UTF16Ptr(pcszTenantId)
+func NetGetAadJoinInformation(pcszTenantId *string, ppJoinInfo **DSREG_JOIN_INFO) error {
+	_pcszTenantId := win32.UTF16PtrOrNil(pcszTenantId)
 	r1, _, _ := syscall.SyscallN(procNetGetAadJoinInformation.Addr(), uintptr(unsafe.Pointer(_pcszTenantId)), uintptr(unsafe.Pointer(ppJoinInfo)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -884,9 +884,9 @@ func NetGetAadJoinInformation(pcszTenantId string, ppJoinInfo **DSREG_JOIN_INFO)
 // NetGetAnyDCName calls NETAPI32!NetGetAnyDCName.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgetanydcname
 // Minimum OS: windows5.0.
-func NetGetAnyDCName(ServerName string, DomainName string, Buffer **byte) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
-	_DomainName := win32.UTF16Ptr(DomainName)
+func NetGetAnyDCName(ServerName *string, DomainName *string, Buffer **byte) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
+	_DomainName := win32.UTF16PtrOrNil(DomainName)
 	r1, _, _ := syscall.SyscallN(procNetGetAnyDCName.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_DomainName)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
@@ -894,9 +894,9 @@ func NetGetAnyDCName(ServerName string, DomainName string, Buffer **byte) uint32
 // NetGetDCName calls NETAPI32!NetGetDCName.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgetdcname
 // Minimum OS: windows5.0.
-func NetGetDCName(ServerName string, DomainName string, Buffer **byte) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
-	_DomainName := win32.UTF16Ptr(DomainName)
+func NetGetDCName(ServerName *string, DomainName *string, Buffer **byte) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
+	_DomainName := win32.UTF16PtrOrNil(DomainName)
 	r1, _, _ := syscall.SyscallN(procNetGetDCName.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_DomainName)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
@@ -914,8 +914,8 @@ func NetGetDisplayInformationIndex(ServerName string, Level uint32, Prefix strin
 // NetGetJoinInformation calls NETAPI32!NetGetJoinInformation.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netgetjoininformation
 // Minimum OS: windows5.0.
-func NetGetJoinInformation(lpServer string, lpNameBuffer *foundation.PWSTR, BufferType *NETSETUP_JOIN_STATUS) uint32 {
-	_lpServer := win32.UTF16Ptr(lpServer)
+func NetGetJoinInformation(lpServer *string, lpNameBuffer *foundation.PWSTR, BufferType *NETSETUP_JOIN_STATUS) uint32 {
+	_lpServer := win32.UTF16PtrOrNil(lpServer)
 	r1, _, _ := syscall.SyscallN(procNetGetJoinInformation.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(lpNameBuffer)), uintptr(unsafe.Pointer(BufferType)))
 	return uint32(r1)
 }
@@ -923,11 +923,11 @@ func NetGetJoinInformation(lpServer string, lpNameBuffer *foundation.PWSTR, Buff
 // NetGetJoinableOUs calls NETAPI32!NetGetJoinableOUs.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netgetjoinableous
 // Minimum OS: windows5.0.
-func NetGetJoinableOUs(lpServer string, lpDomain string, lpAccount string, lpPassword string, OUCount *uint32, OUs **foundation.PWSTR) uint32 {
+func NetGetJoinableOUs(lpServer string, lpDomain string, lpAccount *string, lpPassword *string, OUCount *uint32, OUs **foundation.PWSTR) uint32 {
 	_lpServer := win32.UTF16Ptr(lpServer)
 	_lpDomain := win32.UTF16Ptr(lpDomain)
-	_lpAccount := win32.UTF16Ptr(lpAccount)
-	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpAccount := win32.UTF16PtrOrNil(lpAccount)
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
 	r1, _, _ := syscall.SyscallN(procNetGetJoinableOUs.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpDomain)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(OUCount)), uintptr(unsafe.Pointer(OUs)))
 	return uint32(r1)
 }
@@ -935,8 +935,8 @@ func NetGetJoinableOUs(lpServer string, lpDomain string, lpAccount string, lpPas
 // NetGroupAdd calls NETAPI32!NetGroupAdd.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupadd
 // Minimum OS: windows5.0.
-func NetGroupAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetGroupAdd(servername *string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetGroupAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
@@ -944,8 +944,8 @@ func NetGroupAdd(servername string, level uint32, buf *byte, parm_err *uint32) u
 // NetGroupAddUser calls NETAPI32!NetGroupAddUser.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupadduser
 // Minimum OS: windows5.0.
-func NetGroupAddUser(servername string, GroupName string, username string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetGroupAddUser(servername *string, GroupName string, username string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_GroupName := win32.UTF16Ptr(GroupName)
 	_username := win32.UTF16Ptr(username)
 	r1, _, _ := syscall.SyscallN(procNetGroupAddUser.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_GroupName)), uintptr(unsafe.Pointer(_username)))
@@ -955,8 +955,8 @@ func NetGroupAddUser(servername string, GroupName string, username string) uint3
 // NetGroupDel calls NETAPI32!NetGroupDel.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupdel
 // Minimum OS: windows5.0.
-func NetGroupDel(servername string, groupname string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetGroupDel(servername *string, groupname string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetGroupDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)))
 	return uint32(r1)
@@ -965,8 +965,8 @@ func NetGroupDel(servername string, groupname string) uint32 {
 // NetGroupDelUser calls NETAPI32!NetGroupDelUser.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupdeluser
 // Minimum OS: windows5.0.
-func NetGroupDelUser(servername string, GroupName string, Username string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetGroupDelUser(servername *string, GroupName string, Username string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_GroupName := win32.UTF16Ptr(GroupName)
 	_Username := win32.UTF16Ptr(Username)
 	r1, _, _ := syscall.SyscallN(procNetGroupDelUser.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_GroupName)), uintptr(unsafe.Pointer(_Username)))
@@ -976,8 +976,8 @@ func NetGroupDelUser(servername string, GroupName string, Username string) uint3
 // NetGroupEnum calls NETAPI32!NetGroupEnum.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupenum
 // Minimum OS: windows5.0.
-func NetGroupEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uintptr) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetGroupEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uintptr) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetGroupEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
@@ -985,8 +985,8 @@ func NetGroupEnum(servername string, level uint32, bufptr **byte, prefmaxlen uin
 // NetGroupGetInfo calls NETAPI32!NetGroupGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupgetinfo
 // Minimum OS: windows5.0.
-func NetGroupGetInfo(servername string, groupname string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetGroupGetInfo(servername *string, groupname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetGroupGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
@@ -995,8 +995,8 @@ func NetGroupGetInfo(servername string, groupname string, level uint32, bufptr *
 // NetGroupGetUsers calls NETAPI32!NetGroupGetUsers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupgetusers
 // Minimum OS: windows5.0.
-func NetGroupGetUsers(servername string, groupname string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, ResumeHandle *uintptr) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetGroupGetUsers(servername *string, groupname string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, ResumeHandle *uintptr) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetGroupGetUsers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(ResumeHandle)))
 	return uint32(r1)
@@ -1005,8 +1005,8 @@ func NetGroupGetUsers(servername string, groupname string, level uint32, bufptr 
 // NetGroupSetInfo calls NETAPI32!NetGroupSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupsetinfo
 // Minimum OS: windows5.0.
-func NetGroupSetInfo(servername string, groupname string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetGroupSetInfo(servername *string, groupname string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetGroupSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
@@ -1015,8 +1015,8 @@ func NetGroupSetInfo(servername string, groupname string, level uint32, buf *byt
 // NetGroupSetUsers calls NETAPI32!NetGroupSetUsers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netgroupsetusers
 // Minimum OS: windows5.0.
-func NetGroupSetUsers(servername string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetGroupSetUsers(servername *string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetGroupSetUsers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
 	return uint32(r1)
@@ -1025,16 +1025,16 @@ func NetGroupSetUsers(servername string, groupname string, level uint32, buf *by
 // NetIsServiceAccount calls NETAPI32!NetIsServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netisserviceaccount
 // Minimum OS: windows6.1.
-func NetIsServiceAccount(ServerName string, AccountName string, IsService *foundation.BOOL) foundation.NTSTATUS {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func NetIsServiceAccount(ServerName *string, AccountName string, IsService *foundation.BOOL) foundation.NTSTATUS {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	_AccountName := win32.UTF16Ptr(AccountName)
 	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(unsafe.Pointer(IsService)))
 	return foundation.NTSTATUS(r1)
 }
 
 // NetIsServiceAccount2 calls NETAPI32!NetIsServiceAccount2.
-func NetIsServiceAccount2(ServerName string, AccountName string, IsService *foundation.BOOL, AccountType *MSA_INFO_ACCOUNT_TYPE) foundation.NTSTATUS {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func NetIsServiceAccount2(ServerName *string, AccountName string, IsService *foundation.BOOL, AccountType *MSA_INFO_ACCOUNT_TYPE) foundation.NTSTATUS {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	_AccountName := win32.UTF16Ptr(AccountName)
 	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount2.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(unsafe.Pointer(IsService)), uintptr(unsafe.Pointer(AccountType)))
 	return foundation.NTSTATUS(r1)
@@ -1043,12 +1043,12 @@ func NetIsServiceAccount2(ServerName string, AccountName string, IsService *foun
 // NetJoinDomain calls NETAPI32!NetJoinDomain.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netjoindomain
 // Minimum OS: windows5.0.
-func NetJoinDomain(lpServer string, lpDomain string, lpMachineAccountOU string, lpAccount string, lpPassword string, fJoinOptions NET_JOIN_DOMAIN_JOIN_OPTIONS) uint32 {
-	_lpServer := win32.UTF16Ptr(lpServer)
+func NetJoinDomain(lpServer *string, lpDomain string, lpMachineAccountOU *string, lpAccount *string, lpPassword *string, fJoinOptions NET_JOIN_DOMAIN_JOIN_OPTIONS) uint32 {
+	_lpServer := win32.UTF16PtrOrNil(lpServer)
 	_lpDomain := win32.UTF16Ptr(lpDomain)
-	_lpMachineAccountOU := win32.UTF16Ptr(lpMachineAccountOU)
-	_lpAccount := win32.UTF16Ptr(lpAccount)
-	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpMachineAccountOU := win32.UTF16PtrOrNil(lpMachineAccountOU)
+	_lpAccount := win32.UTF16PtrOrNil(lpAccount)
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
 	r1, _, _ := syscall.SyscallN(procNetJoinDomain.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpDomain)), uintptr(unsafe.Pointer(_lpMachineAccountOU)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(fJoinOptions))
 	return uint32(r1)
 }
@@ -1056,16 +1056,16 @@ func NetJoinDomain(lpServer string, lpDomain string, lpMachineAccountOU string, 
 // NetLocalGroupAdd calls NETAPI32!NetLocalGroupAdd.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupadd
 // Minimum OS: windows5.0.
-func NetLocalGroupAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupAdd(servername *string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
 
 // NetLocalGroupAddMember calls NETAPI32!NetLocalGroupAddMember.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupaddmember
-func NetLocalGroupAddMember(servername string, groupname string, membersid security.PSID) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupAddMember(servername *string, groupname string, membersid security.PSID) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupAddMember.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(membersid))
 	return uint32(r1)
@@ -1074,8 +1074,8 @@ func NetLocalGroupAddMember(servername string, groupname string, membersid secur
 // NetLocalGroupAddMembers calls NETAPI32!NetLocalGroupAddMembers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupaddmembers
 // Minimum OS: windows5.0.
-func NetLocalGroupAddMembers(servername string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupAddMembers(servername *string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupAddMembers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
 	return uint32(r1)
@@ -1084,8 +1084,8 @@ func NetLocalGroupAddMembers(servername string, groupname string, level uint32, 
 // NetLocalGroupDel calls NETAPI32!NetLocalGroupDel.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupdel
 // Minimum OS: windows5.0.
-func NetLocalGroupDel(servername string, groupname string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupDel(servername *string, groupname string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)))
 	return uint32(r1)
@@ -1093,8 +1093,8 @@ func NetLocalGroupDel(servername string, groupname string) uint32 {
 
 // NetLocalGroupDelMember calls NETAPI32!NetLocalGroupDelMember.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupdelmember
-func NetLocalGroupDelMember(servername string, groupname string, membersid security.PSID) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupDelMember(servername *string, groupname string, membersid security.PSID) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupDelMember.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(membersid))
 	return uint32(r1)
@@ -1103,8 +1103,8 @@ func NetLocalGroupDelMember(servername string, groupname string, membersid secur
 // NetLocalGroupDelMembers calls NETAPI32!NetLocalGroupDelMembers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupdelmembers
 // Minimum OS: windows5.0.
-func NetLocalGroupDelMembers(servername string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupDelMembers(servername *string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupDelMembers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
 	return uint32(r1)
@@ -1113,8 +1113,8 @@ func NetLocalGroupDelMembers(servername string, groupname string, level uint32, 
 // NetLocalGroupEnum calls NETAPI32!NetLocalGroupEnum.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupenum
 // Minimum OS: windows5.0.
-func NetLocalGroupEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uintptr) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uintptr) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
 }
@@ -1122,8 +1122,8 @@ func NetLocalGroupEnum(servername string, level uint32, bufptr **byte, prefmaxle
 // NetLocalGroupGetInfo calls NETAPI32!NetLocalGroupGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupgetinfo
 // Minimum OS: windows5.0.
-func NetLocalGroupGetInfo(servername string, groupname string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupGetInfo(servername *string, groupname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
@@ -1132,8 +1132,8 @@ func NetLocalGroupGetInfo(servername string, groupname string, level uint32, buf
 // NetLocalGroupGetMembers calls NETAPI32!NetLocalGroupGetMembers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupgetmembers
 // Minimum OS: windows5.0.
-func NetLocalGroupGetMembers(servername string, localgroupname string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uintptr) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupGetMembers(servername *string, localgroupname string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uintptr) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_localgroupname := win32.UTF16Ptr(localgroupname)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupGetMembers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_localgroupname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
@@ -1142,8 +1142,8 @@ func NetLocalGroupGetMembers(servername string, localgroupname string, level uin
 // NetLocalGroupSetInfo calls NETAPI32!NetLocalGroupSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupsetinfo
 // Minimum OS: windows5.0.
-func NetLocalGroupSetInfo(servername string, groupname string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupSetInfo(servername *string, groupname string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
@@ -1152,8 +1152,8 @@ func NetLocalGroupSetInfo(servername string, groupname string, level uint32, buf
 // NetLocalGroupSetMembers calls NETAPI32!NetLocalGroupSetMembers.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netlocalgroupsetmembers
 // Minimum OS: windows5.0.
-func NetLocalGroupSetMembers(servername string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetLocalGroupSetMembers(servername *string, groupname string, level uint32, buf *byte, totalentries uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_groupname := win32.UTF16Ptr(groupname)
 	r1, _, _ := syscall.SyscallN(procNetLocalGroupSetMembers.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_groupname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(totalentries))
 	return uint32(r1)
@@ -1162,8 +1162,8 @@ func NetLocalGroupSetMembers(servername string, groupname string, level uint32, 
 // NetMessageBufferSend calls NETAPI32!NetMessageBufferSend.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagebuffersend
 // Minimum OS: windows5.0.
-func NetMessageBufferSend(servername string, msgname string, fromname string, buf *byte, buflen uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetMessageBufferSend(servername *string, msgname string, fromname string, buf *byte, buflen uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_msgname := win32.UTF16Ptr(msgname)
 	_fromname := win32.UTF16Ptr(fromname)
 	r1, _, _ := syscall.SyscallN(procNetMessageBufferSend.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_msgname)), uintptr(unsafe.Pointer(_fromname)), uintptr(unsafe.Pointer(buf)), uintptr(buflen))
@@ -1173,8 +1173,8 @@ func NetMessageBufferSend(servername string, msgname string, fromname string, bu
 // NetMessageNameAdd calls NETAPI32!NetMessageNameAdd.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagenameadd
 // Minimum OS: windows5.0.
-func NetMessageNameAdd(servername string, msgname string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetMessageNameAdd(servername *string, msgname string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_msgname := win32.UTF16Ptr(msgname)
 	r1, _, _ := syscall.SyscallN(procNetMessageNameAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_msgname)))
 	return uint32(r1)
@@ -1183,8 +1183,8 @@ func NetMessageNameAdd(servername string, msgname string) uint32 {
 // NetMessageNameDel calls NETAPI32!NetMessageNameDel.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagenamedel
 // Minimum OS: windows5.0.
-func NetMessageNameDel(servername string, msgname string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetMessageNameDel(servername *string, msgname string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_msgname := win32.UTF16Ptr(msgname)
 	r1, _, _ := syscall.SyscallN(procNetMessageNameDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_msgname)))
 	return uint32(r1)
@@ -1193,8 +1193,8 @@ func NetMessageNameDel(servername string, msgname string) uint32 {
 // NetMessageNameEnum calls NETAPI32!NetMessageNameEnum.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagenameenum
 // Minimum OS: windows5.0.
-func NetMessageNameEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetMessageNameEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetMessageNameEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
@@ -1202,8 +1202,8 @@ func NetMessageNameEnum(servername string, level uint32, bufptr **byte, prefmaxl
 // NetMessageNameGetInfo calls NETAPI32!NetMessageNameGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmmsg/nf-lmmsg-netmessagenamegetinfo
 // Minimum OS: windows5.0.
-func NetMessageNameGetInfo(servername string, msgname string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetMessageNameGetInfo(servername *string, msgname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_msgname := win32.UTF16Ptr(msgname)
 	r1, _, _ := syscall.SyscallN(procNetMessageNameGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_msgname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
@@ -1212,11 +1212,11 @@ func NetMessageNameGetInfo(servername string, msgname string, level uint32, bufp
 // NetProvisionComputerAccount calls NETAPI32!NetProvisionComputerAccount.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netprovisioncomputeraccount
 // Minimum OS: windows6.1.
-func NetProvisionComputerAccount(lpDomain string, lpMachineName string, lpMachineAccountOU string, lpDcName string, dwOptions NETSETUP_PROVISION, pProvisionBinData **byte, pdwProvisionBinDataSize *uint32, pProvisionTextData *foundation.PWSTR) uint32 {
+func NetProvisionComputerAccount(lpDomain string, lpMachineName string, lpMachineAccountOU *string, lpDcName *string, dwOptions NETSETUP_PROVISION, pProvisionBinData **byte, pdwProvisionBinDataSize *uint32, pProvisionTextData *foundation.PWSTR) uint32 {
 	_lpDomain := win32.UTF16Ptr(lpDomain)
 	_lpMachineName := win32.UTF16Ptr(lpMachineName)
-	_lpMachineAccountOU := win32.UTF16Ptr(lpMachineAccountOU)
-	_lpDcName := win32.UTF16Ptr(lpDcName)
+	_lpMachineAccountOU := win32.UTF16PtrOrNil(lpMachineAccountOU)
+	_lpDcName := win32.UTF16PtrOrNil(lpDcName)
 	r1, _, _ := syscall.SyscallN(procNetProvisionComputerAccount.Addr(), uintptr(unsafe.Pointer(_lpDomain)), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpMachineAccountOU)), uintptr(unsafe.Pointer(_lpDcName)), uintptr(dwOptions), uintptr(unsafe.Pointer(pProvisionBinData)), uintptr(unsafe.Pointer(pdwProvisionBinDataSize)), uintptr(unsafe.Pointer(pProvisionTextData)))
 	return uint32(r1)
 }
@@ -1233,8 +1233,8 @@ func NetQueryDisplayInformation(ServerName string, Level uint32, Index uint32, E
 // NetQueryServiceAccount calls NETAPI32!NetQueryServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netqueryserviceaccount
 // Minimum OS: windows6.1.
-func NetQueryServiceAccount(ServerName string, AccountName string, InfoLevel uint32, Buffer **byte) foundation.NTSTATUS {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func NetQueryServiceAccount(ServerName *string, AccountName string, InfoLevel uint32, Buffer **byte) foundation.NTSTATUS {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	_AccountName := win32.UTF16Ptr(AccountName)
 	r1, _, _ := syscall.SyscallN(procNetQueryServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(InfoLevel), uintptr(unsafe.Pointer(Buffer)))
 	return foundation.NTSTATUS(r1)
@@ -1252,8 +1252,8 @@ func NetRemoteComputerSupports(UncServerName string, OptionsWanted NET_REMOTE_CO
 // NetRemoteTOD calls NETAPI32!NetRemoteTOD.
 // https://learn.microsoft.com/windows/win32/api/lmremutl/nf-lmremutl-netremotetod
 // Minimum OS: windows5.0.
-func NetRemoteTOD(UncServerName string, BufferPtr **byte) uint32 {
-	_UncServerName := win32.UTF16Ptr(UncServerName)
+func NetRemoteTOD(UncServerName *string, BufferPtr **byte) uint32 {
+	_UncServerName := win32.UTF16PtrOrNil(UncServerName)
 	r1, _, _ := syscall.SyscallN(procNetRemoteTOD.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(BufferPtr)))
 	return uint32(r1)
 }
@@ -1261,11 +1261,11 @@ func NetRemoteTOD(UncServerName string, BufferPtr **byte) uint32 {
 // NetRemoveAlternateComputerName calls NETAPI32!NetRemoveAlternateComputerName.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netremovealternatecomputername
 // Minimum OS: windows5.1.2600.
-func NetRemoveAlternateComputerName(Server string, AlternateName string, DomainAccount string, DomainAccountPassword string, Reserved uint32) uint32 {
-	_Server := win32.UTF16Ptr(Server)
+func NetRemoveAlternateComputerName(Server *string, AlternateName string, DomainAccount *string, DomainAccountPassword *string, Reserved uint32) uint32 {
+	_Server := win32.UTF16PtrOrNil(Server)
 	_AlternateName := win32.UTF16Ptr(AlternateName)
-	_DomainAccount := win32.UTF16Ptr(DomainAccount)
-	_DomainAccountPassword := win32.UTF16Ptr(DomainAccountPassword)
+	_DomainAccount := win32.UTF16PtrOrNil(DomainAccount)
+	_DomainAccountPassword := win32.UTF16PtrOrNil(DomainAccountPassword)
 	r1, _, _ := syscall.SyscallN(procNetRemoveAlternateComputerName.Addr(), uintptr(unsafe.Pointer(_Server)), uintptr(unsafe.Pointer(_AlternateName)), uintptr(unsafe.Pointer(_DomainAccount)), uintptr(unsafe.Pointer(_DomainAccountPassword)), uintptr(Reserved))
 	return uint32(r1)
 }
@@ -1273,8 +1273,8 @@ func NetRemoveAlternateComputerName(Server string, AlternateName string, DomainA
 // NetRemoveServiceAccount calls NETAPI32!NetRemoveServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netremoveserviceaccount
 // Minimum OS: windows6.1.
-func NetRemoveServiceAccount(ServerName string, AccountName string, Flags uint32) foundation.NTSTATUS {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func NetRemoveServiceAccount(ServerName *string, AccountName string, Flags uint32) foundation.NTSTATUS {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	_AccountName := win32.UTF16Ptr(AccountName)
 	r1, _, _ := syscall.SyscallN(procNetRemoveServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(Flags))
 	return foundation.NTSTATUS(r1)
@@ -1283,11 +1283,11 @@ func NetRemoveServiceAccount(ServerName string, AccountName string, Flags uint32
 // NetRenameMachineInDomain calls NETAPI32!NetRenameMachineInDomain.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netrenamemachineindomain
 // Minimum OS: windows5.0.
-func NetRenameMachineInDomain(lpServer string, lpNewMachineName string, lpAccount string, lpPassword string, fRenameOptions uint32) uint32 {
-	_lpServer := win32.UTF16Ptr(lpServer)
-	_lpNewMachineName := win32.UTF16Ptr(lpNewMachineName)
-	_lpAccount := win32.UTF16Ptr(lpAccount)
-	_lpPassword := win32.UTF16Ptr(lpPassword)
+func NetRenameMachineInDomain(lpServer *string, lpNewMachineName *string, lpAccount *string, lpPassword *string, fRenameOptions uint32) uint32 {
+	_lpServer := win32.UTF16PtrOrNil(lpServer)
+	_lpNewMachineName := win32.UTF16PtrOrNil(lpNewMachineName)
+	_lpAccount := win32.UTF16PtrOrNil(lpAccount)
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
 	r1, _, _ := syscall.SyscallN(procNetRenameMachineInDomain.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpNewMachineName)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(fRenameOptions))
 	return uint32(r1)
 }
@@ -1471,9 +1471,9 @@ func NetScheduleJobGetInfo(Servername string, JobId uint32, PointerToBuffer **by
 // NetServerComputerNameAdd calls NETAPI32!NetServerComputerNameAdd.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservercomputernameadd
 // Minimum OS: windows5.0.
-func NetServerComputerNameAdd(ServerName string, EmulatedDomainName string, EmulatedServerName string) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
-	_EmulatedDomainName := win32.UTF16Ptr(EmulatedDomainName)
+func NetServerComputerNameAdd(ServerName *string, EmulatedDomainName *string, EmulatedServerName string) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
+	_EmulatedDomainName := win32.UTF16PtrOrNil(EmulatedDomainName)
 	_EmulatedServerName := win32.UTF16Ptr(EmulatedServerName)
 	r1, _, _ := syscall.SyscallN(procNetServerComputerNameAdd.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_EmulatedDomainName)), uintptr(unsafe.Pointer(_EmulatedServerName)))
 	return uint32(r1)
@@ -1482,8 +1482,8 @@ func NetServerComputerNameAdd(ServerName string, EmulatedDomainName string, Emul
 // NetServerComputerNameDel calls NETAPI32!NetServerComputerNameDel.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservercomputernamedel
 // Minimum OS: windows5.0.
-func NetServerComputerNameDel(ServerName string, EmulatedServerName string) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func NetServerComputerNameDel(ServerName *string, EmulatedServerName string) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	_EmulatedServerName := win32.UTF16Ptr(EmulatedServerName)
 	r1, _, _ := syscall.SyscallN(procNetServerComputerNameDel.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_EmulatedServerName)))
 	return uint32(r1)
@@ -1492,8 +1492,8 @@ func NetServerComputerNameDel(ServerName string, EmulatedServerName string) uint
 // NetServerDiskEnum calls NETAPI32!NetServerDiskEnum.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netserverdiskenum
 // Minimum OS: windows5.0.
-func NetServerDiskEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerDiskEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerDiskEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
@@ -1501,9 +1501,9 @@ func NetServerDiskEnum(servername string, level uint32, bufptr **byte, prefmaxle
 // NetServerEnum calls NETAPI32!NetServerEnum.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netserverenum
 // Minimum OS: windows5.0.
-func NetServerEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, servertype NET_SERVER_TYPE, domain string, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
-	_domain := win32.UTF16Ptr(domain)
+func NetServerEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, servertype NET_SERVER_TYPE, domain *string, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
+	_domain := win32.UTF16PtrOrNil(domain)
 	r1, _, _ := syscall.SyscallN(procNetServerEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(servertype), uintptr(unsafe.Pointer(_domain)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
@@ -1511,8 +1511,8 @@ func NetServerEnum(servername string, level uint32, bufptr **byte, prefmaxlen ui
 // NetServerGetInfo calls NETAPI32!NetServerGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservergetinfo
 // Minimum OS: windows5.0.
-func NetServerGetInfo(servername string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerGetInfo(servername *string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
@@ -1520,8 +1520,8 @@ func NetServerGetInfo(servername string, level uint32, bufptr **byte) uint32 {
 // NetServerSetInfo calls NETAPI32!NetServerSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netserversetinfo
 // Minimum OS: windows5.0.
-func NetServerSetInfo(servername string, level uint32, buf *byte, ParmError *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerSetInfo(servername *string, level uint32, buf *byte, ParmError *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(ParmError)))
 	return uint32(r1)
 }
@@ -1529,8 +1529,8 @@ func NetServerSetInfo(servername string, level uint32, buf *byte, ParmError *uin
 // NetServerTransportAdd calls NETAPI32!NetServerTransportAdd.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservertransportadd
 // Minimum OS: windows5.0.
-func NetServerTransportAdd(servername string, level uint32, bufptr *byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerTransportAdd(servername *string, level uint32, bufptr *byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerTransportAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
@@ -1538,8 +1538,8 @@ func NetServerTransportAdd(servername string, level uint32, bufptr *byte) uint32
 // NetServerTransportAddEx calls NETAPI32!NetServerTransportAddEx.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservertransportaddex
 // Minimum OS: windows5.0.
-func NetServerTransportAddEx(servername string, level uint32, bufptr *byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerTransportAddEx(servername *string, level uint32, bufptr *byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerTransportAddEx.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
@@ -1547,8 +1547,8 @@ func NetServerTransportAddEx(servername string, level uint32, bufptr *byte) uint
 // NetServerTransportDel calls NETAPI32!NetServerTransportDel.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservertransportdel
 // Minimum OS: windows5.0.
-func NetServerTransportDel(servername string, level uint32, bufptr *byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerTransportDel(servername *string, level uint32, bufptr *byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerTransportDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
@@ -1556,16 +1556,16 @@ func NetServerTransportDel(servername string, level uint32, bufptr *byte) uint32
 // NetServerTransportEnum calls NETAPI32!NetServerTransportEnum.
 // https://learn.microsoft.com/windows/win32/api/lmserver/nf-lmserver-netservertransportenum
 // Minimum OS: windows5.0.
-func NetServerTransportEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerTransportEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerTransportEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetServiceControl calls NETAPI32!NetServiceControl.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netservicecontrol
-func NetServiceControl(servername string, service string, opcode uint32, arg uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServiceControl(servername *string, service string, opcode uint32, arg uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_service := win32.UTF16Ptr(service)
 	r1, _, _ := syscall.SyscallN(procNetServiceControl.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_service)), uintptr(opcode), uintptr(arg), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
@@ -1573,16 +1573,16 @@ func NetServiceControl(servername string, service string, opcode uint32, arg uin
 
 // NetServiceEnum calls NETAPI32!NetServiceEnum.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netserviceenum
-func NetServiceEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServiceEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServiceEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetServiceGetInfo calls NETAPI32!NetServiceGetInfo.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netservicegetinfo
-func NetServiceGetInfo(servername string, service string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServiceGetInfo(servername *string, service string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_service := win32.UTF16Ptr(service)
 	r1, _, _ := syscall.SyscallN(procNetServiceGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_service)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
@@ -1590,8 +1590,8 @@ func NetServiceGetInfo(servername string, service string, level uint32, bufptr *
 
 // NetServiceInstall calls NETAPI32!NetServiceInstall.
 // https://learn.microsoft.com/windows/win32/NetMgmt/netserviceinstall
-func NetServiceInstall(servername string, service string, argv []foundation.PWSTR, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServiceInstall(servername *string, service string, argv []foundation.PWSTR, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_service := win32.UTF16Ptr(service)
 	var _argv *foundation.PWSTR
 	if len(argv) > 0 {
@@ -1604,11 +1604,11 @@ func NetServiceInstall(servername string, service string, argv []foundation.PWST
 // NetSetPrimaryComputerName calls NETAPI32!NetSetPrimaryComputerName.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netsetprimarycomputername
 // Minimum OS: windows5.1.2600.
-func NetSetPrimaryComputerName(Server string, PrimaryName string, DomainAccount string, DomainAccountPassword string, Reserved uint32) uint32 {
-	_Server := win32.UTF16Ptr(Server)
+func NetSetPrimaryComputerName(Server *string, PrimaryName string, DomainAccount *string, DomainAccountPassword *string, Reserved uint32) uint32 {
+	_Server := win32.UTF16PtrOrNil(Server)
 	_PrimaryName := win32.UTF16Ptr(PrimaryName)
-	_DomainAccount := win32.UTF16Ptr(DomainAccount)
-	_DomainAccountPassword := win32.UTF16Ptr(DomainAccountPassword)
+	_DomainAccount := win32.UTF16PtrOrNil(DomainAccount)
+	_DomainAccountPassword := win32.UTF16PtrOrNil(DomainAccountPassword)
 	r1, _, _ := syscall.SyscallN(procNetSetPrimaryComputerName.Addr(), uintptr(unsafe.Pointer(_Server)), uintptr(unsafe.Pointer(_PrimaryName)), uintptr(unsafe.Pointer(_DomainAccount)), uintptr(unsafe.Pointer(_DomainAccountPassword)), uintptr(Reserved))
 	return uint32(r1)
 }
@@ -1616,10 +1616,10 @@ func NetSetPrimaryComputerName(Server string, PrimaryName string, DomainAccount 
 // NetUnjoinDomain calls NETAPI32!NetUnjoinDomain.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netunjoindomain
 // Minimum OS: windows5.0.
-func NetUnjoinDomain(lpServer string, lpAccount string, lpPassword string, fUnjoinOptions uint32) uint32 {
-	_lpServer := win32.UTF16Ptr(lpServer)
-	_lpAccount := win32.UTF16Ptr(lpAccount)
-	_lpPassword := win32.UTF16Ptr(lpPassword)
+func NetUnjoinDomain(lpServer *string, lpAccount *string, lpPassword *string, fUnjoinOptions uint32) uint32 {
+	_lpServer := win32.UTF16PtrOrNil(lpServer)
+	_lpAccount := win32.UTF16PtrOrNil(lpAccount)
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
 	r1, _, _ := syscall.SyscallN(procNetUnjoinDomain.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(fUnjoinOptions))
 	return uint32(r1)
 }
@@ -1635,8 +1635,8 @@ func NetUseAdd(servername *int8, LevelFlags uint32, buf *byte, parm_err *uint32)
 // NetUseDel calls NETAPI32!NetUseDel.
 // https://learn.microsoft.com/windows/win32/api/lmuse/nf-lmuse-netusedel
 // Minimum OS: windows5.0.
-func NetUseDel(UncServerName string, UseName string, ForceLevelFlags FORCE_LEVEL_FLAGS) uint32 {
-	_UncServerName := win32.UTF16Ptr(UncServerName)
+func NetUseDel(UncServerName *string, UseName string, ForceLevelFlags FORCE_LEVEL_FLAGS) uint32 {
+	_UncServerName := win32.UTF16PtrOrNil(UncServerName)
 	_UseName := win32.UTF16Ptr(UseName)
 	r1, _, _ := syscall.SyscallN(procNetUseDel.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(_UseName)), uintptr(ForceLevelFlags))
 	return uint32(r1)
@@ -1645,8 +1645,8 @@ func NetUseDel(UncServerName string, UseName string, ForceLevelFlags FORCE_LEVEL
 // NetUseEnum calls NETAPI32!NetUseEnum.
 // https://learn.microsoft.com/windows/win32/api/lmuse/nf-lmuse-netuseenum
 // Minimum OS: windows5.0.
-func NetUseEnum(UncServerName string, LevelFlags uint32, BufPtr **byte, PreferedMaximumSize uint32, EntriesRead *uint32, TotalEntries *uint32, ResumeHandle *uint32) uint32 {
-	_UncServerName := win32.UTF16Ptr(UncServerName)
+func NetUseEnum(UncServerName *string, LevelFlags uint32, BufPtr **byte, PreferedMaximumSize uint32, EntriesRead *uint32, TotalEntries *uint32, ResumeHandle *uint32) uint32 {
+	_UncServerName := win32.UTF16PtrOrNil(UncServerName)
 	r1, _, _ := syscall.SyscallN(procNetUseEnum.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(LevelFlags), uintptr(unsafe.Pointer(BufPtr)), uintptr(PreferedMaximumSize), uintptr(unsafe.Pointer(EntriesRead)), uintptr(unsafe.Pointer(TotalEntries)), uintptr(unsafe.Pointer(ResumeHandle)))
 	return uint32(r1)
 }
@@ -1654,8 +1654,8 @@ func NetUseEnum(UncServerName string, LevelFlags uint32, BufPtr **byte, Prefered
 // NetUseGetInfo calls NETAPI32!NetUseGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmuse/nf-lmuse-netusegetinfo
 // Minimum OS: windows5.0.
-func NetUseGetInfo(UncServerName string, UseName string, LevelFlags uint32, bufptr **byte) uint32 {
-	_UncServerName := win32.UTF16Ptr(UncServerName)
+func NetUseGetInfo(UncServerName *string, UseName string, LevelFlags uint32, bufptr **byte) uint32 {
+	_UncServerName := win32.UTF16PtrOrNil(UncServerName)
 	_UseName := win32.UTF16Ptr(UseName)
 	r1, _, _ := syscall.SyscallN(procNetUseGetInfo.Addr(), uintptr(unsafe.Pointer(_UncServerName)), uintptr(unsafe.Pointer(_UseName)), uintptr(LevelFlags), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
@@ -1664,8 +1664,8 @@ func NetUseGetInfo(UncServerName string, UseName string, LevelFlags uint32, bufp
 // NetUserAdd calls NETAPI32!NetUserAdd.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netuseradd
 // Minimum OS: windows5.0.
-func NetUserAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserAdd(servername *string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetUserAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
@@ -1673,9 +1673,9 @@ func NetUserAdd(servername string, level uint32, buf *byte, parm_err *uint32) ui
 // NetUserChangePassword calls NETAPI32!NetUserChangePassword.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netuserchangepassword
 // Minimum OS: windows5.0.
-func NetUserChangePassword(domainname string, username string, oldpassword string, newpassword string) (uint32, error) {
-	_domainname := win32.UTF16Ptr(domainname)
-	_username := win32.UTF16Ptr(username)
+func NetUserChangePassword(domainname *string, username *string, oldpassword string, newpassword string) (uint32, error) {
+	_domainname := win32.UTF16PtrOrNil(domainname)
+	_username := win32.UTF16PtrOrNil(username)
 	_oldpassword := win32.UTF16Ptr(oldpassword)
 	_newpassword := win32.UTF16Ptr(newpassword)
 	r1, _, e1 := syscall.SyscallN(procNetUserChangePassword.Addr(), uintptr(unsafe.Pointer(_domainname)), uintptr(unsafe.Pointer(_username)), uintptr(unsafe.Pointer(_oldpassword)), uintptr(unsafe.Pointer(_newpassword)))
@@ -1688,8 +1688,8 @@ func NetUserChangePassword(domainname string, username string, oldpassword strin
 // NetUserDel calls NETAPI32!NetUserDel.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netuserdel
 // Minimum OS: windows5.0.
-func NetUserDel(servername string, username string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserDel(servername *string, username string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_username := win32.UTF16Ptr(username)
 	r1, _, _ := syscall.SyscallN(procNetUserDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)))
 	return uint32(r1)
@@ -1698,8 +1698,8 @@ func NetUserDel(servername string, username string) uint32 {
 // NetUserEnum calls NETAPI32!NetUserEnum.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netuserenum
 // Minimum OS: windows5.0.
-func NetUserEnum(servername string, level uint32, filter NET_USER_ENUM_FILTER_FLAGS, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserEnum(servername *string, level uint32, filter NET_USER_ENUM_FILTER_FLAGS, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetUserEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(filter), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
@@ -1707,8 +1707,8 @@ func NetUserEnum(servername string, level uint32, filter NET_USER_ENUM_FILTER_FL
 // NetUserGetGroups calls NETAPI32!NetUserGetGroups.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusergetgroups
 // Minimum OS: windows5.0.
-func NetUserGetGroups(servername string, username string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserGetGroups(servername *string, username string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_username := win32.UTF16Ptr(username)
 	r1, _, _ := syscall.SyscallN(procNetUserGetGroups.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)))
 	return uint32(r1)
@@ -1717,8 +1717,8 @@ func NetUserGetGroups(servername string, username string, level uint32, bufptr *
 // NetUserGetInfo calls NETAPI32!NetUserGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusergetinfo
 // Minimum OS: windows5.1.2600.
-func NetUserGetInfo(servername string, username string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserGetInfo(servername *string, username string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_username := win32.UTF16Ptr(username)
 	r1, _, _ := syscall.SyscallN(procNetUserGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
@@ -1727,8 +1727,8 @@ func NetUserGetInfo(servername string, username string, level uint32, bufptr **b
 // NetUserGetLocalGroups calls NETAPI32!NetUserGetLocalGroups.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusergetlocalgroups
 // Minimum OS: windows5.0.
-func NetUserGetLocalGroups(servername string, username string, level uint32, flags uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserGetLocalGroups(servername *string, username string, level uint32, flags uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_username := win32.UTF16Ptr(username)
 	r1, _, _ := syscall.SyscallN(procNetUserGetLocalGroups.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(flags), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)))
 	return uint32(r1)
@@ -1737,8 +1737,8 @@ func NetUserGetLocalGroups(servername string, username string, level uint32, fla
 // NetUserModalsGet calls NETAPI32!NetUserModalsGet.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusermodalsget
 // Minimum OS: windows5.0.
-func NetUserModalsGet(servername string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserModalsGet(servername *string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetUserModalsGet.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
@@ -1746,8 +1746,8 @@ func NetUserModalsGet(servername string, level uint32, bufptr **byte) uint32 {
 // NetUserModalsSet calls NETAPI32!NetUserModalsSet.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusermodalsset
 // Minimum OS: windows5.0.
-func NetUserModalsSet(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserModalsSet(servername *string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetUserModalsSet.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
@@ -1755,8 +1755,8 @@ func NetUserModalsSet(servername string, level uint32, buf *byte, parm_err *uint
 // NetUserSetGroups calls NETAPI32!NetUserSetGroups.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusersetgroups
 // Minimum OS: windows5.0.
-func NetUserSetGroups(servername string, username string, level uint32, buf *byte, num_entries uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserSetGroups(servername *string, username string, level uint32, buf *byte, num_entries uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_username := win32.UTF16Ptr(username)
 	r1, _, _ := syscall.SyscallN(procNetUserSetGroups.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(num_entries))
 	return uint32(r1)
@@ -1765,8 +1765,8 @@ func NetUserSetGroups(servername string, username string, level uint32, buf *byt
 // NetUserSetInfo calls NETAPI32!NetUserSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netusersetinfo
 // Minimum OS: windows5.0.
-func NetUserSetInfo(servername string, username string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetUserSetInfo(servername *string, username string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_username := win32.UTF16Ptr(username)
 	r1, _, _ := syscall.SyscallN(procNetUserSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
@@ -1775,11 +1775,11 @@ func NetUserSetInfo(servername string, username string, level uint32, buf *byte,
 // NetValidateName calls NETAPI32!NetValidateName.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netvalidatename
 // Minimum OS: windows5.0.
-func NetValidateName(lpServer string, lpName string, lpAccount string, lpPassword string, NameType NETSETUP_NAME_TYPE) uint32 {
-	_lpServer := win32.UTF16Ptr(lpServer)
+func NetValidateName(lpServer *string, lpName string, lpAccount *string, lpPassword *string, NameType NETSETUP_NAME_TYPE) uint32 {
+	_lpServer := win32.UTF16PtrOrNil(lpServer)
 	_lpName := win32.UTF16Ptr(lpName)
-	_lpAccount := win32.UTF16Ptr(lpAccount)
-	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpAccount := win32.UTF16PtrOrNil(lpAccount)
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
 	r1, _, _ := syscall.SyscallN(procNetValidateName.Addr(), uintptr(unsafe.Pointer(_lpServer)), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpAccount)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(NameType))
 	return uint32(r1)
 }
@@ -1804,8 +1804,8 @@ func NetValidatePasswordPolicyFree(OutputArg *unsafe.Pointer) uint32 {
 // NetWkstaGetInfo calls NETAPI32!NetWkstaGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstagetinfo
 // Minimum OS: windows5.0.
-func NetWkstaGetInfo(servername string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetWkstaGetInfo(servername *string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetWkstaGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
@@ -1813,8 +1813,8 @@ func NetWkstaGetInfo(servername string, level uint32, bufptr **byte) uint32 {
 // NetWkstaSetInfo calls NETAPI32!NetWkstaSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstasetinfo
 // Minimum OS: windows5.0.
-func NetWkstaSetInfo(servername string, level uint32, buffer *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetWkstaSetInfo(servername *string, level uint32, buffer *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetWkstaSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
@@ -1828,9 +1828,9 @@ func NetWkstaTransportAdd(servername *int8, level uint32, buf *byte, parm_err *u
 
 // NetWkstaTransportDel calls NETAPI32!NetWkstaTransportDel.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstatransportdel
-func NetWkstaTransportDel(servername string, transportname string, ucond FORCE_LEVEL_FLAGS) uint32 {
-	_servername := win32.UTF16Ptr(servername)
-	_transportname := win32.UTF16Ptr(transportname)
+func NetWkstaTransportDel(servername *string, transportname *string, ucond FORCE_LEVEL_FLAGS) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
+	_transportname := win32.UTF16PtrOrNil(transportname)
 	r1, _, _ := syscall.SyscallN(procNetWkstaTransportDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_transportname)), uintptr(ucond))
 	return uint32(r1)
 }
@@ -1846,8 +1846,8 @@ func NetWkstaTransportEnum(servername *int8, level uint32, bufptr **byte, prefma
 // NetWkstaUserEnum calls NETAPI32!NetWkstaUserEnum.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstauserenum
 // Minimum OS: windows5.0.
-func NetWkstaUserEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetWkstaUserEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetWkstaUserEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
 }
@@ -1855,8 +1855,8 @@ func NetWkstaUserEnum(servername string, level uint32, bufptr **byte, prefmaxlen
 // NetWkstaUserGetInfo calls NETAPI32!NetWkstaUserGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstausergetinfo
 // Minimum OS: windows5.0.
-func NetWkstaUserGetInfo(reserved string, level uint32, bufptr **byte) uint32 {
-	_reserved := win32.UTF16Ptr(reserved)
+func NetWkstaUserGetInfo(reserved *string, level uint32, bufptr **byte) uint32 {
+	_reserved := win32.UTF16PtrOrNil(reserved)
 	r1, _, _ := syscall.SyscallN(procNetWkstaUserGetInfo.Addr(), uintptr(unsafe.Pointer(_reserved)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
@@ -1864,8 +1864,8 @@ func NetWkstaUserGetInfo(reserved string, level uint32, bufptr **byte) uint32 {
 // NetWkstaUserSetInfo calls NETAPI32!NetWkstaUserSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmwksta/nf-lmwksta-netwkstausersetinfo
 // Minimum OS: windows5.0.
-func NetWkstaUserSetInfo(reserved string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_reserved := win32.UTF16Ptr(reserved)
+func NetWkstaUserSetInfo(reserved *string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_reserved := win32.UTF16PtrOrNil(reserved)
 	r1, _, _ := syscall.SyscallN(procNetWkstaUserSetInfo.Addr(), uintptr(unsafe.Pointer(_reserved)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }

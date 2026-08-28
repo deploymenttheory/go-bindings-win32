@@ -366,43 +366,43 @@ type IMSAdminBase2W struct {
 var IID_IMSAdminBase2W = win32.GUID{Data1: 0x8298d101, Data2: 0xf992, Data3: 0x43b7, Data4: [8]byte{0x8e, 0xca, 0x50, 0x52, 0xd8, 0x85, 0xb9, 0x95}}
 
 // BackupWithPasswd dispatches through IMSAdminBase2W's vtable slot 34.
-func (self *IMSAdminBase2W) BackupWithPasswd(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32, pszPasswd string) error {
-	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
-	_pszPasswd := win32.UTF16Ptr(pszPasswd)
+func (self *IMSAdminBase2W) BackupWithPasswd(pszMDBackupLocation *string, dwMDVersion uint32, dwMDFlags uint32, pszPasswd *string) error {
+	_pszMDBackupLocation := win32.UTF16PtrOrNil(pszMDBackupLocation)
+	_pszPasswd := win32.UTF16PtrOrNil(pszPasswd)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags), uintptr(unsafe.Pointer(_pszPasswd)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreWithPasswd dispatches through IMSAdminBase2W's vtable slot 35.
-func (self *IMSAdminBase2W) RestoreWithPasswd(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32, pszPasswd string) error {
-	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
-	_pszPasswd := win32.UTF16Ptr(pszPasswd)
+func (self *IMSAdminBase2W) RestoreWithPasswd(pszMDBackupLocation *string, dwMDVersion uint32, dwMDFlags uint32, pszPasswd *string) error {
+	_pszMDBackupLocation := win32.UTF16PtrOrNil(pszMDBackupLocation)
+	_pszPasswd := win32.UTF16PtrOrNil(pszPasswd)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags), uintptr(unsafe.Pointer(_pszPasswd)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Export dispatches through IMSAdminBase2W's vtable slot 36.
-func (self *IMSAdminBase2W) Export(pszPasswd string, pszFileName string, pszSourcePath string, dwMDFlags uint32) error {
-	_pszPasswd := win32.UTF16Ptr(pszPasswd)
-	_pszFileName := win32.UTF16Ptr(pszFileName)
-	_pszSourcePath := win32.UTF16Ptr(pszSourcePath)
+func (self *IMSAdminBase2W) Export(pszPasswd *string, pszFileName *string, pszSourcePath *string, dwMDFlags uint32) error {
+	_pszPasswd := win32.UTF16PtrOrNil(pszPasswd)
+	_pszFileName := win32.UTF16PtrOrNil(pszFileName)
+	_pszSourcePath := win32.UTF16PtrOrNil(pszSourcePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPasswd)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszSourcePath)), uintptr(dwMDFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Import dispatches through IMSAdminBase2W's vtable slot 37.
-func (self *IMSAdminBase2W) Import(pszPasswd string, pszFileName string, pszSourcePath string, pszDestPath string, dwMDFlags uint32) error {
-	_pszPasswd := win32.UTF16Ptr(pszPasswd)
-	_pszFileName := win32.UTF16Ptr(pszFileName)
-	_pszSourcePath := win32.UTF16Ptr(pszSourcePath)
-	_pszDestPath := win32.UTF16Ptr(pszDestPath)
+func (self *IMSAdminBase2W) Import(pszPasswd *string, pszFileName *string, pszSourcePath *string, pszDestPath *string, dwMDFlags uint32) error {
+	_pszPasswd := win32.UTF16PtrOrNil(pszPasswd)
+	_pszFileName := win32.UTF16PtrOrNil(pszFileName)
+	_pszSourcePath := win32.UTF16PtrOrNil(pszSourcePath)
+	_pszDestPath := win32.UTF16PtrOrNil(pszDestPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPasswd)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszSourcePath)), uintptr(unsafe.Pointer(_pszDestPath)), uintptr(dwMDFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // RestoreHistory dispatches through IMSAdminBase2W's vtable slot 38.
-func (self *IMSAdminBase2W) RestoreHistory(pszMDHistoryLocation string, dwMDMajorVersion uint32, dwMDMinorVersion uint32, dwMDFlags uint32) error {
-	_pszMDHistoryLocation := win32.UTF16Ptr(pszMDHistoryLocation)
+func (self *IMSAdminBase2W) RestoreHistory(pszMDHistoryLocation *string, dwMDMajorVersion uint32, dwMDMinorVersion uint32, dwMDFlags uint32) error {
+	_pszMDHistoryLocation := win32.UTF16PtrOrNil(pszMDHistoryLocation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDHistoryLocation)), uintptr(dwMDMajorVersion), uintptr(dwMDMinorVersion), uintptr(dwMDFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -422,8 +422,8 @@ type IMSAdminBase3W struct {
 var IID_IMSAdminBase3W = win32.GUID{Data1: 0xf612954d, Data2: 0x3b0b, Data3: 0x4c56, Data4: [8]byte{0x95, 0x63, 0x22, 0x7b, 0x7b, 0xe6, 0x24, 0xb4}}
 
 // GetChildPaths dispatches through IMSAdminBase3W's vtable slot 40.
-func (self *IMSAdminBase3W) GetChildPaths(hMDHandle uint32, pszMDPath string, cchMDBufferSize uint32, pszBuffer foundation.PWSTR, pcchMDRequiredBufferSize *uint32) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBase3W) GetChildPaths(hMDHandle uint32, pszMDPath *string, cchMDBufferSize uint32, pszBuffer foundation.PWSTR, pcchMDRequiredBufferSize *uint32) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(cchMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pcchMDRequiredBufferSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -461,37 +461,37 @@ type IMSAdminBaseW struct {
 var IID_IMSAdminBaseW = win32.GUID{Data1: 0x70b51430, Data2: 0xb6ca, Data3: 0x11d0, Data4: [8]byte{0xb9, 0xb9, 0x00, 0xa0, 0xc9, 0x22, 0xe7, 0x50}}
 
 // AddKey dispatches through IMSAdminBaseW's vtable slot 3.
-func (self *IMSAdminBaseW) AddKey(hMDHandle uint32, pszMDPath string) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) AddKey(hMDHandle uint32, pszMDPath *string) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteKey dispatches through IMSAdminBaseW's vtable slot 4.
-func (self *IMSAdminBaseW) DeleteKey(hMDHandle uint32, pszMDPath string) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) DeleteKey(hMDHandle uint32, pszMDPath *string) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DeleteChildKeys dispatches through IMSAdminBaseW's vtable slot 5.
-func (self *IMSAdminBaseW) DeleteChildKeys(hMDHandle uint32, pszMDPath string) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) DeleteChildKeys(hMDHandle uint32, pszMDPath *string) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // EnumKeys dispatches through IMSAdminBaseW's vtable slot 6.
-func (self *IMSAdminBaseW) EnumKeys(hMDHandle uint32, pszMDPath string, pszMDName foundation.PWSTR, dwMDEnumObjectIndex uint32) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) EnumKeys(hMDHandle uint32, pszMDPath *string, pszMDName foundation.PWSTR, dwMDEnumObjectIndex uint32) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pszMDName)), uintptr(dwMDEnumObjectIndex))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyKey dispatches through IMSAdminBaseW's vtable slot 7.
-func (self *IMSAdminBaseW) CopyKey(hMDSourceHandle uint32, pszMDSourcePath string, hMDDestHandle uint32, pszMDDestPath string, bMDOverwriteFlag bool, bMDCopyFlag bool) error {
-	_pszMDSourcePath := win32.UTF16Ptr(pszMDSourcePath)
-	_pszMDDestPath := win32.UTF16Ptr(pszMDDestPath)
+func (self *IMSAdminBaseW) CopyKey(hMDSourceHandle uint32, pszMDSourcePath *string, hMDDestHandle uint32, pszMDDestPath *string, bMDOverwriteFlag bool, bMDCopyFlag bool) error {
+	_pszMDSourcePath := win32.UTF16PtrOrNil(pszMDSourcePath)
+	_pszMDDestPath := win32.UTF16PtrOrNil(pszMDDestPath)
 	_bMDOverwriteFlag := win32.Bool32(bMDOverwriteFlag)
 	_bMDCopyFlag := win32.Bool32(bMDCopyFlag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hMDSourceHandle), uintptr(unsafe.Pointer(_pszMDSourcePath)), uintptr(hMDDestHandle), uintptr(unsafe.Pointer(_pszMDDestPath)), uintptr(_bMDOverwriteFlag), uintptr(_bMDCopyFlag))
@@ -499,9 +499,9 @@ func (self *IMSAdminBaseW) CopyKey(hMDSourceHandle uint32, pszMDSourcePath strin
 }
 
 // RenameKey dispatches through IMSAdminBaseW's vtable slot 8.
-func (self *IMSAdminBaseW) RenameKey(hMDHandle uint32, pszMDPath string, pszMDNewName string) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
-	_pszMDNewName := win32.UTF16Ptr(pszMDNewName)
+func (self *IMSAdminBaseW) RenameKey(hMDHandle uint32, pszMDPath *string, pszMDNewName *string) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
+	_pszMDNewName := win32.UTF16PtrOrNil(pszMDNewName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(_pszMDNewName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -521,8 +521,8 @@ func (self *IMSAdminBaseW) GetData(hMDHandle uint32, pszMDPath string, pmdrMDDat
 }
 
 // DeleteData dispatches through IMSAdminBaseW's vtable slot 11.
-func (self *IMSAdminBaseW) DeleteData(hMDHandle uint32, pszMDPath string, dwMDIdentifier uint32, dwMDDataType uint32) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) DeleteData(hMDHandle uint32, pszMDPath *string, dwMDIdentifier uint32, dwMDDataType uint32) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDIdentifier), uintptr(dwMDDataType))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -542,31 +542,31 @@ func (self *IMSAdminBaseW) GetAllData(hMDHandle uint32, pszMDPath string, dwMDAt
 }
 
 // DeleteAllData dispatches through IMSAdminBaseW's vtable slot 14.
-func (self *IMSAdminBaseW) DeleteAllData(hMDHandle uint32, pszMDPath string, dwMDUserType uint32, dwMDDataType uint32) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) DeleteAllData(hMDHandle uint32, pszMDPath *string, dwMDUserType uint32, dwMDDataType uint32) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDUserType), uintptr(dwMDDataType))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CopyData dispatches through IMSAdminBaseW's vtable slot 15.
-func (self *IMSAdminBaseW) CopyData(hMDSourceHandle uint32, pszMDSourcePath string, hMDDestHandle uint32, pszMDDestPath string, dwMDAttributes uint32, dwMDUserType uint32, dwMDDataType uint32, bMDCopyFlag bool) error {
-	_pszMDSourcePath := win32.UTF16Ptr(pszMDSourcePath)
-	_pszMDDestPath := win32.UTF16Ptr(pszMDDestPath)
+func (self *IMSAdminBaseW) CopyData(hMDSourceHandle uint32, pszMDSourcePath *string, hMDDestHandle uint32, pszMDDestPath *string, dwMDAttributes uint32, dwMDUserType uint32, dwMDDataType uint32, bMDCopyFlag bool) error {
+	_pszMDSourcePath := win32.UTF16PtrOrNil(pszMDSourcePath)
+	_pszMDDestPath := win32.UTF16PtrOrNil(pszMDDestPath)
 	_bMDCopyFlag := win32.Bool32(bMDCopyFlag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hMDSourceHandle), uintptr(unsafe.Pointer(_pszMDSourcePath)), uintptr(hMDDestHandle), uintptr(unsafe.Pointer(_pszMDDestPath)), uintptr(dwMDAttributes), uintptr(dwMDUserType), uintptr(dwMDDataType), uintptr(_bMDCopyFlag))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDataPaths dispatches through IMSAdminBaseW's vtable slot 16.
-func (self *IMSAdminBaseW) GetDataPaths(hMDHandle uint32, pszMDPath string, dwMDIdentifier uint32, dwMDDataType uint32, dwMDBufferSize uint32, pszBuffer foundation.PWSTR, pdwMDRequiredBufferSize *uint32) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) GetDataPaths(hMDHandle uint32, pszMDPath *string, dwMDIdentifier uint32, dwMDDataType uint32, dwMDBufferSize uint32, pszBuffer foundation.PWSTR, pdwMDRequiredBufferSize *uint32) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDIdentifier), uintptr(dwMDDataType), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenKey dispatches through IMSAdminBaseW's vtable slot 17.
-func (self *IMSAdminBaseW) OpenKey(hMDHandle uint32, pszMDPath string, dwMDAccessRequested uint32, dwMDTimeOut uint32, phMDNewHandle *uint32) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) OpenKey(hMDHandle uint32, pszMDPath *string, dwMDAccessRequested uint32, dwMDTimeOut uint32, phMDNewHandle *uint32) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDAccessRequested), uintptr(dwMDTimeOut), uintptr(unsafe.Pointer(phMDNewHandle)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -602,23 +602,23 @@ func (self *IMSAdminBaseW) GetSystemChangeNumber(pdwSystemChangeNumber *uint32) 
 }
 
 // GetDataSetNumber dispatches through IMSAdminBaseW's vtable slot 23.
-func (self *IMSAdminBaseW) GetDataSetNumber(hMDHandle uint32, pszMDPath string, pdwMDDataSetNumber *uint32) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) GetDataSetNumber(hMDHandle uint32, pszMDPath *string, pdwMDDataSetNumber *uint32) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pdwMDDataSetNumber)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetLastChangeTime dispatches through IMSAdminBaseW's vtable slot 24.
-func (self *IMSAdminBaseW) SetLastChangeTime(hMDHandle uint32, pszMDPath string, pftMDLastChangeTime *foundation.FILETIME, bLocalTime bool) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) SetLastChangeTime(hMDHandle uint32, pszMDPath *string, pftMDLastChangeTime *foundation.FILETIME, bLocalTime bool) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	_bLocalTime := win32.Bool32(bLocalTime)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pftMDLastChangeTime)), uintptr(_bLocalTime))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetLastChangeTime dispatches through IMSAdminBaseW's vtable slot 25.
-func (self *IMSAdminBaseW) GetLastChangeTime(hMDHandle uint32, pszMDPath string, pftMDLastChangeTime *foundation.FILETIME, bLocalTime bool) error {
-	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+func (self *IMSAdminBaseW) GetLastChangeTime(hMDHandle uint32, pszMDPath *string, pftMDLastChangeTime *foundation.FILETIME, bLocalTime bool) error {
+	_pszMDPath := win32.UTF16PtrOrNil(pszMDPath)
 	_bLocalTime := win32.Bool32(bLocalTime)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pftMDLastChangeTime)), uintptr(_bLocalTime))
 	return win32.ErrIfFailed(int32(r1))
@@ -637,15 +637,15 @@ func (self *IMSAdminBaseW) KeyExchangePhase2() error {
 }
 
 // Backup dispatches through IMSAdminBaseW's vtable slot 28.
-func (self *IMSAdminBaseW) Backup(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32) error {
-	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
+func (self *IMSAdminBaseW) Backup(pszMDBackupLocation *string, dwMDVersion uint32, dwMDFlags uint32) error {
+	_pszMDBackupLocation := win32.UTF16PtrOrNil(pszMDBackupLocation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Restore dispatches through IMSAdminBaseW's vtable slot 29.
-func (self *IMSAdminBaseW) Restore(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32) error {
-	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
+func (self *IMSAdminBaseW) Restore(pszMDBackupLocation *string, dwMDVersion uint32, dwMDFlags uint32) error {
+	_pszMDBackupLocation := win32.UTF16PtrOrNil(pszMDBackupLocation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -657,8 +657,8 @@ func (self *IMSAdminBaseW) EnumBackups(pszMDBackupLocation foundation.PWSTR, pdw
 }
 
 // DeleteBackup dispatches through IMSAdminBaseW's vtable slot 31.
-func (self *IMSAdminBaseW) DeleteBackup(pszMDBackupLocation string, dwMDVersion uint32) error {
-	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
+func (self *IMSAdminBaseW) DeleteBackup(pszMDBackupLocation *string, dwMDVersion uint32) error {
+	_pszMDBackupLocation := win32.UTF16PtrOrNil(pszMDBackupLocation)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -684,9 +684,9 @@ type IMSImpExpHelpW struct {
 var IID_IMSImpExpHelpW = win32.GUID{Data1: 0x29ff67ff, Data2: 0x8050, Data3: 0x480f, Data4: [8]byte{0x9f, 0x30, 0xcc, 0x41, 0x63, 0x5f, 0x2f, 0x9d}}
 
 // EnumeratePathsInFile dispatches through IMSImpExpHelpW's vtable slot 3.
-func (self *IMSImpExpHelpW) EnumeratePathsInFile(pszFileName string, pszKeyType string, dwMDBufferSize uint32, pszBuffer foundation.PWSTR, pdwMDRequiredBufferSize *uint32) error {
-	_pszFileName := win32.UTF16Ptr(pszFileName)
-	_pszKeyType := win32.UTF16Ptr(pszKeyType)
+func (self *IMSImpExpHelpW) EnumeratePathsInFile(pszFileName *string, pszKeyType *string, dwMDBufferSize uint32, pszBuffer foundation.PWSTR, pdwMDRequiredBufferSize *uint32) error {
+	_pszFileName := win32.UTF16PtrOrNil(pszFileName)
+	_pszKeyType := win32.UTF16PtrOrNil(pszKeyType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszKeyType)), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
 	return win32.ErrIfFailed(int32(r1))
 }

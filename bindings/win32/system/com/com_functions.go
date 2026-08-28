@@ -939,8 +939,8 @@ func CoSetCancelObject(pUnk *IUnknown) error {
 // CoSetProxyBlanket calls OLE32!CoSetProxyBlanket.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cosetproxyblanket
 // Minimum OS: windows5.0.
-func CoSetProxyBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
-	_pServerPrincName := win32.UTF16Ptr(pServerPrincName)
+func CoSetProxyBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName *string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
+	_pServerPrincName := win32.UTF16PtrOrNil(pServerPrincName)
 	r1, _, _ := syscall.SyscallN(procCoSetProxyBlanket.Addr(), uintptr(unsafe.Pointer(pProxy)), uintptr(dwAuthnSvc), uintptr(dwAuthzSvc), uintptr(unsafe.Pointer(_pServerPrincName)), uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(dwCapabilities))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1140,9 +1140,9 @@ func CreateUriFromMultiByteString(pszANSIInputUri foundation.PSTR, dwEncodingFla
 }
 
 // CreateUriWithFragment calls URLMON!CreateUriWithFragment.
-func CreateUriWithFragment(pwzURI string, pwzFragment string, dwFlags uint32, ppURI **IUri) error {
+func CreateUriWithFragment(pwzURI string, pwzFragment *string, dwFlags uint32, ppURI **IUri) error {
 	_pwzURI := win32.UTF16Ptr(pwzURI)
-	_pwzFragment := win32.UTF16Ptr(pwzFragment)
+	_pwzFragment := win32.UTF16PtrOrNil(pwzFragment)
 	r1, _, _ := syscall.SyscallN(procCreateUriWithFragment.Addr(), uintptr(unsafe.Pointer(_pwzURI)), uintptr(unsafe.Pointer(_pwzFragment)), uintptr(dwFlags), 0, uintptr(unsafe.Pointer(ppURI)))
 	return win32.ErrIfFailed(int32(r1))
 }

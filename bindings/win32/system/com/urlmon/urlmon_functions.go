@@ -270,8 +270,8 @@ func CoInternetCombineUrl(pwzBaseUrl string, pwzRelativeUrl string, dwCombineFla
 }
 
 // CoInternetCombineUrlEx calls urlmon!CoInternetCombineUrlEx.
-func CoInternetCombineUrlEx(pBaseUri *systemcom.IUri, pwzRelativeUrl string, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) error {
-	_pwzRelativeUrl := win32.UTF16Ptr(pwzRelativeUrl)
+func CoInternetCombineUrlEx(pBaseUri *systemcom.IUri, pwzRelativeUrl *string, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) error {
+	_pwzRelativeUrl := win32.UTF16PtrOrNil(pwzRelativeUrl)
 	r1, _, _ := syscall.SyscallN(procCoInternetCombineUrlEx.Addr(), uintptr(unsafe.Pointer(pBaseUri)), uintptr(unsafe.Pointer(_pwzRelativeUrl)), uintptr(dwCombineFlags), uintptr(unsafe.Pointer(ppCombinedUri)), uintptr(dwReserved))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -335,15 +335,15 @@ func CoInternetIsFeatureEnabledForIUri(FeatureEntry INTERNETFEATURELIST, dwFlags
 }
 
 // CoInternetIsFeatureEnabledForUrl calls urlmon!CoInternetIsFeatureEnabledForUrl.
-func CoInternetIsFeatureEnabledForUrl(FeatureEntry INTERNETFEATURELIST, dwFlags uint32, szURL string, pSecMgr *IInternetSecurityManager) error {
-	_szURL := win32.UTF16Ptr(szURL)
+func CoInternetIsFeatureEnabledForUrl(FeatureEntry INTERNETFEATURELIST, dwFlags uint32, szURL *string, pSecMgr *IInternetSecurityManager) error {
+	_szURL := win32.UTF16PtrOrNil(szURL)
 	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureEnabledForUrl.Addr(), uintptr(FeatureEntry), uintptr(dwFlags), uintptr(unsafe.Pointer(_szURL)), uintptr(unsafe.Pointer(pSecMgr)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoInternetIsFeatureZoneElevationEnabled calls urlmon!CoInternetIsFeatureZoneElevationEnabled.
-func CoInternetIsFeatureZoneElevationEnabled(szFromURL string, szToURL string, pSecMgr *IInternetSecurityManager, dwFlags uint32) error {
-	_szFromURL := win32.UTF16Ptr(szFromURL)
+func CoInternetIsFeatureZoneElevationEnabled(szFromURL *string, szToURL string, pSecMgr *IInternetSecurityManager, dwFlags uint32) error {
+	_szFromURL := win32.UTF16PtrOrNil(szFromURL)
 	_szToURL := win32.UTF16Ptr(szToURL)
 	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureZoneElevationEnabled.Addr(), uintptr(unsafe.Pointer(_szFromURL)), uintptr(unsafe.Pointer(_szToURL)), uintptr(unsafe.Pointer(pSecMgr)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
@@ -477,25 +477,25 @@ func FindMediaTypeClass(pBC *systemcom.IBindCtx, szType foundation.PSTR, pclsID 
 }
 
 // FindMimeFromData calls urlmon!FindMimeFromData.
-func FindMimeFromData(pBC *systemcom.IBindCtx, pwzUrl string, pBuffer []byte, pwzMimeProposed string, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR) error {
-	_pwzUrl := win32.UTF16Ptr(pwzUrl)
+func FindMimeFromData(pBC *systemcom.IBindCtx, pwzUrl *string, pBuffer []byte, pwzMimeProposed *string, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR) error {
+	_pwzUrl := win32.UTF16PtrOrNil(pwzUrl)
 	var _pBuffer *byte
 	if len(pBuffer) > 0 {
 		_pBuffer = &pBuffer[0]
 	}
-	_pwzMimeProposed := win32.UTF16Ptr(pwzMimeProposed)
+	_pwzMimeProposed := win32.UTF16PtrOrNil(pwzMimeProposed)
 	r1, _, _ := syscall.SyscallN(procFindMimeFromData.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(_pwzUrl)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pwzMimeProposed)), uintptr(dwMimeFlags), uintptr(unsafe.Pointer(ppwzMimeOut)), 0)
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClassFileOrMime calls urlmon!GetClassFileOrMime.
-func GetClassFileOrMime(pBC *systemcom.IBindCtx, szFilename string, pBuffer []byte, szMime string, dwReserved uint32, pclsid *win32.GUID) error {
-	_szFilename := win32.UTF16Ptr(szFilename)
+func GetClassFileOrMime(pBC *systemcom.IBindCtx, szFilename *string, pBuffer []byte, szMime *string, dwReserved uint32, pclsid *win32.GUID) error {
+	_szFilename := win32.UTF16PtrOrNil(szFilename)
 	var _pBuffer *byte
 	if len(pBuffer) > 0 {
 		_pBuffer = &pBuffer[0]
 	}
-	_szMime := win32.UTF16Ptr(szMime)
+	_szMime := win32.UTF16PtrOrNil(szMime)
 	r1, _, _ := syscall.SyscallN(procGetClassFileOrMime.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(_szFilename)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_szMime)), uintptr(dwReserved), uintptr(unsafe.Pointer(pclsid)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -539,25 +539,25 @@ func HlinkNavigateMoniker(pUnk *systemcom.IUnknown, pmkTarget *systemcom.IMonike
 }
 
 // HlinkNavigateString calls urlmon!HlinkNavigateString.
-func HlinkNavigateString(pUnk *systemcom.IUnknown, szTarget string) error {
-	_szTarget := win32.UTF16Ptr(szTarget)
+func HlinkNavigateString(pUnk *systemcom.IUnknown, szTarget *string) error {
+	_szTarget := win32.UTF16PtrOrNil(szTarget)
 	r1, _, _ := syscall.SyscallN(procHlinkNavigateString.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(_szTarget)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HlinkSimpleNavigateToMoniker calls urlmon!HlinkSimpleNavigateToMoniker.
-func HlinkSimpleNavigateToMoniker(pmkTarget *systemcom.IMoniker, szLocation string, szTargetFrameName string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
-	_szLocation := win32.UTF16Ptr(szLocation)
-	_szTargetFrameName := win32.UTF16Ptr(szTargetFrameName)
+func HlinkSimpleNavigateToMoniker(pmkTarget *systemcom.IMoniker, szLocation *string, szTargetFrameName *string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
+	_szLocation := win32.UTF16PtrOrNil(szLocation)
+	_szTargetFrameName := win32.UTF16PtrOrNil(szTargetFrameName)
 	r1, _, _ := syscall.SyscallN(procHlinkSimpleNavigateToMoniker.Addr(), uintptr(unsafe.Pointer(pmkTarget)), uintptr(unsafe.Pointer(_szLocation)), uintptr(unsafe.Pointer(_szTargetFrameName)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(param5)), uintptr(grfHLNF), uintptr(dwReserved))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HlinkSimpleNavigateToString calls urlmon!HlinkSimpleNavigateToString.
-func HlinkSimpleNavigateToString(szTarget string, szLocation string, szTargetFrameName string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
-	_szTarget := win32.UTF16Ptr(szTarget)
-	_szLocation := win32.UTF16Ptr(szLocation)
-	_szTargetFrameName := win32.UTF16Ptr(szTargetFrameName)
+func HlinkSimpleNavigateToString(szTarget *string, szLocation *string, szTargetFrameName *string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
+	_szTarget := win32.UTF16PtrOrNil(szTarget)
+	_szLocation := win32.UTF16PtrOrNil(szLocation)
+	_szTargetFrameName := win32.UTF16PtrOrNil(szTargetFrameName)
 	r1, _, _ := syscall.SyscallN(procHlinkSimpleNavigateToString.Addr(), uintptr(unsafe.Pointer(_szTarget)), uintptr(unsafe.Pointer(_szLocation)), uintptr(unsafe.Pointer(_szTargetFrameName)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(param5)), uintptr(grfHLNF), uintptr(dwReserved))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -681,9 +681,9 @@ func URLDownloadToCacheFileA(param0 *systemcom.IUnknown, param1 foundation.PSTR,
 }
 
 // URLDownloadToFile calls urlmon!URLDownloadToFileW.
-func URLDownloadToFile(param0 *systemcom.IUnknown, param1 string, param2 string, param3 uint32, param4 *systemcom.IBindStatusCallback) error {
+func URLDownloadToFile(param0 *systemcom.IUnknown, param1 string, param2 *string, param3 uint32, param4 *systemcom.IBindStatusCallback) error {
 	_param1 := win32.UTF16Ptr(param1)
-	_param2 := win32.UTF16Ptr(param2)
+	_param2 := win32.UTF16PtrOrNil(param2)
 	r1, _, _ := syscall.SyscallN(procURLDownloadToFile.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(_param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
 	return win32.ErrIfFailed(int32(r1))
 }

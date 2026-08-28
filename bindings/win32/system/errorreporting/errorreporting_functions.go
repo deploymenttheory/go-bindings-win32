@@ -318,8 +318,8 @@ func WerReportCreate(pwzEventType string, repType WER_REPORT_TYPE, pReportInform
 // WerReportHang calls faultrep!WerReportHang.
 // https://learn.microsoft.com/windows/win32/api/errorrep/nf-errorrep-werreporthang
 // Minimum OS: windows6.0.6000.
-func WerReportHang(hwndHungApp foundation.HWND, pwzHungApplicationName string) error {
-	_pwzHungApplicationName := win32.UTF16Ptr(pwzHungApplicationName)
+func WerReportHang(hwndHungApp foundation.HWND, pwzHungApplicationName *string) error {
+	_pwzHungApplicationName := win32.UTF16PtrOrNil(pwzHungApplicationName)
 	r1, _, _ := syscall.SyscallN(procWerReportHang.Addr(), uintptr(hwndHungApp), uintptr(unsafe.Pointer(_pwzHungApplicationName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -327,8 +327,8 @@ func WerReportHang(hwndHungApp foundation.HWND, pwzHungApplicationName string) e
 // WerReportSetParameter calls wer!WerReportSetParameter.
 // https://learn.microsoft.com/windows/win32/api/werapi/nf-werapi-werreportsetparameter
 // Minimum OS: windows6.0.6000.
-func WerReportSetParameter(hReportHandle HREPORT, dwparamID uint32, pwzName string, pwzValue string) error {
-	_pwzName := win32.UTF16Ptr(pwzName)
+func WerReportSetParameter(hReportHandle HREPORT, dwparamID uint32, pwzName *string, pwzValue string) error {
+	_pwzName := win32.UTF16PtrOrNil(pwzName)
 	_pwzValue := win32.UTF16Ptr(pwzValue)
 	r1, _, _ := syscall.SyscallN(procWerReportSetParameter.Addr(), uintptr(hReportHandle), uintptr(dwparamID), uintptr(unsafe.Pointer(_pwzName)), uintptr(unsafe.Pointer(_pwzValue)))
 	return win32.ErrIfFailed(int32(r1))

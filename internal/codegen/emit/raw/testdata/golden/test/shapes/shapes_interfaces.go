@@ -59,8 +59,8 @@ func (self *ITest) SetName(name string) error {
 }
 
 // SetOptional dispatches through ITest's vtable slot 5.
-func (self *ITest) SetOptional(name string) error {
-	_name := win32.UTF16Ptr(name)
+func (self *ITest) SetOptional(name *string) error {
+	_name := win32.UTF16PtrOrNil(name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)))
 	return win32.ErrIfFailed(int32(r1))
 }

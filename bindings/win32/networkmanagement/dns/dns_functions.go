@@ -310,13 +310,13 @@ func DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl string, pSelectionContext [
 }
 
 // DnsConnectionGetProxyInfoForHostUrlEx calls DNSAPI!DnsConnectionGetProxyInfoForHostUrlEx.
-func DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl string, pSelectionContext []byte, dwExplicitInterfaceIndex uint32, pwszConnectionName string, pProxyInfoEx *DNS_CONNECTION_PROXY_INFO_EX) uint32 {
+func DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl string, pSelectionContext []byte, dwExplicitInterfaceIndex uint32, pwszConnectionName *string, pProxyInfoEx *DNS_CONNECTION_PROXY_INFO_EX) uint32 {
 	_pwszHostUrl := win32.UTF16Ptr(pwszHostUrl)
 	var _pSelectionContext *byte
 	if len(pSelectionContext) > 0 {
 		_pSelectionContext = &pSelectionContext[0]
 	}
-	_pwszConnectionName := win32.UTF16Ptr(pwszConnectionName)
+	_pwszConnectionName := win32.UTF16PtrOrNil(pwszConnectionName)
 	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyInfoForHostUrlEx.Addr(), uintptr(unsafe.Pointer(_pwszHostUrl)), uintptr(unsafe.Pointer(_pSelectionContext)), uintptr(len(pSelectionContext)), uintptr(dwExplicitInterfaceIndex), uintptr(unsafe.Pointer(_pwszConnectionName)), uintptr(unsafe.Pointer(pProxyInfoEx)))
 	return uint32(r1)
 }
@@ -379,8 +379,8 @@ func DnsFreeCustomServers(pcServers *uint32, ppServers **DNS_CUSTOM_SERVER) {
 // DnsFreeProxyName calls DNSAPI!DnsFreeProxyName.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsfreeproxyname
 // Minimum OS: windows6.1.
-func DnsFreeProxyName(proxyName string) {
-	_proxyName := win32.UTF16Ptr(proxyName)
+func DnsFreeProxyName(proxyName *string) {
+	_proxyName := win32.UTF16PtrOrNil(proxyName)
 	syscall.SyscallN(procDnsFreeProxyName.Addr(), uintptr(unsafe.Pointer(_proxyName)))
 }
 
@@ -451,8 +451,8 @@ func DnsNameCompare_A(pName1 foundation.PSTR, pName2 foundation.PSTR) bool {
 // DnsQueryConfig calls DNSAPI!DnsQueryConfig.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsqueryconfig
 // Minimum OS: windows5.0.
-func DnsQueryConfig(Config DNS_CONFIG_TYPE, Flag uint32, pwsAdapterName string, pReserved unsafe.Pointer, pBuffer unsafe.Pointer, pBufLen *uint32) int32 {
-	_pwsAdapterName := win32.UTF16Ptr(pwsAdapterName)
+func DnsQueryConfig(Config DNS_CONFIG_TYPE, Flag uint32, pwsAdapterName *string, pReserved unsafe.Pointer, pBuffer unsafe.Pointer, pBufLen *uint32) int32 {
+	_pwsAdapterName := win32.UTF16PtrOrNil(pwsAdapterName)
 	r1, _, _ := syscall.SyscallN(procDnsQueryConfig.Addr(), uintptr(Config), uintptr(Flag), uintptr(unsafe.Pointer(_pwsAdapterName)), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pBufLen)))
 	return int32(r1)
 }

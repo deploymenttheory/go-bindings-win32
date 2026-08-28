@@ -64,10 +64,10 @@ var Procs = struct {
 // DavAddConnection calls NETAPI32!DavAddConnection.
 // https://learn.microsoft.com/windows/win32/api/davclnt/nf-davclnt-davaddconnection
 // Minimum OS: windows6.0.6000.
-func DavAddConnection(ConnectionHandle *foundation.HANDLE, RemoteName string, UserName string, Password string, ClientCert []byte) uint32 {
+func DavAddConnection(ConnectionHandle *foundation.HANDLE, RemoteName string, UserName *string, Password *string, ClientCert []byte) uint32 {
 	_RemoteName := win32.UTF16Ptr(RemoteName)
-	_UserName := win32.UTF16Ptr(UserName)
-	_Password := win32.UTF16Ptr(Password)
+	_UserName := win32.UTF16PtrOrNil(UserName)
+	_Password := win32.UTF16PtrOrNil(Password)
 	var _ClientCert *byte
 	if len(ClientCert) > 0 {
 		_ClientCert = &ClientCert[0]

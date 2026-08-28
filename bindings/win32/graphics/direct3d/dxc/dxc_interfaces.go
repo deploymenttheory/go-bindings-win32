@@ -110,9 +110,9 @@ type IDxcCompiler struct {
 var IID_IDxcCompiler = win32.GUID{Data1: 0x8c210bf3, Data2: 0x011f, Data3: 0x4422, Data4: [8]byte{0x8d, 0x70, 0x6f, 0x9a, 0xcb, 0x8d, 0xb6, 0x17}}
 
 // Compile dispatches through IDxcCompiler's vtable slot 3.
-func (self *IDxcCompiler) Compile(pSource *IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments []foundation.PWSTR, pDefines []DxcDefine, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
-	_pSourceName := win32.UTF16Ptr(pSourceName)
-	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
+func (self *IDxcCompiler) Compile(pSource *IDxcBlob, pSourceName *string, pEntryPoint *string, pTargetProfile string, pArguments []foundation.PWSTR, pDefines []DxcDefine, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
+	_pSourceName := win32.UTF16PtrOrNil(pSourceName)
+	_pEntryPoint := win32.UTF16PtrOrNil(pEntryPoint)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
 	var _pArguments *foundation.PWSTR
 	if len(pArguments) > 0 {
@@ -127,8 +127,8 @@ func (self *IDxcCompiler) Compile(pSource *IDxcBlob, pSourceName string, pEntryP
 }
 
 // Preprocess dispatches through IDxcCompiler's vtable slot 4.
-func (self *IDxcCompiler) Preprocess(pSource *IDxcBlob, pSourceName string, pArguments []foundation.PWSTR, pDefines []DxcDefine, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
-	_pSourceName := win32.UTF16Ptr(pSourceName)
+func (self *IDxcCompiler) Preprocess(pSource *IDxcBlob, pSourceName *string, pArguments []foundation.PWSTR, pDefines []DxcDefine, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
+	_pSourceName := win32.UTF16PtrOrNil(pSourceName)
 	var _pArguments *foundation.PWSTR
 	if len(pArguments) > 0 {
 		_pArguments = &pArguments[0]
@@ -156,9 +156,9 @@ type IDxcCompiler2 struct {
 var IID_IDxcCompiler2 = win32.GUID{Data1: 0xa005a9d9, Data2: 0xb8bb, Data3: 0x4594, Data4: [8]byte{0xb5, 0xc9, 0x0e, 0x63, 0x3b, 0xec, 0x4d, 0x37}}
 
 // CompileWithDebug dispatches through IDxcCompiler2's vtable slot 6.
-func (self *IDxcCompiler2) CompileWithDebug(pSource *IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments []foundation.PWSTR, pDefines []DxcDefine, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult, ppDebugBlobName *foundation.PWSTR, ppDebugBlob **IDxcBlob) error {
-	_pSourceName := win32.UTF16Ptr(pSourceName)
-	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
+func (self *IDxcCompiler2) CompileWithDebug(pSource *IDxcBlob, pSourceName *string, pEntryPoint *string, pTargetProfile string, pArguments []foundation.PWSTR, pDefines []DxcDefine, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult, ppDebugBlobName *foundation.PWSTR, ppDebugBlob **IDxcBlob) error {
+	_pSourceName := win32.UTF16PtrOrNil(pSourceName)
+	_pEntryPoint := win32.UTF16PtrOrNil(pEntryPoint)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
 	var _pArguments *foundation.PWSTR
 	if len(pArguments) > 0 {
@@ -447,15 +447,15 @@ type IDxcLinker struct {
 var IID_IDxcLinker = win32.GUID{Data1: 0xf1b5be2a, Data2: 0x62dd, Data3: 0x4327, Data4: [8]byte{0xa1, 0xc2, 0x42, 0xac, 0x1e, 0x1e, 0x78, 0xe6}}
 
 // RegisterLibrary dispatches through IDxcLinker's vtable slot 3.
-func (self *IDxcLinker) RegisterLibrary(pLibName string, pLib *IDxcBlob) error {
-	_pLibName := win32.UTF16Ptr(pLibName)
+func (self *IDxcLinker) RegisterLibrary(pLibName *string, pLib *IDxcBlob) error {
+	_pLibName := win32.UTF16PtrOrNil(pLibName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pLibName)), uintptr(unsafe.Pointer(pLib)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Link dispatches through IDxcLinker's vtable slot 4.
-func (self *IDxcLinker) Link(pEntryName string, pTargetProfile string, pLibNames []foundation.PWSTR, pArguments []foundation.PWSTR, ppResult **IDxcOperationResult) error {
-	_pEntryName := win32.UTF16Ptr(pEntryName)
+func (self *IDxcLinker) Link(pEntryName *string, pTargetProfile string, pLibNames []foundation.PWSTR, pArguments []foundation.PWSTR, ppResult **IDxcOperationResult) error {
+	_pEntryName := win32.UTF16PtrOrNil(pEntryName)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
 	var _pLibNames *foundation.PWSTR
 	if len(pLibNames) > 0 {
@@ -1000,9 +1000,9 @@ func (self *IDxcUtils) CreateReflection(pData *DxcBuffer, iid *win32.GUID, ppvRe
 }
 
 // BuildArguments dispatches through IDxcUtils's vtable slot 14.
-func (self *IDxcUtils) BuildArguments(pSourceName string, pEntryPoint string, pTargetProfile string, pArguments []foundation.PWSTR, pDefines []DxcDefine, ppArgs **IDxcCompilerArgs) error {
-	_pSourceName := win32.UTF16Ptr(pSourceName)
-	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
+func (self *IDxcUtils) BuildArguments(pSourceName *string, pEntryPoint *string, pTargetProfile string, pArguments []foundation.PWSTR, pDefines []DxcDefine, ppArgs **IDxcCompilerArgs) error {
+	_pSourceName := win32.UTF16PtrOrNil(pSourceName)
+	_pEntryPoint := win32.UTF16PtrOrNil(pEntryPoint)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
 	var _pArguments *foundation.PWSTR
 	if len(pArguments) > 0 {

@@ -399,8 +399,8 @@ var Procs = struct {
 
 // AssociateColorProfileWithDevice calls mscms!AssociateColorProfileWithDeviceW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-associatecolorprofilewithdevicew
-func AssociateColorProfileWithDevice(pMachineName string, pProfileName string, pDeviceName string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func AssociateColorProfileWithDevice(pMachineName *string, pProfileName string, pDeviceName string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	_pDeviceName := win32.UTF16Ptr(pDeviceName)
 	r1, _, _ := syscall.SyscallN(procAssociateColorProfileWithDevice.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)), uintptr(unsafe.Pointer(_pDeviceName)))
@@ -789,8 +789,8 @@ func DeleteColorTransform(hxform uintptr) bool {
 
 // DisassociateColorProfileFromDevice calls mscms!DisassociateColorProfileFromDeviceW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-disassociatecolorprofilefromdevicew
-func DisassociateColorProfileFromDevice(pMachineName string, pProfileName string, pDeviceName string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func DisassociateColorProfileFromDevice(pMachineName *string, pProfileName string, pDeviceName string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	_pDeviceName := win32.UTF16Ptr(pDeviceName)
 	r1, _, _ := syscall.SyscallN(procDisassociateColorProfileFromDevice.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)), uintptr(unsafe.Pointer(_pDeviceName)))
@@ -806,8 +806,8 @@ func DisassociateColorProfileFromDeviceA(pMachineName foundation.PSTR, pProfileN
 
 // EnumColorProfiles calls mscms!EnumColorProfilesW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-enumcolorprofilesw
-func EnumColorProfiles(pMachineName string, pEnumRecord *ENUMTYPEW, pEnumerationBuffer *byte, pdwSizeOfEnumerationBuffer *uint32, pnProfiles *uint32) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func EnumColorProfiles(pMachineName *string, pEnumRecord *ENUMTYPEW, pEnumerationBuffer *byte, pdwSizeOfEnumerationBuffer *uint32, pnProfiles *uint32) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	r1, _, _ := syscall.SyscallN(procEnumColorProfiles.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(pEnumRecord)), uintptr(unsafe.Pointer(pEnumerationBuffer)), uintptr(unsafe.Pointer(pdwSizeOfEnumerationBuffer)), uintptr(unsafe.Pointer(pnProfiles)))
 	return r1 != 0
 }
@@ -844,8 +844,8 @@ func GetCMMInfo(hColorTransform uintptr, param1 uint32) uint32 {
 
 // GetColorDirectory calls mscms!GetColorDirectoryW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolordirectoryw
-func GetColorDirectory(pMachineName string, pBuffer foundation.PWSTR, pdwSize *uint32) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func GetColorDirectory(pMachineName *string, pBuffer foundation.PWSTR, pdwSize *uint32) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	r1, _, _ := syscall.SyscallN(procGetColorDirectory.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pdwSize)))
 	return r1 != 0
 }
@@ -970,8 +970,8 @@ func GetPS2ColorSpaceArray(hProfile uintptr, dwIntent uint32, dwCSAType uint32, 
 
 // GetStandardColorSpaceProfile calls mscms!GetStandardColorSpaceProfileW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getstandardcolorspaceprofilew
-func GetStandardColorSpaceProfile(pMachineName string, dwSCS uint32, pBuffer foundation.PWSTR, pcbSize *uint32) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func GetStandardColorSpaceProfile(pMachineName *string, dwSCS uint32, pBuffer foundation.PWSTR, pcbSize *uint32) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	r1, _, _ := syscall.SyscallN(procGetStandardColorSpaceProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(dwSCS), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbSize)))
 	return r1 != 0
 }
@@ -985,8 +985,8 @@ func GetStandardColorSpaceProfileA(pMachineName foundation.PSTR, dwSCS uint32, p
 
 // InstallColorProfile calls mscms!InstallColorProfileW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-installcolorprofilew
-func InstallColorProfile(pMachineName string, pProfileName string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func InstallColorProfile(pMachineName *string, pProfileName string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	r1, _, _ := syscall.SyscallN(procInstallColorProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)))
 	return r1 != 0
@@ -1029,8 +1029,8 @@ func OpenColorProfileA(pProfile *PROFILE, dwDesiredAccess uint32, dwShareMode ui
 
 // RegisterCMM calls mscms!RegisterCMMW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-registercmmw
-func RegisterCMM(pMachineName string, cmmID uint32, pCMMdll string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func RegisterCMM(pMachineName *string, cmmID uint32, pCMMdll string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pCMMdll := win32.UTF16Ptr(pCMMdll)
 	r1, _, _ := syscall.SyscallN(procRegisterCMM.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(cmmID), uintptr(unsafe.Pointer(_pCMMdll)))
 	return r1 != 0
@@ -1121,8 +1121,8 @@ func SetICMProfileA(hdc graphicsgdi.HDC, lpFileName foundation.PSTR) bool {
 
 // SetStandardColorSpaceProfile calls mscms!SetStandardColorSpaceProfileW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setstandardcolorspaceprofilew
-func SetStandardColorSpaceProfile(pMachineName string, dwProfileID uint32, pProfileName string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func SetStandardColorSpaceProfile(pMachineName *string, dwProfileID uint32, pProfileName string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	r1, _, _ := syscall.SyscallN(procSetStandardColorSpaceProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(dwProfileID), uintptr(unsafe.Pointer(_pProfileName)))
 	return r1 != 0
@@ -1165,8 +1165,8 @@ func TranslateColors(hColorTransform uintptr, paInputColors *COLOR, nColors uint
 
 // UninstallColorProfile calls mscms!UninstallColorProfileW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-uninstallcolorprofilew
-func UninstallColorProfile(pMachineName string, pProfileName string, bDelete bool) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func UninstallColorProfile(pMachineName *string, pProfileName string, bDelete bool) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	_bDelete := win32.Bool32(bDelete)
 	r1, _, _ := syscall.SyscallN(procUninstallColorProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)), uintptr(_bDelete))
@@ -1183,8 +1183,8 @@ func UninstallColorProfileA(pMachineName foundation.PSTR, pProfileName foundatio
 
 // UnregisterCMM calls mscms!UnregisterCMMW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-unregistercmmw
-func UnregisterCMM(pMachineName string, cmmID uint32) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func UnregisterCMM(pMachineName *string, cmmID uint32) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	r1, _, _ := syscall.SyscallN(procUnregisterCMM.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(cmmID))
 	return r1 != 0
 }
@@ -1281,16 +1281,16 @@ func WcsGetCalibrationManagementState(pbIsEnabled *foundation.BOOL) bool {
 
 // WcsGetDefaultColorProfile calls mscms!WcsGetDefaultColorProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetdefaultcolorprofile
-func WcsGetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, cbProfileName uint32, pProfileName foundation.PWSTR) bool {
-	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+func WcsGetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName *string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, cbProfileName uint32, pProfileName foundation.PWSTR) bool {
+	_pDeviceName := win32.UTF16PtrOrNil(pDeviceName)
 	r1, _, _ := syscall.SyscallN(procWcsGetDefaultColorProfile.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(cbProfileName), uintptr(unsafe.Pointer(pProfileName)))
 	return r1 != 0
 }
 
 // WcsGetDefaultColorProfileSize calls mscms!WcsGetDefaultColorProfileSize.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetdefaultcolorprofilesize
-func WcsGetDefaultColorProfileSize(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pcbProfileName *uint32) bool {
-	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+func WcsGetDefaultColorProfileSize(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName *string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pcbProfileName *uint32) bool {
+	_pDeviceName := win32.UTF16PtrOrNil(pDeviceName)
 	r1, _, _ := syscall.SyscallN(procWcsGetDefaultColorProfileSize.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(unsafe.Pointer(pcbProfileName)))
 	return r1 != 0
 }
@@ -1334,9 +1334,9 @@ func WcsSetCalibrationManagementState(bIsEnabled bool) bool {
 
 // WcsSetDefaultColorProfile calls mscms!WcsSetDefaultColorProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcssetdefaultcolorprofile
-func WcsSetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pProfileName string) bool {
-	_pDeviceName := win32.UTF16Ptr(pDeviceName)
-	_pProfileName := win32.UTF16Ptr(pProfileName)
+func WcsSetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName *string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pProfileName *string) bool {
+	_pDeviceName := win32.UTF16PtrOrNil(pDeviceName)
+	_pProfileName := win32.UTF16PtrOrNil(pProfileName)
 	r1, _, _ := syscall.SyscallN(procWcsSetDefaultColorProfile.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(unsafe.Pointer(_pProfileName)))
 	return r1 != 0
 }

@@ -709,10 +709,10 @@ func BinarySDToSecurityDescriptor(pSecurityDescriptor security.PSECURITY_DESCRIP
 // DsAddSidHistory calls NTDSAPI!DsAddSidHistoryW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsaddsidhistoryw
 // Minimum OS: windows6.0.6000.
-func DsAddSidHistory(hDS foundation.HANDLE, SrcDomain string, SrcPrincipal string, SrcDomainController string, SrcDomainCreds unsafe.Pointer, DstDomain string, DstPrincipal string) uint32 {
+func DsAddSidHistory(hDS foundation.HANDLE, SrcDomain string, SrcPrincipal string, SrcDomainController *string, SrcDomainCreds unsafe.Pointer, DstDomain string, DstPrincipal string) uint32 {
 	_SrcDomain := win32.UTF16Ptr(SrcDomain)
 	_SrcPrincipal := win32.UTF16Ptr(SrcPrincipal)
-	_SrcDomainController := win32.UTF16Ptr(SrcDomainController)
+	_SrcDomainController := win32.UTF16PtrOrNil(SrcDomainController)
 	_DstDomain := win32.UTF16Ptr(DstDomain)
 	_DstPrincipal := win32.UTF16Ptr(DstPrincipal)
 	r1, _, _ := syscall.SyscallN(procDsAddSidHistory.Addr(), uintptr(hDS), 0, uintptr(unsafe.Pointer(_SrcDomain)), uintptr(unsafe.Pointer(_SrcPrincipal)), uintptr(unsafe.Pointer(_SrcDomainController)), uintptr(unsafe.Pointer(SrcDomainCreds)), uintptr(unsafe.Pointer(_DstDomain)), uintptr(unsafe.Pointer(_DstPrincipal)))
@@ -730,8 +730,8 @@ func DsAddSidHistoryA(hDS foundation.HANDLE, SrcDomain foundation.PSTR, SrcPrinc
 // DsAddressToSiteNames calls NETAPI32!DsAddressToSiteNamesW.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsaddresstositenamesw
 // Minimum OS: windows6.0.6000.
-func DsAddressToSiteNames(ComputerName string, SocketAddresses []networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PWSTR) uint32 {
-	_ComputerName := win32.UTF16Ptr(ComputerName)
+func DsAddressToSiteNames(ComputerName *string, SocketAddresses []networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PWSTR) uint32 {
+	_ComputerName := win32.UTF16PtrOrNil(ComputerName)
 	var _SocketAddresses *networkingwinsock.SOCKET_ADDRESS
 	if len(SocketAddresses) > 0 {
 		_SocketAddresses = &SocketAddresses[0]
@@ -755,8 +755,8 @@ func DsAddressToSiteNamesA(ComputerName foundation.PSTR, SocketAddresses []netwo
 // DsAddressToSiteNamesEx calls NETAPI32!DsAddressToSiteNamesExW.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsaddresstositenamesexw
 // Minimum OS: windows6.0.6000.
-func DsAddressToSiteNamesEx(ComputerName string, SocketAddresses []networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PWSTR, SubnetNames **foundation.PWSTR) uint32 {
-	_ComputerName := win32.UTF16Ptr(ComputerName)
+func DsAddressToSiteNamesEx(ComputerName *string, SocketAddresses []networkingwinsock.SOCKET_ADDRESS, SiteNames **foundation.PWSTR, SubnetNames **foundation.PWSTR) uint32 {
+	_ComputerName := win32.UTF16PtrOrNil(ComputerName)
 	var _SocketAddresses *networkingwinsock.SOCKET_ADDRESS
 	if len(SocketAddresses) > 0 {
 		_SocketAddresses = &SocketAddresses[0]
@@ -780,9 +780,9 @@ func DsAddressToSiteNamesExA(ComputerName foundation.PSTR, SocketAddresses []net
 // DsBind calls NTDSAPI!DsBindW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsbindw
 // Minimum OS: windows6.0.6000.
-func DsBind(DomainControllerName string, DnsDomainName string, phDS *foundation.HANDLE) uint32 {
-	_DomainControllerName := win32.UTF16Ptr(DomainControllerName)
-	_DnsDomainName := win32.UTF16Ptr(DnsDomainName)
+func DsBind(DomainControllerName *string, DnsDomainName *string, phDS *foundation.HANDLE) uint32 {
+	_DomainControllerName := win32.UTF16PtrOrNil(DomainControllerName)
+	_DnsDomainName := win32.UTF16PtrOrNil(DnsDomainName)
 	r1, _, _ := syscall.SyscallN(procDsBind.Addr(), uintptr(unsafe.Pointer(_DomainControllerName)), uintptr(unsafe.Pointer(_DnsDomainName)), uintptr(unsafe.Pointer(phDS)))
 	return uint32(r1)
 }
@@ -798,11 +798,11 @@ func DsBindA(DomainControllerName foundation.PSTR, DnsDomainName foundation.PSTR
 // DsBindByInstance calls NTDSAPI!DsBindByInstanceW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsbindbyinstancew
 // Minimum OS: windows6.0.6000.
-func DsBindByInstance(ServerName string, Annotation string, InstanceGuid *win32.GUID, DnsDomainName string, AuthIdentity unsafe.Pointer, ServicePrincipalName string, BindFlags uint32, phDS *foundation.HANDLE) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
-	_Annotation := win32.UTF16Ptr(Annotation)
-	_DnsDomainName := win32.UTF16Ptr(DnsDomainName)
-	_ServicePrincipalName := win32.UTF16Ptr(ServicePrincipalName)
+func DsBindByInstance(ServerName *string, Annotation *string, InstanceGuid *win32.GUID, DnsDomainName *string, AuthIdentity unsafe.Pointer, ServicePrincipalName *string, BindFlags uint32, phDS *foundation.HANDLE) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
+	_Annotation := win32.UTF16PtrOrNil(Annotation)
+	_DnsDomainName := win32.UTF16PtrOrNil(DnsDomainName)
+	_ServicePrincipalName := win32.UTF16PtrOrNil(ServicePrincipalName)
 	r1, _, _ := syscall.SyscallN(procDsBindByInstance.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_Annotation)), uintptr(unsafe.Pointer(InstanceGuid)), uintptr(unsafe.Pointer(_DnsDomainName)), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(_ServicePrincipalName)), uintptr(BindFlags), uintptr(unsafe.Pointer(phDS)))
 	return uint32(r1)
 }
@@ -818,8 +818,8 @@ func DsBindByInstanceA(ServerName foundation.PSTR, Annotation foundation.PSTR, I
 // DsBindToISTG calls NTDSAPI!DsBindToISTGW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsbindtoistgw
 // Minimum OS: windows6.0.6000.
-func DsBindToISTG(SiteName string, phDS *foundation.HANDLE) uint32 {
-	_SiteName := win32.UTF16Ptr(SiteName)
+func DsBindToISTG(SiteName *string, phDS *foundation.HANDLE) uint32 {
+	_SiteName := win32.UTF16PtrOrNil(SiteName)
 	r1, _, _ := syscall.SyscallN(procDsBindToISTG.Addr(), uintptr(unsafe.Pointer(_SiteName)), uintptr(unsafe.Pointer(phDS)))
 	return uint32(r1)
 }
@@ -835,9 +835,9 @@ func DsBindToISTGA(SiteName foundation.PSTR, phDS *foundation.HANDLE) uint32 {
 // DsBindWithCred calls NTDSAPI!DsBindWithCredW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsbindwithcredw
 // Minimum OS: windows6.0.6000.
-func DsBindWithCred(DomainControllerName string, DnsDomainName string, AuthIdentity unsafe.Pointer, phDS *foundation.HANDLE) uint32 {
-	_DomainControllerName := win32.UTF16Ptr(DomainControllerName)
-	_DnsDomainName := win32.UTF16Ptr(DnsDomainName)
+func DsBindWithCred(DomainControllerName *string, DnsDomainName *string, AuthIdentity unsafe.Pointer, phDS *foundation.HANDLE) uint32 {
+	_DomainControllerName := win32.UTF16PtrOrNil(DomainControllerName)
+	_DnsDomainName := win32.UTF16PtrOrNil(DnsDomainName)
 	r1, _, _ := syscall.SyscallN(procDsBindWithCred.Addr(), uintptr(unsafe.Pointer(_DomainControllerName)), uintptr(unsafe.Pointer(_DnsDomainName)), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(phDS)))
 	return uint32(r1)
 }
@@ -853,10 +853,10 @@ func DsBindWithCredA(DomainControllerName foundation.PSTR, DnsDomainName foundat
 // DsBindWithSpn calls NTDSAPI!DsBindWithSpnW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsbindwithspnw
 // Minimum OS: windows6.0.6000.
-func DsBindWithSpn(DomainControllerName string, DnsDomainName string, AuthIdentity unsafe.Pointer, ServicePrincipalName string, phDS *foundation.HANDLE) uint32 {
-	_DomainControllerName := win32.UTF16Ptr(DomainControllerName)
-	_DnsDomainName := win32.UTF16Ptr(DnsDomainName)
-	_ServicePrincipalName := win32.UTF16Ptr(ServicePrincipalName)
+func DsBindWithSpn(DomainControllerName *string, DnsDomainName *string, AuthIdentity unsafe.Pointer, ServicePrincipalName *string, phDS *foundation.HANDLE) uint32 {
+	_DomainControllerName := win32.UTF16PtrOrNil(DomainControllerName)
+	_DnsDomainName := win32.UTF16PtrOrNil(DnsDomainName)
+	_ServicePrincipalName := win32.UTF16PtrOrNil(ServicePrincipalName)
 	r1, _, _ := syscall.SyscallN(procDsBindWithSpn.Addr(), uintptr(unsafe.Pointer(_DomainControllerName)), uintptr(unsafe.Pointer(_DnsDomainName)), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(_ServicePrincipalName)), uintptr(unsafe.Pointer(phDS)))
 	return uint32(r1)
 }
@@ -872,10 +872,10 @@ func DsBindWithSpnA(DomainControllerName foundation.PSTR, DnsDomainName foundati
 // DsBindWithSpnEx calls NTDSAPI!DsBindWithSpnExW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsbindwithspnexw
 // Minimum OS: windows6.0.6000.
-func DsBindWithSpnEx(DomainControllerName string, DnsDomainName string, AuthIdentity unsafe.Pointer, ServicePrincipalName string, BindFlags uint32, phDS *foundation.HANDLE) uint32 {
-	_DomainControllerName := win32.UTF16Ptr(DomainControllerName)
-	_DnsDomainName := win32.UTF16Ptr(DnsDomainName)
-	_ServicePrincipalName := win32.UTF16Ptr(ServicePrincipalName)
+func DsBindWithSpnEx(DomainControllerName *string, DnsDomainName *string, AuthIdentity unsafe.Pointer, ServicePrincipalName *string, BindFlags uint32, phDS *foundation.HANDLE) uint32 {
+	_DomainControllerName := win32.UTF16PtrOrNil(DomainControllerName)
+	_DnsDomainName := win32.UTF16PtrOrNil(DnsDomainName)
+	_ServicePrincipalName := win32.UTF16PtrOrNil(ServicePrincipalName)
 	r1, _, _ := syscall.SyscallN(procDsBindWithSpnEx.Addr(), uintptr(unsafe.Pointer(_DomainControllerName)), uintptr(unsafe.Pointer(_DnsDomainName)), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(_ServicePrincipalName)), uintptr(BindFlags), uintptr(unsafe.Pointer(phDS)))
 	return uint32(r1)
 }
@@ -1018,9 +1018,9 @@ func DsCrackUnquotedMangledRdnA(pszRDN foundation.PSTR, cchRDN uint32, pGuid *wi
 // DsDeregisterDnsHostRecords calls NETAPI32!DsDeregisterDnsHostRecordsW.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsderegisterdnshostrecordsw
 // Minimum OS: windows6.0.6000.
-func DsDeregisterDnsHostRecords(ServerName string, DnsDomainName string, DomainGuid *win32.GUID, DsaGuid *win32.GUID, DnsHostName string) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
-	_DnsDomainName := win32.UTF16Ptr(DnsDomainName)
+func DsDeregisterDnsHostRecords(ServerName *string, DnsDomainName *string, DomainGuid *win32.GUID, DsaGuid *win32.GUID, DnsHostName string) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
+	_DnsDomainName := win32.UTF16PtrOrNil(DnsDomainName)
 	_DnsHostName := win32.UTF16Ptr(DnsHostName)
 	r1, _, _ := syscall.SyscallN(procDsDeregisterDnsHostRecords.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_DnsDomainName)), uintptr(unsafe.Pointer(DomainGuid)), uintptr(unsafe.Pointer(DsaGuid)), uintptr(unsafe.Pointer(_DnsHostName)))
 	return uint32(r1)
@@ -1037,8 +1037,8 @@ func DsDeregisterDnsHostRecordsA(ServerName foundation.PSTR, DnsDomainName found
 // DsEnumerateDomainTrusts calls NETAPI32!DsEnumerateDomainTrustsW.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsenumeratedomaintrustsw
 // Minimum OS: windows6.0.6000.
-func DsEnumerateDomainTrusts(ServerName string, Flags uint32, Domains **DS_DOMAIN_TRUSTSW, DomainCount *uint32) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func DsEnumerateDomainTrusts(ServerName *string, Flags uint32, Domains **DS_DOMAIN_TRUSTSW, DomainCount *uint32) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	r1, _, _ := syscall.SyscallN(procDsEnumerateDomainTrusts.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(Flags), uintptr(unsafe.Pointer(Domains)), uintptr(unsafe.Pointer(DomainCount)))
 	return uint32(r1)
 }
@@ -1132,10 +1132,10 @@ func DsGetDcCloseW(GetDcContextHandle foundation.HANDLE) {
 // DsGetDcName calls NETAPI32!DsGetDcNameW.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsgetdcnamew
 // Minimum OS: windows6.0.6000.
-func DsGetDcName(ComputerName string, DomainName string, DomainGuid *win32.GUID, SiteName string, Flags uint32, DomainControllerInfo **DOMAIN_CONTROLLER_INFOW) uint32 {
-	_ComputerName := win32.UTF16Ptr(ComputerName)
-	_DomainName := win32.UTF16Ptr(DomainName)
-	_SiteName := win32.UTF16Ptr(SiteName)
+func DsGetDcName(ComputerName *string, DomainName *string, DomainGuid *win32.GUID, SiteName *string, Flags uint32, DomainControllerInfo **DOMAIN_CONTROLLER_INFOW) uint32 {
+	_ComputerName := win32.UTF16PtrOrNil(ComputerName)
+	_DomainName := win32.UTF16PtrOrNil(DomainName)
+	_SiteName := win32.UTF16PtrOrNil(SiteName)
 	r1, _, _ := syscall.SyscallN(procDsGetDcName.Addr(), uintptr(unsafe.Pointer(_ComputerName)), uintptr(unsafe.Pointer(_DomainName)), uintptr(unsafe.Pointer(DomainGuid)), uintptr(unsafe.Pointer(_SiteName)), uintptr(Flags), uintptr(unsafe.Pointer(DomainControllerInfo)))
 	return uint32(r1)
 }
@@ -1167,10 +1167,10 @@ func DsGetDcNextA(GetDcContextHandle foundation.HANDLE, SockAddressCount *uint32
 // DsGetDcOpen calls NETAPI32!DsGetDcOpenW.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsgetdcopenw
 // Minimum OS: windows6.0.6000.
-func DsGetDcOpen(DnsName string, OptionFlags uint32, SiteName string, DomainGuid *win32.GUID, DnsForestName string, DcFlags uint32, RetGetDcContext *foundation.HANDLE) uint32 {
+func DsGetDcOpen(DnsName string, OptionFlags uint32, SiteName *string, DomainGuid *win32.GUID, DnsForestName *string, DcFlags uint32, RetGetDcContext *foundation.HANDLE) uint32 {
 	_DnsName := win32.UTF16Ptr(DnsName)
-	_SiteName := win32.UTF16Ptr(SiteName)
-	_DnsForestName := win32.UTF16Ptr(DnsForestName)
+	_SiteName := win32.UTF16PtrOrNil(SiteName)
+	_DnsForestName := win32.UTF16PtrOrNil(DnsForestName)
 	r1, _, _ := syscall.SyscallN(procDsGetDcOpen.Addr(), uintptr(unsafe.Pointer(_DnsName)), uintptr(OptionFlags), uintptr(unsafe.Pointer(_SiteName)), uintptr(unsafe.Pointer(DomainGuid)), uintptr(unsafe.Pointer(_DnsForestName)), uintptr(DcFlags), uintptr(unsafe.Pointer(RetGetDcContext)))
 	return uint32(r1)
 }
@@ -1186,8 +1186,8 @@ func DsGetDcOpenA(DnsName foundation.PSTR, OptionFlags uint32, SiteName foundati
 // DsGetDcSiteCoverage calls NETAPI32!DsGetDcSiteCoverageW.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsgetdcsitecoveragew
 // Minimum OS: windows6.0.6000.
-func DsGetDcSiteCoverage(ServerName string, EntryCount *uint32, SiteNames **foundation.PWSTR) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
+func DsGetDcSiteCoverage(ServerName *string, EntryCount *uint32, SiteNames **foundation.PWSTR) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	r1, _, _ := syscall.SyscallN(procDsGetDcSiteCoverage.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(EntryCount)), uintptr(unsafe.Pointer(SiteNames)))
 	return uint32(r1)
 }
@@ -1220,9 +1220,9 @@ func DsGetDomainControllerInfoA(hDs foundation.HANDLE, DomainName foundation.PST
 // DsGetForestTrustInformationW calls NETAPI32!DsGetForestTrustInformationW.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsgetforesttrustinformationw
 // Minimum OS: windows6.0.6000.
-func DsGetForestTrustInformationW(ServerName string, TrustedDomainName string, Flags uint32, ForestTrustInfo **securityauthenticationidentity.LSA_FOREST_TRUST_INFORMATION) uint32 {
-	_ServerName := win32.UTF16Ptr(ServerName)
-	_TrustedDomainName := win32.UTF16Ptr(TrustedDomainName)
+func DsGetForestTrustInformationW(ServerName *string, TrustedDomainName *string, Flags uint32, ForestTrustInfo **securityauthenticationidentity.LSA_FOREST_TRUST_INFORMATION) uint32 {
+	_ServerName := win32.UTF16PtrOrNil(ServerName)
+	_TrustedDomainName := win32.UTF16PtrOrNil(TrustedDomainName)
 	r1, _, _ := syscall.SyscallN(procDsGetForestTrustInformationW.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_TrustedDomainName)), uintptr(Flags), uintptr(unsafe.Pointer(ForestTrustInfo)))
 	return uint32(r1)
 }
@@ -1256,8 +1256,8 @@ func DsGetRdnW(ppDN *foundation.PWSTR, pcDN *uint32, ppKey *foundation.PWSTR, pc
 // DsGetSiteName calls NETAPI32!DsGetSiteNameW.
 // https://learn.microsoft.com/windows/win32/api/dsgetdc/nf-dsgetdc-dsgetsitenamew
 // Minimum OS: windows6.0.6000.
-func DsGetSiteName(ComputerName string, SiteName *foundation.PWSTR) uint32 {
-	_ComputerName := win32.UTF16Ptr(ComputerName)
+func DsGetSiteName(ComputerName *string, SiteName *foundation.PWSTR) uint32 {
+	_ComputerName := win32.UTF16PtrOrNil(ComputerName)
 	r1, _, _ := syscall.SyscallN(procDsGetSiteName.Addr(), uintptr(unsafe.Pointer(_ComputerName)), uintptr(unsafe.Pointer(SiteName)))
 	return uint32(r1)
 }
@@ -1273,9 +1273,9 @@ func DsGetSiteNameA(ComputerName foundation.PSTR, SiteName *foundation.PSTR) uin
 // DsGetSpn calls NTDSAPI!DsGetSpnW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsgetspnw
 // Minimum OS: windows6.0.6000.
-func DsGetSpn(ServiceType DS_SPN_NAME_TYPE, ServiceClass string, ServiceName string, InstancePort uint16, cInstanceNames uint16, pInstanceNames *foundation.PWSTR, pInstancePorts *uint16, pcSpn *uint32, prpszSpn **foundation.PWSTR) uint32 {
+func DsGetSpn(ServiceType DS_SPN_NAME_TYPE, ServiceClass string, ServiceName *string, InstancePort uint16, cInstanceNames uint16, pInstanceNames *foundation.PWSTR, pInstancePorts *uint16, pcSpn *uint32, prpszSpn **foundation.PWSTR) uint32 {
 	_ServiceClass := win32.UTF16Ptr(ServiceClass)
-	_ServiceName := win32.UTF16Ptr(ServiceName)
+	_ServiceName := win32.UTF16PtrOrNil(ServiceName)
 	r1, _, _ := syscall.SyscallN(procDsGetSpn.Addr(), uintptr(ServiceType), uintptr(unsafe.Pointer(_ServiceClass)), uintptr(unsafe.Pointer(_ServiceName)), uintptr(InstancePort), uintptr(cInstanceNames), uintptr(unsafe.Pointer(pInstanceNames)), uintptr(unsafe.Pointer(pInstancePorts)), uintptr(unsafe.Pointer(pcSpn)), uintptr(unsafe.Pointer(prpszSpn)))
 	return uint32(r1)
 }
@@ -1444,10 +1444,10 @@ func DsListSitesA(hDs foundation.HANDLE, ppSites **DS_NAME_RESULTA) uint32 {
 // DsMakePasswordCredentials calls NTDSAPI!DsMakePasswordCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsmakepasswordcredentialsw
 // Minimum OS: windows6.0.6000.
-func DsMakePasswordCredentials(User string, Domain string, Password string, pAuthIdentity *unsafe.Pointer) uint32 {
-	_User := win32.UTF16Ptr(User)
-	_Domain := win32.UTF16Ptr(Domain)
-	_Password := win32.UTF16Ptr(Password)
+func DsMakePasswordCredentials(User *string, Domain *string, Password *string, pAuthIdentity *unsafe.Pointer) uint32 {
+	_User := win32.UTF16PtrOrNil(User)
+	_Domain := win32.UTF16PtrOrNil(Domain)
+	_Password := win32.UTF16PtrOrNil(Password)
 	r1, _, _ := syscall.SyscallN(procDsMakePasswordCredentials.Addr(), uintptr(unsafe.Pointer(_User)), uintptr(unsafe.Pointer(_Domain)), uintptr(unsafe.Pointer(_Password)), uintptr(unsafe.Pointer(pAuthIdentity)))
 	return uint32(r1)
 }
@@ -1463,11 +1463,11 @@ func DsMakePasswordCredentialsA(User foundation.PSTR, Domain foundation.PSTR, Pa
 // DsMakeSpn calls DSPARSE!DsMakeSpnW.
 // https://learn.microsoft.com/windows/win32/api/dsparse/nf-dsparse-dsmakespnw
 // Minimum OS: windows6.0.6000.
-func DsMakeSpn(ServiceClass string, ServiceName string, InstanceName string, InstancePort uint16, Referrer string, pcSpnLength *uint32, pszSpn foundation.PWSTR) uint32 {
+func DsMakeSpn(ServiceClass string, ServiceName string, InstanceName *string, InstancePort uint16, Referrer *string, pcSpnLength *uint32, pszSpn foundation.PWSTR) uint32 {
 	_ServiceClass := win32.UTF16Ptr(ServiceClass)
 	_ServiceName := win32.UTF16Ptr(ServiceName)
-	_InstanceName := win32.UTF16Ptr(InstanceName)
-	_Referrer := win32.UTF16Ptr(Referrer)
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
+	_Referrer := win32.UTF16PtrOrNil(Referrer)
 	r1, _, _ := syscall.SyscallN(procDsMakeSpn.Addr(), uintptr(unsafe.Pointer(_ServiceClass)), uintptr(unsafe.Pointer(_ServiceName)), uintptr(unsafe.Pointer(_InstanceName)), uintptr(InstancePort), uintptr(unsafe.Pointer(_Referrer)), uintptr(unsafe.Pointer(pcSpnLength)), uintptr(unsafe.Pointer(pszSpn)))
 	return uint32(r1)
 }
@@ -1582,9 +1582,9 @@ func DsRemoveDsDomainA(hDs foundation.HANDLE, DomainDN foundation.PSTR) uint32 {
 // DsRemoveDsServer calls NTDSAPI!DsRemoveDsServerW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsremovedsserverw
 // Minimum OS: windows6.0.6000.
-func DsRemoveDsServer(hDs foundation.HANDLE, ServerDN string, DomainDN string, fLastDcInDomain *foundation.BOOL, fCommit bool) uint32 {
+func DsRemoveDsServer(hDs foundation.HANDLE, ServerDN string, DomainDN *string, fLastDcInDomain *foundation.BOOL, fCommit bool) uint32 {
 	_ServerDN := win32.UTF16Ptr(ServerDN)
-	_DomainDN := win32.UTF16Ptr(DomainDN)
+	_DomainDN := win32.UTF16PtrOrNil(DomainDN)
 	_fCommit := win32.Bool32(fCommit)
 	r1, _, _ := syscall.SyscallN(procDsRemoveDsServer.Addr(), uintptr(hDs), uintptr(unsafe.Pointer(_ServerDN)), uintptr(unsafe.Pointer(_DomainDN)), uintptr(unsafe.Pointer(fLastDcInDomain)), uintptr(_fCommit))
 	return uint32(r1)
@@ -1655,10 +1655,10 @@ func DsReplicaFreeInfo(InfoType DS_REPL_INFO_TYPE, pInfo unsafe.Pointer) {
 // DsReplicaGetInfo2W calls NTDSAPI!DsReplicaGetInfo2W.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsreplicagetinfo2w
 // Minimum OS: windows6.0.6000.
-func DsReplicaGetInfo2W(hDS foundation.HANDLE, InfoType DS_REPL_INFO_TYPE, pszObject string, puuidForSourceDsaObjGuid *win32.GUID, pszAttributeName string, pszValue string, dwFlags uint32, dwEnumerationContext uint32, ppInfo *unsafe.Pointer) uint32 {
-	_pszObject := win32.UTF16Ptr(pszObject)
-	_pszAttributeName := win32.UTF16Ptr(pszAttributeName)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func DsReplicaGetInfo2W(hDS foundation.HANDLE, InfoType DS_REPL_INFO_TYPE, pszObject *string, puuidForSourceDsaObjGuid *win32.GUID, pszAttributeName *string, pszValue *string, dwFlags uint32, dwEnumerationContext uint32, ppInfo *unsafe.Pointer) uint32 {
+	_pszObject := win32.UTF16PtrOrNil(pszObject)
+	_pszAttributeName := win32.UTF16PtrOrNil(pszAttributeName)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procDsReplicaGetInfo2W.Addr(), uintptr(hDS), uintptr(InfoType), uintptr(unsafe.Pointer(_pszObject)), uintptr(unsafe.Pointer(puuidForSourceDsaObjGuid)), uintptr(unsafe.Pointer(_pszAttributeName)), uintptr(unsafe.Pointer(_pszValue)), uintptr(dwFlags), uintptr(dwEnumerationContext), uintptr(unsafe.Pointer(ppInfo)))
 	return uint32(r1)
 }
@@ -1666,8 +1666,8 @@ func DsReplicaGetInfo2W(hDS foundation.HANDLE, InfoType DS_REPL_INFO_TYPE, pszOb
 // DsReplicaGetInfoW calls NTDSAPI!DsReplicaGetInfoW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsreplicagetinfow
 // Minimum OS: windows6.0.6000.
-func DsReplicaGetInfoW(hDS foundation.HANDLE, InfoType DS_REPL_INFO_TYPE, pszObject string, puuidForSourceDsaObjGuid *win32.GUID, ppInfo *unsafe.Pointer) uint32 {
-	_pszObject := win32.UTF16Ptr(pszObject)
+func DsReplicaGetInfoW(hDS foundation.HANDLE, InfoType DS_REPL_INFO_TYPE, pszObject *string, puuidForSourceDsaObjGuid *win32.GUID, ppInfo *unsafe.Pointer) uint32 {
+	_pszObject := win32.UTF16PtrOrNil(pszObject)
 	r1, _, _ := syscall.SyscallN(procDsReplicaGetInfoW.Addr(), uintptr(hDS), uintptr(InfoType), uintptr(unsafe.Pointer(_pszObject)), uintptr(unsafe.Pointer(puuidForSourceDsaObjGuid)), uintptr(unsafe.Pointer(ppInfo)))
 	return uint32(r1)
 }
@@ -1778,9 +1778,9 @@ func DsRoleGetPrimaryDomainInformation(lpServer string, InfoLevel DSROLE_PRIMARY
 // DsServerRegisterSpn calls NTDSAPI!DsServerRegisterSpnW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsserverregisterspnw
 // Minimum OS: windows6.0.6000.
-func DsServerRegisterSpn(Operation DS_SPN_WRITE_OP, ServiceClass string, UserObjectDN string) uint32 {
+func DsServerRegisterSpn(Operation DS_SPN_WRITE_OP, ServiceClass string, UserObjectDN *string) uint32 {
 	_ServiceClass := win32.UTF16Ptr(ServiceClass)
-	_UserObjectDN := win32.UTF16Ptr(UserObjectDN)
+	_UserObjectDN := win32.UTF16PtrOrNil(UserObjectDN)
 	r1, _, _ := syscall.SyscallN(procDsServerRegisterSpn.Addr(), uintptr(Operation), uintptr(unsafe.Pointer(_ServiceClass)), uintptr(unsafe.Pointer(_UserObjectDN)))
 	return uint32(r1)
 }

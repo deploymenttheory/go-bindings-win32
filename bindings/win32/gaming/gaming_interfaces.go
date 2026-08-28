@@ -58,9 +58,9 @@ type IGameExplorer2 struct {
 var IID_IGameExplorer2 = win32.GUID{Data1: 0x86874aa7, Data2: 0xa1ed, Data3: 0x450d, Data4: [8]byte{0xa7, 0xeb, 0xb8, 0x9e, 0x20, 0xb2, 0xff, 0xf3}}
 
 // InstallGame dispatches through IGameExplorer2's vtable slot 3.
-func (self *IGameExplorer2) InstallGame(binaryGDFPath string, installDirectory string, installScope GAME_INSTALL_SCOPE) error {
+func (self *IGameExplorer2) InstallGame(binaryGDFPath string, installDirectory *string, installScope GAME_INSTALL_SCOPE) error {
 	_binaryGDFPath := win32.UTF16Ptr(binaryGDFPath)
-	_installDirectory := win32.UTF16Ptr(installDirectory)
+	_installDirectory := win32.UTF16PtrOrNil(installDirectory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)), uintptr(unsafe.Pointer(_installDirectory)), uintptr(installScope))
 	return win32.ErrIfFailed(int32(r1))
 }

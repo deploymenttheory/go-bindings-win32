@@ -243,9 +243,9 @@ func MultinetGetConnectionPerformanceA(lpNetResource *NETRESOURCEA, lpNetConnect
 // NPAddConnection calls davclnt!NPAddConnection.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npaddconnection
 // Minimum OS: windows5.1.2600.
-func NPAddConnection(lpNetResource *NETRESOURCEW, lpPassword string, lpUserName string) uint32 {
-	_lpPassword := win32.UTF16Ptr(lpPassword)
-	_lpUserName := win32.UTF16Ptr(lpUserName)
+func NPAddConnection(lpNetResource *NETRESOURCEW, lpPassword *string, lpUserName *string) uint32 {
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
+	_lpUserName := win32.UTF16PtrOrNil(lpUserName)
 	r1, _, _ := syscall.SyscallN(procNPAddConnection.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserName)))
 	return uint32(r1)
 }
@@ -253,9 +253,9 @@ func NPAddConnection(lpNetResource *NETRESOURCEW, lpPassword string, lpUserName 
 // NPAddConnection3 calls davclnt!NPAddConnection3.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npaddconnection3
 // Minimum OS: windows5.1.2600.
-func NPAddConnection3(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword string, lpUserName string, dwFlags NET_CONNECT_FLAGS) uint32 {
-	_lpPassword := win32.UTF16Ptr(lpPassword)
-	_lpUserName := win32.UTF16Ptr(lpUserName)
+func NPAddConnection3(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword *string, lpUserName *string, dwFlags NET_CONNECT_FLAGS) uint32 {
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
+	_lpUserName := win32.UTF16PtrOrNil(lpUserName)
 	r1, _, _ := syscall.SyscallN(procNPAddConnection3.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserName)), uintptr(dwFlags))
 	return uint32(r1)
 }
@@ -408,10 +408,10 @@ func NPOpenEnum(dwScope uint32, dwType uint32, dwUsage uint32, lpNetResource *NE
 // WNetAddConnection calls MPR!WNetAddConnectionW.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnectionw
 // Minimum OS: windows5.0.
-func WNetAddConnection(lpRemoteName string, lpPassword string, lpLocalName string) foundation.WIN32_ERROR {
+func WNetAddConnection(lpRemoteName string, lpPassword *string, lpLocalName *string) foundation.WIN32_ERROR {
 	_lpRemoteName := win32.UTF16Ptr(lpRemoteName)
-	_lpPassword := win32.UTF16Ptr(lpPassword)
-	_lpLocalName := win32.UTF16Ptr(lpLocalName)
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
+	_lpLocalName := win32.UTF16PtrOrNil(lpLocalName)
 	r1, _, _ := syscall.SyscallN(procWNetAddConnection.Addr(), uintptr(unsafe.Pointer(_lpRemoteName)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpLocalName)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -419,9 +419,9 @@ func WNetAddConnection(lpRemoteName string, lpPassword string, lpLocalName strin
 // WNetAddConnection2 calls MPR!WNetAddConnection2W.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnection2w
 // Minimum OS: windows5.0.
-func WNetAddConnection2(lpNetResource *NETRESOURCEW, lpPassword string, lpUserName string, dwFlags NET_CONNECT_FLAGS) foundation.WIN32_ERROR {
-	_lpPassword := win32.UTF16Ptr(lpPassword)
-	_lpUserName := win32.UTF16Ptr(lpUserName)
+func WNetAddConnection2(lpNetResource *NETRESOURCEW, lpPassword *string, lpUserName *string, dwFlags NET_CONNECT_FLAGS) foundation.WIN32_ERROR {
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
+	_lpUserName := win32.UTF16PtrOrNil(lpUserName)
 	r1, _, _ := syscall.SyscallN(procWNetAddConnection2.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserName)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -437,9 +437,9 @@ func WNetAddConnection2A(lpNetResource *NETRESOURCEA, lpPassword foundation.PSTR
 // WNetAddConnection3 calls MPR!WNetAddConnection3W.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnection3w
 // Minimum OS: windows5.0.
-func WNetAddConnection3(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword string, lpUserName string, dwFlags NET_CONNECT_FLAGS) foundation.WIN32_ERROR {
-	_lpPassword := win32.UTF16Ptr(lpPassword)
-	_lpUserName := win32.UTF16Ptr(lpUserName)
+func WNetAddConnection3(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword *string, lpUserName *string, dwFlags NET_CONNECT_FLAGS) foundation.WIN32_ERROR {
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
+	_lpUserName := win32.UTF16PtrOrNil(lpUserName)
 	r1, _, _ := syscall.SyscallN(procWNetAddConnection3.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserName)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -722,8 +722,8 @@ func WNetGetUniversalNameA(lpLocalPath foundation.PSTR, dwInfoLevel UNC_INFO_LEV
 // WNetGetUser calls MPR!WNetGetUserW.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuserw
 // Minimum OS: windows5.0.
-func WNetGetUser(lpName string, lpUserName foundation.PWSTR, lpnLength *uint32) foundation.WIN32_ERROR {
-	_lpName := win32.UTF16Ptr(lpName)
+func WNetGetUser(lpName *string, lpUserName foundation.PWSTR, lpnLength *uint32) foundation.WIN32_ERROR {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, _ := syscall.SyscallN(procWNetGetUser.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpUserName)), uintptr(unsafe.Pointer(lpnLength)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -770,9 +770,9 @@ func WNetSetLastErrorA(err_ uint32, lpError foundation.PSTR, lpProviders foundat
 // WNetUseConnection calls MPR!WNetUseConnectionW.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetuseconnectionw
 // Minimum OS: windows5.0.
-func WNetUseConnection(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword string, lpUserId string, dwFlags NET_CONNECT_FLAGS, lpAccessName foundation.PWSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
-	_lpPassword := win32.UTF16Ptr(lpPassword)
-	_lpUserId := win32.UTF16Ptr(lpUserId)
+func WNetUseConnection(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword *string, lpUserId *string, dwFlags NET_CONNECT_FLAGS, lpAccessName foundation.PWSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
+	_lpUserId := win32.UTF16PtrOrNil(lpUserId)
 	r1, _, _ := syscall.SyscallN(procWNetUseConnection.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserId)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
 	return foundation.WIN32_ERROR(r1)
 }

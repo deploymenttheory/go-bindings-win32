@@ -1153,8 +1153,8 @@ func MprAdminInterfaceEnum(hMprServer uintptr, dwLevel uint32, lplpbBuffer **byt
 // MprAdminInterfaceGetCredentials calls MPRAPI!MprAdminInterfaceGetCredentials.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradmininterfacegetcredentials
 // Minimum OS: windowsserver2000.
-func MprAdminInterfaceGetCredentials(lpwsServer string, lpwsInterfaceName string, lpwsUserName foundation.PWSTR, lpwsPassword foundation.PWSTR, lpwsDomainName foundation.PWSTR) uint32 {
-	_lpwsServer := win32.UTF16Ptr(lpwsServer)
+func MprAdminInterfaceGetCredentials(lpwsServer *string, lpwsInterfaceName string, lpwsUserName foundation.PWSTR, lpwsPassword foundation.PWSTR, lpwsDomainName foundation.PWSTR) uint32 {
+	_lpwsServer := win32.UTF16PtrOrNil(lpwsServer)
 	_lpwsInterfaceName := win32.UTF16Ptr(lpwsInterfaceName)
 	r1, _, _ := syscall.SyscallN(procMprAdminInterfaceGetCredentials.Addr(), uintptr(unsafe.Pointer(_lpwsServer)), uintptr(unsafe.Pointer(_lpwsInterfaceName)), uintptr(unsafe.Pointer(lpwsUserName)), uintptr(unsafe.Pointer(lpwsPassword)), uintptr(unsafe.Pointer(lpwsDomainName)))
 	return uint32(r1)
@@ -1205,12 +1205,12 @@ func MprAdminInterfaceQueryUpdateResult(hMprServer uintptr, hInterface foundatio
 // MprAdminInterfaceSetCredentials calls MPRAPI!MprAdminInterfaceSetCredentials.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradmininterfacesetcredentials
 // Minimum OS: windowsserver2000.
-func MprAdminInterfaceSetCredentials(lpwsServer string, lpwsInterfaceName string, lpwsUserName string, lpwsDomainName string, lpwsPassword string) uint32 {
-	_lpwsServer := win32.UTF16Ptr(lpwsServer)
+func MprAdminInterfaceSetCredentials(lpwsServer *string, lpwsInterfaceName string, lpwsUserName *string, lpwsDomainName *string, lpwsPassword *string) uint32 {
+	_lpwsServer := win32.UTF16PtrOrNil(lpwsServer)
 	_lpwsInterfaceName := win32.UTF16Ptr(lpwsInterfaceName)
-	_lpwsUserName := win32.UTF16Ptr(lpwsUserName)
-	_lpwsDomainName := win32.UTF16Ptr(lpwsDomainName)
-	_lpwsPassword := win32.UTF16Ptr(lpwsPassword)
+	_lpwsUserName := win32.UTF16PtrOrNil(lpwsUserName)
+	_lpwsDomainName := win32.UTF16PtrOrNil(lpwsDomainName)
+	_lpwsPassword := win32.UTF16PtrOrNil(lpwsPassword)
 	r1, _, _ := syscall.SyscallN(procMprAdminInterfaceSetCredentials.Addr(), uintptr(unsafe.Pointer(_lpwsServer)), uintptr(unsafe.Pointer(_lpwsInterfaceName)), uintptr(unsafe.Pointer(_lpwsUserName)), uintptr(unsafe.Pointer(_lpwsDomainName)), uintptr(unsafe.Pointer(_lpwsPassword)))
 	return uint32(r1)
 }
@@ -1374,8 +1374,8 @@ func MprAdminMIBEntrySet(hMibServer uintptr, dwProtocolId uint32, dwRoutingPid u
 // MprAdminMIBServerConnect calls MPRAPI!MprAdminMIBServerConnect.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradminmibserverconnect
 // Minimum OS: windowsserver2000.
-func MprAdminMIBServerConnect(lpwsServerName string, phMibServer *uintptr) uint32 {
-	_lpwsServerName := win32.UTF16Ptr(lpwsServerName)
+func MprAdminMIBServerConnect(lpwsServerName *string, phMibServer *uintptr) uint32 {
+	_lpwsServerName := win32.UTF16PtrOrNil(lpwsServerName)
 	r1, _, _ := syscall.SyscallN(procMprAdminMIBServerConnect.Addr(), uintptr(unsafe.Pointer(_lpwsServerName)), uintptr(unsafe.Pointer(phMibServer)))
 	return uint32(r1)
 }
@@ -1447,8 +1447,8 @@ func MprAdminSendUserMessage(hMprServer uintptr, hConnection foundation.HANDLE, 
 // MprAdminServerConnect calls MPRAPI!MprAdminServerConnect.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradminserverconnect
 // Minimum OS: windowsserver2000.
-func MprAdminServerConnect(lpwsServerName string, phMprServer *uintptr) uint32 {
-	_lpwsServerName := win32.UTF16Ptr(lpwsServerName)
+func MprAdminServerConnect(lpwsServerName *string, phMprServer *uintptr) uint32 {
+	_lpwsServerName := win32.UTF16PtrOrNil(lpwsServerName)
 	r1, _, _ := syscall.SyscallN(procMprAdminServerConnect.Addr(), uintptr(unsafe.Pointer(_lpwsServerName)), uintptr(unsafe.Pointer(phMprServer)))
 	return uint32(r1)
 }
@@ -1511,8 +1511,8 @@ func MprAdminServerSetInfoEx(hMprServer uintptr, pServerInfo *MPR_SERVER_SET_CON
 // MprAdminTransportCreate calls MPRAPI!MprAdminTransportCreate.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradmintransportcreate
 // Minimum OS: windowsserver2000.
-func MprAdminTransportCreate(hMprServer uintptr, dwTransportId uint32, lpwsTransportName string, pGlobalInfo *byte, dwGlobalInfoSize uint32, pClientInterfaceInfo *byte, dwClientInterfaceInfoSize uint32, lpwsDLLPath string) uint32 {
-	_lpwsTransportName := win32.UTF16Ptr(lpwsTransportName)
+func MprAdminTransportCreate(hMprServer uintptr, dwTransportId uint32, lpwsTransportName *string, pGlobalInfo *byte, dwGlobalInfoSize uint32, pClientInterfaceInfo *byte, dwClientInterfaceInfoSize uint32, lpwsDLLPath string) uint32 {
+	_lpwsTransportName := win32.UTF16PtrOrNil(lpwsTransportName)
 	_lpwsDLLPath := win32.UTF16Ptr(lpwsDLLPath)
 	r1, _, _ := syscall.SyscallN(procMprAdminTransportCreate.Addr(), uintptr(hMprServer), uintptr(dwTransportId), uintptr(unsafe.Pointer(_lpwsTransportName)), uintptr(unsafe.Pointer(pGlobalInfo)), uintptr(dwGlobalInfoSize), uintptr(unsafe.Pointer(pClientInterfaceInfo)), uintptr(dwClientInterfaceInfoSize), uintptr(unsafe.Pointer(_lpwsDLLPath)))
 	return uint32(r1)
@@ -1670,8 +1670,8 @@ func MprConfigInterfaceSetInfo(hMprConfig foundation.HANDLE, hRouterInterface fo
 // MprConfigInterfaceTransportAdd calls MPRAPI!MprConfigInterfaceTransportAdd.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfiginterfacetransportadd
 // Minimum OS: windowsserver2000.
-func MprConfigInterfaceTransportAdd(hMprConfig foundation.HANDLE, hRouterInterface foundation.HANDLE, dwTransportId uint32, lpwsTransportName string, pInterfaceInfo []byte, phRouterIfTransport *foundation.HANDLE) uint32 {
-	_lpwsTransportName := win32.UTF16Ptr(lpwsTransportName)
+func MprConfigInterfaceTransportAdd(hMprConfig foundation.HANDLE, hRouterInterface foundation.HANDLE, dwTransportId uint32, lpwsTransportName *string, pInterfaceInfo []byte, phRouterIfTransport *foundation.HANDLE) uint32 {
+	_lpwsTransportName := win32.UTF16PtrOrNil(lpwsTransportName)
 	var _pInterfaceInfo *byte
 	if len(pInterfaceInfo) > 0 {
 		_pInterfaceInfo = &pInterfaceInfo[0]
@@ -1736,8 +1736,8 @@ func MprConfigServerBackup(hMprConfig foundation.HANDLE, lpwsPath string) uint32
 // MprConfigServerConnect calls MPRAPI!MprConfigServerConnect.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfigserverconnect
 // Minimum OS: windowsserver2000.
-func MprConfigServerConnect(lpwsServerName string, phMprConfig *foundation.HANDLE) uint32 {
-	_lpwsServerName := win32.UTF16Ptr(lpwsServerName)
+func MprConfigServerConnect(lpwsServerName *string, phMprConfig *foundation.HANDLE) uint32 {
+	_lpwsServerName := win32.UTF16PtrOrNil(lpwsServerName)
 	r1, _, _ := syscall.SyscallN(procMprConfigServerConnect.Addr(), uintptr(unsafe.Pointer(_lpwsServerName)), uintptr(unsafe.Pointer(phMprConfig)))
 	return uint32(r1)
 }
@@ -1807,8 +1807,8 @@ func MprConfigServerSetInfoEx(hMprConfig foundation.HANDLE, pSetServerConfig *MP
 // MprConfigTransportCreate calls MPRAPI!MprConfigTransportCreate.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfigtransportcreate
 // Minimum OS: windowsserver2000.
-func MprConfigTransportCreate(hMprConfig foundation.HANDLE, dwTransportId uint32, lpwsTransportName string, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath string, phRouterTransport *foundation.HANDLE) uint32 {
-	_lpwsTransportName := win32.UTF16Ptr(lpwsTransportName)
+func MprConfigTransportCreate(hMprConfig foundation.HANDLE, dwTransportId uint32, lpwsTransportName *string, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath *string, phRouterTransport *foundation.HANDLE) uint32 {
+	_lpwsTransportName := win32.UTF16PtrOrNil(lpwsTransportName)
 	var _pGlobalInfo *byte
 	if len(pGlobalInfo) > 0 {
 		_pGlobalInfo = &pGlobalInfo[0]
@@ -1817,7 +1817,7 @@ func MprConfigTransportCreate(hMprConfig foundation.HANDLE, dwTransportId uint32
 	if len(pClientInterfaceInfo) > 0 {
 		_pClientInterfaceInfo = &pClientInterfaceInfo[0]
 	}
-	_lpwsDLLPath := win32.UTF16Ptr(lpwsDLLPath)
+	_lpwsDLLPath := win32.UTF16PtrOrNil(lpwsDLLPath)
 	r1, _, _ := syscall.SyscallN(procMprConfigTransportCreate.Addr(), uintptr(hMprConfig), uintptr(dwTransportId), uintptr(unsafe.Pointer(_lpwsTransportName)), uintptr(unsafe.Pointer(_pGlobalInfo)), uintptr(len(pGlobalInfo)), uintptr(unsafe.Pointer(_pClientInterfaceInfo)), uintptr(len(pClientInterfaceInfo)), uintptr(unsafe.Pointer(_lpwsDLLPath)), uintptr(unsafe.Pointer(phRouterTransport)))
 	return uint32(r1)
 }
@@ -1857,7 +1857,7 @@ func MprConfigTransportGetInfo(hMprConfig foundation.HANDLE, hRouterTransport fo
 // MprConfigTransportSetInfo calls MPRAPI!MprConfigTransportSetInfo.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfigtransportsetinfo
 // Minimum OS: windowsserver2000.
-func MprConfigTransportSetInfo(hMprConfig foundation.HANDLE, hRouterTransport foundation.HANDLE, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath string) uint32 {
+func MprConfigTransportSetInfo(hMprConfig foundation.HANDLE, hRouterTransport foundation.HANDLE, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath *string) uint32 {
 	var _pGlobalInfo *byte
 	if len(pGlobalInfo) > 0 {
 		_pGlobalInfo = &pGlobalInfo[0]
@@ -1866,7 +1866,7 @@ func MprConfigTransportSetInfo(hMprConfig foundation.HANDLE, hRouterTransport fo
 	if len(pClientInterfaceInfo) > 0 {
 		_pClientInterfaceInfo = &pClientInterfaceInfo[0]
 	}
-	_lpwsDLLPath := win32.UTF16Ptr(lpwsDLLPath)
+	_lpwsDLLPath := win32.UTF16PtrOrNil(lpwsDLLPath)
 	r1, _, _ := syscall.SyscallN(procMprConfigTransportSetInfo.Addr(), uintptr(hMprConfig), uintptr(hRouterTransport), uintptr(unsafe.Pointer(_pGlobalInfo)), uintptr(len(pGlobalInfo)), uintptr(unsafe.Pointer(_pClientInterfaceInfo)), uintptr(len(pClientInterfaceInfo)), uintptr(unsafe.Pointer(_lpwsDLLPath)))
 	return uint32(r1)
 }
@@ -1978,8 +1978,8 @@ func RasConnectionNotificationA(param0 HRASCONN, param1 foundation.HANDLE, param
 // RasCreatePhonebookEntry calls RASAPI32!RasCreatePhonebookEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rascreatephonebookentryw
 // Minimum OS: windows5.0.
-func RasCreatePhonebookEntry(param0 foundation.HWND, param1 string) uint32 {
-	_param1 := win32.UTF16Ptr(param1)
+func RasCreatePhonebookEntry(param0 foundation.HWND, param1 *string) uint32 {
+	_param1 := win32.UTF16PtrOrNil(param1)
 	r1, _, _ := syscall.SyscallN(procRasCreatePhonebookEntry.Addr(), uintptr(param0), uintptr(unsafe.Pointer(_param1)))
 	return uint32(r1)
 }
@@ -1995,8 +1995,8 @@ func RasCreatePhonebookEntryA(param0 foundation.HWND, param1 foundation.PSTR) ui
 // RasDeleteEntry calls RASAPI32!RasDeleteEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasdeleteentryw
 // Minimum OS: windows5.0.
-func RasDeleteEntry(param0 string, param1 string) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasDeleteEntry(param0 *string, param1 string) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasDeleteEntry.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)))
 	return uint32(r1)
@@ -2013,8 +2013,8 @@ func RasDeleteEntryA(param0 foundation.PSTR, param1 foundation.PSTR) uint32 {
 // RasDeleteSubEntry calls RASAPI32!RasDeleteSubEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasdeletesubentryw
 // Minimum OS: windows5.1.2600.
-func RasDeleteSubEntry(pszPhonebook string, pszEntry string, dwSubEntryId uint32) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasDeleteSubEntry(pszPhonebook *string, pszEntry string, dwSubEntryId uint32) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasDeleteSubEntry.Addr(), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(dwSubEntryId))
 	return uint32(r1)
@@ -2031,8 +2031,8 @@ func RasDeleteSubEntryA(pszPhonebook foundation.PSTR, pszEntry foundation.PSTR, 
 // RasDial calls RASAPI32!RasDialW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasdialw
 // Minimum OS: windows5.0.
-func RasDial(param0 *RASDIALEXTENSIONS, param1 string, param2 *RASDIALPARAMSW, param3 uint32, param4 unsafe.Pointer, param5 *HRASCONN) uint32 {
-	_param1 := win32.UTF16Ptr(param1)
+func RasDial(param0 *RASDIALEXTENSIONS, param1 *string, param2 *RASDIALPARAMSW, param3 uint32, param4 unsafe.Pointer, param5 *HRASCONN) uint32 {
+	_param1 := win32.UTF16PtrOrNil(param1)
 	r1, _, _ := syscall.SyscallN(procRasDial.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)), uintptr(unsafe.Pointer(param5)))
 	return uint32(r1)
 }
@@ -2048,10 +2048,10 @@ func RasDialA(param0 *RASDIALEXTENSIONS, param1 foundation.PSTR, param2 *RASDIAL
 // RasDialDlg calls RASDLG!RasDialDlgW.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasdialdlgw
 // Minimum OS: windows5.0.
-func RasDialDlg(lpszPhonebook string, lpszEntry string, lpszPhoneNumber string, lpInfo *RASDIALDLG) bool {
-	_lpszPhonebook := win32.UTF16Ptr(lpszPhonebook)
-	_lpszEntry := win32.UTF16Ptr(lpszEntry)
-	_lpszPhoneNumber := win32.UTF16Ptr(lpszPhoneNumber)
+func RasDialDlg(lpszPhonebook *string, lpszEntry *string, lpszPhoneNumber *string, lpInfo *RASDIALDLG) bool {
+	_lpszPhonebook := win32.UTF16PtrOrNil(lpszPhonebook)
+	_lpszEntry := win32.UTF16PtrOrNil(lpszEntry)
+	_lpszPhoneNumber := win32.UTF16PtrOrNil(lpszPhoneNumber)
 	r1, _, _ := syscall.SyscallN(procRasDialDlg.Addr(), uintptr(unsafe.Pointer(_lpszPhonebook)), uintptr(unsafe.Pointer(_lpszEntry)), uintptr(unsafe.Pointer(_lpszPhoneNumber)), uintptr(unsafe.Pointer(lpInfo)))
 	return r1 != 0
 }
@@ -2067,8 +2067,8 @@ func RasDialDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, lpszP
 // RasEditPhonebookEntry calls RASAPI32!RasEditPhonebookEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-raseditphonebookentryw
 // Minimum OS: windows5.0.
-func RasEditPhonebookEntry(param0 foundation.HWND, param1 string, param2 string) uint32 {
-	_param1 := win32.UTF16Ptr(param1)
+func RasEditPhonebookEntry(param0 foundation.HWND, param1 *string, param2 string) uint32 {
+	_param1 := win32.UTF16PtrOrNil(param1)
 	_param2 := win32.UTF16Ptr(param2)
 	r1, _, _ := syscall.SyscallN(procRasEditPhonebookEntry.Addr(), uintptr(param0), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(_param2)))
 	return uint32(r1)
@@ -2085,9 +2085,9 @@ func RasEditPhonebookEntryA(param0 foundation.HWND, param1 foundation.PSTR, para
 // RasEntryDlg calls RASDLG!RasEntryDlgW.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasentrydlgw
 // Minimum OS: windows5.0.
-func RasEntryDlg(lpszPhonebook string, lpszEntry string, lpInfo *RASENTRYDLGW) bool {
-	_lpszPhonebook := win32.UTF16Ptr(lpszPhonebook)
-	_lpszEntry := win32.UTF16Ptr(lpszEntry)
+func RasEntryDlg(lpszPhonebook *string, lpszEntry *string, lpInfo *RASENTRYDLGW) bool {
+	_lpszPhonebook := win32.UTF16PtrOrNil(lpszPhonebook)
+	_lpszEntry := win32.UTF16PtrOrNil(lpszEntry)
 	r1, _, _ := syscall.SyscallN(procRasEntryDlg.Addr(), uintptr(unsafe.Pointer(_lpszPhonebook)), uintptr(unsafe.Pointer(_lpszEntry)), uintptr(unsafe.Pointer(lpInfo)))
 	return r1 != 0
 }
@@ -2151,9 +2151,9 @@ func RasEnumDevicesA(param0 *RASDEVINFOA, param1 *uint32, param2 *uint32) uint32
 // RasEnumEntries calls RASAPI32!RasEnumEntriesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasenumentriesw
 // Minimum OS: windows5.0.
-func RasEnumEntries(param0 string, param1 string, param2 *RASENTRYNAMEW, param3 *uint32, param4 *uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
-	_param1 := win32.UTF16Ptr(param1)
+func RasEnumEntries(param0 *string, param1 *string, param2 *RASENTRYNAMEW, param3 *uint32, param4 *uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
+	_param1 := win32.UTF16PtrOrNil(param1)
 	r1, _, _ := syscall.SyscallN(procRasEnumEntries.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(unsafe.Pointer(param4)))
 	return uint32(r1)
 }
@@ -2183,8 +2183,8 @@ func RasFreeEapUserIdentityA(pRasEapUserIdentity *RASEAPUSERIDENTITYA) {
 // RasGetAutodialAddress calls RASAPI32!RasGetAutodialAddressW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetautodialaddressw
 // Minimum OS: windows5.0.
-func RasGetAutodialAddress(param0 string, param1 *uint32, param2 *RASAUTODIALENTRYW, param3 *uint32, param4 *uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetAutodialAddress(param0 *string, param1 *uint32, param2 *RASAUTODIALENTRYW, param3 *uint32, param4 *uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	r1, _, _ := syscall.SyscallN(procRasGetAutodialAddress.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(unsafe.Pointer(param4)))
 	return uint32(r1)
 }
@@ -2272,8 +2272,8 @@ func RasGetCountryInfoA(param0 *RASCTRYINFO, param1 *uint32) uint32 {
 // RasGetCredentials calls RASAPI32!RasGetCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetcredentialsw
 // Minimum OS: windows5.0.
-func RasGetCredentials(param0 string, param1 string, param2 *RASCREDENTIALSW) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetCredentials(param0 *string, param1 string, param2 *RASCREDENTIALSW) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasGetCredentials.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)))
 	return uint32(r1)
@@ -2290,8 +2290,8 @@ func RasGetCredentialsA(param0 foundation.PSTR, param1 foundation.PSTR, param2 *
 // RasGetCustomAuthData calls RASAPI32!RasGetCustomAuthDataW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetcustomauthdataw
 // Minimum OS: windows5.0.
-func RasGetCustomAuthData(pszPhonebook string, pszEntry string, pbCustomAuthData *byte, pdwSizeofCustomAuthData *uint32) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasGetCustomAuthData(pszPhonebook *string, pszEntry string, pbCustomAuthData *byte, pdwSizeofCustomAuthData *uint32) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasGetCustomAuthData.Addr(), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(unsafe.Pointer(pbCustomAuthData)), uintptr(unsafe.Pointer(pdwSizeofCustomAuthData)))
 	return uint32(r1)
@@ -2308,8 +2308,8 @@ func RasGetCustomAuthDataA(pszPhonebook foundation.PSTR, pszEntry foundation.PST
 // RasGetEapUserData calls RASAPI32!RasGetEapUserDataW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgeteapuserdataw
 // Minimum OS: windows5.0.
-func RasGetEapUserData(hToken foundation.HANDLE, pszPhonebook string, pszEntry string, pbEapData *byte, pdwSizeofEapData *uint32) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasGetEapUserData(hToken foundation.HANDLE, pszPhonebook *string, pszEntry string, pbEapData *byte, pdwSizeofEapData *uint32) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasGetEapUserData.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(unsafe.Pointer(pbEapData)), uintptr(unsafe.Pointer(pdwSizeofEapData)))
 	return uint32(r1)
@@ -2326,8 +2326,8 @@ func RasGetEapUserDataA(hToken foundation.HANDLE, pszPhonebook foundation.PSTR, 
 // RasGetEapUserIdentity calls RASAPI32!RasGetEapUserIdentityW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgeteapuseridentityw
 // Minimum OS: windows5.0.
-func RasGetEapUserIdentity(pszPhonebook string, pszEntry string, dwFlags uint32, hwnd foundation.HWND, ppRasEapUserIdentity **RASEAPUSERIDENTITYW) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasGetEapUserIdentity(pszPhonebook *string, pszEntry string, dwFlags uint32, hwnd foundation.HWND, ppRasEapUserIdentity **RASEAPUSERIDENTITYW) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasGetEapUserIdentity.Addr(), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(dwFlags), uintptr(hwnd), uintptr(unsafe.Pointer(ppRasEapUserIdentity)))
 	return uint32(r1)
@@ -2344,8 +2344,8 @@ func RasGetEapUserIdentityA(pszPhonebook foundation.PSTR, pszEntry foundation.PS
 // RasGetEntryDialParams calls RASAPI32!RasGetEntryDialParamsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetentrydialparamsw
 // Minimum OS: windows5.0.
-func RasGetEntryDialParams(param0 string, param1 *RASDIALPARAMSW, param2 *foundation.BOOL) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetEntryDialParams(param0 *string, param1 *RASDIALPARAMSW, param2 *foundation.BOOL) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	r1, _, _ := syscall.SyscallN(procRasGetEntryDialParams.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
 	return uint32(r1)
 }
@@ -2361,8 +2361,8 @@ func RasGetEntryDialParamsA(param0 foundation.PSTR, param1 *RASDIALPARAMSA, para
 // RasGetEntryProperties calls RASAPI32!RasGetEntryPropertiesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetentrypropertiesw
 // Minimum OS: windows5.0.
-func RasGetEntryProperties(param0 string, param1 string, param2 *RASENTRYW, param3 *uint32, param4 *byte, param5 *uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetEntryProperties(param0 *string, param1 string, param2 *RASENTRYW, param3 *uint32, param4 *byte, param5 *uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasGetEntryProperties.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(unsafe.Pointer(param4)), uintptr(unsafe.Pointer(param5)))
 	return uint32(r1)
@@ -2449,8 +2449,8 @@ func RasGetSubEntryHandleA(param0 HRASCONN, param1 uint32, param2 *HRASCONN) uin
 // RasGetSubEntryProperties calls RASAPI32!RasGetSubEntryPropertiesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetsubentrypropertiesw
 // Minimum OS: windows5.0.
-func RasGetSubEntryProperties(param0 string, param1 string, param2 uint32, param3 *RASSUBENTRYW, param4 *uint32, param5 *byte, param6 *uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetSubEntryProperties(param0 *string, param1 string, param2 uint32, param3 *RASSUBENTRYW, param4 *uint32, param5 *byte, param6 *uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasGetSubEntryProperties.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(unsafe.Pointer(param4)), uintptr(unsafe.Pointer(param5)), uintptr(unsafe.Pointer(param6)))
 	return uint32(r1)
@@ -2491,9 +2491,9 @@ func RasInvokeEapUI(param0 HRASCONN, param1 uint32, param2 *RASDIALEXTENSIONS, p
 // RasPhonebookDlg calls RASDLG!RasPhonebookDlgW.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasphonebookdlgw
 // Minimum OS: windows5.0.
-func RasPhonebookDlg(lpszPhonebook string, lpszEntry string, lpInfo *RASPBDLGW) bool {
-	_lpszPhonebook := win32.UTF16Ptr(lpszPhonebook)
-	_lpszEntry := win32.UTF16Ptr(lpszEntry)
+func RasPhonebookDlg(lpszPhonebook *string, lpszEntry *string, lpInfo *RASPBDLGW) bool {
+	_lpszPhonebook := win32.UTF16PtrOrNil(lpszPhonebook)
+	_lpszEntry := win32.UTF16PtrOrNil(lpszEntry)
 	r1, _, _ := syscall.SyscallN(procRasPhonebookDlg.Addr(), uintptr(unsafe.Pointer(_lpszPhonebook)), uintptr(unsafe.Pointer(_lpszEntry)), uintptr(unsafe.Pointer(lpInfo)))
 	return r1 != 0
 }
@@ -2509,8 +2509,8 @@ func RasPhonebookDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, 
 // RasRenameEntry calls RASAPI32!RasRenameEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasrenameentryw
 // Minimum OS: windows5.0.
-func RasRenameEntry(param0 string, param1 string, param2 string) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasRenameEntry(param0 *string, param1 string, param2 string) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	_param2 := win32.UTF16Ptr(param2)
 	r1, _, _ := syscall.SyscallN(procRasRenameEntry.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(_param2)))
@@ -2528,8 +2528,8 @@ func RasRenameEntryA(param0 foundation.PSTR, param1 foundation.PSTR, param2 foun
 // RasSetAutodialAddress calls RASAPI32!RasSetAutodialAddressW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetautodialaddressw
 // Minimum OS: windows5.0.
-func RasSetAutodialAddress(param0 string, param1 uint32, param2 *RASAUTODIALENTRYW, param3 uint32, param4 uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetAutodialAddress(param0 *string, param1 uint32, param2 *RASAUTODIALENTRYW, param3 uint32, param4 uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	r1, _, _ := syscall.SyscallN(procRasSetAutodialAddress.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(param4))
 	return uint32(r1)
 }
@@ -2579,8 +2579,8 @@ func RasSetAutodialParamA(param0 uint32, param1 unsafe.Pointer, param2 uint32) u
 // RasSetCredentials calls RASAPI32!RasSetCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetcredentialsw
 // Minimum OS: windows5.0.
-func RasSetCredentials(param0 string, param1 string, param2 *RASCREDENTIALSW, param3 bool) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetCredentials(param0 *string, param1 string, param2 *RASCREDENTIALSW, param3 bool) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	_param3 := win32.Bool32(param3)
 	r1, _, _ := syscall.SyscallN(procRasSetCredentials.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(_param3))
@@ -2599,8 +2599,8 @@ func RasSetCredentialsA(param0 foundation.PSTR, param1 foundation.PSTR, param2 *
 // RasSetCustomAuthData calls RASAPI32!RasSetCustomAuthDataW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetcustomauthdataw
 // Minimum OS: windows5.0.
-func RasSetCustomAuthData(pszPhonebook string, pszEntry string, pbCustomAuthData []byte) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasSetCustomAuthData(pszPhonebook *string, pszEntry string, pbCustomAuthData []byte) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	var _pbCustomAuthData *byte
 	if len(pbCustomAuthData) > 0 {
@@ -2625,8 +2625,8 @@ func RasSetCustomAuthDataA(pszPhonebook foundation.PSTR, pszEntry foundation.PST
 // RasSetEapUserData calls RASAPI32!RasSetEapUserDataW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasseteapuserdataw
 // Minimum OS: windows5.0.
-func RasSetEapUserData(hToken foundation.HANDLE, pszPhonebook string, pszEntry string, pbEapData *byte, dwSizeofEapData uint32) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasSetEapUserData(hToken foundation.HANDLE, pszPhonebook *string, pszEntry string, pbEapData *byte, dwSizeofEapData uint32) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasSetEapUserData.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(unsafe.Pointer(pbEapData)), uintptr(dwSizeofEapData))
 	return uint32(r1)
@@ -2643,8 +2643,8 @@ func RasSetEapUserDataA(hToken foundation.HANDLE, pszPhonebook foundation.PSTR, 
 // RasSetEntryDialParams calls RASAPI32!RasSetEntryDialParamsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetentrydialparamsw
 // Minimum OS: windows5.0.
-func RasSetEntryDialParams(param0 string, param1 *RASDIALPARAMSW, param2 bool) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetEntryDialParams(param0 *string, param1 *RASDIALPARAMSW, param2 bool) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param2 := win32.Bool32(param2)
 	r1, _, _ := syscall.SyscallN(procRasSetEntryDialParams.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(_param2))
 	return uint32(r1)
@@ -2662,8 +2662,8 @@ func RasSetEntryDialParamsA(param0 foundation.PSTR, param1 *RASDIALPARAMSA, para
 // RasSetEntryProperties calls RASAPI32!RasSetEntryPropertiesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetentrypropertiesw
 // Minimum OS: windows5.0.
-func RasSetEntryProperties(param0 string, param1 string, param2 *RASENTRYW, param3 uint32, param4 *byte, param5 uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetEntryProperties(param0 *string, param1 string, param2 *RASENTRYW, param3 uint32, param4 *byte, param5 uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasSetEntryProperties.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)), uintptr(param5))
 	return uint32(r1)
@@ -2680,8 +2680,8 @@ func RasSetEntryPropertiesA(param0 foundation.PSTR, param1 foundation.PSTR, para
 // RasSetSubEntryProperties calls RASAPI32!RasSetSubEntryPropertiesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetsubentrypropertiesw
 // Minimum OS: windows5.0.
-func RasSetSubEntryProperties(param0 string, param1 string, param2 uint32, param3 *RASSUBENTRYW, param4 uint32, param5 *byte, param6 uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetSubEntryProperties(param0 *string, param1 string, param2 uint32, param3 *RASSUBENTRYW, param4 uint32, param5 *byte, param6 uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasSetSubEntryProperties.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(param4), uintptr(unsafe.Pointer(param5)), uintptr(param6))
 	return uint32(r1)
@@ -2706,8 +2706,8 @@ func RasUpdateConnection(hrasconn HRASCONN, lprasupdateconn *RASUPDATECONN) uint
 // RasValidateEntryName calls RASAPI32!RasValidateEntryNameW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasvalidateentrynamew
 // Minimum OS: windows5.0.
-func RasValidateEntryName(param0 string, param1 string) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasValidateEntryName(param0 *string, param1 string) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasValidateEntryName.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)))
 	return uint32(r1)

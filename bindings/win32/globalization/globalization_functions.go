@@ -3818,8 +3818,8 @@ func CompareStringA(Locale uint32, dwCmpFlags uint32, lpString1 []int8, lpString
 // CompareStringEx calls KERNEL32!CompareStringEx.
 // https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-comparestringex
 // Minimum OS: windows6.0.6000.
-func CompareStringEx(lpLocaleName string, dwCmpFlags COMPARE_STRING_FLAGS, lpString1 string, cchCount1 int32, lpString2 string, cchCount2 int32) (COMPARESTRING_RESULT, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func CompareStringEx(lpLocaleName *string, dwCmpFlags COMPARE_STRING_FLAGS, lpString1 string, cchCount1 int32, lpString2 string, cchCount2 int32) (COMPARESTRING_RESULT, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpString1 := win32.UTF16Ptr(lpString1)
 	_lpString2 := win32.UTF16Ptr(lpString2)
 	r1, _, e1 := syscall.SyscallN(procCompareStringEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwCmpFlags), uintptr(unsafe.Pointer(_lpString1)), uintptr(cchCount1), uintptr(unsafe.Pointer(_lpString2)), uintptr(cchCount2), 0, 0, 0)
@@ -3912,8 +3912,8 @@ func EnumCalendarInfoExA(lpCalInfoEnumProcEx CALINFO_ENUMPROCEXA, Locale uint32,
 // EnumCalendarInfoExEx calls KERNEL32!EnumCalendarInfoExEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumcalendarinfoexex
 // Minimum OS: windows6.0.6000.
-func EnumCalendarInfoExEx(pCalInfoEnumProcExEx CALINFO_ENUMPROCEXEX, lpLocaleName string, Calendar uint32, CalType uint32, lParam foundation.LPARAM) error {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func EnumCalendarInfoExEx(pCalInfoEnumProcExEx CALINFO_ENUMPROCEXEX, lpLocaleName *string, Calendar uint32, CalType uint32, lParam foundation.LPARAM) error {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procEnumCalendarInfoExEx.Addr(), uintptr(pCalInfoEnumProcExEx), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(Calendar), 0, uintptr(CalType), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3968,8 +3968,8 @@ func EnumDateFormatsExA(lpDateFmtEnumProcEx DATEFMT_ENUMPROCEXA, Locale uint32, 
 // EnumDateFormatsExEx calls KERNEL32!EnumDateFormatsExEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumdateformatsexex
 // Minimum OS: windows6.0.6000.
-func EnumDateFormatsExEx(lpDateFmtEnumProcExEx DATEFMT_ENUMPROCEXEX, lpLocaleName string, dwFlags ENUM_DATE_FORMATS_FLAGS, lParam foundation.LPARAM) error {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func EnumDateFormatsExEx(lpDateFmtEnumProcExEx DATEFMT_ENUMPROCEXEX, lpLocaleName *string, dwFlags ENUM_DATE_FORMATS_FLAGS, lParam foundation.LPARAM) error {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procEnumDateFormatsExEx.Addr(), uintptr(lpDateFmtEnumProcExEx), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4123,8 +4123,8 @@ func EnumTimeFormatsA(lpTimeFmtEnumProc TIMEFMT_ENUMPROCA, Locale uint32, dwFlag
 // EnumTimeFormatsEx calls KERNEL32!EnumTimeFormatsEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumtimeformatsex
 // Minimum OS: windows6.0.6000.
-func EnumTimeFormatsEx(lpTimeFmtEnumProcEx TIMEFMT_ENUMPROCEX, lpLocaleName string, dwFlags uint32, lParam foundation.LPARAM) error {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func EnumTimeFormatsEx(lpTimeFmtEnumProcEx TIMEFMT_ENUMPROCEX, lpLocaleName *string, dwFlags uint32, lParam foundation.LPARAM) error {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procEnumTimeFormatsEx.Addr(), uintptr(lpTimeFmtEnumProcEx), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4170,8 +4170,8 @@ func FindNLSString(Locale uint32, dwFindNLSStringFlags uint32, lpStringSource st
 // FindNLSStringEx calls KERNEL32!FindNLSStringEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-findnlsstringex
 // Minimum OS: windows6.0.6000.
-func FindNLSStringEx(lpLocaleName string, dwFindNLSStringFlags uint32, lpStringSource string, cchSource int32, lpStringValue string, cchValue int32, pcchFound *int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func FindNLSStringEx(lpLocaleName *string, dwFindNLSStringFlags uint32, lpStringSource string, cchSource int32, lpStringValue string, cchValue int32, pcchFound *int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpStringSource := win32.UTF16Ptr(lpStringSource)
 	_lpStringValue := win32.UTF16Ptr(lpStringValue)
 	r1, _, e1 := syscall.SyscallN(procFindNLSStringEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFindNLSStringFlags), uintptr(unsafe.Pointer(_lpStringSource)), uintptr(cchSource), uintptr(unsafe.Pointer(_lpStringValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pcchFound)), uintptr(unsafe.Pointer(lpVersionInformation)), 0, uintptr(sortHandle))
@@ -4293,8 +4293,8 @@ func GetCalendarInfoA(Locale uint32, Calendar uint32, CalType uint32, lpCalData 
 // GetCalendarInfoEx calls KERNEL32!GetCalendarInfoEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcalendarinfoex
 // Minimum OS: windows6.0.6000.
-func GetCalendarInfoEx(lpLocaleName string, Calendar uint32, CalType uint32, lpCalData foundation.PWSTR, cchData int32, lpValue *uint32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetCalendarInfoEx(lpLocaleName *string, Calendar uint32, CalType uint32, lpCalData foundation.PWSTR, cchData int32, lpValue *uint32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procGetCalendarInfoEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(Calendar), 0, uintptr(CalType), uintptr(unsafe.Pointer(lpCalData)), uintptr(cchData), uintptr(unsafe.Pointer(lpValue)))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -4335,8 +4335,8 @@ func GetCurrencyFormatA(Locale uint32, dwFlags uint32, lpValue foundation.PSTR, 
 // GetCurrencyFormatEx calls KERNEL32!GetCurrencyFormatEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcurrencyformatex
 // Minimum OS: windows5.0.
-func GetCurrencyFormatEx(lpLocaleName string, dwFlags uint32, lpValue string, lpFormat *CURRENCYFMTW, lpCurrencyStr foundation.PWSTR, cchCurrency int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetCurrencyFormatEx(lpLocaleName *string, dwFlags uint32, lpValue string, lpFormat *CURRENCYFMTW, lpCurrencyStr foundation.PWSTR, cchCurrency int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpValue := win32.UTF16Ptr(lpValue)
 	r1, _, e1 := syscall.SyscallN(procGetCurrencyFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpCurrencyStr)), uintptr(cchCurrency))
 	if e1 != 0 {
@@ -4348,8 +4348,8 @@ func GetCurrencyFormatEx(lpLocaleName string, dwFlags uint32, lpValue string, lp
 // GetDateFormat calls KERNEL32!GetDateFormatW.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-getdateformatw
 // Minimum OS: windows5.0.
-func GetDateFormat(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME, lpFormat string, lpDateStr foundation.PWSTR, cchDate int32) (int32, error) {
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetDateFormat(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME, lpFormat *string, lpDateStr foundation.PWSTR, cchDate int32) (int32, error) {
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetDateFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDate)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -4371,10 +4371,10 @@ func GetDateFormatA(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME
 // GetDateFormatEx calls KERNEL32!GetDateFormatEx.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-getdateformatex
 // Minimum OS: windows6.0.6000.
-func GetDateFormatEx(lpLocaleName string, dwFlags ENUM_DATE_FORMATS_FLAGS, lpDate *foundation.SYSTEMTIME, lpFormat string, lpDateStr foundation.PWSTR, cchDate int32, lpCalendar string) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
-	_lpFormat := win32.UTF16Ptr(lpFormat)
-	_lpCalendar := win32.UTF16Ptr(lpCalendar)
+func GetDateFormatEx(lpLocaleName *string, dwFlags ENUM_DATE_FORMATS_FLAGS, lpDate *foundation.SYSTEMTIME, lpFormat *string, lpDateStr foundation.PWSTR, cchDate int32, lpCalendar *string) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
+	_lpCalendar := win32.UTF16PtrOrNil(lpCalendar)
 	r1, _, e1 := syscall.SyscallN(procGetDateFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDate)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate), uintptr(unsafe.Pointer(_lpCalendar)))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -4394,8 +4394,8 @@ func GetDistanceOfClosestLanguageInList(pszLanguage string, pszLanguagesList str
 // GetDurationFormat calls KERNEL32!GetDurationFormat.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getdurationformat
 // Minimum OS: windows6.0.6000.
-func GetDurationFormat(Locale uint32, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetDurationFormat(Locale uint32, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat *string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetDurationFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDuration)), uintptr(ullDuration), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDurationStr)), uintptr(cchDuration))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -4406,9 +4406,9 @@ func GetDurationFormat(Locale uint32, dwFlags uint32, lpDuration *foundation.SYS
 // GetDurationFormatEx calls KERNEL32!GetDurationFormatEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getdurationformatex
 // Minimum OS: windows6.0.6000.
-func GetDurationFormatEx(lpLocaleName string, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetDurationFormatEx(lpLocaleName *string, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat *string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetDurationFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDuration)), uintptr(ullDuration), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDurationStr)), uintptr(cchDuration))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -4499,8 +4499,8 @@ func GetLocaleInfoA(Locale uint32, LCType uint32, lpLCData foundation.PSTR, cchD
 // GetLocaleInfoEx calls KERNEL32!GetLocaleInfoEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getlocaleinfoex
 // Minimum OS: windows6.0.6000.
-func GetLocaleInfoEx(lpLocaleName string, LCType uint32, lpLCData foundation.PWSTR, cchData int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetLocaleInfoEx(lpLocaleName *string, LCType uint32, lpLCData foundation.PWSTR, cchData int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procGetLocaleInfoEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(LCType), uintptr(unsafe.Pointer(lpLCData)), uintptr(cchData))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -4522,8 +4522,8 @@ func GetNLSVersion(Function uint32, Locale uint32, lpVersionInformation *NLSVERS
 // GetNLSVersionEx calls KERNEL32!GetNLSVersionEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getnlsversionex
 // Minimum OS: windows6.0.6000.
-func GetNLSVersionEx(function uint32, lpLocaleName string, lpVersionInformation *NLSVERSIONINFOEX) error {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetNLSVersionEx(function uint32, lpLocaleName *string, lpVersionInformation *NLSVERSIONINFOEX) error {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procGetNLSVersionEx.Addr(), uintptr(function), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(unsafe.Pointer(lpVersionInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4557,8 +4557,8 @@ func GetNumberFormatA(Locale uint32, dwFlags uint32, lpValue foundation.PSTR, lp
 // GetNumberFormatEx calls KERNEL32!GetNumberFormatEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getnumberformatex
 // Minimum OS: windows6.0.6000.
-func GetNumberFormatEx(lpLocaleName string, dwFlags uint32, lpValue string, lpFormat *NUMBERFMTW, lpNumberStr foundation.PWSTR, cchNumber int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetNumberFormatEx(lpLocaleName *string, dwFlags uint32, lpValue string, lpFormat *NUMBERFMTW, lpNumberStr foundation.PWSTR, cchNumber int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpValue := win32.UTF16Ptr(lpValue)
 	r1, _, e1 := syscall.SyscallN(procGetNumberFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpNumberStr)), uintptr(cchNumber))
 	if e1 != 0 {
@@ -4732,8 +4732,8 @@ func GetThreadUILanguage() uint16 {
 // GetTimeFormat calls KERNEL32!GetTimeFormatW.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatw
 // Minimum OS: windows5.0.
-func GetTimeFormat(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME, lpFormat string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetTimeFormat(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME, lpFormat *string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetTimeFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTime)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpTimeStr)), uintptr(cchTime))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -4755,9 +4755,9 @@ func GetTimeFormatA(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME
 // GetTimeFormatEx calls KERNEL32!GetTimeFormatEx.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatex
 // Minimum OS: windows6.0.6000.
-func GetTimeFormatEx(lpLocaleName string, dwFlags TIME_FORMAT_FLAGS, lpTime *foundation.SYSTEMTIME, lpFormat string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetTimeFormatEx(lpLocaleName *string, dwFlags TIME_FORMAT_FLAGS, lpTime *foundation.SYSTEMTIME, lpFormat *string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetTimeFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTime)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpTimeStr)), uintptr(cchTime))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -4979,8 +4979,8 @@ func IsValidLocaleName(lpLocaleName string) bool {
 // IsValidNLSVersion calls KERNEL32!IsValidNLSVersion.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isvalidnlsversion
 // Minimum OS: windows8.0.
-func IsValidNLSVersion(function uint32, lpLocaleName string, lpVersionInformation *NLSVERSIONINFOEX) uint32 {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func IsValidNLSVersion(function uint32, lpLocaleName *string, lpVersionInformation *NLSVERSIONINFOEX) uint32 {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, _ := syscall.SyscallN(procIsValidNLSVersion.Addr(), uintptr(function), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(unsafe.Pointer(lpVersionInformation)))
 	return uint32(r1)
 }
@@ -5030,8 +5030,8 @@ func LCMapStringA(Locale uint32, dwMapFlags uint32, lpSrcStr foundation.PSTR, cc
 // LCMapStringEx calls KERNEL32!LCMapStringEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-lcmapstringex
 // Minimum OS: windows6.0.6000.
-func LCMapStringEx(lpLocaleName string, dwMapFlags uint32, lpSrcStr string, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func LCMapStringEx(lpLocaleName *string, dwMapFlags uint32, lpSrcStr string, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpSrcStr := win32.UTF16Ptr(lpSrcStr)
 	r1, _, e1 := syscall.SyscallN(procLCMapStringEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwMapFlags), uintptr(unsafe.Pointer(_lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpDestStr)), uintptr(cchDest), uintptr(unsafe.Pointer(lpVersionInformation)), 0, uintptr(sortHandle))
 	if e1 != 0 {
@@ -5224,9 +5224,9 @@ func NormalizeString(NormForm NORM_FORM, lpSrcString string, cwSrcLength int32, 
 // NotifyUILanguageChange calls KERNEL32!NotifyUILanguageChange.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-notifyuilanguagechange
 // Minimum OS: windows6.1.
-func NotifyUILanguageChange(dwFlags uint32, pcwstrNewLanguage string, pcwstrPreviousLanguage string, pdwStatusRtrn *uint32) bool {
-	_pcwstrNewLanguage := win32.UTF16Ptr(pcwstrNewLanguage)
-	_pcwstrPreviousLanguage := win32.UTF16Ptr(pcwstrPreviousLanguage)
+func NotifyUILanguageChange(dwFlags uint32, pcwstrNewLanguage *string, pcwstrPreviousLanguage *string, pdwStatusRtrn *uint32) bool {
+	_pcwstrNewLanguage := win32.UTF16PtrOrNil(pcwstrNewLanguage)
+	_pcwstrPreviousLanguage := win32.UTF16PtrOrNil(pcwstrPreviousLanguage)
 	r1, _, _ := syscall.SyscallN(procNotifyUILanguageChange.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pcwstrNewLanguage)), uintptr(unsafe.Pointer(_pcwstrPreviousLanguage)), 0, uintptr(unsafe.Pointer(pdwStatusRtrn)))
 	return r1 != 0
 }
@@ -5234,8 +5234,8 @@ func NotifyUILanguageChange(dwFlags uint32, pcwstrNewLanguage string, pcwstrPrev
 // ResolveLocaleName calls KERNEL32!ResolveLocaleName.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-resolvelocalename
 // Minimum OS: windows6.1.
-func ResolveLocaleName(lpNameToResolve string, lpLocaleName foundation.PWSTR, cchLocaleName int32) (int32, error) {
-	_lpNameToResolve := win32.UTF16Ptr(lpNameToResolve)
+func ResolveLocaleName(lpNameToResolve *string, lpLocaleName foundation.PWSTR, cchLocaleName int32) (int32, error) {
+	_lpNameToResolve := win32.UTF16PtrOrNil(lpNameToResolve)
 	r1, _, e1 := syscall.SyscallN(procResolveLocaleName.Addr(), uintptr(unsafe.Pointer(_lpNameToResolve)), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(cchLocaleName))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -5656,8 +5656,8 @@ func SetLocaleInfoA(Locale uint32, LCType uint32, lpLCData foundation.PSTR) erro
 // SetProcessPreferredUILanguages calls KERNEL32!SetProcessPreferredUILanguages.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setprocesspreferreduilanguages
 // Minimum OS: windows6.1.
-func SetProcessPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer string, pulNumLanguages *uint32) error {
-	_pwszLanguagesBuffer := win32.UTF16Ptr(pwszLanguagesBuffer)
+func SetProcessPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer *string, pulNumLanguages *uint32) error {
+	_pwszLanguagesBuffer := win32.UTF16PtrOrNil(pwszLanguagesBuffer)
 	r1, _, e1 := syscall.SyscallN(procSetProcessPreferredUILanguages.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszLanguagesBuffer)), uintptr(unsafe.Pointer(pulNumLanguages)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -5676,15 +5676,15 @@ func SetThreadLocale(Locale uint32) bool {
 // SetThreadPreferredUILanguages calls KERNEL32!SetThreadPreferredUILanguages.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setthreadpreferreduilanguages
 // Minimum OS: windows6.0.6000.
-func SetThreadPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer string, pulNumLanguages *uint32) bool {
-	_pwszLanguagesBuffer := win32.UTF16Ptr(pwszLanguagesBuffer)
+func SetThreadPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer *string, pulNumLanguages *uint32) bool {
+	_pwszLanguagesBuffer := win32.UTF16PtrOrNil(pwszLanguagesBuffer)
 	r1, _, _ := syscall.SyscallN(procSetThreadPreferredUILanguages.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszLanguagesBuffer)), uintptr(unsafe.Pointer(pulNumLanguages)))
 	return r1 != 0
 }
 
 // SetThreadPreferredUILanguages2 calls KERNEL32!SetThreadPreferredUILanguages2.
-func SetThreadPreferredUILanguages2(flags uint32, languages string, numLanguagesSet *uint32, snapshot *HSAVEDUILANGUAGES) bool {
-	_languages := win32.UTF16Ptr(languages)
+func SetThreadPreferredUILanguages2(flags uint32, languages *string, numLanguagesSet *uint32, snapshot *HSAVEDUILANGUAGES) bool {
+	_languages := win32.UTF16PtrOrNil(languages)
 	r1, _, _ := syscall.SyscallN(procSetThreadPreferredUILanguages2.Addr(), uintptr(flags), uintptr(unsafe.Pointer(_languages)), uintptr(unsafe.Pointer(numLanguagesSet)), uintptr(unsafe.Pointer(snapshot)))
 	return r1 != 0
 }

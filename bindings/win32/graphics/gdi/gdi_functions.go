@@ -1375,8 +1375,8 @@ func ChangeDisplaySettingsA(lpDevMode *DEVMODEA, dwFlags CDS_TYPE) DISP_CHANGE {
 // ChangeDisplaySettingsEx calls USER32!ChangeDisplaySettingsExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-changedisplaysettingsexw
 // Minimum OS: windows5.0.
-func ChangeDisplaySettingsEx(lpszDeviceName string, lpDevMode *DEVMODEW, dwflags CDS_TYPE, lParam unsafe.Pointer) DISP_CHANGE {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+func ChangeDisplaySettingsEx(lpszDeviceName *string, lpDevMode *DEVMODEW, dwflags CDS_TYPE, lParam unsafe.Pointer) DISP_CHANGE {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
 	r1, _, _ := syscall.SyscallN(procChangeDisplaySettingsEx.Addr(), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(unsafe.Pointer(lpDevMode)), 0, uintptr(dwflags), uintptr(unsafe.Pointer(lParam)))
 	return DISP_CHANGE(r1)
 }
@@ -1448,8 +1448,8 @@ func CombineTransform(lpxfOut *XFORM, lpxf1 *XFORM, lpxf2 *XFORM) bool {
 // CopyEnhMetaFile calls GDI32!CopyEnhMetaFileW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-copyenhmetafilew
 // Minimum OS: windows5.0.
-func CopyEnhMetaFile(hEnh HENHMETAFILE, lpFileName string) HENHMETAFILE {
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func CopyEnhMetaFile(hEnh HENHMETAFILE, lpFileName *string) HENHMETAFILE {
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, _ := syscall.SyscallN(procCopyEnhMetaFile.Addr(), uintptr(hEnh), uintptr(unsafe.Pointer(_lpFileName)))
 	return HENHMETAFILE(r1)
 }
@@ -1465,8 +1465,8 @@ func CopyEnhMetaFileA(hEnh HENHMETAFILE, lpFileName foundation.PSTR) HENHMETAFIL
 // CopyMetaFile calls GDI32!CopyMetaFileW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-copymetafilew
 // Minimum OS: windows5.0.
-func CopyMetaFile(param0 HMETAFILE, param1 string) HMETAFILE {
-	_param1 := win32.UTF16Ptr(param1)
+func CopyMetaFile(param0 HMETAFILE, param1 *string) HMETAFILE {
+	_param1 := win32.UTF16PtrOrNil(param1)
 	r1, _, _ := syscall.SyscallN(procCopyMetaFile.Addr(), uintptr(param0), uintptr(unsafe.Pointer(_param1)))
 	return HMETAFILE(r1)
 }
@@ -1530,10 +1530,10 @@ func CreateCompatibleDC(hdc HDC) HDC {
 // CreateDC calls GDI32!CreateDCW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createdcw
 // Minimum OS: windows5.0.
-func CreateDC(pwszDriver string, pwszDevice string, pszPort string, pdm *DEVMODEW) HDC {
-	_pwszDriver := win32.UTF16Ptr(pwszDriver)
-	_pwszDevice := win32.UTF16Ptr(pwszDevice)
-	_pszPort := win32.UTF16Ptr(pszPort)
+func CreateDC(pwszDriver *string, pwszDevice *string, pszPort *string, pdm *DEVMODEW) HDC {
+	_pwszDriver := win32.UTF16PtrOrNil(pwszDriver)
+	_pwszDevice := win32.UTF16PtrOrNil(pwszDevice)
+	_pszPort := win32.UTF16PtrOrNil(pszPort)
 	r1, _, _ := syscall.SyscallN(procCreateDC.Addr(), uintptr(unsafe.Pointer(_pwszDriver)), uintptr(unsafe.Pointer(_pwszDevice)), uintptr(unsafe.Pointer(_pszPort)), uintptr(unsafe.Pointer(pdm)))
 	return HDC(r1)
 }
@@ -1609,9 +1609,9 @@ func CreateEllipticRgnIndirect(lprect *foundation.RECT) HRGN {
 // CreateEnhMetaFile calls GDI32!CreateEnhMetaFileW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createenhmetafilew
 // Minimum OS: windows5.0.
-func CreateEnhMetaFile(hdc HDC, lpFilename string, lprc *foundation.RECT, lpDesc string) HDC {
-	_lpFilename := win32.UTF16Ptr(lpFilename)
-	_lpDesc := win32.UTF16Ptr(lpDesc)
+func CreateEnhMetaFile(hdc HDC, lpFilename *string, lprc *foundation.RECT, lpDesc *string) HDC {
+	_lpFilename := win32.UTF16PtrOrNil(lpFilename)
+	_lpDesc := win32.UTF16PtrOrNil(lpDesc)
 	r1, _, _ := syscall.SyscallN(procCreateEnhMetaFile.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpFilename)), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(_lpDesc)))
 	return HDC(r1)
 }
@@ -1627,8 +1627,8 @@ func CreateEnhMetaFileA(hdc HDC, lpFilename foundation.PSTR, lprc *foundation.RE
 // CreateFont calls GDI32!CreateFontW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createfontw
 // Minimum OS: windows5.0.
-func CreateFont(cHeight int32, cWidth int32, cEscapement int32, cOrientation int32, cWeight int32, bItalic uint32, bUnderline uint32, bStrikeOut uint32, iCharSet uint32, iOutPrecision uint32, iClipPrecision uint32, iQuality uint32, iPitchAndFamily uint32, pszFaceName string) HFONT {
-	_pszFaceName := win32.UTF16Ptr(pszFaceName)
+func CreateFont(cHeight int32, cWidth int32, cEscapement int32, cOrientation int32, cWeight int32, bItalic uint32, bUnderline uint32, bStrikeOut uint32, iCharSet uint32, iOutPrecision uint32, iClipPrecision uint32, iQuality uint32, iPitchAndFamily uint32, pszFaceName *string) HFONT {
+	_pszFaceName := win32.UTF16PtrOrNil(pszFaceName)
 	r1, _, _ := syscall.SyscallN(procCreateFont.Addr(), uintptr(cHeight), uintptr(cWidth), uintptr(cEscapement), uintptr(cOrientation), uintptr(cWeight), uintptr(bItalic), uintptr(bUnderline), uintptr(bStrikeOut), uintptr(iCharSet), uintptr(iOutPrecision), uintptr(iClipPrecision), uintptr(iQuality), uintptr(iPitchAndFamily), uintptr(unsafe.Pointer(_pszFaceName)))
 	return HFONT(r1)
 }
@@ -1700,10 +1700,10 @@ func CreateHatchBrush(iHatch HATCH_BRUSH_STYLE, color foundation.COLORREF) HBRUS
 // CreateIC calls GDI32!CreateICW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createicw
 // Minimum OS: windows5.0.
-func CreateIC(pszDriver string, pszDevice string, pszPort string, pdm *DEVMODEW) HDC {
-	_pszDriver := win32.UTF16Ptr(pszDriver)
-	_pszDevice := win32.UTF16Ptr(pszDevice)
-	_pszPort := win32.UTF16Ptr(pszPort)
+func CreateIC(pszDriver *string, pszDevice *string, pszPort *string, pdm *DEVMODEW) HDC {
+	_pszDriver := win32.UTF16PtrOrNil(pszDriver)
+	_pszDevice := win32.UTF16PtrOrNil(pszDevice)
+	_pszPort := win32.UTF16PtrOrNil(pszPort)
 	r1, _, _ := syscall.SyscallN(procCreateIC.Addr(), uintptr(unsafe.Pointer(_pszDriver)), uintptr(unsafe.Pointer(_pszDevice)), uintptr(unsafe.Pointer(_pszPort)), uintptr(unsafe.Pointer(pdm)))
 	return HDC(r1)
 }
@@ -1719,8 +1719,8 @@ func CreateICA(pszDriver foundation.PSTR, pszDevice foundation.PSTR, pszPort fou
 // CreateMetaFile calls GDI32!CreateMetaFileW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createmetafilew
 // Minimum OS: windows5.0.
-func CreateMetaFile(pszFile string) HDC {
-	_pszFile := win32.UTF16Ptr(pszFile)
+func CreateMetaFile(pszFile *string) HDC {
+	_pszFile := win32.UTF16PtrOrNil(pszFile)
 	r1, _, _ := syscall.SyscallN(procCreateMetaFile.Addr(), uintptr(unsafe.Pointer(_pszFile)))
 	return HDC(r1)
 }
@@ -1816,10 +1816,10 @@ func CreateRoundRectRgn(x1 int32, y1 int32, x2 int32, y2 int32, w int32, h int32
 // CreateScalableFontResource calls GDI32!CreateScalableFontResourceW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createscalablefontresourcew
 // Minimum OS: windows5.0.
-func CreateScalableFontResource(fdwHidden uint32, lpszFont string, lpszFile string, lpszPath string) error {
+func CreateScalableFontResource(fdwHidden uint32, lpszFont string, lpszFile string, lpszPath *string) error {
 	_lpszFont := win32.UTF16Ptr(lpszFont)
 	_lpszFile := win32.UTF16Ptr(lpszFile)
-	_lpszPath := win32.UTF16Ptr(lpszPath)
+	_lpszPath := win32.UTF16PtrOrNil(lpszPath)
 	r1, _, e1 := syscall.SyscallN(procCreateScalableFontResource.Addr(), uintptr(fdwHidden), uintptr(unsafe.Pointer(_lpszFont)), uintptr(unsafe.Pointer(_lpszFile)), uintptr(unsafe.Pointer(_lpszPath)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2013,8 +2013,8 @@ func EndPath(hdc HDC) bool {
 // EnumDisplayDevices calls USER32!EnumDisplayDevicesW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaydevicesw
 // Minimum OS: windows5.0.
-func EnumDisplayDevices(lpDevice string, iDevNum uint32, lpDisplayDevice *DISPLAY_DEVICEW, dwFlags uint32) bool {
-	_lpDevice := win32.UTF16Ptr(lpDevice)
+func EnumDisplayDevices(lpDevice *string, iDevNum uint32, lpDisplayDevice *DISPLAY_DEVICEW, dwFlags uint32) bool {
+	_lpDevice := win32.UTF16PtrOrNil(lpDevice)
 	r1, _, _ := syscall.SyscallN(procEnumDisplayDevices.Addr(), uintptr(unsafe.Pointer(_lpDevice)), uintptr(iDevNum), uintptr(unsafe.Pointer(lpDisplayDevice)), uintptr(dwFlags))
 	return r1 != 0
 }
@@ -2038,8 +2038,8 @@ func EnumDisplayMonitors(hdc HDC, lprcClip *foundation.RECT, lpfnEnum MONITORENU
 // EnumDisplaySettings calls USER32!EnumDisplaySettingsW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsw
 // Minimum OS: windows5.0.
-func EnumDisplaySettings(lpszDeviceName string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW) bool {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+func EnumDisplaySettings(lpszDeviceName *string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW) bool {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
 	r1, _, _ := syscall.SyscallN(procEnumDisplaySettings.Addr(), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)))
 	return r1 != 0
 }
@@ -2055,8 +2055,8 @@ func EnumDisplaySettingsA(lpszDeviceName foundation.PSTR, iModeNum ENUM_DISPLAY_
 // EnumDisplaySettingsEx calls USER32!EnumDisplaySettingsExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsexw
 // Minimum OS: windows5.0.
-func EnumDisplaySettingsEx(lpszDeviceName string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW, dwFlags ENUM_DISPLAY_SETTINGS_FLAGS) bool {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+func EnumDisplaySettingsEx(lpszDeviceName *string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW, dwFlags ENUM_DISPLAY_SETTINGS_FLAGS) bool {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
 	r1, _, _ := syscall.SyscallN(procEnumDisplaySettingsEx.Addr(), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)), uintptr(dwFlags))
 	return r1 != 0
 }
@@ -2080,8 +2080,8 @@ func EnumEnhMetaFile(hdc HDC, hmf HENHMETAFILE, proc ENHMFENUMPROC, param3 unsaf
 // EnumFontFamilies calls GDI32!EnumFontFamiliesW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesw
 // Minimum OS: windows5.0.
-func EnumFontFamilies(hdc HDC, lpLogfont string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
-	_lpLogfont := win32.UTF16Ptr(lpLogfont)
+func EnumFontFamilies(hdc HDC, lpLogfont *string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
+	_lpLogfont := win32.UTF16PtrOrNil(lpLogfont)
 	r1, _, _ := syscall.SyscallN(procEnumFontFamilies.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpLogfont)), uintptr(lpProc), uintptr(lParam))
 	return int32(r1)
 }
@@ -2113,8 +2113,8 @@ func EnumFontFamiliesExA(hdc HDC, lpLogfont *LOGFONTA, lpProc FONTENUMPROCA, lPa
 // EnumFonts calls GDI32!EnumFontsW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontsw
 // Minimum OS: windows5.0.
-func EnumFonts(hdc HDC, lpLogfont string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
-	_lpLogfont := win32.UTF16Ptr(lpLogfont)
+func EnumFonts(hdc HDC, lpLogfont *string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
+	_lpLogfont := win32.UTF16PtrOrNil(lpLogfont)
 	r1, _, _ := syscall.SyscallN(procEnumFonts.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpLogfont)), uintptr(lpProc), uintptr(lParam))
 	return int32(r1)
 }
@@ -2214,8 +2214,8 @@ func ExtSelectClipRgn(hdc HDC, hrgn HRGN, mode RGN_COMBINE_MODE) GDI_REGION_TYPE
 // ExtTextOut calls GDI32!ExtTextOutW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-exttextoutw
 // Minimum OS: windows5.0.
-func ExtTextOut(hdc HDC, x int32, y int32, options ETO_OPTIONS, lprect *foundation.RECT, lpString string, c uint32, lpDx *int32) bool {
-	_lpString := win32.UTF16Ptr(lpString)
+func ExtTextOut(hdc HDC, x int32, y int32, options ETO_OPTIONS, lprect *foundation.RECT, lpString *string, c uint32, lpDx *int32) bool {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, _ := syscall.SyscallN(procExtTextOut.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(options), uintptr(unsafe.Pointer(lprect)), uintptr(unsafe.Pointer(_lpString)), uintptr(c), uintptr(unsafe.Pointer(lpDx)))
 	return r1 != 0
 }
@@ -4516,8 +4516,8 @@ func TTIsEmbeddingEnabledForFacename(lpszFacename foundation.PSTR, pbEnabled *fo
 // TTLoadEmbeddedFont calls t2embed!TTLoadEmbeddedFont.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttloadembeddedfont
 // Minimum OS: windows5.0.
-func TTLoadEmbeddedFont(phFontReference *foundation.HANDLE, ulFlags uint32, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, ulPrivs FONT_LICENSE_PRIVS, pulStatus *TTLOAD_EMBEDDED_FONT_STATUS, lpfnReadFromStream READEMBEDPROC, lpvReadStream unsafe.Pointer, szWinFamilyName string, szMacFamilyName foundation.PSTR, pTTLoadInfo *TTLOADINFO) int32 {
-	_szWinFamilyName := win32.UTF16Ptr(szWinFamilyName)
+func TTLoadEmbeddedFont(phFontReference *foundation.HANDLE, ulFlags uint32, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, ulPrivs FONT_LICENSE_PRIVS, pulStatus *TTLOAD_EMBEDDED_FONT_STATUS, lpfnReadFromStream READEMBEDPROC, lpvReadStream unsafe.Pointer, szWinFamilyName *string, szMacFamilyName foundation.PSTR, pTTLoadInfo *TTLOADINFO) int32 {
+	_szWinFamilyName := win32.UTF16PtrOrNil(szWinFamilyName)
 	r1, _, _ := syscall.SyscallN(procTTLoadEmbeddedFont.Addr(), uintptr(unsafe.Pointer(phFontReference)), uintptr(ulFlags), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(ulPrivs), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnReadFromStream), uintptr(unsafe.Pointer(lpvReadStream)), uintptr(unsafe.Pointer(_szWinFamilyName)), uintptr(unsafe.Pointer(szMacFamilyName)), uintptr(unsafe.Pointer(pTTLoadInfo)))
 	return int32(r1)
 }

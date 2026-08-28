@@ -35,8 +35,9 @@ import (
 )
 
 func main() {
-	// Go string name, Go bool flags, (HANDLE, error) return.
-	event, err := threading.CreateEvent(nil, true /*manualReset*/, false /*initial*/, "my-event")
+	// Go bool flags, an optional (*string) name — nil is NULL — and a
+	// (HANDLE, error) return.
+	event, err := threading.CreateEvent(nil, true /*manualReset*/, false /*initial*/, nil)
 	if err != nil {
 		panic(err)
 	}

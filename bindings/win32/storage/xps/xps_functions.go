@@ -77,9 +77,9 @@ func AbortDoc(hdc graphicsgdi.HDC) int32 {
 // DeviceCapabilities calls winspool.drv!DeviceCapabilitiesW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-devicecapabilitiesw
 // Minimum OS: windows5.0.
-func DeviceCapabilities(pDevice string, pPort string, fwCapability PRINTER_DEVICE_CAPABILITIES, pOutput foundation.PWSTR, pDevMode *graphicsgdi.DEVMODEW) int32 {
+func DeviceCapabilities(pDevice string, pPort *string, fwCapability PRINTER_DEVICE_CAPABILITIES, pOutput foundation.PWSTR, pDevMode *graphicsgdi.DEVMODEW) int32 {
 	_pDevice := win32.UTF16Ptr(pDevice)
-	_pPort := win32.UTF16Ptr(pPort)
+	_pPort := win32.UTF16PtrOrNil(pPort)
 	r1, _, _ := syscall.SyscallN(procDeviceCapabilities.Addr(), uintptr(unsafe.Pointer(_pDevice)), uintptr(unsafe.Pointer(_pPort)), uintptr(fwCapability), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pDevMode)))
 	return int32(r1)
 }

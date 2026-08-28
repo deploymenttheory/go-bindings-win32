@@ -1324,8 +1324,8 @@ func (self *IDXGIResource1) CreateSubresourceSurface(index uint32, ppSurface **I
 }
 
 // CreateSharedHandle dispatches through IDXGIResource1's vtable slot 13.
-func (self *IDXGIResource1) CreateSharedHandle(pAttributes *security.SECURITY_ATTRIBUTES, dwAccess uint32, lpName string, pHandle *foundation.HANDLE) error {
-	_lpName := win32.UTF16Ptr(lpName)
+func (self *IDXGIResource1) CreateSharedHandle(pAttributes *security.SECURITY_ATTRIBUTES, dwAccess uint32, lpName *string, pHandle *foundation.HANDLE) error {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)), uintptr(dwAccess), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(pHandle)))
 	return win32.ErrIfFailed(int32(r1))
 }

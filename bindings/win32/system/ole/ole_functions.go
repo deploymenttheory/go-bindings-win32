@@ -1860,8 +1860,8 @@ func OleGetClipboardWithEnterpriseInfo(dataObject **systemcom.IDataObject, dataE
 // OleGetIconOfClass calls OLE32!OleGetIconOfClass.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olegeticonofclass
 // Minimum OS: windows5.0.
-func OleGetIconOfClass(rclsid *win32.GUID, lpszLabel string, fUseTypeAsLabel bool) foundation.HGLOBAL {
-	_lpszLabel := win32.UTF16Ptr(lpszLabel)
+func OleGetIconOfClass(rclsid *win32.GUID, lpszLabel *string, fUseTypeAsLabel bool) foundation.HGLOBAL {
+	_lpszLabel := win32.UTF16PtrOrNil(lpszLabel)
 	_fUseTypeAsLabel := win32.Bool32(fUseTypeAsLabel)
 	r1, _, _ := syscall.SyscallN(procOleGetIconOfClass.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(_lpszLabel)), uintptr(_fUseTypeAsLabel))
 	return foundation.HGLOBAL(r1)
@@ -2135,8 +2135,8 @@ func OleTranslateColor(clr uint32, hpal graphicsgdi.HPALETTE, lpcolorref *founda
 // OleUIAddVerbMenu calls oledlg!OleUIAddVerbMenuW.
 // https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiaddverbmenuw
 // Minimum OS: windows5.0.
-func OleUIAddVerbMenu(lpOleObj *IOleObject, lpszShortType string, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
-	_lpszShortType := win32.UTF16Ptr(lpszShortType)
+func OleUIAddVerbMenu(lpOleObj *IOleObject, lpszShortType *string, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
+	_lpszShortType := win32.UTF16PtrOrNil(lpszShortType)
 	_bAddConvert := win32.Bool32(bAddConvert)
 	r1, _, _ := syscall.SyscallN(procOleUIAddVerbMenu.Addr(), uintptr(unsafe.Pointer(lpOleObj)), uintptr(unsafe.Pointer(_lpszShortType)), uintptr(hMenu), uintptr(uPos), uintptr(uIDVerbMin), uintptr(uIDVerbMax), uintptr(_bAddConvert), uintptr(idConvert), uintptr(unsafe.Pointer(lphMenu)))
 	return r1 != 0
@@ -2352,18 +2352,18 @@ func RegisterDragDrop(hwnd foundation.HWND, pDropTarget *IDropTarget) error {
 
 // RegisterTypeLib calls OLEAUT32!RegisterTypeLib.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registertypelib
-func RegisterTypeLib(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir string) error {
+func RegisterTypeLib(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir *string) error {
 	_szFullPath := win32.UTF16Ptr(szFullPath)
-	_szHelpDir := win32.UTF16Ptr(szHelpDir)
+	_szHelpDir := win32.UTF16PtrOrNil(szHelpDir)
 	r1, _, _ := syscall.SyscallN(procRegisterTypeLib.Addr(), uintptr(unsafe.Pointer(ptlib)), uintptr(unsafe.Pointer(_szFullPath)), uintptr(unsafe.Pointer(_szHelpDir)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterTypeLibForUser calls OLEAUT32!RegisterTypeLibForUser.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registertypelibforuser
-func RegisterTypeLibForUser(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir string) error {
+func RegisterTypeLibForUser(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir *string) error {
 	_szFullPath := win32.UTF16Ptr(szFullPath)
-	_szHelpDir := win32.UTF16Ptr(szHelpDir)
+	_szHelpDir := win32.UTF16PtrOrNil(szHelpDir)
 	r1, _, _ := syscall.SyscallN(procRegisterTypeLibForUser.Addr(), uintptr(unsafe.Pointer(ptlib)), uintptr(unsafe.Pointer(_szFullPath)), uintptr(unsafe.Pointer(_szHelpDir)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3437,8 +3437,8 @@ func VarFix(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) er
 
 // VarFormat calls OLEAUT32!VarFormat.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformat
-func VarFormat(pvarIn *systemvariant.VARIANT, pstrFormat string, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, dwFlags uint32, pbstrOut *foundation.BSTR) error {
-	_pstrFormat := win32.UTF16Ptr(pstrFormat)
+func VarFormat(pvarIn *systemvariant.VARIANT, pstrFormat *string, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, dwFlags uint32, pbstrOut *foundation.BSTR) error {
+	_pstrFormat := win32.UTF16PtrOrNil(pstrFormat)
 	r1, _, _ := syscall.SyscallN(procVarFormat.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(_pstrFormat)), uintptr(iFirstDay), uintptr(iFirstWeek), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3459,8 +3459,8 @@ func VarFormatDateTime(pvarIn *systemvariant.VARIANT, iNamedFormat VARFORMAT_NAM
 
 // VarFormatFromTokens calls OLEAUT32!VarFormatFromTokens.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformatfromtokens
-func VarFormatFromTokens(pvarIn *systemvariant.VARIANT, pstrFormat string, pbTokCur *byte, dwFlags uint32, pbstrOut *foundation.BSTR, lcid uint32) error {
-	_pstrFormat := win32.UTF16Ptr(pstrFormat)
+func VarFormatFromTokens(pvarIn *systemvariant.VARIANT, pstrFormat *string, pbTokCur *byte, dwFlags uint32, pbstrOut *foundation.BSTR, lcid uint32) error {
+	_pstrFormat := win32.UTF16PtrOrNil(pstrFormat)
 	r1, _, _ := syscall.SyscallN(procVarFormatFromTokens.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(_pstrFormat)), uintptr(unsafe.Pointer(pbTokCur)), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)), uintptr(lcid))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4268,8 +4268,8 @@ func VarSub(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, p
 
 // VarTokenizeFormatString calls OLEAUT32!VarTokenizeFormatString.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vartokenizeformatstring
-func VarTokenizeFormatString(pstrFormat string, rgbTok []byte, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, lcid uint32, pcbActual *int32) error {
-	_pstrFormat := win32.UTF16Ptr(pstrFormat)
+func VarTokenizeFormatString(pstrFormat *string, rgbTok []byte, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, lcid uint32, pcbActual *int32) error {
+	_pstrFormat := win32.UTF16PtrOrNil(pstrFormat)
 	var _rgbTok *byte
 	if len(rgbTok) > 0 {
 		_rgbTok = &rgbTok[0]

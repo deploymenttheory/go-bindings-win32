@@ -160,8 +160,8 @@ func (self *IDataModelManager) CreateNoValue(object **IModelObject) error {
 }
 
 // CreateErrorObject dispatches through IDataModelManager's vtable slot 5.
-func (self *IDataModelManager) CreateErrorObject(hrError foundation.HRESULT, pwszMessage string, object **IModelObject) error {
-	_pwszMessage := win32.UTF16Ptr(pwszMessage)
+func (self *IDataModelManager) CreateErrorObject(hrError foundation.HRESULT, pwszMessage *string, object **IModelObject) error {
+	_pwszMessage := win32.UTF16PtrOrNil(pwszMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hrError), uintptr(unsafe.Pointer(_pwszMessage)), uintptr(unsafe.Pointer(object)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -450,8 +450,8 @@ type IDataModelScriptClient struct {
 var IID_IDataModelScriptClient = win32.GUID{Data1: 0x3b362b0e, Data2: 0x89f0, Data3: 0x46c6, Data4: [8]byte{0xa6, 0x63, 0xdf, 0xdc, 0x95, 0x19, 0x4a, 0xef}}
 
 // ReportError dispatches through IDataModelScriptClient's vtable slot 3.
-func (self *IDataModelScriptClient) ReportError(errClass ErrorClass, hrFail foundation.HRESULT, message string, line uint32, position uint32) error {
-	_message := win32.UTF16Ptr(message)
+func (self *IDataModelScriptClient) ReportError(errClass ErrorClass, hrFail foundation.HRESULT, message *string, line uint32, position uint32) error {
+	_message := win32.UTF16PtrOrNil(message)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(errClass), uintptr(hrFail), uintptr(unsafe.Pointer(_message)), uintptr(line), uintptr(position))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2646,8 +2646,8 @@ func (self *IDebugClient3) CreateProcessWide(Server uint64, CommandLine string, 
 }
 
 // CreateProcessAndAttachWide dispatches through IDebugClient3's vtable slot 59.
-func (self *IDebugClient3) CreateProcessAndAttachWide(Server uint64, CommandLine string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient3) CreateProcessAndAttachWide(Server uint64, CommandLine *string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(CreateFlags), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3003,30 +3003,30 @@ func (self *IDebugClient4) CreateProcessWide(Server uint64, CommandLine string, 
 }
 
 // CreateProcessAndAttachWide dispatches through IDebugClient4's vtable slot 59.
-func (self *IDebugClient4) CreateProcessAndAttachWide(Server uint64, CommandLine string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient4) CreateProcessAndAttachWide(Server uint64, CommandLine *string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(CreateFlags), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenDumpFileWide dispatches through IDebugClient4's vtable slot 60.
-func (self *IDebugClient4) OpenDumpFileWide(FileName string, FileHandle uint64) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient4) OpenDumpFileWide(FileName *string, FileHandle uint64) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDumpFileWide dispatches through IDebugClient4's vtable slot 61.
-func (self *IDebugClient4) WriteDumpFileWide(FileName string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment string) error {
-	_FileName := win32.UTF16Ptr(FileName)
-	_Comment := win32.UTF16Ptr(Comment)
+func (self *IDebugClient4) WriteDumpFileWide(FileName *string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment *string) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
+	_Comment := win32.UTF16PtrOrNil(Comment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Qualifier), uintptr(FormatFlags), uintptr(unsafe.Pointer(_Comment)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDumpInformationFileWide dispatches through IDebugClient4's vtable slot 62.
-func (self *IDebugClient4) AddDumpInformationFileWide(FileName string, FileHandle uint64, Type uint32) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient4) AddDumpInformationFileWide(FileName *string, FileHandle uint64, Type uint32) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Type))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3400,30 +3400,30 @@ func (self *IDebugClient5) CreateProcessWide(Server uint64, CommandLine string, 
 }
 
 // CreateProcessAndAttachWide dispatches through IDebugClient5's vtable slot 59.
-func (self *IDebugClient5) CreateProcessAndAttachWide(Server uint64, CommandLine string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient5) CreateProcessAndAttachWide(Server uint64, CommandLine *string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(CreateFlags), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenDumpFileWide dispatches through IDebugClient5's vtable slot 60.
-func (self *IDebugClient5) OpenDumpFileWide(FileName string, FileHandle uint64) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient5) OpenDumpFileWide(FileName *string, FileHandle uint64) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDumpFileWide dispatches through IDebugClient5's vtable slot 61.
-func (self *IDebugClient5) WriteDumpFileWide(FileName string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment string) error {
-	_FileName := win32.UTF16Ptr(FileName)
-	_Comment := win32.UTF16Ptr(Comment)
+func (self *IDebugClient5) WriteDumpFileWide(FileName *string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment *string) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
+	_Comment := win32.UTF16PtrOrNil(Comment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Qualifier), uintptr(FormatFlags), uintptr(unsafe.Pointer(_Comment)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDumpInformationFileWide dispatches through IDebugClient5's vtable slot 62.
-func (self *IDebugClient5) AddDumpInformationFileWide(FileName string, FileHandle uint64, Type uint32) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient5) AddDumpInformationFileWide(FileName *string, FileHandle uint64, Type uint32) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Type))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3447,8 +3447,8 @@ func (self *IDebugClient5) GetDumpFileWide(Index uint32, Buffer foundation.PWSTR
 }
 
 // AttachKernelWide dispatches through IDebugClient5's vtable slot 66.
-func (self *IDebugClient5) AttachKernelWide(Flags uint32, ConnectOptions string) error {
-	_ConnectOptions := win32.UTF16Ptr(ConnectOptions)
+func (self *IDebugClient5) AttachKernelWide(Flags uint32, ConnectOptions *string) error {
+	_ConnectOptions := win32.UTF16PtrOrNil(ConnectOptions)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_ConnectOptions)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3513,8 +3513,8 @@ func (self *IDebugClient5) GetOutputLinePrefixWide(Buffer foundation.PWSTR, Buff
 }
 
 // SetOutputLinePrefixWide dispatches through IDebugClient5's vtable slot 76.
-func (self *IDebugClient5) SetOutputLinePrefixWide(Prefix string) error {
-	_Prefix := win32.UTF16Ptr(Prefix)
+func (self *IDebugClient5) SetOutputLinePrefixWide(Prefix *string) error {
+	_Prefix := win32.UTF16PtrOrNil(Prefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Prefix)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3555,14 +3555,14 @@ func (self *IDebugClient5) CreateProcess2(Server uint64, CommandLine foundation.
 }
 
 // CreateProcess2Wide dispatches through IDebugClient5's vtable slot 82.
-func (self *IDebugClient5) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
+func (self *IDebugClient5) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory *string, Environment *string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3578,14 +3578,14 @@ func (self *IDebugClient5) CreateProcessAndAttach2(Server uint64, CommandLine fo
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient5's vtable slot 84.
-func (self *IDebugClient5) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient5) CreateProcessAndAttach2Wide(Server uint64, CommandLine *string, OptionsBuffer []byte, InitialDirectory *string, Environment *string, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3597,8 +3597,8 @@ func (self *IDebugClient5) PushOutputLinePrefix(NewPrefix foundation.PSTR, Handl
 }
 
 // PushOutputLinePrefixWide dispatches through IDebugClient5's vtable slot 86.
-func (self *IDebugClient5) PushOutputLinePrefixWide(NewPrefix string, Handle *uint64) error {
-	_NewPrefix := win32.UTF16Ptr(NewPrefix)
+func (self *IDebugClient5) PushOutputLinePrefixWide(NewPrefix *string, Handle *uint64) error {
+	_NewPrefix := win32.UTF16PtrOrNil(NewPrefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewPrefix)), uintptr(unsafe.Pointer(Handle)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4003,30 +4003,30 @@ func (self *IDebugClient6) CreateProcessWide(Server uint64, CommandLine string, 
 }
 
 // CreateProcessAndAttachWide dispatches through IDebugClient6's vtable slot 59.
-func (self *IDebugClient6) CreateProcessAndAttachWide(Server uint64, CommandLine string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient6) CreateProcessAndAttachWide(Server uint64, CommandLine *string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(CreateFlags), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenDumpFileWide dispatches through IDebugClient6's vtable slot 60.
-func (self *IDebugClient6) OpenDumpFileWide(FileName string, FileHandle uint64) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient6) OpenDumpFileWide(FileName *string, FileHandle uint64) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDumpFileWide dispatches through IDebugClient6's vtable slot 61.
-func (self *IDebugClient6) WriteDumpFileWide(FileName string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment string) error {
-	_FileName := win32.UTF16Ptr(FileName)
-	_Comment := win32.UTF16Ptr(Comment)
+func (self *IDebugClient6) WriteDumpFileWide(FileName *string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment *string) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
+	_Comment := win32.UTF16PtrOrNil(Comment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Qualifier), uintptr(FormatFlags), uintptr(unsafe.Pointer(_Comment)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDumpInformationFileWide dispatches through IDebugClient6's vtable slot 62.
-func (self *IDebugClient6) AddDumpInformationFileWide(FileName string, FileHandle uint64, Type uint32) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient6) AddDumpInformationFileWide(FileName *string, FileHandle uint64, Type uint32) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Type))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4050,8 +4050,8 @@ func (self *IDebugClient6) GetDumpFileWide(Index uint32, Buffer foundation.PWSTR
 }
 
 // AttachKernelWide dispatches through IDebugClient6's vtable slot 66.
-func (self *IDebugClient6) AttachKernelWide(Flags uint32, ConnectOptions string) error {
-	_ConnectOptions := win32.UTF16Ptr(ConnectOptions)
+func (self *IDebugClient6) AttachKernelWide(Flags uint32, ConnectOptions *string) error {
+	_ConnectOptions := win32.UTF16PtrOrNil(ConnectOptions)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_ConnectOptions)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4116,8 +4116,8 @@ func (self *IDebugClient6) GetOutputLinePrefixWide(Buffer foundation.PWSTR, Buff
 }
 
 // SetOutputLinePrefixWide dispatches through IDebugClient6's vtable slot 76.
-func (self *IDebugClient6) SetOutputLinePrefixWide(Prefix string) error {
-	_Prefix := win32.UTF16Ptr(Prefix)
+func (self *IDebugClient6) SetOutputLinePrefixWide(Prefix *string) error {
+	_Prefix := win32.UTF16PtrOrNil(Prefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Prefix)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4158,14 +4158,14 @@ func (self *IDebugClient6) CreateProcess2(Server uint64, CommandLine foundation.
 }
 
 // CreateProcess2Wide dispatches through IDebugClient6's vtable slot 82.
-func (self *IDebugClient6) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
+func (self *IDebugClient6) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory *string, Environment *string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4181,14 +4181,14 @@ func (self *IDebugClient6) CreateProcessAndAttach2(Server uint64, CommandLine fo
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient6's vtable slot 84.
-func (self *IDebugClient6) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient6) CreateProcessAndAttach2Wide(Server uint64, CommandLine *string, OptionsBuffer []byte, InitialDirectory *string, Environment *string, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4200,8 +4200,8 @@ func (self *IDebugClient6) PushOutputLinePrefix(NewPrefix foundation.PSTR, Handl
 }
 
 // PushOutputLinePrefixWide dispatches through IDebugClient6's vtable slot 86.
-func (self *IDebugClient6) PushOutputLinePrefixWide(NewPrefix string, Handle *uint64) error {
-	_NewPrefix := win32.UTF16Ptr(NewPrefix)
+func (self *IDebugClient6) PushOutputLinePrefixWide(NewPrefix *string, Handle *uint64) error {
+	_NewPrefix := win32.UTF16PtrOrNil(NewPrefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewPrefix)), uintptr(unsafe.Pointer(Handle)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4612,30 +4612,30 @@ func (self *IDebugClient7) CreateProcessWide(Server uint64, CommandLine string, 
 }
 
 // CreateProcessAndAttachWide dispatches through IDebugClient7's vtable slot 59.
-func (self *IDebugClient7) CreateProcessAndAttachWide(Server uint64, CommandLine string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient7) CreateProcessAndAttachWide(Server uint64, CommandLine *string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(CreateFlags), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenDumpFileWide dispatches through IDebugClient7's vtable slot 60.
-func (self *IDebugClient7) OpenDumpFileWide(FileName string, FileHandle uint64) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient7) OpenDumpFileWide(FileName *string, FileHandle uint64) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDumpFileWide dispatches through IDebugClient7's vtable slot 61.
-func (self *IDebugClient7) WriteDumpFileWide(FileName string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment string) error {
-	_FileName := win32.UTF16Ptr(FileName)
-	_Comment := win32.UTF16Ptr(Comment)
+func (self *IDebugClient7) WriteDumpFileWide(FileName *string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment *string) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
+	_Comment := win32.UTF16PtrOrNil(Comment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Qualifier), uintptr(FormatFlags), uintptr(unsafe.Pointer(_Comment)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDumpInformationFileWide dispatches through IDebugClient7's vtable slot 62.
-func (self *IDebugClient7) AddDumpInformationFileWide(FileName string, FileHandle uint64, Type uint32) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient7) AddDumpInformationFileWide(FileName *string, FileHandle uint64, Type uint32) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Type))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4659,8 +4659,8 @@ func (self *IDebugClient7) GetDumpFileWide(Index uint32, Buffer foundation.PWSTR
 }
 
 // AttachKernelWide dispatches through IDebugClient7's vtable slot 66.
-func (self *IDebugClient7) AttachKernelWide(Flags uint32, ConnectOptions string) error {
-	_ConnectOptions := win32.UTF16Ptr(ConnectOptions)
+func (self *IDebugClient7) AttachKernelWide(Flags uint32, ConnectOptions *string) error {
+	_ConnectOptions := win32.UTF16PtrOrNil(ConnectOptions)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_ConnectOptions)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4725,8 +4725,8 @@ func (self *IDebugClient7) GetOutputLinePrefixWide(Buffer foundation.PWSTR, Buff
 }
 
 // SetOutputLinePrefixWide dispatches through IDebugClient7's vtable slot 76.
-func (self *IDebugClient7) SetOutputLinePrefixWide(Prefix string) error {
-	_Prefix := win32.UTF16Ptr(Prefix)
+func (self *IDebugClient7) SetOutputLinePrefixWide(Prefix *string) error {
+	_Prefix := win32.UTF16PtrOrNil(Prefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Prefix)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4767,14 +4767,14 @@ func (self *IDebugClient7) CreateProcess2(Server uint64, CommandLine foundation.
 }
 
 // CreateProcess2Wide dispatches through IDebugClient7's vtable slot 82.
-func (self *IDebugClient7) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
+func (self *IDebugClient7) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory *string, Environment *string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4790,14 +4790,14 @@ func (self *IDebugClient7) CreateProcessAndAttach2(Server uint64, CommandLine fo
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient7's vtable slot 84.
-func (self *IDebugClient7) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient7) CreateProcessAndAttach2Wide(Server uint64, CommandLine *string, OptionsBuffer []byte, InitialDirectory *string, Environment *string, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4809,8 +4809,8 @@ func (self *IDebugClient7) PushOutputLinePrefix(NewPrefix foundation.PSTR, Handl
 }
 
 // PushOutputLinePrefixWide dispatches through IDebugClient7's vtable slot 86.
-func (self *IDebugClient7) PushOutputLinePrefixWide(NewPrefix string, Handle *uint64) error {
-	_NewPrefix := win32.UTF16Ptr(NewPrefix)
+func (self *IDebugClient7) PushOutputLinePrefixWide(NewPrefix *string, Handle *uint64) error {
+	_NewPrefix := win32.UTF16PtrOrNil(NewPrefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewPrefix)), uintptr(unsafe.Pointer(Handle)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5231,30 +5231,30 @@ func (self *IDebugClient8) CreateProcessWide(Server uint64, CommandLine string, 
 }
 
 // CreateProcessAndAttachWide dispatches through IDebugClient8's vtable slot 59.
-func (self *IDebugClient8) CreateProcessAndAttachWide(Server uint64, CommandLine string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient8) CreateProcessAndAttachWide(Server uint64, CommandLine *string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(CreateFlags), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenDumpFileWide dispatches through IDebugClient8's vtable slot 60.
-func (self *IDebugClient8) OpenDumpFileWide(FileName string, FileHandle uint64) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient8) OpenDumpFileWide(FileName *string, FileHandle uint64) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDumpFileWide dispatches through IDebugClient8's vtable slot 61.
-func (self *IDebugClient8) WriteDumpFileWide(FileName string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment string) error {
-	_FileName := win32.UTF16Ptr(FileName)
-	_Comment := win32.UTF16Ptr(Comment)
+func (self *IDebugClient8) WriteDumpFileWide(FileName *string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment *string) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
+	_Comment := win32.UTF16PtrOrNil(Comment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Qualifier), uintptr(FormatFlags), uintptr(unsafe.Pointer(_Comment)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDumpInformationFileWide dispatches through IDebugClient8's vtable slot 62.
-func (self *IDebugClient8) AddDumpInformationFileWide(FileName string, FileHandle uint64, Type uint32) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient8) AddDumpInformationFileWide(FileName *string, FileHandle uint64, Type uint32) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Type))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5278,8 +5278,8 @@ func (self *IDebugClient8) GetDumpFileWide(Index uint32, Buffer foundation.PWSTR
 }
 
 // AttachKernelWide dispatches through IDebugClient8's vtable slot 66.
-func (self *IDebugClient8) AttachKernelWide(Flags uint32, ConnectOptions string) error {
-	_ConnectOptions := win32.UTF16Ptr(ConnectOptions)
+func (self *IDebugClient8) AttachKernelWide(Flags uint32, ConnectOptions *string) error {
+	_ConnectOptions := win32.UTF16PtrOrNil(ConnectOptions)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_ConnectOptions)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5344,8 +5344,8 @@ func (self *IDebugClient8) GetOutputLinePrefixWide(Buffer foundation.PWSTR, Buff
 }
 
 // SetOutputLinePrefixWide dispatches through IDebugClient8's vtable slot 76.
-func (self *IDebugClient8) SetOutputLinePrefixWide(Prefix string) error {
-	_Prefix := win32.UTF16Ptr(Prefix)
+func (self *IDebugClient8) SetOutputLinePrefixWide(Prefix *string) error {
+	_Prefix := win32.UTF16PtrOrNil(Prefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Prefix)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5386,14 +5386,14 @@ func (self *IDebugClient8) CreateProcess2(Server uint64, CommandLine foundation.
 }
 
 // CreateProcess2Wide dispatches through IDebugClient8's vtable slot 82.
-func (self *IDebugClient8) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
+func (self *IDebugClient8) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory *string, Environment *string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5409,14 +5409,14 @@ func (self *IDebugClient8) CreateProcessAndAttach2(Server uint64, CommandLine fo
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient8's vtable slot 84.
-func (self *IDebugClient8) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient8) CreateProcessAndAttach2Wide(Server uint64, CommandLine *string, OptionsBuffer []byte, InitialDirectory *string, Environment *string, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5428,8 +5428,8 @@ func (self *IDebugClient8) PushOutputLinePrefix(NewPrefix foundation.PSTR, Handl
 }
 
 // PushOutputLinePrefixWide dispatches through IDebugClient8's vtable slot 86.
-func (self *IDebugClient8) PushOutputLinePrefixWide(NewPrefix string, Handle *uint64) error {
-	_NewPrefix := win32.UTF16Ptr(NewPrefix)
+func (self *IDebugClient8) PushOutputLinePrefixWide(NewPrefix *string, Handle *uint64) error {
+	_NewPrefix := win32.UTF16PtrOrNil(NewPrefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewPrefix)), uintptr(unsafe.Pointer(Handle)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5500,8 +5500,8 @@ func (self *IDebugClient8) SetClientContext(Context []byte) error {
 }
 
 // OpenDumpFileWide2 dispatches through IDebugClient8's vtable slot 97.
-func (self *IDebugClient8) OpenDumpFileWide2(FileName string, FileHandle uint64, AlternateArch uint32) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient8) OpenDumpFileWide2(FileName *string, FileHandle uint64, AlternateArch uint32) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(AlternateArch))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5857,30 +5857,30 @@ func (self *IDebugClient9) CreateProcessWide(Server uint64, CommandLine string, 
 }
 
 // CreateProcessAndAttachWide dispatches through IDebugClient9's vtable slot 59.
-func (self *IDebugClient9) CreateProcessAndAttachWide(Server uint64, CommandLine string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient9) CreateProcessAndAttachWide(Server uint64, CommandLine *string, CreateFlags uint32, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(CreateFlags), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenDumpFileWide dispatches through IDebugClient9's vtable slot 60.
-func (self *IDebugClient9) OpenDumpFileWide(FileName string, FileHandle uint64) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient9) OpenDumpFileWide(FileName *string, FileHandle uint64) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDumpFileWide dispatches through IDebugClient9's vtable slot 61.
-func (self *IDebugClient9) WriteDumpFileWide(FileName string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment string) error {
-	_FileName := win32.UTF16Ptr(FileName)
-	_Comment := win32.UTF16Ptr(Comment)
+func (self *IDebugClient9) WriteDumpFileWide(FileName *string, FileHandle uint64, Qualifier uint32, FormatFlags uint32, Comment *string) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
+	_Comment := win32.UTF16PtrOrNil(Comment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Qualifier), uintptr(FormatFlags), uintptr(unsafe.Pointer(_Comment)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDumpInformationFileWide dispatches through IDebugClient9's vtable slot 62.
-func (self *IDebugClient9) AddDumpInformationFileWide(FileName string, FileHandle uint64, Type uint32) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient9) AddDumpInformationFileWide(FileName *string, FileHandle uint64, Type uint32) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(Type))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5904,8 +5904,8 @@ func (self *IDebugClient9) GetDumpFileWide(Index uint32, Buffer foundation.PWSTR
 }
 
 // AttachKernelWide dispatches through IDebugClient9's vtable slot 66.
-func (self *IDebugClient9) AttachKernelWide(Flags uint32, ConnectOptions string) error {
-	_ConnectOptions := win32.UTF16Ptr(ConnectOptions)
+func (self *IDebugClient9) AttachKernelWide(Flags uint32, ConnectOptions *string) error {
+	_ConnectOptions := win32.UTF16PtrOrNil(ConnectOptions)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_ConnectOptions)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5970,8 +5970,8 @@ func (self *IDebugClient9) GetOutputLinePrefixWide(Buffer foundation.PWSTR, Buff
 }
 
 // SetOutputLinePrefixWide dispatches through IDebugClient9's vtable slot 76.
-func (self *IDebugClient9) SetOutputLinePrefixWide(Prefix string) error {
-	_Prefix := win32.UTF16Ptr(Prefix)
+func (self *IDebugClient9) SetOutputLinePrefixWide(Prefix *string) error {
+	_Prefix := win32.UTF16PtrOrNil(Prefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Prefix)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -6012,14 +6012,14 @@ func (self *IDebugClient9) CreateProcess2(Server uint64, CommandLine foundation.
 }
 
 // CreateProcess2Wide dispatches through IDebugClient9's vtable slot 82.
-func (self *IDebugClient9) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
+func (self *IDebugClient9) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory *string, Environment *string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -6035,14 +6035,14 @@ func (self *IDebugClient9) CreateProcessAndAttach2(Server uint64, CommandLine fo
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient9's vtable slot 84.
-func (self *IDebugClient9) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
-	_CommandLine := win32.UTF16Ptr(CommandLine)
+func (self *IDebugClient9) CreateProcessAndAttach2Wide(Server uint64, CommandLine *string, OptionsBuffer []byte, InitialDirectory *string, Environment *string, ProcessId uint32, AttachFlags uint32) error {
+	_CommandLine := win32.UTF16PtrOrNil(CommandLine)
 	var _OptionsBuffer *byte
 	if len(OptionsBuffer) > 0 {
 		_OptionsBuffer = &OptionsBuffer[0]
 	}
-	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
-	_Environment := win32.UTF16Ptr(Environment)
+	_InitialDirectory := win32.UTF16PtrOrNil(InitialDirectory)
+	_Environment := win32.UTF16PtrOrNil(Environment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -6054,8 +6054,8 @@ func (self *IDebugClient9) PushOutputLinePrefix(NewPrefix foundation.PSTR, Handl
 }
 
 // PushOutputLinePrefixWide dispatches through IDebugClient9's vtable slot 86.
-func (self *IDebugClient9) PushOutputLinePrefixWide(NewPrefix string, Handle *uint64) error {
-	_NewPrefix := win32.UTF16Ptr(NewPrefix)
+func (self *IDebugClient9) PushOutputLinePrefixWide(NewPrefix *string, Handle *uint64) error {
+	_NewPrefix := win32.UTF16PtrOrNil(NewPrefix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_NewPrefix)), uintptr(unsafe.Pointer(Handle)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -6126,15 +6126,15 @@ func (self *IDebugClient9) SetClientContext(Context []byte) error {
 }
 
 // OpenDumpFileWide2 dispatches through IDebugClient9's vtable slot 97.
-func (self *IDebugClient9) OpenDumpFileWide2(FileName string, FileHandle uint64, AlternateArch uint32) error {
-	_FileName := win32.UTF16Ptr(FileName)
+func (self *IDebugClient9) OpenDumpFileWide2(FileName *string, FileHandle uint64, AlternateArch uint32) error {
+	_FileName := win32.UTF16PtrOrNil(FileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_FileName)), uintptr(FileHandle), uintptr(AlternateArch))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OpenDumpDirectoryWide dispatches through IDebugClient9's vtable slot 98.
-func (self *IDebugClient9) OpenDumpDirectoryWide(DirName string, AlternateArch uint32) error {
-	_DirName := win32.UTF16Ptr(DirName)
+func (self *IDebugClient9) OpenDumpDirectoryWide(DirName *string, AlternateArch uint32) error {
+	_DirName := win32.UTF16PtrOrNil(DirName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_DirName)), uintptr(AlternateArch))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -8889,15 +8889,15 @@ func (self *IDebugControl4) ControlledOutputVaListWide(OutputControl uint32, Mas
 }
 
 // OutputPromptWide dispatches through IDebugControl4's vtable slot 124.
-func (self *IDebugControl4) OutputPromptWide(OutputControl uint32, Format string) error {
-	_Format := win32.UTF16Ptr(Format)
+func (self *IDebugControl4) OutputPromptWide(OutputControl uint32, Format *string) error {
+	_Format := win32.UTF16PtrOrNil(Format)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Format)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OutputPromptVaListWide dispatches through IDebugControl4's vtable slot 125.
-func (self *IDebugControl4) OutputPromptVaListWide(OutputControl uint32, Format string, Args *int8) error {
-	_Format := win32.UTF16Ptr(Format)
+func (self *IDebugControl4) OutputPromptVaListWide(OutputControl uint32, Format *string, Args *int8) error {
+	_Format := win32.UTF16PtrOrNil(Format)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[125], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Format)), uintptr(unsafe.Pointer(Args)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -9000,9 +9000,9 @@ func (self *IDebugControl4) GetExtensionByPathWide(Path string, Handle *uint64) 
 }
 
 // CallExtensionWide dispatches through IDebugControl4's vtable slot 141.
-func (self *IDebugControl4) CallExtensionWide(Handle uint64, Function string, Arguments string) error {
+func (self *IDebugControl4) CallExtensionWide(Handle uint64, Function string, Arguments *string) error {
 	_Function := win32.UTF16Ptr(Function)
-	_Arguments := win32.UTF16Ptr(Arguments)
+	_Arguments := win32.UTF16PtrOrNil(Arguments)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[141], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(unsafe.Pointer(_Function)), uintptr(unsafe.Pointer(_Arguments)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -9070,16 +9070,16 @@ func (self *IDebugControl4) GetLastEventInformationWide(Type *uint32, ProcessId 
 }
 
 // GetTextReplacementWide dispatches through IDebugControl4's vtable slot 151.
-func (self *IDebugControl4) GetTextReplacementWide(SrcText string, Index uint32, SrcBuffer foundation.PWSTR, SrcBufferSize uint32, SrcSize *uint32, DstBuffer foundation.PWSTR, DstBufferSize uint32, DstSize *uint32) error {
-	_SrcText := win32.UTF16Ptr(SrcText)
+func (self *IDebugControl4) GetTextReplacementWide(SrcText *string, Index uint32, SrcBuffer foundation.PWSTR, SrcBufferSize uint32, SrcSize *uint32, DstBuffer foundation.PWSTR, DstBufferSize uint32, DstSize *uint32) error {
+	_SrcText := win32.UTF16PtrOrNil(SrcText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[151], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SrcText)), uintptr(Index), uintptr(unsafe.Pointer(SrcBuffer)), uintptr(SrcBufferSize), uintptr(unsafe.Pointer(SrcSize)), uintptr(unsafe.Pointer(DstBuffer)), uintptr(DstBufferSize), uintptr(unsafe.Pointer(DstSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTextReplacementWide dispatches through IDebugControl4's vtable slot 152.
-func (self *IDebugControl4) SetTextReplacementWide(SrcText string, DstText string) error {
+func (self *IDebugControl4) SetTextReplacementWide(SrcText string, DstText *string) error {
 	_SrcText := win32.UTF16Ptr(SrcText)
-	_DstText := win32.UTF16Ptr(DstText)
+	_DstText := win32.UTF16PtrOrNil(DstText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[152], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SrcText)), uintptr(unsafe.Pointer(_DstText)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -9098,8 +9098,8 @@ func (self *IDebugControl4) GetExpressionSyntaxNamesWide(Index uint32, FullNameB
 }
 
 // GetEventIndexDescriptionWide dispatches through IDebugControl4's vtable slot 155.
-func (self *IDebugControl4) GetEventIndexDescriptionWide(Index uint32, Which uint32, Buffer string, BufferSize uint32, DescSize *uint32) error {
-	_Buffer := win32.UTF16Ptr(Buffer)
+func (self *IDebugControl4) GetEventIndexDescriptionWide(Index uint32, Which uint32, Buffer *string, BufferSize uint32, DescSize *uint32) error {
+	_Buffer := win32.UTF16PtrOrNil(Buffer)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[155], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Which), uintptr(unsafe.Pointer(_Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DescSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -9990,15 +9990,15 @@ func (self *IDebugControl5) ControlledOutputVaListWide(OutputControl uint32, Mas
 }
 
 // OutputPromptWide dispatches through IDebugControl5's vtable slot 124.
-func (self *IDebugControl5) OutputPromptWide(OutputControl uint32, Format string) error {
-	_Format := win32.UTF16Ptr(Format)
+func (self *IDebugControl5) OutputPromptWide(OutputControl uint32, Format *string) error {
+	_Format := win32.UTF16PtrOrNil(Format)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Format)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OutputPromptVaListWide dispatches through IDebugControl5's vtable slot 125.
-func (self *IDebugControl5) OutputPromptVaListWide(OutputControl uint32, Format string, Args *int8) error {
-	_Format := win32.UTF16Ptr(Format)
+func (self *IDebugControl5) OutputPromptVaListWide(OutputControl uint32, Format *string, Args *int8) error {
+	_Format := win32.UTF16PtrOrNil(Format)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[125], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Format)), uintptr(unsafe.Pointer(Args)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -10101,9 +10101,9 @@ func (self *IDebugControl5) GetExtensionByPathWide(Path string, Handle *uint64) 
 }
 
 // CallExtensionWide dispatches through IDebugControl5's vtable slot 141.
-func (self *IDebugControl5) CallExtensionWide(Handle uint64, Function string, Arguments string) error {
+func (self *IDebugControl5) CallExtensionWide(Handle uint64, Function string, Arguments *string) error {
 	_Function := win32.UTF16Ptr(Function)
-	_Arguments := win32.UTF16Ptr(Arguments)
+	_Arguments := win32.UTF16PtrOrNil(Arguments)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[141], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(unsafe.Pointer(_Function)), uintptr(unsafe.Pointer(_Arguments)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -10171,16 +10171,16 @@ func (self *IDebugControl5) GetLastEventInformationWide(Type *uint32, ProcessId 
 }
 
 // GetTextReplacementWide dispatches through IDebugControl5's vtable slot 151.
-func (self *IDebugControl5) GetTextReplacementWide(SrcText string, Index uint32, SrcBuffer foundation.PWSTR, SrcBufferSize uint32, SrcSize *uint32, DstBuffer foundation.PWSTR, DstBufferSize uint32, DstSize *uint32) error {
-	_SrcText := win32.UTF16Ptr(SrcText)
+func (self *IDebugControl5) GetTextReplacementWide(SrcText *string, Index uint32, SrcBuffer foundation.PWSTR, SrcBufferSize uint32, SrcSize *uint32, DstBuffer foundation.PWSTR, DstBufferSize uint32, DstSize *uint32) error {
+	_SrcText := win32.UTF16PtrOrNil(SrcText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[151], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SrcText)), uintptr(Index), uintptr(unsafe.Pointer(SrcBuffer)), uintptr(SrcBufferSize), uintptr(unsafe.Pointer(SrcSize)), uintptr(unsafe.Pointer(DstBuffer)), uintptr(DstBufferSize), uintptr(unsafe.Pointer(DstSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTextReplacementWide dispatches through IDebugControl5's vtable slot 152.
-func (self *IDebugControl5) SetTextReplacementWide(SrcText string, DstText string) error {
+func (self *IDebugControl5) SetTextReplacementWide(SrcText string, DstText *string) error {
 	_SrcText := win32.UTF16Ptr(SrcText)
-	_DstText := win32.UTF16Ptr(DstText)
+	_DstText := win32.UTF16PtrOrNil(DstText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[152], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SrcText)), uintptr(unsafe.Pointer(_DstText)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -10199,8 +10199,8 @@ func (self *IDebugControl5) GetExpressionSyntaxNamesWide(Index uint32, FullNameB
 }
 
 // GetEventIndexDescriptionWide dispatches through IDebugControl5's vtable slot 155.
-func (self *IDebugControl5) GetEventIndexDescriptionWide(Index uint32, Which uint32, Buffer string, BufferSize uint32, DescSize *uint32) error {
-	_Buffer := win32.UTF16Ptr(Buffer)
+func (self *IDebugControl5) GetEventIndexDescriptionWide(Index uint32, Which uint32, Buffer *string, BufferSize uint32, DescSize *uint32) error {
+	_Buffer := win32.UTF16PtrOrNil(Buffer)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[155], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Which), uintptr(unsafe.Pointer(_Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DescSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -11149,15 +11149,15 @@ func (self *IDebugControl6) ControlledOutputVaListWide(OutputControl uint32, Mas
 }
 
 // OutputPromptWide dispatches through IDebugControl6's vtable slot 124.
-func (self *IDebugControl6) OutputPromptWide(OutputControl uint32, Format string) error {
-	_Format := win32.UTF16Ptr(Format)
+func (self *IDebugControl6) OutputPromptWide(OutputControl uint32, Format *string) error {
+	_Format := win32.UTF16PtrOrNil(Format)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Format)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OutputPromptVaListWide dispatches through IDebugControl6's vtable slot 125.
-func (self *IDebugControl6) OutputPromptVaListWide(OutputControl uint32, Format string, Args *int8) error {
-	_Format := win32.UTF16Ptr(Format)
+func (self *IDebugControl6) OutputPromptVaListWide(OutputControl uint32, Format *string, Args *int8) error {
+	_Format := win32.UTF16PtrOrNil(Format)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[125], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Format)), uintptr(unsafe.Pointer(Args)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -11260,9 +11260,9 @@ func (self *IDebugControl6) GetExtensionByPathWide(Path string, Handle *uint64) 
 }
 
 // CallExtensionWide dispatches through IDebugControl6's vtable slot 141.
-func (self *IDebugControl6) CallExtensionWide(Handle uint64, Function string, Arguments string) error {
+func (self *IDebugControl6) CallExtensionWide(Handle uint64, Function string, Arguments *string) error {
 	_Function := win32.UTF16Ptr(Function)
-	_Arguments := win32.UTF16Ptr(Arguments)
+	_Arguments := win32.UTF16PtrOrNil(Arguments)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[141], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(unsafe.Pointer(_Function)), uintptr(unsafe.Pointer(_Arguments)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -11330,16 +11330,16 @@ func (self *IDebugControl6) GetLastEventInformationWide(Type *uint32, ProcessId 
 }
 
 // GetTextReplacementWide dispatches through IDebugControl6's vtable slot 151.
-func (self *IDebugControl6) GetTextReplacementWide(SrcText string, Index uint32, SrcBuffer foundation.PWSTR, SrcBufferSize uint32, SrcSize *uint32, DstBuffer foundation.PWSTR, DstBufferSize uint32, DstSize *uint32) error {
-	_SrcText := win32.UTF16Ptr(SrcText)
+func (self *IDebugControl6) GetTextReplacementWide(SrcText *string, Index uint32, SrcBuffer foundation.PWSTR, SrcBufferSize uint32, SrcSize *uint32, DstBuffer foundation.PWSTR, DstBufferSize uint32, DstSize *uint32) error {
+	_SrcText := win32.UTF16PtrOrNil(SrcText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[151], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SrcText)), uintptr(Index), uintptr(unsafe.Pointer(SrcBuffer)), uintptr(SrcBufferSize), uintptr(unsafe.Pointer(SrcSize)), uintptr(unsafe.Pointer(DstBuffer)), uintptr(DstBufferSize), uintptr(unsafe.Pointer(DstSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTextReplacementWide dispatches through IDebugControl6's vtable slot 152.
-func (self *IDebugControl6) SetTextReplacementWide(SrcText string, DstText string) error {
+func (self *IDebugControl6) SetTextReplacementWide(SrcText string, DstText *string) error {
 	_SrcText := win32.UTF16Ptr(SrcText)
-	_DstText := win32.UTF16Ptr(DstText)
+	_DstText := win32.UTF16PtrOrNil(DstText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[152], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SrcText)), uintptr(unsafe.Pointer(_DstText)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -11358,8 +11358,8 @@ func (self *IDebugControl6) GetExpressionSyntaxNamesWide(Index uint32, FullNameB
 }
 
 // GetEventIndexDescriptionWide dispatches through IDebugControl6's vtable slot 155.
-func (self *IDebugControl6) GetEventIndexDescriptionWide(Index uint32, Which uint32, Buffer string, BufferSize uint32, DescSize *uint32) error {
-	_Buffer := win32.UTF16Ptr(Buffer)
+func (self *IDebugControl6) GetEventIndexDescriptionWide(Index uint32, Which uint32, Buffer *string, BufferSize uint32, DescSize *uint32) error {
+	_Buffer := win32.UTF16PtrOrNil(Buffer)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[155], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Which), uintptr(unsafe.Pointer(_Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DescSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -12320,15 +12320,15 @@ func (self *IDebugControl7) ControlledOutputVaListWide(OutputControl uint32, Mas
 }
 
 // OutputPromptWide dispatches through IDebugControl7's vtable slot 124.
-func (self *IDebugControl7) OutputPromptWide(OutputControl uint32, Format string) error {
-	_Format := win32.UTF16Ptr(Format)
+func (self *IDebugControl7) OutputPromptWide(OutputControl uint32, Format *string) error {
+	_Format := win32.UTF16PtrOrNil(Format)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Format)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OutputPromptVaListWide dispatches through IDebugControl7's vtable slot 125.
-func (self *IDebugControl7) OutputPromptVaListWide(OutputControl uint32, Format string, Args *int8) error {
-	_Format := win32.UTF16Ptr(Format)
+func (self *IDebugControl7) OutputPromptVaListWide(OutputControl uint32, Format *string, Args *int8) error {
+	_Format := win32.UTF16PtrOrNil(Format)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[125], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Format)), uintptr(unsafe.Pointer(Args)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -12431,9 +12431,9 @@ func (self *IDebugControl7) GetExtensionByPathWide(Path string, Handle *uint64) 
 }
 
 // CallExtensionWide dispatches through IDebugControl7's vtable slot 141.
-func (self *IDebugControl7) CallExtensionWide(Handle uint64, Function string, Arguments string) error {
+func (self *IDebugControl7) CallExtensionWide(Handle uint64, Function string, Arguments *string) error {
 	_Function := win32.UTF16Ptr(Function)
-	_Arguments := win32.UTF16Ptr(Arguments)
+	_Arguments := win32.UTF16PtrOrNil(Arguments)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[141], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(unsafe.Pointer(_Function)), uintptr(unsafe.Pointer(_Arguments)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -12501,16 +12501,16 @@ func (self *IDebugControl7) GetLastEventInformationWide(Type *uint32, ProcessId 
 }
 
 // GetTextReplacementWide dispatches through IDebugControl7's vtable slot 151.
-func (self *IDebugControl7) GetTextReplacementWide(SrcText string, Index uint32, SrcBuffer foundation.PWSTR, SrcBufferSize uint32, SrcSize *uint32, DstBuffer foundation.PWSTR, DstBufferSize uint32, DstSize *uint32) error {
-	_SrcText := win32.UTF16Ptr(SrcText)
+func (self *IDebugControl7) GetTextReplacementWide(SrcText *string, Index uint32, SrcBuffer foundation.PWSTR, SrcBufferSize uint32, SrcSize *uint32, DstBuffer foundation.PWSTR, DstBufferSize uint32, DstSize *uint32) error {
+	_SrcText := win32.UTF16PtrOrNil(SrcText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[151], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SrcText)), uintptr(Index), uintptr(unsafe.Pointer(SrcBuffer)), uintptr(SrcBufferSize), uintptr(unsafe.Pointer(SrcSize)), uintptr(unsafe.Pointer(DstBuffer)), uintptr(DstBufferSize), uintptr(unsafe.Pointer(DstSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetTextReplacementWide dispatches through IDebugControl7's vtable slot 152.
-func (self *IDebugControl7) SetTextReplacementWide(SrcText string, DstText string) error {
+func (self *IDebugControl7) SetTextReplacementWide(SrcText string, DstText *string) error {
 	_SrcText := win32.UTF16Ptr(SrcText)
-	_DstText := win32.UTF16Ptr(DstText)
+	_DstText := win32.UTF16PtrOrNil(DstText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[152], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SrcText)), uintptr(unsafe.Pointer(_DstText)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -12529,8 +12529,8 @@ func (self *IDebugControl7) GetExpressionSyntaxNamesWide(Index uint32, FullNameB
 }
 
 // GetEventIndexDescriptionWide dispatches through IDebugControl7's vtable slot 155.
-func (self *IDebugControl7) GetEventIndexDescriptionWide(Index uint32, Which uint32, Buffer string, BufferSize uint32, DescSize *uint32) error {
-	_Buffer := win32.UTF16Ptr(Buffer)
+func (self *IDebugControl7) GetEventIndexDescriptionWide(Index uint32, Which uint32, Buffer *string, BufferSize uint32, DescSize *uint32) error {
+	_Buffer := win32.UTF16PtrOrNil(Buffer)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[155], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Which), uintptr(unsafe.Pointer(_Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DescSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -13933,9 +13933,9 @@ func (self *IDebugEventCallbacksWide) ExitThread(ExitCode uint32) error {
 }
 
 // CreateProcessA dispatches through IDebugEventCallbacksWide's vtable slot 8.
-func (self *IDebugEventCallbacksWide) CreateProcessA(ImageFileHandle uint64, Handle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName string, ImageName string, CheckSum uint32, TimeDateStamp uint32, InitialThreadHandle uint64, ThreadDataOffset uint64, StartOffset uint64) error {
-	_ModuleName := win32.UTF16Ptr(ModuleName)
-	_ImageName := win32.UTF16Ptr(ImageName)
+func (self *IDebugEventCallbacksWide) CreateProcessA(ImageFileHandle uint64, Handle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName *string, ImageName *string, CheckSum uint32, TimeDateStamp uint32, InitialThreadHandle uint64, ThreadDataOffset uint64, StartOffset uint64) error {
+	_ModuleName := win32.UTF16PtrOrNil(ModuleName)
+	_ImageName := win32.UTF16PtrOrNil(ImageName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ImageFileHandle), uintptr(Handle), uintptr(BaseOffset), uintptr(ModuleSize), uintptr(unsafe.Pointer(_ModuleName)), uintptr(unsafe.Pointer(_ImageName)), uintptr(CheckSum), uintptr(TimeDateStamp), uintptr(InitialThreadHandle), uintptr(ThreadDataOffset), uintptr(StartOffset))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -13947,16 +13947,16 @@ func (self *IDebugEventCallbacksWide) ExitProcess(ExitCode uint32) error {
 }
 
 // LoadModule dispatches through IDebugEventCallbacksWide's vtable slot 10.
-func (self *IDebugEventCallbacksWide) LoadModule(ImageFileHandle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName string, ImageName string, CheckSum uint32, TimeDateStamp uint32) error {
-	_ModuleName := win32.UTF16Ptr(ModuleName)
-	_ImageName := win32.UTF16Ptr(ImageName)
+func (self *IDebugEventCallbacksWide) LoadModule(ImageFileHandle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName *string, ImageName *string, CheckSum uint32, TimeDateStamp uint32) error {
+	_ModuleName := win32.UTF16PtrOrNil(ModuleName)
+	_ImageName := win32.UTF16PtrOrNil(ImageName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ImageFileHandle), uintptr(BaseOffset), uintptr(ModuleSize), uintptr(unsafe.Pointer(_ModuleName)), uintptr(unsafe.Pointer(_ImageName)), uintptr(CheckSum), uintptr(TimeDateStamp))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnloadModule dispatches through IDebugEventCallbacksWide's vtable slot 11.
-func (self *IDebugEventCallbacksWide) UnloadModule(ImageBaseName string, BaseOffset uint64) error {
-	_ImageBaseName := win32.UTF16Ptr(ImageBaseName)
+func (self *IDebugEventCallbacksWide) UnloadModule(ImageBaseName *string, BaseOffset uint64) error {
+	_ImageBaseName := win32.UTF16PtrOrNil(ImageBaseName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ImageBaseName)), uintptr(BaseOffset))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -14046,9 +14046,9 @@ func (self *IDebugEventContextCallbacks) ExitThread(ExitCode uint32, Context []b
 }
 
 // CreateProcessA dispatches through IDebugEventContextCallbacks's vtable slot 8.
-func (self *IDebugEventContextCallbacks) CreateProcessA(ImageFileHandle uint64, Handle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName string, ImageName string, CheckSum uint32, TimeDateStamp uint32, InitialThreadHandle uint64, ThreadDataOffset uint64, StartOffset uint64, Context []byte) error {
-	_ModuleName := win32.UTF16Ptr(ModuleName)
-	_ImageName := win32.UTF16Ptr(ImageName)
+func (self *IDebugEventContextCallbacks) CreateProcessA(ImageFileHandle uint64, Handle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName *string, ImageName *string, CheckSum uint32, TimeDateStamp uint32, InitialThreadHandle uint64, ThreadDataOffset uint64, StartOffset uint64, Context []byte) error {
+	_ModuleName := win32.UTF16PtrOrNil(ModuleName)
+	_ImageName := win32.UTF16PtrOrNil(ImageName)
 	var _Context *byte
 	if len(Context) > 0 {
 		_Context = &Context[0]
@@ -14068,9 +14068,9 @@ func (self *IDebugEventContextCallbacks) ExitProcess(ExitCode uint32, Context []
 }
 
 // LoadModule dispatches through IDebugEventContextCallbacks's vtable slot 10.
-func (self *IDebugEventContextCallbacks) LoadModule(ImageFileHandle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName string, ImageName string, CheckSum uint32, TimeDateStamp uint32, Context []byte) error {
-	_ModuleName := win32.UTF16Ptr(ModuleName)
-	_ImageName := win32.UTF16Ptr(ImageName)
+func (self *IDebugEventContextCallbacks) LoadModule(ImageFileHandle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName *string, ImageName *string, CheckSum uint32, TimeDateStamp uint32, Context []byte) error {
+	_ModuleName := win32.UTF16PtrOrNil(ModuleName)
+	_ImageName := win32.UTF16PtrOrNil(ImageName)
 	var _Context *byte
 	if len(Context) > 0 {
 		_Context = &Context[0]
@@ -14080,8 +14080,8 @@ func (self *IDebugEventContextCallbacks) LoadModule(ImageFileHandle uint64, Base
 }
 
 // UnloadModule dispatches through IDebugEventContextCallbacks's vtable slot 11.
-func (self *IDebugEventContextCallbacks) UnloadModule(ImageBaseName string, BaseOffset uint64, Context []byte) error {
-	_ImageBaseName := win32.UTF16Ptr(ImageBaseName)
+func (self *IDebugEventContextCallbacks) UnloadModule(ImageBaseName *string, BaseOffset uint64, Context []byte) error {
+	_ImageBaseName := win32.UTF16PtrOrNil(ImageBaseName)
 	var _Context *byte
 	if len(Context) > 0 {
 		_Context = &Context[0]
@@ -15636,8 +15636,8 @@ func (self *IDebugHostSymbol) GetContext(context **IDebugHostContext) error {
 }
 
 // EnumerateChildren dispatches through IDebugHostSymbol's vtable slot 4.
-func (self *IDebugHostSymbol) EnumerateChildren(kind SymbolKind, name string, ppEnum **IDebugHostSymbolEnumerator) error {
-	_name := win32.UTF16Ptr(name)
+func (self *IDebugHostSymbol) EnumerateChildren(kind SymbolKind, name *string, ppEnum **IDebugHostSymbolEnumerator) error {
+	_name := win32.UTF16PtrOrNil(name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(kind), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(ppEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -15743,10 +15743,10 @@ type IDebugHostSymbols struct {
 var IID_IDebugHostSymbols = win32.GUID{Data1: 0x854fd751, Data2: 0xc2e1, Data3: 0x4eb2, Data4: [8]byte{0xb5, 0x25, 0x66, 0x19, 0xcb, 0x97, 0xa5, 0x88}}
 
 // CreateModuleSignature dispatches through IDebugHostSymbols's vtable slot 3.
-func (self *IDebugHostSymbols) CreateModuleSignature(pwszModuleName string, pwszMinVersion string, pwszMaxVersion string, ppModuleSignature **IDebugHostModuleSignature) error {
+func (self *IDebugHostSymbols) CreateModuleSignature(pwszModuleName string, pwszMinVersion *string, pwszMaxVersion *string, ppModuleSignature **IDebugHostModuleSignature) error {
 	_pwszModuleName := win32.UTF16Ptr(pwszModuleName)
-	_pwszMinVersion := win32.UTF16Ptr(pwszMinVersion)
-	_pwszMaxVersion := win32.UTF16Ptr(pwszMaxVersion)
+	_pwszMinVersion := win32.UTF16PtrOrNil(pwszMinVersion)
+	_pwszMaxVersion := win32.UTF16PtrOrNil(pwszMaxVersion)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszModuleName)), uintptr(unsafe.Pointer(_pwszMinVersion)), uintptr(unsafe.Pointer(_pwszMaxVersion)), uintptr(unsafe.Pointer(ppModuleSignature)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -15759,11 +15759,11 @@ func (self *IDebugHostSymbols) CreateTypeSignature(signatureSpecification string
 }
 
 // CreateTypeSignatureForModuleRange dispatches through IDebugHostSymbols's vtable slot 5.
-func (self *IDebugHostSymbols) CreateTypeSignatureForModuleRange(signatureSpecification string, moduleName string, minVersion string, maxVersion string, typeSignature **IDebugHostTypeSignature) error {
+func (self *IDebugHostSymbols) CreateTypeSignatureForModuleRange(signatureSpecification string, moduleName string, minVersion *string, maxVersion *string, typeSignature **IDebugHostTypeSignature) error {
 	_signatureSpecification := win32.UTF16Ptr(signatureSpecification)
 	_moduleName := win32.UTF16Ptr(moduleName)
-	_minVersion := win32.UTF16Ptr(minVersion)
-	_maxVersion := win32.UTF16Ptr(maxVersion)
+	_minVersion := win32.UTF16PtrOrNil(minVersion)
+	_maxVersion := win32.UTF16PtrOrNil(maxVersion)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureSpecification)), uintptr(unsafe.Pointer(_moduleName)), uintptr(unsafe.Pointer(_minVersion)), uintptr(unsafe.Pointer(_maxVersion)), uintptr(unsafe.Pointer(typeSignature)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -16184,8 +16184,8 @@ func (self *IDebugOutputCallbacks2) GetInterestMask(Mask *uint32) error {
 }
 
 // Output2 dispatches through IDebugOutputCallbacks2's vtable slot 5.
-func (self *IDebugOutputCallbacks2) Output2(Which uint32, Flags uint32, Arg uint64, Text string) error {
-	_Text := win32.UTF16Ptr(Text)
+func (self *IDebugOutputCallbacks2) Output2(Which uint32, Flags uint32, Arg uint64, Text *string) error {
+	_Text := win32.UTF16PtrOrNil(Text)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Flags), uintptr(Arg), uintptr(unsafe.Pointer(_Text)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -16229,10 +16229,10 @@ type IDebugPlmClient struct {
 var IID_IDebugPlmClient = win32.GUID{Data1: 0xa02b66c4, Data2: 0xaea3, Data3: 0x4234, Data4: [8]byte{0xa9, 0xf7, 0xfe, 0x4c, 0x38, 0x3d, 0x4e, 0x29}}
 
 // LaunchPlmPackageForDebugWide dispatches through IDebugPlmClient's vtable slot 3.
-func (self *IDebugPlmClient) LaunchPlmPackageForDebugWide(Server uint64, Timeout uint32, PackageFullName string, AppName string, Arguments string, ProcessId *uint32, ThreadId *uint32) error {
+func (self *IDebugPlmClient) LaunchPlmPackageForDebugWide(Server uint64, Timeout uint32, PackageFullName string, AppName string, Arguments *string, ProcessId *uint32, ThreadId *uint32) error {
 	_PackageFullName := win32.UTF16Ptr(PackageFullName)
 	_AppName := win32.UTF16Ptr(AppName)
-	_Arguments := win32.UTF16Ptr(Arguments)
+	_Arguments := win32.UTF16PtrOrNil(Arguments)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(Timeout), uintptr(unsafe.Pointer(_PackageFullName)), uintptr(unsafe.Pointer(_AppName)), uintptr(unsafe.Pointer(_Arguments)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -16246,10 +16246,10 @@ type IDebugPlmClient2 struct {
 var IID_IDebugPlmClient2 = win32.GUID{Data1: 0x597c980d, Data2: 0xe7bd, Data3: 0x4309, Data4: [8]byte{0x96, 0x2c, 0x9d, 0x9b, 0x69, 0xa7, 0x37, 0x2c}}
 
 // LaunchPlmPackageForDebugWide dispatches through IDebugPlmClient2's vtable slot 3.
-func (self *IDebugPlmClient2) LaunchPlmPackageForDebugWide(Server uint64, Timeout uint32, PackageFullName string, AppName string, Arguments string, ProcessId *uint32, ThreadId *uint32) error {
+func (self *IDebugPlmClient2) LaunchPlmPackageForDebugWide(Server uint64, Timeout uint32, PackageFullName string, AppName string, Arguments *string, ProcessId *uint32, ThreadId *uint32) error {
 	_PackageFullName := win32.UTF16Ptr(PackageFullName)
 	_AppName := win32.UTF16Ptr(AppName)
-	_Arguments := win32.UTF16Ptr(Arguments)
+	_Arguments := win32.UTF16PtrOrNil(Arguments)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(Timeout), uintptr(unsafe.Pointer(_PackageFullName)), uintptr(unsafe.Pointer(_AppName)), uintptr(unsafe.Pointer(_Arguments)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -16271,10 +16271,10 @@ type IDebugPlmClient3 struct {
 var IID_IDebugPlmClient3 = win32.GUID{Data1: 0xd4a5dbd1, Data2: 0xca02, Data3: 0x4d90, Data4: [8]byte{0x85, 0x6a, 0x2a, 0x92, 0xbf, 0xd0, 0xf2, 0x0f}}
 
 // LaunchPlmPackageForDebugWide dispatches through IDebugPlmClient3's vtable slot 3.
-func (self *IDebugPlmClient3) LaunchPlmPackageForDebugWide(Server uint64, Timeout uint32, PackageFullName string, AppName string, Arguments string, ProcessId *uint32, ThreadId *uint32) error {
+func (self *IDebugPlmClient3) LaunchPlmPackageForDebugWide(Server uint64, Timeout uint32, PackageFullName string, AppName string, Arguments *string, ProcessId *uint32, ThreadId *uint32) error {
 	_PackageFullName := win32.UTF16Ptr(PackageFullName)
 	_AppName := win32.UTF16Ptr(AppName)
-	_Arguments := win32.UTF16Ptr(Arguments)
+	_Arguments := win32.UTF16PtrOrNil(Arguments)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(Timeout), uintptr(unsafe.Pointer(_PackageFullName)), uintptr(unsafe.Pointer(_AppName)), uintptr(unsafe.Pointer(_Arguments)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)))
 	return win32.ErrIfFailed(int32(r1))
 }

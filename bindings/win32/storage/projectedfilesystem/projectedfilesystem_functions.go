@@ -191,9 +191,9 @@ func PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext PRJ_NAMESPA
 // PrjMarkDirectoryAsPlaceholder calls PROJECTEDFSLIB!PrjMarkDirectoryAsPlaceholder.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjmarkdirectoryasplaceholder
 // Minimum OS: windows10.0.17763.
-func PrjMarkDirectoryAsPlaceholder(rootPathName string, targetPathName string, versionInfo *PRJ_PLACEHOLDER_VERSION_INFO, virtualizationInstanceID *win32.GUID) error {
+func PrjMarkDirectoryAsPlaceholder(rootPathName string, targetPathName *string, versionInfo *PRJ_PLACEHOLDER_VERSION_INFO, virtualizationInstanceID *win32.GUID) error {
 	_rootPathName := win32.UTF16Ptr(rootPathName)
-	_targetPathName := win32.UTF16Ptr(targetPathName)
+	_targetPathName := win32.UTF16PtrOrNil(targetPathName)
 	r1, _, _ := syscall.SyscallN(procPrjMarkDirectoryAsPlaceholder.Addr(), uintptr(unsafe.Pointer(_rootPathName)), uintptr(unsafe.Pointer(_targetPathName)), uintptr(unsafe.Pointer(versionInfo)), uintptr(unsafe.Pointer(virtualizationInstanceID)))
 	return win32.ErrIfFailed(int32(r1))
 }

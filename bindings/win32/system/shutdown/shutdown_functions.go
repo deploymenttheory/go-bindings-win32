@@ -73,8 +73,8 @@ var Procs = struct {
 // AbortSystemShutdown calls ADVAPI32!AbortSystemShutdownW.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-abortsystemshutdownw
 // Minimum OS: windows5.1.2600.
-func AbortSystemShutdown(lpMachineName string) error {
-	_lpMachineName := win32.UTF16Ptr(lpMachineName)
+func AbortSystemShutdown(lpMachineName *string) error {
+	_lpMachineName := win32.UTF16PtrOrNil(lpMachineName)
 	r1, _, e1 := syscall.SyscallN(procAbortSystemShutdown.Addr(), uintptr(unsafe.Pointer(_lpMachineName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -113,9 +113,9 @@ func ExitWindowsEx(uFlags EXIT_WINDOWS_FLAGS, dwReason SHUTDOWN_REASON) error {
 // InitiateShutdown calls ADVAPI32!InitiateShutdownW.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiateshutdownw
 // Minimum OS: windows6.0.6000.
-func InitiateShutdown(lpMachineName string, lpMessage string, dwGracePeriod uint32, dwShutdownFlags SHUTDOWN_FLAGS, dwReason SHUTDOWN_REASON) uint32 {
-	_lpMachineName := win32.UTF16Ptr(lpMachineName)
-	_lpMessage := win32.UTF16Ptr(lpMessage)
+func InitiateShutdown(lpMachineName *string, lpMessage *string, dwGracePeriod uint32, dwShutdownFlags SHUTDOWN_FLAGS, dwReason SHUTDOWN_REASON) uint32 {
+	_lpMachineName := win32.UTF16PtrOrNil(lpMachineName)
+	_lpMessage := win32.UTF16PtrOrNil(lpMessage)
 	r1, _, _ := syscall.SyscallN(procInitiateShutdown.Addr(), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpMessage)), uintptr(dwGracePeriod), uintptr(dwShutdownFlags), uintptr(dwReason))
 	return uint32(r1)
 }
@@ -131,9 +131,9 @@ func InitiateShutdownA(lpMachineName foundation.PSTR, lpMessage foundation.PSTR,
 // InitiateSystemShutdown calls ADVAPI32!InitiateSystemShutdownW.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiatesystemshutdownw
 // Minimum OS: windows5.1.2600.
-func InitiateSystemShutdown(lpMachineName string, lpMessage string, dwTimeout uint32, bForceAppsClosed bool, bRebootAfterShutdown bool) error {
-	_lpMachineName := win32.UTF16Ptr(lpMachineName)
-	_lpMessage := win32.UTF16Ptr(lpMessage)
+func InitiateSystemShutdown(lpMachineName *string, lpMessage *string, dwTimeout uint32, bForceAppsClosed bool, bRebootAfterShutdown bool) error {
+	_lpMachineName := win32.UTF16PtrOrNil(lpMachineName)
+	_lpMessage := win32.UTF16PtrOrNil(lpMessage)
 	_bForceAppsClosed := win32.Bool32(bForceAppsClosed)
 	_bRebootAfterShutdown := win32.Bool32(bRebootAfterShutdown)
 	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdown.Addr(), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpMessage)), uintptr(dwTimeout), uintptr(_bForceAppsClosed), uintptr(_bRebootAfterShutdown))
@@ -159,9 +159,9 @@ func InitiateSystemShutdownA(lpMachineName foundation.PSTR, lpMessage foundation
 // InitiateSystemShutdownEx calls ADVAPI32!InitiateSystemShutdownExW.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-initiatesystemshutdownexw
 // Minimum OS: windows5.1.2600.
-func InitiateSystemShutdownEx(lpMachineName string, lpMessage string, dwTimeout uint32, bForceAppsClosed bool, bRebootAfterShutdown bool, dwReason SHUTDOWN_REASON) error {
-	_lpMachineName := win32.UTF16Ptr(lpMachineName)
-	_lpMessage := win32.UTF16Ptr(lpMessage)
+func InitiateSystemShutdownEx(lpMachineName *string, lpMessage *string, dwTimeout uint32, bForceAppsClosed bool, bRebootAfterShutdown bool, dwReason SHUTDOWN_REASON) error {
+	_lpMachineName := win32.UTF16PtrOrNil(lpMachineName)
+	_lpMessage := win32.UTF16PtrOrNil(lpMessage)
 	_bForceAppsClosed := win32.Bool32(bForceAppsClosed)
 	_bRebootAfterShutdown := win32.Bool32(bRebootAfterShutdown)
 	r1, _, e1 := syscall.SyscallN(procInitiateSystemShutdownEx.Addr(), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpMessage)), uintptr(dwTimeout), uintptr(_bForceAppsClosed), uintptr(_bRebootAfterShutdown), uintptr(dwReason))

@@ -1060,9 +1060,9 @@ func Ldap_bindA(ld *LDAP, dn foundation.PSTR, cred foundation.PSTR, method uint3
 // Ldap_bindW calls WLDAP32!ldap_bindW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_bindw
 // Minimum OS: windows6.0.6000.
-func Ldap_bindW(ld *LDAP, dn string, cred string, method uint32) uint32 {
-	_dn := win32.UTF16Ptr(dn)
-	_cred := win32.UTF16Ptr(cred)
+func Ldap_bindW(ld *LDAP, dn *string, cred *string, method uint32) uint32 {
+	_dn := win32.UTF16PtrOrNil(dn)
+	_cred := win32.UTF16PtrOrNil(cred)
 	r1, _, _ := syscall.SyscallN(procLdap_bindW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(_cred)), uintptr(method))
 	return uint32(r1)
 }
@@ -1086,9 +1086,9 @@ func Ldap_bind_sA(ld *LDAP, dn foundation.PSTR, cred foundation.PSTR, method uin
 // Ldap_bind_sW calls WLDAP32!ldap_bind_sW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_bind_sw
 // Minimum OS: windows6.0.6000.
-func Ldap_bind_sW(ld *LDAP, dn string, cred string, method uint32) uint32 {
-	_dn := win32.UTF16Ptr(dn)
-	_cred := win32.UTF16Ptr(cred)
+func Ldap_bind_sW(ld *LDAP, dn *string, cred *string, method uint32) uint32 {
+	_dn := win32.UTF16PtrOrNil(dn)
+	_cred := win32.UTF16PtrOrNil(cred)
 	r1, _, _ := syscall.SyscallN(procLdap_bind_sW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(_cred)), uintptr(method))
 	return uint32(r1)
 }
@@ -1172,10 +1172,10 @@ func Ldap_compare_extA(ld *LDAP, dn foundation.PSTR, Attr foundation.PSTR, Value
 // Ldap_compare_extW calls WLDAP32!ldap_compare_extW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_compare_extw
 // Minimum OS: windows6.0.6000.
-func Ldap_compare_extW(ld *LDAP, dn string, Attr string, Value string, Data *LDAP_BERVAL, ServerControls **LDAPControlW, ClientControls **LDAPControlW, MessageNumber *uint32) uint32 {
+func Ldap_compare_extW(ld *LDAP, dn string, Attr string, Value *string, Data *LDAP_BERVAL, ServerControls **LDAPControlW, ClientControls **LDAPControlW, MessageNumber *uint32) uint32 {
 	_dn := win32.UTF16Ptr(dn)
 	_Attr := win32.UTF16Ptr(Attr)
-	_Value := win32.UTF16Ptr(Value)
+	_Value := win32.UTF16PtrOrNil(Value)
 	r1, _, _ := syscall.SyscallN(procLdap_compare_extW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(_Attr)), uintptr(unsafe.Pointer(_Value)), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(ServerControls)), uintptr(unsafe.Pointer(ClientControls)), uintptr(unsafe.Pointer(MessageNumber)))
 	return uint32(r1)
 }
@@ -1199,10 +1199,10 @@ func Ldap_compare_ext_sA(ld *LDAP, dn foundation.PSTR, Attr foundation.PSTR, Val
 // Ldap_compare_ext_sW calls WLDAP32!ldap_compare_ext_sW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_compare_ext_sw
 // Minimum OS: windows6.0.6000.
-func Ldap_compare_ext_sW(ld *LDAP, dn string, Attr string, Value string, Data *LDAP_BERVAL, ServerControls **LDAPControlW, ClientControls **LDAPControlW) uint32 {
+func Ldap_compare_ext_sW(ld *LDAP, dn string, Attr string, Value *string, Data *LDAP_BERVAL, ServerControls **LDAPControlW, ClientControls **LDAPControlW) uint32 {
 	_dn := win32.UTF16Ptr(dn)
 	_Attr := win32.UTF16Ptr(Attr)
-	_Value := win32.UTF16Ptr(Value)
+	_Value := win32.UTF16PtrOrNil(Value)
 	r1, _, _ := syscall.SyscallN(procLdap_compare_ext_sW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(_Attr)), uintptr(unsafe.Pointer(_Value)), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(ServerControls)), uintptr(unsafe.Pointer(ClientControls)))
 	return uint32(r1)
 }
@@ -2322,10 +2322,10 @@ func Ldap_rename_extA(ld *LDAP, dn foundation.PSTR, NewRDN foundation.PSTR, NewP
 // Ldap_rename_extW calls WLDAP32!ldap_rename_extW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_rename_extw
 // Minimum OS: windows6.0.6000.
-func Ldap_rename_extW(ld *LDAP, dn string, NewRDN string, NewParent string, DeleteOldRdn int32, ServerControls **LDAPControlW, ClientControls **LDAPControlW, MessageNumber *uint32) uint32 {
+func Ldap_rename_extW(ld *LDAP, dn string, NewRDN string, NewParent *string, DeleteOldRdn int32, ServerControls **LDAPControlW, ClientControls **LDAPControlW, MessageNumber *uint32) uint32 {
 	_dn := win32.UTF16Ptr(dn)
 	_NewRDN := win32.UTF16Ptr(NewRDN)
-	_NewParent := win32.UTF16Ptr(NewParent)
+	_NewParent := win32.UTF16PtrOrNil(NewParent)
 	r1, _, _ := syscall.SyscallN(procLdap_rename_extW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(_NewRDN)), uintptr(unsafe.Pointer(_NewParent)), uintptr(DeleteOldRdn), uintptr(unsafe.Pointer(ServerControls)), uintptr(unsafe.Pointer(ClientControls)), uintptr(unsafe.Pointer(MessageNumber)))
 	return uint32(r1)
 }
@@ -2349,10 +2349,10 @@ func Ldap_rename_ext_sA(ld *LDAP, dn foundation.PSTR, NewRDN foundation.PSTR, Ne
 // Ldap_rename_ext_sW calls WLDAP32!ldap_rename_ext_sW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_rename_ext_sw
 // Minimum OS: windows6.0.6000.
-func Ldap_rename_ext_sW(ld *LDAP, dn string, NewRDN string, NewParent string, DeleteOldRdn int32, ServerControls **LDAPControlW, ClientControls **LDAPControlW) uint32 {
+func Ldap_rename_ext_sW(ld *LDAP, dn string, NewRDN string, NewParent *string, DeleteOldRdn int32, ServerControls **LDAPControlW, ClientControls **LDAPControlW) uint32 {
 	_dn := win32.UTF16Ptr(dn)
 	_NewRDN := win32.UTF16Ptr(NewRDN)
-	_NewParent := win32.UTF16Ptr(NewParent)
+	_NewParent := win32.UTF16PtrOrNil(NewParent)
 	r1, _, _ := syscall.SyscallN(procLdap_rename_ext_sW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(_NewRDN)), uintptr(unsafe.Pointer(_NewParent)), uintptr(DeleteOldRdn), uintptr(unsafe.Pointer(ServerControls)), uintptr(unsafe.Pointer(ClientControls)))
 	return uint32(r1)
 }
@@ -2428,8 +2428,8 @@ func Ldap_searchA(ld *LDAP, base foundation.PSTR, scope uint32, filter foundatio
 // Ldap_searchW calls WLDAP32!ldap_searchW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_searchw
 // Minimum OS: windows6.0.6000.
-func Ldap_searchW(ld *LDAP, base string, scope uint32, filter string, attrs **uint16, attrsonly uint32) uint32 {
-	_base := win32.UTF16Ptr(base)
+func Ldap_searchW(ld *LDAP, base *string, scope uint32, filter string, attrs **uint16, attrsonly uint32) uint32 {
+	_base := win32.UTF16PtrOrNil(base)
 	_filter := win32.UTF16Ptr(filter)
 	r1, _, _ := syscall.SyscallN(procLdap_searchW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_base)), uintptr(scope), uintptr(unsafe.Pointer(_filter)), uintptr(unsafe.Pointer(attrs)), uintptr(attrsonly))
 	return uint32(r1)
@@ -2462,8 +2462,8 @@ func Ldap_search_extA(ld *LDAP, base foundation.PSTR, scope uint32, filter found
 // Ldap_search_extW calls WLDAP32!ldap_search_extW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_search_extw
 // Minimum OS: windows6.0.6000.
-func Ldap_search_extW(ld *LDAP, base string, scope uint32, filter string, attrs **uint16, attrsonly uint32, ServerControls **LDAPControlW, ClientControls **LDAPControlW, TimeLimit uint32, SizeLimit uint32, MessageNumber *uint32) uint32 {
-	_base := win32.UTF16Ptr(base)
+func Ldap_search_extW(ld *LDAP, base *string, scope uint32, filter string, attrs **uint16, attrsonly uint32, ServerControls **LDAPControlW, ClientControls **LDAPControlW, TimeLimit uint32, SizeLimit uint32, MessageNumber *uint32) uint32 {
+	_base := win32.UTF16PtrOrNil(base)
 	_filter := win32.UTF16Ptr(filter)
 	r1, _, _ := syscall.SyscallN(procLdap_search_extW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_base)), uintptr(scope), uintptr(unsafe.Pointer(_filter)), uintptr(unsafe.Pointer(attrs)), uintptr(attrsonly), uintptr(unsafe.Pointer(ServerControls)), uintptr(unsafe.Pointer(ClientControls)), uintptr(TimeLimit), uintptr(SizeLimit), uintptr(unsafe.Pointer(MessageNumber)))
 	return uint32(r1)
@@ -2488,8 +2488,8 @@ func Ldap_search_ext_sA(ld *LDAP, base foundation.PSTR, scope uint32, filter fou
 // Ldap_search_ext_sW calls WLDAP32!ldap_search_ext_sW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_search_ext_sw
 // Minimum OS: windows6.0.6000.
-func Ldap_search_ext_sW(ld *LDAP, base string, scope uint32, filter string, attrs **uint16, attrsonly uint32, ServerControls **LDAPControlW, ClientControls **LDAPControlW, timeout *LDAP_TIMEVAL, SizeLimit uint32, res **LDAPMessage) uint32 {
-	_base := win32.UTF16Ptr(base)
+func Ldap_search_ext_sW(ld *LDAP, base *string, scope uint32, filter string, attrs **uint16, attrsonly uint32, ServerControls **LDAPControlW, ClientControls **LDAPControlW, timeout *LDAP_TIMEVAL, SizeLimit uint32, res **LDAPMessage) uint32 {
+	_base := win32.UTF16PtrOrNil(base)
 	_filter := win32.UTF16Ptr(filter)
 	r1, _, _ := syscall.SyscallN(procLdap_search_ext_sW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_base)), uintptr(scope), uintptr(unsafe.Pointer(_filter)), uintptr(unsafe.Pointer(attrs)), uintptr(attrsonly), uintptr(unsafe.Pointer(ServerControls)), uintptr(unsafe.Pointer(ClientControls)), uintptr(unsafe.Pointer(timeout)), uintptr(SizeLimit), uintptr(unsafe.Pointer(res)))
 	return uint32(r1)
@@ -2549,8 +2549,8 @@ func Ldap_search_sA(ld *LDAP, base foundation.PSTR, scope uint32, filter foundat
 // Ldap_search_sW calls WLDAP32!ldap_search_sW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_search_sw
 // Minimum OS: windows6.0.6000.
-func Ldap_search_sW(ld *LDAP, base string, scope uint32, filter string, attrs **uint16, attrsonly uint32, res **LDAPMessage) uint32 {
-	_base := win32.UTF16Ptr(base)
+func Ldap_search_sW(ld *LDAP, base *string, scope uint32, filter string, attrs **uint16, attrsonly uint32, res **LDAPMessage) uint32 {
+	_base := win32.UTF16PtrOrNil(base)
 	_filter := win32.UTF16Ptr(filter)
 	r1, _, _ := syscall.SyscallN(procLdap_search_sW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_base)), uintptr(scope), uintptr(unsafe.Pointer(_filter)), uintptr(unsafe.Pointer(attrs)), uintptr(attrsonly), uintptr(unsafe.Pointer(res)))
 	return uint32(r1)
@@ -2575,8 +2575,8 @@ func Ldap_search_stA(ld *LDAP, base foundation.PSTR, scope uint32, filter founda
 // Ldap_search_stW calls WLDAP32!ldap_search_stW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_search_stw
 // Minimum OS: windows6.0.6000.
-func Ldap_search_stW(ld *LDAP, base string, scope uint32, filter string, attrs **uint16, attrsonly uint32, timeout *LDAP_TIMEVAL, res **LDAPMessage) uint32 {
-	_base := win32.UTF16Ptr(base)
+func Ldap_search_stW(ld *LDAP, base *string, scope uint32, filter string, attrs **uint16, attrsonly uint32, timeout *LDAP_TIMEVAL, res **LDAPMessage) uint32 {
+	_base := win32.UTF16PtrOrNil(base)
 	_filter := win32.UTF16Ptr(filter)
 	r1, _, _ := syscall.SyscallN(procLdap_search_stW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_base)), uintptr(scope), uintptr(unsafe.Pointer(_filter)), uintptr(unsafe.Pointer(attrs)), uintptr(attrsonly), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(res)))
 	return uint32(r1)
@@ -2628,9 +2628,9 @@ func Ldap_simple_bindA(ld *LDAP, dn foundation.PSTR, passwd foundation.PSTR) uin
 // Ldap_simple_bindW calls WLDAP32!ldap_simple_bindW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_simple_bindw
 // Minimum OS: windows6.0.6000.
-func Ldap_simple_bindW(ld *LDAP, dn string, passwd string) uint32 {
-	_dn := win32.UTF16Ptr(dn)
-	_passwd := win32.UTF16Ptr(passwd)
+func Ldap_simple_bindW(ld *LDAP, dn *string, passwd *string) uint32 {
+	_dn := win32.UTF16PtrOrNil(dn)
+	_passwd := win32.UTF16PtrOrNil(passwd)
 	r1, _, _ := syscall.SyscallN(procLdap_simple_bindW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(_passwd)))
 	return uint32(r1)
 }
@@ -2654,9 +2654,9 @@ func Ldap_simple_bind_sA(ld *LDAP, dn foundation.PSTR, passwd foundation.PSTR) u
 // Ldap_simple_bind_sW calls WLDAP32!ldap_simple_bind_sW.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldap_simple_bind_sw
 // Minimum OS: windows6.0.6000.
-func Ldap_simple_bind_sW(ld *LDAP, dn string, passwd string) uint32 {
-	_dn := win32.UTF16Ptr(dn)
-	_passwd := win32.UTF16Ptr(passwd)
+func Ldap_simple_bind_sW(ld *LDAP, dn *string, passwd *string) uint32 {
+	_dn := win32.UTF16PtrOrNil(dn)
+	_passwd := win32.UTF16PtrOrNil(passwd)
 	r1, _, _ := syscall.SyscallN(procLdap_simple_bind_sW.Addr(), uintptr(unsafe.Pointer(ld)), uintptr(unsafe.Pointer(_dn)), uintptr(unsafe.Pointer(_passwd)))
 	return uint32(r1)
 }

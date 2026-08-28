@@ -703,17 +703,17 @@ func LoadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle unsafe.Pointer, imageN
 }
 
 // LoadSavedStateSymbolProvider calls VmSavedStateDumpProvider!LoadSavedStateSymbolProvider.
-func LoadSavedStateSymbolProvider(vmSavedStateDumpHandle unsafe.Pointer, userSymbols string, force bool) error {
-	_userSymbols := win32.UTF16Ptr(userSymbols)
+func LoadSavedStateSymbolProvider(vmSavedStateDumpHandle unsafe.Pointer, userSymbols *string, force bool) error {
+	_userSymbols := win32.UTF16PtrOrNil(userSymbols)
 	_force := win32.Bool32(force)
 	r1, _, _ := syscall.SyscallN(procLoadSavedStateSymbolProvider.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(_userSymbols)), uintptr(_force))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // LocateSavedStateFiles calls VmSavedStateDumpProvider!LocateSavedStateFiles.
-func LocateSavedStateFiles(vmName string, snapshotName string, binPath *foundation.PWSTR, vsvPath *foundation.PWSTR, vmrsPath *foundation.PWSTR) error {
+func LocateSavedStateFiles(vmName string, snapshotName *string, binPath *foundation.PWSTR, vsvPath *foundation.PWSTR, vmrsPath *foundation.PWSTR) error {
 	_vmName := win32.UTF16Ptr(vmName)
-	_snapshotName := win32.UTF16Ptr(snapshotName)
+	_snapshotName := win32.UTF16PtrOrNil(snapshotName)
 	r1, _, _ := syscall.SyscallN(procLocateSavedStateFiles.Addr(), uintptr(unsafe.Pointer(_vmName)), uintptr(unsafe.Pointer(_snapshotName)), uintptr(unsafe.Pointer(binPath)), uintptr(unsafe.Pointer(vsvPath)), uintptr(unsafe.Pointer(vmrsPath)))
 	return win32.ErrIfFailed(int32(r1))
 }

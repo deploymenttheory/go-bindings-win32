@@ -281,9 +281,9 @@ var Procs = struct {
 
 // DRMAcquireAdvisories calls msdrm!DRMAcquireAdvisories.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmacquireadvisories
-func DRMAcquireAdvisories(hLicenseStorage uint32, wszLicense string, wszURL string, pvContext unsafe.Pointer) error {
+func DRMAcquireAdvisories(hLicenseStorage uint32, wszLicense string, wszURL *string, pvContext unsafe.Pointer) error {
 	_wszLicense := win32.UTF16Ptr(wszLicense)
-	_wszURL := win32.UTF16Ptr(wszURL)
+	_wszURL := win32.UTF16PtrOrNil(wszURL)
 	r1, _, _ := syscall.SyscallN(procDRMAcquireAdvisories.Addr(), uintptr(hLicenseStorage), uintptr(unsafe.Pointer(_wszLicense)), uintptr(unsafe.Pointer(_wszURL)), uintptr(unsafe.Pointer(pvContext)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -303,11 +303,11 @@ func DRMAcquireIssuanceLicenseTemplate(hClient uint32, uFlags uint32, pvReserved
 
 // DRMAcquireLicense calls msdrm!DRMAcquireLicense.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmacquirelicense
-func DRMAcquireLicense(hSession uint32, uFlags uint32, wszGroupIdentityCredential string, wszRequestedRights string, wszCustomData string, wszURL string, pvContext unsafe.Pointer) error {
-	_wszGroupIdentityCredential := win32.UTF16Ptr(wszGroupIdentityCredential)
-	_wszRequestedRights := win32.UTF16Ptr(wszRequestedRights)
-	_wszCustomData := win32.UTF16Ptr(wszCustomData)
-	_wszURL := win32.UTF16Ptr(wszURL)
+func DRMAcquireLicense(hSession uint32, uFlags uint32, wszGroupIdentityCredential *string, wszRequestedRights *string, wszCustomData *string, wszURL *string, pvContext unsafe.Pointer) error {
+	_wszGroupIdentityCredential := win32.UTF16PtrOrNil(wszGroupIdentityCredential)
+	_wszRequestedRights := win32.UTF16PtrOrNil(wszRequestedRights)
+	_wszCustomData := win32.UTF16PtrOrNil(wszCustomData)
+	_wszURL := win32.UTF16PtrOrNil(wszURL)
 	r1, _, _ := syscall.SyscallN(procDRMAcquireLicense.Addr(), uintptr(hSession), uintptr(uFlags), uintptr(unsafe.Pointer(_wszGroupIdentityCredential)), uintptr(unsafe.Pointer(_wszRequestedRights)), uintptr(unsafe.Pointer(_wszCustomData)), uintptr(unsafe.Pointer(_wszURL)), uintptr(unsafe.Pointer(pvContext)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -412,27 +412,27 @@ func DRMCreateBoundLicense(hEnv uint32, pParams *DRMBOUNDLICENSEPARAMS, wszLicen
 
 // DRMCreateClientSession calls msdrm!DRMCreateClientSession.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmcreateclientsession
-func DRMCreateClientSession(pfnCallback DRMCALLBACK, uCallbackVersion uint32, wszGroupIDProviderType string, wszGroupID string, phClient *uint32) error {
+func DRMCreateClientSession(pfnCallback DRMCALLBACK, uCallbackVersion uint32, wszGroupIDProviderType string, wszGroupID *string, phClient *uint32) error {
 	_wszGroupIDProviderType := win32.UTF16Ptr(wszGroupIDProviderType)
-	_wszGroupID := win32.UTF16Ptr(wszGroupID)
+	_wszGroupID := win32.UTF16PtrOrNil(wszGroupID)
 	r1, _, _ := syscall.SyscallN(procDRMCreateClientSession.Addr(), uintptr(pfnCallback), uintptr(uCallbackVersion), uintptr(unsafe.Pointer(_wszGroupIDProviderType)), uintptr(unsafe.Pointer(_wszGroupID)), uintptr(unsafe.Pointer(phClient)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DRMCreateEnablingBitsDecryptor calls msdrm!DRMCreateEnablingBitsDecryptor.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmcreateenablingbitsdecryptor
-func DRMCreateEnablingBitsDecryptor(hBoundLicense uint32, wszRight string, hAuxLib uint32, wszAuxPlug string, phDecryptor *uint32) error {
-	_wszRight := win32.UTF16Ptr(wszRight)
-	_wszAuxPlug := win32.UTF16Ptr(wszAuxPlug)
+func DRMCreateEnablingBitsDecryptor(hBoundLicense uint32, wszRight *string, hAuxLib uint32, wszAuxPlug *string, phDecryptor *uint32) error {
+	_wszRight := win32.UTF16PtrOrNil(wszRight)
+	_wszAuxPlug := win32.UTF16PtrOrNil(wszAuxPlug)
 	r1, _, _ := syscall.SyscallN(procDRMCreateEnablingBitsDecryptor.Addr(), uintptr(hBoundLicense), uintptr(unsafe.Pointer(_wszRight)), uintptr(hAuxLib), uintptr(unsafe.Pointer(_wszAuxPlug)), uintptr(unsafe.Pointer(phDecryptor)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DRMCreateEnablingBitsEncryptor calls msdrm!DRMCreateEnablingBitsEncryptor.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmcreateenablingbitsencryptor
-func DRMCreateEnablingBitsEncryptor(hBoundLicense uint32, wszRight string, hAuxLib uint32, wszAuxPlug string, phEncryptor *uint32) error {
-	_wszRight := win32.UTF16Ptr(wszRight)
-	_wszAuxPlug := win32.UTF16Ptr(wszAuxPlug)
+func DRMCreateEnablingBitsEncryptor(hBoundLicense uint32, wszRight *string, hAuxLib uint32, wszAuxPlug *string, phEncryptor *uint32) error {
+	_wszRight := win32.UTF16PtrOrNil(wszRight)
+	_wszAuxPlug := win32.UTF16PtrOrNil(wszAuxPlug)
 	r1, _, _ := syscall.SyscallN(procDRMCreateEnablingBitsEncryptor.Addr(), uintptr(hBoundLicense), uintptr(unsafe.Pointer(_wszRight)), uintptr(hAuxLib), uintptr(unsafe.Pointer(_wszAuxPlug)), uintptr(unsafe.Pointer(phEncryptor)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -448,10 +448,10 @@ func DRMCreateEnablingPrincipal(hEnv uint32, hLibrary uint32, wszObject string, 
 
 // DRMCreateIssuanceLicense calls msdrm!DRMCreateIssuanceLicense.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmcreateissuancelicense
-func DRMCreateIssuanceLicense(pstTimeFrom *foundation.SYSTEMTIME, pstTimeUntil *foundation.SYSTEMTIME, wszReferralInfoName string, wszReferralInfoURL string, hOwner uint32, wszIssuanceLicense string, hBoundLicense uint32, phIssuanceLicense *uint32) error {
-	_wszReferralInfoName := win32.UTF16Ptr(wszReferralInfoName)
-	_wszReferralInfoURL := win32.UTF16Ptr(wszReferralInfoURL)
-	_wszIssuanceLicense := win32.UTF16Ptr(wszIssuanceLicense)
+func DRMCreateIssuanceLicense(pstTimeFrom *foundation.SYSTEMTIME, pstTimeUntil *foundation.SYSTEMTIME, wszReferralInfoName *string, wszReferralInfoURL *string, hOwner uint32, wszIssuanceLicense *string, hBoundLicense uint32, phIssuanceLicense *uint32) error {
+	_wszReferralInfoName := win32.UTF16PtrOrNil(wszReferralInfoName)
+	_wszReferralInfoURL := win32.UTF16PtrOrNil(wszReferralInfoURL)
+	_wszIssuanceLicense := win32.UTF16PtrOrNil(wszIssuanceLicense)
 	r1, _, _ := syscall.SyscallN(procDRMCreateIssuanceLicense.Addr(), uintptr(unsafe.Pointer(pstTimeFrom)), uintptr(unsafe.Pointer(pstTimeUntil)), uintptr(unsafe.Pointer(_wszReferralInfoName)), uintptr(unsafe.Pointer(_wszReferralInfoURL)), uintptr(hOwner), uintptr(unsafe.Pointer(_wszIssuanceLicense)), uintptr(hBoundLicense), uintptr(unsafe.Pointer(phIssuanceLicense)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -474,10 +474,10 @@ func DRMCreateRight(wszRightName string, pstFrom *foundation.SYSTEMTIME, pstUnti
 
 // DRMCreateUser calls msdrm!DRMCreateUser.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmcreateuser
-func DRMCreateUser(wszUserName string, wszUserId string, wszUserIdType string, phUser *uint32) error {
-	_wszUserName := win32.UTF16Ptr(wszUserName)
-	_wszUserId := win32.UTF16Ptr(wszUserId)
-	_wszUserIdType := win32.UTF16Ptr(wszUserIdType)
+func DRMCreateUser(wszUserName *string, wszUserId *string, wszUserIdType *string, phUser *uint32) error {
+	_wszUserName := win32.UTF16PtrOrNil(wszUserName)
+	_wszUserId := win32.UTF16PtrOrNil(wszUserId)
+	_wszUserIdType := win32.UTF16PtrOrNil(wszUserIdType)
 	r1, _, _ := syscall.SyscallN(procDRMCreateUser.Addr(), uintptr(unsafe.Pointer(_wszUserName)), uintptr(unsafe.Pointer(_wszUserId)), uintptr(unsafe.Pointer(_wszUserIdType)), uintptr(unsafe.Pointer(phUser)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -620,8 +620,8 @@ func DRMGetClientVersion(pDRMClientVersionInfo *DRM_CLIENT_VERSION_INFO) error {
 
 // DRMGetEnvironmentInfo calls msdrm!DRMGetEnvironmentInfo.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmgetenvironmentinfo
-func DRMGetEnvironmentInfo(handle uint32, wszAttribute string, peEncoding *DRMENCODINGTYPE, pcBuffer *uint32, pbBuffer *byte) error {
-	_wszAttribute := win32.UTF16Ptr(wszAttribute)
+func DRMGetEnvironmentInfo(handle uint32, wszAttribute *string, peEncoding *DRMENCODINGTYPE, pcBuffer *uint32, pbBuffer *byte) error {
+	_wszAttribute := win32.UTF16PtrOrNil(wszAttribute)
 	r1, _, _ := syscall.SyscallN(procDRMGetEnvironmentInfo.Addr(), uintptr(handle), uintptr(unsafe.Pointer(_wszAttribute)), uintptr(unsafe.Pointer(peEncoding)), uintptr(unsafe.Pointer(pcBuffer)), uintptr(unsafe.Pointer(pbBuffer)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -714,18 +714,18 @@ func DRMGetSecurityProvider(uFlags uint32, puTypeLen *uint32, wszType foundation
 
 // DRMGetServiceLocation calls msdrm!DRMGetServiceLocation.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmgetservicelocation
-func DRMGetServiceLocation(hClient uint32, uServiceType uint32, uServiceLocation uint32, wszIssuanceLicense string, puServiceURLLength *uint32, wszServiceURL foundation.PWSTR) error {
-	_wszIssuanceLicense := win32.UTF16Ptr(wszIssuanceLicense)
+func DRMGetServiceLocation(hClient uint32, uServiceType uint32, uServiceLocation uint32, wszIssuanceLicense *string, puServiceURLLength *uint32, wszServiceURL foundation.PWSTR) error {
+	_wszIssuanceLicense := win32.UTF16PtrOrNil(wszIssuanceLicense)
 	r1, _, _ := syscall.SyscallN(procDRMGetServiceLocation.Addr(), uintptr(hClient), uintptr(uServiceType), uintptr(uServiceLocation), uintptr(unsafe.Pointer(_wszIssuanceLicense)), uintptr(unsafe.Pointer(puServiceURLLength)), uintptr(unsafe.Pointer(wszServiceURL)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DRMGetSignedIssuanceLicense calls msdrm!DRMGetSignedIssuanceLicense.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmgetsignedissuancelicense
-func DRMGetSignedIssuanceLicense(hEnv uint32, hIssuanceLicense uint32, uFlags uint32, pbSymKey *byte, cbSymKey uint32, wszSymKeyType string, wszClientLicensorCertificate string, pfnCallback DRMCALLBACK, wszURL string, pvContext unsafe.Pointer) error {
-	_wszSymKeyType := win32.UTF16Ptr(wszSymKeyType)
-	_wszClientLicensorCertificate := win32.UTF16Ptr(wszClientLicensorCertificate)
-	_wszURL := win32.UTF16Ptr(wszURL)
+func DRMGetSignedIssuanceLicense(hEnv uint32, hIssuanceLicense uint32, uFlags uint32, pbSymKey *byte, cbSymKey uint32, wszSymKeyType *string, wszClientLicensorCertificate *string, pfnCallback DRMCALLBACK, wszURL *string, pvContext unsafe.Pointer) error {
+	_wszSymKeyType := win32.UTF16PtrOrNil(wszSymKeyType)
+	_wszClientLicensorCertificate := win32.UTF16PtrOrNil(wszClientLicensorCertificate)
+	_wszURL := win32.UTF16PtrOrNil(wszURL)
 	r1, _, _ := syscall.SyscallN(procDRMGetSignedIssuanceLicense.Addr(), uintptr(hEnv), uintptr(hIssuanceLicense), uintptr(uFlags), uintptr(unsafe.Pointer(pbSymKey)), uintptr(cbSymKey), uintptr(unsafe.Pointer(_wszSymKeyType)), uintptr(unsafe.Pointer(_wszClientLicensorCertificate)), uintptr(pfnCallback), uintptr(unsafe.Pointer(_wszURL)), uintptr(unsafe.Pointer(pvContext)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -733,12 +733,12 @@ func DRMGetSignedIssuanceLicense(hEnv uint32, hIssuanceLicense uint32, uFlags ui
 // DRMGetSignedIssuanceLicenseEx calls msdrm!DRMGetSignedIssuanceLicenseEx.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmgetsignedissuancelicenseex
 // Minimum OS: windows6.1.
-func DRMGetSignedIssuanceLicenseEx(hEnv uint32, hIssuanceLicense uint32, uFlags uint32, pbSymKey []byte, wszSymKeyType string, pvReserved unsafe.Pointer, hEnablingPrincipal uint32, hBoundLicenseCLC uint32, pfnCallback DRMCALLBACK, pvContext unsafe.Pointer) error {
+func DRMGetSignedIssuanceLicenseEx(hEnv uint32, hIssuanceLicense uint32, uFlags uint32, pbSymKey []byte, wszSymKeyType *string, pvReserved unsafe.Pointer, hEnablingPrincipal uint32, hBoundLicenseCLC uint32, pfnCallback DRMCALLBACK, pvContext unsafe.Pointer) error {
 	var _pbSymKey *byte
 	if len(pbSymKey) > 0 {
 		_pbSymKey = &pbSymKey[0]
 	}
-	_wszSymKeyType := win32.UTF16Ptr(wszSymKeyType)
+	_wszSymKeyType := win32.UTF16PtrOrNil(wszSymKeyType)
 	r1, _, _ := syscall.SyscallN(procDRMGetSignedIssuanceLicenseEx.Addr(), uintptr(hEnv), uintptr(hIssuanceLicense), uintptr(uFlags), uintptr(unsafe.Pointer(_pbSymKey)), uintptr(len(pbSymKey)), uintptr(unsafe.Pointer(_wszSymKeyType)), uintptr(unsafe.Pointer(pvReserved)), uintptr(hEnablingPrincipal), uintptr(hBoundLicenseCLC), uintptr(pfnCallback), uintptr(unsafe.Pointer(pvContext)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -812,9 +812,9 @@ func DRMGetUsers(hIssuanceLicense uint32, uIndex uint32, phUser *uint32) error {
 
 // DRMInitEnvironment calls msdrm!DRMInitEnvironment.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drminitenvironment
-func DRMInitEnvironment(eSecurityProviderType DRMSECURITYPROVIDERTYPE, eSpecification DRMSPECTYPE, wszSecurityProvider string, wszManifestCredentials string, wszMachineCredentials string, phEnv *uint32, phDefaultLibrary *uint32) error {
-	_wszSecurityProvider := win32.UTF16Ptr(wszSecurityProvider)
-	_wszManifestCredentials := win32.UTF16Ptr(wszManifestCredentials)
+func DRMInitEnvironment(eSecurityProviderType DRMSECURITYPROVIDERTYPE, eSpecification DRMSPECTYPE, wszSecurityProvider *string, wszManifestCredentials *string, wszMachineCredentials string, phEnv *uint32, phDefaultLibrary *uint32) error {
+	_wszSecurityProvider := win32.UTF16PtrOrNil(wszSecurityProvider)
+	_wszManifestCredentials := win32.UTF16PtrOrNil(wszManifestCredentials)
 	_wszMachineCredentials := win32.UTF16Ptr(wszMachineCredentials)
 	r1, _, _ := syscall.SyscallN(procDRMInitEnvironment.Addr(), uintptr(eSecurityProviderType), uintptr(eSpecification), uintptr(unsafe.Pointer(_wszSecurityProvider)), uintptr(unsafe.Pointer(_wszManifestCredentials)), uintptr(unsafe.Pointer(_wszMachineCredentials)), uintptr(unsafe.Pointer(phEnv)), uintptr(unsafe.Pointer(phDefaultLibrary)))
 	return win32.ErrIfFailed(int32(r1))
@@ -837,9 +837,9 @@ func DRMIsWindowProtected(hwnd foundation.HWND, pfProtected *foundation.BOOL) er
 
 // DRMLoadLibrary calls msdrm!DRMLoadLibrary.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmloadlibrary
-func DRMLoadLibrary(hEnv uint32, eSpecification DRMSPECTYPE, wszLibraryProvider string, wszCredentials string, phLibrary *uint32) error {
+func DRMLoadLibrary(hEnv uint32, eSpecification DRMSPECTYPE, wszLibraryProvider string, wszCredentials *string, phLibrary *uint32) error {
 	_wszLibraryProvider := win32.UTF16Ptr(wszLibraryProvider)
-	_wszCredentials := win32.UTF16Ptr(wszCredentials)
+	_wszCredentials := win32.UTF16PtrOrNil(wszCredentials)
 	r1, _, _ := syscall.SyscallN(procDRMLoadLibrary.Addr(), uintptr(hEnv), uintptr(eSpecification), uintptr(unsafe.Pointer(_wszLibraryProvider)), uintptr(unsafe.Pointer(_wszCredentials)), uintptr(unsafe.Pointer(phLibrary)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -870,8 +870,8 @@ func DRMRegisterProtectedWindow(hEnv uint32, hwnd foundation.HWND) error {
 
 // DRMRegisterRevocationList calls msdrm!DRMRegisterRevocationList.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmregisterrevocationlist
-func DRMRegisterRevocationList(hEnv uint32, wszRevocationList string) error {
-	_wszRevocationList := win32.UTF16Ptr(wszRevocationList)
+func DRMRegisterRevocationList(hEnv uint32, wszRevocationList *string) error {
+	_wszRevocationList := win32.UTF16PtrOrNil(wszRevocationList)
 	r1, _, _ := syscall.SyscallN(procDRMRegisterRevocationList.Addr(), uintptr(hEnv), uintptr(unsafe.Pointer(_wszRevocationList)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -885,10 +885,10 @@ func DRMRepair() error {
 
 // DRMSetApplicationSpecificData calls msdrm!DRMSetApplicationSpecificData.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmsetapplicationspecificdata
-func DRMSetApplicationSpecificData(hIssuanceLicense uint32, fDelete bool, wszName string, wszValue string) error {
+func DRMSetApplicationSpecificData(hIssuanceLicense uint32, fDelete bool, wszName *string, wszValue *string) error {
 	_fDelete := win32.Bool32(fDelete)
-	_wszName := win32.UTF16Ptr(wszName)
-	_wszValue := win32.UTF16Ptr(wszValue)
+	_wszName := win32.UTF16PtrOrNil(wszName)
+	_wszValue := win32.UTF16PtrOrNil(wszValue)
 	r1, _, _ := syscall.SyscallN(procDRMSetApplicationSpecificData.Addr(), uintptr(hIssuanceLicense), uintptr(_fDelete), uintptr(unsafe.Pointer(_wszName)), uintptr(unsafe.Pointer(_wszValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -909,58 +909,58 @@ func DRMSetIntervalTime(hIssuanceLicense uint32, cDays uint32) error {
 
 // DRMSetMetaData calls msdrm!DRMSetMetaData.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmsetmetadata
-func DRMSetMetaData(hIssuanceLicense uint32, wszContentId string, wszContentIdType string, wszSKUId string, wszSKUIdType string, wszContentType string, wszContentName string) error {
+func DRMSetMetaData(hIssuanceLicense uint32, wszContentId string, wszContentIdType string, wszSKUId *string, wszSKUIdType *string, wszContentType *string, wszContentName *string) error {
 	_wszContentId := win32.UTF16Ptr(wszContentId)
 	_wszContentIdType := win32.UTF16Ptr(wszContentIdType)
-	_wszSKUId := win32.UTF16Ptr(wszSKUId)
-	_wszSKUIdType := win32.UTF16Ptr(wszSKUIdType)
-	_wszContentType := win32.UTF16Ptr(wszContentType)
-	_wszContentName := win32.UTF16Ptr(wszContentName)
+	_wszSKUId := win32.UTF16PtrOrNil(wszSKUId)
+	_wszSKUIdType := win32.UTF16PtrOrNil(wszSKUIdType)
+	_wszContentType := win32.UTF16PtrOrNil(wszContentType)
+	_wszContentName := win32.UTF16PtrOrNil(wszContentName)
 	r1, _, _ := syscall.SyscallN(procDRMSetMetaData.Addr(), uintptr(hIssuanceLicense), uintptr(unsafe.Pointer(_wszContentId)), uintptr(unsafe.Pointer(_wszContentIdType)), uintptr(unsafe.Pointer(_wszSKUId)), uintptr(unsafe.Pointer(_wszSKUIdType)), uintptr(unsafe.Pointer(_wszContentType)), uintptr(unsafe.Pointer(_wszContentName)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DRMSetNameAndDescription calls msdrm!DRMSetNameAndDescription.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmsetnameanddescription
-func DRMSetNameAndDescription(hIssuanceLicense uint32, fDelete bool, lcid uint32, wszName string, wszDescription string) error {
+func DRMSetNameAndDescription(hIssuanceLicense uint32, fDelete bool, lcid uint32, wszName *string, wszDescription *string) error {
 	_fDelete := win32.Bool32(fDelete)
-	_wszName := win32.UTF16Ptr(wszName)
-	_wszDescription := win32.UTF16Ptr(wszDescription)
+	_wszName := win32.UTF16PtrOrNil(wszName)
+	_wszDescription := win32.UTF16PtrOrNil(wszDescription)
 	r1, _, _ := syscall.SyscallN(procDRMSetNameAndDescription.Addr(), uintptr(hIssuanceLicense), uintptr(_fDelete), uintptr(lcid), uintptr(unsafe.Pointer(_wszName)), uintptr(unsafe.Pointer(_wszDescription)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DRMSetRevocationPoint calls msdrm!DRMSetRevocationPoint.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmsetrevocationpoint
-func DRMSetRevocationPoint(hIssuanceLicense uint32, fDelete bool, wszId string, wszIdType string, wszURL string, pstFrequency *foundation.SYSTEMTIME, wszName string, wszPublicKey string) error {
+func DRMSetRevocationPoint(hIssuanceLicense uint32, fDelete bool, wszId string, wszIdType string, wszURL string, pstFrequency *foundation.SYSTEMTIME, wszName *string, wszPublicKey *string) error {
 	_fDelete := win32.Bool32(fDelete)
 	_wszId := win32.UTF16Ptr(wszId)
 	_wszIdType := win32.UTF16Ptr(wszIdType)
 	_wszURL := win32.UTF16Ptr(wszURL)
-	_wszName := win32.UTF16Ptr(wszName)
-	_wszPublicKey := win32.UTF16Ptr(wszPublicKey)
+	_wszName := win32.UTF16PtrOrNil(wszName)
+	_wszPublicKey := win32.UTF16PtrOrNil(wszPublicKey)
 	r1, _, _ := syscall.SyscallN(procDRMSetRevocationPoint.Addr(), uintptr(hIssuanceLicense), uintptr(_fDelete), uintptr(unsafe.Pointer(_wszId)), uintptr(unsafe.Pointer(_wszIdType)), uintptr(unsafe.Pointer(_wszURL)), uintptr(unsafe.Pointer(pstFrequency)), uintptr(unsafe.Pointer(_wszName)), uintptr(unsafe.Pointer(_wszPublicKey)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DRMSetUsagePolicy calls msdrm!DRMSetUsagePolicy.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmsetusagepolicy
-func DRMSetUsagePolicy(hIssuanceLicense uint32, eUsagePolicyType DRM_USAGEPOLICY_TYPE, fDelete bool, fExclusion bool, wszName string, wszMinVersion string, wszMaxVersion string, wszPublicKey string, wszDigestAlgorithm string, pbDigest *byte, cbDigest uint32) error {
+func DRMSetUsagePolicy(hIssuanceLicense uint32, eUsagePolicyType DRM_USAGEPOLICY_TYPE, fDelete bool, fExclusion bool, wszName *string, wszMinVersion *string, wszMaxVersion *string, wszPublicKey *string, wszDigestAlgorithm *string, pbDigest *byte, cbDigest uint32) error {
 	_fDelete := win32.Bool32(fDelete)
 	_fExclusion := win32.Bool32(fExclusion)
-	_wszName := win32.UTF16Ptr(wszName)
-	_wszMinVersion := win32.UTF16Ptr(wszMinVersion)
-	_wszMaxVersion := win32.UTF16Ptr(wszMaxVersion)
-	_wszPublicKey := win32.UTF16Ptr(wszPublicKey)
-	_wszDigestAlgorithm := win32.UTF16Ptr(wszDigestAlgorithm)
+	_wszName := win32.UTF16PtrOrNil(wszName)
+	_wszMinVersion := win32.UTF16PtrOrNil(wszMinVersion)
+	_wszMaxVersion := win32.UTF16PtrOrNil(wszMaxVersion)
+	_wszPublicKey := win32.UTF16PtrOrNil(wszPublicKey)
+	_wszDigestAlgorithm := win32.UTF16PtrOrNil(wszDigestAlgorithm)
 	r1, _, _ := syscall.SyscallN(procDRMSetUsagePolicy.Addr(), uintptr(hIssuanceLicense), uintptr(eUsagePolicyType), uintptr(_fDelete), uintptr(_fExclusion), uintptr(unsafe.Pointer(_wszName)), uintptr(unsafe.Pointer(_wszMinVersion)), uintptr(unsafe.Pointer(_wszMaxVersion)), uintptr(unsafe.Pointer(_wszPublicKey)), uintptr(unsafe.Pointer(_wszDigestAlgorithm)), uintptr(unsafe.Pointer(pbDigest)), uintptr(cbDigest))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DRMVerify calls msdrm!DRMVerify.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmverify
-func DRMVerify(wszData string, pcAttestedData *uint32, wszAttestedData foundation.PWSTR, peType *DRMATTESTTYPE, pcPrincipal *uint32, wszPrincipal foundation.PWSTR, pcManifest *uint32, wszManifest foundation.PWSTR) error {
-	_wszData := win32.UTF16Ptr(wszData)
+func DRMVerify(wszData *string, pcAttestedData *uint32, wszAttestedData foundation.PWSTR, peType *DRMATTESTTYPE, pcPrincipal *uint32, wszPrincipal foundation.PWSTR, pcManifest *uint32, wszManifest foundation.PWSTR) error {
+	_wszData := win32.UTF16PtrOrNil(wszData)
 	r1, _, _ := syscall.SyscallN(procDRMVerify.Addr(), uintptr(unsafe.Pointer(_wszData)), uintptr(unsafe.Pointer(pcAttestedData)), uintptr(unsafe.Pointer(wszAttestedData)), uintptr(unsafe.Pointer(peType)), uintptr(unsafe.Pointer(pcPrincipal)), uintptr(unsafe.Pointer(wszPrincipal)), uintptr(unsafe.Pointer(pcManifest)), uintptr(unsafe.Pointer(wszManifest)))
 	return win32.ErrIfFailed(int32(r1))
 }

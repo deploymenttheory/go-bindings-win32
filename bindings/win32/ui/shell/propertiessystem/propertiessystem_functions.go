@@ -856,9 +856,9 @@ func PifMgr_GetProperties(hProps foundation.HANDLE, pszGroup foundation.PSTR, lp
 // PifMgr_OpenProperties calls SHELL32!PifMgr_OpenProperties.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pifmgr_openproperties
 // Minimum OS: windows5.0.
-func PifMgr_OpenProperties(pszApp string, pszPIF string, hInf uint32, flOpt uint32) foundation.HANDLE {
+func PifMgr_OpenProperties(pszApp string, pszPIF *string, hInf uint32, flOpt uint32) foundation.HANDLE {
 	_pszApp := win32.UTF16Ptr(pszApp)
-	_pszPIF := win32.UTF16Ptr(pszPIF)
+	_pszPIF := win32.UTF16PtrOrNil(pszPIF)
 	r1, _, _ := syscall.SyscallN(procPifMgr_OpenProperties.Addr(), uintptr(unsafe.Pointer(_pszApp)), uintptr(unsafe.Pointer(_pszPIF)), uintptr(hInf), uintptr(flOpt))
 	return foundation.HANDLE(r1)
 }

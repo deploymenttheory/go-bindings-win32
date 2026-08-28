@@ -117,8 +117,8 @@ func SrpDoesPolicyAllowAppExecution(packageId *storagepackagingappx.PACKAGE_ID, 
 // SrpEnablePermissiveModeFileEncryption calls srpapi!SrpEnablePermissiveModeFileEncryption.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpenablepermissivemodefileencryption
 // Minimum OS: windows10.0.10240.
-func SrpEnablePermissiveModeFileEncryption(enterpriseId string) error {
-	_enterpriseId := win32.UTF16Ptr(enterpriseId)
+func SrpEnablePermissiveModeFileEncryption(enterpriseId *string) error {
+	_enterpriseId := win32.UTF16PtrOrNil(enterpriseId)
 	r1, _, _ := syscall.SyscallN(procSrpEnablePermissiveModeFileEncryption.Addr(), uintptr(unsafe.Pointer(_enterpriseId)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -167,8 +167,8 @@ func SrpIsTokenService(TokenHandle foundation.HANDLE, IsTokenService *byte) foun
 // SrpSetTokenEnterpriseId calls srpapi!SrpSetTokenEnterpriseId.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpsettokenenterpriseid
 // Minimum OS: windows10.0.10240.
-func SrpSetTokenEnterpriseId(tokenHandle foundation.HANDLE, enterpriseId string) error {
-	_enterpriseId := win32.UTF16Ptr(enterpriseId)
+func SrpSetTokenEnterpriseId(tokenHandle foundation.HANDLE, enterpriseId *string) error {
+	_enterpriseId := win32.UTF16PtrOrNil(enterpriseId)
 	r1, _, _ := syscall.SyscallN(procSrpSetTokenEnterpriseId.Addr(), uintptr(tokenHandle), uintptr(unsafe.Pointer(_enterpriseId)))
 	return win32.ErrIfFailed(int32(r1))
 }

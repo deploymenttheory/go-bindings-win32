@@ -939,8 +939,8 @@ func VariantToStringArrayAlloc(var_ *VARIANT, pprgsz **foundation.PWSTR, pcElem 
 // VariantToStringWithDefault calls PROPSYS!VariantToStringWithDefault.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttostringwithdefault
 // Minimum OS: windows5.1.2600.
-func VariantToStringWithDefault(varIn *VARIANT, pszDefault string) foundation.PWSTR {
-	_pszDefault := win32.UTF16Ptr(pszDefault)
+func VariantToStringWithDefault(varIn *VARIANT, pszDefault *string) foundation.PWSTR {
+	_pszDefault := win32.UTF16PtrOrNil(pszDefault)
 	r1, _, _ := syscall.SyscallN(procVariantToStringWithDefault.Addr(), uintptr(unsafe.Pointer(varIn)), uintptr(unsafe.Pointer(_pszDefault)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }

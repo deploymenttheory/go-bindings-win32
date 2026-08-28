@@ -2745,9 +2745,9 @@ type IGroupPolicyObject struct {
 var IID_IGroupPolicyObject = win32.GUID{Data1: 0xea502723, Data2: 0xa23d, Data3: 0x11d1, Data4: [8]byte{0xa7, 0xd3, 0x00, 0x00, 0xf8, 0x75, 0x71, 0xe3}}
 
 // New dispatches through IGroupPolicyObject's vtable slot 3.
-func (self *IGroupPolicyObject) New(pszDomainName string, pszDisplayName string, dwFlags uint32) error {
+func (self *IGroupPolicyObject) New(pszDomainName string, pszDisplayName *string, dwFlags uint32) error {
 	_pszDomainName := win32.UTF16Ptr(pszDomainName)
-	_pszDisplayName := win32.UTF16Ptr(pszDisplayName)
+	_pszDisplayName := win32.UTF16PtrOrNil(pszDisplayName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDomainName)), uintptr(unsafe.Pointer(_pszDisplayName)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }

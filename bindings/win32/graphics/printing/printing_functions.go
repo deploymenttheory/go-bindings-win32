@@ -727,8 +727,8 @@ func AddJobA(hPrinter PRINTER_HANDLE, Level uint32, pData []byte, pcbNeeded *uin
 
 // AddMonitor calls winspool.drv!AddMonitorW.
 // https://learn.microsoft.com/windows/win32/printdocs/addmonitor
-func AddMonitor(pName string, Level uint32, pMonitors *byte) error {
-	_pName := win32.UTF16Ptr(pName)
+func AddMonitor(pName *string, Level uint32, pMonitors *byte) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, e1 := syscall.SyscallN(procAddMonitor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pMonitors)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -748,8 +748,8 @@ func AddMonitorA(pName foundation.PSTR, Level uint32, pMonitors *byte) error {
 
 // AddPort calls winspool.drv!AddPortW.
 // https://learn.microsoft.com/windows/win32/printdocs/addport
-func AddPort(pName string, hWnd foundation.HWND, pMonitorName string) error {
-	_pName := win32.UTF16Ptr(pName)
+func AddPort(pName *string, hWnd foundation.HWND, pMonitorName string) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pMonitorName := win32.UTF16Ptr(pMonitorName)
 	r1, _, e1 := syscall.SyscallN(procAddPort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(hWnd), uintptr(unsafe.Pointer(_pMonitorName)))
 	if r1 == 0 {
@@ -776,9 +776,9 @@ func AddPrintDeviceObject(hPrinter PRINTER_HANDLE, phDeviceObject *foundation.HA
 
 // AddPrintProcessor calls winspool.drv!AddPrintProcessorW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprintprocessor
-func AddPrintProcessor(pName string, pEnvironment string, pPathName string, pPrintProcessorName string) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func AddPrintProcessor(pName *string, pEnvironment *string, pPathName string, pPrintProcessorName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pPathName := win32.UTF16Ptr(pPathName)
 	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
 	r1, _, _ := syscall.SyscallN(procAddPrintProcessor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pPathName)), uintptr(unsafe.Pointer(_pPrintProcessorName)))
@@ -794,8 +794,8 @@ func AddPrintProcessorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pPa
 
 // AddPrintProvidor calls winspool.drv!AddPrintProvidorW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprintprovidor
-func AddPrintProvidor(pName string, Level uint32, pProvidorInfo *byte) bool {
-	_pName := win32.UTF16Ptr(pName)
+func AddPrintProvidor(pName *string, Level uint32, pProvidorInfo *byte) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, _ := syscall.SyscallN(procAddPrintProvidor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pProvidorInfo)))
 	return r1 != 0
 }
@@ -809,8 +809,8 @@ func AddPrintProvidorA(pName foundation.PSTR, Level uint32, pProvidorInfo *byte)
 
 // AddPrinter calls winspool.drv!AddPrinterW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprinter
-func AddPrinter(pName string, Level uint32, pPrinter *byte) (PRINTER_HANDLE, error) {
-	_pName := win32.UTF16Ptr(pName)
+func AddPrinter(pName *string, Level uint32, pPrinter *byte) (PRINTER_HANDLE, error) {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, e1 := syscall.SyscallN(procAddPrinter.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)))
 	ret := PRINTER_HANDLE(r1)
 	if ret == ^PRINTER_HANDLE(0) || ret == 0 {
@@ -861,8 +861,8 @@ func AddPrinterConnectionA(pName foundation.PSTR) bool {
 
 // AddPrinterDriver calls winspool.drv!AddPrinterDriverW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprinterdriver
-func AddPrinterDriver(pName string, Level uint32, pDriverInfo *byte) error {
-	_pName := win32.UTF16Ptr(pName)
+func AddPrinterDriver(pName *string, Level uint32, pDriverInfo *byte) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, e1 := syscall.SyscallN(procAddPrinterDriver.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -882,8 +882,8 @@ func AddPrinterDriverA(pName foundation.PSTR, Level uint32, pDriverInfo *byte) e
 
 // AddPrinterDriverEx calls winspool.drv!AddPrinterDriverExW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprinterdriverex
-func AddPrinterDriverEx(pName string, Level uint32, lpbDriverInfo *byte, dwFileCopyFlags uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
+func AddPrinterDriverEx(pName *string, Level uint32, lpbDriverInfo *byte, dwFileCopyFlags uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, _ := syscall.SyscallN(procAddPrinterDriverEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(lpbDriverInfo)), uintptr(dwFileCopyFlags))
 	return r1 != 0
 }
@@ -960,8 +960,8 @@ func CommonPropertySheetUIA(hWndOwner foundation.HWND, pfnPropSheetUI PFNPROPSHE
 
 // ConfigurePort calls winspool.drv!ConfigurePortW.
 // https://learn.microsoft.com/windows/win32/printdocs/configureport
-func ConfigurePort(pName string, hWnd foundation.HWND, pPortName string) bool {
-	_pName := win32.UTF16Ptr(pName)
+func ConfigurePort(pName *string, hWnd foundation.HWND, pPortName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pPortName := win32.UTF16Ptr(pPortName)
 	r1, _, _ := syscall.SyscallN(procConfigurePort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(hWnd), uintptr(unsafe.Pointer(_pPortName)))
 	return r1 != 0
@@ -985,9 +985,9 @@ var specCorePrinterDriverInstalled = &win32.Spec{Args: []win32.Arg{win32.Word, w
 
 // CorePrinterDriverInstalled calls winspool.drv!CorePrinterDriverInstalledW.
 // https://learn.microsoft.com/windows/win32/printdocs/coreprinterdriverinstalled
-func CorePrinterDriverInstalled(pszServer string, pszEnvironment string, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *foundation.BOOL) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+func CorePrinterDriverInstalled(pszServer *string, pszEnvironment *string, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *foundation.BOOL) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
 	r1, _, _ := win32.Call(procCorePrinterDriverInstalled.Addr(), specCorePrinterDriverInstalled, nil, uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(&CoreDriverGUID)), uintptr(win32.StructArg(ftDriverDate)), uintptr(dwlDriverVersion), uintptr(unsafe.Pointer(pbDriverInstalled))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1004,8 +1004,8 @@ func CorePrinterDriverInstalledA(pszServer foundation.PSTR, pszEnvironment found
 // CreatePrintAsyncNotifyChannel calls winspool.drv!CreatePrintAsyncNotifyChannel.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-createprintasyncnotifychannel
 // Minimum OS: windows6.0.6000.
-func CreatePrintAsyncNotifyChannel(pszName string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) error {
-	_pszName := win32.UTF16Ptr(pszName)
+func CreatePrintAsyncNotifyChannel(pszName *string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) error {
+	_pszName := win32.UTF16PtrOrNil(pszName)
 	r1, _, _ := syscall.SyscallN(procCreatePrintAsyncNotifyChannel.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1040,9 +1040,9 @@ func DeleteJobNamedProperty(hPrinter PRINTER_HANDLE, JobId uint32, pszName strin
 
 // DeleteMonitor calls winspool.drv!DeleteMonitorW.
 // https://learn.microsoft.com/windows/win32/printdocs/deletemonitor
-func DeleteMonitor(pName string, pEnvironment string, pMonitorName string) error {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeleteMonitor(pName *string, pEnvironment *string, pMonitorName string) error {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pMonitorName := win32.UTF16Ptr(pMonitorName)
 	r1, _, e1 := syscall.SyscallN(procDeleteMonitor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pMonitorName)))
 	if r1 == 0 {
@@ -1063,8 +1063,8 @@ func DeleteMonitorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pMonito
 
 // DeletePort calls winspool.drv!DeletePortW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteport
-func DeletePort(pName string, hWnd foundation.HWND, pPortName string) error {
-	_pName := win32.UTF16Ptr(pName)
+func DeletePort(pName *string, hWnd foundation.HWND, pPortName string) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pPortName := win32.UTF16Ptr(pPortName)
 	r1, _, e1 := syscall.SyscallN(procDeletePort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(hWnd), uintptr(unsafe.Pointer(_pPortName)))
 	if r1 == 0 {
@@ -1085,9 +1085,9 @@ func DeletePortA(pName foundation.PSTR, hWnd foundation.HWND, pPortName foundati
 
 // DeletePrintProcessor calls winspool.drv!DeletePrintProcessorW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprintprocessor
-func DeletePrintProcessor(pName string, pEnvironment string, pPrintProcessorName string) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeletePrintProcessor(pName *string, pEnvironment *string, pPrintProcessorName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
 	r1, _, _ := syscall.SyscallN(procDeletePrintProcessor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pPrintProcessorName)))
 	return r1 != 0
@@ -1102,9 +1102,9 @@ func DeletePrintProcessorA(pName foundation.PSTR, pEnvironment foundation.PSTR, 
 
 // DeletePrintProvidor calls winspool.drv!DeletePrintProvidorW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprintprovidor
-func DeletePrintProvidor(pName string, pEnvironment string, pPrintProvidorName string) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeletePrintProvidor(pName *string, pEnvironment *string, pPrintProvidorName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pPrintProvidorName := win32.UTF16Ptr(pPrintProvidorName)
 	r1, _, _ := syscall.SyscallN(procDeletePrintProvidor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pPrintProvidorName)))
 	return r1 != 0
@@ -1175,9 +1175,9 @@ func DeletePrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pVa
 
 // DeletePrinterDriver calls winspool.drv!DeletePrinterDriverW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriver
-func DeletePrinterDriver(pName string, pEnvironment string, pDriverName string) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeletePrinterDriver(pName *string, pEnvironment *string, pDriverName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pDriverName := win32.UTF16Ptr(pDriverName)
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriver.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pDriverName)))
 	return r1 != 0
@@ -1192,9 +1192,9 @@ func DeletePrinterDriverA(pName foundation.PSTR, pEnvironment foundation.PSTR, p
 
 // DeletePrinterDriverEx calls winspool.drv!DeletePrinterDriverExW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverex
-func DeletePrinterDriverEx(pName string, pEnvironment string, pDriverName string, dwDeleteFlag uint32, dwVersionFlag uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeletePrinterDriverEx(pName *string, pEnvironment *string, pDriverName string, dwDeleteFlag uint32, dwVersionFlag uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pDriverName := win32.UTF16Ptr(pDriverName)
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pDriverName)), uintptr(dwDeleteFlag), uintptr(dwVersionFlag))
 	return r1 != 0
@@ -1209,10 +1209,10 @@ func DeletePrinterDriverExA(pName foundation.PSTR, pEnvironment foundation.PSTR,
 
 // DeletePrinterDriverPackage calls winspool.drv!DeletePrinterDriverPackageW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverpackage
-func DeletePrinterDriverPackage(pszServer string, pszInfPath string, pszEnvironment string) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
+func DeletePrinterDriverPackage(pszServer *string, pszInfPath string, pszEnvironment *string) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
 	_pszInfPath := win32.UTF16Ptr(pszInfPath)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszEnvironment)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1344,8 +1344,8 @@ func EnumJobsA(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level ui
 
 // EnumMonitors calls winspool.drv!EnumMonitorsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enummonitors
-func EnumMonitors(pName string, Level uint32, pMonitor []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
+func EnumMonitors(pName *string, Level uint32, pMonitor []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	var _pMonitor *byte
 	if len(pMonitor) > 0 {
 		_pMonitor = &pMonitor[0]
@@ -1367,8 +1367,8 @@ func EnumMonitorsA(pName foundation.PSTR, Level uint32, pMonitor []byte, pcbNeed
 
 // EnumPorts calls winspool.drv!EnumPortsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumports
-func EnumPorts(pName string, Level uint32, pPort []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
+func EnumPorts(pName *string, Level uint32, pPort []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	var _pPort *byte
 	if len(pPort) > 0 {
 		_pPort = &pPort[0]
@@ -1390,8 +1390,8 @@ func EnumPortsA(pName foundation.PSTR, Level uint32, pPort []byte, pcbNeeded *ui
 
 // EnumPrintProcessorDatatypes calls winspool.drv!EnumPrintProcessorDatatypesW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes
-func EnumPrintProcessorDatatypes(pName string, pPrintProcessorName string, Level uint32, pDatatypes []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
+func EnumPrintProcessorDatatypes(pName *string, pPrintProcessorName string, Level uint32, pDatatypes []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
 	var _pDatatypes *byte
 	if len(pDatatypes) > 0 {
@@ -1414,9 +1414,9 @@ func EnumPrintProcessorDatatypesA(pName foundation.PSTR, pPrintProcessorName fou
 
 // EnumPrintProcessors calls winspool.drv!EnumPrintProcessorsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors
-func EnumPrintProcessors(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func EnumPrintProcessors(pName *string, pEnvironment *string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pPrintProcessorInfo *byte
 	if len(pPrintProcessorInfo) > 0 {
 		_pPrintProcessorInfo = &pPrintProcessorInfo[0]
@@ -1483,9 +1483,9 @@ func EnumPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pEnum
 
 // EnumPrinterDrivers calls winspool.drv!EnumPrinterDriversW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers
-func EnumPrinterDrivers(pName string, pEnvironment string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32, pcReturned *uint32) error {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func EnumPrinterDrivers(pName *string, pEnvironment *string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32, pcReturned *uint32) error {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pDriverInfo *byte
 	if len(pDriverInfo) > 0 {
 		_pDriverInfo = &pDriverInfo[0]
@@ -1528,8 +1528,8 @@ func EnumPrinterKeyA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pSubkey 
 
 // EnumPrinters calls winspool.drv!EnumPrintersW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinters
-func EnumPrinters(Flags uint32, Name string, Level uint32, pPrinterEnum []byte, pcbNeeded *uint32, pcReturned *uint32) error {
-	_Name := win32.UTF16Ptr(Name)
+func EnumPrinters(Flags uint32, Name *string, Level uint32, pPrinterEnum []byte, pcbNeeded *uint32, pcReturned *uint32) error {
+	_Name := win32.UTF16PtrOrNil(Name)
 	var _pPrinterEnum *byte
 	if len(pPrinterEnum) > 0 {
 		_pPrinterEnum = &pPrinterEnum[0]
@@ -1704,9 +1704,9 @@ func GetCPSUIUserData(hDlg foundation.HWND) uintptr {
 
 // GetCorePrinterDrivers calls winspool.drv!GetCorePrinterDriversW.
 // https://learn.microsoft.com/windows/win32/printdocs/getcoreprinterdrivers
-func GetCorePrinterDrivers(pszServer string, pszEnvironment string, pszzCoreDriverDependencies string, pCorePrinterDrivers []CORE_PRINTER_DRIVERW) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+func GetCorePrinterDrivers(pszServer *string, pszEnvironment *string, pszzCoreDriverDependencies string, pCorePrinterDrivers []CORE_PRINTER_DRIVERW) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
 	_pszzCoreDriverDependencies := win32.UTF16Ptr(pszzCoreDriverDependencies)
 	var _pCorePrinterDrivers *CORE_PRINTER_DRIVERW
 	if len(pCorePrinterDrivers) > 0 {
@@ -1827,9 +1827,9 @@ func GetPrintOutputInfo(hWnd foundation.HWND, pszPrinter string, phFile *foundat
 
 // GetPrintProcessorDirectory calls winspool.drv!GetPrintProcessorDirectoryW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprintprocessordirectory
-func GetPrintProcessorDirectory(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func GetPrintProcessorDirectory(pName *string, pEnvironment *string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pPrintProcessorInfo *byte
 	if len(pPrintProcessorInfo) > 0 {
 		_pPrintProcessorInfo = &pPrintProcessorInfo[0]
@@ -1926,8 +1926,8 @@ func GetPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pValue
 
 // GetPrinterDriver calls winspool.drv!GetPrinterDriverW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver
-func GetPrinterDriver(hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func GetPrinterDriver(hPrinter PRINTER_HANDLE, pEnvironment *string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pDriverInfo *byte
 	if len(pDriverInfo) > 0 {
 		_pDriverInfo = &pDriverInfo[0]
@@ -1938,8 +1938,8 @@ func GetPrinterDriver(hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32
 
 // GetPrinterDriver2 calls winspool.drv!GetPrinterDriver2W.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver2
-func GetPrinterDriver2(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func GetPrinterDriver2(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment *string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pDriverInfo *byte
 	if len(pDriverInfo) > 0 {
 		_pDriverInfo = &pDriverInfo[0]
@@ -1971,9 +1971,9 @@ func GetPrinterDriverA(hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Le
 
 // GetPrinterDriverDirectory calls winspool.drv!GetPrinterDriverDirectoryW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverdirectory
-func GetPrinterDriverDirectory(pName string, pEnvironment string, Level uint32, pDriverDirectory []byte, pcbNeeded *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func GetPrinterDriverDirectory(pName *string, pEnvironment *string, Level uint32, pDriverDirectory []byte, pcbNeeded *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pDriverDirectory *byte
 	if len(pDriverDirectory) > 0 {
 		_pDriverDirectory = &pDriverDirectory[0]
@@ -1995,10 +1995,10 @@ func GetPrinterDriverDirectoryA(pName foundation.PSTR, pEnvironment foundation.P
 
 // GetPrinterDriverPackagePath calls winspool.drv!GetPrinterDriverPackagePathW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverpackagepath
-func GetPrinterDriverPackagePath(pszServer string, pszEnvironment string, pszLanguage string, pszPackageID string, pszDriverPackageCab foundation.PWSTR, cchDriverPackageCab uint32, pcchRequiredSize *uint32) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
-	_pszLanguage := win32.UTF16Ptr(pszLanguage)
+func GetPrinterDriverPackagePath(pszServer *string, pszEnvironment *string, pszLanguage *string, pszPackageID string, pszDriverPackageCab foundation.PWSTR, cchDriverPackageCab uint32, pcchRequiredSize *uint32) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
+	_pszLanguage := win32.UTF16PtrOrNil(pszLanguage)
 	_pszPackageID := win32.UTF16Ptr(pszPackageID)
 	r1, _, _ := syscall.SyscallN(procGetPrinterDriverPackagePath.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(_pszLanguage)), uintptr(unsafe.Pointer(_pszPackageID)), uintptr(unsafe.Pointer(pszDriverPackageCab)), uintptr(cchDriverPackageCab), uintptr(unsafe.Pointer(pcchRequiredSize)))
 	return win32.ErrIfFailed(int32(r1))
@@ -2030,11 +2030,11 @@ func ImpersonatePrinterClient(hToken foundation.HANDLE) bool {
 
 // InstallPrinterDriverFromPackage calls winspool.drv!InstallPrinterDriverFromPackageW.
 // https://learn.microsoft.com/windows/win32/printdocs/installprinterdriverfrompackage
-func InstallPrinterDriverFromPackage(pszServer string, pszInfPath string, pszDriverName string, pszEnvironment string, dwFlags uint32) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
-	_pszInfPath := win32.UTF16Ptr(pszInfPath)
+func InstallPrinterDriverFromPackage(pszServer *string, pszInfPath *string, pszDriverName string, pszEnvironment *string, dwFlags uint32) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
+	_pszInfPath := win32.UTF16PtrOrNil(pszInfPath)
 	_pszDriverName := win32.UTF16Ptr(pszDriverName)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
 	r1, _, _ := syscall.SyscallN(procInstallPrinterDriverFromPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszDriverName)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2062,8 +2062,8 @@ func IsValidDevmodeA(pDevmode *graphicsgdi.DEVMODEA, DevmodeSize uintptr) bool {
 
 // OpenPrinter calls winspool.drv!OpenPrinterW.
 // https://learn.microsoft.com/windows/win32/printdocs/openprinter
-func OpenPrinter(pPrinterName string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW) error {
-	_pPrinterName := win32.UTF16Ptr(pPrinterName)
+func OpenPrinter(pPrinterName *string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW) error {
+	_pPrinterName := win32.UTF16PtrOrNil(pPrinterName)
 	r1, _, e1 := syscall.SyscallN(procOpenPrinter.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2073,8 +2073,8 @@ func OpenPrinter(pPrinterName string, phPrinter *PRINTER_HANDLE, pDefault *PRINT
 
 // OpenPrinter2 calls winspool.drv!OpenPrinter2W.
 // https://learn.microsoft.com/windows/win32/printdocs/openprinter2
-func OpenPrinter2(pPrinterName string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW, pOptions *PRINTER_OPTIONSW) error {
-	_pPrinterName := win32.UTF16Ptr(pPrinterName)
+func OpenPrinter2(pPrinterName *string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW, pOptions *PRINTER_OPTIONSW) error {
+	_pPrinterName := win32.UTF16PtrOrNil(pPrinterName)
 	r1, _, e1 := syscall.SyscallN(procOpenPrinter2.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pOptions)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2169,8 +2169,8 @@ func ReadPrinter(hPrinter PRINTER_HANDLE, pBuf []byte, pNoBytesRead *uint32) boo
 // RegisterForPrintAsyncNotifications calls winspool.drv!RegisterForPrintAsyncNotifications.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-registerforprintasyncnotifications
 // Minimum OS: windows6.0.6000.
-func RegisterForPrintAsyncNotifications(pszName string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) error {
-	_pszName := win32.UTF16Ptr(pszName)
+func RegisterForPrintAsyncNotifications(pszName *string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) error {
+	_pszName := win32.UTF16PtrOrNil(pszName)
 	r1, _, _ := syscall.SyscallN(procRegisterForPrintAsyncNotifications.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(phNotify)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2290,8 +2290,8 @@ func SetCPSUIUserData(hDlg foundation.HWND, CPSUIUserData uintptr) bool {
 
 // SetDefaultPrinter calls winspool.drv!SetDefaultPrinterW.
 // https://learn.microsoft.com/windows/win32/printdocs/setdefaultprinter
-func SetDefaultPrinter(pszPrinter string) bool {
-	_pszPrinter := win32.UTF16Ptr(pszPrinter)
+func SetDefaultPrinter(pszPrinter *string) bool {
+	_pszPrinter := win32.UTF16PtrOrNil(pszPrinter)
 	r1, _, _ := syscall.SyscallN(procSetDefaultPrinter.Addr(), uintptr(unsafe.Pointer(_pszPrinter)))
 	return r1 != 0
 }
@@ -2340,8 +2340,8 @@ func SetJobNamedProperty(hPrinter PRINTER_HANDLE, JobId uint32, pProperty *Print
 
 // SetPort calls winspool.drv!SetPortW.
 // https://learn.microsoft.com/windows/win32/printdocs/setport
-func SetPort(pName string, pPortName string, dwLevel uint32, pPortInfo *byte) error {
-	_pName := win32.UTF16Ptr(pName)
+func SetPort(pName *string, pPortName string, dwLevel uint32, pPortInfo *byte) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pPortName := win32.UTF16Ptr(pPortName)
 	r1, _, e1 := syscall.SyscallN(procSetPort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pPortName)), uintptr(dwLevel), uintptr(unsafe.Pointer(pPortInfo)))
 	if r1 == 0 {
@@ -2513,10 +2513,10 @@ func UpdatePrintDeviceObject(hPrinter PRINTER_HANDLE, hDeviceObject foundation.H
 
 // UploadPrinterDriverPackage calls winspool.drv!UploadPrinterDriverPackageW.
 // https://learn.microsoft.com/windows/win32/printdocs/uploadprinterdriverpackage
-func UploadPrinterDriverPackage(pszServer string, pszInfPath string, pszEnvironment string, dwFlags uint32, hwnd foundation.HWND, pszDestInfPath foundation.PWSTR, pcchDestInfPath *uint32) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
+func UploadPrinterDriverPackage(pszServer *string, pszInfPath string, pszEnvironment *string, dwFlags uint32, hwnd foundation.HWND, pszDestInfPath foundation.PWSTR, pcchDestInfPath *uint32) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
 	_pszInfPath := win32.UTF16Ptr(pszInfPath)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
 	r1, _, _ := syscall.SyscallN(procUploadPrinterDriverPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(dwFlags), uintptr(hwnd), uintptr(unsafe.Pointer(pszDestInfPath)), uintptr(unsafe.Pointer(pcchDestInfPath)))
 	return win32.ErrIfFailed(int32(r1))
 }

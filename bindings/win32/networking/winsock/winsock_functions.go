@@ -754,9 +754,9 @@ func GetAcceptExSockaddrs(lpOutputBuffer unsafe.Pointer, dwReceiveDataLength uin
 // GetAddrInfoEx calls WS2_32!GetAddrInfoExW.
 // https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexw
 // Minimum OS: windows6.0.6000.
-func GetAddrInfoEx(pName string, pServiceName string, dwNameSpace uint32, lpNspId *win32.GUID, hints *ADDRINFOEXW, ppResult **ADDRINFOEXW, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle *foundation.HANDLE) int32 {
-	_pName := win32.UTF16Ptr(pName)
-	_pServiceName := win32.UTF16Ptr(pServiceName)
+func GetAddrInfoEx(pName *string, pServiceName *string, dwNameSpace uint32, lpNspId *win32.GUID, hints *ADDRINFOEXW, ppResult **ADDRINFOEXW, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle *foundation.HANDLE) int32 {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pServiceName := win32.UTF16PtrOrNil(pServiceName)
 	r1, _, _ := syscall.SyscallN(procGetAddrInfoEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pServiceName)), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpNspId)), uintptr(unsafe.Pointer(hints)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(unsafe.Pointer(lpHandle)))
 	return int32(r1)
 }
@@ -788,9 +788,9 @@ func GetAddrInfoExOverlappedResult(lpOverlapped *systemio.OVERLAPPED) int32 {
 // GetAddrInfoW calls WS2_32!GetAddrInfoW.
 // https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfow
 // Minimum OS: windows8.1.
-func GetAddrInfoW(pNodeName string, pServiceName string, pHints *ADDRINFOW, ppResult **ADDRINFOW) int32 {
-	_pNodeName := win32.UTF16Ptr(pNodeName)
-	_pServiceName := win32.UTF16Ptr(pServiceName)
+func GetAddrInfoW(pNodeName *string, pServiceName *string, pHints *ADDRINFOW, ppResult **ADDRINFOW) int32 {
+	_pNodeName := win32.UTF16PtrOrNil(pNodeName)
+	_pServiceName := win32.UTF16PtrOrNil(pServiceName)
 	r1, _, _ := syscall.SyscallN(procGetAddrInfoW.Addr(), uintptr(unsafe.Pointer(_pNodeName)), uintptr(unsafe.Pointer(_pServiceName)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppResult)))
 	return int32(r1)
 }
@@ -798,8 +798,8 @@ func GetAddrInfoW(pNodeName string, pServiceName string, pHints *ADDRINFOW, ppRe
 // GetAddressByName calls MSWSOCK!GetAddressByNameW.
 // https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getaddressbynamew
 // Minimum OS: windows5.0.
-func GetAddressByName(dwNameSpace uint32, lpServiceType *win32.GUID, lpServiceName string, lpiProtocols *int32, dwResolution uint32, lpServiceAsyncInfo *SERVICE_ASYNC_INFO, lpCsaddrBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpAliasBuffer foundation.PWSTR, lpdwAliasBufferLength *uint32) (int32, error) {
-	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+func GetAddressByName(dwNameSpace uint32, lpServiceType *win32.GUID, lpServiceName *string, lpiProtocols *int32, dwResolution uint32, lpServiceAsyncInfo *SERVICE_ASYNC_INFO, lpCsaddrBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpAliasBuffer foundation.PWSTR, lpdwAliasBufferLength *uint32) (int32, error) {
+	_lpServiceName := win32.UTF16PtrOrNil(lpServiceName)
 	r1, _, e1 := syscall.SyscallN(procGetAddressByName.Addr(), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpServiceType)), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(dwResolution), uintptr(unsafe.Pointer(lpServiceAsyncInfo)), uintptr(unsafe.Pointer(lpCsaddrBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpAliasBuffer)), uintptr(unsafe.Pointer(lpdwAliasBufferLength)))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -1406,9 +1406,9 @@ func Sendto(s SOCKET, buf foundation.PSTR, len_ int32, flags int32, to *SOCKADDR
 // SetAddrInfoEx calls WS2_32!SetAddrInfoExW.
 // https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-setaddrinfoexw
 // Minimum OS: windows8.1.
-func SetAddrInfoEx(pName string, pServiceName string, pAddresses *SOCKET_ADDRESS, dwAddressCount uint32, lpBlob *systemcom.BLOB, dwFlags uint32, dwNameSpace uint32, lpNspId *win32.GUID, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle *foundation.HANDLE) int32 {
+func SetAddrInfoEx(pName string, pServiceName *string, pAddresses *SOCKET_ADDRESS, dwAddressCount uint32, lpBlob *systemcom.BLOB, dwFlags uint32, dwNameSpace uint32, lpNspId *win32.GUID, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle *foundation.HANDLE) int32 {
 	_pName := win32.UTF16Ptr(pName)
-	_pServiceName := win32.UTF16Ptr(pServiceName)
+	_pServiceName := win32.UTF16PtrOrNil(pServiceName)
 	r1, _, _ := syscall.SyscallN(procSetAddrInfoEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pServiceName)), uintptr(unsafe.Pointer(pAddresses)), uintptr(dwAddressCount), uintptr(unsafe.Pointer(lpBlob)), uintptr(dwFlags), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpNspId)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(unsafe.Pointer(lpNameHandle)))
 	return int32(r1)
 }
@@ -2542,9 +2542,9 @@ func WSCEnumProtocols32(lpiProtocols *int32, lpProtocolBuffer *WSAPROTOCOL_INFOW
 // WSCGetApplicationCategory calls WS2_32!WSCGetApplicationCategory.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscgetapplicationcategory
 // Minimum OS: windows6.0.6000.
-func WSCGetApplicationCategory(Path string, PathLength uint32, Extra string, ExtraLength uint32, pPermittedLspCategories *uint32, lpErrno *int32) int32 {
+func WSCGetApplicationCategory(Path string, PathLength uint32, Extra *string, ExtraLength uint32, pPermittedLspCategories *uint32, lpErrno *int32) int32 {
 	_Path := win32.UTF16Ptr(Path)
-	_Extra := win32.UTF16Ptr(Extra)
+	_Extra := win32.UTF16PtrOrNil(Extra)
 	r1, _, _ := syscall.SyscallN(procWSCGetApplicationCategory.Addr(), uintptr(unsafe.Pointer(_Path)), uintptr(PathLength), uintptr(unsafe.Pointer(_Extra)), uintptr(ExtraLength), uintptr(unsafe.Pointer(pPermittedLspCategories)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
@@ -2665,9 +2665,9 @@ func WSCInstallProviderAndChains64_32(lpProviderId *win32.GUID, lpszProviderDllP
 // WSCSetApplicationCategory calls WS2_32!WSCSetApplicationCategory.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscsetapplicationcategory
 // Minimum OS: windows6.0.6000.
-func WSCSetApplicationCategory(Path string, PathLength uint32, Extra string, ExtraLength uint32, PermittedLspCategories uint32, pPrevPermLspCat *uint32, lpErrno *int32) int32 {
+func WSCSetApplicationCategory(Path string, PathLength uint32, Extra *string, ExtraLength uint32, PermittedLspCategories uint32, pPrevPermLspCat *uint32, lpErrno *int32) int32 {
 	_Path := win32.UTF16Ptr(Path)
-	_Extra := win32.UTF16Ptr(Extra)
+	_Extra := win32.UTF16PtrOrNil(Extra)
 	r1, _, _ := syscall.SyscallN(procWSCSetApplicationCategory.Addr(), uintptr(unsafe.Pointer(_Path)), uintptr(PathLength), uintptr(unsafe.Pointer(_Extra)), uintptr(ExtraLength), uintptr(PermittedLspCategories), uintptr(unsafe.Pointer(pPrevPermLspCat)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }

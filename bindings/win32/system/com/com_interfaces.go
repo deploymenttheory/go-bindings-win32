@@ -949,8 +949,8 @@ func (self *IClientSecurity) QueryBlanket(pProxy *IUnknown, pAuthnSvc *uint32, p
 }
 
 // SetBlanket dispatches through IClientSecurity's vtable slot 4.
-func (self *IClientSecurity) SetBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
-	_pServerPrincName := win32.UTF16Ptr(pServerPrincName)
+func (self *IClientSecurity) SetBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName *string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
+	_pServerPrincName := win32.UTF16PtrOrNil(pServerPrincName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProxy)), uintptr(dwAuthnSvc), uintptr(dwAuthzSvc), uintptr(unsafe.Pointer(_pServerPrincName)), uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(dwCapabilities))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3904,8 +3904,8 @@ func (self *IUriBuilder) GetUserName(pcchUserName *uint32, ppwzUserName *foundat
 }
 
 // SetFragment dispatches through IUriBuilder's vtable slot 16.
-func (self *IUriBuilder) SetFragment(pwzNewValue string) error {
-	_pwzNewValue := win32.UTF16Ptr(pwzNewValue)
+func (self *IUriBuilder) SetFragment(pwzNewValue *string) error {
+	_pwzNewValue := win32.UTF16PtrOrNil(pwzNewValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzNewValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3918,15 +3918,15 @@ func (self *IUriBuilder) SetHost(pwzNewValue string) error {
 }
 
 // SetPassword dispatches through IUriBuilder's vtable slot 18.
-func (self *IUriBuilder) SetPassword(pwzNewValue string) error {
-	_pwzNewValue := win32.UTF16Ptr(pwzNewValue)
+func (self *IUriBuilder) SetPassword(pwzNewValue *string) error {
+	_pwzNewValue := win32.UTF16PtrOrNil(pwzNewValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzNewValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetPath dispatches through IUriBuilder's vtable slot 19.
-func (self *IUriBuilder) SetPath(pwzNewValue string) error {
-	_pwzNewValue := win32.UTF16Ptr(pwzNewValue)
+func (self *IUriBuilder) SetPath(pwzNewValue *string) error {
+	_pwzNewValue := win32.UTF16PtrOrNil(pwzNewValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzNewValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3939,8 +3939,8 @@ func (self *IUriBuilder) SetPort(fHasPort bool, dwNewValue uint32) error {
 }
 
 // SetQuery dispatches through IUriBuilder's vtable slot 21.
-func (self *IUriBuilder) SetQuery(pwzNewValue string) error {
-	_pwzNewValue := win32.UTF16Ptr(pwzNewValue)
+func (self *IUriBuilder) SetQuery(pwzNewValue *string) error {
+	_pwzNewValue := win32.UTF16PtrOrNil(pwzNewValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzNewValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3953,8 +3953,8 @@ func (self *IUriBuilder) SetSchemeName(pwzNewValue string) error {
 }
 
 // SetUserName dispatches through IUriBuilder's vtable slot 23.
-func (self *IUriBuilder) SetUserName(pwzNewValue string) error {
-	_pwzNewValue := win32.UTF16Ptr(pwzNewValue)
+func (self *IUriBuilder) SetUserName(pwzNewValue *string) error {
+	_pwzNewValue := win32.UTF16PtrOrNil(pwzNewValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzNewValue)))
 	return win32.ErrIfFailed(int32(r1))
 }

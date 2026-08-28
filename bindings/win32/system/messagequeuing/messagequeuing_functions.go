@@ -188,8 +188,8 @@ func MQFreeSecurityContext(hSecurityContext foundation.HANDLE) {
 }
 
 // MQGetMachineProperties calls mqrt!MQGetMachineProperties.
-func MQGetMachineProperties(lpwcsMachineName string, pguidMachineId *win32.GUID, pQMProps *MQQMPROPS) error {
-	_lpwcsMachineName := win32.UTF16Ptr(lpwcsMachineName)
+func MQGetMachineProperties(lpwcsMachineName *string, pguidMachineId *win32.GUID, pQMProps *MQQMPROPS) error {
+	_lpwcsMachineName := win32.UTF16PtrOrNil(lpwcsMachineName)
 	r1, _, _ := syscall.SyscallN(procMQGetMachineProperties.Addr(), uintptr(unsafe.Pointer(_lpwcsMachineName)), uintptr(unsafe.Pointer(pguidMachineId)), uintptr(unsafe.Pointer(pQMProps)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -201,8 +201,8 @@ func MQGetOverlappedResult(lpOverlapped *systemio.OVERLAPPED) error {
 }
 
 // MQGetPrivateComputerInformation calls mqrt!MQGetPrivateComputerInformation.
-func MQGetPrivateComputerInformation(lpwcsComputerName string, pPrivateProps *MQPRIVATEPROPS) error {
-	_lpwcsComputerName := win32.UTF16Ptr(lpwcsComputerName)
+func MQGetPrivateComputerInformation(lpwcsComputerName *string, pPrivateProps *MQPRIVATEPROPS) error {
+	_lpwcsComputerName := win32.UTF16PtrOrNil(lpwcsComputerName)
 	r1, _, _ := syscall.SyscallN(procMQGetPrivateComputerInformation.Addr(), uintptr(unsafe.Pointer(_lpwcsComputerName)), uintptr(unsafe.Pointer(pPrivateProps)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -254,8 +254,8 @@ func MQInstanceToFormatName(pGuid *win32.GUID, lpwcsFormatName foundation.PWSTR,
 }
 
 // MQLocateBegin calls mqrt!MQLocateBegin.
-func MQLocateBegin(lpwcsContext string, pRestriction *MQRESTRICTION, pColumns *MQCOLUMNSET, pSort *MQSORTSET, phEnum *foundation.HANDLE) error {
-	_lpwcsContext := win32.UTF16Ptr(lpwcsContext)
+func MQLocateBegin(lpwcsContext *string, pRestriction *MQRESTRICTION, pColumns *MQCOLUMNSET, pSort *MQSORTSET, phEnum *foundation.HANDLE) error {
+	_lpwcsContext := win32.UTF16PtrOrNil(lpwcsContext)
 	r1, _, _ := syscall.SyscallN(procMQLocateBegin.Addr(), uintptr(unsafe.Pointer(_lpwcsContext)), uintptr(unsafe.Pointer(pRestriction)), uintptr(unsafe.Pointer(pColumns)), uintptr(unsafe.Pointer(pSort)), uintptr(unsafe.Pointer(phEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -279,8 +279,8 @@ func MQMarkMessageRejected(hQueue foundation.HANDLE, ullLookupId uint64) error {
 }
 
 // MQMgmtAction calls mqrt!MQMgmtAction.
-func MQMgmtAction(pComputerName string, pObjectName string, pAction string) error {
-	_pComputerName := win32.UTF16Ptr(pComputerName)
+func MQMgmtAction(pComputerName *string, pObjectName string, pAction string) error {
+	_pComputerName := win32.UTF16PtrOrNil(pComputerName)
 	_pObjectName := win32.UTF16Ptr(pObjectName)
 	_pAction := win32.UTF16Ptr(pAction)
 	r1, _, _ := syscall.SyscallN(procMQMgmtAction.Addr(), uintptr(unsafe.Pointer(_pComputerName)), uintptr(unsafe.Pointer(_pObjectName)), uintptr(unsafe.Pointer(_pAction)))
@@ -288,8 +288,8 @@ func MQMgmtAction(pComputerName string, pObjectName string, pAction string) erro
 }
 
 // MQMgmtGetInfo calls mqrt!MQMgmtGetInfo.
-func MQMgmtGetInfo(pComputerName string, pObjectName string, pMgmtProps *MQMGMTPROPS) error {
-	_pComputerName := win32.UTF16Ptr(pComputerName)
+func MQMgmtGetInfo(pComputerName *string, pObjectName string, pMgmtProps *MQMGMTPROPS) error {
+	_pComputerName := win32.UTF16PtrOrNil(pComputerName)
 	_pObjectName := win32.UTF16Ptr(pObjectName)
 	r1, _, _ := syscall.SyscallN(procMQMgmtGetInfo.Addr(), uintptr(unsafe.Pointer(_pComputerName)), uintptr(unsafe.Pointer(_pObjectName)), uintptr(unsafe.Pointer(pMgmtProps)))
 	return win32.ErrIfFailed(int32(r1))

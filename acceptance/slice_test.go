@@ -15,13 +15,13 @@ import (
 // wrong nCount would read past the slice or wait on the wrong set.
 func TestSliceParam(t *testing.T) {
 	// Two manual-reset events; only the second is initially signaled.
-	unsignaled, err := threading.CreateEvent(nil, true, false, "")
+	unsignaled, err := threading.CreateEvent(nil, true, false, nil)
 	if err != nil {
 		t.Fatalf("CreateEvent(unsignaled): %v", err)
 	}
 	defer foundation.CloseHandle(unsignaled)
 
-	signaled, err := threading.CreateEvent(nil, true, true, "")
+	signaled, err := threading.CreateEvent(nil, true, true, nil)
 	if err != nil {
 		t.Fatalf("CreateEvent(signaled): %v", err)
 	}

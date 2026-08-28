@@ -188,8 +188,8 @@ func RegisterDeviceWithManagementUsingAADDeviceCredentials() error {
 }
 
 // RegisterDeviceWithManagementUsingAADDeviceCredentials2 calls MDMRegistration!RegisterDeviceWithManagementUsingAADDeviceCredentials2.
-func RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID string) error {
-	_MDMApplicationID := win32.UTF16Ptr(MDMApplicationID)
+func RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID *string) error {
+	_MDMApplicationID := win32.UTF16PtrOrNil(MDMApplicationID)
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagementUsingAADDeviceCredentials2.Addr(), uintptr(unsafe.Pointer(_MDMApplicationID)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -221,8 +221,8 @@ func UnregisterDeviceWithLocalManagement() error {
 // UnregisterDeviceWithManagement calls MDMRegistration!UnregisterDeviceWithManagement.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-unregisterdevicewithmanagement
 // Minimum OS: windows8.1.
-func UnregisterDeviceWithManagement(enrollmentID string) error {
-	_enrollmentID := win32.UTF16Ptr(enrollmentID)
+func UnregisterDeviceWithManagement(enrollmentID *string) error {
+	_enrollmentID := win32.UTF16PtrOrNil(enrollmentID)
 	r1, _, _ := syscall.SyscallN(procUnregisterDeviceWithManagement.Addr(), uintptr(unsafe.Pointer(_enrollmentID)))
 	return win32.ErrIfFailed(int32(r1))
 }

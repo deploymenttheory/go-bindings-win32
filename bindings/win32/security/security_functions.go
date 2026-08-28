@@ -443,10 +443,10 @@ func AccessCheck(pSecurityDescriptor PSECURITY_DESCRIPTOR, ClientToken foundatio
 
 // AccessCheckAndAuditAlarm calls ADVAPI32!AccessCheckAndAuditAlarmW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckandauditalarmw
-func AccessCheckAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, SecurityDescriptor PSECURITY_DESCRIPTOR, DesiredAccess uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
+func AccessCheckAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName *string, SecurityDescriptor PSECURITY_DESCRIPTOR, DesiredAccess uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	_ObjectCreation := win32.Bool32(ObjectCreation)
 	r1, _, _ := syscall.SyscallN(procAccessCheckAndAuditAlarm.Addr(), uintptr(unsafe.Pointer(_SubsystemName)), uintptr(unsafe.Pointer(HandleId)), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_ObjectName)), uintptr(SecurityDescriptor), uintptr(DesiredAccess), uintptr(unsafe.Pointer(GenericMapping)), uintptr(_ObjectCreation), uintptr(unsafe.Pointer(GrantedAccess)), uintptr(unsafe.Pointer(AccessStatus)), uintptr(unsafe.Pointer(pfGenerateOnClose)))
 	return r1 != 0
@@ -481,10 +481,10 @@ func AccessCheckByType(pSecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSi
 
 // AccessCheckByTypeAndAuditAlarm calls ADVAPI32!AccessCheckByTypeAndAuditAlarmW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckbytypeandauditalarmw
-func AccessCheckByTypeAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList []OBJECT_TYPE_LIST, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
+func AccessCheckByTypeAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName *string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList []OBJECT_TYPE_LIST, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	var _ObjectTypeList *OBJECT_TYPE_LIST
 	if len(ObjectTypeList) > 0 {
 		_ObjectTypeList = &ObjectTypeList[0]
@@ -523,10 +523,10 @@ func AccessCheckByTypeResultList(pSecurityDescriptor PSECURITY_DESCRIPTOR, Princ
 
 // AccessCheckByTypeResultListAndAuditAlarm calls ADVAPI32!AccessCheckByTypeResultListAndAuditAlarmW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckbytyperesultlistandauditalarmw
-func AccessCheckByTypeResultListAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccessList *uint32, AccessStatusList *uint32, pfGenerateOnClose *foundation.BOOL) bool {
+func AccessCheckByTypeResultListAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName *string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccessList *uint32, AccessStatusList *uint32, pfGenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	_ObjectCreation := win32.Bool32(ObjectCreation)
 	r1, _, _ := syscall.SyscallN(procAccessCheckByTypeResultListAndAuditAlarm.Addr(), uintptr(unsafe.Pointer(_SubsystemName)), uintptr(unsafe.Pointer(HandleId)), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_ObjectName)), uintptr(SecurityDescriptor), uintptr(PrincipalSelfSid), uintptr(DesiredAccess), uintptr(AuditType), uintptr(Flags), uintptr(unsafe.Pointer(ObjectTypeList)), uintptr(ObjectTypeListLength), uintptr(unsafe.Pointer(GenericMapping)), uintptr(_ObjectCreation), uintptr(unsafe.Pointer(GrantedAccessList)), uintptr(unsafe.Pointer(AccessStatusList)), uintptr(unsafe.Pointer(pfGenerateOnClose)))
 	return r1 != 0
@@ -546,10 +546,10 @@ func AccessCheckByTypeResultListAndAuditAlarmA(SubsystemName foundation.PSTR, Ha
 
 // AccessCheckByTypeResultListAndAuditAlarmByHandle calls ADVAPI32!AccessCheckByTypeResultListAndAuditAlarmByHandleW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckbytyperesultlistandauditalarmbyhandlew
-func AccessCheckByTypeResultListAndAuditAlarmByHandle(SubsystemName string, HandleId unsafe.Pointer, ClientToken foundation.HANDLE, ObjectTypeName string, ObjectName string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccessList *uint32, AccessStatusList *uint32, pfGenerateOnClose *foundation.BOOL) bool {
+func AccessCheckByTypeResultListAndAuditAlarmByHandle(SubsystemName string, HandleId unsafe.Pointer, ClientToken foundation.HANDLE, ObjectTypeName string, ObjectName *string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccessList *uint32, AccessStatusList *uint32, pfGenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	_ObjectCreation := win32.Bool32(ObjectCreation)
 	r1, _, _ := syscall.SyscallN(procAccessCheckByTypeResultListAndAuditAlarmByHandle.Addr(), uintptr(unsafe.Pointer(_SubsystemName)), uintptr(unsafe.Pointer(HandleId)), uintptr(ClientToken), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_ObjectName)), uintptr(SecurityDescriptor), uintptr(PrincipalSelfSid), uintptr(DesiredAccess), uintptr(AuditType), uintptr(Flags), uintptr(unsafe.Pointer(ObjectTypeList)), uintptr(ObjectTypeListLength), uintptr(unsafe.Pointer(GenericMapping)), uintptr(_ObjectCreation), uintptr(unsafe.Pointer(GrantedAccessList)), uintptr(unsafe.Pointer(AccessStatusList)), uintptr(unsafe.Pointer(pfGenerateOnClose)))
 	return r1 != 0
@@ -1386,10 +1386,10 @@ func IsWellKnownSid(pSid PSID, WellKnownSidType WELL_KNOWN_SID_TYPE) bool {
 // LogonUser calls ADVAPI32!LogonUserW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-logonuserw
 // Minimum OS: windows5.1.2600.
-func LogonUser(lpszUsername string, lpszDomain string, lpszPassword string, dwLogonType LOGON32_LOGON, dwLogonProvider LOGON32_PROVIDER, phToken *foundation.HANDLE) error {
+func LogonUser(lpszUsername string, lpszDomain *string, lpszPassword *string, dwLogonType LOGON32_LOGON, dwLogonProvider LOGON32_PROVIDER, phToken *foundation.HANDLE) error {
 	_lpszUsername := win32.UTF16Ptr(lpszUsername)
-	_lpszDomain := win32.UTF16Ptr(lpszDomain)
-	_lpszPassword := win32.UTF16Ptr(lpszPassword)
+	_lpszDomain := win32.UTF16PtrOrNil(lpszDomain)
+	_lpszPassword := win32.UTF16PtrOrNil(lpszPassword)
 	r1, _, e1 := syscall.SyscallN(procLogonUser.Addr(), uintptr(unsafe.Pointer(_lpszUsername)), uintptr(unsafe.Pointer(_lpszDomain)), uintptr(unsafe.Pointer(_lpszPassword)), uintptr(dwLogonType), uintptr(dwLogonProvider), uintptr(unsafe.Pointer(phToken)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1411,10 +1411,10 @@ func LogonUserA(lpszUsername foundation.PSTR, lpszDomain foundation.PSTR, lpszPa
 // LogonUserEx calls ADVAPI32!LogonUserExW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-logonuserexw
 // Minimum OS: windows5.1.2600.
-func LogonUserEx(lpszUsername string, lpszDomain string, lpszPassword string, dwLogonType LOGON32_LOGON, dwLogonProvider LOGON32_PROVIDER, phToken *foundation.HANDLE, ppLogonSid *PSID, ppProfileBuffer *unsafe.Pointer, pdwProfileLength *uint32, pQuotaLimits *QUOTA_LIMITS) error {
+func LogonUserEx(lpszUsername string, lpszDomain *string, lpszPassword *string, dwLogonType LOGON32_LOGON, dwLogonProvider LOGON32_PROVIDER, phToken *foundation.HANDLE, ppLogonSid *PSID, ppProfileBuffer *unsafe.Pointer, pdwProfileLength *uint32, pQuotaLimits *QUOTA_LIMITS) error {
 	_lpszUsername := win32.UTF16Ptr(lpszUsername)
-	_lpszDomain := win32.UTF16Ptr(lpszDomain)
-	_lpszPassword := win32.UTF16Ptr(lpszPassword)
+	_lpszDomain := win32.UTF16PtrOrNil(lpszDomain)
+	_lpszPassword := win32.UTF16PtrOrNil(lpszPassword)
 	r1, _, e1 := syscall.SyscallN(procLogonUserEx.Addr(), uintptr(unsafe.Pointer(_lpszUsername)), uintptr(unsafe.Pointer(_lpszDomain)), uintptr(unsafe.Pointer(_lpszPassword)), uintptr(dwLogonType), uintptr(dwLogonProvider), uintptr(unsafe.Pointer(phToken)), uintptr(unsafe.Pointer(ppLogonSid)), uintptr(unsafe.Pointer(ppProfileBuffer)), uintptr(unsafe.Pointer(pdwProfileLength)), uintptr(unsafe.Pointer(pQuotaLimits)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1436,8 +1436,8 @@ func LogonUserExA(lpszUsername foundation.PSTR, lpszDomain foundation.PSTR, lpsz
 // LookupAccountName calls ADVAPI32!LookupAccountNameW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupaccountnamew
 // Minimum OS: windows5.1.2600.
-func LookupAccountName(lpSystemName string, lpAccountName string, Sid PSID, cbSid *uint32, ReferencedDomainName foundation.PWSTR, cchReferencedDomainName *uint32, peUse *SID_NAME_USE) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupAccountName(lpSystemName *string, lpAccountName string, Sid PSID, cbSid *uint32, ReferencedDomainName foundation.PWSTR, cchReferencedDomainName *uint32, peUse *SID_NAME_USE) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	_lpAccountName := win32.UTF16Ptr(lpAccountName)
 	r1, _, e1 := syscall.SyscallN(procLookupAccountName.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(unsafe.Pointer(_lpAccountName)), uintptr(Sid), uintptr(unsafe.Pointer(cbSid)), uintptr(unsafe.Pointer(ReferencedDomainName)), uintptr(unsafe.Pointer(cchReferencedDomainName)), uintptr(unsafe.Pointer(peUse)))
 	if r1 == 0 {
@@ -1460,8 +1460,8 @@ func LookupAccountNameA(lpSystemName foundation.PSTR, lpAccountName foundation.P
 // LookupAccountSid calls ADVAPI32!LookupAccountSidW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupaccountsidw
 // Minimum OS: windows5.1.2600.
-func LookupAccountSid(lpSystemName string, Sid PSID, Name foundation.PWSTR, cchName *uint32, ReferencedDomainName foundation.PWSTR, cchReferencedDomainName *uint32, peUse *SID_NAME_USE) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupAccountSid(lpSystemName *string, Sid PSID, Name foundation.PWSTR, cchName *uint32, ReferencedDomainName foundation.PWSTR, cchReferencedDomainName *uint32, peUse *SID_NAME_USE) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	r1, _, e1 := syscall.SyscallN(procLookupAccountSid.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(Sid), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(cchName)), uintptr(unsafe.Pointer(ReferencedDomainName)), uintptr(unsafe.Pointer(cchReferencedDomainName)), uintptr(unsafe.Pointer(peUse)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1483,8 +1483,8 @@ func LookupAccountSidA(lpSystemName foundation.PSTR, Sid PSID, Name foundation.P
 // LookupPrivilegeDisplayName calls ADVAPI32!LookupPrivilegeDisplayNameW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupprivilegedisplaynamew
 // Minimum OS: windows5.1.2600.
-func LookupPrivilegeDisplayName(lpSystemName string, lpName string, lpDisplayName foundation.PWSTR, cchDisplayName *uint32, lpLanguageId *uint32) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupPrivilegeDisplayName(lpSystemName *string, lpName string, lpDisplayName foundation.PWSTR, cchDisplayName *uint32, lpLanguageId *uint32) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	_lpName := win32.UTF16Ptr(lpName)
 	r1, _, e1 := syscall.SyscallN(procLookupPrivilegeDisplayName.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpDisplayName)), uintptr(unsafe.Pointer(cchDisplayName)), uintptr(unsafe.Pointer(lpLanguageId)))
 	if r1 == 0 {
@@ -1507,8 +1507,8 @@ func LookupPrivilegeDisplayNameA(lpSystemName foundation.PSTR, lpName foundation
 // LookupPrivilegeName calls ADVAPI32!LookupPrivilegeNameW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupprivilegenamew
 // Minimum OS: windows5.1.2600.
-func LookupPrivilegeName(lpSystemName string, lpLuid *foundation.LUID, lpName foundation.PWSTR, cchName *uint32) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupPrivilegeName(lpSystemName *string, lpLuid *foundation.LUID, lpName foundation.PWSTR, cchName *uint32) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	r1, _, e1 := syscall.SyscallN(procLookupPrivilegeName.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(unsafe.Pointer(lpLuid)), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(cchName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1530,8 +1530,8 @@ func LookupPrivilegeNameA(lpSystemName foundation.PSTR, lpLuid *foundation.LUID,
 // LookupPrivilegeValue calls ADVAPI32!LookupPrivilegeValueW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupprivilegevaluew
 // Minimum OS: windows5.1.2600.
-func LookupPrivilegeValue(lpSystemName string, lpName string, lpLuid *foundation.LUID) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupPrivilegeValue(lpSystemName *string, lpName string, lpLuid *foundation.LUID) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	_lpName := win32.UTF16Ptr(lpName)
 	r1, _, e1 := syscall.SyscallN(procLookupPrivilegeValue.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpLuid)))
 	if r1 == 0 {
@@ -1624,10 +1624,10 @@ func ObjectDeleteAuditAlarmA(SubsystemName foundation.PSTR, HandleId unsafe.Poin
 
 // ObjectOpenAuditAlarm calls ADVAPI32!ObjectOpenAuditAlarmW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-objectopenauditalarmw
-func ObjectOpenAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, pSecurityDescriptor PSECURITY_DESCRIPTOR, ClientToken foundation.HANDLE, DesiredAccess uint32, GrantedAccess uint32, Privileges *PRIVILEGE_SET, ObjectCreation bool, AccessGranted bool, GenerateOnClose *foundation.BOOL) bool {
+func ObjectOpenAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName *string, pSecurityDescriptor PSECURITY_DESCRIPTOR, ClientToken foundation.HANDLE, DesiredAccess uint32, GrantedAccess uint32, Privileges *PRIVILEGE_SET, ObjectCreation bool, AccessGranted bool, GenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	_ObjectCreation := win32.Bool32(ObjectCreation)
 	_AccessGranted := win32.Bool32(AccessGranted)
 	r1, _, _ := syscall.SyscallN(procObjectOpenAuditAlarm.Addr(), uintptr(unsafe.Pointer(_SubsystemName)), uintptr(unsafe.Pointer(HandleId)), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_ObjectName)), uintptr(pSecurityDescriptor), uintptr(ClientToken), uintptr(DesiredAccess), uintptr(GrantedAccess), uintptr(unsafe.Pointer(Privileges)), uintptr(_ObjectCreation), uintptr(_AccessGranted), uintptr(unsafe.Pointer(GenerateOnClose)))

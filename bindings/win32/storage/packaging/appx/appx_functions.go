@@ -339,8 +339,8 @@ func ClosePackageInfo(packageInfoReference *PACKAGE_INFO_REFERENCE) foundation.W
 }
 
 // CreatePackageVirtualizationContext calls KERNEL32!CreatePackageVirtualizationContext.
-func CreatePackageVirtualizationContext(packageFamilyName string, context *PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) error {
-	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+func CreatePackageVirtualizationContext(packageFamilyName *string, context *PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE) error {
+	_packageFamilyName := win32.UTF16PtrOrNil(packageFamilyName)
 	r1, _, _ := syscall.SyscallN(procCreatePackageVirtualizationContext.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(context)))
 	return win32.ErrIfFailed(int32(r1))
 }

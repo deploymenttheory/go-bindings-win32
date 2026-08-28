@@ -1236,9 +1236,9 @@ func WriteProcessorPwrScheme(uiID uint32, pMachineProcessorPowerPolicy *MACHINE_
 // WritePwrScheme calls POWRPROF!WritePwrScheme.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-writepwrscheme
 // Minimum OS: windows5.1.2600.
-func WritePwrScheme(puiID *uint32, lpszSchemeName string, lpszDescription string, lpScheme *POWER_POLICY) (foundation.BOOLEAN, error) {
+func WritePwrScheme(puiID *uint32, lpszSchemeName string, lpszDescription *string, lpScheme *POWER_POLICY) (foundation.BOOLEAN, error) {
 	_lpszSchemeName := win32.UTF16Ptr(lpszSchemeName)
-	_lpszDescription := win32.UTF16Ptr(lpszDescription)
+	_lpszDescription := win32.UTF16PtrOrNil(lpszDescription)
 	r1, _, e1 := syscall.SyscallN(procWritePwrScheme.Addr(), uintptr(unsafe.Pointer(puiID)), uintptr(unsafe.Pointer(_lpszSchemeName)), uintptr(unsafe.Pointer(_lpszDescription)), uintptr(unsafe.Pointer(lpScheme)))
 	if e1 != 0 {
 		return foundation.BOOLEAN(r1), e1

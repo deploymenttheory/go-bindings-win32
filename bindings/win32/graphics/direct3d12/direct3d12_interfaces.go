@@ -922,8 +922,8 @@ func (self *ID3D12Device) CreateReservedResource(pDesc *D3D12_RESOURCE_DESC, Ini
 }
 
 // CreateSharedHandle dispatches through ID3D12Device's vtable slot 31.
-func (self *ID3D12Device) CreateSharedHandle(pObject *ID3D12DeviceChild, pAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name string, pHandle *foundation.HANDLE) error {
-	_Name := win32.UTF16Ptr(Name)
+func (self *ID3D12Device) CreateSharedHandle(pObject *ID3D12DeviceChild, pAttributes *security.SECURITY_ATTRIBUTES, Access uint32, Name *string, pHandle *foundation.HANDLE) error {
+	_Name := win32.UTF16PtrOrNil(Name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pAttributes)), uintptr(Access), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(pHandle)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1126,8 +1126,8 @@ type ID3D12Device14 struct {
 var IID_ID3D12Device14 = win32.GUID{Data1: 0x5f6e592d, Data2: 0xd895, Data3: 0x44c2, Data4: [8]byte{0x8e, 0x4a, 0x88, 0xad, 0x49, 0x26, 0xd3, 0x23}}
 
 // CreateRootSignatureFromSubobjectInLibrary dispatches through ID3D12Device14's vtable slot 82.
-func (self *ID3D12Device14) CreateRootSignatureFromSubobjectInLibrary(nodeMask uint32, pLibraryBlob unsafe.Pointer, blobLengthInBytes uintptr, subobjectName string, riid *win32.GUID, ppvRootSignature **win32.IUnknown) error {
-	_subobjectName := win32.UTF16Ptr(subobjectName)
+func (self *ID3D12Device14) CreateRootSignatureFromSubobjectInLibrary(nodeMask uint32, pLibraryBlob unsafe.Pointer, blobLengthInBytes uintptr, subobjectName *string, riid *win32.GUID, ppvRootSignature **win32.IUnknown) error {
+	_subobjectName := win32.UTF16PtrOrNil(subobjectName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(nodeMask), uintptr(unsafe.Pointer(pLibraryBlob)), uintptr(blobLengthInBytes), uintptr(unsafe.Pointer(_subobjectName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvRootSignature)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2869,8 +2869,8 @@ type ID3D12PipelineLibrary struct {
 var IID_ID3D12PipelineLibrary = win32.GUID{Data1: 0xc64226a8, Data2: 0x9201, Data3: 0x46af, Data4: [8]byte{0xb4, 0xcc, 0x53, 0xfb, 0x9f, 0xf7, 0x41, 0x4f}}
 
 // StorePipeline dispatches through ID3D12PipelineLibrary's vtable slot 8.
-func (self *ID3D12PipelineLibrary) StorePipeline(pName string, pPipeline *ID3D12PipelineState) error {
-	_pName := win32.UTF16Ptr(pName)
+func (self *ID3D12PipelineLibrary) StorePipeline(pName *string, pPipeline *ID3D12PipelineState) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(pPipeline)))
 	return win32.ErrIfFailed(int32(r1))
 }

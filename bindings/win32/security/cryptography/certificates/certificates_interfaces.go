@@ -2206,23 +2206,23 @@ type ICertRequestD struct {
 var IID_ICertRequestD = win32.GUID{Data1: 0xd99e6e70, Data2: 0xfc88, Data3: 0x11d0, Data4: [8]byte{0xb4, 0x98, 0x00, 0xa0, 0xc9, 0x03, 0x12, 0xf3}}
 
 // Request dispatches through ICertRequestD's vtable slot 3.
-func (self *ICertRequestD) Request(dwFlags uint32, pwszAuthority string, pdwRequestId *uint32, pdwDisposition *uint32, pwszAttributes string, pctbRequest *CERTTRANSBLOB, pctbCertChain *CERTTRANSBLOB, pctbEncodedCert *CERTTRANSBLOB, pctbDispositionMessage *CERTTRANSBLOB) error {
-	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
-	_pwszAttributes := win32.UTF16Ptr(pwszAttributes)
+func (self *ICertRequestD) Request(dwFlags uint32, pwszAuthority *string, pdwRequestId *uint32, pdwDisposition *uint32, pwszAttributes *string, pctbRequest *CERTTRANSBLOB, pctbCertChain *CERTTRANSBLOB, pctbEncodedCert *CERTTRANSBLOB, pctbDispositionMessage *CERTTRANSBLOB) error {
+	_pwszAuthority := win32.UTF16PtrOrNil(pwszAuthority)
+	_pwszAttributes := win32.UTF16PtrOrNil(pwszAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(unsafe.Pointer(pdwRequestId)), uintptr(unsafe.Pointer(pdwDisposition)), uintptr(unsafe.Pointer(_pwszAttributes)), uintptr(unsafe.Pointer(pctbRequest)), uintptr(unsafe.Pointer(pctbCertChain)), uintptr(unsafe.Pointer(pctbEncodedCert)), uintptr(unsafe.Pointer(pctbDispositionMessage)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCACert dispatches through ICertRequestD's vtable slot 4.
-func (self *ICertRequestD) GetCACert(fchain uint32, pwszAuthority string, pctbOut *CERTTRANSBLOB) error {
-	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
+func (self *ICertRequestD) GetCACert(fchain uint32, pwszAuthority *string, pctbOut *CERTTRANSBLOB) error {
+	_pwszAuthority := win32.UTF16PtrOrNil(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fchain), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(unsafe.Pointer(pctbOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Ping dispatches through ICertRequestD's vtable slot 5.
-func (self *ICertRequestD) Ping(pwszAuthority string) error {
-	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
+func (self *ICertRequestD) Ping(pwszAuthority *string) error {
+	_pwszAuthority := win32.UTF16PtrOrNil(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2236,31 +2236,31 @@ type ICertRequestD2 struct {
 var IID_ICertRequestD2 = win32.GUID{Data1: 0x5422fd3a, Data2: 0xd4b8, Data3: 0x4cef, Data4: [8]byte{0xa1, 0x2e, 0xe8, 0x7d, 0x4c, 0xa2, 0x2e, 0x90}}
 
 // Request2 dispatches through ICertRequestD2's vtable slot 6.
-func (self *ICertRequestD2) Request2(pwszAuthority string, dwFlags uint32, pwszSerialNumber string, pdwRequestId *uint32, pdwDisposition *uint32, pwszAttributes string, pctbRequest *CERTTRANSBLOB, pctbFullResponse *CERTTRANSBLOB, pctbEncodedCert *CERTTRANSBLOB, pctbDispositionMessage *CERTTRANSBLOB) error {
-	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
-	_pwszSerialNumber := win32.UTF16Ptr(pwszSerialNumber)
-	_pwszAttributes := win32.UTF16Ptr(pwszAttributes)
+func (self *ICertRequestD2) Request2(pwszAuthority *string, dwFlags uint32, pwszSerialNumber *string, pdwRequestId *uint32, pdwDisposition *uint32, pwszAttributes *string, pctbRequest *CERTTRANSBLOB, pctbFullResponse *CERTTRANSBLOB, pctbEncodedCert *CERTTRANSBLOB, pctbDispositionMessage *CERTTRANSBLOB) error {
+	_pwszAuthority := win32.UTF16PtrOrNil(pwszAuthority)
+	_pwszSerialNumber := win32.UTF16PtrOrNil(pwszSerialNumber)
+	_pwszAttributes := win32.UTF16PtrOrNil(pwszAttributes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszSerialNumber)), uintptr(unsafe.Pointer(pdwRequestId)), uintptr(unsafe.Pointer(pdwDisposition)), uintptr(unsafe.Pointer(_pwszAttributes)), uintptr(unsafe.Pointer(pctbRequest)), uintptr(unsafe.Pointer(pctbFullResponse)), uintptr(unsafe.Pointer(pctbEncodedCert)), uintptr(unsafe.Pointer(pctbDispositionMessage)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAProperty dispatches through ICertRequestD2's vtable slot 7.
-func (self *ICertRequestD2) GetCAProperty(pwszAuthority string, PropId int32, PropIndex int32, PropType int32, pctbPropertyValue *CERTTRANSBLOB) error {
-	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
+func (self *ICertRequestD2) GetCAProperty(pwszAuthority *string, PropId int32, PropIndex int32, PropType int32, pctbPropertyValue *CERTTRANSBLOB) error {
+	_pwszAuthority := win32.UTF16PtrOrNil(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(PropId), uintptr(PropIndex), uintptr(PropType), uintptr(unsafe.Pointer(pctbPropertyValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCAPropertyInfo dispatches through ICertRequestD2's vtable slot 8.
-func (self *ICertRequestD2) GetCAPropertyInfo(pwszAuthority string, pcProperty *int32, pctbPropInfo *CERTTRANSBLOB) error {
-	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
+func (self *ICertRequestD2) GetCAPropertyInfo(pwszAuthority *string, pcProperty *int32, pctbPropInfo *CERTTRANSBLOB) error {
+	_pwszAuthority := win32.UTF16PtrOrNil(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)), uintptr(unsafe.Pointer(pcProperty)), uintptr(unsafe.Pointer(pctbPropInfo)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Ping2 dispatches through ICertRequestD2's vtable slot 9.
-func (self *ICertRequestD2) Ping2(pwszAuthority string) error {
-	_pwszAuthority := win32.UTF16Ptr(pwszAuthority)
+func (self *ICertRequestD2) Ping2(pwszAuthority *string) error {
+	_pwszAuthority := win32.UTF16PtrOrNil(pwszAuthority)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszAuthority)))
 	return win32.ErrIfFailed(int32(r1))
 }

@@ -70,9 +70,9 @@ type IActiveXUIHandlerSite3 struct {
 var IID_IActiveXUIHandlerSite3 = win32.GUID{Data1: 0x7904009a, Data2: 0x1238, Data3: 0x47f4, Data4: [8]byte{0x90, 0x1c, 0x87, 0x13, 0x75, 0xc3, 0x46, 0x08}}
 
 // MessageBoxW dispatches through IActiveXUIHandlerSite3's vtable slot 3.
-func (self *IActiveXUIHandlerSite3) MessageBoxW(hwnd foundation.HWND, text string, caption string, type_ uint32, result *int32) error {
-	_text := win32.UTF16Ptr(text)
-	_caption := win32.UTF16Ptr(caption)
+func (self *IActiveXUIHandlerSite3) MessageBoxW(hwnd foundation.HWND, text *string, caption *string, type_ uint32, result *int32) error {
+	_text := win32.UTF16PtrOrNil(text)
+	_caption := win32.UTF16PtrOrNil(caption)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(_caption)), uintptr(type_), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }

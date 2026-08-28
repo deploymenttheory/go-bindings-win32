@@ -510,8 +510,8 @@ func AuthzInitializeRemoteResourceManager(pRpcInitInfo *AUTHZ_RPC_INIT_INFO_CLIE
 // AuthzInitializeResourceManager calls AUTHZ!AuthzInitializeResourceManager.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzinitializeresourcemanager
 // Minimum OS: windows5.1.2600.
-func AuthzInitializeResourceManager(Flags uint32, pfnDynamicAccessCheck PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName string, phAuthzResourceManager *AUTHZ_RESOURCE_MANAGER_HANDLE) error {
-	_szResourceManagerName := win32.UTF16Ptr(szResourceManagerName)
+func AuthzInitializeResourceManager(Flags uint32, pfnDynamicAccessCheck PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName *string, phAuthzResourceManager *AUTHZ_RESOURCE_MANAGER_HANDLE) error {
+	_szResourceManagerName := win32.UTF16PtrOrNil(szResourceManagerName)
 	r1, _, e1 := syscall.SyscallN(procAuthzInitializeResourceManager.Addr(), uintptr(Flags), uintptr(pfnDynamicAccessCheck), uintptr(pfnComputeDynamicGroups), uintptr(pfnFreeDynamicGroups), uintptr(unsafe.Pointer(_szResourceManagerName)), uintptr(unsafe.Pointer(phAuthzResourceManager)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -686,8 +686,8 @@ func AuthzUnregisterSecurityEventSource(dwFlags uint32, phEventProvider *AUTHZ_S
 // BuildExplicitAccessWithName calls ADVAPI32!BuildExplicitAccessWithNameW.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildexplicitaccesswithnamew
 // Minimum OS: windows5.1.2600.
-func BuildExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName string, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance security.ACE_FLAGS) {
-	_pTrusteeName := win32.UTF16Ptr(pTrusteeName)
+func BuildExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName *string, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance security.ACE_FLAGS) {
+	_pTrusteeName := win32.UTF16PtrOrNil(pTrusteeName)
 	syscall.SyscallN(procBuildExplicitAccessWithName.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(_pTrusteeName)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
 }
 
@@ -699,8 +699,8 @@ func BuildExplicitAccessWithNameA(pExplicitAccess *EXPLICIT_ACCESS_A, pTrusteeNa
 }
 
 // BuildImpersonateExplicitAccessWithName calls ADVAPI32!BuildImpersonateExplicitAccessWithNameW.
-func BuildImpersonateExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName string, pTrustee *TRUSTEE_W, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance uint32) {
-	_pTrusteeName := win32.UTF16Ptr(pTrusteeName)
+func BuildImpersonateExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName *string, pTrustee *TRUSTEE_W, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance uint32) {
+	_pTrusteeName := win32.UTF16PtrOrNil(pTrusteeName)
 	syscall.SyscallN(procBuildImpersonateExplicitAccessWithName.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(_pTrusteeName)), uintptr(unsafe.Pointer(pTrustee)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
 }
 
@@ -754,8 +754,8 @@ func BuildSecurityDescriptorA(pOwner *TRUSTEE_A, pGroup *TRUSTEE_A, pListOfAcces
 // BuildTrusteeWithName calls ADVAPI32!BuildTrusteeWithNameW.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithnamew
 // Minimum OS: windows5.1.2600.
-func BuildTrusteeWithName(pTrustee *TRUSTEE_W, pName string) {
-	_pName := win32.UTF16Ptr(pName)
+func BuildTrusteeWithName(pTrustee *TRUSTEE_W, pName *string) {
+	_pName := win32.UTF16PtrOrNil(pName)
 	syscall.SyscallN(procBuildTrusteeWithName.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(_pName)))
 }
 
@@ -769,10 +769,10 @@ func BuildTrusteeWithNameA(pTrustee *TRUSTEE_A, pName foundation.PSTR) {
 // BuildTrusteeWithObjectsAndName calls ADVAPI32!BuildTrusteeWithObjectsAndNameW.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithobjectsandnamew
 // Minimum OS: windows5.1.2600.
-func BuildTrusteeWithObjectsAndName(pTrustee *TRUSTEE_W, pObjName *OBJECTS_AND_NAME_W, ObjectType SE_OBJECT_TYPE, ObjectTypeName string, InheritedObjectTypeName string, Name string) {
-	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_InheritedObjectTypeName := win32.UTF16Ptr(InheritedObjectTypeName)
-	_Name := win32.UTF16Ptr(Name)
+func BuildTrusteeWithObjectsAndName(pTrustee *TRUSTEE_W, pObjName *OBJECTS_AND_NAME_W, ObjectType SE_OBJECT_TYPE, ObjectTypeName *string, InheritedObjectTypeName *string, Name *string) {
+	_ObjectTypeName := win32.UTF16PtrOrNil(ObjectTypeName)
+	_InheritedObjectTypeName := win32.UTF16PtrOrNil(InheritedObjectTypeName)
+	_Name := win32.UTF16PtrOrNil(Name)
 	syscall.SyscallN(procBuildTrusteeWithObjectsAndName.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pObjName)), uintptr(ObjectType), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_InheritedObjectTypeName)), uintptr(unsafe.Pointer(_Name)))
 }
 

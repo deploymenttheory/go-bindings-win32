@@ -299,10 +299,10 @@ func (self *INetCfgClassSetup) SelectAndInstall(hwndParent foundation.HWND, pObo
 }
 
 // Install dispatches through INetCfgClassSetup's vtable slot 4.
-func (self *INetCfgClassSetup) Install(pszwInfId string, pOboToken *OBO_TOKEN, dwSetupFlags uint32, dwUpgradeFromBuildNo uint32, pszwAnswerFile string, pszwAnswerSections string, ppnccItem **INetCfgComponent) error {
+func (self *INetCfgClassSetup) Install(pszwInfId string, pOboToken *OBO_TOKEN, dwSetupFlags uint32, dwUpgradeFromBuildNo uint32, pszwAnswerFile *string, pszwAnswerSections *string, ppnccItem **INetCfgComponent) error {
 	_pszwInfId := win32.UTF16Ptr(pszwInfId)
-	_pszwAnswerFile := win32.UTF16Ptr(pszwAnswerFile)
-	_pszwAnswerSections := win32.UTF16Ptr(pszwAnswerSections)
+	_pszwAnswerFile := win32.UTF16PtrOrNil(pszwAnswerFile)
+	_pszwAnswerSections := win32.UTF16PtrOrNil(pszwAnswerSections)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwInfId)), uintptr(unsafe.Pointer(pOboToken)), uintptr(dwSetupFlags), uintptr(dwUpgradeFromBuildNo), uintptr(unsafe.Pointer(_pszwAnswerFile)), uintptr(unsafe.Pointer(_pszwAnswerSections)), uintptr(unsafe.Pointer(ppnccItem)))
 	return win32.ErrIfFailed(int32(r1))
 }

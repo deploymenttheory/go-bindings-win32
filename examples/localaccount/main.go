@@ -82,7 +82,7 @@ func main() {
 	if !*keep {
 		// Always clean up the account we created, even if inspection fails.
 		defer func() {
-			if status := netmanagement.NetUserDel("", *name); status == nerrSuccess {
+			if status := netmanagement.NetUserDel(nil, *name); status == nerrSuccess {
 				fmt.Printf("deleted %q\n", *name)
 			} else {
 				fmt.Fprintf(os.Stderr, "cleanup: NetUserDel returned %d\n", status)
@@ -99,7 +99,7 @@ func main() {
 // USER_INFO_1; the struct is passed as its raw bytes.
 func createAccount(name string, info *netmanagement.USER_INFO_1) error {
 	var parmErr uint32
-	status := netmanagement.NetUserAdd("", infoLevel1, (*byte)(unsafe.Pointer(info)), &parmErr)
+	status := netmanagement.NetUserAdd(nil, infoLevel1, (*byte)(unsafe.Pointer(info)), &parmErr)
 	switch status {
 	case nerrSuccess:
 		return nil
@@ -116,7 +116,7 @@ func createAccount(name string, info *netmanagement.USER_INFO_1) error {
 // prints a couple of fields, showing how to consume a NetApiBuffer result.
 func inspectAccount(name string) {
 	var buffer *byte
-	status := netmanagement.NetUserGetInfo("", name, infoLevel1, &buffer)
+	status := netmanagement.NetUserGetInfo(nil, name, infoLevel1, &buffer)
 	if status != nerrSuccess {
 		fmt.Fprintf(os.Stderr, "NetUserGetInfo returned %d\n", status)
 		return
@@ -138,7 +138,7 @@ func listLocalAccounts() {
 		read, total uint32
 		resume      uint32
 	)
-	status := netmanagement.NetUserEnum("", 0, netmanagement.FILTER_NORMAL_ACCOUNT,
+	status := netmanagement.NetUserEnum(nil, 0, netmanagement.FILTER_NORMAL_ACCOUNT,
 		&buffer, maxPreferredLength, &read, &total, &resume)
 	if status != nerrSuccess || buffer == nil {
 		fmt.Fprintf(os.Stderr, "NetUserEnum returned %d\n", status)

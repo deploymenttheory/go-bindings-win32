@@ -285,8 +285,8 @@ func MediumStruct(m MEDIUM) {
 }
 
 // OptionalStringW calls TEST!OptionalStringW.
-func OptionalStringW(name string) error {
-	_name := win32.UTF16Ptr(name)
+func OptionalStringW(name *string) error {
+	_name := win32.UTF16PtrOrNil(name)
 	r1, _, _ := syscall.SyscallN(procOptionalStringW.Addr(), uintptr(unsafe.Pointer(_name)))
 	return win32.ErrIfFailed(int32(r1))
 }

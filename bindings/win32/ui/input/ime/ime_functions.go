@@ -382,9 +382,9 @@ func ImmEnumInputContext(idThread uint32, lpfn IMCENUMPROC, lParam foundation.LP
 // ImmEnumRegisterWord calls IMM32!ImmEnumRegisterWordW.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immenumregisterwordw
 // Minimum OS: windows5.1.2600.
-func ImmEnumRegisterWord(param0 uiinputkeyboardandmouse.HKL, param1 REGISTERWORDENUMPROCW, lpszReading string, param3 uint32, lpszRegister string, param5 unsafe.Pointer) uint32 {
-	_lpszReading := win32.UTF16Ptr(lpszReading)
-	_lpszRegister := win32.UTF16Ptr(lpszRegister)
+func ImmEnumRegisterWord(param0 uiinputkeyboardandmouse.HKL, param1 REGISTERWORDENUMPROCW, lpszReading *string, param3 uint32, lpszRegister *string, param5 unsafe.Pointer) uint32 {
+	_lpszReading := win32.UTF16PtrOrNil(lpszReading)
+	_lpszRegister := win32.UTF16PtrOrNil(lpszRegister)
 	r1, _, _ := syscall.SyscallN(procImmEnumRegisterWord.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(_lpszReading)), uintptr(param3), uintptr(unsafe.Pointer(_lpszRegister)), uintptr(unsafe.Pointer(param5)))
 	return uint32(r1)
 }

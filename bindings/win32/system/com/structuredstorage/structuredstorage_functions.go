@@ -638,8 +638,8 @@ func InitPropVariantFromResource(hinst foundation.HINSTANCE, id uint32, ppropvar
 // InitPropVariantFromStringAsVector calls PROPSYS!InitPropVariantFromStringAsVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromstringasvector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromStringAsVector(psz string, ppropvar *PROPVARIANT) error {
-	_psz := win32.UTF16Ptr(psz)
+func InitPropVariantFromStringAsVector(psz *string, ppropvar *PROPVARIANT) error {
+	_psz := win32.UTF16PtrOrNil(psz)
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromStringAsVector.Addr(), uintptr(unsafe.Pointer(_psz)), uintptr(unsafe.Pointer(ppropvar)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1139,8 +1139,8 @@ func PropVariantToStringVectorAlloc(propvar *PROPVARIANT, pprgsz **foundation.PW
 // PropVariantToStringWithDefault calls PROPSYS!PropVariantToStringWithDefault.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostringwithdefault
 // Minimum OS: windows5.1.2600.
-func PropVariantToStringWithDefault(propvarIn *PROPVARIANT, pszDefault string) foundation.PWSTR {
-	_pszDefault := win32.UTF16Ptr(pszDefault)
+func PropVariantToStringWithDefault(propvarIn *PROPVARIANT, pszDefault *string) foundation.PWSTR {
+	_pszDefault := win32.UTF16PtrOrNil(pszDefault)
 	r1, _, _ := syscall.SyscallN(procPropVariantToStringWithDefault.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(_pszDefault)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
@@ -1321,8 +1321,8 @@ func StgConvertVariantToProperty(pvar *PROPVARIANT, CodePage uint16, pprop *SERI
 // StgCreateDocfile calls OLE32!StgCreateDocfile.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatedocfile
 // Minimum OS: windows5.0.
-func StgCreateDocfile(pwcsName string, grfMode systemcom.STGM, ppstgOpen **IStorage) error {
-	_pwcsName := win32.UTF16Ptr(pwcsName)
+func StgCreateDocfile(pwcsName *string, grfMode systemcom.STGM, ppstgOpen **IStorage) error {
+	_pwcsName := win32.UTF16PtrOrNil(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgCreateDocfile.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), 0, uintptr(unsafe.Pointer(ppstgOpen)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1354,8 +1354,8 @@ func StgCreatePropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, pclsid *win32
 // StgCreateStorageEx calls OLE32!StgCreateStorageEx.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatestorageex
 // Minimum OS: windows5.0.
-func StgCreateStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen **win32.IUnknown) error {
-	_pwcsName := win32.UTF16Ptr(pwcsName)
+func StgCreateStorageEx(pwcsName *string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen **win32.IUnknown) error {
+	_pwcsName := win32.UTF16PtrOrNil(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgCreateStorageEx.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1426,8 +1426,8 @@ func StgOpenPropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, grfFlags uint32
 // StgOpenStorage calls OLE32!StgOpenStorage.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorage
 // Minimum OS: windows5.0.
-func StgOpenStorage(pwcsName string, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) error {
-	_pwcsName := win32.UTF16Ptr(pwcsName)
+func StgOpenStorage(pwcsName *string, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) error {
+	_pwcsName := win32.UTF16PtrOrNil(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgOpenStorage.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
 	return win32.ErrIfFailed(int32(r1))
 }

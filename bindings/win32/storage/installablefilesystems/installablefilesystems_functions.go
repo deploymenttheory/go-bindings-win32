@@ -115,21 +115,21 @@ var Procs = struct {
 
 // FilterAttach calls FLTLIB!FilterAttach.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterattach
-func FilterAttach(lpFilterName string, lpVolumeName string, lpInstanceName string, dwCreatedInstanceNameLength uint32, lpCreatedInstanceName foundation.PWSTR) error {
+func FilterAttach(lpFilterName string, lpVolumeName string, lpInstanceName *string, dwCreatedInstanceNameLength uint32, lpCreatedInstanceName foundation.PWSTR) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
-	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
+	_lpInstanceName := win32.UTF16PtrOrNil(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterAttach.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpInstanceName)), uintptr(dwCreatedInstanceNameLength), uintptr(unsafe.Pointer(lpCreatedInstanceName)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterAttachAtAltitude calls FLTLIB!FilterAttachAtAltitude.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterattachataltitude
-func FilterAttachAtAltitude(lpFilterName string, lpVolumeName string, lpAltitude string, lpInstanceName string, dwCreatedInstanceNameLength uint32, lpCreatedInstanceName foundation.PWSTR) error {
+func FilterAttachAtAltitude(lpFilterName string, lpVolumeName string, lpAltitude string, lpInstanceName *string, dwCreatedInstanceNameLength uint32, lpCreatedInstanceName foundation.PWSTR) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
 	_lpAltitude := win32.UTF16Ptr(lpAltitude)
-	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
+	_lpInstanceName := win32.UTF16PtrOrNil(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterAttachAtAltitude.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpAltitude)), uintptr(unsafe.Pointer(_lpInstanceName)), uintptr(dwCreatedInstanceNameLength), uintptr(unsafe.Pointer(lpCreatedInstanceName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -163,10 +163,10 @@ func FilterCreate(lpFilterName string, hFilter *HFILTER) error {
 
 // FilterDetach calls FLTLIB!FilterDetach.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterdetach
-func FilterDetach(lpFilterName string, lpVolumeName string, lpInstanceName string) error {
+func FilterDetach(lpFilterName string, lpVolumeName string, lpInstanceName *string) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
-	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
+	_lpInstanceName := win32.UTF16PtrOrNil(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterDetach.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpInstanceName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -235,10 +235,10 @@ func FilterInstanceClose(hInstance HFILTER_INSTANCE) error {
 
 // FilterInstanceCreate calls FLTLIB!FilterInstanceCreate.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterinstancecreate
-func FilterInstanceCreate(lpFilterName string, lpVolumeName string, lpInstanceName string, hInstance *HFILTER_INSTANCE) error {
+func FilterInstanceCreate(lpFilterName string, lpVolumeName string, lpInstanceName *string, hInstance *HFILTER_INSTANCE) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
-	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
+	_lpInstanceName := win32.UTF16PtrOrNil(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterInstanceCreate.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpInstanceName)), uintptr(unsafe.Pointer(hInstance)))
 	return win32.ErrIfFailed(int32(r1))
 }

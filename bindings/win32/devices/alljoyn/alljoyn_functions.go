@@ -1690,8 +1690,8 @@ func AllJoynCloseBusHandle(busHandle foundation.HANDLE) error {
 // AllJoynConnectToBus calls MSAJApi!AllJoynConnectToBus.
 // https://learn.microsoft.com/windows/win32/api/msajtransport/nf-msajtransport-alljoynconnecttobus
 // Minimum OS: windows10.0.10240.
-func AllJoynConnectToBus(connectionSpec string) (foundation.HANDLE, error) {
-	_connectionSpec := win32.UTF16Ptr(connectionSpec)
+func AllJoynConnectToBus(connectionSpec *string) (foundation.HANDLE, error) {
+	_connectionSpec := win32.UTF16PtrOrNil(connectionSpec)
 	r1, _, e1 := syscall.SyscallN(procAllJoynConnectToBus.Addr(), uintptr(unsafe.Pointer(_connectionSpec)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {

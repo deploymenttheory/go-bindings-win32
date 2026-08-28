@@ -1358,8 +1358,8 @@ func AnyPopup() bool {
 // AppendMenu calls USER32!AppendMenuW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-appendmenuw
 // Minimum OS: windows5.0.
-func AppendMenu(hMenu HMENU, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem string) error {
-	_lpNewItem := win32.UTF16Ptr(lpNewItem)
+func AppendMenu(hMenu HMENU, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem *string) error {
+	_lpNewItem := win32.UTF16PtrOrNil(lpNewItem)
 	r1, _, e1 := syscall.SyscallN(procAppendMenu.Addr(), uintptr(hMenu), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(_lpNewItem)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1491,8 +1491,8 @@ func CascadeWindows(hwndParent foundation.HWND, wHow CASCADE_WINDOWS_HOW, lpRect
 }
 
 // ChangeMenu calls USER32!ChangeMenuW.
-func ChangeMenu(hMenu HMENU, cmd uint32, lpszNewItem string, cmdInsert uint32, flags uint32) bool {
-	_lpszNewItem := win32.UTF16Ptr(lpszNewItem)
+func ChangeMenu(hMenu HMENU, cmd uint32, lpszNewItem *string, cmdInsert uint32, flags uint32) bool {
+	_lpszNewItem := win32.UTF16PtrOrNil(lpszNewItem)
 	r1, _, _ := syscall.SyscallN(procChangeMenu.Addr(), uintptr(hMenu), uintptr(cmd), uintptr(unsafe.Pointer(_lpszNewItem)), uintptr(cmdInsert), uintptr(flags))
 	return r1 != 0
 }
@@ -2034,9 +2034,9 @@ func CreatePopupMenu() (HMENU, error) {
 // CreateResourceIndexer calls MrmSupport!CreateResourceIndexer.
 // https://learn.microsoft.com/windows/win32/api/resourceindexer/nf-resourceindexer-createresourceindexer
 // Minimum OS: windows10.0.10240.
-func CreateResourceIndexer(projectRoot string, extensionDllPath string, ppResourceIndexer *unsafe.Pointer) error {
+func CreateResourceIndexer(projectRoot string, extensionDllPath *string, ppResourceIndexer *unsafe.Pointer) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_extensionDllPath := win32.UTF16Ptr(extensionDllPath)
+	_extensionDllPath := win32.UTF16PtrOrNil(extensionDllPath)
 	r1, _, _ := syscall.SyscallN(procCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(unsafe.Pointer(_extensionDllPath)), uintptr(unsafe.Pointer(ppResourceIndexer)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2044,9 +2044,9 @@ func CreateResourceIndexer(projectRoot string, extensionDllPath string, ppResour
 // CreateWindowEx calls USER32!CreateWindowExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw
 // Minimum OS: windows5.0.
-func CreateWindowEx(dwExStyle WINDOW_EX_STYLE, lpClassName string, lpWindowName string, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hMenu HMENU, hInstance foundation.HINSTANCE, lpParam unsafe.Pointer) (foundation.HWND, error) {
-	_lpClassName := win32.UTF16Ptr(lpClassName)
-	_lpWindowName := win32.UTF16Ptr(lpWindowName)
+func CreateWindowEx(dwExStyle WINDOW_EX_STYLE, lpClassName *string, lpWindowName *string, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hMenu HMENU, hInstance foundation.HINSTANCE, lpParam unsafe.Pointer) (foundation.HWND, error) {
+	_lpClassName := win32.UTF16PtrOrNil(lpClassName)
+	_lpWindowName := win32.UTF16PtrOrNil(lpWindowName)
 	r1, _, e1 := syscall.SyscallN(procCreateWindowEx.Addr(), uintptr(dwExStyle), uintptr(unsafe.Pointer(_lpClassName)), uintptr(unsafe.Pointer(_lpWindowName)), uintptr(dwStyle), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(hWndParent), uintptr(hMenu), uintptr(hInstance), uintptr(unsafe.Pointer(lpParam)))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
@@ -2205,8 +2205,8 @@ func DestroyIcon(hIcon HICON) error {
 // DestroyIndexedResults calls MrmSupport!DestroyIndexedResults.
 // https://learn.microsoft.com/windows/win32/api/resourceindexer/nf-resourceindexer-destroyindexedresults
 // Minimum OS: windows10.0.10240.
-func DestroyIndexedResults(resourceUri string, qualifiers []IndexedResourceQualifier) {
-	_resourceUri := win32.UTF16Ptr(resourceUri)
+func DestroyIndexedResults(resourceUri *string, qualifiers []IndexedResourceQualifier) {
+	_resourceUri := win32.UTF16PtrOrNil(resourceUri)
 	var _qualifiers *IndexedResourceQualifier
 	if len(qualifiers) > 0 {
 		_qualifiers = &qualifiers[0]
@@ -2459,9 +2459,9 @@ func EnumWindows(lpEnumFunc WNDENUMPROC, lParam foundation.LPARAM) error {
 // FindWindow calls USER32!FindWindowW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-findwindoww
 // Minimum OS: windows5.0.
-func FindWindow(lpClassName string, lpWindowName string) (foundation.HWND, error) {
-	_lpClassName := win32.UTF16Ptr(lpClassName)
-	_lpWindowName := win32.UTF16Ptr(lpWindowName)
+func FindWindow(lpClassName *string, lpWindowName *string) (foundation.HWND, error) {
+	_lpClassName := win32.UTF16PtrOrNil(lpClassName)
+	_lpWindowName := win32.UTF16PtrOrNil(lpWindowName)
 	r1, _, e1 := syscall.SyscallN(procFindWindow.Addr(), uintptr(unsafe.Pointer(_lpClassName)), uintptr(unsafe.Pointer(_lpWindowName)))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
@@ -2485,9 +2485,9 @@ func FindWindowA(lpClassName foundation.PSTR, lpWindowName foundation.PSTR) (fou
 // FindWindowEx calls USER32!FindWindowExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-findwindowexw
 // Minimum OS: windows5.0.
-func FindWindowEx(hWndParent foundation.HWND, hWndChildAfter foundation.HWND, lpszClass string, lpszWindow string) (foundation.HWND, error) {
-	_lpszClass := win32.UTF16Ptr(lpszClass)
-	_lpszWindow := win32.UTF16Ptr(lpszWindow)
+func FindWindowEx(hWndParent foundation.HWND, hWndChildAfter foundation.HWND, lpszClass *string, lpszWindow *string) (foundation.HWND, error) {
+	_lpszClass := win32.UTF16PtrOrNil(lpszClass)
+	_lpszWindow := win32.UTF16PtrOrNil(lpszWindow)
 	r1, _, e1 := syscall.SyscallN(procFindWindowEx.Addr(), uintptr(hWndParent), uintptr(hWndChildAfter), uintptr(unsafe.Pointer(_lpszClass)), uintptr(unsafe.Pointer(_lpszWindow)))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
@@ -3490,8 +3490,8 @@ func InheritWindowMonitor(hwnd foundation.HWND, hwndInherit foundation.HWND) boo
 // InsertMenu calls USER32!InsertMenuW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-insertmenuw
 // Minimum OS: windows5.0.
-func InsertMenu(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem string) error {
-	_lpNewItem := win32.UTF16Ptr(lpNewItem)
+func InsertMenu(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem *string) error {
+	_lpNewItem := win32.UTF16PtrOrNil(lpNewItem)
 	r1, _, e1 := syscall.SyscallN(procInsertMenu.Addr(), uintptr(hMenu), uintptr(uPosition), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(_lpNewItem)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4022,9 +4022,9 @@ func MenuItemFromPoint(hWnd foundation.HWND, hMenu HMENU, ptScreen foundation.PO
 // MessageBox calls USER32!MessageBoxW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw
 // Minimum OS: windows5.0.
-func MessageBox(hWnd foundation.HWND, lpText string, lpCaption string, uType MESSAGEBOX_STYLE) (MESSAGEBOX_RESULT, error) {
-	_lpText := win32.UTF16Ptr(lpText)
-	_lpCaption := win32.UTF16Ptr(lpCaption)
+func MessageBox(hWnd foundation.HWND, lpText *string, lpCaption *string, uType MESSAGEBOX_STYLE) (MESSAGEBOX_RESULT, error) {
+	_lpText := win32.UTF16PtrOrNil(lpText)
+	_lpCaption := win32.UTF16PtrOrNil(lpCaption)
 	r1, _, e1 := syscall.SyscallN(procMessageBox.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpText)), uintptr(unsafe.Pointer(_lpCaption)), uintptr(uType))
 	if e1 != 0 {
 		return MESSAGEBOX_RESULT(r1), e1
@@ -4046,9 +4046,9 @@ func MessageBoxA(hWnd foundation.HWND, lpText foundation.PSTR, lpCaption foundat
 // MessageBoxEx calls USER32!MessageBoxExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxexw
 // Minimum OS: windows5.0.
-func MessageBoxEx(hWnd foundation.HWND, lpText string, lpCaption string, uType MESSAGEBOX_STYLE, wLanguageId uint16) (MESSAGEBOX_RESULT, error) {
-	_lpText := win32.UTF16Ptr(lpText)
-	_lpCaption := win32.UTF16Ptr(lpCaption)
+func MessageBoxEx(hWnd foundation.HWND, lpText *string, lpCaption *string, uType MESSAGEBOX_STYLE, wLanguageId uint16) (MESSAGEBOX_RESULT, error) {
+	_lpText := win32.UTF16PtrOrNil(lpText)
+	_lpCaption := win32.UTF16PtrOrNil(lpCaption)
 	r1, _, e1 := syscall.SyscallN(procMessageBoxEx.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpText)), uintptr(unsafe.Pointer(_lpCaption)), uintptr(uType), uintptr(wLanguageId))
 	if e1 != 0 {
 		return MESSAGEBOX_RESULT(r1), e1
@@ -4086,8 +4086,8 @@ func MessageBoxIndirectA(lpmbp *MSGBOXPARAMSA) MESSAGEBOX_RESULT {
 // ModifyMenu calls USER32!ModifyMenuW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-modifymenuw
 // Minimum OS: windows5.0.
-func ModifyMenu(hMnu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem string) error {
-	_lpNewItem := win32.UTF16Ptr(lpNewItem)
+func ModifyMenu(hMnu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem *string) error {
+	_lpNewItem := win32.UTF16PtrOrNil(lpNewItem)
 	r1, _, e1 := syscall.SyscallN(procModifyMenu.Addr(), uintptr(hMnu), uintptr(uPosition), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(_lpNewItem)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4120,8 +4120,8 @@ func MoveWindow(hWnd foundation.HWND, X int32, Y int32, nWidth int32, nHeight in
 
 // MrmCreateConfig calls MrmSupport!MrmCreateConfig.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateconfig
-func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers string, outputXmlFile string) error {
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers *string, outputXmlFile string) error {
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	_outputXmlFile := win32.UTF16Ptr(outputXmlFile)
 	r1, _, _ := syscall.SyscallN(procMrmCreateConfig.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_outputXmlFile)))
 	return win32.ErrIfFailed(int32(r1))
@@ -4129,8 +4129,8 @@ func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers strin
 
 // MrmCreateConfigInMemory calls MrmSupport!MrmCreateConfigInMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateconfiginmemory
-func MrmCreateConfigInMemory(platformVersion MrmPlatformVersion, defaultQualifiers string, outputXmlData **byte, outputXmlSize *uint32) error {
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+func MrmCreateConfigInMemory(platformVersion MrmPlatformVersion, defaultQualifiers *string, outputXmlData **byte, outputXmlSize *uint32) error {
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmCreateConfigInMemory.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4159,19 +4159,19 @@ func MrmCreateResourceFileWithChecksum(indexer MrmResourceIndexerHandle, packagi
 
 // MrmCreateResourceIndexer calls MrmSupport!MrmCreateResourceIndexer.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexer
-func MrmCreateResourceIndexer(packageFamilyName string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, indexer *MrmResourceIndexerHandle) error {
-	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+func MrmCreateResourceIndexer(packageFamilyName *string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, indexer *MrmResourceIndexerHandle) error {
+	_packageFamilyName := win32.UTF16PtrOrNil(packageFamilyName)
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(indexer)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousPriData calls MrmSupport!MrmCreateResourceIndexerFromPreviousPriData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviouspridata-
-func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, priData []byte, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, priData []byte, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	var _priData *byte
 	if len(priData) > 0 {
 		_priData = &priData[0]
@@ -4182,9 +4182,9 @@ func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVer
 
 // MrmCreateResourceIndexerFromPreviousPriFile calls MrmSupport!MrmCreateResourceIndexerFromPreviousPriFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousprifile
-func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, priFile string, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, priFile string, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	_priFile := win32.UTF16Ptr(priFile)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriFile.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_priFile)), uintptr(unsafe.Pointer(indexer)))
 	return win32.ErrIfFailed(int32(r1))
@@ -4192,9 +4192,9 @@ func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot string, platformVer
 
 // MrmCreateResourceIndexerFromPreviousSchemaData calls MrmSupport!MrmCreateResourceIndexerFromPreviousSchemaData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousschemadata
-func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, schemaXmlData []byte, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, schemaXmlData []byte, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	var _schemaXmlData *byte
 	if len(schemaXmlData) > 0 {
 		_schemaXmlData = &schemaXmlData[0]
@@ -4205,19 +4205,19 @@ func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platform
 
 // MrmCreateResourceIndexerFromPreviousSchemaFile calls MrmSupport!MrmCreateResourceIndexerFromPreviousSchemaFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousschemafile
-func MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, schemaFile string, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, schemaFile string, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	_schemaFile := win32.UTF16Ptr(schemaFile)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaFile.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_schemaFile)), uintptr(unsafe.Pointer(indexer)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexerWithFlags calls MrmSupport!MrmCreateResourceIndexerWithFlags.
-func MrmCreateResourceIndexerWithFlags(packageFamilyName string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, flags MrmIndexerFlags, indexer *MrmResourceIndexerHandle) error {
-	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+func MrmCreateResourceIndexerWithFlags(packageFamilyName *string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, flags MrmIndexerFlags, indexer *MrmResourceIndexerHandle) error {
+	_packageFamilyName := win32.UTF16PtrOrNil(packageFamilyName)
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerWithFlags.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(flags), uintptr(unsafe.Pointer(indexer)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4246,9 +4246,9 @@ func MrmDumpPriDataInMemory(inputPriData []byte, schemaPriData []byte, dumpType 
 
 // MrmDumpPriFile calls MrmSupport!MrmDumpPriFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmdumpprifile
-func MrmDumpPriFile(indexFileName string, schemaPriFile string, dumpType MrmDumpType, outputXmlFile string) error {
+func MrmDumpPriFile(indexFileName string, schemaPriFile *string, dumpType MrmDumpType, outputXmlFile string) error {
 	_indexFileName := win32.UTF16Ptr(indexFileName)
-	_schemaPriFile := win32.UTF16Ptr(schemaPriFile)
+	_schemaPriFile := win32.UTF16PtrOrNil(schemaPriFile)
 	_outputXmlFile := win32.UTF16Ptr(outputXmlFile)
 	r1, _, _ := syscall.SyscallN(procMrmDumpPriFile.Addr(), uintptr(unsafe.Pointer(_indexFileName)), uintptr(unsafe.Pointer(_schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(_outputXmlFile)))
 	return win32.ErrIfFailed(int32(r1))
@@ -4256,9 +4256,9 @@ func MrmDumpPriFile(indexFileName string, schemaPriFile string, dumpType MrmDump
 
 // MrmDumpPriFileInMemory calls MrmSupport!MrmDumpPriFileInMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmdumpprifileinmemory
-func MrmDumpPriFileInMemory(indexFileName string, schemaPriFile string, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) error {
+func MrmDumpPriFileInMemory(indexFileName string, schemaPriFile *string, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) error {
 	_indexFileName := win32.UTF16Ptr(indexFileName)
-	_schemaPriFile := win32.UTF16Ptr(schemaPriFile)
+	_schemaPriFile := win32.UTF16PtrOrNil(schemaPriFile)
 	r1, _, _ := syscall.SyscallN(procMrmDumpPriFileInMemory.Addr(), uintptr(unsafe.Pointer(_indexFileName)), uintptr(unsafe.Pointer(_schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4279,31 +4279,31 @@ func MrmGetPriFileContentChecksum(priFile string, checksum *uint32) error {
 
 // MrmIndexEmbeddedData calls MrmSupport!MrmIndexEmbeddedData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmindexembeddeddata
-func MrmIndexEmbeddedData(indexer MrmResourceIndexerHandle, resourceUri string, embeddedData []byte, qualifiers string) error {
+func MrmIndexEmbeddedData(indexer MrmResourceIndexerHandle, resourceUri string, embeddedData []byte, qualifiers *string) error {
 	_resourceUri := win32.UTF16Ptr(resourceUri)
 	var _embeddedData *byte
 	if len(embeddedData) > 0 {
 		_embeddedData = &embeddedData[0]
 	}
-	_qualifiers := win32.UTF16Ptr(qualifiers)
+	_qualifiers := win32.UTF16PtrOrNil(qualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmIndexEmbeddedData.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_embeddedData)), uintptr(len(embeddedData)), uintptr(unsafe.Pointer(_qualifiers)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmIndexFile calls MrmSupport!MrmIndexFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmindexfile
-func MrmIndexFile(indexer MrmResourceIndexerHandle, resourceUri string, filePath string, qualifiers string) error {
+func MrmIndexFile(indexer MrmResourceIndexerHandle, resourceUri string, filePath string, qualifiers *string) error {
 	_resourceUri := win32.UTF16Ptr(resourceUri)
 	_filePath := win32.UTF16Ptr(filePath)
-	_qualifiers := win32.UTF16Ptr(qualifiers)
+	_qualifiers := win32.UTF16PtrOrNil(qualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmIndexFile.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_filePath)), uintptr(unsafe.Pointer(_qualifiers)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmIndexFileAutoQualifiers calls MrmSupport!MrmIndexFileAutoQualifiers.
 // https://learn.microsoft.com/windows/win32/menurc/mrmindexfileautoqualifiers
-func MrmIndexFileAutoQualifiers(indexer MrmResourceIndexerHandle, filePath string) error {
-	_filePath := win32.UTF16Ptr(filePath)
+func MrmIndexFileAutoQualifiers(indexer MrmResourceIndexerHandle, filePath *string) error {
+	_filePath := win32.UTF16PtrOrNil(filePath)
 	r1, _, _ := syscall.SyscallN(procMrmIndexFileAutoQualifiers.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_filePath)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4318,10 +4318,10 @@ func MrmIndexResourceContainerAutoQualifiers(indexer MrmResourceIndexerHandle, c
 
 // MrmIndexString calls MrmSupport!MrmIndexString.
 // https://learn.microsoft.com/windows/win32/menurc/mrmindexstring
-func MrmIndexString(indexer MrmResourceIndexerHandle, resourceUri string, resourceString string, qualifiers string) error {
+func MrmIndexString(indexer MrmResourceIndexerHandle, resourceUri string, resourceString string, qualifiers *string) error {
 	_resourceUri := win32.UTF16Ptr(resourceUri)
 	_resourceString := win32.UTF16Ptr(resourceString)
-	_qualifiers := win32.UTF16Ptr(qualifiers)
+	_qualifiers := win32.UTF16PtrOrNil(qualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmIndexString.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_resourceString)), uintptr(unsafe.Pointer(_qualifiers)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5265,8 +5265,8 @@ func SetWindowPos(hWnd foundation.HWND, hWndInsertAfter foundation.HWND, X int32
 // SetWindowText calls USER32!SetWindowTextW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowtextw
 // Minimum OS: windows5.0.
-func SetWindowText(hWnd foundation.HWND, lpString string) error {
-	_lpString := win32.UTF16Ptr(lpString)
+func SetWindowText(hWnd foundation.HWND, lpString *string) error {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procSetWindowText.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpString)))
 	if r1 == 0 {
 		return win32.LastError(e1)

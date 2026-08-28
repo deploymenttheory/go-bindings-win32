@@ -562,9 +562,9 @@ func (self *IDWriteFactory5) CreateInMemoryFontFileLoader(newLoader **IDWriteInM
 }
 
 // CreateHttpFontFileLoader dispatches through IDWriteFactory5's vtable slot 45.
-func (self *IDWriteFactory5) CreateHttpFontFileLoader(referrerUrl string, extraHeaders string, newLoader **IDWriteRemoteFontFileLoader) error {
-	_referrerUrl := win32.UTF16Ptr(referrerUrl)
-	_extraHeaders := win32.UTF16Ptr(extraHeaders)
+func (self *IDWriteFactory5) CreateHttpFontFileLoader(referrerUrl *string, extraHeaders *string, newLoader **IDWriteRemoteFontFileLoader) error {
+	_referrerUrl := win32.UTF16PtrOrNil(referrerUrl)
+	_extraHeaders := win32.UTF16PtrOrNil(extraHeaders)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_referrerUrl)), uintptr(unsafe.Pointer(_extraHeaders)), uintptr(unsafe.Pointer(newLoader)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1647,8 +1647,8 @@ type IDWriteFontFallback struct {
 var IID_IDWriteFontFallback = win32.GUID{Data1: 0xefa008f9, Data2: 0xf7a1, Data3: 0x48bf, Data4: [8]byte{0xb0, 0x5c, 0xf2, 0x24, 0x71, 0x3c, 0xc0, 0xff}}
 
 // MapCharacters dispatches through IDWriteFontFallback's vtable slot 3.
-func (self *IDWriteFontFallback) MapCharacters(analysisSource *IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection *IDWriteFontCollection, baseFamilyName string, baseWeight DWRITE_FONT_WEIGHT, baseStyle DWRITE_FONT_STYLE, baseStretch DWRITE_FONT_STRETCH, mappedLength *uint32, mappedFont **IDWriteFont, scale *float32) error {
-	_baseFamilyName := win32.UTF16Ptr(baseFamilyName)
+func (self *IDWriteFontFallback) MapCharacters(analysisSource *IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection *IDWriteFontCollection, baseFamilyName *string, baseWeight DWRITE_FONT_WEIGHT, baseStyle DWRITE_FONT_STYLE, baseStretch DWRITE_FONT_STRETCH, mappedLength *uint32, mappedFont **IDWriteFont, scale *float32) error {
+	_baseFamilyName := win32.UTF16PtrOrNil(baseFamilyName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(analysisSource)), uintptr(textPosition), uintptr(textLength), uintptr(unsafe.Pointer(baseFontCollection)), uintptr(unsafe.Pointer(_baseFamilyName)), uintptr(baseWeight), uintptr(baseStyle), uintptr(baseStretch), uintptr(unsafe.Pointer(mappedLength)), uintptr(unsafe.Pointer(mappedFont)), uintptr(unsafe.Pointer(scale)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1663,8 +1663,8 @@ type IDWriteFontFallback1 struct {
 var IID_IDWriteFontFallback1 = win32.GUID{Data1: 0x2397599d, Data2: 0xdd0d, Data3: 0x4681, Data4: [8]byte{0xbd, 0x6a, 0xf4, 0xf3, 0x1e, 0xaa, 0xde, 0x77}}
 
 // MapCharacters dispatches through IDWriteFontFallback1's vtable slot 4.
-func (self *IDWriteFontFallback1) MapCharacters(analysisSource *IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection *IDWriteFontCollection, baseFamilyName string, fontAxisValues []DWRITE_FONT_AXIS_VALUE, mappedLength *uint32, scale *float32, mappedFontFace **IDWriteFontFace5) error {
-	_baseFamilyName := win32.UTF16Ptr(baseFamilyName)
+func (self *IDWriteFontFallback1) MapCharacters(analysisSource *IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection *IDWriteFontCollection, baseFamilyName *string, fontAxisValues []DWRITE_FONT_AXIS_VALUE, mappedLength *uint32, scale *float32, mappedFontFace **IDWriteFontFace5) error {
+	_baseFamilyName := win32.UTF16PtrOrNil(baseFamilyName)
 	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
 	if len(fontAxisValues) > 0 {
 		_fontAxisValues = &fontAxisValues[0]
@@ -1685,7 +1685,7 @@ var IID_IDWriteFontFallbackBuilder = win32.GUID{Data1: 0xfd882d06, Data2: 0x8aba
 var specIDWriteFontFallbackBuilder_AddMapping = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
 
 // AddMapping dispatches through IDWriteFontFallbackBuilder's vtable slot 3.
-func (self *IDWriteFontFallbackBuilder) AddMapping(ranges []DWRITE_UNICODE_RANGE, targetFamilyNames []*uint16, fontCollection *IDWriteFontCollection, localeName string, baseFamilyName string, scale float32) error {
+func (self *IDWriteFontFallbackBuilder) AddMapping(ranges []DWRITE_UNICODE_RANGE, targetFamilyNames []*uint16, fontCollection *IDWriteFontCollection, localeName *string, baseFamilyName *string, scale float32) error {
 	var _ranges *DWRITE_UNICODE_RANGE
 	if len(ranges) > 0 {
 		_ranges = &ranges[0]
@@ -1694,8 +1694,8 @@ func (self *IDWriteFontFallbackBuilder) AddMapping(ranges []DWRITE_UNICODE_RANGE
 	if len(targetFamilyNames) > 0 {
 		_targetFamilyNames = &targetFamilyNames[0]
 	}
-	_localeName := win32.UTF16Ptr(localeName)
-	_baseFamilyName := win32.UTF16Ptr(baseFamilyName)
+	_localeName := win32.UTF16PtrOrNil(localeName)
+	_baseFamilyName := win32.UTF16PtrOrNil(baseFamilyName)
 	r1, _, _ := win32.Call(self.LpVtbl[3], specIDWriteFontFallbackBuilder_AddMapping, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ranges)), uintptr(len(ranges)), uintptr(unsafe.Pointer(_targetFamilyNames)), uintptr(len(targetFamilyNames)), uintptr(unsafe.Pointer(fontCollection)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(_baseFamilyName)), uintptr(math.Float32bits(scale))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2812,8 +2812,8 @@ func (self *IDWriteRemoteFontFileLoader) GetLocalityFromKey(fontFileReferenceKey
 }
 
 // CreateFontFileReferenceFromUrl dispatches through IDWriteRemoteFontFileLoader's vtable slot 6.
-func (self *IDWriteRemoteFontFileLoader) CreateFontFileReferenceFromUrl(factory *IDWriteFactory, baseUrl string, fontFileUrl string, fontFile **IDWriteFontFile) error {
-	_baseUrl := win32.UTF16Ptr(baseUrl)
+func (self *IDWriteRemoteFontFileLoader) CreateFontFileReferenceFromUrl(factory *IDWriteFactory, baseUrl *string, fontFileUrl string, fontFile **IDWriteFontFile) error {
+	_baseUrl := win32.UTF16PtrOrNil(baseUrl)
 	_fontFileUrl := win32.UTF16Ptr(fontFileUrl)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(_baseUrl)), uintptr(unsafe.Pointer(_fontFileUrl)), uintptr(unsafe.Pointer(fontFile)))
 	return win32.ErrIfFailed(int32(r1))
@@ -3129,11 +3129,11 @@ func (self *IDWriteTextAnalyzer) AnalyzeLineBreakpoints(analysisSource *IDWriteT
 }
 
 // GetGlyphs dispatches through IDWriteTextAnalyzer's vtable slot 7.
-func (self *IDWriteTextAnalyzer) GetGlyphs(textString string, textLength uint32, fontFace *IDWriteFontFace, isSideways bool, isRightToLeft bool, scriptAnalysis *DWRITE_SCRIPT_ANALYSIS, localeName string, numberSubstitution *IDWriteNumberSubstitution, features **DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, maxGlyphCount uint32, clusterMap *uint16, textProps *DWRITE_SHAPING_TEXT_PROPERTIES, glyphIndices *uint16, glyphProps *DWRITE_SHAPING_GLYPH_PROPERTIES, actualGlyphCount *uint32) error {
+func (self *IDWriteTextAnalyzer) GetGlyphs(textString string, textLength uint32, fontFace *IDWriteFontFace, isSideways bool, isRightToLeft bool, scriptAnalysis *DWRITE_SCRIPT_ANALYSIS, localeName *string, numberSubstitution *IDWriteNumberSubstitution, features **DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, maxGlyphCount uint32, clusterMap *uint16, textProps *DWRITE_SHAPING_TEXT_PROPERTIES, glyphIndices *uint16, glyphProps *DWRITE_SHAPING_GLYPH_PROPERTIES, actualGlyphCount *uint32) error {
 	_textString := win32.UTF16Ptr(textString)
 	_isSideways := win32.Bool32(isSideways)
 	_isRightToLeft := win32.Bool32(isRightToLeft)
-	_localeName := win32.UTF16Ptr(localeName)
+	_localeName := win32.UTF16PtrOrNil(localeName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_textString)), uintptr(textLength), uintptr(unsafe.Pointer(fontFace)), uintptr(_isSideways), uintptr(_isRightToLeft), uintptr(unsafe.Pointer(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(numberSubstitution)), uintptr(unsafe.Pointer(features)), uintptr(unsafe.Pointer(featureRangeLengths)), uintptr(featureRanges), uintptr(maxGlyphCount), uintptr(unsafe.Pointer(clusterMap)), uintptr(unsafe.Pointer(textProps)), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(glyphProps)), uintptr(unsafe.Pointer(actualGlyphCount)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3141,11 +3141,11 @@ func (self *IDWriteTextAnalyzer) GetGlyphs(textString string, textLength uint32,
 var specIDWriteTextAnalyzer_GetGlyphPlacements = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
 
 // GetGlyphPlacements dispatches through IDWriteTextAnalyzer's vtable slot 8.
-func (self *IDWriteTextAnalyzer) GetGlyphPlacements(textString string, clusterMap *uint16, textProps *DWRITE_SHAPING_TEXT_PROPERTIES, textLength uint32, glyphIndices *uint16, glyphProps *DWRITE_SHAPING_GLYPH_PROPERTIES, glyphCount uint32, fontFace *IDWriteFontFace, fontEmSize float32, isSideways bool, isRightToLeft bool, scriptAnalysis *DWRITE_SCRIPT_ANALYSIS, localeName string, features **DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, glyphAdvances *float32, glyphOffsets *DWRITE_GLYPH_OFFSET) error {
+func (self *IDWriteTextAnalyzer) GetGlyphPlacements(textString string, clusterMap *uint16, textProps *DWRITE_SHAPING_TEXT_PROPERTIES, textLength uint32, glyphIndices *uint16, glyphProps *DWRITE_SHAPING_GLYPH_PROPERTIES, glyphCount uint32, fontFace *IDWriteFontFace, fontEmSize float32, isSideways bool, isRightToLeft bool, scriptAnalysis *DWRITE_SCRIPT_ANALYSIS, localeName *string, features **DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, glyphAdvances *float32, glyphOffsets *DWRITE_GLYPH_OFFSET) error {
 	_textString := win32.UTF16Ptr(textString)
 	_isSideways := win32.Bool32(isSideways)
 	_isRightToLeft := win32.Bool32(isRightToLeft)
-	_localeName := win32.UTF16Ptr(localeName)
+	_localeName := win32.UTF16PtrOrNil(localeName)
 	r1, _, _ := win32.Call(self.LpVtbl[8], specIDWriteTextAnalyzer_GetGlyphPlacements, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_textString)), uintptr(unsafe.Pointer(clusterMap)), uintptr(unsafe.Pointer(textProps)), uintptr(textLength), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(glyphProps)), uintptr(glyphCount), uintptr(unsafe.Pointer(fontFace)), uintptr(math.Float32bits(fontEmSize)), uintptr(_isSideways), uintptr(_isRightToLeft), uintptr(unsafe.Pointer(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(features)), uintptr(unsafe.Pointer(featureRangeLengths)), uintptr(featureRanges), uintptr(unsafe.Pointer(glyphAdvances)), uintptr(unsafe.Pointer(glyphOffsets))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3153,12 +3153,12 @@ func (self *IDWriteTextAnalyzer) GetGlyphPlacements(textString string, clusterMa
 var specIDWriteTextAnalyzer_GetGdiCompatibleGlyphPlacements = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
 
 // GetGdiCompatibleGlyphPlacements dispatches through IDWriteTextAnalyzer's vtable slot 9.
-func (self *IDWriteTextAnalyzer) GetGdiCompatibleGlyphPlacements(textString string, clusterMap *uint16, textProps *DWRITE_SHAPING_TEXT_PROPERTIES, textLength uint32, glyphIndices *uint16, glyphProps *DWRITE_SHAPING_GLYPH_PROPERTIES, glyphCount uint32, fontFace *IDWriteFontFace, fontEmSize float32, pixelsPerDip float32, transform *DWRITE_MATRIX, useGdiNatural bool, isSideways bool, isRightToLeft bool, scriptAnalysis *DWRITE_SCRIPT_ANALYSIS, localeName string, features **DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, glyphAdvances *float32, glyphOffsets *DWRITE_GLYPH_OFFSET) error {
+func (self *IDWriteTextAnalyzer) GetGdiCompatibleGlyphPlacements(textString string, clusterMap *uint16, textProps *DWRITE_SHAPING_TEXT_PROPERTIES, textLength uint32, glyphIndices *uint16, glyphProps *DWRITE_SHAPING_GLYPH_PROPERTIES, glyphCount uint32, fontFace *IDWriteFontFace, fontEmSize float32, pixelsPerDip float32, transform *DWRITE_MATRIX, useGdiNatural bool, isSideways bool, isRightToLeft bool, scriptAnalysis *DWRITE_SCRIPT_ANALYSIS, localeName *string, features **DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, glyphAdvances *float32, glyphOffsets *DWRITE_GLYPH_OFFSET) error {
 	_textString := win32.UTF16Ptr(textString)
 	_useGdiNatural := win32.Bool32(useGdiNatural)
 	_isSideways := win32.Bool32(isSideways)
 	_isRightToLeft := win32.Bool32(isRightToLeft)
-	_localeName := win32.UTF16Ptr(localeName)
+	_localeName := win32.UTF16PtrOrNil(localeName)
 	r1, _, _ := win32.Call(self.LpVtbl[9], specIDWriteTextAnalyzer_GetGdiCompatibleGlyphPlacements, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_textString)), uintptr(unsafe.Pointer(clusterMap)), uintptr(unsafe.Pointer(textProps)), uintptr(textLength), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(glyphProps)), uintptr(glyphCount), uintptr(unsafe.Pointer(fontFace)), uintptr(math.Float32bits(fontEmSize)), uintptr(math.Float32bits(pixelsPerDip)), uintptr(unsafe.Pointer(transform)), uintptr(_useGdiNatural), uintptr(_isSideways), uintptr(_isRightToLeft), uintptr(unsafe.Pointer(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(features)), uintptr(unsafe.Pointer(featureRangeLengths)), uintptr(featureRanges), uintptr(unsafe.Pointer(glyphAdvances)), uintptr(unsafe.Pointer(glyphOffsets))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3185,10 +3185,10 @@ func (self *IDWriteTextAnalyzer1) ApplyCharacterSpacing(leadingSpacing float32, 
 }
 
 // GetBaseline dispatches through IDWriteTextAnalyzer1's vtable slot 11.
-func (self *IDWriteTextAnalyzer1) GetBaseline(fontFace *IDWriteFontFace, baseline DWRITE_BASELINE, isVertical bool, isSimulationAllowed bool, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName string, baselineCoordinate *int32, exists *foundation.BOOL) error {
+func (self *IDWriteTextAnalyzer1) GetBaseline(fontFace *IDWriteFontFace, baseline DWRITE_BASELINE, isVertical bool, isSimulationAllowed bool, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName *string, baselineCoordinate *int32, exists *foundation.BOOL) error {
 	_isVertical := win32.Bool32(isVertical)
 	_isSimulationAllowed := win32.Bool32(isSimulationAllowed)
-	_localeName := win32.UTF16Ptr(localeName)
+	_localeName := win32.UTF16PtrOrNil(localeName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(baseline), uintptr(_isVertical), uintptr(_isSimulationAllowed), uintptr(win32.StructArg(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(baselineCoordinate)), uintptr(unsafe.Pointer(exists)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3263,8 +3263,8 @@ func (self *IDWriteTextAnalyzer2) GetGlyphOrientationTransform(glyphOrientationA
 }
 
 // GetTypographicFeatures dispatches through IDWriteTextAnalyzer2's vtable slot 20.
-func (self *IDWriteTextAnalyzer2) GetTypographicFeatures(fontFace *IDWriteFontFace, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName string, actualTagCount *uint32, tags []DWRITE_FONT_FEATURE_TAG) error {
-	_localeName := win32.UTF16Ptr(localeName)
+func (self *IDWriteTextAnalyzer2) GetTypographicFeatures(fontFace *IDWriteFontFace, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName *string, actualTagCount *uint32, tags []DWRITE_FONT_FEATURE_TAG) error {
+	_localeName := win32.UTF16PtrOrNil(localeName)
 	var _tags *DWRITE_FONT_FEATURE_TAG
 	if len(tags) > 0 {
 		_tags = &tags[0]
@@ -3274,8 +3274,8 @@ func (self *IDWriteTextAnalyzer2) GetTypographicFeatures(fontFace *IDWriteFontFa
 }
 
 // CheckTypographicFeature dispatches through IDWriteTextAnalyzer2's vtable slot 21.
-func (self *IDWriteTextAnalyzer2) CheckTypographicFeature(fontFace *IDWriteFontFace, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName string, featureTag DWRITE_FONT_FEATURE_TAG, glyphCount uint32, glyphIndices *uint16, featureApplies *byte) error {
-	_localeName := win32.UTF16Ptr(localeName)
+func (self *IDWriteTextAnalyzer2) CheckTypographicFeature(fontFace *IDWriteFontFace, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName *string, featureTag DWRITE_FONT_FEATURE_TAG, glyphCount uint32, glyphIndices *uint16, featureApplies *byte) error {
+	_localeName := win32.UTF16PtrOrNil(localeName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(win32.StructArg(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(featureTag), uintptr(glyphCount), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(featureApplies)))
 	return win32.ErrIfFailed(int32(r1))
 }

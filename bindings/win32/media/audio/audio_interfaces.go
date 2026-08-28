@@ -1441,8 +1441,8 @@ func (self *IMMNotificationClient) OnDeviceRemoved(pwstrDeviceId string) error {
 }
 
 // OnDefaultDeviceChanged dispatches through IMMNotificationClient's vtable slot 6.
-func (self *IMMNotificationClient) OnDefaultDeviceChanged(flow EDataFlow, role ERole, pwstrDefaultDeviceId string) error {
-	_pwstrDefaultDeviceId := win32.UTF16Ptr(pwstrDefaultDeviceId)
+func (self *IMMNotificationClient) OnDefaultDeviceChanged(flow EDataFlow, role ERole, pwstrDefaultDeviceId *string) error {
+	_pwstrDefaultDeviceId := win32.UTF16PtrOrNil(pwstrDefaultDeviceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(flow), uintptr(role), uintptr(unsafe.Pointer(_pwstrDefaultDeviceId)))
 	return win32.ErrIfFailed(int32(r1))
 }

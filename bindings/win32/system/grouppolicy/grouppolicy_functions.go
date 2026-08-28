@@ -229,8 +229,8 @@ func GenerateGPNotification(bMachine bool, lpwszMgmtProduct string, dwMgmtProduc
 // GetAppliedGPOList calls USERENV!GetAppliedGPOListW.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-getappliedgpolistw
 // Minimum OS: windows6.0.6000.
-func GetAppliedGPOList(dwFlags uint32, pMachineName string, pSidUser security.PSID, pGuidExtension *win32.GUID, ppGPOList **GROUP_POLICY_OBJECTW) uint32 {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func GetAppliedGPOList(dwFlags uint32, pMachineName *string, pSidUser security.PSID, pGuidExtension *win32.GUID, ppGPOList **GROUP_POLICY_OBJECTW) uint32 {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	r1, _, _ := syscall.SyscallN(procGetAppliedGPOList.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pMachineName)), uintptr(pSidUser), uintptr(unsafe.Pointer(pGuidExtension)), uintptr(unsafe.Pointer(ppGPOList)))
 	return uint32(r1)
 }
@@ -246,10 +246,10 @@ func GetAppliedGPOListA(dwFlags uint32, pMachineName foundation.PSTR, pSidUser s
 // GetGPOList calls USERENV!GetGPOListW.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-getgpolistw
 // Minimum OS: windows6.0.6000.
-func GetGPOList(hToken foundation.HANDLE, lpName string, lpHostName string, lpComputerName string, dwFlags uint32, pGPOList **GROUP_POLICY_OBJECTW) error {
-	_lpName := win32.UTF16Ptr(lpName)
-	_lpHostName := win32.UTF16Ptr(lpHostName)
-	_lpComputerName := win32.UTF16Ptr(lpComputerName)
+func GetGPOList(hToken foundation.HANDLE, lpName *string, lpHostName *string, lpComputerName *string, dwFlags uint32, pGPOList **GROUP_POLICY_OBJECTW) error {
+	_lpName := win32.UTF16PtrOrNil(lpName)
+	_lpHostName := win32.UTF16PtrOrNil(lpHostName)
+	_lpComputerName := win32.UTF16PtrOrNil(lpComputerName)
 	r1, _, e1 := syscall.SyscallN(procGetGPOList.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpHostName)), uintptr(unsafe.Pointer(_lpComputerName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pGPOList)))
 	if r1 == 0 {
 		return win32.LastError(e1)

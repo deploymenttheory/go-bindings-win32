@@ -425,10 +425,10 @@ func WinHttpGetProxySettingsVersion(hSession unsafe.Pointer, pdwProxySettingsVer
 // WinHttpOpen calls WINHTTP!WinHttpOpen.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpopen
 // Minimum OS: windows5.1.2600.
-func WinHttpOpen(pszAgentW string, dwAccessType WINHTTP_ACCESS_TYPE, pszProxyW string, pszProxyBypassW string, dwFlags uint32) (unsafe.Pointer, error) {
-	_pszAgentW := win32.UTF16Ptr(pszAgentW)
-	_pszProxyW := win32.UTF16Ptr(pszProxyW)
-	_pszProxyBypassW := win32.UTF16Ptr(pszProxyBypassW)
+func WinHttpOpen(pszAgentW *string, dwAccessType WINHTTP_ACCESS_TYPE, pszProxyW *string, pszProxyBypassW *string, dwFlags uint32) (unsafe.Pointer, error) {
+	_pszAgentW := win32.UTF16PtrOrNil(pszAgentW)
+	_pszProxyW := win32.UTF16PtrOrNil(pszProxyW)
+	_pszProxyBypassW := win32.UTF16PtrOrNil(pszProxyBypassW)
 	r1, _, e1 := syscall.SyscallN(procWinHttpOpen.Addr(), uintptr(unsafe.Pointer(_pszAgentW)), uintptr(dwAccessType), uintptr(unsafe.Pointer(_pszProxyW)), uintptr(unsafe.Pointer(_pszProxyBypassW)), uintptr(dwFlags))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
@@ -565,8 +565,8 @@ func WinHttpReadDataEx(hRequest unsafe.Pointer, lpBuffer []byte, lpdwNumberOfByt
 }
 
 // WinHttpReadProxySettings calls WINHTTP!WinHttpReadProxySettings.
-func WinHttpReadProxySettings(hSession unsafe.Pointer, pcwszConnectionName string, fFallBackToDefaultSettings bool, fSetAutoDiscoverForDefaultSettings bool, pdwSettingsVersion *uint32, pfDefaultSettingsAreReturned *foundation.BOOL, pWinHttpProxySettings *WINHTTP_PROXY_SETTINGS) uint32 {
-	_pcwszConnectionName := win32.UTF16Ptr(pcwszConnectionName)
+func WinHttpReadProxySettings(hSession unsafe.Pointer, pcwszConnectionName *string, fFallBackToDefaultSettings bool, fSetAutoDiscoverForDefaultSettings bool, pdwSettingsVersion *uint32, pfDefaultSettingsAreReturned *foundation.BOOL, pWinHttpProxySettings *WINHTTP_PROXY_SETTINGS) uint32 {
+	_pcwszConnectionName := win32.UTF16PtrOrNil(pcwszConnectionName)
 	_fFallBackToDefaultSettings := win32.Bool32(fFallBackToDefaultSettings)
 	_fSetAutoDiscoverForDefaultSettings := win32.Bool32(fSetAutoDiscoverForDefaultSettings)
 	r1, _, _ := syscall.SyscallN(procWinHttpReadProxySettings.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(unsafe.Pointer(_pcwszConnectionName)), uintptr(_fFallBackToDefaultSettings), uintptr(_fSetAutoDiscoverForDefaultSettings), uintptr(unsafe.Pointer(pdwSettingsVersion)), uintptr(unsafe.Pointer(pfDefaultSettingsAreReturned)), uintptr(unsafe.Pointer(pWinHttpProxySettings)))
@@ -602,8 +602,8 @@ func WinHttpResetAutoProxy(hSession unsafe.Pointer, dwFlags uint32) uint32 {
 // WinHttpSendRequest calls WINHTTP!WinHttpSendRequest.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpsendrequest
 // Minimum OS: windows5.1.2600.
-func WinHttpSendRequest(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, lpOptional []byte, dwTotalLength uint32, dwContext uintptr) error {
-	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
+func WinHttpSendRequest(hRequest unsafe.Pointer, lpszHeaders *string, dwHeadersLength uint32, lpOptional []byte, dwTotalLength uint32, dwContext uintptr) error {
+	_lpszHeaders := win32.UTF16PtrOrNil(lpszHeaders)
 	var _lpOptional *byte
 	if len(lpOptional) > 0 {
 		_lpOptional = &lpOptional[0]

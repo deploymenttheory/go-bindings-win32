@@ -223,16 +223,16 @@ func (self *ISpDataKey) GetData(pszValueName string, pcbData *uint32, pData *byt
 }
 
 // SetStringValue dispatches through ISpDataKey's vtable slot 5.
-func (self *ISpDataKey) SetStringValue(pszValueName string, pszValue string) error {
-	_pszValueName := win32.UTF16Ptr(pszValueName)
+func (self *ISpDataKey) SetStringValue(pszValueName *string, pszValue string) error {
+	_pszValueName := win32.UTF16PtrOrNil(pszValueName)
 	_pszValue := win32.UTF16Ptr(pszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(_pszValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringValue dispatches through ISpDataKey's vtable slot 6.
-func (self *ISpDataKey) GetStringValue(pszValueName string, ppszValue *foundation.PWSTR) error {
-	_pszValueName := win32.UTF16Ptr(pszValueName)
+func (self *ISpDataKey) GetStringValue(pszValueName *string, ppszValue *foundation.PWSTR) error {
+	_pszValueName := win32.UTF16PtrOrNil(pszValueName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(ppszValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -346,9 +346,9 @@ type ISpErrorLog struct {
 var IID_ISpErrorLog = win32.GUID{Data1: 0xf4711347, Data2: 0xe608, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x86, 0x00, 0xc0, 0x4f, 0x8e, 0xf9, 0xb5}}
 
 // AddError dispatches through ISpErrorLog's vtable slot 3.
-func (self *ISpErrorLog) AddError(lLineNumber int32, hr foundation.HRESULT, pszDescription string, pszHelpFile string, dwHelpContext uint32) error {
+func (self *ISpErrorLog) AddError(lLineNumber int32, hr foundation.HRESULT, pszDescription string, pszHelpFile *string, dwHelpContext uint32) error {
 	_pszDescription := win32.UTF16Ptr(pszDescription)
-	_pszHelpFile := win32.UTF16Ptr(pszHelpFile)
+	_pszHelpFile := win32.UTF16PtrOrNil(pszHelpFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lLineNumber), uintptr(hr), uintptr(unsafe.Pointer(_pszDescription)), uintptr(unsafe.Pointer(_pszHelpFile)), uintptr(dwHelpContext))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -470,9 +470,9 @@ func (self *ISpGrammarBuilder) CreateNewState(hState SPSTATEHANDLE, phState *SPS
 var specISpGrammarBuilder_AddWordTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
 
 // AddWordTransition dispatches through ISpGrammarBuilder's vtable slot 7.
-func (self *ISpGrammarBuilder) AddWordTransition(hFromState SPSTATEHANDLE, hToState SPSTATEHANDLE, psz string, pszSeparators string, eWordType SPGRAMMARWORDTYPE, Weight float32, pPropInfo *SPPROPERTYINFO) error {
-	_psz := win32.UTF16Ptr(psz)
-	_pszSeparators := win32.UTF16Ptr(pszSeparators)
+func (self *ISpGrammarBuilder) AddWordTransition(hFromState SPSTATEHANDLE, hToState SPSTATEHANDLE, psz *string, pszSeparators *string, eWordType SPGRAMMARWORDTYPE, Weight float32, pPropInfo *SPPROPERTYINFO) error {
+	_psz := win32.UTF16PtrOrNil(psz)
+	_pszSeparators := win32.UTF16PtrOrNil(pszSeparators)
 	r1, _, _ := win32.Call(self.LpVtbl[7], specISpGrammarBuilder_AddWordTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(hFromState), uintptr(hToState), uintptr(unsafe.Pointer(_psz)), uintptr(unsafe.Pointer(_pszSeparators)), uintptr(eWordType), uintptr(math.Float32bits(Weight)), uintptr(unsafe.Pointer(pPropInfo))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -486,9 +486,9 @@ func (self *ISpGrammarBuilder) AddRuleTransition(hFromState SPSTATEHANDLE, hToSt
 }
 
 // AddResource dispatches through ISpGrammarBuilder's vtable slot 9.
-func (self *ISpGrammarBuilder) AddResource(hRuleState SPSTATEHANDLE, pszResourceName string, pszResourceValue string) error {
+func (self *ISpGrammarBuilder) AddResource(hRuleState SPSTATEHANDLE, pszResourceName string, pszResourceValue *string) error {
 	_pszResourceName := win32.UTF16Ptr(pszResourceName)
-	_pszResourceValue := win32.UTF16Ptr(pszResourceValue)
+	_pszResourceValue := win32.UTF16PtrOrNil(pszResourceValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hRuleState), uintptr(unsafe.Pointer(_pszResourceName)), uintptr(unsafe.Pointer(_pszResourceValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -768,8 +768,8 @@ type ISpObjectToken struct {
 var IID_ISpObjectToken = win32.GUID{Data1: 0x14056589, Data2: 0xe16c, Data3: 0x11d2, Data4: [8]byte{0xbb, 0x90, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0}}
 
 // SetId dispatches through ISpObjectToken's vtable slot 15.
-func (self *ISpObjectToken) SetId(pszCategoryId string, pszTokenId string, fCreateIfNotExist bool) error {
-	_pszCategoryId := win32.UTF16Ptr(pszCategoryId)
+func (self *ISpObjectToken) SetId(pszCategoryId *string, pszTokenId string, fCreateIfNotExist bool) error {
+	_pszCategoryId := win32.UTF16PtrOrNil(pszCategoryId)
 	_pszTokenId := win32.UTF16Ptr(pszTokenId)
 	_fCreateIfNotExist := win32.Bool32(fCreateIfNotExist)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategoryId)), uintptr(unsafe.Pointer(_pszTokenId)), uintptr(_fCreateIfNotExist))
@@ -795,9 +795,9 @@ func (self *ISpObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, dwClsC
 }
 
 // GetStorageFileName dispatches through ISpObjectToken's vtable slot 19.
-func (self *ISpObjectToken) GetStorageFileName(clsidCaller *win32.GUID, pszValueName string, pszFileNameSpecifier string, nFolder uint32, ppszFilePath *foundation.PWSTR) error {
+func (self *ISpObjectToken) GetStorageFileName(clsidCaller *win32.GUID, pszValueName string, pszFileNameSpecifier *string, nFolder uint32, ppszFilePath *foundation.PWSTR) error {
 	_pszValueName := win32.UTF16Ptr(pszValueName)
-	_pszFileNameSpecifier := win32.UTF16Ptr(pszFileNameSpecifier)
+	_pszFileNameSpecifier := win32.UTF16PtrOrNil(pszFileNameSpecifier)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidCaller)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(_pszFileNameSpecifier)), uintptr(nFolder), uintptr(unsafe.Pointer(ppszFilePath)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -867,9 +867,9 @@ func (self *ISpObjectTokenCategory) GetDataKey(spdkl SPDATAKEYLOCATION, ppDataKe
 }
 
 // EnumTokens dispatches through ISpObjectTokenCategory's vtable slot 18.
-func (self *ISpObjectTokenCategory) EnumTokens(pzsReqAttribs string, pszOptAttribs string, ppEnum **IEnumSpObjectTokens) error {
-	_pzsReqAttribs := win32.UTF16Ptr(pzsReqAttribs)
-	_pszOptAttribs := win32.UTF16Ptr(pszOptAttribs)
+func (self *ISpObjectTokenCategory) EnumTokens(pzsReqAttribs *string, pszOptAttribs *string, ppEnum **IEnumSpObjectTokens) error {
+	_pzsReqAttribs := win32.UTF16PtrOrNil(pzsReqAttribs)
+	_pszOptAttribs := win32.UTF16PtrOrNil(pszOptAttribs)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pzsReqAttribs)), uintptr(unsafe.Pointer(_pszOptAttribs)), uintptr(unsafe.Pointer(ppEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -896,9 +896,9 @@ type ISpObjectTokenEnumBuilder struct {
 var IID_ISpObjectTokenEnumBuilder = win32.GUID{Data1: 0x06b64f9f, Data2: 0x7fda, Data3: 0x11d2, Data4: [8]byte{0xb4, 0xf2, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96}}
 
 // SetAttribs dispatches through ISpObjectTokenEnumBuilder's vtable slot 9.
-func (self *ISpObjectTokenEnumBuilder) SetAttribs(pszReqAttribs string, pszOptAttribs string) error {
-	_pszReqAttribs := win32.UTF16Ptr(pszReqAttribs)
-	_pszOptAttribs := win32.UTF16Ptr(pszOptAttribs)
+func (self *ISpObjectTokenEnumBuilder) SetAttribs(pszReqAttribs *string, pszOptAttribs *string) error {
+	_pszReqAttribs := win32.UTF16PtrOrNil(pszReqAttribs)
+	_pszOptAttribs := win32.UTF16PtrOrNil(pszOptAttribs)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszReqAttribs)), uintptr(unsafe.Pointer(_pszOptAttribs)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1445,8 +1445,8 @@ func (self *ISpRecoGrammar) LoadCmdFromProprietaryGrammar(rguidParam *win32.GUID
 }
 
 // SetRuleState dispatches through ISpRecoGrammar's vtable slot 18.
-func (self *ISpRecoGrammar) SetRuleState(pszName string, pReserved unsafe.Pointer, NewState SPRULESTATE) error {
-	_pszName := win32.UTF16Ptr(pszName)
+func (self *ISpRecoGrammar) SetRuleState(pszName *string, pReserved unsafe.Pointer, NewState SPRULESTATE) error {
+	_pszName := win32.UTF16PtrOrNil(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pReserved)), uintptr(NewState))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1458,8 +1458,8 @@ func (self *ISpRecoGrammar) SetRuleIdState(ulRuleId uint32, NewState SPRULESTATE
 }
 
 // LoadDictation dispatches through ISpRecoGrammar's vtable slot 20.
-func (self *ISpRecoGrammar) LoadDictation(pszTopicName string, Options SPLOADOPTIONS) error {
-	_pszTopicName := win32.UTF16Ptr(pszTopicName)
+func (self *ISpRecoGrammar) LoadDictation(pszTopicName *string, Options SPLOADOPTIONS) error {
+	_pszTopicName := win32.UTF16PtrOrNil(pszTopicName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTopicName)), uintptr(Options))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1477,8 +1477,8 @@ func (self *ISpRecoGrammar) SetDictationState(NewState SPRULESTATE) error {
 }
 
 // SetWordSequenceData dispatches through ISpRecoGrammar's vtable slot 23.
-func (self *ISpRecoGrammar) SetWordSequenceData(pText string, cchText uint32, pInfo *SPTEXTSELECTIONINFO) error {
-	_pText := win32.UTF16Ptr(pText)
+func (self *ISpRecoGrammar) SetWordSequenceData(pText *string, cchText uint32, pInfo *SPTEXTSELECTIONINFO) error {
+	_pText := win32.UTF16PtrOrNil(pText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pText)), uintptr(cchText), uintptr(unsafe.Pointer(pInfo)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1529,18 +1529,18 @@ func (self *ISpRecoGrammar2) GetRules(ppCoMemRules **SPRULE, puNumRules *uint32)
 }
 
 // LoadCmdFromFile2 dispatches through ISpRecoGrammar2's vtable slot 4.
-func (self *ISpRecoGrammar2) LoadCmdFromFile2(pszFileName string, Options SPLOADOPTIONS, pszSharingUri string, pszBaseUri string) error {
+func (self *ISpRecoGrammar2) LoadCmdFromFile2(pszFileName string, Options SPLOADOPTIONS, pszSharingUri *string, pszBaseUri *string) error {
 	_pszFileName := win32.UTF16Ptr(pszFileName)
-	_pszSharingUri := win32.UTF16Ptr(pszSharingUri)
-	_pszBaseUri := win32.UTF16Ptr(pszBaseUri)
+	_pszSharingUri := win32.UTF16PtrOrNil(pszSharingUri)
+	_pszBaseUri := win32.UTF16PtrOrNil(pszBaseUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(Options), uintptr(unsafe.Pointer(_pszSharingUri)), uintptr(unsafe.Pointer(_pszBaseUri)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadCmdFromMemory2 dispatches through ISpRecoGrammar2's vtable slot 5.
-func (self *ISpRecoGrammar2) LoadCmdFromMemory2(pGrammar *SPBINARYGRAMMAR, Options SPLOADOPTIONS, pszSharingUri string, pszBaseUri string) error {
-	_pszSharingUri := win32.UTF16Ptr(pszSharingUri)
-	_pszBaseUri := win32.UTF16Ptr(pszBaseUri)
+func (self *ISpRecoGrammar2) LoadCmdFromMemory2(pGrammar *SPBINARYGRAMMAR, Options SPLOADOPTIONS, pszSharingUri *string, pszBaseUri *string) error {
+	_pszSharingUri := win32.UTF16PtrOrNil(pszSharingUri)
+	_pszBaseUri := win32.UTF16PtrOrNil(pszBaseUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGrammar)), uintptr(Options), uintptr(unsafe.Pointer(_pszSharingUri)), uintptr(unsafe.Pointer(_pszBaseUri)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1650,8 +1650,8 @@ func (self *ISpRecoResult2) CommitAlternate(pPhraseAlt *ISpPhraseAlt, ppNewResul
 }
 
 // CommitText dispatches through ISpRecoResult2's vtable slot 15.
-func (self *ISpRecoResult2) CommitText(ulStartElement uint32, cElements uint32, pszCorrectedData string, eCommitFlags uint32) error {
-	_pszCorrectedData := win32.UTF16Ptr(pszCorrectedData)
+func (self *ISpRecoResult2) CommitText(ulStartElement uint32, cElements uint32, pszCorrectedData *string, eCommitFlags uint32) error {
+	_pszCorrectedData := win32.UTF16PtrOrNil(pszCorrectedData)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(unsafe.Pointer(_pszCorrectedData)), uintptr(eCommitFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1759,8 +1759,8 @@ func (self *ISpRecognizer) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.
 }
 
 // DisplayUI dispatches through ISpRecognizer's vtable slot 21.
-func (self *ISpRecognizer) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32) error {
-	_pszTitle := win32.UTF16Ptr(pszTitle)
+func (self *ISpRecognizer) DisplayUI(hwndParent foundation.HWND, pszTitle *string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32) error {
+	_pszTitle := win32.UTF16PtrOrNil(pszTitle)
 	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData))
 	return win32.ErrIfFailed(int32(r1))
@@ -1865,8 +1865,8 @@ type ISpSRAlternates2 struct {
 var IID_ISpSRAlternates2 = win32.GUID{Data1: 0xf338f437, Data2: 0xcb33, Data3: 0x4020, Data4: [8]byte{0x9c, 0xab, 0xc7, 0x1f, 0xf9, 0xce, 0x12, 0xd3}}
 
 // CommitText dispatches through ISpSRAlternates2's vtable slot 5.
-func (self *ISpSRAlternates2) CommitText(pAltRequest *SPPHRASEALTREQUEST, pcszNewText string, commitFlags SPCOMMITFLAGS) error {
-	_pcszNewText := win32.UTF16Ptr(pcszNewText)
+func (self *ISpSRAlternates2) CommitText(pAltRequest *SPPHRASEALTREQUEST, pcszNewText *string, commitFlags SPCOMMITFLAGS) error {
+	_pcszNewText := win32.UTF16PtrOrNil(pcszNewText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAltRequest)), uintptr(unsafe.Pointer(_pcszNewText)), uintptr(commitFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2089,8 +2089,8 @@ func (self *ISpSREngine2) SetAdaptationData2(pvEngineContext unsafe.Pointer, pAd
 }
 
 // SetGrammarPrefix dispatches through ISpSREngine2's vtable slot 34.
-func (self *ISpSREngine2) SetGrammarPrefix(pvEngineGrammar unsafe.Pointer, pszPrefix string, fIsPrefixRequired bool) error {
-	_pszPrefix := win32.UTF16Ptr(pszPrefix)
+func (self *ISpSREngine2) SetGrammarPrefix(pvEngineGrammar unsafe.Pointer, pszPrefix *string, fIsPrefixRequired bool) error {
+	_pszPrefix := win32.UTF16PtrOrNil(pszPrefix)
 	_fIsPrefixRequired := win32.Bool32(fIsPrefixRequired)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(_pszPrefix)), uintptr(_fIsPrefixRequired))
 	return win32.ErrIfFailed(int32(r1))
@@ -2697,8 +2697,8 @@ func (self *ISpTokenUI) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Poi
 }
 
 // DisplayUI dispatches through ISpTokenUI's vtable slot 4.
-func (self *ISpTokenUI) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, pToken *ISpObjectToken, punkObject *systemcom.IUnknown) error {
-	_pszTitle := win32.UTF16Ptr(pszTitle)
+func (self *ISpTokenUI) DisplayUI(hwndParent foundation.HWND, pszTitle *string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, pToken *ISpObjectToken, punkObject *systemcom.IUnknown) error {
+	_pszTitle := win32.UTF16PtrOrNil(pszTitle)
 	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(pToken)), uintptr(unsafe.Pointer(punkObject)))
 	return win32.ErrIfFailed(int32(r1))
@@ -2777,8 +2777,8 @@ func (self *ISpVoice) GetVoice(ppToken **ISpObjectToken) error {
 }
 
 // Speak dispatches through ISpVoice's vtable slot 20.
-func (self *ISpVoice) Speak(pwcs string, dwFlags uint32, pulStreamNumber *uint32) error {
-	_pwcs := win32.UTF16Ptr(pwcs)
+func (self *ISpVoice) Speak(pwcs *string, dwFlags uint32, pulStreamNumber *uint32) error {
+	_pwcs := win32.UTF16PtrOrNil(pwcs)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pulStreamNumber)))
 	return win32.ErrIfFailed(int32(r1))
 }

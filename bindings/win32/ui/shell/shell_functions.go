@@ -2184,9 +2184,9 @@ func AssocIsDangerous(pszAssoc string) bool {
 // AssocQueryKey calls SHLWAPI!AssocQueryKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-assocquerykeyw
 // Minimum OS: windows5.0.
-func AssocQueryKey(flags ASSOCF, key ASSOCKEY, pszAssoc string, pszExtra string, phkeyOut *systemregistry.HKEY) error {
+func AssocQueryKey(flags ASSOCF, key ASSOCKEY, pszAssoc string, pszExtra *string, phkeyOut *systemregistry.HKEY) error {
 	_pszAssoc := win32.UTF16Ptr(pszAssoc)
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(procAssocQueryKey.Addr(), uintptr(flags), uintptr(key), uintptr(unsafe.Pointer(_pszAssoc)), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(phkeyOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2202,9 +2202,9 @@ func AssocQueryKeyA(flags ASSOCF, key ASSOCKEY, pszAssoc foundation.PSTR, pszExt
 // AssocQueryString calls SHLWAPI!AssocQueryStringW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-assocquerystringw
 // Minimum OS: windows5.0.
-func AssocQueryString(flags ASSOCF, str ASSOCSTR, pszAssoc string, pszExtra string, pszOut foundation.PWSTR, pcchOut *uint32) error {
+func AssocQueryString(flags ASSOCF, str ASSOCSTR, pszAssoc string, pszExtra *string, pszOut foundation.PWSTR, pcchOut *uint32) error {
 	_pszAssoc := win32.UTF16Ptr(pszAssoc)
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(procAssocQueryString.Addr(), uintptr(flags), uintptr(str), uintptr(unsafe.Pointer(_pszAssoc)), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(pszOut)), uintptr(unsafe.Pointer(pcchOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2220,8 +2220,8 @@ func AssocQueryStringA(flags ASSOCF, str ASSOCSTR, pszAssoc foundation.PSTR, psz
 // AssocQueryStringByKey calls SHLWAPI!AssocQueryStringByKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-assocquerystringbykeyw
 // Minimum OS: windows5.0.
-func AssocQueryStringByKey(flags ASSOCF, str ASSOCSTR, hkAssoc systemregistry.HKEY, pszExtra string, pszOut foundation.PWSTR, pcchOut *uint32) error {
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+func AssocQueryStringByKey(flags ASSOCF, str ASSOCSTR, hkAssoc systemregistry.HKEY, pszExtra *string, pszOut foundation.PWSTR, pcchOut *uint32) error {
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(procAssocQueryStringByKey.Addr(), uintptr(flags), uintptr(str), uintptr(hkAssoc), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(pszOut)), uintptr(unsafe.Pointer(pcchOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2402,10 +2402,10 @@ func DefSubclassProc(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARAM
 // DeleteProfile calls USERENV!DeleteProfileW.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-deleteprofilew
 // Minimum OS: windows5.0.
-func DeleteProfile(lpSidString string, lpProfilePath string, lpComputerName string) error {
+func DeleteProfile(lpSidString string, lpProfilePath *string, lpComputerName *string) error {
 	_lpSidString := win32.UTF16Ptr(lpSidString)
-	_lpProfilePath := win32.UTF16Ptr(lpProfilePath)
-	_lpComputerName := win32.UTF16Ptr(lpComputerName)
+	_lpProfilePath := win32.UTF16PtrOrNil(lpProfilePath)
+	_lpComputerName := win32.UTF16PtrOrNil(lpComputerName)
 	r1, _, e1 := syscall.SyscallN(procDeleteProfile.Addr(), uintptr(unsafe.Pointer(_lpSidString)), uintptr(unsafe.Pointer(_lpProfilePath)), uintptr(unsafe.Pointer(_lpComputerName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2578,9 +2578,9 @@ func FileIconInit(fRestoreCache bool) bool {
 // FindExecutable calls SHELL32!FindExecutableW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-findexecutablew
 // Minimum OS: windows5.1.2600.
-func FindExecutable(lpFile string, lpDirectory string, lpResult foundation.PWSTR) foundation.HINSTANCE {
+func FindExecutable(lpFile string, lpDirectory *string, lpResult foundation.PWSTR) foundation.HINSTANCE {
 	_lpFile := win32.UTF16Ptr(lpFile)
-	_lpDirectory := win32.UTF16Ptr(lpDirectory)
+	_lpDirectory := win32.UTF16PtrOrNil(lpDirectory)
 	r1, _, _ := syscall.SyscallN(procFindExecutable.Addr(), uintptr(unsafe.Pointer(_lpFile)), uintptr(unsafe.Pointer(_lpDirectory)), uintptr(unsafe.Pointer(lpResult)))
 	return foundation.HINSTANCE(r1)
 }
@@ -2672,11 +2672,11 @@ func GetDpiForShellUIComponent(param0 SHELL_UI_COMPONENT) uint32 {
 // GetFileNameFromBrowse calls SHELL32!GetFileNameFromBrowse.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-getfilenamefrombrowse
 // Minimum OS: windows5.0.
-func GetFileNameFromBrowse(hwnd foundation.HWND, pszFilePath foundation.PWSTR, cchFilePath uint32, pszWorkingDir string, pszDefExt string, pszFilters string, pszTitle string) bool {
-	_pszWorkingDir := win32.UTF16Ptr(pszWorkingDir)
+func GetFileNameFromBrowse(hwnd foundation.HWND, pszFilePath foundation.PWSTR, cchFilePath uint32, pszWorkingDir *string, pszDefExt string, pszFilters *string, pszTitle *string) bool {
+	_pszWorkingDir := win32.UTF16PtrOrNil(pszWorkingDir)
 	_pszDefExt := win32.UTF16Ptr(pszDefExt)
-	_pszFilters := win32.UTF16Ptr(pszFilters)
-	_pszTitle := win32.UTF16Ptr(pszTitle)
+	_pszFilters := win32.UTF16PtrOrNil(pszFilters)
+	_pszTitle := win32.UTF16PtrOrNil(pszTitle)
 	r1, _, _ := syscall.SyscallN(procGetFileNameFromBrowse.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszFilePath)), uintptr(cchFilePath), uintptr(unsafe.Pointer(_pszWorkingDir)), uintptr(unsafe.Pointer(_pszDefExt)), uintptr(unsafe.Pointer(_pszFilters)), uintptr(unsafe.Pointer(_pszTitle)))
 	return r1 != 0
 }
@@ -3375,8 +3375,8 @@ func IsInternetESCEnabled() bool {
 }
 
 // IsLFNDrive calls SHELL32!IsLFNDriveW.
-func IsLFNDrive(pszPath string) bool {
-	_pszPath := win32.UTF16Ptr(pszPath)
+func IsLFNDrive(pszPath *string) bool {
+	_pszPath := win32.UTF16PtrOrNil(pszPath)
 	r1, _, _ := syscall.SyscallN(procIsLFNDrive.Addr(), uintptr(unsafe.Pointer(_pszPath)))
 	return r1 != 0
 }
@@ -3443,9 +3443,9 @@ func OleSaveToStreamEx(piunk *systemcom.IUnknown, pistm *systemcom.IStream, fCle
 // OpenRegStream calls SHELL32!OpenRegStream.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-openregstream
 // Minimum OS: windows5.1.2600.
-func OpenRegStream(hkey systemregistry.HKEY, pszSubkey string, pszValue string, grfMode uint32) *systemcom.IStream {
-	_pszSubkey := win32.UTF16Ptr(pszSubkey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func OpenRegStream(hkey systemregistry.HKEY, pszSubkey *string, pszValue *string, grfMode uint32) *systemcom.IStream {
+	_pszSubkey := win32.UTF16PtrOrNil(pszSubkey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procOpenRegStream.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubkey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(grfMode))
 	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
@@ -3486,8 +3486,8 @@ func PathAddBackslashA(pszPath foundation.PSTR) foundation.PSTR {
 // PathAddExtension calls SHLWAPI!PathAddExtensionW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-pathaddextensionw
 // Minimum OS: windows5.0.
-func PathAddExtension(pszPath foundation.PWSTR, pszExt string) bool {
-	_pszExt := win32.UTF16Ptr(pszExt)
+func PathAddExtension(pszPath foundation.PWSTR, pszExt *string) bool {
+	_pszExt := win32.UTF16PtrOrNil(pszExt)
 	r1, _, _ := syscall.SyscallN(procPathAddExtension.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(unsafe.Pointer(_pszExt)))
 	return r1 != 0
 }
@@ -3512,9 +3512,9 @@ func PathAllocCanonicalize(pszPathIn string, dwFlags PATHCCH_OPTIONS, ppszPathOu
 // PathAllocCombine calls api-ms-win-core-path-l1-1-0!PathAllocCombine.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathalloccombine
 // Minimum OS: windows8.0.
-func PathAllocCombine(pszPathIn string, pszMore string, dwFlags PATHCCH_OPTIONS, ppszPathOut *foundation.PWSTR) error {
-	_pszPathIn := win32.UTF16Ptr(pszPathIn)
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathAllocCombine(pszPathIn *string, pszMore *string, dwFlags PATHCCH_OPTIONS, ppszPathOut *foundation.PWSTR) error {
+	_pszPathIn := win32.UTF16PtrOrNil(pszPathIn)
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathAllocCombine.Addr(), uintptr(unsafe.Pointer(_pszPathIn)), uintptr(unsafe.Pointer(_pszMore)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppszPathOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3603,8 +3603,8 @@ func PathCchAddExtension(pszPath foundation.PWSTR, cchPath uintptr, pszExt strin
 // PathCchAppend calls api-ms-win-core-path-l1-1-0!PathCchAppend.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchappend
 // Minimum OS: windows8.0.
-func PathCchAppend(pszPath foundation.PWSTR, cchPath uintptr, pszMore string) error {
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathCchAppend(pszPath foundation.PWSTR, cchPath uintptr, pszMore *string) error {
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathCchAppend.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(cchPath), uintptr(unsafe.Pointer(_pszMore)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3612,8 +3612,8 @@ func PathCchAppend(pszPath foundation.PWSTR, cchPath uintptr, pszMore string) er
 // PathCchAppendEx calls api-ms-win-core-path-l1-1-0!PathCchAppendEx.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchappendex
 // Minimum OS: windows8.0.
-func PathCchAppendEx(pszPath foundation.PWSTR, cchPath uintptr, pszMore string, dwFlags PATHCCH_OPTIONS) error {
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathCchAppendEx(pszPath foundation.PWSTR, cchPath uintptr, pszMore *string, dwFlags PATHCCH_OPTIONS) error {
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathCchAppendEx.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(cchPath), uintptr(unsafe.Pointer(_pszMore)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3639,9 +3639,9 @@ func PathCchCanonicalizeEx(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszP
 // PathCchCombine calls api-ms-win-core-path-l1-1-0!PathCchCombine.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchcombine
 // Minimum OS: windows8.0.
-func PathCchCombine(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn string, pszMore string) error {
-	_pszPathIn := win32.UTF16Ptr(pszPathIn)
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathCchCombine(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn *string, pszMore *string) error {
+	_pszPathIn := win32.UTF16PtrOrNil(pszPathIn)
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathCchCombine.Addr(), uintptr(unsafe.Pointer(pszPathOut)), uintptr(cchPathOut), uintptr(unsafe.Pointer(_pszPathIn)), uintptr(unsafe.Pointer(_pszMore)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3649,9 +3649,9 @@ func PathCchCombine(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn s
 // PathCchCombineEx calls api-ms-win-core-path-l1-1-0!PathCchCombineEx.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchcombineex
 // Minimum OS: windows8.0.
-func PathCchCombineEx(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn string, pszMore string, dwFlags PATHCCH_OPTIONS) error {
-	_pszPathIn := win32.UTF16Ptr(pszPathIn)
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathCchCombineEx(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn *string, pszMore *string, dwFlags PATHCCH_OPTIONS) error {
+	_pszPathIn := win32.UTF16PtrOrNil(pszPathIn)
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathCchCombineEx.Addr(), uintptr(unsafe.Pointer(pszPathOut)), uintptr(cchPathOut), uintptr(unsafe.Pointer(_pszPathIn)), uintptr(unsafe.Pointer(_pszMore)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3668,8 +3668,8 @@ func PathCchFindExtension(pszPath string, cchPath uintptr, ppszExt *foundation.P
 // PathCchIsRoot calls api-ms-win-core-path-l1-1-0!PathCchIsRoot.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchisroot
 // Minimum OS: windows8.0.
-func PathCchIsRoot(pszPath string) bool {
-	_pszPath := win32.UTF16Ptr(pszPath)
+func PathCchIsRoot(pszPath *string) bool {
+	_pszPath := win32.UTF16PtrOrNil(pszPath)
 	r1, _, _ := syscall.SyscallN(procPathCchIsRoot.Addr(), uintptr(unsafe.Pointer(_pszPath)))
 	return r1 != 0
 }
@@ -3743,8 +3743,8 @@ func PathCchStripToRoot(pszPath foundation.PWSTR, cchPath uintptr) error {
 // PathCleanupSpec calls SHELL32!PathCleanupSpec.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pathcleanupspec
 // Minimum OS: windows5.1.2600.
-func PathCleanupSpec(pszDir string, pszSpec foundation.PWSTR) int32 {
-	_pszDir := win32.UTF16Ptr(pszDir)
+func PathCleanupSpec(pszDir *string, pszSpec foundation.PWSTR) int32 {
+	_pszDir := win32.UTF16PtrOrNil(pszDir)
 	r1, _, _ := syscall.SyscallN(procPathCleanupSpec.Addr(), uintptr(unsafe.Pointer(_pszDir)), uintptr(unsafe.Pointer(pszSpec)))
 	return int32(r1)
 }
@@ -3752,9 +3752,9 @@ func PathCleanupSpec(pszDir string, pszSpec foundation.PWSTR) int32 {
 // PathCombine calls SHLWAPI!PathCombineW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-pathcombinew
 // Minimum OS: windows5.0.
-func PathCombine(pszDest foundation.PWSTR, pszDir string, pszFile string) foundation.PWSTR {
-	_pszDir := win32.UTF16Ptr(pszDir)
-	_pszFile := win32.UTF16Ptr(pszFile)
+func PathCombine(pszDest foundation.PWSTR, pszDir *string, pszFile *string) foundation.PWSTR {
+	_pszDir := win32.UTF16PtrOrNil(pszDir)
+	_pszFile := win32.UTF16PtrOrNil(pszFile)
 	r1, _, _ := syscall.SyscallN(procPathCombine.Addr(), uintptr(unsafe.Pointer(pszDest)), uintptr(unsafe.Pointer(_pszDir)), uintptr(unsafe.Pointer(_pszFile)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
@@ -4218,8 +4218,8 @@ func PathIsSlowA(pszFile foundation.PSTR, dwAttr uint32) bool {
 // PathIsSystemFolder calls SHLWAPI!PathIsSystemFolderW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-pathissystemfolderw
 // Minimum OS: windows5.0.
-func PathIsSystemFolder(pszPath string, dwAttrb uint32) bool {
-	_pszPath := win32.UTF16Ptr(pszPath)
+func PathIsSystemFolder(pszPath *string, dwAttrb uint32) bool {
+	_pszPath := win32.UTF16PtrOrNil(pszPath)
 	r1, _, _ := syscall.SyscallN(procPathIsSystemFolder.Addr(), uintptr(unsafe.Pointer(_pszPath)), uintptr(dwAttrb))
 	return r1 != 0
 }
@@ -4345,10 +4345,10 @@ func PathMakeSystemFolderA(pszPath foundation.PSTR) bool {
 // PathMakeUniqueName calls SHELL32!PathMakeUniqueName.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pathmakeuniquename
 // Minimum OS: windows5.0.
-func PathMakeUniqueName(pszUniqueName foundation.PWSTR, cchMax uint32, pszTemplate string, pszLongPlate string, pszDir string) bool {
+func PathMakeUniqueName(pszUniqueName foundation.PWSTR, cchMax uint32, pszTemplate string, pszLongPlate *string, pszDir *string) bool {
 	_pszTemplate := win32.UTF16Ptr(pszTemplate)
-	_pszLongPlate := win32.UTF16Ptr(pszLongPlate)
-	_pszDir := win32.UTF16Ptr(pszDir)
+	_pszLongPlate := win32.UTF16PtrOrNil(pszLongPlate)
+	_pszDir := win32.UTF16PtrOrNil(pszDir)
 	r1, _, _ := syscall.SyscallN(procPathMakeUniqueName.Addr(), uintptr(unsafe.Pointer(pszUniqueName)), uintptr(cchMax), uintptr(unsafe.Pointer(_pszTemplate)), uintptr(unsafe.Pointer(_pszLongPlate)), uintptr(unsafe.Pointer(_pszDir)))
 	return r1 != 0
 }
@@ -4692,10 +4692,10 @@ func PathUnquoteSpacesA(lpsz foundation.PSTR) bool {
 // PathYetAnotherMakeUniqueName calls SHELL32!PathYetAnotherMakeUniqueName.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pathyetanothermakeuniquename
 // Minimum OS: windows5.0.
-func PathYetAnotherMakeUniqueName(pszUniqueName foundation.PWSTR, pszPath string, pszShort string, pszFileSpec string) bool {
+func PathYetAnotherMakeUniqueName(pszUniqueName foundation.PWSTR, pszPath string, pszShort *string, pszFileSpec *string) bool {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	_pszShort := win32.UTF16Ptr(pszShort)
-	_pszFileSpec := win32.UTF16Ptr(pszFileSpec)
+	_pszShort := win32.UTF16PtrOrNil(pszShort)
+	_pszFileSpec := win32.UTF16PtrOrNil(pszFileSpec)
 	r1, _, _ := syscall.SyscallN(procPathYetAnotherMakeUniqueName.Addr(), uintptr(unsafe.Pointer(pszUniqueName)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszShort)), uintptr(unsafe.Pointer(_pszFileSpec)))
 	return r1 != 0
 }
@@ -4781,8 +4781,8 @@ func RemoveWindowSubclass(hWnd foundation.HWND, pfnSubclass SUBCLASSPROC, uIdSub
 // RestartDialog calls SHELL32!RestartDialog.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-restartdialog
 // Minimum OS: windows5.0.
-func RestartDialog(hwnd foundation.HWND, pszPrompt string, dwReturn uint32) int32 {
-	_pszPrompt := win32.UTF16Ptr(pszPrompt)
+func RestartDialog(hwnd foundation.HWND, pszPrompt *string, dwReturn uint32) int32 {
+	_pszPrompt := win32.UTF16PtrOrNil(pszPrompt)
 	r1, _, _ := syscall.SyscallN(procRestartDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszPrompt)), uintptr(dwReturn))
 	return int32(r1)
 }
@@ -4790,8 +4790,8 @@ func RestartDialog(hwnd foundation.HWND, pszPrompt string, dwReturn uint32) int3
 // RestartDialogEx calls SHELL32!RestartDialogEx.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-restartdialogex
 // Minimum OS: windows5.0.
-func RestartDialogEx(hwnd foundation.HWND, pszPrompt string, dwReturn uint32, dwReasonCode uint32) int32 {
-	_pszPrompt := win32.UTF16Ptr(pszPrompt)
+func RestartDialogEx(hwnd foundation.HWND, pszPrompt *string, dwReturn uint32, dwReasonCode uint32) int32 {
+	_pszPrompt := win32.UTF16PtrOrNil(pszPrompt)
 	r1, _, _ := syscall.SyscallN(procRestartDialogEx.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszPrompt)), uintptr(dwReturn), uintptr(dwReasonCode))
 	return int32(r1)
 }
@@ -5004,8 +5004,8 @@ func SHCloneSpecialIDList(csidl int32, fCreate bool) *uishellcommon.ITEMIDLIST {
 // SHCoCreateInstance calls SHELL32!SHCoCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcocreateinstance
 // Minimum OS: windows5.1.2600.
-func SHCoCreateInstance(pszCLSID string, pclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
-	_pszCLSID := win32.UTF16Ptr(pszCLSID)
+func SHCoCreateInstance(pszCLSID *string, pclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
+	_pszCLSID := win32.UTF16PtrOrNil(pszCLSID)
 	r1, _, _ := syscall.SyscallN(procSHCoCreateInstance.Addr(), uintptr(unsafe.Pointer(_pszCLSID)), uintptr(unsafe.Pointer(pclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5013,8 +5013,8 @@ func SHCoCreateInstance(pszCLSID string, pclsid *win32.GUID, pUnkOuter *systemco
 // SHCopyKey calls SHLWAPI!SHCopyKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcopykeyw
 // Minimum OS: windows5.0.
-func SHCopyKey(hkeySrc systemregistry.HKEY, pszSrcSubKey string, hkeyDest systemregistry.HKEY) foundation.WIN32_ERROR {
-	_pszSrcSubKey := win32.UTF16Ptr(pszSrcSubKey)
+func SHCopyKey(hkeySrc systemregistry.HKEY, pszSrcSubKey *string, hkeyDest systemregistry.HKEY) foundation.WIN32_ERROR {
+	_pszSrcSubKey := win32.UTF16PtrOrNil(pszSrcSubKey)
 	r1, _, _ := syscall.SyscallN(procSHCopyKey.Addr(), uintptr(hkeySrc), uintptr(unsafe.Pointer(_pszSrcSubKey)), uintptr(hkeyDest), 0)
 	return foundation.WIN32_ERROR(r1)
 }
@@ -5135,8 +5135,8 @@ func SHCreateItemFromRelativeName(psiParent *IShellItem, pszName string, pbc *sy
 // SHCreateItemInKnownFolder calls SHELL32!SHCreateItemInKnownFolder.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateiteminknownfolder
 // Minimum OS: windows6.0.6000.
-func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem string, riid *win32.GUID, ppv **win32.IUnknown) error {
-	_pszItem := win32.UTF16Ptr(pszItem)
+func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem *string, riid *win32.GUID, ppv **win32.IUnknown) error {
+	_pszItem := win32.UTF16PtrOrNil(pszItem)
 	r1, _, _ := syscall.SyscallN(procSHCreateItemInKnownFolder.Addr(), uintptr(unsafe.Pointer(kfid)), uintptr(dwKFFlags), uintptr(unsafe.Pointer(_pszItem)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5175,8 +5175,8 @@ func SHCreateProcessAsUserW(pscpi *SHCREATEPROCESSINFOW) error {
 // SHCreatePropSheetExtArray calls SHELL32!SHCreatePropSheetExtArray.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shcreatepropsheetextarray
 // Minimum OS: windows5.1.2600.
-func SHCreatePropSheetExtArray(hKey systemregistry.HKEY, pszSubKey string, max_iface uint32) HPSXA {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+func SHCreatePropSheetExtArray(hKey systemregistry.HKEY, pszSubKey *string, max_iface uint32) HPSXA {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
 	r1, _, _ := syscall.SyscallN(procSHCreatePropSheetExtArray.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(max_iface))
 	return HPSXA(r1)
 }
@@ -5350,8 +5350,8 @@ func SHDefExtractIconA(pszIconFile foundation.PSTR, iIndex int32, uFlags uint32,
 // SHDeleteEmptyKey calls SHLWAPI!SHDeleteEmptyKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shdeleteemptykeyw
 // Minimum OS: windows5.0.
-func SHDeleteEmptyKey(hkey systemregistry.HKEY, pszSubKey string) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+func SHDeleteEmptyKey(hkey systemregistry.HKEY, pszSubKey *string) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
 	r1, _, _ := syscall.SyscallN(procSHDeleteEmptyKey.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -5367,8 +5367,8 @@ func SHDeleteEmptyKeyA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR) foun
 // SHDeleteKey calls SHLWAPI!SHDeleteKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shdeletekeyw
 // Minimum OS: windows5.0.
-func SHDeleteKey(hkey systemregistry.HKEY, pszSubKey string) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+func SHDeleteKey(hkey systemregistry.HKEY, pszSubKey *string) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
 	r1, _, _ := syscall.SyscallN(procSHDeleteKey.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -5384,8 +5384,8 @@ func SHDeleteKeyA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR) foundatio
 // SHDeleteValue calls SHLWAPI!SHDeleteValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shdeletevaluew
 // Minimum OS: windows5.0.
-func SHDeleteValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+func SHDeleteValue(hkey systemregistry.HKEY, pszSubKey *string, pszValue string) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
 	_pszValue := win32.UTF16Ptr(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHDeleteValue.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)))
 	return foundation.WIN32_ERROR(r1)
@@ -5417,8 +5417,8 @@ func SHDoDragDrop(hwnd foundation.HWND, pdata *systemcom.IDataObject, pdsrc *sys
 // SHEmptyRecycleBin calls SHELL32!SHEmptyRecycleBinW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shemptyrecyclebinw
 // Minimum OS: windows5.0.
-func SHEmptyRecycleBin(hwnd foundation.HWND, pszRootPath string, dwFlags uint32) error {
-	_pszRootPath := win32.UTF16Ptr(pszRootPath)
+func SHEmptyRecycleBin(hwnd foundation.HWND, pszRootPath *string, dwFlags uint32) error {
+	_pszRootPath := win32.UTF16PtrOrNil(pszRootPath)
 	r1, _, _ := syscall.SyscallN(procSHEmptyRecycleBin.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszRootPath)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5684,8 +5684,8 @@ func SHGetFolderPathA(csidl int32, hToken foundation.HANDLE, dwFlags uint32, psz
 // SHGetFolderPathAndSubDir calls SHELL32!SHGetFolderPathAndSubDirW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetfolderpathandsubdirw
 // Minimum OS: windows5.1.2600.
-func SHGetFolderPathAndSubDir(csidl int32, hToken foundation.HANDLE, dwFlags uint32, pszSubDir string, pszPath foundation.PWSTR) error {
-	_pszSubDir := win32.UTF16Ptr(pszSubDir)
+func SHGetFolderPathAndSubDir(csidl int32, hToken foundation.HANDLE, dwFlags uint32, pszSubDir *string, pszPath foundation.PWSTR) error {
+	_pszSubDir := win32.UTF16PtrOrNil(pszSubDir)
 	r1, _, _ := syscall.SyscallN(procSHGetFolderPathAndSubDir.Addr(), 0, uintptr(csidl), uintptr(hToken), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszSubDir)), uintptr(unsafe.Pointer(pszPath)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5709,8 +5709,8 @@ func SHGetIDListFromObject(punk *systemcom.IUnknown, ppidl **uishellcommon.ITEMI
 // SHGetIconOverlayIndex calls SHELL32!SHGetIconOverlayIndexW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgeticonoverlayindexw
 // Minimum OS: windows5.0.
-func SHGetIconOverlayIndex(pszIconPath string, iIconIndex int32) int32 {
-	_pszIconPath := win32.UTF16Ptr(pszIconPath)
+func SHGetIconOverlayIndex(pszIconPath *string, iIconIndex int32) int32 {
+	_pszIconPath := win32.UTF16PtrOrNil(pszIconPath)
 	r1, _, _ := syscall.SyscallN(procSHGetIconOverlayIndex.Addr(), uintptr(unsafe.Pointer(_pszIconPath)), uintptr(iIconIndex))
 	return int32(r1)
 }
@@ -5943,8 +5943,8 @@ func SHGetThreadRef(ppunk **systemcom.IUnknown) error {
 // SHGetUnreadMailCount calls SHELL32!SHGetUnreadMailCountW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetunreadmailcountw
 // Minimum OS: windows5.1.2600.
-func SHGetUnreadMailCount(hKeyUser systemregistry.HKEY, pszMailAddress string, pdwCount *uint32, pFileTime *foundation.FILETIME, pszShellExecuteCommand foundation.PWSTR, cchShellExecuteCommand int32) error {
-	_pszMailAddress := win32.UTF16Ptr(pszMailAddress)
+func SHGetUnreadMailCount(hKeyUser systemregistry.HKEY, pszMailAddress *string, pdwCount *uint32, pFileTime *foundation.FILETIME, pszShellExecuteCommand foundation.PWSTR, cchShellExecuteCommand int32) error {
+	_pszMailAddress := win32.UTF16PtrOrNil(pszMailAddress)
 	r1, _, _ := syscall.SyscallN(procSHGetUnreadMailCount.Addr(), uintptr(hKeyUser), uintptr(unsafe.Pointer(_pszMailAddress)), uintptr(unsafe.Pointer(pdwCount)), uintptr(unsafe.Pointer(pFileTime)), uintptr(unsafe.Pointer(pszShellExecuteCommand)), uintptr(cchShellExecuteCommand))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5952,9 +5952,9 @@ func SHGetUnreadMailCount(hKeyUser systemregistry.HKEY, pszMailAddress string, p
 // SHGetValue calls SHLWAPI!SHGetValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shgetvaluew
 // Minimum OS: windows5.0.
-func SHGetValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHGetValue(hkey systemregistry.HKEY, pszSubKey *string, pszValue *string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHGetValue.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -5970,8 +5970,8 @@ func SHGetValueA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR, pszValue f
 // SHGetViewStatePropertyBag calls SHLWAPI!SHGetViewStatePropertyBag.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shgetviewstatepropertybag
 // Minimum OS: windows5.1.2600.
-func SHGetViewStatePropertyBag(pidl *uishellcommon.ITEMIDLIST, pszBagName string, dwFlags uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
-	_pszBagName := win32.UTF16Ptr(pszBagName)
+func SHGetViewStatePropertyBag(pidl *uishellcommon.ITEMIDLIST, pszBagName *string, dwFlags uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
+	_pszBagName := win32.UTF16PtrOrNil(pszBagName)
 	r1, _, _ := syscall.SyscallN(procSHGetViewStatePropertyBag.Addr(), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(_pszBagName)), uintptr(dwFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -6020,9 +6020,9 @@ func SHILCreateFromPath(pszPath string, ppidl **uishellcommon.ITEMIDLIST, rgfInO
 // SHInvokePrinterCommand calls SHELL32!SHInvokePrinterCommandW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shinvokeprintercommandw
 // Minimum OS: windows5.0.
-func SHInvokePrinterCommand(hwnd foundation.HWND, uAction uint32, lpBuf1 string, lpBuf2 string, fModal bool) bool {
+func SHInvokePrinterCommand(hwnd foundation.HWND, uAction uint32, lpBuf1 string, lpBuf2 *string, fModal bool) bool {
 	_lpBuf1 := win32.UTF16Ptr(lpBuf1)
-	_lpBuf2 := win32.UTF16Ptr(lpBuf2)
+	_lpBuf2 := win32.UTF16PtrOrNil(lpBuf2)
 	_fModal := win32.Bool32(fModal)
 	r1, _, _ := syscall.SyscallN(procSHInvokePrinterCommand.Addr(), uintptr(hwnd), uintptr(uAction), uintptr(unsafe.Pointer(_lpBuf1)), uintptr(unsafe.Pointer(_lpBuf2)), uintptr(_fModal))
 	return r1 != 0
@@ -6133,9 +6133,9 @@ func SHMultiFileProperties(pdtobj *systemcom.IDataObject, dwFlags uint32) error 
 // SHObjectProperties calls SHELL32!SHObjectProperties.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shobjectproperties
 // Minimum OS: windows5.1.2600.
-func SHObjectProperties(hwnd foundation.HWND, shopObjectType uint32, pszObjectName string, pszPropertyPage string) bool {
+func SHObjectProperties(hwnd foundation.HWND, shopObjectType uint32, pszObjectName string, pszPropertyPage *string) bool {
 	_pszObjectName := win32.UTF16Ptr(pszObjectName)
-	_pszPropertyPage := win32.UTF16Ptr(pszPropertyPage)
+	_pszPropertyPage := win32.UTF16PtrOrNil(pszPropertyPage)
 	r1, _, _ := syscall.SyscallN(procSHObjectProperties.Addr(), uintptr(hwnd), uintptr(shopObjectType), uintptr(unsafe.Pointer(_pszObjectName)), uintptr(unsafe.Pointer(_pszPropertyPage)))
 	return r1 != 0
 }
@@ -6155,13 +6155,13 @@ func SHOpenFolderAndSelectItems(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*u
 // SHOpenPropSheet calls SHELL32!SHOpenPropSheetW.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shopenpropsheetw
 // Minimum OS: windows5.1.2600.
-func SHOpenPropSheet(pszCaption string, ahkeys []systemregistry.HKEY, pclsidDefault *win32.GUID, pdtobj *systemcom.IDataObject, psb *IShellBrowser, pStartPage string) bool {
-	_pszCaption := win32.UTF16Ptr(pszCaption)
+func SHOpenPropSheet(pszCaption *string, ahkeys []systemregistry.HKEY, pclsidDefault *win32.GUID, pdtobj *systemcom.IDataObject, psb *IShellBrowser, pStartPage *string) bool {
+	_pszCaption := win32.UTF16PtrOrNil(pszCaption)
 	var _ahkeys *systemregistry.HKEY
 	if len(ahkeys) > 0 {
 		_ahkeys = &ahkeys[0]
 	}
-	_pStartPage := win32.UTF16Ptr(pStartPage)
+	_pStartPage := win32.UTF16PtrOrNil(pStartPage)
 	r1, _, _ := syscall.SyscallN(procSHOpenPropSheet.Addr(), uintptr(unsafe.Pointer(_pszCaption)), uintptr(unsafe.Pointer(_ahkeys)), uintptr(len(ahkeys)), uintptr(unsafe.Pointer(pclsidDefault)), uintptr(unsafe.Pointer(pdtobj)), uintptr(unsafe.Pointer(psb)), uintptr(unsafe.Pointer(_pStartPage)))
 	return r1 != 0
 }
@@ -6169,9 +6169,9 @@ func SHOpenPropSheet(pszCaption string, ahkeys []systemregistry.HKEY, pclsidDefa
 // SHOpenRegStream calls SHLWAPI!SHOpenRegStreamW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shopenregstreamw
 // Minimum OS: windows5.0.
-func SHOpenRegStream(hkey systemregistry.HKEY, pszSubkey string, pszValue string, grfMode uint32) *systemcom.IStream {
-	_pszSubkey := win32.UTF16Ptr(pszSubkey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHOpenRegStream(hkey systemregistry.HKEY, pszSubkey *string, pszValue *string, grfMode uint32) *systemcom.IStream {
+	_pszSubkey := win32.UTF16PtrOrNil(pszSubkey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHOpenRegStream.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubkey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(grfMode))
 	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
@@ -6179,9 +6179,9 @@ func SHOpenRegStream(hkey systemregistry.HKEY, pszSubkey string, pszValue string
 // SHOpenRegStream2 calls SHLWAPI!SHOpenRegStream2W.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shopenregstream2w
 // Minimum OS: windows5.0.
-func SHOpenRegStream2(hkey systemregistry.HKEY, pszSubkey string, pszValue string, grfMode uint32) *systemcom.IStream {
-	_pszSubkey := win32.UTF16Ptr(pszSubkey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHOpenRegStream2(hkey systemregistry.HKEY, pszSubkey *string, pszValue *string, grfMode uint32) *systemcom.IStream {
+	_pszSubkey := win32.UTF16PtrOrNil(pszSubkey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHOpenRegStream2.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubkey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(grfMode))
 	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
@@ -6255,8 +6255,8 @@ func SHQueryInfoKeyA(hkey systemregistry.HKEY, pcSubKeys *uint32, pcchMaxSubKeyL
 // SHQueryRecycleBin calls SHELL32!SHQueryRecycleBinW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shqueryrecyclebinw
 // Minimum OS: windows5.0.
-func SHQueryRecycleBin(pszRootPath string, pSHQueryRBInfo *SHQUERYRBINFO) error {
-	_pszRootPath := win32.UTF16Ptr(pszRootPath)
+func SHQueryRecycleBin(pszRootPath *string, pSHQueryRBInfo *SHQUERYRBINFO) error {
+	_pszRootPath := win32.UTF16PtrOrNil(pszRootPath)
 	r1, _, _ := syscall.SyscallN(procSHQueryRecycleBin.Addr(), uintptr(unsafe.Pointer(_pszRootPath)), uintptr(unsafe.Pointer(pSHQueryRBInfo)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -6280,8 +6280,8 @@ func SHQueryUserNotificationState(pquns *QUERY_USER_NOTIFICATION_STATE) error {
 // SHQueryValueEx calls SHLWAPI!SHQueryValueExW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shqueryvalueexw
 // Minimum OS: windows5.0.
-func SHQueryValueEx(hkey systemregistry.HKEY, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHQueryValueEx(hkey systemregistry.HKEY, pszValue *string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHQueryValueEx.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszValue)), 0, uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -6396,9 +6396,9 @@ func SHRegEnumUSValueA(hUSkey uintptr, dwIndex uint32, pszValueName foundation.P
 // SHRegGetBoolUSValue calls SHLWAPI!SHRegGetBoolUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetboolusvaluew
 // Minimum OS: windows5.0.
-func SHRegGetBoolUSValue(pszSubKey string, pszValue string, fIgnoreHKCU bool, fDefault bool) bool {
+func SHRegGetBoolUSValue(pszSubKey string, pszValue *string, fIgnoreHKCU bool, fDefault bool) bool {
 	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
 	_fDefault := win32.Bool32(fDefault)
 	r1, _, _ := syscall.SyscallN(procSHRegGetBoolUSValue.Addr(), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(_fIgnoreHKCU), uintptr(_fDefault))
@@ -6418,8 +6418,8 @@ func SHRegGetBoolUSValueA(pszSubKey foundation.PSTR, pszValue foundation.PSTR, f
 // SHRegGetIntW calls SHLWAPI!SHRegGetIntW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetintw
 // Minimum OS: windows5.0.
-func SHRegGetIntW(hk systemregistry.HKEY, pwzKey string, iDefault int32) int32 {
-	_pwzKey := win32.UTF16Ptr(pwzKey)
+func SHRegGetIntW(hk systemregistry.HKEY, pwzKey *string, iDefault int32) int32 {
+	_pwzKey := win32.UTF16PtrOrNil(pwzKey)
 	r1, _, _ := syscall.SyscallN(procSHRegGetIntW.Addr(), uintptr(hk), uintptr(unsafe.Pointer(_pwzKey)), uintptr(iDefault))
 	return int32(r1)
 }
@@ -6427,9 +6427,9 @@ func SHRegGetIntW(hk systemregistry.HKEY, pwzKey string, iDefault int32) int32 {
 // SHRegGetPath calls SHLWAPI!SHRegGetPathW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetpathw
 // Minimum OS: windows5.0.
-func SHRegGetPath(hKey systemregistry.HKEY, pcszSubKey string, pcszValue string, pszPath foundation.PWSTR, dwFlags uint32) foundation.WIN32_ERROR {
-	_pcszSubKey := win32.UTF16Ptr(pcszSubKey)
-	_pcszValue := win32.UTF16Ptr(pcszValue)
+func SHRegGetPath(hKey systemregistry.HKEY, pcszSubKey *string, pcszValue *string, pszPath foundation.PWSTR, dwFlags uint32) foundation.WIN32_ERROR {
+	_pcszSubKey := win32.UTF16PtrOrNil(pcszSubKey)
+	_pcszValue := win32.UTF16PtrOrNil(pcszValue)
 	r1, _, _ := syscall.SyscallN(procSHRegGetPath.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pcszSubKey)), uintptr(unsafe.Pointer(_pcszValue)), uintptr(unsafe.Pointer(pszPath)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -6445,9 +6445,9 @@ func SHRegGetPathA(hKey systemregistry.HKEY, pcszSubKey foundation.PSTR, pcszVal
 // SHRegGetUSValue calls SHLWAPI!SHRegGetUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetusvaluew
 // Minimum OS: windows5.0.
-func SHRegGetUSValue(pszSubKey string, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
+func SHRegGetUSValue(pszSubKey string, pszValue *string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
 	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
 	var _pvDefaultData *byte
 	if len(pvDefaultData) > 0 {
@@ -6473,9 +6473,9 @@ func SHRegGetUSValueA(pszSubKey foundation.PSTR, pszValue foundation.PSTR, pdwTy
 // SHRegGetValue calls SHLWAPI!SHRegGetValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetvaluew
 // Minimum OS: windows5.1.2600.
-func SHRegGetValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string, srrfFlags int32, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHRegGetValue(hkey systemregistry.HKEY, pszSubKey *string, pszValue *string, srrfFlags int32, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHRegGetValue.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(srrfFlags), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -6491,9 +6491,9 @@ func SHRegGetValueA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR, pszValu
 // SHRegGetValueFromHKCUHKLM calls SHLWAPI!SHRegGetValueFromHKCUHKLM.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetvaluefromhkcuhklm
 // Minimum OS: windows6.0.6000.
-func SHRegGetValueFromHKCUHKLM(pwszKey string, pwszValue string, srrfFlags int32, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
+func SHRegGetValueFromHKCUHKLM(pwszKey string, pwszValue *string, srrfFlags int32, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
 	_pwszKey := win32.UTF16Ptr(pwszKey)
-	_pwszValue := win32.UTF16Ptr(pwszValue)
+	_pwszValue := win32.UTF16PtrOrNil(pwszValue)
 	r1, _, _ := syscall.SyscallN(procSHRegGetValueFromHKCUHKLM.Addr(), uintptr(unsafe.Pointer(_pwszKey)), uintptr(unsafe.Pointer(_pwszValue)), uintptr(srrfFlags), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -6536,8 +6536,8 @@ func SHRegQueryInfoUSKeyA(hUSKey uintptr, pcSubKeys *uint32, pcchMaxSubKeyLen *u
 // SHRegQueryUSValue calls SHLWAPI!SHRegQueryUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregqueryusvaluew
 // Minimum OS: windows5.0.
-func SHRegQueryUSValue(hUSKey uintptr, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHRegQueryUSValue(hUSKey uintptr, pszValue *string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
 	var _pvDefaultData *byte
 	if len(pvDefaultData) > 0 {
@@ -6563,9 +6563,9 @@ func SHRegQueryUSValueA(hUSKey uintptr, pszValue foundation.PSTR, pdwType *uint3
 // SHRegSetPath calls SHLWAPI!SHRegSetPathW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregsetpathw
 // Minimum OS: windows5.0.
-func SHRegSetPath(hKey systemregistry.HKEY, pcszSubKey string, pcszValue string, pcszPath string, dwFlags uint32) foundation.WIN32_ERROR {
-	_pcszSubKey := win32.UTF16Ptr(pcszSubKey)
-	_pcszValue := win32.UTF16Ptr(pcszValue)
+func SHRegSetPath(hKey systemregistry.HKEY, pcszSubKey *string, pcszValue *string, pcszPath string, dwFlags uint32) foundation.WIN32_ERROR {
+	_pcszSubKey := win32.UTF16PtrOrNil(pcszSubKey)
+	_pcszValue := win32.UTF16PtrOrNil(pcszValue)
 	_pcszPath := win32.UTF16Ptr(pcszPath)
 	r1, _, _ := syscall.SyscallN(procSHRegSetPath.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pcszSubKey)), uintptr(unsafe.Pointer(_pcszValue)), uintptr(unsafe.Pointer(_pcszPath)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
@@ -6767,9 +6767,9 @@ func SHSetUnreadMailCount(pszMailAddress string, dwCount uint32, pszShellExecute
 // SHSetValue calls SHLWAPI!SHSetValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shsetvaluew
 // Minimum OS: windows5.0.
-func SHSetValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string, dwType uint32, pvData []byte) int32 {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHSetValue(hkey systemregistry.HKEY, pszSubKey *string, pszValue *string, dwType uint32, pvData []byte) int32 {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	var _pvData *byte
 	if len(pvData) > 0 {
 		_pvData = &pvData[0]
@@ -6801,9 +6801,9 @@ func SHShellFolderView_Message(hwndMain foundation.HWND, uMsg uint32, lParam fou
 // SHShowManageLibraryUI calls SHELL32!SHShowManageLibraryUI.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shshowmanagelibraryui
 // Minimum OS: windows6.1.
-func SHShowManageLibraryUI(psiLibrary *IShellItem, hwndOwner foundation.HWND, pszTitle string, pszInstruction string, lmdOptions LIBRARYMANAGEDIALOGOPTIONS) error {
-	_pszTitle := win32.UTF16Ptr(pszTitle)
-	_pszInstruction := win32.UTF16Ptr(pszInstruction)
+func SHShowManageLibraryUI(psiLibrary *IShellItem, hwndOwner foundation.HWND, pszTitle *string, pszInstruction *string, lmdOptions LIBRARYMANAGEDIALOGOPTIONS) error {
+	_pszTitle := win32.UTF16PtrOrNil(pszTitle)
+	_pszInstruction := win32.UTF16PtrOrNil(pszInstruction)
 	r1, _, _ := syscall.SyscallN(procSHShowManageLibraryUI.Addr(), uintptr(unsafe.Pointer(psiLibrary)), uintptr(hwndOwner), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszInstruction)), uintptr(lmdOptions))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -6828,8 +6828,8 @@ func SHSkipJunction(pbc *systemcom.IBindCtx, pclsid *win32.GUID) bool {
 // SHStartNetConnectionDialog calls SHELL32!SHStartNetConnectionDialogW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shstartnetconnectiondialogw
 // Minimum OS: windows5.1.2600.
-func SHStartNetConnectionDialog(hwnd foundation.HWND, pszRemoteName string, dwType uint32) error {
-	_pszRemoteName := win32.UTF16Ptr(pszRemoteName)
+func SHStartNetConnectionDialog(hwnd foundation.HWND, pszRemoteName *string, dwType uint32) error {
+	_pszRemoteName := win32.UTF16PtrOrNil(pszRemoteName)
 	r1, _, _ := syscall.SyscallN(procSHStartNetConnectionDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszRemoteName)), uintptr(dwType))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -6969,9 +6969,9 @@ func SetWindowSubclass(hWnd foundation.HWND, pfnSubclass SUBCLASSPROC, uIdSubcla
 // ShellAbout calls SHELL32!ShellAboutW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellaboutw
 // Minimum OS: windows5.1.2600.
-func ShellAbout(hWnd foundation.HWND, szApp string, szOtherStuff string, hIcon uiwindowsandmessaging.HICON) int32 {
+func ShellAbout(hWnd foundation.HWND, szApp string, szOtherStuff *string, hIcon uiwindowsandmessaging.HICON) int32 {
 	_szApp := win32.UTF16Ptr(szApp)
-	_szOtherStuff := win32.UTF16Ptr(szOtherStuff)
+	_szOtherStuff := win32.UTF16PtrOrNil(szOtherStuff)
 	r1, _, _ := syscall.SyscallN(procShellAbout.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_szApp)), uintptr(unsafe.Pointer(_szOtherStuff)), uintptr(hIcon))
 	return int32(r1)
 }
@@ -6987,11 +6987,11 @@ func ShellAboutA(hWnd foundation.HWND, szApp foundation.PSTR, szOtherStuff found
 // ShellExecute calls SHELL32!ShellExecuteW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellexecutew
 // Minimum OS: windows5.1.2600.
-func ShellExecute(hwnd foundation.HWND, lpOperation string, lpFile string, lpParameters string, lpDirectory string, nShowCmd uiwindowsandmessaging.SHOW_WINDOW_CMD) foundation.HINSTANCE {
-	_lpOperation := win32.UTF16Ptr(lpOperation)
+func ShellExecute(hwnd foundation.HWND, lpOperation *string, lpFile string, lpParameters *string, lpDirectory *string, nShowCmd uiwindowsandmessaging.SHOW_WINDOW_CMD) foundation.HINSTANCE {
+	_lpOperation := win32.UTF16PtrOrNil(lpOperation)
 	_lpFile := win32.UTF16Ptr(lpFile)
-	_lpParameters := win32.UTF16Ptr(lpParameters)
-	_lpDirectory := win32.UTF16Ptr(lpDirectory)
+	_lpParameters := win32.UTF16PtrOrNil(lpParameters)
+	_lpDirectory := win32.UTF16PtrOrNil(lpDirectory)
 	r1, _, _ := syscall.SyscallN(procShellExecute.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_lpOperation)), uintptr(unsafe.Pointer(_lpFile)), uintptr(unsafe.Pointer(_lpParameters)), uintptr(unsafe.Pointer(_lpDirectory)), uintptr(nShowCmd))
 	return foundation.HINSTANCE(r1)
 }
@@ -7029,9 +7029,9 @@ func ShellExecuteExA(pExecInfo *SHELLEXECUTEINFOA) error {
 // ShellMessageBox calls SHLWAPI!ShellMessageBoxW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellmessageboxw
 // Minimum OS: windows5.1.2600.
-func ShellMessageBox(hAppInst foundation.HINSTANCE, hWnd foundation.HWND, lpcText string, lpcTitle string, fuStyle uiwindowsandmessaging.MESSAGEBOX_STYLE) (int32, error) {
+func ShellMessageBox(hAppInst foundation.HINSTANCE, hWnd foundation.HWND, lpcText string, lpcTitle *string, fuStyle uiwindowsandmessaging.MESSAGEBOX_STYLE) (int32, error) {
 	_lpcText := win32.UTF16Ptr(lpcText)
-	_lpcTitle := win32.UTF16Ptr(lpcTitle)
+	_lpcTitle := win32.UTF16PtrOrNil(lpcTitle)
 	r1, _, e1 := syscall.SyscallN(procShellMessageBox.Addr(), uintptr(hAppInst), uintptr(hWnd), uintptr(unsafe.Pointer(_lpcText)), uintptr(unsafe.Pointer(_lpcTitle)), uintptr(fuStyle))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -7560,9 +7560,9 @@ func StrPBrkA(psz foundation.PSTR, pszSet foundation.PSTR) foundation.PSTR {
 // StrRChr calls SHLWAPI!StrRChrW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-strrchrw
 // Minimum OS: windows5.0.
-func StrRChr(pszStart string, pszEnd string, wMatch uint16) foundation.PWSTR {
+func StrRChr(pszStart string, pszEnd *string, wMatch uint16) foundation.PWSTR {
 	_pszStart := win32.UTF16Ptr(pszStart)
-	_pszEnd := win32.UTF16Ptr(pszEnd)
+	_pszEnd := win32.UTF16PtrOrNil(pszEnd)
 	r1, _, _ := syscall.SyscallN(procStrRChr.Addr(), uintptr(unsafe.Pointer(_pszStart)), uintptr(unsafe.Pointer(_pszEnd)), uintptr(wMatch))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
@@ -7578,9 +7578,9 @@ func StrRChrA(pszStart foundation.PSTR, pszEnd foundation.PSTR, wMatch uint16) f
 // StrRChrI calls SHLWAPI!StrRChrIW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-strrchriw
 // Minimum OS: windows5.0.
-func StrRChrI(pszStart string, pszEnd string, wMatch uint16) foundation.PWSTR {
+func StrRChrI(pszStart string, pszEnd *string, wMatch uint16) foundation.PWSTR {
 	_pszStart := win32.UTF16Ptr(pszStart)
-	_pszEnd := win32.UTF16Ptr(pszEnd)
+	_pszEnd := win32.UTF16PtrOrNil(pszEnd)
 	r1, _, _ := syscall.SyscallN(procStrRChrI.Addr(), uintptr(unsafe.Pointer(_pszStart)), uintptr(unsafe.Pointer(_pszEnd)), uintptr(wMatch))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
@@ -7596,9 +7596,9 @@ func StrRChrIA(pszStart foundation.PSTR, pszEnd foundation.PSTR, wMatch uint16) 
 // StrRStrI calls SHLWAPI!StrRStrIW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-strrstriw
 // Minimum OS: windows5.0.
-func StrRStrI(pszSource string, pszLast string, pszSrch string) foundation.PWSTR {
+func StrRStrI(pszSource string, pszLast *string, pszSrch string) foundation.PWSTR {
 	_pszSource := win32.UTF16Ptr(pszSource)
-	_pszLast := win32.UTF16Ptr(pszLast)
+	_pszLast := win32.UTF16PtrOrNil(pszLast)
 	_pszSrch := win32.UTF16Ptr(pszSrch)
 	r1, _, _ := syscall.SyscallN(procStrRStrI.Addr(), uintptr(unsafe.Pointer(_pszSource)), uintptr(unsafe.Pointer(_pszLast)), uintptr(unsafe.Pointer(_pszSrch)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
@@ -8093,8 +8093,8 @@ func Win32DeleteFile(pszPath string) bool {
 // WinHelp calls USER32!WinHelpW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-winhelpw
 // Minimum OS: windows5.1.2600.
-func WinHelp(hWndMain foundation.HWND, lpszHelp string, uCommand uint32, dwData uintptr) error {
-	_lpszHelp := win32.UTF16Ptr(lpszHelp)
+func WinHelp(hWndMain foundation.HWND, lpszHelp *string, uCommand uint32, dwData uintptr) error {
+	_lpszHelp := win32.UTF16PtrOrNil(lpszHelp)
 	r1, _, e1 := syscall.SyscallN(procWinHelp.Addr(), uintptr(hWndMain), uintptr(unsafe.Pointer(_lpszHelp)), uintptr(uCommand), uintptr(dwData))
 	if r1 == 0 {
 		return win32.LastError(e1)

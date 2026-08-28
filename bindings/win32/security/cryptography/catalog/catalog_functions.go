@@ -150,8 +150,8 @@ func CryptCATAdminAcquireContext(phCatAdmin *uintptr, pgSubsystem *win32.GUID) e
 // CryptCATAdminAcquireContext2 calls WINTRUST!CryptCATAdminAcquireContext2.
 // https://learn.microsoft.com/windows/win32/api/mscat/nf-mscat-cryptcatadminacquirecontext2
 // Minimum OS: windows8.0.
-func CryptCATAdminAcquireContext2(phCatAdmin *uintptr, pgSubsystem *win32.GUID, pwszHashAlgorithm string, pStrongHashPolicy *securitycryptography.CERT_STRONG_SIGN_PARA) error {
-	_pwszHashAlgorithm := win32.UTF16Ptr(pwszHashAlgorithm)
+func CryptCATAdminAcquireContext2(phCatAdmin *uintptr, pgSubsystem *win32.GUID, pwszHashAlgorithm *string, pStrongHashPolicy *securitycryptography.CERT_STRONG_SIGN_PARA) error {
+	_pwszHashAlgorithm := win32.UTF16PtrOrNil(pwszHashAlgorithm)
 	r1, _, e1 := syscall.SyscallN(procCryptCATAdminAcquireContext2.Addr(), uintptr(unsafe.Pointer(phCatAdmin)), uintptr(unsafe.Pointer(pgSubsystem)), uintptr(unsafe.Pointer(_pwszHashAlgorithm)), uintptr(unsafe.Pointer(pStrongHashPolicy)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -162,9 +162,9 @@ func CryptCATAdminAcquireContext2(phCatAdmin *uintptr, pgSubsystem *win32.GUID, 
 // CryptCATAdminAddCatalog calls WINTRUST!CryptCATAdminAddCatalog.
 // https://learn.microsoft.com/windows/win32/api/mscat/nf-mscat-cryptcatadminaddcatalog
 // Minimum OS: windows5.1.2600.
-func CryptCATAdminAddCatalog(hCatAdmin uintptr, pwszCatalogFile string, pwszSelectBaseName string, dwFlags uint32) (uintptr, error) {
+func CryptCATAdminAddCatalog(hCatAdmin uintptr, pwszCatalogFile string, pwszSelectBaseName *string, dwFlags uint32) (uintptr, error) {
 	_pwszCatalogFile := win32.UTF16Ptr(pwszCatalogFile)
-	_pwszSelectBaseName := win32.UTF16Ptr(pwszSelectBaseName)
+	_pwszSelectBaseName := win32.UTF16PtrOrNil(pwszSelectBaseName)
 	r1, _, e1 := syscall.SyscallN(procCryptCATAdminAddCatalog.Addr(), uintptr(hCatAdmin), uintptr(unsafe.Pointer(_pwszCatalogFile)), uintptr(unsafe.Pointer(_pwszSelectBaseName)), uintptr(dwFlags))
 	if e1 != 0 {
 		return uintptr(r1), e1
@@ -447,8 +447,8 @@ func CryptCATPutCatAttrInfo(hCatalog foundation.HANDLE, pwszReferenceTag string,
 // CryptCATPutMemberInfo calls WINTRUST!CryptCATPutMemberInfo.
 // https://learn.microsoft.com/windows/win32/api/mscat/nf-mscat-cryptcatputmemberinfo
 // Minimum OS: windows5.1.2600.
-func CryptCATPutMemberInfo(hCatalog foundation.HANDLE, pwszFileName string, pwszReferenceTag string, pgSubjectType *win32.GUID, dwCertVersion uint32, cbSIPIndirectData uint32, pbSIPIndirectData *byte) (*CRYPTCATMEMBER, error) {
-	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+func CryptCATPutMemberInfo(hCatalog foundation.HANDLE, pwszFileName *string, pwszReferenceTag string, pgSubjectType *win32.GUID, dwCertVersion uint32, cbSIPIndirectData uint32, pbSIPIndirectData *byte) (*CRYPTCATMEMBER, error) {
+	_pwszFileName := win32.UTF16PtrOrNil(pwszFileName)
 	_pwszReferenceTag := win32.UTF16Ptr(pwszReferenceTag)
 	r1, _, e1 := syscall.SyscallN(procCryptCATPutMemberInfo.Addr(), uintptr(hCatalog), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(_pwszReferenceTag)), uintptr(unsafe.Pointer(pgSubjectType)), uintptr(dwCertVersion), uintptr(cbSIPIndirectData), uintptr(unsafe.Pointer(pbSIPIndirectData)))
 	ret := (*CRYPTCATMEMBER)(unsafe.Pointer(r1))
@@ -469,8 +469,8 @@ func CryptCATStoreFromHandle(hCatalog foundation.HANDLE) *CRYPTCATSTORE {
 // IsCatalogFile calls WINTRUST!IsCatalogFile.
 // https://learn.microsoft.com/windows/win32/api/mscat/nf-mscat-iscatalogfile
 // Minimum OS: windows5.1.2600.
-func IsCatalogFile(hFile foundation.HANDLE, pwszFileName string) bool {
-	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+func IsCatalogFile(hFile foundation.HANDLE, pwszFileName *string) bool {
+	_pwszFileName := win32.UTF16PtrOrNil(pwszFileName)
 	r1, _, _ := syscall.SyscallN(procIsCatalogFile.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_pwszFileName)))
 	return r1 != 0
 }

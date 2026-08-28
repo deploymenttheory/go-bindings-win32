@@ -821,8 +821,8 @@ func WdsCliFreeStringArray(ppwszArray []foundation.PWSTR) error {
 // WdsCliGetDriverQueryXml calls WDSCLIENTAPI!WdsCliGetDriverQueryXml.
 // https://learn.microsoft.com/windows/win32/api/wdsclientapi/nf-wdsclientapi-wdscligetdriverqueryxml
 // Minimum OS: windows8.0.
-func WdsCliGetDriverQueryXml(pwszWinDirPath string, ppwszDriverQuery *foundation.PWSTR) error {
-	_pwszWinDirPath := win32.UTF16Ptr(pwszWinDirPath)
+func WdsCliGetDriverQueryXml(pwszWinDirPath *string, ppwszDriverQuery *foundation.PWSTR) error {
+	_pwszWinDirPath := win32.UTF16PtrOrNil(pwszWinDirPath)
 	r1, _, _ := syscall.SyscallN(procWdsCliGetDriverQueryXml.Addr(), uintptr(unsafe.Pointer(_pwszWinDirPath)), uintptr(unsafe.Pointer(ppwszDriverQuery)))
 	return win32.ErrIfFailed(int32(r1))
 }

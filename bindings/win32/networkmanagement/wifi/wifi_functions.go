@@ -627,9 +627,9 @@ func WlanRenameProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GU
 // WlanSaveTemporaryProfile calls wlanapi!WlanSaveTemporaryProfile.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansavetemporaryprofile
 // Minimum OS: windows6.0.6000.
-func WlanSaveTemporaryProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, strProfileName string, strAllUserProfileSecurity string, dwFlags uint32, bOverWrite bool) uint32 {
+func WlanSaveTemporaryProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, strProfileName string, strAllUserProfileSecurity *string, dwFlags uint32, bOverWrite bool) uint32 {
 	_strProfileName := win32.UTF16Ptr(strProfileName)
-	_strAllUserProfileSecurity := win32.UTF16Ptr(strAllUserProfileSecurity)
+	_strAllUserProfileSecurity := win32.UTF16PtrOrNil(strAllUserProfileSecurity)
 	_bOverWrite := win32.Bool32(bOverWrite)
 	r1, _, _ := syscall.SyscallN(procWlanSaveTemporaryProfile.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(unsafe.Pointer(_strAllUserProfileSecurity)), uintptr(dwFlags), uintptr(_bOverWrite), 0)
 	return uint32(r1)
@@ -678,9 +678,9 @@ func WlanSetInterface(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUI
 // WlanSetProfile calls wlanapi!WlanSetProfile.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofile
 // Minimum OS: windows6.0.6000.
-func WlanSetProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, dwFlags uint32, strProfileXml string, strAllUserProfileSecurity string, bOverwrite bool, pdwReasonCode *uint32) uint32 {
+func WlanSetProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, dwFlags uint32, strProfileXml string, strAllUserProfileSecurity *string, bOverwrite bool, pdwReasonCode *uint32) uint32 {
 	_strProfileXml := win32.UTF16Ptr(strProfileXml)
-	_strAllUserProfileSecurity := win32.UTF16Ptr(strAllUserProfileSecurity)
+	_strAllUserProfileSecurity := win32.UTF16PtrOrNil(strAllUserProfileSecurity)
 	_bOverwrite := win32.Bool32(bOverwrite)
 	r1, _, _ := syscall.SyscallN(procWlanSetProfile.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(dwFlags), uintptr(unsafe.Pointer(_strProfileXml)), uintptr(unsafe.Pointer(_strAllUserProfileSecurity)), uintptr(_bOverwrite), 0, uintptr(unsafe.Pointer(pdwReasonCode)))
 	return uint32(r1)
@@ -748,8 +748,8 @@ func WlanSetProfilePosition(hClientHandle foundation.HANDLE, pInterfaceGuid *win
 // WlanSetPsdIEDataList calls wlanapi!WlanSetPsdIEDataList.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetpsdiedatalist
 // Minimum OS: windows6.0.6000.
-func WlanSetPsdIEDataList(hClientHandle foundation.HANDLE, strFormat string, pPsdIEDataList *WLAN_RAW_DATA_LIST) uint32 {
-	_strFormat := win32.UTF16Ptr(strFormat)
+func WlanSetPsdIEDataList(hClientHandle foundation.HANDLE, strFormat *string, pPsdIEDataList *WLAN_RAW_DATA_LIST) uint32 {
+	_strFormat := win32.UTF16PtrOrNil(strFormat)
 	r1, _, _ := syscall.SyscallN(procWlanSetPsdIEDataList.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(_strFormat)), uintptr(unsafe.Pointer(pPsdIEDataList)), 0)
 	return uint32(r1)
 }

@@ -693,11 +693,11 @@ func DrtCreateNullSecurityProvider(ppSecurityProvider **DRT_SECURITY_PROVIDER) e
 // DrtCreatePnrpBootstrapResolver calls drtprov!DrtCreatePnrpBootstrapResolver.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtcreatepnrpbootstrapresolver
 // Minimum OS: windows6.1.
-func DrtCreatePnrpBootstrapResolver(fPublish bool, pwzPeerName string, pwzCloudName string, pwzPublishingIdentity string, ppResolver **DRT_BOOTSTRAP_PROVIDER) error {
+func DrtCreatePnrpBootstrapResolver(fPublish bool, pwzPeerName string, pwzCloudName *string, pwzPublishingIdentity *string, ppResolver **DRT_BOOTSTRAP_PROVIDER) error {
 	_fPublish := win32.Bool32(fPublish)
 	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
-	_pwzCloudName := win32.UTF16Ptr(pwzCloudName)
-	_pwzPublishingIdentity := win32.UTF16Ptr(pwzPublishingIdentity)
+	_pwzCloudName := win32.UTF16PtrOrNil(pwzCloudName)
+	_pwzPublishingIdentity := win32.UTF16PtrOrNil(pwzPublishingIdentity)
 	r1, _, _ := syscall.SyscallN(procDrtCreatePnrpBootstrapResolver.Addr(), uintptr(_fPublish), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(_pwzCloudName)), uintptr(unsafe.Pointer(_pwzPublishingIdentity)), uintptr(unsafe.Pointer(ppResolver)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -966,8 +966,8 @@ func PeerCollabEnumPeopleNearMe(phPeerEnum *unsafe.Pointer) error {
 // PeerCollabExportContact calls P2P!PeerCollabExportContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabexportcontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabExportContact(pwzPeerName string, ppwzContactData *foundation.PWSTR) error {
-	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
+func PeerCollabExportContact(pwzPeerName *string, ppwzContactData *foundation.PWSTR) error {
+	_pwzPeerName := win32.UTF16PtrOrNil(pwzPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerCollabExportContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppwzContactData)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -991,8 +991,8 @@ func PeerCollabGetApplicationRegistrationInfo(pApplicationId *win32.GUID, regist
 // PeerCollabGetContact calls P2P!PeerCollabGetContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgetcontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetContact(pwzPeerName string, ppContact **PEER_CONTACT) error {
-	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
+func PeerCollabGetContact(pwzPeerName *string, ppContact **PEER_CONTACT) error {
+	_pwzPeerName := win32.UTF16PtrOrNil(pwzPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppContact)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1198,9 +1198,9 @@ func PeerCollabUpdateContact(pContact *PEER_CONTACT) error {
 // PeerCreatePeerName calls P2P!PeerCreatePeerName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercreatepeername
 // Minimum OS: windows5.1.2600.
-func PeerCreatePeerName(pwzIdentity string, pwzClassifier string, ppwzPeerName *foundation.PWSTR) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
-	_pwzClassifier := win32.UTF16Ptr(pwzClassifier)
+func PeerCreatePeerName(pwzIdentity *string, pwzClassifier *string, ppwzPeerName *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
+	_pwzClassifier := win32.UTF16PtrOrNil(pwzClassifier)
 	r1, _, _ := syscall.SyscallN(procPeerCreatePeerName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzClassifier)), uintptr(unsafe.Pointer(ppwzPeerName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1562,8 +1562,8 @@ func PeerGraphCloseDirectConnection(hGraph unsafe.Pointer, ullConnectionId uint6
 // PeerGraphConnect calls P2PGRAPH!PeerGraphConnect.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphconnect
 // Minimum OS: windows5.1.2600.
-func PeerGraphConnect(hGraph unsafe.Pointer, pwzPeerId string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
-	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+func PeerGraphConnect(hGraph unsafe.Pointer, pwzPeerId *string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
+	_pwzPeerId := win32.UTF16PtrOrNil(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphConnect.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1616,8 +1616,8 @@ func PeerGraphEnumConnections(hGraph unsafe.Pointer, dwFlags uint32, phPeerEnum 
 // PeerGraphEnumNodes calls P2PGRAPH!PeerGraphEnumNodes.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphenumnodes
 // Minimum OS: windows5.1.2600.
-func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId string, phPeerEnum *unsafe.Pointer) error {
-	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId *string, phPeerEnum *unsafe.Pointer) error {
+	_pwzPeerId := win32.UTF16PtrOrNil(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphEnumNodes.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1625,8 +1625,8 @@ func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId string, phPeerEnum *uns
 // PeerGraphEnumRecords calls P2PGRAPH!PeerGraphEnumRecords.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphenumrecords
 // Minimum OS: windows5.1.2600.
-func PeerGraphEnumRecords(hGraph unsafe.Pointer, pRecordType *win32.GUID, pwzPeerId string, phPeerEnum *unsafe.Pointer) error {
-	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+func PeerGraphEnumRecords(hGraph unsafe.Pointer, pRecordType *win32.GUID, pwzPeerId *string, phPeerEnum *unsafe.Pointer) error {
+	_pwzPeerId := win32.UTF16PtrOrNil(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphEnumRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordType)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1965,8 +1965,8 @@ func PeerGroupEnumConnections(hGroup unsafe.Pointer, dwFlags uint32, phPeerEnum 
 // PeerGroupEnumMembers calls P2P!PeerGroupEnumMembers.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupenummembers
 // Minimum OS: windows5.1.2600.
-func PeerGroupEnumMembers(hGroup unsafe.Pointer, dwFlags uint32, pwzIdentity string, phPeerEnum *unsafe.Pointer) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerGroupEnumMembers(hGroup unsafe.Pointer, dwFlags uint32, pwzIdentity *string, phPeerEnum *unsafe.Pointer) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerGroupEnumMembers.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phPeerEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2061,10 +2061,10 @@ func PeerGroupIssueCredentials(hGroup unsafe.Pointer, pwzSubjectIdentity string,
 // PeerGroupJoin calls P2P!PeerGroupJoin.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupjoin
 // Minimum OS: windows5.1.2600.
-func PeerGroupJoin(pwzIdentity string, pwzInvitation string, pwzCloud string, phGroup *unsafe.Pointer) error {
+func PeerGroupJoin(pwzIdentity string, pwzInvitation string, pwzCloud *string, phGroup *unsafe.Pointer) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzInvitation := win32.UTF16Ptr(pwzInvitation)
-	_pwzCloud := win32.UTF16Ptr(pwzCloud)
+	_pwzCloud := win32.UTF16PtrOrNil(pwzCloud)
 	r1, _, _ := syscall.SyscallN(procPeerGroupJoin.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2072,10 +2072,10 @@ func PeerGroupJoin(pwzIdentity string, pwzInvitation string, pwzCloud string, ph
 // PeerGroupOpen calls P2P!PeerGroupOpen.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupopen
 // Minimum OS: windows5.1.2600.
-func PeerGroupOpen(pwzIdentity string, pwzGroupPeerName string, pwzCloud string, phGroup *unsafe.Pointer) error {
+func PeerGroupOpen(pwzIdentity string, pwzGroupPeerName string, pwzCloud *string, phGroup *unsafe.Pointer) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzGroupPeerName := win32.UTF16Ptr(pwzGroupPeerName)
-	_pwzCloud := win32.UTF16Ptr(pwzCloud)
+	_pwzCloud := win32.UTF16PtrOrNil(pwzCloud)
 	r1, _, _ := syscall.SyscallN(procPeerGroupOpen.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzGroupPeerName)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2101,11 +2101,11 @@ func PeerGroupParseInvitation(pwzInvitation string, ppInvitationInfo **PEER_INVI
 // PeerGroupPasswordJoin calls P2P!PeerGroupPasswordJoin.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergrouppasswordjoin
 // Minimum OS: windows5.1.2600.
-func PeerGroupPasswordJoin(pwzIdentity string, pwzInvitation string, pwzPassword string, pwzCloud string, phGroup *unsafe.Pointer) error {
+func PeerGroupPasswordJoin(pwzIdentity string, pwzInvitation string, pwzPassword string, pwzCloud *string, phGroup *unsafe.Pointer) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzInvitation := win32.UTF16Ptr(pwzInvitation)
 	_pwzPassword := win32.UTF16Ptr(pwzPassword)
-	_pwzCloud := win32.UTF16Ptr(pwzCloud)
+	_pwzCloud := win32.UTF16PtrOrNil(pwzCloud)
 	r1, _, _ := syscall.SyscallN(procPeerGroupPasswordJoin.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2217,9 +2217,9 @@ func PeerHostNameToPeerName(pwzHostName string, ppwzPeerName *foundation.PWSTR) 
 // PeerIdentityCreate calls P2P!PeerIdentityCreate.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitycreate
 // Minimum OS: windows5.1.2600.
-func PeerIdentityCreate(pwzClassifier string, pwzFriendlyName string, hCryptProv uintptr, ppwzIdentity *foundation.PWSTR) error {
-	_pwzClassifier := win32.UTF16Ptr(pwzClassifier)
-	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
+func PeerIdentityCreate(pwzClassifier *string, pwzFriendlyName *string, hCryptProv uintptr, ppwzIdentity *foundation.PWSTR) error {
+	_pwzClassifier := win32.UTF16PtrOrNil(pwzClassifier)
+	_pwzFriendlyName := win32.UTF16PtrOrNil(pwzFriendlyName)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityCreate.Addr(), uintptr(unsafe.Pointer(_pwzClassifier)), uintptr(unsafe.Pointer(_pwzFriendlyName)), uintptr(hCryptProv), uintptr(unsafe.Pointer(ppwzIdentity)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2236,8 +2236,8 @@ func PeerIdentityDelete(pwzIdentity string) error {
 // PeerIdentityExport calls P2P!PeerIdentityExport.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentityexport
 // Minimum OS: windows5.1.2600.
-func PeerIdentityExport(pwzIdentity string, pwzPassword string, ppwzExportXML *foundation.PWSTR) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentityExport(pwzIdentity *string, pwzPassword string, ppwzExportXML *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	_pwzPassword := win32.UTF16Ptr(pwzPassword)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityExport.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(ppwzExportXML)))
 	return win32.ErrIfFailed(int32(r1))
@@ -2246,8 +2246,8 @@ func PeerIdentityExport(pwzIdentity string, pwzPassword string, ppwzExportXML *f
 // PeerIdentityGetCryptKey calls P2P!PeerIdentityGetCryptKey.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetcryptkey
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetCryptKey(pwzIdentity string, phCryptProv *uintptr) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentityGetCryptKey(pwzIdentity *string, phCryptProv *uintptr) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetCryptKey.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phCryptProv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2263,8 +2263,8 @@ func PeerIdentityGetDefault(ppwzPeerName *foundation.PWSTR) error {
 // PeerIdentityGetFriendlyName calls P2P!PeerIdentityGetFriendlyName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetfriendlyname
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetFriendlyName(pwzIdentity string, ppwzFriendlyName *foundation.PWSTR) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentityGetFriendlyName(pwzIdentity *string, ppwzFriendlyName *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetFriendlyName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(ppwzFriendlyName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2272,8 +2272,8 @@ func PeerIdentityGetFriendlyName(pwzIdentity string, ppwzFriendlyName *foundatio
 // PeerIdentityGetXML calls P2P!PeerIdentityGetXML.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetxml
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetXML(pwzIdentity string, ppwzIdentityXML *foundation.PWSTR) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentityGetXML(pwzIdentity *string, ppwzIdentityXML *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetXML.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(ppwzIdentityXML)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2291,8 +2291,8 @@ func PeerIdentityImport(pwzImportXML string, pwzPassword string, ppwzIdentity *f
 // PeerIdentitySetFriendlyName calls P2P!PeerIdentitySetFriendlyName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitysetfriendlyname
 // Minimum OS: windows5.1.2600.
-func PeerIdentitySetFriendlyName(pwzIdentity string, pwzFriendlyName string) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentitySetFriendlyName(pwzIdentity *string, pwzFriendlyName string) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
 	r1, _, _ := syscall.SyscallN(procPeerIdentitySetFriendlyName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzFriendlyName)))
 	return win32.ErrIfFailed(int32(r1))
@@ -2343,9 +2343,9 @@ func PeerPnrpRegister(pcwzPeerName string, pRegistrationInfo *PEER_PNRP_REGISTRA
 // PeerPnrpResolve calls P2P!PeerPnrpResolve.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpresolve
 // Minimum OS: windows5.1.2600.
-func PeerPnrpResolve(pcwzPeerName string, pcwzCloudName string, pcEndpoints *uint32, ppEndpoints **PEER_PNRP_ENDPOINT_INFO) error {
+func PeerPnrpResolve(pcwzPeerName string, pcwzCloudName *string, pcEndpoints *uint32, ppEndpoints **PEER_PNRP_ENDPOINT_INFO) error {
 	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
-	_pcwzCloudName := win32.UTF16Ptr(pcwzCloudName)
+	_pcwzCloudName := win32.UTF16PtrOrNil(pcwzCloudName)
 	r1, _, _ := syscall.SyscallN(procPeerPnrpResolve.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(_pcwzCloudName)), uintptr(unsafe.Pointer(pcEndpoints)), uintptr(unsafe.Pointer(ppEndpoints)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2361,9 +2361,9 @@ func PeerPnrpShutdown() error {
 // PeerPnrpStartResolve calls P2P!PeerPnrpStartResolve.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpstartresolve
 // Minimum OS: windows5.1.2600.
-func PeerPnrpStartResolve(pcwzPeerName string, pcwzCloudName string, cMaxEndpoints uint32, hEvent foundation.HANDLE, phResolve *unsafe.Pointer) error {
+func PeerPnrpStartResolve(pcwzPeerName string, pcwzCloudName *string, cMaxEndpoints uint32, hEvent foundation.HANDLE, phResolve *unsafe.Pointer) error {
 	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
-	_pcwzCloudName := win32.UTF16Ptr(pcwzCloudName)
+	_pcwzCloudName := win32.UTF16PtrOrNil(pcwzCloudName)
 	r1, _, _ := syscall.SyscallN(procPeerPnrpStartResolve.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(_pcwzCloudName)), uintptr(cMaxEndpoints), uintptr(hEvent), uintptr(unsafe.Pointer(phResolve)))
 	return win32.ErrIfFailed(int32(r1))
 }

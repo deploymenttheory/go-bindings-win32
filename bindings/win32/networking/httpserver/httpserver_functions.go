@@ -231,8 +231,8 @@ func HttpCreateHttpHandle(RequestQueueHandle *foundation.HANDLE) uint32 {
 // HttpCreateRequestQueue calls HTTPAPI!HttpCreateRequestQueue.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpcreaterequestqueue
 // Minimum OS: windows6.0.6000.
-func HttpCreateRequestQueue(Version HTTPAPI_VERSION, Name string, SecurityAttributes *security.SECURITY_ATTRIBUTES, Flags uint32, RequestQueueHandle *HTTP_REQUEST_QUEUE_HANDLE) uint32 {
-	_Name := win32.UTF16Ptr(Name)
+func HttpCreateRequestQueue(Version HTTPAPI_VERSION, Name *string, SecurityAttributes *security.SECURITY_ATTRIBUTES, Flags uint32, RequestQueueHandle *HTTP_REQUEST_QUEUE_HANDLE) uint32 {
+	_Name := win32.UTF16PtrOrNil(Name)
 	r1, _, _ := syscall.SyscallN(procHttpCreateRequestQueue.Addr(), uintptr(win32.StructArg(Version)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(SecurityAttributes)), uintptr(Flags), uintptr(unsafe.Pointer(RequestQueueHandle)))
 	return uint32(r1)
 }

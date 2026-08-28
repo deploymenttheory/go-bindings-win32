@@ -490,8 +490,8 @@ func RoOriginateError(error_ foundation.HRESULT, message HSTRING) bool {
 // RoOriginateErrorW calls api-ms-win-core-winrt-error-l1-1-0!RoOriginateErrorW.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rooriginateerrorw
 // Minimum OS: windows8.0.
-func RoOriginateErrorW(error_ foundation.HRESULT, cchMax uint32, message string) bool {
-	_message := win32.UTF16Ptr(message)
+func RoOriginateErrorW(error_ foundation.HRESULT, cchMax uint32, message *string) bool {
+	_message := win32.UTF16PtrOrNil(message)
 	r1, _, _ := syscall.SyscallN(procRoOriginateErrorW.Addr(), uintptr(error_), uintptr(cchMax), uintptr(unsafe.Pointer(_message)))
 	return r1 != 0
 }
@@ -569,8 +569,8 @@ func RoTransformError(oldError foundation.HRESULT, newError foundation.HRESULT, 
 // RoTransformErrorW calls api-ms-win-core-winrt-error-l1-1-0!RoTransformErrorW.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rotransformerrorw
 // Minimum OS: windows8.0.
-func RoTransformErrorW(oldError foundation.HRESULT, newError foundation.HRESULT, cchMax uint32, message string) bool {
-	_message := win32.UTF16Ptr(message)
+func RoTransformErrorW(oldError foundation.HRESULT, newError foundation.HRESULT, cchMax uint32, message *string) bool {
+	_message := win32.UTF16PtrOrNil(message)
 	r1, _, _ := syscall.SyscallN(procRoTransformErrorW.Addr(), uintptr(oldError), uintptr(newError), uintptr(cchMax), uintptr(unsafe.Pointer(_message)))
 	return r1 != 0
 }
@@ -617,8 +617,8 @@ func WindowsConcatString(string1 HSTRING, string2 HSTRING, newString *HSTRING) e
 // WindowsCreateString calls api-ms-win-core-winrt-string-l1-1-0!WindowsCreateString.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowscreatestring
 // Minimum OS: windows8.0.
-func WindowsCreateString(sourceString string, length uint32, string_ *HSTRING) error {
-	_sourceString := win32.UTF16Ptr(sourceString)
+func WindowsCreateString(sourceString *string, length uint32, string_ *HSTRING) error {
+	_sourceString := win32.UTF16PtrOrNil(sourceString)
 	r1, _, _ := syscall.SyscallN(procWindowsCreateString.Addr(), uintptr(unsafe.Pointer(_sourceString)), uintptr(length), uintptr(unsafe.Pointer(string_)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -626,8 +626,8 @@ func WindowsCreateString(sourceString string, length uint32, string_ *HSTRING) e
 // WindowsCreateStringReference calls api-ms-win-core-winrt-string-l1-1-0!WindowsCreateStringReference.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowscreatestringreference
 // Minimum OS: windows8.0.
-func WindowsCreateStringReference(sourceString string, length uint32, hstringHeader *HSTRING_HEADER, string_ *HSTRING) error {
-	_sourceString := win32.UTF16Ptr(sourceString)
+func WindowsCreateStringReference(sourceString *string, length uint32, hstringHeader *HSTRING_HEADER, string_ *HSTRING) error {
+	_sourceString := win32.UTF16PtrOrNil(sourceString)
 	r1, _, _ := syscall.SyscallN(procWindowsCreateStringReference.Addr(), uintptr(unsafe.Pointer(_sourceString)), uintptr(length), uintptr(unsafe.Pointer(hstringHeader)), uintptr(unsafe.Pointer(string_)))
 	return win32.ErrIfFailed(int32(r1))
 }

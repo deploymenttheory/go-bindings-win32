@@ -304,8 +304,8 @@ func CloseTrace(TraceHandle PROCESSTRACE_HANDLE) foundation.WIN32_ERROR {
 // ControlTrace calls ADVAPI32!ControlTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-controltracew
 // Minimum OS: windows5.0.
-func ControlTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES, ControlCode EVENT_TRACE_CONTROL) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func ControlTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES, ControlCode EVENT_TRACE_CONTROL) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procControlTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)), uintptr(ControlCode))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -329,9 +329,9 @@ func CreateTraceInstanceId(RegHandle foundation.HANDLE, InstInfo *EVENT_INSTANCE
 // CveEventWrite calls ADVAPI32!CveEventWrite.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-cveeventwrite
 // Minimum OS: windows10.0.10240.
-func CveEventWrite(CveId string, AdditionalDetails string) int32 {
+func CveEventWrite(CveId string, AdditionalDetails *string) int32 {
 	_CveId := win32.UTF16Ptr(CveId)
-	_AdditionalDetails := win32.UTF16Ptr(AdditionalDetails)
+	_AdditionalDetails := win32.UTF16PtrOrNil(AdditionalDetails)
 	r1, _, _ := syscall.SyscallN(procCveEventWrite.Addr(), uintptr(unsafe.Pointer(_CveId)), uintptr(unsafe.Pointer(_AdditionalDetails)))
 	return int32(r1)
 }
@@ -512,8 +512,8 @@ func EventWriteTransfer(RegHandle REGHANDLE, EventDescriptor *EVENT_DESCRIPTOR, 
 // FlushTrace calls ADVAPI32!FlushTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-flushtracew
 // Minimum OS: windows5.1.2600.
-func FlushTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func FlushTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procFlushTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -672,8 +672,8 @@ func QueryAllTracesA(PropertyArray []*EVENT_TRACE_PROPERTIES, LoggerCount *uint3
 // QueryTrace calls ADVAPI32!QueryTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-querytracew
 // Minimum OS: windows5.0.
-func QueryTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func QueryTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procQueryTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -697,13 +697,13 @@ func QueryTraceProcessingHandle(ProcessingHandle PROCESSTRACE_HANDLE, Informatio
 // RegisterTraceGuids calls ADVAPI32!RegisterTraceGuidsW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-registertraceguidsw
 // Minimum OS: windows5.0.
-func RegisterTraceGuids(RequestAddress WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, TraceGuidReg []TRACE_GUID_REGISTRATION, MofImagePath string, MofResourceName string, RegistrationHandle *uint64) uint32 {
+func RegisterTraceGuids(RequestAddress WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, TraceGuidReg []TRACE_GUID_REGISTRATION, MofImagePath *string, MofResourceName *string, RegistrationHandle *uint64) uint32 {
 	var _TraceGuidReg *TRACE_GUID_REGISTRATION
 	if len(TraceGuidReg) > 0 {
 		_TraceGuidReg = &TraceGuidReg[0]
 	}
-	_MofImagePath := win32.UTF16Ptr(MofImagePath)
-	_MofResourceName := win32.UTF16Ptr(MofResourceName)
+	_MofImagePath := win32.UTF16PtrOrNil(MofImagePath)
+	_MofResourceName := win32.UTF16PtrOrNil(MofResourceName)
 	r1, _, _ := syscall.SyscallN(procRegisterTraceGuids.Addr(), uintptr(RequestAddress), uintptr(unsafe.Pointer(RequestContext)), uintptr(unsafe.Pointer(ControlGuid)), uintptr(len(TraceGuidReg)), uintptr(unsafe.Pointer(_TraceGuidReg)), uintptr(unsafe.Pointer(_MofImagePath)), uintptr(unsafe.Pointer(_MofResourceName)), uintptr(unsafe.Pointer(RegistrationHandle)))
 	return uint32(r1)
 }
@@ -756,8 +756,8 @@ func StartTraceA(TraceId *uint64, InstanceName foundation.PSTR, Properties *EVEN
 // StopTrace calls ADVAPI32!StopTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-stoptracew
 // Minimum OS: windows5.0.
-func StopTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func StopTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procStopTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -1109,8 +1109,8 @@ func UnregisterTraceGuids(RegistrationHandle uint64) uint32 {
 // UpdateTrace calls ADVAPI32!UpdateTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-updatetracew
 // Minimum OS: windows5.0.
-func UpdateTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func UpdateTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procUpdateTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }

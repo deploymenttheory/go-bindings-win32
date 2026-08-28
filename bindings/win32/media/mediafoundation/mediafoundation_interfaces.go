@@ -5355,12 +5355,12 @@ func (self *IMFHttpDownloadSession) SetServer(szServerName string, nPort uint32)
 }
 
 // CreateRequest dispatches through IMFHttpDownloadSession's vtable slot 4.
-func (self *IMFHttpDownloadSession) CreateRequest(szObjectName string, fBypassProxyCache bool, fSecure bool, szVerb string, szReferrer string, ppRequest **IMFHttpDownloadRequest) error {
+func (self *IMFHttpDownloadSession) CreateRequest(szObjectName string, fBypassProxyCache bool, fSecure bool, szVerb *string, szReferrer *string, ppRequest **IMFHttpDownloadRequest) error {
 	_szObjectName := win32.UTF16Ptr(szObjectName)
 	_fBypassProxyCache := win32.Bool32(fBypassProxyCache)
 	_fSecure := win32.Bool32(fSecure)
-	_szVerb := win32.UTF16Ptr(szVerb)
-	_szReferrer := win32.UTF16Ptr(szReferrer)
+	_szVerb := win32.UTF16PtrOrNil(szVerb)
+	_szReferrer := win32.UTF16PtrOrNil(szReferrer)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szObjectName)), uintptr(_fBypassProxyCache), uintptr(_fSecure), uintptr(unsafe.Pointer(_szVerb)), uintptr(unsafe.Pointer(_szReferrer)), uintptr(unsafe.Pointer(ppRequest)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5825,8 +5825,8 @@ type IMFMediaEngineAudioEndpointId struct {
 var IID_IMFMediaEngineAudioEndpointId = win32.GUID{Data1: 0x7a3bac98, Data2: 0x0e76, Data3: 0x49fb, Data4: [8]byte{0x8c, 0x20, 0x8a, 0x86, 0xfd, 0x98, 0xea, 0xf2}}
 
 // SetAudioEndpointId dispatches through IMFMediaEngineAudioEndpointId's vtable slot 3.
-func (self *IMFMediaEngineAudioEndpointId) SetAudioEndpointId(pszEndpointId string) error {
-	_pszEndpointId := win32.UTF16Ptr(pszEndpointId)
+func (self *IMFMediaEngineAudioEndpointId) SetAudioEndpointId(pszEndpointId *string) error {
+	_pszEndpointId := win32.UTF16PtrOrNil(pszEndpointId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszEndpointId)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -10766,28 +10766,28 @@ func (self *IMFTimedText) SelectTrack(trackId uint32, selected bool) error {
 }
 
 // AddDataSource dispatches through IMFTimedText's vtable slot 5.
-func (self *IMFTimedText) AddDataSource(byteStream *IMFByteStream, label string, language string, kind MF_TIMED_TEXT_TRACK_KIND, isDefault bool, trackId *uint32) error {
-	_label := win32.UTF16Ptr(label)
-	_language := win32.UTF16Ptr(language)
+func (self *IMFTimedText) AddDataSource(byteStream *IMFByteStream, label *string, language *string, kind MF_TIMED_TEXT_TRACK_KIND, isDefault bool, trackId *uint32) error {
+	_label := win32.UTF16PtrOrNil(label)
+	_language := win32.UTF16PtrOrNil(language)
 	_isDefault := win32.Bool32(isDefault)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(byteStream)), uintptr(unsafe.Pointer(_label)), uintptr(unsafe.Pointer(_language)), uintptr(kind), uintptr(_isDefault), uintptr(unsafe.Pointer(trackId)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddDataSourceFromUrl dispatches through IMFTimedText's vtable slot 6.
-func (self *IMFTimedText) AddDataSourceFromUrl(url string, label string, language string, kind MF_TIMED_TEXT_TRACK_KIND, isDefault bool, trackId *uint32) error {
+func (self *IMFTimedText) AddDataSourceFromUrl(url string, label *string, language *string, kind MF_TIMED_TEXT_TRACK_KIND, isDefault bool, trackId *uint32) error {
 	_url := win32.UTF16Ptr(url)
-	_label := win32.UTF16Ptr(label)
-	_language := win32.UTF16Ptr(language)
+	_label := win32.UTF16PtrOrNil(label)
+	_language := win32.UTF16PtrOrNil(language)
 	_isDefault := win32.Bool32(isDefault)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_url)), uintptr(unsafe.Pointer(_label)), uintptr(unsafe.Pointer(_language)), uintptr(kind), uintptr(_isDefault), uintptr(unsafe.Pointer(trackId)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddTrack dispatches through IMFTimedText's vtable slot 7.
-func (self *IMFTimedText) AddTrack(label string, language string, kind MF_TIMED_TEXT_TRACK_KIND, track **IMFTimedTextTrack) error {
-	_label := win32.UTF16Ptr(label)
-	_language := win32.UTF16Ptr(language)
+func (self *IMFTimedText) AddTrack(label *string, language *string, kind MF_TIMED_TEXT_TRACK_KIND, track **IMFTimedTextTrack) error {
+	_label := win32.UTF16PtrOrNil(label)
+	_language := win32.UTF16PtrOrNil(language)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_label)), uintptr(unsafe.Pointer(_language)), uintptr(kind), uintptr(unsafe.Pointer(track)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -12638,9 +12638,9 @@ func (self *IMFVirtualCamera) AddProperty(pKey *foundation.DEVPROPKEY, Type devi
 }
 
 // AddRegistryEntry dispatches through IMFVirtualCamera's vtable slot 35.
-func (self *IMFVirtualCamera) AddRegistryEntry(EntryName string, SubkeyPath string, dwRegType uint32, pbData []byte) error {
+func (self *IMFVirtualCamera) AddRegistryEntry(EntryName string, SubkeyPath *string, dwRegType uint32, pbData []byte) error {
 	_EntryName := win32.UTF16Ptr(EntryName)
-	_SubkeyPath := win32.UTF16Ptr(SubkeyPath)
+	_SubkeyPath := win32.UTF16PtrOrNil(SubkeyPath)
 	var _pbData *byte
 	if len(pbData) > 0 {
 		_pbData = &pbData[0]

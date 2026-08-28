@@ -30,7 +30,7 @@ import (
 )
 
 func main() {
-	event, err := threading.CreateEvent(nil, true, false, "my-event") // (foundation.HANDLE, error)
+	event, err := threading.CreateEvent(nil, true, false, nil) // unnamed (NULL); win32.Str("name") names it
 	if err != nil {
 		log.Fatal(err)
 	}

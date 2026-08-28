@@ -156,8 +156,8 @@ type IWindowsParentalControls struct {
 var IID_IWindowsParentalControls = win32.GUID{Data1: 0x28b4d88b, Data2: 0xe072, Data3: 0x49e6, Data4: [8]byte{0x80, 0x4d, 0x26, 0xed, 0xbe, 0x21, 0xa7, 0xb9}}
 
 // GetGamesSettings dispatches through IWindowsParentalControls's vtable slot 7.
-func (self *IWindowsParentalControls) GetGamesSettings(pcszSID string, ppSettings **IWPCGamesSettings) error {
-	_pcszSID := win32.UTF16Ptr(pcszSID)
+func (self *IWindowsParentalControls) GetGamesSettings(pcszSID *string, ppSettings **IWPCGamesSettings) error {
+	_pcszSID := win32.UTF16PtrOrNil(pcszSID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcszSID)), uintptr(unsafe.Pointer(ppSettings)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -178,15 +178,15 @@ func (self *IWindowsParentalControlsCore) GetVisibility(peVisibility *WPCFLAG_VI
 }
 
 // GetUserSettings dispatches through IWindowsParentalControlsCore's vtable slot 4.
-func (self *IWindowsParentalControlsCore) GetUserSettings(pcszSID string, ppSettings **IWPCSettings) error {
-	_pcszSID := win32.UTF16Ptr(pcszSID)
+func (self *IWindowsParentalControlsCore) GetUserSettings(pcszSID *string, ppSettings **IWPCSettings) error {
+	_pcszSID := win32.UTF16PtrOrNil(pcszSID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcszSID)), uintptr(unsafe.Pointer(ppSettings)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetWebSettings dispatches through IWindowsParentalControlsCore's vtable slot 5.
-func (self *IWindowsParentalControlsCore) GetWebSettings(pcszSID string, ppSettings **IWPCWebSettings) error {
-	_pcszSID := win32.UTF16Ptr(pcszSID)
+func (self *IWindowsParentalControlsCore) GetWebSettings(pcszSID *string, ppSettings **IWPCWebSettings) error {
+	_pcszSID := win32.UTF16PtrOrNil(pcszSID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcszSID)), uintptr(unsafe.Pointer(ppSettings)))
 	return win32.ErrIfFailed(int32(r1))
 }

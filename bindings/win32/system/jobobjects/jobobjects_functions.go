@@ -85,8 +85,8 @@ func AssignProcessToJobObject(hJob foundation.HANDLE, hProcess foundation.HANDLE
 // CreateJobObject calls KERNEL32!CreateJobObjectW.
 // https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-createjobobjectw
 // Minimum OS: windows5.1.2600.
-func CreateJobObject(lpJobAttributes *security.SECURITY_ATTRIBUTES, lpName string) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateJobObject(lpJobAttributes *security.SECURITY_ATTRIBUTES, lpName *string) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateJobObject.Addr(), uintptr(unsafe.Pointer(lpJobAttributes)), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -180,8 +180,8 @@ func QueryInformationJobObject(hJob foundation.HANDLE, JobObjectInformationClass
 // QueryIoRateControlInformationJobObject calls KERNEL32!QueryIoRateControlInformationJobObject.
 // https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-queryioratecontrolinformationjobobject
 // Minimum OS: windows10.0.10240.
-func QueryIoRateControlInformationJobObject(hJob foundation.HANDLE, VolumeName string, InfoBlocks **JOBOBJECT_IO_RATE_CONTROL_INFORMATION, InfoBlockCount *uint32) (uint32, error) {
-	_VolumeName := win32.UTF16Ptr(VolumeName)
+func QueryIoRateControlInformationJobObject(hJob foundation.HANDLE, VolumeName *string, InfoBlocks **JOBOBJECT_IO_RATE_CONTROL_INFORMATION, InfoBlockCount *uint32) (uint32, error) {
+	_VolumeName := win32.UTF16PtrOrNil(VolumeName)
 	r1, _, e1 := syscall.SyscallN(procQueryIoRateControlInformationJobObject.Addr(), uintptr(hJob), uintptr(unsafe.Pointer(_VolumeName)), uintptr(unsafe.Pointer(InfoBlocks)), uintptr(unsafe.Pointer(InfoBlockCount)))
 	if e1 != 0 {
 		return uint32(r1), e1

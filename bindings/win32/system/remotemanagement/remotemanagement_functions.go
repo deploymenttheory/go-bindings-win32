@@ -176,8 +176,8 @@ func WSManConnectShellCommand(shell WSMAN_SHELL_HANDLE, flags uint32, commandID 
 // WSManCreateSession calls WsmSvc!WSManCreateSession.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmancreatesession
 // Minimum OS: windows6.1.
-func WSManCreateSession(apiHandle WSMAN_API_HANDLE, connection string, flags uint32, serverAuthenticationCredentials *WSMAN_AUTHENTICATION_CREDENTIALS, proxyInfo *WSMAN_PROXY_INFO, session *WSMAN_SESSION_HANDLE) uint32 {
-	_connection := win32.UTF16Ptr(connection)
+func WSManCreateSession(apiHandle WSMAN_API_HANDLE, connection *string, flags uint32, serverAuthenticationCredentials *WSMAN_AUTHENTICATION_CREDENTIALS, proxyInfo *WSMAN_PROXY_INFO, session *WSMAN_SESSION_HANDLE) uint32 {
+	_connection := win32.UTF16PtrOrNil(connection)
 	r1, _, _ := syscall.SyscallN(procWSManCreateSession.Addr(), uintptr(apiHandle), uintptr(unsafe.Pointer(_connection)), uintptr(flags), uintptr(unsafe.Pointer(serverAuthenticationCredentials)), uintptr(unsafe.Pointer(proxyInfo)), uintptr(unsafe.Pointer(session)))
 	return uint32(r1)
 }
@@ -217,8 +217,8 @@ func WSManDisconnectShell(shell WSMAN_SHELL_HANDLE, flags uint32, disconnectInfo
 // WSManGetErrorMessage calls WsmSvc!WSManGetErrorMessage.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmangeterrormessage
 // Minimum OS: windows6.1.
-func WSManGetErrorMessage(apiHandle WSMAN_API_HANDLE, languageCode string, errorCode uint32, messageLength uint32, message foundation.PWSTR, messageLengthUsed *uint32) uint32 {
-	_languageCode := win32.UTF16Ptr(languageCode)
+func WSManGetErrorMessage(apiHandle WSMAN_API_HANDLE, languageCode *string, errorCode uint32, messageLength uint32, message foundation.PWSTR, messageLengthUsed *uint32) uint32 {
+	_languageCode := win32.UTF16PtrOrNil(languageCode)
 	r1, _, _ := syscall.SyscallN(procWSManGetErrorMessage.Addr(), uintptr(apiHandle), 0, uintptr(unsafe.Pointer(_languageCode)), uintptr(errorCode), uintptr(messageLength), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(messageLengthUsed)))
 	return uint32(r1)
 }
@@ -250,8 +250,8 @@ func WSManInitialize(flags uint32, apiHandle *WSMAN_API_HANDLE) uint32 {
 // WSManPluginAuthzOperationComplete calls WsmSvc!WSManPluginAuthzOperationComplete.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginauthzoperationcomplete
 // Minimum OS: windows6.1.
-func WSManPluginAuthzOperationComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, userAuthorizationContext unsafe.Pointer, errorCode uint32, extendedErrorInformation string) uint32 {
-	_extendedErrorInformation := win32.UTF16Ptr(extendedErrorInformation)
+func WSManPluginAuthzOperationComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, userAuthorizationContext unsafe.Pointer, errorCode uint32, extendedErrorInformation *string) uint32 {
+	_extendedErrorInformation := win32.UTF16PtrOrNil(extendedErrorInformation)
 	r1, _, _ := syscall.SyscallN(procWSManPluginAuthzOperationComplete.Addr(), uintptr(unsafe.Pointer(senderDetails)), uintptr(flags), uintptr(unsafe.Pointer(userAuthorizationContext)), uintptr(errorCode), uintptr(unsafe.Pointer(_extendedErrorInformation)))
 	return uint32(r1)
 }
@@ -259,8 +259,8 @@ func WSManPluginAuthzOperationComplete(senderDetails *WSMAN_SENDER_DETAILS, flag
 // WSManPluginAuthzQueryQuotaComplete calls WsmSvc!WSManPluginAuthzQueryQuotaComplete.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginauthzqueryquotacomplete
 // Minimum OS: windows6.1.
-func WSManPluginAuthzQueryQuotaComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, quota *WSMAN_AUTHZ_QUOTA, errorCode uint32, extendedErrorInformation string) uint32 {
-	_extendedErrorInformation := win32.UTF16Ptr(extendedErrorInformation)
+func WSManPluginAuthzQueryQuotaComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, quota *WSMAN_AUTHZ_QUOTA, errorCode uint32, extendedErrorInformation *string) uint32 {
+	_extendedErrorInformation := win32.UTF16PtrOrNil(extendedErrorInformation)
 	r1, _, _ := syscall.SyscallN(procWSManPluginAuthzQueryQuotaComplete.Addr(), uintptr(unsafe.Pointer(senderDetails)), uintptr(flags), uintptr(unsafe.Pointer(quota)), uintptr(errorCode), uintptr(unsafe.Pointer(_extendedErrorInformation)))
 	return uint32(r1)
 }
@@ -268,9 +268,9 @@ func WSManPluginAuthzQueryQuotaComplete(senderDetails *WSMAN_SENDER_DETAILS, fla
 // WSManPluginAuthzUserComplete calls WsmSvc!WSManPluginAuthzUserComplete.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginauthzusercomplete
 // Minimum OS: windows6.1.
-func WSManPluginAuthzUserComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, userAuthorizationContext unsafe.Pointer, impersonationToken foundation.HANDLE, userIsAdministrator bool, errorCode uint32, extendedErrorInformation string) uint32 {
+func WSManPluginAuthzUserComplete(senderDetails *WSMAN_SENDER_DETAILS, flags uint32, userAuthorizationContext unsafe.Pointer, impersonationToken foundation.HANDLE, userIsAdministrator bool, errorCode uint32, extendedErrorInformation *string) uint32 {
 	_userIsAdministrator := win32.Bool32(userIsAdministrator)
-	_extendedErrorInformation := win32.UTF16Ptr(extendedErrorInformation)
+	_extendedErrorInformation := win32.UTF16PtrOrNil(extendedErrorInformation)
 	r1, _, _ := syscall.SyscallN(procWSManPluginAuthzUserComplete.Addr(), uintptr(unsafe.Pointer(senderDetails)), uintptr(flags), uintptr(unsafe.Pointer(userAuthorizationContext)), uintptr(impersonationToken), uintptr(_userIsAdministrator), uintptr(errorCode), uintptr(unsafe.Pointer(_extendedErrorInformation)))
 	return uint32(r1)
 }
@@ -300,8 +300,8 @@ func WSManPluginGetOperationParameters(requestDetails *WSMAN_PLUGIN_REQUEST, fla
 // WSManPluginOperationComplete calls WsmSvc!WSManPluginOperationComplete.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginoperationcomplete
 // Minimum OS: windows6.1.
-func WSManPluginOperationComplete(requestDetails *WSMAN_PLUGIN_REQUEST, flags uint32, errorCode uint32, extendedInformation string) uint32 {
-	_extendedInformation := win32.UTF16Ptr(extendedInformation)
+func WSManPluginOperationComplete(requestDetails *WSMAN_PLUGIN_REQUEST, flags uint32, errorCode uint32, extendedInformation *string) uint32 {
+	_extendedInformation := win32.UTF16PtrOrNil(extendedInformation)
 	r1, _, _ := syscall.SyscallN(procWSManPluginOperationComplete.Addr(), uintptr(unsafe.Pointer(requestDetails)), uintptr(flags), uintptr(errorCode), uintptr(unsafe.Pointer(_extendedInformation)))
 	return uint32(r1)
 }
@@ -309,9 +309,9 @@ func WSManPluginOperationComplete(requestDetails *WSMAN_PLUGIN_REQUEST, flags ui
 // WSManPluginReceiveResult calls WsmSvc!WSManPluginReceiveResult.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanpluginreceiveresult
 // Minimum OS: windows6.1.
-func WSManPluginReceiveResult(requestDetails *WSMAN_PLUGIN_REQUEST, flags uint32, stream string, streamResult *WSMAN_DATA, commandState string, exitCode uint32) uint32 {
-	_stream := win32.UTF16Ptr(stream)
-	_commandState := win32.UTF16Ptr(commandState)
+func WSManPluginReceiveResult(requestDetails *WSMAN_PLUGIN_REQUEST, flags uint32, stream *string, streamResult *WSMAN_DATA, commandState *string, exitCode uint32) uint32 {
+	_stream := win32.UTF16PtrOrNil(stream)
+	_commandState := win32.UTF16PtrOrNil(commandState)
 	r1, _, _ := syscall.SyscallN(procWSManPluginReceiveResult.Addr(), uintptr(unsafe.Pointer(requestDetails)), uintptr(flags), uintptr(unsafe.Pointer(_stream)), uintptr(unsafe.Pointer(streamResult)), uintptr(unsafe.Pointer(_commandState)), uintptr(exitCode))
 	return uint32(r1)
 }

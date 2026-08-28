@@ -1840,8 +1840,8 @@ type ID3D11Fence struct {
 var IID_ID3D11Fence = win32.GUID{Data1: 0xaffde9d1, Data2: 0x1df7, Data3: 0x4bb7, Data4: [8]byte{0x8a, 0x34, 0x0f, 0x46, 0x25, 0x1d, 0xab, 0x80}}
 
 // CreateSharedHandle dispatches through ID3D11Fence's vtable slot 7.
-func (self *ID3D11Fence) CreateSharedHandle(pAttributes *security.SECURITY_ATTRIBUTES, dwAccess uint32, lpName string, pHandle *foundation.HANDLE) error {
-	_lpName := win32.UTF16Ptr(lpName)
+func (self *ID3D11Fence) CreateSharedHandle(pAttributes *security.SECURITY_ATTRIBUTES, dwAccess uint32, lpName *string, pHandle *foundation.HANDLE) error {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)), uintptr(dwAccess), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(pHandle)))
 	return win32.ErrIfFailed(int32(r1))
 }

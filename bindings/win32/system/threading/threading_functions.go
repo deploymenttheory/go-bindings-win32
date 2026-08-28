@@ -1416,10 +1416,10 @@ func CreateBoundaryDescriptorA(Name foundation.PSTR, Flags uint32) (foundation.H
 // CreateEvent calls KERNEL32!CreateEventW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventw
 // Minimum OS: windows5.1.2600.
-func CreateEvent(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, bInitialState bool, lpName string) (foundation.HANDLE, error) {
+func CreateEvent(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, bInitialState bool, lpName *string) (foundation.HANDLE, error) {
 	_bManualReset := win32.Bool32(bManualReset)
 	_bInitialState := win32.Bool32(bInitialState)
-	_lpName := win32.UTF16Ptr(lpName)
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateEvent.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(_bManualReset), uintptr(_bInitialState), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1445,8 +1445,8 @@ func CreateEventA(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset 
 // CreateEventEx calls KERNEL32!CreateEventExW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventexw
 // Minimum OS: windows6.0.6000.
-func CreateEventEx(lpEventAttributes *security.SECURITY_ATTRIBUTES, lpName string, dwFlags CREATE_EVENT, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateEventEx(lpEventAttributes *security.SECURITY_ATTRIBUTES, lpName *string, dwFlags CREATE_EVENT, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateEventEx.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(unsafe.Pointer(_lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1494,9 +1494,9 @@ func CreateFiberEx(dwStackCommitSize uintptr, dwStackReserveSize uintptr, dwFlag
 // CreateMutex calls KERNEL32!CreateMutexW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createmutexw
 // Minimum OS: windows5.1.2600.
-func CreateMutex(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner bool, lpName string) (foundation.HANDLE, error) {
+func CreateMutex(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner bool, lpName *string) (foundation.HANDLE, error) {
 	_bInitialOwner := win32.Bool32(bInitialOwner)
-	_lpName := win32.UTF16Ptr(lpName)
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateMutex.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(_bInitialOwner), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1521,8 +1521,8 @@ func CreateMutexA(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner
 // CreateMutexEx calls KERNEL32!CreateMutexExW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createmutexexw
 // Minimum OS: windows6.0.6000.
-func CreateMutexEx(lpMutexAttributes *security.SECURITY_ATTRIBUTES, lpName string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateMutexEx(lpMutexAttributes *security.SECURITY_ATTRIBUTES, lpName *string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateMutexEx.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(unsafe.Pointer(_lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1566,10 +1566,10 @@ func CreatePrivateNamespaceA(lpPrivateNamespaceAttributes *security.SECURITY_ATT
 // CreateProcess calls KERNEL32!CreateProcessW.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw
 // Minimum OS: windows5.1.2600.
-func CreateProcess(lpApplicationName string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
+func CreateProcess(lpApplicationName *string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory *string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpApplicationName := win32.UTF16PtrOrNil(lpApplicationName)
 	_bInheritHandles := win32.Bool32(bInheritHandles)
-	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	_lpCurrentDirectory := win32.UTF16PtrOrNil(lpCurrentDirectory)
 	r1, _, e1 := syscall.SyscallN(procCreateProcess.Addr(), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(_bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1592,10 +1592,10 @@ func CreateProcessA(lpApplicationName foundation.PSTR, lpCommandLine foundation.
 // CreateProcessAsUser calls ADVAPI32!CreateProcessAsUserW.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessasuserw
 // Minimum OS: windows5.1.2600.
-func CreateProcessAsUser(hToken foundation.HANDLE, lpApplicationName string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
+func CreateProcessAsUser(hToken foundation.HANDLE, lpApplicationName *string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory *string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpApplicationName := win32.UTF16PtrOrNil(lpApplicationName)
 	_bInheritHandles := win32.Bool32(bInheritHandles)
-	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	_lpCurrentDirectory := win32.UTF16PtrOrNil(lpCurrentDirectory)
 	r1, _, e1 := syscall.SyscallN(procCreateProcessAsUser.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(_bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1618,12 +1618,12 @@ func CreateProcessAsUserA(hToken foundation.HANDLE, lpApplicationName foundation
 // CreateProcessWithLogonW calls ADVAPI32!CreateProcessWithLogonW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createprocesswithlogonw
 // Minimum OS: windows5.1.2600.
-func CreateProcessWithLogonW(lpUsername string, lpDomain string, lpPassword string, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+func CreateProcessWithLogonW(lpUsername string, lpDomain *string, lpPassword string, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName *string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory *string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
 	_lpUsername := win32.UTF16Ptr(lpUsername)
-	_lpDomain := win32.UTF16Ptr(lpDomain)
+	_lpDomain := win32.UTF16PtrOrNil(lpDomain)
 	_lpPassword := win32.UTF16Ptr(lpPassword)
-	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
-	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	_lpApplicationName := win32.UTF16PtrOrNil(lpApplicationName)
+	_lpCurrentDirectory := win32.UTF16PtrOrNil(lpCurrentDirectory)
 	r1, _, e1 := syscall.SyscallN(procCreateProcessWithLogonW.Addr(), uintptr(unsafe.Pointer(_lpUsername)), uintptr(unsafe.Pointer(_lpDomain)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(dwLogonFlags), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1634,9 +1634,9 @@ func CreateProcessWithLogonW(lpUsername string, lpDomain string, lpPassword stri
 // CreateProcessWithTokenW calls ADVAPI32!CreateProcessWithTokenW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createprocesswithtokenw
 // Minimum OS: windows6.0.6000.
-func CreateProcessWithTokenW(hToken foundation.HANDLE, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
-	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+func CreateProcessWithTokenW(hToken foundation.HANDLE, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName *string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory *string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpApplicationName := win32.UTF16PtrOrNil(lpApplicationName)
+	_lpCurrentDirectory := win32.UTF16PtrOrNil(lpCurrentDirectory)
 	r1, _, e1 := syscall.SyscallN(procCreateProcessWithTokenW.Addr(), uintptr(hToken), uintptr(dwLogonFlags), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1671,8 +1671,8 @@ func CreateRemoteThreadEx(hProcess foundation.HANDLE, lpThreadAttributes *securi
 // CreateSemaphore calls KERNEL32!CreateSemaphoreW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createsemaphorew
 // Minimum OS: windows5.1.2600.
-func CreateSemaphore(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName string) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateSemaphore(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName *string) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateSemaphore.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1696,8 +1696,8 @@ func CreateSemaphoreA(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInit
 // CreateSemaphoreEx calls KERNEL32!CreateSemaphoreExW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createsemaphoreexw
 // Minimum OS: windows6.0.6000.
-func CreateSemaphoreEx(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName string, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateSemaphoreEx(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName *string, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateSemaphoreEx.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(_lpName)), 0, uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1844,9 +1844,9 @@ func CreateUmsThreadContext(lpUmsThread *unsafe.Pointer) error {
 // CreateWaitableTimer calls KERNEL32!CreateWaitableTimerW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createwaitabletimerw
 // Minimum OS: windows5.1.2600.
-func CreateWaitableTimer(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, lpTimerName string) (foundation.HANDLE, error) {
+func CreateWaitableTimer(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, lpTimerName *string) (foundation.HANDLE, error) {
 	_bManualReset := win32.Bool32(bManualReset)
-	_lpTimerName := win32.UTF16Ptr(lpTimerName)
+	_lpTimerName := win32.UTF16PtrOrNil(lpTimerName)
 	r1, _, e1 := syscall.SyscallN(procCreateWaitableTimer.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(_bManualReset), uintptr(unsafe.Pointer(_lpTimerName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1866,8 +1866,8 @@ func CreateWaitableTimerA(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManu
 // CreateWaitableTimerEx calls KERNEL32!CreateWaitableTimerExW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createwaitabletimerexw
 // Minimum OS: windows6.0.6000.
-func CreateWaitableTimerEx(lpTimerAttributes *security.SECURITY_ATTRIBUTES, lpTimerName string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	_lpTimerName := win32.UTF16Ptr(lpTimerName)
+func CreateWaitableTimerEx(lpTimerAttributes *security.SECURITY_ATTRIBUTES, lpTimerName *string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpTimerName := win32.UTF16PtrOrNil(lpTimerName)
 	r1, _, e1 := syscall.SyscallN(procCreateWaitableTimerEx.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(unsafe.Pointer(_lpTimerName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {

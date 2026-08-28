@@ -861,8 +861,8 @@ func EngUnlockSurface(pso *SURFOBJ) {
 // EngWideCharToMultiByte calls GDI32!EngWideCharToMultiByte.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engwidechartomultibyte
 // Minimum OS: windows5.0.
-func EngWideCharToMultiByte(CodePage uint32, WideCharString string, BytesInWideCharString int32, MultiByteString foundation.PSTR, BytesInMultiByteString int32) int32 {
-	_WideCharString := win32.UTF16Ptr(WideCharString)
+func EngWideCharToMultiByte(CodePage uint32, WideCharString *string, BytesInWideCharString int32, MultiByteString foundation.PSTR, BytesInMultiByteString int32) int32 {
+	_WideCharString := win32.UTF16PtrOrNil(WideCharString)
 	r1, _, _ := syscall.SyscallN(procEngWideCharToMultiByte.Addr(), uintptr(CodePage), uintptr(unsafe.Pointer(_WideCharString)), uintptr(BytesInWideCharString), uintptr(unsafe.Pointer(MultiByteString)), uintptr(BytesInMultiByteString))
 	return int32(r1)
 }

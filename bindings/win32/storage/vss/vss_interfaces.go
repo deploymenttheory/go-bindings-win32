@@ -957,8 +957,8 @@ type IVssComponentEx2 struct {
 var IID_IVssComponentEx2 = win32.GUID{Data1: 0x3b5be0f2, Data2: 0x07a9, Data3: 0x4e4b, Data4: [8]byte{0xbd, 0xd3, 0xcf, 0xdc, 0x8e, 0x2c, 0x0d, 0x2d}}
 
 // SetFailure dispatches through IVssComponentEx2's vtable slot 48.
-func (self *IVssComponentEx2) SetFailure(hr foundation.HRESULT, hrApplication foundation.HRESULT, wszApplicationMessage string, dwReserved uint32) error {
-	_wszApplicationMessage := win32.UTF16Ptr(wszApplicationMessage)
+func (self *IVssComponentEx2) SetFailure(hr foundation.HRESULT, hrApplication foundation.HRESULT, wszApplicationMessage *string, dwReserved uint32) error {
+	_wszApplicationMessage := win32.UTF16PtrOrNil(wszApplicationMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(hrApplication), uintptr(unsafe.Pointer(_wszApplicationMessage)), uintptr(dwReserved))
 	return win32.ErrIfFailed(int32(r1))
 }

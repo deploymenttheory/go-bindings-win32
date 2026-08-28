@@ -237,8 +237,8 @@ func CreateDesktopExA(lpszDesktop foundation.PSTR, dwFlags DESKTOP_CONTROL_FLAGS
 // CreateWindowStation calls USER32!CreateWindowStationW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowstationw
 // Minimum OS: windows5.0.
-func CreateWindowStation(lpwinsta string, dwFlags uint32, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HWINSTA, error) {
-	_lpwinsta := win32.UTF16Ptr(lpwinsta)
+func CreateWindowStation(lpwinsta *string, dwFlags uint32, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HWINSTA, error) {
+	_lpwinsta := win32.UTF16PtrOrNil(lpwinsta)
 	r1, _, e1 := syscall.SyscallN(procCreateWindowStation.Addr(), uintptr(unsafe.Pointer(_lpwinsta)), uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)))
 	ret := HWINSTA(r1)
 	if ret == ^HWINSTA(0) || ret == 0 {

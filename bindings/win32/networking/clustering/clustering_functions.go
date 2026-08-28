@@ -1259,8 +1259,8 @@ func AddClusterGroupDependency(hDependentGroup HGROUP, hProviderGroup HGROUP) ui
 }
 
 // AddClusterGroupDependencyEx calls CLUSAPI!AddClusterGroupDependencyEx.
-func AddClusterGroupDependencyEx(hDependentGroup HGROUP, hProviderGroup HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterGroupDependencyEx(hDependentGroup HGROUP, hProviderGroup HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterGroupDependencyEx.Addr(), uintptr(hDependentGroup), uintptr(hProviderGroup), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1274,8 +1274,8 @@ func AddClusterGroupSetDependency(hDependentGroupSet HGROUPSET, hProviderGroupSe
 }
 
 // AddClusterGroupSetDependencyEx calls CLUSAPI!AddClusterGroupSetDependencyEx.
-func AddClusterGroupSetDependencyEx(hDependentGroupSet HGROUPSET, hProviderGroupSet HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterGroupSetDependencyEx(hDependentGroupSet HGROUPSET, hProviderGroupSet HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterGroupSetDependencyEx.Addr(), uintptr(hDependentGroupSet), uintptr(hProviderGroupSet), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1289,8 +1289,8 @@ func AddClusterGroupToGroupSetDependency(hDependentGroup HGROUP, hProviderGroupS
 }
 
 // AddClusterGroupToGroupSetDependencyEx calls CLUSAPI!AddClusterGroupToGroupSetDependencyEx.
-func AddClusterGroupToGroupSetDependencyEx(hDependentGroup HGROUP, hProviderGroupSet HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterGroupToGroupSetDependencyEx(hDependentGroup HGROUP, hProviderGroupSet HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterGroupToGroupSetDependencyEx.Addr(), uintptr(hDependentGroup), uintptr(hProviderGroupSet), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1323,8 +1323,8 @@ func AddClusterResourceDependency(hResource HRESOURCE, hDependsOn HRESOURCE) uin
 }
 
 // AddClusterResourceDependencyEx calls CLUSAPI!AddClusterResourceDependencyEx.
-func AddClusterResourceDependencyEx(hResource HRESOURCE, hDependsOn HRESOURCE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterResourceDependencyEx(hResource HRESOURCE, hDependsOn HRESOURCE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterResourceDependencyEx.Addr(), uintptr(hResource), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1338,17 +1338,17 @@ func AddClusterResourceNode(hResource HRESOURCE, hNode HNODE) uint32 {
 }
 
 // AddClusterResourceNodeEx calls CLUSAPI!AddClusterResourceNodeEx.
-func AddClusterResourceNodeEx(hResource HRESOURCE, hNode HNODE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterResourceNodeEx(hResource HRESOURCE, hNode HNODE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterResourceNodeEx.Addr(), uintptr(hResource), uintptr(hNode), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
 // AddClusterStorageNode calls CLUSAPI!AddClusterStorageNode.
-func AddClusterStorageNode(hCluster HCLUSTER, lpszNodeName string, pfnProgressCallback PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg unsafe.Pointer, lpszClusterStorageNodeDescription string, lpszClusterStorageNodeLocation string) uint32 {
+func AddClusterStorageNode(hCluster HCLUSTER, lpszNodeName string, pfnProgressCallback PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg unsafe.Pointer, lpszClusterStorageNodeDescription *string, lpszClusterStorageNodeLocation *string) uint32 {
 	_lpszNodeName := win32.UTF16Ptr(lpszNodeName)
-	_lpszClusterStorageNodeDescription := win32.UTF16Ptr(lpszClusterStorageNodeDescription)
-	_lpszClusterStorageNodeLocation := win32.UTF16Ptr(lpszClusterStorageNodeLocation)
+	_lpszClusterStorageNodeDescription := win32.UTF16PtrOrNil(lpszClusterStorageNodeDescription)
+	_lpszClusterStorageNodeLocation := win32.UTF16PtrOrNil(lpszClusterStorageNodeLocation)
 	r1, _, _ := syscall.SyscallN(procAddClusterStorageNode.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNodeName)), uintptr(pfnProgressCallback), uintptr(unsafe.Pointer(pvCallbackArg)), uintptr(unsafe.Pointer(_lpszClusterStorageNodeDescription)), uintptr(unsafe.Pointer(_lpszClusterStorageNodeLocation)))
 	return uint32(r1)
 }
@@ -1409,8 +1409,8 @@ func ChangeClusterResourceGroupEx(hResource HRESOURCE, hGroup HGROUP, Flags uint
 }
 
 // ChangeClusterResourceGroupEx2 calls CLUSAPI!ChangeClusterResourceGroupEx2.
-func ChangeClusterResourceGroupEx2(hResource HRESOURCE, hGroup HGROUP, Flags uint64, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ChangeClusterResourceGroupEx2(hResource HRESOURCE, hGroup HGROUP, Flags uint64, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procChangeClusterResourceGroupEx2.Addr(), uintptr(hResource), uintptr(hGroup), uintptr(Flags), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1599,8 +1599,8 @@ func ClusterAddGroupToGroupSetWithDomains(hGroupSet HGROUPSET, hGroup HGROUP, fa
 }
 
 // ClusterAddGroupToGroupSetWithDomainsEx calls CLUSAPI!ClusterAddGroupToGroupSetWithDomainsEx.
-func ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet HGROUPSET, hGroup HGROUP, faultDomain uint32, updateDomain uint32, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet HGROUPSET, hGroup HGROUP, faultDomain uint32, updateDomain uint32, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterAddGroupToGroupSetWithDomainsEx.Addr(), uintptr(hGroupSet), uintptr(hGroup), uintptr(faultDomain), uintptr(updateDomain), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1662,7 +1662,7 @@ func ClusterControl(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lp
 }
 
 // ClusterControlEx calls CLUSAPI!ClusterControlEx.
-func ClusterControlEx(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterControlEx(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1671,7 +1671,7 @@ func ClusterControlEx(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, 
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterControlEx.Addr(), uintptr(hCluster), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1792,7 +1792,7 @@ func ClusterGroupControl(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, l
 }
 
 // ClusterGroupControlEx calls CLUSAPI!ClusterGroupControlEx.
-func ClusterGroupControlEx(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterGroupControlEx(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1801,7 +1801,7 @@ func ClusterGroupControlEx(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32,
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterGroupControlEx.Addr(), uintptr(hGroup), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1852,9 +1852,9 @@ func ClusterGroupOpenEnum(hGroup HGROUP, dwType uint32) (HGROUPENUM, error) {
 // ClusterGroupOpenEnumEx calls CLUSAPI!ClusterGroupOpenEnumEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clustergroupopenenumex
 // Minimum OS: windowsserver2012.
-func ClusterGroupOpenEnumEx(hCluster HCLUSTER, lpszProperties string, cbProperties uint32, lpszRoProperties string, cbRoProperties uint32, dwFlags uint32) HGROUPENUMEX {
-	_lpszProperties := win32.UTF16Ptr(lpszProperties)
-	_lpszRoProperties := win32.UTF16Ptr(lpszRoProperties)
+func ClusterGroupOpenEnumEx(hCluster HCLUSTER, lpszProperties *string, cbProperties uint32, lpszRoProperties *string, cbRoProperties uint32, dwFlags uint32) HGROUPENUMEX {
+	_lpszProperties := win32.UTF16PtrOrNil(lpszProperties)
+	_lpszRoProperties := win32.UTF16PtrOrNil(lpszRoProperties)
 	r1, _, _ := syscall.SyscallN(procClusterGroupOpenEnumEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszProperties)), uintptr(cbProperties), uintptr(unsafe.Pointer(_lpszRoProperties)), uintptr(cbRoProperties), uintptr(dwFlags))
 	return HGROUPENUMEX(r1)
 }
@@ -1884,7 +1884,7 @@ func ClusterGroupSetControl(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode 
 }
 
 // ClusterGroupSetControlEx calls CLUSAPI!ClusterGroupSetControlEx.
-func ClusterGroupSetControlEx(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterGroupSetControlEx(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1893,7 +1893,7 @@ func ClusterGroupSetControlEx(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCod
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterGroupSetControlEx.Addr(), uintptr(hGroupSet), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1959,7 +1959,7 @@ func ClusterNetInterfaceControl(hNetInterface HNETINTERFACE, hHostNode HNODE, dw
 }
 
 // ClusterNetInterfaceControlEx calls CLUSAPI!ClusterNetInterfaceControlEx.
-func ClusterNetInterfaceControlEx(hNetInterface HNETINTERFACE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterNetInterfaceControlEx(hNetInterface HNETINTERFACE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1968,7 +1968,7 @@ func ClusterNetInterfaceControlEx(hNetInterface HNETINTERFACE, hHostNode HNODE, 
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterNetInterfaceControlEx.Addr(), uintptr(hNetInterface), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1984,9 +1984,9 @@ func ClusterNetInterfaceEnum(hNetInterfaceEnum HNETINTERFACEENUM, dwIndex uint32
 // ClusterNetInterfaceOpenEnum calls CLUSAPI!ClusterNetInterfaceOpenEnum.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusternetinterfaceopenenum
 // Minimum OS: windowsserver2016.
-func ClusterNetInterfaceOpenEnum(hCluster HCLUSTER, lpszNodeName string, lpszNetworkName string) (HNETINTERFACEENUM, error) {
-	_lpszNodeName := win32.UTF16Ptr(lpszNodeName)
-	_lpszNetworkName := win32.UTF16Ptr(lpszNetworkName)
+func ClusterNetInterfaceOpenEnum(hCluster HCLUSTER, lpszNodeName *string, lpszNetworkName *string) (HNETINTERFACEENUM, error) {
+	_lpszNodeName := win32.UTF16PtrOrNil(lpszNodeName)
+	_lpszNetworkName := win32.UTF16PtrOrNil(lpszNetworkName)
 	r1, _, e1 := syscall.SyscallN(procClusterNetInterfaceOpenEnum.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNodeName)), uintptr(unsafe.Pointer(_lpszNetworkName)))
 	if e1 != 0 {
 		return HNETINTERFACEENUM(r1), e1
@@ -2019,7 +2019,7 @@ func ClusterNetworkControl(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uin
 }
 
 // ClusterNetworkControlEx calls CLUSAPI!ClusterNetworkControlEx.
-func ClusterNetworkControlEx(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterNetworkControlEx(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -2028,7 +2028,7 @@ func ClusterNetworkControlEx(hNetwork HNETWORK, hHostNode HNODE, dwControlCode u
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterNetworkControlEx.Addr(), uintptr(hNetwork), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2093,7 +2093,7 @@ func ClusterNodeControl(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpIn
 }
 
 // ClusterNodeControlEx calls CLUSAPI!ClusterNodeControlEx.
-func ClusterNodeControlEx(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterNodeControlEx(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -2102,7 +2102,7 @@ func ClusterNodeControlEx(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lp
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterNodeControlEx.Addr(), uintptr(hNode), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2201,8 +2201,8 @@ func ClusterPrepareSharedVolumeForBackup(lpszFileName string, lpszVolumePathName
 // ClusterRegBatchAddCommand calls CLUSAPI!ClusterRegBatchAddCommand.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterregbatchaddcommand
 // Minimum OS: windowsserver2008.
-func ClusterRegBatchAddCommand(hRegBatch HREGBATCH, dwCommand CLUSTER_REG_COMMAND, wzName string, dwOptions uint32, lpData []byte) int32 {
-	_wzName := win32.UTF16Ptr(wzName)
+func ClusterRegBatchAddCommand(hRegBatch HREGBATCH, dwCommand CLUSTER_REG_COMMAND, wzName *string, dwOptions uint32, lpData []byte) int32 {
+	_wzName := win32.UTF16PtrOrNil(wzName)
 	var _lpData *byte
 	if len(lpData) > 0 {
 		_lpData = &lpData[0]
@@ -2310,9 +2310,9 @@ func ClusterRegCreateKey(hKey systemregistry.HKEY, lpszSubKey string, dwOptions 
 }
 
 // ClusterRegCreateKeyEx calls CLUSAPI!ClusterRegCreateKeyEx.
-func ClusterRegCreateKeyEx(hKey systemregistry.HKEY, lpSubKey string, dwOptions uint32, samDesired uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, phkResult *systemregistry.HKEY, lpdwDisposition *uint32, lpszReason string) int32 {
+func ClusterRegCreateKeyEx(hKey systemregistry.HKEY, lpSubKey string, dwOptions uint32, samDesired uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, phkResult *systemregistry.HKEY, lpdwDisposition *uint32, lpszReason *string) int32 {
 	_lpSubKey := win32.UTF16Ptr(lpSubKey)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegCreateKeyEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(dwOptions), uintptr(samDesired), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(unsafe.Pointer(phkResult)), uintptr(unsafe.Pointer(lpdwDisposition)), uintptr(unsafe.Pointer(_lpszReason)))
 	return int32(r1)
 }
@@ -2335,9 +2335,9 @@ func ClusterRegDeleteKey(hKey systemregistry.HKEY, lpszSubKey string) int32 {
 }
 
 // ClusterRegDeleteKeyEx calls CLUSAPI!ClusterRegDeleteKeyEx.
-func ClusterRegDeleteKeyEx(hKey systemregistry.HKEY, lpSubKey string, lpszReason string) int32 {
+func ClusterRegDeleteKeyEx(hKey systemregistry.HKEY, lpSubKey string, lpszReason *string) int32 {
 	_lpSubKey := win32.UTF16Ptr(lpSubKey)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegDeleteKeyEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(unsafe.Pointer(_lpszReason)))
 	return int32(r1)
 }
@@ -2352,9 +2352,9 @@ func ClusterRegDeleteValue(hKey systemregistry.HKEY, lpszValueName string) uint3
 }
 
 // ClusterRegDeleteValueEx calls CLUSAPI!ClusterRegDeleteValueEx.
-func ClusterRegDeleteValueEx(hKey systemregistry.HKEY, lpszValueName string, lpszReason string) uint32 {
+func ClusterRegDeleteValueEx(hKey systemregistry.HKEY, lpszValueName string, lpszReason *string) uint32 {
 	_lpszValueName := win32.UTF16Ptr(lpszValueName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegDeleteValueEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpszValueName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2444,8 +2444,8 @@ func ClusterRegSetKeySecurity(hKey systemregistry.HKEY, SecurityInformation uint
 }
 
 // ClusterRegSetKeySecurityEx calls CLUSAPI!ClusterRegSetKeySecurityEx.
-func ClusterRegSetKeySecurityEx(hKey systemregistry.HKEY, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, lpszReason string) int32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ClusterRegSetKeySecurityEx(hKey systemregistry.HKEY, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, lpszReason *string) int32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegSetKeySecurityEx.Addr(), uintptr(hKey), uintptr(SecurityInformation), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(_lpszReason)))
 	return int32(r1)
 }
@@ -2463,9 +2463,9 @@ func ClusterRegSetValue(hKey systemregistry.HKEY, lpszValueName string, dwType u
 }
 
 // ClusterRegSetValueEx calls CLUSAPI!ClusterRegSetValueEx.
-func ClusterRegSetValueEx(hKey systemregistry.HKEY, lpszValueName string, dwType uint32, lpData *byte, cbData uint32, lpszReason string) uint32 {
+func ClusterRegSetValueEx(hKey systemregistry.HKEY, lpszValueName string, dwType uint32, lpData *byte, cbData uint32, lpszReason *string) uint32 {
 	_lpszValueName := win32.UTF16Ptr(lpszValueName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegSetValueEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpszValueName)), uintptr(dwType), uintptr(unsafe.Pointer(lpData)), uintptr(cbData), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2501,8 +2501,8 @@ func ClusterRemoveGroupFromGroupSet(hGroup HGROUP) uint32 {
 }
 
 // ClusterRemoveGroupFromGroupSetEx calls CLUSAPI!ClusterRemoveGroupFromGroupSetEx.
-func ClusterRemoveGroupFromGroupSetEx(hGroup HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ClusterRemoveGroupFromGroupSetEx(hGroup HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRemoveGroupFromGroupSetEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2556,7 +2556,7 @@ func ClusterResourceControlAsUser(hResource HRESOURCE, hHostNode HNODE, dwContro
 }
 
 // ClusterResourceControlAsUserEx calls CLUSAPI!ClusterResourceControlAsUserEx.
-func ClusterResourceControlAsUserEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceControlAsUserEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -2565,13 +2565,13 @@ func ClusterResourceControlAsUserEx(hResource HRESOURCE, hHostNode HNODE, dwCont
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterResourceControlAsUserEx.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
 // ClusterResourceControlEx calls CLUSAPI!ClusterResourceControlEx.
-func ClusterResourceControlEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceControlEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -2580,7 +2580,7 @@ func ClusterResourceControlEx(hResource HRESOURCE, hHostNode HNODE, dwControlCod
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterResourceControlEx.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2631,9 +2631,9 @@ func ClusterResourceOpenEnum(hResource HRESOURCE, dwType uint32) (HRESENUM, erro
 // ClusterResourceOpenEnumEx calls CLUSAPI!ClusterResourceOpenEnumEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterresourceopenenumex
 // Minimum OS: windowsserver2012.
-func ClusterResourceOpenEnumEx(hCluster HCLUSTER, lpszProperties string, cbProperties uint32, lpszRoProperties string, cbRoProperties uint32, dwFlags uint32) (HRESENUMEX, error) {
-	_lpszProperties := win32.UTF16Ptr(lpszProperties)
-	_lpszRoProperties := win32.UTF16Ptr(lpszRoProperties)
+func ClusterResourceOpenEnumEx(hCluster HCLUSTER, lpszProperties *string, cbProperties uint32, lpszRoProperties *string, cbRoProperties uint32, dwFlags uint32) (HRESENUMEX, error) {
+	_lpszProperties := win32.UTF16PtrOrNil(lpszProperties)
+	_lpszRoProperties := win32.UTF16PtrOrNil(lpszRoProperties)
 	r1, _, e1 := syscall.SyscallN(procClusterResourceOpenEnumEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszProperties)), uintptr(cbProperties), uintptr(unsafe.Pointer(_lpszRoProperties)), uintptr(cbRoProperties), uintptr(dwFlags))
 	if e1 != 0 {
 		return HRESENUMEX(r1), e1
@@ -2684,7 +2684,7 @@ func ClusterResourceTypeControlAsUser(hCluster HCLUSTER, lpszResourceTypeName st
 }
 
 // ClusterResourceTypeControlAsUserEx calls CLUSAPI!ClusterResourceTypeControlAsUserEx.
-func ClusterResourceTypeControlAsUserEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceTypeControlAsUserEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
@@ -2694,13 +2694,13 @@ func ClusterResourceTypeControlAsUserEx(hCluster HCLUSTER, lpszResourceTypeName 
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlAsUserEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
 // ClusterResourceTypeControlEx calls CLUSAPI!ClusterResourceTypeControlEx.
-func ClusterResourceTypeControlEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceTypeControlEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
@@ -2710,7 +2710,7 @@ func ClusterResourceTypeControlEx(hCluster HCLUSTER, lpszResourceTypeName string
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2870,10 +2870,10 @@ func CreateClusterResource(hGroup HGROUP, lpszResourceName string, lpszResourceT
 }
 
 // CreateClusterResourceEx calls CLUSAPI!CreateClusterResourceEx.
-func CreateClusterResourceEx(hGroup HGROUP, lpszResourceName string, lpszResourceType string, dwFlags uint32, lpszReason string) HRESOURCE {
+func CreateClusterResourceEx(hGroup HGROUP, lpszResourceName string, lpszResourceType string, dwFlags uint32, lpszReason *string) HRESOURCE {
 	_lpszResourceName := win32.UTF16Ptr(lpszResourceName)
 	_lpszResourceType := win32.UTF16Ptr(lpszResourceType)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procCreateClusterResourceEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszResourceName)), uintptr(unsafe.Pointer(_lpszResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszReason)))
 	return HRESOURCE(r1)
 }
@@ -2890,11 +2890,11 @@ func CreateClusterResourceType(hCluster HCLUSTER, lpszResourceTypeName string, l
 }
 
 // CreateClusterResourceTypeEx calls CLUSAPI!CreateClusterResourceTypeEx.
-func CreateClusterResourceTypeEx(hCluster HCLUSTER, lpszResourceTypeName string, lpszDisplayName string, lpszResourceTypeDll string, dwLooksAlivePollInterval uint32, dwIsAlivePollInterval uint32, lpszReason string) uint32 {
+func CreateClusterResourceTypeEx(hCluster HCLUSTER, lpszResourceTypeName string, lpszDisplayName string, lpszResourceTypeDll string, dwLooksAlivePollInterval uint32, dwIsAlivePollInterval uint32, lpszReason *string) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
 	_lpszDisplayName := win32.UTF16Ptr(lpszDisplayName)
 	_lpszResourceTypeDll := win32.UTF16Ptr(lpszResourceTypeDll)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procCreateClusterResourceTypeEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(unsafe.Pointer(_lpszDisplayName)), uintptr(unsafe.Pointer(_lpszResourceTypeDll)), uintptr(dwLooksAlivePollInterval), uintptr(dwIsAlivePollInterval), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2908,8 +2908,8 @@ func DeleteClusterGroup(hGroup HGROUP) uint32 {
 }
 
 // DeleteClusterGroupEx calls CLUSAPI!DeleteClusterGroupEx.
-func DeleteClusterGroupEx(hGroup HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func DeleteClusterGroupEx(hGroup HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDeleteClusterGroupEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2923,8 +2923,8 @@ func DeleteClusterGroupSet(hGroupSet HGROUPSET) uint32 {
 }
 
 // DeleteClusterGroupSetEx calls CLUSAPI!DeleteClusterGroupSetEx.
-func DeleteClusterGroupSetEx(hGroupSet HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func DeleteClusterGroupSetEx(hGroupSet HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDeleteClusterGroupSetEx.Addr(), uintptr(hGroupSet), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2938,8 +2938,8 @@ func DeleteClusterResource(hResource HRESOURCE) uint32 {
 }
 
 // DeleteClusterResourceEx calls CLUSAPI!DeleteClusterResourceEx.
-func DeleteClusterResourceEx(hResource HRESOURCE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func DeleteClusterResourceEx(hResource HRESOURCE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDeleteClusterResourceEx.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2954,9 +2954,9 @@ func DeleteClusterResourceType(hCluster HCLUSTER, lpszResourceTypeName string) u
 }
 
 // DeleteClusterResourceTypeEx calls CLUSAPI!DeleteClusterResourceTypeEx.
-func DeleteClusterResourceTypeEx(hCluster HCLUSTER, lpszTypeName string, lpszReason string) uint32 {
+func DeleteClusterResourceTypeEx(hCluster HCLUSTER, lpszTypeName string, lpszReason *string) uint32 {
 	_lpszTypeName := win32.UTF16Ptr(lpszTypeName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDeleteClusterResourceTypeEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszTypeName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2979,8 +2979,8 @@ func DestroyClusterGroup(hGroup HGROUP) uint32 {
 }
 
 // DestroyClusterGroupEx calls CLUSAPI!DestroyClusterGroupEx.
-func DestroyClusterGroupEx(hGroup HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func DestroyClusterGroupEx(hGroup HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDestroyClusterGroupEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3026,8 +3026,8 @@ func EvictClusterNodeEx(hNode HNODE, dwTimeOut uint32, phrCleanupStatus *foundat
 }
 
 // EvictClusterNodeEx2 calls CLUSAPI!EvictClusterNodeEx2.
-func EvictClusterNodeEx2(hNode HNODE, dwTimeout uint32, phrCleanupStatus *foundation.HRESULT, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func EvictClusterNodeEx2(hNode HNODE, dwTimeout uint32, phrCleanupStatus *foundation.HRESULT, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procEvictClusterNodeEx2.Addr(), uintptr(hNode), uintptr(dwTimeout), uintptr(unsafe.Pointer(phrCleanupStatus)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3041,8 +3041,8 @@ func FailClusterResource(hResource HRESOURCE) uint32 {
 }
 
 // FailClusterResourceEx calls CLUSAPI!FailClusterResourceEx.
-func FailClusterResourceEx(hResource HRESOURCE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func FailClusterResourceEx(hResource HRESOURCE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procFailClusterResourceEx.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3350,8 +3350,8 @@ func GetNodeCloudTypeDW(ppszNodeName string, NodeCloudType *uint32) uint32 {
 // GetNodeClusterState calls CLUSAPI!GetNodeClusterState.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-getnodeclusterstate
 // Minimum OS: windowsserver2008.
-func GetNodeClusterState(lpszNodeName string, pdwClusterState *uint32) uint32 {
-	_lpszNodeName := win32.UTF16Ptr(lpszNodeName)
+func GetNodeClusterState(lpszNodeName *string, pdwClusterState *uint32) uint32 {
+	_lpszNodeName := win32.UTF16PtrOrNil(lpszNodeName)
 	r1, _, _ := syscall.SyscallN(procGetNodeClusterState.Addr(), uintptr(unsafe.Pointer(_lpszNodeName)), uintptr(unsafe.Pointer(pdwClusterState)))
 	return uint32(r1)
 }
@@ -3408,12 +3408,12 @@ func MoveClusterGroupEx(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint3
 }
 
 // MoveClusterGroupEx2 calls CLUSAPI!MoveClusterGroupEx2.
-func MoveClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+func MoveClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint32, lpInBuffer []byte, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procMoveClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwMoveFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3439,8 +3439,8 @@ func OfflineClusterGroupEx(hGroup HGROUP, dwOfflineFlags uint32, lpInBuffer []by
 }
 
 // OfflineClusterGroupEx2 calls CLUSAPI!OfflineClusterGroupEx2.
-func OfflineClusterGroupEx2(hGroup HGROUP, dwOfflineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func OfflineClusterGroupEx2(hGroup HGROUP, dwOfflineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procOfflineClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3466,12 +3466,12 @@ func OfflineClusterResourceEx(hResource HRESOURCE, dwOfflineFlags uint32, lpInBu
 }
 
 // OfflineClusterResourceEx2 calls CLUSAPI!OfflineClusterResourceEx2.
-func OfflineClusterResourceEx2(hResource HRESOURCE, dwOfflineFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+func OfflineClusterResourceEx2(hResource HRESOURCE, dwOfflineFlags uint32, lpInBuffer []byte, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procOfflineClusterResourceEx2.Addr(), uintptr(hResource), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3497,12 +3497,12 @@ func OnlineClusterGroupEx(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags u
 }
 
 // OnlineClusterGroupEx2 calls CLUSAPI!OnlineClusterGroupEx2.
-func OnlineClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+func OnlineClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procOnlineClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3528,12 +3528,12 @@ func OnlineClusterResourceEx(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuff
 }
 
 // OnlineClusterResourceEx2 calls CLUSAPI!OnlineClusterResourceEx2.
-func OnlineClusterResourceEx2(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+func OnlineClusterResourceEx2(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procOnlineClusterResourceEx2.Addr(), uintptr(hResource), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3541,8 +3541,8 @@ func OnlineClusterResourceEx2(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuf
 // OpenCluster calls CLUSAPI!OpenCluster.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-opencluster
 // Minimum OS: windowsserver2008.
-func OpenCluster(lpszClusterName string) (HCLUSTER, error) {
-	_lpszClusterName := win32.UTF16Ptr(lpszClusterName)
+func OpenCluster(lpszClusterName *string) (HCLUSTER, error) {
+	_lpszClusterName := win32.UTF16PtrOrNil(lpszClusterName)
 	r1, _, e1 := syscall.SyscallN(procOpenCluster.Addr(), uintptr(unsafe.Pointer(_lpszClusterName)))
 	if e1 != 0 {
 		return HCLUSTER(r1), e1
@@ -3570,8 +3570,8 @@ func OpenClusterCryptProviderEx(lpszResource string, lpszKeyname string, lpszPro
 // OpenClusterEx calls CLUSAPI!OpenClusterEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusterex
 // Minimum OS: windowsserver2008.
-func OpenClusterEx(lpszClusterName string, DesiredAccess uint32, GrantedAccess *uint32) (HCLUSTER, error) {
-	_lpszClusterName := win32.UTF16Ptr(lpszClusterName)
+func OpenClusterEx(lpszClusterName *string, DesiredAccess uint32, GrantedAccess *uint32) (HCLUSTER, error) {
+	_lpszClusterName := win32.UTF16PtrOrNil(lpszClusterName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterEx.Addr(), uintptr(unsafe.Pointer(_lpszClusterName)), uintptr(DesiredAccess), uintptr(unsafe.Pointer(GrantedAccess)))
 	if e1 != 0 {
 		return HCLUSTER(r1), e1
@@ -3594,8 +3594,8 @@ func OpenClusterGroup(hCluster HCLUSTER, lpszGroupName string) (HGROUP, error) {
 // OpenClusterGroupEx calls CLUSAPI!OpenClusterGroupEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclustergroupex
 // Minimum OS: windowsserver2008.
-func OpenClusterGroupEx(hCluster HCLUSTER, lpszGroupName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HGROUP, error) {
-	_lpszGroupName := win32.UTF16Ptr(lpszGroupName)
+func OpenClusterGroupEx(hCluster HCLUSTER, lpszGroupName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HGROUP, error) {
+	_lpszGroupName := win32.UTF16PtrOrNil(lpszGroupName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterGroupEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszGroupName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HGROUP(r1), e1
@@ -3630,8 +3630,8 @@ func OpenClusterNetInterface(hCluster HCLUSTER, lpszInterfaceName string) (HNETI
 // OpenClusterNetInterfaceEx calls CLUSAPI!OpenClusterNetInterfaceEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusternetinterfaceex
 // Minimum OS: windowsserver2008.
-func OpenClusterNetInterfaceEx(hCluster HCLUSTER, lpszInterfaceName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNETINTERFACE, error) {
-	_lpszInterfaceName := win32.UTF16Ptr(lpszInterfaceName)
+func OpenClusterNetInterfaceEx(hCluster HCLUSTER, lpszInterfaceName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNETINTERFACE, error) {
+	_lpszInterfaceName := win32.UTF16PtrOrNil(lpszInterfaceName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterNetInterfaceEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszInterfaceName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HNETINTERFACE(r1), e1
@@ -3654,8 +3654,8 @@ func OpenClusterNetwork(hCluster HCLUSTER, lpszNetworkName string) (HNETWORK, er
 // OpenClusterNetworkEx calls CLUSAPI!OpenClusterNetworkEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusternetworkex
 // Minimum OS: windowsserver2008.
-func OpenClusterNetworkEx(hCluster HCLUSTER, lpszNetworkName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNETWORK, error) {
-	_lpszNetworkName := win32.UTF16Ptr(lpszNetworkName)
+func OpenClusterNetworkEx(hCluster HCLUSTER, lpszNetworkName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNETWORK, error) {
+	_lpszNetworkName := win32.UTF16PtrOrNil(lpszNetworkName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterNetworkEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNetworkName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HNETWORK(r1), e1
@@ -3684,8 +3684,8 @@ func OpenClusterNodeById(hCluster HCLUSTER, nodeId uint32) HNODE {
 // OpenClusterNodeEx calls CLUSAPI!OpenClusterNodeEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusternodeex
 // Minimum OS: windowsserver2008.
-func OpenClusterNodeEx(hCluster HCLUSTER, lpszNodeName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNODE, error) {
-	_lpszNodeName := win32.UTF16Ptr(lpszNodeName)
+func OpenClusterNodeEx(hCluster HCLUSTER, lpszNodeName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNODE, error) {
+	_lpszNodeName := win32.UTF16PtrOrNil(lpszNodeName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterNodeEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNodeName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HNODE(r1), e1
@@ -3708,8 +3708,8 @@ func OpenClusterResource(hCluster HCLUSTER, lpszResourceName string) (HRESOURCE,
 // OpenClusterResourceEx calls CLUSAPI!OpenClusterResourceEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusterresourceex
 // Minimum OS: windowsserver2008.
-func OpenClusterResourceEx(hCluster HCLUSTER, lpszResourceName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HRESOURCE, error) {
-	_lpszResourceName := win32.UTF16Ptr(lpszResourceName)
+func OpenClusterResourceEx(hCluster HCLUSTER, lpszResourceName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HRESOURCE, error) {
+	_lpszResourceName := win32.UTF16PtrOrNil(lpszResourceName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterResourceEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HRESOURCE(r1), e1
@@ -3734,9 +3734,9 @@ func PauseClusterNodeEx(hNode HNODE, bDrainNode bool, dwPauseFlags uint32, hNode
 }
 
 // PauseClusterNodeEx2 calls CLUSAPI!PauseClusterNodeEx2.
-func PauseClusterNodeEx2(hNode HNODE, bDrainNode bool, dwPauseFlags uint32, hNodeDrainTarget HNODE, lpszReason string) uint32 {
+func PauseClusterNodeEx2(hNode HNODE, bDrainNode bool, dwPauseFlags uint32, hNodeDrainTarget HNODE, lpszReason *string) uint32 {
 	_bDrainNode := win32.Bool32(bDrainNode)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procPauseClusterNodeEx2.Addr(), uintptr(hNode), uintptr(_bDrainNode), uintptr(dwPauseFlags), uintptr(hNodeDrainTarget), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3798,8 +3798,8 @@ func RemoveClusterGroupDependency(hGroup HGROUP, hDependsOn HGROUP) uint32 {
 }
 
 // RemoveClusterGroupDependencyEx calls CLUSAPI!RemoveClusterGroupDependencyEx.
-func RemoveClusterGroupDependencyEx(hGroup HGROUP, hDependsOn HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterGroupDependencyEx(hGroup HGROUP, hDependsOn HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterGroupDependencyEx.Addr(), uintptr(hGroup), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3813,8 +3813,8 @@ func RemoveClusterGroupSetDependency(hGroupSet HGROUPSET, hDependsOn HGROUPSET) 
 }
 
 // RemoveClusterGroupSetDependencyEx calls CLUSAPI!RemoveClusterGroupSetDependencyEx.
-func RemoveClusterGroupSetDependencyEx(hGroupSet HGROUPSET, hDependsOn HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterGroupSetDependencyEx(hGroupSet HGROUPSET, hDependsOn HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterGroupSetDependencyEx.Addr(), uintptr(hGroupSet), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3828,8 +3828,8 @@ func RemoveClusterGroupToGroupSetDependency(hGroup HGROUP, hDependsOn HGROUPSET)
 }
 
 // RemoveClusterGroupToGroupSetDependencyEx calls CLUSAPI!RemoveClusterGroupToGroupSetDependencyEx.
-func RemoveClusterGroupToGroupSetDependencyEx(hGroup HGROUP, hDependsOn HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterGroupToGroupSetDependencyEx(hGroup HGROUP, hDependsOn HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterGroupToGroupSetDependencyEx.Addr(), uintptr(hGroup), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3850,8 +3850,8 @@ func RemoveClusterResourceDependency(hResource HRESOURCE, hDependsOn HRESOURCE) 
 }
 
 // RemoveClusterResourceDependencyEx calls CLUSAPI!RemoveClusterResourceDependencyEx.
-func RemoveClusterResourceDependencyEx(hResource HRESOURCE, hDependsOn HRESOURCE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterResourceDependencyEx(hResource HRESOURCE, hDependsOn HRESOURCE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterResourceDependencyEx.Addr(), uintptr(hResource), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3865,8 +3865,8 @@ func RemoveClusterResourceNode(hResource HRESOURCE, hNode HNODE) uint32 {
 }
 
 // RemoveClusterResourceNodeEx calls CLUSAPI!RemoveClusterResourceNodeEx.
-func RemoveClusterResourceNodeEx(hResource HRESOURCE, hNode HNODE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterResourceNodeEx(hResource HRESOURCE, hNode HNODE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterResourceNodeEx.Addr(), uintptr(hResource), uintptr(hNode), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4286,8 +4286,8 @@ func ResUtilGetLongProperty(plOutValue *int32, pValueStruct *CLUSPROP_LONG, lOld
 // ResUtilGetMultiSzProperty calls RESUTILS!ResUtilGetMultiSzProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetmultiszproperty
 // Minimum OS: windowsserver2008.
-func ResUtilGetMultiSzProperty(ppszOutValue *foundation.PWSTR, pcbOutValueSize *uint32, pValueStruct *CLUSPROP_SZ, pszOldValue string, cbOldValueSize uint32, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
-	_pszOldValue := win32.UTF16Ptr(pszOldValue)
+func ResUtilGetMultiSzProperty(ppszOutValue *foundation.PWSTR, pcbOutValueSize *uint32, pValueStruct *CLUSPROP_SZ, pszOldValue *string, cbOldValueSize uint32, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
+	_pszOldValue := win32.UTF16PtrOrNil(pszOldValue)
 	r1, _, _ := syscall.SyscallN(procResUtilGetMultiSzProperty.Addr(), uintptr(unsafe.Pointer(ppszOutValue)), uintptr(unsafe.Pointer(pcbOutValueSize)), uintptr(unsafe.Pointer(pValueStruct)), uintptr(unsafe.Pointer(_pszOldValue)), uintptr(cbOldValueSize), uintptr(unsafe.Pointer(ppPropertyList)), uintptr(unsafe.Pointer(pcbPropertyListSize)))
 	return uint32(r1)
 }
@@ -4480,8 +4480,8 @@ func ResUtilGetResourceNameDependencyEx(lpszResourceName string, lpszResourceTyp
 // ResUtilGetSzProperty calls RESUTILS!ResUtilGetSzProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetszproperty
 // Minimum OS: windowsserver2008.
-func ResUtilGetSzProperty(ppszOutValue *foundation.PWSTR, pValueStruct *CLUSPROP_SZ, pszOldValue string, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
-	_pszOldValue := win32.UTF16Ptr(pszOldValue)
+func ResUtilGetSzProperty(ppszOutValue *foundation.PWSTR, pValueStruct *CLUSPROP_SZ, pszOldValue *string, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
+	_pszOldValue := win32.UTF16PtrOrNil(pszOldValue)
 	r1, _, _ := syscall.SyscallN(procResUtilGetSzProperty.Addr(), uintptr(unsafe.Pointer(ppszOutValue)), uintptr(unsafe.Pointer(pValueStruct)), uintptr(unsafe.Pointer(_pszOldValue)), uintptr(unsafe.Pointer(ppPropertyList)), uintptr(unsafe.Pointer(pcbPropertyListSize)))
 	return uint32(r1)
 }
@@ -4854,8 +4854,8 @@ func RestartClusterResource(hResource HRESOURCE, dwFlags uint32) uint32 {
 }
 
 // RestartClusterResourceEx calls CLUSAPI!RestartClusterResourceEx.
-func RestartClusterResourceEx(hResource HRESOURCE, dwFlags uint32, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RestartClusterResourceEx(hResource HRESOURCE, dwFlags uint32, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRestartClusterResourceEx.Addr(), uintptr(hResource), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4863,10 +4863,10 @@ func RestartClusterResourceEx(hResource HRESOURCE, dwFlags uint32, lpszReason st
 // RestoreClusterDatabase calls CLUSAPI!RestoreClusterDatabase.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-restoreclusterdatabase
 // Minimum OS: windowsserver2003.
-func RestoreClusterDatabase(lpszPathName string, bForce bool, lpszQuorumDriveLetter string) uint32 {
+func RestoreClusterDatabase(lpszPathName string, bForce bool, lpszQuorumDriveLetter *string) uint32 {
 	_lpszPathName := win32.UTF16Ptr(lpszPathName)
 	_bForce := win32.Bool32(bForce)
-	_lpszQuorumDriveLetter := win32.UTF16Ptr(lpszQuorumDriveLetter)
+	_lpszQuorumDriveLetter := win32.UTF16PtrOrNil(lpszQuorumDriveLetter)
 	r1, _, _ := syscall.SyscallN(procRestoreClusterDatabase.Addr(), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(_bForce), uintptr(unsafe.Pointer(_lpszQuorumDriveLetter)))
 	return uint32(r1)
 }
@@ -4888,8 +4888,8 @@ func ResumeClusterNodeEx(hNode HNODE, eResumeFailbackType CLUSTER_NODE_RESUME_FA
 }
 
 // ResumeClusterNodeEx2 calls CLUSAPI!ResumeClusterNodeEx2.
-func ResumeClusterNodeEx2(hNode HNODE, eResumeFailbackType CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved uint32, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ResumeClusterNodeEx2(hNode HNODE, eResumeFailbackType CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved uint32, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procResumeClusterNodeEx2.Addr(), uintptr(hNode), uintptr(eResumeFailbackType), uintptr(dwResumeFlagsReserved), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4912,9 +4912,9 @@ func SetClusterGroupName(hGroup HGROUP, lpszGroupName string) uint32 {
 }
 
 // SetClusterGroupNameEx calls CLUSAPI!SetClusterGroupNameEx.
-func SetClusterGroupNameEx(hGroup HGROUP, lpszGroupName string, lpszReason string) uint32 {
+func SetClusterGroupNameEx(hGroup HGROUP, lpszGroupName string, lpszReason *string) uint32 {
 	_lpszGroupName := win32.UTF16Ptr(lpszGroupName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterGroupNameEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszGroupName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4932,12 +4932,12 @@ func SetClusterGroupNodeList(hGroup HGROUP, NodeList []HNODE) uint32 {
 }
 
 // SetClusterGroupNodeListEx calls CLUSAPI!SetClusterGroupNodeListEx.
-func SetClusterGroupNodeListEx(hGroup HGROUP, NodeList []HNODE, lpszReason string) uint32 {
+func SetClusterGroupNodeListEx(hGroup HGROUP, NodeList []HNODE, lpszReason *string) uint32 {
 	var _NodeList *HNODE
 	if len(NodeList) > 0 {
 		_NodeList = &NodeList[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterGroupNodeListEx.Addr(), uintptr(hGroup), uintptr(len(NodeList)), uintptr(unsafe.Pointer(_NodeList)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4952,9 +4952,9 @@ func SetClusterGroupSetDependencyExpression(hGroupSet HGROUPSET, lpszDependencyE
 }
 
 // SetClusterGroupSetDependencyExpressionEx calls CLUSAPI!SetClusterGroupSetDependencyExpressionEx.
-func SetClusterGroupSetDependencyExpressionEx(hGroupSet HGROUPSET, lpszDependencyExpression string, lpszReason string) uint32 {
+func SetClusterGroupSetDependencyExpressionEx(hGroupSet HGROUPSET, lpszDependencyExpression string, lpszReason *string) uint32 {
 	_lpszDependencyExpression := win32.UTF16Ptr(lpszDependencyExpression)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterGroupSetDependencyExpressionEx.Addr(), uintptr(hGroupSet), uintptr(unsafe.Pointer(_lpszDependencyExpression)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4969,9 +4969,9 @@ func SetClusterName(hCluster HCLUSTER, lpszNewClusterName string) uint32 {
 }
 
 // SetClusterNameEx calls CLUSAPI!SetClusterNameEx.
-func SetClusterNameEx(hCluster HCLUSTER, lpszNewClusterName string, lpszReason string) uint32 {
+func SetClusterNameEx(hCluster HCLUSTER, lpszNewClusterName string, lpszReason *string) uint32 {
 	_lpszNewClusterName := win32.UTF16Ptr(lpszNewClusterName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterNameEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNewClusterName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4986,9 +4986,9 @@ func SetClusterNetworkName(hNetwork HNETWORK, lpszName string) uint32 {
 }
 
 // SetClusterNetworkNameEx calls CLUSAPI!SetClusterNetworkNameEx.
-func SetClusterNetworkNameEx(hNetwork HNETWORK, lpszName string, lpszReason string) uint32 {
+func SetClusterNetworkNameEx(hNetwork HNETWORK, lpszName string, lpszReason *string) uint32 {
 	_lpszName := win32.UTF16Ptr(lpszName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterNetworkNameEx.Addr(), uintptr(hNetwork), uintptr(unsafe.Pointer(_lpszName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -5008,16 +5008,16 @@ func SetClusterNetworkPriorityOrder(hCluster HCLUSTER, NetworkList []HNETWORK) u
 // SetClusterQuorumResource calls CLUSAPI!SetClusterQuorumResource.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-setclusterquorumresource
 // Minimum OS: windowsserver2008.
-func SetClusterQuorumResource(hResource HRESOURCE, lpszDeviceName string, dwMaxQuoLogSize uint32) uint32 {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+func SetClusterQuorumResource(hResource HRESOURCE, lpszDeviceName *string, dwMaxQuoLogSize uint32) uint32 {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
 	r1, _, _ := syscall.SyscallN(procSetClusterQuorumResource.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(dwMaxQuoLogSize))
 	return uint32(r1)
 }
 
 // SetClusterQuorumResourceEx calls CLUSAPI!SetClusterQuorumResourceEx.
-func SetClusterQuorumResourceEx(hResource HRESOURCE, lpszDeviceName string, dwMaxQuorumLogSize uint32, lpszReason string) uint32 {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func SetClusterQuorumResourceEx(hResource HRESOURCE, lpszDeviceName *string, dwMaxQuorumLogSize uint32, lpszReason *string) uint32 {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterQuorumResourceEx.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(dwMaxQuorumLogSize), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -5041,9 +5041,9 @@ func SetClusterResourceName(hResource HRESOURCE, lpszResourceName string) uint32
 }
 
 // SetClusterResourceNameEx calls CLUSAPI!SetClusterResourceNameEx.
-func SetClusterResourceNameEx(hResource HRESOURCE, lpszResourceName string, lpszReason string) uint32 {
+func SetClusterResourceNameEx(hResource HRESOURCE, lpszResourceName string, lpszReason *string) uint32 {
 	_lpszResourceName := win32.UTF16Ptr(lpszResourceName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterResourceNameEx.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszResourceName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -5068,9 +5068,9 @@ func SetGroupDependencyExpression(hGroup HGROUP, lpszDependencyExpression string
 }
 
 // SetGroupDependencyExpressionEx calls CLUSAPI!SetGroupDependencyExpressionEx.
-func SetGroupDependencyExpressionEx(hGroup HGROUP, lpszDependencyExpression string, lpszReason string) uint32 {
+func SetGroupDependencyExpressionEx(hGroup HGROUP, lpszDependencyExpression string, lpszReason *string) uint32 {
 	_lpszDependencyExpression := win32.UTF16Ptr(lpszDependencyExpression)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetGroupDependencyExpressionEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszDependencyExpression)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }

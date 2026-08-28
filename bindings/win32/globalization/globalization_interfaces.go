@@ -623,8 +623,8 @@ func (self *IMultiLanguage) ConvertStringToUnicode(pdwMode *uint32, dwEncoding u
 }
 
 // ConvertStringFromUnicode dispatches through IMultiLanguage's vtable slot 11.
-func (self *IMultiLanguage) ConvertStringFromUnicode(pdwMode *uint32, dwEncoding uint32, pSrcStr string, pcSrcSize *uint32, pDstStr foundation.PSTR, pcDstSize *uint32) error {
-	_pSrcStr := win32.UTF16Ptr(pSrcStr)
+func (self *IMultiLanguage) ConvertStringFromUnicode(pdwMode *uint32, dwEncoding uint32, pSrcStr *string, pcSrcSize *uint32, pDstStr foundation.PSTR, pcDstSize *uint32) error {
+	_pSrcStr := win32.UTF16PtrOrNil(pSrcStr)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(_pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -722,8 +722,8 @@ func (self *IMultiLanguage2) ConvertStringToUnicode(pdwMode *uint32, dwEncoding 
 }
 
 // ConvertStringFromUnicode dispatches through IMultiLanguage2's vtable slot 11.
-func (self *IMultiLanguage2) ConvertStringFromUnicode(pdwMode *uint32, dwEncoding uint32, pSrcStr string, pcSrcSize *uint32, pDstStr foundation.PSTR, pcDstSize *uint32) error {
-	_pSrcStr := win32.UTF16Ptr(pSrcStr)
+func (self *IMultiLanguage2) ConvertStringFromUnicode(pdwMode *uint32, dwEncoding uint32, pSrcStr *string, pcSrcSize *uint32, pDstStr foundation.PSTR, pcDstSize *uint32) error {
+	_pSrcStr := win32.UTF16PtrOrNil(pSrcStr)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(_pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -765,23 +765,23 @@ func (self *IMultiLanguage2) CreateConvertCharset(uiSrcCodePage uint32, uiDstCod
 }
 
 // ConvertStringInIStream dispatches through IMultiLanguage2's vtable slot 18.
-func (self *IMultiLanguage2) ConvertStringInIStream(pdwMode *uint32, dwFlag uint32, lpFallBack string, dwSrcEncoding uint32, dwDstEncoding uint32, pstmIn *systemcom.IStream, pstmOut *systemcom.IStream) error {
-	_lpFallBack := win32.UTF16Ptr(lpFallBack)
+func (self *IMultiLanguage2) ConvertStringInIStream(pdwMode *uint32, dwFlag uint32, lpFallBack *string, dwSrcEncoding uint32, dwDstEncoding uint32, pstmIn *systemcom.IStream, pstmOut *systemcom.IStream) error {
+	_lpFallBack := win32.UTF16PtrOrNil(lpFallBack)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwFlag), uintptr(unsafe.Pointer(_lpFallBack)), uintptr(dwSrcEncoding), uintptr(dwDstEncoding), uintptr(unsafe.Pointer(pstmIn)), uintptr(unsafe.Pointer(pstmOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringToUnicodeEx dispatches through IMultiLanguage2's vtable slot 19.
-func (self *IMultiLanguage2) ConvertStringToUnicodeEx(pdwMode *uint32, dwEncoding uint32, pSrcStr foundation.PSTR, pcSrcSize *uint32, pDstStr foundation.PWSTR, pcDstSize *uint32, dwFlag uint32, lpFallBack string) error {
-	_lpFallBack := win32.UTF16Ptr(lpFallBack)
+func (self *IMultiLanguage2) ConvertStringToUnicodeEx(pdwMode *uint32, dwEncoding uint32, pSrcStr foundation.PSTR, pcSrcSize *uint32, pDstStr foundation.PWSTR, pcDstSize *uint32, dwFlag uint32, lpFallBack *string) error {
+	_lpFallBack := win32.UTF16PtrOrNil(lpFallBack)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)), uintptr(dwFlag), uintptr(unsafe.Pointer(_lpFallBack)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertStringFromUnicodeEx dispatches through IMultiLanguage2's vtable slot 20.
-func (self *IMultiLanguage2) ConvertStringFromUnicodeEx(pdwMode *uint32, dwEncoding uint32, pSrcStr string, pcSrcSize *uint32, pDstStr foundation.PSTR, pcDstSize *uint32, dwFlag uint32, lpFallBack string) error {
+func (self *IMultiLanguage2) ConvertStringFromUnicodeEx(pdwMode *uint32, dwEncoding uint32, pSrcStr string, pcSrcSize *uint32, pDstStr foundation.PSTR, pcDstSize *uint32, dwFlag uint32, lpFallBack *string) error {
 	_pSrcStr := win32.UTF16Ptr(pSrcStr)
-	_lpFallBack := win32.UTF16Ptr(lpFallBack)
+	_lpFallBack := win32.UTF16PtrOrNil(lpFallBack)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMode)), uintptr(dwEncoding), uintptr(unsafe.Pointer(_pSrcStr)), uintptr(unsafe.Pointer(pcSrcSize)), uintptr(unsafe.Pointer(pDstStr)), uintptr(unsafe.Pointer(pcDstSize)), uintptr(dwFlag), uintptr(unsafe.Pointer(_lpFallBack)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -849,24 +849,24 @@ type IMultiLanguage3 struct {
 var IID_IMultiLanguage3 = win32.GUID{Data1: 0x4e5868ab, Data2: 0xb157, Data3: 0x4623, Data4: [8]byte{0x9a, 0xcc, 0x6a, 0x1d, 0x9c, 0xae, 0xbe, 0x04}}
 
 // DetectOutboundCodePage dispatches through IMultiLanguage3's vtable slot 30.
-func (self *IMultiLanguage3) DetectOutboundCodePage(dwFlags uint32, lpWideCharStr string, cchWideChar uint32, puiPreferredCodePages []uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar string) error {
+func (self *IMultiLanguage3) DetectOutboundCodePage(dwFlags uint32, lpWideCharStr string, cchWideChar uint32, puiPreferredCodePages []uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar *string) error {
 	_lpWideCharStr := win32.UTF16Ptr(lpWideCharStr)
 	var _puiPreferredCodePages *uint32
 	if len(puiPreferredCodePages) > 0 {
 		_puiPreferredCodePages = &puiPreferredCodePages[0]
 	}
-	_lpSpecialChar := win32.UTF16Ptr(lpSpecialChar)
+	_lpSpecialChar := win32.UTF16PtrOrNil(lpSpecialChar)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpWideCharStr)), uintptr(cchWideChar), uintptr(unsafe.Pointer(_puiPreferredCodePages)), uintptr(len(puiPreferredCodePages)), uintptr(unsafe.Pointer(puiDetectedCodePages)), uintptr(unsafe.Pointer(pnDetectedCodePages)), uintptr(unsafe.Pointer(_lpSpecialChar)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DetectOutboundCodePageInIStream dispatches through IMultiLanguage3's vtable slot 31.
-func (self *IMultiLanguage3) DetectOutboundCodePageInIStream(dwFlags uint32, pStrIn *systemcom.IStream, puiPreferredCodePages []uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar string) error {
+func (self *IMultiLanguage3) DetectOutboundCodePageInIStream(dwFlags uint32, pStrIn *systemcom.IStream, puiPreferredCodePages []uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar *string) error {
 	var _puiPreferredCodePages *uint32
 	if len(puiPreferredCodePages) > 0 {
 		_puiPreferredCodePages = &puiPreferredCodePages[0]
 	}
-	_lpSpecialChar := win32.UTF16Ptr(lpSpecialChar)
+	_lpSpecialChar := win32.UTF16PtrOrNil(lpSpecialChar)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pStrIn)), uintptr(unsafe.Pointer(_puiPreferredCodePages)), uintptr(len(puiPreferredCodePages)), uintptr(unsafe.Pointer(puiDetectedCodePages)), uintptr(unsafe.Pointer(pnDetectedCodePages)), uintptr(unsafe.Pointer(_lpSpecialChar)))
 	return win32.ErrIfFailed(int32(r1))
 }

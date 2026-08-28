@@ -1419,8 +1419,8 @@ func MixerSetControlDetails(hmxobj HMIXEROBJ, pmxcd *MIXERCONTROLDETAILS, fdwDet
 }
 
 // PlaySound calls WINMM!PlaySoundW.
-func PlaySound(pszSound string, hmod foundation.HMODULE, fdwSound SND_FLAGS) bool {
-	_pszSound := win32.UTF16Ptr(pszSound)
+func PlaySound(pszSound *string, hmod foundation.HMODULE, fdwSound SND_FLAGS) bool {
+	_pszSound := win32.UTF16PtrOrNil(pszSound)
 	r1, _, _ := syscall.SyscallN(procPlaySound.Addr(), uintptr(unsafe.Pointer(_pszSound)), uintptr(hmod), uintptr(fdwSound))
 	return r1 != 0
 }
@@ -1432,8 +1432,8 @@ func PlaySoundA(pszSound foundation.PSTR, hmod foundation.HMODULE, fdwSound SND_
 }
 
 // SndPlaySound calls WINMM!sndPlaySoundW.
-func SndPlaySound(pszSound string, fuSound uint32) bool {
-	_pszSound := win32.UTF16Ptr(pszSound)
+func SndPlaySound(pszSound *string, fuSound uint32) bool {
+	_pszSound := win32.UTF16PtrOrNil(pszSound)
 	r1, _, _ := syscall.SyscallN(procSndPlaySound.Addr(), uintptr(unsafe.Pointer(_pszSound)), uintptr(fuSound))
 	return r1 != 0
 }

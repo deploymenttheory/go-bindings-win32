@@ -3758,8 +3758,8 @@ func (self *ID2D1SvgDocument) Deserialize(inputXmlStream *systemcom.IStream, sub
 }
 
 // CreatePaint dispatches through ID2D1SvgDocument's vtable slot 11.
-func (self *ID2D1SvgDocument) CreatePaint(paintType D2D1_SVG_PAINT_TYPE, color *graphicsdirect2dcommon.D2D1_COLOR_F, id string, paint **ID2D1SvgPaint) error {
-	_id := win32.UTF16Ptr(id)
+func (self *ID2D1SvgDocument) CreatePaint(paintType D2D1_SVG_PAINT_TYPE, color *graphicsdirect2dcommon.D2D1_COLOR_F, id *string, paint **ID2D1SvgPaint) error {
+	_id := win32.UTF16PtrOrNil(id)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(paintType), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(paint)))
 	return win32.ErrIfFailed(int32(r1))
 }

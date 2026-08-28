@@ -143,6 +143,7 @@ func runBindings(args []string) error {
 	verbose := flags.Bool("v", false, "print diagnostics")
 	writeBaseline := flags.String("diagnostics", "", "write the diagnostics baseline to this path")
 	checkBaseline := flags.String("diagnostics-baseline", "", "fail if any diagnostic is not in this committed baseline")
+	coveragePath := flags.String("coverage", "", "write the coverage report (markdown) to this path")
 	if err := flags.Parse(args); err != nil {
 		return err
 	}
@@ -171,6 +172,12 @@ func runBindings(args []string) error {
 	}
 	fmt.Printf("emitted %d packages → %s (%d diagnostics)\n", written, *outDir, len(diags))
 
+	if *coveragePath != "" {
+		if err := writeCoverage(*coveragePath, registryWinmdVersion(registry), generator.Coverage(), diags); err != nil {
+			return err
+		}
+		fmt.Printf("wrote coverage report → %s\n", *coveragePath)
+	}
 	if *writeBaseline != "" {
 		if err := diagnostics.WriteBaseline(*writeBaseline, diags); err != nil {
 			return err
@@ -192,6 +199,16 @@ func runBindings(args []string) error {
 		fmt.Println("diagnostics within baseline")
 	}
 	return nil
+}
+
+// registryWinmdVersion returns the winmd version recorded in the loaded IR.
+func registryWinmdVersion(registry *pipeline.Registry) string {
+	for _, meta := range registry.Namespaces {
+		if meta.WinmdVersion != "" {
+			return meta.WinmdVersion
+		}
+	}
+	return "unknown"
 }
 
 // modulePath is this module's import path root.

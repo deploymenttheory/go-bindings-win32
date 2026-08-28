@@ -88,6 +88,20 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 	return functions, dlls, procTable
 }
 
+// functionCandidates counts the functions buildFunctionModels considers:
+// amd64-compatible, one per exported name.
+func (g *Generator) functionCandidates(meta *win32meta.NamespaceMeta) int {
+	seen := map[string]bool{}
+	for i := range meta.Functions {
+		function := &meta.Functions[i]
+		if !amd64Compatible(function.Availability.Architectures) {
+			continue
+		}
+		seen[naming.Export(function.Name)] = true
+	}
+	return len(seen)
+}
+
 // splitIdents extracts the Go identifiers from a type expression
 // ("*security.SECURITY_ATTRIBUTES" → ["security", "SECURITY_ATTRIBUTES"]),
 // used to detect parameter names that would shadow a type referenced in the

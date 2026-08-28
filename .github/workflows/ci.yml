@@ -67,8 +67,8 @@ jobs:
 
       # One command clears and re-emits the single idiomatic-shaped bindings
       # tree, and enforces the diagnostics ratchet.
-      - name: Regenerate bindings with ratchet
-        run: go run ./cmd/generate bindings --diagnostics-baseline metadata/diagnostics-baseline.json
+      - name: Regenerate bindings with ratchet and the coverage report
+        run: go run ./cmd/generate bindings --diagnostics-baseline metadata/diagnostics-baseline.json --coverage docs/COVERAGE.md
 
       - name: Regenerate the ABI acceptance test
         run: go run ./cmd/generate abitest
@@ -76,5 +76,5 @@ jobs:
       - name: Generated output must match the committed tree
         shell: bash
         run: |
-          git add -N bindings acceptance
-          git diff --exit-code --stat -- bindings acceptance
+          git add -N bindings acceptance docs/COVERAGE.md
+          git diff --exit-code --stat -- bindings acceptance docs/COVERAGE.md

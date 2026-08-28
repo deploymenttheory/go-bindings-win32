@@ -42,6 +42,10 @@ type Generator struct {
 	// entries (informational.go) matched an emitted API this run.
 	informationalMatched map[string]bool
 
+	// coverage counts emitted vs. declared constructs per namespace (the
+	// coverage report's input); see coverage.go.
+	coverage map[string]*NamespaceCoverage
+
 	// Diagnostics collects all degradations and skips (ratchet input).
 	Diagnostics []string
 }
@@ -66,9 +70,10 @@ func New(registry *pipeline.Registry, modulePath, outDir string) *Generator {
 // generated packages must always compile). Returns the package count.
 func (g *Generator) EmitAll(filter map[string]bool) (int, error) {
 	g.computeSkippedTypes()
-	// ABI records collected by the pre-pass may include structs the real
-	// pass will skip; keep only real-pass records.
+	// ABI records and coverage counted by the pre-pass may include structs
+	// the real pass will skip; keep only real-pass records.
 	g.abiRecords = map[string]ABIRecord{}
+	g.coverage = map[string]*NamespaceCoverage{}
 	g.writtenFiles = map[string]bool{}
 	emitted := map[string]bool{}
 	pending := make([]string, 0, len(g.registry.Namespaces))
@@ -253,7 +258,13 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 
 	structImports := typemap.ImportSet{}
 	var structBody strings.Builder
+	coverage := g.coverageOf(meta.Namespace)
+	coverage.Structs = len(meta.Structs)
+	coverage.StructsEmitted = 0
 	for _, model := range g.buildStructModels(meta, structImports) {
+		if isTopLevelStruct(meta, model.TypeName) {
+			coverage.StructsEmitted++
+		}
 		if err := renderInto(&structBody, render.Struct, model); err != nil {
 			return err
 		}
@@ -276,7 +287,16 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	// COM interfaces file.
 	interfaceImports := typemap.ImportSet{}
 	var interfaceBody strings.Builder
+	coverage.Methods, coverage.MethodsEmitted = 0, 0
+	for name := range meta.Interfaces {
+		coverage.Methods += len(meta.Interfaces[name].Methods)
+	}
 	for _, model := range g.buildInterfaceModels(meta, interfaceImports) {
+		if model.AliasOf != "" {
+			// The runtime owns the root's methods; they are all available.
+			coverage.MethodsEmitted += len(meta.Interfaces[model.TypeName].Methods)
+		}
+		coverage.MethodsEmitted += len(model.Methods)
 		if err := renderInto(&interfaceBody, render.Interface, model); err != nil {
 			return err
 		}
@@ -300,6 +320,8 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	// Functions file: DLL/proc declarations plus wrappers.
 	funcImports := typemap.ImportSet{}
 	functions, dlls, procTable := g.buildFunctionModels(meta, funcImports)
+	coverage.Functions = g.functionCandidates(meta)
+	coverage.FunctionsEmitted = len(functions)
 	var funcBody strings.Builder
 	if len(dlls) > 0 {
 		block, err := render.DLL(dlls)
@@ -328,6 +350,12 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	// Claimed last so a closer never shadows a type or function.
 	handleImports := typemap.ImportSet{}
 	handleBody := g.buildHandleClosers(meta, handleImports)
+	coverage.Closers, coverage.ClosersEmitted = 0, strings.Count(handleBody, "\nfunc Close")
+	for name := range meta.Typedefs {
+		if meta.Typedefs[name].FreeFunc != "" {
+			coverage.Closers++
+		}
+	}
 	if err := g.writeFile(packageDir, packageName+"_handles.go", packageName, handleImports, handleBody); err != nil {
 		return err
 	}
@@ -492,4 +520,15 @@ func (g *Generator) unclaimName(name string) {
 // diag records one diagnostic.
 func (g *Generator) diag(format string, args ...any) {
 	g.Diagnostics = append(g.Diagnostics, fmt.Sprintf(format, args...))
+}
+
+// isTopLevelStruct reports whether an emitted struct model is one of the
+// namespace's own structs (as opposed to a flattened anonymous nested type).
+func isTopLevelStruct(meta *win32meta.NamespaceMeta, typeName string) bool {
+	for name := range meta.Structs {
+		if naming.Export(name) == typeName {
+			return true
+		}
+	}
+	return false
 }

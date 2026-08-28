@@ -61,7 +61,7 @@ jobs:
       # baseline (reviewed via this PR).
       - name: Regenerate bindings and baseline
         if: steps.fetch.outputs.updated == 'true'
-        run: go run ./cmd/generate bindings --diagnostics metadata/diagnostics-baseline.json
+        run: go run ./cmd/generate bindings --diagnostics metadata/diagnostics-baseline.json --coverage docs/COVERAGE.md
 
       - name: Regenerate the ABI acceptance test
         if: steps.fetch.outputs.updated == 'true'
@@ -84,6 +84,7 @@ jobs:
           add-paths: |
             metadata/winmd/
             metadata/diagnostics-baseline.json
+            docs/COVERAGE.md
             bindings/
             acceptance/abi/
           delete-branch: true

@@ -107,7 +107,7 @@ jobs:
           go test ./internal/... ./bindings/runtime/... ./acceptance/...
 
       - name: Upload the ${{ matrix.arch }} emission
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: regenerated-${{ matrix.arch }}
           if-no-files-found: error

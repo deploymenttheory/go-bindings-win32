@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.3.1...v0.4.0) (2026-08-28)
+
+
+### Features
+
+* **codegen:** [Optional] input strings become *string (nil passes NULL) ([9644899](https://github.com/deploymenttheory/go-bindings-win32/commit/9644899575c8ea15bdb72030926c10ffd5cdea1b))
+* **codegen:** dispatch floats, by-value composites and struct returns via win32.Call ([c106e23](https://github.com/deploymenttheory/go-bindings-win32/commit/c106e23cd75bca9c1ffa8f81bba7b2a4d83e81c9))
+* **codegen:** emit [Constant] header inlines instead of FORCEINLINE dispatch ([a568505](https://github.com/deploymenttheory/go-bindings-win32/commit/a5685054049454bde5ab13a06addcedd28e50ac4))
+* **codegen:** make Close&lt;Handle&gt; a no-op for zero and invalid sentinels ([e158828](https://github.com/deploymenttheory/go-bindings-win32/commit/e158828fffd82e33dc3c3450723a99185420af81))
+* **codegen:** marshal native C bool parameters and returns ([ec11553](https://github.com/deploymenttheory/go-bindings-win32/commit/ec11553f0fc5645600ab2a5817ca33ebe53c2289))
+* **codegen:** struct returns — hidden result pointer for COM, r1 for flat ([e869f3a](https://github.com/deploymenttheory/go-bindings-win32/commit/e869f3a040edc9a5662dc2b2c77d23e9e3b83ab3))
+* **com:** one IUnknown type plus QueryInterface[T] and Cast[T] helpers ([ea1b463](https://github.com/deploymenttheory/go-bindings-win32/commit/ea1b46347f2f1c6f604b639cf45db1075de7ec80))
+* **generate:** coverage report (docs/COVERAGE.md) from the emitting run ([de057f0](https://github.com/deploymenttheory/go-bindings-win32/commit/de057f0ba4fa43a6acfe7bd779e0864e63e7e81b))
+* register-aware calls, full ABI gate, and review-driven fixes ([f046700](https://github.com/deploymenttheory/go-bindings-win32/commit/f04670053b003b7be6d4b4717c48da5393daaed7))
+* **runtime:** register-aware Call with per-arch assembly trampolines ([c080289](https://github.com/deploymenttheory/go-bindings-win32/commit/c080289ad05391f27556f3ce61f23618ad632fd4))
+* **runtime:** typed ProcError and per-package Procs availability-probe table ([e3d2c10](https://github.com/deploymenttheory/go-bindings-win32/commit/e3d2c106126b490972f13ded87530c6f3b806b42))
+
 ## [0.3.1](https://github.com/deploymenttheory/go-bindings-win32/compare/v0.3.0...v0.3.1) (2026-08-14)
 
 

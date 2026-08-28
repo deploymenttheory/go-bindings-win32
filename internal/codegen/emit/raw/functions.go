@@ -34,6 +34,13 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 			continue
 		}
 		seen[rawName] = true
+		if !IsLoadableModule(function.DLL) {
+			// No export to dispatch to: emit the [Constant] inline (or skip).
+			if model, ok := g.buildInlineFunction(meta, function, rawName, imports); ok {
+				functions = append(functions, model)
+			}
+			continue
+		}
 		model, ok := g.buildFunction(meta, function, rawName, imports)
 		if !ok {
 			continue
@@ -259,21 +266,9 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		return view.FunctionModel{}, false
 	}
 
-	// Choose the exported name: drop a trailing -W when the bare name is free.
-	goName := rawName
-	if function.UnsuffixedName != "" {
-		candidate := naming.Export(function.UnsuffixedName)
-		if g.claimName(candidate) {
-			goName = candidate
-		} else {
-			g.diag("function %s: bare name %s taken, keeping %s", meta.Namespace, candidate, rawName)
-		}
-	}
-	if goName == rawName {
-		if !g.claimName(goName) {
-			g.diag("function %s: name already used in package %s", function.Name, meta.Namespace)
-			return view.FunctionModel{}, false
-		}
+	goName, ok := g.claimFunctionName(meta, function, rawName)
+	if !ok {
+		return view.FunctionModel{}, false
 	}
 	model.GoName = goName
 	model.ProcVar = "proc" + goName
@@ -293,6 +288,23 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 			"The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.")
 	}
 	return model, true
+}
+
+// claimFunctionName chooses and claims the exported name: a trailing -W is
+// dropped when the bare name is free; otherwise the raw name must be free.
+func (g *Generator) claimFunctionName(meta *win32meta.NamespaceMeta, function *win32meta.Function, rawName string) (string, bool) {
+	if function.UnsuffixedName != "" {
+		candidate := naming.Export(function.UnsuffixedName)
+		if g.claimName(candidate) {
+			return candidate, true
+		}
+		g.diag("function %s: bare name %s taken, keeping %s", meta.Namespace, candidate, rawName)
+	}
+	if !g.claimName(rawName) {
+		g.diag("function %s: name already used in package %s", function.Name, meta.Namespace)
+		return "", false
+	}
+	return rawName, true
 }
 
 // shapeParam maps one non-slice, non-retval parameter to its idiomatic Go
@@ -482,6 +494,12 @@ func returnConversion(resolved typemap.Resolved) string {
 // functionComments assembles the doc comment lines.
 func functionComments(function *win32meta.Function, goName string) []string {
 	lines := []string{fmt.Sprintf("%s calls %s!%s.", goName, strings.TrimSuffix(function.DLL, ".dll"), exportOf(function))}
+	return append(lines, availabilityComments(function)...)
+}
+
+// availabilityComments renders the doc link and minimum-OS lines.
+func availabilityComments(function *win32meta.Function) []string {
+	var lines []string
 	if function.Availability.DocURL != "" {
 		lines = append(lines, function.Availability.DocURL)
 	}

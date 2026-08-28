@@ -13,12 +13,10 @@ import (
 )
 
 var (
-	modFORCEINLINE = win32.NewDLL("FORCEINLINE")
-	modTEST        = win32.NewDLL("TEST.dll")
+	modTEST = win32.NewDLL("TEST.dll")
 )
 
 var (
-	procGetCurrentThing = modFORCEINLINE.NewProc("GetCurrentThing")
 	procBoolIn          = modTEST.NewProc("BoolIn")
 	procByteBuffer      = modTEST.NewProc("ByteBuffer")
 	procCallbackParam   = modTEST.NewProc("CallbackParam")
@@ -91,10 +89,9 @@ func FreeTest(h HLOCALTEST) {
 	syscall.SyscallN(procFreeTest.Addr(), uintptr(h))
 }
 
-// GetCurrentThing calls FORCEINLINE!GetCurrentThing.
-func GetCurrentThing() foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procGetCurrentThing.Addr())
-	return foundation.HANDLE(r1)
+// GetCurrentThingToken is a header inline, not a DLL export: it evaluates to the constant -4.
+func GetCurrentThingToken() foundation.HANDLE {
+	return ^foundation.HANDLE(3)
 }
 
 // HandleOpen calls TEST!HandleOpen.
@@ -110,6 +107,11 @@ func HandleOpen() (foundation.HANDLE, error) {
 // InOutString calls TEST!InOutString.
 func InOutString(buffer foundation.PWSTR) {
 	syscall.SyscallN(procInOutString.Addr(), uintptr(unsafe.Pointer(buffer)))
+}
+
+// InlineInt is a header inline, not a DLL export: it evaluates to the constant -7.
+func InlineInt() int32 {
+	return int32(-7)
 }
 
 // OptionalStringW calls TEST!OptionalStringW.

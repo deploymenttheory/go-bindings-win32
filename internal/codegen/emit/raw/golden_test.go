@@ -188,6 +188,11 @@ func withUnsuffixed(f win32meta.Function, bare string) win32meta.Function {
 	return f
 }
 
+func withConstant(f win32meta.Function, value string) win32meta.Function {
+	f.Constant = value
+	return f
+}
+
 func withArch(f win32meta.Function, arches ...string) win32meta.Function {
 	f.Availability.Architectures = arches
 	return f
@@ -312,6 +317,8 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 			function("ComOut", testDLL, hresultType(), param("riid", guidPtrType(), in), param("ppv", voidDoublePtrType(), comOutPtr)),
 			function("RiidPair", testDLL, hresultType(), param("riid", guidPtrType(), in), param("ppv", voidDoublePtrType(), out)),
 			function("GetCurrentThing", "FORCEINLINE", handleType()),
+			withConstant(function("GetCurrentThingToken", "FORCEINLINE", handleType()), "-4"),
+			withConstant(function("InlineInt", "FORCEINLINE", native("Int32")), "-7"),
 			function("SmallStruct", testDLL, native("Void"), param("s", smallRef, in)),
 			function("MediumStruct", testDLL, native("Void"), param("m", apiRef(shapes, "MEDIUM", "Struct"), in)),
 			function("BigStruct", testDLL, native("Void"), param("b", apiRef(shapes, "BIG", "Struct"), in)),

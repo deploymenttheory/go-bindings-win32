@@ -110,6 +110,8 @@ const (
 	RetRetValVoid    = 9 // void + elevated outs → (outs…)
 	// Curated informational-success APIs (S_FALSE matters):
 	RetHResultValueErr = 10 // HRESULT → (win32.HRESULT, error); success codes preserved
+	// Header inline carrying a [Constant]: no dispatch, `return RetExpr`.
+	RetInline = 11
 )
 
 // InterfaceModel is one COM interface: a pointer-sized struct dispatching

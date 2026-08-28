@@ -9,7 +9,7 @@ package win32meta
 
 // CurrentSchemaVersion is bumped when the IR changes incompatibly; readers
 // reject files with a different version so stale caches are re-ingested.
-const CurrentSchemaVersion = 2
+const CurrentSchemaVersion = 3
 
 // NamespaceMeta is the serialized unit: the full API surface of one
 // Windows.Win32 namespace.
@@ -111,6 +111,10 @@ type Function struct {
 	// (e.g. CreateEventW → CreateEvent) when the metadata declares a
 	// Unicode alias.
 	UnsuffixedName string `json:"unsuffixed_name,omitempty"`
+	// Constant carries a [Constant] attribute value (decimal) for header
+	// inlines that no DLL exports (DLL is then the pseudo-module
+	// "FORCEINLINE"): GetCurrentProcessToken is the constant -4.
+	Constant string `json:"constant,omitempty"`
 }
 
 // Struct is a value struct (or union) with C layout.

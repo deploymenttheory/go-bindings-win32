@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"sort"
 
+	rawwin "github.com/deploymenttheory/go-bindings-win32/internal/codegen/emit/raw"
 	"github.com/deploymenttheory/go-bindings-win32/internal/codegen/pipeline"
 	"github.com/deploymenttheory/go-bindings-win32/internal/win32meta"
 )
@@ -73,8 +74,13 @@ func runValidate(args []string) error {
 		})
 
 		for i := range meta.Functions {
-			if meta.Functions[i].DLL == "" {
-				addError("[%s] function %s has no DLL import", namespace, meta.Functions[i].Name)
+			function := &meta.Functions[i]
+			switch {
+			case function.DLL == "":
+				addError("[%s] function %s has no DLL import", namespace, function.Name)
+			case !rawwin.IsLoadableModule(function.DLL) && function.Constant == "":
+				addWarning("[%s] function %s imports %q, which is not a loadable module, and carries no [Constant] (the generator skips it)",
+					namespace, function.Name, function.DLL)
 			}
 		}
 		for name, enum := range meta.Enums {

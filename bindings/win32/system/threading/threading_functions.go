@@ -21,7 +21,6 @@ var (
 	modapi_ms_win_core_synch_l1_2_0 = win32.NewDLL("api-ms-win-core-synch-l1-2-0.dll")
 	modapi_ms_win_core_wow64_l1_1_1 = win32.NewDLL("api-ms-win-core-wow64-l1-1-1.dll")
 	modAVRT                         = win32.NewDLL("AVRT.dll")
-	modFORCEINLINE                  = win32.NewDLL("FORCEINLINE")
 	modKERNEL32                     = win32.NewDLL("KERNEL32.dll")
 	modOLEACC                       = win32.NewDLL("OLEACC.dll")
 	modRTWorkQ                      = win32.NewDLL("RTWorkQ.dll")
@@ -54,9 +53,6 @@ var (
 	procAvSetMmThreadCharacteristics                 = modAVRT.NewProc("AvSetMmThreadCharacteristicsW")
 	procAvSetMmThreadCharacteristicsA                = modAVRT.NewProc("AvSetMmThreadCharacteristicsA")
 	procAvSetMmThreadPriority                        = modAVRT.NewProc("AvSetMmThreadPriority")
-	procGetCurrentProcessToken                       = modFORCEINLINE.NewProc("GetCurrentProcessToken")
-	procGetCurrentThreadEffectiveToken               = modFORCEINLINE.NewProc("GetCurrentThreadEffectiveToken")
-	procGetCurrentThreadToken                        = modFORCEINLINE.NewProc("GetCurrentThreadToken")
 	procAcquireSRWLockExclusive                      = modKERNEL32.NewProc("AcquireSRWLockExclusive")
 	procAcquireSRWLockShared                         = modKERNEL32.NewProc("AcquireSRWLockShared")
 	procAddIntegrityLabelToBoundaryDescriptor        = modKERNEL32.NewProc("AddIntegrityLabelToBoundaryDescriptor")
@@ -1467,11 +1463,10 @@ func GetCurrentProcessId() uint32 {
 	return uint32(r1)
 }
 
-// GetCurrentProcessToken calls FORCEINLINE!GetCurrentProcessToken.
+// GetCurrentProcessToken is a header inline, not a DLL export: it evaluates to the constant -4.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentprocesstoken
 func GetCurrentProcessToken() foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procGetCurrentProcessToken.Addr())
-	return foundation.HANDLE(r1)
+	return ^foundation.HANDLE(3)
 }
 
 // GetCurrentProcessorNumber calls KERNEL32!GetCurrentProcessorNumber.
@@ -1497,11 +1492,10 @@ func GetCurrentThread() foundation.HANDLE {
 	return foundation.HANDLE(r1)
 }
 
-// GetCurrentThreadEffectiveToken calls FORCEINLINE!GetCurrentThreadEffectiveToken.
+// GetCurrentThreadEffectiveToken is a header inline, not a DLL export: it evaluates to the constant -6.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentthreadeffectivetoken
 func GetCurrentThreadEffectiveToken() foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procGetCurrentThreadEffectiveToken.Addr())
-	return foundation.HANDLE(r1)
+	return ^foundation.HANDLE(5)
 }
 
 // GetCurrentThreadId calls KERNEL32!GetCurrentThreadId.
@@ -1519,11 +1513,10 @@ func GetCurrentThreadStackLimits(LowLimit *uintptr, HighLimit *uintptr) {
 	syscall.SyscallN(procGetCurrentThreadStackLimits.Addr(), uintptr(unsafe.Pointer(LowLimit)), uintptr(unsafe.Pointer(HighLimit)))
 }
 
-// GetCurrentThreadToken calls FORCEINLINE!GetCurrentThreadToken.
+// GetCurrentThreadToken is a header inline, not a DLL export: it evaluates to the constant -5.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentthreadtoken
 func GetCurrentThreadToken() foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procGetCurrentThreadToken.Addr())
-	return foundation.HANDLE(r1)
+	return ^foundation.HANDLE(4)
 }
 
 // GetCurrentUmsThread calls KERNEL32!GetCurrentUmsThread.

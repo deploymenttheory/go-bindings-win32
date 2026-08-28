@@ -157,6 +157,12 @@ each call, then the template dispatches via `syscall.SyscallN`:
   returns `(win32.HRESULT, error)` instead: err reflects failure only, the
   HRESULT preserves `S_FALSE`-style success codes. The winmd has no attribute
   for this, so the set is curated; stale entries surface as diagnostics.
+- a function whose DllImport module is not a loadable PE module (the
+  `FORCEINLINE` pseudo-module marks SDK header macros such as
+  `GetCurrentProcessToken`) is never dispatched: when the metadata carries a
+  `[Constant]` value (ingested as `Function.Constant`) it is emitted as a
+  plain Go function returning that constant (`^foundation.HANDLE(3)` for
+  -4); otherwise it is skipped with a diagnostic (`emit/raw/inline.go`).
 - handle/pointer + SetLastError → `(T, error)`, failure sentinels from
   `[InvalidHandleValue]` metadata; other + SetLastError → `(T, error)` where
   err is the advisory GetLastError; no SetLastError → bare `T`

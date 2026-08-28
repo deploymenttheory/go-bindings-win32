@@ -5,6 +5,7 @@
 package deploymentservices
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -672,6 +673,14 @@ func (self *IWdsTransportNamespaceScheduledCastAutoStart) Get_StartTime() (float
 	_pStartTime := new(float64)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pStartTime))))
 	return *_pStartTime, win32.ErrIfFailed(int32(r1))
+}
+
+var specIWdsTransportNamespaceScheduledCastAutoStart_Put_StartTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_StartTime dispatches through IWdsTransportNamespaceScheduledCastAutoStart's vtable slot 32.
+func (self *IWdsTransportNamespaceScheduledCastAutoStart) Put_StartTime(StartTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIWdsTransportNamespaceScheduledCastAutoStart_Put_StartTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(StartTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IWdsTransportNamespaceScheduledCastManualStart: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/nn-wdstptmgmt-iwdstransportnamespacescheduledcastmanualstart

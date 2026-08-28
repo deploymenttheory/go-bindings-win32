@@ -4,18 +4,21 @@
 
 package foundation
 
-// FARPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uintptr.
+// FARPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type FARPROC uintptr
 
-// NEARPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uintptr.
+// NEARPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type NEARPROC uintptr
 
-// PAPCFUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// PAPCFUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr.
 type PAPCFUNC uintptr
 
-// PROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uintptr.
+// PROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type PROC uintptr

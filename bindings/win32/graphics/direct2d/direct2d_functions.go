@@ -5,6 +5,7 @@
 package direct2d
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -18,13 +19,74 @@ var (
 )
 
 var (
+	procD2D1ComputeMaximumScaleFactor                   = modd2d1.NewProc("D2D1ComputeMaximumScaleFactor")
+	procD2D1ConvertColorSpace                           = modd2d1.NewProc("D2D1ConvertColorSpace")
 	procD2D1CreateDevice                                = modd2d1.NewProc("D2D1CreateDevice")
 	procD2D1CreateDeviceContext                         = modd2d1.NewProc("D2D1CreateDeviceContext")
 	procD2D1CreateFactory                               = modd2d1.NewProc("D2D1CreateFactory")
 	procD2D1GetGradientMeshInteriorPointsFromCoonsPatch = modd2d1.NewProc("D2D1GetGradientMeshInteriorPointsFromCoonsPatch")
 	procD2D1InvertMatrix                                = modd2d1.NewProc("D2D1InvertMatrix")
 	procD2D1IsMatrixInvertible                          = modd2d1.NewProc("D2D1IsMatrixInvertible")
+	procD2D1MakeRotateMatrix                            = modd2d1.NewProc("D2D1MakeRotateMatrix")
+	procD2D1MakeSkewMatrix                              = modd2d1.NewProc("D2D1MakeSkewMatrix")
+	procD2D1SinCos                                      = modd2d1.NewProc("D2D1SinCos")
+	procD2D1Tan                                         = modd2d1.NewProc("D2D1Tan")
+	procD2D1Vec3Length                                  = modd2d1.NewProc("D2D1Vec3Length")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	D2D1ComputeMaximumScaleFactor                   *win32.Proc
+	D2D1ConvertColorSpace                           *win32.Proc
+	D2D1CreateDevice                                *win32.Proc
+	D2D1CreateDeviceContext                         *win32.Proc
+	D2D1CreateFactory                               *win32.Proc
+	D2D1GetGradientMeshInteriorPointsFromCoonsPatch *win32.Proc
+	D2D1InvertMatrix                                *win32.Proc
+	D2D1IsMatrixInvertible                          *win32.Proc
+	D2D1MakeRotateMatrix                            *win32.Proc
+	D2D1MakeSkewMatrix                              *win32.Proc
+	D2D1SinCos                                      *win32.Proc
+	D2D1Tan                                         *win32.Proc
+	D2D1Vec3Length                                  *win32.Proc
+}{
+	D2D1ComputeMaximumScaleFactor:                   procD2D1ComputeMaximumScaleFactor,
+	D2D1ConvertColorSpace:                           procD2D1ConvertColorSpace,
+	D2D1CreateDevice:                                procD2D1CreateDevice,
+	D2D1CreateDeviceContext:                         procD2D1CreateDeviceContext,
+	D2D1CreateFactory:                               procD2D1CreateFactory,
+	D2D1GetGradientMeshInteriorPointsFromCoonsPatch: procD2D1GetGradientMeshInteriorPointsFromCoonsPatch,
+	D2D1InvertMatrix:                                procD2D1InvertMatrix,
+	D2D1IsMatrixInvertible:                          procD2D1IsMatrixInvertible,
+	D2D1MakeRotateMatrix:                            procD2D1MakeRotateMatrix,
+	D2D1MakeSkewMatrix:                              procD2D1MakeSkewMatrix,
+	D2D1SinCos:                                      procD2D1SinCos,
+	D2D1Tan:                                         procD2D1Tan,
+	D2D1Vec3Length:                                  procD2D1Vec3Length,
+}
+
+var specD2D1ComputeMaximumScaleFactor = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// D2D1ComputeMaximumScaleFactor calls d2d1!D2D1ComputeMaximumScaleFactor.
+// https://learn.microsoft.com/windows/win32/api/d2d1_2/nf-d2d1_2-d2d1computemaximumscalefactor
+// Minimum OS: windows8.1.
+func D2D1ComputeMaximumScaleFactor(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) float32 {
+	r := win32.Call(procD2D1ComputeMaximumScaleFactor.Addr(), specD2D1ComputeMaximumScaleFactor, nil, uintptr(unsafe.Pointer(matrix)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specD2D1ConvertColorSpace = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word}, Ret: win32.Struct(16, 4, 4, false)}
+
+// D2D1ConvertColorSpace calls d2d1!D2D1ConvertColorSpace.
+// https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1convertcolorspace
+func D2D1ConvertColorSpace(sourceColorSpace D2D1_COLOR_SPACE, destinationColorSpace D2D1_COLOR_SPACE, color *graphicsdirect2dcommon.D2D1_COLOR_F) graphicsdirect2dcommon.D2D1_COLOR_F {
+	_ret := new(graphicsdirect2dcommon.D2D1_COLOR_F)
+	win32.Call(procD2D1ConvertColorSpace.Addr(), specD2D1ConvertColorSpace, win32.OutParam(unsafe.Pointer(_ret)), uintptr(sourceColorSpace), uintptr(destinationColorSpace), uintptr(unsafe.Pointer(color))).Tuple()
+	return *_ret
+}
 
 // D2D1CreateDevice calls d2d1!D2D1CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1createdevice
@@ -71,4 +133,48 @@ func D2D1InvertMatrix(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) bool {
 func D2D1IsMatrixInvertible(matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) bool {
 	r1, _, _ := syscall.SyscallN(procD2D1IsMatrixInvertible.Addr(), uintptr(unsafe.Pointer(matrix)))
 	return r1 != 0
+}
+
+var specD2D1MakeRotateMatrix = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Struct(8, 4, 2, false), win32.Word}}
+
+// D2D1MakeRotateMatrix calls d2d1!D2D1MakeRotateMatrix.
+// https://learn.microsoft.com/windows/win32/api/d2d1/nf-d2d1-d2d1makerotatematrix
+// Minimum OS: windows6.1.
+func D2D1MakeRotateMatrix(angle float32, center graphicsdirect2dcommon.D2D_POINT_2F, matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) {
+	win32.Call(procD2D1MakeRotateMatrix.Addr(), specD2D1MakeRotateMatrix, nil, uintptr(math.Float32bits(angle)), uintptr(unsafe.Pointer(&center)), uintptr(unsafe.Pointer(matrix))).Tuple()
+}
+
+var specD2D1MakeSkewMatrix = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Struct(8, 4, 2, false), win32.Word}}
+
+// D2D1MakeSkewMatrix calls d2d1!D2D1MakeSkewMatrix.
+// https://learn.microsoft.com/windows/win32/api/d2d1/nf-d2d1-d2d1makeskewmatrix
+// Minimum OS: windows6.1.
+func D2D1MakeSkewMatrix(angleX float32, angleY float32, center graphicsdirect2dcommon.D2D_POINT_2F, matrix *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) {
+	win32.Call(procD2D1MakeSkewMatrix.Addr(), specD2D1MakeSkewMatrix, nil, uintptr(math.Float32bits(angleX)), uintptr(math.Float32bits(angleY)), uintptr(unsafe.Pointer(&center)), uintptr(unsafe.Pointer(matrix))).Tuple()
+}
+
+var specD2D1SinCos = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word, win32.Word}}
+
+// D2D1SinCos calls d2d1!D2D1SinCos.
+// https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1sincos
+func D2D1SinCos(angle float32, s *float32, c *float32) {
+	win32.Call(procD2D1SinCos.Addr(), specD2D1SinCos, nil, uintptr(math.Float32bits(angle)), uintptr(unsafe.Pointer(s)), uintptr(unsafe.Pointer(c))).Tuple()
+}
+
+var specD2D1Tan = &win32.Spec{Args: []win32.Arg{win32.Float32}, Ret: win32.Float32}
+
+// D2D1Tan calls d2d1!D2D1Tan.
+// https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1tan
+func D2D1Tan(angle float32) float32 {
+	r := win32.Call(procD2D1Tan.Addr(), specD2D1Tan, nil, uintptr(math.Float32bits(angle)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specD2D1Vec3Length = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32}, Ret: win32.Float32}
+
+// D2D1Vec3Length calls d2d1!D2D1Vec3Length.
+// https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1vec3length
+func D2D1Vec3Length(x float32, y float32, z float32) float32 {
+	r := win32.Call(procD2D1Vec3Length.Addr(), specD2D1Vec3Length, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z)))
+	return math.Float32frombits(uint32(r.F0))
 }

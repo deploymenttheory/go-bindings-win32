@@ -5,6 +5,7 @@
 package variant
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -34,6 +35,8 @@ var (
 	procVariantCopy                     = modOLEAUT32.NewProc("VariantCopy")
 	procVariantCopyInd                  = modOLEAUT32.NewProc("VariantCopyInd")
 	procVariantInit                     = modOLEAUT32.NewProc("VariantInit")
+	procVariantTimeToDosDateTime        = modOLEAUT32.NewProc("VariantTimeToDosDateTime")
+	procVariantTimeToSystemTime         = modOLEAUT32.NewProc("VariantTimeToSystemTime")
 	procClearVariantArray               = modPROPSYS.NewProc("ClearVariantArray")
 	procInitVariantFromBooleanArray     = modPROPSYS.NewProc("InitVariantFromBooleanArray")
 	procInitVariantFromBuffer           = modPROPSYS.NewProc("InitVariantFromBuffer")
@@ -70,6 +73,7 @@ var (
 	procVariantToDouble                 = modPROPSYS.NewProc("VariantToDouble")
 	procVariantToDoubleArray            = modPROPSYS.NewProc("VariantToDoubleArray")
 	procVariantToDoubleArrayAlloc       = modPROPSYS.NewProc("VariantToDoubleArrayAlloc")
+	procVariantToDoubleWithDefault      = modPROPSYS.NewProc("VariantToDoubleWithDefault")
 	procVariantToFileTime               = modPROPSYS.NewProc("VariantToFileTime")
 	procVariantToGUID                   = modPROPSYS.NewProc("VariantToGUID")
 	procVariantToInt16                  = modPROPSYS.NewProc("VariantToInt16")
@@ -102,6 +106,186 @@ var (
 	procVariantToUInt64ArrayAlloc       = modPROPSYS.NewProc("VariantToUInt64ArrayAlloc")
 	procVariantToUInt64WithDefault      = modPROPSYS.NewProc("VariantToUInt64WithDefault")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ClearVariantArray               *win32.Proc
+	DosDateTimeToVariantTime        *win32.Proc
+	InitVariantFromBooleanArray     *win32.Proc
+	InitVariantFromBuffer           *win32.Proc
+	InitVariantFromDoubleArray      *win32.Proc
+	InitVariantFromFileTime         *win32.Proc
+	InitVariantFromFileTimeArray    *win32.Proc
+	InitVariantFromGUIDAsString     *win32.Proc
+	InitVariantFromInt16Array       *win32.Proc
+	InitVariantFromInt32Array       *win32.Proc
+	InitVariantFromInt64Array       *win32.Proc
+	InitVariantFromResource         *win32.Proc
+	InitVariantFromStringArray      *win32.Proc
+	InitVariantFromUInt16Array      *win32.Proc
+	InitVariantFromUInt32Array      *win32.Proc
+	InitVariantFromUInt64Array      *win32.Proc
+	InitVariantFromVariantArrayElem *win32.Proc
+	SystemTimeToVariantTime         *win32.Proc
+	VARIANT_UserFree                *win32.Proc
+	VARIANT_UserFree64              *win32.Proc
+	VARIANT_UserMarshal             *win32.Proc
+	VARIANT_UserMarshal64           *win32.Proc
+	VARIANT_UserSize                *win32.Proc
+	VARIANT_UserSize64              *win32.Proc
+	VARIANT_UserUnmarshal           *win32.Proc
+	VARIANT_UserUnmarshal64         *win32.Proc
+	VariantChangeType               *win32.Proc
+	VariantChangeTypeEx             *win32.Proc
+	VariantClear                    *win32.Proc
+	VariantCompare                  *win32.Proc
+	VariantCopy                     *win32.Proc
+	VariantCopyInd                  *win32.Proc
+	VariantGetBooleanElem           *win32.Proc
+	VariantGetDoubleElem            *win32.Proc
+	VariantGetElementCount          *win32.Proc
+	VariantGetInt16Elem             *win32.Proc
+	VariantGetInt32Elem             *win32.Proc
+	VariantGetInt64Elem             *win32.Proc
+	VariantGetStringElem            *win32.Proc
+	VariantGetUInt16Elem            *win32.Proc
+	VariantGetUInt32Elem            *win32.Proc
+	VariantGetUInt64Elem            *win32.Proc
+	VariantInit                     *win32.Proc
+	VariantTimeToDosDateTime        *win32.Proc
+	VariantTimeToSystemTime         *win32.Proc
+	VariantToBoolean                *win32.Proc
+	VariantToBooleanArray           *win32.Proc
+	VariantToBooleanArrayAlloc      *win32.Proc
+	VariantToBooleanWithDefault     *win32.Proc
+	VariantToBuffer                 *win32.Proc
+	VariantToDosDateTime            *win32.Proc
+	VariantToDouble                 *win32.Proc
+	VariantToDoubleArray            *win32.Proc
+	VariantToDoubleArrayAlloc       *win32.Proc
+	VariantToDoubleWithDefault      *win32.Proc
+	VariantToFileTime               *win32.Proc
+	VariantToGUID                   *win32.Proc
+	VariantToInt16                  *win32.Proc
+	VariantToInt16Array             *win32.Proc
+	VariantToInt16ArrayAlloc        *win32.Proc
+	VariantToInt16WithDefault       *win32.Proc
+	VariantToInt32                  *win32.Proc
+	VariantToInt32Array             *win32.Proc
+	VariantToInt32ArrayAlloc        *win32.Proc
+	VariantToInt32WithDefault       *win32.Proc
+	VariantToInt64                  *win32.Proc
+	VariantToInt64Array             *win32.Proc
+	VariantToInt64ArrayAlloc        *win32.Proc
+	VariantToInt64WithDefault       *win32.Proc
+	VariantToString                 *win32.Proc
+	VariantToStringAlloc            *win32.Proc
+	VariantToStringArray            *win32.Proc
+	VariantToStringArrayAlloc       *win32.Proc
+	VariantToStringWithDefault      *win32.Proc
+	VariantToUInt16                 *win32.Proc
+	VariantToUInt16Array            *win32.Proc
+	VariantToUInt16ArrayAlloc       *win32.Proc
+	VariantToUInt16WithDefault      *win32.Proc
+	VariantToUInt32                 *win32.Proc
+	VariantToUInt32Array            *win32.Proc
+	VariantToUInt32ArrayAlloc       *win32.Proc
+	VariantToUInt32WithDefault      *win32.Proc
+	VariantToUInt64                 *win32.Proc
+	VariantToUInt64Array            *win32.Proc
+	VariantToUInt64ArrayAlloc       *win32.Proc
+	VariantToUInt64WithDefault      *win32.Proc
+}{
+	ClearVariantArray:               procClearVariantArray,
+	DosDateTimeToVariantTime:        procDosDateTimeToVariantTime,
+	InitVariantFromBooleanArray:     procInitVariantFromBooleanArray,
+	InitVariantFromBuffer:           procInitVariantFromBuffer,
+	InitVariantFromDoubleArray:      procInitVariantFromDoubleArray,
+	InitVariantFromFileTime:         procInitVariantFromFileTime,
+	InitVariantFromFileTimeArray:    procInitVariantFromFileTimeArray,
+	InitVariantFromGUIDAsString:     procInitVariantFromGUIDAsString,
+	InitVariantFromInt16Array:       procInitVariantFromInt16Array,
+	InitVariantFromInt32Array:       procInitVariantFromInt32Array,
+	InitVariantFromInt64Array:       procInitVariantFromInt64Array,
+	InitVariantFromResource:         procInitVariantFromResource,
+	InitVariantFromStringArray:      procInitVariantFromStringArray,
+	InitVariantFromUInt16Array:      procInitVariantFromUInt16Array,
+	InitVariantFromUInt32Array:      procInitVariantFromUInt32Array,
+	InitVariantFromUInt64Array:      procInitVariantFromUInt64Array,
+	InitVariantFromVariantArrayElem: procInitVariantFromVariantArrayElem,
+	SystemTimeToVariantTime:         procSystemTimeToVariantTime,
+	VARIANT_UserFree:                procVARIANT_UserFree,
+	VARIANT_UserFree64:              procVARIANT_UserFree64,
+	VARIANT_UserMarshal:             procVARIANT_UserMarshal,
+	VARIANT_UserMarshal64:           procVARIANT_UserMarshal64,
+	VARIANT_UserSize:                procVARIANT_UserSize,
+	VARIANT_UserSize64:              procVARIANT_UserSize64,
+	VARIANT_UserUnmarshal:           procVARIANT_UserUnmarshal,
+	VARIANT_UserUnmarshal64:         procVARIANT_UserUnmarshal64,
+	VariantChangeType:               procVariantChangeType,
+	VariantChangeTypeEx:             procVariantChangeTypeEx,
+	VariantClear:                    procVariantClear,
+	VariantCompare:                  procVariantCompare,
+	VariantCopy:                     procVariantCopy,
+	VariantCopyInd:                  procVariantCopyInd,
+	VariantGetBooleanElem:           procVariantGetBooleanElem,
+	VariantGetDoubleElem:            procVariantGetDoubleElem,
+	VariantGetElementCount:          procVariantGetElementCount,
+	VariantGetInt16Elem:             procVariantGetInt16Elem,
+	VariantGetInt32Elem:             procVariantGetInt32Elem,
+	VariantGetInt64Elem:             procVariantGetInt64Elem,
+	VariantGetStringElem:            procVariantGetStringElem,
+	VariantGetUInt16Elem:            procVariantGetUInt16Elem,
+	VariantGetUInt32Elem:            procVariantGetUInt32Elem,
+	VariantGetUInt64Elem:            procVariantGetUInt64Elem,
+	VariantInit:                     procVariantInit,
+	VariantTimeToDosDateTime:        procVariantTimeToDosDateTime,
+	VariantTimeToSystemTime:         procVariantTimeToSystemTime,
+	VariantToBoolean:                procVariantToBoolean,
+	VariantToBooleanArray:           procVariantToBooleanArray,
+	VariantToBooleanArrayAlloc:      procVariantToBooleanArrayAlloc,
+	VariantToBooleanWithDefault:     procVariantToBooleanWithDefault,
+	VariantToBuffer:                 procVariantToBuffer,
+	VariantToDosDateTime:            procVariantToDosDateTime,
+	VariantToDouble:                 procVariantToDouble,
+	VariantToDoubleArray:            procVariantToDoubleArray,
+	VariantToDoubleArrayAlloc:       procVariantToDoubleArrayAlloc,
+	VariantToDoubleWithDefault:      procVariantToDoubleWithDefault,
+	VariantToFileTime:               procVariantToFileTime,
+	VariantToGUID:                   procVariantToGUID,
+	VariantToInt16:                  procVariantToInt16,
+	VariantToInt16Array:             procVariantToInt16Array,
+	VariantToInt16ArrayAlloc:        procVariantToInt16ArrayAlloc,
+	VariantToInt16WithDefault:       procVariantToInt16WithDefault,
+	VariantToInt32:                  procVariantToInt32,
+	VariantToInt32Array:             procVariantToInt32Array,
+	VariantToInt32ArrayAlloc:        procVariantToInt32ArrayAlloc,
+	VariantToInt32WithDefault:       procVariantToInt32WithDefault,
+	VariantToInt64:                  procVariantToInt64,
+	VariantToInt64Array:             procVariantToInt64Array,
+	VariantToInt64ArrayAlloc:        procVariantToInt64ArrayAlloc,
+	VariantToInt64WithDefault:       procVariantToInt64WithDefault,
+	VariantToString:                 procVariantToString,
+	VariantToStringAlloc:            procVariantToStringAlloc,
+	VariantToStringArray:            procVariantToStringArray,
+	VariantToStringArrayAlloc:       procVariantToStringArrayAlloc,
+	VariantToStringWithDefault:      procVariantToStringWithDefault,
+	VariantToUInt16:                 procVariantToUInt16,
+	VariantToUInt16Array:            procVariantToUInt16Array,
+	VariantToUInt16ArrayAlloc:       procVariantToUInt16ArrayAlloc,
+	VariantToUInt16WithDefault:      procVariantToUInt16WithDefault,
+	VariantToUInt32:                 procVariantToUInt32,
+	VariantToUInt32Array:            procVariantToUInt32Array,
+	VariantToUInt32ArrayAlloc:       procVariantToUInt32ArrayAlloc,
+	VariantToUInt32WithDefault:      procVariantToUInt32WithDefault,
+	VariantToUInt64:                 procVariantToUInt64,
+	VariantToUInt64Array:            procVariantToUInt64Array,
+	VariantToUInt64ArrayAlloc:       procVariantToUInt64ArrayAlloc,
+	VariantToUInt64WithDefault:      procVariantToUInt64WithDefault,
+}
 
 // ClearVariantArray calls PROPSYS!ClearVariantArray.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-clearvariantarray
@@ -479,6 +663,24 @@ func VariantInit(pvarg *VARIANT) {
 	syscall.SyscallN(procVariantInit.Addr(), uintptr(unsafe.Pointer(pvarg)))
 }
 
+var specVariantTimeToDosDateTime = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word, win32.Word}}
+
+// VariantTimeToDosDateTime calls OLEAUT32!VariantTimeToDosDateTime.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varianttimetodosdatetime
+func VariantTimeToDosDateTime(vtime float64, pwDosDate *uint16, pwDosTime *uint16) int32 {
+	r1, _, _ := win32.Call(procVariantTimeToDosDateTime.Addr(), specVariantTimeToDosDateTime, nil, uintptr(math.Float64bits(vtime)), uintptr(unsafe.Pointer(pwDosDate)), uintptr(unsafe.Pointer(pwDosTime))).Tuple()
+	return int32(r1)
+}
+
+var specVariantTimeToSystemTime = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VariantTimeToSystemTime calls OLEAUT32!VariantTimeToSystemTime.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varianttimetosystemtime
+func VariantTimeToSystemTime(vtime float64, lpSystemTime *foundation.SYSTEMTIME) int32 {
+	r1, _, _ := win32.Call(procVariantTimeToSystemTime.Addr(), specVariantTimeToSystemTime, nil, uintptr(math.Float64bits(vtime)), uintptr(unsafe.Pointer(lpSystemTime))).Tuple()
+	return int32(r1)
+}
+
 // VariantToBoolean calls PROPSYS!VariantToBoolean.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttoboolean
 // Minimum OS: windows5.1.2600.
@@ -562,6 +764,16 @@ func VariantToDoubleArray(var_ *VARIANT, prgn []float64, pcElem *uint32) error {
 func VariantToDoubleArrayAlloc(var_ *VARIANT, pprgn **float64, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVariantToDoubleArrayAlloc.Addr(), uintptr(unsafe.Pointer(var_)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVariantToDoubleWithDefault = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}, Ret: win32.Float64}
+
+// VariantToDoubleWithDefault calls PROPSYS!VariantToDoubleWithDefault.
+// https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttodoublewithdefault
+// Minimum OS: windows5.1.2600.
+func VariantToDoubleWithDefault(varIn *VARIANT, dblDefault float64) float64 {
+	r := win32.Call(procVariantToDoubleWithDefault.Addr(), specVariantToDoubleWithDefault, nil, uintptr(unsafe.Pointer(varIn)), uintptr(math.Float64bits(dblDefault)))
+	return math.Float64frombits(r.F0)
 }
 
 // VariantToFileTime calls PROPSYS!VariantToFileTime.
@@ -727,8 +939,8 @@ func VariantToStringArrayAlloc(var_ *VARIANT, pprgsz **foundation.PWSTR, pcElem 
 // VariantToStringWithDefault calls PROPSYS!VariantToStringWithDefault.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttostringwithdefault
 // Minimum OS: windows5.1.2600.
-func VariantToStringWithDefault(varIn *VARIANT, pszDefault string) foundation.PWSTR {
-	_pszDefault := win32.UTF16Ptr(pszDefault)
+func VariantToStringWithDefault(varIn *VARIANT, pszDefault *string) foundation.PWSTR {
+	_pszDefault := win32.UTF16PtrOrNil(pszDefault)
 	r1, _, _ := syscall.SyscallN(procVariantToStringWithDefault.Addr(), uintptr(unsafe.Pointer(varIn)), uintptr(unsafe.Pointer(_pszDefault)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }

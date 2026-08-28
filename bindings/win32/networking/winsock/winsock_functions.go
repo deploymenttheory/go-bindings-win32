@@ -228,6 +228,420 @@ var (
 	procWSCWriteProviderOrder32          = modWS2_32.NewProc("WSCWriteProviderOrder32")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	Accept                           *win32.Proc
+	AcceptEx                         *win32.Proc
+	Bind                             *win32.Proc
+	Closesocket                      *win32.Proc
+	Connect                          *win32.Proc
+	EnumProtocols                    *win32.Proc
+	EnumProtocolsA                   *win32.Proc
+	FreeAddrInfoEx                   *win32.Proc
+	FreeAddrInfoExW                  *win32.Proc
+	FreeAddrInfoW                    *win32.Proc
+	Freeaddrinfo                     *win32.Proc
+	GetAcceptExSockaddrs             *win32.Proc
+	GetAddrInfoEx                    *win32.Proc
+	GetAddrInfoExA                   *win32.Proc
+	GetAddrInfoExCancel              *win32.Proc
+	GetAddrInfoExOverlappedResult    *win32.Proc
+	GetAddrInfoW                     *win32.Proc
+	GetAddressByName                 *win32.Proc
+	GetAddressByNameA                *win32.Proc
+	GetHostNameW                     *win32.Proc
+	GetNameByType                    *win32.Proc
+	GetNameByTypeA                   *win32.Proc
+	GetNameInfoW                     *win32.Proc
+	GetService                       *win32.Proc
+	GetServiceA                      *win32.Proc
+	GetTypeByName                    *win32.Proc
+	GetTypeByNameA                   *win32.Proc
+	Getaddrinfo                      *win32.Proc
+	Gethostbyaddr                    *win32.Proc
+	Gethostbyname                    *win32.Proc
+	Gethostname                      *win32.Proc
+	Getnameinfo                      *win32.Proc
+	Getpeername                      *win32.Proc
+	Getprotobyname                   *win32.Proc
+	Getprotobynumber                 *win32.Proc
+	Getservbyname                    *win32.Proc
+	Getservbyport                    *win32.Proc
+	Getsockname                      *win32.Proc
+	Getsockopt                       *win32.Proc
+	Htonl                            *win32.Proc
+	Htons                            *win32.Proc
+	InetNtopW                        *win32.Proc
+	InetPtonW                        *win32.Proc
+	Inet_addr                        *win32.Proc
+	Inet_ntoa                        *win32.Proc
+	Inet_ntop                        *win32.Proc
+	Inet_pton                        *win32.Proc
+	Ioctlsocket                      *win32.Proc
+	Listen                           *win32.Proc
+	Ntohl                            *win32.Proc
+	Ntohs                            *win32.Proc
+	ProcessSocketNotifications       *win32.Proc
+	Recv                             *win32.Proc
+	Recvfrom                         *win32.Proc
+	RtlEthernetAddressToString       *win32.Proc
+	RtlEthernetAddressToStringA      *win32.Proc
+	RtlEthernetStringToAddress       *win32.Proc
+	RtlEthernetStringToAddressA      *win32.Proc
+	RtlIpv4AddressToString           *win32.Proc
+	RtlIpv4AddressToStringA          *win32.Proc
+	RtlIpv4AddressToStringEx         *win32.Proc
+	RtlIpv4AddressToStringExA        *win32.Proc
+	RtlIpv4StringToAddress           *win32.Proc
+	RtlIpv4StringToAddressA          *win32.Proc
+	RtlIpv4StringToAddressEx         *win32.Proc
+	RtlIpv4StringToAddressExA        *win32.Proc
+	RtlIpv6AddressToString           *win32.Proc
+	RtlIpv6AddressToStringA          *win32.Proc
+	RtlIpv6AddressToStringEx         *win32.Proc
+	RtlIpv6AddressToStringExA        *win32.Proc
+	RtlIpv6StringToAddress           *win32.Proc
+	RtlIpv6StringToAddressA          *win32.Proc
+	RtlIpv6StringToAddressEx         *win32.Proc
+	RtlIpv6StringToAddressExA        *win32.Proc
+	Select                           *win32.Proc
+	Send                             *win32.Proc
+	Sendto                           *win32.Proc
+	SetAddrInfoEx                    *win32.Proc
+	SetAddrInfoExA                   *win32.Proc
+	SetService                       *win32.Proc
+	SetServiceA                      *win32.Proc
+	SetSocketMediaStreamingMode      *win32.Proc
+	Setsockopt                       *win32.Proc
+	Shutdown                         *win32.Proc
+	Socket                           *win32.Proc
+	TransmitFile                     *win32.Proc
+	WPUCompleteOverlappedRequest     *win32.Proc
+	WSAAccept                        *win32.Proc
+	WSAAddressToString               *win32.Proc
+	WSAAddressToStringA              *win32.Proc
+	WSAAdvertiseProvider             *win32.Proc
+	WSAAsyncGetHostByAddr            *win32.Proc
+	WSAAsyncGetHostByName            *win32.Proc
+	WSAAsyncGetProtoByName           *win32.Proc
+	WSAAsyncGetProtoByNumber         *win32.Proc
+	WSAAsyncGetServByName            *win32.Proc
+	WSAAsyncGetServByPort            *win32.Proc
+	WSAAsyncSelect                   *win32.Proc
+	WSACancelAsyncRequest            *win32.Proc
+	WSACancelBlockingCall            *win32.Proc
+	WSACleanup                       *win32.Proc
+	WSACloseEvent                    *win32.Proc
+	WSAConnect                       *win32.Proc
+	WSAConnectByList                 *win32.Proc
+	WSAConnectByName                 *win32.Proc
+	WSAConnectByNameA                *win32.Proc
+	WSACreateEvent                   *win32.Proc
+	WSADeleteSocketPeerTargetName    *win32.Proc
+	WSADuplicateSocket               *win32.Proc
+	WSADuplicateSocketA              *win32.Proc
+	WSAEnumNameSpaceProviders        *win32.Proc
+	WSAEnumNameSpaceProvidersA       *win32.Proc
+	WSAEnumNameSpaceProvidersEx      *win32.Proc
+	WSAEnumNameSpaceProvidersExA     *win32.Proc
+	WSAEnumNetworkEvents             *win32.Proc
+	WSAEnumProtocols                 *win32.Proc
+	WSAEnumProtocolsA                *win32.Proc
+	WSAEventSelect                   *win32.Proc
+	WSAFDIsSet                       *win32.Proc
+	WSAGetLastError                  *win32.Proc
+	WSAGetOverlappedResult           *win32.Proc
+	WSAGetQOSByName                  *win32.Proc
+	WSAGetServiceClassInfo           *win32.Proc
+	WSAGetServiceClassInfoA          *win32.Proc
+	WSAGetServiceClassNameByClassId  *win32.Proc
+	WSAGetServiceClassNameByClassIdA *win32.Proc
+	WSAHtonl                         *win32.Proc
+	WSAHtons                         *win32.Proc
+	WSAImpersonateSocketPeer         *win32.Proc
+	WSAInstallServiceClass           *win32.Proc
+	WSAInstallServiceClassA          *win32.Proc
+	WSAIoctl                         *win32.Proc
+	WSAIsBlocking                    *win32.Proc
+	WSAJoinLeaf                      *win32.Proc
+	WSALookupServiceBegin            *win32.Proc
+	WSALookupServiceBeginA           *win32.Proc
+	WSALookupServiceEnd              *win32.Proc
+	WSALookupServiceNext             *win32.Proc
+	WSALookupServiceNextA            *win32.Proc
+	WSANSPIoctl                      *win32.Proc
+	WSANtohl                         *win32.Proc
+	WSANtohs                         *win32.Proc
+	WSAPoll                          *win32.Proc
+	WSAProviderCompleteAsyncCall     *win32.Proc
+	WSAProviderConfigChange          *win32.Proc
+	WSAQuerySocketSecurity           *win32.Proc
+	WSARecv                          *win32.Proc
+	WSARecvDisconnect                *win32.Proc
+	WSARecvEx                        *win32.Proc
+	WSARecvFrom                      *win32.Proc
+	WSARemoveServiceClass            *win32.Proc
+	WSAResetEvent                    *win32.Proc
+	WSARevertImpersonation           *win32.Proc
+	WSASend                          *win32.Proc
+	WSASendDisconnect                *win32.Proc
+	WSASendMsg                       *win32.Proc
+	WSASendTo                        *win32.Proc
+	WSASetBlockingHook               *win32.Proc
+	WSASetEvent                      *win32.Proc
+	WSASetLastError                  *win32.Proc
+	WSASetService                    *win32.Proc
+	WSASetServiceA                   *win32.Proc
+	WSASetSocketPeerTargetName       *win32.Proc
+	WSASetSocketSecurity             *win32.Proc
+	WSASocket                        *win32.Proc
+	WSASocketA                       *win32.Proc
+	WSAStartup                       *win32.Proc
+	WSAStringToAddress               *win32.Proc
+	WSAStringToAddressA              *win32.Proc
+	WSAUnadvertiseProvider           *win32.Proc
+	WSAUnhookBlockingHook            *win32.Proc
+	WSAWaitForMultipleEvents         *win32.Proc
+	WSCDeinstallProvider             *win32.Proc
+	WSCDeinstallProvider32           *win32.Proc
+	WSCEnableNSProvider              *win32.Proc
+	WSCEnableNSProvider32            *win32.Proc
+	WSCEnumNameSpaceProviders32      *win32.Proc
+	WSCEnumNameSpaceProvidersEx32    *win32.Proc
+	WSCEnumProtocols                 *win32.Proc
+	WSCEnumProtocols32               *win32.Proc
+	WSCGetApplicationCategory        *win32.Proc
+	WSCGetProviderInfo               *win32.Proc
+	WSCGetProviderInfo32             *win32.Proc
+	WSCGetProviderPath               *win32.Proc
+	WSCGetProviderPath32             *win32.Proc
+	WSCInstallNameSpace              *win32.Proc
+	WSCInstallNameSpace32            *win32.Proc
+	WSCInstallNameSpaceEx            *win32.Proc
+	WSCInstallNameSpaceEx32          *win32.Proc
+	WSCInstallProvider               *win32.Proc
+	WSCInstallProvider64_32          *win32.Proc
+	WSCInstallProviderAndChains64_32 *win32.Proc
+	WSCSetApplicationCategory        *win32.Proc
+	WSCSetProviderInfo               *win32.Proc
+	WSCSetProviderInfo32             *win32.Proc
+	WSCUnInstallNameSpace            *win32.Proc
+	WSCUnInstallNameSpace32          *win32.Proc
+	WSCUpdateProvider                *win32.Proc
+	WSCUpdateProvider32              *win32.Proc
+	WSCWriteNameSpaceOrder           *win32.Proc
+	WSCWriteNameSpaceOrder32         *win32.Proc
+	WSCWriteProviderOrder            *win32.Proc
+	WSCWriteProviderOrder32          *win32.Proc
+}{
+	Accept:                           procAccept,
+	AcceptEx:                         procAcceptEx,
+	Bind:                             procBind,
+	Closesocket:                      procClosesocket,
+	Connect:                          procConnect,
+	EnumProtocols:                    procEnumProtocols,
+	EnumProtocolsA:                   procEnumProtocolsA,
+	FreeAddrInfoEx:                   procFreeAddrInfoEx,
+	FreeAddrInfoExW:                  procFreeAddrInfoExW,
+	FreeAddrInfoW:                    procFreeAddrInfoW,
+	Freeaddrinfo:                     procFreeaddrinfo,
+	GetAcceptExSockaddrs:             procGetAcceptExSockaddrs,
+	GetAddrInfoEx:                    procGetAddrInfoEx,
+	GetAddrInfoExA:                   procGetAddrInfoExA,
+	GetAddrInfoExCancel:              procGetAddrInfoExCancel,
+	GetAddrInfoExOverlappedResult:    procGetAddrInfoExOverlappedResult,
+	GetAddrInfoW:                     procGetAddrInfoW,
+	GetAddressByName:                 procGetAddressByName,
+	GetAddressByNameA:                procGetAddressByNameA,
+	GetHostNameW:                     procGetHostNameW,
+	GetNameByType:                    procGetNameByType,
+	GetNameByTypeA:                   procGetNameByTypeA,
+	GetNameInfoW:                     procGetNameInfoW,
+	GetService:                       procGetService,
+	GetServiceA:                      procGetServiceA,
+	GetTypeByName:                    procGetTypeByName,
+	GetTypeByNameA:                   procGetTypeByNameA,
+	Getaddrinfo:                      procGetaddrinfo,
+	Gethostbyaddr:                    procGethostbyaddr,
+	Gethostbyname:                    procGethostbyname,
+	Gethostname:                      procGethostname,
+	Getnameinfo:                      procGetnameinfo,
+	Getpeername:                      procGetpeername,
+	Getprotobyname:                   procGetprotobyname,
+	Getprotobynumber:                 procGetprotobynumber,
+	Getservbyname:                    procGetservbyname,
+	Getservbyport:                    procGetservbyport,
+	Getsockname:                      procGetsockname,
+	Getsockopt:                       procGetsockopt,
+	Htonl:                            procHtonl,
+	Htons:                            procHtons,
+	InetNtopW:                        procInetNtopW,
+	InetPtonW:                        procInetPtonW,
+	Inet_addr:                        procInet_addr,
+	Inet_ntoa:                        procInet_ntoa,
+	Inet_ntop:                        procInet_ntop,
+	Inet_pton:                        procInet_pton,
+	Ioctlsocket:                      procIoctlsocket,
+	Listen:                           procListen,
+	Ntohl:                            procNtohl,
+	Ntohs:                            procNtohs,
+	ProcessSocketNotifications:       procProcessSocketNotifications,
+	Recv:                             procRecv,
+	Recvfrom:                         procRecvfrom,
+	RtlEthernetAddressToString:       procRtlEthernetAddressToString,
+	RtlEthernetAddressToStringA:      procRtlEthernetAddressToStringA,
+	RtlEthernetStringToAddress:       procRtlEthernetStringToAddress,
+	RtlEthernetStringToAddressA:      procRtlEthernetStringToAddressA,
+	RtlIpv4AddressToString:           procRtlIpv4AddressToString,
+	RtlIpv4AddressToStringA:          procRtlIpv4AddressToStringA,
+	RtlIpv4AddressToStringEx:         procRtlIpv4AddressToStringEx,
+	RtlIpv4AddressToStringExA:        procRtlIpv4AddressToStringExA,
+	RtlIpv4StringToAddress:           procRtlIpv4StringToAddress,
+	RtlIpv4StringToAddressA:          procRtlIpv4StringToAddressA,
+	RtlIpv4StringToAddressEx:         procRtlIpv4StringToAddressEx,
+	RtlIpv4StringToAddressExA:        procRtlIpv4StringToAddressExA,
+	RtlIpv6AddressToString:           procRtlIpv6AddressToString,
+	RtlIpv6AddressToStringA:          procRtlIpv6AddressToStringA,
+	RtlIpv6AddressToStringEx:         procRtlIpv6AddressToStringEx,
+	RtlIpv6AddressToStringExA:        procRtlIpv6AddressToStringExA,
+	RtlIpv6StringToAddress:           procRtlIpv6StringToAddress,
+	RtlIpv6StringToAddressA:          procRtlIpv6StringToAddressA,
+	RtlIpv6StringToAddressEx:         procRtlIpv6StringToAddressEx,
+	RtlIpv6StringToAddressExA:        procRtlIpv6StringToAddressExA,
+	Select:                           procSelect,
+	Send:                             procSend,
+	Sendto:                           procSendto,
+	SetAddrInfoEx:                    procSetAddrInfoEx,
+	SetAddrInfoExA:                   procSetAddrInfoExA,
+	SetService:                       procSetService,
+	SetServiceA:                      procSetServiceA,
+	SetSocketMediaStreamingMode:      procSetSocketMediaStreamingMode,
+	Setsockopt:                       procSetsockopt,
+	Shutdown:                         procShutdown,
+	Socket:                           procSocket,
+	TransmitFile:                     procTransmitFile,
+	WPUCompleteOverlappedRequest:     procWPUCompleteOverlappedRequest,
+	WSAAccept:                        procWSAAccept,
+	WSAAddressToString:               procWSAAddressToString,
+	WSAAddressToStringA:              procWSAAddressToStringA,
+	WSAAdvertiseProvider:             procWSAAdvertiseProvider,
+	WSAAsyncGetHostByAddr:            procWSAAsyncGetHostByAddr,
+	WSAAsyncGetHostByName:            procWSAAsyncGetHostByName,
+	WSAAsyncGetProtoByName:           procWSAAsyncGetProtoByName,
+	WSAAsyncGetProtoByNumber:         procWSAAsyncGetProtoByNumber,
+	WSAAsyncGetServByName:            procWSAAsyncGetServByName,
+	WSAAsyncGetServByPort:            procWSAAsyncGetServByPort,
+	WSAAsyncSelect:                   procWSAAsyncSelect,
+	WSACancelAsyncRequest:            procWSACancelAsyncRequest,
+	WSACancelBlockingCall:            procWSACancelBlockingCall,
+	WSACleanup:                       procWSACleanup,
+	WSACloseEvent:                    procWSACloseEvent,
+	WSAConnect:                       procWSAConnect,
+	WSAConnectByList:                 procWSAConnectByList,
+	WSAConnectByName:                 procWSAConnectByName,
+	WSAConnectByNameA:                procWSAConnectByNameA,
+	WSACreateEvent:                   procWSACreateEvent,
+	WSADeleteSocketPeerTargetName:    procWSADeleteSocketPeerTargetName,
+	WSADuplicateSocket:               procWSADuplicateSocket,
+	WSADuplicateSocketA:              procWSADuplicateSocketA,
+	WSAEnumNameSpaceProviders:        procWSAEnumNameSpaceProviders,
+	WSAEnumNameSpaceProvidersA:       procWSAEnumNameSpaceProvidersA,
+	WSAEnumNameSpaceProvidersEx:      procWSAEnumNameSpaceProvidersEx,
+	WSAEnumNameSpaceProvidersExA:     procWSAEnumNameSpaceProvidersExA,
+	WSAEnumNetworkEvents:             procWSAEnumNetworkEvents,
+	WSAEnumProtocols:                 procWSAEnumProtocols,
+	WSAEnumProtocolsA:                procWSAEnumProtocolsA,
+	WSAEventSelect:                   procWSAEventSelect,
+	WSAFDIsSet:                       procWSAFDIsSet,
+	WSAGetLastError:                  procWSAGetLastError,
+	WSAGetOverlappedResult:           procWSAGetOverlappedResult,
+	WSAGetQOSByName:                  procWSAGetQOSByName,
+	WSAGetServiceClassInfo:           procWSAGetServiceClassInfo,
+	WSAGetServiceClassInfoA:          procWSAGetServiceClassInfoA,
+	WSAGetServiceClassNameByClassId:  procWSAGetServiceClassNameByClassId,
+	WSAGetServiceClassNameByClassIdA: procWSAGetServiceClassNameByClassIdA,
+	WSAHtonl:                         procWSAHtonl,
+	WSAHtons:                         procWSAHtons,
+	WSAImpersonateSocketPeer:         procWSAImpersonateSocketPeer,
+	WSAInstallServiceClass:           procWSAInstallServiceClass,
+	WSAInstallServiceClassA:          procWSAInstallServiceClassA,
+	WSAIoctl:                         procWSAIoctl,
+	WSAIsBlocking:                    procWSAIsBlocking,
+	WSAJoinLeaf:                      procWSAJoinLeaf,
+	WSALookupServiceBegin:            procWSALookupServiceBegin,
+	WSALookupServiceBeginA:           procWSALookupServiceBeginA,
+	WSALookupServiceEnd:              procWSALookupServiceEnd,
+	WSALookupServiceNext:             procWSALookupServiceNext,
+	WSALookupServiceNextA:            procWSALookupServiceNextA,
+	WSANSPIoctl:                      procWSANSPIoctl,
+	WSANtohl:                         procWSANtohl,
+	WSANtohs:                         procWSANtohs,
+	WSAPoll:                          procWSAPoll,
+	WSAProviderCompleteAsyncCall:     procWSAProviderCompleteAsyncCall,
+	WSAProviderConfigChange:          procWSAProviderConfigChange,
+	WSAQuerySocketSecurity:           procWSAQuerySocketSecurity,
+	WSARecv:                          procWSARecv,
+	WSARecvDisconnect:                procWSARecvDisconnect,
+	WSARecvEx:                        procWSARecvEx,
+	WSARecvFrom:                      procWSARecvFrom,
+	WSARemoveServiceClass:            procWSARemoveServiceClass,
+	WSAResetEvent:                    procWSAResetEvent,
+	WSARevertImpersonation:           procWSARevertImpersonation,
+	WSASend:                          procWSASend,
+	WSASendDisconnect:                procWSASendDisconnect,
+	WSASendMsg:                       procWSASendMsg,
+	WSASendTo:                        procWSASendTo,
+	WSASetBlockingHook:               procWSASetBlockingHook,
+	WSASetEvent:                      procWSASetEvent,
+	WSASetLastError:                  procWSASetLastError,
+	WSASetService:                    procWSASetService,
+	WSASetServiceA:                   procWSASetServiceA,
+	WSASetSocketPeerTargetName:       procWSASetSocketPeerTargetName,
+	WSASetSocketSecurity:             procWSASetSocketSecurity,
+	WSASocket:                        procWSASocket,
+	WSASocketA:                       procWSASocketA,
+	WSAStartup:                       procWSAStartup,
+	WSAStringToAddress:               procWSAStringToAddress,
+	WSAStringToAddressA:              procWSAStringToAddressA,
+	WSAUnadvertiseProvider:           procWSAUnadvertiseProvider,
+	WSAUnhookBlockingHook:            procWSAUnhookBlockingHook,
+	WSAWaitForMultipleEvents:         procWSAWaitForMultipleEvents,
+	WSCDeinstallProvider:             procWSCDeinstallProvider,
+	WSCDeinstallProvider32:           procWSCDeinstallProvider32,
+	WSCEnableNSProvider:              procWSCEnableNSProvider,
+	WSCEnableNSProvider32:            procWSCEnableNSProvider32,
+	WSCEnumNameSpaceProviders32:      procWSCEnumNameSpaceProviders32,
+	WSCEnumNameSpaceProvidersEx32:    procWSCEnumNameSpaceProvidersEx32,
+	WSCEnumProtocols:                 procWSCEnumProtocols,
+	WSCEnumProtocols32:               procWSCEnumProtocols32,
+	WSCGetApplicationCategory:        procWSCGetApplicationCategory,
+	WSCGetProviderInfo:               procWSCGetProviderInfo,
+	WSCGetProviderInfo32:             procWSCGetProviderInfo32,
+	WSCGetProviderPath:               procWSCGetProviderPath,
+	WSCGetProviderPath32:             procWSCGetProviderPath32,
+	WSCInstallNameSpace:              procWSCInstallNameSpace,
+	WSCInstallNameSpace32:            procWSCInstallNameSpace32,
+	WSCInstallNameSpaceEx:            procWSCInstallNameSpaceEx,
+	WSCInstallNameSpaceEx32:          procWSCInstallNameSpaceEx32,
+	WSCInstallProvider:               procWSCInstallProvider,
+	WSCInstallProvider64_32:          procWSCInstallProvider64_32,
+	WSCInstallProviderAndChains64_32: procWSCInstallProviderAndChains64_32,
+	WSCSetApplicationCategory:        procWSCSetApplicationCategory,
+	WSCSetProviderInfo:               procWSCSetProviderInfo,
+	WSCSetProviderInfo32:             procWSCSetProviderInfo32,
+	WSCUnInstallNameSpace:            procWSCUnInstallNameSpace,
+	WSCUnInstallNameSpace32:          procWSCUnInstallNameSpace32,
+	WSCUpdateProvider:                procWSCUpdateProvider,
+	WSCUpdateProvider32:              procWSCUpdateProvider32,
+	WSCWriteNameSpaceOrder:           procWSCWriteNameSpaceOrder,
+	WSCWriteNameSpaceOrder32:         procWSCWriteNameSpaceOrder32,
+	WSCWriteProviderOrder:            procWSCWriteProviderOrder,
+	WSCWriteProviderOrder32:          procWSCWriteProviderOrder32,
+}
+
 // Accept calls WS2_32!accept.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-accept
 // Minimum OS: windows8.1.
@@ -340,9 +754,9 @@ func GetAcceptExSockaddrs(lpOutputBuffer unsafe.Pointer, dwReceiveDataLength uin
 // GetAddrInfoEx calls WS2_32!GetAddrInfoExW.
 // https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfoexw
 // Minimum OS: windows6.0.6000.
-func GetAddrInfoEx(pName string, pServiceName string, dwNameSpace uint32, lpNspId *win32.GUID, hints *ADDRINFOEXW, ppResult **ADDRINFOEXW, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle *foundation.HANDLE) int32 {
-	_pName := win32.UTF16Ptr(pName)
-	_pServiceName := win32.UTF16Ptr(pServiceName)
+func GetAddrInfoEx(pName *string, pServiceName *string, dwNameSpace uint32, lpNspId *win32.GUID, hints *ADDRINFOEXW, ppResult **ADDRINFOEXW, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpHandle *foundation.HANDLE) int32 {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pServiceName := win32.UTF16PtrOrNil(pServiceName)
 	r1, _, _ := syscall.SyscallN(procGetAddrInfoEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pServiceName)), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpNspId)), uintptr(unsafe.Pointer(hints)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(unsafe.Pointer(lpHandle)))
 	return int32(r1)
 }
@@ -374,9 +788,9 @@ func GetAddrInfoExOverlappedResult(lpOverlapped *systemio.OVERLAPPED) int32 {
 // GetAddrInfoW calls WS2_32!GetAddrInfoW.
 // https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfow
 // Minimum OS: windows8.1.
-func GetAddrInfoW(pNodeName string, pServiceName string, pHints *ADDRINFOW, ppResult **ADDRINFOW) int32 {
-	_pNodeName := win32.UTF16Ptr(pNodeName)
-	_pServiceName := win32.UTF16Ptr(pServiceName)
+func GetAddrInfoW(pNodeName *string, pServiceName *string, pHints *ADDRINFOW, ppResult **ADDRINFOW) int32 {
+	_pNodeName := win32.UTF16PtrOrNil(pNodeName)
+	_pServiceName := win32.UTF16PtrOrNil(pServiceName)
 	r1, _, _ := syscall.SyscallN(procGetAddrInfoW.Addr(), uintptr(unsafe.Pointer(_pNodeName)), uintptr(unsafe.Pointer(_pServiceName)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppResult)))
 	return int32(r1)
 }
@@ -384,8 +798,8 @@ func GetAddrInfoW(pNodeName string, pServiceName string, pHints *ADDRINFOW, ppRe
 // GetAddressByName calls MSWSOCK!GetAddressByNameW.
 // https://learn.microsoft.com/windows/win32/api/nspapi/nf-nspapi-getaddressbynamew
 // Minimum OS: windows5.0.
-func GetAddressByName(dwNameSpace uint32, lpServiceType *win32.GUID, lpServiceName string, lpiProtocols *int32, dwResolution uint32, lpServiceAsyncInfo *SERVICE_ASYNC_INFO, lpCsaddrBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpAliasBuffer foundation.PWSTR, lpdwAliasBufferLength *uint32) (int32, error) {
-	_lpServiceName := win32.UTF16Ptr(lpServiceName)
+func GetAddressByName(dwNameSpace uint32, lpServiceType *win32.GUID, lpServiceName *string, lpiProtocols *int32, dwResolution uint32, lpServiceAsyncInfo *SERVICE_ASYNC_INFO, lpCsaddrBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpAliasBuffer foundation.PWSTR, lpdwAliasBufferLength *uint32) (int32, error) {
+	_lpServiceName := win32.UTF16PtrOrNil(lpServiceName)
 	r1, _, e1 := syscall.SyscallN(procGetAddressByName.Addr(), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpServiceType)), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(unsafe.Pointer(lpiProtocols)), uintptr(dwResolution), uintptr(unsafe.Pointer(lpServiceAsyncInfo)), uintptr(unsafe.Pointer(lpCsaddrBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpAliasBuffer)), uintptr(unsafe.Pointer(lpdwAliasBufferLength)))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -992,9 +1406,9 @@ func Sendto(s SOCKET, buf foundation.PSTR, len_ int32, flags int32, to *SOCKADDR
 // SetAddrInfoEx calls WS2_32!SetAddrInfoExW.
 // https://learn.microsoft.com/windows/win32/api/ws2tcpip/nf-ws2tcpip-setaddrinfoexw
 // Minimum OS: windows8.1.
-func SetAddrInfoEx(pName string, pServiceName string, pAddresses *SOCKET_ADDRESS, dwAddressCount uint32, lpBlob *systemcom.BLOB, dwFlags uint32, dwNameSpace uint32, lpNspId *win32.GUID, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle *foundation.HANDLE) int32 {
+func SetAddrInfoEx(pName string, pServiceName *string, pAddresses *SOCKET_ADDRESS, dwAddressCount uint32, lpBlob *systemcom.BLOB, dwFlags uint32, dwNameSpace uint32, lpNspId *win32.GUID, timeout *TIMEVAL, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPLOOKUPSERVICE_COMPLETION_ROUTINE, lpNameHandle *foundation.HANDLE) int32 {
 	_pName := win32.UTF16Ptr(pName)
-	_pServiceName := win32.UTF16Ptr(pServiceName)
+	_pServiceName := win32.UTF16PtrOrNil(pServiceName)
 	r1, _, _ := syscall.SyscallN(procSetAddrInfoEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pServiceName)), uintptr(unsafe.Pointer(pAddresses)), uintptr(dwAddressCount), uintptr(unsafe.Pointer(lpBlob)), uintptr(dwFlags), uintptr(dwNameSpace), uintptr(unsafe.Pointer(lpNspId)), uintptr(unsafe.Pointer(timeout)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(unsafe.Pointer(lpNameHandle)))
 	return int32(r1)
 }
@@ -2128,9 +2542,9 @@ func WSCEnumProtocols32(lpiProtocols *int32, lpProtocolBuffer *WSAPROTOCOL_INFOW
 // WSCGetApplicationCategory calls WS2_32!WSCGetApplicationCategory.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscgetapplicationcategory
 // Minimum OS: windows6.0.6000.
-func WSCGetApplicationCategory(Path string, PathLength uint32, Extra string, ExtraLength uint32, pPermittedLspCategories *uint32, lpErrno *int32) int32 {
+func WSCGetApplicationCategory(Path string, PathLength uint32, Extra *string, ExtraLength uint32, pPermittedLspCategories *uint32, lpErrno *int32) int32 {
 	_Path := win32.UTF16Ptr(Path)
-	_Extra := win32.UTF16Ptr(Extra)
+	_Extra := win32.UTF16PtrOrNil(Extra)
 	r1, _, _ := syscall.SyscallN(procWSCGetApplicationCategory.Addr(), uintptr(unsafe.Pointer(_Path)), uintptr(PathLength), uintptr(unsafe.Pointer(_Extra)), uintptr(ExtraLength), uintptr(unsafe.Pointer(pPermittedLspCategories)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
@@ -2251,9 +2665,9 @@ func WSCInstallProviderAndChains64_32(lpProviderId *win32.GUID, lpszProviderDllP
 // WSCSetApplicationCategory calls WS2_32!WSCSetApplicationCategory.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscsetapplicationcategory
 // Minimum OS: windows6.0.6000.
-func WSCSetApplicationCategory(Path string, PathLength uint32, Extra string, ExtraLength uint32, PermittedLspCategories uint32, pPrevPermLspCat *uint32, lpErrno *int32) int32 {
+func WSCSetApplicationCategory(Path string, PathLength uint32, Extra *string, ExtraLength uint32, PermittedLspCategories uint32, pPrevPermLspCat *uint32, lpErrno *int32) int32 {
 	_Path := win32.UTF16Ptr(Path)
-	_Extra := win32.UTF16Ptr(Extra)
+	_Extra := win32.UTF16PtrOrNil(Extra)
 	r1, _, _ := syscall.SyscallN(procWSCSetApplicationCategory.Addr(), uintptr(unsafe.Pointer(_Path)), uintptr(PathLength), uintptr(unsafe.Pointer(_Extra)), uintptr(ExtraLength), uintptr(PermittedLspCategories), uintptr(unsafe.Pointer(pPrevPermLspCat)), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }

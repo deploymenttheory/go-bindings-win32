@@ -4,34 +4,42 @@
 
 package libraryloader
 
-// ENUMRESLANGPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HMODULE, foundation.PSTR, foundation.PSTR, uint16, uintptr) foundation.BOOL.
+// ENUMRESLANGPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HMODULE, foundation.PSTR, foundation.PSTR, uint16, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ENUMRESLANGPROCA uintptr
 
-// ENUMRESLANGPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HMODULE, foundation.PWSTR, foundation.PWSTR, uint16, uintptr) foundation.BOOL.
+// ENUMRESLANGPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HMODULE, foundation.PWSTR, foundation.PWSTR, uint16, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ENUMRESLANGPROCW uintptr
 
-// ENUMRESNAMEPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HMODULE, foundation.PSTR, foundation.PSTR, uintptr) foundation.BOOL.
+// ENUMRESNAMEPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HMODULE, foundation.PSTR, foundation.PSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ENUMRESNAMEPROCA uintptr
 
-// ENUMRESNAMEPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HMODULE, foundation.PWSTR, foundation.PWSTR, uintptr) foundation.BOOL.
+// ENUMRESNAMEPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HMODULE, foundation.PWSTR, foundation.PWSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ENUMRESNAMEPROCW uintptr
 
-// ENUMRESTYPEPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HMODULE, foundation.PSTR, uintptr) foundation.BOOL.
+// ENUMRESTYPEPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HMODULE, foundation.PSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ENUMRESTYPEPROCA uintptr
 
-// ENUMRESTYPEPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HMODULE, foundation.PWSTR, uintptr) foundation.BOOL.
+// ENUMRESTYPEPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HMODULE, foundation.PWSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ENUMRESTYPEPROCW uintptr
 
-// PGET_MODULE_HANDLE_EXA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PSTR, *foundation.HMODULE) foundation.BOOL.
+// PGET_MODULE_HANDLE_EXA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PSTR, *foundation.HMODULE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PGET_MODULE_HANDLE_EXA uintptr
 
-// PGET_MODULE_HANDLE_EXW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PWSTR, *foundation.HMODULE) foundation.BOOL.
+// PGET_MODULE_HANDLE_EXW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PWSTR, *foundation.HMODULE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PGET_MODULE_HANDLE_EXW uintptr

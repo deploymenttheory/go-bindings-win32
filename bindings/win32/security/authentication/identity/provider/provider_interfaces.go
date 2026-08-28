@@ -393,8 +393,8 @@ type AsyncIIdentityStoreEx struct {
 var IID_AsyncIIdentityStoreEx = win32.GUID{Data1: 0xfca3af9a, Data2: 0x8a07, Data3: 0x4eae, Data4: [8]byte{0x86, 0x32, 0xec, 0x3d, 0xe6, 0x58, 0xa3, 0x6a}}
 
 // Begin_CreateConnectedIdentity dispatches through AsyncIIdentityStoreEx's vtable slot 3.
-func (self *AsyncIIdentityStoreEx) Begin_CreateConnectedIdentity(LocalName string, ConnectedName string, ProviderGUID *win32.GUID) error {
-	_LocalName := win32.UTF16Ptr(LocalName)
+func (self *AsyncIIdentityStoreEx) Begin_CreateConnectedIdentity(LocalName *string, ConnectedName string, ProviderGUID *win32.GUID) error {
+	_LocalName := win32.UTF16PtrOrNil(LocalName)
 	_ConnectedName := win32.UTF16Ptr(ConnectedName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_LocalName)), uintptr(unsafe.Pointer(_ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
 	return win32.ErrIfFailed(int32(r1))
@@ -655,8 +655,8 @@ type IIdentityStoreEx struct {
 var IID_IIdentityStoreEx = win32.GUID{Data1: 0xf9f9eb98, Data2: 0x8f7f, Data3: 0x4e38, Data4: [8]byte{0x95, 0x77, 0x69, 0x80, 0x11, 0x4c, 0xe3, 0x2b}}
 
 // CreateConnectedIdentity dispatches through IIdentityStoreEx's vtable slot 3.
-func (self *IIdentityStoreEx) CreateConnectedIdentity(LocalName string, ConnectedName string, ProviderGUID *win32.GUID) error {
-	_LocalName := win32.UTF16Ptr(LocalName)
+func (self *IIdentityStoreEx) CreateConnectedIdentity(LocalName *string, ConnectedName string, ProviderGUID *win32.GUID) error {
+	_LocalName := win32.UTF16PtrOrNil(LocalName)
 	_ConnectedName := win32.UTF16Ptr(ConnectedName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_LocalName)), uintptr(unsafe.Pointer(_ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
 	return win32.ErrIfFailed(int32(r1))

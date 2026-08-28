@@ -132,6 +132,234 @@ var (
 	procCreateUriWithFragment             = modURLMON.NewProc("CreateUriWithFragment")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BindMoniker                       *win32.Proc
+	CLSIDFromProgID                   *win32.Proc
+	CLSIDFromProgIDEx                 *win32.Proc
+	CLSIDFromString                   *win32.Proc
+	CoAddRefServerProcess             *win32.Proc
+	CoAllowSetForegroundWindow        *win32.Proc
+	CoAllowUnmarshalerCLSID           *win32.Proc
+	CoBuildVersion                    *win32.Proc
+	CoCancelCall                      *win32.Proc
+	CoCopyProxy                       *win32.Proc
+	CoCreateFreeThreadedMarshaler     *win32.Proc
+	CoCreateGuid                      *win32.Proc
+	CoCreateInstance                  *win32.Proc
+	CoCreateInstanceEx                *win32.Proc
+	CoCreateInstanceFromApp           *win32.Proc
+	CoDecrementMTAUsage               *win32.Proc
+	CoDisableCallCancellation         *win32.Proc
+	CoDisconnectContext               *win32.Proc
+	CoDisconnectObject                *win32.Proc
+	CoDosDateTimeToFileTime           *win32.Proc
+	CoEnableCallCancellation          *win32.Proc
+	CoFileTimeNow                     *win32.Proc
+	CoFileTimeToDosDateTime           *win32.Proc
+	CoFreeAllLibraries                *win32.Proc
+	CoFreeLibrary                     *win32.Proc
+	CoFreeUnusedLibraries             *win32.Proc
+	CoFreeUnusedLibrariesEx           *win32.Proc
+	CoGetApartmentType                *win32.Proc
+	CoGetCallContext                  *win32.Proc
+	CoGetCallerTID                    *win32.Proc
+	CoGetCancelObject                 *win32.Proc
+	CoGetClassObject                  *win32.Proc
+	CoGetContextToken                 *win32.Proc
+	CoGetCurrentLogicalThreadId       *win32.Proc
+	CoGetCurrentProcess               *win32.Proc
+	CoGetMalloc                       *win32.Proc
+	CoGetObject                       *win32.Proc
+	CoGetObjectContext                *win32.Proc
+	CoGetPSClsid                      *win32.Proc
+	CoGetSystemSecurityPermissions    *win32.Proc
+	CoGetTreatAsClass                 *win32.Proc
+	CoImpersonateClient               *win32.Proc
+	CoIncrementMTAUsage               *win32.Proc
+	CoInitialize                      *win32.Proc
+	CoInitializeEx                    *win32.Proc
+	CoInitializeSecurity              *win32.Proc
+	CoInstall                         *win32.Proc
+	CoInvalidateRemoteMachineBindings *win32.Proc
+	CoIsHandlerConnected              *win32.Proc
+	CoIsOle1Class                     *win32.Proc
+	CoLoadLibrary                     *win32.Proc
+	CoLockObjectExternal              *win32.Proc
+	CoQueryAuthenticationServices     *win32.Proc
+	CoQueryClientBlanket              *win32.Proc
+	CoQueryProxyBlanket               *win32.Proc
+	CoRegisterActivationFilter        *win32.Proc
+	CoRegisterChannelHook             *win32.Proc
+	CoRegisterClassObject             *win32.Proc
+	CoRegisterDeviceCatalog           *win32.Proc
+	CoRegisterInitializeSpy           *win32.Proc
+	CoRegisterMallocSpy               *win32.Proc
+	CoRegisterPSClsid                 *win32.Proc
+	CoRegisterSurrogate               *win32.Proc
+	CoReleaseServerProcess            *win32.Proc
+	CoResumeClassObjects              *win32.Proc
+	CoRevertToSelf                    *win32.Proc
+	CoRevokeClassObject               *win32.Proc
+	CoRevokeDeviceCatalog             *win32.Proc
+	CoRevokeInitializeSpy             *win32.Proc
+	CoRevokeMallocSpy                 *win32.Proc
+	CoSetCancelObject                 *win32.Proc
+	CoSetProxyBlanket                 *win32.Proc
+	CoSuspendClassObjects             *win32.Proc
+	CoSwitchCallContext               *win32.Proc
+	CoTaskMemAlloc                    *win32.Proc
+	CoTaskMemFree                     *win32.Proc
+	CoTaskMemRealloc                  *win32.Proc
+	CoTestCancel                      *win32.Proc
+	CoTreatAsClass                    *win32.Proc
+	CoUninitialize                    *win32.Proc
+	CoWaitForMultipleHandles          *win32.Proc
+	CoWaitForMultipleObjects          *win32.Proc
+	CreateAntiMoniker                 *win32.Proc
+	CreateBindCtx                     *win32.Proc
+	CreateClassMoniker                *win32.Proc
+	CreateDataAdviseHolder            *win32.Proc
+	CreateDataCache                   *win32.Proc
+	CreateFileMoniker                 *win32.Proc
+	CreateGenericComposite            *win32.Proc
+	CreateIUriBuilder                 *win32.Proc
+	CreateItemMoniker                 *win32.Proc
+	CreateObjrefMoniker               *win32.Proc
+	CreatePointerMoniker              *win32.Proc
+	CreateStdProgressIndicator        *win32.Proc
+	CreateUri                         *win32.Proc
+	CreateUriFromMultiByteString      *win32.Proc
+	CreateUriWithFragment             *win32.Proc
+	DcomChannelSetHResult             *win32.Proc
+	GetClassFile                      *win32.Proc
+	GetErrorInfo                      *win32.Proc
+	GetRunningObjectTable             *win32.Proc
+	IIDFromString                     *win32.Proc
+	MkParseDisplayName                *win32.Proc
+	MonikerCommonPrefixWith           *win32.Proc
+	MonikerRelativePathTo             *win32.Proc
+	ProgIDFromCLSID                   *win32.Proc
+	SetErrorInfo                      *win32.Proc
+	StringFromCLSID                   *win32.Proc
+	StringFromGUID2                   *win32.Proc
+	StringFromIID                     *win32.Proc
+}{
+	BindMoniker:                       procBindMoniker,
+	CLSIDFromProgID:                   procCLSIDFromProgID,
+	CLSIDFromProgIDEx:                 procCLSIDFromProgIDEx,
+	CLSIDFromString:                   procCLSIDFromString,
+	CoAddRefServerProcess:             procCoAddRefServerProcess,
+	CoAllowSetForegroundWindow:        procCoAllowSetForegroundWindow,
+	CoAllowUnmarshalerCLSID:           procCoAllowUnmarshalerCLSID,
+	CoBuildVersion:                    procCoBuildVersion,
+	CoCancelCall:                      procCoCancelCall,
+	CoCopyProxy:                       procCoCopyProxy,
+	CoCreateFreeThreadedMarshaler:     procCoCreateFreeThreadedMarshaler,
+	CoCreateGuid:                      procCoCreateGuid,
+	CoCreateInstance:                  procCoCreateInstance,
+	CoCreateInstanceEx:                procCoCreateInstanceEx,
+	CoCreateInstanceFromApp:           procCoCreateInstanceFromApp,
+	CoDecrementMTAUsage:               procCoDecrementMTAUsage,
+	CoDisableCallCancellation:         procCoDisableCallCancellation,
+	CoDisconnectContext:               procCoDisconnectContext,
+	CoDisconnectObject:                procCoDisconnectObject,
+	CoDosDateTimeToFileTime:           procCoDosDateTimeToFileTime,
+	CoEnableCallCancellation:          procCoEnableCallCancellation,
+	CoFileTimeNow:                     procCoFileTimeNow,
+	CoFileTimeToDosDateTime:           procCoFileTimeToDosDateTime,
+	CoFreeAllLibraries:                procCoFreeAllLibraries,
+	CoFreeLibrary:                     procCoFreeLibrary,
+	CoFreeUnusedLibraries:             procCoFreeUnusedLibraries,
+	CoFreeUnusedLibrariesEx:           procCoFreeUnusedLibrariesEx,
+	CoGetApartmentType:                procCoGetApartmentType,
+	CoGetCallContext:                  procCoGetCallContext,
+	CoGetCallerTID:                    procCoGetCallerTID,
+	CoGetCancelObject:                 procCoGetCancelObject,
+	CoGetClassObject:                  procCoGetClassObject,
+	CoGetContextToken:                 procCoGetContextToken,
+	CoGetCurrentLogicalThreadId:       procCoGetCurrentLogicalThreadId,
+	CoGetCurrentProcess:               procCoGetCurrentProcess,
+	CoGetMalloc:                       procCoGetMalloc,
+	CoGetObject:                       procCoGetObject,
+	CoGetObjectContext:                procCoGetObjectContext,
+	CoGetPSClsid:                      procCoGetPSClsid,
+	CoGetSystemSecurityPermissions:    procCoGetSystemSecurityPermissions,
+	CoGetTreatAsClass:                 procCoGetTreatAsClass,
+	CoImpersonateClient:               procCoImpersonateClient,
+	CoIncrementMTAUsage:               procCoIncrementMTAUsage,
+	CoInitialize:                      procCoInitialize,
+	CoInitializeEx:                    procCoInitializeEx,
+	CoInitializeSecurity:              procCoInitializeSecurity,
+	CoInstall:                         procCoInstall,
+	CoInvalidateRemoteMachineBindings: procCoInvalidateRemoteMachineBindings,
+	CoIsHandlerConnected:              procCoIsHandlerConnected,
+	CoIsOle1Class:                     procCoIsOle1Class,
+	CoLoadLibrary:                     procCoLoadLibrary,
+	CoLockObjectExternal:              procCoLockObjectExternal,
+	CoQueryAuthenticationServices:     procCoQueryAuthenticationServices,
+	CoQueryClientBlanket:              procCoQueryClientBlanket,
+	CoQueryProxyBlanket:               procCoQueryProxyBlanket,
+	CoRegisterActivationFilter:        procCoRegisterActivationFilter,
+	CoRegisterChannelHook:             procCoRegisterChannelHook,
+	CoRegisterClassObject:             procCoRegisterClassObject,
+	CoRegisterDeviceCatalog:           procCoRegisterDeviceCatalog,
+	CoRegisterInitializeSpy:           procCoRegisterInitializeSpy,
+	CoRegisterMallocSpy:               procCoRegisterMallocSpy,
+	CoRegisterPSClsid:                 procCoRegisterPSClsid,
+	CoRegisterSurrogate:               procCoRegisterSurrogate,
+	CoReleaseServerProcess:            procCoReleaseServerProcess,
+	CoResumeClassObjects:              procCoResumeClassObjects,
+	CoRevertToSelf:                    procCoRevertToSelf,
+	CoRevokeClassObject:               procCoRevokeClassObject,
+	CoRevokeDeviceCatalog:             procCoRevokeDeviceCatalog,
+	CoRevokeInitializeSpy:             procCoRevokeInitializeSpy,
+	CoRevokeMallocSpy:                 procCoRevokeMallocSpy,
+	CoSetCancelObject:                 procCoSetCancelObject,
+	CoSetProxyBlanket:                 procCoSetProxyBlanket,
+	CoSuspendClassObjects:             procCoSuspendClassObjects,
+	CoSwitchCallContext:               procCoSwitchCallContext,
+	CoTaskMemAlloc:                    procCoTaskMemAlloc,
+	CoTaskMemFree:                     procCoTaskMemFree,
+	CoTaskMemRealloc:                  procCoTaskMemRealloc,
+	CoTestCancel:                      procCoTestCancel,
+	CoTreatAsClass:                    procCoTreatAsClass,
+	CoUninitialize:                    procCoUninitialize,
+	CoWaitForMultipleHandles:          procCoWaitForMultipleHandles,
+	CoWaitForMultipleObjects:          procCoWaitForMultipleObjects,
+	CreateAntiMoniker:                 procCreateAntiMoniker,
+	CreateBindCtx:                     procCreateBindCtx,
+	CreateClassMoniker:                procCreateClassMoniker,
+	CreateDataAdviseHolder:            procCreateDataAdviseHolder,
+	CreateDataCache:                   procCreateDataCache,
+	CreateFileMoniker:                 procCreateFileMoniker,
+	CreateGenericComposite:            procCreateGenericComposite,
+	CreateIUriBuilder:                 procCreateIUriBuilder,
+	CreateItemMoniker:                 procCreateItemMoniker,
+	CreateObjrefMoniker:               procCreateObjrefMoniker,
+	CreatePointerMoniker:              procCreatePointerMoniker,
+	CreateStdProgressIndicator:        procCreateStdProgressIndicator,
+	CreateUri:                         procCreateUri,
+	CreateUriFromMultiByteString:      procCreateUriFromMultiByteString,
+	CreateUriWithFragment:             procCreateUriWithFragment,
+	DcomChannelSetHResult:             procDcomChannelSetHResult,
+	GetClassFile:                      procGetClassFile,
+	GetErrorInfo:                      procGetErrorInfo,
+	GetRunningObjectTable:             procGetRunningObjectTable,
+	IIDFromString:                     procIIDFromString,
+	MkParseDisplayName:                procMkParseDisplayName,
+	MonikerCommonPrefixWith:           procMonikerCommonPrefixWith,
+	MonikerRelativePathTo:             procMonikerRelativePathTo,
+	ProgIDFromCLSID:                   procProgIDFromCLSID,
+	SetErrorInfo:                      procSetErrorInfo,
+	StringFromCLSID:                   procStringFromCLSID,
+	StringFromGUID2:                   procStringFromGUID2,
+	StringFromIID:                     procStringFromIID,
+}
+
 // BindMoniker calls OLE32!BindMoniker.
 // https://learn.microsoft.com/windows/win32/api/objbase/nf-objbase-bindmoniker
 // Minimum OS: windows5.0.
@@ -711,8 +939,8 @@ func CoSetCancelObject(pUnk *IUnknown) error {
 // CoSetProxyBlanket calls OLE32!CoSetProxyBlanket.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cosetproxyblanket
 // Minimum OS: windows5.0.
-func CoSetProxyBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
-	_pServerPrincName := win32.UTF16Ptr(pServerPrincName)
+func CoSetProxyBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName *string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
+	_pServerPrincName := win32.UTF16PtrOrNil(pServerPrincName)
 	r1, _, _ := syscall.SyscallN(procCoSetProxyBlanket.Addr(), uintptr(unsafe.Pointer(pProxy)), uintptr(dwAuthnSvc), uintptr(dwAuthzSvc), uintptr(unsafe.Pointer(_pServerPrincName)), uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(dwCapabilities))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -912,9 +1140,9 @@ func CreateUriFromMultiByteString(pszANSIInputUri foundation.PSTR, dwEncodingFla
 }
 
 // CreateUriWithFragment calls URLMON!CreateUriWithFragment.
-func CreateUriWithFragment(pwzURI string, pwzFragment string, dwFlags uint32, ppURI **IUri) error {
+func CreateUriWithFragment(pwzURI string, pwzFragment *string, dwFlags uint32, ppURI **IUri) error {
 	_pwzURI := win32.UTF16Ptr(pwzURI)
-	_pwzFragment := win32.UTF16Ptr(pwzFragment)
+	_pwzFragment := win32.UTF16PtrOrNil(pwzFragment)
 	r1, _, _ := syscall.SyscallN(procCreateUriWithFragment.Addr(), uintptr(unsafe.Pointer(_pwzURI)), uintptr(unsafe.Pointer(_pwzFragment)), uintptr(dwFlags), 0, uintptr(unsafe.Pointer(ppURI)))
 	return win32.ErrIfFailed(int32(r1))
 }

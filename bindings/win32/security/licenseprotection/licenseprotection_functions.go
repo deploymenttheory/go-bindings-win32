@@ -21,6 +21,18 @@ var (
 	procValidateLicenseKeyProtection     = modlicenseprotection.NewProc("ValidateLicenseKeyProtection")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	RegisterLicenseKeyWithExpiration *win32.Proc
+	ValidateLicenseKeyProtection     *win32.Proc
+}{
+	RegisterLicenseKeyWithExpiration: procRegisterLicenseKeyWithExpiration,
+	ValidateLicenseKeyProtection:     procValidateLicenseKeyProtection,
+}
+
 // RegisterLicenseKeyWithExpiration calls licenseprotection!RegisterLicenseKeyWithExpiration.
 func RegisterLicenseKeyWithExpiration(licenseKey string, validityInDays uint32, status *LicenseProtectionStatus) error {
 	_licenseKey := win32.UTF16Ptr(licenseKey)

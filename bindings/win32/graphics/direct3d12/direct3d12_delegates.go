@@ -4,74 +4,85 @@
 
 package direct3d12
 
-// D3D12ApplicationDescFunc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*D3D12_APPLICATION_DESC, unsafe.Pointer).
+// D3D12ApplicationDescFunc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*D3D12_APPLICATION_DESC, unsafe.Pointer) uintptr.
 type D3D12ApplicationDescFunc uintptr
 
-// D3D12CompilerCacheSessionAllocationFunc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer) unsafe.Pointer.
+// D3D12CompilerCacheSessionAllocationFunc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type D3D12CompilerCacheSessionAllocationFunc uintptr
 
-// D3D12CompilerCacheSessionGroupValueKeysFunc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*D3D12_COMPILER_CACHE_VALUE_KEY, unsafe.Pointer).
+// D3D12CompilerCacheSessionGroupValueKeysFunc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*D3D12_COMPILER_CACHE_VALUE_KEY, unsafe.Pointer) uintptr.
 type D3D12CompilerCacheSessionGroupValueKeysFunc uintptr
 
-// D3D12CompilerCacheSessionGroupValuesFunc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *D3D12_COMPILER_CACHE_TYPED_CONST_VALUE, unsafe.Pointer).
+// D3D12CompilerCacheSessionGroupValuesFunc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *D3D12_COMPILER_CACHE_TYPED_CONST_VALUE, unsafe.Pointer) uintptr.
 type D3D12CompilerCacheSessionGroupValuesFunc uintptr
 
-// D3D12MessageFunc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(D3D12_MESSAGE_CATEGORY, D3D12_MESSAGE_SEVERITY, D3D12_MESSAGE_ID, foundation.PSTR, unsafe.Pointer).
+// D3D12MessageFunc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(D3D12_MESSAGE_CATEGORY, D3D12_MESSAGE_SEVERITY, D3D12_MESSAGE_ID, foundation.PSTR, unsafe.Pointer) uintptr.
 type D3D12MessageFunc uintptr
 
-// D3D12PipelineStateFunc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32, *D3D12_PIPELINE_STATE_STREAM_DESC, unsafe.Pointer).
+// D3D12PipelineStateFunc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32, *D3D12_PIPELINE_STATE_STREAM_DESC, unsafe.Pointer) uintptr.
 type D3D12PipelineStateFunc uintptr
 
-// D3D12StateObjectFunc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32, *D3D12_STATE_OBJECT_DESC, unsafe.Pointer, uint32, unsafe.Pointer).
+// D3D12StateObjectFunc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32, *D3D12_STATE_OBJECT_DESC, unsafe.Pointer, uint32, unsafe.Pointer) uintptr.
 type D3D12StateObjectFunc uintptr
 
-// D3D12_PFN_TRIM_NOTIFICATION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*D3D12_TRIM_NOTIFICATION).
+// D3D12_PFN_TRIM_NOTIFICATION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*D3D12_TRIM_NOTIFICATION) uintptr.
 type D3D12_PFN_TRIM_NOTIFICATION_CALLBACK uintptr
 
-// PFN_D3D12_COMPILER_CREATE_FACTORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// PFN_D3D12_COMPILER_CREATE_FACTORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_COMPILER_CREATE_FACTORY uintptr
 
-// PFN_D3D12_COMPILER_SERIALIZE_VERSIONED_ROOT_SIGNATURE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*D3D12_VERSIONED_ROOT_SIGNATURE_DESC, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
+// PFN_D3D12_COMPILER_SERIALIZE_VERSIONED_ROOT_SIGNATURE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*D3D12_VERSIONED_ROOT_SIGNATURE_DESC, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_COMPILER_SERIALIZE_VERSIONED_ROOT_SIGNATURE uintptr
 
-// PFN_D3D12_CREATE_DEVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown, graphicsdirect3d.D3D_FEATURE_LEVEL, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// PFN_D3D12_CREATE_DEVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown, graphicsdirect3d.D3D_FEATURE_LEVEL, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_CREATE_DEVICE uintptr
 
-// PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_CREATE_ROOT_SIGNATURE_DESERIALIZER uintptr
 
-// PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER uintptr
 
-// PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER_FROM_SUBOBJECT_IN_LIBRARY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, foundation.PWSTR, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER_FROM_SUBOBJECT_IN_LIBRARY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, foundation.PWSTR, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_CREATE_VERSIONED_ROOT_SIGNATURE_DESERIALIZER_FROM_SUBOBJECT_IN_LIBRARY uintptr
 
-// PFN_D3D12_GET_DEBUG_INTERFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// PFN_D3D12_GET_DEBUG_INTERFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_GET_DEBUG_INTERFACE uintptr
 
-// PFN_D3D12_GET_INTERFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// PFN_D3D12_GET_INTERFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_GET_INTERFACE uintptr
 
-// PFN_D3D12_SERIALIZE_ROOT_SIGNATURE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*D3D12_ROOT_SIGNATURE_DESC, D3D_ROOT_SIGNATURE_VERSION, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
+// PFN_D3D12_SERIALIZE_ROOT_SIGNATURE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*D3D12_ROOT_SIGNATURE_DESC, D3D_ROOT_SIGNATURE_VERSION, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_SERIALIZE_ROOT_SIGNATURE uintptr
 
-// PFN_D3D12_SERIALIZE_VERSIONED_ROOT_SIGNATURE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*D3D12_VERSIONED_ROOT_SIGNATURE_DESC, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
+// PFN_D3D12_SERIALIZE_VERSIONED_ROOT_SIGNATURE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*D3D12_VERSIONED_ROOT_SIGNATURE_DESC, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D12_SERIALIZE_VERSIONED_ROOT_SIGNATURE uintptr

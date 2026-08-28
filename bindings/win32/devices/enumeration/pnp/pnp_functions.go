@@ -29,6 +29,32 @@ var (
 	procSwMemFree                    = modCFGMGR32.NewProc("SwMemFree")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	SwDeviceClose                *win32.Proc
+	SwDeviceCreate               *win32.Proc
+	SwDeviceGetLifetime          *win32.Proc
+	SwDeviceInterfacePropertySet *win32.Proc
+	SwDeviceInterfaceRegister    *win32.Proc
+	SwDeviceInterfaceSetState    *win32.Proc
+	SwDevicePropertySet          *win32.Proc
+	SwDeviceSetLifetime          *win32.Proc
+	SwMemFree                    *win32.Proc
+}{
+	SwDeviceClose:                procSwDeviceClose,
+	SwDeviceCreate:               procSwDeviceCreate,
+	SwDeviceGetLifetime:          procSwDeviceGetLifetime,
+	SwDeviceInterfacePropertySet: procSwDeviceInterfacePropertySet,
+	SwDeviceInterfaceRegister:    procSwDeviceInterfaceRegister,
+	SwDeviceInterfaceSetState:    procSwDeviceInterfaceSetState,
+	SwDevicePropertySet:          procSwDevicePropertySet,
+	SwDeviceSetLifetime:          procSwDeviceSetLifetime,
+	SwMemFree:                    procSwMemFree,
+}
+
 // SwDeviceClose calls CFGMGR32!SwDeviceClose.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdeviceclose
 // Minimum OS: windows8.0.
@@ -74,8 +100,8 @@ func SwDeviceInterfacePropertySet(hSwDevice HSWDEVICE, pszDeviceInterfaceId stri
 // SwDeviceInterfaceRegister calls CFGMGR32!SwDeviceInterfaceRegister.
 // https://learn.microsoft.com/windows/win32/api/swdevice/nf-swdevice-swdeviceinterfaceregister
 // Minimum OS: windows8.0.
-func SwDeviceInterfaceRegister(hSwDevice HSWDEVICE, pInterfaceClassGuid *win32.GUID, pszReferenceString string, pProperties []devicesproperties.DEVPROPERTY, fEnabled bool, ppszDeviceInterfaceId *foundation.PWSTR) error {
-	_pszReferenceString := win32.UTF16Ptr(pszReferenceString)
+func SwDeviceInterfaceRegister(hSwDevice HSWDEVICE, pInterfaceClassGuid *win32.GUID, pszReferenceString *string, pProperties []devicesproperties.DEVPROPERTY, fEnabled bool, ppszDeviceInterfaceId *foundation.PWSTR) error {
+	_pszReferenceString := win32.UTF16PtrOrNil(pszReferenceString)
 	var _pProperties *devicesproperties.DEVPROPERTY
 	if len(pProperties) > 0 {
 		_pProperties = &pProperties[0]

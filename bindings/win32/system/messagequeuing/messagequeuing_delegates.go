@@ -4,6 +4,6 @@
 
 package messagequeuing
 
-// PMQRECEIVECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HRESULT, uintptr, uint32, uint32, *MQMSGPROPS, *systemio.OVERLAPPED, foundation.HANDLE).
+// PMQRECEIVECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HRESULT, uintptr, uint32, uint32, *MQMSGPROPS, *systemio.OVERLAPPED, foundation.HANDLE) uintptr.
 type PMQRECEIVECALLBACK uintptr

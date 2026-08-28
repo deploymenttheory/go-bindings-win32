@@ -861,6 +861,15 @@ func (self *IRMHelper) RMCount(dwcTotalNumberOfRMs uint32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIRMHelper_RMInfo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RMInfo dispatches through IRMHelper's vtable slot 4.
+func (self *IRMHelper) RMInfo(pXa_Switch *Xa_switch_t, fCDeclCallingConv bool, pszOpenString foundation.PSTR, pszCloseString foundation.PSTR, guidRMRecovery win32.GUID) error {
+	_fCDeclCallingConv := win32.Bool32(fCDeclCallingConv)
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIRMHelper_RMInfo, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXa_Switch)), uintptr(_fCDeclCallingConv), uintptr(unsafe.Pointer(pszOpenString)), uintptr(unsafe.Pointer(pszCloseString)), uintptr(unsafe.Pointer(&guidRMRecovery))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IResourceManager: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iresourcemanager
 // IID: 13741d21-87eb-11ce-8081-0080c758527e
 type IResourceManager struct {
@@ -1647,6 +1656,14 @@ type IXAConfig struct {
 
 // IID_IXAConfig is the interface identifier for IXAConfig.
 var IID_IXAConfig = win32.GUID{Data1: 0xc8a6e3a1, Data2: 0x9a8c, Data3: 0x11cf, Data4: [8]byte{0xa3, 0x08, 0x00, 0xa0, 0xc9, 0x05, 0x41, 0x6e}}
+
+var specIXAConfig_Initialize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Initialize dispatches through IXAConfig's vtable slot 3.
+func (self *IXAConfig) Initialize(clsidHelperDll win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIXAConfig_Initialize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&clsidHelperDll))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Terminate dispatches through IXAConfig's vtable slot 4.
 func (self *IXAConfig) Terminate() error {

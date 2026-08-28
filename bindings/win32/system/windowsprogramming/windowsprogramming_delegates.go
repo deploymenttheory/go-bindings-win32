@@ -4,126 +4,154 @@
 
 package windowsprogramming
 
-// APPLICATION_RECOVERY_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// APPLICATION_RECOVERY_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type APPLICATION_RECOVERY_CALLBACK uintptr
 
-// ENUM_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DCISURFACEINFO, unsafe.Pointer).
+// ENUM_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DCISURFACEINFO, unsafe.Pointer) uintptr.
 type ENUM_CALLBACK uintptr
 
-// PDELAYLOAD_FAILURE_DLL_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *DELAYLOAD_INFO) unsafe.Pointer.
+// PDELAYLOAD_FAILURE_DLL_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *DELAYLOAD_INFO) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PDELAYLOAD_FAILURE_DLL_CALLBACK uintptr
 
-// PFEATURE_STATE_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFEATURE_STATE_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFEATURE_STATE_CHANGE_CALLBACK uintptr
 
-// PFIBER_CALLOUT_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) unsafe.Pointer.
+// PFIBER_CALLOUT_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFIBER_CALLOUT_ROUTINE uintptr
 
-// PQUERYACTCTXW_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.HANDLE, unsafe.Pointer, uint32, unsafe.Pointer, uintptr, *uintptr) foundation.BOOL.
+// PQUERYACTCTXW_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.HANDLE, unsafe.Pointer, uint32, unsafe.Pointer, uintptr, *uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PQUERYACTCTXW_FUNC uintptr
 
-// PWINSTATIONQUERYINFORMATIONW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, WINSTATIONINFOCLASS, unsafe.Pointer, uint32, *uint32) foundation.BOOLEAN.
+// PWINSTATIONQUERYINFORMATIONW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, WINSTATIONINFOCLASS, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PWINSTATIONQUERYINFORMATIONW uintptr
 
-// PWLDP_CANEXECUTEBUFFER_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, *byte, uint32, foundation.PWSTR, *WLDP_EXECUTION_POLICY) foundation.HRESULT.
+// PWLDP_CANEXECUTEBUFFER_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, *byte, uint32, foundation.PWSTR, *WLDP_EXECUTION_POLICY) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_CANEXECUTEBUFFER_API uintptr
 
-// PWLDP_CANEXECUTEFILEFROMDETACHEDSIGNATURE_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, foundation.HANDLE, foundation.HANDLE, foundation.PWSTR, *WLDP_EXECUTION_POLICY) foundation.HRESULT.
+// PWLDP_CANEXECUTEFILEFROMDETACHEDSIGNATURE_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, foundation.HANDLE, foundation.HANDLE, foundation.PWSTR, *WLDP_EXECUTION_POLICY) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_CANEXECUTEFILEFROMDETACHEDSIGNATURE_API uintptr
 
-// PWLDP_CANEXECUTEFILE_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, foundation.HANDLE, foundation.PWSTR, *WLDP_EXECUTION_POLICY) foundation.HRESULT.
+// PWLDP_CANEXECUTEFILE_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, foundation.HANDLE, foundation.PWSTR, *WLDP_EXECUTION_POLICY) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_CANEXECUTEFILE_API uintptr
 
-// PWLDP_CANEXECUTESTREAM_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, *systemcom.IStream, foundation.PWSTR, *WLDP_EXECUTION_POLICY) foundation.HRESULT.
+// PWLDP_CANEXECUTESTREAM_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, WLDP_EXECUTION_EVALUATION_OPTIONS, *systemcom.IStream, foundation.PWSTR, *WLDP_EXECUTION_POLICY) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_CANEXECUTESTREAM_API uintptr
 
-// PWLDP_GETAPPLICATIONSETTINGBOOLEAN_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *foundation.BOOL) foundation.HRESULT.
+// PWLDP_GETAPPLICATIONSETTINGBOOLEAN_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_GETAPPLICATIONSETTINGBOOLEAN_API uintptr
 
-// PWLDP_GETAPPLICATIONSETTINGSTRINGLIST_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uintptr, *uintptr, foundation.PWSTR) foundation.HRESULT.
+// PWLDP_GETAPPLICATIONSETTINGSTRINGLIST_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uintptr, *uintptr, foundation.PWSTR) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_GETAPPLICATIONSETTINGSTRINGLIST_API uintptr
 
-// PWLDP_GETAPPLICATIONSETTINGSTRINGSET_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uintptr, *uintptr, foundation.PWSTR) foundation.HRESULT.
+// PWLDP_GETAPPLICATIONSETTINGSTRINGSET_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uintptr, *uintptr, foundation.PWSTR) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_GETAPPLICATIONSETTINGSTRINGSET_API uintptr
 
-// PWLDP_ISAPPAPPROVEDBYPOLICY_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint64) foundation.HRESULT.
+// PWLDP_ISAPPAPPROVEDBYPOLICY_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_ISAPPAPPROVEDBYPOLICY_API uintptr
 
-// PWLDP_ISDYNAMICCODEPOLICYENABLED_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.BOOL) foundation.HRESULT.
+// PWLDP_ISDYNAMICCODEPOLICYENABLED_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_ISDYNAMICCODEPOLICYENABLED_API uintptr
 
-// PWLDP_ISPRODUCTIONCONFIGURATION_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.BOOL) foundation.HRESULT.
+// PWLDP_ISPRODUCTIONCONFIGURATION_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_ISPRODUCTIONCONFIGURATION_API uintptr
 
-// PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.BOOL) foundation.HRESULT.
+// PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API uintptr
 
-// PWLDP_QUERYDEVICESECURITYINFORMATION_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WLDP_DEVICE_SECURITY_INFORMATION, uint32, *uint32) foundation.HRESULT.
+// PWLDP_QUERYDEVICESECURITYINFORMATION_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WLDP_DEVICE_SECURITY_INFORMATION, uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_QUERYDEVICESECURITYINFORMATION_API uintptr
 
-// PWLDP_QUERYDYNAMICODETRUST_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, uint32) foundation.HRESULT.
+// PWLDP_QUERYDYNAMICODETRUST_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_QUERYDYNAMICODETRUST_API uintptr
 
-// PWLDP_QUERYPOLICYSETTINGENABLED2_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *foundation.BOOL) foundation.HRESULT.
+// PWLDP_QUERYPOLICYSETTINGENABLED2_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_QUERYPOLICYSETTINGENABLED2_API uintptr
 
-// PWLDP_QUERYPOLICYSETTINGENABLED_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(WLDP_POLICY_SETTING, *foundation.BOOL) foundation.HRESULT.
+// PWLDP_QUERYPOLICYSETTINGENABLED_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(WLDP_POLICY_SETTING, *foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_QUERYPOLICYSETTINGENABLED_API uintptr
 
-// PWLDP_QUERYSECURITYPOLICY_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.UNICODE_STRING, *foundation.UNICODE_STRING, *foundation.UNICODE_STRING, *WLDP_SECURE_SETTING_VALUE_TYPE, unsafe.Pointer, *uint32) foundation.HRESULT.
+// PWLDP_QUERYSECURITYPOLICY_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.UNICODE_STRING, *foundation.UNICODE_STRING, *foundation.UNICODE_STRING, *WLDP_SECURE_SETTING_VALUE_TYPE, unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_QUERYSECURITYPOLICY_API uintptr
 
-// PWLDP_QUERYWINDOWSLOCKDOWNMODE_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WLDP_WINDOWS_LOCKDOWN_MODE) foundation.HRESULT.
+// PWLDP_QUERYWINDOWSLOCKDOWNMODE_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WLDP_WINDOWS_LOCKDOWN_MODE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_QUERYWINDOWSLOCKDOWNMODE_API uintptr
 
-// PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WLDP_WINDOWS_LOCKDOWN_RESTRICTION) foundation.HRESULT.
+// PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WLDP_WINDOWS_LOCKDOWN_RESTRICTION) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_API uintptr
 
-// PWLDP_RESETPRODUCTIONCONFIGURATION_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.HRESULT.
+// PWLDP_RESETPRODUCTIONCONFIGURATION_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_RESETPRODUCTIONCONFIGURATION_API uintptr
 
-// PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.HRESULT.
+// PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API uintptr
 
-// PWLDP_SETDYNAMICCODETRUST_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.HRESULT.
+// PWLDP_SETDYNAMICCODETRUST_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_SETDYNAMICCODETRUST_API uintptr
 
-// PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(WLDP_WINDOWS_LOCKDOWN_RESTRICTION) foundation.HRESULT.
+// PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API is a callback pointer: create one with syscall.NewCallback
+// using the shape func(WLDP_WINDOWS_LOCKDOWN_RESTRICTION) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWLDP_SETWINDOWSLOCKDOWNRESTRICTION_API uintptr
 
-// REGINSTALLA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HMODULE, foundation.PSTR, *STRTABLEA) foundation.HRESULT.
+// REGINSTALLA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HMODULE, foundation.PSTR, *STRTABLEA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type REGINSTALLA uintptr
 
-// WINWATCHNOTIFYPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HWINWATCH, foundation.HWND, uint32, foundation.LPARAM).
+// WINWATCHNOTIFYPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HWINWATCH, foundation.HWND, uint32, foundation.LPARAM) uintptr.
 type WINWATCHNOTIFYPROC uintptr

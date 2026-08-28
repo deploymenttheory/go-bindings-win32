@@ -25,6 +25,28 @@ var (
 	procFhServiceUnblockBackup       = modfhsvcctl.NewProc("FhServiceUnblockBackup")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	FhServiceBlockBackup         *win32.Proc
+	FhServiceClosePipe           *win32.Proc
+	FhServiceOpenPipe            *win32.Proc
+	FhServiceReloadConfiguration *win32.Proc
+	FhServiceStartBackup         *win32.Proc
+	FhServiceStopBackup          *win32.Proc
+	FhServiceUnblockBackup       *win32.Proc
+}{
+	FhServiceBlockBackup:         procFhServiceBlockBackup,
+	FhServiceClosePipe:           procFhServiceClosePipe,
+	FhServiceOpenPipe:            procFhServiceOpenPipe,
+	FhServiceReloadConfiguration: procFhServiceReloadConfiguration,
+	FhServiceStartBackup:         procFhServiceStartBackup,
+	FhServiceStopBackup:          procFhServiceStopBackup,
+	FhServiceUnblockBackup:       procFhServiceUnblockBackup,
+}
+
 // FhServiceBlockBackup calls fhsvcctl!FhServiceBlockBackup.
 // https://learn.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceblockbackup
 // Minimum OS: windows8.0.

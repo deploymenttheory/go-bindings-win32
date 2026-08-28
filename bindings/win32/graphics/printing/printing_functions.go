@@ -101,6 +101,8 @@ var (
 	procConfigurePort                                = modwinspool_drv.NewProc("ConfigurePortW")
 	procConfigurePortA                               = modwinspool_drv.NewProc("ConfigurePortA")
 	procConnectToPrinterDlg                          = modwinspool_drv.NewProc("ConnectToPrinterDlg")
+	procCorePrinterDriverInstalled                   = modwinspool_drv.NewProc("CorePrinterDriverInstalledW")
+	procCorePrinterDriverInstalledA                  = modwinspool_drv.NewProc("CorePrinterDriverInstalledA")
 	procCreatePrintAsyncNotifyChannel                = modwinspool_drv.NewProc("CreatePrintAsyncNotifyChannel")
 	procCreatePrinterIC                              = modwinspool_drv.NewProc("CreatePrinterIC")
 	procDeleteForm                                   = modwinspool_drv.NewProc("DeleteFormW")
@@ -240,6 +242,448 @@ var (
 	procXcvDataW                                     = modwinspool_drv.NewProc("XcvDataW")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AbortPrinter                                 *win32.Proc
+	AddForm                                      *win32.Proc
+	AddFormA                                     *win32.Proc
+	AddJob                                       *win32.Proc
+	AddJobA                                      *win32.Proc
+	AddMonitor                                   *win32.Proc
+	AddMonitorA                                  *win32.Proc
+	AddPort                                      *win32.Proc
+	AddPortA                                     *win32.Proc
+	AddPrintDeviceObject                         *win32.Proc
+	AddPrintProcessor                            *win32.Proc
+	AddPrintProcessorA                           *win32.Proc
+	AddPrintProvidor                             *win32.Proc
+	AddPrintProvidorA                            *win32.Proc
+	AddPrinter                                   *win32.Proc
+	AddPrinterA                                  *win32.Proc
+	AddPrinterConnection                         *win32.Proc
+	AddPrinterConnection2                        *win32.Proc
+	AddPrinterConnection2A                       *win32.Proc
+	AddPrinterConnectionA                        *win32.Proc
+	AddPrinterDriver                             *win32.Proc
+	AddPrinterDriverA                            *win32.Proc
+	AddPrinterDriverEx                           *win32.Proc
+	AddPrinterDriverExA                          *win32.Proc
+	AdvancedDocumentProperties                   *win32.Proc
+	AdvancedDocumentPropertiesA                  *win32.Proc
+	AppendPrinterNotifyInfoData                  *win32.Proc
+	CallRouterFindFirstPrinterChangeNotification *win32.Proc
+	ClosePrinter                                 *win32.Proc
+	CloseSpoolFileHandle                         *win32.Proc
+	CommitSpoolData                              *win32.Proc
+	CommonPropertySheetUI                        *win32.Proc
+	CommonPropertySheetUIA                       *win32.Proc
+	ConfigurePort                                *win32.Proc
+	ConfigurePortA                               *win32.Proc
+	ConnectToPrinterDlg                          *win32.Proc
+	CorePrinterDriverInstalled                   *win32.Proc
+	CorePrinterDriverInstalledA                  *win32.Proc
+	CreatePrintAsyncNotifyChannel                *win32.Proc
+	CreatePrinterIC                              *win32.Proc
+	DeleteForm                                   *win32.Proc
+	DeleteFormA                                  *win32.Proc
+	DeleteJobNamedProperty                       *win32.Proc
+	DeleteMonitor                                *win32.Proc
+	DeleteMonitorA                               *win32.Proc
+	DeletePort                                   *win32.Proc
+	DeletePortA                                  *win32.Proc
+	DeletePrintProcessor                         *win32.Proc
+	DeletePrintProcessorA                        *win32.Proc
+	DeletePrintProvidor                          *win32.Proc
+	DeletePrintProvidorA                         *win32.Proc
+	DeletePrinter                                *win32.Proc
+	DeletePrinterConnection                      *win32.Proc
+	DeletePrinterConnectionA                     *win32.Proc
+	DeletePrinterData                            *win32.Proc
+	DeletePrinterDataA                           *win32.Proc
+	DeletePrinterDataEx                          *win32.Proc
+	DeletePrinterDataExA                         *win32.Proc
+	DeletePrinterDriver                          *win32.Proc
+	DeletePrinterDriverA                         *win32.Proc
+	DeletePrinterDriverEx                        *win32.Proc
+	DeletePrinterDriverExA                       *win32.Proc
+	DeletePrinterDriverPackage                   *win32.Proc
+	DeletePrinterDriverPackageA                  *win32.Proc
+	DeletePrinterIC                              *win32.Proc
+	DeletePrinterKey                             *win32.Proc
+	DeletePrinterKeyA                            *win32.Proc
+	DevQueryPrint                                *win32.Proc
+	DevQueryPrintEx                              *win32.Proc
+	DocumentProperties                           *win32.Proc
+	DocumentPropertiesA                          *win32.Proc
+	EndDocPrinter                                *win32.Proc
+	EndPagePrinter                               *win32.Proc
+	EnumForms                                    *win32.Proc
+	EnumFormsA                                   *win32.Proc
+	EnumJobNamedProperties                       *win32.Proc
+	EnumJobs                                     *win32.Proc
+	EnumJobsA                                    *win32.Proc
+	EnumMonitors                                 *win32.Proc
+	EnumMonitorsA                                *win32.Proc
+	EnumPorts                                    *win32.Proc
+	EnumPortsA                                   *win32.Proc
+	EnumPrintProcessorDatatypes                  *win32.Proc
+	EnumPrintProcessorDatatypesA                 *win32.Proc
+	EnumPrintProcessors                          *win32.Proc
+	EnumPrintProcessorsA                         *win32.Proc
+	EnumPrinterData                              *win32.Proc
+	EnumPrinterDataA                             *win32.Proc
+	EnumPrinterDataEx                            *win32.Proc
+	EnumPrinterDataExA                           *win32.Proc
+	EnumPrinterDrivers                           *win32.Proc
+	EnumPrinterDriversA                          *win32.Proc
+	EnumPrinterKey                               *win32.Proc
+	EnumPrinterKeyA                              *win32.Proc
+	EnumPrinters                                 *win32.Proc
+	EnumPrintersA                                *win32.Proc
+	ExtDeviceMode                                *win32.Proc
+	FindClosePrinterChangeNotification           *win32.Proc
+	FindFirstPrinterChangeNotification           *win32.Proc
+	FindNextPrinterChangeNotification            *win32.Proc
+	FlushPrinter                                 *win32.Proc
+	FreePrintNamedPropertyArray                  *win32.Proc
+	FreePrintPropertyValue                       *win32.Proc
+	FreePrinterNotifyInfo                        *win32.Proc
+	GdiDeleteSpoolFileHandle                     *win32.Proc
+	GdiEndDocEMF                                 *win32.Proc
+	GdiEndPageEMF                                *win32.Proc
+	GdiGetDC                                     *win32.Proc
+	GdiGetDevmodeForPage                         *win32.Proc
+	GdiGetPageCount                              *win32.Proc
+	GdiGetPageHandle                             *win32.Proc
+	GdiGetSpoolFileHandle                        *win32.Proc
+	GdiPlayPageEMF                               *win32.Proc
+	GdiResetDCEMF                                *win32.Proc
+	GdiStartDocEMF                               *win32.Proc
+	GdiStartPageEMF                              *win32.Proc
+	GenerateCopyFilePaths                        *win32.Proc
+	GetCPSUIUserData                             *win32.Proc
+	GetCorePrinterDrivers                        *win32.Proc
+	GetCorePrinterDriversA                       *win32.Proc
+	GetDefaultPrinter                            *win32.Proc
+	GetDefaultPrinterA                           *win32.Proc
+	GetForm                                      *win32.Proc
+	GetFormA                                     *win32.Proc
+	GetJob                                       *win32.Proc
+	GetJobA                                      *win32.Proc
+	GetJobAttributes                             *win32.Proc
+	GetJobAttributesEx                           *win32.Proc
+	GetJobNamedPropertyValue                     *win32.Proc
+	GetPrintExecutionData                        *win32.Proc
+	GetPrintOutputInfo                           *win32.Proc
+	GetPrintProcessorDirectory                   *win32.Proc
+	GetPrintProcessorDirectoryA                  *win32.Proc
+	GetPrinter                                   *win32.Proc
+	GetPrinterA                                  *win32.Proc
+	GetPrinterData                               *win32.Proc
+	GetPrinterDataA                              *win32.Proc
+	GetPrinterDataEx                             *win32.Proc
+	GetPrinterDataExA                            *win32.Proc
+	GetPrinterDriver                             *win32.Proc
+	GetPrinterDriver2                            *win32.Proc
+	GetPrinterDriver2A                           *win32.Proc
+	GetPrinterDriverA                            *win32.Proc
+	GetPrinterDriverDirectory                    *win32.Proc
+	GetPrinterDriverDirectoryA                   *win32.Proc
+	GetPrinterDriverPackagePath                  *win32.Proc
+	GetPrinterDriverPackagePathA                 *win32.Proc
+	GetSpoolFileHandle                           *win32.Proc
+	ImpersonatePrinterClient                     *win32.Proc
+	InstallPrinterDriverFromPackage              *win32.Proc
+	InstallPrinterDriverFromPackageA             *win32.Proc
+	IsValidDevmode                               *win32.Proc
+	IsValidDevmodeA                              *win32.Proc
+	OpenPrinter                                  *win32.Proc
+	OpenPrinter2                                 *win32.Proc
+	OpenPrinter2A                                *win32.Proc
+	OpenPrinterA                                 *win32.Proc
+	PartialReplyPrinterChangeNotification        *win32.Proc
+	PlayGdiScriptOnPrinterIC                     *win32.Proc
+	PrinterMessageBox                            *win32.Proc
+	PrinterMessageBoxA                           *win32.Proc
+	PrinterProperties                            *win32.Proc
+	ProvidorFindClosePrinterChangeNotification   *win32.Proc
+	ProvidorFindFirstPrinterChangeNotification   *win32.Proc
+	ReadPrinter                                  *win32.Proc
+	RegisterForPrintAsyncNotifications           *win32.Proc
+	RemovePrintDeviceObject                      *win32.Proc
+	ReplyPrinterChangeNotification               *win32.Proc
+	ReplyPrinterChangeNotificationEx             *win32.Proc
+	ReportJobProcessingProgress                  *win32.Proc
+	ResetPrinter                                 *win32.Proc
+	ResetPrinterA                                *win32.Proc
+	RevertToPrinterSelf                          *win32.Proc
+	RouterAllocBidiMem                           *win32.Proc
+	RouterAllocBidiResponseContainer             *win32.Proc
+	RouterAllocPrinterNotifyInfo                 *win32.Proc
+	RouterCreatePrintAsyncNotificationChannel    *win32.Proc
+	RouterFreeBidiMem                            *win32.Proc
+	RouterFreeBidiResponseContainer              *win32.Proc
+	RouterFreePrinterNotifyInfo                  *win32.Proc
+	RouterGetPrintClassObject                    *win32.Proc
+	RouterUnregisterForPrintAsyncNotifications   *win32.Proc
+	ScheduleJob                                  *win32.Proc
+	SetCPSUIUserData                             *win32.Proc
+	SetDefaultPrinter                            *win32.Proc
+	SetDefaultPrinterA                           *win32.Proc
+	SetForm                                      *win32.Proc
+	SetFormA                                     *win32.Proc
+	SetJob                                       *win32.Proc
+	SetJobA                                      *win32.Proc
+	SetJobNamedProperty                          *win32.Proc
+	SetPort                                      *win32.Proc
+	SetPortA                                     *win32.Proc
+	SetPrinter                                   *win32.Proc
+	SetPrinterA                                  *win32.Proc
+	SetPrinterData                               *win32.Proc
+	SetPrinterDataA                              *win32.Proc
+	SetPrinterDataEx                             *win32.Proc
+	SetPrinterDataExA                            *win32.Proc
+	SplIsSessionZero                             *win32.Proc
+	SplPromptUIInUsersSession                    *win32.Proc
+	SpoolerCopyFileEvent                         *win32.Proc
+	SpoolerFindClosePrinterChangeNotification    *win32.Proc
+	SpoolerFindFirstPrinterChangeNotification    *win32.Proc
+	SpoolerFindNextPrinterChangeNotification     *win32.Proc
+	SpoolerFreePrinterNotifyInfo                 *win32.Proc
+	SpoolerRefreshPrinterChangeNotification      *win32.Proc
+	StartDocPrinter                              *win32.Proc
+	StartDocPrinterA                             *win32.Proc
+	StartPagePrinter                             *win32.Proc
+	UnRegisterForPrintAsyncNotifications         *win32.Proc
+	UpdatePrintDeviceObject                      *win32.Proc
+	UploadPrinterDriverPackage                   *win32.Proc
+	UploadPrinterDriverPackageA                  *win32.Proc
+	WaitForPrinterChange                         *win32.Proc
+	WritePrinter                                 *win32.Proc
+	XcvDataW                                     *win32.Proc
+}{
+	AbortPrinter:                procAbortPrinter,
+	AddForm:                     procAddForm,
+	AddFormA:                    procAddFormA,
+	AddJob:                      procAddJob,
+	AddJobA:                     procAddJobA,
+	AddMonitor:                  procAddMonitor,
+	AddMonitorA:                 procAddMonitorA,
+	AddPort:                     procAddPort,
+	AddPortA:                    procAddPortA,
+	AddPrintDeviceObject:        procAddPrintDeviceObject,
+	AddPrintProcessor:           procAddPrintProcessor,
+	AddPrintProcessorA:          procAddPrintProcessorA,
+	AddPrintProvidor:            procAddPrintProvidor,
+	AddPrintProvidorA:           procAddPrintProvidorA,
+	AddPrinter:                  procAddPrinter,
+	AddPrinterA:                 procAddPrinterA,
+	AddPrinterConnection:        procAddPrinterConnection,
+	AddPrinterConnection2:       procAddPrinterConnection2,
+	AddPrinterConnection2A:      procAddPrinterConnection2A,
+	AddPrinterConnectionA:       procAddPrinterConnectionA,
+	AddPrinterDriver:            procAddPrinterDriver,
+	AddPrinterDriverA:           procAddPrinterDriverA,
+	AddPrinterDriverEx:          procAddPrinterDriverEx,
+	AddPrinterDriverExA:         procAddPrinterDriverExA,
+	AdvancedDocumentProperties:  procAdvancedDocumentProperties,
+	AdvancedDocumentPropertiesA: procAdvancedDocumentPropertiesA,
+	AppendPrinterNotifyInfoData: procAppendPrinterNotifyInfoData,
+	CallRouterFindFirstPrinterChangeNotification: procCallRouterFindFirstPrinterChangeNotification,
+	ClosePrinter:                          procClosePrinter,
+	CloseSpoolFileHandle:                  procCloseSpoolFileHandle,
+	CommitSpoolData:                       procCommitSpoolData,
+	CommonPropertySheetUI:                 procCommonPropertySheetUI,
+	CommonPropertySheetUIA:                procCommonPropertySheetUIA,
+	ConfigurePort:                         procConfigurePort,
+	ConfigurePortA:                        procConfigurePortA,
+	ConnectToPrinterDlg:                   procConnectToPrinterDlg,
+	CorePrinterDriverInstalled:            procCorePrinterDriverInstalled,
+	CorePrinterDriverInstalledA:           procCorePrinterDriverInstalledA,
+	CreatePrintAsyncNotifyChannel:         procCreatePrintAsyncNotifyChannel,
+	CreatePrinterIC:                       procCreatePrinterIC,
+	DeleteForm:                            procDeleteForm,
+	DeleteFormA:                           procDeleteFormA,
+	DeleteJobNamedProperty:                procDeleteJobNamedProperty,
+	DeleteMonitor:                         procDeleteMonitor,
+	DeleteMonitorA:                        procDeleteMonitorA,
+	DeletePort:                            procDeletePort,
+	DeletePortA:                           procDeletePortA,
+	DeletePrintProcessor:                  procDeletePrintProcessor,
+	DeletePrintProcessorA:                 procDeletePrintProcessorA,
+	DeletePrintProvidor:                   procDeletePrintProvidor,
+	DeletePrintProvidorA:                  procDeletePrintProvidorA,
+	DeletePrinter:                         procDeletePrinter,
+	DeletePrinterConnection:               procDeletePrinterConnection,
+	DeletePrinterConnectionA:              procDeletePrinterConnectionA,
+	DeletePrinterData:                     procDeletePrinterData,
+	DeletePrinterDataA:                    procDeletePrinterDataA,
+	DeletePrinterDataEx:                   procDeletePrinterDataEx,
+	DeletePrinterDataExA:                  procDeletePrinterDataExA,
+	DeletePrinterDriver:                   procDeletePrinterDriver,
+	DeletePrinterDriverA:                  procDeletePrinterDriverA,
+	DeletePrinterDriverEx:                 procDeletePrinterDriverEx,
+	DeletePrinterDriverExA:                procDeletePrinterDriverExA,
+	DeletePrinterDriverPackage:            procDeletePrinterDriverPackage,
+	DeletePrinterDriverPackageA:           procDeletePrinterDriverPackageA,
+	DeletePrinterIC:                       procDeletePrinterIC,
+	DeletePrinterKey:                      procDeletePrinterKey,
+	DeletePrinterKeyA:                     procDeletePrinterKeyA,
+	DevQueryPrint:                         procDevQueryPrint,
+	DevQueryPrintEx:                       procDevQueryPrintEx,
+	DocumentProperties:                    procDocumentProperties,
+	DocumentPropertiesA:                   procDocumentPropertiesA,
+	EndDocPrinter:                         procEndDocPrinter,
+	EndPagePrinter:                        procEndPagePrinter,
+	EnumForms:                             procEnumForms,
+	EnumFormsA:                            procEnumFormsA,
+	EnumJobNamedProperties:                procEnumJobNamedProperties,
+	EnumJobs:                              procEnumJobs,
+	EnumJobsA:                             procEnumJobsA,
+	EnumMonitors:                          procEnumMonitors,
+	EnumMonitorsA:                         procEnumMonitorsA,
+	EnumPorts:                             procEnumPorts,
+	EnumPortsA:                            procEnumPortsA,
+	EnumPrintProcessorDatatypes:           procEnumPrintProcessorDatatypes,
+	EnumPrintProcessorDatatypesA:          procEnumPrintProcessorDatatypesA,
+	EnumPrintProcessors:                   procEnumPrintProcessors,
+	EnumPrintProcessorsA:                  procEnumPrintProcessorsA,
+	EnumPrinterData:                       procEnumPrinterData,
+	EnumPrinterDataA:                      procEnumPrinterDataA,
+	EnumPrinterDataEx:                     procEnumPrinterDataEx,
+	EnumPrinterDataExA:                    procEnumPrinterDataExA,
+	EnumPrinterDrivers:                    procEnumPrinterDrivers,
+	EnumPrinterDriversA:                   procEnumPrinterDriversA,
+	EnumPrinterKey:                        procEnumPrinterKey,
+	EnumPrinterKeyA:                       procEnumPrinterKeyA,
+	EnumPrinters:                          procEnumPrinters,
+	EnumPrintersA:                         procEnumPrintersA,
+	ExtDeviceMode:                         procExtDeviceMode,
+	FindClosePrinterChangeNotification:    procFindClosePrinterChangeNotification,
+	FindFirstPrinterChangeNotification:    procFindFirstPrinterChangeNotification,
+	FindNextPrinterChangeNotification:     procFindNextPrinterChangeNotification,
+	FlushPrinter:                          procFlushPrinter,
+	FreePrintNamedPropertyArray:           procFreePrintNamedPropertyArray,
+	FreePrintPropertyValue:                procFreePrintPropertyValue,
+	FreePrinterNotifyInfo:                 procFreePrinterNotifyInfo,
+	GdiDeleteSpoolFileHandle:              procGdiDeleteSpoolFileHandle,
+	GdiEndDocEMF:                          procGdiEndDocEMF,
+	GdiEndPageEMF:                         procGdiEndPageEMF,
+	GdiGetDC:                              procGdiGetDC,
+	GdiGetDevmodeForPage:                  procGdiGetDevmodeForPage,
+	GdiGetPageCount:                       procGdiGetPageCount,
+	GdiGetPageHandle:                      procGdiGetPageHandle,
+	GdiGetSpoolFileHandle:                 procGdiGetSpoolFileHandle,
+	GdiPlayPageEMF:                        procGdiPlayPageEMF,
+	GdiResetDCEMF:                         procGdiResetDCEMF,
+	GdiStartDocEMF:                        procGdiStartDocEMF,
+	GdiStartPageEMF:                       procGdiStartPageEMF,
+	GenerateCopyFilePaths:                 procGenerateCopyFilePaths,
+	GetCPSUIUserData:                      procGetCPSUIUserData,
+	GetCorePrinterDrivers:                 procGetCorePrinterDrivers,
+	GetCorePrinterDriversA:                procGetCorePrinterDriversA,
+	GetDefaultPrinter:                     procGetDefaultPrinter,
+	GetDefaultPrinterA:                    procGetDefaultPrinterA,
+	GetForm:                               procGetForm,
+	GetFormA:                              procGetFormA,
+	GetJob:                                procGetJob,
+	GetJobA:                               procGetJobA,
+	GetJobAttributes:                      procGetJobAttributes,
+	GetJobAttributesEx:                    procGetJobAttributesEx,
+	GetJobNamedPropertyValue:              procGetJobNamedPropertyValue,
+	GetPrintExecutionData:                 procGetPrintExecutionData,
+	GetPrintOutputInfo:                    procGetPrintOutputInfo,
+	GetPrintProcessorDirectory:            procGetPrintProcessorDirectory,
+	GetPrintProcessorDirectoryA:           procGetPrintProcessorDirectoryA,
+	GetPrinter:                            procGetPrinter,
+	GetPrinterA:                           procGetPrinterA,
+	GetPrinterData:                        procGetPrinterData,
+	GetPrinterDataA:                       procGetPrinterDataA,
+	GetPrinterDataEx:                      procGetPrinterDataEx,
+	GetPrinterDataExA:                     procGetPrinterDataExA,
+	GetPrinterDriver:                      procGetPrinterDriver,
+	GetPrinterDriver2:                     procGetPrinterDriver2,
+	GetPrinterDriver2A:                    procGetPrinterDriver2A,
+	GetPrinterDriverA:                     procGetPrinterDriverA,
+	GetPrinterDriverDirectory:             procGetPrinterDriverDirectory,
+	GetPrinterDriverDirectoryA:            procGetPrinterDriverDirectoryA,
+	GetPrinterDriverPackagePath:           procGetPrinterDriverPackagePath,
+	GetPrinterDriverPackagePathA:          procGetPrinterDriverPackagePathA,
+	GetSpoolFileHandle:                    procGetSpoolFileHandle,
+	ImpersonatePrinterClient:              procImpersonatePrinterClient,
+	InstallPrinterDriverFromPackage:       procInstallPrinterDriverFromPackage,
+	InstallPrinterDriverFromPackageA:      procInstallPrinterDriverFromPackageA,
+	IsValidDevmode:                        procIsValidDevmode,
+	IsValidDevmodeA:                       procIsValidDevmodeA,
+	OpenPrinter:                           procOpenPrinter,
+	OpenPrinter2:                          procOpenPrinter2,
+	OpenPrinter2A:                         procOpenPrinter2A,
+	OpenPrinterA:                          procOpenPrinterA,
+	PartialReplyPrinterChangeNotification: procPartialReplyPrinterChangeNotification,
+	PlayGdiScriptOnPrinterIC:              procPlayGdiScriptOnPrinterIC,
+	PrinterMessageBox:                     procPrinterMessageBox,
+	PrinterMessageBoxA:                    procPrinterMessageBoxA,
+	PrinterProperties:                     procPrinterProperties,
+	ProvidorFindClosePrinterChangeNotification: procProvidorFindClosePrinterChangeNotification,
+	ProvidorFindFirstPrinterChangeNotification: procProvidorFindFirstPrinterChangeNotification,
+	ReadPrinter:                                procReadPrinter,
+	RegisterForPrintAsyncNotifications:         procRegisterForPrintAsyncNotifications,
+	RemovePrintDeviceObject:                    procRemovePrintDeviceObject,
+	ReplyPrinterChangeNotification:             procReplyPrinterChangeNotification,
+	ReplyPrinterChangeNotificationEx:           procReplyPrinterChangeNotificationEx,
+	ReportJobProcessingProgress:                procReportJobProcessingProgress,
+	ResetPrinter:                               procResetPrinter,
+	ResetPrinterA:                              procResetPrinterA,
+	RevertToPrinterSelf:                        procRevertToPrinterSelf,
+	RouterAllocBidiMem:                         procRouterAllocBidiMem,
+	RouterAllocBidiResponseContainer:           procRouterAllocBidiResponseContainer,
+	RouterAllocPrinterNotifyInfo:               procRouterAllocPrinterNotifyInfo,
+	RouterCreatePrintAsyncNotificationChannel:  procRouterCreatePrintAsyncNotificationChannel,
+	RouterFreeBidiMem:                          procRouterFreeBidiMem,
+	RouterFreeBidiResponseContainer:            procRouterFreeBidiResponseContainer,
+	RouterFreePrinterNotifyInfo:                procRouterFreePrinterNotifyInfo,
+	RouterGetPrintClassObject:                  procRouterGetPrintClassObject,
+	RouterUnregisterForPrintAsyncNotifications: procRouterUnregisterForPrintAsyncNotifications,
+	ScheduleJob:                                procScheduleJob,
+	SetCPSUIUserData:                           procSetCPSUIUserData,
+	SetDefaultPrinter:                          procSetDefaultPrinter,
+	SetDefaultPrinterA:                         procSetDefaultPrinterA,
+	SetForm:                                    procSetForm,
+	SetFormA:                                   procSetFormA,
+	SetJob:                                     procSetJob,
+	SetJobA:                                    procSetJobA,
+	SetJobNamedProperty:                        procSetJobNamedProperty,
+	SetPort:                                    procSetPort,
+	SetPortA:                                   procSetPortA,
+	SetPrinter:                                 procSetPrinter,
+	SetPrinterA:                                procSetPrinterA,
+	SetPrinterData:                             procSetPrinterData,
+	SetPrinterDataA:                            procSetPrinterDataA,
+	SetPrinterDataEx:                           procSetPrinterDataEx,
+	SetPrinterDataExA:                          procSetPrinterDataExA,
+	SplIsSessionZero:                           procSplIsSessionZero,
+	SplPromptUIInUsersSession:                  procSplPromptUIInUsersSession,
+	SpoolerCopyFileEvent:                       procSpoolerCopyFileEvent,
+	SpoolerFindClosePrinterChangeNotification:  procSpoolerFindClosePrinterChangeNotification,
+	SpoolerFindFirstPrinterChangeNotification:  procSpoolerFindFirstPrinterChangeNotification,
+	SpoolerFindNextPrinterChangeNotification:   procSpoolerFindNextPrinterChangeNotification,
+	SpoolerFreePrinterNotifyInfo:               procSpoolerFreePrinterNotifyInfo,
+	SpoolerRefreshPrinterChangeNotification:    procSpoolerRefreshPrinterChangeNotification,
+	StartDocPrinter:                            procStartDocPrinter,
+	StartDocPrinterA:                           procStartDocPrinterA,
+	StartPagePrinter:                           procStartPagePrinter,
+	UnRegisterForPrintAsyncNotifications:       procUnRegisterForPrintAsyncNotifications,
+	UpdatePrintDeviceObject:                    procUpdatePrintDeviceObject,
+	UploadPrinterDriverPackage:                 procUploadPrinterDriverPackage,
+	UploadPrinterDriverPackageA:                procUploadPrinterDriverPackageA,
+	WaitForPrinterChange:                       procWaitForPrinterChange,
+	WritePrinter:                               procWritePrinter,
+	XcvDataW:                                   procXcvDataW,
+}
+
 // AbortPrinter calls winspool.drv!AbortPrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/abortprinter
 func AbortPrinter(hPrinter PRINTER_HANDLE) bool {
@@ -283,8 +727,8 @@ func AddJobA(hPrinter PRINTER_HANDLE, Level uint32, pData []byte, pcbNeeded *uin
 
 // AddMonitor calls winspool.drv!AddMonitorW.
 // https://learn.microsoft.com/windows/win32/printdocs/addmonitor
-func AddMonitor(pName string, Level uint32, pMonitors *byte) error {
-	_pName := win32.UTF16Ptr(pName)
+func AddMonitor(pName *string, Level uint32, pMonitors *byte) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, e1 := syscall.SyscallN(procAddMonitor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pMonitors)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -304,8 +748,8 @@ func AddMonitorA(pName foundation.PSTR, Level uint32, pMonitors *byte) error {
 
 // AddPort calls winspool.drv!AddPortW.
 // https://learn.microsoft.com/windows/win32/printdocs/addport
-func AddPort(pName string, hWnd foundation.HWND, pMonitorName string) error {
-	_pName := win32.UTF16Ptr(pName)
+func AddPort(pName *string, hWnd foundation.HWND, pMonitorName string) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pMonitorName := win32.UTF16Ptr(pMonitorName)
 	r1, _, e1 := syscall.SyscallN(procAddPort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(hWnd), uintptr(unsafe.Pointer(_pMonitorName)))
 	if r1 == 0 {
@@ -332,9 +776,9 @@ func AddPrintDeviceObject(hPrinter PRINTER_HANDLE, phDeviceObject *foundation.HA
 
 // AddPrintProcessor calls winspool.drv!AddPrintProcessorW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprintprocessor
-func AddPrintProcessor(pName string, pEnvironment string, pPathName string, pPrintProcessorName string) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func AddPrintProcessor(pName *string, pEnvironment *string, pPathName string, pPrintProcessorName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pPathName := win32.UTF16Ptr(pPathName)
 	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
 	r1, _, _ := syscall.SyscallN(procAddPrintProcessor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pPathName)), uintptr(unsafe.Pointer(_pPrintProcessorName)))
@@ -350,8 +794,8 @@ func AddPrintProcessorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pPa
 
 // AddPrintProvidor calls winspool.drv!AddPrintProvidorW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprintprovidor
-func AddPrintProvidor(pName string, Level uint32, pProvidorInfo *byte) bool {
-	_pName := win32.UTF16Ptr(pName)
+func AddPrintProvidor(pName *string, Level uint32, pProvidorInfo *byte) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, _ := syscall.SyscallN(procAddPrintProvidor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pProvidorInfo)))
 	return r1 != 0
 }
@@ -365,8 +809,8 @@ func AddPrintProvidorA(pName foundation.PSTR, Level uint32, pProvidorInfo *byte)
 
 // AddPrinter calls winspool.drv!AddPrinterW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprinter
-func AddPrinter(pName string, Level uint32, pPrinter *byte) (PRINTER_HANDLE, error) {
-	_pName := win32.UTF16Ptr(pName)
+func AddPrinter(pName *string, Level uint32, pPrinter *byte) (PRINTER_HANDLE, error) {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, e1 := syscall.SyscallN(procAddPrinter.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)))
 	ret := PRINTER_HANDLE(r1)
 	if ret == ^PRINTER_HANDLE(0) || ret == 0 {
@@ -417,8 +861,8 @@ func AddPrinterConnectionA(pName foundation.PSTR) bool {
 
 // AddPrinterDriver calls winspool.drv!AddPrinterDriverW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprinterdriver
-func AddPrinterDriver(pName string, Level uint32, pDriverInfo *byte) error {
-	_pName := win32.UTF16Ptr(pName)
+func AddPrinterDriver(pName *string, Level uint32, pDriverInfo *byte) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, e1 := syscall.SyscallN(procAddPrinterDriver.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -438,8 +882,8 @@ func AddPrinterDriverA(pName foundation.PSTR, Level uint32, pDriverInfo *byte) e
 
 // AddPrinterDriverEx calls winspool.drv!AddPrinterDriverExW.
 // https://learn.microsoft.com/windows/win32/printdocs/addprinterdriverex
-func AddPrinterDriverEx(pName string, Level uint32, lpbDriverInfo *byte, dwFileCopyFlags uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
+func AddPrinterDriverEx(pName *string, Level uint32, lpbDriverInfo *byte, dwFileCopyFlags uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, _ := syscall.SyscallN(procAddPrinterDriverEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(lpbDriverInfo)), uintptr(dwFileCopyFlags))
 	return r1 != 0
 }
@@ -516,8 +960,8 @@ func CommonPropertySheetUIA(hWndOwner foundation.HWND, pfnPropSheetUI PFNPROPSHE
 
 // ConfigurePort calls winspool.drv!ConfigurePortW.
 // https://learn.microsoft.com/windows/win32/printdocs/configureport
-func ConfigurePort(pName string, hWnd foundation.HWND, pPortName string) bool {
-	_pName := win32.UTF16Ptr(pName)
+func ConfigurePort(pName *string, hWnd foundation.HWND, pPortName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pPortName := win32.UTF16Ptr(pPortName)
 	r1, _, _ := syscall.SyscallN(procConfigurePort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(hWnd), uintptr(unsafe.Pointer(_pPortName)))
 	return r1 != 0
@@ -537,11 +981,31 @@ func ConnectToPrinterDlg(hwnd foundation.HWND, Flags uint32) foundation.HANDLE {
 	return foundation.HANDLE(r1)
 }
 
+var specCorePrinterDriverInstalled = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CorePrinterDriverInstalled calls winspool.drv!CorePrinterDriverInstalledW.
+// https://learn.microsoft.com/windows/win32/printdocs/coreprinterdriverinstalled
+func CorePrinterDriverInstalled(pszServer *string, pszEnvironment *string, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *foundation.BOOL) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
+	r1, _, _ := win32.Call(procCorePrinterDriverInstalled.Addr(), specCorePrinterDriverInstalled, nil, uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(&CoreDriverGUID)), uintptr(win32.StructArg(ftDriverDate)), uintptr(dwlDriverVersion), uintptr(unsafe.Pointer(pbDriverInstalled))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specCorePrinterDriverInstalledA = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CorePrinterDriverInstalledA calls winspool.drv!CorePrinterDriverInstalledA.
+// https://learn.microsoft.com/windows/win32/printdocs/coreprinterdriverinstalled
+func CorePrinterDriverInstalledA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *foundation.BOOL) error {
+	r1, _, _ := win32.Call(procCorePrinterDriverInstalledA.Addr(), specCorePrinterDriverInstalledA, nil, uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(&CoreDriverGUID)), uintptr(win32.StructArg(ftDriverDate)), uintptr(dwlDriverVersion), uintptr(unsafe.Pointer(pbDriverInstalled))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CreatePrintAsyncNotifyChannel calls winspool.drv!CreatePrintAsyncNotifyChannel.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-createprintasyncnotifychannel
 // Minimum OS: windows6.0.6000.
-func CreatePrintAsyncNotifyChannel(pszName string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) error {
-	_pszName := win32.UTF16Ptr(pszName)
+func CreatePrintAsyncNotifyChannel(pszName *string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, ppIAsynchNotification **IPrintAsyncNotifyChannel) error {
+	_pszName := win32.UTF16PtrOrNil(pszName)
 	r1, _, _ := syscall.SyscallN(procCreatePrintAsyncNotifyChannel.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppIAsynchNotification)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -576,9 +1040,9 @@ func DeleteJobNamedProperty(hPrinter PRINTER_HANDLE, JobId uint32, pszName strin
 
 // DeleteMonitor calls winspool.drv!DeleteMonitorW.
 // https://learn.microsoft.com/windows/win32/printdocs/deletemonitor
-func DeleteMonitor(pName string, pEnvironment string, pMonitorName string) error {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeleteMonitor(pName *string, pEnvironment *string, pMonitorName string) error {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pMonitorName := win32.UTF16Ptr(pMonitorName)
 	r1, _, e1 := syscall.SyscallN(procDeleteMonitor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pMonitorName)))
 	if r1 == 0 {
@@ -599,8 +1063,8 @@ func DeleteMonitorA(pName foundation.PSTR, pEnvironment foundation.PSTR, pMonito
 
 // DeletePort calls winspool.drv!DeletePortW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteport
-func DeletePort(pName string, hWnd foundation.HWND, pPortName string) error {
-	_pName := win32.UTF16Ptr(pName)
+func DeletePort(pName *string, hWnd foundation.HWND, pPortName string) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pPortName := win32.UTF16Ptr(pPortName)
 	r1, _, e1 := syscall.SyscallN(procDeletePort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(hWnd), uintptr(unsafe.Pointer(_pPortName)))
 	if r1 == 0 {
@@ -621,9 +1085,9 @@ func DeletePortA(pName foundation.PSTR, hWnd foundation.HWND, pPortName foundati
 
 // DeletePrintProcessor calls winspool.drv!DeletePrintProcessorW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprintprocessor
-func DeletePrintProcessor(pName string, pEnvironment string, pPrintProcessorName string) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeletePrintProcessor(pName *string, pEnvironment *string, pPrintProcessorName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
 	r1, _, _ := syscall.SyscallN(procDeletePrintProcessor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pPrintProcessorName)))
 	return r1 != 0
@@ -638,9 +1102,9 @@ func DeletePrintProcessorA(pName foundation.PSTR, pEnvironment foundation.PSTR, 
 
 // DeletePrintProvidor calls winspool.drv!DeletePrintProvidorW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprintprovidor
-func DeletePrintProvidor(pName string, pEnvironment string, pPrintProvidorName string) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeletePrintProvidor(pName *string, pEnvironment *string, pPrintProvidorName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pPrintProvidorName := win32.UTF16Ptr(pPrintProvidorName)
 	r1, _, _ := syscall.SyscallN(procDeletePrintProvidor.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pPrintProvidorName)))
 	return r1 != 0
@@ -711,9 +1175,9 @@ func DeletePrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pVa
 
 // DeletePrinterDriver calls winspool.drv!DeletePrinterDriverW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriver
-func DeletePrinterDriver(pName string, pEnvironment string, pDriverName string) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeletePrinterDriver(pName *string, pEnvironment *string, pDriverName string) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pDriverName := win32.UTF16Ptr(pDriverName)
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriver.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pDriverName)))
 	return r1 != 0
@@ -728,9 +1192,9 @@ func DeletePrinterDriverA(pName foundation.PSTR, pEnvironment foundation.PSTR, p
 
 // DeletePrinterDriverEx calls winspool.drv!DeletePrinterDriverExW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverex
-func DeletePrinterDriverEx(pName string, pEnvironment string, pDriverName string, dwDeleteFlag uint32, dwVersionFlag uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func DeletePrinterDriverEx(pName *string, pEnvironment *string, pDriverName string, dwDeleteFlag uint32, dwVersionFlag uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	_pDriverName := win32.UTF16Ptr(pDriverName)
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverEx.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(unsafe.Pointer(_pDriverName)), uintptr(dwDeleteFlag), uintptr(dwVersionFlag))
 	return r1 != 0
@@ -745,10 +1209,10 @@ func DeletePrinterDriverExA(pName foundation.PSTR, pEnvironment foundation.PSTR,
 
 // DeletePrinterDriverPackage calls winspool.drv!DeletePrinterDriverPackageW.
 // https://learn.microsoft.com/windows/win32/printdocs/deleteprinterdriverpackage
-func DeletePrinterDriverPackage(pszServer string, pszInfPath string, pszEnvironment string) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
+func DeletePrinterDriverPackage(pszServer *string, pszInfPath string, pszEnvironment *string) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
 	_pszInfPath := win32.UTF16Ptr(pszInfPath)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
 	r1, _, _ := syscall.SyscallN(procDeletePrinterDriverPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszEnvironment)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -880,8 +1344,8 @@ func EnumJobsA(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level ui
 
 // EnumMonitors calls winspool.drv!EnumMonitorsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enummonitors
-func EnumMonitors(pName string, Level uint32, pMonitor []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
+func EnumMonitors(pName *string, Level uint32, pMonitor []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	var _pMonitor *byte
 	if len(pMonitor) > 0 {
 		_pMonitor = &pMonitor[0]
@@ -903,8 +1367,8 @@ func EnumMonitorsA(pName foundation.PSTR, Level uint32, pMonitor []byte, pcbNeed
 
 // EnumPorts calls winspool.drv!EnumPortsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumports
-func EnumPorts(pName string, Level uint32, pPort []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
+func EnumPorts(pName *string, Level uint32, pPort []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	var _pPort *byte
 	if len(pPort) > 0 {
 		_pPort = &pPort[0]
@@ -926,8 +1390,8 @@ func EnumPortsA(pName foundation.PSTR, Level uint32, pPort []byte, pcbNeeded *ui
 
 // EnumPrintProcessorDatatypes calls winspool.drv!EnumPrintProcessorDatatypesW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes
-func EnumPrintProcessorDatatypes(pName string, pPrintProcessorName string, Level uint32, pDatatypes []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
+func EnumPrintProcessorDatatypes(pName *string, pPrintProcessorName string, Level uint32, pDatatypes []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
 	var _pDatatypes *byte
 	if len(pDatatypes) > 0 {
@@ -950,9 +1414,9 @@ func EnumPrintProcessorDatatypesA(pName foundation.PSTR, pPrintProcessorName fou
 
 // EnumPrintProcessors calls winspool.drv!EnumPrintProcessorsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors
-func EnumPrintProcessors(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func EnumPrintProcessors(pName *string, pEnvironment *string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pPrintProcessorInfo *byte
 	if len(pPrintProcessorInfo) > 0 {
 		_pPrintProcessorInfo = &pPrintProcessorInfo[0]
@@ -1019,9 +1483,9 @@ func EnumPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pEnum
 
 // EnumPrinterDrivers calls winspool.drv!EnumPrinterDriversW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers
-func EnumPrinterDrivers(pName string, pEnvironment string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32, pcReturned *uint32) error {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func EnumPrinterDrivers(pName *string, pEnvironment *string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32, pcReturned *uint32) error {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pDriverInfo *byte
 	if len(pDriverInfo) > 0 {
 		_pDriverInfo = &pDriverInfo[0]
@@ -1064,8 +1528,8 @@ func EnumPrinterKeyA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pSubkey 
 
 // EnumPrinters calls winspool.drv!EnumPrintersW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinters
-func EnumPrinters(Flags uint32, Name string, Level uint32, pPrinterEnum []byte, pcbNeeded *uint32, pcReturned *uint32) error {
-	_Name := win32.UTF16Ptr(Name)
+func EnumPrinters(Flags uint32, Name *string, Level uint32, pPrinterEnum []byte, pcbNeeded *uint32, pcReturned *uint32) error {
+	_Name := win32.UTF16PtrOrNil(Name)
 	var _pPrinterEnum *byte
 	if len(pPrinterEnum) > 0 {
 		_pPrinterEnum = &pPrinterEnum[0]
@@ -1240,9 +1704,9 @@ func GetCPSUIUserData(hDlg foundation.HWND) uintptr {
 
 // GetCorePrinterDrivers calls winspool.drv!GetCorePrinterDriversW.
 // https://learn.microsoft.com/windows/win32/printdocs/getcoreprinterdrivers
-func GetCorePrinterDrivers(pszServer string, pszEnvironment string, pszzCoreDriverDependencies string, pCorePrinterDrivers []CORE_PRINTER_DRIVERW) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+func GetCorePrinterDrivers(pszServer *string, pszEnvironment *string, pszzCoreDriverDependencies string, pCorePrinterDrivers []CORE_PRINTER_DRIVERW) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
 	_pszzCoreDriverDependencies := win32.UTF16Ptr(pszzCoreDriverDependencies)
 	var _pCorePrinterDrivers *CORE_PRINTER_DRIVERW
 	if len(pCorePrinterDrivers) > 0 {
@@ -1363,9 +1827,9 @@ func GetPrintOutputInfo(hWnd foundation.HWND, pszPrinter string, phFile *foundat
 
 // GetPrintProcessorDirectory calls winspool.drv!GetPrintProcessorDirectoryW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprintprocessordirectory
-func GetPrintProcessorDirectory(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func GetPrintProcessorDirectory(pName *string, pEnvironment *string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pPrintProcessorInfo *byte
 	if len(pPrintProcessorInfo) > 0 {
 		_pPrintProcessorInfo = &pPrintProcessorInfo[0]
@@ -1462,8 +1926,8 @@ func GetPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pValue
 
 // GetPrinterDriver calls winspool.drv!GetPrinterDriverW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver
-func GetPrinterDriver(hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func GetPrinterDriver(hPrinter PRINTER_HANDLE, pEnvironment *string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pDriverInfo *byte
 	if len(pDriverInfo) > 0 {
 		_pDriverInfo = &pDriverInfo[0]
@@ -1474,8 +1938,8 @@ func GetPrinterDriver(hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32
 
 // GetPrinterDriver2 calls winspool.drv!GetPrinterDriver2W.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver2
-func GetPrinterDriver2(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func GetPrinterDriver2(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment *string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pDriverInfo *byte
 	if len(pDriverInfo) > 0 {
 		_pDriverInfo = &pDriverInfo[0]
@@ -1507,9 +1971,9 @@ func GetPrinterDriverA(hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Le
 
 // GetPrinterDriverDirectory calls winspool.drv!GetPrinterDriverDirectoryW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverdirectory
-func GetPrinterDriverDirectory(pName string, pEnvironment string, Level uint32, pDriverDirectory []byte, pcbNeeded *uint32) bool {
-	_pName := win32.UTF16Ptr(pName)
-	_pEnvironment := win32.UTF16Ptr(pEnvironment)
+func GetPrinterDriverDirectory(pName *string, pEnvironment *string, Level uint32, pDriverDirectory []byte, pcbNeeded *uint32) bool {
+	_pName := win32.UTF16PtrOrNil(pName)
+	_pEnvironment := win32.UTF16PtrOrNil(pEnvironment)
 	var _pDriverDirectory *byte
 	if len(pDriverDirectory) > 0 {
 		_pDriverDirectory = &pDriverDirectory[0]
@@ -1531,10 +1995,10 @@ func GetPrinterDriverDirectoryA(pName foundation.PSTR, pEnvironment foundation.P
 
 // GetPrinterDriverPackagePath calls winspool.drv!GetPrinterDriverPackagePathW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverpackagepath
-func GetPrinterDriverPackagePath(pszServer string, pszEnvironment string, pszLanguage string, pszPackageID string, pszDriverPackageCab foundation.PWSTR, cchDriverPackageCab uint32, pcchRequiredSize *uint32) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
-	_pszLanguage := win32.UTF16Ptr(pszLanguage)
+func GetPrinterDriverPackagePath(pszServer *string, pszEnvironment *string, pszLanguage *string, pszPackageID string, pszDriverPackageCab foundation.PWSTR, cchDriverPackageCab uint32, pcchRequiredSize *uint32) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
+	_pszLanguage := win32.UTF16PtrOrNil(pszLanguage)
 	_pszPackageID := win32.UTF16Ptr(pszPackageID)
 	r1, _, _ := syscall.SyscallN(procGetPrinterDriverPackagePath.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(_pszLanguage)), uintptr(unsafe.Pointer(_pszPackageID)), uintptr(unsafe.Pointer(pszDriverPackageCab)), uintptr(cchDriverPackageCab), uintptr(unsafe.Pointer(pcchRequiredSize)))
 	return win32.ErrIfFailed(int32(r1))
@@ -1566,11 +2030,11 @@ func ImpersonatePrinterClient(hToken foundation.HANDLE) bool {
 
 // InstallPrinterDriverFromPackage calls winspool.drv!InstallPrinterDriverFromPackageW.
 // https://learn.microsoft.com/windows/win32/printdocs/installprinterdriverfrompackage
-func InstallPrinterDriverFromPackage(pszServer string, pszInfPath string, pszDriverName string, pszEnvironment string, dwFlags uint32) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
-	_pszInfPath := win32.UTF16Ptr(pszInfPath)
+func InstallPrinterDriverFromPackage(pszServer *string, pszInfPath *string, pszDriverName string, pszEnvironment *string, dwFlags uint32) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
+	_pszInfPath := win32.UTF16PtrOrNil(pszInfPath)
 	_pszDriverName := win32.UTF16Ptr(pszDriverName)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
 	r1, _, _ := syscall.SyscallN(procInstallPrinterDriverFromPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszDriverName)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1598,8 +2062,8 @@ func IsValidDevmodeA(pDevmode *graphicsgdi.DEVMODEA, DevmodeSize uintptr) bool {
 
 // OpenPrinter calls winspool.drv!OpenPrinterW.
 // https://learn.microsoft.com/windows/win32/printdocs/openprinter
-func OpenPrinter(pPrinterName string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW) error {
-	_pPrinterName := win32.UTF16Ptr(pPrinterName)
+func OpenPrinter(pPrinterName *string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW) error {
+	_pPrinterName := win32.UTF16PtrOrNil(pPrinterName)
 	r1, _, e1 := syscall.SyscallN(procOpenPrinter.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1609,8 +2073,8 @@ func OpenPrinter(pPrinterName string, phPrinter *PRINTER_HANDLE, pDefault *PRINT
 
 // OpenPrinter2 calls winspool.drv!OpenPrinter2W.
 // https://learn.microsoft.com/windows/win32/printdocs/openprinter2
-func OpenPrinter2(pPrinterName string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW, pOptions *PRINTER_OPTIONSW) error {
-	_pPrinterName := win32.UTF16Ptr(pPrinterName)
+func OpenPrinter2(pPrinterName *string, phPrinter *PRINTER_HANDLE, pDefault *PRINTER_DEFAULTSW, pOptions *PRINTER_OPTIONSW) error {
+	_pPrinterName := win32.UTF16PtrOrNil(pPrinterName)
 	r1, _, e1 := syscall.SyscallN(procOpenPrinter2.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(phPrinter)), uintptr(unsafe.Pointer(pDefault)), uintptr(unsafe.Pointer(pOptions)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1705,8 +2169,8 @@ func ReadPrinter(hPrinter PRINTER_HANDLE, pBuf []byte, pNoBytesRead *uint32) boo
 // RegisterForPrintAsyncNotifications calls winspool.drv!RegisterForPrintAsyncNotifications.
 // https://learn.microsoft.com/windows/win32/api/prnasnot/nf-prnasnot-registerforprintasyncnotifications
 // Minimum OS: windows6.0.6000.
-func RegisterForPrintAsyncNotifications(pszName string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) error {
-	_pszName := win32.UTF16Ptr(pszName)
+func RegisterForPrintAsyncNotifications(pszName *string, pNotificationType *win32.GUID, eUserFilter PrintAsyncNotifyUserFilter, eConversationStyle PrintAsyncNotifyConversationStyle, pCallback *IPrintAsyncNotifyCallback, phNotify *foundation.HANDLE) error {
+	_pszName := win32.UTF16PtrOrNil(pszName)
 	r1, _, _ := syscall.SyscallN(procRegisterForPrintAsyncNotifications.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pNotificationType)), uintptr(eUserFilter), uintptr(eConversationStyle), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(phNotify)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1826,8 +2290,8 @@ func SetCPSUIUserData(hDlg foundation.HWND, CPSUIUserData uintptr) bool {
 
 // SetDefaultPrinter calls winspool.drv!SetDefaultPrinterW.
 // https://learn.microsoft.com/windows/win32/printdocs/setdefaultprinter
-func SetDefaultPrinter(pszPrinter string) bool {
-	_pszPrinter := win32.UTF16Ptr(pszPrinter)
+func SetDefaultPrinter(pszPrinter *string) bool {
+	_pszPrinter := win32.UTF16PtrOrNil(pszPrinter)
 	r1, _, _ := syscall.SyscallN(procSetDefaultPrinter.Addr(), uintptr(unsafe.Pointer(_pszPrinter)))
 	return r1 != 0
 }
@@ -1876,8 +2340,8 @@ func SetJobNamedProperty(hPrinter PRINTER_HANDLE, JobId uint32, pProperty *Print
 
 // SetPort calls winspool.drv!SetPortW.
 // https://learn.microsoft.com/windows/win32/printdocs/setport
-func SetPort(pName string, pPortName string, dwLevel uint32, pPortInfo *byte) error {
-	_pName := win32.UTF16Ptr(pName)
+func SetPort(pName *string, pPortName string, dwLevel uint32, pPortInfo *byte) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	_pPortName := win32.UTF16Ptr(pPortName)
 	r1, _, e1 := syscall.SyscallN(procSetPort.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pPortName)), uintptr(dwLevel), uintptr(unsafe.Pointer(pPortInfo)))
 	if r1 == 0 {
@@ -2049,10 +2513,10 @@ func UpdatePrintDeviceObject(hPrinter PRINTER_HANDLE, hDeviceObject foundation.H
 
 // UploadPrinterDriverPackage calls winspool.drv!UploadPrinterDriverPackageW.
 // https://learn.microsoft.com/windows/win32/printdocs/uploadprinterdriverpackage
-func UploadPrinterDriverPackage(pszServer string, pszInfPath string, pszEnvironment string, dwFlags uint32, hwnd foundation.HWND, pszDestInfPath foundation.PWSTR, pcchDestInfPath *uint32) error {
-	_pszServer := win32.UTF16Ptr(pszServer)
+func UploadPrinterDriverPackage(pszServer *string, pszInfPath string, pszEnvironment *string, dwFlags uint32, hwnd foundation.HWND, pszDestInfPath foundation.PWSTR, pcchDestInfPath *uint32) error {
+	_pszServer := win32.UTF16PtrOrNil(pszServer)
 	_pszInfPath := win32.UTF16Ptr(pszInfPath)
-	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
 	r1, _, _ := syscall.SyscallN(procUploadPrinterDriverPackage.Addr(), uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszInfPath)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(dwFlags), uintptr(hwnd), uintptr(unsafe.Pointer(pszDestInfPath)), uintptr(unsafe.Pointer(pcchDestInfPath)))
 	return win32.ErrIfFailed(int32(r1))
 }

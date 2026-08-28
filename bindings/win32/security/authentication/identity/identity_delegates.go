@@ -4,818 +4,1008 @@
 
 package identity
 
-// ACCEPT_SECURITY_CONTEXT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *securitycredentials.SecHandle, *SecBufferDesc, uint32, uint32, *securitycredentials.SecHandle, *SecBufferDesc, *uint32, *int64) foundation.HRESULT.
+// ACCEPT_SECURITY_CONTEXT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *securitycredentials.SecHandle, *SecBufferDesc, uint32, uint32, *securitycredentials.SecHandle, *SecBufferDesc, *uint32, *int64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type ACCEPT_SECURITY_CONTEXT_FN uintptr
 
-// ACQUIRE_CREDENTIALS_HANDLE_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int8, *int8, uint32, unsafe.Pointer, unsafe.Pointer, SEC_GET_KEY_FN, unsafe.Pointer, *securitycredentials.SecHandle, *int64) foundation.HRESULT.
+// ACQUIRE_CREDENTIALS_HANDLE_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int8, *int8, uint32, unsafe.Pointer, unsafe.Pointer, SEC_GET_KEY_FN, unsafe.Pointer, *securitycredentials.SecHandle, *int64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type ACQUIRE_CREDENTIALS_HANDLE_FN_A uintptr
 
-// ACQUIRE_CREDENTIALS_HANDLE_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint16, *uint16, uint32, unsafe.Pointer, unsafe.Pointer, SEC_GET_KEY_FN, unsafe.Pointer, *securitycredentials.SecHandle, *int64) foundation.HRESULT.
+// ACQUIRE_CREDENTIALS_HANDLE_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint16, *uint16, uint32, unsafe.Pointer, unsafe.Pointer, SEC_GET_KEY_FN, unsafe.Pointer, *securitycredentials.SecHandle, *int64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type ACQUIRE_CREDENTIALS_HANDLE_FN_W uintptr
 
-// ADD_CREDENTIALS_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *int8, *int8, uint32, unsafe.Pointer, SEC_GET_KEY_FN, unsafe.Pointer, *int64) foundation.HRESULT.
+// ADD_CREDENTIALS_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *int8, *int8, uint32, unsafe.Pointer, SEC_GET_KEY_FN, unsafe.Pointer, *int64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type ADD_CREDENTIALS_FN_A uintptr
 
-// ADD_CREDENTIALS_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *uint16, *uint16, uint32, unsafe.Pointer, SEC_GET_KEY_FN, unsafe.Pointer, *int64) foundation.HRESULT.
+// ADD_CREDENTIALS_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *uint16, *uint16, uint32, unsafe.Pointer, SEC_GET_KEY_FN, unsafe.Pointer, *int64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type ADD_CREDENTIALS_FN_W uintptr
 
-// APPLY_CONTROL_TOKEN_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *SecBufferDesc) foundation.HRESULT.
+// APPLY_CONTROL_TOKEN_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *SecBufferDesc) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type APPLY_CONTROL_TOKEN_FN uintptr
 
-// CHANGE_PASSWORD_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int8, *int8, *int8, *int8, *int8, foundation.BOOLEAN, uint32, *SecBufferDesc) foundation.HRESULT.
+// CHANGE_PASSWORD_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int8, *int8, *int8, *int8, *int8, foundation.BOOLEAN, uint32, *SecBufferDesc) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CHANGE_PASSWORD_FN_A uintptr
 
-// CHANGE_PASSWORD_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint16, *uint16, *uint16, *uint16, *uint16, foundation.BOOLEAN, uint32, *SecBufferDesc) foundation.HRESULT.
+// CHANGE_PASSWORD_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint16, *uint16, *uint16, *uint16, *uint16, foundation.BOOLEAN, uint32, *SecBufferDesc) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CHANGE_PASSWORD_FN_W uintptr
 
-// COMPLETE_AUTH_TOKEN_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *SecBufferDesc) foundation.HRESULT.
+// COMPLETE_AUTH_TOKEN_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *SecBufferDesc) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type COMPLETE_AUTH_TOKEN_FN uintptr
 
-// CredFreeCredentialsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, **ENCRYPTED_CREDENTIALW).
+// CredFreeCredentialsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, **ENCRYPTED_CREDENTIALW) uintptr.
 type CredFreeCredentialsFn uintptr
 
-// CredReadDomainCredentialsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, uint32, *securitycredentials.CREDENTIAL_TARGET_INFORMATIONW, uint32, *uint32, ***ENCRYPTED_CREDENTIALW) foundation.NTSTATUS.
+// CredReadDomainCredentialsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, uint32, *securitycredentials.CREDENTIAL_TARGET_INFORMATIONW, uint32, *uint32, ***ENCRYPTED_CREDENTIALW) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type CredReadDomainCredentialsFn uintptr
 
-// CredReadFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, uint32, foundation.PWSTR, uint32, uint32, **ENCRYPTED_CREDENTIALW) foundation.NTSTATUS.
+// CredReadFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, uint32, foundation.PWSTR, uint32, uint32, **ENCRYPTED_CREDENTIALW) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type CredReadFn uintptr
 
-// CredWriteFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, uint32, *ENCRYPTED_CREDENTIALW, uint32) foundation.NTSTATUS.
+// CredWriteFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, uint32, *ENCRYPTED_CREDENTIALW, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type CredWriteFn uintptr
 
-// CrediUnmarshalandDecodeStringFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, **byte, *uint32, *byte) foundation.NTSTATUS.
+// CrediUnmarshalandDecodeStringFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, **byte, *uint32, *byte) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type CrediUnmarshalandDecodeStringFn uintptr
 
-// DECRYPT_MESSAGE_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *SecBufferDesc, uint32, *uint32) foundation.HRESULT.
+// DECRYPT_MESSAGE_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *SecBufferDesc, uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DECRYPT_MESSAGE_FN uintptr
 
-// DELETE_SECURITY_CONTEXT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle) foundation.HRESULT.
+// DELETE_SECURITY_CONTEXT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DELETE_SECURITY_CONTEXT_FN uintptr
 
-// ENCRYPT_MESSAGE_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, *SecBufferDesc, uint32) foundation.HRESULT.
+// ENCRYPT_MESSAGE_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, *SecBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type ENCRYPT_MESSAGE_FN uintptr
 
-// ENUMERATE_SECURITY_PACKAGES_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, **SecPkgInfoA) foundation.HRESULT.
+// ENUMERATE_SECURITY_PACKAGES_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, **SecPkgInfoA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type ENUMERATE_SECURITY_PACKAGES_FN_A uintptr
 
-// ENUMERATE_SECURITY_PACKAGES_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, **SecPkgInfoW) foundation.HRESULT.
+// ENUMERATE_SECURITY_PACKAGES_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, **SecPkgInfoW) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type ENUMERATE_SECURITY_PACKAGES_FN_W uintptr
 
-// EXPORT_SECURITY_CONTEXT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, *SecBuffer, *unsafe.Pointer) foundation.HRESULT.
+// EXPORT_SECURITY_CONTEXT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, *SecBuffer, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type EXPORT_SECURITY_CONTEXT_FN uintptr
 
-// FREE_CONTEXT_BUFFER_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// FREE_CONTEXT_BUFFER_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FREE_CONTEXT_BUFFER_FN uintptr
 
-// FREE_CREDENTIALS_HANDLE_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle) foundation.HRESULT.
+// FREE_CREDENTIALS_HANDLE_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FREE_CREDENTIALS_HANDLE_FN uintptr
 
-// IMPERSONATE_SECURITY_CONTEXT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle) foundation.HRESULT.
+// IMPERSONATE_SECURITY_CONTEXT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type IMPERSONATE_SECURITY_CONTEXT_FN uintptr
 
-// IMPORT_SECURITY_CONTEXT_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int8, *SecBuffer, unsafe.Pointer, *securitycredentials.SecHandle) foundation.HRESULT.
+// IMPORT_SECURITY_CONTEXT_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int8, *SecBuffer, unsafe.Pointer, *securitycredentials.SecHandle) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type IMPORT_SECURITY_CONTEXT_FN_A uintptr
 
-// IMPORT_SECURITY_CONTEXT_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint16, *SecBuffer, unsafe.Pointer, *securitycredentials.SecHandle) foundation.HRESULT.
+// IMPORT_SECURITY_CONTEXT_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint16, *SecBuffer, unsafe.Pointer, *securitycredentials.SecHandle) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type IMPORT_SECURITY_CONTEXT_FN_W uintptr
 
-// INITIALIZE_SECURITY_CONTEXT_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *securitycredentials.SecHandle, *int8, uint32, uint32, uint32, *SecBufferDesc, uint32, *securitycredentials.SecHandle, *SecBufferDesc, *uint32, *int64) foundation.HRESULT.
+// INITIALIZE_SECURITY_CONTEXT_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *securitycredentials.SecHandle, *int8, uint32, uint32, uint32, *SecBufferDesc, uint32, *securitycredentials.SecHandle, *SecBufferDesc, *uint32, *int64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type INITIALIZE_SECURITY_CONTEXT_FN_A uintptr
 
-// INITIALIZE_SECURITY_CONTEXT_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *securitycredentials.SecHandle, *uint16, uint32, uint32, uint32, *SecBufferDesc, uint32, *securitycredentials.SecHandle, *SecBufferDesc, *uint32, *int64) foundation.HRESULT.
+// INITIALIZE_SECURITY_CONTEXT_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *securitycredentials.SecHandle, *uint16, uint32, uint32, uint32, *SecBufferDesc, uint32, *securitycredentials.SecHandle, *SecBufferDesc, *uint32, *int64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type INITIALIZE_SECURITY_CONTEXT_FN_W uintptr
 
-// INIT_SECURITY_INTERFACE_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() *SecurityFunctionTableA.
+// INIT_SECURITY_INTERFACE_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// *SecurityFunctionTableA; NewCallback requires a uintptr-sized result).
 type INIT_SECURITY_INTERFACE_A uintptr
 
-// INIT_SECURITY_INTERFACE_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() *SecurityFunctionTableW.
+// INIT_SECURITY_INTERFACE_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// *SecurityFunctionTableW; NewCallback requires a uintptr-sized result).
 type INIT_SECURITY_INTERFACE_W uintptr
 
-// KspCompleteTokenFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBufferDesc) foundation.NTSTATUS.
+// KspCompleteTokenFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBufferDesc) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspCompleteTokenFn uintptr
 
-// KspDeleteContextFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *uintptr) foundation.NTSTATUS.
+// KspDeleteContextFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *uintptr) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspDeleteContextFn uintptr
 
-// KspGetTokenFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *foundation.HANDLE, *unsafe.Pointer) foundation.NTSTATUS.
+// KspGetTokenFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *foundation.HANDLE, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspGetTokenFn uintptr
 
-// KspInitContextFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBuffer, *uintptr) foundation.NTSTATUS.
+// KspInitContextFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBuffer, *uintptr) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspInitContextFn uintptr
 
-// KspInitPackageFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SECPKG_KERNEL_FUNCTIONS) foundation.NTSTATUS.
+// KspInitPackageFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SECPKG_KERNEL_FUNCTIONS) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspInitPackageFn uintptr
 
-// KspMakeSignatureFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, *SecBufferDesc, uint32) foundation.NTSTATUS.
+// KspMakeSignatureFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, *SecBufferDesc, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspMakeSignatureFn uintptr
 
-// KspMapHandleFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *uintptr) foundation.NTSTATUS.
+// KspMapHandleFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *uintptr) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspMapHandleFn uintptr
 
-// KspQueryAttributesFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer) foundation.NTSTATUS.
+// KspQueryAttributesFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspQueryAttributesFn uintptr
 
-// KspSealMessageFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, *SecBufferDesc, uint32) foundation.NTSTATUS.
+// KspSealMessageFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, *SecBufferDesc, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspSealMessageFn uintptr
 
-// KspSerializeAuthDataFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// KspSerializeAuthDataFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspSerializeAuthDataFn uintptr
 
-// KspSetPagingModeFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.BOOLEAN) foundation.NTSTATUS.
+// KspSetPagingModeFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.BOOLEAN) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspSetPagingModeFn uintptr
 
-// KspUnsealMessageFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBufferDesc, uint32, *uint32) foundation.NTSTATUS.
+// KspUnsealMessageFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBufferDesc, uint32, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspUnsealMessageFn uintptr
 
-// KspVerifySignatureFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBufferDesc, uint32, *uint32) foundation.NTSTATUS.
+// KspVerifySignatureFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBufferDesc, uint32, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type KspVerifySignatureFn uintptr
 
-// LSA_AP_POST_LOGON_USER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SECPKG_POST_LOGON_USER_INFO) foundation.NTSTATUS.
+// LSA_AP_POST_LOGON_USER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SECPKG_POST_LOGON_USER_INFO) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type LSA_AP_POST_LOGON_USER uintptr
 
-// MAKE_SIGNATURE_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, *SecBufferDesc, uint32) foundation.HRESULT.
+// MAKE_SIGNATURE_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, *SecBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type MAKE_SIGNATURE_FN uintptr
 
-// PKSEC_CREATE_CONTEXT_LIST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(KSEC_CONTEXT_TYPE) unsafe.Pointer.
+// PKSEC_CREATE_CONTEXT_LIST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(KSEC_CONTEXT_TYPE) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PKSEC_CREATE_CONTEXT_LIST uintptr
 
-// PKSEC_DEREFERENCE_LIST_ENTRY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*KSEC_LIST_ENTRY, *byte).
+// PKSEC_DEREFERENCE_LIST_ENTRY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*KSEC_LIST_ENTRY, *byte) uintptr.
 type PKSEC_DEREFERENCE_LIST_ENTRY uintptr
 
-// PKSEC_INSERT_LIST_ENTRY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *KSEC_LIST_ENTRY).
+// PKSEC_INSERT_LIST_ENTRY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *KSEC_LIST_ENTRY) uintptr.
 type PKSEC_INSERT_LIST_ENTRY uintptr
 
-// PKSEC_LOCATE_PKG_BY_ID is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) unsafe.Pointer.
+// PKSEC_LOCATE_PKG_BY_ID is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PKSEC_LOCATE_PKG_BY_ID uintptr
 
-// PKSEC_REFERENCE_LIST_ENTRY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*KSEC_LIST_ENTRY, uint32, foundation.BOOLEAN) foundation.NTSTATUS.
+// PKSEC_REFERENCE_LIST_ENTRY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*KSEC_LIST_ENTRY, uint32, foundation.BOOLEAN) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PKSEC_REFERENCE_LIST_ENTRY uintptr
 
-// PKSEC_SERIALIZE_SCHANNEL_AUTH_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// PKSEC_SERIALIZE_SCHANNEL_AUTH_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PKSEC_SERIALIZE_SCHANNEL_AUTH_DATA uintptr
 
-// PKSEC_SERIALIZE_WINNT_AUTH_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// PKSEC_SERIALIZE_WINNT_AUTH_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PKSEC_SERIALIZE_WINNT_AUTH_DATA uintptr
 
-// PLSA_ADD_CREDENTIAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, uint32, *LSA_STRING, *LSA_STRING) foundation.NTSTATUS.
+// PLSA_ADD_CREDENTIAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, uint32, *LSA_STRING, *LSA_STRING) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_ADD_CREDENTIAL uintptr
 
-// PLSA_ALLOCATE_CLIENT_BUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// PLSA_ALLOCATE_CLIENT_BUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_ALLOCATE_CLIENT_BUFFER uintptr
 
-// PLSA_ALLOCATE_LSA_HEAP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) unsafe.Pointer.
+// PLSA_ALLOCATE_LSA_HEAP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PLSA_ALLOCATE_LSA_HEAP uintptr
 
-// PLSA_ALLOCATE_PRIVATE_HEAP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) unsafe.Pointer.
+// PLSA_ALLOCATE_PRIVATE_HEAP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PLSA_ALLOCATE_PRIVATE_HEAP uintptr
 
-// PLSA_ALLOCATE_SHARED_MEMORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32) unsafe.Pointer.
+// PLSA_ALLOCATE_SHARED_MEMORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PLSA_ALLOCATE_SHARED_MEMORY uintptr
 
-// PLSA_AP_CALL_PACKAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) foundation.NTSTATUS.
+// PLSA_AP_CALL_PACKAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_CALL_PACKAGE uintptr
 
-// PLSA_AP_CALL_PACKAGE_PASSTHROUGH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) foundation.NTSTATUS.
+// PLSA_AP_CALL_PACKAGE_PASSTHROUGH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_CALL_PACKAGE_PASSTHROUGH uintptr
 
-// PLSA_AP_INITIALIZE_PACKAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *LSA_DISPATCH_TABLE, *LSA_STRING, *LSA_STRING, **LSA_STRING) foundation.NTSTATUS.
+// PLSA_AP_INITIALIZE_PACKAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *LSA_DISPATCH_TABLE, *LSA_STRING, *LSA_STRING, **LSA_STRING) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_INITIALIZE_PACKAGE uintptr
 
-// PLSA_AP_LOGON_TERMINATED is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID).
+// PLSA_AP_LOGON_TERMINATED is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID) uintptr.
 type PLSA_AP_LOGON_TERMINATED uintptr
 
-// PLSA_AP_LOGON_USER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *foundation.LUID, *int32, *LSA_TOKEN_INFORMATION_TYPE, *unsafe.Pointer, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING) foundation.NTSTATUS.
+// PLSA_AP_LOGON_USER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *foundation.LUID, *int32, *LSA_TOKEN_INFORMATION_TYPE, *unsafe.Pointer, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_LOGON_USER uintptr
 
-// PLSA_AP_LOGON_USER_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *foundation.LUID, *int32, *LSA_TOKEN_INFORMATION_TYPE, *unsafe.Pointer, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING) foundation.NTSTATUS.
+// PLSA_AP_LOGON_USER_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *foundation.LUID, *int32, *LSA_TOKEN_INFORMATION_TYPE, *unsafe.Pointer, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_LOGON_USER_EX uintptr
 
-// PLSA_AP_LOGON_USER_EX2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *foundation.LUID, *int32, *LSA_TOKEN_INFORMATION_TYPE, *unsafe.Pointer, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, *SECPKG_PRIMARY_CRED, **SECPKG_SUPPLEMENTAL_CRED_ARRAY) foundation.NTSTATUS.
+// PLSA_AP_LOGON_USER_EX2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *foundation.LUID, *int32, *LSA_TOKEN_INFORMATION_TYPE, *unsafe.Pointer, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, *SECPKG_PRIMARY_CRED, **SECPKG_SUPPLEMENTAL_CRED_ARRAY) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_LOGON_USER_EX2 uintptr
 
-// PLSA_AP_LOGON_USER_EX3 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *SECPKG_SURROGATE_LOGON, *unsafe.Pointer, *uint32, *foundation.LUID, *int32, *LSA_TOKEN_INFORMATION_TYPE, *unsafe.Pointer, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, *SECPKG_PRIMARY_CRED, **SECPKG_SUPPLEMENTAL_CRED_ARRAY) foundation.NTSTATUS.
+// PLSA_AP_LOGON_USER_EX3 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *SECPKG_SURROGATE_LOGON, *unsafe.Pointer, *uint32, *foundation.LUID, *int32, *LSA_TOKEN_INFORMATION_TYPE, *unsafe.Pointer, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, **LSA_UNICODE_STRING, *SECPKG_PRIMARY_CRED, **SECPKG_SUPPLEMENTAL_CRED_ARRAY) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_LOGON_USER_EX3 uintptr
 
-// PLSA_AP_POST_LOGON_USER_SURROGATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *SECPKG_SURROGATE_LOGON, unsafe.Pointer, uint32, *foundation.LUID, foundation.NTSTATUS, foundation.NTSTATUS, LSA_TOKEN_INFORMATION_TYPE, unsafe.Pointer, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *SECPKG_PRIMARY_CRED, *SECPKG_SUPPLEMENTAL_CRED_ARRAY) foundation.NTSTATUS.
+// PLSA_AP_POST_LOGON_USER_SURROGATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *SECPKG_SURROGATE_LOGON, unsafe.Pointer, uint32, *foundation.LUID, foundation.NTSTATUS, foundation.NTSTATUS, LSA_TOKEN_INFORMATION_TYPE, unsafe.Pointer, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *SECPKG_PRIMARY_CRED, *SECPKG_SUPPLEMENTAL_CRED_ARRAY) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_POST_LOGON_USER_SURROGATE uintptr
 
-// PLSA_AP_PRE_LOGON_USER_SURROGATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *SECPKG_SURROGATE_LOGON, *int32) foundation.NTSTATUS.
+// PLSA_AP_PRE_LOGON_USER_SURROGATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, SECURITY_LOGON_TYPE, unsafe.Pointer, unsafe.Pointer, uint32, *SECPKG_SURROGATE_LOGON, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_PRE_LOGON_USER_SURROGATE uintptr
 
-// PLSA_AUDIT_ACCOUNT_LOGON is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.BOOLEAN, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, foundation.NTSTATUS) foundation.NTSTATUS.
+// PLSA_AUDIT_ACCOUNT_LOGON is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.BOOLEAN, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, foundation.NTSTATUS) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AUDIT_ACCOUNT_LOGON uintptr
 
-// PLSA_AUDIT_LOGON is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.NTSTATUS, foundation.NTSTATUS, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, security.PSID, SECURITY_LOGON_TYPE, *security.TOKEN_SOURCE, *foundation.LUID).
+// PLSA_AUDIT_LOGON is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.NTSTATUS, foundation.NTSTATUS, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, security.PSID, SECURITY_LOGON_TYPE, *security.TOKEN_SOURCE, *foundation.LUID) uintptr.
 type PLSA_AUDIT_LOGON uintptr
 
-// PLSA_AUDIT_LOGON_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.NTSTATUS, foundation.NTSTATUS, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, security.PSID, SECURITY_LOGON_TYPE, security.SECURITY_IMPERSONATION_LEVEL, *security.TOKEN_SOURCE, *foundation.LUID).
+// PLSA_AUDIT_LOGON_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.NTSTATUS, foundation.NTSTATUS, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, security.PSID, SECURITY_LOGON_TYPE, security.SECURITY_IMPERSONATION_LEVEL, *security.TOKEN_SOURCE, *foundation.LUID) uintptr.
 type PLSA_AUDIT_LOGON_EX uintptr
 
-// PLSA_CALLBACK_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *SecBuffer, *SecBuffer) foundation.NTSTATUS.
+// PLSA_CALLBACK_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *SecBuffer, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CALLBACK_FUNCTION uintptr
 
-// PLSA_CALL_PACKAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) foundation.NTSTATUS.
+// PLSA_CALL_PACKAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CALL_PACKAGE uintptr
 
-// PLSA_CALL_PACKAGEEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) foundation.NTSTATUS.
+// PLSA_CALL_PACKAGEEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CALL_PACKAGEEX uintptr
 
-// PLSA_CALL_PACKAGE_PASSTHROUGH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) foundation.NTSTATUS.
+// PLSA_CALL_PACKAGE_PASSTHROUGH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CALL_PACKAGE_PASSTHROUGH uintptr
 
-// PLSA_CANCEL_NOTIFICATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.NTSTATUS.
+// PLSA_CANCEL_NOTIFICATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CANCEL_NOTIFICATION uintptr
 
-// PLSA_CHECK_PROTECTED_USER_BY_TOKEN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *foundation.BOOLEAN) foundation.NTSTATUS.
+// PLSA_CHECK_PROTECTED_USER_BY_TOKEN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *foundation.BOOLEAN) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CHECK_PROTECTED_USER_BY_TOKEN uintptr
 
-// PLSA_CLIENT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uintptr, uintptr, *SecBuffer, *SecBuffer) foundation.NTSTATUS.
+// PLSA_CLIENT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uintptr, uintptr, *SecBuffer, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CLIENT_CALLBACK uintptr
 
-// PLSA_CLOSE_SAM_USER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.NTSTATUS.
+// PLSA_CLOSE_SAM_USER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CLOSE_SAM_USER uintptr
 
-// PLSA_CONVERT_AUTH_DATA_TO_TOKEN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, security.SECURITY_IMPERSONATION_LEVEL, *security.TOKEN_SOURCE, SECURITY_LOGON_TYPE, *LSA_UNICODE_STRING, *foundation.HANDLE, *foundation.LUID, *LSA_UNICODE_STRING, *int32) foundation.NTSTATUS.
+// PLSA_CONVERT_AUTH_DATA_TO_TOKEN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, security.SECURITY_IMPERSONATION_LEVEL, *security.TOKEN_SOURCE, SECURITY_LOGON_TYPE, *LSA_UNICODE_STRING, *foundation.HANDLE, *foundation.LUID, *LSA_UNICODE_STRING, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CONVERT_AUTH_DATA_TO_TOKEN uintptr
 
-// PLSA_COPY_FROM_CLIENT_BUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) foundation.NTSTATUS.
+// PLSA_COPY_FROM_CLIENT_BUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_COPY_FROM_CLIENT_BUFFER uintptr
 
-// PLSA_COPY_TO_CLIENT_BUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) foundation.NTSTATUS.
+// PLSA_COPY_TO_CLIENT_BUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, uint32, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_COPY_TO_CLIENT_BUFFER uintptr
 
-// PLSA_CRACK_SINGLE_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.BOOLEAN, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, uint32, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *uint32) foundation.NTSTATUS.
+// PLSA_CRACK_SINGLE_NAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.BOOLEAN, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, uint32, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CRACK_SINGLE_NAME uintptr
 
-// PLSA_CREATE_LOGON_SESSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID) foundation.NTSTATUS.
+// PLSA_CREATE_LOGON_SESSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CREATE_LOGON_SESSION uintptr
 
-// PLSA_CREATE_SHARED_MEMORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32) unsafe.Pointer.
+// PLSA_CREATE_SHARED_MEMORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PLSA_CREATE_SHARED_MEMORY uintptr
 
-// PLSA_CREATE_THREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*security.SECURITY_ATTRIBUTES, uint32, systemthreading.LPTHREAD_START_ROUTINE, unsafe.Pointer, uint32, *uint32) foundation.HANDLE.
+// PLSA_CREATE_THREAD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*security.SECURITY_ATTRIBUTES, uint32, systemthreading.LPTHREAD_START_ROUTINE, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// foundation.HANDLE; NewCallback requires a uintptr-sized result).
 type PLSA_CREATE_THREAD uintptr
 
-// PLSA_CREATE_TOKEN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, *security.TOKEN_SOURCE, SECURITY_LOGON_TYPE, security.SECURITY_IMPERSONATION_LEVEL, LSA_TOKEN_INFORMATION_TYPE, unsafe.Pointer, *security.TOKEN_GROUPS, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *foundation.HANDLE, *int32) foundation.NTSTATUS.
+// PLSA_CREATE_TOKEN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, *security.TOKEN_SOURCE, SECURITY_LOGON_TYPE, security.SECURITY_IMPERSONATION_LEVEL, LSA_TOKEN_INFORMATION_TYPE, unsafe.Pointer, *security.TOKEN_GROUPS, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *foundation.HANDLE, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CREATE_TOKEN uintptr
 
-// PLSA_CREATE_TOKEN_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, *security.TOKEN_SOURCE, SECURITY_LOGON_TYPE, security.SECURITY_IMPERSONATION_LEVEL, LSA_TOKEN_INFORMATION_TYPE, unsafe.Pointer, *security.TOKEN_GROUPS, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, unsafe.Pointer, SECPKG_SESSIONINFO_TYPE, *foundation.HANDLE, *int32) foundation.NTSTATUS.
+// PLSA_CREATE_TOKEN_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, *security.TOKEN_SOURCE, SECURITY_LOGON_TYPE, security.SECURITY_IMPERSONATION_LEVEL, LSA_TOKEN_INFORMATION_TYPE, unsafe.Pointer, *security.TOKEN_GROUPS, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, unsafe.Pointer, SECPKG_SESSIONINFO_TYPE, *foundation.HANDLE, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_CREATE_TOKEN_EX uintptr
 
-// PLSA_DELETE_CREDENTIAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, uint32, *LSA_STRING) foundation.NTSTATUS.
+// PLSA_DELETE_CREDENTIAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, uint32, *LSA_STRING) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_DELETE_CREDENTIAL uintptr
 
-// PLSA_DELETE_LOGON_SESSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID) foundation.NTSTATUS.
+// PLSA_DELETE_LOGON_SESSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_DELETE_LOGON_SESSION uintptr
 
-// PLSA_DELETE_SHARED_MEMORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.BOOLEAN.
+// PLSA_DELETE_SHARED_MEMORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PLSA_DELETE_SHARED_MEMORY uintptr
 
-// PLSA_DUPLICATE_HANDLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *foundation.HANDLE) foundation.NTSTATUS.
+// PLSA_DUPLICATE_HANDLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *foundation.HANDLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_DUPLICATE_HANDLE uintptr
 
-// PLSA_EXPAND_AUTH_DATA_FOR_DOMAIN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, unsafe.Pointer, **byte, *uint32) foundation.NTSTATUS.
+// PLSA_EXPAND_AUTH_DATA_FOR_DOMAIN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, unsafe.Pointer, **byte, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_EXPAND_AUTH_DATA_FOR_DOMAIN uintptr
 
-// PLSA_FREE_CLIENT_BUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, unsafe.Pointer) foundation.NTSTATUS.
+// PLSA_FREE_CLIENT_BUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_FREE_CLIENT_BUFFER uintptr
 
-// PLSA_FREE_LSA_HEAP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PLSA_FREE_LSA_HEAP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PLSA_FREE_LSA_HEAP uintptr
 
-// PLSA_FREE_PRIVATE_HEAP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PLSA_FREE_PRIVATE_HEAP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PLSA_FREE_PRIVATE_HEAP uintptr
 
-// PLSA_FREE_SHARED_MEMORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer).
+// PLSA_FREE_SHARED_MEMORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr.
 type PLSA_FREE_SHARED_MEMORY uintptr
 
-// PLSA_GET_APP_MODE_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, *uintptr, *uintptr, *SecBuffer, *foundation.BOOLEAN) foundation.NTSTATUS.
+// PLSA_GET_APP_MODE_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, *uintptr, *uintptr, *SecBuffer, *foundation.BOOLEAN) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_APP_MODE_INFO uintptr
 
-// PLSA_GET_AUTH_DATA_FOR_USER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SECURITY_STRING, SECPKG_NAME_TYPE, *SECURITY_STRING, **byte, *uint32, *LSA_UNICODE_STRING) foundation.NTSTATUS.
+// PLSA_GET_AUTH_DATA_FOR_USER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SECURITY_STRING, SECPKG_NAME_TYPE, *SECURITY_STRING, **byte, *uint32, *LSA_UNICODE_STRING) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_AUTH_DATA_FOR_USER uintptr
 
-// PLSA_GET_CALL_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SECPKG_CALL_INFO) foundation.BOOLEAN.
+// PLSA_GET_CALL_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SECPKG_CALL_INFO) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PLSA_GET_CALL_INFO uintptr
 
-// PLSA_GET_CLIENT_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SECPKG_CLIENT_INFO) foundation.NTSTATUS.
+// PLSA_GET_CLIENT_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SECPKG_CLIENT_INFO) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_CLIENT_INFO uintptr
 
-// PLSA_GET_CLIENT_INFO_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SECPKG_CLIENT_INFO_EX, uint32) foundation.NTSTATUS.
+// PLSA_GET_CLIENT_INFO_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SECPKG_CLIENT_INFO_EX, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_CLIENT_INFO_EX uintptr
 
-// PLSA_GET_CREDENTIALS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, uint32, *uint32, foundation.BOOLEAN, *LSA_STRING, *uint32, *LSA_STRING) foundation.NTSTATUS.
+// PLSA_GET_CREDENTIALS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, uint32, *uint32, foundation.BOOLEAN, *LSA_STRING, *uint32, *LSA_STRING) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_CREDENTIALS uintptr
 
-// PLSA_GET_EXTENDED_CALL_FLAGS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32) foundation.NTSTATUS.
+// PLSA_GET_EXTENDED_CALL_FLAGS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_EXTENDED_CALL_FLAGS uintptr
 
-// PLSA_GET_SECPKG_FAILURE_REASON is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SECPKG_FAILURE_REASON) foundation.NTSTATUS.
+// PLSA_GET_SECPKG_FAILURE_REASON is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SECPKG_FAILURE_REASON) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_SECPKG_FAILURE_REASON uintptr
 
-// PLSA_GET_SERVICE_ACCOUNT_PASSWORD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING, *LSA_UNICODE_STRING, CRED_FETCH, *foundation.FILETIME, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *foundation.FILETIME) foundation.NTSTATUS.
+// PLSA_GET_SERVICE_ACCOUNT_PASSWORD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING, *LSA_UNICODE_STRING, CRED_FETCH, *foundation.FILETIME, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *foundation.FILETIME) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_SERVICE_ACCOUNT_PASSWORD uintptr
 
-// PLSA_GET_USER_AUTH_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, **byte, *uint32) foundation.NTSTATUS.
+// PLSA_GET_USER_AUTH_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, **byte, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_USER_AUTH_DATA uintptr
 
-// PLSA_GET_USER_CREDENTIALS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *unsafe.Pointer, *uint32, *unsafe.Pointer, *uint32) foundation.NTSTATUS.
+// PLSA_GET_USER_CREDENTIALS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *unsafe.Pointer, *uint32, *unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_GET_USER_CREDENTIALS uintptr
 
-// PLSA_IMPERSONATE_CLIENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.NTSTATUS.
+// PLSA_IMPERSONATE_CLIENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_IMPERSONATE_CLIENT uintptr
 
-// PLSA_LOCATE_PKG_BY_ID is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) unsafe.Pointer.
+// PLSA_LOCATE_PKG_BY_ID is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PLSA_LOCATE_PKG_BY_ID uintptr
 
-// PLSA_MAP_BUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SecBuffer, *SecBuffer) foundation.NTSTATUS.
+// PLSA_MAP_BUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SecBuffer, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_MAP_BUFFER uintptr
 
-// PLSA_OPEN_SAM_USER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SECURITY_STRING, SECPKG_NAME_TYPE, *SECURITY_STRING, foundation.BOOLEAN, uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// PLSA_OPEN_SAM_USER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SECURITY_STRING, SECPKG_NAME_TYPE, *SECURITY_STRING, foundation.BOOLEAN, uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_OPEN_SAM_USER uintptr
 
-// PLSA_OPEN_TOKEN_BY_LOGON_ID is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, *foundation.HANDLE) foundation.NTSTATUS.
+// PLSA_OPEN_TOKEN_BY_LOGON_ID is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, *foundation.HANDLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_OPEN_TOKEN_BY_LOGON_ID uintptr
 
-// PLSA_PROTECT_MEMORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32).
+// PLSA_PROTECT_MEMORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr.
 type PLSA_PROTECT_MEMORY uintptr
 
-// PLSA_QUERY_CLIENT_REQUEST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// PLSA_QUERY_CLIENT_REQUEST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_QUERY_CLIENT_REQUEST uintptr
 
-// PLSA_REDIRECTED_LOGON_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32) foundation.NTSTATUS.
+// PLSA_REDIRECTED_LOGON_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_REDIRECTED_LOGON_CALLBACK uintptr
 
-// PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE).
+// PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr.
 type PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK uintptr
 
-// PLSA_REDIRECTED_LOGON_GET_LOGON_CREDS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **byte, *uint32) foundation.NTSTATUS.
+// PLSA_REDIRECTED_LOGON_GET_LOGON_CREDS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **byte, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_REDIRECTED_LOGON_GET_LOGON_CREDS uintptr
 
-// PLSA_REDIRECTED_LOGON_GET_SID is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *security.PSID) foundation.NTSTATUS.
+// PLSA_REDIRECTED_LOGON_GET_SID is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *security.PSID) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_REDIRECTED_LOGON_GET_SID uintptr
 
-// PLSA_REDIRECTED_LOGON_GET_SUPP_CREDS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **SECPKG_SUPPLEMENTAL_CRED_ARRAY) foundation.NTSTATUS.
+// PLSA_REDIRECTED_LOGON_GET_SUPP_CREDS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **SECPKG_SUPPLEMENTAL_CRED_ARRAY) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_REDIRECTED_LOGON_GET_SUPP_CREDS uintptr
 
-// PLSA_REDIRECTED_LOGON_INIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *LSA_UNICODE_STRING, uint32, *foundation.LUID) foundation.NTSTATUS.
+// PLSA_REDIRECTED_LOGON_INIT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *LSA_UNICODE_STRING, uint32, *foundation.LUID) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_REDIRECTED_LOGON_INIT uintptr
 
-// PLSA_REGISTER_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, PLSA_CALLBACK_FUNCTION) foundation.NTSTATUS.
+// PLSA_REGISTER_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, PLSA_CALLBACK_FUNCTION) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_REGISTER_CALLBACK uintptr
 
-// PLSA_REGISTER_NOTIFICATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemthreading.LPTHREAD_START_ROUTINE, unsafe.Pointer, uint32, uint32, uint32, uint32, foundation.HANDLE) foundation.HANDLE.
+// PLSA_REGISTER_NOTIFICATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemthreading.LPTHREAD_START_ROUTINE, unsafe.Pointer, uint32, uint32, uint32, uint32, foundation.HANDLE) uintptr (the native return type is
+// foundation.HANDLE; NewCallback requires a uintptr-sized result).
 type PLSA_REGISTER_NOTIFICATION uintptr
 
-// PLSA_SAVE_SUPPLEMENTAL_CREDENTIALS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, uint32, unsafe.Pointer, foundation.BOOLEAN) foundation.NTSTATUS.
+// PLSA_SAVE_SUPPLEMENTAL_CREDENTIALS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, uint32, unsafe.Pointer, foundation.BOOLEAN) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_SAVE_SUPPLEMENTAL_CREDENTIALS uintptr
 
-// PLSA_SET_APP_MODE_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uintptr, uintptr, *SecBuffer, foundation.BOOLEAN) foundation.NTSTATUS.
+// PLSA_SET_APP_MODE_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uintptr, uintptr, *SecBuffer, foundation.BOOLEAN) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_SET_APP_MODE_INFO uintptr
 
-// PLSA_SET_SECPKG_FAILURE_REASON is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SECPKG_FAILURE_REASON) foundation.NTSTATUS.
+// PLSA_SET_SECPKG_FAILURE_REASON is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SECPKG_FAILURE_REASON) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_SET_SECPKG_FAILURE_REASON uintptr
 
-// PLSA_UNLOAD_PACKAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.NTSTATUS.
+// PLSA_UNLOAD_PACKAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_UNLOAD_PACKAGE uintptr
 
-// PLSA_UPDATE_PRIMARY_CREDENTIALS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SECPKG_PRIMARY_CRED, *SECPKG_SUPPLEMENTAL_CRED_ARRAY) foundation.NTSTATUS.
+// PLSA_UPDATE_PRIMARY_CREDENTIALS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SECPKG_PRIMARY_CRED, *SECPKG_SUPPLEMENTAL_CRED_ARRAY) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_UPDATE_PRIMARY_CREDENTIALS uintptr
 
-// PSAM_CREDENTIAL_UPDATE_FREE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PSAM_CREDENTIAL_UPDATE_FREE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PSAM_CREDENTIAL_UPDATE_FREE_ROUTINE uintptr
 
-// PSAM_CREDENTIAL_UPDATE_NOTIFY_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING, unsafe.Pointer, uint32, uint32, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *unsafe.Pointer, *uint32) foundation.NTSTATUS.
+// PSAM_CREDENTIAL_UPDATE_NOTIFY_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING, unsafe.Pointer, uint32, uint32, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PSAM_CREDENTIAL_UPDATE_NOTIFY_ROUTINE uintptr
 
-// PSAM_CREDENTIAL_UPDATE_REGISTER_MAPPED_ENTRYPOINTS_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SAM_REGISTER_MAPPING_TABLE) foundation.NTSTATUS.
+// PSAM_CREDENTIAL_UPDATE_REGISTER_MAPPED_ENTRYPOINTS_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SAM_REGISTER_MAPPING_TABLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PSAM_CREDENTIAL_UPDATE_REGISTER_MAPPED_ENTRYPOINTS_ROUTINE uintptr
 
-// PSAM_CREDENTIAL_UPDATE_REGISTER_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING) foundation.BOOLEAN.
+// PSAM_CREDENTIAL_UPDATE_REGISTER_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PSAM_CREDENTIAL_UPDATE_REGISTER_ROUTINE uintptr
 
-// PSAM_INIT_NOTIFICATION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.BOOLEAN.
+// PSAM_INIT_NOTIFICATION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PSAM_INIT_NOTIFICATION_ROUTINE uintptr
 
-// PSAM_PASSWORD_FILTER_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, foundation.BOOLEAN) foundation.BOOLEAN.
+// PSAM_PASSWORD_FILTER_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, foundation.BOOLEAN) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PSAM_PASSWORD_FILTER_ROUTINE uintptr
 
-// PSAM_PASSWORD_NOTIFICATION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING, uint32, *LSA_UNICODE_STRING) foundation.NTSTATUS.
+// PSAM_PASSWORD_NOTIFICATION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING, uint32, *LSA_UNICODE_STRING) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PSAM_PASSWORD_NOTIFICATION_ROUTINE uintptr
 
-// QUERY_CONTEXT_ATTRIBUTES_EX_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) foundation.HRESULT.
+// QUERY_CONTEXT_ATTRIBUTES_EX_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_CONTEXT_ATTRIBUTES_EX_FN_A uintptr
 
-// QUERY_CONTEXT_ATTRIBUTES_EX_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) foundation.HRESULT.
+// QUERY_CONTEXT_ATTRIBUTES_EX_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_CONTEXT_ATTRIBUTES_EX_FN_W uintptr
 
-// QUERY_CONTEXT_ATTRIBUTES_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer) foundation.HRESULT.
+// QUERY_CONTEXT_ATTRIBUTES_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_CONTEXT_ATTRIBUTES_FN_A uintptr
 
-// QUERY_CONTEXT_ATTRIBUTES_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer) foundation.HRESULT.
+// QUERY_CONTEXT_ATTRIBUTES_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_CONTEXT_ATTRIBUTES_FN_W uintptr
 
-// QUERY_CREDENTIALS_ATTRIBUTES_EX_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) foundation.HRESULT.
+// QUERY_CREDENTIALS_ATTRIBUTES_EX_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_CREDENTIALS_ATTRIBUTES_EX_FN_A uintptr
 
-// QUERY_CREDENTIALS_ATTRIBUTES_EX_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) foundation.HRESULT.
+// QUERY_CREDENTIALS_ATTRIBUTES_EX_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_CREDENTIALS_ATTRIBUTES_EX_FN_W uintptr
 
-// QUERY_CREDENTIALS_ATTRIBUTES_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer) foundation.HRESULT.
+// QUERY_CREDENTIALS_ATTRIBUTES_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_CREDENTIALS_ATTRIBUTES_FN_A uintptr
 
-// QUERY_CREDENTIALS_ATTRIBUTES_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer) foundation.HRESULT.
+// QUERY_CREDENTIALS_ATTRIBUTES_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_CREDENTIALS_ATTRIBUTES_FN_W uintptr
 
-// QUERY_SECURITY_CONTEXT_TOKEN_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *unsafe.Pointer) foundation.HRESULT.
+// QUERY_SECURITY_CONTEXT_TOKEN_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_SECURITY_CONTEXT_TOKEN_FN uintptr
 
-// QUERY_SECURITY_PACKAGE_INFO_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int8, **SecPkgInfoA) foundation.HRESULT.
+// QUERY_SECURITY_PACKAGE_INFO_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int8, **SecPkgInfoA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_SECURITY_PACKAGE_INFO_FN_A uintptr
 
-// QUERY_SECURITY_PACKAGE_INFO_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint16, **SecPkgInfoW) foundation.HRESULT.
+// QUERY_SECURITY_PACKAGE_INFO_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint16, **SecPkgInfoW) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type QUERY_SECURITY_PACKAGE_INFO_FN_W uintptr
 
-// REVERT_SECURITY_CONTEXT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle) foundation.HRESULT.
+// REVERT_SECURITY_CONTEXT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type REVERT_SECURITY_CONTEXT_FN uintptr
 
-// SEC_GET_KEY_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *foundation.HRESULT).
+// SEC_GET_KEY_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *foundation.HRESULT) uintptr.
 type SEC_GET_KEY_FN uintptr
 
-// SET_CONTEXT_ATTRIBUTES_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) foundation.HRESULT.
+// SET_CONTEXT_ATTRIBUTES_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SET_CONTEXT_ATTRIBUTES_FN_A uintptr
 
-// SET_CONTEXT_ATTRIBUTES_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) foundation.HRESULT.
+// SET_CONTEXT_ATTRIBUTES_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SET_CONTEXT_ATTRIBUTES_FN_W uintptr
 
-// SET_CREDENTIALS_ATTRIBUTES_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) foundation.HRESULT.
+// SET_CREDENTIALS_ATTRIBUTES_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SET_CREDENTIALS_ATTRIBUTES_FN_A uintptr
 
-// SET_CREDENTIALS_ATTRIBUTES_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) foundation.HRESULT.
+// SET_CREDENTIALS_ATTRIBUTES_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SET_CREDENTIALS_ATTRIBUTES_FN_W uintptr
 
-// SSL_CRACK_CERTIFICATE_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, foundation.BOOL, **X509Certificate) foundation.BOOL.
+// SSL_CRACK_CERTIFICATE_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, foundation.BOOL, **X509Certificate) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type SSL_CRACK_CERTIFICATE_FN uintptr
 
-// SSL_EMPTY_CACHE_FN_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32) foundation.BOOL.
+// SSL_EMPTY_CACHE_FN_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type SSL_EMPTY_CACHE_FN_A uintptr
 
-// SSL_EMPTY_CACHE_FN_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32) foundation.BOOL.
+// SSL_EMPTY_CACHE_FN_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type SSL_EMPTY_CACHE_FN_W uintptr
 
-// SSL_FREE_CERTIFICATE_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*X509Certificate).
+// SSL_FREE_CERTIFICATE_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*X509Certificate) uintptr.
 type SSL_FREE_CERTIFICATE_FN uintptr
 
-// SpAcceptCredentialsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SECURITY_LOGON_TYPE, *LSA_UNICODE_STRING, *SECPKG_PRIMARY_CRED, *SECPKG_SUPPLEMENTAL_CRED) foundation.NTSTATUS.
+// SpAcceptCredentialsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SECURITY_LOGON_TYPE, *LSA_UNICODE_STRING, *SECPKG_PRIMARY_CRED, *SECPKG_SUPPLEMENTAL_CRED) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpAcceptCredentialsFn uintptr
 
-// SpAcceptLsaModeContextFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *SecBufferDesc, uint32, uint32, *uintptr, *SecBufferDesc, *uint32, *int64, *foundation.BOOLEAN, *SecBuffer) foundation.NTSTATUS.
+// SpAcceptLsaModeContextFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *SecBufferDesc, uint32, uint32, *uintptr, *SecBufferDesc, *uint32, *int64, *foundation.BOOLEAN, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpAcceptLsaModeContextFn uintptr
 
-// SpAcquireCredentialsHandleFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING, uint32, *foundation.LUID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uintptr, *int64) foundation.NTSTATUS.
+// SpAcquireCredentialsHandleFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING, uint32, *foundation.LUID, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *uintptr, *int64) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpAcquireCredentialsHandleFn uintptr
 
-// SpAddCredentialsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int64) foundation.NTSTATUS.
+// SpAddCredentialsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, *int64) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpAddCredentialsFn uintptr
 
-// SpApplyControlTokenFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBufferDesc) foundation.NTSTATUS.
+// SpApplyControlTokenFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBufferDesc) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpApplyControlTokenFn uintptr
 
-// SpChangeAccountPasswordFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, foundation.BOOLEAN, *SecBufferDesc) foundation.NTSTATUS.
+// SpChangeAccountPasswordFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, *LSA_UNICODE_STRING, foundation.BOOLEAN, *SecBufferDesc) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpChangeAccountPasswordFn uintptr
 
-// SpCompleteAuthTokenFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBufferDesc) foundation.NTSTATUS.
+// SpCompleteAuthTokenFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBufferDesc) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpCompleteAuthTokenFn uintptr
 
-// SpDeleteContextFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) foundation.NTSTATUS.
+// SpDeleteContextFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpDeleteContextFn uintptr
 
-// SpDeleteCredentialsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBuffer) foundation.NTSTATUS.
+// SpDeleteCredentialsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpDeleteCredentialsFn uintptr
 
-// SpExchangeMetaDataFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *LSA_UNICODE_STRING, uint32, uint32, *byte, *uintptr) foundation.NTSTATUS.
+// SpExchangeMetaDataFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *LSA_UNICODE_STRING, uint32, uint32, *byte, *uintptr) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpExchangeMetaDataFn uintptr
 
-// SpExportSecurityContextFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, *SecBuffer, *foundation.HANDLE) foundation.NTSTATUS.
+// SpExportSecurityContextFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, *SecBuffer, *foundation.HANDLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpExportSecurityContextFn uintptr
 
-// SpExtractTargetInfoFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32) foundation.NTSTATUS.
+// SpExtractTargetInfoFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpExtractTargetInfoFn uintptr
 
-// SpFormatCredentialsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SecBuffer, *SecBuffer) foundation.NTSTATUS.
+// SpFormatCredentialsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SecBuffer, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpFormatCredentialsFn uintptr
 
-// SpFreeCredentialsHandleFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) foundation.NTSTATUS.
+// SpFreeCredentialsHandleFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpFreeCredentialsHandleFn uintptr
 
-// SpGetContextTokenFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *foundation.HANDLE) foundation.NTSTATUS.
+// SpGetContextTokenFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *foundation.HANDLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpGetContextTokenFn uintptr
 
-// SpGetCredUIContextFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *win32.GUID, *uint32, **byte) foundation.NTSTATUS.
+// SpGetCredUIContextFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *win32.GUID, *uint32, **byte) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpGetCredUIContextFn uintptr
 
-// SpGetCredentialsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBuffer) foundation.NTSTATUS.
+// SpGetCredentialsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpGetCredentialsFn uintptr
 
-// SpGetExtendedInformationFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SECPKG_EXTENDED_INFORMATION_CLASS, **SECPKG_EXTENDED_INFORMATION) foundation.NTSTATUS.
+// SpGetExtendedInformationFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SECPKG_EXTENDED_INFORMATION_CLASS, **SECPKG_EXTENDED_INFORMATION) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpGetExtendedInformationFn uintptr
 
-// SpGetInfoFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SecPkgInfoA) foundation.NTSTATUS.
+// SpGetInfoFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SecPkgInfoA) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpGetInfoFn uintptr
 
-// SpGetRemoteCredGuardLogonBufferFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *LSA_UNICODE_STRING, *foundation.HANDLE, *PLSA_REDIRECTED_LOGON_CALLBACK, *PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK, *uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// SpGetRemoteCredGuardLogonBufferFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *LSA_UNICODE_STRING, *foundation.HANDLE, *PLSA_REDIRECTED_LOGON_CALLBACK, *PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK, *uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpGetRemoteCredGuardLogonBufferFn uintptr
 
-// SpGetRemoteCredGuardSupplementalCredsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *LSA_UNICODE_STRING, *foundation.HANDLE, *PLSA_REDIRECTED_LOGON_CALLBACK, *PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK, *uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// SpGetRemoteCredGuardSupplementalCredsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *LSA_UNICODE_STRING, *foundation.HANDLE, *PLSA_REDIRECTED_LOGON_CALLBACK, *PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK, *uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpGetRemoteCredGuardSupplementalCredsFn uintptr
 
-// SpGetTbalSupplementalCredsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.LUID, *uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// SpGetTbalSupplementalCredsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.LUID, *uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpGetTbalSupplementalCredsFn uintptr
 
-// SpGetUserInfoFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, uint32, **SECURITY_USER_DATA) foundation.NTSTATUS.
+// SpGetUserInfoFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, uint32, **SECURITY_USER_DATA) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpGetUserInfoFn uintptr
 
-// SpImportSecurityContextFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SecBuffer, foundation.HANDLE, *uintptr) foundation.NTSTATUS.
+// SpImportSecurityContextFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SecBuffer, foundation.HANDLE, *uintptr) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpImportSecurityContextFn uintptr
 
-// SpInitLsaModeContextFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *LSA_UNICODE_STRING, uint32, uint32, *SecBufferDesc, *uintptr, *SecBufferDesc, *uint32, *int64, *foundation.BOOLEAN, *SecBuffer) foundation.NTSTATUS.
+// SpInitLsaModeContextFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *LSA_UNICODE_STRING, uint32, uint32, *SecBufferDesc, *uintptr, *SecBufferDesc, *uint32, *int64, *foundation.BOOLEAN, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpInitLsaModeContextFn uintptr
 
-// SpInitUserModeContextFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBuffer) foundation.NTSTATUS.
+// SpInitUserModeContextFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpInitUserModeContextFn uintptr
 
-// SpInitializeFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SECPKG_PARAMETERS, *LSA_SECPKG_FUNCTION_TABLE) foundation.NTSTATUS.
+// SpInitializeFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SECPKG_PARAMETERS, *LSA_SECPKG_FUNCTION_TABLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpInitializeFn uintptr
 
-// SpInstanceInitFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *SECPKG_DLL_FUNCTIONS, *unsafe.Pointer) foundation.NTSTATUS.
+// SpInstanceInitFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *SECPKG_DLL_FUNCTIONS, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpInstanceInitFn uintptr
 
-// SpLsaModeInitializeFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *uint32, **SECPKG_FUNCTION_TABLE, *uint32) foundation.NTSTATUS.
+// SpLsaModeInitializeFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *uint32, **SECPKG_FUNCTION_TABLE, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpLsaModeInitializeFn uintptr
 
-// SpMakeSignatureFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, *SecBufferDesc, uint32) foundation.NTSTATUS.
+// SpMakeSignatureFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, *SecBufferDesc, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpMakeSignatureFn uintptr
 
-// SpMarshalAttributeDataFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, *byte, *uint32, **byte) foundation.NTSTATUS.
+// SpMarshalAttributeDataFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, *byte, *uint32, **byte) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpMarshalAttributeDataFn uintptr
 
-// SpMarshallSupplementalCredsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *byte, *uint32, *unsafe.Pointer) foundation.NTSTATUS.
+// SpMarshallSupplementalCredsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *byte, *uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpMarshallSupplementalCredsFn uintptr
 
-// SpQueryContextAttributesFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer) foundation.NTSTATUS.
+// SpQueryContextAttributesFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpQueryContextAttributesFn uintptr
 
-// SpQueryCredentialsAttributesFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer) foundation.NTSTATUS.
+// SpQueryCredentialsAttributesFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpQueryCredentialsAttributesFn uintptr
 
-// SpQueryMetaDataFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *LSA_UNICODE_STRING, uint32, *uint32, **byte, *uintptr) foundation.NTSTATUS.
+// SpQueryMetaDataFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *LSA_UNICODE_STRING, uint32, *uint32, **byte, *uintptr) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpQueryMetaDataFn uintptr
 
-// SpSaveCredentialsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBuffer) foundation.NTSTATUS.
+// SpSaveCredentialsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBuffer) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpSaveCredentialsFn uintptr
 
-// SpSealMessageFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, *SecBufferDesc, uint32) foundation.NTSTATUS.
+// SpSealMessageFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, *SecBufferDesc, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpSealMessageFn uintptr
 
-// SpSetContextAttributesFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer, uint32) foundation.NTSTATUS.
+// SpSetContextAttributesFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpSetContextAttributesFn uintptr
 
-// SpSetCredentialsAttributesFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer, uint32) foundation.NTSTATUS.
+// SpSetCredentialsAttributesFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpSetCredentialsAttributesFn uintptr
 
-// SpSetExtendedInformationFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SECPKG_EXTENDED_INFORMATION_CLASS, *SECPKG_EXTENDED_INFORMATION) foundation.NTSTATUS.
+// SpSetExtendedInformationFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SECPKG_EXTENDED_INFORMATION_CLASS, *SECPKG_EXTENDED_INFORMATION) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpSetExtendedInformationFn uintptr
 
-// SpShutdownFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.NTSTATUS.
+// SpShutdownFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpShutdownFn uintptr
 
-// SpUnsealMessageFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBufferDesc, uint32, *uint32) foundation.NTSTATUS.
+// SpUnsealMessageFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBufferDesc, uint32, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpUnsealMessageFn uintptr
 
-// SpUpdateCredentialsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *win32.GUID, uint32, *byte) foundation.NTSTATUS.
+// SpUpdateCredentialsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *win32.GUID, uint32, *byte) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpUpdateCredentialsFn uintptr
 
-// SpUserModeInitializeFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *uint32, **SECPKG_USER_FUNCTION_TABLE, *uint32) foundation.NTSTATUS.
+// SpUserModeInitializeFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *uint32, **SECPKG_USER_FUNCTION_TABLE, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpUserModeInitializeFn uintptr
 
-// SpValidateTargetInfoFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *SECPKG_TARGETINFO) foundation.NTSTATUS.
+// SpValidateTargetInfoFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *SECPKG_TARGETINFO) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpValidateTargetInfoFn uintptr
 
-// SpVerifySignatureFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *SecBufferDesc, uint32, *uint32) foundation.NTSTATUS.
+// SpVerifySignatureFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *SecBufferDesc, uint32, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type SpVerifySignatureFn uintptr
 
-// SslDeserializeCertificateStoreFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(securitycryptography.CRYPT_INTEGER_BLOB, **securitycryptography.CERT_CONTEXT) foundation.HRESULT.
+// SslDeserializeCertificateStoreFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(securitycryptography.CRYPT_INTEGER_BLOB, **securitycryptography.CERT_CONTEXT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslDeserializeCertificateStoreFn uintptr
 
-// SslGetExtensionsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, *SCH_EXTENSION_DATA, byte, *uint32, SchGetExtensionsOptions) foundation.HRESULT.
+// SslGetExtensionsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, *SCH_EXTENSION_DATA, byte, *uint32, SchGetExtensionsOptions) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslGetExtensionsFn uintptr
 
-// SslGetServerIdentityFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, **byte, *uint32, uint32) foundation.HRESULT.
+// SslGetServerIdentityFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, **byte, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslGetServerIdentityFn uintptr
 
-// VERIFY_SIGNATURE_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycredentials.SecHandle, *SecBufferDesc, uint32, *uint32) foundation.HRESULT.
+// VERIFY_SIGNATURE_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycredentials.SecHandle, *SecBufferDesc, uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type VERIFY_SIGNATURE_FN uintptr

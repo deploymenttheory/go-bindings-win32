@@ -25,6 +25,24 @@ var (
 	procXAudio2CreateWithVersionInfo = modXAudio2_8.NewProc("XAudio2CreateWithVersionInfo")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateAudioReverb            *win32.Proc
+	CreateAudioVolumeMeter       *win32.Proc
+	CreateFX                     *win32.Proc
+	CreateHrtfApo                *win32.Proc
+	XAudio2CreateWithVersionInfo *win32.Proc
+}{
+	CreateAudioReverb:            procCreateAudioReverb,
+	CreateAudioVolumeMeter:       procCreateAudioVolumeMeter,
+	CreateFX:                     procCreateFX,
+	CreateHrtfApo:                procCreateHrtfApo,
+	XAudio2CreateWithVersionInfo: procXAudio2CreateWithVersionInfo,
+}
+
 // CreateAudioReverb calls XAudio2_8!CreateAudioReverb.
 func CreateAudioReverb(ppApo **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateAudioReverb.Addr(), uintptr(unsafe.Pointer(ppApo)))

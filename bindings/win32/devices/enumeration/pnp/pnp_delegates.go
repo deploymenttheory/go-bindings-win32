@@ -4,6 +4,6 @@
 
 package pnp
 
-// SW_DEVICE_CREATE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HSWDEVICE, foundation.HRESULT, unsafe.Pointer, foundation.PWSTR).
+// SW_DEVICE_CREATE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HSWDEVICE, foundation.HRESULT, unsafe.Pointer, foundation.PWSTR) uintptr.
 type SW_DEVICE_CREATE_CALLBACK uintptr

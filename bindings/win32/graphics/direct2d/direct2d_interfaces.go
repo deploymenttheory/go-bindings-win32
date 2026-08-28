@@ -5,6 +5,7 @@
 package direct2d
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -48,6 +49,27 @@ type ID2D1Bitmap struct {
 
 // IID_ID2D1Bitmap is the interface identifier for ID2D1Bitmap.
 var IID_ID2D1Bitmap = win32.GUID{Data1: 0xa2296057, Data2: 0xea42, Data3: 0x4099, Data4: [8]byte{0x98, 0x3b, 0x53, 0x9f, 0xb6, 0x50, 0x54, 0x26}}
+
+// GetSize dispatches through ID2D1Bitmap's vtable slot 4.
+func (self *ID2D1Bitmap) GetSize() graphicsdirect2dcommon.D2D_SIZE_F {
+	_ret := new(graphicsdirect2dcommon.D2D_SIZE_F)
+	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+// GetPixelSize dispatches through ID2D1Bitmap's vtable slot 5.
+func (self *ID2D1Bitmap) GetPixelSize() graphicsdirect2dcommon.D2D_SIZE_U {
+	_ret := new(graphicsdirect2dcommon.D2D_SIZE_U)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+// GetPixelFormat dispatches through ID2D1Bitmap's vtable slot 6.
+func (self *ID2D1Bitmap) GetPixelFormat() graphicsdirect2dcommon.D2D1_PIXEL_FORMAT {
+	_ret := new(graphicsdirect2dcommon.D2D1_PIXEL_FORMAT)
+	syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
 
 // GetDpi dispatches through ID2D1Bitmap's vtable slot 7.
 func (self *ID2D1Bitmap) GetDpi(dpiX *float32, dpiY *float32) {
@@ -275,9 +297,24 @@ type ID2D1Brush struct {
 // IID_ID2D1Brush is the interface identifier for ID2D1Brush.
 var IID_ID2D1Brush = win32.GUID{Data1: 0x2cd906a8, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
+var specID2D1Brush_SetOpacity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOpacity dispatches through ID2D1Brush's vtable slot 4.
+func (self *ID2D1Brush) SetOpacity(opacity float32) {
+	win32.Call(self.LpVtbl[4], specID2D1Brush_SetOpacity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(opacity))).Tuple()
+}
+
 // SetTransform dispatches through ID2D1Brush's vtable slot 5.
 func (self *ID2D1Brush) SetTransform(transform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F) {
 	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform)))
+}
+
+var specID2D1Brush_GetOpacity = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetOpacity dispatches through ID2D1Brush's vtable slot 6.
+func (self *ID2D1Brush) GetOpacity() float32 {
+	r := win32.Call(self.LpVtbl[6], specID2D1Brush_GetOpacity, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
 }
 
 // GetTransform dispatches through ID2D1Brush's vtable slot 7.
@@ -433,9 +470,43 @@ func (self *ID2D1CommandSink) Clear(color *graphicsdirect2dcommon.D2D1_COLOR_F) 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specID2D1CommandSink_DrawGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
 // DrawGlyphRun dispatches through ID2D1CommandSink's vtable slot 13.
 func (self *ID2D1CommandSink) DrawGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, glyphRunDescription *graphicsdirectwrite.DWRITE_GLYPH_RUN_DESCRIPTION, foregroundBrush *ID2D1Brush, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(measuringMode))
+	r1, _, _ := win32.Call(self.LpVtbl[13], specID2D1CommandSink_DrawGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(measuringMode)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1CommandSink_DrawLine = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Struct(8, 4, 2, false), win32.Word, win32.Float32, win32.Word}}
+
+// DrawLine dispatches through ID2D1CommandSink's vtable slot 14.
+func (self *ID2D1CommandSink) DrawLine(point0 graphicsdirect2dcommon.D2D_POINT_2F, point1 graphicsdirect2dcommon.D2D_POINT_2F, brush *ID2D1Brush, strokeWidth float32, strokeStyle *ID2D1StrokeStyle) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specID2D1CommandSink_DrawLine, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point0)), uintptr(unsafe.Pointer(&point1)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1CommandSink_DrawGeometry = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// DrawGeometry dispatches through ID2D1CommandSink's vtable slot 15.
+func (self *ID2D1CommandSink) DrawGeometry(geometry *ID2D1Geometry, brush *ID2D1Brush, strokeWidth float32, strokeStyle *ID2D1StrokeStyle) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specID2D1CommandSink_DrawGeometry, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(geometry)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1CommandSink_DrawRectangle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// DrawRectangle dispatches through ID2D1CommandSink's vtable slot 16.
+func (self *ID2D1CommandSink) DrawRectangle(rect *graphicsdirect2dcommon.D2D_RECT_F, brush *ID2D1Brush, strokeWidth float32, strokeStyle *ID2D1StrokeStyle) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specID2D1CommandSink_DrawRectangle, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rect)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1CommandSink_DrawBitmap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// DrawBitmap dispatches through ID2D1CommandSink's vtable slot 17.
+func (self *ID2D1CommandSink) DrawBitmap(bitmap *ID2D1Bitmap, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, opacity float32, interpolationMode D2D1_INTERPOLATION_MODE, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F, perspectiveTransform *graphicsdirect2dcommon.D2D_MATRIX_4X4_F) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specID2D1CommandSink_DrawBitmap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(destinationRectangle)), uintptr(math.Float32bits(opacity)), uintptr(interpolationMode), uintptr(unsafe.Pointer(sourceRectangle)), uintptr(unsafe.Pointer(perspectiveTransform))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -956,9 +1027,11 @@ func (self *ID2D1DeviceContext) GetImageWorldBounds(image *ID2D1Image, worldBoun
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specID2D1DeviceContext_GetGlyphRunWorldBounds = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word}}
+
 // GetGlyphRunWorldBounds dispatches through ID2D1DeviceContext's vtable slot 72.
 func (self *ID2D1DeviceContext) GetGlyphRunWorldBounds(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE, bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(measuringMode), uintptr(unsafe.Pointer(bounds)))
+	r1, _, _ := win32.Call(self.LpVtbl[72], specID2D1DeviceContext_GetGlyphRunWorldBounds, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(measuringMode), uintptr(unsafe.Pointer(bounds))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1009,9 +1082,11 @@ func (self *ID2D1DeviceContext) GetUnitMode() D2D1_UNIT_MODE {
 	return D2D1_UNIT_MODE(r1)
 }
 
+var specID2D1DeviceContext_DrawGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
 // DrawGlyphRun dispatches through ID2D1DeviceContext's vtable slot 82.
 func (self *ID2D1DeviceContext) DrawGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, glyphRunDescription *graphicsdirectwrite.DWRITE_GLYPH_RUN_DESCRIPTION, foregroundBrush *ID2D1Brush, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
-	syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(measuringMode))
+	win32.Call(self.LpVtbl[82], specID2D1DeviceContext_DrawGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(measuringMode)).Tuple()
 }
 
 // DrawImage dispatches through ID2D1DeviceContext's vtable slot 83.
@@ -1022,6 +1097,13 @@ func (self *ID2D1DeviceContext) DrawImage(image *ID2D1Image, targetOffset *graph
 // DrawGdiMetafile dispatches through ID2D1DeviceContext's vtable slot 84.
 func (self *ID2D1DeviceContext) DrawGdiMetafile(gdiMetafile *ID2D1GdiMetafile, targetOffset *graphicsdirect2dcommon.D2D_POINT_2F) {
 	syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gdiMetafile)), uintptr(unsafe.Pointer(targetOffset)))
+}
+
+var specID2D1DeviceContext_DrawBitmap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// DrawBitmap dispatches through ID2D1DeviceContext's vtable slot 85.
+func (self *ID2D1DeviceContext) DrawBitmap(bitmap *ID2D1Bitmap, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, opacity float32, interpolationMode D2D1_INTERPOLATION_MODE, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F, perspectiveTransform *graphicsdirect2dcommon.D2D_MATRIX_4X4_F) {
+	win32.Call(self.LpVtbl[85], specID2D1DeviceContext_DrawBitmap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(destinationRectangle)), uintptr(math.Float32bits(opacity)), uintptr(interpolationMode), uintptr(unsafe.Pointer(sourceRectangle)), uintptr(unsafe.Pointer(perspectiveTransform))).Tuple()
 }
 
 // PushLayer dispatches through ID2D1DeviceContext's vtable slot 86.
@@ -1070,6 +1152,22 @@ type ID2D1DeviceContext1 struct {
 
 // IID_ID2D1DeviceContext1 is the interface identifier for ID2D1DeviceContext1.
 var IID_ID2D1DeviceContext1 = win32.GUID{Data1: 0xd37f57e4, Data2: 0x6908, Data3: 0x459f, Data4: [8]byte{0xa1, 0x99, 0xe7, 0x2f, 0x24, 0xf7, 0x99, 0x87}}
+
+var specID2D1DeviceContext1_CreateFilledGeometryRealization = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// CreateFilledGeometryRealization dispatches through ID2D1DeviceContext1's vtable slot 92.
+func (self *ID2D1DeviceContext1) CreateFilledGeometryRealization(geometry *ID2D1Geometry, flatteningTolerance float32, geometryRealization **ID2D1GeometryRealization) error {
+	r1, _, _ := win32.Call(self.LpVtbl[92], specID2D1DeviceContext1_CreateFilledGeometryRealization, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(geometry)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(geometryRealization))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1DeviceContext1_CreateStrokedGeometryRealization = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// CreateStrokedGeometryRealization dispatches through ID2D1DeviceContext1's vtable slot 93.
+func (self *ID2D1DeviceContext1) CreateStrokedGeometryRealization(geometry *ID2D1Geometry, flatteningTolerance float32, strokeWidth float32, strokeStyle *ID2D1StrokeStyle, geometryRealization **ID2D1GeometryRealization) error {
+	r1, _, _ := win32.Call(self.LpVtbl[93], specID2D1DeviceContext1_CreateStrokedGeometryRealization, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(geometry)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle)), uintptr(unsafe.Pointer(geometryRealization))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // DrawGeometryRealization dispatches through ID2D1DeviceContext1's vtable slot 94.
 func (self *ID2D1DeviceContext1) DrawGeometryRealization(geometryRealization *ID2D1GeometryRealization, brush *ID2D1Brush) {
@@ -1201,19 +1299,43 @@ func (self *ID2D1DeviceContext4) DrawText(string_ string, stringLength uint32, t
 	syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(options), uintptr(measuringMode))
 }
 
+var specID2D1DeviceContext4_DrawTextLayout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
 // DrawTextLayout dispatches through ID2D1DeviceContext4's vtable slot 110.
 func (self *ID2D1DeviceContext4) DrawTextLayout(origin graphicsdirect2dcommon.D2D_POINT_2F, textLayout *graphicsdirectwrite.IDWriteTextLayout, defaultFillBrush *ID2D1Brush, svgGlyphStyle *ID2D1SvgGlyphStyle, colorPaletteIndex uint32, options D2D1_DRAW_TEXT_OPTIONS) {
-	syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(origin)), uintptr(unsafe.Pointer(textLayout)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(options))
+	win32.Call(self.LpVtbl[110], specID2D1DeviceContext4_DrawTextLayout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&origin)), uintptr(unsafe.Pointer(textLayout)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(options)).Tuple()
 }
+
+var specID2D1DeviceContext4_DrawColorBitmapGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word}}
 
 // DrawColorBitmapGlyphRun dispatches through ID2D1DeviceContext4's vtable slot 111.
 func (self *ID2D1DeviceContext4) DrawColorBitmapGlyphRun(glyphImageFormat graphicsdirectwrite.DWRITE_GLYPH_IMAGE_FORMATS, baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE, bitmapSnapOption D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) {
-	syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(glyphImageFormat), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(measuringMode), uintptr(bitmapSnapOption))
+	win32.Call(self.LpVtbl[111], specID2D1DeviceContext4_DrawColorBitmapGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(glyphImageFormat), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(measuringMode), uintptr(bitmapSnapOption)).Tuple()
 }
+
+var specID2D1DeviceContext4_DrawSvgGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
 
 // DrawSvgGlyphRun dispatches through ID2D1DeviceContext4's vtable slot 112.
 func (self *ID2D1DeviceContext4) DrawSvgGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, defaultFillBrush *ID2D1Brush, svgGlyphStyle *ID2D1SvgGlyphStyle, colorPaletteIndex uint32, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
-	syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(measuringMode))
+	win32.Call(self.LpVtbl[112], specID2D1DeviceContext4_DrawSvgGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(measuringMode)).Tuple()
+}
+
+var specID2D1DeviceContext4_GetColorBitmapGlyphImage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// GetColorBitmapGlyphImage dispatches through ID2D1DeviceContext4's vtable slot 113.
+func (self *ID2D1DeviceContext4) GetColorBitmapGlyphImage(glyphImageFormat graphicsdirectwrite.DWRITE_GLYPH_IMAGE_FORMATS, glyphOrigin graphicsdirect2dcommon.D2D_POINT_2F, fontFace *graphicsdirectwrite.IDWriteFontFace, fontEmSize float32, glyphIndex uint16, isSideways bool, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, dpiX float32, dpiY float32, glyphTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, glyphImage **ID2D1Image) error {
+	_isSideways := win32.Bool32(isSideways)
+	r1, _, _ := win32.Call(self.LpVtbl[113], specID2D1DeviceContext4_GetColorBitmapGlyphImage, nil, uintptr(unsafe.Pointer(self)), uintptr(glyphImageFormat), uintptr(unsafe.Pointer(&glyphOrigin)), uintptr(unsafe.Pointer(fontFace)), uintptr(math.Float32bits(fontEmSize)), uintptr(glyphIndex), uintptr(_isSideways), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(dpiX)), uintptr(math.Float32bits(dpiY)), uintptr(unsafe.Pointer(glyphTransform)), uintptr(unsafe.Pointer(glyphImage))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1DeviceContext4_GetSvgGlyphImage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetSvgGlyphImage dispatches through ID2D1DeviceContext4's vtable slot 114.
+func (self *ID2D1DeviceContext4) GetSvgGlyphImage(glyphOrigin graphicsdirect2dcommon.D2D_POINT_2F, fontFace *graphicsdirectwrite.IDWriteFontFace, fontEmSize float32, glyphIndex uint16, isSideways bool, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, defaultFillBrush *ID2D1Brush, svgGlyphStyle *ID2D1SvgGlyphStyle, colorPaletteIndex uint32, glyphTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, glyphImage **ID2D1CommandList) error {
+	_isSideways := win32.Bool32(isSideways)
+	r1, _, _ := win32.Call(self.LpVtbl[114], specID2D1DeviceContext4_GetSvgGlyphImage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&glyphOrigin)), uintptr(unsafe.Pointer(fontFace)), uintptr(math.Float32bits(fontEmSize)), uintptr(glyphIndex), uintptr(_isSideways), uintptr(unsafe.Pointer(worldTransform)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(glyphTransform)), uintptr(unsafe.Pointer(glyphImage))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ID2D1DeviceContext5: https://learn.microsoft.com/windows/win32/api/d2d1_3/nn-d2d1_3-id2d1devicecontext5
@@ -1225,9 +1347,11 @@ type ID2D1DeviceContext5 struct {
 // IID_ID2D1DeviceContext5 is the interface identifier for ID2D1DeviceContext5.
 var IID_ID2D1DeviceContext5 = win32.GUID{Data1: 0x7836d248, Data2: 0x68cc, Data3: 0x4df6, Data4: [8]byte{0xb9, 0xe8, 0xde, 0x99, 0x1b, 0xf6, 0x2e, 0xb7}}
 
+var specID2D1DeviceContext5_CreateSvgDocument = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(8, 4, 2, false), win32.Word}}
+
 // CreateSvgDocument dispatches through ID2D1DeviceContext5's vtable slot 115.
 func (self *ID2D1DeviceContext5) CreateSvgDocument(inputXmlStream *systemcom.IStream, viewportSize graphicsdirect2dcommon.D2D_SIZE_F, svgDocument **ID2D1SvgDocument) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputXmlStream)), uintptr(win32.StructArg(viewportSize)), uintptr(unsafe.Pointer(svgDocument)))
+	r1, _, _ := win32.Call(self.LpVtbl[115], specID2D1DeviceContext5_CreateSvgDocument, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputXmlStream)), uintptr(unsafe.Pointer(&viewportSize)), uintptr(unsafe.Pointer(svgDocument))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1276,14 +1400,18 @@ func (self *ID2D1DeviceContext7) GetPaintFeatureLevel() graphicsdirectwrite.DWRI
 	return graphicsdirectwrite.DWRITE_PAINT_FEATURE_LEVEL(r1)
 }
 
+var specID2D1DeviceContext7_DrawPaintGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
 // DrawPaintGlyphRun dispatches through ID2D1DeviceContext7's vtable slot 121.
 func (self *ID2D1DeviceContext7) DrawPaintGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, defaultFillBrush *ID2D1Brush, colorPaletteIndex uint32, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
-	syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(colorPaletteIndex), uintptr(measuringMode))
+	win32.Call(self.LpVtbl[121], specID2D1DeviceContext7_DrawPaintGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(colorPaletteIndex), uintptr(measuringMode)).Tuple()
 }
+
+var specID2D1DeviceContext7_DrawGlyphRunWithColorSupport = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
 
 // DrawGlyphRunWithColorSupport dispatches through ID2D1DeviceContext7's vtable slot 122.
 func (self *ID2D1DeviceContext7) DrawGlyphRunWithColorSupport(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, glyphRunDescription *graphicsdirectwrite.DWRITE_GLYPH_RUN_DESCRIPTION, foregroundBrush *ID2D1Brush, svgGlyphStyle *ID2D1SvgGlyphStyle, colorPaletteIndex uint32, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE, bitmapSnapOption D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) {
-	syscall.SyscallN(self.LpVtbl[122], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(measuringMode), uintptr(bitmapSnapOption))
+	win32.Call(self.LpVtbl[122], specID2D1DeviceContext7_DrawGlyphRunWithColorSupport, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(unsafe.Pointer(svgGlyphStyle)), uintptr(colorPaletteIndex), uintptr(measuringMode), uintptr(bitmapSnapOption)).Tuple()
 }
 
 // ID2D1DrawInfo: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1drawinfo
@@ -2074,6 +2202,102 @@ func (self *ID2D1Geometry) GetBounds(worldTransform *graphicsdirect2dcommon.D2D_
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specID2D1Geometry_GetWidenedBounds = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// GetWidenedBounds dispatches through ID2D1Geometry's vtable slot 5.
+func (self *ID2D1Geometry) GetWidenedBounds(strokeWidth float32, strokeStyle *ID2D1StrokeStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specID2D1Geometry_GetWidenedBounds, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(bounds))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_StrokeContainsPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Float32, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// StrokeContainsPoint dispatches through ID2D1Geometry's vtable slot 6.
+func (self *ID2D1Geometry) StrokeContainsPoint(point graphicsdirect2dcommon.D2D_POINT_2F, strokeWidth float32, strokeStyle *ID2D1StrokeStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, contains *foundation.BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specID2D1Geometry_StrokeContainsPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(contains))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_FillContainsPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Float32, win32.Word}}
+
+// FillContainsPoint dispatches through ID2D1Geometry's vtable slot 7.
+func (self *ID2D1Geometry) FillContainsPoint(point graphicsdirect2dcommon.D2D_POINT_2F, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, contains *foundation.BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specID2D1Geometry_FillContainsPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(contains))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_CompareWithGeometry = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// CompareWithGeometry dispatches through ID2D1Geometry's vtable slot 8.
+func (self *ID2D1Geometry) CompareWithGeometry(inputGeometry *ID2D1Geometry, inputGeometryTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, relation *D2D1_GEOMETRY_RELATION) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specID2D1Geometry_CompareWithGeometry, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputGeometry)), uintptr(unsafe.Pointer(inputGeometryTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(relation))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_Simplify = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// Simplify dispatches through ID2D1Geometry's vtable slot 9.
+func (self *ID2D1Geometry) Simplify(simplificationOption D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, geometrySink *graphicsdirect2dcommon.ID2D1SimplifiedGeometrySink) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specID2D1Geometry_Simplify, nil, uintptr(unsafe.Pointer(self)), uintptr(simplificationOption), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(geometrySink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_Tessellate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// Tessellate dispatches through ID2D1Geometry's vtable slot 10.
+func (self *ID2D1Geometry) Tessellate(worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, tessellationSink *ID2D1TessellationSink) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specID2D1Geometry_Tessellate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(tessellationSink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_CombineWithGeometry = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// CombineWithGeometry dispatches through ID2D1Geometry's vtable slot 11.
+func (self *ID2D1Geometry) CombineWithGeometry(inputGeometry *ID2D1Geometry, combineMode D2D1_COMBINE_MODE, inputGeometryTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, geometrySink *graphicsdirect2dcommon.ID2D1SimplifiedGeometrySink) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specID2D1Geometry_CombineWithGeometry, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputGeometry)), uintptr(combineMode), uintptr(unsafe.Pointer(inputGeometryTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(geometrySink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_Outline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// Outline dispatches through ID2D1Geometry's vtable slot 12.
+func (self *ID2D1Geometry) Outline(worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, geometrySink *graphicsdirect2dcommon.ID2D1SimplifiedGeometrySink) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specID2D1Geometry_Outline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(geometrySink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_ComputeArea = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// ComputeArea dispatches through ID2D1Geometry's vtable slot 13.
+func (self *ID2D1Geometry) ComputeArea(worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, area *float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specID2D1Geometry_ComputeArea, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(area))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_ComputeLength = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// ComputeLength dispatches through ID2D1Geometry's vtable slot 14.
+func (self *ID2D1Geometry) ComputeLength(worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, length *float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specID2D1Geometry_ComputeLength, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(length))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_ComputePointAtLength = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// ComputePointAtLength dispatches through ID2D1Geometry's vtable slot 15.
+func (self *ID2D1Geometry) ComputePointAtLength(length float32, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, point *graphicsdirect2dcommon.D2D_POINT_2F, unitTangentVector *graphicsdirect2dcommon.D2D_POINT_2F) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specID2D1Geometry_ComputePointAtLength, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(length)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(point)), uintptr(unsafe.Pointer(unitTangentVector))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Geometry_Widen = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// Widen dispatches through ID2D1Geometry's vtable slot 16.
+func (self *ID2D1Geometry) Widen(strokeWidth float32, strokeStyle *ID2D1StrokeStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, geometrySink *graphicsdirect2dcommon.ID2D1SimplifiedGeometrySink) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specID2D1Geometry_Widen, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(geometrySink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ID2D1GeometryGroup: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1geometrygroup
 // IID: 2cd906a6-12e2-11dc-9fed-001143a055f9
 type ID2D1GeometryGroup struct {
@@ -2122,9 +2346,11 @@ type ID2D1GeometrySink struct {
 // IID_ID2D1GeometrySink is the interface identifier for ID2D1GeometrySink.
 var IID_ID2D1GeometrySink = win32.GUID{Data1: 0x2cd9069f, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
+var specID2D1GeometrySink_AddLine = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false)}}
+
 // AddLine dispatches through ID2D1GeometrySink's vtable slot 10.
 func (self *ID2D1GeometrySink) AddLine(point graphicsdirect2dcommon.D2D_POINT_2F) {
-	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(point)))
+	win32.Call(self.LpVtbl[10], specID2D1GeometrySink_AddLine, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point))).Tuple()
 }
 
 // AddBezier dispatches through ID2D1GeometrySink's vtable slot 11.
@@ -2413,6 +2639,13 @@ func (self *ID2D1Ink) SetStartPoint(startPoint *D2D1_INK_POINT) {
 	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(startPoint)))
 }
 
+// GetStartPoint dispatches through ID2D1Ink's vtable slot 5.
+func (self *ID2D1Ink) GetStartPoint() D2D1_INK_POINT {
+	_ret := new(D2D1_INK_POINT)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // AddSegments dispatches through ID2D1Ink's vtable slot 6.
 func (self *ID2D1Ink) AddSegments(segments []D2D1_INK_BEZIER_SEGMENT) error {
 	var _segments *D2D1_INK_BEZIER_SEGMENT
@@ -2461,6 +2694,14 @@ func (self *ID2D1Ink) GetSegments(startSegment uint32, segments []D2D1_INK_BEZIE
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specID2D1Ink_StreamAsGeometry = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// StreamAsGeometry dispatches through ID2D1Ink's vtable slot 12.
+func (self *ID2D1Ink) StreamAsGeometry(inkStyle *ID2D1InkStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, geometrySink *graphicsdirect2dcommon.ID2D1SimplifiedGeometrySink) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specID2D1Ink_StreamAsGeometry, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inkStyle)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(geometrySink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetBounds dispatches through ID2D1Ink's vtable slot 13.
 func (self *ID2D1Ink) GetBounds(inkStyle *ID2D1InkStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, bounds *graphicsdirect2dcommon.D2D_RECT_F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inkStyle)), uintptr(unsafe.Pointer(worldTransform)), uintptr(unsafe.Pointer(bounds)))
@@ -2506,6 +2747,13 @@ type ID2D1Layer struct {
 // IID_ID2D1Layer is the interface identifier for ID2D1Layer.
 var IID_ID2D1Layer = win32.GUID{Data1: 0x2cd9069b, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
+// GetSize dispatches through ID2D1Layer's vtable slot 4.
+func (self *ID2D1Layer) GetSize() graphicsdirect2dcommon.D2D_SIZE_F {
+	_ret := new(graphicsdirect2dcommon.D2D_SIZE_F)
+	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // ID2D1LinearGradientBrush: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1lineargradientbrush
 // IID: 2cd906ab-12e2-11dc-9fed-001143a055f9
 type ID2D1LinearGradientBrush struct {
@@ -2515,14 +2763,32 @@ type ID2D1LinearGradientBrush struct {
 // IID_ID2D1LinearGradientBrush is the interface identifier for ID2D1LinearGradientBrush.
 var IID_ID2D1LinearGradientBrush = win32.GUID{Data1: 0x2cd906ab, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
+var specID2D1LinearGradientBrush_SetStartPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false)}}
+
 // SetStartPoint dispatches through ID2D1LinearGradientBrush's vtable slot 8.
 func (self *ID2D1LinearGradientBrush) SetStartPoint(startPoint graphicsdirect2dcommon.D2D_POINT_2F) {
-	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(startPoint)))
+	win32.Call(self.LpVtbl[8], specID2D1LinearGradientBrush_SetStartPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&startPoint))).Tuple()
 }
+
+var specID2D1LinearGradientBrush_SetEndPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false)}}
 
 // SetEndPoint dispatches through ID2D1LinearGradientBrush's vtable slot 9.
 func (self *ID2D1LinearGradientBrush) SetEndPoint(endPoint graphicsdirect2dcommon.D2D_POINT_2F) {
-	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(endPoint)))
+	win32.Call(self.LpVtbl[9], specID2D1LinearGradientBrush_SetEndPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&endPoint))).Tuple()
+}
+
+// GetStartPoint dispatches through ID2D1LinearGradientBrush's vtable slot 10.
+func (self *ID2D1LinearGradientBrush) GetStartPoint() graphicsdirect2dcommon.D2D_POINT_2F {
+	_ret := new(graphicsdirect2dcommon.D2D_POINT_2F)
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+// GetEndPoint dispatches through ID2D1LinearGradientBrush's vtable slot 11.
+func (self *ID2D1LinearGradientBrush) GetEndPoint() graphicsdirect2dcommon.D2D_POINT_2F {
+	_ret := new(graphicsdirect2dcommon.D2D_POINT_2F)
+	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
 }
 
 // GetGradientStopCollection dispatches through ID2D1LinearGradientBrush's vtable slot 12.
@@ -2593,6 +2859,13 @@ func (self *ID2D1OffsetTransform) SetOffset(offset foundation.POINT) {
 	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(offset)))
 }
 
+// GetOffset dispatches through ID2D1OffsetTransform's vtable slot 5.
+func (self *ID2D1OffsetTransform) GetOffset() foundation.POINT {
+	_ret := new(foundation.POINT)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // ID2D1PathGeometry: https://learn.microsoft.com/windows/win32/api/d2d1/nn-d2d1-id2d1pathgeometry
 // IID: 2cd906a5-12e2-11dc-9fed-001143a055f9
 type ID2D1PathGeometry struct {
@@ -2635,6 +2908,14 @@ type ID2D1PathGeometry1 struct {
 // IID_ID2D1PathGeometry1 is the interface identifier for ID2D1PathGeometry1.
 var IID_ID2D1PathGeometry1 = win32.GUID{Data1: 0x62baa2d2, Data2: 0xab54, Data3: 0x41b7, Data4: [8]byte{0xb8, 0x72, 0x78, 0x7e, 0x01, 0x06, 0xa4, 0x21}}
 
+var specID2D1PathGeometry1_ComputePointAndSegmentAtLength = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// ComputePointAndSegmentAtLength dispatches through ID2D1PathGeometry1's vtable slot 21.
+func (self *ID2D1PathGeometry1) ComputePointAndSegmentAtLength(length float32, startSegment uint32, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, pointDescription *D2D1_POINT_DESCRIPTION) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specID2D1PathGeometry1_ComputePointAndSegmentAtLength, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(length)), uintptr(startSegment), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(pointDescription))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ID2D1PrintControl: https://learn.microsoft.com/windows/win32/api/d2d1_1/nn-d2d1_1-id2d1printcontrol
 // IID: 2c1d867d-c290-41c8-ae7e-34a98702e9a5
 type ID2D1PrintControl struct {
@@ -2644,9 +2925,11 @@ type ID2D1PrintControl struct {
 // IID_ID2D1PrintControl is the interface identifier for ID2D1PrintControl.
 var IID_ID2D1PrintControl = win32.GUID{Data1: 0x2c1d867d, Data2: 0xc290, Data3: 0x41c8, Data4: [8]byte{0xae, 0x7e, 0x34, 0xa9, 0x87, 0x02, 0xe9, 0xa5}}
 
+var specID2D1PrintControl_AddPage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word}}
+
 // AddPage dispatches through ID2D1PrintControl's vtable slot 3.
 func (self *ID2D1PrintControl) AddPage(commandList *ID2D1CommandList, pageSize graphicsdirect2dcommon.D2D_SIZE_F, pagePrintTicketStream *systemcom.IStream, tag1 *uint64, tag2 *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commandList)), uintptr(win32.StructArg(pageSize)), uintptr(unsafe.Pointer(pagePrintTicketStream)), uintptr(unsafe.Pointer(tag1)), uintptr(unsafe.Pointer(tag2)))
+	r1, _, _ := win32.Call(self.LpVtbl[3], specID2D1PrintControl_AddPage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commandList)), uintptr(unsafe.Pointer(&pageSize)), uintptr(unsafe.Pointer(pagePrintTicketStream)), uintptr(unsafe.Pointer(tag1)), uintptr(unsafe.Pointer(tag2))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2759,14 +3042,62 @@ type ID2D1RadialGradientBrush struct {
 // IID_ID2D1RadialGradientBrush is the interface identifier for ID2D1RadialGradientBrush.
 var IID_ID2D1RadialGradientBrush = win32.GUID{Data1: 0x2cd906ac, Data2: 0x12e2, Data3: 0x11dc, Data4: [8]byte{0x9f, 0xed, 0x00, 0x11, 0x43, 0xa0, 0x55, 0xf9}}
 
+var specID2D1RadialGradientBrush_SetCenter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false)}}
+
 // SetCenter dispatches through ID2D1RadialGradientBrush's vtable slot 8.
 func (self *ID2D1RadialGradientBrush) SetCenter(center graphicsdirect2dcommon.D2D_POINT_2F) {
-	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(center)))
+	win32.Call(self.LpVtbl[8], specID2D1RadialGradientBrush_SetCenter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&center))).Tuple()
 }
+
+var specID2D1RadialGradientBrush_SetGradientOriginOffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false)}}
 
 // SetGradientOriginOffset dispatches through ID2D1RadialGradientBrush's vtable slot 9.
 func (self *ID2D1RadialGradientBrush) SetGradientOriginOffset(gradientOriginOffset graphicsdirect2dcommon.D2D_POINT_2F) {
-	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(gradientOriginOffset)))
+	win32.Call(self.LpVtbl[9], specID2D1RadialGradientBrush_SetGradientOriginOffset, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&gradientOriginOffset))).Tuple()
+}
+
+var specID2D1RadialGradientBrush_SetRadiusX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetRadiusX dispatches through ID2D1RadialGradientBrush's vtable slot 10.
+func (self *ID2D1RadialGradientBrush) SetRadiusX(radiusX float32) {
+	win32.Call(self.LpVtbl[10], specID2D1RadialGradientBrush_SetRadiusX, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radiusX))).Tuple()
+}
+
+var specID2D1RadialGradientBrush_SetRadiusY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetRadiusY dispatches through ID2D1RadialGradientBrush's vtable slot 11.
+func (self *ID2D1RadialGradientBrush) SetRadiusY(radiusY float32) {
+	win32.Call(self.LpVtbl[11], specID2D1RadialGradientBrush_SetRadiusY, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radiusY))).Tuple()
+}
+
+// GetCenter dispatches through ID2D1RadialGradientBrush's vtable slot 12.
+func (self *ID2D1RadialGradientBrush) GetCenter() graphicsdirect2dcommon.D2D_POINT_2F {
+	_ret := new(graphicsdirect2dcommon.D2D_POINT_2F)
+	syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+// GetGradientOriginOffset dispatches through ID2D1RadialGradientBrush's vtable slot 13.
+func (self *ID2D1RadialGradientBrush) GetGradientOriginOffset() graphicsdirect2dcommon.D2D_POINT_2F {
+	_ret := new(graphicsdirect2dcommon.D2D_POINT_2F)
+	syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+var specID2D1RadialGradientBrush_GetRadiusX = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetRadiusX dispatches through ID2D1RadialGradientBrush's vtable slot 14.
+func (self *ID2D1RadialGradientBrush) GetRadiusX() float32 {
+	r := win32.Call(self.LpVtbl[14], specID2D1RadialGradientBrush_GetRadiusX, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specID2D1RadialGradientBrush_GetRadiusY = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetRadiusY dispatches through ID2D1RadialGradientBrush's vtable slot 15.
+func (self *ID2D1RadialGradientBrush) GetRadiusY() float32 {
+	r := win32.Call(self.LpVtbl[15], specID2D1RadialGradientBrush_GetRadiusY, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
 }
 
 // GetGradientStopCollection dispatches through ID2D1RadialGradientBrush's vtable slot 16.
@@ -2899,9 +3230,30 @@ func (self *ID2D1RenderTarget) CreateMesh(mesh **ID2D1Mesh) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specID2D1RenderTarget_DrawLine = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Struct(8, 4, 2, false), win32.Word, win32.Float32, win32.Word}}
+
+// DrawLine dispatches through ID2D1RenderTarget's vtable slot 15.
+func (self *ID2D1RenderTarget) DrawLine(point0 graphicsdirect2dcommon.D2D_POINT_2F, point1 graphicsdirect2dcommon.D2D_POINT_2F, brush *ID2D1Brush, strokeWidth float32, strokeStyle *ID2D1StrokeStyle) {
+	win32.Call(self.LpVtbl[15], specID2D1RenderTarget_DrawLine, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point0)), uintptr(unsafe.Pointer(&point1)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle))).Tuple()
+}
+
+var specID2D1RenderTarget_DrawRectangle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// DrawRectangle dispatches through ID2D1RenderTarget's vtable slot 16.
+func (self *ID2D1RenderTarget) DrawRectangle(rect *graphicsdirect2dcommon.D2D_RECT_F, brush *ID2D1Brush, strokeWidth float32, strokeStyle *ID2D1StrokeStyle) {
+	win32.Call(self.LpVtbl[16], specID2D1RenderTarget_DrawRectangle, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rect)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle))).Tuple()
+}
+
 // FillRectangle dispatches through ID2D1RenderTarget's vtable slot 17.
 func (self *ID2D1RenderTarget) FillRectangle(rect *graphicsdirect2dcommon.D2D_RECT_F, brush *ID2D1Brush) {
 	syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rect)), uintptr(unsafe.Pointer(brush)))
+}
+
+var specID2D1RenderTarget_DrawRoundedRectangle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// DrawRoundedRectangle dispatches through ID2D1RenderTarget's vtable slot 18.
+func (self *ID2D1RenderTarget) DrawRoundedRectangle(roundedRect *D2D1_ROUNDED_RECT, brush *ID2D1Brush, strokeWidth float32, strokeStyle *ID2D1StrokeStyle) {
+	win32.Call(self.LpVtbl[18], specID2D1RenderTarget_DrawRoundedRectangle, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(roundedRect)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle))).Tuple()
 }
 
 // FillRoundedRectangle dispatches through ID2D1RenderTarget's vtable slot 19.
@@ -2909,9 +3261,23 @@ func (self *ID2D1RenderTarget) FillRoundedRectangle(roundedRect *D2D1_ROUNDED_RE
 	syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(roundedRect)), uintptr(unsafe.Pointer(brush)))
 }
 
+var specID2D1RenderTarget_DrawEllipse = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// DrawEllipse dispatches through ID2D1RenderTarget's vtable slot 20.
+func (self *ID2D1RenderTarget) DrawEllipse(ellipse *D2D1_ELLIPSE, brush *ID2D1Brush, strokeWidth float32, strokeStyle *ID2D1StrokeStyle) {
+	win32.Call(self.LpVtbl[20], specID2D1RenderTarget_DrawEllipse, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ellipse)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle))).Tuple()
+}
+
 // FillEllipse dispatches through ID2D1RenderTarget's vtable slot 21.
 func (self *ID2D1RenderTarget) FillEllipse(ellipse *D2D1_ELLIPSE, brush *ID2D1Brush) {
 	syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ellipse)), uintptr(unsafe.Pointer(brush)))
+}
+
+var specID2D1RenderTarget_DrawGeometry = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// DrawGeometry dispatches through ID2D1RenderTarget's vtable slot 22.
+func (self *ID2D1RenderTarget) DrawGeometry(geometry *ID2D1Geometry, brush *ID2D1Brush, strokeWidth float32, strokeStyle *ID2D1StrokeStyle) {
+	win32.Call(self.LpVtbl[22], specID2D1RenderTarget_DrawGeometry, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(geometry)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle))).Tuple()
 }
 
 // FillGeometry dispatches through ID2D1RenderTarget's vtable slot 23.
@@ -2929,20 +3295,31 @@ func (self *ID2D1RenderTarget) FillOpacityMask(opacityMask *ID2D1Bitmap, brush *
 	syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(opacityMask)), uintptr(unsafe.Pointer(brush)), uintptr(content), uintptr(unsafe.Pointer(destinationRectangle)), uintptr(unsafe.Pointer(sourceRectangle)))
 }
 
+var specID2D1RenderTarget_DrawBitmap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// DrawBitmap dispatches through ID2D1RenderTarget's vtable slot 26.
+func (self *ID2D1RenderTarget) DrawBitmap(bitmap *ID2D1Bitmap, destinationRectangle *graphicsdirect2dcommon.D2D_RECT_F, opacity float32, interpolationMode D2D1_BITMAP_INTERPOLATION_MODE, sourceRectangle *graphicsdirect2dcommon.D2D_RECT_F) {
+	win32.Call(self.LpVtbl[26], specID2D1RenderTarget_DrawBitmap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(destinationRectangle)), uintptr(math.Float32bits(opacity)), uintptr(interpolationMode), uintptr(unsafe.Pointer(sourceRectangle))).Tuple()
+}
+
 // DrawText dispatches through ID2D1RenderTarget's vtable slot 27.
 func (self *ID2D1RenderTarget) DrawText(string_ string, stringLength uint32, textFormat *graphicsdirectwrite.IDWriteTextFormat, layoutRect *graphicsdirect2dcommon.D2D_RECT_F, defaultFillBrush *ID2D1Brush, options D2D1_DRAW_TEXT_OPTIONS, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
 	_string_ := win32.UTF16Ptr(string_)
 	syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(options), uintptr(measuringMode))
 }
 
+var specID2D1RenderTarget_DrawTextLayout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word}}
+
 // DrawTextLayout dispatches through ID2D1RenderTarget's vtable slot 28.
 func (self *ID2D1RenderTarget) DrawTextLayout(origin graphicsdirect2dcommon.D2D_POINT_2F, textLayout *graphicsdirectwrite.IDWriteTextLayout, defaultFillBrush *ID2D1Brush, options D2D1_DRAW_TEXT_OPTIONS) {
-	syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(origin)), uintptr(unsafe.Pointer(textLayout)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(options))
+	win32.Call(self.LpVtbl[28], specID2D1RenderTarget_DrawTextLayout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&origin)), uintptr(unsafe.Pointer(textLayout)), uintptr(unsafe.Pointer(defaultFillBrush)), uintptr(options)).Tuple()
 }
+
+var specID2D1RenderTarget_DrawGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word}}
 
 // DrawGlyphRun dispatches through ID2D1RenderTarget's vtable slot 29.
 func (self *ID2D1RenderTarget) DrawGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *graphicsdirectwrite.DWRITE_GLYPH_RUN, foregroundBrush *ID2D1Brush, measuringMode graphicsdirectwrite.DWRITE_MEASURING_MODE) {
-	syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(measuringMode))
+	win32.Call(self.LpVtbl[29], specID2D1RenderTarget_DrawGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(foregroundBrush)), uintptr(measuringMode)).Tuple()
 }
 
 // SetTransform dispatches through ID2D1RenderTarget's vtable slot 30.
@@ -3049,9 +3426,37 @@ func (self *ID2D1RenderTarget) EndDraw(tag1 *uint64, tag2 *uint64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// GetPixelFormat dispatches through ID2D1RenderTarget's vtable slot 50.
+func (self *ID2D1RenderTarget) GetPixelFormat() graphicsdirect2dcommon.D2D1_PIXEL_FORMAT {
+	_ret := new(graphicsdirect2dcommon.D2D1_PIXEL_FORMAT)
+	syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+var specID2D1RenderTarget_SetDpi = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// SetDpi dispatches through ID2D1RenderTarget's vtable slot 51.
+func (self *ID2D1RenderTarget) SetDpi(dpiX float32, dpiY float32) {
+	win32.Call(self.LpVtbl[51], specID2D1RenderTarget_SetDpi, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(dpiX)), uintptr(math.Float32bits(dpiY))).Tuple()
+}
+
 // GetDpi dispatches through ID2D1RenderTarget's vtable slot 52.
 func (self *ID2D1RenderTarget) GetDpi(dpiX *float32, dpiY *float32) {
 	syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dpiX)), uintptr(unsafe.Pointer(dpiY)))
+}
+
+// GetSize dispatches through ID2D1RenderTarget's vtable slot 53.
+func (self *ID2D1RenderTarget) GetSize() graphicsdirect2dcommon.D2D_SIZE_F {
+	_ret := new(graphicsdirect2dcommon.D2D_SIZE_F)
+	syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
+// GetPixelSize dispatches through ID2D1RenderTarget's vtable slot 54.
+func (self *ID2D1RenderTarget) GetPixelSize() graphicsdirect2dcommon.D2D_SIZE_U {
+	_ret := new(graphicsdirect2dcommon.D2D_SIZE_U)
+	syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
 }
 
 // GetMaximumBitmapSize dispatches through ID2D1RenderTarget's vtable slot 55.
@@ -3125,6 +3530,13 @@ var IID_ID2D1SolidColorBrush = win32.GUID{Data1: 0x2cd906a9, Data2: 0x12e2, Data
 // SetColor dispatches through ID2D1SolidColorBrush's vtable slot 8.
 func (self *ID2D1SolidColorBrush) SetColor(color *graphicsdirect2dcommon.D2D1_COLOR_F) {
 	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)))
+}
+
+// GetColor dispatches through ID2D1SolidColorBrush's vtable slot 9.
+func (self *ID2D1SolidColorBrush) GetColor() graphicsdirect2dcommon.D2D1_COLOR_F {
+	_ret := new(graphicsdirect2dcommon.D2D1_COLOR_F)
+	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
 }
 
 // ID2D1SourceTransform: https://learn.microsoft.com/windows/win32/api/d2d1effectauthor/nn-d2d1effectauthor-id2d1sourcetransform
@@ -3213,10 +3625,26 @@ func (self *ID2D1StrokeStyle) GetDashCap() D2D1_CAP_STYLE {
 	return D2D1_CAP_STYLE(r1)
 }
 
+var specID2D1StrokeStyle_GetMiterLimit = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetMiterLimit dispatches through ID2D1StrokeStyle's vtable slot 7.
+func (self *ID2D1StrokeStyle) GetMiterLimit() float32 {
+	r := win32.Call(self.LpVtbl[7], specID2D1StrokeStyle_GetMiterLimit, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
 // GetLineJoin dispatches through ID2D1StrokeStyle's vtable slot 8.
 func (self *ID2D1StrokeStyle) GetLineJoin() D2D1_LINE_JOIN {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
 	return D2D1_LINE_JOIN(r1)
+}
+
+var specID2D1StrokeStyle_GetDashOffset = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetDashOffset dispatches through ID2D1StrokeStyle's vtable slot 9.
+func (self *ID2D1StrokeStyle) GetDashOffset() float32 {
+	r := win32.Call(self.LpVtbl[9], specID2D1StrokeStyle_GetDashOffset, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
 }
 
 // GetDashStyle dispatches through ID2D1StrokeStyle's vtable slot 10.
@@ -3284,10 +3712,19 @@ type ID2D1SvgDocument struct {
 // IID_ID2D1SvgDocument is the interface identifier for ID2D1SvgDocument.
 var IID_ID2D1SvgDocument = win32.GUID{Data1: 0x86b88e4d, Data2: 0xafa4, Data3: 0x4d7b, Data4: [8]byte{0x88, 0xe4, 0x68, 0xa5, 0x1c, 0x4a, 0x0a, 0xec}}
 
+var specID2D1SvgDocument_SetViewportSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false)}}
+
 // SetViewportSize dispatches through ID2D1SvgDocument's vtable slot 4.
 func (self *ID2D1SvgDocument) SetViewportSize(viewportSize graphicsdirect2dcommon.D2D_SIZE_F) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(viewportSize)))
+	r1, _, _ := win32.Call(self.LpVtbl[4], specID2D1SvgDocument_SetViewportSize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&viewportSize))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetViewportSize dispatches through ID2D1SvgDocument's vtable slot 5.
+func (self *ID2D1SvgDocument) GetViewportSize() graphicsdirect2dcommon.D2D_SIZE_F {
+	_ret := new(graphicsdirect2dcommon.D2D_SIZE_F)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
 }
 
 // SetRoot dispatches through ID2D1SvgDocument's vtable slot 6.
@@ -3321,8 +3758,8 @@ func (self *ID2D1SvgDocument) Deserialize(inputXmlStream *systemcom.IStream, sub
 }
 
 // CreatePaint dispatches through ID2D1SvgDocument's vtable slot 11.
-func (self *ID2D1SvgDocument) CreatePaint(paintType D2D1_SVG_PAINT_TYPE, color *graphicsdirect2dcommon.D2D1_COLOR_F, id string, paint **ID2D1SvgPaint) error {
-	_id := win32.UTF16Ptr(id)
+func (self *ID2D1SvgDocument) CreatePaint(paintType D2D1_SVG_PAINT_TYPE, color *graphicsdirect2dcommon.D2D1_COLOR_F, id *string, paint **ID2D1SvgPaint) error {
+	_id := win32.UTF16PtrOrNil(id)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(paintType), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(paint)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3584,6 +4021,18 @@ func (self *ID2D1SvgGlyphStyle) SetFill(brush *ID2D1Brush) error {
 // GetFill dispatches through ID2D1SvgGlyphStyle's vtable slot 5.
 func (self *ID2D1SvgGlyphStyle) GetFill(brush **ID2D1Brush) {
 	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(brush)))
+}
+
+var specID2D1SvgGlyphStyle_SetStroke = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Float32}}
+
+// SetStroke dispatches through ID2D1SvgGlyphStyle's vtable slot 6.
+func (self *ID2D1SvgGlyphStyle) SetStroke(brush *ID2D1Brush, strokeWidth float32, dashes []float32, dashOffset float32) error {
+	var _dashes *float32
+	if len(dashes) > 0 {
+		_dashes = &dashes[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[6], specID2D1SvgGlyphStyle_SetStroke, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(_dashes)), uintptr(len(dashes)), uintptr(math.Float32bits(dashOffset))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrokeDashesCount dispatches through ID2D1SvgGlyphStyle's vtable slot 7.
@@ -3879,6 +4328,14 @@ func (self *ID2D1Transform) MapOutputRectToInputRects(outputRect *foundation.REC
 // MapInputRectsToOutputRect dispatches through ID2D1Transform's vtable slot 5.
 func (self *ID2D1Transform) MapInputRectsToOutputRect(inputRects *foundation.RECT, inputOpaqueSubRects *foundation.RECT, inputRectCount uint32, outputRect *foundation.RECT, outputOpaqueSubRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputRects)), uintptr(unsafe.Pointer(inputOpaqueSubRects)), uintptr(inputRectCount), uintptr(unsafe.Pointer(outputRect)), uintptr(unsafe.Pointer(outputOpaqueSubRect)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID2D1Transform_MapInvalidRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// MapInvalidRect dispatches through ID2D1Transform's vtable slot 6.
+func (self *ID2D1Transform) MapInvalidRect(inputIndex uint32, invalidInputRect foundation.RECT, invalidOutputRect *foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specID2D1Transform_MapInvalidRect, nil, uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(unsafe.Pointer(&invalidInputRect)), uintptr(unsafe.Pointer(invalidOutputRect))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

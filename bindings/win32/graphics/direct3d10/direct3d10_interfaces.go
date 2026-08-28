@@ -5,6 +5,7 @@
 package direct3d10
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -418,6 +419,13 @@ func (self *ID3D10Device) UpdateSubresource(pDstResource *ID3D10Resource, DstSub
 // ClearRenderTargetView dispatches through ID3D10Device's vtable slot 35.
 func (self *ID3D10Device) ClearRenderTargetView(pRenderTargetView *ID3D10RenderTargetView, ColorRGBA *float32) {
 	syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRenderTargetView)), uintptr(unsafe.Pointer(ColorRGBA)))
+}
+
+var specID3D10Device_ClearDepthStencilView = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// ClearDepthStencilView dispatches through ID3D10Device's vtable slot 36.
+func (self *ID3D10Device) ClearDepthStencilView(pDepthStencilView *ID3D10DepthStencilView, ClearFlags uint32, Depth float32, Stencil byte) {
+	win32.Call(self.LpVtbl[36], specID3D10Device_ClearDepthStencilView, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDepthStencilView)), uintptr(ClearFlags), uintptr(math.Float32bits(Depth)), uintptr(Stencil)).Tuple()
 }
 
 // GenerateMips dispatches through ID3D10Device's vtable slot 37.
@@ -1299,6 +1307,14 @@ type ID3D10EffectScalarVariable struct {
 
 // IID_ID3D10EffectScalarVariable is the interface identifier for ID3D10EffectScalarVariable.
 var IID_ID3D10EffectScalarVariable = win32.GUID{Data1: 0x00e48f7b, Data2: 0xd2c8, Data3: 0x49e8, Data4: [8]byte{0xa8, 0x6c, 0x02, 0x2d, 0xee, 0x53, 0x43, 0x1f}}
+
+var specID3D10EffectScalarVariable_SetFloat = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetFloat dispatches through ID3D10EffectScalarVariable's vtable slot 25.
+func (self *ID3D10EffectScalarVariable) SetFloat(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specID3D10EffectScalarVariable_SetFloat, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetFloat dispatches through ID3D10EffectScalarVariable's vtable slot 26.
 func (self *ID3D10EffectScalarVariable) GetFloat(pValue *float32) error {

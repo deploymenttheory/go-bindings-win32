@@ -65,6 +65,102 @@ var (
 	procHttpWaitForDisconnectEx        = modHTTPAPI.NewProc("HttpWaitForDisconnectEx")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	HttpAddFragmentToCache         *win32.Proc
+	HttpAddUrl                     *win32.Proc
+	HttpAddUrlToUrlGroup           *win32.Proc
+	HttpCancelHttpRequest          *win32.Proc
+	HttpCloseRequestQueue          *win32.Proc
+	HttpCloseServerSession         *win32.Proc
+	HttpCloseUrlGroup              *win32.Proc
+	HttpCreateHttpHandle           *win32.Proc
+	HttpCreateRequestQueue         *win32.Proc
+	HttpCreateServerSession        *win32.Proc
+	HttpCreateUrlGroup             *win32.Proc
+	HttpDeclarePush                *win32.Proc
+	HttpDelegateRequestEx          *win32.Proc
+	HttpDeleteServiceConfiguration *win32.Proc
+	HttpFindUrlGroupId             *win32.Proc
+	HttpFlushResponseCache         *win32.Proc
+	HttpGetExtension               *win32.Proc
+	HttpInitialize                 *win32.Proc
+	HttpIsFeatureSupported         *win32.Proc
+	HttpPrepareUrl                 *win32.Proc
+	HttpQueryRequestProperty       *win32.Proc
+	HttpQueryRequestQueueProperty  *win32.Proc
+	HttpQueryServerSessionProperty *win32.Proc
+	HttpQueryServiceConfiguration  *win32.Proc
+	HttpQueryUrlGroupProperty      *win32.Proc
+	HttpReadFragmentFromCache      *win32.Proc
+	HttpReceiveClientCertificate   *win32.Proc
+	HttpReceiveHttpRequest         *win32.Proc
+	HttpReceiveRequestEntityBody   *win32.Proc
+	HttpRemoveUrl                  *win32.Proc
+	HttpRemoveUrlFromUrlGroup      *win32.Proc
+	HttpSendHttpResponse           *win32.Proc
+	HttpSendResponseEntityBody     *win32.Proc
+	HttpSetRequestProperty         *win32.Proc
+	HttpSetRequestQueueProperty    *win32.Proc
+	HttpSetServerSessionProperty   *win32.Proc
+	HttpSetServiceConfiguration    *win32.Proc
+	HttpSetUrlGroupProperty        *win32.Proc
+	HttpShutdownRequestQueue       *win32.Proc
+	HttpTerminate                  *win32.Proc
+	HttpUpdateServiceConfiguration *win32.Proc
+	HttpWaitForDemandStart         *win32.Proc
+	HttpWaitForDisconnect          *win32.Proc
+	HttpWaitForDisconnectEx        *win32.Proc
+}{
+	HttpAddFragmentToCache:         procHttpAddFragmentToCache,
+	HttpAddUrl:                     procHttpAddUrl,
+	HttpAddUrlToUrlGroup:           procHttpAddUrlToUrlGroup,
+	HttpCancelHttpRequest:          procHttpCancelHttpRequest,
+	HttpCloseRequestQueue:          procHttpCloseRequestQueue,
+	HttpCloseServerSession:         procHttpCloseServerSession,
+	HttpCloseUrlGroup:              procHttpCloseUrlGroup,
+	HttpCreateHttpHandle:           procHttpCreateHttpHandle,
+	HttpCreateRequestQueue:         procHttpCreateRequestQueue,
+	HttpCreateServerSession:        procHttpCreateServerSession,
+	HttpCreateUrlGroup:             procHttpCreateUrlGroup,
+	HttpDeclarePush:                procHttpDeclarePush,
+	HttpDelegateRequestEx:          procHttpDelegateRequestEx,
+	HttpDeleteServiceConfiguration: procHttpDeleteServiceConfiguration,
+	HttpFindUrlGroupId:             procHttpFindUrlGroupId,
+	HttpFlushResponseCache:         procHttpFlushResponseCache,
+	HttpGetExtension:               procHttpGetExtension,
+	HttpInitialize:                 procHttpInitialize,
+	HttpIsFeatureSupported:         procHttpIsFeatureSupported,
+	HttpPrepareUrl:                 procHttpPrepareUrl,
+	HttpQueryRequestProperty:       procHttpQueryRequestProperty,
+	HttpQueryRequestQueueProperty:  procHttpQueryRequestQueueProperty,
+	HttpQueryServerSessionProperty: procHttpQueryServerSessionProperty,
+	HttpQueryServiceConfiguration:  procHttpQueryServiceConfiguration,
+	HttpQueryUrlGroupProperty:      procHttpQueryUrlGroupProperty,
+	HttpReadFragmentFromCache:      procHttpReadFragmentFromCache,
+	HttpReceiveClientCertificate:   procHttpReceiveClientCertificate,
+	HttpReceiveHttpRequest:         procHttpReceiveHttpRequest,
+	HttpReceiveRequestEntityBody:   procHttpReceiveRequestEntityBody,
+	HttpRemoveUrl:                  procHttpRemoveUrl,
+	HttpRemoveUrlFromUrlGroup:      procHttpRemoveUrlFromUrlGroup,
+	HttpSendHttpResponse:           procHttpSendHttpResponse,
+	HttpSendResponseEntityBody:     procHttpSendResponseEntityBody,
+	HttpSetRequestProperty:         procHttpSetRequestProperty,
+	HttpSetRequestQueueProperty:    procHttpSetRequestQueueProperty,
+	HttpSetServerSessionProperty:   procHttpSetServerSessionProperty,
+	HttpSetServiceConfiguration:    procHttpSetServiceConfiguration,
+	HttpSetUrlGroupProperty:        procHttpSetUrlGroupProperty,
+	HttpShutdownRequestQueue:       procHttpShutdownRequestQueue,
+	HttpTerminate:                  procHttpTerminate,
+	HttpUpdateServiceConfiguration: procHttpUpdateServiceConfiguration,
+	HttpWaitForDemandStart:         procHttpWaitForDemandStart,
+	HttpWaitForDisconnect:          procHttpWaitForDisconnect,
+	HttpWaitForDisconnectEx:        procHttpWaitForDisconnectEx,
+}
+
 // HttpAddFragmentToCache calls HTTPAPI!HttpAddFragmentToCache.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpaddfragmenttocache
 // Minimum OS: windows6.0.6000.
@@ -135,8 +231,8 @@ func HttpCreateHttpHandle(RequestQueueHandle *foundation.HANDLE) uint32 {
 // HttpCreateRequestQueue calls HTTPAPI!HttpCreateRequestQueue.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpcreaterequestqueue
 // Minimum OS: windows6.0.6000.
-func HttpCreateRequestQueue(Version HTTPAPI_VERSION, Name string, SecurityAttributes *security.SECURITY_ATTRIBUTES, Flags uint32, RequestQueueHandle *HTTP_REQUEST_QUEUE_HANDLE) uint32 {
-	_Name := win32.UTF16Ptr(Name)
+func HttpCreateRequestQueue(Version HTTPAPI_VERSION, Name *string, SecurityAttributes *security.SECURITY_ATTRIBUTES, Flags uint32, RequestQueueHandle *HTTP_REQUEST_QUEUE_HANDLE) uint32 {
+	_Name := win32.UTF16PtrOrNil(Name)
 	r1, _, _ := syscall.SyscallN(procHttpCreateRequestQueue.Addr(), uintptr(win32.StructArg(Version)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(SecurityAttributes)), uintptr(Flags), uintptr(unsafe.Pointer(RequestQueueHandle)))
 	return uint32(r1)
 }

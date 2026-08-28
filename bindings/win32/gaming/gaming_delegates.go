@@ -4,10 +4,10 @@
 
 package gaming
 
-// GameUICompletionRoutine is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HRESULT, unsafe.Pointer).
+// GameUICompletionRoutine is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HRESULT, unsafe.Pointer) uintptr.
 type GameUICompletionRoutine uintptr
 
-// PlayerPickerUICompletionRoutine is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HRESULT, unsafe.Pointer, *systemwinrt.HSTRING, uintptr).
+// PlayerPickerUICompletionRoutine is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HRESULT, unsafe.Pointer, *systemwinrt.HSTRING, uintptr) uintptr.
 type PlayerPickerUICompletionRoutine uintptr

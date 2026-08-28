@@ -30,6 +30,34 @@ var (
 	procWcmSetProperty                      = modwcmapi.NewProc("WcmSetProperty")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	FreeInterfaceContextTable           *win32.Proc
+	GetInterfaceContextTableForHostName *win32.Proc
+	OnDemandGetRoutingHint              *win32.Proc
+	OnDemandRegisterNotification        *win32.Proc
+	OnDemandUnRegisterNotification      *win32.Proc
+	WcmFreeMemory                       *win32.Proc
+	WcmGetProfileList                   *win32.Proc
+	WcmQueryProperty                    *win32.Proc
+	WcmSetProfileList                   *win32.Proc
+	WcmSetProperty                      *win32.Proc
+}{
+	FreeInterfaceContextTable:           procFreeInterfaceContextTable,
+	GetInterfaceContextTableForHostName: procGetInterfaceContextTableForHostName,
+	OnDemandGetRoutingHint:              procOnDemandGetRoutingHint,
+	OnDemandRegisterNotification:        procOnDemandRegisterNotification,
+	OnDemandUnRegisterNotification:      procOnDemandUnRegisterNotification,
+	WcmFreeMemory:                       procWcmFreeMemory,
+	WcmGetProfileList:                   procWcmGetProfileList,
+	WcmQueryProperty:                    procWcmQueryProperty,
+	WcmSetProfileList:                   procWcmSetProfileList,
+	WcmSetProperty:                      procWcmSetProperty,
+}
+
 // FreeInterfaceContextTable calls OnDemandConnRouteHelper!FreeInterfaceContextTable.
 // https://learn.microsoft.com/windows/win32/api/ondemandconnroutehelper/nf-ondemandconnroutehelper-freeinterfacecontexttable
 // Minimum OS: windows10.0.10240.
@@ -40,9 +68,9 @@ func FreeInterfaceContextTable(InterfaceContextTable *NET_INTERFACE_CONTEXT_TABL
 // GetInterfaceContextTableForHostName calls OnDemandConnRouteHelper!GetInterfaceContextTableForHostName.
 // https://learn.microsoft.com/windows/win32/api/ondemandconnroutehelper/nf-ondemandconnroutehelper-getinterfacecontexttableforhostname
 // Minimum OS: windows10.0.10240.
-func GetInterfaceContextTableForHostName(HostName string, ProxyName string, Flags uint32, ConnectionProfileFilterRawData []byte, InterfaceContextTable **NET_INTERFACE_CONTEXT_TABLE) error {
-	_HostName := win32.UTF16Ptr(HostName)
-	_ProxyName := win32.UTF16Ptr(ProxyName)
+func GetInterfaceContextTableForHostName(HostName *string, ProxyName *string, Flags uint32, ConnectionProfileFilterRawData []byte, InterfaceContextTable **NET_INTERFACE_CONTEXT_TABLE) error {
+	_HostName := win32.UTF16PtrOrNil(HostName)
+	_ProxyName := win32.UTF16PtrOrNil(ProxyName)
 	var _ConnectionProfileFilterRawData *byte
 	if len(ConnectionProfileFilterRawData) > 0 {
 		_ConnectionProfileFilterRawData = &ConnectionProfileFilterRawData[0]
@@ -94,8 +122,8 @@ func WcmGetProfileList(ppProfileList **WCM_PROFILE_INFO_LIST) uint32 {
 // WcmQueryProperty calls wcmapi!WcmQueryProperty.
 // https://learn.microsoft.com/windows/win32/api/wcmapi/nf-wcmapi-wcmqueryproperty
 // Minimum OS: windows8.0.
-func WcmQueryProperty(pInterface *win32.GUID, strProfileName string, Property WCM_PROPERTY, pdwDataSize *uint32, ppData **byte) uint32 {
-	_strProfileName := win32.UTF16Ptr(strProfileName)
+func WcmQueryProperty(pInterface *win32.GUID, strProfileName *string, Property WCM_PROPERTY, pdwDataSize *uint32, ppData **byte) uint32 {
+	_strProfileName := win32.UTF16PtrOrNil(strProfileName)
 	r1, _, _ := syscall.SyscallN(procWcmQueryProperty.Addr(), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(Property), 0, uintptr(unsafe.Pointer(pdwDataSize)), uintptr(unsafe.Pointer(ppData)))
 	return uint32(r1)
 }
@@ -112,8 +140,8 @@ func WcmSetProfileList(pProfileList *WCM_PROFILE_INFO_LIST, dwPosition uint32, f
 // WcmSetProperty calls wcmapi!WcmSetProperty.
 // https://learn.microsoft.com/windows/win32/api/wcmapi/nf-wcmapi-wcmsetproperty
 // Minimum OS: windows8.0.
-func WcmSetProperty(pInterface *win32.GUID, strProfileName string, Property WCM_PROPERTY, pbData []byte) uint32 {
-	_strProfileName := win32.UTF16Ptr(strProfileName)
+func WcmSetProperty(pInterface *win32.GUID, strProfileName *string, Property WCM_PROPERTY, pbData []byte) uint32 {
+	_strProfileName := win32.UTF16PtrOrNil(strProfileName)
 	var _pbData *byte
 	if len(pbData) > 0 {
 		_pbData = &pbData[0]

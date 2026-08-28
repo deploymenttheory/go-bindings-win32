@@ -88,6 +88,15 @@ func (self *IMbnConnectionContext) GetProvisionedContexts(provisionedContexts **
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMbnConnectionContext_SetProvisionedContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(40, 8, 0, false), win32.Word, win32.Word}}
+
+// SetProvisionedContext dispatches through IMbnConnectionContext's vtable slot 4.
+func (self *IMbnConnectionContext) SetProvisionedContext(provisionedContexts MBN_CONTEXT, providerID string, requestID *uint32) error {
+	_providerID := win32.UTF16Ptr(providerID)
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIMbnConnectionContext_SetProvisionedContext, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&provisionedContexts)), uintptr(unsafe.Pointer(_providerID)), uintptr(unsafe.Pointer(requestID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IMbnConnectionContextEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectioncontextevents
 // IID: dcbbbab6-200c-4bbb-aaee-338e368af6fa
 type IMbnConnectionContextEvents struct {
@@ -920,6 +929,14 @@ var IID_IMbnPinManagerEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2006, Data
 // OnPinListAvailable dispatches through IMbnPinManagerEvents's vtable slot 3.
 func (self *IMbnPinManagerEvents) OnPinListAvailable(pinManager *IMbnPinManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pinManager)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMbnPinManagerEvents_OnGetPinStateComplete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(12, 4, 0, false), win32.Word, win32.Word}}
+
+// OnGetPinStateComplete dispatches through IMbnPinManagerEvents's vtable slot 4.
+func (self *IMbnPinManagerEvents) OnGetPinStateComplete(pinManager *IMbnPinManager, pinInfo MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIMbnPinManagerEvents_OnGetPinStateComplete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pinManager)), uintptr(unsafe.Pointer(&pinInfo)), uintptr(requestID), uintptr(status)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

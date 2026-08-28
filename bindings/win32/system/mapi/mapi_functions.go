@@ -19,6 +19,16 @@ var (
 	procMAPIFreeBuffer = modMAPI32.NewProc("MAPIFreeBuffer")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MAPIFreeBuffer *win32.Proc
+}{
+	MAPIFreeBuffer: procMAPIFreeBuffer,
+}
+
 // MAPIFreeBuffer calls MAPI32!MAPIFreeBuffer.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/mapifreebuffer
 func MAPIFreeBuffer(pv unsafe.Pointer) uint32 {

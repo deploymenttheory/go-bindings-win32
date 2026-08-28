@@ -285,6 +285,13 @@ func (in *Ingester) projectApis(meta *win32meta.NamespaceMeta, typeDef *winmd.Ty
 		if in.hasAttribute(target, "UnicodeAttribute") && strings.HasSuffix(method.Name, "W") {
 			function.UnsuffixedName = strings.TrimSuffix(method.Name, "W")
 		}
+		// Header inlines (FORCEINLINE pseudo-module) carry their value as a
+		// [Constant] attribute instead of an export.
+		for _, attr := range in.file.AttributesFor(target) {
+			if attr.Name == "ConstantAttribute" && len(attr.Fixed) == 1 {
+				function.Constant = fmt.Sprint(attr.Fixed[0])
+			}
+		}
 		meta.Functions = append(meta.Functions, function)
 	}
 

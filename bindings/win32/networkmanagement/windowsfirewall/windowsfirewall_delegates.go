@@ -4,34 +4,40 @@
 
 package windowsfirewall
 
-// PAC_CHANGES_CALLBACK_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *INET_FIREWALL_AC_CHANGE).
+// PAC_CHANGES_CALLBACK_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *INET_FIREWALL_AC_CHANGE) uintptr.
 type PAC_CHANGES_CALLBACK_FN uintptr
 
-// PFN_FWADDDYNAMICKEYWORDADDRESS0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*FW_DYNAMIC_KEYWORD_ADDRESS0) uint32.
+// PFN_FWADDDYNAMICKEYWORDADDRESS0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*FW_DYNAMIC_KEYWORD_ADDRESS0) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_FWADDDYNAMICKEYWORDADDRESS0 uintptr
 
-// PFN_FWDELETEDYNAMICKEYWORDADDRESS0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(win32.GUID) uint32.
+// PFN_FWDELETEDYNAMICKEYWORDADDRESS0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(win32.GUID) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_FWDELETEDYNAMICKEYWORDADDRESS0 uintptr
 
-// PFN_FWENUMDYNAMICKEYWORDADDRESSBYID0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(win32.GUID, **FW_DYNAMIC_KEYWORD_ADDRESS_DATA0) uint32.
+// PFN_FWENUMDYNAMICKEYWORDADDRESSBYID0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(win32.GUID, **FW_DYNAMIC_KEYWORD_ADDRESS_DATA0) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_FWENUMDYNAMICKEYWORDADDRESSBYID0 uintptr
 
-// PFN_FWENUMDYNAMICKEYWORDADDRESSESBYTYPE0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, **FW_DYNAMIC_KEYWORD_ADDRESS_DATA0) uint32.
+// PFN_FWENUMDYNAMICKEYWORDADDRESSESBYTYPE0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, **FW_DYNAMIC_KEYWORD_ADDRESS_DATA0) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_FWENUMDYNAMICKEYWORDADDRESSESBYTYPE0 uintptr
 
-// PFN_FWFREEDYNAMICKEYWORDADDRESSDATA0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*FW_DYNAMIC_KEYWORD_ADDRESS_DATA0) uint32.
+// PFN_FWFREEDYNAMICKEYWORDADDRESSDATA0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*FW_DYNAMIC_KEYWORD_ADDRESS_DATA0) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_FWFREEDYNAMICKEYWORDADDRESSDATA0 uintptr
 
-// PFN_FWUPDATEDYNAMICKEYWORDADDRESS0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(win32.GUID, foundation.PWSTR, foundation.BOOL) uint32.
+// PFN_FWUPDATEDYNAMICKEYWORDADDRESS0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(win32.GUID, foundation.PWSTR, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_FWUPDATEDYNAMICKEYWORDADDRESS0 uintptr
 
-// PNETISO_EDP_ID_CALLBACK_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PWSTR, uint32).
+// PNETISO_EDP_ID_CALLBACK_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PWSTR, uint32) uintptr.
 type PNETISO_EDP_ID_CALLBACK_FN uintptr

@@ -4,18 +4,22 @@
 
 package stationsanddesktops
 
-// DESKTOPENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.LPARAM) foundation.BOOL.
+// DESKTOPENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DESKTOPENUMPROCA uintptr
 
-// DESKTOPENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.LPARAM) foundation.BOOL.
+// DESKTOPENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DESKTOPENUMPROCW uintptr
 
-// WINSTAENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.LPARAM) foundation.BOOL.
+// WINSTAENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type WINSTAENUMPROCA uintptr
 
-// WINSTAENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.LPARAM) foundation.BOOL.
+// WINSTAENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type WINSTAENUMPROCW uintptr

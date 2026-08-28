@@ -25,6 +25,28 @@ var (
 	procRtlWriteNonVolatileMemory       = modntdll.NewProc("RtlWriteNonVolatileMemory")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	RtlDrainNonVolatileFlush        *win32.Proc
+	RtlFillNonVolatileMemory        *win32.Proc
+	RtlFlushNonVolatileMemory       *win32.Proc
+	RtlFlushNonVolatileMemoryRanges *win32.Proc
+	RtlFreeNonVolatileToken         *win32.Proc
+	RtlGetNonVolatileToken          *win32.Proc
+	RtlWriteNonVolatileMemory       *win32.Proc
+}{
+	RtlDrainNonVolatileFlush:        procRtlDrainNonVolatileFlush,
+	RtlFillNonVolatileMemory:        procRtlFillNonVolatileMemory,
+	RtlFlushNonVolatileMemory:       procRtlFlushNonVolatileMemory,
+	RtlFlushNonVolatileMemoryRanges: procRtlFlushNonVolatileMemoryRanges,
+	RtlFreeNonVolatileToken:         procRtlFreeNonVolatileToken,
+	RtlGetNonVolatileToken:          procRtlGetNonVolatileToken,
+	RtlWriteNonVolatileMemory:       procRtlWriteNonVolatileMemory,
+}
+
 // RtlDrainNonVolatileFlush calls ntdll!RtlDrainNonVolatileFlush.
 func RtlDrainNonVolatileFlush(NvToken unsafe.Pointer) uint32 {
 	r1, _, _ := syscall.SyscallN(procRtlDrainNonVolatileFlush.Addr(), uintptr(unsafe.Pointer(NvToken)))

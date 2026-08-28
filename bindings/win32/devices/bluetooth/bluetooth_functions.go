@@ -67,11 +67,113 @@ var (
 	procBluetoothSelectDevicesFree            = modbthprops_cpl.NewProc("BluetoothSelectDevicesFree")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BluetoothAuthenticateDevice           *win32.Proc
+	BluetoothAuthenticateDeviceEx         *win32.Proc
+	BluetoothAuthenticateMultipleDevices  *win32.Proc
+	BluetoothDisplayDeviceProperties      *win32.Proc
+	BluetoothEnableDiscovery              *win32.Proc
+	BluetoothEnableIncomingConnections    *win32.Proc
+	BluetoothEnumerateInstalledServices   *win32.Proc
+	BluetoothFindDeviceClose              *win32.Proc
+	BluetoothFindFirstDevice              *win32.Proc
+	BluetoothFindFirstRadio               *win32.Proc
+	BluetoothFindNextDevice               *win32.Proc
+	BluetoothFindNextRadio                *win32.Proc
+	BluetoothFindRadioClose               *win32.Proc
+	BluetoothGATTAbortReliableWrite       *win32.Proc
+	BluetoothGATTBeginReliableWrite       *win32.Proc
+	BluetoothGATTEndReliableWrite         *win32.Proc
+	BluetoothGATTGetCharacteristicValue   *win32.Proc
+	BluetoothGATTGetCharacteristics       *win32.Proc
+	BluetoothGATTGetDescriptorValue       *win32.Proc
+	BluetoothGATTGetDescriptors           *win32.Proc
+	BluetoothGATTGetIncludedServices      *win32.Proc
+	BluetoothGATTGetServices              *win32.Proc
+	BluetoothGATTRegisterEvent            *win32.Proc
+	BluetoothGATTSetCharacteristicValue   *win32.Proc
+	BluetoothGATTSetDescriptorValue       *win32.Proc
+	BluetoothGATTUnregisterEvent          *win32.Proc
+	BluetoothGetDeviceInfo                *win32.Proc
+	BluetoothGetRadioInfo                 *win32.Proc
+	BluetoothIsConnectable                *win32.Proc
+	BluetoothIsDiscoverable               *win32.Proc
+	BluetoothIsVersionAvailable           *win32.Proc
+	BluetoothRegisterForAuthentication    *win32.Proc
+	BluetoothRegisterForAuthenticationEx  *win32.Proc
+	BluetoothRemoveDevice                 *win32.Proc
+	BluetoothSdpEnumAttributes            *win32.Proc
+	BluetoothSdpGetAttributeValue         *win32.Proc
+	BluetoothSdpGetContainerElementData   *win32.Proc
+	BluetoothSdpGetElementData            *win32.Proc
+	BluetoothSdpGetString                 *win32.Proc
+	BluetoothSelectDevices                *win32.Proc
+	BluetoothSelectDevicesFree            *win32.Proc
+	BluetoothSendAuthenticationResponse   *win32.Proc
+	BluetoothSendAuthenticationResponseEx *win32.Proc
+	BluetoothSetLocalServiceInfo          *win32.Proc
+	BluetoothSetServiceState              *win32.Proc
+	BluetoothUnregisterAuthentication     *win32.Proc
+	BluetoothUpdateDeviceRecord           *win32.Proc
+}{
+	BluetoothAuthenticateDevice:           procBluetoothAuthenticateDevice,
+	BluetoothAuthenticateDeviceEx:         procBluetoothAuthenticateDeviceEx,
+	BluetoothAuthenticateMultipleDevices:  procBluetoothAuthenticateMultipleDevices,
+	BluetoothDisplayDeviceProperties:      procBluetoothDisplayDeviceProperties,
+	BluetoothEnableDiscovery:              procBluetoothEnableDiscovery,
+	BluetoothEnableIncomingConnections:    procBluetoothEnableIncomingConnections,
+	BluetoothEnumerateInstalledServices:   procBluetoothEnumerateInstalledServices,
+	BluetoothFindDeviceClose:              procBluetoothFindDeviceClose,
+	BluetoothFindFirstDevice:              procBluetoothFindFirstDevice,
+	BluetoothFindFirstRadio:               procBluetoothFindFirstRadio,
+	BluetoothFindNextDevice:               procBluetoothFindNextDevice,
+	BluetoothFindNextRadio:                procBluetoothFindNextRadio,
+	BluetoothFindRadioClose:               procBluetoothFindRadioClose,
+	BluetoothGATTAbortReliableWrite:       procBluetoothGATTAbortReliableWrite,
+	BluetoothGATTBeginReliableWrite:       procBluetoothGATTBeginReliableWrite,
+	BluetoothGATTEndReliableWrite:         procBluetoothGATTEndReliableWrite,
+	BluetoothGATTGetCharacteristicValue:   procBluetoothGATTGetCharacteristicValue,
+	BluetoothGATTGetCharacteristics:       procBluetoothGATTGetCharacteristics,
+	BluetoothGATTGetDescriptorValue:       procBluetoothGATTGetDescriptorValue,
+	BluetoothGATTGetDescriptors:           procBluetoothGATTGetDescriptors,
+	BluetoothGATTGetIncludedServices:      procBluetoothGATTGetIncludedServices,
+	BluetoothGATTGetServices:              procBluetoothGATTGetServices,
+	BluetoothGATTRegisterEvent:            procBluetoothGATTRegisterEvent,
+	BluetoothGATTSetCharacteristicValue:   procBluetoothGATTSetCharacteristicValue,
+	BluetoothGATTSetDescriptorValue:       procBluetoothGATTSetDescriptorValue,
+	BluetoothGATTUnregisterEvent:          procBluetoothGATTUnregisterEvent,
+	BluetoothGetDeviceInfo:                procBluetoothGetDeviceInfo,
+	BluetoothGetRadioInfo:                 procBluetoothGetRadioInfo,
+	BluetoothIsConnectable:                procBluetoothIsConnectable,
+	BluetoothIsDiscoverable:               procBluetoothIsDiscoverable,
+	BluetoothIsVersionAvailable:           procBluetoothIsVersionAvailable,
+	BluetoothRegisterForAuthentication:    procBluetoothRegisterForAuthentication,
+	BluetoothRegisterForAuthenticationEx:  procBluetoothRegisterForAuthenticationEx,
+	BluetoothRemoveDevice:                 procBluetoothRemoveDevice,
+	BluetoothSdpEnumAttributes:            procBluetoothSdpEnumAttributes,
+	BluetoothSdpGetAttributeValue:         procBluetoothSdpGetAttributeValue,
+	BluetoothSdpGetContainerElementData:   procBluetoothSdpGetContainerElementData,
+	BluetoothSdpGetElementData:            procBluetoothSdpGetElementData,
+	BluetoothSdpGetString:                 procBluetoothSdpGetString,
+	BluetoothSelectDevices:                procBluetoothSelectDevices,
+	BluetoothSelectDevicesFree:            procBluetoothSelectDevicesFree,
+	BluetoothSendAuthenticationResponse:   procBluetoothSendAuthenticationResponse,
+	BluetoothSendAuthenticationResponseEx: procBluetoothSendAuthenticationResponseEx,
+	BluetoothSetLocalServiceInfo:          procBluetoothSetLocalServiceInfo,
+	BluetoothSetServiceState:              procBluetoothSetServiceState,
+	BluetoothUnregisterAuthentication:     procBluetoothUnregisterAuthentication,
+	BluetoothUpdateDeviceRecord:           procBluetoothUpdateDeviceRecord,
+}
+
 // BluetoothAuthenticateDevice calls bthprops.cpl!BluetoothAuthenticateDevice.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothauthenticatedevice
 // Minimum OS: windows6.0.6000.
-func BluetoothAuthenticateDevice(hwndParent foundation.HWND, hRadio foundation.HANDLE, pbtbi *BLUETOOTH_DEVICE_INFO, pszPasskey string, ulPasskeyLength uint32) uint32 {
-	_pszPasskey := win32.UTF16Ptr(pszPasskey)
+func BluetoothAuthenticateDevice(hwndParent foundation.HWND, hRadio foundation.HANDLE, pbtbi *BLUETOOTH_DEVICE_INFO, pszPasskey *string, ulPasskeyLength uint32) uint32 {
+	_pszPasskey := win32.UTF16PtrOrNil(pszPasskey)
 	r1, _, _ := syscall.SyscallN(procBluetoothAuthenticateDevice.Addr(), uintptr(hwndParent), uintptr(hRadio), uintptr(unsafe.Pointer(pbtbi)), uintptr(unsafe.Pointer(_pszPasskey)), uintptr(ulPasskeyLength))
 	return uint32(r1)
 }

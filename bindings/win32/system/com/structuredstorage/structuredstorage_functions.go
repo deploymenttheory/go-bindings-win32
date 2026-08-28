@@ -5,6 +5,7 @@
 package structuredstorage
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -106,6 +107,7 @@ var (
 	procPropVariantToDouble                      = modPROPSYS.NewProc("PropVariantToDouble")
 	procPropVariantToDoubleVector                = modPROPSYS.NewProc("PropVariantToDoubleVector")
 	procPropVariantToDoubleVectorAlloc           = modPROPSYS.NewProc("PropVariantToDoubleVectorAlloc")
+	procPropVariantToDoubleWithDefault           = modPROPSYS.NewProc("PropVariantToDoubleWithDefault")
 	procPropVariantToFileTime                    = modPROPSYS.NewProc("PropVariantToFileTime")
 	procPropVariantToFileTimeVector              = modPROPSYS.NewProc("PropVariantToFileTimeVector")
 	procPropVariantToFileTimeVectorAlloc         = modPROPSYS.NewProc("PropVariantToFileTimeVectorAlloc")
@@ -146,6 +148,262 @@ var (
 	procVariantToPropVariant                     = modPROPSYS.NewProc("VariantToPropVariant")
 	procWinRTPropertyValueToPropVariant          = modPROPSYS.NewProc("WinRTPropertyValueToPropVariant")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ClearPropVariantArray                    *win32.Proc
+	CoGetInstanceFromFile                    *win32.Proc
+	CoGetInstanceFromIStorage                *win32.Proc
+	CoGetInterfaceAndReleaseStream           *win32.Proc
+	CreateILockBytesOnHGlobal                *win32.Proc
+	CreateStreamOnHGlobal                    *win32.Proc
+	FmtIdToPropStgName                       *win32.Proc
+	FreePropVariantArray                     *win32.Proc
+	GetConvertStg                            *win32.Proc
+	GetHGlobalFromILockBytes                 *win32.Proc
+	GetHGlobalFromStream                     *win32.Proc
+	InitPropVariantFromBooleanVector         *win32.Proc
+	InitPropVariantFromBuffer                *win32.Proc
+	InitPropVariantFromCLSID                 *win32.Proc
+	InitPropVariantFromDoubleVector          *win32.Proc
+	InitPropVariantFromFileTime              *win32.Proc
+	InitPropVariantFromFileTimeVector        *win32.Proc
+	InitPropVariantFromGUIDAsString          *win32.Proc
+	InitPropVariantFromInt16Vector           *win32.Proc
+	InitPropVariantFromInt32Vector           *win32.Proc
+	InitPropVariantFromInt64Vector           *win32.Proc
+	InitPropVariantFromPropVariantVectorElem *win32.Proc
+	InitPropVariantFromResource              *win32.Proc
+	InitPropVariantFromStringAsVector        *win32.Proc
+	InitPropVariantFromStringVector          *win32.Proc
+	InitPropVariantFromUInt16Vector          *win32.Proc
+	InitPropVariantFromUInt32Vector          *win32.Proc
+	InitPropVariantFromUInt64Vector          *win32.Proc
+	InitPropVariantVectorFromPropVariant     *win32.Proc
+	OleConvertIStorageToOLESTREAM            *win32.Proc
+	OleConvertIStorageToOLESTREAMEx          *win32.Proc
+	OleConvertOLESTREAMToIStorage            *win32.Proc
+	OleConvertOLESTREAMToIStorageEx          *win32.Proc
+	PropStgNameToFmtId                       *win32.Proc
+	PropVariantChangeType                    *win32.Proc
+	PropVariantClear                         *win32.Proc
+	PropVariantCompareEx                     *win32.Proc
+	PropVariantCopy                          *win32.Proc
+	PropVariantGetBooleanElem                *win32.Proc
+	PropVariantGetDoubleElem                 *win32.Proc
+	PropVariantGetElementCount               *win32.Proc
+	PropVariantGetFileTimeElem               *win32.Proc
+	PropVariantGetInt16Elem                  *win32.Proc
+	PropVariantGetInt32Elem                  *win32.Proc
+	PropVariantGetInt64Elem                  *win32.Proc
+	PropVariantGetStringElem                 *win32.Proc
+	PropVariantGetUInt16Elem                 *win32.Proc
+	PropVariantGetUInt32Elem                 *win32.Proc
+	PropVariantGetUInt64Elem                 *win32.Proc
+	PropVariantToBSTR                        *win32.Proc
+	PropVariantToBoolean                     *win32.Proc
+	PropVariantToBooleanVector               *win32.Proc
+	PropVariantToBooleanVectorAlloc          *win32.Proc
+	PropVariantToBooleanWithDefault          *win32.Proc
+	PropVariantToBuffer                      *win32.Proc
+	PropVariantToDouble                      *win32.Proc
+	PropVariantToDoubleVector                *win32.Proc
+	PropVariantToDoubleVectorAlloc           *win32.Proc
+	PropVariantToDoubleWithDefault           *win32.Proc
+	PropVariantToFileTime                    *win32.Proc
+	PropVariantToFileTimeVector              *win32.Proc
+	PropVariantToFileTimeVectorAlloc         *win32.Proc
+	PropVariantToGUID                        *win32.Proc
+	PropVariantToInt16                       *win32.Proc
+	PropVariantToInt16Vector                 *win32.Proc
+	PropVariantToInt16VectorAlloc            *win32.Proc
+	PropVariantToInt16WithDefault            *win32.Proc
+	PropVariantToInt32                       *win32.Proc
+	PropVariantToInt32Vector                 *win32.Proc
+	PropVariantToInt32VectorAlloc            *win32.Proc
+	PropVariantToInt32WithDefault            *win32.Proc
+	PropVariantToInt64                       *win32.Proc
+	PropVariantToInt64Vector                 *win32.Proc
+	PropVariantToInt64VectorAlloc            *win32.Proc
+	PropVariantToInt64WithDefault            *win32.Proc
+	PropVariantToString                      *win32.Proc
+	PropVariantToStringAlloc                 *win32.Proc
+	PropVariantToStringVector                *win32.Proc
+	PropVariantToStringVectorAlloc           *win32.Proc
+	PropVariantToStringWithDefault           *win32.Proc
+	PropVariantToUInt16                      *win32.Proc
+	PropVariantToUInt16Vector                *win32.Proc
+	PropVariantToUInt16VectorAlloc           *win32.Proc
+	PropVariantToUInt16WithDefault           *win32.Proc
+	PropVariantToUInt32                      *win32.Proc
+	PropVariantToUInt32Vector                *win32.Proc
+	PropVariantToUInt32VectorAlloc           *win32.Proc
+	PropVariantToUInt32WithDefault           *win32.Proc
+	PropVariantToUInt64                      *win32.Proc
+	PropVariantToUInt64Vector                *win32.Proc
+	PropVariantToUInt64VectorAlloc           *win32.Proc
+	PropVariantToUInt64WithDefault           *win32.Proc
+	PropVariantToVariant                     *win32.Proc
+	PropVariantToWinRTPropertyValue          *win32.Proc
+	ReadClassStg                             *win32.Proc
+	ReadClassStm                             *win32.Proc
+	ReadFmtUserTypeStg                       *win32.Proc
+	SetConvertStg                            *win32.Proc
+	StgConvertPropertyToVariant              *win32.Proc
+	StgConvertVariantToProperty              *win32.Proc
+	StgCreateDocfile                         *win32.Proc
+	StgCreateDocfileOnILockBytes             *win32.Proc
+	StgCreatePropSetStg                      *win32.Proc
+	StgCreatePropStg                         *win32.Proc
+	StgCreateStorageEx                       *win32.Proc
+	StgDeserializePropVariant                *win32.Proc
+	StgGetIFillLockBytesOnFile               *win32.Proc
+	StgGetIFillLockBytesOnILockBytes         *win32.Proc
+	StgIsStorageFile                         *win32.Proc
+	StgIsStorageILockBytes                   *win32.Proc
+	StgOpenAsyncDocfileOnIFillLockBytes      *win32.Proc
+	StgOpenLayoutDocfile                     *win32.Proc
+	StgOpenPropStg                           *win32.Proc
+	StgOpenStorage                           *win32.Proc
+	StgOpenStorageEx                         *win32.Proc
+	StgOpenStorageOnILockBytes               *win32.Proc
+	StgPropertyLengthAsVariant               *win32.Proc
+	StgSerializePropVariant                  *win32.Proc
+	StgSetTimes                              *win32.Proc
+	VariantToPropVariant                     *win32.Proc
+	WinRTPropertyValueToPropVariant          *win32.Proc
+	WriteClassStg                            *win32.Proc
+	WriteClassStm                            *win32.Proc
+	WriteFmtUserTypeStg                      *win32.Proc
+}{
+	ClearPropVariantArray:                    procClearPropVariantArray,
+	CoGetInstanceFromFile:                    procCoGetInstanceFromFile,
+	CoGetInstanceFromIStorage:                procCoGetInstanceFromIStorage,
+	CoGetInterfaceAndReleaseStream:           procCoGetInterfaceAndReleaseStream,
+	CreateILockBytesOnHGlobal:                procCreateILockBytesOnHGlobal,
+	CreateStreamOnHGlobal:                    procCreateStreamOnHGlobal,
+	FmtIdToPropStgName:                       procFmtIdToPropStgName,
+	FreePropVariantArray:                     procFreePropVariantArray,
+	GetConvertStg:                            procGetConvertStg,
+	GetHGlobalFromILockBytes:                 procGetHGlobalFromILockBytes,
+	GetHGlobalFromStream:                     procGetHGlobalFromStream,
+	InitPropVariantFromBooleanVector:         procInitPropVariantFromBooleanVector,
+	InitPropVariantFromBuffer:                procInitPropVariantFromBuffer,
+	InitPropVariantFromCLSID:                 procInitPropVariantFromCLSID,
+	InitPropVariantFromDoubleVector:          procInitPropVariantFromDoubleVector,
+	InitPropVariantFromFileTime:              procInitPropVariantFromFileTime,
+	InitPropVariantFromFileTimeVector:        procInitPropVariantFromFileTimeVector,
+	InitPropVariantFromGUIDAsString:          procInitPropVariantFromGUIDAsString,
+	InitPropVariantFromInt16Vector:           procInitPropVariantFromInt16Vector,
+	InitPropVariantFromInt32Vector:           procInitPropVariantFromInt32Vector,
+	InitPropVariantFromInt64Vector:           procInitPropVariantFromInt64Vector,
+	InitPropVariantFromPropVariantVectorElem: procInitPropVariantFromPropVariantVectorElem,
+	InitPropVariantFromResource:              procInitPropVariantFromResource,
+	InitPropVariantFromStringAsVector:        procInitPropVariantFromStringAsVector,
+	InitPropVariantFromStringVector:          procInitPropVariantFromStringVector,
+	InitPropVariantFromUInt16Vector:          procInitPropVariantFromUInt16Vector,
+	InitPropVariantFromUInt32Vector:          procInitPropVariantFromUInt32Vector,
+	InitPropVariantFromUInt64Vector:          procInitPropVariantFromUInt64Vector,
+	InitPropVariantVectorFromPropVariant:     procInitPropVariantVectorFromPropVariant,
+	OleConvertIStorageToOLESTREAM:            procOleConvertIStorageToOLESTREAM,
+	OleConvertIStorageToOLESTREAMEx:          procOleConvertIStorageToOLESTREAMEx,
+	OleConvertOLESTREAMToIStorage:            procOleConvertOLESTREAMToIStorage,
+	OleConvertOLESTREAMToIStorageEx:          procOleConvertOLESTREAMToIStorageEx,
+	PropStgNameToFmtId:                       procPropStgNameToFmtId,
+	PropVariantChangeType:                    procPropVariantChangeType,
+	PropVariantClear:                         procPropVariantClear,
+	PropVariantCompareEx:                     procPropVariantCompareEx,
+	PropVariantCopy:                          procPropVariantCopy,
+	PropVariantGetBooleanElem:                procPropVariantGetBooleanElem,
+	PropVariantGetDoubleElem:                 procPropVariantGetDoubleElem,
+	PropVariantGetElementCount:               procPropVariantGetElementCount,
+	PropVariantGetFileTimeElem:               procPropVariantGetFileTimeElem,
+	PropVariantGetInt16Elem:                  procPropVariantGetInt16Elem,
+	PropVariantGetInt32Elem:                  procPropVariantGetInt32Elem,
+	PropVariantGetInt64Elem:                  procPropVariantGetInt64Elem,
+	PropVariantGetStringElem:                 procPropVariantGetStringElem,
+	PropVariantGetUInt16Elem:                 procPropVariantGetUInt16Elem,
+	PropVariantGetUInt32Elem:                 procPropVariantGetUInt32Elem,
+	PropVariantGetUInt64Elem:                 procPropVariantGetUInt64Elem,
+	PropVariantToBSTR:                        procPropVariantToBSTR,
+	PropVariantToBoolean:                     procPropVariantToBoolean,
+	PropVariantToBooleanVector:               procPropVariantToBooleanVector,
+	PropVariantToBooleanVectorAlloc:          procPropVariantToBooleanVectorAlloc,
+	PropVariantToBooleanWithDefault:          procPropVariantToBooleanWithDefault,
+	PropVariantToBuffer:                      procPropVariantToBuffer,
+	PropVariantToDouble:                      procPropVariantToDouble,
+	PropVariantToDoubleVector:                procPropVariantToDoubleVector,
+	PropVariantToDoubleVectorAlloc:           procPropVariantToDoubleVectorAlloc,
+	PropVariantToDoubleWithDefault:           procPropVariantToDoubleWithDefault,
+	PropVariantToFileTime:                    procPropVariantToFileTime,
+	PropVariantToFileTimeVector:              procPropVariantToFileTimeVector,
+	PropVariantToFileTimeVectorAlloc:         procPropVariantToFileTimeVectorAlloc,
+	PropVariantToGUID:                        procPropVariantToGUID,
+	PropVariantToInt16:                       procPropVariantToInt16,
+	PropVariantToInt16Vector:                 procPropVariantToInt16Vector,
+	PropVariantToInt16VectorAlloc:            procPropVariantToInt16VectorAlloc,
+	PropVariantToInt16WithDefault:            procPropVariantToInt16WithDefault,
+	PropVariantToInt32:                       procPropVariantToInt32,
+	PropVariantToInt32Vector:                 procPropVariantToInt32Vector,
+	PropVariantToInt32VectorAlloc:            procPropVariantToInt32VectorAlloc,
+	PropVariantToInt32WithDefault:            procPropVariantToInt32WithDefault,
+	PropVariantToInt64:                       procPropVariantToInt64,
+	PropVariantToInt64Vector:                 procPropVariantToInt64Vector,
+	PropVariantToInt64VectorAlloc:            procPropVariantToInt64VectorAlloc,
+	PropVariantToInt64WithDefault:            procPropVariantToInt64WithDefault,
+	PropVariantToString:                      procPropVariantToString,
+	PropVariantToStringAlloc:                 procPropVariantToStringAlloc,
+	PropVariantToStringVector:                procPropVariantToStringVector,
+	PropVariantToStringVectorAlloc:           procPropVariantToStringVectorAlloc,
+	PropVariantToStringWithDefault:           procPropVariantToStringWithDefault,
+	PropVariantToUInt16:                      procPropVariantToUInt16,
+	PropVariantToUInt16Vector:                procPropVariantToUInt16Vector,
+	PropVariantToUInt16VectorAlloc:           procPropVariantToUInt16VectorAlloc,
+	PropVariantToUInt16WithDefault:           procPropVariantToUInt16WithDefault,
+	PropVariantToUInt32:                      procPropVariantToUInt32,
+	PropVariantToUInt32Vector:                procPropVariantToUInt32Vector,
+	PropVariantToUInt32VectorAlloc:           procPropVariantToUInt32VectorAlloc,
+	PropVariantToUInt32WithDefault:           procPropVariantToUInt32WithDefault,
+	PropVariantToUInt64:                      procPropVariantToUInt64,
+	PropVariantToUInt64Vector:                procPropVariantToUInt64Vector,
+	PropVariantToUInt64VectorAlloc:           procPropVariantToUInt64VectorAlloc,
+	PropVariantToUInt64WithDefault:           procPropVariantToUInt64WithDefault,
+	PropVariantToVariant:                     procPropVariantToVariant,
+	PropVariantToWinRTPropertyValue:          procPropVariantToWinRTPropertyValue,
+	ReadClassStg:                             procReadClassStg,
+	ReadClassStm:                             procReadClassStm,
+	ReadFmtUserTypeStg:                       procReadFmtUserTypeStg,
+	SetConvertStg:                            procSetConvertStg,
+	StgConvertPropertyToVariant:              procStgConvertPropertyToVariant,
+	StgConvertVariantToProperty:              procStgConvertVariantToProperty,
+	StgCreateDocfile:                         procStgCreateDocfile,
+	StgCreateDocfileOnILockBytes:             procStgCreateDocfileOnILockBytes,
+	StgCreatePropSetStg:                      procStgCreatePropSetStg,
+	StgCreatePropStg:                         procStgCreatePropStg,
+	StgCreateStorageEx:                       procStgCreateStorageEx,
+	StgDeserializePropVariant:                procStgDeserializePropVariant,
+	StgGetIFillLockBytesOnFile:               procStgGetIFillLockBytesOnFile,
+	StgGetIFillLockBytesOnILockBytes:         procStgGetIFillLockBytesOnILockBytes,
+	StgIsStorageFile:                         procStgIsStorageFile,
+	StgIsStorageILockBytes:                   procStgIsStorageILockBytes,
+	StgOpenAsyncDocfileOnIFillLockBytes:      procStgOpenAsyncDocfileOnIFillLockBytes,
+	StgOpenLayoutDocfile:                     procStgOpenLayoutDocfile,
+	StgOpenPropStg:                           procStgOpenPropStg,
+	StgOpenStorage:                           procStgOpenStorage,
+	StgOpenStorageEx:                         procStgOpenStorageEx,
+	StgOpenStorageOnILockBytes:               procStgOpenStorageOnILockBytes,
+	StgPropertyLengthAsVariant:               procStgPropertyLengthAsVariant,
+	StgSerializePropVariant:                  procStgSerializePropVariant,
+	StgSetTimes:                              procStgSetTimes,
+	VariantToPropVariant:                     procVariantToPropVariant,
+	WinRTPropertyValueToPropVariant:          procWinRTPropertyValueToPropVariant,
+	WriteClassStg:                            procWriteClassStg,
+	WriteClassStm:                            procWriteClassStm,
+	WriteFmtUserTypeStg:                      procWriteFmtUserTypeStg,
+}
 
 // ClearPropVariantArray calls PROPSYS!ClearPropVariantArray.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-clearpropvariantarray
@@ -380,8 +638,8 @@ func InitPropVariantFromResource(hinst foundation.HINSTANCE, id uint32, ppropvar
 // InitPropVariantFromStringAsVector calls PROPSYS!InitPropVariantFromStringAsVector.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initpropvariantfromstringasvector
 // Minimum OS: windows5.1.2600.
-func InitPropVariantFromStringAsVector(psz string, ppropvar *PROPVARIANT) error {
-	_psz := win32.UTF16Ptr(psz)
+func InitPropVariantFromStringAsVector(psz *string, ppropvar *PROPVARIANT) error {
+	_psz := win32.UTF16PtrOrNil(psz)
 	r1, _, _ := syscall.SyscallN(procInitPropVariantFromStringAsVector.Addr(), uintptr(unsafe.Pointer(_psz)), uintptr(unsafe.Pointer(ppropvar)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -688,6 +946,16 @@ func PropVariantToDoubleVectorAlloc(propvar *PROPVARIANT, pprgn **float64, pcEle
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specPropVariantToDoubleWithDefault = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}, Ret: win32.Float64}
+
+// PropVariantToDoubleWithDefault calls PROPSYS!PropVariantToDoubleWithDefault.
+// https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttodoublewithdefault
+// Minimum OS: windows5.1.2600.
+func PropVariantToDoubleWithDefault(propvarIn *PROPVARIANT, dblDefault float64) float64 {
+	r := win32.Call(procPropVariantToDoubleWithDefault.Addr(), specPropVariantToDoubleWithDefault, nil, uintptr(unsafe.Pointer(propvarIn)), uintptr(math.Float64bits(dblDefault)))
+	return math.Float64frombits(r.F0)
+}
+
 // PropVariantToFileTime calls PROPSYS!PropVariantToFileTime.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttofiletime
 // Minimum OS: windows5.1.2600.
@@ -871,8 +1139,8 @@ func PropVariantToStringVectorAlloc(propvar *PROPVARIANT, pprgsz **foundation.PW
 // PropVariantToStringWithDefault calls PROPSYS!PropVariantToStringWithDefault.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttostringwithdefault
 // Minimum OS: windows5.1.2600.
-func PropVariantToStringWithDefault(propvarIn *PROPVARIANT, pszDefault string) foundation.PWSTR {
-	_pszDefault := win32.UTF16Ptr(pszDefault)
+func PropVariantToStringWithDefault(propvarIn *PROPVARIANT, pszDefault *string) foundation.PWSTR {
+	_pszDefault := win32.UTF16PtrOrNil(pszDefault)
 	r1, _, _ := syscall.SyscallN(procPropVariantToStringWithDefault.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(_pszDefault)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
@@ -1053,8 +1321,8 @@ func StgConvertVariantToProperty(pvar *PROPVARIANT, CodePage uint16, pprop *SERI
 // StgCreateDocfile calls OLE32!StgCreateDocfile.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatedocfile
 // Minimum OS: windows5.0.
-func StgCreateDocfile(pwcsName string, grfMode systemcom.STGM, ppstgOpen **IStorage) error {
-	_pwcsName := win32.UTF16Ptr(pwcsName)
+func StgCreateDocfile(pwcsName *string, grfMode systemcom.STGM, ppstgOpen **IStorage) error {
+	_pwcsName := win32.UTF16PtrOrNil(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgCreateDocfile.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), 0, uintptr(unsafe.Pointer(ppstgOpen)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1086,8 +1354,8 @@ func StgCreatePropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, pclsid *win32
 // StgCreateStorageEx calls OLE32!StgCreateStorageEx.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgcreatestorageex
 // Minimum OS: windows5.0.
-func StgCreateStorageEx(pwcsName string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen **win32.IUnknown) error {
-	_pwcsName := win32.UTF16Ptr(pwcsName)
+func StgCreateStorageEx(pwcsName *string, grfMode systemcom.STGM, stgfmt STGFMT, grfAttrs uint32, pStgOptions *STGOPTIONS, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, riid *win32.GUID, ppObjectOpen **win32.IUnknown) error {
+	_pwcsName := win32.UTF16PtrOrNil(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgCreateStorageEx.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(grfMode), uintptr(stgfmt), uintptr(grfAttrs), uintptr(unsafe.Pointer(pStgOptions)), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObjectOpen)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1158,8 +1426,8 @@ func StgOpenPropStg(pUnk *systemcom.IUnknown, fmtid *win32.GUID, grfFlags uint32
 // StgOpenStorage calls OLE32!StgOpenStorage.
 // https://learn.microsoft.com/windows/win32/api/coml2api/nf-coml2api-stgopenstorage
 // Minimum OS: windows5.0.
-func StgOpenStorage(pwcsName string, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) error {
-	_pwcsName := win32.UTF16Ptr(pwcsName)
+func StgOpenStorage(pwcsName *string, pstgPriority *IStorage, grfMode systemcom.STGM, snbExclude **uint16, reserved uint32, ppstgOpen **IStorage) error {
+	_pwcsName := win32.UTF16PtrOrNil(pwcsName)
 	r1, _, _ := syscall.SyscallN(procStgOpenStorage.Addr(), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(pstgPriority)), uintptr(grfMode), uintptr(unsafe.Pointer(snbExclude)), uintptr(reserved), uintptr(unsafe.Pointer(ppstgOpen)))
 	return win32.ErrIfFailed(int32(r1))
 }

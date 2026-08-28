@@ -21,7 +21,6 @@ var (
 	modapi_ms_win_core_synch_l1_2_0 = win32.NewDLL("api-ms-win-core-synch-l1-2-0.dll")
 	modapi_ms_win_core_wow64_l1_1_1 = win32.NewDLL("api-ms-win-core-wow64-l1-1-1.dll")
 	modAVRT                         = win32.NewDLL("AVRT.dll")
-	modFORCEINLINE                  = win32.NewDLL("FORCEINLINE")
 	modKERNEL32                     = win32.NewDLL("KERNEL32.dll")
 	modOLEACC                       = win32.NewDLL("OLEACC.dll")
 	modRTWorkQ                      = win32.NewDLL("RTWorkQ.dll")
@@ -54,9 +53,6 @@ var (
 	procAvSetMmThreadCharacteristics                 = modAVRT.NewProc("AvSetMmThreadCharacteristicsW")
 	procAvSetMmThreadCharacteristicsA                = modAVRT.NewProc("AvSetMmThreadCharacteristicsA")
 	procAvSetMmThreadPriority                        = modAVRT.NewProc("AvSetMmThreadPriority")
-	procGetCurrentProcessToken                       = modFORCEINLINE.NewProc("GetCurrentProcessToken")
-	procGetCurrentThreadEffectiveToken               = modFORCEINLINE.NewProc("GetCurrentThreadEffectiveToken")
-	procGetCurrentThreadToken                        = modFORCEINLINE.NewProc("GetCurrentThreadToken")
 	procAcquireSRWLockExclusive                      = modKERNEL32.NewProc("AcquireSRWLockExclusive")
 	procAcquireSRWLockShared                         = modKERNEL32.NewProc("AcquireSRWLockShared")
 	procAddIntegrityLabelToBoundaryDescriptor        = modKERNEL32.NewProc("AddIntegrityLabelToBoundaryDescriptor")
@@ -369,6 +365,686 @@ var (
 	procSetProcessRestrictionExemption               = modUSER32.NewProc("SetProcessRestrictionExemption")
 	procWaitForInputIdle                             = modUSER32.NewProc("WaitForInputIdle")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AcquireSRWLockExclusive                      *win32.Proc
+	AcquireSRWLockShared                         *win32.Proc
+	AddIntegrityLabelToBoundaryDescriptor        *win32.Proc
+	AddSIDToBoundaryDescriptor                   *win32.Proc
+	AttachThreadInput                            *win32.Proc
+	AvQuerySystemResponsiveness                  *win32.Proc
+	AvRevertMmThreadCharacteristics              *win32.Proc
+	AvRtCreateThreadOrderingGroup                *win32.Proc
+	AvRtCreateThreadOrderingGroupEx              *win32.Proc
+	AvRtCreateThreadOrderingGroupExA             *win32.Proc
+	AvRtDeleteThreadOrderingGroup                *win32.Proc
+	AvRtJoinThreadOrderingGroup                  *win32.Proc
+	AvRtLeaveThreadOrderingGroup                 *win32.Proc
+	AvRtWaitOnThreadOrderingGroup                *win32.Proc
+	AvSetMmMaxThreadCharacteristics              *win32.Proc
+	AvSetMmMaxThreadCharacteristicsA             *win32.Proc
+	AvSetMmThreadCharacteristics                 *win32.Proc
+	AvSetMmThreadCharacteristicsA                *win32.Proc
+	AvSetMmThreadPriority                        *win32.Proc
+	CallbackMayRunLong                           *win32.Proc
+	CancelThreadpoolIo                           *win32.Proc
+	CancelTimerQueueTimer                        *win32.Proc
+	CancelWaitableTimer                          *win32.Proc
+	ChangeTimerQueueTimer                        *win32.Proc
+	ClosePrivateNamespace                        *win32.Proc
+	CloseThreadpool                              *win32.Proc
+	CloseThreadpoolCleanupGroup                  *win32.Proc
+	CloseThreadpoolCleanupGroupMembers           *win32.Proc
+	CloseThreadpoolIo                            *win32.Proc
+	CloseThreadpoolTimer                         *win32.Proc
+	CloseThreadpoolWait                          *win32.Proc
+	CloseThreadpoolWork                          *win32.Proc
+	ConvertFiberToThread                         *win32.Proc
+	ConvertThreadToFiber                         *win32.Proc
+	ConvertThreadToFiberEx                       *win32.Proc
+	CreateBoundaryDescriptor                     *win32.Proc
+	CreateBoundaryDescriptorA                    *win32.Proc
+	CreateEvent                                  *win32.Proc
+	CreateEventA                                 *win32.Proc
+	CreateEventEx                                *win32.Proc
+	CreateEventExA                               *win32.Proc
+	CreateFiber                                  *win32.Proc
+	CreateFiberEx                                *win32.Proc
+	CreateMutex                                  *win32.Proc
+	CreateMutexA                                 *win32.Proc
+	CreateMutexEx                                *win32.Proc
+	CreateMutexExA                               *win32.Proc
+	CreatePrivateNamespace                       *win32.Proc
+	CreatePrivateNamespaceA                      *win32.Proc
+	CreateProcess                                *win32.Proc
+	CreateProcessA                               *win32.Proc
+	CreateProcessAsUser                          *win32.Proc
+	CreateProcessAsUserA                         *win32.Proc
+	CreateProcessWithLogonW                      *win32.Proc
+	CreateProcessWithTokenW                      *win32.Proc
+	CreateRemoteThread                           *win32.Proc
+	CreateRemoteThreadEx                         *win32.Proc
+	CreateSemaphore                              *win32.Proc
+	CreateSemaphoreA                             *win32.Proc
+	CreateSemaphoreEx                            *win32.Proc
+	CreateSemaphoreExA                           *win32.Proc
+	CreateThread                                 *win32.Proc
+	CreateThreadpool                             *win32.Proc
+	CreateThreadpoolCleanupGroup                 *win32.Proc
+	CreateThreadpoolIo                           *win32.Proc
+	CreateThreadpoolTimer                        *win32.Proc
+	CreateThreadpoolWait                         *win32.Proc
+	CreateThreadpoolWork                         *win32.Proc
+	CreateTimerQueue                             *win32.Proc
+	CreateTimerQueueTimer                        *win32.Proc
+	CreateUmsCompletionList                      *win32.Proc
+	CreateUmsThreadContext                       *win32.Proc
+	CreateWaitableTimer                          *win32.Proc
+	CreateWaitableTimerA                         *win32.Proc
+	CreateWaitableTimerEx                        *win32.Proc
+	CreateWaitableTimerExA                       *win32.Proc
+	DeleteBoundaryDescriptor                     *win32.Proc
+	DeleteCriticalSection                        *win32.Proc
+	DeleteFiber                                  *win32.Proc
+	DeleteProcThreadAttributeList                *win32.Proc
+	DeleteSynchronizationBarrier                 *win32.Proc
+	DeleteTimerQueue                             *win32.Proc
+	DeleteTimerQueueEx                           *win32.Proc
+	DeleteTimerQueueTimer                        *win32.Proc
+	DeleteUmsCompletionList                      *win32.Proc
+	DeleteUmsThreadContext                       *win32.Proc
+	DequeueUmsCompletionListItems                *win32.Proc
+	DisassociateCurrentThreadFromCallback        *win32.Proc
+	EnterCriticalSection                         *win32.Proc
+	EnterSynchronizationBarrier                  *win32.Proc
+	EnterUmsSchedulingMode                       *win32.Proc
+	ExecuteUmsThread                             *win32.Proc
+	ExitProcess                                  *win32.Proc
+	ExitThread                                   *win32.Proc
+	FlsAlloc                                     *win32.Proc
+	FlsFree                                      *win32.Proc
+	FlsGetValue                                  *win32.Proc
+	FlsGetValue2                                 *win32.Proc
+	FlsSetValue                                  *win32.Proc
+	FlushProcessWriteBuffers                     *win32.Proc
+	FreeLibraryWhenCallbackReturns               *win32.Proc
+	GetActiveProcessorCount                      *win32.Proc
+	GetActiveProcessorGroupCount                 *win32.Proc
+	GetCurrentProcess                            *win32.Proc
+	GetCurrentProcessId                          *win32.Proc
+	GetCurrentProcessorNumber                    *win32.Proc
+	GetCurrentProcessorNumberEx                  *win32.Proc
+	GetCurrentThread                             *win32.Proc
+	GetCurrentThreadId                           *win32.Proc
+	GetCurrentThreadStackLimits                  *win32.Proc
+	GetCurrentUmsThread                          *win32.Proc
+	GetExitCodeProcess                           *win32.Proc
+	GetExitCodeThread                            *win32.Proc
+	GetGuiResources                              *win32.Proc
+	GetMachineTypeAttributes                     *win32.Proc
+	GetMaximumProcessorCount                     *win32.Proc
+	GetMaximumProcessorGroupCount                *win32.Proc
+	GetNextUmsListItem                           *win32.Proc
+	GetNumaAvailableMemoryNode                   *win32.Proc
+	GetNumaAvailableMemoryNodeEx                 *win32.Proc
+	GetNumaHighestNodeNumber                     *win32.Proc
+	GetNumaNodeNumberFromHandle                  *win32.Proc
+	GetNumaNodeProcessorMask                     *win32.Proc
+	GetNumaNodeProcessorMask2                    *win32.Proc
+	GetNumaNodeProcessorMaskEx                   *win32.Proc
+	GetNumaProcessorNode                         *win32.Proc
+	GetNumaProcessorNodeEx                       *win32.Proc
+	GetNumaProximityNode                         *win32.Proc
+	GetNumaProximityNodeEx                       *win32.Proc
+	GetPriorityClass                             *win32.Proc
+	GetProcessAffinityMask                       *win32.Proc
+	GetProcessDEPPolicy                          *win32.Proc
+	GetProcessDefaultCpuSetMasks                 *win32.Proc
+	GetProcessDefaultCpuSets                     *win32.Proc
+	GetProcessGroupAffinity                      *win32.Proc
+	GetProcessHandleCount                        *win32.Proc
+	GetProcessHandleFromHwnd                     *win32.Proc
+	GetProcessId                                 *win32.Proc
+	GetProcessIdOfThread                         *win32.Proc
+	GetProcessInformation                        *win32.Proc
+	GetProcessIoCounters                         *win32.Proc
+	GetProcessMitigationPolicy                   *win32.Proc
+	GetProcessPriorityBoost                      *win32.Proc
+	GetProcessShutdownParameters                 *win32.Proc
+	GetProcessTimes                              *win32.Proc
+	GetProcessVersion                            *win32.Proc
+	GetProcessWorkingSetSize                     *win32.Proc
+	GetStartupInfo                               *win32.Proc
+	GetStartupInfoA                              *win32.Proc
+	GetSystemTimes                               *win32.Proc
+	GetThreadDescription                         *win32.Proc
+	GetThreadGroupAffinity                       *win32.Proc
+	GetThreadIOPendingFlag                       *win32.Proc
+	GetThreadId                                  *win32.Proc
+	GetThreadIdealProcessorEx                    *win32.Proc
+	GetThreadInformation                         *win32.Proc
+	GetThreadPriority                            *win32.Proc
+	GetThreadPriorityBoost                       *win32.Proc
+	GetThreadSelectedCpuSetMasks                 *win32.Proc
+	GetThreadSelectedCpuSets                     *win32.Proc
+	GetThreadTimes                               *win32.Proc
+	GetUmsCompletionListEvent                    *win32.Proc
+	GetUmsSystemThreadInformation                *win32.Proc
+	InitOnceBeginInitialize                      *win32.Proc
+	InitOnceComplete                             *win32.Proc
+	InitOnceExecuteOnce                          *win32.Proc
+	InitOnceInitialize                           *win32.Proc
+	InitializeConditionVariable                  *win32.Proc
+	InitializeCriticalSection                    *win32.Proc
+	InitializeCriticalSectionAndSpinCount        *win32.Proc
+	InitializeCriticalSectionEx                  *win32.Proc
+	InitializeProcThreadAttributeList            *win32.Proc
+	InitializeSListHead                          *win32.Proc
+	InitializeSRWLock                            *win32.Proc
+	InitializeSynchronizationBarrier             *win32.Proc
+	InterlockedFlushSList                        *win32.Proc
+	InterlockedPopEntrySList                     *win32.Proc
+	InterlockedPushEntrySList                    *win32.Proc
+	InterlockedPushListSListEx                   *win32.Proc
+	IsImmersiveProcess                           *win32.Proc
+	IsProcessCritical                            *win32.Proc
+	IsProcessorFeaturePresent                    *win32.Proc
+	IsThreadAFiber                               *win32.Proc
+	IsThreadpoolTimerSet                         *win32.Proc
+	IsWow64Process                               *win32.Proc
+	IsWow64Process2                              *win32.Proc
+	LeaveCriticalSection                         *win32.Proc
+	LeaveCriticalSectionWhenCallbackReturns      *win32.Proc
+	OpenEvent                                    *win32.Proc
+	OpenEventA                                   *win32.Proc
+	OpenMutex                                    *win32.Proc
+	OpenPrivateNamespace                         *win32.Proc
+	OpenPrivateNamespaceA                        *win32.Proc
+	OpenProcess                                  *win32.Proc
+	OpenProcessToken                             *win32.Proc
+	OpenSemaphore                                *win32.Proc
+	OpenThread                                   *win32.Proc
+	OpenThreadToken                              *win32.Proc
+	OpenWaitableTimer                            *win32.Proc
+	OpenWaitableTimerA                           *win32.Proc
+	PulseEvent                                   *win32.Proc
+	QueryDepthSList                              *win32.Proc
+	QueryFullProcessImageName                    *win32.Proc
+	QueryFullProcessImageNameA                   *win32.Proc
+	QueryProcessAffinityUpdateMode               *win32.Proc
+	QueryProtectedPolicy                         *win32.Proc
+	QueryThreadpoolStackInformation              *win32.Proc
+	QueryUmsThreadInformation                    *win32.Proc
+	QueueUserAPC                                 *win32.Proc
+	QueueUserAPC2                                *win32.Proc
+	QueueUserWorkItem                            *win32.Proc
+	RegisterWaitForSingleObject                  *win32.Proc
+	ReleaseMutex                                 *win32.Proc
+	ReleaseMutexWhenCallbackReturns              *win32.Proc
+	ReleaseSRWLockExclusive                      *win32.Proc
+	ReleaseSRWLockShared                         *win32.Proc
+	ReleaseSemaphore                             *win32.Proc
+	ReleaseSemaphoreWhenCallbackReturns          *win32.Proc
+	ResetEvent                                   *win32.Proc
+	ResumeThread                                 *win32.Proc
+	RtwqAddPeriodicCallback                      *win32.Proc
+	RtwqAllocateSerialWorkQueue                  *win32.Proc
+	RtwqAllocateWorkQueue                        *win32.Proc
+	RtwqBeginRegisterWorkQueueWithMMCSS          *win32.Proc
+	RtwqBeginUnregisterWorkQueueWithMMCSS        *win32.Proc
+	RtwqCancelDeadline                           *win32.Proc
+	RtwqCancelWorkItem                           *win32.Proc
+	RtwqCreateAsyncResult                        *win32.Proc
+	RtwqEndRegisterWorkQueueWithMMCSS            *win32.Proc
+	RtwqGetWorkQueueMMCSSClass                   *win32.Proc
+	RtwqGetWorkQueueMMCSSPriority                *win32.Proc
+	RtwqGetWorkQueueMMCSSTaskId                  *win32.Proc
+	RtwqInvokeCallback                           *win32.Proc
+	RtwqJoinWorkQueue                            *win32.Proc
+	RtwqLockPlatform                             *win32.Proc
+	RtwqLockSharedWorkQueue                      *win32.Proc
+	RtwqLockWorkQueue                            *win32.Proc
+	RtwqPutWaitingWorkItem                       *win32.Proc
+	RtwqPutWorkItem                              *win32.Proc
+	RtwqRegisterPlatformEvents                   *win32.Proc
+	RtwqRegisterPlatformWithMMCSS                *win32.Proc
+	RtwqRemovePeriodicCallback                   *win32.Proc
+	RtwqScheduleWorkItem                         *win32.Proc
+	RtwqSetDeadline                              *win32.Proc
+	RtwqSetDeadline2                             *win32.Proc
+	RtwqSetLongRunning                           *win32.Proc
+	RtwqShutdown                                 *win32.Proc
+	RtwqStartup                                  *win32.Proc
+	RtwqUnjoinWorkQueue                          *win32.Proc
+	RtwqUnlockPlatform                           *win32.Proc
+	RtwqUnlockWorkQueue                          *win32.Proc
+	RtwqUnregisterPlatformEvents                 *win32.Proc
+	RtwqUnregisterPlatformFromMMCSS              *win32.Proc
+	SetCriticalSectionSpinCount                  *win32.Proc
+	SetEvent                                     *win32.Proc
+	SetEventWhenCallbackReturns                  *win32.Proc
+	SetPriorityClass                             *win32.Proc
+	SetProcessAffinityMask                       *win32.Proc
+	SetProcessAffinityUpdateMode                 *win32.Proc
+	SetProcessDEPPolicy                          *win32.Proc
+	SetProcessDefaultCpuSetMasks                 *win32.Proc
+	SetProcessDefaultCpuSets                     *win32.Proc
+	SetProcessDynamicEHContinuationTargets       *win32.Proc
+	SetProcessDynamicEnforcedCetCompatibleRanges *win32.Proc
+	SetProcessInformation                        *win32.Proc
+	SetProcessMitigationPolicy                   *win32.Proc
+	SetProcessPriorityBoost                      *win32.Proc
+	SetProcessRestrictionExemption               *win32.Proc
+	SetProcessShutdownParameters                 *win32.Proc
+	SetProcessWorkingSetSize                     *win32.Proc
+	SetProtectedPolicy                           *win32.Proc
+	SetThreadAffinityMask                        *win32.Proc
+	SetThreadDescription                         *win32.Proc
+	SetThreadGroupAffinity                       *win32.Proc
+	SetThreadIdealProcessor                      *win32.Proc
+	SetThreadIdealProcessorEx                    *win32.Proc
+	SetThreadInformation                         *win32.Proc
+	SetThreadPriority                            *win32.Proc
+	SetThreadPriorityBoost                       *win32.Proc
+	SetThreadSelectedCpuSetMasks                 *win32.Proc
+	SetThreadSelectedCpuSets                     *win32.Proc
+	SetThreadStackGuarantee                      *win32.Proc
+	SetThreadToken                               *win32.Proc
+	SetThreadpoolStackInformation                *win32.Proc
+	SetThreadpoolThreadMaximum                   *win32.Proc
+	SetThreadpoolThreadMinimum                   *win32.Proc
+	SetThreadpoolTimer                           *win32.Proc
+	SetThreadpoolTimerEx                         *win32.Proc
+	SetThreadpoolWait                            *win32.Proc
+	SetThreadpoolWaitEx                          *win32.Proc
+	SetTimerQueueTimer                           *win32.Proc
+	SetUmsThreadInformation                      *win32.Proc
+	SetWaitableTimer                             *win32.Proc
+	SetWaitableTimerEx                           *win32.Proc
+	SignalObjectAndWait                          *win32.Proc
+	Sleep                                        *win32.Proc
+	SleepConditionVariableCS                     *win32.Proc
+	SleepConditionVariableSRW                    *win32.Proc
+	SleepEx                                      *win32.Proc
+	StartThreadpoolIo                            *win32.Proc
+	SubmitThreadpoolWork                         *win32.Proc
+	SuspendThread                                *win32.Proc
+	SwitchToFiber                                *win32.Proc
+	SwitchToThread                               *win32.Proc
+	TerminateProcess                             *win32.Proc
+	TerminateThread                              *win32.Proc
+	TlsAlloc                                     *win32.Proc
+	TlsFree                                      *win32.Proc
+	TlsGetValue                                  *win32.Proc
+	TlsGetValue2                                 *win32.Proc
+	TlsSetValue                                  *win32.Proc
+	TryAcquireSRWLockExclusive                   *win32.Proc
+	TryAcquireSRWLockShared                      *win32.Proc
+	TryEnterCriticalSection                      *win32.Proc
+	TrySubmitThreadpoolCallback                  *win32.Proc
+	UmsThreadYield                               *win32.Proc
+	UnregisterWait                               *win32.Proc
+	UnregisterWaitEx                             *win32.Proc
+	UpdateProcThreadAttribute                    *win32.Proc
+	WaitForInputIdle                             *win32.Proc
+	WaitForMultipleObjects                       *win32.Proc
+	WaitForMultipleObjectsEx                     *win32.Proc
+	WaitForSingleObject                          *win32.Proc
+	WaitForSingleObjectEx                        *win32.Proc
+	WaitForThreadpoolIoCallbacks                 *win32.Proc
+	WaitForThreadpoolTimerCallbacks              *win32.Proc
+	WaitForThreadpoolWaitCallbacks               *win32.Proc
+	WaitForThreadpoolWorkCallbacks               *win32.Proc
+	WaitOnAddress                                *win32.Proc
+	WakeAllConditionVariable                     *win32.Proc
+	WakeByAddressAll                             *win32.Proc
+	WakeByAddressSingle                          *win32.Proc
+	WakeConditionVariable                        *win32.Proc
+	WinExec                                      *win32.Proc
+	Wow64SetThreadDefaultGuestMachine            *win32.Proc
+	Wow64SuspendThread                           *win32.Proc
+}{
+	AcquireSRWLockExclusive:                      procAcquireSRWLockExclusive,
+	AcquireSRWLockShared:                         procAcquireSRWLockShared,
+	AddIntegrityLabelToBoundaryDescriptor:        procAddIntegrityLabelToBoundaryDescriptor,
+	AddSIDToBoundaryDescriptor:                   procAddSIDToBoundaryDescriptor,
+	AttachThreadInput:                            procAttachThreadInput,
+	AvQuerySystemResponsiveness:                  procAvQuerySystemResponsiveness,
+	AvRevertMmThreadCharacteristics:              procAvRevertMmThreadCharacteristics,
+	AvRtCreateThreadOrderingGroup:                procAvRtCreateThreadOrderingGroup,
+	AvRtCreateThreadOrderingGroupEx:              procAvRtCreateThreadOrderingGroupEx,
+	AvRtCreateThreadOrderingGroupExA:             procAvRtCreateThreadOrderingGroupExA,
+	AvRtDeleteThreadOrderingGroup:                procAvRtDeleteThreadOrderingGroup,
+	AvRtJoinThreadOrderingGroup:                  procAvRtJoinThreadOrderingGroup,
+	AvRtLeaveThreadOrderingGroup:                 procAvRtLeaveThreadOrderingGroup,
+	AvRtWaitOnThreadOrderingGroup:                procAvRtWaitOnThreadOrderingGroup,
+	AvSetMmMaxThreadCharacteristics:              procAvSetMmMaxThreadCharacteristics,
+	AvSetMmMaxThreadCharacteristicsA:             procAvSetMmMaxThreadCharacteristicsA,
+	AvSetMmThreadCharacteristics:                 procAvSetMmThreadCharacteristics,
+	AvSetMmThreadCharacteristicsA:                procAvSetMmThreadCharacteristicsA,
+	AvSetMmThreadPriority:                        procAvSetMmThreadPriority,
+	CallbackMayRunLong:                           procCallbackMayRunLong,
+	CancelThreadpoolIo:                           procCancelThreadpoolIo,
+	CancelTimerQueueTimer:                        procCancelTimerQueueTimer,
+	CancelWaitableTimer:                          procCancelWaitableTimer,
+	ChangeTimerQueueTimer:                        procChangeTimerQueueTimer,
+	ClosePrivateNamespace:                        procClosePrivateNamespace,
+	CloseThreadpool:                              procCloseThreadpool,
+	CloseThreadpoolCleanupGroup:                  procCloseThreadpoolCleanupGroup,
+	CloseThreadpoolCleanupGroupMembers:           procCloseThreadpoolCleanupGroupMembers,
+	CloseThreadpoolIo:                            procCloseThreadpoolIo,
+	CloseThreadpoolTimer:                         procCloseThreadpoolTimer,
+	CloseThreadpoolWait:                          procCloseThreadpoolWait,
+	CloseThreadpoolWork:                          procCloseThreadpoolWork,
+	ConvertFiberToThread:                         procConvertFiberToThread,
+	ConvertThreadToFiber:                         procConvertThreadToFiber,
+	ConvertThreadToFiberEx:                       procConvertThreadToFiberEx,
+	CreateBoundaryDescriptor:                     procCreateBoundaryDescriptor,
+	CreateBoundaryDescriptorA:                    procCreateBoundaryDescriptorA,
+	CreateEvent:                                  procCreateEvent,
+	CreateEventA:                                 procCreateEventA,
+	CreateEventEx:                                procCreateEventEx,
+	CreateEventExA:                               procCreateEventExA,
+	CreateFiber:                                  procCreateFiber,
+	CreateFiberEx:                                procCreateFiberEx,
+	CreateMutex:                                  procCreateMutex,
+	CreateMutexA:                                 procCreateMutexA,
+	CreateMutexEx:                                procCreateMutexEx,
+	CreateMutexExA:                               procCreateMutexExA,
+	CreatePrivateNamespace:                       procCreatePrivateNamespace,
+	CreatePrivateNamespaceA:                      procCreatePrivateNamespaceA,
+	CreateProcess:                                procCreateProcess,
+	CreateProcessA:                               procCreateProcessA,
+	CreateProcessAsUser:                          procCreateProcessAsUser,
+	CreateProcessAsUserA:                         procCreateProcessAsUserA,
+	CreateProcessWithLogonW:                      procCreateProcessWithLogonW,
+	CreateProcessWithTokenW:                      procCreateProcessWithTokenW,
+	CreateRemoteThread:                           procCreateRemoteThread,
+	CreateRemoteThreadEx:                         procCreateRemoteThreadEx,
+	CreateSemaphore:                              procCreateSemaphore,
+	CreateSemaphoreA:                             procCreateSemaphoreA,
+	CreateSemaphoreEx:                            procCreateSemaphoreEx,
+	CreateSemaphoreExA:                           procCreateSemaphoreExA,
+	CreateThread:                                 procCreateThread,
+	CreateThreadpool:                             procCreateThreadpool,
+	CreateThreadpoolCleanupGroup:                 procCreateThreadpoolCleanupGroup,
+	CreateThreadpoolIo:                           procCreateThreadpoolIo,
+	CreateThreadpoolTimer:                        procCreateThreadpoolTimer,
+	CreateThreadpoolWait:                         procCreateThreadpoolWait,
+	CreateThreadpoolWork:                         procCreateThreadpoolWork,
+	CreateTimerQueue:                             procCreateTimerQueue,
+	CreateTimerQueueTimer:                        procCreateTimerQueueTimer,
+	CreateUmsCompletionList:                      procCreateUmsCompletionList,
+	CreateUmsThreadContext:                       procCreateUmsThreadContext,
+	CreateWaitableTimer:                          procCreateWaitableTimer,
+	CreateWaitableTimerA:                         procCreateWaitableTimerA,
+	CreateWaitableTimerEx:                        procCreateWaitableTimerEx,
+	CreateWaitableTimerExA:                       procCreateWaitableTimerExA,
+	DeleteBoundaryDescriptor:                     procDeleteBoundaryDescriptor,
+	DeleteCriticalSection:                        procDeleteCriticalSection,
+	DeleteFiber:                                  procDeleteFiber,
+	DeleteProcThreadAttributeList:                procDeleteProcThreadAttributeList,
+	DeleteSynchronizationBarrier:                 procDeleteSynchronizationBarrier,
+	DeleteTimerQueue:                             procDeleteTimerQueue,
+	DeleteTimerQueueEx:                           procDeleteTimerQueueEx,
+	DeleteTimerQueueTimer:                        procDeleteTimerQueueTimer,
+	DeleteUmsCompletionList:                      procDeleteUmsCompletionList,
+	DeleteUmsThreadContext:                       procDeleteUmsThreadContext,
+	DequeueUmsCompletionListItems:                procDequeueUmsCompletionListItems,
+	DisassociateCurrentThreadFromCallback:        procDisassociateCurrentThreadFromCallback,
+	EnterCriticalSection:                         procEnterCriticalSection,
+	EnterSynchronizationBarrier:                  procEnterSynchronizationBarrier,
+	EnterUmsSchedulingMode:                       procEnterUmsSchedulingMode,
+	ExecuteUmsThread:                             procExecuteUmsThread,
+	ExitProcess:                                  procExitProcess,
+	ExitThread:                                   procExitThread,
+	FlsAlloc:                                     procFlsAlloc,
+	FlsFree:                                      procFlsFree,
+	FlsGetValue:                                  procFlsGetValue,
+	FlsGetValue2:                                 procFlsGetValue2,
+	FlsSetValue:                                  procFlsSetValue,
+	FlushProcessWriteBuffers:                     procFlushProcessWriteBuffers,
+	FreeLibraryWhenCallbackReturns:               procFreeLibraryWhenCallbackReturns,
+	GetActiveProcessorCount:                      procGetActiveProcessorCount,
+	GetActiveProcessorGroupCount:                 procGetActiveProcessorGroupCount,
+	GetCurrentProcess:                            procGetCurrentProcess,
+	GetCurrentProcessId:                          procGetCurrentProcessId,
+	GetCurrentProcessorNumber:                    procGetCurrentProcessorNumber,
+	GetCurrentProcessorNumberEx:                  procGetCurrentProcessorNumberEx,
+	GetCurrentThread:                             procGetCurrentThread,
+	GetCurrentThreadId:                           procGetCurrentThreadId,
+	GetCurrentThreadStackLimits:                  procGetCurrentThreadStackLimits,
+	GetCurrentUmsThread:                          procGetCurrentUmsThread,
+	GetExitCodeProcess:                           procGetExitCodeProcess,
+	GetExitCodeThread:                            procGetExitCodeThread,
+	GetGuiResources:                              procGetGuiResources,
+	GetMachineTypeAttributes:                     procGetMachineTypeAttributes,
+	GetMaximumProcessorCount:                     procGetMaximumProcessorCount,
+	GetMaximumProcessorGroupCount:                procGetMaximumProcessorGroupCount,
+	GetNextUmsListItem:                           procGetNextUmsListItem,
+	GetNumaAvailableMemoryNode:                   procGetNumaAvailableMemoryNode,
+	GetNumaAvailableMemoryNodeEx:                 procGetNumaAvailableMemoryNodeEx,
+	GetNumaHighestNodeNumber:                     procGetNumaHighestNodeNumber,
+	GetNumaNodeNumberFromHandle:                  procGetNumaNodeNumberFromHandle,
+	GetNumaNodeProcessorMask:                     procGetNumaNodeProcessorMask,
+	GetNumaNodeProcessorMask2:                    procGetNumaNodeProcessorMask2,
+	GetNumaNodeProcessorMaskEx:                   procGetNumaNodeProcessorMaskEx,
+	GetNumaProcessorNode:                         procGetNumaProcessorNode,
+	GetNumaProcessorNodeEx:                       procGetNumaProcessorNodeEx,
+	GetNumaProximityNode:                         procGetNumaProximityNode,
+	GetNumaProximityNodeEx:                       procGetNumaProximityNodeEx,
+	GetPriorityClass:                             procGetPriorityClass,
+	GetProcessAffinityMask:                       procGetProcessAffinityMask,
+	GetProcessDEPPolicy:                          procGetProcessDEPPolicy,
+	GetProcessDefaultCpuSetMasks:                 procGetProcessDefaultCpuSetMasks,
+	GetProcessDefaultCpuSets:                     procGetProcessDefaultCpuSets,
+	GetProcessGroupAffinity:                      procGetProcessGroupAffinity,
+	GetProcessHandleCount:                        procGetProcessHandleCount,
+	GetProcessHandleFromHwnd:                     procGetProcessHandleFromHwnd,
+	GetProcessId:                                 procGetProcessId,
+	GetProcessIdOfThread:                         procGetProcessIdOfThread,
+	GetProcessInformation:                        procGetProcessInformation,
+	GetProcessIoCounters:                         procGetProcessIoCounters,
+	GetProcessMitigationPolicy:                   procGetProcessMitigationPolicy,
+	GetProcessPriorityBoost:                      procGetProcessPriorityBoost,
+	GetProcessShutdownParameters:                 procGetProcessShutdownParameters,
+	GetProcessTimes:                              procGetProcessTimes,
+	GetProcessVersion:                            procGetProcessVersion,
+	GetProcessWorkingSetSize:                     procGetProcessWorkingSetSize,
+	GetStartupInfo:                               procGetStartupInfo,
+	GetStartupInfoA:                              procGetStartupInfoA,
+	GetSystemTimes:                               procGetSystemTimes,
+	GetThreadDescription:                         procGetThreadDescription,
+	GetThreadGroupAffinity:                       procGetThreadGroupAffinity,
+	GetThreadIOPendingFlag:                       procGetThreadIOPendingFlag,
+	GetThreadId:                                  procGetThreadId,
+	GetThreadIdealProcessorEx:                    procGetThreadIdealProcessorEx,
+	GetThreadInformation:                         procGetThreadInformation,
+	GetThreadPriority:                            procGetThreadPriority,
+	GetThreadPriorityBoost:                       procGetThreadPriorityBoost,
+	GetThreadSelectedCpuSetMasks:                 procGetThreadSelectedCpuSetMasks,
+	GetThreadSelectedCpuSets:                     procGetThreadSelectedCpuSets,
+	GetThreadTimes:                               procGetThreadTimes,
+	GetUmsCompletionListEvent:                    procGetUmsCompletionListEvent,
+	GetUmsSystemThreadInformation:                procGetUmsSystemThreadInformation,
+	InitOnceBeginInitialize:                      procInitOnceBeginInitialize,
+	InitOnceComplete:                             procInitOnceComplete,
+	InitOnceExecuteOnce:                          procInitOnceExecuteOnce,
+	InitOnceInitialize:                           procInitOnceInitialize,
+	InitializeConditionVariable:                  procInitializeConditionVariable,
+	InitializeCriticalSection:                    procInitializeCriticalSection,
+	InitializeCriticalSectionAndSpinCount:        procInitializeCriticalSectionAndSpinCount,
+	InitializeCriticalSectionEx:                  procInitializeCriticalSectionEx,
+	InitializeProcThreadAttributeList:            procInitializeProcThreadAttributeList,
+	InitializeSListHead:                          procInitializeSListHead,
+	InitializeSRWLock:                            procInitializeSRWLock,
+	InitializeSynchronizationBarrier:             procInitializeSynchronizationBarrier,
+	InterlockedFlushSList:                        procInterlockedFlushSList,
+	InterlockedPopEntrySList:                     procInterlockedPopEntrySList,
+	InterlockedPushEntrySList:                    procInterlockedPushEntrySList,
+	InterlockedPushListSListEx:                   procInterlockedPushListSListEx,
+	IsImmersiveProcess:                           procIsImmersiveProcess,
+	IsProcessCritical:                            procIsProcessCritical,
+	IsProcessorFeaturePresent:                    procIsProcessorFeaturePresent,
+	IsThreadAFiber:                               procIsThreadAFiber,
+	IsThreadpoolTimerSet:                         procIsThreadpoolTimerSet,
+	IsWow64Process:                               procIsWow64Process,
+	IsWow64Process2:                              procIsWow64Process2,
+	LeaveCriticalSection:                         procLeaveCriticalSection,
+	LeaveCriticalSectionWhenCallbackReturns:      procLeaveCriticalSectionWhenCallbackReturns,
+	OpenEvent:                                    procOpenEvent,
+	OpenEventA:                                   procOpenEventA,
+	OpenMutex:                                    procOpenMutex,
+	OpenPrivateNamespace:                         procOpenPrivateNamespace,
+	OpenPrivateNamespaceA:                        procOpenPrivateNamespaceA,
+	OpenProcess:                                  procOpenProcess,
+	OpenProcessToken:                             procOpenProcessToken,
+	OpenSemaphore:                                procOpenSemaphore,
+	OpenThread:                                   procOpenThread,
+	OpenThreadToken:                              procOpenThreadToken,
+	OpenWaitableTimer:                            procOpenWaitableTimer,
+	OpenWaitableTimerA:                           procOpenWaitableTimerA,
+	PulseEvent:                                   procPulseEvent,
+	QueryDepthSList:                              procQueryDepthSList,
+	QueryFullProcessImageName:                    procQueryFullProcessImageName,
+	QueryFullProcessImageNameA:                   procQueryFullProcessImageNameA,
+	QueryProcessAffinityUpdateMode:               procQueryProcessAffinityUpdateMode,
+	QueryProtectedPolicy:                         procQueryProtectedPolicy,
+	QueryThreadpoolStackInformation:              procQueryThreadpoolStackInformation,
+	QueryUmsThreadInformation:                    procQueryUmsThreadInformation,
+	QueueUserAPC:                                 procQueueUserAPC,
+	QueueUserAPC2:                                procQueueUserAPC2,
+	QueueUserWorkItem:                            procQueueUserWorkItem,
+	RegisterWaitForSingleObject:                  procRegisterWaitForSingleObject,
+	ReleaseMutex:                                 procReleaseMutex,
+	ReleaseMutexWhenCallbackReturns:              procReleaseMutexWhenCallbackReturns,
+	ReleaseSRWLockExclusive:                      procReleaseSRWLockExclusive,
+	ReleaseSRWLockShared:                         procReleaseSRWLockShared,
+	ReleaseSemaphore:                             procReleaseSemaphore,
+	ReleaseSemaphoreWhenCallbackReturns:          procReleaseSemaphoreWhenCallbackReturns,
+	ResetEvent:                                   procResetEvent,
+	ResumeThread:                                 procResumeThread,
+	RtwqAddPeriodicCallback:                      procRtwqAddPeriodicCallback,
+	RtwqAllocateSerialWorkQueue:                  procRtwqAllocateSerialWorkQueue,
+	RtwqAllocateWorkQueue:                        procRtwqAllocateWorkQueue,
+	RtwqBeginRegisterWorkQueueWithMMCSS:          procRtwqBeginRegisterWorkQueueWithMMCSS,
+	RtwqBeginUnregisterWorkQueueWithMMCSS:        procRtwqBeginUnregisterWorkQueueWithMMCSS,
+	RtwqCancelDeadline:                           procRtwqCancelDeadline,
+	RtwqCancelWorkItem:                           procRtwqCancelWorkItem,
+	RtwqCreateAsyncResult:                        procRtwqCreateAsyncResult,
+	RtwqEndRegisterWorkQueueWithMMCSS:            procRtwqEndRegisterWorkQueueWithMMCSS,
+	RtwqGetWorkQueueMMCSSClass:                   procRtwqGetWorkQueueMMCSSClass,
+	RtwqGetWorkQueueMMCSSPriority:                procRtwqGetWorkQueueMMCSSPriority,
+	RtwqGetWorkQueueMMCSSTaskId:                  procRtwqGetWorkQueueMMCSSTaskId,
+	RtwqInvokeCallback:                           procRtwqInvokeCallback,
+	RtwqJoinWorkQueue:                            procRtwqJoinWorkQueue,
+	RtwqLockPlatform:                             procRtwqLockPlatform,
+	RtwqLockSharedWorkQueue:                      procRtwqLockSharedWorkQueue,
+	RtwqLockWorkQueue:                            procRtwqLockWorkQueue,
+	RtwqPutWaitingWorkItem:                       procRtwqPutWaitingWorkItem,
+	RtwqPutWorkItem:                              procRtwqPutWorkItem,
+	RtwqRegisterPlatformEvents:                   procRtwqRegisterPlatformEvents,
+	RtwqRegisterPlatformWithMMCSS:                procRtwqRegisterPlatformWithMMCSS,
+	RtwqRemovePeriodicCallback:                   procRtwqRemovePeriodicCallback,
+	RtwqScheduleWorkItem:                         procRtwqScheduleWorkItem,
+	RtwqSetDeadline:                              procRtwqSetDeadline,
+	RtwqSetDeadline2:                             procRtwqSetDeadline2,
+	RtwqSetLongRunning:                           procRtwqSetLongRunning,
+	RtwqShutdown:                                 procRtwqShutdown,
+	RtwqStartup:                                  procRtwqStartup,
+	RtwqUnjoinWorkQueue:                          procRtwqUnjoinWorkQueue,
+	RtwqUnlockPlatform:                           procRtwqUnlockPlatform,
+	RtwqUnlockWorkQueue:                          procRtwqUnlockWorkQueue,
+	RtwqUnregisterPlatformEvents:                 procRtwqUnregisterPlatformEvents,
+	RtwqUnregisterPlatformFromMMCSS:              procRtwqUnregisterPlatformFromMMCSS,
+	SetCriticalSectionSpinCount:                  procSetCriticalSectionSpinCount,
+	SetEvent:                                     procSetEvent,
+	SetEventWhenCallbackReturns:                  procSetEventWhenCallbackReturns,
+	SetPriorityClass:                             procSetPriorityClass,
+	SetProcessAffinityMask:                       procSetProcessAffinityMask,
+	SetProcessAffinityUpdateMode:                 procSetProcessAffinityUpdateMode,
+	SetProcessDEPPolicy:                          procSetProcessDEPPolicy,
+	SetProcessDefaultCpuSetMasks:                 procSetProcessDefaultCpuSetMasks,
+	SetProcessDefaultCpuSets:                     procSetProcessDefaultCpuSets,
+	SetProcessDynamicEHContinuationTargets:       procSetProcessDynamicEHContinuationTargets,
+	SetProcessDynamicEnforcedCetCompatibleRanges: procSetProcessDynamicEnforcedCetCompatibleRanges,
+	SetProcessInformation:                        procSetProcessInformation,
+	SetProcessMitigationPolicy:                   procSetProcessMitigationPolicy,
+	SetProcessPriorityBoost:                      procSetProcessPriorityBoost,
+	SetProcessRestrictionExemption:               procSetProcessRestrictionExemption,
+	SetProcessShutdownParameters:                 procSetProcessShutdownParameters,
+	SetProcessWorkingSetSize:                     procSetProcessWorkingSetSize,
+	SetProtectedPolicy:                           procSetProtectedPolicy,
+	SetThreadAffinityMask:                        procSetThreadAffinityMask,
+	SetThreadDescription:                         procSetThreadDescription,
+	SetThreadGroupAffinity:                       procSetThreadGroupAffinity,
+	SetThreadIdealProcessor:                      procSetThreadIdealProcessor,
+	SetThreadIdealProcessorEx:                    procSetThreadIdealProcessorEx,
+	SetThreadInformation:                         procSetThreadInformation,
+	SetThreadPriority:                            procSetThreadPriority,
+	SetThreadPriorityBoost:                       procSetThreadPriorityBoost,
+	SetThreadSelectedCpuSetMasks:                 procSetThreadSelectedCpuSetMasks,
+	SetThreadSelectedCpuSets:                     procSetThreadSelectedCpuSets,
+	SetThreadStackGuarantee:                      procSetThreadStackGuarantee,
+	SetThreadToken:                               procSetThreadToken,
+	SetThreadpoolStackInformation:                procSetThreadpoolStackInformation,
+	SetThreadpoolThreadMaximum:                   procSetThreadpoolThreadMaximum,
+	SetThreadpoolThreadMinimum:                   procSetThreadpoolThreadMinimum,
+	SetThreadpoolTimer:                           procSetThreadpoolTimer,
+	SetThreadpoolTimerEx:                         procSetThreadpoolTimerEx,
+	SetThreadpoolWait:                            procSetThreadpoolWait,
+	SetThreadpoolWaitEx:                          procSetThreadpoolWaitEx,
+	SetTimerQueueTimer:                           procSetTimerQueueTimer,
+	SetUmsThreadInformation:                      procSetUmsThreadInformation,
+	SetWaitableTimer:                             procSetWaitableTimer,
+	SetWaitableTimerEx:                           procSetWaitableTimerEx,
+	SignalObjectAndWait:                          procSignalObjectAndWait,
+	Sleep:                                        procSleep,
+	SleepConditionVariableCS:                     procSleepConditionVariableCS,
+	SleepConditionVariableSRW:                    procSleepConditionVariableSRW,
+	SleepEx:                                      procSleepEx,
+	StartThreadpoolIo:                            procStartThreadpoolIo,
+	SubmitThreadpoolWork:                         procSubmitThreadpoolWork,
+	SuspendThread:                                procSuspendThread,
+	SwitchToFiber:                                procSwitchToFiber,
+	SwitchToThread:                               procSwitchToThread,
+	TerminateProcess:                             procTerminateProcess,
+	TerminateThread:                              procTerminateThread,
+	TlsAlloc:                                     procTlsAlloc,
+	TlsFree:                                      procTlsFree,
+	TlsGetValue:                                  procTlsGetValue,
+	TlsGetValue2:                                 procTlsGetValue2,
+	TlsSetValue:                                  procTlsSetValue,
+	TryAcquireSRWLockExclusive:                   procTryAcquireSRWLockExclusive,
+	TryAcquireSRWLockShared:                      procTryAcquireSRWLockShared,
+	TryEnterCriticalSection:                      procTryEnterCriticalSection,
+	TrySubmitThreadpoolCallback:                  procTrySubmitThreadpoolCallback,
+	UmsThreadYield:                               procUmsThreadYield,
+	UnregisterWait:                               procUnregisterWait,
+	UnregisterWaitEx:                             procUnregisterWaitEx,
+	UpdateProcThreadAttribute:                    procUpdateProcThreadAttribute,
+	WaitForInputIdle:                             procWaitForInputIdle,
+	WaitForMultipleObjects:                       procWaitForMultipleObjects,
+	WaitForMultipleObjectsEx:                     procWaitForMultipleObjectsEx,
+	WaitForSingleObject:                          procWaitForSingleObject,
+	WaitForSingleObjectEx:                        procWaitForSingleObjectEx,
+	WaitForThreadpoolIoCallbacks:                 procWaitForThreadpoolIoCallbacks,
+	WaitForThreadpoolTimerCallbacks:              procWaitForThreadpoolTimerCallbacks,
+	WaitForThreadpoolWaitCallbacks:               procWaitForThreadpoolWaitCallbacks,
+	WaitForThreadpoolWorkCallbacks:               procWaitForThreadpoolWorkCallbacks,
+	WaitOnAddress:                                procWaitOnAddress,
+	WakeAllConditionVariable:                     procWakeAllConditionVariable,
+	WakeByAddressAll:                             procWakeByAddressAll,
+	WakeByAddressSingle:                          procWakeByAddressSingle,
+	WakeConditionVariable:                        procWakeConditionVariable,
+	WinExec:                                      procWinExec,
+	Wow64SetThreadDefaultGuestMachine:            procWow64SetThreadDefaultGuestMachine,
+	Wow64SuspendThread:                           procWow64SuspendThread,
+}
 
 // AcquireSRWLockExclusive calls KERNEL32!AcquireSRWLockExclusive.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-acquiresrwlockexclusive
@@ -740,10 +1416,10 @@ func CreateBoundaryDescriptorA(Name foundation.PSTR, Flags uint32) (foundation.H
 // CreateEvent calls KERNEL32!CreateEventW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventw
 // Minimum OS: windows5.1.2600.
-func CreateEvent(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, bInitialState bool, lpName string) (foundation.HANDLE, error) {
+func CreateEvent(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, bInitialState bool, lpName *string) (foundation.HANDLE, error) {
 	_bManualReset := win32.Bool32(bManualReset)
 	_bInitialState := win32.Bool32(bInitialState)
-	_lpName := win32.UTF16Ptr(lpName)
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateEvent.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(_bManualReset), uintptr(_bInitialState), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -769,8 +1445,8 @@ func CreateEventA(lpEventAttributes *security.SECURITY_ATTRIBUTES, bManualReset 
 // CreateEventEx calls KERNEL32!CreateEventExW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createeventexw
 // Minimum OS: windows6.0.6000.
-func CreateEventEx(lpEventAttributes *security.SECURITY_ATTRIBUTES, lpName string, dwFlags CREATE_EVENT, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateEventEx(lpEventAttributes *security.SECURITY_ATTRIBUTES, lpName *string, dwFlags CREATE_EVENT, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateEventEx.Addr(), uintptr(unsafe.Pointer(lpEventAttributes)), uintptr(unsafe.Pointer(_lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -818,9 +1494,9 @@ func CreateFiberEx(dwStackCommitSize uintptr, dwStackReserveSize uintptr, dwFlag
 // CreateMutex calls KERNEL32!CreateMutexW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createmutexw
 // Minimum OS: windows5.1.2600.
-func CreateMutex(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner bool, lpName string) (foundation.HANDLE, error) {
+func CreateMutex(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner bool, lpName *string) (foundation.HANDLE, error) {
 	_bInitialOwner := win32.Bool32(bInitialOwner)
-	_lpName := win32.UTF16Ptr(lpName)
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateMutex.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(_bInitialOwner), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -845,8 +1521,8 @@ func CreateMutexA(lpMutexAttributes *security.SECURITY_ATTRIBUTES, bInitialOwner
 // CreateMutexEx calls KERNEL32!CreateMutexExW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createmutexexw
 // Minimum OS: windows6.0.6000.
-func CreateMutexEx(lpMutexAttributes *security.SECURITY_ATTRIBUTES, lpName string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateMutexEx(lpMutexAttributes *security.SECURITY_ATTRIBUTES, lpName *string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateMutexEx.Addr(), uintptr(unsafe.Pointer(lpMutexAttributes)), uintptr(unsafe.Pointer(_lpName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -890,10 +1566,10 @@ func CreatePrivateNamespaceA(lpPrivateNamespaceAttributes *security.SECURITY_ATT
 // CreateProcess calls KERNEL32!CreateProcessW.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw
 // Minimum OS: windows5.1.2600.
-func CreateProcess(lpApplicationName string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
+func CreateProcess(lpApplicationName *string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory *string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpApplicationName := win32.UTF16PtrOrNil(lpApplicationName)
 	_bInheritHandles := win32.Bool32(bInheritHandles)
-	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	_lpCurrentDirectory := win32.UTF16PtrOrNil(lpCurrentDirectory)
 	r1, _, e1 := syscall.SyscallN(procCreateProcess.Addr(), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(_bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -916,10 +1592,10 @@ func CreateProcessA(lpApplicationName foundation.PSTR, lpCommandLine foundation.
 // CreateProcessAsUser calls ADVAPI32!CreateProcessAsUserW.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessasuserw
 // Minimum OS: windows5.1.2600.
-func CreateProcessAsUser(hToken foundation.HANDLE, lpApplicationName string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
+func CreateProcessAsUser(hToken foundation.HANDLE, lpApplicationName *string, lpCommandLine foundation.PWSTR, lpProcessAttributes *security.SECURITY_ATTRIBUTES, lpThreadAttributes *security.SECURITY_ATTRIBUTES, bInheritHandles bool, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory *string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpApplicationName := win32.UTF16PtrOrNil(lpApplicationName)
 	_bInheritHandles := win32.Bool32(bInheritHandles)
-	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	_lpCurrentDirectory := win32.UTF16PtrOrNil(lpCurrentDirectory)
 	r1, _, e1 := syscall.SyscallN(procCreateProcessAsUser.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(unsafe.Pointer(lpProcessAttributes)), uintptr(unsafe.Pointer(lpThreadAttributes)), uintptr(_bInheritHandles), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -942,12 +1618,12 @@ func CreateProcessAsUserA(hToken foundation.HANDLE, lpApplicationName foundation
 // CreateProcessWithLogonW calls ADVAPI32!CreateProcessWithLogonW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createprocesswithlogonw
 // Minimum OS: windows5.1.2600.
-func CreateProcessWithLogonW(lpUsername string, lpDomain string, lpPassword string, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+func CreateProcessWithLogonW(lpUsername string, lpDomain *string, lpPassword string, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName *string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory *string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
 	_lpUsername := win32.UTF16Ptr(lpUsername)
-	_lpDomain := win32.UTF16Ptr(lpDomain)
+	_lpDomain := win32.UTF16PtrOrNil(lpDomain)
 	_lpPassword := win32.UTF16Ptr(lpPassword)
-	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
-	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+	_lpApplicationName := win32.UTF16PtrOrNil(lpApplicationName)
+	_lpCurrentDirectory := win32.UTF16PtrOrNil(lpCurrentDirectory)
 	r1, _, e1 := syscall.SyscallN(procCreateProcessWithLogonW.Addr(), uintptr(unsafe.Pointer(_lpUsername)), uintptr(unsafe.Pointer(_lpDomain)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(dwLogonFlags), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -958,9 +1634,9 @@ func CreateProcessWithLogonW(lpUsername string, lpDomain string, lpPassword stri
 // CreateProcessWithTokenW calls ADVAPI32!CreateProcessWithTokenW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createprocesswithtokenw
 // Minimum OS: windows6.0.6000.
-func CreateProcessWithTokenW(hToken foundation.HANDLE, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
-	_lpApplicationName := win32.UTF16Ptr(lpApplicationName)
-	_lpCurrentDirectory := win32.UTF16Ptr(lpCurrentDirectory)
+func CreateProcessWithTokenW(hToken foundation.HANDLE, dwLogonFlags CREATE_PROCESS_LOGON_FLAGS, lpApplicationName *string, lpCommandLine foundation.PWSTR, dwCreationFlags PROCESS_CREATION_FLAGS, lpEnvironment unsafe.Pointer, lpCurrentDirectory *string, lpStartupInfo *STARTUPINFOW, lpProcessInformation *PROCESS_INFORMATION) error {
+	_lpApplicationName := win32.UTF16PtrOrNil(lpApplicationName)
+	_lpCurrentDirectory := win32.UTF16PtrOrNil(lpCurrentDirectory)
 	r1, _, e1 := syscall.SyscallN(procCreateProcessWithTokenW.Addr(), uintptr(hToken), uintptr(dwLogonFlags), uintptr(unsafe.Pointer(_lpApplicationName)), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(dwCreationFlags), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(unsafe.Pointer(_lpCurrentDirectory)), uintptr(unsafe.Pointer(lpStartupInfo)), uintptr(unsafe.Pointer(lpProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -995,8 +1671,8 @@ func CreateRemoteThreadEx(hProcess foundation.HANDLE, lpThreadAttributes *securi
 // CreateSemaphore calls KERNEL32!CreateSemaphoreW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createsemaphorew
 // Minimum OS: windows5.1.2600.
-func CreateSemaphore(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName string) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateSemaphore(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName *string) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateSemaphore.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1020,8 +1696,8 @@ func CreateSemaphoreA(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInit
 // CreateSemaphoreEx calls KERNEL32!CreateSemaphoreExW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createsemaphoreexw
 // Minimum OS: windows6.0.6000.
-func CreateSemaphoreEx(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName string, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateSemaphoreEx(lpSemaphoreAttributes *security.SECURITY_ATTRIBUTES, lInitialCount int32, lMaximumCount int32, lpName *string, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateSemaphoreEx.Addr(), uintptr(unsafe.Pointer(lpSemaphoreAttributes)), uintptr(lInitialCount), uintptr(lMaximumCount), uintptr(unsafe.Pointer(_lpName)), 0, uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1168,9 +1844,9 @@ func CreateUmsThreadContext(lpUmsThread *unsafe.Pointer) error {
 // CreateWaitableTimer calls KERNEL32!CreateWaitableTimerW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createwaitabletimerw
 // Minimum OS: windows5.1.2600.
-func CreateWaitableTimer(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, lpTimerName string) (foundation.HANDLE, error) {
+func CreateWaitableTimer(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManualReset bool, lpTimerName *string) (foundation.HANDLE, error) {
 	_bManualReset := win32.Bool32(bManualReset)
-	_lpTimerName := win32.UTF16Ptr(lpTimerName)
+	_lpTimerName := win32.UTF16PtrOrNil(lpTimerName)
 	r1, _, e1 := syscall.SyscallN(procCreateWaitableTimer.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(_bManualReset), uintptr(unsafe.Pointer(_lpTimerName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1190,8 +1866,8 @@ func CreateWaitableTimerA(lpTimerAttributes *security.SECURITY_ATTRIBUTES, bManu
 // CreateWaitableTimerEx calls KERNEL32!CreateWaitableTimerExW.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-createwaitabletimerexw
 // Minimum OS: windows6.0.6000.
-func CreateWaitableTimerEx(lpTimerAttributes *security.SECURITY_ATTRIBUTES, lpTimerName string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
-	_lpTimerName := win32.UTF16Ptr(lpTimerName)
+func CreateWaitableTimerEx(lpTimerAttributes *security.SECURITY_ATTRIBUTES, lpTimerName *string, dwFlags uint32, dwDesiredAccess uint32) (foundation.HANDLE, error) {
+	_lpTimerName := win32.UTF16PtrOrNil(lpTimerName)
 	r1, _, e1 := syscall.SyscallN(procCreateWaitableTimerEx.Addr(), uintptr(unsafe.Pointer(lpTimerAttributes)), uintptr(unsafe.Pointer(_lpTimerName)), uintptr(dwFlags), uintptr(dwDesiredAccess))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1467,11 +2143,10 @@ func GetCurrentProcessId() uint32 {
 	return uint32(r1)
 }
 
-// GetCurrentProcessToken calls FORCEINLINE!GetCurrentProcessToken.
+// GetCurrentProcessToken is a header inline, not a DLL export: it evaluates to the constant -4.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentprocesstoken
 func GetCurrentProcessToken() foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procGetCurrentProcessToken.Addr())
-	return foundation.HANDLE(r1)
+	return ^foundation.HANDLE(3)
 }
 
 // GetCurrentProcessorNumber calls KERNEL32!GetCurrentProcessorNumber.
@@ -1497,11 +2172,10 @@ func GetCurrentThread() foundation.HANDLE {
 	return foundation.HANDLE(r1)
 }
 
-// GetCurrentThreadEffectiveToken calls FORCEINLINE!GetCurrentThreadEffectiveToken.
+// GetCurrentThreadEffectiveToken is a header inline, not a DLL export: it evaluates to the constant -6.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentthreadeffectivetoken
 func GetCurrentThreadEffectiveToken() foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procGetCurrentThreadEffectiveToken.Addr())
-	return foundation.HANDLE(r1)
+	return ^foundation.HANDLE(5)
 }
 
 // GetCurrentThreadId calls KERNEL32!GetCurrentThreadId.
@@ -1519,11 +2193,10 @@ func GetCurrentThreadStackLimits(LowLimit *uintptr, HighLimit *uintptr) {
 	syscall.SyscallN(procGetCurrentThreadStackLimits.Addr(), uintptr(unsafe.Pointer(LowLimit)), uintptr(unsafe.Pointer(HighLimit)))
 }
 
-// GetCurrentThreadToken calls FORCEINLINE!GetCurrentThreadToken.
+// GetCurrentThreadToken is a header inline, not a DLL export: it evaluates to the constant -5.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getcurrentthreadtoken
 func GetCurrentThreadToken() foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procGetCurrentThreadToken.Addr())
-	return foundation.HANDLE(r1)
+	return ^foundation.HANDLE(4)
 }
 
 // GetCurrentUmsThread calls KERNEL32!GetCurrentUmsThread.

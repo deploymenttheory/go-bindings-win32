@@ -35,6 +35,38 @@ var (
 	procD3DX11CreateSegmentedScan     = modd3dcsx.NewProc("D3DX11CreateSegmentedScan")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	D3D11CreateDevice             *win32.Proc
+	D3D11CreateDeviceAndSwapChain *win32.Proc
+	D3DDisassemble11Trace         *win32.Proc
+	D3DX11CreateFFT               *win32.Proc
+	D3DX11CreateFFT1DComplex      *win32.Proc
+	D3DX11CreateFFT1DReal         *win32.Proc
+	D3DX11CreateFFT2DComplex      *win32.Proc
+	D3DX11CreateFFT2DReal         *win32.Proc
+	D3DX11CreateFFT3DComplex      *win32.Proc
+	D3DX11CreateFFT3DReal         *win32.Proc
+	D3DX11CreateScan              *win32.Proc
+	D3DX11CreateSegmentedScan     *win32.Proc
+}{
+	D3D11CreateDevice:             procD3D11CreateDevice,
+	D3D11CreateDeviceAndSwapChain: procD3D11CreateDeviceAndSwapChain,
+	D3DDisassemble11Trace:         procD3DDisassemble11Trace,
+	D3DX11CreateFFT:               procD3DX11CreateFFT,
+	D3DX11CreateFFT1DComplex:      procD3DX11CreateFFT1DComplex,
+	D3DX11CreateFFT1DReal:         procD3DX11CreateFFT1DReal,
+	D3DX11CreateFFT2DComplex:      procD3DX11CreateFFT2DComplex,
+	D3DX11CreateFFT2DReal:         procD3DX11CreateFFT2DReal,
+	D3DX11CreateFFT3DComplex:      procD3DX11CreateFFT3DComplex,
+	D3DX11CreateFFT3DReal:         procD3DX11CreateFFT3DReal,
+	D3DX11CreateScan:              procD3DX11CreateScan,
+	D3DX11CreateSegmentedScan:     procD3DX11CreateSegmentedScan,
+}
+
 // D3D11CreateDevice calls d3d11!D3D11CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d3d11/nf-d3d11-d3d11createdevice
 func D3D11CreateDevice(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType graphicsdirect3d.D3D_DRIVER_TYPE, Software foundation.HMODULE, Flags D3D11_CREATE_DEVICE_FLAG, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, ppDevice **ID3D11Device, pFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppImmediateContext **ID3D11DeviceContext) error {

@@ -4,18 +4,22 @@
 
 package activedirectory
 
-// LPCQADDFORMSPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.LPARAM, *CQFORM) foundation.HRESULT.
+// LPCQADDFORMSPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.LPARAM, *CQFORM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPCQADDFORMSPROC uintptr
 
-// LPCQADDPAGESPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.LPARAM, *win32.GUID, *CQPAGE) foundation.HRESULT.
+// LPCQADDPAGESPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.LPARAM, *win32.GUID, *CQPAGE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPCQADDPAGESPROC uintptr
 
-// LPCQPAGEPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CQPAGE, foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) foundation.HRESULT.
+// LPCQPAGEPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CQPAGE, foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPCQPAGEPROC uintptr
 
-// LPDSENUMATTRIBUTES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.LPARAM, foundation.PWSTR, foundation.PWSTR, uint32) foundation.HRESULT.
+// LPDSENUMATTRIBUTES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.LPARAM, foundation.PWSTR, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDSENUMATTRIBUTES uintptr

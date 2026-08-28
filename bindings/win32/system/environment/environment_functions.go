@@ -64,6 +64,98 @@ var (
 	procTerminateEnclave                       = modvertdll.NewProc("TerminateEnclave")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CallEnclave                            *win32.Proc
+	CreateEnclave                          *win32.Proc
+	CreateEnvironmentBlock                 *win32.Proc
+	DeleteEnclave                          *win32.Proc
+	DestroyEnvironmentBlock                *win32.Proc
+	EnclaveCopyIntoEnclave                 *win32.Proc
+	EnclaveCopyOutOfEnclave                *win32.Proc
+	EnclaveEncryptDataForTrustlet          *win32.Proc
+	EnclaveGetAttestationReport            *win32.Proc
+	EnclaveGetEnclaveInformation           *win32.Proc
+	EnclaveRestrictContainingProcessAccess *win32.Proc
+	EnclaveSealData                        *win32.Proc
+	EnclaveUnsealData                      *win32.Proc
+	EnclaveUsesAttestedKeys                *win32.Proc
+	EnclaveVerifyAttestationReport         *win32.Proc
+	ExpandEnvironmentStrings               *win32.Proc
+	ExpandEnvironmentStringsA              *win32.Proc
+	ExpandEnvironmentStringsForUser        *win32.Proc
+	ExpandEnvironmentStringsForUserA       *win32.Proc
+	FreeEnvironmentStrings                 *win32.Proc
+	FreeEnvironmentStringsA                *win32.Proc
+	GetCommandLine                         *win32.Proc
+	GetCommandLineA                        *win32.Proc
+	GetCurrentDirectory                    *win32.Proc
+	GetCurrentDirectoryA                   *win32.Proc
+	GetEnvironmentStrings                  *win32.Proc
+	GetEnvironmentStringsW                 *win32.Proc
+	GetEnvironmentVariable                 *win32.Proc
+	GetEnvironmentVariableA                *win32.Proc
+	InitializeEnclave                      *win32.Proc
+	IsEnclaveTypeSupported                 *win32.Proc
+	LoadEnclaveData                        *win32.Proc
+	LoadEnclaveImage                       *win32.Proc
+	LoadEnclaveImageA                      *win32.Proc
+	NeedCurrentDirectoryForExePath         *win32.Proc
+	NeedCurrentDirectoryForExePathA        *win32.Proc
+	SetCurrentDirectory                    *win32.Proc
+	SetCurrentDirectoryA                   *win32.Proc
+	SetEnvironmentStrings                  *win32.Proc
+	SetEnvironmentVariable                 *win32.Proc
+	SetEnvironmentVariableA                *win32.Proc
+	TerminateEnclave                       *win32.Proc
+}{
+	CallEnclave:                            procCallEnclave,
+	CreateEnclave:                          procCreateEnclave,
+	CreateEnvironmentBlock:                 procCreateEnvironmentBlock,
+	DeleteEnclave:                          procDeleteEnclave,
+	DestroyEnvironmentBlock:                procDestroyEnvironmentBlock,
+	EnclaveCopyIntoEnclave:                 procEnclaveCopyIntoEnclave,
+	EnclaveCopyOutOfEnclave:                procEnclaveCopyOutOfEnclave,
+	EnclaveEncryptDataForTrustlet:          procEnclaveEncryptDataForTrustlet,
+	EnclaveGetAttestationReport:            procEnclaveGetAttestationReport,
+	EnclaveGetEnclaveInformation:           procEnclaveGetEnclaveInformation,
+	EnclaveRestrictContainingProcessAccess: procEnclaveRestrictContainingProcessAccess,
+	EnclaveSealData:                        procEnclaveSealData,
+	EnclaveUnsealData:                      procEnclaveUnsealData,
+	EnclaveUsesAttestedKeys:                procEnclaveUsesAttestedKeys,
+	EnclaveVerifyAttestationReport:         procEnclaveVerifyAttestationReport,
+	ExpandEnvironmentStrings:               procExpandEnvironmentStrings,
+	ExpandEnvironmentStringsA:              procExpandEnvironmentStringsA,
+	ExpandEnvironmentStringsForUser:        procExpandEnvironmentStringsForUser,
+	ExpandEnvironmentStringsForUserA:       procExpandEnvironmentStringsForUserA,
+	FreeEnvironmentStrings:                 procFreeEnvironmentStrings,
+	FreeEnvironmentStringsA:                procFreeEnvironmentStringsA,
+	GetCommandLine:                         procGetCommandLine,
+	GetCommandLineA:                        procGetCommandLineA,
+	GetCurrentDirectory:                    procGetCurrentDirectory,
+	GetCurrentDirectoryA:                   procGetCurrentDirectoryA,
+	GetEnvironmentStrings:                  procGetEnvironmentStrings,
+	GetEnvironmentStringsW:                 procGetEnvironmentStringsW,
+	GetEnvironmentVariable:                 procGetEnvironmentVariable,
+	GetEnvironmentVariableA:                procGetEnvironmentVariableA,
+	InitializeEnclave:                      procInitializeEnclave,
+	IsEnclaveTypeSupported:                 procIsEnclaveTypeSupported,
+	LoadEnclaveData:                        procLoadEnclaveData,
+	LoadEnclaveImage:                       procLoadEnclaveImage,
+	LoadEnclaveImageA:                      procLoadEnclaveImageA,
+	NeedCurrentDirectoryForExePath:         procNeedCurrentDirectoryForExePath,
+	NeedCurrentDirectoryForExePathA:        procNeedCurrentDirectoryForExePathA,
+	SetCurrentDirectory:                    procSetCurrentDirectory,
+	SetCurrentDirectoryA:                   procSetCurrentDirectoryA,
+	SetEnvironmentStrings:                  procSetEnvironmentStrings,
+	SetEnvironmentVariable:                 procSetEnvironmentVariable,
+	SetEnvironmentVariableA:                procSetEnvironmentVariableA,
+	TerminateEnclave:                       procTerminateEnclave,
+}
+
 // CallEnclave calls vertdll!CallEnclave.
 // https://learn.microsoft.com/windows/win32/api/enclaveapi/nf-enclaveapi-callenclave
 // Minimum OS: windows10.0.16299.
@@ -347,8 +439,8 @@ func GetEnvironmentStringsW() foundation.PWSTR {
 // GetEnvironmentVariable calls KERNEL32!GetEnvironmentVariableW.
 // https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getenvironmentvariablew
 // Minimum OS: windows5.1.2600.
-func GetEnvironmentVariable(lpName string, lpBuffer foundation.PWSTR, nSize uint32) (uint32, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func GetEnvironmentVariable(lpName *string, lpBuffer foundation.PWSTR, nSize uint32) (uint32, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procGetEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
@@ -474,9 +566,9 @@ func SetEnvironmentStrings(NewEnvironment string) bool {
 // SetEnvironmentVariable calls KERNEL32!SetEnvironmentVariableW.
 // https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-setenvironmentvariablew
 // Minimum OS: windows5.1.2600.
-func SetEnvironmentVariable(lpName string, lpValue string) error {
+func SetEnvironmentVariable(lpName string, lpValue *string) error {
 	_lpName := win32.UTF16Ptr(lpName)
-	_lpValue := win32.UTF16Ptr(lpValue)
+	_lpValue := win32.UTF16PtrOrNil(lpValue)
 	r1, _, e1 := syscall.SyscallN(procSetEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpValue)))
 	if r1 == 0 {
 		return win32.LastError(e1)

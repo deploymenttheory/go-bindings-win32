@@ -45,6 +45,58 @@ var (
 	procWaitNamedPipeA                  = modKERNEL32.NewProc("WaitNamedPipeA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CallNamedPipe                   *win32.Proc
+	CallNamedPipeA                  *win32.Proc
+	ConnectNamedPipe                *win32.Proc
+	CreateNamedPipe                 *win32.Proc
+	CreateNamedPipeA                *win32.Proc
+	CreatePipe                      *win32.Proc
+	DisconnectNamedPipe             *win32.Proc
+	GetNamedPipeClientComputerName  *win32.Proc
+	GetNamedPipeClientComputerNameA *win32.Proc
+	GetNamedPipeClientProcessId     *win32.Proc
+	GetNamedPipeClientSessionId     *win32.Proc
+	GetNamedPipeHandleState         *win32.Proc
+	GetNamedPipeHandleStateA        *win32.Proc
+	GetNamedPipeInfo                *win32.Proc
+	GetNamedPipeServerProcessId     *win32.Proc
+	GetNamedPipeServerSessionId     *win32.Proc
+	ImpersonateNamedPipeClient      *win32.Proc
+	PeekNamedPipe                   *win32.Proc
+	SetNamedPipeHandleState         *win32.Proc
+	TransactNamedPipe               *win32.Proc
+	WaitNamedPipe                   *win32.Proc
+	WaitNamedPipeA                  *win32.Proc
+}{
+	CallNamedPipe:                   procCallNamedPipe,
+	CallNamedPipeA:                  procCallNamedPipeA,
+	ConnectNamedPipe:                procConnectNamedPipe,
+	CreateNamedPipe:                 procCreateNamedPipe,
+	CreateNamedPipeA:                procCreateNamedPipeA,
+	CreatePipe:                      procCreatePipe,
+	DisconnectNamedPipe:             procDisconnectNamedPipe,
+	GetNamedPipeClientComputerName:  procGetNamedPipeClientComputerName,
+	GetNamedPipeClientComputerNameA: procGetNamedPipeClientComputerNameA,
+	GetNamedPipeClientProcessId:     procGetNamedPipeClientProcessId,
+	GetNamedPipeClientSessionId:     procGetNamedPipeClientSessionId,
+	GetNamedPipeHandleState:         procGetNamedPipeHandleState,
+	GetNamedPipeHandleStateA:        procGetNamedPipeHandleStateA,
+	GetNamedPipeInfo:                procGetNamedPipeInfo,
+	GetNamedPipeServerProcessId:     procGetNamedPipeServerProcessId,
+	GetNamedPipeServerSessionId:     procGetNamedPipeServerSessionId,
+	ImpersonateNamedPipeClient:      procImpersonateNamedPipeClient,
+	PeekNamedPipe:                   procPeekNamedPipe,
+	SetNamedPipeHandleState:         procSetNamedPipeHandleState,
+	TransactNamedPipe:               procTransactNamedPipe,
+	WaitNamedPipe:                   procWaitNamedPipe,
+	WaitNamedPipeA:                  procWaitNamedPipeA,
+}
+
 // CallNamedPipe calls KERNEL32!CallNamedPipeW.
 // https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-callnamedpipew
 func CallNamedPipe(lpNamedPipeName string, lpInBuffer []byte, lpOutBuffer []byte, lpBytesRead *uint32, nTimeOut uint32) bool {

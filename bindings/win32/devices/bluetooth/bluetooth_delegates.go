@@ -4,22 +4,26 @@
 
 package bluetooth
 
-// PFNBLUETOOTH_GATT_EVENT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BTH_LE_GATT_EVENT_TYPE, unsafe.Pointer, unsafe.Pointer).
+// PFNBLUETOOTH_GATT_EVENT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BTH_LE_GATT_EVENT_TYPE, unsafe.Pointer, unsafe.Pointer) uintptr.
 type PFNBLUETOOTH_GATT_EVENT_CALLBACK uintptr
 
-// PFN_AUTHENTICATION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *BLUETOOTH_DEVICE_INFO) foundation.BOOL.
+// PFN_AUTHENTICATION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *BLUETOOTH_DEVICE_INFO) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_AUTHENTICATION_CALLBACK uintptr
 
-// PFN_AUTHENTICATION_CALLBACK_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS) foundation.BOOL.
+// PFN_AUTHENTICATION_CALLBACK_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_AUTHENTICATION_CALLBACK_EX uintptr
 
-// PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *byte, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *byte, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK uintptr
 
-// PFN_DEVICE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *BLUETOOTH_DEVICE_INFO) foundation.BOOL.
+// PFN_DEVICE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *BLUETOOTH_DEVICE_INFO) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DEVICE_CALLBACK uintptr

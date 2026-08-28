@@ -22,6 +22,22 @@ var (
 	procHttpFilterProc      = modRpcProxy.NewProc("HttpFilterProc")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	GetExtensionVersion *win32.Proc
+	GetFilterVersion    *win32.Proc
+	HttpExtensionProc   *win32.Proc
+	HttpFilterProc      *win32.Proc
+}{
+	GetExtensionVersion: procGetExtensionVersion,
+	GetFilterVersion:    procGetFilterVersion,
+	HttpExtensionProc:   procHttpExtensionProc,
+	HttpFilterProc:      procHttpFilterProc,
+}
+
 // GetExtensionVersion calls RpcProxy!GetExtensionVersion.
 func GetExtensionVersion(pVer *HSE_VERSION_INFO) bool {
 	r1, _, _ := syscall.SyscallN(procGetExtensionVersion.Addr(), uintptr(unsafe.Pointer(pVer)))

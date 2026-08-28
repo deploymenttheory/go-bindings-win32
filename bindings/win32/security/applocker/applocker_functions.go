@@ -30,6 +30,34 @@ var (
 	procSaferiIsExecutableFileType = modADVAPI32.NewProc("SaferiIsExecutableFileType")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	SaferCloseLevel            *win32.Proc
+	SaferComputeTokenFromLevel *win32.Proc
+	SaferCreateLevel           *win32.Proc
+	SaferGetLevelInformation   *win32.Proc
+	SaferGetPolicyInformation  *win32.Proc
+	SaferIdentifyLevel         *win32.Proc
+	SaferRecordEventLogEntry   *win32.Proc
+	SaferSetLevelInformation   *win32.Proc
+	SaferSetPolicyInformation  *win32.Proc
+	SaferiIsExecutableFileType *win32.Proc
+}{
+	SaferCloseLevel:            procSaferCloseLevel,
+	SaferComputeTokenFromLevel: procSaferComputeTokenFromLevel,
+	SaferCreateLevel:           procSaferCreateLevel,
+	SaferGetLevelInformation:   procSaferGetLevelInformation,
+	SaferGetPolicyInformation:  procSaferGetPolicyInformation,
+	SaferIdentifyLevel:         procSaferIdentifyLevel,
+	SaferRecordEventLogEntry:   procSaferRecordEventLogEntry,
+	SaferSetLevelInformation:   procSaferSetLevelInformation,
+	SaferSetPolicyInformation:  procSaferSetPolicyInformation,
+	SaferiIsExecutableFileType: procSaferiIsExecutableFileType,
+}
+
 // SaferCloseLevel calls ADVAPI32!SaferCloseLevel.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-safercloselevel
 // Minimum OS: windows5.1.2600.

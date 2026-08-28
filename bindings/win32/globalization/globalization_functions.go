@@ -5,6 +5,7 @@
 package globalization
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -73,6 +74,7 @@ var (
 	procUdatpg_getDefaultHourCycle                            = modicu.NewProc("udatpg_getDefaultHourCycle")
 	procUdatpg_getFieldDisplayName                            = modicu.NewProc("udatpg_getFieldDisplayName")
 	procUdtitvfmt_closeResult                                 = modicu.NewProc("udtitvfmt_closeResult")
+	procUdtitvfmt_formatToResult                              = modicu.NewProc("udtitvfmt_formatToResult")
 	procUdtitvfmt_getContext                                  = modicu.NewProc("udtitvfmt_getContext")
 	procUdtitvfmt_openResult                                  = modicu.NewProc("udtitvfmt_openResult")
 	procUdtitvfmt_resultAsValue                               = modicu.NewProc("udtitvfmt_resultAsValue")
@@ -98,6 +100,7 @@ var (
 	procUnumf_close                                           = modicu.NewProc("unumf_close")
 	procUnumf_closeResult                                     = modicu.NewProc("unumf_closeResult")
 	procUnumf_formatDecimal                                   = modicu.NewProc("unumf_formatDecimal")
+	procUnumf_formatDouble                                    = modicu.NewProc("unumf_formatDouble")
 	procUnumf_formatInt                                       = modicu.NewProc("unumf_formatInt")
 	procUnumf_openForSkeletonAndLocale                        = modicu.NewProc("unumf_openForSkeletonAndLocale")
 	procUnumf_openForSkeletonAndLocaleWithError               = modicu.NewProc("unumf_openForSkeletonAndLocaleWithError")
@@ -110,6 +113,7 @@ var (
 	procUnumrf_close                                          = modicu.NewProc("unumrf_close")
 	procUnumrf_closeResult                                    = modicu.NewProc("unumrf_closeResult")
 	procUnumrf_formatDecimalRange                             = modicu.NewProc("unumrf_formatDecimalRange")
+	procUnumrf_formatDoubleRange                              = modicu.NewProc("unumrf_formatDoubleRange")
 	procUnumrf_openForSkeletonWithCollapseAndIdentityFallback = modicu.NewProc("unumrf_openForSkeletonWithCollapseAndIdentityFallback")
 	procUnumrf_openResult                                     = modicu.NewProc("unumrf_openResult")
 	procUnumrf_resultAsValue                                  = modicu.NewProc("unumrf_resultAsValue")
@@ -118,6 +122,8 @@ var (
 	procUnumrf_resultGetSecondDecimalNumber                   = modicu.NewProc("unumrf_resultGetSecondDecimalNumber")
 	procUplrules_selectFormatted                              = modicu.NewProc("uplrules_selectFormatted")
 	procUreldatefmt_closeResult                               = modicu.NewProc("ureldatefmt_closeResult")
+	procUreldatefmt_formatNumericToResult                     = modicu.NewProc("ureldatefmt_formatNumericToResult")
+	procUreldatefmt_formatToResult                            = modicu.NewProc("ureldatefmt_formatToResult")
 	procUreldatefmt_openResult                                = modicu.NewProc("ureldatefmt_openResult")
 	procUreldatefmt_resultAsValue                             = modicu.NewProc("ureldatefmt_resultAsValue")
 	procUset_complementAllCodePoints                          = modicu.NewProc("uset_complementAllCodePoints")
@@ -150,9 +156,13 @@ var (
 	procUcal_getDSTSavings                                    = modicuin.NewProc("ucal_getDSTSavings")
 	procUcal_getDayOfWeekType                                 = modicuin.NewProc("ucal_getDayOfWeekType")
 	procUcal_getDefaultTimeZone                               = modicuin.NewProc("ucal_getDefaultTimeZone")
+	procUcal_getFieldDifference                               = modicuin.NewProc("ucal_getFieldDifference")
+	procUcal_getGregorianChange                               = modicuin.NewProc("ucal_getGregorianChange")
 	procUcal_getKeywordValuesForLocale                        = modicuin.NewProc("ucal_getKeywordValuesForLocale")
 	procUcal_getLimit                                         = modicuin.NewProc("ucal_getLimit")
 	procUcal_getLocaleByType                                  = modicuin.NewProc("ucal_getLocaleByType")
+	procUcal_getMillis                                        = modicuin.NewProc("ucal_getMillis")
+	procUcal_getNow                                           = modicuin.NewProc("ucal_getNow")
 	procUcal_getTZDataVersion                                 = modicuin.NewProc("ucal_getTZDataVersion")
 	procUcal_getTimeZoneDisplayName                           = modicuin.NewProc("ucal_getTimeZoneDisplayName")
 	procUcal_getTimeZoneID                                    = modicuin.NewProc("ucal_getTimeZoneID")
@@ -163,6 +173,7 @@ var (
 	procUcal_getWindowsTimeZoneID                             = modicuin.NewProc("ucal_getWindowsTimeZoneID")
 	procUcal_inDaylightTime                                   = modicuin.NewProc("ucal_inDaylightTime")
 	procUcal_isSet                                            = modicuin.NewProc("ucal_isSet")
+	procUcal_isWeekend                                        = modicuin.NewProc("ucal_isWeekend")
 	procUcal_open                                             = modicuin.NewProc("ucal_open")
 	procUcal_openCountryTimeZones                             = modicuin.NewProc("ucal_openCountryTimeZones")
 	procUcal_openTimeZoneIDEnumeration                        = modicuin.NewProc("ucal_openTimeZoneIDEnumeration")
@@ -173,6 +184,8 @@ var (
 	procUcal_setDate                                          = modicuin.NewProc("ucal_setDate")
 	procUcal_setDateTime                                      = modicuin.NewProc("ucal_setDateTime")
 	procUcal_setDefaultTimeZone                               = modicuin.NewProc("ucal_setDefaultTimeZone")
+	procUcal_setGregorianChange                               = modicuin.NewProc("ucal_setGregorianChange")
+	procUcal_setMillis                                        = modicuin.NewProc("ucal_setMillis")
 	procUcal_setTimeZone                                      = modicuin.NewProc("ucal_setTimeZone")
 	procUcol_cloneBinary                                      = modicuin.NewProc("ucol_cloneBinary")
 	procUcol_close                                            = modicuin.NewProc("ucol_close")
@@ -248,8 +261,11 @@ var (
 	procUdat_close                                            = modicuin.NewProc("udat_close")
 	procUdat_countAvailable                                   = modicuin.NewProc("udat_countAvailable")
 	procUdat_countSymbols                                     = modicuin.NewProc("udat_countSymbols")
+	procUdat_format                                           = modicuin.NewProc("udat_format")
 	procUdat_formatCalendar                                   = modicuin.NewProc("udat_formatCalendar")
 	procUdat_formatCalendarForFields                          = modicuin.NewProc("udat_formatCalendarForFields")
+	procUdat_formatForFields                                  = modicuin.NewProc("udat_formatForFields")
+	procUdat_get2DigitYearStart                               = modicuin.NewProc("udat_get2DigitYearStart")
 	procUdat_getAvailable                                     = modicuin.NewProc("udat_getAvailable")
 	procUdat_getBooleanAttribute                              = modicuin.NewProc("udat_getBooleanAttribute")
 	procUdat_getCalendar                                      = modicuin.NewProc("udat_getCalendar")
@@ -260,7 +276,9 @@ var (
 	procUdat_getSymbols                                       = modicuin.NewProc("udat_getSymbols")
 	procUdat_isLenient                                        = modicuin.NewProc("udat_isLenient")
 	procUdat_open                                             = modicuin.NewProc("udat_open")
+	procUdat_parse                                            = modicuin.NewProc("udat_parse")
 	procUdat_parseCalendar                                    = modicuin.NewProc("udat_parseCalendar")
+	procUdat_set2DigitYearStart                               = modicuin.NewProc("udat_set2DigitYearStart")
 	procUdat_setBooleanAttribute                              = modicuin.NewProc("udat_setBooleanAttribute")
 	procUdat_setCalendar                                      = modicuin.NewProc("udat_setCalendar")
 	procUdat_setContext                                       = modicuin.NewProc("udat_setContext")
@@ -292,6 +310,7 @@ var (
 	procUdatpg_setDateTimeFormat                              = modicuin.NewProc("udatpg_setDateTimeFormat")
 	procUdatpg_setDecimal                                     = modicuin.NewProc("udatpg_setDecimal")
 	procUdtitvfmt_close                                       = modicuin.NewProc("udtitvfmt_close")
+	procUdtitvfmt_format                                      = modicuin.NewProc("udtitvfmt_format")
 	procUdtitvfmt_open                                        = modicuin.NewProc("udtitvfmt_open")
 	procUfieldpositer_close                                   = modicuin.NewProc("ufieldpositer_close")
 	procUfieldpositer_next                                    = modicuin.NewProc("ufieldpositer_next")
@@ -299,7 +318,9 @@ var (
 	procUfmt_close                                            = modicuin.NewProc("ufmt_close")
 	procUfmt_getArrayItemByIndex                              = modicuin.NewProc("ufmt_getArrayItemByIndex")
 	procUfmt_getArrayLength                                   = modicuin.NewProc("ufmt_getArrayLength")
+	procUfmt_getDate                                          = modicuin.NewProc("ufmt_getDate")
 	procUfmt_getDecNumChars                                   = modicuin.NewProc("ufmt_getDecNumChars")
+	procUfmt_getDouble                                        = modicuin.NewProc("ufmt_getDouble")
 	procUfmt_getInt64                                         = modicuin.NewProc("ufmt_getInt64")
 	procUfmt_getLong                                          = modicuin.NewProc("ufmt_getLong")
 	procUfmt_getObject                                        = modicuin.NewProc("ufmt_getObject")
@@ -338,21 +359,28 @@ var (
 	procUnum_countAvailable                                   = modicuin.NewProc("unum_countAvailable")
 	procUnum_format                                           = modicuin.NewProc("unum_format")
 	procUnum_formatDecimal                                    = modicuin.NewProc("unum_formatDecimal")
+	procUnum_formatDouble                                     = modicuin.NewProc("unum_formatDouble")
+	procUnum_formatDoubleCurrency                             = modicuin.NewProc("unum_formatDoubleCurrency")
+	procUnum_formatDoubleForFields                            = modicuin.NewProc("unum_formatDoubleForFields")
 	procUnum_formatInt64                                      = modicuin.NewProc("unum_formatInt64")
 	procUnum_formatUFormattable                               = modicuin.NewProc("unum_formatUFormattable")
 	procUnum_getAttribute                                     = modicuin.NewProc("unum_getAttribute")
 	procUnum_getAvailable                                     = modicuin.NewProc("unum_getAvailable")
 	procUnum_getContext                                       = modicuin.NewProc("unum_getContext")
+	procUnum_getDoubleAttribute                               = modicuin.NewProc("unum_getDoubleAttribute")
 	procUnum_getLocaleByType                                  = modicuin.NewProc("unum_getLocaleByType")
 	procUnum_getSymbol                                        = modicuin.NewProc("unum_getSymbol")
 	procUnum_getTextAttribute                                 = modicuin.NewProc("unum_getTextAttribute")
 	procUnum_open                                             = modicuin.NewProc("unum_open")
 	procUnum_parse                                            = modicuin.NewProc("unum_parse")
 	procUnum_parseDecimal                                     = modicuin.NewProc("unum_parseDecimal")
+	procUnum_parseDouble                                      = modicuin.NewProc("unum_parseDouble")
+	procUnum_parseDoubleCurrency                              = modicuin.NewProc("unum_parseDoubleCurrency")
 	procUnum_parseInt64                                       = modicuin.NewProc("unum_parseInt64")
 	procUnum_parseToUFormattable                              = modicuin.NewProc("unum_parseToUFormattable")
 	procUnum_setAttribute                                     = modicuin.NewProc("unum_setAttribute")
 	procUnum_setContext                                       = modicuin.NewProc("unum_setContext")
+	procUnum_setDoubleAttribute                               = modicuin.NewProc("unum_setDoubleAttribute")
 	procUnum_setSymbol                                        = modicuin.NewProc("unum_setSymbol")
 	procUnum_setTextAttribute                                 = modicuin.NewProc("unum_setTextAttribute")
 	procUnum_toPattern                                        = modicuin.NewProc("unum_toPattern")
@@ -368,6 +396,7 @@ var (
 	procUplrules_getKeywords                                  = modicuin.NewProc("uplrules_getKeywords")
 	procUplrules_open                                         = modicuin.NewProc("uplrules_open")
 	procUplrules_openForType                                  = modicuin.NewProc("uplrules_openForType")
+	procUplrules_select                                       = modicuin.NewProc("uplrules_select")
 	procUregex_appendReplacement                              = modicuin.NewProc("uregex_appendReplacement")
 	procUregex_appendReplacementUText                         = modicuin.NewProc("uregex_appendReplacementUText")
 	procUregex_appendTail                                     = modicuin.NewProc("uregex_appendTail")
@@ -445,6 +474,8 @@ var (
 	procUregion_getType                                       = modicuin.NewProc("uregion_getType")
 	procUreldatefmt_close                                     = modicuin.NewProc("ureldatefmt_close")
 	procUreldatefmt_combineDateAndTime                        = modicuin.NewProc("ureldatefmt_combineDateAndTime")
+	procUreldatefmt_format                                    = modicuin.NewProc("ureldatefmt_format")
+	procUreldatefmt_formatNumeric                             = modicuin.NewProc("ureldatefmt_formatNumeric")
 	procUreldatefmt_open                                      = modicuin.NewProc("ureldatefmt_open")
 	procUsearch_close                                         = modicuin.NewProc("usearch_close")
 	procUsearch_first                                         = modicuin.NewProc("usearch_first")
@@ -556,6 +587,7 @@ var (
 	procU_getIntPropertyMaxValue                              = modicuuc.NewProc("u_getIntPropertyMaxValue")
 	procU_getIntPropertyMinValue                              = modicuuc.NewProc("u_getIntPropertyMinValue")
 	procU_getIntPropertyValue                                 = modicuuc.NewProc("u_getIntPropertyValue")
+	procU_getNumericValue                                     = modicuuc.NewProc("u_getNumericValue")
 	procU_getPropertyEnum                                     = modicuuc.NewProc("u_getPropertyEnum")
 	procU_getPropertyName                                     = modicuuc.NewProc("u_getPropertyName")
 	procU_getPropertyValueEnum                                = modicuuc.NewProc("u_getPropertyValueEnum")
@@ -808,13 +840,18 @@ var (
 	procUcnvsel_selectForString                               = modicuuc.NewProc("ucnvsel_selectForString")
 	procUcnvsel_selectForUTF8                                 = modicuuc.NewProc("ucnvsel_selectForUTF8")
 	procUcnvsel_serialize                                     = modicuuc.NewProc("ucnvsel_serialize")
+	procUcurr_countCurrencies                                 = modicuuc.NewProc("ucurr_countCurrencies")
 	procUcurr_forLocale                                       = modicuuc.NewProc("ucurr_forLocale")
+	procUcurr_forLocaleAndDate                                = modicuuc.NewProc("ucurr_forLocaleAndDate")
 	procUcurr_getDefaultFractionDigits                        = modicuuc.NewProc("ucurr_getDefaultFractionDigits")
 	procUcurr_getDefaultFractionDigitsForUsage                = modicuuc.NewProc("ucurr_getDefaultFractionDigitsForUsage")
 	procUcurr_getKeywordValuesForLocale                       = modicuuc.NewProc("ucurr_getKeywordValuesForLocale")
 	procUcurr_getName                                         = modicuuc.NewProc("ucurr_getName")
 	procUcurr_getNumericCode                                  = modicuuc.NewProc("ucurr_getNumericCode")
 	procUcurr_getPluralName                                   = modicuuc.NewProc("ucurr_getPluralName")
+	procUcurr_getRoundingIncrement                            = modicuuc.NewProc("ucurr_getRoundingIncrement")
+	procUcurr_getRoundingIncrementForUsage                    = modicuuc.NewProc("ucurr_getRoundingIncrementForUsage")
+	procUcurr_isAvailable                                     = modicuuc.NewProc("ucurr_isAvailable")
 	procUcurr_openISOCurrencies                               = modicuuc.NewProc("ucurr_openISOCurrencies")
 	procUcurr_register                                        = modicuuc.NewProc("ucurr_register")
 	procUcurr_unregister                                      = modicuuc.NewProc("ucurr_unregister")
@@ -1241,6 +1278,2510 @@ var (
 	procScriptXtoCP                                           = modUSP10.NewProc("ScriptXtoCP")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AdjustCalendarDate                                    *win32.Proc
+	CompareString                                         *win32.Proc
+	CompareStringA                                        *win32.Proc
+	CompareStringEx                                       *win32.Proc
+	CompareStringOrdinal                                  *win32.Proc
+	ConvertCalDateTimeToSystemTime                        *win32.Proc
+	ConvertDefaultLocale                                  *win32.Proc
+	ConvertSystemTimeToCalDateTime                        *win32.Proc
+	EnumCalendarInfo                                      *win32.Proc
+	EnumCalendarInfoA                                     *win32.Proc
+	EnumCalendarInfoEx                                    *win32.Proc
+	EnumCalendarInfoExA                                   *win32.Proc
+	EnumCalendarInfoExEx                                  *win32.Proc
+	EnumDateFormats                                       *win32.Proc
+	EnumDateFormatsA                                      *win32.Proc
+	EnumDateFormatsEx                                     *win32.Proc
+	EnumDateFormatsExA                                    *win32.Proc
+	EnumDateFormatsExEx                                   *win32.Proc
+	EnumLanguageGroupLocales                              *win32.Proc
+	EnumLanguageGroupLocalesA                             *win32.Proc
+	EnumSystemCodePages                                   *win32.Proc
+	EnumSystemCodePagesA                                  *win32.Proc
+	EnumSystemGeoID                                       *win32.Proc
+	EnumSystemGeoNames                                    *win32.Proc
+	EnumSystemLanguageGroups                              *win32.Proc
+	EnumSystemLanguageGroupsA                             *win32.Proc
+	EnumSystemLocales                                     *win32.Proc
+	EnumSystemLocalesA                                    *win32.Proc
+	EnumSystemLocalesEx                                   *win32.Proc
+	EnumTimeFormats                                       *win32.Proc
+	EnumTimeFormatsA                                      *win32.Proc
+	EnumTimeFormatsEx                                     *win32.Proc
+	EnumUILanguages                                       *win32.Proc
+	EnumUILanguagesA                                      *win32.Proc
+	FindNLSString                                         *win32.Proc
+	FindNLSStringEx                                       *win32.Proc
+	FindStringOrdinal                                     *win32.Proc
+	FoldString                                            *win32.Proc
+	FoldStringA                                           *win32.Proc
+	GetACP                                                *win32.Proc
+	GetCPInfo                                             *win32.Proc
+	GetCPInfoEx                                           *win32.Proc
+	GetCPInfoExA                                          *win32.Proc
+	GetCalendarDateFormatEx                               *win32.Proc
+	GetCalendarInfo                                       *win32.Proc
+	GetCalendarInfoA                                      *win32.Proc
+	GetCalendarInfoEx                                     *win32.Proc
+	GetCalendarSupportedDateRange                         *win32.Proc
+	GetCurrencyFormat                                     *win32.Proc
+	GetCurrencyFormatA                                    *win32.Proc
+	GetCurrencyFormatEx                                   *win32.Proc
+	GetDateFormat                                         *win32.Proc
+	GetDateFormatA                                        *win32.Proc
+	GetDateFormatEx                                       *win32.Proc
+	GetDistanceOfClosestLanguageInList                    *win32.Proc
+	GetDurationFormat                                     *win32.Proc
+	GetDurationFormatEx                                   *win32.Proc
+	GetFileMUIInfo                                        *win32.Proc
+	GetFileMUIPath                                        *win32.Proc
+	GetGeoInfo                                            *win32.Proc
+	GetGeoInfoA                                           *win32.Proc
+	GetGeoInfoEx                                          *win32.Proc
+	GetLocaleInfo                                         *win32.Proc
+	GetLocaleInfoA                                        *win32.Proc
+	GetLocaleInfoEx                                       *win32.Proc
+	GetNLSVersion                                         *win32.Proc
+	GetNLSVersionEx                                       *win32.Proc
+	GetNumberFormat                                       *win32.Proc
+	GetNumberFormatA                                      *win32.Proc
+	GetNumberFormatEx                                     *win32.Proc
+	GetOEMCP                                              *win32.Proc
+	GetProcessPreferredUILanguages                        *win32.Proc
+	GetStringScripts                                      *win32.Proc
+	GetStringType                                         *win32.Proc
+	GetStringTypeA                                        *win32.Proc
+	GetStringTypeEx                                       *win32.Proc
+	GetStringTypeExA                                      *win32.Proc
+	GetSystemDefaultLCID                                  *win32.Proc
+	GetSystemDefaultLangID                                *win32.Proc
+	GetSystemDefaultLocaleName                            *win32.Proc
+	GetSystemDefaultUILanguage                            *win32.Proc
+	GetSystemPreferredUILanguages                         *win32.Proc
+	GetTextCharset                                        *win32.Proc
+	GetTextCharsetInfo                                    *win32.Proc
+	GetThreadLocale                                       *win32.Proc
+	GetThreadPreferredUILanguages                         *win32.Proc
+	GetThreadUILanguage                                   *win32.Proc
+	GetTimeFormat                                         *win32.Proc
+	GetTimeFormatA                                        *win32.Proc
+	GetTimeFormatEx                                       *win32.Proc
+	GetUILanguageInfo                                     *win32.Proc
+	GetUserDefaultGeoName                                 *win32.Proc
+	GetUserDefaultLCID                                    *win32.Proc
+	GetUserDefaultLangID                                  *win32.Proc
+	GetUserDefaultLocaleName                              *win32.Proc
+	GetUserDefaultUILanguage                              *win32.Proc
+	GetUserGeoID                                          *win32.Proc
+	GetUserPreferredUILanguages                           *win32.Proc
+	IdnToAscii                                            *win32.Proc
+	IdnToNameprepUnicode                                  *win32.Proc
+	IdnToUnicode                                          *win32.Proc
+	IsCalendarLeapYear                                    *win32.Proc
+	IsDBCSLeadByte                                        *win32.Proc
+	IsDBCSLeadByteEx                                      *win32.Proc
+	IsNLSDefinedString                                    *win32.Proc
+	IsNormalizedString                                    *win32.Proc
+	IsTextUnicode                                         *win32.Proc
+	IsValidCodePage                                       *win32.Proc
+	IsValidLanguageGroup                                  *win32.Proc
+	IsValidLocale                                         *win32.Proc
+	IsValidLocaleName                                     *win32.Proc
+	IsValidNLSVersion                                     *win32.Proc
+	IsWellFormedTag                                       *win32.Proc
+	LCIDToLocaleName                                      *win32.Proc
+	LCMapString                                           *win32.Proc
+	LCMapStringA                                          *win32.Proc
+	LCMapStringEx                                         *win32.Proc
+	LocaleNameToLCID                                      *win32.Proc
+	Lstrcat                                               *win32.Proc
+	LstrcatA                                              *win32.Proc
+	Lstrcmp                                               *win32.Proc
+	LstrcmpA                                              *win32.Proc
+	Lstrcmpi                                              *win32.Proc
+	LstrcmpiA                                             *win32.Proc
+	Lstrcpy                                               *win32.Proc
+	LstrcpyA                                              *win32.Proc
+	Lstrcpyn                                              *win32.Proc
+	LstrcpynA                                             *win32.Proc
+	Lstrlen                                               *win32.Proc
+	LstrlenA                                              *win32.Proc
+	MappingDoAction                                       *win32.Proc
+	MappingFreePropertyBag                                *win32.Proc
+	MappingFreeServices                                   *win32.Proc
+	MappingGetServices                                    *win32.Proc
+	MappingRecognizeText                                  *win32.Proc
+	MultiByteToWideChar                                   *win32.Proc
+	NormalizeString                                       *win32.Proc
+	NotifyUILanguageChange                                *win32.Proc
+	ResolveLocaleName                                     *win32.Proc
+	RestoreThreadPreferredUILanguages                     *win32.Proc
+	ScriptApplyDigitSubstitution                          *win32.Proc
+	ScriptApplyLogicalWidth                               *win32.Proc
+	ScriptBreak                                           *win32.Proc
+	ScriptCPtoX                                           *win32.Proc
+	ScriptCacheGetHeight                                  *win32.Proc
+	ScriptFreeCache                                       *win32.Proc
+	ScriptGetCMap                                         *win32.Proc
+	ScriptGetFontAlternateGlyphs                          *win32.Proc
+	ScriptGetFontFeatureTags                              *win32.Proc
+	ScriptGetFontLanguageTags                             *win32.Proc
+	ScriptGetFontProperties                               *win32.Proc
+	ScriptGetFontScriptTags                               *win32.Proc
+	ScriptGetGlyphABCWidth                                *win32.Proc
+	ScriptGetLogicalWidths                                *win32.Proc
+	ScriptGetProperties                                   *win32.Proc
+	ScriptIsComplex                                       *win32.Proc
+	ScriptItemize                                         *win32.Proc
+	ScriptItemizeOpenType                                 *win32.Proc
+	ScriptJustify                                         *win32.Proc
+	ScriptLayout                                          *win32.Proc
+	ScriptPlace                                           *win32.Proc
+	ScriptPlaceOpenType                                   *win32.Proc
+	ScriptPositionSingleGlyph                             *win32.Proc
+	ScriptRecordDigitSubstitution                         *win32.Proc
+	ScriptShape                                           *win32.Proc
+	ScriptShapeOpenType                                   *win32.Proc
+	ScriptStringAnalyse                                   *win32.Proc
+	ScriptStringCPtoX                                     *win32.Proc
+	ScriptStringFree                                      *win32.Proc
+	ScriptStringGetLogicalWidths                          *win32.Proc
+	ScriptStringGetOrder                                  *win32.Proc
+	ScriptStringOut                                       *win32.Proc
+	ScriptStringValidate                                  *win32.Proc
+	ScriptStringXtoCP                                     *win32.Proc
+	ScriptString_pLogAttr                                 *win32.Proc
+	ScriptString_pSize                                    *win32.Proc
+	ScriptString_pcOutChars                               *win32.Proc
+	ScriptSubstituteSingleGlyph                           *win32.Proc
+	ScriptTextOut                                         *win32.Proc
+	ScriptXtoCP                                           *win32.Proc
+	SetCalendarInfo                                       *win32.Proc
+	SetCalendarInfoA                                      *win32.Proc
+	SetLocaleInfo                                         *win32.Proc
+	SetLocaleInfoA                                        *win32.Proc
+	SetProcessPreferredUILanguages                        *win32.Proc
+	SetThreadLocale                                       *win32.Proc
+	SetThreadPreferredUILanguages                         *win32.Proc
+	SetThreadPreferredUILanguages2                        *win32.Proc
+	SetThreadUILanguage                                   *win32.Proc
+	SetUserGeoID                                          *win32.Proc
+	SetUserGeoName                                        *win32.Proc
+	TranslateCharsetInfo                                  *win32.Proc
+	UCNV_FROM_U_CALLBACK_ESCAPE                           *win32.Proc
+	UCNV_FROM_U_CALLBACK_SKIP                             *win32.Proc
+	UCNV_FROM_U_CALLBACK_STOP                             *win32.Proc
+	UCNV_FROM_U_CALLBACK_SUBSTITUTE                       *win32.Proc
+	UCNV_TO_U_CALLBACK_ESCAPE                             *win32.Proc
+	UCNV_TO_U_CALLBACK_SKIP                               *win32.Proc
+	UCNV_TO_U_CALLBACK_STOP                               *win32.Proc
+	UCNV_TO_U_CALLBACK_SUBSTITUTE                         *win32.Proc
+	U_UCharsToChars                                       *win32.Proc
+	U_austrcpy                                            *win32.Proc
+	U_austrncpy                                           *win32.Proc
+	U_catclose                                            *win32.Proc
+	U_catgets                                             *win32.Proc
+	U_catopen                                             *win32.Proc
+	U_charAge                                             *win32.Proc
+	U_charDigitValue                                      *win32.Proc
+	U_charDirection                                       *win32.Proc
+	U_charFromName                                        *win32.Proc
+	U_charMirror                                          *win32.Proc
+	U_charName                                            *win32.Proc
+	U_charType                                            *win32.Proc
+	U_charsToUChars                                       *win32.Proc
+	U_cleanup                                             *win32.Proc
+	U_countChar32                                         *win32.Proc
+	U_digit                                               *win32.Proc
+	U_enumCharNames                                       *win32.Proc
+	U_enumCharTypes                                       *win32.Proc
+	U_errorName                                           *win32.Proc
+	U_foldCase                                            *win32.Proc
+	U_forDigit                                            *win32.Proc
+	U_formatMessage                                       *win32.Proc
+	U_formatMessageWithError                              *win32.Proc
+	U_getBidiPairedBracket                                *win32.Proc
+	U_getBinaryPropertySet                                *win32.Proc
+	U_getCombiningClass                                   *win32.Proc
+	U_getDataVersion                                      *win32.Proc
+	U_getFC_NFKC_Closure                                  *win32.Proc
+	U_getIntPropertyMap                                   *win32.Proc
+	U_getIntPropertyMaxValue                              *win32.Proc
+	U_getIntPropertyMinValue                              *win32.Proc
+	U_getIntPropertyValue                                 *win32.Proc
+	U_getNumericValue                                     *win32.Proc
+	U_getPropertyEnum                                     *win32.Proc
+	U_getPropertyName                                     *win32.Proc
+	U_getPropertyValueEnum                                *win32.Proc
+	U_getPropertyValueName                                *win32.Proc
+	U_getUnicodeVersion                                   *win32.Proc
+	U_getVersion                                          *win32.Proc
+	U_hasBinaryProperty                                   *win32.Proc
+	U_init                                                *win32.Proc
+	U_isIDIgnorable                                       *win32.Proc
+	U_isIDPart                                            *win32.Proc
+	U_isIDStart                                           *win32.Proc
+	U_isISOControl                                        *win32.Proc
+	U_isJavaIDPart                                        *win32.Proc
+	U_isJavaIDStart                                       *win32.Proc
+	U_isJavaSpaceChar                                     *win32.Proc
+	U_isMirrored                                          *win32.Proc
+	U_isUAlphabetic                                       *win32.Proc
+	U_isULowercase                                        *win32.Proc
+	U_isUUppercase                                        *win32.Proc
+	U_isUWhiteSpace                                       *win32.Proc
+	U_isWhitespace                                        *win32.Proc
+	U_isalnum                                             *win32.Proc
+	U_isalpha                                             *win32.Proc
+	U_isbase                                              *win32.Proc
+	U_isblank                                             *win32.Proc
+	U_iscntrl                                             *win32.Proc
+	U_isdefined                                           *win32.Proc
+	U_isdigit                                             *win32.Proc
+	U_isgraph                                             *win32.Proc
+	U_islower                                             *win32.Proc
+	U_isprint                                             *win32.Proc
+	U_ispunct                                             *win32.Proc
+	U_isspace                                             *win32.Proc
+	U_istitle                                             *win32.Proc
+	U_isupper                                             *win32.Proc
+	U_isxdigit                                            *win32.Proc
+	U_memcasecmp                                          *win32.Proc
+	U_memchr                                              *win32.Proc
+	U_memchr32                                            *win32.Proc
+	U_memcmp                                              *win32.Proc
+	U_memcmpCodePointOrder                                *win32.Proc
+	U_memcpy                                              *win32.Proc
+	U_memmove                                             *win32.Proc
+	U_memrchr                                             *win32.Proc
+	U_memrchr32                                           *win32.Proc
+	U_memset                                              *win32.Proc
+	U_parseMessage                                        *win32.Proc
+	U_parseMessageWithError                               *win32.Proc
+	U_setMemoryFunctions                                  *win32.Proc
+	U_shapeArabic                                         *win32.Proc
+	U_strCaseCompare                                      *win32.Proc
+	U_strCompare                                          *win32.Proc
+	U_strCompareIter                                      *win32.Proc
+	U_strFindFirst                                        *win32.Proc
+	U_strFindLast                                         *win32.Proc
+	U_strFoldCase                                         *win32.Proc
+	U_strFromJavaModifiedUTF8WithSub                      *win32.Proc
+	U_strFromUTF32                                        *win32.Proc
+	U_strFromUTF32WithSub                                 *win32.Proc
+	U_strFromUTF8                                         *win32.Proc
+	U_strFromUTF8Lenient                                  *win32.Proc
+	U_strFromUTF8WithSub                                  *win32.Proc
+	U_strFromWCS                                          *win32.Proc
+	U_strHasMoreChar32Than                                *win32.Proc
+	U_strToJavaModifiedUTF8                               *win32.Proc
+	U_strToLower                                          *win32.Proc
+	U_strToTitle                                          *win32.Proc
+	U_strToUTF32                                          *win32.Proc
+	U_strToUTF32WithSub                                   *win32.Proc
+	U_strToUTF8                                           *win32.Proc
+	U_strToUTF8WithSub                                    *win32.Proc
+	U_strToUpper                                          *win32.Proc
+	U_strToWCS                                            *win32.Proc
+	U_strcasecmp                                          *win32.Proc
+	U_strcat                                              *win32.Proc
+	U_strchr                                              *win32.Proc
+	U_strchr32                                            *win32.Proc
+	U_strcmp                                              *win32.Proc
+	U_strcmpCodePointOrder                                *win32.Proc
+	U_strcpy                                              *win32.Proc
+	U_strcspn                                             *win32.Proc
+	U_stringHasBinaryProperty                             *win32.Proc
+	U_strlen                                              *win32.Proc
+	U_strncasecmp                                         *win32.Proc
+	U_strncat                                             *win32.Proc
+	U_strncmp                                             *win32.Proc
+	U_strncmpCodePointOrder                               *win32.Proc
+	U_strncpy                                             *win32.Proc
+	U_strpbrk                                             *win32.Proc
+	U_strrchr                                             *win32.Proc
+	U_strrchr32                                           *win32.Proc
+	U_strrstr                                             *win32.Proc
+	U_strspn                                              *win32.Proc
+	U_strstr                                              *win32.Proc
+	U_strtok_r                                            *win32.Proc
+	U_tolower                                             *win32.Proc
+	U_totitle                                             *win32.Proc
+	U_toupper                                             *win32.Proc
+	U_uastrcpy                                            *win32.Proc
+	U_uastrncpy                                           *win32.Proc
+	U_unescape                                            *win32.Proc
+	U_unescapeAt                                          *win32.Proc
+	U_versionFromString                                   *win32.Proc
+	U_versionFromUString                                  *win32.Proc
+	U_versionToString                                     *win32.Proc
+	U_vformatMessage                                      *win32.Proc
+	U_vformatMessageWithError                             *win32.Proc
+	U_vparseMessage                                       *win32.Proc
+	U_vparseMessageWithError                              *win32.Proc
+	Ubidi_close                                           *win32.Proc
+	Ubidi_countParagraphs                                 *win32.Proc
+	Ubidi_countRuns                                       *win32.Proc
+	Ubidi_getBaseDirection                                *win32.Proc
+	Ubidi_getClassCallback                                *win32.Proc
+	Ubidi_getCustomizedClass                              *win32.Proc
+	Ubidi_getDirection                                    *win32.Proc
+	Ubidi_getLength                                       *win32.Proc
+	Ubidi_getLevelAt                                      *win32.Proc
+	Ubidi_getLevels                                       *win32.Proc
+	Ubidi_getLogicalIndex                                 *win32.Proc
+	Ubidi_getLogicalMap                                   *win32.Proc
+	Ubidi_getLogicalRun                                   *win32.Proc
+	Ubidi_getParaLevel                                    *win32.Proc
+	Ubidi_getParagraph                                    *win32.Proc
+	Ubidi_getParagraphByIndex                             *win32.Proc
+	Ubidi_getProcessedLength                              *win32.Proc
+	Ubidi_getReorderingMode                               *win32.Proc
+	Ubidi_getReorderingOptions                            *win32.Proc
+	Ubidi_getResultLength                                 *win32.Proc
+	Ubidi_getText                                         *win32.Proc
+	Ubidi_getVisualIndex                                  *win32.Proc
+	Ubidi_getVisualMap                                    *win32.Proc
+	Ubidi_getVisualRun                                    *win32.Proc
+	Ubidi_invertMap                                       *win32.Proc
+	Ubidi_isInverse                                       *win32.Proc
+	Ubidi_isOrderParagraphsLTR                            *win32.Proc
+	Ubidi_open                                            *win32.Proc
+	Ubidi_openSized                                       *win32.Proc
+	Ubidi_orderParagraphsLTR                              *win32.Proc
+	Ubidi_reorderLogical                                  *win32.Proc
+	Ubidi_reorderVisual                                   *win32.Proc
+	Ubidi_setClassCallback                                *win32.Proc
+	Ubidi_setContext                                      *win32.Proc
+	Ubidi_setInverse                                      *win32.Proc
+	Ubidi_setLine                                         *win32.Proc
+	Ubidi_setPara                                         *win32.Proc
+	Ubidi_setReorderingMode                               *win32.Proc
+	Ubidi_setReorderingOptions                            *win32.Proc
+	Ubidi_writeReordered                                  *win32.Proc
+	Ubidi_writeReverse                                    *win32.Proc
+	Ubiditransform_close                                  *win32.Proc
+	Ubiditransform_open                                   *win32.Proc
+	Ubiditransform_transform                              *win32.Proc
+	Ublock_getCode                                        *win32.Proc
+	Ubrk_clone                                            *win32.Proc
+	Ubrk_close                                            *win32.Proc
+	Ubrk_countAvailable                                   *win32.Proc
+	Ubrk_current                                          *win32.Proc
+	Ubrk_first                                            *win32.Proc
+	Ubrk_following                                        *win32.Proc
+	Ubrk_getAvailable                                     *win32.Proc
+	Ubrk_getBinaryRules                                   *win32.Proc
+	Ubrk_getLocaleByType                                  *win32.Proc
+	Ubrk_getRuleStatus                                    *win32.Proc
+	Ubrk_getRuleStatusVec                                 *win32.Proc
+	Ubrk_isBoundary                                       *win32.Proc
+	Ubrk_last                                             *win32.Proc
+	Ubrk_next                                             *win32.Proc
+	Ubrk_open                                             *win32.Proc
+	Ubrk_openBinaryRules                                  *win32.Proc
+	Ubrk_openRules                                        *win32.Proc
+	Ubrk_preceding                                        *win32.Proc
+	Ubrk_previous                                         *win32.Proc
+	Ubrk_refreshUText                                     *win32.Proc
+	Ubrk_safeClone                                        *win32.Proc
+	Ubrk_setText                                          *win32.Proc
+	Ubrk_setUText                                         *win32.Proc
+	Ucal_add                                              *win32.Proc
+	Ucal_clear                                            *win32.Proc
+	Ucal_clearField                                       *win32.Proc
+	Ucal_clone                                            *win32.Proc
+	Ucal_close                                            *win32.Proc
+	Ucal_countAvailable                                   *win32.Proc
+	Ucal_equivalentTo                                     *win32.Proc
+	Ucal_get                                              *win32.Proc
+	Ucal_getAttribute                                     *win32.Proc
+	Ucal_getAvailable                                     *win32.Proc
+	Ucal_getCanonicalTimeZoneID                           *win32.Proc
+	Ucal_getDSTSavings                                    *win32.Proc
+	Ucal_getDayOfWeekType                                 *win32.Proc
+	Ucal_getDefaultTimeZone                               *win32.Proc
+	Ucal_getFieldDifference                               *win32.Proc
+	Ucal_getGregorianChange                               *win32.Proc
+	Ucal_getHostTimeZone                                  *win32.Proc
+	Ucal_getKeywordValuesForLocale                        *win32.Proc
+	Ucal_getLimit                                         *win32.Proc
+	Ucal_getLocaleByType                                  *win32.Proc
+	Ucal_getMillis                                        *win32.Proc
+	Ucal_getNow                                           *win32.Proc
+	Ucal_getTZDataVersion                                 *win32.Proc
+	Ucal_getTimeZoneDisplayName                           *win32.Proc
+	Ucal_getTimeZoneID                                    *win32.Proc
+	Ucal_getTimeZoneIDForWindowsID                        *win32.Proc
+	Ucal_getTimeZoneOffsetFromLocal                       *win32.Proc
+	Ucal_getTimeZoneTransitionDate                        *win32.Proc
+	Ucal_getType                                          *win32.Proc
+	Ucal_getWeekendTransition                             *win32.Proc
+	Ucal_getWindowsTimeZoneID                             *win32.Proc
+	Ucal_inDaylightTime                                   *win32.Proc
+	Ucal_isSet                                            *win32.Proc
+	Ucal_isWeekend                                        *win32.Proc
+	Ucal_open                                             *win32.Proc
+	Ucal_openCountryTimeZones                             *win32.Proc
+	Ucal_openTimeZoneIDEnumeration                        *win32.Proc
+	Ucal_openTimeZones                                    *win32.Proc
+	Ucal_roll                                             *win32.Proc
+	Ucal_set                                              *win32.Proc
+	Ucal_setAttribute                                     *win32.Proc
+	Ucal_setDate                                          *win32.Proc
+	Ucal_setDateTime                                      *win32.Proc
+	Ucal_setDefaultTimeZone                               *win32.Proc
+	Ucal_setGregorianChange                               *win32.Proc
+	Ucal_setMillis                                        *win32.Proc
+	Ucal_setTimeZone                                      *win32.Proc
+	Ucasemap_close                                        *win32.Proc
+	Ucasemap_getBreakIterator                             *win32.Proc
+	Ucasemap_getLocale                                    *win32.Proc
+	Ucasemap_getOptions                                   *win32.Proc
+	Ucasemap_open                                         *win32.Proc
+	Ucasemap_setBreakIterator                             *win32.Proc
+	Ucasemap_setLocale                                    *win32.Proc
+	Ucasemap_setOptions                                   *win32.Proc
+	Ucasemap_toTitle                                      *win32.Proc
+	Ucasemap_utf8FoldCase                                 *win32.Proc
+	Ucasemap_utf8ToLower                                  *win32.Proc
+	Ucasemap_utf8ToTitle                                  *win32.Proc
+	Ucasemap_utf8ToUpper                                  *win32.Proc
+	Ucfpos_close                                          *win32.Proc
+	Ucfpos_constrainCategory                              *win32.Proc
+	Ucfpos_constrainField                                 *win32.Proc
+	Ucfpos_getCategory                                    *win32.Proc
+	Ucfpos_getField                                       *win32.Proc
+	Ucfpos_getIndexes                                     *win32.Proc
+	Ucfpos_getInt64IterationContext                       *win32.Proc
+	Ucfpos_matchesField                                   *win32.Proc
+	Ucfpos_open                                           *win32.Proc
+	Ucfpos_reset                                          *win32.Proc
+	Ucfpos_setInt64IterationContext                       *win32.Proc
+	Ucfpos_setState                                       *win32.Proc
+	Ucnv_cbFromUWriteBytes                                *win32.Proc
+	Ucnv_cbFromUWriteSub                                  *win32.Proc
+	Ucnv_cbFromUWriteUChars                               *win32.Proc
+	Ucnv_cbToUWriteSub                                    *win32.Proc
+	Ucnv_cbToUWriteUChars                                 *win32.Proc
+	Ucnv_clone                                            *win32.Proc
+	Ucnv_close                                            *win32.Proc
+	Ucnv_compareNames                                     *win32.Proc
+	Ucnv_convert                                          *win32.Proc
+	Ucnv_convertEx                                        *win32.Proc
+	Ucnv_countAliases                                     *win32.Proc
+	Ucnv_countAvailable                                   *win32.Proc
+	Ucnv_countStandards                                   *win32.Proc
+	Ucnv_detectUnicodeSignature                           *win32.Proc
+	Ucnv_fixFileSeparator                                 *win32.Proc
+	Ucnv_flushCache                                       *win32.Proc
+	Ucnv_fromAlgorithmic                                  *win32.Proc
+	Ucnv_fromUChars                                       *win32.Proc
+	Ucnv_fromUCountPending                                *win32.Proc
+	Ucnv_fromUnicode                                      *win32.Proc
+	Ucnv_getAlias                                         *win32.Proc
+	Ucnv_getAliases                                       *win32.Proc
+	Ucnv_getAvailableName                                 *win32.Proc
+	Ucnv_getCCSID                                         *win32.Proc
+	Ucnv_getCanonicalName                                 *win32.Proc
+	Ucnv_getDefaultName                                   *win32.Proc
+	Ucnv_getDisplayName                                   *win32.Proc
+	Ucnv_getFromUCallBack                                 *win32.Proc
+	Ucnv_getInvalidChars                                  *win32.Proc
+	Ucnv_getInvalidUChars                                 *win32.Proc
+	Ucnv_getMaxCharSize                                   *win32.Proc
+	Ucnv_getMinCharSize                                   *win32.Proc
+	Ucnv_getName                                          *win32.Proc
+	Ucnv_getNextUChar                                     *win32.Proc
+	Ucnv_getPlatform                                      *win32.Proc
+	Ucnv_getStandard                                      *win32.Proc
+	Ucnv_getStandardName                                  *win32.Proc
+	Ucnv_getStarters                                      *win32.Proc
+	Ucnv_getSubstChars                                    *win32.Proc
+	Ucnv_getToUCallBack                                   *win32.Proc
+	Ucnv_getType                                          *win32.Proc
+	Ucnv_getUnicodeSet                                    *win32.Proc
+	Ucnv_isAmbiguous                                      *win32.Proc
+	Ucnv_isFixedWidth                                     *win32.Proc
+	Ucnv_open                                             *win32.Proc
+	Ucnv_openAllNames                                     *win32.Proc
+	Ucnv_openCCSID                                        *win32.Proc
+	Ucnv_openPackage                                      *win32.Proc
+	Ucnv_openStandardNames                                *win32.Proc
+	Ucnv_openU                                            *win32.Proc
+	Ucnv_reset                                            *win32.Proc
+	Ucnv_resetFromUnicode                                 *win32.Proc
+	Ucnv_resetToUnicode                                   *win32.Proc
+	Ucnv_safeClone                                        *win32.Proc
+	Ucnv_setDefaultName                                   *win32.Proc
+	Ucnv_setFallback                                      *win32.Proc
+	Ucnv_setFromUCallBack                                 *win32.Proc
+	Ucnv_setSubstChars                                    *win32.Proc
+	Ucnv_setSubstString                                   *win32.Proc
+	Ucnv_setToUCallBack                                   *win32.Proc
+	Ucnv_toAlgorithmic                                    *win32.Proc
+	Ucnv_toUChars                                         *win32.Proc
+	Ucnv_toUCountPending                                  *win32.Proc
+	Ucnv_toUnicode                                        *win32.Proc
+	Ucnv_usesFallback                                     *win32.Proc
+	Ucnvsel_close                                         *win32.Proc
+	Ucnvsel_open                                          *win32.Proc
+	Ucnvsel_openFromSerialized                            *win32.Proc
+	Ucnvsel_selectForString                               *win32.Proc
+	Ucnvsel_selectForUTF8                                 *win32.Proc
+	Ucnvsel_serialize                                     *win32.Proc
+	Ucol_clone                                            *win32.Proc
+	Ucol_cloneBinary                                      *win32.Proc
+	Ucol_close                                            *win32.Proc
+	Ucol_closeElements                                    *win32.Proc
+	Ucol_countAvailable                                   *win32.Proc
+	Ucol_equal                                            *win32.Proc
+	Ucol_getAttribute                                     *win32.Proc
+	Ucol_getAvailable                                     *win32.Proc
+	Ucol_getBound                                         *win32.Proc
+	Ucol_getContractionsAndExpansions                     *win32.Proc
+	Ucol_getDisplayName                                   *win32.Proc
+	Ucol_getEquivalentReorderCodes                        *win32.Proc
+	Ucol_getFunctionalEquivalent                          *win32.Proc
+	Ucol_getKeywordValues                                 *win32.Proc
+	Ucol_getKeywordValuesForLocale                        *win32.Proc
+	Ucol_getKeywords                                      *win32.Proc
+	Ucol_getLocaleByType                                  *win32.Proc
+	Ucol_getMaxExpansion                                  *win32.Proc
+	Ucol_getMaxVariable                                   *win32.Proc
+	Ucol_getOffset                                        *win32.Proc
+	Ucol_getReorderCodes                                  *win32.Proc
+	Ucol_getRules                                         *win32.Proc
+	Ucol_getRulesEx                                       *win32.Proc
+	Ucol_getSortKey                                       *win32.Proc
+	Ucol_getStrength                                      *win32.Proc
+	Ucol_getTailoredSet                                   *win32.Proc
+	Ucol_getUCAVersion                                    *win32.Proc
+	Ucol_getVariableTop                                   *win32.Proc
+	Ucol_getVersion                                       *win32.Proc
+	Ucol_greater                                          *win32.Proc
+	Ucol_greaterOrEqual                                   *win32.Proc
+	Ucol_keyHashCode                                      *win32.Proc
+	Ucol_mergeSortkeys                                    *win32.Proc
+	Ucol_next                                             *win32.Proc
+	Ucol_nextSortKeyPart                                  *win32.Proc
+	Ucol_open                                             *win32.Proc
+	Ucol_openAvailableLocales                             *win32.Proc
+	Ucol_openBinary                                       *win32.Proc
+	Ucol_openElements                                     *win32.Proc
+	Ucol_openRules                                        *win32.Proc
+	Ucol_previous                                         *win32.Proc
+	Ucol_primaryOrder                                     *win32.Proc
+	Ucol_reset                                            *win32.Proc
+	Ucol_safeClone                                        *win32.Proc
+	Ucol_secondaryOrder                                   *win32.Proc
+	Ucol_setAttribute                                     *win32.Proc
+	Ucol_setMaxVariable                                   *win32.Proc
+	Ucol_setOffset                                        *win32.Proc
+	Ucol_setReorderCodes                                  *win32.Proc
+	Ucol_setStrength                                      *win32.Proc
+	Ucol_setText                                          *win32.Proc
+	Ucol_strcoll                                          *win32.Proc
+	Ucol_strcollIter                                      *win32.Proc
+	Ucol_strcollUTF8                                      *win32.Proc
+	Ucol_tertiaryOrder                                    *win32.Proc
+	Ucpmap_get                                            *win32.Proc
+	Ucpmap_getRange                                       *win32.Proc
+	Ucptrie_close                                         *win32.Proc
+	Ucptrie_get                                           *win32.Proc
+	Ucptrie_getRange                                      *win32.Proc
+	Ucptrie_getType                                       *win32.Proc
+	Ucptrie_getValueWidth                                 *win32.Proc
+	Ucptrie_internalSmallIndex                            *win32.Proc
+	Ucptrie_internalSmallU8Index                          *win32.Proc
+	Ucptrie_internalU8PrevIndex                           *win32.Proc
+	Ucptrie_openFromBinary                                *win32.Proc
+	Ucptrie_toBinary                                      *win32.Proc
+	Ucsdet_close                                          *win32.Proc
+	Ucsdet_detect                                         *win32.Proc
+	Ucsdet_detectAll                                      *win32.Proc
+	Ucsdet_enableInputFilter                              *win32.Proc
+	Ucsdet_getAllDetectableCharsets                       *win32.Proc
+	Ucsdet_getConfidence                                  *win32.Proc
+	Ucsdet_getLanguage                                    *win32.Proc
+	Ucsdet_getName                                        *win32.Proc
+	Ucsdet_getUChars                                      *win32.Proc
+	Ucsdet_isInputFilterEnabled                           *win32.Proc
+	Ucsdet_open                                           *win32.Proc
+	Ucsdet_setDeclaredEncoding                            *win32.Proc
+	Ucsdet_setText                                        *win32.Proc
+	Ucurr_countCurrencies                                 *win32.Proc
+	Ucurr_forLocale                                       *win32.Proc
+	Ucurr_forLocaleAndDate                                *win32.Proc
+	Ucurr_getDefaultFractionDigits                        *win32.Proc
+	Ucurr_getDefaultFractionDigitsForUsage                *win32.Proc
+	Ucurr_getKeywordValuesForLocale                       *win32.Proc
+	Ucurr_getName                                         *win32.Proc
+	Ucurr_getNumericCode                                  *win32.Proc
+	Ucurr_getPluralName                                   *win32.Proc
+	Ucurr_getRoundingIncrement                            *win32.Proc
+	Ucurr_getRoundingIncrementForUsage                    *win32.Proc
+	Ucurr_isAvailable                                     *win32.Proc
+	Ucurr_openISOCurrencies                               *win32.Proc
+	Ucurr_register                                        *win32.Proc
+	Ucurr_unregister                                      *win32.Proc
+	Udat_adoptNumberFormat                                *win32.Proc
+	Udat_adoptNumberFormatForFields                       *win32.Proc
+	Udat_applyPattern                                     *win32.Proc
+	Udat_clone                                            *win32.Proc
+	Udat_close                                            *win32.Proc
+	Udat_countAvailable                                   *win32.Proc
+	Udat_countSymbols                                     *win32.Proc
+	Udat_format                                           *win32.Proc
+	Udat_formatCalendar                                   *win32.Proc
+	Udat_formatCalendarForFields                          *win32.Proc
+	Udat_formatForFields                                  *win32.Proc
+	Udat_get2DigitYearStart                               *win32.Proc
+	Udat_getAvailable                                     *win32.Proc
+	Udat_getBooleanAttribute                              *win32.Proc
+	Udat_getCalendar                                      *win32.Proc
+	Udat_getContext                                       *win32.Proc
+	Udat_getLocaleByType                                  *win32.Proc
+	Udat_getNumberFormat                                  *win32.Proc
+	Udat_getNumberFormatForField                          *win32.Proc
+	Udat_getSymbols                                       *win32.Proc
+	Udat_isLenient                                        *win32.Proc
+	Udat_open                                             *win32.Proc
+	Udat_parse                                            *win32.Proc
+	Udat_parseCalendar                                    *win32.Proc
+	Udat_set2DigitYearStart                               *win32.Proc
+	Udat_setBooleanAttribute                              *win32.Proc
+	Udat_setCalendar                                      *win32.Proc
+	Udat_setContext                                       *win32.Proc
+	Udat_setLenient                                       *win32.Proc
+	Udat_setNumberFormat                                  *win32.Proc
+	Udat_setSymbols                                       *win32.Proc
+	Udat_toCalendarDateField                              *win32.Proc
+	Udat_toPattern                                        *win32.Proc
+	Udatpg_addPattern                                     *win32.Proc
+	Udatpg_clone                                          *win32.Proc
+	Udatpg_close                                          *win32.Proc
+	Udatpg_getAppendItemFormat                            *win32.Proc
+	Udatpg_getAppendItemName                              *win32.Proc
+	Udatpg_getBaseSkeleton                                *win32.Proc
+	Udatpg_getBestPattern                                 *win32.Proc
+	Udatpg_getBestPatternWithOptions                      *win32.Proc
+	Udatpg_getDateTimeFormat                              *win32.Proc
+	Udatpg_getDecimal                                     *win32.Proc
+	Udatpg_getDefaultHourCycle                            *win32.Proc
+	Udatpg_getFieldDisplayName                            *win32.Proc
+	Udatpg_getPatternForSkeleton                          *win32.Proc
+	Udatpg_getSkeleton                                    *win32.Proc
+	Udatpg_open                                           *win32.Proc
+	Udatpg_openBaseSkeletons                              *win32.Proc
+	Udatpg_openEmpty                                      *win32.Proc
+	Udatpg_openSkeletons                                  *win32.Proc
+	Udatpg_replaceFieldTypes                              *win32.Proc
+	Udatpg_replaceFieldTypesWithOptions                   *win32.Proc
+	Udatpg_setAppendItemFormat                            *win32.Proc
+	Udatpg_setAppendItemName                              *win32.Proc
+	Udatpg_setDateTimeFormat                              *win32.Proc
+	Udatpg_setDecimal                                     *win32.Proc
+	Udtitvfmt_close                                       *win32.Proc
+	Udtitvfmt_closeResult                                 *win32.Proc
+	Udtitvfmt_format                                      *win32.Proc
+	Udtitvfmt_formatToResult                              *win32.Proc
+	Udtitvfmt_getContext                                  *win32.Proc
+	Udtitvfmt_open                                        *win32.Proc
+	Udtitvfmt_openResult                                  *win32.Proc
+	Udtitvfmt_resultAsValue                               *win32.Proc
+	Udtitvfmt_setContext                                  *win32.Proc
+	Uenum_close                                           *win32.Proc
+	Uenum_count                                           *win32.Proc
+	Uenum_next                                            *win32.Proc
+	Uenum_openCharStringsEnumeration                      *win32.Proc
+	Uenum_openUCharStringsEnumeration                     *win32.Proc
+	Uenum_reset                                           *win32.Proc
+	Uenum_unext                                           *win32.Proc
+	Ufieldpositer_close                                   *win32.Proc
+	Ufieldpositer_next                                    *win32.Proc
+	Ufieldpositer_open                                    *win32.Proc
+	Ufmt_close                                            *win32.Proc
+	Ufmt_getArrayItemByIndex                              *win32.Proc
+	Ufmt_getArrayLength                                   *win32.Proc
+	Ufmt_getDate                                          *win32.Proc
+	Ufmt_getDecNumChars                                   *win32.Proc
+	Ufmt_getDouble                                        *win32.Proc
+	Ufmt_getInt64                                         *win32.Proc
+	Ufmt_getLong                                          *win32.Proc
+	Ufmt_getObject                                        *win32.Proc
+	Ufmt_getType                                          *win32.Proc
+	Ufmt_getUChars                                        *win32.Proc
+	Ufmt_isNumeric                                        *win32.Proc
+	Ufmt_open                                             *win32.Proc
+	Ufmtval_getString                                     *win32.Proc
+	Ufmtval_nextPosition                                  *win32.Proc
+	Ugender_getInstance                                   *win32.Proc
+	Ugender_getListGender                                 *win32.Proc
+	Uidna_close                                           *win32.Proc
+	Uidna_labelToASCII                                    *win32.Proc
+	Uidna_labelToASCII_UTF8                               *win32.Proc
+	Uidna_labelToUnicode                                  *win32.Proc
+	Uidna_labelToUnicodeUTF8                              *win32.Proc
+	Uidna_nameToASCII                                     *win32.Proc
+	Uidna_nameToASCII_UTF8                                *win32.Proc
+	Uidna_nameToUnicode                                   *win32.Proc
+	Uidna_nameToUnicodeUTF8                               *win32.Proc
+	Uidna_openUTS46                                       *win32.Proc
+	Uiter_current32                                       *win32.Proc
+	Uiter_getState                                        *win32.Proc
+	Uiter_next32                                          *win32.Proc
+	Uiter_previous32                                      *win32.Proc
+	Uiter_setState                                        *win32.Proc
+	Uiter_setString                                       *win32.Proc
+	Uiter_setUTF16BE                                      *win32.Proc
+	Uiter_setUTF8                                         *win32.Proc
+	Uldn_close                                            *win32.Proc
+	Uldn_getContext                                       *win32.Proc
+	Uldn_getDialectHandling                               *win32.Proc
+	Uldn_getLocale                                        *win32.Proc
+	Uldn_keyDisplayName                                   *win32.Proc
+	Uldn_keyValueDisplayName                              *win32.Proc
+	Uldn_languageDisplayName                              *win32.Proc
+	Uldn_localeDisplayName                                *win32.Proc
+	Uldn_open                                             *win32.Proc
+	Uldn_openForContext                                   *win32.Proc
+	Uldn_regionDisplayName                                *win32.Proc
+	Uldn_scriptCodeDisplayName                            *win32.Proc
+	Uldn_scriptDisplayName                                *win32.Proc
+	Uldn_variantDisplayName                               *win32.Proc
+	Ulistfmt_close                                        *win32.Proc
+	Ulistfmt_closeResult                                  *win32.Proc
+	Ulistfmt_format                                       *win32.Proc
+	Ulistfmt_formatStringsToResult                        *win32.Proc
+	Ulistfmt_open                                         *win32.Proc
+	Ulistfmt_openForType                                  *win32.Proc
+	Ulistfmt_openResult                                   *win32.Proc
+	Ulistfmt_resultAsValue                                *win32.Proc
+	Uloc_acceptLanguage                                   *win32.Proc
+	Uloc_acceptLanguageFromHTTP                           *win32.Proc
+	Uloc_addLikelySubtags                                 *win32.Proc
+	Uloc_canonicalize                                     *win32.Proc
+	Uloc_countAvailable                                   *win32.Proc
+	Uloc_forLanguageTag                                   *win32.Proc
+	Uloc_getAvailable                                     *win32.Proc
+	Uloc_getBaseName                                      *win32.Proc
+	Uloc_getCharacterOrientation                          *win32.Proc
+	Uloc_getCountry                                       *win32.Proc
+	Uloc_getDefault                                       *win32.Proc
+	Uloc_getDisplayCountry                                *win32.Proc
+	Uloc_getDisplayKeyword                                *win32.Proc
+	Uloc_getDisplayKeywordValue                           *win32.Proc
+	Uloc_getDisplayLanguage                               *win32.Proc
+	Uloc_getDisplayName                                   *win32.Proc
+	Uloc_getDisplayScript                                 *win32.Proc
+	Uloc_getDisplayVariant                                *win32.Proc
+	Uloc_getISO3Country                                   *win32.Proc
+	Uloc_getISO3Language                                  *win32.Proc
+	Uloc_getISOCountries                                  *win32.Proc
+	Uloc_getISOLanguages                                  *win32.Proc
+	Uloc_getKeywordValue                                  *win32.Proc
+	Uloc_getLCID                                          *win32.Proc
+	Uloc_getLanguage                                      *win32.Proc
+	Uloc_getLineOrientation                               *win32.Proc
+	Uloc_getLocaleForLCID                                 *win32.Proc
+	Uloc_getName                                          *win32.Proc
+	Uloc_getParent                                        *win32.Proc
+	Uloc_getScript                                        *win32.Proc
+	Uloc_getVariant                                       *win32.Proc
+	Uloc_isRightToLeft                                    *win32.Proc
+	Uloc_minimizeSubtags                                  *win32.Proc
+	Uloc_openAvailableByType                              *win32.Proc
+	Uloc_openKeywords                                     *win32.Proc
+	Uloc_setDefault                                       *win32.Proc
+	Uloc_setKeywordValue                                  *win32.Proc
+	Uloc_toLanguageTag                                    *win32.Proc
+	Uloc_toLegacyKey                                      *win32.Proc
+	Uloc_toLegacyType                                     *win32.Proc
+	Uloc_toUnicodeLocaleKey                               *win32.Proc
+	Uloc_toUnicodeLocaleType                              *win32.Proc
+	Ulocdata_close                                        *win32.Proc
+	Ulocdata_getCLDRVersion                               *win32.Proc
+	Ulocdata_getDelimiter                                 *win32.Proc
+	Ulocdata_getExemplarSet                               *win32.Proc
+	Ulocdata_getLocaleDisplayPattern                      *win32.Proc
+	Ulocdata_getLocaleSeparator                           *win32.Proc
+	Ulocdata_getMeasurementSystem                         *win32.Proc
+	Ulocdata_getNoSubstitute                              *win32.Proc
+	Ulocdata_getPaperSize                                 *win32.Proc
+	Ulocdata_open                                         *win32.Proc
+	Ulocdata_setNoSubstitute                              *win32.Proc
+	Umsg_applyPattern                                     *win32.Proc
+	Umsg_autoQuoteApostrophe                              *win32.Proc
+	Umsg_clone                                            *win32.Proc
+	Umsg_close                                            *win32.Proc
+	Umsg_format                                           *win32.Proc
+	Umsg_getLocale                                        *win32.Proc
+	Umsg_open                                             *win32.Proc
+	Umsg_parse                                            *win32.Proc
+	Umsg_setLocale                                        *win32.Proc
+	Umsg_toPattern                                        *win32.Proc
+	Umsg_vformat                                          *win32.Proc
+	Umsg_vparse                                           *win32.Proc
+	Umutablecptrie_buildImmutable                         *win32.Proc
+	Umutablecptrie_clone                                  *win32.Proc
+	Umutablecptrie_close                                  *win32.Proc
+	Umutablecptrie_fromUCPMap                             *win32.Proc
+	Umutablecptrie_fromUCPTrie                            *win32.Proc
+	Umutablecptrie_get                                    *win32.Proc
+	Umutablecptrie_getRange                               *win32.Proc
+	Umutablecptrie_open                                   *win32.Proc
+	Umutablecptrie_set                                    *win32.Proc
+	Umutablecptrie_setRange                               *win32.Proc
+	Unorm2_append                                         *win32.Proc
+	Unorm2_close                                          *win32.Proc
+	Unorm2_composePair                                    *win32.Proc
+	Unorm2_getCombiningClass                              *win32.Proc
+	Unorm2_getDecomposition                               *win32.Proc
+	Unorm2_getInstance                                    *win32.Proc
+	Unorm2_getNFCInstance                                 *win32.Proc
+	Unorm2_getNFDInstance                                 *win32.Proc
+	Unorm2_getNFKCCasefoldInstance                        *win32.Proc
+	Unorm2_getNFKCInstance                                *win32.Proc
+	Unorm2_getNFKDInstance                                *win32.Proc
+	Unorm2_getRawDecomposition                            *win32.Proc
+	Unorm2_hasBoundaryAfter                               *win32.Proc
+	Unorm2_hasBoundaryBefore                              *win32.Proc
+	Unorm2_isInert                                        *win32.Proc
+	Unorm2_isNormalized                                   *win32.Proc
+	Unorm2_normalize                                      *win32.Proc
+	Unorm2_normalizeSecondAndAppend                       *win32.Proc
+	Unorm2_openFiltered                                   *win32.Proc
+	Unorm2_quickCheck                                     *win32.Proc
+	Unorm2_spanQuickCheckYes                              *win32.Proc
+	Unorm_compare                                         *win32.Proc
+	Unum_applyPattern                                     *win32.Proc
+	Unum_clone                                            *win32.Proc
+	Unum_close                                            *win32.Proc
+	Unum_countAvailable                                   *win32.Proc
+	Unum_format                                           *win32.Proc
+	Unum_formatDecimal                                    *win32.Proc
+	Unum_formatDouble                                     *win32.Proc
+	Unum_formatDoubleCurrency                             *win32.Proc
+	Unum_formatDoubleForFields                            *win32.Proc
+	Unum_formatInt64                                      *win32.Proc
+	Unum_formatUFormattable                               *win32.Proc
+	Unum_getAttribute                                     *win32.Proc
+	Unum_getAvailable                                     *win32.Proc
+	Unum_getContext                                       *win32.Proc
+	Unum_getDoubleAttribute                               *win32.Proc
+	Unum_getLocaleByType                                  *win32.Proc
+	Unum_getSymbol                                        *win32.Proc
+	Unum_getTextAttribute                                 *win32.Proc
+	Unum_open                                             *win32.Proc
+	Unum_parse                                            *win32.Proc
+	Unum_parseDecimal                                     *win32.Proc
+	Unum_parseDouble                                      *win32.Proc
+	Unum_parseDoubleCurrency                              *win32.Proc
+	Unum_parseInt64                                       *win32.Proc
+	Unum_parseToUFormattable                              *win32.Proc
+	Unum_setAttribute                                     *win32.Proc
+	Unum_setContext                                       *win32.Proc
+	Unum_setDoubleAttribute                               *win32.Proc
+	Unum_setSymbol                                        *win32.Proc
+	Unum_setTextAttribute                                 *win32.Proc
+	Unum_toPattern                                        *win32.Proc
+	Unumf_close                                           *win32.Proc
+	Unumf_closeResult                                     *win32.Proc
+	Unumf_formatDecimal                                   *win32.Proc
+	Unumf_formatDouble                                    *win32.Proc
+	Unumf_formatInt                                       *win32.Proc
+	Unumf_openForSkeletonAndLocale                        *win32.Proc
+	Unumf_openForSkeletonAndLocaleWithError               *win32.Proc
+	Unumf_openResult                                      *win32.Proc
+	Unumf_resultAsValue                                   *win32.Proc
+	Unumf_resultGetAllFieldPositions                      *win32.Proc
+	Unumf_resultNextFieldPosition                         *win32.Proc
+	Unumf_resultToDecimalNumber                           *win32.Proc
+	Unumf_resultToString                                  *win32.Proc
+	Unumrf_close                                          *win32.Proc
+	Unumrf_closeResult                                    *win32.Proc
+	Unumrf_formatDecimalRange                             *win32.Proc
+	Unumrf_formatDoubleRange                              *win32.Proc
+	Unumrf_openForSkeletonWithCollapseAndIdentityFallback *win32.Proc
+	Unumrf_openResult                                     *win32.Proc
+	Unumrf_resultAsValue                                  *win32.Proc
+	Unumrf_resultGetFirstDecimalNumber                    *win32.Proc
+	Unumrf_resultGetIdentityResult                        *win32.Proc
+	Unumrf_resultGetSecondDecimalNumber                   *win32.Proc
+	Unumsys_close                                         *win32.Proc
+	Unumsys_getDescription                                *win32.Proc
+	Unumsys_getName                                       *win32.Proc
+	Unumsys_getRadix                                      *win32.Proc
+	Unumsys_isAlgorithmic                                 *win32.Proc
+	Unumsys_open                                          *win32.Proc
+	Unumsys_openAvailableNames                            *win32.Proc
+	Unumsys_openByName                                    *win32.Proc
+	UpdateCalendarDayOfWeek                               *win32.Proc
+	Uplrules_close                                        *win32.Proc
+	Uplrules_getKeywords                                  *win32.Proc
+	Uplrules_open                                         *win32.Proc
+	Uplrules_openForType                                  *win32.Proc
+	Uplrules_select                                       *win32.Proc
+	Uplrules_selectFormatted                              *win32.Proc
+	Uregex_appendReplacement                              *win32.Proc
+	Uregex_appendReplacementUText                         *win32.Proc
+	Uregex_appendTail                                     *win32.Proc
+	Uregex_appendTailUText                                *win32.Proc
+	Uregex_clone                                          *win32.Proc
+	Uregex_close                                          *win32.Proc
+	Uregex_end                                            *win32.Proc
+	Uregex_end64                                          *win32.Proc
+	Uregex_find                                           *win32.Proc
+	Uregex_find64                                         *win32.Proc
+	Uregex_findNext                                       *win32.Proc
+	Uregex_flags                                          *win32.Proc
+	Uregex_getFindProgressCallback                        *win32.Proc
+	Uregex_getMatchCallback                               *win32.Proc
+	Uregex_getStackLimit                                  *win32.Proc
+	Uregex_getText                                        *win32.Proc
+	Uregex_getTimeLimit                                   *win32.Proc
+	Uregex_getUText                                       *win32.Proc
+	Uregex_group                                          *win32.Proc
+	Uregex_groupCount                                     *win32.Proc
+	Uregex_groupNumberFromCName                           *win32.Proc
+	Uregex_groupNumberFromName                            *win32.Proc
+	Uregex_groupUText                                     *win32.Proc
+	Uregex_hasAnchoringBounds                             *win32.Proc
+	Uregex_hasTransparentBounds                           *win32.Proc
+	Uregex_hitEnd                                         *win32.Proc
+	Uregex_lookingAt                                      *win32.Proc
+	Uregex_lookingAt64                                    *win32.Proc
+	Uregex_matches                                        *win32.Proc
+	Uregex_matches64                                      *win32.Proc
+	Uregex_open                                           *win32.Proc
+	Uregex_openC                                          *win32.Proc
+	Uregex_openUText                                      *win32.Proc
+	Uregex_pattern                                        *win32.Proc
+	Uregex_patternUText                                   *win32.Proc
+	Uregex_refreshUText                                   *win32.Proc
+	Uregex_regionEnd                                      *win32.Proc
+	Uregex_regionEnd64                                    *win32.Proc
+	Uregex_regionStart                                    *win32.Proc
+	Uregex_regionStart64                                  *win32.Proc
+	Uregex_replaceAll                                     *win32.Proc
+	Uregex_replaceAllUText                                *win32.Proc
+	Uregex_replaceFirst                                   *win32.Proc
+	Uregex_replaceFirstUText                              *win32.Proc
+	Uregex_requireEnd                                     *win32.Proc
+	Uregex_reset                                          *win32.Proc
+	Uregex_reset64                                        *win32.Proc
+	Uregex_setFindProgressCallback                        *win32.Proc
+	Uregex_setMatchCallback                               *win32.Proc
+	Uregex_setRegion                                      *win32.Proc
+	Uregex_setRegion64                                    *win32.Proc
+	Uregex_setRegionAndStart                              *win32.Proc
+	Uregex_setStackLimit                                  *win32.Proc
+	Uregex_setText                                        *win32.Proc
+	Uregex_setTimeLimit                                   *win32.Proc
+	Uregex_setUText                                       *win32.Proc
+	Uregex_split                                          *win32.Proc
+	Uregex_splitUText                                     *win32.Proc
+	Uregex_start                                          *win32.Proc
+	Uregex_start64                                        *win32.Proc
+	Uregex_useAnchoringBounds                             *win32.Proc
+	Uregex_useTransparentBounds                           *win32.Proc
+	Uregion_areEqual                                      *win32.Proc
+	Uregion_contains                                      *win32.Proc
+	Uregion_getAvailable                                  *win32.Proc
+	Uregion_getContainedRegions                           *win32.Proc
+	Uregion_getContainedRegionsOfType                     *win32.Proc
+	Uregion_getContainingRegion                           *win32.Proc
+	Uregion_getContainingRegionOfType                     *win32.Proc
+	Uregion_getNumericCode                                *win32.Proc
+	Uregion_getPreferredValues                            *win32.Proc
+	Uregion_getRegionCode                                 *win32.Proc
+	Uregion_getRegionFromCode                             *win32.Proc
+	Uregion_getRegionFromNumericCode                      *win32.Proc
+	Uregion_getType                                       *win32.Proc
+	Ureldatefmt_close                                     *win32.Proc
+	Ureldatefmt_closeResult                               *win32.Proc
+	Ureldatefmt_combineDateAndTime                        *win32.Proc
+	Ureldatefmt_format                                    *win32.Proc
+	Ureldatefmt_formatNumeric                             *win32.Proc
+	Ureldatefmt_formatNumericToResult                     *win32.Proc
+	Ureldatefmt_formatToResult                            *win32.Proc
+	Ureldatefmt_open                                      *win32.Proc
+	Ureldatefmt_openResult                                *win32.Proc
+	Ureldatefmt_resultAsValue                             *win32.Proc
+	Ures_close                                            *win32.Proc
+	Ures_getBinary                                        *win32.Proc
+	Ures_getByIndex                                       *win32.Proc
+	Ures_getByKey                                         *win32.Proc
+	Ures_getInt                                           *win32.Proc
+	Ures_getIntVector                                     *win32.Proc
+	Ures_getKey                                           *win32.Proc
+	Ures_getLocaleByType                                  *win32.Proc
+	Ures_getNextResource                                  *win32.Proc
+	Ures_getNextString                                    *win32.Proc
+	Ures_getSize                                          *win32.Proc
+	Ures_getString                                        *win32.Proc
+	Ures_getStringByIndex                                 *win32.Proc
+	Ures_getStringByKey                                   *win32.Proc
+	Ures_getType                                          *win32.Proc
+	Ures_getUInt                                          *win32.Proc
+	Ures_getUTF8String                                    *win32.Proc
+	Ures_getUTF8StringByIndex                             *win32.Proc
+	Ures_getUTF8StringByKey                               *win32.Proc
+	Ures_getVersion                                       *win32.Proc
+	Ures_hasNext                                          *win32.Proc
+	Ures_open                                             *win32.Proc
+	Ures_openAvailableLocales                             *win32.Proc
+	Ures_openDirect                                       *win32.Proc
+	Ures_openU                                            *win32.Proc
+	Ures_resetIterator                                    *win32.Proc
+	Uscript_breaksBetweenLetters                          *win32.Proc
+	Uscript_getCode                                       *win32.Proc
+	Uscript_getName                                       *win32.Proc
+	Uscript_getSampleString                               *win32.Proc
+	Uscript_getScript                                     *win32.Proc
+	Uscript_getScriptExtensions                           *win32.Proc
+	Uscript_getShortName                                  *win32.Proc
+	Uscript_getUsage                                      *win32.Proc
+	Uscript_hasScript                                     *win32.Proc
+	Uscript_isCased                                       *win32.Proc
+	Uscript_isRightToLeft                                 *win32.Proc
+	Usearch_close                                         *win32.Proc
+	Usearch_first                                         *win32.Proc
+	Usearch_following                                     *win32.Proc
+	Usearch_getAttribute                                  *win32.Proc
+	Usearch_getBreakIterator                              *win32.Proc
+	Usearch_getCollator                                   *win32.Proc
+	Usearch_getMatchedLength                              *win32.Proc
+	Usearch_getMatchedStart                               *win32.Proc
+	Usearch_getMatchedText                                *win32.Proc
+	Usearch_getOffset                                     *win32.Proc
+	Usearch_getPattern                                    *win32.Proc
+	Usearch_getText                                       *win32.Proc
+	Usearch_last                                          *win32.Proc
+	Usearch_next                                          *win32.Proc
+	Usearch_open                                          *win32.Proc
+	Usearch_openFromCollator                              *win32.Proc
+	Usearch_preceding                                     *win32.Proc
+	Usearch_previous                                      *win32.Proc
+	Usearch_reset                                         *win32.Proc
+	Usearch_setAttribute                                  *win32.Proc
+	Usearch_setBreakIterator                              *win32.Proc
+	Usearch_setCollator                                   *win32.Proc
+	Usearch_setOffset                                     *win32.Proc
+	Usearch_setPattern                                    *win32.Proc
+	Usearch_setText                                       *win32.Proc
+	Uset_add                                              *win32.Proc
+	Uset_addAll                                           *win32.Proc
+	Uset_addAllCodePoints                                 *win32.Proc
+	Uset_addRange                                         *win32.Proc
+	Uset_addString                                        *win32.Proc
+	Uset_applyIntPropertyValue                            *win32.Proc
+	Uset_applyPattern                                     *win32.Proc
+	Uset_applyPropertyAlias                               *win32.Proc
+	Uset_charAt                                           *win32.Proc
+	Uset_clear                                            *win32.Proc
+	Uset_clone                                            *win32.Proc
+	Uset_cloneAsThawed                                    *win32.Proc
+	Uset_close                                            *win32.Proc
+	Uset_closeOver                                        *win32.Proc
+	Uset_compact                                          *win32.Proc
+	Uset_complement                                       *win32.Proc
+	Uset_complementAll                                    *win32.Proc
+	Uset_complementAllCodePoints                          *win32.Proc
+	Uset_complementRange                                  *win32.Proc
+	Uset_complementString                                 *win32.Proc
+	Uset_contains                                         *win32.Proc
+	Uset_containsAll                                      *win32.Proc
+	Uset_containsAllCodePoints                            *win32.Proc
+	Uset_containsNone                                     *win32.Proc
+	Uset_containsRange                                    *win32.Proc
+	Uset_containsSome                                     *win32.Proc
+	Uset_containsString                                   *win32.Proc
+	Uset_equals                                           *win32.Proc
+	Uset_freeze                                           *win32.Proc
+	Uset_getItem                                          *win32.Proc
+	Uset_getItemCount                                     *win32.Proc
+	Uset_getRangeCount                                    *win32.Proc
+	Uset_getSerializedRange                               *win32.Proc
+	Uset_getSerializedRangeCount                          *win32.Proc
+	Uset_getSerializedSet                                 *win32.Proc
+	Uset_hasStrings                                       *win32.Proc
+	Uset_indexOf                                          *win32.Proc
+	Uset_isEmpty                                          *win32.Proc
+	Uset_isFrozen                                         *win32.Proc
+	Uset_open                                             *win32.Proc
+	Uset_openEmpty                                        *win32.Proc
+	Uset_openPattern                                      *win32.Proc
+	Uset_openPatternOptions                               *win32.Proc
+	Uset_remove                                           *win32.Proc
+	Uset_removeAll                                        *win32.Proc
+	Uset_removeAllCodePoints                              *win32.Proc
+	Uset_removeAllStrings                                 *win32.Proc
+	Uset_removeRange                                      *win32.Proc
+	Uset_removeString                                     *win32.Proc
+	Uset_resemblesPattern                                 *win32.Proc
+	Uset_retain                                           *win32.Proc
+	Uset_retainAll                                        *win32.Proc
+	Uset_retainAllCodePoints                              *win32.Proc
+	Uset_retainString                                     *win32.Proc
+	Uset_serialize                                        *win32.Proc
+	Uset_serializedContains                               *win32.Proc
+	Uset_set                                              *win32.Proc
+	Uset_setSerializedToOne                               *win32.Proc
+	Uset_size                                             *win32.Proc
+	Uset_span                                             *win32.Proc
+	Uset_spanBack                                         *win32.Proc
+	Uset_spanBackUTF8                                     *win32.Proc
+	Uset_spanUTF8                                         *win32.Proc
+	Uset_toPattern                                        *win32.Proc
+	Uspoof_areConfusable                                  *win32.Proc
+	Uspoof_areConfusableUTF8                              *win32.Proc
+	Uspoof_check                                          *win32.Proc
+	Uspoof_check2                                         *win32.Proc
+	Uspoof_check2UTF8                                     *win32.Proc
+	Uspoof_checkUTF8                                      *win32.Proc
+	Uspoof_clone                                          *win32.Proc
+	Uspoof_close                                          *win32.Proc
+	Uspoof_closeCheckResult                               *win32.Proc
+	Uspoof_getAllowedChars                                *win32.Proc
+	Uspoof_getAllowedLocales                              *win32.Proc
+	Uspoof_getCheckResultChecks                           *win32.Proc
+	Uspoof_getCheckResultNumerics                         *win32.Proc
+	Uspoof_getCheckResultRestrictionLevel                 *win32.Proc
+	Uspoof_getChecks                                      *win32.Proc
+	Uspoof_getInclusionSet                                *win32.Proc
+	Uspoof_getRecommendedSet                              *win32.Proc
+	Uspoof_getRestrictionLevel                            *win32.Proc
+	Uspoof_getSkeleton                                    *win32.Proc
+	Uspoof_getSkeletonUTF8                                *win32.Proc
+	Uspoof_open                                           *win32.Proc
+	Uspoof_openCheckResult                                *win32.Proc
+	Uspoof_openFromSerialized                             *win32.Proc
+	Uspoof_openFromSource                                 *win32.Proc
+	Uspoof_serialize                                      *win32.Proc
+	Uspoof_setAllowedChars                                *win32.Proc
+	Uspoof_setAllowedLocales                              *win32.Proc
+	Uspoof_setChecks                                      *win32.Proc
+	Uspoof_setRestrictionLevel                            *win32.Proc
+	Usprep_close                                          *win32.Proc
+	Usprep_open                                           *win32.Proc
+	Usprep_openByType                                     *win32.Proc
+	Usprep_prepare                                        *win32.Proc
+	Utext_char32At                                        *win32.Proc
+	Utext_clone                                           *win32.Proc
+	Utext_close                                           *win32.Proc
+	Utext_copy                                            *win32.Proc
+	Utext_current32                                       *win32.Proc
+	Utext_equals                                          *win32.Proc
+	Utext_extract                                         *win32.Proc
+	Utext_freeze                                          *win32.Proc
+	Utext_getNativeIndex                                  *win32.Proc
+	Utext_getPreviousNativeIndex                          *win32.Proc
+	Utext_hasMetaData                                     *win32.Proc
+	Utext_isLengthExpensive                               *win32.Proc
+	Utext_isWritable                                      *win32.Proc
+	Utext_moveIndex32                                     *win32.Proc
+	Utext_nativeLength                                    *win32.Proc
+	Utext_next32                                          *win32.Proc
+	Utext_next32From                                      *win32.Proc
+	Utext_openUChars                                      *win32.Proc
+	Utext_openUTF8                                        *win32.Proc
+	Utext_previous32                                      *win32.Proc
+	Utext_previous32From                                  *win32.Proc
+	Utext_replace                                         *win32.Proc
+	Utext_setNativeIndex                                  *win32.Proc
+	Utext_setup                                           *win32.Proc
+	Utf8_appendCharSafeBody                               *win32.Proc
+	Utf8_back1SafeBody                                    *win32.Proc
+	Utf8_nextCharSafeBody                                 *win32.Proc
+	Utf8_prevCharSafeBody                                 *win32.Proc
+	Utmscale_fromInt64                                    *win32.Proc
+	Utmscale_getTimeScaleValue                            *win32.Proc
+	Utmscale_toInt64                                      *win32.Proc
+	Utrace_format                                         *win32.Proc
+	Utrace_functionName                                   *win32.Proc
+	Utrace_getFunctions                                   *win32.Proc
+	Utrace_getLevel                                       *win32.Proc
+	Utrace_setFunctions                                   *win32.Proc
+	Utrace_setLevel                                       *win32.Proc
+	Utrace_vformat                                        *win32.Proc
+	Utrans_clone                                          *win32.Proc
+	Utrans_close                                          *win32.Proc
+	Utrans_countAvailableIDs                              *win32.Proc
+	Utrans_getSourceSet                                   *win32.Proc
+	Utrans_getUnicodeID                                   *win32.Proc
+	Utrans_openIDs                                        *win32.Proc
+	Utrans_openInverse                                    *win32.Proc
+	Utrans_openU                                          *win32.Proc
+	Utrans_register                                       *win32.Proc
+	Utrans_setFilter                                      *win32.Proc
+	Utrans_toRules                                        *win32.Proc
+	Utrans_trans                                          *win32.Proc
+	Utrans_transIncremental                               *win32.Proc
+	Utrans_transIncrementalUChars                         *win32.Proc
+	Utrans_transUChars                                    *win32.Proc
+	Utrans_unregisterID                                   *win32.Proc
+	VerifyScripts                                         *win32.Proc
+	WideCharToMultiByte                                   *win32.Proc
+}{
+	AdjustCalendarDate:                      procAdjustCalendarDate,
+	CompareString:                           procCompareString,
+	CompareStringA:                          procCompareStringA,
+	CompareStringEx:                         procCompareStringEx,
+	CompareStringOrdinal:                    procCompareStringOrdinal,
+	ConvertCalDateTimeToSystemTime:          procConvertCalDateTimeToSystemTime,
+	ConvertDefaultLocale:                    procConvertDefaultLocale,
+	ConvertSystemTimeToCalDateTime:          procConvertSystemTimeToCalDateTime,
+	EnumCalendarInfo:                        procEnumCalendarInfo,
+	EnumCalendarInfoA:                       procEnumCalendarInfoA,
+	EnumCalendarInfoEx:                      procEnumCalendarInfoEx,
+	EnumCalendarInfoExA:                     procEnumCalendarInfoExA,
+	EnumCalendarInfoExEx:                    procEnumCalendarInfoExEx,
+	EnumDateFormats:                         procEnumDateFormats,
+	EnumDateFormatsA:                        procEnumDateFormatsA,
+	EnumDateFormatsEx:                       procEnumDateFormatsEx,
+	EnumDateFormatsExA:                      procEnumDateFormatsExA,
+	EnumDateFormatsExEx:                     procEnumDateFormatsExEx,
+	EnumLanguageGroupLocales:                procEnumLanguageGroupLocales,
+	EnumLanguageGroupLocalesA:               procEnumLanguageGroupLocalesA,
+	EnumSystemCodePages:                     procEnumSystemCodePages,
+	EnumSystemCodePagesA:                    procEnumSystemCodePagesA,
+	EnumSystemGeoID:                         procEnumSystemGeoID,
+	EnumSystemGeoNames:                      procEnumSystemGeoNames,
+	EnumSystemLanguageGroups:                procEnumSystemLanguageGroups,
+	EnumSystemLanguageGroupsA:               procEnumSystemLanguageGroupsA,
+	EnumSystemLocales:                       procEnumSystemLocales,
+	EnumSystemLocalesA:                      procEnumSystemLocalesA,
+	EnumSystemLocalesEx:                     procEnumSystemLocalesEx,
+	EnumTimeFormats:                         procEnumTimeFormats,
+	EnumTimeFormatsA:                        procEnumTimeFormatsA,
+	EnumTimeFormatsEx:                       procEnumTimeFormatsEx,
+	EnumUILanguages:                         procEnumUILanguages,
+	EnumUILanguagesA:                        procEnumUILanguagesA,
+	FindNLSString:                           procFindNLSString,
+	FindNLSStringEx:                         procFindNLSStringEx,
+	FindStringOrdinal:                       procFindStringOrdinal,
+	FoldString:                              procFoldString,
+	FoldStringA:                             procFoldStringA,
+	GetACP:                                  procGetACP,
+	GetCPInfo:                               procGetCPInfo,
+	GetCPInfoEx:                             procGetCPInfoEx,
+	GetCPInfoExA:                            procGetCPInfoExA,
+	GetCalendarDateFormatEx:                 procGetCalendarDateFormatEx,
+	GetCalendarInfo:                         procGetCalendarInfo,
+	GetCalendarInfoA:                        procGetCalendarInfoA,
+	GetCalendarInfoEx:                       procGetCalendarInfoEx,
+	GetCalendarSupportedDateRange:           procGetCalendarSupportedDateRange,
+	GetCurrencyFormat:                       procGetCurrencyFormat,
+	GetCurrencyFormatA:                      procGetCurrencyFormatA,
+	GetCurrencyFormatEx:                     procGetCurrencyFormatEx,
+	GetDateFormat:                           procGetDateFormat,
+	GetDateFormatA:                          procGetDateFormatA,
+	GetDateFormatEx:                         procGetDateFormatEx,
+	GetDistanceOfClosestLanguageInList:      procGetDistanceOfClosestLanguageInList,
+	GetDurationFormat:                       procGetDurationFormat,
+	GetDurationFormatEx:                     procGetDurationFormatEx,
+	GetFileMUIInfo:                          procGetFileMUIInfo,
+	GetFileMUIPath:                          procGetFileMUIPath,
+	GetGeoInfo:                              procGetGeoInfo,
+	GetGeoInfoA:                             procGetGeoInfoA,
+	GetGeoInfoEx:                            procGetGeoInfoEx,
+	GetLocaleInfo:                           procGetLocaleInfo,
+	GetLocaleInfoA:                          procGetLocaleInfoA,
+	GetLocaleInfoEx:                         procGetLocaleInfoEx,
+	GetNLSVersion:                           procGetNLSVersion,
+	GetNLSVersionEx:                         procGetNLSVersionEx,
+	GetNumberFormat:                         procGetNumberFormat,
+	GetNumberFormatA:                        procGetNumberFormatA,
+	GetNumberFormatEx:                       procGetNumberFormatEx,
+	GetOEMCP:                                procGetOEMCP,
+	GetProcessPreferredUILanguages:          procGetProcessPreferredUILanguages,
+	GetStringScripts:                        procGetStringScripts,
+	GetStringType:                           procGetStringType,
+	GetStringTypeA:                          procGetStringTypeA,
+	GetStringTypeEx:                         procGetStringTypeEx,
+	GetStringTypeExA:                        procGetStringTypeExA,
+	GetSystemDefaultLCID:                    procGetSystemDefaultLCID,
+	GetSystemDefaultLangID:                  procGetSystemDefaultLangID,
+	GetSystemDefaultLocaleName:              procGetSystemDefaultLocaleName,
+	GetSystemDefaultUILanguage:              procGetSystemDefaultUILanguage,
+	GetSystemPreferredUILanguages:           procGetSystemPreferredUILanguages,
+	GetTextCharset:                          procGetTextCharset,
+	GetTextCharsetInfo:                      procGetTextCharsetInfo,
+	GetThreadLocale:                         procGetThreadLocale,
+	GetThreadPreferredUILanguages:           procGetThreadPreferredUILanguages,
+	GetThreadUILanguage:                     procGetThreadUILanguage,
+	GetTimeFormat:                           procGetTimeFormat,
+	GetTimeFormatA:                          procGetTimeFormatA,
+	GetTimeFormatEx:                         procGetTimeFormatEx,
+	GetUILanguageInfo:                       procGetUILanguageInfo,
+	GetUserDefaultGeoName:                   procGetUserDefaultGeoName,
+	GetUserDefaultLCID:                      procGetUserDefaultLCID,
+	GetUserDefaultLangID:                    procGetUserDefaultLangID,
+	GetUserDefaultLocaleName:                procGetUserDefaultLocaleName,
+	GetUserDefaultUILanguage:                procGetUserDefaultUILanguage,
+	GetUserGeoID:                            procGetUserGeoID,
+	GetUserPreferredUILanguages:             procGetUserPreferredUILanguages,
+	IdnToAscii:                              procIdnToAscii,
+	IdnToNameprepUnicode:                    procIdnToNameprepUnicode,
+	IdnToUnicode:                            procIdnToUnicode,
+	IsCalendarLeapYear:                      procIsCalendarLeapYear,
+	IsDBCSLeadByte:                          procIsDBCSLeadByte,
+	IsDBCSLeadByteEx:                        procIsDBCSLeadByteEx,
+	IsNLSDefinedString:                      procIsNLSDefinedString,
+	IsNormalizedString:                      procIsNormalizedString,
+	IsTextUnicode:                           procIsTextUnicode,
+	IsValidCodePage:                         procIsValidCodePage,
+	IsValidLanguageGroup:                    procIsValidLanguageGroup,
+	IsValidLocale:                           procIsValidLocale,
+	IsValidLocaleName:                       procIsValidLocaleName,
+	IsValidNLSVersion:                       procIsValidNLSVersion,
+	IsWellFormedTag:                         procIsWellFormedTag,
+	LCIDToLocaleName:                        procLCIDToLocaleName,
+	LCMapString:                             procLCMapString,
+	LCMapStringA:                            procLCMapStringA,
+	LCMapStringEx:                           procLCMapStringEx,
+	LocaleNameToLCID:                        procLocaleNameToLCID,
+	Lstrcat:                                 procLstrcat,
+	LstrcatA:                                procLstrcatA,
+	Lstrcmp:                                 procLstrcmp,
+	LstrcmpA:                                procLstrcmpA,
+	Lstrcmpi:                                procLstrcmpi,
+	LstrcmpiA:                               procLstrcmpiA,
+	Lstrcpy:                                 procLstrcpy,
+	LstrcpyA:                                procLstrcpyA,
+	Lstrcpyn:                                procLstrcpyn,
+	LstrcpynA:                               procLstrcpynA,
+	Lstrlen:                                 procLstrlen,
+	LstrlenA:                                procLstrlenA,
+	MappingDoAction:                         procMappingDoAction,
+	MappingFreePropertyBag:                  procMappingFreePropertyBag,
+	MappingFreeServices:                     procMappingFreeServices,
+	MappingGetServices:                      procMappingGetServices,
+	MappingRecognizeText:                    procMappingRecognizeText,
+	MultiByteToWideChar:                     procMultiByteToWideChar,
+	NormalizeString:                         procNormalizeString,
+	NotifyUILanguageChange:                  procNotifyUILanguageChange,
+	ResolveLocaleName:                       procResolveLocaleName,
+	RestoreThreadPreferredUILanguages:       procRestoreThreadPreferredUILanguages,
+	ScriptApplyDigitSubstitution:            procScriptApplyDigitSubstitution,
+	ScriptApplyLogicalWidth:                 procScriptApplyLogicalWidth,
+	ScriptBreak:                             procScriptBreak,
+	ScriptCPtoX:                             procScriptCPtoX,
+	ScriptCacheGetHeight:                    procScriptCacheGetHeight,
+	ScriptFreeCache:                         procScriptFreeCache,
+	ScriptGetCMap:                           procScriptGetCMap,
+	ScriptGetFontAlternateGlyphs:            procScriptGetFontAlternateGlyphs,
+	ScriptGetFontFeatureTags:                procScriptGetFontFeatureTags,
+	ScriptGetFontLanguageTags:               procScriptGetFontLanguageTags,
+	ScriptGetFontProperties:                 procScriptGetFontProperties,
+	ScriptGetFontScriptTags:                 procScriptGetFontScriptTags,
+	ScriptGetGlyphABCWidth:                  procScriptGetGlyphABCWidth,
+	ScriptGetLogicalWidths:                  procScriptGetLogicalWidths,
+	ScriptGetProperties:                     procScriptGetProperties,
+	ScriptIsComplex:                         procScriptIsComplex,
+	ScriptItemize:                           procScriptItemize,
+	ScriptItemizeOpenType:                   procScriptItemizeOpenType,
+	ScriptJustify:                           procScriptJustify,
+	ScriptLayout:                            procScriptLayout,
+	ScriptPlace:                             procScriptPlace,
+	ScriptPlaceOpenType:                     procScriptPlaceOpenType,
+	ScriptPositionSingleGlyph:               procScriptPositionSingleGlyph,
+	ScriptRecordDigitSubstitution:           procScriptRecordDigitSubstitution,
+	ScriptShape:                             procScriptShape,
+	ScriptShapeOpenType:                     procScriptShapeOpenType,
+	ScriptStringAnalyse:                     procScriptStringAnalyse,
+	ScriptStringCPtoX:                       procScriptStringCPtoX,
+	ScriptStringFree:                        procScriptStringFree,
+	ScriptStringGetLogicalWidths:            procScriptStringGetLogicalWidths,
+	ScriptStringGetOrder:                    procScriptStringGetOrder,
+	ScriptStringOut:                         procScriptStringOut,
+	ScriptStringValidate:                    procScriptStringValidate,
+	ScriptStringXtoCP:                       procScriptStringXtoCP,
+	ScriptString_pLogAttr:                   procScriptString_pLogAttr,
+	ScriptString_pSize:                      procScriptString_pSize,
+	ScriptString_pcOutChars:                 procScriptString_pcOutChars,
+	ScriptSubstituteSingleGlyph:             procScriptSubstituteSingleGlyph,
+	ScriptTextOut:                           procScriptTextOut,
+	ScriptXtoCP:                             procScriptXtoCP,
+	SetCalendarInfo:                         procSetCalendarInfo,
+	SetCalendarInfoA:                        procSetCalendarInfoA,
+	SetLocaleInfo:                           procSetLocaleInfo,
+	SetLocaleInfoA:                          procSetLocaleInfoA,
+	SetProcessPreferredUILanguages:          procSetProcessPreferredUILanguages,
+	SetThreadLocale:                         procSetThreadLocale,
+	SetThreadPreferredUILanguages:           procSetThreadPreferredUILanguages,
+	SetThreadPreferredUILanguages2:          procSetThreadPreferredUILanguages2,
+	SetThreadUILanguage:                     procSetThreadUILanguage,
+	SetUserGeoID:                            procSetUserGeoID,
+	SetUserGeoName:                          procSetUserGeoName,
+	TranslateCharsetInfo:                    procTranslateCharsetInfo,
+	UCNV_FROM_U_CALLBACK_ESCAPE:             procUCNV_FROM_U_CALLBACK_ESCAPE,
+	UCNV_FROM_U_CALLBACK_SKIP:               procUCNV_FROM_U_CALLBACK_SKIP,
+	UCNV_FROM_U_CALLBACK_STOP:               procUCNV_FROM_U_CALLBACK_STOP,
+	UCNV_FROM_U_CALLBACK_SUBSTITUTE:         procUCNV_FROM_U_CALLBACK_SUBSTITUTE,
+	UCNV_TO_U_CALLBACK_ESCAPE:               procUCNV_TO_U_CALLBACK_ESCAPE,
+	UCNV_TO_U_CALLBACK_SKIP:                 procUCNV_TO_U_CALLBACK_SKIP,
+	UCNV_TO_U_CALLBACK_STOP:                 procUCNV_TO_U_CALLBACK_STOP,
+	UCNV_TO_U_CALLBACK_SUBSTITUTE:           procUCNV_TO_U_CALLBACK_SUBSTITUTE,
+	U_UCharsToChars:                         procU_UCharsToChars,
+	U_austrcpy:                              procU_austrcpy,
+	U_austrncpy:                             procU_austrncpy,
+	U_catclose:                              procU_catclose,
+	U_catgets:                               procU_catgets,
+	U_catopen:                               procU_catopen,
+	U_charAge:                               procU_charAge,
+	U_charDigitValue:                        procU_charDigitValue,
+	U_charDirection:                         procU_charDirection,
+	U_charFromName:                          procU_charFromName,
+	U_charMirror:                            procU_charMirror,
+	U_charName:                              procU_charName,
+	U_charType:                              procU_charType,
+	U_charsToUChars:                         procU_charsToUChars,
+	U_cleanup:                               procU_cleanup,
+	U_countChar32:                           procU_countChar32,
+	U_digit:                                 procU_digit,
+	U_enumCharNames:                         procU_enumCharNames,
+	U_enumCharTypes:                         procU_enumCharTypes,
+	U_errorName:                             procU_errorName,
+	U_foldCase:                              procU_foldCase,
+	U_forDigit:                              procU_forDigit,
+	U_formatMessage:                         procU_formatMessage,
+	U_formatMessageWithError:                procU_formatMessageWithError,
+	U_getBidiPairedBracket:                  procU_getBidiPairedBracket,
+	U_getBinaryPropertySet:                  procU_getBinaryPropertySet,
+	U_getCombiningClass:                     procU_getCombiningClass,
+	U_getDataVersion:                        procU_getDataVersion,
+	U_getFC_NFKC_Closure:                    procU_getFC_NFKC_Closure,
+	U_getIntPropertyMap:                     procU_getIntPropertyMap,
+	U_getIntPropertyMaxValue:                procU_getIntPropertyMaxValue,
+	U_getIntPropertyMinValue:                procU_getIntPropertyMinValue,
+	U_getIntPropertyValue:                   procU_getIntPropertyValue,
+	U_getNumericValue:                       procU_getNumericValue,
+	U_getPropertyEnum:                       procU_getPropertyEnum,
+	U_getPropertyName:                       procU_getPropertyName,
+	U_getPropertyValueEnum:                  procU_getPropertyValueEnum,
+	U_getPropertyValueName:                  procU_getPropertyValueName,
+	U_getUnicodeVersion:                     procU_getUnicodeVersion,
+	U_getVersion:                            procU_getVersion,
+	U_hasBinaryProperty:                     procU_hasBinaryProperty,
+	U_init:                                  procU_init,
+	U_isIDIgnorable:                         procU_isIDIgnorable,
+	U_isIDPart:                              procU_isIDPart,
+	U_isIDStart:                             procU_isIDStart,
+	U_isISOControl:                          procU_isISOControl,
+	U_isJavaIDPart:                          procU_isJavaIDPart,
+	U_isJavaIDStart:                         procU_isJavaIDStart,
+	U_isJavaSpaceChar:                       procU_isJavaSpaceChar,
+	U_isMirrored:                            procU_isMirrored,
+	U_isUAlphabetic:                         procU_isUAlphabetic,
+	U_isULowercase:                          procU_isULowercase,
+	U_isUUppercase:                          procU_isUUppercase,
+	U_isUWhiteSpace:                         procU_isUWhiteSpace,
+	U_isWhitespace:                          procU_isWhitespace,
+	U_isalnum:                               procU_isalnum,
+	U_isalpha:                               procU_isalpha,
+	U_isbase:                                procU_isbase,
+	U_isblank:                               procU_isblank,
+	U_iscntrl:                               procU_iscntrl,
+	U_isdefined:                             procU_isdefined,
+	U_isdigit:                               procU_isdigit,
+	U_isgraph:                               procU_isgraph,
+	U_islower:                               procU_islower,
+	U_isprint:                               procU_isprint,
+	U_ispunct:                               procU_ispunct,
+	U_isspace:                               procU_isspace,
+	U_istitle:                               procU_istitle,
+	U_isupper:                               procU_isupper,
+	U_isxdigit:                              procU_isxdigit,
+	U_memcasecmp:                            procU_memcasecmp,
+	U_memchr:                                procU_memchr,
+	U_memchr32:                              procU_memchr32,
+	U_memcmp:                                procU_memcmp,
+	U_memcmpCodePointOrder:                  procU_memcmpCodePointOrder,
+	U_memcpy:                                procU_memcpy,
+	U_memmove:                               procU_memmove,
+	U_memrchr:                               procU_memrchr,
+	U_memrchr32:                             procU_memrchr32,
+	U_memset:                                procU_memset,
+	U_parseMessage:                          procU_parseMessage,
+	U_parseMessageWithError:                 procU_parseMessageWithError,
+	U_setMemoryFunctions:                    procU_setMemoryFunctions,
+	U_shapeArabic:                           procU_shapeArabic,
+	U_strCaseCompare:                        procU_strCaseCompare,
+	U_strCompare:                            procU_strCompare,
+	U_strCompareIter:                        procU_strCompareIter,
+	U_strFindFirst:                          procU_strFindFirst,
+	U_strFindLast:                           procU_strFindLast,
+	U_strFoldCase:                           procU_strFoldCase,
+	U_strFromJavaModifiedUTF8WithSub:        procU_strFromJavaModifiedUTF8WithSub,
+	U_strFromUTF32:                          procU_strFromUTF32,
+	U_strFromUTF32WithSub:                   procU_strFromUTF32WithSub,
+	U_strFromUTF8:                           procU_strFromUTF8,
+	U_strFromUTF8Lenient:                    procU_strFromUTF8Lenient,
+	U_strFromUTF8WithSub:                    procU_strFromUTF8WithSub,
+	U_strFromWCS:                            procU_strFromWCS,
+	U_strHasMoreChar32Than:                  procU_strHasMoreChar32Than,
+	U_strToJavaModifiedUTF8:                 procU_strToJavaModifiedUTF8,
+	U_strToLower:                            procU_strToLower,
+	U_strToTitle:                            procU_strToTitle,
+	U_strToUTF32:                            procU_strToUTF32,
+	U_strToUTF32WithSub:                     procU_strToUTF32WithSub,
+	U_strToUTF8:                             procU_strToUTF8,
+	U_strToUTF8WithSub:                      procU_strToUTF8WithSub,
+	U_strToUpper:                            procU_strToUpper,
+	U_strToWCS:                              procU_strToWCS,
+	U_strcasecmp:                            procU_strcasecmp,
+	U_strcat:                                procU_strcat,
+	U_strchr:                                procU_strchr,
+	U_strchr32:                              procU_strchr32,
+	U_strcmp:                                procU_strcmp,
+	U_strcmpCodePointOrder:                  procU_strcmpCodePointOrder,
+	U_strcpy:                                procU_strcpy,
+	U_strcspn:                               procU_strcspn,
+	U_stringHasBinaryProperty:               procU_stringHasBinaryProperty,
+	U_strlen:                                procU_strlen,
+	U_strncasecmp:                           procU_strncasecmp,
+	U_strncat:                               procU_strncat,
+	U_strncmp:                               procU_strncmp,
+	U_strncmpCodePointOrder:                 procU_strncmpCodePointOrder,
+	U_strncpy:                               procU_strncpy,
+	U_strpbrk:                               procU_strpbrk,
+	U_strrchr:                               procU_strrchr,
+	U_strrchr32:                             procU_strrchr32,
+	U_strrstr:                               procU_strrstr,
+	U_strspn:                                procU_strspn,
+	U_strstr:                                procU_strstr,
+	U_strtok_r:                              procU_strtok_r,
+	U_tolower:                               procU_tolower,
+	U_totitle:                               procU_totitle,
+	U_toupper:                               procU_toupper,
+	U_uastrcpy:                              procU_uastrcpy,
+	U_uastrncpy:                             procU_uastrncpy,
+	U_unescape:                              procU_unescape,
+	U_unescapeAt:                            procU_unescapeAt,
+	U_versionFromString:                     procU_versionFromString,
+	U_versionFromUString:                    procU_versionFromUString,
+	U_versionToString:                       procU_versionToString,
+	U_vformatMessage:                        procU_vformatMessage,
+	U_vformatMessageWithError:               procU_vformatMessageWithError,
+	U_vparseMessage:                         procU_vparseMessage,
+	U_vparseMessageWithError:                procU_vparseMessageWithError,
+	Ubidi_close:                             procUbidi_close,
+	Ubidi_countParagraphs:                   procUbidi_countParagraphs,
+	Ubidi_countRuns:                         procUbidi_countRuns,
+	Ubidi_getBaseDirection:                  procUbidi_getBaseDirection,
+	Ubidi_getClassCallback:                  procUbidi_getClassCallback,
+	Ubidi_getCustomizedClass:                procUbidi_getCustomizedClass,
+	Ubidi_getDirection:                      procUbidi_getDirection,
+	Ubidi_getLength:                         procUbidi_getLength,
+	Ubidi_getLevelAt:                        procUbidi_getLevelAt,
+	Ubidi_getLevels:                         procUbidi_getLevels,
+	Ubidi_getLogicalIndex:                   procUbidi_getLogicalIndex,
+	Ubidi_getLogicalMap:                     procUbidi_getLogicalMap,
+	Ubidi_getLogicalRun:                     procUbidi_getLogicalRun,
+	Ubidi_getParaLevel:                      procUbidi_getParaLevel,
+	Ubidi_getParagraph:                      procUbidi_getParagraph,
+	Ubidi_getParagraphByIndex:               procUbidi_getParagraphByIndex,
+	Ubidi_getProcessedLength:                procUbidi_getProcessedLength,
+	Ubidi_getReorderingMode:                 procUbidi_getReorderingMode,
+	Ubidi_getReorderingOptions:              procUbidi_getReorderingOptions,
+	Ubidi_getResultLength:                   procUbidi_getResultLength,
+	Ubidi_getText:                           procUbidi_getText,
+	Ubidi_getVisualIndex:                    procUbidi_getVisualIndex,
+	Ubidi_getVisualMap:                      procUbidi_getVisualMap,
+	Ubidi_getVisualRun:                      procUbidi_getVisualRun,
+	Ubidi_invertMap:                         procUbidi_invertMap,
+	Ubidi_isInverse:                         procUbidi_isInverse,
+	Ubidi_isOrderParagraphsLTR:              procUbidi_isOrderParagraphsLTR,
+	Ubidi_open:                              procUbidi_open,
+	Ubidi_openSized:                         procUbidi_openSized,
+	Ubidi_orderParagraphsLTR:                procUbidi_orderParagraphsLTR,
+	Ubidi_reorderLogical:                    procUbidi_reorderLogical,
+	Ubidi_reorderVisual:                     procUbidi_reorderVisual,
+	Ubidi_setClassCallback:                  procUbidi_setClassCallback,
+	Ubidi_setContext:                        procUbidi_setContext,
+	Ubidi_setInverse:                        procUbidi_setInverse,
+	Ubidi_setLine:                           procUbidi_setLine,
+	Ubidi_setPara:                           procUbidi_setPara,
+	Ubidi_setReorderingMode:                 procUbidi_setReorderingMode,
+	Ubidi_setReorderingOptions:              procUbidi_setReorderingOptions,
+	Ubidi_writeReordered:                    procUbidi_writeReordered,
+	Ubidi_writeReverse:                      procUbidi_writeReverse,
+	Ubiditransform_close:                    procUbiditransform_close,
+	Ubiditransform_open:                     procUbiditransform_open,
+	Ubiditransform_transform:                procUbiditransform_transform,
+	Ublock_getCode:                          procUblock_getCode,
+	Ubrk_clone:                              procUbrk_clone,
+	Ubrk_close:                              procUbrk_close,
+	Ubrk_countAvailable:                     procUbrk_countAvailable,
+	Ubrk_current:                            procUbrk_current,
+	Ubrk_first:                              procUbrk_first,
+	Ubrk_following:                          procUbrk_following,
+	Ubrk_getAvailable:                       procUbrk_getAvailable,
+	Ubrk_getBinaryRules:                     procUbrk_getBinaryRules,
+	Ubrk_getLocaleByType:                    procUbrk_getLocaleByType,
+	Ubrk_getRuleStatus:                      procUbrk_getRuleStatus,
+	Ubrk_getRuleStatusVec:                   procUbrk_getRuleStatusVec,
+	Ubrk_isBoundary:                         procUbrk_isBoundary,
+	Ubrk_last:                               procUbrk_last,
+	Ubrk_next:                               procUbrk_next,
+	Ubrk_open:                               procUbrk_open,
+	Ubrk_openBinaryRules:                    procUbrk_openBinaryRules,
+	Ubrk_openRules:                          procUbrk_openRules,
+	Ubrk_preceding:                          procUbrk_preceding,
+	Ubrk_previous:                           procUbrk_previous,
+	Ubrk_refreshUText:                       procUbrk_refreshUText,
+	Ubrk_safeClone:                          procUbrk_safeClone,
+	Ubrk_setText:                            procUbrk_setText,
+	Ubrk_setUText:                           procUbrk_setUText,
+	Ucal_add:                                procUcal_add,
+	Ucal_clear:                              procUcal_clear,
+	Ucal_clearField:                         procUcal_clearField,
+	Ucal_clone:                              procUcal_clone,
+	Ucal_close:                              procUcal_close,
+	Ucal_countAvailable:                     procUcal_countAvailable,
+	Ucal_equivalentTo:                       procUcal_equivalentTo,
+	Ucal_get:                                procUcal_get,
+	Ucal_getAttribute:                       procUcal_getAttribute,
+	Ucal_getAvailable:                       procUcal_getAvailable,
+	Ucal_getCanonicalTimeZoneID:             procUcal_getCanonicalTimeZoneID,
+	Ucal_getDSTSavings:                      procUcal_getDSTSavings,
+	Ucal_getDayOfWeekType:                   procUcal_getDayOfWeekType,
+	Ucal_getDefaultTimeZone:                 procUcal_getDefaultTimeZone,
+	Ucal_getFieldDifference:                 procUcal_getFieldDifference,
+	Ucal_getGregorianChange:                 procUcal_getGregorianChange,
+	Ucal_getHostTimeZone:                    procUcal_getHostTimeZone,
+	Ucal_getKeywordValuesForLocale:          procUcal_getKeywordValuesForLocale,
+	Ucal_getLimit:                           procUcal_getLimit,
+	Ucal_getLocaleByType:                    procUcal_getLocaleByType,
+	Ucal_getMillis:                          procUcal_getMillis,
+	Ucal_getNow:                             procUcal_getNow,
+	Ucal_getTZDataVersion:                   procUcal_getTZDataVersion,
+	Ucal_getTimeZoneDisplayName:             procUcal_getTimeZoneDisplayName,
+	Ucal_getTimeZoneID:                      procUcal_getTimeZoneID,
+	Ucal_getTimeZoneIDForWindowsID:          procUcal_getTimeZoneIDForWindowsID,
+	Ucal_getTimeZoneOffsetFromLocal:         procUcal_getTimeZoneOffsetFromLocal,
+	Ucal_getTimeZoneTransitionDate:          procUcal_getTimeZoneTransitionDate,
+	Ucal_getType:                            procUcal_getType,
+	Ucal_getWeekendTransition:               procUcal_getWeekendTransition,
+	Ucal_getWindowsTimeZoneID:               procUcal_getWindowsTimeZoneID,
+	Ucal_inDaylightTime:                     procUcal_inDaylightTime,
+	Ucal_isSet:                              procUcal_isSet,
+	Ucal_isWeekend:                          procUcal_isWeekend,
+	Ucal_open:                               procUcal_open,
+	Ucal_openCountryTimeZones:               procUcal_openCountryTimeZones,
+	Ucal_openTimeZoneIDEnumeration:          procUcal_openTimeZoneIDEnumeration,
+	Ucal_openTimeZones:                      procUcal_openTimeZones,
+	Ucal_roll:                               procUcal_roll,
+	Ucal_set:                                procUcal_set,
+	Ucal_setAttribute:                       procUcal_setAttribute,
+	Ucal_setDate:                            procUcal_setDate,
+	Ucal_setDateTime:                        procUcal_setDateTime,
+	Ucal_setDefaultTimeZone:                 procUcal_setDefaultTimeZone,
+	Ucal_setGregorianChange:                 procUcal_setGregorianChange,
+	Ucal_setMillis:                          procUcal_setMillis,
+	Ucal_setTimeZone:                        procUcal_setTimeZone,
+	Ucasemap_close:                          procUcasemap_close,
+	Ucasemap_getBreakIterator:               procUcasemap_getBreakIterator,
+	Ucasemap_getLocale:                      procUcasemap_getLocale,
+	Ucasemap_getOptions:                     procUcasemap_getOptions,
+	Ucasemap_open:                           procUcasemap_open,
+	Ucasemap_setBreakIterator:               procUcasemap_setBreakIterator,
+	Ucasemap_setLocale:                      procUcasemap_setLocale,
+	Ucasemap_setOptions:                     procUcasemap_setOptions,
+	Ucasemap_toTitle:                        procUcasemap_toTitle,
+	Ucasemap_utf8FoldCase:                   procUcasemap_utf8FoldCase,
+	Ucasemap_utf8ToLower:                    procUcasemap_utf8ToLower,
+	Ucasemap_utf8ToTitle:                    procUcasemap_utf8ToTitle,
+	Ucasemap_utf8ToUpper:                    procUcasemap_utf8ToUpper,
+	Ucfpos_close:                            procUcfpos_close,
+	Ucfpos_constrainCategory:                procUcfpos_constrainCategory,
+	Ucfpos_constrainField:                   procUcfpos_constrainField,
+	Ucfpos_getCategory:                      procUcfpos_getCategory,
+	Ucfpos_getField:                         procUcfpos_getField,
+	Ucfpos_getIndexes:                       procUcfpos_getIndexes,
+	Ucfpos_getInt64IterationContext:         procUcfpos_getInt64IterationContext,
+	Ucfpos_matchesField:                     procUcfpos_matchesField,
+	Ucfpos_open:                             procUcfpos_open,
+	Ucfpos_reset:                            procUcfpos_reset,
+	Ucfpos_setInt64IterationContext:         procUcfpos_setInt64IterationContext,
+	Ucfpos_setState:                         procUcfpos_setState,
+	Ucnv_cbFromUWriteBytes:                  procUcnv_cbFromUWriteBytes,
+	Ucnv_cbFromUWriteSub:                    procUcnv_cbFromUWriteSub,
+	Ucnv_cbFromUWriteUChars:                 procUcnv_cbFromUWriteUChars,
+	Ucnv_cbToUWriteSub:                      procUcnv_cbToUWriteSub,
+	Ucnv_cbToUWriteUChars:                   procUcnv_cbToUWriteUChars,
+	Ucnv_clone:                              procUcnv_clone,
+	Ucnv_close:                              procUcnv_close,
+	Ucnv_compareNames:                       procUcnv_compareNames,
+	Ucnv_convert:                            procUcnv_convert,
+	Ucnv_convertEx:                          procUcnv_convertEx,
+	Ucnv_countAliases:                       procUcnv_countAliases,
+	Ucnv_countAvailable:                     procUcnv_countAvailable,
+	Ucnv_countStandards:                     procUcnv_countStandards,
+	Ucnv_detectUnicodeSignature:             procUcnv_detectUnicodeSignature,
+	Ucnv_fixFileSeparator:                   procUcnv_fixFileSeparator,
+	Ucnv_flushCache:                         procUcnv_flushCache,
+	Ucnv_fromAlgorithmic:                    procUcnv_fromAlgorithmic,
+	Ucnv_fromUChars:                         procUcnv_fromUChars,
+	Ucnv_fromUCountPending:                  procUcnv_fromUCountPending,
+	Ucnv_fromUnicode:                        procUcnv_fromUnicode,
+	Ucnv_getAlias:                           procUcnv_getAlias,
+	Ucnv_getAliases:                         procUcnv_getAliases,
+	Ucnv_getAvailableName:                   procUcnv_getAvailableName,
+	Ucnv_getCCSID:                           procUcnv_getCCSID,
+	Ucnv_getCanonicalName:                   procUcnv_getCanonicalName,
+	Ucnv_getDefaultName:                     procUcnv_getDefaultName,
+	Ucnv_getDisplayName:                     procUcnv_getDisplayName,
+	Ucnv_getFromUCallBack:                   procUcnv_getFromUCallBack,
+	Ucnv_getInvalidChars:                    procUcnv_getInvalidChars,
+	Ucnv_getInvalidUChars:                   procUcnv_getInvalidUChars,
+	Ucnv_getMaxCharSize:                     procUcnv_getMaxCharSize,
+	Ucnv_getMinCharSize:                     procUcnv_getMinCharSize,
+	Ucnv_getName:                            procUcnv_getName,
+	Ucnv_getNextUChar:                       procUcnv_getNextUChar,
+	Ucnv_getPlatform:                        procUcnv_getPlatform,
+	Ucnv_getStandard:                        procUcnv_getStandard,
+	Ucnv_getStandardName:                    procUcnv_getStandardName,
+	Ucnv_getStarters:                        procUcnv_getStarters,
+	Ucnv_getSubstChars:                      procUcnv_getSubstChars,
+	Ucnv_getToUCallBack:                     procUcnv_getToUCallBack,
+	Ucnv_getType:                            procUcnv_getType,
+	Ucnv_getUnicodeSet:                      procUcnv_getUnicodeSet,
+	Ucnv_isAmbiguous:                        procUcnv_isAmbiguous,
+	Ucnv_isFixedWidth:                       procUcnv_isFixedWidth,
+	Ucnv_open:                               procUcnv_open,
+	Ucnv_openAllNames:                       procUcnv_openAllNames,
+	Ucnv_openCCSID:                          procUcnv_openCCSID,
+	Ucnv_openPackage:                        procUcnv_openPackage,
+	Ucnv_openStandardNames:                  procUcnv_openStandardNames,
+	Ucnv_openU:                              procUcnv_openU,
+	Ucnv_reset:                              procUcnv_reset,
+	Ucnv_resetFromUnicode:                   procUcnv_resetFromUnicode,
+	Ucnv_resetToUnicode:                     procUcnv_resetToUnicode,
+	Ucnv_safeClone:                          procUcnv_safeClone,
+	Ucnv_setDefaultName:                     procUcnv_setDefaultName,
+	Ucnv_setFallback:                        procUcnv_setFallback,
+	Ucnv_setFromUCallBack:                   procUcnv_setFromUCallBack,
+	Ucnv_setSubstChars:                      procUcnv_setSubstChars,
+	Ucnv_setSubstString:                     procUcnv_setSubstString,
+	Ucnv_setToUCallBack:                     procUcnv_setToUCallBack,
+	Ucnv_toAlgorithmic:                      procUcnv_toAlgorithmic,
+	Ucnv_toUChars:                           procUcnv_toUChars,
+	Ucnv_toUCountPending:                    procUcnv_toUCountPending,
+	Ucnv_toUnicode:                          procUcnv_toUnicode,
+	Ucnv_usesFallback:                       procUcnv_usesFallback,
+	Ucnvsel_close:                           procUcnvsel_close,
+	Ucnvsel_open:                            procUcnvsel_open,
+	Ucnvsel_openFromSerialized:              procUcnvsel_openFromSerialized,
+	Ucnvsel_selectForString:                 procUcnvsel_selectForString,
+	Ucnvsel_selectForUTF8:                   procUcnvsel_selectForUTF8,
+	Ucnvsel_serialize:                       procUcnvsel_serialize,
+	Ucol_clone:                              procUcol_clone,
+	Ucol_cloneBinary:                        procUcol_cloneBinary,
+	Ucol_close:                              procUcol_close,
+	Ucol_closeElements:                      procUcol_closeElements,
+	Ucol_countAvailable:                     procUcol_countAvailable,
+	Ucol_equal:                              procUcol_equal,
+	Ucol_getAttribute:                       procUcol_getAttribute,
+	Ucol_getAvailable:                       procUcol_getAvailable,
+	Ucol_getBound:                           procUcol_getBound,
+	Ucol_getContractionsAndExpansions:       procUcol_getContractionsAndExpansions,
+	Ucol_getDisplayName:                     procUcol_getDisplayName,
+	Ucol_getEquivalentReorderCodes:          procUcol_getEquivalentReorderCodes,
+	Ucol_getFunctionalEquivalent:            procUcol_getFunctionalEquivalent,
+	Ucol_getKeywordValues:                   procUcol_getKeywordValues,
+	Ucol_getKeywordValuesForLocale:          procUcol_getKeywordValuesForLocale,
+	Ucol_getKeywords:                        procUcol_getKeywords,
+	Ucol_getLocaleByType:                    procUcol_getLocaleByType,
+	Ucol_getMaxExpansion:                    procUcol_getMaxExpansion,
+	Ucol_getMaxVariable:                     procUcol_getMaxVariable,
+	Ucol_getOffset:                          procUcol_getOffset,
+	Ucol_getReorderCodes:                    procUcol_getReorderCodes,
+	Ucol_getRules:                           procUcol_getRules,
+	Ucol_getRulesEx:                         procUcol_getRulesEx,
+	Ucol_getSortKey:                         procUcol_getSortKey,
+	Ucol_getStrength:                        procUcol_getStrength,
+	Ucol_getTailoredSet:                     procUcol_getTailoredSet,
+	Ucol_getUCAVersion:                      procUcol_getUCAVersion,
+	Ucol_getVariableTop:                     procUcol_getVariableTop,
+	Ucol_getVersion:                         procUcol_getVersion,
+	Ucol_greater:                            procUcol_greater,
+	Ucol_greaterOrEqual:                     procUcol_greaterOrEqual,
+	Ucol_keyHashCode:                        procUcol_keyHashCode,
+	Ucol_mergeSortkeys:                      procUcol_mergeSortkeys,
+	Ucol_next:                               procUcol_next,
+	Ucol_nextSortKeyPart:                    procUcol_nextSortKeyPart,
+	Ucol_open:                               procUcol_open,
+	Ucol_openAvailableLocales:               procUcol_openAvailableLocales,
+	Ucol_openBinary:                         procUcol_openBinary,
+	Ucol_openElements:                       procUcol_openElements,
+	Ucol_openRules:                          procUcol_openRules,
+	Ucol_previous:                           procUcol_previous,
+	Ucol_primaryOrder:                       procUcol_primaryOrder,
+	Ucol_reset:                              procUcol_reset,
+	Ucol_safeClone:                          procUcol_safeClone,
+	Ucol_secondaryOrder:                     procUcol_secondaryOrder,
+	Ucol_setAttribute:                       procUcol_setAttribute,
+	Ucol_setMaxVariable:                     procUcol_setMaxVariable,
+	Ucol_setOffset:                          procUcol_setOffset,
+	Ucol_setReorderCodes:                    procUcol_setReorderCodes,
+	Ucol_setStrength:                        procUcol_setStrength,
+	Ucol_setText:                            procUcol_setText,
+	Ucol_strcoll:                            procUcol_strcoll,
+	Ucol_strcollIter:                        procUcol_strcollIter,
+	Ucol_strcollUTF8:                        procUcol_strcollUTF8,
+	Ucol_tertiaryOrder:                      procUcol_tertiaryOrder,
+	Ucpmap_get:                              procUcpmap_get,
+	Ucpmap_getRange:                         procUcpmap_getRange,
+	Ucptrie_close:                           procUcptrie_close,
+	Ucptrie_get:                             procUcptrie_get,
+	Ucptrie_getRange:                        procUcptrie_getRange,
+	Ucptrie_getType:                         procUcptrie_getType,
+	Ucptrie_getValueWidth:                   procUcptrie_getValueWidth,
+	Ucptrie_internalSmallIndex:              procUcptrie_internalSmallIndex,
+	Ucptrie_internalSmallU8Index:            procUcptrie_internalSmallU8Index,
+	Ucptrie_internalU8PrevIndex:             procUcptrie_internalU8PrevIndex,
+	Ucptrie_openFromBinary:                  procUcptrie_openFromBinary,
+	Ucptrie_toBinary:                        procUcptrie_toBinary,
+	Ucsdet_close:                            procUcsdet_close,
+	Ucsdet_detect:                           procUcsdet_detect,
+	Ucsdet_detectAll:                        procUcsdet_detectAll,
+	Ucsdet_enableInputFilter:                procUcsdet_enableInputFilter,
+	Ucsdet_getAllDetectableCharsets:         procUcsdet_getAllDetectableCharsets,
+	Ucsdet_getConfidence:                    procUcsdet_getConfidence,
+	Ucsdet_getLanguage:                      procUcsdet_getLanguage,
+	Ucsdet_getName:                          procUcsdet_getName,
+	Ucsdet_getUChars:                        procUcsdet_getUChars,
+	Ucsdet_isInputFilterEnabled:             procUcsdet_isInputFilterEnabled,
+	Ucsdet_open:                             procUcsdet_open,
+	Ucsdet_setDeclaredEncoding:              procUcsdet_setDeclaredEncoding,
+	Ucsdet_setText:                          procUcsdet_setText,
+	Ucurr_countCurrencies:                   procUcurr_countCurrencies,
+	Ucurr_forLocale:                         procUcurr_forLocale,
+	Ucurr_forLocaleAndDate:                  procUcurr_forLocaleAndDate,
+	Ucurr_getDefaultFractionDigits:          procUcurr_getDefaultFractionDigits,
+	Ucurr_getDefaultFractionDigitsForUsage:  procUcurr_getDefaultFractionDigitsForUsage,
+	Ucurr_getKeywordValuesForLocale:         procUcurr_getKeywordValuesForLocale,
+	Ucurr_getName:                           procUcurr_getName,
+	Ucurr_getNumericCode:                    procUcurr_getNumericCode,
+	Ucurr_getPluralName:                     procUcurr_getPluralName,
+	Ucurr_getRoundingIncrement:              procUcurr_getRoundingIncrement,
+	Ucurr_getRoundingIncrementForUsage:      procUcurr_getRoundingIncrementForUsage,
+	Ucurr_isAvailable:                       procUcurr_isAvailable,
+	Ucurr_openISOCurrencies:                 procUcurr_openISOCurrencies,
+	Ucurr_register:                          procUcurr_register,
+	Ucurr_unregister:                        procUcurr_unregister,
+	Udat_adoptNumberFormat:                  procUdat_adoptNumberFormat,
+	Udat_adoptNumberFormatForFields:         procUdat_adoptNumberFormatForFields,
+	Udat_applyPattern:                       procUdat_applyPattern,
+	Udat_clone:                              procUdat_clone,
+	Udat_close:                              procUdat_close,
+	Udat_countAvailable:                     procUdat_countAvailable,
+	Udat_countSymbols:                       procUdat_countSymbols,
+	Udat_format:                             procUdat_format,
+	Udat_formatCalendar:                     procUdat_formatCalendar,
+	Udat_formatCalendarForFields:            procUdat_formatCalendarForFields,
+	Udat_formatForFields:                    procUdat_formatForFields,
+	Udat_get2DigitYearStart:                 procUdat_get2DigitYearStart,
+	Udat_getAvailable:                       procUdat_getAvailable,
+	Udat_getBooleanAttribute:                procUdat_getBooleanAttribute,
+	Udat_getCalendar:                        procUdat_getCalendar,
+	Udat_getContext:                         procUdat_getContext,
+	Udat_getLocaleByType:                    procUdat_getLocaleByType,
+	Udat_getNumberFormat:                    procUdat_getNumberFormat,
+	Udat_getNumberFormatForField:            procUdat_getNumberFormatForField,
+	Udat_getSymbols:                         procUdat_getSymbols,
+	Udat_isLenient:                          procUdat_isLenient,
+	Udat_open:                               procUdat_open,
+	Udat_parse:                              procUdat_parse,
+	Udat_parseCalendar:                      procUdat_parseCalendar,
+	Udat_set2DigitYearStart:                 procUdat_set2DigitYearStart,
+	Udat_setBooleanAttribute:                procUdat_setBooleanAttribute,
+	Udat_setCalendar:                        procUdat_setCalendar,
+	Udat_setContext:                         procUdat_setContext,
+	Udat_setLenient:                         procUdat_setLenient,
+	Udat_setNumberFormat:                    procUdat_setNumberFormat,
+	Udat_setSymbols:                         procUdat_setSymbols,
+	Udat_toCalendarDateField:                procUdat_toCalendarDateField,
+	Udat_toPattern:                          procUdat_toPattern,
+	Udatpg_addPattern:                       procUdatpg_addPattern,
+	Udatpg_clone:                            procUdatpg_clone,
+	Udatpg_close:                            procUdatpg_close,
+	Udatpg_getAppendItemFormat:              procUdatpg_getAppendItemFormat,
+	Udatpg_getAppendItemName:                procUdatpg_getAppendItemName,
+	Udatpg_getBaseSkeleton:                  procUdatpg_getBaseSkeleton,
+	Udatpg_getBestPattern:                   procUdatpg_getBestPattern,
+	Udatpg_getBestPatternWithOptions:        procUdatpg_getBestPatternWithOptions,
+	Udatpg_getDateTimeFormat:                procUdatpg_getDateTimeFormat,
+	Udatpg_getDecimal:                       procUdatpg_getDecimal,
+	Udatpg_getDefaultHourCycle:              procUdatpg_getDefaultHourCycle,
+	Udatpg_getFieldDisplayName:              procUdatpg_getFieldDisplayName,
+	Udatpg_getPatternForSkeleton:            procUdatpg_getPatternForSkeleton,
+	Udatpg_getSkeleton:                      procUdatpg_getSkeleton,
+	Udatpg_open:                             procUdatpg_open,
+	Udatpg_openBaseSkeletons:                procUdatpg_openBaseSkeletons,
+	Udatpg_openEmpty:                        procUdatpg_openEmpty,
+	Udatpg_openSkeletons:                    procUdatpg_openSkeletons,
+	Udatpg_replaceFieldTypes:                procUdatpg_replaceFieldTypes,
+	Udatpg_replaceFieldTypesWithOptions:     procUdatpg_replaceFieldTypesWithOptions,
+	Udatpg_setAppendItemFormat:              procUdatpg_setAppendItemFormat,
+	Udatpg_setAppendItemName:                procUdatpg_setAppendItemName,
+	Udatpg_setDateTimeFormat:                procUdatpg_setDateTimeFormat,
+	Udatpg_setDecimal:                       procUdatpg_setDecimal,
+	Udtitvfmt_close:                         procUdtitvfmt_close,
+	Udtitvfmt_closeResult:                   procUdtitvfmt_closeResult,
+	Udtitvfmt_format:                        procUdtitvfmt_format,
+	Udtitvfmt_formatToResult:                procUdtitvfmt_formatToResult,
+	Udtitvfmt_getContext:                    procUdtitvfmt_getContext,
+	Udtitvfmt_open:                          procUdtitvfmt_open,
+	Udtitvfmt_openResult:                    procUdtitvfmt_openResult,
+	Udtitvfmt_resultAsValue:                 procUdtitvfmt_resultAsValue,
+	Udtitvfmt_setContext:                    procUdtitvfmt_setContext,
+	Uenum_close:                             procUenum_close,
+	Uenum_count:                             procUenum_count,
+	Uenum_next:                              procUenum_next,
+	Uenum_openCharStringsEnumeration:        procUenum_openCharStringsEnumeration,
+	Uenum_openUCharStringsEnumeration:       procUenum_openUCharStringsEnumeration,
+	Uenum_reset:                             procUenum_reset,
+	Uenum_unext:                             procUenum_unext,
+	Ufieldpositer_close:                     procUfieldpositer_close,
+	Ufieldpositer_next:                      procUfieldpositer_next,
+	Ufieldpositer_open:                      procUfieldpositer_open,
+	Ufmt_close:                              procUfmt_close,
+	Ufmt_getArrayItemByIndex:                procUfmt_getArrayItemByIndex,
+	Ufmt_getArrayLength:                     procUfmt_getArrayLength,
+	Ufmt_getDate:                            procUfmt_getDate,
+	Ufmt_getDecNumChars:                     procUfmt_getDecNumChars,
+	Ufmt_getDouble:                          procUfmt_getDouble,
+	Ufmt_getInt64:                           procUfmt_getInt64,
+	Ufmt_getLong:                            procUfmt_getLong,
+	Ufmt_getObject:                          procUfmt_getObject,
+	Ufmt_getType:                            procUfmt_getType,
+	Ufmt_getUChars:                          procUfmt_getUChars,
+	Ufmt_isNumeric:                          procUfmt_isNumeric,
+	Ufmt_open:                               procUfmt_open,
+	Ufmtval_getString:                       procUfmtval_getString,
+	Ufmtval_nextPosition:                    procUfmtval_nextPosition,
+	Ugender_getInstance:                     procUgender_getInstance,
+	Ugender_getListGender:                   procUgender_getListGender,
+	Uidna_close:                             procUidna_close,
+	Uidna_labelToASCII:                      procUidna_labelToASCII,
+	Uidna_labelToASCII_UTF8:                 procUidna_labelToASCII_UTF8,
+	Uidna_labelToUnicode:                    procUidna_labelToUnicode,
+	Uidna_labelToUnicodeUTF8:                procUidna_labelToUnicodeUTF8,
+	Uidna_nameToASCII:                       procUidna_nameToASCII,
+	Uidna_nameToASCII_UTF8:                  procUidna_nameToASCII_UTF8,
+	Uidna_nameToUnicode:                     procUidna_nameToUnicode,
+	Uidna_nameToUnicodeUTF8:                 procUidna_nameToUnicodeUTF8,
+	Uidna_openUTS46:                         procUidna_openUTS46,
+	Uiter_current32:                         procUiter_current32,
+	Uiter_getState:                          procUiter_getState,
+	Uiter_next32:                            procUiter_next32,
+	Uiter_previous32:                        procUiter_previous32,
+	Uiter_setState:                          procUiter_setState,
+	Uiter_setString:                         procUiter_setString,
+	Uiter_setUTF16BE:                        procUiter_setUTF16BE,
+	Uiter_setUTF8:                           procUiter_setUTF8,
+	Uldn_close:                              procUldn_close,
+	Uldn_getContext:                         procUldn_getContext,
+	Uldn_getDialectHandling:                 procUldn_getDialectHandling,
+	Uldn_getLocale:                          procUldn_getLocale,
+	Uldn_keyDisplayName:                     procUldn_keyDisplayName,
+	Uldn_keyValueDisplayName:                procUldn_keyValueDisplayName,
+	Uldn_languageDisplayName:                procUldn_languageDisplayName,
+	Uldn_localeDisplayName:                  procUldn_localeDisplayName,
+	Uldn_open:                               procUldn_open,
+	Uldn_openForContext:                     procUldn_openForContext,
+	Uldn_regionDisplayName:                  procUldn_regionDisplayName,
+	Uldn_scriptCodeDisplayName:              procUldn_scriptCodeDisplayName,
+	Uldn_scriptDisplayName:                  procUldn_scriptDisplayName,
+	Uldn_variantDisplayName:                 procUldn_variantDisplayName,
+	Ulistfmt_close:                          procUlistfmt_close,
+	Ulistfmt_closeResult:                    procUlistfmt_closeResult,
+	Ulistfmt_format:                         procUlistfmt_format,
+	Ulistfmt_formatStringsToResult:          procUlistfmt_formatStringsToResult,
+	Ulistfmt_open:                           procUlistfmt_open,
+	Ulistfmt_openForType:                    procUlistfmt_openForType,
+	Ulistfmt_openResult:                     procUlistfmt_openResult,
+	Ulistfmt_resultAsValue:                  procUlistfmt_resultAsValue,
+	Uloc_acceptLanguage:                     procUloc_acceptLanguage,
+	Uloc_acceptLanguageFromHTTP:             procUloc_acceptLanguageFromHTTP,
+	Uloc_addLikelySubtags:                   procUloc_addLikelySubtags,
+	Uloc_canonicalize:                       procUloc_canonicalize,
+	Uloc_countAvailable:                     procUloc_countAvailable,
+	Uloc_forLanguageTag:                     procUloc_forLanguageTag,
+	Uloc_getAvailable:                       procUloc_getAvailable,
+	Uloc_getBaseName:                        procUloc_getBaseName,
+	Uloc_getCharacterOrientation:            procUloc_getCharacterOrientation,
+	Uloc_getCountry:                         procUloc_getCountry,
+	Uloc_getDefault:                         procUloc_getDefault,
+	Uloc_getDisplayCountry:                  procUloc_getDisplayCountry,
+	Uloc_getDisplayKeyword:                  procUloc_getDisplayKeyword,
+	Uloc_getDisplayKeywordValue:             procUloc_getDisplayKeywordValue,
+	Uloc_getDisplayLanguage:                 procUloc_getDisplayLanguage,
+	Uloc_getDisplayName:                     procUloc_getDisplayName,
+	Uloc_getDisplayScript:                   procUloc_getDisplayScript,
+	Uloc_getDisplayVariant:                  procUloc_getDisplayVariant,
+	Uloc_getISO3Country:                     procUloc_getISO3Country,
+	Uloc_getISO3Language:                    procUloc_getISO3Language,
+	Uloc_getISOCountries:                    procUloc_getISOCountries,
+	Uloc_getISOLanguages:                    procUloc_getISOLanguages,
+	Uloc_getKeywordValue:                    procUloc_getKeywordValue,
+	Uloc_getLCID:                            procUloc_getLCID,
+	Uloc_getLanguage:                        procUloc_getLanguage,
+	Uloc_getLineOrientation:                 procUloc_getLineOrientation,
+	Uloc_getLocaleForLCID:                   procUloc_getLocaleForLCID,
+	Uloc_getName:                            procUloc_getName,
+	Uloc_getParent:                          procUloc_getParent,
+	Uloc_getScript:                          procUloc_getScript,
+	Uloc_getVariant:                         procUloc_getVariant,
+	Uloc_isRightToLeft:                      procUloc_isRightToLeft,
+	Uloc_minimizeSubtags:                    procUloc_minimizeSubtags,
+	Uloc_openAvailableByType:                procUloc_openAvailableByType,
+	Uloc_openKeywords:                       procUloc_openKeywords,
+	Uloc_setDefault:                         procUloc_setDefault,
+	Uloc_setKeywordValue:                    procUloc_setKeywordValue,
+	Uloc_toLanguageTag:                      procUloc_toLanguageTag,
+	Uloc_toLegacyKey:                        procUloc_toLegacyKey,
+	Uloc_toLegacyType:                       procUloc_toLegacyType,
+	Uloc_toUnicodeLocaleKey:                 procUloc_toUnicodeLocaleKey,
+	Uloc_toUnicodeLocaleType:                procUloc_toUnicodeLocaleType,
+	Ulocdata_close:                          procUlocdata_close,
+	Ulocdata_getCLDRVersion:                 procUlocdata_getCLDRVersion,
+	Ulocdata_getDelimiter:                   procUlocdata_getDelimiter,
+	Ulocdata_getExemplarSet:                 procUlocdata_getExemplarSet,
+	Ulocdata_getLocaleDisplayPattern:        procUlocdata_getLocaleDisplayPattern,
+	Ulocdata_getLocaleSeparator:             procUlocdata_getLocaleSeparator,
+	Ulocdata_getMeasurementSystem:           procUlocdata_getMeasurementSystem,
+	Ulocdata_getNoSubstitute:                procUlocdata_getNoSubstitute,
+	Ulocdata_getPaperSize:                   procUlocdata_getPaperSize,
+	Ulocdata_open:                           procUlocdata_open,
+	Ulocdata_setNoSubstitute:                procUlocdata_setNoSubstitute,
+	Umsg_applyPattern:                       procUmsg_applyPattern,
+	Umsg_autoQuoteApostrophe:                procUmsg_autoQuoteApostrophe,
+	Umsg_clone:                              procUmsg_clone,
+	Umsg_close:                              procUmsg_close,
+	Umsg_format:                             procUmsg_format,
+	Umsg_getLocale:                          procUmsg_getLocale,
+	Umsg_open:                               procUmsg_open,
+	Umsg_parse:                              procUmsg_parse,
+	Umsg_setLocale:                          procUmsg_setLocale,
+	Umsg_toPattern:                          procUmsg_toPattern,
+	Umsg_vformat:                            procUmsg_vformat,
+	Umsg_vparse:                             procUmsg_vparse,
+	Umutablecptrie_buildImmutable:           procUmutablecptrie_buildImmutable,
+	Umutablecptrie_clone:                    procUmutablecptrie_clone,
+	Umutablecptrie_close:                    procUmutablecptrie_close,
+	Umutablecptrie_fromUCPMap:               procUmutablecptrie_fromUCPMap,
+	Umutablecptrie_fromUCPTrie:              procUmutablecptrie_fromUCPTrie,
+	Umutablecptrie_get:                      procUmutablecptrie_get,
+	Umutablecptrie_getRange:                 procUmutablecptrie_getRange,
+	Umutablecptrie_open:                     procUmutablecptrie_open,
+	Umutablecptrie_set:                      procUmutablecptrie_set,
+	Umutablecptrie_setRange:                 procUmutablecptrie_setRange,
+	Unorm2_append:                           procUnorm2_append,
+	Unorm2_close:                            procUnorm2_close,
+	Unorm2_composePair:                      procUnorm2_composePair,
+	Unorm2_getCombiningClass:                procUnorm2_getCombiningClass,
+	Unorm2_getDecomposition:                 procUnorm2_getDecomposition,
+	Unorm2_getInstance:                      procUnorm2_getInstance,
+	Unorm2_getNFCInstance:                   procUnorm2_getNFCInstance,
+	Unorm2_getNFDInstance:                   procUnorm2_getNFDInstance,
+	Unorm2_getNFKCCasefoldInstance:          procUnorm2_getNFKCCasefoldInstance,
+	Unorm2_getNFKCInstance:                  procUnorm2_getNFKCInstance,
+	Unorm2_getNFKDInstance:                  procUnorm2_getNFKDInstance,
+	Unorm2_getRawDecomposition:              procUnorm2_getRawDecomposition,
+	Unorm2_hasBoundaryAfter:                 procUnorm2_hasBoundaryAfter,
+	Unorm2_hasBoundaryBefore:                procUnorm2_hasBoundaryBefore,
+	Unorm2_isInert:                          procUnorm2_isInert,
+	Unorm2_isNormalized:                     procUnorm2_isNormalized,
+	Unorm2_normalize:                        procUnorm2_normalize,
+	Unorm2_normalizeSecondAndAppend:         procUnorm2_normalizeSecondAndAppend,
+	Unorm2_openFiltered:                     procUnorm2_openFiltered,
+	Unorm2_quickCheck:                       procUnorm2_quickCheck,
+	Unorm2_spanQuickCheckYes:                procUnorm2_spanQuickCheckYes,
+	Unorm_compare:                           procUnorm_compare,
+	Unum_applyPattern:                       procUnum_applyPattern,
+	Unum_clone:                              procUnum_clone,
+	Unum_close:                              procUnum_close,
+	Unum_countAvailable:                     procUnum_countAvailable,
+	Unum_format:                             procUnum_format,
+	Unum_formatDecimal:                      procUnum_formatDecimal,
+	Unum_formatDouble:                       procUnum_formatDouble,
+	Unum_formatDoubleCurrency:               procUnum_formatDoubleCurrency,
+	Unum_formatDoubleForFields:              procUnum_formatDoubleForFields,
+	Unum_formatInt64:                        procUnum_formatInt64,
+	Unum_formatUFormattable:                 procUnum_formatUFormattable,
+	Unum_getAttribute:                       procUnum_getAttribute,
+	Unum_getAvailable:                       procUnum_getAvailable,
+	Unum_getContext:                         procUnum_getContext,
+	Unum_getDoubleAttribute:                 procUnum_getDoubleAttribute,
+	Unum_getLocaleByType:                    procUnum_getLocaleByType,
+	Unum_getSymbol:                          procUnum_getSymbol,
+	Unum_getTextAttribute:                   procUnum_getTextAttribute,
+	Unum_open:                               procUnum_open,
+	Unum_parse:                              procUnum_parse,
+	Unum_parseDecimal:                       procUnum_parseDecimal,
+	Unum_parseDouble:                        procUnum_parseDouble,
+	Unum_parseDoubleCurrency:                procUnum_parseDoubleCurrency,
+	Unum_parseInt64:                         procUnum_parseInt64,
+	Unum_parseToUFormattable:                procUnum_parseToUFormattable,
+	Unum_setAttribute:                       procUnum_setAttribute,
+	Unum_setContext:                         procUnum_setContext,
+	Unum_setDoubleAttribute:                 procUnum_setDoubleAttribute,
+	Unum_setSymbol:                          procUnum_setSymbol,
+	Unum_setTextAttribute:                   procUnum_setTextAttribute,
+	Unum_toPattern:                          procUnum_toPattern,
+	Unumf_close:                             procUnumf_close,
+	Unumf_closeResult:                       procUnumf_closeResult,
+	Unumf_formatDecimal:                     procUnumf_formatDecimal,
+	Unumf_formatDouble:                      procUnumf_formatDouble,
+	Unumf_formatInt:                         procUnumf_formatInt,
+	Unumf_openForSkeletonAndLocale:          procUnumf_openForSkeletonAndLocale,
+	Unumf_openForSkeletonAndLocaleWithError: procUnumf_openForSkeletonAndLocaleWithError,
+	Unumf_openResult:                        procUnumf_openResult,
+	Unumf_resultAsValue:                     procUnumf_resultAsValue,
+	Unumf_resultGetAllFieldPositions:        procUnumf_resultGetAllFieldPositions,
+	Unumf_resultNextFieldPosition:           procUnumf_resultNextFieldPosition,
+	Unumf_resultToDecimalNumber:             procUnumf_resultToDecimalNumber,
+	Unumf_resultToString:                    procUnumf_resultToString,
+	Unumrf_close:                            procUnumrf_close,
+	Unumrf_closeResult:                      procUnumrf_closeResult,
+	Unumrf_formatDecimalRange:               procUnumrf_formatDecimalRange,
+	Unumrf_formatDoubleRange:                procUnumrf_formatDoubleRange,
+	Unumrf_openForSkeletonWithCollapseAndIdentityFallback: procUnumrf_openForSkeletonWithCollapseAndIdentityFallback,
+	Unumrf_openResult:                     procUnumrf_openResult,
+	Unumrf_resultAsValue:                  procUnumrf_resultAsValue,
+	Unumrf_resultGetFirstDecimalNumber:    procUnumrf_resultGetFirstDecimalNumber,
+	Unumrf_resultGetIdentityResult:        procUnumrf_resultGetIdentityResult,
+	Unumrf_resultGetSecondDecimalNumber:   procUnumrf_resultGetSecondDecimalNumber,
+	Unumsys_close:                         procUnumsys_close,
+	Unumsys_getDescription:                procUnumsys_getDescription,
+	Unumsys_getName:                       procUnumsys_getName,
+	Unumsys_getRadix:                      procUnumsys_getRadix,
+	Unumsys_isAlgorithmic:                 procUnumsys_isAlgorithmic,
+	Unumsys_open:                          procUnumsys_open,
+	Unumsys_openAvailableNames:            procUnumsys_openAvailableNames,
+	Unumsys_openByName:                    procUnumsys_openByName,
+	UpdateCalendarDayOfWeek:               procUpdateCalendarDayOfWeek,
+	Uplrules_close:                        procUplrules_close,
+	Uplrules_getKeywords:                  procUplrules_getKeywords,
+	Uplrules_open:                         procUplrules_open,
+	Uplrules_openForType:                  procUplrules_openForType,
+	Uplrules_select:                       procUplrules_select,
+	Uplrules_selectFormatted:              procUplrules_selectFormatted,
+	Uregex_appendReplacement:              procUregex_appendReplacement,
+	Uregex_appendReplacementUText:         procUregex_appendReplacementUText,
+	Uregex_appendTail:                     procUregex_appendTail,
+	Uregex_appendTailUText:                procUregex_appendTailUText,
+	Uregex_clone:                          procUregex_clone,
+	Uregex_close:                          procUregex_close,
+	Uregex_end:                            procUregex_end,
+	Uregex_end64:                          procUregex_end64,
+	Uregex_find:                           procUregex_find,
+	Uregex_find64:                         procUregex_find64,
+	Uregex_findNext:                       procUregex_findNext,
+	Uregex_flags:                          procUregex_flags,
+	Uregex_getFindProgressCallback:        procUregex_getFindProgressCallback,
+	Uregex_getMatchCallback:               procUregex_getMatchCallback,
+	Uregex_getStackLimit:                  procUregex_getStackLimit,
+	Uregex_getText:                        procUregex_getText,
+	Uregex_getTimeLimit:                   procUregex_getTimeLimit,
+	Uregex_getUText:                       procUregex_getUText,
+	Uregex_group:                          procUregex_group,
+	Uregex_groupCount:                     procUregex_groupCount,
+	Uregex_groupNumberFromCName:           procUregex_groupNumberFromCName,
+	Uregex_groupNumberFromName:            procUregex_groupNumberFromName,
+	Uregex_groupUText:                     procUregex_groupUText,
+	Uregex_hasAnchoringBounds:             procUregex_hasAnchoringBounds,
+	Uregex_hasTransparentBounds:           procUregex_hasTransparentBounds,
+	Uregex_hitEnd:                         procUregex_hitEnd,
+	Uregex_lookingAt:                      procUregex_lookingAt,
+	Uregex_lookingAt64:                    procUregex_lookingAt64,
+	Uregex_matches:                        procUregex_matches,
+	Uregex_matches64:                      procUregex_matches64,
+	Uregex_open:                           procUregex_open,
+	Uregex_openC:                          procUregex_openC,
+	Uregex_openUText:                      procUregex_openUText,
+	Uregex_pattern:                        procUregex_pattern,
+	Uregex_patternUText:                   procUregex_patternUText,
+	Uregex_refreshUText:                   procUregex_refreshUText,
+	Uregex_regionEnd:                      procUregex_regionEnd,
+	Uregex_regionEnd64:                    procUregex_regionEnd64,
+	Uregex_regionStart:                    procUregex_regionStart,
+	Uregex_regionStart64:                  procUregex_regionStart64,
+	Uregex_replaceAll:                     procUregex_replaceAll,
+	Uregex_replaceAllUText:                procUregex_replaceAllUText,
+	Uregex_replaceFirst:                   procUregex_replaceFirst,
+	Uregex_replaceFirstUText:              procUregex_replaceFirstUText,
+	Uregex_requireEnd:                     procUregex_requireEnd,
+	Uregex_reset:                          procUregex_reset,
+	Uregex_reset64:                        procUregex_reset64,
+	Uregex_setFindProgressCallback:        procUregex_setFindProgressCallback,
+	Uregex_setMatchCallback:               procUregex_setMatchCallback,
+	Uregex_setRegion:                      procUregex_setRegion,
+	Uregex_setRegion64:                    procUregex_setRegion64,
+	Uregex_setRegionAndStart:              procUregex_setRegionAndStart,
+	Uregex_setStackLimit:                  procUregex_setStackLimit,
+	Uregex_setText:                        procUregex_setText,
+	Uregex_setTimeLimit:                   procUregex_setTimeLimit,
+	Uregex_setUText:                       procUregex_setUText,
+	Uregex_split:                          procUregex_split,
+	Uregex_splitUText:                     procUregex_splitUText,
+	Uregex_start:                          procUregex_start,
+	Uregex_start64:                        procUregex_start64,
+	Uregex_useAnchoringBounds:             procUregex_useAnchoringBounds,
+	Uregex_useTransparentBounds:           procUregex_useTransparentBounds,
+	Uregion_areEqual:                      procUregion_areEqual,
+	Uregion_contains:                      procUregion_contains,
+	Uregion_getAvailable:                  procUregion_getAvailable,
+	Uregion_getContainedRegions:           procUregion_getContainedRegions,
+	Uregion_getContainedRegionsOfType:     procUregion_getContainedRegionsOfType,
+	Uregion_getContainingRegion:           procUregion_getContainingRegion,
+	Uregion_getContainingRegionOfType:     procUregion_getContainingRegionOfType,
+	Uregion_getNumericCode:                procUregion_getNumericCode,
+	Uregion_getPreferredValues:            procUregion_getPreferredValues,
+	Uregion_getRegionCode:                 procUregion_getRegionCode,
+	Uregion_getRegionFromCode:             procUregion_getRegionFromCode,
+	Uregion_getRegionFromNumericCode:      procUregion_getRegionFromNumericCode,
+	Uregion_getType:                       procUregion_getType,
+	Ureldatefmt_close:                     procUreldatefmt_close,
+	Ureldatefmt_closeResult:               procUreldatefmt_closeResult,
+	Ureldatefmt_combineDateAndTime:        procUreldatefmt_combineDateAndTime,
+	Ureldatefmt_format:                    procUreldatefmt_format,
+	Ureldatefmt_formatNumeric:             procUreldatefmt_formatNumeric,
+	Ureldatefmt_formatNumericToResult:     procUreldatefmt_formatNumericToResult,
+	Ureldatefmt_formatToResult:            procUreldatefmt_formatToResult,
+	Ureldatefmt_open:                      procUreldatefmt_open,
+	Ureldatefmt_openResult:                procUreldatefmt_openResult,
+	Ureldatefmt_resultAsValue:             procUreldatefmt_resultAsValue,
+	Ures_close:                            procUres_close,
+	Ures_getBinary:                        procUres_getBinary,
+	Ures_getByIndex:                       procUres_getByIndex,
+	Ures_getByKey:                         procUres_getByKey,
+	Ures_getInt:                           procUres_getInt,
+	Ures_getIntVector:                     procUres_getIntVector,
+	Ures_getKey:                           procUres_getKey,
+	Ures_getLocaleByType:                  procUres_getLocaleByType,
+	Ures_getNextResource:                  procUres_getNextResource,
+	Ures_getNextString:                    procUres_getNextString,
+	Ures_getSize:                          procUres_getSize,
+	Ures_getString:                        procUres_getString,
+	Ures_getStringByIndex:                 procUres_getStringByIndex,
+	Ures_getStringByKey:                   procUres_getStringByKey,
+	Ures_getType:                          procUres_getType,
+	Ures_getUInt:                          procUres_getUInt,
+	Ures_getUTF8String:                    procUres_getUTF8String,
+	Ures_getUTF8StringByIndex:             procUres_getUTF8StringByIndex,
+	Ures_getUTF8StringByKey:               procUres_getUTF8StringByKey,
+	Ures_getVersion:                       procUres_getVersion,
+	Ures_hasNext:                          procUres_hasNext,
+	Ures_open:                             procUres_open,
+	Ures_openAvailableLocales:             procUres_openAvailableLocales,
+	Ures_openDirect:                       procUres_openDirect,
+	Ures_openU:                            procUres_openU,
+	Ures_resetIterator:                    procUres_resetIterator,
+	Uscript_breaksBetweenLetters:          procUscript_breaksBetweenLetters,
+	Uscript_getCode:                       procUscript_getCode,
+	Uscript_getName:                       procUscript_getName,
+	Uscript_getSampleString:               procUscript_getSampleString,
+	Uscript_getScript:                     procUscript_getScript,
+	Uscript_getScriptExtensions:           procUscript_getScriptExtensions,
+	Uscript_getShortName:                  procUscript_getShortName,
+	Uscript_getUsage:                      procUscript_getUsage,
+	Uscript_hasScript:                     procUscript_hasScript,
+	Uscript_isCased:                       procUscript_isCased,
+	Uscript_isRightToLeft:                 procUscript_isRightToLeft,
+	Usearch_close:                         procUsearch_close,
+	Usearch_first:                         procUsearch_first,
+	Usearch_following:                     procUsearch_following,
+	Usearch_getAttribute:                  procUsearch_getAttribute,
+	Usearch_getBreakIterator:              procUsearch_getBreakIterator,
+	Usearch_getCollator:                   procUsearch_getCollator,
+	Usearch_getMatchedLength:              procUsearch_getMatchedLength,
+	Usearch_getMatchedStart:               procUsearch_getMatchedStart,
+	Usearch_getMatchedText:                procUsearch_getMatchedText,
+	Usearch_getOffset:                     procUsearch_getOffset,
+	Usearch_getPattern:                    procUsearch_getPattern,
+	Usearch_getText:                       procUsearch_getText,
+	Usearch_last:                          procUsearch_last,
+	Usearch_next:                          procUsearch_next,
+	Usearch_open:                          procUsearch_open,
+	Usearch_openFromCollator:              procUsearch_openFromCollator,
+	Usearch_preceding:                     procUsearch_preceding,
+	Usearch_previous:                      procUsearch_previous,
+	Usearch_reset:                         procUsearch_reset,
+	Usearch_setAttribute:                  procUsearch_setAttribute,
+	Usearch_setBreakIterator:              procUsearch_setBreakIterator,
+	Usearch_setCollator:                   procUsearch_setCollator,
+	Usearch_setOffset:                     procUsearch_setOffset,
+	Usearch_setPattern:                    procUsearch_setPattern,
+	Usearch_setText:                       procUsearch_setText,
+	Uset_add:                              procUset_add,
+	Uset_addAll:                           procUset_addAll,
+	Uset_addAllCodePoints:                 procUset_addAllCodePoints,
+	Uset_addRange:                         procUset_addRange,
+	Uset_addString:                        procUset_addString,
+	Uset_applyIntPropertyValue:            procUset_applyIntPropertyValue,
+	Uset_applyPattern:                     procUset_applyPattern,
+	Uset_applyPropertyAlias:               procUset_applyPropertyAlias,
+	Uset_charAt:                           procUset_charAt,
+	Uset_clear:                            procUset_clear,
+	Uset_clone:                            procUset_clone,
+	Uset_cloneAsThawed:                    procUset_cloneAsThawed,
+	Uset_close:                            procUset_close,
+	Uset_closeOver:                        procUset_closeOver,
+	Uset_compact:                          procUset_compact,
+	Uset_complement:                       procUset_complement,
+	Uset_complementAll:                    procUset_complementAll,
+	Uset_complementAllCodePoints:          procUset_complementAllCodePoints,
+	Uset_complementRange:                  procUset_complementRange,
+	Uset_complementString:                 procUset_complementString,
+	Uset_contains:                         procUset_contains,
+	Uset_containsAll:                      procUset_containsAll,
+	Uset_containsAllCodePoints:            procUset_containsAllCodePoints,
+	Uset_containsNone:                     procUset_containsNone,
+	Uset_containsRange:                    procUset_containsRange,
+	Uset_containsSome:                     procUset_containsSome,
+	Uset_containsString:                   procUset_containsString,
+	Uset_equals:                           procUset_equals,
+	Uset_freeze:                           procUset_freeze,
+	Uset_getItem:                          procUset_getItem,
+	Uset_getItemCount:                     procUset_getItemCount,
+	Uset_getRangeCount:                    procUset_getRangeCount,
+	Uset_getSerializedRange:               procUset_getSerializedRange,
+	Uset_getSerializedRangeCount:          procUset_getSerializedRangeCount,
+	Uset_getSerializedSet:                 procUset_getSerializedSet,
+	Uset_hasStrings:                       procUset_hasStrings,
+	Uset_indexOf:                          procUset_indexOf,
+	Uset_isEmpty:                          procUset_isEmpty,
+	Uset_isFrozen:                         procUset_isFrozen,
+	Uset_open:                             procUset_open,
+	Uset_openEmpty:                        procUset_openEmpty,
+	Uset_openPattern:                      procUset_openPattern,
+	Uset_openPatternOptions:               procUset_openPatternOptions,
+	Uset_remove:                           procUset_remove,
+	Uset_removeAll:                        procUset_removeAll,
+	Uset_removeAllCodePoints:              procUset_removeAllCodePoints,
+	Uset_removeAllStrings:                 procUset_removeAllStrings,
+	Uset_removeRange:                      procUset_removeRange,
+	Uset_removeString:                     procUset_removeString,
+	Uset_resemblesPattern:                 procUset_resemblesPattern,
+	Uset_retain:                           procUset_retain,
+	Uset_retainAll:                        procUset_retainAll,
+	Uset_retainAllCodePoints:              procUset_retainAllCodePoints,
+	Uset_retainString:                     procUset_retainString,
+	Uset_serialize:                        procUset_serialize,
+	Uset_serializedContains:               procUset_serializedContains,
+	Uset_set:                              procUset_set,
+	Uset_setSerializedToOne:               procUset_setSerializedToOne,
+	Uset_size:                             procUset_size,
+	Uset_span:                             procUset_span,
+	Uset_spanBack:                         procUset_spanBack,
+	Uset_spanBackUTF8:                     procUset_spanBackUTF8,
+	Uset_spanUTF8:                         procUset_spanUTF8,
+	Uset_toPattern:                        procUset_toPattern,
+	Uspoof_areConfusable:                  procUspoof_areConfusable,
+	Uspoof_areConfusableUTF8:              procUspoof_areConfusableUTF8,
+	Uspoof_check:                          procUspoof_check,
+	Uspoof_check2:                         procUspoof_check2,
+	Uspoof_check2UTF8:                     procUspoof_check2UTF8,
+	Uspoof_checkUTF8:                      procUspoof_checkUTF8,
+	Uspoof_clone:                          procUspoof_clone,
+	Uspoof_close:                          procUspoof_close,
+	Uspoof_closeCheckResult:               procUspoof_closeCheckResult,
+	Uspoof_getAllowedChars:                procUspoof_getAllowedChars,
+	Uspoof_getAllowedLocales:              procUspoof_getAllowedLocales,
+	Uspoof_getCheckResultChecks:           procUspoof_getCheckResultChecks,
+	Uspoof_getCheckResultNumerics:         procUspoof_getCheckResultNumerics,
+	Uspoof_getCheckResultRestrictionLevel: procUspoof_getCheckResultRestrictionLevel,
+	Uspoof_getChecks:                      procUspoof_getChecks,
+	Uspoof_getInclusionSet:                procUspoof_getInclusionSet,
+	Uspoof_getRecommendedSet:              procUspoof_getRecommendedSet,
+	Uspoof_getRestrictionLevel:            procUspoof_getRestrictionLevel,
+	Uspoof_getSkeleton:                    procUspoof_getSkeleton,
+	Uspoof_getSkeletonUTF8:                procUspoof_getSkeletonUTF8,
+	Uspoof_open:                           procUspoof_open,
+	Uspoof_openCheckResult:                procUspoof_openCheckResult,
+	Uspoof_openFromSerialized:             procUspoof_openFromSerialized,
+	Uspoof_openFromSource:                 procUspoof_openFromSource,
+	Uspoof_serialize:                      procUspoof_serialize,
+	Uspoof_setAllowedChars:                procUspoof_setAllowedChars,
+	Uspoof_setAllowedLocales:              procUspoof_setAllowedLocales,
+	Uspoof_setChecks:                      procUspoof_setChecks,
+	Uspoof_setRestrictionLevel:            procUspoof_setRestrictionLevel,
+	Usprep_close:                          procUsprep_close,
+	Usprep_open:                           procUsprep_open,
+	Usprep_openByType:                     procUsprep_openByType,
+	Usprep_prepare:                        procUsprep_prepare,
+	Utext_char32At:                        procUtext_char32At,
+	Utext_clone:                           procUtext_clone,
+	Utext_close:                           procUtext_close,
+	Utext_copy:                            procUtext_copy,
+	Utext_current32:                       procUtext_current32,
+	Utext_equals:                          procUtext_equals,
+	Utext_extract:                         procUtext_extract,
+	Utext_freeze:                          procUtext_freeze,
+	Utext_getNativeIndex:                  procUtext_getNativeIndex,
+	Utext_getPreviousNativeIndex:          procUtext_getPreviousNativeIndex,
+	Utext_hasMetaData:                     procUtext_hasMetaData,
+	Utext_isLengthExpensive:               procUtext_isLengthExpensive,
+	Utext_isWritable:                      procUtext_isWritable,
+	Utext_moveIndex32:                     procUtext_moveIndex32,
+	Utext_nativeLength:                    procUtext_nativeLength,
+	Utext_next32:                          procUtext_next32,
+	Utext_next32From:                      procUtext_next32From,
+	Utext_openUChars:                      procUtext_openUChars,
+	Utext_openUTF8:                        procUtext_openUTF8,
+	Utext_previous32:                      procUtext_previous32,
+	Utext_previous32From:                  procUtext_previous32From,
+	Utext_replace:                         procUtext_replace,
+	Utext_setNativeIndex:                  procUtext_setNativeIndex,
+	Utext_setup:                           procUtext_setup,
+	Utf8_appendCharSafeBody:               procUtf8_appendCharSafeBody,
+	Utf8_back1SafeBody:                    procUtf8_back1SafeBody,
+	Utf8_nextCharSafeBody:                 procUtf8_nextCharSafeBody,
+	Utf8_prevCharSafeBody:                 procUtf8_prevCharSafeBody,
+	Utmscale_fromInt64:                    procUtmscale_fromInt64,
+	Utmscale_getTimeScaleValue:            procUtmscale_getTimeScaleValue,
+	Utmscale_toInt64:                      procUtmscale_toInt64,
+	Utrace_format:                         procUtrace_format,
+	Utrace_functionName:                   procUtrace_functionName,
+	Utrace_getFunctions:                   procUtrace_getFunctions,
+	Utrace_getLevel:                       procUtrace_getLevel,
+	Utrace_setFunctions:                   procUtrace_setFunctions,
+	Utrace_setLevel:                       procUtrace_setLevel,
+	Utrace_vformat:                        procUtrace_vformat,
+	Utrans_clone:                          procUtrans_clone,
+	Utrans_close:                          procUtrans_close,
+	Utrans_countAvailableIDs:              procUtrans_countAvailableIDs,
+	Utrans_getSourceSet:                   procUtrans_getSourceSet,
+	Utrans_getUnicodeID:                   procUtrans_getUnicodeID,
+	Utrans_openIDs:                        procUtrans_openIDs,
+	Utrans_openInverse:                    procUtrans_openInverse,
+	Utrans_openU:                          procUtrans_openU,
+	Utrans_register:                       procUtrans_register,
+	Utrans_setFilter:                      procUtrans_setFilter,
+	Utrans_toRules:                        procUtrans_toRules,
+	Utrans_trans:                          procUtrans_trans,
+	Utrans_transIncremental:               procUtrans_transIncremental,
+	Utrans_transIncrementalUChars:         procUtrans_transIncrementalUChars,
+	Utrans_transUChars:                    procUtrans_transUChars,
+	Utrans_unregisterID:                   procUtrans_unregisterID,
+	VerifyScripts:                         procVerifyScripts,
+	WideCharToMultiByte:                   procWideCharToMultiByte,
+}
+
 // AdjustCalendarDate calls KERNEL32!AdjustCalendarDate.
 // https://learn.microsoft.com/windows/win32/Intl/adjustcalendardate
 func AdjustCalendarDate(lpCalDateTime *CALDATETIME, calUnit CALDATETIME_DATEUNIT, amount int32) bool {
@@ -1277,8 +3818,8 @@ func CompareStringA(Locale uint32, dwCmpFlags uint32, lpString1 []int8, lpString
 // CompareStringEx calls KERNEL32!CompareStringEx.
 // https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-comparestringex
 // Minimum OS: windows6.0.6000.
-func CompareStringEx(lpLocaleName string, dwCmpFlags COMPARE_STRING_FLAGS, lpString1 string, cchCount1 int32, lpString2 string, cchCount2 int32) (COMPARESTRING_RESULT, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func CompareStringEx(lpLocaleName *string, dwCmpFlags COMPARE_STRING_FLAGS, lpString1 string, cchCount1 int32, lpString2 string, cchCount2 int32) (COMPARESTRING_RESULT, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpString1 := win32.UTF16Ptr(lpString1)
 	_lpString2 := win32.UTF16Ptr(lpString2)
 	r1, _, e1 := syscall.SyscallN(procCompareStringEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwCmpFlags), uintptr(unsafe.Pointer(_lpString1)), uintptr(cchCount1), uintptr(unsafe.Pointer(_lpString2)), uintptr(cchCount2), 0, 0, 0)
@@ -1371,8 +3912,8 @@ func EnumCalendarInfoExA(lpCalInfoEnumProcEx CALINFO_ENUMPROCEXA, Locale uint32,
 // EnumCalendarInfoExEx calls KERNEL32!EnumCalendarInfoExEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumcalendarinfoexex
 // Minimum OS: windows6.0.6000.
-func EnumCalendarInfoExEx(pCalInfoEnumProcExEx CALINFO_ENUMPROCEXEX, lpLocaleName string, Calendar uint32, CalType uint32, lParam foundation.LPARAM) error {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func EnumCalendarInfoExEx(pCalInfoEnumProcExEx CALINFO_ENUMPROCEXEX, lpLocaleName *string, Calendar uint32, CalType uint32, lParam foundation.LPARAM) error {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procEnumCalendarInfoExEx.Addr(), uintptr(pCalInfoEnumProcExEx), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(Calendar), 0, uintptr(CalType), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1427,8 +3968,8 @@ func EnumDateFormatsExA(lpDateFmtEnumProcEx DATEFMT_ENUMPROCEXA, Locale uint32, 
 // EnumDateFormatsExEx calls KERNEL32!EnumDateFormatsExEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumdateformatsexex
 // Minimum OS: windows6.0.6000.
-func EnumDateFormatsExEx(lpDateFmtEnumProcExEx DATEFMT_ENUMPROCEXEX, lpLocaleName string, dwFlags ENUM_DATE_FORMATS_FLAGS, lParam foundation.LPARAM) error {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func EnumDateFormatsExEx(lpDateFmtEnumProcExEx DATEFMT_ENUMPROCEXEX, lpLocaleName *string, dwFlags ENUM_DATE_FORMATS_FLAGS, lParam foundation.LPARAM) error {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procEnumDateFormatsExEx.Addr(), uintptr(lpDateFmtEnumProcExEx), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1582,8 +4123,8 @@ func EnumTimeFormatsA(lpTimeFmtEnumProc TIMEFMT_ENUMPROCA, Locale uint32, dwFlag
 // EnumTimeFormatsEx calls KERNEL32!EnumTimeFormatsEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-enumtimeformatsex
 // Minimum OS: windows6.0.6000.
-func EnumTimeFormatsEx(lpTimeFmtEnumProcEx TIMEFMT_ENUMPROCEX, lpLocaleName string, dwFlags uint32, lParam foundation.LPARAM) error {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func EnumTimeFormatsEx(lpTimeFmtEnumProcEx TIMEFMT_ENUMPROCEX, lpLocaleName *string, dwFlags uint32, lParam foundation.LPARAM) error {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procEnumTimeFormatsEx.Addr(), uintptr(lpTimeFmtEnumProcEx), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1629,8 +4170,8 @@ func FindNLSString(Locale uint32, dwFindNLSStringFlags uint32, lpStringSource st
 // FindNLSStringEx calls KERNEL32!FindNLSStringEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-findnlsstringex
 // Minimum OS: windows6.0.6000.
-func FindNLSStringEx(lpLocaleName string, dwFindNLSStringFlags uint32, lpStringSource string, cchSource int32, lpStringValue string, cchValue int32, pcchFound *int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func FindNLSStringEx(lpLocaleName *string, dwFindNLSStringFlags uint32, lpStringSource string, cchSource int32, lpStringValue string, cchValue int32, pcchFound *int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpStringSource := win32.UTF16Ptr(lpStringSource)
 	_lpStringValue := win32.UTF16Ptr(lpStringValue)
 	r1, _, e1 := syscall.SyscallN(procFindNLSStringEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFindNLSStringFlags), uintptr(unsafe.Pointer(_lpStringSource)), uintptr(cchSource), uintptr(unsafe.Pointer(_lpStringValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pcchFound)), uintptr(unsafe.Pointer(lpVersionInformation)), 0, uintptr(sortHandle))
@@ -1752,8 +4293,8 @@ func GetCalendarInfoA(Locale uint32, Calendar uint32, CalType uint32, lpCalData 
 // GetCalendarInfoEx calls KERNEL32!GetCalendarInfoEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcalendarinfoex
 // Minimum OS: windows6.0.6000.
-func GetCalendarInfoEx(lpLocaleName string, Calendar uint32, CalType uint32, lpCalData foundation.PWSTR, cchData int32, lpValue *uint32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetCalendarInfoEx(lpLocaleName *string, Calendar uint32, CalType uint32, lpCalData foundation.PWSTR, cchData int32, lpValue *uint32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procGetCalendarInfoEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(Calendar), 0, uintptr(CalType), uintptr(unsafe.Pointer(lpCalData)), uintptr(cchData), uintptr(unsafe.Pointer(lpValue)))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -1794,8 +4335,8 @@ func GetCurrencyFormatA(Locale uint32, dwFlags uint32, lpValue foundation.PSTR, 
 // GetCurrencyFormatEx calls KERNEL32!GetCurrencyFormatEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getcurrencyformatex
 // Minimum OS: windows5.0.
-func GetCurrencyFormatEx(lpLocaleName string, dwFlags uint32, lpValue string, lpFormat *CURRENCYFMTW, lpCurrencyStr foundation.PWSTR, cchCurrency int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetCurrencyFormatEx(lpLocaleName *string, dwFlags uint32, lpValue string, lpFormat *CURRENCYFMTW, lpCurrencyStr foundation.PWSTR, cchCurrency int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpValue := win32.UTF16Ptr(lpValue)
 	r1, _, e1 := syscall.SyscallN(procGetCurrencyFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpCurrencyStr)), uintptr(cchCurrency))
 	if e1 != 0 {
@@ -1807,8 +4348,8 @@ func GetCurrencyFormatEx(lpLocaleName string, dwFlags uint32, lpValue string, lp
 // GetDateFormat calls KERNEL32!GetDateFormatW.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-getdateformatw
 // Minimum OS: windows5.0.
-func GetDateFormat(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME, lpFormat string, lpDateStr foundation.PWSTR, cchDate int32) (int32, error) {
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetDateFormat(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME, lpFormat *string, lpDateStr foundation.PWSTR, cchDate int32) (int32, error) {
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetDateFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDate)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -1830,10 +4371,10 @@ func GetDateFormatA(Locale uint32, dwFlags uint32, lpDate *foundation.SYSTEMTIME
 // GetDateFormatEx calls KERNEL32!GetDateFormatEx.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-getdateformatex
 // Minimum OS: windows6.0.6000.
-func GetDateFormatEx(lpLocaleName string, dwFlags ENUM_DATE_FORMATS_FLAGS, lpDate *foundation.SYSTEMTIME, lpFormat string, lpDateStr foundation.PWSTR, cchDate int32, lpCalendar string) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
-	_lpFormat := win32.UTF16Ptr(lpFormat)
-	_lpCalendar := win32.UTF16Ptr(lpCalendar)
+func GetDateFormatEx(lpLocaleName *string, dwFlags ENUM_DATE_FORMATS_FLAGS, lpDate *foundation.SYSTEMTIME, lpFormat *string, lpDateStr foundation.PWSTR, cchDate int32, lpCalendar *string) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
+	_lpCalendar := win32.UTF16PtrOrNil(lpCalendar)
 	r1, _, e1 := syscall.SyscallN(procGetDateFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDate)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDateStr)), uintptr(cchDate), uintptr(unsafe.Pointer(_lpCalendar)))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -1853,8 +4394,8 @@ func GetDistanceOfClosestLanguageInList(pszLanguage string, pszLanguagesList str
 // GetDurationFormat calls KERNEL32!GetDurationFormat.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getdurationformat
 // Minimum OS: windows6.0.6000.
-func GetDurationFormat(Locale uint32, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetDurationFormat(Locale uint32, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat *string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetDurationFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDuration)), uintptr(ullDuration), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDurationStr)), uintptr(cchDuration))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -1865,9 +4406,9 @@ func GetDurationFormat(Locale uint32, dwFlags uint32, lpDuration *foundation.SYS
 // GetDurationFormatEx calls KERNEL32!GetDurationFormatEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getdurationformatex
 // Minimum OS: windows6.0.6000.
-func GetDurationFormatEx(lpLocaleName string, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetDurationFormatEx(lpLocaleName *string, dwFlags uint32, lpDuration *foundation.SYSTEMTIME, ullDuration uint64, lpFormat *string, lpDurationStr foundation.PWSTR, cchDuration int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetDurationFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpDuration)), uintptr(ullDuration), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpDurationStr)), uintptr(cchDuration))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -1958,8 +4499,8 @@ func GetLocaleInfoA(Locale uint32, LCType uint32, lpLCData foundation.PSTR, cchD
 // GetLocaleInfoEx calls KERNEL32!GetLocaleInfoEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getlocaleinfoex
 // Minimum OS: windows6.0.6000.
-func GetLocaleInfoEx(lpLocaleName string, LCType uint32, lpLCData foundation.PWSTR, cchData int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetLocaleInfoEx(lpLocaleName *string, LCType uint32, lpLCData foundation.PWSTR, cchData int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procGetLocaleInfoEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(LCType), uintptr(unsafe.Pointer(lpLCData)), uintptr(cchData))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -1981,8 +4522,8 @@ func GetNLSVersion(Function uint32, Locale uint32, lpVersionInformation *NLSVERS
 // GetNLSVersionEx calls KERNEL32!GetNLSVersionEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getnlsversionex
 // Minimum OS: windows6.0.6000.
-func GetNLSVersionEx(function uint32, lpLocaleName string, lpVersionInformation *NLSVERSIONINFOEX) error {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetNLSVersionEx(function uint32, lpLocaleName *string, lpVersionInformation *NLSVERSIONINFOEX) error {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, e1 := syscall.SyscallN(procGetNLSVersionEx.Addr(), uintptr(function), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(unsafe.Pointer(lpVersionInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2016,8 +4557,8 @@ func GetNumberFormatA(Locale uint32, dwFlags uint32, lpValue foundation.PSTR, lp
 // GetNumberFormatEx calls KERNEL32!GetNumberFormatEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-getnumberformatex
 // Minimum OS: windows6.0.6000.
-func GetNumberFormatEx(lpLocaleName string, dwFlags uint32, lpValue string, lpFormat *NUMBERFMTW, lpNumberStr foundation.PWSTR, cchNumber int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func GetNumberFormatEx(lpLocaleName *string, dwFlags uint32, lpValue string, lpFormat *NUMBERFMTW, lpNumberStr foundation.PWSTR, cchNumber int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpValue := win32.UTF16Ptr(lpValue)
 	r1, _, e1 := syscall.SyscallN(procGetNumberFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpValue)), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpNumberStr)), uintptr(cchNumber))
 	if e1 != 0 {
@@ -2191,8 +4732,8 @@ func GetThreadUILanguage() uint16 {
 // GetTimeFormat calls KERNEL32!GetTimeFormatW.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatw
 // Minimum OS: windows5.0.
-func GetTimeFormat(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME, lpFormat string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetTimeFormat(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME, lpFormat *string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetTimeFormat.Addr(), uintptr(Locale), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTime)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpTimeStr)), uintptr(cchTime))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -2214,9 +4755,9 @@ func GetTimeFormatA(Locale uint32, dwFlags uint32, lpTime *foundation.SYSTEMTIME
 // GetTimeFormatEx calls KERNEL32!GetTimeFormatEx.
 // https://learn.microsoft.com/windows/win32/api/datetimeapi/nf-datetimeapi-gettimeformatex
 // Minimum OS: windows6.0.6000.
-func GetTimeFormatEx(lpLocaleName string, dwFlags TIME_FORMAT_FLAGS, lpTime *foundation.SYSTEMTIME, lpFormat string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
-	_lpFormat := win32.UTF16Ptr(lpFormat)
+func GetTimeFormatEx(lpLocaleName *string, dwFlags TIME_FORMAT_FLAGS, lpTime *foundation.SYSTEMTIME, lpFormat *string, lpTimeStr foundation.PWSTR, cchTime int32) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
+	_lpFormat := win32.UTF16PtrOrNil(lpFormat)
 	r1, _, e1 := syscall.SyscallN(procGetTimeFormatEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpTime)), uintptr(unsafe.Pointer(_lpFormat)), uintptr(unsafe.Pointer(lpTimeStr)), uintptr(cchTime))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -2438,8 +4979,8 @@ func IsValidLocaleName(lpLocaleName string) bool {
 // IsValidNLSVersion calls KERNEL32!IsValidNLSVersion.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-isvalidnlsversion
 // Minimum OS: windows8.0.
-func IsValidNLSVersion(function uint32, lpLocaleName string, lpVersionInformation *NLSVERSIONINFOEX) uint32 {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func IsValidNLSVersion(function uint32, lpLocaleName *string, lpVersionInformation *NLSVERSIONINFOEX) uint32 {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	r1, _, _ := syscall.SyscallN(procIsValidNLSVersion.Addr(), uintptr(function), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(unsafe.Pointer(lpVersionInformation)))
 	return uint32(r1)
 }
@@ -2489,8 +5030,8 @@ func LCMapStringA(Locale uint32, dwMapFlags uint32, lpSrcStr foundation.PSTR, cc
 // LCMapStringEx calls KERNEL32!LCMapStringEx.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-lcmapstringex
 // Minimum OS: windows6.0.6000.
-func LCMapStringEx(lpLocaleName string, dwMapFlags uint32, lpSrcStr string, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
-	_lpLocaleName := win32.UTF16Ptr(lpLocaleName)
+func LCMapStringEx(lpLocaleName *string, dwMapFlags uint32, lpSrcStr string, cchSrc int32, lpDestStr foundation.PWSTR, cchDest int32, lpVersionInformation *NLSVERSIONINFO, sortHandle foundation.LPARAM) (int32, error) {
+	_lpLocaleName := win32.UTF16PtrOrNil(lpLocaleName)
 	_lpSrcStr := win32.UTF16Ptr(lpSrcStr)
 	r1, _, e1 := syscall.SyscallN(procLCMapStringEx.Addr(), uintptr(unsafe.Pointer(_lpLocaleName)), uintptr(dwMapFlags), uintptr(unsafe.Pointer(_lpSrcStr)), uintptr(cchSrc), uintptr(unsafe.Pointer(lpDestStr)), uintptr(cchDest), uintptr(unsafe.Pointer(lpVersionInformation)), 0, uintptr(sortHandle))
 	if e1 != 0 {
@@ -2683,9 +5224,9 @@ func NormalizeString(NormForm NORM_FORM, lpSrcString string, cwSrcLength int32, 
 // NotifyUILanguageChange calls KERNEL32!NotifyUILanguageChange.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-notifyuilanguagechange
 // Minimum OS: windows6.1.
-func NotifyUILanguageChange(dwFlags uint32, pcwstrNewLanguage string, pcwstrPreviousLanguage string, pdwStatusRtrn *uint32) bool {
-	_pcwstrNewLanguage := win32.UTF16Ptr(pcwstrNewLanguage)
-	_pcwstrPreviousLanguage := win32.UTF16Ptr(pcwstrPreviousLanguage)
+func NotifyUILanguageChange(dwFlags uint32, pcwstrNewLanguage *string, pcwstrPreviousLanguage *string, pdwStatusRtrn *uint32) bool {
+	_pcwstrNewLanguage := win32.UTF16PtrOrNil(pcwstrNewLanguage)
+	_pcwstrPreviousLanguage := win32.UTF16PtrOrNil(pcwstrPreviousLanguage)
 	r1, _, _ := syscall.SyscallN(procNotifyUILanguageChange.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pcwstrNewLanguage)), uintptr(unsafe.Pointer(_pcwstrPreviousLanguage)), 0, uintptr(unsafe.Pointer(pdwStatusRtrn)))
 	return r1 != 0
 }
@@ -2693,8 +5234,8 @@ func NotifyUILanguageChange(dwFlags uint32, pcwstrNewLanguage string, pcwstrPrev
 // ResolveLocaleName calls KERNEL32!ResolveLocaleName.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-resolvelocalename
 // Minimum OS: windows6.1.
-func ResolveLocaleName(lpNameToResolve string, lpLocaleName foundation.PWSTR, cchLocaleName int32) (int32, error) {
-	_lpNameToResolve := win32.UTF16Ptr(lpNameToResolve)
+func ResolveLocaleName(lpNameToResolve *string, lpLocaleName foundation.PWSTR, cchLocaleName int32) (int32, error) {
+	_lpNameToResolve := win32.UTF16PtrOrNil(lpNameToResolve)
 	r1, _, e1 := syscall.SyscallN(procResolveLocaleName.Addr(), uintptr(unsafe.Pointer(_lpNameToResolve)), uintptr(unsafe.Pointer(lpLocaleName)), uintptr(cchLocaleName))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -3115,8 +5656,8 @@ func SetLocaleInfoA(Locale uint32, LCType uint32, lpLCData foundation.PSTR) erro
 // SetProcessPreferredUILanguages calls KERNEL32!SetProcessPreferredUILanguages.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setprocesspreferreduilanguages
 // Minimum OS: windows6.1.
-func SetProcessPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer string, pulNumLanguages *uint32) error {
-	_pwszLanguagesBuffer := win32.UTF16Ptr(pwszLanguagesBuffer)
+func SetProcessPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer *string, pulNumLanguages *uint32) error {
+	_pwszLanguagesBuffer := win32.UTF16PtrOrNil(pwszLanguagesBuffer)
 	r1, _, e1 := syscall.SyscallN(procSetProcessPreferredUILanguages.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszLanguagesBuffer)), uintptr(unsafe.Pointer(pulNumLanguages)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3135,15 +5676,15 @@ func SetThreadLocale(Locale uint32) bool {
 // SetThreadPreferredUILanguages calls KERNEL32!SetThreadPreferredUILanguages.
 // https://learn.microsoft.com/windows/win32/api/winnls/nf-winnls-setthreadpreferreduilanguages
 // Minimum OS: windows6.0.6000.
-func SetThreadPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer string, pulNumLanguages *uint32) bool {
-	_pwszLanguagesBuffer := win32.UTF16Ptr(pwszLanguagesBuffer)
+func SetThreadPreferredUILanguages(dwFlags uint32, pwszLanguagesBuffer *string, pulNumLanguages *uint32) bool {
+	_pwszLanguagesBuffer := win32.UTF16PtrOrNil(pwszLanguagesBuffer)
 	r1, _, _ := syscall.SyscallN(procSetThreadPreferredUILanguages.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszLanguagesBuffer)), uintptr(unsafe.Pointer(pulNumLanguages)))
 	return r1 != 0
 }
 
 // SetThreadPreferredUILanguages2 calls KERNEL32!SetThreadPreferredUILanguages2.
-func SetThreadPreferredUILanguages2(flags uint32, languages string, numLanguagesSet *uint32, snapshot *HSAVEDUILANGUAGES) bool {
-	_languages := win32.UTF16Ptr(languages)
+func SetThreadPreferredUILanguages2(flags uint32, languages *string, numLanguagesSet *uint32, snapshot *HSAVEDUILANGUAGES) bool {
+	_languages := win32.UTF16PtrOrNil(languages)
 	r1, _, _ := syscall.SyscallN(procSetThreadPreferredUILanguages2.Addr(), uintptr(flags), uintptr(unsafe.Pointer(_languages)), uintptr(unsafe.Pointer(numLanguagesSet)), uintptr(unsafe.Pointer(snapshot)))
 	return r1 != 0
 }
@@ -3421,6 +5962,14 @@ func U_getIntPropertyMinValue(which UProperty) int32 {
 func U_getIntPropertyValue(c int32, which UProperty) int32 {
 	r1, _, _ := syscall.SyscallN(procU_getIntPropertyValue.Addr(), uintptr(c), uintptr(which))
 	return int32(r1)
+}
+
+var specU_getNumericValue = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// U_getNumericValue calls icuuc!u_getNumericValue.
+func U_getNumericValue(c int32) float64 {
+	r := win32.Call(procU_getNumericValue.Addr(), specU_getNumericValue, nil, uintptr(c))
+	return math.Float64frombits(r.F0)
 }
 
 // U_getPropertyEnum calls icuuc!u_getPropertyEnum.
@@ -3707,8 +6256,8 @@ func U_parseMessageWithError(locale foundation.PSTR, pattern *uint16, patternLen
 }
 
 // U_setMemoryFunctions calls icuuc!u_setMemoryFunctions.
-func U_setMemoryFunctions(context unsafe.Pointer, a *UMemAllocFn, r *UMemReallocFn, f *UMemFreeFn, status *UErrorCode) {
-	syscall.SyscallN(procU_setMemoryFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(a)), uintptr(unsafe.Pointer(r)), uintptr(unsafe.Pointer(f)), uintptr(unsafe.Pointer(status)))
+func U_setMemoryFunctions(context unsafe.Pointer, a *UMemAllocFn, r_ *UMemReallocFn, f *UMemFreeFn, status *UErrorCode) {
+	syscall.SyscallN(procU_setMemoryFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(a)), uintptr(unsafe.Pointer(r_)), uintptr(unsafe.Pointer(f)), uintptr(unsafe.Pointer(status)))
 }
 
 // U_shapeArabic calls icuuc!u_shapeArabic.
@@ -4534,6 +7083,22 @@ func Ucal_getDefaultTimeZone(result *uint16, resultCapacity int32, ec *UErrorCod
 	return int32(r1)
 }
 
+var specUcal_getFieldDifference = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word}}
+
+// Ucal_getFieldDifference calls icuin!ucal_getFieldDifference.
+func Ucal_getFieldDifference(cal *unsafe.Pointer, target float64, field UCalendarDateFields, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUcal_getFieldDifference.Addr(), specUcal_getFieldDifference, nil, uintptr(unsafe.Pointer(cal)), uintptr(math.Float64bits(target)), uintptr(field), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUcal_getGregorianChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ucal_getGregorianChange calls icuin!ucal_getGregorianChange.
+func Ucal_getGregorianChange(cal *unsafe.Pointer, pErrorCode *UErrorCode) float64 {
+	r := win32.Call(procUcal_getGregorianChange.Addr(), specUcal_getGregorianChange, nil, uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(pErrorCode)))
+	return math.Float64frombits(r.F0)
+}
+
 // Ucal_getHostTimeZone calls icu!ucal_getHostTimeZone.
 func Ucal_getHostTimeZone(result *uint16, resultCapacity int32, ec *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUcal_getHostTimeZone.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(ec)))
@@ -4556,6 +7121,22 @@ func Ucal_getLimit(cal *unsafe.Pointer, field UCalendarDateFields, type_ UCalend
 func Ucal_getLocaleByType(cal *unsafe.Pointer, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procUcal_getLocaleByType.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(type_), uintptr(unsafe.Pointer(status)))
 	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+var specUcal_getMillis = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ucal_getMillis calls icuin!ucal_getMillis.
+func Ucal_getMillis(cal *unsafe.Pointer, status *UErrorCode) float64 {
+	r := win32.Call(procUcal_getMillis.Addr(), specUcal_getMillis, nil, uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
+var specUcal_getNow = &win32.Spec{Args: []win32.Arg{}, Ret: win32.Float64}
+
+// Ucal_getNow calls icuin!ucal_getNow.
+func Ucal_getNow() float64 {
+	r := win32.Call(procUcal_getNow.Addr(), specUcal_getNow, nil)
+	return math.Float64frombits(r.F0)
 }
 
 // Ucal_getTZDataVersion calls icuin!ucal_getTZDataVersion.
@@ -4623,6 +7204,14 @@ func Ucal_isSet(cal *unsafe.Pointer, field UCalendarDateFields) int8 {
 	return int8(r1)
 }
 
+var specUcal_isWeekend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Ucal_isWeekend calls icuin!ucal_isWeekend.
+func Ucal_isWeekend(cal *unsafe.Pointer, date float64, status *UErrorCode) int8 {
+	r1, _, _ := win32.Call(procUcal_isWeekend.Addr(), specUcal_isWeekend, nil, uintptr(unsafe.Pointer(cal)), uintptr(math.Float64bits(date)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int8(r1)
+}
+
 // Ucal_open calls icuin!ucal_open.
 func Ucal_open(zoneID *uint16, len_ int32, locale foundation.PSTR, type_ UCalendarType, status *UErrorCode) *unsafe.Pointer {
 	r1, _, _ := syscall.SyscallN(procUcal_open.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(len_), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(unsafe.Pointer(status)))
@@ -4675,6 +7264,20 @@ func Ucal_setDateTime(cal *unsafe.Pointer, year int32, month int32, date int32, 
 // Ucal_setDefaultTimeZone calls icuin!ucal_setDefaultTimeZone.
 func Ucal_setDefaultTimeZone(zoneID *uint16, ec *UErrorCode) {
 	syscall.SyscallN(procUcal_setDefaultTimeZone.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(unsafe.Pointer(ec)))
+}
+
+var specUcal_setGregorianChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Ucal_setGregorianChange calls icuin!ucal_setGregorianChange.
+func Ucal_setGregorianChange(cal *unsafe.Pointer, date float64, pErrorCode *UErrorCode) {
+	win32.Call(procUcal_setGregorianChange.Addr(), specUcal_setGregorianChange, nil, uintptr(unsafe.Pointer(cal)), uintptr(math.Float64bits(date)), uintptr(unsafe.Pointer(pErrorCode))).Tuple()
+}
+
+var specUcal_setMillis = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Ucal_setMillis calls icuin!ucal_setMillis.
+func Ucal_setMillis(cal *unsafe.Pointer, dateTime float64, status *UErrorCode) {
+	win32.Call(procUcal_setMillis.Addr(), specUcal_setMillis, nil, uintptr(unsafe.Pointer(cal)), uintptr(math.Float64bits(dateTime)), uintptr(unsafe.Pointer(status))).Tuple()
 }
 
 // Ucal_setTimeZone calls icuin!ucal_setTimeZone.
@@ -5683,9 +8286,25 @@ func Ucsdet_setText(ucsd *UCharsetDetector, textIn foundation.PSTR, len_ int32, 
 	syscall.SyscallN(procUcsdet_setText.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(textIn)), uintptr(len_), uintptr(unsafe.Pointer(status)))
 }
 
+var specUcurr_countCurrencies = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Ucurr_countCurrencies calls icuuc!ucurr_countCurrencies.
+func Ucurr_countCurrencies(locale foundation.PSTR, date float64, ec *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUcurr_countCurrencies.Addr(), specUcurr_countCurrencies, nil, uintptr(unsafe.Pointer(locale)), uintptr(math.Float64bits(date)), uintptr(unsafe.Pointer(ec))).Tuple()
+	return int32(r1)
+}
+
 // Ucurr_forLocale calls icuuc!ucurr_forLocale.
 func Ucurr_forLocale(locale foundation.PSTR, buff *uint16, buffCapacity int32, ec *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUcurr_forLocale.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(buff)), uintptr(buffCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+var specUcurr_forLocaleAndDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Ucurr_forLocaleAndDate calls icuuc!ucurr_forLocaleAndDate.
+func Ucurr_forLocaleAndDate(locale foundation.PSTR, date float64, index int32, buff *uint16, buffCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUcurr_forLocaleAndDate.Addr(), specUcurr_forLocaleAndDate, nil, uintptr(unsafe.Pointer(locale)), uintptr(math.Float64bits(date)), uintptr(index), uintptr(unsafe.Pointer(buff)), uintptr(buffCapacity), uintptr(unsafe.Pointer(ec))).Tuple()
 	return int32(r1)
 }
 
@@ -5723,6 +8342,30 @@ func Ucurr_getNumericCode(currency *uint16) int32 {
 func Ucurr_getPluralName(currency *uint16, locale foundation.PSTR, isChoiceFormat *int8, pluralCount foundation.PSTR, len_ *int32, ec *UErrorCode) *uint16 {
 	r1, _, _ := syscall.SyscallN(procUcurr_getPluralName.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(isChoiceFormat)), uintptr(unsafe.Pointer(pluralCount)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(ec)))
 	return (*uint16)(unsafe.Pointer(r1))
+}
+
+var specUcurr_getRoundingIncrement = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ucurr_getRoundingIncrement calls icuuc!ucurr_getRoundingIncrement.
+func Ucurr_getRoundingIncrement(currency *uint16, ec *UErrorCode) float64 {
+	r := win32.Call(procUcurr_getRoundingIncrement.Addr(), specUcurr_getRoundingIncrement, nil, uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(ec)))
+	return math.Float64frombits(r.F0)
+}
+
+var specUcurr_getRoundingIncrementForUsage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ucurr_getRoundingIncrementForUsage calls icuuc!ucurr_getRoundingIncrementForUsage.
+func Ucurr_getRoundingIncrementForUsage(currency *uint16, usage UCurrencyUsage, ec *UErrorCode) float64 {
+	r := win32.Call(procUcurr_getRoundingIncrementForUsage.Addr(), specUcurr_getRoundingIncrementForUsage, nil, uintptr(unsafe.Pointer(currency)), uintptr(usage), uintptr(unsafe.Pointer(ec)))
+	return math.Float64frombits(r.F0)
+}
+
+var specUcurr_isAvailable = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// Ucurr_isAvailable calls icuuc!ucurr_isAvailable.
+func Ucurr_isAvailable(isoCode *uint16, from float64, to float64, errorCode *UErrorCode) int8 {
+	r1, _, _ := win32.Call(procUcurr_isAvailable.Addr(), specUcurr_isAvailable, nil, uintptr(unsafe.Pointer(isoCode)), uintptr(math.Float64bits(from)), uintptr(math.Float64bits(to)), uintptr(unsafe.Pointer(errorCode))).Tuple()
+	return int8(r1)
 }
 
 // Ucurr_openISOCurrencies calls icuuc!ucurr_openISOCurrencies.
@@ -5781,6 +8424,14 @@ func Udat_countSymbols(fmt *unsafe.Pointer, type_ UDateFormatSymbolType) int32 {
 	return int32(r1)
 }
 
+var specUdat_format = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Udat_format calls icuin!udat_format.
+func Udat_format(format *unsafe.Pointer, dateToFormat float64, result *uint16, resultLength int32, position *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUdat_format.Addr(), specUdat_format, nil, uintptr(unsafe.Pointer(format)), uintptr(math.Float64bits(dateToFormat)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
 // Udat_formatCalendar calls icuin!udat_formatCalendar.
 func Udat_formatCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, result *uint16, capacity int32, position *UFieldPosition, status *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUdat_formatCalendar.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(result)), uintptr(capacity), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status)))
@@ -5791,6 +8442,22 @@ func Udat_formatCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, resul
 func Udat_formatCalendarForFields(format *unsafe.Pointer, calendar *unsafe.Pointer, result *uint16, capacity int32, fpositer *UFieldPositionIterator, status *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUdat_formatCalendarForFields.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(result)), uintptr(capacity), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(status)))
 	return int32(r1)
+}
+
+var specUdat_formatForFields = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Udat_formatForFields calls icuin!udat_formatForFields.
+func Udat_formatForFields(format *unsafe.Pointer, dateToFormat float64, result *uint16, resultLength int32, fpositer *UFieldPositionIterator, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUdat_formatForFields.Addr(), specUdat_formatForFields, nil, uintptr(unsafe.Pointer(format)), uintptr(math.Float64bits(dateToFormat)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUdat_get2DigitYearStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Udat_get2DigitYearStart calls icuin!udat_get2DigitYearStart.
+func Udat_get2DigitYearStart(fmt *unsafe.Pointer, status *UErrorCode) float64 {
+	r := win32.Call(procUdat_get2DigitYearStart.Addr(), specUdat_get2DigitYearStart, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
 }
 
 // Udat_getAvailable calls icuin!udat_getAvailable.
@@ -5853,9 +8520,24 @@ func Udat_open(timeStyle UDateFormatStyle, dateStyle UDateFormatStyle, locale fo
 	return (*unsafe.Pointer)(unsafe.Pointer(r1))
 }
 
+var specUdat_parse = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Udat_parse calls icuin!udat_parse.
+func Udat_parse(format *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) float64 {
+	r := win32.Call(procUdat_parse.Addr(), specUdat_parse, nil, uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
 // Udat_parseCalendar calls icuin!udat_parseCalendar.
 func Udat_parseCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) {
 	syscall.SyscallN(procUdat_parseCalendar.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+}
+
+var specUdat_set2DigitYearStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Udat_set2DigitYearStart calls icuin!udat_set2DigitYearStart.
+func Udat_set2DigitYearStart(fmt *unsafe.Pointer, d float64, status *UErrorCode) {
+	win32.Call(procUdat_set2DigitYearStart.Addr(), specUdat_set2DigitYearStart, nil, uintptr(unsafe.Pointer(fmt)), uintptr(math.Float64bits(d)), uintptr(unsafe.Pointer(status))).Tuple()
 }
 
 // Udat_setBooleanAttribute calls icuin!udat_setBooleanAttribute.
@@ -6049,6 +8731,21 @@ func Udtitvfmt_closeResult(uresult *UFormattedDateInterval) {
 	syscall.SyscallN(procUdtitvfmt_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
 }
 
+var specUdtitvfmt_format = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Udtitvfmt_format calls icuin!udtitvfmt_format.
+func Udtitvfmt_format(formatter *UDateIntervalFormat, fromDate float64, toDate float64, result *uint16, resultCapacity int32, position *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUdtitvfmt_format.Addr(), specUdtitvfmt_format, nil, uintptr(unsafe.Pointer(formatter)), uintptr(math.Float64bits(fromDate)), uintptr(math.Float64bits(toDate)), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUdtitvfmt_formatToResult = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// Udtitvfmt_formatToResult calls icu!udtitvfmt_formatToResult.
+func Udtitvfmt_formatToResult(formatter *UDateIntervalFormat, fromDate float64, toDate float64, result *UFormattedDateInterval, status *UErrorCode) {
+	win32.Call(procUdtitvfmt_formatToResult.Addr(), specUdtitvfmt_formatToResult, nil, uintptr(unsafe.Pointer(formatter)), uintptr(math.Float64bits(fromDate)), uintptr(math.Float64bits(toDate)), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(status))).Tuple()
+}
+
 // Udtitvfmt_getContext calls icu!udtitvfmt_getContext.
 func Udtitvfmt_getContext(formatter *UDateIntervalFormat, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
 	r1, _, _ := syscall.SyscallN(procUdtitvfmt_getContext.Addr(), uintptr(unsafe.Pointer(formatter)), uintptr(type_), uintptr(unsafe.Pointer(status)))
@@ -6152,10 +8849,26 @@ func Ufmt_getArrayLength(fmt *unsafe.Pointer, status *UErrorCode) int32 {
 	return int32(r1)
 }
 
+var specUfmt_getDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ufmt_getDate calls icuin!ufmt_getDate.
+func Ufmt_getDate(fmt *unsafe.Pointer, status *UErrorCode) float64 {
+	r := win32.Call(procUfmt_getDate.Addr(), specUfmt_getDate, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
 // Ufmt_getDecNumChars calls icuin!ufmt_getDecNumChars.
 func Ufmt_getDecNumChars(fmt *unsafe.Pointer, len_ *int32, status *UErrorCode) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procUfmt_getDecNumChars.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
 	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+var specUfmt_getDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ufmt_getDouble calls icuin!ufmt_getDouble.
+func Ufmt_getDouble(fmt *unsafe.Pointer, status *UErrorCode) float64 {
+	r := win32.Call(procUfmt_getDouble.Addr(), specUfmt_getDouble, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
 }
 
 // Ufmt_getInt64 calls icuin!ufmt_getInt64.
@@ -7057,6 +9770,30 @@ func Unum_formatDecimal(fmt *unsafe.Pointer, number foundation.PSTR, length int3
 	return int32(r1)
 }
 
+var specUnum_formatDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Unum_formatDouble calls icuin!unum_formatDouble.
+func Unum_formatDouble(fmt *unsafe.Pointer, number float64, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUnum_formatDouble.Addr(), specUnum_formatDouble, nil, uintptr(unsafe.Pointer(fmt)), uintptr(math.Float64bits(number)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUnum_formatDoubleCurrency = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Unum_formatDoubleCurrency calls icuin!unum_formatDoubleCurrency.
+func Unum_formatDoubleCurrency(fmt *unsafe.Pointer, number float64, currency *uint16, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUnum_formatDoubleCurrency.Addr(), specUnum_formatDoubleCurrency, nil, uintptr(unsafe.Pointer(fmt)), uintptr(math.Float64bits(number)), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUnum_formatDoubleForFields = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Unum_formatDoubleForFields calls icuin!unum_formatDoubleForFields.
+func Unum_formatDoubleForFields(format *unsafe.Pointer, number float64, result *uint16, resultLength int32, fpositer *UFieldPositionIterator, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUnum_formatDoubleForFields.Addr(), specUnum_formatDoubleForFields, nil, uintptr(unsafe.Pointer(format)), uintptr(math.Float64bits(number)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
 // Unum_formatInt64 calls icuin!unum_formatInt64.
 func Unum_formatInt64(fmt *unsafe.Pointer, number int64, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUnum_formatInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(number), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
@@ -7085,6 +9822,14 @@ func Unum_getAvailable(localeIndex int32) foundation.PSTR {
 func Unum_getContext(fmt *unsafe.Pointer, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
 	r1, _, _ := syscall.SyscallN(procUnum_getContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
 	return UDisplayContext(r1)
+}
+
+var specUnum_getDoubleAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Unum_getDoubleAttribute calls icuin!unum_getDoubleAttribute.
+func Unum_getDoubleAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute) float64 {
+	r := win32.Call(procUnum_getDoubleAttribute.Addr(), specUnum_getDoubleAttribute, nil, uintptr(unsafe.Pointer(fmt)), uintptr(attr))
+	return math.Float64frombits(r.F0)
 }
 
 // Unum_getLocaleByType calls icuin!unum_getLocaleByType.
@@ -7123,6 +9868,22 @@ func Unum_parseDecimal(fmt *unsafe.Pointer, text *uint16, textLength int32, pars
 	return int32(r1)
 }
 
+var specUnum_parseDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Unum_parseDouble calls icuin!unum_parseDouble.
+func Unum_parseDouble(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) float64 {
+	r := win32.Call(procUnum_parseDouble.Addr(), specUnum_parseDouble, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
+var specUnum_parseDoubleCurrency = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Unum_parseDoubleCurrency calls icuin!unum_parseDoubleCurrency.
+func Unum_parseDoubleCurrency(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, currency *uint16, status *UErrorCode) float64 {
+	r := win32.Call(procUnum_parseDoubleCurrency.Addr(), specUnum_parseDoubleCurrency, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
 // Unum_parseInt64 calls icuin!unum_parseInt64.
 func Unum_parseInt64(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) int64 {
 	r1, _, _ := syscall.SyscallN(procUnum_parseInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
@@ -7143,6 +9904,13 @@ func Unum_setAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute, newValu
 // Unum_setContext calls icuin!unum_setContext.
 func Unum_setContext(fmt *unsafe.Pointer, value UDisplayContext, status *UErrorCode) {
 	syscall.SyscallN(procUnum_setContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(value), uintptr(unsafe.Pointer(status)))
+}
+
+var specUnum_setDoubleAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64}}
+
+// Unum_setDoubleAttribute calls icuin!unum_setDoubleAttribute.
+func Unum_setDoubleAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute, newValue float64) {
+	win32.Call(procUnum_setDoubleAttribute.Addr(), specUnum_setDoubleAttribute, nil, uintptr(unsafe.Pointer(fmt)), uintptr(attr), uintptr(math.Float64bits(newValue))).Tuple()
 }
 
 // Unum_setSymbol calls icuin!unum_setSymbol.
@@ -7174,6 +9942,13 @@ func Unumf_closeResult(uresult *UFormattedNumber) {
 // Unumf_formatDecimal calls icu!unumf_formatDecimal.
 func Unumf_formatDecimal(uformatter *UNumberFormatter, value foundation.PSTR, valueLen int32, uresult *UFormattedNumber, ec *UErrorCode) {
 	syscall.SyscallN(procUnumf_formatDecimal.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(unsafe.Pointer(value)), uintptr(valueLen), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+}
+
+var specUnumf_formatDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word}}
+
+// Unumf_formatDouble calls icu!unumf_formatDouble.
+func Unumf_formatDouble(uformatter *UNumberFormatter, value float64, uresult *UFormattedNumber, ec *UErrorCode) {
+	win32.Call(procUnumf_formatDouble.Addr(), specUnumf_formatDouble, nil, uintptr(unsafe.Pointer(uformatter)), uintptr(math.Float64bits(value)), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec))).Tuple()
 }
 
 // Unumf_formatInt calls icu!unumf_formatInt.
@@ -7241,6 +10016,13 @@ func Unumrf_closeResult(uresult *UFormattedNumberRange) {
 // Unumrf_formatDecimalRange calls icu!unumrf_formatDecimalRange.
 func Unumrf_formatDecimalRange(uformatter *UNumberRangeFormatter, first foundation.PSTR, firstLen int32, second foundation.PSTR, secondLen int32, uresult *UFormattedNumberRange, ec *UErrorCode) {
 	syscall.SyscallN(procUnumrf_formatDecimalRange.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(unsafe.Pointer(first)), uintptr(firstLen), uintptr(unsafe.Pointer(second)), uintptr(secondLen), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+}
+
+var specUnumrf_formatDoubleRange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// Unumrf_formatDoubleRange calls icu!unumrf_formatDoubleRange.
+func Unumrf_formatDoubleRange(uformatter *UNumberRangeFormatter, first float64, second float64, uresult *UFormattedNumberRange, ec *UErrorCode) {
+	win32.Call(procUnumrf_formatDoubleRange.Addr(), specUnumrf_formatDoubleRange, nil, uintptr(unsafe.Pointer(uformatter)), uintptr(math.Float64bits(first)), uintptr(math.Float64bits(second)), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec))).Tuple()
 }
 
 // Unumrf_openForSkeletonWithCollapseAndIdentityFallback calls icu!unumrf_openForSkeletonWithCollapseAndIdentityFallback.
@@ -7354,6 +10136,14 @@ func Uplrules_open(locale foundation.PSTR, status *UErrorCode) *UPluralRules {
 func Uplrules_openForType(locale foundation.PSTR, type_ UPluralType, status *UErrorCode) *UPluralRules {
 	r1, _, _ := syscall.SyscallN(procUplrules_openForType.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(unsafe.Pointer(status)))
 	return (*UPluralRules)(unsafe.Pointer(r1))
+}
+
+var specUplrules_select = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// Uplrules_select calls icuin!uplrules_select.
+func Uplrules_select(uplrules *UPluralRules, number float64, keyword *uint16, capacity int32, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUplrules_select.Addr(), specUplrules_select, nil, uintptr(unsafe.Pointer(uplrules)), uintptr(math.Float64bits(number)), uintptr(unsafe.Pointer(keyword)), uintptr(capacity), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
 }
 
 // Uplrules_selectFormatted calls icu!uplrules_selectFormatted.
@@ -7808,6 +10598,36 @@ func Ureldatefmt_closeResult(ufrdt *UFormattedRelativeDateTime) {
 func Ureldatefmt_combineDateAndTime(reldatefmt *URelativeDateTimeFormatter, relativeDateString *uint16, relativeDateStringLen int32, timeString *uint16, timeStringLen int32, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUreldatefmt_combineDateAndTime.Addr(), uintptr(unsafe.Pointer(reldatefmt)), uintptr(unsafe.Pointer(relativeDateString)), uintptr(relativeDateStringLen), uintptr(unsafe.Pointer(timeString)), uintptr(timeStringLen), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status)))
 	return int32(r1)
+}
+
+var specUreldatefmt_format = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Ureldatefmt_format calls icuin!ureldatefmt_format.
+func Ureldatefmt_format(reldatefmt *URelativeDateTimeFormatter, offset float64, unit URelativeDateTimeUnit, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUreldatefmt_format.Addr(), specUreldatefmt_format, nil, uintptr(unsafe.Pointer(reldatefmt)), uintptr(math.Float64bits(offset)), uintptr(unit), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUreldatefmt_formatNumeric = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Ureldatefmt_formatNumeric calls icuin!ureldatefmt_formatNumeric.
+func Ureldatefmt_formatNumeric(reldatefmt *URelativeDateTimeFormatter, offset float64, unit URelativeDateTimeUnit, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUreldatefmt_formatNumeric.Addr(), specUreldatefmt_formatNumeric, nil, uintptr(unsafe.Pointer(reldatefmt)), uintptr(math.Float64bits(offset)), uintptr(unit), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUreldatefmt_formatNumericToResult = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// Ureldatefmt_formatNumericToResult calls icu!ureldatefmt_formatNumericToResult.
+func Ureldatefmt_formatNumericToResult(reldatefmt *URelativeDateTimeFormatter, offset float64, unit URelativeDateTimeUnit, result *UFormattedRelativeDateTime, status *UErrorCode) {
+	win32.Call(procUreldatefmt_formatNumericToResult.Addr(), specUreldatefmt_formatNumericToResult, nil, uintptr(unsafe.Pointer(reldatefmt)), uintptr(math.Float64bits(offset)), uintptr(unit), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(status))).Tuple()
+}
+
+var specUreldatefmt_formatToResult = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// Ureldatefmt_formatToResult calls icu!ureldatefmt_formatToResult.
+func Ureldatefmt_formatToResult(reldatefmt *URelativeDateTimeFormatter, offset float64, unit URelativeDateTimeUnit, result *UFormattedRelativeDateTime, status *UErrorCode) {
+	win32.Call(procUreldatefmt_formatToResult.Addr(), specUreldatefmt_formatToResult, nil, uintptr(unsafe.Pointer(reldatefmt)), uintptr(math.Float64bits(offset)), uintptr(unit), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(status))).Tuple()
 }
 
 // Ureldatefmt_open calls icuin!ureldatefmt_open.

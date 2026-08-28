@@ -5,6 +5,7 @@
 package speech
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -222,16 +223,16 @@ func (self *ISpDataKey) GetData(pszValueName string, pcbData *uint32, pData *byt
 }
 
 // SetStringValue dispatches through ISpDataKey's vtable slot 5.
-func (self *ISpDataKey) SetStringValue(pszValueName string, pszValue string) error {
-	_pszValueName := win32.UTF16Ptr(pszValueName)
+func (self *ISpDataKey) SetStringValue(pszValueName *string, pszValue string) error {
+	_pszValueName := win32.UTF16PtrOrNil(pszValueName)
 	_pszValue := win32.UTF16Ptr(pszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(_pszValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringValue dispatches through ISpDataKey's vtable slot 6.
-func (self *ISpDataKey) GetStringValue(pszValueName string, ppszValue *foundation.PWSTR) error {
-	_pszValueName := win32.UTF16Ptr(pszValueName)
+func (self *ISpDataKey) GetStringValue(pszValueName *string, ppszValue *foundation.PWSTR) error {
+	_pszValueName := win32.UTF16PtrOrNil(pszValueName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(ppszValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -345,9 +346,9 @@ type ISpErrorLog struct {
 var IID_ISpErrorLog = win32.GUID{Data1: 0xf4711347, Data2: 0xe608, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x86, 0x00, 0xc0, 0x4f, 0x8e, 0xf9, 0xb5}}
 
 // AddError dispatches through ISpErrorLog's vtable slot 3.
-func (self *ISpErrorLog) AddError(lLineNumber int32, hr foundation.HRESULT, pszDescription string, pszHelpFile string, dwHelpContext uint32) error {
+func (self *ISpErrorLog) AddError(lLineNumber int32, hr foundation.HRESULT, pszDescription string, pszHelpFile *string, dwHelpContext uint32) error {
 	_pszDescription := win32.UTF16Ptr(pszDescription)
-	_pszHelpFile := win32.UTF16Ptr(pszHelpFile)
+	_pszHelpFile := win32.UTF16PtrOrNil(pszHelpFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lLineNumber), uintptr(hr), uintptr(unsafe.Pointer(_pszDescription)), uintptr(unsafe.Pointer(_pszHelpFile)), uintptr(dwHelpContext))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -466,10 +467,28 @@ func (self *ISpGrammarBuilder) CreateNewState(hState SPSTATEHANDLE, phState *SPS
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISpGrammarBuilder_AddWordTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// AddWordTransition dispatches through ISpGrammarBuilder's vtable slot 7.
+func (self *ISpGrammarBuilder) AddWordTransition(hFromState SPSTATEHANDLE, hToState SPSTATEHANDLE, psz *string, pszSeparators *string, eWordType SPGRAMMARWORDTYPE, Weight float32, pPropInfo *SPPROPERTYINFO) error {
+	_psz := win32.UTF16PtrOrNil(psz)
+	_pszSeparators := win32.UTF16PtrOrNil(pszSeparators)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISpGrammarBuilder_AddWordTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(hFromState), uintptr(hToState), uintptr(unsafe.Pointer(_psz)), uintptr(unsafe.Pointer(_pszSeparators)), uintptr(eWordType), uintptr(math.Float32bits(Weight)), uintptr(unsafe.Pointer(pPropInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpGrammarBuilder_AddRuleTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// AddRuleTransition dispatches through ISpGrammarBuilder's vtable slot 8.
+func (self *ISpGrammarBuilder) AddRuleTransition(hFromState SPSTATEHANDLE, hToState SPSTATEHANDLE, hRule SPSTATEHANDLE, Weight float32, pPropInfo *SPPROPERTYINFO) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specISpGrammarBuilder_AddRuleTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(hFromState), uintptr(hToState), uintptr(hRule), uintptr(math.Float32bits(Weight)), uintptr(unsafe.Pointer(pPropInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddResource dispatches through ISpGrammarBuilder's vtable slot 9.
-func (self *ISpGrammarBuilder) AddResource(hRuleState SPSTATEHANDLE, pszResourceName string, pszResourceValue string) error {
+func (self *ISpGrammarBuilder) AddResource(hRuleState SPSTATEHANDLE, pszResourceName string, pszResourceValue *string) error {
 	_pszResourceName := win32.UTF16Ptr(pszResourceName)
-	_pszResourceValue := win32.UTF16Ptr(pszResourceValue)
+	_pszResourceValue := win32.UTF16PtrOrNil(pszResourceValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hRuleState), uintptr(unsafe.Pointer(_pszResourceName)), uintptr(unsafe.Pointer(_pszResourceValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -749,8 +768,8 @@ type ISpObjectToken struct {
 var IID_ISpObjectToken = win32.GUID{Data1: 0x14056589, Data2: 0xe16c, Data3: 0x11d2, Data4: [8]byte{0xbb, 0x90, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0}}
 
 // SetId dispatches through ISpObjectToken's vtable slot 15.
-func (self *ISpObjectToken) SetId(pszCategoryId string, pszTokenId string, fCreateIfNotExist bool) error {
-	_pszCategoryId := win32.UTF16Ptr(pszCategoryId)
+func (self *ISpObjectToken) SetId(pszCategoryId *string, pszTokenId string, fCreateIfNotExist bool) error {
+	_pszCategoryId := win32.UTF16PtrOrNil(pszCategoryId)
 	_pszTokenId := win32.UTF16Ptr(pszTokenId)
 	_fCreateIfNotExist := win32.Bool32(fCreateIfNotExist)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategoryId)), uintptr(unsafe.Pointer(_pszTokenId)), uintptr(_fCreateIfNotExist))
@@ -776,9 +795,9 @@ func (self *ISpObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, dwClsC
 }
 
 // GetStorageFileName dispatches through ISpObjectToken's vtable slot 19.
-func (self *ISpObjectToken) GetStorageFileName(clsidCaller *win32.GUID, pszValueName string, pszFileNameSpecifier string, nFolder uint32, ppszFilePath *foundation.PWSTR) error {
+func (self *ISpObjectToken) GetStorageFileName(clsidCaller *win32.GUID, pszValueName string, pszFileNameSpecifier *string, nFolder uint32, ppszFilePath *foundation.PWSTR) error {
 	_pszValueName := win32.UTF16Ptr(pszValueName)
-	_pszFileNameSpecifier := win32.UTF16Ptr(pszFileNameSpecifier)
+	_pszFileNameSpecifier := win32.UTF16PtrOrNil(pszFileNameSpecifier)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidCaller)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(_pszFileNameSpecifier)), uintptr(nFolder), uintptr(unsafe.Pointer(ppszFilePath)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -848,9 +867,9 @@ func (self *ISpObjectTokenCategory) GetDataKey(spdkl SPDATAKEYLOCATION, ppDataKe
 }
 
 // EnumTokens dispatches through ISpObjectTokenCategory's vtable slot 18.
-func (self *ISpObjectTokenCategory) EnumTokens(pzsReqAttribs string, pszOptAttribs string, ppEnum **IEnumSpObjectTokens) error {
-	_pzsReqAttribs := win32.UTF16Ptr(pzsReqAttribs)
-	_pszOptAttribs := win32.UTF16Ptr(pszOptAttribs)
+func (self *ISpObjectTokenCategory) EnumTokens(pzsReqAttribs *string, pszOptAttribs *string, ppEnum **IEnumSpObjectTokens) error {
+	_pzsReqAttribs := win32.UTF16PtrOrNil(pzsReqAttribs)
+	_pszOptAttribs := win32.UTF16PtrOrNil(pszOptAttribs)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pzsReqAttribs)), uintptr(unsafe.Pointer(_pszOptAttribs)), uintptr(unsafe.Pointer(ppEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -877,9 +896,9 @@ type ISpObjectTokenEnumBuilder struct {
 var IID_ISpObjectTokenEnumBuilder = win32.GUID{Data1: 0x06b64f9f, Data2: 0x7fda, Data3: 0x11d2, Data4: [8]byte{0xb4, 0xf2, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96}}
 
 // SetAttribs dispatches through ISpObjectTokenEnumBuilder's vtable slot 9.
-func (self *ISpObjectTokenEnumBuilder) SetAttribs(pszReqAttribs string, pszOptAttribs string) error {
-	_pszReqAttribs := win32.UTF16Ptr(pszReqAttribs)
-	_pszOptAttribs := win32.UTF16Ptr(pszOptAttribs)
+func (self *ISpObjectTokenEnumBuilder) SetAttribs(pszReqAttribs *string, pszOptAttribs *string) error {
+	_pszReqAttribs := win32.UTF16PtrOrNil(pszReqAttribs)
+	_pszOptAttribs := win32.UTF16PtrOrNil(pszOptAttribs)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszReqAttribs)), uintptr(unsafe.Pointer(_pszOptAttribs)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1426,8 +1445,8 @@ func (self *ISpRecoGrammar) LoadCmdFromProprietaryGrammar(rguidParam *win32.GUID
 }
 
 // SetRuleState dispatches through ISpRecoGrammar's vtable slot 18.
-func (self *ISpRecoGrammar) SetRuleState(pszName string, pReserved unsafe.Pointer, NewState SPRULESTATE) error {
-	_pszName := win32.UTF16Ptr(pszName)
+func (self *ISpRecoGrammar) SetRuleState(pszName *string, pReserved unsafe.Pointer, NewState SPRULESTATE) error {
+	_pszName := win32.UTF16PtrOrNil(pszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pReserved)), uintptr(NewState))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1439,8 +1458,8 @@ func (self *ISpRecoGrammar) SetRuleIdState(ulRuleId uint32, NewState SPRULESTATE
 }
 
 // LoadDictation dispatches through ISpRecoGrammar's vtable slot 20.
-func (self *ISpRecoGrammar) LoadDictation(pszTopicName string, Options SPLOADOPTIONS) error {
-	_pszTopicName := win32.UTF16Ptr(pszTopicName)
+func (self *ISpRecoGrammar) LoadDictation(pszTopicName *string, Options SPLOADOPTIONS) error {
+	_pszTopicName := win32.UTF16PtrOrNil(pszTopicName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTopicName)), uintptr(Options))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1458,8 +1477,8 @@ func (self *ISpRecoGrammar) SetDictationState(NewState SPRULESTATE) error {
 }
 
 // SetWordSequenceData dispatches through ISpRecoGrammar's vtable slot 23.
-func (self *ISpRecoGrammar) SetWordSequenceData(pText string, cchText uint32, pInfo *SPTEXTSELECTIONINFO) error {
-	_pText := win32.UTF16Ptr(pText)
+func (self *ISpRecoGrammar) SetWordSequenceData(pText *string, cchText uint32, pInfo *SPTEXTSELECTIONINFO) error {
+	_pText := win32.UTF16PtrOrNil(pText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pText)), uintptr(cchText), uintptr(unsafe.Pointer(pInfo)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1510,18 +1529,18 @@ func (self *ISpRecoGrammar2) GetRules(ppCoMemRules **SPRULE, puNumRules *uint32)
 }
 
 // LoadCmdFromFile2 dispatches through ISpRecoGrammar2's vtable slot 4.
-func (self *ISpRecoGrammar2) LoadCmdFromFile2(pszFileName string, Options SPLOADOPTIONS, pszSharingUri string, pszBaseUri string) error {
+func (self *ISpRecoGrammar2) LoadCmdFromFile2(pszFileName string, Options SPLOADOPTIONS, pszSharingUri *string, pszBaseUri *string) error {
 	_pszFileName := win32.UTF16Ptr(pszFileName)
-	_pszSharingUri := win32.UTF16Ptr(pszSharingUri)
-	_pszBaseUri := win32.UTF16Ptr(pszBaseUri)
+	_pszSharingUri := win32.UTF16PtrOrNil(pszSharingUri)
+	_pszBaseUri := win32.UTF16PtrOrNil(pszBaseUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(Options), uintptr(unsafe.Pointer(_pszSharingUri)), uintptr(unsafe.Pointer(_pszBaseUri)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // LoadCmdFromMemory2 dispatches through ISpRecoGrammar2's vtable slot 5.
-func (self *ISpRecoGrammar2) LoadCmdFromMemory2(pGrammar *SPBINARYGRAMMAR, Options SPLOADOPTIONS, pszSharingUri string, pszBaseUri string) error {
-	_pszSharingUri := win32.UTF16Ptr(pszSharingUri)
-	_pszBaseUri := win32.UTF16Ptr(pszBaseUri)
+func (self *ISpRecoGrammar2) LoadCmdFromMemory2(pGrammar *SPBINARYGRAMMAR, Options SPLOADOPTIONS, pszSharingUri *string, pszBaseUri *string) error {
+	_pszSharingUri := win32.UTF16PtrOrNil(pszSharingUri)
+	_pszBaseUri := win32.UTF16PtrOrNil(pszBaseUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGrammar)), uintptr(Options), uintptr(unsafe.Pointer(_pszSharingUri)), uintptr(unsafe.Pointer(_pszBaseUri)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1530,6 +1549,23 @@ func (self *ISpRecoGrammar2) LoadCmdFromMemory2(pGrammar *SPBINARYGRAMMAR, Optio
 func (self *ISpRecoGrammar2) SetRulePriority(pszRuleName string, ulRuleId uint32, nRulePriority int32) error {
 	_pszRuleName := win32.UTF16Ptr(pszRuleName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRuleName)), uintptr(ulRuleId), uintptr(nRulePriority))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpRecoGrammar2_SetRuleWeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// SetRuleWeight dispatches through ISpRecoGrammar2's vtable slot 7.
+func (self *ISpRecoGrammar2) SetRuleWeight(pszRuleName string, ulRuleId uint32, flWeight float32) error {
+	_pszRuleName := win32.UTF16Ptr(pszRuleName)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISpRecoGrammar2_SetRuleWeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRuleName)), uintptr(ulRuleId), uintptr(math.Float32bits(flWeight))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpRecoGrammar2_SetDictationWeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetDictationWeight dispatches through ISpRecoGrammar2's vtable slot 8.
+func (self *ISpRecoGrammar2) SetDictationWeight(flWeight float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specISpRecoGrammar2_SetDictationWeight, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flWeight))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1614,8 +1650,8 @@ func (self *ISpRecoResult2) CommitAlternate(pPhraseAlt *ISpPhraseAlt, ppNewResul
 }
 
 // CommitText dispatches through ISpRecoResult2's vtable slot 15.
-func (self *ISpRecoResult2) CommitText(ulStartElement uint32, cElements uint32, pszCorrectedData string, eCommitFlags uint32) error {
-	_pszCorrectedData := win32.UTF16Ptr(pszCorrectedData)
+func (self *ISpRecoResult2) CommitText(ulStartElement uint32, cElements uint32, pszCorrectedData *string, eCommitFlags uint32) error {
+	_pszCorrectedData := win32.UTF16PtrOrNil(pszCorrectedData)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(unsafe.Pointer(_pszCorrectedData)), uintptr(eCommitFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1723,8 +1759,8 @@ func (self *ISpRecognizer) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.
 }
 
 // DisplayUI dispatches through ISpRecognizer's vtable slot 21.
-func (self *ISpRecognizer) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32) error {
-	_pszTitle := win32.UTF16Ptr(pszTitle)
+func (self *ISpRecognizer) DisplayUI(hwndParent foundation.HWND, pszTitle *string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32) error {
+	_pszTitle := win32.UTF16PtrOrNil(pszTitle)
 	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData))
 	return win32.ErrIfFailed(int32(r1))
@@ -1829,8 +1865,8 @@ type ISpSRAlternates2 struct {
 var IID_ISpSRAlternates2 = win32.GUID{Data1: 0xf338f437, Data2: 0xcb33, Data3: 0x4020, Data4: [8]byte{0x9c, 0xab, 0xc7, 0x1f, 0xf9, 0xce, 0x12, 0xd3}}
 
 // CommitText dispatches through ISpSRAlternates2's vtable slot 5.
-func (self *ISpSRAlternates2) CommitText(pAltRequest *SPPHRASEALTREQUEST, pcszNewText string, commitFlags SPCOMMITFLAGS) error {
-	_pcszNewText := win32.UTF16Ptr(pcszNewText)
+func (self *ISpSRAlternates2) CommitText(pAltRequest *SPPHRASEALTREQUEST, pcszNewText *string, commitFlags SPCOMMITFLAGS) error {
+	_pcszNewText := win32.UTF16PtrOrNil(pcszNewText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAltRequest)), uintptr(unsafe.Pointer(_pcszNewText)), uintptr(commitFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2053,8 +2089,8 @@ func (self *ISpSREngine2) SetAdaptationData2(pvEngineContext unsafe.Pointer, pAd
 }
 
 // SetGrammarPrefix dispatches through ISpSREngine2's vtable slot 34.
-func (self *ISpSREngine2) SetGrammarPrefix(pvEngineGrammar unsafe.Pointer, pszPrefix string, fIsPrefixRequired bool) error {
-	_pszPrefix := win32.UTF16Ptr(pszPrefix)
+func (self *ISpSREngine2) SetGrammarPrefix(pvEngineGrammar unsafe.Pointer, pszPrefix *string, fIsPrefixRequired bool) error {
+	_pszPrefix := win32.UTF16PtrOrNil(pszPrefix)
 	_fIsPrefixRequired := win32.Bool32(fIsPrefixRequired)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(_pszPrefix)), uintptr(_fIsPrefixRequired))
 	return win32.ErrIfFailed(int32(r1))
@@ -2069,6 +2105,22 @@ func (self *ISpSREngine2) SetRulePriority(hRule SPRULEHANDLE, pvClientRuleContex
 // EmulateRecognition dispatches through ISpSREngine2's vtable slot 36.
 func (self *ISpSREngine2) EmulateRecognition(pPhrase *ISpPhrase, dwCompareFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhrase)), uintptr(dwCompareFlags))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpSREngine2_SetSLMWeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetSLMWeight dispatches through ISpSREngine2's vtable slot 37.
+func (self *ISpSREngine2) SetSLMWeight(pvEngineGrammar unsafe.Pointer, flWeight float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specISpSREngine2_SetSLMWeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(math.Float32bits(flWeight))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpSREngine2_SetRuleWeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// SetRuleWeight dispatches through ISpSREngine2's vtable slot 38.
+func (self *ISpSREngine2) SetRuleWeight(hRule SPRULEHANDLE, pvClientRuleContext unsafe.Pointer, flWeight float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specISpSREngine2_SetRuleWeight, nil, uintptr(unsafe.Pointer(self)), uintptr(hRule), uintptr(unsafe.Pointer(pvClientRuleContext)), uintptr(math.Float32bits(flWeight))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2645,8 +2697,8 @@ func (self *ISpTokenUI) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Poi
 }
 
 // DisplayUI dispatches through ISpTokenUI's vtable slot 4.
-func (self *ISpTokenUI) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, pToken *ISpObjectToken, punkObject *systemcom.IUnknown) error {
-	_pszTitle := win32.UTF16Ptr(pszTitle)
+func (self *ISpTokenUI) DisplayUI(hwndParent foundation.HWND, pszTitle *string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, pToken *ISpObjectToken, punkObject *systemcom.IUnknown) error {
+	_pszTitle := win32.UTF16PtrOrNil(pszTitle)
 	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(pToken)), uintptr(unsafe.Pointer(punkObject)))
 	return win32.ErrIfFailed(int32(r1))
@@ -2725,8 +2777,8 @@ func (self *ISpVoice) GetVoice(ppToken **ISpObjectToken) error {
 }
 
 // Speak dispatches through ISpVoice's vtable slot 20.
-func (self *ISpVoice) Speak(pwcs string, dwFlags uint32, pulStreamNumber *uint32) error {
-	_pwcs := win32.UTF16Ptr(pwcs)
+func (self *ISpVoice) Speak(pwcs *string, dwFlags uint32, pulStreamNumber *uint32) error {
+	_pwcs := win32.UTF16PtrOrNil(pwcs)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pulStreamNumber)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3071,6 +3123,22 @@ func (self *ISpeechBaseStream) Read(Buffer *systemvariant.VARIANT, NumberOfBytes
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISpeechBaseStream_Write = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Write dispatches through ISpeechBaseStream's vtable slot 10.
+func (self *ISpeechBaseStream) Write(Buffer systemvariant.VARIANT, BytesWritten *int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISpeechBaseStream_Write, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Buffer)), uintptr(unsafe.Pointer(BytesWritten))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechBaseStream_Seek = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// Seek dispatches through ISpeechBaseStream's vtable slot 11.
+func (self *ISpeechBaseStream) Seek(Position systemvariant.VARIANT, Origin SpeechStreamSeekPositionType, NewPosition *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISpeechBaseStream_Seek, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Position)), uintptr(Origin), uintptr(unsafe.Pointer(NewPosition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 1a9e9f4f-104f-4db8-a115-efd7fd0c97ae
 type ISpeechCustomStream struct {
 	ISpeechBaseStream
@@ -3098,6 +3166,14 @@ type ISpeechDataKey struct {
 
 // IID_ISpeechDataKey is the interface identifier for ISpeechDataKey.
 var IID_ISpeechDataKey = win32.GUID{Data1: 0xce17c09b, Data2: 0x4efa, Data3: 0x44d5, Data4: [8]byte{0xa4, 0xc9, 0x59, 0xd9, 0x58, 0x5a, 0xb0, 0xcd}}
+
+var specISpeechDataKey_SetBinaryValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetBinaryValue dispatches through ISpeechDataKey's vtable slot 7.
+func (self *ISpeechDataKey) SetBinaryValue(ValueName foundation.BSTR, Value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISpeechDataKey_SetBinaryValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ValueName)), uintptr(unsafe.Pointer(&Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetBinaryValue dispatches through ISpeechDataKey's vtable slot 8.
 func (self *ISpeechDataKey) GetBinaryValue(ValueName foundation.BSTR, Value *systemvariant.VARIANT) error {
@@ -3255,6 +3331,30 @@ func (self *ISpeechGrammarRuleState) Get_Transitions(Transitions **ISpeechGramma
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISpeechGrammarRuleState_AddWordTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// AddWordTransition dispatches through ISpeechGrammarRuleState's vtable slot 9.
+func (self *ISpeechGrammarRuleState) AddWordTransition(DestState *ISpeechGrammarRuleState, Words foundation.BSTR, Separators foundation.BSTR, Type SpeechGrammarWordType, PropertyName foundation.BSTR, PropertyId int32, PropertyValue *systemvariant.VARIANT, Weight float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISpeechGrammarRuleState_AddWordTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DestState)), uintptr(unsafe.Pointer(Words)), uintptr(unsafe.Pointer(Separators)), uintptr(Type), uintptr(unsafe.Pointer(PropertyName)), uintptr(PropertyId), uintptr(unsafe.Pointer(PropertyValue)), uintptr(math.Float32bits(Weight))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechGrammarRuleState_AddRuleTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// AddRuleTransition dispatches through ISpeechGrammarRuleState's vtable slot 10.
+func (self *ISpeechGrammarRuleState) AddRuleTransition(DestinationState *ISpeechGrammarRuleState, Rule *ISpeechGrammarRule, PropertyName foundation.BSTR, PropertyId int32, PropertyValue *systemvariant.VARIANT, Weight float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISpeechGrammarRuleState_AddRuleTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DestinationState)), uintptr(unsafe.Pointer(Rule)), uintptr(unsafe.Pointer(PropertyName)), uintptr(PropertyId), uintptr(unsafe.Pointer(PropertyValue)), uintptr(math.Float32bits(Weight))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechGrammarRuleState_AddSpecialTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// AddSpecialTransition dispatches through ISpeechGrammarRuleState's vtable slot 11.
+func (self *ISpeechGrammarRuleState) AddSpecialTransition(DestinationState *ISpeechGrammarRuleState, Type SpeechSpecialTransitionType, PropertyName foundation.BSTR, PropertyId int32, PropertyValue *systemvariant.VARIANT, Weight float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISpeechGrammarRuleState_AddSpecialTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DestinationState)), uintptr(Type), uintptr(unsafe.Pointer(PropertyName)), uintptr(PropertyId), uintptr(unsafe.Pointer(PropertyValue)), uintptr(math.Float32bits(Weight))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: cafd1db1-41d1-4a06-9863-e2e81da17a9a
 type ISpeechGrammarRuleStateTransition struct {
 	systemcom.IDispatch
@@ -3348,6 +3448,14 @@ var IID_ISpeechGrammarRules = win32.GUID{Data1: 0x6ffa3b44, Data2: 0xfc2d, Data3
 // Get_Count dispatches through ISpeechGrammarRules's vtable slot 7.
 func (self *ISpeechGrammarRules) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechGrammarRules_FindRule = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// FindRule dispatches through ISpeechGrammarRules's vtable slot 8.
+func (self *ISpeechGrammarRules) FindRule(RuleNameOrId systemvariant.VARIANT, Rule **ISpeechGrammarRule) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specISpeechGrammarRules_FindRule, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&RuleNameOrId)), uintptr(unsafe.Pointer(Rule))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3611,6 +3719,14 @@ type ISpeechMemoryStream struct {
 // IID_ISpeechMemoryStream is the interface identifier for ISpeechMemoryStream.
 var IID_ISpeechMemoryStream = win32.GUID{Data1: 0xeeb14b68, Data2: 0x808b, Data3: 0x4abe, Data4: [8]byte{0xa5, 0xea, 0xb5, 0x1d, 0xa7, 0x58, 0x80, 0x08}}
 
+var specISpeechMemoryStream_SetData = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetData dispatches through ISpeechMemoryStream's vtable slot 12.
+func (self *ISpeechMemoryStream) SetData(Data systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISpeechMemoryStream_SetData, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Data))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetData dispatches through ISpeechMemoryStream's vtable slot 13.
 func (self *ISpeechMemoryStream) GetData(pData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
@@ -3796,6 +3912,14 @@ func (self *ISpeechPhoneConverter) Put_LanguageId(LanguageId int32) error {
 // PhoneToId dispatches through ISpeechPhoneConverter's vtable slot 9.
 func (self *ISpeechPhoneConverter) PhoneToId(Phonemes foundation.BSTR, IdArray *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Phonemes)), uintptr(unsafe.Pointer(IdArray)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechPhoneConverter_IdToPhone = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// IdToPhone dispatches through ISpeechPhoneConverter's vtable slot 10.
+func (self *ISpeechPhoneConverter) IdToPhone(IdArray systemvariant.VARIANT, Phonemes *foundation.BSTR) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISpeechPhoneConverter_IdToPhone, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&IdArray)), uintptr(unsafe.Pointer(Phonemes))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4455,9 +4579,25 @@ func (self *ISpeechRecoContext) Resume() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISpeechRecoContext_CreateGrammar = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateGrammar dispatches through ISpeechRecoContext's vtable slot 28.
+func (self *ISpeechRecoContext) CreateGrammar(GrammarId systemvariant.VARIANT, Grammar **ISpeechRecoGrammar) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specISpeechRecoContext_CreateGrammar, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&GrammarId)), uintptr(unsafe.Pointer(Grammar))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CreateResultFromMemory dispatches through ISpeechRecoContext's vtable slot 29.
 func (self *ISpeechRecoContext) CreateResultFromMemory(ResultBlock *systemvariant.VARIANT, Result **ISpeechRecoResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ResultBlock)), uintptr(unsafe.Pointer(Result)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechRecoContext_Bookmark = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// Bookmark dispatches through ISpeechRecoContext's vtable slot 30.
+func (self *ISpeechRecoContext) Bookmark(Options SpeechBookmarkOptions, StreamPos systemvariant.VARIANT, BookmarkId systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specISpeechRecoContext_Bookmark, nil, uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(unsafe.Pointer(&StreamPos)), uintptr(unsafe.Pointer(&BookmarkId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4520,6 +4660,30 @@ func (self *ISpeechRecoGrammar) CmdLoadFromFile(FileName foundation.BSTR, LoadOp
 // CmdLoadFromObject dispatches through ISpeechRecoGrammar's vtable slot 14.
 func (self *ISpeechRecoGrammar) CmdLoadFromObject(ClassId foundation.BSTR, GrammarName foundation.BSTR, LoadOption SpeechLoadOption) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ClassId)), uintptr(unsafe.Pointer(GrammarName)), uintptr(LoadOption))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechRecoGrammar_CmdLoadFromResource = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// CmdLoadFromResource dispatches through ISpeechRecoGrammar's vtable slot 15.
+func (self *ISpeechRecoGrammar) CmdLoadFromResource(hModule int32, ResourceName systemvariant.VARIANT, ResourceType systemvariant.VARIANT, LanguageId int32, LoadOption SpeechLoadOption) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISpeechRecoGrammar_CmdLoadFromResource, nil, uintptr(unsafe.Pointer(self)), uintptr(hModule), uintptr(unsafe.Pointer(&ResourceName)), uintptr(unsafe.Pointer(&ResourceType)), uintptr(LanguageId), uintptr(LoadOption)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechRecoGrammar_CmdLoadFromMemory = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CmdLoadFromMemory dispatches through ISpeechRecoGrammar's vtable slot 16.
+func (self *ISpeechRecoGrammar) CmdLoadFromMemory(GrammarData systemvariant.VARIANT, LoadOption SpeechLoadOption) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specISpeechRecoGrammar_CmdLoadFromMemory, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&GrammarData)), uintptr(LoadOption)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechRecoGrammar_CmdLoadFromProprietaryGrammar = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CmdLoadFromProprietaryGrammar dispatches through ISpeechRecoGrammar's vtable slot 17.
+func (self *ISpeechRecoGrammar) CmdLoadFromProprietaryGrammar(ProprietaryGuid foundation.BSTR, ProprietaryString foundation.BSTR, ProprietaryData systemvariant.VARIANT, LoadOption SpeechLoadOption) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specISpeechRecoGrammar_CmdLoadFromProprietaryGrammar, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ProprietaryGuid)), uintptr(unsafe.Pointer(ProprietaryString)), uintptr(unsafe.Pointer(&ProprietaryData)), uintptr(LoadOption)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4860,6 +5024,14 @@ func (self *ISpeechRecognizer) Putref_Profile(Profile *ISpeechObjectToken) error
 // Get_Profile dispatches through ISpeechRecognizer's vtable slot 20.
 func (self *ISpeechRecognizer) Get_Profile(Profile **ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Profile)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechRecognizer_EmulateRecognition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// EmulateRecognition dispatches through ISpeechRecognizer's vtable slot 21.
+func (self *ISpeechRecognizer) EmulateRecognition(TextElements systemvariant.VARIANT, ElementDisplayAttributes *systemvariant.VARIANT, LanguageId int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specISpeechRecognizer_EmulateRecognition, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&TextElements)), uintptr(unsafe.Pointer(ElementDisplayAttributes)), uintptr(LanguageId)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5418,6 +5590,14 @@ func (self *ISpeechWaveFormatEx) Put_BitsPerSample(BitsPerSample int16) error {
 // Get_ExtraData dispatches through ISpeechWaveFormatEx's vtable slot 19.
 func (self *ISpeechWaveFormatEx) Get_ExtraData(ExtraData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ExtraData)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpeechWaveFormatEx_Put_ExtraData = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ExtraData dispatches through ISpeechWaveFormatEx's vtable slot 20.
+func (self *ISpeechWaveFormatEx) Put_ExtraData(ExtraData systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specISpeechWaveFormatEx_Put_ExtraData, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ExtraData))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

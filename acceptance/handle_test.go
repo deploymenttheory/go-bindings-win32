@@ -14,7 +14,7 @@ import (
 // handle succeeds; closing it again fails (invalid handle), proving the error
 // normalization is wired through.
 func TestHandleCloser(t *testing.T) {
-	event, err := threading.CreateEvent(nil, true, false, "")
+	event, err := threading.CreateEvent(nil, true, false, nil)
 	if err != nil {
 		t.Fatalf("CreateEvent: %v", err)
 	}
@@ -29,5 +29,15 @@ func TestHandleCloser(t *testing.T) {
 		t.Fatal("CloseHANDLE(already closed) returned nil, want error")
 	} else {
 		t.Logf("double-close error surfaced: %v", err)
+	}
+
+	// The zero value and INVALID_HANDLE_VALUE are never handed to CloseHandle
+	// (which would report ERROR_INVALID_HANDLE): a deferred close on an error
+	// path is a no-op.
+	if err := foundation.CloseHANDLE(0); err != nil {
+		t.Errorf("CloseHANDLE(0) = %v, want nil", err)
+	}
+	if err := foundation.CloseHANDLE(^foundation.HANDLE(0)); err != nil {
+		t.Errorf("CloseHANDLE(INVALID_HANDLE_VALUE) = %v, want nil", err)
 	}
 }

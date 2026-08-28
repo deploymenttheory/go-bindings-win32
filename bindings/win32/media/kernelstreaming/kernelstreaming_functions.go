@@ -35,6 +35,42 @@ var (
 	procKsCreateTopologyNode2        = modksuser.NewProc("KsCreateTopologyNode2")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	KsCreateAllocator            *win32.Proc
+	KsCreateAllocator2           *win32.Proc
+	KsCreateClock                *win32.Proc
+	KsCreateClock2               *win32.Proc
+	KsCreatePin                  *win32.Proc
+	KsCreatePin2                 *win32.Proc
+	KsCreateTopologyNode         *win32.Proc
+	KsCreateTopologyNode2        *win32.Proc
+	KsGetMediaType               *win32.Proc
+	KsGetMediaTypeCount          *win32.Proc
+	KsGetMultiplePinFactoryItems *win32.Proc
+	KsOpenDefaultDevice          *win32.Proc
+	KsResolveRequiredAttributes  *win32.Proc
+	KsSynchronousDeviceControl   *win32.Proc
+}{
+	KsCreateAllocator:            procKsCreateAllocator,
+	KsCreateAllocator2:           procKsCreateAllocator2,
+	KsCreateClock:                procKsCreateClock,
+	KsCreateClock2:               procKsCreateClock2,
+	KsCreatePin:                  procKsCreatePin,
+	KsCreatePin2:                 procKsCreatePin2,
+	KsCreateTopologyNode:         procKsCreateTopologyNode,
+	KsCreateTopologyNode2:        procKsCreateTopologyNode2,
+	KsGetMediaType:               procKsGetMediaType,
+	KsGetMediaTypeCount:          procKsGetMediaTypeCount,
+	KsGetMultiplePinFactoryItems: procKsGetMultiplePinFactoryItems,
+	KsOpenDefaultDevice:          procKsOpenDefaultDevice,
+	KsResolveRequiredAttributes:  procKsResolveRequiredAttributes,
+	KsSynchronousDeviceControl:   procKsSynchronousDeviceControl,
+}
+
 // KsCreateAllocator calls ksuser!KsCreateAllocator.
 func KsCreateAllocator(ConnectionHandle foundation.HANDLE, AllocatorFraming *KSALLOCATOR_FRAMING, AllocatorHandle *foundation.HANDLE) uint32 {
 	r1, _, _ := syscall.SyscallN(procKsCreateAllocator.Addr(), uintptr(ConnectionHandle), uintptr(unsafe.Pointer(AllocatorFraming)), uintptr(unsafe.Pointer(AllocatorHandle)))

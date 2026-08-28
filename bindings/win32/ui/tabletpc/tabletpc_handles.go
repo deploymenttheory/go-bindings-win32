@@ -4,22 +4,38 @@
 
 package tabletpc
 
-// CloseHRECOALT releases a HRECOALT handle by calling DestroyAlternate.
+// CloseHRECOALT releases a HRECOALT handle by calling DestroyAlternate. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHRECOALT(h HRECOALT) error {
+	if h == ^HRECOALT(0) || h == 0 {
+		return nil
+	}
 	return DestroyAlternate(HRECOALT(h))
 }
 
-// CloseHRECOCONTEXT releases a HRECOCONTEXT handle by calling DestroyContext.
+// CloseHRECOCONTEXT releases a HRECOCONTEXT handle by calling DestroyContext. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHRECOCONTEXT(h HRECOCONTEXT) error {
+	if h == ^HRECOCONTEXT(0) || h == 0 {
+		return nil
+	}
 	return DestroyContext(HRECOCONTEXT(h))
 }
 
-// CloseHRECOGNIZER releases a HRECOGNIZER handle by calling DestroyRecognizer.
+// CloseHRECOGNIZER releases a HRECOGNIZER handle by calling DestroyRecognizer. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHRECOGNIZER(h HRECOGNIZER) error {
+	if h == ^HRECOGNIZER(0) || h == 0 {
+		return nil
+	}
 	return DestroyRecognizer(HRECOGNIZER(h))
 }
 
-// CloseHRECOWORDLIST releases a HRECOWORDLIST handle by calling DestroyWordList.
+// CloseHRECOWORDLIST releases a HRECOWORDLIST handle by calling DestroyWordList. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHRECOWORDLIST(h HRECOWORDLIST) error {
+	if h == ^HRECOWORDLIST(0) || h == 0 {
+		return nil
+	}
 	return DestroyWordList(HRECOWORDLIST(h))
 }

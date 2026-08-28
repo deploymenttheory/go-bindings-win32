@@ -4,6 +4,6 @@
 
 package ioctl
 
-// PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IO_IRP_EXT_TRACK_OFFSET_HEADER, *IO_IRP_EXT_TRACK_OFFSET_HEADER, int64).
+// PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IO_IRP_EXT_TRACK_OFFSET_HEADER, *IO_IRP_EXT_TRACK_OFFSET_HEADER, int64) uintptr.
 type PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK uintptr

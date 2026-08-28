@@ -4,12 +4,20 @@
 
 package com
 
-// CloseCO_DEVICE_CATALOG_COOKIE releases a CO_DEVICE_CATALOG_COOKIE handle by calling CoRevokeDeviceCatalog.
+// CloseCO_DEVICE_CATALOG_COOKIE releases a CO_DEVICE_CATALOG_COOKIE handle by calling CoRevokeDeviceCatalog. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseCO_DEVICE_CATALOG_COOKIE(h CO_DEVICE_CATALOG_COOKIE) error {
+	if h == ^CO_DEVICE_CATALOG_COOKIE(0) || h == 0 {
+		return nil
+	}
 	return CoRevokeDeviceCatalog(CO_DEVICE_CATALOG_COOKIE(h))
 }
 
-// CloseCO_MTA_USAGE_COOKIE releases a CO_MTA_USAGE_COOKIE handle by calling CoDecrementMTAUsage.
+// CloseCO_MTA_USAGE_COOKIE releases a CO_MTA_USAGE_COOKIE handle by calling CoDecrementMTAUsage. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseCO_MTA_USAGE_COOKIE(h CO_MTA_USAGE_COOKIE) error {
+	if h == ^CO_MTA_USAGE_COOKIE(0) || h == 0 {
+		return nil
+	}
 	return CoDecrementMTAUsage(CO_MTA_USAGE_COOKIE(h))
 }

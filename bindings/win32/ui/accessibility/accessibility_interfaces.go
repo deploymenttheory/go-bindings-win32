@@ -5,6 +5,7 @@
 package accessibility
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -39,6 +40,18 @@ type IAccPropServer struct {
 // IID_IAccPropServer is the interface identifier for IAccPropServer.
 var IID_IAccPropServer = win32.GUID{Data1: 0x76c0dbbb, Data2: 0x15e0, Data3: 0x4e7b, Data4: [8]byte{0xb6, 0x1b, 0x20, 0xee, 0xea, 0x20, 0x01, 0xe0}}
 
+var specIAccPropServer_GetPropValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetPropValue dispatches through IAccPropServer's vtable slot 3.
+func (self *IAccPropServer) GetPropValue(pIDString []byte, idProp win32.GUID, pvarValue *systemvariant.VARIANT, pfHasProp *foundation.BOOL) error {
+	var _pIDString *byte
+	if len(pIDString) > 0 {
+		_pIDString = &pIDString[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIAccPropServer_GetPropValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIDString)), uintptr(len(pIDString)), uintptr(unsafe.Pointer(&idProp)), uintptr(unsafe.Pointer(pvarValue)), uintptr(unsafe.Pointer(pfHasProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IAccPropServices: https://learn.microsoft.com/windows/win32/api/oleacc/nn-oleacc-iaccpropservices
 // IID: 6e26e776-04f0-495d-80e4-3330352e3169
 type IAccPropServices struct {
@@ -47,6 +60,18 @@ type IAccPropServices struct {
 
 // IID_IAccPropServices is the interface identifier for IAccPropServices.
 var IID_IAccPropServices = win32.GUID{Data1: 0x6e26e776, Data2: 0x04f0, Data3: 0x495d, Data4: [8]byte{0x80, 0xe4, 0x33, 0x30, 0x35, 0x2e, 0x31, 0x69}}
+
+var specIAccPropServices_SetPropValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetPropValue dispatches through IAccPropServices's vtable slot 3.
+func (self *IAccPropServices) SetPropValue(pIDString []byte, idProp win32.GUID, var_ systemvariant.VARIANT) error {
+	var _pIDString *byte
+	if len(pIDString) > 0 {
+		_pIDString = &pIDString[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIAccPropServices_SetPropValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIDString)), uintptr(len(pIDString)), uintptr(unsafe.Pointer(&idProp)), uintptr(unsafe.Pointer(&var_))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // SetPropServer dispatches through IAccPropServices's vtable slot 4.
 func (self *IAccPropServices) SetPropServer(pIDString []byte, paProps []win32.GUID, pServer *IAccPropServer, annoScope AnnoScope) error {
@@ -73,6 +98,23 @@ func (self *IAccPropServices) ClearProps(pIDString []byte, paProps []win32.GUID)
 		_paProps = &paProps[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIDString)), uintptr(len(pIDString)), uintptr(unsafe.Pointer(_paProps)), uintptr(len(paProps)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccPropServices_SetHwndProp = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetHwndProp dispatches through IAccPropServices's vtable slot 6.
+func (self *IAccPropServices) SetHwndProp(hwnd foundation.HWND, idObject uint32, idChild uint32, idProp win32.GUID, var_ systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIAccPropServices_SetHwndProp, nil, uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(&idProp)), uintptr(unsafe.Pointer(&var_))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccPropServices_SetHwndPropStr = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetHwndPropStr dispatches through IAccPropServices's vtable slot 7.
+func (self *IAccPropServices) SetHwndPropStr(hwnd foundation.HWND, idObject uint32, idChild uint32, idProp win32.GUID, str string) error {
+	_str := win32.UTF16Ptr(str)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIAccPropServices_SetHwndPropStr, nil, uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(&idProp)), uintptr(unsafe.Pointer(_str))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -109,6 +151,23 @@ func (self *IAccPropServices) DecomposeHwndIdentityString(pIDString []byte, phwn
 		_pIDString = &pIDString[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIDString)), uintptr(len(pIDString)), uintptr(unsafe.Pointer(phwnd)), uintptr(unsafe.Pointer(pidObject)), uintptr(unsafe.Pointer(pidChild)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccPropServices_SetHmenuProp = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetHmenuProp dispatches through IAccPropServices's vtable slot 12.
+func (self *IAccPropServices) SetHmenuProp(hmenu uiwindowsandmessaging.HMENU, idChild uint32, idProp win32.GUID, var_ systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIAccPropServices_SetHmenuProp, nil, uintptr(unsafe.Pointer(self)), uintptr(hmenu), uintptr(idChild), uintptr(unsafe.Pointer(&idProp)), uintptr(unsafe.Pointer(&var_))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccPropServices_SetHmenuPropStr = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetHmenuPropStr dispatches through IAccPropServices's vtable slot 13.
+func (self *IAccPropServices) SetHmenuPropStr(hmenu uiwindowsandmessaging.HMENU, idChild uint32, idProp win32.GUID, str string) error {
+	_str := win32.UTF16Ptr(str)
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIAccPropServices_SetHmenuPropStr, nil, uintptr(unsafe.Pointer(self)), uintptr(hmenu), uintptr(idChild), uintptr(unsafe.Pointer(&idProp)), uintptr(unsafe.Pointer(_str))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -171,6 +230,87 @@ func (self *IAccessible) Get_accChildCount() (int32, error) {
 	return *_pcountChildren, win32.ErrIfFailed(int32(r1))
 }
 
+var specIAccessible_Get_accChild = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accChild dispatches through IAccessible's vtable slot 9.
+func (self *IAccessible) Get_accChild(varChild systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_ppdispChild := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIAccessible_Get_accChild, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_ppdispChild)))).Tuple()
+	return *_ppdispChild, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Get_accName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accName dispatches through IAccessible's vtable slot 10.
+func (self *IAccessible) Get_accName(varChild systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pszName := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIAccessible_Get_accName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_pszName)))).Tuple()
+	return *_pszName, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Get_accValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accValue dispatches through IAccessible's vtable slot 11.
+func (self *IAccessible) Get_accValue(varChild systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pszValue := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIAccessible_Get_accValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_pszValue)))).Tuple()
+	return *_pszValue, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Get_accDescription = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accDescription dispatches through IAccessible's vtable slot 12.
+func (self *IAccessible) Get_accDescription(varChild systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pszDescription := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIAccessible_Get_accDescription, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_pszDescription)))).Tuple()
+	return *_pszDescription, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Get_accRole = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accRole dispatches through IAccessible's vtable slot 13.
+func (self *IAccessible) Get_accRole(varChild systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_pvarRole := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIAccessible_Get_accRole, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_pvarRole)))).Tuple()
+	return *_pvarRole, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Get_accState = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accState dispatches through IAccessible's vtable slot 14.
+func (self *IAccessible) Get_accState(varChild systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_pvarState := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIAccessible_Get_accState, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_pvarState)))).Tuple()
+	return *_pvarState, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Get_accHelp = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accHelp dispatches through IAccessible's vtable slot 15.
+func (self *IAccessible) Get_accHelp(varChild systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pszHelp := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIAccessible_Get_accHelp, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_pszHelp)))).Tuple()
+	return *_pszHelp, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Get_accHelpTopic = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accHelpTopic dispatches through IAccessible's vtable slot 16.
+func (self *IAccessible) Get_accHelpTopic(pszHelpFile *foundation.BSTR, varChild systemvariant.VARIANT) (int32, error) {
+	_pidTopic := new(int32)
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIAccessible_Get_accHelpTopic, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszHelpFile)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_pidTopic)))).Tuple()
+	return *_pidTopic, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Get_accKeyboardShortcut = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accKeyboardShortcut dispatches through IAccessible's vtable slot 17.
+func (self *IAccessible) Get_accKeyboardShortcut(varChild systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pszKeyboardShortcut := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIAccessible_Get_accKeyboardShortcut, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_pszKeyboardShortcut)))).Tuple()
+	return *_pszKeyboardShortcut, win32.ErrIfFailed(int32(r1))
+}
+
 // Get_accFocus dispatches through IAccessible's vtable slot 18.
 func (self *IAccessible) Get_accFocus() (systemvariant.VARIANT, error) {
 	_pvarChild := new(systemvariant.VARIANT)
@@ -185,11 +325,69 @@ func (self *IAccessible) Get_accSelection() (systemvariant.VARIANT, error) {
 	return *_pvarChildren, win32.ErrIfFailed(int32(r1))
 }
 
+var specIAccessible_Get_accDefaultAction = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_accDefaultAction dispatches through IAccessible's vtable slot 20.
+func (self *IAccessible) Get_accDefaultAction(varChild systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pszDefaultAction := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIAccessible_Get_accDefaultAction, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(win32.OutParam(unsafe.Pointer(_pszDefaultAction)))).Tuple()
+	return *_pszDefaultAction, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_AccSelect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AccSelect dispatches through IAccessible's vtable slot 21.
+func (self *IAccessible) AccSelect(flagsSelect int32, varChild systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIAccessible_AccSelect, nil, uintptr(unsafe.Pointer(self)), uintptr(flagsSelect), uintptr(unsafe.Pointer(&varChild))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_AccLocation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AccLocation dispatches through IAccessible's vtable slot 22.
+func (self *IAccessible) AccLocation(pxLeft *int32, pyTop *int32, pcxWidth *int32, pcyHeight *int32, varChild systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIAccessible_AccLocation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pxLeft)), uintptr(unsafe.Pointer(pyTop)), uintptr(unsafe.Pointer(pcxWidth)), uintptr(unsafe.Pointer(pcyHeight)), uintptr(unsafe.Pointer(&varChild))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_AccNavigate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// AccNavigate dispatches through IAccessible's vtable slot 23.
+func (self *IAccessible) AccNavigate(navDir int32, varStart systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_pvarEndUpAt := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIAccessible_AccNavigate, nil, uintptr(unsafe.Pointer(self)), uintptr(navDir), uintptr(unsafe.Pointer(&varStart)), uintptr(win32.OutParam(unsafe.Pointer(_pvarEndUpAt)))).Tuple()
+	return *_pvarEndUpAt, win32.ErrIfFailed(int32(r1))
+}
+
 // AccHitTest dispatches through IAccessible's vtable slot 24.
 func (self *IAccessible) AccHitTest(xLeft int32, yTop int32) (systemvariant.VARIANT, error) {
 	_pvarChild := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(xLeft), uintptr(yTop), uintptr(win32.OutParam(unsafe.Pointer(_pvarChild))))
 	return *_pvarChild, win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_AccDoDefaultAction = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AccDoDefaultAction dispatches through IAccessible's vtable slot 25.
+func (self *IAccessible) AccDoDefaultAction(varChild systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIAccessible_AccDoDefaultAction, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Put_accName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Put_accName dispatches through IAccessible's vtable slot 26.
+func (self *IAccessible) Put_accName(varChild systemvariant.VARIANT, szName foundation.BSTR) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIAccessible_Put_accName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(unsafe.Pointer(szName))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAccessible_Put_accValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Put_accValue dispatches through IAccessible's vtable slot 27.
+func (self *IAccessible) Put_accValue(varChild systemvariant.VARIANT, szValue foundation.BSTR) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIAccessible_Put_accValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varChild)), uintptr(unsafe.Pointer(szValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IAccessibleEx: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-iaccessibleex
@@ -564,6 +762,15 @@ type IItemContainerProvider struct {
 // IID_IItemContainerProvider is the interface identifier for IItemContainerProvider.
 var IID_IItemContainerProvider = win32.GUID{Data1: 0xe747770b, Data2: 0x39ce, Data3: 0x4382, Data4: [8]byte{0xab, 0x30, 0xd8, 0xfb, 0x3f, 0x33, 0x6f, 0x24}}
 
+var specIItemContainerProvider_FindItemByProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// FindItemByProperty dispatches through IItemContainerProvider's vtable slot 3.
+func (self *IItemContainerProvider) FindItemByProperty(pStartAfter *IRawElementProviderSimple, propertyId UIA_PROPERTY_ID, value systemvariant.VARIANT) (*IRawElementProviderSimple, error) {
+	_pFound := new(*IRawElementProviderSimple)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIItemContainerProvider_FindItemByProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartAfter)), uintptr(propertyId), uintptr(unsafe.Pointer(&value)), uintptr(win32.OutParam(unsafe.Pointer(_pFound)))).Tuple()
+	return *_pFound, win32.ErrIfFailed(int32(r1))
+}
+
 // ILegacyIAccessibleProvider: https://learn.microsoft.com/windows/win32/api/uiautomationcore/nn-uiautomationcore-ilegacyiaccessibleprovider
 // IID: e44c3566-915d-4070-99c6-047bff5a08f5
 type ILegacyIAccessibleProvider struct {
@@ -745,6 +952,14 @@ type IProxyProviderWinEventSink struct {
 // IID_IProxyProviderWinEventSink is the interface identifier for IProxyProviderWinEventSink.
 var IID_IProxyProviderWinEventSink = win32.GUID{Data1: 0x4fd82b78, Data2: 0xa43e, Data3: 0x46ac, Data4: [8]byte{0x98, 0x03, 0x0a, 0x69, 0x69, 0xc7, 0xc1, 0x83}}
 
+var specIProxyProviderWinEventSink_AddAutomationPropertyChangedEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddAutomationPropertyChangedEvent dispatches through IProxyProviderWinEventSink's vtable slot 3.
+func (self *IProxyProviderWinEventSink) AddAutomationPropertyChangedEvent(pProvider *IRawElementProviderSimple, id UIA_PROPERTY_ID, newValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIProxyProviderWinEventSink_AddAutomationPropertyChangedEvent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProvider)), uintptr(id), uintptr(unsafe.Pointer(&newValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddAutomationEvent dispatches through IProxyProviderWinEventSink's vtable slot 4.
 func (self *IProxyProviderWinEventSink) AddAutomationEvent(pProvider *IRawElementProviderSimple, id UIA_EVENT_ID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProvider)), uintptr(id))
@@ -765,6 +980,14 @@ type IRangeValueProvider struct {
 
 // IID_IRangeValueProvider is the interface identifier for IRangeValueProvider.
 var IID_IRangeValueProvider = win32.GUID{Data1: 0x36dc7aef, Data2: 0x33e6, Data3: 0x4691, Data4: [8]byte{0xaf, 0xe1, 0x2b, 0xe7, 0x27, 0x4b, 0x3d, 0x33}}
+
+var specIRangeValueProvider_SetValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetValue dispatches through IRangeValueProvider's vtable slot 3.
+func (self *IRangeValueProvider) SetValue(val float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIRangeValueProvider_SetValue, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(val))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_Value dispatches through IRangeValueProvider's vtable slot 4.
 func (self *IRangeValueProvider) Get_Value() (float64, error) {
@@ -887,6 +1110,15 @@ type IRawElementProviderFragmentRoot struct {
 
 // IID_IRawElementProviderFragmentRoot is the interface identifier for IRawElementProviderFragmentRoot.
 var IID_IRawElementProviderFragmentRoot = win32.GUID{Data1: 0x620ce2a5, Data2: 0xab8f, Data3: 0x40a9, Data4: [8]byte{0x86, 0xcb, 0xde, 0x3c, 0x75, 0x59, 0x9b, 0x58}}
+
+var specIRawElementProviderFragmentRoot_ElementProviderFromPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// ElementProviderFromPoint dispatches through IRawElementProviderFragmentRoot's vtable slot 3.
+func (self *IRawElementProviderFragmentRoot) ElementProviderFromPoint(x float64, y float64) (*IRawElementProviderFragment, error) {
+	_pRetVal := new(*IRawElementProviderFragment)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIRawElementProviderFragmentRoot_ElementProviderFromPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal)))).Tuple()
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
+}
 
 // GetFocus dispatches through IRawElementProviderFragmentRoot's vtable slot 4.
 func (self *IRawElementProviderFragmentRoot) GetFocus() (*IRawElementProviderFragment, error) {
@@ -1081,6 +1313,14 @@ var IID_IScrollProvider = win32.GUID{Data1: 0xb38b8077, Data2: 0x1fc3, Data3: 0x
 // Scroll dispatches through IScrollProvider's vtable slot 3.
 func (self *IScrollProvider) Scroll(horizontalAmount ScrollAmount, verticalAmount ScrollAmount) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(horizontalAmount), uintptr(verticalAmount))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIScrollProvider_SetScrollPercent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// SetScrollPercent dispatches through IScrollProvider's vtable slot 4.
+func (self *IScrollProvider) SetScrollPercent(horizontalPercent float64, verticalPercent float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIScrollProvider_SetScrollPercent, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(horizontalPercent)), uintptr(math.Float64bits(verticalPercent))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1489,6 +1729,15 @@ func (self *ITextProvider) RangeFromChild(childElement *IRawElementProviderSimpl
 	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
+var specITextProvider_RangeFromPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 2, true), win32.Word}}
+
+// RangeFromPoint dispatches through ITextProvider's vtable slot 6.
+func (self *ITextProvider) RangeFromPoint(point UiaPoint) (*ITextRangeProvider, error) {
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := win32.Call(self.LpVtbl[6], specITextProvider_RangeFromPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point)), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal)))).Tuple()
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DocumentRange dispatches through ITextProvider's vtable slot 7.
 func (self *ITextProvider) Get_DocumentRange() (*ITextRangeProvider, error) {
 	_pRetVal := new(*ITextRangeProvider)
@@ -1560,6 +1809,16 @@ func (self *ITextRangeProvider) CompareEndpoints(endpoint TextPatternRangeEndpoi
 func (self *ITextRangeProvider) ExpandToEnclosingUnit(unit TextUnit) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unit))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextRangeProvider_FindAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// FindAttribute dispatches through ITextRangeProvider's vtable slot 7.
+func (self *ITextRangeProvider) FindAttribute(attributeId UIA_TEXTATTRIBUTE_ID, val systemvariant.VARIANT, backward bool) (*ITextRangeProvider, error) {
+	_backward := win32.Bool32(backward)
+	_pRetVal := new(*ITextRangeProvider)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specITextRangeProvider_FindAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(attributeId), uintptr(unsafe.Pointer(&val)), uintptr(_backward), uintptr(win32.OutParam(unsafe.Pointer(_pRetVal)))).Tuple()
+	return *_pRetVal, win32.ErrIfFailed(int32(r1))
 }
 
 // FindText dispatches through ITextRangeProvider's vtable slot 8.
@@ -1697,6 +1956,30 @@ type ITransformProvider struct {
 // IID_ITransformProvider is the interface identifier for ITransformProvider.
 var IID_ITransformProvider = win32.GUID{Data1: 0x6829ddc4, Data2: 0x4f91, Data3: 0x4ffa, Data4: [8]byte{0xb8, 0x6f, 0xbd, 0x3e, 0x29, 0x87, 0xcb, 0x4c}}
 
+var specITransformProvider_Move = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// Move dispatches through ITransformProvider's vtable slot 3.
+func (self *ITransformProvider) Move(x float64, y float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITransformProvider_Move, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITransformProvider_Resize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// Resize dispatches through ITransformProvider's vtable slot 4.
+func (self *ITransformProvider) Resize(width float64, height float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specITransformProvider_Resize, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(width)), uintptr(math.Float64bits(height))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITransformProvider_Rotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Rotate dispatches through ITransformProvider's vtable slot 5.
+func (self *ITransformProvider) Rotate(degrees float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specITransformProvider_Rotate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(degrees))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_CanMove dispatches through ITransformProvider's vtable slot 6.
 func (self *ITransformProvider) Get_CanMove() (foundation.BOOL, error) {
 	_pRetVal := new(foundation.BOOL)
@@ -1726,6 +2009,14 @@ type ITransformProvider2 struct {
 
 // IID_ITransformProvider2 is the interface identifier for ITransformProvider2.
 var IID_ITransformProvider2 = win32.GUID{Data1: 0x4758742f, Data2: 0x7ac2, Data3: 0x460c, Data4: [8]byte{0xbc, 0x48, 0x09, 0xfc, 0x09, 0x30, 0x8a, 0x93}}
+
+var specITransformProvider2_Zoom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Zoom dispatches through ITransformProvider2's vtable slot 9.
+func (self *ITransformProvider2) Zoom(zoom float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specITransformProvider2_Zoom, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(zoom))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_CanZoom dispatches through ITransformProvider2's vtable slot 10.
 func (self *ITransformProvider2) Get_CanZoom() (foundation.BOOL, error) {
@@ -1910,6 +2201,24 @@ func (self *IUIAutomation) CreateFalseCondition() (*IUIAutomationCondition, erro
 	return *_newCondition, win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAutomation_CreatePropertyCondition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreatePropertyCondition dispatches through IUIAutomation's vtable slot 23.
+func (self *IUIAutomation) CreatePropertyCondition(propertyId UIA_PROPERTY_ID, value systemvariant.VARIANT) (*IUIAutomationCondition, error) {
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIUIAutomation_CreatePropertyCondition, nil, uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&value)), uintptr(win32.OutParam(unsafe.Pointer(_newCondition)))).Tuple()
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAutomation_CreatePropertyConditionEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// CreatePropertyConditionEx dispatches through IUIAutomation's vtable slot 24.
+func (self *IUIAutomation) CreatePropertyConditionEx(propertyId UIA_PROPERTY_ID, value systemvariant.VARIANT, flags PropertyConditionFlags) (*IUIAutomationCondition, error) {
+	_newCondition := new(*IUIAutomationCondition)
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIUIAutomation_CreatePropertyConditionEx, nil, uintptr(unsafe.Pointer(self)), uintptr(propertyId), uintptr(unsafe.Pointer(&value)), uintptr(flags), uintptr(win32.OutParam(unsafe.Pointer(_newCondition)))).Tuple()
+	return *_newCondition, win32.ErrIfFailed(int32(r1))
+}
+
 // CreateAndCondition dispatches through IUIAutomation's vtable slot 25.
 func (self *IUIAutomation) CreateAndCondition(condition1 *IUIAutomationCondition, condition2 *IUIAutomationCondition) (*IUIAutomationCondition, error) {
 	_newCondition := new(*IUIAutomationCondition)
@@ -2049,6 +2358,24 @@ func (self *IUIAutomation) IntSafeArrayToNativeArray(intArray *systemcom.SAFEARR
 	return *_arrayCount, win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAutomation_RectToVariant = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RectToVariant dispatches through IUIAutomation's vtable slot 44.
+func (self *IUIAutomation) RectToVariant(rc foundation.RECT) (systemvariant.VARIANT, error) {
+	_var_ := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIUIAutomation_RectToVariant, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&rc)), uintptr(win32.OutParam(unsafe.Pointer(_var_)))).Tuple()
+	return *_var_, win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAutomation_VariantToRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// VariantToRect dispatches through IUIAutomation's vtable slot 45.
+func (self *IUIAutomation) VariantToRect(var_ systemvariant.VARIANT) (foundation.RECT, error) {
+	_rc := new(foundation.RECT)
+	r1, _, _ := win32.Call(self.LpVtbl[45], specIUIAutomation_VariantToRect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&var_)), uintptr(win32.OutParam(unsafe.Pointer(_rc)))).Tuple()
+	return *_rc, win32.ErrIfFailed(int32(r1))
+}
+
 // SafeArrayToRectNativeArray dispatches through IUIAutomation's vtable slot 46.
 func (self *IUIAutomation) SafeArrayToRectNativeArray(rects *systemcom.SAFEARRAY, rectArray **foundation.RECT) (int32, error) {
 	_rectArrayCount := new(int32)
@@ -2094,6 +2421,15 @@ func (self *IUIAutomation) PollForPotentialSupportedPatterns(pElement *IUIAutoma
 func (self *IUIAutomation) PollForPotentialSupportedProperties(pElement *IUIAutomationElement, propertyIds **systemcom.SAFEARRAY, propertyNames **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pElement)), uintptr(unsafe.Pointer(propertyIds)), uintptr(unsafe.Pointer(propertyNames)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAutomation_CheckNotSupported = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CheckNotSupported dispatches through IUIAutomation's vtable slot 53.
+func (self *IUIAutomation) CheckNotSupported(value systemvariant.VARIANT) (foundation.BOOL, error) {
+	_isNotSupported := new(foundation.BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIUIAutomation_CheckNotSupported, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&value)), uintptr(win32.OutParam(unsafe.Pointer(_isNotSupported)))).Tuple()
+	return *_isNotSupported, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ReservedNotSupportedValue dispatches through IUIAutomation's vtable slot 54.
@@ -3940,6 +4276,15 @@ type IUIAutomationItemContainerPattern struct {
 // IID_IUIAutomationItemContainerPattern is the interface identifier for IUIAutomationItemContainerPattern.
 var IID_IUIAutomationItemContainerPattern = win32.GUID{Data1: 0xc690fdb2, Data2: 0x27a8, Data3: 0x423c, Data4: [8]byte{0x81, 0x2d, 0x42, 0x97, 0x73, 0xc9, 0x08, 0x4e}}
 
+var specIUIAutomationItemContainerPattern_FindItemByProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// FindItemByProperty dispatches through IUIAutomationItemContainerPattern's vtable slot 3.
+func (self *IUIAutomationItemContainerPattern) FindItemByProperty(pStartAfter *IUIAutomationElement, propertyId UIA_PROPERTY_ID, value systemvariant.VARIANT) (*IUIAutomationElement, error) {
+	_pFound := new(*IUIAutomationElement)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAutomationItemContainerPattern_FindItemByProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStartAfter)), uintptr(propertyId), uintptr(unsafe.Pointer(&value)), uintptr(win32.OutParam(unsafe.Pointer(_pFound)))).Tuple()
+	return *_pFound, win32.ErrIfFailed(int32(r1))
+}
+
 // IUIAutomationLegacyIAccessiblePattern: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationlegacyiaccessiblepattern
 // IID: 828055ad-355b-4435-86d5-3b51c14a9b1b
 type IUIAutomationLegacyIAccessiblePattern struct {
@@ -4293,6 +4638,14 @@ type IUIAutomationPropertyChangedEventHandler struct {
 // IID_IUIAutomationPropertyChangedEventHandler is the interface identifier for IUIAutomationPropertyChangedEventHandler.
 var IID_IUIAutomationPropertyChangedEventHandler = win32.GUID{Data1: 0x40cd37d4, Data2: 0xc756, Data3: 0x4b0c, Data4: [8]byte{0x8c, 0x6f, 0xbd, 0xdf, 0xee, 0xb1, 0x3b, 0x50}}
 
+var specIUIAutomationPropertyChangedEventHandler_HandlePropertyChangedEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// HandlePropertyChangedEvent dispatches through IUIAutomationPropertyChangedEventHandler's vtable slot 3.
+func (self *IUIAutomationPropertyChangedEventHandler) HandlePropertyChangedEvent(sender *IUIAutomationElement, propertyId UIA_PROPERTY_ID, newValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAutomationPropertyChangedEventHandler_HandlePropertyChangedEvent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(propertyId), uintptr(unsafe.Pointer(&newValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IUIAutomationPropertyCondition: https://learn.microsoft.com/windows/win32/api/uiautomationclient/nn-uiautomationclient-iuiautomationpropertycondition
 // IID: 99ebf2cb-5578-4267-9ad4-afd6ea77e94b
 type IUIAutomationPropertyCondition struct {
@@ -4520,6 +4873,14 @@ type IUIAutomationRangeValuePattern struct {
 // IID_IUIAutomationRangeValuePattern is the interface identifier for IUIAutomationRangeValuePattern.
 var IID_IUIAutomationRangeValuePattern = win32.GUID{Data1: 0x59213f4f, Data2: 0x7346, Data3: 0x49e5, Data4: [8]byte{0xb1, 0x20, 0x80, 0x55, 0x59, 0x87, 0xa1, 0x48}}
 
+var specIUIAutomationRangeValuePattern_SetValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetValue dispatches through IUIAutomationRangeValuePattern's vtable slot 3.
+func (self *IUIAutomationRangeValuePattern) SetValue(val float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAutomationRangeValuePattern_SetValue, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(val))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_CurrentValue dispatches through IUIAutomationRangeValuePattern's vtable slot 4.
 func (self *IUIAutomationRangeValuePattern) Get_CurrentValue() (float64, error) {
 	_retVal := new(float64)
@@ -4666,6 +5027,14 @@ var IID_IUIAutomationScrollPattern = win32.GUID{Data1: 0x88f4d42a, Data2: 0xe881
 // Scroll dispatches through IUIAutomationScrollPattern's vtable slot 3.
 func (self *IUIAutomationScrollPattern) Scroll(horizontalAmount ScrollAmount, verticalAmount ScrollAmount) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(horizontalAmount), uintptr(verticalAmount))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAutomationScrollPattern_SetScrollPercent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// SetScrollPercent dispatches through IUIAutomationScrollPattern's vtable slot 4.
+func (self *IUIAutomationScrollPattern) SetScrollPercent(horizontalPercent float64, verticalPercent float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAutomationScrollPattern_SetScrollPercent, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(horizontalPercent)), uintptr(math.Float64bits(verticalPercent))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5405,6 +5774,16 @@ func (self *IUIAutomationTextRange) ExpandToEnclosingUnit(textUnit TextUnit) err
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAutomationTextRange_FindAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// FindAttribute dispatches through IUIAutomationTextRange's vtable slot 7.
+func (self *IUIAutomationTextRange) FindAttribute(attr UIA_TEXTATTRIBUTE_ID, val systemvariant.VARIANT, backward bool) (*IUIAutomationTextRange, error) {
+	_backward := win32.Bool32(backward)
+	_found := new(*IUIAutomationTextRange)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIUIAutomationTextRange_FindAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(attr), uintptr(unsafe.Pointer(&val)), uintptr(_backward), uintptr(win32.OutParam(unsafe.Pointer(_found)))).Tuple()
+	return *_found, win32.ErrIfFailed(int32(r1))
+}
+
 // FindText dispatches through IUIAutomationTextRange's vtable slot 8.
 func (self *IUIAutomationTextRange) FindText(text foundation.BSTR, backward bool, ignoreCase bool) (*IUIAutomationTextRange, error) {
 	_backward := win32.Bool32(backward)
@@ -5604,6 +5983,30 @@ type IUIAutomationTransformPattern struct {
 // IID_IUIAutomationTransformPattern is the interface identifier for IUIAutomationTransformPattern.
 var IID_IUIAutomationTransformPattern = win32.GUID{Data1: 0xa9b55844, Data2: 0xa55d, Data3: 0x4ef0, Data4: [8]byte{0x92, 0x6d, 0x56, 0x9c, 0x16, 0xff, 0x89, 0xbb}}
 
+var specIUIAutomationTransformPattern_Move = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// Move dispatches through IUIAutomationTransformPattern's vtable slot 3.
+func (self *IUIAutomationTransformPattern) Move(x float64, y float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAutomationTransformPattern_Move, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAutomationTransformPattern_Resize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// Resize dispatches through IUIAutomationTransformPattern's vtable slot 4.
+func (self *IUIAutomationTransformPattern) Resize(width float64, height float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAutomationTransformPattern_Resize, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(width)), uintptr(math.Float64bits(height))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAutomationTransformPattern_Rotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Rotate dispatches through IUIAutomationTransformPattern's vtable slot 5.
+func (self *IUIAutomationTransformPattern) Rotate(degrees float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIUIAutomationTransformPattern_Rotate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(degrees))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_CurrentCanMove dispatches through IUIAutomationTransformPattern's vtable slot 6.
 func (self *IUIAutomationTransformPattern) Get_CurrentCanMove() (foundation.BOOL, error) {
 	_retVal := new(foundation.BOOL)
@@ -5654,6 +6057,14 @@ type IUIAutomationTransformPattern2 struct {
 
 // IID_IUIAutomationTransformPattern2 is the interface identifier for IUIAutomationTransformPattern2.
 var IID_IUIAutomationTransformPattern2 = win32.GUID{Data1: 0x6d74d017, Data2: 0x6ecb, Data3: 0x4381, Data4: [8]byte{0xb3, 0x8b, 0x3c, 0x17, 0xa4, 0x8f, 0xf1, 0xc2}}
+
+var specIUIAutomationTransformPattern2_Zoom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Zoom dispatches through IUIAutomationTransformPattern2's vtable slot 12.
+func (self *IUIAutomationTransformPattern2) Zoom(zoomValue float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIUIAutomationTransformPattern2_Zoom, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(zoomValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // ZoomByUnit dispatches through IUIAutomationTransformPattern2's vtable slot 13.
 func (self *IUIAutomationTransformPattern2) ZoomByUnit(zoomUnit ZoomUnit) error {

@@ -70,6 +70,116 @@ var (
 	procVkKeyScanExA           = modUSER32.NewProc("VkKeyScanExA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ActivateKeyboardLayout *win32.Proc
+	BlockInput             *win32.Proc
+	DragDetect             *win32.Proc
+	EnableWindow           *win32.Proc
+	GetActiveWindow        *win32.Proc
+	GetAsyncKeyState       *win32.Proc
+	GetCapture             *win32.Proc
+	GetDoubleClickTime     *win32.Proc
+	GetFocus               *win32.Proc
+	GetKBCodePage          *win32.Proc
+	GetKeyNameText         *win32.Proc
+	GetKeyNameTextA        *win32.Proc
+	GetKeyState            *win32.Proc
+	GetKeyboardLayout      *win32.Proc
+	GetKeyboardLayoutList  *win32.Proc
+	GetKeyboardLayoutName  *win32.Proc
+	GetKeyboardLayoutNameA *win32.Proc
+	GetKeyboardState       *win32.Proc
+	GetKeyboardType        *win32.Proc
+	GetLastInputInfo       *win32.Proc
+	GetMouseMovePointsEx   *win32.Proc
+	IsWindowEnabled        *win32.Proc
+	Keybd_event            *win32.Proc
+	LoadKeyboardLayout     *win32.Proc
+	LoadKeyboardLayoutA    *win32.Proc
+	MapVirtualKey          *win32.Proc
+	MapVirtualKeyA         *win32.Proc
+	MapVirtualKeyEx        *win32.Proc
+	MapVirtualKeyExA       *win32.Proc
+	Mouse_event            *win32.Proc
+	OemKeyScan             *win32.Proc
+	RegisterHotKey         *win32.Proc
+	ReleaseCapture         *win32.Proc
+	SendInput              *win32.Proc
+	SetActiveWindow        *win32.Proc
+	SetCapture             *win32.Proc
+	SetDoubleClickTime     *win32.Proc
+	SetFocus               *win32.Proc
+	SetKeyboardState       *win32.Proc
+	SwapMouseButton        *win32.Proc
+	ToAscii                *win32.Proc
+	ToAsciiEx              *win32.Proc
+	ToUnicode              *win32.Proc
+	ToUnicodeEx            *win32.Proc
+	TrackMouseEvent        *win32.Proc
+	UnloadKeyboardLayout   *win32.Proc
+	UnregisterHotKey       *win32.Proc
+	VkKeyScan              *win32.Proc
+	VkKeyScanA             *win32.Proc
+	VkKeyScanEx            *win32.Proc
+	VkKeyScanExA           *win32.Proc
+}{
+	ActivateKeyboardLayout: procActivateKeyboardLayout,
+	BlockInput:             procBlockInput,
+	DragDetect:             procDragDetect,
+	EnableWindow:           procEnableWindow,
+	GetActiveWindow:        procGetActiveWindow,
+	GetAsyncKeyState:       procGetAsyncKeyState,
+	GetCapture:             procGetCapture,
+	GetDoubleClickTime:     procGetDoubleClickTime,
+	GetFocus:               procGetFocus,
+	GetKBCodePage:          procGetKBCodePage,
+	GetKeyNameText:         procGetKeyNameText,
+	GetKeyNameTextA:        procGetKeyNameTextA,
+	GetKeyState:            procGetKeyState,
+	GetKeyboardLayout:      procGetKeyboardLayout,
+	GetKeyboardLayoutList:  procGetKeyboardLayoutList,
+	GetKeyboardLayoutName:  procGetKeyboardLayoutName,
+	GetKeyboardLayoutNameA: procGetKeyboardLayoutNameA,
+	GetKeyboardState:       procGetKeyboardState,
+	GetKeyboardType:        procGetKeyboardType,
+	GetLastInputInfo:       procGetLastInputInfo,
+	GetMouseMovePointsEx:   procGetMouseMovePointsEx,
+	IsWindowEnabled:        procIsWindowEnabled,
+	Keybd_event:            procKeybd_event,
+	LoadKeyboardLayout:     procLoadKeyboardLayout,
+	LoadKeyboardLayoutA:    procLoadKeyboardLayoutA,
+	MapVirtualKey:          procMapVirtualKey,
+	MapVirtualKeyA:         procMapVirtualKeyA,
+	MapVirtualKeyEx:        procMapVirtualKeyEx,
+	MapVirtualKeyExA:       procMapVirtualKeyExA,
+	Mouse_event:            procMouse_event,
+	OemKeyScan:             procOemKeyScan,
+	RegisterHotKey:         procRegisterHotKey,
+	ReleaseCapture:         procReleaseCapture,
+	SendInput:              procSendInput,
+	SetActiveWindow:        procSetActiveWindow,
+	SetCapture:             procSetCapture,
+	SetDoubleClickTime:     procSetDoubleClickTime,
+	SetFocus:               procSetFocus,
+	SetKeyboardState:       procSetKeyboardState,
+	SwapMouseButton:        procSwapMouseButton,
+	ToAscii:                procToAscii,
+	ToAsciiEx:              procToAsciiEx,
+	ToUnicode:              procToUnicode,
+	ToUnicodeEx:            procToUnicodeEx,
+	TrackMouseEvent:        procTrackMouseEvent,
+	UnloadKeyboardLayout:   procUnloadKeyboardLayout,
+	UnregisterHotKey:       procUnregisterHotKey,
+	VkKeyScan:              procVkKeyScan,
+	VkKeyScanA:             procVkKeyScanA,
+	VkKeyScanEx:            procVkKeyScanEx,
+	VkKeyScanExA:           procVkKeyScanExA,
+}
+
 // ActivateKeyboardLayout calls USER32!ActivateKeyboardLayout.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-activatekeyboardlayout
 // Minimum OS: windows5.0.

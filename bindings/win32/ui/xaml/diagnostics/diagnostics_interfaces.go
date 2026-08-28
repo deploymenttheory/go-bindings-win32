@@ -212,6 +212,14 @@ type IVisualTreeServiceCallback struct {
 // IID_IVisualTreeServiceCallback is the interface identifier for IVisualTreeServiceCallback.
 var IID_IVisualTreeServiceCallback = win32.GUID{Data1: 0xaa7a8931, Data2: 0x80e4, Data3: 0x4fec, Data4: [8]byte{0x8f, 0x3b, 0x55, 0x3f, 0x87, 0xb4, 0x96, 0x6e}}
 
+var specIVisualTreeServiceCallback_OnVisualTreeChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(64, 8, 0, false), win32.Word}}
+
+// OnVisualTreeChange dispatches through IVisualTreeServiceCallback's vtable slot 3.
+func (self *IVisualTreeServiceCallback) OnVisualTreeChange(relation ParentChildRelation, element VisualElement, mutationType VisualMutationType) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVisualTreeServiceCallback_OnVisualTreeChange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&relation)), uintptr(unsafe.Pointer(&element)), uintptr(mutationType)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IVisualTreeServiceCallback2: https://learn.microsoft.com/windows/win32/api/xamlom/nn-xamlom-ivisualtreeservicecallback2
 // IID: bad9eb88-ae77-4397-b948-5fa2db0a19ea
 type IVisualTreeServiceCallback2 struct {
@@ -270,6 +278,14 @@ func (self *IXamlDiagnostics) GetHandleFromIInspectable(pInstance *systemwinrt.I
 	_pHandle := new(uint64)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstance)), uintptr(win32.OutParam(unsafe.Pointer(_pHandle))))
 	return *_pHandle, win32.ErrIfFailed(int32(r1))
+}
+
+var specIXamlDiagnostics_HitTest = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// HitTest dispatches through IXamlDiagnostics's vtable slot 8.
+func (self *IXamlDiagnostics) HitTest(rect foundation.RECT, pCount *uint32, ppInstanceHandles **uint64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIXamlDiagnostics_HitTest, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&rect)), uintptr(unsafe.Pointer(pCount)), uintptr(unsafe.Pointer(ppInstanceHandles))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterInstance dispatches through IXamlDiagnostics's vtable slot 9.

@@ -4,102 +4,127 @@
 
 package controls
 
-// DTT_CALLBACK_PROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(graphicsgdi.HDC, foundation.PWSTR, int32, *foundation.RECT, uint32, foundation.LPARAM) int32.
+// DTT_CALLBACK_PROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(graphicsgdi.HDC, foundation.PWSTR, int32, *foundation.RECT, uint32, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type DTT_CALLBACK_PROC uintptr
 
-// EDITWORDBREAKPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, int32, int32, WORD_BREAK_ACTION) int32.
+// EDITWORDBREAKPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, int32, int32, WORD_BREAK_ACTION) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type EDITWORDBREAKPROCA uintptr
 
-// EDITWORDBREAKPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, int32, int32, WORD_BREAK_ACTION) int32.
+// EDITWORDBREAKPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, int32, int32, WORD_BREAK_ACTION) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type EDITWORDBREAKPROCW uintptr
 
-// LPFNADDPROPSHEETPAGES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, LPFNSVADDPROPSHEETPAGE, foundation.LPARAM) foundation.BOOL.
+// LPFNADDPROPSHEETPAGES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, LPFNSVADDPROPSHEETPAGE, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFNADDPROPSHEETPAGES uintptr
 
-// LPFNCCINFOA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CCINFOA) uint32.
+// LPFNCCINFOA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CCINFOA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFNCCINFOA uintptr
 
-// LPFNCCINFOW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CCINFOW) uint32.
+// LPFNCCINFOW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CCINFOW) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFNCCINFOW uintptr
 
-// LPFNCCSIZETOTEXTA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, graphicsgdi.HFONT, foundation.PSTR) int32.
+// LPFNCCSIZETOTEXTA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, graphicsgdi.HFONT, foundation.PSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPFNCCSIZETOTEXTA uintptr
 
-// LPFNCCSIZETOTEXTW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, graphicsgdi.HFONT, foundation.PWSTR) int32.
+// LPFNCCSIZETOTEXTW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, graphicsgdi.HFONT, foundation.PWSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPFNCCSIZETOTEXTW uintptr
 
-// LPFNCCSTYLEA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *CCSTYLEA) foundation.BOOL.
+// LPFNCCSTYLEA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *CCSTYLEA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFNCCSTYLEA uintptr
 
-// LPFNCCSTYLEW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *CCSTYLEW) foundation.BOOL.
+// LPFNCCSTYLEW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *CCSTYLEW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFNCCSTYLEW uintptr
 
-// LPFNPSPCALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, PSPCB_MESSAGE, *PROPSHEETPAGEA) uint32.
+// LPFNPSPCALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, PSPCB_MESSAGE, *PROPSHEETPAGEA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFNPSPCALLBACKA uintptr
 
-// LPFNPSPCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, PSPCB_MESSAGE, *PROPSHEETPAGEW) uint32.
+// LPFNPSPCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, PSPCB_MESSAGE, *PROPSHEETPAGEW) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFNPSPCALLBACKW uintptr
 
-// LPFNSVADDPROPSHEETPAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HPROPSHEETPAGE, foundation.LPARAM) foundation.BOOL.
+// LPFNSVADDPROPSHEETPAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HPROPSHEETPAGE, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFNSVADDPROPSHEETPAGE uintptr
 
-// PFNDACOMPARE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, foundation.LPARAM) int32.
+// PFNDACOMPARE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNDACOMPARE uintptr
 
-// PFNDACOMPARECONST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, foundation.LPARAM) int32.
+// PFNDACOMPARECONST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNDACOMPARECONST uintptr
 
-// PFNDAENUMCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer) int32.
+// PFNDAENUMCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNDAENUMCALLBACK uintptr
 
-// PFNDAENUMCALLBACKCONST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer) int32.
+// PFNDAENUMCALLBACKCONST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNDAENUMCALLBACKCONST uintptr
 
-// PFNDPAMERGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DPAMM_MESSAGE, unsafe.Pointer, unsafe.Pointer, foundation.LPARAM) unsafe.Pointer.
+// PFNDPAMERGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DPAMM_MESSAGE, unsafe.Pointer, unsafe.Pointer, foundation.LPARAM) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFNDPAMERGE uintptr
 
-// PFNDPAMERGECONST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DPAMM_MESSAGE, unsafe.Pointer, unsafe.Pointer, foundation.LPARAM) unsafe.Pointer.
+// PFNDPAMERGECONST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DPAMM_MESSAGE, unsafe.Pointer, unsafe.Pointer, foundation.LPARAM) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFNDPAMERGECONST uintptr
 
-// PFNDPASTREAM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DPASTREAMINFO, *systemcom.IStream, unsafe.Pointer) foundation.HRESULT.
+// PFNDPASTREAM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DPASTREAMINFO, *systemcom.IStream, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNDPASTREAM uintptr
 
-// PFNLVCOMPARE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.LPARAM, foundation.LPARAM, foundation.LPARAM) int32.
+// PFNLVCOMPARE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.LPARAM, foundation.LPARAM, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNLVCOMPARE uintptr
 
-// PFNLVGROUPCOMPARE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, int32, unsafe.Pointer) int32.
+// PFNLVGROUPCOMPARE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, int32, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNLVGROUPCOMPARE uintptr
 
-// PFNPROPSHEETCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.LPARAM) int32.
+// PFNPROPSHEETCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNPROPSHEETCALLBACK uintptr
 
-// PFNTVCOMPARE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.LPARAM, foundation.LPARAM, foundation.LPARAM) int32.
+// PFNTVCOMPARE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.LPARAM, foundation.LPARAM, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNTVCOMPARE uintptr
 
-// PFTASKDIALOGCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM, uintptr) foundation.HRESULT.
+// PFTASKDIALOGCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM, uintptr) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFTASKDIALOGCALLBACK uintptr

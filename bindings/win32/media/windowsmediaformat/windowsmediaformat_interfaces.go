@@ -5,6 +5,7 @@
 package windowsmediaformat
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -142,6 +143,22 @@ type INSSBuffer3 struct {
 
 // IID_INSSBuffer3 is the interface identifier for INSSBuffer3.
 var IID_INSSBuffer3 = win32.GUID{Data1: 0xc87ceaaf, Data2: 0x75be, Data3: 0x4bc4, Data4: [8]byte{0x84, 0xeb, 0xac, 0x27, 0x98, 0x50, 0x76, 0x72}}
+
+var specINSSBuffer3_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// SetProperty dispatches through INSSBuffer3's vtable slot 10.
+func (self *INSSBuffer3) SetProperty(guidBufferProperty win32.GUID, pvBufferProperty unsafe.Pointer, dwBufferPropertySize uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specINSSBuffer3_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidBufferProperty)), uintptr(unsafe.Pointer(pvBufferProperty)), uintptr(dwBufferPropertySize)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specINSSBuffer3_GetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetProperty dispatches through INSSBuffer3's vtable slot 11.
+func (self *INSSBuffer3) GetProperty(guidBufferProperty win32.GUID, pvBufferProperty unsafe.Pointer, pdwBufferPropertySize *uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specINSSBuffer3_GetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidBufferProperty)), uintptr(unsafe.Pointer(pvBufferProperty)), uintptr(unsafe.Pointer(pdwBufferPropertySize))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // INSSBuffer4: https://learn.microsoft.com/windows/win32/api/wmsbuffer/nn-wmsbuffer-inssbuffer4
 // IID: b6b8fd5a-32e2-49d4-a910-c26cc85465ed
@@ -684,6 +701,15 @@ type IWMDRMTranscryptor2 struct {
 // IID_IWMDRMTranscryptor2 is the interface identifier for IWMDRMTranscryptor2.
 var IID_IWMDRMTranscryptor2 = win32.GUID{Data1: 0xe0da439f, Data2: 0xd331, Data3: 0x496a, Data4: [8]byte{0xbe, 0xce, 0x18, 0xe5, 0xba, 0xc5, 0xdd, 0x23}}
 
+var specIWMDRMTranscryptor2_SeekEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// SeekEx dispatches through IWMDRMTranscryptor2's vtable slot 7.
+func (self *IWMDRMTranscryptor2) SeekEx(cnsStartTime uint64, cnsDuration uint64, flRate float32, fIncludeFileHeader bool) error {
+	_fIncludeFileHeader := win32.Bool32(fIncludeFileHeader)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIWMDRMTranscryptor2_SeekEx, nil, uintptr(unsafe.Pointer(self)), uintptr(cnsStartTime), uintptr(cnsDuration), uintptr(math.Float32bits(flRate)), uintptr(_fIncludeFileHeader)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ZeroAdjustTimestamps dispatches through IWMDRMTranscryptor2's vtable slot 8.
 func (self *IWMDRMTranscryptor2) ZeroAdjustTimestamps(fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
@@ -781,6 +807,30 @@ type IWMDeviceRegistration struct {
 // IID_IWMDeviceRegistration is the interface identifier for IWMDeviceRegistration.
 var IID_IWMDeviceRegistration = win32.GUID{Data1: 0xf6211f03, Data2: 0x8d21, Data3: 0x4e94, Data4: [8]byte{0x93, 0xe6, 0x85, 0x10, 0x80, 0x5f, 0x2d, 0x99}}
 
+var specIWMDeviceRegistration_RegisterDevice = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 1, 0, false), win32.Word}}
+
+// RegisterDevice dispatches through IWMDeviceRegistration's vtable slot 3.
+func (self *IWMDeviceRegistration) RegisterDevice(dwRegisterType uint32, pbCertificate []byte, SerialNumber DRM_VAL16, ppDevice **IWMRegisteredDevice) error {
+	var _pbCertificate *byte
+	if len(pbCertificate) > 0 {
+		_pbCertificate = &pbCertificate[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIWMDeviceRegistration_RegisterDevice, nil, uintptr(unsafe.Pointer(self)), uintptr(dwRegisterType), uintptr(unsafe.Pointer(_pbCertificate)), uintptr(len(pbCertificate)), uintptr(unsafe.Pointer(&SerialNumber)), uintptr(unsafe.Pointer(ppDevice))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMDeviceRegistration_UnregisterDevice = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 1, 0, false)}}
+
+// UnregisterDevice dispatches through IWMDeviceRegistration's vtable slot 4.
+func (self *IWMDeviceRegistration) UnregisterDevice(dwRegisterType uint32, pbCertificate []byte, SerialNumber DRM_VAL16) error {
+	var _pbCertificate *byte
+	if len(pbCertificate) > 0 {
+		_pbCertificate = &pbCertificate[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIWMDeviceRegistration_UnregisterDevice, nil, uintptr(unsafe.Pointer(self)), uintptr(dwRegisterType), uintptr(unsafe.Pointer(_pbCertificate)), uintptr(len(pbCertificate)), uintptr(unsafe.Pointer(&SerialNumber))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetRegistrationStats dispatches through IWMDeviceRegistration's vtable slot 5.
 func (self *IWMDeviceRegistration) GetRegistrationStats(dwRegisterType uint32, pcRegisteredDevices *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwRegisterType), uintptr(unsafe.Pointer(pcRegisteredDevices)))
@@ -796,6 +846,18 @@ func (self *IWMDeviceRegistration) GetFirstRegisteredDevice(dwRegisterType uint3
 // GetNextRegisteredDevice dispatches through IWMDeviceRegistration's vtable slot 7.
 func (self *IWMDeviceRegistration) GetNextRegisteredDevice(ppDevice **IWMRegisteredDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMDeviceRegistration_GetRegisteredDeviceByID = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 1, 0, false), win32.Word}}
+
+// GetRegisteredDeviceByID dispatches through IWMDeviceRegistration's vtable slot 8.
+func (self *IWMDeviceRegistration) GetRegisteredDeviceByID(dwRegisterType uint32, pbCertificate []byte, SerialNumber DRM_VAL16, ppDevice **IWMRegisteredDevice) error {
+	var _pbCertificate *byte
+	if len(pbCertificate) > 0 {
+		_pbCertificate = &pbCertificate[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIWMDeviceRegistration_GetRegisteredDeviceByID, nil, uintptr(unsafe.Pointer(self)), uintptr(dwRegisterType), uintptr(unsafe.Pointer(_pbCertificate)), uintptr(len(pbCertificate)), uintptr(unsafe.Pointer(&SerialNumber)), uintptr(unsafe.Pointer(ppDevice))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1860,6 +1922,14 @@ func (self *IWMReader) GetOutputFormat(dwOutputNumber uint32, dwFormatNumber uin
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWMReader_Start = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// Start dispatches through IWMReader's vtable slot 10.
+func (self *IWMReader) Start(cnsStart uint64, cnsDuration uint64, fRate float32, pvContext unsafe.Pointer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIWMReader_Start, nil, uintptr(unsafe.Pointer(self)), uintptr(cnsStart), uintptr(cnsDuration), uintptr(math.Float32bits(fRate)), uintptr(unsafe.Pointer(pvContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Stop dispatches through IWMReader's vtable slot 11.
 func (self *IWMReader) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
@@ -2086,6 +2156,14 @@ func (self *IWMReaderAdvanced2) GetProtocolName(pwszProtocol foundation.PWSTR, p
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWMReaderAdvanced2_StartAtMarker = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// StartAtMarker dispatches through IWMReaderAdvanced2's vtable slot 30.
+func (self *IWMReaderAdvanced2) StartAtMarker(wMarkerIndex uint16, cnsDuration uint64, fRate float32, pvContext unsafe.Pointer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIWMReaderAdvanced2_StartAtMarker, nil, uintptr(unsafe.Pointer(self)), uintptr(wMarkerIndex), uintptr(cnsDuration), uintptr(math.Float32bits(fRate)), uintptr(unsafe.Pointer(pvContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetOutputSetting dispatches through IWMReaderAdvanced2's vtable slot 31.
 func (self *IWMReaderAdvanced2) GetOutputSetting(dwOutputNum uint32, pszName string, pType *WMT_ATTR_DATATYPE, pValue *byte, pcbLength *uint16) error {
 	_pszName := win32.UTF16Ptr(pszName)
@@ -2101,6 +2179,14 @@ func (self *IWMReaderAdvanced2) SetOutputSetting(dwOutputNum uint32, pszName str
 		_pValue = &pValue[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMReaderAdvanced2_Preroll = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// Preroll dispatches through IWMReaderAdvanced2's vtable slot 33.
+func (self *IWMReaderAdvanced2) Preroll(cnsStart uint64, cnsDuration uint64, fRate float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIWMReaderAdvanced2_Preroll, nil, uintptr(unsafe.Pointer(self)), uintptr(cnsStart), uintptr(cnsDuration), uintptr(math.Float32bits(fRate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2141,6 +2227,14 @@ var IID_IWMReaderAdvanced3 = win32.GUID{Data1: 0x5dc0674b, Data2: 0xf04b, Data3:
 // StopNetStreaming dispatches through IWMReaderAdvanced3's vtable slot 38.
 func (self *IWMReaderAdvanced3) StopNetStreaming() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMReaderAdvanced3_StartAtPosition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// StartAtPosition dispatches through IWMReaderAdvanced3's vtable slot 39.
+func (self *IWMReaderAdvanced3) StartAtPosition(wStreamNum uint16, pvOffsetStart unsafe.Pointer, pvDuration unsafe.Pointer, dwOffsetFormat WMT_OFFSET_FORMAT, fRate float32, pvContext unsafe.Pointer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIWMReaderAdvanced3_StartAtPosition, nil, uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(pvOffsetStart)), uintptr(unsafe.Pointer(pvDuration)), uintptr(dwOffsetFormat), uintptr(math.Float32bits(fRate)), uintptr(unsafe.Pointer(pvContext))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3236,6 +3330,18 @@ func (self *IWMStreamConfig2) GetTransportType(pnTransportType *WMT_TRANSPORT_TY
 // SetTransportType dispatches through IWMStreamConfig2's vtable slot 15.
 func (self *IWMStreamConfig2) SetTransportType(nTransportType WMT_TRANSPORT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(nTransportType))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMStreamConfig2_AddDataUnitExtension = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// AddDataUnitExtension dispatches through IWMStreamConfig2's vtable slot 16.
+func (self *IWMStreamConfig2) AddDataUnitExtension(guidExtensionSystemID win32.GUID, cbExtensionDataSize uint16, pbExtensionSystemInfo []byte) error {
+	var _pbExtensionSystemInfo *byte
+	if len(pbExtensionSystemInfo) > 0 {
+		_pbExtensionSystemInfo = &pbExtensionSystemInfo[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIWMStreamConfig2_AddDataUnitExtension, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidExtensionSystemID)), uintptr(cbExtensionDataSize), uintptr(unsafe.Pointer(_pbExtensionSystemInfo)), uintptr(len(pbExtensionSystemInfo))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -4,6 +4,7 @@
 
 package imageacquisition
 
-// DeviceDialogFunction is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DEVICEDIALOGDATA) foundation.HRESULT.
+// DeviceDialogFunction is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DEVICEDIALOGDATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DeviceDialogFunction uintptr

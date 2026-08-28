@@ -5,6 +5,7 @@
 package js
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -46,6 +47,7 @@ var (
 	procJsDeleteProperty                     = modchakra.NewProc("JsDeleteProperty")
 	procJsDisableRuntimeExecution            = modchakra.NewProc("JsDisableRuntimeExecution")
 	procJsDisposeRuntime                     = modchakra.NewProc("JsDisposeRuntime")
+	procJsDoubleToNumber                     = modchakra.NewProc("JsDoubleToNumber")
 	procJsEnableRuntimeExecution             = modchakra.NewProc("JsEnableRuntimeExecution")
 	procJsEnumerateHeap                      = modchakra.NewProc("JsEnumerateHeap")
 	procJsEquals                             = modchakra.NewProc("JsEquals")
@@ -104,6 +106,184 @@ var (
 	procJsValueToVariant                     = modchakra.NewProc("JsValueToVariant")
 	procJsVariantToValue                     = modchakra.NewProc("JsVariantToValue")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	JsAddRef                             *win32.Proc
+	JsBoolToBoolean                      *win32.Proc
+	JsBooleanToBool                      *win32.Proc
+	JsCallFunction                       *win32.Proc
+	JsCollectGarbage                     *win32.Proc
+	JsConstructObject                    *win32.Proc
+	JsConvertValueToBoolean              *win32.Proc
+	JsConvertValueToNumber               *win32.Proc
+	JsConvertValueToObject               *win32.Proc
+	JsConvertValueToString               *win32.Proc
+	JsCreateArray                        *win32.Proc
+	JsCreateContext                      *win32.Proc
+	JsCreateError                        *win32.Proc
+	JsCreateExternalObject               *win32.Proc
+	JsCreateFunction                     *win32.Proc
+	JsCreateObject                       *win32.Proc
+	JsCreateRangeError                   *win32.Proc
+	JsCreateReferenceError               *win32.Proc
+	JsCreateRuntime                      *win32.Proc
+	JsCreateSyntaxError                  *win32.Proc
+	JsCreateTypeError                    *win32.Proc
+	JsCreateURIError                     *win32.Proc
+	JsDefineProperty                     *win32.Proc
+	JsDeleteIndexedProperty              *win32.Proc
+	JsDeleteProperty                     *win32.Proc
+	JsDisableRuntimeExecution            *win32.Proc
+	JsDisposeRuntime                     *win32.Proc
+	JsDoubleToNumber                     *win32.Proc
+	JsEnableRuntimeExecution             *win32.Proc
+	JsEnumerateHeap                      *win32.Proc
+	JsEquals                             *win32.Proc
+	JsGetAndClearException               *win32.Proc
+	JsGetCurrentContext                  *win32.Proc
+	JsGetExtensionAllowed                *win32.Proc
+	JsGetExternalData                    *win32.Proc
+	JsGetFalseValue                      *win32.Proc
+	JsGetGlobalObject                    *win32.Proc
+	JsGetIndexedProperty                 *win32.Proc
+	JsGetNullValue                       *win32.Proc
+	JsGetOwnPropertyDescriptor           *win32.Proc
+	JsGetOwnPropertyNames                *win32.Proc
+	JsGetProperty                        *win32.Proc
+	JsGetPropertyIdFromName              *win32.Proc
+	JsGetPropertyNameFromId              *win32.Proc
+	JsGetPrototype                       *win32.Proc
+	JsGetRuntime                         *win32.Proc
+	JsGetRuntimeMemoryLimit              *win32.Proc
+	JsGetRuntimeMemoryUsage              *win32.Proc
+	JsGetStringLength                    *win32.Proc
+	JsGetTrueValue                       *win32.Proc
+	JsGetUndefinedValue                  *win32.Proc
+	JsGetValueType                       *win32.Proc
+	JsHasException                       *win32.Proc
+	JsHasExternalData                    *win32.Proc
+	JsHasIndexedProperty                 *win32.Proc
+	JsHasProperty                        *win32.Proc
+	JsIdle                               *win32.Proc
+	JsIntToNumber                        *win32.Proc
+	JsIsEnumeratingHeap                  *win32.Proc
+	JsIsRuntimeExecutionDisabled         *win32.Proc
+	JsNumberToDouble                     *win32.Proc
+	JsParseScript                        *win32.Proc
+	JsParseSerializedScript              *win32.Proc
+	JsPointerToString                    *win32.Proc
+	JsPreventExtension                   *win32.Proc
+	JsRelease                            *win32.Proc
+	JsRunScript                          *win32.Proc
+	JsRunSerializedScript                *win32.Proc
+	JsSerializeScript                    *win32.Proc
+	JsSetCurrentContext                  *win32.Proc
+	JsSetException                       *win32.Proc
+	JsSetExternalData                    *win32.Proc
+	JsSetIndexedProperty                 *win32.Proc
+	JsSetProperty                        *win32.Proc
+	JsSetPrototype                       *win32.Proc
+	JsSetRuntimeBeforeCollectCallback    *win32.Proc
+	JsSetRuntimeMemoryAllocationCallback *win32.Proc
+	JsSetRuntimeMemoryLimit              *win32.Proc
+	JsStartDebugging                     *win32.Proc
+	JsStartProfiling                     *win32.Proc
+	JsStopProfiling                      *win32.Proc
+	JsStrictEquals                       *win32.Proc
+	JsStringToPointer                    *win32.Proc
+	JsValueToVariant                     *win32.Proc
+	JsVariantToValue                     *win32.Proc
+}{
+	JsAddRef:                             procJsAddRef,
+	JsBoolToBoolean:                      procJsBoolToBoolean,
+	JsBooleanToBool:                      procJsBooleanToBool,
+	JsCallFunction:                       procJsCallFunction,
+	JsCollectGarbage:                     procJsCollectGarbage,
+	JsConstructObject:                    procJsConstructObject,
+	JsConvertValueToBoolean:              procJsConvertValueToBoolean,
+	JsConvertValueToNumber:               procJsConvertValueToNumber,
+	JsConvertValueToObject:               procJsConvertValueToObject,
+	JsConvertValueToString:               procJsConvertValueToString,
+	JsCreateArray:                        procJsCreateArray,
+	JsCreateContext:                      procJsCreateContext,
+	JsCreateError:                        procJsCreateError,
+	JsCreateExternalObject:               procJsCreateExternalObject,
+	JsCreateFunction:                     procJsCreateFunction,
+	JsCreateObject:                       procJsCreateObject,
+	JsCreateRangeError:                   procJsCreateRangeError,
+	JsCreateReferenceError:               procJsCreateReferenceError,
+	JsCreateRuntime:                      procJsCreateRuntime,
+	JsCreateSyntaxError:                  procJsCreateSyntaxError,
+	JsCreateTypeError:                    procJsCreateTypeError,
+	JsCreateURIError:                     procJsCreateURIError,
+	JsDefineProperty:                     procJsDefineProperty,
+	JsDeleteIndexedProperty:              procJsDeleteIndexedProperty,
+	JsDeleteProperty:                     procJsDeleteProperty,
+	JsDisableRuntimeExecution:            procJsDisableRuntimeExecution,
+	JsDisposeRuntime:                     procJsDisposeRuntime,
+	JsDoubleToNumber:                     procJsDoubleToNumber,
+	JsEnableRuntimeExecution:             procJsEnableRuntimeExecution,
+	JsEnumerateHeap:                      procJsEnumerateHeap,
+	JsEquals:                             procJsEquals,
+	JsGetAndClearException:               procJsGetAndClearException,
+	JsGetCurrentContext:                  procJsGetCurrentContext,
+	JsGetExtensionAllowed:                procJsGetExtensionAllowed,
+	JsGetExternalData:                    procJsGetExternalData,
+	JsGetFalseValue:                      procJsGetFalseValue,
+	JsGetGlobalObject:                    procJsGetGlobalObject,
+	JsGetIndexedProperty:                 procJsGetIndexedProperty,
+	JsGetNullValue:                       procJsGetNullValue,
+	JsGetOwnPropertyDescriptor:           procJsGetOwnPropertyDescriptor,
+	JsGetOwnPropertyNames:                procJsGetOwnPropertyNames,
+	JsGetProperty:                        procJsGetProperty,
+	JsGetPropertyIdFromName:              procJsGetPropertyIdFromName,
+	JsGetPropertyNameFromId:              procJsGetPropertyNameFromId,
+	JsGetPrototype:                       procJsGetPrototype,
+	JsGetRuntime:                         procJsGetRuntime,
+	JsGetRuntimeMemoryLimit:              procJsGetRuntimeMemoryLimit,
+	JsGetRuntimeMemoryUsage:              procJsGetRuntimeMemoryUsage,
+	JsGetStringLength:                    procJsGetStringLength,
+	JsGetTrueValue:                       procJsGetTrueValue,
+	JsGetUndefinedValue:                  procJsGetUndefinedValue,
+	JsGetValueType:                       procJsGetValueType,
+	JsHasException:                       procJsHasException,
+	JsHasExternalData:                    procJsHasExternalData,
+	JsHasIndexedProperty:                 procJsHasIndexedProperty,
+	JsHasProperty:                        procJsHasProperty,
+	JsIdle:                               procJsIdle,
+	JsIntToNumber:                        procJsIntToNumber,
+	JsIsEnumeratingHeap:                  procJsIsEnumeratingHeap,
+	JsIsRuntimeExecutionDisabled:         procJsIsRuntimeExecutionDisabled,
+	JsNumberToDouble:                     procJsNumberToDouble,
+	JsParseScript:                        procJsParseScript,
+	JsParseSerializedScript:              procJsParseSerializedScript,
+	JsPointerToString:                    procJsPointerToString,
+	JsPreventExtension:                   procJsPreventExtension,
+	JsRelease:                            procJsRelease,
+	JsRunScript:                          procJsRunScript,
+	JsRunSerializedScript:                procJsRunSerializedScript,
+	JsSerializeScript:                    procJsSerializeScript,
+	JsSetCurrentContext:                  procJsSetCurrentContext,
+	JsSetException:                       procJsSetException,
+	JsSetExternalData:                    procJsSetExternalData,
+	JsSetIndexedProperty:                 procJsSetIndexedProperty,
+	JsSetProperty:                        procJsSetProperty,
+	JsSetPrototype:                       procJsSetPrototype,
+	JsSetRuntimeBeforeCollectCallback:    procJsSetRuntimeBeforeCollectCallback,
+	JsSetRuntimeMemoryAllocationCallback: procJsSetRuntimeMemoryAllocationCallback,
+	JsSetRuntimeMemoryLimit:              procJsSetRuntimeMemoryLimit,
+	JsStartDebugging:                     procJsStartDebugging,
+	JsStartProfiling:                     procJsStartProfiling,
+	JsStopProfiling:                      procJsStopProfiling,
+	JsStrictEquals:                       procJsStrictEquals,
+	JsStringToPointer:                    procJsStringToPointer,
+	JsValueToVariant:                     procJsValueToVariant,
+	JsVariantToValue:                     procJsVariantToValue,
+}
 
 // JsAddRef calls chakra!JsAddRef.
 func JsAddRef(ref unsafe.Pointer, count *uint32) JsErrorCode {
@@ -264,6 +444,14 @@ func JsDisableRuntimeExecution(runtime unsafe.Pointer) JsErrorCode {
 // JsDisposeRuntime calls chakra!JsDisposeRuntime.
 func JsDisposeRuntime(runtime unsafe.Pointer) JsErrorCode {
 	r1, _, _ := syscall.SyscallN(procJsDisposeRuntime.Addr(), uintptr(unsafe.Pointer(runtime)))
+	return JsErrorCode(r1)
+}
+
+var specJsDoubleToNumber = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// JsDoubleToNumber calls chakra!JsDoubleToNumber.
+func JsDoubleToNumber(doubleValue float64, value *unsafe.Pointer) JsErrorCode {
+	r1, _, _ := win32.Call(procJsDoubleToNumber.Addr(), specJsDoubleToNumber, nil, uintptr(math.Float64bits(doubleValue)), uintptr(unsafe.Pointer(value))).Tuple()
 	return JsErrorCode(r1)
 }
 

@@ -145,10 +145,262 @@ var (
 	procWcsTranslateColors                       = modmscms.NewProc("WcsTranslateColors")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AssociateColorProfileWithDevice          *win32.Proc
+	AssociateColorProfileWithDeviceA         *win32.Proc
+	CMCheckColors                            *win32.Proc
+	CMCheckColorsInGamut                     *win32.Proc
+	CMCheckRGBs                              *win32.Proc
+	CMConvertColorNameToIndex                *win32.Proc
+	CMConvertIndexToColorName                *win32.Proc
+	CMCreateDeviceLinkProfile                *win32.Proc
+	CMCreateMultiProfileTransform            *win32.Proc
+	CMCreateProfile                          *win32.Proc
+	CMCreateProfileW                         *win32.Proc
+	CMCreateTransform                        *win32.Proc
+	CMCreateTransformExt                     *win32.Proc
+	CMCreateTransformExtW                    *win32.Proc
+	CMCreateTransformW                       *win32.Proc
+	CMDeleteTransform                        *win32.Proc
+	CMGetInfo                                *win32.Proc
+	CMGetNamedProfileInfo                    *win32.Proc
+	CMIsProfileValid                         *win32.Proc
+	CMTranslateColors                        *win32.Proc
+	CMTranslateRGB                           *win32.Proc
+	CMTranslateRGBs                          *win32.Proc
+	CMTranslateRGBsExt                       *win32.Proc
+	CheckBitmapBits                          *win32.Proc
+	CheckColors                              *win32.Proc
+	CheckColorsInGamut                       *win32.Proc
+	CloseColorProfile                        *win32.Proc
+	ColorCorrectPalette                      *win32.Proc
+	ColorMatchToTarget                       *win32.Proc
+	ColorProfileAddDisplayAssociation        *win32.Proc
+	ColorProfileGetDeviceCapabilities        *win32.Proc
+	ColorProfileGetDisplayDefault            *win32.Proc
+	ColorProfileGetDisplayList               *win32.Proc
+	ColorProfileGetDisplayUserScope          *win32.Proc
+	ColorProfileRemoveDisplayAssociation     *win32.Proc
+	ColorProfileSetDisplayDefaultAssociation *win32.Proc
+	ConvertColorNameToIndex                  *win32.Proc
+	ConvertIndexToColorName                  *win32.Proc
+	CreateColorSpace                         *win32.Proc
+	CreateColorSpaceA                        *win32.Proc
+	CreateColorTransform                     *win32.Proc
+	CreateColorTransformA                    *win32.Proc
+	CreateDeviceLinkProfile                  *win32.Proc
+	CreateMultiProfileTransform              *win32.Proc
+	CreateProfileFromLogColorSpace           *win32.Proc
+	CreateProfileFromLogColorSpaceA          *win32.Proc
+	DeleteColorSpace                         *win32.Proc
+	DeleteColorTransform                     *win32.Proc
+	DisassociateColorProfileFromDevice       *win32.Proc
+	DisassociateColorProfileFromDeviceA      *win32.Proc
+	EnumColorProfiles                        *win32.Proc
+	EnumColorProfilesA                       *win32.Proc
+	EnumICMProfiles                          *win32.Proc
+	EnumICMProfilesA                         *win32.Proc
+	GetCMMInfo                               *win32.Proc
+	GetColorDirectory                        *win32.Proc
+	GetColorDirectoryA                       *win32.Proc
+	GetColorProfileElement                   *win32.Proc
+	GetColorProfileElementTag                *win32.Proc
+	GetColorProfileFromHandle                *win32.Proc
+	GetColorProfileHeader                    *win32.Proc
+	GetColorSpace                            *win32.Proc
+	GetCountColorProfileElements             *win32.Proc
+	GetDeviceGammaRamp                       *win32.Proc
+	GetICMProfile                            *win32.Proc
+	GetICMProfileA                           *win32.Proc
+	GetLogColorSpace                         *win32.Proc
+	GetLogColorSpaceA                        *win32.Proc
+	GetNamedProfileInfo                      *win32.Proc
+	GetPS2ColorRenderingDictionary           *win32.Proc
+	GetPS2ColorRenderingIntent               *win32.Proc
+	GetPS2ColorSpaceArray                    *win32.Proc
+	GetStandardColorSpaceProfile             *win32.Proc
+	GetStandardColorSpaceProfileA            *win32.Proc
+	InstallColorProfile                      *win32.Proc
+	InstallColorProfileA                     *win32.Proc
+	IsColorProfileTagPresent                 *win32.Proc
+	IsColorProfileValid                      *win32.Proc
+	OpenColorProfile                         *win32.Proc
+	OpenColorProfileA                        *win32.Proc
+	RegisterCMM                              *win32.Proc
+	RegisterCMMA                             *win32.Proc
+	SelectCMM                                *win32.Proc
+	SetColorProfileElement                   *win32.Proc
+	SetColorProfileElementReference          *win32.Proc
+	SetColorProfileElementSize               *win32.Proc
+	SetColorProfileHeader                    *win32.Proc
+	SetColorSpace                            *win32.Proc
+	SetDeviceGammaRamp                       *win32.Proc
+	SetICMMode                               *win32.Proc
+	SetICMProfile                            *win32.Proc
+	SetICMProfileA                           *win32.Proc
+	SetStandardColorSpaceProfile             *win32.Proc
+	SetStandardColorSpaceProfileA            *win32.Proc
+	SetupColorMatching                       *win32.Proc
+	SetupColorMatchingA                      *win32.Proc
+	TranslateBitmapBits                      *win32.Proc
+	TranslateColors                          *win32.Proc
+	UninstallColorProfile                    *win32.Proc
+	UninstallColorProfileA                   *win32.Proc
+	UnregisterCMM                            *win32.Proc
+	UnregisterCMMA                           *win32.Proc
+	UpdateICMRegKey                          *win32.Proc
+	UpdateICMRegKeyA                         *win32.Proc
+	WcsAssociateColorProfileWithDevice       *win32.Proc
+	WcsCheckColors                           *win32.Proc
+	WcsCreateIccProfile                      *win32.Proc
+	WcsDisassociateColorProfileFromDevice    *win32.Proc
+	WcsEnumColorProfiles                     *win32.Proc
+	WcsEnumColorProfilesSize                 *win32.Proc
+	WcsGetCalibrationManagementState         *win32.Proc
+	WcsGetDefaultColorProfile                *win32.Proc
+	WcsGetDefaultColorProfileSize            *win32.Proc
+	WcsGetDefaultRenderingIntent             *win32.Proc
+	WcsGetUsePerUserProfiles                 *win32.Proc
+	WcsOpenColorProfile                      *win32.Proc
+	WcsOpenColorProfileA                     *win32.Proc
+	WcsSetCalibrationManagementState         *win32.Proc
+	WcsSetDefaultColorProfile                *win32.Proc
+	WcsSetDefaultRenderingIntent             *win32.Proc
+	WcsSetUsePerUserProfiles                 *win32.Proc
+	WcsTranslateColors                       *win32.Proc
+}{
+	AssociateColorProfileWithDevice:          procAssociateColorProfileWithDevice,
+	AssociateColorProfileWithDeviceA:         procAssociateColorProfileWithDeviceA,
+	CMCheckColors:                            procCMCheckColors,
+	CMCheckColorsInGamut:                     procCMCheckColorsInGamut,
+	CMCheckRGBs:                              procCMCheckRGBs,
+	CMConvertColorNameToIndex:                procCMConvertColorNameToIndex,
+	CMConvertIndexToColorName:                procCMConvertIndexToColorName,
+	CMCreateDeviceLinkProfile:                procCMCreateDeviceLinkProfile,
+	CMCreateMultiProfileTransform:            procCMCreateMultiProfileTransform,
+	CMCreateProfile:                          procCMCreateProfile,
+	CMCreateProfileW:                         procCMCreateProfileW,
+	CMCreateTransform:                        procCMCreateTransform,
+	CMCreateTransformExt:                     procCMCreateTransformExt,
+	CMCreateTransformExtW:                    procCMCreateTransformExtW,
+	CMCreateTransformW:                       procCMCreateTransformW,
+	CMDeleteTransform:                        procCMDeleteTransform,
+	CMGetInfo:                                procCMGetInfo,
+	CMGetNamedProfileInfo:                    procCMGetNamedProfileInfo,
+	CMIsProfileValid:                         procCMIsProfileValid,
+	CMTranslateColors:                        procCMTranslateColors,
+	CMTranslateRGB:                           procCMTranslateRGB,
+	CMTranslateRGBs:                          procCMTranslateRGBs,
+	CMTranslateRGBsExt:                       procCMTranslateRGBsExt,
+	CheckBitmapBits:                          procCheckBitmapBits,
+	CheckColors:                              procCheckColors,
+	CheckColorsInGamut:                       procCheckColorsInGamut,
+	CloseColorProfile:                        procCloseColorProfile,
+	ColorCorrectPalette:                      procColorCorrectPalette,
+	ColorMatchToTarget:                       procColorMatchToTarget,
+	ColorProfileAddDisplayAssociation:        procColorProfileAddDisplayAssociation,
+	ColorProfileGetDeviceCapabilities:        procColorProfileGetDeviceCapabilities,
+	ColorProfileGetDisplayDefault:            procColorProfileGetDisplayDefault,
+	ColorProfileGetDisplayList:               procColorProfileGetDisplayList,
+	ColorProfileGetDisplayUserScope:          procColorProfileGetDisplayUserScope,
+	ColorProfileRemoveDisplayAssociation:     procColorProfileRemoveDisplayAssociation,
+	ColorProfileSetDisplayDefaultAssociation: procColorProfileSetDisplayDefaultAssociation,
+	ConvertColorNameToIndex:                  procConvertColorNameToIndex,
+	ConvertIndexToColorName:                  procConvertIndexToColorName,
+	CreateColorSpace:                         procCreateColorSpace,
+	CreateColorSpaceA:                        procCreateColorSpaceA,
+	CreateColorTransform:                     procCreateColorTransform,
+	CreateColorTransformA:                    procCreateColorTransformA,
+	CreateDeviceLinkProfile:                  procCreateDeviceLinkProfile,
+	CreateMultiProfileTransform:              procCreateMultiProfileTransform,
+	CreateProfileFromLogColorSpace:           procCreateProfileFromLogColorSpace,
+	CreateProfileFromLogColorSpaceA:          procCreateProfileFromLogColorSpaceA,
+	DeleteColorSpace:                         procDeleteColorSpace,
+	DeleteColorTransform:                     procDeleteColorTransform,
+	DisassociateColorProfileFromDevice:       procDisassociateColorProfileFromDevice,
+	DisassociateColorProfileFromDeviceA:      procDisassociateColorProfileFromDeviceA,
+	EnumColorProfiles:                        procEnumColorProfiles,
+	EnumColorProfilesA:                       procEnumColorProfilesA,
+	EnumICMProfiles:                          procEnumICMProfiles,
+	EnumICMProfilesA:                         procEnumICMProfilesA,
+	GetCMMInfo:                               procGetCMMInfo,
+	GetColorDirectory:                        procGetColorDirectory,
+	GetColorDirectoryA:                       procGetColorDirectoryA,
+	GetColorProfileElement:                   procGetColorProfileElement,
+	GetColorProfileElementTag:                procGetColorProfileElementTag,
+	GetColorProfileFromHandle:                procGetColorProfileFromHandle,
+	GetColorProfileHeader:                    procGetColorProfileHeader,
+	GetColorSpace:                            procGetColorSpace,
+	GetCountColorProfileElements:             procGetCountColorProfileElements,
+	GetDeviceGammaRamp:                       procGetDeviceGammaRamp,
+	GetICMProfile:                            procGetICMProfile,
+	GetICMProfileA:                           procGetICMProfileA,
+	GetLogColorSpace:                         procGetLogColorSpace,
+	GetLogColorSpaceA:                        procGetLogColorSpaceA,
+	GetNamedProfileInfo:                      procGetNamedProfileInfo,
+	GetPS2ColorRenderingDictionary:           procGetPS2ColorRenderingDictionary,
+	GetPS2ColorRenderingIntent:               procGetPS2ColorRenderingIntent,
+	GetPS2ColorSpaceArray:                    procGetPS2ColorSpaceArray,
+	GetStandardColorSpaceProfile:             procGetStandardColorSpaceProfile,
+	GetStandardColorSpaceProfileA:            procGetStandardColorSpaceProfileA,
+	InstallColorProfile:                      procInstallColorProfile,
+	InstallColorProfileA:                     procInstallColorProfileA,
+	IsColorProfileTagPresent:                 procIsColorProfileTagPresent,
+	IsColorProfileValid:                      procIsColorProfileValid,
+	OpenColorProfile:                         procOpenColorProfile,
+	OpenColorProfileA:                        procOpenColorProfileA,
+	RegisterCMM:                              procRegisterCMM,
+	RegisterCMMA:                             procRegisterCMMA,
+	SelectCMM:                                procSelectCMM,
+	SetColorProfileElement:                   procSetColorProfileElement,
+	SetColorProfileElementReference:          procSetColorProfileElementReference,
+	SetColorProfileElementSize:               procSetColorProfileElementSize,
+	SetColorProfileHeader:                    procSetColorProfileHeader,
+	SetColorSpace:                            procSetColorSpace,
+	SetDeviceGammaRamp:                       procSetDeviceGammaRamp,
+	SetICMMode:                               procSetICMMode,
+	SetICMProfile:                            procSetICMProfile,
+	SetICMProfileA:                           procSetICMProfileA,
+	SetStandardColorSpaceProfile:             procSetStandardColorSpaceProfile,
+	SetStandardColorSpaceProfileA:            procSetStandardColorSpaceProfileA,
+	SetupColorMatching:                       procSetupColorMatching,
+	SetupColorMatchingA:                      procSetupColorMatchingA,
+	TranslateBitmapBits:                      procTranslateBitmapBits,
+	TranslateColors:                          procTranslateColors,
+	UninstallColorProfile:                    procUninstallColorProfile,
+	UninstallColorProfileA:                   procUninstallColorProfileA,
+	UnregisterCMM:                            procUnregisterCMM,
+	UnregisterCMMA:                           procUnregisterCMMA,
+	UpdateICMRegKey:                          procUpdateICMRegKey,
+	UpdateICMRegKeyA:                         procUpdateICMRegKeyA,
+	WcsAssociateColorProfileWithDevice:       procWcsAssociateColorProfileWithDevice,
+	WcsCheckColors:                           procWcsCheckColors,
+	WcsCreateIccProfile:                      procWcsCreateIccProfile,
+	WcsDisassociateColorProfileFromDevice:    procWcsDisassociateColorProfileFromDevice,
+	WcsEnumColorProfiles:                     procWcsEnumColorProfiles,
+	WcsEnumColorProfilesSize:                 procWcsEnumColorProfilesSize,
+	WcsGetCalibrationManagementState:         procWcsGetCalibrationManagementState,
+	WcsGetDefaultColorProfile:                procWcsGetDefaultColorProfile,
+	WcsGetDefaultColorProfileSize:            procWcsGetDefaultColorProfileSize,
+	WcsGetDefaultRenderingIntent:             procWcsGetDefaultRenderingIntent,
+	WcsGetUsePerUserProfiles:                 procWcsGetUsePerUserProfiles,
+	WcsOpenColorProfile:                      procWcsOpenColorProfile,
+	WcsOpenColorProfileA:                     procWcsOpenColorProfileA,
+	WcsSetCalibrationManagementState:         procWcsSetCalibrationManagementState,
+	WcsSetDefaultColorProfile:                procWcsSetDefaultColorProfile,
+	WcsSetDefaultRenderingIntent:             procWcsSetDefaultRenderingIntent,
+	WcsSetUsePerUserProfiles:                 procWcsSetUsePerUserProfiles,
+	WcsTranslateColors:                       procWcsTranslateColors,
+}
+
 // AssociateColorProfileWithDevice calls mscms!AssociateColorProfileWithDeviceW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-associatecolorprofilewithdevicew
-func AssociateColorProfileWithDevice(pMachineName string, pProfileName string, pDeviceName string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func AssociateColorProfileWithDevice(pMachineName *string, pProfileName string, pDeviceName string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	_pDeviceName := win32.UTF16Ptr(pDeviceName)
 	r1, _, _ := syscall.SyscallN(procAssociateColorProfileWithDevice.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)), uintptr(unsafe.Pointer(_pDeviceName)))
@@ -537,8 +789,8 @@ func DeleteColorTransform(hxform uintptr) bool {
 
 // DisassociateColorProfileFromDevice calls mscms!DisassociateColorProfileFromDeviceW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-disassociatecolorprofilefromdevicew
-func DisassociateColorProfileFromDevice(pMachineName string, pProfileName string, pDeviceName string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func DisassociateColorProfileFromDevice(pMachineName *string, pProfileName string, pDeviceName string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	_pDeviceName := win32.UTF16Ptr(pDeviceName)
 	r1, _, _ := syscall.SyscallN(procDisassociateColorProfileFromDevice.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)), uintptr(unsafe.Pointer(_pDeviceName)))
@@ -554,8 +806,8 @@ func DisassociateColorProfileFromDeviceA(pMachineName foundation.PSTR, pProfileN
 
 // EnumColorProfiles calls mscms!EnumColorProfilesW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-enumcolorprofilesw
-func EnumColorProfiles(pMachineName string, pEnumRecord *ENUMTYPEW, pEnumerationBuffer *byte, pdwSizeOfEnumerationBuffer *uint32, pnProfiles *uint32) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func EnumColorProfiles(pMachineName *string, pEnumRecord *ENUMTYPEW, pEnumerationBuffer *byte, pdwSizeOfEnumerationBuffer *uint32, pnProfiles *uint32) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	r1, _, _ := syscall.SyscallN(procEnumColorProfiles.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(pEnumRecord)), uintptr(unsafe.Pointer(pEnumerationBuffer)), uintptr(unsafe.Pointer(pdwSizeOfEnumerationBuffer)), uintptr(unsafe.Pointer(pnProfiles)))
 	return r1 != 0
 }
@@ -592,8 +844,8 @@ func GetCMMInfo(hColorTransform uintptr, param1 uint32) uint32 {
 
 // GetColorDirectory calls mscms!GetColorDirectoryW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolordirectoryw
-func GetColorDirectory(pMachineName string, pBuffer foundation.PWSTR, pdwSize *uint32) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func GetColorDirectory(pMachineName *string, pBuffer foundation.PWSTR, pdwSize *uint32) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	r1, _, _ := syscall.SyscallN(procGetColorDirectory.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pdwSize)))
 	return r1 != 0
 }
@@ -718,8 +970,8 @@ func GetPS2ColorSpaceArray(hProfile uintptr, dwIntent uint32, dwCSAType uint32, 
 
 // GetStandardColorSpaceProfile calls mscms!GetStandardColorSpaceProfileW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getstandardcolorspaceprofilew
-func GetStandardColorSpaceProfile(pMachineName string, dwSCS uint32, pBuffer foundation.PWSTR, pcbSize *uint32) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func GetStandardColorSpaceProfile(pMachineName *string, dwSCS uint32, pBuffer foundation.PWSTR, pcbSize *uint32) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	r1, _, _ := syscall.SyscallN(procGetStandardColorSpaceProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(dwSCS), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbSize)))
 	return r1 != 0
 }
@@ -733,8 +985,8 @@ func GetStandardColorSpaceProfileA(pMachineName foundation.PSTR, dwSCS uint32, p
 
 // InstallColorProfile calls mscms!InstallColorProfileW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-installcolorprofilew
-func InstallColorProfile(pMachineName string, pProfileName string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func InstallColorProfile(pMachineName *string, pProfileName string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	r1, _, _ := syscall.SyscallN(procInstallColorProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)))
 	return r1 != 0
@@ -777,8 +1029,8 @@ func OpenColorProfileA(pProfile *PROFILE, dwDesiredAccess uint32, dwShareMode ui
 
 // RegisterCMM calls mscms!RegisterCMMW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-registercmmw
-func RegisterCMM(pMachineName string, cmmID uint32, pCMMdll string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func RegisterCMM(pMachineName *string, cmmID uint32, pCMMdll string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pCMMdll := win32.UTF16Ptr(pCMMdll)
 	r1, _, _ := syscall.SyscallN(procRegisterCMM.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(cmmID), uintptr(unsafe.Pointer(_pCMMdll)))
 	return r1 != 0
@@ -869,8 +1121,8 @@ func SetICMProfileA(hdc graphicsgdi.HDC, lpFileName foundation.PSTR) bool {
 
 // SetStandardColorSpaceProfile calls mscms!SetStandardColorSpaceProfileW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setstandardcolorspaceprofilew
-func SetStandardColorSpaceProfile(pMachineName string, dwProfileID uint32, pProfileName string) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func SetStandardColorSpaceProfile(pMachineName *string, dwProfileID uint32, pProfileName string) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	r1, _, _ := syscall.SyscallN(procSetStandardColorSpaceProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(dwProfileID), uintptr(unsafe.Pointer(_pProfileName)))
 	return r1 != 0
@@ -913,8 +1165,8 @@ func TranslateColors(hColorTransform uintptr, paInputColors *COLOR, nColors uint
 
 // UninstallColorProfile calls mscms!UninstallColorProfileW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-uninstallcolorprofilew
-func UninstallColorProfile(pMachineName string, pProfileName string, bDelete bool) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func UninstallColorProfile(pMachineName *string, pProfileName string, bDelete bool) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	_pProfileName := win32.UTF16Ptr(pProfileName)
 	_bDelete := win32.Bool32(bDelete)
 	r1, _, _ := syscall.SyscallN(procUninstallColorProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)), uintptr(_bDelete))
@@ -931,8 +1183,8 @@ func UninstallColorProfileA(pMachineName foundation.PSTR, pProfileName foundatio
 
 // UnregisterCMM calls mscms!UnregisterCMMW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-unregistercmmw
-func UnregisterCMM(pMachineName string, cmmID uint32) bool {
-	_pMachineName := win32.UTF16Ptr(pMachineName)
+func UnregisterCMM(pMachineName *string, cmmID uint32) bool {
+	_pMachineName := win32.UTF16PtrOrNil(pMachineName)
 	r1, _, _ := syscall.SyscallN(procUnregisterCMM.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(cmmID))
 	return r1 != 0
 }
@@ -1029,16 +1281,16 @@ func WcsGetCalibrationManagementState(pbIsEnabled *foundation.BOOL) bool {
 
 // WcsGetDefaultColorProfile calls mscms!WcsGetDefaultColorProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetdefaultcolorprofile
-func WcsGetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, cbProfileName uint32, pProfileName foundation.PWSTR) bool {
-	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+func WcsGetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName *string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, cbProfileName uint32, pProfileName foundation.PWSTR) bool {
+	_pDeviceName := win32.UTF16PtrOrNil(pDeviceName)
 	r1, _, _ := syscall.SyscallN(procWcsGetDefaultColorProfile.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(cbProfileName), uintptr(unsafe.Pointer(pProfileName)))
 	return r1 != 0
 }
 
 // WcsGetDefaultColorProfileSize calls mscms!WcsGetDefaultColorProfileSize.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetdefaultcolorprofilesize
-func WcsGetDefaultColorProfileSize(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pcbProfileName *uint32) bool {
-	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+func WcsGetDefaultColorProfileSize(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName *string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pcbProfileName *uint32) bool {
+	_pDeviceName := win32.UTF16PtrOrNil(pDeviceName)
 	r1, _, _ := syscall.SyscallN(procWcsGetDefaultColorProfileSize.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(unsafe.Pointer(pcbProfileName)))
 	return r1 != 0
 }
@@ -1082,9 +1334,9 @@ func WcsSetCalibrationManagementState(bIsEnabled bool) bool {
 
 // WcsSetDefaultColorProfile calls mscms!WcsSetDefaultColorProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcssetdefaultcolorprofile
-func WcsSetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pProfileName string) bool {
-	_pDeviceName := win32.UTF16Ptr(pDeviceName)
-	_pProfileName := win32.UTF16Ptr(pProfileName)
+func WcsSetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName *string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pProfileName *string) bool {
+	_pDeviceName := win32.UTF16PtrOrNil(pDeviceName)
+	_pProfileName := win32.UTF16PtrOrNil(pProfileName)
 	r1, _, _ := syscall.SyscallN(procWcsSetDefaultColorProfile.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(unsafe.Pointer(_pProfileName)))
 	return r1 != 0
 }

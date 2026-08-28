@@ -4,10 +4,12 @@
 
 package ole
 
-// LPFNOLEUIHOOK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uint32.
+// LPFNOLEUIHOOK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFNOLEUIHOOK uintptr
 
-// OLESTREAMQUERYCONVERTOLELINKCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, unsafe.Pointer) foundation.HRESULT.
+// OLESTREAMQUERYCONVERTOLELINKCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type OLESTREAMQUERYCONVERTOLELINKCALLBACK uintptr

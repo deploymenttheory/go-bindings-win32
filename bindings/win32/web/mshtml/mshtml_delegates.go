@@ -4,22 +4,27 @@
 
 package mshtml
 
-// IEISXMLNSREGISTEREDFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *win32.GUID) foundation.HRESULT.
+// IEISXMLNSREGISTEREDFN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *win32.GUID) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type IEISXMLNSREGISTEREDFN uintptr
 
-// IEREGISTERXMLNSFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, win32.GUID, foundation.BOOL) foundation.HRESULT.
+// IEREGISTERXMLNSFN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, win32.GUID, foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type IEREGISTERXMLNSFN uintptr
 
-// SHOWHTMLDIALOGEXFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *systemcom.IMoniker, uint32, *systemvariant.VARIANT, foundation.PWSTR, *systemvariant.VARIANT) foundation.HRESULT.
+// SHOWHTMLDIALOGEXFN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *systemcom.IMoniker, uint32, *systemvariant.VARIANT, foundation.PWSTR, *systemvariant.VARIANT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SHOWHTMLDIALOGEXFN uintptr
 
-// SHOWHTMLDIALOGFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *systemcom.IMoniker, *systemvariant.VARIANT, foundation.PWSTR, *systemvariant.VARIANT) foundation.HRESULT.
+// SHOWHTMLDIALOGFN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *systemcom.IMoniker, *systemvariant.VARIANT, foundation.PWSTR, *systemvariant.VARIANT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SHOWHTMLDIALOGFN uintptr
 
-// SHOWMODELESSHTMLDIALOGFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *systemcom.IMoniker, *systemvariant.VARIANT, *systemvariant.VARIANT, **IHTMLWindow2) foundation.HRESULT.
+// SHOWMODELESSHTMLDIALOGFN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *systemcom.IMoniker, *systemvariant.VARIANT, *systemvariant.VARIANT, **IHTMLWindow2) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SHOWMODELESSHTMLDIALOGFN uintptr

@@ -5,6 +5,7 @@
 package alljoyn
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -183,6 +184,8 @@ var (
 	procAlljoyn_busattachment_registerbusobject                                     = modMSAJApi.NewProc("alljoyn_busattachment_registerbusobject")
 	procAlljoyn_busattachment_registerbusobject_secure                              = modMSAJApi.NewProc("alljoyn_busattachment_registerbusobject_secure")
 	procAlljoyn_busattachment_registerkeystorelistener                              = modMSAJApi.NewProc("alljoyn_busattachment_registerkeystorelistener")
+	procAlljoyn_busattachment_registersignalhandler                                 = modMSAJApi.NewProc("alljoyn_busattachment_registersignalhandler")
+	procAlljoyn_busattachment_registersignalhandlerwithrule                         = modMSAJApi.NewProc("alljoyn_busattachment_registersignalhandlerwithrule")
 	procAlljoyn_busattachment_releasename                                           = modMSAJApi.NewProc("alljoyn_busattachment_releasename")
 	procAlljoyn_busattachment_reloadkeystore                                        = modMSAJApi.NewProc("alljoyn_busattachment_reloadkeystore")
 	procAlljoyn_busattachment_removematch                                           = modMSAJApi.NewProc("alljoyn_busattachment_removematch")
@@ -204,12 +207,15 @@ var (
 	procAlljoyn_busattachment_unregisterapplicationstatelistener                    = modMSAJApi.NewProc("alljoyn_busattachment_unregisterapplicationstatelistener")
 	procAlljoyn_busattachment_unregisterbuslistener                                 = modMSAJApi.NewProc("alljoyn_busattachment_unregisterbuslistener")
 	procAlljoyn_busattachment_unregisterbusobject                                   = modMSAJApi.NewProc("alljoyn_busattachment_unregisterbusobject")
+	procAlljoyn_busattachment_unregistersignalhandler                               = modMSAJApi.NewProc("alljoyn_busattachment_unregistersignalhandler")
+	procAlljoyn_busattachment_unregistersignalhandlerwithrule                       = modMSAJApi.NewProc("alljoyn_busattachment_unregistersignalhandlerwithrule")
 	procAlljoyn_busattachment_whoimplements_interface                               = modMSAJApi.NewProc("alljoyn_busattachment_whoimplements_interface")
 	procAlljoyn_busattachment_whoimplements_interfaces                              = modMSAJApi.NewProc("alljoyn_busattachment_whoimplements_interfaces")
 	procAlljoyn_buslistener_create                                                  = modMSAJApi.NewProc("alljoyn_buslistener_create")
 	procAlljoyn_buslistener_destroy                                                 = modMSAJApi.NewProc("alljoyn_buslistener_destroy")
 	procAlljoyn_busobject_addinterface                                              = modMSAJApi.NewProc("alljoyn_busobject_addinterface")
 	procAlljoyn_busobject_addinterface_announced                                    = modMSAJApi.NewProc("alljoyn_busobject_addinterface_announced")
+	procAlljoyn_busobject_addmethodhandler                                          = modMSAJApi.NewProc("alljoyn_busobject_addmethodhandler")
 	procAlljoyn_busobject_addmethodhandlers                                         = modMSAJApi.NewProc("alljoyn_busobject_addmethodhandlers")
 	procAlljoyn_busobject_cancelsessionlessmessage                                  = modMSAJApi.NewProc("alljoyn_busobject_cancelsessionlessmessage")
 	procAlljoyn_busobject_cancelsessionlessmessage_serial                           = modMSAJApi.NewProc("alljoyn_busobject_cancelsessionlessmessage_serial")
@@ -226,6 +232,7 @@ var (
 	procAlljoyn_busobject_methodreply_err                                           = modMSAJApi.NewProc("alljoyn_busobject_methodreply_err")
 	procAlljoyn_busobject_methodreply_status                                        = modMSAJApi.NewProc("alljoyn_busobject_methodreply_status")
 	procAlljoyn_busobject_setannounceflag                                           = modMSAJApi.NewProc("alljoyn_busobject_setannounceflag")
+	procAlljoyn_busobject_signal                                                    = modMSAJApi.NewProc("alljoyn_busobject_signal")
 	procAlljoyn_credentials_clear                                                   = modMSAJApi.NewProc("alljoyn_credentials_clear")
 	procAlljoyn_credentials_create                                                  = modMSAJApi.NewProc("alljoyn_credentials_create")
 	procAlljoyn_credentials_destroy                                                 = modMSAJApi.NewProc("alljoyn_credentials_destroy")
@@ -283,6 +290,17 @@ var (
 	procAlljoyn_interfacedescription_hasproperty                                    = modMSAJApi.NewProc("alljoyn_interfacedescription_hasproperty")
 	procAlljoyn_interfacedescription_introspect                                     = modMSAJApi.NewProc("alljoyn_interfacedescription_introspect")
 	procAlljoyn_interfacedescription_issecure                                       = modMSAJApi.NewProc("alljoyn_interfacedescription_issecure")
+	procAlljoyn_interfacedescription_member_eql                                     = modMSAJApi.NewProc("alljoyn_interfacedescription_member_eql")
+	procAlljoyn_interfacedescription_member_getannotation                           = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getannotation")
+	procAlljoyn_interfacedescription_member_getannotationatindex                    = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getannotationatindex")
+	procAlljoyn_interfacedescription_member_getannotationscount                     = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getannotationscount")
+	procAlljoyn_interfacedescription_member_getargannotation                        = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getargannotation")
+	procAlljoyn_interfacedescription_member_getargannotationatindex                 = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getargannotationatindex")
+	procAlljoyn_interfacedescription_member_getargannotationscount                  = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getargannotationscount")
+	procAlljoyn_interfacedescription_property_eql                                   = modMSAJApi.NewProc("alljoyn_interfacedescription_property_eql")
+	procAlljoyn_interfacedescription_property_getannotation                         = modMSAJApi.NewProc("alljoyn_interfacedescription_property_getannotation")
+	procAlljoyn_interfacedescription_property_getannotationatindex                  = modMSAJApi.NewProc("alljoyn_interfacedescription_property_getannotationatindex")
+	procAlljoyn_interfacedescription_property_getannotationscount                   = modMSAJApi.NewProc("alljoyn_interfacedescription_property_getannotationscount")
 	procAlljoyn_interfacedescription_setargdescription                              = modMSAJApi.NewProc("alljoyn_interfacedescription_setargdescription")
 	procAlljoyn_interfacedescription_setargdescriptionforlanguage                   = modMSAJApi.NewProc("alljoyn_interfacedescription_setargdescriptionforlanguage")
 	procAlljoyn_interfacedescription_setdescription                                 = modMSAJApi.NewProc("alljoyn_interfacedescription_setdescription")
@@ -381,6 +399,7 @@ var (
 	procAlljoyn_msgarg_set_and_stabilize                                            = modMSAJApi.NewProc("alljoyn_msgarg_set_and_stabilize")
 	procAlljoyn_msgarg_set_bool                                                     = modMSAJApi.NewProc("alljoyn_msgarg_set_bool")
 	procAlljoyn_msgarg_set_bool_array                                               = modMSAJApi.NewProc("alljoyn_msgarg_set_bool_array")
+	procAlljoyn_msgarg_set_double                                                   = modMSAJApi.NewProc("alljoyn_msgarg_set_double")
 	procAlljoyn_msgarg_set_double_array                                             = modMSAJApi.NewProc("alljoyn_msgarg_set_double_array")
 	procAlljoyn_msgarg_set_int16                                                    = modMSAJApi.NewProc("alljoyn_msgarg_set_int16")
 	procAlljoyn_msgarg_set_int16_array                                              = modMSAJApi.NewProc("alljoyn_msgarg_set_int16_array")
@@ -481,8 +500,11 @@ var (
 	procAlljoyn_proxybusobject_issecure                                             = modMSAJApi.NewProc("alljoyn_proxybusobject_issecure")
 	procAlljoyn_proxybusobject_isvalid                                              = modMSAJApi.NewProc("alljoyn_proxybusobject_isvalid")
 	procAlljoyn_proxybusobject_methodcall                                           = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcall")
+	procAlljoyn_proxybusobject_methodcall_member                                    = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcall_member")
+	procAlljoyn_proxybusobject_methodcall_member_noreply                            = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcall_member_noreply")
 	procAlljoyn_proxybusobject_methodcall_noreply                                   = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcall_noreply")
 	procAlljoyn_proxybusobject_methodcallasync                                      = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcallasync")
+	procAlljoyn_proxybusobject_methodcallasync_member                               = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcallasync_member")
 	procAlljoyn_proxybusobject_parsexml                                             = modMSAJApi.NewProc("alljoyn_proxybusobject_parsexml")
 	procAlljoyn_proxybusobject_ref_create                                           = modMSAJApi.NewProc("alljoyn_proxybusobject_ref_create")
 	procAlljoyn_proxybusobject_ref_decref                                           = modMSAJApi.NewProc("alljoyn_proxybusobject_ref_decref")
@@ -546,6 +568,1108 @@ var (
 	procQCC_StatusText                                                              = modMSAJApi.NewProc("QCC_StatusText")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AllJoynAcceptBusConnection                                                  *win32.Proc
+	AllJoynCloseBusHandle                                                       *win32.Proc
+	AllJoynConnectToBus                                                         *win32.Proc
+	AllJoynCreateBus                                                            *win32.Proc
+	AllJoynEnumEvents                                                           *win32.Proc
+	AllJoynEventSelect                                                          *win32.Proc
+	AllJoynReceiveFromBus                                                       *win32.Proc
+	AllJoynSendToBus                                                            *win32.Proc
+	Alljoyn_aboutdata_create                                                    *win32.Proc
+	Alljoyn_aboutdata_create_empty                                              *win32.Proc
+	Alljoyn_aboutdata_create_full                                               *win32.Proc
+	Alljoyn_aboutdata_createfrommsgarg                                          *win32.Proc
+	Alljoyn_aboutdata_createfromxml                                             *win32.Proc
+	Alljoyn_aboutdata_destroy                                                   *win32.Proc
+	Alljoyn_aboutdata_getaboutdata                                              *win32.Proc
+	Alljoyn_aboutdata_getajsoftwareversion                                      *win32.Proc
+	Alljoyn_aboutdata_getannouncedaboutdata                                     *win32.Proc
+	Alljoyn_aboutdata_getappid                                                  *win32.Proc
+	Alljoyn_aboutdata_getappname                                                *win32.Proc
+	Alljoyn_aboutdata_getdateofmanufacture                                      *win32.Proc
+	Alljoyn_aboutdata_getdefaultlanguage                                        *win32.Proc
+	Alljoyn_aboutdata_getdescription                                            *win32.Proc
+	Alljoyn_aboutdata_getdeviceid                                               *win32.Proc
+	Alljoyn_aboutdata_getdevicename                                             *win32.Proc
+	Alljoyn_aboutdata_getfield                                                  *win32.Proc
+	Alljoyn_aboutdata_getfields                                                 *win32.Proc
+	Alljoyn_aboutdata_getfieldsignature                                         *win32.Proc
+	Alljoyn_aboutdata_gethardwareversion                                        *win32.Proc
+	Alljoyn_aboutdata_getmanufacturer                                           *win32.Proc
+	Alljoyn_aboutdata_getmodelnumber                                            *win32.Proc
+	Alljoyn_aboutdata_getsoftwareversion                                        *win32.Proc
+	Alljoyn_aboutdata_getsupportedlanguages                                     *win32.Proc
+	Alljoyn_aboutdata_getsupporturl                                             *win32.Proc
+	Alljoyn_aboutdata_isfieldannounced                                          *win32.Proc
+	Alljoyn_aboutdata_isfieldlocalized                                          *win32.Proc
+	Alljoyn_aboutdata_isfieldrequired                                           *win32.Proc
+	Alljoyn_aboutdata_isvalid                                                   *win32.Proc
+	Alljoyn_aboutdata_setappid                                                  *win32.Proc
+	Alljoyn_aboutdata_setappid_fromstring                                       *win32.Proc
+	Alljoyn_aboutdata_setappname                                                *win32.Proc
+	Alljoyn_aboutdata_setdateofmanufacture                                      *win32.Proc
+	Alljoyn_aboutdata_setdefaultlanguage                                        *win32.Proc
+	Alljoyn_aboutdata_setdescription                                            *win32.Proc
+	Alljoyn_aboutdata_setdeviceid                                               *win32.Proc
+	Alljoyn_aboutdata_setdevicename                                             *win32.Proc
+	Alljoyn_aboutdata_setfield                                                  *win32.Proc
+	Alljoyn_aboutdata_sethardwareversion                                        *win32.Proc
+	Alljoyn_aboutdata_setmanufacturer                                           *win32.Proc
+	Alljoyn_aboutdata_setmodelnumber                                            *win32.Proc
+	Alljoyn_aboutdata_setsoftwareversion                                        *win32.Proc
+	Alljoyn_aboutdata_setsupportedlanguage                                      *win32.Proc
+	Alljoyn_aboutdata_setsupporturl                                             *win32.Proc
+	Alljoyn_aboutdatalistener_create                                            *win32.Proc
+	Alljoyn_aboutdatalistener_destroy                                           *win32.Proc
+	Alljoyn_abouticon_clear                                                     *win32.Proc
+	Alljoyn_abouticon_create                                                    *win32.Proc
+	Alljoyn_abouticon_destroy                                                   *win32.Proc
+	Alljoyn_abouticon_getcontent                                                *win32.Proc
+	Alljoyn_abouticon_geturl                                                    *win32.Proc
+	Alljoyn_abouticon_setcontent                                                *win32.Proc
+	Alljoyn_abouticon_setcontent_frommsgarg                                     *win32.Proc
+	Alljoyn_abouticon_seturl                                                    *win32.Proc
+	Alljoyn_abouticonobj_create                                                 *win32.Proc
+	Alljoyn_abouticonobj_destroy                                                *win32.Proc
+	Alljoyn_abouticonproxy_create                                               *win32.Proc
+	Alljoyn_abouticonproxy_destroy                                              *win32.Proc
+	Alljoyn_abouticonproxy_geticon                                              *win32.Proc
+	Alljoyn_abouticonproxy_getversion                                           *win32.Proc
+	Alljoyn_aboutlistener_create                                                *win32.Proc
+	Alljoyn_aboutlistener_destroy                                               *win32.Proc
+	Alljoyn_aboutobj_announce                                                   *win32.Proc
+	Alljoyn_aboutobj_announce_using_datalistener                                *win32.Proc
+	Alljoyn_aboutobj_create                                                     *win32.Proc
+	Alljoyn_aboutobj_destroy                                                    *win32.Proc
+	Alljoyn_aboutobj_unannounce                                                 *win32.Proc
+	Alljoyn_aboutobjectdescription_clear                                        *win32.Proc
+	Alljoyn_aboutobjectdescription_create                                       *win32.Proc
+	Alljoyn_aboutobjectdescription_create_full                                  *win32.Proc
+	Alljoyn_aboutobjectdescription_createfrommsgarg                             *win32.Proc
+	Alljoyn_aboutobjectdescription_destroy                                      *win32.Proc
+	Alljoyn_aboutobjectdescription_getinterfacepaths                            *win32.Proc
+	Alljoyn_aboutobjectdescription_getinterfaces                                *win32.Proc
+	Alljoyn_aboutobjectdescription_getmsgarg                                    *win32.Proc
+	Alljoyn_aboutobjectdescription_getpaths                                     *win32.Proc
+	Alljoyn_aboutobjectdescription_hasinterface                                 *win32.Proc
+	Alljoyn_aboutobjectdescription_hasinterfaceatpath                           *win32.Proc
+	Alljoyn_aboutobjectdescription_haspath                                      *win32.Proc
+	Alljoyn_aboutproxy_create                                                   *win32.Proc
+	Alljoyn_aboutproxy_destroy                                                  *win32.Proc
+	Alljoyn_aboutproxy_getaboutdata                                             *win32.Proc
+	Alljoyn_aboutproxy_getobjectdescription                                     *win32.Proc
+	Alljoyn_aboutproxy_getversion                                               *win32.Proc
+	Alljoyn_applicationstatelistener_create                                     *win32.Proc
+	Alljoyn_applicationstatelistener_destroy                                    *win32.Proc
+	Alljoyn_authlistener_create                                                 *win32.Proc
+	Alljoyn_authlistener_destroy                                                *win32.Proc
+	Alljoyn_authlistener_requestcredentialsresponse                             *win32.Proc
+	Alljoyn_authlistener_setsharedsecret                                        *win32.Proc
+	Alljoyn_authlistener_verifycredentialsresponse                              *win32.Proc
+	Alljoyn_authlistenerasync_create                                            *win32.Proc
+	Alljoyn_authlistenerasync_destroy                                           *win32.Proc
+	Alljoyn_autopinger_adddestination                                           *win32.Proc
+	Alljoyn_autopinger_addpinggroup                                             *win32.Proc
+	Alljoyn_autopinger_create                                                   *win32.Proc
+	Alljoyn_autopinger_destroy                                                  *win32.Proc
+	Alljoyn_autopinger_pause                                                    *win32.Proc
+	Alljoyn_autopinger_removedestination                                        *win32.Proc
+	Alljoyn_autopinger_removepinggroup                                          *win32.Proc
+	Alljoyn_autopinger_resume                                                   *win32.Proc
+	Alljoyn_autopinger_setpinginterval                                          *win32.Proc
+	Alljoyn_busattachment_addlogonentry                                         *win32.Proc
+	Alljoyn_busattachment_addmatch                                              *win32.Proc
+	Alljoyn_busattachment_advertisename                                         *win32.Proc
+	Alljoyn_busattachment_bindsessionport                                       *win32.Proc
+	Alljoyn_busattachment_canceladvertisename                                   *win32.Proc
+	Alljoyn_busattachment_cancelfindadvertisedname                              *win32.Proc
+	Alljoyn_busattachment_cancelfindadvertisednamebytransport                   *win32.Proc
+	Alljoyn_busattachment_cancelwhoimplements_interface                         *win32.Proc
+	Alljoyn_busattachment_cancelwhoimplements_interfaces                        *win32.Proc
+	Alljoyn_busattachment_clearkeys                                             *win32.Proc
+	Alljoyn_busattachment_clearkeystore                                         *win32.Proc
+	Alljoyn_busattachment_connect                                               *win32.Proc
+	Alljoyn_busattachment_create                                                *win32.Proc
+	Alljoyn_busattachment_create_concurrency                                    *win32.Proc
+	Alljoyn_busattachment_createinterface                                       *win32.Proc
+	Alljoyn_busattachment_createinterface_secure                                *win32.Proc
+	Alljoyn_busattachment_createinterfacesfromxml                               *win32.Proc
+	Alljoyn_busattachment_deletedefaultkeystore                                 *win32.Proc
+	Alljoyn_busattachment_deleteinterface                                       *win32.Proc
+	Alljoyn_busattachment_destroy                                               *win32.Proc
+	Alljoyn_busattachment_disconnect                                            *win32.Proc
+	Alljoyn_busattachment_enableconcurrentcallbacks                             *win32.Proc
+	Alljoyn_busattachment_enablepeersecurity                                    *win32.Proc
+	Alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener *win32.Proc
+	Alljoyn_busattachment_findadvertisedname                                    *win32.Proc
+	Alljoyn_busattachment_findadvertisednamebytransport                         *win32.Proc
+	Alljoyn_busattachment_getalljoyndebugobj                                    *win32.Proc
+	Alljoyn_busattachment_getalljoynproxyobj                                    *win32.Proc
+	Alljoyn_busattachment_getconcurrency                                        *win32.Proc
+	Alljoyn_busattachment_getconnectspec                                        *win32.Proc
+	Alljoyn_busattachment_getdbusproxyobj                                       *win32.Proc
+	Alljoyn_busattachment_getglobalguidstring                                   *win32.Proc
+	Alljoyn_busattachment_getinterface                                          *win32.Proc
+	Alljoyn_busattachment_getinterfaces                                         *win32.Proc
+	Alljoyn_busattachment_getkeyexpiration                                      *win32.Proc
+	Alljoyn_busattachment_getpeerguid                                           *win32.Proc
+	Alljoyn_busattachment_getpermissionconfigurator                             *win32.Proc
+	Alljoyn_busattachment_gettimestamp                                          *win32.Proc
+	Alljoyn_busattachment_getuniquename                                         *win32.Proc
+	Alljoyn_busattachment_isconnected                                           *win32.Proc
+	Alljoyn_busattachment_ispeersecurityenabled                                 *win32.Proc
+	Alljoyn_busattachment_isstarted                                             *win32.Proc
+	Alljoyn_busattachment_isstopping                                            *win32.Proc
+	Alljoyn_busattachment_join                                                  *win32.Proc
+	Alljoyn_busattachment_joinsession                                           *win32.Proc
+	Alljoyn_busattachment_joinsessionasync                                      *win32.Proc
+	Alljoyn_busattachment_leavesession                                          *win32.Proc
+	Alljoyn_busattachment_namehasowner                                          *win32.Proc
+	Alljoyn_busattachment_ping                                                  *win32.Proc
+	Alljoyn_busattachment_registeraboutlistener                                 *win32.Proc
+	Alljoyn_busattachment_registerapplicationstatelistener                      *win32.Proc
+	Alljoyn_busattachment_registerbuslistener                                   *win32.Proc
+	Alljoyn_busattachment_registerbusobject                                     *win32.Proc
+	Alljoyn_busattachment_registerbusobject_secure                              *win32.Proc
+	Alljoyn_busattachment_registerkeystorelistener                              *win32.Proc
+	Alljoyn_busattachment_registersignalhandler                                 *win32.Proc
+	Alljoyn_busattachment_registersignalhandlerwithrule                         *win32.Proc
+	Alljoyn_busattachment_releasename                                           *win32.Proc
+	Alljoyn_busattachment_reloadkeystore                                        *win32.Proc
+	Alljoyn_busattachment_removematch                                           *win32.Proc
+	Alljoyn_busattachment_removesessionmember                                   *win32.Proc
+	Alljoyn_busattachment_requestname                                           *win32.Proc
+	Alljoyn_busattachment_secureconnection                                      *win32.Proc
+	Alljoyn_busattachment_secureconnectionasync                                 *win32.Proc
+	Alljoyn_busattachment_setdaemondebug                                        *win32.Proc
+	Alljoyn_busattachment_setkeyexpiration                                      *win32.Proc
+	Alljoyn_busattachment_setlinktimeout                                        *win32.Proc
+	Alljoyn_busattachment_setlinktimeoutasync                                   *win32.Proc
+	Alljoyn_busattachment_setsessionlistener                                    *win32.Proc
+	Alljoyn_busattachment_start                                                 *win32.Proc
+	Alljoyn_busattachment_stop                                                  *win32.Proc
+	Alljoyn_busattachment_unbindsessionport                                     *win32.Proc
+	Alljoyn_busattachment_unregisteraboutlistener                               *win32.Proc
+	Alljoyn_busattachment_unregisterallaboutlisteners                           *win32.Proc
+	Alljoyn_busattachment_unregisterallhandlers                                 *win32.Proc
+	Alljoyn_busattachment_unregisterapplicationstatelistener                    *win32.Proc
+	Alljoyn_busattachment_unregisterbuslistener                                 *win32.Proc
+	Alljoyn_busattachment_unregisterbusobject                                   *win32.Proc
+	Alljoyn_busattachment_unregistersignalhandler                               *win32.Proc
+	Alljoyn_busattachment_unregistersignalhandlerwithrule                       *win32.Proc
+	Alljoyn_busattachment_whoimplements_interface                               *win32.Proc
+	Alljoyn_busattachment_whoimplements_interfaces                              *win32.Proc
+	Alljoyn_buslistener_create                                                  *win32.Proc
+	Alljoyn_buslistener_destroy                                                 *win32.Proc
+	Alljoyn_busobject_addinterface                                              *win32.Proc
+	Alljoyn_busobject_addinterface_announced                                    *win32.Proc
+	Alljoyn_busobject_addmethodhandler                                          *win32.Proc
+	Alljoyn_busobject_addmethodhandlers                                         *win32.Proc
+	Alljoyn_busobject_cancelsessionlessmessage                                  *win32.Proc
+	Alljoyn_busobject_cancelsessionlessmessage_serial                           *win32.Proc
+	Alljoyn_busobject_create                                                    *win32.Proc
+	Alljoyn_busobject_destroy                                                   *win32.Proc
+	Alljoyn_busobject_emitpropertieschanged                                     *win32.Proc
+	Alljoyn_busobject_emitpropertychanged                                       *win32.Proc
+	Alljoyn_busobject_getannouncedinterfacenames                                *win32.Proc
+	Alljoyn_busobject_getbusattachment                                          *win32.Proc
+	Alljoyn_busobject_getname                                                   *win32.Proc
+	Alljoyn_busobject_getpath                                                   *win32.Proc
+	Alljoyn_busobject_issecure                                                  *win32.Proc
+	Alljoyn_busobject_methodreply_args                                          *win32.Proc
+	Alljoyn_busobject_methodreply_err                                           *win32.Proc
+	Alljoyn_busobject_methodreply_status                                        *win32.Proc
+	Alljoyn_busobject_setannounceflag                                           *win32.Proc
+	Alljoyn_busobject_signal                                                    *win32.Proc
+	Alljoyn_credentials_clear                                                   *win32.Proc
+	Alljoyn_credentials_create                                                  *win32.Proc
+	Alljoyn_credentials_destroy                                                 *win32.Proc
+	Alljoyn_credentials_getcertchain                                            *win32.Proc
+	Alljoyn_credentials_getexpiration                                           *win32.Proc
+	Alljoyn_credentials_getlogonentry                                           *win32.Proc
+	Alljoyn_credentials_getpassword                                             *win32.Proc
+	Alljoyn_credentials_getprivateKey                                           *win32.Proc
+	Alljoyn_credentials_getusername                                             *win32.Proc
+	Alljoyn_credentials_isset                                                   *win32.Proc
+	Alljoyn_credentials_setcertchain                                            *win32.Proc
+	Alljoyn_credentials_setexpiration                                           *win32.Proc
+	Alljoyn_credentials_setlogonentry                                           *win32.Proc
+	Alljoyn_credentials_setpassword                                             *win32.Proc
+	Alljoyn_credentials_setprivatekey                                           *win32.Proc
+	Alljoyn_credentials_setusername                                             *win32.Proc
+	Alljoyn_getbuildinfo                                                        *win32.Proc
+	Alljoyn_getnumericversion                                                   *win32.Proc
+	Alljoyn_getversion                                                          *win32.Proc
+	Alljoyn_init                                                                *win32.Proc
+	Alljoyn_interfacedescription_activate                                       *win32.Proc
+	Alljoyn_interfacedescription_addannotation                                  *win32.Proc
+	Alljoyn_interfacedescription_addargannotation                               *win32.Proc
+	Alljoyn_interfacedescription_addmember                                      *win32.Proc
+	Alljoyn_interfacedescription_addmemberannotation                            *win32.Proc
+	Alljoyn_interfacedescription_addmethod                                      *win32.Proc
+	Alljoyn_interfacedescription_addproperty                                    *win32.Proc
+	Alljoyn_interfacedescription_addpropertyannotation                          *win32.Proc
+	Alljoyn_interfacedescription_addsignal                                      *win32.Proc
+	Alljoyn_interfacedescription_eql                                            *win32.Proc
+	Alljoyn_interfacedescription_getannotation                                  *win32.Proc
+	Alljoyn_interfacedescription_getannotationatindex                           *win32.Proc
+	Alljoyn_interfacedescription_getannotationscount                            *win32.Proc
+	Alljoyn_interfacedescription_getargdescriptionforlanguage                   *win32.Proc
+	Alljoyn_interfacedescription_getdescriptionforlanguage                      *win32.Proc
+	Alljoyn_interfacedescription_getdescriptionlanguages                        *win32.Proc
+	Alljoyn_interfacedescription_getdescriptionlanguages2                       *win32.Proc
+	Alljoyn_interfacedescription_getdescriptiontranslationcallback              *win32.Proc
+	Alljoyn_interfacedescription_getmember                                      *win32.Proc
+	Alljoyn_interfacedescription_getmemberannotation                            *win32.Proc
+	Alljoyn_interfacedescription_getmemberargannotation                         *win32.Proc
+	Alljoyn_interfacedescription_getmemberdescriptionforlanguage                *win32.Proc
+	Alljoyn_interfacedescription_getmembers                                     *win32.Proc
+	Alljoyn_interfacedescription_getmethod                                      *win32.Proc
+	Alljoyn_interfacedescription_getname                                        *win32.Proc
+	Alljoyn_interfacedescription_getproperties                                  *win32.Proc
+	Alljoyn_interfacedescription_getproperty                                    *win32.Proc
+	Alljoyn_interfacedescription_getpropertyannotation                          *win32.Proc
+	Alljoyn_interfacedescription_getpropertydescriptionforlanguage              *win32.Proc
+	Alljoyn_interfacedescription_getsecuritypolicy                              *win32.Proc
+	Alljoyn_interfacedescription_getsignal                                      *win32.Proc
+	Alljoyn_interfacedescription_hasdescription                                 *win32.Proc
+	Alljoyn_interfacedescription_hasmember                                      *win32.Proc
+	Alljoyn_interfacedescription_hasproperties                                  *win32.Proc
+	Alljoyn_interfacedescription_hasproperty                                    *win32.Proc
+	Alljoyn_interfacedescription_introspect                                     *win32.Proc
+	Alljoyn_interfacedescription_issecure                                       *win32.Proc
+	Alljoyn_interfacedescription_member_eql                                     *win32.Proc
+	Alljoyn_interfacedescription_member_getannotation                           *win32.Proc
+	Alljoyn_interfacedescription_member_getannotationatindex                    *win32.Proc
+	Alljoyn_interfacedescription_member_getannotationscount                     *win32.Proc
+	Alljoyn_interfacedescription_member_getargannotation                        *win32.Proc
+	Alljoyn_interfacedescription_member_getargannotationatindex                 *win32.Proc
+	Alljoyn_interfacedescription_member_getargannotationscount                  *win32.Proc
+	Alljoyn_interfacedescription_property_eql                                   *win32.Proc
+	Alljoyn_interfacedescription_property_getannotation                         *win32.Proc
+	Alljoyn_interfacedescription_property_getannotationatindex                  *win32.Proc
+	Alljoyn_interfacedescription_property_getannotationscount                   *win32.Proc
+	Alljoyn_interfacedescription_setargdescription                              *win32.Proc
+	Alljoyn_interfacedescription_setargdescriptionforlanguage                   *win32.Proc
+	Alljoyn_interfacedescription_setdescription                                 *win32.Proc
+	Alljoyn_interfacedescription_setdescriptionforlanguage                      *win32.Proc
+	Alljoyn_interfacedescription_setdescriptionlanguage                         *win32.Proc
+	Alljoyn_interfacedescription_setdescriptiontranslationcallback              *win32.Proc
+	Alljoyn_interfacedescription_setmemberdescription                           *win32.Proc
+	Alljoyn_interfacedescription_setmemberdescriptionforlanguage                *win32.Proc
+	Alljoyn_interfacedescription_setpropertydescription                         *win32.Proc
+	Alljoyn_interfacedescription_setpropertydescriptionforlanguage              *win32.Proc
+	Alljoyn_keystorelistener_create                                             *win32.Proc
+	Alljoyn_keystorelistener_destroy                                            *win32.Proc
+	Alljoyn_keystorelistener_getkeys                                            *win32.Proc
+	Alljoyn_keystorelistener_putkeys                                            *win32.Proc
+	Alljoyn_keystorelistener_with_synchronization_create                        *win32.Proc
+	Alljoyn_message_create                                                      *win32.Proc
+	Alljoyn_message_description                                                 *win32.Proc
+	Alljoyn_message_destroy                                                     *win32.Proc
+	Alljoyn_message_eql                                                         *win32.Proc
+	Alljoyn_message_getarg                                                      *win32.Proc
+	Alljoyn_message_getargs                                                     *win32.Proc
+	Alljoyn_message_getauthmechanism                                            *win32.Proc
+	Alljoyn_message_getcallserial                                               *win32.Proc
+	Alljoyn_message_getcompressiontoken                                         *win32.Proc
+	Alljoyn_message_getdestination                                              *win32.Proc
+	Alljoyn_message_geterrorname                                                *win32.Proc
+	Alljoyn_message_getflags                                                    *win32.Proc
+	Alljoyn_message_getinterface                                                *win32.Proc
+	Alljoyn_message_getmembername                                               *win32.Proc
+	Alljoyn_message_getobjectpath                                               *win32.Proc
+	Alljoyn_message_getreceiveendpointname                                      *win32.Proc
+	Alljoyn_message_getreplyserial                                              *win32.Proc
+	Alljoyn_message_getsender                                                   *win32.Proc
+	Alljoyn_message_getsessionid                                                *win32.Proc
+	Alljoyn_message_getsignature                                                *win32.Proc
+	Alljoyn_message_gettimestamp                                                *win32.Proc
+	Alljoyn_message_gettype                                                     *win32.Proc
+	Alljoyn_message_isbroadcastsignal                                           *win32.Proc
+	Alljoyn_message_isencrypted                                                 *win32.Proc
+	Alljoyn_message_isexpired                                                   *win32.Proc
+	Alljoyn_message_isglobalbroadcast                                           *win32.Proc
+	Alljoyn_message_issessionless                                               *win32.Proc
+	Alljoyn_message_isunreliable                                                *win32.Proc
+	Alljoyn_message_parseargs                                                   *win32.Proc
+	Alljoyn_message_setendianess                                                *win32.Proc
+	Alljoyn_message_tostring                                                    *win32.Proc
+	Alljoyn_msgarg_array_create                                                 *win32.Proc
+	Alljoyn_msgarg_array_element                                                *win32.Proc
+	Alljoyn_msgarg_array_get                                                    *win32.Proc
+	Alljoyn_msgarg_array_set                                                    *win32.Proc
+	Alljoyn_msgarg_array_set_offset                                             *win32.Proc
+	Alljoyn_msgarg_array_signature                                              *win32.Proc
+	Alljoyn_msgarg_array_tostring                                               *win32.Proc
+	Alljoyn_msgarg_clear                                                        *win32.Proc
+	Alljoyn_msgarg_clone                                                        *win32.Proc
+	Alljoyn_msgarg_copy                                                         *win32.Proc
+	Alljoyn_msgarg_create                                                       *win32.Proc
+	Alljoyn_msgarg_create_and_set                                               *win32.Proc
+	Alljoyn_msgarg_destroy                                                      *win32.Proc
+	Alljoyn_msgarg_equal                                                        *win32.Proc
+	Alljoyn_msgarg_get                                                          *win32.Proc
+	Alljoyn_msgarg_get_array_element                                            *win32.Proc
+	Alljoyn_msgarg_get_array_elementsignature                                   *win32.Proc
+	Alljoyn_msgarg_get_array_numberofelements                                   *win32.Proc
+	Alljoyn_msgarg_get_bool                                                     *win32.Proc
+	Alljoyn_msgarg_get_bool_array                                               *win32.Proc
+	Alljoyn_msgarg_get_double                                                   *win32.Proc
+	Alljoyn_msgarg_get_double_array                                             *win32.Proc
+	Alljoyn_msgarg_get_int16                                                    *win32.Proc
+	Alljoyn_msgarg_get_int16_array                                              *win32.Proc
+	Alljoyn_msgarg_get_int32                                                    *win32.Proc
+	Alljoyn_msgarg_get_int32_array                                              *win32.Proc
+	Alljoyn_msgarg_get_int64                                                    *win32.Proc
+	Alljoyn_msgarg_get_int64_array                                              *win32.Proc
+	Alljoyn_msgarg_get_objectpath                                               *win32.Proc
+	Alljoyn_msgarg_get_signature                                                *win32.Proc
+	Alljoyn_msgarg_get_string                                                   *win32.Proc
+	Alljoyn_msgarg_get_uint16                                                   *win32.Proc
+	Alljoyn_msgarg_get_uint16_array                                             *win32.Proc
+	Alljoyn_msgarg_get_uint32                                                   *win32.Proc
+	Alljoyn_msgarg_get_uint32_array                                             *win32.Proc
+	Alljoyn_msgarg_get_uint64                                                   *win32.Proc
+	Alljoyn_msgarg_get_uint64_array                                             *win32.Proc
+	Alljoyn_msgarg_get_uint8                                                    *win32.Proc
+	Alljoyn_msgarg_get_uint8_array                                              *win32.Proc
+	Alljoyn_msgarg_get_variant                                                  *win32.Proc
+	Alljoyn_msgarg_get_variant_array                                            *win32.Proc
+	Alljoyn_msgarg_getdictelement                                               *win32.Proc
+	Alljoyn_msgarg_getkey                                                       *win32.Proc
+	Alljoyn_msgarg_getmember                                                    *win32.Proc
+	Alljoyn_msgarg_getnummembers                                                *win32.Proc
+	Alljoyn_msgarg_gettype                                                      *win32.Proc
+	Alljoyn_msgarg_getvalue                                                     *win32.Proc
+	Alljoyn_msgarg_hassignature                                                 *win32.Proc
+	Alljoyn_msgarg_set                                                          *win32.Proc
+	Alljoyn_msgarg_set_and_stabilize                                            *win32.Proc
+	Alljoyn_msgarg_set_bool                                                     *win32.Proc
+	Alljoyn_msgarg_set_bool_array                                               *win32.Proc
+	Alljoyn_msgarg_set_double                                                   *win32.Proc
+	Alljoyn_msgarg_set_double_array                                             *win32.Proc
+	Alljoyn_msgarg_set_int16                                                    *win32.Proc
+	Alljoyn_msgarg_set_int16_array                                              *win32.Proc
+	Alljoyn_msgarg_set_int32                                                    *win32.Proc
+	Alljoyn_msgarg_set_int32_array                                              *win32.Proc
+	Alljoyn_msgarg_set_int64                                                    *win32.Proc
+	Alljoyn_msgarg_set_int64_array                                              *win32.Proc
+	Alljoyn_msgarg_set_objectpath                                               *win32.Proc
+	Alljoyn_msgarg_set_objectpath_array                                         *win32.Proc
+	Alljoyn_msgarg_set_signature                                                *win32.Proc
+	Alljoyn_msgarg_set_signature_array                                          *win32.Proc
+	Alljoyn_msgarg_set_string                                                   *win32.Proc
+	Alljoyn_msgarg_set_string_array                                             *win32.Proc
+	Alljoyn_msgarg_set_uint16                                                   *win32.Proc
+	Alljoyn_msgarg_set_uint16_array                                             *win32.Proc
+	Alljoyn_msgarg_set_uint32                                                   *win32.Proc
+	Alljoyn_msgarg_set_uint32_array                                             *win32.Proc
+	Alljoyn_msgarg_set_uint64                                                   *win32.Proc
+	Alljoyn_msgarg_set_uint64_array                                             *win32.Proc
+	Alljoyn_msgarg_set_uint8                                                    *win32.Proc
+	Alljoyn_msgarg_set_uint8_array                                              *win32.Proc
+	Alljoyn_msgarg_setdictentry                                                 *win32.Proc
+	Alljoyn_msgarg_setstruct                                                    *win32.Proc
+	Alljoyn_msgarg_signature                                                    *win32.Proc
+	Alljoyn_msgarg_stabilize                                                    *win32.Proc
+	Alljoyn_msgarg_tostring                                                     *win32.Proc
+	Alljoyn_observer_create                                                     *win32.Proc
+	Alljoyn_observer_destroy                                                    *win32.Proc
+	Alljoyn_observer_get                                                        *win32.Proc
+	Alljoyn_observer_getfirst                                                   *win32.Proc
+	Alljoyn_observer_getnext                                                    *win32.Proc
+	Alljoyn_observer_registerlistener                                           *win32.Proc
+	Alljoyn_observer_unregisteralllisteners                                     *win32.Proc
+	Alljoyn_observer_unregisterlistener                                         *win32.Proc
+	Alljoyn_observerlistener_create                                             *win32.Proc
+	Alljoyn_observerlistener_destroy                                            *win32.Proc
+	Alljoyn_passwordmanager_setcredentials                                      *win32.Proc
+	Alljoyn_permissionconfigurationlistener_create                              *win32.Proc
+	Alljoyn_permissionconfigurationlistener_destroy                             *win32.Proc
+	Alljoyn_permissionconfigurator_certificatechain_destroy                     *win32.Proc
+	Alljoyn_permissionconfigurator_certificateid_cleanup                        *win32.Proc
+	Alljoyn_permissionconfigurator_certificateidarray_cleanup                   *win32.Proc
+	Alljoyn_permissionconfigurator_claim                                        *win32.Proc
+	Alljoyn_permissionconfigurator_endmanagement                                *win32.Proc
+	Alljoyn_permissionconfigurator_getapplicationstate                          *win32.Proc
+	Alljoyn_permissionconfigurator_getclaimcapabilities                         *win32.Proc
+	Alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo           *win32.Proc
+	Alljoyn_permissionconfigurator_getdefaultclaimcapabilities                  *win32.Proc
+	Alljoyn_permissionconfigurator_getdefaultpolicy                             *win32.Proc
+	Alljoyn_permissionconfigurator_getidentity                                  *win32.Proc
+	Alljoyn_permissionconfigurator_getidentitycertificateid                     *win32.Proc
+	Alljoyn_permissionconfigurator_getmanifests                                 *win32.Proc
+	Alljoyn_permissionconfigurator_getmanifesttemplate                          *win32.Proc
+	Alljoyn_permissionconfigurator_getmembershipsummaries                       *win32.Proc
+	Alljoyn_permissionconfigurator_getpolicy                                    *win32.Proc
+	Alljoyn_permissionconfigurator_getpublickey                                 *win32.Proc
+	Alljoyn_permissionconfigurator_installmanifests                             *win32.Proc
+	Alljoyn_permissionconfigurator_installmembership                            *win32.Proc
+	Alljoyn_permissionconfigurator_manifestarray_cleanup                        *win32.Proc
+	Alljoyn_permissionconfigurator_manifesttemplate_destroy                     *win32.Proc
+	Alljoyn_permissionconfigurator_policy_destroy                               *win32.Proc
+	Alljoyn_permissionconfigurator_publickey_destroy                            *win32.Proc
+	Alljoyn_permissionconfigurator_removemembership                             *win32.Proc
+	Alljoyn_permissionconfigurator_reset                                        *win32.Proc
+	Alljoyn_permissionconfigurator_resetpolicy                                  *win32.Proc
+	Alljoyn_permissionconfigurator_setapplicationstate                          *win32.Proc
+	Alljoyn_permissionconfigurator_setclaimcapabilities                         *win32.Proc
+	Alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo           *win32.Proc
+	Alljoyn_permissionconfigurator_setmanifesttemplatefromxml                   *win32.Proc
+	Alljoyn_permissionconfigurator_startmanagement                              *win32.Proc
+	Alljoyn_permissionconfigurator_updateidentity                               *win32.Proc
+	Alljoyn_permissionconfigurator_updatepolicy                                 *win32.Proc
+	Alljoyn_pinglistener_create                                                 *win32.Proc
+	Alljoyn_pinglistener_destroy                                                *win32.Proc
+	Alljoyn_proxybusobject_addchild                                             *win32.Proc
+	Alljoyn_proxybusobject_addinterface                                         *win32.Proc
+	Alljoyn_proxybusobject_addinterface_by_name                                 *win32.Proc
+	Alljoyn_proxybusobject_copy                                                 *win32.Proc
+	Alljoyn_proxybusobject_create                                               *win32.Proc
+	Alljoyn_proxybusobject_create_secure                                        *win32.Proc
+	Alljoyn_proxybusobject_destroy                                              *win32.Proc
+	Alljoyn_proxybusobject_enablepropertycaching                                *win32.Proc
+	Alljoyn_proxybusobject_getallproperties                                     *win32.Proc
+	Alljoyn_proxybusobject_getallpropertiesasync                                *win32.Proc
+	Alljoyn_proxybusobject_getchild                                             *win32.Proc
+	Alljoyn_proxybusobject_getchildren                                          *win32.Proc
+	Alljoyn_proxybusobject_getinterface                                         *win32.Proc
+	Alljoyn_proxybusobject_getinterfaces                                        *win32.Proc
+	Alljoyn_proxybusobject_getpath                                              *win32.Proc
+	Alljoyn_proxybusobject_getproperty                                          *win32.Proc
+	Alljoyn_proxybusobject_getpropertyasync                                     *win32.Proc
+	Alljoyn_proxybusobject_getservicename                                       *win32.Proc
+	Alljoyn_proxybusobject_getsessionid                                         *win32.Proc
+	Alljoyn_proxybusobject_getuniquename                                        *win32.Proc
+	Alljoyn_proxybusobject_implementsinterface                                  *win32.Proc
+	Alljoyn_proxybusobject_introspectremoteobject                               *win32.Proc
+	Alljoyn_proxybusobject_introspectremoteobjectasync                          *win32.Proc
+	Alljoyn_proxybusobject_issecure                                             *win32.Proc
+	Alljoyn_proxybusobject_isvalid                                              *win32.Proc
+	Alljoyn_proxybusobject_methodcall                                           *win32.Proc
+	Alljoyn_proxybusobject_methodcall_member                                    *win32.Proc
+	Alljoyn_proxybusobject_methodcall_member_noreply                            *win32.Proc
+	Alljoyn_proxybusobject_methodcall_noreply                                   *win32.Proc
+	Alljoyn_proxybusobject_methodcallasync                                      *win32.Proc
+	Alljoyn_proxybusobject_methodcallasync_member                               *win32.Proc
+	Alljoyn_proxybusobject_parsexml                                             *win32.Proc
+	Alljoyn_proxybusobject_ref_create                                           *win32.Proc
+	Alljoyn_proxybusobject_ref_decref                                           *win32.Proc
+	Alljoyn_proxybusobject_ref_get                                              *win32.Proc
+	Alljoyn_proxybusobject_ref_incref                                           *win32.Proc
+	Alljoyn_proxybusobject_registerpropertieschangedlistener                    *win32.Proc
+	Alljoyn_proxybusobject_removechild                                          *win32.Proc
+	Alljoyn_proxybusobject_secureconnection                                     *win32.Proc
+	Alljoyn_proxybusobject_secureconnectionasync                                *win32.Proc
+	Alljoyn_proxybusobject_setproperty                                          *win32.Proc
+	Alljoyn_proxybusobject_setpropertyasync                                     *win32.Proc
+	Alljoyn_proxybusobject_unregisterpropertieschangedlistener                  *win32.Proc
+	Alljoyn_routerinit                                                          *win32.Proc
+	Alljoyn_routerinitwithconfig                                                *win32.Proc
+	Alljoyn_routershutdown                                                      *win32.Proc
+	Alljoyn_securityapplicationproxy_claim                                      *win32.Proc
+	Alljoyn_securityapplicationproxy_computemanifestdigest                      *win32.Proc
+	Alljoyn_securityapplicationproxy_create                                     *win32.Proc
+	Alljoyn_securityapplicationproxy_destroy                                    *win32.Proc
+	Alljoyn_securityapplicationproxy_digest_destroy                             *win32.Proc
+	Alljoyn_securityapplicationproxy_eccpublickey_destroy                       *win32.Proc
+	Alljoyn_securityapplicationproxy_endmanagement                              *win32.Proc
+	Alljoyn_securityapplicationproxy_getapplicationstate                        *win32.Proc
+	Alljoyn_securityapplicationproxy_getclaimcapabilities                       *win32.Proc
+	Alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo         *win32.Proc
+	Alljoyn_securityapplicationproxy_getdefaultpolicy                           *win32.Proc
+	Alljoyn_securityapplicationproxy_geteccpublickey                            *win32.Proc
+	Alljoyn_securityapplicationproxy_getmanifesttemplate                        *win32.Proc
+	Alljoyn_securityapplicationproxy_getpermissionmanagementsessionport         *win32.Proc
+	Alljoyn_securityapplicationproxy_getpolicy                                  *win32.Proc
+	Alljoyn_securityapplicationproxy_installmembership                          *win32.Proc
+	Alljoyn_securityapplicationproxy_manifest_destroy                           *win32.Proc
+	Alljoyn_securityapplicationproxy_manifesttemplate_destroy                   *win32.Proc
+	Alljoyn_securityapplicationproxy_policy_destroy                             *win32.Proc
+	Alljoyn_securityapplicationproxy_reset                                      *win32.Proc
+	Alljoyn_securityapplicationproxy_resetpolicy                                *win32.Proc
+	Alljoyn_securityapplicationproxy_setmanifestsignature                       *win32.Proc
+	Alljoyn_securityapplicationproxy_signmanifest                               *win32.Proc
+	Alljoyn_securityapplicationproxy_startmanagement                            *win32.Proc
+	Alljoyn_securityapplicationproxy_updateidentity                             *win32.Proc
+	Alljoyn_securityapplicationproxy_updatepolicy                               *win32.Proc
+	Alljoyn_sessionlistener_create                                              *win32.Proc
+	Alljoyn_sessionlistener_destroy                                             *win32.Proc
+	Alljoyn_sessionopts_cmp                                                     *win32.Proc
+	Alljoyn_sessionopts_create                                                  *win32.Proc
+	Alljoyn_sessionopts_destroy                                                 *win32.Proc
+	Alljoyn_sessionopts_get_multipoint                                          *win32.Proc
+	Alljoyn_sessionopts_get_proximity                                           *win32.Proc
+	Alljoyn_sessionopts_get_traffic                                             *win32.Proc
+	Alljoyn_sessionopts_get_transports                                          *win32.Proc
+	Alljoyn_sessionopts_iscompatible                                            *win32.Proc
+	Alljoyn_sessionopts_set_multipoint                                          *win32.Proc
+	Alljoyn_sessionopts_set_proximity                                           *win32.Proc
+	Alljoyn_sessionopts_set_traffic                                             *win32.Proc
+	Alljoyn_sessionopts_set_transports                                          *win32.Proc
+	Alljoyn_sessionportlistener_create                                          *win32.Proc
+	Alljoyn_sessionportlistener_destroy                                         *win32.Proc
+	Alljoyn_shutdown                                                            *win32.Proc
+	Alljoyn_unity_deferred_callbacks_process                                    *win32.Proc
+	Alljoyn_unity_set_deferred_callback_mainthread_only                         *win32.Proc
+	QCC_StatusText                                                              *win32.Proc
+}{
+	AllJoynAcceptBusConnection:                                                  procAllJoynAcceptBusConnection,
+	AllJoynCloseBusHandle:                                                       procAllJoynCloseBusHandle,
+	AllJoynConnectToBus:                                                         procAllJoynConnectToBus,
+	AllJoynCreateBus:                                                            procAllJoynCreateBus,
+	AllJoynEnumEvents:                                                           procAllJoynEnumEvents,
+	AllJoynEventSelect:                                                          procAllJoynEventSelect,
+	AllJoynReceiveFromBus:                                                       procAllJoynReceiveFromBus,
+	AllJoynSendToBus:                                                            procAllJoynSendToBus,
+	Alljoyn_aboutdata_create:                                                    procAlljoyn_aboutdata_create,
+	Alljoyn_aboutdata_create_empty:                                              procAlljoyn_aboutdata_create_empty,
+	Alljoyn_aboutdata_create_full:                                               procAlljoyn_aboutdata_create_full,
+	Alljoyn_aboutdata_createfrommsgarg:                                          procAlljoyn_aboutdata_createfrommsgarg,
+	Alljoyn_aboutdata_createfromxml:                                             procAlljoyn_aboutdata_createfromxml,
+	Alljoyn_aboutdata_destroy:                                                   procAlljoyn_aboutdata_destroy,
+	Alljoyn_aboutdata_getaboutdata:                                              procAlljoyn_aboutdata_getaboutdata,
+	Alljoyn_aboutdata_getajsoftwareversion:                                      procAlljoyn_aboutdata_getajsoftwareversion,
+	Alljoyn_aboutdata_getannouncedaboutdata:                                     procAlljoyn_aboutdata_getannouncedaboutdata,
+	Alljoyn_aboutdata_getappid:                                                  procAlljoyn_aboutdata_getappid,
+	Alljoyn_aboutdata_getappname:                                                procAlljoyn_aboutdata_getappname,
+	Alljoyn_aboutdata_getdateofmanufacture:                                      procAlljoyn_aboutdata_getdateofmanufacture,
+	Alljoyn_aboutdata_getdefaultlanguage:                                        procAlljoyn_aboutdata_getdefaultlanguage,
+	Alljoyn_aboutdata_getdescription:                                            procAlljoyn_aboutdata_getdescription,
+	Alljoyn_aboutdata_getdeviceid:                                               procAlljoyn_aboutdata_getdeviceid,
+	Alljoyn_aboutdata_getdevicename:                                             procAlljoyn_aboutdata_getdevicename,
+	Alljoyn_aboutdata_getfield:                                                  procAlljoyn_aboutdata_getfield,
+	Alljoyn_aboutdata_getfields:                                                 procAlljoyn_aboutdata_getfields,
+	Alljoyn_aboutdata_getfieldsignature:                                         procAlljoyn_aboutdata_getfieldsignature,
+	Alljoyn_aboutdata_gethardwareversion:                                        procAlljoyn_aboutdata_gethardwareversion,
+	Alljoyn_aboutdata_getmanufacturer:                                           procAlljoyn_aboutdata_getmanufacturer,
+	Alljoyn_aboutdata_getmodelnumber:                                            procAlljoyn_aboutdata_getmodelnumber,
+	Alljoyn_aboutdata_getsoftwareversion:                                        procAlljoyn_aboutdata_getsoftwareversion,
+	Alljoyn_aboutdata_getsupportedlanguages:                                     procAlljoyn_aboutdata_getsupportedlanguages,
+	Alljoyn_aboutdata_getsupporturl:                                             procAlljoyn_aboutdata_getsupporturl,
+	Alljoyn_aboutdata_isfieldannounced:                                          procAlljoyn_aboutdata_isfieldannounced,
+	Alljoyn_aboutdata_isfieldlocalized:                                          procAlljoyn_aboutdata_isfieldlocalized,
+	Alljoyn_aboutdata_isfieldrequired:                                           procAlljoyn_aboutdata_isfieldrequired,
+	Alljoyn_aboutdata_isvalid:                                                   procAlljoyn_aboutdata_isvalid,
+	Alljoyn_aboutdata_setappid:                                                  procAlljoyn_aboutdata_setappid,
+	Alljoyn_aboutdata_setappid_fromstring:                                       procAlljoyn_aboutdata_setappid_fromstring,
+	Alljoyn_aboutdata_setappname:                                                procAlljoyn_aboutdata_setappname,
+	Alljoyn_aboutdata_setdateofmanufacture:                                      procAlljoyn_aboutdata_setdateofmanufacture,
+	Alljoyn_aboutdata_setdefaultlanguage:                                        procAlljoyn_aboutdata_setdefaultlanguage,
+	Alljoyn_aboutdata_setdescription:                                            procAlljoyn_aboutdata_setdescription,
+	Alljoyn_aboutdata_setdeviceid:                                               procAlljoyn_aboutdata_setdeviceid,
+	Alljoyn_aboutdata_setdevicename:                                             procAlljoyn_aboutdata_setdevicename,
+	Alljoyn_aboutdata_setfield:                                                  procAlljoyn_aboutdata_setfield,
+	Alljoyn_aboutdata_sethardwareversion:                                        procAlljoyn_aboutdata_sethardwareversion,
+	Alljoyn_aboutdata_setmanufacturer:                                           procAlljoyn_aboutdata_setmanufacturer,
+	Alljoyn_aboutdata_setmodelnumber:                                            procAlljoyn_aboutdata_setmodelnumber,
+	Alljoyn_aboutdata_setsoftwareversion:                                        procAlljoyn_aboutdata_setsoftwareversion,
+	Alljoyn_aboutdata_setsupportedlanguage:                                      procAlljoyn_aboutdata_setsupportedlanguage,
+	Alljoyn_aboutdata_setsupporturl:                                             procAlljoyn_aboutdata_setsupporturl,
+	Alljoyn_aboutdatalistener_create:                                            procAlljoyn_aboutdatalistener_create,
+	Alljoyn_aboutdatalistener_destroy:                                           procAlljoyn_aboutdatalistener_destroy,
+	Alljoyn_abouticon_clear:                                                     procAlljoyn_abouticon_clear,
+	Alljoyn_abouticon_create:                                                    procAlljoyn_abouticon_create,
+	Alljoyn_abouticon_destroy:                                                   procAlljoyn_abouticon_destroy,
+	Alljoyn_abouticon_getcontent:                                                procAlljoyn_abouticon_getcontent,
+	Alljoyn_abouticon_geturl:                                                    procAlljoyn_abouticon_geturl,
+	Alljoyn_abouticon_setcontent:                                                procAlljoyn_abouticon_setcontent,
+	Alljoyn_abouticon_setcontent_frommsgarg:                                     procAlljoyn_abouticon_setcontent_frommsgarg,
+	Alljoyn_abouticon_seturl:                                                    procAlljoyn_abouticon_seturl,
+	Alljoyn_abouticonobj_create:                                                 procAlljoyn_abouticonobj_create,
+	Alljoyn_abouticonobj_destroy:                                                procAlljoyn_abouticonobj_destroy,
+	Alljoyn_abouticonproxy_create:                                               procAlljoyn_abouticonproxy_create,
+	Alljoyn_abouticonproxy_destroy:                                              procAlljoyn_abouticonproxy_destroy,
+	Alljoyn_abouticonproxy_geticon:                                              procAlljoyn_abouticonproxy_geticon,
+	Alljoyn_abouticonproxy_getversion:                                           procAlljoyn_abouticonproxy_getversion,
+	Alljoyn_aboutlistener_create:                                                procAlljoyn_aboutlistener_create,
+	Alljoyn_aboutlistener_destroy:                                               procAlljoyn_aboutlistener_destroy,
+	Alljoyn_aboutobj_announce:                                                   procAlljoyn_aboutobj_announce,
+	Alljoyn_aboutobj_announce_using_datalistener:                                procAlljoyn_aboutobj_announce_using_datalistener,
+	Alljoyn_aboutobj_create:                                                     procAlljoyn_aboutobj_create,
+	Alljoyn_aboutobj_destroy:                                                    procAlljoyn_aboutobj_destroy,
+	Alljoyn_aboutobj_unannounce:                                                 procAlljoyn_aboutobj_unannounce,
+	Alljoyn_aboutobjectdescription_clear:                                        procAlljoyn_aboutobjectdescription_clear,
+	Alljoyn_aboutobjectdescription_create:                                       procAlljoyn_aboutobjectdescription_create,
+	Alljoyn_aboutobjectdescription_create_full:                                  procAlljoyn_aboutobjectdescription_create_full,
+	Alljoyn_aboutobjectdescription_createfrommsgarg:                             procAlljoyn_aboutobjectdescription_createfrommsgarg,
+	Alljoyn_aboutobjectdescription_destroy:                                      procAlljoyn_aboutobjectdescription_destroy,
+	Alljoyn_aboutobjectdescription_getinterfacepaths:                            procAlljoyn_aboutobjectdescription_getinterfacepaths,
+	Alljoyn_aboutobjectdescription_getinterfaces:                                procAlljoyn_aboutobjectdescription_getinterfaces,
+	Alljoyn_aboutobjectdescription_getmsgarg:                                    procAlljoyn_aboutobjectdescription_getmsgarg,
+	Alljoyn_aboutobjectdescription_getpaths:                                     procAlljoyn_aboutobjectdescription_getpaths,
+	Alljoyn_aboutobjectdescription_hasinterface:                                 procAlljoyn_aboutobjectdescription_hasinterface,
+	Alljoyn_aboutobjectdescription_hasinterfaceatpath:                           procAlljoyn_aboutobjectdescription_hasinterfaceatpath,
+	Alljoyn_aboutobjectdescription_haspath:                                      procAlljoyn_aboutobjectdescription_haspath,
+	Alljoyn_aboutproxy_create:                                                   procAlljoyn_aboutproxy_create,
+	Alljoyn_aboutproxy_destroy:                                                  procAlljoyn_aboutproxy_destroy,
+	Alljoyn_aboutproxy_getaboutdata:                                             procAlljoyn_aboutproxy_getaboutdata,
+	Alljoyn_aboutproxy_getobjectdescription:                                     procAlljoyn_aboutproxy_getobjectdescription,
+	Alljoyn_aboutproxy_getversion:                                               procAlljoyn_aboutproxy_getversion,
+	Alljoyn_applicationstatelistener_create:                                     procAlljoyn_applicationstatelistener_create,
+	Alljoyn_applicationstatelistener_destroy:                                    procAlljoyn_applicationstatelistener_destroy,
+	Alljoyn_authlistener_create:                                                 procAlljoyn_authlistener_create,
+	Alljoyn_authlistener_destroy:                                                procAlljoyn_authlistener_destroy,
+	Alljoyn_authlistener_requestcredentialsresponse:                             procAlljoyn_authlistener_requestcredentialsresponse,
+	Alljoyn_authlistener_setsharedsecret:                                        procAlljoyn_authlistener_setsharedsecret,
+	Alljoyn_authlistener_verifycredentialsresponse:                              procAlljoyn_authlistener_verifycredentialsresponse,
+	Alljoyn_authlistenerasync_create:                                            procAlljoyn_authlistenerasync_create,
+	Alljoyn_authlistenerasync_destroy:                                           procAlljoyn_authlistenerasync_destroy,
+	Alljoyn_autopinger_adddestination:                                           procAlljoyn_autopinger_adddestination,
+	Alljoyn_autopinger_addpinggroup:                                             procAlljoyn_autopinger_addpinggroup,
+	Alljoyn_autopinger_create:                                                   procAlljoyn_autopinger_create,
+	Alljoyn_autopinger_destroy:                                                  procAlljoyn_autopinger_destroy,
+	Alljoyn_autopinger_pause:                                                    procAlljoyn_autopinger_pause,
+	Alljoyn_autopinger_removedestination:                                        procAlljoyn_autopinger_removedestination,
+	Alljoyn_autopinger_removepinggroup:                                          procAlljoyn_autopinger_removepinggroup,
+	Alljoyn_autopinger_resume:                                                   procAlljoyn_autopinger_resume,
+	Alljoyn_autopinger_setpinginterval:                                          procAlljoyn_autopinger_setpinginterval,
+	Alljoyn_busattachment_addlogonentry:                                         procAlljoyn_busattachment_addlogonentry,
+	Alljoyn_busattachment_addmatch:                                              procAlljoyn_busattachment_addmatch,
+	Alljoyn_busattachment_advertisename:                                         procAlljoyn_busattachment_advertisename,
+	Alljoyn_busattachment_bindsessionport:                                       procAlljoyn_busattachment_bindsessionport,
+	Alljoyn_busattachment_canceladvertisename:                                   procAlljoyn_busattachment_canceladvertisename,
+	Alljoyn_busattachment_cancelfindadvertisedname:                              procAlljoyn_busattachment_cancelfindadvertisedname,
+	Alljoyn_busattachment_cancelfindadvertisednamebytransport:                   procAlljoyn_busattachment_cancelfindadvertisednamebytransport,
+	Alljoyn_busattachment_cancelwhoimplements_interface:                         procAlljoyn_busattachment_cancelwhoimplements_interface,
+	Alljoyn_busattachment_cancelwhoimplements_interfaces:                        procAlljoyn_busattachment_cancelwhoimplements_interfaces,
+	Alljoyn_busattachment_clearkeys:                                             procAlljoyn_busattachment_clearkeys,
+	Alljoyn_busattachment_clearkeystore:                                         procAlljoyn_busattachment_clearkeystore,
+	Alljoyn_busattachment_connect:                                               procAlljoyn_busattachment_connect,
+	Alljoyn_busattachment_create:                                                procAlljoyn_busattachment_create,
+	Alljoyn_busattachment_create_concurrency:                                    procAlljoyn_busattachment_create_concurrency,
+	Alljoyn_busattachment_createinterface:                                       procAlljoyn_busattachment_createinterface,
+	Alljoyn_busattachment_createinterface_secure:                                procAlljoyn_busattachment_createinterface_secure,
+	Alljoyn_busattachment_createinterfacesfromxml:                               procAlljoyn_busattachment_createinterfacesfromxml,
+	Alljoyn_busattachment_deletedefaultkeystore:                                 procAlljoyn_busattachment_deletedefaultkeystore,
+	Alljoyn_busattachment_deleteinterface:                                       procAlljoyn_busattachment_deleteinterface,
+	Alljoyn_busattachment_destroy:                                               procAlljoyn_busattachment_destroy,
+	Alljoyn_busattachment_disconnect:                                            procAlljoyn_busattachment_disconnect,
+	Alljoyn_busattachment_enableconcurrentcallbacks:                             procAlljoyn_busattachment_enableconcurrentcallbacks,
+	Alljoyn_busattachment_enablepeersecurity:                                    procAlljoyn_busattachment_enablepeersecurity,
+	Alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener: procAlljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener,
+	Alljoyn_busattachment_findadvertisedname:                                    procAlljoyn_busattachment_findadvertisedname,
+	Alljoyn_busattachment_findadvertisednamebytransport:                         procAlljoyn_busattachment_findadvertisednamebytransport,
+	Alljoyn_busattachment_getalljoyndebugobj:                                    procAlljoyn_busattachment_getalljoyndebugobj,
+	Alljoyn_busattachment_getalljoynproxyobj:                                    procAlljoyn_busattachment_getalljoynproxyobj,
+	Alljoyn_busattachment_getconcurrency:                                        procAlljoyn_busattachment_getconcurrency,
+	Alljoyn_busattachment_getconnectspec:                                        procAlljoyn_busattachment_getconnectspec,
+	Alljoyn_busattachment_getdbusproxyobj:                                       procAlljoyn_busattachment_getdbusproxyobj,
+	Alljoyn_busattachment_getglobalguidstring:                                   procAlljoyn_busattachment_getglobalguidstring,
+	Alljoyn_busattachment_getinterface:                                          procAlljoyn_busattachment_getinterface,
+	Alljoyn_busattachment_getinterfaces:                                         procAlljoyn_busattachment_getinterfaces,
+	Alljoyn_busattachment_getkeyexpiration:                                      procAlljoyn_busattachment_getkeyexpiration,
+	Alljoyn_busattachment_getpeerguid:                                           procAlljoyn_busattachment_getpeerguid,
+	Alljoyn_busattachment_getpermissionconfigurator:                             procAlljoyn_busattachment_getpermissionconfigurator,
+	Alljoyn_busattachment_gettimestamp:                                          procAlljoyn_busattachment_gettimestamp,
+	Alljoyn_busattachment_getuniquename:                                         procAlljoyn_busattachment_getuniquename,
+	Alljoyn_busattachment_isconnected:                                           procAlljoyn_busattachment_isconnected,
+	Alljoyn_busattachment_ispeersecurityenabled:                                 procAlljoyn_busattachment_ispeersecurityenabled,
+	Alljoyn_busattachment_isstarted:                                             procAlljoyn_busattachment_isstarted,
+	Alljoyn_busattachment_isstopping:                                            procAlljoyn_busattachment_isstopping,
+	Alljoyn_busattachment_join:                                                  procAlljoyn_busattachment_join,
+	Alljoyn_busattachment_joinsession:                                           procAlljoyn_busattachment_joinsession,
+	Alljoyn_busattachment_joinsessionasync:                                      procAlljoyn_busattachment_joinsessionasync,
+	Alljoyn_busattachment_leavesession:                                          procAlljoyn_busattachment_leavesession,
+	Alljoyn_busattachment_namehasowner:                                          procAlljoyn_busattachment_namehasowner,
+	Alljoyn_busattachment_ping:                                                  procAlljoyn_busattachment_ping,
+	Alljoyn_busattachment_registeraboutlistener:                                 procAlljoyn_busattachment_registeraboutlistener,
+	Alljoyn_busattachment_registerapplicationstatelistener:                      procAlljoyn_busattachment_registerapplicationstatelistener,
+	Alljoyn_busattachment_registerbuslistener:                                   procAlljoyn_busattachment_registerbuslistener,
+	Alljoyn_busattachment_registerbusobject:                                     procAlljoyn_busattachment_registerbusobject,
+	Alljoyn_busattachment_registerbusobject_secure:                              procAlljoyn_busattachment_registerbusobject_secure,
+	Alljoyn_busattachment_registerkeystorelistener:                              procAlljoyn_busattachment_registerkeystorelistener,
+	Alljoyn_busattachment_registersignalhandler:                                 procAlljoyn_busattachment_registersignalhandler,
+	Alljoyn_busattachment_registersignalhandlerwithrule:                         procAlljoyn_busattachment_registersignalhandlerwithrule,
+	Alljoyn_busattachment_releasename:                                           procAlljoyn_busattachment_releasename,
+	Alljoyn_busattachment_reloadkeystore:                                        procAlljoyn_busattachment_reloadkeystore,
+	Alljoyn_busattachment_removematch:                                           procAlljoyn_busattachment_removematch,
+	Alljoyn_busattachment_removesessionmember:                                   procAlljoyn_busattachment_removesessionmember,
+	Alljoyn_busattachment_requestname:                                           procAlljoyn_busattachment_requestname,
+	Alljoyn_busattachment_secureconnection:                                      procAlljoyn_busattachment_secureconnection,
+	Alljoyn_busattachment_secureconnectionasync:                                 procAlljoyn_busattachment_secureconnectionasync,
+	Alljoyn_busattachment_setdaemondebug:                                        procAlljoyn_busattachment_setdaemondebug,
+	Alljoyn_busattachment_setkeyexpiration:                                      procAlljoyn_busattachment_setkeyexpiration,
+	Alljoyn_busattachment_setlinktimeout:                                        procAlljoyn_busattachment_setlinktimeout,
+	Alljoyn_busattachment_setlinktimeoutasync:                                   procAlljoyn_busattachment_setlinktimeoutasync,
+	Alljoyn_busattachment_setsessionlistener:                                    procAlljoyn_busattachment_setsessionlistener,
+	Alljoyn_busattachment_start:                                                 procAlljoyn_busattachment_start,
+	Alljoyn_busattachment_stop:                                                  procAlljoyn_busattachment_stop,
+	Alljoyn_busattachment_unbindsessionport:                                     procAlljoyn_busattachment_unbindsessionport,
+	Alljoyn_busattachment_unregisteraboutlistener:                               procAlljoyn_busattachment_unregisteraboutlistener,
+	Alljoyn_busattachment_unregisterallaboutlisteners:                           procAlljoyn_busattachment_unregisterallaboutlisteners,
+	Alljoyn_busattachment_unregisterallhandlers:                                 procAlljoyn_busattachment_unregisterallhandlers,
+	Alljoyn_busattachment_unregisterapplicationstatelistener:                    procAlljoyn_busattachment_unregisterapplicationstatelistener,
+	Alljoyn_busattachment_unregisterbuslistener:                                 procAlljoyn_busattachment_unregisterbuslistener,
+	Alljoyn_busattachment_unregisterbusobject:                                   procAlljoyn_busattachment_unregisterbusobject,
+	Alljoyn_busattachment_unregistersignalhandler:                               procAlljoyn_busattachment_unregistersignalhandler,
+	Alljoyn_busattachment_unregistersignalhandlerwithrule:                       procAlljoyn_busattachment_unregistersignalhandlerwithrule,
+	Alljoyn_busattachment_whoimplements_interface:                               procAlljoyn_busattachment_whoimplements_interface,
+	Alljoyn_busattachment_whoimplements_interfaces:                              procAlljoyn_busattachment_whoimplements_interfaces,
+	Alljoyn_buslistener_create:                                                  procAlljoyn_buslistener_create,
+	Alljoyn_buslistener_destroy:                                                 procAlljoyn_buslistener_destroy,
+	Alljoyn_busobject_addinterface:                                              procAlljoyn_busobject_addinterface,
+	Alljoyn_busobject_addinterface_announced:                                    procAlljoyn_busobject_addinterface_announced,
+	Alljoyn_busobject_addmethodhandler:                                          procAlljoyn_busobject_addmethodhandler,
+	Alljoyn_busobject_addmethodhandlers:                                         procAlljoyn_busobject_addmethodhandlers,
+	Alljoyn_busobject_cancelsessionlessmessage:                                  procAlljoyn_busobject_cancelsessionlessmessage,
+	Alljoyn_busobject_cancelsessionlessmessage_serial:                           procAlljoyn_busobject_cancelsessionlessmessage_serial,
+	Alljoyn_busobject_create:                                                    procAlljoyn_busobject_create,
+	Alljoyn_busobject_destroy:                                                   procAlljoyn_busobject_destroy,
+	Alljoyn_busobject_emitpropertieschanged:                                     procAlljoyn_busobject_emitpropertieschanged,
+	Alljoyn_busobject_emitpropertychanged:                                       procAlljoyn_busobject_emitpropertychanged,
+	Alljoyn_busobject_getannouncedinterfacenames:                                procAlljoyn_busobject_getannouncedinterfacenames,
+	Alljoyn_busobject_getbusattachment:                                          procAlljoyn_busobject_getbusattachment,
+	Alljoyn_busobject_getname:                                                   procAlljoyn_busobject_getname,
+	Alljoyn_busobject_getpath:                                                   procAlljoyn_busobject_getpath,
+	Alljoyn_busobject_issecure:                                                  procAlljoyn_busobject_issecure,
+	Alljoyn_busobject_methodreply_args:                                          procAlljoyn_busobject_methodreply_args,
+	Alljoyn_busobject_methodreply_err:                                           procAlljoyn_busobject_methodreply_err,
+	Alljoyn_busobject_methodreply_status:                                        procAlljoyn_busobject_methodreply_status,
+	Alljoyn_busobject_setannounceflag:                                           procAlljoyn_busobject_setannounceflag,
+	Alljoyn_busobject_signal:                                                    procAlljoyn_busobject_signal,
+	Alljoyn_credentials_clear:                                                   procAlljoyn_credentials_clear,
+	Alljoyn_credentials_create:                                                  procAlljoyn_credentials_create,
+	Alljoyn_credentials_destroy:                                                 procAlljoyn_credentials_destroy,
+	Alljoyn_credentials_getcertchain:                                            procAlljoyn_credentials_getcertchain,
+	Alljoyn_credentials_getexpiration:                                           procAlljoyn_credentials_getexpiration,
+	Alljoyn_credentials_getlogonentry:                                           procAlljoyn_credentials_getlogonentry,
+	Alljoyn_credentials_getpassword:                                             procAlljoyn_credentials_getpassword,
+	Alljoyn_credentials_getprivateKey:                                           procAlljoyn_credentials_getprivateKey,
+	Alljoyn_credentials_getusername:                                             procAlljoyn_credentials_getusername,
+	Alljoyn_credentials_isset:                                                   procAlljoyn_credentials_isset,
+	Alljoyn_credentials_setcertchain:                                            procAlljoyn_credentials_setcertchain,
+	Alljoyn_credentials_setexpiration:                                           procAlljoyn_credentials_setexpiration,
+	Alljoyn_credentials_setlogonentry:                                           procAlljoyn_credentials_setlogonentry,
+	Alljoyn_credentials_setpassword:                                             procAlljoyn_credentials_setpassword,
+	Alljoyn_credentials_setprivatekey:                                           procAlljoyn_credentials_setprivatekey,
+	Alljoyn_credentials_setusername:                                             procAlljoyn_credentials_setusername,
+	Alljoyn_getbuildinfo:                                                        procAlljoyn_getbuildinfo,
+	Alljoyn_getnumericversion:                                                   procAlljoyn_getnumericversion,
+	Alljoyn_getversion:                                                          procAlljoyn_getversion,
+	Alljoyn_init:                                                                procAlljoyn_init,
+	Alljoyn_interfacedescription_activate:                                       procAlljoyn_interfacedescription_activate,
+	Alljoyn_interfacedescription_addannotation:                                  procAlljoyn_interfacedescription_addannotation,
+	Alljoyn_interfacedescription_addargannotation:                               procAlljoyn_interfacedescription_addargannotation,
+	Alljoyn_interfacedescription_addmember:                                      procAlljoyn_interfacedescription_addmember,
+	Alljoyn_interfacedescription_addmemberannotation:                            procAlljoyn_interfacedescription_addmemberannotation,
+	Alljoyn_interfacedescription_addmethod:                                      procAlljoyn_interfacedescription_addmethod,
+	Alljoyn_interfacedescription_addproperty:                                    procAlljoyn_interfacedescription_addproperty,
+	Alljoyn_interfacedescription_addpropertyannotation:                          procAlljoyn_interfacedescription_addpropertyannotation,
+	Alljoyn_interfacedescription_addsignal:                                      procAlljoyn_interfacedescription_addsignal,
+	Alljoyn_interfacedescription_eql:                                            procAlljoyn_interfacedescription_eql,
+	Alljoyn_interfacedescription_getannotation:                                  procAlljoyn_interfacedescription_getannotation,
+	Alljoyn_interfacedescription_getannotationatindex:                           procAlljoyn_interfacedescription_getannotationatindex,
+	Alljoyn_interfacedescription_getannotationscount:                            procAlljoyn_interfacedescription_getannotationscount,
+	Alljoyn_interfacedescription_getargdescriptionforlanguage:                   procAlljoyn_interfacedescription_getargdescriptionforlanguage,
+	Alljoyn_interfacedescription_getdescriptionforlanguage:                      procAlljoyn_interfacedescription_getdescriptionforlanguage,
+	Alljoyn_interfacedescription_getdescriptionlanguages:                        procAlljoyn_interfacedescription_getdescriptionlanguages,
+	Alljoyn_interfacedescription_getdescriptionlanguages2:                       procAlljoyn_interfacedescription_getdescriptionlanguages2,
+	Alljoyn_interfacedescription_getdescriptiontranslationcallback:              procAlljoyn_interfacedescription_getdescriptiontranslationcallback,
+	Alljoyn_interfacedescription_getmember:                                      procAlljoyn_interfacedescription_getmember,
+	Alljoyn_interfacedescription_getmemberannotation:                            procAlljoyn_interfacedescription_getmemberannotation,
+	Alljoyn_interfacedescription_getmemberargannotation:                         procAlljoyn_interfacedescription_getmemberargannotation,
+	Alljoyn_interfacedescription_getmemberdescriptionforlanguage:                procAlljoyn_interfacedescription_getmemberdescriptionforlanguage,
+	Alljoyn_interfacedescription_getmembers:                                     procAlljoyn_interfacedescription_getmembers,
+	Alljoyn_interfacedescription_getmethod:                                      procAlljoyn_interfacedescription_getmethod,
+	Alljoyn_interfacedescription_getname:                                        procAlljoyn_interfacedescription_getname,
+	Alljoyn_interfacedescription_getproperties:                                  procAlljoyn_interfacedescription_getproperties,
+	Alljoyn_interfacedescription_getproperty:                                    procAlljoyn_interfacedescription_getproperty,
+	Alljoyn_interfacedescription_getpropertyannotation:                          procAlljoyn_interfacedescription_getpropertyannotation,
+	Alljoyn_interfacedescription_getpropertydescriptionforlanguage:              procAlljoyn_interfacedescription_getpropertydescriptionforlanguage,
+	Alljoyn_interfacedescription_getsecuritypolicy:                              procAlljoyn_interfacedescription_getsecuritypolicy,
+	Alljoyn_interfacedescription_getsignal:                                      procAlljoyn_interfacedescription_getsignal,
+	Alljoyn_interfacedescription_hasdescription:                                 procAlljoyn_interfacedescription_hasdescription,
+	Alljoyn_interfacedescription_hasmember:                                      procAlljoyn_interfacedescription_hasmember,
+	Alljoyn_interfacedescription_hasproperties:                                  procAlljoyn_interfacedescription_hasproperties,
+	Alljoyn_interfacedescription_hasproperty:                                    procAlljoyn_interfacedescription_hasproperty,
+	Alljoyn_interfacedescription_introspect:                                     procAlljoyn_interfacedescription_introspect,
+	Alljoyn_interfacedescription_issecure:                                       procAlljoyn_interfacedescription_issecure,
+	Alljoyn_interfacedescription_member_eql:                                     procAlljoyn_interfacedescription_member_eql,
+	Alljoyn_interfacedescription_member_getannotation:                           procAlljoyn_interfacedescription_member_getannotation,
+	Alljoyn_interfacedescription_member_getannotationatindex:                    procAlljoyn_interfacedescription_member_getannotationatindex,
+	Alljoyn_interfacedescription_member_getannotationscount:                     procAlljoyn_interfacedescription_member_getannotationscount,
+	Alljoyn_interfacedescription_member_getargannotation:                        procAlljoyn_interfacedescription_member_getargannotation,
+	Alljoyn_interfacedescription_member_getargannotationatindex:                 procAlljoyn_interfacedescription_member_getargannotationatindex,
+	Alljoyn_interfacedescription_member_getargannotationscount:                  procAlljoyn_interfacedescription_member_getargannotationscount,
+	Alljoyn_interfacedescription_property_eql:                                   procAlljoyn_interfacedescription_property_eql,
+	Alljoyn_interfacedescription_property_getannotation:                         procAlljoyn_interfacedescription_property_getannotation,
+	Alljoyn_interfacedescription_property_getannotationatindex:                  procAlljoyn_interfacedescription_property_getannotationatindex,
+	Alljoyn_interfacedescription_property_getannotationscount:                   procAlljoyn_interfacedescription_property_getannotationscount,
+	Alljoyn_interfacedescription_setargdescription:                              procAlljoyn_interfacedescription_setargdescription,
+	Alljoyn_interfacedescription_setargdescriptionforlanguage:                   procAlljoyn_interfacedescription_setargdescriptionforlanguage,
+	Alljoyn_interfacedescription_setdescription:                                 procAlljoyn_interfacedescription_setdescription,
+	Alljoyn_interfacedescription_setdescriptionforlanguage:                      procAlljoyn_interfacedescription_setdescriptionforlanguage,
+	Alljoyn_interfacedescription_setdescriptionlanguage:                         procAlljoyn_interfacedescription_setdescriptionlanguage,
+	Alljoyn_interfacedescription_setdescriptiontranslationcallback:              procAlljoyn_interfacedescription_setdescriptiontranslationcallback,
+	Alljoyn_interfacedescription_setmemberdescription:                           procAlljoyn_interfacedescription_setmemberdescription,
+	Alljoyn_interfacedescription_setmemberdescriptionforlanguage:                procAlljoyn_interfacedescription_setmemberdescriptionforlanguage,
+	Alljoyn_interfacedescription_setpropertydescription:                         procAlljoyn_interfacedescription_setpropertydescription,
+	Alljoyn_interfacedescription_setpropertydescriptionforlanguage:              procAlljoyn_interfacedescription_setpropertydescriptionforlanguage,
+	Alljoyn_keystorelistener_create:                                             procAlljoyn_keystorelistener_create,
+	Alljoyn_keystorelistener_destroy:                                            procAlljoyn_keystorelistener_destroy,
+	Alljoyn_keystorelistener_getkeys:                                            procAlljoyn_keystorelistener_getkeys,
+	Alljoyn_keystorelistener_putkeys:                                            procAlljoyn_keystorelistener_putkeys,
+	Alljoyn_keystorelistener_with_synchronization_create:                        procAlljoyn_keystorelistener_with_synchronization_create,
+	Alljoyn_message_create:                                                      procAlljoyn_message_create,
+	Alljoyn_message_description:                                                 procAlljoyn_message_description,
+	Alljoyn_message_destroy:                                                     procAlljoyn_message_destroy,
+	Alljoyn_message_eql:                                                         procAlljoyn_message_eql,
+	Alljoyn_message_getarg:                                                      procAlljoyn_message_getarg,
+	Alljoyn_message_getargs:                                                     procAlljoyn_message_getargs,
+	Alljoyn_message_getauthmechanism:                                            procAlljoyn_message_getauthmechanism,
+	Alljoyn_message_getcallserial:                                               procAlljoyn_message_getcallserial,
+	Alljoyn_message_getcompressiontoken:                                         procAlljoyn_message_getcompressiontoken,
+	Alljoyn_message_getdestination:                                              procAlljoyn_message_getdestination,
+	Alljoyn_message_geterrorname:                                                procAlljoyn_message_geterrorname,
+	Alljoyn_message_getflags:                                                    procAlljoyn_message_getflags,
+	Alljoyn_message_getinterface:                                                procAlljoyn_message_getinterface,
+	Alljoyn_message_getmembername:                                               procAlljoyn_message_getmembername,
+	Alljoyn_message_getobjectpath:                                               procAlljoyn_message_getobjectpath,
+	Alljoyn_message_getreceiveendpointname:                                      procAlljoyn_message_getreceiveendpointname,
+	Alljoyn_message_getreplyserial:                                              procAlljoyn_message_getreplyserial,
+	Alljoyn_message_getsender:                                                   procAlljoyn_message_getsender,
+	Alljoyn_message_getsessionid:                                                procAlljoyn_message_getsessionid,
+	Alljoyn_message_getsignature:                                                procAlljoyn_message_getsignature,
+	Alljoyn_message_gettimestamp:                                                procAlljoyn_message_gettimestamp,
+	Alljoyn_message_gettype:                                                     procAlljoyn_message_gettype,
+	Alljoyn_message_isbroadcastsignal:                                           procAlljoyn_message_isbroadcastsignal,
+	Alljoyn_message_isencrypted:                                                 procAlljoyn_message_isencrypted,
+	Alljoyn_message_isexpired:                                                   procAlljoyn_message_isexpired,
+	Alljoyn_message_isglobalbroadcast:                                           procAlljoyn_message_isglobalbroadcast,
+	Alljoyn_message_issessionless:                                               procAlljoyn_message_issessionless,
+	Alljoyn_message_isunreliable:                                                procAlljoyn_message_isunreliable,
+	Alljoyn_message_parseargs:                                                   procAlljoyn_message_parseargs,
+	Alljoyn_message_setendianess:                                                procAlljoyn_message_setendianess,
+	Alljoyn_message_tostring:                                                    procAlljoyn_message_tostring,
+	Alljoyn_msgarg_array_create:                                                 procAlljoyn_msgarg_array_create,
+	Alljoyn_msgarg_array_element:                                                procAlljoyn_msgarg_array_element,
+	Alljoyn_msgarg_array_get:                                                    procAlljoyn_msgarg_array_get,
+	Alljoyn_msgarg_array_set:                                                    procAlljoyn_msgarg_array_set,
+	Alljoyn_msgarg_array_set_offset:                                             procAlljoyn_msgarg_array_set_offset,
+	Alljoyn_msgarg_array_signature:                                              procAlljoyn_msgarg_array_signature,
+	Alljoyn_msgarg_array_tostring:                                               procAlljoyn_msgarg_array_tostring,
+	Alljoyn_msgarg_clear:                                                        procAlljoyn_msgarg_clear,
+	Alljoyn_msgarg_clone:                                                        procAlljoyn_msgarg_clone,
+	Alljoyn_msgarg_copy:                                                         procAlljoyn_msgarg_copy,
+	Alljoyn_msgarg_create:                                                       procAlljoyn_msgarg_create,
+	Alljoyn_msgarg_create_and_set:                                               procAlljoyn_msgarg_create_and_set,
+	Alljoyn_msgarg_destroy:                                                      procAlljoyn_msgarg_destroy,
+	Alljoyn_msgarg_equal:                                                        procAlljoyn_msgarg_equal,
+	Alljoyn_msgarg_get:                                                          procAlljoyn_msgarg_get,
+	Alljoyn_msgarg_get_array_element:                                            procAlljoyn_msgarg_get_array_element,
+	Alljoyn_msgarg_get_array_elementsignature:                                   procAlljoyn_msgarg_get_array_elementsignature,
+	Alljoyn_msgarg_get_array_numberofelements:                                   procAlljoyn_msgarg_get_array_numberofelements,
+	Alljoyn_msgarg_get_bool:                                                     procAlljoyn_msgarg_get_bool,
+	Alljoyn_msgarg_get_bool_array:                                               procAlljoyn_msgarg_get_bool_array,
+	Alljoyn_msgarg_get_double:                                                   procAlljoyn_msgarg_get_double,
+	Alljoyn_msgarg_get_double_array:                                             procAlljoyn_msgarg_get_double_array,
+	Alljoyn_msgarg_get_int16:                                                    procAlljoyn_msgarg_get_int16,
+	Alljoyn_msgarg_get_int16_array:                                              procAlljoyn_msgarg_get_int16_array,
+	Alljoyn_msgarg_get_int32:                                                    procAlljoyn_msgarg_get_int32,
+	Alljoyn_msgarg_get_int32_array:                                              procAlljoyn_msgarg_get_int32_array,
+	Alljoyn_msgarg_get_int64:                                                    procAlljoyn_msgarg_get_int64,
+	Alljoyn_msgarg_get_int64_array:                                              procAlljoyn_msgarg_get_int64_array,
+	Alljoyn_msgarg_get_objectpath:                                               procAlljoyn_msgarg_get_objectpath,
+	Alljoyn_msgarg_get_signature:                                                procAlljoyn_msgarg_get_signature,
+	Alljoyn_msgarg_get_string:                                                   procAlljoyn_msgarg_get_string,
+	Alljoyn_msgarg_get_uint16:                                                   procAlljoyn_msgarg_get_uint16,
+	Alljoyn_msgarg_get_uint16_array:                                             procAlljoyn_msgarg_get_uint16_array,
+	Alljoyn_msgarg_get_uint32:                                                   procAlljoyn_msgarg_get_uint32,
+	Alljoyn_msgarg_get_uint32_array:                                             procAlljoyn_msgarg_get_uint32_array,
+	Alljoyn_msgarg_get_uint64:                                                   procAlljoyn_msgarg_get_uint64,
+	Alljoyn_msgarg_get_uint64_array:                                             procAlljoyn_msgarg_get_uint64_array,
+	Alljoyn_msgarg_get_uint8:                                                    procAlljoyn_msgarg_get_uint8,
+	Alljoyn_msgarg_get_uint8_array:                                              procAlljoyn_msgarg_get_uint8_array,
+	Alljoyn_msgarg_get_variant:                                                  procAlljoyn_msgarg_get_variant,
+	Alljoyn_msgarg_get_variant_array:                                            procAlljoyn_msgarg_get_variant_array,
+	Alljoyn_msgarg_getdictelement:                                               procAlljoyn_msgarg_getdictelement,
+	Alljoyn_msgarg_getkey:                                                       procAlljoyn_msgarg_getkey,
+	Alljoyn_msgarg_getmember:                                                    procAlljoyn_msgarg_getmember,
+	Alljoyn_msgarg_getnummembers:                                                procAlljoyn_msgarg_getnummembers,
+	Alljoyn_msgarg_gettype:                                                      procAlljoyn_msgarg_gettype,
+	Alljoyn_msgarg_getvalue:                                                     procAlljoyn_msgarg_getvalue,
+	Alljoyn_msgarg_hassignature:                                                 procAlljoyn_msgarg_hassignature,
+	Alljoyn_msgarg_set:                                                          procAlljoyn_msgarg_set,
+	Alljoyn_msgarg_set_and_stabilize:                                            procAlljoyn_msgarg_set_and_stabilize,
+	Alljoyn_msgarg_set_bool:                                                     procAlljoyn_msgarg_set_bool,
+	Alljoyn_msgarg_set_bool_array:                                               procAlljoyn_msgarg_set_bool_array,
+	Alljoyn_msgarg_set_double:                                                   procAlljoyn_msgarg_set_double,
+	Alljoyn_msgarg_set_double_array:                                             procAlljoyn_msgarg_set_double_array,
+	Alljoyn_msgarg_set_int16:                                                    procAlljoyn_msgarg_set_int16,
+	Alljoyn_msgarg_set_int16_array:                                              procAlljoyn_msgarg_set_int16_array,
+	Alljoyn_msgarg_set_int32:                                                    procAlljoyn_msgarg_set_int32,
+	Alljoyn_msgarg_set_int32_array:                                              procAlljoyn_msgarg_set_int32_array,
+	Alljoyn_msgarg_set_int64:                                                    procAlljoyn_msgarg_set_int64,
+	Alljoyn_msgarg_set_int64_array:                                              procAlljoyn_msgarg_set_int64_array,
+	Alljoyn_msgarg_set_objectpath:                                               procAlljoyn_msgarg_set_objectpath,
+	Alljoyn_msgarg_set_objectpath_array:                                         procAlljoyn_msgarg_set_objectpath_array,
+	Alljoyn_msgarg_set_signature:                                                procAlljoyn_msgarg_set_signature,
+	Alljoyn_msgarg_set_signature_array:                                          procAlljoyn_msgarg_set_signature_array,
+	Alljoyn_msgarg_set_string:                                                   procAlljoyn_msgarg_set_string,
+	Alljoyn_msgarg_set_string_array:                                             procAlljoyn_msgarg_set_string_array,
+	Alljoyn_msgarg_set_uint16:                                                   procAlljoyn_msgarg_set_uint16,
+	Alljoyn_msgarg_set_uint16_array:                                             procAlljoyn_msgarg_set_uint16_array,
+	Alljoyn_msgarg_set_uint32:                                                   procAlljoyn_msgarg_set_uint32,
+	Alljoyn_msgarg_set_uint32_array:                                             procAlljoyn_msgarg_set_uint32_array,
+	Alljoyn_msgarg_set_uint64:                                                   procAlljoyn_msgarg_set_uint64,
+	Alljoyn_msgarg_set_uint64_array:                                             procAlljoyn_msgarg_set_uint64_array,
+	Alljoyn_msgarg_set_uint8:                                                    procAlljoyn_msgarg_set_uint8,
+	Alljoyn_msgarg_set_uint8_array:                                              procAlljoyn_msgarg_set_uint8_array,
+	Alljoyn_msgarg_setdictentry:                                                 procAlljoyn_msgarg_setdictentry,
+	Alljoyn_msgarg_setstruct:                                                    procAlljoyn_msgarg_setstruct,
+	Alljoyn_msgarg_signature:                                                    procAlljoyn_msgarg_signature,
+	Alljoyn_msgarg_stabilize:                                                    procAlljoyn_msgarg_stabilize,
+	Alljoyn_msgarg_tostring:                                                     procAlljoyn_msgarg_tostring,
+	Alljoyn_observer_create:                                                     procAlljoyn_observer_create,
+	Alljoyn_observer_destroy:                                                    procAlljoyn_observer_destroy,
+	Alljoyn_observer_get:                                                        procAlljoyn_observer_get,
+	Alljoyn_observer_getfirst:                                                   procAlljoyn_observer_getfirst,
+	Alljoyn_observer_getnext:                                                    procAlljoyn_observer_getnext,
+	Alljoyn_observer_registerlistener:                                           procAlljoyn_observer_registerlistener,
+	Alljoyn_observer_unregisteralllisteners:                                     procAlljoyn_observer_unregisteralllisteners,
+	Alljoyn_observer_unregisterlistener:                                         procAlljoyn_observer_unregisterlistener,
+	Alljoyn_observerlistener_create:                                             procAlljoyn_observerlistener_create,
+	Alljoyn_observerlistener_destroy:                                            procAlljoyn_observerlistener_destroy,
+	Alljoyn_passwordmanager_setcredentials:                                      procAlljoyn_passwordmanager_setcredentials,
+	Alljoyn_permissionconfigurationlistener_create:                              procAlljoyn_permissionconfigurationlistener_create,
+	Alljoyn_permissionconfigurationlistener_destroy:                             procAlljoyn_permissionconfigurationlistener_destroy,
+	Alljoyn_permissionconfigurator_certificatechain_destroy:                     procAlljoyn_permissionconfigurator_certificatechain_destroy,
+	Alljoyn_permissionconfigurator_certificateid_cleanup:                        procAlljoyn_permissionconfigurator_certificateid_cleanup,
+	Alljoyn_permissionconfigurator_certificateidarray_cleanup:                   procAlljoyn_permissionconfigurator_certificateidarray_cleanup,
+	Alljoyn_permissionconfigurator_claim:                                        procAlljoyn_permissionconfigurator_claim,
+	Alljoyn_permissionconfigurator_endmanagement:                                procAlljoyn_permissionconfigurator_endmanagement,
+	Alljoyn_permissionconfigurator_getapplicationstate:                          procAlljoyn_permissionconfigurator_getapplicationstate,
+	Alljoyn_permissionconfigurator_getclaimcapabilities:                         procAlljoyn_permissionconfigurator_getclaimcapabilities,
+	Alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo:           procAlljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo,
+	Alljoyn_permissionconfigurator_getdefaultclaimcapabilities:                  procAlljoyn_permissionconfigurator_getdefaultclaimcapabilities,
+	Alljoyn_permissionconfigurator_getdefaultpolicy:                             procAlljoyn_permissionconfigurator_getdefaultpolicy,
+	Alljoyn_permissionconfigurator_getidentity:                                  procAlljoyn_permissionconfigurator_getidentity,
+	Alljoyn_permissionconfigurator_getidentitycertificateid:                     procAlljoyn_permissionconfigurator_getidentitycertificateid,
+	Alljoyn_permissionconfigurator_getmanifests:                                 procAlljoyn_permissionconfigurator_getmanifests,
+	Alljoyn_permissionconfigurator_getmanifesttemplate:                          procAlljoyn_permissionconfigurator_getmanifesttemplate,
+	Alljoyn_permissionconfigurator_getmembershipsummaries:                       procAlljoyn_permissionconfigurator_getmembershipsummaries,
+	Alljoyn_permissionconfigurator_getpolicy:                                    procAlljoyn_permissionconfigurator_getpolicy,
+	Alljoyn_permissionconfigurator_getpublickey:                                 procAlljoyn_permissionconfigurator_getpublickey,
+	Alljoyn_permissionconfigurator_installmanifests:                             procAlljoyn_permissionconfigurator_installmanifests,
+	Alljoyn_permissionconfigurator_installmembership:                            procAlljoyn_permissionconfigurator_installmembership,
+	Alljoyn_permissionconfigurator_manifestarray_cleanup:                        procAlljoyn_permissionconfigurator_manifestarray_cleanup,
+	Alljoyn_permissionconfigurator_manifesttemplate_destroy:                     procAlljoyn_permissionconfigurator_manifesttemplate_destroy,
+	Alljoyn_permissionconfigurator_policy_destroy:                               procAlljoyn_permissionconfigurator_policy_destroy,
+	Alljoyn_permissionconfigurator_publickey_destroy:                            procAlljoyn_permissionconfigurator_publickey_destroy,
+	Alljoyn_permissionconfigurator_removemembership:                             procAlljoyn_permissionconfigurator_removemembership,
+	Alljoyn_permissionconfigurator_reset:                                        procAlljoyn_permissionconfigurator_reset,
+	Alljoyn_permissionconfigurator_resetpolicy:                                  procAlljoyn_permissionconfigurator_resetpolicy,
+	Alljoyn_permissionconfigurator_setapplicationstate:                          procAlljoyn_permissionconfigurator_setapplicationstate,
+	Alljoyn_permissionconfigurator_setclaimcapabilities:                         procAlljoyn_permissionconfigurator_setclaimcapabilities,
+	Alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo:           procAlljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo,
+	Alljoyn_permissionconfigurator_setmanifesttemplatefromxml:                   procAlljoyn_permissionconfigurator_setmanifesttemplatefromxml,
+	Alljoyn_permissionconfigurator_startmanagement:                              procAlljoyn_permissionconfigurator_startmanagement,
+	Alljoyn_permissionconfigurator_updateidentity:                               procAlljoyn_permissionconfigurator_updateidentity,
+	Alljoyn_permissionconfigurator_updatepolicy:                                 procAlljoyn_permissionconfigurator_updatepolicy,
+	Alljoyn_pinglistener_create:                                                 procAlljoyn_pinglistener_create,
+	Alljoyn_pinglistener_destroy:                                                procAlljoyn_pinglistener_destroy,
+	Alljoyn_proxybusobject_addchild:                                             procAlljoyn_proxybusobject_addchild,
+	Alljoyn_proxybusobject_addinterface:                                         procAlljoyn_proxybusobject_addinterface,
+	Alljoyn_proxybusobject_addinterface_by_name:                                 procAlljoyn_proxybusobject_addinterface_by_name,
+	Alljoyn_proxybusobject_copy:                                                 procAlljoyn_proxybusobject_copy,
+	Alljoyn_proxybusobject_create:                                               procAlljoyn_proxybusobject_create,
+	Alljoyn_proxybusobject_create_secure:                                        procAlljoyn_proxybusobject_create_secure,
+	Alljoyn_proxybusobject_destroy:                                              procAlljoyn_proxybusobject_destroy,
+	Alljoyn_proxybusobject_enablepropertycaching:                                procAlljoyn_proxybusobject_enablepropertycaching,
+	Alljoyn_proxybusobject_getallproperties:                                     procAlljoyn_proxybusobject_getallproperties,
+	Alljoyn_proxybusobject_getallpropertiesasync:                                procAlljoyn_proxybusobject_getallpropertiesasync,
+	Alljoyn_proxybusobject_getchild:                                             procAlljoyn_proxybusobject_getchild,
+	Alljoyn_proxybusobject_getchildren:                                          procAlljoyn_proxybusobject_getchildren,
+	Alljoyn_proxybusobject_getinterface:                                         procAlljoyn_proxybusobject_getinterface,
+	Alljoyn_proxybusobject_getinterfaces:                                        procAlljoyn_proxybusobject_getinterfaces,
+	Alljoyn_proxybusobject_getpath:                                              procAlljoyn_proxybusobject_getpath,
+	Alljoyn_proxybusobject_getproperty:                                          procAlljoyn_proxybusobject_getproperty,
+	Alljoyn_proxybusobject_getpropertyasync:                                     procAlljoyn_proxybusobject_getpropertyasync,
+	Alljoyn_proxybusobject_getservicename:                                       procAlljoyn_proxybusobject_getservicename,
+	Alljoyn_proxybusobject_getsessionid:                                         procAlljoyn_proxybusobject_getsessionid,
+	Alljoyn_proxybusobject_getuniquename:                                        procAlljoyn_proxybusobject_getuniquename,
+	Alljoyn_proxybusobject_implementsinterface:                                  procAlljoyn_proxybusobject_implementsinterface,
+	Alljoyn_proxybusobject_introspectremoteobject:                               procAlljoyn_proxybusobject_introspectremoteobject,
+	Alljoyn_proxybusobject_introspectremoteobjectasync:                          procAlljoyn_proxybusobject_introspectremoteobjectasync,
+	Alljoyn_proxybusobject_issecure:                                             procAlljoyn_proxybusobject_issecure,
+	Alljoyn_proxybusobject_isvalid:                                              procAlljoyn_proxybusobject_isvalid,
+	Alljoyn_proxybusobject_methodcall:                                           procAlljoyn_proxybusobject_methodcall,
+	Alljoyn_proxybusobject_methodcall_member:                                    procAlljoyn_proxybusobject_methodcall_member,
+	Alljoyn_proxybusobject_methodcall_member_noreply:                            procAlljoyn_proxybusobject_methodcall_member_noreply,
+	Alljoyn_proxybusobject_methodcall_noreply:                                   procAlljoyn_proxybusobject_methodcall_noreply,
+	Alljoyn_proxybusobject_methodcallasync:                                      procAlljoyn_proxybusobject_methodcallasync,
+	Alljoyn_proxybusobject_methodcallasync_member:                               procAlljoyn_proxybusobject_methodcallasync_member,
+	Alljoyn_proxybusobject_parsexml:                                             procAlljoyn_proxybusobject_parsexml,
+	Alljoyn_proxybusobject_ref_create:                                           procAlljoyn_proxybusobject_ref_create,
+	Alljoyn_proxybusobject_ref_decref:                                           procAlljoyn_proxybusobject_ref_decref,
+	Alljoyn_proxybusobject_ref_get:                                              procAlljoyn_proxybusobject_ref_get,
+	Alljoyn_proxybusobject_ref_incref:                                           procAlljoyn_proxybusobject_ref_incref,
+	Alljoyn_proxybusobject_registerpropertieschangedlistener:                    procAlljoyn_proxybusobject_registerpropertieschangedlistener,
+	Alljoyn_proxybusobject_removechild:                                          procAlljoyn_proxybusobject_removechild,
+	Alljoyn_proxybusobject_secureconnection:                                     procAlljoyn_proxybusobject_secureconnection,
+	Alljoyn_proxybusobject_secureconnectionasync:                                procAlljoyn_proxybusobject_secureconnectionasync,
+	Alljoyn_proxybusobject_setproperty:                                          procAlljoyn_proxybusobject_setproperty,
+	Alljoyn_proxybusobject_setpropertyasync:                                     procAlljoyn_proxybusobject_setpropertyasync,
+	Alljoyn_proxybusobject_unregisterpropertieschangedlistener:                  procAlljoyn_proxybusobject_unregisterpropertieschangedlistener,
+	Alljoyn_routerinit:                                                          procAlljoyn_routerinit,
+	Alljoyn_routerinitwithconfig:                                                procAlljoyn_routerinitwithconfig,
+	Alljoyn_routershutdown:                                                      procAlljoyn_routershutdown,
+	Alljoyn_securityapplicationproxy_claim:                                      procAlljoyn_securityapplicationproxy_claim,
+	Alljoyn_securityapplicationproxy_computemanifestdigest:                      procAlljoyn_securityapplicationproxy_computemanifestdigest,
+	Alljoyn_securityapplicationproxy_create:                                     procAlljoyn_securityapplicationproxy_create,
+	Alljoyn_securityapplicationproxy_destroy:                                    procAlljoyn_securityapplicationproxy_destroy,
+	Alljoyn_securityapplicationproxy_digest_destroy:                             procAlljoyn_securityapplicationproxy_digest_destroy,
+	Alljoyn_securityapplicationproxy_eccpublickey_destroy:                       procAlljoyn_securityapplicationproxy_eccpublickey_destroy,
+	Alljoyn_securityapplicationproxy_endmanagement:                              procAlljoyn_securityapplicationproxy_endmanagement,
+	Alljoyn_securityapplicationproxy_getapplicationstate:                        procAlljoyn_securityapplicationproxy_getapplicationstate,
+	Alljoyn_securityapplicationproxy_getclaimcapabilities:                       procAlljoyn_securityapplicationproxy_getclaimcapabilities,
+	Alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo:         procAlljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo,
+	Alljoyn_securityapplicationproxy_getdefaultpolicy:                           procAlljoyn_securityapplicationproxy_getdefaultpolicy,
+	Alljoyn_securityapplicationproxy_geteccpublickey:                            procAlljoyn_securityapplicationproxy_geteccpublickey,
+	Alljoyn_securityapplicationproxy_getmanifesttemplate:                        procAlljoyn_securityapplicationproxy_getmanifesttemplate,
+	Alljoyn_securityapplicationproxy_getpermissionmanagementsessionport:         procAlljoyn_securityapplicationproxy_getpermissionmanagementsessionport,
+	Alljoyn_securityapplicationproxy_getpolicy:                                  procAlljoyn_securityapplicationproxy_getpolicy,
+	Alljoyn_securityapplicationproxy_installmembership:                          procAlljoyn_securityapplicationproxy_installmembership,
+	Alljoyn_securityapplicationproxy_manifest_destroy:                           procAlljoyn_securityapplicationproxy_manifest_destroy,
+	Alljoyn_securityapplicationproxy_manifesttemplate_destroy:                   procAlljoyn_securityapplicationproxy_manifesttemplate_destroy,
+	Alljoyn_securityapplicationproxy_policy_destroy:                             procAlljoyn_securityapplicationproxy_policy_destroy,
+	Alljoyn_securityapplicationproxy_reset:                                      procAlljoyn_securityapplicationproxy_reset,
+	Alljoyn_securityapplicationproxy_resetpolicy:                                procAlljoyn_securityapplicationproxy_resetpolicy,
+	Alljoyn_securityapplicationproxy_setmanifestsignature:                       procAlljoyn_securityapplicationproxy_setmanifestsignature,
+	Alljoyn_securityapplicationproxy_signmanifest:                               procAlljoyn_securityapplicationproxy_signmanifest,
+	Alljoyn_securityapplicationproxy_startmanagement:                            procAlljoyn_securityapplicationproxy_startmanagement,
+	Alljoyn_securityapplicationproxy_updateidentity:                             procAlljoyn_securityapplicationproxy_updateidentity,
+	Alljoyn_securityapplicationproxy_updatepolicy:                               procAlljoyn_securityapplicationproxy_updatepolicy,
+	Alljoyn_sessionlistener_create:                                              procAlljoyn_sessionlistener_create,
+	Alljoyn_sessionlistener_destroy:                                             procAlljoyn_sessionlistener_destroy,
+	Alljoyn_sessionopts_cmp:                                                     procAlljoyn_sessionopts_cmp,
+	Alljoyn_sessionopts_create:                                                  procAlljoyn_sessionopts_create,
+	Alljoyn_sessionopts_destroy:                                                 procAlljoyn_sessionopts_destroy,
+	Alljoyn_sessionopts_get_multipoint:                                          procAlljoyn_sessionopts_get_multipoint,
+	Alljoyn_sessionopts_get_proximity:                                           procAlljoyn_sessionopts_get_proximity,
+	Alljoyn_sessionopts_get_traffic:                                             procAlljoyn_sessionopts_get_traffic,
+	Alljoyn_sessionopts_get_transports:                                          procAlljoyn_sessionopts_get_transports,
+	Alljoyn_sessionopts_iscompatible:                                            procAlljoyn_sessionopts_iscompatible,
+	Alljoyn_sessionopts_set_multipoint:                                          procAlljoyn_sessionopts_set_multipoint,
+	Alljoyn_sessionopts_set_proximity:                                           procAlljoyn_sessionopts_set_proximity,
+	Alljoyn_sessionopts_set_traffic:                                             procAlljoyn_sessionopts_set_traffic,
+	Alljoyn_sessionopts_set_transports:                                          procAlljoyn_sessionopts_set_transports,
+	Alljoyn_sessionportlistener_create:                                          procAlljoyn_sessionportlistener_create,
+	Alljoyn_sessionportlistener_destroy:                                         procAlljoyn_sessionportlistener_destroy,
+	Alljoyn_shutdown:                                                            procAlljoyn_shutdown,
+	Alljoyn_unity_deferred_callbacks_process:                                    procAlljoyn_unity_deferred_callbacks_process,
+	Alljoyn_unity_set_deferred_callback_mainthread_only:                         procAlljoyn_unity_set_deferred_callback_mainthread_only,
+	QCC_StatusText:                                                              procQCC_StatusText,
+}
+
 // AllJoynAcceptBusConnection calls MSAJApi!AllJoynAcceptBusConnection.
 func AllJoynAcceptBusConnection(serverBusHandle foundation.HANDLE, abortEvent foundation.HANDLE) uint32 {
 	r1, _, _ := syscall.SyscallN(procAllJoynAcceptBusConnection.Addr(), uintptr(serverBusHandle), uintptr(abortEvent))
@@ -566,8 +1690,8 @@ func AllJoynCloseBusHandle(busHandle foundation.HANDLE) error {
 // AllJoynConnectToBus calls MSAJApi!AllJoynConnectToBus.
 // https://learn.microsoft.com/windows/win32/api/msajtransport/nf-msajtransport-alljoynconnecttobus
 // Minimum OS: windows10.0.10240.
-func AllJoynConnectToBus(connectionSpec string) (foundation.HANDLE, error) {
-	_connectionSpec := win32.UTF16Ptr(connectionSpec)
+func AllJoynConnectToBus(connectionSpec *string) (foundation.HANDLE, error) {
+	_connectionSpec := win32.UTF16PtrOrNil(connectionSpec)
 	r1, _, e1 := syscall.SyscallN(procAllJoynConnectToBus.Addr(), uintptr(unsafe.Pointer(_connectionSpec)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1550,6 +2674,22 @@ func Alljoyn_busattachment_registerkeystorelistener(bus Alljoyn_busattachment, l
 	return QStatus(r1)
 }
 
+var specAlljoyn_busattachment_registersignalhandler = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_busattachment_registersignalhandler calls MSAJApi!alljoyn_busattachment_registersignalhandler.
+func Alljoyn_busattachment_registersignalhandler(bus Alljoyn_busattachment, signal_handler Alljoyn_messagereceiver_signalhandler_ptr, member Alljoyn_interfacedescription_member, srcPath foundation.PSTR) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busattachment_registersignalhandler.Addr(), specAlljoyn_busattachment_registersignalhandler, nil, uintptr(bus), uintptr(signal_handler), uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(srcPath))).Tuple()
+	return QStatus(r1)
+}
+
+var specAlljoyn_busattachment_registersignalhandlerwithrule = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_busattachment_registersignalhandlerwithrule calls MSAJApi!alljoyn_busattachment_registersignalhandlerwithrule.
+func Alljoyn_busattachment_registersignalhandlerwithrule(bus Alljoyn_busattachment, signal_handler Alljoyn_messagereceiver_signalhandler_ptr, member Alljoyn_interfacedescription_member, matchRule foundation.PSTR) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busattachment_registersignalhandlerwithrule.Addr(), specAlljoyn_busattachment_registersignalhandlerwithrule, nil, uintptr(bus), uintptr(signal_handler), uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(matchRule))).Tuple()
+	return QStatus(r1)
+}
+
 // Alljoyn_busattachment_releasename calls MSAJApi!alljoyn_busattachment_releasename.
 func Alljoyn_busattachment_releasename(bus Alljoyn_busattachment, name foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_releasename.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)))
@@ -1672,6 +2812,22 @@ func Alljoyn_busattachment_unregisterbusobject(bus Alljoyn_busattachment, object
 	syscall.SyscallN(procAlljoyn_busattachment_unregisterbusobject.Addr(), uintptr(bus), uintptr(object))
 }
 
+var specAlljoyn_busattachment_unregistersignalhandler = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_busattachment_unregistersignalhandler calls MSAJApi!alljoyn_busattachment_unregistersignalhandler.
+func Alljoyn_busattachment_unregistersignalhandler(bus Alljoyn_busattachment, signal_handler Alljoyn_messagereceiver_signalhandler_ptr, member Alljoyn_interfacedescription_member, srcPath foundation.PSTR) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busattachment_unregistersignalhandler.Addr(), specAlljoyn_busattachment_unregistersignalhandler, nil, uintptr(bus), uintptr(signal_handler), uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(srcPath))).Tuple()
+	return QStatus(r1)
+}
+
+var specAlljoyn_busattachment_unregistersignalhandlerwithrule = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_busattachment_unregistersignalhandlerwithrule calls MSAJApi!alljoyn_busattachment_unregistersignalhandlerwithrule.
+func Alljoyn_busattachment_unregistersignalhandlerwithrule(bus Alljoyn_busattachment, signal_handler Alljoyn_messagereceiver_signalhandler_ptr, member Alljoyn_interfacedescription_member, matchRule foundation.PSTR) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busattachment_unregistersignalhandlerwithrule.Addr(), specAlljoyn_busattachment_unregistersignalhandlerwithrule, nil, uintptr(bus), uintptr(signal_handler), uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(matchRule))).Tuple()
+	return QStatus(r1)
+}
+
 // Alljoyn_busattachment_whoimplements_interface calls MSAJApi!alljoyn_busattachment_whoimplements_interface.
 func Alljoyn_busattachment_whoimplements_interface(bus Alljoyn_busattachment, implementsInterface foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_whoimplements_interface.Addr(), uintptr(bus), uintptr(unsafe.Pointer(implementsInterface)))
@@ -1704,6 +2860,14 @@ func Alljoyn_busobject_addinterface(bus Alljoyn_busobject, iface Alljoyn_interfa
 // Alljoyn_busobject_addinterface_announced calls MSAJApi!alljoyn_busobject_addinterface_announced.
 func Alljoyn_busobject_addinterface_announced(bus Alljoyn_busobject, iface Alljoyn_interfacedescription) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_addinterface_announced.Addr(), uintptr(bus), uintptr(iface))
+	return QStatus(r1)
+}
+
+var specAlljoyn_busobject_addmethodhandler = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word}}
+
+// Alljoyn_busobject_addmethodhandler calls MSAJApi!alljoyn_busobject_addmethodhandler.
+func Alljoyn_busobject_addmethodhandler(bus Alljoyn_busobject, member Alljoyn_interfacedescription_member, handler Alljoyn_messagereceiver_methodhandler_ptr, context unsafe.Pointer) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busobject_addmethodhandler.Addr(), specAlljoyn_busobject_addmethodhandler, nil, uintptr(bus), uintptr(unsafe.Pointer(&member)), uintptr(handler), uintptr(unsafe.Pointer(context))).Tuple()
 	return QStatus(r1)
 }
 
@@ -1797,6 +2961,14 @@ func Alljoyn_busobject_methodreply_status(bus Alljoyn_busobject, msg Alljoyn_mes
 // Alljoyn_busobject_setannounceflag calls MSAJApi!alljoyn_busobject_setannounceflag.
 func Alljoyn_busobject_setannounceflag(bus Alljoyn_busobject, iface Alljoyn_interfacedescription, isAnnounced Alljoyn_about_announceflag) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_setannounceflag.Addr(), uintptr(bus), uintptr(iface), uintptr(isAnnounced))
+	return QStatus(r1)
+}
+
+var specAlljoyn_busobject_signal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_busobject_signal calls MSAJApi!alljoyn_busobject_signal.
+func Alljoyn_busobject_signal(bus Alljoyn_busobject, destination foundation.PSTR, sessionId uint32, signal Alljoyn_interfacedescription_member, args Alljoyn_msgarg, numArgs uintptr, timeToLive uint16, flags byte, msg Alljoyn_message) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busobject_signal.Addr(), specAlljoyn_busobject_signal, nil, uintptr(bus), uintptr(unsafe.Pointer(destination)), uintptr(sessionId), uintptr(unsafe.Pointer(&signal)), uintptr(args), uintptr(numArgs), uintptr(timeToLive), uintptr(flags), uintptr(msg)).Tuple()
 	return QStatus(r1)
 }
 
@@ -2130,6 +3302,91 @@ func Alljoyn_interfacedescription_introspect(iface Alljoyn_interfacedescription,
 func Alljoyn_interfacedescription_issecure(iface Alljoyn_interfacedescription) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_issecure.Addr(), uintptr(iface))
 	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_member_eql = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Struct(56, 8, 0, false)}}
+
+// Alljoyn_interfacedescription_member_eql calls MSAJApi!alljoyn_interfacedescription_member_eql.
+func Alljoyn_interfacedescription_member_eql(one Alljoyn_interfacedescription_member, other Alljoyn_interfacedescription_member) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_eql.Addr(), specAlljoyn_interfacedescription_member_eql, nil, uintptr(unsafe.Pointer(&one)), uintptr(unsafe.Pointer(&other))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_member_getannotation = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_member_getannotation calls MSAJApi!alljoyn_interfacedescription_member_getannotation.
+func Alljoyn_interfacedescription_member_getannotation(member Alljoyn_interfacedescription_member, name foundation.PSTR, value foundation.PSTR, value_size *uintptr) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_getannotation.Addr(), specAlljoyn_interfacedescription_member_getannotation, nil, uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_member_getannotationatindex = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_member_getannotationatindex calls MSAJApi!alljoyn_interfacedescription_member_getannotationatindex.
+func Alljoyn_interfacedescription_member_getannotationatindex(member Alljoyn_interfacedescription_member, index uintptr, name foundation.PSTR, name_size *uintptr, value foundation.PSTR, value_size *uintptr) {
+	win32.Call(procAlljoyn_interfacedescription_member_getannotationatindex.Addr(), specAlljoyn_interfacedescription_member_getannotationatindex, nil, uintptr(unsafe.Pointer(&member)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(name_size)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+}
+
+var specAlljoyn_interfacedescription_member_getannotationscount = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false)}}
+
+// Alljoyn_interfacedescription_member_getannotationscount calls MSAJApi!alljoyn_interfacedescription_member_getannotationscount.
+func Alljoyn_interfacedescription_member_getannotationscount(member Alljoyn_interfacedescription_member) uintptr {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_getannotationscount.Addr(), specAlljoyn_interfacedescription_member_getannotationscount, nil, uintptr(unsafe.Pointer(&member))).Tuple()
+	return uintptr(r1)
+}
+
+var specAlljoyn_interfacedescription_member_getargannotation = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_member_getargannotation calls MSAJApi!alljoyn_interfacedescription_member_getargannotation.
+func Alljoyn_interfacedescription_member_getargannotation(member Alljoyn_interfacedescription_member, argName foundation.PSTR, name foundation.PSTR, value foundation.PSTR, value_size *uintptr) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_getargannotation.Addr(), specAlljoyn_interfacedescription_member_getargannotation, nil, uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(argName)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_member_getargannotationatindex = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_member_getargannotationatindex calls MSAJApi!alljoyn_interfacedescription_member_getargannotationatindex.
+func Alljoyn_interfacedescription_member_getargannotationatindex(member Alljoyn_interfacedescription_member, argName foundation.PSTR, index uintptr, name foundation.PSTR, name_size *uintptr, value foundation.PSTR, value_size *uintptr) {
+	win32.Call(procAlljoyn_interfacedescription_member_getargannotationatindex.Addr(), specAlljoyn_interfacedescription_member_getargannotationatindex, nil, uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(argName)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(name_size)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+}
+
+var specAlljoyn_interfacedescription_member_getargannotationscount = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_interfacedescription_member_getargannotationscount calls MSAJApi!alljoyn_interfacedescription_member_getargannotationscount.
+func Alljoyn_interfacedescription_member_getargannotationscount(member Alljoyn_interfacedescription_member, argName foundation.PSTR) uintptr {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_getargannotationscount.Addr(), specAlljoyn_interfacedescription_member_getargannotationscount, nil, uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(argName))).Tuple()
+	return uintptr(r1)
+}
+
+var specAlljoyn_interfacedescription_property_eql = &win32.Spec{Args: []win32.Arg{win32.Struct(32, 8, 0, false), win32.Struct(32, 8, 0, false)}}
+
+// Alljoyn_interfacedescription_property_eql calls MSAJApi!alljoyn_interfacedescription_property_eql.
+func Alljoyn_interfacedescription_property_eql(one Alljoyn_interfacedescription_property, other Alljoyn_interfacedescription_property) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_property_eql.Addr(), specAlljoyn_interfacedescription_property_eql, nil, uintptr(unsafe.Pointer(&one)), uintptr(unsafe.Pointer(&other))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_property_getannotation = &win32.Spec{Args: []win32.Arg{win32.Struct(32, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_property_getannotation calls MSAJApi!alljoyn_interfacedescription_property_getannotation.
+func Alljoyn_interfacedescription_property_getannotation(property Alljoyn_interfacedescription_property, name foundation.PSTR, value foundation.PSTR, value_size *uintptr) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_property_getannotation.Addr(), specAlljoyn_interfacedescription_property_getannotation, nil, uintptr(unsafe.Pointer(&property)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_property_getannotationatindex = &win32.Spec{Args: []win32.Arg{win32.Struct(32, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_property_getannotationatindex calls MSAJApi!alljoyn_interfacedescription_property_getannotationatindex.
+func Alljoyn_interfacedescription_property_getannotationatindex(property Alljoyn_interfacedescription_property, index uintptr, name foundation.PSTR, name_size *uintptr, value foundation.PSTR, value_size *uintptr) {
+	win32.Call(procAlljoyn_interfacedescription_property_getannotationatindex.Addr(), specAlljoyn_interfacedescription_property_getannotationatindex, nil, uintptr(unsafe.Pointer(&property)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(name_size)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+}
+
+var specAlljoyn_interfacedescription_property_getannotationscount = &win32.Spec{Args: []win32.Arg{win32.Struct(32, 8, 0, false)}}
+
+// Alljoyn_interfacedescription_property_getannotationscount calls MSAJApi!alljoyn_interfacedescription_property_getannotationscount.
+func Alljoyn_interfacedescription_property_getannotationscount(property Alljoyn_interfacedescription_property) uintptr {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_property_getannotationscount.Addr(), specAlljoyn_interfacedescription_property_getannotationscount, nil, uintptr(unsafe.Pointer(&property))).Tuple()
+	return uintptr(r1)
 }
 
 // Alljoyn_interfacedescription_setargdescription calls MSAJApi!alljoyn_interfacedescription_setargdescription.
@@ -2706,6 +3963,14 @@ func Alljoyn_msgarg_set_bool(arg Alljoyn_msgarg, b int32) QStatus {
 // Alljoyn_msgarg_set_bool_array calls MSAJApi!alljoyn_msgarg_set_bool_array.
 func Alljoyn_msgarg_set_bool_array(arg Alljoyn_msgarg, length uintptr, ab *int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_bool_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(ab)))
+	return QStatus(r1)
+}
+
+var specAlljoyn_msgarg_set_double = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Alljoyn_msgarg_set_double calls MSAJApi!alljoyn_msgarg_set_double.
+func Alljoyn_msgarg_set_double(arg Alljoyn_msgarg, d float64) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_msgarg_set_double.Addr(), specAlljoyn_msgarg_set_double, nil, uintptr(arg), uintptr(math.Float64bits(d))).Tuple()
 	return QStatus(r1)
 }
 
@@ -3292,6 +4557,22 @@ func Alljoyn_proxybusobject_methodcall(proxyObj Alljoyn_proxybusobject, ifaceNam
 	return QStatus(r1)
 }
 
+var specAlljoyn_proxybusobject_methodcall_member = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_proxybusobject_methodcall_member calls MSAJApi!alljoyn_proxybusobject_methodcall_member.
+func Alljoyn_proxybusobject_methodcall_member(proxyObj Alljoyn_proxybusobject, method Alljoyn_interfacedescription_member, args Alljoyn_msgarg, numArgs uintptr, replyMsg Alljoyn_message, timeout uint32, flags byte) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_proxybusobject_methodcall_member.Addr(), specAlljoyn_proxybusobject_methodcall_member, nil, uintptr(proxyObj), uintptr(unsafe.Pointer(&method)), uintptr(args), uintptr(numArgs), uintptr(replyMsg), uintptr(timeout), uintptr(flags)).Tuple()
+	return QStatus(r1)
+}
+
+var specAlljoyn_proxybusobject_methodcall_member_noreply = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_proxybusobject_methodcall_member_noreply calls MSAJApi!alljoyn_proxybusobject_methodcall_member_noreply.
+func Alljoyn_proxybusobject_methodcall_member_noreply(proxyObj Alljoyn_proxybusobject, method Alljoyn_interfacedescription_member, args Alljoyn_msgarg, numArgs uintptr, flags byte) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_proxybusobject_methodcall_member_noreply.Addr(), specAlljoyn_proxybusobject_methodcall_member_noreply, nil, uintptr(proxyObj), uintptr(unsafe.Pointer(&method)), uintptr(args), uintptr(numArgs), uintptr(flags)).Tuple()
+	return QStatus(r1)
+}
+
 // Alljoyn_proxybusobject_methodcall_noreply calls MSAJApi!alljoyn_proxybusobject_methodcall_noreply.
 func Alljoyn_proxybusobject_methodcall_noreply(proxyObj Alljoyn_proxybusobject, ifaceName foundation.PSTR, methodName foundation.PSTR, args Alljoyn_msgarg, numArgs uintptr, flags byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_methodcall_noreply.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(ifaceName)), uintptr(unsafe.Pointer(methodName)), uintptr(args), uintptr(numArgs), uintptr(flags))
@@ -3301,6 +4582,14 @@ func Alljoyn_proxybusobject_methodcall_noreply(proxyObj Alljoyn_proxybusobject, 
 // Alljoyn_proxybusobject_methodcallasync calls MSAJApi!alljoyn_proxybusobject_methodcallasync.
 func Alljoyn_proxybusobject_methodcallasync(proxyObj Alljoyn_proxybusobject, ifaceName foundation.PSTR, methodName foundation.PSTR, replyFunc Alljoyn_messagereceiver_replyhandler_ptr, args Alljoyn_msgarg, numArgs uintptr, context unsafe.Pointer, timeout uint32, flags byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_methodcallasync.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(ifaceName)), uintptr(unsafe.Pointer(methodName)), uintptr(replyFunc), uintptr(args), uintptr(numArgs), uintptr(unsafe.Pointer(context)), uintptr(timeout), uintptr(flags))
+	return QStatus(r1)
+}
+
+var specAlljoyn_proxybusobject_methodcallasync_member = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_proxybusobject_methodcallasync_member calls MSAJApi!alljoyn_proxybusobject_methodcallasync_member.
+func Alljoyn_proxybusobject_methodcallasync_member(proxyObj Alljoyn_proxybusobject, method Alljoyn_interfacedescription_member, replyFunc Alljoyn_messagereceiver_replyhandler_ptr, args Alljoyn_msgarg, numArgs uintptr, context unsafe.Pointer, timeout uint32, flags byte) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_proxybusobject_methodcallasync_member.Addr(), specAlljoyn_proxybusobject_methodcallasync_member, nil, uintptr(proxyObj), uintptr(unsafe.Pointer(&method)), uintptr(replyFunc), uintptr(args), uintptr(numArgs), uintptr(unsafe.Pointer(context)), uintptr(timeout), uintptr(flags)).Tuple()
 	return QStatus(r1)
 }
 

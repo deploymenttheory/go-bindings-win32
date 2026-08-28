@@ -4,14 +4,14 @@
 
 package hostcomputesystem
 
-// HCS_EVENT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*HCS_EVENT, unsafe.Pointer).
+// HCS_EVENT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*HCS_EVENT, unsafe.Pointer) uintptr.
 type HCS_EVENT_CALLBACK uintptr
 
-// HCS_NOTIFICATION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer, foundation.HRESULT, foundation.PWSTR).
+// HCS_NOTIFICATION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer, foundation.HRESULT, foundation.PWSTR) uintptr.
 type HCS_NOTIFICATION_CALLBACK uintptr
 
-// HCS_OPERATION_COMPLETION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCS_OPERATION, unsafe.Pointer).
+// HCS_OPERATION_COMPLETION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCS_OPERATION, unsafe.Pointer) uintptr.
 type HCS_OPERATION_COMPLETION uintptr

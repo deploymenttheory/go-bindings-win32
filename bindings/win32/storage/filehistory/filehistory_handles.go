@@ -4,7 +4,11 @@
 
 package filehistory
 
-// CloseFH_SERVICE_PIPE_HANDLE releases a FH_SERVICE_PIPE_HANDLE handle by calling FhServiceClosePipe.
+// CloseFH_SERVICE_PIPE_HANDLE releases a FH_SERVICE_PIPE_HANDLE handle by calling FhServiceClosePipe. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseFH_SERVICE_PIPE_HANDLE(h FH_SERVICE_PIPE_HANDLE) error {
+	if h == ^FH_SERVICE_PIPE_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return FhServiceClosePipe(FH_SERVICE_PIPE_HANDLE(h))
 }

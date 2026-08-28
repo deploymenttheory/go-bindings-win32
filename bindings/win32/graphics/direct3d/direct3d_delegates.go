@@ -4,6 +4,6 @@
 
 package direct3d
 
-// PFN_DESTRUCTION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFN_DESTRUCTION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFN_DESTRUCTION_CALLBACK uintptr

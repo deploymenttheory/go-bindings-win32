@@ -83,16 +83,140 @@ var (
 	procUnsubscribeServiceChangeNotifications = modSecHost.NewProc("UnsubscribeServiceChangeNotifications")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ChangeServiceConfig                   *win32.Proc
+	ChangeServiceConfig2                  *win32.Proc
+	ChangeServiceConfig2A                 *win32.Proc
+	ChangeServiceConfigA                  *win32.Proc
+	CloseServiceHandle                    *win32.Proc
+	ControlService                        *win32.Proc
+	ControlServiceEx                      *win32.Proc
+	ControlServiceExA                     *win32.Proc
+	CreateService                         *win32.Proc
+	CreateServiceA                        *win32.Proc
+	DeleteService                         *win32.Proc
+	EnumDependentServices                 *win32.Proc
+	EnumDependentServicesA                *win32.Proc
+	EnumServicesStatus                    *win32.Proc
+	EnumServicesStatusA                   *win32.Proc
+	EnumServicesStatusEx                  *win32.Proc
+	EnumServicesStatusExA                 *win32.Proc
+	GetServiceDirectory                   *win32.Proc
+	GetServiceDisplayName                 *win32.Proc
+	GetServiceDisplayNameA                *win32.Proc
+	GetServiceKeyName                     *win32.Proc
+	GetServiceKeyNameA                    *win32.Proc
+	GetServiceRegistryStateKey            *win32.Proc
+	GetSharedServiceDirectory             *win32.Proc
+	GetSharedServiceRegistryStateKey      *win32.Proc
+	LockServiceDatabase                   *win32.Proc
+	NotifyBootConfigStatus                *win32.Proc
+	NotifyServiceStatusChange             *win32.Proc
+	NotifyServiceStatusChangeA            *win32.Proc
+	OpenSCManager                         *win32.Proc
+	OpenSCManagerA                        *win32.Proc
+	OpenService                           *win32.Proc
+	OpenServiceA                          *win32.Proc
+	QueryServiceConfig                    *win32.Proc
+	QueryServiceConfig2                   *win32.Proc
+	QueryServiceConfig2A                  *win32.Proc
+	QueryServiceConfigA                   *win32.Proc
+	QueryServiceDynamicInformation        *win32.Proc
+	QueryServiceLockStatus                *win32.Proc
+	QueryServiceLockStatusA               *win32.Proc
+	QueryServiceObjectSecurity            *win32.Proc
+	QueryServiceStatus                    *win32.Proc
+	QueryServiceStatusEx                  *win32.Proc
+	RegisterServiceCtrlHandler            *win32.Proc
+	RegisterServiceCtrlHandlerA           *win32.Proc
+	RegisterServiceCtrlHandlerEx          *win32.Proc
+	RegisterServiceCtrlHandlerExA         *win32.Proc
+	SetServiceBits                        *win32.Proc
+	SetServiceObjectSecurity              *win32.Proc
+	SetServiceStatus                      *win32.Proc
+	StartService                          *win32.Proc
+	StartServiceA                         *win32.Proc
+	StartServiceCtrlDispatcher            *win32.Proc
+	StartServiceCtrlDispatcherA           *win32.Proc
+	SubscribeServiceChangeNotifications   *win32.Proc
+	UnlockServiceDatabase                 *win32.Proc
+	UnsubscribeServiceChangeNotifications *win32.Proc
+	WaitServiceState                      *win32.Proc
+}{
+	ChangeServiceConfig:                   procChangeServiceConfig,
+	ChangeServiceConfig2:                  procChangeServiceConfig2,
+	ChangeServiceConfig2A:                 procChangeServiceConfig2A,
+	ChangeServiceConfigA:                  procChangeServiceConfigA,
+	CloseServiceHandle:                    procCloseServiceHandle,
+	ControlService:                        procControlService,
+	ControlServiceEx:                      procControlServiceEx,
+	ControlServiceExA:                     procControlServiceExA,
+	CreateService:                         procCreateService,
+	CreateServiceA:                        procCreateServiceA,
+	DeleteService:                         procDeleteService,
+	EnumDependentServices:                 procEnumDependentServices,
+	EnumDependentServicesA:                procEnumDependentServicesA,
+	EnumServicesStatus:                    procEnumServicesStatus,
+	EnumServicesStatusA:                   procEnumServicesStatusA,
+	EnumServicesStatusEx:                  procEnumServicesStatusEx,
+	EnumServicesStatusExA:                 procEnumServicesStatusExA,
+	GetServiceDirectory:                   procGetServiceDirectory,
+	GetServiceDisplayName:                 procGetServiceDisplayName,
+	GetServiceDisplayNameA:                procGetServiceDisplayNameA,
+	GetServiceKeyName:                     procGetServiceKeyName,
+	GetServiceKeyNameA:                    procGetServiceKeyNameA,
+	GetServiceRegistryStateKey:            procGetServiceRegistryStateKey,
+	GetSharedServiceDirectory:             procGetSharedServiceDirectory,
+	GetSharedServiceRegistryStateKey:      procGetSharedServiceRegistryStateKey,
+	LockServiceDatabase:                   procLockServiceDatabase,
+	NotifyBootConfigStatus:                procNotifyBootConfigStatus,
+	NotifyServiceStatusChange:             procNotifyServiceStatusChange,
+	NotifyServiceStatusChangeA:            procNotifyServiceStatusChangeA,
+	OpenSCManager:                         procOpenSCManager,
+	OpenSCManagerA:                        procOpenSCManagerA,
+	OpenService:                           procOpenService,
+	OpenServiceA:                          procOpenServiceA,
+	QueryServiceConfig:                    procQueryServiceConfig,
+	QueryServiceConfig2:                   procQueryServiceConfig2,
+	QueryServiceConfig2A:                  procQueryServiceConfig2A,
+	QueryServiceConfigA:                   procQueryServiceConfigA,
+	QueryServiceDynamicInformation:        procQueryServiceDynamicInformation,
+	QueryServiceLockStatus:                procQueryServiceLockStatus,
+	QueryServiceLockStatusA:               procQueryServiceLockStatusA,
+	QueryServiceObjectSecurity:            procQueryServiceObjectSecurity,
+	QueryServiceStatus:                    procQueryServiceStatus,
+	QueryServiceStatusEx:                  procQueryServiceStatusEx,
+	RegisterServiceCtrlHandler:            procRegisterServiceCtrlHandler,
+	RegisterServiceCtrlHandlerA:           procRegisterServiceCtrlHandlerA,
+	RegisterServiceCtrlHandlerEx:          procRegisterServiceCtrlHandlerEx,
+	RegisterServiceCtrlHandlerExA:         procRegisterServiceCtrlHandlerExA,
+	SetServiceBits:                        procSetServiceBits,
+	SetServiceObjectSecurity:              procSetServiceObjectSecurity,
+	SetServiceStatus:                      procSetServiceStatus,
+	StartService:                          procStartService,
+	StartServiceA:                         procStartServiceA,
+	StartServiceCtrlDispatcher:            procStartServiceCtrlDispatcher,
+	StartServiceCtrlDispatcherA:           procStartServiceCtrlDispatcherA,
+	SubscribeServiceChangeNotifications:   procSubscribeServiceChangeNotifications,
+	UnlockServiceDatabase:                 procUnlockServiceDatabase,
+	UnsubscribeServiceChangeNotifications: procUnsubscribeServiceChangeNotifications,
+	WaitServiceState:                      procWaitServiceState,
+}
+
 // ChangeServiceConfig calls ADVAPI32!ChangeServiceConfigW.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-changeserviceconfigw
 // Minimum OS: windows5.1.2600.
-func ChangeServiceConfig(hService SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName string, lpLoadOrderGroup string, lpdwTagId *uint32, lpDependencies string, lpServiceStartName string, lpPassword string, lpDisplayName string) error {
-	_lpBinaryPathName := win32.UTF16Ptr(lpBinaryPathName)
-	_lpLoadOrderGroup := win32.UTF16Ptr(lpLoadOrderGroup)
-	_lpDependencies := win32.UTF16Ptr(lpDependencies)
-	_lpServiceStartName := win32.UTF16Ptr(lpServiceStartName)
-	_lpPassword := win32.UTF16Ptr(lpPassword)
-	_lpDisplayName := win32.UTF16Ptr(lpDisplayName)
+func ChangeServiceConfig(hService SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName *string, lpLoadOrderGroup *string, lpdwTagId *uint32, lpDependencies *string, lpServiceStartName *string, lpPassword *string, lpDisplayName *string) error {
+	_lpBinaryPathName := win32.UTF16PtrOrNil(lpBinaryPathName)
+	_lpLoadOrderGroup := win32.UTF16PtrOrNil(lpLoadOrderGroup)
+	_lpDependencies := win32.UTF16PtrOrNil(lpDependencies)
+	_lpServiceStartName := win32.UTF16PtrOrNil(lpServiceStartName)
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
+	_lpDisplayName := win32.UTF16PtrOrNil(lpDisplayName)
 	r1, _, e1 := syscall.SyscallN(procChangeServiceConfig.Addr(), uintptr(hService), uintptr(dwServiceType), uintptr(dwStartType), uintptr(dwErrorControl), uintptr(unsafe.Pointer(_lpBinaryPathName)), uintptr(unsafe.Pointer(_lpLoadOrderGroup)), uintptr(unsafe.Pointer(lpdwTagId)), uintptr(unsafe.Pointer(_lpDependencies)), uintptr(unsafe.Pointer(_lpServiceStartName)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpDisplayName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -180,14 +304,14 @@ func ControlServiceExA(hService SC_HANDLE, dwControl uint32, dwInfoLevel uint32,
 // CreateService calls ADVAPI32!CreateServiceW.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-createservicew
 // Minimum OS: windows5.1.2600.
-func CreateService(hSCManager SC_HANDLE, lpServiceName string, lpDisplayName string, dwDesiredAccess uint32, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName string, lpLoadOrderGroup string, lpdwTagId *uint32, lpDependencies string, lpServiceStartName string, lpPassword string) (SC_HANDLE, error) {
+func CreateService(hSCManager SC_HANDLE, lpServiceName string, lpDisplayName *string, dwDesiredAccess uint32, dwServiceType ENUM_SERVICE_TYPE, dwStartType SERVICE_START_TYPE, dwErrorControl SERVICE_ERROR, lpBinaryPathName *string, lpLoadOrderGroup *string, lpdwTagId *uint32, lpDependencies *string, lpServiceStartName *string, lpPassword *string) (SC_HANDLE, error) {
 	_lpServiceName := win32.UTF16Ptr(lpServiceName)
-	_lpDisplayName := win32.UTF16Ptr(lpDisplayName)
-	_lpBinaryPathName := win32.UTF16Ptr(lpBinaryPathName)
-	_lpLoadOrderGroup := win32.UTF16Ptr(lpLoadOrderGroup)
-	_lpDependencies := win32.UTF16Ptr(lpDependencies)
-	_lpServiceStartName := win32.UTF16Ptr(lpServiceStartName)
-	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpDisplayName := win32.UTF16PtrOrNil(lpDisplayName)
+	_lpBinaryPathName := win32.UTF16PtrOrNil(lpBinaryPathName)
+	_lpLoadOrderGroup := win32.UTF16PtrOrNil(lpLoadOrderGroup)
+	_lpDependencies := win32.UTF16PtrOrNil(lpDependencies)
+	_lpServiceStartName := win32.UTF16PtrOrNil(lpServiceStartName)
+	_lpPassword := win32.UTF16PtrOrNil(lpPassword)
 	r1, _, e1 := syscall.SyscallN(procCreateService.Addr(), uintptr(hSCManager), uintptr(unsafe.Pointer(_lpServiceName)), uintptr(unsafe.Pointer(_lpDisplayName)), uintptr(dwDesiredAccess), uintptr(dwServiceType), uintptr(dwStartType), uintptr(dwErrorControl), uintptr(unsafe.Pointer(_lpBinaryPathName)), uintptr(unsafe.Pointer(_lpLoadOrderGroup)), uintptr(unsafe.Pointer(lpdwTagId)), uintptr(unsafe.Pointer(_lpDependencies)), uintptr(unsafe.Pointer(_lpServiceStartName)), uintptr(unsafe.Pointer(_lpPassword)))
 	ret := SC_HANDLE(r1)
 	if ret == ^SC_HANDLE(0) || ret == 0 {
@@ -266,12 +390,12 @@ func EnumServicesStatusA(hSCManager SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, 
 // EnumServicesStatusEx calls ADVAPI32!EnumServicesStatusExW.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexw
 // Minimum OS: windows5.1.2600.
-func EnumServicesStatusEx(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices []byte, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32, pszGroupName string) error {
+func EnumServicesStatusEx(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices []byte, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32, pszGroupName *string) error {
 	var _lpServices *byte
 	if len(lpServices) > 0 {
 		_lpServices = &lpServices[0]
 	}
-	_pszGroupName := win32.UTF16Ptr(pszGroupName)
+	_pszGroupName := win32.UTF16PtrOrNil(pszGroupName)
 	r1, _, e1 := syscall.SyscallN(procEnumServicesStatusEx.Addr(), uintptr(hSCManager), uintptr(InfoLevel), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(_lpServices)), uintptr(len(lpServices)), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)), uintptr(unsafe.Pointer(_pszGroupName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -413,9 +537,9 @@ func NotifyServiceStatusChangeA(hService SC_HANDLE, dwNotifyMask SERVICE_NOTIFY,
 // OpenSCManager calls ADVAPI32!OpenSCManagerW.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-openscmanagerw
 // Minimum OS: windows5.1.2600.
-func OpenSCManager(lpMachineName string, lpDatabaseName string, dwDesiredAccess uint32) (SC_HANDLE, error) {
-	_lpMachineName := win32.UTF16Ptr(lpMachineName)
-	_lpDatabaseName := win32.UTF16Ptr(lpDatabaseName)
+func OpenSCManager(lpMachineName *string, lpDatabaseName *string, dwDesiredAccess uint32) (SC_HANDLE, error) {
+	_lpMachineName := win32.UTF16PtrOrNil(lpMachineName)
+	_lpDatabaseName := win32.UTF16PtrOrNil(lpDatabaseName)
 	r1, _, e1 := syscall.SyscallN(procOpenSCManager.Addr(), uintptr(unsafe.Pointer(_lpMachineName)), uintptr(unsafe.Pointer(_lpDatabaseName)), uintptr(dwDesiredAccess))
 	ret := SC_HANDLE(r1)
 	if ret == ^SC_HANDLE(0) || ret == 0 {

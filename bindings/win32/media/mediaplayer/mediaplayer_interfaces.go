@@ -5,6 +5,7 @@
 package mediaplayer
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -1521,6 +1522,22 @@ func (self *IWMPContentPartner) GetListContents(location foundation.BSTR, pConte
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWMPContentPartner_Login = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// Login dispatches through IWMPContentPartner's vtable slot 19.
+func (self *IWMPContentPartner) Login(userInfo systemcom.BLOB, pwdInfo systemcom.BLOB, fUsedCachedCreds foundation.VARIANT_BOOL, fOkToCache foundation.VARIANT_BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIWMPContentPartner_Login, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&userInfo)), uintptr(unsafe.Pointer(&pwdInfo)), uintptr(fUsedCachedCreds), uintptr(fOkToCache)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMPContentPartner_Authenticate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false)}}
+
+// Authenticate dispatches through IWMPContentPartner's vtable slot 20.
+func (self *IWMPContentPartner) Authenticate(userInfo systemcom.BLOB, pwdInfo systemcom.BLOB) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIWMPContentPartner_Authenticate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&userInfo)), uintptr(unsafe.Pointer(&pwdInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Logout dispatches through IWMPContentPartner's vtable slot 21.
 func (self *IWMPContentPartner) Logout() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
@@ -1690,6 +1707,14 @@ func (self *IWMPControls) FastReverse() error {
 // Get_currentPosition dispatches through IWMPControls's vtable slot 13.
 func (self *IWMPControls) Get_currentPosition(pdCurrentPosition *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdCurrentPosition)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMPControls_Put_currentPosition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_currentPosition dispatches through IWMPControls's vtable slot 14.
+func (self *IWMPControls) Put_currentPosition(dCurrentPosition float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIWMPControls_Put_currentPosition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dCurrentPosition))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2469,6 +2494,13 @@ func (self *IWMPEvents) EndOfStream(Result int32) {
 	syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Result))
 }
 
+var specIWMPEvents_PositionChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// PositionChange dispatches through IWMPEvents's vtable slot 14.
+func (self *IWMPEvents) PositionChange(oldPosition float64, newPosition float64) {
+	win32.Call(self.LpVtbl[14], specIWMPEvents_PositionChange, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(oldPosition)), uintptr(math.Float64bits(newPosition))).Tuple()
+}
+
 // MarkerHit dispatches through IWMPEvents's vtable slot 15.
 func (self *IWMPEvents) MarkerHit(MarkerNum int32) {
 	syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(MarkerNum))
@@ -3224,6 +3256,25 @@ type IWMPMediaPluginRegistrar struct {
 
 // IID_IWMPMediaPluginRegistrar is the interface identifier for IWMPMediaPluginRegistrar.
 var IID_IWMPMediaPluginRegistrar = win32.GUID{Data1: 0x68e27045, Data2: 0x05bd, Data3: 0x40b2, Data4: [8]byte{0x97, 0x20, 0x23, 0x08, 0x8c, 0x78, 0xe3, 0x90}}
+
+var specIWMPMediaPluginRegistrar_WMPRegisterPlayerPlugin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// WMPRegisterPlayerPlugin dispatches through IWMPMediaPluginRegistrar's vtable slot 3.
+func (self *IWMPMediaPluginRegistrar) WMPRegisterPlayerPlugin(pwszFriendlyName string, pwszDescription string, pwszUninstallString string, dwPriority uint32, guidPluginType win32.GUID, clsid win32.GUID, cMediaTypes uint32, pMediaTypes unsafe.Pointer) error {
+	_pwszFriendlyName := win32.UTF16Ptr(pwszFriendlyName)
+	_pwszDescription := win32.UTF16Ptr(pwszDescription)
+	_pwszUninstallString := win32.UTF16Ptr(pwszUninstallString)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIWMPMediaPluginRegistrar_WMPRegisterPlayerPlugin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFriendlyName)), uintptr(unsafe.Pointer(_pwszDescription)), uintptr(unsafe.Pointer(_pwszUninstallString)), uintptr(dwPriority), uintptr(unsafe.Pointer(&guidPluginType)), uintptr(unsafe.Pointer(&clsid)), uintptr(cMediaTypes), uintptr(unsafe.Pointer(pMediaTypes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMPMediaPluginRegistrar_WMPUnRegisterPlayerPlugin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// WMPUnRegisterPlayerPlugin dispatches through IWMPMediaPluginRegistrar's vtable slot 4.
+func (self *IWMPMediaPluginRegistrar) WMPUnRegisterPlayerPlugin(guidPluginType win32.GUID, clsid win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIWMPMediaPluginRegistrar_WMPUnRegisterPlayerPlugin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidPluginType)), uintptr(unsafe.Pointer(&clsid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IWMPMetadataPicture: https://learn.microsoft.com/windows/win32/api/wmp/nn-wmp-iwmpmetadatapicture
 // IID: 5c29bbe0-f87d-4c45-aa28-a70f0230ffa9
@@ -4457,6 +4508,14 @@ func (self *IWMPSettings) Put_playCount(lCount int32) error {
 // Get_rate dispatches through IWMPSettings's vtable slot 20.
 func (self *IWMPSettings) Get_rate(pdRate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdRate)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMPSettings_Put_rate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_rate dispatches through IWMPSettings's vtable slot 21.
+func (self *IWMPSettings) Put_rate(dRate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIWMPSettings_Put_rate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dRate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

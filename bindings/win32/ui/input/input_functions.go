@@ -29,6 +29,34 @@ var (
 	procRegisterRawInputDevices      = modUSER32.NewProc("RegisterRawInputDevices")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DefRawInputProc              *win32.Proc
+	GetCIMSSM                    *win32.Proc
+	GetCurrentInputMessageSource *win32.Proc
+	GetRawInputBuffer            *win32.Proc
+	GetRawInputData              *win32.Proc
+	GetRawInputDeviceInfo        *win32.Proc
+	GetRawInputDeviceInfoA       *win32.Proc
+	GetRawInputDeviceList        *win32.Proc
+	GetRegisteredRawInputDevices *win32.Proc
+	RegisterRawInputDevices      *win32.Proc
+}{
+	DefRawInputProc:              procDefRawInputProc,
+	GetCIMSSM:                    procGetCIMSSM,
+	GetCurrentInputMessageSource: procGetCurrentInputMessageSource,
+	GetRawInputBuffer:            procGetRawInputBuffer,
+	GetRawInputData:              procGetRawInputData,
+	GetRawInputDeviceInfo:        procGetRawInputDeviceInfo,
+	GetRawInputDeviceInfoA:       procGetRawInputDeviceInfoA,
+	GetRawInputDeviceList:        procGetRawInputDeviceList,
+	GetRegisteredRawInputDevices: procGetRegisteredRawInputDevices,
+	RegisterRawInputDevices:      procRegisterRawInputDevices,
+}
+
 // DefRawInputProc calls USER32!DefRawInputProc.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-defrawinputproc
 // Minimum OS: windows5.1.2600.

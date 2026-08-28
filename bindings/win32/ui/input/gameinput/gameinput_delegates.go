@@ -4,18 +4,18 @@
 
 package gameinput
 
-// GameInputDeviceCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer, *IGameInputDevice, uint64, GameInputDeviceStatus, GameInputDeviceStatus).
+// GameInputDeviceCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint64, unsafe.Pointer, *IGameInputDevice, uint64, GameInputDeviceStatus, GameInputDeviceStatus) uintptr.
 type GameInputDeviceCallback uintptr
 
-// GameInputKeyboardLayoutCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer, *IGameInputDevice, uint64, uint32, uint32).
+// GameInputKeyboardLayoutCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint64, unsafe.Pointer, *IGameInputDevice, uint64, uint32, uint32) uintptr.
 type GameInputKeyboardLayoutCallback uintptr
 
-// GameInputReadingCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer, *IGameInputReading, bool).
+// GameInputReadingCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint64, unsafe.Pointer, *IGameInputReading, bool) uintptr.
 type GameInputReadingCallback uintptr
 
-// GameInputSystemButtonCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer, *IGameInputDevice, uint64, GameInputSystemButtons, GameInputSystemButtons).
+// GameInputSystemButtonCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint64, unsafe.Pointer, *IGameInputDevice, uint64, GameInputSystemButtons, GameInputSystemButtons) uintptr.
 type GameInputSystemButtonCallback uintptr

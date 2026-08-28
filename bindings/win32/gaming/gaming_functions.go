@@ -56,6 +56,74 @@ var (
 	procShowUserSettingsUIForUser             = modapi_ms_win_gaming_tcui_l1_1_4.NewProc("ShowUserSettingsUIForUser")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CheckGamingPrivilegeSilently          *win32.Proc
+	CheckGamingPrivilegeSilentlyForUser   *win32.Proc
+	CheckGamingPrivilegeWithUI            *win32.Proc
+	CheckGamingPrivilegeWithUIForUser     *win32.Proc
+	GetExpandedResourceExclusiveCpuCount  *win32.Proc
+	GetGamingDeviceModelInformation       *win32.Proc
+	HasExpandedResources                  *win32.Proc
+	ProcessPendingGameUI                  *win32.Proc
+	ReleaseExclusiveCpuSets               *win32.Proc
+	ShowChangeFriendRelationshipUI        *win32.Proc
+	ShowChangeFriendRelationshipUIForUser *win32.Proc
+	ShowCustomizeUserProfileUI            *win32.Proc
+	ShowCustomizeUserProfileUIForUser     *win32.Proc
+	ShowFindFriendsUI                     *win32.Proc
+	ShowFindFriendsUIForUser              *win32.Proc
+	ShowGameInfoUI                        *win32.Proc
+	ShowGameInfoUIForUser                 *win32.Proc
+	ShowGameInviteUI                      *win32.Proc
+	ShowGameInviteUIForUser               *win32.Proc
+	ShowGameInviteUIWithContext           *win32.Proc
+	ShowGameInviteUIWithContextForUser    *win32.Proc
+	ShowPlayerPickerUI                    *win32.Proc
+	ShowPlayerPickerUIForUser             *win32.Proc
+	ShowProfileCardUI                     *win32.Proc
+	ShowProfileCardUIForUser              *win32.Proc
+	ShowTitleAchievementsUI               *win32.Proc
+	ShowTitleAchievementsUIForUser        *win32.Proc
+	ShowUserSettingsUI                    *win32.Proc
+	ShowUserSettingsUIForUser             *win32.Proc
+	TryCancelPendingGameUI                *win32.Proc
+}{
+	CheckGamingPrivilegeSilently:          procCheckGamingPrivilegeSilently,
+	CheckGamingPrivilegeSilentlyForUser:   procCheckGamingPrivilegeSilentlyForUser,
+	CheckGamingPrivilegeWithUI:            procCheckGamingPrivilegeWithUI,
+	CheckGamingPrivilegeWithUIForUser:     procCheckGamingPrivilegeWithUIForUser,
+	GetExpandedResourceExclusiveCpuCount:  procGetExpandedResourceExclusiveCpuCount,
+	GetGamingDeviceModelInformation:       procGetGamingDeviceModelInformation,
+	HasExpandedResources:                  procHasExpandedResources,
+	ProcessPendingGameUI:                  procProcessPendingGameUI,
+	ReleaseExclusiveCpuSets:               procReleaseExclusiveCpuSets,
+	ShowChangeFriendRelationshipUI:        procShowChangeFriendRelationshipUI,
+	ShowChangeFriendRelationshipUIForUser: procShowChangeFriendRelationshipUIForUser,
+	ShowCustomizeUserProfileUI:            procShowCustomizeUserProfileUI,
+	ShowCustomizeUserProfileUIForUser:     procShowCustomizeUserProfileUIForUser,
+	ShowFindFriendsUI:                     procShowFindFriendsUI,
+	ShowFindFriendsUIForUser:              procShowFindFriendsUIForUser,
+	ShowGameInfoUI:                        procShowGameInfoUI,
+	ShowGameInfoUIForUser:                 procShowGameInfoUIForUser,
+	ShowGameInviteUI:                      procShowGameInviteUI,
+	ShowGameInviteUIForUser:               procShowGameInviteUIForUser,
+	ShowGameInviteUIWithContext:           procShowGameInviteUIWithContext,
+	ShowGameInviteUIWithContextForUser:    procShowGameInviteUIWithContextForUser,
+	ShowPlayerPickerUI:                    procShowPlayerPickerUI,
+	ShowPlayerPickerUIForUser:             procShowPlayerPickerUIForUser,
+	ShowProfileCardUI:                     procShowProfileCardUI,
+	ShowProfileCardUIForUser:              procShowProfileCardUIForUser,
+	ShowTitleAchievementsUI:               procShowTitleAchievementsUI,
+	ShowTitleAchievementsUIForUser:        procShowTitleAchievementsUIForUser,
+	ShowUserSettingsUI:                    procShowUserSettingsUI,
+	ShowUserSettingsUIForUser:             procShowUserSettingsUIForUser,
+	TryCancelPendingGameUI:                procTryCancelPendingGameUI,
+}
+
 // CheckGamingPrivilegeSilently calls api-ms-win-gaming-tcui-l1-1-1!CheckGamingPrivilegeSilently.
 func CheckGamingPrivilegeSilently(privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procCheckGamingPrivilegeSilently.Addr(), uintptr(privilegeId), uintptr(scope), uintptr(policy), uintptr(unsafe.Pointer(hasPrivilege)))

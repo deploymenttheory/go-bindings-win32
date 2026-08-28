@@ -23,9 +23,25 @@ type IWinHttpRequest struct {
 // IID_IWinHttpRequest is the interface identifier for IWinHttpRequest.
 var IID_IWinHttpRequest = win32.GUID{Data1: 0x016fe2ec, Data2: 0xb2c8, Data3: 0x45f8, Data4: [8]byte{0xb2, 0x3b, 0x39, 0xe5, 0x3a, 0x75, 0x39, 0x6b}}
 
+var specIWinHttpRequest_SetProxy = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetProxy dispatches through IWinHttpRequest's vtable slot 7.
+func (self *IWinHttpRequest) SetProxy(ProxySetting int32, ProxyServer systemvariant.VARIANT, BypassList systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIWinHttpRequest_SetProxy, nil, uintptr(unsafe.Pointer(self)), uintptr(ProxySetting), uintptr(unsafe.Pointer(&ProxyServer)), uintptr(unsafe.Pointer(&BypassList))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCredentials dispatches through IWinHttpRequest's vtable slot 8.
 func (self *IWinHttpRequest) SetCredentials(UserName foundation.BSTR, Password foundation.BSTR, Flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UserName)), uintptr(unsafe.Pointer(Password)), uintptr(Flags))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWinHttpRequest_Open = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Open dispatches through IWinHttpRequest's vtable slot 9.
+func (self *IWinHttpRequest) Open(Method foundation.BSTR, Url foundation.BSTR, Async systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIWinHttpRequest_Open, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Method)), uintptr(unsafe.Pointer(Url)), uintptr(unsafe.Pointer(&Async))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -47,6 +63,14 @@ func (self *IWinHttpRequest) GetAllResponseHeaders() (foundation.BSTR, error) {
 	_Headers := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Headers))))
 	return *_Headers, win32.ErrIfFailed(int32(r1))
+}
+
+var specIWinHttpRequest_Send = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Send dispatches through IWinHttpRequest's vtable slot 13.
+func (self *IWinHttpRequest) Send(Body systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIWinHttpRequest_Send, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Body))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Status dispatches through IWinHttpRequest's vtable slot 14.
@@ -89,6 +113,23 @@ func (self *IWinHttpRequest) Get_Option(Option WinHttpRequestOption) (systemvari
 	_Value := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Option), uintptr(win32.OutParam(unsafe.Pointer(_Value))))
 	return *_Value, win32.ErrIfFailed(int32(r1))
+}
+
+var specIWinHttpRequest_Put_Option = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Option dispatches through IWinHttpRequest's vtable slot 20.
+func (self *IWinHttpRequest) Put_Option(Option WinHttpRequestOption, Value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIWinHttpRequest_Put_Option, nil, uintptr(unsafe.Pointer(self)), uintptr(Option), uintptr(unsafe.Pointer(&Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWinHttpRequest_WaitForResponse = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// WaitForResponse dispatches through IWinHttpRequest's vtable slot 21.
+func (self *IWinHttpRequest) WaitForResponse(Timeout systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_Succeeded := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIWinHttpRequest_WaitForResponse, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Timeout)), uintptr(win32.OutParam(unsafe.Pointer(_Succeeded)))).Tuple()
+	return *_Succeeded, win32.ErrIfFailed(int32(r1))
 }
 
 // Abort dispatches through IWinHttpRequest's vtable slot 22.

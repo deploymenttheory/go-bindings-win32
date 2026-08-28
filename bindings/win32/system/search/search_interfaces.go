@@ -516,8 +516,8 @@ func (self *ICommandText) GetCommandText(pguidDialect *win32.GUID, ppwszCommand 
 }
 
 // SetCommandText dispatches through ICommandText's vtable slot 7.
-func (self *ICommandText) SetCommandText(rguidDialect *win32.GUID, pwszCommand string) error {
-	_pwszCommand := win32.UTF16Ptr(pwszCommand)
+func (self *ICommandText) SetCommandText(rguidDialect *win32.GUID, pwszCommand *string) error {
+	_pwszCommand := win32.UTF16PtrOrNil(pwszCommand)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidDialect)), uintptr(unsafe.Pointer(_pwszCommand)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -725,9 +725,9 @@ func (self *IConditionFactory2) CreateCompoundFromArray(ct systemsearchcommon.CO
 }
 
 // CreateStringLeaf dispatches through IConditionFactory2's vtable slot 11.
-func (self *IConditionFactory2) CreateStringLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, pszValue string, pszLocaleName string, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
+func (self *IConditionFactory2) CreateStringLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, pszValue string, pszLocaleName *string, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszValue := win32.UTF16Ptr(pszValue)
-	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
+	_pszLocaleName := win32.UTF16PtrOrNil(pszLocaleName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(_pszLocaleName)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -746,9 +746,9 @@ func (self *IConditionFactory2) CreateBooleanLeaf(propkey *foundation.PROPERTYKE
 }
 
 // CreateLeaf dispatches through IConditionFactory2's vtable slot 14.
-func (self *IConditionFactory2) CreateLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, propvar *systemcomstructuredstorage.PROPVARIANT, pszSemanticType string, pszLocaleName string, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
-	_pszSemanticType := win32.UTF16Ptr(pszSemanticType)
-	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
+func (self *IConditionFactory2) CreateLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, propvar *systemcomstructuredstorage.PROPVARIANT, pszSemanticType *string, pszLocaleName *string, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv **win32.IUnknown) error {
+	_pszSemanticType := win32.UTF16PtrOrNil(pszSemanticType)
+	_pszLocaleName := win32.UTF16PtrOrNil(pszLocaleName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_pszSemanticType)), uintptr(unsafe.Pointer(_pszLocaleName)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -845,15 +845,15 @@ func (self *IDBAsynchNotify) OnLowResource(dwReserved uintptr) error {
 }
 
 // OnProgress dispatches through IDBAsynchNotify's vtable slot 4.
-func (self *IDBAsynchNotify) OnProgress(hChapter uintptr, eOperation uint32, ulProgress uintptr, ulProgressMax uintptr, eAsynchPhase uint32, pwszStatusText string) error {
-	_pwszStatusText := win32.UTF16Ptr(pwszStatusText)
+func (self *IDBAsynchNotify) OnProgress(hChapter uintptr, eOperation uint32, ulProgress uintptr, ulProgressMax uintptr, eAsynchPhase uint32, pwszStatusText *string) error {
+	_pwszStatusText := win32.UTF16PtrOrNil(pwszStatusText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(eOperation), uintptr(ulProgress), uintptr(ulProgressMax), uintptr(eAsynchPhase), uintptr(unsafe.Pointer(_pwszStatusText)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnStop dispatches through IDBAsynchNotify's vtable slot 5.
-func (self *IDBAsynchNotify) OnStop(hChapter uintptr, eOperation uint32, hrStatus foundation.HRESULT, pwszStatusText string) error {
-	_pwszStatusText := win32.UTF16Ptr(pwszStatusText)
+func (self *IDBAsynchNotify) OnStop(hChapter uintptr, eOperation uint32, hrStatus foundation.HRESULT, pwszStatusText *string) error {
+	_pwszStatusText := win32.UTF16PtrOrNil(pwszStatusText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(eOperation), uintptr(hrStatus), uintptr(unsafe.Pointer(_pwszStatusText)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1017,12 +1017,12 @@ type IDBPromptInitialize struct {
 var IID_IDBPromptInitialize = win32.GUID{Data1: 0x2206ccb0, Data2: 0x19c1, Data3: 0x11d1, Data4: [8]byte{0x89, 0xe0, 0x00, 0xc0, 0x4f, 0xd7, 0xa8, 0x29}}
 
 // PromptDataSource dispatches through IDBPromptInitialize's vtable slot 3.
-func (self *IDBPromptInitialize) PromptDataSource(pUnkOuter *systemcom.IUnknown, hWndParent foundation.HWND, dwPromptOptions uint32, rgSourceTypeFilter []uint32, pwszszzProviderFilter string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
+func (self *IDBPromptInitialize) PromptDataSource(pUnkOuter *systemcom.IUnknown, hWndParent foundation.HWND, dwPromptOptions uint32, rgSourceTypeFilter []uint32, pwszszzProviderFilter *string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
 	var _rgSourceTypeFilter *uint32
 	if len(rgSourceTypeFilter) > 0 {
 		_rgSourceTypeFilter = &rgSourceTypeFilter[0]
 	}
-	_pwszszzProviderFilter := win32.UTF16Ptr(pwszszzProviderFilter)
+	_pwszszzProviderFilter := win32.UTF16PtrOrNil(pwszszzProviderFilter)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(hWndParent), uintptr(dwPromptOptions), uintptr(len(rgSourceTypeFilter)), uintptr(unsafe.Pointer(_rgSourceTypeFilter)), uintptr(unsafe.Pointer(_pwszszzProviderFilter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1184,8 +1184,8 @@ type IDataInitialize struct {
 var IID_IDataInitialize = win32.GUID{Data1: 0x2206ccb1, Data2: 0x19c1, Data3: 0x11d1, Data4: [8]byte{0x89, 0xe0, 0x00, 0xc0, 0x4f, 0xd7, 0xa8, 0x29}}
 
 // GetDataSource dispatches through IDataInitialize's vtable slot 3.
-func (self *IDataInitialize) GetDataSource(pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszInitializationString string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
-	_pwszInitializationString := win32.UTF16Ptr(pwszInitializationString)
+func (self *IDataInitialize) GetDataSource(pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszInitializationString *string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
+	_pwszInitializationString := win32.UTF16PtrOrNil(pwszInitializationString)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(_pwszInitializationString)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1197,15 +1197,15 @@ func (self *IDataInitialize) GetInitializationString(pDataSource *systemcom.IUnk
 }
 
 // CreateDBInstance dispatches through IDataInitialize's vtable slot 5.
-func (self *IDataInitialize) CreateDBInstance(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
-	_pwszReserved := win32.UTF16Ptr(pwszReserved)
+func (self *IDataInitialize) CreateDBInstance(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved *string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
+	_pwszReserved := win32.UTF16PtrOrNil(pwszReserved)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidProvider)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(_pwszReserved)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateDBInstanceEx dispatches through IDataInitialize's vtable slot 6.
-func (self *IDataInitialize) CreateDBInstanceEx(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved string, pServerInfo *systemcom.COSERVERINFO, rgmqResults []systemcom.MULTI_QI) error {
-	_pwszReserved := win32.UTF16Ptr(pwszReserved)
+func (self *IDataInitialize) CreateDBInstanceEx(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved *string, pServerInfo *systemcom.COSERVERINFO, rgmqResults []systemcom.MULTI_QI) error {
+	_pwszReserved := win32.UTF16PtrOrNil(pwszReserved)
 	var _rgmqResults *systemcom.MULTI_QI
 	if len(rgmqResults) > 0 {
 		_rgmqResults = &rgmqResults[0]
@@ -1215,16 +1215,16 @@ func (self *IDataInitialize) CreateDBInstanceEx(clsidProvider *win32.GUID, pUnkO
 }
 
 // LoadStringFromStorage dispatches through IDataInitialize's vtable slot 7.
-func (self *IDataInitialize) LoadStringFromStorage(pwszFileName string, ppwszInitializationString *foundation.PWSTR) error {
-	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+func (self *IDataInitialize) LoadStringFromStorage(pwszFileName *string, ppwszInitializationString *foundation.PWSTR) error {
+	_pwszFileName := win32.UTF16PtrOrNil(pwszFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(ppwszInitializationString)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteStringToStorage dispatches through IDataInitialize's vtable slot 8.
-func (self *IDataInitialize) WriteStringToStorage(pwszFileName string, pwszInitializationString string, dwCreationDisposition uint32) error {
-	_pwszFileName := win32.UTF16Ptr(pwszFileName)
-	_pwszInitializationString := win32.UTF16Ptr(pwszInitializationString)
+func (self *IDataInitialize) WriteStringToStorage(pwszFileName *string, pwszInitializationString *string, dwCreationDisposition uint32) error {
+	_pwszFileName := win32.UTF16PtrOrNil(pwszFileName)
+	_pwszInitializationString := win32.UTF16PtrOrNil(pwszInitializationString)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(_pwszInitializationString)), uintptr(dwCreationDisposition))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4425,6 +4425,14 @@ func (self *ISecurityInfo) GetObjectTypes(cObjectTypes *uint32, rgObjectTypes **
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISecurityInfo_GetPermissions = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetPermissions dispatches through ISecurityInfo's vtable slot 5.
+func (self *ISecurityInfo) GetPermissions(ObjectType win32.GUID, pPermissions *uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specISecurityInfo_GetPermissions, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ObjectType)), uintptr(unsafe.Pointer(pPermissions))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 06210e88-01f5-11d1-b512-0080c781c384
 type IService struct {
 	systemcom.IUnknown
@@ -5416,6 +5424,14 @@ func (self *OLEDBSimpleProvider) GetVariant(iRow uintptr, iColumn uintptr, forma
 	return *_pVar, win32.ErrIfFailed(int32(r1))
 }
 
+var specOLEDBSimpleProvider_SetVariant = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetVariant dispatches through OLEDBSimpleProvider's vtable slot 7.
+func (self *OLEDBSimpleProvider) SetVariant(iRow uintptr, iColumn uintptr, format OSPFORMAT, Var systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specOLEDBSimpleProvider_SetVariant, nil, uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(iColumn), uintptr(format), uintptr(unsafe.Pointer(&Var))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetLocale dispatches through OLEDBSimpleProvider's vtable slot 8.
 func (self *OLEDBSimpleProvider) GetLocale() (foundation.BSTR, error) {
 	_pbstrLocale := new(foundation.BSTR)
@@ -5435,6 +5451,15 @@ func (self *OLEDBSimpleProvider) InsertRows(iRow uintptr, cRows uintptr) (uintpt
 	_pcRowsInserted := new(uintptr)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows), uintptr(win32.OutParam(unsafe.Pointer(_pcRowsInserted))))
 	return *_pcRowsInserted, win32.ErrIfFailed(int32(r1))
+}
+
+var specOLEDBSimpleProvider_Find = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Find dispatches through OLEDBSimpleProvider's vtable slot 11.
+func (self *OLEDBSimpleProvider) Find(iRowStart uintptr, iColumn uintptr, val systemvariant.VARIANT, findFlags OSPFIND, compType OSPCOMP) (uintptr, error) {
+	_piRowFound := new(uintptr)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specOLEDBSimpleProvider_Find, nil, uintptr(unsafe.Pointer(self)), uintptr(iRowStart), uintptr(iColumn), uintptr(unsafe.Pointer(&val)), uintptr(findFlags), uintptr(compType), uintptr(win32.OutParam(unsafe.Pointer(_piRowFound)))).Tuple()
+	return *_piRowFound, win32.ErrIfFailed(int32(r1))
 }
 
 // AddOLEDBSimpleProviderListener dispatches through OLEDBSimpleProvider's vtable slot 12.

@@ -23,6 +23,7 @@ var (
 	modapi_ms_win_core_winrt_string_l1_1_0       = win32.NewDLL("api-ms-win-core-winrt-string-l1-1-0.dll")
 	modapi_ms_win_core_winrt_string_l1_1_1       = win32.NewDLL("api-ms-win-core-winrt-string-l1-1-1.dll")
 	modapi_ms_win_shcore_stream_winrt_l1_1_0     = win32.NewDLL("api-ms-win-shcore-stream-winrt-l1-1-0.dll")
+	modCoreMessaging                             = win32.NewDLL("CoreMessaging.dll")
 	modOLE32                                     = win32.NewDLL("OLE32.dll")
 	modWindows_UI                                = win32.NewDLL("Windows.UI.dll")
 )
@@ -89,11 +90,152 @@ var (
 	procCreateRandomAccessStreamOnFile        = modapi_ms_win_shcore_stream_winrt_l1_1_0.NewProc("CreateRandomAccessStreamOnFile")
 	procCreateRandomAccessStreamOverStream    = modapi_ms_win_shcore_stream_winrt_l1_1_0.NewProc("CreateRandomAccessStreamOverStream")
 	procCreateStreamOverRandomAccessStream    = modapi_ms_win_shcore_stream_winrt_l1_1_0.NewProc("CreateStreamOverRandomAccessStream")
+	procCreateDispatcherQueueController       = modCoreMessaging.NewProc("CreateDispatcherQueueController")
 	procCoDecodeProxy                         = modOLE32.NewProc("CoDecodeProxy")
 	procRoGetAgileReference                   = modOLE32.NewProc("RoGetAgileReference")
 	procCreateControlInput                    = modWindows_UI.NewProc("CreateControlInput")
 	procCreateControlInputEx                  = modWindows_UI.NewProc("CreateControlInputEx")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CoDecodeProxy                         *win32.Proc
+	CreateControlInput                    *win32.Proc
+	CreateControlInputEx                  *win32.Proc
+	CreateDispatcherQueueController       *win32.Proc
+	CreateRandomAccessStreamOnFile        *win32.Proc
+	CreateRandomAccessStreamOverStream    *win32.Proc
+	CreateStreamOverRandomAccessStream    *win32.Proc
+	GetRestrictedErrorInfo                *win32.Proc
+	HSTRING_UserFree                      *win32.Proc
+	HSTRING_UserFree64                    *win32.Proc
+	HSTRING_UserMarshal                   *win32.Proc
+	HSTRING_UserMarshal64                 *win32.Proc
+	HSTRING_UserSize                      *win32.Proc
+	HSTRING_UserSize64                    *win32.Proc
+	HSTRING_UserUnmarshal                 *win32.Proc
+	HSTRING_UserUnmarshal64               *win32.Proc
+	IsErrorPropagationEnabled             *win32.Proc
+	RoActivateInstance                    *win32.Proc
+	RoCaptureErrorContext                 *win32.Proc
+	RoClearError                          *win32.Proc
+	RoFailFastWithErrorContext            *win32.Proc
+	RoGetActivationFactory                *win32.Proc
+	RoGetAgileReference                   *win32.Proc
+	RoGetApartmentIdentifier              *win32.Proc
+	RoGetBufferMarshaler                  *win32.Proc
+	RoGetErrorReportingFlags              *win32.Proc
+	RoGetMatchingRestrictedErrorInfo      *win32.Proc
+	RoGetServerActivatableClasses         *win32.Proc
+	RoInitialize                          *win32.Proc
+	RoInspectCapturedStackBackTrace       *win32.Proc
+	RoInspectThreadErrorInfo              *win32.Proc
+	RoOriginateError                      *win32.Proc
+	RoOriginateErrorW                     *win32.Proc
+	RoOriginateLanguageException          *win32.Proc
+	RoRegisterActivationFactories         *win32.Proc
+	RoRegisterForApartmentShutdown        *win32.Proc
+	RoReportFailedDelegate                *win32.Proc
+	RoReportUnhandledError                *win32.Proc
+	RoResolveRestrictedErrorInfoReference *win32.Proc
+	RoRevokeActivationFactories           *win32.Proc
+	RoSetErrorReportingFlags              *win32.Proc
+	RoTransformError                      *win32.Proc
+	RoTransformErrorW                     *win32.Proc
+	RoUninitialize                        *win32.Proc
+	RoUnregisterForApartmentShutdown      *win32.Proc
+	SetRestrictedErrorInfo                *win32.Proc
+	WindowsCompareStringOrdinal           *win32.Proc
+	WindowsConcatString                   *win32.Proc
+	WindowsCreateString                   *win32.Proc
+	WindowsCreateStringReference          *win32.Proc
+	WindowsDeleteString                   *win32.Proc
+	WindowsDeleteStringBuffer             *win32.Proc
+	WindowsDuplicateString                *win32.Proc
+	WindowsGetStringLen                   *win32.Proc
+	WindowsGetStringRawBuffer             *win32.Proc
+	WindowsInspectString                  *win32.Proc
+	WindowsInspectString2                 *win32.Proc
+	WindowsIsStringEmpty                  *win32.Proc
+	WindowsPreallocateStringBuffer        *win32.Proc
+	WindowsPromoteStringBuffer            *win32.Proc
+	WindowsReplaceString                  *win32.Proc
+	WindowsStringHasEmbeddedNull          *win32.Proc
+	WindowsSubstring                      *win32.Proc
+	WindowsSubstringWithSpecifiedLength   *win32.Proc
+	WindowsTrimStringEnd                  *win32.Proc
+	WindowsTrimStringStart                *win32.Proc
+}{
+	CoDecodeProxy:                         procCoDecodeProxy,
+	CreateControlInput:                    procCreateControlInput,
+	CreateControlInputEx:                  procCreateControlInputEx,
+	CreateDispatcherQueueController:       procCreateDispatcherQueueController,
+	CreateRandomAccessStreamOnFile:        procCreateRandomAccessStreamOnFile,
+	CreateRandomAccessStreamOverStream:    procCreateRandomAccessStreamOverStream,
+	CreateStreamOverRandomAccessStream:    procCreateStreamOverRandomAccessStream,
+	GetRestrictedErrorInfo:                procGetRestrictedErrorInfo,
+	HSTRING_UserFree:                      procHSTRING_UserFree,
+	HSTRING_UserFree64:                    procHSTRING_UserFree64,
+	HSTRING_UserMarshal:                   procHSTRING_UserMarshal,
+	HSTRING_UserMarshal64:                 procHSTRING_UserMarshal64,
+	HSTRING_UserSize:                      procHSTRING_UserSize,
+	HSTRING_UserSize64:                    procHSTRING_UserSize64,
+	HSTRING_UserUnmarshal:                 procHSTRING_UserUnmarshal,
+	HSTRING_UserUnmarshal64:               procHSTRING_UserUnmarshal64,
+	IsErrorPropagationEnabled:             procIsErrorPropagationEnabled,
+	RoActivateInstance:                    procRoActivateInstance,
+	RoCaptureErrorContext:                 procRoCaptureErrorContext,
+	RoClearError:                          procRoClearError,
+	RoFailFastWithErrorContext:            procRoFailFastWithErrorContext,
+	RoGetActivationFactory:                procRoGetActivationFactory,
+	RoGetAgileReference:                   procRoGetAgileReference,
+	RoGetApartmentIdentifier:              procRoGetApartmentIdentifier,
+	RoGetBufferMarshaler:                  procRoGetBufferMarshaler,
+	RoGetErrorReportingFlags:              procRoGetErrorReportingFlags,
+	RoGetMatchingRestrictedErrorInfo:      procRoGetMatchingRestrictedErrorInfo,
+	RoGetServerActivatableClasses:         procRoGetServerActivatableClasses,
+	RoInitialize:                          procRoInitialize,
+	RoInspectCapturedStackBackTrace:       procRoInspectCapturedStackBackTrace,
+	RoInspectThreadErrorInfo:              procRoInspectThreadErrorInfo,
+	RoOriginateError:                      procRoOriginateError,
+	RoOriginateErrorW:                     procRoOriginateErrorW,
+	RoOriginateLanguageException:          procRoOriginateLanguageException,
+	RoRegisterActivationFactories:         procRoRegisterActivationFactories,
+	RoRegisterForApartmentShutdown:        procRoRegisterForApartmentShutdown,
+	RoReportFailedDelegate:                procRoReportFailedDelegate,
+	RoReportUnhandledError:                procRoReportUnhandledError,
+	RoResolveRestrictedErrorInfoReference: procRoResolveRestrictedErrorInfoReference,
+	RoRevokeActivationFactories:           procRoRevokeActivationFactories,
+	RoSetErrorReportingFlags:              procRoSetErrorReportingFlags,
+	RoTransformError:                      procRoTransformError,
+	RoTransformErrorW:                     procRoTransformErrorW,
+	RoUninitialize:                        procRoUninitialize,
+	RoUnregisterForApartmentShutdown:      procRoUnregisterForApartmentShutdown,
+	SetRestrictedErrorInfo:                procSetRestrictedErrorInfo,
+	WindowsCompareStringOrdinal:           procWindowsCompareStringOrdinal,
+	WindowsConcatString:                   procWindowsConcatString,
+	WindowsCreateString:                   procWindowsCreateString,
+	WindowsCreateStringReference:          procWindowsCreateStringReference,
+	WindowsDeleteString:                   procWindowsDeleteString,
+	WindowsDeleteStringBuffer:             procWindowsDeleteStringBuffer,
+	WindowsDuplicateString:                procWindowsDuplicateString,
+	WindowsGetStringLen:                   procWindowsGetStringLen,
+	WindowsGetStringRawBuffer:             procWindowsGetStringRawBuffer,
+	WindowsInspectString:                  procWindowsInspectString,
+	WindowsInspectString2:                 procWindowsInspectString2,
+	WindowsIsStringEmpty:                  procWindowsIsStringEmpty,
+	WindowsPreallocateStringBuffer:        procWindowsPreallocateStringBuffer,
+	WindowsPromoteStringBuffer:            procWindowsPromoteStringBuffer,
+	WindowsReplaceString:                  procWindowsReplaceString,
+	WindowsStringHasEmbeddedNull:          procWindowsStringHasEmbeddedNull,
+	WindowsSubstring:                      procWindowsSubstring,
+	WindowsSubstringWithSpecifiedLength:   procWindowsSubstringWithSpecifiedLength,
+	WindowsTrimStringEnd:                  procWindowsTrimStringEnd,
+	WindowsTrimStringStart:                procWindowsTrimStringStart,
+}
 
 // CoDecodeProxy calls OLE32!CoDecodeProxy.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-codecodeproxy
@@ -113,6 +255,15 @@ func CreateControlInput(riid *win32.GUID, ppv **win32.IUnknown) error {
 // https://learn.microsoft.com/windows/win32/api/corewindow/nf-corewindow-createcontrolinputex
 func CreateControlInputEx(pCoreWindow *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateControlInputEx.Addr(), uintptr(unsafe.Pointer(pCoreWindow)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specCreateDispatcherQueueController = &win32.Spec{Args: []win32.Arg{win32.Struct(12, 4, 0, false), win32.Word}}
+
+// CreateDispatcherQueueController calls CoreMessaging!CreateDispatcherQueueController.
+// https://learn.microsoft.com/windows/win32/api/dispatcherqueue/nf-dispatcherqueue-createdispatcherqueuecontroller
+func CreateDispatcherQueueController(options DispatcherQueueOptions, dispatcherQueueController *uintptr) error {
+	r1, _, _ := win32.Call(procCreateDispatcherQueueController.Addr(), specCreateDispatcherQueueController, nil, uintptr(unsafe.Pointer(&options)), uintptr(unsafe.Pointer(dispatcherQueueController))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -339,8 +490,8 @@ func RoOriginateError(error_ foundation.HRESULT, message HSTRING) bool {
 // RoOriginateErrorW calls api-ms-win-core-winrt-error-l1-1-0!RoOriginateErrorW.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rooriginateerrorw
 // Minimum OS: windows8.0.
-func RoOriginateErrorW(error_ foundation.HRESULT, cchMax uint32, message string) bool {
-	_message := win32.UTF16Ptr(message)
+func RoOriginateErrorW(error_ foundation.HRESULT, cchMax uint32, message *string) bool {
+	_message := win32.UTF16PtrOrNil(message)
 	r1, _, _ := syscall.SyscallN(procRoOriginateErrorW.Addr(), uintptr(error_), uintptr(cchMax), uintptr(unsafe.Pointer(_message)))
 	return r1 != 0
 }
@@ -418,8 +569,8 @@ func RoTransformError(oldError foundation.HRESULT, newError foundation.HRESULT, 
 // RoTransformErrorW calls api-ms-win-core-winrt-error-l1-1-0!RoTransformErrorW.
 // https://learn.microsoft.com/windows/win32/api/roerrorapi/nf-roerrorapi-rotransformerrorw
 // Minimum OS: windows8.0.
-func RoTransformErrorW(oldError foundation.HRESULT, newError foundation.HRESULT, cchMax uint32, message string) bool {
-	_message := win32.UTF16Ptr(message)
+func RoTransformErrorW(oldError foundation.HRESULT, newError foundation.HRESULT, cchMax uint32, message *string) bool {
+	_message := win32.UTF16PtrOrNil(message)
 	r1, _, _ := syscall.SyscallN(procRoTransformErrorW.Addr(), uintptr(oldError), uintptr(newError), uintptr(cchMax), uintptr(unsafe.Pointer(_message)))
 	return r1 != 0
 }
@@ -466,8 +617,8 @@ func WindowsConcatString(string1 HSTRING, string2 HSTRING, newString *HSTRING) e
 // WindowsCreateString calls api-ms-win-core-winrt-string-l1-1-0!WindowsCreateString.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowscreatestring
 // Minimum OS: windows8.0.
-func WindowsCreateString(sourceString string, length uint32, string_ *HSTRING) error {
-	_sourceString := win32.UTF16Ptr(sourceString)
+func WindowsCreateString(sourceString *string, length uint32, string_ *HSTRING) error {
+	_sourceString := win32.UTF16PtrOrNil(sourceString)
 	r1, _, _ := syscall.SyscallN(procWindowsCreateString.Addr(), uintptr(unsafe.Pointer(_sourceString)), uintptr(length), uintptr(unsafe.Pointer(string_)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -475,8 +626,8 @@ func WindowsCreateString(sourceString string, length uint32, string_ *HSTRING) e
 // WindowsCreateStringReference calls api-ms-win-core-winrt-string-l1-1-0!WindowsCreateStringReference.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowscreatestringreference
 // Minimum OS: windows8.0.
-func WindowsCreateStringReference(sourceString string, length uint32, hstringHeader *HSTRING_HEADER, string_ *HSTRING) error {
-	_sourceString := win32.UTF16Ptr(sourceString)
+func WindowsCreateStringReference(sourceString *string, length uint32, hstringHeader *HSTRING_HEADER, string_ *HSTRING) error {
+	_sourceString := win32.UTF16PtrOrNil(sourceString)
 	r1, _, _ := syscall.SyscallN(procWindowsCreateStringReference.Addr(), uintptr(unsafe.Pointer(_sourceString)), uintptr(length), uintptr(unsafe.Pointer(hstringHeader)), uintptr(unsafe.Pointer(string_)))
 	return win32.ErrIfFailed(int32(r1))
 }

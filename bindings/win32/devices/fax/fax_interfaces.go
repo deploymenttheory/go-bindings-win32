@@ -5,6 +5,7 @@
 package fax
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -325,6 +326,14 @@ func (self *IFaxAccounts) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxAccounts_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IFaxAccounts's vtable slot 8.
+func (self *IFaxAccounts) Get_Item(vIndex systemvariant.VARIANT, pFaxAccount **IFaxAccount) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxAccounts_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vIndex)), uintptr(unsafe.Pointer(pFaxAccount))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Count dispatches through IFaxAccounts's vtable slot 9.
 func (self *IFaxAccounts) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
@@ -598,9 +607,25 @@ func (self *IFaxConfiguration) Get_DiscountRateStart(pdateDiscountRateStart *flo
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxConfiguration_Put_DiscountRateStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_DiscountRateStart dispatches through IFaxConfiguration's vtable slot 34.
+func (self *IFaxConfiguration) Put_DiscountRateStart(dateDiscountRateStart float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIFaxConfiguration_Put_DiscountRateStart, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dateDiscountRateStart))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DiscountRateEnd dispatches through IFaxConfiguration's vtable slot 35.
 func (self *IFaxConfiguration) Get_DiscountRateEnd(pdateDiscountRateEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateDiscountRateEnd)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxConfiguration_Put_DiscountRateEnd = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_DiscountRateEnd dispatches through IFaxConfiguration's vtable slot 36.
+func (self *IFaxConfiguration) Put_DiscountRateEnd(dateDiscountRateEnd float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIFaxConfiguration_Put_DiscountRateEnd, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dateDiscountRateEnd))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -817,6 +842,14 @@ func (self *IFaxDevice) GetExtensionProperty(bstrGUID foundation.BSTR, pvPropert
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxDevice_SetExtensionProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetExtensionProperty dispatches through IFaxDevice's vtable slot 29.
+func (self *IFaxDevice) SetExtensionProperty(bstrGUID foundation.BSTR, vProperty systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIFaxDevice_SetExtensionProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGUID)), uintptr(unsafe.Pointer(&vProperty))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // UseRoutingMethod dispatches through IFaxDevice's vtable slot 30.
 func (self *IFaxDevice) UseRoutingMethod(bstrMethodGUID foundation.BSTR, bUse foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMethodGUID)), uintptr(bUse))
@@ -976,6 +1009,14 @@ func (self *IFaxDeviceProviders) Get__NewEnum(ppUnk **systemcom.IUnknown) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxDeviceProviders_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IFaxDeviceProviders's vtable slot 8.
+func (self *IFaxDeviceProviders) Get_Item(vIndex systemvariant.VARIANT, pFaxDeviceProvider **IFaxDeviceProvider) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxDeviceProviders_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vIndex)), uintptr(unsafe.Pointer(pFaxDeviceProvider))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Count dispatches through IFaxDeviceProviders's vtable slot 9.
 func (self *IFaxDeviceProviders) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
@@ -994,6 +1035,14 @@ var IID_IFaxDevices = win32.GUID{Data1: 0x9e46783e, Data2: 0xf34f, Data3: 0x482e
 // Get__NewEnum dispatches through IFaxDevices's vtable slot 7.
 func (self *IFaxDevices) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxDevices_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IFaxDevices's vtable slot 8.
+func (self *IFaxDevices) Get_Item(vIndex systemvariant.VARIANT, pFaxDevice **IFaxDevice) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxDevices_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vIndex)), uintptr(unsafe.Pointer(pFaxDevice))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1081,6 +1130,14 @@ func (self *IFaxDocument) Put_Note(bstrNote foundation.BSTR) error {
 // Get_ScheduleTime dispatches through IFaxDocument's vtable slot 17.
 func (self *IFaxDocument) Get_ScheduleTime(pdateScheduleTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateScheduleTime)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxDocument_Put_ScheduleTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_ScheduleTime dispatches through IFaxDocument's vtable slot 18.
+func (self *IFaxDocument) Put_ScheduleTime(dateScheduleTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIFaxDocument_Put_ScheduleTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dateScheduleTime))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1234,6 +1291,14 @@ func (self *IFaxDocument2) Get_SubmissionId(pbstrSubmissionId *foundation.BSTR) 
 // Get_Bodies dispatches through IFaxDocument2's vtable slot 42.
 func (self *IFaxDocument2) Get_Bodies(pvBodies *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvBodies)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxDocument2_Put_Bodies = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Bodies dispatches through IFaxDocument2's vtable slot 43.
+func (self *IFaxDocument2) Put_Bodies(vBodies systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIFaxDocument2_Put_Bodies, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vBodies))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1462,6 +1527,14 @@ func (self *IFaxInboundRoutingExtensions) Get__NewEnum(ppUnk **systemcom.IUnknow
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxInboundRoutingExtensions_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IFaxInboundRoutingExtensions's vtable slot 8.
+func (self *IFaxInboundRoutingExtensions) Get_Item(vIndex systemvariant.VARIANT, pFaxInboundRoutingExtension **IFaxInboundRoutingExtension) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxInboundRoutingExtensions_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vIndex)), uintptr(unsafe.Pointer(pFaxInboundRoutingExtension))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Count dispatches through IFaxInboundRoutingExtensions's vtable slot 9.
 func (self *IFaxInboundRoutingExtensions) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
@@ -1543,6 +1616,14 @@ var IID_IFaxInboundRoutingMethods = win32.GUID{Data1: 0x783fca10, Data2: 0x8908,
 // Get__NewEnum dispatches through IFaxInboundRoutingMethods's vtable slot 7.
 func (self *IFaxInboundRoutingMethods) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxInboundRoutingMethods_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IFaxInboundRoutingMethods's vtable slot 8.
+func (self *IFaxInboundRoutingMethods) Get_Item(vIndex systemvariant.VARIANT, pFaxInboundRoutingMethod **IFaxInboundRoutingMethod) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxInboundRoutingMethods_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vIndex)), uintptr(unsafe.Pointer(pFaxInboundRoutingMethod))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1804,6 +1885,14 @@ var IID_IFaxIncomingJobs = win32.GUID{Data1: 0x011f04e9, Data2: 0x4fd6, Data3: 0
 // Get__NewEnum dispatches through IFaxIncomingJobs's vtable slot 7.
 func (self *IFaxIncomingJobs) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnk)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxIncomingJobs_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IFaxIncomingJobs's vtable slot 8.
+func (self *IFaxIncomingJobs) Get_Item(vIndex systemvariant.VARIANT, pFaxIncomingJob **IFaxIncomingJob) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxIncomingJobs_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vIndex)), uintptr(unsafe.Pointer(pFaxIncomingJob))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2290,6 +2379,14 @@ func (self *IFaxOutboundRoutingGroups) Get__NewEnum(ppUnk **systemcom.IUnknown) 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxOutboundRoutingGroups_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IFaxOutboundRoutingGroups's vtable slot 8.
+func (self *IFaxOutboundRoutingGroups) Get_Item(vIndex systemvariant.VARIANT, pFaxOutboundRoutingGroup **IFaxOutboundRoutingGroup) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxOutboundRoutingGroups_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vIndex)), uintptr(unsafe.Pointer(pFaxOutboundRoutingGroup))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Count dispatches through IFaxOutboundRoutingGroups's vtable slot 9.
 func (self *IFaxOutboundRoutingGroups) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
@@ -2299,6 +2396,14 @@ func (self *IFaxOutboundRoutingGroups) Get_Count(plCount *int32) error {
 // Add dispatches through IFaxOutboundRoutingGroups's vtable slot 10.
 func (self *IFaxOutboundRoutingGroups) Add(bstrName foundation.BSTR, pFaxOutboundRoutingGroup **IFaxOutboundRoutingGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pFaxOutboundRoutingGroup)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxOutboundRoutingGroups_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IFaxOutboundRoutingGroups's vtable slot 11.
+func (self *IFaxOutboundRoutingGroups) Remove(vIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIFaxOutboundRoutingGroups_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vIndex))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2782,6 +2887,14 @@ func (self *IFaxOutgoingJobs) Get__NewEnum(ppUnk **systemcom.IUnknown) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxOutgoingJobs_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IFaxOutgoingJobs's vtable slot 8.
+func (self *IFaxOutgoingJobs) Get_Item(vIndex systemvariant.VARIANT, pFaxOutgoingJob **IFaxOutgoingJob) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxOutgoingJobs_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vIndex)), uintptr(unsafe.Pointer(pFaxOutgoingJob))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Count dispatches through IFaxOutgoingJobs's vtable slot 9.
 func (self *IFaxOutgoingJobs) Get_Count(plCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
@@ -3094,9 +3207,25 @@ func (self *IFaxOutgoingQueue) Get_DiscountRateStart(pdateDiscountRateStart *flo
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxOutgoingQueue_Put_DiscountRateStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_DiscountRateStart dispatches through IFaxOutgoingQueue's vtable slot 20.
+func (self *IFaxOutgoingQueue) Put_DiscountRateStart(dateDiscountRateStart float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIFaxOutgoingQueue_Put_DiscountRateStart, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dateDiscountRateStart))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DiscountRateEnd dispatches through IFaxOutgoingQueue's vtable slot 21.
 func (self *IFaxOutgoingQueue) Get_DiscountRateEnd(pdateDiscountRateEnd *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateDiscountRateEnd)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxOutgoingQueue_Put_DiscountRateEnd = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_DiscountRateEnd dispatches through IFaxOutgoingQueue's vtable slot 22.
+func (self *IFaxOutgoingQueue) Put_DiscountRateEnd(dateDiscountRateEnd float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIFaxOutgoingQueue_Put_DiscountRateEnd, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dateDiscountRateEnd))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3352,6 +3481,14 @@ func (self *IFaxSecurity) Get_Descriptor(pvDescriptor *systemvariant.VARIANT) er
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxSecurity_Put_Descriptor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Descriptor dispatches through IFaxSecurity's vtable slot 8.
+func (self *IFaxSecurity) Put_Descriptor(vDescriptor systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxSecurity_Put_Descriptor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vDescriptor))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_GrantedRights dispatches through IFaxSecurity's vtable slot 9.
 func (self *IFaxSecurity) Get_GrantedRights(pGrantedRights *FAX_ACCESS_RIGHTS_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGrantedRights)))
@@ -3394,6 +3531,14 @@ var IID_IFaxSecurity2 = win32.GUID{Data1: 0x17d851f4, Data2: 0xd09b, Data3: 0x48
 // Get_Descriptor dispatches through IFaxSecurity2's vtable slot 7.
 func (self *IFaxSecurity2) Get_Descriptor(pvDescriptor *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvDescriptor)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxSecurity2_Put_Descriptor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Descriptor dispatches through IFaxSecurity2's vtable slot 8.
+func (self *IFaxSecurity2) Put_Descriptor(vDescriptor systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFaxSecurity2_Put_Descriptor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vDescriptor))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3757,6 +3902,14 @@ func (self *IFaxServer) GetExtensionProperty(bstrGUID foundation.BSTR, pvPropert
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFaxServer_SetExtensionProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetExtensionProperty dispatches through IFaxServer's vtable slot 25.
+func (self *IFaxServer) SetExtensionProperty(bstrGUID foundation.BSTR, vProperty systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIFaxServer_SetExtensionProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGUID)), uintptr(unsafe.Pointer(&vProperty))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ListenToServerEvents dispatches through IFaxServer's vtable slot 26.
 func (self *IFaxServer) ListenToServerEvents(EventTypes FAX_SERVER_EVENTS_TYPE_ENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(EventTypes))
@@ -3772,6 +3925,14 @@ func (self *IFaxServer) RegisterDeviceProvider(bstrGUID foundation.BSTR, bstrFri
 // UnregisterDeviceProvider dispatches through IFaxServer's vtable slot 28.
 func (self *IFaxServer) UnregisterDeviceProvider(bstrUniqueName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUniqueName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFaxServer_RegisterInboundRoutingExtension = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RegisterInboundRoutingExtension dispatches through IFaxServer's vtable slot 29.
+func (self *IFaxServer) RegisterInboundRoutingExtension(bstrExtensionName foundation.BSTR, bstrFriendlyName foundation.BSTR, bstrImageName foundation.BSTR, vMethods systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIFaxServer_RegisterInboundRoutingExtension, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrExtensionName)), uintptr(unsafe.Pointer(bstrFriendlyName)), uintptr(unsafe.Pointer(bstrImageName)), uintptr(unsafe.Pointer(&vMethods))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

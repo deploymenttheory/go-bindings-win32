@@ -19,6 +19,16 @@ var (
 	procCreateDeviceAccessInstance = moddeviceaccess.NewProc("CreateDeviceAccessInstance")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateDeviceAccessInstance *win32.Proc
+}{
+	CreateDeviceAccessInstance: procCreateDeviceAccessInstance,
+}
+
 // CreateDeviceAccessInstance calls deviceaccess!CreateDeviceAccessInstance.
 // https://learn.microsoft.com/windows/win32/api/deviceaccess/nf-deviceaccess-createdeviceaccessinstance
 func CreateDeviceAccessInstance(deviceInterfacePath string, desiredAccess uint32, createAsync **ICreateDeviceAccessAsync) error {

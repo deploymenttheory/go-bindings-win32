@@ -4,34 +4,40 @@
 
 package clrhosting
 
-// CLRCreateInstanceFnPtr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// CLRCreateInstanceFnPtr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CLRCreateInstanceFnPtr uintptr
 
-// CallbackThreadSetFnPtr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.HRESULT.
+// CallbackThreadSetFnPtr is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CallbackThreadSetFnPtr uintptr
 
-// CallbackThreadUnsetFnPtr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.HRESULT.
+// CallbackThreadUnsetFnPtr is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CallbackThreadUnsetFnPtr uintptr
 
-// CreateInterfaceFnPtr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// CreateInterfaceFnPtr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CreateInterfaceFnPtr uintptr
 
-// FExecuteInAppDomainCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// FExecuteInAppDomainCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FExecuteInAppDomainCallback uintptr
 
-// FLockClrVersionCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.HRESULT.
+// FLockClrVersionCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FLockClrVersionCallback uintptr
 
-// PTLS_CALLBACK_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PTLS_CALLBACK_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PTLS_CALLBACK_FUNCTION uintptr
 
-// RuntimeLoadedCallbackFnPtr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*ICLRRuntimeInfo, CallbackThreadSetFnPtr, CallbackThreadUnsetFnPtr).
+// RuntimeLoadedCallbackFnPtr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*ICLRRuntimeInfo, CallbackThreadSetFnPtr, CallbackThreadUnsetFnPtr) uintptr.
 type RuntimeLoadedCallbackFnPtr uintptr

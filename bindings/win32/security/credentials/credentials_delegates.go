@@ -4,18 +4,21 @@
 
 package credentials
 
-// LPOCNCHKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, unsafe.Pointer) foundation.BOOL.
+// LPOCNCHKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPOCNCHKPROC uintptr
 
-// LPOCNCONNPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.PSTR, foundation.PSTR, unsafe.Pointer) uintptr.
+// LPOCNCONNPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, foundation.PSTR, foundation.PSTR, unsafe.Pointer) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPOCNCONNPROCA uintptr
 
-// LPOCNCONNPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer) uintptr.
+// LPOCNCONNPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPOCNCONNPROCW uintptr
 
-// LPOCNDSCPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, unsafe.Pointer).
+// LPOCNDSCPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, unsafe.Pointer) uintptr.
 type LPOCNDSCPROC uintptr

@@ -15,7 +15,7 @@ go test ./internal/...
 go test ./bindings/runtime/...
 
 # Live acceptance tests (calls real Win32 APIs; Windows only)
-go test ./acceptance/
+go test ./acceptance/...
 
 # ── Pipeline ─────────────────────────────────────────────────────────────────
 # 0. Update the committed winmd from NuGet (writes PROVENANCE.json; no-op when current)
@@ -38,7 +38,7 @@ go run ./cmd/generate/ bindings --namespace System.Threading
 # Verbose diagnostics (degradations, skips, cycle breaks)
 go run ./cmd/generate/ bindings -v
 
-# Regenerate bindings AND the ABI layout acceptance test (acceptance/abi_generated_test.go)
+# Regenerate bindings AND the ABI layout tests (acceptance/abi/abi_<namespace>_test.go)
 go run ./cmd/generate/ abitest
 
 # Structural integrity checks (errors fail; warnings report)
@@ -68,7 +68,8 @@ This is a **code generator** that reads Microsoft's `Windows.Win32.winmd`
 `Microsoft.Windows.SDK.Win32Metadata` NuGet package) and emits Go bindings for
 the Win32 API. It mirrors the architecture of the sibling
 `go-bindings-macosplatform` generator; the design rationale and milestones live
-in [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md).
+in the git history (the original implementation plan has been superseded by
+this file).
 
 ```
 Windows.Win32.winmd → .w32meta.json (IR) → Go source
@@ -120,9 +121,14 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
   through it.
 - **`bindings/runtime/win32/`** — the hand-written runtime: lazy system-DLL
   loading (System32-only via `LoadLibraryExW` +
-  `LOAD_LIBRARY_SEARCH_SYSTEM32`, `loader.go`), `LastError` normalization,
-  the typed `HRESULT` error, `GUID`, UTF-16 helpers. Standard library only —
-  nothing beyond the stdlib is ever linked into consumer binaries.
+  `LOAD_LIBRARY_SEARCH_SYSTEM32`, `loader.go`; a missing DLL/export is a
+  typed `*ProcError` from `Proc.Find`, and the panic value of `Proc.Addr`),
+  `LastError` normalization, the typed `HRESULT` error, `GUID`, UTF-16
+  helpers, the root `IUnknown` with `QueryInterface[T]`/`Cast[T]`, and the
+  register-aware `Call` (`call.go` + `call_amd64.s`/`call_arm64.s`: floats,
+  by-value composites and struct returns SyscallN cannot express). Standard
+  library only — nothing beyond the stdlib is ever linked into consumer
+  binaries, and no cgo.
 
 ### Generated output (`bindings/win32/`)
 
@@ -131,7 +137,8 @@ One package per namespace, directory = namespace path
 cross-refs = all segments joined: `systemthreading`). Files per package, split
 by construct: `doc.go`, `<pkg>_typedefs.go`, `<pkg>_enums.go`,
 `<pkg>_structs.go`, `<pkg>_delegates.go`, `<pkg>_constants.go`,
-`<pkg>_functions.go`, `<pkg>_interfaces.go` (COM), `<pkg>_handles.go` (RAII
+`<pkg>_functions.go` (DLL/proc vars, the `Procs` availability-probe table,
+then the functions), `<pkg>_interfaces.go` (COM), `<pkg>_handles.go` (handle
 closers). Empty files are not written.
 
 There is **one** tree. The typed constructs (typedefs/enums/structs/delegates/
@@ -147,8 +154,12 @@ The function and COM-method gathers (`functions.go`, `interfaces.go`) shape
 each call, then the template dispatches via `syscall.SyscallN`:
 
 - input `PWSTR`/`PCWSTR` → Go `string` (UTF-16 at the boundary:
-  `_name := win32.UTF16Ptr(name)`)
-- input `BOOL` → Go `bool` (`win32.Bool32`); plain `BOOL` return → `bool`
+  `_name := win32.UTF16Ptr(name)`); an `[Optional]` one (`Param.IsOptional`,
+  the ECMA-335 Optional flag CsWin32/windows-rs project too) → `*string`
+  (`win32.UTF16PtrOrNil`: nil passes NULL, `win32.Str("")` passes `L""`)
+- input `BOOL` → Go `bool` (`win32.Bool32`); plain `BOOL` return → `bool`;
+  a native C `bool`/`BOOLEAN` param → `bool` (`win32.Bool8`, one byte in the
+  word) and return → `bool` (`byte(r1) != 0`: only AL is defined)
 - `HRESULT` return → `error` (failures surface as the typed `win32.HRESULT`,
   which `errors.Is`-matches `syscall.Errno` for `FACILITY_WIN32` codes);
   `BOOL` + SetLastError → `error`
@@ -157,6 +168,12 @@ each call, then the template dispatches via `syscall.SyscallN`:
   returns `(win32.HRESULT, error)` instead: err reflects failure only, the
   HRESULT preserves `S_FALSE`-style success codes. The winmd has no attribute
   for this, so the set is curated; stale entries surface as diagnostics.
+- a function whose DllImport module is not a loadable PE module (the
+  `FORCEINLINE` pseudo-module marks SDK header macros such as
+  `GetCurrentProcessToken`) is never dispatched: when the metadata carries a
+  `[Constant]` value (ingested as `Function.Constant`) it is emitted as a
+  plain Go function returning that constant (`^foundation.HANDLE(3)` for
+  -4); otherwise it is skipped with a diagnostic (`emit/raw/inline.go`).
 - handle/pointer + SetLastError → `(T, error)`, failure sentinels from
   `[InvalidHandleValue]` metadata; other + SetLastError → `(T, error)` where
   err is the advisory GetLastError; no SetLastError → bare `T`
@@ -180,9 +197,12 @@ each call, then the template dispatches via `syscall.SyscallN`:
   the return is HRESULT.
 - a `void**` `[out]` param carrying `[ComOutPtr]` (or `[IidParameterIndex]`,
   ingested but absent from the current winmd) is typed `**win32.IUnknown` —
-  the runtime's root COM shape (`bindings/runtime/win32/iunknown.go`), layout-
-  compatible with every generated `*IFoo` and carrying QueryInterface/AddRef/
-  Release. Cast to the concrete interface selected by the riid argument. A
+  the runtime's root COM shape (`bindings/runtime/win32/iunknown.go`), which
+  the generated `System.Com.IUnknown` is a type alias of (there is exactly
+  one `IUnknown`), layout-compatible with every generated `*IFoo` and
+  carrying QueryInterface/AddRef/Release. `win32.Cast[T]` reinterprets the
+  result as the interface the riid selected; `win32.QueryInterface[T]` asks
+  any object for another interface, typed. A
   `[retval]` one elevates to a `(*win32.IUnknown, error)` return like any
   typed COM out. An un-attributed `void**` `[out]` that pairs with an input
   `*GUID` param whose name contains `iid` — immediately preceding it, or the
@@ -193,12 +213,36 @@ each call, then the template dispatches via `syscall.SyscallN`:
   param `Node` in a method returning `(*Node, error)`) is suffixed with `_`,
   because Go puts parameter names in scope for the result types.
 
-The set of emittable functions is exactly what `syscall.SyscallN` can marshal:
-by-value struct/union/array/GUID params and floats are skipped with a
-diagnostic. The merged `view.ReturnKind` enumerates all the shapes above.
+- a COM method returning a struct/union/GUID by value receives a hidden
+  result pointer right after `this` (the MSVC member-function ABI on x64 and
+  ARM64 alike; windows-rs emits the same shape) and returns the value
+  (`RetStructOut`); a flat function returning a 1/2/4/8-byte non-float
+  aggregate reconstructs it from `r1` (`win32.StructRet[T]`).
 
-**Handle RAII** (`<pkg>_handles.go`): each `[RAIIFree]` handle typedef gets a
-`Close<Handle>(h) error` helper that calls the (idiomatic-shaped) free function
+- shapes `syscall.SyscallN` cannot marshal dispatch through the runtime's
+  register-aware `win32.Call(fn, spec, ret, args...)` instead (a Go planner
+  per architecture plus a per-arch assembly trampoline entered via SyscallN;
+  no cgo — `bindings/runtime/win32/call.go`): `float32`/`float64` params
+  (`uintptr(math.Float32bits(v))`, descriptor `win32.Float32`), float returns
+  (`RetFloat`: `math.Float32frombits(uint32(r.F0))`), by-value composites
+  that are not a 1/2/4/8-byte integer aggregate — HFAs like `D2D_POINT_2F`,
+  GUID, RECT, VARIANT — (`uintptr(unsafe.Pointer(&v))` with
+  `win32.Struct(size, align, hfa, hfa64)`), and flat struct returns larger
+  than a register or made of floats (`RetStructOut`/`RetStructOutLast` with a
+  `win32.OutParam` ret buffer). Each such call site gets a package-level
+  `spec<Name>` `*win32.Spec`; the gather composes `view.CallExpr` (`.Tuple()`
+  adapts the `Result` to SyscallN's `(r1, r2, err)`), so the templates never
+  know which dispatcher they render.
+
+Only by-value arrays and float returns with SetLastError remain skipped with
+a diagnostic. `sizes.go` keeps a scalar-leaf census per layout so the ARM64
+homogeneous-float-aggregate rule (`layout.hfa`) is applied to descriptors.
+The merged `view.ReturnKind` enumerates all the shapes above.
+
+**Handle closers** (`<pkg>_handles.go`): each `[RAIIFree]` handle typedef gets a
+`Close<Handle>(h) error` helper (a plain function, not RAII — Go has no
+destructors) that returns nil for the zero/`[InvalidHandleValue]` sentinels
+and otherwise calls the (idiomatic-shaped) free function
 — looked up via the registry's function-owner index, possibly cross-namespace —
 and normalizes its return to `error`. Emitted only when the closer is
 unambiguous, takes exactly the handle, and has a normalizable return; otherwise
@@ -246,9 +290,12 @@ DO-NOT-EDIT header are never touched.
 
 ### QA gates (M2)
 
-- **ABI layout test** — `generate abitest` records every emitted struct's
-  computed C layout and writes `acceptance/abi_generated_test.go` with
-  `unsafe.Sizeof`/`Offsetof` assertions (all Foundation + ~400 sampled).
+- **ABI layout tests** — `generate abitest` records every emitted struct's
+  computed C layout and writes one `acceptance/abi/abi_<namespace>_test.go`
+  per namespace: static tables of `unsafe.Sizeof`/`Offsetof` assertions
+  (compile-time constants) over **every** recorded struct, walked by the
+  hand-written `checkABI` driver in `acceptance/abi/abi_test.go`. Stale
+  generated files are pruned.
   Structs whose packed C layout Go cannot reproduce are skipped up front.
 - **`generate validate`** — dangling refs, invalid enum bases, missing DLLs,
   dangling COM bases. Errors fail CI.
@@ -262,9 +309,15 @@ DO-NOT-EDIT header are never touched.
   wrappers trip vet's unsafe.Pointer heuristic by design), unit + acceptance
   tests, then the regeneration gate: ingest → validate → bindings (with
   ratchet) → abitest → `git diff --exit-code` over `bindings/` + `acceptance/`.
-- `winmd-update.yml` — weekly + manual: `fetch-metadata` checks NuGet; on a
-  new version it re-ingests, regenerates, rewrites the baseline, and opens a
-  PR whose body is the `generate diff` output old→new.
+- `winmd-update.yml` — weekly + manual: a `check` job asks NuGet for a new
+  version; if there is one, an `emit` matrix (windows-latest amd64 +
+  windows-11-arm arm64) each fetches that pinned version, re-ingests,
+  validates, regenerates bindings + baseline + `docs/COVERAGE.md` + the ABI
+  tests, builds, vets and runs the live suites on its own architecture, and
+  uploads its emission; a `pull-request` job diffs the two emissions (the
+  cross-host determinism gate — the generator must be host-independent),
+  applies the amd64 one and opens a PR whose body is the `generate diff`
+  output old→new.
 
 ## Important constraints
 

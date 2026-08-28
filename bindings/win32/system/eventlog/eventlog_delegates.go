@@ -4,6 +4,7 @@
 
 package eventlog
 
-// EVT_SUBSCRIBE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(EVT_SUBSCRIBE_NOTIFY_ACTION, unsafe.Pointer, EVT_HANDLE) uint32.
+// EVT_SUBSCRIBE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(EVT_SUBSCRIBE_NOTIFY_ACTION, unsafe.Pointer, EVT_HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type EVT_SUBSCRIBE_CALLBACK uintptr

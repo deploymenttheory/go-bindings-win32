@@ -4,18 +4,22 @@
 
 package grouppolicy
 
-// PFNGENERATEGROUPPOLICY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *foundation.BOOL, foundation.PWSTR, *RSOP_TARGET, *RSOP_TARGET) uint32.
+// PFNGENERATEGROUPPOLICY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *foundation.BOOL, foundation.PWSTR, *RSOP_TARGET, *RSOP_TARGET) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNGENERATEGROUPPOLICY uintptr
 
-// PFNPROCESSGROUPPOLICY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.HANDLE, systemregistry.HKEY, *GROUP_POLICY_OBJECTA, *GROUP_POLICY_OBJECTA, uintptr, *foundation.BOOL, PFNSTATUSMESSAGECALLBACK) uint32.
+// PFNPROCESSGROUPPOLICY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.HANDLE, systemregistry.HKEY, *GROUP_POLICY_OBJECTA, *GROUP_POLICY_OBJECTA, uintptr, *foundation.BOOL, PFNSTATUSMESSAGECALLBACK) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNPROCESSGROUPPOLICY uintptr
 
-// PFNPROCESSGROUPPOLICYEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.HANDLE, systemregistry.HKEY, *GROUP_POLICY_OBJECTA, *GROUP_POLICY_OBJECTA, uintptr, *foundation.BOOL, PFNSTATUSMESSAGECALLBACK, *systemwmi.IWbemServices, *foundation.HRESULT) uint32.
+// PFNPROCESSGROUPPOLICYEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.HANDLE, systemregistry.HKEY, *GROUP_POLICY_OBJECTA, *GROUP_POLICY_OBJECTA, uintptr, *foundation.BOOL, PFNSTATUSMESSAGECALLBACK, *systemwmi.IWbemServices, *foundation.HRESULT) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNPROCESSGROUPPOLICYEX uintptr
 
-// PFNSTATUSMESSAGECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.BOOL, foundation.PWSTR) uint32.
+// PFNSTATUSMESSAGECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.BOOL, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNSTATUSMESSAGECALLBACK uintptr

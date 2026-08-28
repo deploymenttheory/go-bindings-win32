@@ -38,6 +38,52 @@ var (
 	procPrjWritePlaceholderInfo2         = modPROJECTEDFSLIB.NewProc("PrjWritePlaceholderInfo2")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	PrjAllocateAlignedBuffer         *win32.Proc
+	PrjClearNegativePathCache        *win32.Proc
+	PrjCompleteCommand               *win32.Proc
+	PrjDeleteFile                    *win32.Proc
+	PrjDoesNameContainWildCards      *win32.Proc
+	PrjFileNameCompare               *win32.Proc
+	PrjFileNameMatch                 *win32.Proc
+	PrjFillDirEntryBuffer            *win32.Proc
+	PrjFillDirEntryBuffer2           *win32.Proc
+	PrjFreeAlignedBuffer             *win32.Proc
+	PrjGetOnDiskFileState            *win32.Proc
+	PrjGetVirtualizationInstanceInfo *win32.Proc
+	PrjMarkDirectoryAsPlaceholder    *win32.Proc
+	PrjStartVirtualizing             *win32.Proc
+	PrjStopVirtualizing              *win32.Proc
+	PrjUpdateFileIfNeeded            *win32.Proc
+	PrjWriteFileData                 *win32.Proc
+	PrjWritePlaceholderInfo          *win32.Proc
+	PrjWritePlaceholderInfo2         *win32.Proc
+}{
+	PrjAllocateAlignedBuffer:         procPrjAllocateAlignedBuffer,
+	PrjClearNegativePathCache:        procPrjClearNegativePathCache,
+	PrjCompleteCommand:               procPrjCompleteCommand,
+	PrjDeleteFile:                    procPrjDeleteFile,
+	PrjDoesNameContainWildCards:      procPrjDoesNameContainWildCards,
+	PrjFileNameCompare:               procPrjFileNameCompare,
+	PrjFileNameMatch:                 procPrjFileNameMatch,
+	PrjFillDirEntryBuffer:            procPrjFillDirEntryBuffer,
+	PrjFillDirEntryBuffer2:           procPrjFillDirEntryBuffer2,
+	PrjFreeAlignedBuffer:             procPrjFreeAlignedBuffer,
+	PrjGetOnDiskFileState:            procPrjGetOnDiskFileState,
+	PrjGetVirtualizationInstanceInfo: procPrjGetVirtualizationInstanceInfo,
+	PrjMarkDirectoryAsPlaceholder:    procPrjMarkDirectoryAsPlaceholder,
+	PrjStartVirtualizing:             procPrjStartVirtualizing,
+	PrjStopVirtualizing:              procPrjStopVirtualizing,
+	PrjUpdateFileIfNeeded:            procPrjUpdateFileIfNeeded,
+	PrjWriteFileData:                 procPrjWriteFileData,
+	PrjWritePlaceholderInfo:          procPrjWritePlaceholderInfo,
+	PrjWritePlaceholderInfo2:         procPrjWritePlaceholderInfo2,
+}
+
 // PrjAllocateAlignedBuffer calls PROJECTEDFSLIB!PrjAllocateAlignedBuffer.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjallocatealignedbuffer
 // Minimum OS: windows10.0.17763.
@@ -145,9 +191,9 @@ func PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext PRJ_NAMESPA
 // PrjMarkDirectoryAsPlaceholder calls PROJECTEDFSLIB!PrjMarkDirectoryAsPlaceholder.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjmarkdirectoryasplaceholder
 // Minimum OS: windows10.0.17763.
-func PrjMarkDirectoryAsPlaceholder(rootPathName string, targetPathName string, versionInfo *PRJ_PLACEHOLDER_VERSION_INFO, virtualizationInstanceID *win32.GUID) error {
+func PrjMarkDirectoryAsPlaceholder(rootPathName string, targetPathName *string, versionInfo *PRJ_PLACEHOLDER_VERSION_INFO, virtualizationInstanceID *win32.GUID) error {
 	_rootPathName := win32.UTF16Ptr(rootPathName)
-	_targetPathName := win32.UTF16Ptr(targetPathName)
+	_targetPathName := win32.UTF16PtrOrNil(targetPathName)
 	r1, _, _ := syscall.SyscallN(procPrjMarkDirectoryAsPlaceholder.Addr(), uintptr(unsafe.Pointer(_rootPathName)), uintptr(unsafe.Pointer(_targetPathName)), uintptr(unsafe.Pointer(versionInfo)), uintptr(unsafe.Pointer(virtualizationInstanceID)))
 	return win32.ErrIfFailed(int32(r1))
 }

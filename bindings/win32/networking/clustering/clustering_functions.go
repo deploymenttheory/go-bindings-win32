@@ -164,6 +164,7 @@ var (
 	procClusterResourceTypeGetEnumCount             = modCLUSAPI.NewProc("ClusterResourceTypeGetEnumCount")
 	procClusterResourceTypeOpenEnum                 = modCLUSAPI.NewProc("ClusterResourceTypeOpenEnum")
 	procClusterSetAccountAccess                     = modCLUSAPI.NewProc("ClusterSetAccountAccess")
+	procClusterSharedVolumeSetSnapshotState         = modCLUSAPI.NewProc("ClusterSharedVolumeSetSnapshotState")
 	procClusterUpgradeFunctionalLevel               = modCLUSAPI.NewProc("ClusterUpgradeFunctionalLevel")
 	procCreateCluster                               = modCLUSAPI.NewProc("CreateCluster")
 	procCreateClusterAvailabilitySet                = modCLUSAPI.NewProc("CreateClusterAvailabilitySet")
@@ -260,6 +261,7 @@ var (
 	procPauseClusterNodeEx                          = modCLUSAPI.NewProc("PauseClusterNodeEx")
 	procPauseClusterNodeEx2                         = modCLUSAPI.NewProc("PauseClusterNodeEx2")
 	procRegisterClusterNotify                       = modCLUSAPI.NewProc("RegisterClusterNotify")
+	procRegisterClusterNotifyV2                     = modCLUSAPI.NewProc("RegisterClusterNotifyV2")
 	procRegisterClusterResourceTypeNotifyV2         = modCLUSAPI.NewProc("RegisterClusterResourceTypeNotifyV2")
 	procRemoveClusterGroupDependency                = modCLUSAPI.NewProc("RemoveClusterGroupDependency")
 	procRemoveClusterGroupDependencyEx              = modCLUSAPI.NewProc("RemoveClusterGroupDependencyEx")
@@ -428,6 +430,826 @@ var (
 	procResUtilsDeleteKeyTree                       = modRESUTILS.NewProc("ResUtilsDeleteKeyTree")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddClusterGroupDependency                   *win32.Proc
+	AddClusterGroupDependencyEx                 *win32.Proc
+	AddClusterGroupSetDependency                *win32.Proc
+	AddClusterGroupSetDependencyEx              *win32.Proc
+	AddClusterGroupToGroupSetDependency         *win32.Proc
+	AddClusterGroupToGroupSetDependencyEx       *win32.Proc
+	AddClusterNode                              *win32.Proc
+	AddClusterNodeEx                            *win32.Proc
+	AddClusterResourceDependency                *win32.Proc
+	AddClusterResourceDependencyEx              *win32.Proc
+	AddClusterResourceNode                      *win32.Proc
+	AddClusterResourceNodeEx                    *win32.Proc
+	AddClusterStorageNode                       *win32.Proc
+	AddCrossClusterGroupSetDependency           *win32.Proc
+	AddResourceToClusterSharedVolumes           *win32.Proc
+	BackupClusterDatabase                       *win32.Proc
+	CanResourceBeDependent                      *win32.Proc
+	CancelClusterGroupOperation                 *win32.Proc
+	ChangeClusterResourceGroup                  *win32.Proc
+	ChangeClusterResourceGroupEx                *win32.Proc
+	ChangeClusterResourceGroupEx2               *win32.Proc
+	CloseCluster                                *win32.Proc
+	CloseClusterCryptProvider                   *win32.Proc
+	CloseClusterGroup                           *win32.Proc
+	CloseClusterGroupSet                        *win32.Proc
+	CloseClusterNetInterface                    *win32.Proc
+	CloseClusterNetwork                         *win32.Proc
+	CloseClusterNode                            *win32.Proc
+	CloseClusterNotifyPort                      *win32.Proc
+	CloseClusterResource                        *win32.Proc
+	ClusAddClusterHealthFault                   *win32.Proc
+	ClusGetClusterHealthFaults                  *win32.Proc
+	ClusRemoveClusterHealthFault                *win32.Proc
+	ClusWorkerCheckTerminate                    *win32.Proc
+	ClusWorkerCreate                            *win32.Proc
+	ClusWorkerTerminate                         *win32.Proc
+	ClusWorkerTerminateEx                       *win32.Proc
+	ClusWorkersTerminate                        *win32.Proc
+	ClusapiSetReasonHandler                     *win32.Proc
+	ClusterAddGroupToAffinityRule               *win32.Proc
+	ClusterAddGroupToGroupSet                   *win32.Proc
+	ClusterAddGroupToGroupSetWithDomains        *win32.Proc
+	ClusterAddGroupToGroupSetWithDomainsEx      *win32.Proc
+	ClusterAffinityRuleControl                  *win32.Proc
+	ClusterClearBackupStateForSharedVolume      *win32.Proc
+	ClusterCloseEnum                            *win32.Proc
+	ClusterCloseEnumEx                          *win32.Proc
+	ClusterControl                              *win32.Proc
+	ClusterControlEx                            *win32.Proc
+	ClusterCreateAffinityRule                   *win32.Proc
+	ClusterDecrypt                              *win32.Proc
+	ClusterEncrypt                              *win32.Proc
+	ClusterEnum                                 *win32.Proc
+	ClusterEnumEx                               *win32.Proc
+	ClusterGetEnumCount                         *win32.Proc
+	ClusterGetEnumCountEx                       *win32.Proc
+	ClusterGetVolumeNameForVolumeMountPoint     *win32.Proc
+	ClusterGetVolumePathName                    *win32.Proc
+	ClusterGroupCloseEnum                       *win32.Proc
+	ClusterGroupCloseEnumEx                     *win32.Proc
+	ClusterGroupControl                         *win32.Proc
+	ClusterGroupControlEx                       *win32.Proc
+	ClusterGroupEnum                            *win32.Proc
+	ClusterGroupEnumEx                          *win32.Proc
+	ClusterGroupGetEnumCount                    *win32.Proc
+	ClusterGroupGetEnumCountEx                  *win32.Proc
+	ClusterGroupOpenEnum                        *win32.Proc
+	ClusterGroupOpenEnumEx                      *win32.Proc
+	ClusterGroupSetCloseEnum                    *win32.Proc
+	ClusterGroupSetControl                      *win32.Proc
+	ClusterGroupSetControlEx                    *win32.Proc
+	ClusterGroupSetEnum                         *win32.Proc
+	ClusterGroupSetGetEnumCount                 *win32.Proc
+	ClusterGroupSetOpenEnum                     *win32.Proc
+	ClusterIsPathOnSharedVolume                 *win32.Proc
+	ClusterNetInterfaceCloseEnum                *win32.Proc
+	ClusterNetInterfaceControl                  *win32.Proc
+	ClusterNetInterfaceControlEx                *win32.Proc
+	ClusterNetInterfaceEnum                     *win32.Proc
+	ClusterNetInterfaceOpenEnum                 *win32.Proc
+	ClusterNetworkCloseEnum                     *win32.Proc
+	ClusterNetworkControl                       *win32.Proc
+	ClusterNetworkControlEx                     *win32.Proc
+	ClusterNetworkEnum                          *win32.Proc
+	ClusterNetworkGetEnumCount                  *win32.Proc
+	ClusterNetworkOpenEnum                      *win32.Proc
+	ClusterNodeCloseEnum                        *win32.Proc
+	ClusterNodeCloseEnumEx                      *win32.Proc
+	ClusterNodeControl                          *win32.Proc
+	ClusterNodeControlEx                        *win32.Proc
+	ClusterNodeEnum                             *win32.Proc
+	ClusterNodeEnumEx                           *win32.Proc
+	ClusterNodeGetEnumCount                     *win32.Proc
+	ClusterNodeGetEnumCountEx                   *win32.Proc
+	ClusterNodeOpenEnum                         *win32.Proc
+	ClusterNodeOpenEnumEx                       *win32.Proc
+	ClusterNodeReplacement                      *win32.Proc
+	ClusterOpenEnum                             *win32.Proc
+	ClusterOpenEnumEx                           *win32.Proc
+	ClusterPrepareSharedVolumeForBackup         *win32.Proc
+	ClusterRegBatchAddCommand                   *win32.Proc
+	ClusterRegBatchCloseNotification            *win32.Proc
+	ClusterRegBatchReadCommand                  *win32.Proc
+	ClusterRegCloseBatch                        *win32.Proc
+	ClusterRegCloseBatchEx                      *win32.Proc
+	ClusterRegCloseBatchNotifyPort              *win32.Proc
+	ClusterRegCloseKey                          *win32.Proc
+	ClusterRegCloseReadBatch                    *win32.Proc
+	ClusterRegCloseReadBatchEx                  *win32.Proc
+	ClusterRegCloseReadBatchReply               *win32.Proc
+	ClusterRegCreateBatch                       *win32.Proc
+	ClusterRegCreateBatchNotifyPort             *win32.Proc
+	ClusterRegCreateKey                         *win32.Proc
+	ClusterRegCreateKeyEx                       *win32.Proc
+	ClusterRegCreateReadBatch                   *win32.Proc
+	ClusterRegDeleteKey                         *win32.Proc
+	ClusterRegDeleteKeyEx                       *win32.Proc
+	ClusterRegDeleteValue                       *win32.Proc
+	ClusterRegDeleteValueEx                     *win32.Proc
+	ClusterRegEnumKey                           *win32.Proc
+	ClusterRegEnumValue                         *win32.Proc
+	ClusterRegGetBatchNotification              *win32.Proc
+	ClusterRegGetKeySecurity                    *win32.Proc
+	ClusterRegOpenKey                           *win32.Proc
+	ClusterRegQueryInfoKey                      *win32.Proc
+	ClusterRegQueryValue                        *win32.Proc
+	ClusterRegReadBatchAddCommand               *win32.Proc
+	ClusterRegReadBatchReplyNextCommand         *win32.Proc
+	ClusterRegSetKeySecurity                    *win32.Proc
+	ClusterRegSetKeySecurityEx                  *win32.Proc
+	ClusterRegSetValue                          *win32.Proc
+	ClusterRegSetValueEx                        *win32.Proc
+	ClusterRegSyncDatabase                      *win32.Proc
+	ClusterRemoveAffinityRule                   *win32.Proc
+	ClusterRemoveGroupFromAffinityRule          *win32.Proc
+	ClusterRemoveGroupFromGroupSet              *win32.Proc
+	ClusterRemoveGroupFromGroupSetEx            *win32.Proc
+	ClusterResourceCloseEnum                    *win32.Proc
+	ClusterResourceCloseEnumEx                  *win32.Proc
+	ClusterResourceControl                      *win32.Proc
+	ClusterResourceControlAsUser                *win32.Proc
+	ClusterResourceControlAsUserEx              *win32.Proc
+	ClusterResourceControlEx                    *win32.Proc
+	ClusterResourceEnum                         *win32.Proc
+	ClusterResourceEnumEx                       *win32.Proc
+	ClusterResourceGetEnumCount                 *win32.Proc
+	ClusterResourceGetEnumCountEx               *win32.Proc
+	ClusterResourceOpenEnum                     *win32.Proc
+	ClusterResourceOpenEnumEx                   *win32.Proc
+	ClusterResourceTypeCloseEnum                *win32.Proc
+	ClusterResourceTypeControl                  *win32.Proc
+	ClusterResourceTypeControlAsUser            *win32.Proc
+	ClusterResourceTypeControlAsUserEx          *win32.Proc
+	ClusterResourceTypeControlEx                *win32.Proc
+	ClusterResourceTypeEnum                     *win32.Proc
+	ClusterResourceTypeGetEnumCount             *win32.Proc
+	ClusterResourceTypeOpenEnum                 *win32.Proc
+	ClusterSetAccountAccess                     *win32.Proc
+	ClusterSharedVolumeSetSnapshotState         *win32.Proc
+	ClusterUpgradeFunctionalLevel               *win32.Proc
+	CreateCluster                               *win32.Proc
+	CreateClusterAvailabilitySet                *win32.Proc
+	CreateClusterGroup                          *win32.Proc
+	CreateClusterGroupEx                        *win32.Proc
+	CreateClusterGroupSet                       *win32.Proc
+	CreateClusterNameAccount                    *win32.Proc
+	CreateClusterNotifyPort                     *win32.Proc
+	CreateClusterNotifyPortV2                   *win32.Proc
+	CreateClusterResource                       *win32.Proc
+	CreateClusterResourceEx                     *win32.Proc
+	CreateClusterResourceType                   *win32.Proc
+	CreateClusterResourceTypeEx                 *win32.Proc
+	DeleteClusterGroup                          *win32.Proc
+	DeleteClusterGroupEx                        *win32.Proc
+	DeleteClusterGroupSet                       *win32.Proc
+	DeleteClusterGroupSetEx                     *win32.Proc
+	DeleteClusterResource                       *win32.Proc
+	DeleteClusterResourceEx                     *win32.Proc
+	DeleteClusterResourceType                   *win32.Proc
+	DeleteClusterResourceTypeEx                 *win32.Proc
+	DestroyCluster                              *win32.Proc
+	DestroyClusterGroup                         *win32.Proc
+	DestroyClusterGroupEx                       *win32.Proc
+	DetermineCNOResTypeFromCluster              *win32.Proc
+	DetermineCNOResTypeFromNodelist             *win32.Proc
+	DetermineClusterCloudTypeFromCluster        *win32.Proc
+	DetermineClusterCloudTypeFromNodelist       *win32.Proc
+	EvictClusterNode                            *win32.Proc
+	EvictClusterNodeEx                          *win32.Proc
+	EvictClusterNodeEx2                         *win32.Proc
+	FailClusterResource                         *win32.Proc
+	FailClusterResourceEx                       *win32.Proc
+	FreeClusterCrypt                            *win32.Proc
+	FreeClusterHealthFault                      *win32.Proc
+	FreeClusterHealthFaultArray                 *win32.Proc
+	GetClusterFromGroup                         *win32.Proc
+	GetClusterFromNetInterface                  *win32.Proc
+	GetClusterFromNetwork                       *win32.Proc
+	GetClusterFromNode                          *win32.Proc
+	GetClusterFromResource                      *win32.Proc
+	GetClusterGroupKey                          *win32.Proc
+	GetClusterGroupState                        *win32.Proc
+	GetClusterInformation                       *win32.Proc
+	GetClusterKey                               *win32.Proc
+	GetClusterNetInterface                      *win32.Proc
+	GetClusterNetInterfaceKey                   *win32.Proc
+	GetClusterNetInterfaceState                 *win32.Proc
+	GetClusterNetworkId                         *win32.Proc
+	GetClusterNetworkKey                        *win32.Proc
+	GetClusterNetworkState                      *win32.Proc
+	GetClusterNodeId                            *win32.Proc
+	GetClusterNodeKey                           *win32.Proc
+	GetClusterNodeState                         *win32.Proc
+	GetClusterNotify                            *win32.Proc
+	GetClusterNotifyV2                          *win32.Proc
+	GetClusterQuorumResource                    *win32.Proc
+	GetClusterResourceDependencyExpression      *win32.Proc
+	GetClusterResourceKey                       *win32.Proc
+	GetClusterResourceNetworkName               *win32.Proc
+	GetClusterResourceState                     *win32.Proc
+	GetClusterResourceTypeKey                   *win32.Proc
+	GetNodeCloudTypeDW                          *win32.Proc
+	GetNodeClusterState                         *win32.Proc
+	GetNotifyEventHandle                        *win32.Proc
+	InitializeClusterHealthFault                *win32.Proc
+	InitializeClusterHealthFaultArray           *win32.Proc
+	IsFileOnClusterSharedVolume                 *win32.Proc
+	MoveClusterGroup                            *win32.Proc
+	MoveClusterGroupEx                          *win32.Proc
+	MoveClusterGroupEx2                         *win32.Proc
+	OfflineClusterGroup                         *win32.Proc
+	OfflineClusterGroupEx                       *win32.Proc
+	OfflineClusterGroupEx2                      *win32.Proc
+	OfflineClusterResource                      *win32.Proc
+	OfflineClusterResourceEx                    *win32.Proc
+	OfflineClusterResourceEx2                   *win32.Proc
+	OnlineClusterGroup                          *win32.Proc
+	OnlineClusterGroupEx                        *win32.Proc
+	OnlineClusterGroupEx2                       *win32.Proc
+	OnlineClusterResource                       *win32.Proc
+	OnlineClusterResourceEx                     *win32.Proc
+	OnlineClusterResourceEx2                    *win32.Proc
+	OpenCluster                                 *win32.Proc
+	OpenClusterCryptProvider                    *win32.Proc
+	OpenClusterCryptProviderEx                  *win32.Proc
+	OpenClusterEx                               *win32.Proc
+	OpenClusterGroup                            *win32.Proc
+	OpenClusterGroupEx                          *win32.Proc
+	OpenClusterGroupSet                         *win32.Proc
+	OpenClusterNetInterface                     *win32.Proc
+	OpenClusterNetInterfaceEx                   *win32.Proc
+	OpenClusterNetwork                          *win32.Proc
+	OpenClusterNetworkEx                        *win32.Proc
+	OpenClusterNode                             *win32.Proc
+	OpenClusterNodeById                         *win32.Proc
+	OpenClusterNodeEx                           *win32.Proc
+	OpenClusterResource                         *win32.Proc
+	OpenClusterResourceEx                       *win32.Proc
+	PauseClusterNode                            *win32.Proc
+	PauseClusterNodeEx                          *win32.Proc
+	PauseClusterNodeEx2                         *win32.Proc
+	QueryAppInstanceVersion                     *win32.Proc
+	RegisterAppInstance                         *win32.Proc
+	RegisterAppInstanceVersion                  *win32.Proc
+	RegisterClusterNotify                       *win32.Proc
+	RegisterClusterNotifyV2                     *win32.Proc
+	RegisterClusterResourceTypeNotifyV2         *win32.Proc
+	RemoveClusterGroupDependency                *win32.Proc
+	RemoveClusterGroupDependencyEx              *win32.Proc
+	RemoveClusterGroupSetDependency             *win32.Proc
+	RemoveClusterGroupSetDependencyEx           *win32.Proc
+	RemoveClusterGroupToGroupSetDependency      *win32.Proc
+	RemoveClusterGroupToGroupSetDependencyEx    *win32.Proc
+	RemoveClusterNameAccount                    *win32.Proc
+	RemoveClusterResourceDependency             *win32.Proc
+	RemoveClusterResourceDependencyEx           *win32.Proc
+	RemoveClusterResourceNode                   *win32.Proc
+	RemoveClusterResourceNodeEx                 *win32.Proc
+	RemoveClusterStorageNode                    *win32.Proc
+	RemoveCrossClusterGroupSetDependency        *win32.Proc
+	RemoveResourceFromClusterSharedVolumes      *win32.Proc
+	RepairClusterNameAccount                    *win32.Proc
+	ResUtilAddUnknownProperties                 *win32.Proc
+	ResUtilCreateDirectoryTree                  *win32.Proc
+	ResUtilDupGroup                             *win32.Proc
+	ResUtilDupParameterBlock                    *win32.Proc
+	ResUtilDupResource                          *win32.Proc
+	ResUtilDupString                            *win32.Proc
+	ResUtilEnumGroups                           *win32.Proc
+	ResUtilEnumGroupsEx                         *win32.Proc
+	ResUtilEnumPrivateProperties                *win32.Proc
+	ResUtilEnumProperties                       *win32.Proc
+	ResUtilEnumResources                        *win32.Proc
+	ResUtilEnumResourcesEx                      *win32.Proc
+	ResUtilEnumResourcesEx2                     *win32.Proc
+	ResUtilExpandEnvironmentStrings             *win32.Proc
+	ResUtilFindBinaryProperty                   *win32.Proc
+	ResUtilFindDependentDiskResourceDriveLetter *win32.Proc
+	ResUtilFindDwordProperty                    *win32.Proc
+	ResUtilFindExpandSzProperty                 *win32.Proc
+	ResUtilFindExpandedSzProperty               *win32.Proc
+	ResUtilFindFileTimeProperty                 *win32.Proc
+	ResUtilFindLongProperty                     *win32.Proc
+	ResUtilFindMultiSzProperty                  *win32.Proc
+	ResUtilFindSzProperty                       *win32.Proc
+	ResUtilFindULargeIntegerProperty            *win32.Proc
+	ResUtilFreeEnvironment                      *win32.Proc
+	ResUtilFreeParameterBlock                   *win32.Proc
+	ResUtilGetAllProperties                     *win32.Proc
+	ResUtilGetBinaryProperty                    *win32.Proc
+	ResUtilGetBinaryValue                       *win32.Proc
+	ResUtilGetClusterGroupType                  *win32.Proc
+	ResUtilGetClusterId                         *win32.Proc
+	ResUtilGetClusterRoleState                  *win32.Proc
+	ResUtilGetCoreClusterResources              *win32.Proc
+	ResUtilGetCoreClusterResourcesEx            *win32.Proc
+	ResUtilGetCoreGroup                         *win32.Proc
+	ResUtilGetDwordProperty                     *win32.Proc
+	ResUtilGetDwordValue                        *win32.Proc
+	ResUtilGetEnvironmentWithNetName            *win32.Proc
+	ResUtilGetFileTimeProperty                  *win32.Proc
+	ResUtilGetLongProperty                      *win32.Proc
+	ResUtilGetMultiSzProperty                   *win32.Proc
+	ResUtilGetPrivateProperties                 *win32.Proc
+	ResUtilGetProperties                        *win32.Proc
+	ResUtilGetPropertiesToParameterBlock        *win32.Proc
+	ResUtilGetProperty                          *win32.Proc
+	ResUtilGetPropertyFormats                   *win32.Proc
+	ResUtilGetPropertySize                      *win32.Proc
+	ResUtilGetQwordValue                        *win32.Proc
+	ResUtilGetResourceDependency                *win32.Proc
+	ResUtilGetResourceDependencyByClass         *win32.Proc
+	ResUtilGetResourceDependencyByClassEx       *win32.Proc
+	ResUtilGetResourceDependencyByName          *win32.Proc
+	ResUtilGetResourceDependencyByNameEx        *win32.Proc
+	ResUtilGetResourceDependencyEx              *win32.Proc
+	ResUtilGetResourceDependentIPAddressProps   *win32.Proc
+	ResUtilGetResourceName                      *win32.Proc
+	ResUtilGetResourceNameDependency            *win32.Proc
+	ResUtilGetResourceNameDependencyEx          *win32.Proc
+	ResUtilGetSzProperty                        *win32.Proc
+	ResUtilGetSzValue                           *win32.Proc
+	ResUtilGroupsEqual                          *win32.Proc
+	ResUtilIsPathValid                          *win32.Proc
+	ResUtilIsResourceClassEqual                 *win32.Proc
+	ResUtilLeftPaxosIsLessThanRight             *win32.Proc
+	ResUtilNodeEnum                             *win32.Proc
+	ResUtilPaxosComparer                        *win32.Proc
+	ResUtilPropertyListFromParameterBlock       *win32.Proc
+	ResUtilRemoveResourceServiceEnvironment     *win32.Proc
+	ResUtilResourceDepEnum                      *win32.Proc
+	ResUtilResourceTypesEqual                   *win32.Proc
+	ResUtilResourcesEqual                       *win32.Proc
+	ResUtilSetBinaryValue                       *win32.Proc
+	ResUtilSetDwordValue                        *win32.Proc
+	ResUtilSetExpandSzValue                     *win32.Proc
+	ResUtilSetMultiSzValue                      *win32.Proc
+	ResUtilSetPrivatePropertyList               *win32.Proc
+	ResUtilSetPropertyParameterBlock            *win32.Proc
+	ResUtilSetPropertyParameterBlockEx          *win32.Proc
+	ResUtilSetPropertyTable                     *win32.Proc
+	ResUtilSetPropertyTableEx                   *win32.Proc
+	ResUtilSetQwordValue                        *win32.Proc
+	ResUtilSetResourceServiceEnvironment        *win32.Proc
+	ResUtilSetResourceServiceStartParameters    *win32.Proc
+	ResUtilSetResourceServiceStartParametersEx  *win32.Proc
+	ResUtilSetSzValue                           *win32.Proc
+	ResUtilSetUnknownProperties                 *win32.Proc
+	ResUtilSetValueEx                           *win32.Proc
+	ResUtilStartResourceService                 *win32.Proc
+	ResUtilStopResourceService                  *win32.Proc
+	ResUtilStopService                          *win32.Proc
+	ResUtilTerminateServiceProcessFromResDll    *win32.Proc
+	ResUtilVerifyPrivatePropertyList            *win32.Proc
+	ResUtilVerifyPropertyTable                  *win32.Proc
+	ResUtilVerifyResourceService                *win32.Proc
+	ResUtilVerifyService                        *win32.Proc
+	ResUtilVerifyShutdownSafe                   *win32.Proc
+	ResUtilsDeleteKeyTree                       *win32.Proc
+	ResetAllAppInstanceVersions                 *win32.Proc
+	RestartClusterResource                      *win32.Proc
+	RestartClusterResourceEx                    *win32.Proc
+	RestoreClusterDatabase                      *win32.Proc
+	ResumeClusterNode                           *win32.Proc
+	ResumeClusterNodeEx                         *win32.Proc
+	ResumeClusterNodeEx2                        *win32.Proc
+	SetAppInstanceCsvFlags                      *win32.Proc
+	SetClusterGroupName                         *win32.Proc
+	SetClusterGroupNameEx                       *win32.Proc
+	SetClusterGroupNodeList                     *win32.Proc
+	SetClusterGroupNodeListEx                   *win32.Proc
+	SetClusterGroupSetDependencyExpression      *win32.Proc
+	SetClusterGroupSetDependencyExpressionEx    *win32.Proc
+	SetClusterName                              *win32.Proc
+	SetClusterNameEx                            *win32.Proc
+	SetClusterNetworkName                       *win32.Proc
+	SetClusterNetworkNameEx                     *win32.Proc
+	SetClusterNetworkPriorityOrder              *win32.Proc
+	SetClusterQuorumResource                    *win32.Proc
+	SetClusterQuorumResourceEx                  *win32.Proc
+	SetClusterResourceDependencyExpression      *win32.Proc
+	SetClusterResourceName                      *win32.Proc
+	SetClusterResourceNameEx                    *win32.Proc
+	SetClusterServiceAccountPassword            *win32.Proc
+	SetGroupDependencyExpression                *win32.Proc
+	SetGroupDependencyExpressionEx              *win32.Proc
+}{
+	AddClusterGroupDependency:                   procAddClusterGroupDependency,
+	AddClusterGroupDependencyEx:                 procAddClusterGroupDependencyEx,
+	AddClusterGroupSetDependency:                procAddClusterGroupSetDependency,
+	AddClusterGroupSetDependencyEx:              procAddClusterGroupSetDependencyEx,
+	AddClusterGroupToGroupSetDependency:         procAddClusterGroupToGroupSetDependency,
+	AddClusterGroupToGroupSetDependencyEx:       procAddClusterGroupToGroupSetDependencyEx,
+	AddClusterNode:                              procAddClusterNode,
+	AddClusterNodeEx:                            procAddClusterNodeEx,
+	AddClusterResourceDependency:                procAddClusterResourceDependency,
+	AddClusterResourceDependencyEx:              procAddClusterResourceDependencyEx,
+	AddClusterResourceNode:                      procAddClusterResourceNode,
+	AddClusterResourceNodeEx:                    procAddClusterResourceNodeEx,
+	AddClusterStorageNode:                       procAddClusterStorageNode,
+	AddCrossClusterGroupSetDependency:           procAddCrossClusterGroupSetDependency,
+	AddResourceToClusterSharedVolumes:           procAddResourceToClusterSharedVolumes,
+	BackupClusterDatabase:                       procBackupClusterDatabase,
+	CanResourceBeDependent:                      procCanResourceBeDependent,
+	CancelClusterGroupOperation:                 procCancelClusterGroupOperation,
+	ChangeClusterResourceGroup:                  procChangeClusterResourceGroup,
+	ChangeClusterResourceGroupEx:                procChangeClusterResourceGroupEx,
+	ChangeClusterResourceGroupEx2:               procChangeClusterResourceGroupEx2,
+	CloseCluster:                                procCloseCluster,
+	CloseClusterCryptProvider:                   procCloseClusterCryptProvider,
+	CloseClusterGroup:                           procCloseClusterGroup,
+	CloseClusterGroupSet:                        procCloseClusterGroupSet,
+	CloseClusterNetInterface:                    procCloseClusterNetInterface,
+	CloseClusterNetwork:                         procCloseClusterNetwork,
+	CloseClusterNode:                            procCloseClusterNode,
+	CloseClusterNotifyPort:                      procCloseClusterNotifyPort,
+	CloseClusterResource:                        procCloseClusterResource,
+	ClusAddClusterHealthFault:                   procClusAddClusterHealthFault,
+	ClusGetClusterHealthFaults:                  procClusGetClusterHealthFaults,
+	ClusRemoveClusterHealthFault:                procClusRemoveClusterHealthFault,
+	ClusWorkerCheckTerminate:                    procClusWorkerCheckTerminate,
+	ClusWorkerCreate:                            procClusWorkerCreate,
+	ClusWorkerTerminate:                         procClusWorkerTerminate,
+	ClusWorkerTerminateEx:                       procClusWorkerTerminateEx,
+	ClusWorkersTerminate:                        procClusWorkersTerminate,
+	ClusapiSetReasonHandler:                     procClusapiSetReasonHandler,
+	ClusterAddGroupToAffinityRule:               procClusterAddGroupToAffinityRule,
+	ClusterAddGroupToGroupSet:                   procClusterAddGroupToGroupSet,
+	ClusterAddGroupToGroupSetWithDomains:        procClusterAddGroupToGroupSetWithDomains,
+	ClusterAddGroupToGroupSetWithDomainsEx:      procClusterAddGroupToGroupSetWithDomainsEx,
+	ClusterAffinityRuleControl:                  procClusterAffinityRuleControl,
+	ClusterClearBackupStateForSharedVolume:      procClusterClearBackupStateForSharedVolume,
+	ClusterCloseEnum:                            procClusterCloseEnum,
+	ClusterCloseEnumEx:                          procClusterCloseEnumEx,
+	ClusterControl:                              procClusterControl,
+	ClusterControlEx:                            procClusterControlEx,
+	ClusterCreateAffinityRule:                   procClusterCreateAffinityRule,
+	ClusterDecrypt:                              procClusterDecrypt,
+	ClusterEncrypt:                              procClusterEncrypt,
+	ClusterEnum:                                 procClusterEnum,
+	ClusterEnumEx:                               procClusterEnumEx,
+	ClusterGetEnumCount:                         procClusterGetEnumCount,
+	ClusterGetEnumCountEx:                       procClusterGetEnumCountEx,
+	ClusterGetVolumeNameForVolumeMountPoint:     procClusterGetVolumeNameForVolumeMountPoint,
+	ClusterGetVolumePathName:                    procClusterGetVolumePathName,
+	ClusterGroupCloseEnum:                       procClusterGroupCloseEnum,
+	ClusterGroupCloseEnumEx:                     procClusterGroupCloseEnumEx,
+	ClusterGroupControl:                         procClusterGroupControl,
+	ClusterGroupControlEx:                       procClusterGroupControlEx,
+	ClusterGroupEnum:                            procClusterGroupEnum,
+	ClusterGroupEnumEx:                          procClusterGroupEnumEx,
+	ClusterGroupGetEnumCount:                    procClusterGroupGetEnumCount,
+	ClusterGroupGetEnumCountEx:                  procClusterGroupGetEnumCountEx,
+	ClusterGroupOpenEnum:                        procClusterGroupOpenEnum,
+	ClusterGroupOpenEnumEx:                      procClusterGroupOpenEnumEx,
+	ClusterGroupSetCloseEnum:                    procClusterGroupSetCloseEnum,
+	ClusterGroupSetControl:                      procClusterGroupSetControl,
+	ClusterGroupSetControlEx:                    procClusterGroupSetControlEx,
+	ClusterGroupSetEnum:                         procClusterGroupSetEnum,
+	ClusterGroupSetGetEnumCount:                 procClusterGroupSetGetEnumCount,
+	ClusterGroupSetOpenEnum:                     procClusterGroupSetOpenEnum,
+	ClusterIsPathOnSharedVolume:                 procClusterIsPathOnSharedVolume,
+	ClusterNetInterfaceCloseEnum:                procClusterNetInterfaceCloseEnum,
+	ClusterNetInterfaceControl:                  procClusterNetInterfaceControl,
+	ClusterNetInterfaceControlEx:                procClusterNetInterfaceControlEx,
+	ClusterNetInterfaceEnum:                     procClusterNetInterfaceEnum,
+	ClusterNetInterfaceOpenEnum:                 procClusterNetInterfaceOpenEnum,
+	ClusterNetworkCloseEnum:                     procClusterNetworkCloseEnum,
+	ClusterNetworkControl:                       procClusterNetworkControl,
+	ClusterNetworkControlEx:                     procClusterNetworkControlEx,
+	ClusterNetworkEnum:                          procClusterNetworkEnum,
+	ClusterNetworkGetEnumCount:                  procClusterNetworkGetEnumCount,
+	ClusterNetworkOpenEnum:                      procClusterNetworkOpenEnum,
+	ClusterNodeCloseEnum:                        procClusterNodeCloseEnum,
+	ClusterNodeCloseEnumEx:                      procClusterNodeCloseEnumEx,
+	ClusterNodeControl:                          procClusterNodeControl,
+	ClusterNodeControlEx:                        procClusterNodeControlEx,
+	ClusterNodeEnum:                             procClusterNodeEnum,
+	ClusterNodeEnumEx:                           procClusterNodeEnumEx,
+	ClusterNodeGetEnumCount:                     procClusterNodeGetEnumCount,
+	ClusterNodeGetEnumCountEx:                   procClusterNodeGetEnumCountEx,
+	ClusterNodeOpenEnum:                         procClusterNodeOpenEnum,
+	ClusterNodeOpenEnumEx:                       procClusterNodeOpenEnumEx,
+	ClusterNodeReplacement:                      procClusterNodeReplacement,
+	ClusterOpenEnum:                             procClusterOpenEnum,
+	ClusterOpenEnumEx:                           procClusterOpenEnumEx,
+	ClusterPrepareSharedVolumeForBackup:         procClusterPrepareSharedVolumeForBackup,
+	ClusterRegBatchAddCommand:                   procClusterRegBatchAddCommand,
+	ClusterRegBatchCloseNotification:            procClusterRegBatchCloseNotification,
+	ClusterRegBatchReadCommand:                  procClusterRegBatchReadCommand,
+	ClusterRegCloseBatch:                        procClusterRegCloseBatch,
+	ClusterRegCloseBatchEx:                      procClusterRegCloseBatchEx,
+	ClusterRegCloseBatchNotifyPort:              procClusterRegCloseBatchNotifyPort,
+	ClusterRegCloseKey:                          procClusterRegCloseKey,
+	ClusterRegCloseReadBatch:                    procClusterRegCloseReadBatch,
+	ClusterRegCloseReadBatchEx:                  procClusterRegCloseReadBatchEx,
+	ClusterRegCloseReadBatchReply:               procClusterRegCloseReadBatchReply,
+	ClusterRegCreateBatch:                       procClusterRegCreateBatch,
+	ClusterRegCreateBatchNotifyPort:             procClusterRegCreateBatchNotifyPort,
+	ClusterRegCreateKey:                         procClusterRegCreateKey,
+	ClusterRegCreateKeyEx:                       procClusterRegCreateKeyEx,
+	ClusterRegCreateReadBatch:                   procClusterRegCreateReadBatch,
+	ClusterRegDeleteKey:                         procClusterRegDeleteKey,
+	ClusterRegDeleteKeyEx:                       procClusterRegDeleteKeyEx,
+	ClusterRegDeleteValue:                       procClusterRegDeleteValue,
+	ClusterRegDeleteValueEx:                     procClusterRegDeleteValueEx,
+	ClusterRegEnumKey:                           procClusterRegEnumKey,
+	ClusterRegEnumValue:                         procClusterRegEnumValue,
+	ClusterRegGetBatchNotification:              procClusterRegGetBatchNotification,
+	ClusterRegGetKeySecurity:                    procClusterRegGetKeySecurity,
+	ClusterRegOpenKey:                           procClusterRegOpenKey,
+	ClusterRegQueryInfoKey:                      procClusterRegQueryInfoKey,
+	ClusterRegQueryValue:                        procClusterRegQueryValue,
+	ClusterRegReadBatchAddCommand:               procClusterRegReadBatchAddCommand,
+	ClusterRegReadBatchReplyNextCommand:         procClusterRegReadBatchReplyNextCommand,
+	ClusterRegSetKeySecurity:                    procClusterRegSetKeySecurity,
+	ClusterRegSetKeySecurityEx:                  procClusterRegSetKeySecurityEx,
+	ClusterRegSetValue:                          procClusterRegSetValue,
+	ClusterRegSetValueEx:                        procClusterRegSetValueEx,
+	ClusterRegSyncDatabase:                      procClusterRegSyncDatabase,
+	ClusterRemoveAffinityRule:                   procClusterRemoveAffinityRule,
+	ClusterRemoveGroupFromAffinityRule:          procClusterRemoveGroupFromAffinityRule,
+	ClusterRemoveGroupFromGroupSet:              procClusterRemoveGroupFromGroupSet,
+	ClusterRemoveGroupFromGroupSetEx:            procClusterRemoveGroupFromGroupSetEx,
+	ClusterResourceCloseEnum:                    procClusterResourceCloseEnum,
+	ClusterResourceCloseEnumEx:                  procClusterResourceCloseEnumEx,
+	ClusterResourceControl:                      procClusterResourceControl,
+	ClusterResourceControlAsUser:                procClusterResourceControlAsUser,
+	ClusterResourceControlAsUserEx:              procClusterResourceControlAsUserEx,
+	ClusterResourceControlEx:                    procClusterResourceControlEx,
+	ClusterResourceEnum:                         procClusterResourceEnum,
+	ClusterResourceEnumEx:                       procClusterResourceEnumEx,
+	ClusterResourceGetEnumCount:                 procClusterResourceGetEnumCount,
+	ClusterResourceGetEnumCountEx:               procClusterResourceGetEnumCountEx,
+	ClusterResourceOpenEnum:                     procClusterResourceOpenEnum,
+	ClusterResourceOpenEnumEx:                   procClusterResourceOpenEnumEx,
+	ClusterResourceTypeCloseEnum:                procClusterResourceTypeCloseEnum,
+	ClusterResourceTypeControl:                  procClusterResourceTypeControl,
+	ClusterResourceTypeControlAsUser:            procClusterResourceTypeControlAsUser,
+	ClusterResourceTypeControlAsUserEx:          procClusterResourceTypeControlAsUserEx,
+	ClusterResourceTypeControlEx:                procClusterResourceTypeControlEx,
+	ClusterResourceTypeEnum:                     procClusterResourceTypeEnum,
+	ClusterResourceTypeGetEnumCount:             procClusterResourceTypeGetEnumCount,
+	ClusterResourceTypeOpenEnum:                 procClusterResourceTypeOpenEnum,
+	ClusterSetAccountAccess:                     procClusterSetAccountAccess,
+	ClusterSharedVolumeSetSnapshotState:         procClusterSharedVolumeSetSnapshotState,
+	ClusterUpgradeFunctionalLevel:               procClusterUpgradeFunctionalLevel,
+	CreateCluster:                               procCreateCluster,
+	CreateClusterAvailabilitySet:                procCreateClusterAvailabilitySet,
+	CreateClusterGroup:                          procCreateClusterGroup,
+	CreateClusterGroupEx:                        procCreateClusterGroupEx,
+	CreateClusterGroupSet:                       procCreateClusterGroupSet,
+	CreateClusterNameAccount:                    procCreateClusterNameAccount,
+	CreateClusterNotifyPort:                     procCreateClusterNotifyPort,
+	CreateClusterNotifyPortV2:                   procCreateClusterNotifyPortV2,
+	CreateClusterResource:                       procCreateClusterResource,
+	CreateClusterResourceEx:                     procCreateClusterResourceEx,
+	CreateClusterResourceType:                   procCreateClusterResourceType,
+	CreateClusterResourceTypeEx:                 procCreateClusterResourceTypeEx,
+	DeleteClusterGroup:                          procDeleteClusterGroup,
+	DeleteClusterGroupEx:                        procDeleteClusterGroupEx,
+	DeleteClusterGroupSet:                       procDeleteClusterGroupSet,
+	DeleteClusterGroupSetEx:                     procDeleteClusterGroupSetEx,
+	DeleteClusterResource:                       procDeleteClusterResource,
+	DeleteClusterResourceEx:                     procDeleteClusterResourceEx,
+	DeleteClusterResourceType:                   procDeleteClusterResourceType,
+	DeleteClusterResourceTypeEx:                 procDeleteClusterResourceTypeEx,
+	DestroyCluster:                              procDestroyCluster,
+	DestroyClusterGroup:                         procDestroyClusterGroup,
+	DestroyClusterGroupEx:                       procDestroyClusterGroupEx,
+	DetermineCNOResTypeFromCluster:              procDetermineCNOResTypeFromCluster,
+	DetermineCNOResTypeFromNodelist:             procDetermineCNOResTypeFromNodelist,
+	DetermineClusterCloudTypeFromCluster:        procDetermineClusterCloudTypeFromCluster,
+	DetermineClusterCloudTypeFromNodelist:       procDetermineClusterCloudTypeFromNodelist,
+	EvictClusterNode:                            procEvictClusterNode,
+	EvictClusterNodeEx:                          procEvictClusterNodeEx,
+	EvictClusterNodeEx2:                         procEvictClusterNodeEx2,
+	FailClusterResource:                         procFailClusterResource,
+	FailClusterResourceEx:                       procFailClusterResourceEx,
+	FreeClusterCrypt:                            procFreeClusterCrypt,
+	FreeClusterHealthFault:                      procFreeClusterHealthFault,
+	FreeClusterHealthFaultArray:                 procFreeClusterHealthFaultArray,
+	GetClusterFromGroup:                         procGetClusterFromGroup,
+	GetClusterFromNetInterface:                  procGetClusterFromNetInterface,
+	GetClusterFromNetwork:                       procGetClusterFromNetwork,
+	GetClusterFromNode:                          procGetClusterFromNode,
+	GetClusterFromResource:                      procGetClusterFromResource,
+	GetClusterGroupKey:                          procGetClusterGroupKey,
+	GetClusterGroupState:                        procGetClusterGroupState,
+	GetClusterInformation:                       procGetClusterInformation,
+	GetClusterKey:                               procGetClusterKey,
+	GetClusterNetInterface:                      procGetClusterNetInterface,
+	GetClusterNetInterfaceKey:                   procGetClusterNetInterfaceKey,
+	GetClusterNetInterfaceState:                 procGetClusterNetInterfaceState,
+	GetClusterNetworkId:                         procGetClusterNetworkId,
+	GetClusterNetworkKey:                        procGetClusterNetworkKey,
+	GetClusterNetworkState:                      procGetClusterNetworkState,
+	GetClusterNodeId:                            procGetClusterNodeId,
+	GetClusterNodeKey:                           procGetClusterNodeKey,
+	GetClusterNodeState:                         procGetClusterNodeState,
+	GetClusterNotify:                            procGetClusterNotify,
+	GetClusterNotifyV2:                          procGetClusterNotifyV2,
+	GetClusterQuorumResource:                    procGetClusterQuorumResource,
+	GetClusterResourceDependencyExpression:      procGetClusterResourceDependencyExpression,
+	GetClusterResourceKey:                       procGetClusterResourceKey,
+	GetClusterResourceNetworkName:               procGetClusterResourceNetworkName,
+	GetClusterResourceState:                     procGetClusterResourceState,
+	GetClusterResourceTypeKey:                   procGetClusterResourceTypeKey,
+	GetNodeCloudTypeDW:                          procGetNodeCloudTypeDW,
+	GetNodeClusterState:                         procGetNodeClusterState,
+	GetNotifyEventHandle:                        procGetNotifyEventHandle,
+	InitializeClusterHealthFault:                procInitializeClusterHealthFault,
+	InitializeClusterHealthFaultArray:           procInitializeClusterHealthFaultArray,
+	IsFileOnClusterSharedVolume:                 procIsFileOnClusterSharedVolume,
+	MoveClusterGroup:                            procMoveClusterGroup,
+	MoveClusterGroupEx:                          procMoveClusterGroupEx,
+	MoveClusterGroupEx2:                         procMoveClusterGroupEx2,
+	OfflineClusterGroup:                         procOfflineClusterGroup,
+	OfflineClusterGroupEx:                       procOfflineClusterGroupEx,
+	OfflineClusterGroupEx2:                      procOfflineClusterGroupEx2,
+	OfflineClusterResource:                      procOfflineClusterResource,
+	OfflineClusterResourceEx:                    procOfflineClusterResourceEx,
+	OfflineClusterResourceEx2:                   procOfflineClusterResourceEx2,
+	OnlineClusterGroup:                          procOnlineClusterGroup,
+	OnlineClusterGroupEx:                        procOnlineClusterGroupEx,
+	OnlineClusterGroupEx2:                       procOnlineClusterGroupEx2,
+	OnlineClusterResource:                       procOnlineClusterResource,
+	OnlineClusterResourceEx:                     procOnlineClusterResourceEx,
+	OnlineClusterResourceEx2:                    procOnlineClusterResourceEx2,
+	OpenCluster:                                 procOpenCluster,
+	OpenClusterCryptProvider:                    procOpenClusterCryptProvider,
+	OpenClusterCryptProviderEx:                  procOpenClusterCryptProviderEx,
+	OpenClusterEx:                               procOpenClusterEx,
+	OpenClusterGroup:                            procOpenClusterGroup,
+	OpenClusterGroupEx:                          procOpenClusterGroupEx,
+	OpenClusterGroupSet:                         procOpenClusterGroupSet,
+	OpenClusterNetInterface:                     procOpenClusterNetInterface,
+	OpenClusterNetInterfaceEx:                   procOpenClusterNetInterfaceEx,
+	OpenClusterNetwork:                          procOpenClusterNetwork,
+	OpenClusterNetworkEx:                        procOpenClusterNetworkEx,
+	OpenClusterNode:                             procOpenClusterNode,
+	OpenClusterNodeById:                         procOpenClusterNodeById,
+	OpenClusterNodeEx:                           procOpenClusterNodeEx,
+	OpenClusterResource:                         procOpenClusterResource,
+	OpenClusterResourceEx:                       procOpenClusterResourceEx,
+	PauseClusterNode:                            procPauseClusterNode,
+	PauseClusterNodeEx:                          procPauseClusterNodeEx,
+	PauseClusterNodeEx2:                         procPauseClusterNodeEx2,
+	QueryAppInstanceVersion:                     procQueryAppInstanceVersion,
+	RegisterAppInstance:                         procRegisterAppInstance,
+	RegisterAppInstanceVersion:                  procRegisterAppInstanceVersion,
+	RegisterClusterNotify:                       procRegisterClusterNotify,
+	RegisterClusterNotifyV2:                     procRegisterClusterNotifyV2,
+	RegisterClusterResourceTypeNotifyV2:         procRegisterClusterResourceTypeNotifyV2,
+	RemoveClusterGroupDependency:                procRemoveClusterGroupDependency,
+	RemoveClusterGroupDependencyEx:              procRemoveClusterGroupDependencyEx,
+	RemoveClusterGroupSetDependency:             procRemoveClusterGroupSetDependency,
+	RemoveClusterGroupSetDependencyEx:           procRemoveClusterGroupSetDependencyEx,
+	RemoveClusterGroupToGroupSetDependency:      procRemoveClusterGroupToGroupSetDependency,
+	RemoveClusterGroupToGroupSetDependencyEx:    procRemoveClusterGroupToGroupSetDependencyEx,
+	RemoveClusterNameAccount:                    procRemoveClusterNameAccount,
+	RemoveClusterResourceDependency:             procRemoveClusterResourceDependency,
+	RemoveClusterResourceDependencyEx:           procRemoveClusterResourceDependencyEx,
+	RemoveClusterResourceNode:                   procRemoveClusterResourceNode,
+	RemoveClusterResourceNodeEx:                 procRemoveClusterResourceNodeEx,
+	RemoveClusterStorageNode:                    procRemoveClusterStorageNode,
+	RemoveCrossClusterGroupSetDependency:        procRemoveCrossClusterGroupSetDependency,
+	RemoveResourceFromClusterSharedVolumes:      procRemoveResourceFromClusterSharedVolumes,
+	RepairClusterNameAccount:                    procRepairClusterNameAccount,
+	ResUtilAddUnknownProperties:                 procResUtilAddUnknownProperties,
+	ResUtilCreateDirectoryTree:                  procResUtilCreateDirectoryTree,
+	ResUtilDupGroup:                             procResUtilDupGroup,
+	ResUtilDupParameterBlock:                    procResUtilDupParameterBlock,
+	ResUtilDupResource:                          procResUtilDupResource,
+	ResUtilDupString:                            procResUtilDupString,
+	ResUtilEnumGroups:                           procResUtilEnumGroups,
+	ResUtilEnumGroupsEx:                         procResUtilEnumGroupsEx,
+	ResUtilEnumPrivateProperties:                procResUtilEnumPrivateProperties,
+	ResUtilEnumProperties:                       procResUtilEnumProperties,
+	ResUtilEnumResources:                        procResUtilEnumResources,
+	ResUtilEnumResourcesEx:                      procResUtilEnumResourcesEx,
+	ResUtilEnumResourcesEx2:                     procResUtilEnumResourcesEx2,
+	ResUtilExpandEnvironmentStrings:             procResUtilExpandEnvironmentStrings,
+	ResUtilFindBinaryProperty:                   procResUtilFindBinaryProperty,
+	ResUtilFindDependentDiskResourceDriveLetter: procResUtilFindDependentDiskResourceDriveLetter,
+	ResUtilFindDwordProperty:                    procResUtilFindDwordProperty,
+	ResUtilFindExpandSzProperty:                 procResUtilFindExpandSzProperty,
+	ResUtilFindExpandedSzProperty:               procResUtilFindExpandedSzProperty,
+	ResUtilFindFileTimeProperty:                 procResUtilFindFileTimeProperty,
+	ResUtilFindLongProperty:                     procResUtilFindLongProperty,
+	ResUtilFindMultiSzProperty:                  procResUtilFindMultiSzProperty,
+	ResUtilFindSzProperty:                       procResUtilFindSzProperty,
+	ResUtilFindULargeIntegerProperty:            procResUtilFindULargeIntegerProperty,
+	ResUtilFreeEnvironment:                      procResUtilFreeEnvironment,
+	ResUtilFreeParameterBlock:                   procResUtilFreeParameterBlock,
+	ResUtilGetAllProperties:                     procResUtilGetAllProperties,
+	ResUtilGetBinaryProperty:                    procResUtilGetBinaryProperty,
+	ResUtilGetBinaryValue:                       procResUtilGetBinaryValue,
+	ResUtilGetClusterGroupType:                  procResUtilGetClusterGroupType,
+	ResUtilGetClusterId:                         procResUtilGetClusterId,
+	ResUtilGetClusterRoleState:                  procResUtilGetClusterRoleState,
+	ResUtilGetCoreClusterResources:              procResUtilGetCoreClusterResources,
+	ResUtilGetCoreClusterResourcesEx:            procResUtilGetCoreClusterResourcesEx,
+	ResUtilGetCoreGroup:                         procResUtilGetCoreGroup,
+	ResUtilGetDwordProperty:                     procResUtilGetDwordProperty,
+	ResUtilGetDwordValue:                        procResUtilGetDwordValue,
+	ResUtilGetEnvironmentWithNetName:            procResUtilGetEnvironmentWithNetName,
+	ResUtilGetFileTimeProperty:                  procResUtilGetFileTimeProperty,
+	ResUtilGetLongProperty:                      procResUtilGetLongProperty,
+	ResUtilGetMultiSzProperty:                   procResUtilGetMultiSzProperty,
+	ResUtilGetPrivateProperties:                 procResUtilGetPrivateProperties,
+	ResUtilGetProperties:                        procResUtilGetProperties,
+	ResUtilGetPropertiesToParameterBlock:        procResUtilGetPropertiesToParameterBlock,
+	ResUtilGetProperty:                          procResUtilGetProperty,
+	ResUtilGetPropertyFormats:                   procResUtilGetPropertyFormats,
+	ResUtilGetPropertySize:                      procResUtilGetPropertySize,
+	ResUtilGetQwordValue:                        procResUtilGetQwordValue,
+	ResUtilGetResourceDependency:                procResUtilGetResourceDependency,
+	ResUtilGetResourceDependencyByClass:         procResUtilGetResourceDependencyByClass,
+	ResUtilGetResourceDependencyByClassEx:       procResUtilGetResourceDependencyByClassEx,
+	ResUtilGetResourceDependencyByName:          procResUtilGetResourceDependencyByName,
+	ResUtilGetResourceDependencyByNameEx:        procResUtilGetResourceDependencyByNameEx,
+	ResUtilGetResourceDependencyEx:              procResUtilGetResourceDependencyEx,
+	ResUtilGetResourceDependentIPAddressProps:   procResUtilGetResourceDependentIPAddressProps,
+	ResUtilGetResourceName:                      procResUtilGetResourceName,
+	ResUtilGetResourceNameDependency:            procResUtilGetResourceNameDependency,
+	ResUtilGetResourceNameDependencyEx:          procResUtilGetResourceNameDependencyEx,
+	ResUtilGetSzProperty:                        procResUtilGetSzProperty,
+	ResUtilGetSzValue:                           procResUtilGetSzValue,
+	ResUtilGroupsEqual:                          procResUtilGroupsEqual,
+	ResUtilIsPathValid:                          procResUtilIsPathValid,
+	ResUtilIsResourceClassEqual:                 procResUtilIsResourceClassEqual,
+	ResUtilLeftPaxosIsLessThanRight:             procResUtilLeftPaxosIsLessThanRight,
+	ResUtilNodeEnum:                             procResUtilNodeEnum,
+	ResUtilPaxosComparer:                        procResUtilPaxosComparer,
+	ResUtilPropertyListFromParameterBlock:       procResUtilPropertyListFromParameterBlock,
+	ResUtilRemoveResourceServiceEnvironment:     procResUtilRemoveResourceServiceEnvironment,
+	ResUtilResourceDepEnum:                      procResUtilResourceDepEnum,
+	ResUtilResourceTypesEqual:                   procResUtilResourceTypesEqual,
+	ResUtilResourcesEqual:                       procResUtilResourcesEqual,
+	ResUtilSetBinaryValue:                       procResUtilSetBinaryValue,
+	ResUtilSetDwordValue:                        procResUtilSetDwordValue,
+	ResUtilSetExpandSzValue:                     procResUtilSetExpandSzValue,
+	ResUtilSetMultiSzValue:                      procResUtilSetMultiSzValue,
+	ResUtilSetPrivatePropertyList:               procResUtilSetPrivatePropertyList,
+	ResUtilSetPropertyParameterBlock:            procResUtilSetPropertyParameterBlock,
+	ResUtilSetPropertyParameterBlockEx:          procResUtilSetPropertyParameterBlockEx,
+	ResUtilSetPropertyTable:                     procResUtilSetPropertyTable,
+	ResUtilSetPropertyTableEx:                   procResUtilSetPropertyTableEx,
+	ResUtilSetQwordValue:                        procResUtilSetQwordValue,
+	ResUtilSetResourceServiceEnvironment:        procResUtilSetResourceServiceEnvironment,
+	ResUtilSetResourceServiceStartParameters:    procResUtilSetResourceServiceStartParameters,
+	ResUtilSetResourceServiceStartParametersEx:  procResUtilSetResourceServiceStartParametersEx,
+	ResUtilSetSzValue:                           procResUtilSetSzValue,
+	ResUtilSetUnknownProperties:                 procResUtilSetUnknownProperties,
+	ResUtilSetValueEx:                           procResUtilSetValueEx,
+	ResUtilStartResourceService:                 procResUtilStartResourceService,
+	ResUtilStopResourceService:                  procResUtilStopResourceService,
+	ResUtilStopService:                          procResUtilStopService,
+	ResUtilTerminateServiceProcessFromResDll:    procResUtilTerminateServiceProcessFromResDll,
+	ResUtilVerifyPrivatePropertyList:            procResUtilVerifyPrivatePropertyList,
+	ResUtilVerifyPropertyTable:                  procResUtilVerifyPropertyTable,
+	ResUtilVerifyResourceService:                procResUtilVerifyResourceService,
+	ResUtilVerifyService:                        procResUtilVerifyService,
+	ResUtilVerifyShutdownSafe:                   procResUtilVerifyShutdownSafe,
+	ResUtilsDeleteKeyTree:                       procResUtilsDeleteKeyTree,
+	ResetAllAppInstanceVersions:                 procResetAllAppInstanceVersions,
+	RestartClusterResource:                      procRestartClusterResource,
+	RestartClusterResourceEx:                    procRestartClusterResourceEx,
+	RestoreClusterDatabase:                      procRestoreClusterDatabase,
+	ResumeClusterNode:                           procResumeClusterNode,
+	ResumeClusterNodeEx:                         procResumeClusterNodeEx,
+	ResumeClusterNodeEx2:                        procResumeClusterNodeEx2,
+	SetAppInstanceCsvFlags:                      procSetAppInstanceCsvFlags,
+	SetClusterGroupName:                         procSetClusterGroupName,
+	SetClusterGroupNameEx:                       procSetClusterGroupNameEx,
+	SetClusterGroupNodeList:                     procSetClusterGroupNodeList,
+	SetClusterGroupNodeListEx:                   procSetClusterGroupNodeListEx,
+	SetClusterGroupSetDependencyExpression:      procSetClusterGroupSetDependencyExpression,
+	SetClusterGroupSetDependencyExpressionEx:    procSetClusterGroupSetDependencyExpressionEx,
+	SetClusterName:                              procSetClusterName,
+	SetClusterNameEx:                            procSetClusterNameEx,
+	SetClusterNetworkName:                       procSetClusterNetworkName,
+	SetClusterNetworkNameEx:                     procSetClusterNetworkNameEx,
+	SetClusterNetworkPriorityOrder:              procSetClusterNetworkPriorityOrder,
+	SetClusterQuorumResource:                    procSetClusterQuorumResource,
+	SetClusterQuorumResourceEx:                  procSetClusterQuorumResourceEx,
+	SetClusterResourceDependencyExpression:      procSetClusterResourceDependencyExpression,
+	SetClusterResourceName:                      procSetClusterResourceName,
+	SetClusterResourceNameEx:                    procSetClusterResourceNameEx,
+	SetClusterServiceAccountPassword:            procSetClusterServiceAccountPassword,
+	SetGroupDependencyExpression:                procSetGroupDependencyExpression,
+	SetGroupDependencyExpressionEx:              procSetGroupDependencyExpressionEx,
+}
+
 // AddClusterGroupDependency calls CLUSAPI!AddClusterGroupDependency.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-addclustergroupdependency
 // Minimum OS: windowsserver2016.
@@ -437,8 +1259,8 @@ func AddClusterGroupDependency(hDependentGroup HGROUP, hProviderGroup HGROUP) ui
 }
 
 // AddClusterGroupDependencyEx calls CLUSAPI!AddClusterGroupDependencyEx.
-func AddClusterGroupDependencyEx(hDependentGroup HGROUP, hProviderGroup HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterGroupDependencyEx(hDependentGroup HGROUP, hProviderGroup HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterGroupDependencyEx.Addr(), uintptr(hDependentGroup), uintptr(hProviderGroup), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -452,8 +1274,8 @@ func AddClusterGroupSetDependency(hDependentGroupSet HGROUPSET, hProviderGroupSe
 }
 
 // AddClusterGroupSetDependencyEx calls CLUSAPI!AddClusterGroupSetDependencyEx.
-func AddClusterGroupSetDependencyEx(hDependentGroupSet HGROUPSET, hProviderGroupSet HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterGroupSetDependencyEx(hDependentGroupSet HGROUPSET, hProviderGroupSet HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterGroupSetDependencyEx.Addr(), uintptr(hDependentGroupSet), uintptr(hProviderGroupSet), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -467,8 +1289,8 @@ func AddClusterGroupToGroupSetDependency(hDependentGroup HGROUP, hProviderGroupS
 }
 
 // AddClusterGroupToGroupSetDependencyEx calls CLUSAPI!AddClusterGroupToGroupSetDependencyEx.
-func AddClusterGroupToGroupSetDependencyEx(hDependentGroup HGROUP, hProviderGroupSet HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterGroupToGroupSetDependencyEx(hDependentGroup HGROUP, hProviderGroupSet HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterGroupToGroupSetDependencyEx.Addr(), uintptr(hDependentGroup), uintptr(hProviderGroupSet), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -501,8 +1323,8 @@ func AddClusterResourceDependency(hResource HRESOURCE, hDependsOn HRESOURCE) uin
 }
 
 // AddClusterResourceDependencyEx calls CLUSAPI!AddClusterResourceDependencyEx.
-func AddClusterResourceDependencyEx(hResource HRESOURCE, hDependsOn HRESOURCE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterResourceDependencyEx(hResource HRESOURCE, hDependsOn HRESOURCE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterResourceDependencyEx.Addr(), uintptr(hResource), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -516,17 +1338,17 @@ func AddClusterResourceNode(hResource HRESOURCE, hNode HNODE) uint32 {
 }
 
 // AddClusterResourceNodeEx calls CLUSAPI!AddClusterResourceNodeEx.
-func AddClusterResourceNodeEx(hResource HRESOURCE, hNode HNODE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func AddClusterResourceNodeEx(hResource HRESOURCE, hNode HNODE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procAddClusterResourceNodeEx.Addr(), uintptr(hResource), uintptr(hNode), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
 // AddClusterStorageNode calls CLUSAPI!AddClusterStorageNode.
-func AddClusterStorageNode(hCluster HCLUSTER, lpszNodeName string, pfnProgressCallback PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg unsafe.Pointer, lpszClusterStorageNodeDescription string, lpszClusterStorageNodeLocation string) uint32 {
+func AddClusterStorageNode(hCluster HCLUSTER, lpszNodeName string, pfnProgressCallback PCLUSTER_SETUP_PROGRESS_CALLBACK, pvCallbackArg unsafe.Pointer, lpszClusterStorageNodeDescription *string, lpszClusterStorageNodeLocation *string) uint32 {
 	_lpszNodeName := win32.UTF16Ptr(lpszNodeName)
-	_lpszClusterStorageNodeDescription := win32.UTF16Ptr(lpszClusterStorageNodeDescription)
-	_lpszClusterStorageNodeLocation := win32.UTF16Ptr(lpszClusterStorageNodeLocation)
+	_lpszClusterStorageNodeDescription := win32.UTF16PtrOrNil(lpszClusterStorageNodeDescription)
+	_lpszClusterStorageNodeLocation := win32.UTF16PtrOrNil(lpszClusterStorageNodeLocation)
 	r1, _, _ := syscall.SyscallN(procAddClusterStorageNode.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNodeName)), uintptr(pfnProgressCallback), uintptr(unsafe.Pointer(pvCallbackArg)), uintptr(unsafe.Pointer(_lpszClusterStorageNodeDescription)), uintptr(unsafe.Pointer(_lpszClusterStorageNodeLocation)))
 	return uint32(r1)
 }
@@ -587,8 +1409,8 @@ func ChangeClusterResourceGroupEx(hResource HRESOURCE, hGroup HGROUP, Flags uint
 }
 
 // ChangeClusterResourceGroupEx2 calls CLUSAPI!ChangeClusterResourceGroupEx2.
-func ChangeClusterResourceGroupEx2(hResource HRESOURCE, hGroup HGROUP, Flags uint64, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ChangeClusterResourceGroupEx2(hResource HRESOURCE, hGroup HGROUP, Flags uint64, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procChangeClusterResourceGroupEx2.Addr(), uintptr(hResource), uintptr(hGroup), uintptr(Flags), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -777,8 +1599,8 @@ func ClusterAddGroupToGroupSetWithDomains(hGroupSet HGROUPSET, hGroup HGROUP, fa
 }
 
 // ClusterAddGroupToGroupSetWithDomainsEx calls CLUSAPI!ClusterAddGroupToGroupSetWithDomainsEx.
-func ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet HGROUPSET, hGroup HGROUP, faultDomain uint32, updateDomain uint32, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet HGROUPSET, hGroup HGROUP, faultDomain uint32, updateDomain uint32, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterAddGroupToGroupSetWithDomainsEx.Addr(), uintptr(hGroupSet), uintptr(hGroup), uintptr(faultDomain), uintptr(updateDomain), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -840,7 +1662,7 @@ func ClusterControl(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lp
 }
 
 // ClusterControlEx calls CLUSAPI!ClusterControlEx.
-func ClusterControlEx(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterControlEx(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -849,7 +1671,7 @@ func ClusterControlEx(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, 
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterControlEx.Addr(), uintptr(hCluster), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -970,7 +1792,7 @@ func ClusterGroupControl(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, l
 }
 
 // ClusterGroupControlEx calls CLUSAPI!ClusterGroupControlEx.
-func ClusterGroupControlEx(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterGroupControlEx(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -979,7 +1801,7 @@ func ClusterGroupControlEx(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32,
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterGroupControlEx.Addr(), uintptr(hGroup), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1030,9 +1852,9 @@ func ClusterGroupOpenEnum(hGroup HGROUP, dwType uint32) (HGROUPENUM, error) {
 // ClusterGroupOpenEnumEx calls CLUSAPI!ClusterGroupOpenEnumEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clustergroupopenenumex
 // Minimum OS: windowsserver2012.
-func ClusterGroupOpenEnumEx(hCluster HCLUSTER, lpszProperties string, cbProperties uint32, lpszRoProperties string, cbRoProperties uint32, dwFlags uint32) HGROUPENUMEX {
-	_lpszProperties := win32.UTF16Ptr(lpszProperties)
-	_lpszRoProperties := win32.UTF16Ptr(lpszRoProperties)
+func ClusterGroupOpenEnumEx(hCluster HCLUSTER, lpszProperties *string, cbProperties uint32, lpszRoProperties *string, cbRoProperties uint32, dwFlags uint32) HGROUPENUMEX {
+	_lpszProperties := win32.UTF16PtrOrNil(lpszProperties)
+	_lpszRoProperties := win32.UTF16PtrOrNil(lpszRoProperties)
 	r1, _, _ := syscall.SyscallN(procClusterGroupOpenEnumEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszProperties)), uintptr(cbProperties), uintptr(unsafe.Pointer(_lpszRoProperties)), uintptr(cbRoProperties), uintptr(dwFlags))
 	return HGROUPENUMEX(r1)
 }
@@ -1062,7 +1884,7 @@ func ClusterGroupSetControl(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode 
 }
 
 // ClusterGroupSetControlEx calls CLUSAPI!ClusterGroupSetControlEx.
-func ClusterGroupSetControlEx(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterGroupSetControlEx(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1071,7 +1893,7 @@ func ClusterGroupSetControlEx(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCod
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterGroupSetControlEx.Addr(), uintptr(hGroupSet), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1137,7 +1959,7 @@ func ClusterNetInterfaceControl(hNetInterface HNETINTERFACE, hHostNode HNODE, dw
 }
 
 // ClusterNetInterfaceControlEx calls CLUSAPI!ClusterNetInterfaceControlEx.
-func ClusterNetInterfaceControlEx(hNetInterface HNETINTERFACE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterNetInterfaceControlEx(hNetInterface HNETINTERFACE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1146,7 +1968,7 @@ func ClusterNetInterfaceControlEx(hNetInterface HNETINTERFACE, hHostNode HNODE, 
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterNetInterfaceControlEx.Addr(), uintptr(hNetInterface), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1162,9 +1984,9 @@ func ClusterNetInterfaceEnum(hNetInterfaceEnum HNETINTERFACEENUM, dwIndex uint32
 // ClusterNetInterfaceOpenEnum calls CLUSAPI!ClusterNetInterfaceOpenEnum.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusternetinterfaceopenenum
 // Minimum OS: windowsserver2016.
-func ClusterNetInterfaceOpenEnum(hCluster HCLUSTER, lpszNodeName string, lpszNetworkName string) (HNETINTERFACEENUM, error) {
-	_lpszNodeName := win32.UTF16Ptr(lpszNodeName)
-	_lpszNetworkName := win32.UTF16Ptr(lpszNetworkName)
+func ClusterNetInterfaceOpenEnum(hCluster HCLUSTER, lpszNodeName *string, lpszNetworkName *string) (HNETINTERFACEENUM, error) {
+	_lpszNodeName := win32.UTF16PtrOrNil(lpszNodeName)
+	_lpszNetworkName := win32.UTF16PtrOrNil(lpszNetworkName)
 	r1, _, e1 := syscall.SyscallN(procClusterNetInterfaceOpenEnum.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNodeName)), uintptr(unsafe.Pointer(_lpszNetworkName)))
 	if e1 != 0 {
 		return HNETINTERFACEENUM(r1), e1
@@ -1197,7 +2019,7 @@ func ClusterNetworkControl(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uin
 }
 
 // ClusterNetworkControlEx calls CLUSAPI!ClusterNetworkControlEx.
-func ClusterNetworkControlEx(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterNetworkControlEx(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1206,7 +2028,7 @@ func ClusterNetworkControlEx(hNetwork HNETWORK, hHostNode HNODE, dwControlCode u
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterNetworkControlEx.Addr(), uintptr(hNetwork), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1271,7 +2093,7 @@ func ClusterNodeControl(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpIn
 }
 
 // ClusterNodeControlEx calls CLUSAPI!ClusterNodeControlEx.
-func ClusterNodeControlEx(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterNodeControlEx(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1280,7 +2102,7 @@ func ClusterNodeControlEx(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lp
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterNodeControlEx.Addr(), uintptr(hNode), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1379,8 +2201,8 @@ func ClusterPrepareSharedVolumeForBackup(lpszFileName string, lpszVolumePathName
 // ClusterRegBatchAddCommand calls CLUSAPI!ClusterRegBatchAddCommand.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterregbatchaddcommand
 // Minimum OS: windowsserver2008.
-func ClusterRegBatchAddCommand(hRegBatch HREGBATCH, dwCommand CLUSTER_REG_COMMAND, wzName string, dwOptions uint32, lpData []byte) int32 {
-	_wzName := win32.UTF16Ptr(wzName)
+func ClusterRegBatchAddCommand(hRegBatch HREGBATCH, dwCommand CLUSTER_REG_COMMAND, wzName *string, dwOptions uint32, lpData []byte) int32 {
+	_wzName := win32.UTF16PtrOrNil(wzName)
 	var _lpData *byte
 	if len(lpData) > 0 {
 		_lpData = &lpData[0]
@@ -1488,9 +2310,9 @@ func ClusterRegCreateKey(hKey systemregistry.HKEY, lpszSubKey string, dwOptions 
 }
 
 // ClusterRegCreateKeyEx calls CLUSAPI!ClusterRegCreateKeyEx.
-func ClusterRegCreateKeyEx(hKey systemregistry.HKEY, lpSubKey string, dwOptions uint32, samDesired uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, phkResult *systemregistry.HKEY, lpdwDisposition *uint32, lpszReason string) int32 {
+func ClusterRegCreateKeyEx(hKey systemregistry.HKEY, lpSubKey string, dwOptions uint32, samDesired uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, phkResult *systemregistry.HKEY, lpdwDisposition *uint32, lpszReason *string) int32 {
 	_lpSubKey := win32.UTF16Ptr(lpSubKey)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegCreateKeyEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(dwOptions), uintptr(samDesired), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(unsafe.Pointer(phkResult)), uintptr(unsafe.Pointer(lpdwDisposition)), uintptr(unsafe.Pointer(_lpszReason)))
 	return int32(r1)
 }
@@ -1513,9 +2335,9 @@ func ClusterRegDeleteKey(hKey systemregistry.HKEY, lpszSubKey string) int32 {
 }
 
 // ClusterRegDeleteKeyEx calls CLUSAPI!ClusterRegDeleteKeyEx.
-func ClusterRegDeleteKeyEx(hKey systemregistry.HKEY, lpSubKey string, lpszReason string) int32 {
+func ClusterRegDeleteKeyEx(hKey systemregistry.HKEY, lpSubKey string, lpszReason *string) int32 {
 	_lpSubKey := win32.UTF16Ptr(lpSubKey)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegDeleteKeyEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(unsafe.Pointer(_lpszReason)))
 	return int32(r1)
 }
@@ -1530,9 +2352,9 @@ func ClusterRegDeleteValue(hKey systemregistry.HKEY, lpszValueName string) uint3
 }
 
 // ClusterRegDeleteValueEx calls CLUSAPI!ClusterRegDeleteValueEx.
-func ClusterRegDeleteValueEx(hKey systemregistry.HKEY, lpszValueName string, lpszReason string) uint32 {
+func ClusterRegDeleteValueEx(hKey systemregistry.HKEY, lpszValueName string, lpszReason *string) uint32 {
 	_lpszValueName := win32.UTF16Ptr(lpszValueName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegDeleteValueEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpszValueName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1622,8 +2444,8 @@ func ClusterRegSetKeySecurity(hKey systemregistry.HKEY, SecurityInformation uint
 }
 
 // ClusterRegSetKeySecurityEx calls CLUSAPI!ClusterRegSetKeySecurityEx.
-func ClusterRegSetKeySecurityEx(hKey systemregistry.HKEY, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, lpszReason string) int32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ClusterRegSetKeySecurityEx(hKey systemregistry.HKEY, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, lpszReason *string) int32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegSetKeySecurityEx.Addr(), uintptr(hKey), uintptr(SecurityInformation), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(_lpszReason)))
 	return int32(r1)
 }
@@ -1641,9 +2463,9 @@ func ClusterRegSetValue(hKey systemregistry.HKEY, lpszValueName string, dwType u
 }
 
 // ClusterRegSetValueEx calls CLUSAPI!ClusterRegSetValueEx.
-func ClusterRegSetValueEx(hKey systemregistry.HKEY, lpszValueName string, dwType uint32, lpData *byte, cbData uint32, lpszReason string) uint32 {
+func ClusterRegSetValueEx(hKey systemregistry.HKEY, lpszValueName string, dwType uint32, lpData *byte, cbData uint32, lpszReason *string) uint32 {
 	_lpszValueName := win32.UTF16Ptr(lpszValueName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRegSetValueEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpszValueName)), uintptr(dwType), uintptr(unsafe.Pointer(lpData)), uintptr(cbData), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1679,8 +2501,8 @@ func ClusterRemoveGroupFromGroupSet(hGroup HGROUP) uint32 {
 }
 
 // ClusterRemoveGroupFromGroupSetEx calls CLUSAPI!ClusterRemoveGroupFromGroupSetEx.
-func ClusterRemoveGroupFromGroupSetEx(hGroup HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ClusterRemoveGroupFromGroupSetEx(hGroup HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterRemoveGroupFromGroupSetEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1734,7 +2556,7 @@ func ClusterResourceControlAsUser(hResource HRESOURCE, hHostNode HNODE, dwContro
 }
 
 // ClusterResourceControlAsUserEx calls CLUSAPI!ClusterResourceControlAsUserEx.
-func ClusterResourceControlAsUserEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceControlAsUserEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1743,13 +2565,13 @@ func ClusterResourceControlAsUserEx(hResource HRESOURCE, hHostNode HNODE, dwCont
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterResourceControlAsUserEx.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
 // ClusterResourceControlEx calls CLUSAPI!ClusterResourceControlEx.
-func ClusterResourceControlEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceControlEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
@@ -1758,7 +2580,7 @@ func ClusterResourceControlEx(hResource HRESOURCE, hHostNode HNODE, dwControlCod
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterResourceControlEx.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1809,9 +2631,9 @@ func ClusterResourceOpenEnum(hResource HRESOURCE, dwType uint32) (HRESENUM, erro
 // ClusterResourceOpenEnumEx calls CLUSAPI!ClusterResourceOpenEnumEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterresourceopenenumex
 // Minimum OS: windowsserver2012.
-func ClusterResourceOpenEnumEx(hCluster HCLUSTER, lpszProperties string, cbProperties uint32, lpszRoProperties string, cbRoProperties uint32, dwFlags uint32) (HRESENUMEX, error) {
-	_lpszProperties := win32.UTF16Ptr(lpszProperties)
-	_lpszRoProperties := win32.UTF16Ptr(lpszRoProperties)
+func ClusterResourceOpenEnumEx(hCluster HCLUSTER, lpszProperties *string, cbProperties uint32, lpszRoProperties *string, cbRoProperties uint32, dwFlags uint32) (HRESENUMEX, error) {
+	_lpszProperties := win32.UTF16PtrOrNil(lpszProperties)
+	_lpszRoProperties := win32.UTF16PtrOrNil(lpszRoProperties)
 	r1, _, e1 := syscall.SyscallN(procClusterResourceOpenEnumEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszProperties)), uintptr(cbProperties), uintptr(unsafe.Pointer(_lpszRoProperties)), uintptr(cbRoProperties), uintptr(dwFlags))
 	if e1 != 0 {
 		return HRESENUMEX(r1), e1
@@ -1862,7 +2684,7 @@ func ClusterResourceTypeControlAsUser(hCluster HCLUSTER, lpszResourceTypeName st
 }
 
 // ClusterResourceTypeControlAsUserEx calls CLUSAPI!ClusterResourceTypeControlAsUserEx.
-func ClusterResourceTypeControlAsUserEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceTypeControlAsUserEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
@@ -1872,13 +2694,13 @@ func ClusterResourceTypeControlAsUserEx(hCluster HCLUSTER, lpszResourceTypeName 
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlAsUserEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
 // ClusterResourceTypeControlEx calls CLUSAPI!ClusterResourceTypeControlEx.
-func ClusterResourceTypeControlEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceTypeControlEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason *string) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
@@ -1888,7 +2710,7 @@ func ClusterResourceTypeControlEx(hCluster HCLUSTER, lpszResourceTypeName string
 	if len(lpOutBuffer) > 0 {
 		_lpOutBuffer = &lpOutBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -1928,6 +2750,20 @@ func ClusterSetAccountAccess(hCluster HCLUSTER, szAccountSID string, dwAccess ui
 	_szAccountSID := win32.UTF16Ptr(szAccountSID)
 	r1, _, _ := syscall.SyscallN(procClusterSetAccountAccess.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_szAccountSID)), uintptr(dwAccess), uintptr(dwControlType))
 	return uint32(r1)
+}
+
+var specClusterSharedVolumeSetSnapshotState = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// ClusterSharedVolumeSetSnapshotState calls CLUSAPI!ClusterSharedVolumeSetSnapshotState.
+// https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clustersharedvolumesetsnapshotstate
+// Minimum OS: windowsserver2008.
+func ClusterSharedVolumeSetSnapshotState(guidSnapshotSet win32.GUID, lpszVolumeName string, state CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE) (uint32, error) {
+	_lpszVolumeName := win32.UTF16Ptr(lpszVolumeName)
+	r1, _, e1 := win32.Call(procClusterSharedVolumeSetSnapshotState.Addr(), specClusterSharedVolumeSetSnapshotState, nil, uintptr(unsafe.Pointer(&guidSnapshotSet)), uintptr(unsafe.Pointer(_lpszVolumeName)), uintptr(state)).Tuple()
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // ClusterUpgradeFunctionalLevel calls CLUSAPI!ClusterUpgradeFunctionalLevel.
@@ -2034,10 +2870,10 @@ func CreateClusterResource(hGroup HGROUP, lpszResourceName string, lpszResourceT
 }
 
 // CreateClusterResourceEx calls CLUSAPI!CreateClusterResourceEx.
-func CreateClusterResourceEx(hGroup HGROUP, lpszResourceName string, lpszResourceType string, dwFlags uint32, lpszReason string) HRESOURCE {
+func CreateClusterResourceEx(hGroup HGROUP, lpszResourceName string, lpszResourceType string, dwFlags uint32, lpszReason *string) HRESOURCE {
 	_lpszResourceName := win32.UTF16Ptr(lpszResourceName)
 	_lpszResourceType := win32.UTF16Ptr(lpszResourceType)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procCreateClusterResourceEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszResourceName)), uintptr(unsafe.Pointer(_lpszResourceType)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszReason)))
 	return HRESOURCE(r1)
 }
@@ -2054,11 +2890,11 @@ func CreateClusterResourceType(hCluster HCLUSTER, lpszResourceTypeName string, l
 }
 
 // CreateClusterResourceTypeEx calls CLUSAPI!CreateClusterResourceTypeEx.
-func CreateClusterResourceTypeEx(hCluster HCLUSTER, lpszResourceTypeName string, lpszDisplayName string, lpszResourceTypeDll string, dwLooksAlivePollInterval uint32, dwIsAlivePollInterval uint32, lpszReason string) uint32 {
+func CreateClusterResourceTypeEx(hCluster HCLUSTER, lpszResourceTypeName string, lpszDisplayName string, lpszResourceTypeDll string, dwLooksAlivePollInterval uint32, dwIsAlivePollInterval uint32, lpszReason *string) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
 	_lpszDisplayName := win32.UTF16Ptr(lpszDisplayName)
 	_lpszResourceTypeDll := win32.UTF16Ptr(lpszResourceTypeDll)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procCreateClusterResourceTypeEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(unsafe.Pointer(_lpszDisplayName)), uintptr(unsafe.Pointer(_lpszResourceTypeDll)), uintptr(dwLooksAlivePollInterval), uintptr(dwIsAlivePollInterval), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2072,8 +2908,8 @@ func DeleteClusterGroup(hGroup HGROUP) uint32 {
 }
 
 // DeleteClusterGroupEx calls CLUSAPI!DeleteClusterGroupEx.
-func DeleteClusterGroupEx(hGroup HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func DeleteClusterGroupEx(hGroup HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDeleteClusterGroupEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2087,8 +2923,8 @@ func DeleteClusterGroupSet(hGroupSet HGROUPSET) uint32 {
 }
 
 // DeleteClusterGroupSetEx calls CLUSAPI!DeleteClusterGroupSetEx.
-func DeleteClusterGroupSetEx(hGroupSet HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func DeleteClusterGroupSetEx(hGroupSet HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDeleteClusterGroupSetEx.Addr(), uintptr(hGroupSet), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2102,8 +2938,8 @@ func DeleteClusterResource(hResource HRESOURCE) uint32 {
 }
 
 // DeleteClusterResourceEx calls CLUSAPI!DeleteClusterResourceEx.
-func DeleteClusterResourceEx(hResource HRESOURCE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func DeleteClusterResourceEx(hResource HRESOURCE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDeleteClusterResourceEx.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2118,9 +2954,9 @@ func DeleteClusterResourceType(hCluster HCLUSTER, lpszResourceTypeName string) u
 }
 
 // DeleteClusterResourceTypeEx calls CLUSAPI!DeleteClusterResourceTypeEx.
-func DeleteClusterResourceTypeEx(hCluster HCLUSTER, lpszTypeName string, lpszReason string) uint32 {
+func DeleteClusterResourceTypeEx(hCluster HCLUSTER, lpszTypeName string, lpszReason *string) uint32 {
 	_lpszTypeName := win32.UTF16Ptr(lpszTypeName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDeleteClusterResourceTypeEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszTypeName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2143,8 +2979,8 @@ func DestroyClusterGroup(hGroup HGROUP) uint32 {
 }
 
 // DestroyClusterGroupEx calls CLUSAPI!DestroyClusterGroupEx.
-func DestroyClusterGroupEx(hGroup HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func DestroyClusterGroupEx(hGroup HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procDestroyClusterGroupEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2190,8 +3026,8 @@ func EvictClusterNodeEx(hNode HNODE, dwTimeOut uint32, phrCleanupStatus *foundat
 }
 
 // EvictClusterNodeEx2 calls CLUSAPI!EvictClusterNodeEx2.
-func EvictClusterNodeEx2(hNode HNODE, dwTimeout uint32, phrCleanupStatus *foundation.HRESULT, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func EvictClusterNodeEx2(hNode HNODE, dwTimeout uint32, phrCleanupStatus *foundation.HRESULT, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procEvictClusterNodeEx2.Addr(), uintptr(hNode), uintptr(dwTimeout), uintptr(unsafe.Pointer(phrCleanupStatus)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2205,8 +3041,8 @@ func FailClusterResource(hResource HRESOURCE) uint32 {
 }
 
 // FailClusterResourceEx calls CLUSAPI!FailClusterResourceEx.
-func FailClusterResourceEx(hResource HRESOURCE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func FailClusterResourceEx(hResource HRESOURCE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procFailClusterResourceEx.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2514,8 +3350,8 @@ func GetNodeCloudTypeDW(ppszNodeName string, NodeCloudType *uint32) uint32 {
 // GetNodeClusterState calls CLUSAPI!GetNodeClusterState.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-getnodeclusterstate
 // Minimum OS: windowsserver2008.
-func GetNodeClusterState(lpszNodeName string, pdwClusterState *uint32) uint32 {
-	_lpszNodeName := win32.UTF16Ptr(lpszNodeName)
+func GetNodeClusterState(lpszNodeName *string, pdwClusterState *uint32) uint32 {
+	_lpszNodeName := win32.UTF16PtrOrNil(lpszNodeName)
 	r1, _, _ := syscall.SyscallN(procGetNodeClusterState.Addr(), uintptr(unsafe.Pointer(_lpszNodeName)), uintptr(unsafe.Pointer(pdwClusterState)))
 	return uint32(r1)
 }
@@ -2572,12 +3408,12 @@ func MoveClusterGroupEx(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint3
 }
 
 // MoveClusterGroupEx2 calls CLUSAPI!MoveClusterGroupEx2.
-func MoveClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+func MoveClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint32, lpInBuffer []byte, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procMoveClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwMoveFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2603,8 +3439,8 @@ func OfflineClusterGroupEx(hGroup HGROUP, dwOfflineFlags uint32, lpInBuffer []by
 }
 
 // OfflineClusterGroupEx2 calls CLUSAPI!OfflineClusterGroupEx2.
-func OfflineClusterGroupEx2(hGroup HGROUP, dwOfflineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func OfflineClusterGroupEx2(hGroup HGROUP, dwOfflineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procOfflineClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2630,12 +3466,12 @@ func OfflineClusterResourceEx(hResource HRESOURCE, dwOfflineFlags uint32, lpInBu
 }
 
 // OfflineClusterResourceEx2 calls CLUSAPI!OfflineClusterResourceEx2.
-func OfflineClusterResourceEx2(hResource HRESOURCE, dwOfflineFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+func OfflineClusterResourceEx2(hResource HRESOURCE, dwOfflineFlags uint32, lpInBuffer []byte, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procOfflineClusterResourceEx2.Addr(), uintptr(hResource), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2661,12 +3497,12 @@ func OnlineClusterGroupEx(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags u
 }
 
 // OnlineClusterGroupEx2 calls CLUSAPI!OnlineClusterGroupEx2.
-func OnlineClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+func OnlineClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procOnlineClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2692,12 +3528,12 @@ func OnlineClusterResourceEx(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuff
 }
 
 // OnlineClusterResourceEx2 calls CLUSAPI!OnlineClusterResourceEx2.
-func OnlineClusterResourceEx2(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+func OnlineClusterResourceEx2(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason *string) uint32 {
 	var _lpInBuffer *byte
 	if len(lpInBuffer) > 0 {
 		_lpInBuffer = &lpInBuffer[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procOnlineClusterResourceEx2.Addr(), uintptr(hResource), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2705,8 +3541,8 @@ func OnlineClusterResourceEx2(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuf
 // OpenCluster calls CLUSAPI!OpenCluster.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-opencluster
 // Minimum OS: windowsserver2008.
-func OpenCluster(lpszClusterName string) (HCLUSTER, error) {
-	_lpszClusterName := win32.UTF16Ptr(lpszClusterName)
+func OpenCluster(lpszClusterName *string) (HCLUSTER, error) {
+	_lpszClusterName := win32.UTF16PtrOrNil(lpszClusterName)
 	r1, _, e1 := syscall.SyscallN(procOpenCluster.Addr(), uintptr(unsafe.Pointer(_lpszClusterName)))
 	if e1 != 0 {
 		return HCLUSTER(r1), e1
@@ -2734,8 +3570,8 @@ func OpenClusterCryptProviderEx(lpszResource string, lpszKeyname string, lpszPro
 // OpenClusterEx calls CLUSAPI!OpenClusterEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusterex
 // Minimum OS: windowsserver2008.
-func OpenClusterEx(lpszClusterName string, DesiredAccess uint32, GrantedAccess *uint32) (HCLUSTER, error) {
-	_lpszClusterName := win32.UTF16Ptr(lpszClusterName)
+func OpenClusterEx(lpszClusterName *string, DesiredAccess uint32, GrantedAccess *uint32) (HCLUSTER, error) {
+	_lpszClusterName := win32.UTF16PtrOrNil(lpszClusterName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterEx.Addr(), uintptr(unsafe.Pointer(_lpszClusterName)), uintptr(DesiredAccess), uintptr(unsafe.Pointer(GrantedAccess)))
 	if e1 != 0 {
 		return HCLUSTER(r1), e1
@@ -2758,8 +3594,8 @@ func OpenClusterGroup(hCluster HCLUSTER, lpszGroupName string) (HGROUP, error) {
 // OpenClusterGroupEx calls CLUSAPI!OpenClusterGroupEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclustergroupex
 // Minimum OS: windowsserver2008.
-func OpenClusterGroupEx(hCluster HCLUSTER, lpszGroupName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HGROUP, error) {
-	_lpszGroupName := win32.UTF16Ptr(lpszGroupName)
+func OpenClusterGroupEx(hCluster HCLUSTER, lpszGroupName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HGROUP, error) {
+	_lpszGroupName := win32.UTF16PtrOrNil(lpszGroupName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterGroupEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszGroupName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HGROUP(r1), e1
@@ -2794,8 +3630,8 @@ func OpenClusterNetInterface(hCluster HCLUSTER, lpszInterfaceName string) (HNETI
 // OpenClusterNetInterfaceEx calls CLUSAPI!OpenClusterNetInterfaceEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusternetinterfaceex
 // Minimum OS: windowsserver2008.
-func OpenClusterNetInterfaceEx(hCluster HCLUSTER, lpszInterfaceName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNETINTERFACE, error) {
-	_lpszInterfaceName := win32.UTF16Ptr(lpszInterfaceName)
+func OpenClusterNetInterfaceEx(hCluster HCLUSTER, lpszInterfaceName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNETINTERFACE, error) {
+	_lpszInterfaceName := win32.UTF16PtrOrNil(lpszInterfaceName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterNetInterfaceEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszInterfaceName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HNETINTERFACE(r1), e1
@@ -2818,8 +3654,8 @@ func OpenClusterNetwork(hCluster HCLUSTER, lpszNetworkName string) (HNETWORK, er
 // OpenClusterNetworkEx calls CLUSAPI!OpenClusterNetworkEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusternetworkex
 // Minimum OS: windowsserver2008.
-func OpenClusterNetworkEx(hCluster HCLUSTER, lpszNetworkName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNETWORK, error) {
-	_lpszNetworkName := win32.UTF16Ptr(lpszNetworkName)
+func OpenClusterNetworkEx(hCluster HCLUSTER, lpszNetworkName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNETWORK, error) {
+	_lpszNetworkName := win32.UTF16PtrOrNil(lpszNetworkName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterNetworkEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNetworkName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HNETWORK(r1), e1
@@ -2848,8 +3684,8 @@ func OpenClusterNodeById(hCluster HCLUSTER, nodeId uint32) HNODE {
 // OpenClusterNodeEx calls CLUSAPI!OpenClusterNodeEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusternodeex
 // Minimum OS: windowsserver2008.
-func OpenClusterNodeEx(hCluster HCLUSTER, lpszNodeName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNODE, error) {
-	_lpszNodeName := win32.UTF16Ptr(lpszNodeName)
+func OpenClusterNodeEx(hCluster HCLUSTER, lpszNodeName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HNODE, error) {
+	_lpszNodeName := win32.UTF16PtrOrNil(lpszNodeName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterNodeEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNodeName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HNODE(r1), e1
@@ -2872,8 +3708,8 @@ func OpenClusterResource(hCluster HCLUSTER, lpszResourceName string) (HRESOURCE,
 // OpenClusterResourceEx calls CLUSAPI!OpenClusterResourceEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-openclusterresourceex
 // Minimum OS: windowsserver2008.
-func OpenClusterResourceEx(hCluster HCLUSTER, lpszResourceName string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HRESOURCE, error) {
-	_lpszResourceName := win32.UTF16Ptr(lpszResourceName)
+func OpenClusterResourceEx(hCluster HCLUSTER, lpszResourceName *string, dwDesiredAccess uint32, lpdwGrantedAccess *uint32) (HRESOURCE, error) {
+	_lpszResourceName := win32.UTF16PtrOrNil(lpszResourceName)
 	r1, _, e1 := syscall.SyscallN(procOpenClusterResourceEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceName)), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpdwGrantedAccess)))
 	if e1 != 0 {
 		return HRESOURCE(r1), e1
@@ -2898,9 +3734,9 @@ func PauseClusterNodeEx(hNode HNODE, bDrainNode bool, dwPauseFlags uint32, hNode
 }
 
 // PauseClusterNodeEx2 calls CLUSAPI!PauseClusterNodeEx2.
-func PauseClusterNodeEx2(hNode HNODE, bDrainNode bool, dwPauseFlags uint32, hNodeDrainTarget HNODE, lpszReason string) uint32 {
+func PauseClusterNodeEx2(hNode HNODE, bDrainNode bool, dwPauseFlags uint32, hNodeDrainTarget HNODE, lpszReason *string) uint32 {
 	_bDrainNode := win32.Bool32(bDrainNode)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procPauseClusterNodeEx2.Addr(), uintptr(hNode), uintptr(_bDrainNode), uintptr(dwPauseFlags), uintptr(hNodeDrainTarget), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2934,6 +3770,16 @@ func RegisterClusterNotify(hChange HCHANGE, dwFilterType uint32, hObject foundat
 	return uint32(r1)
 }
 
+var specRegisterClusterNotifyV2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// RegisterClusterNotifyV2 calls CLUSAPI!RegisterClusterNotifyV2.
+// https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-registerclusternotifyv2
+// Minimum OS: windowsserver2016.
+func RegisterClusterNotifyV2(hChange HCHANGE, Filter NOTIFY_FILTER_AND_TYPE, hObject foundation.HANDLE, dwNotifyKey uintptr) uint32 {
+	r1, _, _ := win32.Call(procRegisterClusterNotifyV2.Addr(), specRegisterClusterNotifyV2, nil, uintptr(hChange), uintptr(unsafe.Pointer(&Filter)), uintptr(hObject), uintptr(dwNotifyKey)).Tuple()
+	return uint32(r1)
+}
+
 // RegisterClusterResourceTypeNotifyV2 calls CLUSAPI!RegisterClusterResourceTypeNotifyV2.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-registerclusterresourcetypenotifyv2
 // Minimum OS: windowsserver2016.
@@ -2952,8 +3798,8 @@ func RemoveClusterGroupDependency(hGroup HGROUP, hDependsOn HGROUP) uint32 {
 }
 
 // RemoveClusterGroupDependencyEx calls CLUSAPI!RemoveClusterGroupDependencyEx.
-func RemoveClusterGroupDependencyEx(hGroup HGROUP, hDependsOn HGROUP, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterGroupDependencyEx(hGroup HGROUP, hDependsOn HGROUP, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterGroupDependencyEx.Addr(), uintptr(hGroup), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2967,8 +3813,8 @@ func RemoveClusterGroupSetDependency(hGroupSet HGROUPSET, hDependsOn HGROUPSET) 
 }
 
 // RemoveClusterGroupSetDependencyEx calls CLUSAPI!RemoveClusterGroupSetDependencyEx.
-func RemoveClusterGroupSetDependencyEx(hGroupSet HGROUPSET, hDependsOn HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterGroupSetDependencyEx(hGroupSet HGROUPSET, hDependsOn HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterGroupSetDependencyEx.Addr(), uintptr(hGroupSet), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -2982,8 +3828,8 @@ func RemoveClusterGroupToGroupSetDependency(hGroup HGROUP, hDependsOn HGROUPSET)
 }
 
 // RemoveClusterGroupToGroupSetDependencyEx calls CLUSAPI!RemoveClusterGroupToGroupSetDependencyEx.
-func RemoveClusterGroupToGroupSetDependencyEx(hGroup HGROUP, hDependsOn HGROUPSET, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterGroupToGroupSetDependencyEx(hGroup HGROUP, hDependsOn HGROUPSET, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterGroupToGroupSetDependencyEx.Addr(), uintptr(hGroup), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3004,8 +3850,8 @@ func RemoveClusterResourceDependency(hResource HRESOURCE, hDependsOn HRESOURCE) 
 }
 
 // RemoveClusterResourceDependencyEx calls CLUSAPI!RemoveClusterResourceDependencyEx.
-func RemoveClusterResourceDependencyEx(hResource HRESOURCE, hDependsOn HRESOURCE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterResourceDependencyEx(hResource HRESOURCE, hDependsOn HRESOURCE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterResourceDependencyEx.Addr(), uintptr(hResource), uintptr(hDependsOn), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3019,8 +3865,8 @@ func RemoveClusterResourceNode(hResource HRESOURCE, hNode HNODE) uint32 {
 }
 
 // RemoveClusterResourceNodeEx calls CLUSAPI!RemoveClusterResourceNodeEx.
-func RemoveClusterResourceNodeEx(hResource HRESOURCE, hNode HNODE, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RemoveClusterResourceNodeEx(hResource HRESOURCE, hNode HNODE, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRemoveClusterResourceNodeEx.Addr(), uintptr(hResource), uintptr(hNode), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -3440,8 +4286,8 @@ func ResUtilGetLongProperty(plOutValue *int32, pValueStruct *CLUSPROP_LONG, lOld
 // ResUtilGetMultiSzProperty calls RESUTILS!ResUtilGetMultiSzProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetmultiszproperty
 // Minimum OS: windowsserver2008.
-func ResUtilGetMultiSzProperty(ppszOutValue *foundation.PWSTR, pcbOutValueSize *uint32, pValueStruct *CLUSPROP_SZ, pszOldValue string, cbOldValueSize uint32, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
-	_pszOldValue := win32.UTF16Ptr(pszOldValue)
+func ResUtilGetMultiSzProperty(ppszOutValue *foundation.PWSTR, pcbOutValueSize *uint32, pValueStruct *CLUSPROP_SZ, pszOldValue *string, cbOldValueSize uint32, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
+	_pszOldValue := win32.UTF16PtrOrNil(pszOldValue)
 	r1, _, _ := syscall.SyscallN(procResUtilGetMultiSzProperty.Addr(), uintptr(unsafe.Pointer(ppszOutValue)), uintptr(unsafe.Pointer(pcbOutValueSize)), uintptr(unsafe.Pointer(pValueStruct)), uintptr(unsafe.Pointer(_pszOldValue)), uintptr(cbOldValueSize), uintptr(unsafe.Pointer(ppPropertyList)), uintptr(unsafe.Pointer(pcbPropertyListSize)))
 	return uint32(r1)
 }
@@ -3634,8 +4480,8 @@ func ResUtilGetResourceNameDependencyEx(lpszResourceName string, lpszResourceTyp
 // ResUtilGetSzProperty calls RESUTILS!ResUtilGetSzProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetszproperty
 // Minimum OS: windowsserver2008.
-func ResUtilGetSzProperty(ppszOutValue *foundation.PWSTR, pValueStruct *CLUSPROP_SZ, pszOldValue string, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
-	_pszOldValue := win32.UTF16Ptr(pszOldValue)
+func ResUtilGetSzProperty(ppszOutValue *foundation.PWSTR, pValueStruct *CLUSPROP_SZ, pszOldValue *string, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
+	_pszOldValue := win32.UTF16PtrOrNil(pszOldValue)
 	r1, _, _ := syscall.SyscallN(procResUtilGetSzProperty.Addr(), uintptr(unsafe.Pointer(ppszOutValue)), uintptr(unsafe.Pointer(pValueStruct)), uintptr(unsafe.Pointer(_pszOldValue)), uintptr(unsafe.Pointer(ppPropertyList)), uintptr(unsafe.Pointer(pcbPropertyListSize)))
 	return uint32(r1)
 }
@@ -4008,8 +4854,8 @@ func RestartClusterResource(hResource HRESOURCE, dwFlags uint32) uint32 {
 }
 
 // RestartClusterResourceEx calls CLUSAPI!RestartClusterResourceEx.
-func RestartClusterResourceEx(hResource HRESOURCE, dwFlags uint32, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func RestartClusterResourceEx(hResource HRESOURCE, dwFlags uint32, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procRestartClusterResourceEx.Addr(), uintptr(hResource), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4017,10 +4863,10 @@ func RestartClusterResourceEx(hResource HRESOURCE, dwFlags uint32, lpszReason st
 // RestoreClusterDatabase calls CLUSAPI!RestoreClusterDatabase.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-restoreclusterdatabase
 // Minimum OS: windowsserver2003.
-func RestoreClusterDatabase(lpszPathName string, bForce bool, lpszQuorumDriveLetter string) uint32 {
+func RestoreClusterDatabase(lpszPathName string, bForce bool, lpszQuorumDriveLetter *string) uint32 {
 	_lpszPathName := win32.UTF16Ptr(lpszPathName)
 	_bForce := win32.Bool32(bForce)
-	_lpszQuorumDriveLetter := win32.UTF16Ptr(lpszQuorumDriveLetter)
+	_lpszQuorumDriveLetter := win32.UTF16PtrOrNil(lpszQuorumDriveLetter)
 	r1, _, _ := syscall.SyscallN(procRestoreClusterDatabase.Addr(), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(_bForce), uintptr(unsafe.Pointer(_lpszQuorumDriveLetter)))
 	return uint32(r1)
 }
@@ -4042,8 +4888,8 @@ func ResumeClusterNodeEx(hNode HNODE, eResumeFailbackType CLUSTER_NODE_RESUME_FA
 }
 
 // ResumeClusterNodeEx2 calls CLUSAPI!ResumeClusterNodeEx2.
-func ResumeClusterNodeEx2(hNode HNODE, eResumeFailbackType CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved uint32, lpszReason string) uint32 {
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func ResumeClusterNodeEx2(hNode HNODE, eResumeFailbackType CLUSTER_NODE_RESUME_FAILBACK_TYPE, dwResumeFlagsReserved uint32, lpszReason *string) uint32 {
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procResumeClusterNodeEx2.Addr(), uintptr(hNode), uintptr(eResumeFailbackType), uintptr(dwResumeFlagsReserved), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4066,9 +4912,9 @@ func SetClusterGroupName(hGroup HGROUP, lpszGroupName string) uint32 {
 }
 
 // SetClusterGroupNameEx calls CLUSAPI!SetClusterGroupNameEx.
-func SetClusterGroupNameEx(hGroup HGROUP, lpszGroupName string, lpszReason string) uint32 {
+func SetClusterGroupNameEx(hGroup HGROUP, lpszGroupName string, lpszReason *string) uint32 {
 	_lpszGroupName := win32.UTF16Ptr(lpszGroupName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterGroupNameEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszGroupName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4086,12 +4932,12 @@ func SetClusterGroupNodeList(hGroup HGROUP, NodeList []HNODE) uint32 {
 }
 
 // SetClusterGroupNodeListEx calls CLUSAPI!SetClusterGroupNodeListEx.
-func SetClusterGroupNodeListEx(hGroup HGROUP, NodeList []HNODE, lpszReason string) uint32 {
+func SetClusterGroupNodeListEx(hGroup HGROUP, NodeList []HNODE, lpszReason *string) uint32 {
 	var _NodeList *HNODE
 	if len(NodeList) > 0 {
 		_NodeList = &NodeList[0]
 	}
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterGroupNodeListEx.Addr(), uintptr(hGroup), uintptr(len(NodeList)), uintptr(unsafe.Pointer(_NodeList)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4106,9 +4952,9 @@ func SetClusterGroupSetDependencyExpression(hGroupSet HGROUPSET, lpszDependencyE
 }
 
 // SetClusterGroupSetDependencyExpressionEx calls CLUSAPI!SetClusterGroupSetDependencyExpressionEx.
-func SetClusterGroupSetDependencyExpressionEx(hGroupSet HGROUPSET, lpszDependencyExpression string, lpszReason string) uint32 {
+func SetClusterGroupSetDependencyExpressionEx(hGroupSet HGROUPSET, lpszDependencyExpression string, lpszReason *string) uint32 {
 	_lpszDependencyExpression := win32.UTF16Ptr(lpszDependencyExpression)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterGroupSetDependencyExpressionEx.Addr(), uintptr(hGroupSet), uintptr(unsafe.Pointer(_lpszDependencyExpression)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4123,9 +4969,9 @@ func SetClusterName(hCluster HCLUSTER, lpszNewClusterName string) uint32 {
 }
 
 // SetClusterNameEx calls CLUSAPI!SetClusterNameEx.
-func SetClusterNameEx(hCluster HCLUSTER, lpszNewClusterName string, lpszReason string) uint32 {
+func SetClusterNameEx(hCluster HCLUSTER, lpszNewClusterName string, lpszReason *string) uint32 {
 	_lpszNewClusterName := win32.UTF16Ptr(lpszNewClusterName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterNameEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszNewClusterName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4140,9 +4986,9 @@ func SetClusterNetworkName(hNetwork HNETWORK, lpszName string) uint32 {
 }
 
 // SetClusterNetworkNameEx calls CLUSAPI!SetClusterNetworkNameEx.
-func SetClusterNetworkNameEx(hNetwork HNETWORK, lpszName string, lpszReason string) uint32 {
+func SetClusterNetworkNameEx(hNetwork HNETWORK, lpszName string, lpszReason *string) uint32 {
 	_lpszName := win32.UTF16Ptr(lpszName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterNetworkNameEx.Addr(), uintptr(hNetwork), uintptr(unsafe.Pointer(_lpszName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4162,16 +5008,16 @@ func SetClusterNetworkPriorityOrder(hCluster HCLUSTER, NetworkList []HNETWORK) u
 // SetClusterQuorumResource calls CLUSAPI!SetClusterQuorumResource.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-setclusterquorumresource
 // Minimum OS: windowsserver2008.
-func SetClusterQuorumResource(hResource HRESOURCE, lpszDeviceName string, dwMaxQuoLogSize uint32) uint32 {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+func SetClusterQuorumResource(hResource HRESOURCE, lpszDeviceName *string, dwMaxQuoLogSize uint32) uint32 {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
 	r1, _, _ := syscall.SyscallN(procSetClusterQuorumResource.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(dwMaxQuoLogSize))
 	return uint32(r1)
 }
 
 // SetClusterQuorumResourceEx calls CLUSAPI!SetClusterQuorumResourceEx.
-func SetClusterQuorumResourceEx(hResource HRESOURCE, lpszDeviceName string, dwMaxQuorumLogSize uint32, lpszReason string) uint32 {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+func SetClusterQuorumResourceEx(hResource HRESOURCE, lpszDeviceName *string, dwMaxQuorumLogSize uint32, lpszReason *string) uint32 {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterQuorumResourceEx.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(dwMaxQuorumLogSize), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4195,9 +5041,9 @@ func SetClusterResourceName(hResource HRESOURCE, lpszResourceName string) uint32
 }
 
 // SetClusterResourceNameEx calls CLUSAPI!SetClusterResourceNameEx.
-func SetClusterResourceNameEx(hResource HRESOURCE, lpszResourceName string, lpszReason string) uint32 {
+func SetClusterResourceNameEx(hResource HRESOURCE, lpszResourceName string, lpszReason *string) uint32 {
 	_lpszResourceName := win32.UTF16Ptr(lpszResourceName)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetClusterResourceNameEx.Addr(), uintptr(hResource), uintptr(unsafe.Pointer(_lpszResourceName)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
@@ -4222,9 +5068,9 @@ func SetGroupDependencyExpression(hGroup HGROUP, lpszDependencyExpression string
 }
 
 // SetGroupDependencyExpressionEx calls CLUSAPI!SetGroupDependencyExpressionEx.
-func SetGroupDependencyExpressionEx(hGroup HGROUP, lpszDependencyExpression string, lpszReason string) uint32 {
+func SetGroupDependencyExpressionEx(hGroup HGROUP, lpszDependencyExpression string, lpszReason *string) uint32 {
 	_lpszDependencyExpression := win32.UTF16Ptr(lpszDependencyExpression)
-	_lpszReason := win32.UTF16Ptr(lpszReason)
+	_lpszReason := win32.UTF16PtrOrNil(lpszReason)
 	r1, _, _ := syscall.SyscallN(procSetGroupDependencyExpressionEx.Addr(), uintptr(hGroup), uintptr(unsafe.Pointer(_lpszDependencyExpression)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }

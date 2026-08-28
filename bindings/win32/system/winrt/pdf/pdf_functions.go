@@ -20,6 +20,16 @@ var (
 	procPdfCreateRenderer = modWindows_Data_Pdf.NewProc("PdfCreateRenderer")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	PdfCreateRenderer *win32.Proc
+}{
+	PdfCreateRenderer: procPdfCreateRenderer,
+}
+
 // PdfCreateRenderer calls Windows.Data.Pdf!PdfCreateRenderer.
 // https://learn.microsoft.com/windows/win32/api/windows.data.pdf.interop/nf-windows-data-pdf-interop-pdfcreaterenderer
 func PdfCreateRenderer(pDevice *graphicsdxgi.IDXGIDevice, ppRenderer **IPdfRendererNative) error {

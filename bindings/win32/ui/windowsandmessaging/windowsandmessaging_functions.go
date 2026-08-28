@@ -445,6 +445,862 @@ var (
 	procWvsprintfA                                     = modUSER32.NewProc("wvsprintfA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AdjustWindowRect                               *win32.Proc
+	AdjustWindowRectEx                             *win32.Proc
+	AllowSetForegroundWindow                       *win32.Proc
+	AnimateWindow                                  *win32.Proc
+	AnyPopup                                       *win32.Proc
+	AppendMenu                                     *win32.Proc
+	AppendMenuA                                    *win32.Proc
+	ApplyWindowAction                              *win32.Proc
+	ArrangeIconicWindows                           *win32.Proc
+	BeginDeferWindowPos                            *win32.Proc
+	BringWindowToTop                               *win32.Proc
+	CalculatePopupWindowPosition                   *win32.Proc
+	CallMsgFilter                                  *win32.Proc
+	CallMsgFilterA                                 *win32.Proc
+	CallNextHookEx                                 *win32.Proc
+	CallWindowProc                                 *win32.Proc
+	CallWindowProcA                                *win32.Proc
+	CancelShutdown                                 *win32.Proc
+	CascadeWindows                                 *win32.Proc
+	ChangeMenu                                     *win32.Proc
+	ChangeMenuA                                    *win32.Proc
+	ChangeWindowMessageFilter                      *win32.Proc
+	ChangeWindowMessageFilterEx                    *win32.Proc
+	CharLower                                      *win32.Proc
+	CharLowerA                                     *win32.Proc
+	CharLowerBuff                                  *win32.Proc
+	CharLowerBuffA                                 *win32.Proc
+	CharNext                                       *win32.Proc
+	CharNextA                                      *win32.Proc
+	CharNextExA                                    *win32.Proc
+	CharPrev                                       *win32.Proc
+	CharPrevA                                      *win32.Proc
+	CharPrevExA                                    *win32.Proc
+	CharToOem                                      *win32.Proc
+	CharToOemA                                     *win32.Proc
+	CharToOemBuff                                  *win32.Proc
+	CharToOemBuffA                                 *win32.Proc
+	CharUpper                                      *win32.Proc
+	CharUpperA                                     *win32.Proc
+	CharUpperBuff                                  *win32.Proc
+	CharUpperBuffA                                 *win32.Proc
+	CheckMenuItem                                  *win32.Proc
+	CheckMenuRadioItem                             *win32.Proc
+	ChildWindowFromPoint                           *win32.Proc
+	ChildWindowFromPointEx                         *win32.Proc
+	ClipCursor                                     *win32.Proc
+	CloseWindow                                    *win32.Proc
+	ConvertPrimaryPointerToMouseDrag               *win32.Proc
+	ConvertToInterceptWindow                       *win32.Proc
+	CopyAcceleratorTable                           *win32.Proc
+	CopyAcceleratorTableA                          *win32.Proc
+	CopyIcon                                       *win32.Proc
+	CopyImage                                      *win32.Proc
+	CreateAcceleratorTable                         *win32.Proc
+	CreateAcceleratorTableA                        *win32.Proc
+	CreateCaret                                    *win32.Proc
+	CreateCursor                                   *win32.Proc
+	CreateDialogIndirectParam                      *win32.Proc
+	CreateDialogIndirectParamA                     *win32.Proc
+	CreateDialogParam                              *win32.Proc
+	CreateDialogParamA                             *win32.Proc
+	CreateIcon                                     *win32.Proc
+	CreateIconFromResource                         *win32.Proc
+	CreateIconFromResourceEx                       *win32.Proc
+	CreateIconIndirect                             *win32.Proc
+	CreateMDIWindow                                *win32.Proc
+	CreateMDIWindowA                               *win32.Proc
+	CreateMenu                                     *win32.Proc
+	CreatePopupMenu                                *win32.Proc
+	CreateResourceIndexer                          *win32.Proc
+	CreateWindowEx                                 *win32.Proc
+	CreateWindowExA                                *win32.Proc
+	DefDlgProc                                     *win32.Proc
+	DefDlgProcA                                    *win32.Proc
+	DefFrameProc                                   *win32.Proc
+	DefFrameProcA                                  *win32.Proc
+	DefMDIChildProc                                *win32.Proc
+	DefMDIChildProcA                               *win32.Proc
+	DefWindowProc                                  *win32.Proc
+	DefWindowProcA                                 *win32.Proc
+	DeferWindowPos                                 *win32.Proc
+	DeleteMenu                                     *win32.Proc
+	DeregisterShellHookWindow                      *win32.Proc
+	DestroyAcceleratorTable                        *win32.Proc
+	DestroyCaret                                   *win32.Proc
+	DestroyCursor                                  *win32.Proc
+	DestroyIcon                                    *win32.Proc
+	DestroyIndexedResults                          *win32.Proc
+	DestroyMenu                                    *win32.Proc
+	DestroyResourceIndexer                         *win32.Proc
+	DestroyWindow                                  *win32.Proc
+	DialogBoxIndirectParam                         *win32.Proc
+	DialogBoxIndirectParamA                        *win32.Proc
+	DialogBoxParam                                 *win32.Proc
+	DialogBoxParamA                                *win32.Proc
+	DisableProcessWindowsGhosting                  *win32.Proc
+	DispatchMessage                                *win32.Proc
+	DispatchMessageA                               *win32.Proc
+	DragObject                                     *win32.Proc
+	DrawIcon                                       *win32.Proc
+	DrawIconEx                                     *win32.Proc
+	DrawMenuBar                                    *win32.Proc
+	EnableMenuItem                                 *win32.Proc
+	EndDeferWindowPos                              *win32.Proc
+	EndDialog                                      *win32.Proc
+	EndMenu                                        *win32.Proc
+	EnterMoveSizeLoop                              *win32.Proc
+	EnumChildWindows                               *win32.Proc
+	EnumProps                                      *win32.Proc
+	EnumPropsA                                     *win32.Proc
+	EnumPropsEx                                    *win32.Proc
+	EnumPropsExA                                   *win32.Proc
+	EnumThreadWindows                              *win32.Proc
+	EnumWindows                                    *win32.Proc
+	FindWindow                                     *win32.Proc
+	FindWindowA                                    *win32.Proc
+	FindWindowEx                                   *win32.Proc
+	FindWindowExA                                  *win32.Proc
+	FlashWindow                                    *win32.Proc
+	FlashWindowEx                                  *win32.Proc
+	GetAltTabInfo                                  *win32.Proc
+	GetAltTabInfoA                                 *win32.Proc
+	GetAncestor                                    *win32.Proc
+	GetCaretBlinkTime                              *win32.Proc
+	GetCaretPos                                    *win32.Proc
+	GetClassInfo                                   *win32.Proc
+	GetClassInfoA                                  *win32.Proc
+	GetClassInfoEx                                 *win32.Proc
+	GetClassInfoExA                                *win32.Proc
+	GetClassLong                                   *win32.Proc
+	GetClassLongA                                  *win32.Proc
+	GetClassLongPtr                                *win32.Proc
+	GetClassLongPtrA                               *win32.Proc
+	GetClassName                                   *win32.Proc
+	GetClassNameA                                  *win32.Proc
+	GetClassWord                                   *win32.Proc
+	GetClientRect                                  *win32.Proc
+	GetClipCursor                                  *win32.Proc
+	GetCurrentMonitorTopologyId                    *win32.Proc
+	GetCursor                                      *win32.Proc
+	GetCursorInfo                                  *win32.Proc
+	GetCursorPos                                   *win32.Proc
+	GetDesktopWindow                               *win32.Proc
+	GetDialogBaseUnits                             *win32.Proc
+	GetDlgCtrlID                                   *win32.Proc
+	GetDlgItem                                     *win32.Proc
+	GetDlgItemInt                                  *win32.Proc
+	GetDlgItemText                                 *win32.Proc
+	GetDlgItemTextA                                *win32.Proc
+	GetForegroundWindow                            *win32.Proc
+	GetGUIThreadInfo                               *win32.Proc
+	GetIconInfo                                    *win32.Proc
+	GetIconInfoEx                                  *win32.Proc
+	GetIconInfoExA                                 *win32.Proc
+	GetInputState                                  *win32.Proc
+	GetLastActivePopup                             *win32.Proc
+	GetLayeredWindowAttributes                     *win32.Proc
+	GetMenu                                        *win32.Proc
+	GetMenuBarInfo                                 *win32.Proc
+	GetMenuCheckMarkDimensions                     *win32.Proc
+	GetMenuDefaultItem                             *win32.Proc
+	GetMenuInfo                                    *win32.Proc
+	GetMenuItemCount                               *win32.Proc
+	GetMenuItemID                                  *win32.Proc
+	GetMenuItemInfo                                *win32.Proc
+	GetMenuItemInfoA                               *win32.Proc
+	GetMenuItemRect                                *win32.Proc
+	GetMenuState                                   *win32.Proc
+	GetMenuString                                  *win32.Proc
+	GetMenuStringA                                 *win32.Proc
+	GetMessage                                     *win32.Proc
+	GetMessageA                                    *win32.Proc
+	GetMessageExtraInfo                            *win32.Proc
+	GetMessagePos                                  *win32.Proc
+	GetMessageTime                                 *win32.Proc
+	GetNextDlgGroupItem                            *win32.Proc
+	GetNextDlgTabItem                              *win32.Proc
+	GetParent                                      *win32.Proc
+	GetPhysicalCursorPos                           *win32.Proc
+	GetProcessDefaultLayout                        *win32.Proc
+	GetProp                                        *win32.Proc
+	GetPropA                                       *win32.Proc
+	GetQueueStatus                                 *win32.Proc
+	GetScrollBarInfo                               *win32.Proc
+	GetScrollInfo                                  *win32.Proc
+	GetScrollPos                                   *win32.Proc
+	GetScrollRange                                 *win32.Proc
+	GetShellWindow                                 *win32.Proc
+	GetSubMenu                                     *win32.Proc
+	GetSystemMenu                                  *win32.Proc
+	GetSystemMetrics                               *win32.Proc
+	GetTitleBarInfo                                *win32.Proc
+	GetTopWindow                                   *win32.Proc
+	GetWindow                                      *win32.Proc
+	GetWindowDisplayAffinity                       *win32.Proc
+	GetWindowInfo                                  *win32.Proc
+	GetWindowLong                                  *win32.Proc
+	GetWindowLongA                                 *win32.Proc
+	GetWindowLongPtr                               *win32.Proc
+	GetWindowLongPtrA                              *win32.Proc
+	GetWindowModuleFileName                        *win32.Proc
+	GetWindowModuleFileNameA                       *win32.Proc
+	GetWindowPlacement                             *win32.Proc
+	GetWindowRect                                  *win32.Proc
+	GetWindowText                                  *win32.Proc
+	GetWindowTextA                                 *win32.Proc
+	GetWindowTextLength                            *win32.Proc
+	GetWindowTextLengthA                           *win32.Proc
+	GetWindowThreadProcessId                       *win32.Proc
+	GetWindowWord                                  *win32.Proc
+	HideCaret                                      *win32.Proc
+	HiliteMenuItem                                 *win32.Proc
+	InSendMessage                                  *win32.Proc
+	InSendMessageEx                                *win32.Proc
+	IndexFilePath                                  *win32.Proc
+	InheritWindowMonitor                           *win32.Proc
+	InsertMenu                                     *win32.Proc
+	InsertMenuA                                    *win32.Proc
+	InsertMenuItem                                 *win32.Proc
+	InsertMenuItemA                                *win32.Proc
+	InternalGetWindowText                          *win32.Proc
+	IsCharAlpha                                    *win32.Proc
+	IsCharAlphaA                                   *win32.Proc
+	IsCharAlphaNumeric                             *win32.Proc
+	IsCharAlphaNumericA                            *win32.Proc
+	IsCharLower                                    *win32.Proc
+	IsCharLowerA                                   *win32.Proc
+	IsCharUpper                                    *win32.Proc
+	IsCharUpperA                                   *win32.Proc
+	IsChild                                        *win32.Proc
+	IsDialogMessage                                *win32.Proc
+	IsDialogMessageA                               *win32.Proc
+	IsGUIThread                                    *win32.Proc
+	IsHungAppWindow                                *win32.Proc
+	IsIconic                                       *win32.Proc
+	IsInterceptWindow                              *win32.Proc
+	IsMenu                                         *win32.Proc
+	IsProcessDPIAware                              *win32.Proc
+	IsWindow                                       *win32.Proc
+	IsWindowArranged                               *win32.Proc
+	IsWindowUnicode                                *win32.Proc
+	IsWindowVisible                                *win32.Proc
+	IsWow64Message                                 *win32.Proc
+	IsZoomed                                       *win32.Proc
+	KillTimer                                      *win32.Proc
+	LoadAccelerators                               *win32.Proc
+	LoadAcceleratorsA                              *win32.Proc
+	LoadCursor                                     *win32.Proc
+	LoadCursorA                                    *win32.Proc
+	LoadCursorFromFile                             *win32.Proc
+	LoadCursorFromFileA                            *win32.Proc
+	LoadIcon                                       *win32.Proc
+	LoadIconA                                      *win32.Proc
+	LoadImage                                      *win32.Proc
+	LoadImageA                                     *win32.Proc
+	LoadMenu                                       *win32.Proc
+	LoadMenuA                                      *win32.Proc
+	LoadMenuIndirect                               *win32.Proc
+	LoadMenuIndirectA                              *win32.Proc
+	LoadString                                     *win32.Proc
+	LoadStringA                                    *win32.Proc
+	LockSetForegroundWindow                        *win32.Proc
+	LogicalToPhysicalPoint                         *win32.Proc
+	LookupIconIdFromDirectory                      *win32.Proc
+	LookupIconIdFromDirectoryEx                    *win32.Proc
+	MapDialogRect                                  *win32.Proc
+	MenuItemFromPoint                              *win32.Proc
+	MessageBox                                     *win32.Proc
+	MessageBoxA                                    *win32.Proc
+	MessageBoxEx                                   *win32.Proc
+	MessageBoxExA                                  *win32.Proc
+	MessageBoxIndirect                             *win32.Proc
+	MessageBoxIndirectA                            *win32.Proc
+	ModifyMenu                                     *win32.Proc
+	ModifyMenuA                                    *win32.Proc
+	MoveWindow                                     *win32.Proc
+	MrmCreateConfig                                *win32.Proc
+	MrmCreateConfigInMemory                        *win32.Proc
+	MrmCreateResourceFile                          *win32.Proc
+	MrmCreateResourceFileInMemory                  *win32.Proc
+	MrmCreateResourceFileWithChecksum              *win32.Proc
+	MrmCreateResourceIndexer                       *win32.Proc
+	MrmCreateResourceIndexerFromPreviousPriData    *win32.Proc
+	MrmCreateResourceIndexerFromPreviousPriFile    *win32.Proc
+	MrmCreateResourceIndexerFromPreviousSchemaData *win32.Proc
+	MrmCreateResourceIndexerFromPreviousSchemaFile *win32.Proc
+	MrmCreateResourceIndexerWithFlags              *win32.Proc
+	MrmDestroyIndexerAndMessages                   *win32.Proc
+	MrmDumpPriDataInMemory                         *win32.Proc
+	MrmDumpPriFile                                 *win32.Proc
+	MrmDumpPriFileInMemory                         *win32.Proc
+	MrmFreeMemory                                  *win32.Proc
+	MrmGetPriFileContentChecksum                   *win32.Proc
+	MrmIndexEmbeddedData                           *win32.Proc
+	MrmIndexFile                                   *win32.Proc
+	MrmIndexFileAutoQualifiers                     *win32.Proc
+	MrmIndexResourceContainerAutoQualifiers        *win32.Proc
+	MrmIndexString                                 *win32.Proc
+	MrmPeekResourceIndexerMessages                 *win32.Proc
+	MsgWaitForMultipleObjects                      *win32.Proc
+	MsgWaitForMultipleObjectsEx                    *win32.Proc
+	OemToChar                                      *win32.Proc
+	OemToCharA                                     *win32.Proc
+	OemToCharBuff                                  *win32.Proc
+	OemToCharBuffA                                 *win32.Proc
+	OpenIcon                                       *win32.Proc
+	PeekMessage                                    *win32.Proc
+	PeekMessageA                                   *win32.Proc
+	PhysicalToLogicalPoint                         *win32.Proc
+	PostMessage                                    *win32.Proc
+	PostMessageA                                   *win32.Proc
+	PostQuitMessage                                *win32.Proc
+	PostThreadMessage                              *win32.Proc
+	PostThreadMessageA                             *win32.Proc
+	PrivateExtractIcons                            *win32.Proc
+	PrivateExtractIconsA                           *win32.Proc
+	RealChildWindowFromPoint                       *win32.Proc
+	RealGetWindowClass                             *win32.Proc
+	RealGetWindowClassA                            *win32.Proc
+	RegisterClass                                  *win32.Proc
+	RegisterClassA                                 *win32.Proc
+	RegisterClassEx                                *win32.Proc
+	RegisterClassExA                               *win32.Proc
+	RegisterCloakedNotification                    *win32.Proc
+	RegisterDeviceNotification                     *win32.Proc
+	RegisterDeviceNotificationA                    *win32.Proc
+	RegisterForTooltipDismissNotification          *win32.Proc
+	RegisterShellHookWindow                        *win32.Proc
+	RegisterWindowMessage                          *win32.Proc
+	RegisterWindowMessageA                         *win32.Proc
+	RemoveMenu                                     *win32.Proc
+	RemoveProp                                     *win32.Proc
+	RemovePropA                                    *win32.Proc
+	ReplyMessage                                   *win32.Proc
+	ScrollDC                                       *win32.Proc
+	ScrollWindow                                   *win32.Proc
+	ScrollWindowEx                                 *win32.Proc
+	SendDlgItemMessage                             *win32.Proc
+	SendDlgItemMessageA                            *win32.Proc
+	SendMessage                                    *win32.Proc
+	SendMessageA                                   *win32.Proc
+	SendMessageCallback                            *win32.Proc
+	SendMessageCallbackA                           *win32.Proc
+	SendMessageTimeout                             *win32.Proc
+	SendMessageTimeoutA                            *win32.Proc
+	SendNotifyMessage                              *win32.Proc
+	SendNotifyMessageA                             *win32.Proc
+	SetAdditionalForegroundBoostProcesses          *win32.Proc
+	SetCaretBlinkTime                              *win32.Proc
+	SetCaretPos                                    *win32.Proc
+	SetClassLong                                   *win32.Proc
+	SetClassLongA                                  *win32.Proc
+	SetClassLongPtr                                *win32.Proc
+	SetClassLongPtrA                               *win32.Proc
+	SetClassWord                                   *win32.Proc
+	SetCoalescableTimer                            *win32.Proc
+	SetCursor                                      *win32.Proc
+	SetCursorPos                                   *win32.Proc
+	SetDebugErrorLevel                             *win32.Proc
+	SetDlgItemInt                                  *win32.Proc
+	SetDlgItemText                                 *win32.Proc
+	SetDlgItemTextA                                *win32.Proc
+	SetForegroundWindow                            *win32.Proc
+	SetLayeredWindowAttributes                     *win32.Proc
+	SetMenu                                        *win32.Proc
+	SetMenuDefaultItem                             *win32.Proc
+	SetMenuInfo                                    *win32.Proc
+	SetMenuItemBitmaps                             *win32.Proc
+	SetMenuItemInfo                                *win32.Proc
+	SetMenuItemInfoA                               *win32.Proc
+	SetMessageExtraInfo                            *win32.Proc
+	SetMessageQueue                                *win32.Proc
+	SetParent                                      *win32.Proc
+	SetPhysicalCursorPos                           *win32.Proc
+	SetProcessDPIAware                             *win32.Proc
+	SetProcessDefaultLayout                        *win32.Proc
+	SetProp                                        *win32.Proc
+	SetPropA                                       *win32.Proc
+	SetSystemCursor                                *win32.Proc
+	SetTimer                                       *win32.Proc
+	SetWindowDisplayAffinity                       *win32.Proc
+	SetWindowLong                                  *win32.Proc
+	SetWindowLongA                                 *win32.Proc
+	SetWindowLongPtr                               *win32.Proc
+	SetWindowLongPtrA                              *win32.Proc
+	SetWindowPlacement                             *win32.Proc
+	SetWindowPos                                   *win32.Proc
+	SetWindowText                                  *win32.Proc
+	SetWindowTextA                                 *win32.Proc
+	SetWindowWord                                  *win32.Proc
+	SetWindowsHook                                 *win32.Proc
+	SetWindowsHookA                                *win32.Proc
+	SetWindowsHookEx                               *win32.Proc
+	SetWindowsHookExA                              *win32.Proc
+	ShowCaret                                      *win32.Proc
+	ShowCursor                                     *win32.Proc
+	ShowOwnedPopups                                *win32.Proc
+	ShowWindow                                     *win32.Proc
+	ShowWindowAsync                                *win32.Proc
+	SoundSentry                                    *win32.Proc
+	SwitchToThisWindow                             *win32.Proc
+	SystemParametersInfo                           *win32.Proc
+	SystemParametersInfoA                          *win32.Proc
+	TileWindows                                    *win32.Proc
+	TrackPopupMenu                                 *win32.Proc
+	TrackPopupMenuEx                               *win32.Proc
+	TranslateAccelerator                           *win32.Proc
+	TranslateAcceleratorA                          *win32.Proc
+	TranslateMDISysAccel                           *win32.Proc
+	TranslateMessage                               *win32.Proc
+	UnhookWindowsHook                              *win32.Proc
+	UnhookWindowsHookEx                            *win32.Proc
+	UnregisterClass                                *win32.Proc
+	UnregisterClassA                               *win32.Proc
+	UnregisterDeviceNotification                   *win32.Proc
+	UpdateLayeredWindow                            *win32.Proc
+	UpdateLayeredWindowIndirect                    *win32.Proc
+	WaitMessage                                    *win32.Proc
+	WindowFromPhysicalPoint                        *win32.Proc
+	WindowFromPoint                                *win32.Proc
+	Wsprintf                                       *win32.Proc
+	WsprintfA                                      *win32.Proc
+	Wvsprintf                                      *win32.Proc
+	WvsprintfA                                     *win32.Proc
+}{
+	AdjustWindowRect:                  procAdjustWindowRect,
+	AdjustWindowRectEx:                procAdjustWindowRectEx,
+	AllowSetForegroundWindow:          procAllowSetForegroundWindow,
+	AnimateWindow:                     procAnimateWindow,
+	AnyPopup:                          procAnyPopup,
+	AppendMenu:                        procAppendMenu,
+	AppendMenuA:                       procAppendMenuA,
+	ApplyWindowAction:                 procApplyWindowAction,
+	ArrangeIconicWindows:              procArrangeIconicWindows,
+	BeginDeferWindowPos:               procBeginDeferWindowPos,
+	BringWindowToTop:                  procBringWindowToTop,
+	CalculatePopupWindowPosition:      procCalculatePopupWindowPosition,
+	CallMsgFilter:                     procCallMsgFilter,
+	CallMsgFilterA:                    procCallMsgFilterA,
+	CallNextHookEx:                    procCallNextHookEx,
+	CallWindowProc:                    procCallWindowProc,
+	CallWindowProcA:                   procCallWindowProcA,
+	CancelShutdown:                    procCancelShutdown,
+	CascadeWindows:                    procCascadeWindows,
+	ChangeMenu:                        procChangeMenu,
+	ChangeMenuA:                       procChangeMenuA,
+	ChangeWindowMessageFilter:         procChangeWindowMessageFilter,
+	ChangeWindowMessageFilterEx:       procChangeWindowMessageFilterEx,
+	CharLower:                         procCharLower,
+	CharLowerA:                        procCharLowerA,
+	CharLowerBuff:                     procCharLowerBuff,
+	CharLowerBuffA:                    procCharLowerBuffA,
+	CharNext:                          procCharNext,
+	CharNextA:                         procCharNextA,
+	CharNextExA:                       procCharNextExA,
+	CharPrev:                          procCharPrev,
+	CharPrevA:                         procCharPrevA,
+	CharPrevExA:                       procCharPrevExA,
+	CharToOem:                         procCharToOem,
+	CharToOemA:                        procCharToOemA,
+	CharToOemBuff:                     procCharToOemBuff,
+	CharToOemBuffA:                    procCharToOemBuffA,
+	CharUpper:                         procCharUpper,
+	CharUpperA:                        procCharUpperA,
+	CharUpperBuff:                     procCharUpperBuff,
+	CharUpperBuffA:                    procCharUpperBuffA,
+	CheckMenuItem:                     procCheckMenuItem,
+	CheckMenuRadioItem:                procCheckMenuRadioItem,
+	ChildWindowFromPoint:              procChildWindowFromPoint,
+	ChildWindowFromPointEx:            procChildWindowFromPointEx,
+	ClipCursor:                        procClipCursor,
+	CloseWindow:                       procCloseWindow,
+	ConvertPrimaryPointerToMouseDrag:  procConvertPrimaryPointerToMouseDrag,
+	ConvertToInterceptWindow:          procConvertToInterceptWindow,
+	CopyAcceleratorTable:              procCopyAcceleratorTable,
+	CopyAcceleratorTableA:             procCopyAcceleratorTableA,
+	CopyIcon:                          procCopyIcon,
+	CopyImage:                         procCopyImage,
+	CreateAcceleratorTable:            procCreateAcceleratorTable,
+	CreateAcceleratorTableA:           procCreateAcceleratorTableA,
+	CreateCaret:                       procCreateCaret,
+	CreateCursor:                      procCreateCursor,
+	CreateDialogIndirectParam:         procCreateDialogIndirectParam,
+	CreateDialogIndirectParamA:        procCreateDialogIndirectParamA,
+	CreateDialogParam:                 procCreateDialogParam,
+	CreateDialogParamA:                procCreateDialogParamA,
+	CreateIcon:                        procCreateIcon,
+	CreateIconFromResource:            procCreateIconFromResource,
+	CreateIconFromResourceEx:          procCreateIconFromResourceEx,
+	CreateIconIndirect:                procCreateIconIndirect,
+	CreateMDIWindow:                   procCreateMDIWindow,
+	CreateMDIWindowA:                  procCreateMDIWindowA,
+	CreateMenu:                        procCreateMenu,
+	CreatePopupMenu:                   procCreatePopupMenu,
+	CreateResourceIndexer:             procCreateResourceIndexer,
+	CreateWindowEx:                    procCreateWindowEx,
+	CreateWindowExA:                   procCreateWindowExA,
+	DefDlgProc:                        procDefDlgProc,
+	DefDlgProcA:                       procDefDlgProcA,
+	DefFrameProc:                      procDefFrameProc,
+	DefFrameProcA:                     procDefFrameProcA,
+	DefMDIChildProc:                   procDefMDIChildProc,
+	DefMDIChildProcA:                  procDefMDIChildProcA,
+	DefWindowProc:                     procDefWindowProc,
+	DefWindowProcA:                    procDefWindowProcA,
+	DeferWindowPos:                    procDeferWindowPos,
+	DeleteMenu:                        procDeleteMenu,
+	DeregisterShellHookWindow:         procDeregisterShellHookWindow,
+	DestroyAcceleratorTable:           procDestroyAcceleratorTable,
+	DestroyCaret:                      procDestroyCaret,
+	DestroyCursor:                     procDestroyCursor,
+	DestroyIcon:                       procDestroyIcon,
+	DestroyIndexedResults:             procDestroyIndexedResults,
+	DestroyMenu:                       procDestroyMenu,
+	DestroyResourceIndexer:            procDestroyResourceIndexer,
+	DestroyWindow:                     procDestroyWindow,
+	DialogBoxIndirectParam:            procDialogBoxIndirectParam,
+	DialogBoxIndirectParamA:           procDialogBoxIndirectParamA,
+	DialogBoxParam:                    procDialogBoxParam,
+	DialogBoxParamA:                   procDialogBoxParamA,
+	DisableProcessWindowsGhosting:     procDisableProcessWindowsGhosting,
+	DispatchMessage:                   procDispatchMessage,
+	DispatchMessageA:                  procDispatchMessageA,
+	DragObject:                        procDragObject,
+	DrawIcon:                          procDrawIcon,
+	DrawIconEx:                        procDrawIconEx,
+	DrawMenuBar:                       procDrawMenuBar,
+	EnableMenuItem:                    procEnableMenuItem,
+	EndDeferWindowPos:                 procEndDeferWindowPos,
+	EndDialog:                         procEndDialog,
+	EndMenu:                           procEndMenu,
+	EnterMoveSizeLoop:                 procEnterMoveSizeLoop,
+	EnumChildWindows:                  procEnumChildWindows,
+	EnumProps:                         procEnumProps,
+	EnumPropsA:                        procEnumPropsA,
+	EnumPropsEx:                       procEnumPropsEx,
+	EnumPropsExA:                      procEnumPropsExA,
+	EnumThreadWindows:                 procEnumThreadWindows,
+	EnumWindows:                       procEnumWindows,
+	FindWindow:                        procFindWindow,
+	FindWindowA:                       procFindWindowA,
+	FindWindowEx:                      procFindWindowEx,
+	FindWindowExA:                     procFindWindowExA,
+	FlashWindow:                       procFlashWindow,
+	FlashWindowEx:                     procFlashWindowEx,
+	GetAltTabInfo:                     procGetAltTabInfo,
+	GetAltTabInfoA:                    procGetAltTabInfoA,
+	GetAncestor:                       procGetAncestor,
+	GetCaretBlinkTime:                 procGetCaretBlinkTime,
+	GetCaretPos:                       procGetCaretPos,
+	GetClassInfo:                      procGetClassInfo,
+	GetClassInfoA:                     procGetClassInfoA,
+	GetClassInfoEx:                    procGetClassInfoEx,
+	GetClassInfoExA:                   procGetClassInfoExA,
+	GetClassLong:                      procGetClassLong,
+	GetClassLongA:                     procGetClassLongA,
+	GetClassLongPtr:                   procGetClassLongPtr,
+	GetClassLongPtrA:                  procGetClassLongPtrA,
+	GetClassName:                      procGetClassName,
+	GetClassNameA:                     procGetClassNameA,
+	GetClassWord:                      procGetClassWord,
+	GetClientRect:                     procGetClientRect,
+	GetClipCursor:                     procGetClipCursor,
+	GetCurrentMonitorTopologyId:       procGetCurrentMonitorTopologyId,
+	GetCursor:                         procGetCursor,
+	GetCursorInfo:                     procGetCursorInfo,
+	GetCursorPos:                      procGetCursorPos,
+	GetDesktopWindow:                  procGetDesktopWindow,
+	GetDialogBaseUnits:                procGetDialogBaseUnits,
+	GetDlgCtrlID:                      procGetDlgCtrlID,
+	GetDlgItem:                        procGetDlgItem,
+	GetDlgItemInt:                     procGetDlgItemInt,
+	GetDlgItemText:                    procGetDlgItemText,
+	GetDlgItemTextA:                   procGetDlgItemTextA,
+	GetForegroundWindow:               procGetForegroundWindow,
+	GetGUIThreadInfo:                  procGetGUIThreadInfo,
+	GetIconInfo:                       procGetIconInfo,
+	GetIconInfoEx:                     procGetIconInfoEx,
+	GetIconInfoExA:                    procGetIconInfoExA,
+	GetInputState:                     procGetInputState,
+	GetLastActivePopup:                procGetLastActivePopup,
+	GetLayeredWindowAttributes:        procGetLayeredWindowAttributes,
+	GetMenu:                           procGetMenu,
+	GetMenuBarInfo:                    procGetMenuBarInfo,
+	GetMenuCheckMarkDimensions:        procGetMenuCheckMarkDimensions,
+	GetMenuDefaultItem:                procGetMenuDefaultItem,
+	GetMenuInfo:                       procGetMenuInfo,
+	GetMenuItemCount:                  procGetMenuItemCount,
+	GetMenuItemID:                     procGetMenuItemID,
+	GetMenuItemInfo:                   procGetMenuItemInfo,
+	GetMenuItemInfoA:                  procGetMenuItemInfoA,
+	GetMenuItemRect:                   procGetMenuItemRect,
+	GetMenuState:                      procGetMenuState,
+	GetMenuString:                     procGetMenuString,
+	GetMenuStringA:                    procGetMenuStringA,
+	GetMessage:                        procGetMessage,
+	GetMessageA:                       procGetMessageA,
+	GetMessageExtraInfo:               procGetMessageExtraInfo,
+	GetMessagePos:                     procGetMessagePos,
+	GetMessageTime:                    procGetMessageTime,
+	GetNextDlgGroupItem:               procGetNextDlgGroupItem,
+	GetNextDlgTabItem:                 procGetNextDlgTabItem,
+	GetParent:                         procGetParent,
+	GetPhysicalCursorPos:              procGetPhysicalCursorPos,
+	GetProcessDefaultLayout:           procGetProcessDefaultLayout,
+	GetProp:                           procGetProp,
+	GetPropA:                          procGetPropA,
+	GetQueueStatus:                    procGetQueueStatus,
+	GetScrollBarInfo:                  procGetScrollBarInfo,
+	GetScrollInfo:                     procGetScrollInfo,
+	GetScrollPos:                      procGetScrollPos,
+	GetScrollRange:                    procGetScrollRange,
+	GetShellWindow:                    procGetShellWindow,
+	GetSubMenu:                        procGetSubMenu,
+	GetSystemMenu:                     procGetSystemMenu,
+	GetSystemMetrics:                  procGetSystemMetrics,
+	GetTitleBarInfo:                   procGetTitleBarInfo,
+	GetTopWindow:                      procGetTopWindow,
+	GetWindow:                         procGetWindow,
+	GetWindowDisplayAffinity:          procGetWindowDisplayAffinity,
+	GetWindowInfo:                     procGetWindowInfo,
+	GetWindowLong:                     procGetWindowLong,
+	GetWindowLongA:                    procGetWindowLongA,
+	GetWindowLongPtr:                  procGetWindowLongPtr,
+	GetWindowLongPtrA:                 procGetWindowLongPtrA,
+	GetWindowModuleFileName:           procGetWindowModuleFileName,
+	GetWindowModuleFileNameA:          procGetWindowModuleFileNameA,
+	GetWindowPlacement:                procGetWindowPlacement,
+	GetWindowRect:                     procGetWindowRect,
+	GetWindowText:                     procGetWindowText,
+	GetWindowTextA:                    procGetWindowTextA,
+	GetWindowTextLength:               procGetWindowTextLength,
+	GetWindowTextLengthA:              procGetWindowTextLengthA,
+	GetWindowThreadProcessId:          procGetWindowThreadProcessId,
+	GetWindowWord:                     procGetWindowWord,
+	HideCaret:                         procHideCaret,
+	HiliteMenuItem:                    procHiliteMenuItem,
+	InSendMessage:                     procInSendMessage,
+	InSendMessageEx:                   procInSendMessageEx,
+	IndexFilePath:                     procIndexFilePath,
+	InheritWindowMonitor:              procInheritWindowMonitor,
+	InsertMenu:                        procInsertMenu,
+	InsertMenuA:                       procInsertMenuA,
+	InsertMenuItem:                    procInsertMenuItem,
+	InsertMenuItemA:                   procInsertMenuItemA,
+	InternalGetWindowText:             procInternalGetWindowText,
+	IsCharAlpha:                       procIsCharAlpha,
+	IsCharAlphaA:                      procIsCharAlphaA,
+	IsCharAlphaNumeric:                procIsCharAlphaNumeric,
+	IsCharAlphaNumericA:               procIsCharAlphaNumericA,
+	IsCharLower:                       procIsCharLower,
+	IsCharLowerA:                      procIsCharLowerA,
+	IsCharUpper:                       procIsCharUpper,
+	IsCharUpperA:                      procIsCharUpperA,
+	IsChild:                           procIsChild,
+	IsDialogMessage:                   procIsDialogMessage,
+	IsDialogMessageA:                  procIsDialogMessageA,
+	IsGUIThread:                       procIsGUIThread,
+	IsHungAppWindow:                   procIsHungAppWindow,
+	IsIconic:                          procIsIconic,
+	IsInterceptWindow:                 procIsInterceptWindow,
+	IsMenu:                            procIsMenu,
+	IsProcessDPIAware:                 procIsProcessDPIAware,
+	IsWindow:                          procIsWindow,
+	IsWindowArranged:                  procIsWindowArranged,
+	IsWindowUnicode:                   procIsWindowUnicode,
+	IsWindowVisible:                   procIsWindowVisible,
+	IsWow64Message:                    procIsWow64Message,
+	IsZoomed:                          procIsZoomed,
+	KillTimer:                         procKillTimer,
+	LoadAccelerators:                  procLoadAccelerators,
+	LoadAcceleratorsA:                 procLoadAcceleratorsA,
+	LoadCursor:                        procLoadCursor,
+	LoadCursorA:                       procLoadCursorA,
+	LoadCursorFromFile:                procLoadCursorFromFile,
+	LoadCursorFromFileA:               procLoadCursorFromFileA,
+	LoadIcon:                          procLoadIcon,
+	LoadIconA:                         procLoadIconA,
+	LoadImage:                         procLoadImage,
+	LoadImageA:                        procLoadImageA,
+	LoadMenu:                          procLoadMenu,
+	LoadMenuA:                         procLoadMenuA,
+	LoadMenuIndirect:                  procLoadMenuIndirect,
+	LoadMenuIndirectA:                 procLoadMenuIndirectA,
+	LoadString:                        procLoadString,
+	LoadStringA:                       procLoadStringA,
+	LockSetForegroundWindow:           procLockSetForegroundWindow,
+	LogicalToPhysicalPoint:            procLogicalToPhysicalPoint,
+	LookupIconIdFromDirectory:         procLookupIconIdFromDirectory,
+	LookupIconIdFromDirectoryEx:       procLookupIconIdFromDirectoryEx,
+	MapDialogRect:                     procMapDialogRect,
+	MenuItemFromPoint:                 procMenuItemFromPoint,
+	MessageBox:                        procMessageBox,
+	MessageBoxA:                       procMessageBoxA,
+	MessageBoxEx:                      procMessageBoxEx,
+	MessageBoxExA:                     procMessageBoxExA,
+	MessageBoxIndirect:                procMessageBoxIndirect,
+	MessageBoxIndirectA:               procMessageBoxIndirectA,
+	ModifyMenu:                        procModifyMenu,
+	ModifyMenuA:                       procModifyMenuA,
+	MoveWindow:                        procMoveWindow,
+	MrmCreateConfig:                   procMrmCreateConfig,
+	MrmCreateConfigInMemory:           procMrmCreateConfigInMemory,
+	MrmCreateResourceFile:             procMrmCreateResourceFile,
+	MrmCreateResourceFileInMemory:     procMrmCreateResourceFileInMemory,
+	MrmCreateResourceFileWithChecksum: procMrmCreateResourceFileWithChecksum,
+	MrmCreateResourceIndexer:          procMrmCreateResourceIndexer,
+	MrmCreateResourceIndexerFromPreviousPriData:    procMrmCreateResourceIndexerFromPreviousPriData,
+	MrmCreateResourceIndexerFromPreviousPriFile:    procMrmCreateResourceIndexerFromPreviousPriFile,
+	MrmCreateResourceIndexerFromPreviousSchemaData: procMrmCreateResourceIndexerFromPreviousSchemaData,
+	MrmCreateResourceIndexerFromPreviousSchemaFile: procMrmCreateResourceIndexerFromPreviousSchemaFile,
+	MrmCreateResourceIndexerWithFlags:              procMrmCreateResourceIndexerWithFlags,
+	MrmDestroyIndexerAndMessages:                   procMrmDestroyIndexerAndMessages,
+	MrmDumpPriDataInMemory:                         procMrmDumpPriDataInMemory,
+	MrmDumpPriFile:                                 procMrmDumpPriFile,
+	MrmDumpPriFileInMemory:                         procMrmDumpPriFileInMemory,
+	MrmFreeMemory:                                  procMrmFreeMemory,
+	MrmGetPriFileContentChecksum:                   procMrmGetPriFileContentChecksum,
+	MrmIndexEmbeddedData:                           procMrmIndexEmbeddedData,
+	MrmIndexFile:                                   procMrmIndexFile,
+	MrmIndexFileAutoQualifiers:                     procMrmIndexFileAutoQualifiers,
+	MrmIndexResourceContainerAutoQualifiers:        procMrmIndexResourceContainerAutoQualifiers,
+	MrmIndexString:                                 procMrmIndexString,
+	MrmPeekResourceIndexerMessages:                 procMrmPeekResourceIndexerMessages,
+	MsgWaitForMultipleObjects:                      procMsgWaitForMultipleObjects,
+	MsgWaitForMultipleObjectsEx:                    procMsgWaitForMultipleObjectsEx,
+	OemToChar:                                      procOemToChar,
+	OemToCharA:                                     procOemToCharA,
+	OemToCharBuff:                                  procOemToCharBuff,
+	OemToCharBuffA:                                 procOemToCharBuffA,
+	OpenIcon:                                       procOpenIcon,
+	PeekMessage:                                    procPeekMessage,
+	PeekMessageA:                                   procPeekMessageA,
+	PhysicalToLogicalPoint:                         procPhysicalToLogicalPoint,
+	PostMessage:                                    procPostMessage,
+	PostMessageA:                                   procPostMessageA,
+	PostQuitMessage:                                procPostQuitMessage,
+	PostThreadMessage:                              procPostThreadMessage,
+	PostThreadMessageA:                             procPostThreadMessageA,
+	PrivateExtractIcons:                            procPrivateExtractIcons,
+	PrivateExtractIconsA:                           procPrivateExtractIconsA,
+	RealChildWindowFromPoint:                       procRealChildWindowFromPoint,
+	RealGetWindowClass:                             procRealGetWindowClass,
+	RealGetWindowClassA:                            procRealGetWindowClassA,
+	RegisterClass:                                  procRegisterClass,
+	RegisterClassA:                                 procRegisterClassA,
+	RegisterClassEx:                                procRegisterClassEx,
+	RegisterClassExA:                               procRegisterClassExA,
+	RegisterCloakedNotification:                    procRegisterCloakedNotification,
+	RegisterDeviceNotification:                     procRegisterDeviceNotification,
+	RegisterDeviceNotificationA:                    procRegisterDeviceNotificationA,
+	RegisterForTooltipDismissNotification:          procRegisterForTooltipDismissNotification,
+	RegisterShellHookWindow:                        procRegisterShellHookWindow,
+	RegisterWindowMessage:                          procRegisterWindowMessage,
+	RegisterWindowMessageA:                         procRegisterWindowMessageA,
+	RemoveMenu:                                     procRemoveMenu,
+	RemoveProp:                                     procRemoveProp,
+	RemovePropA:                                    procRemovePropA,
+	ReplyMessage:                                   procReplyMessage,
+	ScrollDC:                                       procScrollDC,
+	ScrollWindow:                                   procScrollWindow,
+	ScrollWindowEx:                                 procScrollWindowEx,
+	SendDlgItemMessage:                             procSendDlgItemMessage,
+	SendDlgItemMessageA:                            procSendDlgItemMessageA,
+	SendMessage:                                    procSendMessage,
+	SendMessageA:                                   procSendMessageA,
+	SendMessageCallback:                            procSendMessageCallback,
+	SendMessageCallbackA:                           procSendMessageCallbackA,
+	SendMessageTimeout:                             procSendMessageTimeout,
+	SendMessageTimeoutA:                            procSendMessageTimeoutA,
+	SendNotifyMessage:                              procSendNotifyMessage,
+	SendNotifyMessageA:                             procSendNotifyMessageA,
+	SetAdditionalForegroundBoostProcesses:          procSetAdditionalForegroundBoostProcesses,
+	SetCaretBlinkTime:                              procSetCaretBlinkTime,
+	SetCaretPos:                                    procSetCaretPos,
+	SetClassLong:                                   procSetClassLong,
+	SetClassLongA:                                  procSetClassLongA,
+	SetClassLongPtr:                                procSetClassLongPtr,
+	SetClassLongPtrA:                               procSetClassLongPtrA,
+	SetClassWord:                                   procSetClassWord,
+	SetCoalescableTimer:                            procSetCoalescableTimer,
+	SetCursor:                                      procSetCursor,
+	SetCursorPos:                                   procSetCursorPos,
+	SetDebugErrorLevel:                             procSetDebugErrorLevel,
+	SetDlgItemInt:                                  procSetDlgItemInt,
+	SetDlgItemText:                                 procSetDlgItemText,
+	SetDlgItemTextA:                                procSetDlgItemTextA,
+	SetForegroundWindow:                            procSetForegroundWindow,
+	SetLayeredWindowAttributes:                     procSetLayeredWindowAttributes,
+	SetMenu:                                        procSetMenu,
+	SetMenuDefaultItem:                             procSetMenuDefaultItem,
+	SetMenuInfo:                                    procSetMenuInfo,
+	SetMenuItemBitmaps:                             procSetMenuItemBitmaps,
+	SetMenuItemInfo:                                procSetMenuItemInfo,
+	SetMenuItemInfoA:                               procSetMenuItemInfoA,
+	SetMessageExtraInfo:                            procSetMessageExtraInfo,
+	SetMessageQueue:                                procSetMessageQueue,
+	SetParent:                                      procSetParent,
+	SetPhysicalCursorPos:                           procSetPhysicalCursorPos,
+	SetProcessDPIAware:                             procSetProcessDPIAware,
+	SetProcessDefaultLayout:                        procSetProcessDefaultLayout,
+	SetProp:                                        procSetProp,
+	SetPropA:                                       procSetPropA,
+	SetSystemCursor:                                procSetSystemCursor,
+	SetTimer:                                       procSetTimer,
+	SetWindowDisplayAffinity:                       procSetWindowDisplayAffinity,
+	SetWindowLong:                                  procSetWindowLong,
+	SetWindowLongA:                                 procSetWindowLongA,
+	SetWindowLongPtr:                               procSetWindowLongPtr,
+	SetWindowLongPtrA:                              procSetWindowLongPtrA,
+	SetWindowPlacement:                             procSetWindowPlacement,
+	SetWindowPos:                                   procSetWindowPos,
+	SetWindowText:                                  procSetWindowText,
+	SetWindowTextA:                                 procSetWindowTextA,
+	SetWindowWord:                                  procSetWindowWord,
+	SetWindowsHook:                                 procSetWindowsHook,
+	SetWindowsHookA:                                procSetWindowsHookA,
+	SetWindowsHookEx:                               procSetWindowsHookEx,
+	SetWindowsHookExA:                              procSetWindowsHookExA,
+	ShowCaret:                                      procShowCaret,
+	ShowCursor:                                     procShowCursor,
+	ShowOwnedPopups:                                procShowOwnedPopups,
+	ShowWindow:                                     procShowWindow,
+	ShowWindowAsync:                                procShowWindowAsync,
+	SoundSentry:                                    procSoundSentry,
+	SwitchToThisWindow:                             procSwitchToThisWindow,
+	SystemParametersInfo:                           procSystemParametersInfo,
+	SystemParametersInfoA:                          procSystemParametersInfoA,
+	TileWindows:                                    procTileWindows,
+	TrackPopupMenu:                                 procTrackPopupMenu,
+	TrackPopupMenuEx:                               procTrackPopupMenuEx,
+	TranslateAccelerator:                           procTranslateAccelerator,
+	TranslateAcceleratorA:                          procTranslateAcceleratorA,
+	TranslateMDISysAccel:                           procTranslateMDISysAccel,
+	TranslateMessage:                               procTranslateMessage,
+	UnhookWindowsHook:                              procUnhookWindowsHook,
+	UnhookWindowsHookEx:                            procUnhookWindowsHookEx,
+	UnregisterClass:                                procUnregisterClass,
+	UnregisterClassA:                               procUnregisterClassA,
+	UnregisterDeviceNotification:                   procUnregisterDeviceNotification,
+	UpdateLayeredWindow:                            procUpdateLayeredWindow,
+	UpdateLayeredWindowIndirect:                    procUpdateLayeredWindowIndirect,
+	WaitMessage:                                    procWaitMessage,
+	WindowFromPhysicalPoint:                        procWindowFromPhysicalPoint,
+	WindowFromPoint:                                procWindowFromPoint,
+	Wsprintf:                                       procWsprintf,
+	WsprintfA:                                      procWsprintfA,
+	Wvsprintf:                                      procWvsprintf,
+	WvsprintfA:                                     procWvsprintfA,
+}
+
 // AdjustWindowRect calls USER32!AdjustWindowRect.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-adjustwindowrect
 // Minimum OS: windows5.0.
@@ -502,8 +1358,8 @@ func AnyPopup() bool {
 // AppendMenu calls USER32!AppendMenuW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-appendmenuw
 // Minimum OS: windows5.0.
-func AppendMenu(hMenu HMENU, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem string) error {
-	_lpNewItem := win32.UTF16Ptr(lpNewItem)
+func AppendMenu(hMenu HMENU, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem *string) error {
+	_lpNewItem := win32.UTF16PtrOrNil(lpNewItem)
 	r1, _, e1 := syscall.SyscallN(procAppendMenu.Addr(), uintptr(hMenu), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(_lpNewItem)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -635,8 +1491,8 @@ func CascadeWindows(hwndParent foundation.HWND, wHow CASCADE_WINDOWS_HOW, lpRect
 }
 
 // ChangeMenu calls USER32!ChangeMenuW.
-func ChangeMenu(hMenu HMENU, cmd uint32, lpszNewItem string, cmdInsert uint32, flags uint32) bool {
-	_lpszNewItem := win32.UTF16Ptr(lpszNewItem)
+func ChangeMenu(hMenu HMENU, cmd uint32, lpszNewItem *string, cmdInsert uint32, flags uint32) bool {
+	_lpszNewItem := win32.UTF16PtrOrNil(lpszNewItem)
 	r1, _, _ := syscall.SyscallN(procChangeMenu.Addr(), uintptr(hMenu), uintptr(cmd), uintptr(unsafe.Pointer(_lpszNewItem)), uintptr(cmdInsert), uintptr(flags))
 	return r1 != 0
 }
@@ -1178,9 +2034,9 @@ func CreatePopupMenu() (HMENU, error) {
 // CreateResourceIndexer calls MrmSupport!CreateResourceIndexer.
 // https://learn.microsoft.com/windows/win32/api/resourceindexer/nf-resourceindexer-createresourceindexer
 // Minimum OS: windows10.0.10240.
-func CreateResourceIndexer(projectRoot string, extensionDllPath string, ppResourceIndexer *unsafe.Pointer) error {
+func CreateResourceIndexer(projectRoot string, extensionDllPath *string, ppResourceIndexer *unsafe.Pointer) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_extensionDllPath := win32.UTF16Ptr(extensionDllPath)
+	_extensionDllPath := win32.UTF16PtrOrNil(extensionDllPath)
 	r1, _, _ := syscall.SyscallN(procCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(unsafe.Pointer(_extensionDllPath)), uintptr(unsafe.Pointer(ppResourceIndexer)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1188,9 +2044,9 @@ func CreateResourceIndexer(projectRoot string, extensionDllPath string, ppResour
 // CreateWindowEx calls USER32!CreateWindowExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowexw
 // Minimum OS: windows5.0.
-func CreateWindowEx(dwExStyle WINDOW_EX_STYLE, lpClassName string, lpWindowName string, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hMenu HMENU, hInstance foundation.HINSTANCE, lpParam unsafe.Pointer) (foundation.HWND, error) {
-	_lpClassName := win32.UTF16Ptr(lpClassName)
-	_lpWindowName := win32.UTF16Ptr(lpWindowName)
+func CreateWindowEx(dwExStyle WINDOW_EX_STYLE, lpClassName *string, lpWindowName *string, dwStyle WINDOW_STYLE, X int32, Y int32, nWidth int32, nHeight int32, hWndParent foundation.HWND, hMenu HMENU, hInstance foundation.HINSTANCE, lpParam unsafe.Pointer) (foundation.HWND, error) {
+	_lpClassName := win32.UTF16PtrOrNil(lpClassName)
+	_lpWindowName := win32.UTF16PtrOrNil(lpWindowName)
 	r1, _, e1 := syscall.SyscallN(procCreateWindowEx.Addr(), uintptr(dwExStyle), uintptr(unsafe.Pointer(_lpClassName)), uintptr(unsafe.Pointer(_lpWindowName)), uintptr(dwStyle), uintptr(X), uintptr(Y), uintptr(nWidth), uintptr(nHeight), uintptr(hWndParent), uintptr(hMenu), uintptr(hInstance), uintptr(unsafe.Pointer(lpParam)))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
@@ -1349,8 +2205,8 @@ func DestroyIcon(hIcon HICON) error {
 // DestroyIndexedResults calls MrmSupport!DestroyIndexedResults.
 // https://learn.microsoft.com/windows/win32/api/resourceindexer/nf-resourceindexer-destroyindexedresults
 // Minimum OS: windows10.0.10240.
-func DestroyIndexedResults(resourceUri string, qualifiers []IndexedResourceQualifier) {
-	_resourceUri := win32.UTF16Ptr(resourceUri)
+func DestroyIndexedResults(resourceUri *string, qualifiers []IndexedResourceQualifier) {
+	_resourceUri := win32.UTF16PtrOrNil(resourceUri)
 	var _qualifiers *IndexedResourceQualifier
 	if len(qualifiers) > 0 {
 		_qualifiers = &qualifiers[0]
@@ -1603,9 +2459,9 @@ func EnumWindows(lpEnumFunc WNDENUMPROC, lParam foundation.LPARAM) error {
 // FindWindow calls USER32!FindWindowW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-findwindoww
 // Minimum OS: windows5.0.
-func FindWindow(lpClassName string, lpWindowName string) (foundation.HWND, error) {
-	_lpClassName := win32.UTF16Ptr(lpClassName)
-	_lpWindowName := win32.UTF16Ptr(lpWindowName)
+func FindWindow(lpClassName *string, lpWindowName *string) (foundation.HWND, error) {
+	_lpClassName := win32.UTF16PtrOrNil(lpClassName)
+	_lpWindowName := win32.UTF16PtrOrNil(lpWindowName)
 	r1, _, e1 := syscall.SyscallN(procFindWindow.Addr(), uintptr(unsafe.Pointer(_lpClassName)), uintptr(unsafe.Pointer(_lpWindowName)))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
@@ -1629,9 +2485,9 @@ func FindWindowA(lpClassName foundation.PSTR, lpWindowName foundation.PSTR) (fou
 // FindWindowEx calls USER32!FindWindowExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-findwindowexw
 // Minimum OS: windows5.0.
-func FindWindowEx(hWndParent foundation.HWND, hWndChildAfter foundation.HWND, lpszClass string, lpszWindow string) (foundation.HWND, error) {
-	_lpszClass := win32.UTF16Ptr(lpszClass)
-	_lpszWindow := win32.UTF16Ptr(lpszWindow)
+func FindWindowEx(hWndParent foundation.HWND, hWndChildAfter foundation.HWND, lpszClass *string, lpszWindow *string) (foundation.HWND, error) {
+	_lpszClass := win32.UTF16PtrOrNil(lpszClass)
+	_lpszWindow := win32.UTF16PtrOrNil(lpszWindow)
 	r1, _, e1 := syscall.SyscallN(procFindWindowEx.Addr(), uintptr(hWndParent), uintptr(hWndChildAfter), uintptr(unsafe.Pointer(_lpszClass)), uintptr(unsafe.Pointer(_lpszWindow)))
 	ret := foundation.HWND(r1)
 	if ret == 0 {
@@ -2634,8 +3490,8 @@ func InheritWindowMonitor(hwnd foundation.HWND, hwndInherit foundation.HWND) boo
 // InsertMenu calls USER32!InsertMenuW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-insertmenuw
 // Minimum OS: windows5.0.
-func InsertMenu(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem string) error {
-	_lpNewItem := win32.UTF16Ptr(lpNewItem)
+func InsertMenu(hMenu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem *string) error {
+	_lpNewItem := win32.UTF16PtrOrNil(lpNewItem)
 	r1, _, e1 := syscall.SyscallN(procInsertMenu.Addr(), uintptr(hMenu), uintptr(uPosition), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(_lpNewItem)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3166,9 +4022,9 @@ func MenuItemFromPoint(hWnd foundation.HWND, hMenu HMENU, ptScreen foundation.PO
 // MessageBox calls USER32!MessageBoxW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxw
 // Minimum OS: windows5.0.
-func MessageBox(hWnd foundation.HWND, lpText string, lpCaption string, uType MESSAGEBOX_STYLE) (MESSAGEBOX_RESULT, error) {
-	_lpText := win32.UTF16Ptr(lpText)
-	_lpCaption := win32.UTF16Ptr(lpCaption)
+func MessageBox(hWnd foundation.HWND, lpText *string, lpCaption *string, uType MESSAGEBOX_STYLE) (MESSAGEBOX_RESULT, error) {
+	_lpText := win32.UTF16PtrOrNil(lpText)
+	_lpCaption := win32.UTF16PtrOrNil(lpCaption)
 	r1, _, e1 := syscall.SyscallN(procMessageBox.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpText)), uintptr(unsafe.Pointer(_lpCaption)), uintptr(uType))
 	if e1 != 0 {
 		return MESSAGEBOX_RESULT(r1), e1
@@ -3190,9 +4046,9 @@ func MessageBoxA(hWnd foundation.HWND, lpText foundation.PSTR, lpCaption foundat
 // MessageBoxEx calls USER32!MessageBoxExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-messageboxexw
 // Minimum OS: windows5.0.
-func MessageBoxEx(hWnd foundation.HWND, lpText string, lpCaption string, uType MESSAGEBOX_STYLE, wLanguageId uint16) (MESSAGEBOX_RESULT, error) {
-	_lpText := win32.UTF16Ptr(lpText)
-	_lpCaption := win32.UTF16Ptr(lpCaption)
+func MessageBoxEx(hWnd foundation.HWND, lpText *string, lpCaption *string, uType MESSAGEBOX_STYLE, wLanguageId uint16) (MESSAGEBOX_RESULT, error) {
+	_lpText := win32.UTF16PtrOrNil(lpText)
+	_lpCaption := win32.UTF16PtrOrNil(lpCaption)
 	r1, _, e1 := syscall.SyscallN(procMessageBoxEx.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpText)), uintptr(unsafe.Pointer(_lpCaption)), uintptr(uType), uintptr(wLanguageId))
 	if e1 != 0 {
 		return MESSAGEBOX_RESULT(r1), e1
@@ -3230,8 +4086,8 @@ func MessageBoxIndirectA(lpmbp *MSGBOXPARAMSA) MESSAGEBOX_RESULT {
 // ModifyMenu calls USER32!ModifyMenuW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-modifymenuw
 // Minimum OS: windows5.0.
-func ModifyMenu(hMnu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem string) error {
-	_lpNewItem := win32.UTF16Ptr(lpNewItem)
+func ModifyMenu(hMnu HMENU, uPosition uint32, uFlags MENU_ITEM_FLAGS, uIDNewItem uintptr, lpNewItem *string) error {
+	_lpNewItem := win32.UTF16PtrOrNil(lpNewItem)
 	r1, _, e1 := syscall.SyscallN(procModifyMenu.Addr(), uintptr(hMnu), uintptr(uPosition), uintptr(uFlags), uintptr(uIDNewItem), uintptr(unsafe.Pointer(_lpNewItem)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3264,8 +4120,8 @@ func MoveWindow(hWnd foundation.HWND, X int32, Y int32, nWidth int32, nHeight in
 
 // MrmCreateConfig calls MrmSupport!MrmCreateConfig.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateconfig
-func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers string, outputXmlFile string) error {
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers *string, outputXmlFile string) error {
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	_outputXmlFile := win32.UTF16Ptr(outputXmlFile)
 	r1, _, _ := syscall.SyscallN(procMrmCreateConfig.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_outputXmlFile)))
 	return win32.ErrIfFailed(int32(r1))
@@ -3273,8 +4129,8 @@ func MrmCreateConfig(platformVersion MrmPlatformVersion, defaultQualifiers strin
 
 // MrmCreateConfigInMemory calls MrmSupport!MrmCreateConfigInMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateconfiginmemory
-func MrmCreateConfigInMemory(platformVersion MrmPlatformVersion, defaultQualifiers string, outputXmlData **byte, outputXmlSize *uint32) error {
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+func MrmCreateConfigInMemory(platformVersion MrmPlatformVersion, defaultQualifiers *string, outputXmlData **byte, outputXmlSize *uint32) error {
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmCreateConfigInMemory.Addr(), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3303,19 +4159,19 @@ func MrmCreateResourceFileWithChecksum(indexer MrmResourceIndexerHandle, packagi
 
 // MrmCreateResourceIndexer calls MrmSupport!MrmCreateResourceIndexer.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexer
-func MrmCreateResourceIndexer(packageFamilyName string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, indexer *MrmResourceIndexerHandle) error {
-	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+func MrmCreateResourceIndexer(packageFamilyName *string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, indexer *MrmResourceIndexerHandle) error {
+	_packageFamilyName := win32.UTF16PtrOrNil(packageFamilyName)
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexer.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(indexer)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexerFromPreviousPriData calls MrmSupport!MrmCreateResourceIndexerFromPreviousPriData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviouspridata-
-func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, priData []byte, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, priData []byte, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	var _priData *byte
 	if len(priData) > 0 {
 		_priData = &priData[0]
@@ -3326,9 +4182,9 @@ func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVer
 
 // MrmCreateResourceIndexerFromPreviousPriFile calls MrmSupport!MrmCreateResourceIndexerFromPreviousPriFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousprifile
-func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, priFile string, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, priFile string, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	_priFile := win32.UTF16Ptr(priFile)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriFile.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_priFile)), uintptr(unsafe.Pointer(indexer)))
 	return win32.ErrIfFailed(int32(r1))
@@ -3336,9 +4192,9 @@ func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot string, platformVer
 
 // MrmCreateResourceIndexerFromPreviousSchemaData calls MrmSupport!MrmCreateResourceIndexerFromPreviousSchemaData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousschemadata
-func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, schemaXmlData []byte, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, schemaXmlData []byte, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	var _schemaXmlData *byte
 	if len(schemaXmlData) > 0 {
 		_schemaXmlData = &schemaXmlData[0]
@@ -3349,19 +4205,19 @@ func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platform
 
 // MrmCreateResourceIndexerFromPreviousSchemaFile calls MrmSupport!MrmCreateResourceIndexerFromPreviousSchemaFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousschemafile
-func MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, schemaFile string, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, schemaFile string, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	_schemaFile := win32.UTF16Ptr(schemaFile)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaFile.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_schemaFile)), uintptr(unsafe.Pointer(indexer)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmCreateResourceIndexerWithFlags calls MrmSupport!MrmCreateResourceIndexerWithFlags.
-func MrmCreateResourceIndexerWithFlags(packageFamilyName string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, flags MrmIndexerFlags, indexer *MrmResourceIndexerHandle) error {
-	_packageFamilyName := win32.UTF16Ptr(packageFamilyName)
+func MrmCreateResourceIndexerWithFlags(packageFamilyName *string, projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers *string, flags MrmIndexerFlags, indexer *MrmResourceIndexerHandle) error {
+	_packageFamilyName := win32.UTF16PtrOrNil(packageFamilyName)
 	_projectRoot := win32.UTF16Ptr(projectRoot)
-	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
+	_defaultQualifiers := win32.UTF16PtrOrNil(defaultQualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerWithFlags.Addr(), uintptr(unsafe.Pointer(_packageFamilyName)), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(flags), uintptr(unsafe.Pointer(indexer)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3390,9 +4246,9 @@ func MrmDumpPriDataInMemory(inputPriData []byte, schemaPriData []byte, dumpType 
 
 // MrmDumpPriFile calls MrmSupport!MrmDumpPriFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmdumpprifile
-func MrmDumpPriFile(indexFileName string, schemaPriFile string, dumpType MrmDumpType, outputXmlFile string) error {
+func MrmDumpPriFile(indexFileName string, schemaPriFile *string, dumpType MrmDumpType, outputXmlFile string) error {
 	_indexFileName := win32.UTF16Ptr(indexFileName)
-	_schemaPriFile := win32.UTF16Ptr(schemaPriFile)
+	_schemaPriFile := win32.UTF16PtrOrNil(schemaPriFile)
 	_outputXmlFile := win32.UTF16Ptr(outputXmlFile)
 	r1, _, _ := syscall.SyscallN(procMrmDumpPriFile.Addr(), uintptr(unsafe.Pointer(_indexFileName)), uintptr(unsafe.Pointer(_schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(_outputXmlFile)))
 	return win32.ErrIfFailed(int32(r1))
@@ -3400,9 +4256,9 @@ func MrmDumpPriFile(indexFileName string, schemaPriFile string, dumpType MrmDump
 
 // MrmDumpPriFileInMemory calls MrmSupport!MrmDumpPriFileInMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmdumpprifileinmemory
-func MrmDumpPriFileInMemory(indexFileName string, schemaPriFile string, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) error {
+func MrmDumpPriFileInMemory(indexFileName string, schemaPriFile *string, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) error {
 	_indexFileName := win32.UTF16Ptr(indexFileName)
-	_schemaPriFile := win32.UTF16Ptr(schemaPriFile)
+	_schemaPriFile := win32.UTF16PtrOrNil(schemaPriFile)
 	r1, _, _ := syscall.SyscallN(procMrmDumpPriFileInMemory.Addr(), uintptr(unsafe.Pointer(_indexFileName)), uintptr(unsafe.Pointer(_schemaPriFile)), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3423,31 +4279,31 @@ func MrmGetPriFileContentChecksum(priFile string, checksum *uint32) error {
 
 // MrmIndexEmbeddedData calls MrmSupport!MrmIndexEmbeddedData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmindexembeddeddata
-func MrmIndexEmbeddedData(indexer MrmResourceIndexerHandle, resourceUri string, embeddedData []byte, qualifiers string) error {
+func MrmIndexEmbeddedData(indexer MrmResourceIndexerHandle, resourceUri string, embeddedData []byte, qualifiers *string) error {
 	_resourceUri := win32.UTF16Ptr(resourceUri)
 	var _embeddedData *byte
 	if len(embeddedData) > 0 {
 		_embeddedData = &embeddedData[0]
 	}
-	_qualifiers := win32.UTF16Ptr(qualifiers)
+	_qualifiers := win32.UTF16PtrOrNil(qualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmIndexEmbeddedData.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_embeddedData)), uintptr(len(embeddedData)), uintptr(unsafe.Pointer(_qualifiers)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmIndexFile calls MrmSupport!MrmIndexFile.
 // https://learn.microsoft.com/windows/win32/menurc/mrmindexfile
-func MrmIndexFile(indexer MrmResourceIndexerHandle, resourceUri string, filePath string, qualifiers string) error {
+func MrmIndexFile(indexer MrmResourceIndexerHandle, resourceUri string, filePath string, qualifiers *string) error {
 	_resourceUri := win32.UTF16Ptr(resourceUri)
 	_filePath := win32.UTF16Ptr(filePath)
-	_qualifiers := win32.UTF16Ptr(qualifiers)
+	_qualifiers := win32.UTF16PtrOrNil(qualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmIndexFile.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_filePath)), uintptr(unsafe.Pointer(_qualifiers)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MrmIndexFileAutoQualifiers calls MrmSupport!MrmIndexFileAutoQualifiers.
 // https://learn.microsoft.com/windows/win32/menurc/mrmindexfileautoqualifiers
-func MrmIndexFileAutoQualifiers(indexer MrmResourceIndexerHandle, filePath string) error {
-	_filePath := win32.UTF16Ptr(filePath)
+func MrmIndexFileAutoQualifiers(indexer MrmResourceIndexerHandle, filePath *string) error {
+	_filePath := win32.UTF16PtrOrNil(filePath)
 	r1, _, _ := syscall.SyscallN(procMrmIndexFileAutoQualifiers.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_filePath)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3462,10 +4318,10 @@ func MrmIndexResourceContainerAutoQualifiers(indexer MrmResourceIndexerHandle, c
 
 // MrmIndexString calls MrmSupport!MrmIndexString.
 // https://learn.microsoft.com/windows/win32/menurc/mrmindexstring
-func MrmIndexString(indexer MrmResourceIndexerHandle, resourceUri string, resourceString string, qualifiers string) error {
+func MrmIndexString(indexer MrmResourceIndexerHandle, resourceUri string, resourceString string, qualifiers *string) error {
 	_resourceUri := win32.UTF16Ptr(resourceUri)
 	_resourceString := win32.UTF16Ptr(resourceString)
-	_qualifiers := win32.UTF16Ptr(qualifiers)
+	_qualifiers := win32.UTF16PtrOrNil(qualifiers)
 	r1, _, _ := syscall.SyscallN(procMrmIndexString.Addr(), uintptr(win32.StructArg(indexer)), uintptr(unsafe.Pointer(_resourceUri)), uintptr(unsafe.Pointer(_resourceString)), uintptr(unsafe.Pointer(_qualifiers)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4409,8 +5265,8 @@ func SetWindowPos(hWnd foundation.HWND, hWndInsertAfter foundation.HWND, X int32
 // SetWindowText calls USER32!SetWindowTextW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowtextw
 // Minimum OS: windows5.0.
-func SetWindowText(hWnd foundation.HWND, lpString string) error {
-	_lpString := win32.UTF16Ptr(lpString)
+func SetWindowText(hWnd foundation.HWND, lpString *string) error {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procSetWindowText.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_lpString)))
 	if r1 == 0 {
 		return win32.LastError(e1)

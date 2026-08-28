@@ -4,366 +4,455 @@
 
 package debug
 
-// DIGEST_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte, uint32) foundation.BOOL.
+// DIGEST_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DIGEST_FUNCTION uintptr
 
-// LPCALL_BACK_USER_INTERRUPT_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uint32.
+// LPCALL_BACK_USER_INTERRUPT_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPCALL_BACK_USER_INTERRUPT_ROUTINE uintptr
 
-// LPTOP_LEVEL_EXCEPTION_FILTER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*EXCEPTION_POINTERS) int32.
+// LPTOP_LEVEL_EXCEPTION_FILTER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*EXCEPTION_POINTERS) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPTOP_LEVEL_EXCEPTION_FILTER uintptr
 
-// MINIDUMP_CALLBACK_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *MINIDUMP_CALLBACK_INPUT, *MINIDUMP_CALLBACK_OUTPUT) foundation.BOOL.
+// MINIDUMP_CALLBACK_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *MINIDUMP_CALLBACK_INPUT, *MINIDUMP_CALLBACK_OUTPUT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type MINIDUMP_CALLBACK_ROUTINE uintptr
 
-// PCOGETACTIVATIONSTATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(win32.GUID, uint32, *uint32) foundation.HRESULT.
+// PCOGETACTIVATIONSTATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(win32.GUID, uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PCOGETACTIVATIONSTATE uintptr
 
-// PCOGETCALLSTATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, *uint32) foundation.HRESULT.
+// PCOGETCALLSTATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PCOGETCALLSTATE uintptr
 
-// PDBGHELP_CREATE_USER_DUMP_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *unsafe.Pointer, *uint32, unsafe.Pointer) foundation.BOOL.
+// PDBGHELP_CREATE_USER_DUMP_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *unsafe.Pointer, *uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PDBGHELP_CREATE_USER_DUMP_CALLBACK uintptr
 
-// PENUMDIRTREE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, unsafe.Pointer) foundation.BOOL.
+// PENUMDIRTREE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PENUMDIRTREE_CALLBACK uintptr
 
-// PENUMDIRTREE_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, unsafe.Pointer) foundation.BOOL.
+// PENUMDIRTREE_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PENUMDIRTREE_CALLBACKW uintptr
 
-// PENUMLOADED_MODULES_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// PENUMLOADED_MODULES_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PENUMLOADED_MODULES_CALLBACK uintptr
 
-// PENUMLOADED_MODULES_CALLBACK64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint64, uint32, unsafe.Pointer) foundation.BOOL.
+// PENUMLOADED_MODULES_CALLBACK64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint64, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PENUMLOADED_MODULES_CALLBACK64 uintptr
 
-// PENUMLOADED_MODULES_CALLBACKW64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint64, uint32, unsafe.Pointer) foundation.BOOL.
+// PENUMLOADED_MODULES_CALLBACKW64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint64, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PENUMLOADED_MODULES_CALLBACKW64 uintptr
 
-// PENUMSOURCEFILETOKENSCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr) foundation.BOOL.
+// PENUMSOURCEFILETOKENSCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PENUMSOURCEFILETOKENSCALLBACK uintptr
 
-// PFINDFILEINPATHCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, unsafe.Pointer) foundation.BOOL.
+// PFINDFILEINPATHCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFINDFILEINPATHCALLBACK uintptr
 
-// PFINDFILEINPATHCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, unsafe.Pointer) foundation.BOOL.
+// PFINDFILEINPATHCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFINDFILEINPATHCALLBACKW uintptr
 
-// PFIND_DEBUG_FILE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PSTR, unsafe.Pointer) foundation.BOOL.
+// PFIND_DEBUG_FILE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFIND_DEBUG_FILE_CALLBACK uintptr
 
-// PFIND_DEBUG_FILE_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, unsafe.Pointer) foundation.BOOL.
+// PFIND_DEBUG_FILE_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFIND_DEBUG_FILE_CALLBACKW uintptr
 
-// PFIND_EXE_FILE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PSTR, unsafe.Pointer) foundation.BOOL.
+// PFIND_EXE_FILE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFIND_EXE_FILE_CALLBACK uintptr
 
-// PFIND_EXE_FILE_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, unsafe.Pointer) foundation.BOOL.
+// PFIND_EXE_FILE_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFIND_EXE_FILE_CALLBACKW uintptr
 
-// PFUNCTION_TABLE_ACCESS_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32) unsafe.Pointer.
+// PFUNCTION_TABLE_ACCESS_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFUNCTION_TABLE_ACCESS_ROUTINE uintptr
 
-// PFUNCTION_TABLE_ACCESS_ROUTINE64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint64) unsafe.Pointer.
+// PFUNCTION_TABLE_ACCESS_ROUTINE64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint64) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFUNCTION_TABLE_ACCESS_ROUTINE64 uintptr
 
-// PGET_MODULE_BASE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32) uint32.
+// PGET_MODULE_BASE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PGET_MODULE_BASE_ROUTINE uintptr
 
-// PGET_MODULE_BASE_ROUTINE64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint64) uint64.
+// PGET_MODULE_BASE_ROUTINE64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint64) uintptr (the native return type is
+// uint64; NewCallback requires a uintptr-sized result).
 type PGET_MODULE_BASE_ROUTINE64 uintptr
 
-// PGET_RUNTIME_FUNCTION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer) *IMAGE_RUNTIME_FUNCTION_ENTRY.
+// PGET_RUNTIME_FUNCTION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint64, unsafe.Pointer) uintptr (the native return type is
+// *IMAGE_RUNTIME_FUNCTION_ENTRY; NewCallback requires a uintptr-sized result).
 type PGET_RUNTIME_FUNCTION_CALLBACK uintptr
 
-// PGET_TARGET_ATTRIBUTE_VALUE64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uint64, *uint64) foundation.BOOL.
+// PGET_TARGET_ATTRIBUTE_VALUE64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uint64, *uint64) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PGET_TARGET_ATTRIBUTE_VALUE64 uintptr
 
-// PIMAGEHLP_STATUS_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(IMAGEHLP_STATUS_REASON, foundation.PSTR, foundation.PSTR, uintptr, uintptr) foundation.BOOL.
+// PIMAGEHLP_STATUS_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(IMAGEHLP_STATUS_REASON, foundation.PSTR, foundation.PSTR, uintptr, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PIMAGEHLP_STATUS_ROUTINE uintptr
 
-// PIMAGEHLP_STATUS_ROUTINE32 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(IMAGEHLP_STATUS_REASON, foundation.PSTR, foundation.PSTR, uint32, uintptr) foundation.BOOL.
+// PIMAGEHLP_STATUS_ROUTINE32 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(IMAGEHLP_STATUS_REASON, foundation.PSTR, foundation.PSTR, uint32, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PIMAGEHLP_STATUS_ROUTINE32 uintptr
 
-// PIMAGEHLP_STATUS_ROUTINE64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(IMAGEHLP_STATUS_REASON, foundation.PSTR, foundation.PSTR, uint64, uintptr) foundation.BOOL.
+// PIMAGEHLP_STATUS_ROUTINE64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(IMAGEHLP_STATUS_REASON, foundation.PSTR, foundation.PSTR, uint64, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PIMAGEHLP_STATUS_ROUTINE64 uintptr
 
-// PREAD_PROCESS_MEMORY_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, uint32, *uint32) foundation.BOOL.
+// PREAD_PROCESS_MEMORY_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PREAD_PROCESS_MEMORY_ROUTINE uintptr
 
-// PREAD_PROCESS_MEMORY_ROUTINE64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint64, unsafe.Pointer, uint32, *uint32) foundation.BOOL.
+// PREAD_PROCESS_MEMORY_ROUTINE64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint64, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PREAD_PROCESS_MEMORY_ROUTINE64 uintptr
 
-// PSYMBOLSERVERBYINDEXPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR, foundation.PSTR) foundation.BOOL.
+// PSYMBOLSERVERBYINDEXPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR, foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERBYINDEXPROC uintptr
 
-// PSYMBOLSERVERBYINDEXPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR, foundation.PSTR) foundation.BOOL.
+// PSYMBOLSERVERBYINDEXPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR, foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERBYINDEXPROCA uintptr
 
-// PSYMBOLSERVERBYINDEXPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) foundation.BOOL.
+// PSYMBOLSERVERBYINDEXPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERBYINDEXPROCW uintptr
 
-// PSYMBOLSERVERCALLBACKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, uint64) foundation.BOOL.
+// PSYMBOLSERVERCALLBACKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint64, uint64) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERCALLBACKPROC uintptr
 
-// PSYMBOLSERVERCLOSEPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.BOOL.
+// PSYMBOLSERVERCLOSEPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERCLOSEPROC uintptr
 
-// PSYMBOLSERVERDELTANAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, unsafe.Pointer, uint32, uint32, unsafe.Pointer, uint32, uint32, foundation.PSTR, uintptr) foundation.BOOL.
+// PSYMBOLSERVERDELTANAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, unsafe.Pointer, uint32, uint32, unsafe.Pointer, uint32, uint32, foundation.PSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERDELTANAME uintptr
 
-// PSYMBOLSERVERDELTANAMEW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, unsafe.Pointer, uint32, uint32, unsafe.Pointer, uint32, uint32, foundation.PWSTR, uintptr) foundation.BOOL.
+// PSYMBOLSERVERDELTANAMEW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, unsafe.Pointer, uint32, uint32, unsafe.Pointer, uint32, uint32, foundation.PWSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERDELTANAMEW uintptr
 
-// PSYMBOLSERVERGETINDEXSTRING is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32, foundation.PSTR, uintptr) foundation.BOOL.
+// PSYMBOLSERVERGETINDEXSTRING is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32, foundation.PSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERGETINDEXSTRING uintptr
 
-// PSYMBOLSERVERGETINDEXSTRINGW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32, foundation.PWSTR, uintptr) foundation.BOOL.
+// PSYMBOLSERVERGETINDEXSTRINGW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32, foundation.PWSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERGETINDEXSTRINGW uintptr
 
-// PSYMBOLSERVERGETOPTIONDATAPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *uint64) foundation.BOOL.
+// PSYMBOLSERVERGETOPTIONDATAPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *uint64) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERGETOPTIONDATAPROC uintptr
 
-// PSYMBOLSERVERGETOPTIONSPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uintptr.
+// PSYMBOLSERVERGETOPTIONSPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERGETOPTIONSPROC uintptr
 
-// PSYMBOLSERVERGETSUPPLEMENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR, foundation.PSTR, uintptr) foundation.BOOL.
+// PSYMBOLSERVERGETSUPPLEMENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR, foundation.PSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERGETSUPPLEMENT uintptr
 
-// PSYMBOLSERVERGETSUPPLEMENTW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uintptr) foundation.BOOL.
+// PSYMBOLSERVERGETSUPPLEMENTW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERGETSUPPLEMENTW uintptr
 
-// PSYMBOLSERVERGETVERSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*API_VERSION) foundation.BOOL.
+// PSYMBOLSERVERGETVERSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*API_VERSION) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERGETVERSION uintptr
 
-// PSYMBOLSERVERISSTORE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) foundation.BOOL.
+// PSYMBOLSERVERISSTORE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERISSTORE uintptr
 
-// PSYMBOLSERVERISSTOREW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// PSYMBOLSERVERISSTOREW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERISSTOREW uintptr
 
-// PSYMBOLSERVERMESSAGEPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64, uint64) foundation.BOOL.
+// PSYMBOLSERVERMESSAGEPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint64, uint64) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERMESSAGEPROC uintptr
 
-// PSYMBOLSERVEROPENPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.BOOL.
+// PSYMBOLSERVEROPENPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVEROPENPROC uintptr
 
-// PSYMBOLSERVERPINGPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) foundation.BOOL.
+// PSYMBOLSERVERPINGPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERPINGPROC uintptr
 
-// PSYMBOLSERVERPINGPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) foundation.BOOL.
+// PSYMBOLSERVERPINGPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERPINGPROCA uintptr
 
-// PSYMBOLSERVERPINGPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// PSYMBOLSERVERPINGPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERPINGPROCW uintptr
 
-// PSYMBOLSERVERPINGPROCWEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// PSYMBOLSERVERPINGPROCWEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERPINGPROCWEX uintptr
 
-// PSYMBOLSERVERPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, unsafe.Pointer, uint32, uint32, foundation.PSTR) foundation.BOOL.
+// PSYMBOLSERVERPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, unsafe.Pointer, uint32, uint32, foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERPROC uintptr
 
-// PSYMBOLSERVERPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, unsafe.Pointer, uint32, uint32, foundation.PSTR) foundation.BOOL.
+// PSYMBOLSERVERPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, unsafe.Pointer, uint32, uint32, foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERPROCA uintptr
 
-// PSYMBOLSERVERPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, uint32, uint32, foundation.PWSTR) foundation.BOOL.
+// PSYMBOLSERVERPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, uint32, uint32, foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERPROCW uintptr
 
-// PSYMBOLSERVERSETHTTPAUTHHEADER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// PSYMBOLSERVERSETHTTPAUTHHEADER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERSETHTTPAUTHHEADER uintptr
 
-// PSYMBOLSERVERSETOPTIONSPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64) foundation.BOOL.
+// PSYMBOLSERVERSETOPTIONSPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint64) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERSETOPTIONSPROC uintptr
 
-// PSYMBOLSERVERSETOPTIONSWPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64) foundation.BOOL.
+// PSYMBOLSERVERSETOPTIONSWPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint64) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERSETOPTIONSWPROC uintptr
 
-// PSYMBOLSERVERSTOREFILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, unsafe.Pointer, uint32, uint32, foundation.PSTR, uintptr, uint32) foundation.BOOL.
+// PSYMBOLSERVERSTOREFILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, unsafe.Pointer, uint32, uint32, foundation.PSTR, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERSTOREFILE uintptr
 
-// PSYMBOLSERVERSTOREFILEW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, uint32, uint32, foundation.PWSTR, uintptr, uint32) foundation.BOOL.
+// PSYMBOLSERVERSTOREFILEW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, uint32, uint32, foundation.PWSTR, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERSTOREFILEW uintptr
 
-// PSYMBOLSERVERSTORESUPPLEMENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR, foundation.PSTR, uintptr, uint32) foundation.BOOL.
+// PSYMBOLSERVERSTORESUPPLEMENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR, foundation.PSTR, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERSTORESUPPLEMENT uintptr
 
-// PSYMBOLSERVERSTORESUPPLEMENTW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uintptr, uint32) foundation.BOOL.
+// PSYMBOLSERVERSTORESUPPLEMENTW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERSTORESUPPLEMENTW uintptr
 
-// PSYMBOLSERVERVERSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uint32.
+// PSYMBOLSERVERVERSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERVERSION uintptr
 
-// PSYMBOLSERVERWEXPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, uint32, uint32, foundation.PWSTR, *SYMSRV_EXTENDED_OUTPUT_DATA) foundation.BOOL.
+// PSYMBOLSERVERWEXPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, uint32, uint32, foundation.PWSTR, *SYMSRV_EXTENDED_OUTPUT_DATA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOLSERVERWEXPROC uintptr
 
-// PSYMBOL_FUNCENTRY_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, unsafe.Pointer) unsafe.Pointer.
+// PSYMBOL_FUNCENTRY_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, unsafe.Pointer) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PSYMBOL_FUNCENTRY_CALLBACK uintptr
 
-// PSYMBOL_FUNCENTRY_CALLBACK64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint64, uint64) unsafe.Pointer.
+// PSYMBOL_FUNCENTRY_CALLBACK64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint64, uint64) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PSYMBOL_FUNCENTRY_CALLBACK64 uintptr
 
-// PSYMBOL_REGISTERED_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, unsafe.Pointer) foundation.BOOL.
+// PSYMBOL_REGISTERED_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOL_REGISTERED_CALLBACK uintptr
 
-// PSYMBOL_REGISTERED_CALLBACK64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uint64, uint64) foundation.BOOL.
+// PSYMBOL_REGISTERED_CALLBACK64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uint64, uint64) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYMBOL_REGISTERED_CALLBACK64 uintptr
 
-// PSYM_ENUMERATESYMBOLS_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SYMBOL_INFO, uint32, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMERATESYMBOLS_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SYMBOL_INFO, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMERATESYMBOLS_CALLBACK uintptr
 
-// PSYM_ENUMERATESYMBOLS_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SYMBOL_INFOW, uint32, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMERATESYMBOLS_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SYMBOL_INFOW, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMERATESYMBOLS_CALLBACKW uintptr
 
-// PSYM_ENUMLINES_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SRCCODEINFO, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMLINES_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SRCCODEINFO, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMLINES_CALLBACK uintptr
 
-// PSYM_ENUMLINES_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SRCCODEINFOW, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMLINES_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SRCCODEINFOW, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMLINES_CALLBACKW uintptr
 
-// PSYM_ENUMMODULES_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMMODULES_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMMODULES_CALLBACK uintptr
 
-// PSYM_ENUMMODULES_CALLBACK64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint64, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMMODULES_CALLBACK64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint64, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMMODULES_CALLBACK64 uintptr
 
-// PSYM_ENUMMODULES_CALLBACKW64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint64, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMMODULES_CALLBACKW64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint64, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMMODULES_CALLBACKW64 uintptr
 
-// PSYM_ENUMPROCESSES_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMPROCESSES_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMPROCESSES_CALLBACK uintptr
 
-// PSYM_ENUMSOURCEFILES_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SOURCEFILE, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMSOURCEFILES_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SOURCEFILE, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMSOURCEFILES_CALLBACK uintptr
 
-// PSYM_ENUMSOURCEFILES_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SOURCEFILEW, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMSOURCEFILES_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SOURCEFILEW, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMSOURCEFILES_CALLBACKW uintptr
 
-// PSYM_ENUMSYMBOLS_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMSYMBOLS_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMSYMBOLS_CALLBACK uintptr
 
-// PSYM_ENUMSYMBOLS_CALLBACK64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint64, uint32, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMSYMBOLS_CALLBACK64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint64, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMSYMBOLS_CALLBACK64 uintptr
 
-// PSYM_ENUMSYMBOLS_CALLBACK64W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint64, uint32, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMSYMBOLS_CALLBACK64W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint64, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMSYMBOLS_CALLBACK64W uintptr
 
-// PSYM_ENUMSYMBOLS_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// PSYM_ENUMSYMBOLS_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PSYM_ENUMSYMBOLS_CALLBACKW uintptr
 
-// PTRANSLATE_ADDRESS_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, unsafe.Pointer) uint32.
+// PTRANSLATE_ADDRESS_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PTRANSLATE_ADDRESS_ROUTINE uintptr
 
-// PTRANSLATE_ADDRESS_ROUTINE64 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *ADDRESS64) uint64.
+// PTRANSLATE_ADDRESS_ROUTINE64 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, *ADDRESS64) uintptr (the native return type is
+// uint64; NewCallback requires a uintptr-sized result).
 type PTRANSLATE_ADDRESS_ROUTINE64 uintptr
 
-// PVECTORED_EXCEPTION_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*EXCEPTION_POINTERS) int32.
+// PVECTORED_EXCEPTION_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*EXCEPTION_POINTERS) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PVECTORED_EXCEPTION_HANDLER uintptr
 
-// PWAITCHAINCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, uint32, *uint32, *WAITCHAIN_NODE_INFO, *foundation.BOOL).
+// PWAITCHAINCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, uint32, *uint32, *WAITCHAIN_NODE_INFO, *foundation.BOOL) uintptr.
 type PWAITCHAINCALLBACK uintptr
 
-// SYMADDSOURCESTREAM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint64, foundation.PSTR, *byte, uintptr) foundation.BOOL.
+// SYMADDSOURCESTREAM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint64, foundation.PSTR, *byte, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type SYMADDSOURCESTREAM uintptr
 
-// SYMADDSOURCESTREAMA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint64, foundation.PSTR, *byte, uintptr) foundation.BOOL.
+// SYMADDSOURCESTREAMA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint64, foundation.PSTR, *byte, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type SYMADDSOURCESTREAMA uintptr
 
-// WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *uint32) foundation.NTSTATUS.
+// WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER uintptr
 
-// WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32) foundation.NTSTATUS.
+// WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER uintptr
 
-// WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER uintptr

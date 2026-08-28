@@ -4,10 +4,10 @@
 
 package interactioncontext
 
-// INTERACTION_CONTEXT_OUTPUT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *INTERACTION_CONTEXT_OUTPUT).
+// INTERACTION_CONTEXT_OUTPUT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *INTERACTION_CONTEXT_OUTPUT) uintptr.
 type INTERACTION_CONTEXT_OUTPUT_CALLBACK uintptr
 
-// INTERACTION_CONTEXT_OUTPUT_CALLBACK2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *INTERACTION_CONTEXT_OUTPUT2).
+// INTERACTION_CONTEXT_OUTPUT_CALLBACK2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *INTERACTION_CONTEXT_OUTPUT2) uintptr.
 type INTERACTION_CONTEXT_OUTPUT_CALLBACK2 uintptr

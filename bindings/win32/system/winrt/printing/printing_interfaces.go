@@ -5,6 +5,7 @@
 package printing
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -71,6 +72,14 @@ var IID_IPrintPreviewPageCollection = win32.GUID{Data1: 0x0b31cc62, Data2: 0xd7e
 // Paginate dispatches through IPrintPreviewPageCollection's vtable slot 3.
 func (self *IPrintPreviewPageCollection) Paginate(currentJobPage uint32, printTaskOptions *systemwinrt.IInspectable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(currentJobPage), uintptr(unsafe.Pointer(printTaskOptions)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPrintPreviewPageCollection_MakePage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// MakePage dispatches through IPrintPreviewPageCollection's vtable slot 4.
+func (self *IPrintPreviewPageCollection) MakePage(desiredJobPage uint32, width float32, height float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIPrintPreviewPageCollection_MakePage, nil, uintptr(unsafe.Pointer(self)), uintptr(desiredJobPage), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

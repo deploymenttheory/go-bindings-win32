@@ -4,6 +4,6 @@
 
 package imapi
 
-// MSGCALLRELEASE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *systemaddressbook.IMessage).
+// MSGCALLRELEASE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *systemaddressbook.IMessage) uintptr.
 type MSGCALLRELEASE uintptr

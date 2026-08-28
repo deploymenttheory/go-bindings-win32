@@ -4,6 +4,6 @@
 
 package setupandmigration
 
-// OOBE_COMPLETED_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// OOBE_COMPLETED_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type OOBE_COMPLETED_CALLBACK uintptr

@@ -4,202 +4,220 @@
 
 package rpc
 
-// CS_TAG_GETTING_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int32, *uint32, *uint32, *uint32, *uint32).
+// CS_TAG_GETTING_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int32, *uint32, *uint32, *uint32, *uint32) uintptr.
 type CS_TAG_GETTING_ROUTINE uintptr
 
-// CS_TYPE_FROM_NETCS_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, *byte, uint32, uint32, unsafe.Pointer, *uint32, *uint32).
+// CS_TYPE_FROM_NETCS_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, *byte, uint32, uint32, unsafe.Pointer, *uint32, *uint32) uintptr.
 type CS_TYPE_FROM_NETCS_ROUTINE uintptr
 
-// CS_TYPE_LOCAL_SIZE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32, *IDL_CS_CONVERT, *uint32, *uint32).
+// CS_TYPE_LOCAL_SIZE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32, *IDL_CS_CONVERT, *uint32, *uint32) uintptr.
 type CS_TYPE_LOCAL_SIZE_ROUTINE uintptr
 
-// CS_TYPE_NET_SIZE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32, *IDL_CS_CONVERT, *uint32, *uint32).
+// CS_TYPE_NET_SIZE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32, *IDL_CS_CONVERT, *uint32, *uint32) uintptr.
 type CS_TYPE_NET_SIZE_ROUTINE uintptr
 
-// CS_TYPE_TO_NETCS_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, *byte, *uint32, *uint32).
+// CS_TYPE_TO_NETCS_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, *byte, *uint32, *uint32) uintptr.
 type CS_TYPE_TO_NETCS_ROUTINE uintptr
 
-// EXPR_EVAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*MIDL_STUB_MESSAGE).
+// EXPR_EVAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*MIDL_STUB_MESSAGE) uintptr.
 type EXPR_EVAL uintptr
 
-// GENERIC_BINDING_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) unsafe.Pointer.
+// GENERIC_BINDING_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type GENERIC_BINDING_ROUTINE uintptr
 
-// GENERIC_UNBIND_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte).
+// GENERIC_UNBIND_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte) uintptr.
 type GENERIC_UNBIND_ROUTINE uintptr
 
-// I_RpcFreeCalloutStateFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RDR_CALLOUT_STATE).
+// I_RpcFreeCalloutStateFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RDR_CALLOUT_STATE) uintptr.
 type I_RpcFreeCalloutStateFn uintptr
 
-// I_RpcPerformCalloutFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *RDR_CALLOUT_STATE, RPC_HTTP_REDIRECTOR_STAGE) RPC_STATUS.
+// I_RpcPerformCalloutFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *RDR_CALLOUT_STATE, RPC_HTTP_REDIRECTOR_STAGE) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type I_RpcPerformCalloutFn uintptr
 
-// I_RpcProxyFilterIfFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *win32.GUID, uint16, *int32) RPC_STATUS.
+// I_RpcProxyFilterIfFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *win32.GUID, uint16, *int32) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type I_RpcProxyFilterIfFn uintptr
 
-// I_RpcProxyGetClientAddressFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, *uint32) RPC_STATUS.
+// I_RpcProxyGetClientAddressFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, *uint32) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type I_RpcProxyGetClientAddressFn uintptr
 
-// I_RpcProxyGetClientSessionAndResourceUUID is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *int32, *win32.GUID, *int32, *win32.GUID) RPC_STATUS.
+// I_RpcProxyGetClientSessionAndResourceUUID is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *int32, *win32.GUID, *int32, *win32.GUID) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type I_RpcProxyGetClientSessionAndResourceUUID uintptr
 
-// I_RpcProxyGetConnectionTimeoutFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32) RPC_STATUS.
+// I_RpcProxyGetConnectionTimeoutFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type I_RpcProxyGetConnectionTimeoutFn uintptr
 
-// I_RpcProxyIsValidMachineFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) RPC_STATUS.
+// I_RpcProxyIsValidMachineFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type I_RpcProxyIsValidMachineFn uintptr
 
-// I_RpcProxyUpdatePerfCounterBackendServerFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint16, int32).
+// I_RpcProxyUpdatePerfCounterBackendServerFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint16, int32) uintptr.
 type I_RpcProxyUpdatePerfCounterBackendServerFn uintptr
 
-// I_RpcProxyUpdatePerfCounterFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RpcPerfCounters, int32, uint32).
+// I_RpcProxyUpdatePerfCounterFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RpcPerfCounters, int32, uint32) uintptr.
 type I_RpcProxyUpdatePerfCounterFn uintptr
 
-// MIDL_ES_ALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, **int8, *uint32).
+// MIDL_ES_ALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, **int8, *uint32) uintptr.
 type MIDL_ES_ALLOC uintptr
 
-// MIDL_ES_READ is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, **int8, *uint32).
+// MIDL_ES_READ is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, **int8, *uint32) uintptr.
 type MIDL_ES_READ uintptr
 
-// MIDL_ES_WRITE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, uint32).
+// MIDL_ES_WRITE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, uint32) uintptr.
 type MIDL_ES_WRITE uintptr
 
-// NDR_NOTIFY2_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(byte).
+// NDR_NOTIFY2_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(byte) uintptr.
 type NDR_NOTIFY2_ROUTINE uintptr
 
-// NDR_NOTIFY_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func().
+// NDR_NOTIFY_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr.
 type NDR_NOTIFY_ROUTINE uintptr
 
-// NDR_RUNDOWN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// NDR_RUNDOWN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type NDR_RUNDOWN uintptr
 
-// PFN_RPCNOTIFICATION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RPC_ASYNC_STATE, unsafe.Pointer, RPC_ASYNC_EVENT).
+// PFN_RPCNOTIFICATION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RPC_ASYNC_STATE, unsafe.Pointer, RPC_ASYNC_EVENT) uintptr.
 type PFN_RPCNOTIFICATION_ROUTINE uintptr
 
-// PFN_RPC_ALLOCATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) unsafe.Pointer.
+// PFN_RPC_ALLOCATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_RPC_ALLOCATE uintptr
 
-// PFN_RPC_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFN_RPC_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFN_RPC_FREE uintptr
 
-// PRPC_RUNDOWN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PRPC_RUNDOWN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PRPC_RUNDOWN uintptr
 
-// RPCLT_PDU_FILTER_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, int32).
+// RPCLT_PDU_FILTER_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, int32) uintptr.
 type RPCLT_PDU_FILTER_FUNC uintptr
 
-// RPC_ADDRESS_CHANGE_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// RPC_ADDRESS_CHANGE_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type RPC_ADDRESS_CHANGE_FN uintptr
 
-// RPC_AUTH_KEY_RETRIEVAL_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, *unsafe.Pointer, *RPC_STATUS).
+// RPC_AUTH_KEY_RETRIEVAL_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, *unsafe.Pointer, *RPC_STATUS) uintptr.
 type RPC_AUTH_KEY_RETRIEVAL_FN uintptr
 
-// RPC_BLOCKING_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) RPC_STATUS.
+// RPC_BLOCKING_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type RPC_BLOCKING_FN uintptr
 
-// RPC_CLIENT_ALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) unsafe.Pointer.
+// RPC_CLIENT_ALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type RPC_CLIENT_ALLOC uintptr
 
-// RPC_CLIENT_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// RPC_CLIENT_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type RPC_CLIENT_FREE uintptr
 
-// RPC_DISPATCH_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RPC_MESSAGE).
+// RPC_DISPATCH_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RPC_MESSAGE) uintptr.
 type RPC_DISPATCH_FUNCTION uintptr
 
-// RPC_FORWARD_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *RPC_VERSION, *win32.GUID, *byte, *unsafe.Pointer) RPC_STATUS.
+// RPC_FORWARD_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *RPC_VERSION, *win32.GUID, *byte, *unsafe.Pointer) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type RPC_FORWARD_FUNCTION uintptr
 
-// RPC_HTTP_PROXY_FREE_STRING is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR).
+// RPC_HTTP_PROXY_FREE_STRING is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr.
 type RPC_HTTP_PROXY_FREE_STRING uintptr
 
-// RPC_IF_CALLBACK_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer) RPC_STATUS.
+// RPC_IF_CALLBACK_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type RPC_IF_CALLBACK_FN uintptr
 
-// RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, uint32).
+// RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, uint32) uintptr.
 type RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN uintptr
 
-// RPC_MGMT_AUTHORIZATION_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, *RPC_STATUS) int32.
+// RPC_MGMT_AUTHORIZATION_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, *RPC_STATUS) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type RPC_MGMT_AUTHORIZATION_FN uintptr
 
-// RPC_NEW_HTTP_PROXY_CHANNEL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RPC_HTTP_REDIRECTOR_STAGE, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *foundation.PWSTR, *foundation.PWSTR) RPC_STATUS.
+// RPC_NEW_HTTP_PROXY_CHANNEL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RPC_HTTP_REDIRECTOR_STAGE, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *foundation.PWSTR, *foundation.PWSTR) uintptr (the native return type is
+// RPC_STATUS; NewCallback requires a uintptr-sized result).
 type RPC_NEW_HTTP_PROXY_CHANNEL uintptr
 
-// RPC_OBJECT_INQ_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *win32.GUID, *RPC_STATUS).
+// RPC_OBJECT_INQ_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *win32.GUID, *RPC_STATUS) uintptr.
 type RPC_OBJECT_INQ_FN uintptr
 
-// RPC_SECURITY_CALLBACK_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// RPC_SECURITY_CALLBACK_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type RPC_SECURITY_CALLBACK_FN uintptr
 
-// RPC_SETFILTER_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RPCLT_PDU_FILTER_FUNC).
+// RPC_SETFILTER_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RPCLT_PDU_FILTER_FUNC) uintptr.
 type RPC_SETFILTER_FUNC uintptr
 
-// SERVER_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() int32.
+// SERVER_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type SERVER_ROUTINE uintptr
 
-// STUB_THUNK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*MIDL_STUB_MESSAGE).
+// STUB_THUNK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*MIDL_STUB_MESSAGE) uintptr.
 type STUB_THUNK uintptr
 
-// USER_MARSHAL_FREEING_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, unsafe.Pointer).
+// USER_MARSHAL_FREEING_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, unsafe.Pointer) uintptr.
 type USER_MARSHAL_FREEING_ROUTINE uintptr
 
-// USER_MARSHAL_MARSHALLING_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, *byte, unsafe.Pointer) *byte.
+// USER_MARSHAL_MARSHALLING_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, *byte, unsafe.Pointer) uintptr (the native return type is
+// *byte; NewCallback requires a uintptr-sized result).
 type USER_MARSHAL_MARSHALLING_ROUTINE uintptr
 
-// USER_MARSHAL_SIZING_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, uint32, unsafe.Pointer) uint32.
+// USER_MARSHAL_SIZING_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type USER_MARSHAL_SIZING_ROUTINE uintptr
 
-// USER_MARSHAL_UNMARSHALLING_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, *byte, unsafe.Pointer) *byte.
+// USER_MARSHAL_UNMARSHALLING_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, *byte, unsafe.Pointer) uintptr (the native return type is
+// *byte; NewCallback requires a uintptr-sized result).
 type USER_MARSHAL_UNMARSHALLING_ROUTINE uintptr
 
-// XMIT_HELPER_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*MIDL_STUB_MESSAGE).
+// XMIT_HELPER_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*MIDL_STUB_MESSAGE) uintptr.
 type XMIT_HELPER_ROUTINE uintptr

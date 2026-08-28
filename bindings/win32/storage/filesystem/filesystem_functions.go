@@ -63,6 +63,8 @@ var (
 	procRemoveDirectoryFromAppW             = modapi_ms_win_core_file_fromapp_l1_1_0.NewProc("RemoveDirectoryFromAppW")
 	procReplaceFileFromAppW                 = modapi_ms_win_core_file_fromapp_l1_1_0.NewProc("ReplaceFileFromAppW")
 	procSetFileAttributesFromAppW           = modapi_ms_win_core_file_fromapp_l1_1_0.NewProc("SetFileAttributesFromAppW")
+	procBuildIoRingCancelRequest            = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingCancelRequest")
+	procBuildIoRingReadFile                 = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingReadFile")
 	procBuildIoRingRegisterBuffers          = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingRegisterBuffers")
 	procBuildIoRingRegisterFileHandles      = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingRegisterFileHandles")
 	procCloseIoRing                         = modapi_ms_win_core_ioring_l1_1_0.NewProc("CloseIoRing")
@@ -101,8 +103,10 @@ var (
 	procLogTailAdvanceFailure               = modclfsw32.NewProc("LogTailAdvanceFailure")
 	procLsnBlockOffset                      = modclfsw32.NewProc("LsnBlockOffset")
 	procLsnContainer                        = modclfsw32.NewProc("LsnContainer")
+	procLsnCreate                           = modclfsw32.NewProc("LsnCreate")
 	procLsnEqual                            = modclfsw32.NewProc("LsnEqual")
 	procLsnGreater                          = modclfsw32.NewProc("LsnGreater")
+	procLsnIncrement                        = modclfsw32.NewProc("LsnIncrement")
 	procLsnInvalid                          = modclfsw32.NewProc("LsnInvalid")
 	procLsnLess                             = modclfsw32.NewProc("LsnLess")
 	procLsnNull                             = modclfsw32.NewProc("LsnNull")
@@ -137,6 +141,10 @@ var (
 	procBackupRead                          = modKERNEL32.NewProc("BackupRead")
 	procBackupSeek                          = modKERNEL32.NewProc("BackupSeek")
 	procBackupWrite                         = modKERNEL32.NewProc("BackupWrite")
+	procBuildIoRingFlushFile                = modKERNEL32.NewProc("BuildIoRingFlushFile")
+	procBuildIoRingReadFileScatter          = modKERNEL32.NewProc("BuildIoRingReadFileScatter")
+	procBuildIoRingWriteFile                = modKERNEL32.NewProc("BuildIoRingWriteFile")
+	procBuildIoRingWriteFileGather          = modKERNEL32.NewProc("BuildIoRingWriteFileGather")
 	procCheckNameLegalDOS8Dot3              = modKERNEL32.NewProc("CheckNameLegalDOS8Dot3W")
 	procCheckNameLegalDOS8Dot3A             = modKERNEL32.NewProc("CheckNameLegalDOS8Dot3A")
 	procCompareFileTime                     = modKERNEL32.NewProc("CompareFileTime")
@@ -447,6 +455,862 @@ var (
 	procWofWimUpdateEntry                   = modWOFUTIL.NewProc("WofWimUpdateEntry")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddLogContainer                     *win32.Proc
+	AddLogContainerSet                  *win32.Proc
+	AddUsersToEncryptedFile             *win32.Proc
+	AdvanceLogBase                      *win32.Proc
+	AlignReservedLog                    *win32.Proc
+	AllocReservedLog                    *win32.Proc
+	AreFileApisANSI                     *win32.Proc
+	AreShortNamesEnabled                *win32.Proc
+	BackupRead                          *win32.Proc
+	BackupSeek                          *win32.Proc
+	BackupWrite                         *win32.Proc
+	BuildIoRingCancelRequest            *win32.Proc
+	BuildIoRingFlushFile                *win32.Proc
+	BuildIoRingReadFile                 *win32.Proc
+	BuildIoRingReadFileScatter          *win32.Proc
+	BuildIoRingRegisterBuffers          *win32.Proc
+	BuildIoRingRegisterFileHandles      *win32.Proc
+	BuildIoRingWriteFile                *win32.Proc
+	BuildIoRingWriteFileGather          *win32.Proc
+	CheckNameLegalDOS8Dot3              *win32.Proc
+	CheckNameLegalDOS8Dot3A             *win32.Proc
+	CloseAndResetLogFile                *win32.Proc
+	CloseEncryptedFileRaw               *win32.Proc
+	CloseIoRing                         *win32.Proc
+	CommitComplete                      *win32.Proc
+	CommitEnlistment                    *win32.Proc
+	CommitTransaction                   *win32.Proc
+	CommitTransactionAsync              *win32.Proc
+	CompareFileTime                     *win32.Proc
+	CopyFile                            *win32.Proc
+	CopyFile2                           *win32.Proc
+	CopyFileA                           *win32.Proc
+	CopyFileEx                          *win32.Proc
+	CopyFileExA                         *win32.Proc
+	CopyFileFromAppW                    *win32.Proc
+	CopyFileTransacted                  *win32.Proc
+	CopyFileTransactedA                 *win32.Proc
+	CopyLZFile                          *win32.Proc
+	CreateBindLink                      *win32.Proc
+	CreateDirectory                     *win32.Proc
+	CreateDirectory2                    *win32.Proc
+	CreateDirectory2A                   *win32.Proc
+	CreateDirectoryA                    *win32.Proc
+	CreateDirectoryEx                   *win32.Proc
+	CreateDirectoryExA                  *win32.Proc
+	CreateDirectoryFromAppW             *win32.Proc
+	CreateDirectoryTransacted           *win32.Proc
+	CreateDirectoryTransactedA          *win32.Proc
+	CreateEnlistment                    *win32.Proc
+	CreateFile                          *win32.Proc
+	CreateFile2                         *win32.Proc
+	CreateFile2FromAppW                 *win32.Proc
+	CreateFile3                         *win32.Proc
+	CreateFileA                         *win32.Proc
+	CreateFileFromAppW                  *win32.Proc
+	CreateFileTransacted                *win32.Proc
+	CreateFileTransactedA               *win32.Proc
+	CreateHardLink                      *win32.Proc
+	CreateHardLinkA                     *win32.Proc
+	CreateHardLinkTransacted            *win32.Proc
+	CreateHardLinkTransactedA           *win32.Proc
+	CreateIoRing                        *win32.Proc
+	CreateLogContainerScanContext       *win32.Proc
+	CreateLogFile                       *win32.Proc
+	CreateLogMarshallingArea            *win32.Proc
+	CreateResourceManager               *win32.Proc
+	CreateSymbolicLink                  *win32.Proc
+	CreateSymbolicLinkA                 *win32.Proc
+	CreateSymbolicLinkTransacted        *win32.Proc
+	CreateSymbolicLinkTransactedA       *win32.Proc
+	CreateTapePartition                 *win32.Proc
+	CreateTransaction                   *win32.Proc
+	CreateTransactionManager            *win32.Proc
+	DecryptFile                         *win32.Proc
+	DecryptFileA                        *win32.Proc
+	DefineDosDevice                     *win32.Proc
+	DefineDosDeviceA                    *win32.Proc
+	DeleteFile                          *win32.Proc
+	DeleteFile2                         *win32.Proc
+	DeleteFile2A                        *win32.Proc
+	DeleteFileA                         *win32.Proc
+	DeleteFileFromAppW                  *win32.Proc
+	DeleteFileTransacted                *win32.Proc
+	DeleteFileTransactedA               *win32.Proc
+	DeleteLogByHandle                   *win32.Proc
+	DeleteLogFile                       *win32.Proc
+	DeleteLogMarshallingArea            *win32.Proc
+	DeleteVolumeMountPoint              *win32.Proc
+	DeleteVolumeMountPointA             *win32.Proc
+	DeregisterManageableLogClient       *win32.Proc
+	DuplicateEncryptionInfoFile         *win32.Proc
+	EncryptFile                         *win32.Proc
+	EncryptFileA                        *win32.Proc
+	EncryptionDisable                   *win32.Proc
+	EraseTape                           *win32.Proc
+	FileEncryptionStatus                *win32.Proc
+	FileEncryptionStatusA               *win32.Proc
+	FileTimeToLocalFileTime             *win32.Proc
+	FindClose                           *win32.Proc
+	FindCloseChangeNotification         *win32.Proc
+	FindFirstChangeNotification         *win32.Proc
+	FindFirstChangeNotificationA        *win32.Proc
+	FindFirstFile                       *win32.Proc
+	FindFirstFileA                      *win32.Proc
+	FindFirstFileEx                     *win32.Proc
+	FindFirstFileExA                    *win32.Proc
+	FindFirstFileExFromAppW             *win32.Proc
+	FindFirstFileNameTransactedW        *win32.Proc
+	FindFirstFileNameW                  *win32.Proc
+	FindFirstFileTransacted             *win32.Proc
+	FindFirstFileTransactedA            *win32.Proc
+	FindFirstStreamTransactedW          *win32.Proc
+	FindFirstStreamW                    *win32.Proc
+	FindFirstVolume                     *win32.Proc
+	FindFirstVolumeA                    *win32.Proc
+	FindFirstVolumeMountPoint           *win32.Proc
+	FindFirstVolumeMountPointA          *win32.Proc
+	FindNextChangeNotification          *win32.Proc
+	FindNextFile                        *win32.Proc
+	FindNextFileA                       *win32.Proc
+	FindNextFileNameW                   *win32.Proc
+	FindNextStreamW                     *win32.Proc
+	FindNextVolume                      *win32.Proc
+	FindNextVolumeA                     *win32.Proc
+	FindNextVolumeMountPoint            *win32.Proc
+	FindNextVolumeMountPointA           *win32.Proc
+	FindVolumeClose                     *win32.Proc
+	FindVolumeMountPointClose           *win32.Proc
+	FlushFileBuffers                    *win32.Proc
+	FlushLogBuffers                     *win32.Proc
+	FlushLogToLsn                       *win32.Proc
+	FreeEncryptedFileMetadata           *win32.Proc
+	FreeEncryptionCertificateHashList   *win32.Proc
+	FreeReservedLog                     *win32.Proc
+	GetBinaryType                       *win32.Proc
+	GetBinaryTypeA                      *win32.Proc
+	GetCompressedFileSize               *win32.Proc
+	GetCompressedFileSizeA              *win32.Proc
+	GetCompressedFileSizeTransacted     *win32.Proc
+	GetCompressedFileSizeTransactedA    *win32.Proc
+	GetCurrentClockTransactionManager   *win32.Proc
+	GetDiskFreeSpace                    *win32.Proc
+	GetDiskFreeSpaceA                   *win32.Proc
+	GetDiskFreeSpaceEx                  *win32.Proc
+	GetDiskFreeSpaceExA                 *win32.Proc
+	GetDiskSpaceInformation             *win32.Proc
+	GetDiskSpaceInformationA            *win32.Proc
+	GetDriveType                        *win32.Proc
+	GetDriveTypeA                       *win32.Proc
+	GetEncryptedFileMetadata            *win32.Proc
+	GetEnlistmentId                     *win32.Proc
+	GetEnlistmentRecoveryInformation    *win32.Proc
+	GetExpandedName                     *win32.Proc
+	GetExpandedNameA                    *win32.Proc
+	GetFileAttributes                   *win32.Proc
+	GetFileAttributesA                  *win32.Proc
+	GetFileAttributesEx                 *win32.Proc
+	GetFileAttributesExA                *win32.Proc
+	GetFileAttributesExFromAppW         *win32.Proc
+	GetFileAttributesTransacted         *win32.Proc
+	GetFileAttributesTransactedA        *win32.Proc
+	GetFileBandwidthReservation         *win32.Proc
+	GetFileInformationByHandle          *win32.Proc
+	GetFileInformationByHandleEx        *win32.Proc
+	GetFileInformationByName            *win32.Proc
+	GetFileSize                         *win32.Proc
+	GetFileSizeEx                       *win32.Proc
+	GetFileTime                         *win32.Proc
+	GetFileType                         *win32.Proc
+	GetFileVersionInfo                  *win32.Proc
+	GetFileVersionInfoA                 *win32.Proc
+	GetFileVersionInfoEx                *win32.Proc
+	GetFileVersionInfoExA               *win32.Proc
+	GetFileVersionInfoSize              *win32.Proc
+	GetFileVersionInfoSizeA             *win32.Proc
+	GetFileVersionInfoSizeEx            *win32.Proc
+	GetFileVersionInfoSizeExA           *win32.Proc
+	GetFinalPathNameByHandle            *win32.Proc
+	GetFinalPathNameByHandleA           *win32.Proc
+	GetFullPathName                     *win32.Proc
+	GetFullPathNameA                    *win32.Proc
+	GetFullPathNameTransacted           *win32.Proc
+	GetFullPathNameTransactedA          *win32.Proc
+	GetIoRingInfo                       *win32.Proc
+	GetLogContainerName                 *win32.Proc
+	GetLogFileInformation               *win32.Proc
+	GetLogIoStatistics                  *win32.Proc
+	GetLogReservationInfo               *win32.Proc
+	GetLogicalDriveStrings              *win32.Proc
+	GetLogicalDriveStringsA             *win32.Proc
+	GetLogicalDrives                    *win32.Proc
+	GetLongPathName                     *win32.Proc
+	GetLongPathNameA                    *win32.Proc
+	GetLongPathNameTransacted           *win32.Proc
+	GetLongPathNameTransactedA          *win32.Proc
+	GetNextLogArchiveExtent             *win32.Proc
+	GetNotificationResourceManager      *win32.Proc
+	GetNotificationResourceManagerAsync *win32.Proc
+	GetShortPathName                    *win32.Proc
+	GetShortPathNameA                   *win32.Proc
+	GetTapeParameters                   *win32.Proc
+	GetTapePosition                     *win32.Proc
+	GetTapeStatus                       *win32.Proc
+	GetTempFileName                     *win32.Proc
+	GetTempFileNameA                    *win32.Proc
+	GetTempPath                         *win32.Proc
+	GetTempPath2                        *win32.Proc
+	GetTempPath2A                       *win32.Proc
+	GetTempPathA                        *win32.Proc
+	GetTransactionId                    *win32.Proc
+	GetTransactionInformation           *win32.Proc
+	GetTransactionManagerId             *win32.Proc
+	GetVolumeInformation                *win32.Proc
+	GetVolumeInformationA               *win32.Proc
+	GetVolumeInformationByHandleW       *win32.Proc
+	GetVolumeNameForVolumeMountPoint    *win32.Proc
+	GetVolumeNameForVolumeMountPointA   *win32.Proc
+	GetVolumePathName                   *win32.Proc
+	GetVolumePathNameA                  *win32.Proc
+	GetVolumePathNamesForVolumeName     *win32.Proc
+	GetVolumePathNamesForVolumeNameA    *win32.Proc
+	HandleLogFull                       *win32.Proc
+	InstallLogPolicy                    *win32.Proc
+	IsIoRingOpSupported                 *win32.Proc
+	LZClose                             *win32.Proc
+	LZCopy                              *win32.Proc
+	LZDone                              *win32.Proc
+	LZInit                              *win32.Proc
+	LZOpenFile                          *win32.Proc
+	LZOpenFileA                         *win32.Proc
+	LZRead                              *win32.Proc
+	LZSeek                              *win32.Proc
+	LZStart                             *win32.Proc
+	LocalFileTimeToFileTime             *win32.Proc
+	LockFile                            *win32.Proc
+	LockFileEx                          *win32.Proc
+	LogTailAdvanceFailure               *win32.Proc
+	LsnBlockOffset                      *win32.Proc
+	LsnContainer                        *win32.Proc
+	LsnCreate                           *win32.Proc
+	LsnEqual                            *win32.Proc
+	LsnGreater                          *win32.Proc
+	LsnIncrement                        *win32.Proc
+	LsnInvalid                          *win32.Proc
+	LsnLess                             *win32.Proc
+	LsnNull                             *win32.Proc
+	LsnRecordSequence                   *win32.Proc
+	MoveFile                            *win32.Proc
+	MoveFileA                           *win32.Proc
+	MoveFileEx                          *win32.Proc
+	MoveFileExA                         *win32.Proc
+	MoveFileFromAppW                    *win32.Proc
+	MoveFileTransacted                  *win32.Proc
+	MoveFileTransactedA                 *win32.Proc
+	MoveFileWithProgress                *win32.Proc
+	MoveFileWithProgressA               *win32.Proc
+	NetConnectionEnum                   *win32.Proc
+	NetFileClose                        *win32.Proc
+	NetFileEnum                         *win32.Proc
+	NetFileGetInfo                      *win32.Proc
+	NetServerAliasAdd                   *win32.Proc
+	NetServerAliasDel                   *win32.Proc
+	NetServerAliasEnum                  *win32.Proc
+	NetSessionDel                       *win32.Proc
+	NetSessionEnum                      *win32.Proc
+	NetSessionGetInfo                   *win32.Proc
+	NetShareAdd                         *win32.Proc
+	NetShareCheck                       *win32.Proc
+	NetShareDel                         *win32.Proc
+	NetShareDelEx                       *win32.Proc
+	NetShareDelSticky                   *win32.Proc
+	NetShareEnum                        *win32.Proc
+	NetShareEnumSticky                  *win32.Proc
+	NetShareGetInfo                     *win32.Proc
+	NetShareSetInfo                     *win32.Proc
+	NetStatisticsGet                    *win32.Proc
+	OpenEncryptedFileRaw                *win32.Proc
+	OpenEncryptedFileRawA               *win32.Proc
+	OpenEnlistment                      *win32.Proc
+	OpenFile                            *win32.Proc
+	OpenFileById                        *win32.Proc
+	OpenResourceManager                 *win32.Proc
+	OpenTransaction                     *win32.Proc
+	OpenTransactionManager              *win32.Proc
+	OpenTransactionManagerById          *win32.Proc
+	PopIoRingCompletion                 *win32.Proc
+	PrePrepareComplete                  *win32.Proc
+	PrePrepareEnlistment                *win32.Proc
+	PrepareComplete                     *win32.Proc
+	PrepareEnlistment                   *win32.Proc
+	PrepareLogArchive                   *win32.Proc
+	PrepareTape                         *win32.Proc
+	QueryDosDevice                      *win32.Proc
+	QueryDosDeviceA                     *win32.Proc
+	QueryIoRingCapabilities             *win32.Proc
+	QueryLogPolicy                      *win32.Proc
+	QueryRecoveryAgentsOnEncryptedFile  *win32.Proc
+	QueryUsersOnEncryptedFile           *win32.Proc
+	ReOpenFile                          *win32.Proc
+	ReadDirectoryChangesExW             *win32.Proc
+	ReadDirectoryChangesW               *win32.Proc
+	ReadEncryptedFileRaw                *win32.Proc
+	ReadFile                            *win32.Proc
+	ReadFileEx                          *win32.Proc
+	ReadFileScatter                     *win32.Proc
+	ReadLogArchiveMetadata              *win32.Proc
+	ReadLogNotification                 *win32.Proc
+	ReadLogRecord                       *win32.Proc
+	ReadLogRestartArea                  *win32.Proc
+	ReadNextLogRecord                   *win32.Proc
+	ReadOnlyEnlistment                  *win32.Proc
+	ReadPreviousLogRestartArea          *win32.Proc
+	RecoverEnlistment                   *win32.Proc
+	RecoverResourceManager              *win32.Proc
+	RecoverTransactionManager           *win32.Proc
+	RegisterForLogWriteNotification     *win32.Proc
+	RegisterManageableLogClient         *win32.Proc
+	RemoveBindLink                      *win32.Proc
+	RemoveDirectory                     *win32.Proc
+	RemoveDirectory2                    *win32.Proc
+	RemoveDirectory2A                   *win32.Proc
+	RemoveDirectoryA                    *win32.Proc
+	RemoveDirectoryFromAppW             *win32.Proc
+	RemoveDirectoryTransacted           *win32.Proc
+	RemoveDirectoryTransactedA          *win32.Proc
+	RemoveLogContainer                  *win32.Proc
+	RemoveLogContainerSet               *win32.Proc
+	RemoveLogPolicy                     *win32.Proc
+	RemoveUsersFromEncryptedFile        *win32.Proc
+	RenameTransactionManager            *win32.Proc
+	ReplaceFile                         *win32.Proc
+	ReplaceFileA                        *win32.Proc
+	ReplaceFileFromAppW                 *win32.Proc
+	ReserveAndAppendLog                 *win32.Proc
+	ReserveAndAppendLogAligned          *win32.Proc
+	RollbackComplete                    *win32.Proc
+	RollbackEnlistment                  *win32.Proc
+	RollbackTransaction                 *win32.Proc
+	RollbackTransactionAsync            *win32.Proc
+	RollforwardTransactionManager       *win32.Proc
+	ScanLogContainers                   *win32.Proc
+	SearchPath                          *win32.Proc
+	SearchPathA                         *win32.Proc
+	SetEncryptedFileMetadata            *win32.Proc
+	SetEndOfFile                        *win32.Proc
+	SetEndOfLog                         *win32.Proc
+	SetEnlistmentRecoveryInformation    *win32.Proc
+	SetFileApisToANSI                   *win32.Proc
+	SetFileApisToOEM                    *win32.Proc
+	SetFileAttributes                   *win32.Proc
+	SetFileAttributesA                  *win32.Proc
+	SetFileAttributesFromAppW           *win32.Proc
+	SetFileAttributesTransacted         *win32.Proc
+	SetFileAttributesTransactedA        *win32.Proc
+	SetFileBandwidthReservation         *win32.Proc
+	SetFileCompletionNotificationModes  *win32.Proc
+	SetFileInformationByHandle          *win32.Proc
+	SetFileIoOverlappedRange            *win32.Proc
+	SetFilePointer                      *win32.Proc
+	SetFilePointerEx                    *win32.Proc
+	SetFileShortName                    *win32.Proc
+	SetFileShortNameA                   *win32.Proc
+	SetFileTime                         *win32.Proc
+	SetFileValidData                    *win32.Proc
+	SetIoRingCompletionEvent            *win32.Proc
+	SetLogArchiveMode                   *win32.Proc
+	SetLogArchiveTail                   *win32.Proc
+	SetLogFileSizeWithPolicy            *win32.Proc
+	SetResourceManagerCompletionPort    *win32.Proc
+	SetSearchPathMode                   *win32.Proc
+	SetTapeParameters                   *win32.Proc
+	SetTapePosition                     *win32.Proc
+	SetTransactionInformation           *win32.Proc
+	SetUserFileEncryptionKey            *win32.Proc
+	SetUserFileEncryptionKeyEx          *win32.Proc
+	SetVolumeLabel                      *win32.Proc
+	SetVolumeLabelA                     *win32.Proc
+	SetVolumeMountPoint                 *win32.Proc
+	SetVolumeMountPointA                *win32.Proc
+	SinglePhaseReject                   *win32.Proc
+	SubmitIoRing                        *win32.Proc
+	TerminateLogArchive                 *win32.Proc
+	TerminateReadLog                    *win32.Proc
+	TruncateLog                         *win32.Proc
+	TxfGetThreadMiniVersionForCreate    *win32.Proc
+	TxfLogCreateFileReadContext         *win32.Proc
+	TxfLogCreateRangeReadContext        *win32.Proc
+	TxfLogDestroyReadContext            *win32.Proc
+	TxfLogReadRecords                   *win32.Proc
+	TxfLogRecordGetFileName             *win32.Proc
+	TxfLogRecordGetGenericType          *win32.Proc
+	TxfReadMetadataInfo                 *win32.Proc
+	TxfSetThreadMiniVersionForCreate    *win32.Proc
+	UnlockFile                          *win32.Proc
+	UnlockFileEx                        *win32.Proc
+	ValidateLog                         *win32.Proc
+	VerFindFile                         *win32.Proc
+	VerFindFileA                        *win32.Proc
+	VerInstallFile                      *win32.Proc
+	VerInstallFileA                     *win32.Proc
+	VerLanguageName                     *win32.Proc
+	VerLanguageNameA                    *win32.Proc
+	VerQueryValue                       *win32.Proc
+	VerQueryValueA                      *win32.Proc
+	WofEnumEntries                      *win32.Proc
+	WofFileEnumFiles                    *win32.Proc
+	WofGetDriverVersion                 *win32.Proc
+	WofIsExternalFile                   *win32.Proc
+	WofSetFileDataLocation              *win32.Proc
+	WofShouldCompressBinaries           *win32.Proc
+	WofWimAddEntry                      *win32.Proc
+	WofWimEnumFiles                     *win32.Proc
+	WofWimRemoveEntry                   *win32.Proc
+	WofWimSuspendEntry                  *win32.Proc
+	WofWimUpdateEntry                   *win32.Proc
+	Wow64DisableWow64FsRedirection      *win32.Proc
+	Wow64EnableWow64FsRedirection       *win32.Proc
+	Wow64RevertWow64FsRedirection       *win32.Proc
+	WriteEncryptedFileRaw               *win32.Proc
+	WriteFile                           *win32.Proc
+	WriteFileEx                         *win32.Proc
+	WriteFileGather                     *win32.Proc
+	WriteLogRestartArea                 *win32.Proc
+	WriteTapemark                       *win32.Proc
+}{
+	AddLogContainer:                     procAddLogContainer,
+	AddLogContainerSet:                  procAddLogContainerSet,
+	AddUsersToEncryptedFile:             procAddUsersToEncryptedFile,
+	AdvanceLogBase:                      procAdvanceLogBase,
+	AlignReservedLog:                    procAlignReservedLog,
+	AllocReservedLog:                    procAllocReservedLog,
+	AreFileApisANSI:                     procAreFileApisANSI,
+	AreShortNamesEnabled:                procAreShortNamesEnabled,
+	BackupRead:                          procBackupRead,
+	BackupSeek:                          procBackupSeek,
+	BackupWrite:                         procBackupWrite,
+	BuildIoRingCancelRequest:            procBuildIoRingCancelRequest,
+	BuildIoRingFlushFile:                procBuildIoRingFlushFile,
+	BuildIoRingReadFile:                 procBuildIoRingReadFile,
+	BuildIoRingReadFileScatter:          procBuildIoRingReadFileScatter,
+	BuildIoRingRegisterBuffers:          procBuildIoRingRegisterBuffers,
+	BuildIoRingRegisterFileHandles:      procBuildIoRingRegisterFileHandles,
+	BuildIoRingWriteFile:                procBuildIoRingWriteFile,
+	BuildIoRingWriteFileGather:          procBuildIoRingWriteFileGather,
+	CheckNameLegalDOS8Dot3:              procCheckNameLegalDOS8Dot3,
+	CheckNameLegalDOS8Dot3A:             procCheckNameLegalDOS8Dot3A,
+	CloseAndResetLogFile:                procCloseAndResetLogFile,
+	CloseEncryptedFileRaw:               procCloseEncryptedFileRaw,
+	CloseIoRing:                         procCloseIoRing,
+	CommitComplete:                      procCommitComplete,
+	CommitEnlistment:                    procCommitEnlistment,
+	CommitTransaction:                   procCommitTransaction,
+	CommitTransactionAsync:              procCommitTransactionAsync,
+	CompareFileTime:                     procCompareFileTime,
+	CopyFile:                            procCopyFile,
+	CopyFile2:                           procCopyFile2,
+	CopyFileA:                           procCopyFileA,
+	CopyFileEx:                          procCopyFileEx,
+	CopyFileExA:                         procCopyFileExA,
+	CopyFileFromAppW:                    procCopyFileFromAppW,
+	CopyFileTransacted:                  procCopyFileTransacted,
+	CopyFileTransactedA:                 procCopyFileTransactedA,
+	CopyLZFile:                          procCopyLZFile,
+	CreateBindLink:                      procCreateBindLink,
+	CreateDirectory:                     procCreateDirectory,
+	CreateDirectory2:                    procCreateDirectory2,
+	CreateDirectory2A:                   procCreateDirectory2A,
+	CreateDirectoryA:                    procCreateDirectoryA,
+	CreateDirectoryEx:                   procCreateDirectoryEx,
+	CreateDirectoryExA:                  procCreateDirectoryExA,
+	CreateDirectoryFromAppW:             procCreateDirectoryFromAppW,
+	CreateDirectoryTransacted:           procCreateDirectoryTransacted,
+	CreateDirectoryTransactedA:          procCreateDirectoryTransactedA,
+	CreateEnlistment:                    procCreateEnlistment,
+	CreateFile:                          procCreateFile,
+	CreateFile2:                         procCreateFile2,
+	CreateFile2FromAppW:                 procCreateFile2FromAppW,
+	CreateFile3:                         procCreateFile3,
+	CreateFileA:                         procCreateFileA,
+	CreateFileFromAppW:                  procCreateFileFromAppW,
+	CreateFileTransacted:                procCreateFileTransacted,
+	CreateFileTransactedA:               procCreateFileTransactedA,
+	CreateHardLink:                      procCreateHardLink,
+	CreateHardLinkA:                     procCreateHardLinkA,
+	CreateHardLinkTransacted:            procCreateHardLinkTransacted,
+	CreateHardLinkTransactedA:           procCreateHardLinkTransactedA,
+	CreateIoRing:                        procCreateIoRing,
+	CreateLogContainerScanContext:       procCreateLogContainerScanContext,
+	CreateLogFile:                       procCreateLogFile,
+	CreateLogMarshallingArea:            procCreateLogMarshallingArea,
+	CreateResourceManager:               procCreateResourceManager,
+	CreateSymbolicLink:                  procCreateSymbolicLink,
+	CreateSymbolicLinkA:                 procCreateSymbolicLinkA,
+	CreateSymbolicLinkTransacted:        procCreateSymbolicLinkTransacted,
+	CreateSymbolicLinkTransactedA:       procCreateSymbolicLinkTransactedA,
+	CreateTapePartition:                 procCreateTapePartition,
+	CreateTransaction:                   procCreateTransaction,
+	CreateTransactionManager:            procCreateTransactionManager,
+	DecryptFile:                         procDecryptFile,
+	DecryptFileA:                        procDecryptFileA,
+	DefineDosDevice:                     procDefineDosDevice,
+	DefineDosDeviceA:                    procDefineDosDeviceA,
+	DeleteFile:                          procDeleteFile,
+	DeleteFile2:                         procDeleteFile2,
+	DeleteFile2A:                        procDeleteFile2A,
+	DeleteFileA:                         procDeleteFileA,
+	DeleteFileFromAppW:                  procDeleteFileFromAppW,
+	DeleteFileTransacted:                procDeleteFileTransacted,
+	DeleteFileTransactedA:               procDeleteFileTransactedA,
+	DeleteLogByHandle:                   procDeleteLogByHandle,
+	DeleteLogFile:                       procDeleteLogFile,
+	DeleteLogMarshallingArea:            procDeleteLogMarshallingArea,
+	DeleteVolumeMountPoint:              procDeleteVolumeMountPoint,
+	DeleteVolumeMountPointA:             procDeleteVolumeMountPointA,
+	DeregisterManageableLogClient:       procDeregisterManageableLogClient,
+	DuplicateEncryptionInfoFile:         procDuplicateEncryptionInfoFile,
+	EncryptFile:                         procEncryptFile,
+	EncryptFileA:                        procEncryptFileA,
+	EncryptionDisable:                   procEncryptionDisable,
+	EraseTape:                           procEraseTape,
+	FileEncryptionStatus:                procFileEncryptionStatus,
+	FileEncryptionStatusA:               procFileEncryptionStatusA,
+	FileTimeToLocalFileTime:             procFileTimeToLocalFileTime,
+	FindClose:                           procFindClose,
+	FindCloseChangeNotification:         procFindCloseChangeNotification,
+	FindFirstChangeNotification:         procFindFirstChangeNotification,
+	FindFirstChangeNotificationA:        procFindFirstChangeNotificationA,
+	FindFirstFile:                       procFindFirstFile,
+	FindFirstFileA:                      procFindFirstFileA,
+	FindFirstFileEx:                     procFindFirstFileEx,
+	FindFirstFileExA:                    procFindFirstFileExA,
+	FindFirstFileExFromAppW:             procFindFirstFileExFromAppW,
+	FindFirstFileNameTransactedW:        procFindFirstFileNameTransactedW,
+	FindFirstFileNameW:                  procFindFirstFileNameW,
+	FindFirstFileTransacted:             procFindFirstFileTransacted,
+	FindFirstFileTransactedA:            procFindFirstFileTransactedA,
+	FindFirstStreamTransactedW:          procFindFirstStreamTransactedW,
+	FindFirstStreamW:                    procFindFirstStreamW,
+	FindFirstVolume:                     procFindFirstVolume,
+	FindFirstVolumeA:                    procFindFirstVolumeA,
+	FindFirstVolumeMountPoint:           procFindFirstVolumeMountPoint,
+	FindFirstVolumeMountPointA:          procFindFirstVolumeMountPointA,
+	FindNextChangeNotification:          procFindNextChangeNotification,
+	FindNextFile:                        procFindNextFile,
+	FindNextFileA:                       procFindNextFileA,
+	FindNextFileNameW:                   procFindNextFileNameW,
+	FindNextStreamW:                     procFindNextStreamW,
+	FindNextVolume:                      procFindNextVolume,
+	FindNextVolumeA:                     procFindNextVolumeA,
+	FindNextVolumeMountPoint:            procFindNextVolumeMountPoint,
+	FindNextVolumeMountPointA:           procFindNextVolumeMountPointA,
+	FindVolumeClose:                     procFindVolumeClose,
+	FindVolumeMountPointClose:           procFindVolumeMountPointClose,
+	FlushFileBuffers:                    procFlushFileBuffers,
+	FlushLogBuffers:                     procFlushLogBuffers,
+	FlushLogToLsn:                       procFlushLogToLsn,
+	FreeEncryptedFileMetadata:           procFreeEncryptedFileMetadata,
+	FreeEncryptionCertificateHashList:   procFreeEncryptionCertificateHashList,
+	FreeReservedLog:                     procFreeReservedLog,
+	GetBinaryType:                       procGetBinaryType,
+	GetBinaryTypeA:                      procGetBinaryTypeA,
+	GetCompressedFileSize:               procGetCompressedFileSize,
+	GetCompressedFileSizeA:              procGetCompressedFileSizeA,
+	GetCompressedFileSizeTransacted:     procGetCompressedFileSizeTransacted,
+	GetCompressedFileSizeTransactedA:    procGetCompressedFileSizeTransactedA,
+	GetCurrentClockTransactionManager:   procGetCurrentClockTransactionManager,
+	GetDiskFreeSpace:                    procGetDiskFreeSpace,
+	GetDiskFreeSpaceA:                   procGetDiskFreeSpaceA,
+	GetDiskFreeSpaceEx:                  procGetDiskFreeSpaceEx,
+	GetDiskFreeSpaceExA:                 procGetDiskFreeSpaceExA,
+	GetDiskSpaceInformation:             procGetDiskSpaceInformation,
+	GetDiskSpaceInformationA:            procGetDiskSpaceInformationA,
+	GetDriveType:                        procGetDriveType,
+	GetDriveTypeA:                       procGetDriveTypeA,
+	GetEncryptedFileMetadata:            procGetEncryptedFileMetadata,
+	GetEnlistmentId:                     procGetEnlistmentId,
+	GetEnlistmentRecoveryInformation:    procGetEnlistmentRecoveryInformation,
+	GetExpandedName:                     procGetExpandedName,
+	GetExpandedNameA:                    procGetExpandedNameA,
+	GetFileAttributes:                   procGetFileAttributes,
+	GetFileAttributesA:                  procGetFileAttributesA,
+	GetFileAttributesEx:                 procGetFileAttributesEx,
+	GetFileAttributesExA:                procGetFileAttributesExA,
+	GetFileAttributesExFromAppW:         procGetFileAttributesExFromAppW,
+	GetFileAttributesTransacted:         procGetFileAttributesTransacted,
+	GetFileAttributesTransactedA:        procGetFileAttributesTransactedA,
+	GetFileBandwidthReservation:         procGetFileBandwidthReservation,
+	GetFileInformationByHandle:          procGetFileInformationByHandle,
+	GetFileInformationByHandleEx:        procGetFileInformationByHandleEx,
+	GetFileInformationByName:            procGetFileInformationByName,
+	GetFileSize:                         procGetFileSize,
+	GetFileSizeEx:                       procGetFileSizeEx,
+	GetFileTime:                         procGetFileTime,
+	GetFileType:                         procGetFileType,
+	GetFileVersionInfo:                  procGetFileVersionInfo,
+	GetFileVersionInfoA:                 procGetFileVersionInfoA,
+	GetFileVersionInfoEx:                procGetFileVersionInfoEx,
+	GetFileVersionInfoExA:               procGetFileVersionInfoExA,
+	GetFileVersionInfoSize:              procGetFileVersionInfoSize,
+	GetFileVersionInfoSizeA:             procGetFileVersionInfoSizeA,
+	GetFileVersionInfoSizeEx:            procGetFileVersionInfoSizeEx,
+	GetFileVersionInfoSizeExA:           procGetFileVersionInfoSizeExA,
+	GetFinalPathNameByHandle:            procGetFinalPathNameByHandle,
+	GetFinalPathNameByHandleA:           procGetFinalPathNameByHandleA,
+	GetFullPathName:                     procGetFullPathName,
+	GetFullPathNameA:                    procGetFullPathNameA,
+	GetFullPathNameTransacted:           procGetFullPathNameTransacted,
+	GetFullPathNameTransactedA:          procGetFullPathNameTransactedA,
+	GetIoRingInfo:                       procGetIoRingInfo,
+	GetLogContainerName:                 procGetLogContainerName,
+	GetLogFileInformation:               procGetLogFileInformation,
+	GetLogIoStatistics:                  procGetLogIoStatistics,
+	GetLogReservationInfo:               procGetLogReservationInfo,
+	GetLogicalDriveStrings:              procGetLogicalDriveStrings,
+	GetLogicalDriveStringsA:             procGetLogicalDriveStringsA,
+	GetLogicalDrives:                    procGetLogicalDrives,
+	GetLongPathName:                     procGetLongPathName,
+	GetLongPathNameA:                    procGetLongPathNameA,
+	GetLongPathNameTransacted:           procGetLongPathNameTransacted,
+	GetLongPathNameTransactedA:          procGetLongPathNameTransactedA,
+	GetNextLogArchiveExtent:             procGetNextLogArchiveExtent,
+	GetNotificationResourceManager:      procGetNotificationResourceManager,
+	GetNotificationResourceManagerAsync: procGetNotificationResourceManagerAsync,
+	GetShortPathName:                    procGetShortPathName,
+	GetShortPathNameA:                   procGetShortPathNameA,
+	GetTapeParameters:                   procGetTapeParameters,
+	GetTapePosition:                     procGetTapePosition,
+	GetTapeStatus:                       procGetTapeStatus,
+	GetTempFileName:                     procGetTempFileName,
+	GetTempFileNameA:                    procGetTempFileNameA,
+	GetTempPath:                         procGetTempPath,
+	GetTempPath2:                        procGetTempPath2,
+	GetTempPath2A:                       procGetTempPath2A,
+	GetTempPathA:                        procGetTempPathA,
+	GetTransactionId:                    procGetTransactionId,
+	GetTransactionInformation:           procGetTransactionInformation,
+	GetTransactionManagerId:             procGetTransactionManagerId,
+	GetVolumeInformation:                procGetVolumeInformation,
+	GetVolumeInformationA:               procGetVolumeInformationA,
+	GetVolumeInformationByHandleW:       procGetVolumeInformationByHandleW,
+	GetVolumeNameForVolumeMountPoint:    procGetVolumeNameForVolumeMountPoint,
+	GetVolumeNameForVolumeMountPointA:   procGetVolumeNameForVolumeMountPointA,
+	GetVolumePathName:                   procGetVolumePathName,
+	GetVolumePathNameA:                  procGetVolumePathNameA,
+	GetVolumePathNamesForVolumeName:     procGetVolumePathNamesForVolumeName,
+	GetVolumePathNamesForVolumeNameA:    procGetVolumePathNamesForVolumeNameA,
+	HandleLogFull:                       procHandleLogFull,
+	InstallLogPolicy:                    procInstallLogPolicy,
+	IsIoRingOpSupported:                 procIsIoRingOpSupported,
+	LZClose:                             procLZClose,
+	LZCopy:                              procLZCopy,
+	LZDone:                              procLZDone,
+	LZInit:                              procLZInit,
+	LZOpenFile:                          procLZOpenFile,
+	LZOpenFileA:                         procLZOpenFileA,
+	LZRead:                              procLZRead,
+	LZSeek:                              procLZSeek,
+	LZStart:                             procLZStart,
+	LocalFileTimeToFileTime:             procLocalFileTimeToFileTime,
+	LockFile:                            procLockFile,
+	LockFileEx:                          procLockFileEx,
+	LogTailAdvanceFailure:               procLogTailAdvanceFailure,
+	LsnBlockOffset:                      procLsnBlockOffset,
+	LsnContainer:                        procLsnContainer,
+	LsnCreate:                           procLsnCreate,
+	LsnEqual:                            procLsnEqual,
+	LsnGreater:                          procLsnGreater,
+	LsnIncrement:                        procLsnIncrement,
+	LsnInvalid:                          procLsnInvalid,
+	LsnLess:                             procLsnLess,
+	LsnNull:                             procLsnNull,
+	LsnRecordSequence:                   procLsnRecordSequence,
+	MoveFile:                            procMoveFile,
+	MoveFileA:                           procMoveFileA,
+	MoveFileEx:                          procMoveFileEx,
+	MoveFileExA:                         procMoveFileExA,
+	MoveFileFromAppW:                    procMoveFileFromAppW,
+	MoveFileTransacted:                  procMoveFileTransacted,
+	MoveFileTransactedA:                 procMoveFileTransactedA,
+	MoveFileWithProgress:                procMoveFileWithProgress,
+	MoveFileWithProgressA:               procMoveFileWithProgressA,
+	NetConnectionEnum:                   procNetConnectionEnum,
+	NetFileClose:                        procNetFileClose,
+	NetFileEnum:                         procNetFileEnum,
+	NetFileGetInfo:                      procNetFileGetInfo,
+	NetServerAliasAdd:                   procNetServerAliasAdd,
+	NetServerAliasDel:                   procNetServerAliasDel,
+	NetServerAliasEnum:                  procNetServerAliasEnum,
+	NetSessionDel:                       procNetSessionDel,
+	NetSessionEnum:                      procNetSessionEnum,
+	NetSessionGetInfo:                   procNetSessionGetInfo,
+	NetShareAdd:                         procNetShareAdd,
+	NetShareCheck:                       procNetShareCheck,
+	NetShareDel:                         procNetShareDel,
+	NetShareDelEx:                       procNetShareDelEx,
+	NetShareDelSticky:                   procNetShareDelSticky,
+	NetShareEnum:                        procNetShareEnum,
+	NetShareEnumSticky:                  procNetShareEnumSticky,
+	NetShareGetInfo:                     procNetShareGetInfo,
+	NetShareSetInfo:                     procNetShareSetInfo,
+	NetStatisticsGet:                    procNetStatisticsGet,
+	OpenEncryptedFileRaw:                procOpenEncryptedFileRaw,
+	OpenEncryptedFileRawA:               procOpenEncryptedFileRawA,
+	OpenEnlistment:                      procOpenEnlistment,
+	OpenFile:                            procOpenFile,
+	OpenFileById:                        procOpenFileById,
+	OpenResourceManager:                 procOpenResourceManager,
+	OpenTransaction:                     procOpenTransaction,
+	OpenTransactionManager:              procOpenTransactionManager,
+	OpenTransactionManagerById:          procOpenTransactionManagerById,
+	PopIoRingCompletion:                 procPopIoRingCompletion,
+	PrePrepareComplete:                  procPrePrepareComplete,
+	PrePrepareEnlistment:                procPrePrepareEnlistment,
+	PrepareComplete:                     procPrepareComplete,
+	PrepareEnlistment:                   procPrepareEnlistment,
+	PrepareLogArchive:                   procPrepareLogArchive,
+	PrepareTape:                         procPrepareTape,
+	QueryDosDevice:                      procQueryDosDevice,
+	QueryDosDeviceA:                     procQueryDosDeviceA,
+	QueryIoRingCapabilities:             procQueryIoRingCapabilities,
+	QueryLogPolicy:                      procQueryLogPolicy,
+	QueryRecoveryAgentsOnEncryptedFile:  procQueryRecoveryAgentsOnEncryptedFile,
+	QueryUsersOnEncryptedFile:           procQueryUsersOnEncryptedFile,
+	ReOpenFile:                          procReOpenFile,
+	ReadDirectoryChangesExW:             procReadDirectoryChangesExW,
+	ReadDirectoryChangesW:               procReadDirectoryChangesW,
+	ReadEncryptedFileRaw:                procReadEncryptedFileRaw,
+	ReadFile:                            procReadFile,
+	ReadFileEx:                          procReadFileEx,
+	ReadFileScatter:                     procReadFileScatter,
+	ReadLogArchiveMetadata:              procReadLogArchiveMetadata,
+	ReadLogNotification:                 procReadLogNotification,
+	ReadLogRecord:                       procReadLogRecord,
+	ReadLogRestartArea:                  procReadLogRestartArea,
+	ReadNextLogRecord:                   procReadNextLogRecord,
+	ReadOnlyEnlistment:                  procReadOnlyEnlistment,
+	ReadPreviousLogRestartArea:          procReadPreviousLogRestartArea,
+	RecoverEnlistment:                   procRecoverEnlistment,
+	RecoverResourceManager:              procRecoverResourceManager,
+	RecoverTransactionManager:           procRecoverTransactionManager,
+	RegisterForLogWriteNotification:     procRegisterForLogWriteNotification,
+	RegisterManageableLogClient:         procRegisterManageableLogClient,
+	RemoveBindLink:                      procRemoveBindLink,
+	RemoveDirectory:                     procRemoveDirectory,
+	RemoveDirectory2:                    procRemoveDirectory2,
+	RemoveDirectory2A:                   procRemoveDirectory2A,
+	RemoveDirectoryA:                    procRemoveDirectoryA,
+	RemoveDirectoryFromAppW:             procRemoveDirectoryFromAppW,
+	RemoveDirectoryTransacted:           procRemoveDirectoryTransacted,
+	RemoveDirectoryTransactedA:          procRemoveDirectoryTransactedA,
+	RemoveLogContainer:                  procRemoveLogContainer,
+	RemoveLogContainerSet:               procRemoveLogContainerSet,
+	RemoveLogPolicy:                     procRemoveLogPolicy,
+	RemoveUsersFromEncryptedFile:        procRemoveUsersFromEncryptedFile,
+	RenameTransactionManager:            procRenameTransactionManager,
+	ReplaceFile:                         procReplaceFile,
+	ReplaceFileA:                        procReplaceFileA,
+	ReplaceFileFromAppW:                 procReplaceFileFromAppW,
+	ReserveAndAppendLog:                 procReserveAndAppendLog,
+	ReserveAndAppendLogAligned:          procReserveAndAppendLogAligned,
+	RollbackComplete:                    procRollbackComplete,
+	RollbackEnlistment:                  procRollbackEnlistment,
+	RollbackTransaction:                 procRollbackTransaction,
+	RollbackTransactionAsync:            procRollbackTransactionAsync,
+	RollforwardTransactionManager:       procRollforwardTransactionManager,
+	ScanLogContainers:                   procScanLogContainers,
+	SearchPath:                          procSearchPath,
+	SearchPathA:                         procSearchPathA,
+	SetEncryptedFileMetadata:            procSetEncryptedFileMetadata,
+	SetEndOfFile:                        procSetEndOfFile,
+	SetEndOfLog:                         procSetEndOfLog,
+	SetEnlistmentRecoveryInformation:    procSetEnlistmentRecoveryInformation,
+	SetFileApisToANSI:                   procSetFileApisToANSI,
+	SetFileApisToOEM:                    procSetFileApisToOEM,
+	SetFileAttributes:                   procSetFileAttributes,
+	SetFileAttributesA:                  procSetFileAttributesA,
+	SetFileAttributesFromAppW:           procSetFileAttributesFromAppW,
+	SetFileAttributesTransacted:         procSetFileAttributesTransacted,
+	SetFileAttributesTransactedA:        procSetFileAttributesTransactedA,
+	SetFileBandwidthReservation:         procSetFileBandwidthReservation,
+	SetFileCompletionNotificationModes:  procSetFileCompletionNotificationModes,
+	SetFileInformationByHandle:          procSetFileInformationByHandle,
+	SetFileIoOverlappedRange:            procSetFileIoOverlappedRange,
+	SetFilePointer:                      procSetFilePointer,
+	SetFilePointerEx:                    procSetFilePointerEx,
+	SetFileShortName:                    procSetFileShortName,
+	SetFileShortNameA:                   procSetFileShortNameA,
+	SetFileTime:                         procSetFileTime,
+	SetFileValidData:                    procSetFileValidData,
+	SetIoRingCompletionEvent:            procSetIoRingCompletionEvent,
+	SetLogArchiveMode:                   procSetLogArchiveMode,
+	SetLogArchiveTail:                   procSetLogArchiveTail,
+	SetLogFileSizeWithPolicy:            procSetLogFileSizeWithPolicy,
+	SetResourceManagerCompletionPort:    procSetResourceManagerCompletionPort,
+	SetSearchPathMode:                   procSetSearchPathMode,
+	SetTapeParameters:                   procSetTapeParameters,
+	SetTapePosition:                     procSetTapePosition,
+	SetTransactionInformation:           procSetTransactionInformation,
+	SetUserFileEncryptionKey:            procSetUserFileEncryptionKey,
+	SetUserFileEncryptionKeyEx:          procSetUserFileEncryptionKeyEx,
+	SetVolumeLabel:                      procSetVolumeLabel,
+	SetVolumeLabelA:                     procSetVolumeLabelA,
+	SetVolumeMountPoint:                 procSetVolumeMountPoint,
+	SetVolumeMountPointA:                procSetVolumeMountPointA,
+	SinglePhaseReject:                   procSinglePhaseReject,
+	SubmitIoRing:                        procSubmitIoRing,
+	TerminateLogArchive:                 procTerminateLogArchive,
+	TerminateReadLog:                    procTerminateReadLog,
+	TruncateLog:                         procTruncateLog,
+	TxfGetThreadMiniVersionForCreate:    procTxfGetThreadMiniVersionForCreate,
+	TxfLogCreateFileReadContext:         procTxfLogCreateFileReadContext,
+	TxfLogCreateRangeReadContext:        procTxfLogCreateRangeReadContext,
+	TxfLogDestroyReadContext:            procTxfLogDestroyReadContext,
+	TxfLogReadRecords:                   procTxfLogReadRecords,
+	TxfLogRecordGetFileName:             procTxfLogRecordGetFileName,
+	TxfLogRecordGetGenericType:          procTxfLogRecordGetGenericType,
+	TxfReadMetadataInfo:                 procTxfReadMetadataInfo,
+	TxfSetThreadMiniVersionForCreate:    procTxfSetThreadMiniVersionForCreate,
+	UnlockFile:                          procUnlockFile,
+	UnlockFileEx:                        procUnlockFileEx,
+	ValidateLog:                         procValidateLog,
+	VerFindFile:                         procVerFindFile,
+	VerFindFileA:                        procVerFindFileA,
+	VerInstallFile:                      procVerInstallFile,
+	VerInstallFileA:                     procVerInstallFileA,
+	VerLanguageName:                     procVerLanguageName,
+	VerLanguageNameA:                    procVerLanguageNameA,
+	VerQueryValue:                       procVerQueryValue,
+	VerQueryValueA:                      procVerQueryValueA,
+	WofEnumEntries:                      procWofEnumEntries,
+	WofFileEnumFiles:                    procWofFileEnumFiles,
+	WofGetDriverVersion:                 procWofGetDriverVersion,
+	WofIsExternalFile:                   procWofIsExternalFile,
+	WofSetFileDataLocation:              procWofSetFileDataLocation,
+	WofShouldCompressBinaries:           procWofShouldCompressBinaries,
+	WofWimAddEntry:                      procWofWimAddEntry,
+	WofWimEnumFiles:                     procWofWimEnumFiles,
+	WofWimRemoveEntry:                   procWofWimRemoveEntry,
+	WofWimSuspendEntry:                  procWofWimSuspendEntry,
+	WofWimUpdateEntry:                   procWofWimUpdateEntry,
+	Wow64DisableWow64FsRedirection:      procWow64DisableWow64FsRedirection,
+	Wow64EnableWow64FsRedirection:       procWow64EnableWow64FsRedirection,
+	Wow64RevertWow64FsRedirection:       procWow64RevertWow64FsRedirection,
+	WriteEncryptedFileRaw:               procWriteEncryptedFileRaw,
+	WriteFile:                           procWriteFile,
+	WriteFileEx:                         procWriteFileEx,
+	WriteFileGather:                     procWriteFileGather,
+	WriteLogRestartArea:                 procWriteLogRestartArea,
+	WriteTapemark:                       procWriteTapemark,
+}
+
 // AddLogContainer calls clfsw32!AddLogContainer.
 // https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-addlogcontainer
 // Minimum OS: windows6.0.6000.
@@ -576,6 +1440,44 @@ func BackupWrite(hFile foundation.HANDLE, lpBuffer []byte, lpNumberOfBytesWritte
 	return nil
 }
 
+var specBuildIoRingCancelRequest = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// BuildIoRingCancelRequest calls api-ms-win-core-ioring-l1-1-0!BuildIoRingCancelRequest.
+// https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringcancelrequest
+func BuildIoRingCancelRequest(ioRing HIORING, file IORING_HANDLE_REF, opToCancel uintptr, userData uintptr) error {
+	r1, _, _ := win32.Call(procBuildIoRingCancelRequest.Addr(), specBuildIoRingCancelRequest, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&file)), uintptr(opToCancel), uintptr(userData)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingFlushFile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingFlushFile calls KERNEL32!BuildIoRingFlushFile.
+func BuildIoRingFlushFile(ioRing HIORING, fileRef IORING_HANDLE_REF, flushMode FILE_FLUSH_MODE, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	r1, _, _ := win32.Call(procBuildIoRingFlushFile.Addr(), specBuildIoRingFlushFile, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(flushMode), uintptr(userData), uintptr(sqeFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingReadFile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingReadFile calls api-ms-win-core-ioring-l1-1-0!BuildIoRingReadFile.
+// https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringreadfile
+func BuildIoRingReadFile(ioRing HIORING, fileRef IORING_HANDLE_REF, dataRef IORING_BUFFER_REF, numberOfBytesToRead uint32, fileOffset uint64, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	r1, _, _ := win32.Call(procBuildIoRingReadFile.Addr(), specBuildIoRingReadFile, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(unsafe.Pointer(&dataRef)), uintptr(numberOfBytesToRead), uintptr(fileOffset), uintptr(userData), uintptr(sqeFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingReadFileScatter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingReadFileScatter calls KERNEL32!BuildIoRingReadFileScatter.
+func BuildIoRingReadFileScatter(ioRing HIORING, fileRef IORING_HANDLE_REF, segmentArray []FILE_SEGMENT_ELEMENT, numberOfBytesToRead uint32, fileOffset uint64, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	var _segmentArray *FILE_SEGMENT_ELEMENT
+	if len(segmentArray) > 0 {
+		_segmentArray = &segmentArray[0]
+	}
+	r1, _, _ := win32.Call(procBuildIoRingReadFileScatter.Addr(), specBuildIoRingReadFileScatter, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(len(segmentArray)), uintptr(unsafe.Pointer(_segmentArray)), uintptr(numberOfBytesToRead), uintptr(fileOffset), uintptr(userData), uintptr(sqeFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // BuildIoRingRegisterBuffers calls api-ms-win-core-ioring-l1-1-0!BuildIoRingRegisterBuffers.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringregisterbuffers
 func BuildIoRingRegisterBuffers(ioRing HIORING, buffers []IORING_BUFFER_INFO, userData uintptr) error {
@@ -595,6 +1497,26 @@ func BuildIoRingRegisterFileHandles(ioRing HIORING, handles []foundation.HANDLE,
 		_handles = &handles[0]
 	}
 	r1, _, _ := syscall.SyscallN(procBuildIoRingRegisterFileHandles.Addr(), uintptr(ioRing), uintptr(len(handles)), uintptr(unsafe.Pointer(_handles)), uintptr(userData))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingWriteFile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingWriteFile calls KERNEL32!BuildIoRingWriteFile.
+func BuildIoRingWriteFile(ioRing HIORING, fileRef IORING_HANDLE_REF, bufferRef IORING_BUFFER_REF, numberOfBytesToWrite uint32, fileOffset uint64, writeFlags FILE_WRITE_FLAGS, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	r1, _, _ := win32.Call(procBuildIoRingWriteFile.Addr(), specBuildIoRingWriteFile, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(unsafe.Pointer(&bufferRef)), uintptr(numberOfBytesToWrite), uintptr(fileOffset), uintptr(writeFlags), uintptr(userData), uintptr(sqeFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingWriteFileGather = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingWriteFileGather calls KERNEL32!BuildIoRingWriteFileGather.
+func BuildIoRingWriteFileGather(ioRing HIORING, fileRef IORING_HANDLE_REF, segmentArray []FILE_SEGMENT_ELEMENT, numberOfBytesToWrite uint32, fileOffset uint64, writeFlags FILE_WRITE_FLAGS, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	var _segmentArray *FILE_SEGMENT_ELEMENT
+	if len(segmentArray) > 0 {
+		_segmentArray = &segmentArray[0]
+	}
+	r1, _, _ := win32.Call(procBuildIoRingWriteFileGather.Addr(), specBuildIoRingWriteFileGather, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(len(segmentArray)), uintptr(unsafe.Pointer(_segmentArray)), uintptr(numberOfBytesToWrite), uintptr(fileOffset), uintptr(writeFlags), uintptr(userData), uintptr(sqeFlags)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -881,8 +1803,8 @@ func CreateDirectoryFromAppW(lpPathName string, lpSecurityAttributes *security.S
 // CreateDirectoryTransacted calls KERNEL32!CreateDirectoryTransactedW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createdirectorytransactedw
 // Minimum OS: windows6.0.6000.
-func CreateDirectoryTransacted(lpTemplateDirectory string, lpNewDirectory string, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, hTransaction foundation.HANDLE) error {
-	_lpTemplateDirectory := win32.UTF16Ptr(lpTemplateDirectory)
+func CreateDirectoryTransacted(lpTemplateDirectory *string, lpNewDirectory string, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, hTransaction foundation.HANDLE) error {
+	_lpTemplateDirectory := win32.UTF16PtrOrNil(lpTemplateDirectory)
 	_lpNewDirectory := win32.UTF16Ptr(lpNewDirectory)
 	r1, _, e1 := syscall.SyscallN(procCreateDirectoryTransacted.Addr(), uintptr(unsafe.Pointer(_lpTemplateDirectory)), uintptr(unsafe.Pointer(_lpNewDirectory)), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(hTransaction))
 	if r1 == 0 {
@@ -1093,8 +2015,8 @@ func CreateLogMarshallingArea(hLog foundation.HANDLE, pfnAllocBuffer CLFS_BLOCK_
 // CreateResourceManager calls ktmw32!CreateResourceManager.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-createresourcemanager
 // Minimum OS: windows6.0.6000.
-func CreateResourceManager(lpResourceManagerAttributes *security.SECURITY_ATTRIBUTES, ResourceManagerId *win32.GUID, CreateOptions uint32, TmHandle foundation.HANDLE, Description string) (foundation.HANDLE, error) {
-	_Description := win32.UTF16Ptr(Description)
+func CreateResourceManager(lpResourceManagerAttributes *security.SECURITY_ATTRIBUTES, ResourceManagerId *win32.GUID, CreateOptions uint32, TmHandle foundation.HANDLE, Description *string) (foundation.HANDLE, error) {
+	_Description := win32.UTF16PtrOrNil(Description)
 	r1, _, e1 := syscall.SyscallN(procCreateResourceManager.Addr(), uintptr(unsafe.Pointer(lpResourceManagerAttributes)), uintptr(unsafe.Pointer(ResourceManagerId)), uintptr(CreateOptions), uintptr(TmHandle), uintptr(unsafe.Pointer(_Description)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1162,8 +2084,8 @@ func CreateTapePartition(hDevice foundation.HANDLE, dwPartitionMethod CREATE_TAP
 // CreateTransaction calls ktmw32!CreateTransaction.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-createtransaction
 // Minimum OS: windows6.0.6000.
-func CreateTransaction(lpTransactionAttributes *security.SECURITY_ATTRIBUTES, UOW *win32.GUID, CreateOptions uint32, IsolationLevel uint32, IsolationFlags uint32, Timeout uint32, Description string) (foundation.HANDLE, error) {
-	_Description := win32.UTF16Ptr(Description)
+func CreateTransaction(lpTransactionAttributes *security.SECURITY_ATTRIBUTES, UOW *win32.GUID, CreateOptions uint32, IsolationLevel uint32, IsolationFlags uint32, Timeout uint32, Description *string) (foundation.HANDLE, error) {
+	_Description := win32.UTF16PtrOrNil(Description)
 	r1, _, e1 := syscall.SyscallN(procCreateTransaction.Addr(), uintptr(unsafe.Pointer(lpTransactionAttributes)), uintptr(unsafe.Pointer(UOW)), uintptr(CreateOptions), uintptr(IsolationLevel), uintptr(IsolationFlags), uintptr(Timeout), uintptr(unsafe.Pointer(_Description)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -1211,9 +2133,9 @@ func DecryptFileA(lpFileName foundation.PSTR) error {
 // DefineDosDevice calls KERNEL32!DefineDosDeviceW.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-definedosdevicew
 // Minimum OS: windows5.1.2600.
-func DefineDosDevice(dwFlags DEFINE_DOS_DEVICE_FLAGS, lpDeviceName string, lpTargetPath string) error {
+func DefineDosDevice(dwFlags DEFINE_DOS_DEVICE_FLAGS, lpDeviceName string, lpTargetPath *string) error {
 	_lpDeviceName := win32.UTF16Ptr(lpDeviceName)
-	_lpTargetPath := win32.UTF16Ptr(lpTargetPath)
+	_lpTargetPath := win32.UTF16PtrOrNil(lpTargetPath)
 	r1, _, e1 := syscall.SyscallN(procDefineDosDevice.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpDeviceName)), uintptr(unsafe.Pointer(_lpTargetPath)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1949,8 +2871,8 @@ func GetCurrentClockTransactionManager(TransactionManagerHandle foundation.HANDL
 // GetDiskFreeSpace calls KERNEL32!GetDiskFreeSpaceW.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskfreespacew
 // Minimum OS: windows5.1.2600.
-func GetDiskFreeSpace(lpRootPathName string, lpSectorsPerCluster *uint32, lpBytesPerSector *uint32, lpNumberOfFreeClusters *uint32, lpTotalNumberOfClusters *uint32) error {
-	_lpRootPathName := win32.UTF16Ptr(lpRootPathName)
+func GetDiskFreeSpace(lpRootPathName *string, lpSectorsPerCluster *uint32, lpBytesPerSector *uint32, lpNumberOfFreeClusters *uint32, lpTotalNumberOfClusters *uint32) error {
+	_lpRootPathName := win32.UTF16PtrOrNil(lpRootPathName)
 	r1, _, e1 := syscall.SyscallN(procGetDiskFreeSpace.Addr(), uintptr(unsafe.Pointer(_lpRootPathName)), uintptr(unsafe.Pointer(lpSectorsPerCluster)), uintptr(unsafe.Pointer(lpBytesPerSector)), uintptr(unsafe.Pointer(lpNumberOfFreeClusters)), uintptr(unsafe.Pointer(lpTotalNumberOfClusters)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1972,8 +2894,8 @@ func GetDiskFreeSpaceA(lpRootPathName foundation.PSTR, lpSectorsPerCluster *uint
 // GetDiskFreeSpaceEx calls KERNEL32!GetDiskFreeSpaceExW.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskfreespaceexw
 // Minimum OS: windows5.1.2600.
-func GetDiskFreeSpaceEx(lpDirectoryName string, lpFreeBytesAvailableToCaller *uint64, lpTotalNumberOfBytes *uint64, lpTotalNumberOfFreeBytes *uint64) error {
-	_lpDirectoryName := win32.UTF16Ptr(lpDirectoryName)
+func GetDiskFreeSpaceEx(lpDirectoryName *string, lpFreeBytesAvailableToCaller *uint64, lpTotalNumberOfBytes *uint64, lpTotalNumberOfFreeBytes *uint64) error {
+	_lpDirectoryName := win32.UTF16PtrOrNil(lpDirectoryName)
 	r1, _, e1 := syscall.SyscallN(procGetDiskFreeSpaceEx.Addr(), uintptr(unsafe.Pointer(_lpDirectoryName)), uintptr(unsafe.Pointer(lpFreeBytesAvailableToCaller)), uintptr(unsafe.Pointer(lpTotalNumberOfBytes)), uintptr(unsafe.Pointer(lpTotalNumberOfFreeBytes)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1994,8 +2916,8 @@ func GetDiskFreeSpaceExA(lpDirectoryName foundation.PSTR, lpFreeBytesAvailableTo
 
 // GetDiskSpaceInformation calls KERNEL32!GetDiskSpaceInformationW.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdiskspaceinformationw
-func GetDiskSpaceInformation(rootPath string, diskSpaceInfo *DISK_SPACE_INFORMATION) error {
-	_rootPath := win32.UTF16Ptr(rootPath)
+func GetDiskSpaceInformation(rootPath *string, diskSpaceInfo *DISK_SPACE_INFORMATION) error {
+	_rootPath := win32.UTF16PtrOrNil(rootPath)
 	r1, _, _ := syscall.SyscallN(procGetDiskSpaceInformation.Addr(), uintptr(unsafe.Pointer(_rootPath)), uintptr(unsafe.Pointer(diskSpaceInfo)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2010,8 +2932,8 @@ func GetDiskSpaceInformationA(rootPath foundation.PSTR, diskSpaceInfo *DISK_SPAC
 // GetDriveType calls KERNEL32!GetDriveTypeW.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getdrivetypew
 // Minimum OS: windows5.1.2600.
-func GetDriveType(lpRootPathName string) uint32 {
-	_lpRootPathName := win32.UTF16Ptr(lpRootPathName)
+func GetDriveType(lpRootPathName *string) uint32 {
+	_lpRootPathName := win32.UTF16PtrOrNil(lpRootPathName)
 	r1, _, _ := syscall.SyscallN(procGetDriveType.Addr(), uintptr(unsafe.Pointer(_lpRootPathName)))
 	return uint32(r1)
 }
@@ -2723,8 +3645,8 @@ func GetTransactionManagerId(TransactionManagerHandle foundation.HANDLE, Transac
 // GetVolumeInformation calls KERNEL32!GetVolumeInformationW.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-getvolumeinformationw
 // Minimum OS: windows5.1.2600.
-func GetVolumeInformation(lpRootPathName string, lpVolumeNameBuffer foundation.PWSTR, nVolumeNameSize uint32, lpVolumeSerialNumber *uint32, lpMaximumComponentLength *uint32, lpFileSystemFlags *uint32, lpFileSystemNameBuffer foundation.PWSTR, nFileSystemNameSize uint32) error {
-	_lpRootPathName := win32.UTF16Ptr(lpRootPathName)
+func GetVolumeInformation(lpRootPathName *string, lpVolumeNameBuffer foundation.PWSTR, nVolumeNameSize uint32, lpVolumeSerialNumber *uint32, lpMaximumComponentLength *uint32, lpFileSystemFlags *uint32, lpFileSystemNameBuffer foundation.PWSTR, nFileSystemNameSize uint32) error {
+	_lpRootPathName := win32.UTF16PtrOrNil(lpRootPathName)
 	r1, _, e1 := syscall.SyscallN(procGetVolumeInformation.Addr(), uintptr(unsafe.Pointer(_lpRootPathName)), uintptr(unsafe.Pointer(lpVolumeNameBuffer)), uintptr(nVolumeNameSize), uintptr(unsafe.Pointer(lpVolumeSerialNumber)), uintptr(unsafe.Pointer(lpMaximumComponentLength)), uintptr(unsafe.Pointer(lpFileSystemFlags)), uintptr(unsafe.Pointer(lpFileSystemNameBuffer)), uintptr(nFileSystemNameSize))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2979,6 +3901,14 @@ func LsnContainer(plsn *CLS_LSN) uint32 {
 	return uint32(r1)
 }
 
+// LsnCreate calls clfsw32!LsnCreate.
+// https://learn.microsoft.com/windows/win32/api/clfsw32/nf-clfsw32-lsncreate
+// Minimum OS: windows6.0.6000.
+func LsnCreate(cidContainer uint32, offBlock uint32, cRecord uint32) CLS_LSN {
+	r1, _, _ := syscall.SyscallN(procLsnCreate.Addr(), uintptr(cidContainer), uintptr(offBlock), uintptr(cRecord))
+	return win32.StructRet[CLS_LSN](r1)
+}
+
 // LsnEqual calls clfsw32!LsnEqual.
 func LsnEqual(plsn1 *CLS_LSN, plsn2 *CLS_LSN) foundation.BOOLEAN {
 	r1, _, _ := syscall.SyscallN(procLsnEqual.Addr(), uintptr(unsafe.Pointer(plsn1)), uintptr(unsafe.Pointer(plsn2)))
@@ -2989,6 +3919,12 @@ func LsnEqual(plsn1 *CLS_LSN, plsn2 *CLS_LSN) foundation.BOOLEAN {
 func LsnGreater(plsn1 *CLS_LSN, plsn2 *CLS_LSN) foundation.BOOLEAN {
 	r1, _, _ := syscall.SyscallN(procLsnGreater.Addr(), uintptr(unsafe.Pointer(plsn1)), uintptr(unsafe.Pointer(plsn2)))
 	return foundation.BOOLEAN(r1)
+}
+
+// LsnIncrement calls clfsw32!LsnIncrement.
+func LsnIncrement(plsn *CLS_LSN) CLS_LSN {
+	r1, _, _ := syscall.SyscallN(procLsnIncrement.Addr(), uintptr(unsafe.Pointer(plsn)))
+	return win32.StructRet[CLS_LSN](r1)
 }
 
 // LsnInvalid calls clfsw32!LsnInvalid.
@@ -3044,9 +3980,9 @@ func MoveFileA(lpExistingFileName foundation.PSTR, lpNewFileName foundation.PSTR
 // MoveFileEx calls KERNEL32!MoveFileExW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefileexw
 // Minimum OS: windows5.1.2600.
-func MoveFileEx(lpExistingFileName string, lpNewFileName string, dwFlags MOVE_FILE_FLAGS) error {
+func MoveFileEx(lpExistingFileName string, lpNewFileName *string, dwFlags MOVE_FILE_FLAGS) error {
 	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
-	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	_lpNewFileName := win32.UTF16PtrOrNil(lpNewFileName)
 	r1, _, e1 := syscall.SyscallN(procMoveFileEx.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3077,9 +4013,9 @@ func MoveFileFromAppW(lpExistingFileName string, lpNewFileName string) bool {
 // MoveFileTransacted calls KERNEL32!MoveFileTransactedW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefiletransactedw
 // Minimum OS: windows6.0.6000.
-func MoveFileTransacted(lpExistingFileName string, lpNewFileName string, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, dwFlags MOVE_FILE_FLAGS, hTransaction foundation.HANDLE) error {
+func MoveFileTransacted(lpExistingFileName string, lpNewFileName *string, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, dwFlags MOVE_FILE_FLAGS, hTransaction foundation.HANDLE) error {
 	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
-	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	_lpNewFileName := win32.UTF16PtrOrNil(lpNewFileName)
 	r1, _, e1 := syscall.SyscallN(procMoveFileTransacted.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(dwFlags), uintptr(hTransaction))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3101,9 +4037,9 @@ func MoveFileTransactedA(lpExistingFileName foundation.PSTR, lpNewFileName found
 // MoveFileWithProgress calls KERNEL32!MoveFileWithProgressW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-movefilewithprogressw
 // Minimum OS: windows5.1.2600.
-func MoveFileWithProgress(lpExistingFileName string, lpNewFileName string, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, dwFlags MOVE_FILE_FLAGS) error {
+func MoveFileWithProgress(lpExistingFileName string, lpNewFileName *string, lpProgressRoutine LPPROGRESS_ROUTINE, lpData unsafe.Pointer, dwFlags MOVE_FILE_FLAGS) error {
 	_lpExistingFileName := win32.UTF16Ptr(lpExistingFileName)
-	_lpNewFileName := win32.UTF16Ptr(lpNewFileName)
+	_lpNewFileName := win32.UTF16PtrOrNil(lpNewFileName)
 	r1, _, e1 := syscall.SyscallN(procMoveFileWithProgress.Addr(), uintptr(unsafe.Pointer(_lpExistingFileName)), uintptr(unsafe.Pointer(_lpNewFileName)), uintptr(lpProgressRoutine), uintptr(unsafe.Pointer(lpData)), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3125,8 +4061,8 @@ func MoveFileWithProgressA(lpExistingFileName foundation.PSTR, lpNewFileName fou
 // NetConnectionEnum calls NETAPI32!NetConnectionEnum.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netconnectionenum
 // Minimum OS: windows5.1.2600.
-func NetConnectionEnum(servername string, qualifier string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetConnectionEnum(servername *string, qualifier string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_qualifier := win32.UTF16Ptr(qualifier)
 	r1, _, _ := syscall.SyscallN(procNetConnectionEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_qualifier)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
@@ -3135,8 +4071,8 @@ func NetConnectionEnum(servername string, qualifier string, level uint32, bufptr
 // NetFileClose calls NETAPI32!NetFileClose.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netfileclose
 // Minimum OS: windows5.1.2600.
-func NetFileClose(servername string, fileid uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetFileClose(servername *string, fileid uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetFileClose.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(fileid))
 	return uint32(r1)
 }
@@ -3144,10 +4080,10 @@ func NetFileClose(servername string, fileid uint32) uint32 {
 // NetFileEnum calls NETAPI32!NetFileEnum.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netfileenum
 // Minimum OS: windows5.1.2600.
-func NetFileEnum(servername string, basepath string, username string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uintptr) uint32 {
-	_servername := win32.UTF16Ptr(servername)
-	_basepath := win32.UTF16Ptr(basepath)
-	_username := win32.UTF16Ptr(username)
+func NetFileEnum(servername *string, basepath *string, username *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uintptr) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
+	_basepath := win32.UTF16PtrOrNil(basepath)
+	_username := win32.UTF16PtrOrNil(username)
 	r1, _, _ := syscall.SyscallN(procNetFileEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_basepath)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
@@ -3155,29 +4091,29 @@ func NetFileEnum(servername string, basepath string, username string, level uint
 // NetFileGetInfo calls NETAPI32!NetFileGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netfilegetinfo
 // Minimum OS: windows5.1.2600.
-func NetFileGetInfo(servername string, fileid uint32, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetFileGetInfo(servername *string, fileid uint32, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetFileGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(fileid), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
 }
 
 // NetServerAliasAdd calls NETAPI32!NetServerAliasAdd.
-func NetServerAliasAdd(servername string, level uint32, buf *byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerAliasAdd(servername *string, level uint32, buf *byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerAliasAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)))
 	return uint32(r1)
 }
 
 // NetServerAliasDel calls NETAPI32!NetServerAliasDel.
-func NetServerAliasDel(servername string, level uint32, buf *byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerAliasDel(servername *string, level uint32, buf *byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerAliasDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)))
 	return uint32(r1)
 }
 
 // NetServerAliasEnum calls NETAPI32!NetServerAliasEnum.
-func NetServerAliasEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetServerAliasEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resumehandle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetServerAliasEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resumehandle)))
 	return uint32(r1)
 }
@@ -3185,10 +4121,10 @@ func NetServerAliasEnum(servername string, level uint32, bufptr **byte, prefmaxl
 // NetSessionDel calls NETAPI32!NetSessionDel.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsessiondel
 // Minimum OS: windows5.1.2600.
-func NetSessionDel(servername string, UncClientName string, username string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
-	_UncClientName := win32.UTF16Ptr(UncClientName)
-	_username := win32.UTF16Ptr(username)
+func NetSessionDel(servername *string, UncClientName *string, username *string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
+	_UncClientName := win32.UTF16PtrOrNil(UncClientName)
+	_username := win32.UTF16PtrOrNil(username)
 	r1, _, _ := syscall.SyscallN(procNetSessionDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_UncClientName)), uintptr(unsafe.Pointer(_username)))
 	return uint32(r1)
 }
@@ -3196,10 +4132,10 @@ func NetSessionDel(servername string, UncClientName string, username string) uin
 // NetSessionEnum calls NETAPI32!NetSessionEnum.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsessionenum
 // Minimum OS: windows5.1.2600.
-func NetSessionEnum(servername string, UncClientName string, username string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
-	_UncClientName := win32.UTF16Ptr(UncClientName)
-	_username := win32.UTF16Ptr(username)
+func NetSessionEnum(servername *string, UncClientName *string, username *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
+	_UncClientName := win32.UTF16PtrOrNil(UncClientName)
+	_username := win32.UTF16PtrOrNil(username)
 	r1, _, _ := syscall.SyscallN(procNetSessionEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_UncClientName)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
@@ -3207,8 +4143,8 @@ func NetSessionEnum(servername string, UncClientName string, username string, le
 // NetSessionGetInfo calls NETAPI32!NetSessionGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsessiongetinfo
 // Minimum OS: windows5.1.2600.
-func NetSessionGetInfo(servername string, UncClientName string, username string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetSessionGetInfo(servername *string, UncClientName string, username string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_UncClientName := win32.UTF16Ptr(UncClientName)
 	_username := win32.UTF16Ptr(username)
 	r1, _, _ := syscall.SyscallN(procNetSessionGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_UncClientName)), uintptr(unsafe.Pointer(_username)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
@@ -3218,8 +4154,8 @@ func NetSessionGetInfo(servername string, UncClientName string, username string,
 // NetShareAdd calls NETAPI32!NetShareAdd.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netshareadd
 // Minimum OS: windows5.1.2600.
-func NetShareAdd(servername string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetShareAdd(servername *string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetShareAdd.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
 }
@@ -3227,8 +4163,8 @@ func NetShareAdd(servername string, level uint32, buf *byte, parm_err *uint32) u
 // NetShareCheck calls NETAPI32!NetShareCheck.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharecheck
 // Minimum OS: windows5.1.2600.
-func NetShareCheck(servername string, device string, type_ *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetShareCheck(servername *string, device string, type_ *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_device := win32.UTF16Ptr(device)
 	r1, _, _ := syscall.SyscallN(procNetShareCheck.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_device)), uintptr(unsafe.Pointer(type_)))
 	return uint32(r1)
@@ -3237,8 +4173,8 @@ func NetShareCheck(servername string, device string, type_ *uint32) uint32 {
 // NetShareDel calls NETAPI32!NetShareDel.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharedel
 // Minimum OS: windows5.1.2600.
-func NetShareDel(servername string, netname string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetShareDel(servername *string, netname string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_netname := win32.UTF16Ptr(netname)
 	r1, _, _ := syscall.SyscallN(procNetShareDel.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_netname)), 0)
 	return uint32(r1)
@@ -3247,15 +4183,15 @@ func NetShareDel(servername string, netname string) uint32 {
 // NetShareDelEx calls NETAPI32!NetShareDelEx.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharedelex
 // Minimum OS: windows5.1.2600.
-func NetShareDelEx(servername string, level uint32, buf *byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetShareDelEx(servername *string, level uint32, buf *byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetShareDelEx.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(buf)))
 	return uint32(r1)
 }
 
 // NetShareDelSticky calls NETAPI32!NetShareDelSticky.
-func NetShareDelSticky(servername string, netname string) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetShareDelSticky(servername *string, netname string) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_netname := win32.UTF16Ptr(netname)
 	r1, _, _ := syscall.SyscallN(procNetShareDelSticky.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_netname)), 0)
 	return uint32(r1)
@@ -3264,15 +4200,15 @@ func NetShareDelSticky(servername string, netname string) uint32 {
 // NetShareEnum calls NETAPI32!NetShareEnum.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netshareenum
 // Minimum OS: windows5.1.2600.
-func NetShareEnum(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetShareEnum(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetShareEnum.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
 
 // NetShareEnumSticky calls NETAPI32!NetShareEnumSticky.
-func NetShareEnumSticky(servername string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetShareEnumSticky(servername *string, level uint32, bufptr **byte, prefmaxlen uint32, entriesread *uint32, totalentries *uint32, resume_handle *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	r1, _, _ := syscall.SyscallN(procNetShareEnumSticky.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(level), uintptr(unsafe.Pointer(bufptr)), uintptr(prefmaxlen), uintptr(unsafe.Pointer(entriesread)), uintptr(unsafe.Pointer(totalentries)), uintptr(unsafe.Pointer(resume_handle)))
 	return uint32(r1)
 }
@@ -3280,8 +4216,8 @@ func NetShareEnumSticky(servername string, level uint32, bufptr **byte, prefmaxl
 // NetShareGetInfo calls NETAPI32!NetShareGetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharegetinfo
 // Minimum OS: windows5.1.2600.
-func NetShareGetInfo(servername string, netname string, level uint32, bufptr **byte) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetShareGetInfo(servername *string, netname string, level uint32, bufptr **byte) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_netname := win32.UTF16Ptr(netname)
 	r1, _, _ := syscall.SyscallN(procNetShareGetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_netname)), uintptr(level), uintptr(unsafe.Pointer(bufptr)))
 	return uint32(r1)
@@ -3290,8 +4226,8 @@ func NetShareGetInfo(servername string, netname string, level uint32, bufptr **b
 // NetShareSetInfo calls NETAPI32!NetShareSetInfo.
 // https://learn.microsoft.com/windows/win32/api/lmshare/nf-lmshare-netsharesetinfo
 // Minimum OS: windows5.1.2600.
-func NetShareSetInfo(servername string, netname string, level uint32, buf *byte, parm_err *uint32) uint32 {
-	_servername := win32.UTF16Ptr(servername)
+func NetShareSetInfo(servername *string, netname string, level uint32, buf *byte, parm_err *uint32) uint32 {
+	_servername := win32.UTF16PtrOrNil(servername)
 	_netname := win32.UTF16Ptr(netname)
 	r1, _, _ := syscall.SyscallN(procNetShareSetInfo.Addr(), uintptr(unsafe.Pointer(_servername)), uintptr(unsafe.Pointer(_netname)), uintptr(level), uintptr(unsafe.Pointer(buf)), uintptr(unsafe.Pointer(parm_err)))
 	return uint32(r1)
@@ -3480,8 +4416,8 @@ func PrepareTape(hDevice foundation.HANDLE, dwOperation PREPARE_TAPE_OPERATION, 
 // QueryDosDevice calls KERNEL32!QueryDosDeviceW.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-querydosdevicew
 // Minimum OS: windows5.1.2600.
-func QueryDosDevice(lpDeviceName string, lpTargetPath foundation.PWSTR, ucchMax uint32) (uint32, error) {
-	_lpDeviceName := win32.UTF16Ptr(lpDeviceName)
+func QueryDosDevice(lpDeviceName *string, lpTargetPath foundation.PWSTR, ucchMax uint32) (uint32, error) {
+	_lpDeviceName := win32.UTF16PtrOrNil(lpDeviceName)
 	r1, _, e1 := syscall.SyscallN(procQueryDosDevice.Addr(), uintptr(unsafe.Pointer(_lpDeviceName)), uintptr(unsafe.Pointer(lpTargetPath)), uintptr(ucchMax))
 	if e1 != 0 {
 		return uint32(r1), e1
@@ -3900,10 +4836,10 @@ func RenameTransactionManager(LogFileName string, ExistingTransactionManagerGuid
 // ReplaceFile calls KERNEL32!ReplaceFileW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-replacefilew
 // Minimum OS: windows5.1.2600.
-func ReplaceFile(lpReplacedFileName string, lpReplacementFileName string, lpBackupFileName string, dwReplaceFlags REPLACE_FILE_FLAGS) error {
+func ReplaceFile(lpReplacedFileName string, lpReplacementFileName string, lpBackupFileName *string, dwReplaceFlags REPLACE_FILE_FLAGS) error {
 	_lpReplacedFileName := win32.UTF16Ptr(lpReplacedFileName)
 	_lpReplacementFileName := win32.UTF16Ptr(lpReplacementFileName)
-	_lpBackupFileName := win32.UTF16Ptr(lpBackupFileName)
+	_lpBackupFileName := win32.UTF16PtrOrNil(lpBackupFileName)
 	r1, _, e1 := syscall.SyscallN(procReplaceFile.Addr(), uintptr(unsafe.Pointer(_lpReplacedFileName)), uintptr(unsafe.Pointer(_lpReplacementFileName)), uintptr(unsafe.Pointer(_lpBackupFileName)), uintptr(dwReplaceFlags), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3924,10 +4860,10 @@ func ReplaceFileA(lpReplacedFileName foundation.PSTR, lpReplacementFileName foun
 
 // ReplaceFileFromAppW calls api-ms-win-core-file-fromapp-l1-1-0!ReplaceFileFromAppW.
 // https://learn.microsoft.com/windows/win32/api/fileapifromapp/nf-fileapifromapp-replacefilefromappw
-func ReplaceFileFromAppW(lpReplacedFileName string, lpReplacementFileName string, lpBackupFileName string, dwReplaceFlags uint32) bool {
+func ReplaceFileFromAppW(lpReplacedFileName string, lpReplacementFileName string, lpBackupFileName *string, dwReplaceFlags uint32) bool {
 	_lpReplacedFileName := win32.UTF16Ptr(lpReplacedFileName)
 	_lpReplacementFileName := win32.UTF16Ptr(lpReplacementFileName)
-	_lpBackupFileName := win32.UTF16Ptr(lpBackupFileName)
+	_lpBackupFileName := win32.UTF16PtrOrNil(lpBackupFileName)
 	r1, _, _ := syscall.SyscallN(procReplaceFileFromAppW.Addr(), uintptr(unsafe.Pointer(_lpReplacedFileName)), uintptr(unsafe.Pointer(_lpReplacementFileName)), uintptr(unsafe.Pointer(_lpBackupFileName)), uintptr(dwReplaceFlags), 0, 0)
 	return r1 != 0
 }
@@ -4023,10 +4959,10 @@ func ScanLogContainers(pcxScan *CLS_SCAN_CONTEXT, eScanMode byte, pReserved unsa
 // SearchPath calls KERNEL32!SearchPathW.
 // https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-searchpathw
 // Minimum OS: windows5.1.2600.
-func SearchPath(lpPath string, lpFileName string, lpExtension string, nBufferLength uint32, lpBuffer foundation.PWSTR, lpFilePart *foundation.PWSTR) (uint32, error) {
-	_lpPath := win32.UTF16Ptr(lpPath)
+func SearchPath(lpPath *string, lpFileName string, lpExtension *string, nBufferLength uint32, lpBuffer foundation.PWSTR, lpFilePart *foundation.PWSTR) (uint32, error) {
+	_lpPath := win32.UTF16PtrOrNil(lpPath)
 	_lpFileName := win32.UTF16Ptr(lpFileName)
-	_lpExtension := win32.UTF16Ptr(lpExtension)
+	_lpExtension := win32.UTF16PtrOrNil(lpExtension)
 	r1, _, e1 := syscall.SyscallN(procSearchPath.Addr(), uintptr(unsafe.Pointer(_lpPath)), uintptr(unsafe.Pointer(_lpFileName)), uintptr(unsafe.Pointer(_lpExtension)), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpFilePart)))
 	if e1 != 0 {
 		return uint32(r1), e1
@@ -4351,8 +5287,8 @@ func SetTapePosition(hDevice foundation.HANDLE, dwPositionMethod TAPE_POSITION_M
 // SetTransactionInformation calls ktmw32!SetTransactionInformation.
 // https://learn.microsoft.com/windows/win32/api/ktmw32/nf-ktmw32-settransactioninformation
 // Minimum OS: windows6.0.6000.
-func SetTransactionInformation(TransactionHandle foundation.HANDLE, IsolationLevel uint32, IsolationFlags uint32, Timeout uint32, Description string) error {
-	_Description := win32.UTF16Ptr(Description)
+func SetTransactionInformation(TransactionHandle foundation.HANDLE, IsolationLevel uint32, IsolationFlags uint32, Timeout uint32, Description *string) error {
+	_Description := win32.UTF16PtrOrNil(Description)
 	r1, _, e1 := syscall.SyscallN(procSetTransactionInformation.Addr(), uintptr(TransactionHandle), uintptr(IsolationLevel), uintptr(IsolationFlags), uintptr(Timeout), uintptr(unsafe.Pointer(_Description)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4377,9 +5313,9 @@ func SetUserFileEncryptionKeyEx(pEncryptionCertificate *ENCRYPTION_CERTIFICATE, 
 // SetVolumeLabel calls KERNEL32!SetVolumeLabelW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setvolumelabelw
 // Minimum OS: windows5.1.2600.
-func SetVolumeLabel(lpRootPathName string, lpVolumeName string) error {
-	_lpRootPathName := win32.UTF16Ptr(lpRootPathName)
-	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
+func SetVolumeLabel(lpRootPathName *string, lpVolumeName *string) error {
+	_lpRootPathName := win32.UTF16PtrOrNil(lpRootPathName)
+	_lpVolumeName := win32.UTF16PtrOrNil(lpVolumeName)
 	r1, _, e1 := syscall.SyscallN(procSetVolumeLabel.Addr(), uintptr(unsafe.Pointer(_lpRootPathName)), uintptr(unsafe.Pointer(_lpVolumeName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4590,9 +5526,9 @@ func ValidateLog(pszLogFileName string, psaLogFile *security.SECURITY_ATTRIBUTES
 // VerFindFile calls VERSION!VerFindFileW.
 // https://learn.microsoft.com/windows/win32/api/winver/nf-winver-verfindfilew
 // Minimum OS: windows5.0.
-func VerFindFile(uFlags VER_FIND_FILE_FLAGS, szFileName string, szWinDir string, szAppDir string, szCurDir foundation.PWSTR, puCurDirLen *uint32, szDestDir foundation.PWSTR, puDestDirLen *uint32) VER_FIND_FILE_STATUS {
+func VerFindFile(uFlags VER_FIND_FILE_FLAGS, szFileName string, szWinDir *string, szAppDir string, szCurDir foundation.PWSTR, puCurDirLen *uint32, szDestDir foundation.PWSTR, puDestDirLen *uint32) VER_FIND_FILE_STATUS {
 	_szFileName := win32.UTF16Ptr(szFileName)
-	_szWinDir := win32.UTF16Ptr(szWinDir)
+	_szWinDir := win32.UTF16PtrOrNil(szWinDir)
 	_szAppDir := win32.UTF16Ptr(szAppDir)
 	r1, _, _ := syscall.SyscallN(procVerFindFile.Addr(), uintptr(uFlags), uintptr(unsafe.Pointer(_szFileName)), uintptr(unsafe.Pointer(_szWinDir)), uintptr(unsafe.Pointer(_szAppDir)), uintptr(unsafe.Pointer(szCurDir)), uintptr(unsafe.Pointer(puCurDirLen)), uintptr(unsafe.Pointer(szDestDir)), uintptr(unsafe.Pointer(puDestDirLen)))
 	return VER_FIND_FILE_STATUS(r1)

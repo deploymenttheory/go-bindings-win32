@@ -58,6 +58,92 @@ var (
 	procWebAuthNPluginUpdateAuthenticatorDetails              = modwebauthn.NewProc("WebAuthNPluginUpdateAuthenticatorDetails")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WebAuthNAuthenticatorGetAssertion                     *win32.Proc
+	WebAuthNAuthenticatorMakeCredential                   *win32.Proc
+	WebAuthNCancelCurrentOperation                        *win32.Proc
+	WebAuthNDecodeGetAssertionRequest                     *win32.Proc
+	WebAuthNDecodeMakeCredentialRequest                   *win32.Proc
+	WebAuthNDeletePlatformCredential                      *win32.Proc
+	WebAuthNEncodeGetAssertionResponse                    *win32.Proc
+	WebAuthNEncodeMakeCredentialResponse                  *win32.Proc
+	WebAuthNFreeAssertion                                 *win32.Proc
+	WebAuthNFreeAuthenticatorList                         *win32.Proc
+	WebAuthNFreeCredentialAttestation                     *win32.Proc
+	WebAuthNFreeDecodedGetAssertionRequest                *win32.Proc
+	WebAuthNFreeDecodedMakeCredentialRequest              *win32.Proc
+	WebAuthNFreePlatformCredentialList                    *win32.Proc
+	WebAuthNGetApiVersionNumber                           *win32.Proc
+	WebAuthNGetAuthenticatorList                          *win32.Proc
+	WebAuthNGetCancellationId                             *win32.Proc
+	WebAuthNGetErrorName                                  *win32.Proc
+	WebAuthNGetPlatformCredentialList                     *win32.Proc
+	WebAuthNGetW3CExceptionDOMError                       *win32.Proc
+	WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable *win32.Proc
+	WebAuthNPluginAddAuthenticator                        *win32.Proc
+	WebAuthNPluginAuthenticatorAddCredentials             *win32.Proc
+	WebAuthNPluginAuthenticatorFreeCredentialDetailsArray *win32.Proc
+	WebAuthNPluginAuthenticatorGetAllCredentials          *win32.Proc
+	WebAuthNPluginAuthenticatorRemoveAllCredentials       *win32.Proc
+	WebAuthNPluginAuthenticatorRemoveCredentials          *win32.Proc
+	WebAuthNPluginFreeAddAuthenticatorResponse            *win32.Proc
+	WebAuthNPluginFreePublicKeyResponse                   *win32.Proc
+	WebAuthNPluginFreeUserVerificationResponse            *win32.Proc
+	WebAuthNPluginGetAuthenticatorState                   *win32.Proc
+	WebAuthNPluginGetOperationSigningPublicKey            *win32.Proc
+	WebAuthNPluginGetUserVerificationCount                *win32.Proc
+	WebAuthNPluginGetUserVerificationPublicKey            *win32.Proc
+	WebAuthNPluginPerformUserVerification                 *win32.Proc
+	WebAuthNPluginRegisterStatusChangeCallback            *win32.Proc
+	WebAuthNPluginRemoveAuthenticator                     *win32.Proc
+	WebAuthNPluginUnregisterStatusChangeCallback          *win32.Proc
+	WebAuthNPluginUpdateAuthenticatorDetails              *win32.Proc
+}{
+	WebAuthNAuthenticatorGetAssertion:                     procWebAuthNAuthenticatorGetAssertion,
+	WebAuthNAuthenticatorMakeCredential:                   procWebAuthNAuthenticatorMakeCredential,
+	WebAuthNCancelCurrentOperation:                        procWebAuthNCancelCurrentOperation,
+	WebAuthNDecodeGetAssertionRequest:                     procWebAuthNDecodeGetAssertionRequest,
+	WebAuthNDecodeMakeCredentialRequest:                   procWebAuthNDecodeMakeCredentialRequest,
+	WebAuthNDeletePlatformCredential:                      procWebAuthNDeletePlatformCredential,
+	WebAuthNEncodeGetAssertionResponse:                    procWebAuthNEncodeGetAssertionResponse,
+	WebAuthNEncodeMakeCredentialResponse:                  procWebAuthNEncodeMakeCredentialResponse,
+	WebAuthNFreeAssertion:                                 procWebAuthNFreeAssertion,
+	WebAuthNFreeAuthenticatorList:                         procWebAuthNFreeAuthenticatorList,
+	WebAuthNFreeCredentialAttestation:                     procWebAuthNFreeCredentialAttestation,
+	WebAuthNFreeDecodedGetAssertionRequest:                procWebAuthNFreeDecodedGetAssertionRequest,
+	WebAuthNFreeDecodedMakeCredentialRequest:              procWebAuthNFreeDecodedMakeCredentialRequest,
+	WebAuthNFreePlatformCredentialList:                    procWebAuthNFreePlatformCredentialList,
+	WebAuthNGetApiVersionNumber:                           procWebAuthNGetApiVersionNumber,
+	WebAuthNGetAuthenticatorList:                          procWebAuthNGetAuthenticatorList,
+	WebAuthNGetCancellationId:                             procWebAuthNGetCancellationId,
+	WebAuthNGetErrorName:                                  procWebAuthNGetErrorName,
+	WebAuthNGetPlatformCredentialList:                     procWebAuthNGetPlatformCredentialList,
+	WebAuthNGetW3CExceptionDOMError:                       procWebAuthNGetW3CExceptionDOMError,
+	WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable: procWebAuthNIsUserVerifyingPlatformAuthenticatorAvailable,
+	WebAuthNPluginAddAuthenticator:                        procWebAuthNPluginAddAuthenticator,
+	WebAuthNPluginAuthenticatorAddCredentials:             procWebAuthNPluginAuthenticatorAddCredentials,
+	WebAuthNPluginAuthenticatorFreeCredentialDetailsArray: procWebAuthNPluginAuthenticatorFreeCredentialDetailsArray,
+	WebAuthNPluginAuthenticatorGetAllCredentials:          procWebAuthNPluginAuthenticatorGetAllCredentials,
+	WebAuthNPluginAuthenticatorRemoveAllCredentials:       procWebAuthNPluginAuthenticatorRemoveAllCredentials,
+	WebAuthNPluginAuthenticatorRemoveCredentials:          procWebAuthNPluginAuthenticatorRemoveCredentials,
+	WebAuthNPluginFreeAddAuthenticatorResponse:            procWebAuthNPluginFreeAddAuthenticatorResponse,
+	WebAuthNPluginFreePublicKeyResponse:                   procWebAuthNPluginFreePublicKeyResponse,
+	WebAuthNPluginFreeUserVerificationResponse:            procWebAuthNPluginFreeUserVerificationResponse,
+	WebAuthNPluginGetAuthenticatorState:                   procWebAuthNPluginGetAuthenticatorState,
+	WebAuthNPluginGetOperationSigningPublicKey:            procWebAuthNPluginGetOperationSigningPublicKey,
+	WebAuthNPluginGetUserVerificationCount:                procWebAuthNPluginGetUserVerificationCount,
+	WebAuthNPluginGetUserVerificationPublicKey:            procWebAuthNPluginGetUserVerificationPublicKey,
+	WebAuthNPluginPerformUserVerification:                 procWebAuthNPluginPerformUserVerification,
+	WebAuthNPluginRegisterStatusChangeCallback:            procWebAuthNPluginRegisterStatusChangeCallback,
+	WebAuthNPluginRemoveAuthenticator:                     procWebAuthNPluginRemoveAuthenticator,
+	WebAuthNPluginUnregisterStatusChangeCallback:          procWebAuthNPluginUnregisterStatusChangeCallback,
+	WebAuthNPluginUpdateAuthenticatorDetails:              procWebAuthNPluginUpdateAuthenticatorDetails,
+}
+
 // WebAuthNAuthenticatorGetAssertion calls webauthn!WebAuthNAuthenticatorGetAssertion.
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthnauthenticatorgetassertion
 func WebAuthNAuthenticatorGetAssertion(hWnd foundation.HWND, pwszRpId string, pWebAuthNClientData *WEBAUTHN_CLIENT_DATA, pWebAuthNGetAssertionOptions *WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS, ppWebAuthNAssertion **WEBAUTHN_ASSERTION) error {

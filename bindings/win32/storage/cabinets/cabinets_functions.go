@@ -29,6 +29,34 @@ var (
 	procFDITruncateCabinet = modCabinet.NewProc("FDITruncateCabinet")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	FCIAddFile         *win32.Proc
+	FCICreate          *win32.Proc
+	FCIDestroy         *win32.Proc
+	FCIFlushCabinet    *win32.Proc
+	FCIFlushFolder     *win32.Proc
+	FDICopy            *win32.Proc
+	FDICreate          *win32.Proc
+	FDIDestroy         *win32.Proc
+	FDIIsCabinet       *win32.Proc
+	FDITruncateCabinet *win32.Proc
+}{
+	FCIAddFile:         procFCIAddFile,
+	FCICreate:          procFCICreate,
+	FCIDestroy:         procFCIDestroy,
+	FCIFlushCabinet:    procFCIFlushCabinet,
+	FCIFlushFolder:     procFCIFlushFolder,
+	FDICopy:            procFDICopy,
+	FDICreate:          procFDICreate,
+	FDIDestroy:         procFDIDestroy,
+	FDIIsCabinet:       procFDIIsCabinet,
+	FDITruncateCabinet: procFDITruncateCabinet,
+}
+
 // FCIAddFile calls Cabinet!FCIAddFile.
 // https://learn.microsoft.com/windows/win32/api/fci/nf-fci-fciaddfile
 func FCIAddFile(hfci unsafe.Pointer, pszSourceFile foundation.PSTR, pszFileName foundation.PSTR, fExecute bool, pfnfcignc PFNFCIGETNEXTCABINET, pfnfcis PFNFCISTATUS, pfnfcigoi PFNFCIGETOPENINFO, typeCompress uint16) bool {

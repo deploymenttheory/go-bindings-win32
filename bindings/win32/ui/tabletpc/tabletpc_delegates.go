@@ -4,6 +4,7 @@
 
 package tabletpc
 
-// PfnRecoCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *byte, HRECOCONTEXT) foundation.HRESULT.
+// PfnRecoCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *byte, HRECOCONTEXT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PfnRecoCallback uintptr

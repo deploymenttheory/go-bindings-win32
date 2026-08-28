@@ -30,6 +30,32 @@ var (
 	procCoGetDefaultContext  = modOLE32.NewProc("CoGetDefaultContext")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CoCreateActivity     *win32.Proc
+	CoEnterServiceDomain *win32.Proc
+	CoGetDefaultContext  *win32.Proc
+	CoLeaveServiceDomain *win32.Proc
+	GetDispenserManager  *win32.Proc
+	GetManagedExtensions *win32.Proc
+	MTSCreateActivity    *win32.Proc
+	RecycleSurrogate     *win32.Proc
+	SafeRef              *win32.Proc
+}{
+	CoCreateActivity:     procCoCreateActivity,
+	CoEnterServiceDomain: procCoEnterServiceDomain,
+	CoGetDefaultContext:  procCoGetDefaultContext,
+	CoLeaveServiceDomain: procCoLeaveServiceDomain,
+	GetDispenserManager:  procGetDispenserManager,
+	GetManagedExtensions: procGetManagedExtensions,
+	MTSCreateActivity:    procMTSCreateActivity,
+	RecycleSurrogate:     procRecycleSurrogate,
+	SafeRef:              procSafeRef,
+}
+
 // CoCreateActivity calls comsvcs!CoCreateActivity.
 // https://learn.microsoft.com/windows/win32/api/comsvcs/nf-comsvcs-cocreateactivity
 // Minimum OS: windows5.1.2600.

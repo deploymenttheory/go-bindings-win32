@@ -485,6 +485,14 @@ func (self *IUPnPEventSink) OnStateChanged(rgdispidChanges []int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUPnPEventSink_OnStateChangedSafe = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// OnStateChangedSafe dispatches through IUPnPEventSink's vtable slot 4.
+func (self *IUPnPEventSink) OnStateChangedSafe(varsadispidChanges systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUPnPEventSink_OnStateChangedSafe, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varsadispidChanges))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IUPnPEventSource: https://learn.microsoft.com/windows/win32/api/upnphost/nn-upnphost-iupnpeventsource
 // IID: 204810b5-73b2-11d4-bf42-00b0d0118b56
 type IUPnPEventSource struct {
@@ -634,6 +642,15 @@ func (self *IUPnPService) QueryStateVariable(bstrVariableName foundation.BSTR) (
 	return *_pValue, win32.ErrIfFailed(int32(r1))
 }
 
+var specIUPnPService_InvokeAction = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// InvokeAction dispatches through IUPnPService's vtable slot 8.
+func (self *IUPnPService) InvokeAction(bstrActionName foundation.BSTR, vInActionArgs systemvariant.VARIANT, pvOutActionArgs *systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_pvRetVal := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIUPnPService_InvokeAction, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrActionName)), uintptr(unsafe.Pointer(&vInActionArgs)), uintptr(unsafe.Pointer(pvOutActionArgs)), uintptr(win32.OutParam(unsafe.Pointer(_pvRetVal)))).Tuple()
+	return *_pvRetVal, win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ServiceTypeIdentifier dispatches through IUPnPService's vtable slot 9.
 func (self *IUPnPService) Get_ServiceTypeIdentifier() (foundation.BSTR, error) {
 	_pVal := new(foundation.BSTR)
@@ -669,6 +686,14 @@ type IUPnPServiceAsync struct {
 
 // IID_IUPnPServiceAsync is the interface identifier for IUPnPServiceAsync.
 var IID_IUPnPServiceAsync = win32.GUID{Data1: 0x098bdaf5, Data2: 0x5ec1, Data3: 0x49e7, Data4: [8]byte{0xa2, 0x60, 0xb3, 0xa1, 0x1d, 0xd8, 0x68, 0x0c}}
+
+var specIUPnPServiceAsync_BeginInvokeAction = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// BeginInvokeAction dispatches through IUPnPServiceAsync's vtable slot 3.
+func (self *IUPnPServiceAsync) BeginInvokeAction(bstrActionName foundation.BSTR, vInActionArgs systemvariant.VARIANT, pAsyncResult *IUPnPAsyncResult, pullRequestID *uint64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUPnPServiceAsync_BeginInvokeAction, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrActionName)), uintptr(unsafe.Pointer(&vInActionArgs)), uintptr(unsafe.Pointer(pAsyncResult)), uintptr(unsafe.Pointer(pullRequestID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // EndInvokeAction dispatches through IUPnPServiceAsync's vtable slot 4.
 func (self *IUPnPServiceAsync) EndInvokeAction(ullRequestID uint64, pvOutActionArgs *systemvariant.VARIANT, pvRetVal *systemvariant.VARIANT) error {
@@ -726,6 +751,15 @@ type IUPnPServiceCallback struct {
 
 // IID_IUPnPServiceCallback is the interface identifier for IUPnPServiceCallback.
 var IID_IUPnPServiceCallback = win32.GUID{Data1: 0x31fadca9, Data2: 0xab73, Data3: 0x464b, Data4: [8]byte{0xb6, 0x7d, 0x5c, 0x1d, 0x0f, 0x83, 0xc8, 0xb8}}
+
+var specIUPnPServiceCallback_StateVariableChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// StateVariableChanged dispatches through IUPnPServiceCallback's vtable slot 3.
+func (self *IUPnPServiceCallback) StateVariableChanged(pus *IUPnPService, pcwszStateVarName string, vaValue systemvariant.VARIANT) error {
+	_pcwszStateVarName := win32.UTF16Ptr(pcwszStateVarName)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUPnPServiceCallback_StateVariableChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pus)), uintptr(unsafe.Pointer(_pcwszStateVarName)), uintptr(unsafe.Pointer(&vaValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // ServiceInstanceDied dispatches through IUPnPServiceCallback's vtable slot 4.
 func (self *IUPnPServiceCallback) ServiceInstanceDied(pus *IUPnPService) error {

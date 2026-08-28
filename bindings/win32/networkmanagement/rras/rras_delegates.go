@@ -4,206 +4,245 @@
 
 package rras
 
-// ORASADFUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.PSTR, uint32, *uint32) foundation.BOOL.
+// ORASADFUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.PSTR, uint32, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ORASADFUNC uintptr
 
-// PFNRASFREEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte) uint32.
+// PFNRASFREEBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNRASFREEBUFFER uintptr
 
-// PFNRASGETBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(**byte, *uint32) uint32.
+// PFNRASGETBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(**byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNRASGETBUFFER uintptr
 
-// PFNRASRECEIVEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *byte, *uint32, uint32, foundation.HANDLE) uint32.
+// PFNRASRECEIVEBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *byte, *uint32, uint32, foundation.HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNRASRECEIVEBUFFER uintptr
 
-// PFNRASRETRIEVEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *byte, *uint32) uint32.
+// PFNRASRETRIEVEBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNRASRETRIEVEBUFFER uintptr
 
-// PFNRASSENDBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *byte, uint32) uint32.
+// PFNRASSENDBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNRASSENDBUFFER uintptr
 
-// PFNRASSETCOMMSETTINGS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *RASCOMMSETTINGS, unsafe.Pointer) uint32.
+// PFNRASSETCOMMSETTINGS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *RASCOMMSETTINGS, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNRASSETCOMMSETTINGS uintptr
 
-// PMGM_CREATION_ALERT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, uint32, uint32, uint32, uint32, *MGM_IF_ENTRY) uint32.
+// PMGM_CREATION_ALERT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, uint32, uint32, uint32, uint32, *MGM_IF_ENTRY) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMGM_CREATION_ALERT_CALLBACK uintptr
 
-// PMGM_DISABLE_IGMP_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32) uint32.
+// PMGM_DISABLE_IGMP_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMGM_DISABLE_IGMP_CALLBACK uintptr
 
-// PMGM_ENABLE_IGMP_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32) uint32.
+// PMGM_ENABLE_IGMP_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMGM_ENABLE_IGMP_CALLBACK uintptr
 
-// PMGM_JOIN_ALERT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, uint32, foundation.BOOL) uint32.
+// PMGM_JOIN_ALERT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, uint32, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMGM_JOIN_ALERT_CALLBACK uintptr
 
-// PMGM_LOCAL_JOIN_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, uint32, uint32, uint32) uint32.
+// PMGM_LOCAL_JOIN_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, uint32, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMGM_LOCAL_JOIN_CALLBACK uintptr
 
-// PMGM_LOCAL_LEAVE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, uint32, uint32, uint32) uint32.
+// PMGM_LOCAL_LEAVE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, uint32, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMGM_LOCAL_LEAVE_CALLBACK uintptr
 
-// PMGM_PRUNE_ALERT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, uint32, uint32, uint32, foundation.BOOL, *uint32) uint32.
+// PMGM_PRUNE_ALERT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, uint32, uint32, uint32, foundation.BOOL, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMGM_PRUNE_ALERT_CALLBACK uintptr
 
-// PMGM_RPF_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, uint32, *uint32, *uint32, *uint32, uint32, *byte, *byte) uint32.
+// PMGM_RPF_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, uint32, *uint32, *uint32, *uint32, uint32, *byte, *byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMGM_RPF_CALLBACK uintptr
 
-// PMGM_WRONG_IF_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, uint32, uint32, *byte) uint32.
+// PMGM_WRONG_IF_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, uint32, uint32, *byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMGM_WRONG_IF_CALLBACK uintptr
 
-// PMPRADMINACCEPTNEWCONNECTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1) foundation.BOOL.
+// PMPRADMINACCEPTNEWCONNECTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PMPRADMINACCEPTNEWCONNECTION uintptr
 
-// PMPRADMINACCEPTNEWCONNECTION2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2) foundation.BOOL.
+// PMPRADMINACCEPTNEWCONNECTION2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PMPRADMINACCEPTNEWCONNECTION2 uintptr
 
-// PMPRADMINACCEPTNEWCONNECTION3 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2, *RAS_CONNECTION_3) foundation.BOOL.
+// PMPRADMINACCEPTNEWCONNECTION3 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2, *RAS_CONNECTION_3) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PMPRADMINACCEPTNEWCONNECTION3 uintptr
 
-// PMPRADMINACCEPTNEWCONNECTIONEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_EX) foundation.BOOL.
+// PMPRADMINACCEPTNEWCONNECTIONEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_EX) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PMPRADMINACCEPTNEWCONNECTIONEX uintptr
 
-// PMPRADMINACCEPTNEWLINK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_PORT_0, *RAS_PORT_1) foundation.BOOL.
+// PMPRADMINACCEPTNEWLINK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_PORT_0, *RAS_PORT_1) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PMPRADMINACCEPTNEWLINK uintptr
 
-// PMPRADMINACCEPTREAUTHENTICATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2, *RAS_CONNECTION_3) foundation.BOOL.
+// PMPRADMINACCEPTREAUTHENTICATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2, *RAS_CONNECTION_3) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PMPRADMINACCEPTREAUTHENTICATION uintptr
 
-// PMPRADMINACCEPTREAUTHENTICATIONEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_EX) foundation.BOOL.
+// PMPRADMINACCEPTREAUTHENTICATIONEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_EX) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PMPRADMINACCEPTREAUTHENTICATIONEX uintptr
 
-// PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_EX) foundation.BOOL.
+// PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_EX) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PMPRADMINACCEPTTUNNELENDPOINTCHANGEEX uintptr
 
-// PMPRADMINCONNECTIONHANGUPNOTIFICATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1).
+// PMPRADMINCONNECTIONHANGUPNOTIFICATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1) uintptr.
 type PMPRADMINCONNECTIONHANGUPNOTIFICATION uintptr
 
-// PMPRADMINCONNECTIONHANGUPNOTIFICATION2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2).
+// PMPRADMINCONNECTIONHANGUPNOTIFICATION2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2) uintptr.
 type PMPRADMINCONNECTIONHANGUPNOTIFICATION2 uintptr
 
-// PMPRADMINCONNECTIONHANGUPNOTIFICATION3 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2, *RAS_CONNECTION_3).
+// PMPRADMINCONNECTIONHANGUPNOTIFICATION3 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_0, *RAS_CONNECTION_1, *RAS_CONNECTION_2, *RAS_CONNECTION_3) uintptr.
 type PMPRADMINCONNECTIONHANGUPNOTIFICATION3 uintptr
 
-// PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_CONNECTION_EX).
+// PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_CONNECTION_EX) uintptr.
 type PMPRADMINCONNECTIONHANGUPNOTIFICATIONEX uintptr
 
-// PMPRADMINGETIPADDRESSFORUSER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32, *foundation.BOOL) uint32.
+// PMPRADMINGETIPADDRESSFORUSER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMPRADMINGETIPADDRESSFORUSER uintptr
 
-// PMPRADMINGETIPV6ADDRESSFORUSER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *networkingwinsock.IN6_ADDR, *foundation.BOOL) uint32.
+// PMPRADMINGETIPV6ADDRESSFORUSER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *networkingwinsock.IN6_ADDR, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMPRADMINGETIPV6ADDRESSFORUSER uintptr
 
-// PMPRADMINLINKHANGUPNOTIFICATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RAS_PORT_0, *RAS_PORT_1).
+// PMPRADMINLINKHANGUPNOTIFICATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RAS_PORT_0, *RAS_PORT_1) uintptr.
 type PMPRADMINLINKHANGUPNOTIFICATION uintptr
 
-// PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*AUTH_VALIDATION_EX) uint32.
+// PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*AUTH_VALIDATION_EX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMPRADMINRASVALIDATEPREAUTHENTICATEDCONNECTIONEX uintptr
 
-// PMPRADMINRELEASEIPADRESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32).
+// PMPRADMINRELEASEIPADRESS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32) uintptr.
 type PMPRADMINRELEASEIPADRESS uintptr
 
-// PMPRADMINRELEASEIPV6ADDRESSFORUSER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *networkingwinsock.IN6_ADDR).
+// PMPRADMINRELEASEIPV6ADDRESSFORUSER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *networkingwinsock.IN6_ADDR) uintptr.
 type PMPRADMINRELEASEIPV6ADDRESSFORUSER uintptr
 
-// PMPRADMINTERMINATEDLL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uint32.
+// PMPRADMINTERMINATEDLL is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PMPRADMINTERMINATEDLL uintptr
 
-// RASADFUNCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, *RASADPARAMS, *uint32) foundation.BOOL.
+// RASADFUNCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, *RASADPARAMS, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type RASADFUNCA uintptr
 
-// RASADFUNCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *RASADPARAMS, *uint32) foundation.BOOL.
+// RASADFUNCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *RASADPARAMS, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type RASADFUNCW uintptr
 
-// RASDIALFUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, RASCONNSTATE, uint32).
+// RASDIALFUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, RASCONNSTATE, uint32) uintptr.
 type RASDIALFUNC uintptr
 
-// RASDIALFUNC1 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRASCONN, uint32, RASCONNSTATE, uint32, uint32).
+// RASDIALFUNC1 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRASCONN, uint32, RASCONNSTATE, uint32, uint32) uintptr.
 type RASDIALFUNC1 uintptr
 
-// RASDIALFUNC2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, HRASCONN, uint32, RASCONNSTATE, uint32, uint32) uint32.
+// RASDIALFUNC2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, HRASCONN, uint32, RASCONNSTATE, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type RASDIALFUNC2 uintptr
 
-// RASPBDLGFUNCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, foundation.PSTR, unsafe.Pointer).
+// RASPBDLGFUNCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, foundation.PSTR, unsafe.Pointer) uintptr.
 type RASPBDLGFUNCA uintptr
 
-// RASPBDLGFUNCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, foundation.PWSTR, unsafe.Pointer).
+// RASPBDLGFUNCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, foundation.PWSTR, unsafe.Pointer) uintptr.
 type RASPBDLGFUNCW uintptr
 
-// RASSECURITYPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uint32.
+// RASSECURITYPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type RASSECURITYPROC uintptr
 
-// RTM_ENTITY_EXPORT_METHOD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *RTM_ENTITY_METHOD_INPUT, *RTM_ENTITY_METHOD_OUTPUT).
+// RTM_ENTITY_EXPORT_METHOD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *RTM_ENTITY_METHOD_INPUT, *RTM_ENTITY_METHOD_OUTPUT) uintptr.
 type RTM_ENTITY_EXPORT_METHOD uintptr
 
-// RTM_EVENT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, RTM_EVENT_TYPE, unsafe.Pointer, unsafe.Pointer) uint32.
+// RTM_EVENT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, RTM_EVENT_TYPE, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type RTM_EVENT_CALLBACK uintptr
 
-// RasCustomDeleteEntryNotifyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) uint32.
+// RasCustomDeleteEntryNotifyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type RasCustomDeleteEntryNotifyFn uintptr
 
-// RasCustomDialDlgFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HINSTANCE, uint32, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, *RASDIALDLG, unsafe.Pointer) foundation.BOOL.
+// RasCustomDialDlgFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HINSTANCE, uint32, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, *RASDIALDLG, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type RasCustomDialDlgFn uintptr
 
-// RasCustomDialFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HINSTANCE, *RASDIALEXTENSIONS, foundation.PWSTR, *RASDIALPARAMSA, uint32, unsafe.Pointer, *HRASCONN, uint32) uint32.
+// RasCustomDialFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HINSTANCE, *RASDIALEXTENSIONS, foundation.PWSTR, *RASDIALPARAMSA, uint32, unsafe.Pointer, *HRASCONN, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type RasCustomDialFn uintptr
 
-// RasCustomEntryDlgFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HINSTANCE, foundation.PWSTR, foundation.PWSTR, *RASENTRYDLGA, uint32) foundation.BOOL.
+// RasCustomEntryDlgFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HINSTANCE, foundation.PWSTR, foundation.PWSTR, *RASENTRYDLGA, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type RasCustomEntryDlgFn uintptr
 
-// RasCustomHangUpFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRASCONN) uint32.
+// RasCustomHangUpFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRASCONN) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type RasCustomHangUpFn uintptr
 
-// RasCustomScriptExecuteFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, foundation.PWSTR, PFNRASGETBUFFER, PFNRASFREEBUFFER, PFNRASSENDBUFFER, PFNRASRECEIVEBUFFER, PFNRASRETRIEVEBUFFER, foundation.HWND, *RASDIALPARAMSA, unsafe.Pointer) uint32.
+// RasCustomScriptExecuteFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, foundation.PWSTR, PFNRASGETBUFFER, PFNRASFREEBUFFER, PFNRASSENDBUFFER, PFNRASRECEIVEBUFFER, PFNRASRETRIEVEBUFFER, foundation.HWND, *RASDIALPARAMSA, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type RasCustomScriptExecuteFn uintptr

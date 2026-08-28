@@ -4,7 +4,11 @@
 
 package keyboardandmouse
 
-// CloseHKL releases a HKL handle by calling UnloadKeyboardLayout.
+// CloseHKL releases a HKL handle by calling UnloadKeyboardLayout. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHKL(h HKL) error {
+	if h == ^HKL(0) || h == 0 {
+		return nil
+	}
 	return UnloadKeyboardLayout(HKL(h))
 }

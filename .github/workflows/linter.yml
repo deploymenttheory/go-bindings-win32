@@ -32,11 +32,11 @@ jobs:
         env:
           DEFAULT_BRANCH: origin/main
           VALIDATE_ALL_CODEBASE: false # tells the linter to only check files that have been modified in the current pull request
-          VALIDATE_GO: true
-          VALIDATE_GOFMT: true
-          VALIDATE_GOCYCLO: true
-          VALIDATE_GOVET: true
-          VALIDATE_GOLANGCI_LINT: true
+          VALIDATE_GO: false # Go is linted by go-lint.yml under GOOS=windows
+          VALIDATE_GOFMT: false
+          VALIDATE_GOCYCLO: false
+          VALIDATE_GOVET: false
+          VALIDATE_GOLANGCI_LINT: false
           VALIDATE_CPD: false # Disable CPD (Copy Paste Detection) for all languages
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # To report GitHub Actions status checks
           MARKDOWN_CONFIG_FILE: .markdown-lint.yml

@@ -100,11 +100,173 @@ var (
 	procUnpackDDElParam               = modUSER32.NewProc("UnpackDDElParam")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddAtom                       *win32.Proc
+	AddAtomA                      *win32.Proc
+	AddClipboardFormatListener    *win32.Proc
+	ChangeClipboardChain          *win32.Proc
+	CloseClipboard                *win32.Proc
+	CountClipboardFormats         *win32.Proc
+	DdeAbandonTransaction         *win32.Proc
+	DdeAccessData                 *win32.Proc
+	DdeAddData                    *win32.Proc
+	DdeClientTransaction          *win32.Proc
+	DdeCmpStringHandles           *win32.Proc
+	DdeConnect                    *win32.Proc
+	DdeConnectList                *win32.Proc
+	DdeCreateDataHandle           *win32.Proc
+	DdeCreateStringHandle         *win32.Proc
+	DdeCreateStringHandleA        *win32.Proc
+	DdeDisconnect                 *win32.Proc
+	DdeDisconnectList             *win32.Proc
+	DdeEnableCallback             *win32.Proc
+	DdeFreeDataHandle             *win32.Proc
+	DdeFreeStringHandle           *win32.Proc
+	DdeGetData                    *win32.Proc
+	DdeGetLastError               *win32.Proc
+	DdeImpersonateClient          *win32.Proc
+	DdeInitialize                 *win32.Proc
+	DdeInitializeA                *win32.Proc
+	DdeKeepStringHandle           *win32.Proc
+	DdeNameService                *win32.Proc
+	DdePostAdvise                 *win32.Proc
+	DdeQueryConvInfo              *win32.Proc
+	DdeQueryNextServer            *win32.Proc
+	DdeQueryString                *win32.Proc
+	DdeQueryStringA               *win32.Proc
+	DdeReconnect                  *win32.Proc
+	DdeSetQualityOfService        *win32.Proc
+	DdeSetUserHandle              *win32.Proc
+	DdeUnaccessData               *win32.Proc
+	DdeUninitialize               *win32.Proc
+	DeleteAtom                    *win32.Proc
+	EmptyClipboard                *win32.Proc
+	EnumClipboardFormats          *win32.Proc
+	FindAtom                      *win32.Proc
+	FindAtomA                     *win32.Proc
+	FreeDDElParam                 *win32.Proc
+	GetAtomName                   *win32.Proc
+	GetAtomNameA                  *win32.Proc
+	GetClipboardData              *win32.Proc
+	GetClipboardFormatName        *win32.Proc
+	GetClipboardFormatNameA       *win32.Proc
+	GetClipboardOwner             *win32.Proc
+	GetClipboardSequenceNumber    *win32.Proc
+	GetClipboardViewer            *win32.Proc
+	GetOpenClipboardWindow        *win32.Proc
+	GetPriorityClipboardFormat    *win32.Proc
+	GetUpdatedClipboardFormats    *win32.Proc
+	GlobalAddAtom                 *win32.Proc
+	GlobalAddAtomA                *win32.Proc
+	GlobalAddAtomEx               *win32.Proc
+	GlobalAddAtomExA              *win32.Proc
+	GlobalDeleteAtom              *win32.Proc
+	GlobalFindAtom                *win32.Proc
+	GlobalFindAtomA               *win32.Proc
+	GlobalGetAtomName             *win32.Proc
+	GlobalGetAtomNameA            *win32.Proc
+	ImpersonateDdeClientWindow    *win32.Proc
+	InitAtomTable                 *win32.Proc
+	IsClipboardFormatAvailable    *win32.Proc
+	OpenClipboard                 *win32.Proc
+	PackDDElParam                 *win32.Proc
+	RegisterClipboardFormat       *win32.Proc
+	RegisterClipboardFormatA      *win32.Proc
+	RemoveClipboardFormatListener *win32.Proc
+	ReuseDDElParam                *win32.Proc
+	SetClipboardData              *win32.Proc
+	SetClipboardViewer            *win32.Proc
+	SetWinMetaFileBits            *win32.Proc
+	UnpackDDElParam               *win32.Proc
+}{
+	AddAtom:                       procAddAtom,
+	AddAtomA:                      procAddAtomA,
+	AddClipboardFormatListener:    procAddClipboardFormatListener,
+	ChangeClipboardChain:          procChangeClipboardChain,
+	CloseClipboard:                procCloseClipboard,
+	CountClipboardFormats:         procCountClipboardFormats,
+	DdeAbandonTransaction:         procDdeAbandonTransaction,
+	DdeAccessData:                 procDdeAccessData,
+	DdeAddData:                    procDdeAddData,
+	DdeClientTransaction:          procDdeClientTransaction,
+	DdeCmpStringHandles:           procDdeCmpStringHandles,
+	DdeConnect:                    procDdeConnect,
+	DdeConnectList:                procDdeConnectList,
+	DdeCreateDataHandle:           procDdeCreateDataHandle,
+	DdeCreateStringHandle:         procDdeCreateStringHandle,
+	DdeCreateStringHandleA:        procDdeCreateStringHandleA,
+	DdeDisconnect:                 procDdeDisconnect,
+	DdeDisconnectList:             procDdeDisconnectList,
+	DdeEnableCallback:             procDdeEnableCallback,
+	DdeFreeDataHandle:             procDdeFreeDataHandle,
+	DdeFreeStringHandle:           procDdeFreeStringHandle,
+	DdeGetData:                    procDdeGetData,
+	DdeGetLastError:               procDdeGetLastError,
+	DdeImpersonateClient:          procDdeImpersonateClient,
+	DdeInitialize:                 procDdeInitialize,
+	DdeInitializeA:                procDdeInitializeA,
+	DdeKeepStringHandle:           procDdeKeepStringHandle,
+	DdeNameService:                procDdeNameService,
+	DdePostAdvise:                 procDdePostAdvise,
+	DdeQueryConvInfo:              procDdeQueryConvInfo,
+	DdeQueryNextServer:            procDdeQueryNextServer,
+	DdeQueryString:                procDdeQueryString,
+	DdeQueryStringA:               procDdeQueryStringA,
+	DdeReconnect:                  procDdeReconnect,
+	DdeSetQualityOfService:        procDdeSetQualityOfService,
+	DdeSetUserHandle:              procDdeSetUserHandle,
+	DdeUnaccessData:               procDdeUnaccessData,
+	DdeUninitialize:               procDdeUninitialize,
+	DeleteAtom:                    procDeleteAtom,
+	EmptyClipboard:                procEmptyClipboard,
+	EnumClipboardFormats:          procEnumClipboardFormats,
+	FindAtom:                      procFindAtom,
+	FindAtomA:                     procFindAtomA,
+	FreeDDElParam:                 procFreeDDElParam,
+	GetAtomName:                   procGetAtomName,
+	GetAtomNameA:                  procGetAtomNameA,
+	GetClipboardData:              procGetClipboardData,
+	GetClipboardFormatName:        procGetClipboardFormatName,
+	GetClipboardFormatNameA:       procGetClipboardFormatNameA,
+	GetClipboardOwner:             procGetClipboardOwner,
+	GetClipboardSequenceNumber:    procGetClipboardSequenceNumber,
+	GetClipboardViewer:            procGetClipboardViewer,
+	GetOpenClipboardWindow:        procGetOpenClipboardWindow,
+	GetPriorityClipboardFormat:    procGetPriorityClipboardFormat,
+	GetUpdatedClipboardFormats:    procGetUpdatedClipboardFormats,
+	GlobalAddAtom:                 procGlobalAddAtom,
+	GlobalAddAtomA:                procGlobalAddAtomA,
+	GlobalAddAtomEx:               procGlobalAddAtomEx,
+	GlobalAddAtomExA:              procGlobalAddAtomExA,
+	GlobalDeleteAtom:              procGlobalDeleteAtom,
+	GlobalFindAtom:                procGlobalFindAtom,
+	GlobalFindAtomA:               procGlobalFindAtomA,
+	GlobalGetAtomName:             procGlobalGetAtomName,
+	GlobalGetAtomNameA:            procGlobalGetAtomNameA,
+	ImpersonateDdeClientWindow:    procImpersonateDdeClientWindow,
+	InitAtomTable:                 procInitAtomTable,
+	IsClipboardFormatAvailable:    procIsClipboardFormatAvailable,
+	OpenClipboard:                 procOpenClipboard,
+	PackDDElParam:                 procPackDDElParam,
+	RegisterClipboardFormat:       procRegisterClipboardFormat,
+	RegisterClipboardFormatA:      procRegisterClipboardFormatA,
+	RemoveClipboardFormatListener: procRemoveClipboardFormatListener,
+	ReuseDDElParam:                procReuseDDElParam,
+	SetClipboardData:              procSetClipboardData,
+	SetClipboardViewer:            procSetClipboardViewer,
+	SetWinMetaFileBits:            procSetWinMetaFileBits,
+	UnpackDDElParam:               procUnpackDDElParam,
+}
+
 // AddAtom calls KERNEL32!AddAtomW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-addatomw
 // Minimum OS: windows5.0.
-func AddAtom(lpString string) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func AddAtom(lpString *string) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procAddAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1
@@ -475,8 +637,8 @@ func EnumClipboardFormats(format uint32) (uint32, error) {
 // FindAtom calls KERNEL32!FindAtomW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findatomw
 // Minimum OS: windows5.0.
-func FindAtom(lpString string) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func FindAtom(lpString *string) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procFindAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1
@@ -636,8 +798,8 @@ func GetUpdatedClipboardFormats(lpuiFormats []uint32, pcFormatsOut *uint32) erro
 // GlobalAddAtom calls KERNEL32!GlobalAddAtomW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomw
 // Minimum OS: windows5.0.
-func GlobalAddAtom(lpString string) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func GlobalAddAtom(lpString *string) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procGlobalAddAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1
@@ -658,8 +820,8 @@ func GlobalAddAtomA(lpString foundation.PSTR) (uint16, error) {
 
 // GlobalAddAtomEx calls KERNEL32!GlobalAddAtomExW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globaladdatomexw
-func GlobalAddAtomEx(lpString string, Flags uint32) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func GlobalAddAtomEx(lpString *string, Flags uint32) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procGlobalAddAtomEx.Addr(), uintptr(unsafe.Pointer(_lpString)), uintptr(Flags))
 	if e1 != 0 {
 		return uint16(r1), e1
@@ -691,8 +853,8 @@ func GlobalDeleteAtom(nAtom uint16) (uint16, error) {
 // GlobalFindAtom calls KERNEL32!GlobalFindAtomW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-globalfindatomw
 // Minimum OS: windows5.0.
-func GlobalFindAtom(lpString string) (uint16, error) {
-	_lpString := win32.UTF16Ptr(lpString)
+func GlobalFindAtom(lpString *string) (uint16, error) {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procGlobalFindAtom.Addr(), uintptr(unsafe.Pointer(_lpString)))
 	if e1 != 0 {
 		return uint16(r1), e1

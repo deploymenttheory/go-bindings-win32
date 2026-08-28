@@ -5,6 +5,7 @@
 package performance
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -508,9 +509,25 @@ func (self *ICounters) Get__NewEnum(ppIunk **systemcom.IUnknown) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specICounters_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ICounters's vtable slot 9.
+func (self *ICounters) Get_Item(index systemvariant.VARIANT, ppI **DICounterItem) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specICounters_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(ppI))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through ICounters's vtable slot 10.
 func (self *ICounters) Add(pathname foundation.BSTR, ppI **DICounterItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pathname)), uintptr(unsafe.Pointer(ppI)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICounters_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through ICounters's vtable slot 11.
+func (self *ICounters) Remove(index systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specICounters_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -688,6 +705,14 @@ func (self *IDataCollectorCollection) Get_Count(retVal *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDataCollectorCollection_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IDataCollectorCollection's vtable slot 8.
+func (self *IDataCollectorCollection) Get_Item(index systemvariant.VARIANT, collector **IDataCollector) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDataCollectorCollection_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(collector))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get__NewEnum dispatches through IDataCollectorCollection's vtable slot 9.
 func (self *IDataCollectorCollection) Get__NewEnum(retVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
@@ -697,6 +722,14 @@ func (self *IDataCollectorCollection) Get__NewEnum(retVal **systemcom.IUnknown) 
 // Add dispatches through IDataCollectorCollection's vtable slot 10.
 func (self *IDataCollectorCollection) Add(collector *IDataCollector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(collector)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDataCollectorCollection_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IDataCollectorCollection's vtable slot 11.
+func (self *IDataCollectorCollection) Remove(collector systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIDataCollectorCollection_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&collector))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1108,6 +1141,14 @@ func (self *IDataCollectorSetCollection) Get_Count(retVal *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDataCollectorSetCollection_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IDataCollectorSetCollection's vtable slot 8.
+func (self *IDataCollectorSetCollection) Get_Item(index systemvariant.VARIANT, set **IDataCollectorSet) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDataCollectorSetCollection_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(set))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get__NewEnum dispatches through IDataCollectorSetCollection's vtable slot 9.
 func (self *IDataCollectorSetCollection) Get__NewEnum(retVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
@@ -1117,6 +1158,14 @@ func (self *IDataCollectorSetCollection) Get__NewEnum(retVal **systemcom.IUnknow
 // Add dispatches through IDataCollectorSetCollection's vtable slot 10.
 func (self *IDataCollectorSetCollection) Add(set *IDataCollectorSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(set)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDataCollectorSetCollection_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IDataCollectorSetCollection's vtable slot 11.
+func (self *IDataCollectorSetCollection) Remove(set systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIDataCollectorSetCollection_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&set))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1369,6 +1418,14 @@ func (self *IFolderActionCollection) Get_Count(Count *uint32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFolderActionCollection_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IFolderActionCollection's vtable slot 8.
+func (self *IFolderActionCollection) Get_Item(Index systemvariant.VARIANT, Action **IFolderAction) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFolderActionCollection_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(unsafe.Pointer(Action))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get__NewEnum dispatches through IFolderActionCollection's vtable slot 9.
 func (self *IFolderActionCollection) Get__NewEnum(Enum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Enum)))
@@ -1378,6 +1435,14 @@ func (self *IFolderActionCollection) Get__NewEnum(Enum **systemcom.IUnknown) err
 // Add dispatches through IFolderActionCollection's vtable slot 10.
 func (self *IFolderActionCollection) Add(Action *IFolderAction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Action)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFolderActionCollection_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IFolderActionCollection's vtable slot 11.
+func (self *IFolderActionCollection) Remove(Index systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIFolderActionCollection_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1433,9 +1498,25 @@ func (self *ILogFiles) Get__NewEnum(ppIunk **systemcom.IUnknown) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specILogFiles_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ILogFiles's vtable slot 9.
+func (self *ILogFiles) Get_Item(index systemvariant.VARIANT, ppI **DILogFileItem) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specILogFiles_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(ppI))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through ILogFiles's vtable slot 10.
 func (self *ILogFiles) Add(pathname foundation.BSTR, ppI **DILogFileItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pathname)), uintptr(unsafe.Pointer(ppI)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specILogFiles_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through ILogFiles's vtable slot 11.
+func (self *ILogFiles) Remove(index systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specILogFiles_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1523,15 +1604,39 @@ func (self *ISchedule) Get_StartDate(start *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISchedule_Put_StartDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_StartDate dispatches through ISchedule's vtable slot 8.
+func (self *ISchedule) Put_StartDate(start systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specISchedule_Put_StartDate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&start))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_EndDate dispatches through ISchedule's vtable slot 9.
 func (self *ISchedule) Get_EndDate(end *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(end)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISchedule_Put_EndDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_EndDate dispatches through ISchedule's vtable slot 10.
+func (self *ISchedule) Put_EndDate(end systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISchedule_Put_EndDate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&end))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_StartTime dispatches through ISchedule's vtable slot 11.
 func (self *ISchedule) Get_StartTime(start *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(start)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISchedule_Put_StartTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_StartTime dispatches through ISchedule's vtable slot 12.
+func (self *ISchedule) Put_StartTime(start systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISchedule_Put_StartTime, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&start))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1562,6 +1667,14 @@ func (self *IScheduleCollection) Get_Count(retVal *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIScheduleCollection_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IScheduleCollection's vtable slot 8.
+func (self *IScheduleCollection) Get_Item(index systemvariant.VARIANT, ppSchedule **ISchedule) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIScheduleCollection_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(ppSchedule))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get__NewEnum dispatches through IScheduleCollection's vtable slot 9.
 func (self *IScheduleCollection) Get__NewEnum(ienum **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ienum)))
@@ -1571,6 +1684,14 @@ func (self *IScheduleCollection) Get__NewEnum(ienum **systemcom.IUnknown) error 
 // Add dispatches through IScheduleCollection's vtable slot 10.
 func (self *IScheduleCollection) Add(pSchedule *ISchedule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSchedule)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIScheduleCollection_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IScheduleCollection's vtable slot 11.
+func (self *IScheduleCollection) Remove(vSchedule systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIScheduleCollection_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vSchedule))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1750,6 +1871,14 @@ func (self *ISystemMonitor) Get_MinimumScale(piValue *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISystemMonitor_Put_UpdateInterval = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_UpdateInterval dispatches through ISystemMonitor's vtable slot 28.
+func (self *ISystemMonitor) Put_UpdateInterval(fValue float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specISystemMonitor_Put_UpdateInterval, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_UpdateInterval dispatches through ISystemMonitor's vtable slot 29.
 func (self *ISystemMonitor) Get_UpdateInterval(pfValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfValue)))
@@ -1870,9 +1999,25 @@ func (self *ISystemMonitor) Get_LogFileName(bsFileName *foundation.BSTR) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISystemMonitor_Put_LogViewStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_LogViewStart dispatches through ISystemMonitor's vtable slot 49.
+func (self *ISystemMonitor) Put_LogViewStart(StartTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[49], specISystemMonitor_Put_LogViewStart, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(StartTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_LogViewStart dispatches through ISystemMonitor's vtable slot 50.
 func (self *ISystemMonitor) Get_LogViewStart(StartTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartTime)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISystemMonitor_Put_LogViewStop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_LogViewStop dispatches through ISystemMonitor's vtable slot 51.
+func (self *ISystemMonitor) Put_LogViewStop(StopTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specISystemMonitor_Put_LogViewStop, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(StopTime))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2142,6 +2287,14 @@ func (self *ISystemMonitor2) Get_LogSourceStopTime(pDate *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISystemMonitor2_SetLogViewRange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// SetLogViewRange dispatches through ISystemMonitor2's vtable slot 95.
+func (self *ISystemMonitor2) SetLogViewRange(StartTime float64, StopTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[95], specISystemMonitor2_SetLogViewRange, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(StartTime)), uintptr(math.Float64bits(StopTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetLogViewRange dispatches through ISystemMonitor2's vtable slot 96.
 func (self *ISystemMonitor2) GetLogViewRange(StartTime *float64, StopTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartTime)), uintptr(unsafe.Pointer(StopTime)))
@@ -2304,6 +2457,14 @@ func (self *ITraceDataCollector) Get_Guid(guid *win32.GUID) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITraceDataCollector_Put_Guid = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Put_Guid dispatches through ITraceDataCollector's vtable slot 49.
+func (self *ITraceDataCollector) Put_Guid(guid win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[49], specITraceDataCollector_Put_Guid, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_IsKernelTrace dispatches through ITraceDataCollector's vtable slot 50.
 func (self *ITraceDataCollector) Get_IsKernelTrace(kernel *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(kernel)))
@@ -2463,6 +2624,14 @@ func (self *ITraceDataProvider) Get_Guid(guid *win32.GUID) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITraceDataProvider_Put_Guid = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Put_Guid dispatches through ITraceDataProvider's vtable slot 10.
+func (self *ITraceDataProvider) Put_Guid(guid win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specITraceDataProvider_Put_Guid, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Level dispatches through ITraceDataProvider's vtable slot 11.
 func (self *ITraceDataProvider) Get_Level(ppLevel **IValueMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLevel)))
@@ -2568,6 +2737,14 @@ func (self *ITraceDataProviderCollection) Get_Count(retVal *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITraceDataProviderCollection_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ITraceDataProviderCollection's vtable slot 8.
+func (self *ITraceDataProviderCollection) Get_Item(index systemvariant.VARIANT, ppProvider **ITraceDataProvider) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specITraceDataProviderCollection_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(ppProvider))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get__NewEnum dispatches through ITraceDataProviderCollection's vtable slot 9.
 func (self *ITraceDataProviderCollection) Get__NewEnum(retVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
@@ -2577,6 +2754,14 @@ func (self *ITraceDataProviderCollection) Get__NewEnum(retVal **systemcom.IUnkno
 // Add dispatches through ITraceDataProviderCollection's vtable slot 10.
 func (self *ITraceDataProviderCollection) Add(pProvider *ITraceDataProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProvider)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITraceDataProviderCollection_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through ITraceDataProviderCollection's vtable slot 11.
+func (self *ITraceDataProviderCollection) Remove(vProvider systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specITraceDataProviderCollection_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vProvider))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2625,6 +2810,14 @@ func (self *IValueMap) Get_Count(retVal *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIValueMap_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IValueMap's vtable slot 8.
+func (self *IValueMap) Get_Item(index systemvariant.VARIANT, value **IValueMapItem) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIValueMap_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get__NewEnum dispatches through IValueMap's vtable slot 9.
 func (self *IValueMap) Get__NewEnum(retVal **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retVal)))
@@ -2649,6 +2842,14 @@ func (self *IValueMap) Get_Value(Value *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIValueMap_Put_Value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Value dispatches through IValueMap's vtable slot 13.
+func (self *IValueMap) Put_Value(Value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIValueMap_Put_Value, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ValueMapType dispatches through IValueMap's vtable slot 14.
 func (self *IValueMap) Get_ValueMapType(type_ *ValueMapType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)))
@@ -2658,6 +2859,22 @@ func (self *IValueMap) Get_ValueMapType(type_ *ValueMapType) error {
 // Put_ValueMapType dispatches through IValueMap's vtable slot 15.
 func (self *IValueMap) Put_ValueMapType(type_ ValueMapType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(type_))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIValueMap_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Add dispatches through IValueMap's vtable slot 16.
+func (self *IValueMap) Add(value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIValueMap_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIValueMap_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IValueMap's vtable slot 17.
+func (self *IValueMap) Remove(value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIValueMap_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2727,6 +2944,14 @@ func (self *IValueMapItem) Put_Key(key foundation.BSTR) error {
 // Get_Value dispatches through IValueMapItem's vtable slot 13.
 func (self *IValueMapItem) Get_Value(Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIValueMapItem_Put_Value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Value dispatches through IValueMapItem's vtable slot 14.
+func (self *IValueMapItem) Put_Value(Value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIValueMapItem_Put_Value, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3010,6 +3235,14 @@ func (self *ISystemMonitorUnion) Get_MinimumScale(piValue *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISystemMonitorUnion_Put_UpdateInterval = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_UpdateInterval dispatches through _ISystemMonitorUnion's vtable slot 28.
+func (self *ISystemMonitorUnion) Put_UpdateInterval(fValue float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specISystemMonitorUnion_Put_UpdateInterval, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_UpdateInterval dispatches through _ISystemMonitorUnion's vtable slot 29.
 func (self *ISystemMonitorUnion) Get_UpdateInterval(pfValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfValue)))
@@ -3130,9 +3363,25 @@ func (self *ISystemMonitorUnion) Get_LogFileName(bsFileName *foundation.BSTR) er
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISystemMonitorUnion_Put_LogViewStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_LogViewStart dispatches through _ISystemMonitorUnion's vtable slot 49.
+func (self *ISystemMonitorUnion) Put_LogViewStart(StartTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[49], specISystemMonitorUnion_Put_LogViewStart, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(StartTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_LogViewStart dispatches through _ISystemMonitorUnion's vtable slot 50.
 func (self *ISystemMonitorUnion) Get_LogViewStart(StartTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartTime)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISystemMonitorUnion_Put_LogViewStop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_LogViewStop dispatches through _ISystemMonitorUnion's vtable slot 51.
+func (self *ISystemMonitorUnion) Put_LogViewStop(StopTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specISystemMonitorUnion_Put_LogViewStop, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(StopTime))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3391,6 +3640,14 @@ func (self *ISystemMonitorUnion) Get_LogSourceStartTime(pDate *float64) error {
 // Get_LogSourceStopTime dispatches through _ISystemMonitorUnion's vtable slot 94.
 func (self *ISystemMonitorUnion) Get_LogSourceStopTime(pDate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISystemMonitorUnion_SetLogViewRange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// SetLogViewRange dispatches through _ISystemMonitorUnion's vtable slot 95.
+func (self *ISystemMonitorUnion) SetLogViewRange(StartTime float64, StopTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[95], specISystemMonitorUnion_SetLogViewRange, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(StartTime)), uintptr(math.Float64bits(StopTime))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

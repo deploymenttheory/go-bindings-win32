@@ -5,7 +5,6 @@ package acceptance
 import (
 	"runtime"
 	"testing"
-	"unsafe"
 
 	win32 "github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/xmllite"
@@ -60,9 +59,9 @@ func TestInformationalSuccessXmlReaderEOF(t *testing.T) {
 	if err := xmllite.CreateXmlReader(&xmllite.IID_IXmlReader, &out, nil); err != nil {
 		t.Fatalf("CreateXmlReader: %v", err)
 	}
-	reader := (*xmllite.IXmlReader)(unsafe.Pointer(out))
+	reader := win32.Cast[xmllite.IXmlReader](out)
 	defer reader.Release()
-	if err := reader.SetInput((*com.IUnknown)(unsafe.Pointer(stream))); err != nil {
+	if err := reader.SetInput(&stream.IUnknown); err != nil { // upcast to the root
 		t.Fatalf("SetInput: %v", err)
 	}
 

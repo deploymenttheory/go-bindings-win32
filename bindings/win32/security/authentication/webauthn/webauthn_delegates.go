@@ -4,10 +4,10 @@
 
 package webauthn
 
-// EXPERIMENTAL_WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// EXPERIMENTAL_WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type EXPERIMENTAL_WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK uintptr
 
-// WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type WEBAUTHN_PLUGIN_STATUS_CHANGE_CALLBACK uintptr

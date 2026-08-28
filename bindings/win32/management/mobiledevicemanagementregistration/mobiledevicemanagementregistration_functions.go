@@ -38,6 +38,50 @@ var (
 	procUnregisterDeviceWithManagement                         = modMDMRegistration.NewProc("UnregisterDeviceWithManagement")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ApplyLocalManagementSyncML                             *win32.Proc
+	DiscoverManagementService                              *win32.Proc
+	DiscoverManagementServiceEx                            *win32.Proc
+	GetDeviceManagementConfigInfo                          *win32.Proc
+	GetDeviceRegistrationInfo                              *win32.Proc
+	GetManagementAppHyperlink                              *win32.Proc
+	IsDeviceRegisteredWithManagement                       *win32.Proc
+	IsManagementRegistrationAllowed                        *win32.Proc
+	IsMdmUxWithoutAadAllowed                               *win32.Proc
+	RegisterDeviceWithLocalManagement                      *win32.Proc
+	RegisterDeviceWithManagement                           *win32.Proc
+	RegisterDeviceWithManagementUsingAADCredentials        *win32.Proc
+	RegisterDeviceWithManagementUsingAADDeviceCredentials  *win32.Proc
+	RegisterDeviceWithManagementUsingAADDeviceCredentials2 *win32.Proc
+	SetDeviceManagementConfigInfo                          *win32.Proc
+	SetManagedExternally                                   *win32.Proc
+	UnregisterDeviceWithLocalManagement                    *win32.Proc
+	UnregisterDeviceWithManagement                         *win32.Proc
+}{
+	ApplyLocalManagementSyncML:                             procApplyLocalManagementSyncML,
+	DiscoverManagementService:                              procDiscoverManagementService,
+	DiscoverManagementServiceEx:                            procDiscoverManagementServiceEx,
+	GetDeviceManagementConfigInfo:                          procGetDeviceManagementConfigInfo,
+	GetDeviceRegistrationInfo:                              procGetDeviceRegistrationInfo,
+	GetManagementAppHyperlink:                              procGetManagementAppHyperlink,
+	IsDeviceRegisteredWithManagement:                       procIsDeviceRegisteredWithManagement,
+	IsManagementRegistrationAllowed:                        procIsManagementRegistrationAllowed,
+	IsMdmUxWithoutAadAllowed:                               procIsMdmUxWithoutAadAllowed,
+	RegisterDeviceWithLocalManagement:                      procRegisterDeviceWithLocalManagement,
+	RegisterDeviceWithManagement:                           procRegisterDeviceWithManagement,
+	RegisterDeviceWithManagementUsingAADCredentials:        procRegisterDeviceWithManagementUsingAADCredentials,
+	RegisterDeviceWithManagementUsingAADDeviceCredentials:  procRegisterDeviceWithManagementUsingAADDeviceCredentials,
+	RegisterDeviceWithManagementUsingAADDeviceCredentials2: procRegisterDeviceWithManagementUsingAADDeviceCredentials2,
+	SetDeviceManagementConfigInfo:                          procSetDeviceManagementConfigInfo,
+	SetManagedExternally:                                   procSetManagedExternally,
+	UnregisterDeviceWithLocalManagement:                    procUnregisterDeviceWithLocalManagement,
+	UnregisterDeviceWithManagement:                         procUnregisterDeviceWithManagement,
+}
+
 // ApplyLocalManagementSyncML calls MDMLocalManagement!ApplyLocalManagementSyncML.
 func ApplyLocalManagementSyncML(syncMLRequest string, syncMLResult *foundation.PWSTR) error {
 	_syncMLRequest := win32.UTF16Ptr(syncMLRequest)
@@ -144,8 +188,8 @@ func RegisterDeviceWithManagementUsingAADDeviceCredentials() error {
 }
 
 // RegisterDeviceWithManagementUsingAADDeviceCredentials2 calls MDMRegistration!RegisterDeviceWithManagementUsingAADDeviceCredentials2.
-func RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID string) error {
-	_MDMApplicationID := win32.UTF16Ptr(MDMApplicationID)
+func RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID *string) error {
+	_MDMApplicationID := win32.UTF16PtrOrNil(MDMApplicationID)
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagementUsingAADDeviceCredentials2.Addr(), uintptr(unsafe.Pointer(_MDMApplicationID)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -177,8 +221,8 @@ func UnregisterDeviceWithLocalManagement() error {
 // UnregisterDeviceWithManagement calls MDMRegistration!UnregisterDeviceWithManagement.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-unregisterdevicewithmanagement
 // Minimum OS: windows8.1.
-func UnregisterDeviceWithManagement(enrollmentID string) error {
-	_enrollmentID := win32.UTF16Ptr(enrollmentID)
+func UnregisterDeviceWithManagement(enrollmentID *string) error {
+	_enrollmentID := win32.UTF16PtrOrNil(enrollmentID)
 	r1, _, _ := syscall.SyscallN(procUnregisterDeviceWithManagement.Addr(), uintptr(unsafe.Pointer(_enrollmentID)))
 	return win32.ErrIfFailed(int32(r1))
 }

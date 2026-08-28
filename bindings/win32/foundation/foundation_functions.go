@@ -44,6 +44,58 @@ var (
 	procSetLastErrorEx        = modUSER32.NewProc("SetLastErrorEx")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CloseHandle           *win32.Proc
+	CompareObjectHandles  *win32.Proc
+	DuplicateHandle       *win32.Proc
+	FreeLibrary           *win32.Proc
+	GetHandleInformation  *win32.Proc
+	GetLastError          *win32.Proc
+	GlobalFree            *win32.Proc
+	LocalFree             *win32.Proc
+	RtlNtStatusToDosError *win32.Proc
+	SetHandleInformation  *win32.Proc
+	SetLastError          *win32.Proc
+	SetLastErrorEx        *win32.Proc
+	SysAddRefString       *win32.Proc
+	SysAllocString        *win32.Proc
+	SysAllocStringByteLen *win32.Proc
+	SysAllocStringLen     *win32.Proc
+	SysFreeString         *win32.Proc
+	SysReAllocString      *win32.Proc
+	SysReAllocStringLen   *win32.Proc
+	SysReleaseString      *win32.Proc
+	SysStringByteLen      *win32.Proc
+	SysStringLen          *win32.Proc
+}{
+	CloseHandle:           procCloseHandle,
+	CompareObjectHandles:  procCompareObjectHandles,
+	DuplicateHandle:       procDuplicateHandle,
+	FreeLibrary:           procFreeLibrary,
+	GetHandleInformation:  procGetHandleInformation,
+	GetLastError:          procGetLastError,
+	GlobalFree:            procGlobalFree,
+	LocalFree:             procLocalFree,
+	RtlNtStatusToDosError: procRtlNtStatusToDosError,
+	SetHandleInformation:  procSetHandleInformation,
+	SetLastError:          procSetLastError,
+	SetLastErrorEx:        procSetLastErrorEx,
+	SysAddRefString:       procSysAddRefString,
+	SysAllocString:        procSysAllocString,
+	SysAllocStringByteLen: procSysAllocStringByteLen,
+	SysAllocStringLen:     procSysAllocStringLen,
+	SysFreeString:         procSysFreeString,
+	SysReAllocString:      procSysReAllocString,
+	SysReAllocStringLen:   procSysReAllocStringLen,
+	SysReleaseString:      procSysReleaseString,
+	SysStringByteLen:      procSysStringByteLen,
+	SysStringLen:          procSysStringLen,
+}
+
 // CloseHandle calls KERNEL32!CloseHandle.
 // https://learn.microsoft.com/windows/win32/api/handleapi/nf-handleapi-closehandle
 // Minimum OS: windows5.0.
@@ -172,8 +224,8 @@ func SysAddRefString(bstrString BSTR) error {
 
 // SysAllocString calls OLEAUT32!SysAllocString.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysallocstring
-func SysAllocString(psz string) BSTR {
-	_psz := win32.UTF16Ptr(psz)
+func SysAllocString(psz *string) BSTR {
+	_psz := win32.UTF16PtrOrNil(psz)
 	r1, _, _ := syscall.SyscallN(procSysAllocString.Addr(), uintptr(unsafe.Pointer(_psz)))
 	return BSTR(unsafe.Pointer(r1))
 }
@@ -187,8 +239,8 @@ func SysAllocStringByteLen(psz PSTR, len_ uint32) BSTR {
 
 // SysAllocStringLen calls OLEAUT32!SysAllocStringLen.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysallocstringlen
-func SysAllocStringLen(strIn string, ui uint32) BSTR {
-	_strIn := win32.UTF16Ptr(strIn)
+func SysAllocStringLen(strIn *string, ui uint32) BSTR {
+	_strIn := win32.UTF16PtrOrNil(strIn)
 	r1, _, _ := syscall.SyscallN(procSysAllocStringLen.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(ui))
 	return BSTR(unsafe.Pointer(r1))
 }
@@ -201,16 +253,16 @@ func SysFreeString(bstrString BSTR) {
 
 // SysReAllocString calls OLEAUT32!SysReAllocString.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysreallocstring
-func SysReAllocString(pbstr *BSTR, psz string) int32 {
-	_psz := win32.UTF16Ptr(psz)
+func SysReAllocString(pbstr *BSTR, psz *string) int32 {
+	_psz := win32.UTF16PtrOrNil(psz)
 	r1, _, _ := syscall.SyscallN(procSysReAllocString.Addr(), uintptr(unsafe.Pointer(pbstr)), uintptr(unsafe.Pointer(_psz)))
 	return int32(r1)
 }
 
 // SysReAllocStringLen calls OLEAUT32!SysReAllocStringLen.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysreallocstringlen
-func SysReAllocStringLen(pbstr *BSTR, psz string, len_ uint32) int32 {
-	_psz := win32.UTF16Ptr(psz)
+func SysReAllocStringLen(pbstr *BSTR, psz *string, len_ uint32) int32 {
+	_psz := win32.UTF16PtrOrNil(psz)
 	r1, _, _ := syscall.SyscallN(procSysReAllocStringLen.Addr(), uintptr(unsafe.Pointer(pbstr)), uintptr(unsafe.Pointer(_psz)), uintptr(len_))
 	return int32(r1)
 }

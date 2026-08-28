@@ -84,6 +84,144 @@ var (
 	procDnsWriteQuestionToBuffer_W            = modDNSAPI.NewProc("DnsWriteQuestionToBuffer_W")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DnsAcquireContextHandle_              *win32.Proc
+	DnsAcquireContextHandle_A             *win32.Proc
+	DnsCancelQuery                        *win32.Proc
+	DnsCancelQueryRaw                     *win32.Proc
+	DnsConnectionDeletePolicyEntries      *win32.Proc
+	DnsConnectionDeleteProxyInfo          *win32.Proc
+	DnsConnectionFreeNameList             *win32.Proc
+	DnsConnectionFreeProxyInfo            *win32.Proc
+	DnsConnectionFreeProxyInfoEx          *win32.Proc
+	DnsConnectionFreeProxyList            *win32.Proc
+	DnsConnectionGetNameList              *win32.Proc
+	DnsConnectionGetProxyInfo             *win32.Proc
+	DnsConnectionGetProxyInfoForHostUrl   *win32.Proc
+	DnsConnectionGetProxyInfoForHostUrlEx *win32.Proc
+	DnsConnectionGetProxyList             *win32.Proc
+	DnsConnectionSetPolicyEntries         *win32.Proc
+	DnsConnectionSetProxyInfo             *win32.Proc
+	DnsConnectionUpdateIfIndexTable       *win32.Proc
+	DnsExtractRecordsFromMessage_UTF8     *win32.Proc
+	DnsExtractRecordsFromMessage_W        *win32.Proc
+	DnsFree                               *win32.Proc
+	DnsFreeCustomServers                  *win32.Proc
+	DnsFreeProxyName                      *win32.Proc
+	DnsGetApplicationSettings             *win32.Proc
+	DnsGetProxyInformation                *win32.Proc
+	DnsIsFlatRecord                       *win32.Proc
+	DnsModifyRecordsInSet_                *win32.Proc
+	DnsModifyRecordsInSet_A               *win32.Proc
+	DnsModifyRecordsInSet_UTF8            *win32.Proc
+	DnsNameCompare_                       *win32.Proc
+	DnsNameCompare_A                      *win32.Proc
+	DnsQueryConfig                        *win32.Proc
+	DnsQueryEx                            *win32.Proc
+	DnsQueryRaw                           *win32.Proc
+	DnsQueryRawResultFree                 *win32.Proc
+	DnsQuery_                             *win32.Proc
+	DnsQuery_A                            *win32.Proc
+	DnsQuery_UTF8                         *win32.Proc
+	DnsRecordCompare                      *win32.Proc
+	DnsRecordCopyEx                       *win32.Proc
+	DnsRecordSetCompare                   *win32.Proc
+	DnsRecordSetCopyEx                    *win32.Proc
+	DnsRecordSetDetach                    *win32.Proc
+	DnsReleaseContextHandle               *win32.Proc
+	DnsReplaceRecordSet                   *win32.Proc
+	DnsReplaceRecordSetA                  *win32.Proc
+	DnsReplaceRecordSetUTF8               *win32.Proc
+	DnsServiceBrowse                      *win32.Proc
+	DnsServiceBrowseCancel                *win32.Proc
+	DnsServiceConstructInstance           *win32.Proc
+	DnsServiceCopyInstance                *win32.Proc
+	DnsServiceDeRegister                  *win32.Proc
+	DnsServiceFreeInstance                *win32.Proc
+	DnsServiceRegister                    *win32.Proc
+	DnsServiceRegisterCancel              *win32.Proc
+	DnsServiceResolve                     *win32.Proc
+	DnsServiceResolveCancel               *win32.Proc
+	DnsSetApplicationSettings             *win32.Proc
+	DnsStartMulticastQuery                *win32.Proc
+	DnsStopMulticastQuery                 *win32.Proc
+	DnsValidateName_                      *win32.Proc
+	DnsValidateName_A                     *win32.Proc
+	DnsValidateName_UTF8                  *win32.Proc
+	DnsWriteQuestionToBuffer_UTF8         *win32.Proc
+	DnsWriteQuestionToBuffer_W            *win32.Proc
+}{
+	DnsAcquireContextHandle_:              procDnsAcquireContextHandle_,
+	DnsAcquireContextHandle_A:             procDnsAcquireContextHandle_A,
+	DnsCancelQuery:                        procDnsCancelQuery,
+	DnsCancelQueryRaw:                     procDnsCancelQueryRaw,
+	DnsConnectionDeletePolicyEntries:      procDnsConnectionDeletePolicyEntries,
+	DnsConnectionDeleteProxyInfo:          procDnsConnectionDeleteProxyInfo,
+	DnsConnectionFreeNameList:             procDnsConnectionFreeNameList,
+	DnsConnectionFreeProxyInfo:            procDnsConnectionFreeProxyInfo,
+	DnsConnectionFreeProxyInfoEx:          procDnsConnectionFreeProxyInfoEx,
+	DnsConnectionFreeProxyList:            procDnsConnectionFreeProxyList,
+	DnsConnectionGetNameList:              procDnsConnectionGetNameList,
+	DnsConnectionGetProxyInfo:             procDnsConnectionGetProxyInfo,
+	DnsConnectionGetProxyInfoForHostUrl:   procDnsConnectionGetProxyInfoForHostUrl,
+	DnsConnectionGetProxyInfoForHostUrlEx: procDnsConnectionGetProxyInfoForHostUrlEx,
+	DnsConnectionGetProxyList:             procDnsConnectionGetProxyList,
+	DnsConnectionSetPolicyEntries:         procDnsConnectionSetPolicyEntries,
+	DnsConnectionSetProxyInfo:             procDnsConnectionSetProxyInfo,
+	DnsConnectionUpdateIfIndexTable:       procDnsConnectionUpdateIfIndexTable,
+	DnsExtractRecordsFromMessage_UTF8:     procDnsExtractRecordsFromMessage_UTF8,
+	DnsExtractRecordsFromMessage_W:        procDnsExtractRecordsFromMessage_W,
+	DnsFree:                               procDnsFree,
+	DnsFreeCustomServers:                  procDnsFreeCustomServers,
+	DnsFreeProxyName:                      procDnsFreeProxyName,
+	DnsGetApplicationSettings:             procDnsGetApplicationSettings,
+	DnsGetProxyInformation:                procDnsGetProxyInformation,
+	DnsIsFlatRecord:                       procDnsIsFlatRecord,
+	DnsModifyRecordsInSet_:                procDnsModifyRecordsInSet_,
+	DnsModifyRecordsInSet_A:               procDnsModifyRecordsInSet_A,
+	DnsModifyRecordsInSet_UTF8:            procDnsModifyRecordsInSet_UTF8,
+	DnsNameCompare_:                       procDnsNameCompare_,
+	DnsNameCompare_A:                      procDnsNameCompare_A,
+	DnsQueryConfig:                        procDnsQueryConfig,
+	DnsQueryEx:                            procDnsQueryEx,
+	DnsQueryRaw:                           procDnsQueryRaw,
+	DnsQueryRawResultFree:                 procDnsQueryRawResultFree,
+	DnsQuery_:                             procDnsQuery_,
+	DnsQuery_A:                            procDnsQuery_A,
+	DnsQuery_UTF8:                         procDnsQuery_UTF8,
+	DnsRecordCompare:                      procDnsRecordCompare,
+	DnsRecordCopyEx:                       procDnsRecordCopyEx,
+	DnsRecordSetCompare:                   procDnsRecordSetCompare,
+	DnsRecordSetCopyEx:                    procDnsRecordSetCopyEx,
+	DnsRecordSetDetach:                    procDnsRecordSetDetach,
+	DnsReleaseContextHandle:               procDnsReleaseContextHandle,
+	DnsReplaceRecordSet:                   procDnsReplaceRecordSet,
+	DnsReplaceRecordSetA:                  procDnsReplaceRecordSetA,
+	DnsReplaceRecordSetUTF8:               procDnsReplaceRecordSetUTF8,
+	DnsServiceBrowse:                      procDnsServiceBrowse,
+	DnsServiceBrowseCancel:                procDnsServiceBrowseCancel,
+	DnsServiceConstructInstance:           procDnsServiceConstructInstance,
+	DnsServiceCopyInstance:                procDnsServiceCopyInstance,
+	DnsServiceDeRegister:                  procDnsServiceDeRegister,
+	DnsServiceFreeInstance:                procDnsServiceFreeInstance,
+	DnsServiceRegister:                    procDnsServiceRegister,
+	DnsServiceRegisterCancel:              procDnsServiceRegisterCancel,
+	DnsServiceResolve:                     procDnsServiceResolve,
+	DnsServiceResolveCancel:               procDnsServiceResolveCancel,
+	DnsSetApplicationSettings:             procDnsSetApplicationSettings,
+	DnsStartMulticastQuery:                procDnsStartMulticastQuery,
+	DnsStopMulticastQuery:                 procDnsStopMulticastQuery,
+	DnsValidateName_:                      procDnsValidateName_,
+	DnsValidateName_A:                     procDnsValidateName_A,
+	DnsValidateName_UTF8:                  procDnsValidateName_UTF8,
+	DnsWriteQuestionToBuffer_UTF8:         procDnsWriteQuestionToBuffer_UTF8,
+	DnsWriteQuestionToBuffer_W:            procDnsWriteQuestionToBuffer_W,
+}
+
 // DnsAcquireContextHandle_ calls DNSAPI!DnsAcquireContextHandle_W.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsacquirecontexthandle_w
 // Minimum OS: windows5.0.
@@ -172,13 +310,13 @@ func DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl string, pSelectionContext [
 }
 
 // DnsConnectionGetProxyInfoForHostUrlEx calls DNSAPI!DnsConnectionGetProxyInfoForHostUrlEx.
-func DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl string, pSelectionContext []byte, dwExplicitInterfaceIndex uint32, pwszConnectionName string, pProxyInfoEx *DNS_CONNECTION_PROXY_INFO_EX) uint32 {
+func DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl string, pSelectionContext []byte, dwExplicitInterfaceIndex uint32, pwszConnectionName *string, pProxyInfoEx *DNS_CONNECTION_PROXY_INFO_EX) uint32 {
 	_pwszHostUrl := win32.UTF16Ptr(pwszHostUrl)
 	var _pSelectionContext *byte
 	if len(pSelectionContext) > 0 {
 		_pSelectionContext = &pSelectionContext[0]
 	}
-	_pwszConnectionName := win32.UTF16Ptr(pwszConnectionName)
+	_pwszConnectionName := win32.UTF16PtrOrNil(pwszConnectionName)
 	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyInfoForHostUrlEx.Addr(), uintptr(unsafe.Pointer(_pwszHostUrl)), uintptr(unsafe.Pointer(_pSelectionContext)), uintptr(len(pSelectionContext)), uintptr(dwExplicitInterfaceIndex), uintptr(unsafe.Pointer(_pwszConnectionName)), uintptr(unsafe.Pointer(pProxyInfoEx)))
 	return uint32(r1)
 }
@@ -241,8 +379,8 @@ func DnsFreeCustomServers(pcServers *uint32, ppServers **DNS_CUSTOM_SERVER) {
 // DnsFreeProxyName calls DNSAPI!DnsFreeProxyName.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsfreeproxyname
 // Minimum OS: windows6.1.
-func DnsFreeProxyName(proxyName string) {
-	_proxyName := win32.UTF16Ptr(proxyName)
+func DnsFreeProxyName(proxyName *string) {
+	_proxyName := win32.UTF16PtrOrNil(proxyName)
 	syscall.SyscallN(procDnsFreeProxyName.Addr(), uintptr(unsafe.Pointer(_proxyName)))
 }
 
@@ -313,8 +451,8 @@ func DnsNameCompare_A(pName1 foundation.PSTR, pName2 foundation.PSTR) bool {
 // DnsQueryConfig calls DNSAPI!DnsQueryConfig.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsqueryconfig
 // Minimum OS: windows5.0.
-func DnsQueryConfig(Config DNS_CONFIG_TYPE, Flag uint32, pwsAdapterName string, pReserved unsafe.Pointer, pBuffer unsafe.Pointer, pBufLen *uint32) int32 {
-	_pwsAdapterName := win32.UTF16Ptr(pwsAdapterName)
+func DnsQueryConfig(Config DNS_CONFIG_TYPE, Flag uint32, pwsAdapterName *string, pReserved unsafe.Pointer, pBuffer unsafe.Pointer, pBufLen *uint32) int32 {
+	_pwsAdapterName := win32.UTF16PtrOrNil(pwsAdapterName)
 	r1, _, _ := syscall.SyscallN(procDnsQueryConfig.Addr(), uintptr(Config), uintptr(Flag), uintptr(unsafe.Pointer(_pwsAdapterName)), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pBufLen)))
 	return int32(r1)
 }

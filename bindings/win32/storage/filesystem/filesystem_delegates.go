@@ -4,94 +4,110 @@
 
 package filesystem
 
-// CACHE_ACCESS_CHECK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(security.PSECURITY_DESCRIPTOR, foundation.HANDLE, uint32, *security.GENERIC_MAPPING, *security.PRIVILEGE_SET, *uint32, *uint32, *foundation.BOOL) foundation.BOOL.
+// CACHE_ACCESS_CHECK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(security.PSECURITY_DESCRIPTOR, foundation.HANDLE, uint32, *security.GENERIC_MAPPING, *security.PRIVILEGE_SET, *uint32, *uint32, *foundation.BOOL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CACHE_ACCESS_CHECK uintptr
 
-// CACHE_DESTROY_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *byte).
+// CACHE_DESTROY_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *byte) uintptr.
 type CACHE_DESTROY_CALLBACK uintptr
 
-// CACHE_KEY_COMPARE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *byte, uint32, *byte) int32.
+// CACHE_KEY_COMPARE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *byte, uint32, *byte) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type CACHE_KEY_COMPARE uintptr
 
-// CACHE_KEY_HASH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32) uint32.
+// CACHE_KEY_HASH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type CACHE_KEY_HASH uintptr
 
-// CACHE_READ_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *byte, unsafe.Pointer) foundation.BOOL.
+// CACHE_READ_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *byte, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CACHE_READ_CALLBACK uintptr
 
-// CLAIMMEDIALABEL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, *MediaLabelInfo) uint32.
+// CLAIMMEDIALABEL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, *MediaLabelInfo) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type CLAIMMEDIALABEL uintptr
 
-// CLAIMMEDIALABELEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, *MediaLabelInfo, *win32.GUID) uint32.
+// CLAIMMEDIALABELEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, *MediaLabelInfo, *win32.GUID) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type CLAIMMEDIALABELEX uintptr
 
-// CLFS_BLOCK_ALLOCATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer) unsafe.Pointer.
+// CLFS_BLOCK_ALLOCATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type CLFS_BLOCK_ALLOCATION uintptr
 
-// CLFS_BLOCK_DEALLOCATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer).
+// CLFS_BLOCK_DEALLOCATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr.
 type CLFS_BLOCK_DEALLOCATION uintptr
 
-// FCACHE_CREATE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, unsafe.Pointer, *uint32, *uint32) foundation.HANDLE.
+// FCACHE_CREATE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, unsafe.Pointer, *uint32, *uint32) uintptr (the native return type is
+// foundation.HANDLE; NewCallback requires a uintptr-sized result).
 type FCACHE_CREATE_CALLBACK uintptr
 
-// FCACHE_RICHCREATE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, unsafe.Pointer, *uint32, *uint32, *foundation.BOOL, *foundation.BOOL, *foundation.BOOL, *foundation.BOOL) foundation.HANDLE.
+// FCACHE_RICHCREATE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, unsafe.Pointer, *uint32, *uint32, *foundation.BOOL, *foundation.BOOL, *foundation.BOOL, *foundation.BOOL) uintptr (the native return type is
+// foundation.HANDLE; NewCallback requires a uintptr-sized result).
 type FCACHE_RICHCREATE_CALLBACK uintptr
 
-// LPPROGRESS_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int64, int64, int64, int64, uint32, LPPROGRESS_ROUTINE_CALLBACK_REASON, foundation.HANDLE, foundation.HANDLE, unsafe.Pointer) COPYPROGRESSROUTINE_PROGRESS.
+// LPPROGRESS_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int64, int64, int64, int64, uint32, LPPROGRESS_ROUTINE_CALLBACK_REASON, foundation.HANDLE, foundation.HANDLE, unsafe.Pointer) uintptr (the native return type is
+// COPYPROGRESSROUTINE_PROGRESS; NewCallback requires a uintptr-sized result).
 type LPPROGRESS_ROUTINE uintptr
 
-// MAXMEDIALABEL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32) uint32.
+// MAXMEDIALABEL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type MAXMEDIALABEL uintptr
 
-// PCLFS_COMPLETION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32).
+// PCLFS_COMPLETION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr.
 type PCLFS_COMPLETION_ROUTINE uintptr
 
-// PCOPYFILE2_PROGRESS_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*COPYFILE2_MESSAGE, unsafe.Pointer) COPYFILE2_MESSAGE_ACTION.
+// PCOPYFILE2_PROGRESS_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*COPYFILE2_MESSAGE, unsafe.Pointer) uintptr (the native return type is
+// COPYFILE2_MESSAGE_ACTION; NewCallback requires a uintptr-sized result).
 type PCOPYFILE2_PROGRESS_ROUTINE uintptr
 
-// PFE_EXPORT_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, unsafe.Pointer, uint32) uint32.
+// PFE_EXPORT_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFE_EXPORT_FUNC uintptr
 
-// PFE_IMPORT_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, unsafe.Pointer, *uint32) uint32.
+// PFE_IMPORT_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFE_IMPORT_FUNC uintptr
 
-// PFN_IO_COMPLETION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*FIO_CONTEXT, *FH_OVERLAPPED, uint32, uint32).
+// PFN_IO_COMPLETION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*FIO_CONTEXT, *FH_OVERLAPPED, uint32, uint32) uintptr.
 type PFN_IO_COMPLETION uintptr
 
-// PLOG_FULL_HANDLER_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, foundation.BOOL, unsafe.Pointer).
+// PLOG_FULL_HANDLER_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, foundation.BOOL, unsafe.Pointer) uintptr.
 type PLOG_FULL_HANDLER_CALLBACK uintptr
 
-// PLOG_TAIL_ADVANCE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, CLS_LSN, unsafe.Pointer).
+// PLOG_TAIL_ADVANCE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, CLS_LSN, unsafe.Pointer) uintptr.
 type PLOG_TAIL_ADVANCE_CALLBACK uintptr
 
-// PLOG_UNPINNED_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer).
+// PLOG_UNPINNED_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer) uintptr.
 type PLOG_UNPINNED_CALLBACK uintptr
 
-// WofEnumEntryProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer) foundation.BOOL.
+// WofEnumEntryProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type WofEnumEntryProc uintptr
 
-// WofEnumFilesProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, unsafe.Pointer, unsafe.Pointer) foundation.BOOL.
+// WofEnumFilesProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type WofEnumFilesProc uintptr

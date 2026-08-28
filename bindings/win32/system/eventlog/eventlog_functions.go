@@ -76,6 +76,124 @@ var (
 	procEvtUpdateBookmark               = modwevtapi.NewProc("EvtUpdateBookmark")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BackupEventLog                  *win32.Proc
+	BackupEventLogA                 *win32.Proc
+	ClearEventLog                   *win32.Proc
+	ClearEventLogA                  *win32.Proc
+	CloseEventLog                   *win32.Proc
+	DeregisterEventSource           *win32.Proc
+	EvtArchiveExportedLog           *win32.Proc
+	EvtCancel                       *win32.Proc
+	EvtClearLog                     *win32.Proc
+	EvtClose                        *win32.Proc
+	EvtCreateBookmark               *win32.Proc
+	EvtCreateRenderContext          *win32.Proc
+	EvtExportLog                    *win32.Proc
+	EvtFormatMessage                *win32.Proc
+	EvtGetChannelConfigProperty     *win32.Proc
+	EvtGetEventInfo                 *win32.Proc
+	EvtGetEventMetadataProperty     *win32.Proc
+	EvtGetExtendedStatus            *win32.Proc
+	EvtGetLogInfo                   *win32.Proc
+	EvtGetObjectArrayProperty       *win32.Proc
+	EvtGetObjectArraySize           *win32.Proc
+	EvtGetPublisherMetadataProperty *win32.Proc
+	EvtGetQueryInfo                 *win32.Proc
+	EvtNext                         *win32.Proc
+	EvtNextChannelPath              *win32.Proc
+	EvtNextEventMetadata            *win32.Proc
+	EvtNextPublisherId              *win32.Proc
+	EvtOpenChannelConfig            *win32.Proc
+	EvtOpenChannelEnum              *win32.Proc
+	EvtOpenEventMetadataEnum        *win32.Proc
+	EvtOpenLog                      *win32.Proc
+	EvtOpenPublisherEnum            *win32.Proc
+	EvtOpenPublisherMetadata        *win32.Proc
+	EvtOpenSession                  *win32.Proc
+	EvtQuery                        *win32.Proc
+	EvtRender                       *win32.Proc
+	EvtSaveChannelConfig            *win32.Proc
+	EvtSeek                         *win32.Proc
+	EvtSetChannelConfigProperty     *win32.Proc
+	EvtSubscribe                    *win32.Proc
+	EvtUpdateBookmark               *win32.Proc
+	GetEventLogInformation          *win32.Proc
+	GetNumberOfEventLogRecords      *win32.Proc
+	GetOldestEventLogRecord         *win32.Proc
+	NotifyChangeEventLog            *win32.Proc
+	OpenBackupEventLog              *win32.Proc
+	OpenBackupEventLogA             *win32.Proc
+	OpenEventLog                    *win32.Proc
+	OpenEventLogA                   *win32.Proc
+	ReadEventLog                    *win32.Proc
+	ReadEventLogA                   *win32.Proc
+	RegisterEventSource             *win32.Proc
+	RegisterEventSourceA            *win32.Proc
+	ReportEvent                     *win32.Proc
+	ReportEventA                    *win32.Proc
+}{
+	BackupEventLog:                  procBackupEventLog,
+	BackupEventLogA:                 procBackupEventLogA,
+	ClearEventLog:                   procClearEventLog,
+	ClearEventLogA:                  procClearEventLogA,
+	CloseEventLog:                   procCloseEventLog,
+	DeregisterEventSource:           procDeregisterEventSource,
+	EvtArchiveExportedLog:           procEvtArchiveExportedLog,
+	EvtCancel:                       procEvtCancel,
+	EvtClearLog:                     procEvtClearLog,
+	EvtClose:                        procEvtClose,
+	EvtCreateBookmark:               procEvtCreateBookmark,
+	EvtCreateRenderContext:          procEvtCreateRenderContext,
+	EvtExportLog:                    procEvtExportLog,
+	EvtFormatMessage:                procEvtFormatMessage,
+	EvtGetChannelConfigProperty:     procEvtGetChannelConfigProperty,
+	EvtGetEventInfo:                 procEvtGetEventInfo,
+	EvtGetEventMetadataProperty:     procEvtGetEventMetadataProperty,
+	EvtGetExtendedStatus:            procEvtGetExtendedStatus,
+	EvtGetLogInfo:                   procEvtGetLogInfo,
+	EvtGetObjectArrayProperty:       procEvtGetObjectArrayProperty,
+	EvtGetObjectArraySize:           procEvtGetObjectArraySize,
+	EvtGetPublisherMetadataProperty: procEvtGetPublisherMetadataProperty,
+	EvtGetQueryInfo:                 procEvtGetQueryInfo,
+	EvtNext:                         procEvtNext,
+	EvtNextChannelPath:              procEvtNextChannelPath,
+	EvtNextEventMetadata:            procEvtNextEventMetadata,
+	EvtNextPublisherId:              procEvtNextPublisherId,
+	EvtOpenChannelConfig:            procEvtOpenChannelConfig,
+	EvtOpenChannelEnum:              procEvtOpenChannelEnum,
+	EvtOpenEventMetadataEnum:        procEvtOpenEventMetadataEnum,
+	EvtOpenLog:                      procEvtOpenLog,
+	EvtOpenPublisherEnum:            procEvtOpenPublisherEnum,
+	EvtOpenPublisherMetadata:        procEvtOpenPublisherMetadata,
+	EvtOpenSession:                  procEvtOpenSession,
+	EvtQuery:                        procEvtQuery,
+	EvtRender:                       procEvtRender,
+	EvtSaveChannelConfig:            procEvtSaveChannelConfig,
+	EvtSeek:                         procEvtSeek,
+	EvtSetChannelConfigProperty:     procEvtSetChannelConfigProperty,
+	EvtSubscribe:                    procEvtSubscribe,
+	EvtUpdateBookmark:               procEvtUpdateBookmark,
+	GetEventLogInformation:          procGetEventLogInformation,
+	GetNumberOfEventLogRecords:      procGetNumberOfEventLogRecords,
+	GetOldestEventLogRecord:         procGetOldestEventLogRecord,
+	NotifyChangeEventLog:            procNotifyChangeEventLog,
+	OpenBackupEventLog:              procOpenBackupEventLog,
+	OpenBackupEventLogA:             procOpenBackupEventLogA,
+	OpenEventLog:                    procOpenEventLog,
+	OpenEventLogA:                   procOpenEventLogA,
+	ReadEventLog:                    procReadEventLog,
+	ReadEventLogA:                   procReadEventLogA,
+	RegisterEventSource:             procRegisterEventSource,
+	RegisterEventSourceA:            procRegisterEventSourceA,
+	ReportEvent:                     procReportEvent,
+	ReportEventA:                    procReportEventA,
+}
+
 // BackupEventLog calls ADVAPI32!BackupEventLogW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-backupeventlogw
 // Minimum OS: windows5.0.
@@ -102,8 +220,8 @@ func BackupEventLogA(hEventLog foundation.HANDLE, lpBackupFileName foundation.PS
 // ClearEventLog calls ADVAPI32!ClearEventLogW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-cleareventlogw
 // Minimum OS: windows5.0.
-func ClearEventLog(hEventLog foundation.HANDLE, lpBackupFileName string) error {
-	_lpBackupFileName := win32.UTF16Ptr(lpBackupFileName)
+func ClearEventLog(hEventLog foundation.HANDLE, lpBackupFileName *string) error {
+	_lpBackupFileName := win32.UTF16PtrOrNil(lpBackupFileName)
 	r1, _, e1 := syscall.SyscallN(procClearEventLog.Addr(), uintptr(hEventLog), uintptr(unsafe.Pointer(_lpBackupFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -170,9 +288,9 @@ func EvtCancel(Object EVT_HANDLE) error {
 // EvtClearLog calls wevtapi!EvtClearLog.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtclearlog
 // Minimum OS: windows6.0.6000.
-func EvtClearLog(Session EVT_HANDLE, ChannelPath string, TargetFilePath string, Flags uint32) error {
+func EvtClearLog(Session EVT_HANDLE, ChannelPath string, TargetFilePath *string, Flags uint32) error {
 	_ChannelPath := win32.UTF16Ptr(ChannelPath)
-	_TargetFilePath := win32.UTF16Ptr(TargetFilePath)
+	_TargetFilePath := win32.UTF16PtrOrNil(TargetFilePath)
 	r1, _, e1 := syscall.SyscallN(procEvtClearLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_ChannelPath)), uintptr(unsafe.Pointer(_TargetFilePath)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -194,8 +312,8 @@ func EvtClose(Object EVT_HANDLE) error {
 // EvtCreateBookmark calls wevtapi!EvtCreateBookmark.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtcreatebookmark
 // Minimum OS: windows6.0.6000.
-func EvtCreateBookmark(BookmarkXml string) (EVT_HANDLE, error) {
-	_BookmarkXml := win32.UTF16Ptr(BookmarkXml)
+func EvtCreateBookmark(BookmarkXml *string) (EVT_HANDLE, error) {
+	_BookmarkXml := win32.UTF16PtrOrNil(BookmarkXml)
 	r1, _, e1 := syscall.SyscallN(procEvtCreateBookmark.Addr(), uintptr(unsafe.Pointer(_BookmarkXml)))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
@@ -221,9 +339,9 @@ func EvtCreateRenderContext(ValuePaths []foundation.PWSTR, Flags uint32) (EVT_HA
 // EvtExportLog calls wevtapi!EvtExportLog.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtexportlog
 // Minimum OS: windows6.0.6000.
-func EvtExportLog(Session EVT_HANDLE, Path string, Query string, TargetFilePath string, Flags uint32) error {
-	_Path := win32.UTF16Ptr(Path)
-	_Query := win32.UTF16Ptr(Query)
+func EvtExportLog(Session EVT_HANDLE, Path *string, Query *string, TargetFilePath string, Flags uint32) error {
+	_Path := win32.UTF16PtrOrNil(Path)
+	_Query := win32.UTF16PtrOrNil(Query)
 	_TargetFilePath := win32.UTF16Ptr(TargetFilePath)
 	r1, _, e1 := syscall.SyscallN(procEvtExportLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(_TargetFilePath)), uintptr(Flags))
 	if r1 == 0 {
@@ -451,9 +569,9 @@ func EvtOpenPublisherEnum(Session EVT_HANDLE, Flags uint32) (EVT_HANDLE, error) 
 // EvtOpenPublisherMetadata calls wevtapi!EvtOpenPublisherMetadata.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtopenpublishermetadata
 // Minimum OS: windows6.0.6000.
-func EvtOpenPublisherMetadata(Session EVT_HANDLE, PublisherId string, LogFilePath string, Locale uint32, Flags uint32) (EVT_HANDLE, error) {
+func EvtOpenPublisherMetadata(Session EVT_HANDLE, PublisherId string, LogFilePath *string, Locale uint32, Flags uint32) (EVT_HANDLE, error) {
 	_PublisherId := win32.UTF16Ptr(PublisherId)
-	_LogFilePath := win32.UTF16Ptr(LogFilePath)
+	_LogFilePath := win32.UTF16PtrOrNil(LogFilePath)
 	r1, _, e1 := syscall.SyscallN(procEvtOpenPublisherMetadata.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_PublisherId)), uintptr(unsafe.Pointer(_LogFilePath)), uintptr(Locale), uintptr(Flags))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
@@ -475,9 +593,9 @@ func EvtOpenSession(LoginClass EVT_LOGIN_CLASS, Login unsafe.Pointer) (EVT_HANDL
 // EvtQuery calls wevtapi!EvtQuery.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtquery
 // Minimum OS: windows6.0.6000.
-func EvtQuery(Session EVT_HANDLE, Path string, Query string, Flags uint32) (EVT_HANDLE, error) {
-	_Path := win32.UTF16Ptr(Path)
-	_Query := win32.UTF16Ptr(Query)
+func EvtQuery(Session EVT_HANDLE, Path *string, Query *string, Flags uint32) (EVT_HANDLE, error) {
+	_Path := win32.UTF16PtrOrNil(Path)
+	_Query := win32.UTF16PtrOrNil(Query)
 	r1, _, e1 := syscall.SyscallN(procEvtQuery.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(_Query)), uintptr(Flags))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
@@ -536,9 +654,9 @@ func EvtSetChannelConfigProperty(ChannelConfig EVT_HANDLE, PropertyId EVT_CHANNE
 // EvtSubscribe calls wevtapi!EvtSubscribe.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtsubscribe
 // Minimum OS: windows6.0.6000.
-func EvtSubscribe(Session EVT_HANDLE, SignalEvent foundation.HANDLE, ChannelPath string, Query string, Bookmark EVT_HANDLE, Context unsafe.Pointer, Callback EVT_SUBSCRIBE_CALLBACK, Flags uint32) (EVT_HANDLE, error) {
-	_ChannelPath := win32.UTF16Ptr(ChannelPath)
-	_Query := win32.UTF16Ptr(Query)
+func EvtSubscribe(Session EVT_HANDLE, SignalEvent foundation.HANDLE, ChannelPath *string, Query *string, Bookmark EVT_HANDLE, Context unsafe.Pointer, Callback EVT_SUBSCRIBE_CALLBACK, Flags uint32) (EVT_HANDLE, error) {
+	_ChannelPath := win32.UTF16PtrOrNil(ChannelPath)
+	_Query := win32.UTF16PtrOrNil(Query)
 	r1, _, e1 := syscall.SyscallN(procEvtSubscribe.Addr(), uintptr(Session), uintptr(SignalEvent), uintptr(unsafe.Pointer(_ChannelPath)), uintptr(unsafe.Pointer(_Query)), uintptr(Bookmark), uintptr(unsafe.Pointer(Context)), uintptr(Callback), uintptr(Flags))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
@@ -608,8 +726,8 @@ func NotifyChangeEventLog(hEventLog foundation.HANDLE, hEvent foundation.HANDLE)
 // OpenBackupEventLog calls ADVAPI32!OpenBackupEventLogW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openbackupeventlogw
 // Minimum OS: windows5.0.
-func OpenBackupEventLog(lpUNCServerName string, lpFileName string) (foundation.HANDLE, error) {
-	_lpUNCServerName := win32.UTF16Ptr(lpUNCServerName)
+func OpenBackupEventLog(lpUNCServerName *string, lpFileName string) (foundation.HANDLE, error) {
+	_lpUNCServerName := win32.UTF16PtrOrNil(lpUNCServerName)
 	_lpFileName := win32.UTF16Ptr(lpFileName)
 	r1, _, e1 := syscall.SyscallN(procOpenBackupEventLog.Addr(), uintptr(unsafe.Pointer(_lpUNCServerName)), uintptr(unsafe.Pointer(_lpFileName)))
 	ret := foundation.HANDLE(r1)
@@ -634,8 +752,8 @@ func OpenBackupEventLogA(lpUNCServerName foundation.PSTR, lpFileName foundation.
 // OpenEventLog calls ADVAPI32!OpenEventLogW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openeventlogw
 // Minimum OS: windows5.0.
-func OpenEventLog(lpUNCServerName string, lpSourceName string) (foundation.HANDLE, error) {
-	_lpUNCServerName := win32.UTF16Ptr(lpUNCServerName)
+func OpenEventLog(lpUNCServerName *string, lpSourceName string) (foundation.HANDLE, error) {
+	_lpUNCServerName := win32.UTF16PtrOrNil(lpUNCServerName)
 	_lpSourceName := win32.UTF16Ptr(lpSourceName)
 	r1, _, e1 := syscall.SyscallN(procOpenEventLog.Addr(), uintptr(unsafe.Pointer(_lpUNCServerName)), uintptr(unsafe.Pointer(_lpSourceName)))
 	ret := foundation.HANDLE(r1)
@@ -690,8 +808,8 @@ func ReadEventLogA(hEventLog foundation.HANDLE, dwReadFlags READ_EVENT_LOG_READ_
 // RegisterEventSource calls ADVAPI32!RegisterEventSourceW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-registereventsourcew
 // Minimum OS: windows5.0.
-func RegisterEventSource(lpUNCServerName string, lpSourceName string) (foundation.HANDLE, error) {
-	_lpUNCServerName := win32.UTF16Ptr(lpUNCServerName)
+func RegisterEventSource(lpUNCServerName *string, lpSourceName string) (foundation.HANDLE, error) {
+	_lpUNCServerName := win32.UTF16PtrOrNil(lpUNCServerName)
 	_lpSourceName := win32.UTF16Ptr(lpSourceName)
 	r1, _, e1 := syscall.SyscallN(procRegisterEventSource.Addr(), uintptr(unsafe.Pointer(_lpUNCServerName)), uintptr(unsafe.Pointer(_lpSourceName)))
 	ret := foundation.HANDLE(r1)

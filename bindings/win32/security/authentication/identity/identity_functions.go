@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	securitycredentials "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/credentials"
+	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
 )
 
 var (
@@ -94,6 +95,7 @@ var (
 	procSspiPromptForCredentialsA              = modcredui.NewProc("SspiPromptForCredentialsA")
 	procSendSAS                                = modSAS.NewProc("SendSAS")
 	procSslCrackCertificate                    = modSCHANNEL.NewProc("SslCrackCertificate")
+	procSslDeserializeCertificateStore         = modSCHANNEL.NewProc("SslDeserializeCertificateStore")
 	procSslEmptyCache                          = modSCHANNEL.NewProc("SslEmptyCacheW")
 	procSslEmptyCacheA                         = modSCHANNEL.NewProc("SslEmptyCacheA")
 	procSslFreeCertificate                     = modSCHANNEL.NewProc("SslFreeCertificate")
@@ -249,6 +251,452 @@ var (
 	procTokenBindingVerifyMessage              = modTOKENBINDING.NewProc("TokenBindingVerifyMessage")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AcceptSecurityContext                  *win32.Proc
+	AcquireCredentialsHandle               *win32.Proc
+	AcquireCredentialsHandleA              *win32.Proc
+	AddCredentials                         *win32.Proc
+	AddCredentialsA                        *win32.Proc
+	AddSecurityPackage                     *win32.Proc
+	AddSecurityPackageA                    *win32.Proc
+	ApplyControlToken                      *win32.Proc
+	AuditComputeEffectivePolicyBySid       *win32.Proc
+	AuditComputeEffectivePolicyByToken     *win32.Proc
+	AuditEnumerateCategories               *win32.Proc
+	AuditEnumeratePerUserPolicy            *win32.Proc
+	AuditEnumerateSubCategories            *win32.Proc
+	AuditFree                              *win32.Proc
+	AuditLookupCategoryGuidFromCategoryId  *win32.Proc
+	AuditLookupCategoryIdFromCategoryGuid  *win32.Proc
+	AuditLookupCategoryName                *win32.Proc
+	AuditLookupCategoryNameA               *win32.Proc
+	AuditLookupSubCategoryName             *win32.Proc
+	AuditLookupSubCategoryNameA            *win32.Proc
+	AuditQueryGlobalSacl                   *win32.Proc
+	AuditQueryGlobalSaclA                  *win32.Proc
+	AuditQueryPerUserPolicy                *win32.Proc
+	AuditQuerySecurity                     *win32.Proc
+	AuditQuerySystemPolicy                 *win32.Proc
+	AuditSetGlobalSacl                     *win32.Proc
+	AuditSetGlobalSaclA                    *win32.Proc
+	AuditSetPerUserPolicy                  *win32.Proc
+	AuditSetSecurity                       *win32.Proc
+	AuditSetSystemPolicy                   *win32.Proc
+	ChangeAccountPassword                  *win32.Proc
+	ChangeAccountPasswordA                 *win32.Proc
+	CompleteAuthToken                      *win32.Proc
+	CredMarshalTargetInfo                  *win32.Proc
+	CredUnmarshalTargetInfo                *win32.Proc
+	DecryptMessage                         *win32.Proc
+	DeleteSecurityContext                  *win32.Proc
+	DeleteSecurityPackage                  *win32.Proc
+	DeleteSecurityPackageA                 *win32.Proc
+	EncryptMessage                         *win32.Proc
+	EnumerateSecurityPackages              *win32.Proc
+	EnumerateSecurityPackagesA             *win32.Proc
+	ExportSecurityContext                  *win32.Proc
+	FreeContextBuffer                      *win32.Proc
+	FreeCredentialsHandle                  *win32.Proc
+	GetComputerObjectName                  *win32.Proc
+	GetComputerObjectNameA                 *win32.Proc
+	GetUserNameEx                          *win32.Proc
+	GetUserNameExA                         *win32.Proc
+	ImpersonateSecurityContext             *win32.Proc
+	ImportSecurityContext                  *win32.Proc
+	ImportSecurityContextA                 *win32.Proc
+	InitSecurityInterface                  *win32.Proc
+	InitSecurityInterfaceA                 *win32.Proc
+	InitializeSecurityContext              *win32.Proc
+	InitializeSecurityContextA             *win32.Proc
+	LsaAddAccountRights                    *win32.Proc
+	LsaCallAuthenticationPackage           *win32.Proc
+	LsaClose                               *win32.Proc
+	LsaConnectUntrusted                    *win32.Proc
+	LsaCreateTrustedDomainEx               *win32.Proc
+	LsaDeleteTrustedDomain                 *win32.Proc
+	LsaDeregisterLogonProcess              *win32.Proc
+	LsaEnumerateAccountRights              *win32.Proc
+	LsaEnumerateAccountsWithUserRight      *win32.Proc
+	LsaEnumerateLogonSessions              *win32.Proc
+	LsaEnumerateTrustedDomains             *win32.Proc
+	LsaEnumerateTrustedDomainsEx           *win32.Proc
+	LsaFreeMemory                          *win32.Proc
+	LsaFreeReturnBuffer                    *win32.Proc
+	LsaGetAppliedCAPIDs                    *win32.Proc
+	LsaGetLogonSessionData                 *win32.Proc
+	LsaLogonUser                           *win32.Proc
+	LsaLookupAuthenticationPackage         *win32.Proc
+	LsaLookupNames                         *win32.Proc
+	LsaLookupNames2                        *win32.Proc
+	LsaLookupSids                          *win32.Proc
+	LsaLookupSids2                         *win32.Proc
+	LsaNtStatusToWinError                  *win32.Proc
+	LsaOpenPolicy                          *win32.Proc
+	LsaOpenTrustedDomainByName             *win32.Proc
+	LsaQueryCAPs                           *win32.Proc
+	LsaQueryDomainInformationPolicy        *win32.Proc
+	LsaQueryForestTrustInformation         *win32.Proc
+	LsaQueryForestTrustInformation2        *win32.Proc
+	LsaQueryInformationPolicy              *win32.Proc
+	LsaQueryTrustedDomainInfo              *win32.Proc
+	LsaQueryTrustedDomainInfoByName        *win32.Proc
+	LsaRegisterLogonProcess                *win32.Proc
+	LsaRegisterPolicyChangeNotification    *win32.Proc
+	LsaRemoveAccountRights                 *win32.Proc
+	LsaRetrievePrivateData                 *win32.Proc
+	LsaSetCAPs                             *win32.Proc
+	LsaSetDomainInformationPolicy          *win32.Proc
+	LsaSetForestTrustInformation           *win32.Proc
+	LsaSetForestTrustInformation2          *win32.Proc
+	LsaSetInformationPolicy                *win32.Proc
+	LsaSetTrustedDomainInfoByName          *win32.Proc
+	LsaSetTrustedDomainInformation         *win32.Proc
+	LsaStorePrivateData                    *win32.Proc
+	LsaUnregisterPolicyChangeNotification  *win32.Proc
+	MakeSignature                          *win32.Proc
+	QueryContextAttributes                 *win32.Proc
+	QueryContextAttributesA                *win32.Proc
+	QueryContextAttributesEx               *win32.Proc
+	QueryContextAttributesExA              *win32.Proc
+	QueryCredentialsAttributes             *win32.Proc
+	QueryCredentialsAttributesA            *win32.Proc
+	QueryCredentialsAttributesEx           *win32.Proc
+	QueryCredentialsAttributesExA          *win32.Proc
+	QuerySecurityContextToken              *win32.Proc
+	QuerySecurityPackageInfo               *win32.Proc
+	QuerySecurityPackageInfoA              *win32.Proc
+	RevertSecurityContext                  *win32.Proc
+	RtlDecryptMemory                       *win32.Proc
+	RtlEncryptMemory                       *win32.Proc
+	RtlGenRandom                           *win32.Proc
+	SLAcquireGenuineTicket                 *win32.Proc
+	SLActivateProduct                      *win32.Proc
+	SLClose                                *win32.Proc
+	SLConsumeRight                         *win32.Proc
+	SLDepositOfflineConfirmationId         *win32.Proc
+	SLDepositOfflineConfirmationIdEx       *win32.Proc
+	SLFireEvent                            *win32.Proc
+	SLGenerateOfflineInstallationId        *win32.Proc
+	SLGenerateOfflineInstallationIdEx      *win32.Proc
+	SLGetApplicationInformation            *win32.Proc
+	SLGetGenuineInformation                *win32.Proc
+	SLGetInstalledProductKeyIds            *win32.Proc
+	SLGetLicense                           *win32.Proc
+	SLGetLicenseFileId                     *win32.Proc
+	SLGetLicenseInformation                *win32.Proc
+	SLGetLicensingStatusInformation        *win32.Proc
+	SLGetPKeyId                            *win32.Proc
+	SLGetPKeyInformation                   *win32.Proc
+	SLGetPolicyInformation                 *win32.Proc
+	SLGetPolicyInformationDWORD            *win32.Proc
+	SLGetProductSkuInformation             *win32.Proc
+	SLGetReferralInformation               *win32.Proc
+	SLGetSLIDList                          *win32.Proc
+	SLGetServerStatus                      *win32.Proc
+	SLGetServiceInformation                *win32.Proc
+	SLGetWindowsInformation                *win32.Proc
+	SLGetWindowsInformationDWORD           *win32.Proc
+	SLInstallLicense                       *win32.Proc
+	SLInstallProofOfPurchase               *win32.Proc
+	SLIsGenuineLocal                       *win32.Proc
+	SLOpen                                 *win32.Proc
+	SLQueryLicenseValueFromApp             *win32.Proc
+	SLRegisterEvent                        *win32.Proc
+	SLSetCurrentProductKey                 *win32.Proc
+	SLSetGenuineInformation                *win32.Proc
+	SLUninstallLicense                     *win32.Proc
+	SLUninstallProofOfPurchase             *win32.Proc
+	SLUnregisterEvent                      *win32.Proc
+	SaslAcceptSecurityContext              *win32.Proc
+	SaslEnumerateProfiles                  *win32.Proc
+	SaslEnumerateProfilesA                 *win32.Proc
+	SaslGetContextOption                   *win32.Proc
+	SaslGetProfilePackage                  *win32.Proc
+	SaslGetProfilePackageA                 *win32.Proc
+	SaslIdentifyPackage                    *win32.Proc
+	SaslIdentifyPackageA                   *win32.Proc
+	SaslInitializeSecurityContext          *win32.Proc
+	SaslInitializeSecurityContextA         *win32.Proc
+	SaslSetContextOption                   *win32.Proc
+	SecAllocateAndSetCallTarget            *win32.Proc
+	SecAllocateAndSetIPAddress             *win32.Proc
+	SecFreeCallContext                     *win32.Proc
+	SendSAS                                *win32.Proc
+	SetContextAttributes                   *win32.Proc
+	SetContextAttributesA                  *win32.Proc
+	SetCredentialsAttributes               *win32.Proc
+	SetCredentialsAttributesA              *win32.Proc
+	SslCrackCertificate                    *win32.Proc
+	SslDeserializeCertificateStore         *win32.Proc
+	SslEmptyCache                          *win32.Proc
+	SslEmptyCacheA                         *win32.Proc
+	SslFreeCertificate                     *win32.Proc
+	SslGenerateRandomBits                  *win32.Proc
+	SslGetExtensions                       *win32.Proc
+	SslGetMaximumKeySize                   *win32.Proc
+	SslGetServerIdentity                   *win32.Proc
+	SspiCompareAuthIdentities              *win32.Proc
+	SspiCopyAuthIdentity                   *win32.Proc
+	SspiDecryptAuthIdentity                *win32.Proc
+	SspiDecryptAuthIdentityEx              *win32.Proc
+	SspiEncodeAuthIdentityAsStrings        *win32.Proc
+	SspiEncodeStringsAsAuthIdentity        *win32.Proc
+	SspiEncryptAuthIdentity                *win32.Proc
+	SspiEncryptAuthIdentityEx              *win32.Proc
+	SspiExcludePackage                     *win32.Proc
+	SspiFreeAuthIdentity                   *win32.Proc
+	SspiGetTargetHostName                  *win32.Proc
+	SspiIsAuthIdentityEncrypted            *win32.Proc
+	SspiIsPromptingNeeded                  *win32.Proc
+	SspiLocalFree                          *win32.Proc
+	SspiMarshalAuthIdentity                *win32.Proc
+	SspiPrepareForCredRead                 *win32.Proc
+	SspiPrepareForCredWrite                *win32.Proc
+	SspiPromptForCredentials               *win32.Proc
+	SspiPromptForCredentialsA              *win32.Proc
+	SspiSetChannelBindingFlags             *win32.Proc
+	SspiUnmarshalAuthIdentity              *win32.Proc
+	SspiValidateAuthIdentity               *win32.Proc
+	SspiZeroAuthIdentity                   *win32.Proc
+	TokenBindingDeleteAllBindings          *win32.Proc
+	TokenBindingDeleteBinding              *win32.Proc
+	TokenBindingGenerateBinding            *win32.Proc
+	TokenBindingGenerateID                 *win32.Proc
+	TokenBindingGenerateIDForUri           *win32.Proc
+	TokenBindingGenerateMessage            *win32.Proc
+	TokenBindingGetHighestSupportedVersion *win32.Proc
+	TokenBindingGetKeyTypesClient          *win32.Proc
+	TokenBindingGetKeyTypesServer          *win32.Proc
+	TokenBindingVerifyMessage              *win32.Proc
+	TranslateName                          *win32.Proc
+	TranslateNameA                         *win32.Proc
+	VerifySignature                        *win32.Proc
+}{
+	AcceptSecurityContext:                  procAcceptSecurityContext,
+	AcquireCredentialsHandle:               procAcquireCredentialsHandle,
+	AcquireCredentialsHandleA:              procAcquireCredentialsHandleA,
+	AddCredentials:                         procAddCredentials,
+	AddCredentialsA:                        procAddCredentialsA,
+	AddSecurityPackage:                     procAddSecurityPackage,
+	AddSecurityPackageA:                    procAddSecurityPackageA,
+	ApplyControlToken:                      procApplyControlToken,
+	AuditComputeEffectivePolicyBySid:       procAuditComputeEffectivePolicyBySid,
+	AuditComputeEffectivePolicyByToken:     procAuditComputeEffectivePolicyByToken,
+	AuditEnumerateCategories:               procAuditEnumerateCategories,
+	AuditEnumeratePerUserPolicy:            procAuditEnumeratePerUserPolicy,
+	AuditEnumerateSubCategories:            procAuditEnumerateSubCategories,
+	AuditFree:                              procAuditFree,
+	AuditLookupCategoryGuidFromCategoryId:  procAuditLookupCategoryGuidFromCategoryId,
+	AuditLookupCategoryIdFromCategoryGuid:  procAuditLookupCategoryIdFromCategoryGuid,
+	AuditLookupCategoryName:                procAuditLookupCategoryName,
+	AuditLookupCategoryNameA:               procAuditLookupCategoryNameA,
+	AuditLookupSubCategoryName:             procAuditLookupSubCategoryName,
+	AuditLookupSubCategoryNameA:            procAuditLookupSubCategoryNameA,
+	AuditQueryGlobalSacl:                   procAuditQueryGlobalSacl,
+	AuditQueryGlobalSaclA:                  procAuditQueryGlobalSaclA,
+	AuditQueryPerUserPolicy:                procAuditQueryPerUserPolicy,
+	AuditQuerySecurity:                     procAuditQuerySecurity,
+	AuditQuerySystemPolicy:                 procAuditQuerySystemPolicy,
+	AuditSetGlobalSacl:                     procAuditSetGlobalSacl,
+	AuditSetGlobalSaclA:                    procAuditSetGlobalSaclA,
+	AuditSetPerUserPolicy:                  procAuditSetPerUserPolicy,
+	AuditSetSecurity:                       procAuditSetSecurity,
+	AuditSetSystemPolicy:                   procAuditSetSystemPolicy,
+	ChangeAccountPassword:                  procChangeAccountPassword,
+	ChangeAccountPasswordA:                 procChangeAccountPasswordA,
+	CompleteAuthToken:                      procCompleteAuthToken,
+	CredMarshalTargetInfo:                  procCredMarshalTargetInfo,
+	CredUnmarshalTargetInfo:                procCredUnmarshalTargetInfo,
+	DecryptMessage:                         procDecryptMessage,
+	DeleteSecurityContext:                  procDeleteSecurityContext,
+	DeleteSecurityPackage:                  procDeleteSecurityPackage,
+	DeleteSecurityPackageA:                 procDeleteSecurityPackageA,
+	EncryptMessage:                         procEncryptMessage,
+	EnumerateSecurityPackages:              procEnumerateSecurityPackages,
+	EnumerateSecurityPackagesA:             procEnumerateSecurityPackagesA,
+	ExportSecurityContext:                  procExportSecurityContext,
+	FreeContextBuffer:                      procFreeContextBuffer,
+	FreeCredentialsHandle:                  procFreeCredentialsHandle,
+	GetComputerObjectName:                  procGetComputerObjectName,
+	GetComputerObjectNameA:                 procGetComputerObjectNameA,
+	GetUserNameEx:                          procGetUserNameEx,
+	GetUserNameExA:                         procGetUserNameExA,
+	ImpersonateSecurityContext:             procImpersonateSecurityContext,
+	ImportSecurityContext:                  procImportSecurityContext,
+	ImportSecurityContextA:                 procImportSecurityContextA,
+	InitSecurityInterface:                  procInitSecurityInterface,
+	InitSecurityInterfaceA:                 procInitSecurityInterfaceA,
+	InitializeSecurityContext:              procInitializeSecurityContext,
+	InitializeSecurityContextA:             procInitializeSecurityContextA,
+	LsaAddAccountRights:                    procLsaAddAccountRights,
+	LsaCallAuthenticationPackage:           procLsaCallAuthenticationPackage,
+	LsaClose:                               procLsaClose,
+	LsaConnectUntrusted:                    procLsaConnectUntrusted,
+	LsaCreateTrustedDomainEx:               procLsaCreateTrustedDomainEx,
+	LsaDeleteTrustedDomain:                 procLsaDeleteTrustedDomain,
+	LsaDeregisterLogonProcess:              procLsaDeregisterLogonProcess,
+	LsaEnumerateAccountRights:              procLsaEnumerateAccountRights,
+	LsaEnumerateAccountsWithUserRight:      procLsaEnumerateAccountsWithUserRight,
+	LsaEnumerateLogonSessions:              procLsaEnumerateLogonSessions,
+	LsaEnumerateTrustedDomains:             procLsaEnumerateTrustedDomains,
+	LsaEnumerateTrustedDomainsEx:           procLsaEnumerateTrustedDomainsEx,
+	LsaFreeMemory:                          procLsaFreeMemory,
+	LsaFreeReturnBuffer:                    procLsaFreeReturnBuffer,
+	LsaGetAppliedCAPIDs:                    procLsaGetAppliedCAPIDs,
+	LsaGetLogonSessionData:                 procLsaGetLogonSessionData,
+	LsaLogonUser:                           procLsaLogonUser,
+	LsaLookupAuthenticationPackage:         procLsaLookupAuthenticationPackage,
+	LsaLookupNames:                         procLsaLookupNames,
+	LsaLookupNames2:                        procLsaLookupNames2,
+	LsaLookupSids:                          procLsaLookupSids,
+	LsaLookupSids2:                         procLsaLookupSids2,
+	LsaNtStatusToWinError:                  procLsaNtStatusToWinError,
+	LsaOpenPolicy:                          procLsaOpenPolicy,
+	LsaOpenTrustedDomainByName:             procLsaOpenTrustedDomainByName,
+	LsaQueryCAPs:                           procLsaQueryCAPs,
+	LsaQueryDomainInformationPolicy:        procLsaQueryDomainInformationPolicy,
+	LsaQueryForestTrustInformation:         procLsaQueryForestTrustInformation,
+	LsaQueryForestTrustInformation2:        procLsaQueryForestTrustInformation2,
+	LsaQueryInformationPolicy:              procLsaQueryInformationPolicy,
+	LsaQueryTrustedDomainInfo:              procLsaQueryTrustedDomainInfo,
+	LsaQueryTrustedDomainInfoByName:        procLsaQueryTrustedDomainInfoByName,
+	LsaRegisterLogonProcess:                procLsaRegisterLogonProcess,
+	LsaRegisterPolicyChangeNotification:    procLsaRegisterPolicyChangeNotification,
+	LsaRemoveAccountRights:                 procLsaRemoveAccountRights,
+	LsaRetrievePrivateData:                 procLsaRetrievePrivateData,
+	LsaSetCAPs:                             procLsaSetCAPs,
+	LsaSetDomainInformationPolicy:          procLsaSetDomainInformationPolicy,
+	LsaSetForestTrustInformation:           procLsaSetForestTrustInformation,
+	LsaSetForestTrustInformation2:          procLsaSetForestTrustInformation2,
+	LsaSetInformationPolicy:                procLsaSetInformationPolicy,
+	LsaSetTrustedDomainInfoByName:          procLsaSetTrustedDomainInfoByName,
+	LsaSetTrustedDomainInformation:         procLsaSetTrustedDomainInformation,
+	LsaStorePrivateData:                    procLsaStorePrivateData,
+	LsaUnregisterPolicyChangeNotification:  procLsaUnregisterPolicyChangeNotification,
+	MakeSignature:                          procMakeSignature,
+	QueryContextAttributes:                 procQueryContextAttributes,
+	QueryContextAttributesA:                procQueryContextAttributesA,
+	QueryContextAttributesEx:               procQueryContextAttributesEx,
+	QueryContextAttributesExA:              procQueryContextAttributesExA,
+	QueryCredentialsAttributes:             procQueryCredentialsAttributes,
+	QueryCredentialsAttributesA:            procQueryCredentialsAttributesA,
+	QueryCredentialsAttributesEx:           procQueryCredentialsAttributesEx,
+	QueryCredentialsAttributesExA:          procQueryCredentialsAttributesExA,
+	QuerySecurityContextToken:              procQuerySecurityContextToken,
+	QuerySecurityPackageInfo:               procQuerySecurityPackageInfo,
+	QuerySecurityPackageInfoA:              procQuerySecurityPackageInfoA,
+	RevertSecurityContext:                  procRevertSecurityContext,
+	RtlDecryptMemory:                       procRtlDecryptMemory,
+	RtlEncryptMemory:                       procRtlEncryptMemory,
+	RtlGenRandom:                           procRtlGenRandom,
+	SLAcquireGenuineTicket:                 procSLAcquireGenuineTicket,
+	SLActivateProduct:                      procSLActivateProduct,
+	SLClose:                                procSLClose,
+	SLConsumeRight:                         procSLConsumeRight,
+	SLDepositOfflineConfirmationId:         procSLDepositOfflineConfirmationId,
+	SLDepositOfflineConfirmationIdEx:       procSLDepositOfflineConfirmationIdEx,
+	SLFireEvent:                            procSLFireEvent,
+	SLGenerateOfflineInstallationId:        procSLGenerateOfflineInstallationId,
+	SLGenerateOfflineInstallationIdEx:      procSLGenerateOfflineInstallationIdEx,
+	SLGetApplicationInformation:            procSLGetApplicationInformation,
+	SLGetGenuineInformation:                procSLGetGenuineInformation,
+	SLGetInstalledProductKeyIds:            procSLGetInstalledProductKeyIds,
+	SLGetLicense:                           procSLGetLicense,
+	SLGetLicenseFileId:                     procSLGetLicenseFileId,
+	SLGetLicenseInformation:                procSLGetLicenseInformation,
+	SLGetLicensingStatusInformation:        procSLGetLicensingStatusInformation,
+	SLGetPKeyId:                            procSLGetPKeyId,
+	SLGetPKeyInformation:                   procSLGetPKeyInformation,
+	SLGetPolicyInformation:                 procSLGetPolicyInformation,
+	SLGetPolicyInformationDWORD:            procSLGetPolicyInformationDWORD,
+	SLGetProductSkuInformation:             procSLGetProductSkuInformation,
+	SLGetReferralInformation:               procSLGetReferralInformation,
+	SLGetSLIDList:                          procSLGetSLIDList,
+	SLGetServerStatus:                      procSLGetServerStatus,
+	SLGetServiceInformation:                procSLGetServiceInformation,
+	SLGetWindowsInformation:                procSLGetWindowsInformation,
+	SLGetWindowsInformationDWORD:           procSLGetWindowsInformationDWORD,
+	SLInstallLicense:                       procSLInstallLicense,
+	SLInstallProofOfPurchase:               procSLInstallProofOfPurchase,
+	SLIsGenuineLocal:                       procSLIsGenuineLocal,
+	SLOpen:                                 procSLOpen,
+	SLQueryLicenseValueFromApp:             procSLQueryLicenseValueFromApp,
+	SLRegisterEvent:                        procSLRegisterEvent,
+	SLSetCurrentProductKey:                 procSLSetCurrentProductKey,
+	SLSetGenuineInformation:                procSLSetGenuineInformation,
+	SLUninstallLicense:                     procSLUninstallLicense,
+	SLUninstallProofOfPurchase:             procSLUninstallProofOfPurchase,
+	SLUnregisterEvent:                      procSLUnregisterEvent,
+	SaslAcceptSecurityContext:              procSaslAcceptSecurityContext,
+	SaslEnumerateProfiles:                  procSaslEnumerateProfiles,
+	SaslEnumerateProfilesA:                 procSaslEnumerateProfilesA,
+	SaslGetContextOption:                   procSaslGetContextOption,
+	SaslGetProfilePackage:                  procSaslGetProfilePackage,
+	SaslGetProfilePackageA:                 procSaslGetProfilePackageA,
+	SaslIdentifyPackage:                    procSaslIdentifyPackage,
+	SaslIdentifyPackageA:                   procSaslIdentifyPackageA,
+	SaslInitializeSecurityContext:          procSaslInitializeSecurityContext,
+	SaslInitializeSecurityContextA:         procSaslInitializeSecurityContextA,
+	SaslSetContextOption:                   procSaslSetContextOption,
+	SecAllocateAndSetCallTarget:            procSecAllocateAndSetCallTarget,
+	SecAllocateAndSetIPAddress:             procSecAllocateAndSetIPAddress,
+	SecFreeCallContext:                     procSecFreeCallContext,
+	SendSAS:                                procSendSAS,
+	SetContextAttributes:                   procSetContextAttributes,
+	SetContextAttributesA:                  procSetContextAttributesA,
+	SetCredentialsAttributes:               procSetCredentialsAttributes,
+	SetCredentialsAttributesA:              procSetCredentialsAttributesA,
+	SslCrackCertificate:                    procSslCrackCertificate,
+	SslDeserializeCertificateStore:         procSslDeserializeCertificateStore,
+	SslEmptyCache:                          procSslEmptyCache,
+	SslEmptyCacheA:                         procSslEmptyCacheA,
+	SslFreeCertificate:                     procSslFreeCertificate,
+	SslGenerateRandomBits:                  procSslGenerateRandomBits,
+	SslGetExtensions:                       procSslGetExtensions,
+	SslGetMaximumKeySize:                   procSslGetMaximumKeySize,
+	SslGetServerIdentity:                   procSslGetServerIdentity,
+	SspiCompareAuthIdentities:              procSspiCompareAuthIdentities,
+	SspiCopyAuthIdentity:                   procSspiCopyAuthIdentity,
+	SspiDecryptAuthIdentity:                procSspiDecryptAuthIdentity,
+	SspiDecryptAuthIdentityEx:              procSspiDecryptAuthIdentityEx,
+	SspiEncodeAuthIdentityAsStrings:        procSspiEncodeAuthIdentityAsStrings,
+	SspiEncodeStringsAsAuthIdentity:        procSspiEncodeStringsAsAuthIdentity,
+	SspiEncryptAuthIdentity:                procSspiEncryptAuthIdentity,
+	SspiEncryptAuthIdentityEx:              procSspiEncryptAuthIdentityEx,
+	SspiExcludePackage:                     procSspiExcludePackage,
+	SspiFreeAuthIdentity:                   procSspiFreeAuthIdentity,
+	SspiGetTargetHostName:                  procSspiGetTargetHostName,
+	SspiIsAuthIdentityEncrypted:            procSspiIsAuthIdentityEncrypted,
+	SspiIsPromptingNeeded:                  procSspiIsPromptingNeeded,
+	SspiLocalFree:                          procSspiLocalFree,
+	SspiMarshalAuthIdentity:                procSspiMarshalAuthIdentity,
+	SspiPrepareForCredRead:                 procSspiPrepareForCredRead,
+	SspiPrepareForCredWrite:                procSspiPrepareForCredWrite,
+	SspiPromptForCredentials:               procSspiPromptForCredentials,
+	SspiPromptForCredentialsA:              procSspiPromptForCredentialsA,
+	SspiSetChannelBindingFlags:             procSspiSetChannelBindingFlags,
+	SspiUnmarshalAuthIdentity:              procSspiUnmarshalAuthIdentity,
+	SspiValidateAuthIdentity:               procSspiValidateAuthIdentity,
+	SspiZeroAuthIdentity:                   procSspiZeroAuthIdentity,
+	TokenBindingDeleteAllBindings:          procTokenBindingDeleteAllBindings,
+	TokenBindingDeleteBinding:              procTokenBindingDeleteBinding,
+	TokenBindingGenerateBinding:            procTokenBindingGenerateBinding,
+	TokenBindingGenerateID:                 procTokenBindingGenerateID,
+	TokenBindingGenerateIDForUri:           procTokenBindingGenerateIDForUri,
+	TokenBindingGenerateMessage:            procTokenBindingGenerateMessage,
+	TokenBindingGetHighestSupportedVersion: procTokenBindingGetHighestSupportedVersion,
+	TokenBindingGetKeyTypesClient:          procTokenBindingGetKeyTypesClient,
+	TokenBindingGetKeyTypesServer:          procTokenBindingGetKeyTypesServer,
+	TokenBindingVerifyMessage:              procTokenBindingVerifyMessage,
+	TranslateName:                          procTranslateName,
+	TranslateNameA:                         procTranslateNameA,
+	VerifySignature:                        procVerifySignature,
+}
+
 // AcceptSecurityContext calls SECUR32!AcceptSecurityContext.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-acceptsecuritycontext
 // Minimum OS: windows6.0.6000.
@@ -260,8 +708,8 @@ func AcceptSecurityContext(phCredential *securitycredentials.SecHandle, phContex
 // AcquireCredentialsHandle calls SECUR32!AcquireCredentialsHandleW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-acquirecredentialshandlew
 // Minimum OS: windows6.0.6000.
-func AcquireCredentialsHandle(pszPrincipal string, pszPackage string, fCredentialUse SECPKG_CRED, pvLogonId unsafe.Pointer, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, phCredential *securitycredentials.SecHandle, ptsExpiry *int64) error {
-	_pszPrincipal := win32.UTF16Ptr(pszPrincipal)
+func AcquireCredentialsHandle(pszPrincipal *string, pszPackage string, fCredentialUse SECPKG_CRED, pvLogonId unsafe.Pointer, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, phCredential *securitycredentials.SecHandle, ptsExpiry *int64) error {
+	_pszPrincipal := win32.UTF16PtrOrNil(pszPrincipal)
 	_pszPackage := win32.UTF16Ptr(pszPackage)
 	r1, _, _ := syscall.SyscallN(procAcquireCredentialsHandle.Addr(), uintptr(unsafe.Pointer(_pszPrincipal)), uintptr(unsafe.Pointer(_pszPackage)), uintptr(fCredentialUse), uintptr(unsafe.Pointer(pvLogonId)), uintptr(unsafe.Pointer(pAuthData)), uintptr(pGetKeyFn), uintptr(unsafe.Pointer(pvGetKeyArgument)), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(ptsExpiry)))
 	return win32.ErrIfFailed(int32(r1))
@@ -277,8 +725,8 @@ func AcquireCredentialsHandleA(pszPrincipal foundation.PSTR, pszPackage foundati
 
 // AddCredentials calls SECUR32!AddCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-addcredentialsw
-func AddCredentials(hCredentials *securitycredentials.SecHandle, pszPrincipal string, pszPackage string, fCredentialUse uint32, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, ptsExpiry *int64) error {
-	_pszPrincipal := win32.UTF16Ptr(pszPrincipal)
+func AddCredentials(hCredentials *securitycredentials.SecHandle, pszPrincipal *string, pszPackage string, fCredentialUse uint32, pAuthData unsafe.Pointer, pGetKeyFn SEC_GET_KEY_FN, pvGetKeyArgument unsafe.Pointer, ptsExpiry *int64) error {
+	_pszPrincipal := win32.UTF16PtrOrNil(pszPrincipal)
 	_pszPackage := win32.UTF16Ptr(pszPackage)
 	r1, _, _ := syscall.SyscallN(procAddCredentials.Addr(), uintptr(unsafe.Pointer(hCredentials)), uintptr(unsafe.Pointer(_pszPrincipal)), uintptr(unsafe.Pointer(_pszPackage)), uintptr(fCredentialUse), uintptr(unsafe.Pointer(pAuthData)), uintptr(pGetKeyFn), uintptr(unsafe.Pointer(pvGetKeyArgument)), uintptr(unsafe.Pointer(ptsExpiry)))
 	return win32.ErrIfFailed(int32(r1))
@@ -1333,10 +1781,10 @@ func RtlGenRandom(RandomBuffer []byte) foundation.BOOLEAN {
 // SLAcquireGenuineTicket calls slcext!SLAcquireGenuineTicket.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slacquiregenuineticket
 // Minimum OS: windows6.0.6000.
-func SLAcquireGenuineTicket(ppTicketBlob *unsafe.Pointer, pcbTicketBlob *uint32, pwszTemplateId string, pwszServerUrl string, pwszClientToken string) error {
+func SLAcquireGenuineTicket(ppTicketBlob *unsafe.Pointer, pcbTicketBlob *uint32, pwszTemplateId string, pwszServerUrl string, pwszClientToken *string) error {
 	_pwszTemplateId := win32.UTF16Ptr(pwszTemplateId)
 	_pwszServerUrl := win32.UTF16Ptr(pwszServerUrl)
-	_pwszClientToken := win32.UTF16Ptr(pwszClientToken)
+	_pwszClientToken := win32.UTF16PtrOrNil(pwszClientToken)
 	r1, _, _ := syscall.SyscallN(procSLAcquireGenuineTicket.Addr(), uintptr(unsafe.Pointer(ppTicketBlob)), uintptr(unsafe.Pointer(pcbTicketBlob)), uintptr(unsafe.Pointer(_pwszTemplateId)), uintptr(unsafe.Pointer(_pwszServerUrl)), uintptr(unsafe.Pointer(_pwszClientToken)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1344,8 +1792,8 @@ func SLAcquireGenuineTicket(ppTicketBlob *unsafe.Pointer, pcbTicketBlob *uint32,
 // SLActivateProduct calls slcext!SLActivateProduct.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slactivateproduct
 // Minimum OS: windows8.0.
-func SLActivateProduct(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, cbAppSpecificData uint32, pvAppSpecificData unsafe.Pointer, pActivationInfo *SL_ACTIVATION_INFO_HEADER, pwszProxyServer string, wProxyPort uint16) error {
-	_pwszProxyServer := win32.UTF16Ptr(pwszProxyServer)
+func SLActivateProduct(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, cbAppSpecificData uint32, pvAppSpecificData unsafe.Pointer, pActivationInfo *SL_ACTIVATION_INFO_HEADER, pwszProxyServer *string, wProxyPort uint16) error {
+	_pwszProxyServer := win32.UTF16PtrOrNil(pwszProxyServer)
 	r1, _, _ := syscall.SyscallN(procSLActivateProduct.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(cbAppSpecificData), uintptr(unsafe.Pointer(pvAppSpecificData)), uintptr(unsafe.Pointer(pActivationInfo)), uintptr(unsafe.Pointer(_pwszProxyServer)), uintptr(wProxyPort))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1361,8 +1809,8 @@ func SLClose(hSLC unsafe.Pointer) error {
 // SLConsumeRight calls SLC!SLConsumeRight.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slconsumeright
 // Minimum OS: windows8.0.
-func SLConsumeRight(hSLC unsafe.Pointer, pAppId *win32.GUID, pProductSkuId *win32.GUID, pwszRightName string) error {
-	_pwszRightName := win32.UTF16Ptr(pwszRightName)
+func SLConsumeRight(hSLC unsafe.Pointer, pAppId *win32.GUID, pProductSkuId *win32.GUID, pwszRightName *string) error {
+	_pwszRightName := win32.UTF16PtrOrNil(pwszRightName)
 	r1, _, _ := syscall.SyscallN(procSLConsumeRight.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pAppId)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(_pwszRightName)), 0)
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1470,8 +1918,8 @@ func SLGetLicenseInformation(hSLC unsafe.Pointer, pSLLicenseId *win32.GUID, pwsz
 // SLGetLicensingStatusInformation calls SLC!SLGetLicensingStatusInformation.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slgetlicensingstatusinformation
 // Minimum OS: windows8.0.
-func SLGetLicensingStatusInformation(hSLC unsafe.Pointer, pAppID *win32.GUID, pProductSkuId *win32.GUID, pwszRightName string, pnStatusCount *uint32, ppLicensingStatus **SL_LICENSING_STATUS) error {
-	_pwszRightName := win32.UTF16Ptr(pwszRightName)
+func SLGetLicensingStatusInformation(hSLC unsafe.Pointer, pAppID *win32.GUID, pProductSkuId *win32.GUID, pwszRightName *string, pnStatusCount *uint32, ppLicensingStatus **SL_LICENSING_STATUS) error {
+	_pwszRightName := win32.UTF16PtrOrNil(pwszRightName)
 	r1, _, _ := syscall.SyscallN(procSLGetLicensingStatusInformation.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(pAppID)), uintptr(unsafe.Pointer(pProductSkuId)), uintptr(unsafe.Pointer(_pwszRightName)), uintptr(unsafe.Pointer(pnStatusCount)), uintptr(unsafe.Pointer(ppLicensingStatus)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1546,10 +1994,10 @@ func SLGetSLIDList(hSLC unsafe.Pointer, eQueryIdType SLIDTYPE, pQueryId *win32.G
 // SLGetServerStatus calls slcext!SLGetServerStatus.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slgetserverstatus
 // Minimum OS: windows8.0.
-func SLGetServerStatus(pwszServerURL string, pwszAcquisitionType string, pwszProxyServer string, wProxyPort uint16, phrStatus *foundation.HRESULT) error {
+func SLGetServerStatus(pwszServerURL string, pwszAcquisitionType string, pwszProxyServer *string, wProxyPort uint16, phrStatus *foundation.HRESULT) error {
 	_pwszServerURL := win32.UTF16Ptr(pwszServerURL)
 	_pwszAcquisitionType := win32.UTF16Ptr(pwszAcquisitionType)
-	_pwszProxyServer := win32.UTF16Ptr(pwszProxyServer)
+	_pwszProxyServer := win32.UTF16PtrOrNil(pwszProxyServer)
 	r1, _, _ := syscall.SyscallN(procSLGetServerStatus.Addr(), uintptr(unsafe.Pointer(_pwszServerURL)), uintptr(unsafe.Pointer(_pwszAcquisitionType)), uintptr(unsafe.Pointer(_pwszProxyServer)), uintptr(wProxyPort), uintptr(unsafe.Pointer(phrStatus)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1759,8 +2207,8 @@ func SaslIdentifyPackageA(pInput *SecBufferDesc, PackageInfo **SecPkgInfoA) erro
 // SaslInitializeSecurityContext calls SECUR32!SaslInitializeSecurityContextW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-saslinitializesecuritycontextw
 // Minimum OS: windowsserver2003.
-func SaslInitializeSecurityContext(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pszTargetName string, fContextReq ISC_REQ_FLAGS, Reserved1 uint32, TargetDataRep uint32, pInput *SecBufferDesc, Reserved2 uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
-	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+func SaslInitializeSecurityContext(phCredential *securitycredentials.SecHandle, phContext *securitycredentials.SecHandle, pszTargetName *string, fContextReq ISC_REQ_FLAGS, Reserved1 uint32, TargetDataRep uint32, pInput *SecBufferDesc, Reserved2 uint32, phNewContext *securitycredentials.SecHandle, pOutput *SecBufferDesc, pfContextAttr *uint32, ptsExpiry *int64) error {
+	_pszTargetName := win32.UTF16PtrOrNil(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procSaslInitializeSecurityContext.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(unsafe.Pointer(phContext)), uintptr(unsafe.Pointer(_pszTargetName)), uintptr(fContextReq), uintptr(Reserved1), uintptr(TargetDataRep), uintptr(unsafe.Pointer(pInput)), uintptr(Reserved2), uintptr(unsafe.Pointer(phNewContext)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfContextAttr)), uintptr(unsafe.Pointer(ptsExpiry)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1782,12 +2230,12 @@ func SaslSetContextOption(ContextHandle *securitycredentials.SecHandle, Option u
 }
 
 // SecAllocateAndSetCallTarget calls SspiCli!SecAllocateAndSetCallTarget.
-func SecAllocateAndSetCallTarget(lpIpAddress []byte, TargetName string, FreeCallContext *int32) error {
+func SecAllocateAndSetCallTarget(lpIpAddress []byte, TargetName *string, FreeCallContext *int32) error {
 	var _lpIpAddress *byte
 	if len(lpIpAddress) > 0 {
 		_lpIpAddress = &lpIpAddress[0]
 	}
-	_TargetName := win32.UTF16Ptr(TargetName)
+	_TargetName := win32.UTF16PtrOrNil(TargetName)
 	r1, _, _ := syscall.SyscallN(procSecAllocateAndSetCallTarget.Addr(), uintptr(unsafe.Pointer(_lpIpAddress)), uintptr(len(lpIpAddress)), uintptr(unsafe.Pointer(_TargetName)), uintptr(unsafe.Pointer(FreeCallContext)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1869,6 +2317,14 @@ func SetCredentialsAttributesA(phCredential *securitycredentials.SecHandle, ulAt
 func SslCrackCertificate(pbCertificate *byte, cbCertificate uint32, dwFlags uint32, ppCertificate **X509Certificate) bool {
 	r1, _, _ := syscall.SyscallN(procSslCrackCertificate.Addr(), uintptr(unsafe.Pointer(pbCertificate)), uintptr(cbCertificate), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCertificate)))
 	return r1 != 0
+}
+
+var specSslDeserializeCertificateStore = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 8, 0, false), win32.Word}}
+
+// SslDeserializeCertificateStore calls SCHANNEL!SslDeserializeCertificateStore.
+func SslDeserializeCertificateStore(SerializedCertificateStore securitycryptography.CRYPT_INTEGER_BLOB, ppCertContext **securitycryptography.CERT_CONTEXT) error {
+	r1, _, _ := win32.Call(procSslDeserializeCertificateStore.Addr(), specSslDeserializeCertificateStore, nil, uintptr(unsafe.Pointer(&SerializedCertificateStore)), uintptr(unsafe.Pointer(ppCertContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslEmptyCache calls SCHANNEL!SslEmptyCacheW.
@@ -1975,10 +2431,10 @@ func SspiEncodeAuthIdentityAsStrings(pAuthIdentity unsafe.Pointer, ppszUserName 
 // SspiEncodeStringsAsAuthIdentity calls SECUR32!SspiEncodeStringsAsAuthIdentity.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-sspiencodestringsasauthidentity
 // Minimum OS: windows6.1.
-func SspiEncodeStringsAsAuthIdentity(pszUserName string, pszDomainName string, pszPackedCredentialsString string, ppAuthIdentity *unsafe.Pointer) error {
-	_pszUserName := win32.UTF16Ptr(pszUserName)
-	_pszDomainName := win32.UTF16Ptr(pszDomainName)
-	_pszPackedCredentialsString := win32.UTF16Ptr(pszPackedCredentialsString)
+func SspiEncodeStringsAsAuthIdentity(pszUserName *string, pszDomainName *string, pszPackedCredentialsString *string, ppAuthIdentity *unsafe.Pointer) error {
+	_pszUserName := win32.UTF16PtrOrNil(pszUserName)
+	_pszDomainName := win32.UTF16PtrOrNil(pszDomainName)
+	_pszPackedCredentialsString := win32.UTF16PtrOrNil(pszPackedCredentialsString)
 	r1, _, _ := syscall.SyscallN(procSspiEncodeStringsAsAuthIdentity.Addr(), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszDomainName)), uintptr(unsafe.Pointer(_pszPackedCredentialsString)), uintptr(unsafe.Pointer(ppAuthIdentity)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2067,8 +2523,8 @@ func SspiPrepareForCredRead(AuthIdentity unsafe.Pointer, pszTargetName string, p
 // SspiPrepareForCredWrite calls SECUR32!SspiPrepareForCredWrite.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-sspiprepareforcredwrite
 // Minimum OS: windows6.1.
-func SspiPrepareForCredWrite(AuthIdentity unsafe.Pointer, pszTargetName string, pCredmanCredentialType *uint32, ppszCredmanTargetName *foundation.PWSTR, ppszCredmanUserName *foundation.PWSTR, ppCredentialBlob **byte, pCredentialBlobSize *uint32) error {
-	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+func SspiPrepareForCredWrite(AuthIdentity unsafe.Pointer, pszTargetName *string, pCredmanCredentialType *uint32, ppszCredmanTargetName *foundation.PWSTR, ppszCredmanUserName *foundation.PWSTR, ppCredentialBlob **byte, pCredentialBlobSize *uint32) error {
+	_pszTargetName := win32.UTF16PtrOrNil(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procSspiPrepareForCredWrite.Addr(), uintptr(unsafe.Pointer(AuthIdentity)), uintptr(unsafe.Pointer(_pszTargetName)), uintptr(unsafe.Pointer(pCredmanCredentialType)), uintptr(unsafe.Pointer(ppszCredmanTargetName)), uintptr(unsafe.Pointer(ppszCredmanUserName)), uintptr(unsafe.Pointer(ppCredentialBlob)), uintptr(unsafe.Pointer(pCredentialBlobSize)))
 	return win32.ErrIfFailed(int32(r1))
 }

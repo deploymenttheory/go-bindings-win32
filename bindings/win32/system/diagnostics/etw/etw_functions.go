@@ -109,6 +109,190 @@ var (
 	procTdhUnloadManifestFromMemory                      = modtdh.NewProc("TdhUnloadManifestFromMemory")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CloseTrace                                       *win32.Proc
+	ControlTrace                                     *win32.Proc
+	ControlTraceA                                    *win32.Proc
+	CreateTraceInstanceId                            *win32.Proc
+	CveEventWrite                                    *win32.Proc
+	EnableTrace                                      *win32.Proc
+	EnableTraceEx                                    *win32.Proc
+	EnableTraceEx2                                   *win32.Proc
+	EnumerateTraceGuids                              *win32.Proc
+	EnumerateTraceGuidsEx                            *win32.Proc
+	EventAccessControl                               *win32.Proc
+	EventAccessQuery                                 *win32.Proc
+	EventAccessRemove                                *win32.Proc
+	EventActivityIdControl                           *win32.Proc
+	EventEnabled                                     *win32.Proc
+	EventProviderEnabled                             *win32.Proc
+	EventRegister                                    *win32.Proc
+	EventSetInformation                              *win32.Proc
+	EventUnregister                                  *win32.Proc
+	EventWrite                                       *win32.Proc
+	EventWriteEx                                     *win32.Proc
+	EventWriteString                                 *win32.Proc
+	EventWriteTransfer                               *win32.Proc
+	FlushTrace                                       *win32.Proc
+	FlushTraceA                                      *win32.Proc
+	GetTraceEnableFlags                              *win32.Proc
+	GetTraceEnableLevel                              *win32.Proc
+	GetTraceLoggerHandle                             *win32.Proc
+	OpenTrace                                        *win32.Proc
+	OpenTraceA                                       *win32.Proc
+	OpenTraceFromBufferStream                        *win32.Proc
+	OpenTraceFromFile                                *win32.Proc
+	OpenTraceFromRealTimeLogger                      *win32.Proc
+	OpenTraceFromRealTimeLoggerWithAllocationOptions *win32.Proc
+	ProcessTrace                                     *win32.Proc
+	ProcessTraceAddBufferToBufferStream              *win32.Proc
+	ProcessTraceBufferDecrementReference             *win32.Proc
+	ProcessTraceBufferIncrementReference             *win32.Proc
+	QueryAllTraces                                   *win32.Proc
+	QueryAllTracesA                                  *win32.Proc
+	QueryTrace                                       *win32.Proc
+	QueryTraceA                                      *win32.Proc
+	QueryTraceProcessingHandle                       *win32.Proc
+	RegisterTraceGuids                               *win32.Proc
+	RegisterTraceGuidsA                              *win32.Proc
+	RemoveTraceCallback                              *win32.Proc
+	SetTraceCallback                                 *win32.Proc
+	StartTrace                                       *win32.Proc
+	StartTraceA                                      *win32.Proc
+	StopTrace                                        *win32.Proc
+	StopTraceA                                       *win32.Proc
+	TdhAggregatePayloadFilters                       *win32.Proc
+	TdhCleanupPayloadEventFilterDescriptor           *win32.Proc
+	TdhCloseDecodingHandle                           *win32.Proc
+	TdhCreatePayloadFilter                           *win32.Proc
+	TdhDeletePayloadFilter                           *win32.Proc
+	TdhEnumerateManifestProviderEvents               *win32.Proc
+	TdhEnumerateProviderFieldInformation             *win32.Proc
+	TdhEnumerateProviderFilters                      *win32.Proc
+	TdhEnumerateProviders                            *win32.Proc
+	TdhEnumerateProvidersForDecodingSource           *win32.Proc
+	TdhFormatProperty                                *win32.Proc
+	TdhGetDecodingParameter                          *win32.Proc
+	TdhGetEventInformation                           *win32.Proc
+	TdhGetEventMapInformation                        *win32.Proc
+	TdhGetManifestEventInformation                   *win32.Proc
+	TdhGetProperty                                   *win32.Proc
+	TdhGetPropertySize                               *win32.Proc
+	TdhGetWppMessage                                 *win32.Proc
+	TdhGetWppProperty                                *win32.Proc
+	TdhLoadManifest                                  *win32.Proc
+	TdhLoadManifestFromBinary                        *win32.Proc
+	TdhLoadManifestFromMemory                        *win32.Proc
+	TdhOpenDecodingHandle                            *win32.Proc
+	TdhQueryProviderFieldInformation                 *win32.Proc
+	TdhSetDecodingParameter                          *win32.Proc
+	TdhUnloadManifest                                *win32.Proc
+	TdhUnloadManifestFromMemory                      *win32.Proc
+	TraceConfigureLastBranchRecord                   *win32.Proc
+	TraceEvent                                       *win32.Proc
+	TraceEventInstance                               *win32.Proc
+	TraceMessage                                     *win32.Proc
+	TraceMessageVa                                   *win32.Proc
+	TraceQueryInformation                            *win32.Proc
+	TraceSetInformation                              *win32.Proc
+	UnregisterTraceGuids                             *win32.Proc
+	UpdateTrace                                      *win32.Proc
+	UpdateTraceA                                     *win32.Proc
+}{
+	CloseTrace:                  procCloseTrace,
+	ControlTrace:                procControlTrace,
+	ControlTraceA:               procControlTraceA,
+	CreateTraceInstanceId:       procCreateTraceInstanceId,
+	CveEventWrite:               procCveEventWrite,
+	EnableTrace:                 procEnableTrace,
+	EnableTraceEx:               procEnableTraceEx,
+	EnableTraceEx2:              procEnableTraceEx2,
+	EnumerateTraceGuids:         procEnumerateTraceGuids,
+	EnumerateTraceGuidsEx:       procEnumerateTraceGuidsEx,
+	EventAccessControl:          procEventAccessControl,
+	EventAccessQuery:            procEventAccessQuery,
+	EventAccessRemove:           procEventAccessRemove,
+	EventActivityIdControl:      procEventActivityIdControl,
+	EventEnabled:                procEventEnabled,
+	EventProviderEnabled:        procEventProviderEnabled,
+	EventRegister:               procEventRegister,
+	EventSetInformation:         procEventSetInformation,
+	EventUnregister:             procEventUnregister,
+	EventWrite:                  procEventWrite,
+	EventWriteEx:                procEventWriteEx,
+	EventWriteString:            procEventWriteString,
+	EventWriteTransfer:          procEventWriteTransfer,
+	FlushTrace:                  procFlushTrace,
+	FlushTraceA:                 procFlushTraceA,
+	GetTraceEnableFlags:         procGetTraceEnableFlags,
+	GetTraceEnableLevel:         procGetTraceEnableLevel,
+	GetTraceLoggerHandle:        procGetTraceLoggerHandle,
+	OpenTrace:                   procOpenTrace,
+	OpenTraceA:                  procOpenTraceA,
+	OpenTraceFromBufferStream:   procOpenTraceFromBufferStream,
+	OpenTraceFromFile:           procOpenTraceFromFile,
+	OpenTraceFromRealTimeLogger: procOpenTraceFromRealTimeLogger,
+	OpenTraceFromRealTimeLoggerWithAllocationOptions: procOpenTraceFromRealTimeLoggerWithAllocationOptions,
+	ProcessTrace:                           procProcessTrace,
+	ProcessTraceAddBufferToBufferStream:    procProcessTraceAddBufferToBufferStream,
+	ProcessTraceBufferDecrementReference:   procProcessTraceBufferDecrementReference,
+	ProcessTraceBufferIncrementReference:   procProcessTraceBufferIncrementReference,
+	QueryAllTraces:                         procQueryAllTraces,
+	QueryAllTracesA:                        procQueryAllTracesA,
+	QueryTrace:                             procQueryTrace,
+	QueryTraceA:                            procQueryTraceA,
+	QueryTraceProcessingHandle:             procQueryTraceProcessingHandle,
+	RegisterTraceGuids:                     procRegisterTraceGuids,
+	RegisterTraceGuidsA:                    procRegisterTraceGuidsA,
+	RemoveTraceCallback:                    procRemoveTraceCallback,
+	SetTraceCallback:                       procSetTraceCallback,
+	StartTrace:                             procStartTrace,
+	StartTraceA:                            procStartTraceA,
+	StopTrace:                              procStopTrace,
+	StopTraceA:                             procStopTraceA,
+	TdhAggregatePayloadFilters:             procTdhAggregatePayloadFilters,
+	TdhCleanupPayloadEventFilterDescriptor: procTdhCleanupPayloadEventFilterDescriptor,
+	TdhCloseDecodingHandle:                 procTdhCloseDecodingHandle,
+	TdhCreatePayloadFilter:                 procTdhCreatePayloadFilter,
+	TdhDeletePayloadFilter:                 procTdhDeletePayloadFilter,
+	TdhEnumerateManifestProviderEvents:     procTdhEnumerateManifestProviderEvents,
+	TdhEnumerateProviderFieldInformation:   procTdhEnumerateProviderFieldInformation,
+	TdhEnumerateProviderFilters:            procTdhEnumerateProviderFilters,
+	TdhEnumerateProviders:                  procTdhEnumerateProviders,
+	TdhEnumerateProvidersForDecodingSource: procTdhEnumerateProvidersForDecodingSource,
+	TdhFormatProperty:                      procTdhFormatProperty,
+	TdhGetDecodingParameter:                procTdhGetDecodingParameter,
+	TdhGetEventInformation:                 procTdhGetEventInformation,
+	TdhGetEventMapInformation:              procTdhGetEventMapInformation,
+	TdhGetManifestEventInformation:         procTdhGetManifestEventInformation,
+	TdhGetProperty:                         procTdhGetProperty,
+	TdhGetPropertySize:                     procTdhGetPropertySize,
+	TdhGetWppMessage:                       procTdhGetWppMessage,
+	TdhGetWppProperty:                      procTdhGetWppProperty,
+	TdhLoadManifest:                        procTdhLoadManifest,
+	TdhLoadManifestFromBinary:              procTdhLoadManifestFromBinary,
+	TdhLoadManifestFromMemory:              procTdhLoadManifestFromMemory,
+	TdhOpenDecodingHandle:                  procTdhOpenDecodingHandle,
+	TdhQueryProviderFieldInformation:       procTdhQueryProviderFieldInformation,
+	TdhSetDecodingParameter:                procTdhSetDecodingParameter,
+	TdhUnloadManifest:                      procTdhUnloadManifest,
+	TdhUnloadManifestFromMemory:            procTdhUnloadManifestFromMemory,
+	TraceConfigureLastBranchRecord:         procTraceConfigureLastBranchRecord,
+	TraceEvent:                             procTraceEvent,
+	TraceEventInstance:                     procTraceEventInstance,
+	TraceMessage:                           procTraceMessage,
+	TraceMessageVa:                         procTraceMessageVa,
+	TraceQueryInformation:                  procTraceQueryInformation,
+	TraceSetInformation:                    procTraceSetInformation,
+	UnregisterTraceGuids:                   procUnregisterTraceGuids,
+	UpdateTrace:                            procUpdateTrace,
+	UpdateTraceA:                           procUpdateTraceA,
+}
+
 // CloseTrace calls ADVAPI32!CloseTrace.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-closetrace
 // Minimum OS: windows5.0.
@@ -120,8 +304,8 @@ func CloseTrace(TraceHandle PROCESSTRACE_HANDLE) foundation.WIN32_ERROR {
 // ControlTrace calls ADVAPI32!ControlTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-controltracew
 // Minimum OS: windows5.0.
-func ControlTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES, ControlCode EVENT_TRACE_CONTROL) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func ControlTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES, ControlCode EVENT_TRACE_CONTROL) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procControlTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)), uintptr(ControlCode))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -145,9 +329,9 @@ func CreateTraceInstanceId(RegHandle foundation.HANDLE, InstInfo *EVENT_INSTANCE
 // CveEventWrite calls ADVAPI32!CveEventWrite.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-cveeventwrite
 // Minimum OS: windows10.0.10240.
-func CveEventWrite(CveId string, AdditionalDetails string) int32 {
+func CveEventWrite(CveId string, AdditionalDetails *string) int32 {
 	_CveId := win32.UTF16Ptr(CveId)
-	_AdditionalDetails := win32.UTF16Ptr(AdditionalDetails)
+	_AdditionalDetails := win32.UTF16PtrOrNil(AdditionalDetails)
 	r1, _, _ := syscall.SyscallN(procCveEventWrite.Addr(), uintptr(unsafe.Pointer(_CveId)), uintptr(unsafe.Pointer(_AdditionalDetails)))
 	return int32(r1)
 }
@@ -328,8 +512,8 @@ func EventWriteTransfer(RegHandle REGHANDLE, EventDescriptor *EVENT_DESCRIPTOR, 
 // FlushTrace calls ADVAPI32!FlushTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-flushtracew
 // Minimum OS: windows5.1.2600.
-func FlushTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func FlushTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procFlushTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -488,8 +672,8 @@ func QueryAllTracesA(PropertyArray []*EVENT_TRACE_PROPERTIES, LoggerCount *uint3
 // QueryTrace calls ADVAPI32!QueryTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-querytracew
 // Minimum OS: windows5.0.
-func QueryTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func QueryTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procQueryTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -513,13 +697,13 @@ func QueryTraceProcessingHandle(ProcessingHandle PROCESSTRACE_HANDLE, Informatio
 // RegisterTraceGuids calls ADVAPI32!RegisterTraceGuidsW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-registertraceguidsw
 // Minimum OS: windows5.0.
-func RegisterTraceGuids(RequestAddress WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, TraceGuidReg []TRACE_GUID_REGISTRATION, MofImagePath string, MofResourceName string, RegistrationHandle *uint64) uint32 {
+func RegisterTraceGuids(RequestAddress WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, TraceGuidReg []TRACE_GUID_REGISTRATION, MofImagePath *string, MofResourceName *string, RegistrationHandle *uint64) uint32 {
 	var _TraceGuidReg *TRACE_GUID_REGISTRATION
 	if len(TraceGuidReg) > 0 {
 		_TraceGuidReg = &TraceGuidReg[0]
 	}
-	_MofImagePath := win32.UTF16Ptr(MofImagePath)
-	_MofResourceName := win32.UTF16Ptr(MofResourceName)
+	_MofImagePath := win32.UTF16PtrOrNil(MofImagePath)
+	_MofResourceName := win32.UTF16PtrOrNil(MofResourceName)
 	r1, _, _ := syscall.SyscallN(procRegisterTraceGuids.Addr(), uintptr(RequestAddress), uintptr(unsafe.Pointer(RequestContext)), uintptr(unsafe.Pointer(ControlGuid)), uintptr(len(TraceGuidReg)), uintptr(unsafe.Pointer(_TraceGuidReg)), uintptr(unsafe.Pointer(_MofImagePath)), uintptr(unsafe.Pointer(_MofResourceName)), uintptr(unsafe.Pointer(RegistrationHandle)))
 	return uint32(r1)
 }
@@ -572,8 +756,8 @@ func StartTraceA(TraceId *uint64, InstanceName foundation.PSTR, Properties *EVEN
 // StopTrace calls ADVAPI32!StopTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-stoptracew
 // Minimum OS: windows5.0.
-func StopTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func StopTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procStopTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -925,8 +1109,8 @@ func UnregisterTraceGuids(RegistrationHandle uint64) uint32 {
 // UpdateTrace calls ADVAPI32!UpdateTraceW.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-updatetracew
 // Minimum OS: windows5.0.
-func UpdateTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	_InstanceName := win32.UTF16Ptr(InstanceName)
+func UpdateTrace(TraceId uint64, InstanceName *string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16PtrOrNil(InstanceName)
 	r1, _, _ := syscall.SyscallN(procUpdateTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }

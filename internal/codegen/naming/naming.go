@@ -24,7 +24,8 @@ var goReservedWords = map[string]bool{
 	"complex": true, "complex64": true, "complex128": true, "imag": true, "real": true,
 	"min": true, "max": true, "clear": true,
 	// names bound by generated code
-	"unsafe": true, "syscall": true, "win32": true, "err": true, "ret": true,
+	"unsafe": true, "syscall": true, "win32": true, "math": true,
+	"err": true, "ret": true, "r": true, "r1": true, "r2": true, "e1": true, // dispatch results
 	"self": true, // COM method receiver
 }
 

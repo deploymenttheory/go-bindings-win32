@@ -4,6 +4,6 @@
 
 package cloudfilters
 
-// CF_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CF_CALLBACK_INFO, *CF_CALLBACK_PARAMETERS).
+// CF_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CF_CALLBACK_INFO, *CF_CALLBACK_PARAMETERS) uintptr.
 type CF_CALLBACK uintptr

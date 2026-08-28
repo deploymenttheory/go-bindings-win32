@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
 // IDedupBackupSupport: https://learn.microsoft.com/windows/win32/api/ddpbackup/nn-ddpbackup-idedupbackupsupport
@@ -45,6 +46,22 @@ func (self *IDedupChunkLibrary) InitializeForPushBuffers() error {
 // Uninitialize dispatches through IDedupChunkLibrary's vtable slot 4.
 func (self *IDedupChunkLibrary) Uninitialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDedupChunkLibrary_SetParameter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetParameter dispatches through IDedupChunkLibrary's vtable slot 5.
+func (self *IDedupChunkLibrary) SetParameter(dwParamType uint32, vParamValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDedupChunkLibrary_SetParameter, nil, uintptr(unsafe.Pointer(self)), uintptr(dwParamType), uintptr(unsafe.Pointer(&vParamValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDedupChunkLibrary_StartChunking = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// StartChunking dispatches through IDedupChunkLibrary's vtable slot 6.
+func (self *IDedupChunkLibrary) StartChunking(iidIteratorInterfaceID win32.GUID, ppChunksEnum **systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDedupChunkLibrary_StartChunking, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&iidIteratorInterfaceID)), uintptr(unsafe.Pointer(ppChunksEnum))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -130,6 +147,14 @@ func (self *IDedupDataPort) GetStreams(pStreamPaths []foundation.BSTR, pRequestI
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDedupDataPort_GetStreamsResults = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetStreamsResults dispatches through IDedupDataPort's vtable slot 10.
+func (self *IDedupDataPort) GetStreamsResults(RequestId win32.GUID, MaxWaitMs uint32, StreamEntryIndex uint32, pStreamCount *uint32, ppStreams **DedupStream, pEntryCount *uint32, ppEntries **DedupStreamEntry, pStatus *DedupDataPortRequestStatus, ppItemResults **foundation.HRESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDedupDataPort_GetStreamsResults, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&RequestId)), uintptr(MaxWaitMs), uintptr(StreamEntryIndex), uintptr(unsafe.Pointer(pStreamCount)), uintptr(unsafe.Pointer(ppStreams)), uintptr(unsafe.Pointer(pEntryCount)), uintptr(unsafe.Pointer(ppEntries)), uintptr(unsafe.Pointer(pStatus)), uintptr(unsafe.Pointer(ppItemResults))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetChunks dispatches through IDedupDataPort's vtable slot 11.
 func (self *IDedupDataPort) GetChunks(pHashes []DedupHash, pRequestId *win32.GUID) error {
 	var _pHashes *DedupHash
@@ -137,6 +162,30 @@ func (self *IDedupDataPort) GetChunks(pHashes []DedupHash, pRequestId *win32.GUI
 		_pHashes = &pHashes[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(len(pHashes)), uintptr(unsafe.Pointer(_pHashes)), uintptr(unsafe.Pointer(pRequestId)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDedupDataPort_GetChunksResults = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetChunksResults dispatches through IDedupDataPort's vtable slot 12.
+func (self *IDedupDataPort) GetChunksResults(RequestId win32.GUID, MaxWaitMs uint32, ChunkIndex uint32, pChunkCount *uint32, ppChunkMetadata **DedupChunk, pDataByteCount *uint32, ppChunkData **byte, pStatus *DedupDataPortRequestStatus, ppItemResults **foundation.HRESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDedupDataPort_GetChunksResults, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&RequestId)), uintptr(MaxWaitMs), uintptr(ChunkIndex), uintptr(unsafe.Pointer(pChunkCount)), uintptr(unsafe.Pointer(ppChunkMetadata)), uintptr(unsafe.Pointer(pDataByteCount)), uintptr(unsafe.Pointer(ppChunkData)), uintptr(unsafe.Pointer(pStatus)), uintptr(unsafe.Pointer(ppItemResults))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDedupDataPort_GetRequestStatus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetRequestStatus dispatches through IDedupDataPort's vtable slot 13.
+func (self *IDedupDataPort) GetRequestStatus(RequestId win32.GUID, pStatus *DedupDataPortRequestStatus) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDedupDataPort_GetRequestStatus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&RequestId)), uintptr(unsafe.Pointer(pStatus))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDedupDataPort_GetRequestResults = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetRequestResults dispatches through IDedupDataPort's vtable slot 14.
+func (self *IDedupDataPort) GetRequestResults(RequestId win32.GUID, MaxWaitMs uint32, pBatchResult *foundation.HRESULT, pBatchCount *uint32, pStatus *DedupDataPortRequestStatus, ppItemResults **foundation.HRESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDedupDataPort_GetRequestResults, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&RequestId)), uintptr(MaxWaitMs), uintptr(unsafe.Pointer(pBatchResult)), uintptr(unsafe.Pointer(pBatchCount)), uintptr(unsafe.Pointer(pStatus)), uintptr(unsafe.Pointer(ppItemResults))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

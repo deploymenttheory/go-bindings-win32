@@ -5,6 +5,7 @@
 package interactioncontext
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -38,10 +39,84 @@ var (
 	procRemovePointerInteractionContext               = modNInput.NewProc("RemovePointerInteractionContext")
 	procResetInteractionContext                       = modNInput.NewProc("ResetInteractionContext")
 	procSetCrossSlideParametersInteractionContext     = modNInput.NewProc("SetCrossSlideParametersInteractionContext")
+	procSetHoldParameterInteractionContext            = modNInput.NewProc("SetHoldParameterInteractionContext")
+	procSetInertiaParameterInteractionContext         = modNInput.NewProc("SetInertiaParameterInteractionContext")
 	procSetInteractionConfigurationInteractionContext = modNInput.NewProc("SetInteractionConfigurationInteractionContext")
+	procSetMouseWheelParameterInteractionContext      = modNInput.NewProc("SetMouseWheelParameterInteractionContext")
+	procSetPivotInteractionContext                    = modNInput.NewProc("SetPivotInteractionContext")
 	procSetPropertyInteractionContext                 = modNInput.NewProc("SetPropertyInteractionContext")
+	procSetTapParameterInteractionContext             = modNInput.NewProc("SetTapParameterInteractionContext")
+	procSetTranslationParameterInteractionContext     = modNInput.NewProc("SetTranslationParameterInteractionContext")
 	procStopInteractionContext                        = modNInput.NewProc("StopInteractionContext")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddPointerInteractionContext                  *win32.Proc
+	BufferPointerPacketsInteractionContext        *win32.Proc
+	CreateInteractionContext                      *win32.Proc
+	DestroyInteractionContext                     *win32.Proc
+	GetCrossSlideParameterInteractionContext      *win32.Proc
+	GetHoldParameterInteractionContext            *win32.Proc
+	GetInertiaParameterInteractionContext         *win32.Proc
+	GetInteractionConfigurationInteractionContext *win32.Proc
+	GetMouseWheelParameterInteractionContext      *win32.Proc
+	GetPropertyInteractionContext                 *win32.Proc
+	GetStateInteractionContext                    *win32.Proc
+	GetTapParameterInteractionContext             *win32.Proc
+	GetTranslationParameterInteractionContext     *win32.Proc
+	ProcessBufferedPacketsInteractionContext      *win32.Proc
+	ProcessInertiaInteractionContext              *win32.Proc
+	ProcessPointerFramesInteractionContext        *win32.Proc
+	RegisterOutputCallbackInteractionContext      *win32.Proc
+	RegisterOutputCallbackInteractionContext2     *win32.Proc
+	RemovePointerInteractionContext               *win32.Proc
+	ResetInteractionContext                       *win32.Proc
+	SetCrossSlideParametersInteractionContext     *win32.Proc
+	SetHoldParameterInteractionContext            *win32.Proc
+	SetInertiaParameterInteractionContext         *win32.Proc
+	SetInteractionConfigurationInteractionContext *win32.Proc
+	SetMouseWheelParameterInteractionContext      *win32.Proc
+	SetPivotInteractionContext                    *win32.Proc
+	SetPropertyInteractionContext                 *win32.Proc
+	SetTapParameterInteractionContext             *win32.Proc
+	SetTranslationParameterInteractionContext     *win32.Proc
+	StopInteractionContext                        *win32.Proc
+}{
+	AddPointerInteractionContext:                  procAddPointerInteractionContext,
+	BufferPointerPacketsInteractionContext:        procBufferPointerPacketsInteractionContext,
+	CreateInteractionContext:                      procCreateInteractionContext,
+	DestroyInteractionContext:                     procDestroyInteractionContext,
+	GetCrossSlideParameterInteractionContext:      procGetCrossSlideParameterInteractionContext,
+	GetHoldParameterInteractionContext:            procGetHoldParameterInteractionContext,
+	GetInertiaParameterInteractionContext:         procGetInertiaParameterInteractionContext,
+	GetInteractionConfigurationInteractionContext: procGetInteractionConfigurationInteractionContext,
+	GetMouseWheelParameterInteractionContext:      procGetMouseWheelParameterInteractionContext,
+	GetPropertyInteractionContext:                 procGetPropertyInteractionContext,
+	GetStateInteractionContext:                    procGetStateInteractionContext,
+	GetTapParameterInteractionContext:             procGetTapParameterInteractionContext,
+	GetTranslationParameterInteractionContext:     procGetTranslationParameterInteractionContext,
+	ProcessBufferedPacketsInteractionContext:      procProcessBufferedPacketsInteractionContext,
+	ProcessInertiaInteractionContext:              procProcessInertiaInteractionContext,
+	ProcessPointerFramesInteractionContext:        procProcessPointerFramesInteractionContext,
+	RegisterOutputCallbackInteractionContext:      procRegisterOutputCallbackInteractionContext,
+	RegisterOutputCallbackInteractionContext2:     procRegisterOutputCallbackInteractionContext2,
+	RemovePointerInteractionContext:               procRemovePointerInteractionContext,
+	ResetInteractionContext:                       procResetInteractionContext,
+	SetCrossSlideParametersInteractionContext:     procSetCrossSlideParametersInteractionContext,
+	SetHoldParameterInteractionContext:            procSetHoldParameterInteractionContext,
+	SetInertiaParameterInteractionContext:         procSetInertiaParameterInteractionContext,
+	SetInteractionConfigurationInteractionContext: procSetInteractionConfigurationInteractionContext,
+	SetMouseWheelParameterInteractionContext:      procSetMouseWheelParameterInteractionContext,
+	SetPivotInteractionContext:                    procSetPivotInteractionContext,
+	SetPropertyInteractionContext:                 procSetPropertyInteractionContext,
+	SetTapParameterInteractionContext:             procSetTapParameterInteractionContext,
+	SetTranslationParameterInteractionContext:     procSetTranslationParameterInteractionContext,
+	StopInteractionContext:                        procStopInteractionContext,
+}
 
 // AddPointerInteractionContext calls NInput!AddPointerInteractionContext.
 // https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-addpointerinteractioncontext
@@ -215,6 +290,24 @@ func SetCrossSlideParametersInteractionContext(interactionContext HINTERACTIONCO
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specSetHoldParameterInteractionContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetHoldParameterInteractionContext calls NInput!SetHoldParameterInteractionContext.
+func SetHoldParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, parameter HOLD_PARAMETER, value float32) error {
+	r1, _, _ := win32.Call(procSetHoldParameterInteractionContext.Addr(), specSetHoldParameterInteractionContext, nil, uintptr(interactionContext), uintptr(parameter), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specSetInertiaParameterInteractionContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetInertiaParameterInteractionContext calls NInput!SetInertiaParameterInteractionContext.
+// https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-setinertiaparameterinteractioncontext
+// Minimum OS: windows8.0.
+func SetInertiaParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, inertiaParameter INERTIA_PARAMETER, value float32) error {
+	r1, _, _ := win32.Call(procSetInertiaParameterInteractionContext.Addr(), specSetInertiaParameterInteractionContext, nil, uintptr(interactionContext), uintptr(inertiaParameter), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetInteractionConfigurationInteractionContext calls NInput!SetInteractionConfigurationInteractionContext.
 // https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-setinteractionconfigurationinteractioncontext
 // Minimum OS: windows8.0.
@@ -227,11 +320,47 @@ func SetInteractionConfigurationInteractionContext(interactionContext HINTERACTI
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specSetMouseWheelParameterInteractionContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetMouseWheelParameterInteractionContext calls NInput!SetMouseWheelParameterInteractionContext.
+// https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-setmousewheelparameterinteractioncontext
+// Minimum OS: windows8.0.
+func SetMouseWheelParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, parameter MOUSE_WHEEL_PARAMETER, value float32) error {
+	r1, _, _ := win32.Call(procSetMouseWheelParameterInteractionContext.Addr(), specSetMouseWheelParameterInteractionContext, nil, uintptr(interactionContext), uintptr(parameter), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specSetPivotInteractionContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetPivotInteractionContext calls NInput!SetPivotInteractionContext.
+// https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-setpivotinteractioncontext
+// Minimum OS: windows8.0.
+func SetPivotInteractionContext(interactionContext HINTERACTIONCONTEXT, x float32, y float32, radius float32) error {
+	r1, _, _ := win32.Call(procSetPivotInteractionContext.Addr(), specSetPivotInteractionContext, nil, uintptr(interactionContext), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(radius))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetPropertyInteractionContext calls NInput!SetPropertyInteractionContext.
 // https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-setpropertyinteractioncontext
 // Minimum OS: windows8.0.
 func SetPropertyInteractionContext(interactionContext HINTERACTIONCONTEXT, contextProperty INTERACTION_CONTEXT_PROPERTY, value uint32) error {
 	r1, _, _ := syscall.SyscallN(procSetPropertyInteractionContext.Addr(), uintptr(interactionContext), uintptr(contextProperty), uintptr(value))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specSetTapParameterInteractionContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetTapParameterInteractionContext calls NInput!SetTapParameterInteractionContext.
+func SetTapParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, parameter TAP_PARAMETER, value float32) error {
+	r1, _, _ := win32.Call(procSetTapParameterInteractionContext.Addr(), specSetTapParameterInteractionContext, nil, uintptr(interactionContext), uintptr(parameter), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specSetTranslationParameterInteractionContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetTranslationParameterInteractionContext calls NInput!SetTranslationParameterInteractionContext.
+func SetTranslationParameterInteractionContext(interactionContext HINTERACTIONCONTEXT, parameter TRANSLATION_PARAMETER, value float32) error {
+	r1, _, _ := win32.Call(procSetTranslationParameterInteractionContext.Addr(), specSetTranslationParameterInteractionContext, nil, uintptr(interactionContext), uintptr(parameter), uintptr(math.Float32bits(value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

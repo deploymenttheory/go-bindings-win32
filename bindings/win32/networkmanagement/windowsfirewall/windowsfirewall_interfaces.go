@@ -1064,6 +1064,14 @@ func (self *INetFwPolicy2) Get_ExcludedInterfaces(profileType NET_FW_PROFILE_TYP
 	return *_interfaces, win32.ErrIfFailed(int32(r1))
 }
 
+var specINetFwPolicy2_Put_ExcludedInterfaces = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ExcludedInterfaces dispatches through INetFwPolicy2's vtable slot 11.
+func (self *INetFwPolicy2) Put_ExcludedInterfaces(profileType NET_FW_PROFILE_TYPE2, interfaces systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specINetFwPolicy2_Put_ExcludedInterfaces, nil, uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(&interfaces))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_BlockAllInboundTraffic dispatches through INetFwPolicy2's vtable slot 12.
 func (self *INetFwPolicy2) Get_BlockAllInboundTraffic(profileType NET_FW_PROFILE_TYPE2) (foundation.VARIANT_BOOL, error) {
 	_Block := new(foundation.VARIANT_BOOL)
@@ -1190,6 +1198,14 @@ func (self *INetFwProduct) Get_RuleCategories() (systemvariant.VARIANT, error) {
 	_ruleCategories := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ruleCategories))))
 	return *_ruleCategories, win32.ErrIfFailed(int32(r1))
+}
+
+var specINetFwProduct_Put_RuleCategories = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_RuleCategories dispatches through INetFwProduct's vtable slot 8.
+func (self *INetFwProduct) Put_RuleCategories(ruleCategories systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specINetFwProduct_Put_RuleCategories, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ruleCategories))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_DisplayName dispatches through INetFwProduct's vtable slot 9.
@@ -1570,6 +1586,14 @@ func (self *INetFwRule) Get_Interfaces() (systemvariant.VARIANT, error) {
 	_interfaces := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_interfaces))))
 	return *_interfaces, win32.ErrIfFailed(int32(r1))
+}
+
+var specINetFwRule_Put_Interfaces = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Interfaces dispatches through INetFwRule's vtable slot 30.
+func (self *INetFwRule) Put_Interfaces(interfaces systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specINetFwRule_Put_Interfaces, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&interfaces))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_InterfaceTypes dispatches through INetFwRule's vtable slot 31.

@@ -27,6 +27,22 @@ func (self *IGameExplorer) AddGame(bstrGDFBinaryPath foundation.BSTR, bstrGameIn
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIGameExplorer_RemoveGame = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RemoveGame dispatches through IGameExplorer's vtable slot 4.
+func (self *IGameExplorer) RemoveGame(guidInstanceID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIGameExplorer_RemoveGame, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidInstanceID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIGameExplorer_UpdateGame = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// UpdateGame dispatches through IGameExplorer's vtable slot 5.
+func (self *IGameExplorer) UpdateGame(guidInstanceID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIGameExplorer_UpdateGame, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidInstanceID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VerifyAccess dispatches through IGameExplorer's vtable slot 6.
 func (self *IGameExplorer) VerifyAccess(bstrGDFBinaryPath foundation.BSTR, pfHasAccess *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGDFBinaryPath)), uintptr(unsafe.Pointer(pfHasAccess)))
@@ -42,9 +58,9 @@ type IGameExplorer2 struct {
 var IID_IGameExplorer2 = win32.GUID{Data1: 0x86874aa7, Data2: 0xa1ed, Data3: 0x450d, Data4: [8]byte{0xa7, 0xeb, 0xb8, 0x9e, 0x20, 0xb2, 0xff, 0xf3}}
 
 // InstallGame dispatches through IGameExplorer2's vtable slot 3.
-func (self *IGameExplorer2) InstallGame(binaryGDFPath string, installDirectory string, installScope GAME_INSTALL_SCOPE) error {
+func (self *IGameExplorer2) InstallGame(binaryGDFPath string, installDirectory *string, installScope GAME_INSTALL_SCOPE) error {
 	_binaryGDFPath := win32.UTF16Ptr(binaryGDFPath)
-	_installDirectory := win32.UTF16Ptr(installDirectory)
+	_installDirectory := win32.UTF16PtrOrNil(installDirectory)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)), uintptr(unsafe.Pointer(_installDirectory)), uintptr(installScope))
 	return win32.ErrIfFailed(int32(r1))
 }

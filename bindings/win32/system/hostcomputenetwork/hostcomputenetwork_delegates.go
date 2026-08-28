@@ -4,6 +4,6 @@
 
 package hostcomputenetwork
 
-// HCN_NOTIFICATION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer, foundation.HRESULT, foundation.PWSTR).
+// HCN_NOTIFICATION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer, foundation.HRESULT, foundation.PWSTR) uintptr.
 type HCN_NOTIFICATION_CALLBACK uintptr

@@ -4,62 +4,64 @@
 
 package remotemanagement
 
-// WSMAN_PLUGIN_AUTHORIZE_OPERATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *WSMAN_SENDER_DETAILS, uint32, uint32, foundation.PWSTR, foundation.PWSTR).
+// WSMAN_PLUGIN_AUTHORIZE_OPERATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *WSMAN_SENDER_DETAILS, uint32, uint32, foundation.PWSTR, foundation.PWSTR) uintptr.
 type WSMAN_PLUGIN_AUTHORIZE_OPERATION uintptr
 
-// WSMAN_PLUGIN_AUTHORIZE_QUERY_QUOTA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *WSMAN_SENDER_DETAILS, uint32).
+// WSMAN_PLUGIN_AUTHORIZE_QUERY_QUOTA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *WSMAN_SENDER_DETAILS, uint32) uintptr.
 type WSMAN_PLUGIN_AUTHORIZE_QUERY_QUOTA uintptr
 
-// WSMAN_PLUGIN_AUTHORIZE_RELEASE_CONTEXT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// WSMAN_PLUGIN_AUTHORIZE_RELEASE_CONTEXT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type WSMAN_PLUGIN_AUTHORIZE_RELEASE_CONTEXT uintptr
 
-// WSMAN_PLUGIN_AUTHORIZE_USER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *WSMAN_SENDER_DETAILS, uint32).
+// WSMAN_PLUGIN_AUTHORIZE_USER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *WSMAN_SENDER_DETAILS, uint32) uintptr.
 type WSMAN_PLUGIN_AUTHORIZE_USER uintptr
 
-// WSMAN_PLUGIN_COMMAND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, foundation.PWSTR, *WSMAN_COMMAND_ARG_SET).
+// WSMAN_PLUGIN_COMMAND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, foundation.PWSTR, *WSMAN_COMMAND_ARG_SET) uintptr.
 type WSMAN_PLUGIN_COMMAND uintptr
 
-// WSMAN_PLUGIN_CONNECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, unsafe.Pointer, *WSMAN_DATA).
+// WSMAN_PLUGIN_CONNECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, unsafe.Pointer, *WSMAN_DATA) uintptr.
 type WSMAN_PLUGIN_CONNECT uintptr
 
-// WSMAN_PLUGIN_RECEIVE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, unsafe.Pointer, *WSMAN_STREAM_ID_SET).
+// WSMAN_PLUGIN_RECEIVE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, unsafe.Pointer, *WSMAN_STREAM_ID_SET) uintptr.
 type WSMAN_PLUGIN_RECEIVE uintptr
 
-// WSMAN_PLUGIN_RELEASE_COMMAND_CONTEXT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer).
+// WSMAN_PLUGIN_RELEASE_COMMAND_CONTEXT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr.
 type WSMAN_PLUGIN_RELEASE_COMMAND_CONTEXT uintptr
 
-// WSMAN_PLUGIN_RELEASE_SHELL_CONTEXT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// WSMAN_PLUGIN_RELEASE_SHELL_CONTEXT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type WSMAN_PLUGIN_RELEASE_SHELL_CONTEXT uintptr
 
-// WSMAN_PLUGIN_SEND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, unsafe.Pointer, foundation.PWSTR, *WSMAN_DATA).
+// WSMAN_PLUGIN_SEND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, unsafe.Pointer, foundation.PWSTR, *WSMAN_DATA) uintptr.
 type WSMAN_PLUGIN_SEND uintptr
 
-// WSMAN_PLUGIN_SHELL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *WSMAN_PLUGIN_REQUEST, uint32, *WSMAN_SHELL_STARTUP_INFO_V11, *WSMAN_DATA).
+// WSMAN_PLUGIN_SHELL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *WSMAN_PLUGIN_REQUEST, uint32, *WSMAN_SHELL_STARTUP_INFO_V11, *WSMAN_DATA) uintptr.
 type WSMAN_PLUGIN_SHELL uintptr
 
-// WSMAN_PLUGIN_SHUTDOWN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32) uint32.
+// WSMAN_PLUGIN_SHUTDOWN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type WSMAN_PLUGIN_SHUTDOWN uintptr
 
-// WSMAN_PLUGIN_SIGNAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, unsafe.Pointer, foundation.PWSTR).
+// WSMAN_PLUGIN_SIGNAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSMAN_PLUGIN_REQUEST, uint32, unsafe.Pointer, unsafe.Pointer, foundation.PWSTR) uintptr.
 type WSMAN_PLUGIN_SIGNAL uintptr
 
-// WSMAN_PLUGIN_STARTUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PWSTR, foundation.PWSTR, *unsafe.Pointer) uint32.
+// WSMAN_PLUGIN_STARTUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PWSTR, foundation.PWSTR, *unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type WSMAN_PLUGIN_STARTUP uintptr
 
-// WSMAN_SHELL_COMPLETION_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, *WSMAN_ERROR, WSMAN_SHELL_HANDLE, WSMAN_COMMAND_HANDLE, WSMAN_OPERATION_HANDLE, *WSMAN_RESPONSE_DATA).
+// WSMAN_SHELL_COMPLETION_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, *WSMAN_ERROR, WSMAN_SHELL_HANDLE, WSMAN_COMMAND_HANDLE, WSMAN_OPERATION_HANDLE, *WSMAN_RESPONSE_DATA) uintptr.
 type WSMAN_SHELL_COMPLETION_FUNCTION uintptr

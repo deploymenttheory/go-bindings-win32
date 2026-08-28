@@ -31,13 +31,43 @@ var (
 	procDavGetUNCFromHTTPPath        = modNETAPI32.NewProc("DavGetUNCFromHTTPPath")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DavAddConnection             *win32.Proc
+	DavCancelConnectionsToServer *win32.Proc
+	DavDeleteConnection          *win32.Proc
+	DavFlushFile                 *win32.Proc
+	DavGetExtendedError          *win32.Proc
+	DavGetHTTPFromUNCPath        *win32.Proc
+	DavGetTheLockOwnerOfTheFile  *win32.Proc
+	DavGetUNCFromHTTPPath        *win32.Proc
+	DavInvalidateCache           *win32.Proc
+	DavRegisterAuthCallback      *win32.Proc
+	DavUnregisterAuthCallback    *win32.Proc
+}{
+	DavAddConnection:             procDavAddConnection,
+	DavCancelConnectionsToServer: procDavCancelConnectionsToServer,
+	DavDeleteConnection:          procDavDeleteConnection,
+	DavFlushFile:                 procDavFlushFile,
+	DavGetExtendedError:          procDavGetExtendedError,
+	DavGetHTTPFromUNCPath:        procDavGetHTTPFromUNCPath,
+	DavGetTheLockOwnerOfTheFile:  procDavGetTheLockOwnerOfTheFile,
+	DavGetUNCFromHTTPPath:        procDavGetUNCFromHTTPPath,
+	DavInvalidateCache:           procDavInvalidateCache,
+	DavRegisterAuthCallback:      procDavRegisterAuthCallback,
+	DavUnregisterAuthCallback:    procDavUnregisterAuthCallback,
+}
+
 // DavAddConnection calls NETAPI32!DavAddConnection.
 // https://learn.microsoft.com/windows/win32/api/davclnt/nf-davclnt-davaddconnection
 // Minimum OS: windows6.0.6000.
-func DavAddConnection(ConnectionHandle *foundation.HANDLE, RemoteName string, UserName string, Password string, ClientCert []byte) uint32 {
+func DavAddConnection(ConnectionHandle *foundation.HANDLE, RemoteName string, UserName *string, Password *string, ClientCert []byte) uint32 {
 	_RemoteName := win32.UTF16Ptr(RemoteName)
-	_UserName := win32.UTF16Ptr(UserName)
-	_Password := win32.UTF16Ptr(Password)
+	_UserName := win32.UTF16PtrOrNil(UserName)
+	_Password := win32.UTF16PtrOrNil(Password)
 	var _ClientCert *byte
 	if len(ClientCert) > 0 {
 		_ClientCert = &ClientCert[0]

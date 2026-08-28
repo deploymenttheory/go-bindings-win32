@@ -297,6 +297,7 @@ var (
 	procCryptHashMessage                                   = modCRYPT32.NewProc("CryptHashMessage")
 	procCryptHashPublicKeyInfo                             = modCRYPT32.NewProc("CryptHashPublicKeyInfo")
 	procCryptHashToBeSigned                                = modCRYPT32.NewProc("CryptHashToBeSigned")
+	procCryptImportPKCS8                                   = modCRYPT32.NewProc("CryptImportPKCS8")
 	procCryptImportPublicKeyInfo                           = modCRYPT32.NewProc("CryptImportPublicKeyInfo")
 	procCryptImportPublicKeyInfoEx                         = modCRYPT32.NewProc("CryptImportPublicKeyInfoEx")
 	procCryptImportPublicKeyInfoEx2                        = modCRYPT32.NewProc("CryptImportPublicKeyInfoEx2")
@@ -499,6 +500,956 @@ var (
 	procSslVerifySignature                                 = modncrypt.NewProc("SslVerifySignature")
 	procFindCertsByIssuer                                  = modWINTRUST.NewProc("FindCertsByIssuer")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BCryptAddContextFunction                           *win32.Proc
+	BCryptAddContextFunctionProvider                   *win32.Proc
+	BCryptCloseAlgorithmProvider                       *win32.Proc
+	BCryptConfigureContext                             *win32.Proc
+	BCryptConfigureContextFunction                     *win32.Proc
+	BCryptCreateContext                                *win32.Proc
+	BCryptCreateHash                                   *win32.Proc
+	BCryptCreateMultiHash                              *win32.Proc
+	BCryptDecapsulate                                  *win32.Proc
+	BCryptDecrypt                                      *win32.Proc
+	BCryptDeleteContext                                *win32.Proc
+	BCryptDeriveKey                                    *win32.Proc
+	BCryptDeriveKeyCapi                                *win32.Proc
+	BCryptDeriveKeyPBKDF2                              *win32.Proc
+	BCryptDestroyHash                                  *win32.Proc
+	BCryptDestroyKey                                   *win32.Proc
+	BCryptDestroySecret                                *win32.Proc
+	BCryptDuplicateHash                                *win32.Proc
+	BCryptDuplicateKey                                 *win32.Proc
+	BCryptEncapsulate                                  *win32.Proc
+	BCryptEncrypt                                      *win32.Proc
+	BCryptEnumAlgorithms                               *win32.Proc
+	BCryptEnumContextFunctionProviders                 *win32.Proc
+	BCryptEnumContextFunctions                         *win32.Proc
+	BCryptEnumContexts                                 *win32.Proc
+	BCryptEnumProviders                                *win32.Proc
+	BCryptEnumRegisteredProviders                      *win32.Proc
+	BCryptExportKey                                    *win32.Proc
+	BCryptFinalizeKeyPair                              *win32.Proc
+	BCryptFinishHash                                   *win32.Proc
+	BCryptFreeBuffer                                   *win32.Proc
+	BCryptGenRandom                                    *win32.Proc
+	BCryptGenerateKeyPair                              *win32.Proc
+	BCryptGenerateSymmetricKey                         *win32.Proc
+	BCryptGetFipsAlgorithmMode                         *win32.Proc
+	BCryptGetProperty                                  *win32.Proc
+	BCryptHash                                         *win32.Proc
+	BCryptHashData                                     *win32.Proc
+	BCryptImportKey                                    *win32.Proc
+	BCryptImportKeyPair                                *win32.Proc
+	BCryptKeyDerivation                                *win32.Proc
+	BCryptOpenAlgorithmProvider                        *win32.Proc
+	BCryptProcessMultiOperations                       *win32.Proc
+	BCryptQueryContextConfiguration                    *win32.Proc
+	BCryptQueryContextFunctionConfiguration            *win32.Proc
+	BCryptQueryContextFunctionProperty                 *win32.Proc
+	BCryptQueryProviderRegistration                    *win32.Proc
+	BCryptRegisterConfigChangeNotify                   *win32.Proc
+	BCryptRegisterProvider                             *win32.Proc
+	BCryptRemoveContextFunction                        *win32.Proc
+	BCryptRemoveContextFunctionProvider                *win32.Proc
+	BCryptResolveProviders                             *win32.Proc
+	BCryptSecretAgreement                              *win32.Proc
+	BCryptSetContextFunctionProperty                   *win32.Proc
+	BCryptSetProperty                                  *win32.Proc
+	BCryptSignHash                                     *win32.Proc
+	BCryptUnregisterConfigChangeNotify                 *win32.Proc
+	BCryptUnregisterProvider                           *win32.Proc
+	BCryptVerifySignature                              *win32.Proc
+	CertAddCRLContextToStore                           *win32.Proc
+	CertAddCRLLinkToStore                              *win32.Proc
+	CertAddCTLContextToStore                           *win32.Proc
+	CertAddCTLLinkToStore                              *win32.Proc
+	CertAddCertificateContextToStore                   *win32.Proc
+	CertAddCertificateLinkToStore                      *win32.Proc
+	CertAddEncodedCRLToStore                           *win32.Proc
+	CertAddEncodedCTLToStore                           *win32.Proc
+	CertAddEncodedCertificateToStore                   *win32.Proc
+	CertAddEncodedCertificateToSystemStore             *win32.Proc
+	CertAddEncodedCertificateToSystemStoreA            *win32.Proc
+	CertAddEnhancedKeyUsageIdentifier                  *win32.Proc
+	CertAddRefServerOcspResponse                       *win32.Proc
+	CertAddRefServerOcspResponseContext                *win32.Proc
+	CertAddSerializedElementToStore                    *win32.Proc
+	CertAddStoreToCollection                           *win32.Proc
+	CertAlgIdToOID                                     *win32.Proc
+	CertCloseServerOcspResponse                        *win32.Proc
+	CertCloseStore                                     *win32.Proc
+	CertCompareCertificate                             *win32.Proc
+	CertCompareCertificateName                         *win32.Proc
+	CertCompareIntegerBlob                             *win32.Proc
+	CertComparePublicKeyInfo                           *win32.Proc
+	CertControlStore                                   *win32.Proc
+	CertCreateCRLContext                               *win32.Proc
+	CertCreateCTLContext                               *win32.Proc
+	CertCreateCTLEntryFromCertificateContextProperties *win32.Proc
+	CertCreateCertificateChainEngine                   *win32.Proc
+	CertCreateCertificateContext                       *win32.Proc
+	CertCreateContext                                  *win32.Proc
+	CertCreateSelfSignCertificate                      *win32.Proc
+	CertDeleteCRLFromStore                             *win32.Proc
+	CertDeleteCTLFromStore                             *win32.Proc
+	CertDeleteCertificateFromStore                     *win32.Proc
+	CertDuplicateCRLContext                            *win32.Proc
+	CertDuplicateCTLContext                            *win32.Proc
+	CertDuplicateCertificateChain                      *win32.Proc
+	CertDuplicateCertificateContext                    *win32.Proc
+	CertDuplicateStore                                 *win32.Proc
+	CertEnumCRLContextProperties                       *win32.Proc
+	CertEnumCRLsInStore                                *win32.Proc
+	CertEnumCTLContextProperties                       *win32.Proc
+	CertEnumCTLsInStore                                *win32.Proc
+	CertEnumCertificateContextProperties               *win32.Proc
+	CertEnumCertificatesInStore                        *win32.Proc
+	CertEnumPhysicalStore                              *win32.Proc
+	CertEnumSubjectInSortedCTL                         *win32.Proc
+	CertEnumSystemStore                                *win32.Proc
+	CertEnumSystemStoreLocation                        *win32.Proc
+	CertFindAttribute                                  *win32.Proc
+	CertFindCRLInStore                                 *win32.Proc
+	CertFindCTLInStore                                 *win32.Proc
+	CertFindCertificateInCRL                           *win32.Proc
+	CertFindCertificateInStore                         *win32.Proc
+	CertFindChainInStore                               *win32.Proc
+	CertFindExtension                                  *win32.Proc
+	CertFindRDNAttr                                    *win32.Proc
+	CertFindSubjectInCTL                               *win32.Proc
+	CertFindSubjectInSortedCTL                         *win32.Proc
+	CertFreeCRLContext                                 *win32.Proc
+	CertFreeCTLContext                                 *win32.Proc
+	CertFreeCertificateChain                           *win32.Proc
+	CertFreeCertificateChainEngine                     *win32.Proc
+	CertFreeCertificateChainList                       *win32.Proc
+	CertFreeCertificateContext                         *win32.Proc
+	CertFreeServerOcspResponseContext                  *win32.Proc
+	CertGetCRLContextProperty                          *win32.Proc
+	CertGetCRLFromStore                                *win32.Proc
+	CertGetCTLContextProperty                          *win32.Proc
+	CertGetCertificateChain                            *win32.Proc
+	CertGetCertificateContextProperty                  *win32.Proc
+	CertGetEnhancedKeyUsage                            *win32.Proc
+	CertGetIntendedKeyUsage                            *win32.Proc
+	CertGetIssuerCertificateFromStore                  *win32.Proc
+	CertGetNameString                                  *win32.Proc
+	CertGetNameStringA                                 *win32.Proc
+	CertGetPublicKeyLength                             *win32.Proc
+	CertGetServerOcspResponseContext                   *win32.Proc
+	CertGetStoreProperty                               *win32.Proc
+	CertGetSubjectCertificateFromStore                 *win32.Proc
+	CertGetValidUsages                                 *win32.Proc
+	CertIsRDNAttrsInCertificateName                    *win32.Proc
+	CertIsStrongHashToSign                             *win32.Proc
+	CertIsValidCRLForCertificate                       *win32.Proc
+	CertIsWeakHash                                     *win32.Proc
+	CertNameToStr                                      *win32.Proc
+	CertNameToStrA                                     *win32.Proc
+	CertOIDToAlgId                                     *win32.Proc
+	CertOpenServerOcspResponse                         *win32.Proc
+	CertOpenStore                                      *win32.Proc
+	CertOpenSystemStore                                *win32.Proc
+	CertOpenSystemStoreA                               *win32.Proc
+	CertRDNValueToStr                                  *win32.Proc
+	CertRDNValueToStrA                                 *win32.Proc
+	CertRegisterPhysicalStore                          *win32.Proc
+	CertRegisterSystemStore                            *win32.Proc
+	CertRemoveEnhancedKeyUsageIdentifier               *win32.Proc
+	CertRemoveStoreFromCollection                      *win32.Proc
+	CertResyncCertificateChainEngine                   *win32.Proc
+	CertRetrieveLogoOrBiometricInfo                    *win32.Proc
+	CertSaveStore                                      *win32.Proc
+	CertSelectCertificateChains                        *win32.Proc
+	CertSerializeCRLStoreElement                       *win32.Proc
+	CertSerializeCTLStoreElement                       *win32.Proc
+	CertSerializeCertificateStoreElement               *win32.Proc
+	CertSetCRLContextProperty                          *win32.Proc
+	CertSetCTLContextProperty                          *win32.Proc
+	CertSetCertificateContextPropertiesFromCTLEntry    *win32.Proc
+	CertSetCertificateContextProperty                  *win32.Proc
+	CertSetEnhancedKeyUsage                            *win32.Proc
+	CertSetStoreProperty                               *win32.Proc
+	CertStrToName                                      *win32.Proc
+	CertStrToNameA                                     *win32.Proc
+	CertUnregisterPhysicalStore                        *win32.Proc
+	CertUnregisterSystemStore                          *win32.Proc
+	CertVerifyCRLRevocation                            *win32.Proc
+	CertVerifyCRLTimeValidity                          *win32.Proc
+	CertVerifyCTLUsage                                 *win32.Proc
+	CertVerifyCertificateChainPolicy                   *win32.Proc
+	CertVerifyRevocation                               *win32.Proc
+	CertVerifySubjectCertificateContext                *win32.Proc
+	CertVerifyTimeValidity                             *win32.Proc
+	CertVerifyValidityNesting                          *win32.Proc
+	CloseCryptoHandle                                  *win32.Proc
+	CryptAcquireCertificatePrivateKey                  *win32.Proc
+	CryptAcquireContext                                *win32.Proc
+	CryptAcquireContextA                               *win32.Proc
+	CryptBinaryToString                                *win32.Proc
+	CryptBinaryToStringA                               *win32.Proc
+	CryptCloseAsyncHandle                              *win32.Proc
+	CryptContextAddRef                                 *win32.Proc
+	CryptCreateAsyncHandle                             *win32.Proc
+	CryptCreateHash                                    *win32.Proc
+	CryptCreateKeyIdentifierFromCSP                    *win32.Proc
+	CryptDecodeMessage                                 *win32.Proc
+	CryptDecodeObject                                  *win32.Proc
+	CryptDecodeObjectEx                                *win32.Proc
+	CryptDecrypt                                       *win32.Proc
+	CryptDecryptAndVerifyMessageSignature              *win32.Proc
+	CryptDecryptMessage                                *win32.Proc
+	CryptDeriveKey                                     *win32.Proc
+	CryptDestroyHash                                   *win32.Proc
+	CryptDestroyKey                                    *win32.Proc
+	CryptDuplicateHash                                 *win32.Proc
+	CryptDuplicateKey                                  *win32.Proc
+	CryptEncodeObject                                  *win32.Proc
+	CryptEncodeObjectEx                                *win32.Proc
+	CryptEncrypt                                       *win32.Proc
+	CryptEncryptMessage                                *win32.Proc
+	CryptEnumKeyIdentifierProperties                   *win32.Proc
+	CryptEnumOIDFunction                               *win32.Proc
+	CryptEnumOIDInfo                                   *win32.Proc
+	CryptEnumProviderTypes                             *win32.Proc
+	CryptEnumProviderTypesA                            *win32.Proc
+	CryptEnumProviders                                 *win32.Proc
+	CryptEnumProvidersA                                *win32.Proc
+	CryptExportKey                                     *win32.Proc
+	CryptExportPKCS8                                   *win32.Proc
+	CryptExportPublicKeyInfo                           *win32.Proc
+	CryptExportPublicKeyInfoEx                         *win32.Proc
+	CryptExportPublicKeyInfoFromBCryptKeyHandle        *win32.Proc
+	CryptFindCertificateKeyProvInfo                    *win32.Proc
+	CryptFindLocalizedName                             *win32.Proc
+	CryptFindOIDInfo                                   *win32.Proc
+	CryptFormatObject                                  *win32.Proc
+	CryptFreeOIDFunctionAddress                        *win32.Proc
+	CryptGenKey                                        *win32.Proc
+	CryptGenRandom                                     *win32.Proc
+	CryptGetAsyncParam                                 *win32.Proc
+	CryptGetDefaultOIDDllList                          *win32.Proc
+	CryptGetDefaultOIDFunctionAddress                  *win32.Proc
+	CryptGetDefaultProvider                            *win32.Proc
+	CryptGetDefaultProviderA                           *win32.Proc
+	CryptGetHashParam                                  *win32.Proc
+	CryptGetKeyIdentifierProperty                      *win32.Proc
+	CryptGetKeyParam                                   *win32.Proc
+	CryptGetMessageCertificates                        *win32.Proc
+	CryptGetMessageSignerCount                         *win32.Proc
+	CryptGetOIDFunctionAddress                         *win32.Proc
+	CryptGetOIDFunctionValue                           *win32.Proc
+	CryptGetObjectUrl                                  *win32.Proc
+	CryptGetProvParam                                  *win32.Proc
+	CryptGetUserKey                                    *win32.Proc
+	CryptHashCertificate                               *win32.Proc
+	CryptHashCertificate2                              *win32.Proc
+	CryptHashData                                      *win32.Proc
+	CryptHashMessage                                   *win32.Proc
+	CryptHashPublicKeyInfo                             *win32.Proc
+	CryptHashSessionKey                                *win32.Proc
+	CryptHashToBeSigned                                *win32.Proc
+	CryptImportKey                                     *win32.Proc
+	CryptImportPKCS8                                   *win32.Proc
+	CryptImportPublicKeyInfo                           *win32.Proc
+	CryptImportPublicKeyInfoEx                         *win32.Proc
+	CryptImportPublicKeyInfoEx2                        *win32.Proc
+	CryptInitOIDFunctionSet                            *win32.Proc
+	CryptInstallCancelRetrieval                        *win32.Proc
+	CryptInstallDefaultContext                         *win32.Proc
+	CryptInstallOIDFunctionAddress                     *win32.Proc
+	CryptMemAlloc                                      *win32.Proc
+	CryptMemFree                                       *win32.Proc
+	CryptMemRealloc                                    *win32.Proc
+	CryptMsgCalculateEncodedLength                     *win32.Proc
+	CryptMsgClose                                      *win32.Proc
+	CryptMsgControl                                    *win32.Proc
+	CryptMsgCountersign                                *win32.Proc
+	CryptMsgCountersignEncoded                         *win32.Proc
+	CryptMsgDuplicate                                  *win32.Proc
+	CryptMsgEncodeAndSignCTL                           *win32.Proc
+	CryptMsgGetAndVerifySigner                         *win32.Proc
+	CryptMsgGetParam                                   *win32.Proc
+	CryptMsgOpenToDecode                               *win32.Proc
+	CryptMsgOpenToEncode                               *win32.Proc
+	CryptMsgSignCTL                                    *win32.Proc
+	CryptMsgUpdate                                     *win32.Proc
+	CryptMsgVerifyCountersignatureEncoded              *win32.Proc
+	CryptMsgVerifyCountersignatureEncodedEx            *win32.Proc
+	CryptProtectData                                   *win32.Proc
+	CryptProtectMemory                                 *win32.Proc
+	CryptQueryObject                                   *win32.Proc
+	CryptRegisterDefaultOIDFunction                    *win32.Proc
+	CryptRegisterOIDFunction                           *win32.Proc
+	CryptRegisterOIDInfo                               *win32.Proc
+	CryptReleaseContext                                *win32.Proc
+	CryptRetrieveObjectByUrl                           *win32.Proc
+	CryptRetrieveObjectByUrlA                          *win32.Proc
+	CryptRetrieveTimeStamp                             *win32.Proc
+	CryptSetAsyncParam                                 *win32.Proc
+	CryptSetHashParam                                  *win32.Proc
+	CryptSetKeyIdentifierProperty                      *win32.Proc
+	CryptSetKeyParam                                   *win32.Proc
+	CryptSetOIDFunctionValue                           *win32.Proc
+	CryptSetProvParam                                  *win32.Proc
+	CryptSetProvider                                   *win32.Proc
+	CryptSetProviderA                                  *win32.Proc
+	CryptSetProviderEx                                 *win32.Proc
+	CryptSetProviderExA                                *win32.Proc
+	CryptSignAndEncodeCertificate                      *win32.Proc
+	CryptSignAndEncryptMessage                         *win32.Proc
+	CryptSignCertificate                               *win32.Proc
+	CryptSignHash                                      *win32.Proc
+	CryptSignHashA                                     *win32.Proc
+	CryptSignMessage                                   *win32.Proc
+	CryptSignMessageWithKey                            *win32.Proc
+	CryptStringToBinary                                *win32.Proc
+	CryptStringToBinaryA                               *win32.Proc
+	CryptUninstallCancelRetrieval                      *win32.Proc
+	CryptUninstallDefaultContext                       *win32.Proc
+	CryptUnprotectData                                 *win32.Proc
+	CryptUnprotectMemory                               *win32.Proc
+	CryptUnregisterDefaultOIDFunction                  *win32.Proc
+	CryptUnregisterOIDFunction                         *win32.Proc
+	CryptUnregisterOIDInfo                             *win32.Proc
+	CryptUpdateProtectedState                          *win32.Proc
+	CryptVerifyCertificateSignature                    *win32.Proc
+	CryptVerifyCertificateSignatureEx                  *win32.Proc
+	CryptVerifyDetachedMessageHash                     *win32.Proc
+	CryptVerifyDetachedMessageSignature                *win32.Proc
+	CryptVerifyMessageHash                             *win32.Proc
+	CryptVerifyMessageSignature                        *win32.Proc
+	CryptVerifyMessageSignatureWithKey                 *win32.Proc
+	CryptVerifySignature                               *win32.Proc
+	CryptVerifySignatureA                              *win32.Proc
+	CryptVerifyTimeStampSignature                      *win32.Proc
+	CryptXmlAddObject                                  *win32.Proc
+	CryptXmlClose                                      *win32.Proc
+	CryptXmlCreateReference                            *win32.Proc
+	CryptXmlDigestReference                            *win32.Proc
+	CryptXmlEncode                                     *win32.Proc
+	CryptXmlEnumAlgorithmInfo                          *win32.Proc
+	CryptXmlFindAlgorithmInfo                          *win32.Proc
+	CryptXmlGetAlgorithmInfo                           *win32.Proc
+	CryptXmlGetDocContext                              *win32.Proc
+	CryptXmlGetReference                               *win32.Proc
+	CryptXmlGetSignature                               *win32.Proc
+	CryptXmlGetStatus                                  *win32.Proc
+	CryptXmlGetTransforms                              *win32.Proc
+	CryptXmlImportPublicKey                            *win32.Proc
+	CryptXmlOpenToDecode                               *win32.Proc
+	CryptXmlOpenToEncode                               *win32.Proc
+	CryptXmlSetHMACSecret                              *win32.Proc
+	CryptXmlSign                                       *win32.Proc
+	CryptXmlVerifySignature                            *win32.Proc
+	Decrypt                                            *win32.Proc
+	Encrypt                                            *win32.Proc
+	FindCertsByIssuer                                  *win32.Proc
+	FreeToken                                          *win32.Proc
+	GenerateDerivedKey                                 *win32.Proc
+	GetAsymmetricEncryptionInterface                   *win32.Proc
+	GetBrowserToken                                    *win32.Proc
+	GetCipherInterface                                 *win32.Proc
+	GetCryptoTransform                                 *win32.Proc
+	GetHashInterface                                   *win32.Proc
+	GetKeyDerivationInterface                          *win32.Proc
+	GetKeyStorageInterface                             *win32.Proc
+	GetKeyedHash                                       *win32.Proc
+	GetRngInterface                                    *win32.Proc
+	GetSChannelInterface                               *win32.Proc
+	GetSecretAgreementInterface                        *win32.Proc
+	GetSignatureInterface                              *win32.Proc
+	GetToken                                           *win32.Proc
+	HashCore                                           *win32.Proc
+	HashFinal                                          *win32.Proc
+	ImportInformationCard                              *win32.Proc
+	ManageCardSpace                                    *win32.Proc
+	NCryptCloseProtectionDescriptor                    *win32.Proc
+	NCryptCreateClaim                                  *win32.Proc
+	NCryptCreatePersistedKey                           *win32.Proc
+	NCryptCreateProtectionDescriptor                   *win32.Proc
+	NCryptDecapsulate                                  *win32.Proc
+	NCryptDecrypt                                      *win32.Proc
+	NCryptDeleteKey                                    *win32.Proc
+	NCryptDeriveKey                                    *win32.Proc
+	NCryptEncapsulate                                  *win32.Proc
+	NCryptEncrypt                                      *win32.Proc
+	NCryptEnumAlgorithms                               *win32.Proc
+	NCryptEnumKeys                                     *win32.Proc
+	NCryptEnumStorageProviders                         *win32.Proc
+	NCryptExportKey                                    *win32.Proc
+	NCryptFinalizeKey                                  *win32.Proc
+	NCryptFreeBuffer                                   *win32.Proc
+	NCryptFreeObject                                   *win32.Proc
+	NCryptGetProperty                                  *win32.Proc
+	NCryptGetProtectionDescriptorInfo                  *win32.Proc
+	NCryptImportKey                                    *win32.Proc
+	NCryptIsAlgSupported                               *win32.Proc
+	NCryptIsKeyHandle                                  *win32.Proc
+	NCryptKeyDerivation                                *win32.Proc
+	NCryptNotifyChangeKey                              *win32.Proc
+	NCryptOpenKey                                      *win32.Proc
+	NCryptOpenStorageProvider                          *win32.Proc
+	NCryptProtectSecret                                *win32.Proc
+	NCryptQueryProtectionDescriptorName                *win32.Proc
+	NCryptRegisterProtectionDescriptorName             *win32.Proc
+	NCryptSecretAgreement                              *win32.Proc
+	NCryptSetProperty                                  *win32.Proc
+	NCryptSignHash                                     *win32.Proc
+	NCryptStreamClose                                  *win32.Proc
+	NCryptStreamOpenToProtect                          *win32.Proc
+	NCryptStreamOpenToUnprotect                        *win32.Proc
+	NCryptStreamOpenToUnprotectEx                      *win32.Proc
+	NCryptStreamUpdate                                 *win32.Proc
+	NCryptTranslateHandle                              *win32.Proc
+	NCryptUnprotectSecret                              *win32.Proc
+	NCryptVerifyClaim                                  *win32.Proc
+	NCryptVerifySignature                              *win32.Proc
+	PFXExportCertStore                                 *win32.Proc
+	PFXExportCertStoreEx                               *win32.Proc
+	PFXImportCertStore                                 *win32.Proc
+	PFXIsPFXBlob                                       *win32.Proc
+	PFXVerifyPassword                                  *win32.Proc
+	ProcessPrng                                        *win32.Proc
+	SignError                                          *win32.Proc
+	SignHash                                           *win32.Proc
+	SignerFreeSignerContext                            *win32.Proc
+	SignerSign                                         *win32.Proc
+	SignerSignEx                                       *win32.Proc
+	SignerSignEx2                                      *win32.Proc
+	SignerSignEx3                                      *win32.Proc
+	SignerTimeStamp                                    *win32.Proc
+	SignerTimeStampEx                                  *win32.Proc
+	SignerTimeStampEx2                                 *win32.Proc
+	SignerTimeStampEx3                                 *win32.Proc
+	SslChangeNotify                                    *win32.Proc
+	SslComputeClientAuthHash                           *win32.Proc
+	SslComputeEapKeyBlock                              *win32.Proc
+	SslComputeFinishedHash                             *win32.Proc
+	SslComputeSessionHash                              *win32.Proc
+	SslCreateClientAuthHash                            *win32.Proc
+	SslCreateEphemeralKey                              *win32.Proc
+	SslCreateHandshakeHash                             *win32.Proc
+	SslDecrementProviderReferenceCount                 *win32.Proc
+	SslDecryptPacket                                   *win32.Proc
+	SslDuplicateTranscriptHash                         *win32.Proc
+	SslEncryptPacket                                   *win32.Proc
+	SslEnumCipherSuites                                *win32.Proc
+	SslEnumCipherSuitesEx                              *win32.Proc
+	SslEnumEccCurves                                   *win32.Proc
+	SslEnumProtocolProviders                           *win32.Proc
+	SslExpandBinderKey                                 *win32.Proc
+	SslExpandExporterMasterKey                         *win32.Proc
+	SslExpandPreSharedKey                              *win32.Proc
+	SslExpandResumptionMasterKey                       *win32.Proc
+	SslExpandTrafficKeys                               *win32.Proc
+	SslExpandWriteKey                                  *win32.Proc
+	SslExportKey                                       *win32.Proc
+	SslExportKeyingMaterial                            *win32.Proc
+	SslExtractEarlyKey                                 *win32.Proc
+	SslExtractHandshakeKey                             *win32.Proc
+	SslExtractMasterKey                                *win32.Proc
+	SslFreeBuffer                                      *win32.Proc
+	SslFreeObject                                      *win32.Proc
+	SslGenerateMasterKey                               *win32.Proc
+	SslGeneratePreMasterKey                            *win32.Proc
+	SslGenerateSessionKeys                             *win32.Proc
+	SslGetCipherSuitePRFHashAlgorithm                  *win32.Proc
+	SslGetKeyProperty                                  *win32.Proc
+	SslGetProviderProperty                             *win32.Proc
+	SslHashHandshake                                   *win32.Proc
+	SslImportKey                                       *win32.Proc
+	SslImportMasterKey                                 *win32.Proc
+	SslIncrementProviderReferenceCount                 *win32.Proc
+	SslLookupCipherLengths                             *win32.Proc
+	SslLookupCipherSuiteInfo                           *win32.Proc
+	SslOpenPrivateKey                                  *win32.Proc
+	SslOpenProvider                                    *win32.Proc
+	SslSignHash                                        *win32.Proc
+	SslVerifySignature                                 *win32.Proc
+	SystemPrng                                         *win32.Proc
+	TransformBlock                                     *win32.Proc
+	TransformFinalBlock                                *win32.Proc
+	VerifyHash                                         *win32.Proc
+}{
+	BCryptAddContextFunction:                           procBCryptAddContextFunction,
+	BCryptAddContextFunctionProvider:                   procBCryptAddContextFunctionProvider,
+	BCryptCloseAlgorithmProvider:                       procBCryptCloseAlgorithmProvider,
+	BCryptConfigureContext:                             procBCryptConfigureContext,
+	BCryptConfigureContextFunction:                     procBCryptConfigureContextFunction,
+	BCryptCreateContext:                                procBCryptCreateContext,
+	BCryptCreateHash:                                   procBCryptCreateHash,
+	BCryptCreateMultiHash:                              procBCryptCreateMultiHash,
+	BCryptDecapsulate:                                  procBCryptDecapsulate,
+	BCryptDecrypt:                                      procBCryptDecrypt,
+	BCryptDeleteContext:                                procBCryptDeleteContext,
+	BCryptDeriveKey:                                    procBCryptDeriveKey,
+	BCryptDeriveKeyCapi:                                procBCryptDeriveKeyCapi,
+	BCryptDeriveKeyPBKDF2:                              procBCryptDeriveKeyPBKDF2,
+	BCryptDestroyHash:                                  procBCryptDestroyHash,
+	BCryptDestroyKey:                                   procBCryptDestroyKey,
+	BCryptDestroySecret:                                procBCryptDestroySecret,
+	BCryptDuplicateHash:                                procBCryptDuplicateHash,
+	BCryptDuplicateKey:                                 procBCryptDuplicateKey,
+	BCryptEncapsulate:                                  procBCryptEncapsulate,
+	BCryptEncrypt:                                      procBCryptEncrypt,
+	BCryptEnumAlgorithms:                               procBCryptEnumAlgorithms,
+	BCryptEnumContextFunctionProviders:                 procBCryptEnumContextFunctionProviders,
+	BCryptEnumContextFunctions:                         procBCryptEnumContextFunctions,
+	BCryptEnumContexts:                                 procBCryptEnumContexts,
+	BCryptEnumProviders:                                procBCryptEnumProviders,
+	BCryptEnumRegisteredProviders:                      procBCryptEnumRegisteredProviders,
+	BCryptExportKey:                                    procBCryptExportKey,
+	BCryptFinalizeKeyPair:                              procBCryptFinalizeKeyPair,
+	BCryptFinishHash:                                   procBCryptFinishHash,
+	BCryptFreeBuffer:                                   procBCryptFreeBuffer,
+	BCryptGenRandom:                                    procBCryptGenRandom,
+	BCryptGenerateKeyPair:                              procBCryptGenerateKeyPair,
+	BCryptGenerateSymmetricKey:                         procBCryptGenerateSymmetricKey,
+	BCryptGetFipsAlgorithmMode:                         procBCryptGetFipsAlgorithmMode,
+	BCryptGetProperty:                                  procBCryptGetProperty,
+	BCryptHash:                                         procBCryptHash,
+	BCryptHashData:                                     procBCryptHashData,
+	BCryptImportKey:                                    procBCryptImportKey,
+	BCryptImportKeyPair:                                procBCryptImportKeyPair,
+	BCryptKeyDerivation:                                procBCryptKeyDerivation,
+	BCryptOpenAlgorithmProvider:                        procBCryptOpenAlgorithmProvider,
+	BCryptProcessMultiOperations:                       procBCryptProcessMultiOperations,
+	BCryptQueryContextConfiguration:                    procBCryptQueryContextConfiguration,
+	BCryptQueryContextFunctionConfiguration:            procBCryptQueryContextFunctionConfiguration,
+	BCryptQueryContextFunctionProperty:                 procBCryptQueryContextFunctionProperty,
+	BCryptQueryProviderRegistration:                    procBCryptQueryProviderRegistration,
+	BCryptRegisterConfigChangeNotify:                   procBCryptRegisterConfigChangeNotify,
+	BCryptRegisterProvider:                             procBCryptRegisterProvider,
+	BCryptRemoveContextFunction:                        procBCryptRemoveContextFunction,
+	BCryptRemoveContextFunctionProvider:                procBCryptRemoveContextFunctionProvider,
+	BCryptResolveProviders:                             procBCryptResolveProviders,
+	BCryptSecretAgreement:                              procBCryptSecretAgreement,
+	BCryptSetContextFunctionProperty:                   procBCryptSetContextFunctionProperty,
+	BCryptSetProperty:                                  procBCryptSetProperty,
+	BCryptSignHash:                                     procBCryptSignHash,
+	BCryptUnregisterConfigChangeNotify:                 procBCryptUnregisterConfigChangeNotify,
+	BCryptUnregisterProvider:                           procBCryptUnregisterProvider,
+	BCryptVerifySignature:                              procBCryptVerifySignature,
+	CertAddCRLContextToStore:                           procCertAddCRLContextToStore,
+	CertAddCRLLinkToStore:                              procCertAddCRLLinkToStore,
+	CertAddCTLContextToStore:                           procCertAddCTLContextToStore,
+	CertAddCTLLinkToStore:                              procCertAddCTLLinkToStore,
+	CertAddCertificateContextToStore:                   procCertAddCertificateContextToStore,
+	CertAddCertificateLinkToStore:                      procCertAddCertificateLinkToStore,
+	CertAddEncodedCRLToStore:                           procCertAddEncodedCRLToStore,
+	CertAddEncodedCTLToStore:                           procCertAddEncodedCTLToStore,
+	CertAddEncodedCertificateToStore:                   procCertAddEncodedCertificateToStore,
+	CertAddEncodedCertificateToSystemStore:             procCertAddEncodedCertificateToSystemStore,
+	CertAddEncodedCertificateToSystemStoreA:            procCertAddEncodedCertificateToSystemStoreA,
+	CertAddEnhancedKeyUsageIdentifier:                  procCertAddEnhancedKeyUsageIdentifier,
+	CertAddRefServerOcspResponse:                       procCertAddRefServerOcspResponse,
+	CertAddRefServerOcspResponseContext:                procCertAddRefServerOcspResponseContext,
+	CertAddSerializedElementToStore:                    procCertAddSerializedElementToStore,
+	CertAddStoreToCollection:                           procCertAddStoreToCollection,
+	CertAlgIdToOID:                                     procCertAlgIdToOID,
+	CertCloseServerOcspResponse:                        procCertCloseServerOcspResponse,
+	CertCloseStore:                                     procCertCloseStore,
+	CertCompareCertificate:                             procCertCompareCertificate,
+	CertCompareCertificateName:                         procCertCompareCertificateName,
+	CertCompareIntegerBlob:                             procCertCompareIntegerBlob,
+	CertComparePublicKeyInfo:                           procCertComparePublicKeyInfo,
+	CertControlStore:                                   procCertControlStore,
+	CertCreateCRLContext:                               procCertCreateCRLContext,
+	CertCreateCTLContext:                               procCertCreateCTLContext,
+	CertCreateCTLEntryFromCertificateContextProperties: procCertCreateCTLEntryFromCertificateContextProperties,
+	CertCreateCertificateChainEngine:                   procCertCreateCertificateChainEngine,
+	CertCreateCertificateContext:                       procCertCreateCertificateContext,
+	CertCreateContext:                                  procCertCreateContext,
+	CertCreateSelfSignCertificate:                      procCertCreateSelfSignCertificate,
+	CertDeleteCRLFromStore:                             procCertDeleteCRLFromStore,
+	CertDeleteCTLFromStore:                             procCertDeleteCTLFromStore,
+	CertDeleteCertificateFromStore:                     procCertDeleteCertificateFromStore,
+	CertDuplicateCRLContext:                            procCertDuplicateCRLContext,
+	CertDuplicateCTLContext:                            procCertDuplicateCTLContext,
+	CertDuplicateCertificateChain:                      procCertDuplicateCertificateChain,
+	CertDuplicateCertificateContext:                    procCertDuplicateCertificateContext,
+	CertDuplicateStore:                                 procCertDuplicateStore,
+	CertEnumCRLContextProperties:                       procCertEnumCRLContextProperties,
+	CertEnumCRLsInStore:                                procCertEnumCRLsInStore,
+	CertEnumCTLContextProperties:                       procCertEnumCTLContextProperties,
+	CertEnumCTLsInStore:                                procCertEnumCTLsInStore,
+	CertEnumCertificateContextProperties:               procCertEnumCertificateContextProperties,
+	CertEnumCertificatesInStore:                        procCertEnumCertificatesInStore,
+	CertEnumPhysicalStore:                              procCertEnumPhysicalStore,
+	CertEnumSubjectInSortedCTL:                         procCertEnumSubjectInSortedCTL,
+	CertEnumSystemStore:                                procCertEnumSystemStore,
+	CertEnumSystemStoreLocation:                        procCertEnumSystemStoreLocation,
+	CertFindAttribute:                                  procCertFindAttribute,
+	CertFindCRLInStore:                                 procCertFindCRLInStore,
+	CertFindCTLInStore:                                 procCertFindCTLInStore,
+	CertFindCertificateInCRL:                           procCertFindCertificateInCRL,
+	CertFindCertificateInStore:                         procCertFindCertificateInStore,
+	CertFindChainInStore:                               procCertFindChainInStore,
+	CertFindExtension:                                  procCertFindExtension,
+	CertFindRDNAttr:                                    procCertFindRDNAttr,
+	CertFindSubjectInCTL:                               procCertFindSubjectInCTL,
+	CertFindSubjectInSortedCTL:                         procCertFindSubjectInSortedCTL,
+	CertFreeCRLContext:                                 procCertFreeCRLContext,
+	CertFreeCTLContext:                                 procCertFreeCTLContext,
+	CertFreeCertificateChain:                           procCertFreeCertificateChain,
+	CertFreeCertificateChainEngine:                     procCertFreeCertificateChainEngine,
+	CertFreeCertificateChainList:                       procCertFreeCertificateChainList,
+	CertFreeCertificateContext:                         procCertFreeCertificateContext,
+	CertFreeServerOcspResponseContext:                  procCertFreeServerOcspResponseContext,
+	CertGetCRLContextProperty:                          procCertGetCRLContextProperty,
+	CertGetCRLFromStore:                                procCertGetCRLFromStore,
+	CertGetCTLContextProperty:                          procCertGetCTLContextProperty,
+	CertGetCertificateChain:                            procCertGetCertificateChain,
+	CertGetCertificateContextProperty:                  procCertGetCertificateContextProperty,
+	CertGetEnhancedKeyUsage:                            procCertGetEnhancedKeyUsage,
+	CertGetIntendedKeyUsage:                            procCertGetIntendedKeyUsage,
+	CertGetIssuerCertificateFromStore:                  procCertGetIssuerCertificateFromStore,
+	CertGetNameString:                                  procCertGetNameString,
+	CertGetNameStringA:                                 procCertGetNameStringA,
+	CertGetPublicKeyLength:                             procCertGetPublicKeyLength,
+	CertGetServerOcspResponseContext:                   procCertGetServerOcspResponseContext,
+	CertGetStoreProperty:                               procCertGetStoreProperty,
+	CertGetSubjectCertificateFromStore:                 procCertGetSubjectCertificateFromStore,
+	CertGetValidUsages:                                 procCertGetValidUsages,
+	CertIsRDNAttrsInCertificateName:                    procCertIsRDNAttrsInCertificateName,
+	CertIsStrongHashToSign:                             procCertIsStrongHashToSign,
+	CertIsValidCRLForCertificate:                       procCertIsValidCRLForCertificate,
+	CertIsWeakHash:                                     procCertIsWeakHash,
+	CertNameToStr:                                      procCertNameToStr,
+	CertNameToStrA:                                     procCertNameToStrA,
+	CertOIDToAlgId:                                     procCertOIDToAlgId,
+	CertOpenServerOcspResponse:                         procCertOpenServerOcspResponse,
+	CertOpenStore:                                      procCertOpenStore,
+	CertOpenSystemStore:                                procCertOpenSystemStore,
+	CertOpenSystemStoreA:                               procCertOpenSystemStoreA,
+	CertRDNValueToStr:                                  procCertRDNValueToStr,
+	CertRDNValueToStrA:                                 procCertRDNValueToStrA,
+	CertRegisterPhysicalStore:                          procCertRegisterPhysicalStore,
+	CertRegisterSystemStore:                            procCertRegisterSystemStore,
+	CertRemoveEnhancedKeyUsageIdentifier:               procCertRemoveEnhancedKeyUsageIdentifier,
+	CertRemoveStoreFromCollection:                      procCertRemoveStoreFromCollection,
+	CertResyncCertificateChainEngine:                   procCertResyncCertificateChainEngine,
+	CertRetrieveLogoOrBiometricInfo:                    procCertRetrieveLogoOrBiometricInfo,
+	CertSaveStore:                                      procCertSaveStore,
+	CertSelectCertificateChains:                        procCertSelectCertificateChains,
+	CertSerializeCRLStoreElement:                       procCertSerializeCRLStoreElement,
+	CertSerializeCTLStoreElement:                       procCertSerializeCTLStoreElement,
+	CertSerializeCertificateStoreElement:               procCertSerializeCertificateStoreElement,
+	CertSetCRLContextProperty:                          procCertSetCRLContextProperty,
+	CertSetCTLContextProperty:                          procCertSetCTLContextProperty,
+	CertSetCertificateContextPropertiesFromCTLEntry:    procCertSetCertificateContextPropertiesFromCTLEntry,
+	CertSetCertificateContextProperty:                  procCertSetCertificateContextProperty,
+	CertSetEnhancedKeyUsage:                            procCertSetEnhancedKeyUsage,
+	CertSetStoreProperty:                               procCertSetStoreProperty,
+	CertStrToName:                                      procCertStrToName,
+	CertStrToNameA:                                     procCertStrToNameA,
+	CertUnregisterPhysicalStore:                        procCertUnregisterPhysicalStore,
+	CertUnregisterSystemStore:                          procCertUnregisterSystemStore,
+	CertVerifyCRLRevocation:                            procCertVerifyCRLRevocation,
+	CertVerifyCRLTimeValidity:                          procCertVerifyCRLTimeValidity,
+	CertVerifyCTLUsage:                                 procCertVerifyCTLUsage,
+	CertVerifyCertificateChainPolicy:                   procCertVerifyCertificateChainPolicy,
+	CertVerifyRevocation:                               procCertVerifyRevocation,
+	CertVerifySubjectCertificateContext:                procCertVerifySubjectCertificateContext,
+	CertVerifyTimeValidity:                             procCertVerifyTimeValidity,
+	CertVerifyValidityNesting:                          procCertVerifyValidityNesting,
+	CloseCryptoHandle:                                  procCloseCryptoHandle,
+	CryptAcquireCertificatePrivateKey:                  procCryptAcquireCertificatePrivateKey,
+	CryptAcquireContext:                                procCryptAcquireContext,
+	CryptAcquireContextA:                               procCryptAcquireContextA,
+	CryptBinaryToString:                                procCryptBinaryToString,
+	CryptBinaryToStringA:                               procCryptBinaryToStringA,
+	CryptCloseAsyncHandle:                              procCryptCloseAsyncHandle,
+	CryptContextAddRef:                                 procCryptContextAddRef,
+	CryptCreateAsyncHandle:                             procCryptCreateAsyncHandle,
+	CryptCreateHash:                                    procCryptCreateHash,
+	CryptCreateKeyIdentifierFromCSP:                    procCryptCreateKeyIdentifierFromCSP,
+	CryptDecodeMessage:                                 procCryptDecodeMessage,
+	CryptDecodeObject:                                  procCryptDecodeObject,
+	CryptDecodeObjectEx:                                procCryptDecodeObjectEx,
+	CryptDecrypt:                                       procCryptDecrypt,
+	CryptDecryptAndVerifyMessageSignature:              procCryptDecryptAndVerifyMessageSignature,
+	CryptDecryptMessage:                                procCryptDecryptMessage,
+	CryptDeriveKey:                                     procCryptDeriveKey,
+	CryptDestroyHash:                                   procCryptDestroyHash,
+	CryptDestroyKey:                                    procCryptDestroyKey,
+	CryptDuplicateHash:                                 procCryptDuplicateHash,
+	CryptDuplicateKey:                                  procCryptDuplicateKey,
+	CryptEncodeObject:                                  procCryptEncodeObject,
+	CryptEncodeObjectEx:                                procCryptEncodeObjectEx,
+	CryptEncrypt:                                       procCryptEncrypt,
+	CryptEncryptMessage:                                procCryptEncryptMessage,
+	CryptEnumKeyIdentifierProperties:                   procCryptEnumKeyIdentifierProperties,
+	CryptEnumOIDFunction:                               procCryptEnumOIDFunction,
+	CryptEnumOIDInfo:                                   procCryptEnumOIDInfo,
+	CryptEnumProviderTypes:                             procCryptEnumProviderTypes,
+	CryptEnumProviderTypesA:                            procCryptEnumProviderTypesA,
+	CryptEnumProviders:                                 procCryptEnumProviders,
+	CryptEnumProvidersA:                                procCryptEnumProvidersA,
+	CryptExportKey:                                     procCryptExportKey,
+	CryptExportPKCS8:                                   procCryptExportPKCS8,
+	CryptExportPublicKeyInfo:                           procCryptExportPublicKeyInfo,
+	CryptExportPublicKeyInfoEx:                         procCryptExportPublicKeyInfoEx,
+	CryptExportPublicKeyInfoFromBCryptKeyHandle:        procCryptExportPublicKeyInfoFromBCryptKeyHandle,
+	CryptFindCertificateKeyProvInfo:                    procCryptFindCertificateKeyProvInfo,
+	CryptFindLocalizedName:                             procCryptFindLocalizedName,
+	CryptFindOIDInfo:                                   procCryptFindOIDInfo,
+	CryptFormatObject:                                  procCryptFormatObject,
+	CryptFreeOIDFunctionAddress:                        procCryptFreeOIDFunctionAddress,
+	CryptGenKey:                                        procCryptGenKey,
+	CryptGenRandom:                                     procCryptGenRandom,
+	CryptGetAsyncParam:                                 procCryptGetAsyncParam,
+	CryptGetDefaultOIDDllList:                          procCryptGetDefaultOIDDllList,
+	CryptGetDefaultOIDFunctionAddress:                  procCryptGetDefaultOIDFunctionAddress,
+	CryptGetDefaultProvider:                            procCryptGetDefaultProvider,
+	CryptGetDefaultProviderA:                           procCryptGetDefaultProviderA,
+	CryptGetHashParam:                                  procCryptGetHashParam,
+	CryptGetKeyIdentifierProperty:                      procCryptGetKeyIdentifierProperty,
+	CryptGetKeyParam:                                   procCryptGetKeyParam,
+	CryptGetMessageCertificates:                        procCryptGetMessageCertificates,
+	CryptGetMessageSignerCount:                         procCryptGetMessageSignerCount,
+	CryptGetOIDFunctionAddress:                         procCryptGetOIDFunctionAddress,
+	CryptGetOIDFunctionValue:                           procCryptGetOIDFunctionValue,
+	CryptGetObjectUrl:                                  procCryptGetObjectUrl,
+	CryptGetProvParam:                                  procCryptGetProvParam,
+	CryptGetUserKey:                                    procCryptGetUserKey,
+	CryptHashCertificate:                               procCryptHashCertificate,
+	CryptHashCertificate2:                              procCryptHashCertificate2,
+	CryptHashData:                                      procCryptHashData,
+	CryptHashMessage:                                   procCryptHashMessage,
+	CryptHashPublicKeyInfo:                             procCryptHashPublicKeyInfo,
+	CryptHashSessionKey:                                procCryptHashSessionKey,
+	CryptHashToBeSigned:                                procCryptHashToBeSigned,
+	CryptImportKey:                                     procCryptImportKey,
+	CryptImportPKCS8:                                   procCryptImportPKCS8,
+	CryptImportPublicKeyInfo:                           procCryptImportPublicKeyInfo,
+	CryptImportPublicKeyInfoEx:                         procCryptImportPublicKeyInfoEx,
+	CryptImportPublicKeyInfoEx2:                        procCryptImportPublicKeyInfoEx2,
+	CryptInitOIDFunctionSet:                            procCryptInitOIDFunctionSet,
+	CryptInstallCancelRetrieval:                        procCryptInstallCancelRetrieval,
+	CryptInstallDefaultContext:                         procCryptInstallDefaultContext,
+	CryptInstallOIDFunctionAddress:                     procCryptInstallOIDFunctionAddress,
+	CryptMemAlloc:                                      procCryptMemAlloc,
+	CryptMemFree:                                       procCryptMemFree,
+	CryptMemRealloc:                                    procCryptMemRealloc,
+	CryptMsgCalculateEncodedLength:                     procCryptMsgCalculateEncodedLength,
+	CryptMsgClose:                                      procCryptMsgClose,
+	CryptMsgControl:                                    procCryptMsgControl,
+	CryptMsgCountersign:                                procCryptMsgCountersign,
+	CryptMsgCountersignEncoded:                         procCryptMsgCountersignEncoded,
+	CryptMsgDuplicate:                                  procCryptMsgDuplicate,
+	CryptMsgEncodeAndSignCTL:                           procCryptMsgEncodeAndSignCTL,
+	CryptMsgGetAndVerifySigner:                         procCryptMsgGetAndVerifySigner,
+	CryptMsgGetParam:                                   procCryptMsgGetParam,
+	CryptMsgOpenToDecode:                               procCryptMsgOpenToDecode,
+	CryptMsgOpenToEncode:                               procCryptMsgOpenToEncode,
+	CryptMsgSignCTL:                                    procCryptMsgSignCTL,
+	CryptMsgUpdate:                                     procCryptMsgUpdate,
+	CryptMsgVerifyCountersignatureEncoded:              procCryptMsgVerifyCountersignatureEncoded,
+	CryptMsgVerifyCountersignatureEncodedEx:            procCryptMsgVerifyCountersignatureEncodedEx,
+	CryptProtectData:                                   procCryptProtectData,
+	CryptProtectMemory:                                 procCryptProtectMemory,
+	CryptQueryObject:                                   procCryptQueryObject,
+	CryptRegisterDefaultOIDFunction:                    procCryptRegisterDefaultOIDFunction,
+	CryptRegisterOIDFunction:                           procCryptRegisterOIDFunction,
+	CryptRegisterOIDInfo:                               procCryptRegisterOIDInfo,
+	CryptReleaseContext:                                procCryptReleaseContext,
+	CryptRetrieveObjectByUrl:                           procCryptRetrieveObjectByUrl,
+	CryptRetrieveObjectByUrlA:                          procCryptRetrieveObjectByUrlA,
+	CryptRetrieveTimeStamp:                             procCryptRetrieveTimeStamp,
+	CryptSetAsyncParam:                                 procCryptSetAsyncParam,
+	CryptSetHashParam:                                  procCryptSetHashParam,
+	CryptSetKeyIdentifierProperty:                      procCryptSetKeyIdentifierProperty,
+	CryptSetKeyParam:                                   procCryptSetKeyParam,
+	CryptSetOIDFunctionValue:                           procCryptSetOIDFunctionValue,
+	CryptSetProvParam:                                  procCryptSetProvParam,
+	CryptSetProvider:                                   procCryptSetProvider,
+	CryptSetProviderA:                                  procCryptSetProviderA,
+	CryptSetProviderEx:                                 procCryptSetProviderEx,
+	CryptSetProviderExA:                                procCryptSetProviderExA,
+	CryptSignAndEncodeCertificate:                      procCryptSignAndEncodeCertificate,
+	CryptSignAndEncryptMessage:                         procCryptSignAndEncryptMessage,
+	CryptSignCertificate:                               procCryptSignCertificate,
+	CryptSignHash:                                      procCryptSignHash,
+	CryptSignHashA:                                     procCryptSignHashA,
+	CryptSignMessage:                                   procCryptSignMessage,
+	CryptSignMessageWithKey:                            procCryptSignMessageWithKey,
+	CryptStringToBinary:                                procCryptStringToBinary,
+	CryptStringToBinaryA:                               procCryptStringToBinaryA,
+	CryptUninstallCancelRetrieval:                      procCryptUninstallCancelRetrieval,
+	CryptUninstallDefaultContext:                       procCryptUninstallDefaultContext,
+	CryptUnprotectData:                                 procCryptUnprotectData,
+	CryptUnprotectMemory:                               procCryptUnprotectMemory,
+	CryptUnregisterDefaultOIDFunction:                  procCryptUnregisterDefaultOIDFunction,
+	CryptUnregisterOIDFunction:                         procCryptUnregisterOIDFunction,
+	CryptUnregisterOIDInfo:                             procCryptUnregisterOIDInfo,
+	CryptUpdateProtectedState:                          procCryptUpdateProtectedState,
+	CryptVerifyCertificateSignature:                    procCryptVerifyCertificateSignature,
+	CryptVerifyCertificateSignatureEx:                  procCryptVerifyCertificateSignatureEx,
+	CryptVerifyDetachedMessageHash:                     procCryptVerifyDetachedMessageHash,
+	CryptVerifyDetachedMessageSignature:                procCryptVerifyDetachedMessageSignature,
+	CryptVerifyMessageHash:                             procCryptVerifyMessageHash,
+	CryptVerifyMessageSignature:                        procCryptVerifyMessageSignature,
+	CryptVerifyMessageSignatureWithKey:                 procCryptVerifyMessageSignatureWithKey,
+	CryptVerifySignature:                               procCryptVerifySignature,
+	CryptVerifySignatureA:                              procCryptVerifySignatureA,
+	CryptVerifyTimeStampSignature:                      procCryptVerifyTimeStampSignature,
+	CryptXmlAddObject:                                  procCryptXmlAddObject,
+	CryptXmlClose:                                      procCryptXmlClose,
+	CryptXmlCreateReference:                            procCryptXmlCreateReference,
+	CryptXmlDigestReference:                            procCryptXmlDigestReference,
+	CryptXmlEncode:                                     procCryptXmlEncode,
+	CryptXmlEnumAlgorithmInfo:                          procCryptXmlEnumAlgorithmInfo,
+	CryptXmlFindAlgorithmInfo:                          procCryptXmlFindAlgorithmInfo,
+	CryptXmlGetAlgorithmInfo:                           procCryptXmlGetAlgorithmInfo,
+	CryptXmlGetDocContext:                              procCryptXmlGetDocContext,
+	CryptXmlGetReference:                               procCryptXmlGetReference,
+	CryptXmlGetSignature:                               procCryptXmlGetSignature,
+	CryptXmlGetStatus:                                  procCryptXmlGetStatus,
+	CryptXmlGetTransforms:                              procCryptXmlGetTransforms,
+	CryptXmlImportPublicKey:                            procCryptXmlImportPublicKey,
+	CryptXmlOpenToDecode:                               procCryptXmlOpenToDecode,
+	CryptXmlOpenToEncode:                               procCryptXmlOpenToEncode,
+	CryptXmlSetHMACSecret:                              procCryptXmlSetHMACSecret,
+	CryptXmlSign:                                       procCryptXmlSign,
+	CryptXmlVerifySignature:                            procCryptXmlVerifySignature,
+	Decrypt:                                            procDecrypt,
+	Encrypt:                                            procEncrypt,
+	FindCertsByIssuer:                                  procFindCertsByIssuer,
+	FreeToken:                                          procFreeToken,
+	GenerateDerivedKey:                                 procGenerateDerivedKey,
+	GetAsymmetricEncryptionInterface:                   procGetAsymmetricEncryptionInterface,
+	GetBrowserToken:                                    procGetBrowserToken,
+	GetCipherInterface:                                 procGetCipherInterface,
+	GetCryptoTransform:                                 procGetCryptoTransform,
+	GetHashInterface:                                   procGetHashInterface,
+	GetKeyDerivationInterface:                          procGetKeyDerivationInterface,
+	GetKeyStorageInterface:                             procGetKeyStorageInterface,
+	GetKeyedHash:                                       procGetKeyedHash,
+	GetRngInterface:                                    procGetRngInterface,
+	GetSChannelInterface:                               procGetSChannelInterface,
+	GetSecretAgreementInterface:                        procGetSecretAgreementInterface,
+	GetSignatureInterface:                              procGetSignatureInterface,
+	GetToken:                                           procGetToken,
+	HashCore:                                           procHashCore,
+	HashFinal:                                          procHashFinal,
+	ImportInformationCard:                              procImportInformationCard,
+	ManageCardSpace:                                    procManageCardSpace,
+	NCryptCloseProtectionDescriptor:                    procNCryptCloseProtectionDescriptor,
+	NCryptCreateClaim:                                  procNCryptCreateClaim,
+	NCryptCreatePersistedKey:                           procNCryptCreatePersistedKey,
+	NCryptCreateProtectionDescriptor:                   procNCryptCreateProtectionDescriptor,
+	NCryptDecapsulate:                                  procNCryptDecapsulate,
+	NCryptDecrypt:                                      procNCryptDecrypt,
+	NCryptDeleteKey:                                    procNCryptDeleteKey,
+	NCryptDeriveKey:                                    procNCryptDeriveKey,
+	NCryptEncapsulate:                                  procNCryptEncapsulate,
+	NCryptEncrypt:                                      procNCryptEncrypt,
+	NCryptEnumAlgorithms:                               procNCryptEnumAlgorithms,
+	NCryptEnumKeys:                                     procNCryptEnumKeys,
+	NCryptEnumStorageProviders:                         procNCryptEnumStorageProviders,
+	NCryptExportKey:                                    procNCryptExportKey,
+	NCryptFinalizeKey:                                  procNCryptFinalizeKey,
+	NCryptFreeBuffer:                                   procNCryptFreeBuffer,
+	NCryptFreeObject:                                   procNCryptFreeObject,
+	NCryptGetProperty:                                  procNCryptGetProperty,
+	NCryptGetProtectionDescriptorInfo:                  procNCryptGetProtectionDescriptorInfo,
+	NCryptImportKey:                                    procNCryptImportKey,
+	NCryptIsAlgSupported:                               procNCryptIsAlgSupported,
+	NCryptIsKeyHandle:                                  procNCryptIsKeyHandle,
+	NCryptKeyDerivation:                                procNCryptKeyDerivation,
+	NCryptNotifyChangeKey:                              procNCryptNotifyChangeKey,
+	NCryptOpenKey:                                      procNCryptOpenKey,
+	NCryptOpenStorageProvider:                          procNCryptOpenStorageProvider,
+	NCryptProtectSecret:                                procNCryptProtectSecret,
+	NCryptQueryProtectionDescriptorName:                procNCryptQueryProtectionDescriptorName,
+	NCryptRegisterProtectionDescriptorName:             procNCryptRegisterProtectionDescriptorName,
+	NCryptSecretAgreement:                              procNCryptSecretAgreement,
+	NCryptSetProperty:                                  procNCryptSetProperty,
+	NCryptSignHash:                                     procNCryptSignHash,
+	NCryptStreamClose:                                  procNCryptStreamClose,
+	NCryptStreamOpenToProtect:                          procNCryptStreamOpenToProtect,
+	NCryptStreamOpenToUnprotect:                        procNCryptStreamOpenToUnprotect,
+	NCryptStreamOpenToUnprotectEx:                      procNCryptStreamOpenToUnprotectEx,
+	NCryptStreamUpdate:                                 procNCryptStreamUpdate,
+	NCryptTranslateHandle:                              procNCryptTranslateHandle,
+	NCryptUnprotectSecret:                              procNCryptUnprotectSecret,
+	NCryptVerifyClaim:                                  procNCryptVerifyClaim,
+	NCryptVerifySignature:                              procNCryptVerifySignature,
+	PFXExportCertStore:                                 procPFXExportCertStore,
+	PFXExportCertStoreEx:                               procPFXExportCertStoreEx,
+	PFXImportCertStore:                                 procPFXImportCertStore,
+	PFXIsPFXBlob:                                       procPFXIsPFXBlob,
+	PFXVerifyPassword:                                  procPFXVerifyPassword,
+	ProcessPrng:                                        procProcessPrng,
+	SignError:                                          procSignError,
+	SignHash:                                           procSignHash,
+	SignerFreeSignerContext:                            procSignerFreeSignerContext,
+	SignerSign:                                         procSignerSign,
+	SignerSignEx:                                       procSignerSignEx,
+	SignerSignEx2:                                      procSignerSignEx2,
+	SignerSignEx3:                                      procSignerSignEx3,
+	SignerTimeStamp:                                    procSignerTimeStamp,
+	SignerTimeStampEx:                                  procSignerTimeStampEx,
+	SignerTimeStampEx2:                                 procSignerTimeStampEx2,
+	SignerTimeStampEx3:                                 procSignerTimeStampEx3,
+	SslChangeNotify:                                    procSslChangeNotify,
+	SslComputeClientAuthHash:                           procSslComputeClientAuthHash,
+	SslComputeEapKeyBlock:                              procSslComputeEapKeyBlock,
+	SslComputeFinishedHash:                             procSslComputeFinishedHash,
+	SslComputeSessionHash:                              procSslComputeSessionHash,
+	SslCreateClientAuthHash:                            procSslCreateClientAuthHash,
+	SslCreateEphemeralKey:                              procSslCreateEphemeralKey,
+	SslCreateHandshakeHash:                             procSslCreateHandshakeHash,
+	SslDecrementProviderReferenceCount:                 procSslDecrementProviderReferenceCount,
+	SslDecryptPacket:                                   procSslDecryptPacket,
+	SslDuplicateTranscriptHash:                         procSslDuplicateTranscriptHash,
+	SslEncryptPacket:                                   procSslEncryptPacket,
+	SslEnumCipherSuites:                                procSslEnumCipherSuites,
+	SslEnumCipherSuitesEx:                              procSslEnumCipherSuitesEx,
+	SslEnumEccCurves:                                   procSslEnumEccCurves,
+	SslEnumProtocolProviders:                           procSslEnumProtocolProviders,
+	SslExpandBinderKey:                                 procSslExpandBinderKey,
+	SslExpandExporterMasterKey:                         procSslExpandExporterMasterKey,
+	SslExpandPreSharedKey:                              procSslExpandPreSharedKey,
+	SslExpandResumptionMasterKey:                       procSslExpandResumptionMasterKey,
+	SslExpandTrafficKeys:                               procSslExpandTrafficKeys,
+	SslExpandWriteKey:                                  procSslExpandWriteKey,
+	SslExportKey:                                       procSslExportKey,
+	SslExportKeyingMaterial:                            procSslExportKeyingMaterial,
+	SslExtractEarlyKey:                                 procSslExtractEarlyKey,
+	SslExtractHandshakeKey:                             procSslExtractHandshakeKey,
+	SslExtractMasterKey:                                procSslExtractMasterKey,
+	SslFreeBuffer:                                      procSslFreeBuffer,
+	SslFreeObject:                                      procSslFreeObject,
+	SslGenerateMasterKey:                               procSslGenerateMasterKey,
+	SslGeneratePreMasterKey:                            procSslGeneratePreMasterKey,
+	SslGenerateSessionKeys:                             procSslGenerateSessionKeys,
+	SslGetCipherSuitePRFHashAlgorithm:                  procSslGetCipherSuitePRFHashAlgorithm,
+	SslGetKeyProperty:                                  procSslGetKeyProperty,
+	SslGetProviderProperty:                             procSslGetProviderProperty,
+	SslHashHandshake:                                   procSslHashHandshake,
+	SslImportKey:                                       procSslImportKey,
+	SslImportMasterKey:                                 procSslImportMasterKey,
+	SslIncrementProviderReferenceCount:                 procSslIncrementProviderReferenceCount,
+	SslLookupCipherLengths:                             procSslLookupCipherLengths,
+	SslLookupCipherSuiteInfo:                           procSslLookupCipherSuiteInfo,
+	SslOpenPrivateKey:                                  procSslOpenPrivateKey,
+	SslOpenProvider:                                    procSslOpenProvider,
+	SslSignHash:                                        procSslSignHash,
+	SslVerifySignature:                                 procSslVerifySignature,
+	SystemPrng:                                         procSystemPrng,
+	TransformBlock:                                     procTransformBlock,
+	TransformFinalBlock:                                procTransformFinalBlock,
+	VerifyHash:                                         procVerifyHash,
+}
 
 // BCryptAddContextFunction calls bcrypt!BCryptAddContextFunction.
 // https://learn.microsoft.com/windows/win32/api/bcrypt/nf-bcrypt-bcryptaddcontextfunction
@@ -983,9 +1934,9 @@ func BCryptKeyDerivation(hKey BCRYPT_KEY_HANDLE, pParameterList *BCryptBufferDes
 // BCryptOpenAlgorithmProvider calls bcrypt!BCryptOpenAlgorithmProvider.
 // https://learn.microsoft.com/windows/win32/api/bcrypt/nf-bcrypt-bcryptopenalgorithmprovider
 // Minimum OS: windows6.0.6000.
-func BCryptOpenAlgorithmProvider(phAlgorithm *BCRYPT_ALG_HANDLE, pszAlgId string, pszImplementation string, dwFlags BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS) foundation.NTSTATUS {
+func BCryptOpenAlgorithmProvider(phAlgorithm *BCRYPT_ALG_HANDLE, pszAlgId string, pszImplementation *string, dwFlags BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS) foundation.NTSTATUS {
 	_pszAlgId := win32.UTF16Ptr(pszAlgId)
-	_pszImplementation := win32.UTF16Ptr(pszImplementation)
+	_pszImplementation := win32.UTF16PtrOrNil(pszImplementation)
 	r1, _, _ := syscall.SyscallN(procBCryptOpenAlgorithmProvider.Addr(), uintptr(unsafe.Pointer(phAlgorithm)), uintptr(unsafe.Pointer(_pszAlgId)), uintptr(unsafe.Pointer(_pszImplementation)), uintptr(dwFlags))
 	return foundation.NTSTATUS(r1)
 }
@@ -1078,10 +2029,10 @@ func BCryptRemoveContextFunctionProvider(dwTable uint32, pszContext string, dwIn
 // BCryptResolveProviders calls bcrypt!BCryptResolveProviders.
 // https://learn.microsoft.com/windows/win32/api/bcrypt/nf-bcrypt-bcryptresolveproviders
 // Minimum OS: windows6.0.6000.
-func BCryptResolveProviders(pszContext string, dwInterface uint32, pszFunction string, pszProvider string, dwMode BCRYPT_QUERY_PROVIDER_MODE, dwFlags BCRYPT_RESOLVE_PROVIDERS_FLAGS, pcbBuffer *uint32, ppBuffer **CRYPT_PROVIDER_REFS) foundation.NTSTATUS {
-	_pszContext := win32.UTF16Ptr(pszContext)
-	_pszFunction := win32.UTF16Ptr(pszFunction)
-	_pszProvider := win32.UTF16Ptr(pszProvider)
+func BCryptResolveProviders(pszContext *string, dwInterface uint32, pszFunction *string, pszProvider *string, dwMode BCRYPT_QUERY_PROVIDER_MODE, dwFlags BCRYPT_RESOLVE_PROVIDERS_FLAGS, pcbBuffer *uint32, ppBuffer **CRYPT_PROVIDER_REFS) foundation.NTSTATUS {
+	_pszContext := win32.UTF16PtrOrNil(pszContext)
+	_pszFunction := win32.UTF16PtrOrNil(pszFunction)
+	_pszProvider := win32.UTF16PtrOrNil(pszProvider)
 	r1, _, _ := syscall.SyscallN(procBCryptResolveProviders.Addr(), uintptr(unsafe.Pointer(_pszContext)), uintptr(dwInterface), uintptr(unsafe.Pointer(_pszFunction)), uintptr(unsafe.Pointer(_pszProvider)), uintptr(dwMode), uintptr(dwFlags), uintptr(unsafe.Pointer(pcbBuffer)), uintptr(unsafe.Pointer(ppBuffer)))
 	return foundation.NTSTATUS(r1)
 }
@@ -2056,9 +3007,9 @@ func CertIsValidCRLForCertificate(pCert *CERT_CONTEXT, pCrl *CRL_CONTEXT, dwFlag
 }
 
 // CertIsWeakHash calls CRYPT32!CertIsWeakHash.
-func CertIsWeakHash(dwHashUseType uint32, pwszCNGHashAlgid string, dwChainFlags uint32, pSignerChainContext *CERT_CHAIN_CONTEXT, pTimeStamp *foundation.FILETIME, pwszFileName string) bool {
+func CertIsWeakHash(dwHashUseType uint32, pwszCNGHashAlgid string, dwChainFlags uint32, pSignerChainContext *CERT_CHAIN_CONTEXT, pTimeStamp *foundation.FILETIME, pwszFileName *string) bool {
 	_pwszCNGHashAlgid := win32.UTF16Ptr(pwszCNGHashAlgid)
-	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+	_pwszFileName := win32.UTF16PtrOrNil(pwszFileName)
 	r1, _, _ := syscall.SyscallN(procCertIsWeakHash.Addr(), uintptr(dwHashUseType), uintptr(unsafe.Pointer(_pwszCNGHashAlgid)), uintptr(dwChainFlags), uintptr(unsafe.Pointer(pSignerChainContext)), uintptr(unsafe.Pointer(pTimeStamp)), uintptr(unsafe.Pointer(_pwszFileName)))
 	return r1 != 0
 }
@@ -2468,9 +3419,9 @@ func CryptAcquireCertificatePrivateKey(pCert *CERT_CONTEXT, dwFlags CRYPT_ACQUIR
 // CryptAcquireContext calls ADVAPI32!CryptAcquireContextW.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptacquirecontextw
 // Minimum OS: windows5.1.2600.
-func CryptAcquireContext(phProv *uintptr, szContainer string, szProvider string, dwProvType uint32, dwFlags uint32) error {
-	_szContainer := win32.UTF16Ptr(szContainer)
-	_szProvider := win32.UTF16Ptr(szProvider)
+func CryptAcquireContext(phProv *uintptr, szContainer *string, szProvider *string, dwProvType uint32, dwFlags uint32) error {
+	_szContainer := win32.UTF16PtrOrNil(szContainer)
+	_szProvider := win32.UTF16PtrOrNil(szProvider)
 	r1, _, e1 := syscall.SyscallN(procCryptAcquireContext.Addr(), uintptr(unsafe.Pointer(phProv)), uintptr(unsafe.Pointer(_szContainer)), uintptr(unsafe.Pointer(_szProvider)), uintptr(dwProvType), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2762,8 +3713,8 @@ func CryptEncryptMessage(pEncryptPara *CRYPT_ENCRYPT_MESSAGE_PARA, rgpRecipientC
 // CryptEnumKeyIdentifierProperties calls CRYPT32!CryptEnumKeyIdentifierProperties.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptenumkeyidentifierproperties
 // Minimum OS: windows5.1.2600.
-func CryptEnumKeyIdentifierProperties(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName string, pvArg unsafe.Pointer, pfnEnum PFN_CRYPT_ENUM_KEYID_PROP) error {
-	_pwszComputerName := win32.UTF16Ptr(pwszComputerName)
+func CryptEnumKeyIdentifierProperties(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName *string, pvArg unsafe.Pointer, pfnEnum PFN_CRYPT_ENUM_KEYID_PROP) error {
+	_pwszComputerName := win32.UTF16PtrOrNil(pwszComputerName)
 	r1, _, e1 := syscall.SyscallN(procCryptEnumKeyIdentifierProperties.Addr(), uintptr(unsafe.Pointer(pKeyIdentifier)), uintptr(dwPropId), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszComputerName)), 0, uintptr(unsafe.Pointer(pvArg)), uintptr(pfnEnum))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2984,8 +3935,8 @@ func CryptGetDefaultOIDDllList(hFuncSet unsafe.Pointer, dwEncodingType uint32, p
 // CryptGetDefaultOIDFunctionAddress calls CRYPT32!CryptGetDefaultOIDFunctionAddress.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptgetdefaultoidfunctionaddress
 // Minimum OS: windows5.1.2600.
-func CryptGetDefaultOIDFunctionAddress(hFuncSet unsafe.Pointer, dwEncodingType uint32, pwszDll string, dwFlags uint32, ppvFuncAddr *unsafe.Pointer, phFuncAddr *unsafe.Pointer) bool {
-	_pwszDll := win32.UTF16Ptr(pwszDll)
+func CryptGetDefaultOIDFunctionAddress(hFuncSet unsafe.Pointer, dwEncodingType uint32, pwszDll *string, dwFlags uint32, ppvFuncAddr *unsafe.Pointer, phFuncAddr *unsafe.Pointer) bool {
+	_pwszDll := win32.UTF16PtrOrNil(pwszDll)
 	r1, _, _ := syscall.SyscallN(procCryptGetDefaultOIDFunctionAddress.Addr(), uintptr(unsafe.Pointer(hFuncSet)), uintptr(dwEncodingType), uintptr(unsafe.Pointer(_pwszDll)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppvFuncAddr)), uintptr(unsafe.Pointer(phFuncAddr)))
 	return r1 != 0
 }
@@ -3026,8 +3977,8 @@ func CryptGetHashParam(hHash uintptr, dwParam uint32, pbData *byte, pdwDataLen *
 // CryptGetKeyIdentifierProperty calls CRYPT32!CryptGetKeyIdentifierProperty.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptgetkeyidentifierproperty
 // Minimum OS: windows5.1.2600.
-func CryptGetKeyIdentifierProperty(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName string, pvData unsafe.Pointer, pcbData *uint32) error {
-	_pwszComputerName := win32.UTF16Ptr(pwszComputerName)
+func CryptGetKeyIdentifierProperty(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName *string, pvData unsafe.Pointer, pcbData *uint32) error {
+	_pwszComputerName := win32.UTF16PtrOrNil(pwszComputerName)
 	r1, _, e1 := syscall.SyscallN(procCryptGetKeyIdentifierProperty.Addr(), uintptr(unsafe.Pointer(pKeyIdentifier)), uintptr(dwPropId), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszComputerName)), 0, uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3091,8 +4042,8 @@ func CryptGetOIDFunctionAddress(hFuncSet unsafe.Pointer, dwEncodingType uint32, 
 // CryptGetOIDFunctionValue calls CRYPT32!CryptGetOIDFunctionValue.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptgetoidfunctionvalue
 // Minimum OS: windows5.1.2600.
-func CryptGetOIDFunctionValue(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszValueName string, pdwValueType *uint32, pbValueData *byte, pcbValueData *uint32) error {
-	_pwszValueName := win32.UTF16Ptr(pwszValueName)
+func CryptGetOIDFunctionValue(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszValueName *string, pdwValueType *uint32, pbValueData *byte, pcbValueData *uint32) error {
+	_pwszValueName := win32.UTF16PtrOrNil(pwszValueName)
 	r1, _, e1 := syscall.SyscallN(procCryptGetOIDFunctionValue.Addr(), uintptr(dwEncodingType), uintptr(unsafe.Pointer(pszFuncName)), uintptr(unsafe.Pointer(pszOID)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(unsafe.Pointer(pdwValueType)), uintptr(unsafe.Pointer(pbValueData)), uintptr(unsafe.Pointer(pcbValueData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3237,6 +4188,19 @@ func CryptImportKey(hProv uintptr, pbData []byte, hPubKey uintptr, dwFlags CRYPT
 		_pbData = &pbData[0]
 	}
 	r1, _, e1 := syscall.SyscallN(procCryptImportKey.Addr(), uintptr(hProv), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(hPubKey), uintptr(dwFlags), uintptr(unsafe.Pointer(phKey)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+var specCryptImportPKCS8 = &win32.Spec{Args: []win32.Arg{win32.Struct(48, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CryptImportPKCS8 calls CRYPT32!CryptImportPKCS8.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptimportpkcs8
+// Minimum OS: windows5.1.2600.
+func CryptImportPKCS8(sPrivateKeyAndParams CRYPT_PKCS8_IMPORT_PARAMS, dwFlags CRYPT_KEY_FLAGS, phCryptProv *uintptr, pvAuxInfo unsafe.Pointer) error {
+	r1, _, e1 := win32.Call(procCryptImportPKCS8.Addr(), specCryptImportPKCS8, nil, uintptr(unsafe.Pointer(&sPrivateKeyAndParams)), uintptr(dwFlags), uintptr(unsafe.Pointer(phCryptProv)), uintptr(unsafe.Pointer(pvAuxInfo))).Tuple()
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3544,8 +4508,8 @@ func CryptMsgVerifyCountersignatureEncodedEx(hCryptProv HCRYPTPROV_LEGACY, dwEnc
 // CryptProtectData calls CRYPT32!CryptProtectData.
 // https://learn.microsoft.com/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata
 // Minimum OS: windows5.1.2600.
-func CryptProtectData(pDataIn *CRYPT_INTEGER_BLOB, szDataDescr string, pOptionalEntropy *CRYPT_INTEGER_BLOB, pPromptStruct *CRYPTPROTECT_PROMPTSTRUCT, dwFlags uint32, pDataOut *CRYPT_INTEGER_BLOB) error {
-	_szDataDescr := win32.UTF16Ptr(szDataDescr)
+func CryptProtectData(pDataIn *CRYPT_INTEGER_BLOB, szDataDescr *string, pOptionalEntropy *CRYPT_INTEGER_BLOB, pPromptStruct *CRYPTPROTECT_PROMPTSTRUCT, dwFlags uint32, pDataOut *CRYPT_INTEGER_BLOB) error {
+	_szDataDescr := win32.UTF16PtrOrNil(szDataDescr)
 	r1, _, e1 := syscall.SyscallN(procCryptProtectData.Addr(), uintptr(unsafe.Pointer(pDataIn)), uintptr(unsafe.Pointer(_szDataDescr)), uintptr(unsafe.Pointer(pOptionalEntropy)), 0, uintptr(unsafe.Pointer(pPromptStruct)), uintptr(dwFlags), uintptr(unsafe.Pointer(pDataOut)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3587,8 +4551,8 @@ func CryptRegisterDefaultOIDFunction(dwEncodingType uint32, pszFuncName foundati
 // CryptRegisterOIDFunction calls CRYPT32!CryptRegisterOIDFunction.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptregisteroidfunction
 // Minimum OS: windows5.1.2600.
-func CryptRegisterOIDFunction(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszDll string, pszOverrideFuncName foundation.PSTR) bool {
-	_pwszDll := win32.UTF16Ptr(pwszDll)
+func CryptRegisterOIDFunction(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszDll *string, pszOverrideFuncName foundation.PSTR) bool {
+	_pwszDll := win32.UTF16PtrOrNil(pwszDll)
 	r1, _, _ := syscall.SyscallN(procCryptRegisterOIDFunction.Addr(), uintptr(dwEncodingType), uintptr(unsafe.Pointer(pszFuncName)), uintptr(unsafe.Pointer(pszOID)), uintptr(unsafe.Pointer(_pwszDll)), uintptr(unsafe.Pointer(pszOverrideFuncName)))
 	return r1 != 0
 }
@@ -3666,8 +4630,8 @@ func CryptSetHashParam(hHash uintptr, dwParam CRYPT_SET_HASH_PARAM, pbData *byte
 // CryptSetKeyIdentifierProperty calls CRYPT32!CryptSetKeyIdentifierProperty.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptsetkeyidentifierproperty
 // Minimum OS: windows5.1.2600.
-func CryptSetKeyIdentifierProperty(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName string, pvData unsafe.Pointer) error {
-	_pwszComputerName := win32.UTF16Ptr(pwszComputerName)
+func CryptSetKeyIdentifierProperty(pKeyIdentifier *CRYPT_INTEGER_BLOB, dwPropId uint32, dwFlags uint32, pwszComputerName *string, pvData unsafe.Pointer) error {
+	_pwszComputerName := win32.UTF16PtrOrNil(pwszComputerName)
 	r1, _, e1 := syscall.SyscallN(procCryptSetKeyIdentifierProperty.Addr(), uintptr(unsafe.Pointer(pKeyIdentifier)), uintptr(dwPropId), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwszComputerName)), 0, uintptr(unsafe.Pointer(pvData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3689,8 +4653,8 @@ func CryptSetKeyParam(hKey uintptr, dwParam CRYPT_KEY_PARAM_ID, pbData *byte, dw
 // CryptSetOIDFunctionValue calls CRYPT32!CryptSetOIDFunctionValue.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptsetoidfunctionvalue
 // Minimum OS: windows5.1.2600.
-func CryptSetOIDFunctionValue(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszValueName string, dwValueType systemregistry.REG_VALUE_TYPE, pbValueData []byte) bool {
-	_pwszValueName := win32.UTF16Ptr(pwszValueName)
+func CryptSetOIDFunctionValue(dwEncodingType uint32, pszFuncName foundation.PSTR, pszOID foundation.PSTR, pwszValueName *string, dwValueType systemregistry.REG_VALUE_TYPE, pbValueData []byte) bool {
+	_pwszValueName := win32.UTF16PtrOrNil(pwszValueName)
 	var _pbValueData *byte
 	if len(pbValueData) > 0 {
 		_pbValueData = &pbValueData[0]
@@ -3804,8 +4768,8 @@ func CryptSignCertificate(hCryptProvOrNCryptKey HCRYPTPROV_OR_NCRYPT_KEY_HANDLE,
 // CryptSignHash calls ADVAPI32!CryptSignHashW.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptsignhashw
 // Minimum OS: windows5.1.2600.
-func CryptSignHash(hHash uintptr, dwKeySpec uint32, szDescription string, dwFlags uint32, pbSignature *byte, pdwSigLen *uint32) error {
-	_szDescription := win32.UTF16Ptr(szDescription)
+func CryptSignHash(hHash uintptr, dwKeySpec uint32, szDescription *string, dwFlags uint32, pbSignature *byte, pdwSigLen *uint32) error {
+	_szDescription := win32.UTF16PtrOrNil(szDescription)
 	r1, _, e1 := syscall.SyscallN(procCryptSignHash.Addr(), uintptr(hHash), uintptr(dwKeySpec), uintptr(unsafe.Pointer(_szDescription)), uintptr(dwFlags), uintptr(unsafe.Pointer(pbSignature)), uintptr(unsafe.Pointer(pdwSigLen)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3941,8 +4905,8 @@ func CryptUnregisterOIDInfo(pInfo *CRYPT_OID_INFO) bool {
 // CryptUpdateProtectedState calls CRYPT32!CryptUpdateProtectedState.
 // https://learn.microsoft.com/windows/win32/api/dpapi/nf-dpapi-cryptupdateprotectedstate
 // Minimum OS: windows6.0.6000.
-func CryptUpdateProtectedState(pOldSid security.PSID, pwszOldPassword string, dwFlags uint32, pdwSuccessCount *uint32, pdwFailureCount *uint32) error {
-	_pwszOldPassword := win32.UTF16Ptr(pwszOldPassword)
+func CryptUpdateProtectedState(pOldSid security.PSID, pwszOldPassword *string, dwFlags uint32, pdwSuccessCount *uint32, pdwFailureCount *uint32) error {
+	_pwszOldPassword := win32.UTF16PtrOrNil(pwszOldPassword)
 	r1, _, e1 := syscall.SyscallN(procCryptUpdateProtectedState.Addr(), uintptr(pOldSid), uintptr(unsafe.Pointer(_pwszOldPassword)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwSuccessCount)), uintptr(unsafe.Pointer(pdwFailureCount)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4054,12 +5018,12 @@ func CryptVerifyMessageSignatureWithKey(pVerifyPara *CRYPT_KEY_VERIFY_MESSAGE_PA
 // CryptVerifySignature calls ADVAPI32!CryptVerifySignatureW.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptverifysignaturew
 // Minimum OS: windows5.1.2600.
-func CryptVerifySignature(hHash uintptr, pbSignature []byte, hPubKey uintptr, szDescription string, dwFlags uint32) error {
+func CryptVerifySignature(hHash uintptr, pbSignature []byte, hPubKey uintptr, szDescription *string, dwFlags uint32) error {
 	var _pbSignature *byte
 	if len(pbSignature) > 0 {
 		_pbSignature = &pbSignature[0]
 	}
-	_szDescription := win32.UTF16Ptr(szDescription)
+	_szDescription := win32.UTF16PtrOrNil(szDescription)
 	r1, _, e1 := syscall.SyscallN(procCryptVerifySignature.Addr(), uintptr(hHash), uintptr(unsafe.Pointer(_pbSignature)), uintptr(len(pbSignature)), uintptr(hPubKey), uintptr(unsafe.Pointer(_szDescription)), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -4124,10 +5088,10 @@ func CryptXmlClose(hCryptXml unsafe.Pointer) error {
 // CryptXmlCreateReference calls CRYPTXML!CryptXmlCreateReference.
 // https://learn.microsoft.com/windows/win32/api/cryptxml/nf-cryptxml-cryptxmlcreatereference
 // Minimum OS: windows6.1.
-func CryptXmlCreateReference(hCryptXml unsafe.Pointer, dwFlags uint32, wszId string, wszURI string, wszType string, pDigestMethod *CRYPT_XML_ALGORITHM, rgTransform []CRYPT_XML_ALGORITHM, phReference *unsafe.Pointer) error {
-	_wszId := win32.UTF16Ptr(wszId)
-	_wszURI := win32.UTF16Ptr(wszURI)
-	_wszType := win32.UTF16Ptr(wszType)
+func CryptXmlCreateReference(hCryptXml unsafe.Pointer, dwFlags uint32, wszId *string, wszURI *string, wszType *string, pDigestMethod *CRYPT_XML_ALGORITHM, rgTransform []CRYPT_XML_ALGORITHM, phReference *unsafe.Pointer) error {
+	_wszId := win32.UTF16PtrOrNil(wszId)
+	_wszURI := win32.UTF16PtrOrNil(wszURI)
+	_wszType := win32.UTF16PtrOrNil(wszType)
 	var _rgTransform *CRYPT_XML_ALGORITHM
 	if len(rgTransform) > 0 {
 		_rgTransform = &rgTransform[0]
@@ -4239,8 +5203,8 @@ func CryptXmlOpenToDecode(pConfig *CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags CRY
 // CryptXmlOpenToEncode calls CRYPTXML!CryptXmlOpenToEncode.
 // https://learn.microsoft.com/windows/win32/api/cryptxml/nf-cryptxml-cryptxmlopentoencode
 // Minimum OS: windows6.1.
-func CryptXmlOpenToEncode(pConfig *CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags CRYPT_XML_FLAGS, wszId string, rgProperty []CRYPT_XML_PROPERTY, pEncoded *CRYPT_XML_BLOB, phSignature *unsafe.Pointer) error {
-	_wszId := win32.UTF16Ptr(wszId)
+func CryptXmlOpenToEncode(pConfig *CRYPT_XML_TRANSFORM_CHAIN_CONFIG, dwFlags CRYPT_XML_FLAGS, wszId *string, rgProperty []CRYPT_XML_PROPERTY, pEncoded *CRYPT_XML_BLOB, phSignature *unsafe.Pointer) error {
+	_wszId := win32.UTF16PtrOrNil(wszId)
 	var _rgProperty *CRYPT_XML_PROPERTY
 	if len(rgProperty) > 0 {
 		_rgProperty = &rgProperty[0]
@@ -4302,12 +5266,12 @@ func Encrypt(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, fOAEP bool, pInData []byte,
 }
 
 // FindCertsByIssuer calls WINTRUST!FindCertsByIssuer.
-func FindCertsByIssuer(pCertChains *CERT_CHAIN, pcbCertChains *uint32, pcCertChains *uint32, pbEncodedIssuerName []byte, pwszPurpose string, dwKeySpec uint32) error {
+func FindCertsByIssuer(pCertChains *CERT_CHAIN, pcbCertChains *uint32, pcCertChains *uint32, pbEncodedIssuerName []byte, pwszPurpose *string, dwKeySpec uint32) error {
 	var _pbEncodedIssuerName *byte
 	if len(pbEncodedIssuerName) > 0 {
 		_pbEncodedIssuerName = &pbEncodedIssuerName[0]
 	}
-	_pwszPurpose := win32.UTF16Ptr(pwszPurpose)
+	_pwszPurpose := win32.UTF16PtrOrNil(pwszPurpose)
 	r1, _, _ := syscall.SyscallN(procFindCertsByIssuer.Addr(), uintptr(unsafe.Pointer(pCertChains)), uintptr(unsafe.Pointer(pcbCertChains)), uintptr(unsafe.Pointer(pcCertChains)), uintptr(unsafe.Pointer(_pbEncodedIssuerName)), uintptr(len(pbEncodedIssuerName)), uintptr(unsafe.Pointer(_pwszPurpose)), uintptr(dwKeySpec))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4491,9 +5455,9 @@ func NCryptCreateClaim(hSubjectKey NCRYPT_KEY_HANDLE, hAuthorityKey NCRYPT_KEY_H
 // NCryptCreatePersistedKey calls ncrypt!NCryptCreatePersistedKey.
 // https://learn.microsoft.com/windows/win32/api/ncrypt/nf-ncrypt-ncryptcreatepersistedkey
 // Minimum OS: windows6.0.6000.
-func NCryptCreatePersistedKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, pszAlgId string, pszKeyName string, dwLegacyKeySpec CERT_KEY_SPEC, dwFlags NCRYPT_FLAGS) error {
+func NCryptCreatePersistedKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, pszAlgId string, pszKeyName *string, dwLegacyKeySpec CERT_KEY_SPEC, dwFlags NCRYPT_FLAGS) error {
 	_pszAlgId := win32.UTF16Ptr(pszAlgId)
-	_pszKeyName := win32.UTF16Ptr(pszKeyName)
+	_pszKeyName := win32.UTF16PtrOrNil(pszKeyName)
 	r1, _, _ := syscall.SyscallN(procNCryptCreatePersistedKey.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(phKey)), uintptr(unsafe.Pointer(_pszAlgId)), uintptr(unsafe.Pointer(_pszKeyName)), uintptr(dwLegacyKeySpec), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4599,8 +5563,8 @@ func NCryptEnumAlgorithms(hProvider NCRYPT_PROV_HANDLE, dwAlgOperations NCRYPT_O
 // NCryptEnumKeys calls ncrypt!NCryptEnumKeys.
 // https://learn.microsoft.com/windows/win32/api/ncrypt/nf-ncrypt-ncryptenumkeys
 // Minimum OS: windows6.0.6000.
-func NCryptEnumKeys(hProvider NCRYPT_PROV_HANDLE, pszScope string, ppKeyName **NCryptKeyName, ppEnumState *unsafe.Pointer, dwFlags NCRYPT_FLAGS) error {
-	_pszScope := win32.UTF16Ptr(pszScope)
+func NCryptEnumKeys(hProvider NCRYPT_PROV_HANDLE, pszScope *string, ppKeyName **NCryptKeyName, ppEnumState *unsafe.Pointer, dwFlags NCRYPT_FLAGS) error {
+	_pszScope := win32.UTF16PtrOrNil(pszScope)
 	r1, _, _ := syscall.SyscallN(procNCryptEnumKeys.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(_pszScope)), uintptr(unsafe.Pointer(ppKeyName)), uintptr(unsafe.Pointer(ppEnumState)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4733,8 +5697,8 @@ func NCryptOpenKey(hProvider NCRYPT_PROV_HANDLE, phKey *NCRYPT_KEY_HANDLE, pszKe
 // NCryptOpenStorageProvider calls ncrypt!NCryptOpenStorageProvider.
 // https://learn.microsoft.com/windows/win32/api/ncrypt/nf-ncrypt-ncryptopenstorageprovider
 // Minimum OS: windows6.0.6000.
-func NCryptOpenStorageProvider(phProvider *NCRYPT_PROV_HANDLE, pszProviderName string, dwFlags uint32) error {
-	_pszProviderName := win32.UTF16Ptr(pszProviderName)
+func NCryptOpenStorageProvider(phProvider *NCRYPT_PROV_HANDLE, pszProviderName *string, dwFlags uint32) error {
+	_pszProviderName := win32.UTF16PtrOrNil(pszProviderName)
 	r1, _, _ := syscall.SyscallN(procNCryptOpenStorageProvider.Addr(), uintptr(unsafe.Pointer(phProvider)), uintptr(unsafe.Pointer(_pszProviderName)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4763,9 +5727,9 @@ func NCryptQueryProtectionDescriptorName(pwszName string, pwszDescriptorString f
 // NCryptRegisterProtectionDescriptorName calls ncrypt!NCryptRegisterProtectionDescriptorName.
 // https://learn.microsoft.com/windows/win32/api/ncryptprotect/nf-ncryptprotect-ncryptregisterprotectiondescriptorname
 // Minimum OS: windows8.0.
-func NCryptRegisterProtectionDescriptorName(pwszName string, pwszDescriptorString string, dwFlags uint32) error {
+func NCryptRegisterProtectionDescriptorName(pwszName string, pwszDescriptorString *string, dwFlags uint32) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
-	_pwszDescriptorString := win32.UTF16Ptr(pwszDescriptorString)
+	_pwszDescriptorString := win32.UTF16PtrOrNil(pwszDescriptorString)
 	r1, _, _ := syscall.SyscallN(procNCryptRegisterProtectionDescriptorName.Addr(), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszDescriptorString)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4991,32 +5955,32 @@ func SignerFreeSignerContext(pSignerContext *SIGNER_CONTEXT) error {
 
 // SignerSign calls Mssign32!SignerSign.
 // https://learn.microsoft.com/windows/win32/SecCrypto/signersign
-func SignerSign(pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer) error {
-	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
+func SignerSign(pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp *string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer) error {
+	_pwszHttpTimeStamp := win32.UTF16PtrOrNil(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSign.Addr(), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSignEx calls Mssign32!SignerSignEx.
 // https://learn.microsoft.com/windows/win32/SecCrypto/signersignex
-func SignerSignEx(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT) error {
-	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
+func SignerSignEx(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, pwszHttpTimeStamp *string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT) error {
+	_pwszHttpTimeStamp := win32.UTF16PtrOrNil(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSignEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSignEx2 calls Mssign32!SignerSignEx2.
 // https://learn.microsoft.com/windows/win32/SecCrypto/signersignex2
-func SignerSignEx2(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA) error {
-	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
+func SignerSignEx2(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp *string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA) error {
+	_pwszHttpTimeStamp := win32.UTF16PtrOrNil(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSignEx2.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(dwTimestampFlags), uintptr(unsafe.Pointer(pszTimestampAlgorithmOid)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)), uintptr(unsafe.Pointer(pCryptoPolicy)), 0)
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SignerSignEx3 calls Mssign32!SignerSignEx3.
 // https://learn.microsoft.com/windows/win32/SecCrypto/signersignex3
-func SignerSignEx3(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA, pDigestSignInfo *SIGNER_DIGEST_SIGN_INFO) error {
-	_pwszHttpTimeStamp := win32.UTF16Ptr(pwszHttpTimeStamp)
+func SignerSignEx3(dwFlags SIGNER_SIGN_FLAGS, pSubjectInfo *SIGNER_SUBJECT_INFO, pSignerCert *SIGNER_CERT, pSignatureInfo *SIGNER_SIGNATURE_INFO, pProviderInfo *SIGNER_PROVIDER_INFO, dwTimestampFlags SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid foundation.PSTR, pwszHttpTimeStamp *string, psRequest *CRYPT_ATTRIBUTES, pSipData unsafe.Pointer, ppSignerContext **SIGNER_CONTEXT, pCryptoPolicy *CERT_STRONG_SIGN_PARA, pDigestSignInfo *SIGNER_DIGEST_SIGN_INFO) error {
+	_pwszHttpTimeStamp := win32.UTF16PtrOrNil(pwszHttpTimeStamp)
 	r1, _, _ := syscall.SyscallN(procSignerSignEx3.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pSubjectInfo)), uintptr(unsafe.Pointer(pSignerCert)), uintptr(unsafe.Pointer(pSignatureInfo)), uintptr(unsafe.Pointer(pProviderInfo)), uintptr(dwTimestampFlags), uintptr(unsafe.Pointer(pszTimestampAlgorithmOid)), uintptr(unsafe.Pointer(_pwszHttpTimeStamp)), uintptr(unsafe.Pointer(psRequest)), uintptr(unsafe.Pointer(pSipData)), uintptr(unsafe.Pointer(ppSignerContext)), uintptr(unsafe.Pointer(pCryptoPolicy)), uintptr(unsafe.Pointer(pDigestSignInfo)), 0)
 	return win32.ErrIfFailed(int32(r1))
 }

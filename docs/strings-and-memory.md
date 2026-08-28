@@ -12,7 +12,19 @@ Win32 wide strings are `PWSTR`/`PCWSTR` — pointers to NUL-terminated UTF-16.
 `PWSTR` parameter into a Go `string` and convert it for you.
 
 ```go
-event, _ := threading.CreateEvent(nil, true, false, "my-event") // Go string in
+opened, _ := threading.OpenEvent(access, false, "my-event") // Go string in
+```
+
+**Optional input strings** — parameters the metadata marks `[Optional]`,
+where the API distinguishes NULL from an empty string (`CreateEvent`'s name,
+`NetUser*`'s server name, `CreateProcess`'s application name and current
+directory, …) — are `*string`: `nil` passes NULL, `win32.Str("x")` (or
+`&name`) passes the string. A Go `""` can never silently become `L""` where
+NULL was meant.
+
+```go
+event, _ := threading.CreateEvent(nil, true, false, nil)                  // unnamed: NULL
+named, _ := threading.CreateEvent(nil, true, false, win32.Str("my-event")) // L"my-event"
 ```
 
 **Output/buffer strings** stay `PWSTR` (they're memory you provide), and you
@@ -29,7 +41,9 @@ name := win32.UTF16ToString(&buf[0])            // back to a Go string
 ```
 
 Runtime helpers: `win32.UTF16Ptr(s string) *uint16` (Go → UTF-16, for filling
-a struct field), and `win32.UTF16ToString(*uint16) string` (UTF-16 → Go).
+a struct field; it panics on an embedded NUL), `win32.UTF16PtrOrNil(*string)`
+(nil → NULL), `win32.Str(s) *string`, and `win32.UTF16ToString(*uint16) string`
+(UTF-16 → Go).
 
 ## Structs
 
@@ -68,7 +82,7 @@ function. The bindings expose those frees, so `defer` them:
 
 ```go
 var buf *byte
-netmanagement.NetUserGetInfo("", user, 1, &buf)
+netmanagement.NetUserGetInfo(nil, user, 1, &buf) // nil server name: the local machine
 defer netmanagement.NetApiBufferFree(unsafe.Pointer(buf)) // free what the API gave you
 info := (*netmanagement.USER_INFO_1)(unsafe.Pointer(buf))
 ```
@@ -76,20 +90,26 @@ info := (*netmanagement.USER_INFO_1)(unsafe.Pointer(buf))
 Common frees: `NetApiBufferFree`, `LocalFree`, `CoTaskMemFree`,
 `SysFreeString`.
 
-## Handles and RAII
+## Handles and closers
 
 Handles are opaque `uintptr`-backed types (`HANDLE`, `HKEY`, …). Where the
 metadata records how a handle is closed (`[RAIIFree]`), the bindings
-generate a `Close<Handle>(h) error` helper — `defer` it:
+generate a `Close<Handle>(h) error` helper — `defer` it. Go has no
+destructors, so this is a plain function, not RAII: nothing closes a handle
+you forget to close.
 
 ```go
-h, err := threading.CreateEvent(nil, true, false, "")
+h, err := threading.CreateEvent(nil, true, false, nil)
 if err != nil { return err }
 defer foundation.CloseHANDLE(h) // → CloseHandle, normalized to error
 ```
 
-`Close<Handle>` returns an `error` so a failed close is observable; ignore it
-with `_ =` if you don't care.
+Closing the zero value or the handle's `[InvalidHandleValue]` sentinel
+(`INVALID_HANDLE_VALUE` for `HANDLE`) is a no-op that returns `nil`, so a
+`defer` on an error path is safe. Closing a live handle twice is still an
+error. `Close<Handle>` returns an `error` where the free function reports
+one (`CloseHandle`, `RegCloseKey`, …); helpers over `void` frees such as
+`CloseThreadpool` always return `nil`.
 
 ## `unsafe` is expected here
 

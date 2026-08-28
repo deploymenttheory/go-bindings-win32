@@ -4,20 +4,32 @@
 
 package hostcomputesystem
 
-// CloseHCS_OPERATION releases a HCS_OPERATION handle by calling HcsCloseOperation.
+// CloseHCS_OPERATION releases a HCS_OPERATION handle by calling HcsCloseOperation. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHCS_OPERATION(h HCS_OPERATION) error {
+	if h == ^HCS_OPERATION(0) || h == 0 {
+		return nil
+	}
 	HcsCloseOperation(HCS_OPERATION(h))
 	return nil
 }
 
-// CloseHCS_PROCESS releases a HCS_PROCESS handle by calling HcsCloseProcess.
+// CloseHCS_PROCESS releases a HCS_PROCESS handle by calling HcsCloseProcess. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHCS_PROCESS(h HCS_PROCESS) error {
+	if h == ^HCS_PROCESS(0) || h == 0 {
+		return nil
+	}
 	HcsCloseProcess(HCS_PROCESS(h))
 	return nil
 }
 
-// CloseHCS_SYSTEM releases a HCS_SYSTEM handle by calling HcsCloseComputeSystem.
+// CloseHCS_SYSTEM releases a HCS_SYSTEM handle by calling HcsCloseComputeSystem. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHCS_SYSTEM(h HCS_SYSTEM) error {
+	if h == ^HCS_SYSTEM(0) || h == 0 {
+		return nil
+	}
 	HcsCloseComputeSystem(HCS_SYSTEM(h))
 	return nil
 }

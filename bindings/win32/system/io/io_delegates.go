@@ -4,10 +4,10 @@
 
 package io
 
-// LPOVERLAPPED_COMPLETION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *OVERLAPPED).
+// LPOVERLAPPED_COMPLETION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *OVERLAPPED) uintptr.
 type LPOVERLAPPED_COMPLETION_ROUTINE uintptr
 
-// PIO_APC_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *IO_STATUS_BLOCK, uint32).
+// PIO_APC_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *IO_STATUS_BLOCK, uint32) uintptr.
 type PIO_APC_ROUTINE uintptr

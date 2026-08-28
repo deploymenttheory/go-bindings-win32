@@ -4,414 +4,507 @@
 
 package winsock
 
-// LPBLOCKINGCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) foundation.BOOL.
+// LPBLOCKINGCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPBLOCKINGCALLBACK uintptr
 
-// LPCONDITIONPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSABUF, *WSABUF, *QOS, *QOS, *WSABUF, *WSABUF, *uint32, uintptr) int32.
+// LPCONDITIONPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSABUF, *WSABUF, *QOS, *QOS, *WSABUF, *WSABUF, *uint32, uintptr) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPCONDITIONPROC uintptr
 
-// LPFN_ACCEPTEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, SOCKET, unsafe.Pointer, uint32, uint32, uint32, *uint32, *systemio.OVERLAPPED) foundation.BOOL.
+// LPFN_ACCEPTEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, SOCKET, unsafe.Pointer, uint32, uint32, uint32, *uint32, *systemio.OVERLAPPED) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_ACCEPTEX uintptr
 
-// LPFN_CONNECTEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *SOCKADDR, int32, unsafe.Pointer, uint32, *uint32, *systemio.OVERLAPPED) foundation.BOOL.
+// LPFN_CONNECTEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *SOCKADDR, int32, unsafe.Pointer, uint32, *uint32, *systemio.OVERLAPPED) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_CONNECTEX uintptr
 
-// LPFN_DISCONNECTEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *systemio.OVERLAPPED, uint32, uint32) foundation.BOOL.
+// LPFN_DISCONNECTEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *systemio.OVERLAPPED, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_DISCONNECTEX uintptr
 
-// LPFN_GETACCEPTEXSOCKADDRS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32, uint32, **SOCKADDR, *int32, **SOCKADDR, *int32).
+// LPFN_GETACCEPTEXSOCKADDRS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32, uint32, **SOCKADDR, *int32, **SOCKADDR, *int32) uintptr.
 type LPFN_GETACCEPTEXSOCKADDRS uintptr
 
-// LPFN_NSPAPI is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uint32.
+// LPFN_NSPAPI is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFN_NSPAPI uintptr
 
-// LPFN_RIOCLOSECOMPLETIONQUEUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_CQ).
+// LPFN_RIOCLOSECOMPLETIONQUEUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_CQ) uintptr.
 type LPFN_RIOCLOSECOMPLETIONQUEUE uintptr
 
-// LPFN_RIOCREATECOMPLETIONQUEUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *RIO_NOTIFICATION_COMPLETION) RIO_CQ.
+// LPFN_RIOCREATECOMPLETIONQUEUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *RIO_NOTIFICATION_COMPLETION) uintptr (the native return type is
+// RIO_CQ; NewCallback requires a uintptr-sized result).
 type LPFN_RIOCREATECOMPLETIONQUEUE uintptr
 
-// LPFN_RIOCREATEREQUESTQUEUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, uint32, uint32, uint32, uint32, RIO_CQ, RIO_CQ, unsafe.Pointer) RIO_RQ.
+// LPFN_RIOCREATEREQUESTQUEUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, uint32, uint32, uint32, uint32, RIO_CQ, RIO_CQ, unsafe.Pointer) uintptr (the native return type is
+// RIO_RQ; NewCallback requires a uintptr-sized result).
 type LPFN_RIOCREATEREQUESTQUEUE uintptr
 
-// LPFN_RIODEQUEUECOMPLETION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_CQ, *RIORESULT, uint32) uint32.
+// LPFN_RIODEQUEUECOMPLETION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_CQ, *RIORESULT, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFN_RIODEQUEUECOMPLETION uintptr
 
-// LPFN_RIODEREGISTERBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_BUFFERID).
+// LPFN_RIODEREGISTERBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_BUFFERID) uintptr.
 type LPFN_RIODEREGISTERBUFFER uintptr
 
-// LPFN_RIONOTIFY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_CQ) int32.
+// LPFN_RIONOTIFY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_CQ) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPFN_RIONOTIFY uintptr
 
-// LPFN_RIORECEIVE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_RQ, *RIO_BUF, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// LPFN_RIORECEIVE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_RQ, *RIO_BUF, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_RIORECEIVE uintptr
 
-// LPFN_RIORECEIVEEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_RQ, *RIO_BUF, uint32, *RIO_BUF, *RIO_BUF, *RIO_BUF, *RIO_BUF, uint32, unsafe.Pointer) int32.
+// LPFN_RIORECEIVEEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_RQ, *RIO_BUF, uint32, *RIO_BUF, *RIO_BUF, *RIO_BUF, *RIO_BUF, uint32, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPFN_RIORECEIVEEX uintptr
 
-// LPFN_RIOREGISTERBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32) RIO_BUFFERID.
+// LPFN_RIOREGISTERBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32) uintptr (the native return type is
+// RIO_BUFFERID; NewCallback requires a uintptr-sized result).
 type LPFN_RIOREGISTERBUFFER uintptr
 
-// LPFN_RIORESIZECOMPLETIONQUEUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_CQ, uint32) foundation.BOOL.
+// LPFN_RIORESIZECOMPLETIONQUEUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_CQ, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_RIORESIZECOMPLETIONQUEUE uintptr
 
-// LPFN_RIORESIZEREQUESTQUEUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_RQ, uint32, uint32) foundation.BOOL.
+// LPFN_RIORESIZEREQUESTQUEUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_RQ, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_RIORESIZEREQUESTQUEUE uintptr
 
-// LPFN_RIOSEND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_RQ, *RIO_BUF, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// LPFN_RIOSEND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_RQ, *RIO_BUF, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_RIOSEND uintptr
 
-// LPFN_RIOSENDEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RIO_RQ, *RIO_BUF, uint32, *RIO_BUF, *RIO_BUF, *RIO_BUF, *RIO_BUF, uint32, unsafe.Pointer) foundation.BOOL.
+// LPFN_RIOSENDEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RIO_RQ, *RIO_BUF, uint32, *RIO_BUF, *RIO_BUF, *RIO_BUF, *RIO_BUF, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_RIOSENDEX uintptr
 
-// LPFN_TRANSMITFILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, foundation.HANDLE, uint32, uint32, *systemio.OVERLAPPED, *TRANSMIT_FILE_BUFFERS, uint32) foundation.BOOL.
+// LPFN_TRANSMITFILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, foundation.HANDLE, uint32, uint32, *systemio.OVERLAPPED, *TRANSMIT_FILE_BUFFERS, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_TRANSMITFILE uintptr
 
-// LPFN_TRANSMITPACKETS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *TRANSMIT_PACKETS_ELEMENT, uint32, uint32, *systemio.OVERLAPPED, uint32) foundation.BOOL.
+// LPFN_TRANSMITPACKETS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *TRANSMIT_PACKETS_ELEMENT, uint32, uint32, *systemio.OVERLAPPED, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFN_TRANSMITPACKETS uintptr
 
-// LPFN_WSAPOLL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSAPOLLFD, uint32, int32) int32.
+// LPFN_WSAPOLL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSAPOLLFD, uint32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPFN_WSAPOLL uintptr
 
-// LPFN_WSARECVMSG is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *WSAMSG, *uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE) int32.
+// LPFN_WSARECVMSG is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *WSAMSG, *uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPFN_WSARECVMSG uintptr
 
-// LPFN_WSASENDMSG is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *WSAMSG, uint32, *uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE) int32.
+// LPFN_WSASENDMSG is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *WSAMSG, uint32, *uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPFN_WSASENDMSG uintptr
 
-// LPLOOKUPSERVICE_COMPLETION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *systemio.OVERLAPPED).
+// LPLOOKUPSERVICE_COMPLETION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *systemio.OVERLAPPED) uintptr.
 type LPLOOKUPSERVICE_COMPLETION_ROUTINE uintptr
 
-// LPNSPCLEANUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID) int32.
+// LPNSPCLEANUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPCLEANUP uintptr
 
-// LPNSPGETSERVICECLASSINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *uint32, *WSASERVICECLASSINFOW) int32.
+// LPNSPGETSERVICECLASSINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *uint32, *WSASERVICECLASSINFOW) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPGETSERVICECLASSINFO uintptr
 
-// LPNSPINSTALLSERVICECLASS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *WSASERVICECLASSINFOW) int32.
+// LPNSPINSTALLSERVICECLASS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *WSASERVICECLASSINFOW) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPINSTALLSERVICECLASS uintptr
 
-// LPNSPIOCTL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, *WSACOMPLETION, *WSATHREADID) int32.
+// LPNSPIOCTL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, *WSACOMPLETION, *WSATHREADID) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPIOCTL uintptr
 
-// LPNSPLOOKUPSERVICEBEGIN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *WSAQUERYSETW, *WSASERVICECLASSINFOW, uint32, *foundation.HANDLE) int32.
+// LPNSPLOOKUPSERVICEBEGIN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *WSAQUERYSETW, *WSASERVICECLASSINFOW, uint32, *foundation.HANDLE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPLOOKUPSERVICEBEGIN uintptr
 
-// LPNSPLOOKUPSERVICEEND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) int32.
+// LPNSPLOOKUPSERVICEEND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPLOOKUPSERVICEEND uintptr
 
-// LPNSPLOOKUPSERVICENEXT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, *uint32, *WSAQUERYSETW) int32.
+// LPNSPLOOKUPSERVICENEXT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, *uint32, *WSAQUERYSETW) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPLOOKUPSERVICENEXT uintptr
 
-// LPNSPREMOVESERVICECLASS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *win32.GUID) int32.
+// LPNSPREMOVESERVICECLASS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *win32.GUID) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPREMOVESERVICECLASS uintptr
 
-// LPNSPSETSERVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *WSASERVICECLASSINFOW, *WSAQUERYSETW, WSAESETSERVICEOP, uint32) int32.
+// LPNSPSETSERVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *WSASERVICECLASSINFOW, *WSAQUERYSETW, WSAESETSERVICEOP, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPSETSERVICE uintptr
 
-// LPNSPSTARTUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *NSP_ROUTINE) int32.
+// LPNSPSTARTUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *NSP_ROUTINE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPSTARTUP uintptr
 
-// LPNSPV2CLEANUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, unsafe.Pointer) int32.
+// LPNSPV2CLEANUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPV2CLEANUP uintptr
 
-// LPNSPV2CLIENTSESSIONRUNDOWN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, unsafe.Pointer).
+// LPNSPV2CLIENTSESSIONRUNDOWN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, unsafe.Pointer) uintptr.
 type LPNSPV2CLIENTSESSIONRUNDOWN uintptr
 
-// LPNSPV2LOOKUPSERVICEBEGIN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *WSAQUERYSET2W, uint32, unsafe.Pointer, *foundation.HANDLE) int32.
+// LPNSPV2LOOKUPSERVICEBEGIN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *WSAQUERYSET2W, uint32, unsafe.Pointer, *foundation.HANDLE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPV2LOOKUPSERVICEBEGIN uintptr
 
-// LPNSPV2LOOKUPSERVICEEND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) int32.
+// LPNSPV2LOOKUPSERVICEEND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPV2LOOKUPSERVICEEND uintptr
 
-// LPNSPV2LOOKUPSERVICENEXTEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, *uint32, *WSAQUERYSET2W).
+// LPNSPV2LOOKUPSERVICENEXTEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, *uint32, *WSAQUERYSET2W) uintptr.
 type LPNSPV2LOOKUPSERVICENEXTEX uintptr
 
-// LPNSPV2SETSERVICEEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *win32.GUID, *WSAQUERYSET2W, WSAESETSERVICEOP, uint32, unsafe.Pointer).
+// LPNSPV2SETSERVICEEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *win32.GUID, *WSAQUERYSET2W, WSAESETSERVICEOP, uint32, unsafe.Pointer) uintptr.
 type LPNSPV2SETSERVICEEX uintptr
 
-// LPNSPV2STARTUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *unsafe.Pointer) int32.
+// LPNSPV2STARTUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNSPV2STARTUP uintptr
 
-// LPSERVICE_CALLBACK_PROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.LPARAM, foundation.HANDLE).
+// LPSERVICE_CALLBACK_PROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.LPARAM, foundation.HANDLE) uintptr.
 type LPSERVICE_CALLBACK_PROC uintptr
 
-// LPWPUCLOSEEVENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(WSAEVENT, *int32) foundation.BOOL.
+// LPWPUCLOSEEVENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(WSAEVENT, *int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPWPUCLOSEEVENT uintptr
 
-// LPWPUCLOSESOCKETHANDLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *int32) int32.
+// LPWPUCLOSESOCKETHANDLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWPUCLOSESOCKETHANDLE uintptr
 
-// LPWPUCLOSETHREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSATHREADID, *int32) int32.
+// LPWPUCLOSETHREAD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSATHREADID, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWPUCLOSETHREAD uintptr
 
-// LPWPUCOMPLETEOVERLAPPEDREQUEST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *systemio.OVERLAPPED, uint32, uint32, *int32) int32.
+// LPWPUCOMPLETEOVERLAPPEDREQUEST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *systemio.OVERLAPPED, uint32, uint32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWPUCOMPLETEOVERLAPPEDREQUEST uintptr
 
-// LPWPUCREATEEVENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int32) WSAEVENT.
+// LPWPUCREATEEVENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int32) uintptr (the native return type is
+// WSAEVENT; NewCallback requires a uintptr-sized result).
 type LPWPUCREATEEVENT uintptr
 
-// LPWPUCREATESOCKETHANDLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uintptr, *int32) SOCKET.
+// LPWPUCREATESOCKETHANDLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uintptr, *int32) uintptr (the native return type is
+// SOCKET; NewCallback requires a uintptr-sized result).
 type LPWPUCREATESOCKETHANDLE uintptr
 
-// LPWPUFDISSET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *FD_SET) int32.
+// LPWPUFDISSET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *FD_SET) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWPUFDISSET uintptr
 
-// LPWPUGETPROVIDERPATH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PWSTR, *int32, *int32) int32.
+// LPWPUGETPROVIDERPATH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PWSTR, *int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWPUGETPROVIDERPATH uintptr
 
-// LPWPUMODIFYIFSHANDLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, SOCKET, *int32) SOCKET.
+// LPWPUMODIFYIFSHANDLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, SOCKET, *int32) uintptr (the native return type is
+// SOCKET; NewCallback requires a uintptr-sized result).
 type LPWPUMODIFYIFSHANDLE uintptr
 
-// LPWPUOPENCURRENTTHREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSATHREADID, *int32) int32.
+// LPWPUOPENCURRENTTHREAD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSATHREADID, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWPUOPENCURRENTTHREAD uintptr
 
-// LPWPUPOSTMESSAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) foundation.BOOL.
+// LPWPUPOSTMESSAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPWPUPOSTMESSAGE uintptr
 
-// LPWPUQUERYBLOCKINGCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *LPBLOCKINGCALLBACK, *uintptr, *int32) int32.
+// LPWPUQUERYBLOCKINGCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *LPBLOCKINGCALLBACK, *uintptr, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWPUQUERYBLOCKINGCALLBACK uintptr
 
-// LPWPUQUERYSOCKETHANDLECONTEXT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *uintptr, *int32) int32.
+// LPWPUQUERYSOCKETHANDLECONTEXT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *uintptr, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWPUQUERYSOCKETHANDLECONTEXT uintptr
 
-// LPWPUQUEUEAPC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WSATHREADID, LPWSAUSERAPC, uintptr, *int32) int32.
+// LPWPUQUEUEAPC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WSATHREADID, LPWSAUSERAPC, uintptr, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWPUQUEUEAPC uintptr
 
-// LPWPURESETEVENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(WSAEVENT, *int32) foundation.BOOL.
+// LPWPURESETEVENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(WSAEVENT, *int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPWPURESETEVENT uintptr
 
-// LPWPUSETEVENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(WSAEVENT, *int32) foundation.BOOL.
+// LPWPUSETEVENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(WSAEVENT, *int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPWPUSETEVENT uintptr
 
-// LPWSAOVERLAPPED_COMPLETION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *systemio.OVERLAPPED, uint32).
+// LPWSAOVERLAPPED_COMPLETION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *systemio.OVERLAPPED, uint32) uintptr.
 type LPWSAOVERLAPPED_COMPLETION_ROUTINE uintptr
 
-// LPWSAUSERAPC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// LPWSAUSERAPC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr.
 type LPWSAUSERAPC uintptr
 
-// LPWSCDEINSTALLPROVIDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *int32) int32.
+// LPWSCDEINSTALLPROVIDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCDEINSTALLPROVIDER uintptr
 
-// LPWSCENABLENSPROVIDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.BOOL) int32.
+// LPWSCENABLENSPROVIDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.BOOL) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCENABLENSPROVIDER uintptr
 
-// LPWSCENUMPROTOCOLS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int32, *WSAPROTOCOL_INFOW, *uint32, *int32) int32.
+// LPWSCENUMPROTOCOLS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int32, *WSAPROTOCOL_INFOW, *uint32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCENUMPROTOCOLS uintptr
 
-// LPWSCGETPROVIDERPATH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PWSTR, *int32, *int32) int32.
+// LPWSCGETPROVIDERPATH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PWSTR, *int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCGETPROVIDERPATH uintptr
 
-// LPWSCINSTALLNAMESPACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, uint32, *win32.GUID) int32.
+// LPWSCINSTALLNAMESPACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, uint32, *win32.GUID) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCINSTALLNAMESPACE uintptr
 
-// LPWSCINSTALLPROVIDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PWSTR, *WSAPROTOCOL_INFOW, uint32, *int32) int32.
+// LPWSCINSTALLPROVIDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PWSTR, *WSAPROTOCOL_INFOW, uint32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCINSTALLPROVIDER uintptr
 
-// LPWSCUNINSTALLNAMESPACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID) int32.
+// LPWSCUNINSTALLNAMESPACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCUNINSTALLNAMESPACE uintptr
 
-// LPWSCUPDATEPROVIDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PWSTR, *WSAPROTOCOL_INFOW, uint32, *int32) int32.
+// LPWSCUPDATEPROVIDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PWSTR, *WSAPROTOCOL_INFOW, uint32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCUPDATEPROVIDER uintptr
 
-// LPWSCWRITENAMESPACEORDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, uint32) int32.
+// LPWSCWRITENAMESPACEORDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCWRITENAMESPACEORDER uintptr
 
-// LPWSCWRITEPROVIDERORDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, uint32) int32.
+// LPWSCWRITEPROVIDERORDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSCWRITEPROVIDERORDER uintptr
 
-// LPWSPACCEPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *SOCKADDR, *int32, LPCONDITIONPROC, uintptr, *int32) SOCKET.
+// LPWSPACCEPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *SOCKADDR, *int32, LPCONDITIONPROC, uintptr, *int32) uintptr (the native return type is
+// SOCKET; NewCallback requires a uintptr-sized result).
 type LPWSPACCEPT uintptr
 
-// LPWSPADDRESSTOSTRING is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SOCKADDR, uint32, *WSAPROTOCOL_INFOW, foundation.PWSTR, *uint32, *int32) int32.
+// LPWSPADDRESSTOSTRING is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SOCKADDR, uint32, *WSAPROTOCOL_INFOW, foundation.PWSTR, *uint32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPADDRESSTOSTRING uintptr
 
-// LPWSPASYNCSELECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, foundation.HWND, uint32, int32, *int32) int32.
+// LPWSPASYNCSELECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, foundation.HWND, uint32, int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPASYNCSELECT uintptr
 
-// LPWSPBIND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *SOCKADDR, int32, *int32) int32.
+// LPWSPBIND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *SOCKADDR, int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPBIND uintptr
 
-// LPWSPCANCELBLOCKINGCALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int32) int32.
+// LPWSPCANCELBLOCKINGCALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPCANCELBLOCKINGCALL uintptr
 
-// LPWSPCLEANUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int32) int32.
+// LPWSPCLEANUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPCLEANUP uintptr
 
-// LPWSPCLOSESOCKET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *int32) int32.
+// LPWSPCLOSESOCKET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPCLOSESOCKET uintptr
 
-// LPWSPCONNECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *SOCKADDR, int32, *WSABUF, *WSABUF, *QOS, *QOS, *int32) int32.
+// LPWSPCONNECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *SOCKADDR, int32, *WSABUF, *WSABUF, *QOS, *QOS, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPCONNECT uintptr
 
-// LPWSPDUPLICATESOCKET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, uint32, *WSAPROTOCOL_INFOW, *int32) int32.
+// LPWSPDUPLICATESOCKET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, uint32, *WSAPROTOCOL_INFOW, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPDUPLICATESOCKET uintptr
 
-// LPWSPENUMNETWORKEVENTS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, foundation.HANDLE, *WSANETWORKEVENTS, *int32) int32.
+// LPWSPENUMNETWORKEVENTS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, foundation.HANDLE, *WSANETWORKEVENTS, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPENUMNETWORKEVENTS uintptr
 
-// LPWSPEVENTSELECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, WSAEVENT, int32, *int32) int32.
+// LPWSPEVENTSELECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, WSAEVENT, int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPEVENTSELECT uintptr
 
-// LPWSPGETOVERLAPPEDRESULT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *systemio.OVERLAPPED, *uint32, foundation.BOOL, *uint32, *int32) foundation.BOOL.
+// LPWSPGETOVERLAPPEDRESULT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *systemio.OVERLAPPED, *uint32, foundation.BOOL, *uint32, *int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPWSPGETOVERLAPPEDRESULT uintptr
 
-// LPWSPGETPEERNAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *SOCKADDR, *int32, *int32) int32.
+// LPWSPGETPEERNAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *SOCKADDR, *int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPGETPEERNAME uintptr
 
-// LPWSPGETQOSBYNAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *WSABUF, *QOS, *int32) foundation.BOOL.
+// LPWSPGETQOSBYNAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *WSABUF, *QOS, *int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPWSPGETQOSBYNAME uintptr
 
-// LPWSPGETSOCKNAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *SOCKADDR, *int32, *int32) int32.
+// LPWSPGETSOCKNAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *SOCKADDR, *int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPGETSOCKNAME uintptr
 
-// LPWSPGETSOCKOPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, int32, int32, foundation.PSTR, *int32, *int32) int32.
+// LPWSPGETSOCKOPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, int32, int32, foundation.PSTR, *int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPGETSOCKOPT uintptr
 
-// LPWSPIOCTL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) int32.
+// LPWSPIOCTL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPIOCTL uintptr
 
-// LPWSPJOINLEAF is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *SOCKADDR, int32, *WSABUF, *WSABUF, *QOS, *QOS, uint32, *int32) SOCKET.
+// LPWSPJOINLEAF is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *SOCKADDR, int32, *WSABUF, *WSABUF, *QOS, *QOS, uint32, *int32) uintptr (the native return type is
+// SOCKET; NewCallback requires a uintptr-sized result).
 type LPWSPJOINLEAF uintptr
 
-// LPWSPLISTEN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, int32, *int32) int32.
+// LPWSPLISTEN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPLISTEN uintptr
 
-// LPWSPRECV is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *WSABUF, uint32, *uint32, *uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) int32.
+// LPWSPRECV is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *WSABUF, uint32, *uint32, *uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPRECV uintptr
 
-// LPWSPRECVDISCONNECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *WSABUF, *int32) int32.
+// LPWSPRECVDISCONNECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *WSABUF, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPRECVDISCONNECT uintptr
 
-// LPWSPRECVFROM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *WSABUF, uint32, *uint32, *uint32, *SOCKADDR, *int32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) int32.
+// LPWSPRECVFROM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *WSABUF, uint32, *uint32, *uint32, *SOCKADDR, *int32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPRECVFROM uintptr
 
-// LPWSPSELECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, *FD_SET, *FD_SET, *FD_SET, *TIMEVAL, *int32) int32.
+// LPWSPSELECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, *FD_SET, *FD_SET, *FD_SET, *TIMEVAL, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPSELECT uintptr
 
-// LPWSPSEND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *WSABUF, uint32, *uint32, uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) int32.
+// LPWSPSEND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *WSABUF, uint32, *uint32, uint32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPSEND uintptr
 
-// LPWSPSENDDISCONNECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *WSABUF, *int32) int32.
+// LPWSPSENDDISCONNECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *WSABUF, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPSENDDISCONNECT uintptr
 
-// LPWSPSENDTO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, *WSABUF, uint32, *uint32, uint32, *SOCKADDR, int32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) int32.
+// LPWSPSENDTO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, *WSABUF, uint32, *uint32, uint32, *SOCKADDR, int32, *systemio.OVERLAPPED, LPWSAOVERLAPPED_COMPLETION_ROUTINE, *WSATHREADID, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPSENDTO uintptr
 
-// LPWSPSETSOCKOPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, int32, int32, foundation.PSTR, int32, *int32) int32.
+// LPWSPSETSOCKOPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, int32, int32, foundation.PSTR, int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPSETSOCKOPT uintptr
 
-// LPWSPSHUTDOWN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SOCKET, int32, *int32) int32.
+// LPWSPSHUTDOWN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SOCKET, int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPSHUTDOWN uintptr
 
-// LPWSPSOCKET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, int32, int32, *WSAPROTOCOL_INFOW, uint32, uint32, *int32) SOCKET.
+// LPWSPSOCKET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, int32, int32, *WSAPROTOCOL_INFOW, uint32, uint32, *int32) uintptr (the native return type is
+// SOCKET; NewCallback requires a uintptr-sized result).
 type LPWSPSOCKET uintptr
 
-// LPWSPSTARTUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint16, *WSPDATA, *WSAPROTOCOL_INFOW, WSPUPCALLTABLE, *WSPPROC_TABLE) int32.
+// LPWSPSTARTUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint16, *WSPDATA, *WSAPROTOCOL_INFOW, WSPUPCALLTABLE, *WSPPROC_TABLE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPSTARTUP uintptr
 
-// LPWSPSTRINGTOADDRESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, int32, *WSAPROTOCOL_INFOW, *SOCKADDR, *int32, *int32) int32.
+// LPWSPSTRINGTOADDRESS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, int32, *WSAPROTOCOL_INFOW, *SOCKADDR, *int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWSPSTRINGTOADDRESS uintptr

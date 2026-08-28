@@ -22,6 +22,18 @@ var (
 	procCreateDirect3D11SurfaceFromDXGISurface = modd3d11.NewProc("CreateDirect3D11SurfaceFromDXGISurface")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateDirect3D11DeviceFromDXGIDevice   *win32.Proc
+	CreateDirect3D11SurfaceFromDXGISurface *win32.Proc
+}{
+	CreateDirect3D11DeviceFromDXGIDevice:   procCreateDirect3D11DeviceFromDXGIDevice,
+	CreateDirect3D11SurfaceFromDXGISurface: procCreateDirect3D11SurfaceFromDXGISurface,
+}
+
 // CreateDirect3D11DeviceFromDXGIDevice calls d3d11!CreateDirect3D11DeviceFromDXGIDevice.
 // https://learn.microsoft.com/windows/win32/api/windows.graphics.directx.direct3d11.interop/nf-windows-graphics-directx-direct3d11-interop-createdirect3d11devicefromdxgidevice
 func CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, graphicsDevice **systemwinrt.IInspectable) error {

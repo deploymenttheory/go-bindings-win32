@@ -424,6 +424,15 @@ func (self *IRDPSRAPIInvitationManager) Get__NewEnum() (*systemcom.IUnknown, err
 	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
+var specIRDPSRAPIInvitationManager_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IRDPSRAPIInvitationManager's vtable slot 8.
+func (self *IRDPSRAPIInvitationManager) Get_Item(item systemvariant.VARIANT) (*IRDPSRAPIInvitation, error) {
+	_ppInvitation := new(*IRDPSRAPIInvitation)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIRDPSRAPIInvitationManager_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&item)), uintptr(win32.OutParam(unsafe.Pointer(_ppInvitation)))).Tuple()
+	return *_ppInvitation, win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Count dispatches through IRDPSRAPIInvitationManager's vtable slot 9.
 func (self *IRDPSRAPIInvitationManager) Get_Count() (int32, error) {
 	_pRetVal := new(int32)
@@ -482,6 +491,14 @@ func (self *IRDPSRAPISessionProperties) Get_Property(PropertyName foundation.BST
 	_pVal := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
 	return *_pVal, win32.ErrIfFailed(int32(r1))
+}
+
+var specIRDPSRAPISessionProperties_Put_Property = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Property dispatches through IRDPSRAPISessionProperties's vtable slot 8.
+func (self *IRDPSRAPISessionProperties) Put_Property(PropertyName foundation.BSTR, newVal systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIRDPSRAPISessionProperties_Put_Property, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)), uintptr(unsafe.Pointer(&newVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IRDPSRAPISharingSession: https://learn.microsoft.com/windows/win32/api/rdpencomapi/nn-rdpencomapi-irdpsrapisharingsession
@@ -957,6 +974,15 @@ func (self *IRDPSRAPIVirtualChannelManager) Get__NewEnum() (*systemcom.IUnknown,
 	_retval := new(*systemcom.IUnknown)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
 	return *_retval, win32.ErrIfFailed(int32(r1))
+}
+
+var specIRDPSRAPIVirtualChannelManager_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IRDPSRAPIVirtualChannelManager's vtable slot 8.
+func (self *IRDPSRAPIVirtualChannelManager) Get_Item(item systemvariant.VARIANT) (*IRDPSRAPIVirtualChannel, error) {
+	_pChannel := new(*IRDPSRAPIVirtualChannel)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIRDPSRAPIVirtualChannelManager_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&item)), uintptr(win32.OutParam(unsafe.Pointer(_pChannel)))).Tuple()
+	return *_pChannel, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateVirtualChannel dispatches through IRDPSRAPIVirtualChannelManager's vtable slot 9.

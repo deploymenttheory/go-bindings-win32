@@ -4,6 +4,6 @@
 
 package netmanagement
 
-// WORKERFUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// WORKERFUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type WORKERFUNCTION uintptr

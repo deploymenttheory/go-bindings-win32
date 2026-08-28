@@ -4,42 +4,50 @@
 
 package shell
 
-// APPLET_PROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.LPARAM, foundation.LPARAM) int32.
+// APPLET_PROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.LPARAM, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type APPLET_PROC uintptr
 
-// BFFCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.LPARAM, foundation.LPARAM) int32.
+// BFFCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.LPARAM, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type BFFCALLBACK uintptr
 
-// DLLGETVERSIONPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DLLVERSIONINFO) foundation.HRESULT.
+// DLLGETVERSIONPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DLLVERSIONINFO) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DLLGETVERSIONPROC uintptr
 
-// LPFNDFMCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IShellFolder, foundation.HWND, *systemcom.IDataObject, uint32, foundation.WPARAM, foundation.LPARAM) foundation.HRESULT.
+// LPFNDFMCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IShellFolder, foundation.HWND, *systemcom.IDataObject, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPFNDFMCALLBACK uintptr
 
-// LPFNVIEWCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IShellView, *IShellFolder, foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) foundation.HRESULT.
+// LPFNVIEWCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IShellView, *IShellFolder, foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPFNVIEWCALLBACK uintptr
 
-// PAPPCONSTRAIN_CHANGE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.BOOLEAN, unsafe.Pointer).
+// PAPPCONSTRAIN_CHANGE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.BOOLEAN, unsafe.Pointer) uintptr.
 type PAPPCONSTRAIN_CHANGE_ROUTINE uintptr
 
-// PAPPSTATE_CHANGE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.BOOLEAN, unsafe.Pointer).
+// PAPPSTATE_CHANGE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.BOOLEAN, unsafe.Pointer) uintptr.
 type PAPPSTATE_CHANGE_ROUTINE uintptr
 
-// PFNCANSHAREFOLDERW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.HRESULT.
+// PFNCANSHAREFOLDERW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNCANSHAREFOLDERW uintptr
 
-// PFNSHOWSHAREFOLDERUIW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.PWSTR) foundation.HRESULT.
+// PFNSHOWSHAREFOLDERUIW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.PWSTR) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNSHOWSHAREFOLDERUIW uintptr
 
-// SUBCLASSPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM, uintptr, uintptr) foundation.LRESULT.
+// SUBCLASSPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM, uintptr, uintptr) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type SUBCLASSPROC uintptr

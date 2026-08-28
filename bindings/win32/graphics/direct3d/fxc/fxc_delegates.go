@@ -4,14 +4,17 @@
 
 package fxc
 
-// PD3DCompile is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, foundation.PSTR, *graphicsdirect3d.D3D_SHADER_MACRO, *graphicsdirect3d.ID3DInclude, foundation.PSTR, foundation.PSTR, uint32, uint32, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
+// PD3DCompile is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, foundation.PSTR, *graphicsdirect3d.D3D_SHADER_MACRO, *graphicsdirect3d.ID3DInclude, foundation.PSTR, foundation.PSTR, uint32, uint32, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PD3DCompile uintptr
 
-// PD3DDisassemble is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, uint32, foundation.PSTR, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
+// PD3DDisassemble is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, uint32, foundation.PSTR, **graphicsdirect3d.ID3DBlob) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PD3DDisassemble uintptr
 
-// PD3DPreprocess is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, foundation.PSTR, *graphicsdirect3d.D3D_SHADER_MACRO, *graphicsdirect3d.ID3DInclude, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) foundation.HRESULT.
+// PD3DPreprocess is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, foundation.PSTR, *graphicsdirect3d.D3D_SHADER_MACRO, *graphicsdirect3d.ID3DInclude, **graphicsdirect3d.ID3DBlob, **graphicsdirect3d.ID3DBlob) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PD3DPreprocess uintptr

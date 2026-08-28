@@ -125,6 +125,14 @@ func (self *INetDiagHelper) GetLifeTime(pLifeTime *LIFE_TIME) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specINetDiagHelper_SetLifeTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// SetLifeTime dispatches through INetDiagHelper's vtable slot 16.
+func (self *INetDiagHelper) SetLifeTime(lifeTime LIFE_TIME) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specINetDiagHelper_SetLifeTime, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&lifeTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetCacheTime dispatches through INetDiagHelper's vtable slot 17.
 func (self *INetDiagHelper) GetCacheTime(pCacheTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCacheTime)))

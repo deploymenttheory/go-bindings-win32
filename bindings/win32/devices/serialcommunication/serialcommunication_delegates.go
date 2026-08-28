@@ -4,10 +4,11 @@
 
 package serialcommunication
 
-// PSERENUM_READPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) byte.
+// PSERENUM_READPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// byte; NewCallback requires a uintptr-sized result).
 type PSERENUM_READPORT uintptr
 
-// PSERENUM_WRITEPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, byte).
+// PSERENUM_WRITEPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, byte) uintptr.
 type PSERENUM_WRITEPORT uintptr

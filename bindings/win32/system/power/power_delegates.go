@@ -4,18 +4,21 @@
 
 package power
 
-// EFFECTIVE_POWER_MODE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(EFFECTIVE_POWER_MODE, unsafe.Pointer).
+// EFFECTIVE_POWER_MODE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(EFFECTIVE_POWER_MODE, unsafe.Pointer) uintptr.
 type EFFECTIVE_POWER_MODE_CALLBACK uintptr
 
-// PDEVICE_NOTIFY_CALLBACK_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, unsafe.Pointer) uint32.
+// PDEVICE_NOTIFY_CALLBACK_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDEVICE_NOTIFY_CALLBACK_ROUTINE uintptr
 
-// PWRSCHEMESENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, foundation.PWSTR, uint32, foundation.PWSTR, *POWER_POLICY, foundation.LPARAM) foundation.BOOLEAN.
+// PWRSCHEMESENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, foundation.PWSTR, uint32, foundation.PWSTR, *POWER_POLICY, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PWRSCHEMESENUMPROC uintptr
 
-// PWRSCHEMESENUMPROC_V1 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *int8, uint32, *int8, *POWER_POLICY, foundation.LPARAM) foundation.BOOLEAN.
+// PWRSCHEMESENUMPROC_V1 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *int8, uint32, *int8, *POWER_POLICY, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PWRSCHEMESENUMPROC_V1 uintptr

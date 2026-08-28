@@ -25,6 +25,28 @@ var (
 	procMcastRequestAddress  = moddhcpcsvc.NewProc("McastRequestAddress")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	McastApiCleanup      *win32.Proc
+	McastApiStartup      *win32.Proc
+	McastEnumerateScopes *win32.Proc
+	McastGenUID          *win32.Proc
+	McastReleaseAddress  *win32.Proc
+	McastRenewAddress    *win32.Proc
+	McastRequestAddress  *win32.Proc
+}{
+	McastApiCleanup:      procMcastApiCleanup,
+	McastApiStartup:      procMcastApiStartup,
+	McastEnumerateScopes: procMcastEnumerateScopes,
+	McastGenUID:          procMcastGenUID,
+	McastReleaseAddress:  procMcastReleaseAddress,
+	McastRenewAddress:    procMcastRenewAddress,
+	McastRequestAddress:  procMcastRequestAddress,
+}
+
 // McastApiCleanup calls dhcpcsvc!McastApiCleanup.
 // https://learn.microsoft.com/windows/win32/api/madcapcl/nf-madcapcl-mcastapicleanup
 // Minimum OS: windows5.0.

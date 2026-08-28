@@ -45,6 +45,9 @@ func Delegate(model view.DelegateModel) (string, error) { return execute("delega
 // DLL renders the package's DLL/proc declaration block.
 func DLL(models []view.DLLModel) (string, error) { return execute("dll", models) }
 
+// Procs renders the package's Procs availability-probe table.
+func Procs(models []view.ProcModel) (string, error) { return execute("procs", models) }
+
 // Function renders one function wrapper.
 func Function(model view.FunctionModel) (string, error) { return execute("function", model) }
 

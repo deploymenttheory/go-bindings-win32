@@ -26,6 +26,26 @@ var (
 	procWscUnRegisterChanges            = modWSCAPI.NewProc("WscUnRegisterChanges")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WscGetAntiMalwareUri            *win32.Proc
+	WscGetSecurityProviderHealth    *win32.Proc
+	WscQueryAntiMalwareUri          *win32.Proc
+	WscRegisterForChanges           *win32.Proc
+	WscRegisterForUserNotifications *win32.Proc
+	WscUnRegisterChanges            *win32.Proc
+}{
+	WscGetAntiMalwareUri:            procWscGetAntiMalwareUri,
+	WscGetSecurityProviderHealth:    procWscGetSecurityProviderHealth,
+	WscQueryAntiMalwareUri:          procWscQueryAntiMalwareUri,
+	WscRegisterForChanges:           procWscRegisterForChanges,
+	WscRegisterForUserNotifications: procWscRegisterForUserNotifications,
+	WscUnRegisterChanges:            procWscUnRegisterChanges,
+}
+
 // WscGetAntiMalwareUri calls WSCAPI!WscGetAntiMalwareUri.
 func WscGetAntiMalwareUri(ppszUri *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWscGetAntiMalwareUri.Addr(), uintptr(unsafe.Pointer(ppszUri)))

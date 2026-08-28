@@ -235,6 +235,14 @@ func (self *ICertSrvSetupKeyInformation) Get_ExistingCACertificate() (systemvari
 	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
+var specICertSrvSetupKeyInformation_Put_ExistingCACertificate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ExistingCACertificate dispatches through ICertSrvSetupKeyInformation's vtable slot 18.
+func (self *ICertSrvSetupKeyInformation) Put_ExistingCACertificate(varVal systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specICertSrvSetupKeyInformation_Put_ExistingCACertificate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ICertSrvSetupKeyInformationCollection: https://learn.microsoft.com/windows/win32/api/casetup/nn-casetup-icertsrvsetupkeyinformationcollection
 // IID: e65c8b00-e58f-41f9-a9ec-a28d7427c844
 type ICertSrvSetupKeyInformationCollection struct {

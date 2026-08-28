@@ -4,26 +4,32 @@
 
 package directoryservices
 
-// PFNDSCREATEISECINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, **securityauthorizationui.ISecurityInformation, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) foundation.HRESULT.
+// PFNDSCREATEISECINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, **securityauthorizationui.ISecurityInformation, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNDSCREATEISECINFO uintptr
 
-// PFNDSCREATEISECINFOEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, **securityauthorizationui.ISecurityInformation, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) foundation.HRESULT.
+// PFNDSCREATEISECINFOEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, **securityauthorizationui.ISecurityInformation, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNDSCREATEISECINFOEX uintptr
 
-// PFNDSCREATESECPAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, *uicontrols.HPROPSHEETPAGE, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) foundation.HRESULT.
+// PFNDSCREATESECPAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, *uicontrols.HPROPSHEETPAGE, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNDSCREATESECPAGE uintptr
 
-// PFNDSEDITSECURITY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.PWSTR, foundation.PWSTR, uint32, foundation.PWSTR, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) foundation.HRESULT.
+// PFNDSEDITSECURITY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.PWSTR, foundation.PWSTR, uint32, foundation.PWSTR, PFNREADOBJECTSECURITY, PFNWRITEOBJECTSECURITY, foundation.LPARAM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNDSEDITSECURITY uintptr
 
-// PFNREADOBJECTSECURITY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, *security.PSECURITY_DESCRIPTOR, foundation.LPARAM) foundation.HRESULT.
+// PFNREADOBJECTSECURITY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, *security.PSECURITY_DESCRIPTOR, foundation.LPARAM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNREADOBJECTSECURITY uintptr
 
-// PFNWRITEOBJECTSECURITY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, security.PSECURITY_DESCRIPTOR, foundation.LPARAM) foundation.HRESULT.
+// PFNWRITEOBJECTSECURITY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, security.PSECURITY_DESCRIPTOR, foundation.LPARAM) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNWRITEOBJECTSECURITY uintptr

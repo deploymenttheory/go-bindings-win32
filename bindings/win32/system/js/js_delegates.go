@@ -4,26 +4,29 @@
 
 package js
 
-// JsBackgroundWorkItemCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// JsBackgroundWorkItemCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type JsBackgroundWorkItemCallback uintptr
 
-// JsBeforeCollectCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// JsBeforeCollectCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type JsBeforeCollectCallback uintptr
 
-// JsFinalizeCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// JsFinalizeCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type JsFinalizeCallback uintptr
 
-// JsMemoryAllocationCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, JsMemoryEventType, uintptr) bool.
+// JsMemoryAllocationCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, JsMemoryEventType, uintptr) uintptr (the native return type is
+// bool; NewCallback requires a uintptr-sized result).
 type JsMemoryAllocationCallback uintptr
 
-// JsNativeFunction is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, bool, *unsafe.Pointer, uint16, unsafe.Pointer) unsafe.Pointer.
+// JsNativeFunction is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, bool, *unsafe.Pointer, uint16, unsafe.Pointer) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type JsNativeFunction uintptr
 
-// JsThreadServiceCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(JsBackgroundWorkItemCallback, unsafe.Pointer) bool.
+// JsThreadServiceCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(JsBackgroundWorkItemCallback, unsafe.Pointer) uintptr (the native return type is
+// bool; NewCallback requires a uintptr-sized result).
 type JsThreadServiceCallback uintptr

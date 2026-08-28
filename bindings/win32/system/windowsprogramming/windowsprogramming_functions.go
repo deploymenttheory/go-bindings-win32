@@ -267,11 +267,477 @@ var (
 	procWldpSetWindowsLockdownRestriction           = modWldp.NewProc("WldpSetWindowsLockdownRestriction")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddDelBackupEntry                           *win32.Proc
+	AddDelBackupEntryA                          *win32.Proc
+	AdvInstallFile                              *win32.Proc
+	AdvInstallFileA                             *win32.Proc
+	ApphelpCheckShellObject                     *win32.Proc
+	CancelDeviceWakeupRequest                   *win32.Proc
+	CloseINFEngine                              *win32.Proc
+	ConvertAuxiliaryCounterToPerformanceCounter *win32.Proc
+	ConvertPerformanceCounterToAuxiliaryCounter *win32.Proc
+	DCIBeginAccess                              *win32.Proc
+	DCICloseProvider                            *win32.Proc
+	DCICreateOffscreen                          *win32.Proc
+	DCICreateOverlay                            *win32.Proc
+	DCICreatePrimary                            *win32.Proc
+	DCIDestroy                                  *win32.Proc
+	DCIDraw                                     *win32.Proc
+	DCIEndAccess                                *win32.Proc
+	DCIEnum                                     *win32.Proc
+	DCIOpenProvider                             *win32.Proc
+	DCISetClipList                              *win32.Proc
+	DCISetDestination                           *win32.Proc
+	DCISetSrcDestClip                           *win32.Proc
+	DelNode                                     *win32.Proc
+	DelNodeA                                    *win32.Proc
+	DelNodeRunDLL32                             *win32.Proc
+	DnsHostnameToComputerName                   *win32.Proc
+	DnsHostnameToComputerNameA                  *win32.Proc
+	DosDateTimeToFileTime                       *win32.Proc
+	EnableProcessOptionalXStateFeatures         *win32.Proc
+	ExecuteCab                                  *win32.Proc
+	ExecuteCabA                                 *win32.Proc
+	ExtractFiles                                *win32.Proc
+	ExtractFilesA                               *win32.Proc
+	FileSaveMarkNotExist                        *win32.Proc
+	FileSaveMarkNotExistA                       *win32.Proc
+	FileSaveRestore                             *win32.Proc
+	FileSaveRestoreOnINF                        *win32.Proc
+	FileSaveRestoreOnINFA                       *win32.Proc
+	FileTimeToDosDateTime                       *win32.Proc
+	GdiEntry13                                  *win32.Proc
+	GetApiSetModuleBaseName                     *win32.Proc
+	GetComputerName                             *win32.Proc
+	GetComputerNameA                            *win32.Proc
+	GetCurrentHwProfile                         *win32.Proc
+	GetCurrentHwProfileA                        *win32.Proc
+	GetDCRegionData                             *win32.Proc
+	GetFeatureEnabledState                      *win32.Proc
+	GetFeatureVariant                           *win32.Proc
+	GetFirmwareEnvironmentVariable              *win32.Proc
+	GetFirmwareEnvironmentVariableA             *win32.Proc
+	GetFirmwareEnvironmentVariableEx            *win32.Proc
+	GetFirmwareEnvironmentVariableExA           *win32.Proc
+	GetPrivateProfileInt                        *win32.Proc
+	GetPrivateProfileIntA                       *win32.Proc
+	GetPrivateProfileSection                    *win32.Proc
+	GetPrivateProfileSectionA                   *win32.Proc
+	GetPrivateProfileSectionNames               *win32.Proc
+	GetPrivateProfileSectionNamesA              *win32.Proc
+	GetPrivateProfileString                     *win32.Proc
+	GetPrivateProfileStringA                    *win32.Proc
+	GetPrivateProfileStruct                     *win32.Proc
+	GetPrivateProfileStructA                    *win32.Proc
+	GetProfileInt                               *win32.Proc
+	GetProfileIntA                              *win32.Proc
+	GetProfileSection                           *win32.Proc
+	GetProfileSectionA                          *win32.Proc
+	GetProfileString                            *win32.Proc
+	GetProfileStringA                           *win32.Proc
+	GetSystemRegistryQuota                      *win32.Proc
+	GetThreadEnabledXStateFeatures              *win32.Proc
+	GetUserName                                 *win32.Proc
+	GetUserNameA                                *win32.Proc
+	GetVersionFromFile                          *win32.Proc
+	GetVersionFromFileA                         *win32.Proc
+	GetVersionFromFileEx                        *win32.Proc
+	GetVersionFromFileExA                       *win32.Proc
+	GetWindowRegionData                         *win32.Proc
+	GlobalCompact                               *win32.Proc
+	GlobalFix                                   *win32.Proc
+	GlobalUnWire                                *win32.Proc
+	GlobalUnfix                                 *win32.Proc
+	GlobalWire                                  *win32.Proc
+	Hread                                       *win32.Proc
+	Hwrite                                      *win32.Proc
+	IMPGetIME                                   *win32.Proc
+	IMPGetIMEA                                  *win32.Proc
+	IMPQueryIME                                 *win32.Proc
+	IMPQueryIMEA                                *win32.Proc
+	IMPSetIME                                   *win32.Proc
+	IMPSetIMEA                                  *win32.Proc
+	IsApiSetImplemented                         *win32.Proc
+	IsBadHugeReadPtr                            *win32.Proc
+	IsBadHugeWritePtr                           *win32.Proc
+	IsNTAdmin                                   *win32.Proc
+	IsNativeVhdBoot                             *win32.Proc
+	IsTokenUntrusted                            *win32.Proc
+	LaunchINFSection                            *win32.Proc
+	LaunchINFSectionEx                          *win32.Proc
+	Lclose                                      *win32.Proc
+	Lcreat                                      *win32.Proc
+	Llseek                                      *win32.Proc
+	LocalCompact                                *win32.Proc
+	LocalShrink                                 *win32.Proc
+	Lopen                                       *win32.Proc
+	Lread                                       *win32.Proc
+	Lwrite                                      *win32.Proc
+	MulDiv                                      *win32.Proc
+	NeedReboot                                  *win32.Proc
+	NeedRebootInit                              *win32.Proc
+	OpenINFEngine                               *win32.Proc
+	OpenINFEngineA                              *win32.Proc
+	OpenMutexA                                  *win32.Proc
+	OpenSemaphoreA                              *win32.Proc
+	QueryAuxiliaryCounterFrequency              *win32.Proc
+	QueryIdleProcessorCycleTime                 *win32.Proc
+	QueryIdleProcessorCycleTimeEx               *win32.Proc
+	QueryInterruptTime                          *win32.Proc
+	QueryInterruptTimePrecise                   *win32.Proc
+	QueryProcessCycleTime                       *win32.Proc
+	QueryThreadCycleTime                        *win32.Proc
+	QueryUnbiasedInterruptTime                  *win32.Proc
+	QueryUnbiasedInterruptTimePrecise           *win32.Proc
+	RaiseCustomSystemEventTrigger               *win32.Proc
+	RebootCheckOnInstall                        *win32.Proc
+	RebootCheckOnInstallA                       *win32.Proc
+	RecordFeatureError                          *win32.Proc
+	RecordFeatureUsage                          *win32.Proc
+	RegInstall                                  *win32.Proc
+	RegInstallA                                 *win32.Proc
+	RegRestoreAll                               *win32.Proc
+	RegRestoreAllA                              *win32.Proc
+	RegSaveRestore                              *win32.Proc
+	RegSaveRestoreA                             *win32.Proc
+	RegSaveRestoreOnINF                         *win32.Proc
+	RegSaveRestoreOnINFA                        *win32.Proc
+	ReplacePartitionUnit                        *win32.Proc
+	RequestDeviceWakeup                         *win32.Proc
+	RtlAnsiStringToUnicodeString                *win32.Proc
+	RtlCharToInteger                            *win32.Proc
+	RtlFreeAnsiString                           *win32.Proc
+	RtlFreeOemString                            *win32.Proc
+	RtlFreeUnicodeString                        *win32.Proc
+	RtlGetReturnAddressHijackTarget             *win32.Proc
+	RtlInitAnsiString                           *win32.Proc
+	RtlInitAnsiStringEx                         *win32.Proc
+	RtlInitString                               *win32.Proc
+	RtlInitStringEx                             *win32.Proc
+	RtlInitUnicodeString                        *win32.Proc
+	RtlIsNameLegalDOS8Dot3                      *win32.Proc
+	RtlLocalTimeToSystemTime                    *win32.Proc
+	RtlRaiseCustomSystemEventTrigger            *win32.Proc
+	RtlTimeToSecondsSince1970                   *win32.Proc
+	RtlUnicodeStringToAnsiString                *win32.Proc
+	RtlUnicodeStringToOemString                 *win32.Proc
+	RtlUnicodeToMultiByteSize                   *win32.Proc
+	RtlUniform                                  *win32.Proc
+	RunSetupCommand                             *win32.Proc
+	RunSetupCommandA                            *win32.Proc
+	SendIMEMessageEx                            *win32.Proc
+	SendIMEMessageExA                           *win32.Proc
+	SetEnvironmentStringsA                      *win32.Proc
+	SetFirmwareEnvironmentVariable              *win32.Proc
+	SetFirmwareEnvironmentVariableA             *win32.Proc
+	SetFirmwareEnvironmentVariableEx            *win32.Proc
+	SetFirmwareEnvironmentVariableExA           *win32.Proc
+	SetHandleCount                              *win32.Proc
+	SetMessageWaitingIndicator                  *win32.Proc
+	SetPerUserSecValues                         *win32.Proc
+	SetPerUserSecValuesA                        *win32.Proc
+	SubscribeFeatureStateChangeNotification     *win32.Proc
+	TranslateInfString                          *win32.Proc
+	TranslateInfStringA                         *win32.Proc
+	TranslateInfStringEx                        *win32.Proc
+	TranslateInfStringExA                       *win32.Proc
+	Uaw_lstrcmpW                                *win32.Proc
+	Uaw_lstrcmpiW                               *win32.Proc
+	Uaw_lstrlenW                                *win32.Proc
+	Uaw_wcschr                                  *win32.Proc
+	Uaw_wcscpy                                  *win32.Proc
+	Uaw_wcsicmp                                 *win32.Proc
+	Uaw_wcslen                                  *win32.Proc
+	Uaw_wcsrchr                                 *win32.Proc
+	UnsubscribeFeatureStateChangeNotification   *win32.Proc
+	UserInstStubWrapper                         *win32.Proc
+	UserInstStubWrapperA                        *win32.Proc
+	UserUnInstStubWrapper                       *win32.Proc
+	UserUnInstStubWrapperA                      *win32.Proc
+	WINNLSEnableIME                             *win32.Proc
+	WINNLSGetEnableStatus                       *win32.Proc
+	WINNLSGetIMEHotkey                          *win32.Proc
+	WinWatchClose                               *win32.Proc
+	WinWatchDidStatusChange                     *win32.Proc
+	WinWatchGetClipList                         *win32.Proc
+	WinWatchNotify                              *win32.Proc
+	WinWatchOpen                                *win32.Proc
+	WldpCanExecuteBuffer                        *win32.Proc
+	WldpCanExecuteFile                          *win32.Proc
+	WldpCanExecuteFileFromDetachedSignature     *win32.Proc
+	WldpCanExecuteStream                        *win32.Proc
+	WldpGetApplicationSettingBoolean            *win32.Proc
+	WldpGetApplicationSettingStringList         *win32.Proc
+	WldpGetApplicationSettingStringSet          *win32.Proc
+	WldpGetLockdownPolicy                       *win32.Proc
+	WldpIsAppApprovedByPolicy                   *win32.Proc
+	WldpIsClassInApprovedList                   *win32.Proc
+	WldpIsDynamicCodePolicyEnabled              *win32.Proc
+	WldpIsProductionConfiguration               *win32.Proc
+	WldpIsWcosProductionConfiguration           *win32.Proc
+	WldpQueryDeviceSecurityInformation          *win32.Proc
+	WldpQueryDynamicCodeTrust                   *win32.Proc
+	WldpQueryPolicySettingEnabled               *win32.Proc
+	WldpQueryPolicySettingEnabled2              *win32.Proc
+	WldpQuerySecurityPolicy                     *win32.Proc
+	WldpQueryWindowsLockdownMode                *win32.Proc
+	WldpQueryWindowsLockdownRestriction         *win32.Proc
+	WldpResetProductionConfiguration            *win32.Proc
+	WldpResetWcosProductionConfiguration        *win32.Proc
+	WldpSetDynamicCodeTrust                     *win32.Proc
+	WldpSetWindowsLockdownRestriction           *win32.Proc
+	WritePrivateProfileSection                  *win32.Proc
+	WritePrivateProfileSectionA                 *win32.Proc
+	WritePrivateProfileString                   *win32.Proc
+	WritePrivateProfileStringA                  *win32.Proc
+	WritePrivateProfileStruct                   *win32.Proc
+	WritePrivateProfileStructA                  *win32.Proc
+	WriteProfileSection                         *win32.Proc
+	WriteProfileSectionA                        *win32.Proc
+	WriteProfileString                          *win32.Proc
+	WriteProfileStringA                         *win32.Proc
+}{
+	AddDelBackupEntry:                           procAddDelBackupEntry,
+	AddDelBackupEntryA:                          procAddDelBackupEntryA,
+	AdvInstallFile:                              procAdvInstallFile,
+	AdvInstallFileA:                             procAdvInstallFileA,
+	ApphelpCheckShellObject:                     procApphelpCheckShellObject,
+	CancelDeviceWakeupRequest:                   procCancelDeviceWakeupRequest,
+	CloseINFEngine:                              procCloseINFEngine,
+	ConvertAuxiliaryCounterToPerformanceCounter: procConvertAuxiliaryCounterToPerformanceCounter,
+	ConvertPerformanceCounterToAuxiliaryCounter: procConvertPerformanceCounterToAuxiliaryCounter,
+	DCIBeginAccess:                              procDCIBeginAccess,
+	DCICloseProvider:                            procDCICloseProvider,
+	DCICreateOffscreen:                          procDCICreateOffscreen,
+	DCICreateOverlay:                            procDCICreateOverlay,
+	DCICreatePrimary:                            procDCICreatePrimary,
+	DCIDestroy:                                  procDCIDestroy,
+	DCIDraw:                                     procDCIDraw,
+	DCIEndAccess:                                procDCIEndAccess,
+	DCIEnum:                                     procDCIEnum,
+	DCIOpenProvider:                             procDCIOpenProvider,
+	DCISetClipList:                              procDCISetClipList,
+	DCISetDestination:                           procDCISetDestination,
+	DCISetSrcDestClip:                           procDCISetSrcDestClip,
+	DelNode:                                     procDelNode,
+	DelNodeA:                                    procDelNodeA,
+	DelNodeRunDLL32:                             procDelNodeRunDLL32,
+	DnsHostnameToComputerName:                   procDnsHostnameToComputerName,
+	DnsHostnameToComputerNameA:                  procDnsHostnameToComputerNameA,
+	DosDateTimeToFileTime:                       procDosDateTimeToFileTime,
+	EnableProcessOptionalXStateFeatures:         procEnableProcessOptionalXStateFeatures,
+	ExecuteCab:                                  procExecuteCab,
+	ExecuteCabA:                                 procExecuteCabA,
+	ExtractFiles:                                procExtractFiles,
+	ExtractFilesA:                               procExtractFilesA,
+	FileSaveMarkNotExist:                        procFileSaveMarkNotExist,
+	FileSaveMarkNotExistA:                       procFileSaveMarkNotExistA,
+	FileSaveRestore:                             procFileSaveRestore,
+	FileSaveRestoreOnINF:                        procFileSaveRestoreOnINF,
+	FileSaveRestoreOnINFA:                       procFileSaveRestoreOnINFA,
+	FileTimeToDosDateTime:                       procFileTimeToDosDateTime,
+	GdiEntry13:                                  procGdiEntry13,
+	GetApiSetModuleBaseName:                     procGetApiSetModuleBaseName,
+	GetComputerName:                             procGetComputerName,
+	GetComputerNameA:                            procGetComputerNameA,
+	GetCurrentHwProfile:                         procGetCurrentHwProfile,
+	GetCurrentHwProfileA:                        procGetCurrentHwProfileA,
+	GetDCRegionData:                             procGetDCRegionData,
+	GetFeatureEnabledState:                      procGetFeatureEnabledState,
+	GetFeatureVariant:                           procGetFeatureVariant,
+	GetFirmwareEnvironmentVariable:              procGetFirmwareEnvironmentVariable,
+	GetFirmwareEnvironmentVariableA:             procGetFirmwareEnvironmentVariableA,
+	GetFirmwareEnvironmentVariableEx:            procGetFirmwareEnvironmentVariableEx,
+	GetFirmwareEnvironmentVariableExA:           procGetFirmwareEnvironmentVariableExA,
+	GetPrivateProfileInt:                        procGetPrivateProfileInt,
+	GetPrivateProfileIntA:                       procGetPrivateProfileIntA,
+	GetPrivateProfileSection:                    procGetPrivateProfileSection,
+	GetPrivateProfileSectionA:                   procGetPrivateProfileSectionA,
+	GetPrivateProfileSectionNames:               procGetPrivateProfileSectionNames,
+	GetPrivateProfileSectionNamesA:              procGetPrivateProfileSectionNamesA,
+	GetPrivateProfileString:                     procGetPrivateProfileString,
+	GetPrivateProfileStringA:                    procGetPrivateProfileStringA,
+	GetPrivateProfileStruct:                     procGetPrivateProfileStruct,
+	GetPrivateProfileStructA:                    procGetPrivateProfileStructA,
+	GetProfileInt:                               procGetProfileInt,
+	GetProfileIntA:                              procGetProfileIntA,
+	GetProfileSection:                           procGetProfileSection,
+	GetProfileSectionA:                          procGetProfileSectionA,
+	GetProfileString:                            procGetProfileString,
+	GetProfileStringA:                           procGetProfileStringA,
+	GetSystemRegistryQuota:                      procGetSystemRegistryQuota,
+	GetThreadEnabledXStateFeatures:              procGetThreadEnabledXStateFeatures,
+	GetUserName:                                 procGetUserName,
+	GetUserNameA:                                procGetUserNameA,
+	GetVersionFromFile:                          procGetVersionFromFile,
+	GetVersionFromFileA:                         procGetVersionFromFileA,
+	GetVersionFromFileEx:                        procGetVersionFromFileEx,
+	GetVersionFromFileExA:                       procGetVersionFromFileExA,
+	GetWindowRegionData:                         procGetWindowRegionData,
+	GlobalCompact:                               procGlobalCompact,
+	GlobalFix:                                   procGlobalFix,
+	GlobalUnWire:                                procGlobalUnWire,
+	GlobalUnfix:                                 procGlobalUnfix,
+	GlobalWire:                                  procGlobalWire,
+	Hread:                                       procHread,
+	Hwrite:                                      procHwrite,
+	IMPGetIME:                                   procIMPGetIME,
+	IMPGetIMEA:                                  procIMPGetIMEA,
+	IMPQueryIME:                                 procIMPQueryIME,
+	IMPQueryIMEA:                                procIMPQueryIMEA,
+	IMPSetIME:                                   procIMPSetIME,
+	IMPSetIMEA:                                  procIMPSetIMEA,
+	IsApiSetImplemented:                         procIsApiSetImplemented,
+	IsBadHugeReadPtr:                            procIsBadHugeReadPtr,
+	IsBadHugeWritePtr:                           procIsBadHugeWritePtr,
+	IsNTAdmin:                                   procIsNTAdmin,
+	IsNativeVhdBoot:                             procIsNativeVhdBoot,
+	IsTokenUntrusted:                            procIsTokenUntrusted,
+	LaunchINFSection:                            procLaunchINFSection,
+	LaunchINFSectionEx:                          procLaunchINFSectionEx,
+	Lclose:                                      procLclose,
+	Lcreat:                                      procLcreat,
+	Llseek:                                      procLlseek,
+	LocalCompact:                                procLocalCompact,
+	LocalShrink:                                 procLocalShrink,
+	Lopen:                                       procLopen,
+	Lread:                                       procLread,
+	Lwrite:                                      procLwrite,
+	MulDiv:                                      procMulDiv,
+	NeedReboot:                                  procNeedReboot,
+	NeedRebootInit:                              procNeedRebootInit,
+	OpenINFEngine:                               procOpenINFEngine,
+	OpenINFEngineA:                              procOpenINFEngineA,
+	OpenMutexA:                                  procOpenMutexA,
+	OpenSemaphoreA:                              procOpenSemaphoreA,
+	QueryAuxiliaryCounterFrequency:              procQueryAuxiliaryCounterFrequency,
+	QueryIdleProcessorCycleTime:                 procQueryIdleProcessorCycleTime,
+	QueryIdleProcessorCycleTimeEx:               procQueryIdleProcessorCycleTimeEx,
+	QueryInterruptTime:                          procQueryInterruptTime,
+	QueryInterruptTimePrecise:                   procQueryInterruptTimePrecise,
+	QueryProcessCycleTime:                       procQueryProcessCycleTime,
+	QueryThreadCycleTime:                        procQueryThreadCycleTime,
+	QueryUnbiasedInterruptTime:                  procQueryUnbiasedInterruptTime,
+	QueryUnbiasedInterruptTimePrecise:           procQueryUnbiasedInterruptTimePrecise,
+	RaiseCustomSystemEventTrigger:               procRaiseCustomSystemEventTrigger,
+	RebootCheckOnInstall:                        procRebootCheckOnInstall,
+	RebootCheckOnInstallA:                       procRebootCheckOnInstallA,
+	RecordFeatureError:                          procRecordFeatureError,
+	RecordFeatureUsage:                          procRecordFeatureUsage,
+	RegInstall:                                  procRegInstall,
+	RegInstallA:                                 procRegInstallA,
+	RegRestoreAll:                               procRegRestoreAll,
+	RegRestoreAllA:                              procRegRestoreAllA,
+	RegSaveRestore:                              procRegSaveRestore,
+	RegSaveRestoreA:                             procRegSaveRestoreA,
+	RegSaveRestoreOnINF:                         procRegSaveRestoreOnINF,
+	RegSaveRestoreOnINFA:                        procRegSaveRestoreOnINFA,
+	ReplacePartitionUnit:                        procReplacePartitionUnit,
+	RequestDeviceWakeup:                         procRequestDeviceWakeup,
+	RtlAnsiStringToUnicodeString:                procRtlAnsiStringToUnicodeString,
+	RtlCharToInteger:                            procRtlCharToInteger,
+	RtlFreeAnsiString:                           procRtlFreeAnsiString,
+	RtlFreeOemString:                            procRtlFreeOemString,
+	RtlFreeUnicodeString:                        procRtlFreeUnicodeString,
+	RtlGetReturnAddressHijackTarget:             procRtlGetReturnAddressHijackTarget,
+	RtlInitAnsiString:                           procRtlInitAnsiString,
+	RtlInitAnsiStringEx:                         procRtlInitAnsiStringEx,
+	RtlInitString:                               procRtlInitString,
+	RtlInitStringEx:                             procRtlInitStringEx,
+	RtlInitUnicodeString:                        procRtlInitUnicodeString,
+	RtlIsNameLegalDOS8Dot3:                      procRtlIsNameLegalDOS8Dot3,
+	RtlLocalTimeToSystemTime:                    procRtlLocalTimeToSystemTime,
+	RtlRaiseCustomSystemEventTrigger:            procRtlRaiseCustomSystemEventTrigger,
+	RtlTimeToSecondsSince1970:                   procRtlTimeToSecondsSince1970,
+	RtlUnicodeStringToAnsiString:                procRtlUnicodeStringToAnsiString,
+	RtlUnicodeStringToOemString:                 procRtlUnicodeStringToOemString,
+	RtlUnicodeToMultiByteSize:                   procRtlUnicodeToMultiByteSize,
+	RtlUniform:                                  procRtlUniform,
+	RunSetupCommand:                             procRunSetupCommand,
+	RunSetupCommandA:                            procRunSetupCommandA,
+	SendIMEMessageEx:                            procSendIMEMessageEx,
+	SendIMEMessageExA:                           procSendIMEMessageExA,
+	SetEnvironmentStringsA:                      procSetEnvironmentStringsA,
+	SetFirmwareEnvironmentVariable:              procSetFirmwareEnvironmentVariable,
+	SetFirmwareEnvironmentVariableA:             procSetFirmwareEnvironmentVariableA,
+	SetFirmwareEnvironmentVariableEx:            procSetFirmwareEnvironmentVariableEx,
+	SetFirmwareEnvironmentVariableExA:           procSetFirmwareEnvironmentVariableExA,
+	SetHandleCount:                              procSetHandleCount,
+	SetMessageWaitingIndicator:                  procSetMessageWaitingIndicator,
+	SetPerUserSecValues:                         procSetPerUserSecValues,
+	SetPerUserSecValuesA:                        procSetPerUserSecValuesA,
+	SubscribeFeatureStateChangeNotification:     procSubscribeFeatureStateChangeNotification,
+	TranslateInfString:                          procTranslateInfString,
+	TranslateInfStringA:                         procTranslateInfStringA,
+	TranslateInfStringEx:                        procTranslateInfStringEx,
+	TranslateInfStringExA:                       procTranslateInfStringExA,
+	Uaw_lstrcmpW:                                procUaw_lstrcmpW,
+	Uaw_lstrcmpiW:                               procUaw_lstrcmpiW,
+	Uaw_lstrlenW:                                procUaw_lstrlenW,
+	Uaw_wcschr:                                  procUaw_wcschr,
+	Uaw_wcscpy:                                  procUaw_wcscpy,
+	Uaw_wcsicmp:                                 procUaw_wcsicmp,
+	Uaw_wcslen:                                  procUaw_wcslen,
+	Uaw_wcsrchr:                                 procUaw_wcsrchr,
+	UnsubscribeFeatureStateChangeNotification: procUnsubscribeFeatureStateChangeNotification,
+	UserInstStubWrapper:                       procUserInstStubWrapper,
+	UserInstStubWrapperA:                      procUserInstStubWrapperA,
+	UserUnInstStubWrapper:                     procUserUnInstStubWrapper,
+	UserUnInstStubWrapperA:                    procUserUnInstStubWrapperA,
+	WINNLSEnableIME:                           procWINNLSEnableIME,
+	WINNLSGetEnableStatus:                     procWINNLSGetEnableStatus,
+	WINNLSGetIMEHotkey:                        procWINNLSGetIMEHotkey,
+	WinWatchClose:                             procWinWatchClose,
+	WinWatchDidStatusChange:                   procWinWatchDidStatusChange,
+	WinWatchGetClipList:                       procWinWatchGetClipList,
+	WinWatchNotify:                            procWinWatchNotify,
+	WinWatchOpen:                              procWinWatchOpen,
+	WldpCanExecuteBuffer:                      procWldpCanExecuteBuffer,
+	WldpCanExecuteFile:                        procWldpCanExecuteFile,
+	WldpCanExecuteFileFromDetachedSignature:   procWldpCanExecuteFileFromDetachedSignature,
+	WldpCanExecuteStream:                      procWldpCanExecuteStream,
+	WldpGetApplicationSettingBoolean:          procWldpGetApplicationSettingBoolean,
+	WldpGetApplicationSettingStringList:       procWldpGetApplicationSettingStringList,
+	WldpGetApplicationSettingStringSet:        procWldpGetApplicationSettingStringSet,
+	WldpGetLockdownPolicy:                     procWldpGetLockdownPolicy,
+	WldpIsAppApprovedByPolicy:                 procWldpIsAppApprovedByPolicy,
+	WldpIsClassInApprovedList:                 procWldpIsClassInApprovedList,
+	WldpIsDynamicCodePolicyEnabled:            procWldpIsDynamicCodePolicyEnabled,
+	WldpIsProductionConfiguration:             procWldpIsProductionConfiguration,
+	WldpIsWcosProductionConfiguration:         procWldpIsWcosProductionConfiguration,
+	WldpQueryDeviceSecurityInformation:        procWldpQueryDeviceSecurityInformation,
+	WldpQueryDynamicCodeTrust:                 procWldpQueryDynamicCodeTrust,
+	WldpQueryPolicySettingEnabled:             procWldpQueryPolicySettingEnabled,
+	WldpQueryPolicySettingEnabled2:            procWldpQueryPolicySettingEnabled2,
+	WldpQuerySecurityPolicy:                   procWldpQuerySecurityPolicy,
+	WldpQueryWindowsLockdownMode:              procWldpQueryWindowsLockdownMode,
+	WldpQueryWindowsLockdownRestriction:       procWldpQueryWindowsLockdownRestriction,
+	WldpResetProductionConfiguration:          procWldpResetProductionConfiguration,
+	WldpResetWcosProductionConfiguration:      procWldpResetWcosProductionConfiguration,
+	WldpSetDynamicCodeTrust:                   procWldpSetDynamicCodeTrust,
+	WldpSetWindowsLockdownRestriction:         procWldpSetWindowsLockdownRestriction,
+	WritePrivateProfileSection:                procWritePrivateProfileSection,
+	WritePrivateProfileSectionA:               procWritePrivateProfileSectionA,
+	WritePrivateProfileString:                 procWritePrivateProfileString,
+	WritePrivateProfileStringA:                procWritePrivateProfileStringA,
+	WritePrivateProfileStruct:                 procWritePrivateProfileStruct,
+	WritePrivateProfileStructA:                procWritePrivateProfileStructA,
+	WriteProfileSection:                       procWriteProfileSection,
+	WriteProfileSectionA:                      procWriteProfileSectionA,
+	WriteProfileString:                        procWriteProfileString,
+	WriteProfileStringA:                       procWriteProfileStringA,
+}
+
 // AddDelBackupEntry calls ADVPACK!AddDelBackupEntryW.
-func AddDelBackupEntry(lpcszFileList string, lpcszBackupDir string, lpcszBaseName string, dwFlags uint32) error {
-	_lpcszFileList := win32.UTF16Ptr(lpcszFileList)
-	_lpcszBackupDir := win32.UTF16Ptr(lpcszBackupDir)
-	_lpcszBaseName := win32.UTF16Ptr(lpcszBaseName)
+func AddDelBackupEntry(lpcszFileList *string, lpcszBackupDir *string, lpcszBaseName *string, dwFlags uint32) error {
+	_lpcszFileList := win32.UTF16PtrOrNil(lpcszFileList)
+	_lpcszBackupDir := win32.UTF16PtrOrNil(lpcszBackupDir)
+	_lpcszBaseName := win32.UTF16PtrOrNil(lpcszBaseName)
 	r1, _, _ := syscall.SyscallN(procAddDelBackupEntry.Addr(), uintptr(unsafe.Pointer(_lpcszFileList)), uintptr(unsafe.Pointer(_lpcszBackupDir)), uintptr(unsafe.Pointer(_lpcszBaseName)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -509,10 +975,10 @@ func ExtractFilesA(pszCabName foundation.PSTR, pszExpandDir foundation.PSTR, dwF
 }
 
 // FileSaveMarkNotExist calls ADVPACK!FileSaveMarkNotExistW.
-func FileSaveMarkNotExist(lpFileList string, lpDir string, lpBaseName string) error {
-	_lpFileList := win32.UTF16Ptr(lpFileList)
-	_lpDir := win32.UTF16Ptr(lpDir)
-	_lpBaseName := win32.UTF16Ptr(lpBaseName)
+func FileSaveMarkNotExist(lpFileList *string, lpDir *string, lpBaseName *string) error {
+	_lpFileList := win32.UTF16PtrOrNil(lpFileList)
+	_lpDir := win32.UTF16PtrOrNil(lpDir)
+	_lpBaseName := win32.UTF16PtrOrNil(lpBaseName)
 	r1, _, _ := syscall.SyscallN(procFileSaveMarkNotExist.Addr(), uintptr(unsafe.Pointer(_lpFileList)), uintptr(unsafe.Pointer(_lpDir)), uintptr(unsafe.Pointer(_lpBaseName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -524,8 +990,8 @@ func FileSaveMarkNotExistA(lpFileList foundation.PSTR, lpDir foundation.PSTR, lp
 }
 
 // FileSaveRestore calls ADVPACK!FileSaveRestoreW.
-func FileSaveRestore(hDlg foundation.HWND, lpFileList string, lpDir string, lpBaseName string, dwFlags uint32) error {
-	_lpFileList := win32.UTF16Ptr(lpFileList)
+func FileSaveRestore(hDlg foundation.HWND, lpFileList *string, lpDir string, lpBaseName string, dwFlags uint32) error {
+	_lpFileList := win32.UTF16PtrOrNil(lpFileList)
 	_lpDir := win32.UTF16Ptr(lpDir)
 	_lpBaseName := win32.UTF16Ptr(lpBaseName)
 	r1, _, _ := syscall.SyscallN(procFileSaveRestore.Addr(), uintptr(hDlg), uintptr(unsafe.Pointer(_lpFileList)), uintptr(unsafe.Pointer(_lpDir)), uintptr(unsafe.Pointer(_lpBaseName)), uintptr(dwFlags))
@@ -704,10 +1170,10 @@ func GetFirmwareEnvironmentVariableExA(lpName foundation.PSTR, lpGuid foundation
 // GetPrivateProfileInt calls KERNEL32!GetPrivateProfileIntW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofileintw
 // Minimum OS: windows5.0.
-func GetPrivateProfileInt(lpAppName string, lpKeyName string, nDefault int32, lpFileName string) int32 {
+func GetPrivateProfileInt(lpAppName string, lpKeyName string, nDefault int32, lpFileName *string) int32 {
 	_lpAppName := win32.UTF16Ptr(lpAppName)
 	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileInt.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(nDefault), uintptr(unsafe.Pointer(_lpFileName)))
 	return int32(r1)
 }
@@ -723,9 +1189,9 @@ func GetPrivateProfileIntA(lpAppName foundation.PSTR, lpKeyName foundation.PSTR,
 // GetPrivateProfileSection calls KERNEL32!GetPrivateProfileSectionW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilesectionw
 // Minimum OS: windows5.0.
-func GetPrivateProfileSection(lpAppName string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName string) uint32 {
+func GetPrivateProfileSection(lpAppName string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName *string) uint32 {
 	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileSection.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize), uintptr(unsafe.Pointer(_lpFileName)))
 	return uint32(r1)
 }
@@ -741,8 +1207,8 @@ func GetPrivateProfileSectionA(lpAppName foundation.PSTR, lpReturnedString found
 // GetPrivateProfileSectionNames calls KERNEL32!GetPrivateProfileSectionNamesW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilesectionnamesw
 // Minimum OS: windows5.0.
-func GetPrivateProfileSectionNames(lpszReturnBuffer foundation.PWSTR, nSize uint32, lpFileName string) uint32 {
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func GetPrivateProfileSectionNames(lpszReturnBuffer foundation.PWSTR, nSize uint32, lpFileName *string) uint32 {
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileSectionNames.Addr(), uintptr(unsafe.Pointer(lpszReturnBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(_lpFileName)))
 	return uint32(r1)
 }
@@ -758,11 +1224,11 @@ func GetPrivateProfileSectionNamesA(lpszReturnBuffer foundation.PSTR, nSize uint
 // GetPrivateProfileString calls KERNEL32!GetPrivateProfileStringW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestringw
 // Minimum OS: windows5.0.
-func GetPrivateProfileString(lpAppName string, lpKeyName string, lpDefault string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName string) (uint32, error) {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpDefault := win32.UTF16Ptr(lpDefault)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func GetPrivateProfileString(lpAppName *string, lpKeyName *string, lpDefault *string, lpReturnedString foundation.PWSTR, nSize uint32, lpFileName *string) (uint32, error) {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpKeyName := win32.UTF16PtrOrNil(lpKeyName)
+	_lpDefault := win32.UTF16PtrOrNil(lpDefault)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, e1 := syscall.SyscallN(procGetPrivateProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpDefault)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize), uintptr(unsafe.Pointer(_lpFileName)))
 	if e1 != 0 {
 		return uint32(r1), e1
@@ -784,14 +1250,14 @@ func GetPrivateProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.PS
 // GetPrivateProfileStruct calls KERNEL32!GetPrivateProfileStructW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestructw
 // Minimum OS: windows5.0.
-func GetPrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile string) bool {
+func GetPrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile *string) bool {
 	_lpszSection := win32.UTF16Ptr(lpszSection)
 	_lpszKey := win32.UTF16Ptr(lpszKey)
 	var _lpStruct *byte
 	if len(lpStruct) > 0 {
 		_lpStruct = &lpStruct[0]
 	}
-	_szFile := win32.UTF16Ptr(szFile)
+	_szFile := win32.UTF16PtrOrNil(szFile)
 	r1, _, _ := syscall.SyscallN(procGetPrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(_lpStruct)), uintptr(len(lpStruct)), uintptr(unsafe.Pointer(_szFile)))
 	return r1 != 0
 }
@@ -846,10 +1312,10 @@ func GetProfileSectionA(lpAppName foundation.PSTR, lpReturnedString foundation.P
 // GetProfileString calls KERNEL32!GetProfileStringW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprofilestringw
 // Minimum OS: windows5.0.
-func GetProfileString(lpAppName string, lpKeyName string, lpDefault string, lpReturnedString foundation.PWSTR, nSize uint32) uint32 {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpDefault := win32.UTF16Ptr(lpDefault)
+func GetProfileString(lpAppName *string, lpKeyName *string, lpDefault *string, lpReturnedString foundation.PWSTR, nSize uint32) uint32 {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpKeyName := win32.UTF16PtrOrNil(lpKeyName)
+	_lpDefault := win32.UTF16PtrOrNil(lpDefault)
 	r1, _, _ := syscall.SyscallN(procGetProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpDefault)), uintptr(unsafe.Pointer(lpReturnedString)), uintptr(nSize))
 	return uint32(r1)
 }
@@ -1318,8 +1784,8 @@ func RegInstallA(hmod foundation.HMODULE, pszSection foundation.PSTR, pstTable *
 }
 
 // RegRestoreAll calls ADVPACK!RegRestoreAllW.
-func RegRestoreAll(hWnd foundation.HWND, pszTitleString string, hkBckupKey systemregistry.HKEY) error {
-	_pszTitleString := win32.UTF16Ptr(pszTitleString)
+func RegRestoreAll(hWnd foundation.HWND, pszTitleString *string, hkBckupKey systemregistry.HKEY) error {
+	_pszTitleString := win32.UTF16PtrOrNil(pszTitleString)
 	r1, _, _ := syscall.SyscallN(procRegRestoreAll.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_pszTitleString)), uintptr(hkBckupKey))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1805,35 +2271,35 @@ func WinWatchOpen(hwnd foundation.HWND) HWINWATCH {
 
 // WldpCanExecuteBuffer calls Wldp!WldpCanExecuteBuffer.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutebuffer
-func WldpCanExecuteBuffer(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, buffer []byte, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
+func WldpCanExecuteBuffer(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, buffer []byte, auditInfo *string, result *WLDP_EXECUTION_POLICY) error {
 	var _buffer *byte
 	if len(buffer) > 0 {
 		_buffer = &buffer[0]
 	}
-	_auditInfo := win32.UTF16Ptr(auditInfo)
+	_auditInfo := win32.UTF16PtrOrNil(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteBuffer.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpCanExecuteFile calls Wldp!WldpCanExecuteFile.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutefile
-func WldpCanExecuteFile(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, fileHandle foundation.HANDLE, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
-	_auditInfo := win32.UTF16Ptr(auditInfo)
+func WldpCanExecuteFile(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, fileHandle foundation.HANDLE, auditInfo *string, result *WLDP_EXECUTION_POLICY) error {
+	_auditInfo := win32.UTF16PtrOrNil(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFile.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(fileHandle), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpCanExecuteFileFromDetachedSignature calls Wldp!WldpCanExecuteFileFromDetachedSignature.
-func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, contentFileHandle foundation.HANDLE, signatureFileHandle foundation.HANDLE, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
-	_auditInfo := win32.UTF16Ptr(auditInfo)
+func WldpCanExecuteFileFromDetachedSignature(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, contentFileHandle foundation.HANDLE, signatureFileHandle foundation.HANDLE, auditInfo *string, result *WLDP_EXECUTION_POLICY) error {
+	_auditInfo := win32.UTF16PtrOrNil(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteFileFromDetachedSignature.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(contentFileHandle), uintptr(signatureFileHandle), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpCanExecuteStream calls Wldp!WldpCanExecuteStream.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpcanexecutestream
-func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, stream *systemcom.IStream, auditInfo string, result *WLDP_EXECUTION_POLICY) error {
-	_auditInfo := win32.UTF16Ptr(auditInfo)
+func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OPTIONS, stream *systemcom.IStream, auditInfo *string, result *WLDP_EXECUTION_POLICY) error {
+	_auditInfo := win32.UTF16PtrOrNil(auditInfo)
 	r1, _, _ := syscall.SyscallN(procWldpCanExecuteStream.Addr(), uintptr(unsafe.Pointer(host)), uintptr(options), uintptr(unsafe.Pointer(stream)), uintptr(unsafe.Pointer(_auditInfo)), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1983,10 +2449,10 @@ func WldpSetWindowsLockdownRestriction(LockdownRestriction WLDP_WINDOWS_LOCKDOWN
 // WritePrivateProfileSection calls KERNEL32!WritePrivateProfileSectionW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilesectionw
 // Minimum OS: windows5.0.
-func WritePrivateProfileSection(lpAppName string, lpString string, lpFileName string) error {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpString := win32.UTF16Ptr(lpString)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func WritePrivateProfileSection(lpAppName *string, lpString *string, lpFileName *string) error {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpString := win32.UTF16PtrOrNil(lpString)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileSection.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpString)), uintptr(unsafe.Pointer(_lpFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2008,11 +2474,11 @@ func WritePrivateProfileSectionA(lpAppName foundation.PSTR, lpString foundation.
 // WritePrivateProfileString calls KERNEL32!WritePrivateProfileStringW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestringw
 // Minimum OS: windows5.0.
-func WritePrivateProfileString(lpAppName string, lpKeyName string, lpString string, lpFileName string) error {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpString := win32.UTF16Ptr(lpString)
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func WritePrivateProfileString(lpAppName *string, lpKeyName *string, lpString *string, lpFileName *string) error {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpKeyName := win32.UTF16PtrOrNil(lpKeyName)
+	_lpString := win32.UTF16PtrOrNil(lpString)
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpString)), uintptr(unsafe.Pointer(_lpFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2034,14 +2500,14 @@ func WritePrivateProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.
 // WritePrivateProfileStruct calls KERNEL32!WritePrivateProfileStructW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestructw
 // Minimum OS: windows5.0.
-func WritePrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile string) error {
+func WritePrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile *string) error {
 	_lpszSection := win32.UTF16Ptr(lpszSection)
 	_lpszKey := win32.UTF16Ptr(lpszKey)
 	var _lpStruct *byte
 	if len(lpStruct) > 0 {
 		_lpStruct = &lpStruct[0]
 	}
-	_szFile := win32.UTF16Ptr(szFile)
+	_szFile := win32.UTF16PtrOrNil(szFile)
 	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(_lpStruct)), uintptr(len(lpStruct)), uintptr(unsafe.Pointer(_szFile)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2091,10 +2557,10 @@ func WriteProfileSectionA(lpAppName foundation.PSTR, lpString foundation.PSTR) e
 // WriteProfileString calls KERNEL32!WriteProfileStringW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprofilestringw
 // Minimum OS: windows5.0.
-func WriteProfileString(lpAppName string, lpKeyName string, lpString string) error {
-	_lpAppName := win32.UTF16Ptr(lpAppName)
-	_lpKeyName := win32.UTF16Ptr(lpKeyName)
-	_lpString := win32.UTF16Ptr(lpString)
+func WriteProfileString(lpAppName *string, lpKeyName *string, lpString *string) error {
+	_lpAppName := win32.UTF16PtrOrNil(lpAppName)
+	_lpKeyName := win32.UTF16PtrOrNil(lpKeyName)
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, e1 := syscall.SyscallN(procWriteProfileString.Addr(), uintptr(unsafe.Pointer(_lpAppName)), uintptr(unsafe.Pointer(_lpKeyName)), uintptr(unsafe.Pointer(_lpString)))
 	if r1 == 0 {
 		return win32.LastError(e1)

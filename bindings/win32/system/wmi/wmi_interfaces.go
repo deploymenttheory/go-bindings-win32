@@ -5,6 +5,7 @@
 package wmi
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -349,6 +350,14 @@ func (self *ISWbemDateTime) GetVarDate(bIsLocal foundation.VARIANT_BOOL) (float6
 	_dVarDate := new(float64)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(bIsLocal), uintptr(win32.OutParam(unsafe.Pointer(_dVarDate))))
 	return *_dVarDate, win32.ErrIfFailed(int32(r1))
+}
+
+var specISWbemDateTime_SetVarDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// SetVarDate dispatches through ISWbemDateTime's vtable slot 44.
+func (self *ISWbemDateTime) SetVarDate(dVarDate float64, bIsLocal foundation.VARIANT_BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specISWbemDateTime_SetVarDate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dVarDate)), uintptr(bIsLocal)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFileTime dispatches through ISWbemDateTime's vtable slot 45.

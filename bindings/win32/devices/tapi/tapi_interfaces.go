@@ -5,6 +5,7 @@
 package tapi
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -864,6 +865,14 @@ func (self *IMcastAddressAllocation) EnumerateScopes(ppEnumMcastScope **IEnumMca
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMcastAddressAllocation_RequestAddress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// RequestAddress dispatches through IMcastAddressAllocation's vtable slot 9.
+func (self *IMcastAddressAllocation) RequestAddress(pScope *IMcastScope, LeaseStartTime float64, LeaseStopTime float64, NumAddresses int32, ppLeaseResponse **IMcastLeaseInfo) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIMcastAddressAllocation_RequestAddress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pScope)), uintptr(math.Float64bits(LeaseStartTime)), uintptr(math.Float64bits(LeaseStopTime)), uintptr(NumAddresses), uintptr(unsafe.Pointer(ppLeaseResponse))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // RenewAddress dispatches through IMcastAddressAllocation's vtable slot 10.
 func (self *IMcastAddressAllocation) RenewAddress(lReserved int32, pRenewRequest *IMcastLeaseInfo, ppRenewResponse **IMcastLeaseInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lReserved), uintptr(unsafe.Pointer(pRenewRequest)), uintptr(unsafe.Pointer(ppRenewResponse)))
@@ -873,6 +882,24 @@ func (self *IMcastAddressAllocation) RenewAddress(lReserved int32, pRenewRequest
 // ReleaseAddress dispatches through IMcastAddressAllocation's vtable slot 11.
 func (self *IMcastAddressAllocation) ReleaseAddress(pReleaseRequest *IMcastLeaseInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReleaseRequest)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMcastAddressAllocation_CreateLeaseInfo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// CreateLeaseInfo dispatches through IMcastAddressAllocation's vtable slot 12.
+func (self *IMcastAddressAllocation) CreateLeaseInfo(LeaseStartTime float64, LeaseStopTime float64, dwNumAddresses uint32, ppAddresses *foundation.PWSTR, pRequestID string, pServerAddress string, ppReleaseRequest **IMcastLeaseInfo) error {
+	_pRequestID := win32.UTF16Ptr(pRequestID)
+	_pServerAddress := win32.UTF16Ptr(pServerAddress)
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIMcastAddressAllocation_CreateLeaseInfo, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(LeaseStartTime)), uintptr(math.Float64bits(LeaseStopTime)), uintptr(dwNumAddresses), uintptr(unsafe.Pointer(ppAddresses)), uintptr(unsafe.Pointer(_pRequestID)), uintptr(unsafe.Pointer(_pServerAddress)), uintptr(unsafe.Pointer(ppReleaseRequest))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMcastAddressAllocation_CreateLeaseInfoFromVariant = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CreateLeaseInfoFromVariant dispatches through IMcastAddressAllocation's vtable slot 13.
+func (self *IMcastAddressAllocation) CreateLeaseInfoFromVariant(LeaseStartTime float64, LeaseStopTime float64, vAddresses systemvariant.VARIANT, pRequestID foundation.BSTR, pServerAddress foundation.BSTR, ppReleaseRequest **IMcastLeaseInfo) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIMcastAddressAllocation_CreateLeaseInfoFromVariant, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(LeaseStartTime)), uintptr(math.Float64bits(LeaseStopTime)), uintptr(unsafe.Pointer(&vAddresses)), uintptr(unsafe.Pointer(pRequestID)), uintptr(unsafe.Pointer(pServerAddress)), uintptr(unsafe.Pointer(ppReleaseRequest))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -897,9 +924,25 @@ func (self *IMcastLeaseInfo) Get_LeaseStartTime(pTime *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMcastLeaseInfo_Put_LeaseStartTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_LeaseStartTime dispatches through IMcastLeaseInfo's vtable slot 9.
+func (self *IMcastLeaseInfo) Put_LeaseStartTime(time float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIMcastLeaseInfo_Put_LeaseStartTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(time))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_LeaseStopTime dispatches through IMcastLeaseInfo's vtable slot 10.
 func (self *IMcastLeaseInfo) Get_LeaseStopTime(pTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTime)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMcastLeaseInfo_Put_LeaseStopTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_LeaseStopTime dispatches through IMcastLeaseInfo's vtable slot 11.
+func (self *IMcastLeaseInfo) Put_LeaseStopTime(time float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIMcastLeaseInfo_Put_LeaseStopTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(time))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1242,6 +1285,14 @@ func (self *ITAddress2) Put_EventFilter(TapiEvent TAPI_EVENT, lSubEvent int32, b
 // DeviceSpecific dispatches through ITAddress2's vtable slot 29.
 func (self *ITAddress2) DeviceSpecific(pCall *ITCallInfo, pParams *byte, dwSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)), uintptr(unsafe.Pointer(pParams)), uintptr(dwSize))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITAddress2_DeviceSpecificVariant = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeviceSpecificVariant dispatches through ITAddress2's vtable slot 30.
+func (self *ITAddress2) DeviceSpecificVariant(pCall *ITCallInfo, varDevSpecificByteArray systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specITAddress2_DeviceSpecificVariant, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)), uintptr(unsafe.Pointer(&varDevSpecificByteArray))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2407,6 +2458,14 @@ func (self *ITCallInfo) Get_CallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER) (syst
 	return *_ppCallInfoBuffer, win32.ErrIfFailed(int32(r1))
 }
 
+var specITCallInfo_Put_CallInfoBuffer = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_CallInfoBuffer dispatches through ITCallInfo's vtable slot 16.
+func (self *ITCallInfo) Put_CallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, pCallInfoBuffer systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specITCallInfo_Put_CallInfoBuffer, nil, uintptr(unsafe.Pointer(self)), uintptr(CallInfoBuffer), uintptr(unsafe.Pointer(&pCallInfoBuffer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetCallInfoBuffer dispatches through ITCallInfo's vtable slot 17.
 func (self *ITCallInfo) GetCallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, pdwSize *uint32, ppCallInfoBuffer **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(CallInfoBuffer), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(ppCallInfoBuffer)))
@@ -3183,11 +3242,27 @@ func (self *ITDirectoryObjectConference) Get_StartTime() (float64, error) {
 	return *_pDate, win32.ErrIfFailed(int32(r1))
 }
 
+var specITDirectoryObjectConference_Put_StartTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_StartTime dispatches through ITDirectoryObjectConference's vtable slot 19.
+func (self *ITDirectoryObjectConference) Put_StartTime(Date float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specITDirectoryObjectConference_Put_StartTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Date))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_StopTime dispatches through ITDirectoryObjectConference's vtable slot 20.
 func (self *ITDirectoryObjectConference) Get_StopTime() (float64, error) {
 	_pDate := new(float64)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pDate))))
 	return *_pDate, win32.ErrIfFailed(int32(r1))
+}
+
+var specITDirectoryObjectConference_Put_StopTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_StopTime dispatches through ITDirectoryObjectConference's vtable slot 21.
+func (self *ITDirectoryObjectConference) Put_StopTime(Date float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specITDirectoryObjectConference_Put_StopTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Date))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ITDirectoryObjectUser: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-itdirectoryobjectuser
@@ -3799,6 +3874,14 @@ type ITMediaPlayback struct {
 // IID_ITMediaPlayback is the interface identifier for ITMediaPlayback.
 var IID_ITMediaPlayback = win32.GUID{Data1: 0x627e8ae6, Data2: 0xae4c, Data3: 0x4a69, Data4: [8]byte{0xbb, 0x63, 0x2a, 0xd6, 0x25, 0x40, 0x4b, 0x77}}
 
+var specITMediaPlayback_Put_PlayList = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PlayList dispatches through ITMediaPlayback's vtable slot 7.
+func (self *ITMediaPlayback) Put_PlayList(PlayListVariant systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specITMediaPlayback_Put_PlayList, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&PlayListVariant))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PlayList dispatches through ITMediaPlayback's vtable slot 8.
 func (self *ITMediaPlayback) Get_PlayList() (systemvariant.VARIANT, error) {
 	_pPlayListVariant := new(systemvariant.VARIANT)
@@ -4112,6 +4195,14 @@ func (self *ITPhone) EnumeratePreferredAddresses() (*IEnumAddress, error) {
 // DeviceSpecific dispatches through ITPhone's vtable slot 37.
 func (self *ITPhone) DeviceSpecific(pParams *byte, dwSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParams)), uintptr(dwSize))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITPhone_DeviceSpecificVariant = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeviceSpecificVariant dispatches through ITPhone's vtable slot 38.
+func (self *ITPhone) DeviceSpecificVariant(varDevSpecificByteArray systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specITPhone_DeviceSpecificVariant, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varDevSpecificByteArray))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4993,6 +5084,14 @@ func (self *ITTAPI) EnumerateCallHubs() (*IEnumCallHub, error) {
 	return *_ppEnumCallHub, win32.ErrIfFailed(int32(r1))
 }
 
+var specITTAPI_SetCallHubTracking = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// SetCallHubTracking dispatches through ITTAPI's vtable slot 15.
+func (self *ITTAPI) SetCallHubTracking(pAddresses systemvariant.VARIANT, bTracking foundation.VARIANT_BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specITTAPI_SetCallHubTracking, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pAddresses)), uintptr(bTracking)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // EnumeratePrivateTAPIObjects dispatches through ITTAPI's vtable slot 16.
 func (self *ITTAPI) EnumeratePrivateTAPIObjects(ppEnumUnknown **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumUnknown)))
@@ -5324,6 +5423,15 @@ func (self *ITTerminalSupport2) Get_PluggableTerminalClasses(bstrTerminalSupercl
 	_pVariant := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTerminalSuperclass)), uintptr(lMediaType), uintptr(win32.OutParam(unsafe.Pointer(_pVariant))))
 	return *_pVariant, win32.ErrIfFailed(int32(r1))
+}
+
+var specITTerminalSupport2_EnumeratePluggableTerminalClasses = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// EnumeratePluggableTerminalClasses dispatches through ITTerminalSupport2's vtable slot 16.
+func (self *ITTerminalSupport2) EnumeratePluggableTerminalClasses(iidTerminalSuperclass win32.GUID, lMediaType int32) (*IEnumPluggableTerminalClassInfo, error) {
+	_ppClassEnumerator := new(*IEnumPluggableTerminalClassInfo)
+	r1, _, _ := win32.Call(self.LpVtbl[16], specITTerminalSupport2_EnumeratePluggableTerminalClasses, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&iidTerminalSuperclass)), uintptr(lMediaType), uintptr(win32.OutParam(unsafe.Pointer(_ppClassEnumerator)))).Tuple()
+	return *_ppClassEnumerator, win32.ErrIfFailed(int32(r1))
 }
 
 // ITToneDetectionEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ittonedetectionevent

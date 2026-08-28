@@ -4,114 +4,138 @@
 
 package winwlx
 
-// PFNMSGECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.BOOL, foundation.PWSTR) uint32.
+// PFNMSGECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.BOOL, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNMSGECALLBACK uintptr
 
-// PWLX_ASSIGN_SHELL_PROTECTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, foundation.HANDLE, foundation.HANDLE) int32.
+// PWLX_ASSIGN_SHELL_PROTECTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, foundation.HANDLE, foundation.HANDLE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_ASSIGN_SHELL_PROTECTION uintptr
 
-// PWLX_CHANGE_PASSWORD_NOTIFY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *WLX_MPR_NOTIFY_INFO, uint32) int32.
+// PWLX_CHANGE_PASSWORD_NOTIFY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *WLX_MPR_NOTIFY_INFO, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_CHANGE_PASSWORD_NOTIFY uintptr
 
-// PWLX_CHANGE_PASSWORD_NOTIFY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *WLX_MPR_NOTIFY_INFO, uint32, foundation.PWSTR, unsafe.Pointer) int32.
+// PWLX_CHANGE_PASSWORD_NOTIFY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *WLX_MPR_NOTIFY_INFO, uint32, foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_CHANGE_PASSWORD_NOTIFY_EX uintptr
 
-// PWLX_CLOSE_USER_DESKTOP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *WLX_DESKTOP, foundation.HANDLE) foundation.BOOL.
+// PWLX_CLOSE_USER_DESKTOP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *WLX_DESKTOP, foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_CLOSE_USER_DESKTOP uintptr
 
-// PWLX_CREATE_USER_DESKTOP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, foundation.PWSTR, **WLX_DESKTOP) foundation.BOOL.
+// PWLX_CREATE_USER_DESKTOP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, foundation.PWSTR, **WLX_DESKTOP) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_CREATE_USER_DESKTOP uintptr
 
-// PWLX_DIALOG_BOX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, foundation.PWSTR, foundation.HWND, uiwindowsandmessaging.DLGPROC) int32.
+// PWLX_DIALOG_BOX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, foundation.PWSTR, foundation.HWND, uiwindowsandmessaging.DLGPROC) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_DIALOG_BOX uintptr
 
-// PWLX_DIALOG_BOX_INDIRECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *uiwindowsandmessaging.DLGTEMPLATE, foundation.HWND, uiwindowsandmessaging.DLGPROC) int32.
+// PWLX_DIALOG_BOX_INDIRECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, *uiwindowsandmessaging.DLGTEMPLATE, foundation.HWND, uiwindowsandmessaging.DLGPROC) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_DIALOG_BOX_INDIRECT uintptr
 
-// PWLX_DIALOG_BOX_INDIRECT_PARAM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *uiwindowsandmessaging.DLGTEMPLATE, foundation.HWND, uiwindowsandmessaging.DLGPROC, foundation.LPARAM) int32.
+// PWLX_DIALOG_BOX_INDIRECT_PARAM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, *uiwindowsandmessaging.DLGTEMPLATE, foundation.HWND, uiwindowsandmessaging.DLGPROC, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_DIALOG_BOX_INDIRECT_PARAM uintptr
 
-// PWLX_DIALOG_BOX_PARAM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, foundation.PWSTR, foundation.HWND, uiwindowsandmessaging.DLGPROC, foundation.LPARAM) int32.
+// PWLX_DIALOG_BOX_PARAM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, foundation.PWSTR, foundation.HWND, uiwindowsandmessaging.DLGPROC, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_DIALOG_BOX_PARAM uintptr
 
-// PWLX_DISCONNECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.BOOL.
+// PWLX_DISCONNECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_DISCONNECT uintptr
 
-// PWLX_GET_OPTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, *uintptr) foundation.BOOL.
+// PWLX_GET_OPTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, *uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_GET_OPTION uintptr
 
-// PWLX_GET_SOURCE_DESKTOP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **WLX_DESKTOP) foundation.BOOL.
+// PWLX_GET_SOURCE_DESKTOP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **WLX_DESKTOP) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_GET_SOURCE_DESKTOP uintptr
 
-// PWLX_MESSAGE_BOX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HWND, foundation.PWSTR, foundation.PWSTR, uint32) int32.
+// PWLX_MESSAGE_BOX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HWND, foundation.PWSTR, foundation.PWSTR, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_MESSAGE_BOX uintptr
 
-// PWLX_QUERY_CLIENT_CREDENTIALS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WLX_CLIENT_CREDENTIALS_INFO_V1_0) foundation.BOOL.
+// PWLX_QUERY_CLIENT_CREDENTIALS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WLX_CLIENT_CREDENTIALS_INFO_V1_0) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_QUERY_CLIENT_CREDENTIALS uintptr
 
-// PWLX_QUERY_CONSOLESWITCH_CREDENTIALS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WLX_CONSOLESWITCH_CREDENTIALS_INFO_V1_0) uint32.
+// PWLX_QUERY_CONSOLESWITCH_CREDENTIALS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WLX_CONSOLESWITCH_CREDENTIALS_INFO_V1_0) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PWLX_QUERY_CONSOLESWITCH_CREDENTIALS uintptr
 
-// PWLX_QUERY_IC_CREDENTIALS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WLX_CLIENT_CREDENTIALS_INFO_V1_0) foundation.BOOL.
+// PWLX_QUERY_IC_CREDENTIALS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WLX_CLIENT_CREDENTIALS_INFO_V1_0) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_QUERY_IC_CREDENTIALS uintptr
 
-// PWLX_QUERY_TERMINAL_SERVICES_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *WLX_TERMINAL_SERVICES_DATA, foundation.PWSTR, foundation.PWSTR) uint32.
+// PWLX_QUERY_TERMINAL_SERVICES_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *WLX_TERMINAL_SERVICES_DATA, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PWLX_QUERY_TERMINAL_SERVICES_DATA uintptr
 
-// PWLX_QUERY_TS_LOGON_CREDENTIALS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WLX_CLIENT_CREDENTIALS_INFO_V2_0) foundation.BOOL.
+// PWLX_QUERY_TS_LOGON_CREDENTIALS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WLX_CLIENT_CREDENTIALS_INFO_V2_0) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_QUERY_TS_LOGON_CREDENTIALS uintptr
 
-// PWLX_SAS_NOTIFY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32).
+// PWLX_SAS_NOTIFY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr.
 type PWLX_SAS_NOTIFY uintptr
 
-// PWLX_SET_CONTEXT_POINTER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer).
+// PWLX_SET_CONTEXT_POINTER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer) uintptr.
 type PWLX_SET_CONTEXT_POINTER uintptr
 
-// PWLX_SET_OPTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uintptr, *uintptr) foundation.BOOL.
+// PWLX_SET_OPTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uintptr, *uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_SET_OPTION uintptr
 
-// PWLX_SET_RETURN_DESKTOP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *WLX_DESKTOP) foundation.BOOL.
+// PWLX_SET_RETURN_DESKTOP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *WLX_DESKTOP) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_SET_RETURN_DESKTOP uintptr
 
-// PWLX_SET_TIMEOUT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32) foundation.BOOL.
+// PWLX_SET_TIMEOUT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PWLX_SET_TIMEOUT uintptr
 
-// PWLX_SWITCH_DESKTOP_TO_USER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) int32.
+// PWLX_SWITCH_DESKTOP_TO_USER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_SWITCH_DESKTOP_TO_USER uintptr
 
-// PWLX_SWITCH_DESKTOP_TO_WINLOGON is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) int32.
+// PWLX_SWITCH_DESKTOP_TO_WINLOGON is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PWLX_SWITCH_DESKTOP_TO_WINLOGON uintptr
 
-// PWLX_USE_CTRL_ALT_DEL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE).
+// PWLX_USE_CTRL_ALT_DEL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr.
 type PWLX_USE_CTRL_ALT_DEL uintptr
 
-// PWLX_WIN31_MIGRATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE).
+// PWLX_WIN31_MIGRATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr.
 type PWLX_WIN31_MIGRATE uintptr

@@ -243,6 +243,7 @@ var (
 	procRtmAddNextHop                              = modrtm.NewProc("RtmAddNextHop")
 	procRtmAddRouteToDest                          = modrtm.NewProc("RtmAddRouteToDest")
 	procRtmBlockMethods                            = modrtm.NewProc("RtmBlockMethods")
+	procRtmConvertIpv6AddressAndLengthToNetAddress = modrtm.NewProc("RtmConvertIpv6AddressAndLengthToNetAddress")
 	procRtmConvertNetAddressToIpv6AddressAndLength = modrtm.NewProc("RtmConvertNetAddressToIpv6AddressAndLength")
 	procRtmCreateDestEnum                          = modrtm.NewProc("RtmCreateDestEnum")
 	procRtmCreateNextHopEnum                       = modrtm.NewProc("RtmCreateNextHopEnum")
@@ -299,6 +300,568 @@ var (
 	procRtmReleaseRoutes                           = modrtm.NewProc("RtmReleaseRoutes")
 	procRtmUpdateAndUnlockRoute                    = modrtm.NewProc("RtmUpdateAndUnlockRoute")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MgmAddGroupMembershipEntry                 *win32.Proc
+	MgmDeRegisterMProtocol                     *win32.Proc
+	MgmDeleteGroupMembershipEntry              *win32.Proc
+	MgmGetFirstMfe                             *win32.Proc
+	MgmGetFirstMfeStats                        *win32.Proc
+	MgmGetMfe                                  *win32.Proc
+	MgmGetMfeStats                             *win32.Proc
+	MgmGetNextMfe                              *win32.Proc
+	MgmGetNextMfeStats                         *win32.Proc
+	MgmGetProtocolOnInterface                  *win32.Proc
+	MgmGroupEnumerationEnd                     *win32.Proc
+	MgmGroupEnumerationGetNext                 *win32.Proc
+	MgmGroupEnumerationStart                   *win32.Proc
+	MgmRegisterMProtocol                       *win32.Proc
+	MgmReleaseInterfaceOwnership               *win32.Proc
+	MgmTakeInterfaceOwnership                  *win32.Proc
+	MprAdminBufferFree                         *win32.Proc
+	MprAdminConnectionClearStats               *win32.Proc
+	MprAdminConnectionEnum                     *win32.Proc
+	MprAdminConnectionEnumEx                   *win32.Proc
+	MprAdminConnectionGetInfo                  *win32.Proc
+	MprAdminConnectionGetInfoEx                *win32.Proc
+	MprAdminConnectionRemoveQuarantine         *win32.Proc
+	MprAdminDeregisterConnectionNotification   *win32.Proc
+	MprAdminDeviceEnum                         *win32.Proc
+	MprAdminEstablishDomainRasServer           *win32.Proc
+	MprAdminGetErrorString                     *win32.Proc
+	MprAdminGetPDCServer                       *win32.Proc
+	MprAdminInterfaceConnect                   *win32.Proc
+	MprAdminInterfaceCreate                    *win32.Proc
+	MprAdminInterfaceDelete                    *win32.Proc
+	MprAdminInterfaceDeviceGetInfo             *win32.Proc
+	MprAdminInterfaceDeviceSetInfo             *win32.Proc
+	MprAdminInterfaceDisconnect                *win32.Proc
+	MprAdminInterfaceEnum                      *win32.Proc
+	MprAdminInterfaceGetCredentials            *win32.Proc
+	MprAdminInterfaceGetCredentialsEx          *win32.Proc
+	MprAdminInterfaceGetCustomInfoEx           *win32.Proc
+	MprAdminInterfaceGetHandle                 *win32.Proc
+	MprAdminInterfaceGetInfo                   *win32.Proc
+	MprAdminInterfaceQueryUpdateResult         *win32.Proc
+	MprAdminInterfaceSetCredentials            *win32.Proc
+	MprAdminInterfaceSetCredentialsEx          *win32.Proc
+	MprAdminInterfaceSetCustomInfoEx           *win32.Proc
+	MprAdminInterfaceSetInfo                   *win32.Proc
+	MprAdminInterfaceTransportAdd              *win32.Proc
+	MprAdminInterfaceTransportGetInfo          *win32.Proc
+	MprAdminInterfaceTransportRemove           *win32.Proc
+	MprAdminInterfaceTransportSetInfo          *win32.Proc
+	MprAdminInterfaceUpdatePhonebookInfo       *win32.Proc
+	MprAdminInterfaceUpdateRoutes              *win32.Proc
+	MprAdminIsDomainRasServer                  *win32.Proc
+	MprAdminIsServiceInitialized               *win32.Proc
+	MprAdminIsServiceRunning                   *win32.Proc
+	MprAdminMIBBufferFree                      *win32.Proc
+	MprAdminMIBEntryCreate                     *win32.Proc
+	MprAdminMIBEntryDelete                     *win32.Proc
+	MprAdminMIBEntryGet                        *win32.Proc
+	MprAdminMIBEntryGetFirst                   *win32.Proc
+	MprAdminMIBEntryGetNext                    *win32.Proc
+	MprAdminMIBEntrySet                        *win32.Proc
+	MprAdminMIBServerConnect                   *win32.Proc
+	MprAdminMIBServerDisconnect                *win32.Proc
+	MprAdminPortClearStats                     *win32.Proc
+	MprAdminPortDisconnect                     *win32.Proc
+	MprAdminPortEnum                           *win32.Proc
+	MprAdminPortGetInfo                        *win32.Proc
+	MprAdminPortReset                          *win32.Proc
+	MprAdminRegisterConnectionNotification     *win32.Proc
+	MprAdminSendUserMessage                    *win32.Proc
+	MprAdminServerConnect                      *win32.Proc
+	MprAdminServerDisconnect                   *win32.Proc
+	MprAdminServerGetCredentials               *win32.Proc
+	MprAdminServerGetInfo                      *win32.Proc
+	MprAdminServerGetInfoEx                    *win32.Proc
+	MprAdminServerSetCredentials               *win32.Proc
+	MprAdminServerSetInfo                      *win32.Proc
+	MprAdminServerSetInfoEx                    *win32.Proc
+	MprAdminTransportCreate                    *win32.Proc
+	MprAdminTransportGetInfo                   *win32.Proc
+	MprAdminTransportSetInfo                   *win32.Proc
+	MprAdminUpdateConnection                   *win32.Proc
+	MprAdminUserGetInfo                        *win32.Proc
+	MprAdminUserSetInfo                        *win32.Proc
+	MprConfigBufferFree                        *win32.Proc
+	MprConfigFilterGetInfo                     *win32.Proc
+	MprConfigFilterSetInfo                     *win32.Proc
+	MprConfigGetFriendlyName                   *win32.Proc
+	MprConfigGetGuidName                       *win32.Proc
+	MprConfigInterfaceCreate                   *win32.Proc
+	MprConfigInterfaceDelete                   *win32.Proc
+	MprConfigInterfaceEnum                     *win32.Proc
+	MprConfigInterfaceGetCustomInfoEx          *win32.Proc
+	MprConfigInterfaceGetHandle                *win32.Proc
+	MprConfigInterfaceGetInfo                  *win32.Proc
+	MprConfigInterfaceSetCustomInfoEx          *win32.Proc
+	MprConfigInterfaceSetInfo                  *win32.Proc
+	MprConfigInterfaceTransportAdd             *win32.Proc
+	MprConfigInterfaceTransportEnum            *win32.Proc
+	MprConfigInterfaceTransportGetHandle       *win32.Proc
+	MprConfigInterfaceTransportGetInfo         *win32.Proc
+	MprConfigInterfaceTransportRemove          *win32.Proc
+	MprConfigInterfaceTransportSetInfo         *win32.Proc
+	MprConfigServerBackup                      *win32.Proc
+	MprConfigServerConnect                     *win32.Proc
+	MprConfigServerDisconnect                  *win32.Proc
+	MprConfigServerGetInfo                     *win32.Proc
+	MprConfigServerGetInfoEx                   *win32.Proc
+	MprConfigServerInstall                     *win32.Proc
+	MprConfigServerRefresh                     *win32.Proc
+	MprConfigServerRestore                     *win32.Proc
+	MprConfigServerSetInfo                     *win32.Proc
+	MprConfigServerSetInfoEx                   *win32.Proc
+	MprConfigTransportCreate                   *win32.Proc
+	MprConfigTransportDelete                   *win32.Proc
+	MprConfigTransportEnum                     *win32.Proc
+	MprConfigTransportGetHandle                *win32.Proc
+	MprConfigTransportGetInfo                  *win32.Proc
+	MprConfigTransportSetInfo                  *win32.Proc
+	MprInfoBlockAdd                            *win32.Proc
+	MprInfoBlockFind                           *win32.Proc
+	MprInfoBlockQuerySize                      *win32.Proc
+	MprInfoBlockRemove                         *win32.Proc
+	MprInfoBlockSet                            *win32.Proc
+	MprInfoCreate                              *win32.Proc
+	MprInfoDelete                              *win32.Proc
+	MprInfoDuplicate                           *win32.Proc
+	MprInfoRemoveAll                           *win32.Proc
+	RasClearConnectionStatistics               *win32.Proc
+	RasClearLinkStatistics                     *win32.Proc
+	RasConnectionNotification                  *win32.Proc
+	RasConnectionNotificationA                 *win32.Proc
+	RasCreatePhonebookEntry                    *win32.Proc
+	RasCreatePhonebookEntryA                   *win32.Proc
+	RasDeleteEntry                             *win32.Proc
+	RasDeleteEntryA                            *win32.Proc
+	RasDeleteSubEntry                          *win32.Proc
+	RasDeleteSubEntryA                         *win32.Proc
+	RasDial                                    *win32.Proc
+	RasDialA                                   *win32.Proc
+	RasDialDlg                                 *win32.Proc
+	RasDialDlgA                                *win32.Proc
+	RasEditPhonebookEntry                      *win32.Proc
+	RasEditPhonebookEntryA                     *win32.Proc
+	RasEntryDlg                                *win32.Proc
+	RasEntryDlgA                               *win32.Proc
+	RasEnumAutodialAddresses                   *win32.Proc
+	RasEnumAutodialAddressesA                  *win32.Proc
+	RasEnumConnections                         *win32.Proc
+	RasEnumConnectionsA                        *win32.Proc
+	RasEnumDevices                             *win32.Proc
+	RasEnumDevicesA                            *win32.Proc
+	RasEnumEntries                             *win32.Proc
+	RasEnumEntriesA                            *win32.Proc
+	RasFreeEapUserIdentity                     *win32.Proc
+	RasFreeEapUserIdentityA                    *win32.Proc
+	RasGetAutodialAddress                      *win32.Proc
+	RasGetAutodialAddressA                     *win32.Proc
+	RasGetAutodialEnable                       *win32.Proc
+	RasGetAutodialEnableA                      *win32.Proc
+	RasGetAutodialParam                        *win32.Proc
+	RasGetAutodialParamA                       *win32.Proc
+	RasGetConnectStatus                        *win32.Proc
+	RasGetConnectStatusA                       *win32.Proc
+	RasGetConnectionStatistics                 *win32.Proc
+	RasGetCountryInfo                          *win32.Proc
+	RasGetCountryInfoA                         *win32.Proc
+	RasGetCredentials                          *win32.Proc
+	RasGetCredentialsA                         *win32.Proc
+	RasGetCustomAuthData                       *win32.Proc
+	RasGetCustomAuthDataA                      *win32.Proc
+	RasGetEapUserData                          *win32.Proc
+	RasGetEapUserDataA                         *win32.Proc
+	RasGetEapUserIdentity                      *win32.Proc
+	RasGetEapUserIdentityA                     *win32.Proc
+	RasGetEntryDialParams                      *win32.Proc
+	RasGetEntryDialParamsA                     *win32.Proc
+	RasGetEntryProperties                      *win32.Proc
+	RasGetEntryPropertiesA                     *win32.Proc
+	RasGetErrorString                          *win32.Proc
+	RasGetErrorStringA                         *win32.Proc
+	RasGetLinkStatistics                       *win32.Proc
+	RasGetPCscf                                *win32.Proc
+	RasGetProjectionInfo                       *win32.Proc
+	RasGetProjectionInfoA                      *win32.Proc
+	RasGetProjectionInfoEx                     *win32.Proc
+	RasGetSubEntryHandle                       *win32.Proc
+	RasGetSubEntryHandleA                      *win32.Proc
+	RasGetSubEntryProperties                   *win32.Proc
+	RasGetSubEntryPropertiesA                  *win32.Proc
+	RasHangUp                                  *win32.Proc
+	RasHangUpA                                 *win32.Proc
+	RasInvokeEapUI                             *win32.Proc
+	RasPhonebookDlg                            *win32.Proc
+	RasPhonebookDlgA                           *win32.Proc
+	RasRenameEntry                             *win32.Proc
+	RasRenameEntryA                            *win32.Proc
+	RasSetAutodialAddress                      *win32.Proc
+	RasSetAutodialAddressA                     *win32.Proc
+	RasSetAutodialEnable                       *win32.Proc
+	RasSetAutodialEnableA                      *win32.Proc
+	RasSetAutodialParam                        *win32.Proc
+	RasSetAutodialParamA                       *win32.Proc
+	RasSetCredentials                          *win32.Proc
+	RasSetCredentialsA                         *win32.Proc
+	RasSetCustomAuthData                       *win32.Proc
+	RasSetCustomAuthDataA                      *win32.Proc
+	RasSetEapUserData                          *win32.Proc
+	RasSetEapUserDataA                         *win32.Proc
+	RasSetEntryDialParams                      *win32.Proc
+	RasSetEntryDialParamsA                     *win32.Proc
+	RasSetEntryProperties                      *win32.Proc
+	RasSetEntryPropertiesA                     *win32.Proc
+	RasSetSubEntryProperties                   *win32.Proc
+	RasSetSubEntryPropertiesA                  *win32.Proc
+	RasUpdateConnection                        *win32.Proc
+	RasValidateEntryName                       *win32.Proc
+	RasValidateEntryNameA                      *win32.Proc
+	RtmAddNextHop                              *win32.Proc
+	RtmAddRouteToDest                          *win32.Proc
+	RtmBlockMethods                            *win32.Proc
+	RtmConvertIpv6AddressAndLengthToNetAddress *win32.Proc
+	RtmConvertNetAddressToIpv6AddressAndLength *win32.Proc
+	RtmCreateDestEnum                          *win32.Proc
+	RtmCreateNextHopEnum                       *win32.Proc
+	RtmCreateRouteEnum                         *win32.Proc
+	RtmCreateRouteList                         *win32.Proc
+	RtmCreateRouteListEnum                     *win32.Proc
+	RtmDeleteEnumHandle                        *win32.Proc
+	RtmDeleteNextHop                           *win32.Proc
+	RtmDeleteRouteList                         *win32.Proc
+	RtmDeleteRouteToDest                       *win32.Proc
+	RtmDeregisterEntity                        *win32.Proc
+	RtmDeregisterFromChangeNotification        *win32.Proc
+	RtmFindNextHop                             *win32.Proc
+	RtmGetChangeStatus                         *win32.Proc
+	RtmGetChangedDests                         *win32.Proc
+	RtmGetDestInfo                             *win32.Proc
+	RtmGetEntityInfo                           *win32.Proc
+	RtmGetEntityMethods                        *win32.Proc
+	RtmGetEnumDests                            *win32.Proc
+	RtmGetEnumNextHops                         *win32.Proc
+	RtmGetEnumRoutes                           *win32.Proc
+	RtmGetExactMatchDestination                *win32.Proc
+	RtmGetExactMatchRoute                      *win32.Proc
+	RtmGetLessSpecificDestination              *win32.Proc
+	RtmGetListEnumRoutes                       *win32.Proc
+	RtmGetMostSpecificDestination              *win32.Proc
+	RtmGetNextHopInfo                          *win32.Proc
+	RtmGetNextHopPointer                       *win32.Proc
+	RtmGetOpaqueInformationPointer             *win32.Proc
+	RtmGetRegisteredEntities                   *win32.Proc
+	RtmGetRouteInfo                            *win32.Proc
+	RtmGetRoutePointer                         *win32.Proc
+	RtmHoldDestination                         *win32.Proc
+	RtmIgnoreChangedDests                      *win32.Proc
+	RtmInsertInRouteList                       *win32.Proc
+	RtmInvokeMethod                            *win32.Proc
+	RtmIsBestRoute                             *win32.Proc
+	RtmIsMarkedForChangeNotification           *win32.Proc
+	RtmLockDestination                         *win32.Proc
+	RtmLockNextHop                             *win32.Proc
+	RtmLockRoute                               *win32.Proc
+	RtmMarkDestForChangeNotification           *win32.Proc
+	RtmReferenceHandles                        *win32.Proc
+	RtmRegisterEntity                          *win32.Proc
+	RtmRegisterForChangeNotification           *win32.Proc
+	RtmReleaseChangedDests                     *win32.Proc
+	RtmReleaseDestInfo                         *win32.Proc
+	RtmReleaseDests                            *win32.Proc
+	RtmReleaseEntities                         *win32.Proc
+	RtmReleaseEntityInfo                       *win32.Proc
+	RtmReleaseNextHopInfo                      *win32.Proc
+	RtmReleaseNextHops                         *win32.Proc
+	RtmReleaseRouteInfo                        *win32.Proc
+	RtmReleaseRoutes                           *win32.Proc
+	RtmUpdateAndUnlockRoute                    *win32.Proc
+}{
+	MgmAddGroupMembershipEntry:                 procMgmAddGroupMembershipEntry,
+	MgmDeRegisterMProtocol:                     procMgmDeRegisterMProtocol,
+	MgmDeleteGroupMembershipEntry:              procMgmDeleteGroupMembershipEntry,
+	MgmGetFirstMfe:                             procMgmGetFirstMfe,
+	MgmGetFirstMfeStats:                        procMgmGetFirstMfeStats,
+	MgmGetMfe:                                  procMgmGetMfe,
+	MgmGetMfeStats:                             procMgmGetMfeStats,
+	MgmGetNextMfe:                              procMgmGetNextMfe,
+	MgmGetNextMfeStats:                         procMgmGetNextMfeStats,
+	MgmGetProtocolOnInterface:                  procMgmGetProtocolOnInterface,
+	MgmGroupEnumerationEnd:                     procMgmGroupEnumerationEnd,
+	MgmGroupEnumerationGetNext:                 procMgmGroupEnumerationGetNext,
+	MgmGroupEnumerationStart:                   procMgmGroupEnumerationStart,
+	MgmRegisterMProtocol:                       procMgmRegisterMProtocol,
+	MgmReleaseInterfaceOwnership:               procMgmReleaseInterfaceOwnership,
+	MgmTakeInterfaceOwnership:                  procMgmTakeInterfaceOwnership,
+	MprAdminBufferFree:                         procMprAdminBufferFree,
+	MprAdminConnectionClearStats:               procMprAdminConnectionClearStats,
+	MprAdminConnectionEnum:                     procMprAdminConnectionEnum,
+	MprAdminConnectionEnumEx:                   procMprAdminConnectionEnumEx,
+	MprAdminConnectionGetInfo:                  procMprAdminConnectionGetInfo,
+	MprAdminConnectionGetInfoEx:                procMprAdminConnectionGetInfoEx,
+	MprAdminConnectionRemoveQuarantine:         procMprAdminConnectionRemoveQuarantine,
+	MprAdminDeregisterConnectionNotification:   procMprAdminDeregisterConnectionNotification,
+	MprAdminDeviceEnum:                         procMprAdminDeviceEnum,
+	MprAdminEstablishDomainRasServer:           procMprAdminEstablishDomainRasServer,
+	MprAdminGetErrorString:                     procMprAdminGetErrorString,
+	MprAdminGetPDCServer:                       procMprAdminGetPDCServer,
+	MprAdminInterfaceConnect:                   procMprAdminInterfaceConnect,
+	MprAdminInterfaceCreate:                    procMprAdminInterfaceCreate,
+	MprAdminInterfaceDelete:                    procMprAdminInterfaceDelete,
+	MprAdminInterfaceDeviceGetInfo:             procMprAdminInterfaceDeviceGetInfo,
+	MprAdminInterfaceDeviceSetInfo:             procMprAdminInterfaceDeviceSetInfo,
+	MprAdminInterfaceDisconnect:                procMprAdminInterfaceDisconnect,
+	MprAdminInterfaceEnum:                      procMprAdminInterfaceEnum,
+	MprAdminInterfaceGetCredentials:            procMprAdminInterfaceGetCredentials,
+	MprAdminInterfaceGetCredentialsEx:          procMprAdminInterfaceGetCredentialsEx,
+	MprAdminInterfaceGetCustomInfoEx:           procMprAdminInterfaceGetCustomInfoEx,
+	MprAdminInterfaceGetHandle:                 procMprAdminInterfaceGetHandle,
+	MprAdminInterfaceGetInfo:                   procMprAdminInterfaceGetInfo,
+	MprAdminInterfaceQueryUpdateResult:         procMprAdminInterfaceQueryUpdateResult,
+	MprAdminInterfaceSetCredentials:            procMprAdminInterfaceSetCredentials,
+	MprAdminInterfaceSetCredentialsEx:          procMprAdminInterfaceSetCredentialsEx,
+	MprAdminInterfaceSetCustomInfoEx:           procMprAdminInterfaceSetCustomInfoEx,
+	MprAdminInterfaceSetInfo:                   procMprAdminInterfaceSetInfo,
+	MprAdminInterfaceTransportAdd:              procMprAdminInterfaceTransportAdd,
+	MprAdminInterfaceTransportGetInfo:          procMprAdminInterfaceTransportGetInfo,
+	MprAdminInterfaceTransportRemove:           procMprAdminInterfaceTransportRemove,
+	MprAdminInterfaceTransportSetInfo:          procMprAdminInterfaceTransportSetInfo,
+	MprAdminInterfaceUpdatePhonebookInfo:       procMprAdminInterfaceUpdatePhonebookInfo,
+	MprAdminInterfaceUpdateRoutes:              procMprAdminInterfaceUpdateRoutes,
+	MprAdminIsDomainRasServer:                  procMprAdminIsDomainRasServer,
+	MprAdminIsServiceInitialized:               procMprAdminIsServiceInitialized,
+	MprAdminIsServiceRunning:                   procMprAdminIsServiceRunning,
+	MprAdminMIBBufferFree:                      procMprAdminMIBBufferFree,
+	MprAdminMIBEntryCreate:                     procMprAdminMIBEntryCreate,
+	MprAdminMIBEntryDelete:                     procMprAdminMIBEntryDelete,
+	MprAdminMIBEntryGet:                        procMprAdminMIBEntryGet,
+	MprAdminMIBEntryGetFirst:                   procMprAdminMIBEntryGetFirst,
+	MprAdminMIBEntryGetNext:                    procMprAdminMIBEntryGetNext,
+	MprAdminMIBEntrySet:                        procMprAdminMIBEntrySet,
+	MprAdminMIBServerConnect:                   procMprAdminMIBServerConnect,
+	MprAdminMIBServerDisconnect:                procMprAdminMIBServerDisconnect,
+	MprAdminPortClearStats:                     procMprAdminPortClearStats,
+	MprAdminPortDisconnect:                     procMprAdminPortDisconnect,
+	MprAdminPortEnum:                           procMprAdminPortEnum,
+	MprAdminPortGetInfo:                        procMprAdminPortGetInfo,
+	MprAdminPortReset:                          procMprAdminPortReset,
+	MprAdminRegisterConnectionNotification:     procMprAdminRegisterConnectionNotification,
+	MprAdminSendUserMessage:                    procMprAdminSendUserMessage,
+	MprAdminServerConnect:                      procMprAdminServerConnect,
+	MprAdminServerDisconnect:                   procMprAdminServerDisconnect,
+	MprAdminServerGetCredentials:               procMprAdminServerGetCredentials,
+	MprAdminServerGetInfo:                      procMprAdminServerGetInfo,
+	MprAdminServerGetInfoEx:                    procMprAdminServerGetInfoEx,
+	MprAdminServerSetCredentials:               procMprAdminServerSetCredentials,
+	MprAdminServerSetInfo:                      procMprAdminServerSetInfo,
+	MprAdminServerSetInfoEx:                    procMprAdminServerSetInfoEx,
+	MprAdminTransportCreate:                    procMprAdminTransportCreate,
+	MprAdminTransportGetInfo:                   procMprAdminTransportGetInfo,
+	MprAdminTransportSetInfo:                   procMprAdminTransportSetInfo,
+	MprAdminUpdateConnection:                   procMprAdminUpdateConnection,
+	MprAdminUserGetInfo:                        procMprAdminUserGetInfo,
+	MprAdminUserSetInfo:                        procMprAdminUserSetInfo,
+	MprConfigBufferFree:                        procMprConfigBufferFree,
+	MprConfigFilterGetInfo:                     procMprConfigFilterGetInfo,
+	MprConfigFilterSetInfo:                     procMprConfigFilterSetInfo,
+	MprConfigGetFriendlyName:                   procMprConfigGetFriendlyName,
+	MprConfigGetGuidName:                       procMprConfigGetGuidName,
+	MprConfigInterfaceCreate:                   procMprConfigInterfaceCreate,
+	MprConfigInterfaceDelete:                   procMprConfigInterfaceDelete,
+	MprConfigInterfaceEnum:                     procMprConfigInterfaceEnum,
+	MprConfigInterfaceGetCustomInfoEx:          procMprConfigInterfaceGetCustomInfoEx,
+	MprConfigInterfaceGetHandle:                procMprConfigInterfaceGetHandle,
+	MprConfigInterfaceGetInfo:                  procMprConfigInterfaceGetInfo,
+	MprConfigInterfaceSetCustomInfoEx:          procMprConfigInterfaceSetCustomInfoEx,
+	MprConfigInterfaceSetInfo:                  procMprConfigInterfaceSetInfo,
+	MprConfigInterfaceTransportAdd:             procMprConfigInterfaceTransportAdd,
+	MprConfigInterfaceTransportEnum:            procMprConfigInterfaceTransportEnum,
+	MprConfigInterfaceTransportGetHandle:       procMprConfigInterfaceTransportGetHandle,
+	MprConfigInterfaceTransportGetInfo:         procMprConfigInterfaceTransportGetInfo,
+	MprConfigInterfaceTransportRemove:          procMprConfigInterfaceTransportRemove,
+	MprConfigInterfaceTransportSetInfo:         procMprConfigInterfaceTransportSetInfo,
+	MprConfigServerBackup:                      procMprConfigServerBackup,
+	MprConfigServerConnect:                     procMprConfigServerConnect,
+	MprConfigServerDisconnect:                  procMprConfigServerDisconnect,
+	MprConfigServerGetInfo:                     procMprConfigServerGetInfo,
+	MprConfigServerGetInfoEx:                   procMprConfigServerGetInfoEx,
+	MprConfigServerInstall:                     procMprConfigServerInstall,
+	MprConfigServerRefresh:                     procMprConfigServerRefresh,
+	MprConfigServerRestore:                     procMprConfigServerRestore,
+	MprConfigServerSetInfo:                     procMprConfigServerSetInfo,
+	MprConfigServerSetInfoEx:                   procMprConfigServerSetInfoEx,
+	MprConfigTransportCreate:                   procMprConfigTransportCreate,
+	MprConfigTransportDelete:                   procMprConfigTransportDelete,
+	MprConfigTransportEnum:                     procMprConfigTransportEnum,
+	MprConfigTransportGetHandle:                procMprConfigTransportGetHandle,
+	MprConfigTransportGetInfo:                  procMprConfigTransportGetInfo,
+	MprConfigTransportSetInfo:                  procMprConfigTransportSetInfo,
+	MprInfoBlockAdd:                            procMprInfoBlockAdd,
+	MprInfoBlockFind:                           procMprInfoBlockFind,
+	MprInfoBlockQuerySize:                      procMprInfoBlockQuerySize,
+	MprInfoBlockRemove:                         procMprInfoBlockRemove,
+	MprInfoBlockSet:                            procMprInfoBlockSet,
+	MprInfoCreate:                              procMprInfoCreate,
+	MprInfoDelete:                              procMprInfoDelete,
+	MprInfoDuplicate:                           procMprInfoDuplicate,
+	MprInfoRemoveAll:                           procMprInfoRemoveAll,
+	RasClearConnectionStatistics:               procRasClearConnectionStatistics,
+	RasClearLinkStatistics:                     procRasClearLinkStatistics,
+	RasConnectionNotification:                  procRasConnectionNotification,
+	RasConnectionNotificationA:                 procRasConnectionNotificationA,
+	RasCreatePhonebookEntry:                    procRasCreatePhonebookEntry,
+	RasCreatePhonebookEntryA:                   procRasCreatePhonebookEntryA,
+	RasDeleteEntry:                             procRasDeleteEntry,
+	RasDeleteEntryA:                            procRasDeleteEntryA,
+	RasDeleteSubEntry:                          procRasDeleteSubEntry,
+	RasDeleteSubEntryA:                         procRasDeleteSubEntryA,
+	RasDial:                                    procRasDial,
+	RasDialA:                                   procRasDialA,
+	RasDialDlg:                                 procRasDialDlg,
+	RasDialDlgA:                                procRasDialDlgA,
+	RasEditPhonebookEntry:                      procRasEditPhonebookEntry,
+	RasEditPhonebookEntryA:                     procRasEditPhonebookEntryA,
+	RasEntryDlg:                                procRasEntryDlg,
+	RasEntryDlgA:                               procRasEntryDlgA,
+	RasEnumAutodialAddresses:                   procRasEnumAutodialAddresses,
+	RasEnumAutodialAddressesA:                  procRasEnumAutodialAddressesA,
+	RasEnumConnections:                         procRasEnumConnections,
+	RasEnumConnectionsA:                        procRasEnumConnectionsA,
+	RasEnumDevices:                             procRasEnumDevices,
+	RasEnumDevicesA:                            procRasEnumDevicesA,
+	RasEnumEntries:                             procRasEnumEntries,
+	RasEnumEntriesA:                            procRasEnumEntriesA,
+	RasFreeEapUserIdentity:                     procRasFreeEapUserIdentity,
+	RasFreeEapUserIdentityA:                    procRasFreeEapUserIdentityA,
+	RasGetAutodialAddress:                      procRasGetAutodialAddress,
+	RasGetAutodialAddressA:                     procRasGetAutodialAddressA,
+	RasGetAutodialEnable:                       procRasGetAutodialEnable,
+	RasGetAutodialEnableA:                      procRasGetAutodialEnableA,
+	RasGetAutodialParam:                        procRasGetAutodialParam,
+	RasGetAutodialParamA:                       procRasGetAutodialParamA,
+	RasGetConnectStatus:                        procRasGetConnectStatus,
+	RasGetConnectStatusA:                       procRasGetConnectStatusA,
+	RasGetConnectionStatistics:                 procRasGetConnectionStatistics,
+	RasGetCountryInfo:                          procRasGetCountryInfo,
+	RasGetCountryInfoA:                         procRasGetCountryInfoA,
+	RasGetCredentials:                          procRasGetCredentials,
+	RasGetCredentialsA:                         procRasGetCredentialsA,
+	RasGetCustomAuthData:                       procRasGetCustomAuthData,
+	RasGetCustomAuthDataA:                      procRasGetCustomAuthDataA,
+	RasGetEapUserData:                          procRasGetEapUserData,
+	RasGetEapUserDataA:                         procRasGetEapUserDataA,
+	RasGetEapUserIdentity:                      procRasGetEapUserIdentity,
+	RasGetEapUserIdentityA:                     procRasGetEapUserIdentityA,
+	RasGetEntryDialParams:                      procRasGetEntryDialParams,
+	RasGetEntryDialParamsA:                     procRasGetEntryDialParamsA,
+	RasGetEntryProperties:                      procRasGetEntryProperties,
+	RasGetEntryPropertiesA:                     procRasGetEntryPropertiesA,
+	RasGetErrorString:                          procRasGetErrorString,
+	RasGetErrorStringA:                         procRasGetErrorStringA,
+	RasGetLinkStatistics:                       procRasGetLinkStatistics,
+	RasGetPCscf:                                procRasGetPCscf,
+	RasGetProjectionInfo:                       procRasGetProjectionInfo,
+	RasGetProjectionInfoA:                      procRasGetProjectionInfoA,
+	RasGetProjectionInfoEx:                     procRasGetProjectionInfoEx,
+	RasGetSubEntryHandle:                       procRasGetSubEntryHandle,
+	RasGetSubEntryHandleA:                      procRasGetSubEntryHandleA,
+	RasGetSubEntryProperties:                   procRasGetSubEntryProperties,
+	RasGetSubEntryPropertiesA:                  procRasGetSubEntryPropertiesA,
+	RasHangUp:                                  procRasHangUp,
+	RasHangUpA:                                 procRasHangUpA,
+	RasInvokeEapUI:                             procRasInvokeEapUI,
+	RasPhonebookDlg:                            procRasPhonebookDlg,
+	RasPhonebookDlgA:                           procRasPhonebookDlgA,
+	RasRenameEntry:                             procRasRenameEntry,
+	RasRenameEntryA:                            procRasRenameEntryA,
+	RasSetAutodialAddress:                      procRasSetAutodialAddress,
+	RasSetAutodialAddressA:                     procRasSetAutodialAddressA,
+	RasSetAutodialEnable:                       procRasSetAutodialEnable,
+	RasSetAutodialEnableA:                      procRasSetAutodialEnableA,
+	RasSetAutodialParam:                        procRasSetAutodialParam,
+	RasSetAutodialParamA:                       procRasSetAutodialParamA,
+	RasSetCredentials:                          procRasSetCredentials,
+	RasSetCredentialsA:                         procRasSetCredentialsA,
+	RasSetCustomAuthData:                       procRasSetCustomAuthData,
+	RasSetCustomAuthDataA:                      procRasSetCustomAuthDataA,
+	RasSetEapUserData:                          procRasSetEapUserData,
+	RasSetEapUserDataA:                         procRasSetEapUserDataA,
+	RasSetEntryDialParams:                      procRasSetEntryDialParams,
+	RasSetEntryDialParamsA:                     procRasSetEntryDialParamsA,
+	RasSetEntryProperties:                      procRasSetEntryProperties,
+	RasSetEntryPropertiesA:                     procRasSetEntryPropertiesA,
+	RasSetSubEntryProperties:                   procRasSetSubEntryProperties,
+	RasSetSubEntryPropertiesA:                  procRasSetSubEntryPropertiesA,
+	RasUpdateConnection:                        procRasUpdateConnection,
+	RasValidateEntryName:                       procRasValidateEntryName,
+	RasValidateEntryNameA:                      procRasValidateEntryNameA,
+	RtmAddNextHop:                              procRtmAddNextHop,
+	RtmAddRouteToDest:                          procRtmAddRouteToDest,
+	RtmBlockMethods:                            procRtmBlockMethods,
+	RtmConvertIpv6AddressAndLengthToNetAddress: procRtmConvertIpv6AddressAndLengthToNetAddress,
+	RtmConvertNetAddressToIpv6AddressAndLength: procRtmConvertNetAddressToIpv6AddressAndLength,
+	RtmCreateDestEnum:                          procRtmCreateDestEnum,
+	RtmCreateNextHopEnum:                       procRtmCreateNextHopEnum,
+	RtmCreateRouteEnum:                         procRtmCreateRouteEnum,
+	RtmCreateRouteList:                         procRtmCreateRouteList,
+	RtmCreateRouteListEnum:                     procRtmCreateRouteListEnum,
+	RtmDeleteEnumHandle:                        procRtmDeleteEnumHandle,
+	RtmDeleteNextHop:                           procRtmDeleteNextHop,
+	RtmDeleteRouteList:                         procRtmDeleteRouteList,
+	RtmDeleteRouteToDest:                       procRtmDeleteRouteToDest,
+	RtmDeregisterEntity:                        procRtmDeregisterEntity,
+	RtmDeregisterFromChangeNotification:        procRtmDeregisterFromChangeNotification,
+	RtmFindNextHop:                             procRtmFindNextHop,
+	RtmGetChangeStatus:                         procRtmGetChangeStatus,
+	RtmGetChangedDests:                         procRtmGetChangedDests,
+	RtmGetDestInfo:                             procRtmGetDestInfo,
+	RtmGetEntityInfo:                           procRtmGetEntityInfo,
+	RtmGetEntityMethods:                        procRtmGetEntityMethods,
+	RtmGetEnumDests:                            procRtmGetEnumDests,
+	RtmGetEnumNextHops:                         procRtmGetEnumNextHops,
+	RtmGetEnumRoutes:                           procRtmGetEnumRoutes,
+	RtmGetExactMatchDestination:                procRtmGetExactMatchDestination,
+	RtmGetExactMatchRoute:                      procRtmGetExactMatchRoute,
+	RtmGetLessSpecificDestination:              procRtmGetLessSpecificDestination,
+	RtmGetListEnumRoutes:                       procRtmGetListEnumRoutes,
+	RtmGetMostSpecificDestination:              procRtmGetMostSpecificDestination,
+	RtmGetNextHopInfo:                          procRtmGetNextHopInfo,
+	RtmGetNextHopPointer:                       procRtmGetNextHopPointer,
+	RtmGetOpaqueInformationPointer:             procRtmGetOpaqueInformationPointer,
+	RtmGetRegisteredEntities:                   procRtmGetRegisteredEntities,
+	RtmGetRouteInfo:                            procRtmGetRouteInfo,
+	RtmGetRoutePointer:                         procRtmGetRoutePointer,
+	RtmHoldDestination:                         procRtmHoldDestination,
+	RtmIgnoreChangedDests:                      procRtmIgnoreChangedDests,
+	RtmInsertInRouteList:                       procRtmInsertInRouteList,
+	RtmInvokeMethod:                            procRtmInvokeMethod,
+	RtmIsBestRoute:                             procRtmIsBestRoute,
+	RtmIsMarkedForChangeNotification:           procRtmIsMarkedForChangeNotification,
+	RtmLockDestination:                         procRtmLockDestination,
+	RtmLockNextHop:                             procRtmLockNextHop,
+	RtmLockRoute:                               procRtmLockRoute,
+	RtmMarkDestForChangeNotification:           procRtmMarkDestForChangeNotification,
+	RtmReferenceHandles:                        procRtmReferenceHandles,
+	RtmRegisterEntity:                          procRtmRegisterEntity,
+	RtmRegisterForChangeNotification:           procRtmRegisterForChangeNotification,
+	RtmReleaseChangedDests:                     procRtmReleaseChangedDests,
+	RtmReleaseDestInfo:                         procRtmReleaseDestInfo,
+	RtmReleaseDests:                            procRtmReleaseDests,
+	RtmReleaseEntities:                         procRtmReleaseEntities,
+	RtmReleaseEntityInfo:                       procRtmReleaseEntityInfo,
+	RtmReleaseNextHopInfo:                      procRtmReleaseNextHopInfo,
+	RtmReleaseNextHops:                         procRtmReleaseNextHops,
+	RtmReleaseRouteInfo:                        procRtmReleaseRouteInfo,
+	RtmReleaseRoutes:                           procRtmReleaseRoutes,
+	RtmUpdateAndUnlockRoute:                    procRtmUpdateAndUnlockRoute,
+}
 
 // MgmAddGroupMembershipEntry calls rtm!MgmAddGroupMembershipEntry.
 // https://learn.microsoft.com/windows/win32/api/mgm/nf-mgm-mgmaddgroupmembershipentry
@@ -590,8 +1153,8 @@ func MprAdminInterfaceEnum(hMprServer uintptr, dwLevel uint32, lplpbBuffer **byt
 // MprAdminInterfaceGetCredentials calls MPRAPI!MprAdminInterfaceGetCredentials.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradmininterfacegetcredentials
 // Minimum OS: windowsserver2000.
-func MprAdminInterfaceGetCredentials(lpwsServer string, lpwsInterfaceName string, lpwsUserName foundation.PWSTR, lpwsPassword foundation.PWSTR, lpwsDomainName foundation.PWSTR) uint32 {
-	_lpwsServer := win32.UTF16Ptr(lpwsServer)
+func MprAdminInterfaceGetCredentials(lpwsServer *string, lpwsInterfaceName string, lpwsUserName foundation.PWSTR, lpwsPassword foundation.PWSTR, lpwsDomainName foundation.PWSTR) uint32 {
+	_lpwsServer := win32.UTF16PtrOrNil(lpwsServer)
 	_lpwsInterfaceName := win32.UTF16Ptr(lpwsInterfaceName)
 	r1, _, _ := syscall.SyscallN(procMprAdminInterfaceGetCredentials.Addr(), uintptr(unsafe.Pointer(_lpwsServer)), uintptr(unsafe.Pointer(_lpwsInterfaceName)), uintptr(unsafe.Pointer(lpwsUserName)), uintptr(unsafe.Pointer(lpwsPassword)), uintptr(unsafe.Pointer(lpwsDomainName)))
 	return uint32(r1)
@@ -642,12 +1205,12 @@ func MprAdminInterfaceQueryUpdateResult(hMprServer uintptr, hInterface foundatio
 // MprAdminInterfaceSetCredentials calls MPRAPI!MprAdminInterfaceSetCredentials.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradmininterfacesetcredentials
 // Minimum OS: windowsserver2000.
-func MprAdminInterfaceSetCredentials(lpwsServer string, lpwsInterfaceName string, lpwsUserName string, lpwsDomainName string, lpwsPassword string) uint32 {
-	_lpwsServer := win32.UTF16Ptr(lpwsServer)
+func MprAdminInterfaceSetCredentials(lpwsServer *string, lpwsInterfaceName string, lpwsUserName *string, lpwsDomainName *string, lpwsPassword *string) uint32 {
+	_lpwsServer := win32.UTF16PtrOrNil(lpwsServer)
 	_lpwsInterfaceName := win32.UTF16Ptr(lpwsInterfaceName)
-	_lpwsUserName := win32.UTF16Ptr(lpwsUserName)
-	_lpwsDomainName := win32.UTF16Ptr(lpwsDomainName)
-	_lpwsPassword := win32.UTF16Ptr(lpwsPassword)
+	_lpwsUserName := win32.UTF16PtrOrNil(lpwsUserName)
+	_lpwsDomainName := win32.UTF16PtrOrNil(lpwsDomainName)
+	_lpwsPassword := win32.UTF16PtrOrNil(lpwsPassword)
 	r1, _, _ := syscall.SyscallN(procMprAdminInterfaceSetCredentials.Addr(), uintptr(unsafe.Pointer(_lpwsServer)), uintptr(unsafe.Pointer(_lpwsInterfaceName)), uintptr(unsafe.Pointer(_lpwsUserName)), uintptr(unsafe.Pointer(_lpwsDomainName)), uintptr(unsafe.Pointer(_lpwsPassword)))
 	return uint32(r1)
 }
@@ -811,8 +1374,8 @@ func MprAdminMIBEntrySet(hMibServer uintptr, dwProtocolId uint32, dwRoutingPid u
 // MprAdminMIBServerConnect calls MPRAPI!MprAdminMIBServerConnect.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradminmibserverconnect
 // Minimum OS: windowsserver2000.
-func MprAdminMIBServerConnect(lpwsServerName string, phMibServer *uintptr) uint32 {
-	_lpwsServerName := win32.UTF16Ptr(lpwsServerName)
+func MprAdminMIBServerConnect(lpwsServerName *string, phMibServer *uintptr) uint32 {
+	_lpwsServerName := win32.UTF16PtrOrNil(lpwsServerName)
 	r1, _, _ := syscall.SyscallN(procMprAdminMIBServerConnect.Addr(), uintptr(unsafe.Pointer(_lpwsServerName)), uintptr(unsafe.Pointer(phMibServer)))
 	return uint32(r1)
 }
@@ -884,8 +1447,8 @@ func MprAdminSendUserMessage(hMprServer uintptr, hConnection foundation.HANDLE, 
 // MprAdminServerConnect calls MPRAPI!MprAdminServerConnect.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradminserverconnect
 // Minimum OS: windowsserver2000.
-func MprAdminServerConnect(lpwsServerName string, phMprServer *uintptr) uint32 {
-	_lpwsServerName := win32.UTF16Ptr(lpwsServerName)
+func MprAdminServerConnect(lpwsServerName *string, phMprServer *uintptr) uint32 {
+	_lpwsServerName := win32.UTF16PtrOrNil(lpwsServerName)
 	r1, _, _ := syscall.SyscallN(procMprAdminServerConnect.Addr(), uintptr(unsafe.Pointer(_lpwsServerName)), uintptr(unsafe.Pointer(phMprServer)))
 	return uint32(r1)
 }
@@ -948,8 +1511,8 @@ func MprAdminServerSetInfoEx(hMprServer uintptr, pServerInfo *MPR_SERVER_SET_CON
 // MprAdminTransportCreate calls MPRAPI!MprAdminTransportCreate.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradmintransportcreate
 // Minimum OS: windowsserver2000.
-func MprAdminTransportCreate(hMprServer uintptr, dwTransportId uint32, lpwsTransportName string, pGlobalInfo *byte, dwGlobalInfoSize uint32, pClientInterfaceInfo *byte, dwClientInterfaceInfoSize uint32, lpwsDLLPath string) uint32 {
-	_lpwsTransportName := win32.UTF16Ptr(lpwsTransportName)
+func MprAdminTransportCreate(hMprServer uintptr, dwTransportId uint32, lpwsTransportName *string, pGlobalInfo *byte, dwGlobalInfoSize uint32, pClientInterfaceInfo *byte, dwClientInterfaceInfoSize uint32, lpwsDLLPath string) uint32 {
+	_lpwsTransportName := win32.UTF16PtrOrNil(lpwsTransportName)
 	_lpwsDLLPath := win32.UTF16Ptr(lpwsDLLPath)
 	r1, _, _ := syscall.SyscallN(procMprAdminTransportCreate.Addr(), uintptr(hMprServer), uintptr(dwTransportId), uintptr(unsafe.Pointer(_lpwsTransportName)), uintptr(unsafe.Pointer(pGlobalInfo)), uintptr(dwGlobalInfoSize), uintptr(unsafe.Pointer(pClientInterfaceInfo)), uintptr(dwClientInterfaceInfoSize), uintptr(unsafe.Pointer(_lpwsDLLPath)))
 	return uint32(r1)
@@ -1107,8 +1670,8 @@ func MprConfigInterfaceSetInfo(hMprConfig foundation.HANDLE, hRouterInterface fo
 // MprConfigInterfaceTransportAdd calls MPRAPI!MprConfigInterfaceTransportAdd.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfiginterfacetransportadd
 // Minimum OS: windowsserver2000.
-func MprConfigInterfaceTransportAdd(hMprConfig foundation.HANDLE, hRouterInterface foundation.HANDLE, dwTransportId uint32, lpwsTransportName string, pInterfaceInfo []byte, phRouterIfTransport *foundation.HANDLE) uint32 {
-	_lpwsTransportName := win32.UTF16Ptr(lpwsTransportName)
+func MprConfigInterfaceTransportAdd(hMprConfig foundation.HANDLE, hRouterInterface foundation.HANDLE, dwTransportId uint32, lpwsTransportName *string, pInterfaceInfo []byte, phRouterIfTransport *foundation.HANDLE) uint32 {
+	_lpwsTransportName := win32.UTF16PtrOrNil(lpwsTransportName)
 	var _pInterfaceInfo *byte
 	if len(pInterfaceInfo) > 0 {
 		_pInterfaceInfo = &pInterfaceInfo[0]
@@ -1173,8 +1736,8 @@ func MprConfigServerBackup(hMprConfig foundation.HANDLE, lpwsPath string) uint32
 // MprConfigServerConnect calls MPRAPI!MprConfigServerConnect.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfigserverconnect
 // Minimum OS: windowsserver2000.
-func MprConfigServerConnect(lpwsServerName string, phMprConfig *foundation.HANDLE) uint32 {
-	_lpwsServerName := win32.UTF16Ptr(lpwsServerName)
+func MprConfigServerConnect(lpwsServerName *string, phMprConfig *foundation.HANDLE) uint32 {
+	_lpwsServerName := win32.UTF16PtrOrNil(lpwsServerName)
 	r1, _, _ := syscall.SyscallN(procMprConfigServerConnect.Addr(), uintptr(unsafe.Pointer(_lpwsServerName)), uintptr(unsafe.Pointer(phMprConfig)))
 	return uint32(r1)
 }
@@ -1244,8 +1807,8 @@ func MprConfigServerSetInfoEx(hMprConfig foundation.HANDLE, pSetServerConfig *MP
 // MprConfigTransportCreate calls MPRAPI!MprConfigTransportCreate.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfigtransportcreate
 // Minimum OS: windowsserver2000.
-func MprConfigTransportCreate(hMprConfig foundation.HANDLE, dwTransportId uint32, lpwsTransportName string, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath string, phRouterTransport *foundation.HANDLE) uint32 {
-	_lpwsTransportName := win32.UTF16Ptr(lpwsTransportName)
+func MprConfigTransportCreate(hMprConfig foundation.HANDLE, dwTransportId uint32, lpwsTransportName *string, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath *string, phRouterTransport *foundation.HANDLE) uint32 {
+	_lpwsTransportName := win32.UTF16PtrOrNil(lpwsTransportName)
 	var _pGlobalInfo *byte
 	if len(pGlobalInfo) > 0 {
 		_pGlobalInfo = &pGlobalInfo[0]
@@ -1254,7 +1817,7 @@ func MprConfigTransportCreate(hMprConfig foundation.HANDLE, dwTransportId uint32
 	if len(pClientInterfaceInfo) > 0 {
 		_pClientInterfaceInfo = &pClientInterfaceInfo[0]
 	}
-	_lpwsDLLPath := win32.UTF16Ptr(lpwsDLLPath)
+	_lpwsDLLPath := win32.UTF16PtrOrNil(lpwsDLLPath)
 	r1, _, _ := syscall.SyscallN(procMprConfigTransportCreate.Addr(), uintptr(hMprConfig), uintptr(dwTransportId), uintptr(unsafe.Pointer(_lpwsTransportName)), uintptr(unsafe.Pointer(_pGlobalInfo)), uintptr(len(pGlobalInfo)), uintptr(unsafe.Pointer(_pClientInterfaceInfo)), uintptr(len(pClientInterfaceInfo)), uintptr(unsafe.Pointer(_lpwsDLLPath)), uintptr(unsafe.Pointer(phRouterTransport)))
 	return uint32(r1)
 }
@@ -1294,7 +1857,7 @@ func MprConfigTransportGetInfo(hMprConfig foundation.HANDLE, hRouterTransport fo
 // MprConfigTransportSetInfo calls MPRAPI!MprConfigTransportSetInfo.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfigtransportsetinfo
 // Minimum OS: windowsserver2000.
-func MprConfigTransportSetInfo(hMprConfig foundation.HANDLE, hRouterTransport foundation.HANDLE, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath string) uint32 {
+func MprConfigTransportSetInfo(hMprConfig foundation.HANDLE, hRouterTransport foundation.HANDLE, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath *string) uint32 {
 	var _pGlobalInfo *byte
 	if len(pGlobalInfo) > 0 {
 		_pGlobalInfo = &pGlobalInfo[0]
@@ -1303,7 +1866,7 @@ func MprConfigTransportSetInfo(hMprConfig foundation.HANDLE, hRouterTransport fo
 	if len(pClientInterfaceInfo) > 0 {
 		_pClientInterfaceInfo = &pClientInterfaceInfo[0]
 	}
-	_lpwsDLLPath := win32.UTF16Ptr(lpwsDLLPath)
+	_lpwsDLLPath := win32.UTF16PtrOrNil(lpwsDLLPath)
 	r1, _, _ := syscall.SyscallN(procMprConfigTransportSetInfo.Addr(), uintptr(hMprConfig), uintptr(hRouterTransport), uintptr(unsafe.Pointer(_pGlobalInfo)), uintptr(len(pGlobalInfo)), uintptr(unsafe.Pointer(_pClientInterfaceInfo)), uintptr(len(pClientInterfaceInfo)), uintptr(unsafe.Pointer(_lpwsDLLPath)))
 	return uint32(r1)
 }
@@ -1415,8 +1978,8 @@ func RasConnectionNotificationA(param0 HRASCONN, param1 foundation.HANDLE, param
 // RasCreatePhonebookEntry calls RASAPI32!RasCreatePhonebookEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rascreatephonebookentryw
 // Minimum OS: windows5.0.
-func RasCreatePhonebookEntry(param0 foundation.HWND, param1 string) uint32 {
-	_param1 := win32.UTF16Ptr(param1)
+func RasCreatePhonebookEntry(param0 foundation.HWND, param1 *string) uint32 {
+	_param1 := win32.UTF16PtrOrNil(param1)
 	r1, _, _ := syscall.SyscallN(procRasCreatePhonebookEntry.Addr(), uintptr(param0), uintptr(unsafe.Pointer(_param1)))
 	return uint32(r1)
 }
@@ -1432,8 +1995,8 @@ func RasCreatePhonebookEntryA(param0 foundation.HWND, param1 foundation.PSTR) ui
 // RasDeleteEntry calls RASAPI32!RasDeleteEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasdeleteentryw
 // Minimum OS: windows5.0.
-func RasDeleteEntry(param0 string, param1 string) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasDeleteEntry(param0 *string, param1 string) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasDeleteEntry.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)))
 	return uint32(r1)
@@ -1450,8 +2013,8 @@ func RasDeleteEntryA(param0 foundation.PSTR, param1 foundation.PSTR) uint32 {
 // RasDeleteSubEntry calls RASAPI32!RasDeleteSubEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasdeletesubentryw
 // Minimum OS: windows5.1.2600.
-func RasDeleteSubEntry(pszPhonebook string, pszEntry string, dwSubEntryId uint32) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasDeleteSubEntry(pszPhonebook *string, pszEntry string, dwSubEntryId uint32) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasDeleteSubEntry.Addr(), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(dwSubEntryId))
 	return uint32(r1)
@@ -1468,8 +2031,8 @@ func RasDeleteSubEntryA(pszPhonebook foundation.PSTR, pszEntry foundation.PSTR, 
 // RasDial calls RASAPI32!RasDialW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasdialw
 // Minimum OS: windows5.0.
-func RasDial(param0 *RASDIALEXTENSIONS, param1 string, param2 *RASDIALPARAMSW, param3 uint32, param4 unsafe.Pointer, param5 *HRASCONN) uint32 {
-	_param1 := win32.UTF16Ptr(param1)
+func RasDial(param0 *RASDIALEXTENSIONS, param1 *string, param2 *RASDIALPARAMSW, param3 uint32, param4 unsafe.Pointer, param5 *HRASCONN) uint32 {
+	_param1 := win32.UTF16PtrOrNil(param1)
 	r1, _, _ := syscall.SyscallN(procRasDial.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)), uintptr(unsafe.Pointer(param5)))
 	return uint32(r1)
 }
@@ -1485,10 +2048,10 @@ func RasDialA(param0 *RASDIALEXTENSIONS, param1 foundation.PSTR, param2 *RASDIAL
 // RasDialDlg calls RASDLG!RasDialDlgW.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasdialdlgw
 // Minimum OS: windows5.0.
-func RasDialDlg(lpszPhonebook string, lpszEntry string, lpszPhoneNumber string, lpInfo *RASDIALDLG) bool {
-	_lpszPhonebook := win32.UTF16Ptr(lpszPhonebook)
-	_lpszEntry := win32.UTF16Ptr(lpszEntry)
-	_lpszPhoneNumber := win32.UTF16Ptr(lpszPhoneNumber)
+func RasDialDlg(lpszPhonebook *string, lpszEntry *string, lpszPhoneNumber *string, lpInfo *RASDIALDLG) bool {
+	_lpszPhonebook := win32.UTF16PtrOrNil(lpszPhonebook)
+	_lpszEntry := win32.UTF16PtrOrNil(lpszEntry)
+	_lpszPhoneNumber := win32.UTF16PtrOrNil(lpszPhoneNumber)
 	r1, _, _ := syscall.SyscallN(procRasDialDlg.Addr(), uintptr(unsafe.Pointer(_lpszPhonebook)), uintptr(unsafe.Pointer(_lpszEntry)), uintptr(unsafe.Pointer(_lpszPhoneNumber)), uintptr(unsafe.Pointer(lpInfo)))
 	return r1 != 0
 }
@@ -1504,8 +2067,8 @@ func RasDialDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, lpszP
 // RasEditPhonebookEntry calls RASAPI32!RasEditPhonebookEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-raseditphonebookentryw
 // Minimum OS: windows5.0.
-func RasEditPhonebookEntry(param0 foundation.HWND, param1 string, param2 string) uint32 {
-	_param1 := win32.UTF16Ptr(param1)
+func RasEditPhonebookEntry(param0 foundation.HWND, param1 *string, param2 string) uint32 {
+	_param1 := win32.UTF16PtrOrNil(param1)
 	_param2 := win32.UTF16Ptr(param2)
 	r1, _, _ := syscall.SyscallN(procRasEditPhonebookEntry.Addr(), uintptr(param0), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(_param2)))
 	return uint32(r1)
@@ -1522,9 +2085,9 @@ func RasEditPhonebookEntryA(param0 foundation.HWND, param1 foundation.PSTR, para
 // RasEntryDlg calls RASDLG!RasEntryDlgW.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasentrydlgw
 // Minimum OS: windows5.0.
-func RasEntryDlg(lpszPhonebook string, lpszEntry string, lpInfo *RASENTRYDLGW) bool {
-	_lpszPhonebook := win32.UTF16Ptr(lpszPhonebook)
-	_lpszEntry := win32.UTF16Ptr(lpszEntry)
+func RasEntryDlg(lpszPhonebook *string, lpszEntry *string, lpInfo *RASENTRYDLGW) bool {
+	_lpszPhonebook := win32.UTF16PtrOrNil(lpszPhonebook)
+	_lpszEntry := win32.UTF16PtrOrNil(lpszEntry)
 	r1, _, _ := syscall.SyscallN(procRasEntryDlg.Addr(), uintptr(unsafe.Pointer(_lpszPhonebook)), uintptr(unsafe.Pointer(_lpszEntry)), uintptr(unsafe.Pointer(lpInfo)))
 	return r1 != 0
 }
@@ -1588,9 +2151,9 @@ func RasEnumDevicesA(param0 *RASDEVINFOA, param1 *uint32, param2 *uint32) uint32
 // RasEnumEntries calls RASAPI32!RasEnumEntriesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasenumentriesw
 // Minimum OS: windows5.0.
-func RasEnumEntries(param0 string, param1 string, param2 *RASENTRYNAMEW, param3 *uint32, param4 *uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
-	_param1 := win32.UTF16Ptr(param1)
+func RasEnumEntries(param0 *string, param1 *string, param2 *RASENTRYNAMEW, param3 *uint32, param4 *uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
+	_param1 := win32.UTF16PtrOrNil(param1)
 	r1, _, _ := syscall.SyscallN(procRasEnumEntries.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(unsafe.Pointer(param4)))
 	return uint32(r1)
 }
@@ -1620,8 +2183,8 @@ func RasFreeEapUserIdentityA(pRasEapUserIdentity *RASEAPUSERIDENTITYA) {
 // RasGetAutodialAddress calls RASAPI32!RasGetAutodialAddressW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetautodialaddressw
 // Minimum OS: windows5.0.
-func RasGetAutodialAddress(param0 string, param1 *uint32, param2 *RASAUTODIALENTRYW, param3 *uint32, param4 *uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetAutodialAddress(param0 *string, param1 *uint32, param2 *RASAUTODIALENTRYW, param3 *uint32, param4 *uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	r1, _, _ := syscall.SyscallN(procRasGetAutodialAddress.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(unsafe.Pointer(param4)))
 	return uint32(r1)
 }
@@ -1709,8 +2272,8 @@ func RasGetCountryInfoA(param0 *RASCTRYINFO, param1 *uint32) uint32 {
 // RasGetCredentials calls RASAPI32!RasGetCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetcredentialsw
 // Minimum OS: windows5.0.
-func RasGetCredentials(param0 string, param1 string, param2 *RASCREDENTIALSW) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetCredentials(param0 *string, param1 string, param2 *RASCREDENTIALSW) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasGetCredentials.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)))
 	return uint32(r1)
@@ -1727,8 +2290,8 @@ func RasGetCredentialsA(param0 foundation.PSTR, param1 foundation.PSTR, param2 *
 // RasGetCustomAuthData calls RASAPI32!RasGetCustomAuthDataW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetcustomauthdataw
 // Minimum OS: windows5.0.
-func RasGetCustomAuthData(pszPhonebook string, pszEntry string, pbCustomAuthData *byte, pdwSizeofCustomAuthData *uint32) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasGetCustomAuthData(pszPhonebook *string, pszEntry string, pbCustomAuthData *byte, pdwSizeofCustomAuthData *uint32) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasGetCustomAuthData.Addr(), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(unsafe.Pointer(pbCustomAuthData)), uintptr(unsafe.Pointer(pdwSizeofCustomAuthData)))
 	return uint32(r1)
@@ -1745,8 +2308,8 @@ func RasGetCustomAuthDataA(pszPhonebook foundation.PSTR, pszEntry foundation.PST
 // RasGetEapUserData calls RASAPI32!RasGetEapUserDataW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgeteapuserdataw
 // Minimum OS: windows5.0.
-func RasGetEapUserData(hToken foundation.HANDLE, pszPhonebook string, pszEntry string, pbEapData *byte, pdwSizeofEapData *uint32) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasGetEapUserData(hToken foundation.HANDLE, pszPhonebook *string, pszEntry string, pbEapData *byte, pdwSizeofEapData *uint32) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasGetEapUserData.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(unsafe.Pointer(pbEapData)), uintptr(unsafe.Pointer(pdwSizeofEapData)))
 	return uint32(r1)
@@ -1763,8 +2326,8 @@ func RasGetEapUserDataA(hToken foundation.HANDLE, pszPhonebook foundation.PSTR, 
 // RasGetEapUserIdentity calls RASAPI32!RasGetEapUserIdentityW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgeteapuseridentityw
 // Minimum OS: windows5.0.
-func RasGetEapUserIdentity(pszPhonebook string, pszEntry string, dwFlags uint32, hwnd foundation.HWND, ppRasEapUserIdentity **RASEAPUSERIDENTITYW) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasGetEapUserIdentity(pszPhonebook *string, pszEntry string, dwFlags uint32, hwnd foundation.HWND, ppRasEapUserIdentity **RASEAPUSERIDENTITYW) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasGetEapUserIdentity.Addr(), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(dwFlags), uintptr(hwnd), uintptr(unsafe.Pointer(ppRasEapUserIdentity)))
 	return uint32(r1)
@@ -1781,8 +2344,8 @@ func RasGetEapUserIdentityA(pszPhonebook foundation.PSTR, pszEntry foundation.PS
 // RasGetEntryDialParams calls RASAPI32!RasGetEntryDialParamsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetentrydialparamsw
 // Minimum OS: windows5.0.
-func RasGetEntryDialParams(param0 string, param1 *RASDIALPARAMSW, param2 *foundation.BOOL) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetEntryDialParams(param0 *string, param1 *RASDIALPARAMSW, param2 *foundation.BOOL) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	r1, _, _ := syscall.SyscallN(procRasGetEntryDialParams.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
 	return uint32(r1)
 }
@@ -1798,8 +2361,8 @@ func RasGetEntryDialParamsA(param0 foundation.PSTR, param1 *RASDIALPARAMSA, para
 // RasGetEntryProperties calls RASAPI32!RasGetEntryPropertiesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetentrypropertiesw
 // Minimum OS: windows5.0.
-func RasGetEntryProperties(param0 string, param1 string, param2 *RASENTRYW, param3 *uint32, param4 *byte, param5 *uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetEntryProperties(param0 *string, param1 string, param2 *RASENTRYW, param3 *uint32, param4 *byte, param5 *uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasGetEntryProperties.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(unsafe.Pointer(param3)), uintptr(unsafe.Pointer(param4)), uintptr(unsafe.Pointer(param5)))
 	return uint32(r1)
@@ -1886,8 +2449,8 @@ func RasGetSubEntryHandleA(param0 HRASCONN, param1 uint32, param2 *HRASCONN) uin
 // RasGetSubEntryProperties calls RASAPI32!RasGetSubEntryPropertiesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetsubentrypropertiesw
 // Minimum OS: windows5.0.
-func RasGetSubEntryProperties(param0 string, param1 string, param2 uint32, param3 *RASSUBENTRYW, param4 *uint32, param5 *byte, param6 *uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasGetSubEntryProperties(param0 *string, param1 string, param2 uint32, param3 *RASSUBENTRYW, param4 *uint32, param5 *byte, param6 *uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasGetSubEntryProperties.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(unsafe.Pointer(param4)), uintptr(unsafe.Pointer(param5)), uintptr(unsafe.Pointer(param6)))
 	return uint32(r1)
@@ -1928,9 +2491,9 @@ func RasInvokeEapUI(param0 HRASCONN, param1 uint32, param2 *RASDIALEXTENSIONS, p
 // RasPhonebookDlg calls RASDLG!RasPhonebookDlgW.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasphonebookdlgw
 // Minimum OS: windows5.0.
-func RasPhonebookDlg(lpszPhonebook string, lpszEntry string, lpInfo *RASPBDLGW) bool {
-	_lpszPhonebook := win32.UTF16Ptr(lpszPhonebook)
-	_lpszEntry := win32.UTF16Ptr(lpszEntry)
+func RasPhonebookDlg(lpszPhonebook *string, lpszEntry *string, lpInfo *RASPBDLGW) bool {
+	_lpszPhonebook := win32.UTF16PtrOrNil(lpszPhonebook)
+	_lpszEntry := win32.UTF16PtrOrNil(lpszEntry)
 	r1, _, _ := syscall.SyscallN(procRasPhonebookDlg.Addr(), uintptr(unsafe.Pointer(_lpszPhonebook)), uintptr(unsafe.Pointer(_lpszEntry)), uintptr(unsafe.Pointer(lpInfo)))
 	return r1 != 0
 }
@@ -1946,8 +2509,8 @@ func RasPhonebookDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, 
 // RasRenameEntry calls RASAPI32!RasRenameEntryW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasrenameentryw
 // Minimum OS: windows5.0.
-func RasRenameEntry(param0 string, param1 string, param2 string) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasRenameEntry(param0 *string, param1 string, param2 string) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	_param2 := win32.UTF16Ptr(param2)
 	r1, _, _ := syscall.SyscallN(procRasRenameEntry.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(_param2)))
@@ -1965,8 +2528,8 @@ func RasRenameEntryA(param0 foundation.PSTR, param1 foundation.PSTR, param2 foun
 // RasSetAutodialAddress calls RASAPI32!RasSetAutodialAddressW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetautodialaddressw
 // Minimum OS: windows5.0.
-func RasSetAutodialAddress(param0 string, param1 uint32, param2 *RASAUTODIALENTRYW, param3 uint32, param4 uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetAutodialAddress(param0 *string, param1 uint32, param2 *RASAUTODIALENTRYW, param3 uint32, param4 uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	r1, _, _ := syscall.SyscallN(procRasSetAutodialAddress.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(param4))
 	return uint32(r1)
 }
@@ -2016,8 +2579,8 @@ func RasSetAutodialParamA(param0 uint32, param1 unsafe.Pointer, param2 uint32) u
 // RasSetCredentials calls RASAPI32!RasSetCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetcredentialsw
 // Minimum OS: windows5.0.
-func RasSetCredentials(param0 string, param1 string, param2 *RASCREDENTIALSW, param3 bool) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetCredentials(param0 *string, param1 string, param2 *RASCREDENTIALSW, param3 bool) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	_param3 := win32.Bool32(param3)
 	r1, _, _ := syscall.SyscallN(procRasSetCredentials.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(_param3))
@@ -2036,8 +2599,8 @@ func RasSetCredentialsA(param0 foundation.PSTR, param1 foundation.PSTR, param2 *
 // RasSetCustomAuthData calls RASAPI32!RasSetCustomAuthDataW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetcustomauthdataw
 // Minimum OS: windows5.0.
-func RasSetCustomAuthData(pszPhonebook string, pszEntry string, pbCustomAuthData []byte) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasSetCustomAuthData(pszPhonebook *string, pszEntry string, pbCustomAuthData []byte) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	var _pbCustomAuthData *byte
 	if len(pbCustomAuthData) > 0 {
@@ -2062,8 +2625,8 @@ func RasSetCustomAuthDataA(pszPhonebook foundation.PSTR, pszEntry foundation.PST
 // RasSetEapUserData calls RASAPI32!RasSetEapUserDataW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasseteapuserdataw
 // Minimum OS: windows5.0.
-func RasSetEapUserData(hToken foundation.HANDLE, pszPhonebook string, pszEntry string, pbEapData *byte, dwSizeofEapData uint32) uint32 {
-	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
+func RasSetEapUserData(hToken foundation.HANDLE, pszPhonebook *string, pszEntry string, pbEapData *byte, dwSizeofEapData uint32) uint32 {
+	_pszPhonebook := win32.UTF16PtrOrNil(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
 	r1, _, _ := syscall.SyscallN(procRasSetEapUserData.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(unsafe.Pointer(pbEapData)), uintptr(dwSizeofEapData))
 	return uint32(r1)
@@ -2080,8 +2643,8 @@ func RasSetEapUserDataA(hToken foundation.HANDLE, pszPhonebook foundation.PSTR, 
 // RasSetEntryDialParams calls RASAPI32!RasSetEntryDialParamsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetentrydialparamsw
 // Minimum OS: windows5.0.
-func RasSetEntryDialParams(param0 string, param1 *RASDIALPARAMSW, param2 bool) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetEntryDialParams(param0 *string, param1 *RASDIALPARAMSW, param2 bool) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param2 := win32.Bool32(param2)
 	r1, _, _ := syscall.SyscallN(procRasSetEntryDialParams.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(_param2))
 	return uint32(r1)
@@ -2099,8 +2662,8 @@ func RasSetEntryDialParamsA(param0 foundation.PSTR, param1 *RASDIALPARAMSA, para
 // RasSetEntryProperties calls RASAPI32!RasSetEntryPropertiesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetentrypropertiesw
 // Minimum OS: windows5.0.
-func RasSetEntryProperties(param0 string, param1 string, param2 *RASENTRYW, param3 uint32, param4 *byte, param5 uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetEntryProperties(param0 *string, param1 string, param2 *RASENTRYW, param3 uint32, param4 *byte, param5 uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasSetEntryProperties.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)), uintptr(param5))
 	return uint32(r1)
@@ -2117,8 +2680,8 @@ func RasSetEntryPropertiesA(param0 foundation.PSTR, param1 foundation.PSTR, para
 // RasSetSubEntryProperties calls RASAPI32!RasSetSubEntryPropertiesW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetsubentrypropertiesw
 // Minimum OS: windows5.0.
-func RasSetSubEntryProperties(param0 string, param1 string, param2 uint32, param3 *RASSUBENTRYW, param4 uint32, param5 *byte, param6 uint32) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasSetSubEntryProperties(param0 *string, param1 string, param2 uint32, param3 *RASSUBENTRYW, param4 uint32, param5 *byte, param6 uint32) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasSetSubEntryProperties.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)), uintptr(param2), uintptr(unsafe.Pointer(param3)), uintptr(param4), uintptr(unsafe.Pointer(param5)), uintptr(param6))
 	return uint32(r1)
@@ -2143,8 +2706,8 @@ func RasUpdateConnection(hrasconn HRASCONN, lprasupdateconn *RASUPDATECONN) uint
 // RasValidateEntryName calls RASAPI32!RasValidateEntryNameW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasvalidateentrynamew
 // Minimum OS: windows5.0.
-func RasValidateEntryName(param0 string, param1 string) uint32 {
-	_param0 := win32.UTF16Ptr(param0)
+func RasValidateEntryName(param0 *string, param1 string) uint32 {
+	_param0 := win32.UTF16PtrOrNil(param0)
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasValidateEntryName.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(_param1)))
 	return uint32(r1)
@@ -2179,6 +2742,14 @@ func RtmAddRouteToDest(RtmRegHandle uintptr, RouteHandle *uintptr, DestAddress *
 // Minimum OS: windowsserver2000.
 func RtmBlockMethods(RtmRegHandle uintptr, TargetHandle foundation.HANDLE, TargetType byte, BlockingFlag uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procRtmBlockMethods.Addr(), uintptr(RtmRegHandle), uintptr(TargetHandle), uintptr(TargetType), uintptr(BlockingFlag))
+	return uint32(r1)
+}
+
+var specRtmConvertIpv6AddressAndLengthToNetAddress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 2, 0, false), win32.Word, win32.Word}}
+
+// RtmConvertIpv6AddressAndLengthToNetAddress calls rtm!RtmConvertIpv6AddressAndLengthToNetAddress.
+func RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress *RTM_NET_ADDRESS, Address networkingwinsock.IN6_ADDR, dwLength uint32, dwAddressSize uint32) uint32 {
+	r1, _, _ := win32.Call(procRtmConvertIpv6AddressAndLengthToNetAddress.Addr(), specRtmConvertIpv6AddressAndLengthToNetAddress, nil, uintptr(unsafe.Pointer(pNetAddress)), uintptr(unsafe.Pointer(&Address)), uintptr(dwLength), uintptr(dwAddressSize)).Tuple()
 	return uint32(r1)
 }
 

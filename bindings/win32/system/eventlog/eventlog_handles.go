@@ -4,7 +4,11 @@
 
 package eventlog
 
-// CloseEVT_HANDLE releases a EVT_HANDLE handle by calling EvtClose.
+// CloseEVT_HANDLE releases a EVT_HANDLE handle by calling EvtClose. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseEVT_HANDLE(h EVT_HANDLE) error {
+	if h == 0 {
+		return nil
+	}
 	return EvtClose(EVT_HANDLE(h))
 }

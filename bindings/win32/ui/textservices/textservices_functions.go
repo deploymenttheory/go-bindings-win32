@@ -21,6 +21,20 @@ var (
 	procUninitLocalMsCtfMonitor = modMsCtfMonitor.NewProc("UninitLocalMsCtfMonitor")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DoMsCtfMonitor          *win32.Proc
+	InitLocalMsCtfMonitor   *win32.Proc
+	UninitLocalMsCtfMonitor *win32.Proc
+}{
+	DoMsCtfMonitor:          procDoMsCtfMonitor,
+	InitLocalMsCtfMonitor:   procInitLocalMsCtfMonitor,
+	UninitLocalMsCtfMonitor: procUninitLocalMsCtfMonitor,
+}
+
 // DoMsCtfMonitor calls MsCtfMonitor!DoMsCtfMonitor.
 func DoMsCtfMonitor(dwFlags uint32, hEventForServiceStop foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procDoMsCtfMonitor.Addr(), uintptr(dwFlags), uintptr(hEventForServiceStop))

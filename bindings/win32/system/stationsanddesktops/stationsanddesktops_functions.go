@@ -52,6 +52,76 @@ var (
 	procSwitchDesktop             = modUSER32.NewProc("SwitchDesktop")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BroadcastSystemMessage    *win32.Proc
+	BroadcastSystemMessageA   *win32.Proc
+	BroadcastSystemMessageEx  *win32.Proc
+	BroadcastSystemMessageExA *win32.Proc
+	CloseDesktop              *win32.Proc
+	CloseWindowStation        *win32.Proc
+	CreateDesktop             *win32.Proc
+	CreateDesktopA            *win32.Proc
+	CreateDesktopEx           *win32.Proc
+	CreateDesktopExA          *win32.Proc
+	CreateWindowStation       *win32.Proc
+	CreateWindowStationA      *win32.Proc
+	EnumDesktopWindows        *win32.Proc
+	EnumDesktops              *win32.Proc
+	EnumDesktopsA             *win32.Proc
+	EnumWindowStations        *win32.Proc
+	EnumWindowStationsA       *win32.Proc
+	GetProcessWindowStation   *win32.Proc
+	GetThreadDesktop          *win32.Proc
+	GetUserObjectInformation  *win32.Proc
+	GetUserObjectInformationA *win32.Proc
+	OpenDesktop               *win32.Proc
+	OpenDesktopA              *win32.Proc
+	OpenInputDesktop          *win32.Proc
+	OpenWindowStation         *win32.Proc
+	OpenWindowStationA        *win32.Proc
+	SetProcessWindowStation   *win32.Proc
+	SetThreadDesktop          *win32.Proc
+	SetUserObjectInformation  *win32.Proc
+	SetUserObjectInformationA *win32.Proc
+	SwitchDesktop             *win32.Proc
+}{
+	BroadcastSystemMessage:    procBroadcastSystemMessage,
+	BroadcastSystemMessageA:   procBroadcastSystemMessageA,
+	BroadcastSystemMessageEx:  procBroadcastSystemMessageEx,
+	BroadcastSystemMessageExA: procBroadcastSystemMessageExA,
+	CloseDesktop:              procCloseDesktop,
+	CloseWindowStation:        procCloseWindowStation,
+	CreateDesktop:             procCreateDesktop,
+	CreateDesktopA:            procCreateDesktopA,
+	CreateDesktopEx:           procCreateDesktopEx,
+	CreateDesktopExA:          procCreateDesktopExA,
+	CreateWindowStation:       procCreateWindowStation,
+	CreateWindowStationA:      procCreateWindowStationA,
+	EnumDesktopWindows:        procEnumDesktopWindows,
+	EnumDesktops:              procEnumDesktops,
+	EnumDesktopsA:             procEnumDesktopsA,
+	EnumWindowStations:        procEnumWindowStations,
+	EnumWindowStationsA:       procEnumWindowStationsA,
+	GetProcessWindowStation:   procGetProcessWindowStation,
+	GetThreadDesktop:          procGetThreadDesktop,
+	GetUserObjectInformation:  procGetUserObjectInformation,
+	GetUserObjectInformationA: procGetUserObjectInformationA,
+	OpenDesktop:               procOpenDesktop,
+	OpenDesktopA:              procOpenDesktopA,
+	OpenInputDesktop:          procOpenInputDesktop,
+	OpenWindowStation:         procOpenWindowStation,
+	OpenWindowStationA:        procOpenWindowStationA,
+	SetProcessWindowStation:   procSetProcessWindowStation,
+	SetThreadDesktop:          procSetThreadDesktop,
+	SetUserObjectInformation:  procSetUserObjectInformation,
+	SetUserObjectInformationA: procSetUserObjectInformationA,
+	SwitchDesktop:             procSwitchDesktop,
+}
+
 // BroadcastSystemMessage calls USER32!BroadcastSystemMessageW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-broadcastsystemmessagew
 // Minimum OS: windows5.0.
@@ -167,8 +237,8 @@ func CreateDesktopExA(lpszDesktop foundation.PSTR, dwFlags DESKTOP_CONTROL_FLAGS
 // CreateWindowStation calls USER32!CreateWindowStationW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowstationw
 // Minimum OS: windows5.0.
-func CreateWindowStation(lpwinsta string, dwFlags uint32, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HWINSTA, error) {
-	_lpwinsta := win32.UTF16Ptr(lpwinsta)
+func CreateWindowStation(lpwinsta *string, dwFlags uint32, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HWINSTA, error) {
+	_lpwinsta := win32.UTF16PtrOrNil(lpwinsta)
 	r1, _, e1 := syscall.SyscallN(procCreateWindowStation.Addr(), uintptr(unsafe.Pointer(_lpwinsta)), uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)))
 	ret := HWINSTA(r1)
 	if ret == ^HWINSTA(0) || ret == 0 {

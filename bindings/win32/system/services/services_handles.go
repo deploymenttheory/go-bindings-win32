@@ -4,7 +4,11 @@
 
 package services
 
-// CloseSC_HANDLE releases a SC_HANDLE handle by calling CloseServiceHandle.
+// CloseSC_HANDLE releases a SC_HANDLE handle by calling CloseServiceHandle. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseSC_HANDLE(h SC_HANDLE) error {
+	if h == ^SC_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return CloseServiceHandle(SC_HANDLE(h))
 }

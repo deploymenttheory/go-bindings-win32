@@ -4,6 +4,7 @@
 
 package kernel
 
-// EXCEPTION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) EXCEPTION_DISPOSITION.
+// EXCEPTION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// EXCEPTION_DISPOSITION; NewCallback requires a uintptr-sized result).
 type EXCEPTION_ROUTINE uintptr

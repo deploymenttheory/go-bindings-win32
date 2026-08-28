@@ -35,6 +35,44 @@ var (
 	procTzSpecificLocalTimeToSystemTimeEx           = modKERNEL32.NewProc("TzSpecificLocalTimeToSystemTimeEx")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	EnumDynamicTimeZoneInformation              *win32.Proc
+	FileTimeToSystemTime                        *win32.Proc
+	GetDynamicTimeZoneInformation               *win32.Proc
+	GetDynamicTimeZoneInformationEffectiveYears *win32.Proc
+	GetTimeZoneInformation                      *win32.Proc
+	GetTimeZoneInformationForYear               *win32.Proc
+	LocalFileTimeToLocalSystemTime              *win32.Proc
+	LocalSystemTimeToLocalFileTime              *win32.Proc
+	SetDynamicTimeZoneInformation               *win32.Proc
+	SetTimeZoneInformation                      *win32.Proc
+	SystemTimeToFileTime                        *win32.Proc
+	SystemTimeToTzSpecificLocalTime             *win32.Proc
+	SystemTimeToTzSpecificLocalTimeEx           *win32.Proc
+	TzSpecificLocalTimeToSystemTime             *win32.Proc
+	TzSpecificLocalTimeToSystemTimeEx           *win32.Proc
+}{
+	EnumDynamicTimeZoneInformation:              procEnumDynamicTimeZoneInformation,
+	FileTimeToSystemTime:                        procFileTimeToSystemTime,
+	GetDynamicTimeZoneInformation:               procGetDynamicTimeZoneInformation,
+	GetDynamicTimeZoneInformationEffectiveYears: procGetDynamicTimeZoneInformationEffectiveYears,
+	GetTimeZoneInformation:                      procGetTimeZoneInformation,
+	GetTimeZoneInformationForYear:               procGetTimeZoneInformationForYear,
+	LocalFileTimeToLocalSystemTime:              procLocalFileTimeToLocalSystemTime,
+	LocalSystemTimeToLocalFileTime:              procLocalSystemTimeToLocalFileTime,
+	SetDynamicTimeZoneInformation:               procSetDynamicTimeZoneInformation,
+	SetTimeZoneInformation:                      procSetTimeZoneInformation,
+	SystemTimeToFileTime:                        procSystemTimeToFileTime,
+	SystemTimeToTzSpecificLocalTime:             procSystemTimeToTzSpecificLocalTime,
+	SystemTimeToTzSpecificLocalTimeEx:           procSystemTimeToTzSpecificLocalTimeEx,
+	TzSpecificLocalTimeToSystemTime:             procTzSpecificLocalTimeToSystemTime,
+	TzSpecificLocalTimeToSystemTimeEx:           procTzSpecificLocalTimeToSystemTimeEx,
+}
+
 // EnumDynamicTimeZoneInformation calls ADVAPI32!EnumDynamicTimeZoneInformation.
 // https://learn.microsoft.com/windows/win32/api/timezoneapi/nf-timezoneapi-enumdynamictimezoneinformation
 // Minimum OS: windows8.0.

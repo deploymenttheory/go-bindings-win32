@@ -5,6 +5,7 @@
 package imaging
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -35,6 +36,14 @@ func (self *IWICBitmap) Lock(prcLock *WICRect, flags uint32, ppILock **IWICBitma
 // SetPalette dispatches through IWICBitmap's vtable slot 9.
 func (self *IWICBitmap) SetPalette(pIPalette *IWICPalette) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIPalette)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWICBitmap_SetResolution = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// SetResolution dispatches through IWICBitmap's vtable slot 10.
+func (self *IWICBitmap) SetResolution(dpiX float64, dpiY float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIWICBitmap_SetResolution, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dpiX)), uintptr(math.Float64bits(dpiY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -455,6 +464,14 @@ func (self *IWICBitmapFrameEncode) SetSize(uiWidth uint32, uiHeight uint32) erro
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWICBitmapFrameEncode_SetResolution = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// SetResolution dispatches through IWICBitmapFrameEncode's vtable slot 5.
+func (self *IWICBitmapFrameEncode) SetResolution(dpiX float64, dpiY float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIWICBitmapFrameEncode_SetResolution, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dpiX)), uintptr(math.Float64bits(dpiY))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetPixelFormat dispatches through IWICBitmapFrameEncode's vtable slot 6.
 func (self *IWICBitmapFrameEncode) SetPixelFormat(pPixelFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPixelFormat)))
@@ -664,6 +681,14 @@ type IWICBitmapToneMapper struct {
 
 // IID_IWICBitmapToneMapper is the interface identifier for IWICBitmapToneMapper.
 var IID_IWICBitmapToneMapper = win32.GUID{Data1: 0x44728ded, Data2: 0x1edf, Data3: 0x4fe9, Data4: [8]byte{0xb5, 0x0b, 0xc8, 0x9a, 0x26, 0x4c, 0x94, 0x39}}
+
+var specIWICBitmapToneMapper_InitializeForHdrTarget = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// InitializeForHdrTarget dispatches through IWICBitmapToneMapper's vtable slot 8.
+func (self *IWICBitmapToneMapper) InitializeForHdrTarget(pISource *IWICBitmapSource, guidDstFormat *win32.GUID, fLuminanceInNits float32, fWhiteLevelInNits float32, mode WICBitmapToneMappingMode) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIWICBitmapToneMapper_InitializeForHdrTarget, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pISource)), uintptr(unsafe.Pointer(guidDstFormat)), uintptr(math.Float32bits(fLuminanceInNits)), uintptr(math.Float32bits(fWhiteLevelInNits)), uintptr(mode)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // InitializeForSdrTarget dispatches through IWICBitmapToneMapper's vtable slot 9.
 func (self *IWICBitmapToneMapper) InitializeForSdrTarget(pISource *IWICBitmapSource, guidDstFormat *win32.GUID, mode WICBitmapToneMappingMode) error {
@@ -991,6 +1016,14 @@ func (self *IWICDevelopRaw) GetCurrentParameterSet(ppCurrentParameterSet **syste
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWICDevelopRaw_SetExposureCompensation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetExposureCompensation dispatches through IWICDevelopRaw's vtable slot 14.
+func (self *IWICDevelopRaw) SetExposureCompensation(ev float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIWICDevelopRaw_SetExposureCompensation, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(ev))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetExposureCompensation dispatches through IWICDevelopRaw's vtable slot 15.
 func (self *IWICDevelopRaw) GetExposureCompensation(pEV *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEV)))
@@ -1039,9 +1072,25 @@ func (self *IWICDevelopRaw) GetKelvinRangeInfo(pMinKelvinTemp *uint32, pMaxKelvi
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWICDevelopRaw_SetContrast = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetContrast dispatches through IWICDevelopRaw's vtable slot 23.
+func (self *IWICDevelopRaw) SetContrast(Contrast float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIWICDevelopRaw_SetContrast, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Contrast))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetContrast dispatches through IWICDevelopRaw's vtable slot 24.
 func (self *IWICDevelopRaw) GetContrast(pContrast *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContrast)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWICDevelopRaw_SetGamma = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetGamma dispatches through IWICDevelopRaw's vtable slot 25.
+func (self *IWICDevelopRaw) SetGamma(Gamma float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIWICDevelopRaw_SetGamma, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Gamma))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1051,9 +1100,25 @@ func (self *IWICDevelopRaw) GetGamma(pGamma *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWICDevelopRaw_SetSharpness = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetSharpness dispatches through IWICDevelopRaw's vtable slot 27.
+func (self *IWICDevelopRaw) SetSharpness(Sharpness float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIWICDevelopRaw_SetSharpness, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Sharpness))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetSharpness dispatches through IWICDevelopRaw's vtable slot 28.
 func (self *IWICDevelopRaw) GetSharpness(pSharpness *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSharpness)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWICDevelopRaw_SetSaturation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetSaturation dispatches through IWICDevelopRaw's vtable slot 29.
+func (self *IWICDevelopRaw) SetSaturation(Saturation float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIWICDevelopRaw_SetSaturation, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Saturation))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1063,9 +1128,25 @@ func (self *IWICDevelopRaw) GetSaturation(pSaturation *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWICDevelopRaw_SetTint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetTint dispatches through IWICDevelopRaw's vtable slot 31.
+func (self *IWICDevelopRaw) SetTint(Tint float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIWICDevelopRaw_SetTint, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Tint))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetTint dispatches through IWICDevelopRaw's vtable slot 32.
 func (self *IWICDevelopRaw) GetTint(pTint *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTint)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWICDevelopRaw_SetNoiseReduction = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetNoiseReduction dispatches through IWICDevelopRaw's vtable slot 33.
+func (self *IWICDevelopRaw) SetNoiseReduction(NoiseReduction float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIWICDevelopRaw_SetNoiseReduction, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(NoiseReduction))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1090,6 +1171,14 @@ func (self *IWICDevelopRaw) SetToneCurve(cbToneCurveSize uint32, pToneCurve *WIC
 // GetToneCurve dispatches through IWICDevelopRaw's vtable slot 37.
 func (self *IWICDevelopRaw) GetToneCurve(cbToneCurveBufferSize uint32, pToneCurve *WICRawToneCurve, pcbActualToneCurveBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(cbToneCurveBufferSize), uintptr(unsafe.Pointer(pToneCurve)), uintptr(unsafe.Pointer(pcbActualToneCurveBufferSize)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWICDevelopRaw_SetRotation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetRotation dispatches through IWICDevelopRaw's vtable slot 38.
+func (self *IWICDevelopRaw) SetRotation(Rotation float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIWICDevelopRaw_SetRotation, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Rotation))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1146,6 +1235,14 @@ func (self *IWICDisplayAdaptationControl) DoesSupportChangingMaxLuminance(pguidD
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWICDisplayAdaptationControl_SetDisplayMaxLuminance = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetDisplayMaxLuminance dispatches through IWICDisplayAdaptationControl's vtable slot 4.
+func (self *IWICDisplayAdaptationControl) SetDisplayMaxLuminance(fLuminanceInNits float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIWICDisplayAdaptationControl_SetDisplayMaxLuminance, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fLuminanceInNits))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetDisplayMaxLuminance dispatches through IWICDisplayAdaptationControl's vtable slot 5.
 func (self *IWICDisplayAdaptationControl) GetDisplayMaxLuminance() (float32, error) {
 	_pfLuminanceInNits := new(float32)
@@ -1160,6 +1257,14 @@ type IWICDisplayAdaptationControl2 struct {
 
 // IID_IWICDisplayAdaptationControl2 is the interface identifier for IWICDisplayAdaptationControl2.
 var IID_IWICDisplayAdaptationControl2 = win32.GUID{Data1: 0xd7508d29, Data2: 0x3ab7, Data3: 0x447e, Data4: [8]byte{0xa6, 0x76, 0x4d, 0x80, 0xd7, 0xde, 0x72, 0x6b}}
+
+var specIWICDisplayAdaptationControl2_SetSdrWhiteLevel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSdrWhiteLevel dispatches through IWICDisplayAdaptationControl2's vtable slot 6.
+func (self *IWICDisplayAdaptationControl2) SetSdrWhiteLevel(fWhiteLevelInNits float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIWICDisplayAdaptationControl2_SetSdrWhiteLevel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fWhiteLevelInNits))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetSdrWhiteLevel dispatches through IWICDisplayAdaptationControl2's vtable slot 7.
 func (self *IWICDisplayAdaptationControl2) GetSdrWhiteLevel() (float32, error) {
@@ -1249,6 +1354,14 @@ type IWICFormatConverter struct {
 
 // IID_IWICFormatConverter is the interface identifier for IWICFormatConverter.
 var IID_IWICFormatConverter = win32.GUID{Data1: 0x00000301, Data2: 0xa8f2, Data3: 0x4877, Data4: [8]byte{0xba, 0x0a, 0xfd, 0x2b, 0x66, 0x45, 0xfb, 0x94}}
+
+var specIWICFormatConverter_Initialize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float64, win32.Word}}
+
+// Initialize dispatches through IWICFormatConverter's vtable slot 8.
+func (self *IWICFormatConverter) Initialize(pISource *IWICBitmapSource, dstFormat *win32.GUID, dither WICBitmapDitherType, pIPalette *IWICPalette, alphaThresholdPercent float64, paletteTranslate WICBitmapPaletteType) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIWICFormatConverter_Initialize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pISource)), uintptr(unsafe.Pointer(dstFormat)), uintptr(dither), uintptr(unsafe.Pointer(pIPalette)), uintptr(math.Float64bits(alphaThresholdPercent)), uintptr(paletteTranslate)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // CanConvert dispatches through IWICFormatConverter's vtable slot 9.
 func (self *IWICFormatConverter) CanConvert(srcPixelFormat *win32.GUID, dstPixelFormat *win32.GUID, pfCanConvert *foundation.BOOL) error {
@@ -2102,6 +2215,18 @@ type IWICPlanarFormatConverter struct {
 // IID_IWICPlanarFormatConverter is the interface identifier for IWICPlanarFormatConverter.
 var IID_IWICPlanarFormatConverter = win32.GUID{Data1: 0xbebee9cb, Data2: 0x83b0, Data3: 0x4dcc, Data4: [8]byte{0x81, 0x32, 0xb0, 0xaa, 0xa5, 0x5e, 0xac, 0x96}}
 
+var specIWICPlanarFormatConverter_Initialize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float64, win32.Word}}
+
+// Initialize dispatches through IWICPlanarFormatConverter's vtable slot 8.
+func (self *IWICPlanarFormatConverter) Initialize(ppPlanes []*IWICBitmapSource, dstFormat *win32.GUID, dither WICBitmapDitherType, pIPalette *IWICPalette, alphaThresholdPercent float64, paletteTranslate WICBitmapPaletteType) error {
+	var _ppPlanes **IWICBitmapSource
+	if len(ppPlanes) > 0 {
+		_ppPlanes = &ppPlanes[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIWICPlanarFormatConverter_Initialize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppPlanes)), uintptr(len(ppPlanes)), uintptr(unsafe.Pointer(dstFormat)), uintptr(dither), uintptr(unsafe.Pointer(pIPalette)), uintptr(math.Float64bits(alphaThresholdPercent)), uintptr(paletteTranslate)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CanConvert dispatches through IWICPlanarFormatConverter's vtable slot 9.
 func (self *IWICPlanarFormatConverter) CanConvert(pSrcPixelFormats []win32.GUID, dstPixelFormat *win32.GUID, pfCanConvert *foundation.BOOL) error {
 	var _pSrcPixelFormats *win32.GUID
@@ -2120,6 +2245,14 @@ type IWICProgressCallback struct {
 
 // IID_IWICProgressCallback is the interface identifier for IWICProgressCallback.
 var IID_IWICProgressCallback = win32.GUID{Data1: 0x4776f9cd, Data2: 0x9517, Data3: 0x45fa, Data4: [8]byte{0xbf, 0x24, 0xe8, 0x9c, 0x5e, 0xc5, 0xc6, 0x0c}}
+
+var specIWICProgressCallback_Notify = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float64}}
+
+// Notify dispatches through IWICProgressCallback's vtable slot 3.
+func (self *IWICProgressCallback) Notify(uFrameNum uint32, operation WICProgressOperation, dblProgress float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIWICProgressCallback_Notify, nil, uintptr(unsafe.Pointer(self)), uintptr(uFrameNum), uintptr(operation), uintptr(math.Float64bits(dblProgress))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IWICProgressiveLevelControl: https://learn.microsoft.com/windows/win32/api/wincodec/nn-wincodec-iwicprogressivelevelcontrol
 // IID: daac296f-7aa5-4dbf-8d15-225c5976f891

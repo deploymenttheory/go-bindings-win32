@@ -226,6 +226,414 @@ var (
 	procPeerDistUnregisterForStatusChangeNotification = modPeerDist.NewProc("PeerDistUnregisterForStatusChangeNotification")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DrtClose                                      *win32.Proc
+	DrtContinueSearch                             *win32.Proc
+	DrtCreateDerivedKey                           *win32.Proc
+	DrtCreateDerivedKeySecurityProvider           *win32.Proc
+	DrtCreateDnsBootstrapResolver                 *win32.Proc
+	DrtCreateIpv6UdpTransport                     *win32.Proc
+	DrtCreateNullSecurityProvider                 *win32.Proc
+	DrtCreatePnrpBootstrapResolver                *win32.Proc
+	DrtDeleteDerivedKeySecurityProvider           *win32.Proc
+	DrtDeleteDnsBootstrapResolver                 *win32.Proc
+	DrtDeleteIpv6UdpTransport                     *win32.Proc
+	DrtDeleteNullSecurityProvider                 *win32.Proc
+	DrtDeletePnrpBootstrapResolver                *win32.Proc
+	DrtEndSearch                                  *win32.Proc
+	DrtGetEventData                               *win32.Proc
+	DrtGetEventDataSize                           *win32.Proc
+	DrtGetInstanceName                            *win32.Proc
+	DrtGetInstanceNameSize                        *win32.Proc
+	DrtGetSearchPath                              *win32.Proc
+	DrtGetSearchPathSize                          *win32.Proc
+	DrtGetSearchResult                            *win32.Proc
+	DrtGetSearchResultSize                        *win32.Proc
+	DrtOpen                                       *win32.Proc
+	DrtRegisterKey                                *win32.Proc
+	DrtStartSearch                                *win32.Proc
+	DrtUnregisterKey                              *win32.Proc
+	DrtUpdateKey                                  *win32.Proc
+	PeerCollabAddContact                          *win32.Proc
+	PeerCollabAsyncInviteContact                  *win32.Proc
+	PeerCollabAsyncInviteEndpoint                 *win32.Proc
+	PeerCollabCancelInvitation                    *win32.Proc
+	PeerCollabCloseHandle                         *win32.Proc
+	PeerCollabDeleteContact                       *win32.Proc
+	PeerCollabDeleteEndpointData                  *win32.Proc
+	PeerCollabDeleteObject                        *win32.Proc
+	PeerCollabEnumApplicationRegistrationInfo     *win32.Proc
+	PeerCollabEnumApplications                    *win32.Proc
+	PeerCollabEnumContacts                        *win32.Proc
+	PeerCollabEnumEndpoints                       *win32.Proc
+	PeerCollabEnumObjects                         *win32.Proc
+	PeerCollabEnumPeopleNearMe                    *win32.Proc
+	PeerCollabExportContact                       *win32.Proc
+	PeerCollabGetAppLaunchInfo                    *win32.Proc
+	PeerCollabGetApplicationRegistrationInfo      *win32.Proc
+	PeerCollabGetContact                          *win32.Proc
+	PeerCollabGetEndpointName                     *win32.Proc
+	PeerCollabGetEventData                        *win32.Proc
+	PeerCollabGetInvitationResponse               *win32.Proc
+	PeerCollabGetPresenceInfo                     *win32.Proc
+	PeerCollabGetSigninOptions                    *win32.Proc
+	PeerCollabInviteContact                       *win32.Proc
+	PeerCollabInviteEndpoint                      *win32.Proc
+	PeerCollabParseContact                        *win32.Proc
+	PeerCollabQueryContactData                    *win32.Proc
+	PeerCollabRefreshEndpointData                 *win32.Proc
+	PeerCollabRegisterApplication                 *win32.Proc
+	PeerCollabRegisterEvent                       *win32.Proc
+	PeerCollabSetEndpointName                     *win32.Proc
+	PeerCollabSetObject                           *win32.Proc
+	PeerCollabSetPresenceInfo                     *win32.Proc
+	PeerCollabShutdown                            *win32.Proc
+	PeerCollabSignin                              *win32.Proc
+	PeerCollabSignout                             *win32.Proc
+	PeerCollabStartup                             *win32.Proc
+	PeerCollabSubscribeEndpointData               *win32.Proc
+	PeerCollabUnregisterApplication               *win32.Proc
+	PeerCollabUnregisterEvent                     *win32.Proc
+	PeerCollabUnsubscribeEndpointData             *win32.Proc
+	PeerCollabUpdateContact                       *win32.Proc
+	PeerCreatePeerName                            *win32.Proc
+	PeerDistClientAddContentInformation           *win32.Proc
+	PeerDistClientAddData                         *win32.Proc
+	PeerDistClientBlockRead                       *win32.Proc
+	PeerDistClientCancelAsyncOperation            *win32.Proc
+	PeerDistClientCloseContent                    *win32.Proc
+	PeerDistClientCompleteContentInformation      *win32.Proc
+	PeerDistClientFlushContent                    *win32.Proc
+	PeerDistClientGetInformationByHandle          *win32.Proc
+	PeerDistClientOpenContent                     *win32.Proc
+	PeerDistClientStreamRead                      *win32.Proc
+	PeerDistGetOverlappedResult                   *win32.Proc
+	PeerDistGetStatus                             *win32.Proc
+	PeerDistGetStatusEx                           *win32.Proc
+	PeerDistRegisterForStatusChangeNotification   *win32.Proc
+	PeerDistRegisterForStatusChangeNotificationEx *win32.Proc
+	PeerDistServerCancelAsyncOperation            *win32.Proc
+	PeerDistServerCloseContentInformation         *win32.Proc
+	PeerDistServerCloseStreamHandle               *win32.Proc
+	PeerDistServerOpenContentInformation          *win32.Proc
+	PeerDistServerOpenContentInformationEx        *win32.Proc
+	PeerDistServerPublishAddToStream              *win32.Proc
+	PeerDistServerPublishCompleteStream           *win32.Proc
+	PeerDistServerPublishStream                   *win32.Proc
+	PeerDistServerRetrieveContentInformation      *win32.Proc
+	PeerDistServerUnpublish                       *win32.Proc
+	PeerDistShutdown                              *win32.Proc
+	PeerDistStartup                               *win32.Proc
+	PeerDistUnregisterForStatusChangeNotification *win32.Proc
+	PeerEndEnumeration                            *win32.Proc
+	PeerEnumGroups                                *win32.Proc
+	PeerEnumIdentities                            *win32.Proc
+	PeerFreeData                                  *win32.Proc
+	PeerGetItemCount                              *win32.Proc
+	PeerGetNextItem                               *win32.Proc
+	PeerGraphAddRecord                            *win32.Proc
+	PeerGraphClose                                *win32.Proc
+	PeerGraphCloseDirectConnection                *win32.Proc
+	PeerGraphConnect                              *win32.Proc
+	PeerGraphCreate                               *win32.Proc
+	PeerGraphDelete                               *win32.Proc
+	PeerGraphDeleteRecord                         *win32.Proc
+	PeerGraphEndEnumeration                       *win32.Proc
+	PeerGraphEnumConnections                      *win32.Proc
+	PeerGraphEnumNodes                            *win32.Proc
+	PeerGraphEnumRecords                          *win32.Proc
+	PeerGraphExportDatabase                       *win32.Proc
+	PeerGraphFreeData                             *win32.Proc
+	PeerGraphGetEventData                         *win32.Proc
+	PeerGraphGetItemCount                         *win32.Proc
+	PeerGraphGetNextItem                          *win32.Proc
+	PeerGraphGetNodeInfo                          *win32.Proc
+	PeerGraphGetProperties                        *win32.Proc
+	PeerGraphGetRecord                            *win32.Proc
+	PeerGraphGetStatus                            *win32.Proc
+	PeerGraphImportDatabase                       *win32.Proc
+	PeerGraphListen                               *win32.Proc
+	PeerGraphOpen                                 *win32.Proc
+	PeerGraphOpenDirectConnection                 *win32.Proc
+	PeerGraphPeerTimeToUniversalTime              *win32.Proc
+	PeerGraphRegisterEvent                        *win32.Proc
+	PeerGraphSearchRecords                        *win32.Proc
+	PeerGraphSendData                             *win32.Proc
+	PeerGraphSetNodeAttributes                    *win32.Proc
+	PeerGraphSetPresence                          *win32.Proc
+	PeerGraphSetProperties                        *win32.Proc
+	PeerGraphShutdown                             *win32.Proc
+	PeerGraphStartup                              *win32.Proc
+	PeerGraphUniversalTimeToPeerTime              *win32.Proc
+	PeerGraphUnregisterEvent                      *win32.Proc
+	PeerGraphUpdateRecord                         *win32.Proc
+	PeerGraphValidateDeferredRecords              *win32.Proc
+	PeerGroupAddRecord                            *win32.Proc
+	PeerGroupClose                                *win32.Proc
+	PeerGroupCloseDirectConnection                *win32.Proc
+	PeerGroupConnect                              *win32.Proc
+	PeerGroupConnectByAddress                     *win32.Proc
+	PeerGroupCreate                               *win32.Proc
+	PeerGroupCreateInvitation                     *win32.Proc
+	PeerGroupCreatePasswordInvitation             *win32.Proc
+	PeerGroupDelete                               *win32.Proc
+	PeerGroupDeleteRecord                         *win32.Proc
+	PeerGroupEnumConnections                      *win32.Proc
+	PeerGroupEnumMembers                          *win32.Proc
+	PeerGroupEnumRecords                          *win32.Proc
+	PeerGroupExportConfig                         *win32.Proc
+	PeerGroupExportDatabase                       *win32.Proc
+	PeerGroupGetEventData                         *win32.Proc
+	PeerGroupGetProperties                        *win32.Proc
+	PeerGroupGetRecord                            *win32.Proc
+	PeerGroupGetStatus                            *win32.Proc
+	PeerGroupImportConfig                         *win32.Proc
+	PeerGroupImportDatabase                       *win32.Proc
+	PeerGroupIssueCredentials                     *win32.Proc
+	PeerGroupJoin                                 *win32.Proc
+	PeerGroupOpen                                 *win32.Proc
+	PeerGroupOpenDirectConnection                 *win32.Proc
+	PeerGroupParseInvitation                      *win32.Proc
+	PeerGroupPasswordJoin                         *win32.Proc
+	PeerGroupPeerTimeToUniversalTime              *win32.Proc
+	PeerGroupRegisterEvent                        *win32.Proc
+	PeerGroupResumePasswordAuthentication         *win32.Proc
+	PeerGroupSearchRecords                        *win32.Proc
+	PeerGroupSendData                             *win32.Proc
+	PeerGroupSetProperties                        *win32.Proc
+	PeerGroupShutdown                             *win32.Proc
+	PeerGroupStartup                              *win32.Proc
+	PeerGroupUniversalTimeToPeerTime              *win32.Proc
+	PeerGroupUnregisterEvent                      *win32.Proc
+	PeerGroupUpdateRecord                         *win32.Proc
+	PeerHostNameToPeerName                        *win32.Proc
+	PeerIdentityCreate                            *win32.Proc
+	PeerIdentityDelete                            *win32.Proc
+	PeerIdentityExport                            *win32.Proc
+	PeerIdentityGetCryptKey                       *win32.Proc
+	PeerIdentityGetDefault                        *win32.Proc
+	PeerIdentityGetFriendlyName                   *win32.Proc
+	PeerIdentityGetXML                            *win32.Proc
+	PeerIdentityImport                            *win32.Proc
+	PeerIdentitySetFriendlyName                   *win32.Proc
+	PeerNameToPeerHostName                        *win32.Proc
+	PeerPnrpEndResolve                            *win32.Proc
+	PeerPnrpGetCloudInfo                          *win32.Proc
+	PeerPnrpGetEndpoint                           *win32.Proc
+	PeerPnrpRegister                              *win32.Proc
+	PeerPnrpResolve                               *win32.Proc
+	PeerPnrpShutdown                              *win32.Proc
+	PeerPnrpStartResolve                          *win32.Proc
+	PeerPnrpStartup                               *win32.Proc
+	PeerPnrpUnregister                            *win32.Proc
+	PeerPnrpUpdateRegistration                    *win32.Proc
+}{
+	DrtClose:                                      procDrtClose,
+	DrtContinueSearch:                             procDrtContinueSearch,
+	DrtCreateDerivedKey:                           procDrtCreateDerivedKey,
+	DrtCreateDerivedKeySecurityProvider:           procDrtCreateDerivedKeySecurityProvider,
+	DrtCreateDnsBootstrapResolver:                 procDrtCreateDnsBootstrapResolver,
+	DrtCreateIpv6UdpTransport:                     procDrtCreateIpv6UdpTransport,
+	DrtCreateNullSecurityProvider:                 procDrtCreateNullSecurityProvider,
+	DrtCreatePnrpBootstrapResolver:                procDrtCreatePnrpBootstrapResolver,
+	DrtDeleteDerivedKeySecurityProvider:           procDrtDeleteDerivedKeySecurityProvider,
+	DrtDeleteDnsBootstrapResolver:                 procDrtDeleteDnsBootstrapResolver,
+	DrtDeleteIpv6UdpTransport:                     procDrtDeleteIpv6UdpTransport,
+	DrtDeleteNullSecurityProvider:                 procDrtDeleteNullSecurityProvider,
+	DrtDeletePnrpBootstrapResolver:                procDrtDeletePnrpBootstrapResolver,
+	DrtEndSearch:                                  procDrtEndSearch,
+	DrtGetEventData:                               procDrtGetEventData,
+	DrtGetEventDataSize:                           procDrtGetEventDataSize,
+	DrtGetInstanceName:                            procDrtGetInstanceName,
+	DrtGetInstanceNameSize:                        procDrtGetInstanceNameSize,
+	DrtGetSearchPath:                              procDrtGetSearchPath,
+	DrtGetSearchPathSize:                          procDrtGetSearchPathSize,
+	DrtGetSearchResult:                            procDrtGetSearchResult,
+	DrtGetSearchResultSize:                        procDrtGetSearchResultSize,
+	DrtOpen:                                       procDrtOpen,
+	DrtRegisterKey:                                procDrtRegisterKey,
+	DrtStartSearch:                                procDrtStartSearch,
+	DrtUnregisterKey:                              procDrtUnregisterKey,
+	DrtUpdateKey:                                  procDrtUpdateKey,
+	PeerCollabAddContact:                          procPeerCollabAddContact,
+	PeerCollabAsyncInviteContact:                  procPeerCollabAsyncInviteContact,
+	PeerCollabAsyncInviteEndpoint:                 procPeerCollabAsyncInviteEndpoint,
+	PeerCollabCancelInvitation:                    procPeerCollabCancelInvitation,
+	PeerCollabCloseHandle:                         procPeerCollabCloseHandle,
+	PeerCollabDeleteContact:                       procPeerCollabDeleteContact,
+	PeerCollabDeleteEndpointData:                  procPeerCollabDeleteEndpointData,
+	PeerCollabDeleteObject:                        procPeerCollabDeleteObject,
+	PeerCollabEnumApplicationRegistrationInfo:     procPeerCollabEnumApplicationRegistrationInfo,
+	PeerCollabEnumApplications:                    procPeerCollabEnumApplications,
+	PeerCollabEnumContacts:                        procPeerCollabEnumContacts,
+	PeerCollabEnumEndpoints:                       procPeerCollabEnumEndpoints,
+	PeerCollabEnumObjects:                         procPeerCollabEnumObjects,
+	PeerCollabEnumPeopleNearMe:                    procPeerCollabEnumPeopleNearMe,
+	PeerCollabExportContact:                       procPeerCollabExportContact,
+	PeerCollabGetAppLaunchInfo:                    procPeerCollabGetAppLaunchInfo,
+	PeerCollabGetApplicationRegistrationInfo:      procPeerCollabGetApplicationRegistrationInfo,
+	PeerCollabGetContact:                          procPeerCollabGetContact,
+	PeerCollabGetEndpointName:                     procPeerCollabGetEndpointName,
+	PeerCollabGetEventData:                        procPeerCollabGetEventData,
+	PeerCollabGetInvitationResponse:               procPeerCollabGetInvitationResponse,
+	PeerCollabGetPresenceInfo:                     procPeerCollabGetPresenceInfo,
+	PeerCollabGetSigninOptions:                    procPeerCollabGetSigninOptions,
+	PeerCollabInviteContact:                       procPeerCollabInviteContact,
+	PeerCollabInviteEndpoint:                      procPeerCollabInviteEndpoint,
+	PeerCollabParseContact:                        procPeerCollabParseContact,
+	PeerCollabQueryContactData:                    procPeerCollabQueryContactData,
+	PeerCollabRefreshEndpointData:                 procPeerCollabRefreshEndpointData,
+	PeerCollabRegisterApplication:                 procPeerCollabRegisterApplication,
+	PeerCollabRegisterEvent:                       procPeerCollabRegisterEvent,
+	PeerCollabSetEndpointName:                     procPeerCollabSetEndpointName,
+	PeerCollabSetObject:                           procPeerCollabSetObject,
+	PeerCollabSetPresenceInfo:                     procPeerCollabSetPresenceInfo,
+	PeerCollabShutdown:                            procPeerCollabShutdown,
+	PeerCollabSignin:                              procPeerCollabSignin,
+	PeerCollabSignout:                             procPeerCollabSignout,
+	PeerCollabStartup:                             procPeerCollabStartup,
+	PeerCollabSubscribeEndpointData:               procPeerCollabSubscribeEndpointData,
+	PeerCollabUnregisterApplication:               procPeerCollabUnregisterApplication,
+	PeerCollabUnregisterEvent:                     procPeerCollabUnregisterEvent,
+	PeerCollabUnsubscribeEndpointData:             procPeerCollabUnsubscribeEndpointData,
+	PeerCollabUpdateContact:                       procPeerCollabUpdateContact,
+	PeerCreatePeerName:                            procPeerCreatePeerName,
+	PeerDistClientAddContentInformation:           procPeerDistClientAddContentInformation,
+	PeerDistClientAddData:                         procPeerDistClientAddData,
+	PeerDistClientBlockRead:                       procPeerDistClientBlockRead,
+	PeerDistClientCancelAsyncOperation:            procPeerDistClientCancelAsyncOperation,
+	PeerDistClientCloseContent:                    procPeerDistClientCloseContent,
+	PeerDistClientCompleteContentInformation:      procPeerDistClientCompleteContentInformation,
+	PeerDistClientFlushContent:                    procPeerDistClientFlushContent,
+	PeerDistClientGetInformationByHandle:          procPeerDistClientGetInformationByHandle,
+	PeerDistClientOpenContent:                     procPeerDistClientOpenContent,
+	PeerDistClientStreamRead:                      procPeerDistClientStreamRead,
+	PeerDistGetOverlappedResult:                   procPeerDistGetOverlappedResult,
+	PeerDistGetStatus:                             procPeerDistGetStatus,
+	PeerDistGetStatusEx:                           procPeerDistGetStatusEx,
+	PeerDistRegisterForStatusChangeNotification:   procPeerDistRegisterForStatusChangeNotification,
+	PeerDistRegisterForStatusChangeNotificationEx: procPeerDistRegisterForStatusChangeNotificationEx,
+	PeerDistServerCancelAsyncOperation:            procPeerDistServerCancelAsyncOperation,
+	PeerDistServerCloseContentInformation:         procPeerDistServerCloseContentInformation,
+	PeerDistServerCloseStreamHandle:               procPeerDistServerCloseStreamHandle,
+	PeerDistServerOpenContentInformation:          procPeerDistServerOpenContentInformation,
+	PeerDistServerOpenContentInformationEx:        procPeerDistServerOpenContentInformationEx,
+	PeerDistServerPublishAddToStream:              procPeerDistServerPublishAddToStream,
+	PeerDistServerPublishCompleteStream:           procPeerDistServerPublishCompleteStream,
+	PeerDistServerPublishStream:                   procPeerDistServerPublishStream,
+	PeerDistServerRetrieveContentInformation:      procPeerDistServerRetrieveContentInformation,
+	PeerDistServerUnpublish:                       procPeerDistServerUnpublish,
+	PeerDistShutdown:                              procPeerDistShutdown,
+	PeerDistStartup:                               procPeerDistStartup,
+	PeerDistUnregisterForStatusChangeNotification: procPeerDistUnregisterForStatusChangeNotification,
+	PeerEndEnumeration:                            procPeerEndEnumeration,
+	PeerEnumGroups:                                procPeerEnumGroups,
+	PeerEnumIdentities:                            procPeerEnumIdentities,
+	PeerFreeData:                                  procPeerFreeData,
+	PeerGetItemCount:                              procPeerGetItemCount,
+	PeerGetNextItem:                               procPeerGetNextItem,
+	PeerGraphAddRecord:                            procPeerGraphAddRecord,
+	PeerGraphClose:                                procPeerGraphClose,
+	PeerGraphCloseDirectConnection:                procPeerGraphCloseDirectConnection,
+	PeerGraphConnect:                              procPeerGraphConnect,
+	PeerGraphCreate:                               procPeerGraphCreate,
+	PeerGraphDelete:                               procPeerGraphDelete,
+	PeerGraphDeleteRecord:                         procPeerGraphDeleteRecord,
+	PeerGraphEndEnumeration:                       procPeerGraphEndEnumeration,
+	PeerGraphEnumConnections:                      procPeerGraphEnumConnections,
+	PeerGraphEnumNodes:                            procPeerGraphEnumNodes,
+	PeerGraphEnumRecords:                          procPeerGraphEnumRecords,
+	PeerGraphExportDatabase:                       procPeerGraphExportDatabase,
+	PeerGraphFreeData:                             procPeerGraphFreeData,
+	PeerGraphGetEventData:                         procPeerGraphGetEventData,
+	PeerGraphGetItemCount:                         procPeerGraphGetItemCount,
+	PeerGraphGetNextItem:                          procPeerGraphGetNextItem,
+	PeerGraphGetNodeInfo:                          procPeerGraphGetNodeInfo,
+	PeerGraphGetProperties:                        procPeerGraphGetProperties,
+	PeerGraphGetRecord:                            procPeerGraphGetRecord,
+	PeerGraphGetStatus:                            procPeerGraphGetStatus,
+	PeerGraphImportDatabase:                       procPeerGraphImportDatabase,
+	PeerGraphListen:                               procPeerGraphListen,
+	PeerGraphOpen:                                 procPeerGraphOpen,
+	PeerGraphOpenDirectConnection:                 procPeerGraphOpenDirectConnection,
+	PeerGraphPeerTimeToUniversalTime:              procPeerGraphPeerTimeToUniversalTime,
+	PeerGraphRegisterEvent:                        procPeerGraphRegisterEvent,
+	PeerGraphSearchRecords:                        procPeerGraphSearchRecords,
+	PeerGraphSendData:                             procPeerGraphSendData,
+	PeerGraphSetNodeAttributes:                    procPeerGraphSetNodeAttributes,
+	PeerGraphSetPresence:                          procPeerGraphSetPresence,
+	PeerGraphSetProperties:                        procPeerGraphSetProperties,
+	PeerGraphShutdown:                             procPeerGraphShutdown,
+	PeerGraphStartup:                              procPeerGraphStartup,
+	PeerGraphUniversalTimeToPeerTime:              procPeerGraphUniversalTimeToPeerTime,
+	PeerGraphUnregisterEvent:                      procPeerGraphUnregisterEvent,
+	PeerGraphUpdateRecord:                         procPeerGraphUpdateRecord,
+	PeerGraphValidateDeferredRecords:              procPeerGraphValidateDeferredRecords,
+	PeerGroupAddRecord:                            procPeerGroupAddRecord,
+	PeerGroupClose:                                procPeerGroupClose,
+	PeerGroupCloseDirectConnection:                procPeerGroupCloseDirectConnection,
+	PeerGroupConnect:                              procPeerGroupConnect,
+	PeerGroupConnectByAddress:                     procPeerGroupConnectByAddress,
+	PeerGroupCreate:                               procPeerGroupCreate,
+	PeerGroupCreateInvitation:                     procPeerGroupCreateInvitation,
+	PeerGroupCreatePasswordInvitation:             procPeerGroupCreatePasswordInvitation,
+	PeerGroupDelete:                               procPeerGroupDelete,
+	PeerGroupDeleteRecord:                         procPeerGroupDeleteRecord,
+	PeerGroupEnumConnections:                      procPeerGroupEnumConnections,
+	PeerGroupEnumMembers:                          procPeerGroupEnumMembers,
+	PeerGroupEnumRecords:                          procPeerGroupEnumRecords,
+	PeerGroupExportConfig:                         procPeerGroupExportConfig,
+	PeerGroupExportDatabase:                       procPeerGroupExportDatabase,
+	PeerGroupGetEventData:                         procPeerGroupGetEventData,
+	PeerGroupGetProperties:                        procPeerGroupGetProperties,
+	PeerGroupGetRecord:                            procPeerGroupGetRecord,
+	PeerGroupGetStatus:                            procPeerGroupGetStatus,
+	PeerGroupImportConfig:                         procPeerGroupImportConfig,
+	PeerGroupImportDatabase:                       procPeerGroupImportDatabase,
+	PeerGroupIssueCredentials:                     procPeerGroupIssueCredentials,
+	PeerGroupJoin:                                 procPeerGroupJoin,
+	PeerGroupOpen:                                 procPeerGroupOpen,
+	PeerGroupOpenDirectConnection:                 procPeerGroupOpenDirectConnection,
+	PeerGroupParseInvitation:                      procPeerGroupParseInvitation,
+	PeerGroupPasswordJoin:                         procPeerGroupPasswordJoin,
+	PeerGroupPeerTimeToUniversalTime:              procPeerGroupPeerTimeToUniversalTime,
+	PeerGroupRegisterEvent:                        procPeerGroupRegisterEvent,
+	PeerGroupResumePasswordAuthentication:         procPeerGroupResumePasswordAuthentication,
+	PeerGroupSearchRecords:                        procPeerGroupSearchRecords,
+	PeerGroupSendData:                             procPeerGroupSendData,
+	PeerGroupSetProperties:                        procPeerGroupSetProperties,
+	PeerGroupShutdown:                             procPeerGroupShutdown,
+	PeerGroupStartup:                              procPeerGroupStartup,
+	PeerGroupUniversalTimeToPeerTime:              procPeerGroupUniversalTimeToPeerTime,
+	PeerGroupUnregisterEvent:                      procPeerGroupUnregisterEvent,
+	PeerGroupUpdateRecord:                         procPeerGroupUpdateRecord,
+	PeerHostNameToPeerName:                        procPeerHostNameToPeerName,
+	PeerIdentityCreate:                            procPeerIdentityCreate,
+	PeerIdentityDelete:                            procPeerIdentityDelete,
+	PeerIdentityExport:                            procPeerIdentityExport,
+	PeerIdentityGetCryptKey:                       procPeerIdentityGetCryptKey,
+	PeerIdentityGetDefault:                        procPeerIdentityGetDefault,
+	PeerIdentityGetFriendlyName:                   procPeerIdentityGetFriendlyName,
+	PeerIdentityGetXML:                            procPeerIdentityGetXML,
+	PeerIdentityImport:                            procPeerIdentityImport,
+	PeerIdentitySetFriendlyName:                   procPeerIdentitySetFriendlyName,
+	PeerNameToPeerHostName:                        procPeerNameToPeerHostName,
+	PeerPnrpEndResolve:                            procPeerPnrpEndResolve,
+	PeerPnrpGetCloudInfo:                          procPeerPnrpGetCloudInfo,
+	PeerPnrpGetEndpoint:                           procPeerPnrpGetEndpoint,
+	PeerPnrpRegister:                              procPeerPnrpRegister,
+	PeerPnrpResolve:                               procPeerPnrpResolve,
+	PeerPnrpShutdown:                              procPeerPnrpShutdown,
+	PeerPnrpStartResolve:                          procPeerPnrpStartResolve,
+	PeerPnrpStartup:                               procPeerPnrpStartup,
+	PeerPnrpUnregister:                            procPeerPnrpUnregister,
+	PeerPnrpUpdateRegistration:                    procPeerPnrpUpdateRegistration,
+}
+
 // DrtClose calls drt!DrtClose.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtclose
 // Minimum OS: windows6.1.
@@ -285,11 +693,11 @@ func DrtCreateNullSecurityProvider(ppSecurityProvider **DRT_SECURITY_PROVIDER) e
 // DrtCreatePnrpBootstrapResolver calls drtprov!DrtCreatePnrpBootstrapResolver.
 // https://learn.microsoft.com/windows/win32/api/drt/nf-drt-drtcreatepnrpbootstrapresolver
 // Minimum OS: windows6.1.
-func DrtCreatePnrpBootstrapResolver(fPublish bool, pwzPeerName string, pwzCloudName string, pwzPublishingIdentity string, ppResolver **DRT_BOOTSTRAP_PROVIDER) error {
+func DrtCreatePnrpBootstrapResolver(fPublish bool, pwzPeerName string, pwzCloudName *string, pwzPublishingIdentity *string, ppResolver **DRT_BOOTSTRAP_PROVIDER) error {
 	_fPublish := win32.Bool32(fPublish)
 	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
-	_pwzCloudName := win32.UTF16Ptr(pwzCloudName)
-	_pwzPublishingIdentity := win32.UTF16Ptr(pwzPublishingIdentity)
+	_pwzCloudName := win32.UTF16PtrOrNil(pwzCloudName)
+	_pwzPublishingIdentity := win32.UTF16PtrOrNil(pwzPublishingIdentity)
 	r1, _, _ := syscall.SyscallN(procDrtCreatePnrpBootstrapResolver.Addr(), uintptr(_fPublish), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(_pwzCloudName)), uintptr(unsafe.Pointer(_pwzPublishingIdentity)), uintptr(unsafe.Pointer(ppResolver)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -558,8 +966,8 @@ func PeerCollabEnumPeopleNearMe(phPeerEnum *unsafe.Pointer) error {
 // PeerCollabExportContact calls P2P!PeerCollabExportContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabexportcontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabExportContact(pwzPeerName string, ppwzContactData *foundation.PWSTR) error {
-	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
+func PeerCollabExportContact(pwzPeerName *string, ppwzContactData *foundation.PWSTR) error {
+	_pwzPeerName := win32.UTF16PtrOrNil(pwzPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerCollabExportContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppwzContactData)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -583,8 +991,8 @@ func PeerCollabGetApplicationRegistrationInfo(pApplicationId *win32.GUID, regist
 // PeerCollabGetContact calls P2P!PeerCollabGetContact.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercollabgetcontact
 // Minimum OS: windows6.0.6000.
-func PeerCollabGetContact(pwzPeerName string, ppContact **PEER_CONTACT) error {
-	_pwzPeerName := win32.UTF16Ptr(pwzPeerName)
+func PeerCollabGetContact(pwzPeerName *string, ppContact **PEER_CONTACT) error {
+	_pwzPeerName := win32.UTF16PtrOrNil(pwzPeerName)
 	r1, _, _ := syscall.SyscallN(procPeerCollabGetContact.Addr(), uintptr(unsafe.Pointer(_pwzPeerName)), uintptr(unsafe.Pointer(ppContact)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -790,9 +1198,9 @@ func PeerCollabUpdateContact(pContact *PEER_CONTACT) error {
 // PeerCreatePeerName calls P2P!PeerCreatePeerName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peercreatepeername
 // Minimum OS: windows5.1.2600.
-func PeerCreatePeerName(pwzIdentity string, pwzClassifier string, ppwzPeerName *foundation.PWSTR) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
-	_pwzClassifier := win32.UTF16Ptr(pwzClassifier)
+func PeerCreatePeerName(pwzIdentity *string, pwzClassifier *string, ppwzPeerName *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
+	_pwzClassifier := win32.UTF16PtrOrNil(pwzClassifier)
 	r1, _, _ := syscall.SyscallN(procPeerCreatePeerName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzClassifier)), uintptr(unsafe.Pointer(ppwzPeerName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1154,8 +1562,8 @@ func PeerGraphCloseDirectConnection(hGraph unsafe.Pointer, ullConnectionId uint6
 // PeerGraphConnect calls P2PGRAPH!PeerGraphConnect.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphconnect
 // Minimum OS: windows5.1.2600.
-func PeerGraphConnect(hGraph unsafe.Pointer, pwzPeerId string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
-	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+func PeerGraphConnect(hGraph unsafe.Pointer, pwzPeerId *string, pAddress *PEER_ADDRESS, pullConnectionId *uint64) error {
+	_pwzPeerId := win32.UTF16PtrOrNil(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphConnect.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pullConnectionId)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1208,8 +1616,8 @@ func PeerGraphEnumConnections(hGraph unsafe.Pointer, dwFlags uint32, phPeerEnum 
 // PeerGraphEnumNodes calls P2PGRAPH!PeerGraphEnumNodes.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphenumnodes
 // Minimum OS: windows5.1.2600.
-func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId string, phPeerEnum *unsafe.Pointer) error {
-	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId *string, phPeerEnum *unsafe.Pointer) error {
+	_pwzPeerId := win32.UTF16PtrOrNil(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphEnumNodes.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1217,8 +1625,8 @@ func PeerGraphEnumNodes(hGraph unsafe.Pointer, pwzPeerId string, phPeerEnum *uns
 // PeerGraphEnumRecords calls P2PGRAPH!PeerGraphEnumRecords.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphenumrecords
 // Minimum OS: windows5.1.2600.
-func PeerGraphEnumRecords(hGraph unsafe.Pointer, pRecordType *win32.GUID, pwzPeerId string, phPeerEnum *unsafe.Pointer) error {
-	_pwzPeerId := win32.UTF16Ptr(pwzPeerId)
+func PeerGraphEnumRecords(hGraph unsafe.Pointer, pRecordType *win32.GUID, pwzPeerId *string, phPeerEnum *unsafe.Pointer) error {
+	_pwzPeerId := win32.UTF16PtrOrNil(pwzPeerId)
 	r1, _, _ := syscall.SyscallN(procPeerGraphEnumRecords.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(unsafe.Pointer(pRecordType)), uintptr(unsafe.Pointer(_pwzPeerId)), uintptr(unsafe.Pointer(phPeerEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1557,8 +1965,8 @@ func PeerGroupEnumConnections(hGroup unsafe.Pointer, dwFlags uint32, phPeerEnum 
 // PeerGroupEnumMembers calls P2P!PeerGroupEnumMembers.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupenummembers
 // Minimum OS: windows5.1.2600.
-func PeerGroupEnumMembers(hGroup unsafe.Pointer, dwFlags uint32, pwzIdentity string, phPeerEnum *unsafe.Pointer) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerGroupEnumMembers(hGroup unsafe.Pointer, dwFlags uint32, pwzIdentity *string, phPeerEnum *unsafe.Pointer) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerGroupEnumMembers.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phPeerEnum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1653,10 +2061,10 @@ func PeerGroupIssueCredentials(hGroup unsafe.Pointer, pwzSubjectIdentity string,
 // PeerGroupJoin calls P2P!PeerGroupJoin.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupjoin
 // Minimum OS: windows5.1.2600.
-func PeerGroupJoin(pwzIdentity string, pwzInvitation string, pwzCloud string, phGroup *unsafe.Pointer) error {
+func PeerGroupJoin(pwzIdentity string, pwzInvitation string, pwzCloud *string, phGroup *unsafe.Pointer) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzInvitation := win32.UTF16Ptr(pwzInvitation)
-	_pwzCloud := win32.UTF16Ptr(pwzCloud)
+	_pwzCloud := win32.UTF16PtrOrNil(pwzCloud)
 	r1, _, _ := syscall.SyscallN(procPeerGroupJoin.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1664,10 +2072,10 @@ func PeerGroupJoin(pwzIdentity string, pwzInvitation string, pwzCloud string, ph
 // PeerGroupOpen calls P2P!PeerGroupOpen.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupopen
 // Minimum OS: windows5.1.2600.
-func PeerGroupOpen(pwzIdentity string, pwzGroupPeerName string, pwzCloud string, phGroup *unsafe.Pointer) error {
+func PeerGroupOpen(pwzIdentity string, pwzGroupPeerName string, pwzCloud *string, phGroup *unsafe.Pointer) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzGroupPeerName := win32.UTF16Ptr(pwzGroupPeerName)
-	_pwzCloud := win32.UTF16Ptr(pwzCloud)
+	_pwzCloud := win32.UTF16PtrOrNil(pwzCloud)
 	r1, _, _ := syscall.SyscallN(procPeerGroupOpen.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzGroupPeerName)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1693,11 +2101,11 @@ func PeerGroupParseInvitation(pwzInvitation string, ppInvitationInfo **PEER_INVI
 // PeerGroupPasswordJoin calls P2P!PeerGroupPasswordJoin.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergrouppasswordjoin
 // Minimum OS: windows5.1.2600.
-func PeerGroupPasswordJoin(pwzIdentity string, pwzInvitation string, pwzPassword string, pwzCloud string, phGroup *unsafe.Pointer) error {
+func PeerGroupPasswordJoin(pwzIdentity string, pwzInvitation string, pwzPassword string, pwzCloud *string, phGroup *unsafe.Pointer) error {
 	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
 	_pwzInvitation := win32.UTF16Ptr(pwzInvitation)
 	_pwzPassword := win32.UTF16Ptr(pwzPassword)
-	_pwzCloud := win32.UTF16Ptr(pwzCloud)
+	_pwzCloud := win32.UTF16PtrOrNil(pwzCloud)
 	r1, _, _ := syscall.SyscallN(procPeerGroupPasswordJoin.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzInvitation)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(_pwzCloud)), uintptr(unsafe.Pointer(phGroup)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1809,9 +2217,9 @@ func PeerHostNameToPeerName(pwzHostName string, ppwzPeerName *foundation.PWSTR) 
 // PeerIdentityCreate calls P2P!PeerIdentityCreate.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitycreate
 // Minimum OS: windows5.1.2600.
-func PeerIdentityCreate(pwzClassifier string, pwzFriendlyName string, hCryptProv uintptr, ppwzIdentity *foundation.PWSTR) error {
-	_pwzClassifier := win32.UTF16Ptr(pwzClassifier)
-	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
+func PeerIdentityCreate(pwzClassifier *string, pwzFriendlyName *string, hCryptProv uintptr, ppwzIdentity *foundation.PWSTR) error {
+	_pwzClassifier := win32.UTF16PtrOrNil(pwzClassifier)
+	_pwzFriendlyName := win32.UTF16PtrOrNil(pwzFriendlyName)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityCreate.Addr(), uintptr(unsafe.Pointer(_pwzClassifier)), uintptr(unsafe.Pointer(_pwzFriendlyName)), uintptr(hCryptProv), uintptr(unsafe.Pointer(ppwzIdentity)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1828,8 +2236,8 @@ func PeerIdentityDelete(pwzIdentity string) error {
 // PeerIdentityExport calls P2P!PeerIdentityExport.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentityexport
 // Minimum OS: windows5.1.2600.
-func PeerIdentityExport(pwzIdentity string, pwzPassword string, ppwzExportXML *foundation.PWSTR) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentityExport(pwzIdentity *string, pwzPassword string, ppwzExportXML *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	_pwzPassword := win32.UTF16Ptr(pwzPassword)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityExport.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzPassword)), uintptr(unsafe.Pointer(ppwzExportXML)))
 	return win32.ErrIfFailed(int32(r1))
@@ -1838,8 +2246,8 @@ func PeerIdentityExport(pwzIdentity string, pwzPassword string, ppwzExportXML *f
 // PeerIdentityGetCryptKey calls P2P!PeerIdentityGetCryptKey.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetcryptkey
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetCryptKey(pwzIdentity string, phCryptProv *uintptr) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentityGetCryptKey(pwzIdentity *string, phCryptProv *uintptr) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetCryptKey.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(phCryptProv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1855,8 +2263,8 @@ func PeerIdentityGetDefault(ppwzPeerName *foundation.PWSTR) error {
 // PeerIdentityGetFriendlyName calls P2P!PeerIdentityGetFriendlyName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetfriendlyname
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetFriendlyName(pwzIdentity string, ppwzFriendlyName *foundation.PWSTR) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentityGetFriendlyName(pwzIdentity *string, ppwzFriendlyName *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetFriendlyName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(ppwzFriendlyName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1864,8 +2272,8 @@ func PeerIdentityGetFriendlyName(pwzIdentity string, ppwzFriendlyName *foundatio
 // PeerIdentityGetXML calls P2P!PeerIdentityGetXML.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitygetxml
 // Minimum OS: windows5.1.2600.
-func PeerIdentityGetXML(pwzIdentity string, ppwzIdentityXML *foundation.PWSTR) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentityGetXML(pwzIdentity *string, ppwzIdentityXML *foundation.PWSTR) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	r1, _, _ := syscall.SyscallN(procPeerIdentityGetXML.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(ppwzIdentityXML)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1883,8 +2291,8 @@ func PeerIdentityImport(pwzImportXML string, pwzPassword string, ppwzIdentity *f
 // PeerIdentitySetFriendlyName calls P2P!PeerIdentitySetFriendlyName.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peeridentitysetfriendlyname
 // Minimum OS: windows5.1.2600.
-func PeerIdentitySetFriendlyName(pwzIdentity string, pwzFriendlyName string) error {
-	_pwzIdentity := win32.UTF16Ptr(pwzIdentity)
+func PeerIdentitySetFriendlyName(pwzIdentity *string, pwzFriendlyName string) error {
+	_pwzIdentity := win32.UTF16PtrOrNil(pwzIdentity)
 	_pwzFriendlyName := win32.UTF16Ptr(pwzFriendlyName)
 	r1, _, _ := syscall.SyscallN(procPeerIdentitySetFriendlyName.Addr(), uintptr(unsafe.Pointer(_pwzIdentity)), uintptr(unsafe.Pointer(_pwzFriendlyName)))
 	return win32.ErrIfFailed(int32(r1))
@@ -1935,9 +2343,9 @@ func PeerPnrpRegister(pcwzPeerName string, pRegistrationInfo *PEER_PNRP_REGISTRA
 // PeerPnrpResolve calls P2P!PeerPnrpResolve.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpresolve
 // Minimum OS: windows5.1.2600.
-func PeerPnrpResolve(pcwzPeerName string, pcwzCloudName string, pcEndpoints *uint32, ppEndpoints **PEER_PNRP_ENDPOINT_INFO) error {
+func PeerPnrpResolve(pcwzPeerName string, pcwzCloudName *string, pcEndpoints *uint32, ppEndpoints **PEER_PNRP_ENDPOINT_INFO) error {
 	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
-	_pcwzCloudName := win32.UTF16Ptr(pcwzCloudName)
+	_pcwzCloudName := win32.UTF16PtrOrNil(pcwzCloudName)
 	r1, _, _ := syscall.SyscallN(procPeerPnrpResolve.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(_pcwzCloudName)), uintptr(unsafe.Pointer(pcEndpoints)), uintptr(unsafe.Pointer(ppEndpoints)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1953,9 +2361,9 @@ func PeerPnrpShutdown() error {
 // PeerPnrpStartResolve calls P2P!PeerPnrpStartResolve.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peerpnrpstartresolve
 // Minimum OS: windows5.1.2600.
-func PeerPnrpStartResolve(pcwzPeerName string, pcwzCloudName string, cMaxEndpoints uint32, hEvent foundation.HANDLE, phResolve *unsafe.Pointer) error {
+func PeerPnrpStartResolve(pcwzPeerName string, pcwzCloudName *string, cMaxEndpoints uint32, hEvent foundation.HANDLE, phResolve *unsafe.Pointer) error {
 	_pcwzPeerName := win32.UTF16Ptr(pcwzPeerName)
-	_pcwzCloudName := win32.UTF16Ptr(pcwzCloudName)
+	_pcwzCloudName := win32.UTF16PtrOrNil(pcwzCloudName)
 	r1, _, _ := syscall.SyscallN(procPeerPnrpStartResolve.Addr(), uintptr(unsafe.Pointer(_pcwzPeerName)), uintptr(unsafe.Pointer(_pcwzCloudName)), uintptr(cMaxEndpoints), uintptr(hEvent), uintptr(unsafe.Pointer(phResolve)))
 	return win32.ErrIfFailed(int32(r1))
 }

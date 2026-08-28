@@ -4,54 +4,67 @@
 
 package mapi
 
-// LPMAPIADDRESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, foundation.PSTR, uint32, foundation.PSTR, uint32, *MapiRecipDesc, uint32, uint32, *uint32, **MapiRecipDesc) uint32.
+// LPMAPIADDRESS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, foundation.PSTR, uint32, foundation.PSTR, uint32, *MapiRecipDesc, uint32, uint32, *uint32, **MapiRecipDesc) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPIADDRESS uintptr
 
-// LPMAPIDELETEMAIL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, foundation.PSTR, uint32, uint32) uint32.
+// LPMAPIDELETEMAIL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, foundation.PSTR, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPIDELETEMAIL uintptr
 
-// LPMAPIDETAILS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *MapiRecipDesc, uint32, uint32) uint32.
+// LPMAPIDETAILS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *MapiRecipDesc, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPIDETAILS uintptr
 
-// LPMAPIFINDNEXT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, foundation.PSTR, foundation.PSTR, uint32, uint32, foundation.PSTR) uint32.
+// LPMAPIFINDNEXT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, foundation.PSTR, foundation.PSTR, uint32, uint32, foundation.PSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPIFINDNEXT uintptr
 
-// LPMAPIFREEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// LPMAPIFREEBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPIFREEBUFFER uintptr
 
-// LPMAPILOGOFF is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, uint32, uint32) uint32.
+// LPMAPILOGOFF is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPILOGOFF uintptr
 
-// LPMAPILOGON is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.PSTR, foundation.PSTR, uint32, uint32, *uintptr) uint32.
+// LPMAPILOGON is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, foundation.PSTR, foundation.PSTR, uint32, uint32, *uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPILOGON uintptr
 
-// LPMAPIREADMAIL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, foundation.PSTR, uint32, uint32, **MapiMessage) uint32.
+// LPMAPIREADMAIL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, foundation.PSTR, uint32, uint32, **MapiMessage) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPIREADMAIL uintptr
 
-// LPMAPIRESOLVENAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, foundation.PSTR, uint32, uint32, **MapiRecipDesc) uint32.
+// LPMAPIRESOLVENAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, foundation.PSTR, uint32, uint32, **MapiRecipDesc) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPIRESOLVENAME uintptr
 
-// LPMAPISAVEMAIL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *MapiMessage, uint32, uint32, foundation.PSTR) uint32.
+// LPMAPISAVEMAIL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *MapiMessage, uint32, uint32, foundation.PSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPISAVEMAIL uintptr
 
-// LPMAPISENDDOCUMENTS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.PSTR, foundation.PSTR, foundation.PSTR, uint32) uint32.
+// LPMAPISENDDOCUMENTS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, foundation.PSTR, foundation.PSTR, foundation.PSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPISENDDOCUMENTS uintptr
 
-// LPMAPISENDMAIL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *MapiMessage, uint32, uint32) uint32.
+// LPMAPISENDMAIL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *MapiMessage, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPISENDMAIL uintptr
 
-// LPMAPISENDMAILW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *MapiMessageW, uint32, uint32) uint32.
+// LPMAPISENDMAILW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *MapiMessageW, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPMAPISENDMAILW uintptr

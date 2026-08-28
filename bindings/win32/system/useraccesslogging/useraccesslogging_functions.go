@@ -22,6 +22,22 @@ var (
 	procUalStop            = modualapi.NewProc("UalStop")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	UalInstrument      *win32.Proc
+	UalRegisterProduct *win32.Proc
+	UalStart           *win32.Proc
+	UalStop            *win32.Proc
+}{
+	UalInstrument:      procUalInstrument,
+	UalRegisterProduct: procUalRegisterProduct,
+	UalStart:           procUalStart,
+	UalStop:            procUalStop,
+}
+
 // UalInstrument calls ualapi!UalInstrument.
 // https://learn.microsoft.com/windows/win32/api/ual/nf-ual-ualinstrument
 // Minimum OS: windows8.0.

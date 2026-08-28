@@ -23,6 +23,20 @@ var (
 	procEditSecurityAdvanced = modACLUI.NewProc("EditSecurityAdvanced")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateSecurityPage   *win32.Proc
+	EditSecurity         *win32.Proc
+	EditSecurityAdvanced *win32.Proc
+}{
+	CreateSecurityPage:   procCreateSecurityPage,
+	EditSecurity:         procEditSecurity,
+	EditSecurityAdvanced: procEditSecurityAdvanced,
+}
+
 // CreateSecurityPage calls ACLUI!CreateSecurityPage.
 // https://learn.microsoft.com/windows/win32/api/aclui/nf-aclui-createsecuritypage
 // Minimum OS: windows5.1.2600.

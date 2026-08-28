@@ -30,12 +30,42 @@ var (
 	procRmStartSession      = modRstrtMgr.NewProc("RmStartSession")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	RmAddFilter         *win32.Proc
+	RmCancelCurrentTask *win32.Proc
+	RmEndSession        *win32.Proc
+	RmGetFilterList     *win32.Proc
+	RmGetList           *win32.Proc
+	RmJoinSession       *win32.Proc
+	RmRegisterResources *win32.Proc
+	RmRemoveFilter      *win32.Proc
+	RmRestart           *win32.Proc
+	RmShutdown          *win32.Proc
+	RmStartSession      *win32.Proc
+}{
+	RmAddFilter:         procRmAddFilter,
+	RmCancelCurrentTask: procRmCancelCurrentTask,
+	RmEndSession:        procRmEndSession,
+	RmGetFilterList:     procRmGetFilterList,
+	RmGetList:           procRmGetList,
+	RmJoinSession:       procRmJoinSession,
+	RmRegisterResources: procRmRegisterResources,
+	RmRemoveFilter:      procRmRemoveFilter,
+	RmRestart:           procRmRestart,
+	RmShutdown:          procRmShutdown,
+	RmStartSession:      procRmStartSession,
+}
+
 // RmAddFilter calls RstrtMgr!RmAddFilter.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmaddfilter
 // Minimum OS: windows6.0.6000.
-func RmAddFilter(dwSessionHandle uint32, strModuleName string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName string, FilterAction RM_FILTER_ACTION) foundation.WIN32_ERROR {
-	_strModuleName := win32.UTF16Ptr(strModuleName)
-	_strServiceShortName := win32.UTF16Ptr(strServiceShortName)
+func RmAddFilter(dwSessionHandle uint32, strModuleName *string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName *string, FilterAction RM_FILTER_ACTION) foundation.WIN32_ERROR {
+	_strModuleName := win32.UTF16PtrOrNil(strModuleName)
+	_strServiceShortName := win32.UTF16PtrOrNil(strServiceShortName)
 	r1, _, _ := syscall.SyscallN(procRmAddFilter.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(_strModuleName)), uintptr(unsafe.Pointer(pProcess)), uintptr(unsafe.Pointer(_strServiceShortName)), uintptr(FilterAction))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -108,9 +138,9 @@ func RmRegisterResources(dwSessionHandle uint32, rgsFileNames []foundation.PWSTR
 // RmRemoveFilter calls RstrtMgr!RmRemoveFilter.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmremovefilter
 // Minimum OS: windows6.0.6000.
-func RmRemoveFilter(dwSessionHandle uint32, strModuleName string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName string) foundation.WIN32_ERROR {
-	_strModuleName := win32.UTF16Ptr(strModuleName)
-	_strServiceShortName := win32.UTF16Ptr(strServiceShortName)
+func RmRemoveFilter(dwSessionHandle uint32, strModuleName *string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName *string) foundation.WIN32_ERROR {
+	_strModuleName := win32.UTF16PtrOrNil(strModuleName)
+	_strServiceShortName := win32.UTF16PtrOrNil(strServiceShortName)
 	r1, _, _ := syscall.SyscallN(procRmRemoveFilter.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(_strModuleName)), uintptr(unsafe.Pointer(pProcess)), uintptr(unsafe.Pointer(_strServiceShortName)))
 	return foundation.WIN32_ERROR(r1)
 }

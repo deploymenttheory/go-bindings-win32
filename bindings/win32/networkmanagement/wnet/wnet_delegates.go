@@ -4,126 +4,157 @@
 
 package wnet
 
-// PF_AddConnectNotify is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*NOTIFYINFO, *NOTIFYADD) uint32.
+// PF_AddConnectNotify is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*NOTIFYINFO, *NOTIFYADD) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_AddConnectNotify uintptr
 
-// PF_CancelConnectNotify is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*NOTIFYINFO, *NOTIFYCANCEL) uint32.
+// PF_CancelConnectNotify is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*NOTIFYINFO, *NOTIFYCANCEL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_CancelConnectNotify uintptr
 
-// PF_NPAddConnection is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*NETRESOURCEW, foundation.PWSTR, foundation.PWSTR) uint32.
+// PF_NPAddConnection is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*NETRESOURCEW, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPAddConnection uintptr
 
-// PF_NPAddConnection3 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *NETRESOURCEW, foundation.PWSTR, foundation.PWSTR, uint32) uint32.
+// PF_NPAddConnection3 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *NETRESOURCEW, foundation.PWSTR, foundation.PWSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPAddConnection3 uintptr
 
-// PF_NPAddConnection4 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *NETRESOURCEW, unsafe.Pointer, uint32, uint32, *byte, uint32) uint32.
+// PF_NPAddConnection4 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *NETRESOURCEW, unsafe.Pointer, uint32, uint32, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPAddConnection4 uintptr
 
-// PF_NPCancelConnection is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.BOOL) uint32.
+// PF_NPCancelConnection is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPCancelConnection uintptr
 
-// PF_NPCancelConnection2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.BOOL, uint32) uint32.
+// PF_NPCancelConnection2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.BOOL, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPCancelConnection2 uintptr
 
-// PF_NPCloseEnum is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) uint32.
+// PF_NPCloseEnum is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPCloseEnum uintptr
 
-// PF_NPDeviceMode is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND) uint32.
+// PF_NPDeviceMode is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPDeviceMode uintptr
 
-// PF_NPDirectoryNotify is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.PWSTR, uint32) uint32.
+// PF_NPDirectoryNotify is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.PWSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPDirectoryNotify uintptr
 
-// PF_NPEnumResource is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *uint32, unsafe.Pointer, *uint32) uint32.
+// PF_NPEnumResource is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *uint32, unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPEnumResource uintptr
 
-// PF_NPFMXEditPerm is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.HWND, uint32) uint32.
+// PF_NPFMXEditPerm is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.HWND, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPFMXEditPerm uintptr
 
-// PF_NPFMXGetPermCaps is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) uint32.
+// PF_NPFMXGetPermCaps is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPFMXGetPermCaps uintptr
 
-// PF_NPFMXGetPermHelp is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, foundation.BOOL, unsafe.Pointer, *uint32, *uint32) uint32.
+// PF_NPFMXGetPermHelp is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, foundation.BOOL, unsafe.Pointer, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPFMXGetPermHelp uintptr
 
-// PF_NPFormatNetworkName is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32, uint32, uint32) uint32.
+// PF_NPFormatNetworkName is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPFormatNetworkName uintptr
 
-// PF_NPGetCaps is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) uint32.
+// PF_NPGetCaps is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetCaps uintptr
 
-// PF_NPGetConnection is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32) uint32.
+// PF_NPGetConnection is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetConnection uintptr
 
-// PF_NPGetConnection3 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, *uint32) uint32.
+// PF_NPGetConnection3 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetConnection3 uintptr
 
-// PF_NPGetConnectionPerformance is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *NETCONNECTINFOSTRUCT) uint32.
+// PF_NPGetConnectionPerformance is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *NETCONNECTINFOSTRUCT) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetConnectionPerformance uintptr
 
-// PF_NPGetDirectoryType is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *int32, foundation.BOOL) uint32.
+// PF_NPGetDirectoryType is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *int32, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetDirectoryType uintptr
 
-// PF_NPGetPersistentUseOptionsForConnection is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *byte, uint32, *byte, *uint32) uint32.
+// PF_NPGetPersistentUseOptionsForConnection is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *byte, uint32, *byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetPersistentUseOptionsForConnection uintptr
 
-// PF_NPGetPropertyText is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, foundation.PWSTR, foundation.PWSTR, uint32, uint32) uint32.
+// PF_NPGetPropertyText is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, foundation.PWSTR, foundation.PWSTR, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetPropertyText uintptr
 
-// PF_NPGetResourceInformation is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*NETRESOURCEW, unsafe.Pointer, *uint32, *foundation.PWSTR) uint32.
+// PF_NPGetResourceInformation is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*NETRESOURCEW, unsafe.Pointer, *uint32, *foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetResourceInformation uintptr
 
-// PF_NPGetResourceParent is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*NETRESOURCEW, unsafe.Pointer, *uint32) uint32.
+// PF_NPGetResourceParent is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*NETRESOURCEW, unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetResourceParent uintptr
 
-// PF_NPGetUniversalName is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, *uint32) uint32.
+// PF_NPGetUniversalName is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetUniversalName uintptr
 
-// PF_NPGetUser is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32) uint32.
+// PF_NPGetUser is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPGetUser uintptr
 
-// PF_NPLogonNotify is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.LUID, foundation.PWSTR, unsafe.Pointer, foundation.PWSTR, unsafe.Pointer, foundation.PWSTR, unsafe.Pointer, *foundation.PWSTR) uint32.
+// PF_NPLogonNotify is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.LUID, foundation.PWSTR, unsafe.Pointer, foundation.PWSTR, unsafe.Pointer, foundation.PWSTR, unsafe.Pointer, *foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPLogonNotify uintptr
 
-// PF_NPOpenEnum is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, *NETRESOURCEW, *foundation.HANDLE) uint32.
+// PF_NPOpenEnum is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, *NETRESOURCEW, *foundation.HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPOpenEnum uintptr
 
-// PF_NPPasswordChangeNotify is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, unsafe.Pointer, foundation.PWSTR, unsafe.Pointer, foundation.PWSTR, unsafe.Pointer, uint32) uint32.
+// PF_NPPasswordChangeNotify is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, unsafe.Pointer, foundation.PWSTR, unsafe.Pointer, foundation.PWSTR, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPPasswordChangeNotify uintptr
 
-// PF_NPPropertyDialog is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, uint32, foundation.PWSTR, uint32) uint32.
+// PF_NPPropertyDialog is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, uint32, foundation.PWSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPPropertyDialog uintptr
 
-// PF_NPSearchDialog is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *NETRESOURCEW, unsafe.Pointer, uint32, *uint32) uint32.
+// PF_NPSearchDialog is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *NETRESOURCEW, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_NPSearchDialog uintptr

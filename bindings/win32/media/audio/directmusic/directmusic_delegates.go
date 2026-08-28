@@ -4,14 +4,17 @@
 
 package directmusic
 
-// LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA, unsafe.Pointer) foundation.BOOL.
+// LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_1_DATA, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFNDIRECTSOUNDDEVICEENUMERATECALLBACK1 uintptr
 
-// LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_A_DATA, unsafe.Pointer) foundation.BOOL.
+// LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_A_DATA, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKA uintptr
 
-// LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_W_DATA, unsafe.Pointer) foundation.BOOL.
+// LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DSPROPERTY_DIRECTSOUNDDEVICE_DESCRIPTION_W_DATA, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFNDIRECTSOUNDDEVICEENUMERATECALLBACKW uintptr

@@ -5,6 +5,7 @@
 package fileserverresourcemanager
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -731,6 +732,22 @@ func (self *IFsrmClassifierModuleImplementation) OnBeginFile(propertyBag *IFsrmP
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIFsrmClassifierModuleImplementation_DoesPropertyValueApply = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// DoesPropertyValueApply dispatches through IFsrmClassifierModuleImplementation's vtable slot 12.
+func (self *IFsrmClassifierModuleImplementation) DoesPropertyValueApply(property foundation.BSTR, value foundation.BSTR, applyValue *foundation.VARIANT_BOOL, idRule win32.GUID, idPropDef win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIFsrmClassifierModuleImplementation_DoesPropertyValueApply, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(property)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(applyValue)), uintptr(unsafe.Pointer(&idRule)), uintptr(unsafe.Pointer(&idPropDef))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFsrmClassifierModuleImplementation_GetPropertyValueToApply = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// GetPropertyValueToApply dispatches through IFsrmClassifierModuleImplementation's vtable slot 13.
+func (self *IFsrmClassifierModuleImplementation) GetPropertyValueToApply(property foundation.BSTR, value *foundation.BSTR, idRule win32.GUID, idPropDef win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIFsrmClassifierModuleImplementation_GetPropertyValueToApply, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(property)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&idRule)), uintptr(unsafe.Pointer(&idPropDef))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // OnEndFile dispatches through IFsrmClassifierModuleImplementation's vtable slot 14.
 func (self *IFsrmClassifierModuleImplementation) OnEndFile() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
@@ -785,6 +802,15 @@ func (self *IFsrmCollection) WaitForCompletion(waitSeconds int32) (foundation.VA
 	_completed := new(foundation.VARIANT_BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(waitSeconds), uintptr(win32.OutParam(unsafe.Pointer(_completed))))
 	return *_completed, win32.ErrIfFailed(int32(r1))
+}
+
+var specIFsrmCollection_GetById = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetById dispatches through IFsrmCollection's vtable slot 13.
+func (self *IFsrmCollection) GetById(id win32.GUID) (systemvariant.VARIANT, error) {
+	_entry := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIFsrmCollection_GetById, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&id)), uintptr(win32.OutParam(unsafe.Pointer(_entry)))).Tuple()
+	return *_entry, win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmCommittableCollection: https://learn.microsoft.com/windows/win32/api/fsrm/nn-fsrm-ifsrmcommittablecollection
@@ -961,6 +987,14 @@ func (self *IFsrmFileConditionProperty) Get_Value() (systemvariant.VARIANT, erro
 	_pVal := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
 	return *_pVal, win32.ErrIfFailed(int32(r1))
+}
+
+var specIFsrmFileConditionProperty_Put_Value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Value dispatches through IFsrmFileConditionProperty's vtable slot 18.
+func (self *IFsrmFileConditionProperty) Put_Value(newVal systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIFsrmFileConditionProperty_Put_Value, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&newVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmFileGroup: https://learn.microsoft.com/windows/win32/api/fsrmscreen/nn-fsrmscreen-ifsrmfilegroup
@@ -1268,6 +1302,14 @@ func (self *IFsrmFileManagementJob) Get_FromDate() (float64, error) {
 	_fromDate := new(float64)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fromDate))))
 	return *_fromDate, win32.ErrIfFailed(int32(r1))
+}
+
+var specIFsrmFileManagementJob_Put_FromDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_FromDate dispatches through IFsrmFileManagementJob's vtable slot 40.
+func (self *IFsrmFileManagementJob) Put_FromDate(fromDate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIFsrmFileManagementJob_Put_FromDate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(fromDate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Task dispatches through IFsrmFileManagementJob's vtable slot 41.
@@ -1756,9 +1798,25 @@ type IFsrmMutableCollection struct {
 // IID_IFsrmMutableCollection is the interface identifier for IFsrmMutableCollection.
 var IID_IFsrmMutableCollection = win32.GUID{Data1: 0x1bb617b8, Data2: 0x3886, Data3: 0x49dc, Data4: [8]byte{0xaf, 0x82, 0xa6, 0xc9, 0x0f, 0xa3, 0x5d, 0xda}}
 
+var specIFsrmMutableCollection_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Add dispatches through IFsrmMutableCollection's vtable slot 14.
+func (self *IFsrmMutableCollection) Add(item systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIFsrmMutableCollection_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&item))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Remove dispatches through IFsrmMutableCollection's vtable slot 15.
 func (self *IFsrmMutableCollection) Remove(index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(index))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFsrmMutableCollection_RemoveById = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RemoveById dispatches through IFsrmMutableCollection's vtable slot 16.
+func (self *IFsrmMutableCollection) RemoveById(id win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIFsrmMutableCollection_RemoveById, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&id))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2503,6 +2561,14 @@ func (self *IFsrmQuotaBase) Get_QuotaLimit() (systemvariant.VARIANT, error) {
 	return *_quotaLimit, win32.ErrIfFailed(int32(r1))
 }
 
+var specIFsrmQuotaBase_Put_QuotaLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_QuotaLimit dispatches through IFsrmQuotaBase's vtable slot 13.
+func (self *IFsrmQuotaBase) Put_QuotaLimit(quotaLimit systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIFsrmQuotaBase_Put_QuotaLimit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&quotaLimit))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_QuotaFlags dispatches through IFsrmQuotaBase's vtable slot 14.
 func (self *IFsrmQuotaBase) Get_QuotaFlags() (int32, error) {
 	_quotaFlags := new(int32)
@@ -2870,6 +2936,14 @@ func (self *IFsrmReport) GetFilter(filter FsrmReportFilter) (systemvariant.VARIA
 	return *_filterValue, win32.ErrIfFailed(int32(r1))
 }
 
+var specIFsrmReport_SetFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetFilter dispatches through IFsrmReport's vtable slot 14.
+func (self *IFsrmReport) SetFilter(filter FsrmReportFilter, filterValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIFsrmReport_SetFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(filter), uintptr(unsafe.Pointer(&filterValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Delete dispatches through IFsrmReport's vtable slot 15.
 func (self *IFsrmReport) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
@@ -3055,11 +3129,27 @@ func (self *IFsrmReportManager) GetDefaultFilter(reportType FsrmReportType, filt
 	return *_filterValue, win32.ErrIfFailed(int32(r1))
 }
 
+var specIFsrmReportManager_SetDefaultFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetDefaultFilter dispatches through IFsrmReportManager's vtable slot 14.
+func (self *IFsrmReportManager) SetDefaultFilter(reportType FsrmReportType, filter FsrmReportFilter, filterValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIFsrmReportManager_SetDefaultFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(reportType), uintptr(filter), uintptr(unsafe.Pointer(&filterValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetReportSizeLimit dispatches through IFsrmReportManager's vtable slot 15.
 func (self *IFsrmReportManager) GetReportSizeLimit(limit FsrmReportLimit) (systemvariant.VARIANT, error) {
 	_limitValue := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(limit), uintptr(win32.OutParam(unsafe.Pointer(_limitValue))))
 	return *_limitValue, win32.ErrIfFailed(int32(r1))
+}
+
+var specIFsrmReportManager_SetReportSizeLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetReportSizeLimit dispatches through IFsrmReportManager's vtable slot 16.
+func (self *IFsrmReportManager) SetReportSizeLimit(limit FsrmReportLimit, limitValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIFsrmReportManager_SetReportSizeLimit, nil, uintptr(unsafe.Pointer(self)), uintptr(limit), uintptr(unsafe.Pointer(&limitValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IFsrmReportScheduler: https://learn.microsoft.com/windows/win32/api/fsrmreports/nn-fsrmreports-ifsrmreportscheduler

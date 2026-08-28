@@ -34,6 +34,44 @@ var (
 	procEcSetSubscriptionProperty      = modWecApi.NewProc("EcSetSubscriptionProperty")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	EcClose                        *win32.Proc
+	EcDeleteSubscription           *win32.Proc
+	EcEnumNextSubscription         *win32.Proc
+	EcGetObjectArrayProperty       *win32.Proc
+	EcGetObjectArraySize           *win32.Proc
+	EcGetSubscriptionProperty      *win32.Proc
+	EcGetSubscriptionRunTimeStatus *win32.Proc
+	EcInsertObjectArrayElement     *win32.Proc
+	EcOpenSubscription             *win32.Proc
+	EcOpenSubscriptionEnum         *win32.Proc
+	EcRemoveObjectArrayElement     *win32.Proc
+	EcRetrySubscription            *win32.Proc
+	EcSaveSubscription             *win32.Proc
+	EcSetObjectArrayProperty       *win32.Proc
+	EcSetSubscriptionProperty      *win32.Proc
+}{
+	EcClose:                        procEcClose,
+	EcDeleteSubscription:           procEcDeleteSubscription,
+	EcEnumNextSubscription:         procEcEnumNextSubscription,
+	EcGetObjectArrayProperty:       procEcGetObjectArrayProperty,
+	EcGetObjectArraySize:           procEcGetObjectArraySize,
+	EcGetSubscriptionProperty:      procEcGetSubscriptionProperty,
+	EcGetSubscriptionRunTimeStatus: procEcGetSubscriptionRunTimeStatus,
+	EcInsertObjectArrayElement:     procEcInsertObjectArrayElement,
+	EcOpenSubscription:             procEcOpenSubscription,
+	EcOpenSubscriptionEnum:         procEcOpenSubscriptionEnum,
+	EcRemoveObjectArrayElement:     procEcRemoveObjectArrayElement,
+	EcRetrySubscription:            procEcRetrySubscription,
+	EcSaveSubscription:             procEcSaveSubscription,
+	EcSetObjectArrayProperty:       procEcSetObjectArrayProperty,
+	EcSetSubscriptionProperty:      procEcSetSubscriptionProperty,
+}
+
 // EcClose calls WecApi!EcClose.
 // https://learn.microsoft.com/windows/win32/api/evcoll/nf-evcoll-ecclose
 // Minimum OS: windows6.0.6000.

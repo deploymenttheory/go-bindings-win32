@@ -5,6 +5,7 @@
 package xaudio2
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -122,6 +123,14 @@ func (self *IXAPOHrtfParameters) SetSourceOrientation(orientation *HrtfOrientati
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIXAPOHrtfParameters_SetSourceGain = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSourceGain dispatches through IXAPOHrtfParameters's vtable slot 5.
+func (self *IXAPOHrtfParameters) SetSourceGain(gain float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIXAPOHrtfParameters_SetSourceGain, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(gain))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetEnvironment dispatches through IXAPOHrtfParameters's vtable slot 6.
 func (self *IXAPOHrtfParameters) SetEnvironment(environment HrtfEnvironment) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(environment))
@@ -175,6 +184,14 @@ func (self *IXAudio2) UnregisterForCallbacks(pCallback *IXAudio2EngineCallback) 
 	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
 }
 
+var specIXAudio2_CreateSourceVoice = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// CreateSourceVoice dispatches through IXAudio2's vtable slot 5.
+func (self *IXAudio2) CreateSourceVoice(ppSourceVoice **IXAudio2SourceVoice, pSourceFormat *mediaaudio.WAVEFORMATEX, Flags uint32, MaxFrequencyRatio float32, pCallback *IXAudio2VoiceCallback, pSendList *XAUDIO2_VOICE_SENDS, pEffectChain *XAUDIO2_EFFECT_CHAIN) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIXAudio2_CreateSourceVoice, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSourceVoice)), uintptr(unsafe.Pointer(pSourceFormat)), uintptr(Flags), uintptr(math.Float32bits(MaxFrequencyRatio)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pSendList)), uintptr(unsafe.Pointer(pEffectChain))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CreateSubmixVoice dispatches through IXAudio2's vtable slot 6.
 func (self *IXAudio2) CreateSubmixVoice(ppSubmixVoice **IXAudio2SubmixVoice, InputChannels uint32, InputSampleRate uint32, Flags uint32, ProcessingStage uint32, pSendList *XAUDIO2_VOICE_SENDS, pEffectChain *XAUDIO2_EFFECT_CHAIN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSubmixVoice)), uintptr(InputChannels), uintptr(InputSampleRate), uintptr(Flags), uintptr(ProcessingStage), uintptr(unsafe.Pointer(pSendList)), uintptr(unsafe.Pointer(pEffectChain)))
@@ -182,8 +199,8 @@ func (self *IXAudio2) CreateSubmixVoice(ppSubmixVoice **IXAudio2SubmixVoice, Inp
 }
 
 // CreateMasteringVoice dispatches through IXAudio2's vtable slot 7.
-func (self *IXAudio2) CreateMasteringVoice(ppMasteringVoice **IXAudio2MasteringVoice, InputChannels uint32, InputSampleRate uint32, Flags uint32, szDeviceId string, pEffectChain *XAUDIO2_EFFECT_CHAIN, StreamCategory mediaaudio.AUDIO_STREAM_CATEGORY) error {
-	_szDeviceId := win32.UTF16Ptr(szDeviceId)
+func (self *IXAudio2) CreateMasteringVoice(ppMasteringVoice **IXAudio2MasteringVoice, InputChannels uint32, InputSampleRate uint32, Flags uint32, szDeviceId *string, pEffectChain *XAUDIO2_EFFECT_CHAIN, StreamCategory mediaaudio.AUDIO_STREAM_CATEGORY) error {
+	_szDeviceId := win32.UTF16PtrOrNil(szDeviceId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMasteringVoice)), uintptr(InputChannels), uintptr(InputSampleRate), uintptr(Flags), uintptr(unsafe.Pointer(_szDeviceId)), uintptr(unsafe.Pointer(pEffectChain)), uintptr(StreamCategory))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -310,6 +327,14 @@ func (self *IXAudio2SourceVoice) GetState(pVoiceState *XAUDIO2_VOICE_STATE, Flag
 	syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVoiceState)), uintptr(Flags))
 }
 
+var specIXAudio2SourceVoice_SetFrequencyRatio = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetFrequencyRatio dispatches through IXAudio2SourceVoice's vtable slot 26.
+func (self *IXAudio2SourceVoice) SetFrequencyRatio(Ratio float32, OperationSet uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIXAudio2SourceVoice_SetFrequencyRatio, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Ratio)), uintptr(OperationSet)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetFrequencyRatio dispatches through IXAudio2SourceVoice's vtable slot 27.
 func (self *IXAudio2SourceVoice) GetFrequencyRatio(pRatio *float32) {
 	syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRatio)))
@@ -405,6 +430,14 @@ func (self *IXAudio2Voice) SetOutputFilterParameters(pDestinationVoice *IXAudio2
 // GetOutputFilterParameters dispatches through IXAudio2Voice's vtable slot 11.
 func (self *IXAudio2Voice) GetOutputFilterParameters(pDestinationVoice *IXAudio2Voice, pParameters *XAUDIO2_FILTER_PARAMETERS) {
 	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationVoice)), uintptr(unsafe.Pointer(pParameters)))
+}
+
+var specIXAudio2Voice_SetVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetVolume dispatches through IXAudio2Voice's vtable slot 12.
+func (self *IXAudio2Voice) SetVolume(Volume float32, OperationSet uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIXAudio2Voice_SetVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Volume)), uintptr(OperationSet)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVolume dispatches through IXAudio2Voice's vtable slot 13.

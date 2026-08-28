@@ -94,9 +94,9 @@ type IWebApplicationNavigationEvents struct {
 var IID_IWebApplicationNavigationEvents = win32.GUID{Data1: 0xc22615d2, Data2: 0xd318, Data3: 0x4da2, Data4: [8]byte{0x84, 0x22, 0x1f, 0xca, 0xf7, 0x7b, 0x10, 0xe4}}
 
 // BeforeNavigate dispatches through IWebApplicationNavigationEvents's vtable slot 3.
-func (self *IWebApplicationNavigationEvents) BeforeNavigate(htmlWindow *webmshtml.IHTMLWindow2, url string, navigationFlags uint32, targetFrameName string) error {
+func (self *IWebApplicationNavigationEvents) BeforeNavigate(htmlWindow *webmshtml.IHTMLWindow2, url string, navigationFlags uint32, targetFrameName *string) error {
 	_url := win32.UTF16Ptr(url)
-	_targetFrameName := win32.UTF16Ptr(targetFrameName)
+	_targetFrameName := win32.UTF16PtrOrNil(targetFrameName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)), uintptr(navigationFlags), uintptr(unsafe.Pointer(_targetFrameName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -109,9 +109,9 @@ func (self *IWebApplicationNavigationEvents) NavigateComplete(htmlWindow *webmsh
 }
 
 // NavigateError dispatches through IWebApplicationNavigationEvents's vtable slot 5.
-func (self *IWebApplicationNavigationEvents) NavigateError(htmlWindow *webmshtml.IHTMLWindow2, url string, targetFrameName string, statusCode uint32) error {
+func (self *IWebApplicationNavigationEvents) NavigateError(htmlWindow *webmshtml.IHTMLWindow2, url string, targetFrameName *string, statusCode uint32) error {
 	_url := win32.UTF16Ptr(url)
-	_targetFrameName := win32.UTF16Ptr(targetFrameName)
+	_targetFrameName := win32.UTF16PtrOrNil(targetFrameName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(htmlWindow)), uintptr(unsafe.Pointer(_url)), uintptr(unsafe.Pointer(_targetFrameName)), uintptr(statusCode))
 	return win32.ErrIfFailed(int32(r1))
 }

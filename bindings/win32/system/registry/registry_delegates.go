@@ -4,6 +4,7 @@
 
 package registry
 
-// PQUERYHANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *Val_context, uint32, unsafe.Pointer, *uint32, uint32) uint32.
+// PQUERYHANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *Val_context, uint32, unsafe.Pointer, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PQUERYHANDLER uintptr

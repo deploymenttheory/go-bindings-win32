@@ -4,34 +4,42 @@
 
 package dhcp
 
-// LPDHCP_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer) uint32.
+// LPDHCP_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDHCP_CONTROL uintptr
 
-// LPDHCP_DELETE_CLIENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *byte, uint32, uint32, uint32) uint32.
+// LPDHCP_DELETE_CLIENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *byte, uint32, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDHCP_DELETE_CLIENT uintptr
 
-// LPDHCP_DROP_SEND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(**byte, *uint32, uint32, uint32, unsafe.Pointer, unsafe.Pointer) uint32.
+// LPDHCP_DROP_SEND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(**byte, *uint32, uint32, uint32, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDHCP_DROP_SEND uintptr
 
-// LPDHCP_ENTRY_POINT_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, *DHCP_CALLOUT_TABLE) uint32.
+// LPDHCP_ENTRY_POINT_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, *DHCP_CALLOUT_TABLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDHCP_ENTRY_POINT_FUNC uintptr
 
-// LPDHCP_GIVE_ADDRESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, uint32, uint32, uint32, uint32, uint32, unsafe.Pointer, unsafe.Pointer) uint32.
+// LPDHCP_GIVE_ADDRESS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, uint32, uint32, uint32, uint32, uint32, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDHCP_GIVE_ADDRESS uintptr
 
-// LPDHCP_HANDLE_OPTIONS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, unsafe.Pointer, unsafe.Pointer, *DHCP_SERVER_OPTIONS) uint32.
+// LPDHCP_HANDLE_OPTIONS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, unsafe.Pointer, unsafe.Pointer, *DHCP_SERVER_OPTIONS) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDHCP_HANDLE_OPTIONS uintptr
 
-// LPDHCP_NEWPKT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(**byte, *uint32, uint32, unsafe.Pointer, *unsafe.Pointer, *foundation.BOOL) uint32.
+// LPDHCP_NEWPKT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(**byte, *uint32, uint32, unsafe.Pointer, *unsafe.Pointer, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDHCP_NEWPKT uintptr
 
-// LPDHCP_PROB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, uint32, uint32, uint32, unsafe.Pointer, unsafe.Pointer) uint32.
+// LPDHCP_PROB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, uint32, uint32, uint32, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDHCP_PROB uintptr

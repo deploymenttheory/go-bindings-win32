@@ -58,6 +58,86 @@ var (
 	procCfUpdateSyncProviderStatus            = modcldapi.NewProc("CfUpdateSyncProviderStatus")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CfCloseHandle                         *win32.Proc
+	CfConnectSyncRoot                     *win32.Proc
+	CfConvertToPlaceholder                *win32.Proc
+	CfCreatePlaceholders                  *win32.Proc
+	CfDehydratePlaceholder                *win32.Proc
+	CfDisconnectSyncRoot                  *win32.Proc
+	CfExecute                             *win32.Proc
+	CfGetCorrelationVector                *win32.Proc
+	CfGetPlaceholderInfo                  *win32.Proc
+	CfGetPlaceholderRangeInfo             *win32.Proc
+	CfGetPlaceholderRangeInfoForHydration *win32.Proc
+	CfGetPlaceholderStateFromAttributeTag *win32.Proc
+	CfGetPlaceholderStateFromFileInfo     *win32.Proc
+	CfGetPlaceholderStateFromFindData     *win32.Proc
+	CfGetPlatformInfo                     *win32.Proc
+	CfGetSyncRootInfoByHandle             *win32.Proc
+	CfGetSyncRootInfoByPath               *win32.Proc
+	CfGetTransferKey                      *win32.Proc
+	CfGetWin32HandleFromProtectedHandle   *win32.Proc
+	CfHydratePlaceholder                  *win32.Proc
+	CfOpenFileWithOplock                  *win32.Proc
+	CfQuerySyncProviderStatus             *win32.Proc
+	CfReferenceProtectedHandle            *win32.Proc
+	CfRegisterSyncRoot                    *win32.Proc
+	CfReleaseProtectedHandle              *win32.Proc
+	CfReleaseTransferKey                  *win32.Proc
+	CfReportProviderProgress              *win32.Proc
+	CfReportProviderProgress2             *win32.Proc
+	CfReportSyncStatus                    *win32.Proc
+	CfRevertPlaceholder                   *win32.Proc
+	CfSetCorrelationVector                *win32.Proc
+	CfSetInSyncState                      *win32.Proc
+	CfSetPinState                         *win32.Proc
+	CfUnregisterSyncRoot                  *win32.Proc
+	CfUpdatePlaceholder                   *win32.Proc
+	CfUpdateSyncProviderStatus            *win32.Proc
+}{
+	CfCloseHandle:                         procCfCloseHandle,
+	CfConnectSyncRoot:                     procCfConnectSyncRoot,
+	CfConvertToPlaceholder:                procCfConvertToPlaceholder,
+	CfCreatePlaceholders:                  procCfCreatePlaceholders,
+	CfDehydratePlaceholder:                procCfDehydratePlaceholder,
+	CfDisconnectSyncRoot:                  procCfDisconnectSyncRoot,
+	CfExecute:                             procCfExecute,
+	CfGetCorrelationVector:                procCfGetCorrelationVector,
+	CfGetPlaceholderInfo:                  procCfGetPlaceholderInfo,
+	CfGetPlaceholderRangeInfo:             procCfGetPlaceholderRangeInfo,
+	CfGetPlaceholderRangeInfoForHydration: procCfGetPlaceholderRangeInfoForHydration,
+	CfGetPlaceholderStateFromAttributeTag: procCfGetPlaceholderStateFromAttributeTag,
+	CfGetPlaceholderStateFromFileInfo:     procCfGetPlaceholderStateFromFileInfo,
+	CfGetPlaceholderStateFromFindData:     procCfGetPlaceholderStateFromFindData,
+	CfGetPlatformInfo:                     procCfGetPlatformInfo,
+	CfGetSyncRootInfoByHandle:             procCfGetSyncRootInfoByHandle,
+	CfGetSyncRootInfoByPath:               procCfGetSyncRootInfoByPath,
+	CfGetTransferKey:                      procCfGetTransferKey,
+	CfGetWin32HandleFromProtectedHandle:   procCfGetWin32HandleFromProtectedHandle,
+	CfHydratePlaceholder:                  procCfHydratePlaceholder,
+	CfOpenFileWithOplock:                  procCfOpenFileWithOplock,
+	CfQuerySyncProviderStatus:             procCfQuerySyncProviderStatus,
+	CfReferenceProtectedHandle:            procCfReferenceProtectedHandle,
+	CfRegisterSyncRoot:                    procCfRegisterSyncRoot,
+	CfReleaseProtectedHandle:              procCfReleaseProtectedHandle,
+	CfReleaseTransferKey:                  procCfReleaseTransferKey,
+	CfReportProviderProgress:              procCfReportProviderProgress,
+	CfReportProviderProgress2:             procCfReportProviderProgress2,
+	CfReportSyncStatus:                    procCfReportSyncStatus,
+	CfRevertPlaceholder:                   procCfRevertPlaceholder,
+	CfSetCorrelationVector:                procCfSetCorrelationVector,
+	CfSetInSyncState:                      procCfSetInSyncState,
+	CfSetPinState:                         procCfSetPinState,
+	CfUnregisterSyncRoot:                  procCfUnregisterSyncRoot,
+	CfUpdatePlaceholder:                   procCfUpdatePlaceholder,
+	CfUpdateSyncProviderStatus:            procCfUpdateSyncProviderStatus,
+}
+
 // CfCloseHandle calls cldapi!CfCloseHandle.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfclosehandle
 // Minimum OS: windows10.0.16299.

@@ -29,6 +29,34 @@ var (
 	procPssWalkSnapshot              = modKERNEL32.NewProc("PssWalkSnapshot")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	PssCaptureSnapshot           *win32.Proc
+	PssDuplicateSnapshot         *win32.Proc
+	PssFreeSnapshot              *win32.Proc
+	PssQuerySnapshot             *win32.Proc
+	PssWalkMarkerCreate          *win32.Proc
+	PssWalkMarkerFree            *win32.Proc
+	PssWalkMarkerGetPosition     *win32.Proc
+	PssWalkMarkerSeekToBeginning *win32.Proc
+	PssWalkMarkerSetPosition     *win32.Proc
+	PssWalkSnapshot              *win32.Proc
+}{
+	PssCaptureSnapshot:           procPssCaptureSnapshot,
+	PssDuplicateSnapshot:         procPssDuplicateSnapshot,
+	PssFreeSnapshot:              procPssFreeSnapshot,
+	PssQuerySnapshot:             procPssQuerySnapshot,
+	PssWalkMarkerCreate:          procPssWalkMarkerCreate,
+	PssWalkMarkerFree:            procPssWalkMarkerFree,
+	PssWalkMarkerGetPosition:     procPssWalkMarkerGetPosition,
+	PssWalkMarkerSeekToBeginning: procPssWalkMarkerSeekToBeginning,
+	PssWalkMarkerSetPosition:     procPssWalkMarkerSetPosition,
+	PssWalkSnapshot:              procPssWalkSnapshot,
+}
+
 // PssCaptureSnapshot calls KERNEL32!PssCaptureSnapshot.
 // https://learn.microsoft.com/windows/win32/api/processsnapshot/nf-processsnapshot-psscapturesnapshot
 // Minimum OS: windows8.1.

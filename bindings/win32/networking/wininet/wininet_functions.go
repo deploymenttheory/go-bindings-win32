@@ -318,9 +318,609 @@ var (
 	procUrlCacheUpdateEntryExtraData               = modWININET.NewProc("UrlCacheUpdateEntryExtraData")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AppCacheCheckManifest                      *win32.Proc
+	AppCacheCloseHandle                        *win32.Proc
+	AppCacheCreateAndCommitFile                *win32.Proc
+	AppCacheDeleteGroup                        *win32.Proc
+	AppCacheDeleteIEGroup                      *win32.Proc
+	AppCacheDuplicateHandle                    *win32.Proc
+	AppCacheFinalize                           *win32.Proc
+	AppCacheFreeDownloadList                   *win32.Proc
+	AppCacheFreeGroupList                      *win32.Proc
+	AppCacheFreeIESpace                        *win32.Proc
+	AppCacheFreeSpace                          *win32.Proc
+	AppCacheGetDownloadList                    *win32.Proc
+	AppCacheGetFallbackUrl                     *win32.Proc
+	AppCacheGetGroupList                       *win32.Proc
+	AppCacheGetIEGroupList                     *win32.Proc
+	AppCacheGetInfo                            *win32.Proc
+	AppCacheGetManifestUrl                     *win32.Proc
+	AppCacheLookup                             *win32.Proc
+	CommitUrlCacheEntry                        *win32.Proc
+	CommitUrlCacheEntryA                       *win32.Proc
+	CommitUrlCacheEntryBinaryBlob              *win32.Proc
+	CreateMD5SSOHash                           *win32.Proc
+	CreateUrlCacheContainer                    *win32.Proc
+	CreateUrlCacheContainerA                   *win32.Proc
+	CreateUrlCacheEntry                        *win32.Proc
+	CreateUrlCacheEntryA                       *win32.Proc
+	CreateUrlCacheEntryExW                     *win32.Proc
+	CreateUrlCacheGroup                        *win32.Proc
+	DeleteIE3Cache                             *win32.Proc
+	DeleteUrlCacheContainer                    *win32.Proc
+	DeleteUrlCacheContainerA                   *win32.Proc
+	DeleteUrlCacheEntry                        *win32.Proc
+	DeleteUrlCacheEntryA                       *win32.Proc
+	DeleteUrlCacheEntryW                       *win32.Proc
+	DeleteUrlCacheGroup                        *win32.Proc
+	DeleteWpadCacheForNetworks                 *win32.Proc
+	DetectAutoProxyUrl                         *win32.Proc
+	DoConnectoidsExist                         *win32.Proc
+	ExportCookieFile                           *win32.Proc
+	ExportCookieFileA                          *win32.Proc
+	FindCloseUrlCache                          *win32.Proc
+	FindFirstUrlCacheContainer                 *win32.Proc
+	FindFirstUrlCacheContainerA                *win32.Proc
+	FindFirstUrlCacheEntry                     *win32.Proc
+	FindFirstUrlCacheEntryA                    *win32.Proc
+	FindFirstUrlCacheEntryEx                   *win32.Proc
+	FindFirstUrlCacheEntryExA                  *win32.Proc
+	FindFirstUrlCacheGroup                     *win32.Proc
+	FindNextUrlCacheContainer                  *win32.Proc
+	FindNextUrlCacheContainerA                 *win32.Proc
+	FindNextUrlCacheEntry                      *win32.Proc
+	FindNextUrlCacheEntryA                     *win32.Proc
+	FindNextUrlCacheEntryEx                    *win32.Proc
+	FindNextUrlCacheEntryExA                   *win32.Proc
+	FindNextUrlCacheGroup                      *win32.Proc
+	FindP3PPolicySymbol                        *win32.Proc
+	FreeUrlCacheSpace                          *win32.Proc
+	FreeUrlCacheSpaceA                         *win32.Proc
+	FtpCommand                                 *win32.Proc
+	FtpCommandA                                *win32.Proc
+	FtpCreateDirectory                         *win32.Proc
+	FtpCreateDirectoryA                        *win32.Proc
+	FtpDeleteFile                              *win32.Proc
+	FtpDeleteFileA                             *win32.Proc
+	FtpFindFirstFile                           *win32.Proc
+	FtpFindFirstFileA                          *win32.Proc
+	FtpGetCurrentDirectory                     *win32.Proc
+	FtpGetCurrentDirectoryA                    *win32.Proc
+	FtpGetFile                                 *win32.Proc
+	FtpGetFileA                                *win32.Proc
+	FtpGetFileEx                               *win32.Proc
+	FtpGetFileSize                             *win32.Proc
+	FtpOpenFile                                *win32.Proc
+	FtpOpenFileA                               *win32.Proc
+	FtpPutFile                                 *win32.Proc
+	FtpPutFileA                                *win32.Proc
+	FtpPutFileEx                               *win32.Proc
+	FtpRemoveDirectory                         *win32.Proc
+	FtpRemoveDirectoryA                        *win32.Proc
+	FtpRenameFile                              *win32.Proc
+	FtpRenameFileA                             *win32.Proc
+	FtpSetCurrentDirectory                     *win32.Proc
+	FtpSetCurrentDirectoryA                    *win32.Proc
+	GetDiskInfoA                               *win32.Proc
+	GetUrlCacheConfigInfo                      *win32.Proc
+	GetUrlCacheConfigInfoA                     *win32.Proc
+	GetUrlCacheEntryBinaryBlob                 *win32.Proc
+	GetUrlCacheEntryInfo                       *win32.Proc
+	GetUrlCacheEntryInfoA                      *win32.Proc
+	GetUrlCacheEntryInfoEx                     *win32.Proc
+	GetUrlCacheEntryInfoExA                    *win32.Proc
+	GetUrlCacheGroupAttribute                  *win32.Proc
+	GetUrlCacheGroupAttributeA                 *win32.Proc
+	GetUrlCacheHeaderData                      *win32.Proc
+	GopherCreateLocator                        *win32.Proc
+	GopherCreateLocatorA                       *win32.Proc
+	GopherFindFirstFile                        *win32.Proc
+	GopherFindFirstFileA                       *win32.Proc
+	GopherGetAttribute                         *win32.Proc
+	GopherGetAttributeA                        *win32.Proc
+	GopherGetLocatorType                       *win32.Proc
+	GopherGetLocatorTypeA                      *win32.Proc
+	GopherOpenFile                             *win32.Proc
+	GopherOpenFileA                            *win32.Proc
+	HttpAddRequestHeaders                      *win32.Proc
+	HttpAddRequestHeadersA                     *win32.Proc
+	HttpCheckDavCompliance                     *win32.Proc
+	HttpCheckDavComplianceA                    *win32.Proc
+	HttpCloseDependencyHandle                  *win32.Proc
+	HttpDuplicateDependencyHandle              *win32.Proc
+	HttpEndRequest                             *win32.Proc
+	HttpEndRequestA                            *win32.Proc
+	HttpGetServerCredentials                   *win32.Proc
+	HttpIndicatePageLoadComplete               *win32.Proc
+	HttpIsHostHstsEnabled                      *win32.Proc
+	HttpOpenDependencyHandle                   *win32.Proc
+	HttpOpenRequest                            *win32.Proc
+	HttpOpenRequestA                           *win32.Proc
+	HttpPushClose                              *win32.Proc
+	HttpPushEnable                             *win32.Proc
+	HttpPushWait                               *win32.Proc
+	HttpQueryInfo                              *win32.Proc
+	HttpQueryInfoA                             *win32.Proc
+	HttpSendRequest                            *win32.Proc
+	HttpSendRequestA                           *win32.Proc
+	HttpSendRequestEx                          *win32.Proc
+	HttpSendRequestExA                         *win32.Proc
+	HttpWebSocketClose                         *win32.Proc
+	HttpWebSocketCompleteUpgrade               *win32.Proc
+	HttpWebSocketQueryCloseStatus              *win32.Proc
+	HttpWebSocketReceive                       *win32.Proc
+	HttpWebSocketSend                          *win32.Proc
+	HttpWebSocketShutdown                      *win32.Proc
+	ImportCookieFile                           *win32.Proc
+	ImportCookieFileA                          *win32.Proc
+	IncrementUrlCacheHeaderData                *win32.Proc
+	InternalInternetGetCookie                  *win32.Proc
+	InternetAlgIdToString                      *win32.Proc
+	InternetAlgIdToStringA                     *win32.Proc
+	InternetAttemptConnect                     *win32.Proc
+	InternetAutodial                           *win32.Proc
+	InternetAutodialHangup                     *win32.Proc
+	InternetCanonicalizeUrl                    *win32.Proc
+	InternetCanonicalizeUrlA                   *win32.Proc
+	InternetCheckConnection                    *win32.Proc
+	InternetCheckConnectionA                   *win32.Proc
+	InternetClearAllPerSiteCookieDecisions     *win32.Proc
+	InternetCloseHandle                        *win32.Proc
+	InternetCombineUrl                         *win32.Proc
+	InternetCombineUrlA                        *win32.Proc
+	InternetConfirmZoneCrossing                *win32.Proc
+	InternetConfirmZoneCrossingA               *win32.Proc
+	InternetConfirmZoneCrossingW               *win32.Proc
+	InternetConnect                            *win32.Proc
+	InternetConnectA                           *win32.Proc
+	InternetConvertUrlFromWireToWideChar       *win32.Proc
+	InternetCrackUrl                           *win32.Proc
+	InternetCrackUrlA                          *win32.Proc
+	InternetCreateUrl                          *win32.Proc
+	InternetCreateUrlA                         *win32.Proc
+	InternetDial                               *win32.Proc
+	InternetDialA                              *win32.Proc
+	InternetDialW                              *win32.Proc
+	InternetEnumPerSiteCookieDecision          *win32.Proc
+	InternetEnumPerSiteCookieDecisionA         *win32.Proc
+	InternetErrorDlg                           *win32.Proc
+	InternetFindNextFile                       *win32.Proc
+	InternetFindNextFileA                      *win32.Proc
+	InternetFortezzaCommand                    *win32.Proc
+	InternetFreeCookies                        *win32.Proc
+	InternetFreeProxyInfoList                  *win32.Proc
+	InternetGetConnectedState                  *win32.Proc
+	InternetGetConnectedStateEx                *win32.Proc
+	InternetGetConnectedStateExA               *win32.Proc
+	InternetGetConnectedStateExW               *win32.Proc
+	InternetGetCookie                          *win32.Proc
+	InternetGetCookieA                         *win32.Proc
+	InternetGetCookieEx                        *win32.Proc
+	InternetGetCookieEx2                       *win32.Proc
+	InternetGetCookieExA                       *win32.Proc
+	InternetGetLastResponseInfo                *win32.Proc
+	InternetGetLastResponseInfoA               *win32.Proc
+	InternetGetPerSiteCookieDecision           *win32.Proc
+	InternetGetPerSiteCookieDecisionA          *win32.Proc
+	InternetGetProxyForUrl                     *win32.Proc
+	InternetGetSecurityInfoByURL               *win32.Proc
+	InternetGetSecurityInfoByURLA              *win32.Proc
+	InternetGetSecurityInfoByURLW              *win32.Proc
+	InternetGoOnline                           *win32.Proc
+	InternetGoOnlineA                          *win32.Proc
+	InternetGoOnlineW                          *win32.Proc
+	InternetHangUp                             *win32.Proc
+	InternetInitializeAutoProxyDll             *win32.Proc
+	InternetLockRequestFile                    *win32.Proc
+	InternetOpen                               *win32.Proc
+	InternetOpenA                              *win32.Proc
+	InternetOpenUrl                            *win32.Proc
+	InternetOpenUrlA                           *win32.Proc
+	InternetQueryDataAvailable                 *win32.Proc
+	InternetQueryFortezzaStatus                *win32.Proc
+	InternetQueryOption                        *win32.Proc
+	InternetQueryOptionA                       *win32.Proc
+	InternetReadFile                           *win32.Proc
+	InternetReadFileEx                         *win32.Proc
+	InternetReadFileExA                        *win32.Proc
+	InternetSecurityProtocolToString           *win32.Proc
+	InternetSecurityProtocolToStringA          *win32.Proc
+	InternetSetCookie                          *win32.Proc
+	InternetSetCookieA                         *win32.Proc
+	InternetSetCookieEx                        *win32.Proc
+	InternetSetCookieEx2                       *win32.Proc
+	InternetSetCookieExA                       *win32.Proc
+	InternetSetDialState                       *win32.Proc
+	InternetSetDialStateA                      *win32.Proc
+	InternetSetDialStateW                      *win32.Proc
+	InternetSetFilePointer                     *win32.Proc
+	InternetSetOption                          *win32.Proc
+	InternetSetOptionA                         *win32.Proc
+	InternetSetOptionEx                        *win32.Proc
+	InternetSetOptionExA                       *win32.Proc
+	InternetSetPerSiteCookieDecision           *win32.Proc
+	InternetSetPerSiteCookieDecisionA          *win32.Proc
+	InternetSetStatusCallback                  *win32.Proc
+	InternetSetStatusCallbackA                 *win32.Proc
+	InternetSetStatusCallbackW                 *win32.Proc
+	InternetShowSecurityInfoByURL              *win32.Proc
+	InternetShowSecurityInfoByURLA             *win32.Proc
+	InternetShowSecurityInfoByURLW             *win32.Proc
+	InternetTimeFromSystemTime                 *win32.Proc
+	InternetTimeFromSystemTimeA                *win32.Proc
+	InternetTimeFromSystemTimeW                *win32.Proc
+	InternetTimeToSystemTime                   *win32.Proc
+	InternetTimeToSystemTimeA                  *win32.Proc
+	InternetTimeToSystemTimeW                  *win32.Proc
+	InternetUnlockRequestFile                  *win32.Proc
+	InternetWriteFile                          *win32.Proc
+	InternetWriteFileEx                        *win32.Proc
+	InternetWriteFileExA                       *win32.Proc
+	IsDomainLegalCookieDomain                  *win32.Proc
+	IsDomainLegalCookieDomainA                 *win32.Proc
+	IsHostInProxyBypassList                    *win32.Proc
+	IsProfilesEnabled                          *win32.Proc
+	IsUrlCacheEntryExpired                     *win32.Proc
+	IsUrlCacheEntryExpiredA                    *win32.Proc
+	LoadUrlCacheContent                        *win32.Proc
+	ParseX509EncodedCertificateForListBoxEntry *win32.Proc
+	PerformOperationOverUrlCacheA              *win32.Proc
+	PrivacyGetZonePreferenceW                  *win32.Proc
+	PrivacySetZonePreferenceW                  *win32.Proc
+	ReadGuidsForConnectedNetworks              *win32.Proc
+	ReadUrlCacheEntryStream                    *win32.Proc
+	ReadUrlCacheEntryStreamEx                  *win32.Proc
+	RegisterUrlCacheNotification               *win32.Proc
+	ResumeSuspendedDownload                    *win32.Proc
+	RetrieveUrlCacheEntryFile                  *win32.Proc
+	RetrieveUrlCacheEntryFileA                 *win32.Proc
+	RetrieveUrlCacheEntryStream                *win32.Proc
+	RetrieveUrlCacheEntryStreamA               *win32.Proc
+	RunOnceUrlCache                            *win32.Proc
+	SetUrlCacheConfigInfo                      *win32.Proc
+	SetUrlCacheConfigInfoA                     *win32.Proc
+	SetUrlCacheEntryGroup                      *win32.Proc
+	SetUrlCacheEntryGroupA                     *win32.Proc
+	SetUrlCacheEntryGroupW                     *win32.Proc
+	SetUrlCacheEntryInfo                       *win32.Proc
+	SetUrlCacheEntryInfoA                      *win32.Proc
+	SetUrlCacheGroupAttribute                  *win32.Proc
+	SetUrlCacheGroupAttributeA                 *win32.Proc
+	SetUrlCacheHeaderData                      *win32.Proc
+	ShowClientAuthCerts                        *win32.Proc
+	ShowSecurityInfo                           *win32.Proc
+	ShowX509EncodedCertificate                 *win32.Proc
+	UnlockUrlCacheEntryFile                    *win32.Proc
+	UnlockUrlCacheEntryFileA                   *win32.Proc
+	UnlockUrlCacheEntryFileW                   *win32.Proc
+	UnlockUrlCacheEntryStream                  *win32.Proc
+	UpdateUrlCacheContentPath                  *win32.Proc
+	UrlCacheCheckEntriesExist                  *win32.Proc
+	UrlCacheCloseEntryHandle                   *win32.Proc
+	UrlCacheContainerSetEntryMaximumAge        *win32.Proc
+	UrlCacheCreateContainer                    *win32.Proc
+	UrlCacheFindFirstEntry                     *win32.Proc
+	UrlCacheFindNextEntry                      *win32.Proc
+	UrlCacheFreeEntryInfo                      *win32.Proc
+	UrlCacheFreeGlobalSpace                    *win32.Proc
+	UrlCacheGetContentPaths                    *win32.Proc
+	UrlCacheGetEntryInfo                       *win32.Proc
+	UrlCacheGetGlobalCacheSize                 *win32.Proc
+	UrlCacheGetGlobalLimit                     *win32.Proc
+	UrlCacheReadEntryStream                    *win32.Proc
+	UrlCacheReloadSettings                     *win32.Proc
+	UrlCacheRetrieveEntryFile                  *win32.Proc
+	UrlCacheRetrieveEntryStream                *win32.Proc
+	UrlCacheServer                             *win32.Proc
+	UrlCacheSetGlobalLimit                     *win32.Proc
+	UrlCacheUpdateEntryExtraData               *win32.Proc
+}{
+	AppCacheCheckManifest:                      procAppCacheCheckManifest,
+	AppCacheCloseHandle:                        procAppCacheCloseHandle,
+	AppCacheCreateAndCommitFile:                procAppCacheCreateAndCommitFile,
+	AppCacheDeleteGroup:                        procAppCacheDeleteGroup,
+	AppCacheDeleteIEGroup:                      procAppCacheDeleteIEGroup,
+	AppCacheDuplicateHandle:                    procAppCacheDuplicateHandle,
+	AppCacheFinalize:                           procAppCacheFinalize,
+	AppCacheFreeDownloadList:                   procAppCacheFreeDownloadList,
+	AppCacheFreeGroupList:                      procAppCacheFreeGroupList,
+	AppCacheFreeIESpace:                        procAppCacheFreeIESpace,
+	AppCacheFreeSpace:                          procAppCacheFreeSpace,
+	AppCacheGetDownloadList:                    procAppCacheGetDownloadList,
+	AppCacheGetFallbackUrl:                     procAppCacheGetFallbackUrl,
+	AppCacheGetGroupList:                       procAppCacheGetGroupList,
+	AppCacheGetIEGroupList:                     procAppCacheGetIEGroupList,
+	AppCacheGetInfo:                            procAppCacheGetInfo,
+	AppCacheGetManifestUrl:                     procAppCacheGetManifestUrl,
+	AppCacheLookup:                             procAppCacheLookup,
+	CommitUrlCacheEntry:                        procCommitUrlCacheEntry,
+	CommitUrlCacheEntryA:                       procCommitUrlCacheEntryA,
+	CommitUrlCacheEntryBinaryBlob:              procCommitUrlCacheEntryBinaryBlob,
+	CreateMD5SSOHash:                           procCreateMD5SSOHash,
+	CreateUrlCacheContainer:                    procCreateUrlCacheContainer,
+	CreateUrlCacheContainerA:                   procCreateUrlCacheContainerA,
+	CreateUrlCacheEntry:                        procCreateUrlCacheEntry,
+	CreateUrlCacheEntryA:                       procCreateUrlCacheEntryA,
+	CreateUrlCacheEntryExW:                     procCreateUrlCacheEntryExW,
+	CreateUrlCacheGroup:                        procCreateUrlCacheGroup,
+	DeleteIE3Cache:                             procDeleteIE3Cache,
+	DeleteUrlCacheContainer:                    procDeleteUrlCacheContainer,
+	DeleteUrlCacheContainerA:                   procDeleteUrlCacheContainerA,
+	DeleteUrlCacheEntry:                        procDeleteUrlCacheEntry,
+	DeleteUrlCacheEntryA:                       procDeleteUrlCacheEntryA,
+	DeleteUrlCacheEntryW:                       procDeleteUrlCacheEntryW,
+	DeleteUrlCacheGroup:                        procDeleteUrlCacheGroup,
+	DeleteWpadCacheForNetworks:                 procDeleteWpadCacheForNetworks,
+	DetectAutoProxyUrl:                         procDetectAutoProxyUrl,
+	DoConnectoidsExist:                         procDoConnectoidsExist,
+	ExportCookieFile:                           procExportCookieFile,
+	ExportCookieFileA:                          procExportCookieFileA,
+	FindCloseUrlCache:                          procFindCloseUrlCache,
+	FindFirstUrlCacheContainer:                 procFindFirstUrlCacheContainer,
+	FindFirstUrlCacheContainerA:                procFindFirstUrlCacheContainerA,
+	FindFirstUrlCacheEntry:                     procFindFirstUrlCacheEntry,
+	FindFirstUrlCacheEntryA:                    procFindFirstUrlCacheEntryA,
+	FindFirstUrlCacheEntryEx:                   procFindFirstUrlCacheEntryEx,
+	FindFirstUrlCacheEntryExA:                  procFindFirstUrlCacheEntryExA,
+	FindFirstUrlCacheGroup:                     procFindFirstUrlCacheGroup,
+	FindNextUrlCacheContainer:                  procFindNextUrlCacheContainer,
+	FindNextUrlCacheContainerA:                 procFindNextUrlCacheContainerA,
+	FindNextUrlCacheEntry:                      procFindNextUrlCacheEntry,
+	FindNextUrlCacheEntryA:                     procFindNextUrlCacheEntryA,
+	FindNextUrlCacheEntryEx:                    procFindNextUrlCacheEntryEx,
+	FindNextUrlCacheEntryExA:                   procFindNextUrlCacheEntryExA,
+	FindNextUrlCacheGroup:                      procFindNextUrlCacheGroup,
+	FindP3PPolicySymbol:                        procFindP3PPolicySymbol,
+	FreeUrlCacheSpace:                          procFreeUrlCacheSpace,
+	FreeUrlCacheSpaceA:                         procFreeUrlCacheSpaceA,
+	FtpCommand:                                 procFtpCommand,
+	FtpCommandA:                                procFtpCommandA,
+	FtpCreateDirectory:                         procFtpCreateDirectory,
+	FtpCreateDirectoryA:                        procFtpCreateDirectoryA,
+	FtpDeleteFile:                              procFtpDeleteFile,
+	FtpDeleteFileA:                             procFtpDeleteFileA,
+	FtpFindFirstFile:                           procFtpFindFirstFile,
+	FtpFindFirstFileA:                          procFtpFindFirstFileA,
+	FtpGetCurrentDirectory:                     procFtpGetCurrentDirectory,
+	FtpGetCurrentDirectoryA:                    procFtpGetCurrentDirectoryA,
+	FtpGetFile:                                 procFtpGetFile,
+	FtpGetFileA:                                procFtpGetFileA,
+	FtpGetFileEx:                               procFtpGetFileEx,
+	FtpGetFileSize:                             procFtpGetFileSize,
+	FtpOpenFile:                                procFtpOpenFile,
+	FtpOpenFileA:                               procFtpOpenFileA,
+	FtpPutFile:                                 procFtpPutFile,
+	FtpPutFileA:                                procFtpPutFileA,
+	FtpPutFileEx:                               procFtpPutFileEx,
+	FtpRemoveDirectory:                         procFtpRemoveDirectory,
+	FtpRemoveDirectoryA:                        procFtpRemoveDirectoryA,
+	FtpRenameFile:                              procFtpRenameFile,
+	FtpRenameFileA:                             procFtpRenameFileA,
+	FtpSetCurrentDirectory:                     procFtpSetCurrentDirectory,
+	FtpSetCurrentDirectoryA:                    procFtpSetCurrentDirectoryA,
+	GetDiskInfoA:                               procGetDiskInfoA,
+	GetUrlCacheConfigInfo:                      procGetUrlCacheConfigInfo,
+	GetUrlCacheConfigInfoA:                     procGetUrlCacheConfigInfoA,
+	GetUrlCacheEntryBinaryBlob:                 procGetUrlCacheEntryBinaryBlob,
+	GetUrlCacheEntryInfo:                       procGetUrlCacheEntryInfo,
+	GetUrlCacheEntryInfoA:                      procGetUrlCacheEntryInfoA,
+	GetUrlCacheEntryInfoEx:                     procGetUrlCacheEntryInfoEx,
+	GetUrlCacheEntryInfoExA:                    procGetUrlCacheEntryInfoExA,
+	GetUrlCacheGroupAttribute:                  procGetUrlCacheGroupAttribute,
+	GetUrlCacheGroupAttributeA:                 procGetUrlCacheGroupAttributeA,
+	GetUrlCacheHeaderData:                      procGetUrlCacheHeaderData,
+	GopherCreateLocator:                        procGopherCreateLocator,
+	GopherCreateLocatorA:                       procGopherCreateLocatorA,
+	GopherFindFirstFile:                        procGopherFindFirstFile,
+	GopherFindFirstFileA:                       procGopherFindFirstFileA,
+	GopherGetAttribute:                         procGopherGetAttribute,
+	GopherGetAttributeA:                        procGopherGetAttributeA,
+	GopherGetLocatorType:                       procGopherGetLocatorType,
+	GopherGetLocatorTypeA:                      procGopherGetLocatorTypeA,
+	GopherOpenFile:                             procGopherOpenFile,
+	GopherOpenFileA:                            procGopherOpenFileA,
+	HttpAddRequestHeaders:                      procHttpAddRequestHeaders,
+	HttpAddRequestHeadersA:                     procHttpAddRequestHeadersA,
+	HttpCheckDavCompliance:                     procHttpCheckDavCompliance,
+	HttpCheckDavComplianceA:                    procHttpCheckDavComplianceA,
+	HttpCloseDependencyHandle:                  procHttpCloseDependencyHandle,
+	HttpDuplicateDependencyHandle:              procHttpDuplicateDependencyHandle,
+	HttpEndRequest:                             procHttpEndRequest,
+	HttpEndRequestA:                            procHttpEndRequestA,
+	HttpGetServerCredentials:                   procHttpGetServerCredentials,
+	HttpIndicatePageLoadComplete:               procHttpIndicatePageLoadComplete,
+	HttpIsHostHstsEnabled:                      procHttpIsHostHstsEnabled,
+	HttpOpenDependencyHandle:                   procHttpOpenDependencyHandle,
+	HttpOpenRequest:                            procHttpOpenRequest,
+	HttpOpenRequestA:                           procHttpOpenRequestA,
+	HttpPushClose:                              procHttpPushClose,
+	HttpPushEnable:                             procHttpPushEnable,
+	HttpPushWait:                               procHttpPushWait,
+	HttpQueryInfo:                              procHttpQueryInfo,
+	HttpQueryInfoA:                             procHttpQueryInfoA,
+	HttpSendRequest:                            procHttpSendRequest,
+	HttpSendRequestA:                           procHttpSendRequestA,
+	HttpSendRequestEx:                          procHttpSendRequestEx,
+	HttpSendRequestExA:                         procHttpSendRequestExA,
+	HttpWebSocketClose:                         procHttpWebSocketClose,
+	HttpWebSocketCompleteUpgrade:               procHttpWebSocketCompleteUpgrade,
+	HttpWebSocketQueryCloseStatus:              procHttpWebSocketQueryCloseStatus,
+	HttpWebSocketReceive:                       procHttpWebSocketReceive,
+	HttpWebSocketSend:                          procHttpWebSocketSend,
+	HttpWebSocketShutdown:                      procHttpWebSocketShutdown,
+	ImportCookieFile:                           procImportCookieFile,
+	ImportCookieFileA:                          procImportCookieFileA,
+	IncrementUrlCacheHeaderData:                procIncrementUrlCacheHeaderData,
+	InternalInternetGetCookie:                  procInternalInternetGetCookie,
+	InternetAlgIdToString:                      procInternetAlgIdToString,
+	InternetAlgIdToStringA:                     procInternetAlgIdToStringA,
+	InternetAttemptConnect:                     procInternetAttemptConnect,
+	InternetAutodial:                           procInternetAutodial,
+	InternetAutodialHangup:                     procInternetAutodialHangup,
+	InternetCanonicalizeUrl:                    procInternetCanonicalizeUrl,
+	InternetCanonicalizeUrlA:                   procInternetCanonicalizeUrlA,
+	InternetCheckConnection:                    procInternetCheckConnection,
+	InternetCheckConnectionA:                   procInternetCheckConnectionA,
+	InternetClearAllPerSiteCookieDecisions:     procInternetClearAllPerSiteCookieDecisions,
+	InternetCloseHandle:                        procInternetCloseHandle,
+	InternetCombineUrl:                         procInternetCombineUrl,
+	InternetCombineUrlA:                        procInternetCombineUrlA,
+	InternetConfirmZoneCrossing:                procInternetConfirmZoneCrossing,
+	InternetConfirmZoneCrossingA:               procInternetConfirmZoneCrossingA,
+	InternetConfirmZoneCrossingW:               procInternetConfirmZoneCrossingW,
+	InternetConnect:                            procInternetConnect,
+	InternetConnectA:                           procInternetConnectA,
+	InternetConvertUrlFromWireToWideChar:       procInternetConvertUrlFromWireToWideChar,
+	InternetCrackUrl:                           procInternetCrackUrl,
+	InternetCrackUrlA:                          procInternetCrackUrlA,
+	InternetCreateUrl:                          procInternetCreateUrl,
+	InternetCreateUrlA:                         procInternetCreateUrlA,
+	InternetDial:                               procInternetDial,
+	InternetDialA:                              procInternetDialA,
+	InternetDialW:                              procInternetDialW,
+	InternetEnumPerSiteCookieDecision:          procInternetEnumPerSiteCookieDecision,
+	InternetEnumPerSiteCookieDecisionA:         procInternetEnumPerSiteCookieDecisionA,
+	InternetErrorDlg:                           procInternetErrorDlg,
+	InternetFindNextFile:                       procInternetFindNextFile,
+	InternetFindNextFileA:                      procInternetFindNextFileA,
+	InternetFortezzaCommand:                    procInternetFortezzaCommand,
+	InternetFreeCookies:                        procInternetFreeCookies,
+	InternetFreeProxyInfoList:                  procInternetFreeProxyInfoList,
+	InternetGetConnectedState:                  procInternetGetConnectedState,
+	InternetGetConnectedStateEx:                procInternetGetConnectedStateEx,
+	InternetGetConnectedStateExA:               procInternetGetConnectedStateExA,
+	InternetGetConnectedStateExW:               procInternetGetConnectedStateExW,
+	InternetGetCookie:                          procInternetGetCookie,
+	InternetGetCookieA:                         procInternetGetCookieA,
+	InternetGetCookieEx:                        procInternetGetCookieEx,
+	InternetGetCookieEx2:                       procInternetGetCookieEx2,
+	InternetGetCookieExA:                       procInternetGetCookieExA,
+	InternetGetLastResponseInfo:                procInternetGetLastResponseInfo,
+	InternetGetLastResponseInfoA:               procInternetGetLastResponseInfoA,
+	InternetGetPerSiteCookieDecision:           procInternetGetPerSiteCookieDecision,
+	InternetGetPerSiteCookieDecisionA:          procInternetGetPerSiteCookieDecisionA,
+	InternetGetProxyForUrl:                     procInternetGetProxyForUrl,
+	InternetGetSecurityInfoByURL:               procInternetGetSecurityInfoByURL,
+	InternetGetSecurityInfoByURLA:              procInternetGetSecurityInfoByURLA,
+	InternetGetSecurityInfoByURLW:              procInternetGetSecurityInfoByURLW,
+	InternetGoOnline:                           procInternetGoOnline,
+	InternetGoOnlineA:                          procInternetGoOnlineA,
+	InternetGoOnlineW:                          procInternetGoOnlineW,
+	InternetHangUp:                             procInternetHangUp,
+	InternetInitializeAutoProxyDll:             procInternetInitializeAutoProxyDll,
+	InternetLockRequestFile:                    procInternetLockRequestFile,
+	InternetOpen:                               procInternetOpen,
+	InternetOpenA:                              procInternetOpenA,
+	InternetOpenUrl:                            procInternetOpenUrl,
+	InternetOpenUrlA:                           procInternetOpenUrlA,
+	InternetQueryDataAvailable:                 procInternetQueryDataAvailable,
+	InternetQueryFortezzaStatus:                procInternetQueryFortezzaStatus,
+	InternetQueryOption:                        procInternetQueryOption,
+	InternetQueryOptionA:                       procInternetQueryOptionA,
+	InternetReadFile:                           procInternetReadFile,
+	InternetReadFileEx:                         procInternetReadFileEx,
+	InternetReadFileExA:                        procInternetReadFileExA,
+	InternetSecurityProtocolToString:           procInternetSecurityProtocolToString,
+	InternetSecurityProtocolToStringA:          procInternetSecurityProtocolToStringA,
+	InternetSetCookie:                          procInternetSetCookie,
+	InternetSetCookieA:                         procInternetSetCookieA,
+	InternetSetCookieEx:                        procInternetSetCookieEx,
+	InternetSetCookieEx2:                       procInternetSetCookieEx2,
+	InternetSetCookieExA:                       procInternetSetCookieExA,
+	InternetSetDialState:                       procInternetSetDialState,
+	InternetSetDialStateA:                      procInternetSetDialStateA,
+	InternetSetDialStateW:                      procInternetSetDialStateW,
+	InternetSetFilePointer:                     procInternetSetFilePointer,
+	InternetSetOption:                          procInternetSetOption,
+	InternetSetOptionA:                         procInternetSetOptionA,
+	InternetSetOptionEx:                        procInternetSetOptionEx,
+	InternetSetOptionExA:                       procInternetSetOptionExA,
+	InternetSetPerSiteCookieDecision:           procInternetSetPerSiteCookieDecision,
+	InternetSetPerSiteCookieDecisionA:          procInternetSetPerSiteCookieDecisionA,
+	InternetSetStatusCallback:                  procInternetSetStatusCallback,
+	InternetSetStatusCallbackA:                 procInternetSetStatusCallbackA,
+	InternetSetStatusCallbackW:                 procInternetSetStatusCallbackW,
+	InternetShowSecurityInfoByURL:              procInternetShowSecurityInfoByURL,
+	InternetShowSecurityInfoByURLA:             procInternetShowSecurityInfoByURLA,
+	InternetShowSecurityInfoByURLW:             procInternetShowSecurityInfoByURLW,
+	InternetTimeFromSystemTime:                 procInternetTimeFromSystemTime,
+	InternetTimeFromSystemTimeA:                procInternetTimeFromSystemTimeA,
+	InternetTimeFromSystemTimeW:                procInternetTimeFromSystemTimeW,
+	InternetTimeToSystemTime:                   procInternetTimeToSystemTime,
+	InternetTimeToSystemTimeA:                  procInternetTimeToSystemTimeA,
+	InternetTimeToSystemTimeW:                  procInternetTimeToSystemTimeW,
+	InternetUnlockRequestFile:                  procInternetUnlockRequestFile,
+	InternetWriteFile:                          procInternetWriteFile,
+	InternetWriteFileEx:                        procInternetWriteFileEx,
+	InternetWriteFileExA:                       procInternetWriteFileExA,
+	IsDomainLegalCookieDomain:                  procIsDomainLegalCookieDomain,
+	IsDomainLegalCookieDomainA:                 procIsDomainLegalCookieDomainA,
+	IsHostInProxyBypassList:                    procIsHostInProxyBypassList,
+	IsProfilesEnabled:                          procIsProfilesEnabled,
+	IsUrlCacheEntryExpired:                     procIsUrlCacheEntryExpired,
+	IsUrlCacheEntryExpiredA:                    procIsUrlCacheEntryExpiredA,
+	LoadUrlCacheContent:                        procLoadUrlCacheContent,
+	ParseX509EncodedCertificateForListBoxEntry: procParseX509EncodedCertificateForListBoxEntry,
+	PerformOperationOverUrlCacheA:              procPerformOperationOverUrlCacheA,
+	PrivacyGetZonePreferenceW:                  procPrivacyGetZonePreferenceW,
+	PrivacySetZonePreferenceW:                  procPrivacySetZonePreferenceW,
+	ReadGuidsForConnectedNetworks:              procReadGuidsForConnectedNetworks,
+	ReadUrlCacheEntryStream:                    procReadUrlCacheEntryStream,
+	ReadUrlCacheEntryStreamEx:                  procReadUrlCacheEntryStreamEx,
+	RegisterUrlCacheNotification:               procRegisterUrlCacheNotification,
+	ResumeSuspendedDownload:                    procResumeSuspendedDownload,
+	RetrieveUrlCacheEntryFile:                  procRetrieveUrlCacheEntryFile,
+	RetrieveUrlCacheEntryFileA:                 procRetrieveUrlCacheEntryFileA,
+	RetrieveUrlCacheEntryStream:                procRetrieveUrlCacheEntryStream,
+	RetrieveUrlCacheEntryStreamA:               procRetrieveUrlCacheEntryStreamA,
+	RunOnceUrlCache:                            procRunOnceUrlCache,
+	SetUrlCacheConfigInfo:                      procSetUrlCacheConfigInfo,
+	SetUrlCacheConfigInfoA:                     procSetUrlCacheConfigInfoA,
+	SetUrlCacheEntryGroup:                      procSetUrlCacheEntryGroup,
+	SetUrlCacheEntryGroupA:                     procSetUrlCacheEntryGroupA,
+	SetUrlCacheEntryGroupW:                     procSetUrlCacheEntryGroupW,
+	SetUrlCacheEntryInfo:                       procSetUrlCacheEntryInfo,
+	SetUrlCacheEntryInfoA:                      procSetUrlCacheEntryInfoA,
+	SetUrlCacheGroupAttribute:                  procSetUrlCacheGroupAttribute,
+	SetUrlCacheGroupAttributeA:                 procSetUrlCacheGroupAttributeA,
+	SetUrlCacheHeaderData:                      procSetUrlCacheHeaderData,
+	ShowClientAuthCerts:                        procShowClientAuthCerts,
+	ShowSecurityInfo:                           procShowSecurityInfo,
+	ShowX509EncodedCertificate:                 procShowX509EncodedCertificate,
+	UnlockUrlCacheEntryFile:                    procUnlockUrlCacheEntryFile,
+	UnlockUrlCacheEntryFileA:                   procUnlockUrlCacheEntryFileA,
+	UnlockUrlCacheEntryFileW:                   procUnlockUrlCacheEntryFileW,
+	UnlockUrlCacheEntryStream:                  procUnlockUrlCacheEntryStream,
+	UpdateUrlCacheContentPath:                  procUpdateUrlCacheContentPath,
+	UrlCacheCheckEntriesExist:                  procUrlCacheCheckEntriesExist,
+	UrlCacheCloseEntryHandle:                   procUrlCacheCloseEntryHandle,
+	UrlCacheContainerSetEntryMaximumAge:        procUrlCacheContainerSetEntryMaximumAge,
+	UrlCacheCreateContainer:                    procUrlCacheCreateContainer,
+	UrlCacheFindFirstEntry:                     procUrlCacheFindFirstEntry,
+	UrlCacheFindNextEntry:                      procUrlCacheFindNextEntry,
+	UrlCacheFreeEntryInfo:                      procUrlCacheFreeEntryInfo,
+	UrlCacheFreeGlobalSpace:                    procUrlCacheFreeGlobalSpace,
+	UrlCacheGetContentPaths:                    procUrlCacheGetContentPaths,
+	UrlCacheGetEntryInfo:                       procUrlCacheGetEntryInfo,
+	UrlCacheGetGlobalCacheSize:                 procUrlCacheGetGlobalCacheSize,
+	UrlCacheGetGlobalLimit:                     procUrlCacheGetGlobalLimit,
+	UrlCacheReadEntryStream:                    procUrlCacheReadEntryStream,
+	UrlCacheReloadSettings:                     procUrlCacheReloadSettings,
+	UrlCacheRetrieveEntryFile:                  procUrlCacheRetrieveEntryFile,
+	UrlCacheRetrieveEntryStream:                procUrlCacheRetrieveEntryStream,
+	UrlCacheServer:                             procUrlCacheServer,
+	UrlCacheSetGlobalLimit:                     procUrlCacheSetGlobalLimit,
+	UrlCacheUpdateEntryExtraData:               procUrlCacheUpdateEntryExtraData,
+}
+
 // AppCacheCheckManifest calls WININET!AppCacheCheckManifest.
-func AppCacheCheckManifest(pwszMasterUrl string, pwszManifestUrl string, pbManifestData []byte, pbManifestResponseHeaders []byte, peState *APP_CACHE_STATE, phNewAppCache *unsafe.Pointer) uint32 {
-	_pwszMasterUrl := win32.UTF16Ptr(pwszMasterUrl)
+func AppCacheCheckManifest(pwszMasterUrl *string, pwszManifestUrl string, pbManifestData []byte, pbManifestResponseHeaders []byte, peState *APP_CACHE_STATE, phNewAppCache *unsafe.Pointer) uint32 {
+	_pwszMasterUrl := win32.UTF16PtrOrNil(pwszMasterUrl)
 	_pwszManifestUrl := win32.UTF16Ptr(pwszManifestUrl)
 	var _pbManifestData *byte
 	if len(pbManifestData) > 0 {
@@ -450,11 +1050,11 @@ func AppCacheLookup(pwszUrl string, dwFlags uint32, phAppCache *unsafe.Pointer) 
 // CommitUrlCacheEntry calls WININET!CommitUrlCacheEntryW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-commiturlcacheentryw
 // Minimum OS: windows5.0.
-func CommitUrlCacheEntry(lpszUrlName string, lpszLocalFileName string, ExpireTime foundation.FILETIME, LastModifiedTime foundation.FILETIME, CacheEntryType uint32, lpszHeaderInfo string, cchHeaderInfo uint32, lpszOriginalUrl string) error {
+func CommitUrlCacheEntry(lpszUrlName string, lpszLocalFileName *string, ExpireTime foundation.FILETIME, LastModifiedTime foundation.FILETIME, CacheEntryType uint32, lpszHeaderInfo *string, cchHeaderInfo uint32, lpszOriginalUrl *string) error {
 	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
-	_lpszLocalFileName := win32.UTF16Ptr(lpszLocalFileName)
-	_lpszHeaderInfo := win32.UTF16Ptr(lpszHeaderInfo)
-	_lpszOriginalUrl := win32.UTF16Ptr(lpszOriginalUrl)
+	_lpszLocalFileName := win32.UTF16PtrOrNil(lpszLocalFileName)
+	_lpszHeaderInfo := win32.UTF16PtrOrNil(lpszHeaderInfo)
+	_lpszOriginalUrl := win32.UTF16PtrOrNil(lpszOriginalUrl)
 	r1, _, e1 := syscall.SyscallN(procCommitUrlCacheEntry.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(unsafe.Pointer(_lpszLocalFileName)), uintptr(win32.StructArg(ExpireTime)), uintptr(win32.StructArg(LastModifiedTime)), uintptr(CacheEntryType), uintptr(unsafe.Pointer(_lpszHeaderInfo)), uintptr(cchHeaderInfo), 0, uintptr(unsafe.Pointer(_lpszOriginalUrl)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -502,10 +1102,10 @@ func CreateMD5SSOHash(pszChallengeInfo string, pwszRealm string, pwszTarget stri
 // CreateUrlCacheContainer calls WININET!CreateUrlCacheContainerW.
 // https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-createurlcachecontainerw
 // Minimum OS: windows5.0.
-func CreateUrlCacheContainer(Name string, lpCachePrefix string, lpszCachePath string, KBCacheLimit uint32, dwContainerType uint32, dwOptions uint32) error {
+func CreateUrlCacheContainer(Name string, lpCachePrefix string, lpszCachePath *string, KBCacheLimit uint32, dwContainerType uint32, dwOptions uint32) error {
 	_Name := win32.UTF16Ptr(Name)
 	_lpCachePrefix := win32.UTF16Ptr(lpCachePrefix)
-	_lpszCachePath := win32.UTF16Ptr(lpszCachePath)
+	_lpszCachePath := win32.UTF16PtrOrNil(lpszCachePath)
 	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheContainer.Addr(), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(_lpCachePrefix)), uintptr(unsafe.Pointer(_lpszCachePath)), uintptr(KBCacheLimit), uintptr(dwContainerType), uintptr(dwOptions), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -527,9 +1127,9 @@ func CreateUrlCacheContainerA(Name foundation.PSTR, lpCachePrefix foundation.PST
 // CreateUrlCacheEntry calls WININET!CreateUrlCacheEntryW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-createurlcacheentryw
 // Minimum OS: windows5.0.
-func CreateUrlCacheEntry(lpszUrlName string, dwExpectedFileSize uint32, lpszFileExtension string, lpszFileName foundation.PWSTR, dwReserved uint32) error {
+func CreateUrlCacheEntry(lpszUrlName string, dwExpectedFileSize uint32, lpszFileExtension *string, lpszFileName foundation.PWSTR, dwReserved uint32) error {
 	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
-	_lpszFileExtension := win32.UTF16Ptr(lpszFileExtension)
+	_lpszFileExtension := win32.UTF16PtrOrNil(lpszFileExtension)
 	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheEntry.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(dwExpectedFileSize), uintptr(unsafe.Pointer(_lpszFileExtension)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwReserved))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -549,9 +1149,9 @@ func CreateUrlCacheEntryA(lpszUrlName foundation.PSTR, dwExpectedFileSize uint32
 }
 
 // CreateUrlCacheEntryExW calls WININET!CreateUrlCacheEntryExW.
-func CreateUrlCacheEntryExW(lpszUrlName string, dwExpectedFileSize uint32, lpszFileExtension string, lpszFileName foundation.PWSTR, dwReserved uint32, fPreserveIncomingFileName bool) bool {
+func CreateUrlCacheEntryExW(lpszUrlName string, dwExpectedFileSize uint32, lpszFileExtension *string, lpszFileName foundation.PWSTR, dwReserved uint32, fPreserveIncomingFileName bool) bool {
 	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
-	_lpszFileExtension := win32.UTF16Ptr(lpszFileExtension)
+	_lpszFileExtension := win32.UTF16PtrOrNil(lpszFileExtension)
 	_fPreserveIncomingFileName := win32.Bool32(fPreserveIncomingFileName)
 	r1, _, _ := syscall.SyscallN(procCreateUrlCacheEntryExW.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(dwExpectedFileSize), uintptr(unsafe.Pointer(_lpszFileExtension)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwReserved), uintptr(_fPreserveIncomingFileName))
 	return r1 != 0
@@ -706,8 +1306,8 @@ func FindFirstUrlCacheContainerA(pdwModified *uint32, lpContainerInfo *INTERNET_
 // FindFirstUrlCacheEntry calls WININET!FindFirstUrlCacheEntryW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryw
 // Minimum OS: windows5.0.
-func FindFirstUrlCacheEntry(lpszUrlSearchPattern string, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) (foundation.HANDLE, error) {
-	_lpszUrlSearchPattern := win32.UTF16Ptr(lpszUrlSearchPattern)
+func FindFirstUrlCacheEntry(lpszUrlSearchPattern *string, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) (foundation.HANDLE, error) {
+	_lpszUrlSearchPattern := win32.UTF16PtrOrNil(lpszUrlSearchPattern)
 	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheEntry.Addr(), uintptr(unsafe.Pointer(_lpszUrlSearchPattern)), uintptr(unsafe.Pointer(lpFirstCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -731,8 +1331,8 @@ func FindFirstUrlCacheEntryA(lpszUrlSearchPattern foundation.PSTR, lpFirstCacheE
 // FindFirstUrlCacheEntryEx calls WININET!FindFirstUrlCacheEntryExW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryexw
 // Minimum OS: windows5.0.
-func FindFirstUrlCacheEntryEx(lpszUrlSearchPattern string, dwFlags uint32, dwFilter uint32, GroupId int64, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) (foundation.HANDLE, error) {
-	_lpszUrlSearchPattern := win32.UTF16Ptr(lpszUrlSearchPattern)
+func FindFirstUrlCacheEntryEx(lpszUrlSearchPattern *string, dwFlags uint32, dwFilter uint32, GroupId int64, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) (foundation.HANDLE, error) {
+	_lpszUrlSearchPattern := win32.UTF16PtrOrNil(lpszUrlSearchPattern)
 	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheEntryEx.Addr(), uintptr(unsafe.Pointer(_lpszUrlSearchPattern)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), uintptr(unsafe.Pointer(lpFirstCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), 0, 0, 0)
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -841,8 +1441,8 @@ func FindP3PPolicySymbol(pszSymbol foundation.PSTR) int32 {
 // FreeUrlCacheSpace calls WININET!FreeUrlCacheSpaceW.
 // https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-freeurlcachespacew
 // Minimum OS: windows5.0.
-func FreeUrlCacheSpace(lpszCachePath string, dwSize uint32, dwFilter uint32) error {
-	_lpszCachePath := win32.UTF16Ptr(lpszCachePath)
+func FreeUrlCacheSpace(lpszCachePath *string, dwSize uint32, dwFilter uint32) error {
+	_lpszCachePath := win32.UTF16PtrOrNil(lpszCachePath)
 	r1, _, e1 := syscall.SyscallN(procFreeUrlCacheSpace.Addr(), uintptr(unsafe.Pointer(_lpszCachePath)), uintptr(dwSize), uintptr(dwFilter))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -935,8 +1535,8 @@ func FtpDeleteFileA(hConnect unsafe.Pointer, lpszFileName foundation.PSTR) error
 // FtpFindFirstFile calls WININET!FtpFindFirstFileW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpfindfirstfilew
 // Minimum OS: windows5.0.
-func FtpFindFirstFile(hConnect unsafe.Pointer, lpszSearchFile string, lpFindFileData *storagefilesystem.WIN32_FIND_DATAW, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	_lpszSearchFile := win32.UTF16Ptr(lpszSearchFile)
+func FtpFindFirstFile(hConnect unsafe.Pointer, lpszSearchFile *string, lpFindFileData *storagefilesystem.WIN32_FIND_DATAW, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszSearchFile := win32.UTF16PtrOrNil(lpszSearchFile)
 	r1, _, e1 := syscall.SyscallN(procFtpFindFirstFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszSearchFile)), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(dwFlags), uintptr(dwContext))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
@@ -1259,10 +1859,10 @@ func GetUrlCacheHeaderData(nIdx uint32, lpdwData *uint32) bool {
 // GopherCreateLocator calls WININET!GopherCreateLocatorW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophercreatelocatorw
 // Minimum OS: windows5.0.
-func GopherCreateLocator(lpszHost string, nServerPort uint16, lpszDisplayString string, lpszSelectorString string, dwGopherType uint32, lpszLocator foundation.PWSTR, lpdwBufferLength *uint32) error {
+func GopherCreateLocator(lpszHost string, nServerPort uint16, lpszDisplayString *string, lpszSelectorString *string, dwGopherType uint32, lpszLocator foundation.PWSTR, lpdwBufferLength *uint32) error {
 	_lpszHost := win32.UTF16Ptr(lpszHost)
-	_lpszDisplayString := win32.UTF16Ptr(lpszDisplayString)
-	_lpszSelectorString := win32.UTF16Ptr(lpszSelectorString)
+	_lpszDisplayString := win32.UTF16PtrOrNil(lpszDisplayString)
+	_lpszSelectorString := win32.UTF16PtrOrNil(lpszSelectorString)
 	r1, _, e1 := syscall.SyscallN(procGopherCreateLocator.Addr(), uintptr(unsafe.Pointer(_lpszHost)), uintptr(nServerPort), uintptr(unsafe.Pointer(_lpszDisplayString)), uintptr(unsafe.Pointer(_lpszSelectorString)), uintptr(dwGopherType), uintptr(unsafe.Pointer(lpszLocator)), uintptr(unsafe.Pointer(lpdwBufferLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1284,9 +1884,9 @@ func GopherCreateLocatorA(lpszHost foundation.PSTR, nServerPort uint16, lpszDisp
 // GopherFindFirstFile calls WININET!GopherFindFirstFileW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gopherfindfirstfilew
 // Minimum OS: windows5.0.
-func GopherFindFirstFile(hConnect unsafe.Pointer, lpszLocator string, lpszSearchString string, lpFindData *GOPHER_FIND_DATAW, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	_lpszLocator := win32.UTF16Ptr(lpszLocator)
-	_lpszSearchString := win32.UTF16Ptr(lpszSearchString)
+func GopherFindFirstFile(hConnect unsafe.Pointer, lpszLocator *string, lpszSearchString *string, lpFindData *GOPHER_FIND_DATAW, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszLocator := win32.UTF16PtrOrNil(lpszLocator)
+	_lpszSearchString := win32.UTF16PtrOrNil(lpszSearchString)
 	r1, _, e1 := syscall.SyscallN(procGopherFindFirstFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszLocator)), uintptr(unsafe.Pointer(_lpszSearchString)), uintptr(unsafe.Pointer(lpFindData)), uintptr(dwFlags), uintptr(dwContext))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
@@ -1310,9 +1910,9 @@ func GopherFindFirstFileA(hConnect unsafe.Pointer, lpszLocator foundation.PSTR, 
 // GopherGetAttribute calls WININET!GopherGetAttributeW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophergetattributew
 // Minimum OS: windows5.0.
-func GopherGetAttribute(hConnect unsafe.Pointer, lpszLocator string, lpszAttributeName string, lpBuffer []byte, lpdwCharactersReturned *uint32, lpfnEnumerator GOPHER_ATTRIBUTE_ENUMERATOR, dwContext uintptr) error {
+func GopherGetAttribute(hConnect unsafe.Pointer, lpszLocator string, lpszAttributeName *string, lpBuffer []byte, lpdwCharactersReturned *uint32, lpfnEnumerator GOPHER_ATTRIBUTE_ENUMERATOR, dwContext uintptr) error {
 	_lpszLocator := win32.UTF16Ptr(lpszLocator)
-	_lpszAttributeName := win32.UTF16Ptr(lpszAttributeName)
+	_lpszAttributeName := win32.UTF16PtrOrNil(lpszAttributeName)
 	var _lpBuffer *byte
 	if len(lpBuffer) > 0 {
 		_lpBuffer = &lpBuffer[0]
@@ -1365,9 +1965,9 @@ func GopherGetLocatorTypeA(lpszLocator foundation.PSTR, lpdwGopherType *uint32) 
 // GopherOpenFile calls WININET!GopherOpenFileW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gopheropenfilew
 // Minimum OS: windows5.0.
-func GopherOpenFile(hConnect unsafe.Pointer, lpszLocator string, lpszView string, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+func GopherOpenFile(hConnect unsafe.Pointer, lpszLocator string, lpszView *string, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
 	_lpszLocator := win32.UTF16Ptr(lpszLocator)
-	_lpszView := win32.UTF16Ptr(lpszView)
+	_lpszView := win32.UTF16PtrOrNil(lpszView)
 	r1, _, e1 := syscall.SyscallN(procGopherOpenFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszLocator)), uintptr(unsafe.Pointer(_lpszView)), uintptr(dwFlags), uintptr(dwContext))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
@@ -1488,11 +2088,11 @@ func HttpOpenDependencyHandle(hRequestHandle unsafe.Pointer, fBackground bool, p
 // HttpOpenRequest calls WININET!HttpOpenRequestW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpopenrequestw
 // Minimum OS: windows5.0.
-func HttpOpenRequest(hConnect unsafe.Pointer, lpszVerb string, lpszObjectName string, lpszVersion string, lpszReferrer string, lplpszAcceptTypes *foundation.PWSTR, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	_lpszVerb := win32.UTF16Ptr(lpszVerb)
-	_lpszObjectName := win32.UTF16Ptr(lpszObjectName)
-	_lpszVersion := win32.UTF16Ptr(lpszVersion)
-	_lpszReferrer := win32.UTF16Ptr(lpszReferrer)
+func HttpOpenRequest(hConnect unsafe.Pointer, lpszVerb *string, lpszObjectName *string, lpszVersion *string, lpszReferrer *string, lplpszAcceptTypes *foundation.PWSTR, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszVerb := win32.UTF16PtrOrNil(lpszVerb)
+	_lpszObjectName := win32.UTF16PtrOrNil(lpszObjectName)
+	_lpszVersion := win32.UTF16PtrOrNil(lpszVersion)
+	_lpszReferrer := win32.UTF16PtrOrNil(lpszReferrer)
 	r1, _, e1 := syscall.SyscallN(procHttpOpenRequest.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszVerb)), uintptr(unsafe.Pointer(_lpszObjectName)), uintptr(unsafe.Pointer(_lpszVersion)), uintptr(unsafe.Pointer(_lpszReferrer)), uintptr(unsafe.Pointer(lplpszAcceptTypes)), uintptr(dwFlags), uintptr(dwContext))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
@@ -1555,8 +2155,8 @@ func HttpQueryInfoA(hRequest unsafe.Pointer, dwInfoLevel uint32, lpBuffer unsafe
 // HttpSendRequest calls WININET!HttpSendRequestW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpsendrequestw
 // Minimum OS: windows5.0.
-func HttpSendRequest(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, lpOptional []byte) error {
-	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
+func HttpSendRequest(hRequest unsafe.Pointer, lpszHeaders *string, dwHeadersLength uint32, lpOptional []byte) error {
+	_lpszHeaders := win32.UTF16PtrOrNil(lpszHeaders)
 	var _lpOptional *byte
 	if len(lpOptional) > 0 {
 		_lpOptional = &lpOptional[0]
@@ -1849,10 +2449,10 @@ func InternetConfirmZoneCrossingW(hWnd foundation.HWND, szUrlPrev string, szUrlN
 // InternetConnect calls WININET!InternetConnectW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetconnectw
 // Minimum OS: windows5.0.
-func InternetConnect(hInternet unsafe.Pointer, lpszServerName string, nServerPort uint16, lpszUserName string, lpszPassword string, dwService uint32, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+func InternetConnect(hInternet unsafe.Pointer, lpszServerName string, nServerPort uint16, lpszUserName *string, lpszPassword *string, dwService uint32, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
 	_lpszServerName := win32.UTF16Ptr(lpszServerName)
-	_lpszUserName := win32.UTF16Ptr(lpszUserName)
-	_lpszPassword := win32.UTF16Ptr(lpszPassword)
+	_lpszUserName := win32.UTF16PtrOrNil(lpszUserName)
+	_lpszPassword := win32.UTF16PtrOrNil(lpszPassword)
 	r1, _, e1 := syscall.SyscallN(procInternetConnect.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(unsafe.Pointer(_lpszServerName)), uintptr(nServerPort), uintptr(unsafe.Pointer(_lpszUserName)), uintptr(unsafe.Pointer(_lpszPassword)), uintptr(dwService), uintptr(dwFlags), uintptr(dwContext))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
@@ -1945,8 +2545,8 @@ func InternetDialA(hwndParent foundation.HWND, lpszConnectoid foundation.PSTR, d
 // InternetDialW calls WININET!InternetDialW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetdialw
 // Minimum OS: windows5.0.
-func InternetDialW(hwndParent foundation.HWND, lpszConnectoid string, dwFlags uint32, lpdwConnection *uintptr) uint32 {
-	_lpszConnectoid := win32.UTF16Ptr(lpszConnectoid)
+func InternetDialW(hwndParent foundation.HWND, lpszConnectoid *string, dwFlags uint32, lpdwConnection *uintptr) uint32 {
+	_lpszConnectoid := win32.UTF16PtrOrNil(lpszConnectoid)
 	r1, _, _ := syscall.SyscallN(procInternetDialW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_lpszConnectoid)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpdwConnection)), 0)
 	return uint32(r1)
 }
@@ -2061,9 +2661,9 @@ func InternetGetConnectedStateExW(lpdwFlags *INTERNET_CONNECTION, lpszConnection
 // InternetGetCookie calls WININET!InternetGetCookieW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetcookiew
 // Minimum OS: windows5.0.
-func InternetGetCookie(lpszUrl string, lpszCookieName string, lpszCookieData foundation.PWSTR, lpdwSize *uint32) error {
+func InternetGetCookie(lpszUrl string, lpszCookieName *string, lpszCookieData foundation.PWSTR, lpdwSize *uint32) error {
 	_lpszUrl := win32.UTF16Ptr(lpszUrl)
-	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
+	_lpszCookieName := win32.UTF16PtrOrNil(lpszCookieName)
 	r1, _, e1 := syscall.SyscallN(procInternetGetCookie.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(unsafe.Pointer(lpdwSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2085,10 +2685,10 @@ func InternetGetCookieA(lpszUrl foundation.PSTR, lpszCookieName foundation.PSTR,
 // InternetGetCookieEx calls WININET!InternetGetCookieExW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetcookieexw
 // Minimum OS: windows5.1.2600.
-func InternetGetCookieEx(lpszUrl string, lpszCookieName string, lpszCookieData string, lpdwSize *uint32, dwFlags INTERNET_COOKIE_FLAGS) error {
+func InternetGetCookieEx(lpszUrl string, lpszCookieName *string, lpszCookieData *string, lpdwSize *uint32, dwFlags INTERNET_COOKIE_FLAGS) error {
 	_lpszUrl := win32.UTF16Ptr(lpszUrl)
-	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
-	_lpszCookieData := win32.UTF16Ptr(lpszCookieData)
+	_lpszCookieName := win32.UTF16PtrOrNil(lpszCookieName)
+	_lpszCookieData := win32.UTF16PtrOrNil(lpszCookieData)
 	r1, _, e1 := syscall.SyscallN(procInternetGetCookieEx.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(_lpszCookieData)), uintptr(unsafe.Pointer(lpdwSize)), uintptr(dwFlags), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2098,9 +2698,9 @@ func InternetGetCookieEx(lpszUrl string, lpszCookieName string, lpszCookieData s
 
 // InternetGetCookieEx2 calls WININET!InternetGetCookieEx2.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetcookieex2
-func InternetGetCookieEx2(pcwszUrl string, pcwszCookieName string, dwFlags uint32, ppCookies **INTERNET_COOKIE2, pdwCookieCount *uint32) uint32 {
+func InternetGetCookieEx2(pcwszUrl string, pcwszCookieName *string, dwFlags uint32, ppCookies **INTERNET_COOKIE2, pdwCookieCount *uint32) uint32 {
 	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
-	_pcwszCookieName := win32.UTF16Ptr(pcwszCookieName)
+	_pcwszCookieName := win32.UTF16PtrOrNil(pcwszCookieName)
 	r1, _, _ := syscall.SyscallN(procInternetGetCookieEx2.Addr(), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(_pcwszCookieName)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCookies)), uintptr(unsafe.Pointer(pdwCookieCount)))
 	return uint32(r1)
 }
@@ -2206,8 +2806,8 @@ func InternetGoOnlineA(lpszURL foundation.PSTR, hwndParent foundation.HWND, dwFl
 // InternetGoOnlineW calls WININET!InternetGoOnlineW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgoonlinew
 // Minimum OS: windows5.0.
-func InternetGoOnlineW(lpszURL string, hwndParent foundation.HWND, dwFlags uint32) error {
-	_lpszURL := win32.UTF16Ptr(lpszURL)
+func InternetGoOnlineW(lpszURL *string, hwndParent foundation.HWND, dwFlags uint32) error {
+	_lpszURL := win32.UTF16PtrOrNil(lpszURL)
 	r1, _, e1 := syscall.SyscallN(procInternetGoOnlineW.Addr(), uintptr(unsafe.Pointer(_lpszURL)), uintptr(hwndParent), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -2248,10 +2848,10 @@ func InternetLockRequestFile(hInternet unsafe.Pointer, lphLockRequestInfo *found
 // InternetOpen calls WININET!InternetOpenW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetopenw
 // Minimum OS: windows5.0.
-func InternetOpen(lpszAgent string, dwAccessType uint32, lpszProxy string, lpszProxyBypass string, dwFlags uint32) (unsafe.Pointer, error) {
-	_lpszAgent := win32.UTF16Ptr(lpszAgent)
-	_lpszProxy := win32.UTF16Ptr(lpszProxy)
-	_lpszProxyBypass := win32.UTF16Ptr(lpszProxyBypass)
+func InternetOpen(lpszAgent *string, dwAccessType uint32, lpszProxy *string, lpszProxyBypass *string, dwFlags uint32) (unsafe.Pointer, error) {
+	_lpszAgent := win32.UTF16PtrOrNil(lpszAgent)
+	_lpszProxy := win32.UTF16PtrOrNil(lpszProxy)
+	_lpszProxyBypass := win32.UTF16PtrOrNil(lpszProxyBypass)
 	r1, _, e1 := syscall.SyscallN(procInternetOpen.Addr(), uintptr(unsafe.Pointer(_lpszAgent)), uintptr(dwAccessType), uintptr(unsafe.Pointer(_lpszProxy)), uintptr(unsafe.Pointer(_lpszProxyBypass)), uintptr(dwFlags))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
@@ -2275,9 +2875,9 @@ func InternetOpenA(lpszAgent foundation.PSTR, dwAccessType uint32, lpszProxy fou
 // InternetOpenUrl calls WININET!InternetOpenUrlW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetopenurlw
 // Minimum OS: windows5.0.
-func InternetOpenUrl(hInternet unsafe.Pointer, lpszUrl string, lpszHeaders string, dwHeadersLength uint32, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+func InternetOpenUrl(hInternet unsafe.Pointer, lpszUrl string, lpszHeaders *string, dwHeadersLength uint32, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
 	_lpszUrl := win32.UTF16Ptr(lpszUrl)
-	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
+	_lpszHeaders := win32.UTF16PtrOrNil(lpszHeaders)
 	r1, _, e1 := syscall.SyscallN(procInternetOpenUrl.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(dwFlags), uintptr(dwContext))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
@@ -2389,9 +2989,9 @@ func InternetSecurityProtocolToStringA(dwProtocol uint32, lpstr foundation.PSTR,
 // InternetSetCookie calls WININET!InternetSetCookieW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetcookiew
 // Minimum OS: windows5.0.
-func InternetSetCookie(lpszUrl string, lpszCookieName string, lpszCookieData string) error {
+func InternetSetCookie(lpszUrl string, lpszCookieName *string, lpszCookieData string) error {
 	_lpszUrl := win32.UTF16Ptr(lpszUrl)
-	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
+	_lpszCookieName := win32.UTF16PtrOrNil(lpszCookieName)
 	_lpszCookieData := win32.UTF16Ptr(lpszCookieData)
 	r1, _, e1 := syscall.SyscallN(procInternetSetCookie.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(_lpszCookieData)))
 	if r1 == 0 {
@@ -2414,9 +3014,9 @@ func InternetSetCookieA(lpszUrl foundation.PSTR, lpszCookieName foundation.PSTR,
 // InternetSetCookieEx calls WININET!InternetSetCookieExW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetcookieexw
 // Minimum OS: windows5.1.2600.
-func InternetSetCookieEx(lpszUrl string, lpszCookieName string, lpszCookieData string, dwFlags uint32, dwReserved uintptr) (uint32, error) {
+func InternetSetCookieEx(lpszUrl string, lpszCookieName *string, lpszCookieData string, dwFlags uint32, dwReserved uintptr) (uint32, error) {
 	_lpszUrl := win32.UTF16Ptr(lpszUrl)
-	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
+	_lpszCookieName := win32.UTF16PtrOrNil(lpszCookieName)
 	_lpszCookieData := win32.UTF16Ptr(lpszCookieData)
 	r1, _, e1 := syscall.SyscallN(procInternetSetCookieEx.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(_lpszCookieData)), uintptr(dwFlags), uintptr(dwReserved))
 	if e1 != 0 {
@@ -2427,9 +3027,9 @@ func InternetSetCookieEx(lpszUrl string, lpszCookieName string, lpszCookieData s
 
 // InternetSetCookieEx2 calls WININET!InternetSetCookieEx2.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetcookieex2
-func InternetSetCookieEx2(pcwszUrl string, pCookie *INTERNET_COOKIE2, pcwszP3PPolicy string, dwFlags uint32, pdwCookieState *uint32) uint32 {
+func InternetSetCookieEx2(pcwszUrl string, pCookie *INTERNET_COOKIE2, pcwszP3PPolicy *string, dwFlags uint32, pdwCookieState *uint32) uint32 {
 	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
-	_pcwszP3PPolicy := win32.UTF16Ptr(pcwszP3PPolicy)
+	_pcwszP3PPolicy := win32.UTF16PtrOrNil(pcwszP3PPolicy)
 	r1, _, _ := syscall.SyscallN(procInternetSetCookieEx2.Addr(), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pCookie)), uintptr(unsafe.Pointer(_pcwszP3PPolicy)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwCookieState)))
 	return uint32(r1)
 }
@@ -2461,8 +3061,8 @@ func InternetSetDialStateA(lpszConnectoid foundation.PSTR, dwState uint32) bool 
 
 // InternetSetDialStateW calls WININET!InternetSetDialStateW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetdialstatew
-func InternetSetDialStateW(lpszConnectoid string, dwState uint32) bool {
-	_lpszConnectoid := win32.UTF16Ptr(lpszConnectoid)
+func InternetSetDialStateW(lpszConnectoid *string, dwState uint32) bool {
+	_lpszConnectoid := win32.UTF16PtrOrNil(lpszConnectoid)
 	r1, _, _ := syscall.SyscallN(procInternetSetDialStateW.Addr(), uintptr(unsafe.Pointer(_lpszConnectoid)), uintptr(dwState), 0)
 	return r1 != 0
 }
@@ -2751,8 +3351,8 @@ func PrivacyGetZonePreferenceW(dwZone uint32, dwType uint32, pdwTemplate *uint32
 // PrivacySetZonePreferenceW calls WININET!PrivacySetZonePreferenceW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-privacysetzonepreferencew
 // Minimum OS: windows5.0.
-func PrivacySetZonePreferenceW(dwZone uint32, dwType uint32, dwTemplate uint32, pszPreference string) uint32 {
-	_pszPreference := win32.UTF16Ptr(pszPreference)
+func PrivacySetZonePreferenceW(dwZone uint32, dwType uint32, dwTemplate uint32, pszPreference *string) uint32 {
+	_pszPreference := win32.UTF16PtrOrNil(pszPreference)
 	r1, _, _ := syscall.SyscallN(procPrivacySetZonePreferenceW.Addr(), uintptr(dwZone), uintptr(dwType), uintptr(dwTemplate), uintptr(unsafe.Pointer(_pszPreference)))
 	return uint32(r1)
 }
@@ -3042,8 +3642,8 @@ func UrlCacheCreateContainer(pwszName string, pwszPrefix string, pwszDirectory s
 }
 
 // UrlCacheFindFirstEntry calls WININET!UrlCacheFindFirstEntry.
-func UrlCacheFindFirstEntry(pwszPrefix string, dwFlags uint32, dwFilter uint32, GroupId int64, pCacheEntryInfo *URLCACHE_ENTRY_INFO, phFind *foundation.HANDLE) uint32 {
-	_pwszPrefix := win32.UTF16Ptr(pwszPrefix)
+func UrlCacheFindFirstEntry(pwszPrefix *string, dwFlags uint32, dwFilter uint32, GroupId int64, pCacheEntryInfo *URLCACHE_ENTRY_INFO, phFind *foundation.HANDLE) uint32 {
+	_pwszPrefix := win32.UTF16PtrOrNil(pwszPrefix)
 	r1, _, _ := syscall.SyscallN(procUrlCacheFindFirstEntry.Addr(), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), uintptr(unsafe.Pointer(pCacheEntryInfo)), uintptr(unsafe.Pointer(phFind)))
 	return uint32(r1)
 }

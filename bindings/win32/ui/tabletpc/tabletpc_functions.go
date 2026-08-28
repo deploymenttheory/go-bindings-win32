@@ -44,6 +44,7 @@ var (
 	procGetRightSeparator             = modinkobjcore.NewProc("GetRightSeparator")
 	procGetUnicodeRanges              = modinkobjcore.NewProc("GetUnicodeRanges")
 	procIsStringSupported             = modinkobjcore.NewProc("IsStringSupported")
+	procLoadCachedAttributes          = modinkobjcore.NewProc("LoadCachedAttributes")
 	procMakeWordList                  = modinkobjcore.NewProc("MakeWordList")
 	procProcess                       = modinkobjcore.NewProc("Process")
 	procResetContext                  = modinkobjcore.NewProc("ResetContext")
@@ -56,6 +57,90 @@ var (
 	procSetTextContext                = modinkobjcore.NewProc("SetTextContext")
 	procSetWordList                   = modinkobjcore.NewProc("SetWordList")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddStroke                     *win32.Proc
+	AddWordsToWordList            *win32.Proc
+	AdviseInkChange               *win32.Proc
+	CloneContext                  *win32.Proc
+	CreateContext                 *win32.Proc
+	CreateRecognizer              *win32.Proc
+	DestroyAlternate              *win32.Proc
+	DestroyContext                *win32.Proc
+	DestroyRecognizer             *win32.Proc
+	DestroyWordList               *win32.Proc
+	EndInkInput                   *win32.Proc
+	GetAllRecognizers             *win32.Proc
+	GetBestResultString           *win32.Proc
+	GetContextPreferenceFlags     *win32.Proc
+	GetContextPropertyList        *win32.Proc
+	GetContextPropertyValue       *win32.Proc
+	GetEnabledUnicodeRanges       *win32.Proc
+	GetGuide                      *win32.Proc
+	GetLatticePtr                 *win32.Proc
+	GetLeftSeparator              *win32.Proc
+	GetPreferredPacketDescription *win32.Proc
+	GetRecoAttributes             *win32.Proc
+	GetResultPropertyList         *win32.Proc
+	GetRightSeparator             *win32.Proc
+	GetUnicodeRanges              *win32.Proc
+	IsStringSupported             *win32.Proc
+	LoadCachedAttributes          *win32.Proc
+	MakeWordList                  *win32.Proc
+	Process                       *win32.Proc
+	ResetContext                  *win32.Proc
+	SetCACMode                    *win32.Proc
+	SetContextPropertyValue       *win32.Proc
+	SetEnabledUnicodeRanges       *win32.Proc
+	SetFactoid                    *win32.Proc
+	SetFlags                      *win32.Proc
+	SetGuide                      *win32.Proc
+	SetTextContext                *win32.Proc
+	SetWordList                   *win32.Proc
+}{
+	AddStroke:                     procAddStroke,
+	AddWordsToWordList:            procAddWordsToWordList,
+	AdviseInkChange:               procAdviseInkChange,
+	CloneContext:                  procCloneContext,
+	CreateContext:                 procCreateContext,
+	CreateRecognizer:              procCreateRecognizer,
+	DestroyAlternate:              procDestroyAlternate,
+	DestroyContext:                procDestroyContext,
+	DestroyRecognizer:             procDestroyRecognizer,
+	DestroyWordList:               procDestroyWordList,
+	EndInkInput:                   procEndInkInput,
+	GetAllRecognizers:             procGetAllRecognizers,
+	GetBestResultString:           procGetBestResultString,
+	GetContextPreferenceFlags:     procGetContextPreferenceFlags,
+	GetContextPropertyList:        procGetContextPropertyList,
+	GetContextPropertyValue:       procGetContextPropertyValue,
+	GetEnabledUnicodeRanges:       procGetEnabledUnicodeRanges,
+	GetGuide:                      procGetGuide,
+	GetLatticePtr:                 procGetLatticePtr,
+	GetLeftSeparator:              procGetLeftSeparator,
+	GetPreferredPacketDescription: procGetPreferredPacketDescription,
+	GetRecoAttributes:             procGetRecoAttributes,
+	GetResultPropertyList:         procGetResultPropertyList,
+	GetRightSeparator:             procGetRightSeparator,
+	GetUnicodeRanges:              procGetUnicodeRanges,
+	IsStringSupported:             procIsStringSupported,
+	LoadCachedAttributes:          procLoadCachedAttributes,
+	MakeWordList:                  procMakeWordList,
+	Process:                       procProcess,
+	ResetContext:                  procResetContext,
+	SetCACMode:                    procSetCACMode,
+	SetContextPropertyValue:       procSetContextPropertyValue,
+	SetEnabledUnicodeRanges:       procSetEnabledUnicodeRanges,
+	SetFactoid:                    procSetFactoid,
+	SetFlags:                      procSetFlags,
+	SetGuide:                      procSetGuide,
+	SetTextContext:                procSetTextContext,
+	SetWordList:                   procSetWordList,
+}
 
 // AddStroke calls inkobjcore!AddStroke.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-addstroke
@@ -265,6 +350,16 @@ func GetUnicodeRanges(hrec HRECOGNIZER, pcRanges *uint32, pcr *CHARACTER_RANGE) 
 func IsStringSupported(hrc HRECOCONTEXT, wcString uint32, pwcString string) error {
 	_pwcString := win32.UTF16Ptr(pwcString)
 	r1, _, _ := syscall.SyscallN(procIsStringSupported.Addr(), uintptr(hrc), uintptr(wcString), uintptr(unsafe.Pointer(_pwcString)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specLoadCachedAttributes = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word}}
+
+// LoadCachedAttributes calls inkobjcore!LoadCachedAttributes.
+// https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-loadcachedattributes
+// Minimum OS: windows5.1.2600.
+func LoadCachedAttributes(clsid win32.GUID, pRecoAttributes *RECO_ATTRS) error {
+	r1, _, _ := win32.Call(procLoadCachedAttributes.Addr(), specLoadCachedAttributes, nil, uintptr(unsafe.Pointer(&clsid)), uintptr(unsafe.Pointer(pRecoAttributes))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

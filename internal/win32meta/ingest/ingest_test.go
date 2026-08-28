@@ -200,3 +200,30 @@ func TestIngestEnumAndStruct(t *testing.T) {
 		t.Error("WNDCLASSEXW.lpfnWndProc not projected as FunctionPointer ApiRef")
 	}
 }
+
+func TestIngestProjectsInlineConstants(t *testing.T) {
+	namespaces, _ := ingestAll(t)
+	threading := namespaceByName(t, namespaces, "System.Threading")
+	want := map[string]string{
+		"GetCurrentProcessToken":         "-4",
+		"GetCurrentThreadToken":          "-5",
+		"GetCurrentThreadEffectiveToken": "-6",
+	}
+	for i := range threading.Functions {
+		function := &threading.Functions[i]
+		if value, ok := want[function.Name]; ok {
+			if function.DLL != "FORCEINLINE" {
+				t.Errorf("%s: DLL = %q, want FORCEINLINE", function.Name, function.DLL)
+			}
+			if function.Constant != value {
+				t.Errorf("%s: Constant = %q, want %q", function.Name, function.Constant, value)
+			}
+			delete(want, function.Name)
+		} else if function.Constant != "" {
+			t.Errorf("%s: unexpected constant %q", function.Name, function.Constant)
+		}
+	}
+	for name := range want {
+		t.Errorf("%s not projected", name)
+	}
+}

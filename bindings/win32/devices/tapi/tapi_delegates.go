@@ -4,38 +4,42 @@
 
 package tapi
 
-// ASYNC_COMPLETION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, int32).
+// ASYNC_COMPLETION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, int32) uintptr.
 type ASYNC_COMPLETION uintptr
 
-// LINECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uintptr, uintptr, uintptr, uintptr).
+// LINECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uintptr, uintptr, uintptr, uintptr) uintptr.
 type LINECALLBACK uintptr
 
-// LINEEVENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HTAPILINE, HTAPICALL, uint32, uintptr, uintptr, uintptr).
+// LINEEVENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HTAPILINE, HTAPICALL, uint32, uintptr, uintptr, uintptr) uintptr.
 type LINEEVENT uintptr
 
-// LPGETTNEFSTREAMCODEPAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IStream, *uint32, *uint32) foundation.HRESULT.
+// LPGETTNEFSTREAMCODEPAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IStream, *uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPGETTNEFSTREAMCODEPAGE uintptr
 
-// LPOPENTNEFSTREAM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *systemcom.IStream, *int8, uint32, *systemaddressbook.IMessage, uint16, **ITnef) foundation.HRESULT.
+// LPOPENTNEFSTREAM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *systemcom.IStream, *int8, uint32, *systemaddressbook.IMessage, uint16, **ITnef) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPOPENTNEFSTREAM uintptr
 
-// LPOPENTNEFSTREAMEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *systemcom.IStream, *int8, uint32, *systemaddressbook.IMessage, uint16, *systemaddressbook.IAddrBook, **ITnef) foundation.HRESULT.
+// LPOPENTNEFSTREAMEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *systemcom.IStream, *int8, uint32, *systemaddressbook.IMessage, uint16, *systemaddressbook.IAddrBook, **ITnef) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPOPENTNEFSTREAMEX uintptr
 
-// PHONECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uintptr, uintptr, uintptr, uintptr).
+// PHONECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uintptr, uintptr, uintptr, uintptr) uintptr.
 type PHONECALLBACK uintptr
 
-// PHONEEVENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HTAPIPHONE, uint32, uintptr, uintptr, uintptr).
+// PHONEEVENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HTAPIPHONE, uint32, uintptr, uintptr, uintptr) uintptr.
 type PHONEEVENT uintptr
 
-// TUISPIDLLCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer, uint32) int32.
+// TUISPIDLLCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type TUISPIDLLCALLBACK uintptr

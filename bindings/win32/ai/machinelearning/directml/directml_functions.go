@@ -21,6 +21,18 @@ var (
 	procDMLCreateDevice1 = modDirectML.NewProc("DMLCreateDevice1")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DMLCreateDevice  *win32.Proc
+	DMLCreateDevice1 *win32.Proc
+}{
+	DMLCreateDevice:  procDMLCreateDevice,
+	DMLCreateDevice1: procDMLCreateDevice1,
+}
+
 // DMLCreateDevice calls DirectML!DMLCreateDevice.
 // https://learn.microsoft.com/windows/win32/api/directml/nf-directml-dmlcreatedevice
 // Minimum OS: windows10.0.10240.

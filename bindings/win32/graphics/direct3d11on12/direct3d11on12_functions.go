@@ -22,6 +22,16 @@ var (
 	procD3D11On12CreateDevice = modd3d11.NewProc("D3D11On12CreateDevice")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	D3D11On12CreateDevice *win32.Proc
+}{
+	D3D11On12CreateDevice: procD3D11On12CreateDevice,
+}
+
 // D3D11On12CreateDevice calls d3d11!D3D11On12CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d3d11on12/nf-d3d11on12-d3d11on12createdevice
 func D3D11On12CreateDevice(pDevice *systemcom.IUnknown, Flags uint32, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, ppCommandQueues []*systemcom.IUnknown, NodeMask uint32, ppDevice **graphicsdirect3d11.ID3D11Device, ppImmediateContext **graphicsdirect3d11.ID3D11DeviceContext, pChosenFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL) error {

@@ -5,6 +5,7 @@
 package tabletpc
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -315,6 +316,14 @@ func (self *IInkCollector) Get_DesiredPacketDescription(PacketGuids *systemvaria
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkCollector_Put_DesiredPacketDescription = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_DesiredPacketDescription dispatches through IInkCollector's vtable slot 25.
+func (self *IInkCollector) Put_DesiredPacketDescription(PacketGuids systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIInkCollector_Put_DesiredPacketDescription, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&PacketGuids))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_MouseIcon dispatches through IInkCollector's vtable slot 26.
 func (self *IInkCollector) Get_MouseIcon(MouseIcon **systemole.IPictureDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MouseIcon)))
@@ -540,6 +549,14 @@ func (self *IInkCursorButtons) Get__NewEnum(_NewEnum **systemcom.IUnknown) error
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkCursorButtons_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through IInkCursorButtons's vtable slot 9.
+func (self *IInkCursorButtons) Item(Identifier systemvariant.VARIANT, Button **IInkCursorButton) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIInkCursorButtons_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Identifier)), uintptr(unsafe.Pointer(Button))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IInkCursors: https://learn.microsoft.com/windows/win32/api/msinkaut/nn-msinkaut-iinkcursors
 // IID: a248c1ac-c698-4e06-9e5c-d57f77c7e647
 type IInkCursors struct {
@@ -588,9 +605,25 @@ func (self *IInkCustomStrokes) Get__NewEnum(_NewEnum **systemcom.IUnknown) error
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkCustomStrokes_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through IInkCustomStrokes's vtable slot 9.
+func (self *IInkCustomStrokes) Item(Identifier systemvariant.VARIANT, Strokes **IInkStrokes) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIInkCustomStrokes_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Identifier)), uintptr(unsafe.Pointer(Strokes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through IInkCustomStrokes's vtable slot 10.
 func (self *IInkCustomStrokes) Add(Name foundation.BSTR, Strokes *IInkStrokes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(Strokes)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkCustomStrokes_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IInkCustomStrokes's vtable slot 11.
+func (self *IInkCustomStrokes) Remove(Identifier systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIInkCustomStrokes_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Identifier))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -681,9 +714,41 @@ func (self *IInkDisp) Clone(NewInk **IInkDisp) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkDisp_HitTestCircle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// HitTestCircle dispatches through IInkDisp's vtable slot 19.
+func (self *IInkDisp) HitTestCircle(X int32, Y int32, radius float32, Strokes **IInkStrokes) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIInkDisp_HitTestCircle, nil, uintptr(unsafe.Pointer(self)), uintptr(X), uintptr(Y), uintptr(math.Float32bits(radius)), uintptr(unsafe.Pointer(Strokes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkDisp_HitTestWithRectangle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// HitTestWithRectangle dispatches through IInkDisp's vtable slot 20.
+func (self *IInkDisp) HitTestWithRectangle(SelectionRectangle *IInkRectangle, IntersectPercent float32, Strokes **IInkStrokes) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIInkDisp_HitTestWithRectangle, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SelectionRectangle)), uintptr(math.Float32bits(IntersectPercent)), uintptr(unsafe.Pointer(Strokes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkDisp_HitTestWithLasso = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Float32, win32.Word, win32.Word}}
+
+// HitTestWithLasso dispatches through IInkDisp's vtable slot 21.
+func (self *IInkDisp) HitTestWithLasso(Points systemvariant.VARIANT, IntersectPercent float32, LassoPoints *systemvariant.VARIANT, Strokes **IInkStrokes) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIInkDisp_HitTestWithLasso, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Points)), uintptr(math.Float32bits(IntersectPercent)), uintptr(unsafe.Pointer(LassoPoints)), uintptr(unsafe.Pointer(Strokes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // NearestPoint dispatches through IInkDisp's vtable slot 22.
 func (self *IInkDisp) NearestPoint(X int32, Y int32, PointOnStroke *float32, DistanceFromPacket *float32, Stroke **IInkStrokeDisp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(X), uintptr(Y), uintptr(unsafe.Pointer(PointOnStroke)), uintptr(unsafe.Pointer(DistanceFromPacket)), uintptr(unsafe.Pointer(Stroke)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkDisp_CreateStrokes = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateStrokes dispatches through IInkDisp's vtable slot 23.
+func (self *IInkDisp) CreateStrokes(StrokeIds systemvariant.VARIANT, Strokes **IInkStrokes) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIInkDisp_CreateStrokes, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&StrokeIds)), uintptr(unsafe.Pointer(Strokes))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -696,6 +761,22 @@ func (self *IInkDisp) AddStrokesAtRectangle(SourceStrokes *IInkStrokes, TargetRe
 // Save dispatches through IInkDisp's vtable slot 25.
 func (self *IInkDisp) Save(PersistenceFormat InkPersistenceFormat, CompressionMode InkPersistenceCompressionMode, Data *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(PersistenceFormat), uintptr(CompressionMode), uintptr(unsafe.Pointer(Data)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkDisp_Load = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Load dispatches through IInkDisp's vtable slot 26.
+func (self *IInkDisp) Load(Data systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIInkDisp_Load, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Data))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkDisp_CreateStroke = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateStroke dispatches through IInkDisp's vtable slot 27.
+func (self *IInkDisp) CreateStroke(PacketData systemvariant.VARIANT, PacketDescription systemvariant.VARIANT, Stroke **IInkStrokeDisp) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIInkDisp_CreateStroke, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&PacketData)), uintptr(unsafe.Pointer(&PacketDescription)), uintptr(unsafe.Pointer(Stroke))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -882,9 +963,25 @@ func (self *IInkDrawingAttributes) Get_Width(CurrentWidth *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkDrawingAttributes_Put_Width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_Width dispatches through IInkDrawingAttributes's vtable slot 10.
+func (self *IInkDrawingAttributes) Put_Width(NewWidth float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIInkDrawingAttributes_Put_Width, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(NewWidth))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Height dispatches through IInkDrawingAttributes's vtable slot 11.
 func (self *IInkDrawingAttributes) Get_Height(CurrentHeight *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentHeight)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkDrawingAttributes_Put_Height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_Height dispatches through IInkDrawingAttributes's vtable slot 12.
+func (self *IInkDrawingAttributes) Put_Height(NewHeight float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIInkDrawingAttributes_Put_Height, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(NewHeight))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1074,6 +1171,14 @@ func (self *IInkEdit) Put_Factoid(newVal foundation.BSTR) error {
 // Get_SelInks dispatches through IInkEdit's vtable slot 22.
 func (self *IInkEdit) Get_SelInks(pSelInk *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSelInk)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkEdit_Put_SelInks = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SelInks dispatches through IInkEdit's vtable slot 23.
+func (self *IInkEdit) Put_SelInks(SelInk systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIInkEdit_Put_SelInks, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SelInk))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1281,9 +1386,25 @@ func (self *IInkEdit) Get_SelAlignment(pvarSelAlignment *systemvariant.VARIANT) 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkEdit_Put_SelAlignment = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SelAlignment dispatches through IInkEdit's vtable slot 58.
+func (self *IInkEdit) Put_SelAlignment(pvarSelAlignment systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIInkEdit_Put_SelAlignment, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pvarSelAlignment))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SelBold dispatches through IInkEdit's vtable slot 59.
 func (self *IInkEdit) Get_SelBold(pvarSelBold *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelBold)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkEdit_Put_SelBold = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SelBold dispatches through IInkEdit's vtable slot 60.
+func (self *IInkEdit) Put_SelBold(pvarSelBold systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[60], specIInkEdit_Put_SelBold, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pvarSelBold))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1293,9 +1414,25 @@ func (self *IInkEdit) Get_SelItalic(pvarSelItalic *systemvariant.VARIANT) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkEdit_Put_SelItalic = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SelItalic dispatches through IInkEdit's vtable slot 62.
+func (self *IInkEdit) Put_SelItalic(pvarSelItalic systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[62], specIInkEdit_Put_SelItalic, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pvarSelItalic))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SelUnderline dispatches through IInkEdit's vtable slot 63.
 func (self *IInkEdit) Get_SelUnderline(pvarSelUnderline *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelUnderline)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkEdit_Put_SelUnderline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SelUnderline dispatches through IInkEdit's vtable slot 64.
+func (self *IInkEdit) Put_SelUnderline(pvarSelUnderline systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[64], specIInkEdit_Put_SelUnderline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pvarSelUnderline))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1305,9 +1442,25 @@ func (self *IInkEdit) Get_SelColor(pvarSelColor *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkEdit_Put_SelColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SelColor dispatches through IInkEdit's vtable slot 66.
+func (self *IInkEdit) Put_SelColor(pvarSelColor systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[66], specIInkEdit_Put_SelColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pvarSelColor))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SelFontName dispatches through IInkEdit's vtable slot 67.
 func (self *IInkEdit) Get_SelFontName(pvarSelFontName *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelFontName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkEdit_Put_SelFontName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SelFontName dispatches through IInkEdit's vtable slot 68.
+func (self *IInkEdit) Put_SelFontName(pvarSelFontName systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[68], specIInkEdit_Put_SelFontName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pvarSelFontName))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1317,9 +1470,25 @@ func (self *IInkEdit) Get_SelFontSize(pvarSelFontSize *systemvariant.VARIANT) er
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkEdit_Put_SelFontSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SelFontSize dispatches through IInkEdit's vtable slot 70.
+func (self *IInkEdit) Put_SelFontSize(pvarSelFontSize systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[70], specIInkEdit_Put_SelFontSize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pvarSelFontSize))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SelCharOffset dispatches through IInkEdit's vtable slot 71.
 func (self *IInkEdit) Get_SelCharOffset(pvarSelCharOffset *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSelCharOffset)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkEdit_Put_SelCharOffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SelCharOffset dispatches through IInkEdit's vtable slot 72.
+func (self *IInkEdit) Put_SelCharOffset(pvarSelCharOffset systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[72], specIInkEdit_Put_SelCharOffset, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pvarSelCharOffset))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1410,6 +1579,30 @@ func (self *IInkExtendedProperties) Get__NewEnum(_NewEnum **systemcom.IUnknown) 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkExtendedProperties_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through IInkExtendedProperties's vtable slot 9.
+func (self *IInkExtendedProperties) Item(Identifier systemvariant.VARIANT, Item **IInkExtendedProperty) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIInkExtendedProperties_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Identifier)), uintptr(unsafe.Pointer(Item))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkExtendedProperties_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Add dispatches through IInkExtendedProperties's vtable slot 10.
+func (self *IInkExtendedProperties) Add(Guid foundation.BSTR, Data systemvariant.VARIANT, InkExtendedProperty **IInkExtendedProperty) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIInkExtendedProperties_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Guid)), uintptr(unsafe.Pointer(&Data)), uintptr(unsafe.Pointer(InkExtendedProperty))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkExtendedProperties_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IInkExtendedProperties's vtable slot 11.
+func (self *IInkExtendedProperties) Remove(Identifier systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIInkExtendedProperties_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Identifier))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Clear dispatches through IInkExtendedProperties's vtable slot 12.
 func (self *IInkExtendedProperties) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
@@ -1440,6 +1633,14 @@ func (self *IInkExtendedProperty) Get_Guid(Guid *foundation.BSTR) error {
 // Get_Data dispatches through IInkExtendedProperty's vtable slot 8.
 func (self *IInkExtendedProperty) Get_Data(Data *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Data)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkExtendedProperty_Put_Data = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Data dispatches through IInkExtendedProperty's vtable slot 9.
+func (self *IInkExtendedProperty) Put_Data(Data systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIInkExtendedProperty_Put_Data, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Data))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1631,6 +1832,14 @@ func (self *IInkOverlay) Put_DynamicRendering(Enabled foundation.VARIANT_BOOL) e
 // Get_DesiredPacketDescription dispatches through IInkOverlay's vtable slot 24.
 func (self *IInkOverlay) Get_DesiredPacketDescription(PacketGuids *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PacketGuids)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkOverlay_Put_DesiredPacketDescription = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_DesiredPacketDescription dispatches through IInkOverlay's vtable slot 25.
+func (self *IInkOverlay) Put_DesiredPacketDescription(PacketGuids systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIInkOverlay_Put_DesiredPacketDescription, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&PacketGuids))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1940,6 +2149,14 @@ func (self *IInkPicture) Put_DynamicRendering(Enabled foundation.VARIANT_BOOL) e
 // Get_DesiredPacketDescription dispatches through IInkPicture's vtable slot 21.
 func (self *IInkPicture) Get_DesiredPacketDescription(PacketGuids *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PacketGuids)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkPicture_Put_DesiredPacketDescription = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_DesiredPacketDescription dispatches through IInkPicture's vtable slot 22.
+func (self *IInkPicture) Put_DesiredPacketDescription(PacketGuids systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIInkPicture_Put_DesiredPacketDescription, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&PacketGuids))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2585,6 +2802,22 @@ func (self *IInkRecognizerContext) EndInkInput() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkRecognizerContext_BackgroundRecognize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// BackgroundRecognize dispatches through IInkRecognizerContext's vtable slot 27.
+func (self *IInkRecognizerContext) BackgroundRecognize(CustomData systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIInkRecognizerContext_BackgroundRecognize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&CustomData))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkRecognizerContext_BackgroundRecognizeWithAlternates = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// BackgroundRecognizeWithAlternates dispatches through IInkRecognizerContext's vtable slot 28.
+func (self *IInkRecognizerContext) BackgroundRecognizeWithAlternates(CustomData systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIInkRecognizerContext_BackgroundRecognizeWithAlternates, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&CustomData))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Clone dispatches through IInkRecognizerContext's vtable slot 29.
 func (self *IInkRecognizerContext) Clone(RecoContext **IInkRecognizerContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecoContext)))
@@ -2609,6 +2842,14 @@ var IID_IInkRecognizerContext2 = win32.GUID{Data1: 0xd6f0e32f, Data2: 0x73d8, Da
 // Get_EnabledUnicodeRanges dispatches through IInkRecognizerContext2's vtable slot 7.
 func (self *IInkRecognizerContext2) Get_EnabledUnicodeRanges(UnicodeRanges *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UnicodeRanges)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkRecognizerContext2_Put_EnabledUnicodeRanges = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_EnabledUnicodeRanges dispatches through IInkRecognizerContext2's vtable slot 8.
+func (self *IInkRecognizerContext2) Put_EnabledUnicodeRanges(UnicodeRanges systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIInkRecognizerContext2_Put_EnabledUnicodeRanges, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&UnicodeRanges))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2684,6 +2925,14 @@ func (self *IInkRecognizerGuide) Put_Midline(Units int32) error {
 // Get_GuideData dispatches through IInkRecognizerGuide's vtable slot 17.
 func (self *IInkRecognizerGuide) Get_GuideData(pRecoGuide *InkRecoGuide) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRecoGuide)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkRecognizerGuide_Put_GuideData = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(44, 4, 0, false)}}
+
+// Put_GuideData dispatches through IInkRecognizerGuide's vtable slot 18.
+func (self *IInkRecognizerGuide) Put_GuideData(recoGuide InkRecoGuide) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIInkRecognizerGuide_Put_GuideData, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&recoGuide))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2783,6 +3032,14 @@ func (self *IInkRectangle) Get_Data(Rect *foundation.RECT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkRectangle_Put_Data = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Put_Data dispatches through IInkRectangle's vtable slot 16.
+func (self *IInkRectangle) Put_Data(Rect foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIInkRectangle_Put_Data, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Rect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetRectangle dispatches through IInkRectangle's vtable slot 17.
 func (self *IInkRectangle) GetRectangle(Top *int32, Left *int32, Bottom *int32, Right *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Top)), uintptr(unsafe.Pointer(Left)), uintptr(unsafe.Pointer(Bottom)), uintptr(unsafe.Pointer(Right)))
@@ -2873,6 +3130,30 @@ func (self *IInkRenderer) Measure(Strokes *IInkStrokes, Rectangle **IInkRectangl
 // MeasureStroke dispatches through IInkRenderer's vtable slot 18.
 func (self *IInkRenderer) MeasureStroke(Stroke *IInkStrokeDisp, DrawingAttributes *IInkDrawingAttributes, Rectangle **IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Stroke)), uintptr(unsafe.Pointer(DrawingAttributes)), uintptr(unsafe.Pointer(Rectangle)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkRenderer_Move = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// Move dispatches through IInkRenderer's vtable slot 19.
+func (self *IInkRenderer) Move(HorizontalComponent float32, VerticalComponent float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIInkRenderer_Move, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalComponent)), uintptr(math.Float32bits(VerticalComponent))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkRenderer_Rotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// Rotate dispatches through IInkRenderer's vtable slot 20.
+func (self *IInkRenderer) Rotate(Degrees float32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIInkRenderer_Rotate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Degrees)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkRenderer_ScaleTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// ScaleTransform dispatches through IInkRenderer's vtable slot 21.
+func (self *IInkRenderer) ScaleTransform(HorizontalMultiplier float32, VerticalMultiplier float32, ApplyOnPenWidth foundation.VARIANT_BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIInkRenderer_ScaleTransform, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalMultiplier)), uintptr(math.Float32bits(VerticalMultiplier)), uintptr(ApplyOnPenWidth)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2987,9 +3268,25 @@ func (self *IInkStrokeDisp) Clip(Rectangle *IInkRectangle) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkStrokeDisp_HitTestCircle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// HitTestCircle dispatches through IInkStrokeDisp's vtable slot 24.
+func (self *IInkStrokeDisp) HitTestCircle(X int32, Y int32, Radius float32, Intersects *foundation.VARIANT_BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIInkStrokeDisp_HitTestCircle, nil, uintptr(unsafe.Pointer(self)), uintptr(X), uintptr(Y), uintptr(math.Float32bits(Radius)), uintptr(unsafe.Pointer(Intersects))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // NearestPoint dispatches through IInkStrokeDisp's vtable slot 25.
 func (self *IInkStrokeDisp) NearestPoint(X int32, Y int32, Distance *float32, Point *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(X), uintptr(Y), uintptr(unsafe.Pointer(Distance)), uintptr(unsafe.Pointer(Point)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokeDisp_Split = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// Split dispatches through IInkStrokeDisp's vtable slot 26.
+func (self *IInkStrokeDisp) Split(SplitAt float32, NewStroke **IInkStrokeDisp) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIInkStrokeDisp_Split, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(SplitAt)), uintptr(unsafe.Pointer(NewStroke))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3005,6 +3302,14 @@ func (self *IInkStrokeDisp) GetPoints(Index int32, Count int32, Points *systemva
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkStrokeDisp_SetPoints = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// SetPoints dispatches through IInkStrokeDisp's vtable slot 29.
+func (self *IInkStrokeDisp) SetPoints(Points systemvariant.VARIANT, Index int32, Count int32, NumberOfPointsSet *int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIInkStrokeDisp_SetPoints, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Points)), uintptr(Index), uintptr(Count), uintptr(unsafe.Pointer(NumberOfPointsSet))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetPacketData dispatches through IInkStrokeDisp's vtable slot 30.
 func (self *IInkStrokeDisp) GetPacketData(Index int32, Count int32, PacketData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Count), uintptr(unsafe.Pointer(PacketData)))
@@ -3014,6 +3319,14 @@ func (self *IInkStrokeDisp) GetPacketData(Index int32, Count int32, PacketData *
 // GetPacketValuesByProperty dispatches through IInkStrokeDisp's vtable slot 31.
 func (self *IInkStrokeDisp) GetPacketValuesByProperty(PropertyName foundation.BSTR, Index int32, Count int32, PacketValues *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)), uintptr(Index), uintptr(Count), uintptr(unsafe.Pointer(PacketValues)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokeDisp_SetPacketValuesByProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// SetPacketValuesByProperty dispatches through IInkStrokeDisp's vtable slot 32.
+func (self *IInkStrokeDisp) SetPacketValuesByProperty(bstrPropertyName foundation.BSTR, PacketValues systemvariant.VARIANT, Index int32, Count int32, NumberOfPacketsSet *int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIInkStrokeDisp_SetPacketValuesByProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropertyName)), uintptr(unsafe.Pointer(&PacketValues)), uintptr(Index), uintptr(Count), uintptr(unsafe.Pointer(NumberOfPacketsSet))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3032,6 +3345,38 @@ func (self *IInkStrokeDisp) Transform(Transform *IInkTransform, ApplyOnPenWidth 
 // ScaleToRectangle dispatches through IInkStrokeDisp's vtable slot 35.
 func (self *IInkStrokeDisp) ScaleToRectangle(Rectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokeDisp_Move = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// Move dispatches through IInkStrokeDisp's vtable slot 36.
+func (self *IInkStrokeDisp) Move(HorizontalComponent float32, VerticalComponent float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIInkStrokeDisp_Move, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalComponent)), uintptr(math.Float32bits(VerticalComponent))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokeDisp_Rotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// Rotate dispatches through IInkStrokeDisp's vtable slot 37.
+func (self *IInkStrokeDisp) Rotate(Degrees float32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIInkStrokeDisp_Rotate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Degrees)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokeDisp_Shear = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// Shear dispatches through IInkStrokeDisp's vtable slot 38.
+func (self *IInkStrokeDisp) Shear(HorizontalMultiplier float32, VerticalMultiplier float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIInkStrokeDisp_Shear, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalMultiplier)), uintptr(math.Float32bits(VerticalMultiplier))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokeDisp_ScaleTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// ScaleTransform dispatches through IInkStrokeDisp's vtable slot 39.
+func (self *IInkStrokeDisp) ScaleTransform(HorizontalMultiplier float32, VerticalMultiplier float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIInkStrokeDisp_ScaleTransform, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalMultiplier)), uintptr(math.Float32bits(VerticalMultiplier))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3125,6 +3470,38 @@ func (self *IInkStrokes) Transform(Transform *IInkTransform, ApplyOnPenWidth fou
 // ScaleToRectangle dispatches through IInkStrokes's vtable slot 20.
 func (self *IInkStrokes) ScaleToRectangle(Rectangle *IInkRectangle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rectangle)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokes_Move = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// Move dispatches through IInkStrokes's vtable slot 21.
+func (self *IInkStrokes) Move(HorizontalComponent float32, VerticalComponent float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIInkStrokes_Move, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalComponent)), uintptr(math.Float32bits(VerticalComponent))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokes_Rotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// Rotate dispatches through IInkStrokes's vtable slot 22.
+func (self *IInkStrokes) Rotate(Degrees float32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIInkStrokes_Rotate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Degrees)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokes_Shear = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// Shear dispatches through IInkStrokes's vtable slot 23.
+func (self *IInkStrokes) Shear(HorizontalMultiplier float32, VerticalMultiplier float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIInkStrokes_Shear, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalMultiplier)), uintptr(math.Float32bits(VerticalMultiplier))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkStrokes_ScaleTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// ScaleTransform dispatches through IInkStrokes's vtable slot 24.
+func (self *IInkStrokes) ScaleTransform(HorizontalMultiplier float32, VerticalMultiplier float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIInkStrokes_ScaleTransform, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalMultiplier)), uintptr(math.Float32bits(VerticalMultiplier))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3275,9 +3652,41 @@ func (self *IInkTransform) Reset() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkTransform_Translate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// Translate dispatches through IInkTransform's vtable slot 8.
+func (self *IInkTransform) Translate(HorizontalComponent float32, VerticalComponent float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIInkTransform_Translate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalComponent)), uintptr(math.Float32bits(VerticalComponent))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkTransform_Rotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// Rotate dispatches through IInkTransform's vtable slot 9.
+func (self *IInkTransform) Rotate(Degrees float32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIInkTransform_Rotate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Degrees)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Reflect dispatches through IInkTransform's vtable slot 10.
 func (self *IInkTransform) Reflect(Horizontally foundation.VARIANT_BOOL, Vertically foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Horizontally), uintptr(Vertically))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkTransform_Shear = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// Shear dispatches through IInkTransform's vtable slot 11.
+func (self *IInkTransform) Shear(HorizontalComponent float32, VerticalComponent float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIInkTransform_Shear, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalComponent)), uintptr(math.Float32bits(VerticalComponent))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkTransform_ScaleTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// ScaleTransform dispatches through IInkTransform's vtable slot 12.
+func (self *IInkTransform) ScaleTransform(HorizontalMultiplier float32, VerticalMultiplier float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIInkTransform_ScaleTransform, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(HorizontalMultiplier)), uintptr(math.Float32bits(VerticalMultiplier))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3287,9 +3696,25 @@ func (self *IInkTransform) GetTransform(eM11 *float32, eM12 *float32, eM21 *floa
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkTransform_SetTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetTransform dispatches through IInkTransform's vtable slot 14.
+func (self *IInkTransform) SetTransform(eM11 float32, eM12 float32, eM21 float32, eM22 float32, eDx float32, eDy float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIInkTransform_SetTransform, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(eM11)), uintptr(math.Float32bits(eM12)), uintptr(math.Float32bits(eM21)), uintptr(math.Float32bits(eM22)), uintptr(math.Float32bits(eDx)), uintptr(math.Float32bits(eDy))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_eM11 dispatches through IInkTransform's vtable slot 15.
 func (self *IInkTransform) Get_eM11(Value *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkTransform_Put_eM11 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_eM11 dispatches through IInkTransform's vtable slot 16.
+func (self *IInkTransform) Put_eM11(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIInkTransform_Put_eM11, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3299,9 +3724,25 @@ func (self *IInkTransform) Get_eM12(Value *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkTransform_Put_eM12 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_eM12 dispatches through IInkTransform's vtable slot 18.
+func (self *IInkTransform) Put_eM12(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIInkTransform_Put_eM12, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_eM21 dispatches through IInkTransform's vtable slot 19.
 func (self *IInkTransform) Get_eM21(Value *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkTransform_Put_eM21 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_eM21 dispatches through IInkTransform's vtable slot 20.
+func (self *IInkTransform) Put_eM21(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIInkTransform_Put_eM21, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3311,9 +3752,25 @@ func (self *IInkTransform) Get_eM22(Value *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkTransform_Put_eM22 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_eM22 dispatches through IInkTransform's vtable slot 22.
+func (self *IInkTransform) Put_eM22(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIInkTransform_Put_eM22, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_eDx dispatches through IInkTransform's vtable slot 23.
 func (self *IInkTransform) Get_eDx(Value *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkTransform_Put_eDx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_eDx dispatches through IInkTransform's vtable slot 24.
+func (self *IInkTransform) Put_eDx(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIInkTransform_Put_eDx, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3323,9 +3780,25 @@ func (self *IInkTransform) Get_eDy(Value *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkTransform_Put_eDy = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_eDy dispatches through IInkTransform's vtable slot 26.
+func (self *IInkTransform) Put_eDy(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIInkTransform_Put_eDy, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Data dispatches through IInkTransform's vtable slot 27.
 func (self *IInkTransform) Get_Data(XForm *graphicsgdi.XFORM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(XForm)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkTransform_Put_Data = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 4, 0, false)}}
+
+// Put_Data dispatches through IInkTransform's vtable slot 28.
+func (self *IInkTransform) Put_Data(XForm graphicsgdi.XFORM) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIInkTransform_Put_Data, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&XForm))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3960,6 +4433,34 @@ type IStrokeBuilder struct {
 // IID_IStrokeBuilder is the interface identifier for IStrokeBuilder.
 var IID_IStrokeBuilder = win32.GUID{Data1: 0xa5fd4e2d, Data2: 0xc44b, Data3: 0x4092, Data4: [8]byte{0x91, 0x77, 0x26, 0x09, 0x05, 0xeb, 0x67, 0x2b}}
 
+var specIStrokeBuilder_CreateStroke = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateStroke dispatches through IStrokeBuilder's vtable slot 3.
+func (self *IStrokeBuilder) CreateStroke(pPackets []int32, pPacketProperties []PACKET_PROPERTY, fInkToDeviceScaleX float32, fInkToDeviceScaleY float32, ppIInkStroke **IInkStrokeDisp) error {
+	var _pPackets *int32
+	if len(pPackets) > 0 {
+		_pPackets = &pPackets[0]
+	}
+	var _pPacketProperties *PACKET_PROPERTY
+	if len(pPacketProperties) > 0 {
+		_pPacketProperties = &pPacketProperties[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIStrokeBuilder_CreateStroke, nil, uintptr(unsafe.Pointer(self)), uintptr(len(pPackets)), uintptr(unsafe.Pointer(_pPackets)), uintptr(len(pPacketProperties)), uintptr(unsafe.Pointer(_pPacketProperties)), uintptr(math.Float32bits(fInkToDeviceScaleX)), uintptr(math.Float32bits(fInkToDeviceScaleY)), uintptr(unsafe.Pointer(ppIInkStroke))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIStrokeBuilder_BeginStroke = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// BeginStroke dispatches through IStrokeBuilder's vtable slot 4.
+func (self *IStrokeBuilder) BeginStroke(tcid uint32, sid uint32, pPacket *int32, pPacketProperties []PACKET_PROPERTY, fInkToDeviceScaleX float32, fInkToDeviceScaleY float32, ppIInkStroke **IInkStrokeDisp) error {
+	var _pPacketProperties *PACKET_PROPERTY
+	if len(pPacketProperties) > 0 {
+		_pPacketProperties = &pPacketProperties[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIStrokeBuilder_BeginStroke, nil, uintptr(unsafe.Pointer(self)), uintptr(tcid), uintptr(sid), uintptr(unsafe.Pointer(pPacket)), uintptr(len(pPacketProperties)), uintptr(unsafe.Pointer(_pPacketProperties)), uintptr(math.Float32bits(fInkToDeviceScaleX)), uintptr(math.Float32bits(fInkToDeviceScaleY)), uintptr(unsafe.Pointer(ppIInkStroke))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AppendPackets dispatches through IStrokeBuilder's vtable slot 5.
 func (self *IStrokeBuilder) AppendPackets(tcid uint32, sid uint32, pPackets []int32) error {
 	var _pPackets *int32
@@ -4097,6 +4598,14 @@ func (self *IStylusPlugin) CustomStylusDataAdded(piRtsSrc *IRealTimeStylus, pGui
 		_pbData = &pbData[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pGuidId)), uintptr(len(pbData)), uintptr(unsafe.Pointer(_pbData)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIStylusPlugin_SystemEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(20, 4, 0, false)}}
+
+// SystemEvent dispatches through IStylusPlugin's vtable slot 14.
+func (self *IStylusPlugin) SystemEvent(piRtsSrc *IRealTimeStylus, tcid uint32, sid uint32, event uint16, eventdata SYSTEM_EVENT_DATA) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIStylusPlugin_SystemEvent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(tcid), uintptr(sid), uintptr(event), uintptr(unsafe.Pointer(&eventdata))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4319,6 +4828,22 @@ func (self *ITextInputPanelEventSink) InPlaceStateChanging(oldInPlaceState InPla
 // InPlaceStateChanged dispatches through ITextInputPanelEventSink's vtable slot 4.
 func (self *ITextInputPanelEventSink) InPlaceStateChanged(oldInPlaceState InPlaceState, newInPlaceState InPlaceState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(oldInPlaceState), uintptr(newInPlaceState))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextInputPanelEventSink_InPlaceSizeChanging = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// InPlaceSizeChanging dispatches through ITextInputPanelEventSink's vtable slot 5.
+func (self *ITextInputPanelEventSink) InPlaceSizeChanging(oldBoundingRectangle foundation.RECT, newBoundingRectangle foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specITextInputPanelEventSink_InPlaceSizeChanging, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&oldBoundingRectangle)), uintptr(unsafe.Pointer(&newBoundingRectangle))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextInputPanelEventSink_InPlaceSizeChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// InPlaceSizeChanged dispatches through ITextInputPanelEventSink's vtable slot 6.
+func (self *ITextInputPanelEventSink) InPlaceSizeChanged(oldBoundingRectangle foundation.RECT, newBoundingRectangle foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specITextInputPanelEventSink_InPlaceSizeChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&oldBoundingRectangle)), uintptr(unsafe.Pointer(&newBoundingRectangle))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

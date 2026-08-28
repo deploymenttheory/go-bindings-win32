@@ -24,15 +24,24 @@ jobs:
       - name: Build
         run: go build ./...
 
-      # Generated syscall wrappers trip vet's unsafe.Pointer heuristic by
-      # design; vet everything hand-written instead.
-      - name: Vet (non-generated packages)
-        run: go vet ./cmd/... ./internal/... ./acceptance/ ./bindings/runtime/...
+      - name: Vet (hand-written packages)
+        run: go vet ./cmd/... ./internal/... ./acceptance/... ./bindings/runtime/...
+
+      # The generated tree gets every vet check except the two that are wrong
+      # by design here: unsafeptr (uintptr(unsafe.Pointer(p)) in SyscallN
+      # argument lists is the sanctioned keepalive pattern) and stdmethods
+      # (COM vtable methods such as IStream.Seek do not match io.Seeker).
+      - name: Vet (generated bindings)
+        run: go vet -unsafeptr=false -stdmethods=false ./bindings/win32/...
 
       # amd64 and arm64 share Win32's LLP64 layout, so the same bindings must
       # compile for both; 386 is deliberately excluded by build constraints.
-      - name: Cross-compile for windows/arm64
-        run: go build ./bindings/...
+      - name: Cross-compile for windows/arm64 (bindings, runtime asm, acceptance tests)
+        run: |
+          go build ./bindings/...
+          go test -c -o NUL ./acceptance/
+          go test -c -o NUL ./acceptance/abi/
+          go test -c -o NUL ./bindings/runtime/win32/
         env:
           GOOS: windows
           GOARCH: arm64
@@ -41,7 +50,24 @@ jobs:
         run: go test ./internal/...
 
       - name: Acceptance tests (live Win32 calls + ABI layout gate)
-        run: go test ./acceptance/
+        run: go test ./acceptance/...
+
+  # The register-aware call path has an arm64 assembly trampoline that the
+  # amd64 job can only assemble, not execute. GitHub's hosted Windows-on-ARM
+  # runner runs the runtime tests and the live acceptance suite for real.
+  acceptance-arm64:
+    name: Acceptance (windows/arm64)
+    runs-on: windows-11-arm
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Runtime and acceptance tests on arm64
+        run: go test ./bindings/runtime/... ./acceptance/...
 
   regen:
     name: Regeneration determinism gate
@@ -62,8 +88,8 @@ jobs:
 
       # One command clears and re-emits the single idiomatic-shaped bindings
       # tree, and enforces the diagnostics ratchet.
-      - name: Regenerate bindings with ratchet
-        run: go run ./cmd/generate bindings --diagnostics-baseline metadata/diagnostics-baseline.json
+      - name: Regenerate bindings with ratchet and the coverage report
+        run: go run ./cmd/generate bindings --diagnostics-baseline metadata/diagnostics-baseline.json --coverage docs/COVERAGE.md
 
       - name: Regenerate the ABI acceptance test
         run: go run ./cmd/generate abitest
@@ -71,5 +97,5 @@ jobs:
       - name: Generated output must match the committed tree
         shell: bash
         run: |
-          git add -N bindings acceptance
-          git diff --exit-code --stat -- bindings acceptance
+          git add -N bindings acceptance docs/COVERAGE.md
+          git diff --exit-code --stat -- bindings acceptance docs/COVERAGE.md

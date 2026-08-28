@@ -4,18 +4,22 @@
 
 package jet
 
-// JET_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(JET_SESID, uint32, storagestructuredstorage.JET_TABLEID, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, storagestructuredstorage.JET_API_PTR) int32.
+// JET_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(JET_SESID, uint32, storagestructuredstorage.JET_TABLEID, uint32, unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, storagestructuredstorage.JET_API_PTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type JET_CALLBACK uintptr
 
-// JET_PFNDURABLECOMMITCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(JET_INSTANCE, *JET_COMMIT_ID, uint32) int32.
+// JET_PFNDURABLECOMMITCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(JET_INSTANCE, *JET_COMMIT_ID, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type JET_PFNDURABLECOMMITCALLBACK uintptr
 
-// JET_PFNREALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, uint32) unsafe.Pointer.
+// JET_PFNREALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type JET_PFNREALLOC uintptr
 
-// JET_PFNSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(JET_SESID, uint32, uint32, unsafe.Pointer) int32.
+// JET_PFNSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(JET_SESID, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type JET_PFNSTATUS uintptr

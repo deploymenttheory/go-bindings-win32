@@ -112,6 +112,194 @@ var (
 	procAuthzUnregisterSecurityEventSource                   = modAUTHZ.NewProc("AuthzUnregisterSecurityEventSource")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AuthzAccessCheck                                     *win32.Proc
+	AuthzAddSidsToContext                                *win32.Proc
+	AuthzCachedAccessCheck                               *win32.Proc
+	AuthzEnumerateSecurityEventSources                   *win32.Proc
+	AuthzEvaluateSacl                                    *win32.Proc
+	AuthzFreeAuditEvent                                  *win32.Proc
+	AuthzFreeCentralAccessPolicyCache                    *win32.Proc
+	AuthzFreeContext                                     *win32.Proc
+	AuthzFreeHandle                                      *win32.Proc
+	AuthzFreeResourceManager                             *win32.Proc
+	AuthzGetInformationFromContext                       *win32.Proc
+	AuthzInitializeCompoundContext                       *win32.Proc
+	AuthzInitializeContextFromAuthzContext               *win32.Proc
+	AuthzInitializeContextFromSid                        *win32.Proc
+	AuthzInitializeContextFromToken                      *win32.Proc
+	AuthzInitializeObjectAccessAuditEvent                *win32.Proc
+	AuthzInitializeObjectAccessAuditEvent2               *win32.Proc
+	AuthzInitializeRemoteResourceManager                 *win32.Proc
+	AuthzInitializeResourceManager                       *win32.Proc
+	AuthzInitializeResourceManagerEx                     *win32.Proc
+	AuthzInstallSecurityEventSource                      *win32.Proc
+	AuthzModifyClaims                                    *win32.Proc
+	AuthzModifySecurityAttributes                        *win32.Proc
+	AuthzModifySids                                      *win32.Proc
+	AuthzOpenObjectAudit                                 *win32.Proc
+	AuthzRegisterCapChangeNotification                   *win32.Proc
+	AuthzRegisterSecurityEventSource                     *win32.Proc
+	AuthzReportSecurityEvent                             *win32.Proc
+	AuthzReportSecurityEventFromParams                   *win32.Proc
+	AuthzSetAppContainerInformation                      *win32.Proc
+	AuthzUninstallSecurityEventSource                    *win32.Proc
+	AuthzUnregisterCapChangeNotification                 *win32.Proc
+	AuthzUnregisterSecurityEventSource                   *win32.Proc
+	BuildExplicitAccessWithName                          *win32.Proc
+	BuildExplicitAccessWithNameA                         *win32.Proc
+	BuildImpersonateExplicitAccessWithName               *win32.Proc
+	BuildImpersonateExplicitAccessWithNameA              *win32.Proc
+	BuildImpersonateTrustee                              *win32.Proc
+	BuildImpersonateTrusteeA                             *win32.Proc
+	BuildSecurityDescriptor                              *win32.Proc
+	BuildSecurityDescriptorA                             *win32.Proc
+	BuildTrusteeWithName                                 *win32.Proc
+	BuildTrusteeWithNameA                                *win32.Proc
+	BuildTrusteeWithObjectsAndName                       *win32.Proc
+	BuildTrusteeWithObjectsAndNameA                      *win32.Proc
+	BuildTrusteeWithObjectsAndSid                        *win32.Proc
+	BuildTrusteeWithObjectsAndSidA                       *win32.Proc
+	BuildTrusteeWithSid                                  *win32.Proc
+	BuildTrusteeWithSidA                                 *win32.Proc
+	ConvertSecurityDescriptorToStringSecurityDescriptor  *win32.Proc
+	ConvertSecurityDescriptorToStringSecurityDescriptorA *win32.Proc
+	ConvertSidToStringSid                                *win32.Proc
+	ConvertSidToStringSidA                               *win32.Proc
+	ConvertStringSecurityDescriptorToSecurityDescriptor  *win32.Proc
+	ConvertStringSecurityDescriptorToSecurityDescriptorA *win32.Proc
+	ConvertStringSidToSid                                *win32.Proc
+	ConvertStringSidToSidA                               *win32.Proc
+	FreeInheritedFromArray                               *win32.Proc
+	GetAuditedPermissionsFromAcl                         *win32.Proc
+	GetAuditedPermissionsFromAclA                        *win32.Proc
+	GetEffectiveRightsFromAcl                            *win32.Proc
+	GetEffectiveRightsFromAclA                           *win32.Proc
+	GetExplicitEntriesFromAcl                            *win32.Proc
+	GetExplicitEntriesFromAclA                           *win32.Proc
+	GetInheritanceSource                                 *win32.Proc
+	GetInheritanceSourceA                                *win32.Proc
+	GetMultipleTrustee                                   *win32.Proc
+	GetMultipleTrusteeA                                  *win32.Proc
+	GetMultipleTrusteeOperation                          *win32.Proc
+	GetMultipleTrusteeOperationA                         *win32.Proc
+	GetNamedSecurityInfo                                 *win32.Proc
+	GetNamedSecurityInfoA                                *win32.Proc
+	GetSecurityInfo                                      *win32.Proc
+	GetTrusteeForm                                       *win32.Proc
+	GetTrusteeFormA                                      *win32.Proc
+	GetTrusteeName                                       *win32.Proc
+	GetTrusteeNameA                                      *win32.Proc
+	GetTrusteeType                                       *win32.Proc
+	GetTrusteeTypeA                                      *win32.Proc
+	LookupSecurityDescriptorParts                        *win32.Proc
+	LookupSecurityDescriptorPartsA                       *win32.Proc
+	SetEntriesInAcl                                      *win32.Proc
+	SetEntriesInAclA                                     *win32.Proc
+	SetNamedSecurityInfo                                 *win32.Proc
+	SetNamedSecurityInfoA                                *win32.Proc
+	SetSecurityInfo                                      *win32.Proc
+	TreeResetNamedSecurityInfo                           *win32.Proc
+	TreeResetNamedSecurityInfoA                          *win32.Proc
+	TreeSetNamedSecurityInfo                             *win32.Proc
+	TreeSetNamedSecurityInfoA                            *win32.Proc
+}{
+	AuthzAccessCheck:                                     procAuthzAccessCheck,
+	AuthzAddSidsToContext:                                procAuthzAddSidsToContext,
+	AuthzCachedAccessCheck:                               procAuthzCachedAccessCheck,
+	AuthzEnumerateSecurityEventSources:                   procAuthzEnumerateSecurityEventSources,
+	AuthzEvaluateSacl:                                    procAuthzEvaluateSacl,
+	AuthzFreeAuditEvent:                                  procAuthzFreeAuditEvent,
+	AuthzFreeCentralAccessPolicyCache:                    procAuthzFreeCentralAccessPolicyCache,
+	AuthzFreeContext:                                     procAuthzFreeContext,
+	AuthzFreeHandle:                                      procAuthzFreeHandle,
+	AuthzFreeResourceManager:                             procAuthzFreeResourceManager,
+	AuthzGetInformationFromContext:                       procAuthzGetInformationFromContext,
+	AuthzInitializeCompoundContext:                       procAuthzInitializeCompoundContext,
+	AuthzInitializeContextFromAuthzContext:               procAuthzInitializeContextFromAuthzContext,
+	AuthzInitializeContextFromSid:                        procAuthzInitializeContextFromSid,
+	AuthzInitializeContextFromToken:                      procAuthzInitializeContextFromToken,
+	AuthzInitializeObjectAccessAuditEvent:                procAuthzInitializeObjectAccessAuditEvent,
+	AuthzInitializeObjectAccessAuditEvent2:               procAuthzInitializeObjectAccessAuditEvent2,
+	AuthzInitializeRemoteResourceManager:                 procAuthzInitializeRemoteResourceManager,
+	AuthzInitializeResourceManager:                       procAuthzInitializeResourceManager,
+	AuthzInitializeResourceManagerEx:                     procAuthzInitializeResourceManagerEx,
+	AuthzInstallSecurityEventSource:                      procAuthzInstallSecurityEventSource,
+	AuthzModifyClaims:                                    procAuthzModifyClaims,
+	AuthzModifySecurityAttributes:                        procAuthzModifySecurityAttributes,
+	AuthzModifySids:                                      procAuthzModifySids,
+	AuthzOpenObjectAudit:                                 procAuthzOpenObjectAudit,
+	AuthzRegisterCapChangeNotification:                   procAuthzRegisterCapChangeNotification,
+	AuthzRegisterSecurityEventSource:                     procAuthzRegisterSecurityEventSource,
+	AuthzReportSecurityEvent:                             procAuthzReportSecurityEvent,
+	AuthzReportSecurityEventFromParams:                   procAuthzReportSecurityEventFromParams,
+	AuthzSetAppContainerInformation:                      procAuthzSetAppContainerInformation,
+	AuthzUninstallSecurityEventSource:                    procAuthzUninstallSecurityEventSource,
+	AuthzUnregisterCapChangeNotification:                 procAuthzUnregisterCapChangeNotification,
+	AuthzUnregisterSecurityEventSource:                   procAuthzUnregisterSecurityEventSource,
+	BuildExplicitAccessWithName:                          procBuildExplicitAccessWithName,
+	BuildExplicitAccessWithNameA:                         procBuildExplicitAccessWithNameA,
+	BuildImpersonateExplicitAccessWithName:               procBuildImpersonateExplicitAccessWithName,
+	BuildImpersonateExplicitAccessWithNameA:              procBuildImpersonateExplicitAccessWithNameA,
+	BuildImpersonateTrustee:                              procBuildImpersonateTrustee,
+	BuildImpersonateTrusteeA:                             procBuildImpersonateTrusteeA,
+	BuildSecurityDescriptor:                              procBuildSecurityDescriptor,
+	BuildSecurityDescriptorA:                             procBuildSecurityDescriptorA,
+	BuildTrusteeWithName:                                 procBuildTrusteeWithName,
+	BuildTrusteeWithNameA:                                procBuildTrusteeWithNameA,
+	BuildTrusteeWithObjectsAndName:                       procBuildTrusteeWithObjectsAndName,
+	BuildTrusteeWithObjectsAndNameA:                      procBuildTrusteeWithObjectsAndNameA,
+	BuildTrusteeWithObjectsAndSid:                        procBuildTrusteeWithObjectsAndSid,
+	BuildTrusteeWithObjectsAndSidA:                       procBuildTrusteeWithObjectsAndSidA,
+	BuildTrusteeWithSid:                                  procBuildTrusteeWithSid,
+	BuildTrusteeWithSidA:                                 procBuildTrusteeWithSidA,
+	ConvertSecurityDescriptorToStringSecurityDescriptor:  procConvertSecurityDescriptorToStringSecurityDescriptor,
+	ConvertSecurityDescriptorToStringSecurityDescriptorA: procConvertSecurityDescriptorToStringSecurityDescriptorA,
+	ConvertSidToStringSid:                                procConvertSidToStringSid,
+	ConvertSidToStringSidA:                               procConvertSidToStringSidA,
+	ConvertStringSecurityDescriptorToSecurityDescriptor:  procConvertStringSecurityDescriptorToSecurityDescriptor,
+	ConvertStringSecurityDescriptorToSecurityDescriptorA: procConvertStringSecurityDescriptorToSecurityDescriptorA,
+	ConvertStringSidToSid:                                procConvertStringSidToSid,
+	ConvertStringSidToSidA:                               procConvertStringSidToSidA,
+	FreeInheritedFromArray:                               procFreeInheritedFromArray,
+	GetAuditedPermissionsFromAcl:                         procGetAuditedPermissionsFromAcl,
+	GetAuditedPermissionsFromAclA:                        procGetAuditedPermissionsFromAclA,
+	GetEffectiveRightsFromAcl:                            procGetEffectiveRightsFromAcl,
+	GetEffectiveRightsFromAclA:                           procGetEffectiveRightsFromAclA,
+	GetExplicitEntriesFromAcl:                            procGetExplicitEntriesFromAcl,
+	GetExplicitEntriesFromAclA:                           procGetExplicitEntriesFromAclA,
+	GetInheritanceSource:                                 procGetInheritanceSource,
+	GetInheritanceSourceA:                                procGetInheritanceSourceA,
+	GetMultipleTrustee:                                   procGetMultipleTrustee,
+	GetMultipleTrusteeA:                                  procGetMultipleTrusteeA,
+	GetMultipleTrusteeOperation:                          procGetMultipleTrusteeOperation,
+	GetMultipleTrusteeOperationA:                         procGetMultipleTrusteeOperationA,
+	GetNamedSecurityInfo:                                 procGetNamedSecurityInfo,
+	GetNamedSecurityInfoA:                                procGetNamedSecurityInfoA,
+	GetSecurityInfo:                                      procGetSecurityInfo,
+	GetTrusteeForm:                                       procGetTrusteeForm,
+	GetTrusteeFormA:                                      procGetTrusteeFormA,
+	GetTrusteeName:                                       procGetTrusteeName,
+	GetTrusteeNameA:                                      procGetTrusteeNameA,
+	GetTrusteeType:                                       procGetTrusteeType,
+	GetTrusteeTypeA:                                      procGetTrusteeTypeA,
+	LookupSecurityDescriptorParts:                        procLookupSecurityDescriptorParts,
+	LookupSecurityDescriptorPartsA:                       procLookupSecurityDescriptorPartsA,
+	SetEntriesInAcl:                                      procSetEntriesInAcl,
+	SetEntriesInAclA:                                     procSetEntriesInAclA,
+	SetNamedSecurityInfo:                                 procSetNamedSecurityInfo,
+	SetNamedSecurityInfoA:                                procSetNamedSecurityInfoA,
+	SetSecurityInfo:                                      procSetSecurityInfo,
+	TreeResetNamedSecurityInfo:                           procTreeResetNamedSecurityInfo,
+	TreeResetNamedSecurityInfoA:                          procTreeResetNamedSecurityInfoA,
+	TreeSetNamedSecurityInfo:                             procTreeSetNamedSecurityInfo,
+	TreeSetNamedSecurityInfoA:                            procTreeSetNamedSecurityInfoA,
+}
+
 // AuthzAccessCheck calls AUTHZ!AuthzAccessCheck.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzaccesscheck
 // Minimum OS: windows5.1.2600.
@@ -322,8 +510,8 @@ func AuthzInitializeRemoteResourceManager(pRpcInitInfo *AUTHZ_RPC_INIT_INFO_CLIE
 // AuthzInitializeResourceManager calls AUTHZ!AuthzInitializeResourceManager.
 // https://learn.microsoft.com/windows/win32/api/authz/nf-authz-authzinitializeresourcemanager
 // Minimum OS: windows5.1.2600.
-func AuthzInitializeResourceManager(Flags uint32, pfnDynamicAccessCheck PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName string, phAuthzResourceManager *AUTHZ_RESOURCE_MANAGER_HANDLE) error {
-	_szResourceManagerName := win32.UTF16Ptr(szResourceManagerName)
+func AuthzInitializeResourceManager(Flags uint32, pfnDynamicAccessCheck PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName *string, phAuthzResourceManager *AUTHZ_RESOURCE_MANAGER_HANDLE) error {
+	_szResourceManagerName := win32.UTF16PtrOrNil(szResourceManagerName)
 	r1, _, e1 := syscall.SyscallN(procAuthzInitializeResourceManager.Addr(), uintptr(Flags), uintptr(pfnDynamicAccessCheck), uintptr(pfnComputeDynamicGroups), uintptr(pfnFreeDynamicGroups), uintptr(unsafe.Pointer(_szResourceManagerName)), uintptr(unsafe.Pointer(phAuthzResourceManager)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -498,8 +686,8 @@ func AuthzUnregisterSecurityEventSource(dwFlags uint32, phEventProvider *AUTHZ_S
 // BuildExplicitAccessWithName calls ADVAPI32!BuildExplicitAccessWithNameW.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildexplicitaccesswithnamew
 // Minimum OS: windows5.1.2600.
-func BuildExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName string, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance security.ACE_FLAGS) {
-	_pTrusteeName := win32.UTF16Ptr(pTrusteeName)
+func BuildExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName *string, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance security.ACE_FLAGS) {
+	_pTrusteeName := win32.UTF16PtrOrNil(pTrusteeName)
 	syscall.SyscallN(procBuildExplicitAccessWithName.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(_pTrusteeName)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
 }
 
@@ -511,8 +699,8 @@ func BuildExplicitAccessWithNameA(pExplicitAccess *EXPLICIT_ACCESS_A, pTrusteeNa
 }
 
 // BuildImpersonateExplicitAccessWithName calls ADVAPI32!BuildImpersonateExplicitAccessWithNameW.
-func BuildImpersonateExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName string, pTrustee *TRUSTEE_W, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance uint32) {
-	_pTrusteeName := win32.UTF16Ptr(pTrusteeName)
+func BuildImpersonateExplicitAccessWithName(pExplicitAccess *EXPLICIT_ACCESS_W, pTrusteeName *string, pTrustee *TRUSTEE_W, AccessPermissions uint32, AccessMode ACCESS_MODE, Inheritance uint32) {
+	_pTrusteeName := win32.UTF16PtrOrNil(pTrusteeName)
 	syscall.SyscallN(procBuildImpersonateExplicitAccessWithName.Addr(), uintptr(unsafe.Pointer(pExplicitAccess)), uintptr(unsafe.Pointer(_pTrusteeName)), uintptr(unsafe.Pointer(pTrustee)), uintptr(AccessPermissions), uintptr(AccessMode), uintptr(Inheritance))
 }
 
@@ -566,8 +754,8 @@ func BuildSecurityDescriptorA(pOwner *TRUSTEE_A, pGroup *TRUSTEE_A, pListOfAcces
 // BuildTrusteeWithName calls ADVAPI32!BuildTrusteeWithNameW.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithnamew
 // Minimum OS: windows5.1.2600.
-func BuildTrusteeWithName(pTrustee *TRUSTEE_W, pName string) {
-	_pName := win32.UTF16Ptr(pName)
+func BuildTrusteeWithName(pTrustee *TRUSTEE_W, pName *string) {
+	_pName := win32.UTF16PtrOrNil(pName)
 	syscall.SyscallN(procBuildTrusteeWithName.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(_pName)))
 }
 
@@ -581,10 +769,10 @@ func BuildTrusteeWithNameA(pTrustee *TRUSTEE_A, pName foundation.PSTR) {
 // BuildTrusteeWithObjectsAndName calls ADVAPI32!BuildTrusteeWithObjectsAndNameW.
 // https://learn.microsoft.com/windows/win32/api/aclapi/nf-aclapi-buildtrusteewithobjectsandnamew
 // Minimum OS: windows5.1.2600.
-func BuildTrusteeWithObjectsAndName(pTrustee *TRUSTEE_W, pObjName *OBJECTS_AND_NAME_W, ObjectType SE_OBJECT_TYPE, ObjectTypeName string, InheritedObjectTypeName string, Name string) {
-	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_InheritedObjectTypeName := win32.UTF16Ptr(InheritedObjectTypeName)
-	_Name := win32.UTF16Ptr(Name)
+func BuildTrusteeWithObjectsAndName(pTrustee *TRUSTEE_W, pObjName *OBJECTS_AND_NAME_W, ObjectType SE_OBJECT_TYPE, ObjectTypeName *string, InheritedObjectTypeName *string, Name *string) {
+	_ObjectTypeName := win32.UTF16PtrOrNil(ObjectTypeName)
+	_InheritedObjectTypeName := win32.UTF16PtrOrNil(InheritedObjectTypeName)
+	_Name := win32.UTF16PtrOrNil(Name)
 	syscall.SyscallN(procBuildTrusteeWithObjectsAndName.Addr(), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pObjName)), uintptr(ObjectType), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_InheritedObjectTypeName)), uintptr(unsafe.Pointer(_Name)))
 }
 

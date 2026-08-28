@@ -4,6 +4,7 @@
 
 package pdf
 
-// PFN_PDF_CREATE_RENDERER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsdxgi.IDXGIDevice, **IPdfRendererNative) foundation.HRESULT.
+// PFN_PDF_CREATE_RENDERER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsdxgi.IDXGIDevice, **IPdfRendererNative) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_PDF_CREATE_RENDERER uintptr

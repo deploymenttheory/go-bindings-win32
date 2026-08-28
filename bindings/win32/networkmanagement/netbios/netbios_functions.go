@@ -19,6 +19,16 @@ var (
 	procNetbios = modNETAPI32.NewProc("Netbios")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	Netbios *win32.Proc
+}{
+	Netbios: procNetbios,
+}
+
 // Netbios calls NETAPI32!Netbios.
 // https://learn.microsoft.com/windows/win32/api/nb30/nf-nb30-netbios
 // Minimum OS: windows5.0.

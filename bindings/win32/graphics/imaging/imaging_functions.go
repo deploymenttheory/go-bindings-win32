@@ -29,6 +29,32 @@ var (
 	procWICSerializeMetadataContent  = modWindowsCodecs.NewProc("WICSerializeMetadataContent")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WICConvertBitmapSource       *win32.Proc
+	WICCreateBitmapFromSection   *win32.Proc
+	WICCreateBitmapFromSectionEx *win32.Proc
+	WICGetMetadataContentSize    *win32.Proc
+	WICMapGuidToShortName        *win32.Proc
+	WICMapSchemaToName           *win32.Proc
+	WICMapShortNameToGuid        *win32.Proc
+	WICMatchMetadataContent      *win32.Proc
+	WICSerializeMetadataContent  *win32.Proc
+}{
+	WICConvertBitmapSource:       procWICConvertBitmapSource,
+	WICCreateBitmapFromSection:   procWICCreateBitmapFromSection,
+	WICCreateBitmapFromSectionEx: procWICCreateBitmapFromSectionEx,
+	WICGetMetadataContentSize:    procWICGetMetadataContentSize,
+	WICMapGuidToShortName:        procWICMapGuidToShortName,
+	WICMapSchemaToName:           procWICMapSchemaToName,
+	WICMapShortNameToGuid:        procWICMapShortNameToGuid,
+	WICMatchMetadataContent:      procWICMatchMetadataContent,
+	WICSerializeMetadataContent:  procWICSerializeMetadataContent,
+}
+
 // WICConvertBitmapSource calls WindowsCodecs!WICConvertBitmapSource.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wicconvertbitmapsource
 // Minimum OS: windows5.1.2600.

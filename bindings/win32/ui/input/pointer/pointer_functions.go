@@ -49,6 +49,72 @@ var (
 	procSkipPointerFrameMessages        = modUSER32.NewProc("SkipPointerFrameMessages")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DestroySyntheticPointerDevice   *win32.Proc
+	EnableMouseInPointer            *win32.Proc
+	GetPointerCursorId              *win32.Proc
+	GetPointerDevice                *win32.Proc
+	GetPointerDeviceCursors         *win32.Proc
+	GetPointerDeviceProperties      *win32.Proc
+	GetPointerDeviceRects           *win32.Proc
+	GetPointerDevices               *win32.Proc
+	GetPointerFrameInfo             *win32.Proc
+	GetPointerFrameInfoHistory      *win32.Proc
+	GetPointerFramePenInfo          *win32.Proc
+	GetPointerFramePenInfoHistory   *win32.Proc
+	GetPointerFrameTouchInfo        *win32.Proc
+	GetPointerFrameTouchInfoHistory *win32.Proc
+	GetPointerInfo                  *win32.Proc
+	GetPointerInfoHistory           *win32.Proc
+	GetPointerInputTransform        *win32.Proc
+	GetPointerPenInfo               *win32.Proc
+	GetPointerPenInfoHistory        *win32.Proc
+	GetPointerTouchInfo             *win32.Proc
+	GetPointerTouchInfoHistory      *win32.Proc
+	GetPointerType                  *win32.Proc
+	GetRawPointerDeviceData         *win32.Proc
+	GetUnpredictedMessagePos        *win32.Proc
+	InitializeTouchInjection        *win32.Proc
+	InjectSyntheticPointerInput     *win32.Proc
+	InjectTouchInput                *win32.Proc
+	IsMouseInPointerEnabled         *win32.Proc
+	SkipPointerFrameMessages        *win32.Proc
+}{
+	DestroySyntheticPointerDevice:   procDestroySyntheticPointerDevice,
+	EnableMouseInPointer:            procEnableMouseInPointer,
+	GetPointerCursorId:              procGetPointerCursorId,
+	GetPointerDevice:                procGetPointerDevice,
+	GetPointerDeviceCursors:         procGetPointerDeviceCursors,
+	GetPointerDeviceProperties:      procGetPointerDeviceProperties,
+	GetPointerDeviceRects:           procGetPointerDeviceRects,
+	GetPointerDevices:               procGetPointerDevices,
+	GetPointerFrameInfo:             procGetPointerFrameInfo,
+	GetPointerFrameInfoHistory:      procGetPointerFrameInfoHistory,
+	GetPointerFramePenInfo:          procGetPointerFramePenInfo,
+	GetPointerFramePenInfoHistory:   procGetPointerFramePenInfoHistory,
+	GetPointerFrameTouchInfo:        procGetPointerFrameTouchInfo,
+	GetPointerFrameTouchInfoHistory: procGetPointerFrameTouchInfoHistory,
+	GetPointerInfo:                  procGetPointerInfo,
+	GetPointerInfoHistory:           procGetPointerInfoHistory,
+	GetPointerInputTransform:        procGetPointerInputTransform,
+	GetPointerPenInfo:               procGetPointerPenInfo,
+	GetPointerPenInfoHistory:        procGetPointerPenInfoHistory,
+	GetPointerTouchInfo:             procGetPointerTouchInfo,
+	GetPointerTouchInfoHistory:      procGetPointerTouchInfoHistory,
+	GetPointerType:                  procGetPointerType,
+	GetRawPointerDeviceData:         procGetRawPointerDeviceData,
+	GetUnpredictedMessagePos:        procGetUnpredictedMessagePos,
+	InitializeTouchInjection:        procInitializeTouchInjection,
+	InjectSyntheticPointerInput:     procInjectSyntheticPointerInput,
+	InjectTouchInput:                procInjectTouchInput,
+	IsMouseInPointerEnabled:         procIsMouseInPointerEnabled,
+	SkipPointerFrameMessages:        procSkipPointerFrameMessages,
+}
+
 // DestroySyntheticPointerDevice calls USER32!DestroySyntheticPointerDevice.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-destroysyntheticpointerdevice
 // Minimum OS: windows10.0.17763.

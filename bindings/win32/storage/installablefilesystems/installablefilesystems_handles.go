@@ -4,12 +4,20 @@
 
 package installablefilesystems
 
-// CloseHFILTER releases a HFILTER handle by calling FilterClose.
+// CloseHFILTER releases a HFILTER handle by calling FilterClose. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHFILTER(h HFILTER) error {
+	if h == ^HFILTER(0) || h == 0 {
+		return nil
+	}
 	return FilterClose(HFILTER(h))
 }
 
-// CloseHFILTER_INSTANCE releases a HFILTER_INSTANCE handle by calling FilterInstanceClose.
+// CloseHFILTER_INSTANCE releases a HFILTER_INSTANCE handle by calling FilterInstanceClose. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHFILTER_INSTANCE(h HFILTER_INSTANCE) error {
+	if h == ^HFILTER_INSTANCE(0) || h == 0 {
+		return nil
+	}
 	return FilterInstanceClose(HFILTER_INSTANCE(h))
 }

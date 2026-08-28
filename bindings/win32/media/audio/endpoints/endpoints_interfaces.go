@@ -5,6 +5,7 @@
 package endpoints
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -147,6 +148,22 @@ func (self *IAudioEndpointVolume) GetChannelCount(pnChannelCount *uint32) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAudioEndpointVolume_SetMasterVolumeLevel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetMasterVolumeLevel dispatches through IAudioEndpointVolume's vtable slot 6.
+func (self *IAudioEndpointVolume) SetMasterVolumeLevel(fLevelDB float32, pguidEventContext *win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIAudioEndpointVolume_SetMasterVolumeLevel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fLevelDB)), uintptr(unsafe.Pointer(pguidEventContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAudioEndpointVolume_SetMasterVolumeLevelScalar = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetMasterVolumeLevelScalar dispatches through IAudioEndpointVolume's vtable slot 7.
+func (self *IAudioEndpointVolume) SetMasterVolumeLevelScalar(fLevel float32, pguidEventContext *win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIAudioEndpointVolume_SetMasterVolumeLevelScalar, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fLevel)), uintptr(unsafe.Pointer(pguidEventContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetMasterVolumeLevel dispatches through IAudioEndpointVolume's vtable slot 8.
 func (self *IAudioEndpointVolume) GetMasterVolumeLevel(pfLevelDB *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLevelDB)))
@@ -156,6 +173,22 @@ func (self *IAudioEndpointVolume) GetMasterVolumeLevel(pfLevelDB *float32) error
 // GetMasterVolumeLevelScalar dispatches through IAudioEndpointVolume's vtable slot 9.
 func (self *IAudioEndpointVolume) GetMasterVolumeLevelScalar(pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLevel)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAudioEndpointVolume_SetChannelVolumeLevel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// SetChannelVolumeLevel dispatches through IAudioEndpointVolume's vtable slot 10.
+func (self *IAudioEndpointVolume) SetChannelVolumeLevel(nChannel uint32, fLevelDB float32, pguidEventContext *win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIAudioEndpointVolume_SetChannelVolumeLevel, nil, uintptr(unsafe.Pointer(self)), uintptr(nChannel), uintptr(math.Float32bits(fLevelDB)), uintptr(unsafe.Pointer(pguidEventContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAudioEndpointVolume_SetChannelVolumeLevelScalar = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// SetChannelVolumeLevelScalar dispatches through IAudioEndpointVolume's vtable slot 11.
+func (self *IAudioEndpointVolume) SetChannelVolumeLevelScalar(nChannel uint32, fLevel float32, pguidEventContext *win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIAudioEndpointVolume_SetChannelVolumeLevelScalar, nil, uintptr(unsafe.Pointer(self)), uintptr(nChannel), uintptr(math.Float32bits(fLevel)), uintptr(unsafe.Pointer(pguidEventContext))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

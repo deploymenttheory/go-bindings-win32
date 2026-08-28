@@ -150,6 +150,268 @@ var (
 	procSCardWriteCacheA                            = modWinSCard.NewProc("SCardWriteCacheA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CredDelete                                  *win32.Proc
+	CredDeleteA                                 *win32.Proc
+	CredEnumerate                               *win32.Proc
+	CredEnumerateA                              *win32.Proc
+	CredFindBestCredential                      *win32.Proc
+	CredFindBestCredentialA                     *win32.Proc
+	CredFree                                    *win32.Proc
+	CredGetSessionTypes                         *win32.Proc
+	CredGetTargetInfo                           *win32.Proc
+	CredGetTargetInfoA                          *win32.Proc
+	CredIsMarshaledCredential                   *win32.Proc
+	CredIsMarshaledCredentialA                  *win32.Proc
+	CredIsProtected                             *win32.Proc
+	CredIsProtectedA                            *win32.Proc
+	CredMarshalCredential                       *win32.Proc
+	CredMarshalCredentialA                      *win32.Proc
+	CredPackAuthenticationBuffer                *win32.Proc
+	CredPackAuthenticationBufferA               *win32.Proc
+	CredProtect                                 *win32.Proc
+	CredProtectA                                *win32.Proc
+	CredRead                                    *win32.Proc
+	CredReadA                                   *win32.Proc
+	CredReadDomainCredentials                   *win32.Proc
+	CredReadDomainCredentialsA                  *win32.Proc
+	CredRename                                  *win32.Proc
+	CredRenameA                                 *win32.Proc
+	CredUICmdLinePromptForCredentials           *win32.Proc
+	CredUICmdLinePromptForCredentialsA          *win32.Proc
+	CredUIConfirmCredentials                    *win32.Proc
+	CredUIConfirmCredentialsA                   *win32.Proc
+	CredUIParseUserName                         *win32.Proc
+	CredUIParseUserNameA                        *win32.Proc
+	CredUIPromptForCredentials                  *win32.Proc
+	CredUIPromptForCredentialsA                 *win32.Proc
+	CredUIPromptForWindowsCredentials           *win32.Proc
+	CredUIPromptForWindowsCredentialsA          *win32.Proc
+	CredUIReadSSOCredW                          *win32.Proc
+	CredUIStoreSSOCredW                         *win32.Proc
+	CredUnPackAuthenticationBuffer              *win32.Proc
+	CredUnPackAuthenticationBufferA             *win32.Proc
+	CredUnmarshalCredential                     *win32.Proc
+	CredUnmarshalCredentialA                    *win32.Proc
+	CredUnprotect                               *win32.Proc
+	CredUnprotectA                              *win32.Proc
+	CredWrite                                   *win32.Proc
+	CredWriteA                                  *win32.Proc
+	CredWriteDomainCredentials                  *win32.Proc
+	CredWriteDomainCredentialsA                 *win32.Proc
+	GetOpenCardName                             *win32.Proc
+	GetOpenCardNameA                            *win32.Proc
+	KeyCredentialManagerFreeInformation         *win32.Proc
+	KeyCredentialManagerGetInformation          *win32.Proc
+	KeyCredentialManagerGetOperationErrorStates *win32.Proc
+	KeyCredentialManagerShowUIOperation         *win32.Proc
+	SCardAccessStartedEvent                     *win32.Proc
+	SCardAddReaderToGroup                       *win32.Proc
+	SCardAddReaderToGroupA                      *win32.Proc
+	SCardAudit                                  *win32.Proc
+	SCardBeginTransaction                       *win32.Proc
+	SCardCancel                                 *win32.Proc
+	SCardConnect                                *win32.Proc
+	SCardConnectA                               *win32.Proc
+	SCardControl                                *win32.Proc
+	SCardDisconnect                             *win32.Proc
+	SCardDlgExtendedError                       *win32.Proc
+	SCardEndTransaction                         *win32.Proc
+	SCardEstablishContext                       *win32.Proc
+	SCardForgetCardType                         *win32.Proc
+	SCardForgetCardTypeA                        *win32.Proc
+	SCardForgetReader                           *win32.Proc
+	SCardForgetReaderA                          *win32.Proc
+	SCardForgetReaderGroup                      *win32.Proc
+	SCardForgetReaderGroupA                     *win32.Proc
+	SCardFreeMemory                             *win32.Proc
+	SCardGetAttrib                              *win32.Proc
+	SCardGetCardTypeProviderName                *win32.Proc
+	SCardGetCardTypeProviderNameA               *win32.Proc
+	SCardGetDeviceTypeId                        *win32.Proc
+	SCardGetDeviceTypeIdA                       *win32.Proc
+	SCardGetProviderId                          *win32.Proc
+	SCardGetProviderIdA                         *win32.Proc
+	SCardGetReaderDeviceInstanceId              *win32.Proc
+	SCardGetReaderDeviceInstanceIdA             *win32.Proc
+	SCardGetReaderIcon                          *win32.Proc
+	SCardGetReaderIconA                         *win32.Proc
+	SCardGetStatusChange                        *win32.Proc
+	SCardGetStatusChangeA                       *win32.Proc
+	SCardGetTransmitCount                       *win32.Proc
+	SCardIntroduceCardType                      *win32.Proc
+	SCardIntroduceCardTypeA                     *win32.Proc
+	SCardIntroduceReader                        *win32.Proc
+	SCardIntroduceReaderA                       *win32.Proc
+	SCardIntroduceReaderGroup                   *win32.Proc
+	SCardIntroduceReaderGroupA                  *win32.Proc
+	SCardIsValidContext                         *win32.Proc
+	SCardListCards                              *win32.Proc
+	SCardListCardsA                             *win32.Proc
+	SCardListInterfaces                         *win32.Proc
+	SCardListInterfacesA                        *win32.Proc
+	SCardListReaderGroups                       *win32.Proc
+	SCardListReaderGroupsA                      *win32.Proc
+	SCardListReaders                            *win32.Proc
+	SCardListReadersA                           *win32.Proc
+	SCardListReadersWithDeviceInstanceId        *win32.Proc
+	SCardListReadersWithDeviceInstanceIdA       *win32.Proc
+	SCardLocateCards                            *win32.Proc
+	SCardLocateCardsA                           *win32.Proc
+	SCardLocateCardsByATR                       *win32.Proc
+	SCardLocateCardsByATRA                      *win32.Proc
+	SCardReadCache                              *win32.Proc
+	SCardReadCacheA                             *win32.Proc
+	SCardReconnect                              *win32.Proc
+	SCardReleaseContext                         *win32.Proc
+	SCardReleaseStartedEvent                    *win32.Proc
+	SCardRemoveReaderFromGroup                  *win32.Proc
+	SCardRemoveReaderFromGroupA                 *win32.Proc
+	SCardSetAttrib                              *win32.Proc
+	SCardSetCardTypeProviderName                *win32.Proc
+	SCardSetCardTypeProviderNameA               *win32.Proc
+	SCardState                                  *win32.Proc
+	SCardStatus                                 *win32.Proc
+	SCardStatusA                                *win32.Proc
+	SCardTransmit                               *win32.Proc
+	SCardUIDlgSelectCard                        *win32.Proc
+	SCardUIDlgSelectCardA                       *win32.Proc
+	SCardWriteCache                             *win32.Proc
+	SCardWriteCacheA                            *win32.Proc
+}{
+	CredDelete:                                  procCredDelete,
+	CredDeleteA:                                 procCredDeleteA,
+	CredEnumerate:                               procCredEnumerate,
+	CredEnumerateA:                              procCredEnumerateA,
+	CredFindBestCredential:                      procCredFindBestCredential,
+	CredFindBestCredentialA:                     procCredFindBestCredentialA,
+	CredFree:                                    procCredFree,
+	CredGetSessionTypes:                         procCredGetSessionTypes,
+	CredGetTargetInfo:                           procCredGetTargetInfo,
+	CredGetTargetInfoA:                          procCredGetTargetInfoA,
+	CredIsMarshaledCredential:                   procCredIsMarshaledCredential,
+	CredIsMarshaledCredentialA:                  procCredIsMarshaledCredentialA,
+	CredIsProtected:                             procCredIsProtected,
+	CredIsProtectedA:                            procCredIsProtectedA,
+	CredMarshalCredential:                       procCredMarshalCredential,
+	CredMarshalCredentialA:                      procCredMarshalCredentialA,
+	CredPackAuthenticationBuffer:                procCredPackAuthenticationBuffer,
+	CredPackAuthenticationBufferA:               procCredPackAuthenticationBufferA,
+	CredProtect:                                 procCredProtect,
+	CredProtectA:                                procCredProtectA,
+	CredRead:                                    procCredRead,
+	CredReadA:                                   procCredReadA,
+	CredReadDomainCredentials:                   procCredReadDomainCredentials,
+	CredReadDomainCredentialsA:                  procCredReadDomainCredentialsA,
+	CredRename:                                  procCredRename,
+	CredRenameA:                                 procCredRenameA,
+	CredUICmdLinePromptForCredentials:           procCredUICmdLinePromptForCredentials,
+	CredUICmdLinePromptForCredentialsA:          procCredUICmdLinePromptForCredentialsA,
+	CredUIConfirmCredentials:                    procCredUIConfirmCredentials,
+	CredUIConfirmCredentialsA:                   procCredUIConfirmCredentialsA,
+	CredUIParseUserName:                         procCredUIParseUserName,
+	CredUIParseUserNameA:                        procCredUIParseUserNameA,
+	CredUIPromptForCredentials:                  procCredUIPromptForCredentials,
+	CredUIPromptForCredentialsA:                 procCredUIPromptForCredentialsA,
+	CredUIPromptForWindowsCredentials:           procCredUIPromptForWindowsCredentials,
+	CredUIPromptForWindowsCredentialsA:          procCredUIPromptForWindowsCredentialsA,
+	CredUIReadSSOCredW:                          procCredUIReadSSOCredW,
+	CredUIStoreSSOCredW:                         procCredUIStoreSSOCredW,
+	CredUnPackAuthenticationBuffer:              procCredUnPackAuthenticationBuffer,
+	CredUnPackAuthenticationBufferA:             procCredUnPackAuthenticationBufferA,
+	CredUnmarshalCredential:                     procCredUnmarshalCredential,
+	CredUnmarshalCredentialA:                    procCredUnmarshalCredentialA,
+	CredUnprotect:                               procCredUnprotect,
+	CredUnprotectA:                              procCredUnprotectA,
+	CredWrite:                                   procCredWrite,
+	CredWriteA:                                  procCredWriteA,
+	CredWriteDomainCredentials:                  procCredWriteDomainCredentials,
+	CredWriteDomainCredentialsA:                 procCredWriteDomainCredentialsA,
+	GetOpenCardName:                             procGetOpenCardName,
+	GetOpenCardNameA:                            procGetOpenCardNameA,
+	KeyCredentialManagerFreeInformation:         procKeyCredentialManagerFreeInformation,
+	KeyCredentialManagerGetInformation:          procKeyCredentialManagerGetInformation,
+	KeyCredentialManagerGetOperationErrorStates: procKeyCredentialManagerGetOperationErrorStates,
+	KeyCredentialManagerShowUIOperation:         procKeyCredentialManagerShowUIOperation,
+	SCardAccessStartedEvent:                     procSCardAccessStartedEvent,
+	SCardAddReaderToGroup:                       procSCardAddReaderToGroup,
+	SCardAddReaderToGroupA:                      procSCardAddReaderToGroupA,
+	SCardAudit:                                  procSCardAudit,
+	SCardBeginTransaction:                       procSCardBeginTransaction,
+	SCardCancel:                                 procSCardCancel,
+	SCardConnect:                                procSCardConnect,
+	SCardConnectA:                               procSCardConnectA,
+	SCardControl:                                procSCardControl,
+	SCardDisconnect:                             procSCardDisconnect,
+	SCardDlgExtendedError:                       procSCardDlgExtendedError,
+	SCardEndTransaction:                         procSCardEndTransaction,
+	SCardEstablishContext:                       procSCardEstablishContext,
+	SCardForgetCardType:                         procSCardForgetCardType,
+	SCardForgetCardTypeA:                        procSCardForgetCardTypeA,
+	SCardForgetReader:                           procSCardForgetReader,
+	SCardForgetReaderA:                          procSCardForgetReaderA,
+	SCardForgetReaderGroup:                      procSCardForgetReaderGroup,
+	SCardForgetReaderGroupA:                     procSCardForgetReaderGroupA,
+	SCardFreeMemory:                             procSCardFreeMemory,
+	SCardGetAttrib:                              procSCardGetAttrib,
+	SCardGetCardTypeProviderName:                procSCardGetCardTypeProviderName,
+	SCardGetCardTypeProviderNameA:               procSCardGetCardTypeProviderNameA,
+	SCardGetDeviceTypeId:                        procSCardGetDeviceTypeId,
+	SCardGetDeviceTypeIdA:                       procSCardGetDeviceTypeIdA,
+	SCardGetProviderId:                          procSCardGetProviderId,
+	SCardGetProviderIdA:                         procSCardGetProviderIdA,
+	SCardGetReaderDeviceInstanceId:              procSCardGetReaderDeviceInstanceId,
+	SCardGetReaderDeviceInstanceIdA:             procSCardGetReaderDeviceInstanceIdA,
+	SCardGetReaderIcon:                          procSCardGetReaderIcon,
+	SCardGetReaderIconA:                         procSCardGetReaderIconA,
+	SCardGetStatusChange:                        procSCardGetStatusChange,
+	SCardGetStatusChangeA:                       procSCardGetStatusChangeA,
+	SCardGetTransmitCount:                       procSCardGetTransmitCount,
+	SCardIntroduceCardType:                      procSCardIntroduceCardType,
+	SCardIntroduceCardTypeA:                     procSCardIntroduceCardTypeA,
+	SCardIntroduceReader:                        procSCardIntroduceReader,
+	SCardIntroduceReaderA:                       procSCardIntroduceReaderA,
+	SCardIntroduceReaderGroup:                   procSCardIntroduceReaderGroup,
+	SCardIntroduceReaderGroupA:                  procSCardIntroduceReaderGroupA,
+	SCardIsValidContext:                         procSCardIsValidContext,
+	SCardListCards:                              procSCardListCards,
+	SCardListCardsA:                             procSCardListCardsA,
+	SCardListInterfaces:                         procSCardListInterfaces,
+	SCardListInterfacesA:                        procSCardListInterfacesA,
+	SCardListReaderGroups:                       procSCardListReaderGroups,
+	SCardListReaderGroupsA:                      procSCardListReaderGroupsA,
+	SCardListReaders:                            procSCardListReaders,
+	SCardListReadersA:                           procSCardListReadersA,
+	SCardListReadersWithDeviceInstanceId:        procSCardListReadersWithDeviceInstanceId,
+	SCardListReadersWithDeviceInstanceIdA:       procSCardListReadersWithDeviceInstanceIdA,
+	SCardLocateCards:                            procSCardLocateCards,
+	SCardLocateCardsA:                           procSCardLocateCardsA,
+	SCardLocateCardsByATR:                       procSCardLocateCardsByATR,
+	SCardLocateCardsByATRA:                      procSCardLocateCardsByATRA,
+	SCardReadCache:                              procSCardReadCache,
+	SCardReadCacheA:                             procSCardReadCacheA,
+	SCardReconnect:                              procSCardReconnect,
+	SCardReleaseContext:                         procSCardReleaseContext,
+	SCardReleaseStartedEvent:                    procSCardReleaseStartedEvent,
+	SCardRemoveReaderFromGroup:                  procSCardRemoveReaderFromGroup,
+	SCardRemoveReaderFromGroupA:                 procSCardRemoveReaderFromGroupA,
+	SCardSetAttrib:                              procSCardSetAttrib,
+	SCardSetCardTypeProviderName:                procSCardSetCardTypeProviderName,
+	SCardSetCardTypeProviderNameA:               procSCardSetCardTypeProviderNameA,
+	SCardState:                                  procSCardState,
+	SCardStatus:                                 procSCardStatus,
+	SCardStatusA:                                procSCardStatusA,
+	SCardTransmit:                               procSCardTransmit,
+	SCardUIDlgSelectCard:                        procSCardUIDlgSelectCard,
+	SCardUIDlgSelectCardA:                       procSCardUIDlgSelectCardA,
+	SCardWriteCache:                             procSCardWriteCache,
+	SCardWriteCacheA:                            procSCardWriteCacheA,
+}
+
 // CredDelete calls ADVAPI32!CredDeleteW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creddeletew
 // Minimum OS: windows5.1.2600.
@@ -176,8 +438,8 @@ func CredDeleteA(TargetName foundation.PSTR, Type CRED_TYPE) error {
 // CredEnumerate calls ADVAPI32!CredEnumerateW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credenumeratew
 // Minimum OS: windows5.1.2600.
-func CredEnumerate(Filter string, Count *uint32, Credential ***CREDENTIALW) error {
-	_Filter := win32.UTF16Ptr(Filter)
+func CredEnumerate(Filter *string, Count *uint32, Credential ***CREDENTIALW) error {
+	_Filter := win32.UTF16PtrOrNil(Filter)
 	r1, _, e1 := syscall.SyscallN(procCredEnumerate.Addr(), uintptr(unsafe.Pointer(_Filter)), 0, uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(Credential)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -447,8 +709,8 @@ func CredRenameA(OldTargetName foundation.PSTR, NewTargetName foundation.PSTR, T
 // CredUICmdLinePromptForCredentials calls credui!CredUICmdLinePromptForCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduicmdlinepromptforcredentialsw
 // Minimum OS: windows5.1.2600.
-func CredUICmdLinePromptForCredentials(pszTargetName string, dwAuthError uint32, UserName foundation.PWSTR, ulUserBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, pfSave *foundation.BOOL, dwFlags CREDUI_FLAGS) uint32 {
-	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+func CredUICmdLinePromptForCredentials(pszTargetName *string, dwAuthError uint32, UserName foundation.PWSTR, ulUserBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, pfSave *foundation.BOOL, dwFlags CREDUI_FLAGS) uint32 {
+	_pszTargetName := win32.UTF16PtrOrNil(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procCredUICmdLinePromptForCredentials.Addr(), uintptr(unsafe.Pointer(_pszTargetName)), 0, uintptr(dwAuthError), uintptr(unsafe.Pointer(UserName)), uintptr(ulUserBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(pfSave)), uintptr(dwFlags))
 	return uint32(r1)
 }
@@ -500,8 +762,8 @@ func CredUIParseUserNameA(userName foundation.PSTR, user foundation.PSTR, userBu
 // CredUIPromptForCredentials calls credui!CredUIPromptForCredentialsW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduipromptforcredentialsw
 // Minimum OS: windows5.1.2600.
-func CredUIPromptForCredentials(pUiInfo *CREDUI_INFOW, pszTargetName string, dwAuthError uint32, pszUserName foundation.PWSTR, ulUserNameBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, save *foundation.BOOL, dwFlags CREDUI_FLAGS) foundation.WIN32_ERROR {
-	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+func CredUIPromptForCredentials(pUiInfo *CREDUI_INFOW, pszTargetName *string, dwAuthError uint32, pszUserName foundation.PWSTR, ulUserNameBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, save *foundation.BOOL, dwFlags CREDUI_FLAGS) foundation.WIN32_ERROR {
+	_pszTargetName := win32.UTF16PtrOrNil(pszTargetName)
 	r1, _, _ := syscall.SyscallN(procCredUIPromptForCredentials.Addr(), uintptr(unsafe.Pointer(pUiInfo)), uintptr(unsafe.Pointer(_pszTargetName)), 0, uintptr(dwAuthError), uintptr(unsafe.Pointer(pszUserName)), uintptr(ulUserNameBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(save)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -541,8 +803,8 @@ func CredUIPromptForWindowsCredentialsA(pUiInfo *CREDUI_INFOA, dwAuthError uint3
 // CredUIReadSSOCredW calls credui!CredUIReadSSOCredW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduireadssocredw
 // Minimum OS: windows5.1.2600.
-func CredUIReadSSOCredW(pszRealm string, ppszUsername *foundation.PWSTR) uint32 {
-	_pszRealm := win32.UTF16Ptr(pszRealm)
+func CredUIReadSSOCredW(pszRealm *string, ppszUsername *foundation.PWSTR) uint32 {
+	_pszRealm := win32.UTF16PtrOrNil(pszRealm)
 	r1, _, _ := syscall.SyscallN(procCredUIReadSSOCredW.Addr(), uintptr(unsafe.Pointer(_pszRealm)), uintptr(unsafe.Pointer(ppszUsername)))
 	return uint32(r1)
 }
@@ -550,8 +812,8 @@ func CredUIReadSSOCredW(pszRealm string, ppszUsername *foundation.PWSTR) uint32 
 // CredUIStoreSSOCredW calls credui!CredUIStoreSSOCredW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduistoressocredw
 // Minimum OS: windows5.1.2600.
-func CredUIStoreSSOCredW(pszRealm string, pszUsername string, pszPassword string, bPersist bool) uint32 {
-	_pszRealm := win32.UTF16Ptr(pszRealm)
+func CredUIStoreSSOCredW(pszRealm *string, pszUsername string, pszPassword string, bPersist bool) uint32 {
+	_pszRealm := win32.UTF16PtrOrNil(pszRealm)
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
 	_bPersist := win32.Bool32(bPersist)
@@ -1137,8 +1399,8 @@ func SCardListReaderGroupsA(hContext uintptr, mszGroups foundation.PSTR, pcchGro
 // SCardListReaders calls WinSCard!SCardListReadersW.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreadersw
 // Minimum OS: windows5.1.2600.
-func SCardListReaders(hContext uintptr, mszGroups string, mszReaders foundation.PWSTR, pcchReaders *uint32) int32 {
-	_mszGroups := win32.UTF16Ptr(mszGroups)
+func SCardListReaders(hContext uintptr, mszGroups *string, mszReaders foundation.PWSTR, pcchReaders *uint32) int32 {
+	_mszGroups := win32.UTF16PtrOrNil(mszGroups)
 	r1, _, _ := syscall.SyscallN(procSCardListReaders.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_mszGroups)), uintptr(unsafe.Pointer(mszReaders)), uintptr(unsafe.Pointer(pcchReaders)))
 	return int32(r1)
 }

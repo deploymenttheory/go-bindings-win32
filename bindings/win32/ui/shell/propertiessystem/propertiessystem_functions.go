@@ -100,6 +100,166 @@ var (
 	procSHPropStgWriteMultiple                      = modSHELL32.NewProc("SHPropStgWriteMultiple")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	PSCoerceToCanonicalValue                    *win32.Proc
+	PSCreateAdapterFromPropertyStore            *win32.Proc
+	PSCreateDelayedMultiplexPropertyStore       *win32.Proc
+	PSCreateMemoryPropertyStore                 *win32.Proc
+	PSCreateMultiplexPropertyStore              *win32.Proc
+	PSCreatePropertyChangeArray                 *win32.Proc
+	PSCreatePropertyStoreFromObject             *win32.Proc
+	PSCreatePropertyStoreFromPropertySetStorage *win32.Proc
+	PSCreateSimplePropertyChange                *win32.Proc
+	PSEnumeratePropertyDescriptions             *win32.Proc
+	PSFormatForDisplay                          *win32.Proc
+	PSFormatForDisplayAlloc                     *win32.Proc
+	PSFormatPropertyValue                       *win32.Proc
+	PSGetImageReferenceForValue                 *win32.Proc
+	PSGetItemPropertyHandler                    *win32.Proc
+	PSGetItemPropertyHandlerWithCreateObject    *win32.Proc
+	PSGetNameFromPropertyKey                    *win32.Proc
+	PSGetNamedPropertyFromPropertyStorage       *win32.Proc
+	PSGetPropertyDescription                    *win32.Proc
+	PSGetPropertyDescriptionByName              *win32.Proc
+	PSGetPropertyDescriptionListFromString      *win32.Proc
+	PSGetPropertyFromPropertyStorage            *win32.Proc
+	PSGetPropertyKeyFromName                    *win32.Proc
+	PSGetPropertySystem                         *win32.Proc
+	PSGetPropertyValue                          *win32.Proc
+	PSLookupPropertyHandlerCLSID                *win32.Proc
+	PSPropertyBag_Delete                        *win32.Proc
+	PSPropertyBag_ReadBOOL                      *win32.Proc
+	PSPropertyBag_ReadBSTR                      *win32.Proc
+	PSPropertyBag_ReadDWORD                     *win32.Proc
+	PSPropertyBag_ReadGUID                      *win32.Proc
+	PSPropertyBag_ReadInt                       *win32.Proc
+	PSPropertyBag_ReadLONG                      *win32.Proc
+	PSPropertyBag_ReadPOINTL                    *win32.Proc
+	PSPropertyBag_ReadPOINTS                    *win32.Proc
+	PSPropertyBag_ReadPropertyKey               *win32.Proc
+	PSPropertyBag_ReadRECTL                     *win32.Proc
+	PSPropertyBag_ReadSHORT                     *win32.Proc
+	PSPropertyBag_ReadStr                       *win32.Proc
+	PSPropertyBag_ReadStrAlloc                  *win32.Proc
+	PSPropertyBag_ReadStream                    *win32.Proc
+	PSPropertyBag_ReadType                      *win32.Proc
+	PSPropertyBag_ReadULONGLONG                 *win32.Proc
+	PSPropertyBag_ReadUnknown                   *win32.Proc
+	PSPropertyBag_WriteBOOL                     *win32.Proc
+	PSPropertyBag_WriteBSTR                     *win32.Proc
+	PSPropertyBag_WriteDWORD                    *win32.Proc
+	PSPropertyBag_WriteGUID                     *win32.Proc
+	PSPropertyBag_WriteInt                      *win32.Proc
+	PSPropertyBag_WriteLONG                     *win32.Proc
+	PSPropertyBag_WritePOINTL                   *win32.Proc
+	PSPropertyBag_WritePOINTS                   *win32.Proc
+	PSPropertyBag_WritePropertyKey              *win32.Proc
+	PSPropertyBag_WriteRECTL                    *win32.Proc
+	PSPropertyBag_WriteSHORT                    *win32.Proc
+	PSPropertyBag_WriteStr                      *win32.Proc
+	PSPropertyBag_WriteStream                   *win32.Proc
+	PSPropertyBag_WriteULONGLONG                *win32.Proc
+	PSPropertyBag_WriteUnknown                  *win32.Proc
+	PSPropertyKeyFromString                     *win32.Proc
+	PSRefreshPropertySchema                     *win32.Proc
+	PSRegisterPropertySchema                    *win32.Proc
+	PSSetPropertyValue                          *win32.Proc
+	PSStringFromPropertyKey                     *win32.Proc
+	PSUnregisterPropertySchema                  *win32.Proc
+	PifMgr_CloseProperties                      *win32.Proc
+	PifMgr_GetProperties                        *win32.Proc
+	PifMgr_OpenProperties                       *win32.Proc
+	PifMgr_SetProperties                        *win32.Proc
+	SHAddDefaultPropertiesByExt                 *win32.Proc
+	SHGetPropertyStoreForWindow                 *win32.Proc
+	SHGetPropertyStoreFromIDList                *win32.Proc
+	SHGetPropertyStoreFromParsingName           *win32.Proc
+	SHPropStgCreate                             *win32.Proc
+	SHPropStgReadMultiple                       *win32.Proc
+	SHPropStgWriteMultiple                      *win32.Proc
+}{
+	PSCoerceToCanonicalValue:                    procPSCoerceToCanonicalValue,
+	PSCreateAdapterFromPropertyStore:            procPSCreateAdapterFromPropertyStore,
+	PSCreateDelayedMultiplexPropertyStore:       procPSCreateDelayedMultiplexPropertyStore,
+	PSCreateMemoryPropertyStore:                 procPSCreateMemoryPropertyStore,
+	PSCreateMultiplexPropertyStore:              procPSCreateMultiplexPropertyStore,
+	PSCreatePropertyChangeArray:                 procPSCreatePropertyChangeArray,
+	PSCreatePropertyStoreFromObject:             procPSCreatePropertyStoreFromObject,
+	PSCreatePropertyStoreFromPropertySetStorage: procPSCreatePropertyStoreFromPropertySetStorage,
+	PSCreateSimplePropertyChange:                procPSCreateSimplePropertyChange,
+	PSEnumeratePropertyDescriptions:             procPSEnumeratePropertyDescriptions,
+	PSFormatForDisplay:                          procPSFormatForDisplay,
+	PSFormatForDisplayAlloc:                     procPSFormatForDisplayAlloc,
+	PSFormatPropertyValue:                       procPSFormatPropertyValue,
+	PSGetImageReferenceForValue:                 procPSGetImageReferenceForValue,
+	PSGetItemPropertyHandler:                    procPSGetItemPropertyHandler,
+	PSGetItemPropertyHandlerWithCreateObject:    procPSGetItemPropertyHandlerWithCreateObject,
+	PSGetNameFromPropertyKey:                    procPSGetNameFromPropertyKey,
+	PSGetNamedPropertyFromPropertyStorage:       procPSGetNamedPropertyFromPropertyStorage,
+	PSGetPropertyDescription:                    procPSGetPropertyDescription,
+	PSGetPropertyDescriptionByName:              procPSGetPropertyDescriptionByName,
+	PSGetPropertyDescriptionListFromString:      procPSGetPropertyDescriptionListFromString,
+	PSGetPropertyFromPropertyStorage:            procPSGetPropertyFromPropertyStorage,
+	PSGetPropertyKeyFromName:                    procPSGetPropertyKeyFromName,
+	PSGetPropertySystem:                         procPSGetPropertySystem,
+	PSGetPropertyValue:                          procPSGetPropertyValue,
+	PSLookupPropertyHandlerCLSID:                procPSLookupPropertyHandlerCLSID,
+	PSPropertyBag_Delete:                        procPSPropertyBag_Delete,
+	PSPropertyBag_ReadBOOL:                      procPSPropertyBag_ReadBOOL,
+	PSPropertyBag_ReadBSTR:                      procPSPropertyBag_ReadBSTR,
+	PSPropertyBag_ReadDWORD:                     procPSPropertyBag_ReadDWORD,
+	PSPropertyBag_ReadGUID:                      procPSPropertyBag_ReadGUID,
+	PSPropertyBag_ReadInt:                       procPSPropertyBag_ReadInt,
+	PSPropertyBag_ReadLONG:                      procPSPropertyBag_ReadLONG,
+	PSPropertyBag_ReadPOINTL:                    procPSPropertyBag_ReadPOINTL,
+	PSPropertyBag_ReadPOINTS:                    procPSPropertyBag_ReadPOINTS,
+	PSPropertyBag_ReadPropertyKey:               procPSPropertyBag_ReadPropertyKey,
+	PSPropertyBag_ReadRECTL:                     procPSPropertyBag_ReadRECTL,
+	PSPropertyBag_ReadSHORT:                     procPSPropertyBag_ReadSHORT,
+	PSPropertyBag_ReadStr:                       procPSPropertyBag_ReadStr,
+	PSPropertyBag_ReadStrAlloc:                  procPSPropertyBag_ReadStrAlloc,
+	PSPropertyBag_ReadStream:                    procPSPropertyBag_ReadStream,
+	PSPropertyBag_ReadType:                      procPSPropertyBag_ReadType,
+	PSPropertyBag_ReadULONGLONG:                 procPSPropertyBag_ReadULONGLONG,
+	PSPropertyBag_ReadUnknown:                   procPSPropertyBag_ReadUnknown,
+	PSPropertyBag_WriteBOOL:                     procPSPropertyBag_WriteBOOL,
+	PSPropertyBag_WriteBSTR:                     procPSPropertyBag_WriteBSTR,
+	PSPropertyBag_WriteDWORD:                    procPSPropertyBag_WriteDWORD,
+	PSPropertyBag_WriteGUID:                     procPSPropertyBag_WriteGUID,
+	PSPropertyBag_WriteInt:                      procPSPropertyBag_WriteInt,
+	PSPropertyBag_WriteLONG:                     procPSPropertyBag_WriteLONG,
+	PSPropertyBag_WritePOINTL:                   procPSPropertyBag_WritePOINTL,
+	PSPropertyBag_WritePOINTS:                   procPSPropertyBag_WritePOINTS,
+	PSPropertyBag_WritePropertyKey:              procPSPropertyBag_WritePropertyKey,
+	PSPropertyBag_WriteRECTL:                    procPSPropertyBag_WriteRECTL,
+	PSPropertyBag_WriteSHORT:                    procPSPropertyBag_WriteSHORT,
+	PSPropertyBag_WriteStr:                      procPSPropertyBag_WriteStr,
+	PSPropertyBag_WriteStream:                   procPSPropertyBag_WriteStream,
+	PSPropertyBag_WriteULONGLONG:                procPSPropertyBag_WriteULONGLONG,
+	PSPropertyBag_WriteUnknown:                  procPSPropertyBag_WriteUnknown,
+	PSPropertyKeyFromString:                     procPSPropertyKeyFromString,
+	PSRefreshPropertySchema:                     procPSRefreshPropertySchema,
+	PSRegisterPropertySchema:                    procPSRegisterPropertySchema,
+	PSSetPropertyValue:                          procPSSetPropertyValue,
+	PSStringFromPropertyKey:                     procPSStringFromPropertyKey,
+	PSUnregisterPropertySchema:                  procPSUnregisterPropertySchema,
+	PifMgr_CloseProperties:                      procPifMgr_CloseProperties,
+	PifMgr_GetProperties:                        procPifMgr_GetProperties,
+	PifMgr_OpenProperties:                       procPifMgr_OpenProperties,
+	PifMgr_SetProperties:                        procPifMgr_SetProperties,
+	SHAddDefaultPropertiesByExt:                 procSHAddDefaultPropertiesByExt,
+	SHGetPropertyStoreForWindow:                 procSHGetPropertyStoreForWindow,
+	SHGetPropertyStoreFromIDList:                procSHGetPropertyStoreFromIDList,
+	SHGetPropertyStoreFromParsingName:           procSHGetPropertyStoreFromParsingName,
+	SHPropStgCreate:                             procSHPropStgCreate,
+	SHPropStgReadMultiple:                       procSHPropStgReadMultiple,
+	SHPropStgWriteMultiple:                      procSHPropStgWriteMultiple,
+}
+
 // PSCoerceToCanonicalValue calls PROPSYS!PSCoerceToCanonicalValue.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pscoercetocanonicalvalue
 // Minimum OS: windows5.1.2600.
@@ -696,9 +856,9 @@ func PifMgr_GetProperties(hProps foundation.HANDLE, pszGroup foundation.PSTR, lp
 // PifMgr_OpenProperties calls SHELL32!PifMgr_OpenProperties.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pifmgr_openproperties
 // Minimum OS: windows5.0.
-func PifMgr_OpenProperties(pszApp string, pszPIF string, hInf uint32, flOpt uint32) foundation.HANDLE {
+func PifMgr_OpenProperties(pszApp string, pszPIF *string, hInf uint32, flOpt uint32) foundation.HANDLE {
 	_pszApp := win32.UTF16Ptr(pszApp)
-	_pszPIF := win32.UTF16Ptr(pszPIF)
+	_pszPIF := win32.UTF16PtrOrNil(pszPIF)
 	r1, _, _ := syscall.SyscallN(procPifMgr_OpenProperties.Addr(), uintptr(unsafe.Pointer(_pszApp)), uintptr(unsafe.Pointer(_pszPIF)), uintptr(hInf), uintptr(flOpt))
 	return foundation.HANDLE(r1)
 }

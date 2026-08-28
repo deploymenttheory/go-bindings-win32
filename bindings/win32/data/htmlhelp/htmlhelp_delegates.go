@@ -4,6 +4,7 @@
 
 package htmlhelp
 
-// PFNCOLHEAPFREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) int32.
+// PFNCOLHEAPFREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNCOLHEAPFREE uintptr

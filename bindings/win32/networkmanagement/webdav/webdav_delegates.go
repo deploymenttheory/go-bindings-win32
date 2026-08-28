@@ -4,10 +4,12 @@
 
 package webdav
 
-// PFNDAVAUTHCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, uint32, *DAV_CALLBACK_CRED, *AUTHNEXTSTEP, *PFNDAVAUTHCALLBACK_FREECRED) uint32.
+// PFNDAVAUTHCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, uint32, *DAV_CALLBACK_CRED, *AUTHNEXTSTEP, *PFNDAVAUTHCALLBACK_FREECRED) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNDAVAUTHCALLBACK uintptr
 
-// PFNDAVAUTHCALLBACK_FREECRED is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// PFNDAVAUTHCALLBACK_FREECRED is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNDAVAUTHCALLBACK_FREECRED uintptr

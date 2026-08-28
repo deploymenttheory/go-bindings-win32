@@ -31,6 +31,36 @@ var (
 	procWMIsContentProtected      = modWMVCore.NewProc("WMIsContentProtected")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WMCreateBackupRestorer    *win32.Proc
+	WMCreateEditor            *win32.Proc
+	WMCreateIndexer           *win32.Proc
+	WMCreateProfileManager    *win32.Proc
+	WMCreateReader            *win32.Proc
+	WMCreateSyncReader        *win32.Proc
+	WMCreateWriter            *win32.Proc
+	WMCreateWriterFileSink    *win32.Proc
+	WMCreateWriterNetworkSink *win32.Proc
+	WMCreateWriterPushSink    *win32.Proc
+	WMIsContentProtected      *win32.Proc
+}{
+	WMCreateBackupRestorer:    procWMCreateBackupRestorer,
+	WMCreateEditor:            procWMCreateEditor,
+	WMCreateIndexer:           procWMCreateIndexer,
+	WMCreateProfileManager:    procWMCreateProfileManager,
+	WMCreateReader:            procWMCreateReader,
+	WMCreateSyncReader:        procWMCreateSyncReader,
+	WMCreateWriter:            procWMCreateWriter,
+	WMCreateWriterFileSink:    procWMCreateWriterFileSink,
+	WMCreateWriterNetworkSink: procWMCreateWriterNetworkSink,
+	WMCreateWriterPushSink:    procWMCreateWriterPushSink,
+	WMIsContentProtected:      procWMIsContentProtected,
+}
+
 // WMCreateBackupRestorer calls WMVCore!WMCreateBackupRestorer.
 // https://learn.microsoft.com/windows/win32/api/wmsdkidl/nf-wmsdkidl-wmcreatebackuprestorer
 // Minimum OS: windows5.0.

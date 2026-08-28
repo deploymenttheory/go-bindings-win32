@@ -356,6 +356,7 @@ var (
 	procStgMakeUniqueName                           = modSHELL32.NewProc("StgMakeUniqueName")
 	procWin32DeleteFile                             = modSHELL32.NewProc("Win32DeleteFile")
 	procWriteCabinetState                           = modSHELL32.NewProc("WriteCabinetState")
+	procAssocCreate                                 = modSHLWAPI.NewProc("AssocCreate")
 	procAssocGetPerceivedType                       = modSHLWAPI.NewProc("AssocGetPerceivedType")
 	procAssocIsDangerous                            = modSHLWAPI.NewProc("AssocIsDangerous")
 	procAssocQueryKey                               = modSHLWAPI.NewProc("AssocQueryKeyW")
@@ -738,6 +739,1410 @@ var (
 	procUnloadUserProfile                           = modUSERENV.NewProc("UnloadUserProfile")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AssocCreate                                 *win32.Proc
+	AssocCreateForClasses                       *win32.Proc
+	AssocGetDetailsOfPropKey                    *win32.Proc
+	AssocGetPerceivedType                       *win32.Proc
+	AssocIsDangerous                            *win32.Proc
+	AssocQueryKey                               *win32.Proc
+	AssocQueryKeyA                              *win32.Proc
+	AssocQueryString                            *win32.Proc
+	AssocQueryStringA                           *win32.Proc
+	AssocQueryStringByKey                       *win32.Proc
+	AssocQueryStringByKeyA                      *win32.Proc
+	CDefFolderMenu_Create2                      *win32.Proc
+	CIDLData_CreateFromIDArray                  *win32.Proc
+	ChrCmpI                                     *win32.Proc
+	ChrCmpIA                                    *win32.Proc
+	ColorAdjustLuma                             *win32.Proc
+	ColorHLSToRGB                               *win32.Proc
+	ColorRGBToHLS                               *win32.Proc
+	CommandLineToArgvW                          *win32.Proc
+	ConnectToConnectionPoint                    *win32.Proc
+	CreateProfile                               *win32.Proc
+	DAD_AutoScroll                              *win32.Proc
+	DAD_DragEnterEx                             *win32.Proc
+	DAD_DragEnterEx2                            *win32.Proc
+	DAD_DragLeave                               *win32.Proc
+	DAD_DragMove                                *win32.Proc
+	DAD_SetDragImage                            *win32.Proc
+	DAD_ShowDragImage                           *win32.Proc
+	DefSubclassProc                             *win32.Proc
+	DeleteProfile                               *win32.Proc
+	DeleteProfileA                              *win32.Proc
+	DoEnvironmentSubst                          *win32.Proc
+	DoEnvironmentSubstA                         *win32.Proc
+	DragAcceptFiles                             *win32.Proc
+	DragFinish                                  *win32.Proc
+	DragQueryFile                               *win32.Proc
+	DragQueryFileA                              *win32.Proc
+	DragQueryPoint                              *win32.Proc
+	DriveType                                   *win32.Proc
+	DuplicateIcon                               *win32.Proc
+	ExtractAssociatedIcon                       *win32.Proc
+	ExtractAssociatedIconA                      *win32.Proc
+	ExtractAssociatedIconEx                     *win32.Proc
+	ExtractAssociatedIconExA                    *win32.Proc
+	ExtractIcon                                 *win32.Proc
+	ExtractIconA                                *win32.Proc
+	ExtractIconEx                               *win32.Proc
+	ExtractIconExA                              *win32.Proc
+	FileIconInit                                *win32.Proc
+	FindExecutable                              *win32.Proc
+	FindExecutableA                             *win32.Proc
+	GetAcceptLanguages                          *win32.Proc
+	GetAcceptLanguagesA                         *win32.Proc
+	GetAllUsersProfileDirectory                 *win32.Proc
+	GetAllUsersProfileDirectoryA                *win32.Proc
+	GetCurrentProcessExplicitAppUserModelID     *win32.Proc
+	GetDefaultUserProfileDirectory              *win32.Proc
+	GetDefaultUserProfileDirectoryA             *win32.Proc
+	GetDpiForShellUIComponent                   *win32.Proc
+	GetFileNameFromBrowse                       *win32.Proc
+	GetMenuContextHelpId                        *win32.Proc
+	GetMenuPosFromID                            *win32.Proc
+	GetProfileType                              *win32.Proc
+	GetProfilesDirectory                        *win32.Proc
+	GetProfilesDirectoryA                       *win32.Proc
+	GetScaleFactorForDevice                     *win32.Proc
+	GetScaleFactorForMonitor                    *win32.Proc
+	GetUserProfileDirectory                     *win32.Proc
+	GetUserProfileDirectoryA                    *win32.Proc
+	GetWindowContextHelpId                      *win32.Proc
+	GetWindowSubclass                           *win32.Proc
+	HMONITOR_UserFree                           *win32.Proc
+	HMONITOR_UserFree64                         *win32.Proc
+	HMONITOR_UserMarshal                        *win32.Proc
+	HMONITOR_UserMarshal64                      *win32.Proc
+	HMONITOR_UserSize                           *win32.Proc
+	HMONITOR_UserSize64                         *win32.Proc
+	HMONITOR_UserUnmarshal                      *win32.Proc
+	HMONITOR_UserUnmarshal64                    *win32.Proc
+	HashData                                    *win32.Proc
+	HlinkClone                                  *win32.Proc
+	HlinkCreateBrowseContext                    *win32.Proc
+	HlinkCreateExtensionServices                *win32.Proc
+	HlinkCreateFromData                         *win32.Proc
+	HlinkCreateFromMoniker                      *win32.Proc
+	HlinkCreateFromString                       *win32.Proc
+	HlinkCreateShortcut                         *win32.Proc
+	HlinkCreateShortcutFromMoniker              *win32.Proc
+	HlinkCreateShortcutFromString               *win32.Proc
+	HlinkGetSpecialReference                    *win32.Proc
+	HlinkGetValueFromParams                     *win32.Proc
+	HlinkIsShortcut                             *win32.Proc
+	HlinkNavigate                               *win32.Proc
+	HlinkNavigateToStringReference              *win32.Proc
+	HlinkOnNavigate                             *win32.Proc
+	HlinkOnRenameDocument                       *win32.Proc
+	HlinkParseDisplayName                       *win32.Proc
+	HlinkPreprocessMoniker                      *win32.Proc
+	HlinkQueryCreateFromData                    *win32.Proc
+	HlinkResolveMonikerForData                  *win32.Proc
+	HlinkResolveShortcut                        *win32.Proc
+	HlinkResolveShortcutToMoniker               *win32.Proc
+	HlinkResolveShortcutToString                *win32.Proc
+	HlinkResolveStringForData                   *win32.Proc
+	HlinkSetSpecialReference                    *win32.Proc
+	HlinkTranslateURL                           *win32.Proc
+	HlinkUpdateStackItem                        *win32.Proc
+	ILAppendID                                  *win32.Proc
+	ILClone                                     *win32.Proc
+	ILCloneFirst                                *win32.Proc
+	ILCombine                                   *win32.Proc
+	ILCreateFromPath                            *win32.Proc
+	ILCreateFromPathA                           *win32.Proc
+	ILFindChild                                 *win32.Proc
+	ILFindLastID                                *win32.Proc
+	ILFree                                      *win32.Proc
+	ILGetNext                                   *win32.Proc
+	ILGetSize                                   *win32.Proc
+	ILIsEqual                                   *win32.Proc
+	ILIsParent                                  *win32.Proc
+	ILLoadFromStreamEx                          *win32.Proc
+	ILRemoveLastID                              *win32.Proc
+	ILSaveToStream                              *win32.Proc
+	IStream_Copy                                *win32.Proc
+	IStream_Read                                *win32.Proc
+	IStream_ReadPidl                            *win32.Proc
+	IStream_ReadStr                             *win32.Proc
+	IStream_Reset                               *win32.Proc
+	IStream_Size                                *win32.Proc
+	IStream_Write                               *win32.Proc
+	IStream_WritePidl                           *win32.Proc
+	IStream_WriteStr                            *win32.Proc
+	IUnknown_AtomicRelease                      *win32.Proc
+	IUnknown_GetSite                            *win32.Proc
+	IUnknown_GetWindow                          *win32.Proc
+	IUnknown_QueryService                       *win32.Proc
+	IUnknown_Set                                *win32.Proc
+	IUnknown_SetSite                            *win32.Proc
+	ImportPrivacySettings                       *win32.Proc
+	InitNetworkAddressControl                   *win32.Proc
+	InitPropVariantFromStrRet                   *win32.Proc
+	InitVariantFromStrRet                       *win32.Proc
+	IntlStrEqWorker                             *win32.Proc
+	IntlStrEqWorkerA                            *win32.Proc
+	IsCharSpace                                 *win32.Proc
+	IsCharSpaceA                                *win32.Proc
+	IsInternetESCEnabled                        *win32.Proc
+	IsLFNDrive                                  *win32.Proc
+	IsLFNDriveA                                 *win32.Proc
+	IsNetDrive                                  *win32.Proc
+	IsOS                                        *win32.Proc
+	IsUserAnAdmin                               *win32.Proc
+	LoadUserProfile                             *win32.Proc
+	LoadUserProfileA                            *win32.Proc
+	OleSaveToStreamEx                           *win32.Proc
+	OpenRegStream                               *win32.Proc
+	ParseURL                                    *win32.Proc
+	ParseURLA                                   *win32.Proc
+	PathAddBackslash                            *win32.Proc
+	PathAddBackslashA                           *win32.Proc
+	PathAddExtension                            *win32.Proc
+	PathAddExtensionA                           *win32.Proc
+	PathAllocCanonicalize                       *win32.Proc
+	PathAllocCombine                            *win32.Proc
+	PathAppend                                  *win32.Proc
+	PathAppendA                                 *win32.Proc
+	PathBuildRoot                               *win32.Proc
+	PathBuildRootA                              *win32.Proc
+	PathCanonicalize                            *win32.Proc
+	PathCanonicalizeA                           *win32.Proc
+	PathCchAddBackslash                         *win32.Proc
+	PathCchAddBackslashEx                       *win32.Proc
+	PathCchAddExtension                         *win32.Proc
+	PathCchAppend                               *win32.Proc
+	PathCchAppendEx                             *win32.Proc
+	PathCchCanonicalize                         *win32.Proc
+	PathCchCanonicalizeEx                       *win32.Proc
+	PathCchCombine                              *win32.Proc
+	PathCchCombineEx                            *win32.Proc
+	PathCchFindExtension                        *win32.Proc
+	PathCchIsRoot                               *win32.Proc
+	PathCchRemoveBackslash                      *win32.Proc
+	PathCchRemoveBackslashEx                    *win32.Proc
+	PathCchRemoveExtension                      *win32.Proc
+	PathCchRemoveFileSpec                       *win32.Proc
+	PathCchRenameExtension                      *win32.Proc
+	PathCchSkipRoot                             *win32.Proc
+	PathCchStripPrefix                          *win32.Proc
+	PathCchStripToRoot                          *win32.Proc
+	PathCleanupSpec                             *win32.Proc
+	PathCombine                                 *win32.Proc
+	PathCombineA                                *win32.Proc
+	PathCommonPrefix                            *win32.Proc
+	PathCommonPrefixA                           *win32.Proc
+	PathCompactPath                             *win32.Proc
+	PathCompactPathA                            *win32.Proc
+	PathCompactPathEx                           *win32.Proc
+	PathCompactPathExA                          *win32.Proc
+	PathCreateFromUrl                           *win32.Proc
+	PathCreateFromUrlA                          *win32.Proc
+	PathCreateFromUrlAlloc                      *win32.Proc
+	PathFileExists                              *win32.Proc
+	PathFileExistsA                             *win32.Proc
+	PathFindExtension                           *win32.Proc
+	PathFindExtensionA                          *win32.Proc
+	PathFindFileName                            *win32.Proc
+	PathFindFileNameA                           *win32.Proc
+	PathFindNextComponent                       *win32.Proc
+	PathFindNextComponentA                      *win32.Proc
+	PathFindOnPath                              *win32.Proc
+	PathFindOnPathA                             *win32.Proc
+	PathFindSuffixArray                         *win32.Proc
+	PathFindSuffixArrayA                        *win32.Proc
+	PathGetArgs                                 *win32.Proc
+	PathGetArgsA                                *win32.Proc
+	PathGetCharType                             *win32.Proc
+	PathGetCharTypeA                            *win32.Proc
+	PathGetDriveNumber                          *win32.Proc
+	PathGetDriveNumberA                         *win32.Proc
+	PathGetShortPath                            *win32.Proc
+	PathIsContentType                           *win32.Proc
+	PathIsContentTypeA                          *win32.Proc
+	PathIsDirectory                             *win32.Proc
+	PathIsDirectoryA                            *win32.Proc
+	PathIsDirectoryEmpty                        *win32.Proc
+	PathIsDirectoryEmptyA                       *win32.Proc
+	PathIsExe                                   *win32.Proc
+	PathIsFileSpec                              *win32.Proc
+	PathIsFileSpecA                             *win32.Proc
+	PathIsLFNFileSpec                           *win32.Proc
+	PathIsLFNFileSpecA                          *win32.Proc
+	PathIsNetworkPath                           *win32.Proc
+	PathIsNetworkPathA                          *win32.Proc
+	PathIsPrefix                                *win32.Proc
+	PathIsPrefixA                               *win32.Proc
+	PathIsRelative                              *win32.Proc
+	PathIsRelativeA                             *win32.Proc
+	PathIsRoot                                  *win32.Proc
+	PathIsRootA                                 *win32.Proc
+	PathIsSameRoot                              *win32.Proc
+	PathIsSameRootA                             *win32.Proc
+	PathIsSlow                                  *win32.Proc
+	PathIsSlowA                                 *win32.Proc
+	PathIsSystemFolder                          *win32.Proc
+	PathIsSystemFolderA                         *win32.Proc
+	PathIsUNC                                   *win32.Proc
+	PathIsUNCA                                  *win32.Proc
+	PathIsUNCEx                                 *win32.Proc
+	PathIsUNCServer                             *win32.Proc
+	PathIsUNCServerA                            *win32.Proc
+	PathIsUNCServerShare                        *win32.Proc
+	PathIsUNCServerShareA                       *win32.Proc
+	PathIsURL                                   *win32.Proc
+	PathIsURLA                                  *win32.Proc
+	PathMakePretty                              *win32.Proc
+	PathMakePrettyA                             *win32.Proc
+	PathMakeSystemFolder                        *win32.Proc
+	PathMakeSystemFolderA                       *win32.Proc
+	PathMakeUniqueName                          *win32.Proc
+	PathMatchSpec                               *win32.Proc
+	PathMatchSpecA                              *win32.Proc
+	PathMatchSpecEx                             *win32.Proc
+	PathMatchSpecExA                            *win32.Proc
+	PathParseIconLocation                       *win32.Proc
+	PathParseIconLocationA                      *win32.Proc
+	PathQualify                                 *win32.Proc
+	PathQuoteSpaces                             *win32.Proc
+	PathQuoteSpacesA                            *win32.Proc
+	PathRelativePathTo                          *win32.Proc
+	PathRelativePathToA                         *win32.Proc
+	PathRemoveArgs                              *win32.Proc
+	PathRemoveArgsA                             *win32.Proc
+	PathRemoveBackslash                         *win32.Proc
+	PathRemoveBackslashA                        *win32.Proc
+	PathRemoveBlanks                            *win32.Proc
+	PathRemoveBlanksA                           *win32.Proc
+	PathRemoveExtension                         *win32.Proc
+	PathRemoveExtensionA                        *win32.Proc
+	PathRemoveFileSpec                          *win32.Proc
+	PathRemoveFileSpecA                         *win32.Proc
+	PathRenameExtension                         *win32.Proc
+	PathRenameExtensionA                        *win32.Proc
+	PathResolve                                 *win32.Proc
+	PathSearchAndQualify                        *win32.Proc
+	PathSearchAndQualifyA                       *win32.Proc
+	PathSetDlgItemPath                          *win32.Proc
+	PathSetDlgItemPathA                         *win32.Proc
+	PathSkipRoot                                *win32.Proc
+	PathSkipRootA                               *win32.Proc
+	PathStripPath                               *win32.Proc
+	PathStripPathA                              *win32.Proc
+	PathStripToRoot                             *win32.Proc
+	PathStripToRootA                            *win32.Proc
+	PathUnExpandEnvStrings                      *win32.Proc
+	PathUnExpandEnvStringsA                     *win32.Proc
+	PathUndecorate                              *win32.Proc
+	PathUndecorateA                             *win32.Proc
+	PathUnmakeSystemFolder                      *win32.Proc
+	PathUnmakeSystemFolderA                     *win32.Proc
+	PathUnquoteSpaces                           *win32.Proc
+	PathUnquoteSpacesA                          *win32.Proc
+	PathYetAnotherMakeUniqueName                *win32.Proc
+	PickIconDlg                                 *win32.Proc
+	PropVariantToStrRet                         *win32.Proc
+	QISearch                                    *win32.Proc
+	ReadCabinetState                            *win32.Proc
+	RealDriveType                               *win32.Proc
+	RegisterAppConstrainedChangeNotification    *win32.Proc
+	RegisterAppStateChangeNotification          *win32.Proc
+	RegisterScaleChangeEvent                    *win32.Proc
+	RegisterScaleChangeNotifications            *win32.Proc
+	RemoveWindowSubclass                        *win32.Proc
+	RestartDialog                               *win32.Proc
+	RestartDialogEx                             *win32.Proc
+	RevokeScaleChangeNotifications              *win32.Proc
+	SHAddFromPropSheetExtArray                  *win32.Proc
+	SHAddToRecentDocs                           *win32.Proc
+	SHAlloc                                     *win32.Proc
+	SHAllocShared                               *win32.Proc
+	SHAnsiToAnsi                                *win32.Proc
+	SHAnsiToUnicode                             *win32.Proc
+	SHAppBarMessage                             *win32.Proc
+	SHAssocEnumHandlers                         *win32.Proc
+	SHAssocEnumHandlersForProtocolByApplication *win32.Proc
+	SHAutoComplete                              *win32.Proc
+	SHBindToFolderIDListParent                  *win32.Proc
+	SHBindToFolderIDListParentEx                *win32.Proc
+	SHBindToObject                              *win32.Proc
+	SHBindToParent                              *win32.Proc
+	SHBrowseForFolder                           *win32.Proc
+	SHBrowseForFolderA                          *win32.Proc
+	SHCLSIDFromString                           *win32.Proc
+	SHChangeNotification_Lock                   *win32.Proc
+	SHChangeNotification_Unlock                 *win32.Proc
+	SHChangeNotify                              *win32.Proc
+	SHChangeNotifyDeregister                    *win32.Proc
+	SHChangeNotifyRegister                      *win32.Proc
+	SHChangeNotifyRegisterThread                *win32.Proc
+	SHCloneSpecialIDList                        *win32.Proc
+	SHCoCreateInstance                          *win32.Proc
+	SHCopyKey                                   *win32.Proc
+	SHCopyKeyA                                  *win32.Proc
+	SHCreateAssociationRegistration             *win32.Proc
+	SHCreateDataObject                          *win32.Proc
+	SHCreateDefaultContextMenu                  *win32.Proc
+	SHCreateDefaultExtractIcon                  *win32.Proc
+	SHCreateDefaultPropertiesOp                 *win32.Proc
+	SHCreateDirectory                           *win32.Proc
+	SHCreateDirectoryEx                         *win32.Proc
+	SHCreateDirectoryExA                        *win32.Proc
+	SHCreateFileExtractIcon                     *win32.Proc
+	SHCreateItemFromIDList                      *win32.Proc
+	SHCreateItemFromParsingName                 *win32.Proc
+	SHCreateItemFromRelativeName                *win32.Proc
+	SHCreateItemInKnownFolder                   *win32.Proc
+	SHCreateItemWithParent                      *win32.Proc
+	SHCreateMemStream                           *win32.Proc
+	SHCreateProcessAsUserW                      *win32.Proc
+	SHCreatePropSheetExtArray                   *win32.Proc
+	SHCreateQueryCancelAutoPlayMoniker          *win32.Proc
+	SHCreateShellFolderView                     *win32.Proc
+	SHCreateShellFolderViewEx                   *win32.Proc
+	SHCreateShellItem                           *win32.Proc
+	SHCreateShellItemArray                      *win32.Proc
+	SHCreateShellItemArrayFromDataObject        *win32.Proc
+	SHCreateShellItemArrayFromIDLists           *win32.Proc
+	SHCreateShellItemArrayFromShellItem         *win32.Proc
+	SHCreateShellPalette                        *win32.Proc
+	SHCreateStdEnumFmtEtc                       *win32.Proc
+	SHCreateStreamOnFile                        *win32.Proc
+	SHCreateStreamOnFileA                       *win32.Proc
+	SHCreateStreamOnFileEx                      *win32.Proc
+	SHCreateThread                              *win32.Proc
+	SHCreateThreadRef                           *win32.Proc
+	SHCreateThreadWithHandle                    *win32.Proc
+	SHDefExtractIcon                            *win32.Proc
+	SHDefExtractIconA                           *win32.Proc
+	SHDeleteEmptyKey                            *win32.Proc
+	SHDeleteEmptyKeyA                           *win32.Proc
+	SHDeleteKey                                 *win32.Proc
+	SHDeleteKeyA                                *win32.Proc
+	SHDeleteValue                               *win32.Proc
+	SHDeleteValueA                              *win32.Proc
+	SHDestroyPropSheetExtArray                  *win32.Proc
+	SHDoDragDrop                                *win32.Proc
+	SHEmptyRecycleBin                           *win32.Proc
+	SHEmptyRecycleBinA                          *win32.Proc
+	SHEnumKeyEx                                 *win32.Proc
+	SHEnumKeyExA                                *win32.Proc
+	SHEnumValue                                 *win32.Proc
+	SHEnumValueA                                *win32.Proc
+	SHEnumerateUnreadMailAccounts               *win32.Proc
+	SHEvaluateSystemCommandTemplate             *win32.Proc
+	SHFileOperation                             *win32.Proc
+	SHFileOperationA                            *win32.Proc
+	SHFindFiles                                 *win32.Proc
+	SHFind_InitMenuPopup                        *win32.Proc
+	SHFlushSFCache                              *win32.Proc
+	SHFormatDateTime                            *win32.Proc
+	SHFormatDateTimeA                           *win32.Proc
+	SHFormatDrive                               *win32.Proc
+	SHFree                                      *win32.Proc
+	SHFreeNameMappings                          *win32.Proc
+	SHFreeShared                                *win32.Proc
+	SHGetAttributesFromDataObject               *win32.Proc
+	SHGetDataFromIDList                         *win32.Proc
+	SHGetDataFromIDListA                        *win32.Proc
+	SHGetDesktopFolder                          *win32.Proc
+	SHGetDiskFreeSpaceEx                        *win32.Proc
+	SHGetDiskFreeSpaceExA                       *win32.Proc
+	SHGetDriveMedia                             *win32.Proc
+	SHGetFileInfo                               *win32.Proc
+	SHGetFileInfoA                              *win32.Proc
+	SHGetFolderLocation                         *win32.Proc
+	SHGetFolderPath                             *win32.Proc
+	SHGetFolderPathA                            *win32.Proc
+	SHGetFolderPathAndSubDir                    *win32.Proc
+	SHGetFolderPathAndSubDirA                   *win32.Proc
+	SHGetIDListFromObject                       *win32.Proc
+	SHGetIconOverlayIndex                       *win32.Proc
+	SHGetIconOverlayIndexA                      *win32.Proc
+	SHGetImageList                              *win32.Proc
+	SHGetInstanceExplorer                       *win32.Proc
+	SHGetInverseCMAP                            *win32.Proc
+	SHGetItemFromDataObject                     *win32.Proc
+	SHGetItemFromObject                         *win32.Proc
+	SHGetKnownFolderIDList                      *win32.Proc
+	SHGetKnownFolderItem                        *win32.Proc
+	SHGetKnownFolderPath                        *win32.Proc
+	SHGetLocalizedName                          *win32.Proc
+	SHGetMalloc                                 *win32.Proc
+	SHGetNameFromIDList                         *win32.Proc
+	SHGetNewLinkInfo                            *win32.Proc
+	SHGetNewLinkInfoA                           *win32.Proc
+	SHGetPathFromIDList                         *win32.Proc
+	SHGetPathFromIDListA                        *win32.Proc
+	SHGetPathFromIDListEx                       *win32.Proc
+	SHGetRealIDL                                *win32.Proc
+	SHGetSetFolderCustomSettings                *win32.Proc
+	SHGetSetSettings                            *win32.Proc
+	SHGetSettings                               *win32.Proc
+	SHGetSpecialFolderLocation                  *win32.Proc
+	SHGetSpecialFolderPath                      *win32.Proc
+	SHGetSpecialFolderPathA                     *win32.Proc
+	SHGetStockIconInfo                          *win32.Proc
+	SHGetTemporaryPropertyForItem               *win32.Proc
+	SHGetThreadRef                              *win32.Proc
+	SHGetUnreadMailCount                        *win32.Proc
+	SHGetValue                                  *win32.Proc
+	SHGetValueA                                 *win32.Proc
+	SHGetViewStatePropertyBag                   *win32.Proc
+	SHGlobalCounterDecrement                    *win32.Proc
+	SHGlobalCounterGetValue                     *win32.Proc
+	SHGlobalCounterIncrement                    *win32.Proc
+	SHHandleUpdateImage                         *win32.Proc
+	SHILCreateFromPath                          *win32.Proc
+	SHInvokePrinterCommand                      *win32.Proc
+	SHInvokePrinterCommandA                     *win32.Proc
+	SHIsFileAvailableOffline                    *win32.Proc
+	SHIsLowMemoryMachine                        *win32.Proc
+	SHLimitInputEdit                            *win32.Proc
+	SHLoadInProc                                *win32.Proc
+	SHLoadIndirectString                        *win32.Proc
+	SHLoadNonloadedIconOverlayIdentifiers       *win32.Proc
+	SHLockShared                                *win32.Proc
+	SHMapPIDLToSystemImageListIndex             *win32.Proc
+	SHMessageBoxCheck                           *win32.Proc
+	SHMessageBoxCheckA                          *win32.Proc
+	SHMultiFileProperties                       *win32.Proc
+	SHObjectProperties                          *win32.Proc
+	SHOpenFolderAndSelectItems                  *win32.Proc
+	SHOpenPropSheet                             *win32.Proc
+	SHOpenRegStream                             *win32.Proc
+	SHOpenRegStream2                            *win32.Proc
+	SHOpenRegStream2A                           *win32.Proc
+	SHOpenRegStreamA                            *win32.Proc
+	SHOpenWithDialog                            *win32.Proc
+	SHParseDisplayName                          *win32.Proc
+	SHPathPrepareForWrite                       *win32.Proc
+	SHPathPrepareForWriteA                      *win32.Proc
+	SHQueryInfoKey                              *win32.Proc
+	SHQueryInfoKeyA                             *win32.Proc
+	SHQueryRecycleBin                           *win32.Proc
+	SHQueryRecycleBinA                          *win32.Proc
+	SHQueryUserNotificationState                *win32.Proc
+	SHQueryValueEx                              *win32.Proc
+	SHQueryValueExA                             *win32.Proc
+	SHRegCloseUSKey                             *win32.Proc
+	SHRegCreateUSKey                            *win32.Proc
+	SHRegCreateUSKeyA                           *win32.Proc
+	SHRegDeleteEmptyUSKey                       *win32.Proc
+	SHRegDeleteEmptyUSKeyA                      *win32.Proc
+	SHRegDeleteUSValue                          *win32.Proc
+	SHRegDeleteUSValueA                         *win32.Proc
+	SHRegDuplicateHKey                          *win32.Proc
+	SHRegEnumUSKey                              *win32.Proc
+	SHRegEnumUSKeyA                             *win32.Proc
+	SHRegEnumUSValue                            *win32.Proc
+	SHRegEnumUSValueA                           *win32.Proc
+	SHRegGetBoolUSValue                         *win32.Proc
+	SHRegGetBoolUSValueA                        *win32.Proc
+	SHRegGetIntW                                *win32.Proc
+	SHRegGetPath                                *win32.Proc
+	SHRegGetPathA                               *win32.Proc
+	SHRegGetUSValue                             *win32.Proc
+	SHRegGetUSValueA                            *win32.Proc
+	SHRegGetValue                               *win32.Proc
+	SHRegGetValueA                              *win32.Proc
+	SHRegGetValueFromHKCUHKLM                   *win32.Proc
+	SHRegOpenUSKey                              *win32.Proc
+	SHRegOpenUSKeyA                             *win32.Proc
+	SHRegQueryInfoUSKey                         *win32.Proc
+	SHRegQueryInfoUSKeyA                        *win32.Proc
+	SHRegQueryUSValue                           *win32.Proc
+	SHRegQueryUSValueA                          *win32.Proc
+	SHRegSetPath                                *win32.Proc
+	SHRegSetPathA                               *win32.Proc
+	SHRegSetUSValue                             *win32.Proc
+	SHRegSetUSValueA                            *win32.Proc
+	SHRegWriteUSValue                           *win32.Proc
+	SHRegWriteUSValueA                          *win32.Proc
+	SHReleaseThreadRef                          *win32.Proc
+	SHRemoveLocalizedName                       *win32.Proc
+	SHReplaceFromPropSheetExtArray              *win32.Proc
+	SHResolveLibrary                            *win32.Proc
+	SHRestricted                                *win32.Proc
+	SHSendMessageBroadcast                      *win32.Proc
+	SHSendMessageBroadcastA                     *win32.Proc
+	SHSetDefaultProperties                      *win32.Proc
+	SHSetFolderPath                             *win32.Proc
+	SHSetFolderPathA                            *win32.Proc
+	SHSetInstanceExplorer                       *win32.Proc
+	SHSetKnownFolderPath                        *win32.Proc
+	SHSetLocalizedName                          *win32.Proc
+	SHSetTemporaryPropertyForItem               *win32.Proc
+	SHSetThreadRef                              *win32.Proc
+	SHSetUnreadMailCount                        *win32.Proc
+	SHSetValue                                  *win32.Proc
+	SHSetValueA                                 *win32.Proc
+	SHShellFolderView_Message                   *win32.Proc
+	SHShowManageLibraryUI                       *win32.Proc
+	SHSimpleIDListFromPath                      *win32.Proc
+	SHSkipJunction                              *win32.Proc
+	SHStartNetConnectionDialog                  *win32.Proc
+	SHStrDup                                    *win32.Proc
+	SHStrDupA                                   *win32.Proc
+	SHStripMneumonic                            *win32.Proc
+	SHStripMneumonicA                           *win32.Proc
+	SHTestTokenMembership                       *win32.Proc
+	SHUnicodeToAnsi                             *win32.Proc
+	SHUnicodeToUnicode                          *win32.Proc
+	SHUnlockShared                              *win32.Proc
+	SHUpdateImage                               *win32.Proc
+	SHUpdateImageA                              *win32.Proc
+	SHValidateUNC                               *win32.Proc
+	SetCurrentProcessExplicitAppUserModelID     *win32.Proc
+	SetMenuContextHelpId                        *win32.Proc
+	SetWindowContextHelpId                      *win32.Proc
+	SetWindowSubclass                           *win32.Proc
+	ShellAbout                                  *win32.Proc
+	ShellAboutA                                 *win32.Proc
+	ShellExecute                                *win32.Proc
+	ShellExecuteA                               *win32.Proc
+	ShellExecuteEx                              *win32.Proc
+	ShellExecuteExA                             *win32.Proc
+	ShellMessageBox                             *win32.Proc
+	ShellMessageBoxA                            *win32.Proc
+	Shell_GetCachedImageIndex                   *win32.Proc
+	Shell_GetCachedImageIndexA                  *win32.Proc
+	Shell_GetCachedImageIndexW                  *win32.Proc
+	Shell_GetImageLists                         *win32.Proc
+	Shell_MergeMenus                            *win32.Proc
+	Shell_NotifyIcon                            *win32.Proc
+	Shell_NotifyIconA                           *win32.Proc
+	Shell_NotifyIconGetRect                     *win32.Proc
+	SignalFileOpen                              *win32.Proc
+	SoftwareUpdateMessageBox                    *win32.Proc
+	StgMakeUniqueName                           *win32.Proc
+	StrCSpn                                     *win32.Proc
+	StrCSpnA                                    *win32.Proc
+	StrCSpnI                                    *win32.Proc
+	StrCSpnIA                                   *win32.Proc
+	StrCatBuff                                  *win32.Proc
+	StrCatBuffA                                 *win32.Proc
+	StrCatChainW                                *win32.Proc
+	StrCatW                                     *win32.Proc
+	StrChr                                      *win32.Proc
+	StrChrA                                     *win32.Proc
+	StrChrI                                     *win32.Proc
+	StrChrIA                                    *win32.Proc
+	StrChrNIW                                   *win32.Proc
+	StrChrNW                                    *win32.Proc
+	StrCmpC                                     *win32.Proc
+	StrCmpCA                                    *win32.Proc
+	StrCmpIC                                    *win32.Proc
+	StrCmpICA                                   *win32.Proc
+	StrCmpIW                                    *win32.Proc
+	StrCmpLogicalW                              *win32.Proc
+	StrCmpN                                     *win32.Proc
+	StrCmpNA                                    *win32.Proc
+	StrCmpNC                                    *win32.Proc
+	StrCmpNCA                                   *win32.Proc
+	StrCmpNI                                    *win32.Proc
+	StrCmpNIA                                   *win32.Proc
+	StrCmpNIC                                   *win32.Proc
+	StrCmpNICA                                  *win32.Proc
+	StrCmpW                                     *win32.Proc
+	StrCpyNW                                    *win32.Proc
+	StrCpyW                                     *win32.Proc
+	StrDup                                      *win32.Proc
+	StrDupA                                     *win32.Proc
+	StrFormatByteSize                           *win32.Proc
+	StrFormatByteSize64A                        *win32.Proc
+	StrFormatByteSizeA                          *win32.Proc
+	StrFormatByteSizeEx                         *win32.Proc
+	StrFormatKBSize                             *win32.Proc
+	StrFormatKBSizeA                            *win32.Proc
+	StrFromTimeInterval                         *win32.Proc
+	StrFromTimeIntervalA                        *win32.Proc
+	StrIsIntlEqual                              *win32.Proc
+	StrIsIntlEqualA                             *win32.Proc
+	StrNCat                                     *win32.Proc
+	StrNCatA                                    *win32.Proc
+	StrPBrk                                     *win32.Proc
+	StrPBrkA                                    *win32.Proc
+	StrRChr                                     *win32.Proc
+	StrRChrA                                    *win32.Proc
+	StrRChrI                                    *win32.Proc
+	StrRChrIA                                   *win32.Proc
+	StrRStrI                                    *win32.Proc
+	StrRStrIA                                   *win32.Proc
+	StrRetToBSTR                                *win32.Proc
+	StrRetToBuf                                 *win32.Proc
+	StrRetToBufA                                *win32.Proc
+	StrRetToStr                                 *win32.Proc
+	StrRetToStrA                                *win32.Proc
+	StrSpn                                      *win32.Proc
+	StrSpnA                                     *win32.Proc
+	StrStr                                      *win32.Proc
+	StrStrA                                     *win32.Proc
+	StrStrI                                     *win32.Proc
+	StrStrIA                                    *win32.Proc
+	StrStrNIW                                   *win32.Proc
+	StrStrNW                                    *win32.Proc
+	StrToInt                                    *win32.Proc
+	StrToInt64Ex                                *win32.Proc
+	StrToInt64ExA                               *win32.Proc
+	StrToIntA                                   *win32.Proc
+	StrToIntEx                                  *win32.Proc
+	StrToIntExA                                 *win32.Proc
+	StrTrim                                     *win32.Proc
+	StrTrimA                                    *win32.Proc
+	UnloadUserProfile                           *win32.Proc
+	UnregisterAppConstrainedChangeNotification  *win32.Proc
+	UnregisterAppStateChangeNotification        *win32.Proc
+	UnregisterScaleChangeEvent                  *win32.Proc
+	UrlApplyScheme                              *win32.Proc
+	UrlApplySchemeA                             *win32.Proc
+	UrlCanonicalize                             *win32.Proc
+	UrlCanonicalizeA                            *win32.Proc
+	UrlCombine                                  *win32.Proc
+	UrlCombineA                                 *win32.Proc
+	UrlCompare                                  *win32.Proc
+	UrlCompareA                                 *win32.Proc
+	UrlCreateFromPath                           *win32.Proc
+	UrlCreateFromPathA                          *win32.Proc
+	UrlEscape                                   *win32.Proc
+	UrlEscapeA                                  *win32.Proc
+	UrlFixupW                                   *win32.Proc
+	UrlGetLocation                              *win32.Proc
+	UrlGetLocationA                             *win32.Proc
+	UrlGetPart                                  *win32.Proc
+	UrlGetPartA                                 *win32.Proc
+	UrlHash                                     *win32.Proc
+	UrlHashA                                    *win32.Proc
+	UrlIs                                       *win32.Proc
+	UrlIsA                                      *win32.Proc
+	UrlIsNoHistory                              *win32.Proc
+	UrlIsNoHistoryA                             *win32.Proc
+	UrlIsOpaque                                 *win32.Proc
+	UrlIsOpaqueA                                *win32.Proc
+	UrlUnescape                                 *win32.Proc
+	UrlUnescapeA                                *win32.Proc
+	VariantToStrRet                             *win32.Proc
+	WhichPlatform                               *win32.Proc
+	Win32DeleteFile                             *win32.Proc
+	WinHelp                                     *win32.Proc
+	WinHelpA                                    *win32.Proc
+	Wnsprintf                                   *win32.Proc
+	WnsprintfA                                  *win32.Proc
+	WriteCabinetState                           *win32.Proc
+	Wvnsprintf                                  *win32.Proc
+	WvnsprintfA                                 *win32.Proc
+}{
+	AssocCreate:                              procAssocCreate,
+	AssocCreateForClasses:                    procAssocCreateForClasses,
+	AssocGetDetailsOfPropKey:                 procAssocGetDetailsOfPropKey,
+	AssocGetPerceivedType:                    procAssocGetPerceivedType,
+	AssocIsDangerous:                         procAssocIsDangerous,
+	AssocQueryKey:                            procAssocQueryKey,
+	AssocQueryKeyA:                           procAssocQueryKeyA,
+	AssocQueryString:                         procAssocQueryString,
+	AssocQueryStringA:                        procAssocQueryStringA,
+	AssocQueryStringByKey:                    procAssocQueryStringByKey,
+	AssocQueryStringByKeyA:                   procAssocQueryStringByKeyA,
+	CDefFolderMenu_Create2:                   procCDefFolderMenu_Create2,
+	CIDLData_CreateFromIDArray:               procCIDLData_CreateFromIDArray,
+	ChrCmpI:                                  procChrCmpI,
+	ChrCmpIA:                                 procChrCmpIA,
+	ColorAdjustLuma:                          procColorAdjustLuma,
+	ColorHLSToRGB:                            procColorHLSToRGB,
+	ColorRGBToHLS:                            procColorRGBToHLS,
+	CommandLineToArgvW:                       procCommandLineToArgvW,
+	ConnectToConnectionPoint:                 procConnectToConnectionPoint,
+	CreateProfile:                            procCreateProfile,
+	DAD_AutoScroll:                           procDAD_AutoScroll,
+	DAD_DragEnterEx:                          procDAD_DragEnterEx,
+	DAD_DragEnterEx2:                         procDAD_DragEnterEx2,
+	DAD_DragLeave:                            procDAD_DragLeave,
+	DAD_DragMove:                             procDAD_DragMove,
+	DAD_SetDragImage:                         procDAD_SetDragImage,
+	DAD_ShowDragImage:                        procDAD_ShowDragImage,
+	DefSubclassProc:                          procDefSubclassProc,
+	DeleteProfile:                            procDeleteProfile,
+	DeleteProfileA:                           procDeleteProfileA,
+	DoEnvironmentSubst:                       procDoEnvironmentSubst,
+	DoEnvironmentSubstA:                      procDoEnvironmentSubstA,
+	DragAcceptFiles:                          procDragAcceptFiles,
+	DragFinish:                               procDragFinish,
+	DragQueryFile:                            procDragQueryFile,
+	DragQueryFileA:                           procDragQueryFileA,
+	DragQueryPoint:                           procDragQueryPoint,
+	DriveType:                                procDriveType,
+	DuplicateIcon:                            procDuplicateIcon,
+	ExtractAssociatedIcon:                    procExtractAssociatedIcon,
+	ExtractAssociatedIconA:                   procExtractAssociatedIconA,
+	ExtractAssociatedIconEx:                  procExtractAssociatedIconEx,
+	ExtractAssociatedIconExA:                 procExtractAssociatedIconExA,
+	ExtractIcon:                              procExtractIcon,
+	ExtractIconA:                             procExtractIconA,
+	ExtractIconEx:                            procExtractIconEx,
+	ExtractIconExA:                           procExtractIconExA,
+	FileIconInit:                             procFileIconInit,
+	FindExecutable:                           procFindExecutable,
+	FindExecutableA:                          procFindExecutableA,
+	GetAcceptLanguages:                       procGetAcceptLanguages,
+	GetAcceptLanguagesA:                      procGetAcceptLanguagesA,
+	GetAllUsersProfileDirectory:              procGetAllUsersProfileDirectory,
+	GetAllUsersProfileDirectoryA:             procGetAllUsersProfileDirectoryA,
+	GetCurrentProcessExplicitAppUserModelID:  procGetCurrentProcessExplicitAppUserModelID,
+	GetDefaultUserProfileDirectory:           procGetDefaultUserProfileDirectory,
+	GetDefaultUserProfileDirectoryA:          procGetDefaultUserProfileDirectoryA,
+	GetDpiForShellUIComponent:                procGetDpiForShellUIComponent,
+	GetFileNameFromBrowse:                    procGetFileNameFromBrowse,
+	GetMenuContextHelpId:                     procGetMenuContextHelpId,
+	GetMenuPosFromID:                         procGetMenuPosFromID,
+	GetProfileType:                           procGetProfileType,
+	GetProfilesDirectory:                     procGetProfilesDirectory,
+	GetProfilesDirectoryA:                    procGetProfilesDirectoryA,
+	GetScaleFactorForDevice:                  procGetScaleFactorForDevice,
+	GetScaleFactorForMonitor:                 procGetScaleFactorForMonitor,
+	GetUserProfileDirectory:                  procGetUserProfileDirectory,
+	GetUserProfileDirectoryA:                 procGetUserProfileDirectoryA,
+	GetWindowContextHelpId:                   procGetWindowContextHelpId,
+	GetWindowSubclass:                        procGetWindowSubclass,
+	HMONITOR_UserFree:                        procHMONITOR_UserFree,
+	HMONITOR_UserFree64:                      procHMONITOR_UserFree64,
+	HMONITOR_UserMarshal:                     procHMONITOR_UserMarshal,
+	HMONITOR_UserMarshal64:                   procHMONITOR_UserMarshal64,
+	HMONITOR_UserSize:                        procHMONITOR_UserSize,
+	HMONITOR_UserSize64:                      procHMONITOR_UserSize64,
+	HMONITOR_UserUnmarshal:                   procHMONITOR_UserUnmarshal,
+	HMONITOR_UserUnmarshal64:                 procHMONITOR_UserUnmarshal64,
+	HashData:                                 procHashData,
+	HlinkClone:                               procHlinkClone,
+	HlinkCreateBrowseContext:                 procHlinkCreateBrowseContext,
+	HlinkCreateExtensionServices:             procHlinkCreateExtensionServices,
+	HlinkCreateFromData:                      procHlinkCreateFromData,
+	HlinkCreateFromMoniker:                   procHlinkCreateFromMoniker,
+	HlinkCreateFromString:                    procHlinkCreateFromString,
+	HlinkCreateShortcut:                      procHlinkCreateShortcut,
+	HlinkCreateShortcutFromMoniker:           procHlinkCreateShortcutFromMoniker,
+	HlinkCreateShortcutFromString:            procHlinkCreateShortcutFromString,
+	HlinkGetSpecialReference:                 procHlinkGetSpecialReference,
+	HlinkGetValueFromParams:                  procHlinkGetValueFromParams,
+	HlinkIsShortcut:                          procHlinkIsShortcut,
+	HlinkNavigate:                            procHlinkNavigate,
+	HlinkNavigateToStringReference:           procHlinkNavigateToStringReference,
+	HlinkOnNavigate:                          procHlinkOnNavigate,
+	HlinkOnRenameDocument:                    procHlinkOnRenameDocument,
+	HlinkParseDisplayName:                    procHlinkParseDisplayName,
+	HlinkPreprocessMoniker:                   procHlinkPreprocessMoniker,
+	HlinkQueryCreateFromData:                 procHlinkQueryCreateFromData,
+	HlinkResolveMonikerForData:               procHlinkResolveMonikerForData,
+	HlinkResolveShortcut:                     procHlinkResolveShortcut,
+	HlinkResolveShortcutToMoniker:            procHlinkResolveShortcutToMoniker,
+	HlinkResolveShortcutToString:             procHlinkResolveShortcutToString,
+	HlinkResolveStringForData:                procHlinkResolveStringForData,
+	HlinkSetSpecialReference:                 procHlinkSetSpecialReference,
+	HlinkTranslateURL:                        procHlinkTranslateURL,
+	HlinkUpdateStackItem:                     procHlinkUpdateStackItem,
+	ILAppendID:                               procILAppendID,
+	ILClone:                                  procILClone,
+	ILCloneFirst:                             procILCloneFirst,
+	ILCombine:                                procILCombine,
+	ILCreateFromPath:                         procILCreateFromPath,
+	ILCreateFromPathA:                        procILCreateFromPathA,
+	ILFindChild:                              procILFindChild,
+	ILFindLastID:                             procILFindLastID,
+	ILFree:                                   procILFree,
+	ILGetNext:                                procILGetNext,
+	ILGetSize:                                procILGetSize,
+	ILIsEqual:                                procILIsEqual,
+	ILIsParent:                               procILIsParent,
+	ILLoadFromStreamEx:                       procILLoadFromStreamEx,
+	ILRemoveLastID:                           procILRemoveLastID,
+	ILSaveToStream:                           procILSaveToStream,
+	IStream_Copy:                             procIStream_Copy,
+	IStream_Read:                             procIStream_Read,
+	IStream_ReadPidl:                         procIStream_ReadPidl,
+	IStream_ReadStr:                          procIStream_ReadStr,
+	IStream_Reset:                            procIStream_Reset,
+	IStream_Size:                             procIStream_Size,
+	IStream_Write:                            procIStream_Write,
+	IStream_WritePidl:                        procIStream_WritePidl,
+	IStream_WriteStr:                         procIStream_WriteStr,
+	IUnknown_AtomicRelease:                   procIUnknown_AtomicRelease,
+	IUnknown_GetSite:                         procIUnknown_GetSite,
+	IUnknown_GetWindow:                       procIUnknown_GetWindow,
+	IUnknown_QueryService:                    procIUnknown_QueryService,
+	IUnknown_Set:                             procIUnknown_Set,
+	IUnknown_SetSite:                         procIUnknown_SetSite,
+	ImportPrivacySettings:                    procImportPrivacySettings,
+	InitNetworkAddressControl:                procInitNetworkAddressControl,
+	InitPropVariantFromStrRet:                procInitPropVariantFromStrRet,
+	InitVariantFromStrRet:                    procInitVariantFromStrRet,
+	IntlStrEqWorker:                          procIntlStrEqWorker,
+	IntlStrEqWorkerA:                         procIntlStrEqWorkerA,
+	IsCharSpace:                              procIsCharSpace,
+	IsCharSpaceA:                             procIsCharSpaceA,
+	IsInternetESCEnabled:                     procIsInternetESCEnabled,
+	IsLFNDrive:                               procIsLFNDrive,
+	IsLFNDriveA:                              procIsLFNDriveA,
+	IsNetDrive:                               procIsNetDrive,
+	IsOS:                                     procIsOS,
+	IsUserAnAdmin:                            procIsUserAnAdmin,
+	LoadUserProfile:                          procLoadUserProfile,
+	LoadUserProfileA:                         procLoadUserProfileA,
+	OleSaveToStreamEx:                        procOleSaveToStreamEx,
+	OpenRegStream:                            procOpenRegStream,
+	ParseURL:                                 procParseURL,
+	ParseURLA:                                procParseURLA,
+	PathAddBackslash:                         procPathAddBackslash,
+	PathAddBackslashA:                        procPathAddBackslashA,
+	PathAddExtension:                         procPathAddExtension,
+	PathAddExtensionA:                        procPathAddExtensionA,
+	PathAllocCanonicalize:                    procPathAllocCanonicalize,
+	PathAllocCombine:                         procPathAllocCombine,
+	PathAppend:                               procPathAppend,
+	PathAppendA:                              procPathAppendA,
+	PathBuildRoot:                            procPathBuildRoot,
+	PathBuildRootA:                           procPathBuildRootA,
+	PathCanonicalize:                         procPathCanonicalize,
+	PathCanonicalizeA:                        procPathCanonicalizeA,
+	PathCchAddBackslash:                      procPathCchAddBackslash,
+	PathCchAddBackslashEx:                    procPathCchAddBackslashEx,
+	PathCchAddExtension:                      procPathCchAddExtension,
+	PathCchAppend:                            procPathCchAppend,
+	PathCchAppendEx:                          procPathCchAppendEx,
+	PathCchCanonicalize:                      procPathCchCanonicalize,
+	PathCchCanonicalizeEx:                    procPathCchCanonicalizeEx,
+	PathCchCombine:                           procPathCchCombine,
+	PathCchCombineEx:                         procPathCchCombineEx,
+	PathCchFindExtension:                     procPathCchFindExtension,
+	PathCchIsRoot:                            procPathCchIsRoot,
+	PathCchRemoveBackslash:                   procPathCchRemoveBackslash,
+	PathCchRemoveBackslashEx:                 procPathCchRemoveBackslashEx,
+	PathCchRemoveExtension:                   procPathCchRemoveExtension,
+	PathCchRemoveFileSpec:                    procPathCchRemoveFileSpec,
+	PathCchRenameExtension:                   procPathCchRenameExtension,
+	PathCchSkipRoot:                          procPathCchSkipRoot,
+	PathCchStripPrefix:                       procPathCchStripPrefix,
+	PathCchStripToRoot:                       procPathCchStripToRoot,
+	PathCleanupSpec:                          procPathCleanupSpec,
+	PathCombine:                              procPathCombine,
+	PathCombineA:                             procPathCombineA,
+	PathCommonPrefix:                         procPathCommonPrefix,
+	PathCommonPrefixA:                        procPathCommonPrefixA,
+	PathCompactPath:                          procPathCompactPath,
+	PathCompactPathA:                         procPathCompactPathA,
+	PathCompactPathEx:                        procPathCompactPathEx,
+	PathCompactPathExA:                       procPathCompactPathExA,
+	PathCreateFromUrl:                        procPathCreateFromUrl,
+	PathCreateFromUrlA:                       procPathCreateFromUrlA,
+	PathCreateFromUrlAlloc:                   procPathCreateFromUrlAlloc,
+	PathFileExists:                           procPathFileExists,
+	PathFileExistsA:                          procPathFileExistsA,
+	PathFindExtension:                        procPathFindExtension,
+	PathFindExtensionA:                       procPathFindExtensionA,
+	PathFindFileName:                         procPathFindFileName,
+	PathFindFileNameA:                        procPathFindFileNameA,
+	PathFindNextComponent:                    procPathFindNextComponent,
+	PathFindNextComponentA:                   procPathFindNextComponentA,
+	PathFindOnPath:                           procPathFindOnPath,
+	PathFindOnPathA:                          procPathFindOnPathA,
+	PathFindSuffixArray:                      procPathFindSuffixArray,
+	PathFindSuffixArrayA:                     procPathFindSuffixArrayA,
+	PathGetArgs:                              procPathGetArgs,
+	PathGetArgsA:                             procPathGetArgsA,
+	PathGetCharType:                          procPathGetCharType,
+	PathGetCharTypeA:                         procPathGetCharTypeA,
+	PathGetDriveNumber:                       procPathGetDriveNumber,
+	PathGetDriveNumberA:                      procPathGetDriveNumberA,
+	PathGetShortPath:                         procPathGetShortPath,
+	PathIsContentType:                        procPathIsContentType,
+	PathIsContentTypeA:                       procPathIsContentTypeA,
+	PathIsDirectory:                          procPathIsDirectory,
+	PathIsDirectoryA:                         procPathIsDirectoryA,
+	PathIsDirectoryEmpty:                     procPathIsDirectoryEmpty,
+	PathIsDirectoryEmptyA:                    procPathIsDirectoryEmptyA,
+	PathIsExe:                                procPathIsExe,
+	PathIsFileSpec:                           procPathIsFileSpec,
+	PathIsFileSpecA:                          procPathIsFileSpecA,
+	PathIsLFNFileSpec:                        procPathIsLFNFileSpec,
+	PathIsLFNFileSpecA:                       procPathIsLFNFileSpecA,
+	PathIsNetworkPath:                        procPathIsNetworkPath,
+	PathIsNetworkPathA:                       procPathIsNetworkPathA,
+	PathIsPrefix:                             procPathIsPrefix,
+	PathIsPrefixA:                            procPathIsPrefixA,
+	PathIsRelative:                           procPathIsRelative,
+	PathIsRelativeA:                          procPathIsRelativeA,
+	PathIsRoot:                               procPathIsRoot,
+	PathIsRootA:                              procPathIsRootA,
+	PathIsSameRoot:                           procPathIsSameRoot,
+	PathIsSameRootA:                          procPathIsSameRootA,
+	PathIsSlow:                               procPathIsSlow,
+	PathIsSlowA:                              procPathIsSlowA,
+	PathIsSystemFolder:                       procPathIsSystemFolder,
+	PathIsSystemFolderA:                      procPathIsSystemFolderA,
+	PathIsUNC:                                procPathIsUNC,
+	PathIsUNCA:                               procPathIsUNCA,
+	PathIsUNCEx:                              procPathIsUNCEx,
+	PathIsUNCServer:                          procPathIsUNCServer,
+	PathIsUNCServerA:                         procPathIsUNCServerA,
+	PathIsUNCServerShare:                     procPathIsUNCServerShare,
+	PathIsUNCServerShareA:                    procPathIsUNCServerShareA,
+	PathIsURL:                                procPathIsURL,
+	PathIsURLA:                               procPathIsURLA,
+	PathMakePretty:                           procPathMakePretty,
+	PathMakePrettyA:                          procPathMakePrettyA,
+	PathMakeSystemFolder:                     procPathMakeSystemFolder,
+	PathMakeSystemFolderA:                    procPathMakeSystemFolderA,
+	PathMakeUniqueName:                       procPathMakeUniqueName,
+	PathMatchSpec:                            procPathMatchSpec,
+	PathMatchSpecA:                           procPathMatchSpecA,
+	PathMatchSpecEx:                          procPathMatchSpecEx,
+	PathMatchSpecExA:                         procPathMatchSpecExA,
+	PathParseIconLocation:                    procPathParseIconLocation,
+	PathParseIconLocationA:                   procPathParseIconLocationA,
+	PathQualify:                              procPathQualify,
+	PathQuoteSpaces:                          procPathQuoteSpaces,
+	PathQuoteSpacesA:                         procPathQuoteSpacesA,
+	PathRelativePathTo:                       procPathRelativePathTo,
+	PathRelativePathToA:                      procPathRelativePathToA,
+	PathRemoveArgs:                           procPathRemoveArgs,
+	PathRemoveArgsA:                          procPathRemoveArgsA,
+	PathRemoveBackslash:                      procPathRemoveBackslash,
+	PathRemoveBackslashA:                     procPathRemoveBackslashA,
+	PathRemoveBlanks:                         procPathRemoveBlanks,
+	PathRemoveBlanksA:                        procPathRemoveBlanksA,
+	PathRemoveExtension:                      procPathRemoveExtension,
+	PathRemoveExtensionA:                     procPathRemoveExtensionA,
+	PathRemoveFileSpec:                       procPathRemoveFileSpec,
+	PathRemoveFileSpecA:                      procPathRemoveFileSpecA,
+	PathRenameExtension:                      procPathRenameExtension,
+	PathRenameExtensionA:                     procPathRenameExtensionA,
+	PathResolve:                              procPathResolve,
+	PathSearchAndQualify:                     procPathSearchAndQualify,
+	PathSearchAndQualifyA:                    procPathSearchAndQualifyA,
+	PathSetDlgItemPath:                       procPathSetDlgItemPath,
+	PathSetDlgItemPathA:                      procPathSetDlgItemPathA,
+	PathSkipRoot:                             procPathSkipRoot,
+	PathSkipRootA:                            procPathSkipRootA,
+	PathStripPath:                            procPathStripPath,
+	PathStripPathA:                           procPathStripPathA,
+	PathStripToRoot:                          procPathStripToRoot,
+	PathStripToRootA:                         procPathStripToRootA,
+	PathUnExpandEnvStrings:                   procPathUnExpandEnvStrings,
+	PathUnExpandEnvStringsA:                  procPathUnExpandEnvStringsA,
+	PathUndecorate:                           procPathUndecorate,
+	PathUndecorateA:                          procPathUndecorateA,
+	PathUnmakeSystemFolder:                   procPathUnmakeSystemFolder,
+	PathUnmakeSystemFolderA:                  procPathUnmakeSystemFolderA,
+	PathUnquoteSpaces:                        procPathUnquoteSpaces,
+	PathUnquoteSpacesA:                       procPathUnquoteSpacesA,
+	PathYetAnotherMakeUniqueName:             procPathYetAnotherMakeUniqueName,
+	PickIconDlg:                              procPickIconDlg,
+	PropVariantToStrRet:                      procPropVariantToStrRet,
+	QISearch:                                 procQISearch,
+	ReadCabinetState:                         procReadCabinetState,
+	RealDriveType:                            procRealDriveType,
+	RegisterAppConstrainedChangeNotification: procRegisterAppConstrainedChangeNotification,
+	RegisterAppStateChangeNotification:       procRegisterAppStateChangeNotification,
+	RegisterScaleChangeEvent:                 procRegisterScaleChangeEvent,
+	RegisterScaleChangeNotifications:         procRegisterScaleChangeNotifications,
+	RemoveWindowSubclass:                     procRemoveWindowSubclass,
+	RestartDialog:                            procRestartDialog,
+	RestartDialogEx:                          procRestartDialogEx,
+	RevokeScaleChangeNotifications:           procRevokeScaleChangeNotifications,
+	SHAddFromPropSheetExtArray:               procSHAddFromPropSheetExtArray,
+	SHAddToRecentDocs:                        procSHAddToRecentDocs,
+	SHAlloc:                                  procSHAlloc,
+	SHAllocShared:                            procSHAllocShared,
+	SHAnsiToAnsi:                             procSHAnsiToAnsi,
+	SHAnsiToUnicode:                          procSHAnsiToUnicode,
+	SHAppBarMessage:                          procSHAppBarMessage,
+	SHAssocEnumHandlers:                      procSHAssocEnumHandlers,
+	SHAssocEnumHandlersForProtocolByApplication: procSHAssocEnumHandlersForProtocolByApplication,
+	SHAutoComplete:                          procSHAutoComplete,
+	SHBindToFolderIDListParent:              procSHBindToFolderIDListParent,
+	SHBindToFolderIDListParentEx:            procSHBindToFolderIDListParentEx,
+	SHBindToObject:                          procSHBindToObject,
+	SHBindToParent:                          procSHBindToParent,
+	SHBrowseForFolder:                       procSHBrowseForFolder,
+	SHBrowseForFolderA:                      procSHBrowseForFolderA,
+	SHCLSIDFromString:                       procSHCLSIDFromString,
+	SHChangeNotification_Lock:               procSHChangeNotification_Lock,
+	SHChangeNotification_Unlock:             procSHChangeNotification_Unlock,
+	SHChangeNotify:                          procSHChangeNotify,
+	SHChangeNotifyDeregister:                procSHChangeNotifyDeregister,
+	SHChangeNotifyRegister:                  procSHChangeNotifyRegister,
+	SHChangeNotifyRegisterThread:            procSHChangeNotifyRegisterThread,
+	SHCloneSpecialIDList:                    procSHCloneSpecialIDList,
+	SHCoCreateInstance:                      procSHCoCreateInstance,
+	SHCopyKey:                               procSHCopyKey,
+	SHCopyKeyA:                              procSHCopyKeyA,
+	SHCreateAssociationRegistration:         procSHCreateAssociationRegistration,
+	SHCreateDataObject:                      procSHCreateDataObject,
+	SHCreateDefaultContextMenu:              procSHCreateDefaultContextMenu,
+	SHCreateDefaultExtractIcon:              procSHCreateDefaultExtractIcon,
+	SHCreateDefaultPropertiesOp:             procSHCreateDefaultPropertiesOp,
+	SHCreateDirectory:                       procSHCreateDirectory,
+	SHCreateDirectoryEx:                     procSHCreateDirectoryEx,
+	SHCreateDirectoryExA:                    procSHCreateDirectoryExA,
+	SHCreateFileExtractIcon:                 procSHCreateFileExtractIcon,
+	SHCreateItemFromIDList:                  procSHCreateItemFromIDList,
+	SHCreateItemFromParsingName:             procSHCreateItemFromParsingName,
+	SHCreateItemFromRelativeName:            procSHCreateItemFromRelativeName,
+	SHCreateItemInKnownFolder:               procSHCreateItemInKnownFolder,
+	SHCreateItemWithParent:                  procSHCreateItemWithParent,
+	SHCreateMemStream:                       procSHCreateMemStream,
+	SHCreateProcessAsUserW:                  procSHCreateProcessAsUserW,
+	SHCreatePropSheetExtArray:               procSHCreatePropSheetExtArray,
+	SHCreateQueryCancelAutoPlayMoniker:      procSHCreateQueryCancelAutoPlayMoniker,
+	SHCreateShellFolderView:                 procSHCreateShellFolderView,
+	SHCreateShellFolderViewEx:               procSHCreateShellFolderViewEx,
+	SHCreateShellItem:                       procSHCreateShellItem,
+	SHCreateShellItemArray:                  procSHCreateShellItemArray,
+	SHCreateShellItemArrayFromDataObject:    procSHCreateShellItemArrayFromDataObject,
+	SHCreateShellItemArrayFromIDLists:       procSHCreateShellItemArrayFromIDLists,
+	SHCreateShellItemArrayFromShellItem:     procSHCreateShellItemArrayFromShellItem,
+	SHCreateShellPalette:                    procSHCreateShellPalette,
+	SHCreateStdEnumFmtEtc:                   procSHCreateStdEnumFmtEtc,
+	SHCreateStreamOnFile:                    procSHCreateStreamOnFile,
+	SHCreateStreamOnFileA:                   procSHCreateStreamOnFileA,
+	SHCreateStreamOnFileEx:                  procSHCreateStreamOnFileEx,
+	SHCreateThread:                          procSHCreateThread,
+	SHCreateThreadRef:                       procSHCreateThreadRef,
+	SHCreateThreadWithHandle:                procSHCreateThreadWithHandle,
+	SHDefExtractIcon:                        procSHDefExtractIcon,
+	SHDefExtractIconA:                       procSHDefExtractIconA,
+	SHDeleteEmptyKey:                        procSHDeleteEmptyKey,
+	SHDeleteEmptyKeyA:                       procSHDeleteEmptyKeyA,
+	SHDeleteKey:                             procSHDeleteKey,
+	SHDeleteKeyA:                            procSHDeleteKeyA,
+	SHDeleteValue:                           procSHDeleteValue,
+	SHDeleteValueA:                          procSHDeleteValueA,
+	SHDestroyPropSheetExtArray:              procSHDestroyPropSheetExtArray,
+	SHDoDragDrop:                            procSHDoDragDrop,
+	SHEmptyRecycleBin:                       procSHEmptyRecycleBin,
+	SHEmptyRecycleBinA:                      procSHEmptyRecycleBinA,
+	SHEnumKeyEx:                             procSHEnumKeyEx,
+	SHEnumKeyExA:                            procSHEnumKeyExA,
+	SHEnumValue:                             procSHEnumValue,
+	SHEnumValueA:                            procSHEnumValueA,
+	SHEnumerateUnreadMailAccounts:           procSHEnumerateUnreadMailAccounts,
+	SHEvaluateSystemCommandTemplate:         procSHEvaluateSystemCommandTemplate,
+	SHFileOperation:                         procSHFileOperation,
+	SHFileOperationA:                        procSHFileOperationA,
+	SHFindFiles:                             procSHFindFiles,
+	SHFind_InitMenuPopup:                    procSHFind_InitMenuPopup,
+	SHFlushSFCache:                          procSHFlushSFCache,
+	SHFormatDateTime:                        procSHFormatDateTime,
+	SHFormatDateTimeA:                       procSHFormatDateTimeA,
+	SHFormatDrive:                           procSHFormatDrive,
+	SHFree:                                  procSHFree,
+	SHFreeNameMappings:                      procSHFreeNameMappings,
+	SHFreeShared:                            procSHFreeShared,
+	SHGetAttributesFromDataObject:           procSHGetAttributesFromDataObject,
+	SHGetDataFromIDList:                     procSHGetDataFromIDList,
+	SHGetDataFromIDListA:                    procSHGetDataFromIDListA,
+	SHGetDesktopFolder:                      procSHGetDesktopFolder,
+	SHGetDiskFreeSpaceEx:                    procSHGetDiskFreeSpaceEx,
+	SHGetDiskFreeSpaceExA:                   procSHGetDiskFreeSpaceExA,
+	SHGetDriveMedia:                         procSHGetDriveMedia,
+	SHGetFileInfo:                           procSHGetFileInfo,
+	SHGetFileInfoA:                          procSHGetFileInfoA,
+	SHGetFolderLocation:                     procSHGetFolderLocation,
+	SHGetFolderPath:                         procSHGetFolderPath,
+	SHGetFolderPathA:                        procSHGetFolderPathA,
+	SHGetFolderPathAndSubDir:                procSHGetFolderPathAndSubDir,
+	SHGetFolderPathAndSubDirA:               procSHGetFolderPathAndSubDirA,
+	SHGetIDListFromObject:                   procSHGetIDListFromObject,
+	SHGetIconOverlayIndex:                   procSHGetIconOverlayIndex,
+	SHGetIconOverlayIndexA:                  procSHGetIconOverlayIndexA,
+	SHGetImageList:                          procSHGetImageList,
+	SHGetInstanceExplorer:                   procSHGetInstanceExplorer,
+	SHGetInverseCMAP:                        procSHGetInverseCMAP,
+	SHGetItemFromDataObject:                 procSHGetItemFromDataObject,
+	SHGetItemFromObject:                     procSHGetItemFromObject,
+	SHGetKnownFolderIDList:                  procSHGetKnownFolderIDList,
+	SHGetKnownFolderItem:                    procSHGetKnownFolderItem,
+	SHGetKnownFolderPath:                    procSHGetKnownFolderPath,
+	SHGetLocalizedName:                      procSHGetLocalizedName,
+	SHGetMalloc:                             procSHGetMalloc,
+	SHGetNameFromIDList:                     procSHGetNameFromIDList,
+	SHGetNewLinkInfo:                        procSHGetNewLinkInfo,
+	SHGetNewLinkInfoA:                       procSHGetNewLinkInfoA,
+	SHGetPathFromIDList:                     procSHGetPathFromIDList,
+	SHGetPathFromIDListA:                    procSHGetPathFromIDListA,
+	SHGetPathFromIDListEx:                   procSHGetPathFromIDListEx,
+	SHGetRealIDL:                            procSHGetRealIDL,
+	SHGetSetFolderCustomSettings:            procSHGetSetFolderCustomSettings,
+	SHGetSetSettings:                        procSHGetSetSettings,
+	SHGetSettings:                           procSHGetSettings,
+	SHGetSpecialFolderLocation:              procSHGetSpecialFolderLocation,
+	SHGetSpecialFolderPath:                  procSHGetSpecialFolderPath,
+	SHGetSpecialFolderPathA:                 procSHGetSpecialFolderPathA,
+	SHGetStockIconInfo:                      procSHGetStockIconInfo,
+	SHGetTemporaryPropertyForItem:           procSHGetTemporaryPropertyForItem,
+	SHGetThreadRef:                          procSHGetThreadRef,
+	SHGetUnreadMailCount:                    procSHGetUnreadMailCount,
+	SHGetValue:                              procSHGetValue,
+	SHGetValueA:                             procSHGetValueA,
+	SHGetViewStatePropertyBag:               procSHGetViewStatePropertyBag,
+	SHGlobalCounterDecrement:                procSHGlobalCounterDecrement,
+	SHGlobalCounterGetValue:                 procSHGlobalCounterGetValue,
+	SHGlobalCounterIncrement:                procSHGlobalCounterIncrement,
+	SHHandleUpdateImage:                     procSHHandleUpdateImage,
+	SHILCreateFromPath:                      procSHILCreateFromPath,
+	SHInvokePrinterCommand:                  procSHInvokePrinterCommand,
+	SHInvokePrinterCommandA:                 procSHInvokePrinterCommandA,
+	SHIsFileAvailableOffline:                procSHIsFileAvailableOffline,
+	SHIsLowMemoryMachine:                    procSHIsLowMemoryMachine,
+	SHLimitInputEdit:                        procSHLimitInputEdit,
+	SHLoadInProc:                            procSHLoadInProc,
+	SHLoadIndirectString:                    procSHLoadIndirectString,
+	SHLoadNonloadedIconOverlayIdentifiers:   procSHLoadNonloadedIconOverlayIdentifiers,
+	SHLockShared:                            procSHLockShared,
+	SHMapPIDLToSystemImageListIndex:         procSHMapPIDLToSystemImageListIndex,
+	SHMessageBoxCheck:                       procSHMessageBoxCheck,
+	SHMessageBoxCheckA:                      procSHMessageBoxCheckA,
+	SHMultiFileProperties:                   procSHMultiFileProperties,
+	SHObjectProperties:                      procSHObjectProperties,
+	SHOpenFolderAndSelectItems:              procSHOpenFolderAndSelectItems,
+	SHOpenPropSheet:                         procSHOpenPropSheet,
+	SHOpenRegStream:                         procSHOpenRegStream,
+	SHOpenRegStream2:                        procSHOpenRegStream2,
+	SHOpenRegStream2A:                       procSHOpenRegStream2A,
+	SHOpenRegStreamA:                        procSHOpenRegStreamA,
+	SHOpenWithDialog:                        procSHOpenWithDialog,
+	SHParseDisplayName:                      procSHParseDisplayName,
+	SHPathPrepareForWrite:                   procSHPathPrepareForWrite,
+	SHPathPrepareForWriteA:                  procSHPathPrepareForWriteA,
+	SHQueryInfoKey:                          procSHQueryInfoKey,
+	SHQueryInfoKeyA:                         procSHQueryInfoKeyA,
+	SHQueryRecycleBin:                       procSHQueryRecycleBin,
+	SHQueryRecycleBinA:                      procSHQueryRecycleBinA,
+	SHQueryUserNotificationState:            procSHQueryUserNotificationState,
+	SHQueryValueEx:                          procSHQueryValueEx,
+	SHQueryValueExA:                         procSHQueryValueExA,
+	SHRegCloseUSKey:                         procSHRegCloseUSKey,
+	SHRegCreateUSKey:                        procSHRegCreateUSKey,
+	SHRegCreateUSKeyA:                       procSHRegCreateUSKeyA,
+	SHRegDeleteEmptyUSKey:                   procSHRegDeleteEmptyUSKey,
+	SHRegDeleteEmptyUSKeyA:                  procSHRegDeleteEmptyUSKeyA,
+	SHRegDeleteUSValue:                      procSHRegDeleteUSValue,
+	SHRegDeleteUSValueA:                     procSHRegDeleteUSValueA,
+	SHRegDuplicateHKey:                      procSHRegDuplicateHKey,
+	SHRegEnumUSKey:                          procSHRegEnumUSKey,
+	SHRegEnumUSKeyA:                         procSHRegEnumUSKeyA,
+	SHRegEnumUSValue:                        procSHRegEnumUSValue,
+	SHRegEnumUSValueA:                       procSHRegEnumUSValueA,
+	SHRegGetBoolUSValue:                     procSHRegGetBoolUSValue,
+	SHRegGetBoolUSValueA:                    procSHRegGetBoolUSValueA,
+	SHRegGetIntW:                            procSHRegGetIntW,
+	SHRegGetPath:                            procSHRegGetPath,
+	SHRegGetPathA:                           procSHRegGetPathA,
+	SHRegGetUSValue:                         procSHRegGetUSValue,
+	SHRegGetUSValueA:                        procSHRegGetUSValueA,
+	SHRegGetValue:                           procSHRegGetValue,
+	SHRegGetValueA:                          procSHRegGetValueA,
+	SHRegGetValueFromHKCUHKLM:               procSHRegGetValueFromHKCUHKLM,
+	SHRegOpenUSKey:                          procSHRegOpenUSKey,
+	SHRegOpenUSKeyA:                         procSHRegOpenUSKeyA,
+	SHRegQueryInfoUSKey:                     procSHRegQueryInfoUSKey,
+	SHRegQueryInfoUSKeyA:                    procSHRegQueryInfoUSKeyA,
+	SHRegQueryUSValue:                       procSHRegQueryUSValue,
+	SHRegQueryUSValueA:                      procSHRegQueryUSValueA,
+	SHRegSetPath:                            procSHRegSetPath,
+	SHRegSetPathA:                           procSHRegSetPathA,
+	SHRegSetUSValue:                         procSHRegSetUSValue,
+	SHRegSetUSValueA:                        procSHRegSetUSValueA,
+	SHRegWriteUSValue:                       procSHRegWriteUSValue,
+	SHRegWriteUSValueA:                      procSHRegWriteUSValueA,
+	SHReleaseThreadRef:                      procSHReleaseThreadRef,
+	SHRemoveLocalizedName:                   procSHRemoveLocalizedName,
+	SHReplaceFromPropSheetExtArray:          procSHReplaceFromPropSheetExtArray,
+	SHResolveLibrary:                        procSHResolveLibrary,
+	SHRestricted:                            procSHRestricted,
+	SHSendMessageBroadcast:                  procSHSendMessageBroadcast,
+	SHSendMessageBroadcastA:                 procSHSendMessageBroadcastA,
+	SHSetDefaultProperties:                  procSHSetDefaultProperties,
+	SHSetFolderPath:                         procSHSetFolderPath,
+	SHSetFolderPathA:                        procSHSetFolderPathA,
+	SHSetInstanceExplorer:                   procSHSetInstanceExplorer,
+	SHSetKnownFolderPath:                    procSHSetKnownFolderPath,
+	SHSetLocalizedName:                      procSHSetLocalizedName,
+	SHSetTemporaryPropertyForItem:           procSHSetTemporaryPropertyForItem,
+	SHSetThreadRef:                          procSHSetThreadRef,
+	SHSetUnreadMailCount:                    procSHSetUnreadMailCount,
+	SHSetValue:                              procSHSetValue,
+	SHSetValueA:                             procSHSetValueA,
+	SHShellFolderView_Message:               procSHShellFolderView_Message,
+	SHShowManageLibraryUI:                   procSHShowManageLibraryUI,
+	SHSimpleIDListFromPath:                  procSHSimpleIDListFromPath,
+	SHSkipJunction:                          procSHSkipJunction,
+	SHStartNetConnectionDialog:              procSHStartNetConnectionDialog,
+	SHStrDup:                                procSHStrDup,
+	SHStrDupA:                               procSHStrDupA,
+	SHStripMneumonic:                        procSHStripMneumonic,
+	SHStripMneumonicA:                       procSHStripMneumonicA,
+	SHTestTokenMembership:                   procSHTestTokenMembership,
+	SHUnicodeToAnsi:                         procSHUnicodeToAnsi,
+	SHUnicodeToUnicode:                      procSHUnicodeToUnicode,
+	SHUnlockShared:                          procSHUnlockShared,
+	SHUpdateImage:                           procSHUpdateImage,
+	SHUpdateImageA:                          procSHUpdateImageA,
+	SHValidateUNC:                           procSHValidateUNC,
+	SetCurrentProcessExplicitAppUserModelID: procSetCurrentProcessExplicitAppUserModelID,
+	SetMenuContextHelpId:                    procSetMenuContextHelpId,
+	SetWindowContextHelpId:                  procSetWindowContextHelpId,
+	SetWindowSubclass:                       procSetWindowSubclass,
+	ShellAbout:                              procShellAbout,
+	ShellAboutA:                             procShellAboutA,
+	ShellExecute:                            procShellExecute,
+	ShellExecuteA:                           procShellExecuteA,
+	ShellExecuteEx:                          procShellExecuteEx,
+	ShellExecuteExA:                         procShellExecuteExA,
+	ShellMessageBox:                         procShellMessageBox,
+	ShellMessageBoxA:                        procShellMessageBoxA,
+	Shell_GetCachedImageIndex:               procShell_GetCachedImageIndex,
+	Shell_GetCachedImageIndexA:              procShell_GetCachedImageIndexA,
+	Shell_GetCachedImageIndexW:              procShell_GetCachedImageIndexW,
+	Shell_GetImageLists:                     procShell_GetImageLists,
+	Shell_MergeMenus:                        procShell_MergeMenus,
+	Shell_NotifyIcon:                        procShell_NotifyIcon,
+	Shell_NotifyIconA:                       procShell_NotifyIconA,
+	Shell_NotifyIconGetRect:                 procShell_NotifyIconGetRect,
+	SignalFileOpen:                          procSignalFileOpen,
+	SoftwareUpdateMessageBox:                procSoftwareUpdateMessageBox,
+	StgMakeUniqueName:                       procStgMakeUniqueName,
+	StrCSpn:                                 procStrCSpn,
+	StrCSpnA:                                procStrCSpnA,
+	StrCSpnI:                                procStrCSpnI,
+	StrCSpnIA:                               procStrCSpnIA,
+	StrCatBuff:                              procStrCatBuff,
+	StrCatBuffA:                             procStrCatBuffA,
+	StrCatChainW:                            procStrCatChainW,
+	StrCatW:                                 procStrCatW,
+	StrChr:                                  procStrChr,
+	StrChrA:                                 procStrChrA,
+	StrChrI:                                 procStrChrI,
+	StrChrIA:                                procStrChrIA,
+	StrChrNIW:                               procStrChrNIW,
+	StrChrNW:                                procStrChrNW,
+	StrCmpC:                                 procStrCmpC,
+	StrCmpCA:                                procStrCmpCA,
+	StrCmpIC:                                procStrCmpIC,
+	StrCmpICA:                               procStrCmpICA,
+	StrCmpIW:                                procStrCmpIW,
+	StrCmpLogicalW:                          procStrCmpLogicalW,
+	StrCmpN:                                 procStrCmpN,
+	StrCmpNA:                                procStrCmpNA,
+	StrCmpNC:                                procStrCmpNC,
+	StrCmpNCA:                               procStrCmpNCA,
+	StrCmpNI:                                procStrCmpNI,
+	StrCmpNIA:                               procStrCmpNIA,
+	StrCmpNIC:                               procStrCmpNIC,
+	StrCmpNICA:                              procStrCmpNICA,
+	StrCmpW:                                 procStrCmpW,
+	StrCpyNW:                                procStrCpyNW,
+	StrCpyW:                                 procStrCpyW,
+	StrDup:                                  procStrDup,
+	StrDupA:                                 procStrDupA,
+	StrFormatByteSize:                       procStrFormatByteSize,
+	StrFormatByteSize64A:                    procStrFormatByteSize64A,
+	StrFormatByteSizeA:                      procStrFormatByteSizeA,
+	StrFormatByteSizeEx:                     procStrFormatByteSizeEx,
+	StrFormatKBSize:                         procStrFormatKBSize,
+	StrFormatKBSizeA:                        procStrFormatKBSizeA,
+	StrFromTimeInterval:                     procStrFromTimeInterval,
+	StrFromTimeIntervalA:                    procStrFromTimeIntervalA,
+	StrIsIntlEqual:                          procStrIsIntlEqual,
+	StrIsIntlEqualA:                         procStrIsIntlEqualA,
+	StrNCat:                                 procStrNCat,
+	StrNCatA:                                procStrNCatA,
+	StrPBrk:                                 procStrPBrk,
+	StrPBrkA:                                procStrPBrkA,
+	StrRChr:                                 procStrRChr,
+	StrRChrA:                                procStrRChrA,
+	StrRChrI:                                procStrRChrI,
+	StrRChrIA:                               procStrRChrIA,
+	StrRStrI:                                procStrRStrI,
+	StrRStrIA:                               procStrRStrIA,
+	StrRetToBSTR:                            procStrRetToBSTR,
+	StrRetToBuf:                             procStrRetToBuf,
+	StrRetToBufA:                            procStrRetToBufA,
+	StrRetToStr:                             procStrRetToStr,
+	StrRetToStrA:                            procStrRetToStrA,
+	StrSpn:                                  procStrSpn,
+	StrSpnA:                                 procStrSpnA,
+	StrStr:                                  procStrStr,
+	StrStrA:                                 procStrStrA,
+	StrStrI:                                 procStrStrI,
+	StrStrIA:                                procStrStrIA,
+	StrStrNIW:                               procStrStrNIW,
+	StrStrNW:                                procStrStrNW,
+	StrToInt:                                procStrToInt,
+	StrToInt64Ex:                            procStrToInt64Ex,
+	StrToInt64ExA:                           procStrToInt64ExA,
+	StrToIntA:                               procStrToIntA,
+	StrToIntEx:                              procStrToIntEx,
+	StrToIntExA:                             procStrToIntExA,
+	StrTrim:                                 procStrTrim,
+	StrTrimA:                                procStrTrimA,
+	UnloadUserProfile:                       procUnloadUserProfile,
+	UnregisterAppConstrainedChangeNotification: procUnregisterAppConstrainedChangeNotification,
+	UnregisterAppStateChangeNotification:       procUnregisterAppStateChangeNotification,
+	UnregisterScaleChangeEvent:                 procUnregisterScaleChangeEvent,
+	UrlApplyScheme:                             procUrlApplyScheme,
+	UrlApplySchemeA:                            procUrlApplySchemeA,
+	UrlCanonicalize:                            procUrlCanonicalize,
+	UrlCanonicalizeA:                           procUrlCanonicalizeA,
+	UrlCombine:                                 procUrlCombine,
+	UrlCombineA:                                procUrlCombineA,
+	UrlCompare:                                 procUrlCompare,
+	UrlCompareA:                                procUrlCompareA,
+	UrlCreateFromPath:                          procUrlCreateFromPath,
+	UrlCreateFromPathA:                         procUrlCreateFromPathA,
+	UrlEscape:                                  procUrlEscape,
+	UrlEscapeA:                                 procUrlEscapeA,
+	UrlFixupW:                                  procUrlFixupW,
+	UrlGetLocation:                             procUrlGetLocation,
+	UrlGetLocationA:                            procUrlGetLocationA,
+	UrlGetPart:                                 procUrlGetPart,
+	UrlGetPartA:                                procUrlGetPartA,
+	UrlHash:                                    procUrlHash,
+	UrlHashA:                                   procUrlHashA,
+	UrlIs:                                      procUrlIs,
+	UrlIsA:                                     procUrlIsA,
+	UrlIsNoHistory:                             procUrlIsNoHistory,
+	UrlIsNoHistoryA:                            procUrlIsNoHistoryA,
+	UrlIsOpaque:                                procUrlIsOpaque,
+	UrlIsOpaqueA:                               procUrlIsOpaqueA,
+	UrlUnescape:                                procUrlUnescape,
+	UrlUnescapeA:                               procUrlUnescapeA,
+	VariantToStrRet:                            procVariantToStrRet,
+	WhichPlatform:                              procWhichPlatform,
+	Win32DeleteFile:                            procWin32DeleteFile,
+	WinHelp:                                    procWinHelp,
+	WinHelpA:                                   procWinHelpA,
+	Wnsprintf:                                  procWnsprintf,
+	WnsprintfA:                                 procWnsprintfA,
+	WriteCabinetState:                          procWriteCabinetState,
+	Wvnsprintf:                                 procWvnsprintf,
+	WvnsprintfA:                                procWvnsprintfA,
+}
+
+var specAssocCreate = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// AssocCreate calls SHLWAPI!AssocCreate.
+// https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-assoccreate
+// Minimum OS: windows5.0.
+func AssocCreate(clsid win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
+	r1, _, _ := win32.Call(procAssocCreate.Addr(), specAssocCreate, nil, uintptr(unsafe.Pointer(&clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AssocCreateForClasses calls SHELL32!AssocCreateForClasses.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-assoccreateforclasses
 // Minimum OS: windows6.0.6000.
@@ -779,9 +2184,9 @@ func AssocIsDangerous(pszAssoc string) bool {
 // AssocQueryKey calls SHLWAPI!AssocQueryKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-assocquerykeyw
 // Minimum OS: windows5.0.
-func AssocQueryKey(flags ASSOCF, key ASSOCKEY, pszAssoc string, pszExtra string, phkeyOut *systemregistry.HKEY) error {
+func AssocQueryKey(flags ASSOCF, key ASSOCKEY, pszAssoc string, pszExtra *string, phkeyOut *systemregistry.HKEY) error {
 	_pszAssoc := win32.UTF16Ptr(pszAssoc)
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(procAssocQueryKey.Addr(), uintptr(flags), uintptr(key), uintptr(unsafe.Pointer(_pszAssoc)), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(phkeyOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -797,9 +2202,9 @@ func AssocQueryKeyA(flags ASSOCF, key ASSOCKEY, pszAssoc foundation.PSTR, pszExt
 // AssocQueryString calls SHLWAPI!AssocQueryStringW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-assocquerystringw
 // Minimum OS: windows5.0.
-func AssocQueryString(flags ASSOCF, str ASSOCSTR, pszAssoc string, pszExtra string, pszOut foundation.PWSTR, pcchOut *uint32) error {
+func AssocQueryString(flags ASSOCF, str ASSOCSTR, pszAssoc string, pszExtra *string, pszOut foundation.PWSTR, pcchOut *uint32) error {
 	_pszAssoc := win32.UTF16Ptr(pszAssoc)
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(procAssocQueryString.Addr(), uintptr(flags), uintptr(str), uintptr(unsafe.Pointer(_pszAssoc)), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(pszOut)), uintptr(unsafe.Pointer(pcchOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -815,8 +2220,8 @@ func AssocQueryStringA(flags ASSOCF, str ASSOCSTR, pszAssoc foundation.PSTR, psz
 // AssocQueryStringByKey calls SHLWAPI!AssocQueryStringByKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-assocquerystringbykeyw
 // Minimum OS: windows5.0.
-func AssocQueryStringByKey(flags ASSOCF, str ASSOCSTR, hkAssoc systemregistry.HKEY, pszExtra string, pszOut foundation.PWSTR, pcchOut *uint32) error {
-	_pszExtra := win32.UTF16Ptr(pszExtra)
+func AssocQueryStringByKey(flags ASSOCF, str ASSOCSTR, hkAssoc systemregistry.HKEY, pszExtra *string, pszOut foundation.PWSTR, pcchOut *uint32) error {
+	_pszExtra := win32.UTF16PtrOrNil(pszExtra)
 	r1, _, _ := syscall.SyscallN(procAssocQueryStringByKey.Addr(), uintptr(flags), uintptr(str), uintptr(hkAssoc), uintptr(unsafe.Pointer(_pszExtra)), uintptr(unsafe.Pointer(pszOut)), uintptr(unsafe.Pointer(pcchOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -997,10 +2402,10 @@ func DefSubclassProc(hWnd foundation.HWND, uMsg uint32, wParam foundation.WPARAM
 // DeleteProfile calls USERENV!DeleteProfileW.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-deleteprofilew
 // Minimum OS: windows5.0.
-func DeleteProfile(lpSidString string, lpProfilePath string, lpComputerName string) error {
+func DeleteProfile(lpSidString string, lpProfilePath *string, lpComputerName *string) error {
 	_lpSidString := win32.UTF16Ptr(lpSidString)
-	_lpProfilePath := win32.UTF16Ptr(lpProfilePath)
-	_lpComputerName := win32.UTF16Ptr(lpComputerName)
+	_lpProfilePath := win32.UTF16PtrOrNil(lpProfilePath)
+	_lpComputerName := win32.UTF16PtrOrNil(lpComputerName)
 	r1, _, e1 := syscall.SyscallN(procDeleteProfile.Addr(), uintptr(unsafe.Pointer(_lpSidString)), uintptr(unsafe.Pointer(_lpProfilePath)), uintptr(unsafe.Pointer(_lpComputerName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1173,9 +2578,9 @@ func FileIconInit(fRestoreCache bool) bool {
 // FindExecutable calls SHELL32!FindExecutableW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-findexecutablew
 // Minimum OS: windows5.1.2600.
-func FindExecutable(lpFile string, lpDirectory string, lpResult foundation.PWSTR) foundation.HINSTANCE {
+func FindExecutable(lpFile string, lpDirectory *string, lpResult foundation.PWSTR) foundation.HINSTANCE {
 	_lpFile := win32.UTF16Ptr(lpFile)
-	_lpDirectory := win32.UTF16Ptr(lpDirectory)
+	_lpDirectory := win32.UTF16PtrOrNil(lpDirectory)
 	r1, _, _ := syscall.SyscallN(procFindExecutable.Addr(), uintptr(unsafe.Pointer(_lpFile)), uintptr(unsafe.Pointer(_lpDirectory)), uintptr(unsafe.Pointer(lpResult)))
 	return foundation.HINSTANCE(r1)
 }
@@ -1267,11 +2672,11 @@ func GetDpiForShellUIComponent(param0 SHELL_UI_COMPONENT) uint32 {
 // GetFileNameFromBrowse calls SHELL32!GetFileNameFromBrowse.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-getfilenamefrombrowse
 // Minimum OS: windows5.0.
-func GetFileNameFromBrowse(hwnd foundation.HWND, pszFilePath foundation.PWSTR, cchFilePath uint32, pszWorkingDir string, pszDefExt string, pszFilters string, pszTitle string) bool {
-	_pszWorkingDir := win32.UTF16Ptr(pszWorkingDir)
+func GetFileNameFromBrowse(hwnd foundation.HWND, pszFilePath foundation.PWSTR, cchFilePath uint32, pszWorkingDir *string, pszDefExt string, pszFilters *string, pszTitle *string) bool {
+	_pszWorkingDir := win32.UTF16PtrOrNil(pszWorkingDir)
 	_pszDefExt := win32.UTF16Ptr(pszDefExt)
-	_pszFilters := win32.UTF16Ptr(pszFilters)
-	_pszTitle := win32.UTF16Ptr(pszTitle)
+	_pszFilters := win32.UTF16PtrOrNil(pszFilters)
+	_pszTitle := win32.UTF16PtrOrNil(pszTitle)
 	r1, _, _ := syscall.SyscallN(procGetFileNameFromBrowse.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pszFilePath)), uintptr(cchFilePath), uintptr(unsafe.Pointer(_pszWorkingDir)), uintptr(unsafe.Pointer(_pszDefExt)), uintptr(unsafe.Pointer(_pszFilters)), uintptr(unsafe.Pointer(_pszTitle)))
 	return r1 != 0
 }
@@ -1970,8 +3375,8 @@ func IsInternetESCEnabled() bool {
 }
 
 // IsLFNDrive calls SHELL32!IsLFNDriveW.
-func IsLFNDrive(pszPath string) bool {
-	_pszPath := win32.UTF16Ptr(pszPath)
+func IsLFNDrive(pszPath *string) bool {
+	_pszPath := win32.UTF16PtrOrNil(pszPath)
 	r1, _, _ := syscall.SyscallN(procIsLFNDrive.Addr(), uintptr(unsafe.Pointer(_pszPath)))
 	return r1 != 0
 }
@@ -2038,9 +3443,9 @@ func OleSaveToStreamEx(piunk *systemcom.IUnknown, pistm *systemcom.IStream, fCle
 // OpenRegStream calls SHELL32!OpenRegStream.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-openregstream
 // Minimum OS: windows5.1.2600.
-func OpenRegStream(hkey systemregistry.HKEY, pszSubkey string, pszValue string, grfMode uint32) *systemcom.IStream {
-	_pszSubkey := win32.UTF16Ptr(pszSubkey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func OpenRegStream(hkey systemregistry.HKEY, pszSubkey *string, pszValue *string, grfMode uint32) *systemcom.IStream {
+	_pszSubkey := win32.UTF16PtrOrNil(pszSubkey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procOpenRegStream.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubkey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(grfMode))
 	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
@@ -2081,8 +3486,8 @@ func PathAddBackslashA(pszPath foundation.PSTR) foundation.PSTR {
 // PathAddExtension calls SHLWAPI!PathAddExtensionW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-pathaddextensionw
 // Minimum OS: windows5.0.
-func PathAddExtension(pszPath foundation.PWSTR, pszExt string) bool {
-	_pszExt := win32.UTF16Ptr(pszExt)
+func PathAddExtension(pszPath foundation.PWSTR, pszExt *string) bool {
+	_pszExt := win32.UTF16PtrOrNil(pszExt)
 	r1, _, _ := syscall.SyscallN(procPathAddExtension.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(unsafe.Pointer(_pszExt)))
 	return r1 != 0
 }
@@ -2107,9 +3512,9 @@ func PathAllocCanonicalize(pszPathIn string, dwFlags PATHCCH_OPTIONS, ppszPathOu
 // PathAllocCombine calls api-ms-win-core-path-l1-1-0!PathAllocCombine.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathalloccombine
 // Minimum OS: windows8.0.
-func PathAllocCombine(pszPathIn string, pszMore string, dwFlags PATHCCH_OPTIONS, ppszPathOut *foundation.PWSTR) error {
-	_pszPathIn := win32.UTF16Ptr(pszPathIn)
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathAllocCombine(pszPathIn *string, pszMore *string, dwFlags PATHCCH_OPTIONS, ppszPathOut *foundation.PWSTR) error {
+	_pszPathIn := win32.UTF16PtrOrNil(pszPathIn)
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathAllocCombine.Addr(), uintptr(unsafe.Pointer(_pszPathIn)), uintptr(unsafe.Pointer(_pszMore)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppszPathOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2198,8 +3603,8 @@ func PathCchAddExtension(pszPath foundation.PWSTR, cchPath uintptr, pszExt strin
 // PathCchAppend calls api-ms-win-core-path-l1-1-0!PathCchAppend.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchappend
 // Minimum OS: windows8.0.
-func PathCchAppend(pszPath foundation.PWSTR, cchPath uintptr, pszMore string) error {
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathCchAppend(pszPath foundation.PWSTR, cchPath uintptr, pszMore *string) error {
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathCchAppend.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(cchPath), uintptr(unsafe.Pointer(_pszMore)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2207,8 +3612,8 @@ func PathCchAppend(pszPath foundation.PWSTR, cchPath uintptr, pszMore string) er
 // PathCchAppendEx calls api-ms-win-core-path-l1-1-0!PathCchAppendEx.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchappendex
 // Minimum OS: windows8.0.
-func PathCchAppendEx(pszPath foundation.PWSTR, cchPath uintptr, pszMore string, dwFlags PATHCCH_OPTIONS) error {
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathCchAppendEx(pszPath foundation.PWSTR, cchPath uintptr, pszMore *string, dwFlags PATHCCH_OPTIONS) error {
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathCchAppendEx.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(cchPath), uintptr(unsafe.Pointer(_pszMore)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2234,9 +3639,9 @@ func PathCchCanonicalizeEx(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszP
 // PathCchCombine calls api-ms-win-core-path-l1-1-0!PathCchCombine.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchcombine
 // Minimum OS: windows8.0.
-func PathCchCombine(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn string, pszMore string) error {
-	_pszPathIn := win32.UTF16Ptr(pszPathIn)
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathCchCombine(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn *string, pszMore *string) error {
+	_pszPathIn := win32.UTF16PtrOrNil(pszPathIn)
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathCchCombine.Addr(), uintptr(unsafe.Pointer(pszPathOut)), uintptr(cchPathOut), uintptr(unsafe.Pointer(_pszPathIn)), uintptr(unsafe.Pointer(_pszMore)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2244,9 +3649,9 @@ func PathCchCombine(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn s
 // PathCchCombineEx calls api-ms-win-core-path-l1-1-0!PathCchCombineEx.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchcombineex
 // Minimum OS: windows8.0.
-func PathCchCombineEx(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn string, pszMore string, dwFlags PATHCCH_OPTIONS) error {
-	_pszPathIn := win32.UTF16Ptr(pszPathIn)
-	_pszMore := win32.UTF16Ptr(pszMore)
+func PathCchCombineEx(pszPathOut foundation.PWSTR, cchPathOut uintptr, pszPathIn *string, pszMore *string, dwFlags PATHCCH_OPTIONS) error {
+	_pszPathIn := win32.UTF16PtrOrNil(pszPathIn)
+	_pszMore := win32.UTF16PtrOrNil(pszMore)
 	r1, _, _ := syscall.SyscallN(procPathCchCombineEx.Addr(), uintptr(unsafe.Pointer(pszPathOut)), uintptr(cchPathOut), uintptr(unsafe.Pointer(_pszPathIn)), uintptr(unsafe.Pointer(_pszMore)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2263,8 +3668,8 @@ func PathCchFindExtension(pszPath string, cchPath uintptr, ppszExt *foundation.P
 // PathCchIsRoot calls api-ms-win-core-path-l1-1-0!PathCchIsRoot.
 // https://learn.microsoft.com/windows/win32/api/pathcch/nf-pathcch-pathcchisroot
 // Minimum OS: windows8.0.
-func PathCchIsRoot(pszPath string) bool {
-	_pszPath := win32.UTF16Ptr(pszPath)
+func PathCchIsRoot(pszPath *string) bool {
+	_pszPath := win32.UTF16PtrOrNil(pszPath)
 	r1, _, _ := syscall.SyscallN(procPathCchIsRoot.Addr(), uintptr(unsafe.Pointer(_pszPath)))
 	return r1 != 0
 }
@@ -2338,8 +3743,8 @@ func PathCchStripToRoot(pszPath foundation.PWSTR, cchPath uintptr) error {
 // PathCleanupSpec calls SHELL32!PathCleanupSpec.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pathcleanupspec
 // Minimum OS: windows5.1.2600.
-func PathCleanupSpec(pszDir string, pszSpec foundation.PWSTR) int32 {
-	_pszDir := win32.UTF16Ptr(pszDir)
+func PathCleanupSpec(pszDir *string, pszSpec foundation.PWSTR) int32 {
+	_pszDir := win32.UTF16PtrOrNil(pszDir)
 	r1, _, _ := syscall.SyscallN(procPathCleanupSpec.Addr(), uintptr(unsafe.Pointer(_pszDir)), uintptr(unsafe.Pointer(pszSpec)))
 	return int32(r1)
 }
@@ -2347,9 +3752,9 @@ func PathCleanupSpec(pszDir string, pszSpec foundation.PWSTR) int32 {
 // PathCombine calls SHLWAPI!PathCombineW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-pathcombinew
 // Minimum OS: windows5.0.
-func PathCombine(pszDest foundation.PWSTR, pszDir string, pszFile string) foundation.PWSTR {
-	_pszDir := win32.UTF16Ptr(pszDir)
-	_pszFile := win32.UTF16Ptr(pszFile)
+func PathCombine(pszDest foundation.PWSTR, pszDir *string, pszFile *string) foundation.PWSTR {
+	_pszDir := win32.UTF16PtrOrNil(pszDir)
+	_pszFile := win32.UTF16PtrOrNil(pszFile)
 	r1, _, _ := syscall.SyscallN(procPathCombine.Addr(), uintptr(unsafe.Pointer(pszDest)), uintptr(unsafe.Pointer(_pszDir)), uintptr(unsafe.Pointer(_pszFile)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
@@ -2813,8 +4218,8 @@ func PathIsSlowA(pszFile foundation.PSTR, dwAttr uint32) bool {
 // PathIsSystemFolder calls SHLWAPI!PathIsSystemFolderW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-pathissystemfolderw
 // Minimum OS: windows5.0.
-func PathIsSystemFolder(pszPath string, dwAttrb uint32) bool {
-	_pszPath := win32.UTF16Ptr(pszPath)
+func PathIsSystemFolder(pszPath *string, dwAttrb uint32) bool {
+	_pszPath := win32.UTF16PtrOrNil(pszPath)
 	r1, _, _ := syscall.SyscallN(procPathIsSystemFolder.Addr(), uintptr(unsafe.Pointer(_pszPath)), uintptr(dwAttrb))
 	return r1 != 0
 }
@@ -2940,10 +4345,10 @@ func PathMakeSystemFolderA(pszPath foundation.PSTR) bool {
 // PathMakeUniqueName calls SHELL32!PathMakeUniqueName.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pathmakeuniquename
 // Minimum OS: windows5.0.
-func PathMakeUniqueName(pszUniqueName foundation.PWSTR, cchMax uint32, pszTemplate string, pszLongPlate string, pszDir string) bool {
+func PathMakeUniqueName(pszUniqueName foundation.PWSTR, cchMax uint32, pszTemplate string, pszLongPlate *string, pszDir *string) bool {
 	_pszTemplate := win32.UTF16Ptr(pszTemplate)
-	_pszLongPlate := win32.UTF16Ptr(pszLongPlate)
-	_pszDir := win32.UTF16Ptr(pszDir)
+	_pszLongPlate := win32.UTF16PtrOrNil(pszLongPlate)
+	_pszDir := win32.UTF16PtrOrNil(pszDir)
 	r1, _, _ := syscall.SyscallN(procPathMakeUniqueName.Addr(), uintptr(unsafe.Pointer(pszUniqueName)), uintptr(cchMax), uintptr(unsafe.Pointer(_pszTemplate)), uintptr(unsafe.Pointer(_pszLongPlate)), uintptr(unsafe.Pointer(_pszDir)))
 	return r1 != 0
 }
@@ -3287,10 +4692,10 @@ func PathUnquoteSpacesA(lpsz foundation.PSTR) bool {
 // PathYetAnotherMakeUniqueName calls SHELL32!PathYetAnotherMakeUniqueName.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pathyetanothermakeuniquename
 // Minimum OS: windows5.0.
-func PathYetAnotherMakeUniqueName(pszUniqueName foundation.PWSTR, pszPath string, pszShort string, pszFileSpec string) bool {
+func PathYetAnotherMakeUniqueName(pszUniqueName foundation.PWSTR, pszPath string, pszShort *string, pszFileSpec *string) bool {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	_pszShort := win32.UTF16Ptr(pszShort)
-	_pszFileSpec := win32.UTF16Ptr(pszFileSpec)
+	_pszShort := win32.UTF16PtrOrNil(pszShort)
+	_pszFileSpec := win32.UTF16PtrOrNil(pszFileSpec)
 	r1, _, _ := syscall.SyscallN(procPathYetAnotherMakeUniqueName.Addr(), uintptr(unsafe.Pointer(pszUniqueName)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(_pszShort)), uintptr(unsafe.Pointer(_pszFileSpec)))
 	return r1 != 0
 }
@@ -3376,8 +4781,8 @@ func RemoveWindowSubclass(hWnd foundation.HWND, pfnSubclass SUBCLASSPROC, uIdSub
 // RestartDialog calls SHELL32!RestartDialog.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-restartdialog
 // Minimum OS: windows5.0.
-func RestartDialog(hwnd foundation.HWND, pszPrompt string, dwReturn uint32) int32 {
-	_pszPrompt := win32.UTF16Ptr(pszPrompt)
+func RestartDialog(hwnd foundation.HWND, pszPrompt *string, dwReturn uint32) int32 {
+	_pszPrompt := win32.UTF16PtrOrNil(pszPrompt)
 	r1, _, _ := syscall.SyscallN(procRestartDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszPrompt)), uintptr(dwReturn))
 	return int32(r1)
 }
@@ -3385,8 +4790,8 @@ func RestartDialog(hwnd foundation.HWND, pszPrompt string, dwReturn uint32) int3
 // RestartDialogEx calls SHELL32!RestartDialogEx.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-restartdialogex
 // Minimum OS: windows5.0.
-func RestartDialogEx(hwnd foundation.HWND, pszPrompt string, dwReturn uint32, dwReasonCode uint32) int32 {
-	_pszPrompt := win32.UTF16Ptr(pszPrompt)
+func RestartDialogEx(hwnd foundation.HWND, pszPrompt *string, dwReturn uint32, dwReasonCode uint32) int32 {
+	_pszPrompt := win32.UTF16PtrOrNil(pszPrompt)
 	r1, _, _ := syscall.SyscallN(procRestartDialogEx.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszPrompt)), uintptr(dwReturn), uintptr(dwReasonCode))
 	return int32(r1)
 }
@@ -3599,8 +5004,8 @@ func SHCloneSpecialIDList(csidl int32, fCreate bool) *uishellcommon.ITEMIDLIST {
 // SHCoCreateInstance calls SHELL32!SHCoCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shcocreateinstance
 // Minimum OS: windows5.1.2600.
-func SHCoCreateInstance(pszCLSID string, pclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
-	_pszCLSID := win32.UTF16Ptr(pszCLSID)
+func SHCoCreateInstance(pszCLSID *string, pclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
+	_pszCLSID := win32.UTF16PtrOrNil(pszCLSID)
 	r1, _, _ := syscall.SyscallN(procSHCoCreateInstance.Addr(), uintptr(unsafe.Pointer(_pszCLSID)), uintptr(unsafe.Pointer(pclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3608,8 +5013,8 @@ func SHCoCreateInstance(pszCLSID string, pclsid *win32.GUID, pUnkOuter *systemco
 // SHCopyKey calls SHLWAPI!SHCopyKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcopykeyw
 // Minimum OS: windows5.0.
-func SHCopyKey(hkeySrc systemregistry.HKEY, pszSrcSubKey string, hkeyDest systemregistry.HKEY) foundation.WIN32_ERROR {
-	_pszSrcSubKey := win32.UTF16Ptr(pszSrcSubKey)
+func SHCopyKey(hkeySrc systemregistry.HKEY, pszSrcSubKey *string, hkeyDest systemregistry.HKEY) foundation.WIN32_ERROR {
+	_pszSrcSubKey := win32.UTF16PtrOrNil(pszSrcSubKey)
 	r1, _, _ := syscall.SyscallN(procSHCopyKey.Addr(), uintptr(hkeySrc), uintptr(unsafe.Pointer(_pszSrcSubKey)), uintptr(hkeyDest), 0)
 	return foundation.WIN32_ERROR(r1)
 }
@@ -3730,8 +5135,8 @@ func SHCreateItemFromRelativeName(psiParent *IShellItem, pszName string, pbc *sy
 // SHCreateItemInKnownFolder calls SHELL32!SHCreateItemInKnownFolder.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateiteminknownfolder
 // Minimum OS: windows6.0.6000.
-func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem string, riid *win32.GUID, ppv **win32.IUnknown) error {
-	_pszItem := win32.UTF16Ptr(pszItem)
+func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem *string, riid *win32.GUID, ppv **win32.IUnknown) error {
+	_pszItem := win32.UTF16PtrOrNil(pszItem)
 	r1, _, _ := syscall.SyscallN(procSHCreateItemInKnownFolder.Addr(), uintptr(unsafe.Pointer(kfid)), uintptr(dwKFFlags), uintptr(unsafe.Pointer(_pszItem)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3770,8 +5175,8 @@ func SHCreateProcessAsUserW(pscpi *SHCREATEPROCESSINFOW) error {
 // SHCreatePropSheetExtArray calls SHELL32!SHCreatePropSheetExtArray.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shcreatepropsheetextarray
 // Minimum OS: windows5.1.2600.
-func SHCreatePropSheetExtArray(hKey systemregistry.HKEY, pszSubKey string, max_iface uint32) HPSXA {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+func SHCreatePropSheetExtArray(hKey systemregistry.HKEY, pszSubKey *string, max_iface uint32) HPSXA {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
 	r1, _, _ := syscall.SyscallN(procSHCreatePropSheetExtArray.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(max_iface))
 	return HPSXA(r1)
 }
@@ -3945,8 +5350,8 @@ func SHDefExtractIconA(pszIconFile foundation.PSTR, iIndex int32, uFlags uint32,
 // SHDeleteEmptyKey calls SHLWAPI!SHDeleteEmptyKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shdeleteemptykeyw
 // Minimum OS: windows5.0.
-func SHDeleteEmptyKey(hkey systemregistry.HKEY, pszSubKey string) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+func SHDeleteEmptyKey(hkey systemregistry.HKEY, pszSubKey *string) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
 	r1, _, _ := syscall.SyscallN(procSHDeleteEmptyKey.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -3962,8 +5367,8 @@ func SHDeleteEmptyKeyA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR) foun
 // SHDeleteKey calls SHLWAPI!SHDeleteKeyW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shdeletekeyw
 // Minimum OS: windows5.0.
-func SHDeleteKey(hkey systemregistry.HKEY, pszSubKey string) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+func SHDeleteKey(hkey systemregistry.HKEY, pszSubKey *string) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
 	r1, _, _ := syscall.SyscallN(procSHDeleteKey.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -3979,8 +5384,8 @@ func SHDeleteKeyA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR) foundatio
 // SHDeleteValue calls SHLWAPI!SHDeleteValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shdeletevaluew
 // Minimum OS: windows5.0.
-func SHDeleteValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+func SHDeleteValue(hkey systemregistry.HKEY, pszSubKey *string, pszValue string) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
 	_pszValue := win32.UTF16Ptr(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHDeleteValue.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)))
 	return foundation.WIN32_ERROR(r1)
@@ -4012,8 +5417,8 @@ func SHDoDragDrop(hwnd foundation.HWND, pdata *systemcom.IDataObject, pdsrc *sys
 // SHEmptyRecycleBin calls SHELL32!SHEmptyRecycleBinW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shemptyrecyclebinw
 // Minimum OS: windows5.0.
-func SHEmptyRecycleBin(hwnd foundation.HWND, pszRootPath string, dwFlags uint32) error {
-	_pszRootPath := win32.UTF16Ptr(pszRootPath)
+func SHEmptyRecycleBin(hwnd foundation.HWND, pszRootPath *string, dwFlags uint32) error {
+	_pszRootPath := win32.UTF16PtrOrNil(pszRootPath)
 	r1, _, _ := syscall.SyscallN(procSHEmptyRecycleBin.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszRootPath)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4279,8 +5684,8 @@ func SHGetFolderPathA(csidl int32, hToken foundation.HANDLE, dwFlags uint32, psz
 // SHGetFolderPathAndSubDir calls SHELL32!SHGetFolderPathAndSubDirW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetfolderpathandsubdirw
 // Minimum OS: windows5.1.2600.
-func SHGetFolderPathAndSubDir(csidl int32, hToken foundation.HANDLE, dwFlags uint32, pszSubDir string, pszPath foundation.PWSTR) error {
-	_pszSubDir := win32.UTF16Ptr(pszSubDir)
+func SHGetFolderPathAndSubDir(csidl int32, hToken foundation.HANDLE, dwFlags uint32, pszSubDir *string, pszPath foundation.PWSTR) error {
+	_pszSubDir := win32.UTF16PtrOrNil(pszSubDir)
 	r1, _, _ := syscall.SyscallN(procSHGetFolderPathAndSubDir.Addr(), 0, uintptr(csidl), uintptr(hToken), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszSubDir)), uintptr(unsafe.Pointer(pszPath)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4304,8 +5709,8 @@ func SHGetIDListFromObject(punk *systemcom.IUnknown, ppidl **uishellcommon.ITEMI
 // SHGetIconOverlayIndex calls SHELL32!SHGetIconOverlayIndexW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgeticonoverlayindexw
 // Minimum OS: windows5.0.
-func SHGetIconOverlayIndex(pszIconPath string, iIconIndex int32) int32 {
-	_pszIconPath := win32.UTF16Ptr(pszIconPath)
+func SHGetIconOverlayIndex(pszIconPath *string, iIconIndex int32) int32 {
+	_pszIconPath := win32.UTF16PtrOrNil(pszIconPath)
 	r1, _, _ := syscall.SyscallN(procSHGetIconOverlayIndex.Addr(), uintptr(unsafe.Pointer(_pszIconPath)), uintptr(iIconIndex))
 	return int32(r1)
 }
@@ -4538,8 +5943,8 @@ func SHGetThreadRef(ppunk **systemcom.IUnknown) error {
 // SHGetUnreadMailCount calls SHELL32!SHGetUnreadMailCountW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetunreadmailcountw
 // Minimum OS: windows5.1.2600.
-func SHGetUnreadMailCount(hKeyUser systemregistry.HKEY, pszMailAddress string, pdwCount *uint32, pFileTime *foundation.FILETIME, pszShellExecuteCommand foundation.PWSTR, cchShellExecuteCommand int32) error {
-	_pszMailAddress := win32.UTF16Ptr(pszMailAddress)
+func SHGetUnreadMailCount(hKeyUser systemregistry.HKEY, pszMailAddress *string, pdwCount *uint32, pFileTime *foundation.FILETIME, pszShellExecuteCommand foundation.PWSTR, cchShellExecuteCommand int32) error {
+	_pszMailAddress := win32.UTF16PtrOrNil(pszMailAddress)
 	r1, _, _ := syscall.SyscallN(procSHGetUnreadMailCount.Addr(), uintptr(hKeyUser), uintptr(unsafe.Pointer(_pszMailAddress)), uintptr(unsafe.Pointer(pdwCount)), uintptr(unsafe.Pointer(pFileTime)), uintptr(unsafe.Pointer(pszShellExecuteCommand)), uintptr(cchShellExecuteCommand))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4547,9 +5952,9 @@ func SHGetUnreadMailCount(hKeyUser systemregistry.HKEY, pszMailAddress string, p
 // SHGetValue calls SHLWAPI!SHGetValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shgetvaluew
 // Minimum OS: windows5.0.
-func SHGetValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHGetValue(hkey systemregistry.HKEY, pszSubKey *string, pszValue *string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHGetValue.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -4565,8 +5970,8 @@ func SHGetValueA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR, pszValue f
 // SHGetViewStatePropertyBag calls SHLWAPI!SHGetViewStatePropertyBag.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shgetviewstatepropertybag
 // Minimum OS: windows5.1.2600.
-func SHGetViewStatePropertyBag(pidl *uishellcommon.ITEMIDLIST, pszBagName string, dwFlags uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
-	_pszBagName := win32.UTF16Ptr(pszBagName)
+func SHGetViewStatePropertyBag(pidl *uishellcommon.ITEMIDLIST, pszBagName *string, dwFlags uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
+	_pszBagName := win32.UTF16PtrOrNil(pszBagName)
 	r1, _, _ := syscall.SyscallN(procSHGetViewStatePropertyBag.Addr(), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(_pszBagName)), uintptr(dwFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4615,9 +6020,9 @@ func SHILCreateFromPath(pszPath string, ppidl **uishellcommon.ITEMIDLIST, rgfInO
 // SHInvokePrinterCommand calls SHELL32!SHInvokePrinterCommandW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shinvokeprintercommandw
 // Minimum OS: windows5.0.
-func SHInvokePrinterCommand(hwnd foundation.HWND, uAction uint32, lpBuf1 string, lpBuf2 string, fModal bool) bool {
+func SHInvokePrinterCommand(hwnd foundation.HWND, uAction uint32, lpBuf1 string, lpBuf2 *string, fModal bool) bool {
 	_lpBuf1 := win32.UTF16Ptr(lpBuf1)
-	_lpBuf2 := win32.UTF16Ptr(lpBuf2)
+	_lpBuf2 := win32.UTF16PtrOrNil(lpBuf2)
 	_fModal := win32.Bool32(fModal)
 	r1, _, _ := syscall.SyscallN(procSHInvokePrinterCommand.Addr(), uintptr(hwnd), uintptr(uAction), uintptr(unsafe.Pointer(_lpBuf1)), uintptr(unsafe.Pointer(_lpBuf2)), uintptr(_fModal))
 	return r1 != 0
@@ -4728,9 +6133,9 @@ func SHMultiFileProperties(pdtobj *systemcom.IDataObject, dwFlags uint32) error 
 // SHObjectProperties calls SHELL32!SHObjectProperties.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shobjectproperties
 // Minimum OS: windows5.1.2600.
-func SHObjectProperties(hwnd foundation.HWND, shopObjectType uint32, pszObjectName string, pszPropertyPage string) bool {
+func SHObjectProperties(hwnd foundation.HWND, shopObjectType uint32, pszObjectName string, pszPropertyPage *string) bool {
 	_pszObjectName := win32.UTF16Ptr(pszObjectName)
-	_pszPropertyPage := win32.UTF16Ptr(pszPropertyPage)
+	_pszPropertyPage := win32.UTF16PtrOrNil(pszPropertyPage)
 	r1, _, _ := syscall.SyscallN(procSHObjectProperties.Addr(), uintptr(hwnd), uintptr(shopObjectType), uintptr(unsafe.Pointer(_pszObjectName)), uintptr(unsafe.Pointer(_pszPropertyPage)))
 	return r1 != 0
 }
@@ -4750,13 +6155,13 @@ func SHOpenFolderAndSelectItems(pidlFolder *uishellcommon.ITEMIDLIST, apidl []*u
 // SHOpenPropSheet calls SHELL32!SHOpenPropSheetW.
 // https://learn.microsoft.com/windows/win32/api/shlobj/nf-shlobj-shopenpropsheetw
 // Minimum OS: windows5.1.2600.
-func SHOpenPropSheet(pszCaption string, ahkeys []systemregistry.HKEY, pclsidDefault *win32.GUID, pdtobj *systemcom.IDataObject, psb *IShellBrowser, pStartPage string) bool {
-	_pszCaption := win32.UTF16Ptr(pszCaption)
+func SHOpenPropSheet(pszCaption *string, ahkeys []systemregistry.HKEY, pclsidDefault *win32.GUID, pdtobj *systemcom.IDataObject, psb *IShellBrowser, pStartPage *string) bool {
+	_pszCaption := win32.UTF16PtrOrNil(pszCaption)
 	var _ahkeys *systemregistry.HKEY
 	if len(ahkeys) > 0 {
 		_ahkeys = &ahkeys[0]
 	}
-	_pStartPage := win32.UTF16Ptr(pStartPage)
+	_pStartPage := win32.UTF16PtrOrNil(pStartPage)
 	r1, _, _ := syscall.SyscallN(procSHOpenPropSheet.Addr(), uintptr(unsafe.Pointer(_pszCaption)), uintptr(unsafe.Pointer(_ahkeys)), uintptr(len(ahkeys)), uintptr(unsafe.Pointer(pclsidDefault)), uintptr(unsafe.Pointer(pdtobj)), uintptr(unsafe.Pointer(psb)), uintptr(unsafe.Pointer(_pStartPage)))
 	return r1 != 0
 }
@@ -4764,9 +6169,9 @@ func SHOpenPropSheet(pszCaption string, ahkeys []systemregistry.HKEY, pclsidDefa
 // SHOpenRegStream calls SHLWAPI!SHOpenRegStreamW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shopenregstreamw
 // Minimum OS: windows5.0.
-func SHOpenRegStream(hkey systemregistry.HKEY, pszSubkey string, pszValue string, grfMode uint32) *systemcom.IStream {
-	_pszSubkey := win32.UTF16Ptr(pszSubkey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHOpenRegStream(hkey systemregistry.HKEY, pszSubkey *string, pszValue *string, grfMode uint32) *systemcom.IStream {
+	_pszSubkey := win32.UTF16PtrOrNil(pszSubkey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHOpenRegStream.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubkey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(grfMode))
 	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
@@ -4774,9 +6179,9 @@ func SHOpenRegStream(hkey systemregistry.HKEY, pszSubkey string, pszValue string
 // SHOpenRegStream2 calls SHLWAPI!SHOpenRegStream2W.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shopenregstream2w
 // Minimum OS: windows5.0.
-func SHOpenRegStream2(hkey systemregistry.HKEY, pszSubkey string, pszValue string, grfMode uint32) *systemcom.IStream {
-	_pszSubkey := win32.UTF16Ptr(pszSubkey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHOpenRegStream2(hkey systemregistry.HKEY, pszSubkey *string, pszValue *string, grfMode uint32) *systemcom.IStream {
+	_pszSubkey := win32.UTF16PtrOrNil(pszSubkey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHOpenRegStream2.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubkey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(grfMode))
 	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
@@ -4850,8 +6255,8 @@ func SHQueryInfoKeyA(hkey systemregistry.HKEY, pcSubKeys *uint32, pcchMaxSubKeyL
 // SHQueryRecycleBin calls SHELL32!SHQueryRecycleBinW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shqueryrecyclebinw
 // Minimum OS: windows5.0.
-func SHQueryRecycleBin(pszRootPath string, pSHQueryRBInfo *SHQUERYRBINFO) error {
-	_pszRootPath := win32.UTF16Ptr(pszRootPath)
+func SHQueryRecycleBin(pszRootPath *string, pSHQueryRBInfo *SHQUERYRBINFO) error {
+	_pszRootPath := win32.UTF16PtrOrNil(pszRootPath)
 	r1, _, _ := syscall.SyscallN(procSHQueryRecycleBin.Addr(), uintptr(unsafe.Pointer(_pszRootPath)), uintptr(unsafe.Pointer(pSHQueryRBInfo)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -4875,8 +6280,8 @@ func SHQueryUserNotificationState(pquns *QUERY_USER_NOTIFICATION_STATE) error {
 // SHQueryValueEx calls SHLWAPI!SHQueryValueExW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shqueryvalueexw
 // Minimum OS: windows5.0.
-func SHQueryValueEx(hkey systemregistry.HKEY, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHQueryValueEx(hkey systemregistry.HKEY, pszValue *string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHQueryValueEx.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszValue)), 0, uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -4991,9 +6396,9 @@ func SHRegEnumUSValueA(hUSkey uintptr, dwIndex uint32, pszValueName foundation.P
 // SHRegGetBoolUSValue calls SHLWAPI!SHRegGetBoolUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetboolusvaluew
 // Minimum OS: windows5.0.
-func SHRegGetBoolUSValue(pszSubKey string, pszValue string, fIgnoreHKCU bool, fDefault bool) bool {
+func SHRegGetBoolUSValue(pszSubKey string, pszValue *string, fIgnoreHKCU bool, fDefault bool) bool {
 	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
 	_fDefault := win32.Bool32(fDefault)
 	r1, _, _ := syscall.SyscallN(procSHRegGetBoolUSValue.Addr(), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(_fIgnoreHKCU), uintptr(_fDefault))
@@ -5013,8 +6418,8 @@ func SHRegGetBoolUSValueA(pszSubKey foundation.PSTR, pszValue foundation.PSTR, f
 // SHRegGetIntW calls SHLWAPI!SHRegGetIntW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetintw
 // Minimum OS: windows5.0.
-func SHRegGetIntW(hk systemregistry.HKEY, pwzKey string, iDefault int32) int32 {
-	_pwzKey := win32.UTF16Ptr(pwzKey)
+func SHRegGetIntW(hk systemregistry.HKEY, pwzKey *string, iDefault int32) int32 {
+	_pwzKey := win32.UTF16PtrOrNil(pwzKey)
 	r1, _, _ := syscall.SyscallN(procSHRegGetIntW.Addr(), uintptr(hk), uintptr(unsafe.Pointer(_pwzKey)), uintptr(iDefault))
 	return int32(r1)
 }
@@ -5022,9 +6427,9 @@ func SHRegGetIntW(hk systemregistry.HKEY, pwzKey string, iDefault int32) int32 {
 // SHRegGetPath calls SHLWAPI!SHRegGetPathW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetpathw
 // Minimum OS: windows5.0.
-func SHRegGetPath(hKey systemregistry.HKEY, pcszSubKey string, pcszValue string, pszPath foundation.PWSTR, dwFlags uint32) foundation.WIN32_ERROR {
-	_pcszSubKey := win32.UTF16Ptr(pcszSubKey)
-	_pcszValue := win32.UTF16Ptr(pcszValue)
+func SHRegGetPath(hKey systemregistry.HKEY, pcszSubKey *string, pcszValue *string, pszPath foundation.PWSTR, dwFlags uint32) foundation.WIN32_ERROR {
+	_pcszSubKey := win32.UTF16PtrOrNil(pcszSubKey)
+	_pcszValue := win32.UTF16PtrOrNil(pcszValue)
 	r1, _, _ := syscall.SyscallN(procSHRegGetPath.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pcszSubKey)), uintptr(unsafe.Pointer(_pcszValue)), uintptr(unsafe.Pointer(pszPath)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -5040,9 +6445,9 @@ func SHRegGetPathA(hKey systemregistry.HKEY, pcszSubKey foundation.PSTR, pcszVal
 // SHRegGetUSValue calls SHLWAPI!SHRegGetUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetusvaluew
 // Minimum OS: windows5.0.
-func SHRegGetUSValue(pszSubKey string, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
+func SHRegGetUSValue(pszSubKey string, pszValue *string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
 	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
 	var _pvDefaultData *byte
 	if len(pvDefaultData) > 0 {
@@ -5068,9 +6473,9 @@ func SHRegGetUSValueA(pszSubKey foundation.PSTR, pszValue foundation.PSTR, pdwTy
 // SHRegGetValue calls SHLWAPI!SHRegGetValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetvaluew
 // Minimum OS: windows5.1.2600.
-func SHRegGetValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string, srrfFlags int32, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHRegGetValue(hkey systemregistry.HKEY, pszSubKey *string, pszValue *string, srrfFlags int32, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	r1, _, _ := syscall.SyscallN(procSHRegGetValue.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(srrfFlags), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -5086,9 +6491,9 @@ func SHRegGetValueA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR, pszValu
 // SHRegGetValueFromHKCUHKLM calls SHLWAPI!SHRegGetValueFromHKCUHKLM.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetvaluefromhkcuhklm
 // Minimum OS: windows6.0.6000.
-func SHRegGetValueFromHKCUHKLM(pwszKey string, pwszValue string, srrfFlags int32, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
+func SHRegGetValueFromHKCUHKLM(pwszKey string, pwszValue *string, srrfFlags int32, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32) foundation.WIN32_ERROR {
 	_pwszKey := win32.UTF16Ptr(pwszKey)
-	_pwszValue := win32.UTF16Ptr(pwszValue)
+	_pwszValue := win32.UTF16PtrOrNil(pwszValue)
 	r1, _, _ := syscall.SyscallN(procSHRegGetValueFromHKCUHKLM.Addr(), uintptr(unsafe.Pointer(_pwszKey)), uintptr(unsafe.Pointer(_pwszValue)), uintptr(srrfFlags), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)))
 	return foundation.WIN32_ERROR(r1)
 }
@@ -5131,8 +6536,8 @@ func SHRegQueryInfoUSKeyA(hUSKey uintptr, pcSubKeys *uint32, pcchMaxSubKeyLen *u
 // SHRegQueryUSValue calls SHLWAPI!SHRegQueryUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregqueryusvaluew
 // Minimum OS: windows5.0.
-func SHRegQueryUSValue(hUSKey uintptr, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHRegQueryUSValue(hUSKey uintptr, pszValue *string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
 	var _pvDefaultData *byte
 	if len(pvDefaultData) > 0 {
@@ -5158,9 +6563,9 @@ func SHRegQueryUSValueA(hUSKey uintptr, pszValue foundation.PSTR, pdwType *uint3
 // SHRegSetPath calls SHLWAPI!SHRegSetPathW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregsetpathw
 // Minimum OS: windows5.0.
-func SHRegSetPath(hKey systemregistry.HKEY, pcszSubKey string, pcszValue string, pcszPath string, dwFlags uint32) foundation.WIN32_ERROR {
-	_pcszSubKey := win32.UTF16Ptr(pcszSubKey)
-	_pcszValue := win32.UTF16Ptr(pcszValue)
+func SHRegSetPath(hKey systemregistry.HKEY, pcszSubKey *string, pcszValue *string, pcszPath string, dwFlags uint32) foundation.WIN32_ERROR {
+	_pcszSubKey := win32.UTF16PtrOrNil(pcszSubKey)
+	_pcszValue := win32.UTF16PtrOrNil(pcszValue)
 	_pcszPath := win32.UTF16Ptr(pcszPath)
 	r1, _, _ := syscall.SyscallN(procSHRegSetPath.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_pcszSubKey)), uintptr(unsafe.Pointer(_pcszValue)), uintptr(unsafe.Pointer(_pcszPath)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
@@ -5362,9 +6767,9 @@ func SHSetUnreadMailCount(pszMailAddress string, dwCount uint32, pszShellExecute
 // SHSetValue calls SHLWAPI!SHSetValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shsetvaluew
 // Minimum OS: windows5.0.
-func SHSetValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string, dwType uint32, pvData []byte) int32 {
-	_pszSubKey := win32.UTF16Ptr(pszSubKey)
-	_pszValue := win32.UTF16Ptr(pszValue)
+func SHSetValue(hkey systemregistry.HKEY, pszSubKey *string, pszValue *string, dwType uint32, pvData []byte) int32 {
+	_pszSubKey := win32.UTF16PtrOrNil(pszSubKey)
+	_pszValue := win32.UTF16PtrOrNil(pszValue)
 	var _pvData *byte
 	if len(pvData) > 0 {
 		_pvData = &pvData[0]
@@ -5396,9 +6801,9 @@ func SHShellFolderView_Message(hwndMain foundation.HWND, uMsg uint32, lParam fou
 // SHShowManageLibraryUI calls SHELL32!SHShowManageLibraryUI.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shshowmanagelibraryui
 // Minimum OS: windows6.1.
-func SHShowManageLibraryUI(psiLibrary *IShellItem, hwndOwner foundation.HWND, pszTitle string, pszInstruction string, lmdOptions LIBRARYMANAGEDIALOGOPTIONS) error {
-	_pszTitle := win32.UTF16Ptr(pszTitle)
-	_pszInstruction := win32.UTF16Ptr(pszInstruction)
+func SHShowManageLibraryUI(psiLibrary *IShellItem, hwndOwner foundation.HWND, pszTitle *string, pszInstruction *string, lmdOptions LIBRARYMANAGEDIALOGOPTIONS) error {
+	_pszTitle := win32.UTF16PtrOrNil(pszTitle)
+	_pszInstruction := win32.UTF16PtrOrNil(pszInstruction)
 	r1, _, _ := syscall.SyscallN(procSHShowManageLibraryUI.Addr(), uintptr(unsafe.Pointer(psiLibrary)), uintptr(hwndOwner), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszInstruction)), uintptr(lmdOptions))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5423,8 +6828,8 @@ func SHSkipJunction(pbc *systemcom.IBindCtx, pclsid *win32.GUID) bool {
 // SHStartNetConnectionDialog calls SHELL32!SHStartNetConnectionDialogW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shstartnetconnectiondialogw
 // Minimum OS: windows5.1.2600.
-func SHStartNetConnectionDialog(hwnd foundation.HWND, pszRemoteName string, dwType uint32) error {
-	_pszRemoteName := win32.UTF16Ptr(pszRemoteName)
+func SHStartNetConnectionDialog(hwnd foundation.HWND, pszRemoteName *string, dwType uint32) error {
+	_pszRemoteName := win32.UTF16PtrOrNil(pszRemoteName)
 	r1, _, _ := syscall.SyscallN(procSHStartNetConnectionDialog.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_pszRemoteName)), uintptr(dwType))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5564,9 +6969,9 @@ func SetWindowSubclass(hWnd foundation.HWND, pfnSubclass SUBCLASSPROC, uIdSubcla
 // ShellAbout calls SHELL32!ShellAboutW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellaboutw
 // Minimum OS: windows5.1.2600.
-func ShellAbout(hWnd foundation.HWND, szApp string, szOtherStuff string, hIcon uiwindowsandmessaging.HICON) int32 {
+func ShellAbout(hWnd foundation.HWND, szApp string, szOtherStuff *string, hIcon uiwindowsandmessaging.HICON) int32 {
 	_szApp := win32.UTF16Ptr(szApp)
-	_szOtherStuff := win32.UTF16Ptr(szOtherStuff)
+	_szOtherStuff := win32.UTF16PtrOrNil(szOtherStuff)
 	r1, _, _ := syscall.SyscallN(procShellAbout.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_szApp)), uintptr(unsafe.Pointer(_szOtherStuff)), uintptr(hIcon))
 	return int32(r1)
 }
@@ -5582,11 +6987,11 @@ func ShellAboutA(hWnd foundation.HWND, szApp foundation.PSTR, szOtherStuff found
 // ShellExecute calls SHELL32!ShellExecuteW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellexecutew
 // Minimum OS: windows5.1.2600.
-func ShellExecute(hwnd foundation.HWND, lpOperation string, lpFile string, lpParameters string, lpDirectory string, nShowCmd uiwindowsandmessaging.SHOW_WINDOW_CMD) foundation.HINSTANCE {
-	_lpOperation := win32.UTF16Ptr(lpOperation)
+func ShellExecute(hwnd foundation.HWND, lpOperation *string, lpFile string, lpParameters *string, lpDirectory *string, nShowCmd uiwindowsandmessaging.SHOW_WINDOW_CMD) foundation.HINSTANCE {
+	_lpOperation := win32.UTF16PtrOrNil(lpOperation)
 	_lpFile := win32.UTF16Ptr(lpFile)
-	_lpParameters := win32.UTF16Ptr(lpParameters)
-	_lpDirectory := win32.UTF16Ptr(lpDirectory)
+	_lpParameters := win32.UTF16PtrOrNil(lpParameters)
+	_lpDirectory := win32.UTF16PtrOrNil(lpDirectory)
 	r1, _, _ := syscall.SyscallN(procShellExecute.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(_lpOperation)), uintptr(unsafe.Pointer(_lpFile)), uintptr(unsafe.Pointer(_lpParameters)), uintptr(unsafe.Pointer(_lpDirectory)), uintptr(nShowCmd))
 	return foundation.HINSTANCE(r1)
 }
@@ -5624,9 +7029,9 @@ func ShellExecuteExA(pExecInfo *SHELLEXECUTEINFOA) error {
 // ShellMessageBox calls SHLWAPI!ShellMessageBoxW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shellmessageboxw
 // Minimum OS: windows5.1.2600.
-func ShellMessageBox(hAppInst foundation.HINSTANCE, hWnd foundation.HWND, lpcText string, lpcTitle string, fuStyle uiwindowsandmessaging.MESSAGEBOX_STYLE) (int32, error) {
+func ShellMessageBox(hAppInst foundation.HINSTANCE, hWnd foundation.HWND, lpcText string, lpcTitle *string, fuStyle uiwindowsandmessaging.MESSAGEBOX_STYLE) (int32, error) {
 	_lpcText := win32.UTF16Ptr(lpcText)
-	_lpcTitle := win32.UTF16Ptr(lpcTitle)
+	_lpcTitle := win32.UTF16PtrOrNil(lpcTitle)
 	r1, _, e1 := syscall.SyscallN(procShellMessageBox.Addr(), uintptr(hAppInst), uintptr(hWnd), uintptr(unsafe.Pointer(_lpcText)), uintptr(unsafe.Pointer(_lpcTitle)), uintptr(fuStyle))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -6155,9 +7560,9 @@ func StrPBrkA(psz foundation.PSTR, pszSet foundation.PSTR) foundation.PSTR {
 // StrRChr calls SHLWAPI!StrRChrW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-strrchrw
 // Minimum OS: windows5.0.
-func StrRChr(pszStart string, pszEnd string, wMatch uint16) foundation.PWSTR {
+func StrRChr(pszStart string, pszEnd *string, wMatch uint16) foundation.PWSTR {
 	_pszStart := win32.UTF16Ptr(pszStart)
-	_pszEnd := win32.UTF16Ptr(pszEnd)
+	_pszEnd := win32.UTF16PtrOrNil(pszEnd)
 	r1, _, _ := syscall.SyscallN(procStrRChr.Addr(), uintptr(unsafe.Pointer(_pszStart)), uintptr(unsafe.Pointer(_pszEnd)), uintptr(wMatch))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
@@ -6173,9 +7578,9 @@ func StrRChrA(pszStart foundation.PSTR, pszEnd foundation.PSTR, wMatch uint16) f
 // StrRChrI calls SHLWAPI!StrRChrIW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-strrchriw
 // Minimum OS: windows5.0.
-func StrRChrI(pszStart string, pszEnd string, wMatch uint16) foundation.PWSTR {
+func StrRChrI(pszStart string, pszEnd *string, wMatch uint16) foundation.PWSTR {
 	_pszStart := win32.UTF16Ptr(pszStart)
-	_pszEnd := win32.UTF16Ptr(pszEnd)
+	_pszEnd := win32.UTF16PtrOrNil(pszEnd)
 	r1, _, _ := syscall.SyscallN(procStrRChrI.Addr(), uintptr(unsafe.Pointer(_pszStart)), uintptr(unsafe.Pointer(_pszEnd)), uintptr(wMatch))
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
@@ -6191,9 +7596,9 @@ func StrRChrIA(pszStart foundation.PSTR, pszEnd foundation.PSTR, wMatch uint16) 
 // StrRStrI calls SHLWAPI!StrRStrIW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-strrstriw
 // Minimum OS: windows5.0.
-func StrRStrI(pszSource string, pszLast string, pszSrch string) foundation.PWSTR {
+func StrRStrI(pszSource string, pszLast *string, pszSrch string) foundation.PWSTR {
 	_pszSource := win32.UTF16Ptr(pszSource)
-	_pszLast := win32.UTF16Ptr(pszLast)
+	_pszLast := win32.UTF16PtrOrNil(pszLast)
 	_pszSrch := win32.UTF16Ptr(pszSrch)
 	r1, _, _ := syscall.SyscallN(procStrRStrI.Addr(), uintptr(unsafe.Pointer(_pszSource)), uintptr(unsafe.Pointer(_pszLast)), uintptr(unsafe.Pointer(_pszSrch)))
 	return foundation.PWSTR(unsafe.Pointer(r1))
@@ -6688,8 +8093,8 @@ func Win32DeleteFile(pszPath string) bool {
 // WinHelp calls USER32!WinHelpW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-winhelpw
 // Minimum OS: windows5.1.2600.
-func WinHelp(hWndMain foundation.HWND, lpszHelp string, uCommand uint32, dwData uintptr) error {
-	_lpszHelp := win32.UTF16Ptr(lpszHelp)
+func WinHelp(hWndMain foundation.HWND, lpszHelp *string, uCommand uint32, dwData uintptr) error {
+	_lpszHelp := win32.UTF16PtrOrNil(lpszHelp)
 	r1, _, e1 := syscall.SyscallN(procWinHelp.Addr(), uintptr(hWndMain), uintptr(unsafe.Pointer(_lpszHelp)), uintptr(uCommand), uintptr(dwData))
 	if r1 == 0 {
 		return win32.LastError(e1)

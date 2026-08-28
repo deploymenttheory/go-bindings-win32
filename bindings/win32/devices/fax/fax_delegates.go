@@ -4,366 +4,454 @@
 
 package fax
 
-// PFAXABORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32) foundation.BOOL.
+// PFAXABORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXABORT uintptr
 
-// PFAXACCESSCHECK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32) foundation.BOOL.
+// PFAXACCESSCHECK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXACCESSCHECK uintptr
 
-// PFAXCLOSE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.BOOL.
+// PFAXCLOSE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXCLOSE uintptr
 
-// PFAXCOMPLETEJOBPARAMSA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(**FAX_JOB_PARAMA, **FAX_COVERPAGE_INFOA) foundation.BOOL.
+// PFAXCOMPLETEJOBPARAMSA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(**FAX_JOB_PARAMA, **FAX_COVERPAGE_INFOA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXCOMPLETEJOBPARAMSA uintptr
 
-// PFAXCOMPLETEJOBPARAMSW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(**FAX_JOB_PARAMW, **FAX_COVERPAGE_INFOW) foundation.BOOL.
+// PFAXCOMPLETEJOBPARAMSW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(**FAX_JOB_PARAMW, **FAX_COVERPAGE_INFOW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXCOMPLETEJOBPARAMSW uintptr
 
-// PFAXCONNECTFAXSERVERA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, *foundation.HANDLE) foundation.BOOL.
+// PFAXCONNECTFAXSERVERA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, *foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXCONNECTFAXSERVERA uintptr
 
-// PFAXCONNECTFAXSERVERW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *foundation.HANDLE) foundation.BOOL.
+// PFAXCONNECTFAXSERVERW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXCONNECTFAXSERVERW uintptr
 
-// PFAXDEVABORTOPERATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.BOOL.
+// PFAXDEVABORTOPERATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXDEVABORTOPERATION uintptr
 
-// PFAXDEVCONFIGURE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uicontrols.HPROPSHEETPAGE) foundation.BOOL.
+// PFAXDEVCONFIGURE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uicontrols.HPROPSHEETPAGE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXDEVCONFIGURE uintptr
 
-// PFAXDEVENDJOB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.BOOL.
+// PFAXDEVENDJOB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXDEVENDJOB uintptr
 
-// PFAXDEVINITIALIZE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.HANDLE, *PFAX_LINECALLBACK, PFAX_SERVICE_CALLBACK) foundation.BOOL.
+// PFAXDEVINITIALIZE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.HANDLE, *PFAX_LINECALLBACK, PFAX_SERVICE_CALLBACK) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXDEVINITIALIZE uintptr
 
-// PFAXDEVRECEIVE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, *FAX_RECEIVE) foundation.BOOL.
+// PFAXDEVRECEIVE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, *FAX_RECEIVE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXDEVRECEIVE uintptr
 
-// PFAXDEVREPORTSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_DEV_STATUS, uint32, *uint32) foundation.BOOL.
+// PFAXDEVREPORTSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_DEV_STATUS, uint32, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXDEVREPORTSTATUS uintptr
 
-// PFAXDEVSEND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_SEND, PFAX_SEND_CALLBACK) foundation.BOOL.
+// PFAXDEVSEND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_SEND, PFAX_SEND_CALLBACK) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXDEVSEND uintptr
 
-// PFAXDEVSHUTDOWN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.HRESULT.
+// PFAXDEVSHUTDOWN is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFAXDEVSHUTDOWN uintptr
 
-// PFAXDEVSTARTJOB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *foundation.HANDLE, foundation.HANDLE, uintptr) foundation.BOOL.
+// PFAXDEVSTARTJOB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *foundation.HANDLE, foundation.HANDLE, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXDEVSTARTJOB uintptr
 
-// PFAXDEVVIRTUALDEVICECREATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, foundation.PWSTR, *uint32, foundation.HANDLE, uintptr) foundation.BOOL.
+// PFAXDEVVIRTUALDEVICECREATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, foundation.PWSTR, *uint32, foundation.HANDLE, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXDEVVIRTUALDEVICECREATION uintptr
 
-// PFAXENABLEROUTINGMETHODA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PSTR, foundation.BOOL) foundation.BOOL.
+// PFAXENABLEROUTINGMETHODA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PSTR, foundation.BOOL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENABLEROUTINGMETHODA uintptr
 
-// PFAXENABLEROUTINGMETHODW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, foundation.BOOL) foundation.BOOL.
+// PFAXENABLEROUTINGMETHODW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, foundation.BOOL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENABLEROUTINGMETHODW uintptr
 
-// PFAXENUMGLOBALROUTINGINFOA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_GLOBAL_ROUTING_INFOA, *uint32) foundation.BOOL.
+// PFAXENUMGLOBALROUTINGINFOA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_GLOBAL_ROUTING_INFOA, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENUMGLOBALROUTINGINFOA uintptr
 
-// PFAXENUMGLOBALROUTINGINFOW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_GLOBAL_ROUTING_INFOW, *uint32) foundation.BOOL.
+// PFAXENUMGLOBALROUTINGINFOW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_GLOBAL_ROUTING_INFOW, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENUMGLOBALROUTINGINFOW uintptr
 
-// PFAXENUMJOBSA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_JOB_ENTRYA, *uint32) foundation.BOOL.
+// PFAXENUMJOBSA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_JOB_ENTRYA, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENUMJOBSA uintptr
 
-// PFAXENUMJOBSW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_JOB_ENTRYW, *uint32) foundation.BOOL.
+// PFAXENUMJOBSW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_JOB_ENTRYW, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENUMJOBSW uintptr
 
-// PFAXENUMPORTSA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_PORT_INFOA, *uint32) foundation.BOOL.
+// PFAXENUMPORTSA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_PORT_INFOA, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENUMPORTSA uintptr
 
-// PFAXENUMPORTSW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_PORT_INFOW, *uint32) foundation.BOOL.
+// PFAXENUMPORTSW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_PORT_INFOW, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENUMPORTSW uintptr
 
-// PFAXENUMROUTINGMETHODSA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_ROUTING_METHODA, *uint32) foundation.BOOL.
+// PFAXENUMROUTINGMETHODSA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_ROUTING_METHODA, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENUMROUTINGMETHODSA uintptr
 
-// PFAXENUMROUTINGMETHODSW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_ROUTING_METHODW, *uint32) foundation.BOOL.
+// PFAXENUMROUTINGMETHODSW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_ROUTING_METHODW, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXENUMROUTINGMETHODSW uintptr
 
-// PFAXFREEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFAXFREEBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFAXFREEBUFFER uintptr
 
-// PFAXGETCONFIGURATIONA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_CONFIGURATIONA) foundation.BOOL.
+// PFAXGETCONFIGURATIONA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_CONFIGURATIONA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETCONFIGURATIONA uintptr
 
-// PFAXGETCONFIGURATIONW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_CONFIGURATIONW) foundation.BOOL.
+// PFAXGETCONFIGURATIONW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_CONFIGURATIONW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETCONFIGURATIONW uintptr
 
-// PFAXGETDEVICESTATUSA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_DEVICE_STATUSA) foundation.BOOL.
+// PFAXGETDEVICESTATUSA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_DEVICE_STATUSA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETDEVICESTATUSA uintptr
 
-// PFAXGETDEVICESTATUSW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_DEVICE_STATUSW) foundation.BOOL.
+// PFAXGETDEVICESTATUSW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_DEVICE_STATUSW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETDEVICESTATUSW uintptr
 
-// PFAXGETJOBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, **FAX_JOB_ENTRYA) foundation.BOOL.
+// PFAXGETJOBA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, **FAX_JOB_ENTRYA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETJOBA uintptr
 
-// PFAXGETJOBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, **FAX_JOB_ENTRYW) foundation.BOOL.
+// PFAXGETJOBW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, **FAX_JOB_ENTRYW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETJOBW uintptr
 
-// PFAXGETLOGGINGCATEGORIESA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_LOG_CATEGORYA, *uint32) foundation.BOOL.
+// PFAXGETLOGGINGCATEGORIESA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_LOG_CATEGORYA, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETLOGGINGCATEGORIESA uintptr
 
-// PFAXGETLOGGINGCATEGORIESW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_LOG_CATEGORYW, *uint32) foundation.BOOL.
+// PFAXGETLOGGINGCATEGORIESW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_LOG_CATEGORYW, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETLOGGINGCATEGORIESW uintptr
 
-// PFAXGETPAGEDATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, **byte, *uint32, *uint32, *uint32) foundation.BOOL.
+// PFAXGETPAGEDATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, **byte, *uint32, *uint32, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETPAGEDATA uintptr
 
-// PFAXGETPORTA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_PORT_INFOA) foundation.BOOL.
+// PFAXGETPORTA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_PORT_INFOA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETPORTA uintptr
 
-// PFAXGETPORTW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, **FAX_PORT_INFOW) foundation.BOOL.
+// PFAXGETPORTW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, **FAX_PORT_INFOW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETPORTW uintptr
 
-// PFAXGETROUTINGINFOA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PSTR, **byte, *uint32) foundation.BOOL.
+// PFAXGETROUTINGINFOA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PSTR, **byte, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETROUTINGINFOA uintptr
 
-// PFAXGETROUTINGINFOW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, **byte, *uint32) foundation.BOOL.
+// PFAXGETROUTINGINFOW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, **byte, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXGETROUTINGINFOW uintptr
 
-// PFAXINITIALIZEEVENTQUEUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, uintptr, foundation.HWND, uint32) foundation.BOOL.
+// PFAXINITIALIZEEVENTQUEUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, uintptr, foundation.HWND, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXINITIALIZEEVENTQUEUE uintptr
 
-// PFAXOPENPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uint32, *foundation.HANDLE) foundation.BOOL.
+// PFAXOPENPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uint32, *foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXOPENPORT uintptr
 
-// PFAXPRINTCOVERPAGEA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*FAX_CONTEXT_INFOA, *FAX_COVERPAGE_INFOA) foundation.BOOL.
+// PFAXPRINTCOVERPAGEA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*FAX_CONTEXT_INFOA, *FAX_COVERPAGE_INFOA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXPRINTCOVERPAGEA uintptr
 
-// PFAXPRINTCOVERPAGEW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*FAX_CONTEXT_INFOW, *FAX_COVERPAGE_INFOW) foundation.BOOL.
+// PFAXPRINTCOVERPAGEW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*FAX_CONTEXT_INFOW, *FAX_COVERPAGE_INFOW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXPRINTCOVERPAGEW uintptr
 
-// PFAXREGISTERROUTINGEXTENSIONW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, PFAX_ROUTING_INSTALLATION_CALLBACKW, unsafe.Pointer) foundation.BOOL.
+// PFAXREGISTERROUTINGEXTENSIONW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, PFAX_ROUTING_INSTALLATION_CALLBACKW, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXREGISTERROUTINGEXTENSIONW uintptr
 
-// PFAXREGISTERSERVICEPROVIDERW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) foundation.BOOL.
+// PFAXREGISTERSERVICEPROVIDERW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXREGISTERSERVICEPROVIDERW uintptr
 
-// PFAXROUTEADDFILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PWSTR, *win32.GUID) int32.
+// PFAXROUTEADDFILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PWSTR, *win32.GUID) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFAXROUTEADDFILE uintptr
 
-// PFAXROUTEDELETEFILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PWSTR) int32.
+// PFAXROUTEDELETEFILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PWSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFAXROUTEDELETEFILE uintptr
 
-// PFAXROUTEDEVICECHANGENOTIFICATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.BOOL) foundation.BOOL.
+// PFAXROUTEDEVICECHANGENOTIFICATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.BOOL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTEDEVICECHANGENOTIFICATION uintptr
 
-// PFAXROUTEDEVICEENABLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, int32) foundation.BOOL.
+// PFAXROUTEDEVICEENABLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTEDEVICEENABLE uintptr
 
-// PFAXROUTEENUMFILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *win32.GUID, *win32.GUID, foundation.PWSTR, unsafe.Pointer) foundation.BOOL.
+// PFAXROUTEENUMFILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *win32.GUID, *win32.GUID, foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTEENUMFILE uintptr
 
-// PFAXROUTEENUMFILES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *win32.GUID, PFAXROUTEENUMFILE, unsafe.Pointer) foundation.BOOL.
+// PFAXROUTEENUMFILES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *win32.GUID, PFAXROUTEENUMFILE, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTEENUMFILES uintptr
 
-// PFAXROUTEGETFILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, foundation.PWSTR, *uint32) foundation.BOOL.
+// PFAXROUTEGETFILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTEGETFILE uintptr
 
-// PFAXROUTEGETROUTINGINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, *byte, *uint32) foundation.BOOL.
+// PFAXROUTEGETROUTINGINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, *byte, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTEGETROUTINGINFO uintptr
 
-// PFAXROUTEINITIALIZE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_ROUTE_CALLBACKROUTINES) foundation.BOOL.
+// PFAXROUTEINITIALIZE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_ROUTE_CALLBACKROUTINES) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTEINITIALIZE uintptr
 
-// PFAXROUTEMETHOD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*FAX_ROUTE, *unsafe.Pointer, *uint32) foundation.BOOL.
+// PFAXROUTEMETHOD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*FAX_ROUTE, *unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTEMETHOD uintptr
 
-// PFAXROUTEMODIFYROUTINGDATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PWSTR, *byte, uint32) foundation.BOOL.
+// PFAXROUTEMODIFYROUTINGDATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PWSTR, *byte, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTEMODIFYROUTINGDATA uintptr
 
-// PFAXROUTESETROUTINGINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, *byte, uint32) foundation.BOOL.
+// PFAXROUTESETROUTINGINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, *byte, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXROUTESETROUTINGINFO uintptr
 
-// PFAXSENDDOCUMENTA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PSTR, *FAX_JOB_PARAMA, *FAX_COVERPAGE_INFOA, *uint32) foundation.BOOL.
+// PFAXSENDDOCUMENTA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PSTR, *FAX_JOB_PARAMA, *FAX_COVERPAGE_INFOA, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSENDDOCUMENTA uintptr
 
-// PFAXSENDDOCUMENTFORBROADCASTA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PSTR, *uint32, PFAX_RECIPIENT_CALLBACKA, unsafe.Pointer) foundation.BOOL.
+// PFAXSENDDOCUMENTFORBROADCASTA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PSTR, *uint32, PFAX_RECIPIENT_CALLBACKA, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSENDDOCUMENTFORBROADCASTA uintptr
 
-// PFAXSENDDOCUMENTFORBROADCASTW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, *uint32, PFAX_RECIPIENT_CALLBACKW, unsafe.Pointer) foundation.BOOL.
+// PFAXSENDDOCUMENTFORBROADCASTW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, *uint32, PFAX_RECIPIENT_CALLBACKW, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSENDDOCUMENTFORBROADCASTW uintptr
 
-// PFAXSENDDOCUMENTW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, *FAX_JOB_PARAMW, *FAX_COVERPAGE_INFOW, *uint32) foundation.BOOL.
+// PFAXSENDDOCUMENTW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, *FAX_JOB_PARAMW, *FAX_COVERPAGE_INFOW, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSENDDOCUMENTW uintptr
 
-// PFAXSETCONFIGURATIONA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_CONFIGURATIONA) foundation.BOOL.
+// PFAXSETCONFIGURATIONA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_CONFIGURATIONA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETCONFIGURATIONA uintptr
 
-// PFAXSETCONFIGURATIONW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_CONFIGURATIONW) foundation.BOOL.
+// PFAXSETCONFIGURATIONW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_CONFIGURATIONW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETCONFIGURATIONW uintptr
 
-// PFAXSETGLOBALROUTINGINFOA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_GLOBAL_ROUTING_INFOA) foundation.BOOL.
+// PFAXSETGLOBALROUTINGINFOA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_GLOBAL_ROUTING_INFOA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETGLOBALROUTINGINFOA uintptr
 
-// PFAXSETGLOBALROUTINGINFOW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_GLOBAL_ROUTING_INFOW) foundation.BOOL.
+// PFAXSETGLOBALROUTINGINFOW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_GLOBAL_ROUTING_INFOW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETGLOBALROUTINGINFOW uintptr
 
-// PFAXSETJOBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uint32, *FAX_JOB_ENTRYA) foundation.BOOL.
+// PFAXSETJOBA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uint32, *FAX_JOB_ENTRYA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETJOBA uintptr
 
-// PFAXSETJOBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uint32, *FAX_JOB_ENTRYW) foundation.BOOL.
+// PFAXSETJOBW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uint32, *FAX_JOB_ENTRYW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETJOBW uintptr
 
-// PFAXSETLOGGINGCATEGORIESA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_LOG_CATEGORYA, uint32) foundation.BOOL.
+// PFAXSETLOGGINGCATEGORIESA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_LOG_CATEGORYA, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETLOGGINGCATEGORIESA uintptr
 
-// PFAXSETLOGGINGCATEGORIESW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_LOG_CATEGORYW, uint32) foundation.BOOL.
+// PFAXSETLOGGINGCATEGORIESW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_LOG_CATEGORYW, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETLOGGINGCATEGORIESW uintptr
 
-// PFAXSETPORTA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_PORT_INFOA) foundation.BOOL.
+// PFAXSETPORTA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_PORT_INFOA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETPORTA uintptr
 
-// PFAXSETPORTW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *FAX_PORT_INFOW) foundation.BOOL.
+// PFAXSETPORTW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *FAX_PORT_INFOW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETPORTW uintptr
 
-// PFAXSETROUTINGINFOA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PSTR, *byte, uint32) foundation.BOOL.
+// PFAXSETROUTINGINFOA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PSTR, *byte, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETROUTINGINFOA uintptr
 
-// PFAXSETROUTINGINFOW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, *byte, uint32) foundation.BOOL.
+// PFAXSETROUTINGINFOW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, *byte, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSETROUTINGINFOW uintptr
 
-// PFAXSTARTPRINTJOBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, *FAX_PRINT_INFOA, *uint32, *FAX_CONTEXT_INFOA) foundation.BOOL.
+// PFAXSTARTPRINTJOBA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, *FAX_PRINT_INFOA, *uint32, *FAX_CONTEXT_INFOA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSTARTPRINTJOBA uintptr
 
-// PFAXSTARTPRINTJOBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *FAX_PRINT_INFOW, *uint32, *FAX_CONTEXT_INFOW) foundation.BOOL.
+// PFAXSTARTPRINTJOBW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *FAX_PRINT_INFOW, *uint32, *FAX_CONTEXT_INFOW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXSTARTPRINTJOBW uintptr
 
-// PFAXUNREGISTERSERVICEPROVIDERW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// PFAXUNREGISTERSERVICEPROVIDERW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAXUNREGISTERSERVICEPROVIDERW uintptr
 
-// PFAX_EXT_CONFIG_CHANGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PWSTR, *byte, uint32) foundation.HRESULT.
+// PFAX_EXT_CONFIG_CHANGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PWSTR, *byte, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFAX_EXT_CONFIG_CHANGE uintptr
 
-// PFAX_EXT_FREE_BUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFAX_EXT_FREE_BUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFAX_EXT_FREE_BUFFER uintptr
 
-// PFAX_EXT_GET_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, FAX_ENUM_DEVICE_ID_SOURCE, foundation.PWSTR, **byte, *uint32) uint32.
+// PFAX_EXT_GET_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, FAX_ENUM_DEVICE_ID_SOURCE, foundation.PWSTR, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFAX_EXT_GET_DATA uintptr
 
-// PFAX_EXT_INITIALIZE_CONFIG is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PFAX_EXT_GET_DATA, PFAX_EXT_SET_DATA, PFAX_EXT_REGISTER_FOR_EVENTS, PFAX_EXT_UNREGISTER_FOR_EVENTS, PFAX_EXT_FREE_BUFFER) foundation.HRESULT.
+// PFAX_EXT_INITIALIZE_CONFIG is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PFAX_EXT_GET_DATA, PFAX_EXT_SET_DATA, PFAX_EXT_REGISTER_FOR_EVENTS, PFAX_EXT_UNREGISTER_FOR_EVENTS, PFAX_EXT_FREE_BUFFER) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFAX_EXT_INITIALIZE_CONFIG uintptr
 
-// PFAX_EXT_REGISTER_FOR_EVENTS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HINSTANCE, uint32, FAX_ENUM_DEVICE_ID_SOURCE, foundation.PWSTR, PFAX_EXT_CONFIG_CHANGE) foundation.HANDLE.
+// PFAX_EXT_REGISTER_FOR_EVENTS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HINSTANCE, uint32, FAX_ENUM_DEVICE_ID_SOURCE, foundation.PWSTR, PFAX_EXT_CONFIG_CHANGE) uintptr (the native return type is
+// foundation.HANDLE; NewCallback requires a uintptr-sized result).
 type PFAX_EXT_REGISTER_FOR_EVENTS uintptr
 
-// PFAX_EXT_SET_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HINSTANCE, uint32, FAX_ENUM_DEVICE_ID_SOURCE, foundation.PWSTR, *byte, uint32) uint32.
+// PFAX_EXT_SET_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HINSTANCE, uint32, FAX_ENUM_DEVICE_ID_SOURCE, foundation.PWSTR, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFAX_EXT_SET_DATA uintptr
 
-// PFAX_EXT_UNREGISTER_FOR_EVENTS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) uint32.
+// PFAX_EXT_UNREGISTER_FOR_EVENTS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFAX_EXT_UNREGISTER_FOR_EVENTS uintptr
 
-// PFAX_LINECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uint32, uintptr, uintptr, uintptr, uintptr).
+// PFAX_LINECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uint32, uintptr, uintptr, uintptr, uintptr) uintptr.
 type PFAX_LINECALLBACK uintptr
 
-// PFAX_RECIPIENT_CALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, *FAX_JOB_PARAMA, *FAX_COVERPAGE_INFOA) foundation.BOOL.
+// PFAX_RECIPIENT_CALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, *FAX_JOB_PARAMA, *FAX_COVERPAGE_INFOA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAX_RECIPIENT_CALLBACKA uintptr
 
-// PFAX_RECIPIENT_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, *FAX_JOB_PARAMW, *FAX_COVERPAGE_INFOW) foundation.BOOL.
+// PFAX_RECIPIENT_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, unsafe.Pointer, *FAX_JOB_PARAMW, *FAX_COVERPAGE_INFOW) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAX_RECIPIENT_CALLBACKW uintptr
 
-// PFAX_ROUTING_INSTALLATION_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) foundation.BOOL.
+// PFAX_ROUTING_INSTALLATION_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAX_ROUTING_INSTALLATION_CALLBACKW uintptr
 
-// PFAX_SEND_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uint32, uint32) foundation.BOOL.
+// PFAX_SEND_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAX_SEND_CALLBACK uintptr
 
-// PFAX_SERVICE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uintptr, uintptr, uintptr) foundation.BOOL.
+// PFAX_SERVICE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uintptr, uintptr, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFAX_SERVICE_CALLBACK uintptr

@@ -22,6 +22,18 @@ var (
 	procWnvRequestNotification = modwnvapi.NewProc("WnvRequestNotification")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WnvOpen                *win32.Proc
+	WnvRequestNotification *win32.Proc
+}{
+	WnvOpen:                procWnvOpen,
+	WnvRequestNotification: procWnvRequestNotification,
+}
+
 // WnvOpen calls wnvapi!WnvOpen.
 // https://learn.microsoft.com/windows/win32/api/wnvapi/nf-wnvapi-wnvopen
 // Minimum OS: windowsserver2012.

@@ -577,6 +577,14 @@ func (self *ITargetInfo) GetTargetID() (foundation.BSTR, error) {
 	return *_TargetID, win32.ErrIfFailed(int32(r1))
 }
 
+var specITargetInfo_SetTargetID = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// SetTargetID dispatches through ITargetInfo's vtable slot 8.
+func (self *ITargetInfo) SetTargetID(TargetID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specITargetInfo_SetTargetID, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&TargetID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetTargetProcessorArchitecture dispatches through ITargetInfo's vtable slot 9.
 func (self *ITargetInfo) GetTargetProcessorArchitecture() (foundation.BSTR, error) {
 	_ProcessorArchitecture := new(foundation.BSTR)

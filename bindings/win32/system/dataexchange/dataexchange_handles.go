@@ -8,17 +8,29 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseHCONV releases a HCONV handle by calling DdeDisconnect.
+// CloseHCONV releases a HCONV handle by calling DdeDisconnect. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHCONV(h HCONV) error {
+	if h == ^HCONV(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DdeDisconnect(HCONV(h))))
 }
 
-// CloseHCONVLIST releases a HCONVLIST handle by calling DdeDisconnectList.
+// CloseHCONVLIST releases a HCONVLIST handle by calling DdeDisconnectList. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHCONVLIST(h HCONVLIST) error {
+	if h == ^HCONVLIST(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DdeDisconnectList(HCONVLIST(h))))
 }
 
-// CloseHDDEDATA releases a HDDEDATA handle by calling DdeFreeDataHandle.
+// CloseHDDEDATA releases a HDDEDATA handle by calling DdeFreeDataHandle. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseHDDEDATA(h HDDEDATA) error {
+	if h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DdeFreeDataHandle(HDDEDATA(h))))
 }

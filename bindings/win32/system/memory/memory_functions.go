@@ -134,6 +134,226 @@ var (
 	procRtlIsZeroMemory                         = modntdll.NewProc("RtlIsZeroMemory")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddSecureMemoryCacheCallback            *win32.Proc
+	AllocateUserPhysicalPages               *win32.Proc
+	AllocateUserPhysicalPages2              *win32.Proc
+	AllocateUserPhysicalPagesNuma           *win32.Proc
+	CreateFileMapping                       *win32.Proc
+	CreateFileMapping2                      *win32.Proc
+	CreateFileMappingA                      *win32.Proc
+	CreateFileMappingFromApp                *win32.Proc
+	CreateFileMappingNuma                   *win32.Proc
+	CreateFileMappingNumaA                  *win32.Proc
+	CreateMemoryResourceNotification        *win32.Proc
+	DiscardVirtualMemory                    *win32.Proc
+	FlushViewOfFile                         *win32.Proc
+	FreeUserPhysicalPages                   *win32.Proc
+	GetLargePageMinimum                     *win32.Proc
+	GetMemoryErrorHandlingCapabilities      *win32.Proc
+	GetMemoryNumaClosestInitiatorNode       *win32.Proc
+	GetMemoryNumaPerformanceInformation     *win32.Proc
+	GetProcessHeap                          *win32.Proc
+	GetProcessHeaps                         *win32.Proc
+	GetProcessWorkingSetSizeEx              *win32.Proc
+	GetSystemFileCacheSize                  *win32.Proc
+	GetWriteWatch                           *win32.Proc
+	GlobalAlloc                             *win32.Proc
+	GlobalFlags                             *win32.Proc
+	GlobalHandle                            *win32.Proc
+	GlobalLock                              *win32.Proc
+	GlobalReAlloc                           *win32.Proc
+	GlobalSize                              *win32.Proc
+	GlobalUnlock                            *win32.Proc
+	HeapAlloc                               *win32.Proc
+	HeapCompact                             *win32.Proc
+	HeapCreate                              *win32.Proc
+	HeapDestroy                             *win32.Proc
+	HeapFree                                *win32.Proc
+	HeapLock                                *win32.Proc
+	HeapQueryInformation                    *win32.Proc
+	HeapReAlloc                             *win32.Proc
+	HeapSetInformation                      *win32.Proc
+	HeapSize                                *win32.Proc
+	HeapSummary                             *win32.Proc
+	HeapUnlock                              *win32.Proc
+	HeapValidate                            *win32.Proc
+	HeapWalk                                *win32.Proc
+	IsBadCodePtr                            *win32.Proc
+	IsBadReadPtr                            *win32.Proc
+	IsBadStringPtr                          *win32.Proc
+	IsBadStringPtrA                         *win32.Proc
+	IsBadWritePtr                           *win32.Proc
+	LocalAlloc                              *win32.Proc
+	LocalFlags                              *win32.Proc
+	LocalHandle                             *win32.Proc
+	LocalLock                               *win32.Proc
+	LocalReAlloc                            *win32.Proc
+	LocalSize                               *win32.Proc
+	LocalUnlock                             *win32.Proc
+	MapUserPhysicalPages                    *win32.Proc
+	MapUserPhysicalPagesScatter             *win32.Proc
+	MapViewOfFile                           *win32.Proc
+	MapViewOfFile3                          *win32.Proc
+	MapViewOfFile3FromApp                   *win32.Proc
+	MapViewOfFileEx                         *win32.Proc
+	MapViewOfFileExNuma                     *win32.Proc
+	MapViewOfFileFromApp                    *win32.Proc
+	MapViewOfFileNuma2                      *win32.Proc
+	OfferVirtualMemory                      *win32.Proc
+	OpenDedicatedMemoryPartition            *win32.Proc
+	OpenFileMapping                         *win32.Proc
+	OpenFileMappingA                        *win32.Proc
+	OpenFileMappingFromApp                  *win32.Proc
+	PrefetchVirtualMemory                   *win32.Proc
+	QueryMemoryResourceNotification         *win32.Proc
+	QueryPartitionInformation               *win32.Proc
+	QueryVirtualMemoryInformation           *win32.Proc
+	ReclaimVirtualMemory                    *win32.Proc
+	RegisterBadMemoryNotification           *win32.Proc
+	RemoveSecureMemoryCacheCallback         *win32.Proc
+	ResetWriteWatch                         *win32.Proc
+	RtlCompareMemory                        *win32.Proc
+	RtlCrc32                                *win32.Proc
+	RtlCrc64                                *win32.Proc
+	RtlIsZeroMemory                         *win32.Proc
+	SetProcessValidCallTargets              *win32.Proc
+	SetProcessValidCallTargetsForMappedView *win32.Proc
+	SetProcessWorkingSetSizeEx              *win32.Proc
+	SetSystemFileCacheSize                  *win32.Proc
+	UnmapViewOfFile                         *win32.Proc
+	UnmapViewOfFile2                        *win32.Proc
+	UnmapViewOfFileEx                       *win32.Proc
+	UnregisterBadMemoryNotification         *win32.Proc
+	VirtualAlloc                            *win32.Proc
+	VirtualAlloc2                           *win32.Proc
+	VirtualAlloc2FromApp                    *win32.Proc
+	VirtualAllocEx                          *win32.Proc
+	VirtualAllocExNuma                      *win32.Proc
+	VirtualAllocFromApp                     *win32.Proc
+	VirtualFree                             *win32.Proc
+	VirtualFreeEx                           *win32.Proc
+	VirtualLock                             *win32.Proc
+	VirtualProtect                          *win32.Proc
+	VirtualProtectEx                        *win32.Proc
+	VirtualProtectFromApp                   *win32.Proc
+	VirtualQuery                            *win32.Proc
+	VirtualQueryEx                          *win32.Proc
+	VirtualUnlock                           *win32.Proc
+	VirtualUnlockEx                         *win32.Proc
+}{
+	AddSecureMemoryCacheCallback:            procAddSecureMemoryCacheCallback,
+	AllocateUserPhysicalPages:               procAllocateUserPhysicalPages,
+	AllocateUserPhysicalPages2:              procAllocateUserPhysicalPages2,
+	AllocateUserPhysicalPagesNuma:           procAllocateUserPhysicalPagesNuma,
+	CreateFileMapping:                       procCreateFileMapping,
+	CreateFileMapping2:                      procCreateFileMapping2,
+	CreateFileMappingA:                      procCreateFileMappingA,
+	CreateFileMappingFromApp:                procCreateFileMappingFromApp,
+	CreateFileMappingNuma:                   procCreateFileMappingNuma,
+	CreateFileMappingNumaA:                  procCreateFileMappingNumaA,
+	CreateMemoryResourceNotification:        procCreateMemoryResourceNotification,
+	DiscardVirtualMemory:                    procDiscardVirtualMemory,
+	FlushViewOfFile:                         procFlushViewOfFile,
+	FreeUserPhysicalPages:                   procFreeUserPhysicalPages,
+	GetLargePageMinimum:                     procGetLargePageMinimum,
+	GetMemoryErrorHandlingCapabilities:      procGetMemoryErrorHandlingCapabilities,
+	GetMemoryNumaClosestInitiatorNode:       procGetMemoryNumaClosestInitiatorNode,
+	GetMemoryNumaPerformanceInformation:     procGetMemoryNumaPerformanceInformation,
+	GetProcessHeap:                          procGetProcessHeap,
+	GetProcessHeaps:                         procGetProcessHeaps,
+	GetProcessWorkingSetSizeEx:              procGetProcessWorkingSetSizeEx,
+	GetSystemFileCacheSize:                  procGetSystemFileCacheSize,
+	GetWriteWatch:                           procGetWriteWatch,
+	GlobalAlloc:                             procGlobalAlloc,
+	GlobalFlags:                             procGlobalFlags,
+	GlobalHandle:                            procGlobalHandle,
+	GlobalLock:                              procGlobalLock,
+	GlobalReAlloc:                           procGlobalReAlloc,
+	GlobalSize:                              procGlobalSize,
+	GlobalUnlock:                            procGlobalUnlock,
+	HeapAlloc:                               procHeapAlloc,
+	HeapCompact:                             procHeapCompact,
+	HeapCreate:                              procHeapCreate,
+	HeapDestroy:                             procHeapDestroy,
+	HeapFree:                                procHeapFree,
+	HeapLock:                                procHeapLock,
+	HeapQueryInformation:                    procHeapQueryInformation,
+	HeapReAlloc:                             procHeapReAlloc,
+	HeapSetInformation:                      procHeapSetInformation,
+	HeapSize:                                procHeapSize,
+	HeapSummary:                             procHeapSummary,
+	HeapUnlock:                              procHeapUnlock,
+	HeapValidate:                            procHeapValidate,
+	HeapWalk:                                procHeapWalk,
+	IsBadCodePtr:                            procIsBadCodePtr,
+	IsBadReadPtr:                            procIsBadReadPtr,
+	IsBadStringPtr:                          procIsBadStringPtr,
+	IsBadStringPtrA:                         procIsBadStringPtrA,
+	IsBadWritePtr:                           procIsBadWritePtr,
+	LocalAlloc:                              procLocalAlloc,
+	LocalFlags:                              procLocalFlags,
+	LocalHandle:                             procLocalHandle,
+	LocalLock:                               procLocalLock,
+	LocalReAlloc:                            procLocalReAlloc,
+	LocalSize:                               procLocalSize,
+	LocalUnlock:                             procLocalUnlock,
+	MapUserPhysicalPages:                    procMapUserPhysicalPages,
+	MapUserPhysicalPagesScatter:             procMapUserPhysicalPagesScatter,
+	MapViewOfFile:                           procMapViewOfFile,
+	MapViewOfFile3:                          procMapViewOfFile3,
+	MapViewOfFile3FromApp:                   procMapViewOfFile3FromApp,
+	MapViewOfFileEx:                         procMapViewOfFileEx,
+	MapViewOfFileExNuma:                     procMapViewOfFileExNuma,
+	MapViewOfFileFromApp:                    procMapViewOfFileFromApp,
+	MapViewOfFileNuma2:                      procMapViewOfFileNuma2,
+	OfferVirtualMemory:                      procOfferVirtualMemory,
+	OpenDedicatedMemoryPartition:            procOpenDedicatedMemoryPartition,
+	OpenFileMapping:                         procOpenFileMapping,
+	OpenFileMappingA:                        procOpenFileMappingA,
+	OpenFileMappingFromApp:                  procOpenFileMappingFromApp,
+	PrefetchVirtualMemory:                   procPrefetchVirtualMemory,
+	QueryMemoryResourceNotification:         procQueryMemoryResourceNotification,
+	QueryPartitionInformation:               procQueryPartitionInformation,
+	QueryVirtualMemoryInformation:           procQueryVirtualMemoryInformation,
+	ReclaimVirtualMemory:                    procReclaimVirtualMemory,
+	RegisterBadMemoryNotification:           procRegisterBadMemoryNotification,
+	RemoveSecureMemoryCacheCallback:         procRemoveSecureMemoryCacheCallback,
+	ResetWriteWatch:                         procResetWriteWatch,
+	RtlCompareMemory:                        procRtlCompareMemory,
+	RtlCrc32:                                procRtlCrc32,
+	RtlCrc64:                                procRtlCrc64,
+	RtlIsZeroMemory:                         procRtlIsZeroMemory,
+	SetProcessValidCallTargets:              procSetProcessValidCallTargets,
+	SetProcessValidCallTargetsForMappedView: procSetProcessValidCallTargetsForMappedView,
+	SetProcessWorkingSetSizeEx:              procSetProcessWorkingSetSizeEx,
+	SetSystemFileCacheSize:                  procSetSystemFileCacheSize,
+	UnmapViewOfFile:                         procUnmapViewOfFile,
+	UnmapViewOfFile2:                        procUnmapViewOfFile2,
+	UnmapViewOfFileEx:                       procUnmapViewOfFileEx,
+	UnregisterBadMemoryNotification:         procUnregisterBadMemoryNotification,
+	VirtualAlloc:                            procVirtualAlloc,
+	VirtualAlloc2:                           procVirtualAlloc2,
+	VirtualAlloc2FromApp:                    procVirtualAlloc2FromApp,
+	VirtualAllocEx:                          procVirtualAllocEx,
+	VirtualAllocExNuma:                      procVirtualAllocExNuma,
+	VirtualAllocFromApp:                     procVirtualAllocFromApp,
+	VirtualFree:                             procVirtualFree,
+	VirtualFreeEx:                           procVirtualFreeEx,
+	VirtualLock:                             procVirtualLock,
+	VirtualProtect:                          procVirtualProtect,
+	VirtualProtectEx:                        procVirtualProtectEx,
+	VirtualProtectFromApp:                   procVirtualProtectFromApp,
+	VirtualQuery:                            procVirtualQuery,
+	VirtualQueryEx:                          procVirtualQueryEx,
+	VirtualUnlock:                           procVirtualUnlock,
+	VirtualUnlockEx:                         procVirtualUnlockEx,
+}
+
 // AddSecureMemoryCacheCallback calls KERNEL32!AddSecureMemoryCacheCallback.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-addsecurememorycachecallback
 // Minimum OS: windows6.0.6000.
@@ -180,8 +400,8 @@ func AllocateUserPhysicalPagesNuma(hProcess foundation.HANDLE, NumberOfPages *ui
 // CreateFileMapping calls KERNEL32!CreateFileMappingW.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingw
 // Minimum OS: windows5.1.2600.
-func CreateFileMapping(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName string) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateFileMapping(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName *string) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateFileMapping.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpFileMappingAttributes)), uintptr(flProtect), uintptr(dwMaximumSizeHigh), uintptr(dwMaximumSizeLow), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -192,8 +412,8 @@ func CreateFileMapping(hFile foundation.HANDLE, lpFileMappingAttributes *securit
 
 // CreateFileMapping2 calls api-ms-win-core-memory-l1-1-7!CreateFileMapping2.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemapping2
-func CreateFileMapping2(File foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, DesiredAccess uint32, PageProtection PAGE_PROTECTION_FLAGS, AllocationAttributes uint32, MaximumSize uint64, Name string, ExtendedParameters []MEM_EXTENDED_PARAMETER) (foundation.HANDLE, error) {
-	_Name := win32.UTF16Ptr(Name)
+func CreateFileMapping2(File foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, DesiredAccess uint32, PageProtection PAGE_PROTECTION_FLAGS, AllocationAttributes uint32, MaximumSize uint64, Name *string, ExtendedParameters []MEM_EXTENDED_PARAMETER) (foundation.HANDLE, error) {
+	_Name := win32.UTF16PtrOrNil(Name)
 	var _ExtendedParameters *MEM_EXTENDED_PARAMETER
 	if len(ExtendedParameters) > 0 {
 		_ExtendedParameters = &ExtendedParameters[0]
@@ -221,8 +441,8 @@ func CreateFileMappingA(hFile foundation.HANDLE, lpFileMappingAttributes *securi
 // CreateFileMappingFromApp calls KERNEL32!CreateFileMappingFromApp.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingfromapp
 // Minimum OS: windows8.0.
-func CreateFileMappingFromApp(hFile foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, PageProtection PAGE_PROTECTION_FLAGS, MaximumSize uint64, Name string) (foundation.HANDLE, error) {
-	_Name := win32.UTF16Ptr(Name)
+func CreateFileMappingFromApp(hFile foundation.HANDLE, SecurityAttributes *security.SECURITY_ATTRIBUTES, PageProtection PAGE_PROTECTION_FLAGS, MaximumSize uint64, Name *string) (foundation.HANDLE, error) {
+	_Name := win32.UTF16PtrOrNil(Name)
 	r1, _, e1 := syscall.SyscallN(procCreateFileMappingFromApp.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(SecurityAttributes)), uintptr(PageProtection), uintptr(MaximumSize), uintptr(unsafe.Pointer(_Name)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -234,8 +454,8 @@ func CreateFileMappingFromApp(hFile foundation.HANDLE, SecurityAttributes *secur
 // CreateFileMappingNuma calls KERNEL32!CreateFileMappingNumaW.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-createfilemappingnumaw
 // Minimum OS: windows6.0.6000.
-func CreateFileMappingNuma(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName string, nndPreferred uint32) (foundation.HANDLE, error) {
-	_lpName := win32.UTF16Ptr(lpName)
+func CreateFileMappingNuma(hFile foundation.HANDLE, lpFileMappingAttributes *security.SECURITY_ATTRIBUTES, flProtect PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh uint32, dwMaximumSizeLow uint32, lpName *string, nndPreferred uint32) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, e1 := syscall.SyscallN(procCreateFileMappingNuma.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpFileMappingAttributes)), uintptr(flProtect), uintptr(dwMaximumSizeHigh), uintptr(dwMaximumSizeLow), uintptr(unsafe.Pointer(_lpName)), uintptr(nndPreferred))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
@@ -633,8 +853,8 @@ func IsBadReadPtr(lp unsafe.Pointer, ucb uintptr) bool {
 // IsBadStringPtr calls KERNEL32!IsBadStringPtrW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-isbadstringptrw
 // Minimum OS: windows5.1.2600.
-func IsBadStringPtr(lpsz string, ucchMax uintptr) bool {
-	_lpsz := win32.UTF16Ptr(lpsz)
+func IsBadStringPtr(lpsz *string, ucchMax uintptr) bool {
+	_lpsz := win32.UTF16PtrOrNil(lpsz)
 	r1, _, _ := syscall.SyscallN(procIsBadStringPtr.Addr(), uintptr(unsafe.Pointer(_lpsz)), uintptr(ucchMax))
 	return r1 != 0
 }

@@ -60,6 +60,7 @@ var (
 	procGetConsoleCursorMode            = modKERNEL32.NewProc("GetConsoleCursorMode")
 	procGetConsoleDisplayMode           = modKERNEL32.NewProc("GetConsoleDisplayMode")
 	procGetConsoleFontInfo              = modKERNEL32.NewProc("GetConsoleFontInfo")
+	procGetConsoleFontSize              = modKERNEL32.NewProc("GetConsoleFontSize")
 	procGetConsoleHardwareState         = modKERNEL32.NewProc("GetConsoleHardwareState")
 	procGetConsoleHistoryInfo           = modKERNEL32.NewProc("GetConsoleHistoryInfo")
 	procGetConsoleInputExeName          = modKERNEL32.NewProc("GetConsoleInputExeNameW")
@@ -79,6 +80,7 @@ var (
 	procGetConsoleWindow                = modKERNEL32.NewProc("GetConsoleWindow")
 	procGetCurrentConsoleFont           = modKERNEL32.NewProc("GetCurrentConsoleFont")
 	procGetCurrentConsoleFontEx         = modKERNEL32.NewProc("GetCurrentConsoleFontEx")
+	procGetLargestConsoleWindowSize     = modKERNEL32.NewProc("GetLargestConsoleWindowSize")
 	procGetNumberOfConsoleFonts         = modKERNEL32.NewProc("GetNumberOfConsoleFonts")
 	procGetNumberOfConsoleInputEvents   = modKERNEL32.NewProc("GetNumberOfConsoleInputEvents")
 	procGetNumberOfConsoleMouseButtons  = modKERNEL32.NewProc("GetNumberOfConsoleMouseButtons")
@@ -158,6 +160,290 @@ var (
 	procGetConsoleKeyboardLayoutName    = modUSER32.NewProc("GetConsoleKeyboardLayoutNameW")
 	procGetConsoleKeyboardLayoutNameA   = modUSER32.NewProc("GetConsoleKeyboardLayoutNameA")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddConsoleAlias                 *win32.Proc
+	AddConsoleAliasA                *win32.Proc
+	AllocConsole                    *win32.Proc
+	AllocConsoleWithOptions         *win32.Proc
+	AttachConsole                   *win32.Proc
+	CloseConsoleHandle              *win32.Proc
+	ClosePseudoConsole              *win32.Proc
+	ConsoleControl                  *win32.Proc
+	ConsoleMenuControl              *win32.Proc
+	CreateConsoleScreenBuffer       *win32.Proc
+	CreatePseudoConsole             *win32.Proc
+	DuplicateConsoleHandle          *win32.Proc
+	ExpungeConsoleCommandHistory    *win32.Proc
+	ExpungeConsoleCommandHistoryA   *win32.Proc
+	FillConsoleOutputAttribute      *win32.Proc
+	FillConsoleOutputCharacter      *win32.Proc
+	FillConsoleOutputCharacterA     *win32.Proc
+	FlushConsoleInputBuffer         *win32.Proc
+	FreeConsole                     *win32.Proc
+	GenerateConsoleCtrlEvent        *win32.Proc
+	GetConsoleAlias                 *win32.Proc
+	GetConsoleAliasA                *win32.Proc
+	GetConsoleAliasExes             *win32.Proc
+	GetConsoleAliasExesA            *win32.Proc
+	GetConsoleAliasExesLength       *win32.Proc
+	GetConsoleAliasExesLengthA      *win32.Proc
+	GetConsoleAliases               *win32.Proc
+	GetConsoleAliasesA              *win32.Proc
+	GetConsoleAliasesLength         *win32.Proc
+	GetConsoleAliasesLengthA        *win32.Proc
+	GetConsoleCP                    *win32.Proc
+	GetConsoleCharType              *win32.Proc
+	GetConsoleCommandHistory        *win32.Proc
+	GetConsoleCommandHistoryA       *win32.Proc
+	GetConsoleCommandHistoryLength  *win32.Proc
+	GetConsoleCommandHistoryLengthA *win32.Proc
+	GetConsoleCursorInfo            *win32.Proc
+	GetConsoleCursorMode            *win32.Proc
+	GetConsoleDisplayMode           *win32.Proc
+	GetConsoleFontInfo              *win32.Proc
+	GetConsoleFontSize              *win32.Proc
+	GetConsoleHardwareState         *win32.Proc
+	GetConsoleHistoryInfo           *win32.Proc
+	GetConsoleInputExeName          *win32.Proc
+	GetConsoleInputExeNameA         *win32.Proc
+	GetConsoleInputWaitHandle       *win32.Proc
+	GetConsoleKeyboardLayoutName    *win32.Proc
+	GetConsoleKeyboardLayoutNameA   *win32.Proc
+	GetConsoleMode                  *win32.Proc
+	GetConsoleNlsMode               *win32.Proc
+	GetConsoleOriginalTitle         *win32.Proc
+	GetConsoleOriginalTitleA        *win32.Proc
+	GetConsoleOutputCP              *win32.Proc
+	GetConsoleProcessList           *win32.Proc
+	GetConsoleScreenBufferInfo      *win32.Proc
+	GetConsoleScreenBufferInfoEx    *win32.Proc
+	GetConsoleSelectionInfo         *win32.Proc
+	GetConsoleTitle                 *win32.Proc
+	GetConsoleTitleA                *win32.Proc
+	GetConsoleWindow                *win32.Proc
+	GetCurrentConsoleFont           *win32.Proc
+	GetCurrentConsoleFontEx         *win32.Proc
+	GetLargestConsoleWindowSize     *win32.Proc
+	GetNumberOfConsoleFonts         *win32.Proc
+	GetNumberOfConsoleInputEvents   *win32.Proc
+	GetNumberOfConsoleMouseButtons  *win32.Proc
+	GetStdHandle                    *win32.Proc
+	InvalidateConsoleDIBits         *win32.Proc
+	OpenConsoleW                    *win32.Proc
+	PeekConsoleInput                *win32.Proc
+	PeekConsoleInputA               *win32.Proc
+	ReadConsole                     *win32.Proc
+	ReadConsoleA                    *win32.Proc
+	ReadConsoleInput                *win32.Proc
+	ReadConsoleInputA               *win32.Proc
+	ReadConsoleInputEx              *win32.Proc
+	ReadConsoleInputExA             *win32.Proc
+	ReadConsoleOutput               *win32.Proc
+	ReadConsoleOutputA              *win32.Proc
+	ReadConsoleOutputAttribute      *win32.Proc
+	ReadConsoleOutputCharacter      *win32.Proc
+	ReadConsoleOutputCharacterA     *win32.Proc
+	RegisterConsoleIME              *win32.Proc
+	RegisterConsoleOS2              *win32.Proc
+	RegisterConsoleVDM              *win32.Proc
+	ReleasePseudoConsole            *win32.Proc
+	ResizePseudoConsole             *win32.Proc
+	ScrollConsoleScreenBuffer       *win32.Proc
+	ScrollConsoleScreenBufferA      *win32.Proc
+	SetConsoleActiveScreenBuffer    *win32.Proc
+	SetConsoleCP                    *win32.Proc
+	SetConsoleCtrlHandler           *win32.Proc
+	SetConsoleCursor                *win32.Proc
+	SetConsoleCursorInfo            *win32.Proc
+	SetConsoleCursorMode            *win32.Proc
+	SetConsoleCursorPosition        *win32.Proc
+	SetConsoleDisplayMode           *win32.Proc
+	SetConsoleFont                  *win32.Proc
+	SetConsoleHardwareState         *win32.Proc
+	SetConsoleHistoryInfo           *win32.Proc
+	SetConsoleIcon                  *win32.Proc
+	SetConsoleInputExeName          *win32.Proc
+	SetConsoleInputExeNameA         *win32.Proc
+	SetConsoleKeyShortcuts          *win32.Proc
+	SetConsoleLocalEUDC             *win32.Proc
+	SetConsoleMenuClose             *win32.Proc
+	SetConsoleMode                  *win32.Proc
+	SetConsoleNlsMode               *win32.Proc
+	SetConsoleNumberOfCommands      *win32.Proc
+	SetConsoleNumberOfCommandsA     *win32.Proc
+	SetConsoleOS2OemFormat          *win32.Proc
+	SetConsoleOutputCP              *win32.Proc
+	SetConsolePalette               *win32.Proc
+	SetConsoleScreenBufferInfoEx    *win32.Proc
+	SetConsoleScreenBufferSize      *win32.Proc
+	SetConsoleTextAttribute         *win32.Proc
+	SetConsoleTitle                 *win32.Proc
+	SetConsoleTitleA                *win32.Proc
+	SetConsoleWindowInfo            *win32.Proc
+	SetCurrentConsoleFontEx         *win32.Proc
+	SetLastConsoleEventActive       *win32.Proc
+	SetStdHandle                    *win32.Proc
+	SetStdHandleEx                  *win32.Proc
+	ShowConsoleCursor               *win32.Proc
+	UnregisterConsoleIME            *win32.Proc
+	VDMConsoleOperation             *win32.Proc
+	VerifyConsoleIoHandle           *win32.Proc
+	WriteConsole                    *win32.Proc
+	WriteConsoleA                   *win32.Proc
+	WriteConsoleInput               *win32.Proc
+	WriteConsoleInputA              *win32.Proc
+	WriteConsoleInputVDM            *win32.Proc
+	WriteConsoleInputVDMA           *win32.Proc
+	WriteConsoleOutput              *win32.Proc
+	WriteConsoleOutputA             *win32.Proc
+	WriteConsoleOutputAttribute     *win32.Proc
+	WriteConsoleOutputCharacter     *win32.Proc
+	WriteConsoleOutputCharacterA    *win32.Proc
+}{
+	AddConsoleAlias:                 procAddConsoleAlias,
+	AddConsoleAliasA:                procAddConsoleAliasA,
+	AllocConsole:                    procAllocConsole,
+	AllocConsoleWithOptions:         procAllocConsoleWithOptions,
+	AttachConsole:                   procAttachConsole,
+	CloseConsoleHandle:              procCloseConsoleHandle,
+	ClosePseudoConsole:              procClosePseudoConsole,
+	ConsoleControl:                  procConsoleControl,
+	ConsoleMenuControl:              procConsoleMenuControl,
+	CreateConsoleScreenBuffer:       procCreateConsoleScreenBuffer,
+	CreatePseudoConsole:             procCreatePseudoConsole,
+	DuplicateConsoleHandle:          procDuplicateConsoleHandle,
+	ExpungeConsoleCommandHistory:    procExpungeConsoleCommandHistory,
+	ExpungeConsoleCommandHistoryA:   procExpungeConsoleCommandHistoryA,
+	FillConsoleOutputAttribute:      procFillConsoleOutputAttribute,
+	FillConsoleOutputCharacter:      procFillConsoleOutputCharacter,
+	FillConsoleOutputCharacterA:     procFillConsoleOutputCharacterA,
+	FlushConsoleInputBuffer:         procFlushConsoleInputBuffer,
+	FreeConsole:                     procFreeConsole,
+	GenerateConsoleCtrlEvent:        procGenerateConsoleCtrlEvent,
+	GetConsoleAlias:                 procGetConsoleAlias,
+	GetConsoleAliasA:                procGetConsoleAliasA,
+	GetConsoleAliasExes:             procGetConsoleAliasExes,
+	GetConsoleAliasExesA:            procGetConsoleAliasExesA,
+	GetConsoleAliasExesLength:       procGetConsoleAliasExesLength,
+	GetConsoleAliasExesLengthA:      procGetConsoleAliasExesLengthA,
+	GetConsoleAliases:               procGetConsoleAliases,
+	GetConsoleAliasesA:              procGetConsoleAliasesA,
+	GetConsoleAliasesLength:         procGetConsoleAliasesLength,
+	GetConsoleAliasesLengthA:        procGetConsoleAliasesLengthA,
+	GetConsoleCP:                    procGetConsoleCP,
+	GetConsoleCharType:              procGetConsoleCharType,
+	GetConsoleCommandHistory:        procGetConsoleCommandHistory,
+	GetConsoleCommandHistoryA:       procGetConsoleCommandHistoryA,
+	GetConsoleCommandHistoryLength:  procGetConsoleCommandHistoryLength,
+	GetConsoleCommandHistoryLengthA: procGetConsoleCommandHistoryLengthA,
+	GetConsoleCursorInfo:            procGetConsoleCursorInfo,
+	GetConsoleCursorMode:            procGetConsoleCursorMode,
+	GetConsoleDisplayMode:           procGetConsoleDisplayMode,
+	GetConsoleFontInfo:              procGetConsoleFontInfo,
+	GetConsoleFontSize:              procGetConsoleFontSize,
+	GetConsoleHardwareState:         procGetConsoleHardwareState,
+	GetConsoleHistoryInfo:           procGetConsoleHistoryInfo,
+	GetConsoleInputExeName:          procGetConsoleInputExeName,
+	GetConsoleInputExeNameA:         procGetConsoleInputExeNameA,
+	GetConsoleInputWaitHandle:       procGetConsoleInputWaitHandle,
+	GetConsoleKeyboardLayoutName:    procGetConsoleKeyboardLayoutName,
+	GetConsoleKeyboardLayoutNameA:   procGetConsoleKeyboardLayoutNameA,
+	GetConsoleMode:                  procGetConsoleMode,
+	GetConsoleNlsMode:               procGetConsoleNlsMode,
+	GetConsoleOriginalTitle:         procGetConsoleOriginalTitle,
+	GetConsoleOriginalTitleA:        procGetConsoleOriginalTitleA,
+	GetConsoleOutputCP:              procGetConsoleOutputCP,
+	GetConsoleProcessList:           procGetConsoleProcessList,
+	GetConsoleScreenBufferInfo:      procGetConsoleScreenBufferInfo,
+	GetConsoleScreenBufferInfoEx:    procGetConsoleScreenBufferInfoEx,
+	GetConsoleSelectionInfo:         procGetConsoleSelectionInfo,
+	GetConsoleTitle:                 procGetConsoleTitle,
+	GetConsoleTitleA:                procGetConsoleTitleA,
+	GetConsoleWindow:                procGetConsoleWindow,
+	GetCurrentConsoleFont:           procGetCurrentConsoleFont,
+	GetCurrentConsoleFontEx:         procGetCurrentConsoleFontEx,
+	GetLargestConsoleWindowSize:     procGetLargestConsoleWindowSize,
+	GetNumberOfConsoleFonts:         procGetNumberOfConsoleFonts,
+	GetNumberOfConsoleInputEvents:   procGetNumberOfConsoleInputEvents,
+	GetNumberOfConsoleMouseButtons:  procGetNumberOfConsoleMouseButtons,
+	GetStdHandle:                    procGetStdHandle,
+	InvalidateConsoleDIBits:         procInvalidateConsoleDIBits,
+	OpenConsoleW:                    procOpenConsoleW,
+	PeekConsoleInput:                procPeekConsoleInput,
+	PeekConsoleInputA:               procPeekConsoleInputA,
+	ReadConsole:                     procReadConsole,
+	ReadConsoleA:                    procReadConsoleA,
+	ReadConsoleInput:                procReadConsoleInput,
+	ReadConsoleInputA:               procReadConsoleInputA,
+	ReadConsoleInputEx:              procReadConsoleInputEx,
+	ReadConsoleInputExA:             procReadConsoleInputExA,
+	ReadConsoleOutput:               procReadConsoleOutput,
+	ReadConsoleOutputA:              procReadConsoleOutputA,
+	ReadConsoleOutputAttribute:      procReadConsoleOutputAttribute,
+	ReadConsoleOutputCharacter:      procReadConsoleOutputCharacter,
+	ReadConsoleOutputCharacterA:     procReadConsoleOutputCharacterA,
+	RegisterConsoleIME:              procRegisterConsoleIME,
+	RegisterConsoleOS2:              procRegisterConsoleOS2,
+	RegisterConsoleVDM:              procRegisterConsoleVDM,
+	ReleasePseudoConsole:            procReleasePseudoConsole,
+	ResizePseudoConsole:             procResizePseudoConsole,
+	ScrollConsoleScreenBuffer:       procScrollConsoleScreenBuffer,
+	ScrollConsoleScreenBufferA:      procScrollConsoleScreenBufferA,
+	SetConsoleActiveScreenBuffer:    procSetConsoleActiveScreenBuffer,
+	SetConsoleCP:                    procSetConsoleCP,
+	SetConsoleCtrlHandler:           procSetConsoleCtrlHandler,
+	SetConsoleCursor:                procSetConsoleCursor,
+	SetConsoleCursorInfo:            procSetConsoleCursorInfo,
+	SetConsoleCursorMode:            procSetConsoleCursorMode,
+	SetConsoleCursorPosition:        procSetConsoleCursorPosition,
+	SetConsoleDisplayMode:           procSetConsoleDisplayMode,
+	SetConsoleFont:                  procSetConsoleFont,
+	SetConsoleHardwareState:         procSetConsoleHardwareState,
+	SetConsoleHistoryInfo:           procSetConsoleHistoryInfo,
+	SetConsoleIcon:                  procSetConsoleIcon,
+	SetConsoleInputExeName:          procSetConsoleInputExeName,
+	SetConsoleInputExeNameA:         procSetConsoleInputExeNameA,
+	SetConsoleKeyShortcuts:          procSetConsoleKeyShortcuts,
+	SetConsoleLocalEUDC:             procSetConsoleLocalEUDC,
+	SetConsoleMenuClose:             procSetConsoleMenuClose,
+	SetConsoleMode:                  procSetConsoleMode,
+	SetConsoleNlsMode:               procSetConsoleNlsMode,
+	SetConsoleNumberOfCommands:      procSetConsoleNumberOfCommands,
+	SetConsoleNumberOfCommandsA:     procSetConsoleNumberOfCommandsA,
+	SetConsoleOS2OemFormat:          procSetConsoleOS2OemFormat,
+	SetConsoleOutputCP:              procSetConsoleOutputCP,
+	SetConsolePalette:               procSetConsolePalette,
+	SetConsoleScreenBufferInfoEx:    procSetConsoleScreenBufferInfoEx,
+	SetConsoleScreenBufferSize:      procSetConsoleScreenBufferSize,
+	SetConsoleTextAttribute:         procSetConsoleTextAttribute,
+	SetConsoleTitle:                 procSetConsoleTitle,
+	SetConsoleTitleA:                procSetConsoleTitleA,
+	SetConsoleWindowInfo:            procSetConsoleWindowInfo,
+	SetCurrentConsoleFontEx:         procSetCurrentConsoleFontEx,
+	SetLastConsoleEventActive:       procSetLastConsoleEventActive,
+	SetStdHandle:                    procSetStdHandle,
+	SetStdHandleEx:                  procSetStdHandleEx,
+	ShowConsoleCursor:               procShowConsoleCursor,
+	UnregisterConsoleIME:            procUnregisterConsoleIME,
+	VDMConsoleOperation:             procVDMConsoleOperation,
+	VerifyConsoleIoHandle:           procVerifyConsoleIoHandle,
+	WriteConsole:                    procWriteConsole,
+	WriteConsoleA:                   procWriteConsoleA,
+	WriteConsoleInput:               procWriteConsoleInput,
+	WriteConsoleInputA:              procWriteConsoleInputA,
+	WriteConsoleInputVDM:            procWriteConsoleInputVDM,
+	WriteConsoleInputVDMA:           procWriteConsoleInputVDMA,
+	WriteConsoleOutput:              procWriteConsoleOutput,
+	WriteConsoleOutputA:             procWriteConsoleOutputA,
+	WriteConsoleOutputAttribute:     procWriteConsoleOutputAttribute,
+	WriteConsoleOutputCharacter:     procWriteConsoleOutputCharacter,
+	WriteConsoleOutputCharacterA:    procWriteConsoleOutputCharacterA,
+}
 
 // AddConsoleAlias calls KERNEL32!AddConsoleAliasW.
 // https://learn.microsoft.com/windows/console/addconsolealias
@@ -499,6 +785,16 @@ func GetConsoleFontInfo(hConsoleOutput foundation.HANDLE, bMaximumWindow bool, n
 	return uint32(r1)
 }
 
+// GetConsoleFontSize calls KERNEL32!GetConsoleFontSize.
+// https://learn.microsoft.com/windows/console/getconsolefontsize
+func GetConsoleFontSize(hConsoleOutput foundation.HANDLE, nFont uint32) (COORD, error) {
+	r1, _, e1 := syscall.SyscallN(procGetConsoleFontSize.Addr(), uintptr(hConsoleOutput), uintptr(nFont))
+	if e1 != 0 {
+		return win32.StructRet[COORD](r1), e1
+	}
+	return win32.StructRet[COORD](r1), nil
+}
+
 // GetConsoleHardwareState calls KERNEL32!GetConsoleHardwareState.
 func GetConsoleHardwareState(hConsoleOutput foundation.HANDLE, lpResolution *COORD, lpFontSize *COORD) bool {
 	r1, _, _ := syscall.SyscallN(procGetConsoleHardwareState.Addr(), uintptr(hConsoleOutput), uintptr(unsafe.Pointer(lpResolution)), uintptr(unsafe.Pointer(lpFontSize)))
@@ -682,6 +978,16 @@ func GetCurrentConsoleFontEx(hConsoleOutput foundation.HANDLE, bMaximumWindow bo
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// GetLargestConsoleWindowSize calls KERNEL32!GetLargestConsoleWindowSize.
+// https://learn.microsoft.com/windows/console/getlargestconsolewindowsize
+func GetLargestConsoleWindowSize(hConsoleOutput foundation.HANDLE) (COORD, error) {
+	r1, _, e1 := syscall.SyscallN(procGetLargestConsoleWindowSize.Addr(), uintptr(hConsoleOutput))
+	if e1 != 0 {
+		return win32.StructRet[COORD](r1), e1
+	}
+	return win32.StructRet[COORD](r1), nil
 }
 
 // GetNumberOfConsoleFonts calls KERNEL32!GetNumberOfConsoleFonts.

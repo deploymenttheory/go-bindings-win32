@@ -27,6 +27,32 @@ var (
 	procDirect3DCreate9Ex        = modd3d9.NewProc("Direct3DCreate9Ex")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	D3DPERF_BeginEvent       *win32.Proc
+	D3DPERF_EndEvent         *win32.Proc
+	D3DPERF_GetStatus        *win32.Proc
+	D3DPERF_QueryRepeatFrame *win32.Proc
+	D3DPERF_SetMarker        *win32.Proc
+	D3DPERF_SetOptions       *win32.Proc
+	D3DPERF_SetRegion        *win32.Proc
+	Direct3DCreate9          *win32.Proc
+	Direct3DCreate9Ex        *win32.Proc
+}{
+	D3DPERF_BeginEvent:       procD3DPERF_BeginEvent,
+	D3DPERF_EndEvent:         procD3DPERF_EndEvent,
+	D3DPERF_GetStatus:        procD3DPERF_GetStatus,
+	D3DPERF_QueryRepeatFrame: procD3DPERF_QueryRepeatFrame,
+	D3DPERF_SetMarker:        procD3DPERF_SetMarker,
+	D3DPERF_SetOptions:       procD3DPERF_SetOptions,
+	D3DPERF_SetRegion:        procD3DPERF_SetRegion,
+	Direct3DCreate9:          procDirect3DCreate9,
+	Direct3DCreate9Ex:        procDirect3DCreate9Ex,
+}
+
 // D3DPERF_BeginEvent calls d3d9!D3DPERF_BeginEvent.
 // https://learn.microsoft.com/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent
 func D3DPERF_BeginEvent(col uint32, wszName string) int32 {

@@ -4,6 +4,7 @@
 
 package dataexchange
 
-// PFNCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, HCONV, HSZ, HSZ, HDDEDATA, uintptr, uintptr) HDDEDATA.
+// PFNCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, HCONV, HSZ, HSZ, HDDEDATA, uintptr, uintptr) uintptr (the native return type is
+// HDDEDATA; NewCallback requires a uintptr-sized result).
 type PFNCALLBACK uintptr

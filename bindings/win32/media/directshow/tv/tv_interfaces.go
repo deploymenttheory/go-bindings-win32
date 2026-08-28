@@ -5,6 +5,7 @@
 package tv
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -946,6 +947,14 @@ func (self *IAttributeGet) GetAttribIndexed(lIndex int32, pguidAttribute *win32.
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAttributeGet_GetAttrib = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetAttrib dispatches through IAttributeGet's vtable slot 5.
+func (self *IAttributeGet) GetAttrib(guidAttribute win32.GUID, pbAttribute *byte, pdwAttributeLength *uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIAttributeGet_GetAttrib, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidAttribute)), uintptr(unsafe.Pointer(pbAttribute)), uintptr(unsafe.Pointer(pdwAttributeLength))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IAttributeSet: https://learn.microsoft.com/windows/win32/api/dsattrib/nn-dsattrib-iattributeset
 // IID: 583ec3cc-4960-4857-982b-41a33ea0a006
 type IAttributeSet struct {
@@ -954,6 +963,14 @@ type IAttributeSet struct {
 
 // IID_IAttributeSet is the interface identifier for IAttributeSet.
 var IID_IAttributeSet = win32.GUID{Data1: 0x583ec3cc, Data2: 0x4960, Data3: 0x4857, Data4: [8]byte{0x98, 0x2b, 0x41, 0xa3, 0x3e, 0xa0, 0xa0, 0x06}}
+
+var specIAttributeSet_SetAttrib = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// SetAttrib dispatches through IAttributeSet's vtable slot 3.
+func (self *IAttributeSet) SetAttrib(guidAttribute win32.GUID, pbAttribute *byte, dwAttributeLength uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIAttributeSet_SetAttrib, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidAttribute)), uintptr(unsafe.Pointer(pbAttribute)), uintptr(dwAttributeLength)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IAuxInTuningSpace: https://learn.microsoft.com/windows/win32/api/tuner/nn-tuner-iauxintuningspace
 // IID: e48244b8-7e17-4f76-a763-5090ff1e2f30
@@ -1444,11 +1461,36 @@ func (self *IComponentTypes) EnumComponentTypes() (*IEnumComponentTypes, error) 
 	return *_ppNewEnum, win32.ErrIfFailed(int32(r1))
 }
 
+var specIComponentTypes_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IComponentTypes's vtable slot 10.
+func (self *IComponentTypes) Get_Item(Index systemvariant.VARIANT) (*IComponentType, error) {
+	_ComponentType := new(*IComponentType)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIComponentTypes_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(win32.OutParam(unsafe.Pointer(_ComponentType)))).Tuple()
+	return *_ComponentType, win32.ErrIfFailed(int32(r1))
+}
+
+var specIComponentTypes_Put_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Put_Item dispatches through IComponentTypes's vtable slot 11.
+func (self *IComponentTypes) Put_Item(Index systemvariant.VARIANT, ComponentType *IComponentType) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIComponentTypes_Put_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(unsafe.Pointer(ComponentType))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through IComponentTypes's vtable slot 12.
 func (self *IComponentTypes) Add(ComponentType *IComponentType) (systemvariant.VARIANT, error) {
 	_NewIndex := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ComponentType)), uintptr(win32.OutParam(unsafe.Pointer(_NewIndex))))
 	return *_NewIndex, win32.ErrIfFailed(int32(r1))
+}
+
+var specIComponentTypes_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IComponentTypes's vtable slot 13.
+func (self *IComponentTypes) Remove(Index systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIComponentTypes_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IComponentTypes's vtable slot 14.
@@ -1488,6 +1530,15 @@ func (self *IComponents) EnumComponents() (*IEnumComponents, error) {
 	return *_ppNewEnum, win32.ErrIfFailed(int32(r1))
 }
 
+var specIComponents_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IComponents's vtable slot 10.
+func (self *IComponents) Get_Item(Index systemvariant.VARIANT) (*IComponent, error) {
+	_ppComponent := new(*IComponent)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIComponents_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(win32.OutParam(unsafe.Pointer(_ppComponent)))).Tuple()
+	return *_ppComponent, win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through IComponents's vtable slot 11.
 func (self *IComponents) Add(Component *IComponent) (systemvariant.VARIANT, error) {
 	_NewIndex := new(systemvariant.VARIANT)
@@ -1495,11 +1546,27 @@ func (self *IComponents) Add(Component *IComponent) (systemvariant.VARIANT, erro
 	return *_NewIndex, win32.ErrIfFailed(int32(r1))
 }
 
+var specIComponents_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IComponents's vtable slot 12.
+func (self *IComponents) Remove(Index systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIComponents_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Clone dispatches through IComponents's vtable slot 13.
 func (self *IComponents) Clone() (*IComponents, error) {
 	_NewList := new(*IComponents)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_NewList))))
 	return *_NewList, win32.ErrIfFailed(int32(r1))
+}
+
+var specIComponents_Put_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Put_Item dispatches through IComponents's vtable slot 14.
+func (self *IComponents) Put_Item(Index systemvariant.VARIANT, ppComponent *IComponent) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIComponents_Put_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(unsafe.Pointer(ppComponent))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fcd01846-0e19-11d3-9d8e-00c04f72d980
@@ -1531,11 +1598,28 @@ func (self *IComponentsOld) EnumComponents() (*IEnumComponents, error) {
 	return *_ppNewEnum, win32.ErrIfFailed(int32(r1))
 }
 
+var specIComponentsOld_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IComponentsOld's vtable slot 10.
+func (self *IComponentsOld) Get_Item(Index systemvariant.VARIANT) (*IComponent, error) {
+	_ppComponent := new(*IComponent)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIComponentsOld_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(win32.OutParam(unsafe.Pointer(_ppComponent)))).Tuple()
+	return *_ppComponent, win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through IComponentsOld's vtable slot 11.
 func (self *IComponentsOld) Add(Component *IComponent) (systemvariant.VARIANT, error) {
 	_NewIndex := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Component)), uintptr(win32.OutParam(unsafe.Pointer(_NewIndex))))
 	return *_NewIndex, win32.ErrIfFailed(int32(r1))
+}
+
+var specIComponentsOld_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IComponentsOld's vtable slot 12.
+func (self *IComponentsOld) Remove(Index systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIComponentsOld_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IComponentsOld's vtable slot 13.
@@ -4436,6 +4520,19 @@ type IESEventFactory struct {
 // IID_IESEventFactory is the interface identifier for IESEventFactory.
 var IID_IESEventFactory = win32.GUID{Data1: 0x506a09b8, Data2: 0x7f86, Data3: 0x4e04, Data4: [8]byte{0xac, 0x05, 0x33, 0x03, 0xbf, 0xe8, 0xfc, 0x49}}
 
+var specIESEventFactory_CreateESEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// CreateESEvent dispatches through IESEventFactory's vtable slot 3.
+func (self *IESEventFactory) CreateESEvent(pServiceProvider *systemcom.IUnknown, dwEventId uint32, guidEventType win32.GUID, pEventData []byte, bstrBaseUrl foundation.BSTR, pInitContext *systemcom.IUnknown) (*mediadirectshow.IESEvent, error) {
+	var _pEventData *byte
+	if len(pEventData) > 0 {
+		_pEventData = &pEventData[0]
+	}
+	_ppESEvent := new(*mediadirectshow.IESEvent)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIESEventFactory_CreateESEvent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pServiceProvider)), uintptr(dwEventId), uintptr(unsafe.Pointer(&guidEventType)), uintptr(len(pEventData)), uintptr(unsafe.Pointer(_pEventData)), uintptr(unsafe.Pointer(bstrBaseUrl)), uintptr(unsafe.Pointer(pInitContext)), uintptr(win32.OutParam(unsafe.Pointer(_ppESEvent)))).Tuple()
+	return *_ppESEvent, win32.ErrIfFailed(int32(r1))
+}
+
 // IESEventService: https://learn.microsoft.com/windows/win32/api/tuner/nn-tuner-ieseventservice
 // IID: ed89a619-4c06-4b2f-99eb-c7669b13047c
 type IESEventService struct {
@@ -5236,11 +5333,29 @@ func (self *IGuideData) GetGuideProgramIDs() (*systemole.IEnumVARIANT, error) {
 	return *_pEnumPrograms, win32.ErrIfFailed(int32(r1))
 }
 
+var specIGuideData_GetProgramProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetProgramProperties dispatches through IGuideData's vtable slot 6.
+func (self *IGuideData) GetProgramProperties(varProgramDescriptionID systemvariant.VARIANT) (*IEnumGuideDataProperties, error) {
+	_ppEnumProperties := new(*IEnumGuideDataProperties)
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIGuideData_GetProgramProperties, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varProgramDescriptionID)), uintptr(win32.OutParam(unsafe.Pointer(_ppEnumProperties)))).Tuple()
+	return *_ppEnumProperties, win32.ErrIfFailed(int32(r1))
+}
+
 // GetScheduleEntryIDs dispatches through IGuideData's vtable slot 7.
 func (self *IGuideData) GetScheduleEntryIDs() (*systemole.IEnumVARIANT, error) {
 	_pEnumScheduleEntries := new(*systemole.IEnumVARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pEnumScheduleEntries))))
 	return *_pEnumScheduleEntries, win32.ErrIfFailed(int32(r1))
+}
+
+var specIGuideData_GetScheduleEntryProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetScheduleEntryProperties dispatches through IGuideData's vtable slot 8.
+func (self *IGuideData) GetScheduleEntryProperties(varScheduleEntryDescriptionID systemvariant.VARIANT) (*IEnumGuideDataProperties, error) {
+	_ppEnumProperties := new(*IEnumGuideDataProperties)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIGuideData_GetScheduleEntryProperties, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varScheduleEntryDescriptionID)), uintptr(win32.OutParam(unsafe.Pointer(_ppEnumProperties)))).Tuple()
+	return *_ppEnumProperties, win32.ErrIfFailed(int32(r1))
 }
 
 // IGuideDataEvent: https://learn.microsoft.com/windows/win32/api/bdatif/nn-bdatif-iguidedataevent
@@ -5255,6 +5370,54 @@ var IID_IGuideDataEvent = win32.GUID{Data1: 0xefda0c80, Data2: 0xf395, Data3: 0x
 // GuideDataAcquired dispatches through IGuideDataEvent's vtable slot 3.
 func (self *IGuideDataEvent) GuideDataAcquired() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIGuideDataEvent_ProgramChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ProgramChanged dispatches through IGuideDataEvent's vtable slot 4.
+func (self *IGuideDataEvent) ProgramChanged(varProgramDescriptionID systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIGuideDataEvent_ProgramChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varProgramDescriptionID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIGuideDataEvent_ServiceChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ServiceChanged dispatches through IGuideDataEvent's vtable slot 5.
+func (self *IGuideDataEvent) ServiceChanged(varServiceDescriptionID systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIGuideDataEvent_ServiceChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varServiceDescriptionID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIGuideDataEvent_ScheduleEntryChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ScheduleEntryChanged dispatches through IGuideDataEvent's vtable slot 6.
+func (self *IGuideDataEvent) ScheduleEntryChanged(varScheduleEntryDescriptionID systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIGuideDataEvent_ScheduleEntryChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varScheduleEntryDescriptionID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIGuideDataEvent_ProgramDeleted = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ProgramDeleted dispatches through IGuideDataEvent's vtable slot 7.
+func (self *IGuideDataEvent) ProgramDeleted(varProgramDescriptionID systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIGuideDataEvent_ProgramDeleted, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varProgramDescriptionID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIGuideDataEvent_ServiceDeleted = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ServiceDeleted dispatches through IGuideDataEvent's vtable slot 8.
+func (self *IGuideDataEvent) ServiceDeleted(varServiceDescriptionID systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIGuideDataEvent_ServiceDeleted, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varServiceDescriptionID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIGuideDataEvent_ScheduleDeleted = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ScheduleDeleted dispatches through IGuideDataEvent's vtable slot 9.
+func (self *IGuideDataEvent) ScheduleDeleted(varScheduleEntryDescriptionID systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIGuideDataEvent_ScheduleDeleted, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varScheduleEntryDescriptionID))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7358,9 +7521,26 @@ func (self *IMSVidAudioRendererDevices) Get__NewEnum() (*systemole.IEnumVARIANT,
 	return *_pD, win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSVidAudioRendererDevices_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IMSVidAudioRendererDevices's vtable slot 9.
+func (self *IMSVidAudioRendererDevices) Get_Item(v systemvariant.VARIANT) (*IMSVidAudioRenderer, error) {
+	_pDB := new(*IMSVidAudioRenderer)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIMSVidAudioRendererDevices_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v)), uintptr(win32.OutParam(unsafe.Pointer(_pDB)))).Tuple()
+	return *_pDB, win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through IMSVidAudioRendererDevices's vtable slot 10.
 func (self *IMSVidAudioRendererDevices) Add(pDB *IMSVidAudioRenderer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDB)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidAudioRendererDevices_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IMSVidAudioRendererDevices's vtable slot 11.
+func (self *IMSVidAudioRendererDevices) Remove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIMSVidAudioRendererDevices_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8037,9 +8217,26 @@ func (self *IMSVidFeatures) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	return *_pD, win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSVidFeatures_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IMSVidFeatures's vtable slot 9.
+func (self *IMSVidFeatures) Get_Item(v systemvariant.VARIANT) (*IMSVidFeature, error) {
+	_pDB := new(*IMSVidFeature)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIMSVidFeatures_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v)), uintptr(win32.OutParam(unsafe.Pointer(_pDB)))).Tuple()
+	return *_pDB, win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through IMSVidFeatures's vtable slot 10.
 func (self *IMSVidFeatures) Add(pDB *IMSVidFeature) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDB)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidFeatures_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IMSVidFeatures's vtable slot 11.
+func (self *IMSVidFeatures) Remove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIMSVidFeatures_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8077,6 +8274,14 @@ var IID_IMSVidFilePlayback2 = win32.GUID{Data1: 0x2f7e44af, Data2: 0x6e52, Data3
 // Put__SourceFilter dispatches through IMSVidFilePlayback2's vtable slot 34.
 func (self *IMSVidFilePlayback2) Put__SourceFilter(FileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidFilePlayback2_Put___SourceFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Put___SourceFilter dispatches through IMSVidFilePlayback2's vtable slot 35.
+func (self *IMSVidFilePlayback2) Put___SourceFilter(FileName win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIMSVidFilePlayback2_Put___SourceFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&FileName))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8425,9 +8630,26 @@ func (self *IMSVidInputDevices) Get__NewEnum() (*systemole.IEnumVARIANT, error) 
 	return *_pD, win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSVidInputDevices_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IMSVidInputDevices's vtable slot 9.
+func (self *IMSVidInputDevices) Get_Item(v systemvariant.VARIANT) (*IMSVidInputDevice, error) {
+	_pDB := new(*IMSVidInputDevice)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIMSVidInputDevices_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v)), uintptr(win32.OutParam(unsafe.Pointer(_pDB)))).Tuple()
+	return *_pDB, win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through IMSVidInputDevices's vtable slot 10.
 func (self *IMSVidInputDevices) Add(pDB *IMSVidInputDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDB)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidInputDevices_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IMSVidInputDevices's vtable slot 11.
+func (self *IMSVidInputDevices) Remove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIMSVidInputDevices_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8472,9 +8694,26 @@ func (self *IMSVidOutputDevices) Get__NewEnum() (*systemole.IEnumVARIANT, error)
 	return *_pD, win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSVidOutputDevices_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IMSVidOutputDevices's vtable slot 9.
+func (self *IMSVidOutputDevices) Get_Item(v systemvariant.VARIANT) (*IMSVidOutputDevice, error) {
+	_pDB := new(*IMSVidOutputDevice)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIMSVidOutputDevices_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v)), uintptr(win32.OutParam(unsafe.Pointer(_pDB)))).Tuple()
+	return *_pDB, win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through IMSVidOutputDevices's vtable slot 10.
 func (self *IMSVidOutputDevices) Add(pDB *IMSVidOutputDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDB)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidOutputDevices_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IMSVidOutputDevices's vtable slot 11.
+func (self *IMSVidOutputDevices) Remove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIMSVidOutputDevices_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8528,6 +8767,14 @@ func (self *IMSVidPlayback) Get_CanStep(fBackwards foundation.VARIANT_BOOL) (fou
 // Step dispatches through IMSVidPlayback's vtable slot 24.
 func (self *IMSVidPlayback) Step(lStep int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lStep))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidPlayback_Put_Rate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_Rate dispatches through IMSVidPlayback's vtable slot 25.
+func (self *IMSVidPlayback) Put_Rate(plRate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIMSVidPlayback_Put_Rate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(plRate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8850,6 +9097,14 @@ func (self *IMSVidStreamBufferSink3) Get_AudioAnalysisFilter() (foundation.BSTR,
 	return *_pszCLSID, win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSVidStreamBufferSink3_Put__AudioAnalysisFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Put__AudioAnalysisFilter dispatches through IMSVidStreamBufferSink3's vtable slot 30.
+func (self *IMSVidStreamBufferSink3) Put__AudioAnalysisFilter(guid win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIMSVidStreamBufferSink3_Put__AudioAnalysisFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get__AudioAnalysisFilter dispatches through IMSVidStreamBufferSink3's vtable slot 31.
 func (self *IMSVidStreamBufferSink3) Get__AudioAnalysisFilter() (win32.GUID, error) {
 	_pGuid := new(win32.GUID)
@@ -8870,6 +9125,14 @@ func (self *IMSVidStreamBufferSink3) Get_VideoAnalysisFilter() (foundation.BSTR,
 	return *_pszCLSID, win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSVidStreamBufferSink3_Put__VideoAnalysisFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Put__VideoAnalysisFilter dispatches through IMSVidStreamBufferSink3's vtable slot 34.
+func (self *IMSVidStreamBufferSink3) Put__VideoAnalysisFilter(guid win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIMSVidStreamBufferSink3_Put__VideoAnalysisFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get__VideoAnalysisFilter dispatches through IMSVidStreamBufferSink3's vtable slot 35.
 func (self *IMSVidStreamBufferSink3) Get__VideoAnalysisFilter() (win32.GUID, error) {
 	_pGuid := new(win32.GUID)
@@ -8888,6 +9151,14 @@ func (self *IMSVidStreamBufferSink3) Get_DataAnalysisFilter() (foundation.BSTR, 
 	_pszCLSID := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pszCLSID))))
 	return *_pszCLSID, win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidStreamBufferSink3_Put__DataAnalysisFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Put__DataAnalysisFilter dispatches through IMSVidStreamBufferSink3's vtable slot 38.
+func (self *IMSVidStreamBufferSink3) Put__DataAnalysisFilter(guid win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIMSVidStreamBufferSink3_Put__DataAnalysisFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get__DataAnalysisFilter dispatches through IMSVidStreamBufferSink3's vtable slot 39.
@@ -9045,6 +9316,14 @@ type IMSVidStreamBufferSource2 struct {
 // IID_IMSVidStreamBufferSource2 is the interface identifier for IMSVidStreamBufferSource2.
 var IID_IMSVidStreamBufferSource2 = win32.GUID{Data1: 0xe4ba9059, Data2: 0xb1ce, Data3: 0x40d8, Data4: [8]byte{0xb9, 0xa0, 0xd4, 0xea, 0x4a, 0x99, 0x89, 0xd3}}
 
+var specIMSVidStreamBufferSource2_Put_RateEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Put_RateEx dispatches through IMSVidStreamBufferSource2's vtable slot 41.
+func (self *IMSVidStreamBufferSource2) Put_RateEx(dwRate float64, dwFramesPerSecond uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIMSVidStreamBufferSource2_Put_RateEx, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dwRate)), uintptr(dwFramesPerSecond)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_AudioCounter dispatches through IMSVidStreamBufferSource2's vtable slot 42.
 func (self *IMSVidStreamBufferSource2) Get_AudioCounter() (*systemcom.IUnknown, error) {
 	_ppUnk := new(*systemcom.IUnknown)
@@ -9145,6 +9424,14 @@ type IMSVidStreamBufferSourceEvent2 struct {
 // IID_IMSVidStreamBufferSourceEvent2 is the interface identifier for IMSVidStreamBufferSourceEvent2.
 var IID_IMSVidStreamBufferSourceEvent2 = win32.GUID{Data1: 0x7aef50ce, Data2: 0x8e22, Data3: 0x4ba8, Data4: [8]byte{0xbc, 0x06, 0xa9, 0x2a, 0x45, 0x8b, 0x4e, 0xf2}}
 
+var specIMSVidStreamBufferSourceEvent2_RateChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// RateChange dispatches through IMSVidStreamBufferSourceEvent2's vtable slot 17.
+func (self *IMSVidStreamBufferSourceEvent2) RateChange(qwNewRate float64, qwOldRate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIMSVidStreamBufferSourceEvent2_RateChange, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(qwNewRate)), uintptr(math.Float64bits(qwOldRate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IMSVidStreamBufferSourceEvent3: https://learn.microsoft.com/windows/win32/api/segment/nn-segment-imsvidstreambuffersourceevent3
 // IID: ceabd6ab-9b90-4570-adf1-3ce76e00a763
 type IMSVidStreamBufferSourceEvent3 struct {
@@ -9220,6 +9507,14 @@ func (self *IMSVidStreamBufferV2SourceEvent) ContentBecomingStale() error {
 // StaleFileDeleted dispatches through IMSVidStreamBufferV2SourceEvent's vtable slot 12.
 func (self *IMSVidStreamBufferV2SourceEvent) StaleFileDeleted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidStreamBufferV2SourceEvent_RateChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// RateChange dispatches through IMSVidStreamBufferV2SourceEvent's vtable slot 13.
+func (self *IMSVidStreamBufferV2SourceEvent) RateChange(qwNewRate float64, qwOldRate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIMSVidStreamBufferV2SourceEvent_RateChange, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(qwNewRate)), uintptr(math.Float64bits(qwOldRate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9401,16 +9696,32 @@ func (self *IMSVidVRGraphSegment) Put_ColorKey(ColorKey uint32) error {
 
 // Get_Source dispatches through IMSVidVRGraphSegment's vtable slot 28.
 func (self *IMSVidVRGraphSegment) Get_Source() (foundation.RECT, error) {
-	_r := new(foundation.RECT)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_r))))
-	return *_r, win32.ErrIfFailed(int32(r1))
+	_r_ := new(foundation.RECT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_r_))))
+	return *_r_, win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidVRGraphSegment_Put_Source = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Put_Source dispatches through IMSVidVRGraphSegment's vtable slot 29.
+func (self *IMSVidVRGraphSegment) Put_Source(r_ foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIMSVidVRGraphSegment_Put_Source, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&r_))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Destination dispatches through IMSVidVRGraphSegment's vtable slot 30.
 func (self *IMSVidVRGraphSegment) Get_Destination() (foundation.RECT, error) {
-	_r := new(foundation.RECT)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_r))))
-	return *_r, win32.ErrIfFailed(int32(r1))
+	_r_ := new(foundation.RECT)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_r_))))
+	return *_r_, win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidVRGraphSegment_Put_Destination = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Put_Destination dispatches through IMSVidVRGraphSegment's vtable slot 31.
+func (self *IMSVidVRGraphSegment) Put_Destination(r_ foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIMSVidVRGraphSegment_Put_Destination, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&r_))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NativeSize dispatches through IMSVidVRGraphSegment's vtable slot 32.
@@ -9756,9 +10067,26 @@ func (self *IMSVidVideoRendererDevices) Get__NewEnum() (*systemole.IEnumVARIANT,
 	return *_pD, win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSVidVideoRendererDevices_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IMSVidVideoRendererDevices's vtable slot 9.
+func (self *IMSVidVideoRendererDevices) Get_Item(v systemvariant.VARIANT) (*IMSVidVideoRenderer, error) {
+	_pDB := new(*IMSVidVideoRenderer)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIMSVidVideoRendererDevices_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v)), uintptr(win32.OutParam(unsafe.Pointer(_pDB)))).Tuple()
+	return *_pDB, win32.ErrIfFailed(int32(r1))
+}
+
 // Add dispatches through IMSVidVideoRendererDevices's vtable slot 10.
 func (self *IMSVidVideoRendererDevices) Add(pDB *IMSVidVideoRenderer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDB)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSVidVideoRendererDevices_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IMSVidVideoRendererDevices's vtable slot 11.
+func (self *IMSVidVideoRendererDevices) Remove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIMSVidVideoRendererDevices_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -10549,6 +10877,14 @@ type IMSVidWebDVDEvent struct {
 // IID_IMSVidWebDVDEvent is the interface identifier for IMSVidWebDVDEvent.
 var IID_IMSVidWebDVDEvent = win32.GUID{Data1: 0xb4f7a674, Data2: 0x9b83, Data3: 0x49cb, Data4: [8]byte{0xa3, 0x57, 0xc6, 0x3b, 0x87, 0x1b, 0xe9, 0x58}}
 
+var specIMSVidWebDVDEvent_DVDNotify = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DVDNotify dispatches through IMSVidWebDVDEvent's vtable slot 8.
+func (self *IMSVidWebDVDEvent) DVDNotify(lEventCode int32, lParam1 systemvariant.VARIANT, lParam2 systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIMSVidWebDVDEvent_DVDNotify, nil, uintptr(unsafe.Pointer(self)), uintptr(lEventCode), uintptr(unsafe.Pointer(&lParam1)), uintptr(unsafe.Pointer(&lParam2))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // PlayForwards dispatches through IMSVidWebDVDEvent's vtable slot 9.
 func (self *IMSVidWebDVDEvent) PlayForwards(bEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(bEnabled))
@@ -11261,6 +11597,14 @@ func (self *IPersistTuneXml) InitNew() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIPersistTuneXml_Load = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Load dispatches through IPersistTuneXml's vtable slot 5.
+func (self *IPersistTuneXml) Load(varValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIPersistTuneXml_Load, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Save dispatches through IPersistTuneXml's vtable slot 6.
 func (self *IPersistTuneXml) Save(pvarFragment *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarFragment)))
@@ -11275,6 +11619,15 @@ type IPersistTuneXmlUtility struct {
 
 // IID_IPersistTuneXmlUtility is the interface identifier for IPersistTuneXmlUtility.
 var IID_IPersistTuneXmlUtility = win32.GUID{Data1: 0x990237ae, Data2: 0xac11, Data3: 0x4614, Data4: [8]byte{0xbe, 0x8f, 0xdd, 0x21, 0x7a, 0x4c, 0xb4, 0xcb}}
+
+var specIPersistTuneXmlUtility_Deserialize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Deserialize dispatches through IPersistTuneXmlUtility's vtable slot 3.
+func (self *IPersistTuneXmlUtility) Deserialize(varValue systemvariant.VARIANT) (*systemcom.IUnknown, error) {
+	_ppObject := new(*systemcom.IUnknown)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIPersistTuneXmlUtility_Deserialize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varValue)), uintptr(win32.OutParam(unsafe.Pointer(_ppObject)))).Tuple()
+	return *_ppObject, win32.ErrIfFailed(int32(r1))
+}
 
 // IPersistTuneXmlUtility2: https://learn.microsoft.com/windows/win32/api/tuner/nn-tuner-ipersisttunexmlutility2
 // IID: 992e165f-ea24-4b2f-9a1d-009d92120451
@@ -11813,6 +12166,14 @@ func (self *IScanningTunerEx) GetTunerStatus(SecondsLeft *int32, CurrentLockType
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIScanningTunerEx_GetCurrentTunerStandardCapability = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetCurrentTunerStandardCapability dispatches through IScanningTunerEx's vtable slot 24.
+func (self *IScanningTunerEx) GetCurrentTunerStandardCapability(CurrentBroadcastStandard win32.GUID, SettlingTime *int32, TvStandardsSupported *int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIScanningTunerEx_GetCurrentTunerStandardCapability, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&CurrentBroadcastStandard)), uintptr(unsafe.Pointer(SettlingTime)), uintptr(unsafe.Pointer(TvStandardsSupported))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetScanSignalTypeFilter dispatches through IScanningTunerEx's vtable slot 25.
 func (self *IScanningTunerEx) SetScanSignalTypeFilter(ScanModulationTypes int32, AnalogVideoStandard int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(ScanModulationTypes), uintptr(AnalogVideoStandard))
@@ -12082,6 +12443,14 @@ type IStreamBufferMediaSeeking2 struct {
 
 // IID_IStreamBufferMediaSeeking2 is the interface identifier for IStreamBufferMediaSeeking2.
 var IID_IStreamBufferMediaSeeking2 = win32.GUID{Data1: 0x3a439ab0, Data2: 0x155f, Data3: 0x470a, Data4: [8]byte{0x86, 0xa6, 0x9e, 0xa5, 0x4a, 0xfd, 0x6e, 0xaf}}
+
+var specIStreamBufferMediaSeeking2_SetRateEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// SetRateEx dispatches through IStreamBufferMediaSeeking2's vtable slot 20.
+func (self *IStreamBufferMediaSeeking2) SetRateEx(dRate float64, dwFramesPerSec uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIStreamBufferMediaSeeking2_SetRateEx, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dRate)), uintptr(dwFramesPerSec)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IStreamBufferRecComp: https://learn.microsoft.com/windows/win32/api/sbe/nn-sbe-istreambufferreccomp
 // IID: 9e259a9b-8815-42ae-b09f-221970b154fd
@@ -12728,6 +13097,23 @@ func (self *ITuningSpaceContainer) Get__NewEnum() (*systemole.IEnumVARIANT, erro
 	return *_NewEnum, win32.ErrIfFailed(int32(r1))
 }
 
+var specITuningSpaceContainer_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ITuningSpaceContainer's vtable slot 9.
+func (self *ITuningSpaceContainer) Get_Item(varIndex systemvariant.VARIANT) (*ITuningSpace, error) {
+	_TuningSpace := new(*ITuningSpace)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specITuningSpaceContainer_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_TuningSpace)))).Tuple()
+	return *_TuningSpace, win32.ErrIfFailed(int32(r1))
+}
+
+var specITuningSpaceContainer_Put_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Put_Item dispatches through ITuningSpaceContainer's vtable slot 10.
+func (self *ITuningSpaceContainer) Put_Item(varIndex systemvariant.VARIANT, TuningSpace *ITuningSpace) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specITuningSpaceContainer_Put_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(unsafe.Pointer(TuningSpace))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // TuningSpacesForCLSID dispatches through ITuningSpaceContainer's vtable slot 11.
 func (self *ITuningSpaceContainer) TuningSpacesForCLSID(SpaceCLSID foundation.BSTR) (*ITuningSpaces, error) {
 	_NewColl := new(*ITuningSpaces)
@@ -12770,6 +13156,14 @@ func (self *ITuningSpaceContainer) Get_EnumTuningSpaces() (*IEnumTuningSpaces, e
 	return *_ppEnum, win32.ErrIfFailed(int32(r1))
 }
 
+var specITuningSpaceContainer_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through ITuningSpaceContainer's vtable slot 17.
+func (self *ITuningSpaceContainer) Remove(Index systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specITuningSpaceContainer_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_MaxCount dispatches through ITuningSpaceContainer's vtable slot 18.
 func (self *ITuningSpaceContainer) Get_MaxCount() (int32, error) {
 	_MaxCount := new(int32)
@@ -12804,6 +13198,15 @@ func (self *ITuningSpaces) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 	_NewEnum := new(*systemole.IEnumVARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_NewEnum))))
 	return *_NewEnum, win32.ErrIfFailed(int32(r1))
+}
+
+var specITuningSpaces_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ITuningSpaces's vtable slot 9.
+func (self *ITuningSpaces) Get_Item(varIndex systemvariant.VARIANT) (*ITuningSpace, error) {
+	_TuningSpace := new(*ITuningSpace)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specITuningSpaces_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_TuningSpace)))).Tuple()
+	return *_TuningSpace, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnumTuningSpaces dispatches through ITuningSpaces's vtable slot 10.

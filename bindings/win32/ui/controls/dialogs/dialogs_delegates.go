@@ -4,34 +4,42 @@
 
 package dialogs
 
-// LPCCHOOKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr.
+// LPCCHOOKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPCCHOOKPROC uintptr
 
-// LPCFHOOKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr.
+// LPCFHOOKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPCFHOOKPROC uintptr
 
-// LPFRHOOKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr.
+// LPFRHOOKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPFRHOOKPROC uintptr
 
-// LPOFNHOOKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr.
+// LPOFNHOOKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPOFNHOOKPROC uintptr
 
-// LPPAGEPAINTHOOK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr.
+// LPPAGEPAINTHOOK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPPAGEPAINTHOOK uintptr
 
-// LPPAGESETUPHOOK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr.
+// LPPAGESETUPHOOK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPPAGESETUPHOOK uintptr
 
-// LPPRINTHOOKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr.
+// LPPRINTHOOKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPPRINTHOOKPROC uintptr
 
-// LPSETUPHOOKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr.
+// LPSETUPHOOKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPSETUPHOOKPROC uintptr

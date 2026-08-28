@@ -74,6 +74,122 @@ var (
 	procQueryWorkingSetEx              = modPSAPI.NewProc("QueryWorkingSetEx")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	EmptyWorkingSet                *win32.Proc
+	EnumDeviceDrivers              *win32.Proc
+	EnumPageFiles                  *win32.Proc
+	EnumPageFilesA                 *win32.Proc
+	EnumProcessModules             *win32.Proc
+	EnumProcessModulesEx           *win32.Proc
+	EnumProcesses                  *win32.Proc
+	GetDeviceDriverBaseName        *win32.Proc
+	GetDeviceDriverBaseNameA       *win32.Proc
+	GetDeviceDriverFileName        *win32.Proc
+	GetDeviceDriverFileNameA       *win32.Proc
+	GetMappedFileName              *win32.Proc
+	GetMappedFileNameA             *win32.Proc
+	GetModuleBaseName              *win32.Proc
+	GetModuleBaseNameA             *win32.Proc
+	GetModuleFileNameEx            *win32.Proc
+	GetModuleFileNameExA           *win32.Proc
+	GetModuleInformation           *win32.Proc
+	GetPerformanceInfo             *win32.Proc
+	GetProcessImageFileName        *win32.Proc
+	GetProcessImageFileNameA       *win32.Proc
+	GetProcessMemoryInfo           *win32.Proc
+	GetWsChanges                   *win32.Proc
+	GetWsChangesEx                 *win32.Proc
+	InitializeProcessForWsWatch    *win32.Proc
+	K32EmptyWorkingSet             *win32.Proc
+	K32EnumDeviceDrivers           *win32.Proc
+	K32EnumPageFiles               *win32.Proc
+	K32EnumPageFilesA              *win32.Proc
+	K32EnumProcessModules          *win32.Proc
+	K32EnumProcessModulesEx        *win32.Proc
+	K32EnumProcesses               *win32.Proc
+	K32GetDeviceDriverBaseName     *win32.Proc
+	K32GetDeviceDriverBaseNameA    *win32.Proc
+	K32GetDeviceDriverFileName     *win32.Proc
+	K32GetDeviceDriverFileNameA    *win32.Proc
+	K32GetMappedFileName           *win32.Proc
+	K32GetMappedFileNameA          *win32.Proc
+	K32GetModuleBaseName           *win32.Proc
+	K32GetModuleBaseNameA          *win32.Proc
+	K32GetModuleFileNameEx         *win32.Proc
+	K32GetModuleFileNameExA        *win32.Proc
+	K32GetModuleInformation        *win32.Proc
+	K32GetPerformanceInfo          *win32.Proc
+	K32GetProcessImageFileName     *win32.Proc
+	K32GetProcessImageFileNameA    *win32.Proc
+	K32GetProcessMemoryInfo        *win32.Proc
+	K32GetWsChanges                *win32.Proc
+	K32GetWsChangesEx              *win32.Proc
+	K32InitializeProcessForWsWatch *win32.Proc
+	K32QueryWorkingSet             *win32.Proc
+	K32QueryWorkingSetEx           *win32.Proc
+	QueryWorkingSet                *win32.Proc
+	QueryWorkingSetEx              *win32.Proc
+}{
+	EmptyWorkingSet:                procEmptyWorkingSet,
+	EnumDeviceDrivers:              procEnumDeviceDrivers,
+	EnumPageFiles:                  procEnumPageFiles,
+	EnumPageFilesA:                 procEnumPageFilesA,
+	EnumProcessModules:             procEnumProcessModules,
+	EnumProcessModulesEx:           procEnumProcessModulesEx,
+	EnumProcesses:                  procEnumProcesses,
+	GetDeviceDriverBaseName:        procGetDeviceDriverBaseName,
+	GetDeviceDriverBaseNameA:       procGetDeviceDriverBaseNameA,
+	GetDeviceDriverFileName:        procGetDeviceDriverFileName,
+	GetDeviceDriverFileNameA:       procGetDeviceDriverFileNameA,
+	GetMappedFileName:              procGetMappedFileName,
+	GetMappedFileNameA:             procGetMappedFileNameA,
+	GetModuleBaseName:              procGetModuleBaseName,
+	GetModuleBaseNameA:             procGetModuleBaseNameA,
+	GetModuleFileNameEx:            procGetModuleFileNameEx,
+	GetModuleFileNameExA:           procGetModuleFileNameExA,
+	GetModuleInformation:           procGetModuleInformation,
+	GetPerformanceInfo:             procGetPerformanceInfo,
+	GetProcessImageFileName:        procGetProcessImageFileName,
+	GetProcessImageFileNameA:       procGetProcessImageFileNameA,
+	GetProcessMemoryInfo:           procGetProcessMemoryInfo,
+	GetWsChanges:                   procGetWsChanges,
+	GetWsChangesEx:                 procGetWsChangesEx,
+	InitializeProcessForWsWatch:    procInitializeProcessForWsWatch,
+	K32EmptyWorkingSet:             procK32EmptyWorkingSet,
+	K32EnumDeviceDrivers:           procK32EnumDeviceDrivers,
+	K32EnumPageFiles:               procK32EnumPageFiles,
+	K32EnumPageFilesA:              procK32EnumPageFilesA,
+	K32EnumProcessModules:          procK32EnumProcessModules,
+	K32EnumProcessModulesEx:        procK32EnumProcessModulesEx,
+	K32EnumProcesses:               procK32EnumProcesses,
+	K32GetDeviceDriverBaseName:     procK32GetDeviceDriverBaseName,
+	K32GetDeviceDriverBaseNameA:    procK32GetDeviceDriverBaseNameA,
+	K32GetDeviceDriverFileName:     procK32GetDeviceDriverFileName,
+	K32GetDeviceDriverFileNameA:    procK32GetDeviceDriverFileNameA,
+	K32GetMappedFileName:           procK32GetMappedFileName,
+	K32GetMappedFileNameA:          procK32GetMappedFileNameA,
+	K32GetModuleBaseName:           procK32GetModuleBaseName,
+	K32GetModuleBaseNameA:          procK32GetModuleBaseNameA,
+	K32GetModuleFileNameEx:         procK32GetModuleFileNameEx,
+	K32GetModuleFileNameExA:        procK32GetModuleFileNameExA,
+	K32GetModuleInformation:        procK32GetModuleInformation,
+	K32GetPerformanceInfo:          procK32GetPerformanceInfo,
+	K32GetProcessImageFileName:     procK32GetProcessImageFileName,
+	K32GetProcessImageFileNameA:    procK32GetProcessImageFileNameA,
+	K32GetProcessMemoryInfo:        procK32GetProcessMemoryInfo,
+	K32GetWsChanges:                procK32GetWsChanges,
+	K32GetWsChangesEx:              procK32GetWsChangesEx,
+	K32InitializeProcessForWsWatch: procK32InitializeProcessForWsWatch,
+	K32QueryWorkingSet:             procK32QueryWorkingSet,
+	K32QueryWorkingSetEx:           procK32QueryWorkingSetEx,
+	QueryWorkingSet:                procQueryWorkingSet,
+	QueryWorkingSetEx:              procQueryWorkingSetEx,
+}
+
 // EmptyWorkingSet calls PSAPI!EmptyWorkingSet.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-emptyworkingset
 // Minimum OS: windows5.1.2600.

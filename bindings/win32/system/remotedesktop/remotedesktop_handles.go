@@ -4,8 +4,12 @@
 
 package remotedesktop
 
-// CloseWTS_CLOUD_AUTH_HANDLE releases a WTS_CLOUD_AUTH_HANDLE handle by calling WTSCloudAuthClose.
+// CloseWTS_CLOUD_AUTH_HANDLE releases a WTS_CLOUD_AUTH_HANDLE handle by calling WTSCloudAuthClose. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseWTS_CLOUD_AUTH_HANDLE(h WTS_CLOUD_AUTH_HANDLE) error {
+	if h == ^WTS_CLOUD_AUTH_HANDLE(0) || h == 0 {
+		return nil
+	}
 	WTSCloudAuthClose(WTS_CLOUD_AUTH_HANDLE(h))
 	return nil
 }

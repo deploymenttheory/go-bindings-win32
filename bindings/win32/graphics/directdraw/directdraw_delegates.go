@@ -4,642 +4,800 @@
 
 package directdraw
 
-// LPCLIPPERCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IDirectDrawClipper, foundation.HWND, uint32, unsafe.Pointer) uint32.
+// LPCLIPPERCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IDirectDrawClipper, foundation.HWND, uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPCLIPPERCALLBACK uintptr
 
-// LPDD32BITDRIVERINIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) uint32.
+// LPDD32BITDRIVERINIT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDD32BITDRIVERINIT uintptr
 
-// LPDDENUMCALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PSTR, foundation.PSTR, unsafe.Pointer) foundation.BOOL.
+// LPDDENUMCALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PSTR, foundation.PSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDDENUMCALLBACKA uintptr
 
-// LPDDENUMCALLBACKEXA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PSTR, foundation.PSTR, unsafe.Pointer, graphicsgdi.HMONITOR) foundation.BOOL.
+// LPDDENUMCALLBACKEXA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PSTR, foundation.PSTR, unsafe.Pointer, graphicsgdi.HMONITOR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDDENUMCALLBACKEXA uintptr
 
-// LPDDENUMCALLBACKEXW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, graphicsgdi.HMONITOR) foundation.BOOL.
+// LPDDENUMCALLBACKEXW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, graphicsgdi.HMONITOR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDDENUMCALLBACKEXW uintptr
 
-// LPDDENUMCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer) foundation.BOOL.
+// LPDDENUMCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDDENUMCALLBACKW uintptr
 
-// LPDDENUMMODESCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDSURFACEDESC, unsafe.Pointer) foundation.HRESULT.
+// LPDDENUMMODESCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDSURFACEDESC, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDDENUMMODESCALLBACK uintptr
 
-// LPDDENUMMODESCALLBACK2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDSURFACEDESC2, unsafe.Pointer) foundation.HRESULT.
+// LPDDENUMMODESCALLBACK2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDSURFACEDESC2, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDDENUMMODESCALLBACK2 uintptr
 
-// LPDDENUMSURFACESCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IDirectDrawSurface, *DDSURFACEDESC, unsafe.Pointer) foundation.HRESULT.
+// LPDDENUMSURFACESCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IDirectDrawSurface, *DDSURFACEDESC, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDDENUMSURFACESCALLBACK uintptr
 
-// LPDDENUMSURFACESCALLBACK2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IDirectDrawSurface4, *DDSURFACEDESC2, unsafe.Pointer) foundation.HRESULT.
+// LPDDENUMSURFACESCALLBACK2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IDirectDrawSurface4, *DDSURFACEDESC2, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDDENUMSURFACESCALLBACK2 uintptr
 
-// LPDDENUMSURFACESCALLBACK7 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IDirectDrawSurface7, *DDSURFACEDESC2, unsafe.Pointer) foundation.HRESULT.
+// LPDDENUMSURFACESCALLBACK7 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IDirectDrawSurface7, *DDSURFACEDESC2, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDDENUMSURFACESCALLBACK7 uintptr
 
-// LPDDENUMVIDEOCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDVIDEOPORTCAPS, unsafe.Pointer) foundation.HRESULT.
+// LPDDENUMVIDEOCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDVIDEOPORTCAPS, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDDENUMVIDEOCALLBACK uintptr
 
-// LPDDGAMMACALIBRATORPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDGAMMARAMP, *byte) foundation.HRESULT.
+// LPDDGAMMACALIBRATORPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDGAMMARAMP, *byte) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDDGAMMACALIBRATORPROC uintptr
 
-// LPDDHALCOLORCB_COLORCONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_COLORCONTROLDATA) uint32.
+// LPDDHALCOLORCB_COLORCONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_COLORCONTROLDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALCOLORCB_COLORCONTROL uintptr
 
-// LPDDHALEXEBUFCB_CANCREATEEXEBUF is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_CANCREATESURFACEDATA) uint32.
+// LPDDHALEXEBUFCB_CANCREATEEXEBUF is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_CANCREATESURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALEXEBUFCB_CANCREATEEXEBUF uintptr
 
-// LPDDHALEXEBUFCB_CREATEEXEBUF is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_CREATESURFACEDATA) uint32.
+// LPDDHALEXEBUFCB_CREATEEXEBUF is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_CREATESURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALEXEBUFCB_CREATEEXEBUF uintptr
 
-// LPDDHALEXEBUFCB_DESTROYEXEBUF is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_DESTROYSURFACEDATA) uint32.
+// LPDDHALEXEBUFCB_DESTROYEXEBUF is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_DESTROYSURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALEXEBUFCB_DESTROYEXEBUF uintptr
 
-// LPDDHALEXEBUFCB_LOCKEXEBUF is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_LOCKDATA) uint32.
+// LPDDHALEXEBUFCB_LOCKEXEBUF is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_LOCKDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALEXEBUFCB_LOCKEXEBUF uintptr
 
-// LPDDHALEXEBUFCB_UNLOCKEXEBUF is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_UNLOCKDATA) uint32.
+// LPDDHALEXEBUFCB_UNLOCKEXEBUF is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_UNLOCKDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALEXEBUFCB_UNLOCKEXEBUF uintptr
 
-// LPDDHALKERNELCB_SYNCSURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_SYNCSURFACEDATA) uint32.
+// LPDDHALKERNELCB_SYNCSURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_SYNCSURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALKERNELCB_SYNCSURFACE uintptr
 
-// LPDDHALKERNELCB_SYNCVIDEOPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_SYNCVIDEOPORTDATA) uint32.
+// LPDDHALKERNELCB_SYNCVIDEOPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_SYNCVIDEOPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALKERNELCB_SYNCVIDEOPORT uintptr
 
-// LPDDHALMOCOMPCB_BEGINFRAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_BEGINMOCOMPFRAMEDATA) uint32.
+// LPDDHALMOCOMPCB_BEGINFRAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_BEGINMOCOMPFRAMEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_BEGINFRAME uintptr
 
-// LPDDHALMOCOMPCB_CREATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_CREATEMOCOMPDATA) uint32.
+// LPDDHALMOCOMPCB_CREATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_CREATEMOCOMPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_CREATE uintptr
 
-// LPDDHALMOCOMPCB_DESTROY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_DESTROYMOCOMPDATA) uint32.
+// LPDDHALMOCOMPCB_DESTROY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_DESTROYMOCOMPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_DESTROY uintptr
 
-// LPDDHALMOCOMPCB_ENDFRAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_ENDMOCOMPFRAMEDATA) uint32.
+// LPDDHALMOCOMPCB_ENDFRAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_ENDMOCOMPFRAMEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_ENDFRAME uintptr
 
-// LPDDHALMOCOMPCB_GETCOMPBUFFINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETMOCOMPCOMPBUFFDATA) uint32.
+// LPDDHALMOCOMPCB_GETCOMPBUFFINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETMOCOMPCOMPBUFFDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_GETCOMPBUFFINFO uintptr
 
-// LPDDHALMOCOMPCB_GETFORMATS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETMOCOMPFORMATSDATA) uint32.
+// LPDDHALMOCOMPCB_GETFORMATS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETMOCOMPFORMATSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_GETFORMATS uintptr
 
-// LPDDHALMOCOMPCB_GETGUIDS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETMOCOMPGUIDSDATA) uint32.
+// LPDDHALMOCOMPCB_GETGUIDS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETMOCOMPGUIDSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_GETGUIDS uintptr
 
-// LPDDHALMOCOMPCB_GETINTERNALINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETINTERNALMOCOMPDATA) uint32.
+// LPDDHALMOCOMPCB_GETINTERNALINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETINTERNALMOCOMPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_GETINTERNALINFO uintptr
 
-// LPDDHALMOCOMPCB_QUERYSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_QUERYMOCOMPSTATUSDATA) uint32.
+// LPDDHALMOCOMPCB_QUERYSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_QUERYMOCOMPSTATUSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_QUERYSTATUS uintptr
 
-// LPDDHALMOCOMPCB_RENDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_RENDERMOCOMPDATA) uint32.
+// LPDDHALMOCOMPCB_RENDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_RENDERMOCOMPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALMOCOMPCB_RENDER uintptr
 
-// LPDDHALPALCB_DESTROYPALETTE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_DESTROYPALETTEDATA) uint32.
+// LPDDHALPALCB_DESTROYPALETTE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_DESTROYPALETTEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALPALCB_DESTROYPALETTE uintptr
 
-// LPDDHALPALCB_SETENTRIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_SETENTRIESDATA) uint32.
+// LPDDHALPALCB_SETENTRIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_SETENTRIESDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALPALCB_SETENTRIES uintptr
 
-// LPDDHALSURFCB_ADDATTACHEDSURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_ADDATTACHEDSURFACEDATA) uint32.
+// LPDDHALSURFCB_ADDATTACHEDSURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_ADDATTACHEDSURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_ADDATTACHEDSURFACE uintptr
 
-// LPDDHALSURFCB_BLT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_BLTDATA) uint32.
+// LPDDHALSURFCB_BLT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_BLTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_BLT uintptr
 
-// LPDDHALSURFCB_DESTROYSURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_DESTROYSURFACEDATA) uint32.
+// LPDDHALSURFCB_DESTROYSURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_DESTROYSURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_DESTROYSURFACE uintptr
 
-// LPDDHALSURFCB_FLIP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_FLIPDATA) uint32.
+// LPDDHALSURFCB_FLIP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_FLIPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_FLIP uintptr
 
-// LPDDHALSURFCB_GETBLTSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETBLTSTATUSDATA) uint32.
+// LPDDHALSURFCB_GETBLTSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETBLTSTATUSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_GETBLTSTATUS uintptr
 
-// LPDDHALSURFCB_GETFLIPSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETFLIPSTATUSDATA) uint32.
+// LPDDHALSURFCB_GETFLIPSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETFLIPSTATUSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_GETFLIPSTATUS uintptr
 
-// LPDDHALSURFCB_LOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_LOCKDATA) uint32.
+// LPDDHALSURFCB_LOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_LOCKDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_LOCK uintptr
 
-// LPDDHALSURFCB_SETCLIPLIST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_SETCLIPLISTDATA) uint32.
+// LPDDHALSURFCB_SETCLIPLIST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_SETCLIPLISTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_SETCLIPLIST uintptr
 
-// LPDDHALSURFCB_SETCOLORKEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_SETCOLORKEYDATA) uint32.
+// LPDDHALSURFCB_SETCOLORKEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_SETCOLORKEYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_SETCOLORKEY uintptr
 
-// LPDDHALSURFCB_SETOVERLAYPOSITION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_SETOVERLAYPOSITIONDATA) uint32.
+// LPDDHALSURFCB_SETOVERLAYPOSITION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_SETOVERLAYPOSITIONDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_SETOVERLAYPOSITION uintptr
 
-// LPDDHALSURFCB_SETPALETTE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_SETPALETTEDATA) uint32.
+// LPDDHALSURFCB_SETPALETTE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_SETPALETTEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_SETPALETTE uintptr
 
-// LPDDHALSURFCB_UNLOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_UNLOCKDATA) uint32.
+// LPDDHALSURFCB_UNLOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_UNLOCKDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_UNLOCK uintptr
 
-// LPDDHALSURFCB_UPDATEOVERLAY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_UPDATEOVERLAYDATA) uint32.
+// LPDDHALSURFCB_UPDATEOVERLAY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_UPDATEOVERLAYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALSURFCB_UPDATEOVERLAY uintptr
 
-// LPDDHALVPORTCB_CANCREATEVIDEOPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_CANCREATEVPORTDATA) uint32.
+// LPDDHALVPORTCB_CANCREATEVIDEOPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_CANCREATEVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_CANCREATEVIDEOPORT uintptr
 
-// LPDDHALVPORTCB_COLORCONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_VPORTCOLORDATA) uint32.
+// LPDDHALVPORTCB_COLORCONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_VPORTCOLORDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_COLORCONTROL uintptr
 
-// LPDDHALVPORTCB_CREATEVIDEOPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_CREATEVPORTDATA) uint32.
+// LPDDHALVPORTCB_CREATEVIDEOPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_CREATEVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_CREATEVIDEOPORT uintptr
 
-// LPDDHALVPORTCB_DESTROYVPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_DESTROYVPORTDATA) uint32.
+// LPDDHALVPORTCB_DESTROYVPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_DESTROYVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_DESTROYVPORT uintptr
 
-// LPDDHALVPORTCB_FLIP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_FLIPVPORTDATA) uint32.
+// LPDDHALVPORTCB_FLIP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_FLIPVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_FLIP uintptr
 
-// LPDDHALVPORTCB_GETBANDWIDTH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETVPORTBANDWIDTHDATA) uint32.
+// LPDDHALVPORTCB_GETBANDWIDTH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETVPORTBANDWIDTHDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_GETBANDWIDTH uintptr
 
-// LPDDHALVPORTCB_GETFIELD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETVPORTFIELDDATA) uint32.
+// LPDDHALVPORTCB_GETFIELD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETVPORTFIELDDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_GETFIELD uintptr
 
-// LPDDHALVPORTCB_GETFLIPSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETVPORTFLIPSTATUSDATA) uint32.
+// LPDDHALVPORTCB_GETFLIPSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETVPORTFLIPSTATUSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_GETFLIPSTATUS uintptr
 
-// LPDDHALVPORTCB_GETINPUTFORMATS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETVPORTINPUTFORMATDATA) uint32.
+// LPDDHALVPORTCB_GETINPUTFORMATS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETVPORTINPUTFORMATDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_GETINPUTFORMATS uintptr
 
-// LPDDHALVPORTCB_GETLINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETVPORTLINEDATA) uint32.
+// LPDDHALVPORTCB_GETLINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETVPORTLINEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_GETLINE uintptr
 
-// LPDDHALVPORTCB_GETOUTPUTFORMATS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETVPORTOUTPUTFORMATDATA) uint32.
+// LPDDHALVPORTCB_GETOUTPUTFORMATS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETVPORTOUTPUTFORMATDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_GETOUTPUTFORMATS uintptr
 
-// LPDDHALVPORTCB_GETSIGNALSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETVPORTSIGNALDATA) uint32.
+// LPDDHALVPORTCB_GETSIGNALSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETVPORTSIGNALDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_GETSIGNALSTATUS uintptr
 
-// LPDDHALVPORTCB_GETVPORTCONNECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETVPORTCONNECTDATA) uint32.
+// LPDDHALVPORTCB_GETVPORTCONNECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETVPORTCONNECTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_GETVPORTCONNECT uintptr
 
-// LPDDHALVPORTCB_UPDATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_UPDATEVPORTDATA) uint32.
+// LPDDHALVPORTCB_UPDATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_UPDATEVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_UPDATE uintptr
 
-// LPDDHALVPORTCB_WAITFORSYNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_WAITFORVPORTSYNCDATA) uint32.
+// LPDDHALVPORTCB_WAITFORSYNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_WAITFORVPORTSYNCDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHALVPORTCB_WAITFORSYNC uintptr
 
-// LPDDHAL_CANCREATESURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_CANCREATESURFACEDATA) uint32.
+// LPDDHAL_CANCREATESURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_CANCREATESURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_CANCREATESURFACE uintptr
 
-// LPDDHAL_CREATEPALETTE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_CREATEPALETTEDATA) uint32.
+// LPDDHAL_CREATEPALETTE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_CREATEPALETTEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_CREATEPALETTE uintptr
 
-// LPDDHAL_CREATESURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_CREATESURFACEDATA) uint32.
+// LPDDHAL_CREATESURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_CREATESURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_CREATESURFACE uintptr
 
-// LPDDHAL_CREATESURFACEEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_CREATESURFACEEXDATA) uint32.
+// LPDDHAL_CREATESURFACEEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_CREATESURFACEEXDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_CREATESURFACEEX uintptr
 
-// LPDDHAL_DESTROYDDLOCAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_DESTROYDDLOCALDATA) uint32.
+// LPDDHAL_DESTROYDDLOCAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_DESTROYDDLOCALDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_DESTROYDDLOCAL uintptr
 
-// LPDDHAL_DESTROYDRIVER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_DESTROYDRIVERDATA) uint32.
+// LPDDHAL_DESTROYDRIVER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_DESTROYDRIVERDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_DESTROYDRIVER uintptr
 
-// LPDDHAL_FLIPTOGDISURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_FLIPTOGDISURFACEDATA) uint32.
+// LPDDHAL_FLIPTOGDISURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_FLIPTOGDISURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_FLIPTOGDISURFACE uintptr
 
-// LPDDHAL_GETAVAILDRIVERMEMORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETAVAILDRIVERMEMORYDATA) uint32.
+// LPDDHAL_GETAVAILDRIVERMEMORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETAVAILDRIVERMEMORYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_GETAVAILDRIVERMEMORY uintptr
 
-// LPDDHAL_GETDRIVERINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETDRIVERINFODATA) uint32.
+// LPDDHAL_GETDRIVERINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETDRIVERINFODATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_GETDRIVERINFO uintptr
 
-// LPDDHAL_GETDRIVERSTATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETDRIVERSTATEDATA) uint32.
+// LPDDHAL_GETDRIVERSTATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETDRIVERSTATEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_GETDRIVERSTATE uintptr
 
-// LPDDHAL_GETHEAPALIGNMENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETHEAPALIGNMENTDATA) uint32.
+// LPDDHAL_GETHEAPALIGNMENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETHEAPALIGNMENTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_GETHEAPALIGNMENT uintptr
 
-// LPDDHAL_GETSCANLINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_GETSCANLINEDATA) uint32.
+// LPDDHAL_GETSCANLINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_GETSCANLINEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_GETSCANLINE uintptr
 
-// LPDDHAL_SETCOLORKEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_DRVSETCOLORKEYDATA) uint32.
+// LPDDHAL_SETCOLORKEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_DRVSETCOLORKEYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_SETCOLORKEY uintptr
 
-// LPDDHAL_SETEXCLUSIVEMODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_SETEXCLUSIVEMODEDATA) uint32.
+// LPDDHAL_SETEXCLUSIVEMODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_SETEXCLUSIVEMODEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_SETEXCLUSIVEMODE uintptr
 
-// LPDDHAL_SETINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHALINFO, foundation.BOOL) foundation.BOOL.
+// LPDDHAL_SETINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHALINFO, foundation.BOOL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDDHAL_SETINFO uintptr
 
-// LPDDHAL_SETMODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_SETMODEDATA) uint32.
+// LPDDHAL_SETMODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_SETMODEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_SETMODE uintptr
 
-// LPDDHAL_UPDATENONLOCALHEAP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_UPDATENONLOCALHEAPDATA) uint32.
+// LPDDHAL_UPDATENONLOCALHEAP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_UPDATENONLOCALHEAPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_UPDATENONLOCALHEAP uintptr
 
-// LPDDHAL_VIDMEMALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDRAWI_DIRECTDRAW_GBL, int32, uint32, uint32) uintptr.
+// LPDDHAL_VIDMEMALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDRAWI_DIRECTDRAW_GBL, int32, uint32, uint32) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type LPDDHAL_VIDMEMALLOC uintptr
 
-// LPDDHAL_VIDMEMFREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDRAWI_DIRECTDRAW_GBL, int32, uintptr).
+// LPDDHAL_VIDMEMFREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDRAWI_DIRECTDRAW_GBL, int32, uintptr) uintptr.
 type LPDDHAL_VIDMEMFREE uintptr
 
-// LPDDHAL_WAITFORVERTICALBLANK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDHAL_WAITFORVERTICALBLANKDATA) uint32.
+// LPDDHAL_WAITFORVERTICALBLANK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDHAL_WAITFORVERTICALBLANKDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPDDHAL_WAITFORVERTICALBLANK uintptr
 
-// LPDDHEL_INIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DDRAWI_DIRECTDRAW_GBL, foundation.BOOL) foundation.BOOL.
+// LPDDHEL_INIT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DDRAWI_DIRECTDRAW_GBL, foundation.BOOL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDDHEL_INIT uintptr
 
-// LPDIRECTDRAWENUMERATEEXA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(LPDDENUMCALLBACKEXA, unsafe.Pointer, uint32) foundation.HRESULT.
+// LPDIRECTDRAWENUMERATEEXA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(LPDDENUMCALLBACKEXA, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDIRECTDRAWENUMERATEEXA uintptr
 
-// LPDIRECTDRAWENUMERATEEXW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(LPDDENUMCALLBACKEXW, unsafe.Pointer, uint32) foundation.HRESULT.
+// LPDIRECTDRAWENUMERATEEXW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(LPDDENUMCALLBACKEXW, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDIRECTDRAWENUMERATEEXW uintptr
 
-// PDD_ALPHABLT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_BLTDATA) uint32.
+// PDD_ALPHABLT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_BLTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_ALPHABLT uintptr
 
-// PDD_CANCREATESURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_CANCREATESURFACEDATA) uint32.
+// PDD_CANCREATESURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_CANCREATESURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_CANCREATESURFACE uintptr
 
-// PDD_COLORCB_COLORCONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_COLORCONTROLDATA) uint32.
+// PDD_COLORCB_COLORCONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_COLORCONTROLDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_COLORCB_COLORCONTROL uintptr
 
-// PDD_CREATEPALETTE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_CREATEPALETTEDATA) uint32.
+// PDD_CREATEPALETTE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_CREATEPALETTEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_CREATEPALETTE uintptr
 
-// PDD_CREATESURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_CREATESURFACEDATA) uint32.
+// PDD_CREATESURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_CREATESURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_CREATESURFACE uintptr
 
-// PDD_CREATESURFACEEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_CREATESURFACEEXDATA) uint32.
+// PDD_CREATESURFACEEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_CREATESURFACEEXDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_CREATESURFACEEX uintptr
 
-// PDD_DESTROYDDLOCAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_DESTROYDDLOCALDATA) uint32.
+// PDD_DESTROYDDLOCAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_DESTROYDDLOCALDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_DESTROYDDLOCAL uintptr
 
-// PDD_DESTROYDRIVER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PDD_DESTROYDRIVERDATA) uint32.
+// PDD_DESTROYDRIVER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PDD_DESTROYDRIVERDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_DESTROYDRIVER uintptr
 
-// PDD_FLIPTOGDISURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_FLIPTOGDISURFACEDATA) uint32.
+// PDD_FLIPTOGDISURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_FLIPTOGDISURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_FLIPTOGDISURFACE uintptr
 
-// PDD_FREEDRIVERMEMORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_FREEDRIVERMEMORYDATA) uint32.
+// PDD_FREEDRIVERMEMORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_FREEDRIVERMEMORYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_FREEDRIVERMEMORY uintptr
 
-// PDD_GETAVAILDRIVERMEMORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETAVAILDRIVERMEMORYDATA) uint32.
+// PDD_GETAVAILDRIVERMEMORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETAVAILDRIVERMEMORYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_GETAVAILDRIVERMEMORY uintptr
 
-// PDD_GETDRIVERINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETDRIVERINFODATA) uint32.
+// PDD_GETDRIVERINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETDRIVERINFODATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_GETDRIVERINFO uintptr
 
-// PDD_GETDRIVERSTATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETDRIVERSTATEDATA) uint32.
+// PDD_GETDRIVERSTATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETDRIVERSTATEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_GETDRIVERSTATE uintptr
 
-// PDD_GETSCANLINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETSCANLINEDATA) uint32.
+// PDD_GETSCANLINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETSCANLINEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_GETSCANLINE uintptr
 
-// PDD_KERNELCB_SYNCSURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_SYNCSURFACEDATA) uint32.
+// PDD_KERNELCB_SYNCSURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_SYNCSURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_KERNELCB_SYNCSURFACE uintptr
 
-// PDD_KERNELCB_SYNCVIDEOPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_SYNCVIDEOPORTDATA) uint32.
+// PDD_KERNELCB_SYNCVIDEOPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_SYNCVIDEOPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_KERNELCB_SYNCVIDEOPORT uintptr
 
-// PDD_MAPMEMORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_MAPMEMORYDATA) uint32.
+// PDD_MAPMEMORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_MAPMEMORYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MAPMEMORY uintptr
 
-// PDD_MOCOMPCB_BEGINFRAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_BEGINMOCOMPFRAMEDATA) uint32.
+// PDD_MOCOMPCB_BEGINFRAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_BEGINMOCOMPFRAMEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_BEGINFRAME uintptr
 
-// PDD_MOCOMPCB_CREATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_CREATEMOCOMPDATA) uint32.
+// PDD_MOCOMPCB_CREATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_CREATEMOCOMPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_CREATE uintptr
 
-// PDD_MOCOMPCB_DESTROY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_DESTROYMOCOMPDATA) uint32.
+// PDD_MOCOMPCB_DESTROY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_DESTROYMOCOMPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_DESTROY uintptr
 
-// PDD_MOCOMPCB_ENDFRAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_ENDMOCOMPFRAMEDATA) uint32.
+// PDD_MOCOMPCB_ENDFRAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_ENDMOCOMPFRAMEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_ENDFRAME uintptr
 
-// PDD_MOCOMPCB_GETCOMPBUFFINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETMOCOMPCOMPBUFFDATA) uint32.
+// PDD_MOCOMPCB_GETCOMPBUFFINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETMOCOMPCOMPBUFFDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_GETCOMPBUFFINFO uintptr
 
-// PDD_MOCOMPCB_GETFORMATS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETMOCOMPFORMATSDATA) uint32.
+// PDD_MOCOMPCB_GETFORMATS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETMOCOMPFORMATSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_GETFORMATS uintptr
 
-// PDD_MOCOMPCB_GETGUIDS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETMOCOMPGUIDSDATA) uint32.
+// PDD_MOCOMPCB_GETGUIDS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETMOCOMPGUIDSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_GETGUIDS uintptr
 
-// PDD_MOCOMPCB_GETINTERNALINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETINTERNALMOCOMPDATA) uint32.
+// PDD_MOCOMPCB_GETINTERNALINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETINTERNALMOCOMPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_GETINTERNALINFO uintptr
 
-// PDD_MOCOMPCB_QUERYSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_QUERYMOCOMPSTATUSDATA) uint32.
+// PDD_MOCOMPCB_QUERYSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_QUERYMOCOMPSTATUSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_QUERYSTATUS uintptr
 
-// PDD_MOCOMPCB_RENDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_RENDERMOCOMPDATA) uint32.
+// PDD_MOCOMPCB_RENDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_RENDERMOCOMPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_MOCOMPCB_RENDER uintptr
 
-// PDD_PALCB_DESTROYPALETTE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_DESTROYPALETTEDATA) uint32.
+// PDD_PALCB_DESTROYPALETTE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_DESTROYPALETTEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_PALCB_DESTROYPALETTE uintptr
 
-// PDD_PALCB_SETENTRIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_SETENTRIESDATA) uint32.
+// PDD_PALCB_SETENTRIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_SETENTRIESDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_PALCB_SETENTRIES uintptr
 
-// PDD_SETCOLORKEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_DRVSETCOLORKEYDATA) uint32.
+// PDD_SETCOLORKEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_DRVSETCOLORKEYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SETCOLORKEY uintptr
 
-// PDD_SETEXCLUSIVEMODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_SETEXCLUSIVEMODEDATA) uint32.
+// PDD_SETEXCLUSIVEMODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_SETEXCLUSIVEMODEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SETEXCLUSIVEMODE uintptr
 
-// PDD_SETMODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PDD_SETMODEDATA) uint32.
+// PDD_SETMODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PDD_SETMODEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SETMODE uintptr
 
-// PDD_SURFCB_ADDATTACHEDSURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_ADDATTACHEDSURFACEDATA) uint32.
+// PDD_SURFCB_ADDATTACHEDSURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_ADDATTACHEDSURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_ADDATTACHEDSURFACE uintptr
 
-// PDD_SURFCB_BLT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_BLTDATA) uint32.
+// PDD_SURFCB_BLT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_BLTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_BLT uintptr
 
-// PDD_SURFCB_DESTROYSURFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_DESTROYSURFACEDATA) uint32.
+// PDD_SURFCB_DESTROYSURFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_DESTROYSURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_DESTROYSURFACE uintptr
 
-// PDD_SURFCB_FLIP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_FLIPDATA) uint32.
+// PDD_SURFCB_FLIP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_FLIPDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_FLIP uintptr
 
-// PDD_SURFCB_GETBLTSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETBLTSTATUSDATA) uint32.
+// PDD_SURFCB_GETBLTSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETBLTSTATUSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_GETBLTSTATUS uintptr
 
-// PDD_SURFCB_GETFLIPSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETFLIPSTATUSDATA) uint32.
+// PDD_SURFCB_GETFLIPSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETFLIPSTATUSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_GETFLIPSTATUS uintptr
 
-// PDD_SURFCB_LOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_LOCKDATA) uint32.
+// PDD_SURFCB_LOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_LOCKDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_LOCK uintptr
 
-// PDD_SURFCB_SETCLIPLIST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_SETCLIPLISTDATA) uint32.
+// PDD_SURFCB_SETCLIPLIST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_SETCLIPLISTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_SETCLIPLIST uintptr
 
-// PDD_SURFCB_SETCOLORKEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_SETCOLORKEYDATA) uint32.
+// PDD_SURFCB_SETCOLORKEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_SETCOLORKEYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_SETCOLORKEY uintptr
 
-// PDD_SURFCB_SETOVERLAYPOSITION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_SETOVERLAYPOSITIONDATA) uint32.
+// PDD_SURFCB_SETOVERLAYPOSITION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_SETOVERLAYPOSITIONDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_SETOVERLAYPOSITION uintptr
 
-// PDD_SURFCB_SETPALETTE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_SETPALETTEDATA) uint32.
+// PDD_SURFCB_SETPALETTE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_SETPALETTEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_SETPALETTE uintptr
 
-// PDD_SURFCB_UNLOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_UNLOCKDATA) uint32.
+// PDD_SURFCB_UNLOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_UNLOCKDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_UNLOCK uintptr
 
-// PDD_SURFCB_UPDATEOVERLAY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_UPDATEOVERLAYDATA) uint32.
+// PDD_SURFCB_UPDATEOVERLAY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_UPDATEOVERLAYDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_SURFCB_UPDATEOVERLAY uintptr
 
-// PDD_VPORTCB_CANCREATEVIDEOPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_CANCREATEVPORTDATA) uint32.
+// PDD_VPORTCB_CANCREATEVIDEOPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_CANCREATEVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_CANCREATEVIDEOPORT uintptr
 
-// PDD_VPORTCB_COLORCONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_VPORTCOLORDATA) uint32.
+// PDD_VPORTCB_COLORCONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_VPORTCOLORDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_COLORCONTROL uintptr
 
-// PDD_VPORTCB_CREATEVIDEOPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_CREATEVPORTDATA) uint32.
+// PDD_VPORTCB_CREATEVIDEOPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_CREATEVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_CREATEVIDEOPORT uintptr
 
-// PDD_VPORTCB_DESTROYVPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_DESTROYVPORTDATA) uint32.
+// PDD_VPORTCB_DESTROYVPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_DESTROYVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_DESTROYVPORT uintptr
 
-// PDD_VPORTCB_FLIP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_FLIPVPORTDATA) uint32.
+// PDD_VPORTCB_FLIP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_FLIPVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_FLIP uintptr
 
-// PDD_VPORTCB_GETAUTOFLIPSURF is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PDD_GETVPORTAUTOFLIPSURFACEDATA) uint32.
+// PDD_VPORTCB_GETAUTOFLIPSURF is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PDD_GETVPORTAUTOFLIPSURFACEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_GETAUTOFLIPSURF uintptr
 
-// PDD_VPORTCB_GETBANDWIDTH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETVPORTBANDWIDTHDATA) uint32.
+// PDD_VPORTCB_GETBANDWIDTH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETVPORTBANDWIDTHDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_GETBANDWIDTH uintptr
 
-// PDD_VPORTCB_GETFIELD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETVPORTFIELDDATA) uint32.
+// PDD_VPORTCB_GETFIELD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETVPORTFIELDDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_GETFIELD uintptr
 
-// PDD_VPORTCB_GETFLIPSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETVPORTFLIPSTATUSDATA) uint32.
+// PDD_VPORTCB_GETFLIPSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETVPORTFLIPSTATUSDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_GETFLIPSTATUS uintptr
 
-// PDD_VPORTCB_GETINPUTFORMATS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETVPORTINPUTFORMATDATA) uint32.
+// PDD_VPORTCB_GETINPUTFORMATS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETVPORTINPUTFORMATDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_GETINPUTFORMATS uintptr
 
-// PDD_VPORTCB_GETLINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETVPORTLINEDATA) uint32.
+// PDD_VPORTCB_GETLINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETVPORTLINEDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_GETLINE uintptr
 
-// PDD_VPORTCB_GETOUTPUTFORMATS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETVPORTOUTPUTFORMATDATA) uint32.
+// PDD_VPORTCB_GETOUTPUTFORMATS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETVPORTOUTPUTFORMATDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_GETOUTPUTFORMATS uintptr
 
-// PDD_VPORTCB_GETSIGNALSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETVPORTSIGNALDATA) uint32.
+// PDD_VPORTCB_GETSIGNALSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETVPORTSIGNALDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_GETSIGNALSTATUS uintptr
 
-// PDD_VPORTCB_GETVPORTCONNECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_GETVPORTCONNECTDATA) uint32.
+// PDD_VPORTCB_GETVPORTCONNECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_GETVPORTCONNECTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_GETVPORTCONNECT uintptr
 
-// PDD_VPORTCB_UPDATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_UPDATEVPORTDATA) uint32.
+// PDD_VPORTCB_UPDATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_UPDATEVPORTDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_UPDATE uintptr
 
-// PDD_VPORTCB_WAITFORSYNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_WAITFORVPORTSYNCDATA) uint32.
+// PDD_VPORTCB_WAITFORSYNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_WAITFORVPORTSYNCDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_VPORTCB_WAITFORSYNC uintptr
 
-// PDD_WAITFORVERTICALBLANK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DD_WAITFORVERTICALBLANKDATA) uint32.
+// PDD_WAITFORVERTICALBLANK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DD_WAITFORVERTICALBLANKDATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDD_WAITFORVERTICALBLANK uintptr
 
-// PDX_BOBNEXTFIELD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDBOBNEXTFIELDINFO, unsafe.Pointer) uint32.
+// PDX_BOBNEXTFIELD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDBOBNEXTFIELDINFO, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_BOBNEXTFIELD uintptr
 
-// PDX_ENABLEIRQ is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDENABLEIRQINFO, unsafe.Pointer) uint32.
+// PDX_ENABLEIRQ is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDENABLEIRQINFO, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_ENABLEIRQ uintptr
 
-// PDX_FLIPOVERLAY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDFLIPOVERLAYINFO, unsafe.Pointer) uint32.
+// PDX_FLIPOVERLAY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDFLIPOVERLAYINFO, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_FLIPOVERLAY uintptr
 
-// PDX_FLIPVIDEOPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDFLIPVIDEOPORTINFO, unsafe.Pointer) uint32.
+// PDX_FLIPVIDEOPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDFLIPVIDEOPORTINFO, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_FLIPVIDEOPORT uintptr
 
-// PDX_GETCURRENTAUTOFLIP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDGETCURRENTAUTOFLIPININFO, *DDGETCURRENTAUTOFLIPOUTINFO) uint32.
+// PDX_GETCURRENTAUTOFLIP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDGETCURRENTAUTOFLIPININFO, *DDGETCURRENTAUTOFLIPOUTINFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_GETCURRENTAUTOFLIP uintptr
 
-// PDX_GETIRQINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, *DDGETIRQINFO) uint32.
+// PDX_GETIRQINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, *DDGETIRQINFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_GETIRQINFO uintptr
 
-// PDX_GETPOLARITY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDGETPOLARITYININFO, *DDGETPOLARITYOUTINFO) uint32.
+// PDX_GETPOLARITY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDGETPOLARITYININFO, *DDGETPOLARITYOUTINFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_GETPOLARITY uintptr
 
-// PDX_GETPREVIOUSAUTOFLIP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDGETPREVIOUSAUTOFLIPININFO, *DDGETPREVIOUSAUTOFLIPOUTINFO) uint32.
+// PDX_GETPREVIOUSAUTOFLIP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDGETPREVIOUSAUTOFLIPININFO, *DDGETPREVIOUSAUTOFLIPOUTINFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_GETPREVIOUSAUTOFLIP uintptr
 
-// PDX_GETTRANSFERSTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, *DDGETTRANSFERSTATUSOUTINFO) uint32.
+// PDX_GETTRANSFERSTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, *DDGETTRANSFERSTATUSOUTINFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_GETTRANSFERSTATUS uintptr
 
-// PDX_IRQCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DX_IRQDATA).
+// PDX_IRQCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DX_IRQDATA) uintptr.
 type PDX_IRQCALLBACK uintptr
 
-// PDX_LOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDLOCKININFO, *DDLOCKOUTINFO) uint32.
+// PDX_LOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDLOCKININFO, *DDLOCKOUTINFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_LOCK uintptr
 
-// PDX_SETSTATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDSETSTATEININFO, *DDSETSTATEOUTINFO) uint32.
+// PDX_SETSTATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDSETSTATEININFO, *DDSETSTATEOUTINFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_SETSTATE uintptr
 
-// PDX_SKIPNEXTFIELD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDSKIPNEXTFIELDINFO, unsafe.Pointer) uint32.
+// PDX_SKIPNEXTFIELD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDSKIPNEXTFIELDINFO, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_SKIPNEXTFIELD uintptr
 
-// PDX_TRANSFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DDTRANSFERININFO, *DDTRANSFEROUTINFO) uint32.
+// PDX_TRANSFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DDTRANSFERININFO, *DDTRANSFEROUTINFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PDX_TRANSFER uintptr

@@ -53,6 +53,72 @@ var (
 	procOpenThemeDataForDpi                    = modUxTheme.NewProc("OpenThemeDataForDpi")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AdjustWindowRectExForDpi               *win32.Proc
+	AreDpiAwarenessContextsEqual           *win32.Proc
+	EnableNonClientDpiScaling              *win32.Proc
+	GetAwarenessFromDpiAwarenessContext    *win32.Proc
+	GetDialogControlDpiChangeBehavior      *win32.Proc
+	GetDialogDpiChangeBehavior             *win32.Proc
+	GetDpiAwarenessContextForProcess       *win32.Proc
+	GetDpiForMonitor                       *win32.Proc
+	GetDpiForSystem                        *win32.Proc
+	GetDpiForWindow                        *win32.Proc
+	GetDpiFromDpiAwarenessContext          *win32.Proc
+	GetProcessDpiAwareness                 *win32.Proc
+	GetSystemDpiForProcess                 *win32.Proc
+	GetSystemMetricsForDpi                 *win32.Proc
+	GetThreadDpiAwarenessContext           *win32.Proc
+	GetThreadDpiHostingBehavior            *win32.Proc
+	GetWindowDpiAwarenessContext           *win32.Proc
+	GetWindowDpiHostingBehavior            *win32.Proc
+	IsValidDpiAwarenessContext             *win32.Proc
+	LogicalToPhysicalPointForPerMonitorDPI *win32.Proc
+	OpenThemeDataForDpi                    *win32.Proc
+	PhysicalToLogicalPointForPerMonitorDPI *win32.Proc
+	SetDialogControlDpiChangeBehavior      *win32.Proc
+	SetDialogDpiChangeBehavior             *win32.Proc
+	SetProcessDpiAwareness                 *win32.Proc
+	SetProcessDpiAwarenessContext          *win32.Proc
+	SetThreadDpiAwarenessContext           *win32.Proc
+	SetThreadDpiHostingBehavior            *win32.Proc
+	SystemParametersInfoForDpi             *win32.Proc
+}{
+	AdjustWindowRectExForDpi:               procAdjustWindowRectExForDpi,
+	AreDpiAwarenessContextsEqual:           procAreDpiAwarenessContextsEqual,
+	EnableNonClientDpiScaling:              procEnableNonClientDpiScaling,
+	GetAwarenessFromDpiAwarenessContext:    procGetAwarenessFromDpiAwarenessContext,
+	GetDialogControlDpiChangeBehavior:      procGetDialogControlDpiChangeBehavior,
+	GetDialogDpiChangeBehavior:             procGetDialogDpiChangeBehavior,
+	GetDpiAwarenessContextForProcess:       procGetDpiAwarenessContextForProcess,
+	GetDpiForMonitor:                       procGetDpiForMonitor,
+	GetDpiForSystem:                        procGetDpiForSystem,
+	GetDpiForWindow:                        procGetDpiForWindow,
+	GetDpiFromDpiAwarenessContext:          procGetDpiFromDpiAwarenessContext,
+	GetProcessDpiAwareness:                 procGetProcessDpiAwareness,
+	GetSystemDpiForProcess:                 procGetSystemDpiForProcess,
+	GetSystemMetricsForDpi:                 procGetSystemMetricsForDpi,
+	GetThreadDpiAwarenessContext:           procGetThreadDpiAwarenessContext,
+	GetThreadDpiHostingBehavior:            procGetThreadDpiHostingBehavior,
+	GetWindowDpiAwarenessContext:           procGetWindowDpiAwarenessContext,
+	GetWindowDpiHostingBehavior:            procGetWindowDpiHostingBehavior,
+	IsValidDpiAwarenessContext:             procIsValidDpiAwarenessContext,
+	LogicalToPhysicalPointForPerMonitorDPI: procLogicalToPhysicalPointForPerMonitorDPI,
+	OpenThemeDataForDpi:                    procOpenThemeDataForDpi,
+	PhysicalToLogicalPointForPerMonitorDPI: procPhysicalToLogicalPointForPerMonitorDPI,
+	SetDialogControlDpiChangeBehavior:      procSetDialogControlDpiChangeBehavior,
+	SetDialogDpiChangeBehavior:             procSetDialogDpiChangeBehavior,
+	SetProcessDpiAwareness:                 procSetProcessDpiAwareness,
+	SetProcessDpiAwarenessContext:          procSetProcessDpiAwarenessContext,
+	SetThreadDpiAwarenessContext:           procSetThreadDpiAwarenessContext,
+	SetThreadDpiHostingBehavior:            procSetThreadDpiHostingBehavior,
+	SystemParametersInfoForDpi:             procSystemParametersInfoForDpi,
+}
+
 // AdjustWindowRectExForDpi calls USER32!AdjustWindowRectExForDpi.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi
 // Minimum OS: windows10.0.14393.

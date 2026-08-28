@@ -50,6 +50,72 @@ var (
 	procTakeSnapshotVhdSet                     = modVirtDisk.NewProc("TakeSnapshotVhdSet")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddVirtualDiskParent                   *win32.Proc
+	ApplySnapshotVhdSet                    *win32.Proc
+	AttachVirtualDisk                      *win32.Proc
+	BreakMirrorVirtualDisk                 *win32.Proc
+	CompactVirtualDisk                     *win32.Proc
+	CompleteForkVirtualDisk                *win32.Proc
+	CreateVirtualDisk                      *win32.Proc
+	DeleteSnapshotVhdSet                   *win32.Proc
+	DeleteVirtualDiskMetadata              *win32.Proc
+	DetachVirtualDisk                      *win32.Proc
+	EnumerateVirtualDiskMetadata           *win32.Proc
+	ExpandVirtualDisk                      *win32.Proc
+	ForkVirtualDisk                        *win32.Proc
+	GetAllAttachedVirtualDiskPhysicalPaths *win32.Proc
+	GetStorageDependencyInformation        *win32.Proc
+	GetVirtualDiskInformation              *win32.Proc
+	GetVirtualDiskMetadata                 *win32.Proc
+	GetVirtualDiskOperationProgress        *win32.Proc
+	GetVirtualDiskPhysicalPath             *win32.Proc
+	MergeVirtualDisk                       *win32.Proc
+	MirrorVirtualDisk                      *win32.Proc
+	ModifyVhdSet                           *win32.Proc
+	OpenVirtualDisk                        *win32.Proc
+	QueryChangesVirtualDisk                *win32.Proc
+	RawSCSIVirtualDisk                     *win32.Proc
+	ResizeVirtualDisk                      *win32.Proc
+	SetVirtualDiskInformation              *win32.Proc
+	SetVirtualDiskMetadata                 *win32.Proc
+	TakeSnapshotVhdSet                     *win32.Proc
+}{
+	AddVirtualDiskParent:                   procAddVirtualDiskParent,
+	ApplySnapshotVhdSet:                    procApplySnapshotVhdSet,
+	AttachVirtualDisk:                      procAttachVirtualDisk,
+	BreakMirrorVirtualDisk:                 procBreakMirrorVirtualDisk,
+	CompactVirtualDisk:                     procCompactVirtualDisk,
+	CompleteForkVirtualDisk:                procCompleteForkVirtualDisk,
+	CreateVirtualDisk:                      procCreateVirtualDisk,
+	DeleteSnapshotVhdSet:                   procDeleteSnapshotVhdSet,
+	DeleteVirtualDiskMetadata:              procDeleteVirtualDiskMetadata,
+	DetachVirtualDisk:                      procDetachVirtualDisk,
+	EnumerateVirtualDiskMetadata:           procEnumerateVirtualDiskMetadata,
+	ExpandVirtualDisk:                      procExpandVirtualDisk,
+	ForkVirtualDisk:                        procForkVirtualDisk,
+	GetAllAttachedVirtualDiskPhysicalPaths: procGetAllAttachedVirtualDiskPhysicalPaths,
+	GetStorageDependencyInformation:        procGetStorageDependencyInformation,
+	GetVirtualDiskInformation:              procGetVirtualDiskInformation,
+	GetVirtualDiskMetadata:                 procGetVirtualDiskMetadata,
+	GetVirtualDiskOperationProgress:        procGetVirtualDiskOperationProgress,
+	GetVirtualDiskPhysicalPath:             procGetVirtualDiskPhysicalPath,
+	MergeVirtualDisk:                       procMergeVirtualDisk,
+	MirrorVirtualDisk:                      procMirrorVirtualDisk,
+	ModifyVhdSet:                           procModifyVhdSet,
+	OpenVirtualDisk:                        procOpenVirtualDisk,
+	QueryChangesVirtualDisk:                procQueryChangesVirtualDisk,
+	RawSCSIVirtualDisk:                     procRawSCSIVirtualDisk,
+	ResizeVirtualDisk:                      procResizeVirtualDisk,
+	SetVirtualDiskInformation:              procSetVirtualDiskInformation,
+	SetVirtualDiskMetadata:                 procSetVirtualDiskMetadata,
+	TakeSnapshotVhdSet:                     procTakeSnapshotVhdSet,
+}
+
 // AddVirtualDiskParent calls VirtDisk!AddVirtualDiskParent.
 // https://learn.microsoft.com/windows/win32/api/virtdisk/nf-virtdisk-addvirtualdiskparent
 // Minimum OS: windows8.0.

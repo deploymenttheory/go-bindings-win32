@@ -144,6 +144,16 @@ type IEncodingFilterFactory struct {
 // IID_IEncodingFilterFactory is the interface identifier for IEncodingFilterFactory.
 var IID_IEncodingFilterFactory = win32.GUID{Data1: 0x70bdde00, Data2: 0xc18e, Data3: 0x11d0, Data4: [8]byte{0xa9, 0xce, 0x00, 0x60, 0x97, 0x94, 0x23, 0x11}}
 
+var specIEncodingFilterFactory_FindBestFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// FindBestFilter dispatches through IEncodingFilterFactory's vtable slot 3.
+func (self *IEncodingFilterFactory) FindBestFilter(pwzCodeIn string, pwzCodeOut string, info DATAINFO, ppDF **IDataFilter) error {
+	_pwzCodeIn := win32.UTF16Ptr(pwzCodeIn)
+	_pwzCodeOut := win32.UTF16Ptr(pwzCodeOut)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIEncodingFilterFactory_FindBestFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzCodeIn)), uintptr(unsafe.Pointer(_pwzCodeOut)), uintptr(unsafe.Pointer(&info)), uintptr(unsafe.Pointer(ppDF))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetDefaultFilter dispatches through IEncodingFilterFactory's vtable slot 4.
 func (self *IEncodingFilterFactory) GetDefaultFilter(pwzCodeIn string, pwzCodeOut string, ppDF **IDataFilter) error {
 	_pwzCodeIn := win32.UTF16Ptr(pwzCodeIn)

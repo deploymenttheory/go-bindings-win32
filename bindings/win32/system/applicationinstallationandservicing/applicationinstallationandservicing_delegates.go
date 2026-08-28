@@ -4,30 +4,37 @@
 
 package applicationinstallationandservicing
 
-// INSTALLUI_HANDLERA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PSTR) int32.
+// INSTALLUI_HANDLERA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type INSTALLUI_HANDLERA uintptr
 
-// INSTALLUI_HANDLERW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR) int32.
+// INSTALLUI_HANDLERW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type INSTALLUI_HANDLERW uintptr
 
-// LPDISPLAYVAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, RESULTTYPES, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) foundation.BOOL.
+// LPDISPLAYVAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, RESULTTYPES, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDISPLAYVAL uintptr
 
-// LPEVALCOMCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(STATUSTYPES, foundation.PWSTR, unsafe.Pointer) foundation.BOOL.
+// LPEVALCOMCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(STATUSTYPES, foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPEVALCOMCALLBACK uintptr
 
-// PINSTALLUI_HANDLER_RECORD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, MSIHANDLE) int32.
+// PINSTALLUI_HANDLER_RECORD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, MSIHANDLE) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PINSTALLUI_HANDLER_RECORD uintptr
 
-// PPATCH_PROGRESS_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32) foundation.BOOL.
+// PPATCH_PROGRESS_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PPATCH_PROGRESS_CALLBACK uintptr
 
-// PPATCH_SYMLOAD_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PSTR, uint32, uint32, uint32, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// PPATCH_SYMLOAD_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PSTR, uint32, uint32, uint32, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PPATCH_SYMLOAD_CALLBACK uintptr

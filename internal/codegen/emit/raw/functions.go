@@ -12,11 +12,12 @@ import (
 )
 
 // buildFunctionModels converts a namespace's functions plus the DLL/proc
-// declaration block that dispatches them. Each function is emitted once with
-// the best shape: idiomatic Go signature (string/bool/[]T/error/…) dispatching
-// directly through syscall.SyscallN.
-func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports typemap.ImportSet) ([]view.FunctionModel, []view.DLLModel) {
+// declaration block that dispatches them and the Procs probe table. Each
+// function is emitted once with the best shape: idiomatic Go signature
+// (string/bool/[]T/error/…) dispatching directly through syscall.SyscallN.
+func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports typemap.ImportSet) ([]view.FunctionModel, []view.DLLModel, []view.ProcModel) {
 	var functions []view.FunctionModel
+	var procTable []view.ProcModel
 	dllProcs := map[string][]view.ProcModel{}
 	dllSpelling := map[string]string{}
 
@@ -34,6 +35,13 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 			continue
 		}
 		seen[rawName] = true
+		if !IsLoadableModule(function.DLL) {
+			// No export to dispatch to: emit the [Constant] inline (or skip).
+			if model, ok := g.buildInlineFunction(meta, function, rawName, imports); ok {
+				functions = append(functions, model)
+			}
+			continue
+		}
 		model, ok := g.buildFunction(meta, function, rawName, imports)
 		if !ok {
 			continue
@@ -50,12 +58,17 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 		if dllSpelling[key] == "" {
 			dllSpelling[key] = function.DLL
 		}
-		dllProcs[key] = append(dllProcs[key], view.ProcModel{
-			VarName:    model.ProcVar,
-			ExportName: exportName,
-		})
+		proc := view.ProcModel{VarName: model.ProcVar, ExportName: exportName, GoName: model.GoName}
+		dllProcs[key] = append(dllProcs[key], proc)
+		procTable = append(procTable, proc)
 	}
 	sort.Slice(functions, func(i, j int) bool { return functions[i].GoName < functions[j].GoName })
+	sort.Slice(procTable, func(i, j int) bool { return procTable[i].GoName < procTable[j].GoName })
+	// The probe table is claimed last so it never costs a function its name.
+	if len(procTable) > 0 && !g.claimName("Procs") {
+		g.diag("package %s: Procs table name already used, probe table not emitted", meta.Namespace)
+		procTable = nil
+	}
 
 	dllKeys := make([]string, 0, len(dllProcs))
 	for key := range dllProcs {
@@ -72,7 +85,21 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 			Procs:    procs,
 		})
 	}
-	return functions, dlls
+	return functions, dlls, procTable
+}
+
+// functionCandidates counts the functions buildFunctionModels considers:
+// amd64-compatible, one per exported name.
+func (g *Generator) functionCandidates(meta *win32meta.NamespaceMeta) int {
+	seen := map[string]bool{}
+	for i := range meta.Functions {
+		function := &meta.Functions[i]
+		if !amd64Compatible(function.Availability.Architectures) {
+			continue
+		}
+		seen[naming.Export(function.Name)] = true
+	}
+	return len(seen)
 }
 
 // splitIdents extracts the Go identifiers from a type expression
@@ -176,8 +203,8 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		paramNames[i] = avoidCollision(naming.ParamName(function.Params[i].Name), reserved)
 	}
 
-	var decls, preamble, argWords, returnValues, returnTypes []string
-	usesUnsafe := false
+	var decls, preamble, argWords, specArgs, returnValues, returnTypes []string
+	usesUnsafe, viaCall := false, false
 	for i := range function.Params {
 		param := &function.Params[i]
 		resolved := resolvedParams[i]
@@ -192,6 +219,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 				local := "_" + paramNames[i]
 				preamble = append(preamble, local+" := new("+element+")")
 				argWords = append(argWords, "uintptr(win32.OutParam(unsafe.Pointer("+local+")))")
+				specArgs = append(specArgs, specWord)
 				returnValues = append(returnValues, "*"+local)
 				returnTypes = append(returnTypes, element)
 				usesUnsafe = true
@@ -201,6 +229,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		// A count parameter collapsed into a slice: derive from len().
 		if arrayIndex, ok := elidedCounts[i]; ok {
 			argWords = append(argWords, "uintptr(len("+paramNames[arrayIndex]+"))")
+			specArgs = append(specArgs, specWord)
 			continue
 		}
 		// An array pointer collapsed into a []T parameter.
@@ -211,22 +240,25 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 			preamble = append(preamble, "var "+local+" "+plan.rawPointerType)
 			preamble = append(preamble, "if len("+name+") > 0 { "+local+" = &"+name+"[0] }")
 			argWords = append(argWords, "uintptr(unsafe.Pointer("+local+"))")
+			specArgs = append(specArgs, specWord)
 			usesUnsafe = true
 			continue
 		}
 
-		decl, pre, word, pointer, ok := g.shapeParam(paramNames[i], param, resolved)
+		shaped, ok := g.shapeParam(paramNames[i], param, resolved)
 		if !ok {
 			g.diag("function %s: param %s not marshalable (%s), function skipped",
 				function.Name, param.Name, resolved.GoType)
 			return view.FunctionModel{}, false
 		}
-		if decl != "" {
-			decls = append(decls, decl)
+		if shaped.decl != "" {
+			decls = append(decls, shaped.decl)
 		}
-		preamble = append(preamble, pre...)
-		argWords = append(argWords, word)
-		usesUnsafe = usesUnsafe || pointer
+		preamble = append(preamble, shaped.preamble...)
+		argWords = append(argWords, shaped.word)
+		specArgs = append(specArgs, shaped.spec)
+		usesUnsafe = usesUnsafe || shaped.pointer
+		viaCall = viaCall || shaped.call
 	}
 
 	model := view.FunctionModel{
@@ -235,6 +267,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		Preamble: preamble,
 		ArgExprs: argWords,
 	}
+	retSpec, retArg := "", "nil"
 	if len(returnValues) > 0 {
 		model.ReturnValues = returnValues
 		switch retValMode {
@@ -255,28 +288,28 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 				model.ReturnSig = "(" + strings.Join(returnTypes, ", ") + ")"
 			}
 		}
-	} else if !g.buildReturnShape(&model, meta, function, returnResolved) {
-		return view.FunctionModel{}, false
-	}
-
-	// Choose the exported name: drop a trailing -W when the bare name is free.
-	goName := rawName
-	if function.UnsuffixedName != "" {
-		candidate := naming.Export(function.UnsuffixedName)
-		if g.claimName(candidate) {
-			goName = candidate
-		} else {
-			g.diag("function %s: bare name %s taken, keeping %s", meta.Namespace, candidate, rawName)
-		}
-	}
-	if goName == rawName {
-		if !g.claimName(goName) {
-			g.diag("function %s: name already used in package %s", function.Name, meta.Namespace)
+	} else {
+		var ok bool
+		if retSpec, retArg, ok = g.buildReturnShape(&model, meta, function, returnResolved); !ok {
 			return view.FunctionModel{}, false
 		}
 	}
+	viaCall = viaCall || retSpec != ""
+
+	goName, ok := g.claimFunctionName(meta, function, rawName)
+	if !ok {
+		return view.FunctionModel{}, false
+	}
 	model.GoName = goName
 	model.ProcVar = "proc" + goName
+	if viaCall {
+		specVar := "spec" + goName
+		model.SpecDecl = specDecl(specVar, specArgs, retSpec)
+		model.CallExpr = callExpr(model.ProcVar+".Addr()", specVar, retArg, argWords, model.ReturnKind)
+		usesUnsafe = true
+	} else {
+		model.CallExpr = "syscall.SyscallN(" + strings.Join(append([]string{model.ProcVar + ".Addr()"}, argWords...), ", ") + ")"
+	}
 
 	// Commit imports and the packages every body needs.
 	for alias, path := range scratch {
@@ -295,74 +328,136 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 	return model, true
 }
 
+// claimFunctionName chooses and claims the exported name: a trailing -W is
+// dropped when the bare name is free; otherwise the raw name must be free.
+func (g *Generator) claimFunctionName(meta *win32meta.NamespaceMeta, function *win32meta.Function, rawName string) (string, bool) {
+	if function.UnsuffixedName != "" {
+		candidate := naming.Export(function.UnsuffixedName)
+		if g.claimName(candidate) {
+			return candidate, true
+		}
+		g.diag("function %s: bare name %s taken, keeping %s", meta.Namespace, candidate, rawName)
+	}
+	if !g.claimName(rawName) {
+		g.diag("function %s: name already used in package %s", function.Name, meta.Namespace)
+		return "", false
+	}
+	return rawName, true
+}
+
+// specWord is the win32.Arg descriptor of a plain integer/pointer word.
+const specWord = "win32.Word"
+
+// shapedParam is one parameter's rendering: its declaration, conversion
+// preamble, the argument word, the win32.Arg descriptor of that word, and
+// whether the word needs unsafe / forces dispatch through win32.Call.
+type shapedParam struct {
+	decl     string
+	preamble []string
+	word     string
+	spec     string
+	pointer  bool
+	call     bool
+}
+
 // shapeParam maps one non-slice, non-retval parameter to its idiomatic Go
-// declaration, any conversion preamble, and the syscall word. pointer reports
-// whether the word uses unsafe.Pointer. ok is false when the param cannot be
-// marshaled (float, or a by-value struct too large for a register); the caller
-// then skips its function or method with a context-appropriate diagnostic.
-// Shared by functions and COM methods.
-func (g *Generator) shapeParam(name string, param *win32meta.Param, resolved typemap.Resolved) (decl string, preamble []string, word string, pointer bool, ok bool) {
+// declaration, any conversion preamble, the syscall word and its descriptor.
+// ok is false when the param cannot be marshaled at all (a by-value array);
+// the caller then skips its function or method with a context-appropriate
+// diagnostic. Shared by functions and COM methods.
+func (g *Generator) shapeParam(name string, param *win32meta.Param, resolved typemap.Resolved) (shapedParam, bool) {
 	// Reserved parameters always take NULL — dropped from the signature.
 	if param.IsReserved {
-		return "", nil, "0", false, true
+		return shapedParam{word: "0", spec: specWord}, true
 	}
-	// Input PWSTR/PCWSTR → Go string.
+	// Input PWSTR/PCWSTR → Go string; an [Optional] one → *string, so NULL
+	// (nil) and the empty string (win32.Str("")) stay distinguishable — the
+	// same projection as CsWin32's string? and windows-rs's Option<PCWSTR>.
 	if isWideStringPtr(resolved) && !param.IsOut {
 		local := "_" + name
-		return name + " string",
-			[]string{local + " := win32.UTF16Ptr(" + name + ")"},
-			"uintptr(unsafe.Pointer(" + local + "))", true, true
+		if param.IsOptional {
+			return shapedParam{
+				decl:     name + " *string",
+				preamble: []string{local + " := win32.UTF16PtrOrNil(" + name + ")"},
+				word:     "uintptr(unsafe.Pointer(" + local + "))",
+				spec:     specWord,
+				pointer:  true,
+			}, true
+		}
+		return shapedParam{
+			decl:     name + " string",
+			preamble: []string{local + " := win32.UTF16Ptr(" + name + ")"},
+			word:     "uintptr(unsafe.Pointer(" + local + "))",
+			spec:     specWord,
+			pointer:  true,
+		}, true
 	}
 	// BOOL input → Go bool.
 	if isBOOL(resolved) && !param.IsOut {
 		local := "_" + name
-		return name + " bool",
-			[]string{local + " := win32.Bool32(" + name + ")"},
-			"uintptr(" + local + ")", false, true
+		return shapedParam{
+			decl:     name + " bool",
+			preamble: []string{local + " := win32.Bool32(" + name + ")"},
+			word:     "uintptr(" + local + ")",
+			spec:     specWord,
+		}, true
 	}
-	// Everything else passes through with the resolved type.
+	decl := name + " " + resolved.GoType
 	switch typemap.ArgClassOf(resolved, resolved.GoType) {
 	case typemap.ArgScalar:
-		return name + " " + resolved.GoType, nil, "uintptr(" + name + ")", false, true
+		return shapedParam{decl: decl, word: "uintptr(" + name + ")", spec: specWord}, true
 	case typemap.ArgPointer:
-		return name + " " + resolved.GoType, nil, "uintptr(unsafe.Pointer(" + name + "))", true, true
+		return shapedParam{decl: decl, word: "uintptr(unsafe.Pointer(" + name + "))", spec: specWord, pointer: true}, true
+	case typemap.ArgBool8:
+		// A C bool / BOOLEAN travels as one byte in the argument word.
+		return shapedParam{decl: name + " bool", word: "uintptr(win32.Bool8(" + name + "))", spec: specWord}, true
+	case typemap.ArgFloat:
+		// IEEE bits in the word; win32.Call places them in the XMM/V register
+		// (or stack slot) the callee reads.
+		if resolved.GoType == "float32" {
+			return shapedParam{decl: decl, word: "uintptr(math.Float32bits(" + name + "))", spec: "win32.Float32", call: true}, true
+		}
+		return shapedParam{decl: decl, word: "uintptr(math.Float64bits(" + name + "))", spec: "win32.Float64", call: true}, true
 	}
-	// A by-value struct or union small enough to travel in a register.
-	if word, ok := registerStructWord(g.byValueStructSize(param, resolved), name); ok {
-		return name + " " + resolved.GoType, nil, word, false, true
-	}
-	return "", nil, "", false, false
-}
-
-// byValueStructSize reports the computed C size of a by-value struct or union
-// parameter, or 0 when the parameter is not one (or its layout cannot be
-// derived).
-func (g *Generator) byValueStructSize(param *win32meta.Param, resolved typemap.Resolved) uint32 {
+	// By-value composites.
 	switch resolved.Kind {
-	case typemap.KindStruct, typemap.KindUnion:
+	case typemap.KindStruct, typemap.KindUnion, typemap.KindGUID:
 	default:
-		return 0
+		return shapedParam{}, false
 	}
-	if computed := g.layoutOf(&param.Type, nil); computed.ok {
-		return computed.size
+	composite := g.layoutOf(&param.Type, nil)
+	if !composite.ok {
+		return shapedParam{}, false
 	}
-	return 0
+	hfaCount, hfa64, isHFA := composite.hfa()
+	// A 1/2/4/8-byte integer aggregate rides the integer register on both
+	// architectures: pack it into the word.
+	if word, ok := registerStructWord(composite.size, name); ok && !isHFA {
+		return shapedParam{decl: decl, word: word, spec: specWord}, true
+	}
+	// Anything else (a pointer to a 16-byte-aligned copy on x64; X registers,
+	// V registers for an HFA, or a pointer on arm64) is planned by win32.Call
+	// from a pointer to the value and its layout.
+	return shapedParam{
+		decl:    decl,
+		word:    "uintptr(unsafe.Pointer(&" + name + "))",
+		spec:    fmt.Sprintf("win32.Struct(%d, %d, %d, %t)", composite.size, composite.align, hfaCount, hfa64),
+		pointer: true,
+		call:    true,
+	}, true
 }
 
 // registerStructWord builds the syscall word for a by-value struct of the
-// given size, reporting false when the size is not one the ABI passes in a
-// register.
+// given size, reporting false when the size is not one the ABI passes in an
+// integer register.
 //
 // The Windows x64 convention passes a struct or union of 1, 2, 4 or 8 bytes as
-// if it were an integer of the same size; ARM64 likewise puts one this small in
-// a register. Any other size — 12 bytes, or an odd 3 — travels by reference
-// instead, which is a different call shape entirely, so those stay skipped
-// rather than being passed truncated for the callee to read as garbage.
+// if it were an integer of the same size; ARM64 does the same for a non-float
+// aggregate this small. Every other shape goes through win32.Call.
 //
-// This is what makes the COORD-taking APIs expressible: CreatePseudoConsole,
-// ResizePseudoConsole, SetConsoleCursorPosition and the console-output family
-// all take a 4-byte COORD by value, and syscall.SyscallN accepts only uintptr
-// words.
+// This is what makes the COORD-taking APIs expressible without a planner:
+// CreatePseudoConsole, ResizePseudoConsole, SetConsoleCursorPosition and the
+// console-output family all take a 4-byte COORD by value.
 func registerStructWord(size uint32, name string) (string, bool) {
 	switch size {
 	case 1, 2, 4, 8:
@@ -371,30 +466,93 @@ func registerStructWord(size uint32, name string) (string, bool) {
 	return "", false
 }
 
-// buildReturnShape selects the body/return template shape (idiomatic).
-func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.NamespaceMeta, function *win32meta.Function, resolved typemap.Resolved) bool {
+// specDecl renders the package-level *win32.Spec of a win32.Call site.
+func specDecl(specVar string, specArgs []string, retSpec string) string {
+	decl := "var " + specVar + " = &win32.Spec{Args: []win32.Arg{" + strings.Join(specArgs, ", ") + "}"
+	if retSpec != "" {
+		decl += ", Ret: " + retSpec
+	}
+	return decl + "}"
+}
+
+// callExpr renders a win32.Call dispatch. Every return kind but RetFloat
+// consumes SyscallN's (r1, r2, err) tuple, so .Tuple() adapts the Result.
+func callExpr(target, specVar, retArg string, argWords []string, returnKind int) string {
+	call := "win32.Call(" + strings.Join(append([]string{target, specVar, retArg}, argWords...), ", ") + ")"
+	if returnKind == view.RetFloat {
+		return call
+	}
+	return call + ".Tuple()"
+}
+
+// buildReturnShape selects the body/return template shape (idiomatic). For
+// returns only win32.Call can carry — floats, and composites larger than a
+// register or made of floats — it reports the Spec's Ret descriptor and the
+// ret-buffer argument (else "" and "nil").
+func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.NamespaceMeta, function *win32meta.Function, resolved typemap.Resolved) (retSpec, retArg string, ok bool) {
+	retArg = "nil"
+	structRet := ""
 	switch resolved.Kind {
 	case typemap.KindVoid:
 		model.ReturnKind = view.RetVoid
-		return true
-	case typemap.KindStruct, typemap.KindUnion, typemap.KindArray, typemap.KindGUID:
+		return "", retArg, true
+	case typemap.KindStruct, typemap.KindUnion, typemap.KindGUID:
+		// A non-member function returns a 1/2/4/8-byte non-float aggregate in
+		// RAX (x64) or X0 (ARM64) as if it were an integer. Anything else —
+		// a hidden result pointer on x64; X0:X1, V registers for an HFA, or
+		// the X8 buffer on ARM64 — is planned by win32.Call into a buffer.
+		returnLayout := g.layoutOf(&function.Return, nil)
+		if !returnLayout.ok {
+			g.diag("function %s: by-value %s return not marshalable, function skipped",
+				function.Name, resolved.GoType)
+			return "", "", false
+		}
+		hfaCount, hfa64, isHFA := returnLayout.hfa()
+		if returnLayout.registerSized() && !isHFA {
+			structRet = "win32.StructRet[" + resolved.GoType + "](r1)"
+			break
+		}
+		model.Preamble = append(model.Preamble, "_ret := new("+resolved.GoType+")")
+		model.RetExpr = "*_ret"
+		model.ReturnKind = view.RetStructOut
+		model.ReturnSig = resolved.GoType
+		if function.SetLastError {
+			model.ReturnKind = view.RetStructOutLast
+			model.ReturnSig = "(" + resolved.GoType + ", error)"
+		}
+		return fmt.Sprintf("win32.Struct(%d, %d, %d, %t)", returnLayout.size, returnLayout.align, hfaCount, hfa64),
+			"win32.OutParam(unsafe.Pointer(_ret))", true
+	case typemap.KindArray:
 		g.diag("function %s: by-value %s return not marshalable, function skipped",
 			function.Name, resolved.GoType)
-		return false
+		return "", "", false
 	case typemap.KindScalar:
-		if resolved.GoType == "float32" || resolved.GoType == "float64" || resolved.GoType == "bool" {
-			g.diag("function %s: %s return not marshalable, function skipped", function.Name, resolved.GoType)
-			return false
+		if resolved.GoType == "float32" || resolved.GoType == "float64" {
+			if function.SetLastError {
+				g.diag("function %s: %s return with SetLastError not marshalable, function skipped", function.Name, resolved.GoType)
+				return "", "", false
+			}
+			model.ReturnKind = view.RetFloat
+			model.ReturnSig = resolved.GoType
+			if resolved.GoType == "float32" {
+				model.RetExpr = "math.Float32frombits(uint32(r.F0))"
+				return "win32.Float32", retArg, true
+			}
+			model.RetExpr = "math.Float64frombits(r.F0)"
+			return "win32.Float64", retArg, true
 		}
 	}
 
 	model.RetExpr = returnConversion(resolved)
+	if structRet != "" {
+		model.RetExpr = structRet
+	}
 
 	// BOOL + SetLastError → error (the BOOL carries nothing beyond success).
 	if function.SetLastError && isBOOL(resolved) {
 		model.ReturnKind = view.RetBoolErr
 		model.ReturnSig = "error"
-		return true
+		return "", retArg, true
 	}
 	// HRESULT → error; curated informational-success APIs additionally
 	// return the raw HRESULT so S_FALSE-style codes survive.
@@ -402,17 +560,17 @@ func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.
 		if g.isInformationalFunction(meta.Namespace, function.Name) {
 			model.ReturnKind = view.RetHResultValueErr
 			model.ReturnSig = "(win32.HRESULT, error)"
-			return true
+			return "", retArg, true
 		}
 		model.ReturnKind = view.RetHResultErr
 		model.ReturnSig = "error"
-		return true
+		return "", retArg, true
 	}
 	// Plain BOOL (no SetLastError) → bool.
 	if isBOOL(resolved) {
 		model.ReturnKind = view.RetBoolValue
 		model.ReturnSig = "bool"
-		return true
+		return "", retArg, true
 	}
 	// Value + SetLastError with a known failure sentinel → clean (T, error).
 	if function.SetLastError {
@@ -420,17 +578,17 @@ func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.
 			model.ReturnKind = view.RetValErr
 			model.ReturnSig = "(" + resolved.GoType + ", error)"
 			model.FailureChecks = checks
-			return true
+			return "", retArg, true
 		}
 		// No derivable sentinel: err is advisory (GetLastError).
 		model.ReturnKind = view.RetValLast
 		model.ReturnSig = "(" + resolved.GoType + ", error)"
-		return true
+		return "", retArg, true
 	}
 	// Plain value → T.
 	model.ReturnKind = view.RetVal
 	model.ReturnSig = resolved.GoType
-	return true
+	return "", retArg, true
 }
 
 // failureChecks derives failure predicates over `ret` from the return type's
@@ -443,28 +601,41 @@ func (g *Generator) failureChecks(resolved typemap.Resolved) []string {
 		if typedef == nil {
 			return nil
 		}
-		values := typedef.InvalidValues
-		if len(values) == 0 {
-			values = []string{"0"}
-		}
-		checks := make([]string, 0, len(values))
-		for _, value := range values {
-			if value == "-1" {
-				checks = append(checks, "ret == ^"+resolved.GoType+"(0)")
-				continue
-			}
-			checks = append(checks, "ret == "+value)
-		}
-		return checks
+		return invalidValueChecks(typedef.InvalidValues, resolved.GoType, "ret")
 	case typemap.KindPointer, typemap.KindPointerTypedef, typemap.KindComPtr:
 		return []string{"ret == nil"}
 	}
 	return nil
 }
 
+// invalidValueChecks renders `name == sentinel` predicates for a handle's
+// [InvalidHandleValue] sentinels (0 when the metadata records none); -1 is
+// spelled as the all-ones word of the handle type.
+func invalidValueChecks(values []string, goType, name string) []string {
+	if len(values) == 0 {
+		values = []string{"0"}
+	}
+	checks := make([]string, 0, len(values))
+	for _, value := range values {
+		if value == "-1" {
+			checks = append(checks, name+" == ^"+goType+"(0)")
+			continue
+		}
+		checks = append(checks, name+" == "+value)
+	}
+	return checks
+}
+
 // returnConversion renders the r1 → Go value conversion.
 func returnConversion(resolved typemap.Resolved) string {
 	switch resolved.Kind {
+	case typemap.KindScalar:
+		if resolved.GoType == "bool" {
+			// A C bool comes back in AL; the x64 convention leaves the upper
+			// bits of RAX undefined, so only the low byte is meaningful.
+			return "byte(r1) != 0"
+		}
+		return resolved.GoType + "(r1)"
 	case typemap.KindPointer, typemap.KindComPtr:
 		if resolved.GoType == "unsafe.Pointer" {
 			return "unsafe.Pointer(r1)"
@@ -481,7 +652,13 @@ func returnConversion(resolved typemap.Resolved) string {
 
 // functionComments assembles the doc comment lines.
 func functionComments(function *win32meta.Function, goName string) []string {
-	lines := []string{fmt.Sprintf("%s calls %s!%s.", goName, strings.TrimSuffix(function.DLL, ".dll"), exportOf(function))}
+	return append([]string{fmt.Sprintf("%s calls %s!%s.", goName, strings.TrimSuffix(function.DLL, ".dll"), exportOf(function))},
+		availabilityComments(function)...)
+}
+
+// availabilityComments renders the doc link and minimum-OS lines.
+func availabilityComments(function *win32meta.Function) []string {
+	var lines []string
 	if function.Availability.DocURL != "" {
 		lines = append(lines, function.Availability.DocURL)
 	}

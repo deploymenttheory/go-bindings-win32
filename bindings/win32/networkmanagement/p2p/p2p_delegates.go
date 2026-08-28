@@ -4,22 +4,26 @@
 
 package p2p
 
-// DRT_BOOTSTRAP_RESOLVE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HRESULT, unsafe.Pointer, *networkingwinsock.SOCKET_ADDRESS_LIST, foundation.BOOL).
+// DRT_BOOTSTRAP_RESOLVE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HRESULT, unsafe.Pointer, *networkingwinsock.SOCKET_ADDRESS_LIST, foundation.BOOL) uintptr.
 type DRT_BOOTSTRAP_RESOLVE_CALLBACK uintptr
 
-// PFNPEER_FREE_SECURITY_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, *PEER_DATA) foundation.HRESULT.
+// PFNPEER_FREE_SECURITY_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, *PEER_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNPEER_FREE_SECURITY_DATA uintptr
 
-// PFNPEER_ON_PASSWORD_AUTH_FAILED is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer) foundation.HRESULT.
+// PFNPEER_ON_PASSWORD_AUTH_FAILED is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNPEER_ON_PASSWORD_AUTH_FAILED uintptr
 
-// PFNPEER_SECURE_RECORD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, *PEER_RECORD, PEER_RECORD_CHANGE_TYPE, **PEER_DATA) foundation.HRESULT.
+// PFNPEER_SECURE_RECORD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, *PEER_RECORD, PEER_RECORD_CHANGE_TYPE, **PEER_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNPEER_SECURE_RECORD uintptr
 
-// PFNPEER_VALIDATE_RECORD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, *PEER_RECORD, PEER_RECORD_CHANGE_TYPE) foundation.HRESULT.
+// PFNPEER_VALIDATE_RECORD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, *PEER_RECORD, PEER_RECORD_CHANGE_TYPE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNPEER_VALIDATE_RECORD uintptr

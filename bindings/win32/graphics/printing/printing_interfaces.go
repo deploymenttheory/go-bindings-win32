@@ -5,14 +5,17 @@
 package printing
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	dataxmlmsxml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/msxml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdxgi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	graphicsimaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/imaging"
+	storagexps "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/xps"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemole "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/ole"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
@@ -1325,6 +1328,14 @@ func (self *IPrintPreviewDxgiPackageTarget) SetJobPageCount(countType PageCountT
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIPrintPreviewDxgiPackageTarget_DrawPage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// DrawPage dispatches through IPrintPreviewDxgiPackageTarget's vtable slot 4.
+func (self *IPrintPreviewDxgiPackageTarget) DrawPage(jobPageNumber uint32, pageImage *graphicsdxgi.IDXGISurface, dpiX float32, dpiY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIPrintPreviewDxgiPackageTarget_DrawPage, nil, uintptr(unsafe.Pointer(self)), uintptr(jobPageNumber), uintptr(unsafe.Pointer(pageImage)), uintptr(math.Float32bits(dpiX)), uintptr(math.Float32bits(dpiY))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // InvalidatePreview dispatches through IPrintPreviewDxgiPackageTarget's vtable slot 5.
 func (self *IPrintPreviewDxgiPackageTarget) InvalidatePreview() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
@@ -2141,6 +2152,14 @@ type IPrinterExtensionManager struct {
 // IID_IPrinterExtensionManager is the interface identifier for IPrinterExtensionManager.
 var IID_IPrinterExtensionManager = win32.GUID{Data1: 0x93c6eb8c, Data2: 0xb001, Data3: 0x4355, Data4: [8]byte{0x96, 0x29, 0x8e, 0x8a, 0x1b, 0x3f, 0x8e, 0x77}}
 
+var specIPrinterExtensionManager_EnableEvents = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// EnableEvents dispatches through IPrinterExtensionManager's vtable slot 3.
+func (self *IPrinterExtensionManager) EnableEvents(printerDriverId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIPrinterExtensionManager_EnableEvents, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&printerDriverId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // DisableEvents dispatches through IPrinterExtensionManager's vtable slot 4.
 func (self *IPrinterExtensionManager) DisableEvents() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
@@ -2635,6 +2654,14 @@ type IXpsRasterizationFactory struct {
 // IID_IXpsRasterizationFactory is the interface identifier for IXpsRasterizationFactory.
 var IID_IXpsRasterizationFactory = win32.GUID{Data1: 0xe094808a, Data2: 0x24c6, Data3: 0x482b, Data4: [8]byte{0xa3, 0xa7, 0xc2, 0x1a, 0xc9, 0xb5, 0x5f, 0x17}}
 
+var specIXpsRasterizationFactory_CreateRasterizer = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// CreateRasterizer dispatches through IXpsRasterizationFactory's vtable slot 3.
+func (self *IXpsRasterizationFactory) CreateRasterizer(xpsPage *storagexps.IXpsOMPage, DPI float32, nonTextRenderingMode XPSRAS_RENDERING_MODE, textRenderingMode XPSRAS_RENDERING_MODE, ppIXPSRasterizer **IXpsRasterizer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIXpsRasterizationFactory_CreateRasterizer, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xpsPage)), uintptr(math.Float32bits(DPI)), uintptr(nonTextRenderingMode), uintptr(textRenderingMode), uintptr(unsafe.Pointer(ppIXPSRasterizer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 2d6e5f77-6414-4a1e-a8e0-d4194ce6a26f
 type IXpsRasterizationFactory1 struct {
 	systemcom.IUnknown
@@ -2643,6 +2670,14 @@ type IXpsRasterizationFactory1 struct {
 // IID_IXpsRasterizationFactory1 is the interface identifier for IXpsRasterizationFactory1.
 var IID_IXpsRasterizationFactory1 = win32.GUID{Data1: 0x2d6e5f77, Data2: 0x6414, Data3: 0x4a1e, Data4: [8]byte{0xa8, 0xe0, 0xd4, 0x19, 0x4c, 0xe6, 0xa2, 0x6f}}
 
+var specIXpsRasterizationFactory1_CreateRasterizer = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// CreateRasterizer dispatches through IXpsRasterizationFactory1's vtable slot 3.
+func (self *IXpsRasterizationFactory1) CreateRasterizer(xpsPage *storagexps.IXpsOMPage, DPI float32, nonTextRenderingMode XPSRAS_RENDERING_MODE, textRenderingMode XPSRAS_RENDERING_MODE, pixelFormat XPSRAS_PIXEL_FORMAT, ppIXPSRasterizer **IXpsRasterizer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIXpsRasterizationFactory1_CreateRasterizer, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xpsPage)), uintptr(math.Float32bits(DPI)), uintptr(nonTextRenderingMode), uintptr(textRenderingMode), uintptr(pixelFormat), uintptr(unsafe.Pointer(ppIXPSRasterizer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 9c16ce3e-10f5-41fd-9ddc-6826669c2ff6
 type IXpsRasterizationFactory2 struct {
 	systemcom.IUnknown
@@ -2650,6 +2685,14 @@ type IXpsRasterizationFactory2 struct {
 
 // IID_IXpsRasterizationFactory2 is the interface identifier for IXpsRasterizationFactory2.
 var IID_IXpsRasterizationFactory2 = win32.GUID{Data1: 0x9c16ce3e, Data2: 0x10f5, Data3: 0x41fd, Data4: [8]byte{0x9d, 0xdc, 0x68, 0x26, 0x66, 0x9c, 0x2f, 0xf6}}
+
+var specIXpsRasterizationFactory2_CreateRasterizer = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// CreateRasterizer dispatches through IXpsRasterizationFactory2's vtable slot 3.
+func (self *IXpsRasterizationFactory2) CreateRasterizer(xpsPage *storagexps.IXpsOMPage, DPIX float32, DPIY float32, nonTextRenderingMode XPSRAS_RENDERING_MODE, textRenderingMode XPSRAS_RENDERING_MODE, pixelFormat XPSRAS_PIXEL_FORMAT, backgroundColor XPSRAS_BACKGROUND_COLOR, ppIXpsRasterizer **IXpsRasterizer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIXpsRasterizationFactory2_CreateRasterizer, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xpsPage)), uintptr(math.Float32bits(DPIX)), uintptr(math.Float32bits(DPIY)), uintptr(nonTextRenderingMode), uintptr(textRenderingMode), uintptr(pixelFormat), uintptr(backgroundColor), uintptr(unsafe.Pointer(ppIXpsRasterizer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IID: 7567cfc8-c156-47a8-9dac-11a2ae5bdd6b
 type IXpsRasterizer struct {

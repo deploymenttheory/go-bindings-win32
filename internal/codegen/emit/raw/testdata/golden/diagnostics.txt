@@ -1,0 +1,5 @@
+[Test.Shapes] cycle break: Struct Test.Other.OTHER_STRUCT not representable without import
+function FloatReturnLastErr: float32 return with SetLastError not marshalable, function skipped
+function GetCurrentThing: DLL "FORCEINLINE" is not a loadable module and no [Constant] value is recorded, skipped
+function Test.Shapes: bare name Taken taken, keeping TakenW
+informational-success entry Data.Xml.XmlLite.IXmlReader.Read matched no emitted API (stale entry?)

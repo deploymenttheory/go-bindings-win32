@@ -40,6 +40,56 @@ var (
 	procReplaceTextA         = modCOMDLG32.NewProc("ReplaceTextA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ChooseColor          *win32.Proc
+	ChooseColorA         *win32.Proc
+	ChooseFont           *win32.Proc
+	ChooseFontA          *win32.Proc
+	CommDlgExtendedError *win32.Proc
+	FindText             *win32.Proc
+	FindTextA            *win32.Proc
+	GetFileTitle         *win32.Proc
+	GetFileTitleA        *win32.Proc
+	GetOpenFileName      *win32.Proc
+	GetOpenFileNameA     *win32.Proc
+	GetSaveFileName      *win32.Proc
+	GetSaveFileNameA     *win32.Proc
+	PageSetupDlg         *win32.Proc
+	PageSetupDlgA        *win32.Proc
+	PrintDlg             *win32.Proc
+	PrintDlgA            *win32.Proc
+	PrintDlgEx           *win32.Proc
+	PrintDlgExA          *win32.Proc
+	ReplaceText          *win32.Proc
+	ReplaceTextA         *win32.Proc
+}{
+	ChooseColor:          procChooseColor,
+	ChooseColorA:         procChooseColorA,
+	ChooseFont:           procChooseFont,
+	ChooseFontA:          procChooseFontA,
+	CommDlgExtendedError: procCommDlgExtendedError,
+	FindText:             procFindText,
+	FindTextA:            procFindTextA,
+	GetFileTitle:         procGetFileTitle,
+	GetFileTitleA:        procGetFileTitleA,
+	GetOpenFileName:      procGetOpenFileName,
+	GetOpenFileNameA:     procGetOpenFileNameA,
+	GetSaveFileName:      procGetSaveFileName,
+	GetSaveFileNameA:     procGetSaveFileNameA,
+	PageSetupDlg:         procPageSetupDlg,
+	PageSetupDlgA:        procPageSetupDlgA,
+	PrintDlg:             procPrintDlg,
+	PrintDlgA:            procPrintDlgA,
+	PrintDlgEx:           procPrintDlgEx,
+	PrintDlgExA:          procPrintDlgExA,
+	ReplaceText:          procReplaceText,
+	ReplaceTextA:         procReplaceTextA,
+}
+
 // ChooseColor calls COMDLG32!ChooseColorW.
 // https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-choosecolorw
 func ChooseColor(param0 *CHOOSECOLORW) bool {

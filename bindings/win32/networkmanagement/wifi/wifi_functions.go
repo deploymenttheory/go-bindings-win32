@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	securityextensibleauthenticationprotocol "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/extensibleauthenticationprotocol"
 )
 
 var (
@@ -72,6 +73,7 @@ var (
 	procWlanSetInterface                         = modwlanapi.NewProc("WlanSetInterface")
 	procWlanSetProfile                           = modwlanapi.NewProc("WlanSetProfile")
 	procWlanSetProfileCustomUserData             = modwlanapi.NewProc("WlanSetProfileCustomUserData")
+	procWlanSetProfileEapUserData                = modwlanapi.NewProc("WlanSetProfileEapUserData")
 	procWlanSetProfileEapXmlUserData             = modwlanapi.NewProc("WlanSetProfileEapXmlUserData")
 	procWlanSetProfileList                       = modwlanapi.NewProc("WlanSetProfileList")
 	procWlanSetProfilePosition                   = modwlanapi.NewProc("WlanSetProfilePosition")
@@ -79,6 +81,136 @@ var (
 	procWlanSetSecuritySettings                  = modwlanapi.NewProc("WlanSetSecuritySettings")
 	procWlanUIEditProfile                        = modwlanui.NewProc("WlanUIEditProfile")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WFDCancelOpenSession                     *win32.Proc
+	WFDCloseHandle                           *win32.Proc
+	WFDCloseSession                          *win32.Proc
+	WFDOpenHandle                            *win32.Proc
+	WFDOpenLegacySession                     *win32.Proc
+	WFDStartOpenSession                      *win32.Proc
+	WFDUpdateDeviceVisibility                *win32.Proc
+	WlanAllocateMemory                       *win32.Proc
+	WlanCloseHandle                          *win32.Proc
+	WlanConnect                              *win32.Proc
+	WlanConnect2                             *win32.Proc
+	WlanDeleteProfile                        *win32.Proc
+	WlanDeviceServiceCommand                 *win32.Proc
+	WlanDisconnect                           *win32.Proc
+	WlanEnumInterfaces                       *win32.Proc
+	WlanExtractPsdIEDataList                 *win32.Proc
+	WlanFreeMemory                           *win32.Proc
+	WlanGetAvailableNetworkList              *win32.Proc
+	WlanGetAvailableNetworkList2             *win32.Proc
+	WlanGetFilterList                        *win32.Proc
+	WlanGetInterfaceCapability               *win32.Proc
+	WlanGetNetworkBssList                    *win32.Proc
+	WlanGetProfile                           *win32.Proc
+	WlanGetProfileCustomUserData             *win32.Proc
+	WlanGetProfileList                       *win32.Proc
+	WlanGetSecuritySettings                  *win32.Proc
+	WlanGetSupportedDeviceServices           *win32.Proc
+	WlanHostedNetworkForceStart              *win32.Proc
+	WlanHostedNetworkForceStop               *win32.Proc
+	WlanHostedNetworkInitSettings            *win32.Proc
+	WlanHostedNetworkQueryProperty           *win32.Proc
+	WlanHostedNetworkQuerySecondaryKey       *win32.Proc
+	WlanHostedNetworkQueryStatus             *win32.Proc
+	WlanHostedNetworkRefreshSecuritySettings *win32.Proc
+	WlanHostedNetworkSetProperty             *win32.Proc
+	WlanHostedNetworkSetSecondaryKey         *win32.Proc
+	WlanHostedNetworkStartUsing              *win32.Proc
+	WlanHostedNetworkStopUsing               *win32.Proc
+	WlanIhvControl                           *win32.Proc
+	WlanOpenHandle                           *win32.Proc
+	WlanQueryAutoConfigParameter             *win32.Proc
+	WlanQueryInterface                       *win32.Proc
+	WlanReasonCodeToString                   *win32.Proc
+	WlanRegisterDeviceServiceNotification    *win32.Proc
+	WlanRegisterNotification                 *win32.Proc
+	WlanRegisterVirtualStationNotification   *win32.Proc
+	WlanRenameProfile                        *win32.Proc
+	WlanSaveTemporaryProfile                 *win32.Proc
+	WlanScan                                 *win32.Proc
+	WlanSetAutoConfigParameter               *win32.Proc
+	WlanSetFilterList                        *win32.Proc
+	WlanSetInterface                         *win32.Proc
+	WlanSetProfile                           *win32.Proc
+	WlanSetProfileCustomUserData             *win32.Proc
+	WlanSetProfileEapUserData                *win32.Proc
+	WlanSetProfileEapXmlUserData             *win32.Proc
+	WlanSetProfileList                       *win32.Proc
+	WlanSetProfilePosition                   *win32.Proc
+	WlanSetPsdIEDataList                     *win32.Proc
+	WlanSetSecuritySettings                  *win32.Proc
+	WlanUIEditProfile                        *win32.Proc
+}{
+	WFDCancelOpenSession:                     procWFDCancelOpenSession,
+	WFDCloseHandle:                           procWFDCloseHandle,
+	WFDCloseSession:                          procWFDCloseSession,
+	WFDOpenHandle:                            procWFDOpenHandle,
+	WFDOpenLegacySession:                     procWFDOpenLegacySession,
+	WFDStartOpenSession:                      procWFDStartOpenSession,
+	WFDUpdateDeviceVisibility:                procWFDUpdateDeviceVisibility,
+	WlanAllocateMemory:                       procWlanAllocateMemory,
+	WlanCloseHandle:                          procWlanCloseHandle,
+	WlanConnect:                              procWlanConnect,
+	WlanConnect2:                             procWlanConnect2,
+	WlanDeleteProfile:                        procWlanDeleteProfile,
+	WlanDeviceServiceCommand:                 procWlanDeviceServiceCommand,
+	WlanDisconnect:                           procWlanDisconnect,
+	WlanEnumInterfaces:                       procWlanEnumInterfaces,
+	WlanExtractPsdIEDataList:                 procWlanExtractPsdIEDataList,
+	WlanFreeMemory:                           procWlanFreeMemory,
+	WlanGetAvailableNetworkList:              procWlanGetAvailableNetworkList,
+	WlanGetAvailableNetworkList2:             procWlanGetAvailableNetworkList2,
+	WlanGetFilterList:                        procWlanGetFilterList,
+	WlanGetInterfaceCapability:               procWlanGetInterfaceCapability,
+	WlanGetNetworkBssList:                    procWlanGetNetworkBssList,
+	WlanGetProfile:                           procWlanGetProfile,
+	WlanGetProfileCustomUserData:             procWlanGetProfileCustomUserData,
+	WlanGetProfileList:                       procWlanGetProfileList,
+	WlanGetSecuritySettings:                  procWlanGetSecuritySettings,
+	WlanGetSupportedDeviceServices:           procWlanGetSupportedDeviceServices,
+	WlanHostedNetworkForceStart:              procWlanHostedNetworkForceStart,
+	WlanHostedNetworkForceStop:               procWlanHostedNetworkForceStop,
+	WlanHostedNetworkInitSettings:            procWlanHostedNetworkInitSettings,
+	WlanHostedNetworkQueryProperty:           procWlanHostedNetworkQueryProperty,
+	WlanHostedNetworkQuerySecondaryKey:       procWlanHostedNetworkQuerySecondaryKey,
+	WlanHostedNetworkQueryStatus:             procWlanHostedNetworkQueryStatus,
+	WlanHostedNetworkRefreshSecuritySettings: procWlanHostedNetworkRefreshSecuritySettings,
+	WlanHostedNetworkSetProperty:             procWlanHostedNetworkSetProperty,
+	WlanHostedNetworkSetSecondaryKey:         procWlanHostedNetworkSetSecondaryKey,
+	WlanHostedNetworkStartUsing:              procWlanHostedNetworkStartUsing,
+	WlanHostedNetworkStopUsing:               procWlanHostedNetworkStopUsing,
+	WlanIhvControl:                           procWlanIhvControl,
+	WlanOpenHandle:                           procWlanOpenHandle,
+	WlanQueryAutoConfigParameter:             procWlanQueryAutoConfigParameter,
+	WlanQueryInterface:                       procWlanQueryInterface,
+	WlanReasonCodeToString:                   procWlanReasonCodeToString,
+	WlanRegisterDeviceServiceNotification:    procWlanRegisterDeviceServiceNotification,
+	WlanRegisterNotification:                 procWlanRegisterNotification,
+	WlanRegisterVirtualStationNotification:   procWlanRegisterVirtualStationNotification,
+	WlanRenameProfile:                        procWlanRenameProfile,
+	WlanSaveTemporaryProfile:                 procWlanSaveTemporaryProfile,
+	WlanScan:                                 procWlanScan,
+	WlanSetAutoConfigParameter:               procWlanSetAutoConfigParameter,
+	WlanSetFilterList:                        procWlanSetFilterList,
+	WlanSetInterface:                         procWlanSetInterface,
+	WlanSetProfile:                           procWlanSetProfile,
+	WlanSetProfileCustomUserData:             procWlanSetProfileCustomUserData,
+	WlanSetProfileEapUserData:                procWlanSetProfileEapUserData,
+	WlanSetProfileEapXmlUserData:             procWlanSetProfileEapXmlUserData,
+	WlanSetProfileList:                       procWlanSetProfileList,
+	WlanSetProfilePosition:                   procWlanSetProfilePosition,
+	WlanSetPsdIEDataList:                     procWlanSetPsdIEDataList,
+	WlanSetSecuritySettings:                  procWlanSetSecuritySettings,
+	WlanUIEditProfile:                        procWlanUIEditProfile,
+}
 
 // WFDCancelOpenSession calls wlanapi!WFDCancelOpenSession.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wfdcancelopensession
@@ -495,9 +627,9 @@ func WlanRenameProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GU
 // WlanSaveTemporaryProfile calls wlanapi!WlanSaveTemporaryProfile.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansavetemporaryprofile
 // Minimum OS: windows6.0.6000.
-func WlanSaveTemporaryProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, strProfileName string, strAllUserProfileSecurity string, dwFlags uint32, bOverWrite bool) uint32 {
+func WlanSaveTemporaryProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, strProfileName string, strAllUserProfileSecurity *string, dwFlags uint32, bOverWrite bool) uint32 {
 	_strProfileName := win32.UTF16Ptr(strProfileName)
-	_strAllUserProfileSecurity := win32.UTF16Ptr(strAllUserProfileSecurity)
+	_strAllUserProfileSecurity := win32.UTF16PtrOrNil(strAllUserProfileSecurity)
 	_bOverWrite := win32.Bool32(bOverWrite)
 	r1, _, _ := syscall.SyscallN(procWlanSaveTemporaryProfile.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(unsafe.Pointer(_strAllUserProfileSecurity)), uintptr(dwFlags), uintptr(_bOverWrite), 0)
 	return uint32(r1)
@@ -546,9 +678,9 @@ func WlanSetInterface(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUI
 // WlanSetProfile calls wlanapi!WlanSetProfile.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofile
 // Minimum OS: windows6.0.6000.
-func WlanSetProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, dwFlags uint32, strProfileXml string, strAllUserProfileSecurity string, bOverwrite bool, pdwReasonCode *uint32) uint32 {
+func WlanSetProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, dwFlags uint32, strProfileXml string, strAllUserProfileSecurity *string, bOverwrite bool, pdwReasonCode *uint32) uint32 {
 	_strProfileXml := win32.UTF16Ptr(strProfileXml)
-	_strAllUserProfileSecurity := win32.UTF16Ptr(strAllUserProfileSecurity)
+	_strAllUserProfileSecurity := win32.UTF16PtrOrNil(strAllUserProfileSecurity)
 	_bOverwrite := win32.Bool32(bOverwrite)
 	r1, _, _ := syscall.SyscallN(procWlanSetProfile.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(dwFlags), uintptr(unsafe.Pointer(_strProfileXml)), uintptr(unsafe.Pointer(_strAllUserProfileSecurity)), uintptr(_bOverwrite), 0, uintptr(unsafe.Pointer(pdwReasonCode)))
 	return uint32(r1)
@@ -564,6 +696,21 @@ func WlanSetProfileCustomUserData(hClientHandle foundation.HANDLE, pInterfaceGui
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWlanSetProfileCustomUserData.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)), 0)
+	return uint32(r1)
+}
+
+var specWlanSetProfileEapUserData = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// WlanSetProfileEapUserData calls wlanapi!WlanSetProfileEapUserData.
+// https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofileeapuserdata
+// Minimum OS: windows6.0.6000.
+func WlanSetProfileEapUserData(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, strProfileName string, eapType securityextensibleauthenticationprotocol.EAP_METHOD_TYPE, dwFlags WLAN_SET_EAPHOST_FLAGS, pbEapUserData []byte) uint32 {
+	_strProfileName := win32.UTF16Ptr(strProfileName)
+	var _pbEapUserData *byte
+	if len(pbEapUserData) > 0 {
+		_pbEapUserData = &pbEapUserData[0]
+	}
+	r1, _, _ := win32.Call(procWlanSetProfileEapUserData.Addr(), specWlanSetProfileEapUserData, nil, uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(unsafe.Pointer(&eapType)), uintptr(dwFlags), uintptr(len(pbEapUserData)), uintptr(unsafe.Pointer(_pbEapUserData)), 0).Tuple()
 	return uint32(r1)
 }
 
@@ -601,8 +748,8 @@ func WlanSetProfilePosition(hClientHandle foundation.HANDLE, pInterfaceGuid *win
 // WlanSetPsdIEDataList calls wlanapi!WlanSetPsdIEDataList.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetpsdiedatalist
 // Minimum OS: windows6.0.6000.
-func WlanSetPsdIEDataList(hClientHandle foundation.HANDLE, strFormat string, pPsdIEDataList *WLAN_RAW_DATA_LIST) uint32 {
-	_strFormat := win32.UTF16Ptr(strFormat)
+func WlanSetPsdIEDataList(hClientHandle foundation.HANDLE, strFormat *string, pPsdIEDataList *WLAN_RAW_DATA_LIST) uint32 {
+	_strFormat := win32.UTF16PtrOrNil(strFormat)
 	r1, _, _ := syscall.SyscallN(procWlanSetPsdIEDataList.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(_strFormat)), uintptr(unsafe.Pointer(pPsdIEDataList)), 0)
 	return uint32(r1)
 }

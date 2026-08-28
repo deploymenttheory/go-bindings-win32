@@ -4,6 +4,7 @@
 
 package apo
 
-// FNAPONOTIFICATIONCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*APO_REG_PROPERTIES, unsafe.Pointer) foundation.HRESULT.
+// FNAPONOTIFICATIONCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*APO_REG_PROPERTIES, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNAPONOTIFICATIONCALLBACK uintptr

@@ -1,3 +1,5 @@
+//go:build windows
+
 // Package win32 is the runtime layer for the generated Win32 bindings.
 //
 // It is the only package the generated code (and its consumers) need beyond
@@ -38,6 +40,15 @@ func LastError(errno Errno) error {
 
 // Bool32 converts a Go bool to the Win32 BOOL word (1/0).
 func Bool32(v bool) int32 {
+	if v {
+		return 1
+	}
+	return 0
+}
+
+// Bool8 converts a Go bool to a C bool / BOOLEAN byte (1/0) for by-value
+// parameters declared with the one-byte C++ bool type.
+func Bool8(v bool) uint8 {
 	if v {
 		return 1
 	}
@@ -86,6 +97,20 @@ func UTF16Ptr(s string) *uint16 {
 	return p
 }
 
+// Str returns a pointer to s, for [Optional] string parameters typed
+// *string: nil passes NULL, Str("") passes the empty string L"".
+func Str(s string) *string { return &s }
+
+// UTF16PtrOrNil converts an optional string parameter: a nil *string yields
+// a NULL pointer, anything else its NUL-terminated UTF-16 form (panicking on
+// an embedded NUL, like UTF16Ptr).
+func UTF16PtrOrNil(s *string) *uint16 {
+	if s == nil {
+		return nil
+	}
+	return UTF16Ptr(*s)
+}
+
 // UTF16ToString converts a NUL-terminated UTF-16 pointer back to a Go string.
 // A nil pointer yields "".
 func UTF16ToString(p *uint16) string {
@@ -116,6 +141,22 @@ func UTF16ToString(p *uint16) string {
 // is 1, 2, 4 or 8 bytes. Anything larger travels by reference under the same
 // ABI and would need a different shape entirely, so it panics rather than
 // silently passing a truncated value the callee would read as garbage.
+// StructRet reconstructs a by-value struct of 1, 2, 4 or 8 bytes from the
+// syscall result word: the x64 convention returns such an aggregate from a
+// non-member function in RAX as if it were an integer, and ARM64 returns a
+// non-float aggregate of up to 8 bytes in X0. The generator emits this only
+// for those sizes (and never for a float aggregate, which ARM64 returns in
+// V registers); anything larger panics rather than yielding garbage.
+func StructRet[T any](word uintptr) T {
+	var value T
+	if unsafe.Sizeof(value) > unsafe.Sizeof(word) {
+		panic("win32: by-value struct is too large to return in a register")
+	}
+	// The low bytes of the word are the struct's bytes (little-endian).
+	value = *(*T)(unsafe.Pointer(&word))
+	return value
+}
+
 func StructArg[T any](v T) uintptr {
 	var word uintptr
 	if unsafe.Sizeof(v) > unsafe.Sizeof(word) {

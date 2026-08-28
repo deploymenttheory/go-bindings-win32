@@ -5,6 +5,7 @@
 package directshow
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -197,9 +198,25 @@ func (self *IAMAudioInputMixer) Get_Mono(pfMono *foundation.BOOL) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAMAudioInputMixer_Put_MixLevel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_MixLevel dispatches through IAMAudioInputMixer's vtable slot 7.
+func (self *IAMAudioInputMixer) Put_MixLevel(Level float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIAMAudioInputMixer_Put_MixLevel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Level))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_MixLevel dispatches through IAMAudioInputMixer's vtable slot 8.
 func (self *IAMAudioInputMixer) Get_MixLevel(pLevel *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLevel)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAMAudioInputMixer_Put_Pan = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_Pan dispatches through IAMAudioInputMixer's vtable slot 9.
+func (self *IAMAudioInputMixer) Put_Pan(Pan float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIAMAudioInputMixer_Put_Pan, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Pan))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -222,6 +239,14 @@ func (self *IAMAudioInputMixer) Get_Loudness(pfLoudness *foundation.BOOL) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAMAudioInputMixer_Put_Treble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_Treble dispatches through IAMAudioInputMixer's vtable slot 13.
+func (self *IAMAudioInputMixer) Put_Treble(Treble float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIAMAudioInputMixer_Put_Treble, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Treble))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Treble dispatches through IAMAudioInputMixer's vtable slot 14.
 func (self *IAMAudioInputMixer) Get_Treble(pTreble *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTreble)))
@@ -231,6 +256,14 @@ func (self *IAMAudioInputMixer) Get_Treble(pTreble *float64) error {
 // Get_TrebleRange dispatches through IAMAudioInputMixer's vtable slot 15.
 func (self *IAMAudioInputMixer) Get_TrebleRange(pRange *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAMAudioInputMixer_Put_Bass = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_Bass dispatches through IAMAudioInputMixer's vtable slot 16.
+func (self *IAMAudioInputMixer) Put_Bass(Bass float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIAMAudioInputMixer_Put_Bass, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Bass))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -854,6 +887,14 @@ func (self *IAMExtTransport) Get_Mode(pMode *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAMExtTransport_Put_Rate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_Rate dispatches through IAMExtTransport's vtable slot 17.
+func (self *IAMExtTransport) Put_Rate(dblRate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIAMExtTransport_Put_Rate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dblRate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Rate dispatches through IAMExtTransport's vtable slot 18.
 func (self *IAMExtTransport) Get_Rate(pdblRate *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdblRate)))
@@ -995,6 +1036,14 @@ func (self *IAMExtendedSeeking) GetMarkerTime(MarkerNum int32, pMarkerTime *floa
 // GetMarkerName dispatches through IAMExtendedSeeking's vtable slot 11.
 func (self *IAMExtendedSeeking) GetMarkerName(MarkerNum int32, pbstrMarkerName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(MarkerNum), uintptr(unsafe.Pointer(pbstrMarkerName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAMExtendedSeeking_Put_PlaybackSpeed = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_PlaybackSpeed dispatches through IAMExtendedSeeking's vtable slot 12.
+func (self *IAMExtendedSeeking) Put_PlaybackSpeed(Speed float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIAMExtendedSeeking_Put_PlaybackSpeed, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Speed))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1560,6 +1609,14 @@ var IID_IAMNetShowConfig = win32.GUID{Data1: 0xfa2aa8f1, Data2: 0x8b62, Data3: 0
 // Get_BufferingTime dispatches through IAMNetShowConfig's vtable slot 7.
 func (self *IAMNetShowConfig) Get_BufferingTime(pBufferingTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBufferingTime)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAMNetShowConfig_Put_BufferingTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_BufferingTime dispatches through IAMNetShowConfig's vtable slot 8.
+func (self *IAMNetShowConfig) Put_BufferingTime(BufferingTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIAMNetShowConfig_Put_BufferingTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(BufferingTime))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2184,6 +2241,14 @@ func (self *IAMStats) GetValueByName(szName foundation.BSTR, lIndex *int32, lCou
 // GetIndex dispatches through IAMStats's vtable slot 11.
 func (self *IAMStats) GetIndex(szName foundation.BSTR, lCreate int32, plIndex *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(lCreate), uintptr(unsafe.Pointer(plIndex)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAMStats_AddValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64}}
+
+// AddValue dispatches through IAMStats's vtable slot 12.
+func (self *IAMStats) AddValue(lIndex int32, dValue float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIAMStats_AddValue, nil, uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(math.Float64bits(dValue))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2851,6 +2916,14 @@ func (self *IAMVideoCompression) Get_PFramesPerKeyFrame(pPFramesPerKeyFrame *int
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAMVideoCompression_Put_Quality = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_Quality dispatches through IAMVideoCompression's vtable slot 7.
+func (self *IAMVideoCompression) Put_Quality(Quality float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIAMVideoCompression_Put_Quality, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Quality))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Quality dispatches through IAMVideoCompression's vtable slot 8.
 func (self *IAMVideoCompression) Get_Quality(pQuality *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pQuality)))
@@ -3121,6 +3194,14 @@ func (self *IAMWstDecoder) GetHoldPage(pbHoldPage *foundation.BOOL) error {
 // GetCurrentPage dispatches through IAMWstDecoder's vtable slot 19.
 func (self *IAMWstDecoder) GetCurrentPage(pWstPage *AM_WST_PAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWstPage)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAMWstDecoder_SetCurrentPage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false)}}
+
+// SetCurrentPage dispatches through IAMWstDecoder's vtable slot 20.
+func (self *IAMWstDecoder) SetCurrentPage(WstPage AM_WST_PAGE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIAMWstDecoder_SetCurrentPage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&WstPage))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4975,8 +5056,8 @@ func (self *IBaseFilter) QueryFilterInfo(pInfo *FILTER_INFO) error {
 }
 
 // JoinFilterGraph dispatches through IBaseFilter's vtable slot 13.
-func (self *IBaseFilter) JoinFilterGraph(pGraph *IFilterGraph, pName string) error {
-	_pName := win32.UTF16Ptr(pName)
+func (self *IBaseFilter) JoinFilterGraph(pGraph *IFilterGraph, pName *string) error {
+	_pName := win32.UTF16PtrOrNil(pName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGraph)), uintptr(unsafe.Pointer(_pName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -5295,6 +5376,14 @@ type IBroadcastEvent struct {
 // IID_IBroadcastEvent is the interface identifier for IBroadcastEvent.
 var IID_IBroadcastEvent = win32.GUID{Data1: 0x3b21263f, Data2: 0x26e8, Data3: 0x489d, Data4: [8]byte{0xaa, 0xc4, 0x92, 0x4f, 0x7e, 0xfd, 0x95, 0x11}}
 
+var specIBroadcastEvent_Fire = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Fire dispatches through IBroadcastEvent's vtable slot 3.
+func (self *IBroadcastEvent) Fire(EventID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIBroadcastEvent_Fire, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&EventID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IBroadcastEventEx: https://learn.microsoft.com/windows/win32/api/tuner/nn-tuner-ibroadcasteventex
 // IID: 3d9e3887-1929-423f-8021-43682de95448
 type IBroadcastEventEx struct {
@@ -5303,6 +5392,14 @@ type IBroadcastEventEx struct {
 
 // IID_IBroadcastEventEx is the interface identifier for IBroadcastEventEx.
 var IID_IBroadcastEventEx = win32.GUID{Data1: 0x3d9e3887, Data2: 0x1929, Data3: 0x423f, Data4: [8]byte{0x80, 0x21, 0x43, 0x68, 0x2d, 0xe9, 0x54, 0x48}}
+
+var specIBroadcastEventEx_FireEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// FireEx dispatches through IBroadcastEventEx's vtable slot 4.
+func (self *IBroadcastEventEx) FireEx(EventID win32.GUID, Param1 uint32, Param2 uint32, Param3 uint32, Param4 uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIBroadcastEventEx_FireEx, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&EventID)), uintptr(Param1), uintptr(Param2), uintptr(Param3), uintptr(Param4)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IID: 1e00486a-78dd-11d2-8dd3-006097c9a2b2
 type IBufferingTime struct {
@@ -6174,6 +6271,14 @@ func (self *IDeferredCommand) Confidence(pConfidence *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDeferredCommand_Postpone = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Postpone dispatches through IDeferredCommand's vtable slot 5.
+func (self *IDeferredCommand) Postpone(newtime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDeferredCommand_Postpone, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(newtime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetHResult dispatches through IDeferredCommand's vtable slot 6.
 func (self *IDeferredCommand) GetHResult(phrResult *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrResult)))
@@ -6543,6 +6648,22 @@ func (self *IDvdControl) NextPGSearch() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDvdControl_ForwardScan = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// ForwardScan dispatches through IDvdControl's vtable slot 13.
+func (self *IDvdControl) ForwardScan(dwSpeed float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDvdControl_ForwardScan, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dwSpeed))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDvdControl_BackwardScan = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// BackwardScan dispatches through IDvdControl's vtable slot 14.
+func (self *IDvdControl) BackwardScan(dwSpeed float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDvdControl_BackwardScan, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dwSpeed))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MenuCall dispatches through IDvdControl's vtable slot 15.
 func (self *IDvdControl) MenuCall(MenuID DVD_MENU_ID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(MenuID))
@@ -6749,6 +6870,22 @@ func (self *IDvdControl2) ReplayChapter(dwFlags uint32, ppCmd **IDvdCmd) error {
 // PlayNextChapter dispatches through IDvdControl2's vtable slot 12.
 func (self *IDvdControl2) PlayNextChapter(dwFlags uint32, ppCmd **IDvdCmd) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDvdControl2_PlayForwards = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word}}
+
+// PlayForwards dispatches through IDvdControl2's vtable slot 13.
+func (self *IDvdControl2) PlayForwards(dSpeed float64, dwFlags uint32, ppCmd **IDvdCmd) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDvdControl2_PlayForwards, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dSpeed)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDvdControl2_PlayBackwards = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word}}
+
+// PlayBackwards dispatches through IDvdControl2's vtable slot 14.
+func (self *IDvdControl2) PlayBackwards(dSpeed float64, dwFlags uint32, ppCmd **IDvdCmd) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDvdControl2_PlayBackwards, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dSpeed)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCmd))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7421,6 +7558,14 @@ type IESEvents struct {
 // IID_IESEvents is the interface identifier for IESEvents.
 var IID_IESEvents = win32.GUID{Data1: 0xabd414bf, Data2: 0xcfe5, Data3: 0x4e5e, Data4: [8]byte{0xaf, 0x5b, 0x4b, 0x4e, 0x49, 0xc5, 0xbf, 0xeb}}
 
+var specIESEvents_OnESEventReceived = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// OnESEventReceived dispatches through IESEvents's vtable slot 3.
+func (self *IESEvents) OnESEventReceived(guidEventType win32.GUID, pESEvent *IESEvent) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIESEvents_OnESEventReceived, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidEventType)), uintptr(unsafe.Pointer(pESEvent))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IEncoderAPI: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-iencoderapi
 // IID: 70423839-6acc-4b23-b079-21dbf08156a5
 type IEncoderAPI struct {
@@ -7971,6 +8116,83 @@ type IFilterMapper struct {
 // IID_IFilterMapper is the interface identifier for IFilterMapper.
 var IID_IFilterMapper = win32.GUID{Data1: 0x56a868a3, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
 
+var specIFilterMapper_RegisterFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// RegisterFilter dispatches through IFilterMapper's vtable slot 3.
+func (self *IFilterMapper) RegisterFilter(clsid win32.GUID, Name string, dwMerit uint32) error {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIFilterMapper_RegisterFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&clsid)), uintptr(unsafe.Pointer(_Name)), uintptr(dwMerit)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFilterMapper_RegisterFilterInstance = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// RegisterFilterInstance dispatches through IFilterMapper's vtable slot 4.
+func (self *IFilterMapper) RegisterFilterInstance(clsid win32.GUID, Name string, MRId *win32.GUID) error {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIFilterMapper_RegisterFilterInstance, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&clsid)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(MRId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFilterMapper_RegisterPin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RegisterPin dispatches through IFilterMapper's vtable slot 5.
+func (self *IFilterMapper) RegisterPin(Filter win32.GUID, Name string, bRendered bool, bOutput bool, bZero bool, bMany bool, ConnectsToFilter win32.GUID, ConnectsToPin string) error {
+	_Name := win32.UTF16Ptr(Name)
+	_bRendered := win32.Bool32(bRendered)
+	_bOutput := win32.Bool32(bOutput)
+	_bZero := win32.Bool32(bZero)
+	_bMany := win32.Bool32(bMany)
+	_ConnectsToPin := win32.UTF16Ptr(ConnectsToPin)
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIFilterMapper_RegisterPin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Filter)), uintptr(unsafe.Pointer(_Name)), uintptr(_bRendered), uintptr(_bOutput), uintptr(_bZero), uintptr(_bMany), uintptr(unsafe.Pointer(&ConnectsToFilter)), uintptr(unsafe.Pointer(_ConnectsToPin))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFilterMapper_RegisterPinType = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// RegisterPinType dispatches through IFilterMapper's vtable slot 6.
+func (self *IFilterMapper) RegisterPinType(clsFilter win32.GUID, strName string, clsMajorType win32.GUID, clsSubType win32.GUID) error {
+	_strName := win32.UTF16Ptr(strName)
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIFilterMapper_RegisterPinType, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&clsFilter)), uintptr(unsafe.Pointer(_strName)), uintptr(unsafe.Pointer(&clsMajorType)), uintptr(unsafe.Pointer(&clsSubType))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFilterMapper_UnregisterFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// UnregisterFilter dispatches through IFilterMapper's vtable slot 7.
+func (self *IFilterMapper) UnregisterFilter(Filter win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIFilterMapper_UnregisterFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Filter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFilterMapper_UnregisterFilterInstance = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// UnregisterFilterInstance dispatches through IFilterMapper's vtable slot 8.
+func (self *IFilterMapper) UnregisterFilterInstance(MRId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIFilterMapper_UnregisterFilterInstance, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&MRId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFilterMapper_UnregisterPin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// UnregisterPin dispatches through IFilterMapper's vtable slot 9.
+func (self *IFilterMapper) UnregisterPin(Filter win32.GUID, Name string) error {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIFilterMapper_UnregisterPin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Filter)), uintptr(unsafe.Pointer(_Name))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIFilterMapper_EnumMatchingFilters = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// EnumMatchingFilters dispatches through IFilterMapper's vtable slot 10.
+func (self *IFilterMapper) EnumMatchingFilters(ppEnum **IEnumRegFilters, dwMerit uint32, bInputNeeded bool, clsInMaj win32.GUID, clsInSub win32.GUID, bRender bool, bOututNeeded bool, clsOutMaj win32.GUID, clsOutSub win32.GUID) error {
+	_bInputNeeded := win32.Bool32(bInputNeeded)
+	_bRender := win32.Bool32(bRender)
+	_bOututNeeded := win32.Bool32(bOututNeeded)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIFilterMapper_EnumMatchingFilters, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)), uintptr(dwMerit), uintptr(_bInputNeeded), uintptr(unsafe.Pointer(&clsInMaj)), uintptr(unsafe.Pointer(&clsInSub)), uintptr(_bRender), uintptr(_bOututNeeded), uintptr(unsafe.Pointer(&clsOutMaj)), uintptr(unsafe.Pointer(&clsOutSub))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IFilterMapper2: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ifiltermapper2
 // IID: b79bb0b0-33c1-11d1-abe1-00a0c905f375
 type IFilterMapper2 struct {
@@ -8256,17 +8478,17 @@ func (self *IGraphBuilder) Render(ppinOut *IPin) error {
 }
 
 // RenderFile dispatches through IGraphBuilder's vtable slot 13.
-func (self *IGraphBuilder) RenderFile(lpcwstrFile string, lpcwstrPlayList string) error {
+func (self *IGraphBuilder) RenderFile(lpcwstrFile string, lpcwstrPlayList *string) error {
 	_lpcwstrFile := win32.UTF16Ptr(lpcwstrFile)
-	_lpcwstrPlayList := win32.UTF16Ptr(lpcwstrPlayList)
+	_lpcwstrPlayList := win32.UTF16PtrOrNil(lpcwstrPlayList)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpcwstrFile)), uintptr(unsafe.Pointer(_lpcwstrPlayList)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AddSourceFilter dispatches through IGraphBuilder's vtable slot 14.
-func (self *IGraphBuilder) AddSourceFilter(lpcwstrFileName string, lpcwstrFilterName string, ppFilter **IBaseFilter) error {
+func (self *IGraphBuilder) AddSourceFilter(lpcwstrFileName string, lpcwstrFilterName *string, ppFilter **IBaseFilter) error {
 	_lpcwstrFileName := win32.UTF16Ptr(lpcwstrFileName)
-	_lpcwstrFilterName := win32.UTF16Ptr(lpcwstrFilterName)
+	_lpcwstrFilterName := win32.UTF16PtrOrNil(lpcwstrFilterName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpcwstrFileName)), uintptr(unsafe.Pointer(_lpcwstrFilterName)), uintptr(unsafe.Pointer(ppFilter)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -8722,6 +8944,14 @@ func (self *IMediaParams) GetParam(dwParamIndex uint32, pValue *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMediaParams_SetParam = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetParam dispatches through IMediaParams's vtable slot 4.
+func (self *IMediaParams) SetParam(dwParamIndex uint32, value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIMediaParams_SetParam, nil, uintptr(unsafe.Pointer(self)), uintptr(dwParamIndex), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddEnvelope dispatches through IMediaParams's vtable slot 5.
 func (self *IMediaParams) AddEnvelope(dwParamIndex uint32, cSegments uint32, pEnvelopeSegments *MP_ENVELOPE_SEGMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwParamIndex), uintptr(cSegments), uintptr(unsafe.Pointer(pEnvelopeSegments)))
@@ -8731,6 +8961,14 @@ func (self *IMediaParams) AddEnvelope(dwParamIndex uint32, cSegments uint32, pEn
 // FlushEnvelope dispatches through IMediaParams's vtable slot 6.
 func (self *IMediaParams) FlushEnvelope(dwParamIndex uint32, refTimeStart int64, refTimeEnd int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwParamIndex), uintptr(refTimeStart), uintptr(refTimeEnd))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMediaParams_SetTimeFormat = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetTimeFormat dispatches through IMediaParams's vtable slot 7.
+func (self *IMediaParams) SetTimeFormat(guidTimeFormat win32.GUID, mpTimeData uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIMediaParams_SetTimeFormat, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidTimeFormat)), uintptr(mpTimeData)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8749,6 +8987,14 @@ func (self *IMediaPosition) Get_Duration(plength *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMediaPosition_Put_CurrentPosition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_CurrentPosition dispatches through IMediaPosition's vtable slot 8.
+func (self *IMediaPosition) Put_CurrentPosition(llTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIMediaPosition_Put_CurrentPosition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(llTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_CurrentPosition dispatches through IMediaPosition's vtable slot 9.
 func (self *IMediaPosition) Get_CurrentPosition(pllTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllTime)))
@@ -8761,9 +9007,33 @@ func (self *IMediaPosition) Get_StopTime(pllTime *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMediaPosition_Put_StopTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_StopTime dispatches through IMediaPosition's vtable slot 11.
+func (self *IMediaPosition) Put_StopTime(llTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIMediaPosition_Put_StopTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(llTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PrerollTime dispatches through IMediaPosition's vtable slot 12.
 func (self *IMediaPosition) Get_PrerollTime(pllTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllTime)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMediaPosition_Put_PrerollTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_PrerollTime dispatches through IMediaPosition's vtable slot 13.
+func (self *IMediaPosition) Put_PrerollTime(llTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIMediaPosition_Put_PrerollTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(llTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMediaPosition_Put_Rate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_Rate dispatches through IMediaPosition's vtable slot 14.
+func (self *IMediaPosition) Put_Rate(dRate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIMediaPosition_Put_Rate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dRate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9042,6 +9312,14 @@ func (self *IMediaSeeking) GetPositions(pCurrent *int64, pStop *int64) error {
 // GetAvailable dispatches through IMediaSeeking's vtable slot 16.
 func (self *IMediaSeeking) GetAvailable(pEarliest *int64, pLatest *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEarliest)), uintptr(unsafe.Pointer(pLatest)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMediaSeeking_SetRate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetRate dispatches through IMediaSeeking's vtable slot 17.
+func (self *IMediaSeeking) SetRate(dRate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIMediaSeeking_SetRate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dRate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9955,6 +10233,14 @@ func (self *IPin) EndFlush() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIPin_NewSegment = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float64}}
+
+// NewSegment dispatches through IPin's vtable slot 17.
+func (self *IPin) NewSegment(tStart int64, tStop int64, dRate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIPin_NewSegment, nil, uintptr(unsafe.Pointer(self)), uintptr(tStart), uintptr(tStop), uintptr(math.Float64bits(dRate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IPinConnection: https://learn.microsoft.com/windows/win32/api/strmif/nn-strmif-ipinconnection
 // IID: 4a9a62d3-27d4-403d-91e9-89f540e55534
 type IPinConnection struct {
@@ -10143,6 +10429,14 @@ type IQualityControl struct {
 // IID_IQualityControl is the interface identifier for IQualityControl.
 var IID_IQualityControl = win32.GUID{Data1: 0x56a868a5, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
 
+var specIQualityControl_Notify = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Notify dispatches through IQualityControl's vtable slot 3.
+func (self *IQualityControl) Notify(pSelf *IBaseFilter, q Quality) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIQualityControl_Notify, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSelf)), uintptr(unsafe.Pointer(&q))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetSink dispatches through IQualityControl's vtable slot 4.
 func (self *IQualityControl) SetSink(piqc *IQualityControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piqc)))
@@ -10157,6 +10451,22 @@ type IQueueCommand struct {
 
 // IID_IQueueCommand is the interface identifier for IQueueCommand.
 var IID_IQueueCommand = win32.GUID{Data1: 0x56a868b7, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
+
+var specIQueueCommand_InvokeAtStreamTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// InvokeAtStreamTime dispatches through IQueueCommand's vtable slot 3.
+func (self *IQueueCommand) InvokeAtStreamTime(pCmd **IDeferredCommand, time float64, iid *win32.GUID, dispidMethod int32, wFlags int16, cArgs int32, pDispParams *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT, puArgErr *int16) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIQueueCommand_InvokeAtStreamTime, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCmd)), uintptr(math.Float64bits(time)), uintptr(unsafe.Pointer(iid)), uintptr(dispidMethod), uintptr(wFlags), uintptr(cArgs), uintptr(unsafe.Pointer(pDispParams)), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(puArgErr))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIQueueCommand_InvokeAtPresentationTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// InvokeAtPresentationTime dispatches through IQueueCommand's vtable slot 4.
+func (self *IQueueCommand) InvokeAtPresentationTime(pCmd **IDeferredCommand, time float64, iid *win32.GUID, dispidMethod int32, wFlags int16, cArgs int32, pDispParams *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT, puArgErr *int16) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIQueueCommand_InvokeAtPresentationTime, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCmd)), uintptr(math.Float64bits(time)), uintptr(unsafe.Pointer(iid)), uintptr(dispidMethod), uintptr(wFlags), uintptr(cArgs), uintptr(unsafe.Pointer(pDispParams)), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(puArgErr))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IID: 56a868bb-0ad4-11ce-b03a-0020af0ba770
 type IRegFilterInfo struct {
@@ -10889,6 +11199,14 @@ type IVMRMixerControl struct {
 // IID_IVMRMixerControl is the interface identifier for IVMRMixerControl.
 var IID_IVMRMixerControl = win32.GUID{Data1: 0x1c1a17b0, Data2: 0xbed0, Data3: 0x415d, Data4: [8]byte{0x97, 0x4b, 0xdc, 0x66, 0x96, 0x13, 0x15, 0x99}}
 
+var specIVMRMixerControl_SetAlpha = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetAlpha dispatches through IVMRMixerControl's vtable slot 3.
+func (self *IVMRMixerControl) SetAlpha(dwStreamID uint32, Alpha float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVMRMixerControl_SetAlpha, nil, uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(math.Float32bits(Alpha))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetAlpha dispatches through IVMRMixerControl's vtable slot 4.
 func (self *IVMRMixerControl) GetAlpha(dwStreamID uint32, pAlpha *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(unsafe.Pointer(pAlpha)))
@@ -10951,6 +11269,14 @@ type IVMRMixerControl9 struct {
 
 // IID_IVMRMixerControl9 is the interface identifier for IVMRMixerControl9.
 var IID_IVMRMixerControl9 = win32.GUID{Data1: 0x1a777eaa, Data2: 0x47c8, Data3: 0x4930, Data4: [8]byte{0xb2, 0xc9, 0x8f, 0xee, 0x1c, 0x1b, 0x0f, 0x3b}}
+
+var specIVMRMixerControl9_SetAlpha = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetAlpha dispatches through IVMRMixerControl9's vtable slot 3.
+func (self *IVMRMixerControl9) SetAlpha(dwStreamID uint32, Alpha float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVMRMixerControl9_SetAlpha, nil, uintptr(unsafe.Pointer(self)), uintptr(dwStreamID), uintptr(math.Float32bits(Alpha))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetAlpha dispatches through IVMRMixerControl9's vtable slot 4.
 func (self *IVMRMixerControl9) GetAlpha(dwStreamID uint32, pAlpha *float32) error {

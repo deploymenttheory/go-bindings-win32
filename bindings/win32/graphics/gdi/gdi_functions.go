@@ -5,6 +5,7 @@
 package gdi
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -30,6 +31,7 @@ var (
 	procAddFontResourceA                = modGDI32.NewProc("AddFontResourceA")
 	procAddFontResourceEx               = modGDI32.NewProc("AddFontResourceExW")
 	procAddFontResourceExA              = modGDI32.NewProc("AddFontResourceExA")
+	procAngleArc                        = modGDI32.NewProc("AngleArc")
 	procAnimatePalette                  = modGDI32.NewProc("AnimatePalette")
 	procArc                             = modGDI32.NewProc("Arc")
 	procArcTo                           = modGDI32.NewProc("ArcTo")
@@ -296,6 +298,7 @@ var (
 	procSetMapperFlags                  = modGDI32.NewProc("SetMapperFlags")
 	procSetMetaFileBitsEx               = modGDI32.NewProc("SetMetaFileBitsEx")
 	procSetMetaRgn                      = modGDI32.NewProc("SetMetaRgn")
+	procSetMiterLimit                   = modGDI32.NewProc("SetMiterLimit")
 	procSetPaletteEntries               = modGDI32.NewProc("SetPaletteEntries")
 	procSetPixel                        = modGDI32.NewProc("SetPixel")
 	procSetPixelV                       = modGDI32.NewProc("SetPixelV")
@@ -418,6 +421,806 @@ var (
 	procWindowFromDC                    = modUSER32.NewProc("WindowFromDC")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AbortPath                       *win32.Proc
+	AddFontMemResourceEx            *win32.Proc
+	AddFontResource                 *win32.Proc
+	AddFontResourceA                *win32.Proc
+	AddFontResourceEx               *win32.Proc
+	AddFontResourceExA              *win32.Proc
+	AlphaBlend                      *win32.Proc
+	AngleArc                        *win32.Proc
+	AnimatePalette                  *win32.Proc
+	Arc                             *win32.Proc
+	ArcTo                           *win32.Proc
+	BeginPaint                      *win32.Proc
+	BeginPath                       *win32.Proc
+	BitBlt                          *win32.Proc
+	CancelDC                        *win32.Proc
+	ChangeDisplaySettings           *win32.Proc
+	ChangeDisplaySettingsA          *win32.Proc
+	ChangeDisplaySettingsEx         *win32.Proc
+	ChangeDisplaySettingsExA        *win32.Proc
+	Chord                           *win32.Proc
+	ClientToScreen                  *win32.Proc
+	CloseEnhMetaFile                *win32.Proc
+	CloseFigure                     *win32.Proc
+	CloseMetaFile                   *win32.Proc
+	CombineRgn                      *win32.Proc
+	CombineTransform                *win32.Proc
+	CopyEnhMetaFile                 *win32.Proc
+	CopyEnhMetaFileA                *win32.Proc
+	CopyMetaFile                    *win32.Proc
+	CopyMetaFileA                   *win32.Proc
+	CopyRect                        *win32.Proc
+	CreateBitmap                    *win32.Proc
+	CreateBitmapIndirect            *win32.Proc
+	CreateBrushIndirect             *win32.Proc
+	CreateCompatibleBitmap          *win32.Proc
+	CreateCompatibleDC              *win32.Proc
+	CreateDC                        *win32.Proc
+	CreateDCA                       *win32.Proc
+	CreateDIBPatternBrush           *win32.Proc
+	CreateDIBPatternBrushPt         *win32.Proc
+	CreateDIBSection                *win32.Proc
+	CreateDIBitmap                  *win32.Proc
+	CreateDiscardableBitmap         *win32.Proc
+	CreateEllipticRgn               *win32.Proc
+	CreateEllipticRgnIndirect       *win32.Proc
+	CreateEnhMetaFile               *win32.Proc
+	CreateEnhMetaFileA              *win32.Proc
+	CreateFont                      *win32.Proc
+	CreateFontA                     *win32.Proc
+	CreateFontIndirect              *win32.Proc
+	CreateFontIndirectA             *win32.Proc
+	CreateFontIndirectEx            *win32.Proc
+	CreateFontIndirectExA           *win32.Proc
+	CreateFontPackage               *win32.Proc
+	CreateHalftonePalette           *win32.Proc
+	CreateHatchBrush                *win32.Proc
+	CreateIC                        *win32.Proc
+	CreateICA                       *win32.Proc
+	CreateMetaFile                  *win32.Proc
+	CreateMetaFileA                 *win32.Proc
+	CreatePalette                   *win32.Proc
+	CreatePatternBrush              *win32.Proc
+	CreatePen                       *win32.Proc
+	CreatePenIndirect               *win32.Proc
+	CreatePolyPolygonRgn            *win32.Proc
+	CreatePolygonRgn                *win32.Proc
+	CreateRectRgn                   *win32.Proc
+	CreateRectRgnIndirect           *win32.Proc
+	CreateRoundRectRgn              *win32.Proc
+	CreateScalableFontResource      *win32.Proc
+	CreateScalableFontResourceA     *win32.Proc
+	CreateSolidBrush                *win32.Proc
+	DPtoLP                          *win32.Proc
+	DeleteDC                        *win32.Proc
+	DeleteEnhMetaFile               *win32.Proc
+	DeleteMetaFile                  *win32.Proc
+	DeleteObject                    *win32.Proc
+	DrawAnimatedRects               *win32.Proc
+	DrawCaption                     *win32.Proc
+	DrawEdge                        *win32.Proc
+	DrawEscape                      *win32.Proc
+	DrawFocusRect                   *win32.Proc
+	DrawFrameControl                *win32.Proc
+	DrawState                       *win32.Proc
+	DrawStateA                      *win32.Proc
+	DrawText                        *win32.Proc
+	DrawTextA                       *win32.Proc
+	DrawTextEx                      *win32.Proc
+	DrawTextExA                     *win32.Proc
+	Ellipse                         *win32.Proc
+	EndPaint                        *win32.Proc
+	EndPath                         *win32.Proc
+	EnumDisplayDevices              *win32.Proc
+	EnumDisplayDevicesA             *win32.Proc
+	EnumDisplayMonitors             *win32.Proc
+	EnumDisplaySettings             *win32.Proc
+	EnumDisplaySettingsA            *win32.Proc
+	EnumDisplaySettingsEx           *win32.Proc
+	EnumDisplaySettingsExA          *win32.Proc
+	EnumEnhMetaFile                 *win32.Proc
+	EnumFontFamilies                *win32.Proc
+	EnumFontFamiliesA               *win32.Proc
+	EnumFontFamiliesEx              *win32.Proc
+	EnumFontFamiliesExA             *win32.Proc
+	EnumFonts                       *win32.Proc
+	EnumFontsA                      *win32.Proc
+	EnumMetaFile                    *win32.Proc
+	EnumObjects                     *win32.Proc
+	EqualRect                       *win32.Proc
+	EqualRgn                        *win32.Proc
+	ExcludeClipRect                 *win32.Proc
+	ExcludeUpdateRgn                *win32.Proc
+	ExtCreatePen                    *win32.Proc
+	ExtCreateRegion                 *win32.Proc
+	ExtFloodFill                    *win32.Proc
+	ExtSelectClipRgn                *win32.Proc
+	ExtTextOut                      *win32.Proc
+	ExtTextOutA                     *win32.Proc
+	FillPath                        *win32.Proc
+	FillRect                        *win32.Proc
+	FillRgn                         *win32.Proc
+	FixBrushOrgEx                   *win32.Proc
+	FlattenPath                     *win32.Proc
+	FloodFill                       *win32.Proc
+	FrameRect                       *win32.Proc
+	FrameRgn                        *win32.Proc
+	GdiAlphaBlend                   *win32.Proc
+	GdiComment                      *win32.Proc
+	GdiFlush                        *win32.Proc
+	GdiGetBatchLimit                *win32.Proc
+	GdiGradientFill                 *win32.Proc
+	GdiSetBatchLimit                *win32.Proc
+	GdiTransparentBlt               *win32.Proc
+	GetArcDirection                 *win32.Proc
+	GetAspectRatioFilterEx          *win32.Proc
+	GetBitmapBits                   *win32.Proc
+	GetBitmapDimensionEx            *win32.Proc
+	GetBkColor                      *win32.Proc
+	GetBkMode                       *win32.Proc
+	GetBoundsRect                   *win32.Proc
+	GetBrushOrgEx                   *win32.Proc
+	GetCharABCWidths                *win32.Proc
+	GetCharABCWidthsA               *win32.Proc
+	GetCharABCWidthsFloat           *win32.Proc
+	GetCharABCWidthsFloatA          *win32.Proc
+	GetCharABCWidthsI               *win32.Proc
+	GetCharWidth                    *win32.Proc
+	GetCharWidth32                  *win32.Proc
+	GetCharWidth32A                 *win32.Proc
+	GetCharWidthA                   *win32.Proc
+	GetCharWidthFloat               *win32.Proc
+	GetCharWidthFloatA              *win32.Proc
+	GetCharWidthI                   *win32.Proc
+	GetCharacterPlacement           *win32.Proc
+	GetCharacterPlacementA          *win32.Proc
+	GetClipBox                      *win32.Proc
+	GetClipRgn                      *win32.Proc
+	GetColorAdjustment              *win32.Proc
+	GetCurrentObject                *win32.Proc
+	GetCurrentPositionEx            *win32.Proc
+	GetDC                           *win32.Proc
+	GetDCBrushColor                 *win32.Proc
+	GetDCEx                         *win32.Proc
+	GetDCOrgEx                      *win32.Proc
+	GetDCPenColor                   *win32.Proc
+	GetDIBColorTable                *win32.Proc
+	GetDIBits                       *win32.Proc
+	GetDeviceCaps                   *win32.Proc
+	GetEnhMetaFile                  *win32.Proc
+	GetEnhMetaFileA                 *win32.Proc
+	GetEnhMetaFileBits              *win32.Proc
+	GetEnhMetaFileDescription       *win32.Proc
+	GetEnhMetaFileDescriptionA      *win32.Proc
+	GetEnhMetaFileHeader            *win32.Proc
+	GetEnhMetaFilePaletteEntries    *win32.Proc
+	GetFontData                     *win32.Proc
+	GetFontLanguageInfo             *win32.Proc
+	GetFontUnicodeRanges            *win32.Proc
+	GetGlyphIndices                 *win32.Proc
+	GetGlyphIndicesA                *win32.Proc
+	GetGlyphOutline                 *win32.Proc
+	GetGlyphOutlineA                *win32.Proc
+	GetGraphicsMode                 *win32.Proc
+	GetKerningPairs                 *win32.Proc
+	GetKerningPairsA                *win32.Proc
+	GetLayout                       *win32.Proc
+	GetMapMode                      *win32.Proc
+	GetMetaFile                     *win32.Proc
+	GetMetaFileA                    *win32.Proc
+	GetMetaFileBitsEx               *win32.Proc
+	GetMetaRgn                      *win32.Proc
+	GetMiterLimit                   *win32.Proc
+	GetMonitorInfo                  *win32.Proc
+	GetMonitorInfoA                 *win32.Proc
+	GetNearestColor                 *win32.Proc
+	GetNearestPaletteIndex          *win32.Proc
+	GetObject                       *win32.Proc
+	GetObjectA                      *win32.Proc
+	GetObjectType                   *win32.Proc
+	GetOutlineTextMetrics           *win32.Proc
+	GetOutlineTextMetricsA          *win32.Proc
+	GetPaletteEntries               *win32.Proc
+	GetPath                         *win32.Proc
+	GetPixel                        *win32.Proc
+	GetPolyFillMode                 *win32.Proc
+	GetROP2                         *win32.Proc
+	GetRandomRgn                    *win32.Proc
+	GetRasterizerCaps               *win32.Proc
+	GetRegionData                   *win32.Proc
+	GetRgnBox                       *win32.Proc
+	GetStockObject                  *win32.Proc
+	GetStretchBltMode               *win32.Proc
+	GetSysColor                     *win32.Proc
+	GetSysColorBrush                *win32.Proc
+	GetSystemPaletteEntries         *win32.Proc
+	GetSystemPaletteUse             *win32.Proc
+	GetTabbedTextExtent             *win32.Proc
+	GetTabbedTextExtentA            *win32.Proc
+	GetTextAlign                    *win32.Proc
+	GetTextCharacterExtra           *win32.Proc
+	GetTextColor                    *win32.Proc
+	GetTextExtentExPoint            *win32.Proc
+	GetTextExtentExPointA           *win32.Proc
+	GetTextExtentExPointI           *win32.Proc
+	GetTextExtentPoint              *win32.Proc
+	GetTextExtentPoint32            *win32.Proc
+	GetTextExtentPoint32A           *win32.Proc
+	GetTextExtentPointA             *win32.Proc
+	GetTextExtentPointI             *win32.Proc
+	GetTextFace                     *win32.Proc
+	GetTextFaceA                    *win32.Proc
+	GetTextMetrics                  *win32.Proc
+	GetTextMetricsA                 *win32.Proc
+	GetUpdateRect                   *win32.Proc
+	GetUpdateRgn                    *win32.Proc
+	GetViewportExtEx                *win32.Proc
+	GetViewportOrgEx                *win32.Proc
+	GetWinMetaFileBits              *win32.Proc
+	GetWindowDC                     *win32.Proc
+	GetWindowExtEx                  *win32.Proc
+	GetWindowOrgEx                  *win32.Proc
+	GetWindowRgn                    *win32.Proc
+	GetWindowRgnBox                 *win32.Proc
+	GetWorldTransform               *win32.Proc
+	GradientFill                    *win32.Proc
+	GrayString                      *win32.Proc
+	GrayStringA                     *win32.Proc
+	InflateRect                     *win32.Proc
+	IntersectClipRect               *win32.Proc
+	IntersectRect                   *win32.Proc
+	InvalidateRect                  *win32.Proc
+	InvalidateRgn                   *win32.Proc
+	InvertRect                      *win32.Proc
+	InvertRgn                       *win32.Proc
+	IsRectEmpty                     *win32.Proc
+	LPtoDP                          *win32.Proc
+	LineDDA                         *win32.Proc
+	LineTo                          *win32.Proc
+	LoadBitmap                      *win32.Proc
+	LoadBitmapA                     *win32.Proc
+	LockWindowUpdate                *win32.Proc
+	MapWindowPoints                 *win32.Proc
+	MaskBlt                         *win32.Proc
+	MergeFontPackage                *win32.Proc
+	ModifyWorldTransform            *win32.Proc
+	MonitorFromPoint                *win32.Proc
+	MonitorFromRect                 *win32.Proc
+	MonitorFromWindow               *win32.Proc
+	MoveToEx                        *win32.Proc
+	OffsetClipRgn                   *win32.Proc
+	OffsetRect                      *win32.Proc
+	OffsetRgn                       *win32.Proc
+	OffsetViewportOrgEx             *win32.Proc
+	OffsetWindowOrgEx               *win32.Proc
+	PaintDesktop                    *win32.Proc
+	PaintRgn                        *win32.Proc
+	PatBlt                          *win32.Proc
+	PathToRegion                    *win32.Proc
+	Pie                             *win32.Proc
+	PlayEnhMetaFile                 *win32.Proc
+	PlayEnhMetaFileRecord           *win32.Proc
+	PlayMetaFile                    *win32.Proc
+	PlayMetaFileRecord              *win32.Proc
+	PlgBlt                          *win32.Proc
+	PolyBezier                      *win32.Proc
+	PolyBezierTo                    *win32.Proc
+	PolyDraw                        *win32.Proc
+	PolyPolygon                     *win32.Proc
+	PolyPolyline                    *win32.Proc
+	PolyTextOut                     *win32.Proc
+	PolyTextOutA                    *win32.Proc
+	Polygon                         *win32.Proc
+	Polyline                        *win32.Proc
+	PolylineTo                      *win32.Proc
+	PtInRect                        *win32.Proc
+	PtInRegion                      *win32.Proc
+	PtVisible                       *win32.Proc
+	RealizePalette                  *win32.Proc
+	RectInRegion                    *win32.Proc
+	RectVisible                     *win32.Proc
+	Rectangle                       *win32.Proc
+	RedrawWindow                    *win32.Proc
+	ReleaseDC                       *win32.Proc
+	RemoveFontMemResourceEx         *win32.Proc
+	RemoveFontResource              *win32.Proc
+	RemoveFontResourceA             *win32.Proc
+	RemoveFontResourceEx            *win32.Proc
+	RemoveFontResourceExA           *win32.Proc
+	ResetDC                         *win32.Proc
+	ResetDCA                        *win32.Proc
+	ResizePalette                   *win32.Proc
+	RestoreDC                       *win32.Proc
+	RoundRect                       *win32.Proc
+	SaveDC                          *win32.Proc
+	ScaleViewportExtEx              *win32.Proc
+	ScaleWindowExtEx                *win32.Proc
+	ScreenToClient                  *win32.Proc
+	SelectClipPath                  *win32.Proc
+	SelectClipRgn                   *win32.Proc
+	SelectObject                    *win32.Proc
+	SelectPalette                   *win32.Proc
+	SetArcDirection                 *win32.Proc
+	SetBitmapBits                   *win32.Proc
+	SetBitmapDimensionEx            *win32.Proc
+	SetBkColor                      *win32.Proc
+	SetBkMode                       *win32.Proc
+	SetBoundsRect                   *win32.Proc
+	SetBrushOrgEx                   *win32.Proc
+	SetColorAdjustment              *win32.Proc
+	SetDCBrushColor                 *win32.Proc
+	SetDCPenColor                   *win32.Proc
+	SetDIBColorTable                *win32.Proc
+	SetDIBits                       *win32.Proc
+	SetDIBitsToDevice               *win32.Proc
+	SetEnhMetaFileBits              *win32.Proc
+	SetGraphicsMode                 *win32.Proc
+	SetLayout                       *win32.Proc
+	SetMapMode                      *win32.Proc
+	SetMapperFlags                  *win32.Proc
+	SetMetaFileBitsEx               *win32.Proc
+	SetMetaRgn                      *win32.Proc
+	SetMiterLimit                   *win32.Proc
+	SetPaletteEntries               *win32.Proc
+	SetPixel                        *win32.Proc
+	SetPixelV                       *win32.Proc
+	SetPolyFillMode                 *win32.Proc
+	SetROP2                         *win32.Proc
+	SetRect                         *win32.Proc
+	SetRectEmpty                    *win32.Proc
+	SetRectRgn                      *win32.Proc
+	SetStretchBltMode               *win32.Proc
+	SetSysColors                    *win32.Proc
+	SetSystemPaletteUse             *win32.Proc
+	SetTextAlign                    *win32.Proc
+	SetTextCharacterExtra           *win32.Proc
+	SetTextColor                    *win32.Proc
+	SetTextJustification            *win32.Proc
+	SetViewportExtEx                *win32.Proc
+	SetViewportOrgEx                *win32.Proc
+	SetWindowExtEx                  *win32.Proc
+	SetWindowOrgEx                  *win32.Proc
+	SetWindowRgn                    *win32.Proc
+	SetWorldTransform               *win32.Proc
+	StretchBlt                      *win32.Proc
+	StretchDIBits                   *win32.Proc
+	StrokeAndFillPath               *win32.Proc
+	StrokePath                      *win32.Proc
+	SubtractRect                    *win32.Proc
+	TTCharToUnicode                 *win32.Proc
+	TTDeleteEmbeddedFont            *win32.Proc
+	TTEmbedFont                     *win32.Proc
+	TTEmbedFontEx                   *win32.Proc
+	TTEmbedFontFromFileA            *win32.Proc
+	TTEnableEmbeddingForFacename    *win32.Proc
+	TTGetEmbeddedFontInfo           *win32.Proc
+	TTGetEmbeddingType              *win32.Proc
+	TTGetNewFontName                *win32.Proc
+	TTIsEmbeddingEnabled            *win32.Proc
+	TTIsEmbeddingEnabledForFacename *win32.Proc
+	TTLoadEmbeddedFont              *win32.Proc
+	TTRunValidationTests            *win32.Proc
+	TTRunValidationTestsEx          *win32.Proc
+	TabbedTextOut                   *win32.Proc
+	TabbedTextOutA                  *win32.Proc
+	TextOut                         *win32.Proc
+	TextOutA                        *win32.Proc
+	TransparentBlt                  *win32.Proc
+	UnionRect                       *win32.Proc
+	UnrealizeObject                 *win32.Proc
+	UpdateColors                    *win32.Proc
+	UpdateWindow                    *win32.Proc
+	ValidateRect                    *win32.Proc
+	ValidateRgn                     *win32.Proc
+	WglSwapMultipleBuffers          *win32.Proc
+	WidenPath                       *win32.Proc
+	WindowFromDC                    *win32.Proc
+}{
+	AbortPath:                       procAbortPath,
+	AddFontMemResourceEx:            procAddFontMemResourceEx,
+	AddFontResource:                 procAddFontResource,
+	AddFontResourceA:                procAddFontResourceA,
+	AddFontResourceEx:               procAddFontResourceEx,
+	AddFontResourceExA:              procAddFontResourceExA,
+	AlphaBlend:                      procAlphaBlend,
+	AngleArc:                        procAngleArc,
+	AnimatePalette:                  procAnimatePalette,
+	Arc:                             procArc,
+	ArcTo:                           procArcTo,
+	BeginPaint:                      procBeginPaint,
+	BeginPath:                       procBeginPath,
+	BitBlt:                          procBitBlt,
+	CancelDC:                        procCancelDC,
+	ChangeDisplaySettings:           procChangeDisplaySettings,
+	ChangeDisplaySettingsA:          procChangeDisplaySettingsA,
+	ChangeDisplaySettingsEx:         procChangeDisplaySettingsEx,
+	ChangeDisplaySettingsExA:        procChangeDisplaySettingsExA,
+	Chord:                           procChord,
+	ClientToScreen:                  procClientToScreen,
+	CloseEnhMetaFile:                procCloseEnhMetaFile,
+	CloseFigure:                     procCloseFigure,
+	CloseMetaFile:                   procCloseMetaFile,
+	CombineRgn:                      procCombineRgn,
+	CombineTransform:                procCombineTransform,
+	CopyEnhMetaFile:                 procCopyEnhMetaFile,
+	CopyEnhMetaFileA:                procCopyEnhMetaFileA,
+	CopyMetaFile:                    procCopyMetaFile,
+	CopyMetaFileA:                   procCopyMetaFileA,
+	CopyRect:                        procCopyRect,
+	CreateBitmap:                    procCreateBitmap,
+	CreateBitmapIndirect:            procCreateBitmapIndirect,
+	CreateBrushIndirect:             procCreateBrushIndirect,
+	CreateCompatibleBitmap:          procCreateCompatibleBitmap,
+	CreateCompatibleDC:              procCreateCompatibleDC,
+	CreateDC:                        procCreateDC,
+	CreateDCA:                       procCreateDCA,
+	CreateDIBPatternBrush:           procCreateDIBPatternBrush,
+	CreateDIBPatternBrushPt:         procCreateDIBPatternBrushPt,
+	CreateDIBSection:                procCreateDIBSection,
+	CreateDIBitmap:                  procCreateDIBitmap,
+	CreateDiscardableBitmap:         procCreateDiscardableBitmap,
+	CreateEllipticRgn:               procCreateEllipticRgn,
+	CreateEllipticRgnIndirect:       procCreateEllipticRgnIndirect,
+	CreateEnhMetaFile:               procCreateEnhMetaFile,
+	CreateEnhMetaFileA:              procCreateEnhMetaFileA,
+	CreateFont:                      procCreateFont,
+	CreateFontA:                     procCreateFontA,
+	CreateFontIndirect:              procCreateFontIndirect,
+	CreateFontIndirectA:             procCreateFontIndirectA,
+	CreateFontIndirectEx:            procCreateFontIndirectEx,
+	CreateFontIndirectExA:           procCreateFontIndirectExA,
+	CreateFontPackage:               procCreateFontPackage,
+	CreateHalftonePalette:           procCreateHalftonePalette,
+	CreateHatchBrush:                procCreateHatchBrush,
+	CreateIC:                        procCreateIC,
+	CreateICA:                       procCreateICA,
+	CreateMetaFile:                  procCreateMetaFile,
+	CreateMetaFileA:                 procCreateMetaFileA,
+	CreatePalette:                   procCreatePalette,
+	CreatePatternBrush:              procCreatePatternBrush,
+	CreatePen:                       procCreatePen,
+	CreatePenIndirect:               procCreatePenIndirect,
+	CreatePolyPolygonRgn:            procCreatePolyPolygonRgn,
+	CreatePolygonRgn:                procCreatePolygonRgn,
+	CreateRectRgn:                   procCreateRectRgn,
+	CreateRectRgnIndirect:           procCreateRectRgnIndirect,
+	CreateRoundRectRgn:              procCreateRoundRectRgn,
+	CreateScalableFontResource:      procCreateScalableFontResource,
+	CreateScalableFontResourceA:     procCreateScalableFontResourceA,
+	CreateSolidBrush:                procCreateSolidBrush,
+	DPtoLP:                          procDPtoLP,
+	DeleteDC:                        procDeleteDC,
+	DeleteEnhMetaFile:               procDeleteEnhMetaFile,
+	DeleteMetaFile:                  procDeleteMetaFile,
+	DeleteObject:                    procDeleteObject,
+	DrawAnimatedRects:               procDrawAnimatedRects,
+	DrawCaption:                     procDrawCaption,
+	DrawEdge:                        procDrawEdge,
+	DrawEscape:                      procDrawEscape,
+	DrawFocusRect:                   procDrawFocusRect,
+	DrawFrameControl:                procDrawFrameControl,
+	DrawState:                       procDrawState,
+	DrawStateA:                      procDrawStateA,
+	DrawText:                        procDrawText,
+	DrawTextA:                       procDrawTextA,
+	DrawTextEx:                      procDrawTextEx,
+	DrawTextExA:                     procDrawTextExA,
+	Ellipse:                         procEllipse,
+	EndPaint:                        procEndPaint,
+	EndPath:                         procEndPath,
+	EnumDisplayDevices:              procEnumDisplayDevices,
+	EnumDisplayDevicesA:             procEnumDisplayDevicesA,
+	EnumDisplayMonitors:             procEnumDisplayMonitors,
+	EnumDisplaySettings:             procEnumDisplaySettings,
+	EnumDisplaySettingsA:            procEnumDisplaySettingsA,
+	EnumDisplaySettingsEx:           procEnumDisplaySettingsEx,
+	EnumDisplaySettingsExA:          procEnumDisplaySettingsExA,
+	EnumEnhMetaFile:                 procEnumEnhMetaFile,
+	EnumFontFamilies:                procEnumFontFamilies,
+	EnumFontFamiliesA:               procEnumFontFamiliesA,
+	EnumFontFamiliesEx:              procEnumFontFamiliesEx,
+	EnumFontFamiliesExA:             procEnumFontFamiliesExA,
+	EnumFonts:                       procEnumFonts,
+	EnumFontsA:                      procEnumFontsA,
+	EnumMetaFile:                    procEnumMetaFile,
+	EnumObjects:                     procEnumObjects,
+	EqualRect:                       procEqualRect,
+	EqualRgn:                        procEqualRgn,
+	ExcludeClipRect:                 procExcludeClipRect,
+	ExcludeUpdateRgn:                procExcludeUpdateRgn,
+	ExtCreatePen:                    procExtCreatePen,
+	ExtCreateRegion:                 procExtCreateRegion,
+	ExtFloodFill:                    procExtFloodFill,
+	ExtSelectClipRgn:                procExtSelectClipRgn,
+	ExtTextOut:                      procExtTextOut,
+	ExtTextOutA:                     procExtTextOutA,
+	FillPath:                        procFillPath,
+	FillRect:                        procFillRect,
+	FillRgn:                         procFillRgn,
+	FixBrushOrgEx:                   procFixBrushOrgEx,
+	FlattenPath:                     procFlattenPath,
+	FloodFill:                       procFloodFill,
+	FrameRect:                       procFrameRect,
+	FrameRgn:                        procFrameRgn,
+	GdiAlphaBlend:                   procGdiAlphaBlend,
+	GdiComment:                      procGdiComment,
+	GdiFlush:                        procGdiFlush,
+	GdiGetBatchLimit:                procGdiGetBatchLimit,
+	GdiGradientFill:                 procGdiGradientFill,
+	GdiSetBatchLimit:                procGdiSetBatchLimit,
+	GdiTransparentBlt:               procGdiTransparentBlt,
+	GetArcDirection:                 procGetArcDirection,
+	GetAspectRatioFilterEx:          procGetAspectRatioFilterEx,
+	GetBitmapBits:                   procGetBitmapBits,
+	GetBitmapDimensionEx:            procGetBitmapDimensionEx,
+	GetBkColor:                      procGetBkColor,
+	GetBkMode:                       procGetBkMode,
+	GetBoundsRect:                   procGetBoundsRect,
+	GetBrushOrgEx:                   procGetBrushOrgEx,
+	GetCharABCWidths:                procGetCharABCWidths,
+	GetCharABCWidthsA:               procGetCharABCWidthsA,
+	GetCharABCWidthsFloat:           procGetCharABCWidthsFloat,
+	GetCharABCWidthsFloatA:          procGetCharABCWidthsFloatA,
+	GetCharABCWidthsI:               procGetCharABCWidthsI,
+	GetCharWidth:                    procGetCharWidth,
+	GetCharWidth32:                  procGetCharWidth32,
+	GetCharWidth32A:                 procGetCharWidth32A,
+	GetCharWidthA:                   procGetCharWidthA,
+	GetCharWidthFloat:               procGetCharWidthFloat,
+	GetCharWidthFloatA:              procGetCharWidthFloatA,
+	GetCharWidthI:                   procGetCharWidthI,
+	GetCharacterPlacement:           procGetCharacterPlacement,
+	GetCharacterPlacementA:          procGetCharacterPlacementA,
+	GetClipBox:                      procGetClipBox,
+	GetClipRgn:                      procGetClipRgn,
+	GetColorAdjustment:              procGetColorAdjustment,
+	GetCurrentObject:                procGetCurrentObject,
+	GetCurrentPositionEx:            procGetCurrentPositionEx,
+	GetDC:                           procGetDC,
+	GetDCBrushColor:                 procGetDCBrushColor,
+	GetDCEx:                         procGetDCEx,
+	GetDCOrgEx:                      procGetDCOrgEx,
+	GetDCPenColor:                   procGetDCPenColor,
+	GetDIBColorTable:                procGetDIBColorTable,
+	GetDIBits:                       procGetDIBits,
+	GetDeviceCaps:                   procGetDeviceCaps,
+	GetEnhMetaFile:                  procGetEnhMetaFile,
+	GetEnhMetaFileA:                 procGetEnhMetaFileA,
+	GetEnhMetaFileBits:              procGetEnhMetaFileBits,
+	GetEnhMetaFileDescription:       procGetEnhMetaFileDescription,
+	GetEnhMetaFileDescriptionA:      procGetEnhMetaFileDescriptionA,
+	GetEnhMetaFileHeader:            procGetEnhMetaFileHeader,
+	GetEnhMetaFilePaletteEntries:    procGetEnhMetaFilePaletteEntries,
+	GetFontData:                     procGetFontData,
+	GetFontLanguageInfo:             procGetFontLanguageInfo,
+	GetFontUnicodeRanges:            procGetFontUnicodeRanges,
+	GetGlyphIndices:                 procGetGlyphIndices,
+	GetGlyphIndicesA:                procGetGlyphIndicesA,
+	GetGlyphOutline:                 procGetGlyphOutline,
+	GetGlyphOutlineA:                procGetGlyphOutlineA,
+	GetGraphicsMode:                 procGetGraphicsMode,
+	GetKerningPairs:                 procGetKerningPairs,
+	GetKerningPairsA:                procGetKerningPairsA,
+	GetLayout:                       procGetLayout,
+	GetMapMode:                      procGetMapMode,
+	GetMetaFile:                     procGetMetaFile,
+	GetMetaFileA:                    procGetMetaFileA,
+	GetMetaFileBitsEx:               procGetMetaFileBitsEx,
+	GetMetaRgn:                      procGetMetaRgn,
+	GetMiterLimit:                   procGetMiterLimit,
+	GetMonitorInfo:                  procGetMonitorInfo,
+	GetMonitorInfoA:                 procGetMonitorInfoA,
+	GetNearestColor:                 procGetNearestColor,
+	GetNearestPaletteIndex:          procGetNearestPaletteIndex,
+	GetObject:                       procGetObject,
+	GetObjectA:                      procGetObjectA,
+	GetObjectType:                   procGetObjectType,
+	GetOutlineTextMetrics:           procGetOutlineTextMetrics,
+	GetOutlineTextMetricsA:          procGetOutlineTextMetricsA,
+	GetPaletteEntries:               procGetPaletteEntries,
+	GetPath:                         procGetPath,
+	GetPixel:                        procGetPixel,
+	GetPolyFillMode:                 procGetPolyFillMode,
+	GetROP2:                         procGetROP2,
+	GetRandomRgn:                    procGetRandomRgn,
+	GetRasterizerCaps:               procGetRasterizerCaps,
+	GetRegionData:                   procGetRegionData,
+	GetRgnBox:                       procGetRgnBox,
+	GetStockObject:                  procGetStockObject,
+	GetStretchBltMode:               procGetStretchBltMode,
+	GetSysColor:                     procGetSysColor,
+	GetSysColorBrush:                procGetSysColorBrush,
+	GetSystemPaletteEntries:         procGetSystemPaletteEntries,
+	GetSystemPaletteUse:             procGetSystemPaletteUse,
+	GetTabbedTextExtent:             procGetTabbedTextExtent,
+	GetTabbedTextExtentA:            procGetTabbedTextExtentA,
+	GetTextAlign:                    procGetTextAlign,
+	GetTextCharacterExtra:           procGetTextCharacterExtra,
+	GetTextColor:                    procGetTextColor,
+	GetTextExtentExPoint:            procGetTextExtentExPoint,
+	GetTextExtentExPointA:           procGetTextExtentExPointA,
+	GetTextExtentExPointI:           procGetTextExtentExPointI,
+	GetTextExtentPoint:              procGetTextExtentPoint,
+	GetTextExtentPoint32:            procGetTextExtentPoint32,
+	GetTextExtentPoint32A:           procGetTextExtentPoint32A,
+	GetTextExtentPointA:             procGetTextExtentPointA,
+	GetTextExtentPointI:             procGetTextExtentPointI,
+	GetTextFace:                     procGetTextFace,
+	GetTextFaceA:                    procGetTextFaceA,
+	GetTextMetrics:                  procGetTextMetrics,
+	GetTextMetricsA:                 procGetTextMetricsA,
+	GetUpdateRect:                   procGetUpdateRect,
+	GetUpdateRgn:                    procGetUpdateRgn,
+	GetViewportExtEx:                procGetViewportExtEx,
+	GetViewportOrgEx:                procGetViewportOrgEx,
+	GetWinMetaFileBits:              procGetWinMetaFileBits,
+	GetWindowDC:                     procGetWindowDC,
+	GetWindowExtEx:                  procGetWindowExtEx,
+	GetWindowOrgEx:                  procGetWindowOrgEx,
+	GetWindowRgn:                    procGetWindowRgn,
+	GetWindowRgnBox:                 procGetWindowRgnBox,
+	GetWorldTransform:               procGetWorldTransform,
+	GradientFill:                    procGradientFill,
+	GrayString:                      procGrayString,
+	GrayStringA:                     procGrayStringA,
+	InflateRect:                     procInflateRect,
+	IntersectClipRect:               procIntersectClipRect,
+	IntersectRect:                   procIntersectRect,
+	InvalidateRect:                  procInvalidateRect,
+	InvalidateRgn:                   procInvalidateRgn,
+	InvertRect:                      procInvertRect,
+	InvertRgn:                       procInvertRgn,
+	IsRectEmpty:                     procIsRectEmpty,
+	LPtoDP:                          procLPtoDP,
+	LineDDA:                         procLineDDA,
+	LineTo:                          procLineTo,
+	LoadBitmap:                      procLoadBitmap,
+	LoadBitmapA:                     procLoadBitmapA,
+	LockWindowUpdate:                procLockWindowUpdate,
+	MapWindowPoints:                 procMapWindowPoints,
+	MaskBlt:                         procMaskBlt,
+	MergeFontPackage:                procMergeFontPackage,
+	ModifyWorldTransform:            procModifyWorldTransform,
+	MonitorFromPoint:                procMonitorFromPoint,
+	MonitorFromRect:                 procMonitorFromRect,
+	MonitorFromWindow:               procMonitorFromWindow,
+	MoveToEx:                        procMoveToEx,
+	OffsetClipRgn:                   procOffsetClipRgn,
+	OffsetRect:                      procOffsetRect,
+	OffsetRgn:                       procOffsetRgn,
+	OffsetViewportOrgEx:             procOffsetViewportOrgEx,
+	OffsetWindowOrgEx:               procOffsetWindowOrgEx,
+	PaintDesktop:                    procPaintDesktop,
+	PaintRgn:                        procPaintRgn,
+	PatBlt:                          procPatBlt,
+	PathToRegion:                    procPathToRegion,
+	Pie:                             procPie,
+	PlayEnhMetaFile:                 procPlayEnhMetaFile,
+	PlayEnhMetaFileRecord:           procPlayEnhMetaFileRecord,
+	PlayMetaFile:                    procPlayMetaFile,
+	PlayMetaFileRecord:              procPlayMetaFileRecord,
+	PlgBlt:                          procPlgBlt,
+	PolyBezier:                      procPolyBezier,
+	PolyBezierTo:                    procPolyBezierTo,
+	PolyDraw:                        procPolyDraw,
+	PolyPolygon:                     procPolyPolygon,
+	PolyPolyline:                    procPolyPolyline,
+	PolyTextOut:                     procPolyTextOut,
+	PolyTextOutA:                    procPolyTextOutA,
+	Polygon:                         procPolygon,
+	Polyline:                        procPolyline,
+	PolylineTo:                      procPolylineTo,
+	PtInRect:                        procPtInRect,
+	PtInRegion:                      procPtInRegion,
+	PtVisible:                       procPtVisible,
+	RealizePalette:                  procRealizePalette,
+	RectInRegion:                    procRectInRegion,
+	RectVisible:                     procRectVisible,
+	Rectangle:                       procRectangle,
+	RedrawWindow:                    procRedrawWindow,
+	ReleaseDC:                       procReleaseDC,
+	RemoveFontMemResourceEx:         procRemoveFontMemResourceEx,
+	RemoveFontResource:              procRemoveFontResource,
+	RemoveFontResourceA:             procRemoveFontResourceA,
+	RemoveFontResourceEx:            procRemoveFontResourceEx,
+	RemoveFontResourceExA:           procRemoveFontResourceExA,
+	ResetDC:                         procResetDC,
+	ResetDCA:                        procResetDCA,
+	ResizePalette:                   procResizePalette,
+	RestoreDC:                       procRestoreDC,
+	RoundRect:                       procRoundRect,
+	SaveDC:                          procSaveDC,
+	ScaleViewportExtEx:              procScaleViewportExtEx,
+	ScaleWindowExtEx:                procScaleWindowExtEx,
+	ScreenToClient:                  procScreenToClient,
+	SelectClipPath:                  procSelectClipPath,
+	SelectClipRgn:                   procSelectClipRgn,
+	SelectObject:                    procSelectObject,
+	SelectPalette:                   procSelectPalette,
+	SetArcDirection:                 procSetArcDirection,
+	SetBitmapBits:                   procSetBitmapBits,
+	SetBitmapDimensionEx:            procSetBitmapDimensionEx,
+	SetBkColor:                      procSetBkColor,
+	SetBkMode:                       procSetBkMode,
+	SetBoundsRect:                   procSetBoundsRect,
+	SetBrushOrgEx:                   procSetBrushOrgEx,
+	SetColorAdjustment:              procSetColorAdjustment,
+	SetDCBrushColor:                 procSetDCBrushColor,
+	SetDCPenColor:                   procSetDCPenColor,
+	SetDIBColorTable:                procSetDIBColorTable,
+	SetDIBits:                       procSetDIBits,
+	SetDIBitsToDevice:               procSetDIBitsToDevice,
+	SetEnhMetaFileBits:              procSetEnhMetaFileBits,
+	SetGraphicsMode:                 procSetGraphicsMode,
+	SetLayout:                       procSetLayout,
+	SetMapMode:                      procSetMapMode,
+	SetMapperFlags:                  procSetMapperFlags,
+	SetMetaFileBitsEx:               procSetMetaFileBitsEx,
+	SetMetaRgn:                      procSetMetaRgn,
+	SetMiterLimit:                   procSetMiterLimit,
+	SetPaletteEntries:               procSetPaletteEntries,
+	SetPixel:                        procSetPixel,
+	SetPixelV:                       procSetPixelV,
+	SetPolyFillMode:                 procSetPolyFillMode,
+	SetROP2:                         procSetROP2,
+	SetRect:                         procSetRect,
+	SetRectEmpty:                    procSetRectEmpty,
+	SetRectRgn:                      procSetRectRgn,
+	SetStretchBltMode:               procSetStretchBltMode,
+	SetSysColors:                    procSetSysColors,
+	SetSystemPaletteUse:             procSetSystemPaletteUse,
+	SetTextAlign:                    procSetTextAlign,
+	SetTextCharacterExtra:           procSetTextCharacterExtra,
+	SetTextColor:                    procSetTextColor,
+	SetTextJustification:            procSetTextJustification,
+	SetViewportExtEx:                procSetViewportExtEx,
+	SetViewportOrgEx:                procSetViewportOrgEx,
+	SetWindowExtEx:                  procSetWindowExtEx,
+	SetWindowOrgEx:                  procSetWindowOrgEx,
+	SetWindowRgn:                    procSetWindowRgn,
+	SetWorldTransform:               procSetWorldTransform,
+	StretchBlt:                      procStretchBlt,
+	StretchDIBits:                   procStretchDIBits,
+	StrokeAndFillPath:               procStrokeAndFillPath,
+	StrokePath:                      procStrokePath,
+	SubtractRect:                    procSubtractRect,
+	TTCharToUnicode:                 procTTCharToUnicode,
+	TTDeleteEmbeddedFont:            procTTDeleteEmbeddedFont,
+	TTEmbedFont:                     procTTEmbedFont,
+	TTEmbedFontEx:                   procTTEmbedFontEx,
+	TTEmbedFontFromFileA:            procTTEmbedFontFromFileA,
+	TTEnableEmbeddingForFacename:    procTTEnableEmbeddingForFacename,
+	TTGetEmbeddedFontInfo:           procTTGetEmbeddedFontInfo,
+	TTGetEmbeddingType:              procTTGetEmbeddingType,
+	TTGetNewFontName:                procTTGetNewFontName,
+	TTIsEmbeddingEnabled:            procTTIsEmbeddingEnabled,
+	TTIsEmbeddingEnabledForFacename: procTTIsEmbeddingEnabledForFacename,
+	TTLoadEmbeddedFont:              procTTLoadEmbeddedFont,
+	TTRunValidationTests:            procTTRunValidationTests,
+	TTRunValidationTestsEx:          procTTRunValidationTestsEx,
+	TabbedTextOut:                   procTabbedTextOut,
+	TabbedTextOutA:                  procTabbedTextOutA,
+	TextOut:                         procTextOut,
+	TextOutA:                        procTextOutA,
+	TransparentBlt:                  procTransparentBlt,
+	UnionRect:                       procUnionRect,
+	UnrealizeObject:                 procUnrealizeObject,
+	UpdateColors:                    procUpdateColors,
+	UpdateWindow:                    procUpdateWindow,
+	ValidateRect:                    procValidateRect,
+	ValidateRgn:                     procValidateRgn,
+	WglSwapMultipleBuffers:          procWglSwapMultipleBuffers,
+	WidenPath:                       procWidenPath,
+	WindowFromDC:                    procWindowFromDC,
+}
+
 // AbortPath calls GDI32!AbortPath.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-abortpath
 // Minimum OS: windows5.0.
@@ -477,6 +1280,16 @@ func AddFontResourceExA(name foundation.PSTR, fl FONT_RESOURCE_CHARACTERISTICS) 
 // Minimum OS: windows5.0.
 func AlphaBlend(hdcDest HDC, xoriginDest int32, yoriginDest int32, wDest int32, hDest int32, hdcSrc HDC, xoriginSrc int32, yoriginSrc int32, wSrc int32, hSrc int32, ftn BLENDFUNCTION) bool {
 	r1, _, _ := syscall.SyscallN(procAlphaBlend.Addr(), uintptr(hdcDest), uintptr(xoriginDest), uintptr(yoriginDest), uintptr(wDest), uintptr(hDest), uintptr(hdcSrc), uintptr(xoriginSrc), uintptr(yoriginSrc), uintptr(wSrc), uintptr(hSrc), uintptr(win32.StructArg(ftn)))
+	return r1 != 0
+}
+
+var specAngleArc = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// AngleArc calls GDI32!AngleArc.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-anglearc
+// Minimum OS: windows5.0.
+func AngleArc(hdc HDC, x int32, y int32, r_ uint32, StartAngle float32, SweepAngle float32) bool {
+	r1, _, _ := win32.Call(procAngleArc.Addr(), specAngleArc, nil, uintptr(hdc), uintptr(x), uintptr(y), uintptr(r_), uintptr(math.Float32bits(StartAngle)), uintptr(math.Float32bits(SweepAngle))).Tuple()
 	return r1 != 0
 }
 
@@ -562,8 +1375,8 @@ func ChangeDisplaySettingsA(lpDevMode *DEVMODEA, dwFlags CDS_TYPE) DISP_CHANGE {
 // ChangeDisplaySettingsEx calls USER32!ChangeDisplaySettingsExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-changedisplaysettingsexw
 // Minimum OS: windows5.0.
-func ChangeDisplaySettingsEx(lpszDeviceName string, lpDevMode *DEVMODEW, dwflags CDS_TYPE, lParam unsafe.Pointer) DISP_CHANGE {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+func ChangeDisplaySettingsEx(lpszDeviceName *string, lpDevMode *DEVMODEW, dwflags CDS_TYPE, lParam unsafe.Pointer) DISP_CHANGE {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
 	r1, _, _ := syscall.SyscallN(procChangeDisplaySettingsEx.Addr(), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(unsafe.Pointer(lpDevMode)), 0, uintptr(dwflags), uintptr(unsafe.Pointer(lParam)))
 	return DISP_CHANGE(r1)
 }
@@ -635,8 +1448,8 @@ func CombineTransform(lpxfOut *XFORM, lpxf1 *XFORM, lpxf2 *XFORM) bool {
 // CopyEnhMetaFile calls GDI32!CopyEnhMetaFileW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-copyenhmetafilew
 // Minimum OS: windows5.0.
-func CopyEnhMetaFile(hEnh HENHMETAFILE, lpFileName string) HENHMETAFILE {
-	_lpFileName := win32.UTF16Ptr(lpFileName)
+func CopyEnhMetaFile(hEnh HENHMETAFILE, lpFileName *string) HENHMETAFILE {
+	_lpFileName := win32.UTF16PtrOrNil(lpFileName)
 	r1, _, _ := syscall.SyscallN(procCopyEnhMetaFile.Addr(), uintptr(hEnh), uintptr(unsafe.Pointer(_lpFileName)))
 	return HENHMETAFILE(r1)
 }
@@ -652,8 +1465,8 @@ func CopyEnhMetaFileA(hEnh HENHMETAFILE, lpFileName foundation.PSTR) HENHMETAFIL
 // CopyMetaFile calls GDI32!CopyMetaFileW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-copymetafilew
 // Minimum OS: windows5.0.
-func CopyMetaFile(param0 HMETAFILE, param1 string) HMETAFILE {
-	_param1 := win32.UTF16Ptr(param1)
+func CopyMetaFile(param0 HMETAFILE, param1 *string) HMETAFILE {
+	_param1 := win32.UTF16PtrOrNil(param1)
 	r1, _, _ := syscall.SyscallN(procCopyMetaFile.Addr(), uintptr(param0), uintptr(unsafe.Pointer(_param1)))
 	return HMETAFILE(r1)
 }
@@ -717,10 +1530,10 @@ func CreateCompatibleDC(hdc HDC) HDC {
 // CreateDC calls GDI32!CreateDCW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createdcw
 // Minimum OS: windows5.0.
-func CreateDC(pwszDriver string, pwszDevice string, pszPort string, pdm *DEVMODEW) HDC {
-	_pwszDriver := win32.UTF16Ptr(pwszDriver)
-	_pwszDevice := win32.UTF16Ptr(pwszDevice)
-	_pszPort := win32.UTF16Ptr(pszPort)
+func CreateDC(pwszDriver *string, pwszDevice *string, pszPort *string, pdm *DEVMODEW) HDC {
+	_pwszDriver := win32.UTF16PtrOrNil(pwszDriver)
+	_pwszDevice := win32.UTF16PtrOrNil(pwszDevice)
+	_pszPort := win32.UTF16PtrOrNil(pszPort)
 	r1, _, _ := syscall.SyscallN(procCreateDC.Addr(), uintptr(unsafe.Pointer(_pwszDriver)), uintptr(unsafe.Pointer(_pwszDevice)), uintptr(unsafe.Pointer(_pszPort)), uintptr(unsafe.Pointer(pdm)))
 	return HDC(r1)
 }
@@ -796,9 +1609,9 @@ func CreateEllipticRgnIndirect(lprect *foundation.RECT) HRGN {
 // CreateEnhMetaFile calls GDI32!CreateEnhMetaFileW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createenhmetafilew
 // Minimum OS: windows5.0.
-func CreateEnhMetaFile(hdc HDC, lpFilename string, lprc *foundation.RECT, lpDesc string) HDC {
-	_lpFilename := win32.UTF16Ptr(lpFilename)
-	_lpDesc := win32.UTF16Ptr(lpDesc)
+func CreateEnhMetaFile(hdc HDC, lpFilename *string, lprc *foundation.RECT, lpDesc *string) HDC {
+	_lpFilename := win32.UTF16PtrOrNil(lpFilename)
+	_lpDesc := win32.UTF16PtrOrNil(lpDesc)
 	r1, _, _ := syscall.SyscallN(procCreateEnhMetaFile.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpFilename)), uintptr(unsafe.Pointer(lprc)), uintptr(unsafe.Pointer(_lpDesc)))
 	return HDC(r1)
 }
@@ -814,8 +1627,8 @@ func CreateEnhMetaFileA(hdc HDC, lpFilename foundation.PSTR, lprc *foundation.RE
 // CreateFont calls GDI32!CreateFontW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createfontw
 // Minimum OS: windows5.0.
-func CreateFont(cHeight int32, cWidth int32, cEscapement int32, cOrientation int32, cWeight int32, bItalic uint32, bUnderline uint32, bStrikeOut uint32, iCharSet uint32, iOutPrecision uint32, iClipPrecision uint32, iQuality uint32, iPitchAndFamily uint32, pszFaceName string) HFONT {
-	_pszFaceName := win32.UTF16Ptr(pszFaceName)
+func CreateFont(cHeight int32, cWidth int32, cEscapement int32, cOrientation int32, cWeight int32, bItalic uint32, bUnderline uint32, bStrikeOut uint32, iCharSet uint32, iOutPrecision uint32, iClipPrecision uint32, iQuality uint32, iPitchAndFamily uint32, pszFaceName *string) HFONT {
+	_pszFaceName := win32.UTF16PtrOrNil(pszFaceName)
 	r1, _, _ := syscall.SyscallN(procCreateFont.Addr(), uintptr(cHeight), uintptr(cWidth), uintptr(cEscapement), uintptr(cOrientation), uintptr(cWeight), uintptr(bItalic), uintptr(bUnderline), uintptr(bStrikeOut), uintptr(iCharSet), uintptr(iOutPrecision), uintptr(iClipPrecision), uintptr(iQuality), uintptr(iPitchAndFamily), uintptr(unsafe.Pointer(_pszFaceName)))
 	return HFONT(r1)
 }
@@ -887,10 +1700,10 @@ func CreateHatchBrush(iHatch HATCH_BRUSH_STYLE, color foundation.COLORREF) HBRUS
 // CreateIC calls GDI32!CreateICW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createicw
 // Minimum OS: windows5.0.
-func CreateIC(pszDriver string, pszDevice string, pszPort string, pdm *DEVMODEW) HDC {
-	_pszDriver := win32.UTF16Ptr(pszDriver)
-	_pszDevice := win32.UTF16Ptr(pszDevice)
-	_pszPort := win32.UTF16Ptr(pszPort)
+func CreateIC(pszDriver *string, pszDevice *string, pszPort *string, pdm *DEVMODEW) HDC {
+	_pszDriver := win32.UTF16PtrOrNil(pszDriver)
+	_pszDevice := win32.UTF16PtrOrNil(pszDevice)
+	_pszPort := win32.UTF16PtrOrNil(pszPort)
 	r1, _, _ := syscall.SyscallN(procCreateIC.Addr(), uintptr(unsafe.Pointer(_pszDriver)), uintptr(unsafe.Pointer(_pszDevice)), uintptr(unsafe.Pointer(_pszPort)), uintptr(unsafe.Pointer(pdm)))
 	return HDC(r1)
 }
@@ -906,8 +1719,8 @@ func CreateICA(pszDriver foundation.PSTR, pszDevice foundation.PSTR, pszPort fou
 // CreateMetaFile calls GDI32!CreateMetaFileW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createmetafilew
 // Minimum OS: windows5.0.
-func CreateMetaFile(pszFile string) HDC {
-	_pszFile := win32.UTF16Ptr(pszFile)
+func CreateMetaFile(pszFile *string) HDC {
+	_pszFile := win32.UTF16PtrOrNil(pszFile)
 	r1, _, _ := syscall.SyscallN(procCreateMetaFile.Addr(), uintptr(unsafe.Pointer(_pszFile)))
 	return HDC(r1)
 }
@@ -1003,10 +1816,10 @@ func CreateRoundRectRgn(x1 int32, y1 int32, x2 int32, y2 int32, w int32, h int32
 // CreateScalableFontResource calls GDI32!CreateScalableFontResourceW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createscalablefontresourcew
 // Minimum OS: windows5.0.
-func CreateScalableFontResource(fdwHidden uint32, lpszFont string, lpszFile string, lpszPath string) error {
+func CreateScalableFontResource(fdwHidden uint32, lpszFont string, lpszFile string, lpszPath *string) error {
 	_lpszFont := win32.UTF16Ptr(lpszFont)
 	_lpszFile := win32.UTF16Ptr(lpszFile)
-	_lpszPath := win32.UTF16Ptr(lpszPath)
+	_lpszPath := win32.UTF16PtrOrNil(lpszPath)
 	r1, _, e1 := syscall.SyscallN(procCreateScalableFontResource.Addr(), uintptr(fdwHidden), uintptr(unsafe.Pointer(_lpszFont)), uintptr(unsafe.Pointer(_lpszFile)), uintptr(unsafe.Pointer(_lpszPath)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1200,8 +2013,8 @@ func EndPath(hdc HDC) bool {
 // EnumDisplayDevices calls USER32!EnumDisplayDevicesW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaydevicesw
 // Minimum OS: windows5.0.
-func EnumDisplayDevices(lpDevice string, iDevNum uint32, lpDisplayDevice *DISPLAY_DEVICEW, dwFlags uint32) bool {
-	_lpDevice := win32.UTF16Ptr(lpDevice)
+func EnumDisplayDevices(lpDevice *string, iDevNum uint32, lpDisplayDevice *DISPLAY_DEVICEW, dwFlags uint32) bool {
+	_lpDevice := win32.UTF16PtrOrNil(lpDevice)
 	r1, _, _ := syscall.SyscallN(procEnumDisplayDevices.Addr(), uintptr(unsafe.Pointer(_lpDevice)), uintptr(iDevNum), uintptr(unsafe.Pointer(lpDisplayDevice)), uintptr(dwFlags))
 	return r1 != 0
 }
@@ -1225,8 +2038,8 @@ func EnumDisplayMonitors(hdc HDC, lprcClip *foundation.RECT, lpfnEnum MONITORENU
 // EnumDisplaySettings calls USER32!EnumDisplaySettingsW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsw
 // Minimum OS: windows5.0.
-func EnumDisplaySettings(lpszDeviceName string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW) bool {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+func EnumDisplaySettings(lpszDeviceName *string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW) bool {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
 	r1, _, _ := syscall.SyscallN(procEnumDisplaySettings.Addr(), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)))
 	return r1 != 0
 }
@@ -1242,8 +2055,8 @@ func EnumDisplaySettingsA(lpszDeviceName foundation.PSTR, iModeNum ENUM_DISPLAY_
 // EnumDisplaySettingsEx calls USER32!EnumDisplaySettingsExW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdisplaysettingsexw
 // Minimum OS: windows5.0.
-func EnumDisplaySettingsEx(lpszDeviceName string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW, dwFlags ENUM_DISPLAY_SETTINGS_FLAGS) bool {
-	_lpszDeviceName := win32.UTF16Ptr(lpszDeviceName)
+func EnumDisplaySettingsEx(lpszDeviceName *string, iModeNum ENUM_DISPLAY_SETTINGS_MODE, lpDevMode *DEVMODEW, dwFlags ENUM_DISPLAY_SETTINGS_FLAGS) bool {
+	_lpszDeviceName := win32.UTF16PtrOrNil(lpszDeviceName)
 	r1, _, _ := syscall.SyscallN(procEnumDisplaySettingsEx.Addr(), uintptr(unsafe.Pointer(_lpszDeviceName)), uintptr(iModeNum), uintptr(unsafe.Pointer(lpDevMode)), uintptr(dwFlags))
 	return r1 != 0
 }
@@ -1267,8 +2080,8 @@ func EnumEnhMetaFile(hdc HDC, hmf HENHMETAFILE, proc ENHMFENUMPROC, param3 unsaf
 // EnumFontFamilies calls GDI32!EnumFontFamiliesW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesw
 // Minimum OS: windows5.0.
-func EnumFontFamilies(hdc HDC, lpLogfont string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
-	_lpLogfont := win32.UTF16Ptr(lpLogfont)
+func EnumFontFamilies(hdc HDC, lpLogfont *string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
+	_lpLogfont := win32.UTF16PtrOrNil(lpLogfont)
 	r1, _, _ := syscall.SyscallN(procEnumFontFamilies.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpLogfont)), uintptr(lpProc), uintptr(lParam))
 	return int32(r1)
 }
@@ -1300,8 +2113,8 @@ func EnumFontFamiliesExA(hdc HDC, lpLogfont *LOGFONTA, lpProc FONTENUMPROCA, lPa
 // EnumFonts calls GDI32!EnumFontsW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumfontsw
 // Minimum OS: windows5.0.
-func EnumFonts(hdc HDC, lpLogfont string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
-	_lpLogfont := win32.UTF16Ptr(lpLogfont)
+func EnumFonts(hdc HDC, lpLogfont *string, lpProc FONTENUMPROCW, lParam foundation.LPARAM) int32 {
+	_lpLogfont := win32.UTF16PtrOrNil(lpLogfont)
 	r1, _, _ := syscall.SyscallN(procEnumFonts.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpLogfont)), uintptr(lpProc), uintptr(lParam))
 	return int32(r1)
 }
@@ -1401,8 +2214,8 @@ func ExtSelectClipRgn(hdc HDC, hrgn HRGN, mode RGN_COMBINE_MODE) GDI_REGION_TYPE
 // ExtTextOut calls GDI32!ExtTextOutW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-exttextoutw
 // Minimum OS: windows5.0.
-func ExtTextOut(hdc HDC, x int32, y int32, options ETO_OPTIONS, lprect *foundation.RECT, lpString string, c uint32, lpDx *int32) bool {
-	_lpString := win32.UTF16Ptr(lpString)
+func ExtTextOut(hdc HDC, x int32, y int32, options ETO_OPTIONS, lprect *foundation.RECT, lpString *string, c uint32, lpDx *int32) bool {
+	_lpString := win32.UTF16PtrOrNil(lpString)
 	r1, _, _ := syscall.SyscallN(procExtTextOut.Addr(), uintptr(hdc), uintptr(x), uintptr(y), uintptr(options), uintptr(unsafe.Pointer(lprect)), uintptr(unsafe.Pointer(_lpString)), uintptr(c), uintptr(unsafe.Pointer(lpDx)))
 	return r1 != 0
 }
@@ -3365,6 +4178,16 @@ func SetMetaRgn(hdc HDC) GDI_REGION_TYPE {
 	return GDI_REGION_TYPE(r1)
 }
 
+var specSetMiterLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetMiterLimit calls GDI32!SetMiterLimit.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setmiterlimit
+// Minimum OS: windows5.0.
+func SetMiterLimit(hdc HDC, limit float32, old *float32) bool {
+	r1, _, _ := win32.Call(procSetMiterLimit.Addr(), specSetMiterLimit, nil, uintptr(hdc), uintptr(math.Float32bits(limit)), uintptr(unsafe.Pointer(old))).Tuple()
+	return r1 != 0
+}
+
 // SetPaletteEntries calls GDI32!SetPaletteEntries.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setpaletteentries
 // Minimum OS: windows5.0.
@@ -3693,8 +4516,8 @@ func TTIsEmbeddingEnabledForFacename(lpszFacename foundation.PSTR, pbEnabled *fo
 // TTLoadEmbeddedFont calls t2embed!TTLoadEmbeddedFont.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttloadembeddedfont
 // Minimum OS: windows5.0.
-func TTLoadEmbeddedFont(phFontReference *foundation.HANDLE, ulFlags uint32, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, ulPrivs FONT_LICENSE_PRIVS, pulStatus *TTLOAD_EMBEDDED_FONT_STATUS, lpfnReadFromStream READEMBEDPROC, lpvReadStream unsafe.Pointer, szWinFamilyName string, szMacFamilyName foundation.PSTR, pTTLoadInfo *TTLOADINFO) int32 {
-	_szWinFamilyName := win32.UTF16Ptr(szWinFamilyName)
+func TTLoadEmbeddedFont(phFontReference *foundation.HANDLE, ulFlags uint32, pulPrivStatus *EMBEDDED_FONT_PRIV_STATUS, ulPrivs FONT_LICENSE_PRIVS, pulStatus *TTLOAD_EMBEDDED_FONT_STATUS, lpfnReadFromStream READEMBEDPROC, lpvReadStream unsafe.Pointer, szWinFamilyName *string, szMacFamilyName foundation.PSTR, pTTLoadInfo *TTLOADINFO) int32 {
+	_szWinFamilyName := win32.UTF16PtrOrNil(szWinFamilyName)
 	r1, _, _ := syscall.SyscallN(procTTLoadEmbeddedFont.Addr(), uintptr(unsafe.Pointer(phFontReference)), uintptr(ulFlags), uintptr(unsafe.Pointer(pulPrivStatus)), uintptr(ulPrivs), uintptr(unsafe.Pointer(pulStatus)), uintptr(lpfnReadFromStream), uintptr(unsafe.Pointer(lpvReadStream)), uintptr(unsafe.Pointer(_szWinFamilyName)), uintptr(unsafe.Pointer(szMacFamilyName)), uintptr(unsafe.Pointer(pTTLoadInfo)))
 	return int32(r1)
 }

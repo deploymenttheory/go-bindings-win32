@@ -4,12 +4,20 @@
 
 package winrt
 
-// CloseHSTRING releases a HSTRING handle by calling WindowsDeleteString.
+// CloseHSTRING releases a HSTRING handle by calling WindowsDeleteString. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseHSTRING(h HSTRING) error {
+	if h == 0 {
+		return nil
+	}
 	return WindowsDeleteString(HSTRING(h))
 }
 
-// CloseHSTRING_BUFFER releases a HSTRING_BUFFER handle by calling WindowsDeleteStringBuffer.
+// CloseHSTRING_BUFFER releases a HSTRING_BUFFER handle by calling WindowsDeleteStringBuffer. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHSTRING_BUFFER(h HSTRING_BUFFER) error {
+	if h == ^HSTRING_BUFFER(0) || h == 0 {
+		return nil
+	}
 	return WindowsDeleteStringBuffer(HSTRING_BUFFER(h))
 }

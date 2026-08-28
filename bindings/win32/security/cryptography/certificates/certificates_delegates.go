@@ -4,78 +4,95 @@
 
 package certificates
 
-// FNCERTSRVBACKUPCLOSE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// FNCERTSRVBACKUPCLOSE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVBACKUPCLOSE uintptr
 
-// FNCERTSRVBACKUPEND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// FNCERTSRVBACKUPEND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVBACKUPEND uintptr
 
-// FNCERTSRVBACKUPFREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// FNCERTSRVBACKUPFREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type FNCERTSRVBACKUPFREE uintptr
 
-// FNCERTSRVBACKUPGETBACKUPLOGSW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, **uint16, *uint32) foundation.HRESULT.
+// FNCERTSRVBACKUPGETBACKUPLOGSW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, **uint16, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVBACKUPGETBACKUPLOGSW uintptr
 
-// FNCERTSRVBACKUPGETDATABASENAMESW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, **uint16, *uint32) foundation.HRESULT.
+// FNCERTSRVBACKUPGETDATABASENAMESW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, **uint16, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVBACKUPGETDATABASENAMESW uintptr
 
-// FNCERTSRVBACKUPGETDYNAMICFILELISTW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, **uint16, *uint32) foundation.HRESULT.
+// FNCERTSRVBACKUPGETDYNAMICFILELISTW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, **uint16, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVBACKUPGETDYNAMICFILELISTW uintptr
 
-// FNCERTSRVBACKUPOPENFILEW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, *int64) foundation.HRESULT.
+// FNCERTSRVBACKUPOPENFILEW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, *int64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVBACKUPOPENFILEW uintptr
 
-// FNCERTSRVBACKUPPREPAREW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, uint32, *unsafe.Pointer) foundation.HRESULT.
+// FNCERTSRVBACKUPPREPAREW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVBACKUPPREPAREW uintptr
 
-// FNCERTSRVBACKUPREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, uint32, *uint32) foundation.HRESULT.
+// FNCERTSRVBACKUPREAD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVBACKUPREAD uintptr
 
-// FNCERTSRVBACKUPTRUNCATELOGS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// FNCERTSRVBACKUPTRUNCATELOGS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVBACKUPTRUNCATELOGS uintptr
 
-// FNCERTSRVISSERVERONLINEW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *foundation.BOOL) foundation.HRESULT.
+// FNCERTSRVISSERVERONLINEW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVISSERVERONLINEW uintptr
 
-// FNCERTSRVRESTOREEND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// FNCERTSRVRESTOREEND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVRESTOREEND uintptr
 
-// FNCERTSRVRESTOREGETDATABASELOCATIONSW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, **uint16, *uint32) foundation.HRESULT.
+// FNCERTSRVRESTOREGETDATABASELOCATIONSW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, **uint16, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVRESTOREGETDATABASELOCATIONSW uintptr
 
-// FNCERTSRVRESTOREPREPAREW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, *unsafe.Pointer) foundation.HRESULT.
+// FNCERTSRVRESTOREPREPAREW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVRESTOREPREPAREW uintptr
 
-// FNCERTSRVRESTOREREGISTERCOMPLETE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.HRESULT) foundation.HRESULT.
+// FNCERTSRVRESTOREREGISTERCOMPLETE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.HRESULT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVRESTOREREGISTERCOMPLETE uintptr
 
-// FNCERTSRVRESTOREREGISTERW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, *CSEDB_RSTMAPW, int32, foundation.PWSTR, uint32, uint32) foundation.HRESULT.
+// FNCERTSRVRESTOREREGISTERW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, *CSEDB_RSTMAPW, int32, foundation.PWSTR, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVRESTOREREGISTERW uintptr
 
-// FNCERTSRVSERVERCONTROLW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, *uint32, **byte) foundation.HRESULT.
+// FNCERTSRVSERVERCONTROLW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, *uint32, **byte) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNCERTSRVSERVERCONTROLW uintptr
 
-// FNIMPORTPFXTOPROVIDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *byte, uint32, ImportPFXFlags, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, *uint32, ***securitycryptography.CERT_CONTEXT) foundation.HRESULT.
+// FNIMPORTPFXTOPROVIDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *byte, uint32, ImportPFXFlags, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, *uint32, ***securitycryptography.CERT_CONTEXT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FNIMPORTPFXTOPROVIDER uintptr
 
-// FNIMPORTPFXTOPROVIDERFREEDATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, **securitycryptography.CERT_CONTEXT).
+// FNIMPORTPFXTOPROVIDERFREEDATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, **securitycryptography.CERT_CONTEXT) uintptr.
 type FNIMPORTPFXTOPROVIDERFREEDATA uintptr

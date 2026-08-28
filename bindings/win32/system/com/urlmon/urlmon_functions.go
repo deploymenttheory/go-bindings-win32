@@ -93,6 +93,160 @@ var (
 	procWriteHitLogging                         = modurlmon.NewProc("WriteHitLogging")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CoGetClassObjectFromURL                 *win32.Proc
+	CoInternetCombineIUri                   *win32.Proc
+	CoInternetCombineUrl                    *win32.Proc
+	CoInternetCombineUrlEx                  *win32.Proc
+	CoInternetCompareUrl                    *win32.Proc
+	CoInternetCreateSecurityManager         *win32.Proc
+	CoInternetCreateZoneManager             *win32.Proc
+	CoInternetGetProtocolFlags              *win32.Proc
+	CoInternetGetSecurityUrl                *win32.Proc
+	CoInternetGetSecurityUrlEx              *win32.Proc
+	CoInternetGetSession                    *win32.Proc
+	CoInternetIsFeatureEnabled              *win32.Proc
+	CoInternetIsFeatureEnabledForIUri       *win32.Proc
+	CoInternetIsFeatureEnabledForUrl        *win32.Proc
+	CoInternetIsFeatureZoneElevationEnabled *win32.Proc
+	CoInternetParseIUri                     *win32.Proc
+	CoInternetParseUrl                      *win32.Proc
+	CoInternetQueryInfo                     *win32.Proc
+	CoInternetSetFeatureEnabled             *win32.Proc
+	CompareSecurityIds                      *win32.Proc
+	CompatFlagsFromClsid                    *win32.Proc
+	CopyBindInfo                            *win32.Proc
+	CopyStgMedium                           *win32.Proc
+	CreateAsyncBindCtx                      *win32.Proc
+	CreateAsyncBindCtxEx                    *win32.Proc
+	CreateFormatEnumerator                  *win32.Proc
+	CreateURLMoniker                        *win32.Proc
+	CreateURLMonikerEx                      *win32.Proc
+	CreateURLMonikerEx2                     *win32.Proc
+	FaultInIEFeature                        *win32.Proc
+	FindMediaType                           *win32.Proc
+	FindMediaTypeClass                      *win32.Proc
+	FindMimeFromData                        *win32.Proc
+	GetClassFileOrMime                      *win32.Proc
+	GetClassURL                             *win32.Proc
+	GetComponentIDFromCLSSPEC               *win32.Proc
+	GetSoftwareUpdateInfo                   *win32.Proc
+	HlinkGoBack                             *win32.Proc
+	HlinkGoForward                          *win32.Proc
+	HlinkNavigateMoniker                    *win32.Proc
+	HlinkNavigateString                     *win32.Proc
+	HlinkSimpleNavigateToMoniker            *win32.Proc
+	HlinkSimpleNavigateToString             *win32.Proc
+	IEGetUserPrivateNamespaceName           *win32.Proc
+	IEInstallScope                          *win32.Proc
+	IsAsyncMoniker                          *win32.Proc
+	IsLoggingEnabled                        *win32.Proc
+	IsLoggingEnabledA                       *win32.Proc
+	IsValidURL                              *win32.Proc
+	MkParseDisplayNameEx                    *win32.Proc
+	ObtainUserAgentString                   *win32.Proc
+	RegisterBindStatusCallback              *win32.Proc
+	RegisterFormatEnumerator                *win32.Proc
+	RegisterMediaTypeClass                  *win32.Proc
+	RegisterMediaTypes                      *win32.Proc
+	ReleaseBindInfo                         *win32.Proc
+	RevokeBindStatusCallback                *win32.Proc
+	RevokeFormatEnumerator                  *win32.Proc
+	SetAccessForIEAppContainer              *win32.Proc
+	SetSoftwareUpdateAdvertisementState     *win32.Proc
+	URLDownloadToCacheFile                  *win32.Proc
+	URLDownloadToCacheFileA                 *win32.Proc
+	URLDownloadToFile                       *win32.Proc
+	URLDownloadToFileA                      *win32.Proc
+	URLOpenBlockingStream                   *win32.Proc
+	URLOpenBlockingStreamA                  *win32.Proc
+	URLOpenPullStream                       *win32.Proc
+	URLOpenPullStreamA                      *win32.Proc
+	URLOpenStream                           *win32.Proc
+	URLOpenStreamA                          *win32.Proc
+	UrlMkGetSessionOption                   *win32.Proc
+	UrlMkSetSessionOption                   *win32.Proc
+	WriteHitLogging                         *win32.Proc
+}{
+	CoGetClassObjectFromURL:                 procCoGetClassObjectFromURL,
+	CoInternetCombineIUri:                   procCoInternetCombineIUri,
+	CoInternetCombineUrl:                    procCoInternetCombineUrl,
+	CoInternetCombineUrlEx:                  procCoInternetCombineUrlEx,
+	CoInternetCompareUrl:                    procCoInternetCompareUrl,
+	CoInternetCreateSecurityManager:         procCoInternetCreateSecurityManager,
+	CoInternetCreateZoneManager:             procCoInternetCreateZoneManager,
+	CoInternetGetProtocolFlags:              procCoInternetGetProtocolFlags,
+	CoInternetGetSecurityUrl:                procCoInternetGetSecurityUrl,
+	CoInternetGetSecurityUrlEx:              procCoInternetGetSecurityUrlEx,
+	CoInternetGetSession:                    procCoInternetGetSession,
+	CoInternetIsFeatureEnabled:              procCoInternetIsFeatureEnabled,
+	CoInternetIsFeatureEnabledForIUri:       procCoInternetIsFeatureEnabledForIUri,
+	CoInternetIsFeatureEnabledForUrl:        procCoInternetIsFeatureEnabledForUrl,
+	CoInternetIsFeatureZoneElevationEnabled: procCoInternetIsFeatureZoneElevationEnabled,
+	CoInternetParseIUri:                     procCoInternetParseIUri,
+	CoInternetParseUrl:                      procCoInternetParseUrl,
+	CoInternetQueryInfo:                     procCoInternetQueryInfo,
+	CoInternetSetFeatureEnabled:             procCoInternetSetFeatureEnabled,
+	CompareSecurityIds:                      procCompareSecurityIds,
+	CompatFlagsFromClsid:                    procCompatFlagsFromClsid,
+	CopyBindInfo:                            procCopyBindInfo,
+	CopyStgMedium:                           procCopyStgMedium,
+	CreateAsyncBindCtx:                      procCreateAsyncBindCtx,
+	CreateAsyncBindCtxEx:                    procCreateAsyncBindCtxEx,
+	CreateFormatEnumerator:                  procCreateFormatEnumerator,
+	CreateURLMoniker:                        procCreateURLMoniker,
+	CreateURLMonikerEx:                      procCreateURLMonikerEx,
+	CreateURLMonikerEx2:                     procCreateURLMonikerEx2,
+	FaultInIEFeature:                        procFaultInIEFeature,
+	FindMediaType:                           procFindMediaType,
+	FindMediaTypeClass:                      procFindMediaTypeClass,
+	FindMimeFromData:                        procFindMimeFromData,
+	GetClassFileOrMime:                      procGetClassFileOrMime,
+	GetClassURL:                             procGetClassURL,
+	GetComponentIDFromCLSSPEC:               procGetComponentIDFromCLSSPEC,
+	GetSoftwareUpdateInfo:                   procGetSoftwareUpdateInfo,
+	HlinkGoBack:                             procHlinkGoBack,
+	HlinkGoForward:                          procHlinkGoForward,
+	HlinkNavigateMoniker:                    procHlinkNavigateMoniker,
+	HlinkNavigateString:                     procHlinkNavigateString,
+	HlinkSimpleNavigateToMoniker:            procHlinkSimpleNavigateToMoniker,
+	HlinkSimpleNavigateToString:             procHlinkSimpleNavigateToString,
+	IEGetUserPrivateNamespaceName:           procIEGetUserPrivateNamespaceName,
+	IEInstallScope:                          procIEInstallScope,
+	IsAsyncMoniker:                          procIsAsyncMoniker,
+	IsLoggingEnabled:                        procIsLoggingEnabled,
+	IsLoggingEnabledA:                       procIsLoggingEnabledA,
+	IsValidURL:                              procIsValidURL,
+	MkParseDisplayNameEx:                    procMkParseDisplayNameEx,
+	ObtainUserAgentString:                   procObtainUserAgentString,
+	RegisterBindStatusCallback:              procRegisterBindStatusCallback,
+	RegisterFormatEnumerator:                procRegisterFormatEnumerator,
+	RegisterMediaTypeClass:                  procRegisterMediaTypeClass,
+	RegisterMediaTypes:                      procRegisterMediaTypes,
+	ReleaseBindInfo:                         procReleaseBindInfo,
+	RevokeBindStatusCallback:                procRevokeBindStatusCallback,
+	RevokeFormatEnumerator:                  procRevokeFormatEnumerator,
+	SetAccessForIEAppContainer:              procSetAccessForIEAppContainer,
+	SetSoftwareUpdateAdvertisementState:     procSetSoftwareUpdateAdvertisementState,
+	URLDownloadToCacheFile:                  procURLDownloadToCacheFile,
+	URLDownloadToCacheFileA:                 procURLDownloadToCacheFileA,
+	URLDownloadToFile:                       procURLDownloadToFile,
+	URLDownloadToFileA:                      procURLDownloadToFileA,
+	URLOpenBlockingStream:                   procURLOpenBlockingStream,
+	URLOpenBlockingStreamA:                  procURLOpenBlockingStreamA,
+	URLOpenPullStream:                       procURLOpenPullStream,
+	URLOpenPullStreamA:                      procURLOpenPullStreamA,
+	URLOpenStream:                           procURLOpenStream,
+	URLOpenStreamA:                          procURLOpenStreamA,
+	UrlMkGetSessionOption:                   procUrlMkGetSessionOption,
+	UrlMkSetSessionOption:                   procUrlMkSetSessionOption,
+	WriteHitLogging:                         procWriteHitLogging,
+}
+
 // CoGetClassObjectFromURL calls urlmon!CoGetClassObjectFromURL.
 func CoGetClassObjectFromURL(rCLASSID *win32.GUID, szCODE string, dwFileVersionMS uint32, dwFileVersionLS uint32, szTYPE string, pBindCtx *systemcom.IBindCtx, dwClsContext systemcom.CLSCTX, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_szCODE := win32.UTF16Ptr(szCODE)
@@ -116,8 +270,8 @@ func CoInternetCombineUrl(pwzBaseUrl string, pwzRelativeUrl string, dwCombineFla
 }
 
 // CoInternetCombineUrlEx calls urlmon!CoInternetCombineUrlEx.
-func CoInternetCombineUrlEx(pBaseUri *systemcom.IUri, pwzRelativeUrl string, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) error {
-	_pwzRelativeUrl := win32.UTF16Ptr(pwzRelativeUrl)
+func CoInternetCombineUrlEx(pBaseUri *systemcom.IUri, pwzRelativeUrl *string, dwCombineFlags uint32, ppCombinedUri **systemcom.IUri, dwReserved uintptr) error {
+	_pwzRelativeUrl := win32.UTF16PtrOrNil(pwzRelativeUrl)
 	r1, _, _ := syscall.SyscallN(procCoInternetCombineUrlEx.Addr(), uintptr(unsafe.Pointer(pBaseUri)), uintptr(unsafe.Pointer(_pwzRelativeUrl)), uintptr(dwCombineFlags), uintptr(unsafe.Pointer(ppCombinedUri)), uintptr(dwReserved))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -181,15 +335,15 @@ func CoInternetIsFeatureEnabledForIUri(FeatureEntry INTERNETFEATURELIST, dwFlags
 }
 
 // CoInternetIsFeatureEnabledForUrl calls urlmon!CoInternetIsFeatureEnabledForUrl.
-func CoInternetIsFeatureEnabledForUrl(FeatureEntry INTERNETFEATURELIST, dwFlags uint32, szURL string, pSecMgr *IInternetSecurityManager) error {
-	_szURL := win32.UTF16Ptr(szURL)
+func CoInternetIsFeatureEnabledForUrl(FeatureEntry INTERNETFEATURELIST, dwFlags uint32, szURL *string, pSecMgr *IInternetSecurityManager) error {
+	_szURL := win32.UTF16PtrOrNil(szURL)
 	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureEnabledForUrl.Addr(), uintptr(FeatureEntry), uintptr(dwFlags), uintptr(unsafe.Pointer(_szURL)), uintptr(unsafe.Pointer(pSecMgr)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoInternetIsFeatureZoneElevationEnabled calls urlmon!CoInternetIsFeatureZoneElevationEnabled.
-func CoInternetIsFeatureZoneElevationEnabled(szFromURL string, szToURL string, pSecMgr *IInternetSecurityManager, dwFlags uint32) error {
-	_szFromURL := win32.UTF16Ptr(szFromURL)
+func CoInternetIsFeatureZoneElevationEnabled(szFromURL *string, szToURL string, pSecMgr *IInternetSecurityManager, dwFlags uint32) error {
+	_szFromURL := win32.UTF16PtrOrNil(szFromURL)
 	_szToURL := win32.UTF16Ptr(szToURL)
 	r1, _, _ := syscall.SyscallN(procCoInternetIsFeatureZoneElevationEnabled.Addr(), uintptr(unsafe.Pointer(_szFromURL)), uintptr(unsafe.Pointer(_szToURL)), uintptr(unsafe.Pointer(pSecMgr)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
@@ -323,25 +477,25 @@ func FindMediaTypeClass(pBC *systemcom.IBindCtx, szType foundation.PSTR, pclsID 
 }
 
 // FindMimeFromData calls urlmon!FindMimeFromData.
-func FindMimeFromData(pBC *systemcom.IBindCtx, pwzUrl string, pBuffer []byte, pwzMimeProposed string, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR) error {
-	_pwzUrl := win32.UTF16Ptr(pwzUrl)
+func FindMimeFromData(pBC *systemcom.IBindCtx, pwzUrl *string, pBuffer []byte, pwzMimeProposed *string, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR) error {
+	_pwzUrl := win32.UTF16PtrOrNil(pwzUrl)
 	var _pBuffer *byte
 	if len(pBuffer) > 0 {
 		_pBuffer = &pBuffer[0]
 	}
-	_pwzMimeProposed := win32.UTF16Ptr(pwzMimeProposed)
+	_pwzMimeProposed := win32.UTF16PtrOrNil(pwzMimeProposed)
 	r1, _, _ := syscall.SyscallN(procFindMimeFromData.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(_pwzUrl)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pwzMimeProposed)), uintptr(dwMimeFlags), uintptr(unsafe.Pointer(ppwzMimeOut)), 0)
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetClassFileOrMime calls urlmon!GetClassFileOrMime.
-func GetClassFileOrMime(pBC *systemcom.IBindCtx, szFilename string, pBuffer []byte, szMime string, dwReserved uint32, pclsid *win32.GUID) error {
-	_szFilename := win32.UTF16Ptr(szFilename)
+func GetClassFileOrMime(pBC *systemcom.IBindCtx, szFilename *string, pBuffer []byte, szMime *string, dwReserved uint32, pclsid *win32.GUID) error {
+	_szFilename := win32.UTF16PtrOrNil(szFilename)
 	var _pBuffer *byte
 	if len(pBuffer) > 0 {
 		_pBuffer = &pBuffer[0]
 	}
-	_szMime := win32.UTF16Ptr(szMime)
+	_szMime := win32.UTF16PtrOrNil(szMime)
 	r1, _, _ := syscall.SyscallN(procGetClassFileOrMime.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(_szFilename)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_szMime)), uintptr(dwReserved), uintptr(unsafe.Pointer(pclsid)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -385,25 +539,25 @@ func HlinkNavigateMoniker(pUnk *systemcom.IUnknown, pmkTarget *systemcom.IMonike
 }
 
 // HlinkNavigateString calls urlmon!HlinkNavigateString.
-func HlinkNavigateString(pUnk *systemcom.IUnknown, szTarget string) error {
-	_szTarget := win32.UTF16Ptr(szTarget)
+func HlinkNavigateString(pUnk *systemcom.IUnknown, szTarget *string) error {
+	_szTarget := win32.UTF16PtrOrNil(szTarget)
 	r1, _, _ := syscall.SyscallN(procHlinkNavigateString.Addr(), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(_szTarget)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HlinkSimpleNavigateToMoniker calls urlmon!HlinkSimpleNavigateToMoniker.
-func HlinkSimpleNavigateToMoniker(pmkTarget *systemcom.IMoniker, szLocation string, szTargetFrameName string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
-	_szLocation := win32.UTF16Ptr(szLocation)
-	_szTargetFrameName := win32.UTF16Ptr(szTargetFrameName)
+func HlinkSimpleNavigateToMoniker(pmkTarget *systemcom.IMoniker, szLocation *string, szTargetFrameName *string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
+	_szLocation := win32.UTF16PtrOrNil(szLocation)
+	_szTargetFrameName := win32.UTF16PtrOrNil(szTargetFrameName)
 	r1, _, _ := syscall.SyscallN(procHlinkSimpleNavigateToMoniker.Addr(), uintptr(unsafe.Pointer(pmkTarget)), uintptr(unsafe.Pointer(_szLocation)), uintptr(unsafe.Pointer(_szTargetFrameName)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(param5)), uintptr(grfHLNF), uintptr(dwReserved))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HlinkSimpleNavigateToString calls urlmon!HlinkSimpleNavigateToString.
-func HlinkSimpleNavigateToString(szTarget string, szLocation string, szTargetFrameName string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
-	_szTarget := win32.UTF16Ptr(szTarget)
-	_szLocation := win32.UTF16Ptr(szLocation)
-	_szTargetFrameName := win32.UTF16Ptr(szTargetFrameName)
+func HlinkSimpleNavigateToString(szTarget *string, szLocation *string, szTargetFrameName *string, pUnk *systemcom.IUnknown, pbc *systemcom.IBindCtx, param5 *systemcom.IBindStatusCallback, grfHLNF uint32, dwReserved uint32) error {
+	_szTarget := win32.UTF16PtrOrNil(szTarget)
+	_szLocation := win32.UTF16PtrOrNil(szLocation)
+	_szTargetFrameName := win32.UTF16PtrOrNil(szTargetFrameName)
 	r1, _, _ := syscall.SyscallN(procHlinkSimpleNavigateToString.Addr(), uintptr(unsafe.Pointer(_szTarget)), uintptr(unsafe.Pointer(_szLocation)), uintptr(unsafe.Pointer(_szTargetFrameName)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(pbc)), uintptr(unsafe.Pointer(param5)), uintptr(grfHLNF), uintptr(dwReserved))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -527,9 +681,9 @@ func URLDownloadToCacheFileA(param0 *systemcom.IUnknown, param1 foundation.PSTR,
 }
 
 // URLDownloadToFile calls urlmon!URLDownloadToFileW.
-func URLDownloadToFile(param0 *systemcom.IUnknown, param1 string, param2 string, param3 uint32, param4 *systemcom.IBindStatusCallback) error {
+func URLDownloadToFile(param0 *systemcom.IUnknown, param1 string, param2 *string, param3 uint32, param4 *systemcom.IBindStatusCallback) error {
 	_param1 := win32.UTF16Ptr(param1)
-	_param2 := win32.UTF16Ptr(param2)
+	_param2 := win32.UTF16PtrOrNil(param2)
 	r1, _, _ := syscall.SyscallN(procURLDownloadToFile.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(_param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)))
 	return win32.ErrIfFailed(int32(r1))
 }

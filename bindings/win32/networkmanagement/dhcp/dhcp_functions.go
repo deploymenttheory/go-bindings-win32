@@ -23,12 +23,15 @@ var (
 	procDhcpCApiInitialize                        = moddhcpcsvc.NewProc("DhcpCApiInitialize")
 	procDhcpDeRegisterParamChange                 = moddhcpcsvc.NewProc("DhcpDeRegisterParamChange")
 	procDhcpGetOriginalSubnetMask                 = moddhcpcsvc.NewProc("DhcpGetOriginalSubnetMask")
+	procDhcpRegisterParamChange                   = moddhcpcsvc.NewProc("DhcpRegisterParamChange")
 	procDhcpRemoveDNSRegistrations                = moddhcpcsvc.NewProc("DhcpRemoveDNSRegistrations")
+	procDhcpRequestParams                         = moddhcpcsvc.NewProc("DhcpRequestParams")
 	procDhcpUndoRequestParams                     = moddhcpcsvc.NewProc("DhcpUndoRequestParams")
 	procDhcpv6CApiCleanup                         = moddhcpcsvc6.NewProc("Dhcpv6CApiCleanup")
 	procDhcpv6CApiInitialize                      = moddhcpcsvc6.NewProc("Dhcpv6CApiInitialize")
 	procDhcpv6ReleasePrefix                       = moddhcpcsvc6.NewProc("Dhcpv6ReleasePrefix")
 	procDhcpv6RenewPrefix                         = moddhcpcsvc6.NewProc("Dhcpv6RenewPrefix")
+	procDhcpv6RequestParams                       = moddhcpcsvc6.NewProc("Dhcpv6RequestParams")
 	procDhcpv6RequestPrefix                       = moddhcpcsvc6.NewProc("Dhcpv6RequestPrefix")
 	procDhcpAddFilterV4                           = modDHCPSAPI.NewProc("DhcpAddFilterV4")
 	procDhcpAddSecurityGroup                      = modDHCPSAPI.NewProc("DhcpAddSecurityGroup")
@@ -36,6 +39,7 @@ var (
 	procDhcpAddSubnetElement                      = modDHCPSAPI.NewProc("DhcpAddSubnetElement")
 	procDhcpAddSubnetElementV4                    = modDHCPSAPI.NewProc("DhcpAddSubnetElementV4")
 	procDhcpAddSubnetElementV5                    = modDHCPSAPI.NewProc("DhcpAddSubnetElementV5")
+	procDhcpAddSubnetElementV6                    = modDHCPSAPI.NewProc("DhcpAddSubnetElementV6")
 	procDhcpAuditLogGetParams                     = modDHCPSAPI.NewProc("DhcpAuditLogGetParams")
 	procDhcpAuditLogSetParams                     = modDHCPSAPI.NewProc("DhcpAuditLogSetParams")
 	procDhcpCreateClass                           = modDHCPSAPI.NewProc("DhcpCreateClass")
@@ -47,6 +51,7 @@ var (
 	procDhcpCreateOptionV5                        = modDHCPSAPI.NewProc("DhcpCreateOptionV5")
 	procDhcpCreateOptionV6                        = modDHCPSAPI.NewProc("DhcpCreateOptionV6")
 	procDhcpCreateSubnet                          = modDHCPSAPI.NewProc("DhcpCreateSubnet")
+	procDhcpCreateSubnetV6                        = modDHCPSAPI.NewProc("DhcpCreateSubnetV6")
 	procDhcpCreateSubnetVQ                        = modDHCPSAPI.NewProc("DhcpCreateSubnetVQ")
 	procDhcpDeleteClass                           = modDHCPSAPI.NewProc("DhcpDeleteClass")
 	procDhcpDeleteClassV6                         = modDHCPSAPI.NewProc("DhcpDeleteClassV6")
@@ -55,6 +60,7 @@ var (
 	procDhcpDeleteFilterV4                        = modDHCPSAPI.NewProc("DhcpDeleteFilterV4")
 	procDhcpDeleteServer                          = modDHCPSAPI.NewProc("DhcpDeleteServer")
 	procDhcpDeleteSubnet                          = modDHCPSAPI.NewProc("DhcpDeleteSubnet")
+	procDhcpDeleteSubnetV6                        = modDHCPSAPI.NewProc("DhcpDeleteSubnetV6")
 	procDhcpDeleteSuperScopeV4                    = modDHCPSAPI.NewProc("DhcpDeleteSuperScopeV4")
 	procDhcpDsCleanup                             = modDHCPSAPI.NewProc("DhcpDsCleanup")
 	procDhcpDsInit                                = modDHCPSAPI.NewProc("DhcpDsInit")
@@ -72,10 +78,12 @@ var (
 	procDhcpEnumSubnetClientsFilterStatusInfo     = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsFilterStatusInfo")
 	procDhcpEnumSubnetClientsV4                   = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsV4")
 	procDhcpEnumSubnetClientsV5                   = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsV5")
+	procDhcpEnumSubnetClientsV6                   = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsV6")
 	procDhcpEnumSubnetClientsVQ                   = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsVQ")
 	procDhcpEnumSubnetElements                    = modDHCPSAPI.NewProc("DhcpEnumSubnetElements")
 	procDhcpEnumSubnetElementsV4                  = modDHCPSAPI.NewProc("DhcpEnumSubnetElementsV4")
 	procDhcpEnumSubnetElementsV5                  = modDHCPSAPI.NewProc("DhcpEnumSubnetElementsV5")
+	procDhcpEnumSubnetElementsV6                  = modDHCPSAPI.NewProc("DhcpEnumSubnetElementsV6")
 	procDhcpEnumSubnets                           = modDHCPSAPI.NewProc("DhcpEnumSubnets")
 	procDhcpEnumSubnetsV6                         = modDHCPSAPI.NewProc("DhcpEnumSubnetsV6")
 	procDhcpGetAllOptionValues                    = modDHCPSAPI.NewProc("DhcpGetAllOptionValues")
@@ -103,6 +111,7 @@ var (
 	procDhcpGetServerSpecificStrings              = modDHCPSAPI.NewProc("DhcpGetServerSpecificStrings")
 	procDhcpGetSubnetDelayOffer                   = modDHCPSAPI.NewProc("DhcpGetSubnetDelayOffer")
 	procDhcpGetSubnetInfo                         = modDHCPSAPI.NewProc("DhcpGetSubnetInfo")
+	procDhcpGetSubnetInfoV6                       = modDHCPSAPI.NewProc("DhcpGetSubnetInfoV6")
 	procDhcpGetSubnetInfoVQ                       = modDHCPSAPI.NewProc("DhcpGetSubnetInfoVQ")
 	procDhcpGetSuperScopeInfoV4                   = modDHCPSAPI.NewProc("DhcpGetSuperScopeInfoV4")
 	procDhcpGetThreadOptions                      = modDHCPSAPI.NewProc("DhcpGetThreadOptions")
@@ -135,6 +144,7 @@ var (
 	procDhcpRemoveSubnetElement                   = modDHCPSAPI.NewProc("DhcpRemoveSubnetElement")
 	procDhcpRemoveSubnetElementV4                 = modDHCPSAPI.NewProc("DhcpRemoveSubnetElementV4")
 	procDhcpRemoveSubnetElementV5                 = modDHCPSAPI.NewProc("DhcpRemoveSubnetElementV5")
+	procDhcpRemoveSubnetElementV6                 = modDHCPSAPI.NewProc("DhcpRemoveSubnetElementV6")
 	procDhcpRpcFreeMemory                         = modDHCPSAPI.NewProc("DhcpRpcFreeMemory")
 	procDhcpScanDatabase                          = modDHCPSAPI.NewProc("DhcpScanDatabase")
 	procDhcpServerAuditlogParamsFree              = modDHCPSAPI.NewProc("DhcpServerAuditlogParamsFree")
@@ -171,6 +181,7 @@ var (
 	procDhcpSetServerBindingInfoV6                = modDHCPSAPI.NewProc("DhcpSetServerBindingInfoV6")
 	procDhcpSetSubnetDelayOffer                   = modDHCPSAPI.NewProc("DhcpSetSubnetDelayOffer")
 	procDhcpSetSubnetInfo                         = modDHCPSAPI.NewProc("DhcpSetSubnetInfo")
+	procDhcpSetSubnetInfoV6                       = modDHCPSAPI.NewProc("DhcpSetSubnetInfoV6")
 	procDhcpSetSubnetInfoVQ                       = modDHCPSAPI.NewProc("DhcpSetSubnetInfoVQ")
 	procDhcpSetSuperScopeV4                       = modDHCPSAPI.NewProc("DhcpSetSuperScopeV4")
 	procDhcpSetThreadOptions                      = modDHCPSAPI.NewProc("DhcpSetThreadOptions")
@@ -214,22 +225,453 @@ var (
 	procDhcpV4SetPolicyEnforcement                = modDHCPSAPI.NewProc("DhcpV4SetPolicyEnforcement")
 	procDhcpV4SetPolicyEx                         = modDHCPSAPI.NewProc("DhcpV4SetPolicyEx")
 	procDhcpV6CreateClientInfo                    = modDHCPSAPI.NewProc("DhcpV6CreateClientInfo")
+	procDhcpV6GetFreeIPAddress                    = modDHCPSAPI.NewProc("DhcpV6GetFreeIPAddress")
 	procDhcpV6GetStatelessStatistics              = modDHCPSAPI.NewProc("DhcpV6GetStatelessStatistics")
+	procDhcpV6GetStatelessStoreParams             = modDHCPSAPI.NewProc("DhcpV6GetStatelessStoreParams")
+	procDhcpV6SetStatelessStoreParams             = modDHCPSAPI.NewProc("DhcpV6SetStatelessStoreParams")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DhcpAddFilterV4                           *win32.Proc
+	DhcpAddSecurityGroup                      *win32.Proc
+	DhcpAddServer                             *win32.Proc
+	DhcpAddSubnetElement                      *win32.Proc
+	DhcpAddSubnetElementV4                    *win32.Proc
+	DhcpAddSubnetElementV5                    *win32.Proc
+	DhcpAddSubnetElementV6                    *win32.Proc
+	DhcpAuditLogGetParams                     *win32.Proc
+	DhcpAuditLogSetParams                     *win32.Proc
+	DhcpCApiCleanup                           *win32.Proc
+	DhcpCApiInitialize                        *win32.Proc
+	DhcpCreateClass                           *win32.Proc
+	DhcpCreateClassV6                         *win32.Proc
+	DhcpCreateClientInfo                      *win32.Proc
+	DhcpCreateClientInfoV4                    *win32.Proc
+	DhcpCreateClientInfoVQ                    *win32.Proc
+	DhcpCreateOption                          *win32.Proc
+	DhcpCreateOptionV5                        *win32.Proc
+	DhcpCreateOptionV6                        *win32.Proc
+	DhcpCreateSubnet                          *win32.Proc
+	DhcpCreateSubnetV6                        *win32.Proc
+	DhcpCreateSubnetVQ                        *win32.Proc
+	DhcpDeRegisterParamChange                 *win32.Proc
+	DhcpDeleteClass                           *win32.Proc
+	DhcpDeleteClassV6                         *win32.Proc
+	DhcpDeleteClientInfo                      *win32.Proc
+	DhcpDeleteClientInfoV6                    *win32.Proc
+	DhcpDeleteFilterV4                        *win32.Proc
+	DhcpDeleteServer                          *win32.Proc
+	DhcpDeleteSubnet                          *win32.Proc
+	DhcpDeleteSubnetV6                        *win32.Proc
+	DhcpDeleteSuperScopeV4                    *win32.Proc
+	DhcpDsCleanup                             *win32.Proc
+	DhcpDsInit                                *win32.Proc
+	DhcpEnumClasses                           *win32.Proc
+	DhcpEnumClassesV6                         *win32.Proc
+	DhcpEnumFilterV4                          *win32.Proc
+	DhcpEnumOptionValues                      *win32.Proc
+	DhcpEnumOptionValuesV5                    *win32.Proc
+	DhcpEnumOptionValuesV6                    *win32.Proc
+	DhcpEnumOptions                           *win32.Proc
+	DhcpEnumOptionsV5                         *win32.Proc
+	DhcpEnumOptionsV6                         *win32.Proc
+	DhcpEnumServers                           *win32.Proc
+	DhcpEnumSubnetClients                     *win32.Proc
+	DhcpEnumSubnetClientsFilterStatusInfo     *win32.Proc
+	DhcpEnumSubnetClientsV4                   *win32.Proc
+	DhcpEnumSubnetClientsV5                   *win32.Proc
+	DhcpEnumSubnetClientsV6                   *win32.Proc
+	DhcpEnumSubnetClientsVQ                   *win32.Proc
+	DhcpEnumSubnetElements                    *win32.Proc
+	DhcpEnumSubnetElementsV4                  *win32.Proc
+	DhcpEnumSubnetElementsV5                  *win32.Proc
+	DhcpEnumSubnetElementsV6                  *win32.Proc
+	DhcpEnumSubnets                           *win32.Proc
+	DhcpEnumSubnetsV6                         *win32.Proc
+	DhcpGetAllOptionValues                    *win32.Proc
+	DhcpGetAllOptionValuesV6                  *win32.Proc
+	DhcpGetAllOptions                         *win32.Proc
+	DhcpGetAllOptionsV6                       *win32.Proc
+	DhcpGetClassInfo                          *win32.Proc
+	DhcpGetClientInfo                         *win32.Proc
+	DhcpGetClientInfoV4                       *win32.Proc
+	DhcpGetClientInfoV6                       *win32.Proc
+	DhcpGetClientInfoVQ                       *win32.Proc
+	DhcpGetClientOptions                      *win32.Proc
+	DhcpGetFilterV4                           *win32.Proc
+	DhcpGetMibInfo                            *win32.Proc
+	DhcpGetMibInfoV5                          *win32.Proc
+	DhcpGetMibInfoV6                          *win32.Proc
+	DhcpGetOptionInfo                         *win32.Proc
+	DhcpGetOptionInfoV5                       *win32.Proc
+	DhcpGetOptionInfoV6                       *win32.Proc
+	DhcpGetOptionValue                        *win32.Proc
+	DhcpGetOptionValueV5                      *win32.Proc
+	DhcpGetOptionValueV6                      *win32.Proc
+	DhcpGetOriginalSubnetMask                 *win32.Proc
+	DhcpGetServerBindingInfo                  *win32.Proc
+	DhcpGetServerBindingInfoV6                *win32.Proc
+	DhcpGetServerSpecificStrings              *win32.Proc
+	DhcpGetSubnetDelayOffer                   *win32.Proc
+	DhcpGetSubnetInfo                         *win32.Proc
+	DhcpGetSubnetInfoV6                       *win32.Proc
+	DhcpGetSubnetInfoVQ                       *win32.Proc
+	DhcpGetSuperScopeInfoV4                   *win32.Proc
+	DhcpGetThreadOptions                      *win32.Proc
+	DhcpGetVersion                            *win32.Proc
+	DhcpHlprAddV4PolicyCondition              *win32.Proc
+	DhcpHlprAddV4PolicyExpr                   *win32.Proc
+	DhcpHlprAddV4PolicyRange                  *win32.Proc
+	DhcpHlprCreateV4Policy                    *win32.Proc
+	DhcpHlprCreateV4PolicyEx                  *win32.Proc
+	DhcpHlprFindV4DhcpProperty                *win32.Proc
+	DhcpHlprFreeV4DhcpProperty                *win32.Proc
+	DhcpHlprFreeV4DhcpPropertyArray           *win32.Proc
+	DhcpHlprFreeV4Policy                      *win32.Proc
+	DhcpHlprFreeV4PolicyArray                 *win32.Proc
+	DhcpHlprFreeV4PolicyEx                    *win32.Proc
+	DhcpHlprFreeV4PolicyExArray               *win32.Proc
+	DhcpHlprIsV4PolicySingleUC                *win32.Proc
+	DhcpHlprIsV4PolicyValid                   *win32.Proc
+	DhcpHlprIsV4PolicyWellFormed              *win32.Proc
+	DhcpHlprModifyV4PolicyExpr                *win32.Proc
+	DhcpHlprResetV4PolicyExpr                 *win32.Proc
+	DhcpModifyClass                           *win32.Proc
+	DhcpModifyClassV6                         *win32.Proc
+	DhcpRegisterParamChange                   *win32.Proc
+	DhcpRemoveDNSRegistrations                *win32.Proc
+	DhcpRemoveOption                          *win32.Proc
+	DhcpRemoveOptionV5                        *win32.Proc
+	DhcpRemoveOptionV6                        *win32.Proc
+	DhcpRemoveOptionValue                     *win32.Proc
+	DhcpRemoveOptionValueV5                   *win32.Proc
+	DhcpRemoveOptionValueV6                   *win32.Proc
+	DhcpRemoveSubnetElement                   *win32.Proc
+	DhcpRemoveSubnetElementV4                 *win32.Proc
+	DhcpRemoveSubnetElementV5                 *win32.Proc
+	DhcpRemoveSubnetElementV6                 *win32.Proc
+	DhcpRequestParams                         *win32.Proc
+	DhcpRpcFreeMemory                         *win32.Proc
+	DhcpScanDatabase                          *win32.Proc
+	DhcpServerAuditlogParamsFree              *win32.Proc
+	DhcpServerBackupDatabase                  *win32.Proc
+	DhcpServerGetConfig                       *win32.Proc
+	DhcpServerGetConfigV4                     *win32.Proc
+	DhcpServerGetConfigV6                     *win32.Proc
+	DhcpServerGetConfigVQ                     *win32.Proc
+	DhcpServerQueryAttribute                  *win32.Proc
+	DhcpServerQueryAttributes                 *win32.Proc
+	DhcpServerQueryDnsRegCredentials          *win32.Proc
+	DhcpServerRedoAuthorization               *win32.Proc
+	DhcpServerRestoreDatabase                 *win32.Proc
+	DhcpServerSetConfig                       *win32.Proc
+	DhcpServerSetConfigV4                     *win32.Proc
+	DhcpServerSetConfigV6                     *win32.Proc
+	DhcpServerSetConfigVQ                     *win32.Proc
+	DhcpServerSetDnsRegCredentials            *win32.Proc
+	DhcpServerSetDnsRegCredentialsV5          *win32.Proc
+	DhcpSetClientInfo                         *win32.Proc
+	DhcpSetClientInfoV4                       *win32.Proc
+	DhcpSetClientInfoV6                       *win32.Proc
+	DhcpSetClientInfoVQ                       *win32.Proc
+	DhcpSetFilterV4                           *win32.Proc
+	DhcpSetOptionInfo                         *win32.Proc
+	DhcpSetOptionInfoV5                       *win32.Proc
+	DhcpSetOptionInfoV6                       *win32.Proc
+	DhcpSetOptionValue                        *win32.Proc
+	DhcpSetOptionValueV5                      *win32.Proc
+	DhcpSetOptionValueV6                      *win32.Proc
+	DhcpSetOptionValues                       *win32.Proc
+	DhcpSetOptionValuesV5                     *win32.Proc
+	DhcpSetServerBindingInfo                  *win32.Proc
+	DhcpSetServerBindingInfoV6                *win32.Proc
+	DhcpSetSubnetDelayOffer                   *win32.Proc
+	DhcpSetSubnetInfo                         *win32.Proc
+	DhcpSetSubnetInfoV6                       *win32.Proc
+	DhcpSetSubnetInfoVQ                       *win32.Proc
+	DhcpSetSuperScopeV4                       *win32.Proc
+	DhcpSetThreadOptions                      *win32.Proc
+	DhcpUndoRequestParams                     *win32.Proc
+	DhcpV4AddPolicyRange                      *win32.Proc
+	DhcpV4CreateClientInfo                    *win32.Proc
+	DhcpV4CreateClientInfoEx                  *win32.Proc
+	DhcpV4CreatePolicy                        *win32.Proc
+	DhcpV4CreatePolicyEx                      *win32.Proc
+	DhcpV4DeletePolicy                        *win32.Proc
+	DhcpV4EnumPolicies                        *win32.Proc
+	DhcpV4EnumPoliciesEx                      *win32.Proc
+	DhcpV4EnumSubnetClients                   *win32.Proc
+	DhcpV4EnumSubnetClientsEx                 *win32.Proc
+	DhcpV4EnumSubnetReservations              *win32.Proc
+	DhcpV4FailoverAddScopeToRelationship      *win32.Proc
+	DhcpV4FailoverCreateRelationship          *win32.Proc
+	DhcpV4FailoverDeleteRelationship          *win32.Proc
+	DhcpV4FailoverDeleteScopeFromRelationship *win32.Proc
+	DhcpV4FailoverEnumRelationship            *win32.Proc
+	DhcpV4FailoverGetAddressStatus            *win32.Proc
+	DhcpV4FailoverGetClientInfo               *win32.Proc
+	DhcpV4FailoverGetRelationship             *win32.Proc
+	DhcpV4FailoverGetScopeRelationship        *win32.Proc
+	DhcpV4FailoverGetScopeStatistics          *win32.Proc
+	DhcpV4FailoverGetSystemTime               *win32.Proc
+	DhcpV4FailoverSetRelationship             *win32.Proc
+	DhcpV4FailoverTriggerAddrAllocation       *win32.Proc
+	DhcpV4GetAllOptionValues                  *win32.Proc
+	DhcpV4GetClientInfo                       *win32.Proc
+	DhcpV4GetClientInfoEx                     *win32.Proc
+	DhcpV4GetFreeIPAddress                    *win32.Proc
+	DhcpV4GetOptionValue                      *win32.Proc
+	DhcpV4GetPolicy                           *win32.Proc
+	DhcpV4GetPolicyEx                         *win32.Proc
+	DhcpV4QueryPolicyEnforcement              *win32.Proc
+	DhcpV4RemoveOptionValue                   *win32.Proc
+	DhcpV4RemovePolicyRange                   *win32.Proc
+	DhcpV4SetOptionValue                      *win32.Proc
+	DhcpV4SetOptionValues                     *win32.Proc
+	DhcpV4SetPolicy                           *win32.Proc
+	DhcpV4SetPolicyEnforcement                *win32.Proc
+	DhcpV4SetPolicyEx                         *win32.Proc
+	DhcpV6CreateClientInfo                    *win32.Proc
+	DhcpV6GetFreeIPAddress                    *win32.Proc
+	DhcpV6GetStatelessStatistics              *win32.Proc
+	DhcpV6GetStatelessStoreParams             *win32.Proc
+	DhcpV6SetStatelessStoreParams             *win32.Proc
+	Dhcpv6CApiCleanup                         *win32.Proc
+	Dhcpv6CApiInitialize                      *win32.Proc
+	Dhcpv6ReleasePrefix                       *win32.Proc
+	Dhcpv6RenewPrefix                         *win32.Proc
+	Dhcpv6RequestParams                       *win32.Proc
+	Dhcpv6RequestPrefix                       *win32.Proc
+}{
+	DhcpAddFilterV4:                           procDhcpAddFilterV4,
+	DhcpAddSecurityGroup:                      procDhcpAddSecurityGroup,
+	DhcpAddServer:                             procDhcpAddServer,
+	DhcpAddSubnetElement:                      procDhcpAddSubnetElement,
+	DhcpAddSubnetElementV4:                    procDhcpAddSubnetElementV4,
+	DhcpAddSubnetElementV5:                    procDhcpAddSubnetElementV5,
+	DhcpAddSubnetElementV6:                    procDhcpAddSubnetElementV6,
+	DhcpAuditLogGetParams:                     procDhcpAuditLogGetParams,
+	DhcpAuditLogSetParams:                     procDhcpAuditLogSetParams,
+	DhcpCApiCleanup:                           procDhcpCApiCleanup,
+	DhcpCApiInitialize:                        procDhcpCApiInitialize,
+	DhcpCreateClass:                           procDhcpCreateClass,
+	DhcpCreateClassV6:                         procDhcpCreateClassV6,
+	DhcpCreateClientInfo:                      procDhcpCreateClientInfo,
+	DhcpCreateClientInfoV4:                    procDhcpCreateClientInfoV4,
+	DhcpCreateClientInfoVQ:                    procDhcpCreateClientInfoVQ,
+	DhcpCreateOption:                          procDhcpCreateOption,
+	DhcpCreateOptionV5:                        procDhcpCreateOptionV5,
+	DhcpCreateOptionV6:                        procDhcpCreateOptionV6,
+	DhcpCreateSubnet:                          procDhcpCreateSubnet,
+	DhcpCreateSubnetV6:                        procDhcpCreateSubnetV6,
+	DhcpCreateSubnetVQ:                        procDhcpCreateSubnetVQ,
+	DhcpDeRegisterParamChange:                 procDhcpDeRegisterParamChange,
+	DhcpDeleteClass:                           procDhcpDeleteClass,
+	DhcpDeleteClassV6:                         procDhcpDeleteClassV6,
+	DhcpDeleteClientInfo:                      procDhcpDeleteClientInfo,
+	DhcpDeleteClientInfoV6:                    procDhcpDeleteClientInfoV6,
+	DhcpDeleteFilterV4:                        procDhcpDeleteFilterV4,
+	DhcpDeleteServer:                          procDhcpDeleteServer,
+	DhcpDeleteSubnet:                          procDhcpDeleteSubnet,
+	DhcpDeleteSubnetV6:                        procDhcpDeleteSubnetV6,
+	DhcpDeleteSuperScopeV4:                    procDhcpDeleteSuperScopeV4,
+	DhcpDsCleanup:                             procDhcpDsCleanup,
+	DhcpDsInit:                                procDhcpDsInit,
+	DhcpEnumClasses:                           procDhcpEnumClasses,
+	DhcpEnumClassesV6:                         procDhcpEnumClassesV6,
+	DhcpEnumFilterV4:                          procDhcpEnumFilterV4,
+	DhcpEnumOptionValues:                      procDhcpEnumOptionValues,
+	DhcpEnumOptionValuesV5:                    procDhcpEnumOptionValuesV5,
+	DhcpEnumOptionValuesV6:                    procDhcpEnumOptionValuesV6,
+	DhcpEnumOptions:                           procDhcpEnumOptions,
+	DhcpEnumOptionsV5:                         procDhcpEnumOptionsV5,
+	DhcpEnumOptionsV6:                         procDhcpEnumOptionsV6,
+	DhcpEnumServers:                           procDhcpEnumServers,
+	DhcpEnumSubnetClients:                     procDhcpEnumSubnetClients,
+	DhcpEnumSubnetClientsFilterStatusInfo:     procDhcpEnumSubnetClientsFilterStatusInfo,
+	DhcpEnumSubnetClientsV4:                   procDhcpEnumSubnetClientsV4,
+	DhcpEnumSubnetClientsV5:                   procDhcpEnumSubnetClientsV5,
+	DhcpEnumSubnetClientsV6:                   procDhcpEnumSubnetClientsV6,
+	DhcpEnumSubnetClientsVQ:                   procDhcpEnumSubnetClientsVQ,
+	DhcpEnumSubnetElements:                    procDhcpEnumSubnetElements,
+	DhcpEnumSubnetElementsV4:                  procDhcpEnumSubnetElementsV4,
+	DhcpEnumSubnetElementsV5:                  procDhcpEnumSubnetElementsV5,
+	DhcpEnumSubnetElementsV6:                  procDhcpEnumSubnetElementsV6,
+	DhcpEnumSubnets:                           procDhcpEnumSubnets,
+	DhcpEnumSubnetsV6:                         procDhcpEnumSubnetsV6,
+	DhcpGetAllOptionValues:                    procDhcpGetAllOptionValues,
+	DhcpGetAllOptionValuesV6:                  procDhcpGetAllOptionValuesV6,
+	DhcpGetAllOptions:                         procDhcpGetAllOptions,
+	DhcpGetAllOptionsV6:                       procDhcpGetAllOptionsV6,
+	DhcpGetClassInfo:                          procDhcpGetClassInfo,
+	DhcpGetClientInfo:                         procDhcpGetClientInfo,
+	DhcpGetClientInfoV4:                       procDhcpGetClientInfoV4,
+	DhcpGetClientInfoV6:                       procDhcpGetClientInfoV6,
+	DhcpGetClientInfoVQ:                       procDhcpGetClientInfoVQ,
+	DhcpGetClientOptions:                      procDhcpGetClientOptions,
+	DhcpGetFilterV4:                           procDhcpGetFilterV4,
+	DhcpGetMibInfo:                            procDhcpGetMibInfo,
+	DhcpGetMibInfoV5:                          procDhcpGetMibInfoV5,
+	DhcpGetMibInfoV6:                          procDhcpGetMibInfoV6,
+	DhcpGetOptionInfo:                         procDhcpGetOptionInfo,
+	DhcpGetOptionInfoV5:                       procDhcpGetOptionInfoV5,
+	DhcpGetOptionInfoV6:                       procDhcpGetOptionInfoV6,
+	DhcpGetOptionValue:                        procDhcpGetOptionValue,
+	DhcpGetOptionValueV5:                      procDhcpGetOptionValueV5,
+	DhcpGetOptionValueV6:                      procDhcpGetOptionValueV6,
+	DhcpGetOriginalSubnetMask:                 procDhcpGetOriginalSubnetMask,
+	DhcpGetServerBindingInfo:                  procDhcpGetServerBindingInfo,
+	DhcpGetServerBindingInfoV6:                procDhcpGetServerBindingInfoV6,
+	DhcpGetServerSpecificStrings:              procDhcpGetServerSpecificStrings,
+	DhcpGetSubnetDelayOffer:                   procDhcpGetSubnetDelayOffer,
+	DhcpGetSubnetInfo:                         procDhcpGetSubnetInfo,
+	DhcpGetSubnetInfoV6:                       procDhcpGetSubnetInfoV6,
+	DhcpGetSubnetInfoVQ:                       procDhcpGetSubnetInfoVQ,
+	DhcpGetSuperScopeInfoV4:                   procDhcpGetSuperScopeInfoV4,
+	DhcpGetThreadOptions:                      procDhcpGetThreadOptions,
+	DhcpGetVersion:                            procDhcpGetVersion,
+	DhcpHlprAddV4PolicyCondition:              procDhcpHlprAddV4PolicyCondition,
+	DhcpHlprAddV4PolicyExpr:                   procDhcpHlprAddV4PolicyExpr,
+	DhcpHlprAddV4PolicyRange:                  procDhcpHlprAddV4PolicyRange,
+	DhcpHlprCreateV4Policy:                    procDhcpHlprCreateV4Policy,
+	DhcpHlprCreateV4PolicyEx:                  procDhcpHlprCreateV4PolicyEx,
+	DhcpHlprFindV4DhcpProperty:                procDhcpHlprFindV4DhcpProperty,
+	DhcpHlprFreeV4DhcpProperty:                procDhcpHlprFreeV4DhcpProperty,
+	DhcpHlprFreeV4DhcpPropertyArray:           procDhcpHlprFreeV4DhcpPropertyArray,
+	DhcpHlprFreeV4Policy:                      procDhcpHlprFreeV4Policy,
+	DhcpHlprFreeV4PolicyArray:                 procDhcpHlprFreeV4PolicyArray,
+	DhcpHlprFreeV4PolicyEx:                    procDhcpHlprFreeV4PolicyEx,
+	DhcpHlprFreeV4PolicyExArray:               procDhcpHlprFreeV4PolicyExArray,
+	DhcpHlprIsV4PolicySingleUC:                procDhcpHlprIsV4PolicySingleUC,
+	DhcpHlprIsV4PolicyValid:                   procDhcpHlprIsV4PolicyValid,
+	DhcpHlprIsV4PolicyWellFormed:              procDhcpHlprIsV4PolicyWellFormed,
+	DhcpHlprModifyV4PolicyExpr:                procDhcpHlprModifyV4PolicyExpr,
+	DhcpHlprResetV4PolicyExpr:                 procDhcpHlprResetV4PolicyExpr,
+	DhcpModifyClass:                           procDhcpModifyClass,
+	DhcpModifyClassV6:                         procDhcpModifyClassV6,
+	DhcpRegisterParamChange:                   procDhcpRegisterParamChange,
+	DhcpRemoveDNSRegistrations:                procDhcpRemoveDNSRegistrations,
+	DhcpRemoveOption:                          procDhcpRemoveOption,
+	DhcpRemoveOptionV5:                        procDhcpRemoveOptionV5,
+	DhcpRemoveOptionV6:                        procDhcpRemoveOptionV6,
+	DhcpRemoveOptionValue:                     procDhcpRemoveOptionValue,
+	DhcpRemoveOptionValueV5:                   procDhcpRemoveOptionValueV5,
+	DhcpRemoveOptionValueV6:                   procDhcpRemoveOptionValueV6,
+	DhcpRemoveSubnetElement:                   procDhcpRemoveSubnetElement,
+	DhcpRemoveSubnetElementV4:                 procDhcpRemoveSubnetElementV4,
+	DhcpRemoveSubnetElementV5:                 procDhcpRemoveSubnetElementV5,
+	DhcpRemoveSubnetElementV6:                 procDhcpRemoveSubnetElementV6,
+	DhcpRequestParams:                         procDhcpRequestParams,
+	DhcpRpcFreeMemory:                         procDhcpRpcFreeMemory,
+	DhcpScanDatabase:                          procDhcpScanDatabase,
+	DhcpServerAuditlogParamsFree:              procDhcpServerAuditlogParamsFree,
+	DhcpServerBackupDatabase:                  procDhcpServerBackupDatabase,
+	DhcpServerGetConfig:                       procDhcpServerGetConfig,
+	DhcpServerGetConfigV4:                     procDhcpServerGetConfigV4,
+	DhcpServerGetConfigV6:                     procDhcpServerGetConfigV6,
+	DhcpServerGetConfigVQ:                     procDhcpServerGetConfigVQ,
+	DhcpServerQueryAttribute:                  procDhcpServerQueryAttribute,
+	DhcpServerQueryAttributes:                 procDhcpServerQueryAttributes,
+	DhcpServerQueryDnsRegCredentials:          procDhcpServerQueryDnsRegCredentials,
+	DhcpServerRedoAuthorization:               procDhcpServerRedoAuthorization,
+	DhcpServerRestoreDatabase:                 procDhcpServerRestoreDatabase,
+	DhcpServerSetConfig:                       procDhcpServerSetConfig,
+	DhcpServerSetConfigV4:                     procDhcpServerSetConfigV4,
+	DhcpServerSetConfigV6:                     procDhcpServerSetConfigV6,
+	DhcpServerSetConfigVQ:                     procDhcpServerSetConfigVQ,
+	DhcpServerSetDnsRegCredentials:            procDhcpServerSetDnsRegCredentials,
+	DhcpServerSetDnsRegCredentialsV5:          procDhcpServerSetDnsRegCredentialsV5,
+	DhcpSetClientInfo:                         procDhcpSetClientInfo,
+	DhcpSetClientInfoV4:                       procDhcpSetClientInfoV4,
+	DhcpSetClientInfoV6:                       procDhcpSetClientInfoV6,
+	DhcpSetClientInfoVQ:                       procDhcpSetClientInfoVQ,
+	DhcpSetFilterV4:                           procDhcpSetFilterV4,
+	DhcpSetOptionInfo:                         procDhcpSetOptionInfo,
+	DhcpSetOptionInfoV5:                       procDhcpSetOptionInfoV5,
+	DhcpSetOptionInfoV6:                       procDhcpSetOptionInfoV6,
+	DhcpSetOptionValue:                        procDhcpSetOptionValue,
+	DhcpSetOptionValueV5:                      procDhcpSetOptionValueV5,
+	DhcpSetOptionValueV6:                      procDhcpSetOptionValueV6,
+	DhcpSetOptionValues:                       procDhcpSetOptionValues,
+	DhcpSetOptionValuesV5:                     procDhcpSetOptionValuesV5,
+	DhcpSetServerBindingInfo:                  procDhcpSetServerBindingInfo,
+	DhcpSetServerBindingInfoV6:                procDhcpSetServerBindingInfoV6,
+	DhcpSetSubnetDelayOffer:                   procDhcpSetSubnetDelayOffer,
+	DhcpSetSubnetInfo:                         procDhcpSetSubnetInfo,
+	DhcpSetSubnetInfoV6:                       procDhcpSetSubnetInfoV6,
+	DhcpSetSubnetInfoVQ:                       procDhcpSetSubnetInfoVQ,
+	DhcpSetSuperScopeV4:                       procDhcpSetSuperScopeV4,
+	DhcpSetThreadOptions:                      procDhcpSetThreadOptions,
+	DhcpUndoRequestParams:                     procDhcpUndoRequestParams,
+	DhcpV4AddPolicyRange:                      procDhcpV4AddPolicyRange,
+	DhcpV4CreateClientInfo:                    procDhcpV4CreateClientInfo,
+	DhcpV4CreateClientInfoEx:                  procDhcpV4CreateClientInfoEx,
+	DhcpV4CreatePolicy:                        procDhcpV4CreatePolicy,
+	DhcpV4CreatePolicyEx:                      procDhcpV4CreatePolicyEx,
+	DhcpV4DeletePolicy:                        procDhcpV4DeletePolicy,
+	DhcpV4EnumPolicies:                        procDhcpV4EnumPolicies,
+	DhcpV4EnumPoliciesEx:                      procDhcpV4EnumPoliciesEx,
+	DhcpV4EnumSubnetClients:                   procDhcpV4EnumSubnetClients,
+	DhcpV4EnumSubnetClientsEx:                 procDhcpV4EnumSubnetClientsEx,
+	DhcpV4EnumSubnetReservations:              procDhcpV4EnumSubnetReservations,
+	DhcpV4FailoverAddScopeToRelationship:      procDhcpV4FailoverAddScopeToRelationship,
+	DhcpV4FailoverCreateRelationship:          procDhcpV4FailoverCreateRelationship,
+	DhcpV4FailoverDeleteRelationship:          procDhcpV4FailoverDeleteRelationship,
+	DhcpV4FailoverDeleteScopeFromRelationship: procDhcpV4FailoverDeleteScopeFromRelationship,
+	DhcpV4FailoverEnumRelationship:            procDhcpV4FailoverEnumRelationship,
+	DhcpV4FailoverGetAddressStatus:            procDhcpV4FailoverGetAddressStatus,
+	DhcpV4FailoverGetClientInfo:               procDhcpV4FailoverGetClientInfo,
+	DhcpV4FailoverGetRelationship:             procDhcpV4FailoverGetRelationship,
+	DhcpV4FailoverGetScopeRelationship:        procDhcpV4FailoverGetScopeRelationship,
+	DhcpV4FailoverGetScopeStatistics:          procDhcpV4FailoverGetScopeStatistics,
+	DhcpV4FailoverGetSystemTime:               procDhcpV4FailoverGetSystemTime,
+	DhcpV4FailoverSetRelationship:             procDhcpV4FailoverSetRelationship,
+	DhcpV4FailoverTriggerAddrAllocation:       procDhcpV4FailoverTriggerAddrAllocation,
+	DhcpV4GetAllOptionValues:                  procDhcpV4GetAllOptionValues,
+	DhcpV4GetClientInfo:                       procDhcpV4GetClientInfo,
+	DhcpV4GetClientInfoEx:                     procDhcpV4GetClientInfoEx,
+	DhcpV4GetFreeIPAddress:                    procDhcpV4GetFreeIPAddress,
+	DhcpV4GetOptionValue:                      procDhcpV4GetOptionValue,
+	DhcpV4GetPolicy:                           procDhcpV4GetPolicy,
+	DhcpV4GetPolicyEx:                         procDhcpV4GetPolicyEx,
+	DhcpV4QueryPolicyEnforcement:              procDhcpV4QueryPolicyEnforcement,
+	DhcpV4RemoveOptionValue:                   procDhcpV4RemoveOptionValue,
+	DhcpV4RemovePolicyRange:                   procDhcpV4RemovePolicyRange,
+	DhcpV4SetOptionValue:                      procDhcpV4SetOptionValue,
+	DhcpV4SetOptionValues:                     procDhcpV4SetOptionValues,
+	DhcpV4SetPolicy:                           procDhcpV4SetPolicy,
+	DhcpV4SetPolicyEnforcement:                procDhcpV4SetPolicyEnforcement,
+	DhcpV4SetPolicyEx:                         procDhcpV4SetPolicyEx,
+	DhcpV6CreateClientInfo:                    procDhcpV6CreateClientInfo,
+	DhcpV6GetFreeIPAddress:                    procDhcpV6GetFreeIPAddress,
+	DhcpV6GetStatelessStatistics:              procDhcpV6GetStatelessStatistics,
+	DhcpV6GetStatelessStoreParams:             procDhcpV6GetStatelessStoreParams,
+	DhcpV6SetStatelessStoreParams:             procDhcpV6SetStatelessStoreParams,
+	Dhcpv6CApiCleanup:                         procDhcpv6CApiCleanup,
+	Dhcpv6CApiInitialize:                      procDhcpv6CApiInitialize,
+	Dhcpv6ReleasePrefix:                       procDhcpv6ReleasePrefix,
+	Dhcpv6RenewPrefix:                         procDhcpv6RenewPrefix,
+	Dhcpv6RequestParams:                       procDhcpv6RequestParams,
+	Dhcpv6RequestPrefix:                       procDhcpv6RequestPrefix,
+}
 
 // DhcpAddFilterV4 calls DHCPSAPI!DhcpAddFilterV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpaddfilterv4
 // Minimum OS: windowsserver2008.
-func DhcpAddFilterV4(ServerIpAddress string, AddFilterInfo *DHCP_FILTER_ADD_INFO, ForceFlag bool) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpAddFilterV4(ServerIpAddress *string, AddFilterInfo *DHCP_FILTER_ADD_INFO, ForceFlag bool) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_ForceFlag := win32.Bool32(ForceFlag)
 	r1, _, _ := syscall.SyscallN(procDhcpAddFilterV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(AddFilterInfo)), uintptr(_ForceFlag))
 	return uint32(r1)
 }
 
 // DhcpAddSecurityGroup calls DHCPSAPI!DhcpAddSecurityGroup.
-func DhcpAddSecurityGroup(pServer string) uint32 {
-	_pServer := win32.UTF16Ptr(pServer)
+func DhcpAddSecurityGroup(pServer *string) uint32 {
+	_pServer := win32.UTF16PtrOrNil(pServer)
 	r1, _, _ := syscall.SyscallN(procDhcpAddSecurityGroup.Addr(), uintptr(unsafe.Pointer(_pServer)))
 	return uint32(r1)
 }
@@ -245,8 +687,8 @@ func DhcpAddServer(Flags uint32, IdInfo unsafe.Pointer, NewServer *DHCPDS_SERVER
 // DhcpAddSubnetElement calls DHCPSAPI!DhcpAddSubnetElement.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpaddsubnetelement
 // Minimum OS: windowsserver2008.
-func DhcpAddSubnetElement(ServerIpAddress string, SubnetAddress uint32, AddElementInfo *DHCP_SUBNET_ELEMENT_DATA) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpAddSubnetElement(ServerIpAddress *string, SubnetAddress uint32, AddElementInfo *DHCP_SUBNET_ELEMENT_DATA) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpAddSubnetElement.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(AddElementInfo)))
 	return uint32(r1)
 }
@@ -254,8 +696,8 @@ func DhcpAddSubnetElement(ServerIpAddress string, SubnetAddress uint32, AddEleme
 // DhcpAddSubnetElementV4 calls DHCPSAPI!DhcpAddSubnetElementV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpaddsubnetelementv4
 // Minimum OS: windowsserver2008.
-func DhcpAddSubnetElementV4(ServerIpAddress string, SubnetAddress uint32, AddElementInfo *DHCP_SUBNET_ELEMENT_DATA_V4) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpAddSubnetElementV4(ServerIpAddress *string, SubnetAddress uint32, AddElementInfo *DHCP_SUBNET_ELEMENT_DATA_V4) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpAddSubnetElementV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(AddElementInfo)))
 	return uint32(r1)
 }
@@ -263,17 +705,28 @@ func DhcpAddSubnetElementV4(ServerIpAddress string, SubnetAddress uint32, AddEle
 // DhcpAddSubnetElementV5 calls DHCPSAPI!DhcpAddSubnetElementV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpaddsubnetelementv5
 // Minimum OS: windowsserver2000.
-func DhcpAddSubnetElementV5(ServerIpAddress string, SubnetAddress uint32, AddElementInfo *DHCP_SUBNET_ELEMENT_DATA_V5) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpAddSubnetElementV5(ServerIpAddress *string, SubnetAddress uint32, AddElementInfo *DHCP_SUBNET_ELEMENT_DATA_V5) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpAddSubnetElementV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(AddElementInfo)))
+	return uint32(r1)
+}
+
+var specDhcpAddSubnetElementV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpAddSubnetElementV6 calls DHCPSAPI!DhcpAddSubnetElementV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpaddsubnetelementv6
+// Minimum OS: windowsserver2008.
+func DhcpAddSubnetElementV6(ServerIpAddress *string, SubnetAddress DHCP_IPV6_ADDRESS, AddElementInfo *DHCP_SUBNET_ELEMENT_DATA_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpAddSubnetElementV6.Addr(), specDhcpAddSubnetElementV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(AddElementInfo))).Tuple()
 	return uint32(r1)
 }
 
 // DhcpAuditLogGetParams calls DHCPSAPI!DhcpAuditLogGetParams.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpauditloggetparams
 // Minimum OS: windowsserver2008.
-func DhcpAuditLogGetParams(ServerIpAddress string, Flags uint32, AuditLogDir *foundation.PWSTR, DiskCheckInterval *uint32, MaxLogFilesSize *uint32, MinSpaceOnDisk *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpAuditLogGetParams(ServerIpAddress *string, Flags uint32, AuditLogDir *foundation.PWSTR, DiskCheckInterval *uint32, MaxLogFilesSize *uint32, MinSpaceOnDisk *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpAuditLogGetParams.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(AuditLogDir)), uintptr(unsafe.Pointer(DiskCheckInterval)), uintptr(unsafe.Pointer(MaxLogFilesSize)), uintptr(unsafe.Pointer(MinSpaceOnDisk)))
 	return uint32(r1)
 }
@@ -281,9 +734,9 @@ func DhcpAuditLogGetParams(ServerIpAddress string, Flags uint32, AuditLogDir *fo
 // DhcpAuditLogSetParams calls DHCPSAPI!DhcpAuditLogSetParams.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpauditlogsetparams
 // Minimum OS: windowsserver2008.
-func DhcpAuditLogSetParams(ServerIpAddress string, Flags uint32, AuditLogDir string, DiskCheckInterval uint32, MaxLogFilesSize uint32, MinSpaceOnDisk uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_AuditLogDir := win32.UTF16Ptr(AuditLogDir)
+func DhcpAuditLogSetParams(ServerIpAddress *string, Flags uint32, AuditLogDir *string, DiskCheckInterval uint32, MaxLogFilesSize uint32, MinSpaceOnDisk uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_AuditLogDir := win32.UTF16PtrOrNil(AuditLogDir)
 	r1, _, _ := syscall.SyscallN(procDhcpAuditLogSetParams.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(_AuditLogDir)), uintptr(DiskCheckInterval), uintptr(MaxLogFilesSize), uintptr(MinSpaceOnDisk))
 	return uint32(r1)
 }
@@ -306,8 +759,8 @@ func DhcpCApiInitialize(Version *uint32) uint32 {
 // DhcpCreateClass calls DHCPSAPI!DhcpCreateClass.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreateclass
 // Minimum OS: windowsserver2008.
-func DhcpCreateClass(ServerIpAddress string, ReservedMustBeZero uint32, ClassInfo *DHCP_CLASS_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpCreateClass(ServerIpAddress *string, ReservedMustBeZero uint32, ClassInfo *DHCP_CLASS_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateClass.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ReservedMustBeZero), uintptr(unsafe.Pointer(ClassInfo)))
 	return uint32(r1)
 }
@@ -315,8 +768,8 @@ func DhcpCreateClass(ServerIpAddress string, ReservedMustBeZero uint32, ClassInf
 // DhcpCreateClassV6 calls DHCPSAPI!DhcpCreateClassV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreateclassv6
 // Minimum OS: windowsserver2008.
-func DhcpCreateClassV6(ServerIpAddress string, ReservedMustBeZero uint32, ClassInfo *DHCP_CLASS_INFO_V6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpCreateClassV6(ServerIpAddress *string, ReservedMustBeZero uint32, ClassInfo *DHCP_CLASS_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateClassV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ReservedMustBeZero), uintptr(unsafe.Pointer(ClassInfo)))
 	return uint32(r1)
 }
@@ -324,8 +777,8 @@ func DhcpCreateClassV6(ServerIpAddress string, ReservedMustBeZero uint32, ClassI
 // DhcpCreateClientInfo calls DHCPSAPI!DhcpCreateClientInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreateclientinfo
 // Minimum OS: windowsserver2000.
-func DhcpCreateClientInfo(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpCreateClientInfo(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateClientInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -333,8 +786,8 @@ func DhcpCreateClientInfo(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO) 
 // DhcpCreateClientInfoV4 calls DHCPSAPI!DhcpCreateClientInfoV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreateclientinfov4
 // Minimum OS: windowsserver2008.
-func DhcpCreateClientInfoV4(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_V4) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpCreateClientInfoV4(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO_V4) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateClientInfoV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -342,8 +795,8 @@ func DhcpCreateClientInfoV4(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO
 // DhcpCreateClientInfoVQ calls DHCPSAPI!DhcpCreateClientInfoVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreateclientinfovq
 // Minimum OS: windowsserver2008.
-func DhcpCreateClientInfoVQ(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_VQ) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpCreateClientInfoVQ(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO_VQ) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateClientInfoVQ.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -351,8 +804,8 @@ func DhcpCreateClientInfoVQ(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO
 // DhcpCreateOption calls DHCPSAPI!DhcpCreateOption.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreateoption
 // Minimum OS: windowsserver2008.
-func DhcpCreateOption(ServerIpAddress string, OptionID uint32, OptionInfo *DHCP_OPTION) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpCreateOption(ServerIpAddress *string, OptionID uint32, OptionInfo *DHCP_OPTION) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateOption.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(OptionID), uintptr(unsafe.Pointer(OptionInfo)))
 	return uint32(r1)
 }
@@ -360,10 +813,10 @@ func DhcpCreateOption(ServerIpAddress string, OptionID uint32, OptionInfo *DHCP_
 // DhcpCreateOptionV5 calls DHCPSAPI!DhcpCreateOptionV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreateoptionv5
 // Minimum OS: windowsserver2008.
-func DhcpCreateOptionV5(ServerIpAddress string, Flags uint32, OptionId uint32, ClassName string, VendorName string, OptionInfo *DHCP_OPTION) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpCreateOptionV5(ServerIpAddress *string, Flags uint32, OptionId uint32, ClassName *string, VendorName *string, OptionInfo *DHCP_OPTION) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateOptionV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionId), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(OptionInfo)))
 	return uint32(r1)
 }
@@ -371,10 +824,10 @@ func DhcpCreateOptionV5(ServerIpAddress string, Flags uint32, OptionId uint32, C
 // DhcpCreateOptionV6 calls DHCPSAPI!DhcpCreateOptionV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreateoptionv6
 // Minimum OS: windowsserver2008.
-func DhcpCreateOptionV6(ServerIpAddress string, Flags uint32, OptionId uint32, ClassName string, VendorName string, OptionInfo *DHCP_OPTION) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpCreateOptionV6(ServerIpAddress *string, Flags uint32, OptionId uint32, ClassName *string, VendorName *string, OptionInfo *DHCP_OPTION) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateOptionV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionId), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(OptionInfo)))
 	return uint32(r1)
 }
@@ -382,17 +835,28 @@ func DhcpCreateOptionV6(ServerIpAddress string, Flags uint32, OptionId uint32, C
 // DhcpCreateSubnet calls DHCPSAPI!DhcpCreateSubnet.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreatesubnet
 // Minimum OS: windowsserver2000.
-func DhcpCreateSubnet(ServerIpAddress string, SubnetAddress uint32, SubnetInfo *DHCP_SUBNET_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpCreateSubnet(ServerIpAddress *string, SubnetAddress uint32, SubnetInfo *DHCP_SUBNET_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateSubnet.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(SubnetInfo)))
+	return uint32(r1)
+}
+
+var specDhcpCreateSubnetV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpCreateSubnetV6 calls DHCPSAPI!DhcpCreateSubnetV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreatesubnetv6
+// Minimum OS: windowsserver2008.
+func DhcpCreateSubnetV6(ServerIpAddress *string, SubnetAddress DHCP_IPV6_ADDRESS, SubnetInfo *DHCP_SUBNET_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpCreateSubnetV6.Addr(), specDhcpCreateSubnetV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(SubnetInfo))).Tuple()
 	return uint32(r1)
 }
 
 // DhcpCreateSubnetVQ calls DHCPSAPI!DhcpCreateSubnetVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreatesubnetvq
 // Minimum OS: windowsserver2008.
-func DhcpCreateSubnetVQ(ServerIpAddress string, SubnetAddress uint32, SubnetInfo *DHCP_SUBNET_INFO_VQ) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpCreateSubnetVQ(ServerIpAddress *string, SubnetAddress uint32, SubnetInfo *DHCP_SUBNET_INFO_VQ) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpCreateSubnetVQ.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(SubnetInfo)))
 	return uint32(r1)
 }
@@ -408,8 +872,8 @@ func DhcpDeRegisterParamChange(Flags uint32, Reserved unsafe.Pointer, Event unsa
 // DhcpDeleteClass calls DHCPSAPI!DhcpDeleteClass.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpdeleteclass
 // Minimum OS: windowsserver2008.
-func DhcpDeleteClass(ServerIpAddress string, ReservedMustBeZero uint32, ClassName string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpDeleteClass(ServerIpAddress *string, ReservedMustBeZero uint32, ClassName string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_ClassName := win32.UTF16Ptr(ClassName)
 	r1, _, _ := syscall.SyscallN(procDhcpDeleteClass.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ReservedMustBeZero), uintptr(unsafe.Pointer(_ClassName)))
 	return uint32(r1)
@@ -418,8 +882,8 @@ func DhcpDeleteClass(ServerIpAddress string, ReservedMustBeZero uint32, ClassNam
 // DhcpDeleteClassV6 calls DHCPSAPI!DhcpDeleteClassV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpdeleteclassv6
 // Minimum OS: windowsserver2008.
-func DhcpDeleteClassV6(ServerIpAddress string, ReservedMustBeZero uint32, ClassName string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpDeleteClassV6(ServerIpAddress *string, ReservedMustBeZero uint32, ClassName string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_ClassName := win32.UTF16Ptr(ClassName)
 	r1, _, _ := syscall.SyscallN(procDhcpDeleteClassV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ReservedMustBeZero), uintptr(unsafe.Pointer(_ClassName)))
 	return uint32(r1)
@@ -428,8 +892,8 @@ func DhcpDeleteClassV6(ServerIpAddress string, ReservedMustBeZero uint32, ClassN
 // DhcpDeleteClientInfo calls DHCPSAPI!DhcpDeleteClientInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpdeleteclientinfo
 // Minimum OS: windowsserver2000.
-func DhcpDeleteClientInfo(ServerIpAddress string, ClientInfo *DHCP_SEARCH_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpDeleteClientInfo(ServerIpAddress *string, ClientInfo *DHCP_SEARCH_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpDeleteClientInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -437,8 +901,8 @@ func DhcpDeleteClientInfo(ServerIpAddress string, ClientInfo *DHCP_SEARCH_INFO) 
 // DhcpDeleteClientInfoV6 calls DHCPSAPI!DhcpDeleteClientInfoV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpdeleteclientinfov6
 // Minimum OS: windowsserver2008.
-func DhcpDeleteClientInfoV6(ServerIpAddress string, ClientInfo *DHCP_SEARCH_INFO_V6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpDeleteClientInfoV6(ServerIpAddress *string, ClientInfo *DHCP_SEARCH_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpDeleteClientInfoV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -446,8 +910,8 @@ func DhcpDeleteClientInfoV6(ServerIpAddress string, ClientInfo *DHCP_SEARCH_INFO
 // DhcpDeleteFilterV4 calls DHCPSAPI!DhcpDeleteFilterV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpdeletefilterv4
 // Minimum OS: windowsserver2008.
-func DhcpDeleteFilterV4(ServerIpAddress string, DeleteFilterInfo *DHCP_ADDR_PATTERN) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpDeleteFilterV4(ServerIpAddress *string, DeleteFilterInfo *DHCP_ADDR_PATTERN) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpDeleteFilterV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(DeleteFilterInfo)))
 	return uint32(r1)
 }
@@ -463,17 +927,28 @@ func DhcpDeleteServer(Flags uint32, IdInfo unsafe.Pointer, NewServer *DHCPDS_SER
 // DhcpDeleteSubnet calls DHCPSAPI!DhcpDeleteSubnet.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpdeletesubnet
 // Minimum OS: windowsserver2000.
-func DhcpDeleteSubnet(ServerIpAddress string, SubnetAddress uint32, ForceFlag DHCP_FORCE_FLAG) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpDeleteSubnet(ServerIpAddress *string, SubnetAddress uint32, ForceFlag DHCP_FORCE_FLAG) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpDeleteSubnet.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(ForceFlag))
+	return uint32(r1)
+}
+
+var specDhcpDeleteSubnetV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpDeleteSubnetV6 calls DHCPSAPI!DhcpDeleteSubnetV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpdeletesubnetv6
+// Minimum OS: windowsserver2008.
+func DhcpDeleteSubnetV6(ServerIpAddress *string, SubnetAddress DHCP_IPV6_ADDRESS, ForceFlag DHCP_FORCE_FLAG) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpDeleteSubnetV6.Addr(), specDhcpDeleteSubnetV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(ForceFlag)).Tuple()
 	return uint32(r1)
 }
 
 // DhcpDeleteSuperScopeV4 calls DHCPSAPI!DhcpDeleteSuperScopeV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpdeletesuperscopev4
 // Minimum OS: windowsserver2008.
-func DhcpDeleteSuperScopeV4(ServerIpAddress string, SuperScopeName string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpDeleteSuperScopeV4(ServerIpAddress *string, SuperScopeName string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_SuperScopeName := win32.UTF16Ptr(SuperScopeName)
 	r1, _, _ := syscall.SyscallN(procDhcpDeleteSuperScopeV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(_SuperScopeName)))
 	return uint32(r1)
@@ -497,8 +972,8 @@ func DhcpDsInit() uint32 {
 // DhcpEnumClasses calls DHCPSAPI!DhcpEnumClasses.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumclasses
 // Minimum OS: windowsserver2008.
-func DhcpEnumClasses(ServerIpAddress string, ReservedMustBeZero uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClassInfoArray **DHCP_CLASS_INFO_ARRAY, nRead *uint32, nTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumClasses(ServerIpAddress *string, ReservedMustBeZero uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClassInfoArray **DHCP_CLASS_INFO_ARRAY, nRead *uint32, nTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumClasses.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ReservedMustBeZero), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClassInfoArray)), uintptr(unsafe.Pointer(nRead)), uintptr(unsafe.Pointer(nTotal)))
 	return uint32(r1)
 }
@@ -506,8 +981,8 @@ func DhcpEnumClasses(ServerIpAddress string, ReservedMustBeZero uint32, ResumeHa
 // DhcpEnumClassesV6 calls DHCPSAPI!DhcpEnumClassesV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumclassesv6
 // Minimum OS: windowsserver2008.
-func DhcpEnumClassesV6(ServerIpAddress string, ReservedMustBeZero uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClassInfoArray **DHCP_CLASS_INFO_ARRAY_V6, nRead *uint32, nTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumClassesV6(ServerIpAddress *string, ReservedMustBeZero uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClassInfoArray **DHCP_CLASS_INFO_ARRAY_V6, nRead *uint32, nTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumClassesV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ReservedMustBeZero), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClassInfoArray)), uintptr(unsafe.Pointer(nRead)), uintptr(unsafe.Pointer(nTotal)))
 	return uint32(r1)
 }
@@ -515,8 +990,8 @@ func DhcpEnumClassesV6(ServerIpAddress string, ReservedMustBeZero uint32, Resume
 // DhcpEnumFilterV4 calls DHCPSAPI!DhcpEnumFilterV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumfilterv4
 // Minimum OS: windowsserver2008.
-func DhcpEnumFilterV4(ServerIpAddress string, ResumeHandle *DHCP_ADDR_PATTERN, PreferredMaximum uint32, ListType DHCP_FILTER_LIST_TYPE, EnumFilterInfo **DHCP_FILTER_ENUM_INFO, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumFilterV4(ServerIpAddress *string, ResumeHandle *DHCP_ADDR_PATTERN, PreferredMaximum uint32, ListType DHCP_FILTER_LIST_TYPE, EnumFilterInfo **DHCP_FILTER_ENUM_INFO, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumFilterV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(ListType), uintptr(unsafe.Pointer(EnumFilterInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
 	return uint32(r1)
 }
@@ -524,8 +999,8 @@ func DhcpEnumFilterV4(ServerIpAddress string, ResumeHandle *DHCP_ADDR_PATTERN, P
 // DhcpEnumOptionValues calls DHCPSAPI!DhcpEnumOptionValues.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumoptionvalues
 // Minimum OS: windowsserver2008.
-func DhcpEnumOptionValues(ServerIpAddress string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, ResumeHandle *uint32, PreferredMaximum uint32, OptionValues **DHCP_OPTION_VALUE_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumOptionValues(ServerIpAddress *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, ResumeHandle *uint32, PreferredMaximum uint32, OptionValues **DHCP_OPTION_VALUE_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumOptionValues.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(OptionValues)), uintptr(unsafe.Pointer(OptionsRead)), uintptr(unsafe.Pointer(OptionsTotal)))
 	return uint32(r1)
 }
@@ -533,10 +1008,10 @@ func DhcpEnumOptionValues(ServerIpAddress string, ScopeInfo *DHCP_OPTION_SCOPE_I
 // DhcpEnumOptionValuesV5 calls DHCPSAPI!DhcpEnumOptionValuesV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumoptionvaluesv5
 // Minimum OS: windowsserver2008.
-func DhcpEnumOptionValuesV5(ServerIpAddress string, Flags uint32, ClassName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, ResumeHandle *uint32, PreferredMaximum uint32, OptionValues **DHCP_OPTION_VALUE_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpEnumOptionValuesV5(ServerIpAddress *string, Flags uint32, ClassName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, ResumeHandle *uint32, PreferredMaximum uint32, OptionValues **DHCP_OPTION_VALUE_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumOptionValuesV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(OptionValues)), uintptr(unsafe.Pointer(OptionsRead)), uintptr(unsafe.Pointer(OptionsTotal)))
 	return uint32(r1)
 }
@@ -544,10 +1019,10 @@ func DhcpEnumOptionValuesV5(ServerIpAddress string, Flags uint32, ClassName stri
 // DhcpEnumOptionValuesV6 calls DHCPSAPI!DhcpEnumOptionValuesV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumoptionvaluesv6
 // Minimum OS: windowsserver2008.
-func DhcpEnumOptionValuesV6(ServerIpAddress string, Flags uint32, ClassName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, ResumeHandle *uint32, PreferredMaximum uint32, OptionValues **DHCP_OPTION_VALUE_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpEnumOptionValuesV6(ServerIpAddress *string, Flags uint32, ClassName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, ResumeHandle *uint32, PreferredMaximum uint32, OptionValues **DHCP_OPTION_VALUE_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumOptionValuesV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(OptionValues)), uintptr(unsafe.Pointer(OptionsRead)), uintptr(unsafe.Pointer(OptionsTotal)))
 	return uint32(r1)
 }
@@ -555,8 +1030,8 @@ func DhcpEnumOptionValuesV6(ServerIpAddress string, Flags uint32, ClassName stri
 // DhcpEnumOptions calls DHCPSAPI!DhcpEnumOptions.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumoptions
 // Minimum OS: windowsserver2008.
-func DhcpEnumOptions(ServerIpAddress string, ResumeHandle *uint32, PreferredMaximum uint32, Options **DHCP_OPTION_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumOptions(ServerIpAddress *string, ResumeHandle *uint32, PreferredMaximum uint32, Options **DHCP_OPTION_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumOptions.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(OptionsRead)), uintptr(unsafe.Pointer(OptionsTotal)))
 	return uint32(r1)
 }
@@ -564,10 +1039,10 @@ func DhcpEnumOptions(ServerIpAddress string, ResumeHandle *uint32, PreferredMaxi
 // DhcpEnumOptionsV5 calls DHCPSAPI!DhcpEnumOptionsV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumoptionsv5
 // Minimum OS: windowsserver2008.
-func DhcpEnumOptionsV5(ServerIpAddress string, Flags uint32, ClassName string, VendorName string, ResumeHandle *uint32, PreferredMaximum uint32, Options **DHCP_OPTION_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpEnumOptionsV5(ServerIpAddress *string, Flags uint32, ClassName *string, VendorName *string, ResumeHandle *uint32, PreferredMaximum uint32, Options **DHCP_OPTION_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumOptionsV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(OptionsRead)), uintptr(unsafe.Pointer(OptionsTotal)))
 	return uint32(r1)
 }
@@ -575,10 +1050,10 @@ func DhcpEnumOptionsV5(ServerIpAddress string, Flags uint32, ClassName string, V
 // DhcpEnumOptionsV6 calls DHCPSAPI!DhcpEnumOptionsV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumoptionsv6
 // Minimum OS: windowsserver2008.
-func DhcpEnumOptionsV6(ServerIpAddress string, Flags uint32, ClassName string, VendorName string, ResumeHandle *uint32, PreferredMaximum uint32, Options **DHCP_OPTION_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpEnumOptionsV6(ServerIpAddress *string, Flags uint32, ClassName *string, VendorName *string, ResumeHandle *uint32, PreferredMaximum uint32, Options **DHCP_OPTION_ARRAY, OptionsRead *uint32, OptionsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumOptionsV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(OptionsRead)), uintptr(unsafe.Pointer(OptionsTotal)))
 	return uint32(r1)
 }
@@ -594,8 +1069,8 @@ func DhcpEnumServers(Flags uint32, IdInfo unsafe.Pointer, Servers **DHCPDS_SERVE
 // DhcpEnumSubnetClients calls DHCPSAPI!DhcpEnumSubnetClients.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetclients
 // Minimum OS: windowsserver2000.
-func DhcpEnumSubnetClients(ServerIpAddress string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnetClients(ServerIpAddress *string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetClients.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClientInfo)), uintptr(unsafe.Pointer(ClientsRead)), uintptr(unsafe.Pointer(ClientsTotal)))
 	return uint32(r1)
 }
@@ -603,8 +1078,8 @@ func DhcpEnumSubnetClients(ServerIpAddress string, SubnetAddress uint32, ResumeH
 // DhcpEnumSubnetClientsFilterStatusInfo calls DHCPSAPI!DhcpEnumSubnetClientsFilterStatusInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetclientsfilterstatusinfo
 // Minimum OS: windowsserver2008.
-func DhcpEnumSubnetClientsFilterStatusInfo(ServerIpAddress string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnetClientsFilterStatusInfo(ServerIpAddress *string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_FILTER_STATUS_INFO_ARRAY, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetClientsFilterStatusInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClientInfo)), uintptr(unsafe.Pointer(ClientsRead)), uintptr(unsafe.Pointer(ClientsTotal)))
 	return uint32(r1)
 }
@@ -612,8 +1087,8 @@ func DhcpEnumSubnetClientsFilterStatusInfo(ServerIpAddress string, SubnetAddress
 // DhcpEnumSubnetClientsV4 calls DHCPSAPI!DhcpEnumSubnetClientsV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetclientsv4
 // Minimum OS: windowsserver2008.
-func DhcpEnumSubnetClientsV4(ServerIpAddress string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY_V4, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnetClientsV4(ServerIpAddress *string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY_V4, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetClientsV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClientInfo)), uintptr(unsafe.Pointer(ClientsRead)), uintptr(unsafe.Pointer(ClientsTotal)))
 	return uint32(r1)
 }
@@ -621,17 +1096,28 @@ func DhcpEnumSubnetClientsV4(ServerIpAddress string, SubnetAddress uint32, Resum
 // DhcpEnumSubnetClientsV5 calls DHCPSAPI!DhcpEnumSubnetClientsV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetclientsv5
 // Minimum OS: windowsserver2008.
-func DhcpEnumSubnetClientsV5(ServerIpAddress string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY_V5, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnetClientsV5(ServerIpAddress *string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY_V5, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetClientsV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClientInfo)), uintptr(unsafe.Pointer(ClientsRead)), uintptr(unsafe.Pointer(ClientsTotal)))
+	return uint32(r1)
+}
+
+var specDhcpEnumSubnetClientsV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DhcpEnumSubnetClientsV6 calls DHCPSAPI!DhcpEnumSubnetClientsV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetclientsv6
+// Minimum OS: windowsserver2008.
+func DhcpEnumSubnetClientsV6(ServerIpAddress *string, SubnetAddress DHCP_IPV6_ADDRESS, ResumeHandle *DHCP_IPV6_ADDRESS, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY_V6, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpEnumSubnetClientsV6.Addr(), specDhcpEnumSubnetClientsV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClientInfo)), uintptr(unsafe.Pointer(ClientsRead)), uintptr(unsafe.Pointer(ClientsTotal))).Tuple()
 	return uint32(r1)
 }
 
 // DhcpEnumSubnetClientsVQ calls DHCPSAPI!DhcpEnumSubnetClientsVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetclientsvq
 // Minimum OS: windowsserver2008.
-func DhcpEnumSubnetClientsVQ(ServerIpAddress string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY_VQ, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnetClientsVQ(ServerIpAddress *string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY_VQ, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetClientsVQ.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClientInfo)), uintptr(unsafe.Pointer(ClientsRead)), uintptr(unsafe.Pointer(ClientsTotal)))
 	return uint32(r1)
 }
@@ -639,8 +1125,8 @@ func DhcpEnumSubnetClientsVQ(ServerIpAddress string, SubnetAddress uint32, Resum
 // DhcpEnumSubnetElements calls DHCPSAPI!DhcpEnumSubnetElements.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetelements
 // Minimum OS: windowsserver2000.
-func DhcpEnumSubnetElements(ServerIpAddress string, SubnetAddress uint32, EnumElementType DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_SUBNET_ELEMENT_INFO_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnetElements(ServerIpAddress *string, SubnetAddress uint32, EnumElementType DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_SUBNET_ELEMENT_INFO_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetElements.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(EnumElementType), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(EnumElementInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
 	return uint32(r1)
 }
@@ -648,8 +1134,8 @@ func DhcpEnumSubnetElements(ServerIpAddress string, SubnetAddress uint32, EnumEl
 // DhcpEnumSubnetElementsV4 calls DHCPSAPI!DhcpEnumSubnetElementsV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetelementsv4
 // Minimum OS: windowsserver2000.
-func DhcpEnumSubnetElementsV4(ServerIpAddress string, SubnetAddress uint32, EnumElementType DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnetElementsV4(ServerIpAddress *string, SubnetAddress uint32, EnumElementType DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_SUBNET_ELEMENT_INFO_ARRAY_V4, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetElementsV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(EnumElementType), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(EnumElementInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
 	return uint32(r1)
 }
@@ -657,17 +1143,28 @@ func DhcpEnumSubnetElementsV4(ServerIpAddress string, SubnetAddress uint32, Enum
 // DhcpEnumSubnetElementsV5 calls DHCPSAPI!DhcpEnumSubnetElementsV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetelementsv5
 // Minimum OS: windowsserver2000.
-func DhcpEnumSubnetElementsV5(ServerIpAddress string, SubnetAddress uint32, EnumElementType DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnetElementsV5(ServerIpAddress *string, SubnetAddress uint32, EnumElementType DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetElementsV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(EnumElementType), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(EnumElementInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
+	return uint32(r1)
+}
+
+var specDhcpEnumSubnetElementsV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DhcpEnumSubnetElementsV6 calls DHCPSAPI!DhcpEnumSubnetElementsV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetelementsv6
+// Minimum OS: windowsserver2008.
+func DhcpEnumSubnetElementsV6(ServerIpAddress *string, SubnetAddress DHCP_IPV6_ADDRESS, EnumElementType DHCP_SUBNET_ELEMENT_TYPE_V6, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpEnumSubnetElementsV6.Addr(), specDhcpEnumSubnetElementsV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(EnumElementType), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(EnumElementInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal))).Tuple()
 	return uint32(r1)
 }
 
 // DhcpEnumSubnets calls DHCPSAPI!DhcpEnumSubnets.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnets
 // Minimum OS: windowsserver2000.
-func DhcpEnumSubnets(ServerIpAddress string, ResumeHandle *uint32, PreferredMaximum uint32, EnumInfo **DHCP_IP_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnets(ServerIpAddress *string, ResumeHandle *uint32, PreferredMaximum uint32, EnumInfo **DHCP_IP_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnets.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(EnumInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
 	return uint32(r1)
 }
@@ -675,8 +1172,8 @@ func DhcpEnumSubnets(ServerIpAddress string, ResumeHandle *uint32, PreferredMaxi
 // DhcpEnumSubnetsV6 calls DHCPSAPI!DhcpEnumSubnetsV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetsv6
 // Minimum OS: windowsserver2008.
-func DhcpEnumSubnetsV6(ServerIpAddress string, ResumeHandle *uint32, PreferredMaximum uint32, EnumInfo **DHCPV6_IP_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpEnumSubnetsV6(ServerIpAddress *string, ResumeHandle *uint32, PreferredMaximum uint32, EnumInfo **DHCPV6_IP_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetsV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(EnumInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
 	return uint32(r1)
 }
@@ -684,8 +1181,8 @@ func DhcpEnumSubnetsV6(ServerIpAddress string, ResumeHandle *uint32, PreferredMa
 // DhcpGetAllOptionValues calls DHCPSAPI!DhcpGetAllOptionValues.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetalloptionvalues
 // Minimum OS: windowsserver2008.
-func DhcpGetAllOptionValues(ServerIpAddress string, Flags uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO, Values **DHCP_ALL_OPTION_VALUES) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetAllOptionValues(ServerIpAddress *string, Flags uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO, Values **DHCP_ALL_OPTION_VALUES) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetAllOptionValues.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(Values)))
 	return uint32(r1)
 }
@@ -693,8 +1190,8 @@ func DhcpGetAllOptionValues(ServerIpAddress string, Flags uint32, ScopeInfo *DHC
 // DhcpGetAllOptionValuesV6 calls DHCPSAPI!DhcpGetAllOptionValuesV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetalloptionvaluesv6
 // Minimum OS: windowsserver2008.
-func DhcpGetAllOptionValuesV6(ServerIpAddress string, Flags uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, Values **DHCP_ALL_OPTION_VALUES) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetAllOptionValuesV6(ServerIpAddress *string, Flags uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, Values **DHCP_ALL_OPTION_VALUES) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetAllOptionValuesV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(Values)))
 	return uint32(r1)
 }
@@ -702,8 +1199,8 @@ func DhcpGetAllOptionValuesV6(ServerIpAddress string, Flags uint32, ScopeInfo *D
 // DhcpGetAllOptions calls DHCPSAPI!DhcpGetAllOptions.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetalloptions
 // Minimum OS: windowsserver2008.
-func DhcpGetAllOptions(ServerIpAddress string, Flags uint32, OptionStruct **DHCP_ALL_OPTIONS) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetAllOptions(ServerIpAddress *string, Flags uint32, OptionStruct **DHCP_ALL_OPTIONS) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetAllOptions.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(OptionStruct)))
 	return uint32(r1)
 }
@@ -711,8 +1208,8 @@ func DhcpGetAllOptions(ServerIpAddress string, Flags uint32, OptionStruct **DHCP
 // DhcpGetAllOptionsV6 calls DHCPSAPI!DhcpGetAllOptionsV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetalloptionsv6
 // Minimum OS: windowsserver2008.
-func DhcpGetAllOptionsV6(ServerIpAddress string, Flags uint32, OptionStruct **DHCP_ALL_OPTIONS) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetAllOptionsV6(ServerIpAddress *string, Flags uint32, OptionStruct **DHCP_ALL_OPTIONS) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetAllOptionsV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(OptionStruct)))
 	return uint32(r1)
 }
@@ -720,8 +1217,8 @@ func DhcpGetAllOptionsV6(ServerIpAddress string, Flags uint32, OptionStruct **DH
 // DhcpGetClassInfo calls DHCPSAPI!DhcpGetClassInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetclassinfo
 // Minimum OS: windowsserver2008.
-func DhcpGetClassInfo(ServerIpAddress string, ReservedMustBeZero uint32, PartialClassInfo *DHCP_CLASS_INFO, FilledClassInfo **DHCP_CLASS_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetClassInfo(ServerIpAddress *string, ReservedMustBeZero uint32, PartialClassInfo *DHCP_CLASS_INFO, FilledClassInfo **DHCP_CLASS_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetClassInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ReservedMustBeZero), uintptr(unsafe.Pointer(PartialClassInfo)), uintptr(unsafe.Pointer(FilledClassInfo)))
 	return uint32(r1)
 }
@@ -729,8 +1226,8 @@ func DhcpGetClassInfo(ServerIpAddress string, ReservedMustBeZero uint32, Partial
 // DhcpGetClientInfo calls DHCPSAPI!DhcpGetClientInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetclientinfo
 // Minimum OS: windowsserver2000.
-func DhcpGetClientInfo(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetClientInfo(ServerIpAddress *string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetClientInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(SearchInfo)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -738,8 +1235,8 @@ func DhcpGetClientInfo(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO, Cli
 // DhcpGetClientInfoV4 calls DHCPSAPI!DhcpGetClientInfoV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetclientinfov4
 // Minimum OS: windowsserver2008.
-func DhcpGetClientInfoV4(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO_V4) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetClientInfoV4(ServerIpAddress *string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO_V4) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetClientInfoV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(SearchInfo)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -747,8 +1244,8 @@ func DhcpGetClientInfoV4(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO, C
 // DhcpGetClientInfoV6 calls DHCPSAPI!DhcpGetClientInfoV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetclientinfov6
 // Minimum OS: windowsserver2008.
-func DhcpGetClientInfoV6(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO_V6, ClientInfo **DHCP_CLIENT_INFO_V6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetClientInfoV6(ServerIpAddress *string, SearchInfo *DHCP_SEARCH_INFO_V6, ClientInfo **DHCP_CLIENT_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetClientInfoV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(SearchInfo)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -756,8 +1253,8 @@ func DhcpGetClientInfoV6(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO_V6
 // DhcpGetClientInfoVQ calls DHCPSAPI!DhcpGetClientInfoVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetclientinfovq
 // Minimum OS: windowsserver2008.
-func DhcpGetClientInfoVQ(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO_VQ) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetClientInfoVQ(ServerIpAddress *string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO_VQ) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetClientInfoVQ.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(SearchInfo)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -765,8 +1262,8 @@ func DhcpGetClientInfoVQ(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO, C
 // DhcpGetClientOptions calls DHCPSAPI!DhcpGetClientOptions.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetclientoptions
 // Minimum OS: windowsserver2008.
-func DhcpGetClientOptions(ServerIpAddress string, ClientIpAddress uint32, ClientSubnetMask uint32, ClientOptions **DHCP_OPTION_LIST) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetClientOptions(ServerIpAddress *string, ClientIpAddress uint32, ClientSubnetMask uint32, ClientOptions **DHCP_OPTION_LIST) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetClientOptions.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ClientIpAddress), uintptr(ClientSubnetMask), uintptr(unsafe.Pointer(ClientOptions)))
 	return uint32(r1)
 }
@@ -774,15 +1271,15 @@ func DhcpGetClientOptions(ServerIpAddress string, ClientIpAddress uint32, Client
 // DhcpGetFilterV4 calls DHCPSAPI!DhcpGetFilterV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetfilterv4
 // Minimum OS: windowsserver2008.
-func DhcpGetFilterV4(ServerIpAddress string, GlobalFilterInfo *DHCP_FILTER_GLOBAL_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetFilterV4(ServerIpAddress *string, GlobalFilterInfo *DHCP_FILTER_GLOBAL_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetFilterV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(GlobalFilterInfo)))
 	return uint32(r1)
 }
 
 // DhcpGetMibInfo calls DHCPSAPI!DhcpGetMibInfo.
-func DhcpGetMibInfo(ServerIpAddress string, MibInfo **DHCP_MIB_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetMibInfo(ServerIpAddress *string, MibInfo **DHCP_MIB_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetMibInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(MibInfo)))
 	return uint32(r1)
 }
@@ -790,8 +1287,8 @@ func DhcpGetMibInfo(ServerIpAddress string, MibInfo **DHCP_MIB_INFO) uint32 {
 // DhcpGetMibInfoV5 calls DHCPSAPI!DhcpGetMibInfoV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetmibinfov5
 // Minimum OS: windowsserver2008.
-func DhcpGetMibInfoV5(ServerIpAddress string, MibInfo **DHCP_MIB_INFO_V5) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetMibInfoV5(ServerIpAddress *string, MibInfo **DHCP_MIB_INFO_V5) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetMibInfoV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(MibInfo)))
 	return uint32(r1)
 }
@@ -799,8 +1296,8 @@ func DhcpGetMibInfoV5(ServerIpAddress string, MibInfo **DHCP_MIB_INFO_V5) uint32
 // DhcpGetMibInfoV6 calls DHCPSAPI!DhcpGetMibInfoV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetmibinfov6
 // Minimum OS: windowsserver2008.
-func DhcpGetMibInfoV6(ServerIpAddress string, MibInfo **DHCP_MIB_INFO_V6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetMibInfoV6(ServerIpAddress *string, MibInfo **DHCP_MIB_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetMibInfoV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(MibInfo)))
 	return uint32(r1)
 }
@@ -808,8 +1305,8 @@ func DhcpGetMibInfoV6(ServerIpAddress string, MibInfo **DHCP_MIB_INFO_V6) uint32
 // DhcpGetOptionInfo calls DHCPSAPI!DhcpGetOptionInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetoptioninfo
 // Minimum OS: windowsserver2008.
-func DhcpGetOptionInfo(ServerIpAddress string, OptionID uint32, OptionInfo **DHCP_OPTION) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetOptionInfo(ServerIpAddress *string, OptionID uint32, OptionInfo **DHCP_OPTION) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetOptionInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(OptionID), uintptr(unsafe.Pointer(OptionInfo)))
 	return uint32(r1)
 }
@@ -817,10 +1314,10 @@ func DhcpGetOptionInfo(ServerIpAddress string, OptionID uint32, OptionInfo **DHC
 // DhcpGetOptionInfoV5 calls DHCPSAPI!DhcpGetOptionInfoV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetoptioninfov5
 // Minimum OS: windowsserver2008.
-func DhcpGetOptionInfoV5(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string, OptionInfo **DHCP_OPTION) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpGetOptionInfoV5(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string, OptionInfo **DHCP_OPTION) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpGetOptionInfoV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(OptionInfo)))
 	return uint32(r1)
 }
@@ -828,10 +1325,10 @@ func DhcpGetOptionInfoV5(ServerIpAddress string, Flags uint32, OptionID uint32, 
 // DhcpGetOptionInfoV6 calls DHCPSAPI!DhcpGetOptionInfoV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetoptioninfov6
 // Minimum OS: windowsserver2008.
-func DhcpGetOptionInfoV6(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string, OptionInfo **DHCP_OPTION) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpGetOptionInfoV6(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string, OptionInfo **DHCP_OPTION) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpGetOptionInfoV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(OptionInfo)))
 	return uint32(r1)
 }
@@ -839,8 +1336,8 @@ func DhcpGetOptionInfoV6(ServerIpAddress string, Flags uint32, OptionID uint32, 
 // DhcpGetOptionValue calls DHCPSAPI!DhcpGetOptionValue.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetoptionvalue
 // Minimum OS: windowsserver2000.
-func DhcpGetOptionValue(ServerIpAddress string, OptionID uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue **DHCP_OPTION_VALUE) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetOptionValue(ServerIpAddress *string, OptionID uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue **DHCP_OPTION_VALUE) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetOptionValue.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(OptionID), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValue)))
 	return uint32(r1)
 }
@@ -848,10 +1345,10 @@ func DhcpGetOptionValue(ServerIpAddress string, OptionID uint32, ScopeInfo *DHCP
 // DhcpGetOptionValueV5 calls DHCPSAPI!DhcpGetOptionValueV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetoptionvaluev5
 // Minimum OS: windowsserver2008.
-func DhcpGetOptionValueV5(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue **DHCP_OPTION_VALUE) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpGetOptionValueV5(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue **DHCP_OPTION_VALUE) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpGetOptionValueV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValue)))
 	return uint32(r1)
 }
@@ -859,10 +1356,10 @@ func DhcpGetOptionValueV5(ServerIpAddress string, Flags uint32, OptionID uint32,
 // DhcpGetOptionValueV6 calls DHCPSAPI!DhcpGetOptionValueV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetoptionvaluev6
 // Minimum OS: windowsserver2008.
-func DhcpGetOptionValueV6(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, OptionValue **DHCP_OPTION_VALUE) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpGetOptionValueV6(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, OptionValue **DHCP_OPTION_VALUE) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpGetOptionValueV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValue)))
 	return uint32(r1)
 }
@@ -877,8 +1374,8 @@ func DhcpGetOriginalSubnetMask(sAdapterName string, dwSubnetMask *uint32) uint32
 // DhcpGetServerBindingInfo calls DHCPSAPI!DhcpGetServerBindingInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetserverbindinginfo
 // Minimum OS: windowsserver2000.
-func DhcpGetServerBindingInfo(ServerIpAddress string, Flags uint32, BindElementsInfo **DHCP_BIND_ELEMENT_ARRAY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetServerBindingInfo(ServerIpAddress *string, Flags uint32, BindElementsInfo **DHCP_BIND_ELEMENT_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetServerBindingInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(BindElementsInfo)))
 	return uint32(r1)
 }
@@ -886,8 +1383,8 @@ func DhcpGetServerBindingInfo(ServerIpAddress string, Flags uint32, BindElements
 // DhcpGetServerBindingInfoV6 calls DHCPSAPI!DhcpGetServerBindingInfoV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetserverbindinginfov6
 // Minimum OS: windowsserver2008.
-func DhcpGetServerBindingInfoV6(ServerIpAddress string, Flags uint32, BindElementsInfo **DHCPV6_BIND_ELEMENT_ARRAY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetServerBindingInfoV6(ServerIpAddress *string, Flags uint32, BindElementsInfo **DHCPV6_BIND_ELEMENT_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetServerBindingInfoV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(BindElementsInfo)))
 	return uint32(r1)
 }
@@ -895,8 +1392,8 @@ func DhcpGetServerBindingInfoV6(ServerIpAddress string, Flags uint32, BindElemen
 // DhcpGetServerSpecificStrings calls DHCPSAPI!DhcpGetServerSpecificStrings.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetserverspecificstrings
 // Minimum OS: windowsserver2008.
-func DhcpGetServerSpecificStrings(ServerIpAddress string, ServerSpecificStrings **DHCP_SERVER_SPECIFIC_STRINGS) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetServerSpecificStrings(ServerIpAddress *string, ServerSpecificStrings **DHCP_SERVER_SPECIFIC_STRINGS) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetServerSpecificStrings.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ServerSpecificStrings)))
 	return uint32(r1)
 }
@@ -904,8 +1401,8 @@ func DhcpGetServerSpecificStrings(ServerIpAddress string, ServerSpecificStrings 
 // DhcpGetSubnetDelayOffer calls DHCPSAPI!DhcpGetSubnetDelayOffer.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetsubnetdelayoffer
 // Minimum OS: windowsserver2008.
-func DhcpGetSubnetDelayOffer(ServerIpAddress string, SubnetAddress uint32, TimeDelayInMilliseconds *uint16) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetSubnetDelayOffer(ServerIpAddress *string, SubnetAddress uint32, TimeDelayInMilliseconds *uint16) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetSubnetDelayOffer.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(TimeDelayInMilliseconds)))
 	return uint32(r1)
 }
@@ -913,17 +1410,28 @@ func DhcpGetSubnetDelayOffer(ServerIpAddress string, SubnetAddress uint32, TimeD
 // DhcpGetSubnetInfo calls DHCPSAPI!DhcpGetSubnetInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetsubnetinfo
 // Minimum OS: windowsserver2000.
-func DhcpGetSubnetInfo(ServerIpAddress string, SubnetAddress uint32, SubnetInfo **DHCP_SUBNET_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetSubnetInfo(ServerIpAddress *string, SubnetAddress uint32, SubnetInfo **DHCP_SUBNET_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetSubnetInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(SubnetInfo)))
+	return uint32(r1)
+}
+
+var specDhcpGetSubnetInfoV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpGetSubnetInfoV6 calls DHCPSAPI!DhcpGetSubnetInfoV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetsubnetinfov6
+// Minimum OS: windowsserver2008.
+func DhcpGetSubnetInfoV6(ServerIpAddress *string, SubnetAddress DHCP_IPV6_ADDRESS, SubnetInfo **DHCP_SUBNET_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpGetSubnetInfoV6.Addr(), specDhcpGetSubnetInfoV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(SubnetInfo))).Tuple()
 	return uint32(r1)
 }
 
 // DhcpGetSubnetInfoVQ calls DHCPSAPI!DhcpGetSubnetInfoVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetsubnetinfovq
 // Minimum OS: windowsserver2008.
-func DhcpGetSubnetInfoVQ(ServerIpAddress string, SubnetAddress uint32, SubnetInfo **DHCP_SUBNET_INFO_VQ) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetSubnetInfoVQ(ServerIpAddress *string, SubnetAddress uint32, SubnetInfo **DHCP_SUBNET_INFO_VQ) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetSubnetInfoVQ.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(SubnetInfo)))
 	return uint32(r1)
 }
@@ -931,8 +1439,8 @@ func DhcpGetSubnetInfoVQ(ServerIpAddress string, SubnetAddress uint32, SubnetInf
 // DhcpGetSuperScopeInfoV4 calls DHCPSAPI!DhcpGetSuperScopeInfoV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetsuperscopeinfov4
 // Minimum OS: windowsserver2008.
-func DhcpGetSuperScopeInfoV4(ServerIpAddress string, SuperScopeTable **DHCP_SUPER_SCOPE_TABLE) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetSuperScopeInfoV4(ServerIpAddress *string, SuperScopeTable **DHCP_SUPER_SCOPE_TABLE) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetSuperScopeInfoV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(SuperScopeTable)))
 	return uint32(r1)
 }
@@ -948,8 +1456,8 @@ func DhcpGetThreadOptions(pFlags *uint32, Reserved unsafe.Pointer) uint32 {
 // DhcpGetVersion calls DHCPSAPI!DhcpGetVersion.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetversion
 // Minimum OS: windowsserver2000.
-func DhcpGetVersion(ServerIpAddress string, MajorVersion *uint32, MinorVersion *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpGetVersion(ServerIpAddress *string, MajorVersion *uint32, MinorVersion *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpGetVersion.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(MajorVersion)), uintptr(unsafe.Pointer(MinorVersion)))
 	return uint32(r1)
 }
@@ -957,8 +1465,8 @@ func DhcpGetVersion(ServerIpAddress string, MajorVersion *uint32, MinorVersion *
 // DhcpHlprAddV4PolicyCondition calls DHCPSAPI!DhcpHlprAddV4PolicyCondition.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcphlpraddv4policycondition
 // Minimum OS: windowsserver2012.
-func DhcpHlprAddV4PolicyCondition(Policy *DHCP_POLICY, ParentExpr uint32, Type DHCP_POL_ATTR_TYPE, OptionID uint32, SubOptionID uint32, VendorName string, Operator DHCP_POL_COMPARATOR, Value []byte, ConditionIndex *uint32) uint32 {
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpHlprAddV4PolicyCondition(Policy *DHCP_POLICY, ParentExpr uint32, Type DHCP_POL_ATTR_TYPE, OptionID uint32, SubOptionID uint32, VendorName *string, Operator DHCP_POL_COMPARATOR, Value []byte, ConditionIndex *uint32) uint32 {
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	var _Value *byte
 	if len(Value) > 0 {
 		_Value = &Value[0]
@@ -1086,8 +1594,8 @@ func DhcpHlprResetV4PolicyExpr(Policy *DHCP_POLICY) uint32 {
 // DhcpModifyClass calls DHCPSAPI!DhcpModifyClass.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpmodifyclass
 // Minimum OS: windowsserver2008.
-func DhcpModifyClass(ServerIpAddress string, ReservedMustBeZero uint32, ClassInfo *DHCP_CLASS_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpModifyClass(ServerIpAddress *string, ReservedMustBeZero uint32, ClassInfo *DHCP_CLASS_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpModifyClass.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ReservedMustBeZero), uintptr(unsafe.Pointer(ClassInfo)))
 	return uint32(r1)
 }
@@ -1095,9 +1603,20 @@ func DhcpModifyClass(ServerIpAddress string, ReservedMustBeZero uint32, ClassInf
 // DhcpModifyClassV6 calls DHCPSAPI!DhcpModifyClassV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpmodifyclassv6
 // Minimum OS: windowsserver2008.
-func DhcpModifyClassV6(ServerIpAddress string, ReservedMustBeZero uint32, ClassInfo *DHCP_CLASS_INFO_V6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpModifyClassV6(ServerIpAddress *string, ReservedMustBeZero uint32, ClassInfo *DHCP_CLASS_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpModifyClassV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ReservedMustBeZero), uintptr(unsafe.Pointer(ClassInfo)))
+	return uint32(r1)
+}
+
+var specDhcpRegisterParamChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpRegisterParamChange calls dhcpcsvc!DhcpRegisterParamChange.
+// https://learn.microsoft.com/windows/win32/api/dhcpcsdk/nf-dhcpcsdk-dhcpregisterparamchange
+// Minimum OS: windows5.0.
+func DhcpRegisterParamChange(Flags uint32, AdapterName string, ClassId *DHCPCAPI_CLASSID, Params DHCPCAPI_PARAMS_ARRAY, Handle unsafe.Pointer) uint32 {
+	_AdapterName := win32.UTF16Ptr(AdapterName)
+	r1, _, _ := win32.Call(procDhcpRegisterParamChange.Addr(), specDhcpRegisterParamChange, nil, uintptr(Flags), 0, uintptr(unsafe.Pointer(_AdapterName)), uintptr(unsafe.Pointer(ClassId)), uintptr(unsafe.Pointer(&Params)), uintptr(unsafe.Pointer(Handle))).Tuple()
 	return uint32(r1)
 }
 
@@ -1112,8 +1631,8 @@ func DhcpRemoveDNSRegistrations() uint32 {
 // DhcpRemoveOption calls DHCPSAPI!DhcpRemoveOption.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremoveoption
 // Minimum OS: windowsserver2008.
-func DhcpRemoveOption(ServerIpAddress string, OptionID uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpRemoveOption(ServerIpAddress *string, OptionID uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveOption.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(OptionID))
 	return uint32(r1)
 }
@@ -1121,10 +1640,10 @@ func DhcpRemoveOption(ServerIpAddress string, OptionID uint32) uint32 {
 // DhcpRemoveOptionV5 calls DHCPSAPI!DhcpRemoveOptionV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremoveoptionv5
 // Minimum OS: windowsserver2008.
-func DhcpRemoveOptionV5(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpRemoveOptionV5(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveOptionV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)))
 	return uint32(r1)
 }
@@ -1132,10 +1651,10 @@ func DhcpRemoveOptionV5(ServerIpAddress string, Flags uint32, OptionID uint32, C
 // DhcpRemoveOptionV6 calls DHCPSAPI!DhcpRemoveOptionV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremoveoptionv6
 // Minimum OS: windowsserver2008.
-func DhcpRemoveOptionV6(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpRemoveOptionV6(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveOptionV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)))
 	return uint32(r1)
 }
@@ -1143,8 +1662,8 @@ func DhcpRemoveOptionV6(ServerIpAddress string, Flags uint32, OptionID uint32, C
 // DhcpRemoveOptionValue calls DHCPSAPI!DhcpRemoveOptionValue.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremoveoptionvalue
 // Minimum OS: windowsserver2008.
-func DhcpRemoveOptionValue(ServerIpAddress string, OptionID uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpRemoveOptionValue(ServerIpAddress *string, OptionID uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveOptionValue.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(OptionID), uintptr(unsafe.Pointer(ScopeInfo)))
 	return uint32(r1)
 }
@@ -1152,10 +1671,10 @@ func DhcpRemoveOptionValue(ServerIpAddress string, OptionID uint32, ScopeInfo *D
 // DhcpRemoveOptionValueV5 calls DHCPSAPI!DhcpRemoveOptionValueV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremoveoptionvaluev5
 // Minimum OS: windowsserver2000.
-func DhcpRemoveOptionValueV5(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpRemoveOptionValueV5(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveOptionValueV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)))
 	return uint32(r1)
 }
@@ -1163,10 +1682,10 @@ func DhcpRemoveOptionValueV5(ServerIpAddress string, Flags uint32, OptionID uint
 // DhcpRemoveOptionValueV6 calls DHCPSAPI!DhcpRemoveOptionValueV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremoveoptionvaluev6
 // Minimum OS: windowsserver2008.
-func DhcpRemoveOptionValueV6(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpRemoveOptionValueV6(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveOptionValueV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)))
 	return uint32(r1)
 }
@@ -1174,8 +1693,8 @@ func DhcpRemoveOptionValueV6(ServerIpAddress string, Flags uint32, OptionID uint
 // DhcpRemoveSubnetElement calls DHCPSAPI!DhcpRemoveSubnetElement.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremovesubnetelement
 // Minimum OS: windowsserver2008.
-func DhcpRemoveSubnetElement(ServerIpAddress string, SubnetAddress uint32, RemoveElementInfo *DHCP_SUBNET_ELEMENT_DATA, ForceFlag DHCP_FORCE_FLAG) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpRemoveSubnetElement(ServerIpAddress *string, SubnetAddress uint32, RemoveElementInfo *DHCP_SUBNET_ELEMENT_DATA, ForceFlag DHCP_FORCE_FLAG) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveSubnetElement.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(RemoveElementInfo)), uintptr(ForceFlag))
 	return uint32(r1)
 }
@@ -1183,8 +1702,8 @@ func DhcpRemoveSubnetElement(ServerIpAddress string, SubnetAddress uint32, Remov
 // DhcpRemoveSubnetElementV4 calls DHCPSAPI!DhcpRemoveSubnetElementV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremovesubnetelementv4
 // Minimum OS: windowsserver2008.
-func DhcpRemoveSubnetElementV4(ServerIpAddress string, SubnetAddress uint32, RemoveElementInfo *DHCP_SUBNET_ELEMENT_DATA_V4, ForceFlag DHCP_FORCE_FLAG) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpRemoveSubnetElementV4(ServerIpAddress *string, SubnetAddress uint32, RemoveElementInfo *DHCP_SUBNET_ELEMENT_DATA_V4, ForceFlag DHCP_FORCE_FLAG) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveSubnetElementV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(RemoveElementInfo)), uintptr(ForceFlag))
 	return uint32(r1)
 }
@@ -1192,9 +1711,32 @@ func DhcpRemoveSubnetElementV4(ServerIpAddress string, SubnetAddress uint32, Rem
 // DhcpRemoveSubnetElementV5 calls DHCPSAPI!DhcpRemoveSubnetElementV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremovesubnetelementv5
 // Minimum OS: windowsserver2000.
-func DhcpRemoveSubnetElementV5(ServerIpAddress string, SubnetAddress uint32, RemoveElementInfo *DHCP_SUBNET_ELEMENT_DATA_V5, ForceFlag DHCP_FORCE_FLAG) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpRemoveSubnetElementV5(ServerIpAddress *string, SubnetAddress uint32, RemoveElementInfo *DHCP_SUBNET_ELEMENT_DATA_V5, ForceFlag DHCP_FORCE_FLAG) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveSubnetElementV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(RemoveElementInfo)), uintptr(ForceFlag))
+	return uint32(r1)
+}
+
+var specDhcpRemoveSubnetElementV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// DhcpRemoveSubnetElementV6 calls DHCPSAPI!DhcpRemoveSubnetElementV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremovesubnetelementv6
+// Minimum OS: windowsserver2008.
+func DhcpRemoveSubnetElementV6(ServerIpAddress *string, SubnetAddress DHCP_IPV6_ADDRESS, RemoveElementInfo *DHCP_SUBNET_ELEMENT_DATA_V6, ForceFlag DHCP_FORCE_FLAG) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpRemoveSubnetElementV6.Addr(), specDhcpRemoveSubnetElementV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(RemoveElementInfo)), uintptr(ForceFlag)).Tuple()
+	return uint32(r1)
+}
+
+var specDhcpRequestParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// DhcpRequestParams calls dhcpcsvc!DhcpRequestParams.
+// https://learn.microsoft.com/windows/win32/api/dhcpcsdk/nf-dhcpcsdk-dhcprequestparams
+// Minimum OS: windows5.0.
+func DhcpRequestParams(Flags uint32, Reserved unsafe.Pointer, AdapterName string, ClassId *DHCPCAPI_CLASSID, SendParams DHCPCAPI_PARAMS_ARRAY, RecdParams DHCPCAPI_PARAMS_ARRAY, Buffer *byte, pSize *uint32, RequestIdStr string) uint32 {
+	_AdapterName := win32.UTF16Ptr(AdapterName)
+	_RequestIdStr := win32.UTF16Ptr(RequestIdStr)
+	r1, _, _ := win32.Call(procDhcpRequestParams.Addr(), specDhcpRequestParams, nil, uintptr(Flags), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(_AdapterName)), uintptr(unsafe.Pointer(ClassId)), uintptr(unsafe.Pointer(&SendParams)), uintptr(unsafe.Pointer(&RecdParams)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pSize)), uintptr(unsafe.Pointer(_RequestIdStr))).Tuple()
 	return uint32(r1)
 }
 
@@ -1208,8 +1750,8 @@ func DhcpRpcFreeMemory(BufferPointer unsafe.Pointer) {
 // DhcpScanDatabase calls DHCPSAPI!DhcpScanDatabase.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpscandatabase
 // Minimum OS: windowsserver2008.
-func DhcpScanDatabase(ServerIpAddress string, SubnetAddress uint32, FixFlag uint32, ScanList **DHCP_SCAN_LIST) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpScanDatabase(ServerIpAddress *string, SubnetAddress uint32, FixFlag uint32, ScanList **DHCP_SCAN_LIST) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpScanDatabase.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(FixFlag), uintptr(unsafe.Pointer(ScanList)))
 	return uint32(r1)
 }
@@ -1222,8 +1764,8 @@ func DhcpServerAuditlogParamsFree(ConfigInfo *DHCP_SERVER_CONFIG_INFO_VQ) {
 // DhcpServerBackupDatabase calls DHCPSAPI!DhcpServerBackupDatabase.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserverbackupdatabase
 // Minimum OS: windowsserver2008.
-func DhcpServerBackupDatabase(ServerIpAddress string, Path string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerBackupDatabase(ServerIpAddress *string, Path string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_Path := win32.UTF16Ptr(Path)
 	r1, _, _ := syscall.SyscallN(procDhcpServerBackupDatabase.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(_Path)))
 	return uint32(r1)
@@ -1232,8 +1774,8 @@ func DhcpServerBackupDatabase(ServerIpAddress string, Path string) uint32 {
 // DhcpServerGetConfig calls DHCPSAPI!DhcpServerGetConfig.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpservergetconfig
 // Minimum OS: windowsserver2008.
-func DhcpServerGetConfig(ServerIpAddress string, ConfigInfo **DHCP_SERVER_CONFIG_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerGetConfig(ServerIpAddress *string, ConfigInfo **DHCP_SERVER_CONFIG_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpServerGetConfig.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ConfigInfo)))
 	return uint32(r1)
 }
@@ -1241,8 +1783,8 @@ func DhcpServerGetConfig(ServerIpAddress string, ConfigInfo **DHCP_SERVER_CONFIG
 // DhcpServerGetConfigV4 calls DHCPSAPI!DhcpServerGetConfigV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpservergetconfigv4
 // Minimum OS: windowsserver2008.
-func DhcpServerGetConfigV4(ServerIpAddress string, ConfigInfo **DHCP_SERVER_CONFIG_INFO_V4) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerGetConfigV4(ServerIpAddress *string, ConfigInfo **DHCP_SERVER_CONFIG_INFO_V4) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpServerGetConfigV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ConfigInfo)))
 	return uint32(r1)
 }
@@ -1250,8 +1792,8 @@ func DhcpServerGetConfigV4(ServerIpAddress string, ConfigInfo **DHCP_SERVER_CONF
 // DhcpServerGetConfigV6 calls DHCPSAPI!DhcpServerGetConfigV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpservergetconfigv6
 // Minimum OS: windowsserver2008.
-func DhcpServerGetConfigV6(ServerIpAddress string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, ConfigInfo **DHCP_SERVER_CONFIG_INFO_V6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerGetConfigV6(ServerIpAddress *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, ConfigInfo **DHCP_SERVER_CONFIG_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpServerGetConfigV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(ConfigInfo)))
 	return uint32(r1)
 }
@@ -1259,8 +1801,8 @@ func DhcpServerGetConfigV6(ServerIpAddress string, ScopeInfo *DHCP_OPTION_SCOPE_
 // DhcpServerGetConfigVQ calls DHCPSAPI!DhcpServerGetConfigVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpservergetconfigvq
 // Minimum OS: windowsserver2008.
-func DhcpServerGetConfigVQ(ServerIpAddress string, ConfigInfo **DHCP_SERVER_CONFIG_INFO_VQ) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerGetConfigVQ(ServerIpAddress *string, ConfigInfo **DHCP_SERVER_CONFIG_INFO_VQ) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpServerGetConfigVQ.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ConfigInfo)))
 	return uint32(r1)
 }
@@ -1268,8 +1810,8 @@ func DhcpServerGetConfigVQ(ServerIpAddress string, ConfigInfo **DHCP_SERVER_CONF
 // DhcpServerQueryAttribute calls DHCPSAPI!DhcpServerQueryAttribute.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserverqueryattribute
 // Minimum OS: windowsserver2008.
-func DhcpServerQueryAttribute(ServerIpAddr string, dwReserved uint32, DhcpAttribId uint32, pDhcpAttrib **DHCP_ATTRIB) uint32 {
-	_ServerIpAddr := win32.UTF16Ptr(ServerIpAddr)
+func DhcpServerQueryAttribute(ServerIpAddr *string, dwReserved uint32, DhcpAttribId uint32, pDhcpAttrib **DHCP_ATTRIB) uint32 {
+	_ServerIpAddr := win32.UTF16PtrOrNil(ServerIpAddr)
 	r1, _, _ := syscall.SyscallN(procDhcpServerQueryAttribute.Addr(), uintptr(unsafe.Pointer(_ServerIpAddr)), uintptr(dwReserved), uintptr(DhcpAttribId), uintptr(unsafe.Pointer(pDhcpAttrib)))
 	return uint32(r1)
 }
@@ -1277,8 +1819,8 @@ func DhcpServerQueryAttribute(ServerIpAddr string, dwReserved uint32, DhcpAttrib
 // DhcpServerQueryAttributes calls DHCPSAPI!DhcpServerQueryAttributes.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserverqueryattributes
 // Minimum OS: windowsserver2008.
-func DhcpServerQueryAttributes(ServerIpAddr string, dwReserved uint32, dwAttribCount uint32, pDhcpAttribs *uint32, pDhcpAttribArr **DHCP_ATTRIB_ARRAY) uint32 {
-	_ServerIpAddr := win32.UTF16Ptr(ServerIpAddr)
+func DhcpServerQueryAttributes(ServerIpAddr *string, dwReserved uint32, dwAttribCount uint32, pDhcpAttribs *uint32, pDhcpAttribArr **DHCP_ATTRIB_ARRAY) uint32 {
+	_ServerIpAddr := win32.UTF16PtrOrNil(ServerIpAddr)
 	r1, _, _ := syscall.SyscallN(procDhcpServerQueryAttributes.Addr(), uintptr(unsafe.Pointer(_ServerIpAddr)), uintptr(dwReserved), uintptr(dwAttribCount), uintptr(unsafe.Pointer(pDhcpAttribs)), uintptr(unsafe.Pointer(pDhcpAttribArr)))
 	return uint32(r1)
 }
@@ -1286,8 +1828,8 @@ func DhcpServerQueryAttributes(ServerIpAddr string, dwReserved uint32, dwAttribC
 // DhcpServerQueryDnsRegCredentials calls DHCPSAPI!DhcpServerQueryDnsRegCredentials.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserverquerydnsregcredentials
 // Minimum OS: windowsserver2008.
-func DhcpServerQueryDnsRegCredentials(ServerIpAddress string, UnameSize uint32, Uname foundation.PWSTR, DomainSize uint32, Domain foundation.PWSTR) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerQueryDnsRegCredentials(ServerIpAddress *string, UnameSize uint32, Uname foundation.PWSTR, DomainSize uint32, Domain foundation.PWSTR) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpServerQueryDnsRegCredentials.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(UnameSize), uintptr(unsafe.Pointer(Uname)), uintptr(DomainSize), uintptr(unsafe.Pointer(Domain)))
 	return uint32(r1)
 }
@@ -1295,8 +1837,8 @@ func DhcpServerQueryDnsRegCredentials(ServerIpAddress string, UnameSize uint32, 
 // DhcpServerRedoAuthorization calls DHCPSAPI!DhcpServerRedoAuthorization.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserverredoauthorization
 // Minimum OS: windowsserver2000.
-func DhcpServerRedoAuthorization(ServerIpAddr string, dwReserved uint32) uint32 {
-	_ServerIpAddr := win32.UTF16Ptr(ServerIpAddr)
+func DhcpServerRedoAuthorization(ServerIpAddr *string, dwReserved uint32) uint32 {
+	_ServerIpAddr := win32.UTF16PtrOrNil(ServerIpAddr)
 	r1, _, _ := syscall.SyscallN(procDhcpServerRedoAuthorization.Addr(), uintptr(unsafe.Pointer(_ServerIpAddr)), uintptr(dwReserved))
 	return uint32(r1)
 }
@@ -1304,8 +1846,8 @@ func DhcpServerRedoAuthorization(ServerIpAddr string, dwReserved uint32) uint32 
 // DhcpServerRestoreDatabase calls DHCPSAPI!DhcpServerRestoreDatabase.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserverrestoredatabase
 // Minimum OS: windowsserver2008.
-func DhcpServerRestoreDatabase(ServerIpAddress string, Path string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerRestoreDatabase(ServerIpAddress *string, Path string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_Path := win32.UTF16Ptr(Path)
 	r1, _, _ := syscall.SyscallN(procDhcpServerRestoreDatabase.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(_Path)))
 	return uint32(r1)
@@ -1314,8 +1856,8 @@ func DhcpServerRestoreDatabase(ServerIpAddress string, Path string) uint32 {
 // DhcpServerSetConfig calls DHCPSAPI!DhcpServerSetConfig.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserversetconfig
 // Minimum OS: windowsserver2008.
-func DhcpServerSetConfig(ServerIpAddress string, FieldsToSet uint32, ConfigInfo *DHCP_SERVER_CONFIG_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerSetConfig(ServerIpAddress *string, FieldsToSet uint32, ConfigInfo *DHCP_SERVER_CONFIG_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpServerSetConfig.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(FieldsToSet), uintptr(unsafe.Pointer(ConfigInfo)))
 	return uint32(r1)
 }
@@ -1323,8 +1865,8 @@ func DhcpServerSetConfig(ServerIpAddress string, FieldsToSet uint32, ConfigInfo 
 // DhcpServerSetConfigV4 calls DHCPSAPI!DhcpServerSetConfigV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserversetconfigv4
 // Minimum OS: windowsserver2008.
-func DhcpServerSetConfigV4(ServerIpAddress string, FieldsToSet uint32, ConfigInfo *DHCP_SERVER_CONFIG_INFO_V4) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerSetConfigV4(ServerIpAddress *string, FieldsToSet uint32, ConfigInfo *DHCP_SERVER_CONFIG_INFO_V4) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpServerSetConfigV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(FieldsToSet), uintptr(unsafe.Pointer(ConfigInfo)))
 	return uint32(r1)
 }
@@ -1332,8 +1874,8 @@ func DhcpServerSetConfigV4(ServerIpAddress string, FieldsToSet uint32, ConfigInf
 // DhcpServerSetConfigV6 calls DHCPSAPI!DhcpServerSetConfigV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserversetconfigv6
 // Minimum OS: windowsserver2008.
-func DhcpServerSetConfigV6(ServerIpAddress string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, FieldsToSet uint32, ConfigInfo *DHCP_SERVER_CONFIG_INFO_V6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerSetConfigV6(ServerIpAddress *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, FieldsToSet uint32, ConfigInfo *DHCP_SERVER_CONFIG_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpServerSetConfigV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(FieldsToSet), uintptr(unsafe.Pointer(ConfigInfo)))
 	return uint32(r1)
 }
@@ -1341,18 +1883,18 @@ func DhcpServerSetConfigV6(ServerIpAddress string, ScopeInfo *DHCP_OPTION_SCOPE_
 // DhcpServerSetConfigVQ calls DHCPSAPI!DhcpServerSetConfigVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserversetconfigvq
 // Minimum OS: windowsserver2008.
-func DhcpServerSetConfigVQ(ServerIpAddress string, FieldsToSet uint32, ConfigInfo *DHCP_SERVER_CONFIG_INFO_VQ) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpServerSetConfigVQ(ServerIpAddress *string, FieldsToSet uint32, ConfigInfo *DHCP_SERVER_CONFIG_INFO_VQ) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpServerSetConfigVQ.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(FieldsToSet), uintptr(unsafe.Pointer(ConfigInfo)))
 	return uint32(r1)
 }
 
 // DhcpServerSetDnsRegCredentials calls DHCPSAPI!DhcpServerSetDnsRegCredentials.
-func DhcpServerSetDnsRegCredentials(ServerIpAddress string, Uname string, Domain string, Passwd string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_Uname := win32.UTF16Ptr(Uname)
-	_Domain := win32.UTF16Ptr(Domain)
-	_Passwd := win32.UTF16Ptr(Passwd)
+func DhcpServerSetDnsRegCredentials(ServerIpAddress *string, Uname *string, Domain *string, Passwd *string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_Uname := win32.UTF16PtrOrNil(Uname)
+	_Domain := win32.UTF16PtrOrNil(Domain)
+	_Passwd := win32.UTF16PtrOrNil(Passwd)
 	r1, _, _ := syscall.SyscallN(procDhcpServerSetDnsRegCredentials.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(_Uname)), uintptr(unsafe.Pointer(_Domain)), uintptr(unsafe.Pointer(_Passwd)))
 	return uint32(r1)
 }
@@ -1360,11 +1902,11 @@ func DhcpServerSetDnsRegCredentials(ServerIpAddress string, Uname string, Domain
 // DhcpServerSetDnsRegCredentialsV5 calls DHCPSAPI!DhcpServerSetDnsRegCredentialsV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpserversetdnsregcredentialsv5
 // Minimum OS: windowsserver2008.
-func DhcpServerSetDnsRegCredentialsV5(ServerIpAddress string, Uname string, Domain string, Passwd string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_Uname := win32.UTF16Ptr(Uname)
-	_Domain := win32.UTF16Ptr(Domain)
-	_Passwd := win32.UTF16Ptr(Passwd)
+func DhcpServerSetDnsRegCredentialsV5(ServerIpAddress *string, Uname *string, Domain *string, Passwd *string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_Uname := win32.UTF16PtrOrNil(Uname)
+	_Domain := win32.UTF16PtrOrNil(Domain)
+	_Passwd := win32.UTF16PtrOrNil(Passwd)
 	r1, _, _ := syscall.SyscallN(procDhcpServerSetDnsRegCredentialsV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(_Uname)), uintptr(unsafe.Pointer(_Domain)), uintptr(unsafe.Pointer(_Passwd)))
 	return uint32(r1)
 }
@@ -1372,8 +1914,8 @@ func DhcpServerSetDnsRegCredentialsV5(ServerIpAddress string, Uname string, Doma
 // DhcpSetClientInfo calls DHCPSAPI!DhcpSetClientInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetclientinfo
 // Minimum OS: windowsserver2000.
-func DhcpSetClientInfo(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetClientInfo(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetClientInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -1381,8 +1923,8 @@ func DhcpSetClientInfo(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO) uin
 // DhcpSetClientInfoV4 calls DHCPSAPI!DhcpSetClientInfoV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetclientinfov4
 // Minimum OS: windowsserver2008.
-func DhcpSetClientInfoV4(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_V4) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetClientInfoV4(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO_V4) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetClientInfoV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -1390,8 +1932,8 @@ func DhcpSetClientInfoV4(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_V4
 // DhcpSetClientInfoV6 calls DHCPSAPI!DhcpSetClientInfoV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetclientinfov6
 // Minimum OS: windowsserver2008.
-func DhcpSetClientInfoV6(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_V6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetClientInfoV6(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetClientInfoV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -1399,8 +1941,8 @@ func DhcpSetClientInfoV6(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_V6
 // DhcpSetClientInfoVQ calls DHCPSAPI!DhcpSetClientInfoVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetclientinfovq
 // Minimum OS: windowsserver2008.
-func DhcpSetClientInfoVQ(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_VQ) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetClientInfoVQ(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO_VQ) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetClientInfoVQ.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -1408,8 +1950,8 @@ func DhcpSetClientInfoVQ(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_VQ
 // DhcpSetFilterV4 calls DHCPSAPI!DhcpSetFilterV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetfilterv4
 // Minimum OS: windowsserver2008.
-func DhcpSetFilterV4(ServerIpAddress string, GlobalFilterInfo *DHCP_FILTER_GLOBAL_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetFilterV4(ServerIpAddress *string, GlobalFilterInfo *DHCP_FILTER_GLOBAL_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetFilterV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(GlobalFilterInfo)))
 	return uint32(r1)
 }
@@ -1417,8 +1959,8 @@ func DhcpSetFilterV4(ServerIpAddress string, GlobalFilterInfo *DHCP_FILTER_GLOBA
 // DhcpSetOptionInfo calls DHCPSAPI!DhcpSetOptionInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetoptioninfo
 // Minimum OS: windowsserver2008.
-func DhcpSetOptionInfo(ServerIpAddress string, OptionID uint32, OptionInfo *DHCP_OPTION) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetOptionInfo(ServerIpAddress *string, OptionID uint32, OptionInfo *DHCP_OPTION) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetOptionInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(OptionID), uintptr(unsafe.Pointer(OptionInfo)))
 	return uint32(r1)
 }
@@ -1426,10 +1968,10 @@ func DhcpSetOptionInfo(ServerIpAddress string, OptionID uint32, OptionInfo *DHCP
 // DhcpSetOptionInfoV5 calls DHCPSAPI!DhcpSetOptionInfoV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetoptioninfov5
 // Minimum OS: windowsserver2008.
-func DhcpSetOptionInfoV5(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string, OptionInfo *DHCP_OPTION) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpSetOptionInfoV5(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string, OptionInfo *DHCP_OPTION) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpSetOptionInfoV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(OptionInfo)))
 	return uint32(r1)
 }
@@ -1437,10 +1979,10 @@ func DhcpSetOptionInfoV5(ServerIpAddress string, Flags uint32, OptionID uint32, 
 // DhcpSetOptionInfoV6 calls DHCPSAPI!DhcpSetOptionInfoV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetoptioninfov6
 // Minimum OS: windowsserver2008.
-func DhcpSetOptionInfoV6(ServerIpAddress string, Flags uint32, OptionID uint32, ClassName string, VendorName string, OptionInfo *DHCP_OPTION) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpSetOptionInfoV6(ServerIpAddress *string, Flags uint32, OptionID uint32, ClassName *string, VendorName *string, OptionInfo *DHCP_OPTION) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpSetOptionInfoV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(OptionInfo)))
 	return uint32(r1)
 }
@@ -1448,8 +1990,8 @@ func DhcpSetOptionInfoV6(ServerIpAddress string, Flags uint32, OptionID uint32, 
 // DhcpSetOptionValue calls DHCPSAPI!DhcpSetOptionValue.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetoptionvalue
 // Minimum OS: windowsserver2008.
-func DhcpSetOptionValue(ServerIpAddress string, OptionID uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue *DHCP_OPTION_DATA) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetOptionValue(ServerIpAddress *string, OptionID uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue *DHCP_OPTION_DATA) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetOptionValue.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(OptionID), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValue)))
 	return uint32(r1)
 }
@@ -1457,10 +1999,10 @@ func DhcpSetOptionValue(ServerIpAddress string, OptionID uint32, ScopeInfo *DHCP
 // DhcpSetOptionValueV5 calls DHCPSAPI!DhcpSetOptionValueV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetoptionvaluev5
 // Minimum OS: windowsserver2000.
-func DhcpSetOptionValueV5(ServerIpAddress string, Flags uint32, OptionId uint32, ClassName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue *DHCP_OPTION_DATA) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpSetOptionValueV5(ServerIpAddress *string, Flags uint32, OptionId uint32, ClassName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue *DHCP_OPTION_DATA) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpSetOptionValueV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionId), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValue)))
 	return uint32(r1)
 }
@@ -1468,10 +2010,10 @@ func DhcpSetOptionValueV5(ServerIpAddress string, Flags uint32, OptionId uint32,
 // DhcpSetOptionValueV6 calls DHCPSAPI!DhcpSetOptionValueV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetoptionvaluev6
 // Minimum OS: windowsserver2008.
-func DhcpSetOptionValueV6(ServerIpAddress string, Flags uint32, OptionId uint32, ClassName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, OptionValue *DHCP_OPTION_DATA) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpSetOptionValueV6(ServerIpAddress *string, Flags uint32, OptionId uint32, ClassName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO6, OptionValue *DHCP_OPTION_DATA) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpSetOptionValueV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionId), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValue)))
 	return uint32(r1)
 }
@@ -1479,8 +2021,8 @@ func DhcpSetOptionValueV6(ServerIpAddress string, Flags uint32, OptionId uint32,
 // DhcpSetOptionValues calls DHCPSAPI!DhcpSetOptionValues.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetoptionvalues
 // Minimum OS: windowsserver2008.
-func DhcpSetOptionValues(ServerIpAddress string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValues *DHCP_OPTION_VALUE_ARRAY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetOptionValues(ServerIpAddress *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValues *DHCP_OPTION_VALUE_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetOptionValues.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValues)))
 	return uint32(r1)
 }
@@ -1488,10 +2030,10 @@ func DhcpSetOptionValues(ServerIpAddress string, ScopeInfo *DHCP_OPTION_SCOPE_IN
 // DhcpSetOptionValuesV5 calls DHCPSAPI!DhcpSetOptionValuesV5.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetoptionvaluesv5
 // Minimum OS: windowsserver2008.
-func DhcpSetOptionValuesV5(ServerIpAddress string, Flags uint32, ClassName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValues *DHCP_OPTION_VALUE_ARRAY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_ClassName := win32.UTF16Ptr(ClassName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpSetOptionValuesV5(ServerIpAddress *string, Flags uint32, ClassName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValues *DHCP_OPTION_VALUE_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_ClassName := win32.UTF16PtrOrNil(ClassName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpSetOptionValuesV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValues)))
 	return uint32(r1)
 }
@@ -1499,8 +2041,8 @@ func DhcpSetOptionValuesV5(ServerIpAddress string, Flags uint32, ClassName strin
 // DhcpSetServerBindingInfo calls DHCPSAPI!DhcpSetServerBindingInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetserverbindinginfo
 // Minimum OS: windowsserver2000.
-func DhcpSetServerBindingInfo(ServerIpAddress string, Flags uint32, BindElementInfo *DHCP_BIND_ELEMENT_ARRAY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetServerBindingInfo(ServerIpAddress *string, Flags uint32, BindElementInfo *DHCP_BIND_ELEMENT_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetServerBindingInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(BindElementInfo)))
 	return uint32(r1)
 }
@@ -1508,8 +2050,8 @@ func DhcpSetServerBindingInfo(ServerIpAddress string, Flags uint32, BindElementI
 // DhcpSetServerBindingInfoV6 calls DHCPSAPI!DhcpSetServerBindingInfoV6.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetserverbindinginfov6
 // Minimum OS: windowsserver2008.
-func DhcpSetServerBindingInfoV6(ServerIpAddress string, Flags uint32, BindElementInfo *DHCPV6_BIND_ELEMENT_ARRAY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetServerBindingInfoV6(ServerIpAddress *string, Flags uint32, BindElementInfo *DHCPV6_BIND_ELEMENT_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetServerBindingInfoV6.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(BindElementInfo)))
 	return uint32(r1)
 }
@@ -1517,8 +2059,8 @@ func DhcpSetServerBindingInfoV6(ServerIpAddress string, Flags uint32, BindElemen
 // DhcpSetSubnetDelayOffer calls DHCPSAPI!DhcpSetSubnetDelayOffer.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetsubnetdelayoffer
 // Minimum OS: windowsserver2008.
-func DhcpSetSubnetDelayOffer(ServerIpAddress string, SubnetAddress uint32, TimeDelayInMilliseconds uint16) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetSubnetDelayOffer(ServerIpAddress *string, SubnetAddress uint32, TimeDelayInMilliseconds uint16) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetSubnetDelayOffer.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(TimeDelayInMilliseconds))
 	return uint32(r1)
 }
@@ -1526,17 +2068,28 @@ func DhcpSetSubnetDelayOffer(ServerIpAddress string, SubnetAddress uint32, TimeD
 // DhcpSetSubnetInfo calls DHCPSAPI!DhcpSetSubnetInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetsubnetinfo
 // Minimum OS: windowsserver2000.
-func DhcpSetSubnetInfo(ServerIpAddress string, SubnetAddress uint32, SubnetInfo *DHCP_SUBNET_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetSubnetInfo(ServerIpAddress *string, SubnetAddress uint32, SubnetInfo *DHCP_SUBNET_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetSubnetInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(SubnetInfo)))
+	return uint32(r1)
+}
+
+var specDhcpSetSubnetInfoV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpSetSubnetInfoV6 calls DHCPSAPI!DhcpSetSubnetInfoV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetsubnetinfov6
+// Minimum OS: windowsserver2008.
+func DhcpSetSubnetInfoV6(ServerIpAddress *string, SubnetAddress DHCP_IPV6_ADDRESS, SubnetInfo *DHCP_SUBNET_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpSetSubnetInfoV6.Addr(), specDhcpSetSubnetInfoV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(SubnetInfo))).Tuple()
 	return uint32(r1)
 }
 
 // DhcpSetSubnetInfoVQ calls DHCPSAPI!DhcpSetSubnetInfoVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetsubnetinfovq
 // Minimum OS: windowsserver2008.
-func DhcpSetSubnetInfoVQ(ServerIpAddress string, SubnetAddress uint32, SubnetInfo *DHCP_SUBNET_INFO_VQ) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpSetSubnetInfoVQ(ServerIpAddress *string, SubnetAddress uint32, SubnetInfo *DHCP_SUBNET_INFO_VQ) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetSubnetInfoVQ.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(SubnetInfo)))
 	return uint32(r1)
 }
@@ -1544,9 +2097,9 @@ func DhcpSetSubnetInfoVQ(ServerIpAddress string, SubnetAddress uint32, SubnetInf
 // DhcpSetSuperScopeV4 calls DHCPSAPI!DhcpSetSuperScopeV4.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetsuperscopev4
 // Minimum OS: windowsserver2008.
-func DhcpSetSuperScopeV4(ServerIpAddress string, SubnetAddress uint32, SuperScopeName string, ChangeExisting bool) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_SuperScopeName := win32.UTF16Ptr(SuperScopeName)
+func DhcpSetSuperScopeV4(ServerIpAddress *string, SubnetAddress uint32, SuperScopeName *string, ChangeExisting bool) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_SuperScopeName := win32.UTF16PtrOrNil(SuperScopeName)
 	_ChangeExisting := win32.Bool32(ChangeExisting)
 	r1, _, _ := syscall.SyscallN(procDhcpSetSuperScopeV4.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(_SuperScopeName)), uintptr(_ChangeExisting))
 	return uint32(r1)
@@ -1573,8 +2126,8 @@ func DhcpUndoRequestParams(AdapterName string, RequestIdStr string) uint32 {
 // DhcpV4AddPolicyRange calls DHCPSAPI!DhcpV4AddPolicyRange.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4addpolicyrange
 // Minimum OS: windowsserver2012.
-func DhcpV4AddPolicyRange(ServerIpAddress string, SubnetAddress uint32, PolicyName string, Range *DHCP_IP_RANGE) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4AddPolicyRange(ServerIpAddress *string, SubnetAddress uint32, PolicyName string, Range *DHCP_IP_RANGE) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_PolicyName := win32.UTF16Ptr(PolicyName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4AddPolicyRange.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(Range)))
 	return uint32(r1)
@@ -1583,15 +2136,15 @@ func DhcpV4AddPolicyRange(ServerIpAddress string, SubnetAddress uint32, PolicyNa
 // DhcpV4CreateClientInfo calls DHCPSAPI!DhcpV4CreateClientInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4createclientinfo
 // Minimum OS: windowsserver2012.
-func DhcpV4CreateClientInfo(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_PB) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4CreateClientInfo(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO_PB) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4CreateClientInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
 
 // DhcpV4CreateClientInfoEx calls DHCPSAPI!DhcpV4CreateClientInfoEx.
-func DhcpV4CreateClientInfoEx(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_EX) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4CreateClientInfoEx(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO_EX) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4CreateClientInfoEx.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -1599,15 +2152,15 @@ func DhcpV4CreateClientInfoEx(ServerIpAddress string, ClientInfo *DHCP_CLIENT_IN
 // DhcpV4CreatePolicy calls DHCPSAPI!DhcpV4CreatePolicy.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4createpolicy
 // Minimum OS: windowsserver2012.
-func DhcpV4CreatePolicy(ServerIpAddress string, pPolicy *DHCP_POLICY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4CreatePolicy(ServerIpAddress *string, pPolicy *DHCP_POLICY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4CreatePolicy.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(pPolicy)))
 	return uint32(r1)
 }
 
 // DhcpV4CreatePolicyEx calls DHCPSAPI!DhcpV4CreatePolicyEx.
-func DhcpV4CreatePolicyEx(ServerIpAddress string, PolicyEx *DHCP_POLICY_EX) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4CreatePolicyEx(ServerIpAddress *string, PolicyEx *DHCP_POLICY_EX) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4CreatePolicyEx.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(PolicyEx)))
 	return uint32(r1)
 }
@@ -1615,8 +2168,8 @@ func DhcpV4CreatePolicyEx(ServerIpAddress string, PolicyEx *DHCP_POLICY_EX) uint
 // DhcpV4DeletePolicy calls DHCPSAPI!DhcpV4DeletePolicy.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4deletepolicy
 // Minimum OS: windowsserver2012.
-func DhcpV4DeletePolicy(ServerIpAddress string, fGlobalPolicy bool, SubnetAddress uint32, PolicyName string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4DeletePolicy(ServerIpAddress *string, fGlobalPolicy bool, SubnetAddress uint32, PolicyName string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_fGlobalPolicy := win32.Bool32(fGlobalPolicy)
 	_PolicyName := win32.UTF16Ptr(PolicyName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4DeletePolicy.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fGlobalPolicy), uintptr(SubnetAddress), uintptr(unsafe.Pointer(_PolicyName)))
@@ -1626,16 +2179,16 @@ func DhcpV4DeletePolicy(ServerIpAddress string, fGlobalPolicy bool, SubnetAddres
 // DhcpV4EnumPolicies calls DHCPSAPI!DhcpV4EnumPolicies.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4enumpolicies
 // Minimum OS: windowsserver2012.
-func DhcpV4EnumPolicies(ServerIpAddress string, ResumeHandle *uint32, PreferredMaximum uint32, fGlobalPolicy bool, SubnetAddress uint32, EnumInfo **DHCP_POLICY_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4EnumPolicies(ServerIpAddress *string, ResumeHandle *uint32, PreferredMaximum uint32, fGlobalPolicy bool, SubnetAddress uint32, EnumInfo **DHCP_POLICY_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_fGlobalPolicy := win32.Bool32(fGlobalPolicy)
 	r1, _, _ := syscall.SyscallN(procDhcpV4EnumPolicies.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(_fGlobalPolicy), uintptr(SubnetAddress), uintptr(unsafe.Pointer(EnumInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
 	return uint32(r1)
 }
 
 // DhcpV4EnumPoliciesEx calls DHCPSAPI!DhcpV4EnumPoliciesEx.
-func DhcpV4EnumPoliciesEx(ServerIpAddress string, ResumeHandle *uint32, PreferredMaximum uint32, GlobalPolicy bool, SubnetAddress uint32, EnumInfo **DHCP_POLICY_EX_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4EnumPoliciesEx(ServerIpAddress *string, ResumeHandle *uint32, PreferredMaximum uint32, GlobalPolicy bool, SubnetAddress uint32, EnumInfo **DHCP_POLICY_EX_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_GlobalPolicy := win32.Bool32(GlobalPolicy)
 	r1, _, _ := syscall.SyscallN(procDhcpV4EnumPoliciesEx.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(_GlobalPolicy), uintptr(SubnetAddress), uintptr(unsafe.Pointer(EnumInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
 	return uint32(r1)
@@ -1644,15 +2197,15 @@ func DhcpV4EnumPoliciesEx(ServerIpAddress string, ResumeHandle *uint32, Preferre
 // DhcpV4EnumSubnetClients calls DHCPSAPI!DhcpV4EnumSubnetClients.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4enumsubnetclients
 // Minimum OS: windowsserver2012.
-func DhcpV4EnumSubnetClients(ServerIpAddress string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_PB_ARRAY, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4EnumSubnetClients(ServerIpAddress *string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_PB_ARRAY, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4EnumSubnetClients.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClientInfo)), uintptr(unsafe.Pointer(ClientsRead)), uintptr(unsafe.Pointer(ClientsTotal)))
 	return uint32(r1)
 }
 
 // DhcpV4EnumSubnetClientsEx calls DHCPSAPI!DhcpV4EnumSubnetClientsEx.
-func DhcpV4EnumSubnetClientsEx(ServerIpAddress string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_EX_ARRAY, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4EnumSubnetClientsEx(ServerIpAddress *string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_EX_ARRAY, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4EnumSubnetClientsEx.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClientInfo)), uintptr(unsafe.Pointer(ClientsRead)), uintptr(unsafe.Pointer(ClientsTotal)))
 	return uint32(r1)
 }
@@ -1660,8 +2213,8 @@ func DhcpV4EnumSubnetClientsEx(ServerIpAddress string, SubnetAddress uint32, Res
 // DhcpV4EnumSubnetReservations calls DHCPSAPI!DhcpV4EnumSubnetReservations.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4enumsubnetreservations
 // Minimum OS: windowsserver2012.
-func DhcpV4EnumSubnetReservations(ServerIpAddress string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_RESERVATION_INFO_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4EnumSubnetReservations(ServerIpAddress *string, SubnetAddress uint32, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_RESERVATION_INFO_ARRAY, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4EnumSubnetReservations.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(EnumElementInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
 	return uint32(r1)
 }
@@ -1669,8 +2222,8 @@ func DhcpV4EnumSubnetReservations(ServerIpAddress string, SubnetAddress uint32, 
 // DhcpV4FailoverAddScopeToRelationship calls DHCPSAPI!DhcpV4FailoverAddScopeToRelationship.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failoveraddscopetorelationship
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverAddScopeToRelationship(ServerIpAddress string, pRelationship *DHCP_FAILOVER_RELATIONSHIP) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverAddScopeToRelationship(ServerIpAddress *string, pRelationship *DHCP_FAILOVER_RELATIONSHIP) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverAddScopeToRelationship.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(pRelationship)))
 	return uint32(r1)
 }
@@ -1678,8 +2231,8 @@ func DhcpV4FailoverAddScopeToRelationship(ServerIpAddress string, pRelationship 
 // DhcpV4FailoverCreateRelationship calls DHCPSAPI!DhcpV4FailoverCreateRelationship.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failovercreaterelationship
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverCreateRelationship(ServerIpAddress string, pRelationship *DHCP_FAILOVER_RELATIONSHIP) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverCreateRelationship(ServerIpAddress *string, pRelationship *DHCP_FAILOVER_RELATIONSHIP) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverCreateRelationship.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(pRelationship)))
 	return uint32(r1)
 }
@@ -1687,8 +2240,8 @@ func DhcpV4FailoverCreateRelationship(ServerIpAddress string, pRelationship *DHC
 // DhcpV4FailoverDeleteRelationship calls DHCPSAPI!DhcpV4FailoverDeleteRelationship.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failoverdeleterelationship
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverDeleteRelationship(ServerIpAddress string, pRelationshipName string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverDeleteRelationship(ServerIpAddress *string, pRelationshipName string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_pRelationshipName := win32.UTF16Ptr(pRelationshipName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverDeleteRelationship.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(_pRelationshipName)))
 	return uint32(r1)
@@ -1697,8 +2250,8 @@ func DhcpV4FailoverDeleteRelationship(ServerIpAddress string, pRelationshipName 
 // DhcpV4FailoverDeleteScopeFromRelationship calls DHCPSAPI!DhcpV4FailoverDeleteScopeFromRelationship.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failoverdeletescopefromrelationship
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverDeleteScopeFromRelationship(ServerIpAddress string, pRelationship *DHCP_FAILOVER_RELATIONSHIP) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverDeleteScopeFromRelationship(ServerIpAddress *string, pRelationship *DHCP_FAILOVER_RELATIONSHIP) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverDeleteScopeFromRelationship.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(pRelationship)))
 	return uint32(r1)
 }
@@ -1706,8 +2259,8 @@ func DhcpV4FailoverDeleteScopeFromRelationship(ServerIpAddress string, pRelation
 // DhcpV4FailoverEnumRelationship calls DHCPSAPI!DhcpV4FailoverEnumRelationship.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failoverenumrelationship
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverEnumRelationship(ServerIpAddress string, ResumeHandle *uint32, PreferredMaximum uint32, pRelationship **DHCP_FAILOVER_RELATIONSHIP_ARRAY, RelationshipRead *uint32, RelationshipTotal *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverEnumRelationship(ServerIpAddress *string, ResumeHandle *uint32, PreferredMaximum uint32, pRelationship **DHCP_FAILOVER_RELATIONSHIP_ARRAY, RelationshipRead *uint32, RelationshipTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverEnumRelationship.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(pRelationship)), uintptr(unsafe.Pointer(RelationshipRead)), uintptr(unsafe.Pointer(RelationshipTotal)))
 	return uint32(r1)
 }
@@ -1715,8 +2268,8 @@ func DhcpV4FailoverEnumRelationship(ServerIpAddress string, ResumeHandle *uint32
 // DhcpV4FailoverGetAddressStatus calls DHCPSAPI!DhcpV4FailoverGetAddressStatus.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failovergetaddressstatus
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverGetAddressStatus(ServerIpAddress string, SubnetAddress uint32, pStatus *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverGetAddressStatus(ServerIpAddress *string, SubnetAddress uint32, pStatus *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverGetAddressStatus.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(pStatus)))
 	return uint32(r1)
 }
@@ -1724,8 +2277,8 @@ func DhcpV4FailoverGetAddressStatus(ServerIpAddress string, SubnetAddress uint32
 // DhcpV4FailoverGetClientInfo calls DHCPSAPI!DhcpV4FailoverGetClientInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failovergetclientinfo
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverGetClientInfo(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCPV4_FAILOVER_CLIENT_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverGetClientInfo(ServerIpAddress *string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCPV4_FAILOVER_CLIENT_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverGetClientInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(SearchInfo)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -1733,8 +2286,8 @@ func DhcpV4FailoverGetClientInfo(ServerIpAddress string, SearchInfo *DHCP_SEARCH
 // DhcpV4FailoverGetRelationship calls DHCPSAPI!DhcpV4FailoverGetRelationship.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failovergetrelationship
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverGetRelationship(ServerIpAddress string, pRelationshipName string, pRelationship **DHCP_FAILOVER_RELATIONSHIP) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverGetRelationship(ServerIpAddress *string, pRelationshipName string, pRelationship **DHCP_FAILOVER_RELATIONSHIP) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_pRelationshipName := win32.UTF16Ptr(pRelationshipName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverGetRelationship.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(_pRelationshipName)), uintptr(unsafe.Pointer(pRelationship)))
 	return uint32(r1)
@@ -1743,8 +2296,8 @@ func DhcpV4FailoverGetRelationship(ServerIpAddress string, pRelationshipName str
 // DhcpV4FailoverGetScopeRelationship calls DHCPSAPI!DhcpV4FailoverGetScopeRelationship.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failovergetscoperelationship
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverGetScopeRelationship(ServerIpAddress string, ScopeId uint32, pRelationship **DHCP_FAILOVER_RELATIONSHIP) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverGetScopeRelationship(ServerIpAddress *string, ScopeId uint32, pRelationship **DHCP_FAILOVER_RELATIONSHIP) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverGetScopeRelationship.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ScopeId), uintptr(unsafe.Pointer(pRelationship)))
 	return uint32(r1)
 }
@@ -1752,8 +2305,8 @@ func DhcpV4FailoverGetScopeRelationship(ServerIpAddress string, ScopeId uint32, 
 // DhcpV4FailoverGetScopeStatistics calls DHCPSAPI!DhcpV4FailoverGetScopeStatistics.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failovergetscopestatistics
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverGetScopeStatistics(ServerIpAddress string, ScopeId uint32, pStats **DHCP_FAILOVER_STATISTICS) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverGetScopeStatistics(ServerIpAddress *string, ScopeId uint32, pStats **DHCP_FAILOVER_STATISTICS) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverGetScopeStatistics.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ScopeId), uintptr(unsafe.Pointer(pStats)))
 	return uint32(r1)
 }
@@ -1761,8 +2314,8 @@ func DhcpV4FailoverGetScopeStatistics(ServerIpAddress string, ScopeId uint32, pS
 // DhcpV4FailoverGetSystemTime calls DHCPSAPI!DhcpV4FailoverGetSystemTime.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failovergetsystemtime
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverGetSystemTime(ServerIpAddress string, pTime *uint32, pMaxAllowedDeltaTime *uint32) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverGetSystemTime(ServerIpAddress *string, pTime *uint32, pMaxAllowedDeltaTime *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverGetSystemTime.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(pTime)), uintptr(unsafe.Pointer(pMaxAllowedDeltaTime)))
 	return uint32(r1)
 }
@@ -1770,8 +2323,8 @@ func DhcpV4FailoverGetSystemTime(ServerIpAddress string, pTime *uint32, pMaxAllo
 // DhcpV4FailoverSetRelationship calls DHCPSAPI!DhcpV4FailoverSetRelationship.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failoversetrelationship
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverSetRelationship(ServerIpAddress string, Flags uint32, pRelationship *DHCP_FAILOVER_RELATIONSHIP) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverSetRelationship(ServerIpAddress *string, Flags uint32, pRelationship *DHCP_FAILOVER_RELATIONSHIP) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverSetRelationship.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(pRelationship)))
 	return uint32(r1)
 }
@@ -1779,8 +2332,8 @@ func DhcpV4FailoverSetRelationship(ServerIpAddress string, Flags uint32, pRelati
 // DhcpV4FailoverTriggerAddrAllocation calls DHCPSAPI!DhcpV4FailoverTriggerAddrAllocation.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4failovertriggeraddrallocation
 // Minimum OS: windowsserver2012.
-func DhcpV4FailoverTriggerAddrAllocation(ServerIpAddress string, pFailRelName string) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4FailoverTriggerAddrAllocation(ServerIpAddress *string, pFailRelName string) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_pFailRelName := win32.UTF16Ptr(pFailRelName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4FailoverTriggerAddrAllocation.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(_pFailRelName)))
 	return uint32(r1)
@@ -1789,8 +2342,8 @@ func DhcpV4FailoverTriggerAddrAllocation(ServerIpAddress string, pFailRelName st
 // DhcpV4GetAllOptionValues calls DHCPSAPI!DhcpV4GetAllOptionValues.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4getalloptionvalues
 // Minimum OS: windowsserver2012.
-func DhcpV4GetAllOptionValues(ServerIpAddress string, Flags uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO, Values **DHCP_ALL_OPTION_VALUES_PB) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4GetAllOptionValues(ServerIpAddress *string, Flags uint32, ScopeInfo *DHCP_OPTION_SCOPE_INFO, Values **DHCP_ALL_OPTION_VALUES_PB) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4GetAllOptionValues.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(Values)))
 	return uint32(r1)
 }
@@ -1798,15 +2351,15 @@ func DhcpV4GetAllOptionValues(ServerIpAddress string, Flags uint32, ScopeInfo *D
 // DhcpV4GetClientInfo calls DHCPSAPI!DhcpV4GetClientInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4getclientinfo
 // Minimum OS: windowsserver2012.
-func DhcpV4GetClientInfo(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO_PB) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4GetClientInfo(ServerIpAddress *string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO_PB) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4GetClientInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(SearchInfo)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
 
 // DhcpV4GetClientInfoEx calls DHCPSAPI!DhcpV4GetClientInfoEx.
-func DhcpV4GetClientInfoEx(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO_EX) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4GetClientInfoEx(ServerIpAddress *string, SearchInfo *DHCP_SEARCH_INFO, ClientInfo **DHCP_CLIENT_INFO_EX) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4GetClientInfoEx.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(SearchInfo)), uintptr(unsafe.Pointer(ClientInfo)))
 	return uint32(r1)
 }
@@ -1814,8 +2367,8 @@ func DhcpV4GetClientInfoEx(ServerIpAddress string, SearchInfo *DHCP_SEARCH_INFO,
 // DhcpV4GetFreeIPAddress calls DHCPSAPI!DhcpV4GetFreeIPAddress.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4getfreeipaddress
 // Minimum OS: windowsserver2012.
-func DhcpV4GetFreeIPAddress(ServerIpAddress string, ScopeId uint32, StartIP uint32, EndIP uint32, NumFreeAddrReq uint32, IPAddrList **DHCP_IP_ARRAY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4GetFreeIPAddress(ServerIpAddress *string, ScopeId uint32, StartIP uint32, EndIP uint32, NumFreeAddrReq uint32, IPAddrList **DHCP_IP_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV4GetFreeIPAddress.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(ScopeId), uintptr(StartIP), uintptr(EndIP), uintptr(NumFreeAddrReq), uintptr(unsafe.Pointer(IPAddrList)))
 	return uint32(r1)
 }
@@ -1823,10 +2376,10 @@ func DhcpV4GetFreeIPAddress(ServerIpAddress string, ScopeId uint32, StartIP uint
 // DhcpV4GetOptionValue calls DHCPSAPI!DhcpV4GetOptionValue.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4getoptionvalue
 // Minimum OS: windowsserver2012.
-func DhcpV4GetOptionValue(ServerIpAddress string, Flags uint32, OptionID uint32, PolicyName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue **DHCP_OPTION_VALUE) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_PolicyName := win32.UTF16Ptr(PolicyName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpV4GetOptionValue(ServerIpAddress *string, Flags uint32, OptionID uint32, PolicyName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue **DHCP_OPTION_VALUE) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_PolicyName := win32.UTF16PtrOrNil(PolicyName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4GetOptionValue.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValue)))
 	return uint32(r1)
 }
@@ -1834,8 +2387,8 @@ func DhcpV4GetOptionValue(ServerIpAddress string, Flags uint32, OptionID uint32,
 // DhcpV4GetPolicy calls DHCPSAPI!DhcpV4GetPolicy.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4getpolicy
 // Minimum OS: windowsserver2012.
-func DhcpV4GetPolicy(ServerIpAddress string, fGlobalPolicy bool, SubnetAddress uint32, PolicyName string, Policy **DHCP_POLICY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4GetPolicy(ServerIpAddress *string, fGlobalPolicy bool, SubnetAddress uint32, PolicyName string, Policy **DHCP_POLICY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_fGlobalPolicy := win32.Bool32(fGlobalPolicy)
 	_PolicyName := win32.UTF16Ptr(PolicyName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4GetPolicy.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fGlobalPolicy), uintptr(SubnetAddress), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(Policy)))
@@ -1843,8 +2396,8 @@ func DhcpV4GetPolicy(ServerIpAddress string, fGlobalPolicy bool, SubnetAddress u
 }
 
 // DhcpV4GetPolicyEx calls DHCPSAPI!DhcpV4GetPolicyEx.
-func DhcpV4GetPolicyEx(ServerIpAddress string, GlobalPolicy bool, SubnetAddress uint32, PolicyName string, Policy **DHCP_POLICY_EX) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4GetPolicyEx(ServerIpAddress *string, GlobalPolicy bool, SubnetAddress uint32, PolicyName string, Policy **DHCP_POLICY_EX) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_GlobalPolicy := win32.Bool32(GlobalPolicy)
 	_PolicyName := win32.UTF16Ptr(PolicyName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4GetPolicyEx.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_GlobalPolicy), uintptr(SubnetAddress), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(Policy)))
@@ -1854,8 +2407,8 @@ func DhcpV4GetPolicyEx(ServerIpAddress string, GlobalPolicy bool, SubnetAddress 
 // DhcpV4QueryPolicyEnforcement calls DHCPSAPI!DhcpV4QueryPolicyEnforcement.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4querypolicyenforcement
 // Minimum OS: windowsserver2012.
-func DhcpV4QueryPolicyEnforcement(ServerIpAddress string, fGlobalPolicy bool, SubnetAddress uint32, Enabled *foundation.BOOL) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4QueryPolicyEnforcement(ServerIpAddress *string, fGlobalPolicy bool, SubnetAddress uint32, Enabled *foundation.BOOL) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_fGlobalPolicy := win32.Bool32(fGlobalPolicy)
 	r1, _, _ := syscall.SyscallN(procDhcpV4QueryPolicyEnforcement.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fGlobalPolicy), uintptr(SubnetAddress), uintptr(unsafe.Pointer(Enabled)))
 	return uint32(r1)
@@ -1864,10 +2417,10 @@ func DhcpV4QueryPolicyEnforcement(ServerIpAddress string, fGlobalPolicy bool, Su
 // DhcpV4RemoveOptionValue calls DHCPSAPI!DhcpV4RemoveOptionValue.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4removeoptionvalue
 // Minimum OS: windowsserver2012.
-func DhcpV4RemoveOptionValue(ServerIpAddress string, Flags uint32, OptionID uint32, PolicyName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_PolicyName := win32.UTF16Ptr(PolicyName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpV4RemoveOptionValue(ServerIpAddress *string, Flags uint32, OptionID uint32, PolicyName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_PolicyName := win32.UTF16PtrOrNil(PolicyName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4RemoveOptionValue.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionID), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)))
 	return uint32(r1)
 }
@@ -1875,8 +2428,8 @@ func DhcpV4RemoveOptionValue(ServerIpAddress string, Flags uint32, OptionID uint
 // DhcpV4RemovePolicyRange calls DHCPSAPI!DhcpV4RemovePolicyRange.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4removepolicyrange
 // Minimum OS: windowsserver2012.
-func DhcpV4RemovePolicyRange(ServerIpAddress string, SubnetAddress uint32, PolicyName string, Range *DHCP_IP_RANGE) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4RemovePolicyRange(ServerIpAddress *string, SubnetAddress uint32, PolicyName string, Range *DHCP_IP_RANGE) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_PolicyName := win32.UTF16Ptr(PolicyName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4RemovePolicyRange.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(Range)))
 	return uint32(r1)
@@ -1885,10 +2438,10 @@ func DhcpV4RemovePolicyRange(ServerIpAddress string, SubnetAddress uint32, Polic
 // DhcpV4SetOptionValue calls DHCPSAPI!DhcpV4SetOptionValue.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4setoptionvalue
 // Minimum OS: windowsserver2012.
-func DhcpV4SetOptionValue(ServerIpAddress string, Flags uint32, OptionId uint32, PolicyName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue *DHCP_OPTION_DATA) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_PolicyName := win32.UTF16Ptr(PolicyName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpV4SetOptionValue(ServerIpAddress *string, Flags uint32, OptionId uint32, PolicyName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValue *DHCP_OPTION_DATA) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_PolicyName := win32.UTF16PtrOrNil(PolicyName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4SetOptionValue.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(OptionId), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValue)))
 	return uint32(r1)
 }
@@ -1896,10 +2449,10 @@ func DhcpV4SetOptionValue(ServerIpAddress string, Flags uint32, OptionId uint32,
 // DhcpV4SetOptionValues calls DHCPSAPI!DhcpV4SetOptionValues.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4setoptionvalues
 // Minimum OS: windowsserver2012.
-func DhcpV4SetOptionValues(ServerIpAddress string, Flags uint32, PolicyName string, VendorName string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValues *DHCP_OPTION_VALUE_ARRAY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
-	_PolicyName := win32.UTF16Ptr(PolicyName)
-	_VendorName := win32.UTF16Ptr(VendorName)
+func DhcpV4SetOptionValues(ServerIpAddress *string, Flags uint32, PolicyName *string, VendorName *string, ScopeInfo *DHCP_OPTION_SCOPE_INFO, OptionValues *DHCP_OPTION_VALUE_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_PolicyName := win32.UTF16PtrOrNil(PolicyName)
+	_VendorName := win32.UTF16PtrOrNil(VendorName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4SetOptionValues.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(Flags), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(_VendorName)), uintptr(unsafe.Pointer(ScopeInfo)), uintptr(unsafe.Pointer(OptionValues)))
 	return uint32(r1)
 }
@@ -1907,8 +2460,8 @@ func DhcpV4SetOptionValues(ServerIpAddress string, Flags uint32, PolicyName stri
 // DhcpV4SetPolicy calls DHCPSAPI!DhcpV4SetPolicy.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4setpolicy
 // Minimum OS: windowsserver2012.
-func DhcpV4SetPolicy(ServerIpAddress string, FieldsModified uint32, fGlobalPolicy bool, SubnetAddress uint32, PolicyName string, Policy *DHCP_POLICY) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4SetPolicy(ServerIpAddress *string, FieldsModified uint32, fGlobalPolicy bool, SubnetAddress uint32, PolicyName string, Policy *DHCP_POLICY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_fGlobalPolicy := win32.Bool32(fGlobalPolicy)
 	_PolicyName := win32.UTF16Ptr(PolicyName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4SetPolicy.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(FieldsModified), uintptr(_fGlobalPolicy), uintptr(SubnetAddress), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(Policy)))
@@ -1918,8 +2471,8 @@ func DhcpV4SetPolicy(ServerIpAddress string, FieldsModified uint32, fGlobalPolic
 // DhcpV4SetPolicyEnforcement calls DHCPSAPI!DhcpV4SetPolicyEnforcement.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4setpolicyenforcement
 // Minimum OS: windowsserver2012.
-func DhcpV4SetPolicyEnforcement(ServerIpAddress string, fGlobalPolicy bool, SubnetAddress uint32, Enable bool) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4SetPolicyEnforcement(ServerIpAddress *string, fGlobalPolicy bool, SubnetAddress uint32, Enable bool) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_fGlobalPolicy := win32.Bool32(fGlobalPolicy)
 	_Enable := win32.Bool32(Enable)
 	r1, _, _ := syscall.SyscallN(procDhcpV4SetPolicyEnforcement.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fGlobalPolicy), uintptr(SubnetAddress), uintptr(_Enable))
@@ -1927,8 +2480,8 @@ func DhcpV4SetPolicyEnforcement(ServerIpAddress string, fGlobalPolicy bool, Subn
 }
 
 // DhcpV4SetPolicyEx calls DHCPSAPI!DhcpV4SetPolicyEx.
-func DhcpV4SetPolicyEx(ServerIpAddress string, FieldsModified uint32, GlobalPolicy bool, SubnetAddress uint32, PolicyName string, Policy *DHCP_POLICY_EX) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV4SetPolicyEx(ServerIpAddress *string, FieldsModified uint32, GlobalPolicy bool, SubnetAddress uint32, PolicyName string, Policy *DHCP_POLICY_EX) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_GlobalPolicy := win32.Bool32(GlobalPolicy)
 	_PolicyName := win32.UTF16Ptr(PolicyName)
 	r1, _, _ := syscall.SyscallN(procDhcpV4SetPolicyEx.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(FieldsModified), uintptr(_GlobalPolicy), uintptr(SubnetAddress), uintptr(unsafe.Pointer(_PolicyName)), uintptr(unsafe.Pointer(Policy)))
@@ -1938,18 +2491,53 @@ func DhcpV4SetPolicyEx(ServerIpAddress string, FieldsModified uint32, GlobalPoli
 // DhcpV6CreateClientInfo calls DHCPSAPI!DhcpV6CreateClientInfo.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv6createclientinfo
 // Minimum OS: windowsserver2012.
-func DhcpV6CreateClientInfo(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO_V6) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV6CreateClientInfo(ServerIpAddress *string, ClientInfo *DHCP_CLIENT_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV6CreateClientInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(ClientInfo)))
+	return uint32(r1)
+}
+
+var specDhcpV6GetFreeIPAddress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// DhcpV6GetFreeIPAddress calls DHCPSAPI!DhcpV6GetFreeIPAddress.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv6getfreeipaddress
+// Minimum OS: windowsserver2012.
+func DhcpV6GetFreeIPAddress(ServerIpAddress *string, ScopeId DHCP_IPV6_ADDRESS, StartIP DHCP_IPV6_ADDRESS, EndIP DHCP_IPV6_ADDRESS, NumFreeAddrReq uint32, IPAddrList **DHCPV6_IP_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpV6GetFreeIPAddress.Addr(), specDhcpV6GetFreeIPAddress, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&ScopeId)), uintptr(unsafe.Pointer(&StartIP)), uintptr(unsafe.Pointer(&EndIP)), uintptr(NumFreeAddrReq), uintptr(unsafe.Pointer(IPAddrList))).Tuple()
 	return uint32(r1)
 }
 
 // DhcpV6GetStatelessStatistics calls DHCPSAPI!DhcpV6GetStatelessStatistics.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv6getstatelessstatistics
 // Minimum OS: windowsserver2012.
-func DhcpV6GetStatelessStatistics(ServerIpAddress string, StatelessStats **DHCPV6_STATELESS_STATS) uint32 {
-	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+func DhcpV6GetStatelessStatistics(ServerIpAddress *string, StatelessStats **DHCPV6_STATELESS_STATS) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV6GetStatelessStatistics.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(StatelessStats)))
+	return uint32(r1)
+}
+
+var specDhcpV6GetStatelessStoreParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpV6GetStatelessStoreParams calls DHCPSAPI!DhcpV6GetStatelessStoreParams.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv6getstatelessstoreparams
+// Minimum OS: windowsserver2012.
+func DhcpV6GetStatelessStoreParams(ServerIpAddress *string, fServerLevel bool, SubnetAddress DHCP_IPV6_ADDRESS, Params **DHCPV6_STATELESS_PARAMS) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_fServerLevel := win32.Bool32(fServerLevel)
+	r1, _, _ := win32.Call(procDhcpV6GetStatelessStoreParams.Addr(), specDhcpV6GetStatelessStoreParams, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fServerLevel), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(Params))).Tuple()
+	return uint32(r1)
+}
+
+var specDhcpV6SetStatelessStoreParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// DhcpV6SetStatelessStoreParams calls DHCPSAPI!DhcpV6SetStatelessStoreParams.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv6setstatelessstoreparams
+// Minimum OS: windowsserver2012.
+func DhcpV6SetStatelessStoreParams(ServerIpAddress *string, fServerLevel bool, SubnetAddress DHCP_IPV6_ADDRESS, FieldModified uint32, Params *DHCPV6_STATELESS_PARAMS) uint32 {
+	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
+	_fServerLevel := win32.Bool32(fServerLevel)
+	r1, _, _ := win32.Call(procDhcpV6SetStatelessStoreParams.Addr(), specDhcpV6SetStatelessStoreParams, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fServerLevel), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(FieldModified), uintptr(unsafe.Pointer(Params))).Tuple()
 	return uint32(r1)
 }
 
@@ -1982,6 +2570,18 @@ func Dhcpv6ReleasePrefix(adapterName string, classId *DHCPV6CAPI_CLASSID, leaseI
 func Dhcpv6RenewPrefix(adapterName string, pclassId *DHCPV6CAPI_CLASSID, prefixleaseInfo *DHCPV6PrefixLeaseInformation, pdwTimeToWait *uint32, bValidatePrefix uint32) uint32 {
 	_adapterName := win32.UTF16Ptr(adapterName)
 	r1, _, _ := syscall.SyscallN(procDhcpv6RenewPrefix.Addr(), uintptr(unsafe.Pointer(_adapterName)), uintptr(unsafe.Pointer(pclassId)), uintptr(unsafe.Pointer(prefixleaseInfo)), uintptr(unsafe.Pointer(pdwTimeToWait)), uintptr(bValidatePrefix))
+	return uint32(r1)
+}
+
+var specDhcpv6RequestParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// Dhcpv6RequestParams calls dhcpcsvc6!Dhcpv6RequestParams.
+// https://learn.microsoft.com/windows/win32/api/dhcpv6csdk/nf-dhcpv6csdk-dhcpv6requestparams
+// Minimum OS: windows6.0.6000.
+func Dhcpv6RequestParams(forceNewInform bool, reserved unsafe.Pointer, adapterName string, classId *DHCPV6CAPI_CLASSID, recdParams DHCPV6CAPI_PARAMS_ARRAY, buffer *byte, pSize *uint32) uint32 {
+	_forceNewInform := win32.Bool32(forceNewInform)
+	_adapterName := win32.UTF16Ptr(adapterName)
+	r1, _, _ := win32.Call(procDhcpv6RequestParams.Addr(), specDhcpv6RequestParams, nil, uintptr(_forceNewInform), uintptr(unsafe.Pointer(reserved)), uintptr(unsafe.Pointer(_adapterName)), uintptr(unsafe.Pointer(classId)), uintptr(unsafe.Pointer(&recdParams)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(pSize))).Tuple()
 	return uint32(r1)
 }
 

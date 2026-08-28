@@ -26,6 +26,28 @@ var (
 	procXInputSetState              = modxinput1_4.NewProc("XInputSetState")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	XInputEnable                *win32.Proc
+	XInputGetAudioDeviceIds     *win32.Proc
+	XInputGetBatteryInformation *win32.Proc
+	XInputGetCapabilities       *win32.Proc
+	XInputGetKeystroke          *win32.Proc
+	XInputGetState              *win32.Proc
+	XInputSetState              *win32.Proc
+}{
+	XInputEnable:                procXInputEnable,
+	XInputGetAudioDeviceIds:     procXInputGetAudioDeviceIds,
+	XInputGetBatteryInformation: procXInputGetBatteryInformation,
+	XInputGetCapabilities:       procXInputGetCapabilities,
+	XInputGetKeystroke:          procXInputGetKeystroke,
+	XInputGetState:              procXInputGetState,
+	XInputSetState:              procXInputSetState,
+}
+
 // XInputEnable calls xinput1_4!XInputEnable.
 // https://learn.microsoft.com/windows/win32/api/xinput/nf-xinput-xinputenable
 func XInputEnable(enable bool) {

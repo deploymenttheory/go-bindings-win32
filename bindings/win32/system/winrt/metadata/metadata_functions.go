@@ -34,6 +34,36 @@ var (
 	procMetaDataGetDispenser                     = modRoMetadata.NewProc("MetaDataGetDispenser")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MetaDataGetDispenser                     *win32.Proc
+	RoCreateNonAgilePropertySet              *win32.Proc
+	RoCreatePropertySetSerializer            *win32.Proc
+	RoFreeParameterizedTypeExtra             *win32.Proc
+	RoGetMetaDataFile                        *win32.Proc
+	RoGetParameterizedTypeInstanceIID        *win32.Proc
+	RoIsApiContractMajorVersionPresent       *win32.Proc
+	RoIsApiContractPresent                   *win32.Proc
+	RoParameterizedTypeExtraGetTypeSignature *win32.Proc
+	RoParseTypeName                          *win32.Proc
+	RoResolveNamespace                       *win32.Proc
+}{
+	MetaDataGetDispenser:                     procMetaDataGetDispenser,
+	RoCreateNonAgilePropertySet:              procRoCreateNonAgilePropertySet,
+	RoCreatePropertySetSerializer:            procRoCreatePropertySetSerializer,
+	RoFreeParameterizedTypeExtra:             procRoFreeParameterizedTypeExtra,
+	RoGetMetaDataFile:                        procRoGetMetaDataFile,
+	RoGetParameterizedTypeInstanceIID:        procRoGetParameterizedTypeInstanceIID,
+	RoIsApiContractMajorVersionPresent:       procRoIsApiContractMajorVersionPresent,
+	RoIsApiContractPresent:                   procRoIsApiContractPresent,
+	RoParameterizedTypeExtraGetTypeSignature: procRoParameterizedTypeExtraGetTypeSignature,
+	RoParseTypeName:                          procRoParseTypeName,
+	RoResolveNamespace:                       procRoResolveNamespace,
+}
+
 // MetaDataGetDispenser calls RoMetadata!MetaDataGetDispenser.
 // https://learn.microsoft.com/windows/win32/api/rometadata/nf-rometadata-metadatagetdispenser
 // Minimum OS: windows8.0.

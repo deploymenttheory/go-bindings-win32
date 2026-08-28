@@ -4,22 +4,24 @@
 
 package systemservices
 
-// PEXCEPTION_FILTER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer) int32.
+// PEXCEPTION_FILTER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PEXCEPTION_FILTER uintptr
 
-// PIMAGE_TLS_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, unsafe.Pointer).
+// PIMAGE_TLS_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, unsafe.Pointer) uintptr.
 type PIMAGE_TLS_CALLBACK uintptr
 
-// POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, *uint32, *unsafe.Pointer) uint32.
+// POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, *uint32, *unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK uintptr
 
-// PTERMINATION_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.BOOLEAN, unsafe.Pointer).
+// PTERMINATION_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.BOOLEAN, unsafe.Pointer) uintptr.
 type PTERMINATION_HANDLER uintptr
 
-// PUMS_SCHEDULER_ENTRY_POINT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(RTL_UMS_SCHEDULER_REASON, uintptr, unsafe.Pointer).
+// PUMS_SCHEDULER_ENTRY_POINT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(RTL_UMS_SCHEDULER_REASON, uintptr, unsafe.Pointer) uintptr.
 type PUMS_SCHEDULER_ENTRY_POINT uintptr

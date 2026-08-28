@@ -544,6 +544,14 @@ func (self *IMSMQMessage) Get_Body(pvarBody *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage_Put_Body = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Body dispatches through IMSMQMessage's vtable slot 28.
+func (self *IMSMQMessage) Put_Body(varBody systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIMSMQMessage_Put_Body, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varBody))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_AdminQueueInfo dispatches through IMSMQMessage's vtable slot 29.
 func (self *IMSMQMessage) Get_AdminQueueInfo(ppqinfoAdmin **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
@@ -565,6 +573,14 @@ func (self *IMSMQMessage) Get_Id(pvarMsgId *systemvariant.VARIANT) error {
 // Get_CorrelationId dispatches through IMSMQMessage's vtable slot 32.
 func (self *IMSMQMessage) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage_Put_CorrelationId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_CorrelationId dispatches through IMSMQMessage's vtable slot 33.
+func (self *IMSMQMessage) Put_CorrelationId(varMsgId systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIMSMQMessage_Put_CorrelationId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varMsgId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -661,6 +677,14 @@ func (self *IMSMQMessage) Get_DestinationQueueInfo(ppqinfoDest **IMSMQQueueInfo)
 // Get_SenderCertificate dispatches through IMSMQMessage's vtable slot 49.
 func (self *IMSMQMessage) Get_SenderCertificate(pvarSenderCert *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderCert)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage_Put_SenderCertificate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SenderCertificate dispatches through IMSMQMessage's vtable slot 50.
+func (self *IMSMQMessage) Put_SenderCertificate(varSenderCert systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIMSMQMessage_Put_SenderCertificate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSenderCert))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -828,6 +852,14 @@ func (self *IMSMQMessage2) Get_Body(pvarBody *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage2_Put_Body = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Body dispatches through IMSMQMessage2's vtable slot 28.
+func (self *IMSMQMessage2) Put_Body(varBody systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIMSMQMessage2_Put_Body, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varBody))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_AdminQueueInfo_v1 dispatches through IMSMQMessage2's vtable slot 29.
 func (self *IMSMQMessage2) Get_AdminQueueInfo_v1(ppqinfoAdmin **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
@@ -849,6 +881,14 @@ func (self *IMSMQMessage2) Get_Id(pvarMsgId *systemvariant.VARIANT) error {
 // Get_CorrelationId dispatches through IMSMQMessage2's vtable slot 32.
 func (self *IMSMQMessage2) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage2_Put_CorrelationId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_CorrelationId dispatches through IMSMQMessage2's vtable slot 33.
+func (self *IMSMQMessage2) Put_CorrelationId(varMsgId systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIMSMQMessage2_Put_CorrelationId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varMsgId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -948,6 +988,14 @@ func (self *IMSMQMessage2) Get_SenderCertificate(pvarSenderCert *systemvariant.V
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage2_Put_SenderCertificate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SenderCertificate dispatches through IMSMQMessage2's vtable slot 50.
+func (self *IMSMQMessage2) Put_SenderCertificate(varSenderCert systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIMSMQMessage2_Put_SenderCertificate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSenderCert))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SenderId dispatches through IMSMQMessage2's vtable slot 51.
 func (self *IMSMQMessage2) Get_SenderId(pvarSenderId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderId)))
@@ -990,6 +1038,14 @@ func (self *IMSMQMessage2) Get_Extension(pvarExtension *systemvariant.VARIANT) e
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage2_Put_Extension = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Extension dispatches through IMSMQMessage2's vtable slot 58.
+func (self *IMSMQMessage2) Put_Extension(varExtension systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIMSMQMessage2_Put_Extension, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varExtension))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ConnectorTypeGuid dispatches through IMSMQMessage2's vtable slot 59.
 func (self *IMSMQMessage2) Get_ConnectorTypeGuid(pbstrGuidConnectorType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidConnectorType)))
@@ -1014,9 +1070,25 @@ func (self *IMSMQMessage2) Get_DestinationSymmetricKey(pvarDestSymmKey *systemva
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage2_Put_DestinationSymmetricKey = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_DestinationSymmetricKey dispatches through IMSMQMessage2's vtable slot 63.
+func (self *IMSMQMessage2) Put_DestinationSymmetricKey(varDestSymmKey systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIMSMQMessage2_Put_DestinationSymmetricKey, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varDestSymmKey))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Signature dispatches through IMSMQMessage2's vtable slot 64.
 func (self *IMSMQMessage2) Get_Signature(pvarSignature *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSignature)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage2_Put_Signature = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Signature dispatches through IMSMQMessage2's vtable slot 65.
+func (self *IMSMQMessage2) Put_Signature(varSignature systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[65], specIMSMQMessage2_Put_Signature, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSignature))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1041,6 +1113,14 @@ func (self *IMSMQMessage2) Get_AuthenticationProviderName(pbstrAuthProvName *fou
 // Put_AuthenticationProviderName dispatches through IMSMQMessage2's vtable slot 69.
 func (self *IMSMQMessage2) Put_AuthenticationProviderName(bstrAuthProvName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAuthProvName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage2_Put_SenderId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SenderId dispatches through IMSMQMessage2's vtable slot 70.
+func (self *IMSMQMessage2) Put_SenderId(varSenderId systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[70], specIMSMQMessage2_Put_SenderId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSenderId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1244,6 +1324,14 @@ func (self *IMSMQMessage3) Get_Body(pvarBody *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage3_Put_Body = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Body dispatches through IMSMQMessage3's vtable slot 28.
+func (self *IMSMQMessage3) Put_Body(varBody systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIMSMQMessage3_Put_Body, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varBody))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_AdminQueueInfo_v1 dispatches through IMSMQMessage3's vtable slot 29.
 func (self *IMSMQMessage3) Get_AdminQueueInfo_v1(ppqinfoAdmin **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
@@ -1265,6 +1353,14 @@ func (self *IMSMQMessage3) Get_Id(pvarMsgId *systemvariant.VARIANT) error {
 // Get_CorrelationId dispatches through IMSMQMessage3's vtable slot 32.
 func (self *IMSMQMessage3) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage3_Put_CorrelationId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_CorrelationId dispatches through IMSMQMessage3's vtable slot 33.
+func (self *IMSMQMessage3) Put_CorrelationId(varMsgId systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIMSMQMessage3_Put_CorrelationId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varMsgId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1364,6 +1460,14 @@ func (self *IMSMQMessage3) Get_SenderCertificate(pvarSenderCert *systemvariant.V
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage3_Put_SenderCertificate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SenderCertificate dispatches through IMSMQMessage3's vtable slot 50.
+func (self *IMSMQMessage3) Put_SenderCertificate(varSenderCert systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIMSMQMessage3_Put_SenderCertificate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSenderCert))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SenderId dispatches through IMSMQMessage3's vtable slot 51.
 func (self *IMSMQMessage3) Get_SenderId(pvarSenderId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderId)))
@@ -1406,6 +1510,14 @@ func (self *IMSMQMessage3) Get_Extension(pvarExtension *systemvariant.VARIANT) e
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage3_Put_Extension = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Extension dispatches through IMSMQMessage3's vtable slot 58.
+func (self *IMSMQMessage3) Put_Extension(varExtension systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIMSMQMessage3_Put_Extension, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varExtension))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ConnectorTypeGuid dispatches through IMSMQMessage3's vtable slot 59.
 func (self *IMSMQMessage3) Get_ConnectorTypeGuid(pbstrGuidConnectorType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidConnectorType)))
@@ -1430,9 +1542,25 @@ func (self *IMSMQMessage3) Get_DestinationSymmetricKey(pvarDestSymmKey *systemva
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage3_Put_DestinationSymmetricKey = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_DestinationSymmetricKey dispatches through IMSMQMessage3's vtable slot 63.
+func (self *IMSMQMessage3) Put_DestinationSymmetricKey(varDestSymmKey systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIMSMQMessage3_Put_DestinationSymmetricKey, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varDestSymmKey))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Signature dispatches through IMSMQMessage3's vtable slot 64.
 func (self *IMSMQMessage3) Get_Signature(pvarSignature *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSignature)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage3_Put_Signature = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Signature dispatches through IMSMQMessage3's vtable slot 65.
+func (self *IMSMQMessage3) Put_Signature(varSignature systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[65], specIMSMQMessage3_Put_Signature, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSignature))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1457,6 +1585,14 @@ func (self *IMSMQMessage3) Get_AuthenticationProviderName(pbstrAuthProvName *fou
 // Put_AuthenticationProviderName dispatches through IMSMQMessage3's vtable slot 69.
 func (self *IMSMQMessage3) Put_AuthenticationProviderName(bstrAuthProvName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAuthProvName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage3_Put_SenderId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SenderId dispatches through IMSMQMessage3's vtable slot 70.
+func (self *IMSMQMessage3) Put_SenderId(varSenderId systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[70], specIMSMQMessage3_Put_SenderId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSenderId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1756,6 +1892,14 @@ func (self *IMSMQMessage4) Get_Body(pvarBody *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage4_Put_Body = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Body dispatches through IMSMQMessage4's vtable slot 28.
+func (self *IMSMQMessage4) Put_Body(varBody systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIMSMQMessage4_Put_Body, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varBody))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_AdminQueueInfo_v1 dispatches through IMSMQMessage4's vtable slot 29.
 func (self *IMSMQMessage4) Get_AdminQueueInfo_v1(ppqinfoAdmin **IMSMQQueueInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppqinfoAdmin)))
@@ -1777,6 +1921,14 @@ func (self *IMSMQMessage4) Get_Id(pvarMsgId *systemvariant.VARIANT) error {
 // Get_CorrelationId dispatches through IMSMQMessage4's vtable slot 32.
 func (self *IMSMQMessage4) Get_CorrelationId(pvarMsgId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarMsgId)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage4_Put_CorrelationId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_CorrelationId dispatches through IMSMQMessage4's vtable slot 33.
+func (self *IMSMQMessage4) Put_CorrelationId(varMsgId systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIMSMQMessage4_Put_CorrelationId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varMsgId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1876,6 +2028,14 @@ func (self *IMSMQMessage4) Get_SenderCertificate(pvarSenderCert *systemvariant.V
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage4_Put_SenderCertificate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SenderCertificate dispatches through IMSMQMessage4's vtable slot 50.
+func (self *IMSMQMessage4) Put_SenderCertificate(varSenderCert systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIMSMQMessage4_Put_SenderCertificate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSenderCert))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SenderId dispatches through IMSMQMessage4's vtable slot 51.
 func (self *IMSMQMessage4) Get_SenderId(pvarSenderId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSenderId)))
@@ -1918,6 +2078,14 @@ func (self *IMSMQMessage4) Get_Extension(pvarExtension *systemvariant.VARIANT) e
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage4_Put_Extension = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Extension dispatches through IMSMQMessage4's vtable slot 58.
+func (self *IMSMQMessage4) Put_Extension(varExtension systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIMSMQMessage4_Put_Extension, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varExtension))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ConnectorTypeGuid dispatches through IMSMQMessage4's vtable slot 59.
 func (self *IMSMQMessage4) Get_ConnectorTypeGuid(pbstrGuidConnectorType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuidConnectorType)))
@@ -1942,9 +2110,25 @@ func (self *IMSMQMessage4) Get_DestinationSymmetricKey(pvarDestSymmKey *systemva
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQMessage4_Put_DestinationSymmetricKey = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_DestinationSymmetricKey dispatches through IMSMQMessage4's vtable slot 63.
+func (self *IMSMQMessage4) Put_DestinationSymmetricKey(varDestSymmKey systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIMSMQMessage4_Put_DestinationSymmetricKey, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varDestSymmKey))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Signature dispatches through IMSMQMessage4's vtable slot 64.
 func (self *IMSMQMessage4) Get_Signature(pvarSignature *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSignature)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage4_Put_Signature = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Signature dispatches through IMSMQMessage4's vtable slot 65.
+func (self *IMSMQMessage4) Put_Signature(varSignature systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[65], specIMSMQMessage4_Put_Signature, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSignature))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1969,6 +2153,14 @@ func (self *IMSMQMessage4) Get_AuthenticationProviderName(pbstrAuthProvName *fou
 // Put_AuthenticationProviderName dispatches through IMSMQMessage4's vtable slot 69.
 func (self *IMSMQMessage4) Put_AuthenticationProviderName(bstrAuthProvName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAuthProvName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQMessage4_Put_SenderId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SenderId dispatches through IMSMQMessage4's vtable slot 70.
+func (self *IMSMQMessage4) Put_SenderId(varSenderId systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[70], specIMSMQMessage4_Put_SenderId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSenderId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2189,6 +2381,14 @@ var IID_IMSMQPrivateDestination = win32.GUID{Data1: 0xeba96b17, Data2: 0x2168, D
 // Get_Handle dispatches through IMSMQPrivateDestination's vtable slot 7.
 func (self *IMSMQPrivateDestination) Get_Handle(pvarHandle *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarHandle)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQPrivateDestination_Put_Handle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Handle dispatches through IMSMQPrivateDestination's vtable slot 8.
+func (self *IMSMQPrivateDestination) Put_Handle(varHandle systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIMSMQPrivateDestination_Put_Handle, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varHandle))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2640,6 +2840,30 @@ func (self *IMSMQQueue3) Get_Handle2(pvarHandle *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQQueue3_ReceiveByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ReceiveByLookupId dispatches through IMSMQQueue3's vtable slot 27.
+func (self *IMSMQQueue3) ReceiveByLookupId(LookupId systemvariant.VARIANT, Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIMSMQQueue3_ReceiveByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue3_ReceiveNextByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ReceiveNextByLookupId dispatches through IMSMQQueue3's vtable slot 28.
+func (self *IMSMQQueue3) ReceiveNextByLookupId(LookupId systemvariant.VARIANT, Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIMSMQQueue3_ReceiveNextByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue3_ReceivePreviousByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ReceivePreviousByLookupId dispatches through IMSMQQueue3's vtable slot 29.
+func (self *IMSMQQueue3) ReceivePreviousByLookupId(LookupId systemvariant.VARIANT, Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIMSMQQueue3_ReceivePreviousByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ReceiveFirstByLookupId dispatches through IMSMQQueue3's vtable slot 30.
 func (self *IMSMQQueue3) ReceiveFirstByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
@@ -2649,6 +2873,30 @@ func (self *IMSMQQueue3) ReceiveFirstByLookupId(Transaction *systemvariant.VARIA
 // ReceiveLastByLookupId dispatches through IMSMQQueue3's vtable slot 31.
 func (self *IMSMQQueue3) ReceiveLastByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue3_PeekByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// PeekByLookupId dispatches through IMSMQQueue3's vtable slot 32.
+func (self *IMSMQQueue3) PeekByLookupId(LookupId systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIMSMQQueue3_PeekByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue3_PeekNextByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// PeekNextByLookupId dispatches through IMSMQQueue3's vtable slot 33.
+func (self *IMSMQQueue3) PeekNextByLookupId(LookupId systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIMSMQQueue3_PeekNextByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue3_PeekPreviousByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// PeekPreviousByLookupId dispatches through IMSMQQueue3's vtable slot 34.
+func (self *IMSMQQueue3) PeekPreviousByLookupId(LookupId systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage3) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIMSMQQueue3_PeekPreviousByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2804,6 +3052,30 @@ func (self *IMSMQQueue4) Get_Handle2(pvarHandle *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQQueue4_ReceiveByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ReceiveByLookupId dispatches through IMSMQQueue4's vtable slot 27.
+func (self *IMSMQQueue4) ReceiveByLookupId(LookupId systemvariant.VARIANT, Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIMSMQQueue4_ReceiveByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue4_ReceiveNextByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ReceiveNextByLookupId dispatches through IMSMQQueue4's vtable slot 28.
+func (self *IMSMQQueue4) ReceiveNextByLookupId(LookupId systemvariant.VARIANT, Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIMSMQQueue4_ReceiveNextByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue4_ReceivePreviousByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ReceivePreviousByLookupId dispatches through IMSMQQueue4's vtable slot 29.
+func (self *IMSMQQueue4) ReceivePreviousByLookupId(LookupId systemvariant.VARIANT, Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIMSMQQueue4_ReceivePreviousByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ReceiveFirstByLookupId dispatches through IMSMQQueue4's vtable slot 30.
 func (self *IMSMQQueue4) ReceiveFirstByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
@@ -2813,6 +3085,30 @@ func (self *IMSMQQueue4) ReceiveFirstByLookupId(Transaction *systemvariant.VARIA
 // ReceiveLastByLookupId dispatches through IMSMQQueue4's vtable slot 31.
 func (self *IMSMQQueue4) ReceiveLastByLookupId(Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue4_PeekByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// PeekByLookupId dispatches through IMSMQQueue4's vtable slot 32.
+func (self *IMSMQQueue4) PeekByLookupId(LookupId systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIMSMQQueue4_PeekByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue4_PeekNextByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// PeekNextByLookupId dispatches through IMSMQQueue4's vtable slot 33.
+func (self *IMSMQQueue4) PeekNextByLookupId(LookupId systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIMSMQQueue4_PeekNextByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue4_PeekPreviousByLookupId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// PeekPreviousByLookupId dispatches through IMSMQQueue4's vtable slot 34.
+func (self *IMSMQQueue4) PeekPreviousByLookupId(LookupId systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIMSMQQueue4_PeekPreviousByLookupId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2837,6 +3133,14 @@ func (self *IMSMQQueue4) Purge() error {
 // Get_IsOpen2 dispatches through IMSMQQueue4's vtable slot 38.
 func (self *IMSMQQueue4) Get_IsOpen2(pisOpen *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisOpen)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueue4_ReceiveByLookupIdAllowPeek = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ReceiveByLookupIdAllowPeek dispatches through IMSMQQueue4's vtable slot 39.
+func (self *IMSMQQueue4) ReceiveByLookupIdAllowPeek(LookupId systemvariant.VARIANT, Transaction *systemvariant.VARIANT, WantDestinationQueue *systemvariant.VARIANT, WantBody *systemvariant.VARIANT, WantConnectorType *systemvariant.VARIANT, ppmsg **IMSMQMessage4) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIMSMQQueue4_ReceiveByLookupIdAllowPeek, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LookupId)), uintptr(unsafe.Pointer(Transaction)), uintptr(unsafe.Pointer(WantDestinationQueue)), uintptr(unsafe.Pointer(WantBody)), uintptr(unsafe.Pointer(WantConnectorType)), uintptr(unsafe.Pointer(ppmsg))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3234,6 +3538,14 @@ func (self *IMSMQQueueInfo2) Get_Security(pvarSecurity *systemvariant.VARIANT) e
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQQueueInfo2_Put_Security = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Security dispatches through IMSMQQueueInfo2's vtable slot 40.
+func (self *IMSMQQueueInfo2) Put_Security(varSecurity systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIMSMQQueueInfo2_Put_Security, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSecurity))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: eba96b1d-2168-11d3-898c-00e02c074f6b
 type IMSMQQueueInfo3 struct {
 	systemcom.IDispatch
@@ -3437,6 +3749,14 @@ func (self *IMSMQQueueInfo3) Get_Properties(ppcolProperties **systemcom.IDispatc
 // Get_Security dispatches through IMSMQQueueInfo3's vtable slot 39.
 func (self *IMSMQQueueInfo3) Get_Security(pvarSecurity *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarSecurity)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMSMQQueueInfo3_Put_Security = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Security dispatches through IMSMQQueueInfo3's vtable slot 40.
+func (self *IMSMQQueueInfo3) Put_Security(varSecurity systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIMSMQQueueInfo3_Put_Security, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSecurity))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3676,6 +3996,14 @@ func (self *IMSMQQueueInfo4) Get_Security(pvarSecurity *systemvariant.VARIANT) e
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMSMQQueueInfo4_Put_Security = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Security dispatches through IMSMQQueueInfo4's vtable slot 40.
+func (self *IMSMQQueueInfo4) Put_Security(varSecurity systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIMSMQQueueInfo4_Put_Security, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSecurity))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_IsTransactional2 dispatches through IMSMQQueueInfo4's vtable slot 41.
 func (self *IMSMQQueueInfo4) Get_IsTransactional2(pisTransactional *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisTransactional)))
@@ -3863,6 +4191,14 @@ type IMSMQTransaction2 struct {
 
 // IID_IMSMQTransaction2 is the interface identifier for IMSMQTransaction2.
 var IID_IMSMQTransaction2 = win32.GUID{Data1: 0x2ce0c5b0, Data2: 0x6e67, Data3: 0x11d2, Data4: [8]byte{0xb0, 0xe6, 0x00, 0xe0, 0x2c, 0x07, 0x4f, 0x6b}}
+
+var specIMSMQTransaction2_InitNew = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// InitNew dispatches through IMSMQTransaction2's vtable slot 10.
+func (self *IMSMQTransaction2) InitNew(varTransaction systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIMSMQTransaction2_InitNew, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varTransaction))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_Properties dispatches through IMSMQTransaction2's vtable slot 11.
 func (self *IMSMQTransaction2) Get_Properties(ppcolProperties **systemcom.IDispatch) error {

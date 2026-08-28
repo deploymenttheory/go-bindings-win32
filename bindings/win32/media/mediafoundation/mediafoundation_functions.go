@@ -75,6 +75,7 @@ var (
 	procMFCreateMP3MediaSink                          = modMF.NewProc("MFCreateMP3MediaSink")
 	procMFCreateMPEG4MediaSink                        = modMF.NewProc("MFCreateMPEG4MediaSink")
 	procMFCreateMediaSession                          = modMF.NewProc("MFCreateMediaSession")
+	procMFCreateMuxSink                               = modMF.NewProc("MFCreateMuxSink")
 	procMFCreateNetSchemePlugin                       = modMF.NewProc("MFCreateNetSchemePlugin")
 	procMFCreatePMPMediaSession                       = modMF.NewProc("MFCreatePMPMediaSession")
 	procMFCreatePMPServer                             = modMF.NewProc("MFCreatePMPServer")
@@ -133,6 +134,7 @@ var (
 	procMFConvertToFP16Array                          = modMFPlat.NewProc("MFConvertToFP16Array")
 	procMFCopyImage                                   = modMFPlat.NewProc("MFCopyImage")
 	procMFCreate2DMediaBuffer                         = modMFPlat.NewProc("MFCreate2DMediaBuffer")
+	procMFCreateAMMediaTypeFromMFMediaType            = modMFPlat.NewProc("MFCreateAMMediaTypeFromMFMediaType")
 	procMFCreateAlignedMemoryBuffer                   = modMFPlat.NewProc("MFCreateAlignedMemoryBuffer")
 	procMFCreateAsyncResult                           = modMFPlat.NewProc("MFCreateAsyncResult")
 	procMFCreateAttributes                            = modMFPlat.NewProc("MFCreateAttributes")
@@ -158,6 +160,7 @@ var (
 	procMFCreateMediaExtensionActivate                = modMFPlat.NewProc("MFCreateMediaExtensionActivate")
 	procMFCreateMediaType                             = modMFPlat.NewProc("MFCreateMediaType")
 	procMFCreateMediaTypeFromProperties               = modMFPlat.NewProc("MFCreateMediaTypeFromProperties")
+	procMFCreateMediaTypeFromRepresentation           = modMFPlat.NewProc("MFCreateMediaTypeFromRepresentation")
 	procMFCreateMemoryBuffer                          = modMFPlat.NewProc("MFCreateMemoryBuffer")
 	procMFCreateMuxStreamAttributes                   = modMFPlat.NewProc("MFCreateMuxStreamAttributes")
 	procMFCreateMuxStreamMediaType                    = modMFPlat.NewProc("MFCreateMuxStreamMediaType")
@@ -203,6 +206,7 @@ var (
 	procMFGetWorkQueueMMCSSTaskId                     = modMFPlat.NewProc("MFGetWorkQueueMMCSSTaskId")
 	procMFHeapAlloc                                   = modMFPlat.NewProc("MFHeapAlloc")
 	procMFHeapFree                                    = modMFPlat.NewProc("MFHeapFree")
+	procMFInitAMMediaTypeFromMFMediaType              = modMFPlat.NewProc("MFInitAMMediaTypeFromMFMediaType")
 	procMFInitAttributesFromBlob                      = modMFPlat.NewProc("MFInitAttributesFromBlob")
 	procMFInitMediaTypeFromAMMediaType                = modMFPlat.NewProc("MFInitMediaTypeFromAMMediaType")
 	procMFInitMediaTypeFromMFVideoFormat              = modMFPlat.NewProc("MFInitMediaTypeFromMFVideoFormat")
@@ -237,14 +241,22 @@ var (
 	procMFShutdown                                    = modMFPlat.NewProc("MFShutdown")
 	procMFSplitSample                                 = modMFPlat.NewProc("MFSplitSample")
 	procMFStartup                                     = modMFPlat.NewProc("MFStartup")
+	procMFTEnum                                       = modMFPlat.NewProc("MFTEnum")
+	procMFTEnum2                                      = modMFPlat.NewProc("MFTEnum2")
+	procMFTEnumEx                                     = modMFPlat.NewProc("MFTEnumEx")
+	procMFTGetInfo                                    = modMFPlat.NewProc("MFTGetInfo")
+	procMFTRegister                                   = modMFPlat.NewProc("MFTRegister")
 	procMFTRegisterLocal                              = modMFPlat.NewProc("MFTRegisterLocal")
 	procMFTRegisterLocalByCLSID                       = modMFPlat.NewProc("MFTRegisterLocalByCLSID")
+	procMFTUnregister                                 = modMFPlat.NewProc("MFTUnregister")
 	procMFTUnregisterLocal                            = modMFPlat.NewProc("MFTUnregisterLocal")
+	procMFTUnregisterLocalByCLSID                     = modMFPlat.NewProc("MFTUnregisterLocalByCLSID")
 	procMFUnlockDXGIDeviceManager                     = modMFPlat.NewProc("MFUnlockDXGIDeviceManager")
 	procMFUnlockPlatform                              = modMFPlat.NewProc("MFUnlockPlatform")
 	procMFUnlockWorkQueue                             = modMFPlat.NewProc("MFUnlockWorkQueue")
 	procMFUnregisterPlatformFromMMCSS                 = modMFPlat.NewProc("MFUnregisterPlatformFromMMCSS")
 	procMFUnwrapMediaType                             = modMFPlat.NewProc("MFUnwrapMediaType")
+	procMFValidateMediaTypeSize                       = modMFPlat.NewProc("MFValidateMediaTypeSize")
 	procMFWrapMediaType                               = modMFPlat.NewProc("MFWrapMediaType")
 	procMFllMulDiv                                    = modMFPlat.NewProc("MFllMulDiv")
 	procMFPCreateMediaPlayer                          = modMFPlay.NewProc("MFPCreateMediaPlayer")
@@ -269,6 +281,504 @@ var (
 	procOPMXboxGetHDCPStatus                          = modOPMXbox.NewProc("OPMXboxGetHDCPStatus")
 	procOPMXboxGetHDCPStatusAndType                   = modOPMXbox.NewProc("OPMXboxGetHDCPStatusAndType")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateNamedPropertyStore                      *win32.Proc
+	CreatePropertyStore                           *win32.Proc
+	DXVA2CreateDirect3DDeviceManager9             *win32.Proc
+	DXVA2CreateVideoService                       *win32.Proc
+	DXVAHD_CreateDevice                           *win32.Proc
+	MFAddPeriodicCallback                         *win32.Proc
+	MFAllocateSerialWorkQueue                     *win32.Proc
+	MFAllocateWorkQueue                           *win32.Proc
+	MFAllocateWorkQueueEx                         *win32.Proc
+	MFAverageTimePerFrameToFrameRate              *win32.Proc
+	MFBeginCreateFile                             *win32.Proc
+	MFBeginRegisterWorkQueueWithMMCSS             *win32.Proc
+	MFBeginRegisterWorkQueueWithMMCSSEx           *win32.Proc
+	MFBeginUnregisterWorkQueueWithMMCSS           *win32.Proc
+	MFCalculateBitmapImageSize                    *win32.Proc
+	MFCalculateImageSize                          *win32.Proc
+	MFCancelCreateFile                            *win32.Proc
+	MFCancelWorkItem                              *win32.Proc
+	MFCombineSamples                              *win32.Proc
+	MFCompareFullToPartialMediaType               *win32.Proc
+	MFConvertColorInfoFromDXVA                    *win32.Proc
+	MFConvertColorInfoToDXVA                      *win32.Proc
+	MFConvertFromFP16Array                        *win32.Proc
+	MFConvertToFP16Array                          *win32.Proc
+	MFCopyImage                                   *win32.Proc
+	MFCreate2DMediaBuffer                         *win32.Proc
+	MFCreate3GPMediaSink                          *win32.Proc
+	MFCreateAC3MediaSink                          *win32.Proc
+	MFCreateADTSMediaSink                         *win32.Proc
+	MFCreateAMMediaTypeFromMFMediaType            *win32.Proc
+	MFCreateASFContentInfo                        *win32.Proc
+	MFCreateASFIndexer                            *win32.Proc
+	MFCreateASFIndexerByteStream                  *win32.Proc
+	MFCreateASFMediaSink                          *win32.Proc
+	MFCreateASFMediaSinkActivate                  *win32.Proc
+	MFCreateASFMultiplexer                        *win32.Proc
+	MFCreateASFProfile                            *win32.Proc
+	MFCreateASFProfileFromPresentationDescriptor  *win32.Proc
+	MFCreateASFSplitter                           *win32.Proc
+	MFCreateASFStreamSelector                     *win32.Proc
+	MFCreateASFStreamingMediaSink                 *win32.Proc
+	MFCreateASFStreamingMediaSinkActivate         *win32.Proc
+	MFCreateAVIMediaSink                          *win32.Proc
+	MFCreateAggregateSource                       *win32.Proc
+	MFCreateAlignedMemoryBuffer                   *win32.Proc
+	MFCreateAsyncResult                           *win32.Proc
+	MFCreateAttributes                            *win32.Proc
+	MFCreateAudioMediaType                        *win32.Proc
+	MFCreateAudioRenderer                         *win32.Proc
+	MFCreateAudioRendererActivate                 *win32.Proc
+	MFCreateCameraControlMonitor                  *win32.Proc
+	MFCreateCameraOcclusionStateMonitor           *win32.Proc
+	MFCreateCollection                            *win32.Proc
+	MFCreateContentDecryptorContext               *win32.Proc
+	MFCreateContentProtectionDevice               *win32.Proc
+	MFCreateCredentialCache                       *win32.Proc
+	MFCreateD3D12SynchronizationObject            *win32.Proc
+	MFCreateDXGICrossAdapterBuffer                *win32.Proc
+	MFCreateDXGIDeviceManager                     *win32.Proc
+	MFCreateDXGISurfaceBuffer                     *win32.Proc
+	MFCreateDXSurfaceBuffer                       *win32.Proc
+	MFCreateDeviceSource                          *win32.Proc
+	MFCreateDeviceSourceActivate                  *win32.Proc
+	MFCreateEncryptedMediaExtensionsStoreActivate *win32.Proc
+	MFCreateEventQueue                            *win32.Proc
+	MFCreateExtendedCameraIntrinsicModel          *win32.Proc
+	MFCreateExtendedCameraIntrinsics              *win32.Proc
+	MFCreateFMPEG4MediaSink                       *win32.Proc
+	MFCreateFile                                  *win32.Proc
+	MFCreateLegacyMediaBufferOnMFMediaBuffer      *win32.Proc
+	MFCreateMFByteStreamOnStream                  *win32.Proc
+	MFCreateMFByteStreamOnStreamEx                *win32.Proc
+	MFCreateMFByteStreamWrapper                   *win32.Proc
+	MFCreateMFVideoFormatFromMFMediaType          *win32.Proc
+	MFCreateMP3MediaSink                          *win32.Proc
+	MFCreateMPEG4MediaSink                        *win32.Proc
+	MFCreateMediaBufferFromMediaType              *win32.Proc
+	MFCreateMediaBufferWrapper                    *win32.Proc
+	MFCreateMediaEvent                            *win32.Proc
+	MFCreateMediaExtensionActivate                *win32.Proc
+	MFCreateMediaSession                          *win32.Proc
+	MFCreateMediaType                             *win32.Proc
+	MFCreateMediaTypeFromProperties               *win32.Proc
+	MFCreateMediaTypeFromRepresentation           *win32.Proc
+	MFCreateMemoryBuffer                          *win32.Proc
+	MFCreateMuxSink                               *win32.Proc
+	MFCreateMuxStreamAttributes                   *win32.Proc
+	MFCreateMuxStreamMediaType                    *win32.Proc
+	MFCreateMuxStreamSample                       *win32.Proc
+	MFCreateNetSchemePlugin                       *win32.Proc
+	MFCreatePMPMediaSession                       *win32.Proc
+	MFCreatePMPServer                             *win32.Proc
+	MFCreatePresentationClock                     *win32.Proc
+	MFCreatePresentationDescriptor                *win32.Proc
+	MFCreatePresentationDescriptorFromASFProfile  *win32.Proc
+	MFCreatePropertiesFromMediaType               *win32.Proc
+	MFCreateProtectedEnvironmentAccess            *win32.Proc
+	MFCreateProxyLocator                          *win32.Proc
+	MFCreateRelativePanelWatcher                  *win32.Proc
+	MFCreateRemoteDesktopPlugin                   *win32.Proc
+	MFCreateSample                                *win32.Proc
+	MFCreateSampleCopierMFT                       *win32.Proc
+	MFCreateSampleGrabberSinkActivate             *win32.Proc
+	MFCreateSensorActivityMonitor                 *win32.Proc
+	MFCreateSensorGroup                           *win32.Proc
+	MFCreateSensorProfile                         *win32.Proc
+	MFCreateSensorProfileCollection               *win32.Proc
+	MFCreateSensorStream                          *win32.Proc
+	MFCreateSequencerSegmentOffset                *win32.Proc
+	MFCreateSequencerSource                       *win32.Proc
+	MFCreateSimpleTypeHandler                     *win32.Proc
+	MFCreateSinkWriterFromMediaSink               *win32.Proc
+	MFCreateSinkWriterFromURL                     *win32.Proc
+	MFCreateSourceReaderFromByteStream            *win32.Proc
+	MFCreateSourceReaderFromMediaSource           *win32.Proc
+	MFCreateSourceReaderFromURL                   *win32.Proc
+	MFCreateSourceResolver                        *win32.Proc
+	MFCreateStandardQualityManager                *win32.Proc
+	MFCreateStreamDescriptor                      *win32.Proc
+	MFCreateStreamOnMFByteStream                  *win32.Proc
+	MFCreateStreamOnMFByteStreamEx                *win32.Proc
+	MFCreateSystemTimeSource                      *win32.Proc
+	MFCreateTempFile                              *win32.Proc
+	MFCreateTopoLoader                            *win32.Proc
+	MFCreateTopology                              *win32.Proc
+	MFCreateTopologyNode                          *win32.Proc
+	MFCreateTrackedSample                         *win32.Proc
+	MFCreateTranscodeProfile                      *win32.Proc
+	MFCreateTranscodeSinkActivate                 *win32.Proc
+	MFCreateTranscodeTopology                     *win32.Proc
+	MFCreateTranscodeTopologyFromByteStream       *win32.Proc
+	MFCreateTransformActivate                     *win32.Proc
+	MFCreateVideoMediaType                        *win32.Proc
+	MFCreateVideoMediaTypeFromBitMapInfoHeader    *win32.Proc
+	MFCreateVideoMediaTypeFromBitMapInfoHeaderEx  *win32.Proc
+	MFCreateVideoMediaTypeFromSubtype             *win32.Proc
+	MFCreateVideoMixer                            *win32.Proc
+	MFCreateVideoMixerAndPresenter                *win32.Proc
+	MFCreateVideoPresenter                        *win32.Proc
+	MFCreateVideoRenderer                         *win32.Proc
+	MFCreateVideoRendererActivate                 *win32.Proc
+	MFCreateVideoSampleAllocator                  *win32.Proc
+	MFCreateVideoSampleAllocatorEx                *win32.Proc
+	MFCreateVideoSampleFromSurface                *win32.Proc
+	MFCreateVirtualCamera                         *win32.Proc
+	MFCreateWAVEMediaSink                         *win32.Proc
+	MFCreateWICBitmapBuffer                       *win32.Proc
+	MFCreateWMAEncoderActivate                    *win32.Proc
+	MFCreateWMVEncoderActivate                    *win32.Proc
+	MFCreateWaveFormatExFromMFMediaType           *win32.Proc
+	MFDeserializeAttributesFromStream             *win32.Proc
+	MFDeserializePresentationDescriptor           *win32.Proc
+	MFEndCreateFile                               *win32.Proc
+	MFEndRegisterWorkQueueWithMMCSS               *win32.Proc
+	MFEndUnregisterWorkQueueWithMMCSS             *win32.Proc
+	MFEnumDeviceSources                           *win32.Proc
+	MFFrameRateToAverageTimePerFrame              *win32.Proc
+	MFGetAttributesAsBlob                         *win32.Proc
+	MFGetAttributesAsBlobSize                     *win32.Proc
+	MFGetContentProtectionSystemCLSID             *win32.Proc
+	MFGetDXGIDeviceManageMode                     *win32.Proc
+	MFGetLocalId                                  *win32.Proc
+	MFGetMFTMerit                                 *win32.Proc
+	MFGetPlaneSize                                *win32.Proc
+	MFGetPluginControl                            *win32.Proc
+	MFGetService                                  *win32.Proc
+	MFGetStrideForBitmapInfoHeader                *win32.Proc
+	MFGetSupportedMimeTypes                       *win32.Proc
+	MFGetSupportedSchemes                         *win32.Proc
+	MFGetSystemId                                 *win32.Proc
+	MFGetSystemTime                               *win32.Proc
+	MFGetTimerPeriodicity                         *win32.Proc
+	MFGetTopoNodeCurrentType                      *win32.Proc
+	MFGetUncompressedVideoFormat                  *win32.Proc
+	MFGetWorkQueueMMCSSClass                      *win32.Proc
+	MFGetWorkQueueMMCSSPriority                   *win32.Proc
+	MFGetWorkQueueMMCSSTaskId                     *win32.Proc
+	MFHeapAlloc                                   *win32.Proc
+	MFHeapFree                                    *win32.Proc
+	MFInitAMMediaTypeFromMFMediaType              *win32.Proc
+	MFInitAttributesFromBlob                      *win32.Proc
+	MFInitMediaTypeFromAMMediaType                *win32.Proc
+	MFInitMediaTypeFromMFVideoFormat              *win32.Proc
+	MFInitMediaTypeFromMPEG1VideoInfo             *win32.Proc
+	MFInitMediaTypeFromMPEG2VideoInfo             *win32.Proc
+	MFInitMediaTypeFromVideoInfoHeader            *win32.Proc
+	MFInitMediaTypeFromVideoInfoHeader2           *win32.Proc
+	MFInitMediaTypeFromWaveFormatEx               *win32.Proc
+	MFInitVideoFormat                             *win32.Proc
+	MFInitVideoFormat_RGB                         *win32.Proc
+	MFInvokeCallback                              *win32.Proc
+	MFIsContentProtectionDeviceSupported          *win32.Proc
+	MFIsFormatYUV                                 *win32.Proc
+	MFIsVirtualCameraTypeSupported                *win32.Proc
+	MFLoadSignedLibrary                           *win32.Proc
+	MFLockDXGIDeviceManager                       *win32.Proc
+	MFLockPlatform                                *win32.Proc
+	MFLockSharedWorkQueue                         *win32.Proc
+	MFLockWorkQueue                               *win32.Proc
+	MFMapDX9FormatToDXGIFormat                    *win32.Proc
+	MFMapDXGIFormatToDX9Format                    *win32.Proc
+	MFPCreateMediaPlayer                          *win32.Proc
+	MFPutWaitingWorkItem                          *win32.Proc
+	MFPutWorkItem                                 *win32.Proc
+	MFPutWorkItem2                                *win32.Proc
+	MFPutWorkItemEx                               *win32.Proc
+	MFPutWorkItemEx2                              *win32.Proc
+	MFRegisterLocalByteStreamHandler              *win32.Proc
+	MFRegisterLocalSchemeHandler                  *win32.Proc
+	MFRegisterPlatformWithMMCSS                   *win32.Proc
+	MFRemovePeriodicCallback                      *win32.Proc
+	MFRequireProtectedEnvironment                 *win32.Proc
+	MFScheduleWorkItem                            *win32.Proc
+	MFScheduleWorkItemEx                          *win32.Proc
+	MFSerializeAttributesToStream                 *win32.Proc
+	MFSerializePresentationDescriptor             *win32.Proc
+	MFShutdown                                    *win32.Proc
+	MFShutdownObject                              *win32.Proc
+	MFSplitSample                                 *win32.Proc
+	MFStartup                                     *win32.Proc
+	MFTEnum                                       *win32.Proc
+	MFTEnum2                                      *win32.Proc
+	MFTEnumEx                                     *win32.Proc
+	MFTGetInfo                                    *win32.Proc
+	MFTRegister                                   *win32.Proc
+	MFTRegisterLocal                              *win32.Proc
+	MFTRegisterLocalByCLSID                       *win32.Proc
+	MFTUnregister                                 *win32.Proc
+	MFTUnregisterLocal                            *win32.Proc
+	MFTUnregisterLocalByCLSID                     *win32.Proc
+	MFTranscodeGetAudioOutputAvailableTypes       *win32.Proc
+	MFUnlockDXGIDeviceManager                     *win32.Proc
+	MFUnlockPlatform                              *win32.Proc
+	MFUnlockWorkQueue                             *win32.Proc
+	MFUnregisterPlatformFromMMCSS                 *win32.Proc
+	MFUnwrapMediaType                             *win32.Proc
+	MFValidateMediaTypeSize                       *win32.Proc
+	MFWrapMediaType                               *win32.Proc
+	MFllMulDiv                                    *win32.Proc
+	OPMGetVideoOutputForTarget                    *win32.Proc
+	OPMGetVideoOutputsFromHMONITOR                *win32.Proc
+	OPMGetVideoOutputsFromIDirect3DDevice9Object  *win32.Proc
+	OPMXboxEnableHDCP                             *win32.Proc
+	OPMXboxGetHDCPStatus                          *win32.Proc
+	OPMXboxGetHDCPStatusAndType                   *win32.Proc
+}{
+	CreateNamedPropertyStore:                      procCreateNamedPropertyStore,
+	CreatePropertyStore:                           procCreatePropertyStore,
+	DXVA2CreateDirect3DDeviceManager9:             procDXVA2CreateDirect3DDeviceManager9,
+	DXVA2CreateVideoService:                       procDXVA2CreateVideoService,
+	DXVAHD_CreateDevice:                           procDXVAHD_CreateDevice,
+	MFAddPeriodicCallback:                         procMFAddPeriodicCallback,
+	MFAllocateSerialWorkQueue:                     procMFAllocateSerialWorkQueue,
+	MFAllocateWorkQueue:                           procMFAllocateWorkQueue,
+	MFAllocateWorkQueueEx:                         procMFAllocateWorkQueueEx,
+	MFAverageTimePerFrameToFrameRate:              procMFAverageTimePerFrameToFrameRate,
+	MFBeginCreateFile:                             procMFBeginCreateFile,
+	MFBeginRegisterWorkQueueWithMMCSS:             procMFBeginRegisterWorkQueueWithMMCSS,
+	MFBeginRegisterWorkQueueWithMMCSSEx:           procMFBeginRegisterWorkQueueWithMMCSSEx,
+	MFBeginUnregisterWorkQueueWithMMCSS:           procMFBeginUnregisterWorkQueueWithMMCSS,
+	MFCalculateBitmapImageSize:                    procMFCalculateBitmapImageSize,
+	MFCalculateImageSize:                          procMFCalculateImageSize,
+	MFCancelCreateFile:                            procMFCancelCreateFile,
+	MFCancelWorkItem:                              procMFCancelWorkItem,
+	MFCombineSamples:                              procMFCombineSamples,
+	MFCompareFullToPartialMediaType:               procMFCompareFullToPartialMediaType,
+	MFConvertColorInfoFromDXVA:                    procMFConvertColorInfoFromDXVA,
+	MFConvertColorInfoToDXVA:                      procMFConvertColorInfoToDXVA,
+	MFConvertFromFP16Array:                        procMFConvertFromFP16Array,
+	MFConvertToFP16Array:                          procMFConvertToFP16Array,
+	MFCopyImage:                                   procMFCopyImage,
+	MFCreate2DMediaBuffer:                         procMFCreate2DMediaBuffer,
+	MFCreate3GPMediaSink:                          procMFCreate3GPMediaSink,
+	MFCreateAC3MediaSink:                          procMFCreateAC3MediaSink,
+	MFCreateADTSMediaSink:                         procMFCreateADTSMediaSink,
+	MFCreateAMMediaTypeFromMFMediaType:            procMFCreateAMMediaTypeFromMFMediaType,
+	MFCreateASFContentInfo:                        procMFCreateASFContentInfo,
+	MFCreateASFIndexer:                            procMFCreateASFIndexer,
+	MFCreateASFIndexerByteStream:                  procMFCreateASFIndexerByteStream,
+	MFCreateASFMediaSink:                          procMFCreateASFMediaSink,
+	MFCreateASFMediaSinkActivate:                  procMFCreateASFMediaSinkActivate,
+	MFCreateASFMultiplexer:                        procMFCreateASFMultiplexer,
+	MFCreateASFProfile:                            procMFCreateASFProfile,
+	MFCreateASFProfileFromPresentationDescriptor:  procMFCreateASFProfileFromPresentationDescriptor,
+	MFCreateASFSplitter:                           procMFCreateASFSplitter,
+	MFCreateASFStreamSelector:                     procMFCreateASFStreamSelector,
+	MFCreateASFStreamingMediaSink:                 procMFCreateASFStreamingMediaSink,
+	MFCreateASFStreamingMediaSinkActivate:         procMFCreateASFStreamingMediaSinkActivate,
+	MFCreateAVIMediaSink:                          procMFCreateAVIMediaSink,
+	MFCreateAggregateSource:                       procMFCreateAggregateSource,
+	MFCreateAlignedMemoryBuffer:                   procMFCreateAlignedMemoryBuffer,
+	MFCreateAsyncResult:                           procMFCreateAsyncResult,
+	MFCreateAttributes:                            procMFCreateAttributes,
+	MFCreateAudioMediaType:                        procMFCreateAudioMediaType,
+	MFCreateAudioRenderer:                         procMFCreateAudioRenderer,
+	MFCreateAudioRendererActivate:                 procMFCreateAudioRendererActivate,
+	MFCreateCameraControlMonitor:                  procMFCreateCameraControlMonitor,
+	MFCreateCameraOcclusionStateMonitor:           procMFCreateCameraOcclusionStateMonitor,
+	MFCreateCollection:                            procMFCreateCollection,
+	MFCreateContentDecryptorContext:               procMFCreateContentDecryptorContext,
+	MFCreateContentProtectionDevice:               procMFCreateContentProtectionDevice,
+	MFCreateCredentialCache:                       procMFCreateCredentialCache,
+	MFCreateD3D12SynchronizationObject:            procMFCreateD3D12SynchronizationObject,
+	MFCreateDXGICrossAdapterBuffer:                procMFCreateDXGICrossAdapterBuffer,
+	MFCreateDXGIDeviceManager:                     procMFCreateDXGIDeviceManager,
+	MFCreateDXGISurfaceBuffer:                     procMFCreateDXGISurfaceBuffer,
+	MFCreateDXSurfaceBuffer:                       procMFCreateDXSurfaceBuffer,
+	MFCreateDeviceSource:                          procMFCreateDeviceSource,
+	MFCreateDeviceSourceActivate:                  procMFCreateDeviceSourceActivate,
+	MFCreateEncryptedMediaExtensionsStoreActivate: procMFCreateEncryptedMediaExtensionsStoreActivate,
+	MFCreateEventQueue:                            procMFCreateEventQueue,
+	MFCreateExtendedCameraIntrinsicModel:          procMFCreateExtendedCameraIntrinsicModel,
+	MFCreateExtendedCameraIntrinsics:              procMFCreateExtendedCameraIntrinsics,
+	MFCreateFMPEG4MediaSink:                       procMFCreateFMPEG4MediaSink,
+	MFCreateFile:                                  procMFCreateFile,
+	MFCreateLegacyMediaBufferOnMFMediaBuffer:      procMFCreateLegacyMediaBufferOnMFMediaBuffer,
+	MFCreateMFByteStreamOnStream:                  procMFCreateMFByteStreamOnStream,
+	MFCreateMFByteStreamOnStreamEx:                procMFCreateMFByteStreamOnStreamEx,
+	MFCreateMFByteStreamWrapper:                   procMFCreateMFByteStreamWrapper,
+	MFCreateMFVideoFormatFromMFMediaType:          procMFCreateMFVideoFormatFromMFMediaType,
+	MFCreateMP3MediaSink:                          procMFCreateMP3MediaSink,
+	MFCreateMPEG4MediaSink:                        procMFCreateMPEG4MediaSink,
+	MFCreateMediaBufferFromMediaType:              procMFCreateMediaBufferFromMediaType,
+	MFCreateMediaBufferWrapper:                    procMFCreateMediaBufferWrapper,
+	MFCreateMediaEvent:                            procMFCreateMediaEvent,
+	MFCreateMediaExtensionActivate:                procMFCreateMediaExtensionActivate,
+	MFCreateMediaSession:                          procMFCreateMediaSession,
+	MFCreateMediaType:                             procMFCreateMediaType,
+	MFCreateMediaTypeFromProperties:               procMFCreateMediaTypeFromProperties,
+	MFCreateMediaTypeFromRepresentation:           procMFCreateMediaTypeFromRepresentation,
+	MFCreateMemoryBuffer:                          procMFCreateMemoryBuffer,
+	MFCreateMuxSink:                               procMFCreateMuxSink,
+	MFCreateMuxStreamAttributes:                   procMFCreateMuxStreamAttributes,
+	MFCreateMuxStreamMediaType:                    procMFCreateMuxStreamMediaType,
+	MFCreateMuxStreamSample:                       procMFCreateMuxStreamSample,
+	MFCreateNetSchemePlugin:                       procMFCreateNetSchemePlugin,
+	MFCreatePMPMediaSession:                       procMFCreatePMPMediaSession,
+	MFCreatePMPServer:                             procMFCreatePMPServer,
+	MFCreatePresentationClock:                     procMFCreatePresentationClock,
+	MFCreatePresentationDescriptor:                procMFCreatePresentationDescriptor,
+	MFCreatePresentationDescriptorFromASFProfile:  procMFCreatePresentationDescriptorFromASFProfile,
+	MFCreatePropertiesFromMediaType:               procMFCreatePropertiesFromMediaType,
+	MFCreateProtectedEnvironmentAccess:            procMFCreateProtectedEnvironmentAccess,
+	MFCreateProxyLocator:                          procMFCreateProxyLocator,
+	MFCreateRelativePanelWatcher:                  procMFCreateRelativePanelWatcher,
+	MFCreateRemoteDesktopPlugin:                   procMFCreateRemoteDesktopPlugin,
+	MFCreateSample:                                procMFCreateSample,
+	MFCreateSampleCopierMFT:                       procMFCreateSampleCopierMFT,
+	MFCreateSampleGrabberSinkActivate:             procMFCreateSampleGrabberSinkActivate,
+	MFCreateSensorActivityMonitor:                 procMFCreateSensorActivityMonitor,
+	MFCreateSensorGroup:                           procMFCreateSensorGroup,
+	MFCreateSensorProfile:                         procMFCreateSensorProfile,
+	MFCreateSensorProfileCollection:               procMFCreateSensorProfileCollection,
+	MFCreateSensorStream:                          procMFCreateSensorStream,
+	MFCreateSequencerSegmentOffset:                procMFCreateSequencerSegmentOffset,
+	MFCreateSequencerSource:                       procMFCreateSequencerSource,
+	MFCreateSimpleTypeHandler:                     procMFCreateSimpleTypeHandler,
+	MFCreateSinkWriterFromMediaSink:               procMFCreateSinkWriterFromMediaSink,
+	MFCreateSinkWriterFromURL:                     procMFCreateSinkWriterFromURL,
+	MFCreateSourceReaderFromByteStream:            procMFCreateSourceReaderFromByteStream,
+	MFCreateSourceReaderFromMediaSource:           procMFCreateSourceReaderFromMediaSource,
+	MFCreateSourceReaderFromURL:                   procMFCreateSourceReaderFromURL,
+	MFCreateSourceResolver:                        procMFCreateSourceResolver,
+	MFCreateStandardQualityManager:                procMFCreateStandardQualityManager,
+	MFCreateStreamDescriptor:                      procMFCreateStreamDescriptor,
+	MFCreateStreamOnMFByteStream:                  procMFCreateStreamOnMFByteStream,
+	MFCreateStreamOnMFByteStreamEx:                procMFCreateStreamOnMFByteStreamEx,
+	MFCreateSystemTimeSource:                      procMFCreateSystemTimeSource,
+	MFCreateTempFile:                              procMFCreateTempFile,
+	MFCreateTopoLoader:                            procMFCreateTopoLoader,
+	MFCreateTopology:                              procMFCreateTopology,
+	MFCreateTopologyNode:                          procMFCreateTopologyNode,
+	MFCreateTrackedSample:                         procMFCreateTrackedSample,
+	MFCreateTranscodeProfile:                      procMFCreateTranscodeProfile,
+	MFCreateTranscodeSinkActivate:                 procMFCreateTranscodeSinkActivate,
+	MFCreateTranscodeTopology:                     procMFCreateTranscodeTopology,
+	MFCreateTranscodeTopologyFromByteStream:       procMFCreateTranscodeTopologyFromByteStream,
+	MFCreateTransformActivate:                     procMFCreateTransformActivate,
+	MFCreateVideoMediaType:                        procMFCreateVideoMediaType,
+	MFCreateVideoMediaTypeFromBitMapInfoHeader:    procMFCreateVideoMediaTypeFromBitMapInfoHeader,
+	MFCreateVideoMediaTypeFromBitMapInfoHeaderEx:  procMFCreateVideoMediaTypeFromBitMapInfoHeaderEx,
+	MFCreateVideoMediaTypeFromSubtype:             procMFCreateVideoMediaTypeFromSubtype,
+	MFCreateVideoMixer:                            procMFCreateVideoMixer,
+	MFCreateVideoMixerAndPresenter:                procMFCreateVideoMixerAndPresenter,
+	MFCreateVideoPresenter:                        procMFCreateVideoPresenter,
+	MFCreateVideoRenderer:                         procMFCreateVideoRenderer,
+	MFCreateVideoRendererActivate:                 procMFCreateVideoRendererActivate,
+	MFCreateVideoSampleAllocator:                  procMFCreateVideoSampleAllocator,
+	MFCreateVideoSampleAllocatorEx:                procMFCreateVideoSampleAllocatorEx,
+	MFCreateVideoSampleFromSurface:                procMFCreateVideoSampleFromSurface,
+	MFCreateVirtualCamera:                         procMFCreateVirtualCamera,
+	MFCreateWAVEMediaSink:                         procMFCreateWAVEMediaSink,
+	MFCreateWICBitmapBuffer:                       procMFCreateWICBitmapBuffer,
+	MFCreateWMAEncoderActivate:                    procMFCreateWMAEncoderActivate,
+	MFCreateWMVEncoderActivate:                    procMFCreateWMVEncoderActivate,
+	MFCreateWaveFormatExFromMFMediaType:           procMFCreateWaveFormatExFromMFMediaType,
+	MFDeserializeAttributesFromStream:             procMFDeserializeAttributesFromStream,
+	MFDeserializePresentationDescriptor:           procMFDeserializePresentationDescriptor,
+	MFEndCreateFile:                               procMFEndCreateFile,
+	MFEndRegisterWorkQueueWithMMCSS:               procMFEndRegisterWorkQueueWithMMCSS,
+	MFEndUnregisterWorkQueueWithMMCSS:             procMFEndUnregisterWorkQueueWithMMCSS,
+	MFEnumDeviceSources:                           procMFEnumDeviceSources,
+	MFFrameRateToAverageTimePerFrame:              procMFFrameRateToAverageTimePerFrame,
+	MFGetAttributesAsBlob:                         procMFGetAttributesAsBlob,
+	MFGetAttributesAsBlobSize:                     procMFGetAttributesAsBlobSize,
+	MFGetContentProtectionSystemCLSID:             procMFGetContentProtectionSystemCLSID,
+	MFGetDXGIDeviceManageMode:                     procMFGetDXGIDeviceManageMode,
+	MFGetLocalId:                                  procMFGetLocalId,
+	MFGetMFTMerit:                                 procMFGetMFTMerit,
+	MFGetPlaneSize:                                procMFGetPlaneSize,
+	MFGetPluginControl:                            procMFGetPluginControl,
+	MFGetService:                                  procMFGetService,
+	MFGetStrideForBitmapInfoHeader:                procMFGetStrideForBitmapInfoHeader,
+	MFGetSupportedMimeTypes:                       procMFGetSupportedMimeTypes,
+	MFGetSupportedSchemes:                         procMFGetSupportedSchemes,
+	MFGetSystemId:                                 procMFGetSystemId,
+	MFGetSystemTime:                               procMFGetSystemTime,
+	MFGetTimerPeriodicity:                         procMFGetTimerPeriodicity,
+	MFGetTopoNodeCurrentType:                      procMFGetTopoNodeCurrentType,
+	MFGetUncompressedVideoFormat:                  procMFGetUncompressedVideoFormat,
+	MFGetWorkQueueMMCSSClass:                      procMFGetWorkQueueMMCSSClass,
+	MFGetWorkQueueMMCSSPriority:                   procMFGetWorkQueueMMCSSPriority,
+	MFGetWorkQueueMMCSSTaskId:                     procMFGetWorkQueueMMCSSTaskId,
+	MFHeapAlloc:                                   procMFHeapAlloc,
+	MFHeapFree:                                    procMFHeapFree,
+	MFInitAMMediaTypeFromMFMediaType:              procMFInitAMMediaTypeFromMFMediaType,
+	MFInitAttributesFromBlob:                      procMFInitAttributesFromBlob,
+	MFInitMediaTypeFromAMMediaType:                procMFInitMediaTypeFromAMMediaType,
+	MFInitMediaTypeFromMFVideoFormat:              procMFInitMediaTypeFromMFVideoFormat,
+	MFInitMediaTypeFromMPEG1VideoInfo:             procMFInitMediaTypeFromMPEG1VideoInfo,
+	MFInitMediaTypeFromMPEG2VideoInfo:             procMFInitMediaTypeFromMPEG2VideoInfo,
+	MFInitMediaTypeFromVideoInfoHeader:            procMFInitMediaTypeFromVideoInfoHeader,
+	MFInitMediaTypeFromVideoInfoHeader2:           procMFInitMediaTypeFromVideoInfoHeader2,
+	MFInitMediaTypeFromWaveFormatEx:               procMFInitMediaTypeFromWaveFormatEx,
+	MFInitVideoFormat:                             procMFInitVideoFormat,
+	MFInitVideoFormat_RGB:                         procMFInitVideoFormat_RGB,
+	MFInvokeCallback:                              procMFInvokeCallback,
+	MFIsContentProtectionDeviceSupported:          procMFIsContentProtectionDeviceSupported,
+	MFIsFormatYUV:                                 procMFIsFormatYUV,
+	MFIsVirtualCameraTypeSupported:                procMFIsVirtualCameraTypeSupported,
+	MFLoadSignedLibrary:                           procMFLoadSignedLibrary,
+	MFLockDXGIDeviceManager:                       procMFLockDXGIDeviceManager,
+	MFLockPlatform:                                procMFLockPlatform,
+	MFLockSharedWorkQueue:                         procMFLockSharedWorkQueue,
+	MFLockWorkQueue:                               procMFLockWorkQueue,
+	MFMapDX9FormatToDXGIFormat:                    procMFMapDX9FormatToDXGIFormat,
+	MFMapDXGIFormatToDX9Format:                    procMFMapDXGIFormatToDX9Format,
+	MFPCreateMediaPlayer:                          procMFPCreateMediaPlayer,
+	MFPutWaitingWorkItem:                          procMFPutWaitingWorkItem,
+	MFPutWorkItem:                                 procMFPutWorkItem,
+	MFPutWorkItem2:                                procMFPutWorkItem2,
+	MFPutWorkItemEx:                               procMFPutWorkItemEx,
+	MFPutWorkItemEx2:                              procMFPutWorkItemEx2,
+	MFRegisterLocalByteStreamHandler:              procMFRegisterLocalByteStreamHandler,
+	MFRegisterLocalSchemeHandler:                  procMFRegisterLocalSchemeHandler,
+	MFRegisterPlatformWithMMCSS:                   procMFRegisterPlatformWithMMCSS,
+	MFRemovePeriodicCallback:                      procMFRemovePeriodicCallback,
+	MFRequireProtectedEnvironment:                 procMFRequireProtectedEnvironment,
+	MFScheduleWorkItem:                            procMFScheduleWorkItem,
+	MFScheduleWorkItemEx:                          procMFScheduleWorkItemEx,
+	MFSerializeAttributesToStream:                 procMFSerializeAttributesToStream,
+	MFSerializePresentationDescriptor:             procMFSerializePresentationDescriptor,
+	MFShutdown:                                    procMFShutdown,
+	MFShutdownObject:                              procMFShutdownObject,
+	MFSplitSample:                                 procMFSplitSample,
+	MFStartup:                                     procMFStartup,
+	MFTEnum:                                       procMFTEnum,
+	MFTEnum2:                                      procMFTEnum2,
+	MFTEnumEx:                                     procMFTEnumEx,
+	MFTGetInfo:                                    procMFTGetInfo,
+	MFTRegister:                                   procMFTRegister,
+	MFTRegisterLocal:                              procMFTRegisterLocal,
+	MFTRegisterLocalByCLSID:                       procMFTRegisterLocalByCLSID,
+	MFTUnregister:                                 procMFTUnregister,
+	MFTUnregisterLocal:                            procMFTUnregisterLocal,
+	MFTUnregisterLocalByCLSID:                     procMFTUnregisterLocalByCLSID,
+	MFTranscodeGetAudioOutputAvailableTypes:       procMFTranscodeGetAudioOutputAvailableTypes,
+	MFUnlockDXGIDeviceManager:                     procMFUnlockDXGIDeviceManager,
+	MFUnlockPlatform:                              procMFUnlockPlatform,
+	MFUnlockWorkQueue:                             procMFUnlockWorkQueue,
+	MFUnregisterPlatformFromMMCSS:                 procMFUnregisterPlatformFromMMCSS,
+	MFUnwrapMediaType:                             procMFUnwrapMediaType,
+	MFValidateMediaTypeSize:                       procMFValidateMediaTypeSize,
+	MFWrapMediaType:                               procMFWrapMediaType,
+	MFllMulDiv:                                    procMFllMulDiv,
+	OPMGetVideoOutputForTarget:                    procOPMGetVideoOutputForTarget,
+	OPMGetVideoOutputsFromHMONITOR:                procOPMGetVideoOutputsFromHMONITOR,
+	OPMGetVideoOutputsFromIDirect3DDevice9Object:  procOPMGetVideoOutputsFromIDirect3DDevice9Object,
+	OPMXboxEnableHDCP:                             procOPMXboxEnableHDCP,
+	OPMXboxGetHDCPStatus:                          procOPMXboxGetHDCPStatus,
+	OPMXboxGetHDCPStatusAndType:                   procOPMXboxGetHDCPStatusAndType,
+}
 
 // CreateNamedPropertyStore calls MF!CreateNamedPropertyStore.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-createnamedpropertystore
@@ -503,6 +1013,16 @@ func MFCreateAC3MediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMF
 // Minimum OS: windows8.0.
 func MFCreateADTSMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateADTSMediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppMediaSink)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFCreateAMMediaTypeFromMFMediaType = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// MFCreateAMMediaTypeFromMFMediaType calls MFPlat!MFCreateAMMediaTypeFromMFMediaType.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreateammediatypefrommfmediatype
+// Minimum OS: windows6.0.6000.
+func MFCreateAMMediaTypeFromMFMediaType(pMFType *IMFMediaType, guidFormatBlockType win32.GUID, ppAMType **AM_MEDIA_TYPE) error {
+	r1, _, _ := win32.Call(procMFCreateAMMediaTypeFromMFMediaType.Addr(), specMFCreateAMMediaTypeFromMFMediaType, nil, uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(&guidFormatBlockType)), uintptr(unsafe.Pointer(ppAMType))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -929,11 +1449,31 @@ func MFCreateMediaTypeFromProperties(punkStream *systemcom.IUnknown, ppMediaType
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specMFCreateMediaTypeFromRepresentation = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// MFCreateMediaTypeFromRepresentation calls MFPlat!MFCreateMediaTypeFromRepresentation.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediatypefromrepresentation
+// Minimum OS: windows6.0.6000.
+func MFCreateMediaTypeFromRepresentation(guidRepresentation win32.GUID, pvRepresentation unsafe.Pointer, ppIMediaType **IMFMediaType) error {
+	r1, _, _ := win32.Call(procMFCreateMediaTypeFromRepresentation.Addr(), specMFCreateMediaTypeFromRepresentation, nil, uintptr(unsafe.Pointer(&guidRepresentation)), uintptr(unsafe.Pointer(pvRepresentation)), uintptr(unsafe.Pointer(ppIMediaType))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MFCreateMemoryBuffer calls MFPlat!MFCreateMemoryBuffer.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatememorybuffer
 // Minimum OS: windows6.0.6000.
 func MFCreateMemoryBuffer(cbMaxLength uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMemoryBuffer.Addr(), uintptr(cbMaxLength), uintptr(unsafe.Pointer(ppBuffer)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFCreateMuxSink = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// MFCreateMuxSink calls MF!MFCreateMuxSink.
+// https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemuxsink
+// Minimum OS: windows8.0.
+func MFCreateMuxSink(guidOutputSubType win32.GUID, pOutputAttributes *IMFAttributes, pOutputByteStream *IMFByteStream, ppMuxSink **IMFMediaSink) error {
+	r1, _, _ := win32.Call(procMFCreateMuxSink.Addr(), specMFCreateMuxSink, nil, uintptr(unsafe.Pointer(&guidOutputSubType)), uintptr(unsafe.Pointer(pOutputAttributes)), uintptr(unsafe.Pointer(pOutputByteStream)), uintptr(unsafe.Pointer(ppMuxSink))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1099,8 +1639,8 @@ func MFCreateSensorGroup(SensorGroupSymbolicLink string, ppSensorGroup **IMFSens
 // MFCreateSensorProfile calls MFSENSORGROUP!MFCreateSensorProfile.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatesensorprofile
 // Minimum OS: windows10.0.17134.
-func MFCreateSensorProfile(ProfileType *win32.GUID, ProfileIndex uint32, Constraints string, ppProfile **IMFSensorProfile) error {
-	_Constraints := win32.UTF16Ptr(Constraints)
+func MFCreateSensorProfile(ProfileType *win32.GUID, ProfileIndex uint32, Constraints *string, ppProfile **IMFSensorProfile) error {
+	_Constraints := win32.UTF16PtrOrNil(Constraints)
 	r1, _, _ := syscall.SyscallN(procMFCreateSensorProfile.Addr(), uintptr(unsafe.Pointer(ProfileType)), uintptr(ProfileIndex), uintptr(unsafe.Pointer(_Constraints)), uintptr(unsafe.Pointer(ppProfile)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1156,8 +1696,8 @@ func MFCreateSinkWriterFromMediaSink(pMediaSink *IMFMediaSink, pAttributes *IMFA
 // MFCreateSinkWriterFromURL calls MFReadWrite!MFCreateSinkWriterFromURL.
 // https://learn.microsoft.com/windows/win32/api/mfreadwrite/nf-mfreadwrite-mfcreatesinkwriterfromurl
 // Minimum OS: windows6.1.
-func MFCreateSinkWriterFromURL(pwszOutputURL string, pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) error {
-	_pwszOutputURL := win32.UTF16Ptr(pwszOutputURL)
+func MFCreateSinkWriterFromURL(pwszOutputURL *string, pByteStream *IMFByteStream, pAttributes *IMFAttributes, ppSinkWriter **IMFSinkWriter) error {
+	_pwszOutputURL := win32.UTF16PtrOrNil(pwszOutputURL)
 	r1, _, _ := syscall.SyscallN(procMFCreateSinkWriterFromURL.Addr(), uintptr(unsafe.Pointer(_pwszOutputURL)), uintptr(unsafe.Pointer(pByteStream)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppSinkWriter)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1709,6 +2249,16 @@ func MFHeapFree(pv unsafe.Pointer) {
 	syscall.SyscallN(procMFHeapFree.Addr(), uintptr(unsafe.Pointer(pv)))
 }
 
+var specMFInitAMMediaTypeFromMFMediaType = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// MFInitAMMediaTypeFromMFMediaType calls MFPlat!MFInitAMMediaTypeFromMFMediaType.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitammediatypefrommfmediatype
+// Minimum OS: windows6.0.6000.
+func MFInitAMMediaTypeFromMFMediaType(pMFType *IMFMediaType, guidFormatBlockType win32.GUID, pAMType *AM_MEDIA_TYPE) error {
+	r1, _, _ := win32.Call(procMFInitAMMediaTypeFromMFMediaType.Addr(), specMFInitAMMediaTypeFromMFMediaType, nil, uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(&guidFormatBlockType)), uintptr(unsafe.Pointer(pAMType))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MFInitAttributesFromBlob calls MFPlat!MFInitAttributesFromBlob.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitattributesfromblob
 // Minimum OS: windows6.0.6000.
@@ -1885,8 +2435,8 @@ func MFMapDXGIFormatToDX9Format(dx11 graphicsdxgicommon.DXGI_FORMAT) uint32 {
 // MFPCreateMediaPlayer calls MFPlay!MFPCreateMediaPlayer.
 // https://learn.microsoft.com/windows/win32/api/mfplay/nf-mfplay-mfpcreatemediaplayer
 // Minimum OS: windows6.1.
-func MFPCreateMediaPlayer(pwszURL string, fStartPlayback bool, creationOptions MFP_CREATION_OPTIONS, pCallback *IMFPMediaPlayerCallback, hWnd foundation.HWND, ppMediaPlayer **IMFPMediaPlayer) error {
-	_pwszURL := win32.UTF16Ptr(pwszURL)
+func MFPCreateMediaPlayer(pwszURL *string, fStartPlayback bool, creationOptions MFP_CREATION_OPTIONS, pCallback *IMFPMediaPlayerCallback, hWnd foundation.HWND, ppMediaPlayer **IMFPMediaPlayer) error {
+	_pwszURL := win32.UTF16PtrOrNil(pwszURL)
 	_fStartPlayback := win32.Bool32(fStartPlayback)
 	r1, _, _ := syscall.SyscallN(procMFPCreateMediaPlayer.Addr(), uintptr(unsafe.Pointer(_pwszURL)), uintptr(_fStartPlayback), uintptr(creationOptions), uintptr(unsafe.Pointer(pCallback)), uintptr(hWnd), uintptr(unsafe.Pointer(ppMediaPlayer)))
 	return win32.ErrIfFailed(int32(r1))
@@ -2044,6 +2594,65 @@ func MFStartup(Version uint32, dwFlags uint32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specMFTEnum = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTEnum calls MFPlat!MFTEnum.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftenum
+// Minimum OS: windows6.0.6000.
+func MFTEnum(guidCategory win32.GUID, Flags uint32, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pAttributes *IMFAttributes, ppclsidMFT **win32.GUID, pcMFTs *uint32) error {
+	r1, _, _ := win32.Call(procMFTEnum.Addr(), specMFTEnum, nil, uintptr(unsafe.Pointer(&guidCategory)), uintptr(Flags), uintptr(unsafe.Pointer(pInputType)), uintptr(unsafe.Pointer(pOutputType)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppclsidMFT)), uintptr(unsafe.Pointer(pcMFTs))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTEnum2 = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTEnum2 calls MFPlat!MFTEnum2.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftenum2
+// Minimum OS: windows10.0.10240.
+func MFTEnum2(guidCategory win32.GUID, Flags uint32, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pAttributes *IMFAttributes, pppMFTActivate ***IMFActivate, pnumMFTActivate *uint32) error {
+	r1, _, _ := win32.Call(procMFTEnum2.Addr(), specMFTEnum2, nil, uintptr(unsafe.Pointer(&guidCategory)), uintptr(Flags), uintptr(unsafe.Pointer(pInputType)), uintptr(unsafe.Pointer(pOutputType)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pppMFTActivate)), uintptr(unsafe.Pointer(pnumMFTActivate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTEnumEx = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTEnumEx calls MFPlat!MFTEnumEx.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftenumex
+// Minimum OS: windows6.1.
+func MFTEnumEx(guidCategory win32.GUID, Flags uint32, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pppMFTActivate ***IMFActivate, pnumMFTActivate *uint32) error {
+	r1, _, _ := win32.Call(procMFTEnumEx.Addr(), specMFTEnumEx, nil, uintptr(unsafe.Pointer(&guidCategory)), uintptr(Flags), uintptr(unsafe.Pointer(pInputType)), uintptr(unsafe.Pointer(pOutputType)), uintptr(unsafe.Pointer(pppMFTActivate)), uintptr(unsafe.Pointer(pnumMFTActivate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTGetInfo = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTGetInfo calls MFPlat!MFTGetInfo.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftgetinfo
+// Minimum OS: windows6.0.6000.
+func MFTGetInfo(clsidMFT win32.GUID, pszName *foundation.PWSTR, ppInputTypes **MFT_REGISTER_TYPE_INFO, pcInputTypes *uint32, ppOutputTypes **MFT_REGISTER_TYPE_INFO, pcOutputTypes *uint32, ppAttributes **IMFAttributes) error {
+	r1, _, _ := win32.Call(procMFTGetInfo.Addr(), specMFTGetInfo, nil, uintptr(unsafe.Pointer(&clsidMFT)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(ppInputTypes)), uintptr(unsafe.Pointer(pcInputTypes)), uintptr(unsafe.Pointer(ppOutputTypes)), uintptr(unsafe.Pointer(pcOutputTypes)), uintptr(unsafe.Pointer(ppAttributes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTRegister = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTRegister calls MFPlat!MFTRegister.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftregister
+// Minimum OS: windows6.0.6000.
+func MFTRegister(clsidMFT win32.GUID, guidCategory win32.GUID, pszName string, Flags uint32, pInputTypes []MFT_REGISTER_TYPE_INFO, pOutputTypes []MFT_REGISTER_TYPE_INFO, pAttributes *IMFAttributes) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	var _pInputTypes *MFT_REGISTER_TYPE_INFO
+	if len(pInputTypes) > 0 {
+		_pInputTypes = &pInputTypes[0]
+	}
+	var _pOutputTypes *MFT_REGISTER_TYPE_INFO
+	if len(pOutputTypes) > 0 {
+		_pOutputTypes = &pOutputTypes[0]
+	}
+	r1, _, _ := win32.Call(procMFTRegister.Addr(), specMFTRegister, nil, uintptr(unsafe.Pointer(&clsidMFT)), uintptr(unsafe.Pointer(&guidCategory)), uintptr(unsafe.Pointer(_pszName)), uintptr(Flags), uintptr(len(pInputTypes)), uintptr(unsafe.Pointer(_pInputTypes)), uintptr(len(pOutputTypes)), uintptr(unsafe.Pointer(_pOutputTypes)), uintptr(unsafe.Pointer(pAttributes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MFTRegisterLocal calls MFPlat!MFTRegisterLocal.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftregisterlocal
 // Minimum OS: windows6.1.
@@ -2078,11 +2687,31 @@ func MFTRegisterLocalByCLSID(clisdMFT *win32.GUID, guidCategory *win32.GUID, psz
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specMFTUnregister = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false)}}
+
+// MFTUnregister calls MFPlat!MFTUnregister.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftunregister
+// Minimum OS: windows6.0.6000.
+func MFTUnregister(clsidMFT win32.GUID) error {
+	r1, _, _ := win32.Call(procMFTUnregister.Addr(), specMFTUnregister, nil, uintptr(unsafe.Pointer(&clsidMFT))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MFTUnregisterLocal calls MFPlat!MFTUnregisterLocal.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftunregisterlocal
 // Minimum OS: windows6.1.
 func MFTUnregisterLocal(pClassFactory *systemcom.IClassFactory) error {
 	r1, _, _ := syscall.SyscallN(procMFTUnregisterLocal.Addr(), uintptr(unsafe.Pointer(pClassFactory)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTUnregisterLocalByCLSID = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false)}}
+
+// MFTUnregisterLocalByCLSID calls MFPlat!MFTUnregisterLocalByCLSID.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftunregisterlocalbyclsid
+// Minimum OS: windows6.1.
+func MFTUnregisterLocalByCLSID(clsidMFT win32.GUID) error {
+	r1, _, _ := win32.Call(procMFTUnregisterLocalByCLSID.Addr(), specMFTUnregisterLocalByCLSID, nil, uintptr(unsafe.Pointer(&clsidMFT))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2131,6 +2760,20 @@ func MFUnregisterPlatformFromMMCSS() error {
 // Minimum OS: windows6.0.6000.
 func MFUnwrapMediaType(pWrap *IMFMediaType, ppOrig **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFUnwrapMediaType.Addr(), uintptr(unsafe.Pointer(pWrap)), uintptr(unsafe.Pointer(ppOrig)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFValidateMediaTypeSize = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// MFValidateMediaTypeSize calls MFPlat!MFValidateMediaTypeSize.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfvalidatemediatypesize
+// Minimum OS: windows6.0.6000.
+func MFValidateMediaTypeSize(FormatType win32.GUID, pBlock []byte) error {
+	var _pBlock *byte
+	if len(pBlock) > 0 {
+		_pBlock = &pBlock[0]
+	}
+	r1, _, _ := win32.Call(procMFValidateMediaTypeSize.Addr(), specMFValidateMediaTypeSize, nil, uintptr(unsafe.Pointer(&FormatType)), uintptr(unsafe.Pointer(_pBlock)), uintptr(len(pBlock))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

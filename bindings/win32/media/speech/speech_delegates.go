@@ -4,6 +4,6 @@
 
 package speech
 
-// SPNOTIFYCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.WPARAM, foundation.LPARAM).
+// SPNOTIFYCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.WPARAM, foundation.LPARAM) uintptr.
 type SPNOTIFYCALLBACK uintptr

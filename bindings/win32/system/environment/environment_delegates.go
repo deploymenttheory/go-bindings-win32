@@ -4,54 +4,66 @@
 
 package environment
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, unsafe.Pointer, uint32) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, unsafe.Pointer, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*ENCLAVE_VBS_BASIC_KEY_REQUEST, uint32, *byte) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*ENCLAVE_VBS_BASIC_KEY_REQUEST, uint32, *byte) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, *uint64) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, *uint64) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, unsafe.Pointer, uint32, *uint32) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*ENCLAVE_INFORMATION) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*ENCLAVE_INFORMATION) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, uint32) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr.
 type VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD uintptr
 
-// VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32) int32.
+// VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT uintptr

@@ -21,6 +21,18 @@ var (
 	procDirect3DCreate9On12Ex = modd3d9.NewProc("Direct3DCreate9On12Ex")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	Direct3DCreate9On12   *win32.Proc
+	Direct3DCreate9On12Ex *win32.Proc
+}{
+	Direct3DCreate9On12:   procDirect3DCreate9On12,
+	Direct3DCreate9On12Ex: procDirect3DCreate9On12Ex,
+}
+
 // Direct3DCreate9On12 calls d3d9!Direct3DCreate9On12.
 func Direct3DCreate9On12(SDKVersion uint32, pOverrideList *D3D9ON12_ARGS, NumOverrideEntries uint32) *graphicsdirect3d9.IDirect3D9 {
 	r1, _, _ := syscall.SyscallN(procDirect3DCreate9On12.Addr(), uintptr(SDKVersion), uintptr(unsafe.Pointer(pOverrideList)), uintptr(NumOverrideEntries))

@@ -4,7 +4,11 @@
 
 package power
 
-// CloseHPOWERNOTIFY releases a HPOWERNOTIFY handle by calling UnregisterPowerSettingNotification.
+// CloseHPOWERNOTIFY releases a HPOWERNOTIFY handle by calling UnregisterPowerSettingNotification. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHPOWERNOTIFY(h HPOWERNOTIFY) error {
+	if h == ^HPOWERNOTIFY(0) || h == 0 {
+		return nil
+	}
 	return UnregisterPowerSettingNotification(HPOWERNOTIFY(h))
 }

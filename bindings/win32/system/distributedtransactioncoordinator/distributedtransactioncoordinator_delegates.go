@@ -4,58 +4,72 @@
 
 package distributedtransactioncoordinator
 
-// DTC_GET_TRANSACTION_MANAGER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, *win32.GUID, uint32, uint16, unsafe.Pointer, *unsafe.Pointer) foundation.HRESULT.
+// DTC_GET_TRANSACTION_MANAGER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, *win32.GUID, uint32, uint16, unsafe.Pointer, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DTC_GET_TRANSACTION_MANAGER uintptr
 
-// DTC_GET_TRANSACTION_MANAGER_EX_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, *win32.GUID, uint32, unsafe.Pointer, *unsafe.Pointer) foundation.HRESULT.
+// DTC_GET_TRANSACTION_MANAGER_EX_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, *win32.GUID, uint32, unsafe.Pointer, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DTC_GET_TRANSACTION_MANAGER_EX_A uintptr
 
-// DTC_GET_TRANSACTION_MANAGER_EX_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *win32.GUID, uint32, unsafe.Pointer, *unsafe.Pointer) foundation.HRESULT.
+// DTC_GET_TRANSACTION_MANAGER_EX_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *win32.GUID, uint32, unsafe.Pointer, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DTC_GET_TRANSACTION_MANAGER_EX_W uintptr
 
-// DTC_INSTALL_CLIENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int8, uint32, uint32) foundation.HRESULT.
+// DTC_INSTALL_CLIENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int8, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DTC_INSTALL_CLIENT uintptr
 
-// XA_CLOSE_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, int32, int32) int32.
+// XA_CLOSE_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_CLOSE_EPT uintptr
 
-// XA_COMMIT_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*XID, int32, int32) int32.
+// XA_COMMIT_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*XID, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_COMMIT_EPT uintptr
 
-// XA_COMPLETE_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int32, *int32, int32, int32) int32.
+// XA_COMPLETE_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int32, *int32, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_COMPLETE_EPT uintptr
 
-// XA_END_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*XID, int32, int32) int32.
+// XA_END_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*XID, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_END_EPT uintptr
 
-// XA_FORGET_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*XID, int32, int32) int32.
+// XA_FORGET_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*XID, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_FORGET_EPT uintptr
 
-// XA_OPEN_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, int32, int32) int32.
+// XA_OPEN_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_OPEN_EPT uintptr
 
-// XA_PREPARE_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*XID, int32, int32) int32.
+// XA_PREPARE_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*XID, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_PREPARE_EPT uintptr
 
-// XA_RECOVER_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*XID, int32, int32, int32) int32.
+// XA_RECOVER_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*XID, int32, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_RECOVER_EPT uintptr
 
-// XA_ROLLBACK_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*XID, int32, int32) int32.
+// XA_ROLLBACK_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*XID, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_ROLLBACK_EPT uintptr
 
-// XA_START_EPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*XID, int32, int32) int32.
+// XA_START_EPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*XID, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type XA_START_EPT uintptr

@@ -4,6 +4,6 @@
 
 package extensibleauthenticationprotocol
 
-// NotificationHandler is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(win32.GUID, unsafe.Pointer).
+// NotificationHandler is a callback pointer: create one with syscall.NewCallback
+// using the shape func(win32.GUID, unsafe.Pointer) uintptr.
 type NotificationHandler uintptr

@@ -5,6 +5,7 @@
 package gdiplus
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -21,36 +22,55 @@ var (
 )
 
 var (
+	procGdipAddPathArc                                   = modgdiplus.NewProc("GdipAddPathArc")
+	procGdipAddPathArcI                                  = modgdiplus.NewProc("GdipAddPathArcI")
+	procGdipAddPathBezier                                = modgdiplus.NewProc("GdipAddPathBezier")
 	procGdipAddPathBezierI                               = modgdiplus.NewProc("GdipAddPathBezierI")
 	procGdipAddPathBeziers                               = modgdiplus.NewProc("GdipAddPathBeziers")
 	procGdipAddPathBeziersI                              = modgdiplus.NewProc("GdipAddPathBeziersI")
 	procGdipAddPathClosedCurve                           = modgdiplus.NewProc("GdipAddPathClosedCurve")
+	procGdipAddPathClosedCurve2                          = modgdiplus.NewProc("GdipAddPathClosedCurve2")
+	procGdipAddPathClosedCurve2I                         = modgdiplus.NewProc("GdipAddPathClosedCurve2I")
 	procGdipAddPathClosedCurveI                          = modgdiplus.NewProc("GdipAddPathClosedCurveI")
 	procGdipAddPathCurve                                 = modgdiplus.NewProc("GdipAddPathCurve")
+	procGdipAddPathCurve2                                = modgdiplus.NewProc("GdipAddPathCurve2")
+	procGdipAddPathCurve2I                               = modgdiplus.NewProc("GdipAddPathCurve2I")
+	procGdipAddPathCurve3                                = modgdiplus.NewProc("GdipAddPathCurve3")
+	procGdipAddPathCurve3I                               = modgdiplus.NewProc("GdipAddPathCurve3I")
 	procGdipAddPathCurveI                                = modgdiplus.NewProc("GdipAddPathCurveI")
+	procGdipAddPathEllipse                               = modgdiplus.NewProc("GdipAddPathEllipse")
 	procGdipAddPathEllipseI                              = modgdiplus.NewProc("GdipAddPathEllipseI")
+	procGdipAddPathLine                                  = modgdiplus.NewProc("GdipAddPathLine")
 	procGdipAddPathLine2                                 = modgdiplus.NewProc("GdipAddPathLine2")
 	procGdipAddPathLine2I                                = modgdiplus.NewProc("GdipAddPathLine2I")
 	procGdipAddPathLineI                                 = modgdiplus.NewProc("GdipAddPathLineI")
 	procGdipAddPathPath                                  = modgdiplus.NewProc("GdipAddPathPath")
+	procGdipAddPathPie                                   = modgdiplus.NewProc("GdipAddPathPie")
+	procGdipAddPathPieI                                  = modgdiplus.NewProc("GdipAddPathPieI")
 	procGdipAddPathPolygon                               = modgdiplus.NewProc("GdipAddPathPolygon")
 	procGdipAddPathPolygonI                              = modgdiplus.NewProc("GdipAddPathPolygonI")
+	procGdipAddPathRectangle                             = modgdiplus.NewProc("GdipAddPathRectangle")
 	procGdipAddPathRectangleI                            = modgdiplus.NewProc("GdipAddPathRectangleI")
 	procGdipAddPathRectangles                            = modgdiplus.NewProc("GdipAddPathRectangles")
 	procGdipAddPathRectanglesI                           = modgdiplus.NewProc("GdipAddPathRectanglesI")
+	procGdipAddPathString                                = modgdiplus.NewProc("GdipAddPathString")
+	procGdipAddPathStringI                               = modgdiplus.NewProc("GdipAddPathStringI")
 	procGdipAlloc                                        = modgdiplus.NewProc("GdipAlloc")
 	procGdipBeginContainer                               = modgdiplus.NewProc("GdipBeginContainer")
 	procGdipBeginContainer2                              = modgdiplus.NewProc("GdipBeginContainer2")
 	procGdipBeginContainerI                              = modgdiplus.NewProc("GdipBeginContainerI")
 	procGdipBitmapApplyEffect                            = modgdiplus.NewProc("GdipBitmapApplyEffect")
+	procGdipBitmapConvertFormat                          = modgdiplus.NewProc("GdipBitmapConvertFormat")
 	procGdipBitmapCreateApplyEffect                      = modgdiplus.NewProc("GdipBitmapCreateApplyEffect")
 	procGdipBitmapGetHistogram                           = modgdiplus.NewProc("GdipBitmapGetHistogram")
 	procGdipBitmapGetHistogramSize                       = modgdiplus.NewProc("GdipBitmapGetHistogramSize")
 	procGdipBitmapGetPixel                               = modgdiplus.NewProc("GdipBitmapGetPixel")
 	procGdipBitmapLockBits                               = modgdiplus.NewProc("GdipBitmapLockBits")
 	procGdipBitmapSetPixel                               = modgdiplus.NewProc("GdipBitmapSetPixel")
+	procGdipBitmapSetResolution                          = modgdiplus.NewProc("GdipBitmapSetResolution")
 	procGdipBitmapUnlockBits                             = modgdiplus.NewProc("GdipBitmapUnlockBits")
 	procGdipClearPathMarkers                             = modgdiplus.NewProc("GdipClearPathMarkers")
+	procGdipCloneBitmapArea                              = modgdiplus.NewProc("GdipCloneBitmapArea")
 	procGdipCloneBitmapAreaI                             = modgdiplus.NewProc("GdipCloneBitmapAreaI")
 	procGdipCloneBrush                                   = modgdiplus.NewProc("GdipCloneBrush")
 	procGdipCloneCustomLineCap                           = modgdiplus.NewProc("GdipCloneCustomLineCap")
@@ -73,6 +93,7 @@ var (
 	procGdipConvertToEmfPlus                             = modgdiplus.NewProc("GdipConvertToEmfPlus")
 	procGdipConvertToEmfPlusToFile                       = modgdiplus.NewProc("GdipConvertToEmfPlusToFile")
 	procGdipConvertToEmfPlusToStream                     = modgdiplus.NewProc("GdipConvertToEmfPlusToStream")
+	procGdipCreateAdjustableArrowCap                     = modgdiplus.NewProc("GdipCreateAdjustableArrowCap")
 	procGdipCreateBitmapFromDirectDrawSurface            = modgdiplus.NewProc("GdipCreateBitmapFromDirectDrawSurface")
 	procGdipCreateBitmapFromFile                         = modgdiplus.NewProc("GdipCreateBitmapFromFile")
 	procGdipCreateBitmapFromFileICM                      = modgdiplus.NewProc("GdipCreateBitmapFromFileICM")
@@ -85,6 +106,9 @@ var (
 	procGdipCreateBitmapFromStream                       = modgdiplus.NewProc("GdipCreateBitmapFromStream")
 	procGdipCreateBitmapFromStreamICM                    = modgdiplus.NewProc("GdipCreateBitmapFromStreamICM")
 	procGdipCreateCachedBitmap                           = modgdiplus.NewProc("GdipCreateCachedBitmap")
+	procGdipCreateCustomLineCap                          = modgdiplus.NewProc("GdipCreateCustomLineCap")
+	procGdipCreateEffect                                 = modgdiplus.NewProc("GdipCreateEffect")
+	procGdipCreateFont                                   = modgdiplus.NewProc("GdipCreateFont")
 	procGdipCreateFontFamilyFromName                     = modgdiplus.NewProc("GdipCreateFontFamilyFromName")
 	procGdipCreateFontFromDC                             = modgdiplus.NewProc("GdipCreateFontFromDC")
 	procGdipCreateFontFromLogfont                        = modgdiplus.NewProc("GdipCreateFontFromLogfontW")
@@ -101,8 +125,11 @@ var (
 	procGdipCreateLineBrush                              = modgdiplus.NewProc("GdipCreateLineBrush")
 	procGdipCreateLineBrushFromRect                      = modgdiplus.NewProc("GdipCreateLineBrushFromRect")
 	procGdipCreateLineBrushFromRectI                     = modgdiplus.NewProc("GdipCreateLineBrushFromRectI")
+	procGdipCreateLineBrushFromRectWithAngle             = modgdiplus.NewProc("GdipCreateLineBrushFromRectWithAngle")
+	procGdipCreateLineBrushFromRectWithAngleI            = modgdiplus.NewProc("GdipCreateLineBrushFromRectWithAngleI")
 	procGdipCreateLineBrushI                             = modgdiplus.NewProc("GdipCreateLineBrushI")
 	procGdipCreateMatrix                                 = modgdiplus.NewProc("GdipCreateMatrix")
+	procGdipCreateMatrix2                                = modgdiplus.NewProc("GdipCreateMatrix2")
 	procGdipCreateMatrix3                                = modgdiplus.NewProc("GdipCreateMatrix3")
 	procGdipCreateMatrix3I                               = modgdiplus.NewProc("GdipCreateMatrix3I")
 	procGdipCreateMetafileFromEmf                        = modgdiplus.NewProc("GdipCreateMetafileFromEmf")
@@ -117,6 +144,8 @@ var (
 	procGdipCreatePathGradientFromPath                   = modgdiplus.NewProc("GdipCreatePathGradientFromPath")
 	procGdipCreatePathGradientI                          = modgdiplus.NewProc("GdipCreatePathGradientI")
 	procGdipCreatePathIter                               = modgdiplus.NewProc("GdipCreatePathIter")
+	procGdipCreatePen1                                   = modgdiplus.NewProc("GdipCreatePen1")
+	procGdipCreatePen2                                   = modgdiplus.NewProc("GdipCreatePen2")
 	procGdipCreateRegion                                 = modgdiplus.NewProc("GdipCreateRegion")
 	procGdipCreateRegionHrgn                             = modgdiplus.NewProc("GdipCreateRegionHrgn")
 	procGdipCreateRegionPath                             = modgdiplus.NewProc("GdipCreateRegionPath")
@@ -127,7 +156,9 @@ var (
 	procGdipCreateStreamOnFile                           = modgdiplus.NewProc("GdipCreateStreamOnFile")
 	procGdipCreateStringFormat                           = modgdiplus.NewProc("GdipCreateStringFormat")
 	procGdipCreateTexture                                = modgdiplus.NewProc("GdipCreateTexture")
+	procGdipCreateTexture2                               = modgdiplus.NewProc("GdipCreateTexture2")
 	procGdipCreateTexture2I                              = modgdiplus.NewProc("GdipCreateTexture2I")
+	procGdipCreateTextureIA                              = modgdiplus.NewProc("GdipCreateTextureIA")
 	procGdipCreateTextureIAI                             = modgdiplus.NewProc("GdipCreateTextureIAI")
 	procGdipDeleteBrush                                  = modgdiplus.NewProc("GdipDeleteBrush")
 	procGdipDeleteCachedBitmap                           = modgdiplus.NewProc("GdipDeleteCachedBitmap")
@@ -145,30 +176,49 @@ var (
 	procGdipDeleteStringFormat                           = modgdiplus.NewProc("GdipDeleteStringFormat")
 	procGdipDisposeImage                                 = modgdiplus.NewProc("GdipDisposeImage")
 	procGdipDisposeImageAttributes                       = modgdiplus.NewProc("GdipDisposeImageAttributes")
+	procGdipDrawArc                                      = modgdiplus.NewProc("GdipDrawArc")
+	procGdipDrawArcI                                     = modgdiplus.NewProc("GdipDrawArcI")
+	procGdipDrawBezier                                   = modgdiplus.NewProc("GdipDrawBezier")
 	procGdipDrawBezierI                                  = modgdiplus.NewProc("GdipDrawBezierI")
 	procGdipDrawBeziers                                  = modgdiplus.NewProc("GdipDrawBeziers")
 	procGdipDrawBeziersI                                 = modgdiplus.NewProc("GdipDrawBeziersI")
 	procGdipDrawCachedBitmap                             = modgdiplus.NewProc("GdipDrawCachedBitmap")
 	procGdipDrawClosedCurve                              = modgdiplus.NewProc("GdipDrawClosedCurve")
+	procGdipDrawClosedCurve2                             = modgdiplus.NewProc("GdipDrawClosedCurve2")
+	procGdipDrawClosedCurve2I                            = modgdiplus.NewProc("GdipDrawClosedCurve2I")
 	procGdipDrawClosedCurveI                             = modgdiplus.NewProc("GdipDrawClosedCurveI")
 	procGdipDrawCurve                                    = modgdiplus.NewProc("GdipDrawCurve")
+	procGdipDrawCurve2                                   = modgdiplus.NewProc("GdipDrawCurve2")
+	procGdipDrawCurve2I                                  = modgdiplus.NewProc("GdipDrawCurve2I")
+	procGdipDrawCurve3                                   = modgdiplus.NewProc("GdipDrawCurve3")
+	procGdipDrawCurve3I                                  = modgdiplus.NewProc("GdipDrawCurve3I")
 	procGdipDrawCurveI                                   = modgdiplus.NewProc("GdipDrawCurveI")
 	procGdipDrawDriverString                             = modgdiplus.NewProc("GdipDrawDriverString")
+	procGdipDrawEllipse                                  = modgdiplus.NewProc("GdipDrawEllipse")
 	procGdipDrawEllipseI                                 = modgdiplus.NewProc("GdipDrawEllipseI")
+	procGdipDrawImage                                    = modgdiplus.NewProc("GdipDrawImage")
 	procGdipDrawImageFX                                  = modgdiplus.NewProc("GdipDrawImageFX")
 	procGdipDrawImageI                                   = modgdiplus.NewProc("GdipDrawImageI")
+	procGdipDrawImagePointRect                           = modgdiplus.NewProc("GdipDrawImagePointRect")
 	procGdipDrawImagePointRectI                          = modgdiplus.NewProc("GdipDrawImagePointRectI")
 	procGdipDrawImagePoints                              = modgdiplus.NewProc("GdipDrawImagePoints")
 	procGdipDrawImagePointsI                             = modgdiplus.NewProc("GdipDrawImagePointsI")
+	procGdipDrawImagePointsRect                          = modgdiplus.NewProc("GdipDrawImagePointsRect")
 	procGdipDrawImagePointsRectI                         = modgdiplus.NewProc("GdipDrawImagePointsRectI")
+	procGdipDrawImageRect                                = modgdiplus.NewProc("GdipDrawImageRect")
 	procGdipDrawImageRectI                               = modgdiplus.NewProc("GdipDrawImageRectI")
+	procGdipDrawImageRectRect                            = modgdiplus.NewProc("GdipDrawImageRectRect")
 	procGdipDrawImageRectRectI                           = modgdiplus.NewProc("GdipDrawImageRectRectI")
+	procGdipDrawLine                                     = modgdiplus.NewProc("GdipDrawLine")
 	procGdipDrawLineI                                    = modgdiplus.NewProc("GdipDrawLineI")
 	procGdipDrawLines                                    = modgdiplus.NewProc("GdipDrawLines")
 	procGdipDrawLinesI                                   = modgdiplus.NewProc("GdipDrawLinesI")
 	procGdipDrawPath                                     = modgdiplus.NewProc("GdipDrawPath")
+	procGdipDrawPie                                      = modgdiplus.NewProc("GdipDrawPie")
+	procGdipDrawPieI                                     = modgdiplus.NewProc("GdipDrawPieI")
 	procGdipDrawPolygon                                  = modgdiplus.NewProc("GdipDrawPolygon")
 	procGdipDrawPolygonI                                 = modgdiplus.NewProc("GdipDrawPolygonI")
+	procGdipDrawRectangle                                = modgdiplus.NewProc("GdipDrawRectangle")
 	procGdipDrawRectangleI                               = modgdiplus.NewProc("GdipDrawRectangleI")
 	procGdipDrawRectangles                               = modgdiplus.NewProc("GdipDrawRectangles")
 	procGdipDrawRectanglesI                              = modgdiplus.NewProc("GdipDrawRectanglesI")
@@ -188,19 +238,26 @@ var (
 	procGdipEnumerateMetafileSrcRectDestRect             = modgdiplus.NewProc("GdipEnumerateMetafileSrcRectDestRect")
 	procGdipEnumerateMetafileSrcRectDestRectI            = modgdiplus.NewProc("GdipEnumerateMetafileSrcRectDestRectI")
 	procGdipFillClosedCurve                              = modgdiplus.NewProc("GdipFillClosedCurve")
+	procGdipFillClosedCurve2                             = modgdiplus.NewProc("GdipFillClosedCurve2")
+	procGdipFillClosedCurve2I                            = modgdiplus.NewProc("GdipFillClosedCurve2I")
 	procGdipFillClosedCurveI                             = modgdiplus.NewProc("GdipFillClosedCurveI")
+	procGdipFillEllipse                                  = modgdiplus.NewProc("GdipFillEllipse")
 	procGdipFillEllipseI                                 = modgdiplus.NewProc("GdipFillEllipseI")
 	procGdipFillPath                                     = modgdiplus.NewProc("GdipFillPath")
+	procGdipFillPie                                      = modgdiplus.NewProc("GdipFillPie")
+	procGdipFillPieI                                     = modgdiplus.NewProc("GdipFillPieI")
 	procGdipFillPolygon                                  = modgdiplus.NewProc("GdipFillPolygon")
 	procGdipFillPolygon2                                 = modgdiplus.NewProc("GdipFillPolygon2")
 	procGdipFillPolygon2I                                = modgdiplus.NewProc("GdipFillPolygon2I")
 	procGdipFillPolygonI                                 = modgdiplus.NewProc("GdipFillPolygonI")
+	procGdipFillRectangle                                = modgdiplus.NewProc("GdipFillRectangle")
 	procGdipFillRectangleI                               = modgdiplus.NewProc("GdipFillRectangleI")
 	procGdipFillRectangles                               = modgdiplus.NewProc("GdipFillRectangles")
 	procGdipFillRectanglesI                              = modgdiplus.NewProc("GdipFillRectanglesI")
 	procGdipFillRegion                                   = modgdiplus.NewProc("GdipFillRegion")
 	procGdipFindFirstImageItem                           = modgdiplus.NewProc("GdipFindFirstImageItem")
 	procGdipFindNextImageItem                            = modgdiplus.NewProc("GdipFindNextImageItem")
+	procGdipFlattenPath                                  = modgdiplus.NewProc("GdipFlattenPath")
 	procGdipFlush                                        = modgdiplus.NewProc("GdipFlush")
 	procGdipFree                                         = modgdiplus.NewProc("GdipFree")
 	procGdipGetAdjustableArrowCapFillState               = modgdiplus.NewProc("GdipGetAdjustableArrowCapFillState")
@@ -235,6 +292,7 @@ var (
 	procGdipGetFontCollectionFamilyCount                 = modgdiplus.NewProc("GdipGetFontCollectionFamilyCount")
 	procGdipGetFontCollectionFamilyList                  = modgdiplus.NewProc("GdipGetFontCollectionFamilyList")
 	procGdipGetFontHeight                                = modgdiplus.NewProc("GdipGetFontHeight")
+	procGdipGetFontHeightGivenDPI                        = modgdiplus.NewProc("GdipGetFontHeightGivenDPI")
 	procGdipGetFontSize                                  = modgdiplus.NewProc("GdipGetFontSize")
 	procGdipGetFontStyle                                 = modgdiplus.NewProc("GdipGetFontStyle")
 	procGdipGetFontUnit                                  = modgdiplus.NewProc("GdipGetFontUnit")
@@ -387,13 +445,19 @@ var (
 	procGdipIsMatrixEqual                                = modgdiplus.NewProc("GdipIsMatrixEqual")
 	procGdipIsMatrixIdentity                             = modgdiplus.NewProc("GdipIsMatrixIdentity")
 	procGdipIsMatrixInvertible                           = modgdiplus.NewProc("GdipIsMatrixInvertible")
+	procGdipIsOutlineVisiblePathPoint                    = modgdiplus.NewProc("GdipIsOutlineVisiblePathPoint")
 	procGdipIsOutlineVisiblePathPointI                   = modgdiplus.NewProc("GdipIsOutlineVisiblePathPointI")
 	procGdipIsStyleAvailable                             = modgdiplus.NewProc("GdipIsStyleAvailable")
 	procGdipIsVisibleClipEmpty                           = modgdiplus.NewProc("GdipIsVisibleClipEmpty")
+	procGdipIsVisiblePathPoint                           = modgdiplus.NewProc("GdipIsVisiblePathPoint")
 	procGdipIsVisiblePathPointI                          = modgdiplus.NewProc("GdipIsVisiblePathPointI")
+	procGdipIsVisiblePoint                               = modgdiplus.NewProc("GdipIsVisiblePoint")
 	procGdipIsVisiblePointI                              = modgdiplus.NewProc("GdipIsVisiblePointI")
+	procGdipIsVisibleRect                                = modgdiplus.NewProc("GdipIsVisibleRect")
 	procGdipIsVisibleRectI                               = modgdiplus.NewProc("GdipIsVisibleRectI")
+	procGdipIsVisibleRegionPoint                         = modgdiplus.NewProc("GdipIsVisibleRegionPoint")
 	procGdipIsVisibleRegionPointI                        = modgdiplus.NewProc("GdipIsVisibleRegionPointI")
+	procGdipIsVisibleRegionRect                          = modgdiplus.NewProc("GdipIsVisibleRegionRect")
 	procGdipIsVisibleRegionRectI                         = modgdiplus.NewProc("GdipIsVisibleRegionRectI")
 	procGdipLoadImageFromFile                            = modgdiplus.NewProc("GdipLoadImageFromFile")
 	procGdipLoadImageFromFileICM                         = modgdiplus.NewProc("GdipLoadImageFromFileICM")
@@ -444,31 +508,51 @@ var (
 	procGdipResetWorldTransform                          = modgdiplus.NewProc("GdipResetWorldTransform")
 	procGdipRestoreGraphics                              = modgdiplus.NewProc("GdipRestoreGraphics")
 	procGdipReversePath                                  = modgdiplus.NewProc("GdipReversePath")
+	procGdipRotateLineTransform                          = modgdiplus.NewProc("GdipRotateLineTransform")
+	procGdipRotateMatrix                                 = modgdiplus.NewProc("GdipRotateMatrix")
+	procGdipRotatePathGradientTransform                  = modgdiplus.NewProc("GdipRotatePathGradientTransform")
+	procGdipRotatePenTransform                           = modgdiplus.NewProc("GdipRotatePenTransform")
+	procGdipRotateTextureTransform                       = modgdiplus.NewProc("GdipRotateTextureTransform")
+	procGdipRotateWorldTransform                         = modgdiplus.NewProc("GdipRotateWorldTransform")
 	procGdipSaveAdd                                      = modgdiplus.NewProc("GdipSaveAdd")
 	procGdipSaveAddImage                                 = modgdiplus.NewProc("GdipSaveAddImage")
 	procGdipSaveGraphics                                 = modgdiplus.NewProc("GdipSaveGraphics")
 	procGdipSaveImageToFile                              = modgdiplus.NewProc("GdipSaveImageToFile")
 	procGdipSaveImageToStream                            = modgdiplus.NewProc("GdipSaveImageToStream")
+	procGdipScaleLineTransform                           = modgdiplus.NewProc("GdipScaleLineTransform")
+	procGdipScaleMatrix                                  = modgdiplus.NewProc("GdipScaleMatrix")
+	procGdipScalePathGradientTransform                   = modgdiplus.NewProc("GdipScalePathGradientTransform")
+	procGdipScalePenTransform                            = modgdiplus.NewProc("GdipScalePenTransform")
+	procGdipScaleTextureTransform                        = modgdiplus.NewProc("GdipScaleTextureTransform")
+	procGdipScaleWorldTransform                          = modgdiplus.NewProc("GdipScaleWorldTransform")
 	procGdipSetAdjustableArrowCapFillState               = modgdiplus.NewProc("GdipSetAdjustableArrowCapFillState")
+	procGdipSetAdjustableArrowCapHeight                  = modgdiplus.NewProc("GdipSetAdjustableArrowCapHeight")
+	procGdipSetAdjustableArrowCapMiddleInset             = modgdiplus.NewProc("GdipSetAdjustableArrowCapMiddleInset")
+	procGdipSetAdjustableArrowCapWidth                   = modgdiplus.NewProc("GdipSetAdjustableArrowCapWidth")
 	procGdipSetClipGraphics                              = modgdiplus.NewProc("GdipSetClipGraphics")
 	procGdipSetClipHrgn                                  = modgdiplus.NewProc("GdipSetClipHrgn")
 	procGdipSetClipPath                                  = modgdiplus.NewProc("GdipSetClipPath")
+	procGdipSetClipRect                                  = modgdiplus.NewProc("GdipSetClipRect")
 	procGdipSetClipRectI                                 = modgdiplus.NewProc("GdipSetClipRectI")
 	procGdipSetClipRegion                                = modgdiplus.NewProc("GdipSetClipRegion")
 	procGdipSetCompositingMode                           = modgdiplus.NewProc("GdipSetCompositingMode")
 	procGdipSetCompositingQuality                        = modgdiplus.NewProc("GdipSetCompositingQuality")
 	procGdipSetCustomLineCapBaseCap                      = modgdiplus.NewProc("GdipSetCustomLineCapBaseCap")
+	procGdipSetCustomLineCapBaseInset                    = modgdiplus.NewProc("GdipSetCustomLineCapBaseInset")
 	procGdipSetCustomLineCapStrokeCaps                   = modgdiplus.NewProc("GdipSetCustomLineCapStrokeCaps")
 	procGdipSetCustomLineCapStrokeJoin                   = modgdiplus.NewProc("GdipSetCustomLineCapStrokeJoin")
+	procGdipSetCustomLineCapWidthScale                   = modgdiplus.NewProc("GdipSetCustomLineCapWidthScale")
 	procGdipSetEffectParameters                          = modgdiplus.NewProc("GdipSetEffectParameters")
 	procGdipSetEmpty                                     = modgdiplus.NewProc("GdipSetEmpty")
 	procGdipSetImageAttributesCachedBackground           = modgdiplus.NewProc("GdipSetImageAttributesCachedBackground")
 	procGdipSetImageAttributesColorKeys                  = modgdiplus.NewProc("GdipSetImageAttributesColorKeys")
 	procGdipSetImageAttributesColorMatrix                = modgdiplus.NewProc("GdipSetImageAttributesColorMatrix")
+	procGdipSetImageAttributesGamma                      = modgdiplus.NewProc("GdipSetImageAttributesGamma")
 	procGdipSetImageAttributesNoOp                       = modgdiplus.NewProc("GdipSetImageAttributesNoOp")
 	procGdipSetImageAttributesOutputChannel              = modgdiplus.NewProc("GdipSetImageAttributesOutputChannel")
 	procGdipSetImageAttributesOutputChannelColorProfile  = modgdiplus.NewProc("GdipSetImageAttributesOutputChannelColorProfile")
 	procGdipSetImageAttributesRemapTable                 = modgdiplus.NewProc("GdipSetImageAttributesRemapTable")
+	procGdipSetImageAttributesThreshold                  = modgdiplus.NewProc("GdipSetImageAttributesThreshold")
 	procGdipSetImageAttributesToIdentity                 = modgdiplus.NewProc("GdipSetImageAttributesToIdentity")
 	procGdipSetImageAttributesWrapMode                   = modgdiplus.NewProc("GdipSetImageAttributesWrapMode")
 	procGdipSetImagePalette                              = modgdiplus.NewProc("GdipSetImagePalette")
@@ -477,19 +561,26 @@ var (
 	procGdipSetLineBlend                                 = modgdiplus.NewProc("GdipSetLineBlend")
 	procGdipSetLineColors                                = modgdiplus.NewProc("GdipSetLineColors")
 	procGdipSetLineGammaCorrection                       = modgdiplus.NewProc("GdipSetLineGammaCorrection")
+	procGdipSetLineLinearBlend                           = modgdiplus.NewProc("GdipSetLineLinearBlend")
 	procGdipSetLinePresetBlend                           = modgdiplus.NewProc("GdipSetLinePresetBlend")
+	procGdipSetLineSigmaBlend                            = modgdiplus.NewProc("GdipSetLineSigmaBlend")
 	procGdipSetLineTransform                             = modgdiplus.NewProc("GdipSetLineTransform")
 	procGdipSetLineWrapMode                              = modgdiplus.NewProc("GdipSetLineWrapMode")
+	procGdipSetMatrixElements                            = modgdiplus.NewProc("GdipSetMatrixElements")
 	procGdipSetMetafileDownLevelRasterizationLimit       = modgdiplus.NewProc("GdipSetMetafileDownLevelRasterizationLimit")
+	procGdipSetPageScale                                 = modgdiplus.NewProc("GdipSetPageScale")
 	procGdipSetPageUnit                                  = modgdiplus.NewProc("GdipSetPageUnit")
 	procGdipSetPathFillMode                              = modgdiplus.NewProc("GdipSetPathFillMode")
 	procGdipSetPathGradientBlend                         = modgdiplus.NewProc("GdipSetPathGradientBlend")
 	procGdipSetPathGradientCenterColor                   = modgdiplus.NewProc("GdipSetPathGradientCenterColor")
 	procGdipSetPathGradientCenterPoint                   = modgdiplus.NewProc("GdipSetPathGradientCenterPoint")
 	procGdipSetPathGradientCenterPointI                  = modgdiplus.NewProc("GdipSetPathGradientCenterPointI")
+	procGdipSetPathGradientFocusScales                   = modgdiplus.NewProc("GdipSetPathGradientFocusScales")
 	procGdipSetPathGradientGammaCorrection               = modgdiplus.NewProc("GdipSetPathGradientGammaCorrection")
+	procGdipSetPathGradientLinearBlend                   = modgdiplus.NewProc("GdipSetPathGradientLinearBlend")
 	procGdipSetPathGradientPath                          = modgdiplus.NewProc("GdipSetPathGradientPath")
 	procGdipSetPathGradientPresetBlend                   = modgdiplus.NewProc("GdipSetPathGradientPresetBlend")
+	procGdipSetPathGradientSigmaBlend                    = modgdiplus.NewProc("GdipSetPathGradientSigmaBlend")
 	procGdipSetPathGradientSurroundColorsWithCount       = modgdiplus.NewProc("GdipSetPathGradientSurroundColorsWithCount")
 	procGdipSetPathGradientTransform                     = modgdiplus.NewProc("GdipSetPathGradientTransform")
 	procGdipSetPathGradientWrapMode                      = modgdiplus.NewProc("GdipSetPathGradientWrapMode")
@@ -501,14 +592,17 @@ var (
 	procGdipSetPenCustomStartCap                         = modgdiplus.NewProc("GdipSetPenCustomStartCap")
 	procGdipSetPenDashArray                              = modgdiplus.NewProc("GdipSetPenDashArray")
 	procGdipSetPenDashCap197819                          = modgdiplus.NewProc("GdipSetPenDashCap197819")
+	procGdipSetPenDashOffset                             = modgdiplus.NewProc("GdipSetPenDashOffset")
 	procGdipSetPenDashStyle                              = modgdiplus.NewProc("GdipSetPenDashStyle")
 	procGdipSetPenEndCap                                 = modgdiplus.NewProc("GdipSetPenEndCap")
 	procGdipSetPenLineCap197819                          = modgdiplus.NewProc("GdipSetPenLineCap197819")
 	procGdipSetPenLineJoin                               = modgdiplus.NewProc("GdipSetPenLineJoin")
+	procGdipSetPenMiterLimit                             = modgdiplus.NewProc("GdipSetPenMiterLimit")
 	procGdipSetPenMode                                   = modgdiplus.NewProc("GdipSetPenMode")
 	procGdipSetPenStartCap                               = modgdiplus.NewProc("GdipSetPenStartCap")
 	procGdipSetPenTransform                              = modgdiplus.NewProc("GdipSetPenTransform")
 	procGdipSetPenUnit                                   = modgdiplus.NewProc("GdipSetPenUnit")
+	procGdipSetPenWidth                                  = modgdiplus.NewProc("GdipSetPenWidth")
 	procGdipSetPixelOffsetMode                           = modgdiplus.NewProc("GdipSetPixelOffsetMode")
 	procGdipSetPropertyItem                              = modgdiplus.NewProc("GdipSetPropertyItem")
 	procGdipSetRenderingOrigin                           = modgdiplus.NewProc("GdipSetRenderingOrigin")
@@ -520,12 +614,14 @@ var (
 	procGdipSetStringFormatHotkeyPrefix                  = modgdiplus.NewProc("GdipSetStringFormatHotkeyPrefix")
 	procGdipSetStringFormatLineAlign                     = modgdiplus.NewProc("GdipSetStringFormatLineAlign")
 	procGdipSetStringFormatMeasurableCharacterRanges     = modgdiplus.NewProc("GdipSetStringFormatMeasurableCharacterRanges")
+	procGdipSetStringFormatTabStops                      = modgdiplus.NewProc("GdipSetStringFormatTabStops")
 	procGdipSetStringFormatTrimming                      = modgdiplus.NewProc("GdipSetStringFormatTrimming")
 	procGdipSetTextContrast                              = modgdiplus.NewProc("GdipSetTextContrast")
 	procGdipSetTextRenderingHint                         = modgdiplus.NewProc("GdipSetTextRenderingHint")
 	procGdipSetTextureTransform                          = modgdiplus.NewProc("GdipSetTextureTransform")
 	procGdipSetTextureWrapMode                           = modgdiplus.NewProc("GdipSetTextureWrapMode")
 	procGdipSetWorldTransform                            = modgdiplus.NewProc("GdipSetWorldTransform")
+	procGdipShearMatrix                                  = modgdiplus.NewProc("GdipShearMatrix")
 	procGdipStartPathFigure                              = modgdiplus.NewProc("GdipStartPathFigure")
 	procGdipStringFormatGetGenericDefault                = modgdiplus.NewProc("GdipStringFormatGetGenericDefault")
 	procGdipStringFormatGetGenericTypographic            = modgdiplus.NewProc("GdipStringFormatGetGenericTypographic")
@@ -536,15 +632,1316 @@ var (
 	procGdipTransformPoints                              = modgdiplus.NewProc("GdipTransformPoints")
 	procGdipTransformPointsI                             = modgdiplus.NewProc("GdipTransformPointsI")
 	procGdipTransformRegion                              = modgdiplus.NewProc("GdipTransformRegion")
+	procGdipTranslateClip                                = modgdiplus.NewProc("GdipTranslateClip")
 	procGdipTranslateClipI                               = modgdiplus.NewProc("GdipTranslateClipI")
+	procGdipTranslateLineTransform                       = modgdiplus.NewProc("GdipTranslateLineTransform")
+	procGdipTranslateMatrix                              = modgdiplus.NewProc("GdipTranslateMatrix")
+	procGdipTranslatePathGradientTransform               = modgdiplus.NewProc("GdipTranslatePathGradientTransform")
+	procGdipTranslatePenTransform                        = modgdiplus.NewProc("GdipTranslatePenTransform")
+	procGdipTranslateRegion                              = modgdiplus.NewProc("GdipTranslateRegion")
 	procGdipTranslateRegionI                             = modgdiplus.NewProc("GdipTranslateRegionI")
+	procGdipTranslateTextureTransform                    = modgdiplus.NewProc("GdipTranslateTextureTransform")
+	procGdipTranslateWorldTransform                      = modgdiplus.NewProc("GdipTranslateWorldTransform")
 	procGdipVectorTransformMatrixPoints                  = modgdiplus.NewProc("GdipVectorTransformMatrixPoints")
 	procGdipVectorTransformMatrixPointsI                 = modgdiplus.NewProc("GdipVectorTransformMatrixPointsI")
+	procGdipWarpPath                                     = modgdiplus.NewProc("GdipWarpPath")
+	procGdipWidenPath                                    = modgdiplus.NewProc("GdipWidenPath")
+	procGdipWindingModeOutline                           = modgdiplus.NewProc("GdipWindingModeOutline")
 	procGdiplusNotificationHook                          = modgdiplus.NewProc("GdiplusNotificationHook")
 	procGdiplusNotificationUnhook                        = modgdiplus.NewProc("GdiplusNotificationUnhook")
 	procGdiplusShutdown                                  = modgdiplus.NewProc("GdiplusShutdown")
 	procGdiplusStartup                                   = modgdiplus.NewProc("GdiplusStartup")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	GdipAddPathArc                                   *win32.Proc
+	GdipAddPathArcI                                  *win32.Proc
+	GdipAddPathBezier                                *win32.Proc
+	GdipAddPathBezierI                               *win32.Proc
+	GdipAddPathBeziers                               *win32.Proc
+	GdipAddPathBeziersI                              *win32.Proc
+	GdipAddPathClosedCurve                           *win32.Proc
+	GdipAddPathClosedCurve2                          *win32.Proc
+	GdipAddPathClosedCurve2I                         *win32.Proc
+	GdipAddPathClosedCurveI                          *win32.Proc
+	GdipAddPathCurve                                 *win32.Proc
+	GdipAddPathCurve2                                *win32.Proc
+	GdipAddPathCurve2I                               *win32.Proc
+	GdipAddPathCurve3                                *win32.Proc
+	GdipAddPathCurve3I                               *win32.Proc
+	GdipAddPathCurveI                                *win32.Proc
+	GdipAddPathEllipse                               *win32.Proc
+	GdipAddPathEllipseI                              *win32.Proc
+	GdipAddPathLine                                  *win32.Proc
+	GdipAddPathLine2                                 *win32.Proc
+	GdipAddPathLine2I                                *win32.Proc
+	GdipAddPathLineI                                 *win32.Proc
+	GdipAddPathPath                                  *win32.Proc
+	GdipAddPathPie                                   *win32.Proc
+	GdipAddPathPieI                                  *win32.Proc
+	GdipAddPathPolygon                               *win32.Proc
+	GdipAddPathPolygonI                              *win32.Proc
+	GdipAddPathRectangle                             *win32.Proc
+	GdipAddPathRectangleI                            *win32.Proc
+	GdipAddPathRectangles                            *win32.Proc
+	GdipAddPathRectanglesI                           *win32.Proc
+	GdipAddPathString                                *win32.Proc
+	GdipAddPathStringI                               *win32.Proc
+	GdipAlloc                                        *win32.Proc
+	GdipBeginContainer                               *win32.Proc
+	GdipBeginContainer2                              *win32.Proc
+	GdipBeginContainerI                              *win32.Proc
+	GdipBitmapApplyEffect                            *win32.Proc
+	GdipBitmapConvertFormat                          *win32.Proc
+	GdipBitmapCreateApplyEffect                      *win32.Proc
+	GdipBitmapGetHistogram                           *win32.Proc
+	GdipBitmapGetHistogramSize                       *win32.Proc
+	GdipBitmapGetPixel                               *win32.Proc
+	GdipBitmapLockBits                               *win32.Proc
+	GdipBitmapSetPixel                               *win32.Proc
+	GdipBitmapSetResolution                          *win32.Proc
+	GdipBitmapUnlockBits                             *win32.Proc
+	GdipClearPathMarkers                             *win32.Proc
+	GdipCloneBitmapArea                              *win32.Proc
+	GdipCloneBitmapAreaI                             *win32.Proc
+	GdipCloneBrush                                   *win32.Proc
+	GdipCloneCustomLineCap                           *win32.Proc
+	GdipCloneFont                                    *win32.Proc
+	GdipCloneFontFamily                              *win32.Proc
+	GdipCloneImage                                   *win32.Proc
+	GdipCloneImageAttributes                         *win32.Proc
+	GdipCloneMatrix                                  *win32.Proc
+	GdipClonePath                                    *win32.Proc
+	GdipClonePen                                     *win32.Proc
+	GdipCloneRegion                                  *win32.Proc
+	GdipCloneStringFormat                            *win32.Proc
+	GdipClosePathFigure                              *win32.Proc
+	GdipClosePathFigures                             *win32.Proc
+	GdipCombineRegionPath                            *win32.Proc
+	GdipCombineRegionRect                            *win32.Proc
+	GdipCombineRegionRectI                           *win32.Proc
+	GdipCombineRegionRegion                          *win32.Proc
+	GdipComment                                      *win32.Proc
+	GdipConvertToEmfPlus                             *win32.Proc
+	GdipConvertToEmfPlusToFile                       *win32.Proc
+	GdipConvertToEmfPlusToStream                     *win32.Proc
+	GdipCreateAdjustableArrowCap                     *win32.Proc
+	GdipCreateBitmapFromDirectDrawSurface            *win32.Proc
+	GdipCreateBitmapFromFile                         *win32.Proc
+	GdipCreateBitmapFromFileICM                      *win32.Proc
+	GdipCreateBitmapFromGdiDib                       *win32.Proc
+	GdipCreateBitmapFromGraphics                     *win32.Proc
+	GdipCreateBitmapFromHBITMAP                      *win32.Proc
+	GdipCreateBitmapFromHICON                        *win32.Proc
+	GdipCreateBitmapFromResource                     *win32.Proc
+	GdipCreateBitmapFromScan0                        *win32.Proc
+	GdipCreateBitmapFromStream                       *win32.Proc
+	GdipCreateBitmapFromStreamICM                    *win32.Proc
+	GdipCreateCachedBitmap                           *win32.Proc
+	GdipCreateCustomLineCap                          *win32.Proc
+	GdipCreateEffect                                 *win32.Proc
+	GdipCreateFont                                   *win32.Proc
+	GdipCreateFontFamilyFromName                     *win32.Proc
+	GdipCreateFontFromDC                             *win32.Proc
+	GdipCreateFontFromLogfont                        *win32.Proc
+	GdipCreateFontFromLogfontA                       *win32.Proc
+	GdipCreateFromHDC                                *win32.Proc
+	GdipCreateFromHDC2                               *win32.Proc
+	GdipCreateFromHWND                               *win32.Proc
+	GdipCreateFromHWNDICM                            *win32.Proc
+	GdipCreateHBITMAPFromBitmap                      *win32.Proc
+	GdipCreateHICONFromBitmap                        *win32.Proc
+	GdipCreateHalftonePalette                        *win32.Proc
+	GdipCreateHatchBrush                             *win32.Proc
+	GdipCreateImageAttributes                        *win32.Proc
+	GdipCreateLineBrush                              *win32.Proc
+	GdipCreateLineBrushFromRect                      *win32.Proc
+	GdipCreateLineBrushFromRectI                     *win32.Proc
+	GdipCreateLineBrushFromRectWithAngle             *win32.Proc
+	GdipCreateLineBrushFromRectWithAngleI            *win32.Proc
+	GdipCreateLineBrushI                             *win32.Proc
+	GdipCreateMatrix                                 *win32.Proc
+	GdipCreateMatrix2                                *win32.Proc
+	GdipCreateMatrix3                                *win32.Proc
+	GdipCreateMatrix3I                               *win32.Proc
+	GdipCreateMetafileFromEmf                        *win32.Proc
+	GdipCreateMetafileFromFile                       *win32.Proc
+	GdipCreateMetafileFromStream                     *win32.Proc
+	GdipCreateMetafileFromWmf                        *win32.Proc
+	GdipCreateMetafileFromWmfFile                    *win32.Proc
+	GdipCreatePath                                   *win32.Proc
+	GdipCreatePath2                                  *win32.Proc
+	GdipCreatePath2I                                 *win32.Proc
+	GdipCreatePathGradient                           *win32.Proc
+	GdipCreatePathGradientFromPath                   *win32.Proc
+	GdipCreatePathGradientI                          *win32.Proc
+	GdipCreatePathIter                               *win32.Proc
+	GdipCreatePen1                                   *win32.Proc
+	GdipCreatePen2                                   *win32.Proc
+	GdipCreateRegion                                 *win32.Proc
+	GdipCreateRegionHrgn                             *win32.Proc
+	GdipCreateRegionPath                             *win32.Proc
+	GdipCreateRegionRect                             *win32.Proc
+	GdipCreateRegionRectI                            *win32.Proc
+	GdipCreateRegionRgnData                          *win32.Proc
+	GdipCreateSolidFill                              *win32.Proc
+	GdipCreateStreamOnFile                           *win32.Proc
+	GdipCreateStringFormat                           *win32.Proc
+	GdipCreateTexture                                *win32.Proc
+	GdipCreateTexture2                               *win32.Proc
+	GdipCreateTexture2I                              *win32.Proc
+	GdipCreateTextureIA                              *win32.Proc
+	GdipCreateTextureIAI                             *win32.Proc
+	GdipDeleteBrush                                  *win32.Proc
+	GdipDeleteCachedBitmap                           *win32.Proc
+	GdipDeleteCustomLineCap                          *win32.Proc
+	GdipDeleteEffect                                 *win32.Proc
+	GdipDeleteFont                                   *win32.Proc
+	GdipDeleteFontFamily                             *win32.Proc
+	GdipDeleteGraphics                               *win32.Proc
+	GdipDeleteMatrix                                 *win32.Proc
+	GdipDeletePath                                   *win32.Proc
+	GdipDeletePathIter                               *win32.Proc
+	GdipDeletePen                                    *win32.Proc
+	GdipDeletePrivateFontCollection                  *win32.Proc
+	GdipDeleteRegion                                 *win32.Proc
+	GdipDeleteStringFormat                           *win32.Proc
+	GdipDisposeImage                                 *win32.Proc
+	GdipDisposeImageAttributes                       *win32.Proc
+	GdipDrawArc                                      *win32.Proc
+	GdipDrawArcI                                     *win32.Proc
+	GdipDrawBezier                                   *win32.Proc
+	GdipDrawBezierI                                  *win32.Proc
+	GdipDrawBeziers                                  *win32.Proc
+	GdipDrawBeziersI                                 *win32.Proc
+	GdipDrawCachedBitmap                             *win32.Proc
+	GdipDrawClosedCurve                              *win32.Proc
+	GdipDrawClosedCurve2                             *win32.Proc
+	GdipDrawClosedCurve2I                            *win32.Proc
+	GdipDrawClosedCurveI                             *win32.Proc
+	GdipDrawCurve                                    *win32.Proc
+	GdipDrawCurve2                                   *win32.Proc
+	GdipDrawCurve2I                                  *win32.Proc
+	GdipDrawCurve3                                   *win32.Proc
+	GdipDrawCurve3I                                  *win32.Proc
+	GdipDrawCurveI                                   *win32.Proc
+	GdipDrawDriverString                             *win32.Proc
+	GdipDrawEllipse                                  *win32.Proc
+	GdipDrawEllipseI                                 *win32.Proc
+	GdipDrawImage                                    *win32.Proc
+	GdipDrawImageFX                                  *win32.Proc
+	GdipDrawImageI                                   *win32.Proc
+	GdipDrawImagePointRect                           *win32.Proc
+	GdipDrawImagePointRectI                          *win32.Proc
+	GdipDrawImagePoints                              *win32.Proc
+	GdipDrawImagePointsI                             *win32.Proc
+	GdipDrawImagePointsRect                          *win32.Proc
+	GdipDrawImagePointsRectI                         *win32.Proc
+	GdipDrawImageRect                                *win32.Proc
+	GdipDrawImageRectI                               *win32.Proc
+	GdipDrawImageRectRect                            *win32.Proc
+	GdipDrawImageRectRectI                           *win32.Proc
+	GdipDrawLine                                     *win32.Proc
+	GdipDrawLineI                                    *win32.Proc
+	GdipDrawLines                                    *win32.Proc
+	GdipDrawLinesI                                   *win32.Proc
+	GdipDrawPath                                     *win32.Proc
+	GdipDrawPie                                      *win32.Proc
+	GdipDrawPieI                                     *win32.Proc
+	GdipDrawPolygon                                  *win32.Proc
+	GdipDrawPolygonI                                 *win32.Proc
+	GdipDrawRectangle                                *win32.Proc
+	GdipDrawRectangleI                               *win32.Proc
+	GdipDrawRectangles                               *win32.Proc
+	GdipDrawRectanglesI                              *win32.Proc
+	GdipDrawString                                   *win32.Proc
+	GdipEmfToWmfBits                                 *win32.Proc
+	GdipEndContainer                                 *win32.Proc
+	GdipEnumerateMetafileDestPoint                   *win32.Proc
+	GdipEnumerateMetafileDestPointI                  *win32.Proc
+	GdipEnumerateMetafileDestPoints                  *win32.Proc
+	GdipEnumerateMetafileDestPointsI                 *win32.Proc
+	GdipEnumerateMetafileDestRect                    *win32.Proc
+	GdipEnumerateMetafileDestRectI                   *win32.Proc
+	GdipEnumerateMetafileSrcRectDestPoint            *win32.Proc
+	GdipEnumerateMetafileSrcRectDestPointI           *win32.Proc
+	GdipEnumerateMetafileSrcRectDestPoints           *win32.Proc
+	GdipEnumerateMetafileSrcRectDestPointsI          *win32.Proc
+	GdipEnumerateMetafileSrcRectDestRect             *win32.Proc
+	GdipEnumerateMetafileSrcRectDestRectI            *win32.Proc
+	GdipFillClosedCurve                              *win32.Proc
+	GdipFillClosedCurve2                             *win32.Proc
+	GdipFillClosedCurve2I                            *win32.Proc
+	GdipFillClosedCurveI                             *win32.Proc
+	GdipFillEllipse                                  *win32.Proc
+	GdipFillEllipseI                                 *win32.Proc
+	GdipFillPath                                     *win32.Proc
+	GdipFillPie                                      *win32.Proc
+	GdipFillPieI                                     *win32.Proc
+	GdipFillPolygon                                  *win32.Proc
+	GdipFillPolygon2                                 *win32.Proc
+	GdipFillPolygon2I                                *win32.Proc
+	GdipFillPolygonI                                 *win32.Proc
+	GdipFillRectangle                                *win32.Proc
+	GdipFillRectangleI                               *win32.Proc
+	GdipFillRectangles                               *win32.Proc
+	GdipFillRectanglesI                              *win32.Proc
+	GdipFillRegion                                   *win32.Proc
+	GdipFindFirstImageItem                           *win32.Proc
+	GdipFindNextImageItem                            *win32.Proc
+	GdipFlattenPath                                  *win32.Proc
+	GdipFlush                                        *win32.Proc
+	GdipFree                                         *win32.Proc
+	GdipGetAdjustableArrowCapFillState               *win32.Proc
+	GdipGetAdjustableArrowCapHeight                  *win32.Proc
+	GdipGetAdjustableArrowCapMiddleInset             *win32.Proc
+	GdipGetAdjustableArrowCapWidth                   *win32.Proc
+	GdipGetAllPropertyItems                          *win32.Proc
+	GdipGetBrushType                                 *win32.Proc
+	GdipGetCellAscent                                *win32.Proc
+	GdipGetCellDescent                               *win32.Proc
+	GdipGetClip                                      *win32.Proc
+	GdipGetClipBounds                                *win32.Proc
+	GdipGetClipBoundsI                               *win32.Proc
+	GdipGetCompositingMode                           *win32.Proc
+	GdipGetCompositingQuality                        *win32.Proc
+	GdipGetCustomLineCapBaseCap                      *win32.Proc
+	GdipGetCustomLineCapBaseInset                    *win32.Proc
+	GdipGetCustomLineCapStrokeCaps                   *win32.Proc
+	GdipGetCustomLineCapStrokeJoin                   *win32.Proc
+	GdipGetCustomLineCapType                         *win32.Proc
+	GdipGetCustomLineCapWidthScale                   *win32.Proc
+	GdipGetDC                                        *win32.Proc
+	GdipGetDpiX                                      *win32.Proc
+	GdipGetDpiY                                      *win32.Proc
+	GdipGetEffectParameterSize                       *win32.Proc
+	GdipGetEffectParameters                          *win32.Proc
+	GdipGetEmHeight                                  *win32.Proc
+	GdipGetEncoderParameterList                      *win32.Proc
+	GdipGetEncoderParameterListSize                  *win32.Proc
+	GdipGetFamily                                    *win32.Proc
+	GdipGetFamilyName                                *win32.Proc
+	GdipGetFontCollectionFamilyCount                 *win32.Proc
+	GdipGetFontCollectionFamilyList                  *win32.Proc
+	GdipGetFontHeight                                *win32.Proc
+	GdipGetFontHeightGivenDPI                        *win32.Proc
+	GdipGetFontSize                                  *win32.Proc
+	GdipGetFontStyle                                 *win32.Proc
+	GdipGetFontUnit                                  *win32.Proc
+	GdipGetGenericFontFamilyMonospace                *win32.Proc
+	GdipGetGenericFontFamilySansSerif                *win32.Proc
+	GdipGetGenericFontFamilySerif                    *win32.Proc
+	GdipGetHatchBackgroundColor                      *win32.Proc
+	GdipGetHatchForegroundColor                      *win32.Proc
+	GdipGetHatchStyle                                *win32.Proc
+	GdipGetHemfFromMetafile                          *win32.Proc
+	GdipGetImageAttributesAdjustedPalette            *win32.Proc
+	GdipGetImageBounds                               *win32.Proc
+	GdipGetImageDecoders                             *win32.Proc
+	GdipGetImageDecodersSize                         *win32.Proc
+	GdipGetImageDimension                            *win32.Proc
+	GdipGetImageEncoders                             *win32.Proc
+	GdipGetImageEncodersSize                         *win32.Proc
+	GdipGetImageFlags                                *win32.Proc
+	GdipGetImageGraphicsContext                      *win32.Proc
+	GdipGetImageHeight                               *win32.Proc
+	GdipGetImageHorizontalResolution                 *win32.Proc
+	GdipGetImageItemData                             *win32.Proc
+	GdipGetImagePalette                              *win32.Proc
+	GdipGetImagePaletteSize                          *win32.Proc
+	GdipGetImagePixelFormat                          *win32.Proc
+	GdipGetImageRawFormat                            *win32.Proc
+	GdipGetImageThumbnail                            *win32.Proc
+	GdipGetImageType                                 *win32.Proc
+	GdipGetImageVerticalResolution                   *win32.Proc
+	GdipGetImageWidth                                *win32.Proc
+	GdipGetInterpolationMode                         *win32.Proc
+	GdipGetLineBlend                                 *win32.Proc
+	GdipGetLineBlendCount                            *win32.Proc
+	GdipGetLineColors                                *win32.Proc
+	GdipGetLineGammaCorrection                       *win32.Proc
+	GdipGetLinePresetBlend                           *win32.Proc
+	GdipGetLinePresetBlendCount                      *win32.Proc
+	GdipGetLineRect                                  *win32.Proc
+	GdipGetLineRectI                                 *win32.Proc
+	GdipGetLineSpacing                               *win32.Proc
+	GdipGetLineTransform                             *win32.Proc
+	GdipGetLineWrapMode                              *win32.Proc
+	GdipGetLogFont                                   *win32.Proc
+	GdipGetLogFontA                                  *win32.Proc
+	GdipGetMatrixElements                            *win32.Proc
+	GdipGetMetafileDownLevelRasterizationLimit       *win32.Proc
+	GdipGetMetafileHeaderFromEmf                     *win32.Proc
+	GdipGetMetafileHeaderFromFile                    *win32.Proc
+	GdipGetMetafileHeaderFromMetafile                *win32.Proc
+	GdipGetMetafileHeaderFromStream                  *win32.Proc
+	GdipGetMetafileHeaderFromWmf                     *win32.Proc
+	GdipGetNearestColor                              *win32.Proc
+	GdipGetPageScale                                 *win32.Proc
+	GdipGetPageUnit                                  *win32.Proc
+	GdipGetPathData                                  *win32.Proc
+	GdipGetPathFillMode                              *win32.Proc
+	GdipGetPathGradientBlend                         *win32.Proc
+	GdipGetPathGradientBlendCount                    *win32.Proc
+	GdipGetPathGradientCenterColor                   *win32.Proc
+	GdipGetPathGradientCenterPoint                   *win32.Proc
+	GdipGetPathGradientCenterPointI                  *win32.Proc
+	GdipGetPathGradientFocusScales                   *win32.Proc
+	GdipGetPathGradientGammaCorrection               *win32.Proc
+	GdipGetPathGradientPath                          *win32.Proc
+	GdipGetPathGradientPointCount                    *win32.Proc
+	GdipGetPathGradientPresetBlend                   *win32.Proc
+	GdipGetPathGradientPresetBlendCount              *win32.Proc
+	GdipGetPathGradientRect                          *win32.Proc
+	GdipGetPathGradientRectI                         *win32.Proc
+	GdipGetPathGradientSurroundColorCount            *win32.Proc
+	GdipGetPathGradientSurroundColorsWithCount       *win32.Proc
+	GdipGetPathGradientTransform                     *win32.Proc
+	GdipGetPathGradientWrapMode                      *win32.Proc
+	GdipGetPathLastPoint                             *win32.Proc
+	GdipGetPathPoints                                *win32.Proc
+	GdipGetPathPointsI                               *win32.Proc
+	GdipGetPathTypes                                 *win32.Proc
+	GdipGetPathWorldBounds                           *win32.Proc
+	GdipGetPathWorldBoundsI                          *win32.Proc
+	GdipGetPenBrushFill                              *win32.Proc
+	GdipGetPenColor                                  *win32.Proc
+	GdipGetPenCompoundArray                          *win32.Proc
+	GdipGetPenCompoundCount                          *win32.Proc
+	GdipGetPenCustomEndCap                           *win32.Proc
+	GdipGetPenCustomStartCap                         *win32.Proc
+	GdipGetPenDashArray                              *win32.Proc
+	GdipGetPenDashCap197819                          *win32.Proc
+	GdipGetPenDashCount                              *win32.Proc
+	GdipGetPenDashOffset                             *win32.Proc
+	GdipGetPenDashStyle                              *win32.Proc
+	GdipGetPenEndCap                                 *win32.Proc
+	GdipGetPenFillType                               *win32.Proc
+	GdipGetPenLineJoin                               *win32.Proc
+	GdipGetPenMiterLimit                             *win32.Proc
+	GdipGetPenMode                                   *win32.Proc
+	GdipGetPenStartCap                               *win32.Proc
+	GdipGetPenTransform                              *win32.Proc
+	GdipGetPenUnit                                   *win32.Proc
+	GdipGetPenWidth                                  *win32.Proc
+	GdipGetPixelOffsetMode                           *win32.Proc
+	GdipGetPointCount                                *win32.Proc
+	GdipGetPropertyCount                             *win32.Proc
+	GdipGetPropertyIdList                            *win32.Proc
+	GdipGetPropertyItem                              *win32.Proc
+	GdipGetPropertyItemSize                          *win32.Proc
+	GdipGetPropertySize                              *win32.Proc
+	GdipGetRegionBounds                              *win32.Proc
+	GdipGetRegionBoundsI                             *win32.Proc
+	GdipGetRegionData                                *win32.Proc
+	GdipGetRegionDataSize                            *win32.Proc
+	GdipGetRegionHRgn                                *win32.Proc
+	GdipGetRegionScans                               *win32.Proc
+	GdipGetRegionScansCount                          *win32.Proc
+	GdipGetRegionScansI                              *win32.Proc
+	GdipGetRenderingOrigin                           *win32.Proc
+	GdipGetSmoothingMode                             *win32.Proc
+	GdipGetSolidFillColor                            *win32.Proc
+	GdipGetStringFormatAlign                         *win32.Proc
+	GdipGetStringFormatDigitSubstitution             *win32.Proc
+	GdipGetStringFormatFlags                         *win32.Proc
+	GdipGetStringFormatHotkeyPrefix                  *win32.Proc
+	GdipGetStringFormatLineAlign                     *win32.Proc
+	GdipGetStringFormatMeasurableCharacterRangeCount *win32.Proc
+	GdipGetStringFormatTabStopCount                  *win32.Proc
+	GdipGetStringFormatTabStops                      *win32.Proc
+	GdipGetStringFormatTrimming                      *win32.Proc
+	GdipGetTextContrast                              *win32.Proc
+	GdipGetTextRenderingHint                         *win32.Proc
+	GdipGetTextureImage                              *win32.Proc
+	GdipGetTextureTransform                          *win32.Proc
+	GdipGetTextureWrapMode                           *win32.Proc
+	GdipGetVisibleClipBounds                         *win32.Proc
+	GdipGetVisibleClipBoundsI                        *win32.Proc
+	GdipGetWorldTransform                            *win32.Proc
+	GdipGraphicsClear                                *win32.Proc
+	GdipGraphicsSetAbort                             *win32.Proc
+	GdipImageForceValidation                         *win32.Proc
+	GdipImageGetFrameCount                           *win32.Proc
+	GdipImageGetFrameDimensionsCount                 *win32.Proc
+	GdipImageGetFrameDimensionsList                  *win32.Proc
+	GdipImageRotateFlip                              *win32.Proc
+	GdipImageSelectActiveFrame                       *win32.Proc
+	GdipImageSetAbort                                *win32.Proc
+	GdipInitializePalette                            *win32.Proc
+	GdipInvertMatrix                                 *win32.Proc
+	GdipIsClipEmpty                                  *win32.Proc
+	GdipIsEmptyRegion                                *win32.Proc
+	GdipIsEqualRegion                                *win32.Proc
+	GdipIsInfiniteRegion                             *win32.Proc
+	GdipIsMatrixEqual                                *win32.Proc
+	GdipIsMatrixIdentity                             *win32.Proc
+	GdipIsMatrixInvertible                           *win32.Proc
+	GdipIsOutlineVisiblePathPoint                    *win32.Proc
+	GdipIsOutlineVisiblePathPointI                   *win32.Proc
+	GdipIsStyleAvailable                             *win32.Proc
+	GdipIsVisibleClipEmpty                           *win32.Proc
+	GdipIsVisiblePathPoint                           *win32.Proc
+	GdipIsVisiblePathPointI                          *win32.Proc
+	GdipIsVisiblePoint                               *win32.Proc
+	GdipIsVisiblePointI                              *win32.Proc
+	GdipIsVisibleRect                                *win32.Proc
+	GdipIsVisibleRectI                               *win32.Proc
+	GdipIsVisibleRegionPoint                         *win32.Proc
+	GdipIsVisibleRegionPointI                        *win32.Proc
+	GdipIsVisibleRegionRect                          *win32.Proc
+	GdipIsVisibleRegionRectI                         *win32.Proc
+	GdipLoadImageFromFile                            *win32.Proc
+	GdipLoadImageFromFileICM                         *win32.Proc
+	GdipLoadImageFromStream                          *win32.Proc
+	GdipLoadImageFromStreamICM                       *win32.Proc
+	GdipMeasureCharacterRanges                       *win32.Proc
+	GdipMeasureDriverString                          *win32.Proc
+	GdipMeasureString                                *win32.Proc
+	GdipMultiplyLineTransform                        *win32.Proc
+	GdipMultiplyMatrix                               *win32.Proc
+	GdipMultiplyPathGradientTransform                *win32.Proc
+	GdipMultiplyPenTransform                         *win32.Proc
+	GdipMultiplyTextureTransform                     *win32.Proc
+	GdipMultiplyWorldTransform                       *win32.Proc
+	GdipNewInstalledFontCollection                   *win32.Proc
+	GdipNewPrivateFontCollection                     *win32.Proc
+	GdipPathIterCopyData                             *win32.Proc
+	GdipPathIterEnumerate                            *win32.Proc
+	GdipPathIterGetCount                             *win32.Proc
+	GdipPathIterGetSubpathCount                      *win32.Proc
+	GdipPathIterHasCurve                             *win32.Proc
+	GdipPathIterIsValid                              *win32.Proc
+	GdipPathIterNextMarker                           *win32.Proc
+	GdipPathIterNextMarkerPath                       *win32.Proc
+	GdipPathIterNextPathType                         *win32.Proc
+	GdipPathIterNextSubpath                          *win32.Proc
+	GdipPathIterNextSubpathPath                      *win32.Proc
+	GdipPathIterRewind                               *win32.Proc
+	GdipPlayMetafileRecord                           *win32.Proc
+	GdipPrivateAddFontFile                           *win32.Proc
+	GdipPrivateAddMemoryFont                         *win32.Proc
+	GdipRecordMetafile                               *win32.Proc
+	GdipRecordMetafileFileName                       *win32.Proc
+	GdipRecordMetafileFileNameI                      *win32.Proc
+	GdipRecordMetafileI                              *win32.Proc
+	GdipRecordMetafileStream                         *win32.Proc
+	GdipRecordMetafileStreamI                        *win32.Proc
+	GdipReleaseDC                                    *win32.Proc
+	GdipRemovePropertyItem                           *win32.Proc
+	GdipResetClip                                    *win32.Proc
+	GdipResetImageAttributes                         *win32.Proc
+	GdipResetLineTransform                           *win32.Proc
+	GdipResetPageTransform                           *win32.Proc
+	GdipResetPath                                    *win32.Proc
+	GdipResetPathGradientTransform                   *win32.Proc
+	GdipResetPenTransform                            *win32.Proc
+	GdipResetTextureTransform                        *win32.Proc
+	GdipResetWorldTransform                          *win32.Proc
+	GdipRestoreGraphics                              *win32.Proc
+	GdipReversePath                                  *win32.Proc
+	GdipRotateLineTransform                          *win32.Proc
+	GdipRotateMatrix                                 *win32.Proc
+	GdipRotatePathGradientTransform                  *win32.Proc
+	GdipRotatePenTransform                           *win32.Proc
+	GdipRotateTextureTransform                       *win32.Proc
+	GdipRotateWorldTransform                         *win32.Proc
+	GdipSaveAdd                                      *win32.Proc
+	GdipSaveAddImage                                 *win32.Proc
+	GdipSaveGraphics                                 *win32.Proc
+	GdipSaveImageToFile                              *win32.Proc
+	GdipSaveImageToStream                            *win32.Proc
+	GdipScaleLineTransform                           *win32.Proc
+	GdipScaleMatrix                                  *win32.Proc
+	GdipScalePathGradientTransform                   *win32.Proc
+	GdipScalePenTransform                            *win32.Proc
+	GdipScaleTextureTransform                        *win32.Proc
+	GdipScaleWorldTransform                          *win32.Proc
+	GdipSetAdjustableArrowCapFillState               *win32.Proc
+	GdipSetAdjustableArrowCapHeight                  *win32.Proc
+	GdipSetAdjustableArrowCapMiddleInset             *win32.Proc
+	GdipSetAdjustableArrowCapWidth                   *win32.Proc
+	GdipSetClipGraphics                              *win32.Proc
+	GdipSetClipHrgn                                  *win32.Proc
+	GdipSetClipPath                                  *win32.Proc
+	GdipSetClipRect                                  *win32.Proc
+	GdipSetClipRectI                                 *win32.Proc
+	GdipSetClipRegion                                *win32.Proc
+	GdipSetCompositingMode                           *win32.Proc
+	GdipSetCompositingQuality                        *win32.Proc
+	GdipSetCustomLineCapBaseCap                      *win32.Proc
+	GdipSetCustomLineCapBaseInset                    *win32.Proc
+	GdipSetCustomLineCapStrokeCaps                   *win32.Proc
+	GdipSetCustomLineCapStrokeJoin                   *win32.Proc
+	GdipSetCustomLineCapWidthScale                   *win32.Proc
+	GdipSetEffectParameters                          *win32.Proc
+	GdipSetEmpty                                     *win32.Proc
+	GdipSetImageAttributesCachedBackground           *win32.Proc
+	GdipSetImageAttributesColorKeys                  *win32.Proc
+	GdipSetImageAttributesColorMatrix                *win32.Proc
+	GdipSetImageAttributesGamma                      *win32.Proc
+	GdipSetImageAttributesNoOp                       *win32.Proc
+	GdipSetImageAttributesOutputChannel              *win32.Proc
+	GdipSetImageAttributesOutputChannelColorProfile  *win32.Proc
+	GdipSetImageAttributesRemapTable                 *win32.Proc
+	GdipSetImageAttributesThreshold                  *win32.Proc
+	GdipSetImageAttributesToIdentity                 *win32.Proc
+	GdipSetImageAttributesWrapMode                   *win32.Proc
+	GdipSetImagePalette                              *win32.Proc
+	GdipSetInfinite                                  *win32.Proc
+	GdipSetInterpolationMode                         *win32.Proc
+	GdipSetLineBlend                                 *win32.Proc
+	GdipSetLineColors                                *win32.Proc
+	GdipSetLineGammaCorrection                       *win32.Proc
+	GdipSetLineLinearBlend                           *win32.Proc
+	GdipSetLinePresetBlend                           *win32.Proc
+	GdipSetLineSigmaBlend                            *win32.Proc
+	GdipSetLineTransform                             *win32.Proc
+	GdipSetLineWrapMode                              *win32.Proc
+	GdipSetMatrixElements                            *win32.Proc
+	GdipSetMetafileDownLevelRasterizationLimit       *win32.Proc
+	GdipSetPageScale                                 *win32.Proc
+	GdipSetPageUnit                                  *win32.Proc
+	GdipSetPathFillMode                              *win32.Proc
+	GdipSetPathGradientBlend                         *win32.Proc
+	GdipSetPathGradientCenterColor                   *win32.Proc
+	GdipSetPathGradientCenterPoint                   *win32.Proc
+	GdipSetPathGradientCenterPointI                  *win32.Proc
+	GdipSetPathGradientFocusScales                   *win32.Proc
+	GdipSetPathGradientGammaCorrection               *win32.Proc
+	GdipSetPathGradientLinearBlend                   *win32.Proc
+	GdipSetPathGradientPath                          *win32.Proc
+	GdipSetPathGradientPresetBlend                   *win32.Proc
+	GdipSetPathGradientSigmaBlend                    *win32.Proc
+	GdipSetPathGradientSurroundColorsWithCount       *win32.Proc
+	GdipSetPathGradientTransform                     *win32.Proc
+	GdipSetPathGradientWrapMode                      *win32.Proc
+	GdipSetPathMarker                                *win32.Proc
+	GdipSetPenBrushFill                              *win32.Proc
+	GdipSetPenColor                                  *win32.Proc
+	GdipSetPenCompoundArray                          *win32.Proc
+	GdipSetPenCustomEndCap                           *win32.Proc
+	GdipSetPenCustomStartCap                         *win32.Proc
+	GdipSetPenDashArray                              *win32.Proc
+	GdipSetPenDashCap197819                          *win32.Proc
+	GdipSetPenDashOffset                             *win32.Proc
+	GdipSetPenDashStyle                              *win32.Proc
+	GdipSetPenEndCap                                 *win32.Proc
+	GdipSetPenLineCap197819                          *win32.Proc
+	GdipSetPenLineJoin                               *win32.Proc
+	GdipSetPenMiterLimit                             *win32.Proc
+	GdipSetPenMode                                   *win32.Proc
+	GdipSetPenStartCap                               *win32.Proc
+	GdipSetPenTransform                              *win32.Proc
+	GdipSetPenUnit                                   *win32.Proc
+	GdipSetPenWidth                                  *win32.Proc
+	GdipSetPixelOffsetMode                           *win32.Proc
+	GdipSetPropertyItem                              *win32.Proc
+	GdipSetRenderingOrigin                           *win32.Proc
+	GdipSetSmoothingMode                             *win32.Proc
+	GdipSetSolidFillColor                            *win32.Proc
+	GdipSetStringFormatAlign                         *win32.Proc
+	GdipSetStringFormatDigitSubstitution             *win32.Proc
+	GdipSetStringFormatFlags                         *win32.Proc
+	GdipSetStringFormatHotkeyPrefix                  *win32.Proc
+	GdipSetStringFormatLineAlign                     *win32.Proc
+	GdipSetStringFormatMeasurableCharacterRanges     *win32.Proc
+	GdipSetStringFormatTabStops                      *win32.Proc
+	GdipSetStringFormatTrimming                      *win32.Proc
+	GdipSetTextContrast                              *win32.Proc
+	GdipSetTextRenderingHint                         *win32.Proc
+	GdipSetTextureTransform                          *win32.Proc
+	GdipSetTextureWrapMode                           *win32.Proc
+	GdipSetWorldTransform                            *win32.Proc
+	GdipShearMatrix                                  *win32.Proc
+	GdipStartPathFigure                              *win32.Proc
+	GdipStringFormatGetGenericDefault                *win32.Proc
+	GdipStringFormatGetGenericTypographic            *win32.Proc
+	GdipTestControl                                  *win32.Proc
+	GdipTransformMatrixPoints                        *win32.Proc
+	GdipTransformMatrixPointsI                       *win32.Proc
+	GdipTransformPath                                *win32.Proc
+	GdipTransformPoints                              *win32.Proc
+	GdipTransformPointsI                             *win32.Proc
+	GdipTransformRegion                              *win32.Proc
+	GdipTranslateClip                                *win32.Proc
+	GdipTranslateClipI                               *win32.Proc
+	GdipTranslateLineTransform                       *win32.Proc
+	GdipTranslateMatrix                              *win32.Proc
+	GdipTranslatePathGradientTransform               *win32.Proc
+	GdipTranslatePenTransform                        *win32.Proc
+	GdipTranslateRegion                              *win32.Proc
+	GdipTranslateRegionI                             *win32.Proc
+	GdipTranslateTextureTransform                    *win32.Proc
+	GdipTranslateWorldTransform                      *win32.Proc
+	GdipVectorTransformMatrixPoints                  *win32.Proc
+	GdipVectorTransformMatrixPointsI                 *win32.Proc
+	GdipWarpPath                                     *win32.Proc
+	GdipWidenPath                                    *win32.Proc
+	GdipWindingModeOutline                           *win32.Proc
+	GdiplusNotificationHook                          *win32.Proc
+	GdiplusNotificationUnhook                        *win32.Proc
+	GdiplusShutdown                                  *win32.Proc
+	GdiplusStartup                                   *win32.Proc
+}{
+	GdipAddPathArc:                                   procGdipAddPathArc,
+	GdipAddPathArcI:                                  procGdipAddPathArcI,
+	GdipAddPathBezier:                                procGdipAddPathBezier,
+	GdipAddPathBezierI:                               procGdipAddPathBezierI,
+	GdipAddPathBeziers:                               procGdipAddPathBeziers,
+	GdipAddPathBeziersI:                              procGdipAddPathBeziersI,
+	GdipAddPathClosedCurve:                           procGdipAddPathClosedCurve,
+	GdipAddPathClosedCurve2:                          procGdipAddPathClosedCurve2,
+	GdipAddPathClosedCurve2I:                         procGdipAddPathClosedCurve2I,
+	GdipAddPathClosedCurveI:                          procGdipAddPathClosedCurveI,
+	GdipAddPathCurve:                                 procGdipAddPathCurve,
+	GdipAddPathCurve2:                                procGdipAddPathCurve2,
+	GdipAddPathCurve2I:                               procGdipAddPathCurve2I,
+	GdipAddPathCurve3:                                procGdipAddPathCurve3,
+	GdipAddPathCurve3I:                               procGdipAddPathCurve3I,
+	GdipAddPathCurveI:                                procGdipAddPathCurveI,
+	GdipAddPathEllipse:                               procGdipAddPathEllipse,
+	GdipAddPathEllipseI:                              procGdipAddPathEllipseI,
+	GdipAddPathLine:                                  procGdipAddPathLine,
+	GdipAddPathLine2:                                 procGdipAddPathLine2,
+	GdipAddPathLine2I:                                procGdipAddPathLine2I,
+	GdipAddPathLineI:                                 procGdipAddPathLineI,
+	GdipAddPathPath:                                  procGdipAddPathPath,
+	GdipAddPathPie:                                   procGdipAddPathPie,
+	GdipAddPathPieI:                                  procGdipAddPathPieI,
+	GdipAddPathPolygon:                               procGdipAddPathPolygon,
+	GdipAddPathPolygonI:                              procGdipAddPathPolygonI,
+	GdipAddPathRectangle:                             procGdipAddPathRectangle,
+	GdipAddPathRectangleI:                            procGdipAddPathRectangleI,
+	GdipAddPathRectangles:                            procGdipAddPathRectangles,
+	GdipAddPathRectanglesI:                           procGdipAddPathRectanglesI,
+	GdipAddPathString:                                procGdipAddPathString,
+	GdipAddPathStringI:                               procGdipAddPathStringI,
+	GdipAlloc:                                        procGdipAlloc,
+	GdipBeginContainer:                               procGdipBeginContainer,
+	GdipBeginContainer2:                              procGdipBeginContainer2,
+	GdipBeginContainerI:                              procGdipBeginContainerI,
+	GdipBitmapApplyEffect:                            procGdipBitmapApplyEffect,
+	GdipBitmapConvertFormat:                          procGdipBitmapConvertFormat,
+	GdipBitmapCreateApplyEffect:                      procGdipBitmapCreateApplyEffect,
+	GdipBitmapGetHistogram:                           procGdipBitmapGetHistogram,
+	GdipBitmapGetHistogramSize:                       procGdipBitmapGetHistogramSize,
+	GdipBitmapGetPixel:                               procGdipBitmapGetPixel,
+	GdipBitmapLockBits:                               procGdipBitmapLockBits,
+	GdipBitmapSetPixel:                               procGdipBitmapSetPixel,
+	GdipBitmapSetResolution:                          procGdipBitmapSetResolution,
+	GdipBitmapUnlockBits:                             procGdipBitmapUnlockBits,
+	GdipClearPathMarkers:                             procGdipClearPathMarkers,
+	GdipCloneBitmapArea:                              procGdipCloneBitmapArea,
+	GdipCloneBitmapAreaI:                             procGdipCloneBitmapAreaI,
+	GdipCloneBrush:                                   procGdipCloneBrush,
+	GdipCloneCustomLineCap:                           procGdipCloneCustomLineCap,
+	GdipCloneFont:                                    procGdipCloneFont,
+	GdipCloneFontFamily:                              procGdipCloneFontFamily,
+	GdipCloneImage:                                   procGdipCloneImage,
+	GdipCloneImageAttributes:                         procGdipCloneImageAttributes,
+	GdipCloneMatrix:                                  procGdipCloneMatrix,
+	GdipClonePath:                                    procGdipClonePath,
+	GdipClonePen:                                     procGdipClonePen,
+	GdipCloneRegion:                                  procGdipCloneRegion,
+	GdipCloneStringFormat:                            procGdipCloneStringFormat,
+	GdipClosePathFigure:                              procGdipClosePathFigure,
+	GdipClosePathFigures:                             procGdipClosePathFigures,
+	GdipCombineRegionPath:                            procGdipCombineRegionPath,
+	GdipCombineRegionRect:                            procGdipCombineRegionRect,
+	GdipCombineRegionRectI:                           procGdipCombineRegionRectI,
+	GdipCombineRegionRegion:                          procGdipCombineRegionRegion,
+	GdipComment:                                      procGdipComment,
+	GdipConvertToEmfPlus:                             procGdipConvertToEmfPlus,
+	GdipConvertToEmfPlusToFile:                       procGdipConvertToEmfPlusToFile,
+	GdipConvertToEmfPlusToStream:                     procGdipConvertToEmfPlusToStream,
+	GdipCreateAdjustableArrowCap:                     procGdipCreateAdjustableArrowCap,
+	GdipCreateBitmapFromDirectDrawSurface:            procGdipCreateBitmapFromDirectDrawSurface,
+	GdipCreateBitmapFromFile:                         procGdipCreateBitmapFromFile,
+	GdipCreateBitmapFromFileICM:                      procGdipCreateBitmapFromFileICM,
+	GdipCreateBitmapFromGdiDib:                       procGdipCreateBitmapFromGdiDib,
+	GdipCreateBitmapFromGraphics:                     procGdipCreateBitmapFromGraphics,
+	GdipCreateBitmapFromHBITMAP:                      procGdipCreateBitmapFromHBITMAP,
+	GdipCreateBitmapFromHICON:                        procGdipCreateBitmapFromHICON,
+	GdipCreateBitmapFromResource:                     procGdipCreateBitmapFromResource,
+	GdipCreateBitmapFromScan0:                        procGdipCreateBitmapFromScan0,
+	GdipCreateBitmapFromStream:                       procGdipCreateBitmapFromStream,
+	GdipCreateBitmapFromStreamICM:                    procGdipCreateBitmapFromStreamICM,
+	GdipCreateCachedBitmap:                           procGdipCreateCachedBitmap,
+	GdipCreateCustomLineCap:                          procGdipCreateCustomLineCap,
+	GdipCreateEffect:                                 procGdipCreateEffect,
+	GdipCreateFont:                                   procGdipCreateFont,
+	GdipCreateFontFamilyFromName:                     procGdipCreateFontFamilyFromName,
+	GdipCreateFontFromDC:                             procGdipCreateFontFromDC,
+	GdipCreateFontFromLogfont:                        procGdipCreateFontFromLogfont,
+	GdipCreateFontFromLogfontA:                       procGdipCreateFontFromLogfontA,
+	GdipCreateFromHDC:                                procGdipCreateFromHDC,
+	GdipCreateFromHDC2:                               procGdipCreateFromHDC2,
+	GdipCreateFromHWND:                               procGdipCreateFromHWND,
+	GdipCreateFromHWNDICM:                            procGdipCreateFromHWNDICM,
+	GdipCreateHBITMAPFromBitmap:                      procGdipCreateHBITMAPFromBitmap,
+	GdipCreateHICONFromBitmap:                        procGdipCreateHICONFromBitmap,
+	GdipCreateHalftonePalette:                        procGdipCreateHalftonePalette,
+	GdipCreateHatchBrush:                             procGdipCreateHatchBrush,
+	GdipCreateImageAttributes:                        procGdipCreateImageAttributes,
+	GdipCreateLineBrush:                              procGdipCreateLineBrush,
+	GdipCreateLineBrushFromRect:                      procGdipCreateLineBrushFromRect,
+	GdipCreateLineBrushFromRectI:                     procGdipCreateLineBrushFromRectI,
+	GdipCreateLineBrushFromRectWithAngle:             procGdipCreateLineBrushFromRectWithAngle,
+	GdipCreateLineBrushFromRectWithAngleI:            procGdipCreateLineBrushFromRectWithAngleI,
+	GdipCreateLineBrushI:                             procGdipCreateLineBrushI,
+	GdipCreateMatrix:                                 procGdipCreateMatrix,
+	GdipCreateMatrix2:                                procGdipCreateMatrix2,
+	GdipCreateMatrix3:                                procGdipCreateMatrix3,
+	GdipCreateMatrix3I:                               procGdipCreateMatrix3I,
+	GdipCreateMetafileFromEmf:                        procGdipCreateMetafileFromEmf,
+	GdipCreateMetafileFromFile:                       procGdipCreateMetafileFromFile,
+	GdipCreateMetafileFromStream:                     procGdipCreateMetafileFromStream,
+	GdipCreateMetafileFromWmf:                        procGdipCreateMetafileFromWmf,
+	GdipCreateMetafileFromWmfFile:                    procGdipCreateMetafileFromWmfFile,
+	GdipCreatePath:                                   procGdipCreatePath,
+	GdipCreatePath2:                                  procGdipCreatePath2,
+	GdipCreatePath2I:                                 procGdipCreatePath2I,
+	GdipCreatePathGradient:                           procGdipCreatePathGradient,
+	GdipCreatePathGradientFromPath:                   procGdipCreatePathGradientFromPath,
+	GdipCreatePathGradientI:                          procGdipCreatePathGradientI,
+	GdipCreatePathIter:                               procGdipCreatePathIter,
+	GdipCreatePen1:                                   procGdipCreatePen1,
+	GdipCreatePen2:                                   procGdipCreatePen2,
+	GdipCreateRegion:                                 procGdipCreateRegion,
+	GdipCreateRegionHrgn:                             procGdipCreateRegionHrgn,
+	GdipCreateRegionPath:                             procGdipCreateRegionPath,
+	GdipCreateRegionRect:                             procGdipCreateRegionRect,
+	GdipCreateRegionRectI:                            procGdipCreateRegionRectI,
+	GdipCreateRegionRgnData:                          procGdipCreateRegionRgnData,
+	GdipCreateSolidFill:                              procGdipCreateSolidFill,
+	GdipCreateStreamOnFile:                           procGdipCreateStreamOnFile,
+	GdipCreateStringFormat:                           procGdipCreateStringFormat,
+	GdipCreateTexture:                                procGdipCreateTexture,
+	GdipCreateTexture2:                               procGdipCreateTexture2,
+	GdipCreateTexture2I:                              procGdipCreateTexture2I,
+	GdipCreateTextureIA:                              procGdipCreateTextureIA,
+	GdipCreateTextureIAI:                             procGdipCreateTextureIAI,
+	GdipDeleteBrush:                                  procGdipDeleteBrush,
+	GdipDeleteCachedBitmap:                           procGdipDeleteCachedBitmap,
+	GdipDeleteCustomLineCap:                          procGdipDeleteCustomLineCap,
+	GdipDeleteEffect:                                 procGdipDeleteEffect,
+	GdipDeleteFont:                                   procGdipDeleteFont,
+	GdipDeleteFontFamily:                             procGdipDeleteFontFamily,
+	GdipDeleteGraphics:                               procGdipDeleteGraphics,
+	GdipDeleteMatrix:                                 procGdipDeleteMatrix,
+	GdipDeletePath:                                   procGdipDeletePath,
+	GdipDeletePathIter:                               procGdipDeletePathIter,
+	GdipDeletePen:                                    procGdipDeletePen,
+	GdipDeletePrivateFontCollection:                  procGdipDeletePrivateFontCollection,
+	GdipDeleteRegion:                                 procGdipDeleteRegion,
+	GdipDeleteStringFormat:                           procGdipDeleteStringFormat,
+	GdipDisposeImage:                                 procGdipDisposeImage,
+	GdipDisposeImageAttributes:                       procGdipDisposeImageAttributes,
+	GdipDrawArc:                                      procGdipDrawArc,
+	GdipDrawArcI:                                     procGdipDrawArcI,
+	GdipDrawBezier:                                   procGdipDrawBezier,
+	GdipDrawBezierI:                                  procGdipDrawBezierI,
+	GdipDrawBeziers:                                  procGdipDrawBeziers,
+	GdipDrawBeziersI:                                 procGdipDrawBeziersI,
+	GdipDrawCachedBitmap:                             procGdipDrawCachedBitmap,
+	GdipDrawClosedCurve:                              procGdipDrawClosedCurve,
+	GdipDrawClosedCurve2:                             procGdipDrawClosedCurve2,
+	GdipDrawClosedCurve2I:                            procGdipDrawClosedCurve2I,
+	GdipDrawClosedCurveI:                             procGdipDrawClosedCurveI,
+	GdipDrawCurve:                                    procGdipDrawCurve,
+	GdipDrawCurve2:                                   procGdipDrawCurve2,
+	GdipDrawCurve2I:                                  procGdipDrawCurve2I,
+	GdipDrawCurve3:                                   procGdipDrawCurve3,
+	GdipDrawCurve3I:                                  procGdipDrawCurve3I,
+	GdipDrawCurveI:                                   procGdipDrawCurveI,
+	GdipDrawDriverString:                             procGdipDrawDriverString,
+	GdipDrawEllipse:                                  procGdipDrawEllipse,
+	GdipDrawEllipseI:                                 procGdipDrawEllipseI,
+	GdipDrawImage:                                    procGdipDrawImage,
+	GdipDrawImageFX:                                  procGdipDrawImageFX,
+	GdipDrawImageI:                                   procGdipDrawImageI,
+	GdipDrawImagePointRect:                           procGdipDrawImagePointRect,
+	GdipDrawImagePointRectI:                          procGdipDrawImagePointRectI,
+	GdipDrawImagePoints:                              procGdipDrawImagePoints,
+	GdipDrawImagePointsI:                             procGdipDrawImagePointsI,
+	GdipDrawImagePointsRect:                          procGdipDrawImagePointsRect,
+	GdipDrawImagePointsRectI:                         procGdipDrawImagePointsRectI,
+	GdipDrawImageRect:                                procGdipDrawImageRect,
+	GdipDrawImageRectI:                               procGdipDrawImageRectI,
+	GdipDrawImageRectRect:                            procGdipDrawImageRectRect,
+	GdipDrawImageRectRectI:                           procGdipDrawImageRectRectI,
+	GdipDrawLine:                                     procGdipDrawLine,
+	GdipDrawLineI:                                    procGdipDrawLineI,
+	GdipDrawLines:                                    procGdipDrawLines,
+	GdipDrawLinesI:                                   procGdipDrawLinesI,
+	GdipDrawPath:                                     procGdipDrawPath,
+	GdipDrawPie:                                      procGdipDrawPie,
+	GdipDrawPieI:                                     procGdipDrawPieI,
+	GdipDrawPolygon:                                  procGdipDrawPolygon,
+	GdipDrawPolygonI:                                 procGdipDrawPolygonI,
+	GdipDrawRectangle:                                procGdipDrawRectangle,
+	GdipDrawRectangleI:                               procGdipDrawRectangleI,
+	GdipDrawRectangles:                               procGdipDrawRectangles,
+	GdipDrawRectanglesI:                              procGdipDrawRectanglesI,
+	GdipDrawString:                                   procGdipDrawString,
+	GdipEmfToWmfBits:                                 procGdipEmfToWmfBits,
+	GdipEndContainer:                                 procGdipEndContainer,
+	GdipEnumerateMetafileDestPoint:                   procGdipEnumerateMetafileDestPoint,
+	GdipEnumerateMetafileDestPointI:                  procGdipEnumerateMetafileDestPointI,
+	GdipEnumerateMetafileDestPoints:                  procGdipEnumerateMetafileDestPoints,
+	GdipEnumerateMetafileDestPointsI:                 procGdipEnumerateMetafileDestPointsI,
+	GdipEnumerateMetafileDestRect:                    procGdipEnumerateMetafileDestRect,
+	GdipEnumerateMetafileDestRectI:                   procGdipEnumerateMetafileDestRectI,
+	GdipEnumerateMetafileSrcRectDestPoint:            procGdipEnumerateMetafileSrcRectDestPoint,
+	GdipEnumerateMetafileSrcRectDestPointI:           procGdipEnumerateMetafileSrcRectDestPointI,
+	GdipEnumerateMetafileSrcRectDestPoints:           procGdipEnumerateMetafileSrcRectDestPoints,
+	GdipEnumerateMetafileSrcRectDestPointsI:          procGdipEnumerateMetafileSrcRectDestPointsI,
+	GdipEnumerateMetafileSrcRectDestRect:             procGdipEnumerateMetafileSrcRectDestRect,
+	GdipEnumerateMetafileSrcRectDestRectI:            procGdipEnumerateMetafileSrcRectDestRectI,
+	GdipFillClosedCurve:                              procGdipFillClosedCurve,
+	GdipFillClosedCurve2:                             procGdipFillClosedCurve2,
+	GdipFillClosedCurve2I:                            procGdipFillClosedCurve2I,
+	GdipFillClosedCurveI:                             procGdipFillClosedCurveI,
+	GdipFillEllipse:                                  procGdipFillEllipse,
+	GdipFillEllipseI:                                 procGdipFillEllipseI,
+	GdipFillPath:                                     procGdipFillPath,
+	GdipFillPie:                                      procGdipFillPie,
+	GdipFillPieI:                                     procGdipFillPieI,
+	GdipFillPolygon:                                  procGdipFillPolygon,
+	GdipFillPolygon2:                                 procGdipFillPolygon2,
+	GdipFillPolygon2I:                                procGdipFillPolygon2I,
+	GdipFillPolygonI:                                 procGdipFillPolygonI,
+	GdipFillRectangle:                                procGdipFillRectangle,
+	GdipFillRectangleI:                               procGdipFillRectangleI,
+	GdipFillRectangles:                               procGdipFillRectangles,
+	GdipFillRectanglesI:                              procGdipFillRectanglesI,
+	GdipFillRegion:                                   procGdipFillRegion,
+	GdipFindFirstImageItem:                           procGdipFindFirstImageItem,
+	GdipFindNextImageItem:                            procGdipFindNextImageItem,
+	GdipFlattenPath:                                  procGdipFlattenPath,
+	GdipFlush:                                        procGdipFlush,
+	GdipFree:                                         procGdipFree,
+	GdipGetAdjustableArrowCapFillState:               procGdipGetAdjustableArrowCapFillState,
+	GdipGetAdjustableArrowCapHeight:                  procGdipGetAdjustableArrowCapHeight,
+	GdipGetAdjustableArrowCapMiddleInset:             procGdipGetAdjustableArrowCapMiddleInset,
+	GdipGetAdjustableArrowCapWidth:                   procGdipGetAdjustableArrowCapWidth,
+	GdipGetAllPropertyItems:                          procGdipGetAllPropertyItems,
+	GdipGetBrushType:                                 procGdipGetBrushType,
+	GdipGetCellAscent:                                procGdipGetCellAscent,
+	GdipGetCellDescent:                               procGdipGetCellDescent,
+	GdipGetClip:                                      procGdipGetClip,
+	GdipGetClipBounds:                                procGdipGetClipBounds,
+	GdipGetClipBoundsI:                               procGdipGetClipBoundsI,
+	GdipGetCompositingMode:                           procGdipGetCompositingMode,
+	GdipGetCompositingQuality:                        procGdipGetCompositingQuality,
+	GdipGetCustomLineCapBaseCap:                      procGdipGetCustomLineCapBaseCap,
+	GdipGetCustomLineCapBaseInset:                    procGdipGetCustomLineCapBaseInset,
+	GdipGetCustomLineCapStrokeCaps:                   procGdipGetCustomLineCapStrokeCaps,
+	GdipGetCustomLineCapStrokeJoin:                   procGdipGetCustomLineCapStrokeJoin,
+	GdipGetCustomLineCapType:                         procGdipGetCustomLineCapType,
+	GdipGetCustomLineCapWidthScale:                   procGdipGetCustomLineCapWidthScale,
+	GdipGetDC:                                        procGdipGetDC,
+	GdipGetDpiX:                                      procGdipGetDpiX,
+	GdipGetDpiY:                                      procGdipGetDpiY,
+	GdipGetEffectParameterSize:                       procGdipGetEffectParameterSize,
+	GdipGetEffectParameters:                          procGdipGetEffectParameters,
+	GdipGetEmHeight:                                  procGdipGetEmHeight,
+	GdipGetEncoderParameterList:                      procGdipGetEncoderParameterList,
+	GdipGetEncoderParameterListSize:                  procGdipGetEncoderParameterListSize,
+	GdipGetFamily:                                    procGdipGetFamily,
+	GdipGetFamilyName:                                procGdipGetFamilyName,
+	GdipGetFontCollectionFamilyCount:                 procGdipGetFontCollectionFamilyCount,
+	GdipGetFontCollectionFamilyList:                  procGdipGetFontCollectionFamilyList,
+	GdipGetFontHeight:                                procGdipGetFontHeight,
+	GdipGetFontHeightGivenDPI:                        procGdipGetFontHeightGivenDPI,
+	GdipGetFontSize:                                  procGdipGetFontSize,
+	GdipGetFontStyle:                                 procGdipGetFontStyle,
+	GdipGetFontUnit:                                  procGdipGetFontUnit,
+	GdipGetGenericFontFamilyMonospace:                procGdipGetGenericFontFamilyMonospace,
+	GdipGetGenericFontFamilySansSerif:                procGdipGetGenericFontFamilySansSerif,
+	GdipGetGenericFontFamilySerif:                    procGdipGetGenericFontFamilySerif,
+	GdipGetHatchBackgroundColor:                      procGdipGetHatchBackgroundColor,
+	GdipGetHatchForegroundColor:                      procGdipGetHatchForegroundColor,
+	GdipGetHatchStyle:                                procGdipGetHatchStyle,
+	GdipGetHemfFromMetafile:                          procGdipGetHemfFromMetafile,
+	GdipGetImageAttributesAdjustedPalette:            procGdipGetImageAttributesAdjustedPalette,
+	GdipGetImageBounds:                               procGdipGetImageBounds,
+	GdipGetImageDecoders:                             procGdipGetImageDecoders,
+	GdipGetImageDecodersSize:                         procGdipGetImageDecodersSize,
+	GdipGetImageDimension:                            procGdipGetImageDimension,
+	GdipGetImageEncoders:                             procGdipGetImageEncoders,
+	GdipGetImageEncodersSize:                         procGdipGetImageEncodersSize,
+	GdipGetImageFlags:                                procGdipGetImageFlags,
+	GdipGetImageGraphicsContext:                      procGdipGetImageGraphicsContext,
+	GdipGetImageHeight:                               procGdipGetImageHeight,
+	GdipGetImageHorizontalResolution:                 procGdipGetImageHorizontalResolution,
+	GdipGetImageItemData:                             procGdipGetImageItemData,
+	GdipGetImagePalette:                              procGdipGetImagePalette,
+	GdipGetImagePaletteSize:                          procGdipGetImagePaletteSize,
+	GdipGetImagePixelFormat:                          procGdipGetImagePixelFormat,
+	GdipGetImageRawFormat:                            procGdipGetImageRawFormat,
+	GdipGetImageThumbnail:                            procGdipGetImageThumbnail,
+	GdipGetImageType:                                 procGdipGetImageType,
+	GdipGetImageVerticalResolution:                   procGdipGetImageVerticalResolution,
+	GdipGetImageWidth:                                procGdipGetImageWidth,
+	GdipGetInterpolationMode:                         procGdipGetInterpolationMode,
+	GdipGetLineBlend:                                 procGdipGetLineBlend,
+	GdipGetLineBlendCount:                            procGdipGetLineBlendCount,
+	GdipGetLineColors:                                procGdipGetLineColors,
+	GdipGetLineGammaCorrection:                       procGdipGetLineGammaCorrection,
+	GdipGetLinePresetBlend:                           procGdipGetLinePresetBlend,
+	GdipGetLinePresetBlendCount:                      procGdipGetLinePresetBlendCount,
+	GdipGetLineRect:                                  procGdipGetLineRect,
+	GdipGetLineRectI:                                 procGdipGetLineRectI,
+	GdipGetLineSpacing:                               procGdipGetLineSpacing,
+	GdipGetLineTransform:                             procGdipGetLineTransform,
+	GdipGetLineWrapMode:                              procGdipGetLineWrapMode,
+	GdipGetLogFont:                                   procGdipGetLogFont,
+	GdipGetLogFontA:                                  procGdipGetLogFontA,
+	GdipGetMatrixElements:                            procGdipGetMatrixElements,
+	GdipGetMetafileDownLevelRasterizationLimit:       procGdipGetMetafileDownLevelRasterizationLimit,
+	GdipGetMetafileHeaderFromEmf:                     procGdipGetMetafileHeaderFromEmf,
+	GdipGetMetafileHeaderFromFile:                    procGdipGetMetafileHeaderFromFile,
+	GdipGetMetafileHeaderFromMetafile:                procGdipGetMetafileHeaderFromMetafile,
+	GdipGetMetafileHeaderFromStream:                  procGdipGetMetafileHeaderFromStream,
+	GdipGetMetafileHeaderFromWmf:                     procGdipGetMetafileHeaderFromWmf,
+	GdipGetNearestColor:                              procGdipGetNearestColor,
+	GdipGetPageScale:                                 procGdipGetPageScale,
+	GdipGetPageUnit:                                  procGdipGetPageUnit,
+	GdipGetPathData:                                  procGdipGetPathData,
+	GdipGetPathFillMode:                              procGdipGetPathFillMode,
+	GdipGetPathGradientBlend:                         procGdipGetPathGradientBlend,
+	GdipGetPathGradientBlendCount:                    procGdipGetPathGradientBlendCount,
+	GdipGetPathGradientCenterColor:                   procGdipGetPathGradientCenterColor,
+	GdipGetPathGradientCenterPoint:                   procGdipGetPathGradientCenterPoint,
+	GdipGetPathGradientCenterPointI:                  procGdipGetPathGradientCenterPointI,
+	GdipGetPathGradientFocusScales:                   procGdipGetPathGradientFocusScales,
+	GdipGetPathGradientGammaCorrection:               procGdipGetPathGradientGammaCorrection,
+	GdipGetPathGradientPath:                          procGdipGetPathGradientPath,
+	GdipGetPathGradientPointCount:                    procGdipGetPathGradientPointCount,
+	GdipGetPathGradientPresetBlend:                   procGdipGetPathGradientPresetBlend,
+	GdipGetPathGradientPresetBlendCount:              procGdipGetPathGradientPresetBlendCount,
+	GdipGetPathGradientRect:                          procGdipGetPathGradientRect,
+	GdipGetPathGradientRectI:                         procGdipGetPathGradientRectI,
+	GdipGetPathGradientSurroundColorCount:            procGdipGetPathGradientSurroundColorCount,
+	GdipGetPathGradientSurroundColorsWithCount:       procGdipGetPathGradientSurroundColorsWithCount,
+	GdipGetPathGradientTransform:                     procGdipGetPathGradientTransform,
+	GdipGetPathGradientWrapMode:                      procGdipGetPathGradientWrapMode,
+	GdipGetPathLastPoint:                             procGdipGetPathLastPoint,
+	GdipGetPathPoints:                                procGdipGetPathPoints,
+	GdipGetPathPointsI:                               procGdipGetPathPointsI,
+	GdipGetPathTypes:                                 procGdipGetPathTypes,
+	GdipGetPathWorldBounds:                           procGdipGetPathWorldBounds,
+	GdipGetPathWorldBoundsI:                          procGdipGetPathWorldBoundsI,
+	GdipGetPenBrushFill:                              procGdipGetPenBrushFill,
+	GdipGetPenColor:                                  procGdipGetPenColor,
+	GdipGetPenCompoundArray:                          procGdipGetPenCompoundArray,
+	GdipGetPenCompoundCount:                          procGdipGetPenCompoundCount,
+	GdipGetPenCustomEndCap:                           procGdipGetPenCustomEndCap,
+	GdipGetPenCustomStartCap:                         procGdipGetPenCustomStartCap,
+	GdipGetPenDashArray:                              procGdipGetPenDashArray,
+	GdipGetPenDashCap197819:                          procGdipGetPenDashCap197819,
+	GdipGetPenDashCount:                              procGdipGetPenDashCount,
+	GdipGetPenDashOffset:                             procGdipGetPenDashOffset,
+	GdipGetPenDashStyle:                              procGdipGetPenDashStyle,
+	GdipGetPenEndCap:                                 procGdipGetPenEndCap,
+	GdipGetPenFillType:                               procGdipGetPenFillType,
+	GdipGetPenLineJoin:                               procGdipGetPenLineJoin,
+	GdipGetPenMiterLimit:                             procGdipGetPenMiterLimit,
+	GdipGetPenMode:                                   procGdipGetPenMode,
+	GdipGetPenStartCap:                               procGdipGetPenStartCap,
+	GdipGetPenTransform:                              procGdipGetPenTransform,
+	GdipGetPenUnit:                                   procGdipGetPenUnit,
+	GdipGetPenWidth:                                  procGdipGetPenWidth,
+	GdipGetPixelOffsetMode:                           procGdipGetPixelOffsetMode,
+	GdipGetPointCount:                                procGdipGetPointCount,
+	GdipGetPropertyCount:                             procGdipGetPropertyCount,
+	GdipGetPropertyIdList:                            procGdipGetPropertyIdList,
+	GdipGetPropertyItem:                              procGdipGetPropertyItem,
+	GdipGetPropertyItemSize:                          procGdipGetPropertyItemSize,
+	GdipGetPropertySize:                              procGdipGetPropertySize,
+	GdipGetRegionBounds:                              procGdipGetRegionBounds,
+	GdipGetRegionBoundsI:                             procGdipGetRegionBoundsI,
+	GdipGetRegionData:                                procGdipGetRegionData,
+	GdipGetRegionDataSize:                            procGdipGetRegionDataSize,
+	GdipGetRegionHRgn:                                procGdipGetRegionHRgn,
+	GdipGetRegionScans:                               procGdipGetRegionScans,
+	GdipGetRegionScansCount:                          procGdipGetRegionScansCount,
+	GdipGetRegionScansI:                              procGdipGetRegionScansI,
+	GdipGetRenderingOrigin:                           procGdipGetRenderingOrigin,
+	GdipGetSmoothingMode:                             procGdipGetSmoothingMode,
+	GdipGetSolidFillColor:                            procGdipGetSolidFillColor,
+	GdipGetStringFormatAlign:                         procGdipGetStringFormatAlign,
+	GdipGetStringFormatDigitSubstitution:             procGdipGetStringFormatDigitSubstitution,
+	GdipGetStringFormatFlags:                         procGdipGetStringFormatFlags,
+	GdipGetStringFormatHotkeyPrefix:                  procGdipGetStringFormatHotkeyPrefix,
+	GdipGetStringFormatLineAlign:                     procGdipGetStringFormatLineAlign,
+	GdipGetStringFormatMeasurableCharacterRangeCount: procGdipGetStringFormatMeasurableCharacterRangeCount,
+	GdipGetStringFormatTabStopCount:                  procGdipGetStringFormatTabStopCount,
+	GdipGetStringFormatTabStops:                      procGdipGetStringFormatTabStops,
+	GdipGetStringFormatTrimming:                      procGdipGetStringFormatTrimming,
+	GdipGetTextContrast:                              procGdipGetTextContrast,
+	GdipGetTextRenderingHint:                         procGdipGetTextRenderingHint,
+	GdipGetTextureImage:                              procGdipGetTextureImage,
+	GdipGetTextureTransform:                          procGdipGetTextureTransform,
+	GdipGetTextureWrapMode:                           procGdipGetTextureWrapMode,
+	GdipGetVisibleClipBounds:                         procGdipGetVisibleClipBounds,
+	GdipGetVisibleClipBoundsI:                        procGdipGetVisibleClipBoundsI,
+	GdipGetWorldTransform:                            procGdipGetWorldTransform,
+	GdipGraphicsClear:                                procGdipGraphicsClear,
+	GdipGraphicsSetAbort:                             procGdipGraphicsSetAbort,
+	GdipImageForceValidation:                         procGdipImageForceValidation,
+	GdipImageGetFrameCount:                           procGdipImageGetFrameCount,
+	GdipImageGetFrameDimensionsCount:                 procGdipImageGetFrameDimensionsCount,
+	GdipImageGetFrameDimensionsList:                  procGdipImageGetFrameDimensionsList,
+	GdipImageRotateFlip:                              procGdipImageRotateFlip,
+	GdipImageSelectActiveFrame:                       procGdipImageSelectActiveFrame,
+	GdipImageSetAbort:                                procGdipImageSetAbort,
+	GdipInitializePalette:                            procGdipInitializePalette,
+	GdipInvertMatrix:                                 procGdipInvertMatrix,
+	GdipIsClipEmpty:                                  procGdipIsClipEmpty,
+	GdipIsEmptyRegion:                                procGdipIsEmptyRegion,
+	GdipIsEqualRegion:                                procGdipIsEqualRegion,
+	GdipIsInfiniteRegion:                             procGdipIsInfiniteRegion,
+	GdipIsMatrixEqual:                                procGdipIsMatrixEqual,
+	GdipIsMatrixIdentity:                             procGdipIsMatrixIdentity,
+	GdipIsMatrixInvertible:                           procGdipIsMatrixInvertible,
+	GdipIsOutlineVisiblePathPoint:                    procGdipIsOutlineVisiblePathPoint,
+	GdipIsOutlineVisiblePathPointI:                   procGdipIsOutlineVisiblePathPointI,
+	GdipIsStyleAvailable:                             procGdipIsStyleAvailable,
+	GdipIsVisibleClipEmpty:                           procGdipIsVisibleClipEmpty,
+	GdipIsVisiblePathPoint:                           procGdipIsVisiblePathPoint,
+	GdipIsVisiblePathPointI:                          procGdipIsVisiblePathPointI,
+	GdipIsVisiblePoint:                               procGdipIsVisiblePoint,
+	GdipIsVisiblePointI:                              procGdipIsVisiblePointI,
+	GdipIsVisibleRect:                                procGdipIsVisibleRect,
+	GdipIsVisibleRectI:                               procGdipIsVisibleRectI,
+	GdipIsVisibleRegionPoint:                         procGdipIsVisibleRegionPoint,
+	GdipIsVisibleRegionPointI:                        procGdipIsVisibleRegionPointI,
+	GdipIsVisibleRegionRect:                          procGdipIsVisibleRegionRect,
+	GdipIsVisibleRegionRectI:                         procGdipIsVisibleRegionRectI,
+	GdipLoadImageFromFile:                            procGdipLoadImageFromFile,
+	GdipLoadImageFromFileICM:                         procGdipLoadImageFromFileICM,
+	GdipLoadImageFromStream:                          procGdipLoadImageFromStream,
+	GdipLoadImageFromStreamICM:                       procGdipLoadImageFromStreamICM,
+	GdipMeasureCharacterRanges:                       procGdipMeasureCharacterRanges,
+	GdipMeasureDriverString:                          procGdipMeasureDriverString,
+	GdipMeasureString:                                procGdipMeasureString,
+	GdipMultiplyLineTransform:                        procGdipMultiplyLineTransform,
+	GdipMultiplyMatrix:                               procGdipMultiplyMatrix,
+	GdipMultiplyPathGradientTransform:                procGdipMultiplyPathGradientTransform,
+	GdipMultiplyPenTransform:                         procGdipMultiplyPenTransform,
+	GdipMultiplyTextureTransform:                     procGdipMultiplyTextureTransform,
+	GdipMultiplyWorldTransform:                       procGdipMultiplyWorldTransform,
+	GdipNewInstalledFontCollection:                   procGdipNewInstalledFontCollection,
+	GdipNewPrivateFontCollection:                     procGdipNewPrivateFontCollection,
+	GdipPathIterCopyData:                             procGdipPathIterCopyData,
+	GdipPathIterEnumerate:                            procGdipPathIterEnumerate,
+	GdipPathIterGetCount:                             procGdipPathIterGetCount,
+	GdipPathIterGetSubpathCount:                      procGdipPathIterGetSubpathCount,
+	GdipPathIterHasCurve:                             procGdipPathIterHasCurve,
+	GdipPathIterIsValid:                              procGdipPathIterIsValid,
+	GdipPathIterNextMarker:                           procGdipPathIterNextMarker,
+	GdipPathIterNextMarkerPath:                       procGdipPathIterNextMarkerPath,
+	GdipPathIterNextPathType:                         procGdipPathIterNextPathType,
+	GdipPathIterNextSubpath:                          procGdipPathIterNextSubpath,
+	GdipPathIterNextSubpathPath:                      procGdipPathIterNextSubpathPath,
+	GdipPathIterRewind:                               procGdipPathIterRewind,
+	GdipPlayMetafileRecord:                           procGdipPlayMetafileRecord,
+	GdipPrivateAddFontFile:                           procGdipPrivateAddFontFile,
+	GdipPrivateAddMemoryFont:                         procGdipPrivateAddMemoryFont,
+	GdipRecordMetafile:                               procGdipRecordMetafile,
+	GdipRecordMetafileFileName:                       procGdipRecordMetafileFileName,
+	GdipRecordMetafileFileNameI:                      procGdipRecordMetafileFileNameI,
+	GdipRecordMetafileI:                              procGdipRecordMetafileI,
+	GdipRecordMetafileStream:                         procGdipRecordMetafileStream,
+	GdipRecordMetafileStreamI:                        procGdipRecordMetafileStreamI,
+	GdipReleaseDC:                                    procGdipReleaseDC,
+	GdipRemovePropertyItem:                           procGdipRemovePropertyItem,
+	GdipResetClip:                                    procGdipResetClip,
+	GdipResetImageAttributes:                         procGdipResetImageAttributes,
+	GdipResetLineTransform:                           procGdipResetLineTransform,
+	GdipResetPageTransform:                           procGdipResetPageTransform,
+	GdipResetPath:                                    procGdipResetPath,
+	GdipResetPathGradientTransform:                   procGdipResetPathGradientTransform,
+	GdipResetPenTransform:                            procGdipResetPenTransform,
+	GdipResetTextureTransform:                        procGdipResetTextureTransform,
+	GdipResetWorldTransform:                          procGdipResetWorldTransform,
+	GdipRestoreGraphics:                              procGdipRestoreGraphics,
+	GdipReversePath:                                  procGdipReversePath,
+	GdipRotateLineTransform:                          procGdipRotateLineTransform,
+	GdipRotateMatrix:                                 procGdipRotateMatrix,
+	GdipRotatePathGradientTransform:                  procGdipRotatePathGradientTransform,
+	GdipRotatePenTransform:                           procGdipRotatePenTransform,
+	GdipRotateTextureTransform:                       procGdipRotateTextureTransform,
+	GdipRotateWorldTransform:                         procGdipRotateWorldTransform,
+	GdipSaveAdd:                                      procGdipSaveAdd,
+	GdipSaveAddImage:                                 procGdipSaveAddImage,
+	GdipSaveGraphics:                                 procGdipSaveGraphics,
+	GdipSaveImageToFile:                              procGdipSaveImageToFile,
+	GdipSaveImageToStream:                            procGdipSaveImageToStream,
+	GdipScaleLineTransform:                           procGdipScaleLineTransform,
+	GdipScaleMatrix:                                  procGdipScaleMatrix,
+	GdipScalePathGradientTransform:                   procGdipScalePathGradientTransform,
+	GdipScalePenTransform:                            procGdipScalePenTransform,
+	GdipScaleTextureTransform:                        procGdipScaleTextureTransform,
+	GdipScaleWorldTransform:                          procGdipScaleWorldTransform,
+	GdipSetAdjustableArrowCapFillState:               procGdipSetAdjustableArrowCapFillState,
+	GdipSetAdjustableArrowCapHeight:                  procGdipSetAdjustableArrowCapHeight,
+	GdipSetAdjustableArrowCapMiddleInset:             procGdipSetAdjustableArrowCapMiddleInset,
+	GdipSetAdjustableArrowCapWidth:                   procGdipSetAdjustableArrowCapWidth,
+	GdipSetClipGraphics:                              procGdipSetClipGraphics,
+	GdipSetClipHrgn:                                  procGdipSetClipHrgn,
+	GdipSetClipPath:                                  procGdipSetClipPath,
+	GdipSetClipRect:                                  procGdipSetClipRect,
+	GdipSetClipRectI:                                 procGdipSetClipRectI,
+	GdipSetClipRegion:                                procGdipSetClipRegion,
+	GdipSetCompositingMode:                           procGdipSetCompositingMode,
+	GdipSetCompositingQuality:                        procGdipSetCompositingQuality,
+	GdipSetCustomLineCapBaseCap:                      procGdipSetCustomLineCapBaseCap,
+	GdipSetCustomLineCapBaseInset:                    procGdipSetCustomLineCapBaseInset,
+	GdipSetCustomLineCapStrokeCaps:                   procGdipSetCustomLineCapStrokeCaps,
+	GdipSetCustomLineCapStrokeJoin:                   procGdipSetCustomLineCapStrokeJoin,
+	GdipSetCustomLineCapWidthScale:                   procGdipSetCustomLineCapWidthScale,
+	GdipSetEffectParameters:                          procGdipSetEffectParameters,
+	GdipSetEmpty:                                     procGdipSetEmpty,
+	GdipSetImageAttributesCachedBackground:           procGdipSetImageAttributesCachedBackground,
+	GdipSetImageAttributesColorKeys:                  procGdipSetImageAttributesColorKeys,
+	GdipSetImageAttributesColorMatrix:                procGdipSetImageAttributesColorMatrix,
+	GdipSetImageAttributesGamma:                      procGdipSetImageAttributesGamma,
+	GdipSetImageAttributesNoOp:                       procGdipSetImageAttributesNoOp,
+	GdipSetImageAttributesOutputChannel:              procGdipSetImageAttributesOutputChannel,
+	GdipSetImageAttributesOutputChannelColorProfile:  procGdipSetImageAttributesOutputChannelColorProfile,
+	GdipSetImageAttributesRemapTable:                 procGdipSetImageAttributesRemapTable,
+	GdipSetImageAttributesThreshold:                  procGdipSetImageAttributesThreshold,
+	GdipSetImageAttributesToIdentity:                 procGdipSetImageAttributesToIdentity,
+	GdipSetImageAttributesWrapMode:                   procGdipSetImageAttributesWrapMode,
+	GdipSetImagePalette:                              procGdipSetImagePalette,
+	GdipSetInfinite:                                  procGdipSetInfinite,
+	GdipSetInterpolationMode:                         procGdipSetInterpolationMode,
+	GdipSetLineBlend:                                 procGdipSetLineBlend,
+	GdipSetLineColors:                                procGdipSetLineColors,
+	GdipSetLineGammaCorrection:                       procGdipSetLineGammaCorrection,
+	GdipSetLineLinearBlend:                           procGdipSetLineLinearBlend,
+	GdipSetLinePresetBlend:                           procGdipSetLinePresetBlend,
+	GdipSetLineSigmaBlend:                            procGdipSetLineSigmaBlend,
+	GdipSetLineTransform:                             procGdipSetLineTransform,
+	GdipSetLineWrapMode:                              procGdipSetLineWrapMode,
+	GdipSetMatrixElements:                            procGdipSetMatrixElements,
+	GdipSetMetafileDownLevelRasterizationLimit:       procGdipSetMetafileDownLevelRasterizationLimit,
+	GdipSetPageScale:                                 procGdipSetPageScale,
+	GdipSetPageUnit:                                  procGdipSetPageUnit,
+	GdipSetPathFillMode:                              procGdipSetPathFillMode,
+	GdipSetPathGradientBlend:                         procGdipSetPathGradientBlend,
+	GdipSetPathGradientCenterColor:                   procGdipSetPathGradientCenterColor,
+	GdipSetPathGradientCenterPoint:                   procGdipSetPathGradientCenterPoint,
+	GdipSetPathGradientCenterPointI:                  procGdipSetPathGradientCenterPointI,
+	GdipSetPathGradientFocusScales:                   procGdipSetPathGradientFocusScales,
+	GdipSetPathGradientGammaCorrection:               procGdipSetPathGradientGammaCorrection,
+	GdipSetPathGradientLinearBlend:                   procGdipSetPathGradientLinearBlend,
+	GdipSetPathGradientPath:                          procGdipSetPathGradientPath,
+	GdipSetPathGradientPresetBlend:                   procGdipSetPathGradientPresetBlend,
+	GdipSetPathGradientSigmaBlend:                    procGdipSetPathGradientSigmaBlend,
+	GdipSetPathGradientSurroundColorsWithCount:       procGdipSetPathGradientSurroundColorsWithCount,
+	GdipSetPathGradientTransform:                     procGdipSetPathGradientTransform,
+	GdipSetPathGradientWrapMode:                      procGdipSetPathGradientWrapMode,
+	GdipSetPathMarker:                                procGdipSetPathMarker,
+	GdipSetPenBrushFill:                              procGdipSetPenBrushFill,
+	GdipSetPenColor:                                  procGdipSetPenColor,
+	GdipSetPenCompoundArray:                          procGdipSetPenCompoundArray,
+	GdipSetPenCustomEndCap:                           procGdipSetPenCustomEndCap,
+	GdipSetPenCustomStartCap:                         procGdipSetPenCustomStartCap,
+	GdipSetPenDashArray:                              procGdipSetPenDashArray,
+	GdipSetPenDashCap197819:                          procGdipSetPenDashCap197819,
+	GdipSetPenDashOffset:                             procGdipSetPenDashOffset,
+	GdipSetPenDashStyle:                              procGdipSetPenDashStyle,
+	GdipSetPenEndCap:                                 procGdipSetPenEndCap,
+	GdipSetPenLineCap197819:                          procGdipSetPenLineCap197819,
+	GdipSetPenLineJoin:                               procGdipSetPenLineJoin,
+	GdipSetPenMiterLimit:                             procGdipSetPenMiterLimit,
+	GdipSetPenMode:                                   procGdipSetPenMode,
+	GdipSetPenStartCap:                               procGdipSetPenStartCap,
+	GdipSetPenTransform:                              procGdipSetPenTransform,
+	GdipSetPenUnit:                                   procGdipSetPenUnit,
+	GdipSetPenWidth:                                  procGdipSetPenWidth,
+	GdipSetPixelOffsetMode:                           procGdipSetPixelOffsetMode,
+	GdipSetPropertyItem:                              procGdipSetPropertyItem,
+	GdipSetRenderingOrigin:                           procGdipSetRenderingOrigin,
+	GdipSetSmoothingMode:                             procGdipSetSmoothingMode,
+	GdipSetSolidFillColor:                            procGdipSetSolidFillColor,
+	GdipSetStringFormatAlign:                         procGdipSetStringFormatAlign,
+	GdipSetStringFormatDigitSubstitution:             procGdipSetStringFormatDigitSubstitution,
+	GdipSetStringFormatFlags:                         procGdipSetStringFormatFlags,
+	GdipSetStringFormatHotkeyPrefix:                  procGdipSetStringFormatHotkeyPrefix,
+	GdipSetStringFormatLineAlign:                     procGdipSetStringFormatLineAlign,
+	GdipSetStringFormatMeasurableCharacterRanges:     procGdipSetStringFormatMeasurableCharacterRanges,
+	GdipSetStringFormatTabStops:                      procGdipSetStringFormatTabStops,
+	GdipSetStringFormatTrimming:                      procGdipSetStringFormatTrimming,
+	GdipSetTextContrast:                              procGdipSetTextContrast,
+	GdipSetTextRenderingHint:                         procGdipSetTextRenderingHint,
+	GdipSetTextureTransform:                          procGdipSetTextureTransform,
+	GdipSetTextureWrapMode:                           procGdipSetTextureWrapMode,
+	GdipSetWorldTransform:                            procGdipSetWorldTransform,
+	GdipShearMatrix:                                  procGdipShearMatrix,
+	GdipStartPathFigure:                              procGdipStartPathFigure,
+	GdipStringFormatGetGenericDefault:                procGdipStringFormatGetGenericDefault,
+	GdipStringFormatGetGenericTypographic:            procGdipStringFormatGetGenericTypographic,
+	GdipTestControl:                                  procGdipTestControl,
+	GdipTransformMatrixPoints:                        procGdipTransformMatrixPoints,
+	GdipTransformMatrixPointsI:                       procGdipTransformMatrixPointsI,
+	GdipTransformPath:                                procGdipTransformPath,
+	GdipTransformPoints:                              procGdipTransformPoints,
+	GdipTransformPointsI:                             procGdipTransformPointsI,
+	GdipTransformRegion:                              procGdipTransformRegion,
+	GdipTranslateClip:                                procGdipTranslateClip,
+	GdipTranslateClipI:                               procGdipTranslateClipI,
+	GdipTranslateLineTransform:                       procGdipTranslateLineTransform,
+	GdipTranslateMatrix:                              procGdipTranslateMatrix,
+	GdipTranslatePathGradientTransform:               procGdipTranslatePathGradientTransform,
+	GdipTranslatePenTransform:                        procGdipTranslatePenTransform,
+	GdipTranslateRegion:                              procGdipTranslateRegion,
+	GdipTranslateRegionI:                             procGdipTranslateRegionI,
+	GdipTranslateTextureTransform:                    procGdipTranslateTextureTransform,
+	GdipTranslateWorldTransform:                      procGdipTranslateWorldTransform,
+	GdipVectorTransformMatrixPoints:                  procGdipVectorTransformMatrixPoints,
+	GdipVectorTransformMatrixPointsI:                 procGdipVectorTransformMatrixPointsI,
+	GdipWarpPath:                                     procGdipWarpPath,
+	GdipWidenPath:                                    procGdipWidenPath,
+	GdipWindingModeOutline:                           procGdipWindingModeOutline,
+	GdiplusNotificationHook:                          procGdiplusNotificationHook,
+	GdiplusNotificationUnhook:                        procGdiplusNotificationUnhook,
+	GdiplusShutdown:                                  procGdiplusShutdown,
+	GdiplusStartup:                                   procGdiplusStartup,
+}
+
+var specGdipAddPathArc = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipAddPathArc calls gdiplus!GdipAddPathArc.
+func GdipAddPathArc(path *GpPath, x float32, y float32, width float32, height float32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathArc.Addr(), specGdipAddPathArc, nil, uintptr(unsafe.Pointer(path)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
+	return Status(r1)
+}
+
+var specGdipAddPathArcI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// GdipAddPathArcI calls gdiplus!GdipAddPathArcI.
+func GdipAddPathArcI(path *GpPath, x int32, y int32, width int32, height int32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathArcI.Addr(), specGdipAddPathArcI, nil, uintptr(unsafe.Pointer(path)), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
+	return Status(r1)
+}
+
+var specGdipAddPathBezier = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipAddPathBezier calls gdiplus!GdipAddPathBezier.
+func GdipAddPathBezier(path *GpPath, x1 float32, y1 float32, x2 float32, y2 float32, x3 float32, y3 float32, x4 float32, y4 float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathBezier.Addr(), specGdipAddPathBezier, nil, uintptr(unsafe.Pointer(path)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2)), uintptr(math.Float32bits(x3)), uintptr(math.Float32bits(y3)), uintptr(math.Float32bits(x4)), uintptr(math.Float32bits(y4))).Tuple()
+	return Status(r1)
+}
 
 // GdipAddPathBezierI calls gdiplus!GdipAddPathBezierI.
 func GdipAddPathBezierI(path *GpPath, x1 int32, y1 int32, x2 int32, y2 int32, x3 int32, y3 int32, x4 int32, y4 int32) Status {
@@ -570,6 +1967,22 @@ func GdipAddPathClosedCurve(path *GpPath, points *PointF, count int32) Status {
 	return Status(r1)
 }
 
+var specGdipAddPathClosedCurve2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipAddPathClosedCurve2 calls gdiplus!GdipAddPathClosedCurve2.
+func GdipAddPathClosedCurve2(path *GpPath, points *PointF, count int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathClosedCurve2.Addr(), specGdipAddPathClosedCurve2, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
+var specGdipAddPathClosedCurve2I = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipAddPathClosedCurve2I calls gdiplus!GdipAddPathClosedCurve2I.
+func GdipAddPathClosedCurve2I(path *GpPath, points *Point, count int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathClosedCurve2I.Addr(), specGdipAddPathClosedCurve2I, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
 // GdipAddPathClosedCurveI calls gdiplus!GdipAddPathClosedCurveI.
 func GdipAddPathClosedCurveI(path *GpPath, points *Point, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipAddPathClosedCurveI.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count))
@@ -582,15 +1995,63 @@ func GdipAddPathCurve(path *GpPath, points *PointF, count int32) Status {
 	return Status(r1)
 }
 
+var specGdipAddPathCurve2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipAddPathCurve2 calls gdiplus!GdipAddPathCurve2.
+func GdipAddPathCurve2(path *GpPath, points *PointF, count int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathCurve2.Addr(), specGdipAddPathCurve2, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
+var specGdipAddPathCurve2I = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipAddPathCurve2I calls gdiplus!GdipAddPathCurve2I.
+func GdipAddPathCurve2I(path *GpPath, points *Point, count int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathCurve2I.Addr(), specGdipAddPathCurve2I, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
+var specGdipAddPathCurve3 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipAddPathCurve3 calls gdiplus!GdipAddPathCurve3.
+func GdipAddPathCurve3(path *GpPath, points *PointF, count int32, offset int32, numberOfSegments int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathCurve3.Addr(), specGdipAddPathCurve3, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(offset), uintptr(numberOfSegments), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
+var specGdipAddPathCurve3I = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipAddPathCurve3I calls gdiplus!GdipAddPathCurve3I.
+func GdipAddPathCurve3I(path *GpPath, points *Point, count int32, offset int32, numberOfSegments int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathCurve3I.Addr(), specGdipAddPathCurve3I, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(offset), uintptr(numberOfSegments), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
 // GdipAddPathCurveI calls gdiplus!GdipAddPathCurveI.
 func GdipAddPathCurveI(path *GpPath, points *Point, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipAddPathCurveI.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count))
 	return Status(r1)
 }
 
+var specGdipAddPathEllipse = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipAddPathEllipse calls gdiplus!GdipAddPathEllipse.
+func GdipAddPathEllipse(path *GpPath, x float32, y float32, width float32, height float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathEllipse.Addr(), specGdipAddPathEllipse, nil, uintptr(unsafe.Pointer(path)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height))).Tuple()
+	return Status(r1)
+}
+
 // GdipAddPathEllipseI calls gdiplus!GdipAddPathEllipseI.
 func GdipAddPathEllipseI(path *GpPath, x int32, y int32, width int32, height int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipAddPathEllipseI.Addr(), uintptr(unsafe.Pointer(path)), uintptr(x), uintptr(y), uintptr(width), uintptr(height))
+	return Status(r1)
+}
+
+var specGdipAddPathLine = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipAddPathLine calls gdiplus!GdipAddPathLine.
+func GdipAddPathLine(path *GpPath, x1 float32, y1 float32, x2 float32, y2 float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathLine.Addr(), specGdipAddPathLine, nil, uintptr(unsafe.Pointer(path)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2))).Tuple()
 	return Status(r1)
 }
 
@@ -619,6 +2080,22 @@ func GdipAddPathPath(path *GpPath, addingPath *GpPath, connect bool) Status {
 	return Status(r1)
 }
 
+var specGdipAddPathPie = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipAddPathPie calls gdiplus!GdipAddPathPie.
+func GdipAddPathPie(path *GpPath, x float32, y float32, width float32, height float32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathPie.Addr(), specGdipAddPathPie, nil, uintptr(unsafe.Pointer(path)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
+	return Status(r1)
+}
+
+var specGdipAddPathPieI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// GdipAddPathPieI calls gdiplus!GdipAddPathPieI.
+func GdipAddPathPieI(path *GpPath, x int32, y int32, width int32, height int32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathPieI.Addr(), specGdipAddPathPieI, nil, uintptr(unsafe.Pointer(path)), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
+	return Status(r1)
+}
+
 // GdipAddPathPolygon calls gdiplus!GdipAddPathPolygon.
 func GdipAddPathPolygon(path *GpPath, points *PointF, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipAddPathPolygon.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count))
@@ -628,6 +2105,14 @@ func GdipAddPathPolygon(path *GpPath, points *PointF, count int32) Status {
 // GdipAddPathPolygonI calls gdiplus!GdipAddPathPolygonI.
 func GdipAddPathPolygonI(path *GpPath, points *Point, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipAddPathPolygonI.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(points)), uintptr(count))
+	return Status(r1)
+}
+
+var specGdipAddPathRectangle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipAddPathRectangle calls gdiplus!GdipAddPathRectangle.
+func GdipAddPathRectangle(path *GpPath, x float32, y float32, width float32, height float32) Status {
+	r1, _, _ := win32.Call(procGdipAddPathRectangle.Addr(), specGdipAddPathRectangle, nil, uintptr(unsafe.Pointer(path)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height))).Tuple()
 	return Status(r1)
 }
 
@@ -646,6 +2131,24 @@ func GdipAddPathRectangles(path *GpPath, rects *RectF, count int32) Status {
 // GdipAddPathRectanglesI calls gdiplus!GdipAddPathRectanglesI.
 func GdipAddPathRectanglesI(path *GpPath, rects *Rect, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipAddPathRectanglesI.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(rects)), uintptr(count))
+	return Status(r1)
+}
+
+var specGdipAddPathString = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// GdipAddPathString calls gdiplus!GdipAddPathString.
+func GdipAddPathString(path *GpPath, string_ string, length int32, family *GpFontFamily, style int32, emSize float32, layoutRect *RectF, format *GpStringFormat) Status {
+	_string_ := win32.UTF16Ptr(string_)
+	r1, _, _ := win32.Call(procGdipAddPathString.Addr(), specGdipAddPathString, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(_string_)), uintptr(length), uintptr(unsafe.Pointer(family)), uintptr(style), uintptr(math.Float32bits(emSize)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(format))).Tuple()
+	return Status(r1)
+}
+
+var specGdipAddPathStringI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// GdipAddPathStringI calls gdiplus!GdipAddPathStringI.
+func GdipAddPathStringI(path *GpPath, string_ string, length int32, family *GpFontFamily, style int32, emSize float32, layoutRect *Rect, format *GpStringFormat) Status {
+	_string_ := win32.UTF16Ptr(string_)
+	r1, _, _ := win32.Call(procGdipAddPathStringI.Addr(), specGdipAddPathStringI, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(_string_)), uintptr(length), uintptr(unsafe.Pointer(family)), uintptr(style), uintptr(math.Float32bits(emSize)), uintptr(unsafe.Pointer(layoutRect)), uintptr(unsafe.Pointer(format))).Tuple()
 	return Status(r1)
 }
 
@@ -677,6 +2180,14 @@ func GdipBeginContainerI(graphics *GpGraphics, dstrect *Rect, srcrect *Rect, uni
 func GdipBitmapApplyEffect(bitmap *GpBitmap, effect *CGpEffect, roi *foundation.RECT, useAuxData bool, auxData *unsafe.Pointer, auxDataSize *int32) Status {
 	_useAuxData := win32.Bool32(useAuxData)
 	r1, _, _ := syscall.SyscallN(procGdipBitmapApplyEffect.Addr(), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(effect)), uintptr(unsafe.Pointer(roi)), uintptr(_useAuxData), uintptr(unsafe.Pointer(auxData)), uintptr(unsafe.Pointer(auxDataSize)))
+	return Status(r1)
+}
+
+var specGdipBitmapConvertFormat = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipBitmapConvertFormat calls gdiplus!GdipBitmapConvertFormat.
+func GdipBitmapConvertFormat(pInputBitmap *GpBitmap, format int32, dithertype DitherType, palettetype PaletteType, palette *ColorPalette, alphaThresholdPercent float32) Status {
+	r1, _, _ := win32.Call(procGdipBitmapConvertFormat.Addr(), specGdipBitmapConvertFormat, nil, uintptr(unsafe.Pointer(pInputBitmap)), uintptr(format), uintptr(dithertype), uintptr(palettetype), uintptr(unsafe.Pointer(palette)), uintptr(math.Float32bits(alphaThresholdPercent))).Tuple()
 	return Status(r1)
 }
 
@@ -717,6 +2228,14 @@ func GdipBitmapSetPixel(bitmap *GpBitmap, x int32, y int32, color uint32) Status
 	return Status(r1)
 }
 
+var specGdipBitmapSetResolution = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// GdipBitmapSetResolution calls gdiplus!GdipBitmapSetResolution.
+func GdipBitmapSetResolution(bitmap *GpBitmap, xdpi float32, ydpi float32) Status {
+	r1, _, _ := win32.Call(procGdipBitmapSetResolution.Addr(), specGdipBitmapSetResolution, nil, uintptr(unsafe.Pointer(bitmap)), uintptr(math.Float32bits(xdpi)), uintptr(math.Float32bits(ydpi))).Tuple()
+	return Status(r1)
+}
+
 // GdipBitmapUnlockBits calls gdiplus!GdipBitmapUnlockBits.
 func GdipBitmapUnlockBits(bitmap *GpBitmap, lockedBitmapData *BitmapData) Status {
 	r1, _, _ := syscall.SyscallN(procGdipBitmapUnlockBits.Addr(), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(lockedBitmapData)))
@@ -726,6 +2245,14 @@ func GdipBitmapUnlockBits(bitmap *GpBitmap, lockedBitmapData *BitmapData) Status
 // GdipClearPathMarkers calls gdiplus!GdipClearPathMarkers.
 func GdipClearPathMarkers(path *GpPath) Status {
 	r1, _, _ := syscall.SyscallN(procGdipClearPathMarkers.Addr(), uintptr(unsafe.Pointer(path)))
+	return Status(r1)
+}
+
+var specGdipCloneBitmapArea = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// GdipCloneBitmapArea calls gdiplus!GdipCloneBitmapArea.
+func GdipCloneBitmapArea(x float32, y float32, width float32, height float32, format int32, srcBitmap *GpBitmap, dstBitmap **GpBitmap) Status {
+	r1, _, _ := win32.Call(procGdipCloneBitmapArea.Addr(), specGdipCloneBitmapArea, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(format), uintptr(unsafe.Pointer(srcBitmap)), uintptr(unsafe.Pointer(dstBitmap))).Tuple()
 	return Status(r1)
 }
 
@@ -865,6 +2392,15 @@ func GdipConvertToEmfPlusToStream(refGraphics *GpGraphics, metafile *GpMetafile,
 	return Status(r1)
 }
 
+var specGdipCreateAdjustableArrowCap = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// GdipCreateAdjustableArrowCap calls gdiplus!GdipCreateAdjustableArrowCap.
+func GdipCreateAdjustableArrowCap(height float32, width float32, isFilled bool, cap_ **GpAdjustableArrowCap) Status {
+	_isFilled := win32.Bool32(isFilled)
+	r1, _, _ := win32.Call(procGdipCreateAdjustableArrowCap.Addr(), specGdipCreateAdjustableArrowCap, nil, uintptr(math.Float32bits(height)), uintptr(math.Float32bits(width)), uintptr(_isFilled), uintptr(unsafe.Pointer(cap_))).Tuple()
+	return Status(r1)
+}
+
 // GdipCreateBitmapFromDirectDrawSurface calls gdiplus!GdipCreateBitmapFromDirectDrawSurface.
 func GdipCreateBitmapFromDirectDrawSurface(surface *graphicsdirectdraw.IDirectDrawSurface7, bitmap **GpBitmap) Status {
 	r1, _, _ := syscall.SyscallN(procGdipCreateBitmapFromDirectDrawSurface.Addr(), uintptr(unsafe.Pointer(surface)), uintptr(unsafe.Pointer(bitmap)))
@@ -937,6 +2473,30 @@ func GdipCreateBitmapFromStreamICM(stream *systemcom.IStream, bitmap **GpBitmap)
 // GdipCreateCachedBitmap calls gdiplus!GdipCreateCachedBitmap.
 func GdipCreateCachedBitmap(bitmap *GpBitmap, graphics *GpGraphics, cachedBitmap **GpCachedBitmap) Status {
 	r1, _, _ := syscall.SyscallN(procGdipCreateCachedBitmap.Addr(), uintptr(unsafe.Pointer(bitmap)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(cachedBitmap)))
+	return Status(r1)
+}
+
+var specGdipCreateCustomLineCap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// GdipCreateCustomLineCap calls gdiplus!GdipCreateCustomLineCap.
+func GdipCreateCustomLineCap(fillPath *GpPath, strokePath *GpPath, baseCap LineCap, baseInset float32, customCap **GpCustomLineCap) Status {
+	r1, _, _ := win32.Call(procGdipCreateCustomLineCap.Addr(), specGdipCreateCustomLineCap, nil, uintptr(unsafe.Pointer(fillPath)), uintptr(unsafe.Pointer(strokePath)), uintptr(baseCap), uintptr(math.Float32bits(baseInset)), uintptr(unsafe.Pointer(customCap))).Tuple()
+	return Status(r1)
+}
+
+var specGdipCreateEffect = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GdipCreateEffect calls gdiplus!GdipCreateEffect.
+func GdipCreateEffect(guid win32.GUID, effect **CGpEffect) Status {
+	r1, _, _ := win32.Call(procGdipCreateEffect.Addr(), specGdipCreateEffect, nil, uintptr(unsafe.Pointer(&guid)), uintptr(unsafe.Pointer(effect))).Tuple()
+	return Status(r1)
+}
+
+var specGdipCreateFont = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// GdipCreateFont calls gdiplus!GdipCreateFont.
+func GdipCreateFont(fontFamily *GpFontFamily, emSize float32, style int32, unit Unit, font **GpFont) Status {
+	r1, _, _ := win32.Call(procGdipCreateFont.Addr(), specGdipCreateFont, nil, uintptr(unsafe.Pointer(fontFamily)), uintptr(math.Float32bits(emSize)), uintptr(style), uintptr(unit), uintptr(unsafe.Pointer(font))).Tuple()
 	return Status(r1)
 }
 
@@ -1037,6 +2597,24 @@ func GdipCreateLineBrushFromRectI(rect *Rect, color1 uint32, color2 uint32, mode
 	return Status(r1)
 }
 
+var specGdipCreateLineBrushFromRectWithAngle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// GdipCreateLineBrushFromRectWithAngle calls gdiplus!GdipCreateLineBrushFromRectWithAngle.
+func GdipCreateLineBrushFromRectWithAngle(rect *RectF, color1 uint32, color2 uint32, angle float32, isAngleScalable bool, wrapMode WrapMode, lineGradient **GpLineGradient) Status {
+	_isAngleScalable := win32.Bool32(isAngleScalable)
+	r1, _, _ := win32.Call(procGdipCreateLineBrushFromRectWithAngle.Addr(), specGdipCreateLineBrushFromRectWithAngle, nil, uintptr(unsafe.Pointer(rect)), uintptr(color1), uintptr(color2), uintptr(math.Float32bits(angle)), uintptr(_isAngleScalable), uintptr(wrapMode), uintptr(unsafe.Pointer(lineGradient))).Tuple()
+	return Status(r1)
+}
+
+var specGdipCreateLineBrushFromRectWithAngleI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// GdipCreateLineBrushFromRectWithAngleI calls gdiplus!GdipCreateLineBrushFromRectWithAngleI.
+func GdipCreateLineBrushFromRectWithAngleI(rect *Rect, color1 uint32, color2 uint32, angle float32, isAngleScalable bool, wrapMode WrapMode, lineGradient **GpLineGradient) Status {
+	_isAngleScalable := win32.Bool32(isAngleScalable)
+	r1, _, _ := win32.Call(procGdipCreateLineBrushFromRectWithAngleI.Addr(), specGdipCreateLineBrushFromRectWithAngleI, nil, uintptr(unsafe.Pointer(rect)), uintptr(color1), uintptr(color2), uintptr(math.Float32bits(angle)), uintptr(_isAngleScalable), uintptr(wrapMode), uintptr(unsafe.Pointer(lineGradient))).Tuple()
+	return Status(r1)
+}
+
 // GdipCreateLineBrushI calls gdiplus!GdipCreateLineBrushI.
 func GdipCreateLineBrushI(point1 *Point, point2 *Point, color1 uint32, color2 uint32, wrapMode WrapMode, lineGradient **GpLineGradient) Status {
 	r1, _, _ := syscall.SyscallN(procGdipCreateLineBrushI.Addr(), uintptr(unsafe.Pointer(point1)), uintptr(unsafe.Pointer(point2)), uintptr(color1), uintptr(color2), uintptr(wrapMode), uintptr(unsafe.Pointer(lineGradient)))
@@ -1046,6 +2624,14 @@ func GdipCreateLineBrushI(point1 *Point, point2 *Point, color1 uint32, color2 ui
 // GdipCreateMatrix calls gdiplus!GdipCreateMatrix.
 func GdipCreateMatrix(matrix **Matrix) Status {
 	r1, _, _ := syscall.SyscallN(procGdipCreateMatrix.Addr(), uintptr(unsafe.Pointer(matrix)))
+	return Status(r1)
+}
+
+var specGdipCreateMatrix2 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipCreateMatrix2 calls gdiplus!GdipCreateMatrix2.
+func GdipCreateMatrix2(m11 float32, m12 float32, m21 float32, m22 float32, dx float32, dy float32, matrix **Matrix) Status {
+	r1, _, _ := win32.Call(procGdipCreateMatrix2.Addr(), specGdipCreateMatrix2, nil, uintptr(math.Float32bits(m11)), uintptr(math.Float32bits(m12)), uintptr(math.Float32bits(m21)), uintptr(math.Float32bits(m22)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy)), uintptr(unsafe.Pointer(matrix))).Tuple()
 	return Status(r1)
 }
 
@@ -1137,6 +2723,22 @@ func GdipCreatePathIter(iterator **GpPathIterator, path *GpPath) Status {
 	return Status(r1)
 }
 
+var specGdipCreatePen1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// GdipCreatePen1 calls gdiplus!GdipCreatePen1.
+func GdipCreatePen1(color uint32, width float32, unit Unit, pen **GpPen) Status {
+	r1, _, _ := win32.Call(procGdipCreatePen1.Addr(), specGdipCreatePen1, nil, uintptr(color), uintptr(math.Float32bits(width)), uintptr(unit), uintptr(unsafe.Pointer(pen))).Tuple()
+	return Status(r1)
+}
+
+var specGdipCreatePen2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// GdipCreatePen2 calls gdiplus!GdipCreatePen2.
+func GdipCreatePen2(brush *GpBrush, width float32, unit Unit, pen **GpPen) Status {
+	r1, _, _ := win32.Call(procGdipCreatePen2.Addr(), specGdipCreatePen2, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(width)), uintptr(unit), uintptr(unsafe.Pointer(pen))).Tuple()
+	return Status(r1)
+}
+
 // GdipCreateRegion calls gdiplus!GdipCreateRegion.
 func GdipCreateRegion(region **GpRegion) Status {
 	r1, _, _ := syscall.SyscallN(procGdipCreateRegion.Addr(), uintptr(unsafe.Pointer(region)))
@@ -1198,9 +2800,25 @@ func GdipCreateTexture(image *GpImage, wrapmode WrapMode, texture **GpTexture) S
 	return Status(r1)
 }
 
+var specGdipCreateTexture2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipCreateTexture2 calls gdiplus!GdipCreateTexture2.
+func GdipCreateTexture2(image *GpImage, wrapmode WrapMode, x float32, y float32, width float32, height float32, texture **GpTexture) Status {
+	r1, _, _ := win32.Call(procGdipCreateTexture2.Addr(), specGdipCreateTexture2, nil, uintptr(unsafe.Pointer(image)), uintptr(wrapmode), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(unsafe.Pointer(texture))).Tuple()
+	return Status(r1)
+}
+
 // GdipCreateTexture2I calls gdiplus!GdipCreateTexture2I.
 func GdipCreateTexture2I(image *GpImage, wrapmode WrapMode, x int32, y int32, width int32, height int32, texture **GpTexture) Status {
 	r1, _, _ := syscall.SyscallN(procGdipCreateTexture2I.Addr(), uintptr(unsafe.Pointer(image)), uintptr(wrapmode), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(texture)))
+	return Status(r1)
+}
+
+var specGdipCreateTextureIA = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipCreateTextureIA calls gdiplus!GdipCreateTextureIA.
+func GdipCreateTextureIA(image *GpImage, imageAttributes *GpImageAttributes, x float32, y float32, width float32, height float32, texture **GpTexture) Status {
+	r1, _, _ := win32.Call(procGdipCreateTextureIA.Addr(), specGdipCreateTextureIA, nil, uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(imageAttributes)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(unsafe.Pointer(texture))).Tuple()
 	return Status(r1)
 }
 
@@ -1306,6 +2924,30 @@ func GdipDisposeImageAttributes(imageattr *GpImageAttributes) Status {
 	return Status(r1)
 }
 
+var specGdipDrawArc = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipDrawArc calls gdiplus!GdipDrawArc.
+func GdipDrawArc(graphics *GpGraphics, pen *GpPen, x float32, y float32, width float32, height float32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawArc.Addr(), specGdipDrawArc, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
+	return Status(r1)
+}
+
+var specGdipDrawArcI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// GdipDrawArcI calls gdiplus!GdipDrawArcI.
+func GdipDrawArcI(graphics *GpGraphics, pen *GpPen, x int32, y int32, width int32, height int32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawArcI.Addr(), specGdipDrawArcI, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
+	return Status(r1)
+}
+
+var specGdipDrawBezier = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipDrawBezier calls gdiplus!GdipDrawBezier.
+func GdipDrawBezier(graphics *GpGraphics, pen *GpPen, x1 float32, y1 float32, x2 float32, y2 float32, x3 float32, y3 float32, x4 float32, y4 float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawBezier.Addr(), specGdipDrawBezier, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2)), uintptr(math.Float32bits(x3)), uintptr(math.Float32bits(y3)), uintptr(math.Float32bits(x4)), uintptr(math.Float32bits(y4))).Tuple()
+	return Status(r1)
+}
+
 // GdipDrawBezierI calls gdiplus!GdipDrawBezierI.
 func GdipDrawBezierI(graphics *GpGraphics, pen *GpPen, x1 int32, y1 int32, x2 int32, y2 int32, x3 int32, y3 int32, x4 int32, y4 int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipDrawBezierI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(x1), uintptr(y1), uintptr(x2), uintptr(y2), uintptr(x3), uintptr(y3), uintptr(x4), uintptr(y4))
@@ -1336,6 +2978,22 @@ func GdipDrawClosedCurve(graphics *GpGraphics, pen *GpPen, points *PointF, count
 	return Status(r1)
 }
 
+var specGdipDrawClosedCurve2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipDrawClosedCurve2 calls gdiplus!GdipDrawClosedCurve2.
+func GdipDrawClosedCurve2(graphics *GpGraphics, pen *GpPen, points *PointF, count int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawClosedCurve2.Addr(), specGdipDrawClosedCurve2, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
+var specGdipDrawClosedCurve2I = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipDrawClosedCurve2I calls gdiplus!GdipDrawClosedCurve2I.
+func GdipDrawClosedCurve2I(graphics *GpGraphics, pen *GpPen, points *Point, count int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawClosedCurve2I.Addr(), specGdipDrawClosedCurve2I, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
 // GdipDrawClosedCurveI calls gdiplus!GdipDrawClosedCurveI.
 func GdipDrawClosedCurveI(graphics *GpGraphics, pen *GpPen, points *Point, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipDrawClosedCurveI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count))
@@ -1345,6 +3003,38 @@ func GdipDrawClosedCurveI(graphics *GpGraphics, pen *GpPen, points *Point, count
 // GdipDrawCurve calls gdiplus!GdipDrawCurve.
 func GdipDrawCurve(graphics *GpGraphics, pen *GpPen, points *PointF, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipDrawCurve.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count))
+	return Status(r1)
+}
+
+var specGdipDrawCurve2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipDrawCurve2 calls gdiplus!GdipDrawCurve2.
+func GdipDrawCurve2(graphics *GpGraphics, pen *GpPen, points *PointF, count int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawCurve2.Addr(), specGdipDrawCurve2, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
+var specGdipDrawCurve2I = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipDrawCurve2I calls gdiplus!GdipDrawCurve2I.
+func GdipDrawCurve2I(graphics *GpGraphics, pen *GpPen, points *Point, count int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawCurve2I.Addr(), specGdipDrawCurve2I, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
+var specGdipDrawCurve3 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipDrawCurve3 calls gdiplus!GdipDrawCurve3.
+func GdipDrawCurve3(graphics *GpGraphics, pen *GpPen, points *PointF, count int32, offset int32, numberOfSegments int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawCurve3.Addr(), specGdipDrawCurve3, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(offset), uintptr(numberOfSegments), uintptr(math.Float32bits(tension))).Tuple()
+	return Status(r1)
+}
+
+var specGdipDrawCurve3I = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipDrawCurve3I calls gdiplus!GdipDrawCurve3I.
+func GdipDrawCurve3I(graphics *GpGraphics, pen *GpPen, points *Point, count int32, offset int32, numberOfSegments int32, tension float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawCurve3I.Addr(), specGdipDrawCurve3I, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(offset), uintptr(numberOfSegments), uintptr(math.Float32bits(tension))).Tuple()
 	return Status(r1)
 }
 
@@ -1360,9 +3050,25 @@ func GdipDrawDriverString(graphics *GpGraphics, text *uint16, length int32, font
 	return Status(r1)
 }
 
+var specGdipDrawEllipse = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipDrawEllipse calls gdiplus!GdipDrawEllipse.
+func GdipDrawEllipse(graphics *GpGraphics, pen *GpPen, x float32, y float32, width float32, height float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawEllipse.Addr(), specGdipDrawEllipse, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height))).Tuple()
+	return Status(r1)
+}
+
 // GdipDrawEllipseI calls gdiplus!GdipDrawEllipseI.
 func GdipDrawEllipseI(graphics *GpGraphics, pen *GpPen, x int32, y int32, width int32, height int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipDrawEllipseI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(x), uintptr(y), uintptr(width), uintptr(height))
+	return Status(r1)
+}
+
+var specGdipDrawImage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// GdipDrawImage calls gdiplus!GdipDrawImage.
+func GdipDrawImage(graphics *GpGraphics, image *GpImage, x float32, y float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawImage.Addr(), specGdipDrawImage, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(image)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
 	return Status(r1)
 }
 
@@ -1375,6 +3081,14 @@ func GdipDrawImageFX(graphics *GpGraphics, image *GpImage, source *RectF, xForm 
 // GdipDrawImageI calls gdiplus!GdipDrawImageI.
 func GdipDrawImageI(graphics *GpGraphics, image *GpImage, x int32, y int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipDrawImageI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(image)), uintptr(x), uintptr(y))
+	return Status(r1)
+}
+
+var specGdipDrawImagePointRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipDrawImagePointRect calls gdiplus!GdipDrawImagePointRect.
+func GdipDrawImagePointRect(graphics *GpGraphics, image *GpImage, x float32, y float32, srcx float32, srcy float32, srcwidth float32, srcheight float32, srcUnit Unit) Status {
+	r1, _, _ := win32.Call(procGdipDrawImagePointRect.Addr(), specGdipDrawImagePointRect, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(image)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(srcx)), uintptr(math.Float32bits(srcy)), uintptr(math.Float32bits(srcwidth)), uintptr(math.Float32bits(srcheight)), uintptr(srcUnit)).Tuple()
 	return Status(r1)
 }
 
@@ -1396,9 +3110,25 @@ func GdipDrawImagePointsI(graphics *GpGraphics, image *GpImage, dstpoints *Point
 	return Status(r1)
 }
 
+var specGdipDrawImagePointsRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GdipDrawImagePointsRect calls gdiplus!GdipDrawImagePointsRect.
+func GdipDrawImagePointsRect(graphics *GpGraphics, image *GpImage, points *PointF, count int32, srcx float32, srcy float32, srcwidth float32, srcheight float32, srcUnit Unit, imageAttributes *GpImageAttributes, callback uintptr, callbackData unsafe.Pointer) Status {
+	r1, _, _ := win32.Call(procGdipDrawImagePointsRect.Addr(), specGdipDrawImagePointsRect, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(srcx)), uintptr(math.Float32bits(srcy)), uintptr(math.Float32bits(srcwidth)), uintptr(math.Float32bits(srcheight)), uintptr(srcUnit), uintptr(unsafe.Pointer(imageAttributes)), uintptr(callback), uintptr(unsafe.Pointer(callbackData))).Tuple()
+	return Status(r1)
+}
+
 // GdipDrawImagePointsRectI calls gdiplus!GdipDrawImagePointsRectI.
 func GdipDrawImagePointsRectI(graphics *GpGraphics, image *GpImage, points *Point, count int32, srcx int32, srcy int32, srcwidth int32, srcheight int32, srcUnit Unit, imageAttributes *GpImageAttributes, callback uintptr, callbackData unsafe.Pointer) Status {
 	r1, _, _ := syscall.SyscallN(procGdipDrawImagePointsRectI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(srcx), uintptr(srcy), uintptr(srcwidth), uintptr(srcheight), uintptr(srcUnit), uintptr(unsafe.Pointer(imageAttributes)), uintptr(callback), uintptr(unsafe.Pointer(callbackData)))
+	return Status(r1)
+}
+
+var specGdipDrawImageRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipDrawImageRect calls gdiplus!GdipDrawImageRect.
+func GdipDrawImageRect(graphics *GpGraphics, image *GpImage, x float32, y float32, width float32, height float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawImageRect.Addr(), specGdipDrawImageRect, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(image)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height))).Tuple()
 	return Status(r1)
 }
 
@@ -1408,9 +3138,25 @@ func GdipDrawImageRectI(graphics *GpGraphics, image *GpImage, x int32, y int32, 
 	return Status(r1)
 }
 
+var specGdipDrawImageRectRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GdipDrawImageRectRect calls gdiplus!GdipDrawImageRectRect.
+func GdipDrawImageRectRect(graphics *GpGraphics, image *GpImage, dstx float32, dsty float32, dstwidth float32, dstheight float32, srcx float32, srcy float32, srcwidth float32, srcheight float32, srcUnit Unit, imageAttributes *GpImageAttributes, callback uintptr, callbackData unsafe.Pointer) Status {
+	r1, _, _ := win32.Call(procGdipDrawImageRectRect.Addr(), specGdipDrawImageRectRect, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(image)), uintptr(math.Float32bits(dstx)), uintptr(math.Float32bits(dsty)), uintptr(math.Float32bits(dstwidth)), uintptr(math.Float32bits(dstheight)), uintptr(math.Float32bits(srcx)), uintptr(math.Float32bits(srcy)), uintptr(math.Float32bits(srcwidth)), uintptr(math.Float32bits(srcheight)), uintptr(srcUnit), uintptr(unsafe.Pointer(imageAttributes)), uintptr(callback), uintptr(unsafe.Pointer(callbackData))).Tuple()
+	return Status(r1)
+}
+
 // GdipDrawImageRectRectI calls gdiplus!GdipDrawImageRectRectI.
 func GdipDrawImageRectRectI(graphics *GpGraphics, image *GpImage, dstx int32, dsty int32, dstwidth int32, dstheight int32, srcx int32, srcy int32, srcwidth int32, srcheight int32, srcUnit Unit, imageAttributes *GpImageAttributes, callback uintptr, callbackData unsafe.Pointer) Status {
 	r1, _, _ := syscall.SyscallN(procGdipDrawImageRectRectI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(image)), uintptr(dstx), uintptr(dsty), uintptr(dstwidth), uintptr(dstheight), uintptr(srcx), uintptr(srcy), uintptr(srcwidth), uintptr(srcheight), uintptr(srcUnit), uintptr(unsafe.Pointer(imageAttributes)), uintptr(callback), uintptr(unsafe.Pointer(callbackData)))
+	return Status(r1)
+}
+
+var specGdipDrawLine = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipDrawLine calls gdiplus!GdipDrawLine.
+func GdipDrawLine(graphics *GpGraphics, pen *GpPen, x1 float32, y1 float32, x2 float32, y2 float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawLine.Addr(), specGdipDrawLine, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2))).Tuple()
 	return Status(r1)
 }
 
@@ -1438,6 +3184,22 @@ func GdipDrawPath(graphics *GpGraphics, pen *GpPen, path *GpPath) Status {
 	return Status(r1)
 }
 
+var specGdipDrawPie = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipDrawPie calls gdiplus!GdipDrawPie.
+func GdipDrawPie(graphics *GpGraphics, pen *GpPen, x float32, y float32, width float32, height float32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawPie.Addr(), specGdipDrawPie, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
+	return Status(r1)
+}
+
+var specGdipDrawPieI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// GdipDrawPieI calls gdiplus!GdipDrawPieI.
+func GdipDrawPieI(graphics *GpGraphics, pen *GpPen, x int32, y int32, width int32, height int32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawPieI.Addr(), specGdipDrawPieI, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
+	return Status(r1)
+}
+
 // GdipDrawPolygon calls gdiplus!GdipDrawPolygon.
 func GdipDrawPolygon(graphics *GpGraphics, pen *GpPen, points *PointF, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipDrawPolygon.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count))
@@ -1447,6 +3209,14 @@ func GdipDrawPolygon(graphics *GpGraphics, pen *GpPen, points *PointF, count int
 // GdipDrawPolygonI calls gdiplus!GdipDrawPolygonI.
 func GdipDrawPolygonI(graphics *GpGraphics, pen *GpPen, points *Point, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipDrawPolygonI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(points)), uintptr(count))
+	return Status(r1)
+}
+
+var specGdipDrawRectangle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipDrawRectangle calls gdiplus!GdipDrawRectangle.
+func GdipDrawRectangle(graphics *GpGraphics, pen *GpPen, x float32, y float32, width float32, height float32) Status {
+	r1, _, _ := win32.Call(procGdipDrawRectangle.Addr(), specGdipDrawRectangle, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height))).Tuple()
 	return Status(r1)
 }
 
@@ -1569,9 +3339,33 @@ func GdipFillClosedCurve(graphics *GpGraphics, brush *GpBrush, points *PointF, c
 	return Status(r1)
 }
 
+var specGdipFillClosedCurve2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// GdipFillClosedCurve2 calls gdiplus!GdipFillClosedCurve2.
+func GdipFillClosedCurve2(graphics *GpGraphics, brush *GpBrush, points *PointF, count int32, tension float32, fillMode FillMode) Status {
+	r1, _, _ := win32.Call(procGdipFillClosedCurve2.Addr(), specGdipFillClosedCurve2, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension)), uintptr(fillMode)).Tuple()
+	return Status(r1)
+}
+
+var specGdipFillClosedCurve2I = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// GdipFillClosedCurve2I calls gdiplus!GdipFillClosedCurve2I.
+func GdipFillClosedCurve2I(graphics *GpGraphics, brush *GpBrush, points *Point, count int32, tension float32, fillMode FillMode) Status {
+	r1, _, _ := win32.Call(procGdipFillClosedCurve2I.Addr(), specGdipFillClosedCurve2I, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(tension)), uintptr(fillMode)).Tuple()
+	return Status(r1)
+}
+
 // GdipFillClosedCurveI calls gdiplus!GdipFillClosedCurveI.
 func GdipFillClosedCurveI(graphics *GpGraphics, brush *GpBrush, points *Point, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipFillClosedCurveI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(points)), uintptr(count))
+	return Status(r1)
+}
+
+var specGdipFillEllipse = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipFillEllipse calls gdiplus!GdipFillEllipse.
+func GdipFillEllipse(graphics *GpGraphics, brush *GpBrush, x float32, y float32, width float32, height float32) Status {
+	r1, _, _ := win32.Call(procGdipFillEllipse.Addr(), specGdipFillEllipse, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height))).Tuple()
 	return Status(r1)
 }
 
@@ -1584,6 +3378,22 @@ func GdipFillEllipseI(graphics *GpGraphics, brush *GpBrush, x int32, y int32, wi
 // GdipFillPath calls gdiplus!GdipFillPath.
 func GdipFillPath(graphics *GpGraphics, brush *GpBrush, path *GpPath) Status {
 	r1, _, _ := syscall.SyscallN(procGdipFillPath.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(path)))
+	return Status(r1)
+}
+
+var specGdipFillPie = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipFillPie calls gdiplus!GdipFillPie.
+func GdipFillPie(graphics *GpGraphics, brush *GpBrush, x float32, y float32, width float32, height float32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipFillPie.Addr(), specGdipFillPie, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
+	return Status(r1)
+}
+
+var specGdipFillPieI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// GdipFillPieI calls gdiplus!GdipFillPieI.
+func GdipFillPieI(graphics *GpGraphics, brush *GpBrush, x int32, y int32, width int32, height int32, startAngle float32, sweepAngle float32) Status {
+	r1, _, _ := win32.Call(procGdipFillPieI.Addr(), specGdipFillPieI, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(brush)), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(sweepAngle))).Tuple()
 	return Status(r1)
 }
 
@@ -1608,6 +3418,14 @@ func GdipFillPolygon2I(graphics *GpGraphics, brush *GpBrush, points *Point, coun
 // GdipFillPolygonI calls gdiplus!GdipFillPolygonI.
 func GdipFillPolygonI(graphics *GpGraphics, brush *GpBrush, points *Point, count int32, fillMode FillMode) Status {
 	r1, _, _ := syscall.SyscallN(procGdipFillPolygonI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(fillMode))
+	return Status(r1)
+}
+
+var specGdipFillRectangle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipFillRectangle calls gdiplus!GdipFillRectangle.
+func GdipFillRectangle(graphics *GpGraphics, brush *GpBrush, x float32, y float32, width float32, height float32) Status {
+	r1, _, _ := win32.Call(procGdipFillRectangle.Addr(), specGdipFillRectangle, nil, uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height))).Tuple()
 	return Status(r1)
 }
 
@@ -1644,6 +3462,14 @@ func GdipFindFirstImageItem(image *GpImage, item *ImageItemData) Status {
 // GdipFindNextImageItem calls gdiplus!GdipFindNextImageItem.
 func GdipFindNextImageItem(image *GpImage, item *ImageItemData) Status {
 	r1, _, _ := syscall.SyscallN(procGdipFindNextImageItem.Addr(), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(item)))
+	return Status(r1)
+}
+
+var specGdipFlattenPath = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// GdipFlattenPath calls gdiplus!GdipFlattenPath.
+func GdipFlattenPath(path *GpPath, matrix *Matrix, flatness float32) Status {
+	r1, _, _ := win32.Call(procGdipFlattenPath.Addr(), specGdipFlattenPath, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(matrix)), uintptr(math.Float32bits(flatness))).Tuple()
 	return Status(r1)
 }
 
@@ -1851,6 +3677,14 @@ func GdipGetFontCollectionFamilyList(fontCollection *GpFontCollection, gpfamilie
 // GdipGetFontHeight calls gdiplus!GdipGetFontHeight.
 func GdipGetFontHeight(font *GpFont, graphics *GpGraphics, height *float32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipGetFontHeight.Addr(), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(height)))
+	return Status(r1)
+}
+
+var specGdipGetFontHeightGivenDPI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// GdipGetFontHeightGivenDPI calls gdiplus!GdipGetFontHeightGivenDPI.
+func GdipGetFontHeightGivenDPI(font *GpFont, dpi float32, height *float32) Status {
+	r1, _, _ := win32.Call(procGdipGetFontHeightGivenDPI.Addr(), specGdipGetFontHeightGivenDPI, nil, uintptr(unsafe.Pointer(font)), uintptr(math.Float32bits(dpi)), uintptr(unsafe.Pointer(height))).Tuple()
 	return Status(r1)
 }
 
@@ -2776,6 +4610,14 @@ func GdipIsMatrixInvertible(matrix *Matrix, result *foundation.BOOL) Status {
 	return Status(r1)
 }
 
+var specGdipIsOutlineVisiblePathPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// GdipIsOutlineVisiblePathPoint calls gdiplus!GdipIsOutlineVisiblePathPoint.
+func GdipIsOutlineVisiblePathPoint(path *GpPath, x float32, y float32, pen *GpPen, graphics *GpGraphics, result *foundation.BOOL) Status {
+	r1, _, _ := win32.Call(procGdipIsOutlineVisiblePathPoint.Addr(), specGdipIsOutlineVisiblePathPoint, nil, uintptr(unsafe.Pointer(path)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(result))).Tuple()
+	return Status(r1)
+}
+
 // GdipIsOutlineVisiblePathPointI calls gdiplus!GdipIsOutlineVisiblePathPointI.
 func GdipIsOutlineVisiblePathPointI(path *GpPath, x int32, y int32, pen *GpPen, graphics *GpGraphics, result *foundation.BOOL) Status {
 	r1, _, _ := syscall.SyscallN(procGdipIsOutlineVisiblePathPointI.Addr(), uintptr(unsafe.Pointer(path)), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(result)))
@@ -2794,9 +4636,25 @@ func GdipIsVisibleClipEmpty(graphics *GpGraphics, result *foundation.BOOL) Statu
 	return Status(r1)
 }
 
+var specGdipIsVisiblePathPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// GdipIsVisiblePathPoint calls gdiplus!GdipIsVisiblePathPoint.
+func GdipIsVisiblePathPoint(path *GpPath, x float32, y float32, graphics *GpGraphics, result *foundation.BOOL) Status {
+	r1, _, _ := win32.Call(procGdipIsVisiblePathPoint.Addr(), specGdipIsVisiblePathPoint, nil, uintptr(unsafe.Pointer(path)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(result))).Tuple()
+	return Status(r1)
+}
+
 // GdipIsVisiblePathPointI calls gdiplus!GdipIsVisiblePathPointI.
 func GdipIsVisiblePathPointI(path *GpPath, x int32, y int32, graphics *GpGraphics, result *foundation.BOOL) Status {
 	r1, _, _ := syscall.SyscallN(procGdipIsVisiblePathPointI.Addr(), uintptr(unsafe.Pointer(path)), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(result)))
+	return Status(r1)
+}
+
+var specGdipIsVisiblePoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipIsVisiblePoint calls gdiplus!GdipIsVisiblePoint.
+func GdipIsVisiblePoint(graphics *GpGraphics, x float32, y float32, result *foundation.BOOL) Status {
+	r1, _, _ := win32.Call(procGdipIsVisiblePoint.Addr(), specGdipIsVisiblePoint, nil, uintptr(unsafe.Pointer(graphics)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(unsafe.Pointer(result))).Tuple()
 	return Status(r1)
 }
 
@@ -2806,15 +4664,39 @@ func GdipIsVisiblePointI(graphics *GpGraphics, x int32, y int32, result *foundat
 	return Status(r1)
 }
 
+var specGdipIsVisibleRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipIsVisibleRect calls gdiplus!GdipIsVisibleRect.
+func GdipIsVisibleRect(graphics *GpGraphics, x float32, y float32, width float32, height float32, result *foundation.BOOL) Status {
+	r1, _, _ := win32.Call(procGdipIsVisibleRect.Addr(), specGdipIsVisibleRect, nil, uintptr(unsafe.Pointer(graphics)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(unsafe.Pointer(result))).Tuple()
+	return Status(r1)
+}
+
 // GdipIsVisibleRectI calls gdiplus!GdipIsVisibleRectI.
 func GdipIsVisibleRectI(graphics *GpGraphics, x int32, y int32, width int32, height int32, result *foundation.BOOL) Status {
 	r1, _, _ := syscall.SyscallN(procGdipIsVisibleRectI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(result)))
 	return Status(r1)
 }
 
+var specGdipIsVisibleRegionPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// GdipIsVisibleRegionPoint calls gdiplus!GdipIsVisibleRegionPoint.
+func GdipIsVisibleRegionPoint(region *GpRegion, x float32, y float32, graphics *GpGraphics, result *foundation.BOOL) Status {
+	r1, _, _ := win32.Call(procGdipIsVisibleRegionPoint.Addr(), specGdipIsVisibleRegionPoint, nil, uintptr(unsafe.Pointer(region)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(result))).Tuple()
+	return Status(r1)
+}
+
 // GdipIsVisibleRegionPointI calls gdiplus!GdipIsVisibleRegionPointI.
 func GdipIsVisibleRegionPointI(region *GpRegion, x int32, y int32, graphics *GpGraphics, result *foundation.BOOL) Status {
 	r1, _, _ := syscall.SyscallN(procGdipIsVisibleRegionPointI.Addr(), uintptr(unsafe.Pointer(region)), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(result)))
+	return Status(r1)
+}
+
+var specGdipIsVisibleRegionRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// GdipIsVisibleRegionRect calls gdiplus!GdipIsVisibleRegionRect.
+func GdipIsVisibleRegionRect(region *GpRegion, x float32, y float32, width float32, height float32, graphics *GpGraphics, result *foundation.BOOL) Status {
+	r1, _, _ := win32.Call(procGdipIsVisibleRegionRect.Addr(), specGdipIsVisibleRegionRect, nil, uintptr(unsafe.Pointer(region)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(result))).Tuple()
 	return Status(r1)
 }
 
@@ -3131,6 +5013,54 @@ func GdipReversePath(path *GpPath) Status {
 	return Status(r1)
 }
 
+var specGdipRotateLineTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// GdipRotateLineTransform calls gdiplus!GdipRotateLineTransform.
+func GdipRotateLineTransform(brush *GpLineGradient, angle float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipRotateLineTransform.Addr(), specGdipRotateLineTransform, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(angle)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipRotateMatrix = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// GdipRotateMatrix calls gdiplus!GdipRotateMatrix.
+func GdipRotateMatrix(matrix *Matrix, angle float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipRotateMatrix.Addr(), specGdipRotateMatrix, nil, uintptr(unsafe.Pointer(matrix)), uintptr(math.Float32bits(angle)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipRotatePathGradientTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// GdipRotatePathGradientTransform calls gdiplus!GdipRotatePathGradientTransform.
+func GdipRotatePathGradientTransform(brush *GpPathGradient, angle float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipRotatePathGradientTransform.Addr(), specGdipRotatePathGradientTransform, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(angle)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipRotatePenTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// GdipRotatePenTransform calls gdiplus!GdipRotatePenTransform.
+func GdipRotatePenTransform(pen *GpPen, angle float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipRotatePenTransform.Addr(), specGdipRotatePenTransform, nil, uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(angle)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipRotateTextureTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// GdipRotateTextureTransform calls gdiplus!GdipRotateTextureTransform.
+func GdipRotateTextureTransform(brush *GpTexture, angle float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipRotateTextureTransform.Addr(), specGdipRotateTextureTransform, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(angle)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipRotateWorldTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// GdipRotateWorldTransform calls gdiplus!GdipRotateWorldTransform.
+func GdipRotateWorldTransform(graphics *GpGraphics, angle float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipRotateWorldTransform.Addr(), specGdipRotateWorldTransform, nil, uintptr(unsafe.Pointer(graphics)), uintptr(math.Float32bits(angle)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
 // GdipSaveAdd calls gdiplus!GdipSaveAdd.
 func GdipSaveAdd(image *GpImage, encoderParams *EncoderParameters) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSaveAdd.Addr(), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(encoderParams)))
@@ -3162,10 +5092,82 @@ func GdipSaveImageToStream(image *GpImage, stream *systemcom.IStream, clsidEncod
 	return Status(r1)
 }
 
+var specGdipScaleLineTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipScaleLineTransform calls gdiplus!GdipScaleLineTransform.
+func GdipScaleLineTransform(brush *GpLineGradient, sx float32, sy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipScaleLineTransform.Addr(), specGdipScaleLineTransform, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(sx)), uintptr(math.Float32bits(sy)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipScaleMatrix = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipScaleMatrix calls gdiplus!GdipScaleMatrix.
+func GdipScaleMatrix(matrix *Matrix, scaleX float32, scaleY float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipScaleMatrix.Addr(), specGdipScaleMatrix, nil, uintptr(unsafe.Pointer(matrix)), uintptr(math.Float32bits(scaleX)), uintptr(math.Float32bits(scaleY)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipScalePathGradientTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipScalePathGradientTransform calls gdiplus!GdipScalePathGradientTransform.
+func GdipScalePathGradientTransform(brush *GpPathGradient, sx float32, sy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipScalePathGradientTransform.Addr(), specGdipScalePathGradientTransform, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(sx)), uintptr(math.Float32bits(sy)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipScalePenTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipScalePenTransform calls gdiplus!GdipScalePenTransform.
+func GdipScalePenTransform(pen *GpPen, sx float32, sy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipScalePenTransform.Addr(), specGdipScalePenTransform, nil, uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(sx)), uintptr(math.Float32bits(sy)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipScaleTextureTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipScaleTextureTransform calls gdiplus!GdipScaleTextureTransform.
+func GdipScaleTextureTransform(brush *GpTexture, sx float32, sy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipScaleTextureTransform.Addr(), specGdipScaleTextureTransform, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(sx)), uintptr(math.Float32bits(sy)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipScaleWorldTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipScaleWorldTransform calls gdiplus!GdipScaleWorldTransform.
+func GdipScaleWorldTransform(graphics *GpGraphics, sx float32, sy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipScaleWorldTransform.Addr(), specGdipScaleWorldTransform, nil, uintptr(unsafe.Pointer(graphics)), uintptr(math.Float32bits(sx)), uintptr(math.Float32bits(sy)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
 // GdipSetAdjustableArrowCapFillState calls gdiplus!GdipSetAdjustableArrowCapFillState.
 func GdipSetAdjustableArrowCapFillState(cap_ *GpAdjustableArrowCap, fillState bool) Status {
 	_fillState := win32.Bool32(fillState)
 	r1, _, _ := syscall.SyscallN(procGdipSetAdjustableArrowCapFillState.Addr(), uintptr(unsafe.Pointer(cap_)), uintptr(_fillState))
+	return Status(r1)
+}
+
+var specGdipSetAdjustableArrowCapHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GdipSetAdjustableArrowCapHeight calls gdiplus!GdipSetAdjustableArrowCapHeight.
+func GdipSetAdjustableArrowCapHeight(cap_ *GpAdjustableArrowCap, height float32) Status {
+	r1, _, _ := win32.Call(procGdipSetAdjustableArrowCapHeight.Addr(), specGdipSetAdjustableArrowCapHeight, nil, uintptr(unsafe.Pointer(cap_)), uintptr(math.Float32bits(height))).Tuple()
+	return Status(r1)
+}
+
+var specGdipSetAdjustableArrowCapMiddleInset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GdipSetAdjustableArrowCapMiddleInset calls gdiplus!GdipSetAdjustableArrowCapMiddleInset.
+func GdipSetAdjustableArrowCapMiddleInset(cap_ *GpAdjustableArrowCap, middleInset float32) Status {
+	r1, _, _ := win32.Call(procGdipSetAdjustableArrowCapMiddleInset.Addr(), specGdipSetAdjustableArrowCapMiddleInset, nil, uintptr(unsafe.Pointer(cap_)), uintptr(math.Float32bits(middleInset))).Tuple()
+	return Status(r1)
+}
+
+var specGdipSetAdjustableArrowCapWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GdipSetAdjustableArrowCapWidth calls gdiplus!GdipSetAdjustableArrowCapWidth.
+func GdipSetAdjustableArrowCapWidth(cap_ *GpAdjustableArrowCap, width float32) Status {
+	r1, _, _ := win32.Call(procGdipSetAdjustableArrowCapWidth.Addr(), specGdipSetAdjustableArrowCapWidth, nil, uintptr(unsafe.Pointer(cap_)), uintptr(math.Float32bits(width))).Tuple()
 	return Status(r1)
 }
 
@@ -3184,6 +5186,14 @@ func GdipSetClipHrgn(graphics *GpGraphics, hRgn graphicsgdi.HRGN, combineMode Co
 // GdipSetClipPath calls gdiplus!GdipSetClipPath.
 func GdipSetClipPath(graphics *GpGraphics, path *GpPath, combineMode CombineMode) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetClipPath.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(path)), uintptr(combineMode))
+	return Status(r1)
+}
+
+var specGdipSetClipRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipSetClipRect calls gdiplus!GdipSetClipRect.
+func GdipSetClipRect(graphics *GpGraphics, x float32, y float32, width float32, height float32, combineMode CombineMode) Status {
+	r1, _, _ := win32.Call(procGdipSetClipRect.Addr(), specGdipSetClipRect, nil, uintptr(unsafe.Pointer(graphics)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(combineMode)).Tuple()
 	return Status(r1)
 }
 
@@ -3217,6 +5227,14 @@ func GdipSetCustomLineCapBaseCap(customCap *GpCustomLineCap, baseCap LineCap) St
 	return Status(r1)
 }
 
+var specGdipSetCustomLineCapBaseInset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GdipSetCustomLineCapBaseInset calls gdiplus!GdipSetCustomLineCapBaseInset.
+func GdipSetCustomLineCapBaseInset(customCap *GpCustomLineCap, inset float32) Status {
+	r1, _, _ := win32.Call(procGdipSetCustomLineCapBaseInset.Addr(), specGdipSetCustomLineCapBaseInset, nil, uintptr(unsafe.Pointer(customCap)), uintptr(math.Float32bits(inset))).Tuple()
+	return Status(r1)
+}
+
 // GdipSetCustomLineCapStrokeCaps calls gdiplus!GdipSetCustomLineCapStrokeCaps.
 func GdipSetCustomLineCapStrokeCaps(customCap *GpCustomLineCap, startCap LineCap, endCap LineCap) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetCustomLineCapStrokeCaps.Addr(), uintptr(unsafe.Pointer(customCap)), uintptr(startCap), uintptr(endCap))
@@ -3226,6 +5244,14 @@ func GdipSetCustomLineCapStrokeCaps(customCap *GpCustomLineCap, startCap LineCap
 // GdipSetCustomLineCapStrokeJoin calls gdiplus!GdipSetCustomLineCapStrokeJoin.
 func GdipSetCustomLineCapStrokeJoin(customCap *GpCustomLineCap, lineJoin LineJoin) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetCustomLineCapStrokeJoin.Addr(), uintptr(unsafe.Pointer(customCap)), uintptr(lineJoin))
+	return Status(r1)
+}
+
+var specGdipSetCustomLineCapWidthScale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GdipSetCustomLineCapWidthScale calls gdiplus!GdipSetCustomLineCapWidthScale.
+func GdipSetCustomLineCapWidthScale(customCap *GpCustomLineCap, widthScale float32) Status {
+	r1, _, _ := win32.Call(procGdipSetCustomLineCapWidthScale.Addr(), specGdipSetCustomLineCapWidthScale, nil, uintptr(unsafe.Pointer(customCap)), uintptr(math.Float32bits(widthScale))).Tuple()
 	return Status(r1)
 }
 
@@ -3262,6 +5288,15 @@ func GdipSetImageAttributesColorMatrix(imageattr *GpImageAttributes, type_ Color
 	return Status(r1)
 }
 
+var specGdipSetImageAttributesGamma = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipSetImageAttributesGamma calls gdiplus!GdipSetImageAttributesGamma.
+func GdipSetImageAttributesGamma(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool, gamma float32) Status {
+	_enableFlag := win32.Bool32(enableFlag)
+	r1, _, _ := win32.Call(procGdipSetImageAttributesGamma.Addr(), specGdipSetImageAttributesGamma, nil, uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(_enableFlag), uintptr(math.Float32bits(gamma))).Tuple()
+	return Status(r1)
+}
+
 // GdipSetImageAttributesNoOp calls gdiplus!GdipSetImageAttributesNoOp.
 func GdipSetImageAttributesNoOp(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool) Status {
 	_enableFlag := win32.Bool32(enableFlag)
@@ -3288,6 +5323,15 @@ func GdipSetImageAttributesOutputChannelColorProfile(imageattr *GpImageAttribute
 func GdipSetImageAttributesRemapTable(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool, mapSize uint32, map_ *ColorMap) Status {
 	_enableFlag := win32.Bool32(enableFlag)
 	r1, _, _ := syscall.SyscallN(procGdipSetImageAttributesRemapTable.Addr(), uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(_enableFlag), uintptr(mapSize), uintptr(unsafe.Pointer(map_)))
+	return Status(r1)
+}
+
+var specGdipSetImageAttributesThreshold = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipSetImageAttributesThreshold calls gdiplus!GdipSetImageAttributesThreshold.
+func GdipSetImageAttributesThreshold(imageattr *GpImageAttributes, type_ ColorAdjustType, enableFlag bool, threshold float32) Status {
+	_enableFlag := win32.Bool32(enableFlag)
+	r1, _, _ := win32.Call(procGdipSetImageAttributesThreshold.Addr(), specGdipSetImageAttributesThreshold, nil, uintptr(unsafe.Pointer(imageattr)), uintptr(type_), uintptr(_enableFlag), uintptr(math.Float32bits(threshold))).Tuple()
 	return Status(r1)
 }
 
@@ -3341,9 +5385,25 @@ func GdipSetLineGammaCorrection(brush *GpLineGradient, useGammaCorrection bool) 
 	return Status(r1)
 }
 
+var specGdipSetLineLinearBlend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// GdipSetLineLinearBlend calls gdiplus!GdipSetLineLinearBlend.
+func GdipSetLineLinearBlend(brush *GpLineGradient, focus float32, scale float32) Status {
+	r1, _, _ := win32.Call(procGdipSetLineLinearBlend.Addr(), specGdipSetLineLinearBlend, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(focus)), uintptr(math.Float32bits(scale))).Tuple()
+	return Status(r1)
+}
+
 // GdipSetLinePresetBlend calls gdiplus!GdipSetLinePresetBlend.
 func GdipSetLinePresetBlend(brush *GpLineGradient, blend *uint32, positions *float32, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetLinePresetBlend.Addr(), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(blend)), uintptr(unsafe.Pointer(positions)), uintptr(count))
+	return Status(r1)
+}
+
+var specGdipSetLineSigmaBlend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// GdipSetLineSigmaBlend calls gdiplus!GdipSetLineSigmaBlend.
+func GdipSetLineSigmaBlend(brush *GpLineGradient, focus float32, scale float32) Status {
+	r1, _, _ := win32.Call(procGdipSetLineSigmaBlend.Addr(), specGdipSetLineSigmaBlend, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(focus)), uintptr(math.Float32bits(scale))).Tuple()
 	return Status(r1)
 }
 
@@ -3359,9 +5419,25 @@ func GdipSetLineWrapMode(brush *GpLineGradient, wrapmode WrapMode) Status {
 	return Status(r1)
 }
 
+var specGdipSetMatrixElements = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GdipSetMatrixElements calls gdiplus!GdipSetMatrixElements.
+func GdipSetMatrixElements(matrix *Matrix, m11 float32, m12 float32, m21 float32, m22 float32, dx float32, dy float32) Status {
+	r1, _, _ := win32.Call(procGdipSetMatrixElements.Addr(), specGdipSetMatrixElements, nil, uintptr(unsafe.Pointer(matrix)), uintptr(math.Float32bits(m11)), uintptr(math.Float32bits(m12)), uintptr(math.Float32bits(m21)), uintptr(math.Float32bits(m22)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy))).Tuple()
+	return Status(r1)
+}
+
 // GdipSetMetafileDownLevelRasterizationLimit calls gdiplus!GdipSetMetafileDownLevelRasterizationLimit.
 func GdipSetMetafileDownLevelRasterizationLimit(metafile *GpMetafile, metafileRasterizationLimitDpi uint32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetMetafileDownLevelRasterizationLimit.Addr(), uintptr(unsafe.Pointer(metafile)), uintptr(metafileRasterizationLimitDpi))
+	return Status(r1)
+}
+
+var specGdipSetPageScale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GdipSetPageScale calls gdiplus!GdipSetPageScale.
+func GdipSetPageScale(graphics *GpGraphics, scale float32) Status {
+	r1, _, _ := win32.Call(procGdipSetPageScale.Addr(), specGdipSetPageScale, nil, uintptr(unsafe.Pointer(graphics)), uintptr(math.Float32bits(scale))).Tuple()
 	return Status(r1)
 }
 
@@ -3401,10 +5477,26 @@ func GdipSetPathGradientCenterPointI(brush *GpPathGradient, points *Point) Statu
 	return Status(r1)
 }
 
+var specGdipSetPathGradientFocusScales = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// GdipSetPathGradientFocusScales calls gdiplus!GdipSetPathGradientFocusScales.
+func GdipSetPathGradientFocusScales(brush *GpPathGradient, xScale float32, yScale float32) Status {
+	r1, _, _ := win32.Call(procGdipSetPathGradientFocusScales.Addr(), specGdipSetPathGradientFocusScales, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(xScale)), uintptr(math.Float32bits(yScale))).Tuple()
+	return Status(r1)
+}
+
 // GdipSetPathGradientGammaCorrection calls gdiplus!GdipSetPathGradientGammaCorrection.
 func GdipSetPathGradientGammaCorrection(brush *GpPathGradient, useGammaCorrection bool) Status {
 	_useGammaCorrection := win32.Bool32(useGammaCorrection)
 	r1, _, _ := syscall.SyscallN(procGdipSetPathGradientGammaCorrection.Addr(), uintptr(unsafe.Pointer(brush)), uintptr(_useGammaCorrection))
+	return Status(r1)
+}
+
+var specGdipSetPathGradientLinearBlend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// GdipSetPathGradientLinearBlend calls gdiplus!GdipSetPathGradientLinearBlend.
+func GdipSetPathGradientLinearBlend(brush *GpPathGradient, focus float32, scale float32) Status {
+	r1, _, _ := win32.Call(procGdipSetPathGradientLinearBlend.Addr(), specGdipSetPathGradientLinearBlend, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(focus)), uintptr(math.Float32bits(scale))).Tuple()
 	return Status(r1)
 }
 
@@ -3417,6 +5509,14 @@ func GdipSetPathGradientPath(brush *GpPathGradient, path *GpPath) Status {
 // GdipSetPathGradientPresetBlend calls gdiplus!GdipSetPathGradientPresetBlend.
 func GdipSetPathGradientPresetBlend(brush *GpPathGradient, blend *uint32, positions *float32, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetPathGradientPresetBlend.Addr(), uintptr(unsafe.Pointer(brush)), uintptr(unsafe.Pointer(blend)), uintptr(unsafe.Pointer(positions)), uintptr(count))
+	return Status(r1)
+}
+
+var specGdipSetPathGradientSigmaBlend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// GdipSetPathGradientSigmaBlend calls gdiplus!GdipSetPathGradientSigmaBlend.
+func GdipSetPathGradientSigmaBlend(brush *GpPathGradient, focus float32, scale float32) Status {
+	r1, _, _ := win32.Call(procGdipSetPathGradientSigmaBlend.Addr(), specGdipSetPathGradientSigmaBlend, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(focus)), uintptr(math.Float32bits(scale))).Tuple()
 	return Status(r1)
 }
 
@@ -3486,6 +5586,14 @@ func GdipSetPenDashCap197819(pen *GpPen, dashCap DashCap) Status {
 	return Status(r1)
 }
 
+var specGdipSetPenDashOffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GdipSetPenDashOffset calls gdiplus!GdipSetPenDashOffset.
+func GdipSetPenDashOffset(pen *GpPen, offset float32) Status {
+	r1, _, _ := win32.Call(procGdipSetPenDashOffset.Addr(), specGdipSetPenDashOffset, nil, uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(offset))).Tuple()
+	return Status(r1)
+}
+
 // GdipSetPenDashStyle calls gdiplus!GdipSetPenDashStyle.
 func GdipSetPenDashStyle(pen *GpPen, dashstyle DashStyle) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetPenDashStyle.Addr(), uintptr(unsafe.Pointer(pen)), uintptr(dashstyle))
@@ -3510,6 +5618,14 @@ func GdipSetPenLineJoin(pen *GpPen, lineJoin LineJoin) Status {
 	return Status(r1)
 }
 
+var specGdipSetPenMiterLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GdipSetPenMiterLimit calls gdiplus!GdipSetPenMiterLimit.
+func GdipSetPenMiterLimit(pen *GpPen, miterLimit float32) Status {
+	r1, _, _ := win32.Call(procGdipSetPenMiterLimit.Addr(), specGdipSetPenMiterLimit, nil, uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(miterLimit))).Tuple()
+	return Status(r1)
+}
+
 // GdipSetPenMode calls gdiplus!GdipSetPenMode.
 func GdipSetPenMode(pen *GpPen, penMode PenAlignment) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetPenMode.Addr(), uintptr(unsafe.Pointer(pen)), uintptr(penMode))
@@ -3531,6 +5647,14 @@ func GdipSetPenTransform(pen *GpPen, matrix *Matrix) Status {
 // GdipSetPenUnit calls gdiplus!GdipSetPenUnit.
 func GdipSetPenUnit(pen *GpPen, unit Unit) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetPenUnit.Addr(), uintptr(unsafe.Pointer(pen)), uintptr(unit))
+	return Status(r1)
+}
+
+var specGdipSetPenWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GdipSetPenWidth calls gdiplus!GdipSetPenWidth.
+func GdipSetPenWidth(pen *GpPen, width float32) Status {
+	r1, _, _ := win32.Call(procGdipSetPenWidth.Addr(), specGdipSetPenWidth, nil, uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(width))).Tuple()
 	return Status(r1)
 }
 
@@ -3600,6 +5724,14 @@ func GdipSetStringFormatMeasurableCharacterRanges(format *GpStringFormat, rangeC
 	return Status(r1)
 }
 
+var specGdipSetStringFormatTabStops = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// GdipSetStringFormatTabStops calls gdiplus!GdipSetStringFormatTabStops.
+func GdipSetStringFormatTabStops(format *GpStringFormat, firstTabOffset float32, count int32, tabStops *float32) Status {
+	r1, _, _ := win32.Call(procGdipSetStringFormatTabStops.Addr(), specGdipSetStringFormatTabStops, nil, uintptr(unsafe.Pointer(format)), uintptr(math.Float32bits(firstTabOffset)), uintptr(count), uintptr(unsafe.Pointer(tabStops))).Tuple()
+	return Status(r1)
+}
+
 // GdipSetStringFormatTrimming calls gdiplus!GdipSetStringFormatTrimming.
 func GdipSetStringFormatTrimming(format *GpStringFormat, trimming StringTrimming) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetStringFormatTrimming.Addr(), uintptr(unsafe.Pointer(format)), uintptr(trimming))
@@ -3633,6 +5765,14 @@ func GdipSetTextureWrapMode(brush *GpTexture, wrapmode WrapMode) Status {
 // GdipSetWorldTransform calls gdiplus!GdipSetWorldTransform.
 func GdipSetWorldTransform(graphics *GpGraphics, matrix *Matrix) Status {
 	r1, _, _ := syscall.SyscallN(procGdipSetWorldTransform.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(unsafe.Pointer(matrix)))
+	return Status(r1)
+}
+
+var specGdipShearMatrix = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipShearMatrix calls gdiplus!GdipShearMatrix.
+func GdipShearMatrix(matrix *Matrix, shearX float32, shearY float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipShearMatrix.Addr(), specGdipShearMatrix, nil, uintptr(unsafe.Pointer(matrix)), uintptr(math.Float32bits(shearX)), uintptr(math.Float32bits(shearY)), uintptr(order)).Tuple()
 	return Status(r1)
 }
 
@@ -3696,15 +5836,79 @@ func GdipTransformRegion(region *GpRegion, matrix *Matrix) Status {
 	return Status(r1)
 }
 
+var specGdipTranslateClip = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// GdipTranslateClip calls gdiplus!GdipTranslateClip.
+func GdipTranslateClip(graphics *GpGraphics, dx float32, dy float32) Status {
+	r1, _, _ := win32.Call(procGdipTranslateClip.Addr(), specGdipTranslateClip, nil, uintptr(unsafe.Pointer(graphics)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy))).Tuple()
+	return Status(r1)
+}
+
 // GdipTranslateClipI calls gdiplus!GdipTranslateClipI.
 func GdipTranslateClipI(graphics *GpGraphics, dx int32, dy int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipTranslateClipI.Addr(), uintptr(unsafe.Pointer(graphics)), uintptr(dx), uintptr(dy))
 	return Status(r1)
 }
 
+var specGdipTranslateLineTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipTranslateLineTransform calls gdiplus!GdipTranslateLineTransform.
+func GdipTranslateLineTransform(brush *GpLineGradient, dx float32, dy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipTranslateLineTransform.Addr(), specGdipTranslateLineTransform, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipTranslateMatrix = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipTranslateMatrix calls gdiplus!GdipTranslateMatrix.
+func GdipTranslateMatrix(matrix *Matrix, offsetX float32, offsetY float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipTranslateMatrix.Addr(), specGdipTranslateMatrix, nil, uintptr(unsafe.Pointer(matrix)), uintptr(math.Float32bits(offsetX)), uintptr(math.Float32bits(offsetY)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipTranslatePathGradientTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipTranslatePathGradientTransform calls gdiplus!GdipTranslatePathGradientTransform.
+func GdipTranslatePathGradientTransform(brush *GpPathGradient, dx float32, dy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipTranslatePathGradientTransform.Addr(), specGdipTranslatePathGradientTransform, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipTranslatePenTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipTranslatePenTransform calls gdiplus!GdipTranslatePenTransform.
+func GdipTranslatePenTransform(pen *GpPen, dx float32, dy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipTranslatePenTransform.Addr(), specGdipTranslatePenTransform, nil, uintptr(unsafe.Pointer(pen)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipTranslateRegion = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// GdipTranslateRegion calls gdiplus!GdipTranslateRegion.
+func GdipTranslateRegion(region *GpRegion, dx float32, dy float32) Status {
+	r1, _, _ := win32.Call(procGdipTranslateRegion.Addr(), specGdipTranslateRegion, nil, uintptr(unsafe.Pointer(region)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy))).Tuple()
+	return Status(r1)
+}
+
 // GdipTranslateRegionI calls gdiplus!GdipTranslateRegionI.
 func GdipTranslateRegionI(region *GpRegion, dx int32, dy int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipTranslateRegionI.Addr(), uintptr(unsafe.Pointer(region)), uintptr(dx), uintptr(dy))
+	return Status(r1)
+}
+
+var specGdipTranslateTextureTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipTranslateTextureTransform calls gdiplus!GdipTranslateTextureTransform.
+func GdipTranslateTextureTransform(brush *GpTexture, dx float32, dy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipTranslateTextureTransform.Addr(), specGdipTranslateTextureTransform, nil, uintptr(unsafe.Pointer(brush)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy)), uintptr(order)).Tuple()
+	return Status(r1)
+}
+
+var specGdipTranslateWorldTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GdipTranslateWorldTransform calls gdiplus!GdipTranslateWorldTransform.
+func GdipTranslateWorldTransform(graphics *GpGraphics, dx float32, dy float32, order MatrixOrder) Status {
+	r1, _, _ := win32.Call(procGdipTranslateWorldTransform.Addr(), specGdipTranslateWorldTransform, nil, uintptr(unsafe.Pointer(graphics)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy)), uintptr(order)).Tuple()
 	return Status(r1)
 }
 
@@ -3717,6 +5921,30 @@ func GdipVectorTransformMatrixPoints(matrix *Matrix, pts *PointF, count int32) S
 // GdipVectorTransformMatrixPointsI calls gdiplus!GdipVectorTransformMatrixPointsI.
 func GdipVectorTransformMatrixPointsI(matrix *Matrix, pts *Point, count int32) Status {
 	r1, _, _ := syscall.SyscallN(procGdipVectorTransformMatrixPointsI.Addr(), uintptr(unsafe.Pointer(matrix)), uintptr(unsafe.Pointer(pts)), uintptr(count))
+	return Status(r1)
+}
+
+var specGdipWarpPath = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Float32}}
+
+// GdipWarpPath calls gdiplus!GdipWarpPath.
+func GdipWarpPath(path *GpPath, matrix *Matrix, points *PointF, count int32, srcx float32, srcy float32, srcwidth float32, srcheight float32, warpMode WarpMode, flatness float32) Status {
+	r1, _, _ := win32.Call(procGdipWarpPath.Addr(), specGdipWarpPath, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(matrix)), uintptr(unsafe.Pointer(points)), uintptr(count), uintptr(math.Float32bits(srcx)), uintptr(math.Float32bits(srcy)), uintptr(math.Float32bits(srcwidth)), uintptr(math.Float32bits(srcheight)), uintptr(warpMode), uintptr(math.Float32bits(flatness))).Tuple()
+	return Status(r1)
+}
+
+var specGdipWidenPath = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// GdipWidenPath calls gdiplus!GdipWidenPath.
+func GdipWidenPath(nativePath *GpPath, pen *GpPen, matrix *Matrix, flatness float32) Status {
+	r1, _, _ := win32.Call(procGdipWidenPath.Addr(), specGdipWidenPath, nil, uintptr(unsafe.Pointer(nativePath)), uintptr(unsafe.Pointer(pen)), uintptr(unsafe.Pointer(matrix)), uintptr(math.Float32bits(flatness))).Tuple()
+	return Status(r1)
+}
+
+var specGdipWindingModeOutline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// GdipWindingModeOutline calls gdiplus!GdipWindingModeOutline.
+func GdipWindingModeOutline(path *GpPath, matrix *Matrix, flatness float32) Status {
+	r1, _, _ := win32.Call(procGdipWindingModeOutline.Addr(), specGdipWindingModeOutline, nil, uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(matrix)), uintptr(math.Float32bits(flatness))).Tuple()
 	return Status(r1)
 }
 

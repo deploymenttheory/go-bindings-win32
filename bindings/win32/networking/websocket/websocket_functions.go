@@ -32,6 +32,40 @@ var (
 	procWebSocketSend                 = modwebsocket.NewProc("WebSocketSend")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WebSocketAbortHandle          *win32.Proc
+	WebSocketBeginClientHandshake *win32.Proc
+	WebSocketBeginServerHandshake *win32.Proc
+	WebSocketCompleteAction       *win32.Proc
+	WebSocketCreateClientHandle   *win32.Proc
+	WebSocketCreateServerHandle   *win32.Proc
+	WebSocketDeleteHandle         *win32.Proc
+	WebSocketEndClientHandshake   *win32.Proc
+	WebSocketEndServerHandshake   *win32.Proc
+	WebSocketGetAction            *win32.Proc
+	WebSocketGetGlobalProperty    *win32.Proc
+	WebSocketReceive              *win32.Proc
+	WebSocketSend                 *win32.Proc
+}{
+	WebSocketAbortHandle:          procWebSocketAbortHandle,
+	WebSocketBeginClientHandshake: procWebSocketBeginClientHandshake,
+	WebSocketBeginServerHandshake: procWebSocketBeginServerHandshake,
+	WebSocketCompleteAction:       procWebSocketCompleteAction,
+	WebSocketCreateClientHandle:   procWebSocketCreateClientHandle,
+	WebSocketCreateServerHandle:   procWebSocketCreateServerHandle,
+	WebSocketDeleteHandle:         procWebSocketDeleteHandle,
+	WebSocketEndClientHandshake:   procWebSocketEndClientHandshake,
+	WebSocketEndServerHandshake:   procWebSocketEndServerHandshake,
+	WebSocketGetAction:            procWebSocketGetAction,
+	WebSocketGetGlobalProperty:    procWebSocketGetGlobalProperty,
+	WebSocketReceive:              procWebSocketReceive,
+	WebSocketSend:                 procWebSocketSend,
+}
+
 // WebSocketAbortHandle calls websocket!WebSocketAbortHandle.
 // https://learn.microsoft.com/windows/win32/api/websocket/nf-websocket-websocketaborthandle
 // Minimum OS: windows8.0.

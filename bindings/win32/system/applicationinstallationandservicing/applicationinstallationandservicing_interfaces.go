@@ -1040,6 +1040,30 @@ type IPMDeploymentManager struct {
 // IID_IPMDeploymentManager is the interface identifier for IPMDeploymentManager.
 var IID_IPMDeploymentManager = win32.GUID{Data1: 0x35f785fa, Data2: 0x1979, Data3: 0x4a8b, Data4: [8]byte{0xbc, 0x8f, 0xfd, 0x70, 0xeb, 0x0d, 0x15, 0x44}}
 
+var specIPMDeploymentManager_ReportDownloadBegin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// ReportDownloadBegin dispatches through IPMDeploymentManager's vtable slot 3.
+func (self *IPMDeploymentManager) ReportDownloadBegin(productID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIPMDeploymentManager_ReportDownloadBegin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_ReportDownloadProgress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// ReportDownloadProgress dispatches through IPMDeploymentManager's vtable slot 4.
+func (self *IPMDeploymentManager) ReportDownloadProgress(productID win32.GUID, usProgress uint16) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIPMDeploymentManager_ReportDownloadProgress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productID)), uintptr(usProgress)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_ReportDownloadComplete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// ReportDownloadComplete dispatches through IPMDeploymentManager's vtable slot 5.
+func (self *IPMDeploymentManager) ReportDownloadComplete(productID win32.GUID, hrResult foundation.HRESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIPMDeploymentManager_ReportDownloadComplete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productID)), uintptr(hrResult)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // BeginInstall dispatches through IPMDeploymentManager's vtable slot 6.
 func (self *IPMDeploymentManager) BeginInstall(pInstallInfo *PM_INSTALLINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallInfo)))
@@ -1064,6 +1088,14 @@ func (self *IPMDeploymentManager) BeginUpdateDeployedPackageLegacy(pUpdateInfo *
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIPMDeploymentManager_BeginUninstall = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// BeginUninstall dispatches through IPMDeploymentManager's vtable slot 10.
+func (self *IPMDeploymentManager) BeginUninstall(productID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIPMDeploymentManager_BeginUninstall, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // BeginEnterpriseAppInstall dispatches through IPMDeploymentManager's vtable slot 11.
 func (self *IPMDeploymentManager) BeginEnterpriseAppInstall(pInstallInfo *PM_INSTALLINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInstallInfo)))
@@ -1076,9 +1108,101 @@ func (self *IPMDeploymentManager) BeginEnterpriseAppUpdate(pUpdateInfo *PM_UPDAT
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIPMDeploymentManager_BeginUpdateLicense = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// BeginUpdateLicense dispatches through IPMDeploymentManager's vtable slot 13.
+func (self *IPMDeploymentManager) BeginUpdateLicense(productID win32.GUID, offerID win32.GUID, pbLicense []byte) error {
+	var _pbLicense *byte
+	if len(pbLicense) > 0 {
+		_pbLicense = &pbLicense[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIPMDeploymentManager_BeginUpdateLicense, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productID)), uintptr(unsafe.Pointer(&offerID)), uintptr(unsafe.Pointer(_pbLicense)), uintptr(len(pbLicense))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetLicenseChallenge dispatches through IPMDeploymentManager's vtable slot 14.
 func (self *IPMDeploymentManager) GetLicenseChallenge(PackagePath foundation.BSTR, ppbChallenge **byte, pcbChallenge *uint32, ppbKID **byte, pcbKID *uint32, ppbDeviceID **byte, pcbDeviceID *uint32, ppbSaltValue **byte, pcbSaltValue *uint32, ppbKGVValue **byte, pcbKGVValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PackagePath)), uintptr(unsafe.Pointer(ppbChallenge)), uintptr(unsafe.Pointer(pcbChallenge)), uintptr(unsafe.Pointer(ppbKID)), uintptr(unsafe.Pointer(pcbKID)), uintptr(unsafe.Pointer(ppbDeviceID)), uintptr(unsafe.Pointer(pcbDeviceID)), uintptr(unsafe.Pointer(ppbSaltValue)), uintptr(unsafe.Pointer(pcbSaltValue)), uintptr(unsafe.Pointer(ppbKGVValue)), uintptr(unsafe.Pointer(pcbKGVValue)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_GetLicenseChallengeByProductID = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetLicenseChallengeByProductID dispatches through IPMDeploymentManager's vtable slot 15.
+func (self *IPMDeploymentManager) GetLicenseChallengeByProductID(ProductID win32.GUID, ppbChallenge **byte, pcbLicense *uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIPMDeploymentManager_GetLicenseChallengeByProductID, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(ppbChallenge)), uintptr(unsafe.Pointer(pcbLicense))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_GetLicenseChallengeByProductID2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetLicenseChallengeByProductID2 dispatches through IPMDeploymentManager's vtable slot 16.
+func (self *IPMDeploymentManager) GetLicenseChallengeByProductID2(ProductID win32.GUID, ppbChallenge **byte, pcbLicense *uint32, ppbKID **byte, pcbKID *uint32, ppbDeviceID **byte, pcbDeviceID *uint32, ppbSaltValue **byte, pcbSaltValue *uint32, ppbKGVValue **byte, pcbKGVValue *uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIPMDeploymentManager_GetLicenseChallengeByProductID2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(ppbChallenge)), uintptr(unsafe.Pointer(pcbLicense)), uintptr(unsafe.Pointer(ppbKID)), uintptr(unsafe.Pointer(pcbKID)), uintptr(unsafe.Pointer(ppbDeviceID)), uintptr(unsafe.Pointer(pcbDeviceID)), uintptr(unsafe.Pointer(ppbSaltValue)), uintptr(unsafe.Pointer(pcbSaltValue)), uintptr(unsafe.Pointer(ppbKGVValue)), uintptr(unsafe.Pointer(pcbKGVValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_RevokeLicense = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RevokeLicense dispatches through IPMDeploymentManager's vtable slot 17.
+func (self *IPMDeploymentManager) RevokeLicense(productID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIPMDeploymentManager_RevokeLicense, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_RebindMdilBinaries = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RebindMdilBinaries dispatches through IPMDeploymentManager's vtable slot 18.
+func (self *IPMDeploymentManager) RebindMdilBinaries(ProductID win32.GUID, FileNames *systemcom.SAFEARRAY) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIPMDeploymentManager_RebindMdilBinaries, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(FileNames))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_RebindAllMdilBinaries = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// RebindAllMdilBinaries dispatches through IPMDeploymentManager's vtable slot 19.
+func (self *IPMDeploymentManager) RebindAllMdilBinaries(ProductID win32.GUID, InstanceID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIPMDeploymentManager_RebindAllMdilBinaries, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(&InstanceID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_RegenerateXbf = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RegenerateXbf dispatches through IPMDeploymentManager's vtable slot 20.
+func (self *IPMDeploymentManager) RegenerateXbf(ProductID win32.GUID, AssemblyPaths *systemcom.SAFEARRAY) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIPMDeploymentManager_RegenerateXbf, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(AssemblyPaths))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_GenerateXbfForCurrentLocale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GenerateXbfForCurrentLocale dispatches through IPMDeploymentManager's vtable slot 21.
+func (self *IPMDeploymentManager) GenerateXbfForCurrentLocale(ProductID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIPMDeploymentManager_GenerateXbfForCurrentLocale, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_BeginProvision = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// BeginProvision dispatches through IPMDeploymentManager's vtable slot 22.
+func (self *IPMDeploymentManager) BeginProvision(ProductID win32.GUID, XMLpath foundation.BSTR) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIPMDeploymentManager_BeginProvision, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(XMLpath))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_BeginDeprovision = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// BeginDeprovision dispatches through IPMDeploymentManager's vtable slot 23.
+func (self *IPMDeploymentManager) BeginDeprovision(ProductID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIPMDeploymentManager_BeginDeprovision, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_ReindexSQLCEDatabases = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// ReindexSQLCEDatabases dispatches through IPMDeploymentManager's vtable slot 24.
+func (self *IPMDeploymentManager) ReindexSQLCEDatabases(ProductID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIPMDeploymentManager_ReindexSQLCEDatabases, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1088,9 +1212,34 @@ func (self *IPMDeploymentManager) SetApplicationsNeedMaintenance(RequiredMainten
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIPMDeploymentManager_UpdateChamberProfile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// UpdateChamberProfile dispatches through IPMDeploymentManager's vtable slot 26.
+func (self *IPMDeploymentManager) UpdateChamberProfile(ProductID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIPMDeploymentManager_UpdateChamberProfile, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_EnterprisePolicyIsApplicationAllowed = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// EnterprisePolicyIsApplicationAllowed dispatches through IPMDeploymentManager's vtable slot 27.
+func (self *IPMDeploymentManager) EnterprisePolicyIsApplicationAllowed(productId win32.GUID, publisherName string, pIsAllowed *foundation.BOOL) error {
+	_publisherName := win32.UTF16Ptr(publisherName)
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIPMDeploymentManager_EnterprisePolicyIsApplicationAllowed, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productId)), uintptr(unsafe.Pointer(_publisherName)), uintptr(unsafe.Pointer(pIsAllowed))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // BeginUpdateDeployedPackage dispatches through IPMDeploymentManager's vtable slot 28.
 func (self *IPMDeploymentManager) BeginUpdateDeployedPackage(pUpdateInfo *PM_UPDATEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUpdateInfo)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_ReportRestoreCancelled = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// ReportRestoreCancelled dispatches through IPMDeploymentManager's vtable slot 29.
+func (self *IPMDeploymentManager) ReportRestoreCancelled(productID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIPMDeploymentManager_ReportRestoreCancelled, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productID))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1107,6 +1256,22 @@ func (self *IPMDeploymentManager) UpdateCapabilitiesForModernApps() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIPMDeploymentManager_ReportDownloadStatusUpdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// ReportDownloadStatusUpdate dispatches through IPMDeploymentManager's vtable slot 32.
+func (self *IPMDeploymentManager) ReportDownloadStatusUpdate(productId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIPMDeploymentManager_ReportDownloadStatusUpdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_BeginUninstallWithOptions = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// BeginUninstallWithOptions dispatches through IPMDeploymentManager's vtable slot 33.
+func (self *IPMDeploymentManager) BeginUninstallWithOptions(productID win32.GUID, removalOptions uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIPMDeploymentManager_BeginUninstallWithOptions, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productID)), uintptr(removalOptions)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // BindDeferredMdilBinaries dispatches through IPMDeploymentManager's vtable slot 34.
 func (self *IPMDeploymentManager) BindDeferredMdilBinaries() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)))
@@ -1116,6 +1281,22 @@ func (self *IPMDeploymentManager) BindDeferredMdilBinaries() error {
 // GenerateXamlLightupXbfForCurrentLocale dispatches through IPMDeploymentManager's vtable slot 35.
 func (self *IPMDeploymentManager) GenerateXamlLightupXbfForCurrentLocale(PackageFamilyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PackageFamilyName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMDeploymentManager_AddLicenseForAppx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// AddLicenseForAppx dispatches through IPMDeploymentManager's vtable slot 36.
+func (self *IPMDeploymentManager) AddLicenseForAppx(productID win32.GUID, pbLicense []byte, pbPlayReadyHeader []byte) error {
+	var _pbLicense *byte
+	if len(pbLicense) > 0 {
+		_pbLicense = &pbLicense[0]
+	}
+	var _pbPlayReadyHeader *byte
+	if len(pbPlayReadyHeader) > 0 {
+		_pbPlayReadyHeader = &pbPlayReadyHeader[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIPMDeploymentManager_AddLicenseForAppx, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productID)), uintptr(unsafe.Pointer(_pbLicense)), uintptr(len(pbLicense)), uintptr(unsafe.Pointer(_pbPlayReadyHeader)), uintptr(len(pbPlayReadyHeader))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1133,6 +1314,87 @@ type IPMEnumerationManager struct {
 // IID_IPMEnumerationManager is the interface identifier for IPMEnumerationManager.
 var IID_IPMEnumerationManager = win32.GUID{Data1: 0x698d57c2, Data2: 0x292d, Data3: 0x4cf3, Data4: [8]byte{0xb7, 0x3c, 0xd9, 0x5a, 0x69, 0x22, 0xed, 0x9a}}
 
+var specIPMEnumerationManager_Get_AllApplications = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(32, 8, 0, false)}}
+
+// Get_AllApplications dispatches through IPMEnumerationManager's vtable slot 3.
+func (self *IPMEnumerationManager) Get_AllApplications(ppAppEnum **IPMApplicationInfoEnumerator, Filter PM_ENUM_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIPMEnumerationManager_Get_AllApplications, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAppEnum)), uintptr(unsafe.Pointer(&Filter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_AllTiles = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(32, 8, 0, false)}}
+
+// Get_AllTiles dispatches through IPMEnumerationManager's vtable slot 4.
+func (self *IPMEnumerationManager) Get_AllTiles(ppTileEnum **IPMTileInfoEnumerator, Filter PM_ENUM_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIPMEnumerationManager_Get_AllTiles, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTileEnum)), uintptr(unsafe.Pointer(&Filter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_AllTasks = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(32, 8, 0, false)}}
+
+// Get_AllTasks dispatches through IPMEnumerationManager's vtable slot 5.
+func (self *IPMEnumerationManager) Get_AllTasks(ppTaskEnum **IPMTaskInfoEnumerator, Filter PM_ENUM_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIPMEnumerationManager_Get_AllTasks, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTaskEnum)), uintptr(unsafe.Pointer(&Filter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_AllExtensions = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(32, 8, 0, false)}}
+
+// Get_AllExtensions dispatches through IPMEnumerationManager's vtable slot 6.
+func (self *IPMEnumerationManager) Get_AllExtensions(ppExtensionEnum **IPMExtensionInfoEnumerator, Filter PM_ENUM_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIPMEnumerationManager_Get_AllExtensions, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppExtensionEnum)), uintptr(unsafe.Pointer(&Filter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_AllBackgroundServiceAgents = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(32, 8, 0, false)}}
+
+// Get_AllBackgroundServiceAgents dispatches through IPMEnumerationManager's vtable slot 7.
+func (self *IPMEnumerationManager) Get_AllBackgroundServiceAgents(ppBSAEnum **IPMBackgroundServiceAgentInfoEnumerator, Filter PM_ENUM_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIPMEnumerationManager_Get_AllBackgroundServiceAgents, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBSAEnum)), uintptr(unsafe.Pointer(&Filter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_AllBackgroundWorkers = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(32, 8, 0, false)}}
+
+// Get_AllBackgroundWorkers dispatches through IPMEnumerationManager's vtable slot 8.
+func (self *IPMEnumerationManager) Get_AllBackgroundWorkers(ppBSWEnum **IPMBackgroundWorkerInfoEnumerator, Filter PM_ENUM_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIPMEnumerationManager_Get_AllBackgroundWorkers, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppBSWEnum)), uintptr(unsafe.Pointer(&Filter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_ApplicationInfo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// Get_ApplicationInfo dispatches through IPMEnumerationManager's vtable slot 9.
+func (self *IPMEnumerationManager) Get_ApplicationInfo(ProductID win32.GUID, ppAppInfo **IPMApplicationInfo) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIPMEnumerationManager_Get_ApplicationInfo, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(ppAppInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_TileInfo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// Get_TileInfo dispatches through IPMEnumerationManager's vtable slot 10.
+func (self *IPMEnumerationManager) Get_TileInfo(ProductID win32.GUID, TileID foundation.BSTR, ppTileInfo **IPMTileInfo) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIPMEnumerationManager_Get_TileInfo, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(TileID)), uintptr(unsafe.Pointer(ppTileInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_TaskInfo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// Get_TaskInfo dispatches through IPMEnumerationManager's vtable slot 11.
+func (self *IPMEnumerationManager) Get_TaskInfo(ProductID win32.GUID, TaskID foundation.BSTR, ppTaskInfo **IPMTaskInfo) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIPMEnumerationManager_Get_TaskInfo, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(TaskID)), uintptr(unsafe.Pointer(ppTaskInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_TaskInfoEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// Get_TaskInfoEx dispatches through IPMEnumerationManager's vtable slot 12.
+func (self *IPMEnumerationManager) Get_TaskInfoEx(ProductID win32.GUID, TaskID string, ppTaskInfo **IPMTaskInfo) error {
+	_TaskID := win32.UTF16Ptr(TaskID)
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIPMEnumerationManager_Get_TaskInfoEx, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(_TaskID)), uintptr(unsafe.Pointer(ppTaskInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_BackgroundServiceAgentInfo dispatches through IPMEnumerationManager's vtable slot 13.
 func (self *IPMEnumerationManager) Get_BackgroundServiceAgentInfo(BSAID uint32, ppTaskInfo **IPMBackgroundServiceAgentInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(BSAID), uintptr(unsafe.Pointer(ppTaskInfo)))
@@ -1145,6 +1407,22 @@ func (self *IPMEnumerationManager) Get_AllLiveTileJobs(ppLiveTileJobEnum **IPMLi
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIPMEnumerationManager_Get_LiveTileJob = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Get_LiveTileJob dispatches through IPMEnumerationManager's vtable slot 15.
+func (self *IPMEnumerationManager) Get_LiveTileJob(ProductID win32.GUID, TileID foundation.BSTR, RecurrenceType PM_LIVETILE_RECURRENCE_TYPE, ppLiveTileJobInfo **IPMLiveTileJobInfo) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIPMEnumerationManager_Get_LiveTileJob, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(TileID)), uintptr(RecurrenceType), uintptr(unsafe.Pointer(ppLiveTileJobInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_ApplicationInfoExternal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// Get_ApplicationInfoExternal dispatches through IPMEnumerationManager's vtable slot 16.
+func (self *IPMEnumerationManager) Get_ApplicationInfoExternal(ProductID win32.GUID, ppAppInfo **IPMApplicationInfo) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIPMEnumerationManager_Get_ApplicationInfoExternal, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProductID)), uintptr(unsafe.Pointer(ppAppInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_FileHandlerGenericLogo dispatches through IPMEnumerationManager's vtable slot 17.
 func (self *IPMEnumerationManager) Get_FileHandlerGenericLogo(FileType foundation.BSTR, LogoSize PM_LOGO_SIZE, pLogo *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileType)), uintptr(LogoSize), uintptr(unsafe.Pointer(pLogo)))
@@ -1154,6 +1432,22 @@ func (self *IPMEnumerationManager) Get_FileHandlerGenericLogo(FileType foundatio
 // Get_ApplicationInfoFromAccessClaims dispatches through IPMEnumerationManager's vtable slot 18.
 func (self *IPMEnumerationManager) Get_ApplicationInfoFromAccessClaims(SysAppID0 foundation.BSTR, SysAppID1 foundation.BSTR, ppAppInfo **IPMApplicationInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SysAppID0)), uintptr(unsafe.Pointer(SysAppID1)), uintptr(unsafe.Pointer(ppAppInfo)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_StartTileEnumeratorBlob = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(32, 8, 0, false), win32.Word, win32.Word}}
+
+// Get_StartTileEnumeratorBlob dispatches through IPMEnumerationManager's vtable slot 19.
+func (self *IPMEnumerationManager) Get_StartTileEnumeratorBlob(Filter PM_ENUM_FILTER, pcTiles *uint32, ppTileBlobs **PM_STARTTILEBLOB) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIPMEnumerationManager_Get_StartTileEnumeratorBlob, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Filter)), uintptr(unsafe.Pointer(pcTiles)), uintptr(unsafe.Pointer(ppTileBlobs))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPMEnumerationManager_Get_StartAppEnumeratorBlob = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(32, 8, 0, false), win32.Word, win32.Word}}
+
+// Get_StartAppEnumeratorBlob dispatches through IPMEnumerationManager's vtable slot 20.
+func (self *IPMEnumerationManager) Get_StartAppEnumeratorBlob(Filter PM_ENUM_FILTER, pcApps *uint32, ppAppBlobs **PM_STARTAPPBLOB) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIPMEnumerationManager_Get_StartAppEnumeratorBlob, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Filter)), uintptr(unsafe.Pointer(pcApps)), uintptr(unsafe.Pointer(ppAppBlobs))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

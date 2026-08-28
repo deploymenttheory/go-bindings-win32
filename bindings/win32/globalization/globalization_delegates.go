@@ -4,250 +4,302 @@
 
 package globalization
 
-// CALINFO_ENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) foundation.BOOL.
+// CALINFO_ENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CALINFO_ENUMPROCA uintptr
 
-// CALINFO_ENUMPROCEXA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32) foundation.BOOL.
+// CALINFO_ENUMPROCEXA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CALINFO_ENUMPROCEXA uintptr
 
-// CALINFO_ENUMPROCEXEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, foundation.PWSTR, foundation.LPARAM) foundation.BOOL.
+// CALINFO_ENUMPROCEXEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, foundation.PWSTR, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CALINFO_ENUMPROCEXEX uintptr
 
-// CALINFO_ENUMPROCEXW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32) foundation.BOOL.
+// CALINFO_ENUMPROCEXW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CALINFO_ENUMPROCEXW uintptr
 
-// CALINFO_ENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// CALINFO_ENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CALINFO_ENUMPROCW uintptr
 
-// CODEPAGE_ENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) foundation.BOOL.
+// CODEPAGE_ENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CODEPAGE_ENUMPROCA uintptr
 
-// CODEPAGE_ENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// CODEPAGE_ENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CODEPAGE_ENUMPROCW uintptr
 
-// DATEFMT_ENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) foundation.BOOL.
+// DATEFMT_ENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DATEFMT_ENUMPROCA uintptr
 
-// DATEFMT_ENUMPROCEXA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32) foundation.BOOL.
+// DATEFMT_ENUMPROCEXA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DATEFMT_ENUMPROCEXA uintptr
 
-// DATEFMT_ENUMPROCEXEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, foundation.LPARAM) foundation.BOOL.
+// DATEFMT_ENUMPROCEXEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DATEFMT_ENUMPROCEXEX uintptr
 
-// DATEFMT_ENUMPROCEXW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32) foundation.BOOL.
+// DATEFMT_ENUMPROCEXW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DATEFMT_ENUMPROCEXW uintptr
 
-// DATEFMT_ENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// DATEFMT_ENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DATEFMT_ENUMPROCW uintptr
 
-// GEO_ENUMNAMEPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.LPARAM) foundation.BOOL.
+// GEO_ENUMNAMEPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type GEO_ENUMNAMEPROC uintptr
 
-// GEO_ENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32) foundation.BOOL.
+// GEO_ENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type GEO_ENUMPROC uintptr
 
-// LANGGROUPLOCALE_ENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, foundation.PSTR, uintptr) foundation.BOOL.
+// LANGGROUPLOCALE_ENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, foundation.PSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LANGGROUPLOCALE_ENUMPROCA uintptr
 
-// LANGGROUPLOCALE_ENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, foundation.PWSTR, uintptr) foundation.BOOL.
+// LANGGROUPLOCALE_ENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, foundation.PWSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LANGGROUPLOCALE_ENUMPROCW uintptr
 
-// LANGUAGEGROUP_ENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PSTR, foundation.PSTR, uint32, uintptr) foundation.BOOL.
+// LANGUAGEGROUP_ENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PSTR, foundation.PSTR, uint32, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LANGUAGEGROUP_ENUMPROCA uintptr
 
-// LANGUAGEGROUP_ENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PWSTR, foundation.PWSTR, uint32, uintptr) foundation.BOOL.
+// LANGUAGEGROUP_ENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PWSTR, foundation.PWSTR, uint32, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LANGUAGEGROUP_ENUMPROCW uintptr
 
-// LOCALE_ENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) foundation.BOOL.
+// LOCALE_ENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LOCALE_ENUMPROCA uintptr
 
-// LOCALE_ENUMPROCEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, foundation.LPARAM) foundation.BOOL.
+// LOCALE_ENUMPROCEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LOCALE_ENUMPROCEX uintptr
 
-// LOCALE_ENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// LOCALE_ENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LOCALE_ENUMPROCW uintptr
 
-// PFN_MAPPINGCALLBACKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*MAPPING_PROPERTY_BAG, unsafe.Pointer, uint32, foundation.HRESULT).
+// PFN_MAPPINGCALLBACKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*MAPPING_PROPERTY_BAG, unsafe.Pointer, uint32, foundation.HRESULT) uintptr.
 type PFN_MAPPINGCALLBACKPROC uintptr
 
-// TIMEFMT_ENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) foundation.BOOL.
+// TIMEFMT_ENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type TIMEFMT_ENUMPROCA uintptr
 
-// TIMEFMT_ENUMPROCEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.LPARAM) foundation.BOOL.
+// TIMEFMT_ENUMPROCEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type TIMEFMT_ENUMPROCEX uintptr
 
-// TIMEFMT_ENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// TIMEFMT_ENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type TIMEFMT_ENUMPROCW uintptr
 
-// UBiDiClassCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int32) UCharDirection.
+// UBiDiClassCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int32) uintptr (the native return type is
+// UCharDirection; NewCallback requires a uintptr-sized result).
 type UBiDiClassCallback uintptr
 
-// UCPMapValueFilter is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32) uint32.
+// UCPMapValueFilter is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type UCPMapValueFilter uintptr
 
-// UCharEnumTypeRange is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int32, int32, UCharCategory) int8.
+// UCharEnumTypeRange is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int32, int32, UCharCategory) uintptr (the native return type is
+// int8; NewCallback requires a uintptr-sized result).
 type UCharEnumTypeRange uintptr
 
-// UCharIteratorCurrent is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator) int32.
+// UCharIteratorCurrent is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UCharIteratorCurrent uintptr
 
-// UCharIteratorGetIndex is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator, UCharIteratorOrigin) int32.
+// UCharIteratorGetIndex is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator, UCharIteratorOrigin) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UCharIteratorGetIndex uintptr
 
-// UCharIteratorGetState is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator) uint32.
+// UCharIteratorGetState is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type UCharIteratorGetState uintptr
 
-// UCharIteratorHasNext is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator) int8.
+// UCharIteratorHasNext is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator) uintptr (the native return type is
+// int8; NewCallback requires a uintptr-sized result).
 type UCharIteratorHasNext uintptr
 
-// UCharIteratorHasPrevious is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator) int8.
+// UCharIteratorHasPrevious is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator) uintptr (the native return type is
+// int8; NewCallback requires a uintptr-sized result).
 type UCharIteratorHasPrevious uintptr
 
-// UCharIteratorMove is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator, int32, UCharIteratorOrigin) int32.
+// UCharIteratorMove is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator, int32, UCharIteratorOrigin) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UCharIteratorMove uintptr
 
-// UCharIteratorNext is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator) int32.
+// UCharIteratorNext is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UCharIteratorNext uintptr
 
-// UCharIteratorPrevious is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator) int32.
+// UCharIteratorPrevious is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UCharIteratorPrevious uintptr
 
-// UCharIteratorReserved is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator, int32) int32.
+// UCharIteratorReserved is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UCharIteratorReserved uintptr
 
-// UCharIteratorSetState is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCharIterator, uint32, *UErrorCode).
+// UCharIteratorSetState is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCharIterator, uint32, *UErrorCode) uintptr.
 type UCharIteratorSetState uintptr
 
-// UConverterFromUCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *UConverterFromUnicodeArgs, *uint16, int32, int32, UConverterCallbackReason, *UErrorCode).
+// UConverterFromUCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *UConverterFromUnicodeArgs, *uint16, int32, int32, UConverterCallbackReason, *UErrorCode) uintptr.
 type UConverterFromUCallback uintptr
 
-// UConverterToUCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *UConverterToUnicodeArgs, foundation.PSTR, int32, UConverterCallbackReason, *UErrorCode).
+// UConverterToUCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *UConverterToUnicodeArgs, foundation.PSTR, int32, UConverterCallbackReason, *UErrorCode) uintptr.
 type UConverterToUCallback uintptr
 
-// UEnumCharNamesFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int32, UCharNameChoice, foundation.PSTR, int32) int8.
+// UEnumCharNamesFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int32, UCharNameChoice, foundation.PSTR, int32) uintptr (the native return type is
+// int8; NewCallback requires a uintptr-sized result).
 type UEnumCharNamesFn uintptr
 
-// UILANGUAGE_ENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uintptr) foundation.BOOL.
+// UILANGUAGE_ENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type UILANGUAGE_ENUMPROCA uintptr
 
-// UILANGUAGE_ENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uintptr) foundation.BOOL.
+// UILANGUAGE_ENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type UILANGUAGE_ENUMPROCW uintptr
 
-// UMemAllocFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr) unsafe.Pointer.
+// UMemAllocFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type UMemAllocFn uintptr
 
-// UMemFreeFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer).
+// UMemFreeFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr.
 type UMemFreeFn uintptr
 
-// UMemReallocFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, uintptr) unsafe.Pointer.
+// UMemReallocFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type UMemReallocFn uintptr
 
-// UNESCAPE_CHAR_AT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, unsafe.Pointer) uint16.
+// UNESCAPE_CHAR_AT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, unsafe.Pointer) uintptr (the native return type is
+// uint16; NewCallback requires a uintptr-sized result).
 type UNESCAPE_CHAR_AT uintptr
 
-// URegexFindProgressCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int64) int8.
+// URegexFindProgressCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int64) uintptr (the native return type is
+// int8; NewCallback requires a uintptr-sized result).
 type URegexFindProgressCallback uintptr
 
-// URegexMatchCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int32) int8.
+// URegexMatchCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int32) uintptr (the native return type is
+// int8; NewCallback requires a uintptr-sized result).
 type URegexMatchCallback uintptr
 
-// UStringCaseMapper is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UCaseMap, *uint16, int32, *uint16, int32, *UErrorCode) int32.
+// UStringCaseMapper is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UCaseMap, *uint16, int32, *uint16, int32, *UErrorCode) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UStringCaseMapper uintptr
 
-// UTextAccess is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UText, int64, int8) int8.
+// UTextAccess is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UText, int64, int8) uintptr (the native return type is
+// int8; NewCallback requires a uintptr-sized result).
 type UTextAccess uintptr
 
-// UTextClone is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UText, *UText, int8, *UErrorCode) *UText.
+// UTextClone is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UText, *UText, int8, *UErrorCode) uintptr (the native return type is
+// *UText; NewCallback requires a uintptr-sized result).
 type UTextClone uintptr
 
-// UTextClose is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UText).
+// UTextClose is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UText) uintptr.
 type UTextClose uintptr
 
-// UTextCopy is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UText, int64, int64, int64, int8, *UErrorCode).
+// UTextCopy is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UText, int64, int64, int64, int8, *UErrorCode) uintptr.
 type UTextCopy uintptr
 
-// UTextExtract is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UText, int64, int64, *uint16, int32, *UErrorCode) int32.
+// UTextExtract is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UText, int64, int64, *uint16, int32, *UErrorCode) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UTextExtract uintptr
 
-// UTextMapNativeIndexToUTF16 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UText, int64) int32.
+// UTextMapNativeIndexToUTF16 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UText, int64) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UTextMapNativeIndexToUTF16 uintptr
 
-// UTextMapOffsetToNative is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UText) int64.
+// UTextMapOffsetToNative is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UText) uintptr (the native return type is
+// int64; NewCallback requires a uintptr-sized result).
 type UTextMapOffsetToNative uintptr
 
-// UTextNativeLength is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UText) int64.
+// UTextNativeLength is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UText) uintptr (the native return type is
+// int64; NewCallback requires a uintptr-sized result).
 type UTextNativeLength uintptr
 
-// UTextReplace is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UText, int64, int64, *uint16, int32, *UErrorCode) int32.
+// UTextReplace is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UText, int64, int64, *uint16, int32, *UErrorCode) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type UTextReplace uintptr
 
-// UTraceData is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int32, int32, foundation.PSTR, *int8).
+// UTraceData is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int32, int32, foundation.PSTR, *int8) uintptr.
 type UTraceData uintptr
 
-// UTraceEntry is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int32).
+// UTraceEntry is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int32) uintptr.
 type UTraceEntry uintptr
 
-// UTraceExit is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int32, foundation.PSTR, *int8).
+// UTraceExit is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int32, foundation.PSTR, *int8) uintptr.
 type UTraceExit uintptr

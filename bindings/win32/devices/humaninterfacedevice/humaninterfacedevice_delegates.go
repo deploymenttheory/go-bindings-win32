@@ -4,62 +4,76 @@
 
 package humaninterfacedevice
 
-// LPDICONFIGUREDEVICESCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown, unsafe.Pointer) foundation.BOOL.
+// LPDICONFIGUREDEVICESCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDICONFIGUREDEVICESCALLBACK uintptr
 
-// LPDIENUMCREATEDEFFECTOBJECTSCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IDirectInputEffect, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMCREATEDEFFECTOBJECTSCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IDirectInputEffect, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMCREATEDEFFECTOBJECTSCALLBACK uintptr
 
-// LPDIENUMDEVICEOBJECTSCALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIDEVICEOBJECTINSTANCEA, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMDEVICEOBJECTSCALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DIDEVICEOBJECTINSTANCEA, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMDEVICEOBJECTSCALLBACKA uintptr
 
-// LPDIENUMDEVICEOBJECTSCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIDEVICEOBJECTINSTANCEW, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMDEVICEOBJECTSCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DIDEVICEOBJECTINSTANCEW, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMDEVICEOBJECTSCALLBACKW uintptr
 
-// LPDIENUMDEVICESBYSEMANTICSCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIDEVICEINSTANCEA, *IDirectInputDevice8A, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMDEVICESBYSEMANTICSCBA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DIDEVICEINSTANCEA, *IDirectInputDevice8A, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMDEVICESBYSEMANTICSCBA uintptr
 
-// LPDIENUMDEVICESBYSEMANTICSCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIDEVICEINSTANCEW, *IDirectInputDevice8W, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMDEVICESBYSEMANTICSCBW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DIDEVICEINSTANCEW, *IDirectInputDevice8W, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMDEVICESBYSEMANTICSCBW uintptr
 
-// LPDIENUMDEVICESCALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIDEVICEINSTANCEA, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMDEVICESCALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DIDEVICEINSTANCEA, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMDEVICESCALLBACKA uintptr
 
-// LPDIENUMDEVICESCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIDEVICEINSTANCEW, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMDEVICESCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DIDEVICEINSTANCEW, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMDEVICESCALLBACKW uintptr
 
-// LPDIENUMEFFECTSCALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIEFFECTINFOA, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMEFFECTSCALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DIEFFECTINFOA, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMEFFECTSCALLBACKA uintptr
 
-// LPDIENUMEFFECTSCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIEFFECTINFOW, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMEFFECTSCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DIEFFECTINFOW, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMEFFECTSCALLBACKW uintptr
 
-// LPDIENUMEFFECTSINFILECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DIFILEEFFECT, unsafe.Pointer) foundation.BOOL.
+// LPDIENUMEFFECTSINFILECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DIFILEEFFECT, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIENUMEFFECTSINFILECALLBACK uintptr
 
-// LPDIJOYTYPECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, unsafe.Pointer) foundation.BOOL.
+// LPDIJOYTYPECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDIJOYTYPECALLBACK uintptr
 
-// LPFNSHOWJOYCPL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND).
+// LPFNSHOWJOYCPL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND) uintptr.
 type LPFNSHOWJOYCPL uintptr
 
-// PFN_HidP_GetVersionInternal is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32) foundation.NTSTATUS.
+// PFN_HidP_GetVersionInternal is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PFN_HidP_GetVersionInternal uintptr
 
-// PHIDP_INSERT_SCANCODES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, uint32) foundation.BOOLEAN.
+// PHIDP_INSERT_SCANCODES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, uint32) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PHIDP_INSERT_SCANCODES uintptr

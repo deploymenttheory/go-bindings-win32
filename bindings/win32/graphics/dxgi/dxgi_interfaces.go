@@ -144,6 +144,14 @@ type IDXGIDebug struct {
 // IID_IDXGIDebug is the interface identifier for IDXGIDebug.
 var IID_IDXGIDebug = win32.GUID{Data1: 0x119e7452, Data2: 0xde9e, Data3: 0x40fe, Data4: [8]byte{0x88, 0x06, 0x88, 0xf9, 0x0c, 0x12, 0xb4, 0x41}}
 
+var specIDXGIDebug_ReportLiveObjects = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// ReportLiveObjects dispatches through IDXGIDebug's vtable slot 3.
+func (self *IDXGIDebug) ReportLiveObjects(apiid win32.GUID, flags DXGI_DEBUG_RLO_FLAGS) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIDXGIDebug_ReportLiveObjects, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&apiid)), uintptr(flags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDXGIDebug1: https://learn.microsoft.com/windows/win32/api/dxgidebug/nn-dxgidebug-idxgidebug1
 // IID: c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550
 type IDXGIDebug1 struct {
@@ -656,10 +664,296 @@ type IDXGIInfoQueue struct {
 // IID_IDXGIInfoQueue is the interface identifier for IDXGIInfoQueue.
 var IID_IDXGIInfoQueue = win32.GUID{Data1: 0xd67441c7, Data2: 0x672a, Data3: 0x476f, Data4: [8]byte{0x9e, 0x82, 0xcd, 0x55, 0xb4, 0x49, 0x49, 0xce}}
 
+var specIDXGIInfoQueue_SetMessageCountLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetMessageCountLimit dispatches through IDXGIInfoQueue's vtable slot 3.
+func (self *IDXGIInfoQueue) SetMessageCountLimit(Producer win32.GUID, MessageCountLimit uint64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIDXGIInfoQueue_SetMessageCountLimit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(MessageCountLimit)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_ClearStoredMessages = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// ClearStoredMessages dispatches through IDXGIInfoQueue's vtable slot 4.
+func (self *IDXGIInfoQueue) ClearStoredMessages(Producer win32.GUID) {
+	win32.Call(self.LpVtbl[4], specIDXGIInfoQueue_ClearStoredMessages, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+}
+
+var specIDXGIInfoQueue_GetMessage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// GetMessage dispatches through IDXGIInfoQueue's vtable slot 5.
+func (self *IDXGIInfoQueue) GetMessage(Producer win32.GUID, MessageIndex uint64, pMessage *DXGI_INFO_QUEUE_MESSAGE, pMessageByteLength *uintptr) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDXGIInfoQueue_GetMessage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(MessageIndex), uintptr(unsafe.Pointer(pMessage)), uintptr(unsafe.Pointer(pMessageByteLength))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_GetNumStoredMessagesAllowedByRetrievalFilters = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GetNumStoredMessagesAllowedByRetrievalFilters dispatches through IDXGIInfoQueue's vtable slot 6.
+func (self *IDXGIInfoQueue) GetNumStoredMessagesAllowedByRetrievalFilters(Producer win32.GUID) uint64 {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDXGIInfoQueue_GetNumStoredMessagesAllowedByRetrievalFilters, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return uint64(r1)
+}
+
+var specIDXGIInfoQueue_GetNumStoredMessages = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GetNumStoredMessages dispatches through IDXGIInfoQueue's vtable slot 7.
+func (self *IDXGIInfoQueue) GetNumStoredMessages(Producer win32.GUID) uint64 {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDXGIInfoQueue_GetNumStoredMessages, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return uint64(r1)
+}
+
+var specIDXGIInfoQueue_GetNumMessagesDiscardedByMessageCountLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GetNumMessagesDiscardedByMessageCountLimit dispatches through IDXGIInfoQueue's vtable slot 8.
+func (self *IDXGIInfoQueue) GetNumMessagesDiscardedByMessageCountLimit(Producer win32.GUID) uint64 {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDXGIInfoQueue_GetNumMessagesDiscardedByMessageCountLimit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return uint64(r1)
+}
+
+var specIDXGIInfoQueue_GetMessageCountLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GetMessageCountLimit dispatches through IDXGIInfoQueue's vtable slot 9.
+func (self *IDXGIInfoQueue) GetMessageCountLimit(Producer win32.GUID) uint64 {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIDXGIInfoQueue_GetMessageCountLimit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return uint64(r1)
+}
+
+var specIDXGIInfoQueue_GetNumMessagesAllowedByStorageFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GetNumMessagesAllowedByStorageFilter dispatches through IDXGIInfoQueue's vtable slot 10.
+func (self *IDXGIInfoQueue) GetNumMessagesAllowedByStorageFilter(Producer win32.GUID) uint64 {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDXGIInfoQueue_GetNumMessagesAllowedByStorageFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return uint64(r1)
+}
+
+var specIDXGIInfoQueue_GetNumMessagesDeniedByStorageFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GetNumMessagesDeniedByStorageFilter dispatches through IDXGIInfoQueue's vtable slot 11.
+func (self *IDXGIInfoQueue) GetNumMessagesDeniedByStorageFilter(Producer win32.GUID) uint64 {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIDXGIInfoQueue_GetNumMessagesDeniedByStorageFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return uint64(r1)
+}
+
+var specIDXGIInfoQueue_AddStorageFilterEntries = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// AddStorageFilterEntries dispatches through IDXGIInfoQueue's vtable slot 12.
+func (self *IDXGIInfoQueue) AddStorageFilterEntries(Producer win32.GUID, pFilter *DXGI_INFO_QUEUE_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDXGIInfoQueue_AddStorageFilterEntries, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(unsafe.Pointer(pFilter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_GetStorageFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetStorageFilter dispatches through IDXGIInfoQueue's vtable slot 13.
+func (self *IDXGIInfoQueue) GetStorageFilter(Producer win32.GUID, pFilter *DXGI_INFO_QUEUE_FILTER, pFilterByteLength *uintptr) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDXGIInfoQueue_GetStorageFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(pFilterByteLength))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_ClearStorageFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// ClearStorageFilter dispatches through IDXGIInfoQueue's vtable slot 14.
+func (self *IDXGIInfoQueue) ClearStorageFilter(Producer win32.GUID) {
+	win32.Call(self.LpVtbl[14], specIDXGIInfoQueue_ClearStorageFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+}
+
+var specIDXGIInfoQueue_PushEmptyStorageFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PushEmptyStorageFilter dispatches through IDXGIInfoQueue's vtable slot 15.
+func (self *IDXGIInfoQueue) PushEmptyStorageFilter(Producer win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIDXGIInfoQueue_PushEmptyStorageFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_PushDenyAllStorageFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PushDenyAllStorageFilter dispatches through IDXGIInfoQueue's vtable slot 16.
+func (self *IDXGIInfoQueue) PushDenyAllStorageFilter(Producer win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIDXGIInfoQueue_PushDenyAllStorageFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_PushCopyOfStorageFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PushCopyOfStorageFilter dispatches through IDXGIInfoQueue's vtable slot 17.
+func (self *IDXGIInfoQueue) PushCopyOfStorageFilter(Producer win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIDXGIInfoQueue_PushCopyOfStorageFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_PushStorageFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// PushStorageFilter dispatches through IDXGIInfoQueue's vtable slot 18.
+func (self *IDXGIInfoQueue) PushStorageFilter(Producer win32.GUID, pFilter *DXGI_INFO_QUEUE_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIDXGIInfoQueue_PushStorageFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(unsafe.Pointer(pFilter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_PopStorageFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PopStorageFilter dispatches through IDXGIInfoQueue's vtable slot 19.
+func (self *IDXGIInfoQueue) PopStorageFilter(Producer win32.GUID) {
+	win32.Call(self.LpVtbl[19], specIDXGIInfoQueue_PopStorageFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+}
+
+var specIDXGIInfoQueue_GetStorageFilterStackSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GetStorageFilterStackSize dispatches through IDXGIInfoQueue's vtable slot 20.
+func (self *IDXGIInfoQueue) GetStorageFilterStackSize(Producer win32.GUID) uint32 {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIDXGIInfoQueue_GetStorageFilterStackSize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return uint32(r1)
+}
+
+var specIDXGIInfoQueue_AddRetrievalFilterEntries = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// AddRetrievalFilterEntries dispatches through IDXGIInfoQueue's vtable slot 21.
+func (self *IDXGIInfoQueue) AddRetrievalFilterEntries(Producer win32.GUID, pFilter *DXGI_INFO_QUEUE_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIDXGIInfoQueue_AddRetrievalFilterEntries, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(unsafe.Pointer(pFilter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_GetRetrievalFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetRetrievalFilter dispatches through IDXGIInfoQueue's vtable slot 22.
+func (self *IDXGIInfoQueue) GetRetrievalFilter(Producer win32.GUID, pFilter *DXGI_INFO_QUEUE_FILTER, pFilterByteLength *uintptr) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIDXGIInfoQueue_GetRetrievalFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(unsafe.Pointer(pFilter)), uintptr(unsafe.Pointer(pFilterByteLength))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_ClearRetrievalFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// ClearRetrievalFilter dispatches through IDXGIInfoQueue's vtable slot 23.
+func (self *IDXGIInfoQueue) ClearRetrievalFilter(Producer win32.GUID) {
+	win32.Call(self.LpVtbl[23], specIDXGIInfoQueue_ClearRetrievalFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+}
+
+var specIDXGIInfoQueue_PushEmptyRetrievalFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PushEmptyRetrievalFilter dispatches through IDXGIInfoQueue's vtable slot 24.
+func (self *IDXGIInfoQueue) PushEmptyRetrievalFilter(Producer win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIDXGIInfoQueue_PushEmptyRetrievalFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_PushDenyAllRetrievalFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PushDenyAllRetrievalFilter dispatches through IDXGIInfoQueue's vtable slot 25.
+func (self *IDXGIInfoQueue) PushDenyAllRetrievalFilter(Producer win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIDXGIInfoQueue_PushDenyAllRetrievalFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_PushCopyOfRetrievalFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PushCopyOfRetrievalFilter dispatches through IDXGIInfoQueue's vtable slot 26.
+func (self *IDXGIInfoQueue) PushCopyOfRetrievalFilter(Producer win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIDXGIInfoQueue_PushCopyOfRetrievalFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_PushRetrievalFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// PushRetrievalFilter dispatches through IDXGIInfoQueue's vtable slot 27.
+func (self *IDXGIInfoQueue) PushRetrievalFilter(Producer win32.GUID, pFilter *DXGI_INFO_QUEUE_FILTER) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIDXGIInfoQueue_PushRetrievalFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(unsafe.Pointer(pFilter))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_PopRetrievalFilter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PopRetrievalFilter dispatches through IDXGIInfoQueue's vtable slot 28.
+func (self *IDXGIInfoQueue) PopRetrievalFilter(Producer win32.GUID) {
+	win32.Call(self.LpVtbl[28], specIDXGIInfoQueue_PopRetrievalFilter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+}
+
+var specIDXGIInfoQueue_GetRetrievalFilterStackSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GetRetrievalFilterStackSize dispatches through IDXGIInfoQueue's vtable slot 29.
+func (self *IDXGIInfoQueue) GetRetrievalFilterStackSize(Producer win32.GUID) uint32 {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIDXGIInfoQueue_GetRetrievalFilterStackSize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return uint32(r1)
+}
+
+var specIDXGIInfoQueue_AddMessage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// AddMessage dispatches through IDXGIInfoQueue's vtable slot 30.
+func (self *IDXGIInfoQueue) AddMessage(Producer win32.GUID, Category DXGI_INFO_QUEUE_MESSAGE_CATEGORY, Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY, ID int32, pDescription foundation.PSTR) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIDXGIInfoQueue_AddMessage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(Category), uintptr(Severity), uintptr(ID), uintptr(unsafe.Pointer(pDescription))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddApplicationMessage dispatches through IDXGIInfoQueue's vtable slot 31.
 func (self *IDXGIInfoQueue) AddApplicationMessage(Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY, pDescription foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(Severity), uintptr(unsafe.Pointer(pDescription)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_SetBreakOnCategory = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// SetBreakOnCategory dispatches through IDXGIInfoQueue's vtable slot 32.
+func (self *IDXGIInfoQueue) SetBreakOnCategory(Producer win32.GUID, Category DXGI_INFO_QUEUE_MESSAGE_CATEGORY, bEnable bool) error {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIDXGIInfoQueue_SetBreakOnCategory, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(Category), uintptr(_bEnable)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_SetBreakOnSeverity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// SetBreakOnSeverity dispatches through IDXGIInfoQueue's vtable slot 33.
+func (self *IDXGIInfoQueue) SetBreakOnSeverity(Producer win32.GUID, Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY, bEnable bool) error {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIDXGIInfoQueue_SetBreakOnSeverity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(Severity), uintptr(_bEnable)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_SetBreakOnID = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// SetBreakOnID dispatches through IDXGIInfoQueue's vtable slot 34.
+func (self *IDXGIInfoQueue) SetBreakOnID(Producer win32.GUID, ID int32, bEnable bool) error {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIDXGIInfoQueue_SetBreakOnID, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(ID), uintptr(_bEnable)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDXGIInfoQueue_GetBreakOnCategory = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetBreakOnCategory dispatches through IDXGIInfoQueue's vtable slot 35.
+func (self *IDXGIInfoQueue) GetBreakOnCategory(Producer win32.GUID, Category DXGI_INFO_QUEUE_MESSAGE_CATEGORY) foundation.BOOL {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIDXGIInfoQueue_GetBreakOnCategory, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(Category)).Tuple()
+	return foundation.BOOL(r1)
+}
+
+var specIDXGIInfoQueue_GetBreakOnSeverity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetBreakOnSeverity dispatches through IDXGIInfoQueue's vtable slot 36.
+func (self *IDXGIInfoQueue) GetBreakOnSeverity(Producer win32.GUID, Severity DXGI_INFO_QUEUE_MESSAGE_SEVERITY) foundation.BOOL {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIDXGIInfoQueue_GetBreakOnSeverity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(Severity)).Tuple()
+	return foundation.BOOL(r1)
+}
+
+var specIDXGIInfoQueue_GetBreakOnID = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetBreakOnID dispatches through IDXGIInfoQueue's vtable slot 37.
+func (self *IDXGIInfoQueue) GetBreakOnID(Producer win32.GUID, ID int32) foundation.BOOL {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIDXGIInfoQueue_GetBreakOnID, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(ID)).Tuple()
+	return foundation.BOOL(r1)
+}
+
+var specIDXGIInfoQueue_SetMuteDebugOutput = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetMuteDebugOutput dispatches through IDXGIInfoQueue's vtable slot 38.
+func (self *IDXGIInfoQueue) SetMuteDebugOutput(Producer win32.GUID, bMute bool) {
+	_bMute := win32.Bool32(bMute)
+	win32.Call(self.LpVtbl[38], specIDXGIInfoQueue_SetMuteDebugOutput, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer)), uintptr(_bMute)).Tuple()
+}
+
+var specIDXGIInfoQueue_GetMuteDebugOutput = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// GetMuteDebugOutput dispatches through IDXGIInfoQueue's vtable slot 39.
+func (self *IDXGIInfoQueue) GetMuteDebugOutput(Producer win32.GUID) foundation.BOOL {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIDXGIInfoQueue_GetMuteDebugOutput, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Producer))).Tuple()
+	return foundation.BOOL(r1)
 }
 
 // IDXGIKeyedMutex: https://learn.microsoft.com/windows/win32/api/dxgi/nn-dxgi-idxgikeyedmutex
@@ -1030,8 +1324,8 @@ func (self *IDXGIResource1) CreateSubresourceSurface(index uint32, ppSurface **I
 }
 
 // CreateSharedHandle dispatches through IDXGIResource1's vtable slot 13.
-func (self *IDXGIResource1) CreateSharedHandle(pAttributes *security.SECURITY_ATTRIBUTES, dwAccess uint32, lpName string, pHandle *foundation.HANDLE) error {
-	_lpName := win32.UTF16Ptr(lpName)
+func (self *IDXGIResource1) CreateSharedHandle(pAttributes *security.SECURITY_ATTRIBUTES, dwAccess uint32, lpName *string, pHandle *foundation.HANDLE) error {
+	_lpName := win32.UTF16PtrOrNil(lpName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAttributes)), uintptr(dwAccess), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(pHandle)))
 	return win32.ErrIfFailed(int32(r1))
 }

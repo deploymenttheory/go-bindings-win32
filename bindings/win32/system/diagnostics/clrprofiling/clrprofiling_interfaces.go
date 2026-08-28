@@ -515,8 +515,8 @@ type ICorProfilerCallback2 struct {
 var IID_ICorProfilerCallback2 = win32.GUID{Data1: 0x8a8cc829, Data2: 0xccf2, Data3: 0x49fe, Data4: [8]byte{0xbb, 0xae, 0x0f, 0x02, 0x22, 0x28, 0x07, 0x1a}}
 
 // ThreadNameChanged dispatches through ICorProfilerCallback2's vtable slot 72.
-func (self *ICorProfilerCallback2) ThreadNameChanged(threadId uintptr, cchName uint32, name string) error {
-	_name := win32.UTF16Ptr(name)
+func (self *ICorProfilerCallback2) ThreadNameChanged(threadId uintptr, cchName uint32, name *string) error {
+	_name := win32.UTF16PtrOrNil(name)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(cchName), uintptr(unsafe.Pointer(_name)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1093,6 +1093,14 @@ func (self *ICorProfilerInfo12) EventPipeStartSession(pProviderConfigs []COR_PRF
 	}
 	_requestRundown := win32.Bool32(requestRundown)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(len(pProviderConfigs)), uintptr(unsafe.Pointer(_pProviderConfigs)), uintptr(_requestRundown), uintptr(unsafe.Pointer(pSession)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICorProfilerInfo12_EventPipeAddProviderToSession = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(32, 8, 0, false)}}
+
+// EventPipeAddProviderToSession dispatches through ICorProfilerInfo12's vtable slot 102.
+func (self *ICorProfilerInfo12) EventPipeAddProviderToSession(session uint64, providerConfig COR_PRF_EVENTPIPE_PROVIDER_CONFIG) error {
+	r1, _, _ := win32.Call(self.LpVtbl[102], specICorProfilerInfo12_EventPipeAddProviderToSession, nil, uintptr(unsafe.Pointer(self)), uintptr(session), uintptr(unsafe.Pointer(&providerConfig))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

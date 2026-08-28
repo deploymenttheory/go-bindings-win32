@@ -323,6 +323,22 @@ type INetworkConnectionCostEvents struct {
 // IID_INetworkConnectionCostEvents is the interface identifier for INetworkConnectionCostEvents.
 var IID_INetworkConnectionCostEvents = win32.GUID{Data1: 0xdcb0000b, Data2: 0x570f, Data3: 0x4a9b, Data4: [8]byte{0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b}}
 
+var specINetworkConnectionCostEvents_ConnectionCostChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// ConnectionCostChanged dispatches through INetworkConnectionCostEvents's vtable slot 3.
+func (self *INetworkConnectionCostEvents) ConnectionCostChanged(connectionId win32.GUID, newCost uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specINetworkConnectionCostEvents_ConnectionCostChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&connectionId)), uintptr(newCost)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specINetworkConnectionCostEvents_ConnectionDataPlanStatusChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// ConnectionDataPlanStatusChanged dispatches through INetworkConnectionCostEvents's vtable slot 4.
+func (self *INetworkConnectionCostEvents) ConnectionDataPlanStatusChanged(connectionId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specINetworkConnectionCostEvents_ConnectionDataPlanStatusChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&connectionId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // INetworkConnectionEvents: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworkconnectionevents
 // IID: dcb00007-570f-4a9b-8d69-199fdba5723b
 type INetworkConnectionEvents struct {
@@ -331,6 +347,22 @@ type INetworkConnectionEvents struct {
 
 // IID_INetworkConnectionEvents is the interface identifier for INetworkConnectionEvents.
 var IID_INetworkConnectionEvents = win32.GUID{Data1: 0xdcb00007, Data2: 0x570f, Data3: 0x4a9b, Data4: [8]byte{0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b}}
+
+var specINetworkConnectionEvents_NetworkConnectionConnectivityChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// NetworkConnectionConnectivityChanged dispatches through INetworkConnectionEvents's vtable slot 3.
+func (self *INetworkConnectionEvents) NetworkConnectionConnectivityChanged(connectionId win32.GUID, newConnectivity NLM_CONNECTIVITY) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specINetworkConnectionEvents_NetworkConnectionConnectivityChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&connectionId)), uintptr(newConnectivity)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specINetworkConnectionEvents_NetworkConnectionPropertyChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// NetworkConnectionPropertyChanged dispatches through INetworkConnectionEvents's vtable slot 4.
+func (self *INetworkConnectionEvents) NetworkConnectionPropertyChanged(connectionId win32.GUID, flags NLM_CONNECTION_PROPERTY_CHANGE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specINetworkConnectionEvents_NetworkConnectionPropertyChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&connectionId)), uintptr(flags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // INetworkCostManager: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworkcostmanager
 // IID: dcb00008-570f-4a9b-8d69-199fdba5723b
@@ -393,6 +425,38 @@ type INetworkEvents struct {
 // IID_INetworkEvents is the interface identifier for INetworkEvents.
 var IID_INetworkEvents = win32.GUID{Data1: 0xdcb00004, Data2: 0x570f, Data3: 0x4a9b, Data4: [8]byte{0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b}}
 
+var specINetworkEvents_NetworkAdded = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// NetworkAdded dispatches through INetworkEvents's vtable slot 3.
+func (self *INetworkEvents) NetworkAdded(networkId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specINetworkEvents_NetworkAdded, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&networkId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specINetworkEvents_NetworkDeleted = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// NetworkDeleted dispatches through INetworkEvents's vtable slot 4.
+func (self *INetworkEvents) NetworkDeleted(networkId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specINetworkEvents_NetworkDeleted, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&networkId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specINetworkEvents_NetworkConnectivityChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// NetworkConnectivityChanged dispatches through INetworkEvents's vtable slot 5.
+func (self *INetworkEvents) NetworkConnectivityChanged(networkId win32.GUID, newConnectivity NLM_CONNECTIVITY) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specINetworkEvents_NetworkConnectivityChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&networkId)), uintptr(newConnectivity)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specINetworkEvents_NetworkPropertyChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// NetworkPropertyChanged dispatches through INetworkEvents's vtable slot 6.
+func (self *INetworkEvents) NetworkPropertyChanged(networkId win32.GUID, flags NLM_NETWORK_PROPERTY_CHANGE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specINetworkEvents_NetworkPropertyChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&networkId)), uintptr(flags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // INetworkListManager: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworklistmanager
 // IID: dcb00000-570f-4a9b-8d69-199fdba5723b
 type INetworkListManager struct {
@@ -409,11 +473,29 @@ func (self *INetworkListManager) GetNetworks(Flags NLM_ENUM_NETWORK) (*IEnumNetw
 	return *_ppEnumNetwork, win32.ErrIfFailed(int32(r1))
 }
 
+var specINetworkListManager_GetNetwork = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetNetwork dispatches through INetworkListManager's vtable slot 8.
+func (self *INetworkListManager) GetNetwork(gdNetworkId win32.GUID) (*INetwork, error) {
+	_ppNetwork := new(*INetwork)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specINetworkListManager_GetNetwork, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&gdNetworkId)), uintptr(win32.OutParam(unsafe.Pointer(_ppNetwork)))).Tuple()
+	return *_ppNetwork, win32.ErrIfFailed(int32(r1))
+}
+
 // GetNetworkConnections dispatches through INetworkListManager's vtable slot 9.
 func (self *INetworkListManager) GetNetworkConnections() (*IEnumNetworkConnections, error) {
 	_ppEnum := new(*IEnumNetworkConnections)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppEnum))))
 	return *_ppEnum, win32.ErrIfFailed(int32(r1))
+}
+
+var specINetworkListManager_GetNetworkConnection = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetNetworkConnection dispatches through INetworkListManager's vtable slot 10.
+func (self *INetworkListManager) GetNetworkConnection(gdNetworkConnectionId win32.GUID) (*INetworkConnection, error) {
+	_ppNetworkConnection := new(*INetworkConnection)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specINetworkListManager_GetNetworkConnection, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&gdNetworkConnectionId)), uintptr(win32.OutParam(unsafe.Pointer(_ppNetworkConnection)))).Tuple()
+	return *_ppNetworkConnection, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsConnectedToInternet dispatches through INetworkListManager's vtable slot 11.

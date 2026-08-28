@@ -4,22 +4,27 @@
 
 package deviceanddriverinstallation
 
-// PCM_NOTIFY_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCMNOTIFICATION, unsafe.Pointer, CM_NOTIFY_ACTION, *CM_NOTIFY_EVENT_DATA, uint32) uint32.
+// PCM_NOTIFY_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCMNOTIFICATION, unsafe.Pointer, CM_NOTIFY_ACTION, *CM_NOTIFY_EVENT_DATA, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCM_NOTIFY_CALLBACK uintptr
 
-// PDETECT_PROGRESS_NOTIFY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32) foundation.BOOL.
+// PDETECT_PROGRESS_NOTIFY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PDETECT_PROGRESS_NOTIFY uintptr
 
-// PSP_DETSIG_CMPPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HDEVINFO, *SP_DEVINFO_DATA, *SP_DEVINFO_DATA, unsafe.Pointer) uint32.
+// PSP_DETSIG_CMPPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HDEVINFO, *SP_DEVINFO_DATA, *SP_DEVINFO_DATA, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSP_DETSIG_CMPPROC uintptr
 
-// PSP_FILE_CALLBACK_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uintptr, uintptr) uint32.
+// PSP_FILE_CALLBACK_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uintptr, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSP_FILE_CALLBACK_A uintptr
 
-// PSP_FILE_CALLBACK_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uintptr, uintptr) uint32.
+// PSP_FILE_CALLBACK_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uintptr, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSP_FILE_CALLBACK_W uintptr

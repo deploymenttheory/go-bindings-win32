@@ -28,6 +28,30 @@ var (
 	procUnregisterApplicationRestart          = modKERNEL32.NewProc("UnregisterApplicationRestart")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ApplicationRecoveryFinished           *win32.Proc
+	ApplicationRecoveryInProgress         *win32.Proc
+	GetApplicationRecoveryCallback        *win32.Proc
+	GetApplicationRestartSettings         *win32.Proc
+	RegisterApplicationRecoveryCallback   *win32.Proc
+	RegisterApplicationRestart            *win32.Proc
+	UnregisterApplicationRecoveryCallback *win32.Proc
+	UnregisterApplicationRestart          *win32.Proc
+}{
+	ApplicationRecoveryFinished:           procApplicationRecoveryFinished,
+	ApplicationRecoveryInProgress:         procApplicationRecoveryInProgress,
+	GetApplicationRecoveryCallback:        procGetApplicationRecoveryCallback,
+	GetApplicationRestartSettings:         procGetApplicationRestartSettings,
+	RegisterApplicationRecoveryCallback:   procRegisterApplicationRecoveryCallback,
+	RegisterApplicationRestart:            procRegisterApplicationRestart,
+	UnregisterApplicationRecoveryCallback: procUnregisterApplicationRecoveryCallback,
+	UnregisterApplicationRestart:          procUnregisterApplicationRestart,
+}
+
 // ApplicationRecoveryFinished calls KERNEL32!ApplicationRecoveryFinished.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-applicationrecoveryfinished
 // Minimum OS: windows6.0.6000.
@@ -71,8 +95,8 @@ func RegisterApplicationRecoveryCallback(pRecoveyCallback systemwindowsprogrammi
 // RegisterApplicationRestart calls KERNEL32!RegisterApplicationRestart.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-registerapplicationrestart
 // Minimum OS: windows6.0.6000.
-func RegisterApplicationRestart(pwzCommandline string, dwFlags REGISTER_APPLICATION_RESTART_FLAGS) error {
-	_pwzCommandline := win32.UTF16Ptr(pwzCommandline)
+func RegisterApplicationRestart(pwzCommandline *string, dwFlags REGISTER_APPLICATION_RESTART_FLAGS) error {
+	_pwzCommandline := win32.UTF16PtrOrNil(pwzCommandline)
 	r1, _, _ := syscall.SyscallN(procRegisterApplicationRestart.Addr(), uintptr(unsafe.Pointer(_pwzCommandline)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }

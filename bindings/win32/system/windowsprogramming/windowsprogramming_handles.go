@@ -4,8 +4,12 @@
 
 package windowsprogramming
 
-// CloseFEATURE_STATE_CHANGE_SUBSCRIPTION releases a FEATURE_STATE_CHANGE_SUBSCRIPTION handle by calling UnsubscribeFeatureStateChangeNotification.
+// CloseFEATURE_STATE_CHANGE_SUBSCRIPTION releases a FEATURE_STATE_CHANGE_SUBSCRIPTION handle by calling UnsubscribeFeatureStateChangeNotification. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseFEATURE_STATE_CHANGE_SUBSCRIPTION(h FEATURE_STATE_CHANGE_SUBSCRIPTION) error {
+	if h == ^FEATURE_STATE_CHANGE_SUBSCRIPTION(0) || h == 0 {
+		return nil
+	}
 	UnsubscribeFeatureStateChangeNotification(FEATURE_STATE_CHANGE_SUBSCRIPTION(h))
 	return nil
 }

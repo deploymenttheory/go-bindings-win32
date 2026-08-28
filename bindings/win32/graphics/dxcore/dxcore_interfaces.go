@@ -22,6 +22,24 @@ type IDXCoreAdapter struct {
 // IID_IDXCoreAdapter is the interface identifier for IDXCoreAdapter.
 var IID_IDXCoreAdapter = win32.GUID{Data1: 0xf0db4c7f, Data2: 0xfe5a, Data3: 0x42a2, Data4: [8]byte{0xbd, 0x62, 0xf2, 0xa6, 0xcf, 0x6f, 0xc8, 0x3e}}
 
+// IsValid dispatches through IDXCoreAdapter's vtable slot 3.
+func (self *IDXCoreAdapter) IsValid() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
+}
+
+// IsAttributeSupported dispatches through IDXCoreAdapter's vtable slot 4.
+func (self *IDXCoreAdapter) IsAttributeSupported(attributeGUID *win32.GUID) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(attributeGUID)))
+	return byte(r1) != 0
+}
+
+// IsPropertySupported dispatches through IDXCoreAdapter's vtable slot 5.
+func (self *IDXCoreAdapter) IsPropertySupported(property DXCoreAdapterProperty) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(property))
+	return byte(r1) != 0
+}
+
 // GetProperty dispatches through IDXCoreAdapter's vtable slot 6.
 func (self *IDXCoreAdapter) GetProperty(property DXCoreAdapterProperty, propertyData []byte) error {
 	var _propertyData *byte
@@ -38,6 +56,12 @@ func (self *IDXCoreAdapter) GetPropertySize(property DXCoreAdapterProperty, buff
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IsQueryStateSupported dispatches through IDXCoreAdapter's vtable slot 8.
+func (self *IDXCoreAdapter) IsQueryStateSupported(property DXCoreAdapterState) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(property))
+	return byte(r1) != 0
+}
+
 // QueryState dispatches through IDXCoreAdapter's vtable slot 9.
 func (self *IDXCoreAdapter) QueryState(state DXCoreAdapterState, inputStateDetails []byte, outputBuffer []byte) error {
 	var _inputStateDetails *byte
@@ -50,6 +74,12 @@ func (self *IDXCoreAdapter) QueryState(state DXCoreAdapterState, inputStateDetai
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(state), uintptr(len(inputStateDetails)), uintptr(unsafe.Pointer(_inputStateDetails)), uintptr(len(outputBuffer)), uintptr(unsafe.Pointer(_outputBuffer)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+// IsSetStateSupported dispatches through IDXCoreAdapter's vtable slot 10.
+func (self *IDXCoreAdapter) IsSetStateSupported(property DXCoreAdapterState) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(property))
+	return byte(r1) != 0
 }
 
 // SetState dispatches through IDXCoreAdapter's vtable slot 11.
@@ -119,6 +149,12 @@ func (self *IDXCoreAdapterFactory) GetAdapterByLuid(adapterLUID *foundation.LUID
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IsNotificationTypeSupported dispatches through IDXCoreAdapterFactory's vtable slot 5.
+func (self *IDXCoreAdapterFactory) IsNotificationTypeSupported(notificationType DXCoreNotificationType) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(notificationType))
+	return byte(r1) != 0
+}
+
 // RegisterEventNotification dispatches through IDXCoreAdapterFactory's vtable slot 6.
 func (self *IDXCoreAdapterFactory) RegisterEventNotification(dxCoreObject *systemcom.IUnknown, notificationType DXCoreNotificationType, callbackFunction PFN_DXCORE_NOTIFICATION_CALLBACK, callbackContext unsafe.Pointer, eventCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dxCoreObject)), uintptr(notificationType), uintptr(callbackFunction), uintptr(unsafe.Pointer(callbackContext)), uintptr(unsafe.Pointer(eventCookie)))
@@ -166,6 +202,12 @@ func (self *IDXCoreAdapterList) GetAdapterCount() uint32 {
 	return uint32(r1)
 }
 
+// IsStale dispatches through IDXCoreAdapterList's vtable slot 5.
+func (self *IDXCoreAdapterList) IsStale() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
+}
+
 // GetFactory dispatches through IDXCoreAdapterList's vtable slot 6.
 func (self *IDXCoreAdapterList) GetFactory(riid *win32.GUID, ppvFactory **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvFactory)))
@@ -180,4 +222,10 @@ func (self *IDXCoreAdapterList) Sort(preferences []DXCoreAdapterPreference) erro
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(preferences)), uintptr(unsafe.Pointer(_preferences)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+// IsAdapterPreferenceSupported dispatches through IDXCoreAdapterList's vtable slot 8.
+func (self *IDXCoreAdapterList) IsAdapterPreferenceSupported(preference DXCoreAdapterPreference) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(preference))
+	return byte(r1) != 0
 }

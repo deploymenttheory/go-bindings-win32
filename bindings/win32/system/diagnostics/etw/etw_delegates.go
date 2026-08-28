@@ -4,34 +4,38 @@
 
 package etw
 
-// PENABLECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, ENABLECALLBACK_ENABLED_STATE, byte, uint64, uint64, *EVENT_FILTER_DESCRIPTOR, unsafe.Pointer).
+// PENABLECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, ENABLECALLBACK_ENABLED_STATE, byte, uint64, uint64, *EVENT_FILTER_DESCRIPTOR, unsafe.Pointer) uintptr.
 type PENABLECALLBACK uintptr
 
-// PETW_BUFFER_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*ETW_BUFFER_HEADER, uint32, *ETW_BUFFER_CALLBACK_INFORMATION, unsafe.Pointer) foundation.BOOL.
+// PETW_BUFFER_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*ETW_BUFFER_HEADER, uint32, *ETW_BUFFER_CALLBACK_INFORMATION, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PETW_BUFFER_CALLBACK uintptr
 
-// PETW_BUFFER_COMPLETION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*ETW_BUFFER_HEADER, unsafe.Pointer).
+// PETW_BUFFER_COMPLETION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*ETW_BUFFER_HEADER, unsafe.Pointer) uintptr.
 type PETW_BUFFER_COMPLETION_CALLBACK uintptr
 
-// PEVENT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*EVENT_TRACE).
+// PEVENT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*EVENT_TRACE) uintptr.
 type PEVENT_CALLBACK uintptr
 
-// PEVENT_RECORD_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*EVENT_RECORD).
+// PEVENT_RECORD_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*EVENT_RECORD) uintptr.
 type PEVENT_RECORD_CALLBACK uintptr
 
-// PEVENT_TRACE_BUFFER_CALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*EVENT_TRACE_LOGFILEA) uint32.
+// PEVENT_TRACE_BUFFER_CALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*EVENT_TRACE_LOGFILEA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PEVENT_TRACE_BUFFER_CALLBACKA uintptr
 
-// PEVENT_TRACE_BUFFER_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*EVENT_TRACE_LOGFILEW) uint32.
+// PEVENT_TRACE_BUFFER_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*EVENT_TRACE_LOGFILEW) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PEVENT_TRACE_BUFFER_CALLBACKW uintptr
 
-// WMIDPREQUEST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(WMIDPREQUESTCODE, unsafe.Pointer, *uint32, unsafe.Pointer) uint32.
+// WMIDPREQUEST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(WMIDPREQUESTCODE, unsafe.Pointer, *uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type WMIDPREQUEST uintptr

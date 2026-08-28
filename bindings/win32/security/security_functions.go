@@ -156,6 +156,280 @@ var (
 	procSetUserObjectSecurity                              = modUSER32.NewProc("SetUserObjectSecurity")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AccessCheck                                        *win32.Proc
+	AccessCheckAndAuditAlarm                           *win32.Proc
+	AccessCheckAndAuditAlarmA                          *win32.Proc
+	AccessCheckByType                                  *win32.Proc
+	AccessCheckByTypeAndAuditAlarm                     *win32.Proc
+	AccessCheckByTypeAndAuditAlarmA                    *win32.Proc
+	AccessCheckByTypeResultList                        *win32.Proc
+	AccessCheckByTypeResultListAndAuditAlarm           *win32.Proc
+	AccessCheckByTypeResultListAndAuditAlarmA          *win32.Proc
+	AccessCheckByTypeResultListAndAuditAlarmByHandle   *win32.Proc
+	AccessCheckByTypeResultListAndAuditAlarmByHandleA  *win32.Proc
+	AddAccessAllowedAce                                *win32.Proc
+	AddAccessAllowedAceEx                              *win32.Proc
+	AddAccessAllowedObjectAce                          *win32.Proc
+	AddAccessDeniedAce                                 *win32.Proc
+	AddAccessDeniedAceEx                               *win32.Proc
+	AddAccessDeniedObjectAce                           *win32.Proc
+	AddAce                                             *win32.Proc
+	AddAuditAccessAce                                  *win32.Proc
+	AddAuditAccessAceEx                                *win32.Proc
+	AddAuditAccessObjectAce                            *win32.Proc
+	AddConditionalAce                                  *win32.Proc
+	AddMandatoryAce                                    *win32.Proc
+	AddResourceAttributeAce                            *win32.Proc
+	AddScopedPolicyIDAce                               *win32.Proc
+	AdjustTokenGroups                                  *win32.Proc
+	AdjustTokenPrivileges                              *win32.Proc
+	AllocateAndInitializeSid                           *win32.Proc
+	AllocateLocallyUniqueId                            *win32.Proc
+	AreAllAccessesGranted                              *win32.Proc
+	AreAnyAccessesGranted                              *win32.Proc
+	CheckTokenCapability                               *win32.Proc
+	CheckTokenMembership                               *win32.Proc
+	CheckTokenMembershipEx                             *win32.Proc
+	ConvertToAutoInheritPrivateObjectSecurity          *win32.Proc
+	CopySid                                            *win32.Proc
+	CreatePrivateObjectSecurity                        *win32.Proc
+	CreatePrivateObjectSecurityEx                      *win32.Proc
+	CreatePrivateObjectSecurityWithMultipleInheritance *win32.Proc
+	CreateRestrictedToken                              *win32.Proc
+	CreateWellKnownSid                                 *win32.Proc
+	DeleteAce                                          *win32.Proc
+	DeriveCapabilitySidsFromName                       *win32.Proc
+	DestroyPrivateObjectSecurity                       *win32.Proc
+	DuplicateToken                                     *win32.Proc
+	DuplicateTokenEx                                   *win32.Proc
+	EqualDomainSid                                     *win32.Proc
+	EqualPrefixSid                                     *win32.Proc
+	EqualSid                                           *win32.Proc
+	FindFirstFreeAce                                   *win32.Proc
+	FreeSid                                            *win32.Proc
+	GetAce                                             *win32.Proc
+	GetAclInformation                                  *win32.Proc
+	GetAppContainerAce                                 *win32.Proc
+	GetCachedSigningLevel                              *win32.Proc
+	GetFileSecurity                                    *win32.Proc
+	GetFileSecurityA                                   *win32.Proc
+	GetKernelObjectSecurity                            *win32.Proc
+	GetLengthSid                                       *win32.Proc
+	GetPrivateObjectSecurity                           *win32.Proc
+	GetSecurityDescriptorControl                       *win32.Proc
+	GetSecurityDescriptorDacl                          *win32.Proc
+	GetSecurityDescriptorGroup                         *win32.Proc
+	GetSecurityDescriptorLength                        *win32.Proc
+	GetSecurityDescriptorOwner                         *win32.Proc
+	GetSecurityDescriptorRMControl                     *win32.Proc
+	GetSecurityDescriptorSacl                          *win32.Proc
+	GetSidIdentifierAuthority                          *win32.Proc
+	GetSidLengthRequired                               *win32.Proc
+	GetSidSubAuthority                                 *win32.Proc
+	GetSidSubAuthorityCount                            *win32.Proc
+	GetTokenInformation                                *win32.Proc
+	GetUserObjectSecurity                              *win32.Proc
+	GetWindowsAccountDomainSid                         *win32.Proc
+	ImpersonateAnonymousToken                          *win32.Proc
+	ImpersonateLoggedOnUser                            *win32.Proc
+	ImpersonateSelf                                    *win32.Proc
+	InitializeAcl                                      *win32.Proc
+	InitializeSecurityDescriptor                       *win32.Proc
+	InitializeSid                                      *win32.Proc
+	IsTokenRestricted                                  *win32.Proc
+	IsValidAcl                                         *win32.Proc
+	IsValidSecurityDescriptor                          *win32.Proc
+	IsValidSid                                         *win32.Proc
+	IsWellKnownSid                                     *win32.Proc
+	LogonUser                                          *win32.Proc
+	LogonUserA                                         *win32.Proc
+	LogonUserEx                                        *win32.Proc
+	LogonUserExA                                       *win32.Proc
+	LookupAccountName                                  *win32.Proc
+	LookupAccountNameA                                 *win32.Proc
+	LookupAccountSid                                   *win32.Proc
+	LookupAccountSidA                                  *win32.Proc
+	LookupPrivilegeDisplayName                         *win32.Proc
+	LookupPrivilegeDisplayNameA                        *win32.Proc
+	LookupPrivilegeName                                *win32.Proc
+	LookupPrivilegeNameA                               *win32.Proc
+	LookupPrivilegeValue                               *win32.Proc
+	LookupPrivilegeValueA                              *win32.Proc
+	MakeAbsoluteSD                                     *win32.Proc
+	MakeSelfRelativeSD                                 *win32.Proc
+	MapGenericMask                                     *win32.Proc
+	ObjectCloseAuditAlarm                              *win32.Proc
+	ObjectCloseAuditAlarmA                             *win32.Proc
+	ObjectDeleteAuditAlarm                             *win32.Proc
+	ObjectDeleteAuditAlarmA                            *win32.Proc
+	ObjectOpenAuditAlarm                               *win32.Proc
+	ObjectOpenAuditAlarmA                              *win32.Proc
+	ObjectPrivilegeAuditAlarm                          *win32.Proc
+	ObjectPrivilegeAuditAlarmA                         *win32.Proc
+	PrivilegeCheck                                     *win32.Proc
+	PrivilegedServiceAuditAlarm                        *win32.Proc
+	PrivilegedServiceAuditAlarmA                       *win32.Proc
+	QuerySecurityAccessMask                            *win32.Proc
+	RevertToSelf                                       *win32.Proc
+	RtlConvertSidToUnicodeString                       *win32.Proc
+	RtlNormalizeSecurityDescriptor                     *win32.Proc
+	SetAclInformation                                  *win32.Proc
+	SetCachedSigningLevel                              *win32.Proc
+	SetFileSecurity                                    *win32.Proc
+	SetFileSecurityA                                   *win32.Proc
+	SetKernelObjectSecurity                            *win32.Proc
+	SetPrivateObjectSecurity                           *win32.Proc
+	SetPrivateObjectSecurityEx                         *win32.Proc
+	SetSecurityAccessMask                              *win32.Proc
+	SetSecurityDescriptorControl                       *win32.Proc
+	SetSecurityDescriptorDacl                          *win32.Proc
+	SetSecurityDescriptorGroup                         *win32.Proc
+	SetSecurityDescriptorOwner                         *win32.Proc
+	SetSecurityDescriptorRMControl                     *win32.Proc
+	SetSecurityDescriptorSacl                          *win32.Proc
+	SetTokenInformation                                *win32.Proc
+	SetUserObjectSecurity                              *win32.Proc
+}{
+	AccessCheck:                                       procAccessCheck,
+	AccessCheckAndAuditAlarm:                          procAccessCheckAndAuditAlarm,
+	AccessCheckAndAuditAlarmA:                         procAccessCheckAndAuditAlarmA,
+	AccessCheckByType:                                 procAccessCheckByType,
+	AccessCheckByTypeAndAuditAlarm:                    procAccessCheckByTypeAndAuditAlarm,
+	AccessCheckByTypeAndAuditAlarmA:                   procAccessCheckByTypeAndAuditAlarmA,
+	AccessCheckByTypeResultList:                       procAccessCheckByTypeResultList,
+	AccessCheckByTypeResultListAndAuditAlarm:          procAccessCheckByTypeResultListAndAuditAlarm,
+	AccessCheckByTypeResultListAndAuditAlarmA:         procAccessCheckByTypeResultListAndAuditAlarmA,
+	AccessCheckByTypeResultListAndAuditAlarmByHandle:  procAccessCheckByTypeResultListAndAuditAlarmByHandle,
+	AccessCheckByTypeResultListAndAuditAlarmByHandleA: procAccessCheckByTypeResultListAndAuditAlarmByHandleA,
+	AddAccessAllowedAce:                               procAddAccessAllowedAce,
+	AddAccessAllowedAceEx:                             procAddAccessAllowedAceEx,
+	AddAccessAllowedObjectAce:                         procAddAccessAllowedObjectAce,
+	AddAccessDeniedAce:                                procAddAccessDeniedAce,
+	AddAccessDeniedAceEx:                              procAddAccessDeniedAceEx,
+	AddAccessDeniedObjectAce:                          procAddAccessDeniedObjectAce,
+	AddAce:                                            procAddAce,
+	AddAuditAccessAce:                                 procAddAuditAccessAce,
+	AddAuditAccessAceEx:                               procAddAuditAccessAceEx,
+	AddAuditAccessObjectAce:                           procAddAuditAccessObjectAce,
+	AddConditionalAce:                                 procAddConditionalAce,
+	AddMandatoryAce:                                   procAddMandatoryAce,
+	AddResourceAttributeAce:                           procAddResourceAttributeAce,
+	AddScopedPolicyIDAce:                              procAddScopedPolicyIDAce,
+	AdjustTokenGroups:                                 procAdjustTokenGroups,
+	AdjustTokenPrivileges:                             procAdjustTokenPrivileges,
+	AllocateAndInitializeSid:                          procAllocateAndInitializeSid,
+	AllocateLocallyUniqueId:                           procAllocateLocallyUniqueId,
+	AreAllAccessesGranted:                             procAreAllAccessesGranted,
+	AreAnyAccessesGranted:                             procAreAnyAccessesGranted,
+	CheckTokenCapability:                              procCheckTokenCapability,
+	CheckTokenMembership:                              procCheckTokenMembership,
+	CheckTokenMembershipEx:                            procCheckTokenMembershipEx,
+	ConvertToAutoInheritPrivateObjectSecurity:         procConvertToAutoInheritPrivateObjectSecurity,
+	CopySid:                       procCopySid,
+	CreatePrivateObjectSecurity:   procCreatePrivateObjectSecurity,
+	CreatePrivateObjectSecurityEx: procCreatePrivateObjectSecurityEx,
+	CreatePrivateObjectSecurityWithMultipleInheritance: procCreatePrivateObjectSecurityWithMultipleInheritance,
+	CreateRestrictedToken:                              procCreateRestrictedToken,
+	CreateWellKnownSid:                                 procCreateWellKnownSid,
+	DeleteAce:                                          procDeleteAce,
+	DeriveCapabilitySidsFromName:                       procDeriveCapabilitySidsFromName,
+	DestroyPrivateObjectSecurity:                       procDestroyPrivateObjectSecurity,
+	DuplicateToken:                                     procDuplicateToken,
+	DuplicateTokenEx:                                   procDuplicateTokenEx,
+	EqualDomainSid:                                     procEqualDomainSid,
+	EqualPrefixSid:                                     procEqualPrefixSid,
+	EqualSid:                                           procEqualSid,
+	FindFirstFreeAce:                                   procFindFirstFreeAce,
+	FreeSid:                                            procFreeSid,
+	GetAce:                                             procGetAce,
+	GetAclInformation:                                  procGetAclInformation,
+	GetAppContainerAce:                                 procGetAppContainerAce,
+	GetCachedSigningLevel:                              procGetCachedSigningLevel,
+	GetFileSecurity:                                    procGetFileSecurity,
+	GetFileSecurityA:                                   procGetFileSecurityA,
+	GetKernelObjectSecurity:                            procGetKernelObjectSecurity,
+	GetLengthSid:                                       procGetLengthSid,
+	GetPrivateObjectSecurity:                           procGetPrivateObjectSecurity,
+	GetSecurityDescriptorControl:                       procGetSecurityDescriptorControl,
+	GetSecurityDescriptorDacl:                          procGetSecurityDescriptorDacl,
+	GetSecurityDescriptorGroup:                         procGetSecurityDescriptorGroup,
+	GetSecurityDescriptorLength:                        procGetSecurityDescriptorLength,
+	GetSecurityDescriptorOwner:                         procGetSecurityDescriptorOwner,
+	GetSecurityDescriptorRMControl:                     procGetSecurityDescriptorRMControl,
+	GetSecurityDescriptorSacl:                          procGetSecurityDescriptorSacl,
+	GetSidIdentifierAuthority:                          procGetSidIdentifierAuthority,
+	GetSidLengthRequired:                               procGetSidLengthRequired,
+	GetSidSubAuthority:                                 procGetSidSubAuthority,
+	GetSidSubAuthorityCount:                            procGetSidSubAuthorityCount,
+	GetTokenInformation:                                procGetTokenInformation,
+	GetUserObjectSecurity:                              procGetUserObjectSecurity,
+	GetWindowsAccountDomainSid:                         procGetWindowsAccountDomainSid,
+	ImpersonateAnonymousToken:                          procImpersonateAnonymousToken,
+	ImpersonateLoggedOnUser:                            procImpersonateLoggedOnUser,
+	ImpersonateSelf:                                    procImpersonateSelf,
+	InitializeAcl:                                      procInitializeAcl,
+	InitializeSecurityDescriptor:                       procInitializeSecurityDescriptor,
+	InitializeSid:                                      procInitializeSid,
+	IsTokenRestricted:                                  procIsTokenRestricted,
+	IsValidAcl:                                         procIsValidAcl,
+	IsValidSecurityDescriptor:                          procIsValidSecurityDescriptor,
+	IsValidSid:                                         procIsValidSid,
+	IsWellKnownSid:                                     procIsWellKnownSid,
+	LogonUser:                                          procLogonUser,
+	LogonUserA:                                         procLogonUserA,
+	LogonUserEx:                                        procLogonUserEx,
+	LogonUserExA:                                       procLogonUserExA,
+	LookupAccountName:                                  procLookupAccountName,
+	LookupAccountNameA:                                 procLookupAccountNameA,
+	LookupAccountSid:                                   procLookupAccountSid,
+	LookupAccountSidA:                                  procLookupAccountSidA,
+	LookupPrivilegeDisplayName:                         procLookupPrivilegeDisplayName,
+	LookupPrivilegeDisplayNameA:                        procLookupPrivilegeDisplayNameA,
+	LookupPrivilegeName:                                procLookupPrivilegeName,
+	LookupPrivilegeNameA:                               procLookupPrivilegeNameA,
+	LookupPrivilegeValue:                               procLookupPrivilegeValue,
+	LookupPrivilegeValueA:                              procLookupPrivilegeValueA,
+	MakeAbsoluteSD:                                     procMakeAbsoluteSD,
+	MakeSelfRelativeSD:                                 procMakeSelfRelativeSD,
+	MapGenericMask:                                     procMapGenericMask,
+	ObjectCloseAuditAlarm:                              procObjectCloseAuditAlarm,
+	ObjectCloseAuditAlarmA:                             procObjectCloseAuditAlarmA,
+	ObjectDeleteAuditAlarm:                             procObjectDeleteAuditAlarm,
+	ObjectDeleteAuditAlarmA:                            procObjectDeleteAuditAlarmA,
+	ObjectOpenAuditAlarm:                               procObjectOpenAuditAlarm,
+	ObjectOpenAuditAlarmA:                              procObjectOpenAuditAlarmA,
+	ObjectPrivilegeAuditAlarm:                          procObjectPrivilegeAuditAlarm,
+	ObjectPrivilegeAuditAlarmA:                         procObjectPrivilegeAuditAlarmA,
+	PrivilegeCheck:                                     procPrivilegeCheck,
+	PrivilegedServiceAuditAlarm:                        procPrivilegedServiceAuditAlarm,
+	PrivilegedServiceAuditAlarmA:                       procPrivilegedServiceAuditAlarmA,
+	QuerySecurityAccessMask:                            procQuerySecurityAccessMask,
+	RevertToSelf:                                       procRevertToSelf,
+	RtlConvertSidToUnicodeString:                       procRtlConvertSidToUnicodeString,
+	RtlNormalizeSecurityDescriptor:                     procRtlNormalizeSecurityDescriptor,
+	SetAclInformation:                                  procSetAclInformation,
+	SetCachedSigningLevel:                              procSetCachedSigningLevel,
+	SetFileSecurity:                                    procSetFileSecurity,
+	SetFileSecurityA:                                   procSetFileSecurityA,
+	SetKernelObjectSecurity:                            procSetKernelObjectSecurity,
+	SetPrivateObjectSecurity:                           procSetPrivateObjectSecurity,
+	SetPrivateObjectSecurityEx:                         procSetPrivateObjectSecurityEx,
+	SetSecurityAccessMask:                              procSetSecurityAccessMask,
+	SetSecurityDescriptorControl:                       procSetSecurityDescriptorControl,
+	SetSecurityDescriptorDacl:                          procSetSecurityDescriptorDacl,
+	SetSecurityDescriptorGroup:                         procSetSecurityDescriptorGroup,
+	SetSecurityDescriptorOwner:                         procSetSecurityDescriptorOwner,
+	SetSecurityDescriptorRMControl:                     procSetSecurityDescriptorRMControl,
+	SetSecurityDescriptorSacl:                          procSetSecurityDescriptorSacl,
+	SetTokenInformation:                                procSetTokenInformation,
+	SetUserObjectSecurity:                              procSetUserObjectSecurity,
+}
+
 // AccessCheck calls ADVAPI32!AccessCheck.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheck
 // Minimum OS: windows5.1.2600.
@@ -169,10 +443,10 @@ func AccessCheck(pSecurityDescriptor PSECURITY_DESCRIPTOR, ClientToken foundatio
 
 // AccessCheckAndAuditAlarm calls ADVAPI32!AccessCheckAndAuditAlarmW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckandauditalarmw
-func AccessCheckAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, SecurityDescriptor PSECURITY_DESCRIPTOR, DesiredAccess uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
+func AccessCheckAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName *string, SecurityDescriptor PSECURITY_DESCRIPTOR, DesiredAccess uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	_ObjectCreation := win32.Bool32(ObjectCreation)
 	r1, _, _ := syscall.SyscallN(procAccessCheckAndAuditAlarm.Addr(), uintptr(unsafe.Pointer(_SubsystemName)), uintptr(unsafe.Pointer(HandleId)), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_ObjectName)), uintptr(SecurityDescriptor), uintptr(DesiredAccess), uintptr(unsafe.Pointer(GenericMapping)), uintptr(_ObjectCreation), uintptr(unsafe.Pointer(GrantedAccess)), uintptr(unsafe.Pointer(AccessStatus)), uintptr(unsafe.Pointer(pfGenerateOnClose)))
 	return r1 != 0
@@ -207,10 +481,10 @@ func AccessCheckByType(pSecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSi
 
 // AccessCheckByTypeAndAuditAlarm calls ADVAPI32!AccessCheckByTypeAndAuditAlarmW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckbytypeandauditalarmw
-func AccessCheckByTypeAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList []OBJECT_TYPE_LIST, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
+func AccessCheckByTypeAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName *string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList []OBJECT_TYPE_LIST, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccess *uint32, AccessStatus *foundation.BOOL, pfGenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	var _ObjectTypeList *OBJECT_TYPE_LIST
 	if len(ObjectTypeList) > 0 {
 		_ObjectTypeList = &ObjectTypeList[0]
@@ -249,10 +523,10 @@ func AccessCheckByTypeResultList(pSecurityDescriptor PSECURITY_DESCRIPTOR, Princ
 
 // AccessCheckByTypeResultListAndAuditAlarm calls ADVAPI32!AccessCheckByTypeResultListAndAuditAlarmW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckbytyperesultlistandauditalarmw
-func AccessCheckByTypeResultListAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccessList *uint32, AccessStatusList *uint32, pfGenerateOnClose *foundation.BOOL) bool {
+func AccessCheckByTypeResultListAndAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName *string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccessList *uint32, AccessStatusList *uint32, pfGenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	_ObjectCreation := win32.Bool32(ObjectCreation)
 	r1, _, _ := syscall.SyscallN(procAccessCheckByTypeResultListAndAuditAlarm.Addr(), uintptr(unsafe.Pointer(_SubsystemName)), uintptr(unsafe.Pointer(HandleId)), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_ObjectName)), uintptr(SecurityDescriptor), uintptr(PrincipalSelfSid), uintptr(DesiredAccess), uintptr(AuditType), uintptr(Flags), uintptr(unsafe.Pointer(ObjectTypeList)), uintptr(ObjectTypeListLength), uintptr(unsafe.Pointer(GenericMapping)), uintptr(_ObjectCreation), uintptr(unsafe.Pointer(GrantedAccessList)), uintptr(unsafe.Pointer(AccessStatusList)), uintptr(unsafe.Pointer(pfGenerateOnClose)))
 	return r1 != 0
@@ -272,10 +546,10 @@ func AccessCheckByTypeResultListAndAuditAlarmA(SubsystemName foundation.PSTR, Ha
 
 // AccessCheckByTypeResultListAndAuditAlarmByHandle calls ADVAPI32!AccessCheckByTypeResultListAndAuditAlarmByHandleW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-accesscheckbytyperesultlistandauditalarmbyhandlew
-func AccessCheckByTypeResultListAndAuditAlarmByHandle(SubsystemName string, HandleId unsafe.Pointer, ClientToken foundation.HANDLE, ObjectTypeName string, ObjectName string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccessList *uint32, AccessStatusList *uint32, pfGenerateOnClose *foundation.BOOL) bool {
+func AccessCheckByTypeResultListAndAuditAlarmByHandle(SubsystemName string, HandleId unsafe.Pointer, ClientToken foundation.HANDLE, ObjectTypeName string, ObjectName *string, SecurityDescriptor PSECURITY_DESCRIPTOR, PrincipalSelfSid PSID, DesiredAccess uint32, AuditType AUDIT_EVENT_TYPE, Flags uint32, ObjectTypeList *OBJECT_TYPE_LIST, ObjectTypeListLength uint32, GenericMapping *GENERIC_MAPPING, ObjectCreation bool, GrantedAccessList *uint32, AccessStatusList *uint32, pfGenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	_ObjectCreation := win32.Bool32(ObjectCreation)
 	r1, _, _ := syscall.SyscallN(procAccessCheckByTypeResultListAndAuditAlarmByHandle.Addr(), uintptr(unsafe.Pointer(_SubsystemName)), uintptr(unsafe.Pointer(HandleId)), uintptr(ClientToken), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_ObjectName)), uintptr(SecurityDescriptor), uintptr(PrincipalSelfSid), uintptr(DesiredAccess), uintptr(AuditType), uintptr(Flags), uintptr(unsafe.Pointer(ObjectTypeList)), uintptr(ObjectTypeListLength), uintptr(unsafe.Pointer(GenericMapping)), uintptr(_ObjectCreation), uintptr(unsafe.Pointer(GrantedAccessList)), uintptr(unsafe.Pointer(AccessStatusList)), uintptr(unsafe.Pointer(pfGenerateOnClose)))
 	return r1 != 0
@@ -1112,10 +1386,10 @@ func IsWellKnownSid(pSid PSID, WellKnownSidType WELL_KNOWN_SID_TYPE) bool {
 // LogonUser calls ADVAPI32!LogonUserW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-logonuserw
 // Minimum OS: windows5.1.2600.
-func LogonUser(lpszUsername string, lpszDomain string, lpszPassword string, dwLogonType LOGON32_LOGON, dwLogonProvider LOGON32_PROVIDER, phToken *foundation.HANDLE) error {
+func LogonUser(lpszUsername string, lpszDomain *string, lpszPassword *string, dwLogonType LOGON32_LOGON, dwLogonProvider LOGON32_PROVIDER, phToken *foundation.HANDLE) error {
 	_lpszUsername := win32.UTF16Ptr(lpszUsername)
-	_lpszDomain := win32.UTF16Ptr(lpszDomain)
-	_lpszPassword := win32.UTF16Ptr(lpszPassword)
+	_lpszDomain := win32.UTF16PtrOrNil(lpszDomain)
+	_lpszPassword := win32.UTF16PtrOrNil(lpszPassword)
 	r1, _, e1 := syscall.SyscallN(procLogonUser.Addr(), uintptr(unsafe.Pointer(_lpszUsername)), uintptr(unsafe.Pointer(_lpszDomain)), uintptr(unsafe.Pointer(_lpszPassword)), uintptr(dwLogonType), uintptr(dwLogonProvider), uintptr(unsafe.Pointer(phToken)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1137,10 +1411,10 @@ func LogonUserA(lpszUsername foundation.PSTR, lpszDomain foundation.PSTR, lpszPa
 // LogonUserEx calls ADVAPI32!LogonUserExW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-logonuserexw
 // Minimum OS: windows5.1.2600.
-func LogonUserEx(lpszUsername string, lpszDomain string, lpszPassword string, dwLogonType LOGON32_LOGON, dwLogonProvider LOGON32_PROVIDER, phToken *foundation.HANDLE, ppLogonSid *PSID, ppProfileBuffer *unsafe.Pointer, pdwProfileLength *uint32, pQuotaLimits *QUOTA_LIMITS) error {
+func LogonUserEx(lpszUsername string, lpszDomain *string, lpszPassword *string, dwLogonType LOGON32_LOGON, dwLogonProvider LOGON32_PROVIDER, phToken *foundation.HANDLE, ppLogonSid *PSID, ppProfileBuffer *unsafe.Pointer, pdwProfileLength *uint32, pQuotaLimits *QUOTA_LIMITS) error {
 	_lpszUsername := win32.UTF16Ptr(lpszUsername)
-	_lpszDomain := win32.UTF16Ptr(lpszDomain)
-	_lpszPassword := win32.UTF16Ptr(lpszPassword)
+	_lpszDomain := win32.UTF16PtrOrNil(lpszDomain)
+	_lpszPassword := win32.UTF16PtrOrNil(lpszPassword)
 	r1, _, e1 := syscall.SyscallN(procLogonUserEx.Addr(), uintptr(unsafe.Pointer(_lpszUsername)), uintptr(unsafe.Pointer(_lpszDomain)), uintptr(unsafe.Pointer(_lpszPassword)), uintptr(dwLogonType), uintptr(dwLogonProvider), uintptr(unsafe.Pointer(phToken)), uintptr(unsafe.Pointer(ppLogonSid)), uintptr(unsafe.Pointer(ppProfileBuffer)), uintptr(unsafe.Pointer(pdwProfileLength)), uintptr(unsafe.Pointer(pQuotaLimits)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1162,8 +1436,8 @@ func LogonUserExA(lpszUsername foundation.PSTR, lpszDomain foundation.PSTR, lpsz
 // LookupAccountName calls ADVAPI32!LookupAccountNameW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupaccountnamew
 // Minimum OS: windows5.1.2600.
-func LookupAccountName(lpSystemName string, lpAccountName string, Sid PSID, cbSid *uint32, ReferencedDomainName foundation.PWSTR, cchReferencedDomainName *uint32, peUse *SID_NAME_USE) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupAccountName(lpSystemName *string, lpAccountName string, Sid PSID, cbSid *uint32, ReferencedDomainName foundation.PWSTR, cchReferencedDomainName *uint32, peUse *SID_NAME_USE) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	_lpAccountName := win32.UTF16Ptr(lpAccountName)
 	r1, _, e1 := syscall.SyscallN(procLookupAccountName.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(unsafe.Pointer(_lpAccountName)), uintptr(Sid), uintptr(unsafe.Pointer(cbSid)), uintptr(unsafe.Pointer(ReferencedDomainName)), uintptr(unsafe.Pointer(cchReferencedDomainName)), uintptr(unsafe.Pointer(peUse)))
 	if r1 == 0 {
@@ -1186,8 +1460,8 @@ func LookupAccountNameA(lpSystemName foundation.PSTR, lpAccountName foundation.P
 // LookupAccountSid calls ADVAPI32!LookupAccountSidW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupaccountsidw
 // Minimum OS: windows5.1.2600.
-func LookupAccountSid(lpSystemName string, Sid PSID, Name foundation.PWSTR, cchName *uint32, ReferencedDomainName foundation.PWSTR, cchReferencedDomainName *uint32, peUse *SID_NAME_USE) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupAccountSid(lpSystemName *string, Sid PSID, Name foundation.PWSTR, cchName *uint32, ReferencedDomainName foundation.PWSTR, cchReferencedDomainName *uint32, peUse *SID_NAME_USE) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	r1, _, e1 := syscall.SyscallN(procLookupAccountSid.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(Sid), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(cchName)), uintptr(unsafe.Pointer(ReferencedDomainName)), uintptr(unsafe.Pointer(cchReferencedDomainName)), uintptr(unsafe.Pointer(peUse)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1209,8 +1483,8 @@ func LookupAccountSidA(lpSystemName foundation.PSTR, Sid PSID, Name foundation.P
 // LookupPrivilegeDisplayName calls ADVAPI32!LookupPrivilegeDisplayNameW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupprivilegedisplaynamew
 // Minimum OS: windows5.1.2600.
-func LookupPrivilegeDisplayName(lpSystemName string, lpName string, lpDisplayName foundation.PWSTR, cchDisplayName *uint32, lpLanguageId *uint32) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupPrivilegeDisplayName(lpSystemName *string, lpName string, lpDisplayName foundation.PWSTR, cchDisplayName *uint32, lpLanguageId *uint32) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	_lpName := win32.UTF16Ptr(lpName)
 	r1, _, e1 := syscall.SyscallN(procLookupPrivilegeDisplayName.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpDisplayName)), uintptr(unsafe.Pointer(cchDisplayName)), uintptr(unsafe.Pointer(lpLanguageId)))
 	if r1 == 0 {
@@ -1233,8 +1507,8 @@ func LookupPrivilegeDisplayNameA(lpSystemName foundation.PSTR, lpName foundation
 // LookupPrivilegeName calls ADVAPI32!LookupPrivilegeNameW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupprivilegenamew
 // Minimum OS: windows5.1.2600.
-func LookupPrivilegeName(lpSystemName string, lpLuid *foundation.LUID, lpName foundation.PWSTR, cchName *uint32) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupPrivilegeName(lpSystemName *string, lpLuid *foundation.LUID, lpName foundation.PWSTR, cchName *uint32) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	r1, _, e1 := syscall.SyscallN(procLookupPrivilegeName.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(unsafe.Pointer(lpLuid)), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(cchName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1256,8 +1530,8 @@ func LookupPrivilegeNameA(lpSystemName foundation.PSTR, lpLuid *foundation.LUID,
 // LookupPrivilegeValue calls ADVAPI32!LookupPrivilegeValueW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-lookupprivilegevaluew
 // Minimum OS: windows5.1.2600.
-func LookupPrivilegeValue(lpSystemName string, lpName string, lpLuid *foundation.LUID) error {
-	_lpSystemName := win32.UTF16Ptr(lpSystemName)
+func LookupPrivilegeValue(lpSystemName *string, lpName string, lpLuid *foundation.LUID) error {
+	_lpSystemName := win32.UTF16PtrOrNil(lpSystemName)
 	_lpName := win32.UTF16Ptr(lpName)
 	r1, _, e1 := syscall.SyscallN(procLookupPrivilegeValue.Addr(), uintptr(unsafe.Pointer(_lpSystemName)), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpLuid)))
 	if r1 == 0 {
@@ -1350,10 +1624,10 @@ func ObjectDeleteAuditAlarmA(SubsystemName foundation.PSTR, HandleId unsafe.Poin
 
 // ObjectOpenAuditAlarm calls ADVAPI32!ObjectOpenAuditAlarmW.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-objectopenauditalarmw
-func ObjectOpenAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName string, pSecurityDescriptor PSECURITY_DESCRIPTOR, ClientToken foundation.HANDLE, DesiredAccess uint32, GrantedAccess uint32, Privileges *PRIVILEGE_SET, ObjectCreation bool, AccessGranted bool, GenerateOnClose *foundation.BOOL) bool {
+func ObjectOpenAuditAlarm(SubsystemName string, HandleId unsafe.Pointer, ObjectTypeName string, ObjectName *string, pSecurityDescriptor PSECURITY_DESCRIPTOR, ClientToken foundation.HANDLE, DesiredAccess uint32, GrantedAccess uint32, Privileges *PRIVILEGE_SET, ObjectCreation bool, AccessGranted bool, GenerateOnClose *foundation.BOOL) bool {
 	_SubsystemName := win32.UTF16Ptr(SubsystemName)
 	_ObjectTypeName := win32.UTF16Ptr(ObjectTypeName)
-	_ObjectName := win32.UTF16Ptr(ObjectName)
+	_ObjectName := win32.UTF16PtrOrNil(ObjectName)
 	_ObjectCreation := win32.Bool32(ObjectCreation)
 	_AccessGranted := win32.Bool32(AccessGranted)
 	r1, _, _ := syscall.SyscallN(procObjectOpenAuditAlarm.Addr(), uintptr(unsafe.Pointer(_SubsystemName)), uintptr(unsafe.Pointer(HandleId)), uintptr(unsafe.Pointer(_ObjectTypeName)), uintptr(unsafe.Pointer(_ObjectName)), uintptr(pSecurityDescriptor), uintptr(ClientToken), uintptr(DesiredAccess), uintptr(GrantedAccess), uintptr(unsafe.Pointer(Privileges)), uintptr(_ObjectCreation), uintptr(_AccessGranted), uintptr(unsafe.Pointer(GenerateOnClose)))

@@ -4,12 +4,20 @@
 
 package bluetooth
 
-// CloseHBLUETOOTH_DEVICE_FIND releases a HBLUETOOTH_DEVICE_FIND handle by calling BluetoothFindDeviceClose.
+// CloseHBLUETOOTH_DEVICE_FIND releases a HBLUETOOTH_DEVICE_FIND handle by calling BluetoothFindDeviceClose. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHBLUETOOTH_DEVICE_FIND(h HBLUETOOTH_DEVICE_FIND) error {
+	if h == ^HBLUETOOTH_DEVICE_FIND(0) || h == 0 {
+		return nil
+	}
 	return BluetoothFindDeviceClose(HBLUETOOTH_DEVICE_FIND(h))
 }
 
-// CloseHBLUETOOTH_RADIO_FIND releases a HBLUETOOTH_RADIO_FIND handle by calling BluetoothFindRadioClose.
+// CloseHBLUETOOTH_RADIO_FIND releases a HBLUETOOTH_RADIO_FIND handle by calling BluetoothFindRadioClose. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHBLUETOOTH_RADIO_FIND(h HBLUETOOTH_RADIO_FIND) error {
+	if h == ^HBLUETOOTH_RADIO_FIND(0) || h == 0 {
+		return nil
+	}
 	return BluetoothFindRadioClose(HBLUETOOTH_RADIO_FIND(h))
 }

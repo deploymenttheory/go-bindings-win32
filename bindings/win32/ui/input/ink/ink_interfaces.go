@@ -5,6 +5,7 @@
 package ink
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -79,6 +80,14 @@ func (self *IInkDesktopHost) CreateInkPresenter(riid *win32.GUID, ppv **win32.IU
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInkDesktopHost_CreateAndInitializeInkPresenter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// CreateAndInitializeInkPresenter dispatches through IInkDesktopHost's vtable slot 5.
+func (self *IInkDesktopHost) CreateAndInitializeInkPresenter(rootVisual *systemcom.IUnknown, width float32, height float32, riid *win32.GUID, ppv **win32.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIInkDesktopHost_CreateAndInitializeInkPresenter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rootVisual)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IInkHostWorkItem: https://learn.microsoft.com/windows/win32/api/inkpresenterdesktop/nn-inkpresenterdesktop-iinkhostworkitem
 // IID: ccda0a9a-1b78-4632-bb96-97800662e26c
 type IInkHostWorkItem struct {
@@ -118,6 +127,14 @@ func (self *IInkPresenterDesktop) SetCommitRequestHandler(handler *IInkCommitReq
 // GetSize dispatches through IInkPresenterDesktop's vtable slot 5.
 func (self *IInkPresenterDesktop) GetSize(width *float32, height *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(width)), uintptr(unsafe.Pointer(height)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInkPresenterDesktop_SetSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// SetSize dispatches through IInkPresenterDesktop's vtable slot 6.
+func (self *IInkPresenterDesktop) SetSize(width float32, height float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIInkPresenterDesktop_SetSize, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -51,6 +51,78 @@ var (
 	procWSDXMLGetValueFromAny             = modwsdapi.NewProc("WSDXMLGetValueFromAny")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WSDAllocateLinkedMemory           *win32.Proc
+	WSDAttachLinkedMemory             *win32.Proc
+	WSDCreateDeviceHost               *win32.Proc
+	WSDCreateDeviceHost2              *win32.Proc
+	WSDCreateDeviceHostAdvanced       *win32.Proc
+	WSDCreateDeviceProxy              *win32.Proc
+	WSDCreateDeviceProxy2             *win32.Proc
+	WSDCreateDeviceProxyAdvanced      *win32.Proc
+	WSDCreateDiscoveryProvider        *win32.Proc
+	WSDCreateDiscoveryProvider2       *win32.Proc
+	WSDCreateDiscoveryPublisher       *win32.Proc
+	WSDCreateDiscoveryPublisher2      *win32.Proc
+	WSDCreateHttpAddress              *win32.Proc
+	WSDCreateHttpMessageParameters    *win32.Proc
+	WSDCreateOutboundAttachment       *win32.Proc
+	WSDCreateUdpAddress               *win32.Proc
+	WSDCreateUdpMessageParameters     *win32.Proc
+	WSDDetachLinkedMemory             *win32.Proc
+	WSDFreeLinkedMemory               *win32.Proc
+	WSDGenerateFault                  *win32.Proc
+	WSDGenerateFaultEx                *win32.Proc
+	WSDGetConfigurationOption         *win32.Proc
+	WSDSetConfigurationOption         *win32.Proc
+	WSDUriDecode                      *win32.Proc
+	WSDUriEncode                      *win32.Proc
+	WSDXMLAddChild                    *win32.Proc
+	WSDXMLAddSibling                  *win32.Proc
+	WSDXMLBuildAnyForSingleElement    *win32.Proc
+	WSDXMLCleanupElement              *win32.Proc
+	WSDXMLCreateContext               *win32.Proc
+	WSDXMLGetNameFromBuiltinNamespace *win32.Proc
+	WSDXMLGetValueFromAny             *win32.Proc
+}{
+	WSDAllocateLinkedMemory:           procWSDAllocateLinkedMemory,
+	WSDAttachLinkedMemory:             procWSDAttachLinkedMemory,
+	WSDCreateDeviceHost:               procWSDCreateDeviceHost,
+	WSDCreateDeviceHost2:              procWSDCreateDeviceHost2,
+	WSDCreateDeviceHostAdvanced:       procWSDCreateDeviceHostAdvanced,
+	WSDCreateDeviceProxy:              procWSDCreateDeviceProxy,
+	WSDCreateDeviceProxy2:             procWSDCreateDeviceProxy2,
+	WSDCreateDeviceProxyAdvanced:      procWSDCreateDeviceProxyAdvanced,
+	WSDCreateDiscoveryProvider:        procWSDCreateDiscoveryProvider,
+	WSDCreateDiscoveryProvider2:       procWSDCreateDiscoveryProvider2,
+	WSDCreateDiscoveryPublisher:       procWSDCreateDiscoveryPublisher,
+	WSDCreateDiscoveryPublisher2:      procWSDCreateDiscoveryPublisher2,
+	WSDCreateHttpAddress:              procWSDCreateHttpAddress,
+	WSDCreateHttpMessageParameters:    procWSDCreateHttpMessageParameters,
+	WSDCreateOutboundAttachment:       procWSDCreateOutboundAttachment,
+	WSDCreateUdpAddress:               procWSDCreateUdpAddress,
+	WSDCreateUdpMessageParameters:     procWSDCreateUdpMessageParameters,
+	WSDDetachLinkedMemory:             procWSDDetachLinkedMemory,
+	WSDFreeLinkedMemory:               procWSDFreeLinkedMemory,
+	WSDGenerateFault:                  procWSDGenerateFault,
+	WSDGenerateFaultEx:                procWSDGenerateFaultEx,
+	WSDGetConfigurationOption:         procWSDGetConfigurationOption,
+	WSDSetConfigurationOption:         procWSDSetConfigurationOption,
+	WSDUriDecode:                      procWSDUriDecode,
+	WSDUriEncode:                      procWSDUriEncode,
+	WSDXMLAddChild:                    procWSDXMLAddChild,
+	WSDXMLAddSibling:                  procWSDXMLAddSibling,
+	WSDXMLBuildAnyForSingleElement:    procWSDXMLBuildAnyForSingleElement,
+	WSDXMLCleanupElement:              procWSDXMLCleanupElement,
+	WSDXMLCreateContext:               procWSDXMLCreateContext,
+	WSDXMLGetNameFromBuiltinNamespace: procWSDXMLGetNameFromBuiltinNamespace,
+	WSDXMLGetValueFromAny:             procWSDXMLGetValueFromAny,
+}
+
 // WSDAllocateLinkedMemory calls wsdapi!WSDAllocateLinkedMemory.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdallocatelinkedmemory
 // Minimum OS: windows6.0.6000.
@@ -232,11 +304,11 @@ func WSDFreeLinkedMemory(pVoid unsafe.Pointer) {
 // WSDGenerateFault calls wsdapi!WSDGenerateFault.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdgeneratefault
 // Minimum OS: windows6.0.6000.
-func WSDGenerateFault(pszCode string, pszSubCode string, pszReason string, pszDetail string, pContext *IWSDXMLContext, ppFault **WSD_SOAP_FAULT) error {
+func WSDGenerateFault(pszCode string, pszSubCode *string, pszReason string, pszDetail *string, pContext *IWSDXMLContext, ppFault **WSD_SOAP_FAULT) error {
 	_pszCode := win32.UTF16Ptr(pszCode)
-	_pszSubCode := win32.UTF16Ptr(pszSubCode)
+	_pszSubCode := win32.UTF16PtrOrNil(pszSubCode)
 	_pszReason := win32.UTF16Ptr(pszReason)
-	_pszDetail := win32.UTF16Ptr(pszDetail)
+	_pszDetail := win32.UTF16PtrOrNil(pszDetail)
 	r1, _, _ := syscall.SyscallN(procWSDGenerateFault.Addr(), uintptr(unsafe.Pointer(_pszCode)), uintptr(unsafe.Pointer(_pszSubCode)), uintptr(unsafe.Pointer(_pszReason)), uintptr(unsafe.Pointer(_pszDetail)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppFault)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -244,8 +316,8 @@ func WSDGenerateFault(pszCode string, pszSubCode string, pszReason string, pszDe
 // WSDGenerateFaultEx calls wsdapi!WSDGenerateFaultEx.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdgeneratefaultex
 // Minimum OS: windows6.0.6000.
-func WSDGenerateFaultEx(pCode *WSDXML_NAME, pSubCode *WSDXML_NAME, pReasons *WSD_LOCALIZED_STRING_LIST, pszDetail string, ppFault **WSD_SOAP_FAULT) error {
-	_pszDetail := win32.UTF16Ptr(pszDetail)
+func WSDGenerateFaultEx(pCode *WSDXML_NAME, pSubCode *WSDXML_NAME, pReasons *WSD_LOCALIZED_STRING_LIST, pszDetail *string, ppFault **WSD_SOAP_FAULT) error {
+	_pszDetail := win32.UTF16PtrOrNil(pszDetail)
 	r1, _, _ := syscall.SyscallN(procWSDGenerateFaultEx.Addr(), uintptr(unsafe.Pointer(pCode)), uintptr(unsafe.Pointer(pSubCode)), uintptr(unsafe.Pointer(pReasons)), uintptr(unsafe.Pointer(_pszDetail)), uintptr(unsafe.Pointer(ppFault)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -311,8 +383,8 @@ func WSDXMLAddSibling(pFirst *WSDXML_ELEMENT, pSecond *WSDXML_ELEMENT) error {
 // WSDXMLBuildAnyForSingleElement calls wsdapi!WSDXMLBuildAnyForSingleElement.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdxmlbuildanyforsingleelement
 // Minimum OS: windows6.0.6000.
-func WSDXMLBuildAnyForSingleElement(pElementName *WSDXML_NAME, pszText string, ppAny **WSDXML_ELEMENT) error {
-	_pszText := win32.UTF16Ptr(pszText)
+func WSDXMLBuildAnyForSingleElement(pElementName *WSDXML_NAME, pszText *string, ppAny **WSDXML_ELEMENT) error {
+	_pszText := win32.UTF16PtrOrNil(pszText)
 	r1, _, _ := syscall.SyscallN(procWSDXMLBuildAnyForSingleElement.Addr(), uintptr(unsafe.Pointer(pElementName)), uintptr(unsafe.Pointer(_pszText)), uintptr(unsafe.Pointer(ppAny)))
 	return win32.ErrIfFailed(int32(r1))
 }

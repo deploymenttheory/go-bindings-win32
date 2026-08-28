@@ -222,6 +222,13 @@ type IDMLDispatchable struct {
 // IID_IDMLDispatchable is the interface identifier for IDMLDispatchable.
 var IID_IDMLDispatchable = win32.GUID{Data1: 0xdcb821a8, Data2: 0x1039, Data3: 0x441e, Data4: [8]byte{0x9f, 0x1c, 0xb1, 0x75, 0x9c, 0x2f, 0x3c, 0xec}}
 
+// GetBindingProperties dispatches through IDMLDispatchable's vtable slot 8.
+func (self *IDMLDispatchable) GetBindingProperties() DML_BINDING_PROPERTIES {
+	_ret := new(DML_BINDING_PROPERTIES)
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))))
+	return *_ret
+}
+
 // IDMLObject: https://learn.microsoft.com/windows/win32/api/directml/nn-directml-idmlobject
 // IID: c8263aac-9e0c-4a2d-9b8e-007521a3317c
 type IDMLObject struct {

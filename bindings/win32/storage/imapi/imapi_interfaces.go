@@ -5,6 +5,7 @@
 package imapi
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -2308,6 +2309,14 @@ func (self *IFsiItem) Get_CreationTime() (float64, error) {
 	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
+var specIFsiItem_Put_CreationTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_CreationTime dispatches through IFsiItem's vtable slot 10.
+func (self *IFsiItem) Put_CreationTime(newVal float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIFsiItem_Put_CreationTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(newVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_LastAccessedTime dispatches through IFsiItem's vtable slot 11.
 func (self *IFsiItem) Get_LastAccessedTime() (float64, error) {
 	_pVal := new(float64)
@@ -2315,11 +2324,27 @@ func (self *IFsiItem) Get_LastAccessedTime() (float64, error) {
 	return *_pVal, win32.ErrIfFailed(int32(r1))
 }
 
+var specIFsiItem_Put_LastAccessedTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_LastAccessedTime dispatches through IFsiItem's vtable slot 12.
+func (self *IFsiItem) Put_LastAccessedTime(newVal float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIFsiItem_Put_LastAccessedTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(newVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_LastModifiedTime dispatches through IFsiItem's vtable slot 13.
 func (self *IFsiItem) Get_LastModifiedTime() (float64, error) {
 	_pVal := new(float64)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
 	return *_pVal, win32.ErrIfFailed(int32(r1))
+}
+
+var specIFsiItem_Put_LastModifiedTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_LastModifiedTime dispatches through IFsiItem's vtable slot 14.
+func (self *IFsiItem) Put_LastModifiedTime(newVal float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIFsiItem_Put_LastModifiedTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(newVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsHidden dispatches through IFsiItem's vtable slot 15.

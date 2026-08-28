@@ -22,6 +22,18 @@ var (
 	procStartXpsPrintJob1 = modXPSPRINT.NewProc("StartXpsPrintJob1")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	StartXpsPrintJob  *win32.Proc
+	StartXpsPrintJob1 *win32.Proc
+}{
+	StartXpsPrintJob:  procStartXpsPrintJob,
+	StartXpsPrintJob1: procStartXpsPrintJob1,
+}
+
 // StartXpsPrintJob calls XPSPRINT!StartXpsPrintJob.
 // https://learn.microsoft.com/windows/win32/api/xpsprint/nf-xpsprint-startxpsprintjob
 // Minimum OS: windows6.1.

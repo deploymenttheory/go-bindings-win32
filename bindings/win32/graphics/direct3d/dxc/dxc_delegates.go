@@ -4,10 +4,12 @@
 
 package dxc
 
-// DxcCreateInstance2Proc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IMalloc, *win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// DxcCreateInstance2Proc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IMalloc, *win32.GUID, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DxcCreateInstance2Proc uintptr
 
-// DxcCreateInstanceProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// DxcCreateInstanceProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DxcCreateInstanceProc uintptr

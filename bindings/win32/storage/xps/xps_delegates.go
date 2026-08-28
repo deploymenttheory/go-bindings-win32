@@ -4,6 +4,7 @@
 
 package xps
 
-// ABORTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(graphicsgdi.HDC, int32) foundation.BOOL.
+// ABORTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(graphicsgdi.HDC, int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ABORTPROC uintptr

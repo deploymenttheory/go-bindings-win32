@@ -8,32 +8,56 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseHACCEL releases a HACCEL handle by calling DestroyAcceleratorTable.
+// CloseHACCEL releases a HACCEL handle by calling DestroyAcceleratorTable. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHACCEL(h HACCEL) error {
+	if h == ^HACCEL(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DestroyAcceleratorTable(HACCEL(h))))
 }
 
-// CloseHCURSOR releases a HCURSOR handle by calling DestroyCursor.
+// CloseHCURSOR releases a HCURSOR handle by calling DestroyCursor. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHCURSOR(h HCURSOR) error {
+	if h == ^HCURSOR(0) || h == 0 {
+		return nil
+	}
 	return DestroyCursor(HCURSOR(h))
 }
 
-// CloseHDEVNOTIFY releases a HDEVNOTIFY handle by calling UnregisterDeviceNotification.
+// CloseHDEVNOTIFY releases a HDEVNOTIFY handle by calling UnregisterDeviceNotification. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDEVNOTIFY(h HDEVNOTIFY) error {
+	if h == ^HDEVNOTIFY(0) || h == 0 {
+		return nil
+	}
 	return UnregisterDeviceNotification(HDEVNOTIFY(h))
 }
 
-// CloseHHOOK releases a HHOOK handle by calling UnhookWindowsHookEx.
+// CloseHHOOK releases a HHOOK handle by calling UnhookWindowsHookEx. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHHOOK(h HHOOK) error {
+	if h == ^HHOOK(0) || h == 0 {
+		return nil
+	}
 	return UnhookWindowsHookEx(HHOOK(h))
 }
 
-// CloseHICON releases a HICON handle by calling DestroyIcon.
+// CloseHICON releases a HICON handle by calling DestroyIcon. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHICON(h HICON) error {
+	if h == ^HICON(0) || h == 0 {
+		return nil
+	}
 	return DestroyIcon(HICON(h))
 }
 
-// CloseHMENU releases a HMENU handle by calling DestroyMenu.
+// CloseHMENU releases a HMENU handle by calling DestroyMenu. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHMENU(h HMENU) error {
+	if h == ^HMENU(0) || h == 0 {
+		return nil
+	}
 	return DestroyMenu(HMENU(h))
 }

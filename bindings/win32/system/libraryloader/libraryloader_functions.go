@@ -69,6 +69,112 @@ var (
 	procUpdateResourceA             = modKERNEL32.NewProc("UpdateResourceA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddDllDirectory             *win32.Proc
+	BeginUpdateResource         *win32.Proc
+	BeginUpdateResourceA        *win32.Proc
+	DisableThreadLibraryCalls   *win32.Proc
+	EndUpdateResource           *win32.Proc
+	EndUpdateResourceA          *win32.Proc
+	EnumResourceLanguages       *win32.Proc
+	EnumResourceLanguagesA      *win32.Proc
+	EnumResourceLanguagesEx     *win32.Proc
+	EnumResourceLanguagesExA    *win32.Proc
+	EnumResourceNames           *win32.Proc
+	EnumResourceNamesA          *win32.Proc
+	EnumResourceNamesEx         *win32.Proc
+	EnumResourceNamesExA        *win32.Proc
+	EnumResourceTypes           *win32.Proc
+	EnumResourceTypesA          *win32.Proc
+	EnumResourceTypesEx         *win32.Proc
+	EnumResourceTypesExA        *win32.Proc
+	FindResource                *win32.Proc
+	FindResourceA               *win32.Proc
+	FindResourceEx              *win32.Proc
+	FindResourceExA             *win32.Proc
+	FreeLibraryAndExitThread    *win32.Proc
+	FreeResource                *win32.Proc
+	GetDllDirectory             *win32.Proc
+	GetDllDirectoryA            *win32.Proc
+	GetModuleFileName           *win32.Proc
+	GetModuleFileNameA          *win32.Proc
+	GetModuleHandle             *win32.Proc
+	GetModuleHandleA            *win32.Proc
+	GetModuleHandleEx           *win32.Proc
+	GetModuleHandleExA          *win32.Proc
+	GetProcAddress              *win32.Proc
+	LoadLibrary                 *win32.Proc
+	LoadLibraryA                *win32.Proc
+	LoadLibraryEx               *win32.Proc
+	LoadLibraryExA              *win32.Proc
+	LoadModule                  *win32.Proc
+	LoadPackagedLibrary         *win32.Proc
+	LoadResource                *win32.Proc
+	LockResource                *win32.Proc
+	QueryOptionalDelayLoadedAPI *win32.Proc
+	RemoveDllDirectory          *win32.Proc
+	SetDefaultDllDirectories    *win32.Proc
+	SetDllDirectory             *win32.Proc
+	SetDllDirectoryA            *win32.Proc
+	SizeofResource              *win32.Proc
+	UpdateResource              *win32.Proc
+	UpdateResourceA             *win32.Proc
+}{
+	AddDllDirectory:             procAddDllDirectory,
+	BeginUpdateResource:         procBeginUpdateResource,
+	BeginUpdateResourceA:        procBeginUpdateResourceA,
+	DisableThreadLibraryCalls:   procDisableThreadLibraryCalls,
+	EndUpdateResource:           procEndUpdateResource,
+	EndUpdateResourceA:          procEndUpdateResourceA,
+	EnumResourceLanguages:       procEnumResourceLanguages,
+	EnumResourceLanguagesA:      procEnumResourceLanguagesA,
+	EnumResourceLanguagesEx:     procEnumResourceLanguagesEx,
+	EnumResourceLanguagesExA:    procEnumResourceLanguagesExA,
+	EnumResourceNames:           procEnumResourceNames,
+	EnumResourceNamesA:          procEnumResourceNamesA,
+	EnumResourceNamesEx:         procEnumResourceNamesEx,
+	EnumResourceNamesExA:        procEnumResourceNamesExA,
+	EnumResourceTypes:           procEnumResourceTypes,
+	EnumResourceTypesA:          procEnumResourceTypesA,
+	EnumResourceTypesEx:         procEnumResourceTypesEx,
+	EnumResourceTypesExA:        procEnumResourceTypesExA,
+	FindResource:                procFindResource,
+	FindResourceA:               procFindResourceA,
+	FindResourceEx:              procFindResourceEx,
+	FindResourceExA:             procFindResourceExA,
+	FreeLibraryAndExitThread:    procFreeLibraryAndExitThread,
+	FreeResource:                procFreeResource,
+	GetDllDirectory:             procGetDllDirectory,
+	GetDllDirectoryA:            procGetDllDirectoryA,
+	GetModuleFileName:           procGetModuleFileName,
+	GetModuleFileNameA:          procGetModuleFileNameA,
+	GetModuleHandle:             procGetModuleHandle,
+	GetModuleHandleA:            procGetModuleHandleA,
+	GetModuleHandleEx:           procGetModuleHandleEx,
+	GetModuleHandleExA:          procGetModuleHandleExA,
+	GetProcAddress:              procGetProcAddress,
+	LoadLibrary:                 procLoadLibrary,
+	LoadLibraryA:                procLoadLibraryA,
+	LoadLibraryEx:               procLoadLibraryEx,
+	LoadLibraryExA:              procLoadLibraryExA,
+	LoadModule:                  procLoadModule,
+	LoadPackagedLibrary:         procLoadPackagedLibrary,
+	LoadResource:                procLoadResource,
+	LockResource:                procLockResource,
+	QueryOptionalDelayLoadedAPI: procQueryOptionalDelayLoadedAPI,
+	RemoveDllDirectory:          procRemoveDllDirectory,
+	SetDefaultDllDirectories:    procSetDefaultDllDirectories,
+	SetDllDirectory:             procSetDllDirectory,
+	SetDllDirectoryA:            procSetDllDirectoryA,
+	SizeofResource:              procSizeofResource,
+	UpdateResource:              procUpdateResource,
+	UpdateResourceA:             procUpdateResourceA,
+}
+
 // AddDllDirectory calls KERNEL32!AddDllDirectory.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-adddlldirectory
 // Minimum OS: windows8.0.
@@ -382,8 +488,8 @@ func GetModuleFileNameA(hModule foundation.HMODULE, lpFilename foundation.PSTR, 
 // GetModuleHandle calls KERNEL32!GetModuleHandleW.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew
 // Minimum OS: windows5.1.2600.
-func GetModuleHandle(lpModuleName string) (foundation.HMODULE, error) {
-	_lpModuleName := win32.UTF16Ptr(lpModuleName)
+func GetModuleHandle(lpModuleName *string) (foundation.HMODULE, error) {
+	_lpModuleName := win32.UTF16PtrOrNil(lpModuleName)
 	r1, _, e1 := syscall.SyscallN(procGetModuleHandle.Addr(), uintptr(unsafe.Pointer(_lpModuleName)))
 	ret := foundation.HMODULE(r1)
 	if ret == 0 {
@@ -407,8 +513,8 @@ func GetModuleHandleA(lpModuleName foundation.PSTR) (foundation.HMODULE, error) 
 // GetModuleHandleEx calls KERNEL32!GetModuleHandleExW.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw
 // Minimum OS: windows5.1.2600.
-func GetModuleHandleEx(dwFlags uint32, lpModuleName string, phModule *foundation.HMODULE) error {
-	_lpModuleName := win32.UTF16Ptr(lpModuleName)
+func GetModuleHandleEx(dwFlags uint32, lpModuleName *string, phModule *foundation.HMODULE) error {
+	_lpModuleName := win32.UTF16PtrOrNil(lpModuleName)
 	r1, _, e1 := syscall.SyscallN(procGetModuleHandleEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpModuleName)), uintptr(unsafe.Pointer(phModule)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -565,8 +671,8 @@ func SetDefaultDllDirectories(DirectoryFlags LOAD_LIBRARY_FLAGS) error {
 // SetDllDirectory calls KERNEL32!SetDllDirectoryW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdlldirectoryw
 // Minimum OS: windows6.0.6000.
-func SetDllDirectory(lpPathName string) error {
-	_lpPathName := win32.UTF16Ptr(lpPathName)
+func SetDllDirectory(lpPathName *string) error {
+	_lpPathName := win32.UTF16PtrOrNil(lpPathName)
 	r1, _, e1 := syscall.SyscallN(procSetDllDirectory.Addr(), uintptr(unsafe.Pointer(_lpPathName)))
 	if r1 == 0 {
 		return win32.LastError(e1)

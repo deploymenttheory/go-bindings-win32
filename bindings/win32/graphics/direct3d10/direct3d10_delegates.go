@@ -4,10 +4,12 @@
 
 package direct3d10
 
-// PFN_D3D10_CREATE_DEVICE1 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsdxgi.IDXGIAdapter, D3D10_DRIVER_TYPE, foundation.HMODULE, uint32, D3D10_FEATURE_LEVEL1, uint32, **ID3D10Device1) foundation.HRESULT.
+// PFN_D3D10_CREATE_DEVICE1 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsdxgi.IDXGIAdapter, D3D10_DRIVER_TYPE, foundation.HMODULE, uint32, D3D10_FEATURE_LEVEL1, uint32, **ID3D10Device1) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D10_CREATE_DEVICE1 uintptr
 
-// PFN_D3D10_CREATE_DEVICE_AND_SWAP_CHAIN1 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsdxgi.IDXGIAdapter, D3D10_DRIVER_TYPE, foundation.HMODULE, uint32, D3D10_FEATURE_LEVEL1, uint32, *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, **graphicsdxgi.IDXGISwapChain, **ID3D10Device1) foundation.HRESULT.
+// PFN_D3D10_CREATE_DEVICE_AND_SWAP_CHAIN1 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsdxgi.IDXGIAdapter, D3D10_DRIVER_TYPE, foundation.HMODULE, uint32, D3D10_FEATURE_LEVEL1, uint32, *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, **graphicsdxgi.IDXGISwapChain, **ID3D10Device1) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D10_CREATE_DEVICE_AND_SWAP_CHAIN1 uintptr

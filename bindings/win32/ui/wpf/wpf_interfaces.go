@@ -5,6 +5,7 @@
 package wpf
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -526,6 +527,14 @@ func (self *IMILBitmapEffectRenderContext) SetInitialTransform(pMatrix *MILMatri
 // GetFinalTransform dispatches through IMILBitmapEffectRenderContext's vtable slot 7.
 func (self *IMILBitmapEffectRenderContext) GetFinalTransform(pMatrix *MILMatrixF) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMatrix)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMILBitmapEffectRenderContext_SetOutputDPI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// SetOutputDPI dispatches through IMILBitmapEffectRenderContext's vtable slot 8.
+func (self *IMILBitmapEffectRenderContext) SetOutputDPI(dblDpiX float64, dblDpiY float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIMILBitmapEffectRenderContext_SetOutputDPI, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(dblDpiX)), uintptr(math.Float64bits(dblDpiY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -13,6 +13,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	storagevirtualdiskservice "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/virtualdiskservice"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
 // IVssAdmin: https://learn.microsoft.com/windows/win32/api/vsadmin/nn-vsadmin-ivssadmin
@@ -23,6 +24,22 @@ type IVssAdmin struct {
 
 // IID_IVssAdmin is the interface identifier for IVssAdmin.
 var IID_IVssAdmin = win32.GUID{Data1: 0x77ed5996, Data2: 0x2f63, Data3: 0x11d3, Data4: [8]byte{0x8a, 0x39, 0x00, 0xc0, 0x4f, 0x72, 0xd8, 0xe3}}
+
+var specIVssAdmin_RegisterProvider = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RegisterProvider dispatches through IVssAdmin's vtable slot 3.
+func (self *IVssAdmin) RegisterProvider(pProviderId win32.GUID, ClassId win32.GUID, pwszProviderName *uint16, eProviderType VSS_PROVIDER_TYPE, pwszProviderVersion *uint16, ProviderVersionId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVssAdmin_RegisterProvider, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pProviderId)), uintptr(unsafe.Pointer(&ClassId)), uintptr(unsafe.Pointer(pwszProviderName)), uintptr(eProviderType), uintptr(unsafe.Pointer(pwszProviderVersion)), uintptr(unsafe.Pointer(&ProviderVersionId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssAdmin_UnregisterProvider = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// UnregisterProvider dispatches through IVssAdmin's vtable slot 4.
+func (self *IVssAdmin) UnregisterProvider(ProviderId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIVssAdmin_UnregisterProvider, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProviderId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // QueryProviders dispatches through IVssAdmin's vtable slot 5.
 func (self *IVssAdmin) QueryProviders(ppEnum **IVssEnumObject) error {
@@ -43,6 +60,30 @@ type IVssAdminEx struct {
 
 // IID_IVssAdminEx is the interface identifier for IVssAdminEx.
 var IID_IVssAdminEx = win32.GUID{Data1: 0x7858a9f8, Data2: 0xb1fa, Data3: 0x41a6, Data4: [8]byte{0x96, 0x4f, 0xb9, 0xb3, 0x6b, 0x8c, 0xd8, 0xd8}}
+
+var specIVssAdminEx_GetProviderCapability = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetProviderCapability dispatches through IVssAdminEx's vtable slot 7.
+func (self *IVssAdminEx) GetProviderCapability(pProviderId win32.GUID, pllOriginalCapabilityMask *uint64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIVssAdminEx_GetProviderCapability, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pProviderId)), uintptr(unsafe.Pointer(pllOriginalCapabilityMask))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssAdminEx_GetProviderContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetProviderContext dispatches through IVssAdminEx's vtable slot 8.
+func (self *IVssAdminEx) GetProviderContext(ProviderId win32.GUID, plContext *int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIVssAdminEx_GetProviderContext, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProviderId)), uintptr(unsafe.Pointer(plContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssAdminEx_SetProviderContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetProviderContext dispatches through IVssAdminEx's vtable slot 9.
+func (self *IVssAdminEx) SetProviderContext(ProviderId win32.GUID, lContext int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIVssAdminEx_SetProviderContext, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProviderId)), uintptr(lContext)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IVssAsync: https://learn.microsoft.com/windows/win32/api/vss/nn-vss-ivssasync
 // IID: 507c37b4-cf5b-4e95-b0af-14eb9767467e
@@ -140,6 +181,16 @@ func (self *IVssBackupComponents) FreeWriterMetadata() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVssBackupComponents_AddComponent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// AddComponent dispatches through IVssBackupComponents's vtable slot 13.
+func (self *IVssBackupComponents) AddComponent(instanceId win32.GUID, writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIVssBackupComponents_AddComponent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&instanceId)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // PrepareForBackup dispatches through IVssBackupComponents's vtable slot 14.
 func (self *IVssBackupComponents) PrepareForBackup(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
@@ -176,6 +227,69 @@ func (self *IVssBackupComponents) GetWriterStatus(iWriter uint32, pidInstance *w
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVssBackupComponents_SetBackupSucceeded = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetBackupSucceeded dispatches through IVssBackupComponents's vtable slot 20.
+func (self *IVssBackupComponents) SetBackupSucceeded(instanceId win32.GUID, writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, bSucceded byte) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIVssBackupComponents_SetBackupSucceeded, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&instanceId)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(bSucceded)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_SetBackupOptions = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetBackupOptions dispatches through IVssBackupComponents's vtable slot 21.
+func (self *IVssBackupComponents) SetBackupOptions(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, wszBackupOptions string) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszBackupOptions := win32.UTF16Ptr(wszBackupOptions)
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIVssBackupComponents_SetBackupOptions, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszBackupOptions))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_SetSelectedForRestore = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetSelectedForRestore dispatches through IVssBackupComponents's vtable slot 22.
+func (self *IVssBackupComponents) SetSelectedForRestore(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, bSelectedForRestore byte) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIVssBackupComponents_SetSelectedForRestore, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(bSelectedForRestore)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_SetRestoreOptions = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetRestoreOptions dispatches through IVssBackupComponents's vtable slot 23.
+func (self *IVssBackupComponents) SetRestoreOptions(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, wszRestoreOptions string) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszRestoreOptions := win32.UTF16Ptr(wszRestoreOptions)
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIVssBackupComponents_SetRestoreOptions, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszRestoreOptions))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_SetAdditionalRestores = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetAdditionalRestores dispatches through IVssBackupComponents's vtable slot 24.
+func (self *IVssBackupComponents) SetAdditionalRestores(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, bAdditionalRestores byte) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIVssBackupComponents_SetAdditionalRestores, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(bAdditionalRestores)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_SetPreviousBackupStamp = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetPreviousBackupStamp dispatches through IVssBackupComponents's vtable slot 25.
+func (self *IVssBackupComponents) SetPreviousBackupStamp(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, wszPreviousBackupStamp string) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszPreviousBackupStamp := win32.UTF16Ptr(wszPreviousBackupStamp)
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIVssBackupComponents_SetPreviousBackupStamp, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszPreviousBackupStamp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SaveAsXML dispatches through IVssBackupComponents's vtable slot 26.
 func (self *IVssBackupComponents) SaveAsXML(pbstrXML *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrXML)))
@@ -185,6 +299,65 @@ func (self *IVssBackupComponents) SaveAsXML(pbstrXML *foundation.BSTR) error {
 // BackupComplete dispatches through IVssBackupComponents's vtable slot 27.
 func (self *IVssBackupComponents) BackupComplete(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_AddAlternativeLocationMapping = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// AddAlternativeLocationMapping dispatches through IVssBackupComponents's vtable slot 28.
+func (self *IVssBackupComponents) AddAlternativeLocationMapping(writerId win32.GUID, componentType VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, wszPath string, wszFilespec string, bRecursive byte, wszDestination string) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFilespec := win32.UTF16Ptr(wszFilespec)
+	_wszDestination := win32.UTF16Ptr(wszDestination)
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIVssBackupComponents_AddAlternativeLocationMapping, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(componentType), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFilespec)), uintptr(bRecursive), uintptr(unsafe.Pointer(_wszDestination))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_AddRestoreSubcomponent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// AddRestoreSubcomponent dispatches through IVssBackupComponents's vtable slot 29.
+func (self *IVssBackupComponents) AddRestoreSubcomponent(writerId win32.GUID, componentType VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, wszSubComponentLogicalPath string, wszSubComponentName string, bRepair byte) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszSubComponentLogicalPath := win32.UTF16Ptr(wszSubComponentLogicalPath)
+	_wszSubComponentName := win32.UTF16Ptr(wszSubComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIVssBackupComponents_AddRestoreSubcomponent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(componentType), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszSubComponentLogicalPath)), uintptr(unsafe.Pointer(_wszSubComponentName)), uintptr(bRepair)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_SetFileRestoreStatus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetFileRestoreStatus dispatches through IVssBackupComponents's vtable slot 30.
+func (self *IVssBackupComponents) SetFileRestoreStatus(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, status VSS_FILE_RESTORE_STATUS) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIVssBackupComponents_SetFileRestoreStatus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(status)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_AddNewTarget = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// AddNewTarget dispatches through IVssBackupComponents's vtable slot 31.
+func (self *IVssBackupComponents) AddNewTarget(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, wszPath string, wszFileName string, bRecursive byte, wszAlternatePath string) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszPath := win32.UTF16Ptr(wszPath)
+	_wszFileName := win32.UTF16Ptr(wszFileName)
+	_wszAlternatePath := win32.UTF16Ptr(wszAlternatePath)
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIVssBackupComponents_AddNewTarget, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszPath)), uintptr(unsafe.Pointer(_wszFileName)), uintptr(bRecursive), uintptr(unsafe.Pointer(_wszAlternatePath))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_SetRangesFilePath = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetRangesFilePath dispatches through IVssBackupComponents's vtable slot 32.
+func (self *IVssBackupComponents) SetRangesFilePath(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, iPartialFile uint32, wszRangesFile string) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszRangesFile := win32.UTF16Ptr(wszRangesFile)
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIVssBackupComponents_SetRangesFilePath, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(iPartialFile), uintptr(unsafe.Pointer(_wszRangesFile))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -212,15 +385,64 @@ func (self *IVssBackupComponents) StartSnapshotSet(pSnapshotSetId *win32.GUID) e
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVssBackupComponents_AddToSnapshotSet = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// AddToSnapshotSet dispatches through IVssBackupComponents's vtable slot 37.
+func (self *IVssBackupComponents) AddToSnapshotSet(pwszVolumeName *uint16, ProviderId win32.GUID, pidSnapshot *win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIVssBackupComponents_AddToSnapshotSet, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(&ProviderId)), uintptr(unsafe.Pointer(pidSnapshot))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // DoSnapshotSet dispatches through IVssBackupComponents's vtable slot 38.
 func (self *IVssBackupComponents) DoSnapshotSet(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVssBackupComponents_DeleteSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DeleteSnapshots dispatches through IVssBackupComponents's vtable slot 39.
+func (self *IVssBackupComponents) DeleteSnapshots(SourceObjectId win32.GUID, eSourceObjectType VSS_OBJECT_TYPE, bForceDelete bool, plDeletedSnapshots *int32, pNondeletedSnapshotID *win32.GUID) error {
+	_bForceDelete := win32.Bool32(bForceDelete)
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIVssBackupComponents_DeleteSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SourceObjectId)), uintptr(eSourceObjectType), uintptr(_bForceDelete), uintptr(unsafe.Pointer(plDeletedSnapshots)), uintptr(unsafe.Pointer(pNondeletedSnapshotID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ImportSnapshots dispatches through IVssBackupComponents's vtable slot 40.
 func (self *IVssBackupComponents) ImportSnapshots(ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_BreakSnapshotSet = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// BreakSnapshotSet dispatches through IVssBackupComponents's vtable slot 41.
+func (self *IVssBackupComponents) BreakSnapshotSet(SnapshotSetId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIVssBackupComponents_BreakSnapshotSet, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_GetSnapshotProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetSnapshotProperties dispatches through IVssBackupComponents's vtable slot 42.
+func (self *IVssBackupComponents) GetSnapshotProperties(SnapshotId win32.GUID, pProp *VSS_SNAPSHOT_PROP) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIVssBackupComponents_GetSnapshotProperties, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(unsafe.Pointer(pProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_Query = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Query dispatches through IVssBackupComponents's vtable slot 43.
+func (self *IVssBackupComponents) Query(QueriedObjectId win32.GUID, eQueriedObjectType VSS_OBJECT_TYPE, eReturnedObjectsType VSS_OBJECT_TYPE, ppEnum **IVssEnumObject) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIVssBackupComponents_Query, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&QueriedObjectId)), uintptr(eQueriedObjectType), uintptr(eReturnedObjectsType), uintptr(unsafe.Pointer(ppEnum))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_IsVolumeSupported = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// IsVolumeSupported dispatches through IVssBackupComponents's vtable slot 44.
+func (self *IVssBackupComponents) IsVolumeSupported(ProviderId win32.GUID, pwszVolumeName *uint16, pbSupportedByThisProvider *foundation.BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIVssBackupComponents_IsVolumeSupported, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProviderId)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSupportedByThisProvider))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -239,6 +461,23 @@ func (self *IVssBackupComponents) EnableWriterClasses(rgWriterClassId *win32.GUI
 // DisableWriterInstances dispatches through IVssBackupComponents's vtable slot 47.
 func (self *IVssBackupComponents) DisableWriterInstances(rgWriterInstanceId *win32.GUID, cInstanceId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rgWriterInstanceId)), uintptr(cInstanceId))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_ExposeSnapshot = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ExposeSnapshot dispatches through IVssBackupComponents's vtable slot 48.
+func (self *IVssBackupComponents) ExposeSnapshot(SnapshotId win32.GUID, wszPathFromRoot *uint16, lAttributes int32, wszExpose *uint16, pwszExposed **uint16) error {
+	r1, _, _ := win32.Call(self.LpVtbl[48], specIVssBackupComponents_ExposeSnapshot, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(unsafe.Pointer(wszPathFromRoot)), uintptr(lAttributes), uintptr(unsafe.Pointer(wszExpose)), uintptr(unsafe.Pointer(pwszExposed))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponents_RevertToSnapshot = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RevertToSnapshot dispatches through IVssBackupComponents's vtable slot 49.
+func (self *IVssBackupComponents) RevertToSnapshot(SnapshotId win32.GUID, bForceDismount bool) error {
+	_bForceDismount := win32.Bool32(bForceDismount)
+	r1, _, _ := win32.Call(self.LpVtbl[49], specIVssBackupComponents_RevertToSnapshot, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(_bForceDismount)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -263,6 +502,16 @@ func (self *IVssBackupComponentsEx) GetWriterMetadataEx(iWriter uint32, pidInsta
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVssBackupComponentsEx_SetSelectedForRestoreEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// SetSelectedForRestoreEx dispatches through IVssBackupComponentsEx's vtable slot 52.
+func (self *IVssBackupComponentsEx) SetSelectedForRestoreEx(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, bSelectedForRestore byte, instanceId win32.GUID) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[52], specIVssBackupComponentsEx_SetSelectedForRestoreEx, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(bSelectedForRestore), uintptr(unsafe.Pointer(&instanceId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IVssBackupComponentsEx2: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivssbackupcomponentsex2
 // IID: acfe2b3a-22c9-4ef8-bd03-2f9ca230084e
 type IVssBackupComponentsEx2 struct {
@@ -271,6 +520,70 @@ type IVssBackupComponentsEx2 struct {
 
 // IID_IVssBackupComponentsEx2 is the interface identifier for IVssBackupComponentsEx2.
 var IID_IVssBackupComponentsEx2 = win32.GUID{Data1: 0xacfe2b3a, Data2: 0x22c9, Data3: 0x4ef8, Data4: [8]byte{0xbd, 0x03, 0x2f, 0x9c, 0xa2, 0x30, 0x08, 0x4e}}
+
+var specIVssBackupComponentsEx2_UnexposeSnapshot = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// UnexposeSnapshot dispatches through IVssBackupComponentsEx2's vtable slot 53.
+func (self *IVssBackupComponentsEx2) UnexposeSnapshot(snapshotId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIVssBackupComponentsEx2_UnexposeSnapshot, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&snapshotId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponentsEx2_SetAuthoritativeRestore = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetAuthoritativeRestore dispatches through IVssBackupComponentsEx2's vtable slot 54.
+func (self *IVssBackupComponentsEx2) SetAuthoritativeRestore(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, bAuth byte) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[54], specIVssBackupComponentsEx2_SetAuthoritativeRestore, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(bAuth)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponentsEx2_SetRollForward = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetRollForward dispatches through IVssBackupComponentsEx2's vtable slot 55.
+func (self *IVssBackupComponentsEx2) SetRollForward(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, rollType VSS_ROLLFORWARD_TYPE, wszRollForwardPoint string) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszRollForwardPoint := win32.UTF16Ptr(wszRollForwardPoint)
+	r1, _, _ := win32.Call(self.LpVtbl[55], specIVssBackupComponentsEx2_SetRollForward, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(rollType), uintptr(unsafe.Pointer(_wszRollForwardPoint))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponentsEx2_SetRestoreName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SetRestoreName dispatches through IVssBackupComponentsEx2's vtable slot 56.
+func (self *IVssBackupComponentsEx2) SetRestoreName(writerId win32.GUID, ct VSS_COMPONENT_TYPE, wszLogicalPath string, wszComponentName string, wszRestoreName string) error {
+	_wszLogicalPath := win32.UTF16Ptr(wszLogicalPath)
+	_wszComponentName := win32.UTF16Ptr(wszComponentName)
+	_wszRestoreName := win32.UTF16Ptr(wszRestoreName)
+	r1, _, _ := win32.Call(self.LpVtbl[56], specIVssBackupComponentsEx2_SetRestoreName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(ct), uintptr(unsafe.Pointer(_wszLogicalPath)), uintptr(unsafe.Pointer(_wszComponentName)), uintptr(unsafe.Pointer(_wszRestoreName))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponentsEx2_BreakSnapshotSetEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// BreakSnapshotSetEx dispatches through IVssBackupComponentsEx2's vtable slot 57.
+func (self *IVssBackupComponentsEx2) BreakSnapshotSetEx(SnapshotSetID win32.GUID, dwBreakFlags uint32, ppAsync **IVssAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[57], specIVssBackupComponentsEx2_BreakSnapshotSetEx, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetID)), uintptr(dwBreakFlags), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponentsEx2_PreFastRecovery = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// PreFastRecovery dispatches through IVssBackupComponentsEx2's vtable slot 58.
+func (self *IVssBackupComponentsEx2) PreFastRecovery(SnapshotSetID win32.GUID, dwPreFastRecoveryFlags uint32, ppAsync **IVssAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIVssBackupComponentsEx2_PreFastRecovery, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetID)), uintptr(dwPreFastRecoveryFlags), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponentsEx2_FastRecovery = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// FastRecovery dispatches through IVssBackupComponentsEx2's vtable slot 59.
+func (self *IVssBackupComponentsEx2) FastRecovery(SnapshotSetID win32.GUID, dwFastRecoveryFlags uint32, ppAsync **IVssAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[59], specIVssBackupComponentsEx2_FastRecovery, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetID)), uintptr(dwFastRecoveryFlags), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IVssBackupComponentsEx3: https://learn.microsoft.com/windows/win32/api/vsbackup/nl-vsbackup-ivssbackupcomponentsex3
 // IID: c191bfbc-b602-4675-8bd1-67d642f529d5
@@ -284,6 +597,14 @@ var IID_IVssBackupComponentsEx3 = win32.GUID{Data1: 0xc191bfbc, Data2: 0xb602, D
 // GetWriterStatusEx dispatches through IVssBackupComponentsEx3's vtable slot 60.
 func (self *IVssBackupComponentsEx3) GetWriterStatusEx(iWriter uint32, pidInstance *win32.GUID, pidWriter *win32.GUID, pbstrWriter *foundation.BSTR, pnStatus *VSS_WRITER_STATE, phrFailureWriter *foundation.HRESULT, phrApplication *foundation.HRESULT, pbstrApplicationMessage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(iWriter), uintptr(unsafe.Pointer(pidInstance)), uintptr(unsafe.Pointer(pidWriter)), uintptr(unsafe.Pointer(pbstrWriter)), uintptr(unsafe.Pointer(pnStatus)), uintptr(unsafe.Pointer(phrFailureWriter)), uintptr(unsafe.Pointer(phrApplication)), uintptr(unsafe.Pointer(pbstrApplicationMessage)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssBackupComponentsEx3_AddSnapshotToRecoverySet = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// AddSnapshotToRecoverySet dispatches through IVssBackupComponentsEx3's vtable slot 61.
+func (self *IVssBackupComponentsEx3) AddSnapshotToRecoverySet(snapshotId win32.GUID, dwFlags uint32, pwszDestinationVolume *uint16) error {
+	r1, _, _ := win32.Call(self.LpVtbl[61], specIVssBackupComponentsEx3_AddSnapshotToRecoverySet, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&snapshotId)), uintptr(dwFlags), uintptr(unsafe.Pointer(pwszDestinationVolume))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -636,8 +957,8 @@ type IVssComponentEx2 struct {
 var IID_IVssComponentEx2 = win32.GUID{Data1: 0x3b5be0f2, Data2: 0x07a9, Data3: 0x4e4b, Data4: [8]byte{0xbd, 0xd3, 0xcf, 0xdc, 0x8e, 0x2c, 0x0d, 0x2d}}
 
 // SetFailure dispatches through IVssComponentEx2's vtable slot 48.
-func (self *IVssComponentEx2) SetFailure(hr foundation.HRESULT, hrApplication foundation.HRESULT, wszApplicationMessage string, dwReserved uint32) error {
-	_wszApplicationMessage := win32.UTF16Ptr(wszApplicationMessage)
+func (self *IVssComponentEx2) SetFailure(hr foundation.HRESULT, hrApplication foundation.HRESULT, wszApplicationMessage *string, dwReserved uint32) error {
+	_wszApplicationMessage := win32.UTF16PtrOrNil(wszApplicationMessage)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(hrApplication), uintptr(unsafe.Pointer(_wszApplicationMessage)), uintptr(dwReserved))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -690,6 +1011,18 @@ func (self *IVssCreateExpressWriterMetadata) SetRestoreMethod(method VSS_RESTORE
 	_wszService := win32.UTF16Ptr(wszService)
 	_wszUserProcedure := win32.UTF16Ptr(wszUserProcedure)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(method), uintptr(unsafe.Pointer(_wszService)), uintptr(unsafe.Pointer(_wszUserProcedure)), uintptr(writerRestore), uintptr(bRebootRequired))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssCreateExpressWriterMetadata_AddComponentDependency = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// AddComponentDependency dispatches through IVssCreateExpressWriterMetadata's vtable slot 7.
+func (self *IVssCreateExpressWriterMetadata) AddComponentDependency(wszForLogicalPath string, wszForComponentName string, onWriterId win32.GUID, wszOnLogicalPath string, wszOnComponentName string) error {
+	_wszForLogicalPath := win32.UTF16Ptr(wszForLogicalPath)
+	_wszForComponentName := win32.UTF16Ptr(wszForComponentName)
+	_wszOnLogicalPath := win32.UTF16Ptr(wszOnLogicalPath)
+	_wszOnComponentName := win32.UTF16Ptr(wszOnComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIVssCreateExpressWriterMetadata_AddComponentDependency, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszForLogicalPath)), uintptr(unsafe.Pointer(_wszForComponentName)), uintptr(unsafe.Pointer(&onWriterId)), uintptr(unsafe.Pointer(_wszOnLogicalPath)), uintptr(unsafe.Pointer(_wszOnComponentName))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -784,6 +1117,18 @@ func (self *IVssCreateWriterMetadata) AddAlternateLocationMapping(wszSourcePath 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVssCreateWriterMetadata_AddComponentDependency = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// AddComponentDependency dispatches through IVssCreateWriterMetadata's vtable slot 8.
+func (self *IVssCreateWriterMetadata) AddComponentDependency(wszForLogicalPath string, wszForComponentName string, onWriterId win32.GUID, wszOnLogicalPath string, wszOnComponentName string) error {
+	_wszForLogicalPath := win32.UTF16Ptr(wszForLogicalPath)
+	_wszForComponentName := win32.UTF16Ptr(wszForComponentName)
+	_wszOnLogicalPath := win32.UTF16Ptr(wszOnLogicalPath)
+	_wszOnComponentName := win32.UTF16Ptr(wszOnComponentName)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIVssCreateWriterMetadata_AddComponentDependency, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszForLogicalPath)), uintptr(unsafe.Pointer(_wszForComponentName)), uintptr(unsafe.Pointer(&onWriterId)), uintptr(unsafe.Pointer(_wszOnLogicalPath)), uintptr(unsafe.Pointer(_wszOnComponentName))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetBackupSchema dispatches through IVssCreateWriterMetadata's vtable slot 9.
 func (self *IVssCreateWriterMetadata) SetBackupSchema(dwSchemaMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwSchemaMask))
@@ -841,6 +1186,14 @@ func (self *IVssDifferentialSoftwareSnapshotMgmt) QueryDiffAreasOnVolume(pwszVol
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVssDifferentialSoftwareSnapshotMgmt_QueryDiffAreasForSnapshot = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// QueryDiffAreasForSnapshot dispatches through IVssDifferentialSoftwareSnapshotMgmt's vtable slot 8.
+func (self *IVssDifferentialSoftwareSnapshotMgmt) QueryDiffAreasForSnapshot(SnapshotId win32.GUID, ppEnum **IVssEnumMgmtObject) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIVssDifferentialSoftwareSnapshotMgmt_QueryDiffAreasForSnapshot, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(unsafe.Pointer(ppEnum))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IVssDifferentialSoftwareSnapshotMgmt2: https://learn.microsoft.com/windows/win32/api/vsmgmt/nn-vsmgmt-ivssdifferentialsoftwaresnapshotmgmt2
 // IID: 949d7353-675f-4275-8969-f044c6277815
 type IVssDifferentialSoftwareSnapshotMgmt2 struct {
@@ -866,6 +1219,14 @@ func (self *IVssDifferentialSoftwareSnapshotMgmt2) MigrateDiffAreas(pwszVolumeNa
 // QueryMigrationStatus dispatches through IVssDifferentialSoftwareSnapshotMgmt2's vtable slot 11.
 func (self *IVssDifferentialSoftwareSnapshotMgmt2) QueryMigrationStatus(pwszVolumeName *uint16, pwszDiffAreaVolumeName *uint16, ppAsync **IVssAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pwszDiffAreaVolumeName)), uintptr(unsafe.Pointer(ppAsync)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssDifferentialSoftwareSnapshotMgmt2_SetSnapshotPriority = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetSnapshotPriority dispatches through IVssDifferentialSoftwareSnapshotMgmt2's vtable slot 12.
+func (self *IVssDifferentialSoftwareSnapshotMgmt2) SetSnapshotPriority(idSnapshot win32.GUID, priority byte) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIVssDifferentialSoftwareSnapshotMgmt2_SetSnapshotPriority, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&idSnapshot)), uintptr(priority)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -899,6 +1260,14 @@ func (self *IVssDifferentialSoftwareSnapshotMgmt3) ClearVolumeProtectFault(pwszV
 // DeleteUnusedDiffAreas dispatches through IVssDifferentialSoftwareSnapshotMgmt3's vtable slot 16.
 func (self *IVssDifferentialSoftwareSnapshotMgmt3) DeleteUnusedDiffAreas(pwszDiffAreaVolumeName *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszDiffAreaVolumeName)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssDifferentialSoftwareSnapshotMgmt3_QuerySnapshotDeltaBitmap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// QuerySnapshotDeltaBitmap dispatches through IVssDifferentialSoftwareSnapshotMgmt3's vtable slot 17.
+func (self *IVssDifferentialSoftwareSnapshotMgmt3) QuerySnapshotDeltaBitmap(idSnapshotOlder win32.GUID, idSnapshotYounger win32.GUID, pcBlockSizePerBit *uint32, pcBitmapLength *uint32, ppbBitmap **byte) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIVssDifferentialSoftwareSnapshotMgmt3_QuerySnapshotDeltaBitmap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&idSnapshotOlder)), uintptr(unsafe.Pointer(&idSnapshotYounger)), uintptr(unsafe.Pointer(pcBlockSizePerBit)), uintptr(unsafe.Pointer(pcBitmapLength)), uintptr(unsafe.Pointer(ppbBitmap))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1102,6 +1471,15 @@ type IVssExpressWriter struct {
 // IID_IVssExpressWriter is the interface identifier for IVssExpressWriter.
 var IID_IVssExpressWriter = win32.GUID{Data1: 0xe33affdc, Data2: 0x59c7, Data3: 0x47b1, Data4: [8]byte{0x97, 0xd5, 0x42, 0x66, 0x59, 0x8f, 0x62, 0x35}}
 
+var specIVssExpressWriter_CreateMetadata = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// CreateMetadata dispatches through IVssExpressWriter's vtable slot 3.
+func (self *IVssExpressWriter) CreateMetadata(writerId win32.GUID, writerName string, usageType VSS_USAGE_TYPE, versionMajor uint32, versionMinor uint32, reserved uint32, ppMetadata **IVssCreateExpressWriterMetadata) error {
+	_writerName := win32.UTF16Ptr(writerName)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVssExpressWriter_CreateMetadata, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId)), uintptr(unsafe.Pointer(_writerName)), uintptr(usageType), uintptr(versionMajor), uintptr(versionMinor), uintptr(reserved), uintptr(unsafe.Pointer(ppMetadata))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // LoadMetadata dispatches through IVssExpressWriter's vtable slot 4.
 func (self *IVssExpressWriter) LoadMetadata(metadata string, reserved uint32) error {
 	_metadata := win32.UTF16Ptr(metadata)
@@ -1112,6 +1490,14 @@ func (self *IVssExpressWriter) LoadMetadata(metadata string, reserved uint32) er
 // Register dispatches through IVssExpressWriter's vtable slot 5.
 func (self *IVssExpressWriter) Register() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssExpressWriter_Unregister = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Unregister dispatches through IVssExpressWriter's vtable slot 6.
+func (self *IVssExpressWriter) Unregister(writerId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIVssExpressWriter_Unregister, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&writerId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1130,6 +1516,39 @@ func (self *IVssFileShareSnapshotProvider) SetContext(lContext int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVssFileShareSnapshotProvider_GetSnapshotProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetSnapshotProperties dispatches through IVssFileShareSnapshotProvider's vtable slot 4.
+func (self *IVssFileShareSnapshotProvider) GetSnapshotProperties(SnapshotId win32.GUID, pProp *VSS_SNAPSHOT_PROP) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIVssFileShareSnapshotProvider_GetSnapshotProperties, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(unsafe.Pointer(pProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssFileShareSnapshotProvider_Query = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Query dispatches through IVssFileShareSnapshotProvider's vtable slot 5.
+func (self *IVssFileShareSnapshotProvider) Query(QueriedObjectId win32.GUID, eQueriedObjectType VSS_OBJECT_TYPE, eReturnedObjectsType VSS_OBJECT_TYPE, ppEnum **IVssEnumObject) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIVssFileShareSnapshotProvider_Query, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&QueriedObjectId)), uintptr(eQueriedObjectType), uintptr(eReturnedObjectsType), uintptr(unsafe.Pointer(ppEnum))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssFileShareSnapshotProvider_DeleteSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DeleteSnapshots dispatches through IVssFileShareSnapshotProvider's vtable slot 6.
+func (self *IVssFileShareSnapshotProvider) DeleteSnapshots(SourceObjectId win32.GUID, eSourceObjectType VSS_OBJECT_TYPE, bForceDelete bool, plDeletedSnapshots *int32, pNondeletedSnapshotID *win32.GUID) error {
+	_bForceDelete := win32.Bool32(bForceDelete)
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIVssFileShareSnapshotProvider_DeleteSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SourceObjectId)), uintptr(eSourceObjectType), uintptr(_bForceDelete), uintptr(unsafe.Pointer(plDeletedSnapshots)), uintptr(unsafe.Pointer(pNondeletedSnapshotID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssFileShareSnapshotProvider_BeginPrepareSnapshot = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// BeginPrepareSnapshot dispatches through IVssFileShareSnapshotProvider's vtable slot 7.
+func (self *IVssFileShareSnapshotProvider) BeginPrepareSnapshot(SnapshotSetId win32.GUID, SnapshotId win32.GUID, pwszSharePath *uint16, lNewContext int32, ProviderId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIVssFileShareSnapshotProvider_BeginPrepareSnapshot, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(unsafe.Pointer(pwszSharePath)), uintptr(lNewContext), uintptr(unsafe.Pointer(&ProviderId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IsPathSupported dispatches through IVssFileShareSnapshotProvider's vtable slot 8.
 func (self *IVssFileShareSnapshotProvider) IsPathSupported(pwszSharePath *uint16, pbSupportedByThisProvider *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSharePath)), uintptr(unsafe.Pointer(pbSupportedByThisProvider)))
@@ -1139,6 +1558,14 @@ func (self *IVssFileShareSnapshotProvider) IsPathSupported(pwszSharePath *uint16
 // IsPathSnapshotted dispatches through IVssFileShareSnapshotProvider's vtable slot 9.
 func (self *IVssFileShareSnapshotProvider) IsPathSnapshotted(pwszSharePath *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCompatibility *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSharePath)), uintptr(unsafe.Pointer(pbSnapshotsPresent)), uintptr(unsafe.Pointer(plSnapshotCompatibility)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssFileShareSnapshotProvider_SetSnapshotProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetSnapshotProperty dispatches through IVssFileShareSnapshotProvider's vtable slot 10.
+func (self *IVssFileShareSnapshotProvider) SetSnapshotProperty(SnapshotId win32.GUID, eSnapshotPropertyId VSS_SNAPSHOT_PROPERTY_ID, vProperty systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIVssFileShareSnapshotProvider_SetSnapshotProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(eSnapshotPropertyId), uintptr(unsafe.Pointer(&vProperty))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1160,6 +1587,14 @@ func (self *IVssHardwareSnapshotProvider) AreLunsSupported(lLunCount int32, lCon
 // FillInLunInfo dispatches through IVssHardwareSnapshotProvider's vtable slot 4.
 func (self *IVssHardwareSnapshotProvider) FillInLunInfo(wszDeviceName *uint16, pLunInfo *storagevirtualdiskservice.VDS_LUN_INFORMATION, pbIsSupported *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszDeviceName)), uintptr(unsafe.Pointer(pLunInfo)), uintptr(unsafe.Pointer(pbIsSupported)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssHardwareSnapshotProvider_BeginPrepareSnapshot = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// BeginPrepareSnapshot dispatches through IVssHardwareSnapshotProvider's vtable slot 5.
+func (self *IVssHardwareSnapshotProvider) BeginPrepareSnapshot(SnapshotSetId win32.GUID, SnapshotId win32.GUID, lContext int32, lLunCount int32, rgDeviceNames **uint16, rgLunInformation *storagevirtualdiskservice.VDS_LUN_INFORMATION) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIVssHardwareSnapshotProvider_BeginPrepareSnapshot, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(lContext), uintptr(lLunCount), uintptr(unsafe.Pointer(rgDeviceNames)), uintptr(unsafe.Pointer(rgLunInformation))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1227,6 +1662,62 @@ type IVssProviderCreateSnapshotSet struct {
 // IID_IVssProviderCreateSnapshotSet is the interface identifier for IVssProviderCreateSnapshotSet.
 var IID_IVssProviderCreateSnapshotSet = win32.GUID{Data1: 0x5f894e5b, Data2: 0x1e39, Data3: 0x4778, Data4: [8]byte{0x8e, 0x23, 0x9a, 0xba, 0xd9, 0xf0, 0xe0, 0x8c}}
 
+var specIVssProviderCreateSnapshotSet_EndPrepareSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// EndPrepareSnapshots dispatches through IVssProviderCreateSnapshotSet's vtable slot 3.
+func (self *IVssProviderCreateSnapshotSet) EndPrepareSnapshots(SnapshotSetId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVssProviderCreateSnapshotSet_EndPrepareSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssProviderCreateSnapshotSet_PreCommitSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PreCommitSnapshots dispatches through IVssProviderCreateSnapshotSet's vtable slot 4.
+func (self *IVssProviderCreateSnapshotSet) PreCommitSnapshots(SnapshotSetId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIVssProviderCreateSnapshotSet_PreCommitSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssProviderCreateSnapshotSet_CommitSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// CommitSnapshots dispatches through IVssProviderCreateSnapshotSet's vtable slot 5.
+func (self *IVssProviderCreateSnapshotSet) CommitSnapshots(SnapshotSetId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIVssProviderCreateSnapshotSet_CommitSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssProviderCreateSnapshotSet_PostCommitSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// PostCommitSnapshots dispatches through IVssProviderCreateSnapshotSet's vtable slot 6.
+func (self *IVssProviderCreateSnapshotSet) PostCommitSnapshots(SnapshotSetId win32.GUID, lSnapshotsCount int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIVssProviderCreateSnapshotSet_PostCommitSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId)), uintptr(lSnapshotsCount)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssProviderCreateSnapshotSet_PreFinalCommitSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PreFinalCommitSnapshots dispatches through IVssProviderCreateSnapshotSet's vtable slot 7.
+func (self *IVssProviderCreateSnapshotSet) PreFinalCommitSnapshots(SnapshotSetId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIVssProviderCreateSnapshotSet_PreFinalCommitSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssProviderCreateSnapshotSet_PostFinalCommitSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// PostFinalCommitSnapshots dispatches through IVssProviderCreateSnapshotSet's vtable slot 8.
+func (self *IVssProviderCreateSnapshotSet) PostFinalCommitSnapshots(SnapshotSetId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIVssProviderCreateSnapshotSet_PostFinalCommitSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssProviderCreateSnapshotSet_AbortSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// AbortSnapshots dispatches through IVssProviderCreateSnapshotSet's vtable slot 9.
+func (self *IVssProviderCreateSnapshotSet) AbortSnapshots(SnapshotSetId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIVssProviderCreateSnapshotSet_AbortSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IVssProviderNotifications: https://learn.microsoft.com/windows/win32/api/vsprov/nn-vsprov-ivssprovidernotifications
 // IID: e561901f-03a5-4afe-86d0-72baeece7004
 type IVssProviderNotifications struct {
@@ -1258,6 +1749,30 @@ type IVssSnapshotMgmt struct {
 // IID_IVssSnapshotMgmt is the interface identifier for IVssSnapshotMgmt.
 var IID_IVssSnapshotMgmt = win32.GUID{Data1: 0xfa7df749, Data2: 0x66e7, Data3: 0x4986, Data4: [8]byte{0xa2, 0x7f, 0xe2, 0xf0, 0x4a, 0xe5, 0x37, 0x72}}
 
+var specIVssSnapshotMgmt_GetProviderMgmtInterface = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetProviderMgmtInterface dispatches through IVssSnapshotMgmt's vtable slot 3.
+func (self *IVssSnapshotMgmt) GetProviderMgmtInterface(ProviderId win32.GUID, InterfaceId *win32.GUID, ppItf **systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVssSnapshotMgmt_GetProviderMgmtInterface, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProviderId)), uintptr(unsafe.Pointer(InterfaceId)), uintptr(unsafe.Pointer(ppItf))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssSnapshotMgmt_QueryVolumesSupportedForSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// QueryVolumesSupportedForSnapshots dispatches through IVssSnapshotMgmt's vtable slot 4.
+func (self *IVssSnapshotMgmt) QueryVolumesSupportedForSnapshots(ProviderId win32.GUID, lContext int32, ppEnum **IVssEnumMgmtObject) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIVssSnapshotMgmt_QueryVolumesSupportedForSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ProviderId)), uintptr(lContext), uintptr(unsafe.Pointer(ppEnum))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssSnapshotMgmt_QuerySnapshotsByVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// QuerySnapshotsByVolume dispatches through IVssSnapshotMgmt's vtable slot 5.
+func (self *IVssSnapshotMgmt) QuerySnapshotsByVolume(pwszVolumeName *uint16, ProviderId win32.GUID, ppEnum **IVssEnumObject) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIVssSnapshotMgmt_QuerySnapshotsByVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(&ProviderId)), uintptr(unsafe.Pointer(ppEnum))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IVssSnapshotMgmt2: https://learn.microsoft.com/windows/win32/api/vsmgmt/nn-vsmgmt-ivsssnapshotmgmt2
 // IID: 0f61ec39-fe82-45f2-a3f0-768b5d427102
 type IVssSnapshotMgmt2 struct {
@@ -1288,6 +1803,39 @@ func (self *IVssSoftwareSnapshotProvider) SetContext(lContext int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVssSoftwareSnapshotProvider_GetSnapshotProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetSnapshotProperties dispatches through IVssSoftwareSnapshotProvider's vtable slot 4.
+func (self *IVssSoftwareSnapshotProvider) GetSnapshotProperties(SnapshotId win32.GUID, pProp *VSS_SNAPSHOT_PROP) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIVssSoftwareSnapshotProvider_GetSnapshotProperties, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(unsafe.Pointer(pProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssSoftwareSnapshotProvider_Query = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Query dispatches through IVssSoftwareSnapshotProvider's vtable slot 5.
+func (self *IVssSoftwareSnapshotProvider) Query(QueriedObjectId win32.GUID, eQueriedObjectType VSS_OBJECT_TYPE, eReturnedObjectsType VSS_OBJECT_TYPE, ppEnum **IVssEnumObject) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIVssSoftwareSnapshotProvider_Query, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&QueriedObjectId)), uintptr(eQueriedObjectType), uintptr(eReturnedObjectsType), uintptr(unsafe.Pointer(ppEnum))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssSoftwareSnapshotProvider_DeleteSnapshots = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DeleteSnapshots dispatches through IVssSoftwareSnapshotProvider's vtable slot 6.
+func (self *IVssSoftwareSnapshotProvider) DeleteSnapshots(SourceObjectId win32.GUID, eSourceObjectType VSS_OBJECT_TYPE, bForceDelete bool, plDeletedSnapshots *int32, pNondeletedSnapshotID *win32.GUID) error {
+	_bForceDelete := win32.Bool32(bForceDelete)
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIVssSoftwareSnapshotProvider_DeleteSnapshots, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SourceObjectId)), uintptr(eSourceObjectType), uintptr(_bForceDelete), uintptr(unsafe.Pointer(plDeletedSnapshots)), uintptr(unsafe.Pointer(pNondeletedSnapshotID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssSoftwareSnapshotProvider_BeginPrepareSnapshot = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// BeginPrepareSnapshot dispatches through IVssSoftwareSnapshotProvider's vtable slot 7.
+func (self *IVssSoftwareSnapshotProvider) BeginPrepareSnapshot(SnapshotSetId win32.GUID, SnapshotId win32.GUID, pwszVolumeName *uint16, lNewContext int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIVssSoftwareSnapshotProvider_BeginPrepareSnapshot, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotSetId)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(lNewContext)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IsVolumeSupported dispatches through IVssSoftwareSnapshotProvider's vtable slot 8.
 func (self *IVssSoftwareSnapshotProvider) IsVolumeSupported(pwszVolumeName *uint16, pbSupportedByThisProvider *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSupportedByThisProvider)))
@@ -1297,6 +1845,22 @@ func (self *IVssSoftwareSnapshotProvider) IsVolumeSupported(pwszVolumeName *uint
 // IsVolumeSnapshotted dispatches through IVssSoftwareSnapshotProvider's vtable slot 9.
 func (self *IVssSoftwareSnapshotProvider) IsVolumeSnapshotted(pwszVolumeName *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCompatibility *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSnapshotsPresent)), uintptr(unsafe.Pointer(plSnapshotCompatibility)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssSoftwareSnapshotProvider_SetSnapshotProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetSnapshotProperty dispatches through IVssSoftwareSnapshotProvider's vtable slot 10.
+func (self *IVssSoftwareSnapshotProvider) SetSnapshotProperty(SnapshotId win32.GUID, eSnapshotPropertyId VSS_SNAPSHOT_PROPERTY_ID, vProperty systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIVssSoftwareSnapshotProvider_SetSnapshotProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotId)), uintptr(eSnapshotPropertyId), uintptr(unsafe.Pointer(&vProperty))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVssSoftwareSnapshotProvider_RevertToSnapshot = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RevertToSnapshot dispatches through IVssSoftwareSnapshotProvider's vtable slot 11.
+func (self *IVssSoftwareSnapshotProvider) RevertToSnapshot(SnapshotId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIVssSoftwareSnapshotProvider_RevertToSnapshot, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&SnapshotId))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

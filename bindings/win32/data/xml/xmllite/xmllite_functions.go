@@ -25,6 +25,26 @@ var (
 	procCreateXmlWriterOutputWithEncodingName     = modXmlLite.NewProc("CreateXmlWriterOutputWithEncodingName")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateXmlReader                           *win32.Proc
+	CreateXmlReaderInputWithEncodingCodePage  *win32.Proc
+	CreateXmlReaderInputWithEncodingName      *win32.Proc
+	CreateXmlWriter                           *win32.Proc
+	CreateXmlWriterOutputWithEncodingCodePage *win32.Proc
+	CreateXmlWriterOutputWithEncodingName     *win32.Proc
+}{
+	CreateXmlReader:                           procCreateXmlReader,
+	CreateXmlReaderInputWithEncodingCodePage:  procCreateXmlReaderInputWithEncodingCodePage,
+	CreateXmlReaderInputWithEncodingName:      procCreateXmlReaderInputWithEncodingName,
+	CreateXmlWriter:                           procCreateXmlWriter,
+	CreateXmlWriterOutputWithEncodingCodePage: procCreateXmlWriterOutputWithEncodingCodePage,
+	CreateXmlWriterOutputWithEncodingName:     procCreateXmlWriterOutputWithEncodingName,
+}
+
 // CreateXmlReader calls XmlLite!CreateXmlReader.
 func CreateXmlReader(riid *win32.GUID, ppvObject **win32.IUnknown, pMalloc *systemcom.IMalloc) error {
 	r1, _, _ := syscall.SyscallN(procCreateXmlReader.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(pMalloc)))
@@ -32,18 +52,18 @@ func CreateXmlReader(riid *win32.GUID, ppvObject **win32.IUnknown, pMalloc *syst
 }
 
 // CreateXmlReaderInputWithEncodingCodePage calls XmlLite!CreateXmlReaderInputWithEncodingCodePage.
-func CreateXmlReaderInputWithEncodingCodePage(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, nEncodingCodePage uint32, fEncodingHint bool, pwszBaseUri string, ppInput **systemcom.IUnknown) error {
+func CreateXmlReaderInputWithEncodingCodePage(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, nEncodingCodePage uint32, fEncodingHint bool, pwszBaseUri *string, ppInput **systemcom.IUnknown) error {
 	_fEncodingHint := win32.Bool32(fEncodingHint)
-	_pwszBaseUri := win32.UTF16Ptr(pwszBaseUri)
+	_pwszBaseUri := win32.UTF16PtrOrNil(pwszBaseUri)
 	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingCodePage.Addr(), uintptr(unsafe.Pointer(pInputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(nEncodingCodePage), uintptr(_fEncodingHint), uintptr(unsafe.Pointer(_pwszBaseUri)), uintptr(unsafe.Pointer(ppInput)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreateXmlReaderInputWithEncodingName calls XmlLite!CreateXmlReaderInputWithEncodingName.
-func CreateXmlReaderInputWithEncodingName(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, pwszEncodingName string, fEncodingHint bool, pwszBaseUri string, ppInput **systemcom.IUnknown) error {
+func CreateXmlReaderInputWithEncodingName(pInputStream *systemcom.IUnknown, pMalloc *systemcom.IMalloc, pwszEncodingName string, fEncodingHint bool, pwszBaseUri *string, ppInput **systemcom.IUnknown) error {
 	_pwszEncodingName := win32.UTF16Ptr(pwszEncodingName)
 	_fEncodingHint := win32.Bool32(fEncodingHint)
-	_pwszBaseUri := win32.UTF16Ptr(pwszBaseUri)
+	_pwszBaseUri := win32.UTF16PtrOrNil(pwszBaseUri)
 	r1, _, _ := syscall.SyscallN(procCreateXmlReaderInputWithEncodingName.Addr(), uintptr(unsafe.Pointer(pInputStream)), uintptr(unsafe.Pointer(pMalloc)), uintptr(unsafe.Pointer(_pwszEncodingName)), uintptr(_fEncodingHint), uintptr(unsafe.Pointer(_pwszBaseUri)), uintptr(unsafe.Pointer(ppInput)))
 	return win32.ErrIfFailed(int32(r1))
 }

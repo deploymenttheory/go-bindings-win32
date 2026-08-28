@@ -4,6 +4,6 @@
 
 package windowsconnectionmanager
 
-// ONDEMAND_NOTIFICATION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// ONDEMAND_NOTIFICATION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type ONDEMAND_NOTIFICATION_CALLBACK uintptr

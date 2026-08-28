@@ -4,30 +4,35 @@
 
 package remotedesktop
 
-// PCHANNEL_INIT_EVENT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, unsafe.Pointer, uint32).
+// PCHANNEL_INIT_EVENT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, unsafe.Pointer, uint32) uintptr.
 type PCHANNEL_INIT_EVENT_FN uintptr
 
-// PCHANNEL_OPEN_EVENT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, unsafe.Pointer, uint32, uint32, uint32).
+// PCHANNEL_OPEN_EVENT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, unsafe.Pointer, uint32, uint32, uint32) uintptr.
 type PCHANNEL_OPEN_EVENT_FN uintptr
 
-// PVIRTUALCHANNELCLOSE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) uint32.
+// PVIRTUALCHANNELCLOSE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PVIRTUALCHANNELCLOSE uintptr
 
-// PVIRTUALCHANNELENTRY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CHANNEL_ENTRY_POINTS) foundation.BOOL.
+// PVIRTUALCHANNELENTRY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CHANNEL_ENTRY_POINTS) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PVIRTUALCHANNELENTRY uintptr
 
-// PVIRTUALCHANNELINIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, *CHANNEL_DEF, int32, uint32, PCHANNEL_INIT_EVENT_FN) uint32.
+// PVIRTUALCHANNELINIT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, *CHANNEL_DEF, int32, uint32, PCHANNEL_INIT_EVENT_FN) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PVIRTUALCHANNELINIT uintptr
 
-// PVIRTUALCHANNELOPEN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *uint32, foundation.PSTR, PCHANNEL_OPEN_EVENT_FN) uint32.
+// PVIRTUALCHANNELOPEN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *uint32, foundation.PSTR, PCHANNEL_OPEN_EVENT_FN) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PVIRTUALCHANNELOPEN uintptr
 
-// PVIRTUALCHANNELWRITE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer, uint32, unsafe.Pointer) uint32.
+// PVIRTUALCHANNELWRITE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer, uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PVIRTUALCHANNELWRITE uintptr

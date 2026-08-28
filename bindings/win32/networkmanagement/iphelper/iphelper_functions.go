@@ -99,6 +99,7 @@ var (
 	procGetIfTable2Ex                              = modIPHLPAPI.NewProc("GetIfTable2Ex")
 	procGetInterfaceActiveTimestampCapabilities    = modIPHLPAPI.NewProc("GetInterfaceActiveTimestampCapabilities")
 	procGetInterfaceCurrentTimestampCapabilities   = modIPHLPAPI.NewProc("GetInterfaceCurrentTimestampCapabilities")
+	procGetInterfaceDnsSettings                    = modIPHLPAPI.NewProc("GetInterfaceDnsSettings")
 	procGetInterfaceHardwareTimestampCapabilities  = modIPHLPAPI.NewProc("GetInterfaceHardwareTimestampCapabilities")
 	procGetInterfaceInfo                           = modIPHLPAPI.NewProc("GetInterfaceInfo")
 	procGetInterfaceSupportedTimestampCapabilities = modIPHLPAPI.NewProc("GetInterfaceSupportedTimestampCapabilities")
@@ -208,6 +209,7 @@ var (
 	procSetDnsSettings                             = modIPHLPAPI.NewProc("SetDnsSettings")
 	procSetFlVirtualInterface                      = modIPHLPAPI.NewProc("SetFlVirtualInterface")
 	procSetIfEntry                                 = modIPHLPAPI.NewProc("SetIfEntry")
+	procSetInterfaceDnsSettings                    = modIPHLPAPI.NewProc("SetInterfaceDnsSettings")
 	procSetIpForwardEntry                          = modIPHLPAPI.NewProc("SetIpForwardEntry")
 	procSetIpForwardEntry2                         = modIPHLPAPI.NewProc("SetIpForwardEntry2")
 	procSetIpInterfaceEntry                        = modIPHLPAPI.NewProc("SetIpInterfaceEntry")
@@ -226,6 +228,428 @@ var (
 	procUnenableRouter                             = modIPHLPAPI.NewProc("UnenableRouter")
 	procUnregisterInterfaceTimestampConfigChange   = modIPHLPAPI.NewProc("UnregisterInterfaceTimestampConfigChange")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddIPAddress                               *win32.Proc
+	CancelIPChangeNotify                       *win32.Proc
+	CancelIfTimestampConfigChange              *win32.Proc
+	CancelMibChangeNotify2                     *win32.Proc
+	CaptureInterfaceHardwareCrossTimestamp     *win32.Proc
+	ConvertCompartmentGuidToId                 *win32.Proc
+	ConvertCompartmentIdToGuid                 *win32.Proc
+	ConvertInterfaceAliasToLuid                *win32.Proc
+	ConvertInterfaceGuidToLuid                 *win32.Proc
+	ConvertInterfaceIndexToLuid                *win32.Proc
+	ConvertInterfaceLuidToAlias                *win32.Proc
+	ConvertInterfaceLuidToGuid                 *win32.Proc
+	ConvertInterfaceLuidToIndex                *win32.Proc
+	ConvertInterfaceLuidToName                 *win32.Proc
+	ConvertInterfaceLuidToNameA                *win32.Proc
+	ConvertInterfaceNameToLuid                 *win32.Proc
+	ConvertInterfaceNameToLuidA                *win32.Proc
+	ConvertIpv4MaskToLength                    *win32.Proc
+	ConvertLengthToIpv4Mask                    *win32.Proc
+	CreateAnycastIpAddressEntry                *win32.Proc
+	CreateFlVirtualInterface                   *win32.Proc
+	CreateIpForwardEntry                       *win32.Proc
+	CreateIpForwardEntry2                      *win32.Proc
+	CreateIpNetEntry                           *win32.Proc
+	CreateIpNetEntry2                          *win32.Proc
+	CreatePersistentTcpPortReservation         *win32.Proc
+	CreatePersistentUdpPortReservation         *win32.Proc
+	CreateProxyArpEntry                        *win32.Proc
+	CreateSortedAddressPairs                   *win32.Proc
+	CreateUnicastIpAddressEntry                *win32.Proc
+	DeleteAnycastIpAddressEntry                *win32.Proc
+	DeleteFlVirtualInterface                   *win32.Proc
+	DeleteIPAddress                            *win32.Proc
+	DeleteIpForwardEntry                       *win32.Proc
+	DeleteIpForwardEntry2                      *win32.Proc
+	DeleteIpNetEntry                           *win32.Proc
+	DeleteIpNetEntry2                          *win32.Proc
+	DeletePersistentTcpPortReservation         *win32.Proc
+	DeletePersistentUdpPortReservation         *win32.Proc
+	DeleteProxyArpEntry                        *win32.Proc
+	DeleteUnicastIpAddressEntry                *win32.Proc
+	DisableMediaSense                          *win32.Proc
+	EnableRouter                               *win32.Proc
+	FlushIpNetTable                            *win32.Proc
+	FlushIpNetTable2                           *win32.Proc
+	FlushIpPathTable                           *win32.Proc
+	FreeDnsSettings                            *win32.Proc
+	FreeInterfaceDnsSettings                   *win32.Proc
+	FreeMibTable                               *win32.Proc
+	GetAdapterIndex                            *win32.Proc
+	GetAdapterOrderMap                         *win32.Proc
+	GetAdaptersAddresses                       *win32.Proc
+	GetAdaptersInfo                            *win32.Proc
+	GetAnycastIpAddressEntry                   *win32.Proc
+	GetAnycastIpAddressTable                   *win32.Proc
+	GetBestInterface                           *win32.Proc
+	GetBestInterfaceEx                         *win32.Proc
+	GetBestRoute                               *win32.Proc
+	GetBestRoute2                              *win32.Proc
+	GetCurrentThreadCompartmentId              *win32.Proc
+	GetCurrentThreadCompartmentScope           *win32.Proc
+	GetDefaultCompartmentId                    *win32.Proc
+	GetDnsSettings                             *win32.Proc
+	GetExtendedTcpTable                        *win32.Proc
+	GetExtendedUdpTable                        *win32.Proc
+	GetFlVirtualInterface                      *win32.Proc
+	GetFlVirtualInterfaceTable                 *win32.Proc
+	GetFriendlyIfIndex                         *win32.Proc
+	GetIcmpStatistics                          *win32.Proc
+	GetIcmpStatisticsEx                        *win32.Proc
+	GetIfEntry                                 *win32.Proc
+	GetIfEntry2                                *win32.Proc
+	GetIfEntry2Ex                              *win32.Proc
+	GetIfStackTable                            *win32.Proc
+	GetIfTable                                 *win32.Proc
+	GetIfTable2                                *win32.Proc
+	GetIfTable2Ex                              *win32.Proc
+	GetInterfaceActiveTimestampCapabilities    *win32.Proc
+	GetInterfaceCurrentTimestampCapabilities   *win32.Proc
+	GetInterfaceDnsSettings                    *win32.Proc
+	GetInterfaceHardwareTimestampCapabilities  *win32.Proc
+	GetInterfaceInfo                           *win32.Proc
+	GetInterfaceSupportedTimestampCapabilities *win32.Proc
+	GetInvertedIfStackTable                    *win32.Proc
+	GetIpAddrTable                             *win32.Proc
+	GetIpErrorString                           *win32.Proc
+	GetIpForwardEntry2                         *win32.Proc
+	GetIpForwardTable                          *win32.Proc
+	GetIpForwardTable2                         *win32.Proc
+	GetIpInterfaceEntry                        *win32.Proc
+	GetIpInterfaceTable                        *win32.Proc
+	GetIpNetEntry2                             *win32.Proc
+	GetIpNetTable                              *win32.Proc
+	GetIpNetTable2                             *win32.Proc
+	GetIpNetworkConnectionBandwidthEstimates   *win32.Proc
+	GetIpPathEntry                             *win32.Proc
+	GetIpPathTable                             *win32.Proc
+	GetIpStatistics                            *win32.Proc
+	GetIpStatisticsEx                          *win32.Proc
+	GetJobCompartmentId                        *win32.Proc
+	GetMulticastIpAddressEntry                 *win32.Proc
+	GetMulticastIpAddressTable                 *win32.Proc
+	GetNetworkConnectivityHint                 *win32.Proc
+	GetNetworkConnectivityHintForInterface     *win32.Proc
+	GetNetworkInformation                      *win32.Proc
+	GetNetworkParams                           *win32.Proc
+	GetNumberOfInterfaces                      *win32.Proc
+	GetOwnerModuleFromPidAndInfo               *win32.Proc
+	GetOwnerModuleFromTcp6Entry                *win32.Proc
+	GetOwnerModuleFromTcpEntry                 *win32.Proc
+	GetOwnerModuleFromUdp6Entry                *win32.Proc
+	GetOwnerModuleFromUdpEntry                 *win32.Proc
+	GetPerAdapterInfo                          *win32.Proc
+	GetPerTcp6ConnectionEStats                 *win32.Proc
+	GetPerTcpConnectionEStats                  *win32.Proc
+	GetRTTAndHopCount                          *win32.Proc
+	GetSessionCompartmentId                    *win32.Proc
+	GetTcp6Table                               *win32.Proc
+	GetTcp6Table2                              *win32.Proc
+	GetTcpStatistics                           *win32.Proc
+	GetTcpStatisticsEx                         *win32.Proc
+	GetTcpStatisticsEx2                        *win32.Proc
+	GetTcpTable                                *win32.Proc
+	GetTcpTable2                               *win32.Proc
+	GetTeredoPort                              *win32.Proc
+	GetUdp6Table                               *win32.Proc
+	GetUdpStatistics                           *win32.Proc
+	GetUdpStatisticsEx                         *win32.Proc
+	GetUdpStatisticsEx2                        *win32.Proc
+	GetUdpTable                                *win32.Proc
+	GetUniDirectionalAdapterInfo               *win32.Proc
+	GetUnicastIpAddressEntry                   *win32.Proc
+	GetUnicastIpAddressTable                   *win32.Proc
+	Icmp6CreateFile                            *win32.Proc
+	Icmp6ParseReplies                          *win32.Proc
+	Icmp6SendEcho2                             *win32.Proc
+	IcmpCloseHandle                            *win32.Proc
+	IcmpCreateFile                             *win32.Proc
+	IcmpParseReplies                           *win32.Proc
+	IcmpSendEcho                               *win32.Proc
+	IcmpSendEcho2                              *win32.Proc
+	IcmpSendEcho2Ex                            *win32.Proc
+	If_indextoname                             *win32.Proc
+	If_nametoindex                             *win32.Proc
+	InitializeFlVirtualInterfaceEntry          *win32.Proc
+	InitializeIpForwardEntry                   *win32.Proc
+	InitializeIpInterfaceEntry                 *win32.Proc
+	InitializeUnicastIpAddressEntry            *win32.Proc
+	IpReleaseAddress                           *win32.Proc
+	IpRenewAddress                             *win32.Proc
+	LookupPersistentTcpPortReservation         *win32.Proc
+	LookupPersistentUdpPortReservation         *win32.Proc
+	NhpAllocateAndGetInterfaceInfoFromStack    *win32.Proc
+	NotifyAddrChange                           *win32.Proc
+	NotifyIfTimestampConfigChange              *win32.Proc
+	NotifyIpInterfaceChange                    *win32.Proc
+	NotifyNetworkConnectivityHintChange        *win32.Proc
+	NotifyRouteChange                          *win32.Proc
+	NotifyRouteChange2                         *win32.Proc
+	NotifyStableUnicastIpAddressTable          *win32.Proc
+	NotifyTeredoPortChange                     *win32.Proc
+	NotifyUnicastIpAddressChange               *win32.Proc
+	ParseNetworkString                         *win32.Proc
+	PfAddFiltersToInterface                    *win32.Proc
+	PfAddGlobalFilterToInterface               *win32.Proc
+	PfBindInterfaceToIPAddress                 *win32.Proc
+	PfBindInterfaceToIndex                     *win32.Proc
+	PfCreateInterface                          *win32.Proc
+	PfDeleteInterface                          *win32.Proc
+	PfDeleteLog                                *win32.Proc
+	PfGetInterfaceStatistics                   *win32.Proc
+	PfMakeLog                                  *win32.Proc
+	PfRebindFilters                            *win32.Proc
+	PfRemoveFilterHandles                      *win32.Proc
+	PfRemoveFiltersFromInterface               *win32.Proc
+	PfRemoveGlobalFilterFromInterface          *win32.Proc
+	PfSetLogBuffer                             *win32.Proc
+	PfTestPacket                               *win32.Proc
+	PfUnBindInterface                          *win32.Proc
+	RegisterInterfaceTimestampConfigChange     *win32.Proc
+	ResolveIpNetEntry2                         *win32.Proc
+	ResolveNeighbor                            *win32.Proc
+	RestoreMediaSense                          *win32.Proc
+	SendARP                                    *win32.Proc
+	SetCurrentThreadCompartmentId              *win32.Proc
+	SetCurrentThreadCompartmentScope           *win32.Proc
+	SetDnsSettings                             *win32.Proc
+	SetFlVirtualInterface                      *win32.Proc
+	SetIfEntry                                 *win32.Proc
+	SetInterfaceDnsSettings                    *win32.Proc
+	SetIpForwardEntry                          *win32.Proc
+	SetIpForwardEntry2                         *win32.Proc
+	SetIpInterfaceEntry                        *win32.Proc
+	SetIpNetEntry                              *win32.Proc
+	SetIpNetEntry2                             *win32.Proc
+	SetIpStatistics                            *win32.Proc
+	SetIpStatisticsEx                          *win32.Proc
+	SetIpTTL                                   *win32.Proc
+	SetJobCompartmentId                        *win32.Proc
+	SetNetworkInformation                      *win32.Proc
+	SetPerTcp6ConnectionEStats                 *win32.Proc
+	SetPerTcpConnectionEStats                  *win32.Proc
+	SetSessionCompartmentId                    *win32.Proc
+	SetTcpEntry                                *win32.Proc
+	SetUnicastIpAddressEntry                   *win32.Proc
+	UnenableRouter                             *win32.Proc
+	UnregisterInterfaceTimestampConfigChange   *win32.Proc
+}{
+	AddIPAddress:                               procAddIPAddress,
+	CancelIPChangeNotify:                       procCancelIPChangeNotify,
+	CancelIfTimestampConfigChange:              procCancelIfTimestampConfigChange,
+	CancelMibChangeNotify2:                     procCancelMibChangeNotify2,
+	CaptureInterfaceHardwareCrossTimestamp:     procCaptureInterfaceHardwareCrossTimestamp,
+	ConvertCompartmentGuidToId:                 procConvertCompartmentGuidToId,
+	ConvertCompartmentIdToGuid:                 procConvertCompartmentIdToGuid,
+	ConvertInterfaceAliasToLuid:                procConvertInterfaceAliasToLuid,
+	ConvertInterfaceGuidToLuid:                 procConvertInterfaceGuidToLuid,
+	ConvertInterfaceIndexToLuid:                procConvertInterfaceIndexToLuid,
+	ConvertInterfaceLuidToAlias:                procConvertInterfaceLuidToAlias,
+	ConvertInterfaceLuidToGuid:                 procConvertInterfaceLuidToGuid,
+	ConvertInterfaceLuidToIndex:                procConvertInterfaceLuidToIndex,
+	ConvertInterfaceLuidToName:                 procConvertInterfaceLuidToName,
+	ConvertInterfaceLuidToNameA:                procConvertInterfaceLuidToNameA,
+	ConvertInterfaceNameToLuid:                 procConvertInterfaceNameToLuid,
+	ConvertInterfaceNameToLuidA:                procConvertInterfaceNameToLuidA,
+	ConvertIpv4MaskToLength:                    procConvertIpv4MaskToLength,
+	ConvertLengthToIpv4Mask:                    procConvertLengthToIpv4Mask,
+	CreateAnycastIpAddressEntry:                procCreateAnycastIpAddressEntry,
+	CreateFlVirtualInterface:                   procCreateFlVirtualInterface,
+	CreateIpForwardEntry:                       procCreateIpForwardEntry,
+	CreateIpForwardEntry2:                      procCreateIpForwardEntry2,
+	CreateIpNetEntry:                           procCreateIpNetEntry,
+	CreateIpNetEntry2:                          procCreateIpNetEntry2,
+	CreatePersistentTcpPortReservation:         procCreatePersistentTcpPortReservation,
+	CreatePersistentUdpPortReservation:         procCreatePersistentUdpPortReservation,
+	CreateProxyArpEntry:                        procCreateProxyArpEntry,
+	CreateSortedAddressPairs:                   procCreateSortedAddressPairs,
+	CreateUnicastIpAddressEntry:                procCreateUnicastIpAddressEntry,
+	DeleteAnycastIpAddressEntry:                procDeleteAnycastIpAddressEntry,
+	DeleteFlVirtualInterface:                   procDeleteFlVirtualInterface,
+	DeleteIPAddress:                            procDeleteIPAddress,
+	DeleteIpForwardEntry:                       procDeleteIpForwardEntry,
+	DeleteIpForwardEntry2:                      procDeleteIpForwardEntry2,
+	DeleteIpNetEntry:                           procDeleteIpNetEntry,
+	DeleteIpNetEntry2:                          procDeleteIpNetEntry2,
+	DeletePersistentTcpPortReservation:         procDeletePersistentTcpPortReservation,
+	DeletePersistentUdpPortReservation:         procDeletePersistentUdpPortReservation,
+	DeleteProxyArpEntry:                        procDeleteProxyArpEntry,
+	DeleteUnicastIpAddressEntry:                procDeleteUnicastIpAddressEntry,
+	DisableMediaSense:                          procDisableMediaSense,
+	EnableRouter:                               procEnableRouter,
+	FlushIpNetTable:                            procFlushIpNetTable,
+	FlushIpNetTable2:                           procFlushIpNetTable2,
+	FlushIpPathTable:                           procFlushIpPathTable,
+	FreeDnsSettings:                            procFreeDnsSettings,
+	FreeInterfaceDnsSettings:                   procFreeInterfaceDnsSettings,
+	FreeMibTable:                               procFreeMibTable,
+	GetAdapterIndex:                            procGetAdapterIndex,
+	GetAdapterOrderMap:                         procGetAdapterOrderMap,
+	GetAdaptersAddresses:                       procGetAdaptersAddresses,
+	GetAdaptersInfo:                            procGetAdaptersInfo,
+	GetAnycastIpAddressEntry:                   procGetAnycastIpAddressEntry,
+	GetAnycastIpAddressTable:                   procGetAnycastIpAddressTable,
+	GetBestInterface:                           procGetBestInterface,
+	GetBestInterfaceEx:                         procGetBestInterfaceEx,
+	GetBestRoute:                               procGetBestRoute,
+	GetBestRoute2:                              procGetBestRoute2,
+	GetCurrentThreadCompartmentId:              procGetCurrentThreadCompartmentId,
+	GetCurrentThreadCompartmentScope:           procGetCurrentThreadCompartmentScope,
+	GetDefaultCompartmentId:                    procGetDefaultCompartmentId,
+	GetDnsSettings:                             procGetDnsSettings,
+	GetExtendedTcpTable:                        procGetExtendedTcpTable,
+	GetExtendedUdpTable:                        procGetExtendedUdpTable,
+	GetFlVirtualInterface:                      procGetFlVirtualInterface,
+	GetFlVirtualInterfaceTable:                 procGetFlVirtualInterfaceTable,
+	GetFriendlyIfIndex:                         procGetFriendlyIfIndex,
+	GetIcmpStatistics:                          procGetIcmpStatistics,
+	GetIcmpStatisticsEx:                        procGetIcmpStatisticsEx,
+	GetIfEntry:                                 procGetIfEntry,
+	GetIfEntry2:                                procGetIfEntry2,
+	GetIfEntry2Ex:                              procGetIfEntry2Ex,
+	GetIfStackTable:                            procGetIfStackTable,
+	GetIfTable:                                 procGetIfTable,
+	GetIfTable2:                                procGetIfTable2,
+	GetIfTable2Ex:                              procGetIfTable2Ex,
+	GetInterfaceActiveTimestampCapabilities:    procGetInterfaceActiveTimestampCapabilities,
+	GetInterfaceCurrentTimestampCapabilities:   procGetInterfaceCurrentTimestampCapabilities,
+	GetInterfaceDnsSettings:                    procGetInterfaceDnsSettings,
+	GetInterfaceHardwareTimestampCapabilities:  procGetInterfaceHardwareTimestampCapabilities,
+	GetInterfaceInfo:                           procGetInterfaceInfo,
+	GetInterfaceSupportedTimestampCapabilities: procGetInterfaceSupportedTimestampCapabilities,
+	GetInvertedIfStackTable:                    procGetInvertedIfStackTable,
+	GetIpAddrTable:                             procGetIpAddrTable,
+	GetIpErrorString:                           procGetIpErrorString,
+	GetIpForwardEntry2:                         procGetIpForwardEntry2,
+	GetIpForwardTable:                          procGetIpForwardTable,
+	GetIpForwardTable2:                         procGetIpForwardTable2,
+	GetIpInterfaceEntry:                        procGetIpInterfaceEntry,
+	GetIpInterfaceTable:                        procGetIpInterfaceTable,
+	GetIpNetEntry2:                             procGetIpNetEntry2,
+	GetIpNetTable:                              procGetIpNetTable,
+	GetIpNetTable2:                             procGetIpNetTable2,
+	GetIpNetworkConnectionBandwidthEstimates:   procGetIpNetworkConnectionBandwidthEstimates,
+	GetIpPathEntry:                             procGetIpPathEntry,
+	GetIpPathTable:                             procGetIpPathTable,
+	GetIpStatistics:                            procGetIpStatistics,
+	GetIpStatisticsEx:                          procGetIpStatisticsEx,
+	GetJobCompartmentId:                        procGetJobCompartmentId,
+	GetMulticastIpAddressEntry:                 procGetMulticastIpAddressEntry,
+	GetMulticastIpAddressTable:                 procGetMulticastIpAddressTable,
+	GetNetworkConnectivityHint:                 procGetNetworkConnectivityHint,
+	GetNetworkConnectivityHintForInterface:     procGetNetworkConnectivityHintForInterface,
+	GetNetworkInformation:                      procGetNetworkInformation,
+	GetNetworkParams:                           procGetNetworkParams,
+	GetNumberOfInterfaces:                      procGetNumberOfInterfaces,
+	GetOwnerModuleFromPidAndInfo:               procGetOwnerModuleFromPidAndInfo,
+	GetOwnerModuleFromTcp6Entry:                procGetOwnerModuleFromTcp6Entry,
+	GetOwnerModuleFromTcpEntry:                 procGetOwnerModuleFromTcpEntry,
+	GetOwnerModuleFromUdp6Entry:                procGetOwnerModuleFromUdp6Entry,
+	GetOwnerModuleFromUdpEntry:                 procGetOwnerModuleFromUdpEntry,
+	GetPerAdapterInfo:                          procGetPerAdapterInfo,
+	GetPerTcp6ConnectionEStats:                 procGetPerTcp6ConnectionEStats,
+	GetPerTcpConnectionEStats:                  procGetPerTcpConnectionEStats,
+	GetRTTAndHopCount:                          procGetRTTAndHopCount,
+	GetSessionCompartmentId:                    procGetSessionCompartmentId,
+	GetTcp6Table:                               procGetTcp6Table,
+	GetTcp6Table2:                              procGetTcp6Table2,
+	GetTcpStatistics:                           procGetTcpStatistics,
+	GetTcpStatisticsEx:                         procGetTcpStatisticsEx,
+	GetTcpStatisticsEx2:                        procGetTcpStatisticsEx2,
+	GetTcpTable:                                procGetTcpTable,
+	GetTcpTable2:                               procGetTcpTable2,
+	GetTeredoPort:                              procGetTeredoPort,
+	GetUdp6Table:                               procGetUdp6Table,
+	GetUdpStatistics:                           procGetUdpStatistics,
+	GetUdpStatisticsEx:                         procGetUdpStatisticsEx,
+	GetUdpStatisticsEx2:                        procGetUdpStatisticsEx2,
+	GetUdpTable:                                procGetUdpTable,
+	GetUniDirectionalAdapterInfo:               procGetUniDirectionalAdapterInfo,
+	GetUnicastIpAddressEntry:                   procGetUnicastIpAddressEntry,
+	GetUnicastIpAddressTable:                   procGetUnicastIpAddressTable,
+	Icmp6CreateFile:                            procIcmp6CreateFile,
+	Icmp6ParseReplies:                          procIcmp6ParseReplies,
+	Icmp6SendEcho2:                             procIcmp6SendEcho2,
+	IcmpCloseHandle:                            procIcmpCloseHandle,
+	IcmpCreateFile:                             procIcmpCreateFile,
+	IcmpParseReplies:                           procIcmpParseReplies,
+	IcmpSendEcho:                               procIcmpSendEcho,
+	IcmpSendEcho2:                              procIcmpSendEcho2,
+	IcmpSendEcho2Ex:                            procIcmpSendEcho2Ex,
+	If_indextoname:                             procIf_indextoname,
+	If_nametoindex:                             procIf_nametoindex,
+	InitializeFlVirtualInterfaceEntry:          procInitializeFlVirtualInterfaceEntry,
+	InitializeIpForwardEntry:                   procInitializeIpForwardEntry,
+	InitializeIpInterfaceEntry:                 procInitializeIpInterfaceEntry,
+	InitializeUnicastIpAddressEntry:            procInitializeUnicastIpAddressEntry,
+	IpReleaseAddress:                           procIpReleaseAddress,
+	IpRenewAddress:                             procIpRenewAddress,
+	LookupPersistentTcpPortReservation:         procLookupPersistentTcpPortReservation,
+	LookupPersistentUdpPortReservation:         procLookupPersistentUdpPortReservation,
+	NhpAllocateAndGetInterfaceInfoFromStack:    procNhpAllocateAndGetInterfaceInfoFromStack,
+	NotifyAddrChange:                           procNotifyAddrChange,
+	NotifyIfTimestampConfigChange:              procNotifyIfTimestampConfigChange,
+	NotifyIpInterfaceChange:                    procNotifyIpInterfaceChange,
+	NotifyNetworkConnectivityHintChange:        procNotifyNetworkConnectivityHintChange,
+	NotifyRouteChange:                          procNotifyRouteChange,
+	NotifyRouteChange2:                         procNotifyRouteChange2,
+	NotifyStableUnicastIpAddressTable:          procNotifyStableUnicastIpAddressTable,
+	NotifyTeredoPortChange:                     procNotifyTeredoPortChange,
+	NotifyUnicastIpAddressChange:               procNotifyUnicastIpAddressChange,
+	ParseNetworkString:                         procParseNetworkString,
+	PfAddFiltersToInterface:                    procPfAddFiltersToInterface,
+	PfAddGlobalFilterToInterface:               procPfAddGlobalFilterToInterface,
+	PfBindInterfaceToIPAddress:                 procPfBindInterfaceToIPAddress,
+	PfBindInterfaceToIndex:                     procPfBindInterfaceToIndex,
+	PfCreateInterface:                          procPfCreateInterface,
+	PfDeleteInterface:                          procPfDeleteInterface,
+	PfDeleteLog:                                procPfDeleteLog,
+	PfGetInterfaceStatistics:                   procPfGetInterfaceStatistics,
+	PfMakeLog:                                  procPfMakeLog,
+	PfRebindFilters:                            procPfRebindFilters,
+	PfRemoveFilterHandles:                      procPfRemoveFilterHandles,
+	PfRemoveFiltersFromInterface:               procPfRemoveFiltersFromInterface,
+	PfRemoveGlobalFilterFromInterface:          procPfRemoveGlobalFilterFromInterface,
+	PfSetLogBuffer:                             procPfSetLogBuffer,
+	PfTestPacket:                               procPfTestPacket,
+	PfUnBindInterface:                          procPfUnBindInterface,
+	RegisterInterfaceTimestampConfigChange:     procRegisterInterfaceTimestampConfigChange,
+	ResolveIpNetEntry2:                         procResolveIpNetEntry2,
+	ResolveNeighbor:                            procResolveNeighbor,
+	RestoreMediaSense:                          procRestoreMediaSense,
+	SendARP:                                    procSendARP,
+	SetCurrentThreadCompartmentId:              procSetCurrentThreadCompartmentId,
+	SetCurrentThreadCompartmentScope:           procSetCurrentThreadCompartmentScope,
+	SetDnsSettings:                             procSetDnsSettings,
+	SetFlVirtualInterface:                      procSetFlVirtualInterface,
+	SetIfEntry:                                 procSetIfEntry,
+	SetInterfaceDnsSettings:                    procSetInterfaceDnsSettings,
+	SetIpForwardEntry:                          procSetIpForwardEntry,
+	SetIpForwardEntry2:                         procSetIpForwardEntry2,
+	SetIpInterfaceEntry:                        procSetIpInterfaceEntry,
+	SetIpNetEntry:                              procSetIpNetEntry,
+	SetIpNetEntry2:                             procSetIpNetEntry2,
+	SetIpStatistics:                            procSetIpStatistics,
+	SetIpStatisticsEx:                          procSetIpStatisticsEx,
+	SetIpTTL:                                   procSetIpTTL,
+	SetJobCompartmentId:                        procSetJobCompartmentId,
+	SetNetworkInformation:                      procSetNetworkInformation,
+	SetPerTcp6ConnectionEStats:                 procSetPerTcp6ConnectionEStats,
+	SetPerTcpConnectionEStats:                  procSetPerTcpConnectionEStats,
+	SetSessionCompartmentId:                    procSetSessionCompartmentId,
+	SetTcpEntry:                                procSetTcpEntry,
+	SetUnicastIpAddressEntry:                   procSetUnicastIpAddressEntry,
+	UnenableRouter:                             procUnenableRouter,
+	UnregisterInterfaceTimestampConfigChange:   procUnregisterInterfaceTimestampConfigChange,
+}
 
 // AddIPAddress calls IPHLPAPI!AddIPAddress.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-addipaddress
@@ -834,6 +1258,15 @@ func GetInterfaceActiveTimestampCapabilities(InterfaceLuid *networkmanagementndi
 func GetInterfaceCurrentTimestampCapabilities(InterfaceLuid *networkmanagementndis.NET_LUID_LH, TimestampCapabilites *INTERFACE_TIMESTAMP_CAPABILITIES) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetInterfaceCurrentTimestampCapabilities.Addr(), uintptr(unsafe.Pointer(InterfaceLuid)), uintptr(unsafe.Pointer(TimestampCapabilites)))
 	return uint32(r1)
+}
+
+var specGetInterfaceDnsSettings = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetInterfaceDnsSettings calls IPHLPAPI!GetInterfaceDnsSettings.
+// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-getinterfacednssettings
+func GetInterfaceDnsSettings(Interface win32.GUID, Settings *DNS_INTERFACE_SETTINGS) foundation.WIN32_ERROR {
+	r1, _, _ := win32.Call(procGetInterfaceDnsSettings.Addr(), specGetInterfaceDnsSettings, nil, uintptr(unsafe.Pointer(&Interface)), uintptr(unsafe.Pointer(Settings))).Tuple()
+	return foundation.WIN32_ERROR(r1)
 }
 
 // GetInterfaceHardwareTimestampCapabilities calls IPHLPAPI.DLL!GetInterfaceHardwareTimestampCapabilities.
@@ -1760,6 +2193,15 @@ func SetFlVirtualInterface(Row *MIB_FL_VIRTUAL_INTERFACE_ROW) uint32 {
 func SetIfEntry(pIfRow *MIB_IFROW) uint32 {
 	r1, _, _ := syscall.SyscallN(procSetIfEntry.Addr(), uintptr(unsafe.Pointer(pIfRow)))
 	return uint32(r1)
+}
+
+var specSetInterfaceDnsSettings = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetInterfaceDnsSettings calls IPHLPAPI!SetInterfaceDnsSettings.
+// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-setinterfacednssettings
+func SetInterfaceDnsSettings(Interface win32.GUID, Settings *DNS_INTERFACE_SETTINGS) foundation.WIN32_ERROR {
+	r1, _, _ := win32.Call(procSetInterfaceDnsSettings.Addr(), specSetInterfaceDnsSettings, nil, uintptr(unsafe.Pointer(&Interface)), uintptr(unsafe.Pointer(Settings))).Tuple()
+	return foundation.WIN32_ERROR(r1)
 }
 
 // SetIpForwardEntry calls IPHLPAPI!SetIpForwardEntry.

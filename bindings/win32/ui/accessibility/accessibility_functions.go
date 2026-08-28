@@ -5,6 +5,7 @@
 package accessibility
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -44,14 +45,17 @@ var (
 	procExpandCollapsePattern_Expand             = modUIAutomationCore.NewProc("ExpandCollapsePattern_Expand")
 	procGridPattern_GetItem                      = modUIAutomationCore.NewProc("GridPattern_GetItem")
 	procInvokePattern_Invoke                     = modUIAutomationCore.NewProc("InvokePattern_Invoke")
+	procItemContainerPattern_FindItemByProperty  = modUIAutomationCore.NewProc("ItemContainerPattern_FindItemByProperty")
 	procLegacyIAccessiblePattern_DoDefaultAction = modUIAutomationCore.NewProc("LegacyIAccessiblePattern_DoDefaultAction")
 	procLegacyIAccessiblePattern_GetIAccessible  = modUIAutomationCore.NewProc("LegacyIAccessiblePattern_GetIAccessible")
 	procLegacyIAccessiblePattern_Select          = modUIAutomationCore.NewProc("LegacyIAccessiblePattern_Select")
 	procLegacyIAccessiblePattern_SetValue        = modUIAutomationCore.NewProc("LegacyIAccessiblePattern_SetValue")
 	procMultipleViewPattern_GetViewName          = modUIAutomationCore.NewProc("MultipleViewPattern_GetViewName")
 	procMultipleViewPattern_SetCurrentView       = modUIAutomationCore.NewProc("MultipleViewPattern_SetCurrentView")
+	procRangeValuePattern_SetValue               = modUIAutomationCore.NewProc("RangeValuePattern_SetValue")
 	procScrollItemPattern_ScrollIntoView         = modUIAutomationCore.NewProc("ScrollItemPattern_ScrollIntoView")
 	procScrollPattern_Scroll                     = modUIAutomationCore.NewProc("ScrollPattern_Scroll")
+	procScrollPattern_SetScrollPercent           = modUIAutomationCore.NewProc("ScrollPattern_SetScrollPercent")
 	procSelectionItemPattern_AddToSelection      = modUIAutomationCore.NewProc("SelectionItemPattern_AddToSelection")
 	procSelectionItemPattern_RemoveFromSelection = modUIAutomationCore.NewProc("SelectionItemPattern_RemoveFromSelection")
 	procSelectionItemPattern_Select              = modUIAutomationCore.NewProc("SelectionItemPattern_Select")
@@ -60,6 +64,7 @@ var (
 	procTextPattern_GetSelection                 = modUIAutomationCore.NewProc("TextPattern_GetSelection")
 	procTextPattern_GetVisibleRanges             = modUIAutomationCore.NewProc("TextPattern_GetVisibleRanges")
 	procTextPattern_RangeFromChild               = modUIAutomationCore.NewProc("TextPattern_RangeFromChild")
+	procTextPattern_RangeFromPoint               = modUIAutomationCore.NewProc("TextPattern_RangeFromPoint")
 	procTextPattern_get_DocumentRange            = modUIAutomationCore.NewProc("TextPattern_get_DocumentRange")
 	procTextPattern_get_SupportedTextSelection   = modUIAutomationCore.NewProc("TextPattern_get_SupportedTextSelection")
 	procTextRange_AddToSelection                 = modUIAutomationCore.NewProc("TextRange_AddToSelection")
@@ -67,6 +72,7 @@ var (
 	procTextRange_Compare                        = modUIAutomationCore.NewProc("TextRange_Compare")
 	procTextRange_CompareEndpoints               = modUIAutomationCore.NewProc("TextRange_CompareEndpoints")
 	procTextRange_ExpandToEnclosingUnit          = modUIAutomationCore.NewProc("TextRange_ExpandToEnclosingUnit")
+	procTextRange_FindAttribute                  = modUIAutomationCore.NewProc("TextRange_FindAttribute")
 	procTextRange_FindText                       = modUIAutomationCore.NewProc("TextRange_FindText")
 	procTextRange_GetAttributeValue              = modUIAutomationCore.NewProc("TextRange_GetAttributeValue")
 	procTextRange_GetBoundingRectangles          = modUIAutomationCore.NewProc("TextRange_GetBoundingRectangles")
@@ -80,6 +86,9 @@ var (
 	procTextRange_ScrollIntoView                 = modUIAutomationCore.NewProc("TextRange_ScrollIntoView")
 	procTextRange_Select                         = modUIAutomationCore.NewProc("TextRange_Select")
 	procTogglePattern_Toggle                     = modUIAutomationCore.NewProc("TogglePattern_Toggle")
+	procTransformPattern_Move                    = modUIAutomationCore.NewProc("TransformPattern_Move")
+	procTransformPattern_Resize                  = modUIAutomationCore.NewProc("TransformPattern_Resize")
+	procTransformPattern_Rotate                  = modUIAutomationCore.NewProc("TransformPattern_Rotate")
 	procUiaAddEvent                              = modUIAutomationCore.NewProc("UiaAddEvent")
 	procUiaClientsAreListening                   = modUIAutomationCore.NewProc("UiaClientsAreListening")
 	procUiaDisconnectAllProviders                = modUIAutomationCore.NewProc("UiaDisconnectAllProviders")
@@ -105,13 +114,16 @@ var (
 	procUiaNavigate                              = modUIAutomationCore.NewProc("UiaNavigate")
 	procUiaNodeFromFocus                         = modUIAutomationCore.NewProc("UiaNodeFromFocus")
 	procUiaNodeFromHandle                        = modUIAutomationCore.NewProc("UiaNodeFromHandle")
+	procUiaNodeFromPoint                         = modUIAutomationCore.NewProc("UiaNodeFromPoint")
 	procUiaNodeFromProvider                      = modUIAutomationCore.NewProc("UiaNodeFromProvider")
 	procUiaNodeRelease                           = modUIAutomationCore.NewProc("UiaNodeRelease")
 	procUiaPatternRelease                        = modUIAutomationCore.NewProc("UiaPatternRelease")
 	procUiaProviderForNonClient                  = modUIAutomationCore.NewProc("UiaProviderForNonClient")
 	procUiaProviderFromIAccessible               = modUIAutomationCore.NewProc("UiaProviderFromIAccessible")
 	procUiaRaiseActiveTextPositionChangedEvent   = modUIAutomationCore.NewProc("UiaRaiseActiveTextPositionChangedEvent")
+	procUiaRaiseAsyncContentLoadedEvent          = modUIAutomationCore.NewProc("UiaRaiseAsyncContentLoadedEvent")
 	procUiaRaiseAutomationEvent                  = modUIAutomationCore.NewProc("UiaRaiseAutomationEvent")
+	procUiaRaiseAutomationPropertyChangedEvent   = modUIAutomationCore.NewProc("UiaRaiseAutomationPropertyChangedEvent")
 	procUiaRaiseChangesEvent                     = modUIAutomationCore.NewProc("UiaRaiseChangesEvent")
 	procUiaRaiseNotificationEvent                = modUIAutomationCore.NewProc("UiaRaiseNotificationEvent")
 	procUiaRaiseStructureChangedEvent            = modUIAutomationCore.NewProc("UiaRaiseStructureChangedEvent")
@@ -135,6 +147,260 @@ var (
 	procUnregisterPointerInputTarget             = modUSER32.NewProc("UnregisterPointerInputTarget")
 	procUnregisterPointerInputTargetEx           = modUSER32.NewProc("UnregisterPointerInputTargetEx")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AccNotifyTouchInteraction                *win32.Proc
+	AccSetRunningUtilityState                *win32.Proc
+	AccessibleChildren                       *win32.Proc
+	AccessibleObjectFromEvent                *win32.Proc
+	AccessibleObjectFromPoint                *win32.Proc
+	AccessibleObjectFromWindow               *win32.Proc
+	CreateStdAccessibleObject                *win32.Proc
+	CreateStdAccessibleProxy                 *win32.Proc
+	CreateStdAccessibleProxyA                *win32.Proc
+	DockPattern_SetDockPosition              *win32.Proc
+	ExpandCollapsePattern_Collapse           *win32.Proc
+	ExpandCollapsePattern_Expand             *win32.Proc
+	GetOleaccVersionInfo                     *win32.Proc
+	GetRoleText                              *win32.Proc
+	GetRoleTextA                             *win32.Proc
+	GetStateText                             *win32.Proc
+	GetStateTextA                            *win32.Proc
+	GridPattern_GetItem                      *win32.Proc
+	InvokePattern_Invoke                     *win32.Proc
+	IsWinEventHookInstalled                  *win32.Proc
+	ItemContainerPattern_FindItemByProperty  *win32.Proc
+	LegacyIAccessiblePattern_DoDefaultAction *win32.Proc
+	LegacyIAccessiblePattern_GetIAccessible  *win32.Proc
+	LegacyIAccessiblePattern_Select          *win32.Proc
+	LegacyIAccessiblePattern_SetValue        *win32.Proc
+	LresultFromObject                        *win32.Proc
+	MultipleViewPattern_GetViewName          *win32.Proc
+	MultipleViewPattern_SetCurrentView       *win32.Proc
+	NotifyWinEvent                           *win32.Proc
+	ObjectFromLresult                        *win32.Proc
+	RangeValuePattern_SetValue               *win32.Proc
+	RegisterPointerInputTarget               *win32.Proc
+	RegisterPointerInputTargetEx             *win32.Proc
+	ScrollItemPattern_ScrollIntoView         *win32.Proc
+	ScrollPattern_Scroll                     *win32.Proc
+	ScrollPattern_SetScrollPercent           *win32.Proc
+	SelectionItemPattern_AddToSelection      *win32.Proc
+	SelectionItemPattern_RemoveFromSelection *win32.Proc
+	SelectionItemPattern_Select              *win32.Proc
+	SetWinEventHook                          *win32.Proc
+	SynchronizedInputPattern_Cancel          *win32.Proc
+	SynchronizedInputPattern_StartListening  *win32.Proc
+	TextPattern_GetSelection                 *win32.Proc
+	TextPattern_GetVisibleRanges             *win32.Proc
+	TextPattern_RangeFromChild               *win32.Proc
+	TextPattern_RangeFromPoint               *win32.Proc
+	TextPattern_get_DocumentRange            *win32.Proc
+	TextPattern_get_SupportedTextSelection   *win32.Proc
+	TextRange_AddToSelection                 *win32.Proc
+	TextRange_Clone                          *win32.Proc
+	TextRange_Compare                        *win32.Proc
+	TextRange_CompareEndpoints               *win32.Proc
+	TextRange_ExpandToEnclosingUnit          *win32.Proc
+	TextRange_FindAttribute                  *win32.Proc
+	TextRange_FindText                       *win32.Proc
+	TextRange_GetAttributeValue              *win32.Proc
+	TextRange_GetBoundingRectangles          *win32.Proc
+	TextRange_GetChildren                    *win32.Proc
+	TextRange_GetEnclosingElement            *win32.Proc
+	TextRange_GetText                        *win32.Proc
+	TextRange_Move                           *win32.Proc
+	TextRange_MoveEndpointByRange            *win32.Proc
+	TextRange_MoveEndpointByUnit             *win32.Proc
+	TextRange_RemoveFromSelection            *win32.Proc
+	TextRange_ScrollIntoView                 *win32.Proc
+	TextRange_Select                         *win32.Proc
+	TogglePattern_Toggle                     *win32.Proc
+	TransformPattern_Move                    *win32.Proc
+	TransformPattern_Resize                  *win32.Proc
+	TransformPattern_Rotate                  *win32.Proc
+	UiaAddEvent                              *win32.Proc
+	UiaClientsAreListening                   *win32.Proc
+	UiaDisconnectAllProviders                *win32.Proc
+	UiaDisconnectProvider                    *win32.Proc
+	UiaEventAddWindow                        *win32.Proc
+	UiaEventRemoveWindow                     *win32.Proc
+	UiaFind                                  *win32.Proc
+	UiaGetErrorDescription                   *win32.Proc
+	UiaGetPatternProvider                    *win32.Proc
+	UiaGetPropertyValue                      *win32.Proc
+	UiaGetReservedMixedAttributeValue        *win32.Proc
+	UiaGetReservedNotSupportedValue          *win32.Proc
+	UiaGetRootNode                           *win32.Proc
+	UiaGetRuntimeId                          *win32.Proc
+	UiaGetUpdatedCache                       *win32.Proc
+	UiaHPatternObjectFromVariant             *win32.Proc
+	UiaHTextRangeFromVariant                 *win32.Proc
+	UiaHUiaNodeFromVariant                   *win32.Proc
+	UiaHasServerSideProvider                 *win32.Proc
+	UiaHostProviderFromHwnd                  *win32.Proc
+	UiaIAccessibleFromProvider               *win32.Proc
+	UiaLookupId                              *win32.Proc
+	UiaNavigate                              *win32.Proc
+	UiaNodeFromFocus                         *win32.Proc
+	UiaNodeFromHandle                        *win32.Proc
+	UiaNodeFromPoint                         *win32.Proc
+	UiaNodeFromProvider                      *win32.Proc
+	UiaNodeRelease                           *win32.Proc
+	UiaPatternRelease                        *win32.Proc
+	UiaProviderForNonClient                  *win32.Proc
+	UiaProviderFromIAccessible               *win32.Proc
+	UiaRaiseActiveTextPositionChangedEvent   *win32.Proc
+	UiaRaiseAsyncContentLoadedEvent          *win32.Proc
+	UiaRaiseAutomationEvent                  *win32.Proc
+	UiaRaiseAutomationPropertyChangedEvent   *win32.Proc
+	UiaRaiseChangesEvent                     *win32.Proc
+	UiaRaiseNotificationEvent                *win32.Proc
+	UiaRaiseStructureChangedEvent            *win32.Proc
+	UiaRaiseTextEditTextChangedEvent         *win32.Proc
+	UiaRegisterProviderCallback              *win32.Proc
+	UiaRemoveEvent                           *win32.Proc
+	UiaReturnRawElementProvider              *win32.Proc
+	UiaSetFocus                              *win32.Proc
+	UiaTextRangeRelease                      *win32.Proc
+	UnhookWinEvent                           *win32.Proc
+	UnregisterPointerInputTarget             *win32.Proc
+	UnregisterPointerInputTargetEx           *win32.Proc
+	ValuePattern_SetValue                    *win32.Proc
+	VirtualizedItemPattern_Realize           *win32.Proc
+	WindowFromAccessibleObject               *win32.Proc
+	WindowPattern_Close                      *win32.Proc
+	WindowPattern_SetWindowVisualState       *win32.Proc
+	WindowPattern_WaitForInputIdle           *win32.Proc
+}{
+	AccNotifyTouchInteraction:                procAccNotifyTouchInteraction,
+	AccSetRunningUtilityState:                procAccSetRunningUtilityState,
+	AccessibleChildren:                       procAccessibleChildren,
+	AccessibleObjectFromEvent:                procAccessibleObjectFromEvent,
+	AccessibleObjectFromPoint:                procAccessibleObjectFromPoint,
+	AccessibleObjectFromWindow:               procAccessibleObjectFromWindow,
+	CreateStdAccessibleObject:                procCreateStdAccessibleObject,
+	CreateStdAccessibleProxy:                 procCreateStdAccessibleProxy,
+	CreateStdAccessibleProxyA:                procCreateStdAccessibleProxyA,
+	DockPattern_SetDockPosition:              procDockPattern_SetDockPosition,
+	ExpandCollapsePattern_Collapse:           procExpandCollapsePattern_Collapse,
+	ExpandCollapsePattern_Expand:             procExpandCollapsePattern_Expand,
+	GetOleaccVersionInfo:                     procGetOleaccVersionInfo,
+	GetRoleText:                              procGetRoleText,
+	GetRoleTextA:                             procGetRoleTextA,
+	GetStateText:                             procGetStateText,
+	GetStateTextA:                            procGetStateTextA,
+	GridPattern_GetItem:                      procGridPattern_GetItem,
+	InvokePattern_Invoke:                     procInvokePattern_Invoke,
+	IsWinEventHookInstalled:                  procIsWinEventHookInstalled,
+	ItemContainerPattern_FindItemByProperty:  procItemContainerPattern_FindItemByProperty,
+	LegacyIAccessiblePattern_DoDefaultAction: procLegacyIAccessiblePattern_DoDefaultAction,
+	LegacyIAccessiblePattern_GetIAccessible:  procLegacyIAccessiblePattern_GetIAccessible,
+	LegacyIAccessiblePattern_Select:          procLegacyIAccessiblePattern_Select,
+	LegacyIAccessiblePattern_SetValue:        procLegacyIAccessiblePattern_SetValue,
+	LresultFromObject:                        procLresultFromObject,
+	MultipleViewPattern_GetViewName:          procMultipleViewPattern_GetViewName,
+	MultipleViewPattern_SetCurrentView:       procMultipleViewPattern_SetCurrentView,
+	NotifyWinEvent:                           procNotifyWinEvent,
+	ObjectFromLresult:                        procObjectFromLresult,
+	RangeValuePattern_SetValue:               procRangeValuePattern_SetValue,
+	RegisterPointerInputTarget:               procRegisterPointerInputTarget,
+	RegisterPointerInputTargetEx:             procRegisterPointerInputTargetEx,
+	ScrollItemPattern_ScrollIntoView:         procScrollItemPattern_ScrollIntoView,
+	ScrollPattern_Scroll:                     procScrollPattern_Scroll,
+	ScrollPattern_SetScrollPercent:           procScrollPattern_SetScrollPercent,
+	SelectionItemPattern_AddToSelection:      procSelectionItemPattern_AddToSelection,
+	SelectionItemPattern_RemoveFromSelection: procSelectionItemPattern_RemoveFromSelection,
+	SelectionItemPattern_Select:              procSelectionItemPattern_Select,
+	SetWinEventHook:                          procSetWinEventHook,
+	SynchronizedInputPattern_Cancel:          procSynchronizedInputPattern_Cancel,
+	SynchronizedInputPattern_StartListening:  procSynchronizedInputPattern_StartListening,
+	TextPattern_GetSelection:                 procTextPattern_GetSelection,
+	TextPattern_GetVisibleRanges:             procTextPattern_GetVisibleRanges,
+	TextPattern_RangeFromChild:               procTextPattern_RangeFromChild,
+	TextPattern_RangeFromPoint:               procTextPattern_RangeFromPoint,
+	TextPattern_get_DocumentRange:            procTextPattern_get_DocumentRange,
+	TextPattern_get_SupportedTextSelection:   procTextPattern_get_SupportedTextSelection,
+	TextRange_AddToSelection:                 procTextRange_AddToSelection,
+	TextRange_Clone:                          procTextRange_Clone,
+	TextRange_Compare:                        procTextRange_Compare,
+	TextRange_CompareEndpoints:               procTextRange_CompareEndpoints,
+	TextRange_ExpandToEnclosingUnit:          procTextRange_ExpandToEnclosingUnit,
+	TextRange_FindAttribute:                  procTextRange_FindAttribute,
+	TextRange_FindText:                       procTextRange_FindText,
+	TextRange_GetAttributeValue:              procTextRange_GetAttributeValue,
+	TextRange_GetBoundingRectangles:          procTextRange_GetBoundingRectangles,
+	TextRange_GetChildren:                    procTextRange_GetChildren,
+	TextRange_GetEnclosingElement:            procTextRange_GetEnclosingElement,
+	TextRange_GetText:                        procTextRange_GetText,
+	TextRange_Move:                           procTextRange_Move,
+	TextRange_MoveEndpointByRange:            procTextRange_MoveEndpointByRange,
+	TextRange_MoveEndpointByUnit:             procTextRange_MoveEndpointByUnit,
+	TextRange_RemoveFromSelection:            procTextRange_RemoveFromSelection,
+	TextRange_ScrollIntoView:                 procTextRange_ScrollIntoView,
+	TextRange_Select:                         procTextRange_Select,
+	TogglePattern_Toggle:                     procTogglePattern_Toggle,
+	TransformPattern_Move:                    procTransformPattern_Move,
+	TransformPattern_Resize:                  procTransformPattern_Resize,
+	TransformPattern_Rotate:                  procTransformPattern_Rotate,
+	UiaAddEvent:                              procUiaAddEvent,
+	UiaClientsAreListening:                   procUiaClientsAreListening,
+	UiaDisconnectAllProviders:                procUiaDisconnectAllProviders,
+	UiaDisconnectProvider:                    procUiaDisconnectProvider,
+	UiaEventAddWindow:                        procUiaEventAddWindow,
+	UiaEventRemoveWindow:                     procUiaEventRemoveWindow,
+	UiaFind:                                  procUiaFind,
+	UiaGetErrorDescription:                   procUiaGetErrorDescription,
+	UiaGetPatternProvider:                    procUiaGetPatternProvider,
+	UiaGetPropertyValue:                      procUiaGetPropertyValue,
+	UiaGetReservedMixedAttributeValue:        procUiaGetReservedMixedAttributeValue,
+	UiaGetReservedNotSupportedValue:          procUiaGetReservedNotSupportedValue,
+	UiaGetRootNode:                           procUiaGetRootNode,
+	UiaGetRuntimeId:                          procUiaGetRuntimeId,
+	UiaGetUpdatedCache:                       procUiaGetUpdatedCache,
+	UiaHPatternObjectFromVariant:             procUiaHPatternObjectFromVariant,
+	UiaHTextRangeFromVariant:                 procUiaHTextRangeFromVariant,
+	UiaHUiaNodeFromVariant:                   procUiaHUiaNodeFromVariant,
+	UiaHasServerSideProvider:                 procUiaHasServerSideProvider,
+	UiaHostProviderFromHwnd:                  procUiaHostProviderFromHwnd,
+	UiaIAccessibleFromProvider:               procUiaIAccessibleFromProvider,
+	UiaLookupId:                              procUiaLookupId,
+	UiaNavigate:                              procUiaNavigate,
+	UiaNodeFromFocus:                         procUiaNodeFromFocus,
+	UiaNodeFromHandle:                        procUiaNodeFromHandle,
+	UiaNodeFromPoint:                         procUiaNodeFromPoint,
+	UiaNodeFromProvider:                      procUiaNodeFromProvider,
+	UiaNodeRelease:                           procUiaNodeRelease,
+	UiaPatternRelease:                        procUiaPatternRelease,
+	UiaProviderForNonClient:                  procUiaProviderForNonClient,
+	UiaProviderFromIAccessible:               procUiaProviderFromIAccessible,
+	UiaRaiseActiveTextPositionChangedEvent:   procUiaRaiseActiveTextPositionChangedEvent,
+	UiaRaiseAsyncContentLoadedEvent:          procUiaRaiseAsyncContentLoadedEvent,
+	UiaRaiseAutomationEvent:                  procUiaRaiseAutomationEvent,
+	UiaRaiseAutomationPropertyChangedEvent:   procUiaRaiseAutomationPropertyChangedEvent,
+	UiaRaiseChangesEvent:                     procUiaRaiseChangesEvent,
+	UiaRaiseNotificationEvent:                procUiaRaiseNotificationEvent,
+	UiaRaiseStructureChangedEvent:            procUiaRaiseStructureChangedEvent,
+	UiaRaiseTextEditTextChangedEvent:         procUiaRaiseTextEditTextChangedEvent,
+	UiaRegisterProviderCallback:              procUiaRegisterProviderCallback,
+	UiaRemoveEvent:                           procUiaRemoveEvent,
+	UiaReturnRawElementProvider:              procUiaReturnRawElementProvider,
+	UiaSetFocus:                              procUiaSetFocus,
+	UiaTextRangeRelease:                      procUiaTextRangeRelease,
+	UnhookWinEvent:                           procUnhookWinEvent,
+	UnregisterPointerInputTarget:             procUnregisterPointerInputTarget,
+	UnregisterPointerInputTargetEx:           procUnregisterPointerInputTargetEx,
+	ValuePattern_SetValue:                    procValuePattern_SetValue,
+	VirtualizedItemPattern_Realize:           procVirtualizedItemPattern_Realize,
+	WindowFromAccessibleObject:               procWindowFromAccessibleObject,
+	WindowPattern_Close:                      procWindowPattern_Close,
+	WindowPattern_SetWindowVisualState:       procWindowPattern_SetWindowVisualState,
+	WindowPattern_WaitForInputIdle:           procWindowPattern_WaitForInputIdle,
+}
 
 // AccNotifyTouchInteraction calls OLEACC!AccNotifyTouchInteraction.
 // https://learn.microsoft.com/windows/win32/api/oleacc/nf-oleacc-accnotifytouchinteraction
@@ -312,6 +578,16 @@ func IsWinEventHookInstalled(event uint32) bool {
 	return r1 != 0
 }
 
+var specItemContainerPattern_FindItemByProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// ItemContainerPattern_FindItemByProperty calls UIAutomationCore!ItemContainerPattern_FindItemByProperty.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-itemcontainerpattern_finditembyproperty
+// Minimum OS: windows6.1.
+func ItemContainerPattern_FindItemByProperty(hobj HUIAPATTERNOBJECT, hnodeStartAfter HUIANODE, propertyId int32, value systemvariant.VARIANT, pFound *HUIANODE) error {
+	r1, _, _ := win32.Call(procItemContainerPattern_FindItemByProperty.Addr(), specItemContainerPattern_FindItemByProperty, nil, uintptr(hobj), uintptr(hnodeStartAfter), uintptr(propertyId), uintptr(unsafe.Pointer(&value)), uintptr(unsafe.Pointer(pFound))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // LegacyIAccessiblePattern_DoDefaultAction calls UIAutomationCore!LegacyIAccessiblePattern_DoDefaultAction.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-legacyiaccessiblepattern_dodefaultaction
 // Minimum OS: windows6.1.
@@ -384,6 +660,16 @@ func ObjectFromLresult(lResult foundation.LRESULT, riid *win32.GUID, wParam foun
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specRangeValuePattern_SetValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// RangeValuePattern_SetValue calls UIAutomationCore!RangeValuePattern_SetValue.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-rangevaluepattern_setvalue
+// Minimum OS: windows5.1.2600.
+func RangeValuePattern_SetValue(hobj HUIAPATTERNOBJECT, val float64) error {
+	r1, _, _ := win32.Call(procRangeValuePattern_SetValue.Addr(), specRangeValuePattern_SetValue, nil, uintptr(hobj), uintptr(math.Float64bits(val))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // RegisterPointerInputTarget calls USER32!RegisterPointerInputTarget.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-registerpointerinputtarget
 // Minimum OS: windows8.0.
@@ -417,6 +703,16 @@ func ScrollItemPattern_ScrollIntoView(hobj HUIAPATTERNOBJECT) error {
 // Minimum OS: windows5.1.2600.
 func ScrollPattern_Scroll(hobj HUIAPATTERNOBJECT, horizontalAmount ScrollAmount, verticalAmount ScrollAmount) error {
 	r1, _, _ := syscall.SyscallN(procScrollPattern_Scroll.Addr(), uintptr(hobj), uintptr(horizontalAmount), uintptr(verticalAmount))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specScrollPattern_SetScrollPercent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// ScrollPattern_SetScrollPercent calls UIAutomationCore!ScrollPattern_SetScrollPercent.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-scrollpattern_setscrollpercent
+// Minimum OS: windows5.1.2600.
+func ScrollPattern_SetScrollPercent(hobj HUIAPATTERNOBJECT, horizontalPercent float64, verticalPercent float64) error {
+	r1, _, _ := win32.Call(procScrollPattern_SetScrollPercent.Addr(), specScrollPattern_SetScrollPercent, nil, uintptr(hobj), uintptr(math.Float64bits(horizontalPercent)), uintptr(math.Float64bits(verticalPercent))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -492,6 +788,16 @@ func TextPattern_RangeFromChild(hobj HUIAPATTERNOBJECT, hnodeChild HUIANODE, pRe
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specTextPattern_RangeFromPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 2, true), win32.Word}}
+
+// TextPattern_RangeFromPoint calls UIAutomationCore!TextPattern_RangeFromPoint.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textpattern_rangefrompoint
+// Minimum OS: windows5.1.2600.
+func TextPattern_RangeFromPoint(hobj HUIAPATTERNOBJECT, point UiaPoint, pRetVal *HUIATEXTRANGE) error {
+	r1, _, _ := win32.Call(procTextPattern_RangeFromPoint.Addr(), specTextPattern_RangeFromPoint, nil, uintptr(hobj), uintptr(unsafe.Pointer(&point)), uintptr(unsafe.Pointer(pRetVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // TextPattern_get_DocumentRange calls UIAutomationCore!TextPattern_get_DocumentRange.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textpattern_get_documentrange
 // Minimum OS: windows5.1.2600.
@@ -545,6 +851,17 @@ func TextRange_CompareEndpoints(hobj HUIATEXTRANGE, endpoint TextPatternRangeEnd
 // Minimum OS: windows5.1.2600.
 func TextRange_ExpandToEnclosingUnit(hobj HUIATEXTRANGE, unit TextUnit) error {
 	r1, _, _ := syscall.SyscallN(procTextRange_ExpandToEnclosingUnit.Addr(), uintptr(hobj), uintptr(unit))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specTextRange_FindAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// TextRange_FindAttribute calls UIAutomationCore!TextRange_FindAttribute.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-textrange_findattribute
+// Minimum OS: windows5.1.2600.
+func TextRange_FindAttribute(hobj HUIATEXTRANGE, attributeId int32, val systemvariant.VARIANT, backward bool, pRetVal *HUIATEXTRANGE) error {
+	_backward := win32.Bool32(backward)
+	r1, _, _ := win32.Call(procTextRange_FindAttribute.Addr(), specTextRange_FindAttribute, nil, uintptr(hobj), uintptr(attributeId), uintptr(unsafe.Pointer(&val)), uintptr(_backward), uintptr(unsafe.Pointer(pRetVal))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -652,6 +969,36 @@ func TextRange_Select(hobj HUIATEXTRANGE) error {
 // Minimum OS: windows5.1.2600.
 func TogglePattern_Toggle(hobj HUIAPATTERNOBJECT) error {
 	r1, _, _ := syscall.SyscallN(procTogglePattern_Toggle.Addr(), uintptr(hobj))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specTransformPattern_Move = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// TransformPattern_Move calls UIAutomationCore!TransformPattern_Move.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-transformpattern_move
+// Minimum OS: windows5.1.2600.
+func TransformPattern_Move(hobj HUIAPATTERNOBJECT, x float64, y float64) error {
+	r1, _, _ := win32.Call(procTransformPattern_Move.Addr(), specTransformPattern_Move, nil, uintptr(hobj), uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specTransformPattern_Resize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// TransformPattern_Resize calls UIAutomationCore!TransformPattern_Resize.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-transformpattern_resize
+// Minimum OS: windows5.1.2600.
+func TransformPattern_Resize(hobj HUIAPATTERNOBJECT, width float64, height float64) error {
+	r1, _, _ := win32.Call(procTransformPattern_Resize.Addr(), specTransformPattern_Resize, nil, uintptr(hobj), uintptr(math.Float64bits(width)), uintptr(math.Float64bits(height))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specTransformPattern_Rotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// TransformPattern_Rotate calls UIAutomationCore!TransformPattern_Rotate.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-transformpattern_rotate
+// Minimum OS: windows5.1.2600.
+func TransformPattern_Rotate(hobj HUIAPATTERNOBJECT, degrees float64) error {
+	r1, _, _ := win32.Call(procTransformPattern_Rotate.Addr(), specTransformPattern_Rotate, nil, uintptr(hobj), uintptr(math.Float64bits(degrees))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -855,6 +1202,16 @@ func UiaNodeFromHandle(hwnd foundation.HWND, phnode *HUIANODE) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specUiaNodeFromPoint = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// UiaNodeFromPoint calls UIAutomationCore!UiaNodeFromPoint.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uianodefrompoint
+// Minimum OS: windows5.1.2600.
+func UiaNodeFromPoint(x float64, y float64, pRequest *UiaCacheRequest, ppRequestedData **systemcom.SAFEARRAY, ppTreeStructure *foundation.BSTR) error {
+	r1, _, _ := win32.Call(procUiaNodeFromPoint.Addr(), specUiaNodeFromPoint, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(ppRequestedData)), uintptr(unsafe.Pointer(ppTreeStructure))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // UiaNodeFromProvider calls UIAutomationCore!UiaNodeFromProvider.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uianodefromprovider
 // Minimum OS: windows5.1.2600.
@@ -903,11 +1260,31 @@ func UiaRaiseActiveTextPositionChangedEvent(provider *IRawElementProviderSimple,
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specUiaRaiseAsyncContentLoadedEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64}}
+
+// UiaRaiseAsyncContentLoadedEvent calls UIAutomationCore!UiaRaiseAsyncContentLoadedEvent.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraiseasynccontentloadedevent
+// Minimum OS: windows5.1.2600.
+func UiaRaiseAsyncContentLoadedEvent(pProvider *IRawElementProviderSimple, asyncContentLoadedState AsyncContentLoadedState, percentComplete float64) error {
+	r1, _, _ := win32.Call(procUiaRaiseAsyncContentLoadedEvent.Addr(), specUiaRaiseAsyncContentLoadedEvent, nil, uintptr(unsafe.Pointer(pProvider)), uintptr(asyncContentLoadedState), uintptr(math.Float64bits(percentComplete))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // UiaRaiseAutomationEvent calls UIAutomationCore!UiaRaiseAutomationEvent.
 // https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraiseautomationevent
 // Minimum OS: windows5.1.2600.
 func UiaRaiseAutomationEvent(pProvider *IRawElementProviderSimple, id UIA_EVENT_ID) error {
 	r1, _, _ := syscall.SyscallN(procUiaRaiseAutomationEvent.Addr(), uintptr(unsafe.Pointer(pProvider)), uintptr(id))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specUiaRaiseAutomationPropertyChangedEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// UiaRaiseAutomationPropertyChangedEvent calls UIAutomationCore!UiaRaiseAutomationPropertyChangedEvent.
+// https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/nf-uiautomationcoreapi-uiaraiseautomationpropertychangedevent
+// Minimum OS: windows5.1.2600.
+func UiaRaiseAutomationPropertyChangedEvent(pProvider *IRawElementProviderSimple, id UIA_PROPERTY_ID, oldValue systemvariant.VARIANT, newValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(procUiaRaiseAutomationPropertyChangedEvent.Addr(), specUiaRaiseAutomationPropertyChangedEvent, nil, uintptr(unsafe.Pointer(pProvider)), uintptr(id), uintptr(unsafe.Pointer(&oldValue)), uintptr(unsafe.Pointer(&newValue))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

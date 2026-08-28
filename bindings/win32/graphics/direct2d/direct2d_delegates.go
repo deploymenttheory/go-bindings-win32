@@ -4,14 +4,17 @@
 
 package direct2d
 
-// PD2D1_EFFECT_FACTORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(**systemcom.IUnknown) foundation.HRESULT.
+// PD2D1_EFFECT_FACTORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(**systemcom.IUnknown) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PD2D1_EFFECT_FACTORY uintptr
 
-// PD2D1_PROPERTY_GET_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown, *byte, uint32, *uint32) foundation.HRESULT.
+// PD2D1_PROPERTY_GET_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown, *byte, uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PD2D1_PROPERTY_GET_FUNCTION uintptr
 
-// PD2D1_PROPERTY_SET_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown, *byte, uint32) foundation.HRESULT.
+// PD2D1_PROPERTY_SET_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown, *byte, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PD2D1_PROPERTY_SET_FUNCTION uintptr

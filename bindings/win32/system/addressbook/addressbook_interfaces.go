@@ -975,3 +975,11 @@ func (self *IWABObject) GetMe(lpIAB *IAddrBook, ulFlags uint32, lpdwAction *uint
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIAB)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpdwAction)), uintptr(unsafe.Pointer(lpsbEID)), uintptr(hwnd))
 	return win32.ErrIfFailed(int32(r1))
 }
+
+var specIWABObject_SetMe = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// SetMe dispatches through IWABObject's vtable slot 15.
+func (self *IWABObject) SetMe(lpIAB *IAddrBook, ulFlags uint32, sbEID SBinary, hwnd foundation.HWND) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIWABObject_SetMe, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIAB)), uintptr(ulFlags), uintptr(unsafe.Pointer(&sbEID)), uintptr(hwnd)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}

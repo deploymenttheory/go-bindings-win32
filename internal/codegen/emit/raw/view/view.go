@@ -71,8 +71,15 @@ type ConstantModel struct {
 type DelegateModel struct {
 	TypeName string
 	DocURL   string
-	// Signature documents the callback's Go shape in a comment.
+	// Signature documents the Go shape syscall.NewCallback accepts for this
+	// callback: the native parameter types and a uintptr result.
 	Signature string
+	// NativeReturn is the native return type when it is not void; the doc
+	// comment explains that NewCallback still needs a uintptr-sized result.
+	NativeReturn string
+	// HasFloat marks a callback with floating-point parameters or return,
+	// which syscall.NewCallback cannot marshal (golang/go#45300).
+	HasFloat bool
 }
 
 // DLLModel declares one lazily loaded DLL and its procs.
@@ -90,6 +97,9 @@ type ProcModel struct {
 	VarName string
 	// ExportName is the DLL export ("CreateEventW").
 	ExportName string
+	// GoName is the exported Go function dispatching through this proc; the
+	// Procs probe table is keyed by it.
+	GoName string
 }
 
 // Return-shape discriminants for FunctionModel.ReturnKind and
@@ -110,6 +120,17 @@ const (
 	RetRetValVoid    = 9 // void + elevated outs → (outs…)
 	// Curated informational-success APIs (S_FALSE matters):
 	RetHResultValueErr = 10 // HRESULT → (win32.HRESULT, error); success codes preserved
+	// Header inline carrying a [Constant]: no dispatch, `return RetExpr`.
+	RetInline = 11
+	// Struct returned by value through a result buffer: a COM method's
+	// hidden result pointer right after `this`, or a flat function's
+	// win32.Call ret buffer; the body returns the local (RetExpr).
+	RetStructOut = 12
+	// RetStructOut plus SetLastError: (T, error) with the error advisory.
+	RetStructOutLast = 13
+	// Floating-point return through win32.Call: the body binds `r` to the
+	// Result and returns RetExpr (a math.FloatNNfrombits of r.F0).
+	RetFloat = 14
 )
 
 // InterfaceModel is one COM interface: a pointer-sized struct dispatching
@@ -125,6 +146,10 @@ type InterfaceModel struct {
 	// BaseType is the embedded base interface type ("com.IUnknown"); ""
 	// makes this a root that declares the raw vtable field itself.
 	BaseType string
+	// AliasOf, when set, declares the type as an alias of the runtime's root
+	// COM shape ("win32.IUnknown") instead of a struct; no methods are
+	// emitted (the runtime owns them).
+	AliasOf string
 	// BaseNote documents a severed base embedding ("" when none).
 	BaseNote string
 	Methods  []ComMethodModel
@@ -143,6 +168,13 @@ type ComMethodModel struct {
 	// syscall words (UTF-16, bool→BOOL, [out,retval] locals) before dispatch.
 	Preamble []string
 	ArgExprs []string
+	// CallExpr is the complete dispatch expression: syscall.SyscallN(...)
+	// or, for shapes SyscallN cannot marshal, win32.Call(...) — with .Tuple()
+	// appended unless ReturnKind is RetFloat, so it yields (r1, r2, err).
+	CallExpr string
+	// SpecDecl declares the package-level *win32.Spec a win32.Call
+	// dispatch references ("" for SyscallN dispatch).
+	SpecDecl string
 	// ReturnKind selects the body shape (Ret* constants). COM methods use
 	// RetVoid, RetHResultErr, the RetRetVal* elevation shapes, or RetVal.
 	ReturnKind int
@@ -169,6 +201,13 @@ type FunctionModel struct {
 	ProcVar string
 	// ArgExprs are the rendered SyscallN argument words.
 	ArgExprs []string
+	// CallExpr is the complete dispatch expression: syscall.SyscallN(...)
+	// or, for shapes SyscallN cannot marshal, win32.Call(...) — with .Tuple()
+	// appended unless ReturnKind is RetFloat, so it yields (r1, r2, err).
+	CallExpr string
+	// SpecDecl declares the package-level *win32.Spec a win32.Call
+	// dispatch references ("" for SyscallN dispatch).
+	SpecDecl string
 	// ReturnKind selects the body shape (Ret* constants).
 	ReturnKind int
 	// RetExpr converts r1 to the Go return value ("foundation.HANDLE(r1)").

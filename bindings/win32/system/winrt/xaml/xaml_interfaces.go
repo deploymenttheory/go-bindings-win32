@@ -267,6 +267,14 @@ func (self *ISurfaceImageSourceNative) SetDevice(device *graphicsdxgi.IDXGIDevic
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISurfaceImageSourceNative_BeginDraw = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// BeginDraw dispatches through ISurfaceImageSourceNative's vtable slot 4.
+func (self *ISurfaceImageSourceNative) BeginDraw(updateRect foundation.RECT, surface **graphicsdxgi.IDXGISurface, offset *foundation.POINT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specISurfaceImageSourceNative_BeginDraw, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&updateRect)), uintptr(unsafe.Pointer(surface)), uintptr(unsafe.Pointer(offset))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // EndDraw dispatches through ISurfaceImageSourceNative's vtable slot 5.
 func (self *ISurfaceImageSourceNative) EndDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
@@ -398,6 +406,14 @@ type IVirtualSurfaceImageSourceNative struct {
 
 // IID_IVirtualSurfaceImageSourceNative is the interface identifier for IVirtualSurfaceImageSourceNative.
 var IID_IVirtualSurfaceImageSourceNative = win32.GUID{Data1: 0xe9550983, Data2: 0x360b, Data3: 0x4f53, Data4: [8]byte{0xb3, 0x91, 0xaf, 0xd6, 0x95, 0x07, 0x86, 0x91}}
+
+var specIVirtualSurfaceImageSourceNative_Invalidate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Invalidate dispatches through IVirtualSurfaceImageSourceNative's vtable slot 6.
+func (self *IVirtualSurfaceImageSourceNative) Invalidate(updateRect foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIVirtualSurfaceImageSourceNative_Invalidate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&updateRect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetUpdateRectCount dispatches through IVirtualSurfaceImageSourceNative's vtable slot 7.
 func (self *IVirtualSurfaceImageSourceNative) GetUpdateRectCount(count *uint32) error {

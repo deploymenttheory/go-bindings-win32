@@ -65,9 +65,9 @@ func (self *IXmlReader) MoveToNextAttribute() error {
 }
 
 // MoveToAttributeByName dispatches through IXmlReader's vtable slot 10.
-func (self *IXmlReader) MoveToAttributeByName(pwszLocalName string, pwszNamespaceUri string) error {
+func (self *IXmlReader) MoveToAttributeByName(pwszLocalName string, pwszNamespaceUri *string) error {
 	_pwszLocalName := win32.UTF16Ptr(pwszLocalName)
-	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
+	_pwszNamespaceUri := win32.UTF16PtrOrNil(pwszNamespaceUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -171,10 +171,10 @@ type IXmlResolver struct {
 var IID_IXmlResolver = win32.GUID{Data1: 0x7279fc82, Data2: 0x709d, Data3: 0x4095, Data4: [8]byte{0xb6, 0x3d, 0x69, 0xfe, 0x4b, 0x0d, 0x90, 0x30}}
 
 // ResolveUri dispatches through IXmlResolver's vtable slot 3.
-func (self *IXmlResolver) ResolveUri(pwszBaseUri string, pwszPublicIdentifier string, pwszSystemIdentifier string, ppResolvedInput **systemcom.IUnknown) error {
-	_pwszBaseUri := win32.UTF16Ptr(pwszBaseUri)
-	_pwszPublicIdentifier := win32.UTF16Ptr(pwszPublicIdentifier)
-	_pwszSystemIdentifier := win32.UTF16Ptr(pwszSystemIdentifier)
+func (self *IXmlResolver) ResolveUri(pwszBaseUri *string, pwszPublicIdentifier *string, pwszSystemIdentifier *string, ppResolvedInput **systemcom.IUnknown) error {
+	_pwszBaseUri := win32.UTF16PtrOrNil(pwszBaseUri)
+	_pwszPublicIdentifier := win32.UTF16PtrOrNil(pwszPublicIdentifier)
+	_pwszSystemIdentifier := win32.UTF16PtrOrNil(pwszSystemIdentifier)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszBaseUri)), uintptr(unsafe.Pointer(_pwszPublicIdentifier)), uintptr(unsafe.Pointer(_pwszSystemIdentifier)), uintptr(unsafe.Pointer(ppResolvedInput)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -213,18 +213,18 @@ func (self *IXmlWriter) WriteAttributes(pReader *IXmlReader, fWriteDefaultAttrib
 }
 
 // WriteAttributeString dispatches through IXmlWriter's vtable slot 7.
-func (self *IXmlWriter) WriteAttributeString(pwszPrefix string, pwszLocalName string, pwszNamespaceUri string, pwszValue string) error {
-	_pwszPrefix := win32.UTF16Ptr(pwszPrefix)
-	_pwszLocalName := win32.UTF16Ptr(pwszLocalName)
-	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
-	_pwszValue := win32.UTF16Ptr(pwszValue)
+func (self *IXmlWriter) WriteAttributeString(pwszPrefix *string, pwszLocalName *string, pwszNamespaceUri *string, pwszValue *string) error {
+	_pwszPrefix := win32.UTF16PtrOrNil(pwszPrefix)
+	_pwszLocalName := win32.UTF16PtrOrNil(pwszLocalName)
+	_pwszNamespaceUri := win32.UTF16PtrOrNil(pwszNamespaceUri)
+	_pwszValue := win32.UTF16PtrOrNil(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)), uintptr(unsafe.Pointer(_pwszValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteCData dispatches through IXmlWriter's vtable slot 8.
-func (self *IXmlWriter) WriteCData(pwszText string) error {
-	_pwszText := win32.UTF16Ptr(pwszText)
+func (self *IXmlWriter) WriteCData(pwszText *string) error {
+	_pwszText := win32.UTF16PtrOrNil(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszText)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -236,35 +236,35 @@ func (self *IXmlWriter) WriteCharEntity(wch uint16) error {
 }
 
 // WriteChars dispatches through IXmlWriter's vtable slot 10.
-func (self *IXmlWriter) WriteChars(pwch string, cwch uint32) error {
-	_pwch := win32.UTF16Ptr(pwch)
+func (self *IXmlWriter) WriteChars(pwch *string, cwch uint32) error {
+	_pwch := win32.UTF16PtrOrNil(pwch)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwch)), uintptr(cwch))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteComment dispatches through IXmlWriter's vtable slot 11.
-func (self *IXmlWriter) WriteComment(pwszComment string) error {
-	_pwszComment := win32.UTF16Ptr(pwszComment)
+func (self *IXmlWriter) WriteComment(pwszComment *string) error {
+	_pwszComment := win32.UTF16PtrOrNil(pwszComment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszComment)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDocType dispatches through IXmlWriter's vtable slot 12.
-func (self *IXmlWriter) WriteDocType(pwszName string, pwszPublicId string, pwszSystemId string, pwszSubset string) error {
-	_pwszName := win32.UTF16Ptr(pwszName)
-	_pwszPublicId := win32.UTF16Ptr(pwszPublicId)
-	_pwszSystemId := win32.UTF16Ptr(pwszSystemId)
-	_pwszSubset := win32.UTF16Ptr(pwszSubset)
+func (self *IXmlWriter) WriteDocType(pwszName *string, pwszPublicId *string, pwszSystemId *string, pwszSubset *string) error {
+	_pwszName := win32.UTF16PtrOrNil(pwszName)
+	_pwszPublicId := win32.UTF16PtrOrNil(pwszPublicId)
+	_pwszSystemId := win32.UTF16PtrOrNil(pwszSystemId)
+	_pwszSubset := win32.UTF16PtrOrNil(pwszSubset)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszPublicId)), uintptr(unsafe.Pointer(_pwszSystemId)), uintptr(unsafe.Pointer(_pwszSubset)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteElementString dispatches through IXmlWriter's vtable slot 13.
-func (self *IXmlWriter) WriteElementString(pwszPrefix string, pwszLocalName string, pwszNamespaceUri string, pwszValue string) error {
-	_pwszPrefix := win32.UTF16Ptr(pwszPrefix)
+func (self *IXmlWriter) WriteElementString(pwszPrefix *string, pwszLocalName string, pwszNamespaceUri *string, pwszValue *string) error {
+	_pwszPrefix := win32.UTF16PtrOrNil(pwszPrefix)
 	_pwszLocalName := win32.UTF16Ptr(pwszLocalName)
-	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
-	_pwszValue := win32.UTF16Ptr(pwszValue)
+	_pwszNamespaceUri := win32.UTF16PtrOrNil(pwszNamespaceUri)
+	_pwszValue := win32.UTF16PtrOrNil(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)), uintptr(unsafe.Pointer(_pwszValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -323,31 +323,31 @@ func (self *IXmlWriter) WriteNodeShallow(pReader *IXmlReader, fWriteDefaultAttri
 }
 
 // WriteProcessingInstruction dispatches through IXmlWriter's vtable slot 22.
-func (self *IXmlWriter) WriteProcessingInstruction(pwszName string, pwszText string) error {
+func (self *IXmlWriter) WriteProcessingInstruction(pwszName string, pwszText *string) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
-	_pwszText := win32.UTF16Ptr(pwszText)
+	_pwszText := win32.UTF16PtrOrNil(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszText)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteQualifiedName dispatches through IXmlWriter's vtable slot 23.
-func (self *IXmlWriter) WriteQualifiedName(pwszLocalName string, pwszNamespaceUri string) error {
+func (self *IXmlWriter) WriteQualifiedName(pwszLocalName string, pwszNamespaceUri *string) error {
 	_pwszLocalName := win32.UTF16Ptr(pwszLocalName)
-	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
+	_pwszNamespaceUri := win32.UTF16PtrOrNil(pwszNamespaceUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteRaw dispatches through IXmlWriter's vtable slot 24.
-func (self *IXmlWriter) WriteRaw(pwszData string) error {
-	_pwszData := win32.UTF16Ptr(pwszData)
+func (self *IXmlWriter) WriteRaw(pwszData *string) error {
+	_pwszData := win32.UTF16PtrOrNil(pwszData)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszData)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteRawChars dispatches through IXmlWriter's vtable slot 25.
-func (self *IXmlWriter) WriteRawChars(pwch string, cwch uint32) error {
-	_pwch := win32.UTF16Ptr(pwch)
+func (self *IXmlWriter) WriteRawChars(pwch *string, cwch uint32) error {
+	_pwch := win32.UTF16PtrOrNil(pwch)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwch)), uintptr(cwch))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -359,17 +359,17 @@ func (self *IXmlWriter) WriteStartDocument(standalone XmlStandalone) error {
 }
 
 // WriteStartElement dispatches through IXmlWriter's vtable slot 27.
-func (self *IXmlWriter) WriteStartElement(pwszPrefix string, pwszLocalName string, pwszNamespaceUri string) error {
-	_pwszPrefix := win32.UTF16Ptr(pwszPrefix)
+func (self *IXmlWriter) WriteStartElement(pwszPrefix *string, pwszLocalName string, pwszNamespaceUri *string) error {
+	_pwszPrefix := win32.UTF16PtrOrNil(pwszPrefix)
 	_pwszLocalName := win32.UTF16Ptr(pwszLocalName)
-	_pwszNamespaceUri := win32.UTF16Ptr(pwszNamespaceUri)
+	_pwszNamespaceUri := win32.UTF16PtrOrNil(pwszNamespaceUri)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(unsafe.Pointer(_pwszLocalName)), uintptr(unsafe.Pointer(_pwszNamespaceUri)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteString dispatches through IXmlWriter's vtable slot 28.
-func (self *IXmlWriter) WriteString(pwszText string) error {
-	_pwszText := win32.UTF16Ptr(pwszText)
+func (self *IXmlWriter) WriteString(pwszText *string) error {
+	_pwszText := win32.UTF16PtrOrNil(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszText)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -381,8 +381,8 @@ func (self *IXmlWriter) WriteSurrogateCharEntity(wchLow uint16, wchHigh uint16) 
 }
 
 // WriteWhitespace dispatches through IXmlWriter's vtable slot 30.
-func (self *IXmlWriter) WriteWhitespace(pwszWhitespace string) error {
-	_pwszWhitespace := win32.UTF16Ptr(pwszWhitespace)
+func (self *IXmlWriter) WriteWhitespace(pwszWhitespace *string) error {
+	_pwszWhitespace := win32.UTF16PtrOrNil(pwszWhitespace)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszWhitespace)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -427,16 +427,16 @@ func (self *IXmlWriterLite) WriteAttributes(pReader *IXmlReader, fWriteDefaultAt
 }
 
 // WriteAttributeString dispatches through IXmlWriterLite's vtable slot 7.
-func (self *IXmlWriterLite) WriteAttributeString(pwszQName string, cwszQName uint32, pwszValue string, cwszValue uint32) error {
+func (self *IXmlWriterLite) WriteAttributeString(pwszQName string, cwszQName uint32, pwszValue *string, cwszValue uint32) error {
 	_pwszQName := win32.UTF16Ptr(pwszQName)
-	_pwszValue := win32.UTF16Ptr(pwszValue)
+	_pwszValue := win32.UTF16PtrOrNil(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszQName)), uintptr(cwszQName), uintptr(unsafe.Pointer(_pwszValue)), uintptr(cwszValue))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteCData dispatches through IXmlWriterLite's vtable slot 8.
-func (self *IXmlWriterLite) WriteCData(pwszText string) error {
-	_pwszText := win32.UTF16Ptr(pwszText)
+func (self *IXmlWriterLite) WriteCData(pwszText *string) error {
+	_pwszText := win32.UTF16PtrOrNil(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszText)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -448,33 +448,33 @@ func (self *IXmlWriterLite) WriteCharEntity(wch uint16) error {
 }
 
 // WriteChars dispatches through IXmlWriterLite's vtable slot 10.
-func (self *IXmlWriterLite) WriteChars(pwch string, cwch uint32) error {
-	_pwch := win32.UTF16Ptr(pwch)
+func (self *IXmlWriterLite) WriteChars(pwch *string, cwch uint32) error {
+	_pwch := win32.UTF16PtrOrNil(pwch)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwch)), uintptr(cwch))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteComment dispatches through IXmlWriterLite's vtable slot 11.
-func (self *IXmlWriterLite) WriteComment(pwszComment string) error {
-	_pwszComment := win32.UTF16Ptr(pwszComment)
+func (self *IXmlWriterLite) WriteComment(pwszComment *string) error {
+	_pwszComment := win32.UTF16PtrOrNil(pwszComment)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszComment)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteDocType dispatches through IXmlWriterLite's vtable slot 12.
-func (self *IXmlWriterLite) WriteDocType(pwszName string, pwszPublicId string, pwszSystemId string, pwszSubset string) error {
-	_pwszName := win32.UTF16Ptr(pwszName)
-	_pwszPublicId := win32.UTF16Ptr(pwszPublicId)
-	_pwszSystemId := win32.UTF16Ptr(pwszSystemId)
-	_pwszSubset := win32.UTF16Ptr(pwszSubset)
+func (self *IXmlWriterLite) WriteDocType(pwszName *string, pwszPublicId *string, pwszSystemId *string, pwszSubset *string) error {
+	_pwszName := win32.UTF16PtrOrNil(pwszName)
+	_pwszPublicId := win32.UTF16PtrOrNil(pwszPublicId)
+	_pwszSystemId := win32.UTF16PtrOrNil(pwszSystemId)
+	_pwszSubset := win32.UTF16PtrOrNil(pwszSubset)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszPublicId)), uintptr(unsafe.Pointer(_pwszSystemId)), uintptr(unsafe.Pointer(_pwszSubset)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteElementString dispatches through IXmlWriterLite's vtable slot 13.
-func (self *IXmlWriterLite) WriteElementString(pwszQName string, cwszQName uint32, pwszValue string) error {
+func (self *IXmlWriterLite) WriteElementString(pwszQName string, cwszQName uint32, pwszValue *string) error {
 	_pwszQName := win32.UTF16Ptr(pwszQName)
-	_pwszValue := win32.UTF16Ptr(pwszValue)
+	_pwszValue := win32.UTF16PtrOrNil(pwszValue)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszQName)), uintptr(cwszQName), uintptr(unsafe.Pointer(_pwszValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -535,23 +535,23 @@ func (self *IXmlWriterLite) WriteNodeShallow(pReader *IXmlReader, fWriteDefaultA
 }
 
 // WriteProcessingInstruction dispatches through IXmlWriterLite's vtable slot 22.
-func (self *IXmlWriterLite) WriteProcessingInstruction(pwszName string, pwszText string) error {
+func (self *IXmlWriterLite) WriteProcessingInstruction(pwszName string, pwszText *string) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
-	_pwszText := win32.UTF16Ptr(pwszText)
+	_pwszText := win32.UTF16PtrOrNil(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszText)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteRaw dispatches through IXmlWriterLite's vtable slot 23.
-func (self *IXmlWriterLite) WriteRaw(pwszData string) error {
-	_pwszData := win32.UTF16Ptr(pwszData)
+func (self *IXmlWriterLite) WriteRaw(pwszData *string) error {
+	_pwszData := win32.UTF16PtrOrNil(pwszData)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszData)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WriteRawChars dispatches through IXmlWriterLite's vtable slot 24.
-func (self *IXmlWriterLite) WriteRawChars(pwch string, cwch uint32) error {
-	_pwch := win32.UTF16Ptr(pwch)
+func (self *IXmlWriterLite) WriteRawChars(pwch *string, cwch uint32) error {
+	_pwch := win32.UTF16PtrOrNil(pwch)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwch)), uintptr(cwch))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -570,8 +570,8 @@ func (self *IXmlWriterLite) WriteStartElement(pwszQName string, cwszQName uint32
 }
 
 // WriteString dispatches through IXmlWriterLite's vtable slot 27.
-func (self *IXmlWriterLite) WriteString(pwszText string) error {
-	_pwszText := win32.UTF16Ptr(pwszText)
+func (self *IXmlWriterLite) WriteString(pwszText *string) error {
+	_pwszText := win32.UTF16PtrOrNil(pwszText)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszText)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -583,8 +583,8 @@ func (self *IXmlWriterLite) WriteSurrogateCharEntity(wchLow uint16, wchHigh uint
 }
 
 // WriteWhitespace dispatches through IXmlWriterLite's vtable slot 29.
-func (self *IXmlWriterLite) WriteWhitespace(pwszWhitespace string) error {
-	_pwszWhitespace := win32.UTF16Ptr(pwszWhitespace)
+func (self *IXmlWriterLite) WriteWhitespace(pwszWhitespace *string) error {
+	_pwszWhitespace := win32.UTF16PtrOrNil(pwszWhitespace)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszWhitespace)))
 	return win32.ErrIfFailed(int32(r1))
 }

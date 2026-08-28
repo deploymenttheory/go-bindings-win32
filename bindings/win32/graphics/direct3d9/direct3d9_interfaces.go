@@ -5,6 +5,7 @@
 package direct3d9
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -482,6 +483,14 @@ func (self *IDirect3DDevice9) EndScene() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDirect3DDevice9_Clear = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// Clear dispatches through IDirect3DDevice9's vtable slot 43.
+func (self *IDirect3DDevice9) Clear(Count uint32, pRects *D3DRECT, Flags uint32, Color uint32, Z float32, Stencil uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIDirect3DDevice9_Clear, nil, uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(pRects)), uintptr(Flags), uintptr(Color), uintptr(math.Float32bits(Z)), uintptr(Stencil)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetTransform dispatches through IDirect3DDevice9's vtable slot 44.
 func (self *IDirect3DDevice9) SetTransform(State D3DTRANSFORMSTATETYPE, pMatrix *graphicsdirect3d.D3DMATRIX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(State), uintptr(unsafe.Pointer(pMatrix)))
@@ -692,6 +701,22 @@ func (self *IDirect3DDevice9) SetSoftwareVertexProcessing(bSoftware bool) error 
 func (self *IDirect3DDevice9) GetSoftwareVertexProcessing() foundation.BOOL {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)))
 	return foundation.BOOL(r1)
+}
+
+var specIDirect3DDevice9_SetNPatchMode = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetNPatchMode dispatches through IDirect3DDevice9's vtable slot 79.
+func (self *IDirect3DDevice9) SetNPatchMode(nSegments float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[79], specIDirect3DDevice9_SetNPatchMode, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(nSegments))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirect3DDevice9_GetNPatchMode = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetNPatchMode dispatches through IDirect3DDevice9's vtable slot 80.
+func (self *IDirect3DDevice9) GetNPatchMode() float32 {
+	r := win32.Call(self.LpVtbl[80], specIDirect3DDevice9_GetNPatchMode, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
 }
 
 // DrawPrimitive dispatches through IDirect3DDevice9's vtable slot 81.

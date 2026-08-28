@@ -5,6 +5,7 @@
 package magnification
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -28,13 +29,61 @@ var (
 	procMagInitialize               = modMAGNIFICATION.NewProc("MagInitialize")
 	procMagSetColorEffect           = modMAGNIFICATION.NewProc("MagSetColorEffect")
 	procMagSetFullscreenColorEffect = modMAGNIFICATION.NewProc("MagSetFullscreenColorEffect")
+	procMagSetFullscreenTransform   = modMAGNIFICATION.NewProc("MagSetFullscreenTransform")
 	procMagSetImageScalingCallback  = modMAGNIFICATION.NewProc("MagSetImageScalingCallback")
 	procMagSetInputTransform        = modMAGNIFICATION.NewProc("MagSetInputTransform")
 	procMagSetWindowFilterList      = modMAGNIFICATION.NewProc("MagSetWindowFilterList")
+	procMagSetWindowSource          = modMAGNIFICATION.NewProc("MagSetWindowSource")
 	procMagSetWindowTransform       = modMAGNIFICATION.NewProc("MagSetWindowTransform")
 	procMagShowSystemCursor         = modMAGNIFICATION.NewProc("MagShowSystemCursor")
 	procMagUninitialize             = modMAGNIFICATION.NewProc("MagUninitialize")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MagGetColorEffect           *win32.Proc
+	MagGetFullscreenColorEffect *win32.Proc
+	MagGetFullscreenTransform   *win32.Proc
+	MagGetImageScalingCallback  *win32.Proc
+	MagGetInputTransform        *win32.Proc
+	MagGetWindowFilterList      *win32.Proc
+	MagGetWindowSource          *win32.Proc
+	MagGetWindowTransform       *win32.Proc
+	MagInitialize               *win32.Proc
+	MagSetColorEffect           *win32.Proc
+	MagSetFullscreenColorEffect *win32.Proc
+	MagSetFullscreenTransform   *win32.Proc
+	MagSetImageScalingCallback  *win32.Proc
+	MagSetInputTransform        *win32.Proc
+	MagSetWindowFilterList      *win32.Proc
+	MagSetWindowSource          *win32.Proc
+	MagSetWindowTransform       *win32.Proc
+	MagShowSystemCursor         *win32.Proc
+	MagUninitialize             *win32.Proc
+}{
+	MagGetColorEffect:           procMagGetColorEffect,
+	MagGetFullscreenColorEffect: procMagGetFullscreenColorEffect,
+	MagGetFullscreenTransform:   procMagGetFullscreenTransform,
+	MagGetImageScalingCallback:  procMagGetImageScalingCallback,
+	MagGetInputTransform:        procMagGetInputTransform,
+	MagGetWindowFilterList:      procMagGetWindowFilterList,
+	MagGetWindowSource:          procMagGetWindowSource,
+	MagGetWindowTransform:       procMagGetWindowTransform,
+	MagInitialize:               procMagInitialize,
+	MagSetColorEffect:           procMagSetColorEffect,
+	MagSetFullscreenColorEffect: procMagSetFullscreenColorEffect,
+	MagSetFullscreenTransform:   procMagSetFullscreenTransform,
+	MagSetImageScalingCallback:  procMagSetImageScalingCallback,
+	MagSetInputTransform:        procMagSetInputTransform,
+	MagSetWindowFilterList:      procMagSetWindowFilterList,
+	MagSetWindowSource:          procMagSetWindowSource,
+	MagSetWindowTransform:       procMagSetWindowTransform,
+	MagShowSystemCursor:         procMagShowSystemCursor,
+	MagUninitialize:             procMagUninitialize,
+}
 
 // MagGetColorEffect calls MAGNIFICATION!MagGetColorEffect.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maggetcoloreffect
@@ -124,6 +173,16 @@ func MagSetFullscreenColorEffect(pEffect *MAGCOLOREFFECT) bool {
 	return r1 != 0
 }
 
+var specMagSetFullscreenTransform = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word, win32.Word}}
+
+// MagSetFullscreenTransform calls MAGNIFICATION!MagSetFullscreenTransform.
+// https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magsetfullscreentransform
+// Minimum OS: windows8.0.
+func MagSetFullscreenTransform(magLevel float32, xOffset int32, yOffset int32) bool {
+	r1, _, _ := win32.Call(procMagSetFullscreenTransform.Addr(), specMagSetFullscreenTransform, nil, uintptr(math.Float32bits(magLevel)), uintptr(xOffset), uintptr(yOffset)).Tuple()
+	return r1 != 0
+}
+
 // MagSetImageScalingCallback calls MAGNIFICATION!MagSetImageScalingCallback.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magsetimagescalingcallback
 // Minimum OS: windows6.0.6000.
@@ -149,6 +208,16 @@ func MagSetInputTransform(fEnabled bool, pRectSource *foundation.RECT, pRectDest
 // Minimum OS: windows6.0.6000.
 func MagSetWindowFilterList(hwnd foundation.HWND, dwFilterMode MW_FILTERMODE, count int32, pHWND *foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procMagSetWindowFilterList.Addr(), uintptr(hwnd), uintptr(dwFilterMode), uintptr(count), uintptr(unsafe.Pointer(pHWND)))
+	return r1 != 0
+}
+
+var specMagSetWindowSource = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// MagSetWindowSource calls MAGNIFICATION!MagSetWindowSource.
+// https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magsetwindowsource
+// Minimum OS: windows6.0.6000.
+func MagSetWindowSource(hwnd foundation.HWND, rect foundation.RECT) bool {
+	r1, _, _ := win32.Call(procMagSetWindowSource.Addr(), specMagSetWindowSource, nil, uintptr(hwnd), uintptr(unsafe.Pointer(&rect))).Tuple()
 	return r1 != 0
 }
 

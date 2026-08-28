@@ -264,9 +264,9 @@ type IMDSPDirectTransfer struct {
 var IID_IMDSPDirectTransfer = win32.GUID{Data1: 0xc2fe57a8, Data2: 0x9304, Data3: 0x478c, Data4: [8]byte{0x9e, 0xe4, 0x47, 0xe3, 0x97, 0xb9, 0x12, 0xd7}}
 
 // TransferToDevice dispatches through IMDSPDirectTransfer's vtable slot 3.
-func (self *IMDSPDirectTransfer) TransferToDevice(pwszSourceFilePath string, pSourceOperation *IWMDMOperation, fuFlags uint32, pwszDestinationName string, pSourceMetaData *IWMDMMetaData, pTransferProgress *IWMDMProgress, ppNewObject **IMDSPStorage) error {
-	_pwszSourceFilePath := win32.UTF16Ptr(pwszSourceFilePath)
-	_pwszDestinationName := win32.UTF16Ptr(pwszDestinationName)
+func (self *IMDSPDirectTransfer) TransferToDevice(pwszSourceFilePath *string, pSourceOperation *IWMDMOperation, fuFlags uint32, pwszDestinationName *string, pSourceMetaData *IWMDMMetaData, pTransferProgress *IWMDMProgress, ppNewObject **IMDSPStorage) error {
+	_pwszSourceFilePath := win32.UTF16PtrOrNil(pwszSourceFilePath)
+	_pwszDestinationName := win32.UTF16PtrOrNil(pwszDestinationName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszSourceFilePath)), uintptr(unsafe.Pointer(pSourceOperation)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pwszDestinationName)), uintptr(unsafe.Pointer(pSourceMetaData)), uintptr(unsafe.Pointer(pTransferProgress)), uintptr(unsafe.Pointer(ppNewObject)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -913,8 +913,8 @@ func (self *ISCPSecureQuery) GetDataDemands(pfuFlags *uint32, pdwMinRightsData *
 }
 
 // ExamineData dispatches through ISCPSecureQuery's vtable slot 4.
-func (self *ISCPSecureQuery) ExamineData(fuFlags uint32, pwszExtension string, pData []byte, abMac *byte) error {
-	_pwszExtension := win32.UTF16Ptr(pwszExtension)
+func (self *ISCPSecureQuery) ExamineData(fuFlags uint32, pwszExtension *string, pData []byte, abMac *byte) error {
+	_pwszExtension := win32.UTF16PtrOrNil(pwszExtension)
 	var _pData *byte
 	if len(pData) > 0 {
 		_pData = &pData[0]
@@ -1704,6 +1704,30 @@ type IWMDMProgress3 struct {
 // IID_IWMDMProgress3 is the interface identifier for IWMDMProgress3.
 var IID_IWMDMProgress3 = win32.GUID{Data1: 0x21de01cb, Data2: 0x3bb4, Data3: 0x4929, Data4: [8]byte{0xb2, 0x1a, 0x17, 0xaf, 0x3f, 0x80, 0xf6, 0x58}}
 
+var specIWMDMProgress3_Begin3 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// Begin3 dispatches through IWMDMProgress3's vtable slot 7.
+func (self *IWMDMProgress3) Begin3(EventId win32.GUID, dwEstimatedTicks uint32, pContext *OPAQUECOMMAND) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIWMDMProgress3_Begin3, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&EventId)), uintptr(dwEstimatedTicks), uintptr(unsafe.Pointer(pContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMDMProgress3_Progress3 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// Progress3 dispatches through IWMDMProgress3's vtable slot 8.
+func (self *IWMDMProgress3) Progress3(EventId win32.GUID, dwTranspiredTicks uint32, pContext *OPAQUECOMMAND) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIWMDMProgress3_Progress3, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&EventId)), uintptr(dwTranspiredTicks), uintptr(unsafe.Pointer(pContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMDMProgress3_End3 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// End3 dispatches through IWMDMProgress3's vtable slot 9.
+func (self *IWMDMProgress3) End3(EventId win32.GUID, hrCompletionCode foundation.HRESULT, pContext *OPAQUECOMMAND) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIWMDMProgress3_End3, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&EventId)), uintptr(hrCompletionCode), uintptr(unsafe.Pointer(pContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IWMDMRevoked: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmrevoked
 // IID: ebeccedb-88ee-4e55-b6a4-8d9f07d696aa
 type IWMDMRevoked struct {
@@ -1911,8 +1935,8 @@ type IWMDMStorageControl struct {
 var IID_IWMDMStorageControl = win32.GUID{Data1: 0x1dcb3a08, Data2: 0x33ed, Data3: 0x11d3, Data4: [8]byte{0x84, 0x70, 0x00, 0xc0, 0x4f, 0x79, 0xdb, 0xc0}}
 
 // Insert dispatches through IWMDMStorageControl's vtable slot 3.
-func (self *IWMDMStorageControl) Insert(fuMode uint32, pwszFile string, pOperation *IWMDMOperation, pProgress *IWMDMProgress, ppNewObject **IWMDMStorage) error {
-	_pwszFile := win32.UTF16Ptr(pwszFile)
+func (self *IWMDMStorageControl) Insert(fuMode uint32, pwszFile *string, pOperation *IWMDMOperation, pProgress *IWMDMProgress, ppNewObject **IWMDMStorage) error {
+	_pwszFile := win32.UTF16PtrOrNil(pwszFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(_pwszFile)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pProgress)), uintptr(unsafe.Pointer(ppNewObject)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1931,8 +1955,8 @@ func (self *IWMDMStorageControl) Rename(fuMode uint32, pwszNewName string, pProg
 }
 
 // Read dispatches through IWMDMStorageControl's vtable slot 6.
-func (self *IWMDMStorageControl) Read(fuMode uint32, pwszFile string, pProgress *IWMDMProgress, pOperation *IWMDMOperation) error {
-	_pwszFile := win32.UTF16Ptr(pwszFile)
+func (self *IWMDMStorageControl) Read(fuMode uint32, pwszFile *string, pProgress *IWMDMProgress, pOperation *IWMDMOperation) error {
+	_pwszFile := win32.UTF16PtrOrNil(pwszFile)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(_pwszFile)), uintptr(unsafe.Pointer(pProgress)), uintptr(unsafe.Pointer(pOperation)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1953,9 +1977,9 @@ type IWMDMStorageControl2 struct {
 var IID_IWMDMStorageControl2 = win32.GUID{Data1: 0x972c2e88, Data2: 0xbd6c, Data3: 0x4125, Data4: [8]byte{0x8e, 0x09, 0x84, 0xf8, 0x37, 0xe6, 0x37, 0xb6}}
 
 // Insert2 dispatches through IWMDMStorageControl2's vtable slot 8.
-func (self *IWMDMStorageControl2) Insert2(fuMode uint32, pwszFileSource string, pwszFileDest string, pOperation *IWMDMOperation, pProgress *IWMDMProgress, pUnknown *systemcom.IUnknown, ppNewObject **IWMDMStorage) error {
-	_pwszFileSource := win32.UTF16Ptr(pwszFileSource)
-	_pwszFileDest := win32.UTF16Ptr(pwszFileDest)
+func (self *IWMDMStorageControl2) Insert2(fuMode uint32, pwszFileSource *string, pwszFileDest *string, pOperation *IWMDMOperation, pProgress *IWMDMProgress, pUnknown *systemcom.IUnknown, ppNewObject **IWMDMStorage) error {
+	_pwszFileSource := win32.UTF16PtrOrNil(pwszFileSource)
+	_pwszFileDest := win32.UTF16PtrOrNil(pwszFileDest)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(unsafe.Pointer(_pwszFileSource)), uintptr(unsafe.Pointer(_pwszFileDest)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pProgress)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppNewObject)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1970,9 +1994,9 @@ type IWMDMStorageControl3 struct {
 var IID_IWMDMStorageControl3 = win32.GUID{Data1: 0xb3266365, Data2: 0xd4f3, Data3: 0x4696, Data4: [8]byte{0x8d, 0x53, 0xbd, 0x27, 0xec, 0x60, 0x99, 0x3a}}
 
 // Insert3 dispatches through IWMDMStorageControl3's vtable slot 9.
-func (self *IWMDMStorageControl3) Insert3(fuMode uint32, fuType uint32, pwszFileSource string, pwszFileDest string, pOperation *IWMDMOperation, pProgress *IWMDMProgress, pMetaData *IWMDMMetaData, pUnknown *systemcom.IUnknown, ppNewObject **IWMDMStorage) error {
-	_pwszFileSource := win32.UTF16Ptr(pwszFileSource)
-	_pwszFileDest := win32.UTF16Ptr(pwszFileDest)
+func (self *IWMDMStorageControl3) Insert3(fuMode uint32, fuType uint32, pwszFileSource *string, pwszFileDest *string, pOperation *IWMDMOperation, pProgress *IWMDMProgress, pMetaData *IWMDMMetaData, pUnknown *systemcom.IUnknown, ppNewObject **IWMDMStorage) error {
+	_pwszFileSource := win32.UTF16PtrOrNil(pwszFileSource)
+	_pwszFileDest := win32.UTF16PtrOrNil(pwszFileDest)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fuMode), uintptr(fuType), uintptr(unsafe.Pointer(_pwszFileSource)), uintptr(unsafe.Pointer(_pwszFileDest)), uintptr(unsafe.Pointer(pOperation)), uintptr(unsafe.Pointer(pProgress)), uintptr(unsafe.Pointer(pMetaData)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppNewObject)))
 	return win32.ErrIfFailed(int32(r1))
 }

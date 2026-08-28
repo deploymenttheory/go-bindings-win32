@@ -4,10 +4,12 @@
 
 package security
 
-// PLSA_AP_CALL_PACKAGE_UNTRUSTED is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) foundation.NTSTATUS.
+// PLSA_AP_CALL_PACKAGE_UNTRUSTED is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer, unsafe.Pointer, unsafe.Pointer, uint32, *unsafe.Pointer, *uint32, *int32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PLSA_AP_CALL_PACKAGE_UNTRUSTED uintptr
 
-// SEC_THREAD_START is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// SEC_THREAD_START is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type SEC_THREAD_START uintptr

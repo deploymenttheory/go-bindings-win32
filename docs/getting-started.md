@@ -35,12 +35,13 @@ import (
 )
 
 func main() {
-	// Go string name, Go bool flags, (HANDLE, error) return.
-	event, err := threading.CreateEvent(nil, true /*manualReset*/, false /*initial*/, "my-event")
+	// Go bool flags, an optional (*string) name — nil is NULL — and a
+	// (HANDLE, error) return.
+	event, err := threading.CreateEvent(nil, true /*manualReset*/, false /*initial*/, nil)
 	if err != nil {
 		panic(err)
 	}
-	defer foundation.CloseHANDLE(event) // generated RAII closer for HANDLE
+	defer foundation.CloseHANDLE(event) // generated Close<Handle> helper
 
 	if err := threading.SetEvent(event); err != nil {
 		panic(err)

@@ -5,6 +5,7 @@
 package portabledevices
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -1196,6 +1197,14 @@ func (self *IPortableDeviceValues) SetSignedLargeIntegerValue(key *foundation.PR
 // GetSignedLargeIntegerValue dispatches through IPortableDeviceValues's vtable slot 16.
 func (self *IPortableDeviceValues) GetSignedLargeIntegerValue(key *foundation.PROPERTYKEY, pValue *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPortableDeviceValues_SetFloatValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetFloatValue dispatches through IPortableDeviceValues's vtable slot 17.
+func (self *IPortableDeviceValues) SetFloatValue(key *foundation.PROPERTYKEY, Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIPortableDeviceValues_SetFloatValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(math.Float32bits(Value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

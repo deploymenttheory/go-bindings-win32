@@ -4,8 +4,12 @@
 
 package pnp
 
-// CloseHSWDEVICE releases a HSWDEVICE handle by calling SwDeviceClose.
+// CloseHSWDEVICE releases a HSWDEVICE handle by calling SwDeviceClose. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHSWDEVICE(h HSWDEVICE) error {
+	if h == ^HSWDEVICE(0) || h == 0 {
+		return nil
+	}
 	SwDeviceClose(HSWDEVICE(h))
 	return nil
 }

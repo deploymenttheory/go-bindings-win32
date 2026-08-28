@@ -4,1610 +4,2006 @@
 
 package clustering
 
-// LPGROUP_CALLBACK_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, HGROUP, HGROUP, unsafe.Pointer) uint32.
+// LPGROUP_CALLBACK_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, HGROUP, HGROUP, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPGROUP_CALLBACK_EX uintptr
 
-// LPNODE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, HNODE, CLUSTER_NODE_STATE, unsafe.Pointer) uint32.
+// LPNODE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, HNODE, CLUSTER_NODE_STATE, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPNODE_CALLBACK uintptr
 
-// LPRESOURCE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HRESOURCE, unsafe.Pointer) uint32.
+// LPRESOURCE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HRESOURCE, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPRESOURCE_CALLBACK uintptr
 
-// LPRESOURCE_CALLBACK_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, HRESOURCE, HRESOURCE, unsafe.Pointer) uint32.
+// LPRESOURCE_CALLBACK_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, HRESOURCE, HRESOURCE, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPRESOURCE_CALLBACK_EX uintptr
 
-// PARBITRATE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, PQUORUM_RESOURCE_LOST) uint32.
+// PARBITRATE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, PQUORUM_RESOURCE_LOST) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PARBITRATE_ROUTINE uintptr
 
-// PARM_WPR_WATCHDOG_FOR_CURRENT_RESOURCE_CALL_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint64) uint32.
+// PARM_WPR_WATCHDOG_FOR_CURRENT_RESOURCE_CALL_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint64) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PARM_WPR_WATCHDOG_FOR_CURRENT_RESOURCE_CALL_ROUTINE uintptr
 
-// PBEGIN_RESCALL_AS_USER_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.HANDLE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, int64, *foundation.BOOL) uint32.
+// PBEGIN_RESCALL_AS_USER_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.HANDLE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, int64, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PBEGIN_RESCALL_AS_USER_ROUTINE uintptr
 
-// PBEGIN_RESCALL_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, int64, *foundation.BOOL) uint32.
+// PBEGIN_RESCALL_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, int64, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PBEGIN_RESCALL_ROUTINE uintptr
 
-// PBEGIN_RESTYPECALL_AS_USER_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.HANDLE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, int64, *foundation.BOOL) uint32.
+// PBEGIN_RESTYPECALL_AS_USER_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.HANDLE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, int64, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PBEGIN_RESTYPECALL_AS_USER_ROUTINE uintptr
 
-// PBEGIN_RESTYPECALL_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, int64, *foundation.BOOL) uint32.
+// PBEGIN_RESTYPECALL_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, int64, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PBEGIN_RESTYPECALL_ROUTINE uintptr
 
-// PCANCEL_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32) uint32.
+// PCANCEL_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCANCEL_ROUTINE uintptr
 
-// PCHANGE_RESOURCE_PROCESS_FOR_DUMPS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.PWSTR, uint32, foundation.BOOL) uint32.
+// PCHANGE_RESOURCE_PROCESS_FOR_DUMPS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, foundation.PWSTR, uint32, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCHANGE_RESOURCE_PROCESS_FOR_DUMPS uintptr
 
-// PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, foundation.BOOL) uint32.
+// PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCHANGE_RES_TYPE_PROCESS_FOR_DUMPS uintptr
 
-// PCLOSE_CLUSTER_CRYPT_PROVIDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSCRYPTPROVIDER) uint32.
+// PCLOSE_CLUSTER_CRYPT_PROVIDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSCRYPTPROVIDER) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLOSE_CLUSTER_CRYPT_PROVIDER uintptr
 
-// PCLOSE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PCLOSE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PCLOSE_ROUTINE uintptr
 
-// PCLUSAPIClusWorkerCheckTerminate is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CLUS_WORKER) foundation.BOOL.
+// PCLUSAPIClusWorkerCheckTerminate is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CLUS_WORKER) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPIClusWorkerCheckTerminate uintptr
 
-// PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HGROUP) uint32.
+// PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HGROUP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY uintptr
 
-// PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HGROUP, foundation.PWSTR) uint32.
+// PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HGROUP, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_GROUP_DEPENDENCY_EX uintptr
 
-// PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, HGROUPSET) uint32.
+// PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, HGROUPSET) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY uintptr
 
-// PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, HGROUPSET, foundation.PWSTR) uint32.
+// PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, HGROUPSET, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX uintptr
 
-// PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HGROUPSET) uint32.
+// PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HGROUPSET) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY uintptr
 
-// PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HGROUPSET, foundation.PWSTR) uint32.
+// PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HGROUPSET, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX uintptr
 
-// PCLUSAPI_ADD_CLUSTER_NODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) HNODE.
+// PCLUSAPI_ADD_CLUSTER_NODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) uintptr (the native return type is
+// HNODE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_NODE uintptr
 
-// PCLUSAPI_ADD_CLUSTER_NODE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) HNODE.
+// PCLUSAPI_ADD_CLUSTER_NODE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) uintptr (the native return type is
+// HNODE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_NODE_EX uintptr
 
-// PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HRESOURCE) uint32.
+// PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HRESOURCE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY uintptr
 
-// PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HRESOURCE, foundation.PWSTR) uint32.
+// PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HRESOURCE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_RESOURCE_DEPENDENCY_EX uintptr
 
-// PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HNODE) uint32.
+// PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HNODE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE uintptr
 
-// PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HNODE, foundation.PWSTR) uint32.
+// PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HNODE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CLUSTER_RESOURCE_NODE_EX uintptr
 
-// PCLUSAPI_ADD_CROSS_CLUSTER_GROUPSET_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_ADD_CROSS_CLUSTER_GROUPSET_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_CROSS_CLUSTER_GROUPSET_DEPENDENCY uintptr
 
-// PCLUSAPI_ADD_RESOURCE_TO_CLUSTER_SHARED_VOLUMES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE) uint32.
+// PCLUSAPI_ADD_RESOURCE_TO_CLUSTER_SHARED_VOLUMES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ADD_RESOURCE_TO_CLUSTER_SHARED_VOLUMES uintptr
 
-// PCLUSAPI_BACKUP_CLUSTER_DATABASE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) uint32.
+// PCLUSAPI_BACKUP_CLUSTER_DATABASE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_BACKUP_CLUSTER_DATABASE uintptr
 
-// PCLUSAPI_CAN_RESOURCE_BE_DEPENDENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HRESOURCE) foundation.BOOL.
+// PCLUSAPI_CAN_RESOURCE_BE_DEPENDENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HRESOURCE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CAN_RESOURCE_BE_DEPENDENT uintptr
 
-// PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HGROUP) uint32.
+// PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HGROUP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP uintptr
 
-// PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HGROUP, uint64) uint32.
+// PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HGROUP, uint64) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX uintptr
 
-// PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HGROUP, uint64, foundation.PWSTR) uint32.
+// PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HGROUP, uint64, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CHANGE_CLUSTER_RESOURCE_GROUP_EX2 uintptr
 
-// PCLUSAPI_CLOSE_CLUSTER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER) foundation.BOOL.
+// PCLUSAPI_CLOSE_CLUSTER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLOSE_CLUSTER uintptr
 
-// PCLUSAPI_CLOSE_CLUSTER_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP) foundation.BOOL.
+// PCLUSAPI_CLOSE_CLUSTER_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLOSE_CLUSTER_GROUP uintptr
 
-// PCLUSAPI_CLOSE_CLUSTER_GROUP_GROUPSET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET) foundation.BOOL.
+// PCLUSAPI_CLOSE_CLUSTER_GROUP_GROUPSET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLOSE_CLUSTER_GROUP_GROUPSET uintptr
 
-// PCLUSAPI_CLOSE_CLUSTER_NETWORK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK) foundation.BOOL.
+// PCLUSAPI_CLOSE_CLUSTER_NETWORK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLOSE_CLUSTER_NETWORK uintptr
 
-// PCLUSAPI_CLOSE_CLUSTER_NET_INTERFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETINTERFACE) foundation.BOOL.
+// PCLUSAPI_CLOSE_CLUSTER_NET_INTERFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETINTERFACE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLOSE_CLUSTER_NET_INTERFACE uintptr
 
-// PCLUSAPI_CLOSE_CLUSTER_NODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE) foundation.BOOL.
+// PCLUSAPI_CLOSE_CLUSTER_NODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLOSE_CLUSTER_NODE uintptr
 
-// PCLUSAPI_CLOSE_CLUSTER_NOTIFY_PORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCHANGE) foundation.BOOL.
+// PCLUSAPI_CLOSE_CLUSTER_NOTIFY_PORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCHANGE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLOSE_CLUSTER_NOTIFY_PORT uintptr
 
-// PCLUSAPI_CLOSE_CLUSTER_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE) foundation.BOOL.
+// PCLUSAPI_CLOSE_CLUSTER_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLOSE_CLUSTER_RESOURCE uintptr
 
-// PCLUSAPI_CLUSTER_ADD_GROUP_TO_AFFINITY_RULE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, HGROUP) uint32.
+// PCLUSAPI_CLUSTER_ADD_GROUP_TO_AFFINITY_RULE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, HGROUP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_ADD_GROUP_TO_AFFINITY_RULE uintptr
 
-// PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUPSET_WITH_DOMAINS_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, HGROUP, uint32, uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUPSET_WITH_DOMAINS_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, HGROUP, uint32, uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUPSET_WITH_DOMAINS_EX uintptr
 
-// PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUP_GROUPSET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, HGROUP) uint32.
+// PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUP_GROUPSET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, HGROUP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_ADD_GROUP_TO_GROUP_GROUPSET uintptr
 
-// PCLUSAPI_CLUSTER_AFFINITY_RULE_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PCLUSAPI_CLUSTER_AFFINITY_RULE_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_AFFINITY_RULE_CONTROL uintptr
 
-// PCLUSAPI_CLUSTER_CLOSE_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSENUM) uint32.
+// PCLUSAPI_CLUSTER_CLOSE_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_CLOSE_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_CLOSE_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSENUMEX) uint32.
+// PCLUSAPI_CLUSTER_CLOSE_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSENUMEX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_CLOSE_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PCLUSAPI_CLUSTER_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_CONTROL uintptr
 
-// PCLUSAPI_CLUSTER_CONTROL_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_CONTROL_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_CONTROL_EX uintptr
 
-// PCLUSAPI_CLUSTER_CREATE_AFFINITY_RULE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, CLUS_AFFINITY_RULE_TYPE) uint32.
+// PCLUSAPI_CLUSTER_CREATE_AFFINITY_RULE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, CLUS_AFFINITY_RULE_TYPE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_CREATE_AFFINITY_RULE uintptr
 
-// PCLUSAPI_CLUSTER_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSENUM, uint32, *uint32, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_CLUSTER_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSENUM, uint32, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSENUMEX, uint32, *CLUSTER_ENUM_ITEM, *uint32) uint32.
+// PCLUSAPI_CLUSTER_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSENUMEX, uint32, *CLUSTER_ENUM_ITEM, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_GET_ENUM_COUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSENUM) uint32.
+// PCLUSAPI_CLUSTER_GET_ENUM_COUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GET_ENUM_COUNT uintptr
 
-// PCLUSAPI_CLUSTER_GET_ENUM_COUNT_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSENUMEX) uint32.
+// PCLUSAPI_CLUSTER_GET_ENUM_COUNT_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSENUMEX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GET_ENUM_COUNT_EX uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPENUM) uint32.
+// PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPENUMEX) uint32.
+// PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPENUMEX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_CLOSE_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PCLUSAPI_CLUSTER_GROUP_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_CONTROL uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_CONTROL_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_GROUP_CONTROL_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_CONTROL_EX uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPENUM, uint32, *uint32, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_CLUSTER_GROUP_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPENUM, uint32, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPENUMEX, uint32, *CLUSTER_GROUP_ENUM_ITEM, *uint32) uint32.
+// PCLUSAPI_CLUSTER_GROUP_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPENUMEX, uint32, *CLUSTER_GROUP_ENUM_ITEM, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPENUM) uint32.
+// PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPENUMEX) uint32.
+// PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPENUMEX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_GET_ENUM_COUNT_EX uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_GROUPSET_CONTROL_EX uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, uint32) HGROUPENUM.
+// PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, uint32) uintptr (the native return type is
+// HGROUPENUM; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32, foundation.PWSTR, uint32, uint32) HGROUPENUMEX.
+// PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32, foundation.PWSTR, uint32, uint32) uintptr (the native return type is
+// HGROUPENUMEX; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_GROUP_OPEN_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_NETWORK_CLOSE_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORKENUM) uint32.
+// PCLUSAPI_CLUSTER_NETWORK_CLOSE_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORKENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NETWORK_CLOSE_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_NETWORK_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PCLUSAPI_CLUSTER_NETWORK_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NETWORK_CONTROL uintptr
 
-// PCLUSAPI_CLUSTER_NETWORK_CONTROL_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_NETWORK_CONTROL_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NETWORK_CONTROL_EX uintptr
 
-// PCLUSAPI_CLUSTER_NETWORK_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORKENUM, uint32, *uint32, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_CLUSTER_NETWORK_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORKENUM, uint32, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NETWORK_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_NETWORK_GET_ENUM_COUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORKENUM) uint32.
+// PCLUSAPI_CLUSTER_NETWORK_GET_ENUM_COUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORKENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NETWORK_GET_ENUM_COUNT uintptr
 
-// PCLUSAPI_CLUSTER_NETWORK_OPEN_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK, uint32) HNETWORKENUM.
+// PCLUSAPI_CLUSTER_NETWORK_OPEN_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK, uint32) uintptr (the native return type is
+// HNETWORKENUM; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NETWORK_OPEN_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETINTERFACE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETINTERFACE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL uintptr
 
-// PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETINTERFACE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETINTERFACE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NET_INTERFACE_CONTROL_EX uintptr
 
-// PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODEENUM) uint32.
+// PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODEENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODEENUMEX) uint32.
+// PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODEENUMEX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_CLOSE_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_NODE_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PCLUSAPI_CLUSTER_NODE_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_CONTROL uintptr
 
-// PCLUSAPI_CLUSTER_NODE_CONTROL_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_NODE_CONTROL_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_CONTROL_EX uintptr
 
-// PCLUSAPI_CLUSTER_NODE_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODEENUM, uint32, *uint32, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_CLUSTER_NODE_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODEENUM, uint32, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_NODE_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODEENUMEX, uint32, *CLUSTER_ENUM_ITEM, *uint32) uint32.
+// PCLUSAPI_CLUSTER_NODE_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODEENUMEX, uint32, *CLUSTER_ENUM_ITEM, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODEENUM) uint32.
+// PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODEENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT uintptr
 
-// PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODEENUMEX) uint32.
+// PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODEENUMEX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_GET_ENUM_COUNT_EX uintptr
 
-// PCLUSAPI_CLUSTER_NODE_OPEN_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, uint32) HNODEENUM.
+// PCLUSAPI_CLUSTER_NODE_OPEN_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, uint32) uintptr (the native return type is
+// HNODEENUM; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_OPEN_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_NODE_OPEN_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, uint32, unsafe.Pointer) HNODEENUMEX.
+// PCLUSAPI_CLUSTER_NODE_OPEN_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, uint32, unsafe.Pointer) uintptr (the native return type is
+// HNODEENUMEX; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_NODE_OPEN_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_OPEN_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, uint32) HCLUSENUM.
+// PCLUSAPI_CLUSTER_OPEN_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, uint32) uintptr (the native return type is
+// HCLUSENUM; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_OPEN_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_OPEN_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, uint32, unsafe.Pointer) HCLUSENUMEX.
+// PCLUSAPI_CLUSTER_OPEN_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, uint32, unsafe.Pointer) uintptr (the native return type is
+// HCLUSENUMEX; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_OPEN_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_REG_CLOSE_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY) int32.
+// PCLUSAPI_CLUSTER_REG_CLOSE_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_CLOSE_KEY uintptr
 
-// PCLUSAPI_CLUSTER_REG_CREATE_BATCH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *HREGBATCH) int32.
+// PCLUSAPI_CLUSTER_REG_CREATE_BATCH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *HREGBATCH) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_CREATE_BATCH uintptr
 
-// PCLUSAPI_CLUSTER_REG_CREATE_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, uint32, *security.SECURITY_ATTRIBUTES, *systemregistry.HKEY, *uint32) int32.
+// PCLUSAPI_CLUSTER_REG_CREATE_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, uint32, *security.SECURITY_ATTRIBUTES, *systemregistry.HKEY, *uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_CREATE_KEY uintptr
 
-// PCLUSAPI_CLUSTER_REG_CREATE_KEY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, uint32, *security.SECURITY_ATTRIBUTES, *systemregistry.HKEY, *uint32, foundation.PWSTR) int32.
+// PCLUSAPI_CLUSTER_REG_CREATE_KEY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, uint32, *security.SECURITY_ATTRIBUTES, *systemregistry.HKEY, *uint32, foundation.PWSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_CREATE_KEY_EX uintptr
 
-// PCLUSAPI_CLUSTER_REG_DELETE_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR) int32.
+// PCLUSAPI_CLUSTER_REG_DELETE_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_DELETE_KEY uintptr
 
-// PCLUSAPI_CLUSTER_REG_DELETE_KEY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR) int32.
+// PCLUSAPI_CLUSTER_REG_DELETE_KEY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_DELETE_KEY_EX uintptr
 
-// PCLUSAPI_CLUSTER_REG_DELETE_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_REG_DELETE_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_DELETE_VALUE uintptr
 
-// PCLUSAPI_CLUSTER_REG_DELETE_VALUE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_REG_DELETE_VALUE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_DELETE_VALUE_EX uintptr
 
-// PCLUSAPI_CLUSTER_REG_ENUM_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, uint32, foundation.PWSTR, *uint32, *foundation.FILETIME) int32.
+// PCLUSAPI_CLUSTER_REG_ENUM_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, uint32, foundation.PWSTR, *uint32, *foundation.FILETIME) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_ENUM_KEY uintptr
 
-// PCLUSAPI_CLUSTER_REG_ENUM_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, uint32, foundation.PWSTR, *uint32, *uint32, *byte, *uint32) uint32.
+// PCLUSAPI_CLUSTER_REG_ENUM_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, uint32, foundation.PWSTR, *uint32, *uint32, *byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_ENUM_VALUE uintptr
 
-// PCLUSAPI_CLUSTER_REG_GET_KEY_SECURITY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, uint32, security.PSECURITY_DESCRIPTOR, *uint32) int32.
+// PCLUSAPI_CLUSTER_REG_GET_KEY_SECURITY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, uint32, security.PSECURITY_DESCRIPTOR, *uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_GET_KEY_SECURITY uintptr
 
-// PCLUSAPI_CLUSTER_REG_OPEN_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *systemregistry.HKEY) int32.
+// PCLUSAPI_CLUSTER_REG_OPEN_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *systemregistry.HKEY) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_OPEN_KEY uintptr
 
-// PCLUSAPI_CLUSTER_REG_QUERY_INFO_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *uint32, *uint32, *uint32, *uint32, *uint32, *uint32, *foundation.FILETIME) int32.
+// PCLUSAPI_CLUSTER_REG_QUERY_INFO_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *uint32, *uint32, *uint32, *uint32, *uint32, *uint32, *foundation.FILETIME) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_QUERY_INFO_KEY uintptr
 
-// PCLUSAPI_CLUSTER_REG_QUERY_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, *uint32, *byte, *uint32) int32.
+// PCLUSAPI_CLUSTER_REG_QUERY_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, *uint32, *byte, *uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_QUERY_VALUE uintptr
 
-// PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, uint32, security.PSECURITY_DESCRIPTOR) int32.
+// PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, uint32, security.PSECURITY_DESCRIPTOR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY uintptr
 
-// PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, uint32, security.PSECURITY_DESCRIPTOR, foundation.PWSTR) int32.
+// PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, uint32, security.PSECURITY_DESCRIPTOR, foundation.PWSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_SET_KEY_SECURITY_EX uintptr
 
-// PCLUSAPI_CLUSTER_REG_SET_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *byte, uint32) uint32.
+// PCLUSAPI_CLUSTER_REG_SET_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_SET_VALUE uintptr
 
-// PCLUSAPI_CLUSTER_REG_SET_VALUE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *byte, uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_REG_SET_VALUE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *byte, uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_SET_VALUE_EX uintptr
 
-// PCLUSAPI_CLUSTER_REG_SYNC_DATABASE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, uint32) int32.
+// PCLUSAPI_CLUSTER_REG_SYNC_DATABASE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REG_SYNC_DATABASE uintptr
 
-// PCLUSAPI_CLUSTER_REMOVE_AFFINITY_RULE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_REMOVE_AFFINITY_RULE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REMOVE_AFFINITY_RULE uintptr
 
-// PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_AFFINITY_RULE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, HGROUP) uint32.
+// PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_AFFINITY_RULE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, HGROUP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_AFFINITY_RULE uintptr
 
-// PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET) uint32.
+// PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET uintptr
 
-// PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_REMOVE_GROUP_FROM_GROUPSET_EX uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESENUM) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESENUMEX) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESENUMEX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_CLOSE_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_CONTROL uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_CONTROL_AS_USER_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_CONTROL_AS_USER_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_CONTROL_AS_USER_EX uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_CONTROL_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_CONTROL_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_CONTROL_EX uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESENUM, uint32, *uint32, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESENUM, uint32, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESENUMEX, uint32, *CLUSTER_RESOURCE_ENUM_ITEM, *uint32) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESENUMEX, uint32, *CLUSTER_RESOURCE_ENUM_ITEM, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESENUM) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESENUMEX) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESENUMEX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_GET_ENUM_COUNT_EX uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, uint32) HRESENUM.
+// PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, uint32) uintptr (the native return type is
+// HRESENUM; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32, foundation.PWSTR, uint32, uint32) HRESENUMEX.
+// PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32, foundation.PWSTR, uint32, uint32) uintptr (the native return type is
+// HRESENUMEX; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_OPEN_ENUM_EX uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_TYPE_CLOSE_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESTYPEENUM) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_TYPE_CLOSE_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESTYPEENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_TYPE_CLOSE_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_AS_USER_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_AS_USER_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_AS_USER_EX uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, HNODE, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_TYPE_CONTROL_EX uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_TYPE_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESTYPEENUM, uint32, *uint32, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_TYPE_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESTYPEENUM, uint32, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_TYPE_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_TYPE_GET_ENUM_COUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESTYPEENUM) uint32.
+// PCLUSAPI_CLUSTER_RESOURCE_TYPE_GET_ENUM_COUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESTYPEENUM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_TYPE_GET_ENUM_COUNT uintptr
 
-// PCLUSAPI_CLUSTER_RESOURCE_TYPE_OPEN_ENUM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32) HRESTYPEENUM.
+// PCLUSAPI_CLUSTER_RESOURCE_TYPE_OPEN_ENUM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32) uintptr (the native return type is
+// HRESTYPEENUM; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_RESOURCE_TYPE_OPEN_ENUM uintptr
 
-// PCLUSAPI_CLUSTER_UPGRADE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.BOOL, PCLUSTER_UPGRADE_PROGRESS_CALLBACK, unsafe.Pointer) uint32.
+// PCLUSAPI_CLUSTER_UPGRADE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.BOOL, PCLUSTER_UPGRADE_PROGRESS_CALLBACK, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUSTER_UPGRADE uintptr
 
-// PCLUSAPI_CLUS_WORKER_CREATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CLUS_WORKER, PWORKER_START_ROUTINE, unsafe.Pointer) uint32.
+// PCLUSAPI_CLUS_WORKER_CREATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CLUS_WORKER, PWORKER_START_ROUTINE, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CLUS_WORKER_CREATE uintptr
 
-// PCLUSAPI_CLUS_WORKER_TERMINATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CLUS_WORKER).
+// PCLUSAPI_CLUS_WORKER_TERMINATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CLUS_WORKER) uintptr.
 type PCLUSAPI_CLUS_WORKER_TERMINATE uintptr
 
-// PCLUSAPI_CREATE_CLUSTER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CREATE_CLUSTER_CONFIG, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) HCLUSTER.
+// PCLUSAPI_CREATE_CLUSTER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CREATE_CLUSTER_CONFIG, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_AVAILABILITY_SET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, *CLUSTER_AVAILABILITY_SET_CONFIG) HGROUPSET.
+// PCLUSAPI_CREATE_CLUSTER_AVAILABILITY_SET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, *CLUSTER_AVAILABILITY_SET_CONFIG) uintptr (the native return type is
+// HGROUPSET; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_AVAILABILITY_SET uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_CNOLESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CREATE_CLUSTER_CONFIG, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) HCLUSTER.
+// PCLUSAPI_CREATE_CLUSTER_CNOLESS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CREATE_CLUSTER_CONFIG, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_CNOLESS uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) HGROUP.
+// PCLUSAPI_CREATE_CLUSTER_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// HGROUP; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_GROUP uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_GROUPEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, *CLUSTER_CREATE_GROUP_INFO) HGROUP.
+// PCLUSAPI_CREATE_CLUSTER_GROUPEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, *CLUSTER_CREATE_GROUP_INFO) uintptr (the native return type is
+// HGROUP; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_GROUPEX uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_GROUP_GROUPSET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) HGROUPSET.
+// PCLUSAPI_CREATE_CLUSTER_GROUP_GROUPSET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// HGROUPSET; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_GROUP_GROUPSET uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_NAME_ACCOUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, *CREATE_CLUSTER_NAME_ACCOUNT, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) uint32.
+// PCLUSAPI_CREATE_CLUSTER_NAME_ACCOUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, *CREATE_CLUSTER_NAME_ACCOUNT, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_NAME_ACCOUNT uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCHANGE, HCLUSTER, uint32, uintptr) HCHANGE.
+// PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCHANGE, HCLUSTER, uint32, uintptr) uintptr (the native return type is
+// HCHANGE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT_V2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCHANGE, HCLUSTER, *NOTIFY_FILTER_AND_TYPE, uint32, uintptr) HCHANGE.
+// PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT_V2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCHANGE, HCLUSTER, *NOTIFY_FILTER_AND_TYPE, uint32, uintptr) uintptr (the native return type is
+// HCHANGE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_NOTIFY_PORT_V2 uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, foundation.PWSTR, foundation.PWSTR, uint32) HRESOURCE.
+// PCLUSAPI_CREATE_CLUSTER_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, foundation.PWSTR, foundation.PWSTR, uint32) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_RESOURCE uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_RESOURCE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, foundation.PWSTR, foundation.PWSTR, uint32, foundation.PWSTR) HRESOURCE.
+// PCLUSAPI_CREATE_CLUSTER_RESOURCE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, foundation.PWSTR, foundation.PWSTR, uint32, foundation.PWSTR) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_RESOURCE_EX uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, uint32) uint32.
+// PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE uintptr
 
-// PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_CREATE_CLUSTER_RESOURCE_TYPE_EX uintptr
 
-// PCLUSAPI_DELETE_CLUSTER_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP) uint32.
+// PCLUSAPI_DELETE_CLUSTER_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DELETE_CLUSTER_GROUP uintptr
 
-// PCLUSAPI_DELETE_CLUSTER_GROUP_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, foundation.PWSTR) uint32.
+// PCLUSAPI_DELETE_CLUSTER_GROUP_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DELETE_CLUSTER_GROUP_EX uintptr
 
-// PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET) uint32.
+// PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET uintptr
 
-// PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, foundation.PWSTR) uint32.
+// PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DELETE_CLUSTER_GROUP_GROUPSET_EX uintptr
 
-// PCLUSAPI_DELETE_CLUSTER_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE) uint32.
+// PCLUSAPI_DELETE_CLUSTER_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DELETE_CLUSTER_RESOURCE uintptr
 
-// PCLUSAPI_DELETE_CLUSTER_RESOURCE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR) uint32.
+// PCLUSAPI_DELETE_CLUSTER_RESOURCE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DELETE_CLUSTER_RESOURCE_EX uintptr
 
-// PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) uint32.
+// PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE uintptr
 
-// PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DELETE_CLUSTER_RESOURCE_TYPE_EX uintptr
 
-// PCLUSAPI_DESTROY_CLUSTER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer, foundation.BOOL) uint32.
+// PCLUSAPI_DESTROY_CLUSTER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, PCLUSTER_SETUP_PROGRESS_CALLBACK, unsafe.Pointer, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DESTROY_CLUSTER uintptr
 
-// PCLUSAPI_DESTROY_CLUSTER_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP) uint32.
+// PCLUSAPI_DESTROY_CLUSTER_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DESTROY_CLUSTER_GROUP uintptr
 
-// PCLUSAPI_DESTROY_CLUSTER_GROUP_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, foundation.PWSTR) uint32.
+// PCLUSAPI_DESTROY_CLUSTER_GROUP_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_DESTROY_CLUSTER_GROUP_EX uintptr
 
-// PCLUSAPI_EVICT_CLUSTER_NODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE) uint32.
+// PCLUSAPI_EVICT_CLUSTER_NODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_EVICT_CLUSTER_NODE uintptr
 
-// PCLUSAPI_EVICT_CLUSTER_NODE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, uint32, *foundation.HRESULT) uint32.
+// PCLUSAPI_EVICT_CLUSTER_NODE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, uint32, *foundation.HRESULT) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_EVICT_CLUSTER_NODE_EX uintptr
 
-// PCLUSAPI_EVICT_CLUSTER_NODE_EX2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, uint32, *foundation.HRESULT, foundation.PWSTR) uint32.
+// PCLUSAPI_EVICT_CLUSTER_NODE_EX2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, uint32, *foundation.HRESULT, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_EVICT_CLUSTER_NODE_EX2 uintptr
 
-// PCLUSAPI_FAIL_CLUSTER_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE) uint32.
+// PCLUSAPI_FAIL_CLUSTER_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_FAIL_CLUSTER_RESOURCE uintptr
 
-// PCLUSAPI_FAIL_CLUSTER_RESOURCE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR) uint32.
+// PCLUSAPI_FAIL_CLUSTER_RESOURCE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_FAIL_CLUSTER_RESOURCE_EX uintptr
 
-// PCLUSAPI_GET_CLUSTER_FROM_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP) HCLUSTER.
+// PCLUSAPI_GET_CLUSTER_FROM_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_FROM_GROUP uintptr
 
-// PCLUSAPI_GET_CLUSTER_FROM_GROUP_GROUPSET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET) HCLUSTER.
+// PCLUSAPI_GET_CLUSTER_FROM_GROUP_GROUPSET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_FROM_GROUP_GROUPSET uintptr
 
-// PCLUSAPI_GET_CLUSTER_FROM_NETWORK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK) HCLUSTER.
+// PCLUSAPI_GET_CLUSTER_FROM_NETWORK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_FROM_NETWORK uintptr
 
-// PCLUSAPI_GET_CLUSTER_FROM_NET_INTERFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETINTERFACE) HCLUSTER.
+// PCLUSAPI_GET_CLUSTER_FROM_NET_INTERFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETINTERFACE) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_FROM_NET_INTERFACE uintptr
 
-// PCLUSAPI_GET_CLUSTER_FROM_NODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE) HCLUSTER.
+// PCLUSAPI_GET_CLUSTER_FROM_NODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_FROM_NODE uintptr
 
-// PCLUSAPI_GET_CLUSTER_FROM_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE) HCLUSTER.
+// PCLUSAPI_GET_CLUSTER_FROM_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_FROM_RESOURCE uintptr
 
-// PCLUSAPI_GET_CLUSTER_GROUP_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, uint32) systemregistry.HKEY.
+// PCLUSAPI_GET_CLUSTER_GROUP_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, uint32) uintptr (the native return type is
+// systemregistry.HKEY; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_GROUP_KEY uintptr
 
-// PCLUSAPI_GET_CLUSTER_GROUP_STATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, foundation.PWSTR, *uint32) CLUSTER_GROUP_STATE.
+// PCLUSAPI_GET_CLUSTER_GROUP_STATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, foundation.PWSTR, *uint32) uintptr (the native return type is
+// CLUSTER_GROUP_STATE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_GROUP_STATE uintptr
 
-// PCLUSAPI_GET_CLUSTER_INFORMATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, *uint32, *CLUSTERVERSIONINFO) uint32.
+// PCLUSAPI_GET_CLUSTER_INFORMATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, *uint32, *CLUSTERVERSIONINFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_INFORMATION uintptr
 
-// PCLUSAPI_GET_CLUSTER_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, uint32) systemregistry.HKEY.
+// PCLUSAPI_GET_CLUSTER_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, uint32) uintptr (the native return type is
+// systemregistry.HKEY; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_KEY uintptr
 
-// PCLUSAPI_GET_CLUSTER_NETWORK_ID is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_GET_CLUSTER_NETWORK_ID is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NETWORK_ID uintptr
 
-// PCLUSAPI_GET_CLUSTER_NETWORK_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK, uint32) systemregistry.HKEY.
+// PCLUSAPI_GET_CLUSTER_NETWORK_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK, uint32) uintptr (the native return type is
+// systemregistry.HKEY; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NETWORK_KEY uintptr
 
-// PCLUSAPI_GET_CLUSTER_NETWORK_STATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK) CLUSTER_NETWORK_STATE.
+// PCLUSAPI_GET_CLUSTER_NETWORK_STATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK) uintptr (the native return type is
+// CLUSTER_NETWORK_STATE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NETWORK_STATE uintptr
 
-// PCLUSAPI_GET_CLUSTER_NET_INTERFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_GET_CLUSTER_NET_INTERFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NET_INTERFACE uintptr
 
-// PCLUSAPI_GET_CLUSTER_NET_INTERFACE_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETINTERFACE, uint32) systemregistry.HKEY.
+// PCLUSAPI_GET_CLUSTER_NET_INTERFACE_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETINTERFACE, uint32) uintptr (the native return type is
+// systemregistry.HKEY; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NET_INTERFACE_KEY uintptr
 
-// PCLUSAPI_GET_CLUSTER_NET_INTERFACE_STATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETINTERFACE) CLUSTER_NETINTERFACE_STATE.
+// PCLUSAPI_GET_CLUSTER_NET_INTERFACE_STATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETINTERFACE) uintptr (the native return type is
+// CLUSTER_NETINTERFACE_STATE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NET_INTERFACE_STATE uintptr
 
-// PCLUSAPI_GET_CLUSTER_NODE_ID is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_GET_CLUSTER_NODE_ID is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NODE_ID uintptr
 
-// PCLUSAPI_GET_CLUSTER_NODE_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, uint32) systemregistry.HKEY.
+// PCLUSAPI_GET_CLUSTER_NODE_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, uint32) uintptr (the native return type is
+// systemregistry.HKEY; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NODE_KEY uintptr
 
-// PCLUSAPI_GET_CLUSTER_NODE_STATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE) CLUSTER_NODE_STATE.
+// PCLUSAPI_GET_CLUSTER_NODE_STATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE) uintptr (the native return type is
+// CLUSTER_NODE_STATE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NODE_STATE uintptr
 
-// PCLUSAPI_GET_CLUSTER_NOTIFY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCHANGE, *uintptr, *uint32, foundation.PWSTR, *uint32, uint32) uint32.
+// PCLUSAPI_GET_CLUSTER_NOTIFY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCHANGE, *uintptr, *uint32, foundation.PWSTR, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NOTIFY uintptr
 
-// PCLUSAPI_GET_CLUSTER_NOTIFY_V2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCHANGE, *uintptr, *NOTIFY_FILTER_AND_TYPE, *byte, *uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, uint32) uint32.
+// PCLUSAPI_GET_CLUSTER_NOTIFY_V2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCHANGE, *uintptr, *NOTIFY_FILTER_AND_TYPE, *byte, *uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_NOTIFY_V2 uintptr
 
-// PCLUSAPI_GET_CLUSTER_QUORUM_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, *uint32) uint32.
+// PCLUSAPI_GET_CLUSTER_QUORUM_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_QUORUM_RESOURCE uintptr
 
-// PCLUSAPI_GET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_GET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION uintptr
 
-// PCLUSAPI_GET_CLUSTER_RESOURCE_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, uint32) systemregistry.HKEY.
+// PCLUSAPI_GET_CLUSTER_RESOURCE_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, uint32) uintptr (the native return type is
+// systemregistry.HKEY; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_RESOURCE_KEY uintptr
 
-// PCLUSAPI_GET_CLUSTER_RESOURCE_NETWORK_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR, *uint32) foundation.BOOL.
+// PCLUSAPI_GET_CLUSTER_RESOURCE_NETWORK_NAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_RESOURCE_NETWORK_NAME uintptr
 
-// PCLUSAPI_GET_CLUSTER_RESOURCE_STATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32) CLUSTER_RESOURCE_STATE.
+// PCLUSAPI_GET_CLUSTER_RESOURCE_STATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// CLUSTER_RESOURCE_STATE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_RESOURCE_STATE uintptr
 
-// PCLUSAPI_GET_CLUSTER_RESOURCE_TYPE_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32) systemregistry.HKEY.
+// PCLUSAPI_GET_CLUSTER_RESOURCE_TYPE_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32) uintptr (the native return type is
+// systemregistry.HKEY; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_CLUSTER_RESOURCE_TYPE_KEY uintptr
 
-// PCLUSAPI_GET_NODE_CLUSTER_STATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *uint32) uint32.
+// PCLUSAPI_GET_NODE_CLUSTER_STATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_NODE_CLUSTER_STATE uintptr
 
-// PCLUSAPI_GET_NOTIFY_EVENT_HANDLE_V2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCHANGE, *foundation.HANDLE) uint32.
+// PCLUSAPI_GET_NOTIFY_EVENT_HANDLE_V2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCHANGE, *foundation.HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_GET_NOTIFY_EVENT_HANDLE_V2 uintptr
 
-// PCLUSAPI_IS_FILE_ON_CLUSTER_SHARED_VOLUME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *foundation.BOOL) uint32.
+// PCLUSAPI_IS_FILE_ON_CLUSTER_SHARED_VOLUME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_IS_FILE_ON_CLUSTER_SHARED_VOLUME uintptr
 
-// PCLUSAPI_MOVE_CLUSTER_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HNODE) uint32.
+// PCLUSAPI_MOVE_CLUSTER_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HNODE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_MOVE_CLUSTER_GROUP uintptr
 
-// PCLUSAPI_OFFLINE_CLUSTER_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP) uint32.
+// PCLUSAPI_OFFLINE_CLUSTER_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OFFLINE_CLUSTER_GROUP uintptr
 
-// PCLUSAPI_OFFLINE_CLUSTER_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE) uint32.
+// PCLUSAPI_OFFLINE_CLUSTER_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OFFLINE_CLUSTER_RESOURCE uintptr
 
-// PCLUSAPI_ONLINE_CLUSTER_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HNODE) uint32.
+// PCLUSAPI_ONLINE_CLUSTER_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HNODE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ONLINE_CLUSTER_GROUP uintptr
 
-// PCLUSAPI_ONLINE_CLUSTER_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE) uint32.
+// PCLUSAPI_ONLINE_CLUSTER_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_ONLINE_CLUSTER_RESOURCE uintptr
 
-// PCLUSAPI_OPEN_CLUSTER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) HCLUSTER.
+// PCLUSAPI_OPEN_CLUSTER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, *uint32) HCLUSTER.
+// PCLUSAPI_OPEN_CLUSTER_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, *uint32) uintptr (the native return type is
+// HCLUSTER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_EX uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_GROUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) HGROUP.
+// PCLUSAPI_OPEN_CLUSTER_GROUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// HGROUP; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_GROUP uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_GROUP_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) HGROUP.
+// PCLUSAPI_OPEN_CLUSTER_GROUP_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) uintptr (the native return type is
+// HGROUP; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_GROUP_EX uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_GROUP_GROUPSET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) HGROUPSET.
+// PCLUSAPI_OPEN_CLUSTER_GROUP_GROUPSET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// HGROUPSET; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_GROUP_GROUPSET uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_NETINTERFACE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) HNETINTERFACE.
+// PCLUSAPI_OPEN_CLUSTER_NETINTERFACE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) uintptr (the native return type is
+// HNETINTERFACE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_NETINTERFACE_EX uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_NETWORK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) HNETWORK.
+// PCLUSAPI_OPEN_CLUSTER_NETWORK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// HNETWORK; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_NETWORK uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_NETWORK_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) HNETWORK.
+// PCLUSAPI_OPEN_CLUSTER_NETWORK_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) uintptr (the native return type is
+// HNETWORK; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_NETWORK_EX uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_NET_INTERFACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) HNETINTERFACE.
+// PCLUSAPI_OPEN_CLUSTER_NET_INTERFACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// HNETINTERFACE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_NET_INTERFACE uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_NODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) HNODE.
+// PCLUSAPI_OPEN_CLUSTER_NODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// HNODE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_NODE uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_NODE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) HNODE.
+// PCLUSAPI_OPEN_CLUSTER_NODE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) uintptr (the native return type is
+// HNODE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_NODE_EX uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) HRESOURCE.
+// PCLUSAPI_OPEN_CLUSTER_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_RESOURCE uintptr
 
-// PCLUSAPI_OPEN_CLUSTER_RESOURCE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) HRESOURCE.
+// PCLUSAPI_OPEN_CLUSTER_RESOURCE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32, *uint32) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_CLUSTER_RESOURCE_EX uintptr
 
-// PCLUSAPI_OPEN_NODE_BY_ID is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, uint32) HNODE.
+// PCLUSAPI_OPEN_NODE_BY_ID is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, uint32) uintptr (the native return type is
+// HNODE; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_OPEN_NODE_BY_ID uintptr
 
-// PCLUSAPI_PAUSE_CLUSTER_NODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE) uint32.
+// PCLUSAPI_PAUSE_CLUSTER_NODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_PAUSE_CLUSTER_NODE uintptr
 
-// PCLUSAPI_PAUSE_CLUSTER_NODE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, foundation.BOOL, uint32, HNODE) uint32.
+// PCLUSAPI_PAUSE_CLUSTER_NODE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, foundation.BOOL, uint32, HNODE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_PAUSE_CLUSTER_NODE_EX uintptr
 
-// PCLUSAPI_PAUSE_CLUSTER_NODE_EX2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, foundation.BOOL, uint32, HNODE, foundation.PWSTR) uint32.
+// PCLUSAPI_PAUSE_CLUSTER_NODE_EX2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, foundation.BOOL, uint32, HNODE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_PAUSE_CLUSTER_NODE_EX2 uintptr
 
-// PCLUSAPI_PFN_REASON_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, HCLUSTER, foundation.PWSTR, *uint32) foundation.BOOL.
+// PCLUSAPI_PFN_REASON_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, HCLUSTER, foundation.PWSTR, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_PFN_REASON_HANDLER uintptr
 
-// PCLUSAPI_REGISTER_CLUSTER_NOTIFY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCHANGE, uint32, foundation.HANDLE, uintptr) uint32.
+// PCLUSAPI_REGISTER_CLUSTER_NOTIFY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCHANGE, uint32, foundation.HANDLE, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REGISTER_CLUSTER_NOTIFY uintptr
 
-// PCLUSAPI_REGISTER_CLUSTER_NOTIFY_V2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCHANGE, NOTIFY_FILTER_AND_TYPE, foundation.HANDLE, uintptr) uint32.
+// PCLUSAPI_REGISTER_CLUSTER_NOTIFY_V2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCHANGE, NOTIFY_FILTER_AND_TYPE, foundation.HANDLE, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REGISTER_CLUSTER_NOTIFY_V2 uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HGROUP) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HGROUP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HGROUP, foundation.PWSTR) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HGROUP, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_GROUP_DEPENDENCY_EX uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, HGROUPSET) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, HGROUPSET) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, HGROUPSET, foundation.PWSTR) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, HGROUPSET, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EX uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HGROUPSET) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HGROUPSET) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, HGROUPSET, foundation.PWSTR) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, HGROUPSET, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_GROUP_TO_GROUP_GROUPSET_DEPENDENCY_EX uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_NAME_ACCOUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_NAME_ACCOUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_NAME_ACCOUNT uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HRESOURCE) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HRESOURCE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HRESOURCE, foundation.PWSTR) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HRESOURCE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_RESOURCE_DEPENDENCY_EX uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HNODE) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HNODE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE uintptr
 
-// PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HNODE, foundation.PWSTR) uint32.
+// PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HNODE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CLUSTER_RESOURCE_NODE_EX uintptr
 
-// PCLUSAPI_REMOVE_CROSS_CLUSTER_GROUPSET_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_REMOVE_CROSS_CLUSTER_GROUPSET_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_CROSS_CLUSTER_GROUPSET_DEPENDENCY uintptr
 
-// PCLUSAPI_REMOVE_RESOURCE_FROM_CLUSTER_SHARED_VOLUMES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE) uint32.
+// PCLUSAPI_REMOVE_RESOURCE_FROM_CLUSTER_SHARED_VOLUMES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REMOVE_RESOURCE_FROM_CLUSTER_SHARED_VOLUMES uintptr
 
-// PCLUSAPI_REPAIR_CLUSTER_NAME_ACCOUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER) uint32.
+// PCLUSAPI_REPAIR_CLUSTER_NAME_ACCOUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_REPAIR_CLUSTER_NAME_ACCOUNT uintptr
 
-// PCLUSAPI_RESTART_CLUSTER_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, uint32) uint32.
+// PCLUSAPI_RESTART_CLUSTER_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_RESTART_CLUSTER_RESOURCE uintptr
 
-// PCLUSAPI_RESTART_CLUSTER_RESOURCE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, uint32) uint32.
+// PCLUSAPI_RESTART_CLUSTER_RESOURCE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_RESTART_CLUSTER_RESOURCE_EX uintptr
 
-// PCLUSAPI_RESTORE_CLUSTER_DATABASE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.BOOL, foundation.PWSTR) uint32.
+// PCLUSAPI_RESTORE_CLUSTER_DATABASE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.BOOL, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_RESTORE_CLUSTER_DATABASE uintptr
 
-// PCLUSAPI_RESUME_CLUSTER_NODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE) uint32.
+// PCLUSAPI_RESUME_CLUSTER_NODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_RESUME_CLUSTER_NODE uintptr
 
-// PCLUSAPI_RESUME_CLUSTER_NODE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, CLUSTER_NODE_RESUME_FAILBACK_TYPE, uint32) uint32.
+// PCLUSAPI_RESUME_CLUSTER_NODE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, CLUSTER_NODE_RESUME_FAILBACK_TYPE, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_RESUME_CLUSTER_NODE_EX uintptr
 
-// PCLUSAPI_RESUME_CLUSTER_NODE_EX2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNODE, CLUSTER_NODE_RESUME_FAILBACK_TYPE, uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_RESUME_CLUSTER_NODE_EX2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNODE, CLUSTER_NODE_RESUME_FAILBACK_TYPE, uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_RESUME_CLUSTER_NODE_EX2 uintptr
 
-// PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION uintptr
 
-// PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUPSET, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUPSET, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_GROUP_GROUPSET_DEPENDENCY_EXPRESSION_EX uintptr
 
-// PCLUSAPI_SET_CLUSTER_GROUP_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_GROUP_NAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_GROUP_NAME uintptr
 
-// PCLUSAPI_SET_CLUSTER_GROUP_NAME_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_GROUP_NAME_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_GROUP_NAME_EX uintptr
 
-// PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, uint32, *HNODE) uint32.
+// PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, uint32, *HNODE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST uintptr
 
-// PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, uint32, *HNODE, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, uint32, *HNODE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_GROUP_NODE_LIST_EX uintptr
 
-// PCLUSAPI_SET_CLUSTER_NAME_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_NAME_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_NAME_EX uintptr
 
-// PCLUSAPI_SET_CLUSTER_NETWORK_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_NETWORK_NAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_NETWORK_NAME uintptr
 
-// PCLUSAPI_SET_CLUSTER_NETWORK_NAME_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HNETWORK, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_NETWORK_NAME_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HNETWORK, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_NETWORK_NAME_EX uintptr
 
-// PCLUSAPI_SET_CLUSTER_NETWORK_PRIORITY_ORDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, uint32, *HNETWORK) uint32.
+// PCLUSAPI_SET_CLUSTER_NETWORK_PRIORITY_ORDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, uint32, *HNETWORK) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_NETWORK_PRIORITY_ORDER uintptr
 
-// PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR, uint32) uint32.
+// PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE uintptr
 
-// PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR, uint32, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR, uint32, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_QUORUM_RESOURCE_EX uintptr
 
-// PCLUSAPI_SET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_RESOURCE_DEPENDENCY_EXPRESSION uintptr
 
-// PCLUSAPI_SET_CLUSTER_RESOURCE_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_RESOURCE_NAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_RESOURCE_NAME uintptr
 
-// PCLUSAPI_SET_CLUSTER_RESOURCE_NAME_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_CLUSTER_RESOURCE_NAME_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_RESOURCE_NAME_EX uintptr
 
-// PCLUSAPI_SET_CLUSTER_SERVICE_ACCOUNT_PASSWORD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, *CLUSTER_SET_PASSWORD_STATUS, *uint32) uint32.
+// PCLUSAPI_SET_CLUSTER_SERVICE_ACCOUNT_PASSWORD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, *CLUSTER_SET_PASSWORD_STATUS, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_CLUSTER_SERVICE_ACCOUNT_PASSWORD uintptr
 
-// PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION uintptr
 
-// PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HGROUP, foundation.PWSTR, foundation.PWSTR) uint32.
+// PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HGROUP, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_GROUP_DEPENDENCY_EXPRESSION_EX uintptr
 
-// PCLUSAPI_SET_REASON_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CLUSAPI_REASON_HANDLER) *CLUSAPI_REASON_HANDLER.
+// PCLUSAPI_SET_REASON_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CLUSAPI_REASON_HANDLER) uintptr (the native return type is
+// *CLUSAPI_REASON_HANDLER; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SET_REASON_HANDLER uintptr
 
-// PCLUSAPI_SHARED_VOLUME_SET_SNAPSHOT_STATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(win32.GUID, foundation.PWSTR, CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE) uint32.
+// PCLUSAPI_SHARED_VOLUME_SET_SNAPSHOT_STATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(win32.GUID, foundation.PWSTR, CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SHARED_VOLUME_SET_SNAPSHOT_STATE uintptr
 
-// PCLUSAPI_SetClusterName is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR) uint32.
+// PCLUSAPI_SetClusterName is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSAPI_SetClusterName uintptr
 
-// PCLUSTER_CLEAR_BACKUP_STATE_FOR_SHARED_VOLUME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) uint32.
+// PCLUSTER_CLEAR_BACKUP_STATE_FOR_SHARED_VOLUME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_CLEAR_BACKUP_STATE_FOR_SHARED_VOLUME uintptr
 
-// PCLUSTER_DECRYPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSCRYPTPROVIDER, *byte, uint32, **byte, *uint32) uint32.
+// PCLUSTER_DECRYPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSCRYPTPROVIDER, *byte, uint32, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_DECRYPT uintptr
 
-// PCLUSTER_ENCRYPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSCRYPTPROVIDER, *byte, uint32, **byte, *uint32) uint32.
+// PCLUSTER_ENCRYPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSCRYPTPROVIDER, *byte, uint32, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_ENCRYPT uintptr
 
-// PCLUSTER_GET_VOLUME_NAME_FOR_VOLUME_MOUNT_POINT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) foundation.BOOL.
+// PCLUSTER_GET_VOLUME_NAME_FOR_VOLUME_MOUNT_POINT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSTER_GET_VOLUME_NAME_FOR_VOLUME_MOUNT_POINT uintptr
 
-// PCLUSTER_GET_VOLUME_PATH_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) foundation.BOOL.
+// PCLUSTER_GET_VOLUME_PATH_NAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSTER_GET_VOLUME_PATH_NAME uintptr
 
-// PCLUSTER_IS_PATH_ON_SHARED_VOLUME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// PCLUSTER_IS_PATH_ON_SHARED_VOLUME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSTER_IS_PATH_ON_SHARED_VOLUME uintptr
 
-// PCLUSTER_PREPARE_SHARED_VOLUME_FOR_BACKUP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32) uint32.
+// PCLUSTER_PREPARE_SHARED_VOLUME_FOR_BACKUP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_PREPARE_SHARED_VOLUME_FOR_BACKUP uintptr
 
-// PCLUSTER_REG_BATCH_ADD_COMMAND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGBATCH, CLUSTER_REG_COMMAND, foundation.PWSTR, uint32, unsafe.Pointer, uint32) int32.
+// PCLUSTER_REG_BATCH_ADD_COMMAND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGBATCH, CLUSTER_REG_COMMAND, foundation.PWSTR, uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_BATCH_ADD_COMMAND uintptr
 
-// PCLUSTER_REG_BATCH_CLOSE_NOTIFICATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGBATCHNOTIFICATION) int32.
+// PCLUSTER_REG_BATCH_CLOSE_NOTIFICATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGBATCHNOTIFICATION) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_BATCH_CLOSE_NOTIFICATION uintptr
 
-// PCLUSTER_REG_BATCH_READ_COMMAND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGBATCHNOTIFICATION, *CLUSTER_BATCH_COMMAND) int32.
+// PCLUSTER_REG_BATCH_READ_COMMAND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGBATCHNOTIFICATION, *CLUSTER_BATCH_COMMAND) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_BATCH_READ_COMMAND uintptr
 
-// PCLUSTER_REG_CLOSE_BATCH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGBATCH, foundation.BOOL, *int32) int32.
+// PCLUSTER_REG_CLOSE_BATCH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGBATCH, foundation.BOOL, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_CLOSE_BATCH uintptr
 
-// PCLUSTER_REG_CLOSE_BATCH_NOTIFY_PORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGBATCHPORT) int32.
+// PCLUSTER_REG_CLOSE_BATCH_NOTIFY_PORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGBATCHPORT) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_CLOSE_BATCH_NOTIFY_PORT uintptr
 
-// PCLUSTER_REG_CLOSE_READ_BATCH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGREADBATCH, *HREGREADBATCHREPLY) int32.
+// PCLUSTER_REG_CLOSE_READ_BATCH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGREADBATCH, *HREGREADBATCHREPLY) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_CLOSE_READ_BATCH uintptr
 
-// PCLUSTER_REG_CLOSE_READ_BATCH_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGREADBATCH, uint32, *HREGREADBATCHREPLY) int32.
+// PCLUSTER_REG_CLOSE_READ_BATCH_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGREADBATCH, uint32, *HREGREADBATCHREPLY) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_CLOSE_READ_BATCH_EX uintptr
 
-// PCLUSTER_REG_CLOSE_READ_BATCH_REPLY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGREADBATCHREPLY) int32.
+// PCLUSTER_REG_CLOSE_READ_BATCH_REPLY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGREADBATCHREPLY) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_CLOSE_READ_BATCH_REPLY uintptr
 
-// PCLUSTER_REG_CREATE_BATCH_NOTIFY_PORT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *HREGBATCHPORT) int32.
+// PCLUSTER_REG_CREATE_BATCH_NOTIFY_PORT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *HREGBATCHPORT) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_CREATE_BATCH_NOTIFY_PORT uintptr
 
-// PCLUSTER_REG_CREATE_READ_BATCH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *HREGREADBATCH) int32.
+// PCLUSTER_REG_CREATE_READ_BATCH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *HREGREADBATCH) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_CREATE_READ_BATCH uintptr
 
-// PCLUSTER_REG_GET_BATCH_NOTIFICATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGBATCHPORT, *HREGBATCHNOTIFICATION) int32.
+// PCLUSTER_REG_GET_BATCH_NOTIFICATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGBATCHPORT, *HREGBATCHNOTIFICATION) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_GET_BATCH_NOTIFICATION uintptr
 
-// PCLUSTER_REG_READ_BATCH_ADD_COMMAND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGREADBATCH, foundation.PWSTR, foundation.PWSTR) int32.
+// PCLUSTER_REG_READ_BATCH_ADD_COMMAND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGREADBATCH, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_READ_BATCH_ADD_COMMAND uintptr
 
-// PCLUSTER_REG_READ_BATCH_REPLY_NEXT_COMMAND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HREGREADBATCHREPLY, *CLUSTER_READ_BATCH_COMMAND) int32.
+// PCLUSTER_REG_READ_BATCH_REPLY_NEXT_COMMAND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HREGREADBATCHREPLY, *CLUSTER_READ_BATCH_COMMAND) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_REG_READ_BATCH_REPLY_NEXT_COMMAND uintptr
 
-// PCLUSTER_SETUP_PROGRESS_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, CLUSTER_SETUP_PHASE, CLUSTER_SETUP_PHASE_TYPE, CLUSTER_SETUP_PHASE_SEVERITY, uint32, foundation.PWSTR, uint32) foundation.BOOL.
+// PCLUSTER_SETUP_PROGRESS_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, CLUSTER_SETUP_PHASE, CLUSTER_SETUP_PHASE_TYPE, CLUSTER_SETUP_PHASE_SEVERITY, uint32, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSTER_SETUP_PROGRESS_CALLBACK uintptr
 
-// PCLUSTER_SET_ACCOUNT_ACCESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.PWSTR, uint32, uint32) uint32.
+// PCLUSTER_SET_ACCOUNT_ACCESS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.PWSTR, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PCLUSTER_SET_ACCOUNT_ACCESS uintptr
 
-// PCLUSTER_UPGRADE_PROGRESS_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, CLUSTER_UPGRADE_PHASE) foundation.BOOL.
+// PCLUSTER_UPGRADE_PROGRESS_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, CLUSTER_UPGRADE_PHASE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCLUSTER_UPGRADE_PROGRESS_CALLBACK uintptr
 
-// PEND_CONTROL_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int64, uint32) uint32.
+// PEND_CONTROL_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int64, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PEND_CONTROL_CALL uintptr
 
-// PEND_TYPE_CONTROL_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int64, uint32) uint32.
+// PEND_TYPE_CONTROL_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int64, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PEND_TYPE_CONTROL_CALL uintptr
 
-// PEXTEND_RES_CONTROL_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int64, uint32) uint32.
+// PEXTEND_RES_CONTROL_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int64, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PEXTEND_RES_CONTROL_CALL uintptr
 
-// PEXTEND_RES_TYPE_CONTROL_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int64, uint32) uint32.
+// PEXTEND_RES_TYPE_CONTROL_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int64, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PEXTEND_RES_TYPE_CONTROL_CALL uintptr
 
-// PFREE_CLUSTER_CRYPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// PFREE_CLUSTER_CRYPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFREE_CLUSTER_CRYPT uintptr
 
-// PIS_ALIVE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.BOOL.
+// PIS_ALIVE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PIS_ALIVE_ROUTINE uintptr
 
-// PLOG_EVENT_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, LOG_LEVEL, foundation.PWSTR).
+// PLOG_EVENT_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, LOG_LEVEL, foundation.PWSTR) uintptr.
 type PLOG_EVENT_ROUTINE uintptr
 
-// PLOOKS_ALIVE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.BOOL.
+// PLOOKS_ALIVE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PLOOKS_ALIVE_ROUTINE uintptr
 
-// POFFLINE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// POFFLINE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type POFFLINE_ROUTINE uintptr
 
-// POFFLINE_V2_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, *byte, uint32, uint32) uint32.
+// POFFLINE_V2_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type POFFLINE_V2_ROUTINE uintptr
 
-// PONLINE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *foundation.HANDLE) uint32.
+// PONLINE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *foundation.HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PONLINE_ROUTINE uintptr
 
-// PONLINE_V2_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *foundation.HANDLE, uint32, *byte, uint32, uint32) uint32.
+// PONLINE_V2_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *foundation.HANDLE, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PONLINE_V2_ROUTINE uintptr
 
-// POPEN_CLUSTER_CRYPT_PROVIDER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *int8, uint32, uint32) HCLUSCRYPTPROVIDER.
+// POPEN_CLUSTER_CRYPT_PROVIDER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *int8, uint32, uint32) uintptr (the native return type is
+// HCLUSCRYPTPROVIDER; NewCallback requires a uintptr-sized result).
 type POPEN_CLUSTER_CRYPT_PROVIDER uintptr
 
-// POPEN_CLUSTER_CRYPT_PROVIDEREX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *int8, uint32, uint32) HCLUSCRYPTPROVIDER.
+// POPEN_CLUSTER_CRYPT_PROVIDEREX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, *int8, uint32, uint32) uintptr (the native return type is
+// HCLUSCRYPTPROVIDER; NewCallback requires a uintptr-sized result).
 type POPEN_CLUSTER_CRYPT_PROVIDEREX uintptr
 
-// POPEN_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, systemregistry.HKEY, uintptr) unsafe.Pointer.
+// POPEN_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, systemregistry.HKEY, uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type POPEN_ROUTINE uintptr
 
-// POPEN_V2_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, systemregistry.HKEY, uintptr, uint32) unsafe.Pointer.
+// POPEN_V2_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, systemregistry.HKEY, uintptr, uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type POPEN_V2_ROUTINE uintptr
 
-// PQUERY_APPINSTANCE_VERSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *uint64, *uint64, *foundation.NTSTATUS) uint32.
+// PQUERY_APPINSTANCE_VERSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *uint64, *uint64, *foundation.NTSTATUS) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PQUERY_APPINSTANCE_VERSION uintptr
 
-// PQUORUM_RESOURCE_LOST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// PQUORUM_RESOURCE_LOST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr.
 type PQUORUM_RESOURCE_LOST uintptr
 
-// PRAISE_RES_TYPE_NOTIFICATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *byte, uint32) uint32.
+// PRAISE_RES_TYPE_NOTIFICATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRAISE_RES_TYPE_NOTIFICATION uintptr
 
-// PREGISTER_APPINSTANCE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *win32.GUID, foundation.BOOL) uint32.
+// PREGISTER_APPINSTANCE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *win32.GUID, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PREGISTER_APPINSTANCE uintptr
 
-// PREGISTER_APPINSTANCE_VERSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, uint64, uint64) uint32.
+// PREGISTER_APPINSTANCE_VERSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, uint64, uint64) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PREGISTER_APPINSTANCE_VERSION uintptr
 
-// PRELEASE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// PRELEASE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRELEASE_ROUTINE uintptr
 
-// PREQUEST_DUMP_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.BOOL, uint32) uint32.
+// PREQUEST_DUMP_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, foundation.BOOL, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PREQUEST_DUMP_ROUTINE uintptr
 
-// PRESET_ALL_APPINSTANCE_VERSIONS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uint32.
+// PRESET_ALL_APPINSTANCE_VERSIONS is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESET_ALL_APPINSTANCE_VERSIONS uintptr
 
-// PRESOURCE_CONTROL_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PRESOURCE_CONTROL_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESOURCE_CONTROL_ROUTINE uintptr
 
-// PRESOURCE_TYPE_CONTROL_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uint32.
+// PRESOURCE_TYPE_CONTROL_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESOURCE_TYPE_CONTROL_ROUTINE uintptr
 
-// PRESUTIL_ADD_UNKNOWN_PROPERTIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32, *uint32, *uint32) uint32.
+// PRESUTIL_ADD_UNKNOWN_PROPERTIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_ADD_UNKNOWN_PROPERTIES uintptr
 
-// PRESUTIL_CREATE_DIRECTORY_TREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) uint32.
+// PRESUTIL_CREATE_DIRECTORY_TREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_CREATE_DIRECTORY_TREE uintptr
 
-// PRESUTIL_DUP_PARAMETER_BLOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, *byte, *RESUTIL_PROPERTY_ITEM) uint32.
+// PRESUTIL_DUP_PARAMETER_BLOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, *byte, *RESUTIL_PROPERTY_ITEM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_DUP_PARAMETER_BLOCK uintptr
 
-// PRESUTIL_DUP_STRING is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.PWSTR.
+// PRESUTIL_DUP_STRING is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.PWSTR; NewCallback requires a uintptr-sized result).
 type PRESUTIL_DUP_STRING uintptr
 
-// PRESUTIL_ENUM_PRIVATE_PROPERTIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *uint32, *uint32) uint32.
+// PRESUTIL_ENUM_PRIVATE_PROPERTIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_ENUM_PRIVATE_PROPERTIES uintptr
 
-// PRESUTIL_ENUM_PROPERTIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RESUTIL_PROPERTY_ITEM, foundation.PWSTR, uint32, *uint32, *uint32) uint32.
+// PRESUTIL_ENUM_PROPERTIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RESUTIL_PROPERTY_ITEM, foundation.PWSTR, uint32, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_ENUM_PROPERTIES uintptr
 
-// PRESUTIL_ENUM_RESOURCES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR, LPRESOURCE_CALLBACK, unsafe.Pointer) uint32.
+// PRESUTIL_ENUM_RESOURCES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR, LPRESOURCE_CALLBACK, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_ENUM_RESOURCES uintptr
 
-// PRESUTIL_ENUM_RESOURCES_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, HRESOURCE, foundation.PWSTR, LPRESOURCE_CALLBACK_EX, unsafe.Pointer) uint32.
+// PRESUTIL_ENUM_RESOURCES_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, HRESOURCE, foundation.PWSTR, LPRESOURCE_CALLBACK_EX, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_ENUM_RESOURCES_EX uintptr
 
-// PRESUTIL_ENUM_RESOURCES_EX2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, HRESOURCE, foundation.PWSTR, LPRESOURCE_CALLBACK_EX, unsafe.Pointer, uint32) uint32.
+// PRESUTIL_ENUM_RESOURCES_EX2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, HRESOURCE, foundation.PWSTR, LPRESOURCE_CALLBACK_EX, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_ENUM_RESOURCES_EX2 uintptr
 
-// PRESUTIL_EXPAND_ENVIRONMENT_STRINGS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.PWSTR.
+// PRESUTIL_EXPAND_ENVIRONMENT_STRINGS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.PWSTR; NewCallback requires a uintptr-sized result).
 type PRESUTIL_EXPAND_ENVIRONMENT_STRINGS uintptr
 
-// PRESUTIL_FIND_BINARY_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, **byte, *uint32) uint32.
+// PRESUTIL_FIND_BINARY_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_BINARY_PROPERTY uintptr
 
-// PRESUTIL_FIND_DEPENDENT_DISK_RESOURCE_DRIVE_LETTER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, HRESOURCE, foundation.PWSTR, *uint32) uint32.
+// PRESUTIL_FIND_DEPENDENT_DISK_RESOURCE_DRIVE_LETTER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, HRESOURCE, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_DEPENDENT_DISK_RESOURCE_DRIVE_LETTER uintptr
 
-// PRESUTIL_FIND_DWORD_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *uint32) uint32.
+// PRESUTIL_FIND_DWORD_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_DWORD_PROPERTY uintptr
 
-// PRESUTIL_FIND_EXPANDED_SZ_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.PWSTR) uint32.
+// PRESUTIL_FIND_EXPANDED_SZ_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_EXPANDED_SZ_PROPERTY uintptr
 
-// PRESUTIL_FIND_EXPAND_SZ_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.PWSTR) uint32.
+// PRESUTIL_FIND_EXPAND_SZ_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_EXPAND_SZ_PROPERTY uintptr
 
-// PRESUTIL_FIND_FILETIME_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.FILETIME) uint32.
+// PRESUTIL_FIND_FILETIME_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.FILETIME) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_FILETIME_PROPERTY uintptr
 
-// PRESUTIL_FIND_LONG_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *int32) uint32.
+// PRESUTIL_FIND_LONG_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *int32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_LONG_PROPERTY uintptr
 
-// PRESUTIL_FIND_MULTI_SZ_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.PWSTR, *uint32) uint32.
+// PRESUTIL_FIND_MULTI_SZ_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_MULTI_SZ_PROPERTY uintptr
 
-// PRESUTIL_FIND_SZ_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.PWSTR) uint32.
+// PRESUTIL_FIND_SZ_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_SZ_PROPERTY uintptr
 
-// PRESUTIL_FIND_ULARGEINTEGER_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *uint64) uint32.
+// PRESUTIL_FIND_ULARGEINTEGER_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *uint64) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FIND_ULARGEINTEGER_PROPERTY uintptr
 
-// PRESUTIL_FREE_ENVIRONMENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// PRESUTIL_FREE_ENVIRONMENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_FREE_ENVIRONMENT uintptr
 
-// PRESUTIL_FREE_PARAMETER_BLOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, *byte, *RESUTIL_PROPERTY_ITEM).
+// PRESUTIL_FREE_PARAMETER_BLOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, *byte, *RESUTIL_PROPERTY_ITEM) uintptr.
 type PRESUTIL_FREE_PARAMETER_BLOCK uintptr
 
-// PRESUTIL_GET_ALL_PROPERTIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32, *uint32, *uint32) uint32.
+// PRESUTIL_GET_ALL_PROPERTIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_ALL_PROPERTIES uintptr
 
-// PRESUTIL_GET_BINARY_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(**byte, *uint32, *CLUSPROP_BINARY, *byte, uint32, **byte, *uint32) uint32.
+// PRESUTIL_GET_BINARY_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(**byte, *uint32, *CLUSPROP_BINARY, *byte, uint32, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_BINARY_PROPERTY uintptr
 
-// PRESUTIL_GET_BINARY_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, **byte, *uint32) uint32.
+// PRESUTIL_GET_BINARY_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_BINARY_VALUE uintptr
 
-// PRESUTIL_GET_CORE_CLUSTER_RESOURCES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, *HRESOURCE, *HRESOURCE, *HRESOURCE) uint32.
+// PRESUTIL_GET_CORE_CLUSTER_RESOURCES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, *HRESOURCE, *HRESOURCE, *HRESOURCE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_CORE_CLUSTER_RESOURCES uintptr
 
-// PRESUTIL_GET_CORE_CLUSTER_RESOURCES_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, *HRESOURCE, *HRESOURCE, *HRESOURCE, uint32) uint32.
+// PRESUTIL_GET_CORE_CLUSTER_RESOURCES_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, *HRESOURCE, *HRESOURCE, *HRESOURCE, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_CORE_CLUSTER_RESOURCES_EX uintptr
 
-// PRESUTIL_GET_DWORD_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, *CLUSPROP_DWORD, uint32, uint32, uint32, **byte, *uint32) uint32.
+// PRESUTIL_GET_DWORD_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, *CLUSPROP_DWORD, uint32, uint32, uint32, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_DWORD_PROPERTY uintptr
 
-// PRESUTIL_GET_DWORD_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, *uint32, uint32) uint32.
+// PRESUTIL_GET_DWORD_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_DWORD_VALUE uintptr
 
-// PRESUTIL_GET_ENVIRONMENT_WITH_NET_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE) unsafe.Pointer.
+// PRESUTIL_GET_ENVIRONMENT_WITH_NET_NAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_ENVIRONMENT_WITH_NET_NAME uintptr
 
-// PRESUTIL_GET_EXPAND_SZ_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.BOOL) foundation.PWSTR.
+// PRESUTIL_GET_EXPAND_SZ_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.BOOL) uintptr (the native return type is
+// foundation.PWSTR; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_EXPAND_SZ_VALUE uintptr
 
-// PRESUTIL_GET_FILETIME_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.FILETIME, *CLUSPROP_FILETIME, foundation.FILETIME, foundation.FILETIME, foundation.FILETIME, **byte, *uint32) uint32.
+// PRESUTIL_GET_FILETIME_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.FILETIME, *CLUSPROP_FILETIME, foundation.FILETIME, foundation.FILETIME, foundation.FILETIME, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_FILETIME_PROPERTY uintptr
 
-// PRESUTIL_GET_LONG_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int32, *CLUSPROP_LONG, int32, int32, int32, **byte, *uint32) uint32.
+// PRESUTIL_GET_LONG_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int32, *CLUSPROP_LONG, int32, int32, int32, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_LONG_PROPERTY uintptr
 
-// PRESUTIL_GET_MULTI_SZ_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.PWSTR, *uint32, *CLUSPROP_SZ, foundation.PWSTR, uint32, **byte, *uint32) uint32.
+// PRESUTIL_GET_MULTI_SZ_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.PWSTR, *uint32, *CLUSPROP_SZ, foundation.PWSTR, uint32, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_MULTI_SZ_PROPERTY uintptr
 
-// PRESUTIL_GET_PRIVATE_PROPERTIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, unsafe.Pointer, uint32, *uint32, *uint32) uint32.
+// PRESUTIL_GET_PRIVATE_PROPERTIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, unsafe.Pointer, uint32, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_PRIVATE_PROPERTIES uintptr
 
-// PRESUTIL_GET_PROPERTIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32, *uint32, *uint32) uint32.
+// PRESUTIL_GET_PROPERTIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_PROPERTIES uintptr
 
-// PRESUTIL_GET_PROPERTIES_TO_PARAMETER_BLOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, *byte, foundation.BOOL, *foundation.PWSTR) uint32.
+// PRESUTIL_GET_PROPERTIES_TO_PARAMETER_BLOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, *byte, foundation.BOOL, *foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_PROPERTIES_TO_PARAMETER_BLOCK uintptr
 
-// PRESUTIL_GET_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, *unsafe.Pointer, *uint32) uint32.
+// PRESUTIL_GET_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, *unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_PROPERTY uintptr
 
-// PRESUTIL_GET_PROPERTY_FORMATS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32, *uint32, *uint32) uint32.
+// PRESUTIL_GET_PROPERTY_FORMATS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_PROPERTY_FORMATS uintptr
 
-// PRESUTIL_GET_PROPERTY_SIZE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, *uint32, *uint32) uint32.
+// PRESUTIL_GET_PROPERTY_SIZE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_PROPERTY_SIZE uintptr
 
-// PRESUTIL_GET_QWORD_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, *uint64, uint64) uint32.
+// PRESUTIL_GET_QWORD_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, *uint64, uint64) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_QWORD_VALUE uintptr
 
-// PRESUTIL_GET_RESOURCE_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR) HRESOURCE.
+// PRESUTIL_GET_RESOURCE_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_DEPENDENCY uintptr
 
-// PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.HANDLE, *CLUS_RESOURCE_CLASS_INFO, foundation.BOOL) HRESOURCE.
+// PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.HANDLE, *CLUS_RESOURCE_CLASS_INFO, foundation.BOOL) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS uintptr
 
-// PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.HANDLE, *CLUS_RESOURCE_CLASS_INFO, foundation.BOOL, uint32) HRESOURCE.
+// PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.HANDLE, *CLUS_RESOURCE_CLASS_INFO, foundation.BOOL, uint32) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_CLASS_EX uintptr
 
-// PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.HANDLE, foundation.PWSTR, foundation.BOOL) HRESOURCE.
+// PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.HANDLE, foundation.PWSTR, foundation.BOOL) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME uintptr
 
-// PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCLUSTER, foundation.HANDLE, foundation.PWSTR, foundation.BOOL, uint32) HRESOURCE.
+// PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCLUSTER, foundation.HANDLE, foundation.PWSTR, foundation.BOOL, uint32) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_DEPENDENCY_BY_NAME_EX uintptr
 
-// PRESUTIL_GET_RESOURCE_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, uint32) HRESOURCE.
+// PRESUTIL_GET_RESOURCE_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.PWSTR, uint32) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_DEPENDENCY_EX uintptr
 
-// PRESUTIL_GET_RESOURCE_DEPENDENTIP_ADDRESS_PROPS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32) uint32.
+// PRESUTIL_GET_RESOURCE_DEPENDENTIP_ADDRESS_PROPS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_DEPENDENTIP_ADDRESS_PROPS uintptr
 
-// PRESUTIL_GET_RESOURCE_NAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, foundation.PWSTR, *uint32) uint32.
+// PRESUTIL_GET_RESOURCE_NAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_NAME uintptr
 
-// PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR) HRESOURCE.
+// PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY uintptr
 
-// PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) HRESOURCE.
+// PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32) uintptr (the native return type is
+// HRESOURCE; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_RESOURCE_NAME_DEPENDENCY_EX uintptr
 
-// PRESUTIL_GET_SZ_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.PWSTR, *CLUSPROP_SZ, foundation.PWSTR, **byte, *uint32) uint32.
+// PRESUTIL_GET_SZ_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.PWSTR, *CLUSPROP_SZ, foundation.PWSTR, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_SZ_PROPERTY uintptr
 
-// PRESUTIL_GET_SZ_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR) foundation.PWSTR.
+// PRESUTIL_GET_SZ_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR) uintptr (the native return type is
+// foundation.PWSTR; NewCallback requires a uintptr-sized result).
 type PRESUTIL_GET_SZ_VALUE uintptr
 
-// PRESUTIL_IS_PATH_VALID is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOL.
+// PRESUTIL_IS_PATH_VALID is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PRESUTIL_IS_PATH_VALID uintptr
 
-// PRESUTIL_IS_RESOURCE_CLASS_EQUAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CLUS_RESOURCE_CLASS_INFO, HRESOURCE) foundation.BOOL.
+// PRESUTIL_IS_RESOURCE_CLASS_EQUAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CLUS_RESOURCE_CLASS_INFO, HRESOURCE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PRESUTIL_IS_RESOURCE_CLASS_EQUAL uintptr
 
-// PRESUTIL_PROPERTY_LIST_FROM_PARAMETER_BLOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RESUTIL_PROPERTY_ITEM, unsafe.Pointer, *uint32, *byte, *uint32, *uint32) uint32.
+// PRESUTIL_PROPERTY_LIST_FROM_PARAMETER_BLOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RESUTIL_PROPERTY_ITEM, unsafe.Pointer, *uint32, *byte, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_PROPERTY_LIST_FROM_PARAMETER_BLOCK uintptr
 
-// PRESUTIL_REMOVE_RESOURCE_SERVICE_ENVIRONMENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, PLOG_EVENT_ROUTINE, uintptr) uint32.
+// PRESUTIL_REMOVE_RESOURCE_SERVICE_ENVIRONMENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, PLOG_EVENT_ROUTINE, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_REMOVE_RESOURCE_SERVICE_ENVIRONMENT uintptr
 
-// PRESUTIL_RESOURCES_EQUAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HRESOURCE, HRESOURCE) foundation.BOOL.
+// PRESUTIL_RESOURCES_EQUAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HRESOURCE, HRESOURCE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PRESUTIL_RESOURCES_EQUAL uintptr
 
-// PRESUTIL_RESOURCE_TYPES_EQUAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, HRESOURCE) foundation.BOOL.
+// PRESUTIL_RESOURCE_TYPES_EQUAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, HRESOURCE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PRESUTIL_RESOURCE_TYPES_EQUAL uintptr
 
-// PRESUTIL_SET_BINARY_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, *byte, uint32, **byte, *uint32) uint32.
+// PRESUTIL_SET_BINARY_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, *byte, uint32, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_BINARY_VALUE uintptr
 
-// PRESUTIL_SET_DWORD_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *uint32) uint32.
+// PRESUTIL_SET_DWORD_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_DWORD_VALUE uintptr
 
-// PRESUTIL_SET_EXPAND_SZ_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR, *foundation.PWSTR) uint32.
+// PRESUTIL_SET_EXPAND_SZ_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR, *foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_EXPAND_SZ_VALUE uintptr
 
-// PRESUTIL_SET_MULTI_SZ_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR, uint32, *foundation.PWSTR, *uint32) uint32.
+// PRESUTIL_SET_MULTI_SZ_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR, uint32, *foundation.PWSTR, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_MULTI_SZ_VALUE uintptr
 
-// PRESUTIL_SET_PRIVATE_PROPERTY_LIST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, unsafe.Pointer, uint32) uint32.
+// PRESUTIL_SET_PRIVATE_PROPERTY_LIST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_PRIVATE_PROPERTY_LIST uintptr
 
-// PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, *byte, unsafe.Pointer, uint32, *byte) uint32.
+// PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, *byte, unsafe.Pointer, uint32, *byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK uintptr
 
-// PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, *byte, unsafe.Pointer, uint32, foundation.BOOL, *byte) uint32.
+// PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, *byte, unsafe.Pointer, uint32, foundation.BOOL, *byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_PROPERTY_PARAMETER_BLOCK_EX uintptr
 
-// PRESUTIL_SET_PROPERTY_TABLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, foundation.BOOL, unsafe.Pointer, uint32, *byte) uint32.
+// PRESUTIL_SET_PROPERTY_TABLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, foundation.BOOL, unsafe.Pointer, uint32, *byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_PROPERTY_TABLE uintptr
 
-// PRESUTIL_SET_PROPERTY_TABLE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, foundation.BOOL, unsafe.Pointer, uint32, foundation.BOOL, *byte) uint32.
+// PRESUTIL_SET_PROPERTY_TABLE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, foundation.BOOL, unsafe.Pointer, uint32, foundation.BOOL, *byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_PROPERTY_TABLE_EX uintptr
 
-// PRESUTIL_SET_QWORD_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, uint64, *uint64) uint32.
+// PRESUTIL_SET_QWORD_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, uint64, *uint64) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_QWORD_VALUE uintptr
 
-// PRESUTIL_SET_RESOURCE_SERVICE_ENVIRONMENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, HRESOURCE, PLOG_EVENT_ROUTINE, uintptr) uint32.
+// PRESUTIL_SET_RESOURCE_SERVICE_ENVIRONMENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, HRESOURCE, PLOG_EVENT_ROUTINE, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_RESOURCE_SERVICE_ENVIRONMENT uintptr
 
-// PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, systemservices.SC_HANDLE, *systemservices.SC_HANDLE, PLOG_EVENT_ROUTINE, uintptr) uint32.
+// PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, systemservices.SC_HANDLE, *systemservices.SC_HANDLE, PLOG_EVENT_ROUTINE, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS uintptr
 
-// PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, systemservices.SC_HANDLE, *systemservices.SC_HANDLE, uint32, PLOG_EVENT_ROUTINE, uintptr) uint32.
+// PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, systemservices.SC_HANDLE, *systemservices.SC_HANDLE, uint32, PLOG_EVENT_ROUTINE, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_RESOURCE_SERVICE_START_PARAMETERS_EX uintptr
 
-// PRESUTIL_SET_SZ_VALUE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR, *foundation.PWSTR) uint32.
+// PRESUTIL_SET_SZ_VALUE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, foundation.PWSTR, foundation.PWSTR, *foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_SZ_VALUE uintptr
 
-// PRESUTIL_SET_UNKNOWN_PROPERTIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32) uint32.
+// PRESUTIL_SET_UNKNOWN_PROPERTIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemregistry.HKEY, *RESUTIL_PROPERTY_ITEM, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_SET_UNKNOWN_PROPERTIES uintptr
 
-// PRESUTIL_START_RESOURCE_SERVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *systemservices.SC_HANDLE) uint32.
+// PRESUTIL_START_RESOURCE_SERVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *systemservices.SC_HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_START_RESOURCE_SERVICE uintptr
 
-// PRESUTIL_STOP_RESOURCE_SERVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) uint32.
+// PRESUTIL_STOP_RESOURCE_SERVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_STOP_RESOURCE_SERVICE uintptr
 
-// PRESUTIL_STOP_SERVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemservices.SC_HANDLE) uint32.
+// PRESUTIL_STOP_SERVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemservices.SC_HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_STOP_SERVICE uintptr
 
-// PRESUTIL_TERMINATE_SERVICE_PROCESS_FROM_RES_DLL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.BOOL, *uint32, PLOG_EVENT_ROUTINE, uintptr) uint32.
+// PRESUTIL_TERMINATE_SERVICE_PROCESS_FROM_RES_DLL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.BOOL, *uint32, PLOG_EVENT_ROUTINE, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_TERMINATE_SERVICE_PROCESS_FROM_RES_DLL uintptr
 
-// PRESUTIL_VERIFY_PRIVATE_PROPERTY_LIST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32) uint32.
+// PRESUTIL_VERIFY_PRIVATE_PROPERTY_LIST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_VERIFY_PRIVATE_PROPERTY_LIST uintptr
 
-// PRESUTIL_VERIFY_PROPERTY_TABLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RESUTIL_PROPERTY_ITEM, unsafe.Pointer, foundation.BOOL, unsafe.Pointer, uint32, *byte) uint32.
+// PRESUTIL_VERIFY_PROPERTY_TABLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RESUTIL_PROPERTY_ITEM, unsafe.Pointer, foundation.BOOL, unsafe.Pointer, uint32, *byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_VERIFY_PROPERTY_TABLE uintptr
 
-// PRESUTIL_VERIFY_RESOURCE_SERVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) uint32.
+// PRESUTIL_VERIFY_RESOURCE_SERVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_VERIFY_RESOURCE_SERVICE uintptr
 
-// PRESUTIL_VERIFY_SERVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemservices.SC_HANDLE) uint32.
+// PRESUTIL_VERIFY_SERVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemservices.SC_HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRESUTIL_VERIFY_SERVICE uintptr
 
-// PRES_UTIL_VERIFY_SHUTDOWN_SAFE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *uint32) uint32.
+// PRES_UTIL_VERIFY_SHUTDOWN_SAFE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRES_UTIL_VERIFY_SHUTDOWN_SAFE uintptr
 
-// PSET_INTERNAL_STATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, CLUSTER_RESOURCE_APPLICATION_STATE, foundation.BOOL) uint32.
+// PSET_INTERNAL_STATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, CLUSTER_RESOURCE_APPLICATION_STATE, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSET_INTERNAL_STATE uintptr
 
-// PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *byte, uint32) uint32.
+// PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE uintptr
 
-// PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.BOOL, uint32, uint32) uint32.
+// PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, foundation.BOOL, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSET_RESOURCE_LOCKED_MODE_EX_ROUTINE uintptr
 
-// PSET_RESOURCE_LOCKED_MODE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.BOOL, uint32) uint32.
+// PSET_RESOURCE_LOCKED_MODE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, foundation.BOOL, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSET_RESOURCE_LOCKED_MODE_ROUTINE uintptr
 
-// PSET_RESOURCE_STATUS_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *RESOURCE_STATUS) uint32.
+// PSET_RESOURCE_STATUS_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *RESOURCE_STATUS) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSET_RESOURCE_STATUS_ROUTINE uintptr
 
-// PSET_RESOURCE_STATUS_ROUTINE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *RESOURCE_STATUS_EX) uint32.
+// PSET_RESOURCE_STATUS_ROUTINE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *RESOURCE_STATUS_EX) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSET_RESOURCE_STATUS_ROUTINE_EX uintptr
 
-// PSET_RESOURCE_WPR_POLICY_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32) uint32.
+// PSET_RESOURCE_WPR_POLICY_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSET_RESOURCE_WPR_POLICY_ROUTINE uintptr
 
-// PSIGNAL_FAILURE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, FAILURE_TYPE, uint32) uint32.
+// PSIGNAL_FAILURE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, FAILURE_TYPE, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSIGNAL_FAILURE_ROUTINE uintptr
 
-// PSTARTUP_EX_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, uint32, *CLRES_CALLBACK_FUNCTION_TABLE, **CLRES_FUNCTION_TABLE) uint32.
+// PSTARTUP_EX_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, uint32, *CLRES_CALLBACK_FUNCTION_TABLE, **CLRES_FUNCTION_TABLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSTARTUP_EX_ROUTINE uintptr
 
-// PSTARTUP_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, uint32, PSET_RESOURCE_STATUS_ROUTINE, PLOG_EVENT_ROUTINE, **CLRES_FUNCTION_TABLE) uint32.
+// PSTARTUP_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, uint32, PSET_RESOURCE_STATUS_ROUTINE, PLOG_EVENT_ROUTINE, **CLRES_FUNCTION_TABLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PSTARTUP_ROUTINE uintptr
 
-// PTERMINATE_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PTERMINATE_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PTERMINATE_ROUTINE uintptr
 
-// PWORKER_START_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CLUS_WORKER, unsafe.Pointer) uint32.
+// PWORKER_START_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CLUS_WORKER, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PWORKER_START_ROUTINE uintptr
 
-// SET_APP_INSTANCE_CSV_FLAGS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, uint32) uint32.
+// SET_APP_INSTANCE_CSV_FLAGS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type SET_APP_INSTANCE_CSV_FLAGS uintptr

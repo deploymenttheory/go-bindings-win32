@@ -4,66 +4,80 @@
 
 package gdi
 
-// CFP_ALLOCPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) unsafe.Pointer.
+// CFP_ALLOCPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type CFP_ALLOCPROC uintptr
 
-// CFP_FREEPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// CFP_FREEPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type CFP_FREEPROC uintptr
 
-// CFP_REALLOCPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr) unsafe.Pointer.
+// CFP_REALLOCPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type CFP_REALLOCPROC uintptr
 
-// DRAWSTATEPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HDC, foundation.LPARAM, foundation.WPARAM, int32, int32) foundation.BOOL.
+// DRAWSTATEPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HDC, foundation.LPARAM, foundation.WPARAM, int32, int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DRAWSTATEPROC uintptr
 
-// ENHMFENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HDC, *HANDLETABLE, *ENHMETARECORD, int32, foundation.LPARAM) int32.
+// ENHMFENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HDC, *HANDLETABLE, *ENHMETARECORD, int32, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type ENHMFENUMPROC uintptr
 
-// FONTENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LOGFONTA, *TEXTMETRICA, uint32, foundation.LPARAM) int32.
+// FONTENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LOGFONTA, *TEXTMETRICA, uint32, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type FONTENUMPROCA uintptr
 
-// FONTENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LOGFONTW, *TEXTMETRICW, uint32, foundation.LPARAM) int32.
+// FONTENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LOGFONTW, *TEXTMETRICW, uint32, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type FONTENUMPROCW uintptr
 
-// GOBJENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.LPARAM) int32.
+// GOBJENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type GOBJENUMPROC uintptr
 
-// GRAYSTRINGPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HDC, foundation.LPARAM, int32) foundation.BOOL.
+// GRAYSTRINGPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HDC, foundation.LPARAM, int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type GRAYSTRINGPROC uintptr
 
-// LINEDDAPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, int32, foundation.LPARAM).
+// LINEDDAPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, int32, foundation.LPARAM) uintptr.
 type LINEDDAPROC uintptr
 
-// LPFNDEVCAPS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, uint32, foundation.PSTR, *DEVMODEA) uint32.
+// LPFNDEVCAPS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, uint32, foundation.PSTR, *DEVMODEA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFNDEVCAPS uintptr
 
-// LPFNDEVMODE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.HMODULE, *DEVMODEA, foundation.PSTR, foundation.PSTR, *DEVMODEA, foundation.PSTR, uint32) uint32.
+// LPFNDEVMODE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.HMODULE, *DEVMODEA, foundation.PSTR, foundation.PSTR, *DEVMODEA, foundation.PSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFNDEVMODE uintptr
 
-// MFENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HDC, *HANDLETABLE, *METARECORD, int32, foundation.LPARAM) int32.
+// MFENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HDC, *HANDLETABLE, *METARECORD, int32, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type MFENUMPROC uintptr
 
-// MONITORENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HMONITOR, HDC, *foundation.RECT, foundation.LPARAM) foundation.BOOL.
+// MONITORENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HMONITOR, HDC, *foundation.RECT, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type MONITORENUMPROC uintptr
 
-// READEMBEDPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, uint32) uint32.
+// READEMBEDPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type READEMBEDPROC uintptr
 
-// WRITEEMBEDPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, uint32) uint32.
+// WRITEEMBEDPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type WRITEEMBEDPROC uintptr

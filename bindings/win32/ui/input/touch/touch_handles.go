@@ -4,12 +4,20 @@
 
 package touch
 
-// CloseHGESTUREINFO releases a HGESTUREINFO handle by calling CloseGestureInfoHandle.
+// CloseHGESTUREINFO releases a HGESTUREINFO handle by calling CloseGestureInfoHandle. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHGESTUREINFO(h HGESTUREINFO) error {
+	if h == ^HGESTUREINFO(0) || h == 0 {
+		return nil
+	}
 	return CloseGestureInfoHandle(HGESTUREINFO(h))
 }
 
-// CloseHTOUCHINPUT releases a HTOUCHINPUT handle by calling CloseTouchInputHandle.
+// CloseHTOUCHINPUT releases a HTOUCHINPUT handle by calling CloseTouchInputHandle. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHTOUCHINPUT(h HTOUCHINPUT) error {
+	if h == ^HTOUCHINPUT(0) || h == 0 {
+		return nil
+	}
 	return CloseTouchInputHandle(HTOUCHINPUT(h))
 }

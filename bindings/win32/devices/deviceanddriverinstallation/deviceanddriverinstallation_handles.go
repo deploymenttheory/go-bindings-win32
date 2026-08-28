@@ -4,7 +4,11 @@
 
 package deviceanddriverinstallation
 
-// CloseHDEVINFO releases a HDEVINFO handle by calling SetupDiDestroyDeviceInfoList.
+// CloseHDEVINFO releases a HDEVINFO handle by calling SetupDiDestroyDeviceInfoList. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDEVINFO(h HDEVINFO) error {
+	if h == ^HDEVINFO(0) || h == 0 {
+		return nil
+	}
 	return SetupDiDestroyDeviceInfoList(HDEVINFO(h))
 }

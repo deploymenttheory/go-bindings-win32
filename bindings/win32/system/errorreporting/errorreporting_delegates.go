@@ -4,26 +4,32 @@
 
 package errorreporting
 
-// PFN_WER_RUNTIME_EXCEPTION_DEBUGGER_LAUNCH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *WER_RUNTIME_EXCEPTION_INFORMATION, *foundation.BOOL, foundation.PWSTR, *uint32, *foundation.BOOL) foundation.HRESULT.
+// PFN_WER_RUNTIME_EXCEPTION_DEBUGGER_LAUNCH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *WER_RUNTIME_EXCEPTION_INFORMATION, *foundation.BOOL, foundation.PWSTR, *uint32, *foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_WER_RUNTIME_EXCEPTION_DEBUGGER_LAUNCH uintptr
 
-// PFN_WER_RUNTIME_EXCEPTION_EVENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *WER_RUNTIME_EXCEPTION_INFORMATION, *foundation.BOOL, foundation.PWSTR, *uint32, *uint32) foundation.HRESULT.
+// PFN_WER_RUNTIME_EXCEPTION_EVENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *WER_RUNTIME_EXCEPTION_INFORMATION, *foundation.BOOL, foundation.PWSTR, *uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_WER_RUNTIME_EXCEPTION_EVENT uintptr
 
-// PFN_WER_RUNTIME_EXCEPTION_EVENT_SIGNATURE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *WER_RUNTIME_EXCEPTION_INFORMATION, uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32) foundation.HRESULT.
+// PFN_WER_RUNTIME_EXCEPTION_EVENT_SIGNATURE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *WER_RUNTIME_EXCEPTION_INFORMATION, uint32, foundation.PWSTR, *uint32, foundation.PWSTR, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_WER_RUNTIME_EXCEPTION_EVENT_SIGNATURE uintptr
 
-// Pfn_ADDEREXCLUDEDAPPLICATIONA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) EFaultRepRetVal.
+// Pfn_ADDEREXCLUDEDAPPLICATIONA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// EFaultRepRetVal; NewCallback requires a uintptr-sized result).
 type Pfn_ADDEREXCLUDEDAPPLICATIONA uintptr
 
-// Pfn_ADDEREXCLUDEDAPPLICATIONW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) EFaultRepRetVal.
+// Pfn_ADDEREXCLUDEDAPPLICATIONW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// EFaultRepRetVal; NewCallback requires a uintptr-sized result).
 type Pfn_ADDEREXCLUDEDAPPLICATIONW uintptr
 
-// Pfn_REPORTFAULT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemdiagnosticsdebug.EXCEPTION_POINTERS, uint32) EFaultRepRetVal.
+// Pfn_REPORTFAULT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemdiagnosticsdebug.EXCEPTION_POINTERS, uint32) uintptr (the native return type is
+// EFaultRepRetVal; NewCallback requires a uintptr-sized result).
 type Pfn_REPORTFAULT uintptr

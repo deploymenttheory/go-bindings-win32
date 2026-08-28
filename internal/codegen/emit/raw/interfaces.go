@@ -39,6 +39,12 @@ func (g *Generator) buildInterfaceModels(meta *win32meta.NamespaceMeta, imports 
 	return models
 }
 
+// runtimeRootInterface is the metadata interface the hand-written runtime
+// already defines (bindings/runtime/win32/iunknown.go). It is emitted as a
+// type alias so the tree has exactly one IUnknown: every embedding root,
+// every [ComOutPtr] out-param and the runtime helpers name the same type.
+const runtimeRootInterface = "System.Com.IUnknown"
+
 func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName string, comInterface *win32meta.ComInterface, imports typemap.ImportSet) (view.InterfaceModel, bool) {
 	startSlot, ok := g.registry.VtableStartSlot(meta.Namespace, name)
 	if !ok {
@@ -66,6 +72,13 @@ func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName s
 				g.diag("interface %s: IID name %s already used", name, iidVar)
 			}
 		}
+	}
+
+	// The runtime owns the root: alias it, keep the IID, emit no methods.
+	if meta.Namespace+"."+name == runtimeRootInterface {
+		model.AliasOf = "win32.IUnknown"
+		imports["win32"] = g.mapper.RuntimeImportPath()
+		return model, true
 	}
 
 	// Base embedding promotes the base's methods; a severed or dangling base
@@ -99,6 +112,11 @@ func (g *Generator) buildInterface(meta *win32meta.NamespaceMeta, name, goName s
 		}
 		for methodNames[methodModel.GoName] {
 			methodModel.GoName += "_"
+			if methodModel.SpecDecl != "" {
+				// Keep the spec variable unique alongside the method name.
+				methodModel.SpecDecl = strings.Replace(methodModel.SpecDecl, " = &win32.Spec", "_ = &win32.Spec", 1)
+				methodModel.CallExpr = strings.Replace(methodModel.CallExpr, ", spec"+goName+"_"+strings.TrimSuffix(methodModel.GoName, "_")+",", ", spec"+goName+"_"+methodModel.GoName+",", 1)
+			}
 		}
 		methodNames[methodModel.GoName] = true
 		model.Methods = append(model.Methods, methodModel)
@@ -141,7 +159,8 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		paramNames[i] = avoidCollision(naming.ParamName(method.Params[i].Name), reserved)
 	}
 
-	var decls, preamble, argWords, returnValues, returnTypes []string
+	var decls, preamble, argWords, specArgs, returnValues, returnTypes []string
+	viaCall := false
 	for i := range method.Params {
 		param := &method.Params[i]
 		resolved := resolvedParams[i]
@@ -154,6 +173,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 				local := "_" + paramNames[i]
 				preamble = append(preamble, local+" := new("+element+")")
 				argWords = append(argWords, "uintptr(win32.OutParam(unsafe.Pointer("+local+")))")
+				specArgs = append(specArgs, specWord)
 				returnValues = append(returnValues, "*"+local)
 				returnTypes = append(returnTypes, element)
 				continue
@@ -162,6 +182,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		// A count/size parameter collapsed into a slice: derive from len().
 		if bufferIndex, ok := elidedCounts[i]; ok {
 			argWords = append(argWords, "uintptr(len("+paramNames[bufferIndex]+"))")
+			specArgs = append(specArgs, specWord)
 			continue
 		}
 		// An array or buffer pointer collapsed into a []T / []byte parameter.
@@ -172,19 +193,22 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 			preamble = append(preamble, "var "+local+" "+plan.rawPointerType)
 			preamble = append(preamble, "if len("+name+") > 0 { "+local+" = &"+name+"[0] }")
 			argWords = append(argWords, "uintptr(unsafe.Pointer("+local+"))")
+			specArgs = append(specArgs, specWord)
 			continue
 		}
-		decl, pre, word, _, ok := g.shapeParam(paramNames[i], param, resolved)
+		shaped, ok := g.shapeParam(paramNames[i], param, resolved)
 		if !ok {
 			g.diag("interface %s: method %s param %s not marshalable (%s), method skipped",
 				interfaceName, method.Name, param.Name, resolved.GoType)
 			return view.ComMethodModel{}, false
 		}
-		if decl != "" {
-			decls = append(decls, decl)
+		if shaped.decl != "" {
+			decls = append(decls, shaped.decl)
 		}
-		preamble = append(preamble, pre...)
-		argWords = append(argWords, word)
+		preamble = append(preamble, shaped.preamble...)
+		argWords = append(argWords, shaped.word)
+		specArgs = append(specArgs, shaped.spec)
+		viaCall = viaCall || shaped.call
 	}
 
 	model := view.ComMethodModel{
@@ -194,6 +218,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		Preamble: preamble,
 		ArgExprs: argWords,
 	}
+	retSpec := ""
 	switch {
 	case isHRESULT(returnResolved) && len(returnValues) > 0:
 		if informationalComMethods[meta.Namespace+"."+interfaceName+"."+method.Name] {
@@ -216,19 +241,50 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 	case returnResolved.Kind == typemap.KindVoid:
 		model.ReturnKind = view.RetVoid
 	case returnResolved.Kind == typemap.KindStruct, returnResolved.Kind == typemap.KindUnion,
-		returnResolved.Kind == typemap.KindArray, returnResolved.Kind == typemap.KindGUID:
+		returnResolved.Kind == typemap.KindGUID:
+		// A non-static member function returns an aggregate of any size
+		// through a hidden result pointer placed right after `this`, on x64
+		// and ARM64 alike (the C-style vtable declarations in d2d1.h spell
+		// it out; windows-rs emits the same shape). The buffer is a heap
+		// local — see runtime outparam.go for why never a stack address.
+		model.Preamble = append([]string{"_ret := new(" + returnResolved.GoType + ")"}, model.Preamble...)
+		model.ArgExprs = append([]string{"uintptr(win32.OutParam(unsafe.Pointer(_ret)))"}, model.ArgExprs...)
+		specArgs = append([]string{specWord}, specArgs...)
+		model.ReturnKind = view.RetStructOut
+		model.ReturnSig = returnResolved.GoType
+		model.RetExpr = "*_ret"
+		scratch["win32"] = g.mapper.RuntimeImportPath()
+	case returnResolved.Kind == typemap.KindArray:
 		g.diag("interface %s: method %s by-value %s return not marshalable, method skipped",
 			interfaceName, method.Name, returnResolved.GoType)
 		return view.ComMethodModel{}, false
-	default:
-		if returnResolved.GoType == "float32" || returnResolved.GoType == "float64" || returnResolved.GoType == "bool" {
-			g.diag("interface %s: method %s %s return not marshalable, method skipped",
-				interfaceName, method.Name, returnResolved.GoType)
-			return view.ComMethodModel{}, false
+	case returnResolved.Kind == typemap.KindScalar && (returnResolved.GoType == "float32" || returnResolved.GoType == "float64"):
+		// A float comes back in XMM0 / D0: win32.Call captures it.
+		model.ReturnKind = view.RetFloat
+		model.ReturnSig = returnResolved.GoType
+		if returnResolved.GoType == "float32" {
+			model.RetExpr = "math.Float32frombits(uint32(r.F0))"
+			retSpec = "win32.Float32"
+		} else {
+			model.RetExpr = "math.Float64frombits(r.F0)"
+			retSpec = "win32.Float64"
 		}
+		viaCall = true
+	default:
 		model.ReturnKind = view.RetVal
 		model.ReturnSig = returnResolved.GoType
 		model.RetExpr = returnConversion(returnResolved)
+	}
+
+	self := "uintptr(unsafe.Pointer(self))"
+	target := fmt.Sprintf("self.LpVtbl[%d]", slot)
+	if viaCall {
+		specVar := "spec" + naming.Export(interfaceName) + "_" + model.GoName
+		model.SpecDecl = specDecl(specVar, append([]string{specWord}, specArgs...), retSpec)
+		model.CallExpr = callExpr(target, specVar, "nil", append([]string{self}, model.ArgExprs...), model.ReturnKind)
+		scratch["win32"] = g.mapper.RuntimeImportPath()
+	} else {
+		model.CallExpr = "syscall.SyscallN(" + strings.Join(append([]string{target, self}, model.ArgExprs...), ", ") + ")"
 	}
 
 	for alias, path := range scratch {

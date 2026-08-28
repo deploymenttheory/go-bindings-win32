@@ -25,6 +25,28 @@ var (
 	procTimeSetEvent      = modWINMM.NewProc("timeSetEvent")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	TimeBeginPeriod   *win32.Proc
+	TimeEndPeriod     *win32.Proc
+	TimeGetDevCaps    *win32.Proc
+	TimeGetSystemTime *win32.Proc
+	TimeGetTime       *win32.Proc
+	TimeKillEvent     *win32.Proc
+	TimeSetEvent      *win32.Proc
+}{
+	TimeBeginPeriod:   procTimeBeginPeriod,
+	TimeEndPeriod:     procTimeEndPeriod,
+	TimeGetDevCaps:    procTimeGetDevCaps,
+	TimeGetSystemTime: procTimeGetSystemTime,
+	TimeGetTime:       procTimeGetTime,
+	TimeKillEvent:     procTimeKillEvent,
+	TimeSetEvent:      procTimeSetEvent,
+}
+
 // TimeBeginPeriod calls WINMM!timeBeginPeriod.
 // https://learn.microsoft.com/windows/win32/api/timeapi/nf-timeapi-timebeginperiod
 // Minimum OS: windows5.0.

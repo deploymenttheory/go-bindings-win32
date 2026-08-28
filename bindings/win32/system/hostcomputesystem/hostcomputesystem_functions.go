@@ -94,6 +94,160 @@ var (
 	procHcsSetupBaseOSVolume                       = modcomputestorage.NewProc("HcsSetupBaseOSVolume")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	HcsAddResourceToOperation                  *win32.Proc
+	HcsAttachLayerStorageFilter                *win32.Proc
+	HcsAttachOverlayFilter                     *win32.Proc
+	HcsCancelOperation                         *win32.Proc
+	HcsCloseComputeSystem                      *win32.Proc
+	HcsCloseOperation                          *win32.Proc
+	HcsCloseProcess                            *win32.Proc
+	HcsCrashComputeSystem                      *win32.Proc
+	HcsCreateComputeSystem                     *win32.Proc
+	HcsCreateComputeSystemInNamespace          *win32.Proc
+	HcsCreateEmptyGuestStateFile               *win32.Proc
+	HcsCreateEmptyRuntimeStateFile             *win32.Proc
+	HcsCreateOperation                         *win32.Proc
+	HcsCreateOperationWithNotifications        *win32.Proc
+	HcsCreateProcess                           *win32.Proc
+	HcsDestroyLayer                            *win32.Proc
+	HcsDetachLayerStorageFilter                *win32.Proc
+	HcsDetachOverlayFilter                     *win32.Proc
+	HcsEnumerateComputeSystems                 *win32.Proc
+	HcsEnumerateComputeSystemsInNamespace      *win32.Proc
+	HcsExportLayer                             *win32.Proc
+	HcsExportLegacyWritableLayer               *win32.Proc
+	HcsFinalizeLiveMigration                   *win32.Proc
+	HcsFormatWritableLayerVhd                  *win32.Proc
+	HcsGetComputeSystemFromOperation           *win32.Proc
+	HcsGetComputeSystemProperties              *win32.Proc
+	HcsGetLayerVhdMountPath                    *win32.Proc
+	HcsGetOperationContext                     *win32.Proc
+	HcsGetOperationId                          *win32.Proc
+	HcsGetOperationProperties                  *win32.Proc
+	HcsGetOperationResult                      *win32.Proc
+	HcsGetOperationResultAndProcessInfo        *win32.Proc
+	HcsGetOperationType                        *win32.Proc
+	HcsGetProcessFromOperation                 *win32.Proc
+	HcsGetProcessInfo                          *win32.Proc
+	HcsGetProcessProperties                    *win32.Proc
+	HcsGetProcessorCompatibilityFromSavedState *win32.Proc
+	HcsGetServiceProperties                    *win32.Proc
+	HcsGrantVmAccess                           *win32.Proc
+	HcsGrantVmGroupAccess                      *win32.Proc
+	HcsImportLayer                             *win32.Proc
+	HcsInitializeLegacyWritableLayer           *win32.Proc
+	HcsInitializeLiveMigrationOnSource         *win32.Proc
+	HcsInitializeWritableLayer                 *win32.Proc
+	HcsModifyComputeSystem                     *win32.Proc
+	HcsModifyProcess                           *win32.Proc
+	HcsModifyServiceSettings                   *win32.Proc
+	HcsOpenComputeSystem                       *win32.Proc
+	HcsOpenComputeSystemInNamespace            *win32.Proc
+	HcsOpenProcess                             *win32.Proc
+	HcsPauseComputeSystem                      *win32.Proc
+	HcsResumeComputeSystem                     *win32.Proc
+	HcsRevokeVmAccess                          *win32.Proc
+	HcsRevokeVmGroupAccess                     *win32.Proc
+	HcsSaveComputeSystem                       *win32.Proc
+	HcsSetComputeSystemCallback                *win32.Proc
+	HcsSetOperationCallback                    *win32.Proc
+	HcsSetOperationContext                     *win32.Proc
+	HcsSetProcessCallback                      *win32.Proc
+	HcsSetupBaseOSLayer                        *win32.Proc
+	HcsSetupBaseOSVolume                       *win32.Proc
+	HcsShutDownComputeSystem                   *win32.Proc
+	HcsSignalProcess                           *win32.Proc
+	HcsStartComputeSystem                      *win32.Proc
+	HcsStartLiveMigrationOnSource              *win32.Proc
+	HcsStartLiveMigrationTransfer              *win32.Proc
+	HcsSubmitWerReport                         *win32.Proc
+	HcsTerminateComputeSystem                  *win32.Proc
+	HcsTerminateProcess                        *win32.Proc
+	HcsWaitForComputeSystemExit                *win32.Proc
+	HcsWaitForOperationResult                  *win32.Proc
+	HcsWaitForOperationResultAndProcessInfo    *win32.Proc
+	HcsWaitForProcessExit                      *win32.Proc
+}{
+	HcsAddResourceToOperation:                  procHcsAddResourceToOperation,
+	HcsAttachLayerStorageFilter:                procHcsAttachLayerStorageFilter,
+	HcsAttachOverlayFilter:                     procHcsAttachOverlayFilter,
+	HcsCancelOperation:                         procHcsCancelOperation,
+	HcsCloseComputeSystem:                      procHcsCloseComputeSystem,
+	HcsCloseOperation:                          procHcsCloseOperation,
+	HcsCloseProcess:                            procHcsCloseProcess,
+	HcsCrashComputeSystem:                      procHcsCrashComputeSystem,
+	HcsCreateComputeSystem:                     procHcsCreateComputeSystem,
+	HcsCreateComputeSystemInNamespace:          procHcsCreateComputeSystemInNamespace,
+	HcsCreateEmptyGuestStateFile:               procHcsCreateEmptyGuestStateFile,
+	HcsCreateEmptyRuntimeStateFile:             procHcsCreateEmptyRuntimeStateFile,
+	HcsCreateOperation:                         procHcsCreateOperation,
+	HcsCreateOperationWithNotifications:        procHcsCreateOperationWithNotifications,
+	HcsCreateProcess:                           procHcsCreateProcess,
+	HcsDestroyLayer:                            procHcsDestroyLayer,
+	HcsDetachLayerStorageFilter:                procHcsDetachLayerStorageFilter,
+	HcsDetachOverlayFilter:                     procHcsDetachOverlayFilter,
+	HcsEnumerateComputeSystems:                 procHcsEnumerateComputeSystems,
+	HcsEnumerateComputeSystemsInNamespace:      procHcsEnumerateComputeSystemsInNamespace,
+	HcsExportLayer:                             procHcsExportLayer,
+	HcsExportLegacyWritableLayer:               procHcsExportLegacyWritableLayer,
+	HcsFinalizeLiveMigration:                   procHcsFinalizeLiveMigration,
+	HcsFormatWritableLayerVhd:                  procHcsFormatWritableLayerVhd,
+	HcsGetComputeSystemFromOperation:           procHcsGetComputeSystemFromOperation,
+	HcsGetComputeSystemProperties:              procHcsGetComputeSystemProperties,
+	HcsGetLayerVhdMountPath:                    procHcsGetLayerVhdMountPath,
+	HcsGetOperationContext:                     procHcsGetOperationContext,
+	HcsGetOperationId:                          procHcsGetOperationId,
+	HcsGetOperationProperties:                  procHcsGetOperationProperties,
+	HcsGetOperationResult:                      procHcsGetOperationResult,
+	HcsGetOperationResultAndProcessInfo:        procHcsGetOperationResultAndProcessInfo,
+	HcsGetOperationType:                        procHcsGetOperationType,
+	HcsGetProcessFromOperation:                 procHcsGetProcessFromOperation,
+	HcsGetProcessInfo:                          procHcsGetProcessInfo,
+	HcsGetProcessProperties:                    procHcsGetProcessProperties,
+	HcsGetProcessorCompatibilityFromSavedState: procHcsGetProcessorCompatibilityFromSavedState,
+	HcsGetServiceProperties:                    procHcsGetServiceProperties,
+	HcsGrantVmAccess:                           procHcsGrantVmAccess,
+	HcsGrantVmGroupAccess:                      procHcsGrantVmGroupAccess,
+	HcsImportLayer:                             procHcsImportLayer,
+	HcsInitializeLegacyWritableLayer:           procHcsInitializeLegacyWritableLayer,
+	HcsInitializeLiveMigrationOnSource:         procHcsInitializeLiveMigrationOnSource,
+	HcsInitializeWritableLayer:                 procHcsInitializeWritableLayer,
+	HcsModifyComputeSystem:                     procHcsModifyComputeSystem,
+	HcsModifyProcess:                           procHcsModifyProcess,
+	HcsModifyServiceSettings:                   procHcsModifyServiceSettings,
+	HcsOpenComputeSystem:                       procHcsOpenComputeSystem,
+	HcsOpenComputeSystemInNamespace:            procHcsOpenComputeSystemInNamespace,
+	HcsOpenProcess:                             procHcsOpenProcess,
+	HcsPauseComputeSystem:                      procHcsPauseComputeSystem,
+	HcsResumeComputeSystem:                     procHcsResumeComputeSystem,
+	HcsRevokeVmAccess:                          procHcsRevokeVmAccess,
+	HcsRevokeVmGroupAccess:                     procHcsRevokeVmGroupAccess,
+	HcsSaveComputeSystem:                       procHcsSaveComputeSystem,
+	HcsSetComputeSystemCallback:                procHcsSetComputeSystemCallback,
+	HcsSetOperationCallback:                    procHcsSetOperationCallback,
+	HcsSetOperationContext:                     procHcsSetOperationContext,
+	HcsSetProcessCallback:                      procHcsSetProcessCallback,
+	HcsSetupBaseOSLayer:                        procHcsSetupBaseOSLayer,
+	HcsSetupBaseOSVolume:                       procHcsSetupBaseOSVolume,
+	HcsShutDownComputeSystem:                   procHcsShutDownComputeSystem,
+	HcsSignalProcess:                           procHcsSignalProcess,
+	HcsStartComputeSystem:                      procHcsStartComputeSystem,
+	HcsStartLiveMigrationOnSource:              procHcsStartLiveMigrationOnSource,
+	HcsStartLiveMigrationTransfer:              procHcsStartLiveMigrationTransfer,
+	HcsSubmitWerReport:                         procHcsSubmitWerReport,
+	HcsTerminateComputeSystem:                  procHcsTerminateComputeSystem,
+	HcsTerminateProcess:                        procHcsTerminateProcess,
+	HcsWaitForComputeSystemExit:                procHcsWaitForComputeSystemExit,
+	HcsWaitForOperationResult:                  procHcsWaitForOperationResult,
+	HcsWaitForOperationResultAndProcessInfo:    procHcsWaitForOperationResultAndProcessInfo,
+	HcsWaitForProcessExit:                      procHcsWaitForProcessExit,
+}
+
 // HcsAddResourceToOperation calls computecore!HcsAddResourceToOperation.
 func HcsAddResourceToOperation(operation HCS_OPERATION, type_ HCS_RESOURCE_TYPE, uri string, handle foundation.HANDLE) error {
 	_uri := win32.UTF16Ptr(uri)
@@ -145,8 +299,8 @@ func HcsCloseProcess(process HCS_PROCESS) {
 
 // HcsCrashComputeSystem calls computecore!HcsCrashComputeSystem.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsCrashComputeSystem
-func HcsCrashComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsCrashComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsCrashComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -231,16 +385,16 @@ func HcsDetachOverlayFilter(VolumeMountPoint string, LayerData string) error {
 
 // HcsEnumerateComputeSystems calls computecore!HcsEnumerateComputeSystems.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsEnumerateComputeSystems
-func HcsEnumerateComputeSystems(query string, operation HCS_OPERATION) error {
-	_query := win32.UTF16Ptr(query)
+func HcsEnumerateComputeSystems(query *string, operation HCS_OPERATION) error {
+	_query := win32.UTF16PtrOrNil(query)
 	r1, _, _ := syscall.SyscallN(procHcsEnumerateComputeSystems.Addr(), uintptr(unsafe.Pointer(_query)), uintptr(operation))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsEnumerateComputeSystemsInNamespace calls computecore!HcsEnumerateComputeSystemsInNamespace.
-func HcsEnumerateComputeSystemsInNamespace(idNamespace string, query string, operation HCS_OPERATION) error {
+func HcsEnumerateComputeSystemsInNamespace(idNamespace string, query *string, operation HCS_OPERATION) error {
 	_idNamespace := win32.UTF16Ptr(idNamespace)
-	_query := win32.UTF16Ptr(query)
+	_query := win32.UTF16PtrOrNil(query)
 	r1, _, _ := syscall.SyscallN(procHcsEnumerateComputeSystemsInNamespace.Addr(), uintptr(unsafe.Pointer(_idNamespace)), uintptr(unsafe.Pointer(_query)), uintptr(operation))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -268,8 +422,8 @@ func HcsExportLegacyWritableLayer(writableLayerMountPath string, writableLayerFo
 }
 
 // HcsFinalizeLiveMigration calls computecore!HcsFinalizeLiveMigration.
-func HcsFinalizeLiveMigration(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsFinalizeLiveMigration(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsFinalizeLiveMigration.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -290,8 +444,8 @@ func HcsGetComputeSystemFromOperation(operation HCS_OPERATION) HCS_SYSTEM {
 
 // HcsGetComputeSystemProperties calls computecore!HcsGetComputeSystemProperties.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsGetComputeSystemProperties
-func HcsGetComputeSystemProperties(computeSystem HCS_SYSTEM, operation HCS_OPERATION, propertyQuery string) error {
-	_propertyQuery := win32.UTF16Ptr(propertyQuery)
+func HcsGetComputeSystemProperties(computeSystem HCS_SYSTEM, operation HCS_OPERATION, propertyQuery *string) error {
+	_propertyQuery := win32.UTF16PtrOrNil(propertyQuery)
 	r1, _, _ := syscall.SyscallN(procHcsGetComputeSystemProperties.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_propertyQuery)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -361,8 +515,8 @@ func HcsGetProcessInfo(process HCS_PROCESS, operation HCS_OPERATION) error {
 
 // HcsGetProcessProperties calls computecore!HcsGetProcessProperties.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsGetProcessProperties
-func HcsGetProcessProperties(process HCS_PROCESS, operation HCS_OPERATION, propertyQuery string) error {
-	_propertyQuery := win32.UTF16Ptr(propertyQuery)
+func HcsGetProcessProperties(process HCS_PROCESS, operation HCS_OPERATION, propertyQuery *string) error {
+	_propertyQuery := win32.UTF16PtrOrNil(propertyQuery)
 	r1, _, _ := syscall.SyscallN(procHcsGetProcessProperties.Addr(), uintptr(process), uintptr(operation), uintptr(unsafe.Pointer(_propertyQuery)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -377,8 +531,8 @@ func HcsGetProcessorCompatibilityFromSavedState(RuntimeFileName string, Processo
 
 // HcsGetServiceProperties calls computecore!HcsGetServiceProperties.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsGetServiceProperties
-func HcsGetServiceProperties(propertyQuery string, result *foundation.PWSTR) error {
-	_propertyQuery := win32.UTF16Ptr(propertyQuery)
+func HcsGetServiceProperties(propertyQuery *string, result *foundation.PWSTR) error {
+	_propertyQuery := win32.UTF16PtrOrNil(propertyQuery)
 	r1, _, _ := syscall.SyscallN(procHcsGetServiceProperties.Addr(), uintptr(unsafe.Pointer(_propertyQuery)), uintptr(unsafe.Pointer(result)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -412,28 +566,28 @@ func HcsImportLayer(layerPath string, sourceFolderPath string, layerData string)
 
 // HcsInitializeLegacyWritableLayer calls computestorage!HcsInitializeLegacyWritableLayer.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsInitializeLegacyWritableLayer
-func HcsInitializeLegacyWritableLayer(writableLayerMountPath string, writableLayerFolderPath string, layerData string, options string) error {
+func HcsInitializeLegacyWritableLayer(writableLayerMountPath string, writableLayerFolderPath string, layerData string, options *string) error {
 	_writableLayerMountPath := win32.UTF16Ptr(writableLayerMountPath)
 	_writableLayerFolderPath := win32.UTF16Ptr(writableLayerFolderPath)
 	_layerData := win32.UTF16Ptr(layerData)
-	_options := win32.UTF16Ptr(options)
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsInitializeLegacyWritableLayer.Addr(), uintptr(unsafe.Pointer(_writableLayerMountPath)), uintptr(unsafe.Pointer(_writableLayerFolderPath)), uintptr(unsafe.Pointer(_layerData)), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsInitializeLiveMigrationOnSource calls computecore!HcsInitializeLiveMigrationOnSource.
-func HcsInitializeLiveMigrationOnSource(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsInitializeLiveMigrationOnSource(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsInitializeLiveMigrationOnSource.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsInitializeWritableLayer calls computestorage!HcsInitializeWritableLayer.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsInitializeWritableLayer
-func HcsInitializeWritableLayer(writableLayerPath string, layerData string, options string) error {
+func HcsInitializeWritableLayer(writableLayerPath string, layerData string, options *string) error {
 	_writableLayerPath := win32.UTF16Ptr(writableLayerPath)
 	_layerData := win32.UTF16Ptr(layerData)
-	_options := win32.UTF16Ptr(options)
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsInitializeWritableLayer.Addr(), uintptr(unsafe.Pointer(_writableLayerPath)), uintptr(unsafe.Pointer(_layerData)), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -487,16 +641,16 @@ func HcsOpenProcess(computeSystem HCS_SYSTEM, processId uint32, requestedAccess 
 
 // HcsPauseComputeSystem calls computecore!HcsPauseComputeSystem.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsPauseComputeSystem
-func HcsPauseComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsPauseComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsPauseComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsResumeComputeSystem calls computecore!HcsResumeComputeSystem.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsResumeComputeSystem
-func HcsResumeComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsResumeComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsResumeComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -520,8 +674,8 @@ func HcsRevokeVmGroupAccess(filePath string) error {
 
 // HcsSaveComputeSystem calls computecore!HcsSaveComputeSystem.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsSaveComputeSystem
-func HcsSaveComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsSaveComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsSaveComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -575,38 +729,38 @@ func HcsSetupBaseOSVolume(layerPath string, volumePath string, options string) e
 
 // HcsShutDownComputeSystem calls computecore!HcsShutDownComputeSystem.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsShutDownComputeSystem
-func HcsShutDownComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsShutDownComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsShutDownComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsSignalProcess calls computecore!HcsSignalProcess.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsSignalProcess
-func HcsSignalProcess(process HCS_PROCESS, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsSignalProcess(process HCS_PROCESS, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsSignalProcess.Addr(), uintptr(process), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsStartComputeSystem calls computecore!HcsStartComputeSystem.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsStartComputeSystem
-func HcsStartComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsStartComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsStartComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsStartLiveMigrationOnSource calls computecore!HcsStartLiveMigrationOnSource.
-func HcsStartLiveMigrationOnSource(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsStartLiveMigrationOnSource(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsStartLiveMigrationOnSource.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsStartLiveMigrationTransfer calls computecore!HcsStartLiveMigrationTransfer.
-func HcsStartLiveMigrationTransfer(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsStartLiveMigrationTransfer(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsStartLiveMigrationTransfer.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -621,16 +775,16 @@ func HcsSubmitWerReport(settings string) error {
 
 // HcsTerminateComputeSystem calls computecore!HcsTerminateComputeSystem.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsTerminateComputeSystem
-func HcsTerminateComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsTerminateComputeSystem(computeSystem HCS_SYSTEM, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsTerminateComputeSystem.Addr(), uintptr(computeSystem), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HcsTerminateProcess calls computecore!HcsTerminateProcess.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/HcsTerminateProcess
-func HcsTerminateProcess(process HCS_PROCESS, operation HCS_OPERATION, options string) error {
-	_options := win32.UTF16Ptr(options)
+func HcsTerminateProcess(process HCS_PROCESS, operation HCS_OPERATION, options *string) error {
+	_options := win32.UTF16PtrOrNil(options)
 	r1, _, _ := syscall.SyscallN(procHcsTerminateProcess.Addr(), uintptr(process), uintptr(operation), uintptr(unsafe.Pointer(_options)))
 	return win32.ErrIfFailed(int32(r1))
 }

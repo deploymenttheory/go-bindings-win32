@@ -4,62 +4,77 @@
 
 package directshow
 
-// AMGETERRORTEXTPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HRESULT, foundation.PSTR, uint32) foundation.BOOL.
+// AMGETERRORTEXTPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HRESULT, foundation.PSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type AMGETERRORTEXTPROCA uintptr
 
-// AMGETERRORTEXTPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HRESULT, foundation.PWSTR, uint32) foundation.BOOL.
+// AMGETERRORTEXTPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HRESULT, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type AMGETERRORTEXTPROCW uintptr
 
-// PDXVA2SW_CREATEVIDEOPROCESSDEVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsdirect3d9.IDirect3DDevice9, *mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *foundation.HANDLE) foundation.HRESULT.
+// PDXVA2SW_CREATEVIDEOPROCESSDEVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsdirect3d9.IDirect3DDevice9, *mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *foundation.HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_CREATEVIDEOPROCESSDEVICE uintptr
 
-// PDXVA2SW_DESTROYVIDEOPROCESSDEVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.HRESULT.
+// PDXVA2SW_DESTROYVIDEOPROCESSDEVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_DESTROYVIDEOPROCESSDEVICE uintptr
 
-// PDXVA2SW_GETFILTERPROPERTYRANGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *mediamediafoundation.DXVA2_ValueRange) foundation.HRESULT.
+// PDXVA2SW_GETFILTERPROPERTYRANGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *mediamediafoundation.DXVA2_ValueRange) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_GETFILTERPROPERTYRANGE uintptr
 
-// PDXVA2SW_GETPROCAMPRANGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *mediamediafoundation.DXVA2_ValueRange) foundation.HRESULT.
+// PDXVA2SW_GETPROCAMPRANGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *mediamediafoundation.DXVA2_ValueRange) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_GETPROCAMPRANGE uintptr
 
-// PDXVA2SW_GETVIDEOPROCESSORCAPS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, *mediamediafoundation.DXVA2_VideoProcessorCaps) foundation.HRESULT.
+// PDXVA2SW_GETVIDEOPROCESSORCAPS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, *mediamediafoundation.DXVA2_VideoProcessorCaps) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_GETVIDEOPROCESSORCAPS uintptr
 
-// PDXVA2SW_GETVIDEOPROCESSORRENDERTARGETCOUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*mediamediafoundation.DXVA2_VideoDesc, *uint32) foundation.HRESULT.
+// PDXVA2SW_GETVIDEOPROCESSORRENDERTARGETCOUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*mediamediafoundation.DXVA2_VideoDesc, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_GETVIDEOPROCESSORRENDERTARGETCOUNT uintptr
 
-// PDXVA2SW_GETVIDEOPROCESSORRENDERTARGETS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*mediamediafoundation.DXVA2_VideoDesc, uint32, *graphicsdirect3d9.D3DFORMAT) foundation.HRESULT.
+// PDXVA2SW_GETVIDEOPROCESSORRENDERTARGETS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*mediamediafoundation.DXVA2_VideoDesc, uint32, *graphicsdirect3d9.D3DFORMAT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_GETVIDEOPROCESSORRENDERTARGETS uintptr
 
-// PDXVA2SW_GETVIDEOPROCESSORSUBSTREAMFORMATCOUNT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, *uint32) foundation.HRESULT.
+// PDXVA2SW_GETVIDEOPROCESSORSUBSTREAMFORMATCOUNT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_GETVIDEOPROCESSORSUBSTREAMFORMATCOUNT uintptr
 
-// PDXVA2SW_GETVIDEOPROCESSORSUBSTREAMFORMATS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *graphicsdirect3d9.D3DFORMAT) foundation.HRESULT.
+// PDXVA2SW_GETVIDEOPROCESSORSUBSTREAMFORMATS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*mediamediafoundation.DXVA2_VideoDesc, graphicsdirect3d9.D3DFORMAT, uint32, *graphicsdirect3d9.D3DFORMAT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_GETVIDEOPROCESSORSUBSTREAMFORMATS uintptr
 
-// PDXVA2SW_VIDEOPROCESSBEGINFRAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.HRESULT.
+// PDXVA2SW_VIDEOPROCESSBEGINFRAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_VIDEOPROCESSBEGINFRAME uintptr
 
-// PDXVA2SW_VIDEOPROCESSBLT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *DXVA2_VIDEOPROCESSBLT) foundation.HRESULT.
+// PDXVA2SW_VIDEOPROCESSBLT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *DXVA2_VIDEOPROCESSBLT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_VIDEOPROCESSBLT uintptr
 
-// PDXVA2SW_VIDEOPROCESSENDFRAME is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *foundation.HANDLE) foundation.HRESULT.
+// PDXVA2SW_VIDEOPROCESSENDFRAME is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *foundation.HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_VIDEOPROCESSENDFRAME uintptr
 
-// PDXVA2SW_VIDEOPROCESSSETRENDERTARGET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *graphicsdirect3d9.IDirect3DSurface9) foundation.HRESULT.
+// PDXVA2SW_VIDEOPROCESSSETRENDERTARGET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *graphicsdirect3d9.IDirect3DSurface9) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVA2SW_VIDEOPROCESSSETRENDERTARGET uintptr

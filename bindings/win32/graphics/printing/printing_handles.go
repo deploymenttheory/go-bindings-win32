@@ -8,12 +8,20 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseFINDPRINTERCHANGENOTIFICATION_HANDLE releases a FINDPRINTERCHANGENOTIFICATION_HANDLE handle by calling FindClosePrinterChangeNotification.
+// CloseFINDPRINTERCHANGENOTIFICATION_HANDLE releases a FINDPRINTERCHANGENOTIFICATION_HANDLE handle by calling FindClosePrinterChangeNotification. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseFINDPRINTERCHANGENOTIFICATION_HANDLE(h FINDPRINTERCHANGENOTIFICATION_HANDLE) error {
+	if h == ^FINDPRINTERCHANGENOTIFICATION_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(FindClosePrinterChangeNotification(FINDPRINTERCHANGENOTIFICATION_HANDLE(h))))
 }
 
-// ClosePRINTER_HANDLE releases a PRINTER_HANDLE handle by calling ClosePrinter.
+// ClosePRINTER_HANDLE releases a PRINTER_HANDLE handle by calling ClosePrinter. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func ClosePRINTER_HANDLE(h PRINTER_HANDLE) error {
+	if h == ^PRINTER_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return ClosePrinter(PRINTER_HANDLE(h))
 }

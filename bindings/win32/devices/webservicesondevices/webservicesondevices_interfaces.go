@@ -178,9 +178,9 @@ func (self *IWSDDeviceHost) RetireService(pszServiceId string) error {
 }
 
 // AddDynamicService dispatches through IWSDDeviceHost's vtable slot 11.
-func (self *IWSDDeviceHost) AddDynamicService(pszServiceId string, pszEndpointAddress string, pPortType *WSD_PORT_TYPE, pPortName *WSDXML_NAME, pAny *WSDXML_ELEMENT, pService *systemcom.IUnknown) error {
+func (self *IWSDDeviceHost) AddDynamicService(pszServiceId string, pszEndpointAddress *string, pPortType *WSD_PORT_TYPE, pPortName *WSDXML_NAME, pAny *WSDXML_ELEMENT, pService *systemcom.IUnknown) error {
 	_pszServiceId := win32.UTF16Ptr(pszServiceId)
-	_pszEndpointAddress := win32.UTF16Ptr(pszEndpointAddress)
+	_pszEndpointAddress := win32.UTF16PtrOrNil(pszEndpointAddress)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszServiceId)), uintptr(unsafe.Pointer(_pszEndpointAddress)), uintptr(unsafe.Pointer(pPortType)), uintptr(unsafe.Pointer(pPortName)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pService)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -439,8 +439,8 @@ type IWSDHttpMessageParameters struct {
 var IID_IWSDHttpMessageParameters = win32.GUID{Data1: 0x540bd122, Data2: 0x5c83, Data3: 0x4dec, Data4: [8]byte{0xb3, 0x96, 0xea, 0x62, 0xa2, 0x69, 0x7f, 0xdf}}
 
 // SetInboundHttpHeaders dispatches through IWSDHttpMessageParameters's vtable slot 8.
-func (self *IWSDHttpMessageParameters) SetInboundHttpHeaders(pszHeaders string) error {
-	_pszHeaders := win32.UTF16Ptr(pszHeaders)
+func (self *IWSDHttpMessageParameters) SetInboundHttpHeaders(pszHeaders *string) error {
+	_pszHeaders := win32.UTF16PtrOrNil(pszHeaders)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszHeaders)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -452,8 +452,8 @@ func (self *IWSDHttpMessageParameters) GetInboundHttpHeaders(ppszHeaders *founda
 }
 
 // SetOutboundHttpHeaders dispatches through IWSDHttpMessageParameters's vtable slot 10.
-func (self *IWSDHttpMessageParameters) SetOutboundHttpHeaders(pszHeaders string) error {
-	_pszHeaders := win32.UTF16Ptr(pszHeaders)
+func (self *IWSDHttpMessageParameters) SetOutboundHttpHeaders(pszHeaders *string) error {
+	_pszHeaders := win32.UTF16PtrOrNil(pszHeaders)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszHeaders)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -465,8 +465,8 @@ func (self *IWSDHttpMessageParameters) GetOutboundHttpHeaders(ppszHeaders *found
 }
 
 // SetID dispatches through IWSDHttpMessageParameters's vtable slot 12.
-func (self *IWSDHttpMessageParameters) SetID(pszId string) error {
-	_pszId := win32.UTF16Ptr(pszId)
+func (self *IWSDHttpMessageParameters) SetID(pszId *string) error {
+	_pszId := win32.UTF16PtrOrNil(pszId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -924,8 +924,8 @@ func (self *IWSDTransportAddress) GetTransportAddressEx(fSafe bool, ppszAddress 
 }
 
 // SetTransportAddress dispatches through IWSDTransportAddress's vtable slot 9.
-func (self *IWSDTransportAddress) SetTransportAddress(pszAddress string) error {
-	_pszAddress := win32.UTF16Ptr(pszAddress)
+func (self *IWSDTransportAddress) SetTransportAddress(pszAddress *string) error {
+	_pszAddress := win32.UTF16PtrOrNil(pszAddress)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAddress)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1169,25 +1169,25 @@ func (self *IWSDiscoveryProvider) Detach() error {
 }
 
 // SearchById dispatches through IWSDiscoveryProvider's vtable slot 6.
-func (self *IWSDiscoveryProvider) SearchById(pszId string, pszTag string) error {
+func (self *IWSDiscoveryProvider) SearchById(pszId string, pszTag *string) error {
 	_pszId := win32.UTF16Ptr(pszId)
-	_pszTag := win32.UTF16Ptr(pszTag)
+	_pszTag := win32.UTF16PtrOrNil(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(unsafe.Pointer(_pszTag)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SearchByAddress dispatches through IWSDiscoveryProvider's vtable slot 7.
-func (self *IWSDiscoveryProvider) SearchByAddress(pszAddress string, pszTag string) error {
+func (self *IWSDiscoveryProvider) SearchByAddress(pszAddress string, pszTag *string) error {
 	_pszAddress := win32.UTF16Ptr(pszAddress)
-	_pszTag := win32.UTF16Ptr(pszTag)
+	_pszTag := win32.UTF16PtrOrNil(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAddress)), uintptr(unsafe.Pointer(_pszTag)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SearchByType dispatches through IWSDiscoveryProvider's vtable slot 8.
-func (self *IWSDiscoveryProvider) SearchByType(pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pszMatchBy string, pszTag string) error {
-	_pszMatchBy := win32.UTF16Ptr(pszMatchBy)
-	_pszTag := win32.UTF16Ptr(pszTag)
+func (self *IWSDiscoveryProvider) SearchByType(pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pszMatchBy *string, pszTag *string) error {
+	_pszMatchBy := win32.UTF16PtrOrNil(pszMatchBy)
+	_pszTag := win32.UTF16PtrOrNil(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(_pszMatchBy)), uintptr(unsafe.Pointer(_pszTag)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1220,15 +1220,15 @@ func (self *IWSDiscoveryProviderNotify) Remove(pService *IWSDiscoveredService) e
 }
 
 // SearchFailed dispatches through IWSDiscoveryProviderNotify's vtable slot 5.
-func (self *IWSDiscoveryProviderNotify) SearchFailed(hr foundation.HRESULT, pszTag string) error {
-	_pszTag := win32.UTF16Ptr(pszTag)
+func (self *IWSDiscoveryProviderNotify) SearchFailed(hr foundation.HRESULT, pszTag *string) error {
+	_pszTag := win32.UTF16PtrOrNil(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(unsafe.Pointer(_pszTag)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SearchComplete dispatches through IWSDiscoveryProviderNotify's vtable slot 6.
-func (self *IWSDiscoveryProviderNotify) SearchComplete(pszTag string) error {
-	_pszTag := win32.UTF16Ptr(pszTag)
+func (self *IWSDiscoveryProviderNotify) SearchComplete(pszTag *string) error {
+	_pszTag := win32.UTF16PtrOrNil(pszTag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTag)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1261,57 +1261,57 @@ func (self *IWSDiscoveryPublisher) UnRegisterNotificationSink(pSink *IWSDiscover
 }
 
 // Publish dispatches through IWSDiscoveryPublisher's vtable slot 6.
-func (self *IWSDiscoveryPublisher) Publish(pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) error {
+func (self *IWSDiscoveryPublisher) Publish(pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId *string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) error {
 	_pszId := win32.UTF16Ptr(pszId)
-	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSessionId := win32.UTF16PtrOrNil(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // UnPublish dispatches through IWSDiscoveryPublisher's vtable slot 7.
-func (self *IWSDiscoveryPublisher) UnPublish(pszId string, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pAny *WSDXML_ELEMENT) error {
+func (self *IWSDiscoveryPublisher) UnPublish(pszId string, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId *string, pAny *WSDXML_ELEMENT) error {
 	_pszId := win32.UTF16Ptr(pszId)
-	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSessionId := win32.UTF16PtrOrNil(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pAny)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchProbe dispatches through IWSDiscoveryPublisher's vtable slot 8.
-func (self *IWSDiscoveryPublisher) MatchProbe(pProbeMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) error {
+func (self *IWSDiscoveryPublisher) MatchProbe(pProbeMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId *string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) error {
 	_pszId := win32.UTF16Ptr(pszId)
-	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSessionId := win32.UTF16PtrOrNil(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProbeMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchResolve dispatches through IWSDiscoveryPublisher's vtable slot 9.
-func (self *IWSDiscoveryPublisher) MatchResolve(pResolveMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) error {
+func (self *IWSDiscoveryPublisher) MatchResolve(pResolveMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId *string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST) error {
 	_pszId := win32.UTF16Ptr(pszId)
-	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSessionId := win32.UTF16PtrOrNil(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolveMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // PublishEx dispatches through IWSDiscoveryPublisher's vtable slot 10.
-func (self *IWSDiscoveryPublisher) PublishEx(pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) error {
+func (self *IWSDiscoveryPublisher) PublishEx(pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId *string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) error {
 	_pszId := win32.UTF16Ptr(pszId)
-	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSessionId := win32.UTF16PtrOrNil(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchProbeEx dispatches through IWSDiscoveryPublisher's vtable slot 11.
-func (self *IWSDiscoveryPublisher) MatchProbeEx(pProbeMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) error {
+func (self *IWSDiscoveryPublisher) MatchProbeEx(pProbeMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId *string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) error {
 	_pszId := win32.UTF16Ptr(pszId)
-	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSessionId := win32.UTF16PtrOrNil(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProbeMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchResolveEx dispatches through IWSDiscoveryPublisher's vtable slot 12.
-func (self *IWSDiscoveryPublisher) MatchResolveEx(pResolveMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) error {
+func (self *IWSDiscoveryPublisher) MatchResolveEx(pResolveMessage *WSD_SOAP_MESSAGE, pMessageParameters *IWSDMessageParameters, pszId string, ullMetadataVersion uint64, ullInstanceId uint64, ullMessageNumber uint64, pszSessionId *string, pTypesList *WSD_NAME_LIST, pScopesList *WSD_URI_LIST, pXAddrsList *WSD_URI_LIST, pHeaderAny *WSDXML_ELEMENT, pReferenceParameterAny *WSDXML_ELEMENT, pPolicyAny *WSDXML_ELEMENT, pEndpointReferenceAny *WSDXML_ELEMENT, pAny *WSDXML_ELEMENT) error {
 	_pszId := win32.UTF16Ptr(pszId)
-	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSessionId := win32.UTF16PtrOrNil(pszSessionId)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolveMessage)), uintptr(unsafe.Pointer(pMessageParameters)), uintptr(unsafe.Pointer(_pszId)), uintptr(ullMetadataVersion), uintptr(ullInstanceId), uintptr(ullMessageNumber), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(pTypesList)), uintptr(unsafe.Pointer(pScopesList)), uintptr(unsafe.Pointer(pXAddrsList)), uintptr(unsafe.Pointer(pHeaderAny)), uintptr(unsafe.Pointer(pReferenceParameterAny)), uintptr(unsafe.Pointer(pPolicyAny)), uintptr(unsafe.Pointer(pEndpointReferenceAny)), uintptr(unsafe.Pointer(pAny)))
 	return win32.ErrIfFailed(int32(r1))
 }

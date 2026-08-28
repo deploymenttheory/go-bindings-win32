@@ -49,23 +49,87 @@ var (
 	procFilterVolumeInstanceFindNext   = modFLTLIB.NewProc("FilterVolumeInstanceFindNext")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	FilterAttach                   *win32.Proc
+	FilterAttachAtAltitude         *win32.Proc
+	FilterClose                    *win32.Proc
+	FilterConnectCommunicationPort *win32.Proc
+	FilterCreate                   *win32.Proc
+	FilterDetach                   *win32.Proc
+	FilterFindClose                *win32.Proc
+	FilterFindFirst                *win32.Proc
+	FilterFindNext                 *win32.Proc
+	FilterGetDosName               *win32.Proc
+	FilterGetInformation           *win32.Proc
+	FilterGetMessage               *win32.Proc
+	FilterInstanceClose            *win32.Proc
+	FilterInstanceCreate           *win32.Proc
+	FilterInstanceFindClose        *win32.Proc
+	FilterInstanceFindFirst        *win32.Proc
+	FilterInstanceFindNext         *win32.Proc
+	FilterInstanceGetInformation   *win32.Proc
+	FilterLoad                     *win32.Proc
+	FilterReplyMessage             *win32.Proc
+	FilterSendMessage              *win32.Proc
+	FilterUnload                   *win32.Proc
+	FilterVolumeFindClose          *win32.Proc
+	FilterVolumeFindFirst          *win32.Proc
+	FilterVolumeFindNext           *win32.Proc
+	FilterVolumeInstanceFindClose  *win32.Proc
+	FilterVolumeInstanceFindFirst  *win32.Proc
+	FilterVolumeInstanceFindNext   *win32.Proc
+}{
+	FilterAttach:                   procFilterAttach,
+	FilterAttachAtAltitude:         procFilterAttachAtAltitude,
+	FilterClose:                    procFilterClose,
+	FilterConnectCommunicationPort: procFilterConnectCommunicationPort,
+	FilterCreate:                   procFilterCreate,
+	FilterDetach:                   procFilterDetach,
+	FilterFindClose:                procFilterFindClose,
+	FilterFindFirst:                procFilterFindFirst,
+	FilterFindNext:                 procFilterFindNext,
+	FilterGetDosName:               procFilterGetDosName,
+	FilterGetInformation:           procFilterGetInformation,
+	FilterGetMessage:               procFilterGetMessage,
+	FilterInstanceClose:            procFilterInstanceClose,
+	FilterInstanceCreate:           procFilterInstanceCreate,
+	FilterInstanceFindClose:        procFilterInstanceFindClose,
+	FilterInstanceFindFirst:        procFilterInstanceFindFirst,
+	FilterInstanceFindNext:         procFilterInstanceFindNext,
+	FilterInstanceGetInformation:   procFilterInstanceGetInformation,
+	FilterLoad:                     procFilterLoad,
+	FilterReplyMessage:             procFilterReplyMessage,
+	FilterSendMessage:              procFilterSendMessage,
+	FilterUnload:                   procFilterUnload,
+	FilterVolumeFindClose:          procFilterVolumeFindClose,
+	FilterVolumeFindFirst:          procFilterVolumeFindFirst,
+	FilterVolumeFindNext:           procFilterVolumeFindNext,
+	FilterVolumeInstanceFindClose:  procFilterVolumeInstanceFindClose,
+	FilterVolumeInstanceFindFirst:  procFilterVolumeInstanceFindFirst,
+	FilterVolumeInstanceFindNext:   procFilterVolumeInstanceFindNext,
+}
+
 // FilterAttach calls FLTLIB!FilterAttach.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterattach
-func FilterAttach(lpFilterName string, lpVolumeName string, lpInstanceName string, dwCreatedInstanceNameLength uint32, lpCreatedInstanceName foundation.PWSTR) error {
+func FilterAttach(lpFilterName string, lpVolumeName string, lpInstanceName *string, dwCreatedInstanceNameLength uint32, lpCreatedInstanceName foundation.PWSTR) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
-	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
+	_lpInstanceName := win32.UTF16PtrOrNil(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterAttach.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpInstanceName)), uintptr(dwCreatedInstanceNameLength), uintptr(unsafe.Pointer(lpCreatedInstanceName)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // FilterAttachAtAltitude calls FLTLIB!FilterAttachAtAltitude.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterattachataltitude
-func FilterAttachAtAltitude(lpFilterName string, lpVolumeName string, lpAltitude string, lpInstanceName string, dwCreatedInstanceNameLength uint32, lpCreatedInstanceName foundation.PWSTR) error {
+func FilterAttachAtAltitude(lpFilterName string, lpVolumeName string, lpAltitude string, lpInstanceName *string, dwCreatedInstanceNameLength uint32, lpCreatedInstanceName foundation.PWSTR) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
 	_lpAltitude := win32.UTF16Ptr(lpAltitude)
-	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
+	_lpInstanceName := win32.UTF16PtrOrNil(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterAttachAtAltitude.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpAltitude)), uintptr(unsafe.Pointer(_lpInstanceName)), uintptr(dwCreatedInstanceNameLength), uintptr(unsafe.Pointer(lpCreatedInstanceName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -99,10 +163,10 @@ func FilterCreate(lpFilterName string, hFilter *HFILTER) error {
 
 // FilterDetach calls FLTLIB!FilterDetach.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterdetach
-func FilterDetach(lpFilterName string, lpVolumeName string, lpInstanceName string) error {
+func FilterDetach(lpFilterName string, lpVolumeName string, lpInstanceName *string) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
-	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
+	_lpInstanceName := win32.UTF16PtrOrNil(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterDetach.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpInstanceName)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -171,10 +235,10 @@ func FilterInstanceClose(hInstance HFILTER_INSTANCE) error {
 
 // FilterInstanceCreate calls FLTLIB!FilterInstanceCreate.
 // https://learn.microsoft.com/windows/win32/api/fltuser/nf-fltuser-filterinstancecreate
-func FilterInstanceCreate(lpFilterName string, lpVolumeName string, lpInstanceName string, hInstance *HFILTER_INSTANCE) error {
+func FilterInstanceCreate(lpFilterName string, lpVolumeName string, lpInstanceName *string, hInstance *HFILTER_INSTANCE) error {
 	_lpFilterName := win32.UTF16Ptr(lpFilterName)
 	_lpVolumeName := win32.UTF16Ptr(lpVolumeName)
-	_lpInstanceName := win32.UTF16Ptr(lpInstanceName)
+	_lpInstanceName := win32.UTF16PtrOrNil(lpInstanceName)
 	r1, _, _ := syscall.SyscallN(procFilterInstanceCreate.Addr(), uintptr(unsafe.Pointer(_lpFilterName)), uintptr(unsafe.Pointer(_lpVolumeName)), uintptr(unsafe.Pointer(_lpInstanceName)), uintptr(unsafe.Pointer(hInstance)))
 	return win32.ErrIfFailed(int32(r1))
 }

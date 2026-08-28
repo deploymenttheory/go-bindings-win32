@@ -5,6 +5,7 @@
 package ole
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -121,6 +122,8 @@ var (
 	procOleIconToCursor                   = modOLEAUT32.NewProc("OleIconToCursor")
 	procOleLoadPicture                    = modOLEAUT32.NewProc("OleLoadPicture")
 	procOleLoadPictureEx                  = modOLEAUT32.NewProc("OleLoadPictureEx")
+	procOleLoadPictureFile                = modOLEAUT32.NewProc("OleLoadPictureFile")
+	procOleLoadPictureFileEx              = modOLEAUT32.NewProc("OleLoadPictureFileEx")
 	procOleLoadPicturePath                = modOLEAUT32.NewProc("OleLoadPicturePath")
 	procOleSavePictureFile                = modOLEAUT32.NewProc("OleSavePictureFile")
 	procOleTranslateColor                 = modOLEAUT32.NewProc("OleTranslateColor")
@@ -167,12 +170,15 @@ var (
 	procVarAdd                            = modOLEAUT32.NewProc("VarAdd")
 	procVarAnd                            = modOLEAUT32.NewProc("VarAnd")
 	procVarBoolFromCy                     = modOLEAUT32.NewProc("VarBoolFromCy")
+	procVarBoolFromDate                   = modOLEAUT32.NewProc("VarBoolFromDate")
 	procVarBoolFromDec                    = modOLEAUT32.NewProc("VarBoolFromDec")
 	procVarBoolFromDisp                   = modOLEAUT32.NewProc("VarBoolFromDisp")
 	procVarBoolFromI1                     = modOLEAUT32.NewProc("VarBoolFromI1")
 	procVarBoolFromI2                     = modOLEAUT32.NewProc("VarBoolFromI2")
 	procVarBoolFromI4                     = modOLEAUT32.NewProc("VarBoolFromI4")
 	procVarBoolFromI8                     = modOLEAUT32.NewProc("VarBoolFromI8")
+	procVarBoolFromR4                     = modOLEAUT32.NewProc("VarBoolFromR4")
+	procVarBoolFromR8                     = modOLEAUT32.NewProc("VarBoolFromR8")
 	procVarBoolFromStr                    = modOLEAUT32.NewProc("VarBoolFromStr")
 	procVarBoolFromUI1                    = modOLEAUT32.NewProc("VarBoolFromUI1")
 	procVarBoolFromUI2                    = modOLEAUT32.NewProc("VarBoolFromUI2")
@@ -182,12 +188,15 @@ var (
 	procVarBstrCmp                        = modOLEAUT32.NewProc("VarBstrCmp")
 	procVarBstrFromBool                   = modOLEAUT32.NewProc("VarBstrFromBool")
 	procVarBstrFromCy                     = modOLEAUT32.NewProc("VarBstrFromCy")
+	procVarBstrFromDate                   = modOLEAUT32.NewProc("VarBstrFromDate")
 	procVarBstrFromDec                    = modOLEAUT32.NewProc("VarBstrFromDec")
 	procVarBstrFromDisp                   = modOLEAUT32.NewProc("VarBstrFromDisp")
 	procVarBstrFromI1                     = modOLEAUT32.NewProc("VarBstrFromI1")
 	procVarBstrFromI2                     = modOLEAUT32.NewProc("VarBstrFromI2")
 	procVarBstrFromI4                     = modOLEAUT32.NewProc("VarBstrFromI4")
 	procVarBstrFromI8                     = modOLEAUT32.NewProc("VarBstrFromI8")
+	procVarBstrFromR4                     = modOLEAUT32.NewProc("VarBstrFromR4")
+	procVarBstrFromR8                     = modOLEAUT32.NewProc("VarBstrFromR8")
 	procVarBstrFromUI1                    = modOLEAUT32.NewProc("VarBstrFromUI1")
 	procVarBstrFromUI2                    = modOLEAUT32.NewProc("VarBstrFromUI2")
 	procVarBstrFromUI4                    = modOLEAUT32.NewProc("VarBstrFromUI4")
@@ -197,14 +206,18 @@ var (
 	procVarCyAbs                          = modOLEAUT32.NewProc("VarCyAbs")
 	procVarCyAdd                          = modOLEAUT32.NewProc("VarCyAdd")
 	procVarCyCmp                          = modOLEAUT32.NewProc("VarCyCmp")
+	procVarCyCmpR8                        = modOLEAUT32.NewProc("VarCyCmpR8")
 	procVarCyFix                          = modOLEAUT32.NewProc("VarCyFix")
 	procVarCyFromBool                     = modOLEAUT32.NewProc("VarCyFromBool")
+	procVarCyFromDate                     = modOLEAUT32.NewProc("VarCyFromDate")
 	procVarCyFromDec                      = modOLEAUT32.NewProc("VarCyFromDec")
 	procVarCyFromDisp                     = modOLEAUT32.NewProc("VarCyFromDisp")
 	procVarCyFromI1                       = modOLEAUT32.NewProc("VarCyFromI1")
 	procVarCyFromI2                       = modOLEAUT32.NewProc("VarCyFromI2")
 	procVarCyFromI4                       = modOLEAUT32.NewProc("VarCyFromI4")
 	procVarCyFromI8                       = modOLEAUT32.NewProc("VarCyFromI8")
+	procVarCyFromR4                       = modOLEAUT32.NewProc("VarCyFromR4")
+	procVarCyFromR8                       = modOLEAUT32.NewProc("VarCyFromR8")
 	procVarCyFromStr                      = modOLEAUT32.NewProc("VarCyFromStr")
 	procVarCyFromUI1                      = modOLEAUT32.NewProc("VarCyFromUI1")
 	procVarCyFromUI2                      = modOLEAUT32.NewProc("VarCyFromUI2")
@@ -225,6 +238,8 @@ var (
 	procVarDateFromI2                     = modOLEAUT32.NewProc("VarDateFromI2")
 	procVarDateFromI4                     = modOLEAUT32.NewProc("VarDateFromI4")
 	procVarDateFromI8                     = modOLEAUT32.NewProc("VarDateFromI8")
+	procVarDateFromR4                     = modOLEAUT32.NewProc("VarDateFromR4")
+	procVarDateFromR8                     = modOLEAUT32.NewProc("VarDateFromR8")
 	procVarDateFromStr                    = modOLEAUT32.NewProc("VarDateFromStr")
 	procVarDateFromUI1                    = modOLEAUT32.NewProc("VarDateFromUI1")
 	procVarDateFromUI2                    = modOLEAUT32.NewProc("VarDateFromUI2")
@@ -235,15 +250,19 @@ var (
 	procVarDecAbs                         = modOLEAUT32.NewProc("VarDecAbs")
 	procVarDecAdd                         = modOLEAUT32.NewProc("VarDecAdd")
 	procVarDecCmp                         = modOLEAUT32.NewProc("VarDecCmp")
+	procVarDecCmpR8                       = modOLEAUT32.NewProc("VarDecCmpR8")
 	procVarDecDiv                         = modOLEAUT32.NewProc("VarDecDiv")
 	procVarDecFix                         = modOLEAUT32.NewProc("VarDecFix")
 	procVarDecFromBool                    = modOLEAUT32.NewProc("VarDecFromBool")
 	procVarDecFromCy                      = modOLEAUT32.NewProc("VarDecFromCy")
+	procVarDecFromDate                    = modOLEAUT32.NewProc("VarDecFromDate")
 	procVarDecFromDisp                    = modOLEAUT32.NewProc("VarDecFromDisp")
 	procVarDecFromI1                      = modOLEAUT32.NewProc("VarDecFromI1")
 	procVarDecFromI2                      = modOLEAUT32.NewProc("VarDecFromI2")
 	procVarDecFromI4                      = modOLEAUT32.NewProc("VarDecFromI4")
 	procVarDecFromI8                      = modOLEAUT32.NewProc("VarDecFromI8")
+	procVarDecFromR4                      = modOLEAUT32.NewProc("VarDecFromR4")
+	procVarDecFromR8                      = modOLEAUT32.NewProc("VarDecFromR8")
 	procVarDecFromStr                     = modOLEAUT32.NewProc("VarDecFromStr")
 	procVarDecFromUI1                     = modOLEAUT32.NewProc("VarDecFromUI1")
 	procVarDecFromUI2                     = modOLEAUT32.NewProc("VarDecFromUI2")
@@ -265,11 +284,14 @@ var (
 	procVarFormatPercent                  = modOLEAUT32.NewProc("VarFormatPercent")
 	procVarI1FromBool                     = modOLEAUT32.NewProc("VarI1FromBool")
 	procVarI1FromCy                       = modOLEAUT32.NewProc("VarI1FromCy")
+	procVarI1FromDate                     = modOLEAUT32.NewProc("VarI1FromDate")
 	procVarI1FromDec                      = modOLEAUT32.NewProc("VarI1FromDec")
 	procVarI1FromDisp                     = modOLEAUT32.NewProc("VarI1FromDisp")
 	procVarI1FromI2                       = modOLEAUT32.NewProc("VarI1FromI2")
 	procVarI1FromI4                       = modOLEAUT32.NewProc("VarI1FromI4")
 	procVarI1FromI8                       = modOLEAUT32.NewProc("VarI1FromI8")
+	procVarI1FromR4                       = modOLEAUT32.NewProc("VarI1FromR4")
+	procVarI1FromR8                       = modOLEAUT32.NewProc("VarI1FromR8")
 	procVarI1FromStr                      = modOLEAUT32.NewProc("VarI1FromStr")
 	procVarI1FromUI1                      = modOLEAUT32.NewProc("VarI1FromUI1")
 	procVarI1FromUI2                      = modOLEAUT32.NewProc("VarI1FromUI2")
@@ -277,11 +299,14 @@ var (
 	procVarI1FromUI8                      = modOLEAUT32.NewProc("VarI1FromUI8")
 	procVarI2FromBool                     = modOLEAUT32.NewProc("VarI2FromBool")
 	procVarI2FromCy                       = modOLEAUT32.NewProc("VarI2FromCy")
+	procVarI2FromDate                     = modOLEAUT32.NewProc("VarI2FromDate")
 	procVarI2FromDec                      = modOLEAUT32.NewProc("VarI2FromDec")
 	procVarI2FromDisp                     = modOLEAUT32.NewProc("VarI2FromDisp")
 	procVarI2FromI1                       = modOLEAUT32.NewProc("VarI2FromI1")
 	procVarI2FromI4                       = modOLEAUT32.NewProc("VarI2FromI4")
 	procVarI2FromI8                       = modOLEAUT32.NewProc("VarI2FromI8")
+	procVarI2FromR4                       = modOLEAUT32.NewProc("VarI2FromR4")
+	procVarI2FromR8                       = modOLEAUT32.NewProc("VarI2FromR8")
 	procVarI2FromStr                      = modOLEAUT32.NewProc("VarI2FromStr")
 	procVarI2FromUI1                      = modOLEAUT32.NewProc("VarI2FromUI1")
 	procVarI2FromUI2                      = modOLEAUT32.NewProc("VarI2FromUI2")
@@ -289,11 +314,14 @@ var (
 	procVarI2FromUI8                      = modOLEAUT32.NewProc("VarI2FromUI8")
 	procVarI4FromBool                     = modOLEAUT32.NewProc("VarI4FromBool")
 	procVarI4FromCy                       = modOLEAUT32.NewProc("VarI4FromCy")
+	procVarI4FromDate                     = modOLEAUT32.NewProc("VarI4FromDate")
 	procVarI4FromDec                      = modOLEAUT32.NewProc("VarI4FromDec")
 	procVarI4FromDisp                     = modOLEAUT32.NewProc("VarI4FromDisp")
 	procVarI4FromI1                       = modOLEAUT32.NewProc("VarI4FromI1")
 	procVarI4FromI2                       = modOLEAUT32.NewProc("VarI4FromI2")
 	procVarI4FromI8                       = modOLEAUT32.NewProc("VarI4FromI8")
+	procVarI4FromR4                       = modOLEAUT32.NewProc("VarI4FromR4")
+	procVarI4FromR8                       = modOLEAUT32.NewProc("VarI4FromR8")
 	procVarI4FromStr                      = modOLEAUT32.NewProc("VarI4FromStr")
 	procVarI4FromUI1                      = modOLEAUT32.NewProc("VarI4FromUI1")
 	procVarI4FromUI2                      = modOLEAUT32.NewProc("VarI4FromUI2")
@@ -301,10 +329,13 @@ var (
 	procVarI4FromUI8                      = modOLEAUT32.NewProc("VarI4FromUI8")
 	procVarI8FromBool                     = modOLEAUT32.NewProc("VarI8FromBool")
 	procVarI8FromCy                       = modOLEAUT32.NewProc("VarI8FromCy")
+	procVarI8FromDate                     = modOLEAUT32.NewProc("VarI8FromDate")
 	procVarI8FromDec                      = modOLEAUT32.NewProc("VarI8FromDec")
 	procVarI8FromDisp                     = modOLEAUT32.NewProc("VarI8FromDisp")
 	procVarI8FromI1                       = modOLEAUT32.NewProc("VarI8FromI1")
 	procVarI8FromI2                       = modOLEAUT32.NewProc("VarI8FromI2")
+	procVarI8FromR4                       = modOLEAUT32.NewProc("VarI8FromR4")
+	procVarI8FromR8                       = modOLEAUT32.NewProc("VarI8FromR8")
 	procVarI8FromStr                      = modOLEAUT32.NewProc("VarI8FromStr")
 	procVarI8FromUI1                      = modOLEAUT32.NewProc("VarI8FromUI1")
 	procVarI8FromUI2                      = modOLEAUT32.NewProc("VarI8FromUI2")
@@ -322,14 +353,17 @@ var (
 	procVarOr                             = modOLEAUT32.NewProc("VarOr")
 	procVarParseNumFromStr                = modOLEAUT32.NewProc("VarParseNumFromStr")
 	procVarPow                            = modOLEAUT32.NewProc("VarPow")
+	procVarR4CmpR8                        = modOLEAUT32.NewProc("VarR4CmpR8")
 	procVarR4FromBool                     = modOLEAUT32.NewProc("VarR4FromBool")
 	procVarR4FromCy                       = modOLEAUT32.NewProc("VarR4FromCy")
+	procVarR4FromDate                     = modOLEAUT32.NewProc("VarR4FromDate")
 	procVarR4FromDec                      = modOLEAUT32.NewProc("VarR4FromDec")
 	procVarR4FromDisp                     = modOLEAUT32.NewProc("VarR4FromDisp")
 	procVarR4FromI1                       = modOLEAUT32.NewProc("VarR4FromI1")
 	procVarR4FromI2                       = modOLEAUT32.NewProc("VarR4FromI2")
 	procVarR4FromI4                       = modOLEAUT32.NewProc("VarR4FromI4")
 	procVarR4FromI8                       = modOLEAUT32.NewProc("VarR4FromI8")
+	procVarR4FromR8                       = modOLEAUT32.NewProc("VarR4FromR8")
 	procVarR4FromStr                      = modOLEAUT32.NewProc("VarR4FromStr")
 	procVarR4FromUI1                      = modOLEAUT32.NewProc("VarR4FromUI1")
 	procVarR4FromUI2                      = modOLEAUT32.NewProc("VarR4FromUI2")
@@ -337,67 +371,84 @@ var (
 	procVarR4FromUI8                      = modOLEAUT32.NewProc("VarR4FromUI8")
 	procVarR8FromBool                     = modOLEAUT32.NewProc("VarR8FromBool")
 	procVarR8FromCy                       = modOLEAUT32.NewProc("VarR8FromCy")
+	procVarR8FromDate                     = modOLEAUT32.NewProc("VarR8FromDate")
 	procVarR8FromDec                      = modOLEAUT32.NewProc("VarR8FromDec")
 	procVarR8FromDisp                     = modOLEAUT32.NewProc("VarR8FromDisp")
 	procVarR8FromI1                       = modOLEAUT32.NewProc("VarR8FromI1")
 	procVarR8FromI2                       = modOLEAUT32.NewProc("VarR8FromI2")
 	procVarR8FromI4                       = modOLEAUT32.NewProc("VarR8FromI4")
 	procVarR8FromI8                       = modOLEAUT32.NewProc("VarR8FromI8")
+	procVarR8FromR4                       = modOLEAUT32.NewProc("VarR8FromR4")
 	procVarR8FromStr                      = modOLEAUT32.NewProc("VarR8FromStr")
 	procVarR8FromUI1                      = modOLEAUT32.NewProc("VarR8FromUI1")
 	procVarR8FromUI2                      = modOLEAUT32.NewProc("VarR8FromUI2")
 	procVarR8FromUI4                      = modOLEAUT32.NewProc("VarR8FromUI4")
 	procVarR8FromUI8                      = modOLEAUT32.NewProc("VarR8FromUI8")
+	procVarR8Pow                          = modOLEAUT32.NewProc("VarR8Pow")
+	procVarR8Round                        = modOLEAUT32.NewProc("VarR8Round")
 	procVarRound                          = modOLEAUT32.NewProc("VarRound")
 	procVarSub                            = modOLEAUT32.NewProc("VarSub")
 	procVarTokenizeFormatString           = modOLEAUT32.NewProc("VarTokenizeFormatString")
 	procVarUI1FromBool                    = modOLEAUT32.NewProc("VarUI1FromBool")
 	procVarUI1FromCy                      = modOLEAUT32.NewProc("VarUI1FromCy")
+	procVarUI1FromDate                    = modOLEAUT32.NewProc("VarUI1FromDate")
 	procVarUI1FromDec                     = modOLEAUT32.NewProc("VarUI1FromDec")
 	procVarUI1FromDisp                    = modOLEAUT32.NewProc("VarUI1FromDisp")
 	procVarUI1FromI1                      = modOLEAUT32.NewProc("VarUI1FromI1")
 	procVarUI1FromI2                      = modOLEAUT32.NewProc("VarUI1FromI2")
 	procVarUI1FromI4                      = modOLEAUT32.NewProc("VarUI1FromI4")
 	procVarUI1FromI8                      = modOLEAUT32.NewProc("VarUI1FromI8")
+	procVarUI1FromR4                      = modOLEAUT32.NewProc("VarUI1FromR4")
+	procVarUI1FromR8                      = modOLEAUT32.NewProc("VarUI1FromR8")
 	procVarUI1FromStr                     = modOLEAUT32.NewProc("VarUI1FromStr")
 	procVarUI1FromUI2                     = modOLEAUT32.NewProc("VarUI1FromUI2")
 	procVarUI1FromUI4                     = modOLEAUT32.NewProc("VarUI1FromUI4")
 	procVarUI1FromUI8                     = modOLEAUT32.NewProc("VarUI1FromUI8")
 	procVarUI2FromBool                    = modOLEAUT32.NewProc("VarUI2FromBool")
 	procVarUI2FromCy                      = modOLEAUT32.NewProc("VarUI2FromCy")
+	procVarUI2FromDate                    = modOLEAUT32.NewProc("VarUI2FromDate")
 	procVarUI2FromDec                     = modOLEAUT32.NewProc("VarUI2FromDec")
 	procVarUI2FromDisp                    = modOLEAUT32.NewProc("VarUI2FromDisp")
 	procVarUI2FromI1                      = modOLEAUT32.NewProc("VarUI2FromI1")
 	procVarUI2FromI2                      = modOLEAUT32.NewProc("VarUI2FromI2")
 	procVarUI2FromI4                      = modOLEAUT32.NewProc("VarUI2FromI4")
 	procVarUI2FromI8                      = modOLEAUT32.NewProc("VarUI2FromI8")
+	procVarUI2FromR4                      = modOLEAUT32.NewProc("VarUI2FromR4")
+	procVarUI2FromR8                      = modOLEAUT32.NewProc("VarUI2FromR8")
 	procVarUI2FromStr                     = modOLEAUT32.NewProc("VarUI2FromStr")
 	procVarUI2FromUI1                     = modOLEAUT32.NewProc("VarUI2FromUI1")
 	procVarUI2FromUI4                     = modOLEAUT32.NewProc("VarUI2FromUI4")
 	procVarUI2FromUI8                     = modOLEAUT32.NewProc("VarUI2FromUI8")
 	procVarUI4FromBool                    = modOLEAUT32.NewProc("VarUI4FromBool")
 	procVarUI4FromCy                      = modOLEAUT32.NewProc("VarUI4FromCy")
+	procVarUI4FromDate                    = modOLEAUT32.NewProc("VarUI4FromDate")
 	procVarUI4FromDec                     = modOLEAUT32.NewProc("VarUI4FromDec")
 	procVarUI4FromDisp                    = modOLEAUT32.NewProc("VarUI4FromDisp")
 	procVarUI4FromI1                      = modOLEAUT32.NewProc("VarUI4FromI1")
 	procVarUI4FromI2                      = modOLEAUT32.NewProc("VarUI4FromI2")
 	procVarUI4FromI4                      = modOLEAUT32.NewProc("VarUI4FromI4")
 	procVarUI4FromI8                      = modOLEAUT32.NewProc("VarUI4FromI8")
+	procVarUI4FromR4                      = modOLEAUT32.NewProc("VarUI4FromR4")
+	procVarUI4FromR8                      = modOLEAUT32.NewProc("VarUI4FromR8")
 	procVarUI4FromStr                     = modOLEAUT32.NewProc("VarUI4FromStr")
 	procVarUI4FromUI1                     = modOLEAUT32.NewProc("VarUI4FromUI1")
 	procVarUI4FromUI2                     = modOLEAUT32.NewProc("VarUI4FromUI2")
 	procVarUI4FromUI8                     = modOLEAUT32.NewProc("VarUI4FromUI8")
 	procVarUI8FromBool                    = modOLEAUT32.NewProc("VarUI8FromBool")
 	procVarUI8FromCy                      = modOLEAUT32.NewProc("VarUI8FromCy")
+	procVarUI8FromDate                    = modOLEAUT32.NewProc("VarUI8FromDate")
 	procVarUI8FromDec                     = modOLEAUT32.NewProc("VarUI8FromDec")
 	procVarUI8FromDisp                    = modOLEAUT32.NewProc("VarUI8FromDisp")
 	procVarUI8FromI1                      = modOLEAUT32.NewProc("VarUI8FromI1")
 	procVarUI8FromI2                      = modOLEAUT32.NewProc("VarUI8FromI2")
 	procVarUI8FromI8                      = modOLEAUT32.NewProc("VarUI8FromI8")
+	procVarUI8FromR4                      = modOLEAUT32.NewProc("VarUI8FromR4")
+	procVarUI8FromR8                      = modOLEAUT32.NewProc("VarUI8FromR8")
 	procVarUI8FromStr                     = modOLEAUT32.NewProc("VarUI8FromStr")
 	procVarUI8FromUI1                     = modOLEAUT32.NewProc("VarUI8FromUI1")
 	procVarUI8FromUI2                     = modOLEAUT32.NewProc("VarUI8FromUI2")
 	procVarUI8FromUI4                     = modOLEAUT32.NewProc("VarUI8FromUI4")
+	procVarUdateFromDate                  = modOLEAUT32.NewProc("VarUdateFromDate")
 	procVarWeekdayName                    = modOLEAUT32.NewProc("VarWeekdayName")
 	procVarXor                            = modOLEAUT32.NewProc("VarXor")
 	procVectorFromBstr                    = modOLEAUT32.NewProc("VectorFromBstr")
@@ -425,6 +476,910 @@ var (
 	procOleUIUpdateLinks                  = modoledlg.NewProc("OleUIUpdateLinksW")
 	procOleUIUpdateLinksA                 = modoledlg.NewProc("OleUIUpdateLinksA")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BstrFromVector                    *win32.Proc
+	ClearCustData                     *win32.Proc
+	CreateDispTypeInfo                *win32.Proc
+	CreateErrorInfo                   *win32.Proc
+	CreateOleAdviseHolder             *win32.Proc
+	CreateStdDispatch                 *win32.Proc
+	CreateTypeLib                     *win32.Proc
+	CreateTypeLib2                    *win32.Proc
+	DispCallFunc                      *win32.Proc
+	DispGetIDsOfNames                 *win32.Proc
+	DispGetParam                      *win32.Proc
+	DispInvoke                        *win32.Proc
+	DoDragDrop                        *win32.Proc
+	GetActiveObject                   *win32.Proc
+	GetAltMonthNames                  *win32.Proc
+	GetRecordInfoFromGuids            *win32.Proc
+	GetRecordInfoFromTypeInfo         *win32.Proc
+	HRGN_UserFree                     *win32.Proc
+	HRGN_UserFree64                   *win32.Proc
+	HRGN_UserMarshal                  *win32.Proc
+	HRGN_UserMarshal64                *win32.Proc
+	HRGN_UserSize                     *win32.Proc
+	HRGN_UserSize64                   *win32.Proc
+	HRGN_UserUnmarshal                *win32.Proc
+	HRGN_UserUnmarshal64              *win32.Proc
+	IsAccelerator                     *win32.Proc
+	LHashValOfNameSys                 *win32.Proc
+	LHashValOfNameSysA                *win32.Proc
+	LoadRegTypeLib                    *win32.Proc
+	LoadTypeLib                       *win32.Proc
+	LoadTypeLibEx                     *win32.Proc
+	OaBuildVersion                    *win32.Proc
+	OaEnablePerUserTLibRegistration   *win32.Proc
+	OleBuildVersion                   *win32.Proc
+	OleConvertOLESTREAMToIStorage2    *win32.Proc
+	OleConvertOLESTREAMToIStorageEx2  *win32.Proc
+	OleCreate                         *win32.Proc
+	OleCreateDefaultHandler           *win32.Proc
+	OleCreateEmbeddingHelper          *win32.Proc
+	OleCreateEx                       *win32.Proc
+	OleCreateFontIndirect             *win32.Proc
+	OleCreateFromData                 *win32.Proc
+	OleCreateFromDataEx               *win32.Proc
+	OleCreateFromFile                 *win32.Proc
+	OleCreateFromFileEx               *win32.Proc
+	OleCreateLink                     *win32.Proc
+	OleCreateLinkEx                   *win32.Proc
+	OleCreateLinkFromData             *win32.Proc
+	OleCreateLinkFromDataEx           *win32.Proc
+	OleCreateLinkToFile               *win32.Proc
+	OleCreateLinkToFileEx             *win32.Proc
+	OleCreateMenuDescriptor           *win32.Proc
+	OleCreatePictureIndirect          *win32.Proc
+	OleCreatePropertyFrame            *win32.Proc
+	OleCreatePropertyFrameIndirect    *win32.Proc
+	OleCreateStaticFromData           *win32.Proc
+	OleDestroyMenuDescriptor          *win32.Proc
+	OleDoAutoConvert                  *win32.Proc
+	OleDraw                           *win32.Proc
+	OleDuplicateData                  *win32.Proc
+	OleFlushClipboard                 *win32.Proc
+	OleGetAutoConvert                 *win32.Proc
+	OleGetClipboard                   *win32.Proc
+	OleGetClipboardWithEnterpriseInfo *win32.Proc
+	OleGetIconOfClass                 *win32.Proc
+	OleGetIconOfFile                  *win32.Proc
+	OleIconToCursor                   *win32.Proc
+	OleInitialize                     *win32.Proc
+	OleIsCurrentClipboard             *win32.Proc
+	OleIsRunning                      *win32.Proc
+	OleLoad                           *win32.Proc
+	OleLoadFromStream                 *win32.Proc
+	OleLoadPicture                    *win32.Proc
+	OleLoadPictureEx                  *win32.Proc
+	OleLoadPictureFile                *win32.Proc
+	OleLoadPictureFileEx              *win32.Proc
+	OleLoadPicturePath                *win32.Proc
+	OleLockRunning                    *win32.Proc
+	OleMetafilePictFromIconAndLabel   *win32.Proc
+	OleNoteObjectVisible              *win32.Proc
+	OleQueryCreateFromData            *win32.Proc
+	OleQueryLinkFromData              *win32.Proc
+	OleRegEnumFormatEtc               *win32.Proc
+	OleRegEnumVerbs                   *win32.Proc
+	OleRegGetMiscStatus               *win32.Proc
+	OleRegGetUserType                 *win32.Proc
+	OleRun                            *win32.Proc
+	OleSave                           *win32.Proc
+	OleSavePictureFile                *win32.Proc
+	OleSaveToStream                   *win32.Proc
+	OleSetAutoConvert                 *win32.Proc
+	OleSetClipboard                   *win32.Proc
+	OleSetContainedObject             *win32.Proc
+	OleSetMenuDescriptor              *win32.Proc
+	OleTranslateAccelerator           *win32.Proc
+	OleTranslateColor                 *win32.Proc
+	OleUIAddVerbMenu                  *win32.Proc
+	OleUIAddVerbMenuA                 *win32.Proc
+	OleUIBusy                         *win32.Proc
+	OleUIBusyA                        *win32.Proc
+	OleUICanConvertOrActivateAs       *win32.Proc
+	OleUIChangeIcon                   *win32.Proc
+	OleUIChangeIconA                  *win32.Proc
+	OleUIChangeSource                 *win32.Proc
+	OleUIChangeSourceA                *win32.Proc
+	OleUIConvert                      *win32.Proc
+	OleUIConvertA                     *win32.Proc
+	OleUIEditLinks                    *win32.Proc
+	OleUIEditLinksA                   *win32.Proc
+	OleUIInsertObject                 *win32.Proc
+	OleUIInsertObjectA                *win32.Proc
+	OleUIObjectProperties             *win32.Proc
+	OleUIObjectPropertiesA            *win32.Proc
+	OleUIPasteSpecial                 *win32.Proc
+	OleUIPasteSpecialA                *win32.Proc
+	OleUIPromptUser                   *win32.Proc
+	OleUIPromptUserA                  *win32.Proc
+	OleUIUpdateLinks                  *win32.Proc
+	OleUIUpdateLinksA                 *win32.Proc
+	OleUninitialize                   *win32.Proc
+	QueryPathOfRegTypeLib             *win32.Proc
+	RegisterActiveObject              *win32.Proc
+	RegisterDragDrop                  *win32.Proc
+	RegisterTypeLib                   *win32.Proc
+	RegisterTypeLibForUser            *win32.Proc
+	ReleaseStgMedium                  *win32.Proc
+	RevokeActiveObject                *win32.Proc
+	RevokeDragDrop                    *win32.Proc
+	SafeArrayAccessData               *win32.Proc
+	SafeArrayAddRef                   *win32.Proc
+	SafeArrayAllocData                *win32.Proc
+	SafeArrayAllocDescriptor          *win32.Proc
+	SafeArrayAllocDescriptorEx        *win32.Proc
+	SafeArrayCopy                     *win32.Proc
+	SafeArrayCopyData                 *win32.Proc
+	SafeArrayCreate                   *win32.Proc
+	SafeArrayCreateEx                 *win32.Proc
+	SafeArrayCreateVector             *win32.Proc
+	SafeArrayCreateVectorEx           *win32.Proc
+	SafeArrayDestroy                  *win32.Proc
+	SafeArrayDestroyData              *win32.Proc
+	SafeArrayDestroyDescriptor        *win32.Proc
+	SafeArrayGetDim                   *win32.Proc
+	SafeArrayGetElement               *win32.Proc
+	SafeArrayGetElemsize              *win32.Proc
+	SafeArrayGetIID                   *win32.Proc
+	SafeArrayGetLBound                *win32.Proc
+	SafeArrayGetRecordInfo            *win32.Proc
+	SafeArrayGetUBound                *win32.Proc
+	SafeArrayGetVartype               *win32.Proc
+	SafeArrayLock                     *win32.Proc
+	SafeArrayPtrOfIndex               *win32.Proc
+	SafeArrayPutElement               *win32.Proc
+	SafeArrayRedim                    *win32.Proc
+	SafeArrayReleaseData              *win32.Proc
+	SafeArrayReleaseDescriptor        *win32.Proc
+	SafeArraySetIID                   *win32.Proc
+	SafeArraySetRecordInfo            *win32.Proc
+	SafeArrayUnaccessData             *win32.Proc
+	SafeArrayUnlock                   *win32.Proc
+	UnRegisterTypeLib                 *win32.Proc
+	UnRegisterTypeLibForUser          *win32.Proc
+	VarAbs                            *win32.Proc
+	VarAdd                            *win32.Proc
+	VarAnd                            *win32.Proc
+	VarBoolFromCy                     *win32.Proc
+	VarBoolFromDate                   *win32.Proc
+	VarBoolFromDec                    *win32.Proc
+	VarBoolFromDisp                   *win32.Proc
+	VarBoolFromI1                     *win32.Proc
+	VarBoolFromI2                     *win32.Proc
+	VarBoolFromI4                     *win32.Proc
+	VarBoolFromI8                     *win32.Proc
+	VarBoolFromR4                     *win32.Proc
+	VarBoolFromR8                     *win32.Proc
+	VarBoolFromStr                    *win32.Proc
+	VarBoolFromUI1                    *win32.Proc
+	VarBoolFromUI2                    *win32.Proc
+	VarBoolFromUI4                    *win32.Proc
+	VarBoolFromUI8                    *win32.Proc
+	VarBstrCat                        *win32.Proc
+	VarBstrCmp                        *win32.Proc
+	VarBstrFromBool                   *win32.Proc
+	VarBstrFromCy                     *win32.Proc
+	VarBstrFromDate                   *win32.Proc
+	VarBstrFromDec                    *win32.Proc
+	VarBstrFromDisp                   *win32.Proc
+	VarBstrFromI1                     *win32.Proc
+	VarBstrFromI2                     *win32.Proc
+	VarBstrFromI4                     *win32.Proc
+	VarBstrFromI8                     *win32.Proc
+	VarBstrFromR4                     *win32.Proc
+	VarBstrFromR8                     *win32.Proc
+	VarBstrFromUI1                    *win32.Proc
+	VarBstrFromUI2                    *win32.Proc
+	VarBstrFromUI4                    *win32.Proc
+	VarBstrFromUI8                    *win32.Proc
+	VarCat                            *win32.Proc
+	VarCmp                            *win32.Proc
+	VarCyAbs                          *win32.Proc
+	VarCyAdd                          *win32.Proc
+	VarCyCmp                          *win32.Proc
+	VarCyCmpR8                        *win32.Proc
+	VarCyFix                          *win32.Proc
+	VarCyFromBool                     *win32.Proc
+	VarCyFromDate                     *win32.Proc
+	VarCyFromDec                      *win32.Proc
+	VarCyFromDisp                     *win32.Proc
+	VarCyFromI1                       *win32.Proc
+	VarCyFromI2                       *win32.Proc
+	VarCyFromI4                       *win32.Proc
+	VarCyFromI8                       *win32.Proc
+	VarCyFromR4                       *win32.Proc
+	VarCyFromR8                       *win32.Proc
+	VarCyFromStr                      *win32.Proc
+	VarCyFromUI1                      *win32.Proc
+	VarCyFromUI2                      *win32.Proc
+	VarCyFromUI4                      *win32.Proc
+	VarCyFromUI8                      *win32.Proc
+	VarCyInt                          *win32.Proc
+	VarCyMul                          *win32.Proc
+	VarCyMulI4                        *win32.Proc
+	VarCyMulI8                        *win32.Proc
+	VarCyNeg                          *win32.Proc
+	VarCyRound                        *win32.Proc
+	VarCySub                          *win32.Proc
+	VarDateFromBool                   *win32.Proc
+	VarDateFromCy                     *win32.Proc
+	VarDateFromDec                    *win32.Proc
+	VarDateFromDisp                   *win32.Proc
+	VarDateFromI1                     *win32.Proc
+	VarDateFromI2                     *win32.Proc
+	VarDateFromI4                     *win32.Proc
+	VarDateFromI8                     *win32.Proc
+	VarDateFromR4                     *win32.Proc
+	VarDateFromR8                     *win32.Proc
+	VarDateFromStr                    *win32.Proc
+	VarDateFromUI1                    *win32.Proc
+	VarDateFromUI2                    *win32.Proc
+	VarDateFromUI4                    *win32.Proc
+	VarDateFromUI8                    *win32.Proc
+	VarDateFromUdate                  *win32.Proc
+	VarDateFromUdateEx                *win32.Proc
+	VarDecAbs                         *win32.Proc
+	VarDecAdd                         *win32.Proc
+	VarDecCmp                         *win32.Proc
+	VarDecCmpR8                       *win32.Proc
+	VarDecDiv                         *win32.Proc
+	VarDecFix                         *win32.Proc
+	VarDecFromBool                    *win32.Proc
+	VarDecFromCy                      *win32.Proc
+	VarDecFromDate                    *win32.Proc
+	VarDecFromDisp                    *win32.Proc
+	VarDecFromI1                      *win32.Proc
+	VarDecFromI2                      *win32.Proc
+	VarDecFromI4                      *win32.Proc
+	VarDecFromI8                      *win32.Proc
+	VarDecFromR4                      *win32.Proc
+	VarDecFromR8                      *win32.Proc
+	VarDecFromStr                     *win32.Proc
+	VarDecFromUI1                     *win32.Proc
+	VarDecFromUI2                     *win32.Proc
+	VarDecFromUI4                     *win32.Proc
+	VarDecFromUI8                     *win32.Proc
+	VarDecInt                         *win32.Proc
+	VarDecMul                         *win32.Proc
+	VarDecNeg                         *win32.Proc
+	VarDecRound                       *win32.Proc
+	VarDecSub                         *win32.Proc
+	VarDiv                            *win32.Proc
+	VarEqv                            *win32.Proc
+	VarFix                            *win32.Proc
+	VarFormat                         *win32.Proc
+	VarFormatCurrency                 *win32.Proc
+	VarFormatDateTime                 *win32.Proc
+	VarFormatFromTokens               *win32.Proc
+	VarFormatNumber                   *win32.Proc
+	VarFormatPercent                  *win32.Proc
+	VarI1FromBool                     *win32.Proc
+	VarI1FromCy                       *win32.Proc
+	VarI1FromDate                     *win32.Proc
+	VarI1FromDec                      *win32.Proc
+	VarI1FromDisp                     *win32.Proc
+	VarI1FromI2                       *win32.Proc
+	VarI1FromI4                       *win32.Proc
+	VarI1FromI8                       *win32.Proc
+	VarI1FromR4                       *win32.Proc
+	VarI1FromR8                       *win32.Proc
+	VarI1FromStr                      *win32.Proc
+	VarI1FromUI1                      *win32.Proc
+	VarI1FromUI2                      *win32.Proc
+	VarI1FromUI4                      *win32.Proc
+	VarI1FromUI8                      *win32.Proc
+	VarI2FromBool                     *win32.Proc
+	VarI2FromCy                       *win32.Proc
+	VarI2FromDate                     *win32.Proc
+	VarI2FromDec                      *win32.Proc
+	VarI2FromDisp                     *win32.Proc
+	VarI2FromI1                       *win32.Proc
+	VarI2FromI4                       *win32.Proc
+	VarI2FromI8                       *win32.Proc
+	VarI2FromR4                       *win32.Proc
+	VarI2FromR8                       *win32.Proc
+	VarI2FromStr                      *win32.Proc
+	VarI2FromUI1                      *win32.Proc
+	VarI2FromUI2                      *win32.Proc
+	VarI2FromUI4                      *win32.Proc
+	VarI2FromUI8                      *win32.Proc
+	VarI4FromBool                     *win32.Proc
+	VarI4FromCy                       *win32.Proc
+	VarI4FromDate                     *win32.Proc
+	VarI4FromDec                      *win32.Proc
+	VarI4FromDisp                     *win32.Proc
+	VarI4FromI1                       *win32.Proc
+	VarI4FromI2                       *win32.Proc
+	VarI4FromI8                       *win32.Proc
+	VarI4FromR4                       *win32.Proc
+	VarI4FromR8                       *win32.Proc
+	VarI4FromStr                      *win32.Proc
+	VarI4FromUI1                      *win32.Proc
+	VarI4FromUI2                      *win32.Proc
+	VarI4FromUI4                      *win32.Proc
+	VarI4FromUI8                      *win32.Proc
+	VarI8FromBool                     *win32.Proc
+	VarI8FromCy                       *win32.Proc
+	VarI8FromDate                     *win32.Proc
+	VarI8FromDec                      *win32.Proc
+	VarI8FromDisp                     *win32.Proc
+	VarI8FromI1                       *win32.Proc
+	VarI8FromI2                       *win32.Proc
+	VarI8FromR4                       *win32.Proc
+	VarI8FromR8                       *win32.Proc
+	VarI8FromStr                      *win32.Proc
+	VarI8FromUI1                      *win32.Proc
+	VarI8FromUI2                      *win32.Proc
+	VarI8FromUI4                      *win32.Proc
+	VarI8FromUI8                      *win32.Proc
+	VarIdiv                           *win32.Proc
+	VarImp                            *win32.Proc
+	VarInt                            *win32.Proc
+	VarMod                            *win32.Proc
+	VarMonthName                      *win32.Proc
+	VarMul                            *win32.Proc
+	VarNeg                            *win32.Proc
+	VarNot                            *win32.Proc
+	VarNumFromParseNum                *win32.Proc
+	VarOr                             *win32.Proc
+	VarParseNumFromStr                *win32.Proc
+	VarPow                            *win32.Proc
+	VarR4CmpR8                        *win32.Proc
+	VarR4FromBool                     *win32.Proc
+	VarR4FromCy                       *win32.Proc
+	VarR4FromDate                     *win32.Proc
+	VarR4FromDec                      *win32.Proc
+	VarR4FromDisp                     *win32.Proc
+	VarR4FromI1                       *win32.Proc
+	VarR4FromI2                       *win32.Proc
+	VarR4FromI4                       *win32.Proc
+	VarR4FromI8                       *win32.Proc
+	VarR4FromR8                       *win32.Proc
+	VarR4FromStr                      *win32.Proc
+	VarR4FromUI1                      *win32.Proc
+	VarR4FromUI2                      *win32.Proc
+	VarR4FromUI4                      *win32.Proc
+	VarR4FromUI8                      *win32.Proc
+	VarR8FromBool                     *win32.Proc
+	VarR8FromCy                       *win32.Proc
+	VarR8FromDate                     *win32.Proc
+	VarR8FromDec                      *win32.Proc
+	VarR8FromDisp                     *win32.Proc
+	VarR8FromI1                       *win32.Proc
+	VarR8FromI2                       *win32.Proc
+	VarR8FromI4                       *win32.Proc
+	VarR8FromI8                       *win32.Proc
+	VarR8FromR4                       *win32.Proc
+	VarR8FromStr                      *win32.Proc
+	VarR8FromUI1                      *win32.Proc
+	VarR8FromUI2                      *win32.Proc
+	VarR8FromUI4                      *win32.Proc
+	VarR8FromUI8                      *win32.Proc
+	VarR8Pow                          *win32.Proc
+	VarR8Round                        *win32.Proc
+	VarRound                          *win32.Proc
+	VarSub                            *win32.Proc
+	VarTokenizeFormatString           *win32.Proc
+	VarUI1FromBool                    *win32.Proc
+	VarUI1FromCy                      *win32.Proc
+	VarUI1FromDate                    *win32.Proc
+	VarUI1FromDec                     *win32.Proc
+	VarUI1FromDisp                    *win32.Proc
+	VarUI1FromI1                      *win32.Proc
+	VarUI1FromI2                      *win32.Proc
+	VarUI1FromI4                      *win32.Proc
+	VarUI1FromI8                      *win32.Proc
+	VarUI1FromR4                      *win32.Proc
+	VarUI1FromR8                      *win32.Proc
+	VarUI1FromStr                     *win32.Proc
+	VarUI1FromUI2                     *win32.Proc
+	VarUI1FromUI4                     *win32.Proc
+	VarUI1FromUI8                     *win32.Proc
+	VarUI2FromBool                    *win32.Proc
+	VarUI2FromCy                      *win32.Proc
+	VarUI2FromDate                    *win32.Proc
+	VarUI2FromDec                     *win32.Proc
+	VarUI2FromDisp                    *win32.Proc
+	VarUI2FromI1                      *win32.Proc
+	VarUI2FromI2                      *win32.Proc
+	VarUI2FromI4                      *win32.Proc
+	VarUI2FromI8                      *win32.Proc
+	VarUI2FromR4                      *win32.Proc
+	VarUI2FromR8                      *win32.Proc
+	VarUI2FromStr                     *win32.Proc
+	VarUI2FromUI1                     *win32.Proc
+	VarUI2FromUI4                     *win32.Proc
+	VarUI2FromUI8                     *win32.Proc
+	VarUI4FromBool                    *win32.Proc
+	VarUI4FromCy                      *win32.Proc
+	VarUI4FromDate                    *win32.Proc
+	VarUI4FromDec                     *win32.Proc
+	VarUI4FromDisp                    *win32.Proc
+	VarUI4FromI1                      *win32.Proc
+	VarUI4FromI2                      *win32.Proc
+	VarUI4FromI4                      *win32.Proc
+	VarUI4FromI8                      *win32.Proc
+	VarUI4FromR4                      *win32.Proc
+	VarUI4FromR8                      *win32.Proc
+	VarUI4FromStr                     *win32.Proc
+	VarUI4FromUI1                     *win32.Proc
+	VarUI4FromUI2                     *win32.Proc
+	VarUI4FromUI8                     *win32.Proc
+	VarUI8FromBool                    *win32.Proc
+	VarUI8FromCy                      *win32.Proc
+	VarUI8FromDate                    *win32.Proc
+	VarUI8FromDec                     *win32.Proc
+	VarUI8FromDisp                    *win32.Proc
+	VarUI8FromI1                      *win32.Proc
+	VarUI8FromI2                      *win32.Proc
+	VarUI8FromI8                      *win32.Proc
+	VarUI8FromR4                      *win32.Proc
+	VarUI8FromR8                      *win32.Proc
+	VarUI8FromStr                     *win32.Proc
+	VarUI8FromUI1                     *win32.Proc
+	VarUI8FromUI2                     *win32.Proc
+	VarUI8FromUI4                     *win32.Proc
+	VarUdateFromDate                  *win32.Proc
+	VarWeekdayName                    *win32.Proc
+	VarXor                            *win32.Proc
+	VectorFromBstr                    *win32.Proc
+}{
+	BstrFromVector:                    procBstrFromVector,
+	ClearCustData:                     procClearCustData,
+	CreateDispTypeInfo:                procCreateDispTypeInfo,
+	CreateErrorInfo:                   procCreateErrorInfo,
+	CreateOleAdviseHolder:             procCreateOleAdviseHolder,
+	CreateStdDispatch:                 procCreateStdDispatch,
+	CreateTypeLib:                     procCreateTypeLib,
+	CreateTypeLib2:                    procCreateTypeLib2,
+	DispCallFunc:                      procDispCallFunc,
+	DispGetIDsOfNames:                 procDispGetIDsOfNames,
+	DispGetParam:                      procDispGetParam,
+	DispInvoke:                        procDispInvoke,
+	DoDragDrop:                        procDoDragDrop,
+	GetActiveObject:                   procGetActiveObject,
+	GetAltMonthNames:                  procGetAltMonthNames,
+	GetRecordInfoFromGuids:            procGetRecordInfoFromGuids,
+	GetRecordInfoFromTypeInfo:         procGetRecordInfoFromTypeInfo,
+	HRGN_UserFree:                     procHRGN_UserFree,
+	HRGN_UserFree64:                   procHRGN_UserFree64,
+	HRGN_UserMarshal:                  procHRGN_UserMarshal,
+	HRGN_UserMarshal64:                procHRGN_UserMarshal64,
+	HRGN_UserSize:                     procHRGN_UserSize,
+	HRGN_UserSize64:                   procHRGN_UserSize64,
+	HRGN_UserUnmarshal:                procHRGN_UserUnmarshal,
+	HRGN_UserUnmarshal64:              procHRGN_UserUnmarshal64,
+	IsAccelerator:                     procIsAccelerator,
+	LHashValOfNameSys:                 procLHashValOfNameSys,
+	LHashValOfNameSysA:                procLHashValOfNameSysA,
+	LoadRegTypeLib:                    procLoadRegTypeLib,
+	LoadTypeLib:                       procLoadTypeLib,
+	LoadTypeLibEx:                     procLoadTypeLibEx,
+	OaBuildVersion:                    procOaBuildVersion,
+	OaEnablePerUserTLibRegistration:   procOaEnablePerUserTLibRegistration,
+	OleBuildVersion:                   procOleBuildVersion,
+	OleConvertOLESTREAMToIStorage2:    procOleConvertOLESTREAMToIStorage2,
+	OleConvertOLESTREAMToIStorageEx2:  procOleConvertOLESTREAMToIStorageEx2,
+	OleCreate:                         procOleCreate,
+	OleCreateDefaultHandler:           procOleCreateDefaultHandler,
+	OleCreateEmbeddingHelper:          procOleCreateEmbeddingHelper,
+	OleCreateEx:                       procOleCreateEx,
+	OleCreateFontIndirect:             procOleCreateFontIndirect,
+	OleCreateFromData:                 procOleCreateFromData,
+	OleCreateFromDataEx:               procOleCreateFromDataEx,
+	OleCreateFromFile:                 procOleCreateFromFile,
+	OleCreateFromFileEx:               procOleCreateFromFileEx,
+	OleCreateLink:                     procOleCreateLink,
+	OleCreateLinkEx:                   procOleCreateLinkEx,
+	OleCreateLinkFromData:             procOleCreateLinkFromData,
+	OleCreateLinkFromDataEx:           procOleCreateLinkFromDataEx,
+	OleCreateLinkToFile:               procOleCreateLinkToFile,
+	OleCreateLinkToFileEx:             procOleCreateLinkToFileEx,
+	OleCreateMenuDescriptor:           procOleCreateMenuDescriptor,
+	OleCreatePictureIndirect:          procOleCreatePictureIndirect,
+	OleCreatePropertyFrame:            procOleCreatePropertyFrame,
+	OleCreatePropertyFrameIndirect:    procOleCreatePropertyFrameIndirect,
+	OleCreateStaticFromData:           procOleCreateStaticFromData,
+	OleDestroyMenuDescriptor:          procOleDestroyMenuDescriptor,
+	OleDoAutoConvert:                  procOleDoAutoConvert,
+	OleDraw:                           procOleDraw,
+	OleDuplicateData:                  procOleDuplicateData,
+	OleFlushClipboard:                 procOleFlushClipboard,
+	OleGetAutoConvert:                 procOleGetAutoConvert,
+	OleGetClipboard:                   procOleGetClipboard,
+	OleGetClipboardWithEnterpriseInfo: procOleGetClipboardWithEnterpriseInfo,
+	OleGetIconOfClass:                 procOleGetIconOfClass,
+	OleGetIconOfFile:                  procOleGetIconOfFile,
+	OleIconToCursor:                   procOleIconToCursor,
+	OleInitialize:                     procOleInitialize,
+	OleIsCurrentClipboard:             procOleIsCurrentClipboard,
+	OleIsRunning:                      procOleIsRunning,
+	OleLoad:                           procOleLoad,
+	OleLoadFromStream:                 procOleLoadFromStream,
+	OleLoadPicture:                    procOleLoadPicture,
+	OleLoadPictureEx:                  procOleLoadPictureEx,
+	OleLoadPictureFile:                procOleLoadPictureFile,
+	OleLoadPictureFileEx:              procOleLoadPictureFileEx,
+	OleLoadPicturePath:                procOleLoadPicturePath,
+	OleLockRunning:                    procOleLockRunning,
+	OleMetafilePictFromIconAndLabel:   procOleMetafilePictFromIconAndLabel,
+	OleNoteObjectVisible:              procOleNoteObjectVisible,
+	OleQueryCreateFromData:            procOleQueryCreateFromData,
+	OleQueryLinkFromData:              procOleQueryLinkFromData,
+	OleRegEnumFormatEtc:               procOleRegEnumFormatEtc,
+	OleRegEnumVerbs:                   procOleRegEnumVerbs,
+	OleRegGetMiscStatus:               procOleRegGetMiscStatus,
+	OleRegGetUserType:                 procOleRegGetUserType,
+	OleRun:                            procOleRun,
+	OleSave:                           procOleSave,
+	OleSavePictureFile:                procOleSavePictureFile,
+	OleSaveToStream:                   procOleSaveToStream,
+	OleSetAutoConvert:                 procOleSetAutoConvert,
+	OleSetClipboard:                   procOleSetClipboard,
+	OleSetContainedObject:             procOleSetContainedObject,
+	OleSetMenuDescriptor:              procOleSetMenuDescriptor,
+	OleTranslateAccelerator:           procOleTranslateAccelerator,
+	OleTranslateColor:                 procOleTranslateColor,
+	OleUIAddVerbMenu:                  procOleUIAddVerbMenu,
+	OleUIAddVerbMenuA:                 procOleUIAddVerbMenuA,
+	OleUIBusy:                         procOleUIBusy,
+	OleUIBusyA:                        procOleUIBusyA,
+	OleUICanConvertOrActivateAs:       procOleUICanConvertOrActivateAs,
+	OleUIChangeIcon:                   procOleUIChangeIcon,
+	OleUIChangeIconA:                  procOleUIChangeIconA,
+	OleUIChangeSource:                 procOleUIChangeSource,
+	OleUIChangeSourceA:                procOleUIChangeSourceA,
+	OleUIConvert:                      procOleUIConvert,
+	OleUIConvertA:                     procOleUIConvertA,
+	OleUIEditLinks:                    procOleUIEditLinks,
+	OleUIEditLinksA:                   procOleUIEditLinksA,
+	OleUIInsertObject:                 procOleUIInsertObject,
+	OleUIInsertObjectA:                procOleUIInsertObjectA,
+	OleUIObjectProperties:             procOleUIObjectProperties,
+	OleUIObjectPropertiesA:            procOleUIObjectPropertiesA,
+	OleUIPasteSpecial:                 procOleUIPasteSpecial,
+	OleUIPasteSpecialA:                procOleUIPasteSpecialA,
+	OleUIPromptUser:                   procOleUIPromptUser,
+	OleUIPromptUserA:                  procOleUIPromptUserA,
+	OleUIUpdateLinks:                  procOleUIUpdateLinks,
+	OleUIUpdateLinksA:                 procOleUIUpdateLinksA,
+	OleUninitialize:                   procOleUninitialize,
+	QueryPathOfRegTypeLib:             procQueryPathOfRegTypeLib,
+	RegisterActiveObject:              procRegisterActiveObject,
+	RegisterDragDrop:                  procRegisterDragDrop,
+	RegisterTypeLib:                   procRegisterTypeLib,
+	RegisterTypeLibForUser:            procRegisterTypeLibForUser,
+	ReleaseStgMedium:                  procReleaseStgMedium,
+	RevokeActiveObject:                procRevokeActiveObject,
+	RevokeDragDrop:                    procRevokeDragDrop,
+	SafeArrayAccessData:               procSafeArrayAccessData,
+	SafeArrayAddRef:                   procSafeArrayAddRef,
+	SafeArrayAllocData:                procSafeArrayAllocData,
+	SafeArrayAllocDescriptor:          procSafeArrayAllocDescriptor,
+	SafeArrayAllocDescriptorEx:        procSafeArrayAllocDescriptorEx,
+	SafeArrayCopy:                     procSafeArrayCopy,
+	SafeArrayCopyData:                 procSafeArrayCopyData,
+	SafeArrayCreate:                   procSafeArrayCreate,
+	SafeArrayCreateEx:                 procSafeArrayCreateEx,
+	SafeArrayCreateVector:             procSafeArrayCreateVector,
+	SafeArrayCreateVectorEx:           procSafeArrayCreateVectorEx,
+	SafeArrayDestroy:                  procSafeArrayDestroy,
+	SafeArrayDestroyData:              procSafeArrayDestroyData,
+	SafeArrayDestroyDescriptor:        procSafeArrayDestroyDescriptor,
+	SafeArrayGetDim:                   procSafeArrayGetDim,
+	SafeArrayGetElement:               procSafeArrayGetElement,
+	SafeArrayGetElemsize:              procSafeArrayGetElemsize,
+	SafeArrayGetIID:                   procSafeArrayGetIID,
+	SafeArrayGetLBound:                procSafeArrayGetLBound,
+	SafeArrayGetRecordInfo:            procSafeArrayGetRecordInfo,
+	SafeArrayGetUBound:                procSafeArrayGetUBound,
+	SafeArrayGetVartype:               procSafeArrayGetVartype,
+	SafeArrayLock:                     procSafeArrayLock,
+	SafeArrayPtrOfIndex:               procSafeArrayPtrOfIndex,
+	SafeArrayPutElement:               procSafeArrayPutElement,
+	SafeArrayRedim:                    procSafeArrayRedim,
+	SafeArrayReleaseData:              procSafeArrayReleaseData,
+	SafeArrayReleaseDescriptor:        procSafeArrayReleaseDescriptor,
+	SafeArraySetIID:                   procSafeArraySetIID,
+	SafeArraySetRecordInfo:            procSafeArraySetRecordInfo,
+	SafeArrayUnaccessData:             procSafeArrayUnaccessData,
+	SafeArrayUnlock:                   procSafeArrayUnlock,
+	UnRegisterTypeLib:                 procUnRegisterTypeLib,
+	UnRegisterTypeLibForUser:          procUnRegisterTypeLibForUser,
+	VarAbs:                            procVarAbs,
+	VarAdd:                            procVarAdd,
+	VarAnd:                            procVarAnd,
+	VarBoolFromCy:                     procVarBoolFromCy,
+	VarBoolFromDate:                   procVarBoolFromDate,
+	VarBoolFromDec:                    procVarBoolFromDec,
+	VarBoolFromDisp:                   procVarBoolFromDisp,
+	VarBoolFromI1:                     procVarBoolFromI1,
+	VarBoolFromI2:                     procVarBoolFromI2,
+	VarBoolFromI4:                     procVarBoolFromI4,
+	VarBoolFromI8:                     procVarBoolFromI8,
+	VarBoolFromR4:                     procVarBoolFromR4,
+	VarBoolFromR8:                     procVarBoolFromR8,
+	VarBoolFromStr:                    procVarBoolFromStr,
+	VarBoolFromUI1:                    procVarBoolFromUI1,
+	VarBoolFromUI2:                    procVarBoolFromUI2,
+	VarBoolFromUI4:                    procVarBoolFromUI4,
+	VarBoolFromUI8:                    procVarBoolFromUI8,
+	VarBstrCat:                        procVarBstrCat,
+	VarBstrCmp:                        procVarBstrCmp,
+	VarBstrFromBool:                   procVarBstrFromBool,
+	VarBstrFromCy:                     procVarBstrFromCy,
+	VarBstrFromDate:                   procVarBstrFromDate,
+	VarBstrFromDec:                    procVarBstrFromDec,
+	VarBstrFromDisp:                   procVarBstrFromDisp,
+	VarBstrFromI1:                     procVarBstrFromI1,
+	VarBstrFromI2:                     procVarBstrFromI2,
+	VarBstrFromI4:                     procVarBstrFromI4,
+	VarBstrFromI8:                     procVarBstrFromI8,
+	VarBstrFromR4:                     procVarBstrFromR4,
+	VarBstrFromR8:                     procVarBstrFromR8,
+	VarBstrFromUI1:                    procVarBstrFromUI1,
+	VarBstrFromUI2:                    procVarBstrFromUI2,
+	VarBstrFromUI4:                    procVarBstrFromUI4,
+	VarBstrFromUI8:                    procVarBstrFromUI8,
+	VarCat:                            procVarCat,
+	VarCmp:                            procVarCmp,
+	VarCyAbs:                          procVarCyAbs,
+	VarCyAdd:                          procVarCyAdd,
+	VarCyCmp:                          procVarCyCmp,
+	VarCyCmpR8:                        procVarCyCmpR8,
+	VarCyFix:                          procVarCyFix,
+	VarCyFromBool:                     procVarCyFromBool,
+	VarCyFromDate:                     procVarCyFromDate,
+	VarCyFromDec:                      procVarCyFromDec,
+	VarCyFromDisp:                     procVarCyFromDisp,
+	VarCyFromI1:                       procVarCyFromI1,
+	VarCyFromI2:                       procVarCyFromI2,
+	VarCyFromI4:                       procVarCyFromI4,
+	VarCyFromI8:                       procVarCyFromI8,
+	VarCyFromR4:                       procVarCyFromR4,
+	VarCyFromR8:                       procVarCyFromR8,
+	VarCyFromStr:                      procVarCyFromStr,
+	VarCyFromUI1:                      procVarCyFromUI1,
+	VarCyFromUI2:                      procVarCyFromUI2,
+	VarCyFromUI4:                      procVarCyFromUI4,
+	VarCyFromUI8:                      procVarCyFromUI8,
+	VarCyInt:                          procVarCyInt,
+	VarCyMul:                          procVarCyMul,
+	VarCyMulI4:                        procVarCyMulI4,
+	VarCyMulI8:                        procVarCyMulI8,
+	VarCyNeg:                          procVarCyNeg,
+	VarCyRound:                        procVarCyRound,
+	VarCySub:                          procVarCySub,
+	VarDateFromBool:                   procVarDateFromBool,
+	VarDateFromCy:                     procVarDateFromCy,
+	VarDateFromDec:                    procVarDateFromDec,
+	VarDateFromDisp:                   procVarDateFromDisp,
+	VarDateFromI1:                     procVarDateFromI1,
+	VarDateFromI2:                     procVarDateFromI2,
+	VarDateFromI4:                     procVarDateFromI4,
+	VarDateFromI8:                     procVarDateFromI8,
+	VarDateFromR4:                     procVarDateFromR4,
+	VarDateFromR8:                     procVarDateFromR8,
+	VarDateFromStr:                    procVarDateFromStr,
+	VarDateFromUI1:                    procVarDateFromUI1,
+	VarDateFromUI2:                    procVarDateFromUI2,
+	VarDateFromUI4:                    procVarDateFromUI4,
+	VarDateFromUI8:                    procVarDateFromUI8,
+	VarDateFromUdate:                  procVarDateFromUdate,
+	VarDateFromUdateEx:                procVarDateFromUdateEx,
+	VarDecAbs:                         procVarDecAbs,
+	VarDecAdd:                         procVarDecAdd,
+	VarDecCmp:                         procVarDecCmp,
+	VarDecCmpR8:                       procVarDecCmpR8,
+	VarDecDiv:                         procVarDecDiv,
+	VarDecFix:                         procVarDecFix,
+	VarDecFromBool:                    procVarDecFromBool,
+	VarDecFromCy:                      procVarDecFromCy,
+	VarDecFromDate:                    procVarDecFromDate,
+	VarDecFromDisp:                    procVarDecFromDisp,
+	VarDecFromI1:                      procVarDecFromI1,
+	VarDecFromI2:                      procVarDecFromI2,
+	VarDecFromI4:                      procVarDecFromI4,
+	VarDecFromI8:                      procVarDecFromI8,
+	VarDecFromR4:                      procVarDecFromR4,
+	VarDecFromR8:                      procVarDecFromR8,
+	VarDecFromStr:                     procVarDecFromStr,
+	VarDecFromUI1:                     procVarDecFromUI1,
+	VarDecFromUI2:                     procVarDecFromUI2,
+	VarDecFromUI4:                     procVarDecFromUI4,
+	VarDecFromUI8:                     procVarDecFromUI8,
+	VarDecInt:                         procVarDecInt,
+	VarDecMul:                         procVarDecMul,
+	VarDecNeg:                         procVarDecNeg,
+	VarDecRound:                       procVarDecRound,
+	VarDecSub:                         procVarDecSub,
+	VarDiv:                            procVarDiv,
+	VarEqv:                            procVarEqv,
+	VarFix:                            procVarFix,
+	VarFormat:                         procVarFormat,
+	VarFormatCurrency:                 procVarFormatCurrency,
+	VarFormatDateTime:                 procVarFormatDateTime,
+	VarFormatFromTokens:               procVarFormatFromTokens,
+	VarFormatNumber:                   procVarFormatNumber,
+	VarFormatPercent:                  procVarFormatPercent,
+	VarI1FromBool:                     procVarI1FromBool,
+	VarI1FromCy:                       procVarI1FromCy,
+	VarI1FromDate:                     procVarI1FromDate,
+	VarI1FromDec:                      procVarI1FromDec,
+	VarI1FromDisp:                     procVarI1FromDisp,
+	VarI1FromI2:                       procVarI1FromI2,
+	VarI1FromI4:                       procVarI1FromI4,
+	VarI1FromI8:                       procVarI1FromI8,
+	VarI1FromR4:                       procVarI1FromR4,
+	VarI1FromR8:                       procVarI1FromR8,
+	VarI1FromStr:                      procVarI1FromStr,
+	VarI1FromUI1:                      procVarI1FromUI1,
+	VarI1FromUI2:                      procVarI1FromUI2,
+	VarI1FromUI4:                      procVarI1FromUI4,
+	VarI1FromUI8:                      procVarI1FromUI8,
+	VarI2FromBool:                     procVarI2FromBool,
+	VarI2FromCy:                       procVarI2FromCy,
+	VarI2FromDate:                     procVarI2FromDate,
+	VarI2FromDec:                      procVarI2FromDec,
+	VarI2FromDisp:                     procVarI2FromDisp,
+	VarI2FromI1:                       procVarI2FromI1,
+	VarI2FromI4:                       procVarI2FromI4,
+	VarI2FromI8:                       procVarI2FromI8,
+	VarI2FromR4:                       procVarI2FromR4,
+	VarI2FromR8:                       procVarI2FromR8,
+	VarI2FromStr:                      procVarI2FromStr,
+	VarI2FromUI1:                      procVarI2FromUI1,
+	VarI2FromUI2:                      procVarI2FromUI2,
+	VarI2FromUI4:                      procVarI2FromUI4,
+	VarI2FromUI8:                      procVarI2FromUI8,
+	VarI4FromBool:                     procVarI4FromBool,
+	VarI4FromCy:                       procVarI4FromCy,
+	VarI4FromDate:                     procVarI4FromDate,
+	VarI4FromDec:                      procVarI4FromDec,
+	VarI4FromDisp:                     procVarI4FromDisp,
+	VarI4FromI1:                       procVarI4FromI1,
+	VarI4FromI2:                       procVarI4FromI2,
+	VarI4FromI8:                       procVarI4FromI8,
+	VarI4FromR4:                       procVarI4FromR4,
+	VarI4FromR8:                       procVarI4FromR8,
+	VarI4FromStr:                      procVarI4FromStr,
+	VarI4FromUI1:                      procVarI4FromUI1,
+	VarI4FromUI2:                      procVarI4FromUI2,
+	VarI4FromUI4:                      procVarI4FromUI4,
+	VarI4FromUI8:                      procVarI4FromUI8,
+	VarI8FromBool:                     procVarI8FromBool,
+	VarI8FromCy:                       procVarI8FromCy,
+	VarI8FromDate:                     procVarI8FromDate,
+	VarI8FromDec:                      procVarI8FromDec,
+	VarI8FromDisp:                     procVarI8FromDisp,
+	VarI8FromI1:                       procVarI8FromI1,
+	VarI8FromI2:                       procVarI8FromI2,
+	VarI8FromR4:                       procVarI8FromR4,
+	VarI8FromR8:                       procVarI8FromR8,
+	VarI8FromStr:                      procVarI8FromStr,
+	VarI8FromUI1:                      procVarI8FromUI1,
+	VarI8FromUI2:                      procVarI8FromUI2,
+	VarI8FromUI4:                      procVarI8FromUI4,
+	VarI8FromUI8:                      procVarI8FromUI8,
+	VarIdiv:                           procVarIdiv,
+	VarImp:                            procVarImp,
+	VarInt:                            procVarInt,
+	VarMod:                            procVarMod,
+	VarMonthName:                      procVarMonthName,
+	VarMul:                            procVarMul,
+	VarNeg:                            procVarNeg,
+	VarNot:                            procVarNot,
+	VarNumFromParseNum:                procVarNumFromParseNum,
+	VarOr:                             procVarOr,
+	VarParseNumFromStr:                procVarParseNumFromStr,
+	VarPow:                            procVarPow,
+	VarR4CmpR8:                        procVarR4CmpR8,
+	VarR4FromBool:                     procVarR4FromBool,
+	VarR4FromCy:                       procVarR4FromCy,
+	VarR4FromDate:                     procVarR4FromDate,
+	VarR4FromDec:                      procVarR4FromDec,
+	VarR4FromDisp:                     procVarR4FromDisp,
+	VarR4FromI1:                       procVarR4FromI1,
+	VarR4FromI2:                       procVarR4FromI2,
+	VarR4FromI4:                       procVarR4FromI4,
+	VarR4FromI8:                       procVarR4FromI8,
+	VarR4FromR8:                       procVarR4FromR8,
+	VarR4FromStr:                      procVarR4FromStr,
+	VarR4FromUI1:                      procVarR4FromUI1,
+	VarR4FromUI2:                      procVarR4FromUI2,
+	VarR4FromUI4:                      procVarR4FromUI4,
+	VarR4FromUI8:                      procVarR4FromUI8,
+	VarR8FromBool:                     procVarR8FromBool,
+	VarR8FromCy:                       procVarR8FromCy,
+	VarR8FromDate:                     procVarR8FromDate,
+	VarR8FromDec:                      procVarR8FromDec,
+	VarR8FromDisp:                     procVarR8FromDisp,
+	VarR8FromI1:                       procVarR8FromI1,
+	VarR8FromI2:                       procVarR8FromI2,
+	VarR8FromI4:                       procVarR8FromI4,
+	VarR8FromI8:                       procVarR8FromI8,
+	VarR8FromR4:                       procVarR8FromR4,
+	VarR8FromStr:                      procVarR8FromStr,
+	VarR8FromUI1:                      procVarR8FromUI1,
+	VarR8FromUI2:                      procVarR8FromUI2,
+	VarR8FromUI4:                      procVarR8FromUI4,
+	VarR8FromUI8:                      procVarR8FromUI8,
+	VarR8Pow:                          procVarR8Pow,
+	VarR8Round:                        procVarR8Round,
+	VarRound:                          procVarRound,
+	VarSub:                            procVarSub,
+	VarTokenizeFormatString:           procVarTokenizeFormatString,
+	VarUI1FromBool:                    procVarUI1FromBool,
+	VarUI1FromCy:                      procVarUI1FromCy,
+	VarUI1FromDate:                    procVarUI1FromDate,
+	VarUI1FromDec:                     procVarUI1FromDec,
+	VarUI1FromDisp:                    procVarUI1FromDisp,
+	VarUI1FromI1:                      procVarUI1FromI1,
+	VarUI1FromI2:                      procVarUI1FromI2,
+	VarUI1FromI4:                      procVarUI1FromI4,
+	VarUI1FromI8:                      procVarUI1FromI8,
+	VarUI1FromR4:                      procVarUI1FromR4,
+	VarUI1FromR8:                      procVarUI1FromR8,
+	VarUI1FromStr:                     procVarUI1FromStr,
+	VarUI1FromUI2:                     procVarUI1FromUI2,
+	VarUI1FromUI4:                     procVarUI1FromUI4,
+	VarUI1FromUI8:                     procVarUI1FromUI8,
+	VarUI2FromBool:                    procVarUI2FromBool,
+	VarUI2FromCy:                      procVarUI2FromCy,
+	VarUI2FromDate:                    procVarUI2FromDate,
+	VarUI2FromDec:                     procVarUI2FromDec,
+	VarUI2FromDisp:                    procVarUI2FromDisp,
+	VarUI2FromI1:                      procVarUI2FromI1,
+	VarUI2FromI2:                      procVarUI2FromI2,
+	VarUI2FromI4:                      procVarUI2FromI4,
+	VarUI2FromI8:                      procVarUI2FromI8,
+	VarUI2FromR4:                      procVarUI2FromR4,
+	VarUI2FromR8:                      procVarUI2FromR8,
+	VarUI2FromStr:                     procVarUI2FromStr,
+	VarUI2FromUI1:                     procVarUI2FromUI1,
+	VarUI2FromUI4:                     procVarUI2FromUI4,
+	VarUI2FromUI8:                     procVarUI2FromUI8,
+	VarUI4FromBool:                    procVarUI4FromBool,
+	VarUI4FromCy:                      procVarUI4FromCy,
+	VarUI4FromDate:                    procVarUI4FromDate,
+	VarUI4FromDec:                     procVarUI4FromDec,
+	VarUI4FromDisp:                    procVarUI4FromDisp,
+	VarUI4FromI1:                      procVarUI4FromI1,
+	VarUI4FromI2:                      procVarUI4FromI2,
+	VarUI4FromI4:                      procVarUI4FromI4,
+	VarUI4FromI8:                      procVarUI4FromI8,
+	VarUI4FromR4:                      procVarUI4FromR4,
+	VarUI4FromR8:                      procVarUI4FromR8,
+	VarUI4FromStr:                     procVarUI4FromStr,
+	VarUI4FromUI1:                     procVarUI4FromUI1,
+	VarUI4FromUI2:                     procVarUI4FromUI2,
+	VarUI4FromUI8:                     procVarUI4FromUI8,
+	VarUI8FromBool:                    procVarUI8FromBool,
+	VarUI8FromCy:                      procVarUI8FromCy,
+	VarUI8FromDate:                    procVarUI8FromDate,
+	VarUI8FromDec:                     procVarUI8FromDec,
+	VarUI8FromDisp:                    procVarUI8FromDisp,
+	VarUI8FromI1:                      procVarUI8FromI1,
+	VarUI8FromI2:                      procVarUI8FromI2,
+	VarUI8FromI8:                      procVarUI8FromI8,
+	VarUI8FromR4:                      procVarUI8FromR4,
+	VarUI8FromR8:                      procVarUI8FromR8,
+	VarUI8FromStr:                     procVarUI8FromStr,
+	VarUI8FromUI1:                     procVarUI8FromUI1,
+	VarUI8FromUI2:                     procVarUI8FromUI2,
+	VarUI8FromUI4:                     procVarUI8FromUI4,
+	VarUdateFromDate:                  procVarUdateFromDate,
+	VarWeekdayName:                    procVarWeekdayName,
+	VarXor:                            procVarXor,
+	VectorFromBstr:                    procVectorFromBstr,
+}
 
 // BstrFromVector calls OLEAUT32!BstrFromVector.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-bstrfromvector
@@ -905,8 +1860,8 @@ func OleGetClipboardWithEnterpriseInfo(dataObject **systemcom.IDataObject, dataE
 // OleGetIconOfClass calls OLE32!OleGetIconOfClass.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olegeticonofclass
 // Minimum OS: windows5.0.
-func OleGetIconOfClass(rclsid *win32.GUID, lpszLabel string, fUseTypeAsLabel bool) foundation.HGLOBAL {
-	_lpszLabel := win32.UTF16Ptr(lpszLabel)
+func OleGetIconOfClass(rclsid *win32.GUID, lpszLabel *string, fUseTypeAsLabel bool) foundation.HGLOBAL {
+	_lpszLabel := win32.UTF16PtrOrNil(lpszLabel)
 	_fUseTypeAsLabel := win32.Bool32(fUseTypeAsLabel)
 	r1, _, _ := syscall.SyscallN(procOleGetIconOfClass.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(_lpszLabel)), uintptr(_fUseTypeAsLabel))
 	return foundation.HGLOBAL(r1)
@@ -985,6 +1940,24 @@ func OleLoadPicture(lpstream *systemcom.IStream, lSize int32, fRunmode bool, rii
 func OleLoadPictureEx(lpstream *systemcom.IStream, lSize int32, fRunmode bool, riid *win32.GUID, xSizeDesired uint32, ySizeDesired uint32, dwFlags LOAD_PICTURE_FLAGS, lplpvObj **win32.IUnknown) error {
 	_fRunmode := win32.Bool32(fRunmode)
 	r1, _, _ := syscall.SyscallN(procOleLoadPictureEx.Addr(), uintptr(unsafe.Pointer(lpstream)), uintptr(lSize), uintptr(_fRunmode), uintptr(unsafe.Pointer(riid)), uintptr(xSizeDesired), uintptr(ySizeDesired), uintptr(dwFlags), uintptr(unsafe.Pointer(lplpvObj)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specOleLoadPictureFile = &win32.Spec{Args: []win32.Arg{win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OleLoadPictureFile calls OLEAUT32!OleLoadPictureFile.
+// https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-oleloadpicturefile
+func OleLoadPictureFile(varFileName systemvariant.VARIANT, lplpdispPicture **systemcom.IDispatch) error {
+	r1, _, _ := win32.Call(procOleLoadPictureFile.Addr(), specOleLoadPictureFile, nil, uintptr(unsafe.Pointer(&varFileName)), uintptr(unsafe.Pointer(lplpdispPicture))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specOleLoadPictureFileEx = &win32.Spec{Args: []win32.Arg{win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// OleLoadPictureFileEx calls OLEAUT32!OleLoadPictureFileEx.
+// https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-oleloadpicturefileex
+func OleLoadPictureFileEx(varFileName systemvariant.VARIANT, xSizeDesired uint32, ySizeDesired uint32, dwFlags LOAD_PICTURE_FLAGS, lplpdispPicture **systemcom.IDispatch) error {
+	r1, _, _ := win32.Call(procOleLoadPictureFileEx.Addr(), specOleLoadPictureFileEx, nil, uintptr(unsafe.Pointer(&varFileName)), uintptr(xSizeDesired), uintptr(ySizeDesired), uintptr(dwFlags), uintptr(unsafe.Pointer(lplpdispPicture))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1162,8 +2135,8 @@ func OleTranslateColor(clr uint32, hpal graphicsgdi.HPALETTE, lpcolorref *founda
 // OleUIAddVerbMenu calls oledlg!OleUIAddVerbMenuW.
 // https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiaddverbmenuw
 // Minimum OS: windows5.0.
-func OleUIAddVerbMenu(lpOleObj *IOleObject, lpszShortType string, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
-	_lpszShortType := win32.UTF16Ptr(lpszShortType)
+func OleUIAddVerbMenu(lpOleObj *IOleObject, lpszShortType *string, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
+	_lpszShortType := win32.UTF16PtrOrNil(lpszShortType)
 	_bAddConvert := win32.Bool32(bAddConvert)
 	r1, _, _ := syscall.SyscallN(procOleUIAddVerbMenu.Addr(), uintptr(unsafe.Pointer(lpOleObj)), uintptr(unsafe.Pointer(_lpszShortType)), uintptr(hMenu), uintptr(uPos), uintptr(uIDVerbMin), uintptr(uIDVerbMax), uintptr(_bAddConvert), uintptr(idConvert), uintptr(unsafe.Pointer(lphMenu)))
 	return r1 != 0
@@ -1379,18 +2352,18 @@ func RegisterDragDrop(hwnd foundation.HWND, pDropTarget *IDropTarget) error {
 
 // RegisterTypeLib calls OLEAUT32!RegisterTypeLib.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registertypelib
-func RegisterTypeLib(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir string) error {
+func RegisterTypeLib(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir *string) error {
 	_szFullPath := win32.UTF16Ptr(szFullPath)
-	_szHelpDir := win32.UTF16Ptr(szHelpDir)
+	_szHelpDir := win32.UTF16PtrOrNil(szHelpDir)
 	r1, _, _ := syscall.SyscallN(procRegisterTypeLib.Addr(), uintptr(unsafe.Pointer(ptlib)), uintptr(unsafe.Pointer(_szFullPath)), uintptr(unsafe.Pointer(_szHelpDir)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterTypeLibForUser calls OLEAUT32!RegisterTypeLibForUser.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registertypelibforuser
-func RegisterTypeLibForUser(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir string) error {
+func RegisterTypeLibForUser(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir *string) error {
 	_szFullPath := win32.UTF16Ptr(szFullPath)
-	_szHelpDir := win32.UTF16Ptr(szHelpDir)
+	_szHelpDir := win32.UTF16PtrOrNil(szHelpDir)
 	r1, _, _ := syscall.SyscallN(procRegisterTypeLibForUser.Addr(), uintptr(unsafe.Pointer(ptlib)), uintptr(unsafe.Pointer(_szFullPath)), uintptr(unsafe.Pointer(_szHelpDir)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1684,6 +2657,15 @@ func VarBoolFromCy(cyIn systemcom.CY, pboolOut *foundation.VARIANT_BOOL) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarBoolFromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarBoolFromDate calls OLEAUT32!VarBoolFromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromdate
+func VarBoolFromDate(dateIn float64, pboolOut *foundation.VARIANT_BOOL) error {
+	r1, _, _ := win32.Call(procVarBoolFromDate.Addr(), specVarBoolFromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pboolOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarBoolFromDec calls OLEAUT32!VarBoolFromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromdec
 func VarBoolFromDec(pdecIn *foundation.DECIMAL, pboolOut *foundation.VARIANT_BOOL) error {
@@ -1723,6 +2705,24 @@ func VarBoolFromI4(lIn int32, pboolOut *foundation.VARIANT_BOOL) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromi8
 func VarBoolFromI8(i64In int64, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pboolOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarBoolFromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarBoolFromR4 calls OLEAUT32!VarBoolFromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromr4
+func VarBoolFromR4(fltIn float32, pboolOut *foundation.VARIANT_BOOL) error {
+	r1, _, _ := win32.Call(procVarBoolFromR4.Addr(), specVarBoolFromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pboolOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarBoolFromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarBoolFromR8 calls OLEAUT32!VarBoolFromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromr8
+func VarBoolFromR8(dblIn float64, pboolOut *foundation.VARIANT_BOOL) error {
+	r1, _, _ := win32.Call(procVarBoolFromR8.Addr(), specVarBoolFromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pboolOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1790,6 +2790,15 @@ func VarBstrFromCy(cyIn systemcom.CY, lcid uint32, dwFlags uint32, pbstrOut *fou
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarBstrFromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// VarBstrFromDate calls OLEAUT32!VarBstrFromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromdate
+func VarBstrFromDate(dateIn float64, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
+	r1, _, _ := win32.Call(procVarBstrFromDate.Addr(), specVarBstrFromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarBstrFromDec calls OLEAUT32!VarBstrFromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromdec
 func VarBstrFromDec(pdecIn *foundation.DECIMAL, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
@@ -1829,6 +2838,24 @@ func VarBstrFromI4(lIn int32, lcid uint32, dwFlags uint32, pbstrOut *foundation.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromi8
 func VarBstrFromI8(i64In int64, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromI8.Addr(), uintptr(i64In), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarBstrFromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// VarBstrFromR4 calls OLEAUT32!VarBstrFromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromr4
+func VarBstrFromR4(fltIn float32, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
+	r1, _, _ := win32.Call(procVarBstrFromR4.Addr(), specVarBstrFromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarBstrFromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// VarBstrFromR8 calls OLEAUT32!VarBstrFromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromr8
+func VarBstrFromR8(dblIn float64, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
+	r1, _, _ := win32.Call(procVarBstrFromR8.Addr(), specVarBstrFromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1895,6 +2922,15 @@ func VarCyCmp(cyLeft systemcom.CY, cyRight systemcom.CY) VARCMP {
 	return VARCMP(r1)
 }
 
+var specVarCyCmpR8 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// VarCyCmpR8 calls OLEAUT32!VarCyCmpR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcycmpr8
+func VarCyCmpR8(cyLeft systemcom.CY, dblRight float64) VARCMP {
+	r1, _, _ := win32.Call(procVarCyCmpR8.Addr(), specVarCyCmpR8, nil, uintptr(win32.StructArg(cyLeft)), uintptr(math.Float64bits(dblRight))).Tuple()
+	return VARCMP(r1)
+}
+
 // VarCyFix calls OLEAUT32!VarCyFix.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfix
 func VarCyFix(cyIn systemcom.CY, pcyResult *systemcom.CY) error {
@@ -1906,6 +2942,15 @@ func VarCyFix(cyIn systemcom.CY, pcyResult *systemcom.CY) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfrombool
 func VarCyFromBool(boolIn foundation.VARIANT_BOOL, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pcyOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarCyFromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarCyFromDate calls OLEAUT32!VarCyFromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromdate
+func VarCyFromDate(dateIn float64, pcyOut *systemcom.CY) error {
+	r1, _, _ := win32.Call(procVarCyFromDate.Addr(), specVarCyFromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pcyOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1948,6 +2993,24 @@ func VarCyFromI4(lIn int32, pcyOut *systemcom.CY) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromi8
 func VarCyFromI8(i64In int64, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pcyOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarCyFromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarCyFromR4 calls OLEAUT32!VarCyFromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromr4
+func VarCyFromR4(fltIn float32, pcyOut *systemcom.CY) error {
+	r1, _, _ := win32.Call(procVarCyFromR4.Addr(), specVarCyFromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pcyOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarCyFromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarCyFromR8 calls OLEAUT32!VarCyFromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromr8
+func VarCyFromR8(dblIn float64, pcyOut *systemcom.CY) error {
+	r1, _, _ := win32.Call(procVarCyFromR8.Addr(), specVarCyFromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pcyOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2092,6 +3155,24 @@ func VarDateFromI8(i64In int64, pdateOut *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarDateFromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarDateFromR4 calls OLEAUT32!VarDateFromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromr4
+func VarDateFromR4(fltIn float32, pdateOut *float64) error {
+	r1, _, _ := win32.Call(procVarDateFromR4.Addr(), specVarDateFromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pdateOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarDateFromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarDateFromR8 calls OLEAUT32!VarDateFromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromr8
+func VarDateFromR8(dblIn float64, pdateOut *float64) error {
+	r1, _, _ := win32.Call(procVarDateFromR8.Addr(), specVarDateFromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pdateOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarDateFromStr calls OLEAUT32!VarDateFromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromstr
 func VarDateFromStr(strIn string, lcid uint32, dwFlags uint32, pdateOut *float64) error {
@@ -2163,6 +3244,15 @@ func VarDecCmp(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL) VARC
 	return VARCMP(r1)
 }
 
+var specVarDecCmpR8 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// VarDecCmpR8 calls OLEAUT32!VarDecCmpR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardeccmpr8
+func VarDecCmpR8(pdecLeft *foundation.DECIMAL, dblRight float64) VARCMP {
+	r1, _, _ := win32.Call(procVarDecCmpR8.Addr(), specVarDecCmpR8, nil, uintptr(unsafe.Pointer(pdecLeft)), uintptr(math.Float64bits(dblRight))).Tuple()
+	return VARCMP(r1)
+}
+
 // VarDecDiv calls OLEAUT32!VarDecDiv.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecdiv
 func VarDecDiv(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error {
@@ -2188,6 +3278,15 @@ func VarDecFromBool(boolIn foundation.VARIANT_BOOL, pdecOut *foundation.DECIMAL)
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromcy
 func VarDecFromCy(cyIn systemcom.CY, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pdecOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarDecFromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarDecFromDate calls OLEAUT32!VarDecFromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromdate
+func VarDecFromDate(dateIn float64, pdecOut *foundation.DECIMAL) error {
+	r1, _, _ := win32.Call(procVarDecFromDate.Addr(), specVarDecFromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pdecOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2223,6 +3322,24 @@ func VarDecFromI4(lIn int32, pdecOut *foundation.DECIMAL) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromi8
 func VarDecFromI8(i64In int64, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pdecOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarDecFromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarDecFromR4 calls OLEAUT32!VarDecFromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromr4
+func VarDecFromR4(fltIn float32, pdecOut *foundation.DECIMAL) error {
+	r1, _, _ := win32.Call(procVarDecFromR4.Addr(), specVarDecFromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pdecOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarDecFromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarDecFromR8 calls OLEAUT32!VarDecFromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromr8
+func VarDecFromR8(dblIn float64, pdecOut *foundation.DECIMAL) error {
+	r1, _, _ := win32.Call(procVarDecFromR8.Addr(), specVarDecFromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pdecOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2320,8 +3437,8 @@ func VarFix(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) er
 
 // VarFormat calls OLEAUT32!VarFormat.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformat
-func VarFormat(pvarIn *systemvariant.VARIANT, pstrFormat string, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, dwFlags uint32, pbstrOut *foundation.BSTR) error {
-	_pstrFormat := win32.UTF16Ptr(pstrFormat)
+func VarFormat(pvarIn *systemvariant.VARIANT, pstrFormat *string, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, dwFlags uint32, pbstrOut *foundation.BSTR) error {
+	_pstrFormat := win32.UTF16PtrOrNil(pstrFormat)
 	r1, _, _ := syscall.SyscallN(procVarFormat.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(_pstrFormat)), uintptr(iFirstDay), uintptr(iFirstWeek), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2342,8 +3459,8 @@ func VarFormatDateTime(pvarIn *systemvariant.VARIANT, iNamedFormat VARFORMAT_NAM
 
 // VarFormatFromTokens calls OLEAUT32!VarFormatFromTokens.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformatfromtokens
-func VarFormatFromTokens(pvarIn *systemvariant.VARIANT, pstrFormat string, pbTokCur *byte, dwFlags uint32, pbstrOut *foundation.BSTR, lcid uint32) error {
-	_pstrFormat := win32.UTF16Ptr(pstrFormat)
+func VarFormatFromTokens(pvarIn *systemvariant.VARIANT, pstrFormat *string, pbTokCur *byte, dwFlags uint32, pbstrOut *foundation.BSTR, lcid uint32) error {
+	_pstrFormat := win32.UTF16PtrOrNil(pstrFormat)
 	r1, _, _ := syscall.SyscallN(procVarFormatFromTokens.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(_pstrFormat)), uintptr(unsafe.Pointer(pbTokCur)), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)), uintptr(lcid))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2373,6 +3490,15 @@ func VarI1FromBool(boolIn foundation.VARIANT_BOOL, pcOut foundation.PSTR) error 
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromcy
 func VarI1FromCy(cyIn systemcom.CY, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pcOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarI1FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarI1FromDate calls OLEAUT32!VarI1FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromdate
+func VarI1FromDate(dateIn float64, pcOut foundation.PSTR) error {
+	r1, _, _ := win32.Call(procVarI1FromDate.Addr(), specVarI1FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pcOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2408,6 +3534,24 @@ func VarI1FromI4(lIn int32, pcOut foundation.PSTR) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromi8
 func VarI1FromI8(i64In int64, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pcOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarI1FromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarI1FromR4 calls OLEAUT32!VarI1FromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromr4
+func VarI1FromR4(fltIn float32, pcOut foundation.PSTR) error {
+	r1, _, _ := win32.Call(procVarI1FromR4.Addr(), specVarI1FromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pcOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarI1FromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarI1FromR8 calls OLEAUT32!VarI1FromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromr8
+func VarI1FromR8(dblIn float64, pcOut foundation.PSTR) error {
+	r1, _, _ := win32.Call(procVarI1FromR8.Addr(), specVarI1FromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pcOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2461,6 +3605,15 @@ func VarI2FromCy(cyIn systemcom.CY, psOut *int16) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarI2FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarI2FromDate calls OLEAUT32!VarI2FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromdate
+func VarI2FromDate(dateIn float64, psOut *int16) error {
+	r1, _, _ := win32.Call(procVarI2FromDate.Addr(), specVarI2FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(psOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarI2FromDec calls OLEAUT32!VarI2FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromdec
 func VarI2FromDec(pdecIn *foundation.DECIMAL, psOut *int16) error {
@@ -2493,6 +3646,24 @@ func VarI2FromI4(lIn int32, psOut *int16) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromi8
 func VarI2FromI8(i64In int64, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(psOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarI2FromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarI2FromR4 calls OLEAUT32!VarI2FromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromr4
+func VarI2FromR4(fltIn float32, psOut *int16) error {
+	r1, _, _ := win32.Call(procVarI2FromR4.Addr(), specVarI2FromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(psOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarI2FromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarI2FromR8 calls OLEAUT32!VarI2FromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromr8
+func VarI2FromR8(dblIn float64, psOut *int16) error {
+	r1, _, _ := win32.Call(procVarI2FromR8.Addr(), specVarI2FromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(psOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2546,6 +3717,15 @@ func VarI4FromCy(cyIn systemcom.CY, plOut *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarI4FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarI4FromDate calls OLEAUT32!VarI4FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromdate
+func VarI4FromDate(dateIn float64, plOut *int32) error {
+	r1, _, _ := win32.Call(procVarI4FromDate.Addr(), specVarI4FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(plOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarI4FromDec calls OLEAUT32!VarI4FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromdec
 func VarI4FromDec(pdecIn *foundation.DECIMAL, plOut *int32) error {
@@ -2578,6 +3758,24 @@ func VarI4FromI2(sIn int16, plOut *int32) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromi8
 func VarI4FromI8(i64In int64, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(plOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarI4FromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarI4FromR4 calls OLEAUT32!VarI4FromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromr4
+func VarI4FromR4(fltIn float32, plOut *int32) error {
+	r1, _, _ := win32.Call(procVarI4FromR4.Addr(), specVarI4FromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(plOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarI4FromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarI4FromR8 calls OLEAUT32!VarI4FromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromr8
+func VarI4FromR8(dblIn float64, plOut *int32) error {
+	r1, _, _ := win32.Call(procVarI4FromR8.Addr(), specVarI4FromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(plOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2631,6 +3829,15 @@ func VarI8FromCy(cyIn systemcom.CY, pi64Out *int64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarI8FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarI8FromDate calls OLEAUT32!VarI8FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromdate
+func VarI8FromDate(dateIn float64, pi64Out *int64) error {
+	r1, _, _ := win32.Call(procVarI8FromDate.Addr(), specVarI8FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pi64Out))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarI8FromDec calls OLEAUT32!VarI8FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromdec
 func VarI8FromDec(pdecIn *foundation.DECIMAL, pi64Out *int64) error {
@@ -2656,6 +3863,24 @@ func VarI8FromI1(cIn foundation.CHAR, pi64Out *int64) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromi2
 func VarI8FromI2(sIn int16, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(pi64Out)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarI8FromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarI8FromR4 calls OLEAUT32!VarI8FromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromr4
+func VarI8FromR4(fltIn float32, pi64Out *int64) error {
+	r1, _, _ := win32.Call(procVarI8FromR4.Addr(), specVarI8FromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pi64Out))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarI8FromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarI8FromR8 calls OLEAUT32!VarI8FromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromr8
+func VarI8FromR8(dblIn float64, pi64Out *int64) error {
+	r1, _, _ := win32.Call(procVarI8FromR8.Addr(), specVarI8FromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pi64Out))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2780,6 +4005,15 @@ func VarPow(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, p
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarR4CmpR8 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float64}}
+
+// VarR4CmpR8 calls OLEAUT32!VarR4CmpR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4cmpr8
+func VarR4CmpR8(fltLeft float32, dblRight float64) VARCMP {
+	r1, _, _ := win32.Call(procVarR4CmpR8.Addr(), specVarR4CmpR8, nil, uintptr(math.Float32bits(fltLeft)), uintptr(math.Float64bits(dblRight))).Tuple()
+	return VARCMP(r1)
+}
+
 // VarR4FromBool calls OLEAUT32!VarR4FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4frombool
 func VarR4FromBool(boolIn foundation.VARIANT_BOOL, pfltOut *float32) error {
@@ -2791,6 +4025,15 @@ func VarR4FromBool(boolIn foundation.VARIANT_BOOL, pfltOut *float32) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromcy
 func VarR4FromCy(cyIn systemcom.CY, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pfltOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarR4FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarR4FromDate calls OLEAUT32!VarR4FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromdate
+func VarR4FromDate(dateIn float64, pfltOut *float32) error {
+	r1, _, _ := win32.Call(procVarR4FromDate.Addr(), specVarR4FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pfltOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2833,6 +4076,15 @@ func VarR4FromI4(lIn int32, pfltOut *float32) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromi8
 func VarR4FromI8(i64In int64, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pfltOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarR4FromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarR4FromR8 calls OLEAUT32!VarR4FromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromr8
+func VarR4FromR8(dblIn float64, pfltOut *float32) error {
+	r1, _, _ := win32.Call(procVarR4FromR8.Addr(), specVarR4FromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pfltOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2886,6 +4138,15 @@ func VarR8FromCy(cyIn systemcom.CY, pdblOut *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarR8FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarR8FromDate calls OLEAUT32!VarR8FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromdate
+func VarR8FromDate(dateIn float64, pdblOut *float64) error {
+	r1, _, _ := win32.Call(procVarR8FromDate.Addr(), specVarR8FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pdblOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarR8FromDec calls OLEAUT32!VarR8FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromdec
 func VarR8FromDec(pdecIn *foundation.DECIMAL, pdblOut *float64) error {
@@ -2928,6 +4189,15 @@ func VarR8FromI8(i64In int64, pdblOut *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarR8FromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarR8FromR4 calls OLEAUT32!VarR8FromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromr4
+func VarR8FromR4(fltIn float32, pdblOut *float64) error {
+	r1, _, _ := win32.Call(procVarR8FromR4.Addr(), specVarR8FromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pdblOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarR8FromStr calls OLEAUT32!VarR8FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromstr
 func VarR8FromStr(strIn string, lcid uint32, dwFlags uint32, pdblOut *float64) error {
@@ -2964,6 +4234,24 @@ func VarR8FromUI8(ui64In uint64, pdblOut *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarR8Pow = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Word}}
+
+// VarR8Pow calls OLEAUT32!VarR8Pow.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8pow
+func VarR8Pow(dblLeft float64, dblRight float64, pdblResult *float64) error {
+	r1, _, _ := win32.Call(procVarR8Pow.Addr(), specVarR8Pow, nil, uintptr(math.Float64bits(dblLeft)), uintptr(math.Float64bits(dblRight)), uintptr(unsafe.Pointer(pdblResult))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarR8Round = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word, win32.Word}}
+
+// VarR8Round calls OLEAUT32!VarR8Round.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8round
+func VarR8Round(dblIn float64, cDecimals int32, pdblResult *float64) error {
+	r1, _, _ := win32.Call(procVarR8Round.Addr(), specVarR8Round, nil, uintptr(math.Float64bits(dblIn)), uintptr(cDecimals), uintptr(unsafe.Pointer(pdblResult))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarRound calls OLEAUT32!VarRound.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varround
 func VarRound(pvarIn *systemvariant.VARIANT, cDecimals int32, pvarResult *systemvariant.VARIANT) error {
@@ -2980,8 +4268,8 @@ func VarSub(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, p
 
 // VarTokenizeFormatString calls OLEAUT32!VarTokenizeFormatString.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vartokenizeformatstring
-func VarTokenizeFormatString(pstrFormat string, rgbTok []byte, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, lcid uint32, pcbActual *int32) error {
-	_pstrFormat := win32.UTF16Ptr(pstrFormat)
+func VarTokenizeFormatString(pstrFormat *string, rgbTok []byte, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, lcid uint32, pcbActual *int32) error {
+	_pstrFormat := win32.UTF16PtrOrNil(pstrFormat)
 	var _rgbTok *byte
 	if len(rgbTok) > 0 {
 		_rgbTok = &rgbTok[0]
@@ -3001,6 +4289,15 @@ func VarUI1FromBool(boolIn foundation.VARIANT_BOOL, pbOut *byte) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromcy
 func VarUI1FromCy(cyIn systemcom.CY, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromCy.Addr(), uintptr(win32.StructArg(cyIn)), uintptr(unsafe.Pointer(pbOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarUI1FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarUI1FromDate calls OLEAUT32!VarUI1FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromdate
+func VarUI1FromDate(dateIn float64, pbOut *byte) error {
+	r1, _, _ := win32.Call(procVarUI1FromDate.Addr(), specVarUI1FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pbOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3043,6 +4340,24 @@ func VarUI1FromI4(lIn int32, pbOut *byte) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromi8
 func VarUI1FromI8(i64In int64, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pbOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarUI1FromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarUI1FromR4 calls OLEAUT32!VarUI1FromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromr4
+func VarUI1FromR4(fltIn float32, pbOut *byte) error {
+	r1, _, _ := win32.Call(procVarUI1FromR4.Addr(), specVarUI1FromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pbOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarUI1FromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarUI1FromR8 calls OLEAUT32!VarUI1FromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromr8
+func VarUI1FromR8(dblIn float64, pbOut *byte) error {
+	r1, _, _ := win32.Call(procVarUI1FromR8.Addr(), specVarUI1FromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pbOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3089,6 +4404,15 @@ func VarUI2FromCy(cyIn systemcom.CY, puiOut *uint16) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarUI2FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarUI2FromDate calls OLEAUT32!VarUI2FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromdate
+func VarUI2FromDate(dateIn float64, puiOut *uint16) error {
+	r1, _, _ := win32.Call(procVarUI2FromDate.Addr(), specVarUI2FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(puiOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarUI2FromDec calls OLEAUT32!VarUI2FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromdec
 func VarUI2FromDec(pdecIn *foundation.DECIMAL, puiOut *uint16) error {
@@ -3128,6 +4452,24 @@ func VarUI2FromI4(lIn int32, puiOut *uint16) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromi8
 func VarUI2FromI8(i64In int64, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(puiOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarUI2FromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarUI2FromR4 calls OLEAUT32!VarUI2FromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromr4
+func VarUI2FromR4(fltIn float32, puiOut *uint16) error {
+	r1, _, _ := win32.Call(procVarUI2FromR4.Addr(), specVarUI2FromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(puiOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarUI2FromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarUI2FromR8 calls OLEAUT32!VarUI2FromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromr8
+func VarUI2FromR8(dblIn float64, puiOut *uint16) error {
+	r1, _, _ := win32.Call(procVarUI2FromR8.Addr(), specVarUI2FromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(puiOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3174,6 +4516,15 @@ func VarUI4FromCy(cyIn systemcom.CY, pulOut *uint32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarUI4FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarUI4FromDate calls OLEAUT32!VarUI4FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromdate
+func VarUI4FromDate(dateIn float64, pulOut *uint32) error {
+	r1, _, _ := win32.Call(procVarUI4FromDate.Addr(), specVarUI4FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pulOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarUI4FromDec calls OLEAUT32!VarUI4FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromdec
 func VarUI4FromDec(pdecIn *foundation.DECIMAL, pulOut *uint32) error {
@@ -3213,6 +4564,24 @@ func VarUI4FromI4(lIn int32, pulOut *uint32) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromi8
 func VarUI4FromI8(i64In int64, plOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(plOut)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarUI4FromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarUI4FromR4 calls OLEAUT32!VarUI4FromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromr4
+func VarUI4FromR4(fltIn float32, pulOut *uint32) error {
+	r1, _, _ := win32.Call(procVarUI4FromR4.Addr(), specVarUI4FromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pulOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarUI4FromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarUI4FromR8 calls OLEAUT32!VarUI4FromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromr8
+func VarUI4FromR8(dblIn float64, pulOut *uint32) error {
+	r1, _, _ := win32.Call(procVarUI4FromR8.Addr(), specVarUI4FromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pulOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3259,6 +4628,15 @@ func VarUI8FromCy(cyIn systemcom.CY, pi64Out *uint64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarUI8FromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarUI8FromDate calls OLEAUT32!VarUI8FromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromdate
+func VarUI8FromDate(dateIn float64, pi64Out *uint64) error {
+	r1, _, _ := win32.Call(procVarUI8FromDate.Addr(), specVarUI8FromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(unsafe.Pointer(pi64Out))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarUI8FromDec calls OLEAUT32!VarUI8FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromdec
 func VarUI8FromDec(pdecIn *foundation.DECIMAL, pi64Out *uint64) error {
@@ -3294,6 +4672,24 @@ func VarUI8FromI8(ui64In int64, pi64Out *uint64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specVarUI8FromR4 = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// VarUI8FromR4 calls OLEAUT32!VarUI8FromR4.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromr4
+func VarUI8FromR4(fltIn float32, pi64Out *uint64) error {
+	r1, _, _ := win32.Call(procVarUI8FromR4.Addr(), specVarUI8FromR4, nil, uintptr(math.Float32bits(fltIn)), uintptr(unsafe.Pointer(pi64Out))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarUI8FromR8 = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VarUI8FromR8 calls OLEAUT32!VarUI8FromR8.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromr8
+func VarUI8FromR8(dblIn float64, pi64Out *uint64) error {
+	r1, _, _ := win32.Call(procVarUI8FromR8.Addr(), specVarUI8FromR8, nil, uintptr(math.Float64bits(dblIn)), uintptr(unsafe.Pointer(pi64Out))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VarUI8FromStr calls OLEAUT32!VarUI8FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromstr
 func VarUI8FromStr(strIn string, lcid uint32, dwFlags uint32, pi64Out *uint64) error {
@@ -3320,6 +4716,15 @@ func VarUI8FromUI2(uiIn uint16, pi64Out *uint64) error {
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromui4
 func VarUI8FromUI4(ulIn uint32, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pi64Out)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVarUdateFromDate = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word, win32.Word}}
+
+// VarUdateFromDate calls OLEAUT32!VarUdateFromDate.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varudatefromdate
+func VarUdateFromDate(dateIn float64, dwFlags uint32, pudateOut *UDATE) error {
+	r1, _, _ := win32.Call(procVarUdateFromDate.Addr(), specVarUdateFromDate, nil, uintptr(math.Float64bits(dateIn)), uintptr(dwFlags), uintptr(unsafe.Pointer(pudateOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

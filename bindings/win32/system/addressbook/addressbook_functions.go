@@ -32,6 +32,11 @@ var (
 	procFPropExists               = modMAPI32.NewProc("FPropExists")
 	procFreePadrlist              = modMAPI32.NewProc("FreePadrlist")
 	procFreeProws                 = modMAPI32.NewProc("FreeProws")
+	procFtAddFt                   = modMAPI32.NewProc("FtAddFt")
+	procFtMulDw                   = modMAPI32.NewProc("FtMulDw")
+	procFtMulDwDw                 = modMAPI32.NewProc("FtMulDwDw")
+	procFtNegFt                   = modMAPI32.NewProc("FtNegFt")
+	procFtSubFt                   = modMAPI32.NewProc("FtSubFt")
 	procFtgRegisterIdleRoutine    = modMAPI32.NewProc("FtgRegisterIdleRoutine")
 	procHrAddColumns              = modMAPI32.NewProc("HrAddColumns")
 	procHrAddColumnsEx            = modMAPI32.NewProc("HrAddColumnsEx")
@@ -73,6 +78,128 @@ var (
 	procWrapStoreEntryID          = modMAPI32.NewProc("WrapStoreEntryID")
 	procCreateTable               = modrtm.NewProc("CreateTable")
 )
+
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BuildDisplayTable         *win32.Proc
+	ChangeIdleRoutine         *win32.Proc
+	CreateIProp               *win32.Proc
+	CreateTable               *win32.Proc
+	DeinitMapiUtil            *win32.Proc
+	DeregisterIdleRoutine     *win32.Proc
+	EnableIdleRoutine         *win32.Proc
+	FEqualNames               *win32.Proc
+	FPropCompareProp          *win32.Proc
+	FPropContainsProp         *win32.Proc
+	FPropExists               *win32.Proc
+	FreePadrlist              *win32.Proc
+	FreeProws                 *win32.Proc
+	FtAddFt                   *win32.Proc
+	FtMulDw                   *win32.Proc
+	FtMulDwDw                 *win32.Proc
+	FtNegFt                   *win32.Proc
+	FtSubFt                   *win32.Proc
+	FtgRegisterIdleRoutine    *win32.Proc
+	HrAddColumns              *win32.Proc
+	HrAddColumnsEx            *win32.Proc
+	HrAllocAdviseSink         *win32.Proc
+	HrDispatchNotifications   *win32.Proc
+	HrGetOneProp              *win32.Proc
+	HrIStorageFromStream      *win32.Proc
+	HrQueryAllRows            *win32.Proc
+	HrSetOneProp              *win32.Proc
+	HrThisThreadAdviseSink    *win32.Proc
+	LPropCompareProp          *win32.Proc
+	LpValFindProp             *win32.Proc
+	MAPIDeinitIdle            *win32.Proc
+	MAPIGetDefaultMalloc      *win32.Proc
+	MAPIInitIdle              *win32.Proc
+	OpenStreamOnFile          *win32.Proc
+	PpropFindProp             *win32.Proc
+	PropCopyMore              *win32.Proc
+	RTFSync                   *win32.Proc
+	ScCopyNotifications       *win32.Proc
+	ScCopyProps               *win32.Proc
+	ScCountNotifications      *win32.Proc
+	ScCountProps              *win32.Proc
+	ScCreateConversationIndex *win32.Proc
+	ScDupPropset              *win32.Proc
+	ScInitMapiUtil            *win32.Proc
+	ScLocalPathFromUNC        *win32.Proc
+	ScRelocNotifications      *win32.Proc
+	ScRelocProps              *win32.Proc
+	ScUNCFromLocalPath        *win32.Proc
+	SzFindCh                  *win32.Proc
+	SzFindLastCh              *win32.Proc
+	SzFindSz                  *win32.Proc
+	UFromSz                   *win32.Proc
+	UlAddRef                  *win32.Proc
+	UlPropSize                *win32.Proc
+	UlRelease                 *win32.Proc
+	WrapCompressedRTFStream   *win32.Proc
+	WrapStoreEntryID          *win32.Proc
+}{
+	BuildDisplayTable:         procBuildDisplayTable,
+	ChangeIdleRoutine:         procChangeIdleRoutine,
+	CreateIProp:               procCreateIProp,
+	CreateTable:               procCreateTable,
+	DeinitMapiUtil:            procDeinitMapiUtil,
+	DeregisterIdleRoutine:     procDeregisterIdleRoutine,
+	EnableIdleRoutine:         procEnableIdleRoutine,
+	FEqualNames:               procFEqualNames,
+	FPropCompareProp:          procFPropCompareProp,
+	FPropContainsProp:         procFPropContainsProp,
+	FPropExists:               procFPropExists,
+	FreePadrlist:              procFreePadrlist,
+	FreeProws:                 procFreeProws,
+	FtAddFt:                   procFtAddFt,
+	FtMulDw:                   procFtMulDw,
+	FtMulDwDw:                 procFtMulDwDw,
+	FtNegFt:                   procFtNegFt,
+	FtSubFt:                   procFtSubFt,
+	FtgRegisterIdleRoutine:    procFtgRegisterIdleRoutine,
+	HrAddColumns:              procHrAddColumns,
+	HrAddColumnsEx:            procHrAddColumnsEx,
+	HrAllocAdviseSink:         procHrAllocAdviseSink,
+	HrDispatchNotifications:   procHrDispatchNotifications,
+	HrGetOneProp:              procHrGetOneProp,
+	HrIStorageFromStream:      procHrIStorageFromStream,
+	HrQueryAllRows:            procHrQueryAllRows,
+	HrSetOneProp:              procHrSetOneProp,
+	HrThisThreadAdviseSink:    procHrThisThreadAdviseSink,
+	LPropCompareProp:          procLPropCompareProp,
+	LpValFindProp:             procLpValFindProp,
+	MAPIDeinitIdle:            procMAPIDeinitIdle,
+	MAPIGetDefaultMalloc:      procMAPIGetDefaultMalloc,
+	MAPIInitIdle:              procMAPIInitIdle,
+	OpenStreamOnFile:          procOpenStreamOnFile,
+	PpropFindProp:             procPpropFindProp,
+	PropCopyMore:              procPropCopyMore,
+	RTFSync:                   procRTFSync,
+	ScCopyNotifications:       procScCopyNotifications,
+	ScCopyProps:               procScCopyProps,
+	ScCountNotifications:      procScCountNotifications,
+	ScCountProps:              procScCountProps,
+	ScCreateConversationIndex: procScCreateConversationIndex,
+	ScDupPropset:              procScDupPropset,
+	ScInitMapiUtil:            procScInitMapiUtil,
+	ScLocalPathFromUNC:        procScLocalPathFromUNC,
+	ScRelocNotifications:      procScRelocNotifications,
+	ScRelocProps:              procScRelocProps,
+	ScUNCFromLocalPath:        procScUNCFromLocalPath,
+	SzFindCh:                  procSzFindCh,
+	SzFindLastCh:              procSzFindLastCh,
+	SzFindSz:                  procSzFindSz,
+	UFromSz:                   procUFromSz,
+	UlAddRef:                  procUlAddRef,
+	UlPropSize:                procUlPropSize,
+	UlRelease:                 procUlRelease,
+	WrapCompressedRTFStream:   procWrapCompressedRTFStream,
+	WrapStoreEntryID:          procWrapStoreEntryID,
+}
 
 // BuildDisplayTable calls MAPI32!BuildDisplayTable.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/builddisplaytable
@@ -158,6 +285,41 @@ func FreePadrlist(lpAdrlist *ADRLIST) {
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/freeprows
 func FreeProws(lpRows *SRowSet) {
 	syscall.SyscallN(procFreeProws.Addr(), uintptr(unsafe.Pointer(lpRows)))
+}
+
+// FtAddFt calls MAPI32!FtAddFt.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftaddft
+func FtAddFt(ftAddend1 foundation.FILETIME, ftAddend2 foundation.FILETIME) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtAddFt.Addr(), uintptr(win32.StructArg(ftAddend1)), uintptr(win32.StructArg(ftAddend2)))
+	return win32.StructRet[foundation.FILETIME](r1)
+}
+
+// FtMulDw calls MAPI32!FtMulDw.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftmuldw
+func FtMulDw(ftMultiplier uint32, ftMultiplicand foundation.FILETIME) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtMulDw.Addr(), uintptr(ftMultiplier), uintptr(win32.StructArg(ftMultiplicand)))
+	return win32.StructRet[foundation.FILETIME](r1)
+}
+
+// FtMulDwDw calls MAPI32!FtMulDwDw.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftmuldwdw
+func FtMulDwDw(ftMultiplicand uint32, ftMultiplier uint32) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtMulDwDw.Addr(), uintptr(ftMultiplicand), uintptr(ftMultiplier))
+	return win32.StructRet[foundation.FILETIME](r1)
+}
+
+// FtNegFt calls MAPI32!FtNegFt.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftnegft
+func FtNegFt(ft foundation.FILETIME) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtNegFt.Addr(), uintptr(win32.StructArg(ft)))
+	return win32.StructRet[foundation.FILETIME](r1)
+}
+
+// FtSubFt calls MAPI32!FtSubFt.
+// https://learn.microsoft.com/office/client-developer/outlook/mapi/ftsubft
+func FtSubFt(ftMinuend foundation.FILETIME, ftSubtrahend foundation.FILETIME) foundation.FILETIME {
+	r1, _, _ := syscall.SyscallN(procFtSubFt.Addr(), uintptr(win32.StructArg(ftMinuend)), uintptr(win32.StructArg(ftSubtrahend)))
+	return win32.StructRet[foundation.FILETIME](r1)
 }
 
 // FtgRegisterIdleRoutine calls MAPI32!FtgRegisterIdleRoutine.

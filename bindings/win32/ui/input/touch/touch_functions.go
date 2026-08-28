@@ -29,6 +29,34 @@ var (
 	procUnregisterTouchWindow  = modUSER32.NewProc("UnregisterTouchWindow")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CloseGestureInfoHandle *win32.Proc
+	CloseTouchInputHandle  *win32.Proc
+	GetGestureConfig       *win32.Proc
+	GetGestureExtraArgs    *win32.Proc
+	GetGestureInfo         *win32.Proc
+	GetTouchInputInfo      *win32.Proc
+	IsTouchWindow          *win32.Proc
+	RegisterTouchWindow    *win32.Proc
+	SetGestureConfig       *win32.Proc
+	UnregisterTouchWindow  *win32.Proc
+}{
+	CloseGestureInfoHandle: procCloseGestureInfoHandle,
+	CloseTouchInputHandle:  procCloseTouchInputHandle,
+	GetGestureConfig:       procGetGestureConfig,
+	GetGestureExtraArgs:    procGetGestureExtraArgs,
+	GetGestureInfo:         procGetGestureInfo,
+	GetTouchInputInfo:      procGetTouchInputInfo,
+	IsTouchWindow:          procIsTouchWindow,
+	RegisterTouchWindow:    procRegisterTouchWindow,
+	SetGestureConfig:       procSetGestureConfig,
+	UnregisterTouchWindow:  procUnregisterTouchWindow,
+}
+
 // CloseGestureInfoHandle calls USER32!CloseGestureInfoHandle.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-closegestureinfohandle
 // Minimum OS: windows6.1.

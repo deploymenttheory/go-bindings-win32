@@ -309,9 +309,15 @@ DO-NOT-EDIT header are never touched.
   wrappers trip vet's unsafe.Pointer heuristic by design), unit + acceptance
   tests, then the regeneration gate: ingest → validate → bindings (with
   ratchet) → abitest → `git diff --exit-code` over `bindings/` + `acceptance/`.
-- `winmd-update.yml` — weekly + manual: `fetch-metadata` checks NuGet; on a
-  new version it re-ingests, regenerates, rewrites the baseline, and opens a
-  PR whose body is the `generate diff` output old→new.
+- `winmd-update.yml` — weekly + manual: a `check` job asks NuGet for a new
+  version; if there is one, an `emit` matrix (windows-latest amd64 +
+  windows-11-arm arm64) each fetches that pinned version, re-ingests,
+  validates, regenerates bindings + baseline + `docs/COVERAGE.md` + the ABI
+  tests, builds, vets and runs the live suites on its own architecture, and
+  uploads its emission; a `pull-request` job diffs the two emissions (the
+  cross-host determinism gate — the generator must be host-independent),
+  applies the amd64 one and opens a PR whose body is the `generate diff`
+  output old→new.
 
 ## Important constraints
 

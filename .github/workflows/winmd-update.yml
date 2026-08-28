@@ -1,8 +1,11 @@
 name: winmd update
 
 # Watches NuGet for new Microsoft.Windows.SDK.Win32Metadata releases. When
-# one appears: download it, re-ingest, regenerate everything, and open a PR
-# whose body carries the semantic API diff between the old and new metadata.
+# one appears, an amd64 and an arm64 runner each download it, re-ingest,
+# regenerate everything (bindings, diagnostics baseline, coverage report, ABI
+# tests) and run the live test suites on their own architecture. The two
+# emissions must be byte-identical — the generator is host-independent — and
+# only then is a PR opened from them, with the semantic API diff as its body.
 
 on:
   schedule:
@@ -14,8 +17,48 @@ permissions:
   pull-requests: write
 
 jobs:
-  update:
-    runs-on: windows-latest
+  check:
+    name: Check NuGet for a new winmd
+    runs-on: ubuntu-latest
+    outputs:
+      updated: ${{ steps.fetch.outputs.updated }}
+      version: ${{ steps.fetch.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Fetch the latest winmd from NuGet
+        id: fetch
+        shell: bash
+        run: |
+          go run ./cmd/generate fetch-metadata | tee fetch.log
+          if git diff --quiet -- metadata/winmd; then
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            echo "winmd is current"
+          else
+            version=$(python3 -c "import json;d=json.load(open('metadata/winmd/PROVENANCE.json'));print((d[0] if isinstance(d,list) else d)['version'])")
+            echo "updated=true" >> "$GITHUB_OUTPUT"
+            echo "version=$version" >> "$GITHUB_OUTPUT"
+            echo "new winmd: $version"
+          fi
+
+  emit:
+    name: Emit and test (${{ matrix.arch }})
+    needs: check
+    if: needs.check.outputs.updated == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: windows-latest
+          - arch: arm64
+            runner: windows-11-arm
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v7
 
@@ -27,59 +70,105 @@ jobs:
       - name: Ingest the currently committed winmd (diff baseline)
         run: go run ./cmd/generate ingest --out old-metadata
 
-      - name: Fetch the latest winmd from NuGet
-        id: fetch
-        shell: bash
-        run: |
-          go run ./cmd/generate fetch-metadata | tee fetch.log
-          if git diff --quiet -- metadata/winmd; then
-            echo "updated=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "updated=true" >> "$GITHUB_OUTPUT"
-            echo "version=$(python -c "import json;d=json.load(open('metadata/winmd/PROVENANCE.json'));print((d[0] if isinstance(d,list) else d)['version'])")" >> "$GITHUB_OUTPUT"
-          fi
+      # Pinned to the version the check job saw, so both architectures
+      # regenerate from exactly the same metadata.
+      - name: Fetch winmd ${{ needs.check.outputs.version }}
+        run: go run ./cmd/generate fetch-metadata --version ${{ needs.check.outputs.version }}
 
       - name: Re-ingest the new winmd
-        if: steps.fetch.outputs.updated == 'true'
         run: go run ./cmd/generate ingest
 
       - name: Validate the new metadata
-        if: steps.fetch.outputs.updated == 'true'
         run: go run ./cmd/generate validate
 
+      # One command regenerates the bindings tree, rewrites the diagnostics
+      # baseline (reviewed via the PR) and the coverage report.
+      - name: Regenerate bindings, baseline and coverage report
+        run: go run ./cmd/generate bindings --diagnostics metadata/diagnostics-baseline.json --coverage docs/COVERAGE.md
+
+      - name: Regenerate the ABI layout tests
+        run: go run ./cmd/generate abitest
+
       - name: Semantic API diff for the PR body
-        if: steps.fetch.outputs.updated == 'true'
         shell: bash
         run: |
           {
-            echo "Automated update to Microsoft.Windows.SDK.Win32Metadata ${{ steps.fetch.outputs.version }}."
+            echo "Automated update to Microsoft.Windows.SDK.Win32Metadata ${{ needs.check.outputs.version }}."
+            echo
+            echo "Regenerated and tested on windows/amd64 and windows/arm64; both emissions were byte-identical."
             echo
             go run ./cmd/generate diff --old old-metadata --new metadata/win32 | head -c 60000
           } > pr-body.md
 
-      # One command regenerates the bindings tree and rewrites the diagnostics
-      # baseline (reviewed via this PR).
-      - name: Regenerate bindings and baseline
-        if: steps.fetch.outputs.updated == 'true'
-        run: go run ./cmd/generate bindings --diagnostics metadata/diagnostics-baseline.json --coverage docs/COVERAGE.md
-
-      - name: Regenerate the ABI acceptance test
-        if: steps.fetch.outputs.updated == 'true'
-        run: go run ./cmd/generate abitest
-
-      - name: Build and test the regenerated tree
-        if: steps.fetch.outputs.updated == 'true'
+      - name: Build and test the regenerated tree on ${{ matrix.arch }}
         run: |
           go build ./...
-          go test ./internal/... ./acceptance/...
+          go vet -unsafeptr=false -stdmethods=false ./bindings/win32/...
+          go test ./internal/... ./bindings/runtime/... ./acceptance/...
+
+      - name: Upload the ${{ matrix.arch }} emission
+        uses: actions/upload-artifact@v4
+        with:
+          name: regenerated-${{ matrix.arch }}
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            metadata/winmd/
+            metadata/diagnostics-baseline.json
+            docs/COVERAGE.md
+            bindings/
+            acceptance/abi/
+            pr-body.md
+
+  pull-request:
+    name: Open the update PR
+    needs: [check, emit]
+    if: needs.check.outputs.updated == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: regenerated-amd64
+          path: regenerated/amd64
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: regenerated-arm64
+          path: regenerated/arm64
+
+      # The generator must not depend on the host it runs on: the amd64 and
+      # arm64 emissions have to match byte for byte before either is used.
+      - name: Cross-architecture determinism gate
+        shell: bash
+        run: |
+          if ! diff -r regenerated/amd64 regenerated/arm64; then
+            echo "::error::the amd64 and arm64 runners emitted different trees; the generator is not host-independent"
+            exit 1
+          fi
+          echo "amd64 and arm64 emissions are identical"
+
+      - name: Apply the emission to the checkout
+        shell: bash
+        run: |
+          # Wholesale replacement so files the new metadata no longer produces
+          # are removed, matching the generator's self-cleaning behaviour.
+          rm -rf bindings/win32 acceptance/abi/abi_*_test.go
+          cp -R regenerated/amd64/bindings/. bindings/
+          cp -R regenerated/amd64/acceptance/abi/. acceptance/abi/
+          cp -R regenerated/amd64/metadata/winmd/. metadata/winmd/
+          cp regenerated/amd64/metadata/diagnostics-baseline.json metadata/diagnostics-baseline.json
+          cp regenerated/amd64/docs/COVERAGE.md docs/COVERAGE.md
+          cp regenerated/amd64/pr-body.md pr-body.md
+          rm -rf regenerated
 
       - name: Open pull request
-        if: steps.fetch.outputs.updated == 'true'
         uses: peter-evans/create-pull-request@v8
         with:
           branch: chore/winmd-update
-          commit-message: "chore(metadata): update winmd to ${{ steps.fetch.outputs.version }}"
-          title: "chore(metadata): update winmd to ${{ steps.fetch.outputs.version }}"
+          commit-message: "chore(metadata): update winmd to ${{ needs.check.outputs.version }}"
+          title: "chore(metadata): update winmd to ${{ needs.check.outputs.version }}"
           body-path: pr-body.md
           add-paths: |
             metadata/winmd/

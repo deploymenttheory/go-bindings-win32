@@ -151,7 +151,9 @@ each call, then the template dispatches via `syscall.SyscallN`:
 
 - input `PWSTR`/`PCWSTR` → Go `string` (UTF-16 at the boundary:
   `_name := win32.UTF16Ptr(name)`)
-- input `BOOL` → Go `bool` (`win32.Bool32`); plain `BOOL` return → `bool`
+- input `BOOL` → Go `bool` (`win32.Bool32`); plain `BOOL` return → `bool`;
+  a native C `bool`/`BOOLEAN` param → `bool` (`win32.Bool8`, one byte in the
+  word) and return → `bool` (`byte(r1) != 0`: only AL is defined)
 - `HRESULT` return → `error` (failures surface as the typed `win32.HRESULT`,
   which `errors.Is`-matches `syscall.Errno` for `FACILITY_WIN32` codes);
   `BOOL` + SetLastError → `error`

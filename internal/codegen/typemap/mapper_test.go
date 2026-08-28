@@ -140,7 +140,7 @@ func TestArgClassOf(t *testing.T) {
 		{"int scalar", Resolved{GoType: "int32", Kind: KindScalar}, ArgScalar},
 		{"float32 unsupported", Resolved{GoType: "float32", Kind: KindScalar}, ArgUnsupported},
 		{"float64 unsupported", Resolved{GoType: "float64", Kind: KindScalar}, ArgUnsupported},
-		{"bool unsupported", Resolved{GoType: "bool", Kind: KindScalar}, ArgUnsupported},
+		{"bool byte", Resolved{GoType: "bool", Kind: KindScalar}, ArgBool8},
 		{"enum", Resolved{GoType: "MODE", Kind: KindEnum}, ArgScalar},
 		{"handle typedef", Resolved{GoType: "HANDLE", Kind: KindHandleTypedef}, ArgScalar},
 		{"scalar typedef", Resolved{GoType: "BOOL", Kind: KindScalarTypedef}, ArgScalar},

@@ -311,6 +311,7 @@ type ArgClass uint8
 const (
 	ArgScalar      ArgClass = iota // uintptr(x)
 	ArgPointer                     // uintptr(unsafe.Pointer(x))
+	ArgBool8                       // uintptr(win32.Bool8(x)): a C bool byte
 	ArgUnsupported                 // cannot marshal (by-value struct, float…)
 )
 
@@ -324,7 +325,7 @@ func ArgClassOf(resolved Resolved, goType string) ArgClass {
 			return ArgUnsupported
 		}
 		if goType == "bool" {
-			return ArgUnsupported // no direct uintptr conversion
+			return ArgBool8
 		}
 		return ArgScalar
 	case KindEnum, KindHandleTypedef, KindScalarTypedef, KindFuncPtr, KindUnsupported:

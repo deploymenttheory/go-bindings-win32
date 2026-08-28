@@ -46,6 +46,15 @@ func Bool32(v bool) int32 {
 	return 0
 }
 
+// Bool8 converts a Go bool to a C bool / BOOLEAN byte (1/0) for by-value
+// parameters declared with the one-byte C++ bool type.
+func Bool8(v bool) uint8 {
+	if v {
+		return 1
+	}
+	return 0
+}
+
 // BoolErr converts a Win32 BOOL result (no GetLastError) into an error: nil
 // when non-zero (success), a generic failure error when zero.
 func BoolErr(b int32) error {

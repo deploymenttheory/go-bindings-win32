@@ -74,6 +74,12 @@ func (self *IGameInput) StopCallback(callbackToken uint64) {
 	syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(callbackToken))
 }
 
+// UnregisterCallback dispatches through IGameInput's vtable slot 13.
+func (self *IGameInput) UnregisterCallback(callbackToken uint64, timeoutInMicroseconds uint64) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(callbackToken), uintptr(timeoutInMicroseconds))
+	return byte(r1) != 0
+}
+
 // CreateDispatcher dispatches through IGameInput's vtable slot 14.
 func (self *IGameInput) CreateDispatcher(dispatcher **IGameInputDispatcher) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dispatcher)))
@@ -153,6 +159,12 @@ func (self *IGameInputDevice) CreateForceFeedbackEffect(motorIndex uint32, param
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IsForceFeedbackMotorPoweredOn dispatches through IGameInputDevice's vtable slot 7.
+func (self *IGameInputDevice) IsForceFeedbackMotorPoweredOn(motorIndex uint32) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(motorIndex))
+	return byte(r1) != 0
+}
+
 // SetHapticMotorState dispatches through IGameInputDevice's vtable slot 9.
 func (self *IGameInputDevice) SetHapticMotorState(motorIndex uint32, params *GameInputHapticFeedbackParams) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(motorIndex), uintptr(unsafe.Pointer(params)))
@@ -223,6 +235,12 @@ func (self *IGameInputDevice) ExecuteRawDeviceIoControl(controlCode uint32, inpu
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// AcquireExclusiveRawDeviceAccess dispatches through IGameInputDevice's vtable slot 20.
+func (self *IGameInputDevice) AcquireExclusiveRawDeviceAccess(timeoutInMicroseconds uint64) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(timeoutInMicroseconds))
+	return byte(r1) != 0
+}
+
 // ReleaseExclusiveRawDeviceAccess dispatches through IGameInputDevice's vtable slot 21.
 func (self *IGameInputDevice) ReleaseExclusiveRawDeviceAccess() {
 	syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
@@ -235,6 +253,12 @@ type IGameInputDispatcher struct {
 
 // IID_IGameInputDispatcher is the interface identifier for IGameInputDispatcher.
 var IID_IGameInputDispatcher = win32.GUID{Data1: 0x415eed2e, Data2: 0x98cb, Data3: 0x42c2, Data4: [8]byte{0x8f, 0x28, 0xb9, 0x46, 0x01, 0x07, 0x4e, 0x31}}
+
+// Dispatch dispatches through IGameInputDispatcher's vtable slot 3.
+func (self *IGameInputDispatcher) Dispatch(quotaInMicroseconds uint64) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(quotaInMicroseconds))
+	return byte(r1) != 0
+}
 
 // OpenWaitHandle dispatches through IGameInputDispatcher's vtable slot 4.
 func (self *IGameInputDispatcher) OpenWaitHandle(waitHandle *foundation.HANDLE) error {
@@ -264,6 +288,12 @@ func (self *IGameInputForceFeedbackEffect) GetMotorIndex() uint32 {
 // GetParams dispatches through IGameInputForceFeedbackEffect's vtable slot 7.
 func (self *IGameInputForceFeedbackEffect) GetParams(params *GameInputForceFeedbackParams) {
 	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(params)))
+}
+
+// SetParams dispatches through IGameInputForceFeedbackEffect's vtable slot 8.
+func (self *IGameInputForceFeedbackEffect) SetParams(params *GameInputForceFeedbackParams) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(params)))
+	return byte(r1) != 0
 }
 
 // GetState dispatches through IGameInputForceFeedbackEffect's vtable slot 9.
@@ -308,6 +338,36 @@ func (self *IGameInputRawDeviceReport) GetRawData(bufferSize uintptr, buffer uns
 	return uintptr(r1)
 }
 
+// SetRawData dispatches through IGameInputRawDeviceReport's vtable slot 7.
+func (self *IGameInputRawDeviceReport) SetRawData(bufferSize uintptr, buffer unsafe.Pointer) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(bufferSize), uintptr(unsafe.Pointer(buffer)))
+	return byte(r1) != 0
+}
+
+// GetItemValue dispatches through IGameInputRawDeviceReport's vtable slot 8.
+func (self *IGameInputRawDeviceReport) GetItemValue(itemIndex uint32, value *int64) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(itemIndex), uintptr(unsafe.Pointer(value)))
+	return byte(r1) != 0
+}
+
+// SetItemValue dispatches through IGameInputRawDeviceReport's vtable slot 9.
+func (self *IGameInputRawDeviceReport) SetItemValue(itemIndex uint32, value int64) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(itemIndex), uintptr(value))
+	return byte(r1) != 0
+}
+
+// ResetItemValue dispatches through IGameInputRawDeviceReport's vtable slot 10.
+func (self *IGameInputRawDeviceReport) ResetItemValue(itemIndex uint32) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(itemIndex))
+	return byte(r1) != 0
+}
+
+// ResetAllItems dispatches through IGameInputRawDeviceReport's vtable slot 11.
+func (self *IGameInputRawDeviceReport) ResetAllItems() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
+}
+
 // IID: 2156947a-e1fa-4de0-a30b-d812931dbd8d
 type IGameInputReading struct {
 	systemcom.IUnknown
@@ -337,6 +397,12 @@ func (self *IGameInputReading) GetTimestamp() uint64 {
 // GetDevice dispatches through IGameInputReading's vtable slot 6.
 func (self *IGameInputReading) GetDevice(device **IGameInputDevice) {
 	syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)))
+}
+
+// GetRawReport dispatches through IGameInputReading's vtable slot 7.
+func (self *IGameInputReading) GetRawReport(report **IGameInputRawDeviceReport) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(report)))
+	return byte(r1) != 0
 }
 
 // GetControllerAxisCount dispatches through IGameInputReading's vtable slot 8.
@@ -403,6 +469,12 @@ func (self *IGameInputReading) GetKeyState(stateArray []GameInputKeyState) uint3
 	return uint32(r1)
 }
 
+// GetMouseState dispatches through IGameInputReading's vtable slot 16.
+func (self *IGameInputReading) GetMouseState(state *GameInputMouseState) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(state)))
+	return byte(r1) != 0
+}
+
 // GetTouchCount dispatches through IGameInputReading's vtable slot 17.
 func (self *IGameInputReading) GetTouchCount() uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
@@ -417,4 +489,40 @@ func (self *IGameInputReading) GetTouchState(stateArray []GameInputTouchState) u
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(len(stateArray)), uintptr(unsafe.Pointer(_stateArray)))
 	return uint32(r1)
+}
+
+// GetMotionState dispatches through IGameInputReading's vtable slot 19.
+func (self *IGameInputReading) GetMotionState(state *GameInputMotionState) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(state)))
+	return byte(r1) != 0
+}
+
+// GetArcadeStickState dispatches through IGameInputReading's vtable slot 20.
+func (self *IGameInputReading) GetArcadeStickState(state *GameInputArcadeStickState) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(state)))
+	return byte(r1) != 0
+}
+
+// GetFlightStickState dispatches through IGameInputReading's vtable slot 21.
+func (self *IGameInputReading) GetFlightStickState(state *GameInputFlightStickState) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(state)))
+	return byte(r1) != 0
+}
+
+// GetGamepadState dispatches through IGameInputReading's vtable slot 22.
+func (self *IGameInputReading) GetGamepadState(state *GameInputGamepadState) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(state)))
+	return byte(r1) != 0
+}
+
+// GetRacingWheelState dispatches through IGameInputReading's vtable slot 23.
+func (self *IGameInputReading) GetRacingWheelState(state *GameInputRacingWheelState) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(state)))
+	return byte(r1) != 0
+}
+
+// GetUiNavigationState dispatches through IGameInputReading's vtable slot 24.
+func (self *IGameInputReading) GetUiNavigationState(state *GameInputUiNavigationState) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(state)))
+	return byte(r1) != 0
 }

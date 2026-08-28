@@ -344,6 +344,9 @@ func (g *Generator) shapeParam(name string, param *win32meta.Param, resolved typ
 		return name + " " + resolved.GoType, nil, "uintptr(" + name + ")", false, true
 	case typemap.ArgPointer:
 		return name + " " + resolved.GoType, nil, "uintptr(unsafe.Pointer(" + name + "))", true, true
+	case typemap.ArgBool8:
+		// A C bool / BOOLEAN travels as one byte in the argument word.
+		return name + " bool", nil, "uintptr(win32.Bool8(" + name + "))", false, true
 	}
 	// A by-value struct or union small enough to travel in a register.
 	if word, ok := registerStructWord(g.byValueStructSize(param, resolved), name); ok {
@@ -400,7 +403,7 @@ func (g *Generator) buildReturnShape(model *view.FunctionModel, meta *win32meta.
 			function.Name, resolved.GoType)
 		return false
 	case typemap.KindScalar:
-		if resolved.GoType == "float32" || resolved.GoType == "float64" || resolved.GoType == "bool" {
+		if resolved.GoType == "float32" || resolved.GoType == "float64" {
 			g.diag("function %s: %s return not marshalable, function skipped", function.Name, resolved.GoType)
 			return false
 		}
@@ -489,6 +492,13 @@ func invalidValueChecks(values []string, goType, name string) []string {
 // returnConversion renders the r1 → Go value conversion.
 func returnConversion(resolved typemap.Resolved) string {
 	switch resolved.Kind {
+	case typemap.KindScalar:
+		if resolved.GoType == "bool" {
+			// A C bool comes back in AL; the x64 convention leaves the upper
+			// bits of RAX undefined, so only the low byte is meaningful.
+			return "byte(r1) != 0"
+		}
+		return resolved.GoType + "(r1)"
 	case typemap.KindPointer, typemap.KindComPtr:
 		if resolved.GoType == "unsafe.Pointer" {
 			return "unsafe.Pointer(r1)"

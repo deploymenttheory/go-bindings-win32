@@ -234,7 +234,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 			interfaceName, method.Name, returnResolved.GoType)
 		return view.ComMethodModel{}, false
 	default:
-		if returnResolved.GoType == "float32" || returnResolved.GoType == "float64" || returnResolved.GoType == "bool" {
+		if returnResolved.GoType == "float32" || returnResolved.GoType == "float64" {
 			g.diag("interface %s: method %s %s return not marshalable, method skipped",
 				interfaceName, method.Name, returnResolved.GoType)
 			return view.ComMethodModel{}, false

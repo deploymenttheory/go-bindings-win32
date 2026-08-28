@@ -64,6 +64,12 @@ func (self *ITest) SetOptional(name string) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+// IsOk dispatches through ITest's vtable slot 7.
+func (self *ITest) IsOk() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
+}
+
 // GetObject dispatches through ITest's vtable slot 10.
 func (self *ITest) GetObject(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))

@@ -537,6 +537,12 @@ func (self *IDataModelScriptDebugBreakpoint) GetId() uint64 {
 	return uint64(r1)
 }
 
+// IsEnabled dispatches through IDataModelScriptDebugBreakpoint's vtable slot 4.
+func (self *IDataModelScriptDebugBreakpoint) IsEnabled() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
+}
+
 // Enable dispatches through IDataModelScriptDebugBreakpoint's vtable slot 5.
 func (self *IDataModelScriptDebugBreakpoint) Enable() {
 	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
@@ -14784,6 +14790,12 @@ type IDebugHostContextExtensibility struct {
 // IID_IDebugHostContextExtensibility is the interface identifier for IDebugHostContextExtensibility.
 var IID_IDebugHostContextExtensibility = win32.GUID{Data1: 0x35ae8e40, Data2: 0xf234, Data3: 0x4ef1, Data4: [8]byte{0xb8, 0xea, 0x0d, 0xfb, 0xc5, 0x8a, 0x20, 0x43}}
 
+// HasExtensionData dispatches through IDebugHostContextExtensibility's vtable slot 3.
+func (self *IDebugHostContextExtensibility) HasExtensionData(blobId uint32) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(blobId))
+	return byte(r1) != 0
+}
+
 // ReadExtensionData dispatches through IDebugHostContextExtensibility's vtable slot 4.
 func (self *IDebugHostContextExtensibility) ReadExtensionData(blobId uint32, bufferSize uint32, buffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(blobId), uintptr(bufferSize), uintptr(unsafe.Pointer(buffer)))
@@ -15154,6 +15166,12 @@ type IDebugHostFunctionLocalDetails2 struct {
 // IID_IDebugHostFunctionLocalDetails2 is the interface identifier for IDebugHostFunctionLocalDetails2.
 var IID_IDebugHostFunctionLocalDetails2 = win32.GUID{Data1: 0x199a57b0, Data2: 0x1967, Data3: 0x4363, Data4: [8]byte{0xb2, 0x5e, 0x90, 0xc7, 0xe8, 0xa0, 0x7f, 0x22}}
 
+// IsInlineScope dispatches through IDebugHostFunctionLocalDetails2's vtable slot 8.
+func (self *IDebugHostFunctionLocalDetails2) IsInlineScope() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
+}
+
 // GetInlinedFunction dispatches through IDebugHostFunctionLocalDetails2's vtable slot 9.
 func (self *IDebugHostFunctionLocalDetails2) GetInlinedFunction(inlineFunction **IDebugHostSymbol) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inlineFunction)))
@@ -15282,6 +15300,12 @@ var IID_IDebugHostMemory4 = win32.GUID{Data1: 0xfe6b3658, Data2: 0xda4b, Data3: 
 func (self *IDebugHostMemory4) GetPhysicalAddressLocation(physAddr uint64, pPhysicalAddressLocation *Location) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(physAddr), uintptr(unsafe.Pointer(pPhysicalAddressLocation)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+// IsPhysicalAddressLocation dispatches through IDebugHostMemory4's vtable slot 11.
+func (self *IDebugHostMemory4) IsPhysicalAddressLocation(pLocation *Location) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocation)))
+	return byte(r1) != 0
 }
 
 // IID: df033400-4912-46e9-ba62-6ef2eb4d87d4

@@ -121,6 +121,18 @@ func (self *IMLOperatorKernelCreationContext) GetOutputCount() uint32 {
 	return uint32(r1)
 }
 
+// IsInputValid dispatches through IMLOperatorKernelCreationContext's vtable slot 9.
+func (self *IMLOperatorKernelCreationContext) IsInputValid(inputIndex uint32) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(inputIndex))
+	return byte(r1) != 0
+}
+
+// IsOutputValid dispatches through IMLOperatorKernelCreationContext's vtable slot 10.
+func (self *IMLOperatorKernelCreationContext) IsOutputValid(outputIndex uint32) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(outputIndex))
+	return byte(r1) != 0
+}
+
 // GetInputEdgeDescription dispatches through IMLOperatorKernelCreationContext's vtable slot 11.
 func (self *IMLOperatorKernelCreationContext) GetInputEdgeDescription(inputIndex uint32, edgeDescription *MLOperatorEdgeDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(unsafe.Pointer(edgeDescription)))
@@ -131,6 +143,12 @@ func (self *IMLOperatorKernelCreationContext) GetInputEdgeDescription(inputIndex
 func (self *IMLOperatorKernelCreationContext) GetOutputEdgeDescription(outputIndex uint32, edgeDescription *MLOperatorEdgeDescription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(unsafe.Pointer(edgeDescription)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+// HasTensorShapeDescription dispatches through IMLOperatorKernelCreationContext's vtable slot 13.
+func (self *IMLOperatorKernelCreationContext) HasTensorShapeDescription() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
 }
 
 // GetTensorShapeDescription dispatches through IMLOperatorKernelCreationContext's vtable slot 14.
@@ -200,6 +218,18 @@ func (self *IMLOperatorShapeInferenceContext) GetInputCount() uint32 {
 func (self *IMLOperatorShapeInferenceContext) GetOutputCount() uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
 	return uint32(r1)
+}
+
+// IsInputValid dispatches through IMLOperatorShapeInferenceContext's vtable slot 9.
+func (self *IMLOperatorShapeInferenceContext) IsInputValid(inputIndex uint32) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(inputIndex))
+	return byte(r1) != 0
+}
+
+// IsOutputValid dispatches through IMLOperatorShapeInferenceContext's vtable slot 10.
+func (self *IMLOperatorShapeInferenceContext) IsOutputValid(outputIndex uint32) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(outputIndex))
+	return byte(r1) != 0
 }
 
 // GetInputEdgeDescription dispatches through IMLOperatorShapeInferenceContext's vtable slot 11.
@@ -274,6 +304,18 @@ func (self *IMLOperatorTensor) GetTensorDataType() MLOperatorTensorDataType {
 	return MLOperatorTensorDataType(r1)
 }
 
+// IsCpuData dispatches through IMLOperatorTensor's vtable slot 6.
+func (self *IMLOperatorTensor) IsCpuData() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
+}
+
+// IsDataInterface dispatches through IMLOperatorTensor's vtable slot 7.
+func (self *IMLOperatorTensor) IsDataInterface() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
+}
+
 // GetData dispatches through IMLOperatorTensor's vtable slot 8.
 func (self *IMLOperatorTensor) GetData() unsafe.Pointer {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
@@ -307,6 +349,12 @@ func (self *IMLOperatorTensorShapeDescription) GetInputTensorShape(inputIndex ui
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(len(dimensions)), uintptr(unsafe.Pointer(_dimensions)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+// HasOutputShapeDescription dispatches through IMLOperatorTensorShapeDescription's vtable slot 5.
+func (self *IMLOperatorTensorShapeDescription) HasOutputShapeDescription() bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
+	return byte(r1) != 0
 }
 
 // GetOutputTensorDimensionCount dispatches through IMLOperatorTensorShapeDescription's vtable slot 6.
@@ -343,6 +391,18 @@ func (self *IMLOperatorTypeInferenceContext) GetInputCount() uint32 {
 func (self *IMLOperatorTypeInferenceContext) GetOutputCount() uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
 	return uint32(r1)
+}
+
+// IsInputValid dispatches through IMLOperatorTypeInferenceContext's vtable slot 9.
+func (self *IMLOperatorTypeInferenceContext) IsInputValid(inputIndex uint32) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(inputIndex))
+	return byte(r1) != 0
+}
+
+// IsOutputValid dispatches through IMLOperatorTypeInferenceContext's vtable slot 10.
+func (self *IMLOperatorTypeInferenceContext) IsOutputValid(outputIndex uint32) bool {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(outputIndex))
+	return byte(r1) != 0
 }
 
 // GetInputEdgeDescription dispatches through IMLOperatorTypeInferenceContext's vtable slot 11.

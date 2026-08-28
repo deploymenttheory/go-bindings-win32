@@ -327,6 +327,7 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 			function("FloatReturn", testDLL, native("Double")),
 			function("StructReturn", testDLL, smallRef),
 			function("BoolReturnNative", testDLL, native("Boolean")),
+			function("BoolNativeParam", testDLL, native("Void"), param("flag", native("Boolean"), in)),
 			function("FreeTest", testDLL, native("Void"), param("h", apiRef(shapes, "HLOCALTEST", "Typedef"), in)),
 			function("ShadowParam", testDLL, pointerTo(smallRef), param("SMALL", native("UInt32"), in)),
 			withArch(function("Arm64OnlyFn", testDLL, native("Void")), "arm64"),

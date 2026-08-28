@@ -43,6 +43,7 @@ var (
 	procWinBioEnumEnrollments              = modwinbio.NewProc("WinBioEnumEnrollments")
 	procWinBioEnumServiceProviders         = modwinbio.NewProc("WinBioEnumServiceProviders")
 	procWinBioFree                         = modwinbio.NewProc("WinBioFree")
+	procWinBioGetCredentialState           = modwinbio.NewProc("WinBioGetCredentialState")
 	procWinBioGetDomainLogonSetting        = modwinbio.NewProc("WinBioGetDomainLogonSetting")
 	procWinBioGetEnabledSetting            = modwinbio.NewProc("WinBioGetEnabledSetting")
 	procWinBioGetEnrolledFactors           = modwinbio.NewProc("WinBioGetEnrolledFactors")
@@ -63,6 +64,7 @@ var (
 	procWinBioReleaseFocus                 = modwinbio.NewProc("WinBioReleaseFocus")
 	procWinBioRemoveAllCredentials         = modwinbio.NewProc("WinBioRemoveAllCredentials")
 	procWinBioRemoveAllDomainCredentials   = modwinbio.NewProc("WinBioRemoveAllDomainCredentials")
+	procWinBioRemoveCredential             = modwinbio.NewProc("WinBioRemoveCredential")
 	procWinBioSetCredential                = modwinbio.NewProc("WinBioSetCredential")
 	procWinBioSetProperty                  = modwinbio.NewProc("WinBioSetProperty")
 	procWinBioUnlockUnit                   = modwinbio.NewProc("WinBioUnlockUnit")
@@ -103,6 +105,7 @@ var Procs = struct {
 	WinBioEnumEnrollments              *win32.Proc
 	WinBioEnumServiceProviders         *win32.Proc
 	WinBioFree                         *win32.Proc
+	WinBioGetCredentialState           *win32.Proc
 	WinBioGetDomainLogonSetting        *win32.Proc
 	WinBioGetEnabledSetting            *win32.Proc
 	WinBioGetEnrolledFactors           *win32.Proc
@@ -123,6 +126,7 @@ var Procs = struct {
 	WinBioReleaseFocus                 *win32.Proc
 	WinBioRemoveAllCredentials         *win32.Proc
 	WinBioRemoveAllDomainCredentials   *win32.Proc
+	WinBioRemoveCredential             *win32.Proc
 	WinBioSetCredential                *win32.Proc
 	WinBioSetProperty                  *win32.Proc
 	WinBioUnlockUnit                   *win32.Proc
@@ -157,6 +161,7 @@ var Procs = struct {
 	WinBioEnumEnrollments:              procWinBioEnumEnrollments,
 	WinBioEnumServiceProviders:         procWinBioEnumServiceProviders,
 	WinBioFree:                         procWinBioFree,
+	WinBioGetCredentialState:           procWinBioGetCredentialState,
 	WinBioGetDomainLogonSetting:        procWinBioGetDomainLogonSetting,
 	WinBioGetEnabledSetting:            procWinBioGetEnabledSetting,
 	WinBioGetEnrolledFactors:           procWinBioGetEnrolledFactors,
@@ -177,6 +182,7 @@ var Procs = struct {
 	WinBioReleaseFocus:                 procWinBioReleaseFocus,
 	WinBioRemoveAllCredentials:         procWinBioRemoveAllCredentials,
 	WinBioRemoveAllDomainCredentials:   procWinBioRemoveAllDomainCredentials,
+	WinBioRemoveCredential:             procWinBioRemoveCredential,
 	WinBioSetCredential:                procWinBioSetCredential,
 	WinBioSetProperty:                  procWinBioSetProperty,
 	WinBioUnlockUnit:                   procWinBioUnlockUnit,
@@ -416,6 +422,16 @@ func WinBioFree(Address unsafe.Pointer) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specWinBioGetCredentialState = &win32.Spec{Args: []win32.Arg{win32.Struct(76, 4, 0, false), win32.Word, win32.Word}}
+
+// WinBioGetCredentialState calls winbio!WinBioGetCredentialState.
+// https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiogetcredentialstate
+// Minimum OS: windows6.1.
+func WinBioGetCredentialState(Identity WINBIO_IDENTITY, Type WINBIO_CREDENTIAL_TYPE, CredentialState *WINBIO_CREDENTIAL_STATE) error {
+	r1, _, _ := win32.Call(procWinBioGetCredentialState.Addr(), specWinBioGetCredentialState, nil, uintptr(unsafe.Pointer(&Identity)), uintptr(Type), uintptr(unsafe.Pointer(CredentialState))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // WinBioGetDomainLogonSetting calls winbio!WinBioGetDomainLogonSetting.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiogetdomainlogonsetting
 // Minimum OS: windows6.1.
@@ -568,6 +584,16 @@ func WinBioRemoveAllCredentials() error {
 // Minimum OS: windows6.1.
 func WinBioRemoveAllDomainCredentials() error {
 	r1, _, _ := syscall.SyscallN(procWinBioRemoveAllDomainCredentials.Addr())
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specWinBioRemoveCredential = &win32.Spec{Args: []win32.Arg{win32.Struct(76, 4, 0, false), win32.Word}}
+
+// WinBioRemoveCredential calls winbio!WinBioRemoveCredential.
+// https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioremovecredential
+// Minimum OS: windows6.1.
+func WinBioRemoveCredential(Identity WINBIO_IDENTITY, Type WINBIO_CREDENTIAL_TYPE) error {
+	r1, _, _ := win32.Call(procWinBioRemoveCredential.Addr(), specWinBioRemoveCredential, nil, uintptr(unsafe.Pointer(&Identity)), uintptr(Type)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

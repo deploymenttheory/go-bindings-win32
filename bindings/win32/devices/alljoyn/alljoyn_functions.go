@@ -5,6 +5,7 @@
 package alljoyn
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -183,6 +184,8 @@ var (
 	procAlljoyn_busattachment_registerbusobject                                     = modMSAJApi.NewProc("alljoyn_busattachment_registerbusobject")
 	procAlljoyn_busattachment_registerbusobject_secure                              = modMSAJApi.NewProc("alljoyn_busattachment_registerbusobject_secure")
 	procAlljoyn_busattachment_registerkeystorelistener                              = modMSAJApi.NewProc("alljoyn_busattachment_registerkeystorelistener")
+	procAlljoyn_busattachment_registersignalhandler                                 = modMSAJApi.NewProc("alljoyn_busattachment_registersignalhandler")
+	procAlljoyn_busattachment_registersignalhandlerwithrule                         = modMSAJApi.NewProc("alljoyn_busattachment_registersignalhandlerwithrule")
 	procAlljoyn_busattachment_releasename                                           = modMSAJApi.NewProc("alljoyn_busattachment_releasename")
 	procAlljoyn_busattachment_reloadkeystore                                        = modMSAJApi.NewProc("alljoyn_busattachment_reloadkeystore")
 	procAlljoyn_busattachment_removematch                                           = modMSAJApi.NewProc("alljoyn_busattachment_removematch")
@@ -204,12 +207,15 @@ var (
 	procAlljoyn_busattachment_unregisterapplicationstatelistener                    = modMSAJApi.NewProc("alljoyn_busattachment_unregisterapplicationstatelistener")
 	procAlljoyn_busattachment_unregisterbuslistener                                 = modMSAJApi.NewProc("alljoyn_busattachment_unregisterbuslistener")
 	procAlljoyn_busattachment_unregisterbusobject                                   = modMSAJApi.NewProc("alljoyn_busattachment_unregisterbusobject")
+	procAlljoyn_busattachment_unregistersignalhandler                               = modMSAJApi.NewProc("alljoyn_busattachment_unregistersignalhandler")
+	procAlljoyn_busattachment_unregistersignalhandlerwithrule                       = modMSAJApi.NewProc("alljoyn_busattachment_unregistersignalhandlerwithrule")
 	procAlljoyn_busattachment_whoimplements_interface                               = modMSAJApi.NewProc("alljoyn_busattachment_whoimplements_interface")
 	procAlljoyn_busattachment_whoimplements_interfaces                              = modMSAJApi.NewProc("alljoyn_busattachment_whoimplements_interfaces")
 	procAlljoyn_buslistener_create                                                  = modMSAJApi.NewProc("alljoyn_buslistener_create")
 	procAlljoyn_buslistener_destroy                                                 = modMSAJApi.NewProc("alljoyn_buslistener_destroy")
 	procAlljoyn_busobject_addinterface                                              = modMSAJApi.NewProc("alljoyn_busobject_addinterface")
 	procAlljoyn_busobject_addinterface_announced                                    = modMSAJApi.NewProc("alljoyn_busobject_addinterface_announced")
+	procAlljoyn_busobject_addmethodhandler                                          = modMSAJApi.NewProc("alljoyn_busobject_addmethodhandler")
 	procAlljoyn_busobject_addmethodhandlers                                         = modMSAJApi.NewProc("alljoyn_busobject_addmethodhandlers")
 	procAlljoyn_busobject_cancelsessionlessmessage                                  = modMSAJApi.NewProc("alljoyn_busobject_cancelsessionlessmessage")
 	procAlljoyn_busobject_cancelsessionlessmessage_serial                           = modMSAJApi.NewProc("alljoyn_busobject_cancelsessionlessmessage_serial")
@@ -226,6 +232,7 @@ var (
 	procAlljoyn_busobject_methodreply_err                                           = modMSAJApi.NewProc("alljoyn_busobject_methodreply_err")
 	procAlljoyn_busobject_methodreply_status                                        = modMSAJApi.NewProc("alljoyn_busobject_methodreply_status")
 	procAlljoyn_busobject_setannounceflag                                           = modMSAJApi.NewProc("alljoyn_busobject_setannounceflag")
+	procAlljoyn_busobject_signal                                                    = modMSAJApi.NewProc("alljoyn_busobject_signal")
 	procAlljoyn_credentials_clear                                                   = modMSAJApi.NewProc("alljoyn_credentials_clear")
 	procAlljoyn_credentials_create                                                  = modMSAJApi.NewProc("alljoyn_credentials_create")
 	procAlljoyn_credentials_destroy                                                 = modMSAJApi.NewProc("alljoyn_credentials_destroy")
@@ -283,6 +290,17 @@ var (
 	procAlljoyn_interfacedescription_hasproperty                                    = modMSAJApi.NewProc("alljoyn_interfacedescription_hasproperty")
 	procAlljoyn_interfacedescription_introspect                                     = modMSAJApi.NewProc("alljoyn_interfacedescription_introspect")
 	procAlljoyn_interfacedescription_issecure                                       = modMSAJApi.NewProc("alljoyn_interfacedescription_issecure")
+	procAlljoyn_interfacedescription_member_eql                                     = modMSAJApi.NewProc("alljoyn_interfacedescription_member_eql")
+	procAlljoyn_interfacedescription_member_getannotation                           = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getannotation")
+	procAlljoyn_interfacedescription_member_getannotationatindex                    = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getannotationatindex")
+	procAlljoyn_interfacedescription_member_getannotationscount                     = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getannotationscount")
+	procAlljoyn_interfacedescription_member_getargannotation                        = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getargannotation")
+	procAlljoyn_interfacedescription_member_getargannotationatindex                 = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getargannotationatindex")
+	procAlljoyn_interfacedescription_member_getargannotationscount                  = modMSAJApi.NewProc("alljoyn_interfacedescription_member_getargannotationscount")
+	procAlljoyn_interfacedescription_property_eql                                   = modMSAJApi.NewProc("alljoyn_interfacedescription_property_eql")
+	procAlljoyn_interfacedescription_property_getannotation                         = modMSAJApi.NewProc("alljoyn_interfacedescription_property_getannotation")
+	procAlljoyn_interfacedescription_property_getannotationatindex                  = modMSAJApi.NewProc("alljoyn_interfacedescription_property_getannotationatindex")
+	procAlljoyn_interfacedescription_property_getannotationscount                   = modMSAJApi.NewProc("alljoyn_interfacedescription_property_getannotationscount")
 	procAlljoyn_interfacedescription_setargdescription                              = modMSAJApi.NewProc("alljoyn_interfacedescription_setargdescription")
 	procAlljoyn_interfacedescription_setargdescriptionforlanguage                   = modMSAJApi.NewProc("alljoyn_interfacedescription_setargdescriptionforlanguage")
 	procAlljoyn_interfacedescription_setdescription                                 = modMSAJApi.NewProc("alljoyn_interfacedescription_setdescription")
@@ -381,6 +399,7 @@ var (
 	procAlljoyn_msgarg_set_and_stabilize                                            = modMSAJApi.NewProc("alljoyn_msgarg_set_and_stabilize")
 	procAlljoyn_msgarg_set_bool                                                     = modMSAJApi.NewProc("alljoyn_msgarg_set_bool")
 	procAlljoyn_msgarg_set_bool_array                                               = modMSAJApi.NewProc("alljoyn_msgarg_set_bool_array")
+	procAlljoyn_msgarg_set_double                                                   = modMSAJApi.NewProc("alljoyn_msgarg_set_double")
 	procAlljoyn_msgarg_set_double_array                                             = modMSAJApi.NewProc("alljoyn_msgarg_set_double_array")
 	procAlljoyn_msgarg_set_int16                                                    = modMSAJApi.NewProc("alljoyn_msgarg_set_int16")
 	procAlljoyn_msgarg_set_int16_array                                              = modMSAJApi.NewProc("alljoyn_msgarg_set_int16_array")
@@ -481,8 +500,11 @@ var (
 	procAlljoyn_proxybusobject_issecure                                             = modMSAJApi.NewProc("alljoyn_proxybusobject_issecure")
 	procAlljoyn_proxybusobject_isvalid                                              = modMSAJApi.NewProc("alljoyn_proxybusobject_isvalid")
 	procAlljoyn_proxybusobject_methodcall                                           = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcall")
+	procAlljoyn_proxybusobject_methodcall_member                                    = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcall_member")
+	procAlljoyn_proxybusobject_methodcall_member_noreply                            = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcall_member_noreply")
 	procAlljoyn_proxybusobject_methodcall_noreply                                   = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcall_noreply")
 	procAlljoyn_proxybusobject_methodcallasync                                      = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcallasync")
+	procAlljoyn_proxybusobject_methodcallasync_member                               = modMSAJApi.NewProc("alljoyn_proxybusobject_methodcallasync_member")
 	procAlljoyn_proxybusobject_parsexml                                             = modMSAJApi.NewProc("alljoyn_proxybusobject_parsexml")
 	procAlljoyn_proxybusobject_ref_create                                           = modMSAJApi.NewProc("alljoyn_proxybusobject_ref_create")
 	procAlljoyn_proxybusobject_ref_decref                                           = modMSAJApi.NewProc("alljoyn_proxybusobject_ref_decref")
@@ -716,6 +738,8 @@ var Procs = struct {
 	Alljoyn_busattachment_registerbusobject                                     *win32.Proc
 	Alljoyn_busattachment_registerbusobject_secure                              *win32.Proc
 	Alljoyn_busattachment_registerkeystorelistener                              *win32.Proc
+	Alljoyn_busattachment_registersignalhandler                                 *win32.Proc
+	Alljoyn_busattachment_registersignalhandlerwithrule                         *win32.Proc
 	Alljoyn_busattachment_releasename                                           *win32.Proc
 	Alljoyn_busattachment_reloadkeystore                                        *win32.Proc
 	Alljoyn_busattachment_removematch                                           *win32.Proc
@@ -737,12 +761,15 @@ var Procs = struct {
 	Alljoyn_busattachment_unregisterapplicationstatelistener                    *win32.Proc
 	Alljoyn_busattachment_unregisterbuslistener                                 *win32.Proc
 	Alljoyn_busattachment_unregisterbusobject                                   *win32.Proc
+	Alljoyn_busattachment_unregistersignalhandler                               *win32.Proc
+	Alljoyn_busattachment_unregistersignalhandlerwithrule                       *win32.Proc
 	Alljoyn_busattachment_whoimplements_interface                               *win32.Proc
 	Alljoyn_busattachment_whoimplements_interfaces                              *win32.Proc
 	Alljoyn_buslistener_create                                                  *win32.Proc
 	Alljoyn_buslistener_destroy                                                 *win32.Proc
 	Alljoyn_busobject_addinterface                                              *win32.Proc
 	Alljoyn_busobject_addinterface_announced                                    *win32.Proc
+	Alljoyn_busobject_addmethodhandler                                          *win32.Proc
 	Alljoyn_busobject_addmethodhandlers                                         *win32.Proc
 	Alljoyn_busobject_cancelsessionlessmessage                                  *win32.Proc
 	Alljoyn_busobject_cancelsessionlessmessage_serial                           *win32.Proc
@@ -759,6 +786,7 @@ var Procs = struct {
 	Alljoyn_busobject_methodreply_err                                           *win32.Proc
 	Alljoyn_busobject_methodreply_status                                        *win32.Proc
 	Alljoyn_busobject_setannounceflag                                           *win32.Proc
+	Alljoyn_busobject_signal                                                    *win32.Proc
 	Alljoyn_credentials_clear                                                   *win32.Proc
 	Alljoyn_credentials_create                                                  *win32.Proc
 	Alljoyn_credentials_destroy                                                 *win32.Proc
@@ -816,6 +844,17 @@ var Procs = struct {
 	Alljoyn_interfacedescription_hasproperty                                    *win32.Proc
 	Alljoyn_interfacedescription_introspect                                     *win32.Proc
 	Alljoyn_interfacedescription_issecure                                       *win32.Proc
+	Alljoyn_interfacedescription_member_eql                                     *win32.Proc
+	Alljoyn_interfacedescription_member_getannotation                           *win32.Proc
+	Alljoyn_interfacedescription_member_getannotationatindex                    *win32.Proc
+	Alljoyn_interfacedescription_member_getannotationscount                     *win32.Proc
+	Alljoyn_interfacedescription_member_getargannotation                        *win32.Proc
+	Alljoyn_interfacedescription_member_getargannotationatindex                 *win32.Proc
+	Alljoyn_interfacedescription_member_getargannotationscount                  *win32.Proc
+	Alljoyn_interfacedescription_property_eql                                   *win32.Proc
+	Alljoyn_interfacedescription_property_getannotation                         *win32.Proc
+	Alljoyn_interfacedescription_property_getannotationatindex                  *win32.Proc
+	Alljoyn_interfacedescription_property_getannotationscount                   *win32.Proc
 	Alljoyn_interfacedescription_setargdescription                              *win32.Proc
 	Alljoyn_interfacedescription_setargdescriptionforlanguage                   *win32.Proc
 	Alljoyn_interfacedescription_setdescription                                 *win32.Proc
@@ -914,6 +953,7 @@ var Procs = struct {
 	Alljoyn_msgarg_set_and_stabilize                                            *win32.Proc
 	Alljoyn_msgarg_set_bool                                                     *win32.Proc
 	Alljoyn_msgarg_set_bool_array                                               *win32.Proc
+	Alljoyn_msgarg_set_double                                                   *win32.Proc
 	Alljoyn_msgarg_set_double_array                                             *win32.Proc
 	Alljoyn_msgarg_set_int16                                                    *win32.Proc
 	Alljoyn_msgarg_set_int16_array                                              *win32.Proc
@@ -1014,8 +1054,11 @@ var Procs = struct {
 	Alljoyn_proxybusobject_issecure                                             *win32.Proc
 	Alljoyn_proxybusobject_isvalid                                              *win32.Proc
 	Alljoyn_proxybusobject_methodcall                                           *win32.Proc
+	Alljoyn_proxybusobject_methodcall_member                                    *win32.Proc
+	Alljoyn_proxybusobject_methodcall_member_noreply                            *win32.Proc
 	Alljoyn_proxybusobject_methodcall_noreply                                   *win32.Proc
 	Alljoyn_proxybusobject_methodcallasync                                      *win32.Proc
+	Alljoyn_proxybusobject_methodcallasync_member                               *win32.Proc
 	Alljoyn_proxybusobject_parsexml                                             *win32.Proc
 	Alljoyn_proxybusobject_ref_create                                           *win32.Proc
 	Alljoyn_proxybusobject_ref_decref                                           *win32.Proc
@@ -1243,6 +1286,8 @@ var Procs = struct {
 	Alljoyn_busattachment_registerbusobject:                                     procAlljoyn_busattachment_registerbusobject,
 	Alljoyn_busattachment_registerbusobject_secure:                              procAlljoyn_busattachment_registerbusobject_secure,
 	Alljoyn_busattachment_registerkeystorelistener:                              procAlljoyn_busattachment_registerkeystorelistener,
+	Alljoyn_busattachment_registersignalhandler:                                 procAlljoyn_busattachment_registersignalhandler,
+	Alljoyn_busattachment_registersignalhandlerwithrule:                         procAlljoyn_busattachment_registersignalhandlerwithrule,
 	Alljoyn_busattachment_releasename:                                           procAlljoyn_busattachment_releasename,
 	Alljoyn_busattachment_reloadkeystore:                                        procAlljoyn_busattachment_reloadkeystore,
 	Alljoyn_busattachment_removematch:                                           procAlljoyn_busattachment_removematch,
@@ -1264,12 +1309,15 @@ var Procs = struct {
 	Alljoyn_busattachment_unregisterapplicationstatelistener:                    procAlljoyn_busattachment_unregisterapplicationstatelistener,
 	Alljoyn_busattachment_unregisterbuslistener:                                 procAlljoyn_busattachment_unregisterbuslistener,
 	Alljoyn_busattachment_unregisterbusobject:                                   procAlljoyn_busattachment_unregisterbusobject,
+	Alljoyn_busattachment_unregistersignalhandler:                               procAlljoyn_busattachment_unregistersignalhandler,
+	Alljoyn_busattachment_unregistersignalhandlerwithrule:                       procAlljoyn_busattachment_unregistersignalhandlerwithrule,
 	Alljoyn_busattachment_whoimplements_interface:                               procAlljoyn_busattachment_whoimplements_interface,
 	Alljoyn_busattachment_whoimplements_interfaces:                              procAlljoyn_busattachment_whoimplements_interfaces,
 	Alljoyn_buslistener_create:                                                  procAlljoyn_buslistener_create,
 	Alljoyn_buslistener_destroy:                                                 procAlljoyn_buslistener_destroy,
 	Alljoyn_busobject_addinterface:                                              procAlljoyn_busobject_addinterface,
 	Alljoyn_busobject_addinterface_announced:                                    procAlljoyn_busobject_addinterface_announced,
+	Alljoyn_busobject_addmethodhandler:                                          procAlljoyn_busobject_addmethodhandler,
 	Alljoyn_busobject_addmethodhandlers:                                         procAlljoyn_busobject_addmethodhandlers,
 	Alljoyn_busobject_cancelsessionlessmessage:                                  procAlljoyn_busobject_cancelsessionlessmessage,
 	Alljoyn_busobject_cancelsessionlessmessage_serial:                           procAlljoyn_busobject_cancelsessionlessmessage_serial,
@@ -1286,6 +1334,7 @@ var Procs = struct {
 	Alljoyn_busobject_methodreply_err:                                           procAlljoyn_busobject_methodreply_err,
 	Alljoyn_busobject_methodreply_status:                                        procAlljoyn_busobject_methodreply_status,
 	Alljoyn_busobject_setannounceflag:                                           procAlljoyn_busobject_setannounceflag,
+	Alljoyn_busobject_signal:                                                    procAlljoyn_busobject_signal,
 	Alljoyn_credentials_clear:                                                   procAlljoyn_credentials_clear,
 	Alljoyn_credentials_create:                                                  procAlljoyn_credentials_create,
 	Alljoyn_credentials_destroy:                                                 procAlljoyn_credentials_destroy,
@@ -1343,6 +1392,17 @@ var Procs = struct {
 	Alljoyn_interfacedescription_hasproperty:                                    procAlljoyn_interfacedescription_hasproperty,
 	Alljoyn_interfacedescription_introspect:                                     procAlljoyn_interfacedescription_introspect,
 	Alljoyn_interfacedescription_issecure:                                       procAlljoyn_interfacedescription_issecure,
+	Alljoyn_interfacedescription_member_eql:                                     procAlljoyn_interfacedescription_member_eql,
+	Alljoyn_interfacedescription_member_getannotation:                           procAlljoyn_interfacedescription_member_getannotation,
+	Alljoyn_interfacedescription_member_getannotationatindex:                    procAlljoyn_interfacedescription_member_getannotationatindex,
+	Alljoyn_interfacedescription_member_getannotationscount:                     procAlljoyn_interfacedescription_member_getannotationscount,
+	Alljoyn_interfacedescription_member_getargannotation:                        procAlljoyn_interfacedescription_member_getargannotation,
+	Alljoyn_interfacedescription_member_getargannotationatindex:                 procAlljoyn_interfacedescription_member_getargannotationatindex,
+	Alljoyn_interfacedescription_member_getargannotationscount:                  procAlljoyn_interfacedescription_member_getargannotationscount,
+	Alljoyn_interfacedescription_property_eql:                                   procAlljoyn_interfacedescription_property_eql,
+	Alljoyn_interfacedescription_property_getannotation:                         procAlljoyn_interfacedescription_property_getannotation,
+	Alljoyn_interfacedescription_property_getannotationatindex:                  procAlljoyn_interfacedescription_property_getannotationatindex,
+	Alljoyn_interfacedescription_property_getannotationscount:                   procAlljoyn_interfacedescription_property_getannotationscount,
 	Alljoyn_interfacedescription_setargdescription:                              procAlljoyn_interfacedescription_setargdescription,
 	Alljoyn_interfacedescription_setargdescriptionforlanguage:                   procAlljoyn_interfacedescription_setargdescriptionforlanguage,
 	Alljoyn_interfacedescription_setdescription:                                 procAlljoyn_interfacedescription_setdescription,
@@ -1441,6 +1501,7 @@ var Procs = struct {
 	Alljoyn_msgarg_set_and_stabilize:                                            procAlljoyn_msgarg_set_and_stabilize,
 	Alljoyn_msgarg_set_bool:                                                     procAlljoyn_msgarg_set_bool,
 	Alljoyn_msgarg_set_bool_array:                                               procAlljoyn_msgarg_set_bool_array,
+	Alljoyn_msgarg_set_double:                                                   procAlljoyn_msgarg_set_double,
 	Alljoyn_msgarg_set_double_array:                                             procAlljoyn_msgarg_set_double_array,
 	Alljoyn_msgarg_set_int16:                                                    procAlljoyn_msgarg_set_int16,
 	Alljoyn_msgarg_set_int16_array:                                              procAlljoyn_msgarg_set_int16_array,
@@ -1541,8 +1602,11 @@ var Procs = struct {
 	Alljoyn_proxybusobject_issecure:                                             procAlljoyn_proxybusobject_issecure,
 	Alljoyn_proxybusobject_isvalid:                                              procAlljoyn_proxybusobject_isvalid,
 	Alljoyn_proxybusobject_methodcall:                                           procAlljoyn_proxybusobject_methodcall,
+	Alljoyn_proxybusobject_methodcall_member:                                    procAlljoyn_proxybusobject_methodcall_member,
+	Alljoyn_proxybusobject_methodcall_member_noreply:                            procAlljoyn_proxybusobject_methodcall_member_noreply,
 	Alljoyn_proxybusobject_methodcall_noreply:                                   procAlljoyn_proxybusobject_methodcall_noreply,
 	Alljoyn_proxybusobject_methodcallasync:                                      procAlljoyn_proxybusobject_methodcallasync,
+	Alljoyn_proxybusobject_methodcallasync_member:                               procAlljoyn_proxybusobject_methodcallasync_member,
 	Alljoyn_proxybusobject_parsexml:                                             procAlljoyn_proxybusobject_parsexml,
 	Alljoyn_proxybusobject_ref_create:                                           procAlljoyn_proxybusobject_ref_create,
 	Alljoyn_proxybusobject_ref_decref:                                           procAlljoyn_proxybusobject_ref_decref,
@@ -2610,6 +2674,22 @@ func Alljoyn_busattachment_registerkeystorelistener(bus Alljoyn_busattachment, l
 	return QStatus(r1)
 }
 
+var specAlljoyn_busattachment_registersignalhandler = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_busattachment_registersignalhandler calls MSAJApi!alljoyn_busattachment_registersignalhandler.
+func Alljoyn_busattachment_registersignalhandler(bus Alljoyn_busattachment, signal_handler Alljoyn_messagereceiver_signalhandler_ptr, member Alljoyn_interfacedescription_member, srcPath foundation.PSTR) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busattachment_registersignalhandler.Addr(), specAlljoyn_busattachment_registersignalhandler, nil, uintptr(bus), uintptr(signal_handler), uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(srcPath))).Tuple()
+	return QStatus(r1)
+}
+
+var specAlljoyn_busattachment_registersignalhandlerwithrule = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_busattachment_registersignalhandlerwithrule calls MSAJApi!alljoyn_busattachment_registersignalhandlerwithrule.
+func Alljoyn_busattachment_registersignalhandlerwithrule(bus Alljoyn_busattachment, signal_handler Alljoyn_messagereceiver_signalhandler_ptr, member Alljoyn_interfacedescription_member, matchRule foundation.PSTR) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busattachment_registersignalhandlerwithrule.Addr(), specAlljoyn_busattachment_registersignalhandlerwithrule, nil, uintptr(bus), uintptr(signal_handler), uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(matchRule))).Tuple()
+	return QStatus(r1)
+}
+
 // Alljoyn_busattachment_releasename calls MSAJApi!alljoyn_busattachment_releasename.
 func Alljoyn_busattachment_releasename(bus Alljoyn_busattachment, name foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_releasename.Addr(), uintptr(bus), uintptr(unsafe.Pointer(name)))
@@ -2732,6 +2812,22 @@ func Alljoyn_busattachment_unregisterbusobject(bus Alljoyn_busattachment, object
 	syscall.SyscallN(procAlljoyn_busattachment_unregisterbusobject.Addr(), uintptr(bus), uintptr(object))
 }
 
+var specAlljoyn_busattachment_unregistersignalhandler = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_busattachment_unregistersignalhandler calls MSAJApi!alljoyn_busattachment_unregistersignalhandler.
+func Alljoyn_busattachment_unregistersignalhandler(bus Alljoyn_busattachment, signal_handler Alljoyn_messagereceiver_signalhandler_ptr, member Alljoyn_interfacedescription_member, srcPath foundation.PSTR) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busattachment_unregistersignalhandler.Addr(), specAlljoyn_busattachment_unregistersignalhandler, nil, uintptr(bus), uintptr(signal_handler), uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(srcPath))).Tuple()
+	return QStatus(r1)
+}
+
+var specAlljoyn_busattachment_unregistersignalhandlerwithrule = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_busattachment_unregistersignalhandlerwithrule calls MSAJApi!alljoyn_busattachment_unregistersignalhandlerwithrule.
+func Alljoyn_busattachment_unregistersignalhandlerwithrule(bus Alljoyn_busattachment, signal_handler Alljoyn_messagereceiver_signalhandler_ptr, member Alljoyn_interfacedescription_member, matchRule foundation.PSTR) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busattachment_unregistersignalhandlerwithrule.Addr(), specAlljoyn_busattachment_unregistersignalhandlerwithrule, nil, uintptr(bus), uintptr(signal_handler), uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(matchRule))).Tuple()
+	return QStatus(r1)
+}
+
 // Alljoyn_busattachment_whoimplements_interface calls MSAJApi!alljoyn_busattachment_whoimplements_interface.
 func Alljoyn_busattachment_whoimplements_interface(bus Alljoyn_busattachment, implementsInterface foundation.PSTR) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busattachment_whoimplements_interface.Addr(), uintptr(bus), uintptr(unsafe.Pointer(implementsInterface)))
@@ -2764,6 +2860,14 @@ func Alljoyn_busobject_addinterface(bus Alljoyn_busobject, iface Alljoyn_interfa
 // Alljoyn_busobject_addinterface_announced calls MSAJApi!alljoyn_busobject_addinterface_announced.
 func Alljoyn_busobject_addinterface_announced(bus Alljoyn_busobject, iface Alljoyn_interfacedescription) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_addinterface_announced.Addr(), uintptr(bus), uintptr(iface))
+	return QStatus(r1)
+}
+
+var specAlljoyn_busobject_addmethodhandler = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word}}
+
+// Alljoyn_busobject_addmethodhandler calls MSAJApi!alljoyn_busobject_addmethodhandler.
+func Alljoyn_busobject_addmethodhandler(bus Alljoyn_busobject, member Alljoyn_interfacedescription_member, handler Alljoyn_messagereceiver_methodhandler_ptr, context unsafe.Pointer) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busobject_addmethodhandler.Addr(), specAlljoyn_busobject_addmethodhandler, nil, uintptr(bus), uintptr(unsafe.Pointer(&member)), uintptr(handler), uintptr(unsafe.Pointer(context))).Tuple()
 	return QStatus(r1)
 }
 
@@ -2857,6 +2961,14 @@ func Alljoyn_busobject_methodreply_status(bus Alljoyn_busobject, msg Alljoyn_mes
 // Alljoyn_busobject_setannounceflag calls MSAJApi!alljoyn_busobject_setannounceflag.
 func Alljoyn_busobject_setannounceflag(bus Alljoyn_busobject, iface Alljoyn_interfacedescription, isAnnounced Alljoyn_about_announceflag) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_busobject_setannounceflag.Addr(), uintptr(bus), uintptr(iface), uintptr(isAnnounced))
+	return QStatus(r1)
+}
+
+var specAlljoyn_busobject_signal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_busobject_signal calls MSAJApi!alljoyn_busobject_signal.
+func Alljoyn_busobject_signal(bus Alljoyn_busobject, destination foundation.PSTR, sessionId uint32, signal Alljoyn_interfacedescription_member, args Alljoyn_msgarg, numArgs uintptr, timeToLive uint16, flags byte, msg Alljoyn_message) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_busobject_signal.Addr(), specAlljoyn_busobject_signal, nil, uintptr(bus), uintptr(unsafe.Pointer(destination)), uintptr(sessionId), uintptr(unsafe.Pointer(&signal)), uintptr(args), uintptr(numArgs), uintptr(timeToLive), uintptr(flags), uintptr(msg)).Tuple()
 	return QStatus(r1)
 }
 
@@ -3190,6 +3302,91 @@ func Alljoyn_interfacedescription_introspect(iface Alljoyn_interfacedescription,
 func Alljoyn_interfacedescription_issecure(iface Alljoyn_interfacedescription) int32 {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_interfacedescription_issecure.Addr(), uintptr(iface))
 	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_member_eql = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Struct(56, 8, 0, false)}}
+
+// Alljoyn_interfacedescription_member_eql calls MSAJApi!alljoyn_interfacedescription_member_eql.
+func Alljoyn_interfacedescription_member_eql(one Alljoyn_interfacedescription_member, other Alljoyn_interfacedescription_member) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_eql.Addr(), specAlljoyn_interfacedescription_member_eql, nil, uintptr(unsafe.Pointer(&one)), uintptr(unsafe.Pointer(&other))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_member_getannotation = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_member_getannotation calls MSAJApi!alljoyn_interfacedescription_member_getannotation.
+func Alljoyn_interfacedescription_member_getannotation(member Alljoyn_interfacedescription_member, name foundation.PSTR, value foundation.PSTR, value_size *uintptr) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_getannotation.Addr(), specAlljoyn_interfacedescription_member_getannotation, nil, uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_member_getannotationatindex = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_member_getannotationatindex calls MSAJApi!alljoyn_interfacedescription_member_getannotationatindex.
+func Alljoyn_interfacedescription_member_getannotationatindex(member Alljoyn_interfacedescription_member, index uintptr, name foundation.PSTR, name_size *uintptr, value foundation.PSTR, value_size *uintptr) {
+	win32.Call(procAlljoyn_interfacedescription_member_getannotationatindex.Addr(), specAlljoyn_interfacedescription_member_getannotationatindex, nil, uintptr(unsafe.Pointer(&member)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(name_size)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+}
+
+var specAlljoyn_interfacedescription_member_getannotationscount = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false)}}
+
+// Alljoyn_interfacedescription_member_getannotationscount calls MSAJApi!alljoyn_interfacedescription_member_getannotationscount.
+func Alljoyn_interfacedescription_member_getannotationscount(member Alljoyn_interfacedescription_member) uintptr {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_getannotationscount.Addr(), specAlljoyn_interfacedescription_member_getannotationscount, nil, uintptr(unsafe.Pointer(&member))).Tuple()
+	return uintptr(r1)
+}
+
+var specAlljoyn_interfacedescription_member_getargannotation = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_member_getargannotation calls MSAJApi!alljoyn_interfacedescription_member_getargannotation.
+func Alljoyn_interfacedescription_member_getargannotation(member Alljoyn_interfacedescription_member, argName foundation.PSTR, name foundation.PSTR, value foundation.PSTR, value_size *uintptr) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_getargannotation.Addr(), specAlljoyn_interfacedescription_member_getargannotation, nil, uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(argName)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_member_getargannotationatindex = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_member_getargannotationatindex calls MSAJApi!alljoyn_interfacedescription_member_getargannotationatindex.
+func Alljoyn_interfacedescription_member_getargannotationatindex(member Alljoyn_interfacedescription_member, argName foundation.PSTR, index uintptr, name foundation.PSTR, name_size *uintptr, value foundation.PSTR, value_size *uintptr) {
+	win32.Call(procAlljoyn_interfacedescription_member_getargannotationatindex.Addr(), specAlljoyn_interfacedescription_member_getargannotationatindex, nil, uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(argName)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(name_size)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+}
+
+var specAlljoyn_interfacedescription_member_getargannotationscount = &win32.Spec{Args: []win32.Arg{win32.Struct(56, 8, 0, false), win32.Word}}
+
+// Alljoyn_interfacedescription_member_getargannotationscount calls MSAJApi!alljoyn_interfacedescription_member_getargannotationscount.
+func Alljoyn_interfacedescription_member_getargannotationscount(member Alljoyn_interfacedescription_member, argName foundation.PSTR) uintptr {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_member_getargannotationscount.Addr(), specAlljoyn_interfacedescription_member_getargannotationscount, nil, uintptr(unsafe.Pointer(&member)), uintptr(unsafe.Pointer(argName))).Tuple()
+	return uintptr(r1)
+}
+
+var specAlljoyn_interfacedescription_property_eql = &win32.Spec{Args: []win32.Arg{win32.Struct(32, 8, 0, false), win32.Struct(32, 8, 0, false)}}
+
+// Alljoyn_interfacedescription_property_eql calls MSAJApi!alljoyn_interfacedescription_property_eql.
+func Alljoyn_interfacedescription_property_eql(one Alljoyn_interfacedescription_property, other Alljoyn_interfacedescription_property) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_property_eql.Addr(), specAlljoyn_interfacedescription_property_eql, nil, uintptr(unsafe.Pointer(&one)), uintptr(unsafe.Pointer(&other))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_property_getannotation = &win32.Spec{Args: []win32.Arg{win32.Struct(32, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_property_getannotation calls MSAJApi!alljoyn_interfacedescription_property_getannotation.
+func Alljoyn_interfacedescription_property_getannotation(property Alljoyn_interfacedescription_property, name foundation.PSTR, value foundation.PSTR, value_size *uintptr) int32 {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_property_getannotation.Addr(), specAlljoyn_interfacedescription_property_getannotation, nil, uintptr(unsafe.Pointer(&property)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+	return int32(r1)
+}
+
+var specAlljoyn_interfacedescription_property_getannotationatindex = &win32.Spec{Args: []win32.Arg{win32.Struct(32, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_interfacedescription_property_getannotationatindex calls MSAJApi!alljoyn_interfacedescription_property_getannotationatindex.
+func Alljoyn_interfacedescription_property_getannotationatindex(property Alljoyn_interfacedescription_property, index uintptr, name foundation.PSTR, name_size *uintptr, value foundation.PSTR, value_size *uintptr) {
+	win32.Call(procAlljoyn_interfacedescription_property_getannotationatindex.Addr(), specAlljoyn_interfacedescription_property_getannotationatindex, nil, uintptr(unsafe.Pointer(&property)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(name_size)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(value_size))).Tuple()
+}
+
+var specAlljoyn_interfacedescription_property_getannotationscount = &win32.Spec{Args: []win32.Arg{win32.Struct(32, 8, 0, false)}}
+
+// Alljoyn_interfacedescription_property_getannotationscount calls MSAJApi!alljoyn_interfacedescription_property_getannotationscount.
+func Alljoyn_interfacedescription_property_getannotationscount(property Alljoyn_interfacedescription_property) uintptr {
+	r1, _, _ := win32.Call(procAlljoyn_interfacedescription_property_getannotationscount.Addr(), specAlljoyn_interfacedescription_property_getannotationscount, nil, uintptr(unsafe.Pointer(&property))).Tuple()
+	return uintptr(r1)
 }
 
 // Alljoyn_interfacedescription_setargdescription calls MSAJApi!alljoyn_interfacedescription_setargdescription.
@@ -3766,6 +3963,14 @@ func Alljoyn_msgarg_set_bool(arg Alljoyn_msgarg, b int32) QStatus {
 // Alljoyn_msgarg_set_bool_array calls MSAJApi!alljoyn_msgarg_set_bool_array.
 func Alljoyn_msgarg_set_bool_array(arg Alljoyn_msgarg, length uintptr, ab *int32) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_msgarg_set_bool_array.Addr(), uintptr(arg), uintptr(length), uintptr(unsafe.Pointer(ab)))
+	return QStatus(r1)
+}
+
+var specAlljoyn_msgarg_set_double = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Alljoyn_msgarg_set_double calls MSAJApi!alljoyn_msgarg_set_double.
+func Alljoyn_msgarg_set_double(arg Alljoyn_msgarg, d float64) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_msgarg_set_double.Addr(), specAlljoyn_msgarg_set_double, nil, uintptr(arg), uintptr(math.Float64bits(d))).Tuple()
 	return QStatus(r1)
 }
 
@@ -4352,6 +4557,22 @@ func Alljoyn_proxybusobject_methodcall(proxyObj Alljoyn_proxybusobject, ifaceNam
 	return QStatus(r1)
 }
 
+var specAlljoyn_proxybusobject_methodcall_member = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_proxybusobject_methodcall_member calls MSAJApi!alljoyn_proxybusobject_methodcall_member.
+func Alljoyn_proxybusobject_methodcall_member(proxyObj Alljoyn_proxybusobject, method Alljoyn_interfacedescription_member, args Alljoyn_msgarg, numArgs uintptr, replyMsg Alljoyn_message, timeout uint32, flags byte) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_proxybusobject_methodcall_member.Addr(), specAlljoyn_proxybusobject_methodcall_member, nil, uintptr(proxyObj), uintptr(unsafe.Pointer(&method)), uintptr(args), uintptr(numArgs), uintptr(replyMsg), uintptr(timeout), uintptr(flags)).Tuple()
+	return QStatus(r1)
+}
+
+var specAlljoyn_proxybusobject_methodcall_member_noreply = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_proxybusobject_methodcall_member_noreply calls MSAJApi!alljoyn_proxybusobject_methodcall_member_noreply.
+func Alljoyn_proxybusobject_methodcall_member_noreply(proxyObj Alljoyn_proxybusobject, method Alljoyn_interfacedescription_member, args Alljoyn_msgarg, numArgs uintptr, flags byte) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_proxybusobject_methodcall_member_noreply.Addr(), specAlljoyn_proxybusobject_methodcall_member_noreply, nil, uintptr(proxyObj), uintptr(unsafe.Pointer(&method)), uintptr(args), uintptr(numArgs), uintptr(flags)).Tuple()
+	return QStatus(r1)
+}
+
 // Alljoyn_proxybusobject_methodcall_noreply calls MSAJApi!alljoyn_proxybusobject_methodcall_noreply.
 func Alljoyn_proxybusobject_methodcall_noreply(proxyObj Alljoyn_proxybusobject, ifaceName foundation.PSTR, methodName foundation.PSTR, args Alljoyn_msgarg, numArgs uintptr, flags byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_methodcall_noreply.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(ifaceName)), uintptr(unsafe.Pointer(methodName)), uintptr(args), uintptr(numArgs), uintptr(flags))
@@ -4361,6 +4582,14 @@ func Alljoyn_proxybusobject_methodcall_noreply(proxyObj Alljoyn_proxybusobject, 
 // Alljoyn_proxybusobject_methodcallasync calls MSAJApi!alljoyn_proxybusobject_methodcallasync.
 func Alljoyn_proxybusobject_methodcallasync(proxyObj Alljoyn_proxybusobject, ifaceName foundation.PSTR, methodName foundation.PSTR, replyFunc Alljoyn_messagereceiver_replyhandler_ptr, args Alljoyn_msgarg, numArgs uintptr, context unsafe.Pointer, timeout uint32, flags byte) QStatus {
 	r1, _, _ := syscall.SyscallN(procAlljoyn_proxybusobject_methodcallasync.Addr(), uintptr(proxyObj), uintptr(unsafe.Pointer(ifaceName)), uintptr(unsafe.Pointer(methodName)), uintptr(replyFunc), uintptr(args), uintptr(numArgs), uintptr(unsafe.Pointer(context)), uintptr(timeout), uintptr(flags))
+	return QStatus(r1)
+}
+
+var specAlljoyn_proxybusobject_methodcallasync_member = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(56, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Alljoyn_proxybusobject_methodcallasync_member calls MSAJApi!alljoyn_proxybusobject_methodcallasync_member.
+func Alljoyn_proxybusobject_methodcallasync_member(proxyObj Alljoyn_proxybusobject, method Alljoyn_interfacedescription_member, replyFunc Alljoyn_messagereceiver_replyhandler_ptr, args Alljoyn_msgarg, numArgs uintptr, context unsafe.Pointer, timeout uint32, flags byte) QStatus {
+	r1, _, _ := win32.Call(procAlljoyn_proxybusobject_methodcallasync_member.Addr(), specAlljoyn_proxybusobject_methodcallasync_member, nil, uintptr(proxyObj), uintptr(unsafe.Pointer(&method)), uintptr(replyFunc), uintptr(args), uintptr(numArgs), uintptr(unsafe.Pointer(context)), uintptr(timeout), uintptr(flags)).Tuple()
 	return QStatus(r1)
 }
 

@@ -5,6 +5,7 @@
 package gdi
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -30,6 +31,7 @@ var (
 	procAddFontResourceA                = modGDI32.NewProc("AddFontResourceA")
 	procAddFontResourceEx               = modGDI32.NewProc("AddFontResourceExW")
 	procAddFontResourceExA              = modGDI32.NewProc("AddFontResourceExA")
+	procAngleArc                        = modGDI32.NewProc("AngleArc")
 	procAnimatePalette                  = modGDI32.NewProc("AnimatePalette")
 	procArc                             = modGDI32.NewProc("Arc")
 	procArcTo                           = modGDI32.NewProc("ArcTo")
@@ -296,6 +298,7 @@ var (
 	procSetMapperFlags                  = modGDI32.NewProc("SetMapperFlags")
 	procSetMetaFileBitsEx               = modGDI32.NewProc("SetMetaFileBitsEx")
 	procSetMetaRgn                      = modGDI32.NewProc("SetMetaRgn")
+	procSetMiterLimit                   = modGDI32.NewProc("SetMiterLimit")
 	procSetPaletteEntries               = modGDI32.NewProc("SetPaletteEntries")
 	procSetPixel                        = modGDI32.NewProc("SetPixel")
 	procSetPixelV                       = modGDI32.NewProc("SetPixelV")
@@ -430,6 +433,7 @@ var Procs = struct {
 	AddFontResourceEx               *win32.Proc
 	AddFontResourceExA              *win32.Proc
 	AlphaBlend                      *win32.Proc
+	AngleArc                        *win32.Proc
 	AnimatePalette                  *win32.Proc
 	Arc                             *win32.Proc
 	ArcTo                           *win32.Proc
@@ -763,6 +767,7 @@ var Procs = struct {
 	SetMapperFlags                  *win32.Proc
 	SetMetaFileBitsEx               *win32.Proc
 	SetMetaRgn                      *win32.Proc
+	SetMiterLimit                   *win32.Proc
 	SetPaletteEntries               *win32.Proc
 	SetPixel                        *win32.Proc
 	SetPixelV                       *win32.Proc
@@ -825,6 +830,7 @@ var Procs = struct {
 	AddFontResourceEx:               procAddFontResourceEx,
 	AddFontResourceExA:              procAddFontResourceExA,
 	AlphaBlend:                      procAlphaBlend,
+	AngleArc:                        procAngleArc,
 	AnimatePalette:                  procAnimatePalette,
 	Arc:                             procArc,
 	ArcTo:                           procArcTo,
@@ -1158,6 +1164,7 @@ var Procs = struct {
 	SetMapperFlags:                  procSetMapperFlags,
 	SetMetaFileBitsEx:               procSetMetaFileBitsEx,
 	SetMetaRgn:                      procSetMetaRgn,
+	SetMiterLimit:                   procSetMiterLimit,
 	SetPaletteEntries:               procSetPaletteEntries,
 	SetPixel:                        procSetPixel,
 	SetPixelV:                       procSetPixelV,
@@ -1273,6 +1280,16 @@ func AddFontResourceExA(name foundation.PSTR, fl FONT_RESOURCE_CHARACTERISTICS) 
 // Minimum OS: windows5.0.
 func AlphaBlend(hdcDest HDC, xoriginDest int32, yoriginDest int32, wDest int32, hDest int32, hdcSrc HDC, xoriginSrc int32, yoriginSrc int32, wSrc int32, hSrc int32, ftn BLENDFUNCTION) bool {
 	r1, _, _ := syscall.SyscallN(procAlphaBlend.Addr(), uintptr(hdcDest), uintptr(xoriginDest), uintptr(yoriginDest), uintptr(wDest), uintptr(hDest), uintptr(hdcSrc), uintptr(xoriginSrc), uintptr(yoriginSrc), uintptr(wSrc), uintptr(hSrc), uintptr(win32.StructArg(ftn)))
+	return r1 != 0
+}
+
+var specAngleArc = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// AngleArc calls GDI32!AngleArc.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-anglearc
+// Minimum OS: windows5.0.
+func AngleArc(hdc HDC, x int32, y int32, r_ uint32, StartAngle float32, SweepAngle float32) bool {
+	r1, _, _ := win32.Call(procAngleArc.Addr(), specAngleArc, nil, uintptr(hdc), uintptr(x), uintptr(y), uintptr(r_), uintptr(math.Float32bits(StartAngle)), uintptr(math.Float32bits(SweepAngle))).Tuple()
 	return r1 != 0
 }
 
@@ -4159,6 +4176,16 @@ func SetMetaFileBitsEx(lpData []byte) HMETAFILE {
 func SetMetaRgn(hdc HDC) GDI_REGION_TYPE {
 	r1, _, _ := syscall.SyscallN(procSetMetaRgn.Addr(), uintptr(hdc))
 	return GDI_REGION_TYPE(r1)
+}
+
+var specSetMiterLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetMiterLimit calls GDI32!SetMiterLimit.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setmiterlimit
+// Minimum OS: windows5.0.
+func SetMiterLimit(hdc HDC, limit float32, old *float32) bool {
+	r1, _, _ := win32.Call(procSetMiterLimit.Addr(), specSetMiterLimit, nil, uintptr(hdc), uintptr(math.Float32bits(limit)), uintptr(unsafe.Pointer(old))).Tuple()
+	return r1 != 0
 }
 
 // SetPaletteEntries calls GDI32!SetPaletteEntries.

@@ -23,12 +23,15 @@ var (
 	procDhcpCApiInitialize                        = moddhcpcsvc.NewProc("DhcpCApiInitialize")
 	procDhcpDeRegisterParamChange                 = moddhcpcsvc.NewProc("DhcpDeRegisterParamChange")
 	procDhcpGetOriginalSubnetMask                 = moddhcpcsvc.NewProc("DhcpGetOriginalSubnetMask")
+	procDhcpRegisterParamChange                   = moddhcpcsvc.NewProc("DhcpRegisterParamChange")
 	procDhcpRemoveDNSRegistrations                = moddhcpcsvc.NewProc("DhcpRemoveDNSRegistrations")
+	procDhcpRequestParams                         = moddhcpcsvc.NewProc("DhcpRequestParams")
 	procDhcpUndoRequestParams                     = moddhcpcsvc.NewProc("DhcpUndoRequestParams")
 	procDhcpv6CApiCleanup                         = moddhcpcsvc6.NewProc("Dhcpv6CApiCleanup")
 	procDhcpv6CApiInitialize                      = moddhcpcsvc6.NewProc("Dhcpv6CApiInitialize")
 	procDhcpv6ReleasePrefix                       = moddhcpcsvc6.NewProc("Dhcpv6ReleasePrefix")
 	procDhcpv6RenewPrefix                         = moddhcpcsvc6.NewProc("Dhcpv6RenewPrefix")
+	procDhcpv6RequestParams                       = moddhcpcsvc6.NewProc("Dhcpv6RequestParams")
 	procDhcpv6RequestPrefix                       = moddhcpcsvc6.NewProc("Dhcpv6RequestPrefix")
 	procDhcpAddFilterV4                           = modDHCPSAPI.NewProc("DhcpAddFilterV4")
 	procDhcpAddSecurityGroup                      = modDHCPSAPI.NewProc("DhcpAddSecurityGroup")
@@ -36,6 +39,7 @@ var (
 	procDhcpAddSubnetElement                      = modDHCPSAPI.NewProc("DhcpAddSubnetElement")
 	procDhcpAddSubnetElementV4                    = modDHCPSAPI.NewProc("DhcpAddSubnetElementV4")
 	procDhcpAddSubnetElementV5                    = modDHCPSAPI.NewProc("DhcpAddSubnetElementV5")
+	procDhcpAddSubnetElementV6                    = modDHCPSAPI.NewProc("DhcpAddSubnetElementV6")
 	procDhcpAuditLogGetParams                     = modDHCPSAPI.NewProc("DhcpAuditLogGetParams")
 	procDhcpAuditLogSetParams                     = modDHCPSAPI.NewProc("DhcpAuditLogSetParams")
 	procDhcpCreateClass                           = modDHCPSAPI.NewProc("DhcpCreateClass")
@@ -47,6 +51,7 @@ var (
 	procDhcpCreateOptionV5                        = modDHCPSAPI.NewProc("DhcpCreateOptionV5")
 	procDhcpCreateOptionV6                        = modDHCPSAPI.NewProc("DhcpCreateOptionV6")
 	procDhcpCreateSubnet                          = modDHCPSAPI.NewProc("DhcpCreateSubnet")
+	procDhcpCreateSubnetV6                        = modDHCPSAPI.NewProc("DhcpCreateSubnetV6")
 	procDhcpCreateSubnetVQ                        = modDHCPSAPI.NewProc("DhcpCreateSubnetVQ")
 	procDhcpDeleteClass                           = modDHCPSAPI.NewProc("DhcpDeleteClass")
 	procDhcpDeleteClassV6                         = modDHCPSAPI.NewProc("DhcpDeleteClassV6")
@@ -55,6 +60,7 @@ var (
 	procDhcpDeleteFilterV4                        = modDHCPSAPI.NewProc("DhcpDeleteFilterV4")
 	procDhcpDeleteServer                          = modDHCPSAPI.NewProc("DhcpDeleteServer")
 	procDhcpDeleteSubnet                          = modDHCPSAPI.NewProc("DhcpDeleteSubnet")
+	procDhcpDeleteSubnetV6                        = modDHCPSAPI.NewProc("DhcpDeleteSubnetV6")
 	procDhcpDeleteSuperScopeV4                    = modDHCPSAPI.NewProc("DhcpDeleteSuperScopeV4")
 	procDhcpDsCleanup                             = modDHCPSAPI.NewProc("DhcpDsCleanup")
 	procDhcpDsInit                                = modDHCPSAPI.NewProc("DhcpDsInit")
@@ -72,10 +78,12 @@ var (
 	procDhcpEnumSubnetClientsFilterStatusInfo     = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsFilterStatusInfo")
 	procDhcpEnumSubnetClientsV4                   = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsV4")
 	procDhcpEnumSubnetClientsV5                   = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsV5")
+	procDhcpEnumSubnetClientsV6                   = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsV6")
 	procDhcpEnumSubnetClientsVQ                   = modDHCPSAPI.NewProc("DhcpEnumSubnetClientsVQ")
 	procDhcpEnumSubnetElements                    = modDHCPSAPI.NewProc("DhcpEnumSubnetElements")
 	procDhcpEnumSubnetElementsV4                  = modDHCPSAPI.NewProc("DhcpEnumSubnetElementsV4")
 	procDhcpEnumSubnetElementsV5                  = modDHCPSAPI.NewProc("DhcpEnumSubnetElementsV5")
+	procDhcpEnumSubnetElementsV6                  = modDHCPSAPI.NewProc("DhcpEnumSubnetElementsV6")
 	procDhcpEnumSubnets                           = modDHCPSAPI.NewProc("DhcpEnumSubnets")
 	procDhcpEnumSubnetsV6                         = modDHCPSAPI.NewProc("DhcpEnumSubnetsV6")
 	procDhcpGetAllOptionValues                    = modDHCPSAPI.NewProc("DhcpGetAllOptionValues")
@@ -103,6 +111,7 @@ var (
 	procDhcpGetServerSpecificStrings              = modDHCPSAPI.NewProc("DhcpGetServerSpecificStrings")
 	procDhcpGetSubnetDelayOffer                   = modDHCPSAPI.NewProc("DhcpGetSubnetDelayOffer")
 	procDhcpGetSubnetInfo                         = modDHCPSAPI.NewProc("DhcpGetSubnetInfo")
+	procDhcpGetSubnetInfoV6                       = modDHCPSAPI.NewProc("DhcpGetSubnetInfoV6")
 	procDhcpGetSubnetInfoVQ                       = modDHCPSAPI.NewProc("DhcpGetSubnetInfoVQ")
 	procDhcpGetSuperScopeInfoV4                   = modDHCPSAPI.NewProc("DhcpGetSuperScopeInfoV4")
 	procDhcpGetThreadOptions                      = modDHCPSAPI.NewProc("DhcpGetThreadOptions")
@@ -135,6 +144,7 @@ var (
 	procDhcpRemoveSubnetElement                   = modDHCPSAPI.NewProc("DhcpRemoveSubnetElement")
 	procDhcpRemoveSubnetElementV4                 = modDHCPSAPI.NewProc("DhcpRemoveSubnetElementV4")
 	procDhcpRemoveSubnetElementV5                 = modDHCPSAPI.NewProc("DhcpRemoveSubnetElementV5")
+	procDhcpRemoveSubnetElementV6                 = modDHCPSAPI.NewProc("DhcpRemoveSubnetElementV6")
 	procDhcpRpcFreeMemory                         = modDHCPSAPI.NewProc("DhcpRpcFreeMemory")
 	procDhcpScanDatabase                          = modDHCPSAPI.NewProc("DhcpScanDatabase")
 	procDhcpServerAuditlogParamsFree              = modDHCPSAPI.NewProc("DhcpServerAuditlogParamsFree")
@@ -171,6 +181,7 @@ var (
 	procDhcpSetServerBindingInfoV6                = modDHCPSAPI.NewProc("DhcpSetServerBindingInfoV6")
 	procDhcpSetSubnetDelayOffer                   = modDHCPSAPI.NewProc("DhcpSetSubnetDelayOffer")
 	procDhcpSetSubnetInfo                         = modDHCPSAPI.NewProc("DhcpSetSubnetInfo")
+	procDhcpSetSubnetInfoV6                       = modDHCPSAPI.NewProc("DhcpSetSubnetInfoV6")
 	procDhcpSetSubnetInfoVQ                       = modDHCPSAPI.NewProc("DhcpSetSubnetInfoVQ")
 	procDhcpSetSuperScopeV4                       = modDHCPSAPI.NewProc("DhcpSetSuperScopeV4")
 	procDhcpSetThreadOptions                      = modDHCPSAPI.NewProc("DhcpSetThreadOptions")
@@ -214,7 +225,10 @@ var (
 	procDhcpV4SetPolicyEnforcement                = modDHCPSAPI.NewProc("DhcpV4SetPolicyEnforcement")
 	procDhcpV4SetPolicyEx                         = modDHCPSAPI.NewProc("DhcpV4SetPolicyEx")
 	procDhcpV6CreateClientInfo                    = modDHCPSAPI.NewProc("DhcpV6CreateClientInfo")
+	procDhcpV6GetFreeIPAddress                    = modDHCPSAPI.NewProc("DhcpV6GetFreeIPAddress")
 	procDhcpV6GetStatelessStatistics              = modDHCPSAPI.NewProc("DhcpV6GetStatelessStatistics")
+	procDhcpV6GetStatelessStoreParams             = modDHCPSAPI.NewProc("DhcpV6GetStatelessStoreParams")
+	procDhcpV6SetStatelessStoreParams             = modDHCPSAPI.NewProc("DhcpV6SetStatelessStoreParams")
 )
 
 // Procs exposes this package's lazily resolved exports for availability
@@ -228,6 +242,7 @@ var Procs = struct {
 	DhcpAddSubnetElement                      *win32.Proc
 	DhcpAddSubnetElementV4                    *win32.Proc
 	DhcpAddSubnetElementV5                    *win32.Proc
+	DhcpAddSubnetElementV6                    *win32.Proc
 	DhcpAuditLogGetParams                     *win32.Proc
 	DhcpAuditLogSetParams                     *win32.Proc
 	DhcpCApiCleanup                           *win32.Proc
@@ -241,6 +256,7 @@ var Procs = struct {
 	DhcpCreateOptionV5                        *win32.Proc
 	DhcpCreateOptionV6                        *win32.Proc
 	DhcpCreateSubnet                          *win32.Proc
+	DhcpCreateSubnetV6                        *win32.Proc
 	DhcpCreateSubnetVQ                        *win32.Proc
 	DhcpDeRegisterParamChange                 *win32.Proc
 	DhcpDeleteClass                           *win32.Proc
@@ -250,6 +266,7 @@ var Procs = struct {
 	DhcpDeleteFilterV4                        *win32.Proc
 	DhcpDeleteServer                          *win32.Proc
 	DhcpDeleteSubnet                          *win32.Proc
+	DhcpDeleteSubnetV6                        *win32.Proc
 	DhcpDeleteSuperScopeV4                    *win32.Proc
 	DhcpDsCleanup                             *win32.Proc
 	DhcpDsInit                                *win32.Proc
@@ -267,10 +284,12 @@ var Procs = struct {
 	DhcpEnumSubnetClientsFilterStatusInfo     *win32.Proc
 	DhcpEnumSubnetClientsV4                   *win32.Proc
 	DhcpEnumSubnetClientsV5                   *win32.Proc
+	DhcpEnumSubnetClientsV6                   *win32.Proc
 	DhcpEnumSubnetClientsVQ                   *win32.Proc
 	DhcpEnumSubnetElements                    *win32.Proc
 	DhcpEnumSubnetElementsV4                  *win32.Proc
 	DhcpEnumSubnetElementsV5                  *win32.Proc
+	DhcpEnumSubnetElementsV6                  *win32.Proc
 	DhcpEnumSubnets                           *win32.Proc
 	DhcpEnumSubnetsV6                         *win32.Proc
 	DhcpGetAllOptionValues                    *win32.Proc
@@ -299,6 +318,7 @@ var Procs = struct {
 	DhcpGetServerSpecificStrings              *win32.Proc
 	DhcpGetSubnetDelayOffer                   *win32.Proc
 	DhcpGetSubnetInfo                         *win32.Proc
+	DhcpGetSubnetInfoV6                       *win32.Proc
 	DhcpGetSubnetInfoVQ                       *win32.Proc
 	DhcpGetSuperScopeInfoV4                   *win32.Proc
 	DhcpGetThreadOptions                      *win32.Proc
@@ -322,6 +342,7 @@ var Procs = struct {
 	DhcpHlprResetV4PolicyExpr                 *win32.Proc
 	DhcpModifyClass                           *win32.Proc
 	DhcpModifyClassV6                         *win32.Proc
+	DhcpRegisterParamChange                   *win32.Proc
 	DhcpRemoveDNSRegistrations                *win32.Proc
 	DhcpRemoveOption                          *win32.Proc
 	DhcpRemoveOptionV5                        *win32.Proc
@@ -332,6 +353,8 @@ var Procs = struct {
 	DhcpRemoveSubnetElement                   *win32.Proc
 	DhcpRemoveSubnetElementV4                 *win32.Proc
 	DhcpRemoveSubnetElementV5                 *win32.Proc
+	DhcpRemoveSubnetElementV6                 *win32.Proc
+	DhcpRequestParams                         *win32.Proc
 	DhcpRpcFreeMemory                         *win32.Proc
 	DhcpScanDatabase                          *win32.Proc
 	DhcpServerAuditlogParamsFree              *win32.Proc
@@ -368,6 +391,7 @@ var Procs = struct {
 	DhcpSetServerBindingInfoV6                *win32.Proc
 	DhcpSetSubnetDelayOffer                   *win32.Proc
 	DhcpSetSubnetInfo                         *win32.Proc
+	DhcpSetSubnetInfoV6                       *win32.Proc
 	DhcpSetSubnetInfoVQ                       *win32.Proc
 	DhcpSetSuperScopeV4                       *win32.Proc
 	DhcpSetThreadOptions                      *win32.Proc
@@ -412,11 +436,15 @@ var Procs = struct {
 	DhcpV4SetPolicyEnforcement                *win32.Proc
 	DhcpV4SetPolicyEx                         *win32.Proc
 	DhcpV6CreateClientInfo                    *win32.Proc
+	DhcpV6GetFreeIPAddress                    *win32.Proc
 	DhcpV6GetStatelessStatistics              *win32.Proc
+	DhcpV6GetStatelessStoreParams             *win32.Proc
+	DhcpV6SetStatelessStoreParams             *win32.Proc
 	Dhcpv6CApiCleanup                         *win32.Proc
 	Dhcpv6CApiInitialize                      *win32.Proc
 	Dhcpv6ReleasePrefix                       *win32.Proc
 	Dhcpv6RenewPrefix                         *win32.Proc
+	Dhcpv6RequestParams                       *win32.Proc
 	Dhcpv6RequestPrefix                       *win32.Proc
 }{
 	DhcpAddFilterV4:                           procDhcpAddFilterV4,
@@ -425,6 +453,7 @@ var Procs = struct {
 	DhcpAddSubnetElement:                      procDhcpAddSubnetElement,
 	DhcpAddSubnetElementV4:                    procDhcpAddSubnetElementV4,
 	DhcpAddSubnetElementV5:                    procDhcpAddSubnetElementV5,
+	DhcpAddSubnetElementV6:                    procDhcpAddSubnetElementV6,
 	DhcpAuditLogGetParams:                     procDhcpAuditLogGetParams,
 	DhcpAuditLogSetParams:                     procDhcpAuditLogSetParams,
 	DhcpCApiCleanup:                           procDhcpCApiCleanup,
@@ -438,6 +467,7 @@ var Procs = struct {
 	DhcpCreateOptionV5:                        procDhcpCreateOptionV5,
 	DhcpCreateOptionV6:                        procDhcpCreateOptionV6,
 	DhcpCreateSubnet:                          procDhcpCreateSubnet,
+	DhcpCreateSubnetV6:                        procDhcpCreateSubnetV6,
 	DhcpCreateSubnetVQ:                        procDhcpCreateSubnetVQ,
 	DhcpDeRegisterParamChange:                 procDhcpDeRegisterParamChange,
 	DhcpDeleteClass:                           procDhcpDeleteClass,
@@ -447,6 +477,7 @@ var Procs = struct {
 	DhcpDeleteFilterV4:                        procDhcpDeleteFilterV4,
 	DhcpDeleteServer:                          procDhcpDeleteServer,
 	DhcpDeleteSubnet:                          procDhcpDeleteSubnet,
+	DhcpDeleteSubnetV6:                        procDhcpDeleteSubnetV6,
 	DhcpDeleteSuperScopeV4:                    procDhcpDeleteSuperScopeV4,
 	DhcpDsCleanup:                             procDhcpDsCleanup,
 	DhcpDsInit:                                procDhcpDsInit,
@@ -464,10 +495,12 @@ var Procs = struct {
 	DhcpEnumSubnetClientsFilterStatusInfo:     procDhcpEnumSubnetClientsFilterStatusInfo,
 	DhcpEnumSubnetClientsV4:                   procDhcpEnumSubnetClientsV4,
 	DhcpEnumSubnetClientsV5:                   procDhcpEnumSubnetClientsV5,
+	DhcpEnumSubnetClientsV6:                   procDhcpEnumSubnetClientsV6,
 	DhcpEnumSubnetClientsVQ:                   procDhcpEnumSubnetClientsVQ,
 	DhcpEnumSubnetElements:                    procDhcpEnumSubnetElements,
 	DhcpEnumSubnetElementsV4:                  procDhcpEnumSubnetElementsV4,
 	DhcpEnumSubnetElementsV5:                  procDhcpEnumSubnetElementsV5,
+	DhcpEnumSubnetElementsV6:                  procDhcpEnumSubnetElementsV6,
 	DhcpEnumSubnets:                           procDhcpEnumSubnets,
 	DhcpEnumSubnetsV6:                         procDhcpEnumSubnetsV6,
 	DhcpGetAllOptionValues:                    procDhcpGetAllOptionValues,
@@ -496,6 +529,7 @@ var Procs = struct {
 	DhcpGetServerSpecificStrings:              procDhcpGetServerSpecificStrings,
 	DhcpGetSubnetDelayOffer:                   procDhcpGetSubnetDelayOffer,
 	DhcpGetSubnetInfo:                         procDhcpGetSubnetInfo,
+	DhcpGetSubnetInfoV6:                       procDhcpGetSubnetInfoV6,
 	DhcpGetSubnetInfoVQ:                       procDhcpGetSubnetInfoVQ,
 	DhcpGetSuperScopeInfoV4:                   procDhcpGetSuperScopeInfoV4,
 	DhcpGetThreadOptions:                      procDhcpGetThreadOptions,
@@ -519,6 +553,7 @@ var Procs = struct {
 	DhcpHlprResetV4PolicyExpr:                 procDhcpHlprResetV4PolicyExpr,
 	DhcpModifyClass:                           procDhcpModifyClass,
 	DhcpModifyClassV6:                         procDhcpModifyClassV6,
+	DhcpRegisterParamChange:                   procDhcpRegisterParamChange,
 	DhcpRemoveDNSRegistrations:                procDhcpRemoveDNSRegistrations,
 	DhcpRemoveOption:                          procDhcpRemoveOption,
 	DhcpRemoveOptionV5:                        procDhcpRemoveOptionV5,
@@ -529,6 +564,8 @@ var Procs = struct {
 	DhcpRemoveSubnetElement:                   procDhcpRemoveSubnetElement,
 	DhcpRemoveSubnetElementV4:                 procDhcpRemoveSubnetElementV4,
 	DhcpRemoveSubnetElementV5:                 procDhcpRemoveSubnetElementV5,
+	DhcpRemoveSubnetElementV6:                 procDhcpRemoveSubnetElementV6,
+	DhcpRequestParams:                         procDhcpRequestParams,
 	DhcpRpcFreeMemory:                         procDhcpRpcFreeMemory,
 	DhcpScanDatabase:                          procDhcpScanDatabase,
 	DhcpServerAuditlogParamsFree:              procDhcpServerAuditlogParamsFree,
@@ -565,6 +602,7 @@ var Procs = struct {
 	DhcpSetServerBindingInfoV6:                procDhcpSetServerBindingInfoV6,
 	DhcpSetSubnetDelayOffer:                   procDhcpSetSubnetDelayOffer,
 	DhcpSetSubnetInfo:                         procDhcpSetSubnetInfo,
+	DhcpSetSubnetInfoV6:                       procDhcpSetSubnetInfoV6,
 	DhcpSetSubnetInfoVQ:                       procDhcpSetSubnetInfoVQ,
 	DhcpSetSuperScopeV4:                       procDhcpSetSuperScopeV4,
 	DhcpSetThreadOptions:                      procDhcpSetThreadOptions,
@@ -609,11 +647,15 @@ var Procs = struct {
 	DhcpV4SetPolicyEnforcement:                procDhcpV4SetPolicyEnforcement,
 	DhcpV4SetPolicyEx:                         procDhcpV4SetPolicyEx,
 	DhcpV6CreateClientInfo:                    procDhcpV6CreateClientInfo,
+	DhcpV6GetFreeIPAddress:                    procDhcpV6GetFreeIPAddress,
 	DhcpV6GetStatelessStatistics:              procDhcpV6GetStatelessStatistics,
+	DhcpV6GetStatelessStoreParams:             procDhcpV6GetStatelessStoreParams,
+	DhcpV6SetStatelessStoreParams:             procDhcpV6SetStatelessStoreParams,
 	Dhcpv6CApiCleanup:                         procDhcpv6CApiCleanup,
 	Dhcpv6CApiInitialize:                      procDhcpv6CApiInitialize,
 	Dhcpv6ReleasePrefix:                       procDhcpv6ReleasePrefix,
 	Dhcpv6RenewPrefix:                         procDhcpv6RenewPrefix,
+	Dhcpv6RequestParams:                       procDhcpv6RequestParams,
 	Dhcpv6RequestPrefix:                       procDhcpv6RequestPrefix,
 }
 
@@ -666,6 +708,17 @@ func DhcpAddSubnetElementV4(ServerIpAddress string, SubnetAddress uint32, AddEle
 func DhcpAddSubnetElementV5(ServerIpAddress string, SubnetAddress uint32, AddElementInfo *DHCP_SUBNET_ELEMENT_DATA_V5) uint32 {
 	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpAddSubnetElementV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(AddElementInfo)))
+	return uint32(r1)
+}
+
+var specDhcpAddSubnetElementV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpAddSubnetElementV6 calls DHCPSAPI!DhcpAddSubnetElementV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpaddsubnetelementv6
+// Minimum OS: windowsserver2008.
+func DhcpAddSubnetElementV6(ServerIpAddress string, SubnetAddress DHCP_IPV6_ADDRESS, AddElementInfo *DHCP_SUBNET_ELEMENT_DATA_V6) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpAddSubnetElementV6.Addr(), specDhcpAddSubnetElementV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(AddElementInfo))).Tuple()
 	return uint32(r1)
 }
 
@@ -788,6 +841,17 @@ func DhcpCreateSubnet(ServerIpAddress string, SubnetAddress uint32, SubnetInfo *
 	return uint32(r1)
 }
 
+var specDhcpCreateSubnetV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpCreateSubnetV6 calls DHCPSAPI!DhcpCreateSubnetV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreatesubnetv6
+// Minimum OS: windowsserver2008.
+func DhcpCreateSubnetV6(ServerIpAddress string, SubnetAddress DHCP_IPV6_ADDRESS, SubnetInfo *DHCP_SUBNET_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpCreateSubnetV6.Addr(), specDhcpCreateSubnetV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(SubnetInfo))).Tuple()
+	return uint32(r1)
+}
+
 // DhcpCreateSubnetVQ calls DHCPSAPI!DhcpCreateSubnetVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpcreatesubnetvq
 // Minimum OS: windowsserver2008.
@@ -866,6 +930,17 @@ func DhcpDeleteServer(Flags uint32, IdInfo unsafe.Pointer, NewServer *DHCPDS_SER
 func DhcpDeleteSubnet(ServerIpAddress string, SubnetAddress uint32, ForceFlag DHCP_FORCE_FLAG) uint32 {
 	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpDeleteSubnet.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(ForceFlag))
+	return uint32(r1)
+}
+
+var specDhcpDeleteSubnetV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpDeleteSubnetV6 calls DHCPSAPI!DhcpDeleteSubnetV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpdeletesubnetv6
+// Minimum OS: windowsserver2008.
+func DhcpDeleteSubnetV6(ServerIpAddress string, SubnetAddress DHCP_IPV6_ADDRESS, ForceFlag DHCP_FORCE_FLAG) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpDeleteSubnetV6.Addr(), specDhcpDeleteSubnetV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(ForceFlag)).Tuple()
 	return uint32(r1)
 }
 
@@ -1027,6 +1102,17 @@ func DhcpEnumSubnetClientsV5(ServerIpAddress string, SubnetAddress uint32, Resum
 	return uint32(r1)
 }
 
+var specDhcpEnumSubnetClientsV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DhcpEnumSubnetClientsV6 calls DHCPSAPI!DhcpEnumSubnetClientsV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetclientsv6
+// Minimum OS: windowsserver2008.
+func DhcpEnumSubnetClientsV6(ServerIpAddress string, SubnetAddress DHCP_IPV6_ADDRESS, ResumeHandle *DHCP_IPV6_ADDRESS, PreferredMaximum uint32, ClientInfo **DHCP_CLIENT_INFO_ARRAY_V6, ClientsRead *uint32, ClientsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpEnumSubnetClientsV6.Addr(), specDhcpEnumSubnetClientsV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(ClientInfo)), uintptr(unsafe.Pointer(ClientsRead)), uintptr(unsafe.Pointer(ClientsTotal))).Tuple()
+	return uint32(r1)
+}
+
 // DhcpEnumSubnetClientsVQ calls DHCPSAPI!DhcpEnumSubnetClientsVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetclientsvq
 // Minimum OS: windowsserver2008.
@@ -1060,6 +1146,17 @@ func DhcpEnumSubnetElementsV4(ServerIpAddress string, SubnetAddress uint32, Enum
 func DhcpEnumSubnetElementsV5(ServerIpAddress string, SubnetAddress uint32, EnumElementType DHCP_SUBNET_ELEMENT_TYPE, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
 	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpEnumSubnetElementsV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(EnumElementType), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(EnumElementInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal)))
+	return uint32(r1)
+}
+
+var specDhcpEnumSubnetElementsV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DhcpEnumSubnetElementsV6 calls DHCPSAPI!DhcpEnumSubnetElementsV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpenumsubnetelementsv6
+// Minimum OS: windowsserver2008.
+func DhcpEnumSubnetElementsV6(ServerIpAddress string, SubnetAddress DHCP_IPV6_ADDRESS, EnumElementType DHCP_SUBNET_ELEMENT_TYPE_V6, ResumeHandle *uint32, PreferredMaximum uint32, EnumElementInfo **DHCP_SUBNET_ELEMENT_INFO_ARRAY_V6, ElementsRead *uint32, ElementsTotal *uint32) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpEnumSubnetElementsV6.Addr(), specDhcpEnumSubnetElementsV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(EnumElementType), uintptr(unsafe.Pointer(ResumeHandle)), uintptr(PreferredMaximum), uintptr(unsafe.Pointer(EnumElementInfo)), uintptr(unsafe.Pointer(ElementsRead)), uintptr(unsafe.Pointer(ElementsTotal))).Tuple()
 	return uint32(r1)
 }
 
@@ -1319,6 +1416,17 @@ func DhcpGetSubnetInfo(ServerIpAddress string, SubnetAddress uint32, SubnetInfo 
 	return uint32(r1)
 }
 
+var specDhcpGetSubnetInfoV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpGetSubnetInfoV6 calls DHCPSAPI!DhcpGetSubnetInfoV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetsubnetinfov6
+// Minimum OS: windowsserver2008.
+func DhcpGetSubnetInfoV6(ServerIpAddress string, SubnetAddress DHCP_IPV6_ADDRESS, SubnetInfo **DHCP_SUBNET_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpGetSubnetInfoV6.Addr(), specDhcpGetSubnetInfoV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(SubnetInfo))).Tuple()
+	return uint32(r1)
+}
+
 // DhcpGetSubnetInfoVQ calls DHCPSAPI!DhcpGetSubnetInfoVQ.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpgetsubnetinfovq
 // Minimum OS: windowsserver2008.
@@ -1501,6 +1609,17 @@ func DhcpModifyClassV6(ServerIpAddress string, ReservedMustBeZero uint32, ClassI
 	return uint32(r1)
 }
 
+var specDhcpRegisterParamChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpRegisterParamChange calls dhcpcsvc!DhcpRegisterParamChange.
+// https://learn.microsoft.com/windows/win32/api/dhcpcsdk/nf-dhcpcsdk-dhcpregisterparamchange
+// Minimum OS: windows5.0.
+func DhcpRegisterParamChange(Flags uint32, AdapterName string, ClassId *DHCPCAPI_CLASSID, Params DHCPCAPI_PARAMS_ARRAY, Handle unsafe.Pointer) uint32 {
+	_AdapterName := win32.UTF16Ptr(AdapterName)
+	r1, _, _ := win32.Call(procDhcpRegisterParamChange.Addr(), specDhcpRegisterParamChange, nil, uintptr(Flags), 0, uintptr(unsafe.Pointer(_AdapterName)), uintptr(unsafe.Pointer(ClassId)), uintptr(unsafe.Pointer(&Params)), uintptr(unsafe.Pointer(Handle))).Tuple()
+	return uint32(r1)
+}
+
 // DhcpRemoveDNSRegistrations calls dhcpcsvc!DhcpRemoveDNSRegistrations.
 // https://learn.microsoft.com/windows/win32/api/dhcpcsdk/nf-dhcpcsdk-dhcpremovednsregistrations
 // Minimum OS: windows5.0.
@@ -1595,6 +1714,29 @@ func DhcpRemoveSubnetElementV4(ServerIpAddress string, SubnetAddress uint32, Rem
 func DhcpRemoveSubnetElementV5(ServerIpAddress string, SubnetAddress uint32, RemoveElementInfo *DHCP_SUBNET_ELEMENT_DATA_V5, ForceFlag DHCP_FORCE_FLAG) uint32 {
 	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpRemoveSubnetElementV5.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(RemoveElementInfo)), uintptr(ForceFlag))
+	return uint32(r1)
+}
+
+var specDhcpRemoveSubnetElementV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// DhcpRemoveSubnetElementV6 calls DHCPSAPI!DhcpRemoveSubnetElementV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpremovesubnetelementv6
+// Minimum OS: windowsserver2008.
+func DhcpRemoveSubnetElementV6(ServerIpAddress string, SubnetAddress DHCP_IPV6_ADDRESS, RemoveElementInfo *DHCP_SUBNET_ELEMENT_DATA_V6, ForceFlag DHCP_FORCE_FLAG) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpRemoveSubnetElementV6.Addr(), specDhcpRemoveSubnetElementV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(RemoveElementInfo)), uintptr(ForceFlag)).Tuple()
+	return uint32(r1)
+}
+
+var specDhcpRequestParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// DhcpRequestParams calls dhcpcsvc!DhcpRequestParams.
+// https://learn.microsoft.com/windows/win32/api/dhcpcsdk/nf-dhcpcsdk-dhcprequestparams
+// Minimum OS: windows5.0.
+func DhcpRequestParams(Flags uint32, Reserved unsafe.Pointer, AdapterName string, ClassId *DHCPCAPI_CLASSID, SendParams DHCPCAPI_PARAMS_ARRAY, RecdParams DHCPCAPI_PARAMS_ARRAY, Buffer *byte, pSize *uint32, RequestIdStr string) uint32 {
+	_AdapterName := win32.UTF16Ptr(AdapterName)
+	_RequestIdStr := win32.UTF16Ptr(RequestIdStr)
+	r1, _, _ := win32.Call(procDhcpRequestParams.Addr(), specDhcpRequestParams, nil, uintptr(Flags), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(_AdapterName)), uintptr(unsafe.Pointer(ClassId)), uintptr(unsafe.Pointer(&SendParams)), uintptr(unsafe.Pointer(&RecdParams)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pSize)), uintptr(unsafe.Pointer(_RequestIdStr))).Tuple()
 	return uint32(r1)
 }
 
@@ -1929,6 +2071,17 @@ func DhcpSetSubnetDelayOffer(ServerIpAddress string, SubnetAddress uint32, TimeD
 func DhcpSetSubnetInfo(ServerIpAddress string, SubnetAddress uint32, SubnetInfo *DHCP_SUBNET_INFO) uint32 {
 	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpSetSubnetInfo.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(SubnetAddress), uintptr(unsafe.Pointer(SubnetInfo)))
+	return uint32(r1)
+}
+
+var specDhcpSetSubnetInfoV6 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpSetSubnetInfoV6 calls DHCPSAPI!DhcpSetSubnetInfoV6.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpsetsubnetinfov6
+// Minimum OS: windowsserver2008.
+func DhcpSetSubnetInfoV6(ServerIpAddress string, SubnetAddress DHCP_IPV6_ADDRESS, SubnetInfo *DHCP_SUBNET_INFO_V6) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpSetSubnetInfoV6.Addr(), specDhcpSetSubnetInfoV6, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(SubnetInfo))).Tuple()
 	return uint32(r1)
 }
 
@@ -2344,12 +2497,47 @@ func DhcpV6CreateClientInfo(ServerIpAddress string, ClientInfo *DHCP_CLIENT_INFO
 	return uint32(r1)
 }
 
+var specDhcpV6GetFreeIPAddress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// DhcpV6GetFreeIPAddress calls DHCPSAPI!DhcpV6GetFreeIPAddress.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv6getfreeipaddress
+// Minimum OS: windowsserver2012.
+func DhcpV6GetFreeIPAddress(ServerIpAddress string, ScopeId DHCP_IPV6_ADDRESS, StartIP DHCP_IPV6_ADDRESS, EndIP DHCP_IPV6_ADDRESS, NumFreeAddrReq uint32, IPAddrList **DHCPV6_IP_ARRAY) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	r1, _, _ := win32.Call(procDhcpV6GetFreeIPAddress.Addr(), specDhcpV6GetFreeIPAddress, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(&ScopeId)), uintptr(unsafe.Pointer(&StartIP)), uintptr(unsafe.Pointer(&EndIP)), uintptr(NumFreeAddrReq), uintptr(unsafe.Pointer(IPAddrList))).Tuple()
+	return uint32(r1)
+}
+
 // DhcpV6GetStatelessStatistics calls DHCPSAPI!DhcpV6GetStatelessStatistics.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv6getstatelessstatistics
 // Minimum OS: windowsserver2012.
 func DhcpV6GetStatelessStatistics(ServerIpAddress string, StatelessStats **DHCPV6_STATELESS_STATS) uint32 {
 	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
 	r1, _, _ := syscall.SyscallN(procDhcpV6GetStatelessStatistics.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(unsafe.Pointer(StatelessStats)))
+	return uint32(r1)
+}
+
+var specDhcpV6GetStatelessStoreParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// DhcpV6GetStatelessStoreParams calls DHCPSAPI!DhcpV6GetStatelessStoreParams.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv6getstatelessstoreparams
+// Minimum OS: windowsserver2012.
+func DhcpV6GetStatelessStoreParams(ServerIpAddress string, fServerLevel bool, SubnetAddress DHCP_IPV6_ADDRESS, Params **DHCPV6_STATELESS_PARAMS) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	_fServerLevel := win32.Bool32(fServerLevel)
+	r1, _, _ := win32.Call(procDhcpV6GetStatelessStoreParams.Addr(), specDhcpV6GetStatelessStoreParams, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fServerLevel), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(unsafe.Pointer(Params))).Tuple()
+	return uint32(r1)
+}
+
+var specDhcpV6SetStatelessStoreParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// DhcpV6SetStatelessStoreParams calls DHCPSAPI!DhcpV6SetStatelessStoreParams.
+// https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv6setstatelessstoreparams
+// Minimum OS: windowsserver2012.
+func DhcpV6SetStatelessStoreParams(ServerIpAddress string, fServerLevel bool, SubnetAddress DHCP_IPV6_ADDRESS, FieldModified uint32, Params *DHCPV6_STATELESS_PARAMS) uint32 {
+	_ServerIpAddress := win32.UTF16Ptr(ServerIpAddress)
+	_fServerLevel := win32.Bool32(fServerLevel)
+	r1, _, _ := win32.Call(procDhcpV6SetStatelessStoreParams.Addr(), specDhcpV6SetStatelessStoreParams, nil, uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fServerLevel), uintptr(unsafe.Pointer(&SubnetAddress)), uintptr(FieldModified), uintptr(unsafe.Pointer(Params))).Tuple()
 	return uint32(r1)
 }
 
@@ -2382,6 +2570,18 @@ func Dhcpv6ReleasePrefix(adapterName string, classId *DHCPV6CAPI_CLASSID, leaseI
 func Dhcpv6RenewPrefix(adapterName string, pclassId *DHCPV6CAPI_CLASSID, prefixleaseInfo *DHCPV6PrefixLeaseInformation, pdwTimeToWait *uint32, bValidatePrefix uint32) uint32 {
 	_adapterName := win32.UTF16Ptr(adapterName)
 	r1, _, _ := syscall.SyscallN(procDhcpv6RenewPrefix.Addr(), uintptr(unsafe.Pointer(_adapterName)), uintptr(unsafe.Pointer(pclassId)), uintptr(unsafe.Pointer(prefixleaseInfo)), uintptr(unsafe.Pointer(pdwTimeToWait)), uintptr(bValidatePrefix))
+	return uint32(r1)
+}
+
+var specDhcpv6RequestParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// Dhcpv6RequestParams calls dhcpcsvc6!Dhcpv6RequestParams.
+// https://learn.microsoft.com/windows/win32/api/dhcpv6csdk/nf-dhcpv6csdk-dhcpv6requestparams
+// Minimum OS: windows6.0.6000.
+func Dhcpv6RequestParams(forceNewInform bool, reserved unsafe.Pointer, adapterName string, classId *DHCPV6CAPI_CLASSID, recdParams DHCPV6CAPI_PARAMS_ARRAY, buffer *byte, pSize *uint32) uint32 {
+	_forceNewInform := win32.Bool32(forceNewInform)
+	_adapterName := win32.UTF16Ptr(adapterName)
+	r1, _, _ := win32.Call(procDhcpv6RequestParams.Addr(), specDhcpv6RequestParams, nil, uintptr(_forceNewInform), uintptr(unsafe.Pointer(reserved)), uintptr(unsafe.Pointer(_adapterName)), uintptr(unsafe.Pointer(classId)), uintptr(unsafe.Pointer(&recdParams)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(pSize))).Tuple()
 	return uint32(r1)
 }
 

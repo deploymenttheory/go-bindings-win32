@@ -1096,6 +1096,14 @@ func (self *ICorProfilerInfo12) EventPipeStartSession(pProviderConfigs []COR_PRF
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specICorProfilerInfo12_EventPipeAddProviderToSession = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(32, 8, 0, false)}}
+
+// EventPipeAddProviderToSession dispatches through ICorProfilerInfo12's vtable slot 102.
+func (self *ICorProfilerInfo12) EventPipeAddProviderToSession(session uint64, providerConfig COR_PRF_EVENTPIPE_PROVIDER_CONFIG) error {
+	r1, _, _ := win32.Call(self.LpVtbl[102], specICorProfilerInfo12_EventPipeAddProviderToSession, nil, uintptr(unsafe.Pointer(self)), uintptr(session), uintptr(unsafe.Pointer(&providerConfig))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // EventPipeStopSession dispatches through ICorProfilerInfo12's vtable slot 103.
 func (self *ICorProfilerInfo12) EventPipeStopSession(session uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(session))

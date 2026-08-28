@@ -525,6 +525,14 @@ type IDispError struct {
 // IID_IDispError is the interface identifier for IDispError.
 var IID_IDispError = win32.GUID{Data1: 0xa6ef9861, Data2: 0xc720, Data3: 0x11d0, Data4: [8]byte{0x93, 0x37, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9}}
 
+var specIDispError_QueryErrorInfo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// QueryErrorInfo dispatches through IDispError's vtable slot 3.
+func (self *IDispError) QueryErrorInfo(guidErrorType win32.GUID, ppde **IDispError) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIDispError_QueryErrorInfo, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidErrorType)), uintptr(unsafe.Pointer(ppde))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetNext dispatches through IDispError's vtable slot 4.
 func (self *IDispError) GetNext(ppde **IDispError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppde)))

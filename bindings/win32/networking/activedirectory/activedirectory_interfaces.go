@@ -5,6 +5,7 @@
 package activedirectory
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -80,9 +81,33 @@ func (self *IADs) Get(bstrName foundation.BSTR, pvProp *systemvariant.VARIANT) e
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADs_Put = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put dispatches through IADs's vtable slot 16.
+func (self *IADs) Put(bstrName foundation.BSTR, vProp systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIADs_Put, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&vProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetEx dispatches through IADs's vtable slot 17.
 func (self *IADs) GetEx(bstrName foundation.BSTR, pvProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pvProp)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADs_PutEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// PutEx dispatches through IADs's vtable slot 18.
+func (self *IADs) PutEx(lnControlCode int32, bstrName foundation.BSTR, vProp systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIADs_PutEx, nil, uintptr(unsafe.Pointer(self)), uintptr(lnControlCode), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&vProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADs_GetInfoEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetInfoEx dispatches through IADs's vtable slot 19.
+func (self *IADs) GetInfoEx(vProperties systemvariant.VARIANT, lnReserved int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIADs_GetInfoEx, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vProperties)), uintptr(lnReserved)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -474,6 +499,14 @@ func (self *IADsCaseIgnoreList) Get_CaseIgnoreList(retval *systemvariant.VARIANT
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsCaseIgnoreList_Put_CaseIgnoreList = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_CaseIgnoreList dispatches through IADsCaseIgnoreList's vtable slot 8.
+func (self *IADsCaseIgnoreList) Put_CaseIgnoreList(vCaseIgnoreList systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIADsCaseIgnoreList_Put_CaseIgnoreList, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vCaseIgnoreList))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IADsClass: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsclass
 // IID: c8f93dd0-4ae0-11cf-9e73-00aa004a5691
 type IADsClass struct {
@@ -543,9 +576,25 @@ func (self *IADsClass) Get_MandatoryProperties(retval *systemvariant.VARIANT) er
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsClass_Put_MandatoryProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_MandatoryProperties dispatches through IADsClass's vtable slot 30.
+func (self *IADsClass) Put_MandatoryProperties(vMandatoryProperties systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIADsClass_Put_MandatoryProperties, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vMandatoryProperties))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_OptionalProperties dispatches through IADsClass's vtable slot 31.
 func (self *IADsClass) Get_OptionalProperties(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsClass_Put_OptionalProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_OptionalProperties dispatches through IADsClass's vtable slot 32.
+func (self *IADsClass) Put_OptionalProperties(vOptionalProperties systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIADsClass_Put_OptionalProperties, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vOptionalProperties))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -555,9 +604,25 @@ func (self *IADsClass) Get_NamingProperties(retval *systemvariant.VARIANT) error
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsClass_Put_NamingProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_NamingProperties dispatches through IADsClass's vtable slot 34.
+func (self *IADsClass) Put_NamingProperties(vNamingProperties systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIADsClass_Put_NamingProperties, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vNamingProperties))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DerivedFrom dispatches through IADsClass's vtable slot 35.
 func (self *IADsClass) Get_DerivedFrom(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsClass_Put_DerivedFrom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_DerivedFrom dispatches through IADsClass's vtable slot 36.
+func (self *IADsClass) Put_DerivedFrom(vDerivedFrom systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIADsClass_Put_DerivedFrom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vDerivedFrom))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -567,15 +632,39 @@ func (self *IADsClass) Get_AuxDerivedFrom(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsClass_Put_AuxDerivedFrom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_AuxDerivedFrom dispatches through IADsClass's vtable slot 38.
+func (self *IADsClass) Put_AuxDerivedFrom(vAuxDerivedFrom systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIADsClass_Put_AuxDerivedFrom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vAuxDerivedFrom))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PossibleSuperiors dispatches through IADsClass's vtable slot 39.
 func (self *IADsClass) Get_PossibleSuperiors(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsClass_Put_PossibleSuperiors = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PossibleSuperiors dispatches through IADsClass's vtable slot 40.
+func (self *IADsClass) Put_PossibleSuperiors(vPossibleSuperiors systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIADsClass_Put_PossibleSuperiors, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vPossibleSuperiors))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Containment dispatches through IADsClass's vtable slot 41.
 func (self *IADsClass) Get_Containment(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsClass_Put_Containment = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Containment dispatches through IADsClass's vtable slot 42.
+func (self *IADsClass) Put_Containment(vContainment systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIADsClass_Put_Containment, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vContainment))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -633,6 +722,14 @@ var IID_IADsCollection = win32.GUID{Data1: 0x72b945e0, Data2: 0x253b, Data3: 0x1
 // Get__NewEnum dispatches through IADsCollection's vtable slot 7.
 func (self *IADsCollection) Get__NewEnum(ppEnumerator **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumerator)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsCollection_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Add dispatches through IADsCollection's vtable slot 8.
+func (self *IADsCollection) Add(bstrName foundation.BSTR, vItem systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIADsCollection_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&vItem))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -843,6 +940,14 @@ func (self *IADsComputer) Get_NetAddresses(retval *systemvariant.VARIANT) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsComputer_Put_NetAddresses = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_NetAddresses dispatches through IADsComputer's vtable slot 51.
+func (self *IADsComputer) Put_NetAddresses(vNetAddresses systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specIADsComputer_Put_NetAddresses, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vNetAddresses))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IADsComputerOperations: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadscomputeroperations
 // IID: ef497680-1d9f-11cf-b1f3-02608c9e7553
 type IADsComputerOperations struct {
@@ -891,9 +996,25 @@ func (self *IADsContainer) Get_Filter(pVar *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsContainer_Put_Filter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Filter dispatches through IADsContainer's vtable slot 10.
+func (self *IADsContainer) Put_Filter(Var systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIADsContainer_Put_Filter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Var))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Hints dispatches through IADsContainer's vtable slot 11.
 func (self *IADsContainer) Get_Hints(pvFilter *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvFilter)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsContainer_Put_Hints = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Hints dispatches through IADsContainer's vtable slot 12.
+func (self *IADsContainer) Put_Hints(vHints systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIADsContainer_Put_Hints, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vHints))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -939,6 +1060,14 @@ var IID_IADsDNWithBinary = win32.GUID{Data1: 0x7e99c0a2, Data2: 0xf935, Data3: 0
 // Get_BinaryValue dispatches through IADsDNWithBinary's vtable slot 7.
 func (self *IADsDNWithBinary) Get_BinaryValue(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsDNWithBinary_Put_BinaryValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_BinaryValue dispatches through IADsDNWithBinary's vtable slot 8.
+func (self *IADsDNWithBinary) Put_BinaryValue(vBinaryValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIADsDNWithBinary_Put_BinaryValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vBinaryValue))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1155,6 +1284,14 @@ type IADsExtension struct {
 // IID_IADsExtension is the interface identifier for IADsExtension.
 var IID_IADsExtension = win32.GUID{Data1: 0x3d35553c, Data2: 0xd2b0, Data3: 0x11d1, Data4: [8]byte{0xb1, 0x7b, 0x00, 0x00, 0xf8, 0x75, 0x93, 0xa0}}
 
+var specIADsExtension_Operate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// Operate dispatches through IADsExtension's vtable slot 3.
+func (self *IADsExtension) Operate(dwCode uint32, varData1 systemvariant.VARIANT, varData2 systemvariant.VARIANT, varData3 systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIADsExtension_Operate, nil, uintptr(unsafe.Pointer(self)), uintptr(dwCode), uintptr(unsafe.Pointer(&varData1)), uintptr(unsafe.Pointer(&varData2)), uintptr(unsafe.Pointer(&varData3))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // PrivateGetIDsOfNames dispatches through IADsExtension's vtable slot 4.
 func (self *IADsExtension) PrivateGetIDsOfNames(riid *win32.GUID, rgszNames **uint16, cNames uint32, lcid uint32, rgDispid *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(rgszNames)), uintptr(cNames), uintptr(lcid), uintptr(unsafe.Pointer(rgDispid)))
@@ -1191,6 +1328,14 @@ func (self *IADsFaxNumber) Put_TelephoneNumber(bstrTelephoneNumber foundation.BS
 // Get_Parameters dispatches through IADsFaxNumber's vtable slot 9.
 func (self *IADsFaxNumber) Get_Parameters(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsFaxNumber_Put_Parameters = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Parameters dispatches through IADsFaxNumber's vtable slot 10.
+func (self *IADsFaxNumber) Put_Parameters(vParameters systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIADsFaxNumber_Put_Parameters, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vParameters))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1473,6 +1618,14 @@ func (self *IADsLocality) Get_SeeAlso(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsLocality_Put_SeeAlso = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SeeAlso dispatches through IADsLocality's vtable slot 27.
+func (self *IADsLocality) Put_SeeAlso(vSeeAlso systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIADsLocality_Put_SeeAlso, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vSeeAlso))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IADsMembers: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsmembers
 // IID: 451a0030-72ec-11cf-b03b-00aa006e0975
 type IADsMembers struct {
@@ -1497,6 +1650,14 @@ func (self *IADsMembers) Get__NewEnum(ppEnumerator **systemcom.IUnknown) error {
 // Get_Filter dispatches through IADsMembers's vtable slot 9.
 func (self *IADsMembers) Get_Filter(pvFilter *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvFilter)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsMembers_Put_Filter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Filter dispatches through IADsMembers's vtable slot 10.
+func (self *IADsMembers) Put_Filter(pvFilter systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIADsMembers_Put_Filter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pvFilter))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1536,6 +1697,14 @@ func (self *IADsNameTranslate) Set(lnSetType int32, bstrADsPath foundation.BSTR)
 // Get dispatches through IADsNameTranslate's vtable slot 11.
 func (self *IADsNameTranslate) Get(lnFormatType int32, pbstrADsPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lnFormatType), uintptr(unsafe.Pointer(pbstrADsPath)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsNameTranslate_SetEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetEx dispatches through IADsNameTranslate's vtable slot 12.
+func (self *IADsNameTranslate) SetEx(lnFormatType int32, pvar systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIADsNameTranslate_SetEx, nil, uintptr(unsafe.Pointer(self)), uintptr(lnFormatType), uintptr(unsafe.Pointer(&pvar))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1590,6 +1759,14 @@ func (self *IADsNetAddress) Put_AddressType(lnAddressType int32) error {
 // Get_Address dispatches through IADsNetAddress's vtable slot 9.
 func (self *IADsNetAddress) Get_Address(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsNetAddress_Put_Address = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Address dispatches through IADsNetAddress's vtable slot 10.
+func (self *IADsNetAddress) Put_Address(vAddress systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIADsNetAddress_Put_Address, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vAddress))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1668,6 +1845,14 @@ func (self *IADsO) Get_SeeAlso(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsO_Put_SeeAlso = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SeeAlso dispatches through IADsO's vtable slot 31.
+func (self *IADsO) Put_SeeAlso(vSeeAlso systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIADsO_Put_SeeAlso, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vSeeAlso))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IADsOU: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsou
 // IID: a2f733b8-effe-11cf-8abc-00c04fd8d503
 type IADsOU struct {
@@ -1743,6 +1928,14 @@ func (self *IADsOU) Get_SeeAlso(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsOU_Put_SeeAlso = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SeeAlso dispatches through IADsOU's vtable slot 31.
+func (self *IADsOU) Put_SeeAlso(vSeeAlso systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIADsOU_Put_SeeAlso, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vSeeAlso))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_BusinessCategory dispatches through IADsOU's vtable slot 32.
 func (self *IADsOU) Get_BusinessCategory(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
@@ -1770,6 +1963,14 @@ func (self *IADsObjectOptions) GetOption(lnOption int32, pvValue *systemvariant.
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsObjectOptions_SetOption = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetOption dispatches through IADsObjectOptions's vtable slot 8.
+func (self *IADsObjectOptions) SetOption(lnOption int32, vValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIADsObjectOptions_SetOption, nil, uintptr(unsafe.Pointer(self)), uintptr(lnOption), uintptr(unsafe.Pointer(&vValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IADsOctetList: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsoctetlist
 // IID: 7b28b80f-4680-11d1-a3b4-00c04fb950dc
 type IADsOctetList struct {
@@ -1782,6 +1983,14 @@ var IID_IADsOctetList = win32.GUID{Data1: 0x7b28b80f, Data2: 0x4680, Data3: 0x11
 // Get_OctetList dispatches through IADsOctetList's vtable slot 7.
 func (self *IADsOctetList) Get_OctetList(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsOctetList_Put_OctetList = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_OctetList dispatches through IADsOctetList's vtable slot 8.
+func (self *IADsOctetList) Put_OctetList(vOctetList systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIADsOctetList_Put_OctetList, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vOctetList))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1935,6 +2144,14 @@ func (self *IADsPostalAddress) Get_PostalAddress(retval *systemvariant.VARIANT) 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsPostalAddress_Put_PostalAddress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PostalAddress dispatches through IADsPostalAddress's vtable slot 8.
+func (self *IADsPostalAddress) Put_PostalAddress(vPostalAddress systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIADsPostalAddress_Put_PostalAddress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vPostalAddress))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IADsPrintJob: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsprintjob
 // IID: 32fb6780-1ed0-11cf-a988-00aa006bc149
 type IADsPrintJob struct {
@@ -2010,9 +2227,25 @@ func (self *IADsPrintJob) Get_StartTime(retval *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsPrintJob_Put_StartTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_StartTime dispatches through IADsPrintJob's vtable slot 31.
+func (self *IADsPrintJob) Put_StartTime(daStartTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIADsPrintJob_Put_StartTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(daStartTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_UntilTime dispatches through IADsPrintJob's vtable slot 32.
 func (self *IADsPrintJob) Get_UntilTime(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsPrintJob_Put_UntilTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_UntilTime dispatches through IADsPrintJob's vtable slot 33.
+func (self *IADsPrintJob) Put_UntilTime(daUntilTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIADsPrintJob_Put_UntilTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(daUntilTime))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2178,9 +2411,25 @@ func (self *IADsPrintQueue) Get_StartTime(retval *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsPrintQueue_Put_StartTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_StartTime dispatches through IADsPrintQueue's vtable slot 33.
+func (self *IADsPrintQueue) Put_StartTime(daStartTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIADsPrintQueue_Put_StartTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(daStartTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_UntilTime dispatches through IADsPrintQueue's vtable slot 34.
 func (self *IADsPrintQueue) Get_UntilTime(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsPrintQueue_Put_UntilTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_UntilTime dispatches through IADsPrintQueue's vtable slot 35.
+func (self *IADsPrintQueue) Put_UntilTime(daUntilTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIADsPrintQueue_Put_UntilTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(daUntilTime))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2226,9 +2475,25 @@ func (self *IADsPrintQueue) Get_PrintDevices(retval *systemvariant.VARIANT) erro
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsPrintQueue_Put_PrintDevices = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PrintDevices dispatches through IADsPrintQueue's vtable slot 43.
+func (self *IADsPrintQueue) Put_PrintDevices(vPrintDevices systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIADsPrintQueue_Put_PrintDevices, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vPrintDevices))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_NetAddresses dispatches through IADsPrintQueue's vtable slot 44.
 func (self *IADsPrintQueue) Get_NetAddresses(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsPrintQueue_Put_NetAddresses = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_NetAddresses dispatches through IADsPrintQueue's vtable slot 45.
+func (self *IADsPrintQueue) Put_NetAddresses(vNetAddresses systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specIADsPrintQueue_Put_NetAddresses, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vNetAddresses))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2403,6 +2668,14 @@ func (self *IADsPropertyEntry) Get_Values(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsPropertyEntry_Put_Values = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Values dispatches through IADsPropertyEntry's vtable slot 15.
+func (self *IADsPropertyEntry) Put_Values(vValues systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIADsPropertyEntry_Put_Values, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vValues))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IADsPropertyList: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspropertylist
 // IID: c6f602b6-8f69-11d0-8528-00c04fd8d503
 type IADsPropertyList struct {
@@ -2436,9 +2709,33 @@ func (self *IADsPropertyList) Reset() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsPropertyList_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through IADsPropertyList's vtable slot 11.
+func (self *IADsPropertyList) Item(varIndex systemvariant.VARIANT, pVariant *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIADsPropertyList_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(unsafe.Pointer(pVariant))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetPropertyItem dispatches through IADsPropertyList's vtable slot 12.
 func (self *IADsPropertyList) GetPropertyItem(bstrName foundation.BSTR, lnADsType int32, pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(lnADsType), uintptr(unsafe.Pointer(pVariant)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsPropertyList_PutPropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// PutPropertyItem dispatches through IADsPropertyList's vtable slot 13.
+func (self *IADsPropertyList) PutPropertyItem(varData systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIADsPropertyList_PutPropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varData))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsPropertyList_ResetPropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ResetPropertyItem dispatches through IADsPropertyList's vtable slot 14.
+func (self *IADsPropertyList) ResetPropertyItem(varEntry systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIADsPropertyList_ResetPropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varEntry))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2565,6 +2862,14 @@ func (self *IADsPropertyValue) Get_OctetString(retval *systemvariant.VARIANT) er
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsPropertyValue_Put_OctetString = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_OctetString dispatches through IADsPropertyValue's vtable slot 25.
+func (self *IADsPropertyValue) Put_OctetString(vOctetString systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIADsPropertyValue_Put_OctetString, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vOctetString))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SecurityDescriptor dispatches through IADsPropertyValue's vtable slot 26.
 func (self *IADsPropertyValue) Get_SecurityDescriptor(retval **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
@@ -2595,6 +2900,14 @@ func (self *IADsPropertyValue) Get_UTCTime(retval *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsPropertyValue_Put_UTCTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_UTCTime dispatches through IADsPropertyValue's vtable slot 31.
+func (self *IADsPropertyValue) Put_UTCTime(daUTCTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIADsPropertyValue_Put_UTCTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(daUTCTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IADsPropertyValue2: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspropertyvalue2
 // IID: 306e831c-5bc7-11d1-a3b8-00c04fb950dc
 type IADsPropertyValue2 struct {
@@ -2607,6 +2920,14 @@ var IID_IADsPropertyValue2 = win32.GUID{Data1: 0x306e831c, Data2: 0x5bc7, Data3:
 // GetObjectProperty dispatches through IADsPropertyValue2's vtable slot 7.
 func (self *IADsPropertyValue2) GetObjectProperty(lnADsType *int32, pvProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lnADsType)), uintptr(unsafe.Pointer(pvProp)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsPropertyValue2_PutObjectProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// PutObjectProperty dispatches through IADsPropertyValue2's vtable slot 8.
+func (self *IADsPropertyValue2) PutObjectProperty(lnADsType int32, vProp systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIADsPropertyValue2_PutObjectProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lnADsType), uintptr(unsafe.Pointer(&vProp))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2670,6 +2991,14 @@ func (self *IADsReplicaPointer) Put_Count(lnCount int32) error {
 // Get_ReplicaAddressHints dispatches through IADsReplicaPointer's vtable slot 15.
 func (self *IADsReplicaPointer) Get_ReplicaAddressHints(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsReplicaPointer_Put_ReplicaAddressHints = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ReplicaAddressHints dispatches through IADsReplicaPointer's vtable slot 16.
+func (self *IADsReplicaPointer) Put_ReplicaAddressHints(vReplicaAddressHints systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIADsReplicaPointer_Put_ReplicaAddressHints, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vReplicaAddressHints))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2850,6 +3179,30 @@ type IADsSecurityUtility struct {
 // IID_IADsSecurityUtility is the interface identifier for IADsSecurityUtility.
 var IID_IADsSecurityUtility = win32.GUID{Data1: 0xa63251b2, Data2: 0x5f21, Data3: 0x474b, Data4: [8]byte{0xab, 0x52, 0x4a, 0x8e, 0xfa, 0xd1, 0x08, 0x95}}
 
+var specIADsSecurityUtility_GetSecurityDescriptor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// GetSecurityDescriptor dispatches through IADsSecurityUtility's vtable slot 7.
+func (self *IADsSecurityUtility) GetSecurityDescriptor(varPath systemvariant.VARIANT, lPathFormat int32, lFormat int32, pVariant *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIADsSecurityUtility_GetSecurityDescriptor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varPath)), uintptr(lPathFormat), uintptr(lFormat), uintptr(unsafe.Pointer(pVariant))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsSecurityUtility_SetSecurityDescriptor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// SetSecurityDescriptor dispatches through IADsSecurityUtility's vtable slot 8.
+func (self *IADsSecurityUtility) SetSecurityDescriptor(varPath systemvariant.VARIANT, lPathFormat int32, varData systemvariant.VARIANT, lDataFormat int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIADsSecurityUtility_SetSecurityDescriptor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varPath)), uintptr(lPathFormat), uintptr(unsafe.Pointer(&varData)), uintptr(lDataFormat)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsSecurityUtility_ConvertSecurityDescriptor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// ConvertSecurityDescriptor dispatches through IADsSecurityUtility's vtable slot 9.
+func (self *IADsSecurityUtility) ConvertSecurityDescriptor(varSD systemvariant.VARIANT, lDataFormat int32, lOutFormat int32, pResult *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIADsSecurityUtility_ConvertSecurityDescriptor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varSD)), uintptr(lDataFormat), uintptr(lOutFormat), uintptr(unsafe.Pointer(pResult))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SecurityMask dispatches through IADsSecurityUtility's vtable slot 10.
 func (self *IADsSecurityUtility) Get_SecurityMask(retval *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
@@ -3006,6 +3359,14 @@ func (self *IADsService) Put_ServiceAccountPath(bstrServiceAccountPath foundatio
 // Get_Dependencies dispatches through IADsService's vtable slot 42.
 func (self *IADsService) Get_Dependencies(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsService_Put_Dependencies = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Dependencies dispatches through IADsService's vtable slot 43.
+func (self *IADsService) Put_Dependencies(vDependencies systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIADsService_Put_Dependencies, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vDependencies))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3393,9 +3754,25 @@ func (self *IADsUser) Get_TelephoneHome(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsUser_Put_TelephoneHome = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_TelephoneHome dispatches through IADsUser's vtable slot 51.
+func (self *IADsUser) Put_TelephoneHome(vTelephoneHome systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specIADsUser_Put_TelephoneHome, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vTelephoneHome))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_TelephoneMobile dispatches through IADsUser's vtable slot 52.
 func (self *IADsUser) Get_TelephoneMobile(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsUser_Put_TelephoneMobile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_TelephoneMobile dispatches through IADsUser's vtable slot 53.
+func (self *IADsUser) Put_TelephoneMobile(vTelephoneMobile systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIADsUser_Put_TelephoneMobile, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vTelephoneMobile))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3405,9 +3782,25 @@ func (self *IADsUser) Get_TelephoneNumber(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsUser_Put_TelephoneNumber = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_TelephoneNumber dispatches through IADsUser's vtable slot 55.
+func (self *IADsUser) Put_TelephoneNumber(vTelephoneNumber systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[55], specIADsUser_Put_TelephoneNumber, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vTelephoneNumber))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_TelephonePager dispatches through IADsUser's vtable slot 56.
 func (self *IADsUser) Get_TelephonePager(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsUser_Put_TelephonePager = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_TelephonePager dispatches through IADsUser's vtable slot 57.
+func (self *IADsUser) Put_TelephonePager(vTelephonePager systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[57], specIADsUser_Put_TelephonePager, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vTelephonePager))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3417,9 +3810,25 @@ func (self *IADsUser) Get_FaxNumber(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsUser_Put_FaxNumber = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_FaxNumber dispatches through IADsUser's vtable slot 59.
+func (self *IADsUser) Put_FaxNumber(vFaxNumber systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[59], specIADsUser_Put_FaxNumber, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vFaxNumber))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_OfficeLocations dispatches through IADsUser's vtable slot 60.
 func (self *IADsUser) Get_OfficeLocations(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsUser_Put_OfficeLocations = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_OfficeLocations dispatches through IADsUser's vtable slot 61.
+func (self *IADsUser) Put_OfficeLocations(vOfficeLocations systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[61], specIADsUser_Put_OfficeLocations, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vOfficeLocations))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3429,15 +3838,39 @@ func (self *IADsUser) Get_PostalAddresses(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsUser_Put_PostalAddresses = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PostalAddresses dispatches through IADsUser's vtable slot 63.
+func (self *IADsUser) Put_PostalAddresses(vPostalAddresses systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIADsUser_Put_PostalAddresses, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vPostalAddresses))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PostalCodes dispatches through IADsUser's vtable slot 64.
 func (self *IADsUser) Get_PostalCodes(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsUser_Put_PostalCodes = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PostalCodes dispatches through IADsUser's vtable slot 65.
+func (self *IADsUser) Put_PostalCodes(vPostalCodes systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[65], specIADsUser_Put_PostalCodes, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vPostalCodes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SeeAlso dispatches through IADsUser's vtable slot 66.
 func (self *IADsUser) Get_SeeAlso(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsUser_Put_SeeAlso = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SeeAlso dispatches through IADsUser's vtable slot 67.
+func (self *IADsUser) Put_SeeAlso(vSeeAlso systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[67], specIADsUser_Put_SeeAlso, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vSeeAlso))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3456,6 +3889,14 @@ func (self *IADsUser) Put_AccountDisabled(fAccountDisabled foundation.VARIANT_BO
 // Get_AccountExpirationDate dispatches through IADsUser's vtable slot 70.
 func (self *IADsUser) Get_AccountExpirationDate(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsUser_Put_AccountExpirationDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_AccountExpirationDate dispatches through IADsUser's vtable slot 71.
+func (self *IADsUser) Put_AccountExpirationDate(daAccountExpirationDate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[71], specIADsUser_Put_AccountExpirationDate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(daAccountExpirationDate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3501,9 +3942,25 @@ func (self *IADsUser) Get_LoginHours(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsUser_Put_LoginHours = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_LoginHours dispatches through IADsUser's vtable slot 79.
+func (self *IADsUser) Put_LoginHours(vLoginHours systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[79], specIADsUser_Put_LoginHours, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vLoginHours))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_LoginWorkstations dispatches through IADsUser's vtable slot 80.
 func (self *IADsUser) Get_LoginWorkstations(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsUser_Put_LoginWorkstations = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_LoginWorkstations dispatches through IADsUser's vtable slot 81.
+func (self *IADsUser) Put_LoginWorkstations(vLoginWorkstations systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[81], specIADsUser_Put_LoginWorkstations, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vLoginWorkstations))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3534,6 +3991,14 @@ func (self *IADsUser) Put_MaxStorage(lnMaxStorage int32) error {
 // Get_PasswordExpirationDate dispatches through IADsUser's vtable slot 86.
 func (self *IADsUser) Get_PasswordExpirationDate(retval *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsUser_Put_PasswordExpirationDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_PasswordExpirationDate dispatches through IADsUser's vtable slot 87.
+func (self *IADsUser) Put_PasswordExpirationDate(daPasswordExpirationDate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[87], specIADsUser_Put_PasswordExpirationDate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(daPasswordExpirationDate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3603,6 +4068,14 @@ func (self *IADsUser) Get_Languages(retval *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIADsUser_Put_Languages = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Languages dispatches through IADsUser's vtable slot 99.
+func (self *IADsUser) Put_Languages(vLanguages systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[99], specIADsUser_Put_Languages, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vLanguages))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Profile dispatches through IADsUser's vtable slot 100.
 func (self *IADsUser) Get_Profile(retval *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
@@ -3630,6 +4103,14 @@ func (self *IADsUser) Put_LoginScript(bstrLoginScript foundation.BSTR) error {
 // Get_Picture dispatches through IADsUser's vtable slot 104.
 func (self *IADsUser) Get_Picture(retval *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(retval)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIADsUser_Put_Picture = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Picture dispatches through IADsUser's vtable slot 105.
+func (self *IADsUser) Put_Picture(vPicture systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[105], specIADsUser_Put_Picture, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vPicture))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

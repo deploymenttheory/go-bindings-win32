@@ -515,6 +515,14 @@ func (self *IRemoteDesktopClientSettings) GetRdpProperty(propertyName foundation
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIRemoteDesktopClientSettings_SetRdpProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetRdpProperty dispatches through IRemoteDesktopClientSettings's vtable slot 10.
+func (self *IRemoteDesktopClientSettings) SetRdpProperty(propertyName foundation.BSTR, value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIRemoteDesktopClientSettings_SetRdpProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propertyName)), uintptr(unsafe.Pointer(&value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IRemoteDesktopClientTouchPointer: https://learn.microsoft.com/windows/win32/api/rdpappcontainerclient/nn-rdpappcontainerclient-iremotedesktopclienttouchpointer
 // IID: 260ec22d-8cbc-44b5-9e88-2a37f6c93ae9
 type IRemoteDesktopClientTouchPointer struct {
@@ -583,6 +591,14 @@ type ITSGAccountingEngine struct {
 // IID_ITSGAccountingEngine is the interface identifier for ITSGAccountingEngine.
 var IID_ITSGAccountingEngine = win32.GUID{Data1: 0x4ce2a0c9, Data2: 0xe874, Data3: 0x4f1a, Data4: [8]byte{0x86, 0xf4, 0x06, 0xbb, 0xb9, 0x11, 0x53, 0x38}}
 
+var specITSGAccountingEngine_DoAccounting = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(88, 8, 0, false)}}
+
+// DoAccounting dispatches through ITSGAccountingEngine's vtable slot 3.
+func (self *ITSGAccountingEngine) DoAccounting(accountingDataType AAAccountingDataType, accountingData AAAccountingData) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITSGAccountingEngine_DoAccounting, nil, uintptr(unsafe.Pointer(self)), uintptr(accountingDataType), uintptr(unsafe.Pointer(&accountingData))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ITSGAuthenticateUserSink: https://learn.microsoft.com/windows/win32/api/tsgauthenticationengine/nn-tsgauthenticationengine-itsgauthenticateusersink
 // IID: 2c3e2e73-a782-47f9-8dfb-77ee1ed27a03
 type ITSGAuthenticateUserSink struct {
@@ -625,6 +641,22 @@ type ITSGAuthenticationEngine struct {
 // IID_ITSGAuthenticationEngine is the interface identifier for ITSGAuthenticationEngine.
 var IID_ITSGAuthenticationEngine = win32.GUID{Data1: 0x9ee3e5bf, Data2: 0x04ab, Data3: 0x4691, Data4: [8]byte{0x99, 0x8c, 0xd7, 0xf6, 0x22, 0x32, 0x1a, 0x56}}
 
+var specITSGAuthenticationEngine_AuthenticateUser = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// AuthenticateUser dispatches through ITSGAuthenticationEngine's vtable slot 3.
+func (self *ITSGAuthenticationEngine) AuthenticateUser(mainSessionId win32.GUID, cookieData *byte, numCookieBytes uint32, context uintptr, pSink *ITSGAuthenticateUserSink) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITSGAuthenticationEngine_AuthenticateUser, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&mainSessionId)), uintptr(unsafe.Pointer(cookieData)), uintptr(numCookieBytes), uintptr(context), uintptr(unsafe.Pointer(pSink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITSGAuthenticationEngine_CancelAuthentication = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// CancelAuthentication dispatches through ITSGAuthenticationEngine's vtable slot 4.
+func (self *ITSGAuthenticationEngine) CancelAuthentication(mainSessionId win32.GUID, context uintptr) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specITSGAuthenticationEngine_CancelAuthentication, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&mainSessionId)), uintptr(context)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ITSGAuthorizeConnectionSink: https://learn.microsoft.com/windows/win32/api/tsgpolicyengine/nn-tsgpolicyengine-itsgauthorizeconnectionsink
 // IID: c27ece33-7781-4318-98ef-1cf2da7b7005
 type ITSGAuthorizeConnectionSink struct {
@@ -633,6 +665,18 @@ type ITSGAuthorizeConnectionSink struct {
 
 // IID_ITSGAuthorizeConnectionSink is the interface identifier for ITSGAuthorizeConnectionSink.
 var IID_ITSGAuthorizeConnectionSink = win32.GUID{Data1: 0xc27ece33, Data2: 0x7781, Data3: 0x4318, Data4: [8]byte{0x98, 0xef, 0x1c, 0xf2, 0xda, 0x7b, 0x70, 0x05}}
+
+var specITSGAuthorizeConnectionSink_OnConnectionAuthorized = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// OnConnectionAuthorized dispatches through ITSGAuthorizeConnectionSink's vtable slot 3.
+func (self *ITSGAuthorizeConnectionSink) OnConnectionAuthorized(hrIn foundation.HRESULT, mainSessionId win32.GUID, pbSoHResponse []byte, idleTimeout uint32, sessionTimeout uint32, sessionTimeoutAction SESSION_TIMEOUT_ACTION_TYPE, trustClass AATrustClassID, policyAttributes *uint32) error {
+	var _pbSoHResponse *byte
+	if len(pbSoHResponse) > 0 {
+		_pbSoHResponse = &pbSoHResponse[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITSGAuthorizeConnectionSink_OnConnectionAuthorized, nil, uintptr(unsafe.Pointer(self)), uintptr(hrIn), uintptr(unsafe.Pointer(&mainSessionId)), uintptr(len(pbSoHResponse)), uintptr(unsafe.Pointer(_pbSoHResponse)), uintptr(idleTimeout), uintptr(sessionTimeout), uintptr(sessionTimeoutAction), uintptr(trustClass), uintptr(unsafe.Pointer(policyAttributes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // ITSGAuthorizeResourceSink: https://learn.microsoft.com/windows/win32/api/tsgpolicyengine/nn-tsgpolicyengine-itsgauthorizeresourcesink
 // IID: feddfcd4-fa12-4435-ae55-7ad1a9779af7
@@ -643,6 +687,22 @@ type ITSGAuthorizeResourceSink struct {
 // IID_ITSGAuthorizeResourceSink is the interface identifier for ITSGAuthorizeResourceSink.
 var IID_ITSGAuthorizeResourceSink = win32.GUID{Data1: 0xfeddfcd4, Data2: 0xfa12, Data3: 0x4435, Data4: [8]byte{0xae, 0x55, 0x7a, 0xd1, 0xa9, 0x77, 0x9a, 0xf7}}
 
+var specITSGAuthorizeResourceSink_OnChannelAuthorized = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// OnChannelAuthorized dispatches through ITSGAuthorizeResourceSink's vtable slot 3.
+func (self *ITSGAuthorizeResourceSink) OnChannelAuthorized(hrIn foundation.HRESULT, mainSessionId win32.GUID, subSessionId int32, allowedResourceNames []foundation.BSTR, failedResourceNames []foundation.BSTR) error {
+	var _allowedResourceNames *foundation.BSTR
+	if len(allowedResourceNames) > 0 {
+		_allowedResourceNames = &allowedResourceNames[0]
+	}
+	var _failedResourceNames *foundation.BSTR
+	if len(failedResourceNames) > 0 {
+		_failedResourceNames = &failedResourceNames[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITSGAuthorizeResourceSink_OnChannelAuthorized, nil, uintptr(unsafe.Pointer(self)), uintptr(hrIn), uintptr(unsafe.Pointer(&mainSessionId)), uintptr(subSessionId), uintptr(unsafe.Pointer(_allowedResourceNames)), uintptr(len(allowedResourceNames)), uintptr(unsafe.Pointer(_failedResourceNames)), uintptr(len(failedResourceNames))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ITSGPolicyEngine: https://learn.microsoft.com/windows/win32/api/tsgpolicyengine/nn-tsgpolicyengine-itsgpolicyengine
 // IID: 8bc24f08-6223-42f4-a5b4-8e37cd135bbd
 type ITSGPolicyEngine struct {
@@ -651,6 +711,42 @@ type ITSGPolicyEngine struct {
 
 // IID_ITSGPolicyEngine is the interface identifier for ITSGPolicyEngine.
 var IID_ITSGPolicyEngine = win32.GUID{Data1: 0x8bc24f08, Data2: 0x6223, Data3: 0x42f4, Data4: [8]byte{0xa5, 0xb4, 0x8e, 0x37, 0xcd, 0x13, 0x5b, 0xbd}}
+
+var specITSGPolicyEngine_AuthorizeConnection = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// AuthorizeConnection dispatches through ITSGPolicyEngine's vtable slot 3.
+func (self *ITSGPolicyEngine) AuthorizeConnection(mainSessionId win32.GUID, username foundation.BSTR, authType AAAuthSchemes, clientMachineIP foundation.BSTR, clientMachineName foundation.BSTR, sohData []byte, cookieData []byte, userToken foundation.HANDLE_PTR, pSink *ITSGAuthorizeConnectionSink) error {
+	var _sohData *byte
+	if len(sohData) > 0 {
+		_sohData = &sohData[0]
+	}
+	var _cookieData *byte
+	if len(cookieData) > 0 {
+		_cookieData = &cookieData[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITSGPolicyEngine_AuthorizeConnection, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&mainSessionId)), uintptr(unsafe.Pointer(username)), uintptr(authType), uintptr(unsafe.Pointer(clientMachineIP)), uintptr(unsafe.Pointer(clientMachineName)), uintptr(unsafe.Pointer(_sohData)), uintptr(len(sohData)), uintptr(unsafe.Pointer(_cookieData)), uintptr(len(cookieData)), uintptr(userToken), uintptr(unsafe.Pointer(pSink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITSGPolicyEngine_AuthorizeResource = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// AuthorizeResource dispatches through ITSGPolicyEngine's vtable slot 4.
+func (self *ITSGPolicyEngine) AuthorizeResource(mainSessionId win32.GUID, subSessionId int32, username foundation.BSTR, resourceNames []foundation.BSTR, alternateResourceNames []foundation.BSTR, portNumber uint32, operation foundation.BSTR, cookie []byte, pSink *ITSGAuthorizeResourceSink) error {
+	var _resourceNames *foundation.BSTR
+	if len(resourceNames) > 0 {
+		_resourceNames = &resourceNames[0]
+	}
+	var _alternateResourceNames *foundation.BSTR
+	if len(alternateResourceNames) > 0 {
+		_alternateResourceNames = &alternateResourceNames[0]
+	}
+	var _cookie *byte
+	if len(cookie) > 0 {
+		_cookie = &cookie[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[4], specITSGPolicyEngine_AuthorizeResource, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&mainSessionId)), uintptr(subSessionId), uintptr(unsafe.Pointer(username)), uintptr(unsafe.Pointer(_resourceNames)), uintptr(len(resourceNames)), uintptr(unsafe.Pointer(_alternateResourceNames)), uintptr(len(alternateResourceNames)), uintptr(portNumber), uintptr(unsafe.Pointer(operation)), uintptr(unsafe.Pointer(_cookie)), uintptr(len(cookie)), uintptr(unsafe.Pointer(pSink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Refresh dispatches through ITSGPolicyEngine's vtable slot 5.
 func (self *ITSGPolicyEngine) Refresh() error {
@@ -727,6 +823,14 @@ func (self *ITsSbClientConnection) Get_FarmName() (foundation.BSTR, error) {
 	_pVal := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
 	return *_pVal, win32.ErrIfFailed(int32(r1))
+}
+
+var specITsSbClientConnection_PutContext = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// PutContext dispatches through ITsSbClientConnection's vtable slot 8.
+func (self *ITsSbClientConnection) PutContext(contextId foundation.BSTR, context systemvariant.VARIANT, existingContext *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specITsSbClientConnection_PutContext, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextId)), uintptr(unsafe.Pointer(&context)), uintptr(unsafe.Pointer(existingContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetContext dispatches through ITsSbClientConnection's vtable slot 9.
@@ -1637,6 +1741,14 @@ func (self *ITsSbSession) Get_ClientDisplay() (CLIENT_DISPLAY, error) {
 	return *_pClientDisplay, win32.ErrIfFailed(int32(r1))
 }
 
+var specITsSbSession_Put_ClientDisplay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(12, 4, 0, false)}}
+
+// Put_ClientDisplay dispatches through ITsSbSession's vtable slot 17.
+func (self *ITsSbSession) Put_ClientDisplay(pClientDisplay CLIENT_DISPLAY) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specITsSbSession_Put_ClientDisplay, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&pClientDisplay))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ProtocolType dispatches through ITsSbSession's vtable slot 18.
 func (self *ITsSbSession) Get_ProtocolType() (uint32, error) {
 	_pVal := new(uint32)
@@ -2165,6 +2277,22 @@ func (self *IWRdsProtocolConnection) CreateVirtualChannel(szEndpointName foundat
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWRdsProtocolConnection_QueryProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// QueryProperty dispatches through IWRdsProtocolConnection's vtable slot 24.
+func (self *IWRdsProtocolConnection) QueryProperty(QueryType win32.GUID, pPropertyEntriesIn []WTS_PROPERTY_VALUE, pPropertyEntriesOut []WTS_PROPERTY_VALUE) error {
+	var _pPropertyEntriesIn *WTS_PROPERTY_VALUE
+	if len(pPropertyEntriesIn) > 0 {
+		_pPropertyEntriesIn = &pPropertyEntriesIn[0]
+	}
+	var _pPropertyEntriesOut *WTS_PROPERTY_VALUE
+	if len(pPropertyEntriesOut) > 0 {
+		_pPropertyEntriesOut = &pPropertyEntriesOut[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIWRdsProtocolConnection_QueryProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&QueryType)), uintptr(len(pPropertyEntriesIn)), uintptr(len(pPropertyEntriesOut)), uintptr(unsafe.Pointer(_pPropertyEntriesIn)), uintptr(unsafe.Pointer(_pPropertyEntriesOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetShadowConnection dispatches through IWRdsProtocolConnection's vtable slot 25.
 func (self *IWRdsProtocolConnection) GetShadowConnection(ppShadowConnection **IWRdsProtocolShadowConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppShadowConnection)))
@@ -2237,6 +2365,22 @@ type IWRdsProtocolConnectionSettings struct {
 
 // IID_IWRdsProtocolConnectionSettings is the interface identifier for IWRdsProtocolConnectionSettings.
 var IID_IWRdsProtocolConnectionSettings = win32.GUID{Data1: 0x83fcf5d3, Data2: 0xf6f4, Data3: 0xea94, Data4: [8]byte{0x9c, 0xd2, 0x32, 0xf2, 0x80, 0xe1, 0xe5, 0x10}}
+
+var specIWRdsProtocolConnectionSettings_SetConnectionSetting = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetConnectionSetting dispatches through IWRdsProtocolConnectionSettings's vtable slot 3.
+func (self *IWRdsProtocolConnectionSettings) SetConnectionSetting(PropertyID win32.GUID, pPropertyEntriesIn *WTS_PROPERTY_VALUE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIWRdsProtocolConnectionSettings_SetConnectionSetting, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&PropertyID)), uintptr(unsafe.Pointer(pPropertyEntriesIn))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWRdsProtocolConnectionSettings_GetConnectionSetting = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetConnectionSetting dispatches through IWRdsProtocolConnectionSettings's vtable slot 4.
+func (self *IWRdsProtocolConnectionSettings) GetConnectionSetting(PropertyID win32.GUID, pPropertyEntriesOut *WTS_PROPERTY_VALUE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIWRdsProtocolConnectionSettings_GetConnectionSetting, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&PropertyID)), uintptr(unsafe.Pointer(pPropertyEntriesOut))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IWRdsProtocolLicenseConnection: https://learn.microsoft.com/windows/win32/api/wtsprotocol/nn-wtsprotocol-iwrdsprotocollicenseconnection
 // IID: 1d6a145f-d095-4424-957a-407fae822d84
@@ -2609,6 +2753,18 @@ type IWTSBitmapRenderer struct {
 // IID_IWTSBitmapRenderer is the interface identifier for IWTSBitmapRenderer.
 var IID_IWTSBitmapRenderer = win32.GUID{Data1: 0x5b7acc97, Data2: 0xf3c9, Data3: 0x46f7, Data4: [8]byte{0x8c, 0x5b, 0xfa, 0x68, 0x5d, 0x34, 0x41, 0xb1}}
 
+var specIWTSBitmapRenderer_Render = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Render dispatches through IWTSBitmapRenderer's vtable slot 3.
+func (self *IWTSBitmapRenderer) Render(imageFormat win32.GUID, dwWidth uint32, dwHeight uint32, cbStride int32, pImageBuffer []byte) error {
+	var _pImageBuffer *byte
+	if len(pImageBuffer) > 0 {
+		_pImageBuffer = &pImageBuffer[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIWTSBitmapRenderer_Render, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&imageFormat)), uintptr(dwWidth), uintptr(dwHeight), uintptr(cbStride), uintptr(len(pImageBuffer)), uintptr(unsafe.Pointer(_pImageBuffer))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetRendererStatistics dispatches through IWTSBitmapRenderer's vtable slot 4.
 func (self *IWTSBitmapRenderer) GetRendererStatistics(pStatistics *BITMAP_RENDERER_STATISTICS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatistics)))
@@ -2629,6 +2785,14 @@ type IWTSBitmapRendererCallback struct {
 
 // IID_IWTSBitmapRendererCallback is the interface identifier for IWTSBitmapRendererCallback.
 var IID_IWTSBitmapRendererCallback = win32.GUID{Data1: 0xd782928e, Data2: 0xfe4e, Data3: 0x4e77, Data4: [8]byte{0xae, 0x90, 0x9c, 0xd0, 0xb3, 0xe3, 0xb3, 0x53}}
+
+var specIWTSBitmapRendererCallback_OnTargetSizeChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnTargetSizeChanged dispatches through IWTSBitmapRendererCallback's vtable slot 3.
+func (self *IWTSBitmapRendererCallback) OnTargetSizeChanged(rcNewSize foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIWTSBitmapRendererCallback_OnTargetSizeChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&rcNewSize))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IWTSListener: https://learn.microsoft.com/windows/win32/api/tsvirtualchannels/nn-tsvirtualchannels-iwtslistener
 // IID: a1230206-9a39-4d58-8674-cdb4dff4e73b
@@ -2701,6 +2865,14 @@ type IWTSPluginServiceProvider struct {
 
 // IID_IWTSPluginServiceProvider is the interface identifier for IWTSPluginServiceProvider.
 var IID_IWTSPluginServiceProvider = win32.GUID{Data1: 0xd3e07363, Data2: 0x087c, Data3: 0x476c, Data4: [8]byte{0x86, 0xa7, 0xdb, 0xb1, 0x5f, 0x46, 0xdd, 0xb4}}
+
+var specIWTSPluginServiceProvider_GetService = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetService dispatches through IWTSPluginServiceProvider's vtable slot 3.
+func (self *IWTSPluginServiceProvider) GetService(ServiceId win32.GUID, ppunkObject **systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIWTSPluginServiceProvider_GetService, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ServiceId)), uintptr(unsafe.Pointer(ppunkObject))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IWTSProtocolConnection: https://learn.microsoft.com/windows/win32/api/wtsprotocol/nn-wtsprotocol-iwtsprotocolconnection
 // IID: 23083765-9095-4648-98bf-ef81c914032d
@@ -2840,6 +3012,22 @@ func (self *IWTSProtocolConnection) SendBeep(Frequency uint32, Duration uint32) 
 func (self *IWTSProtocolConnection) CreateVirtualChannel(szEndpointName foundation.PSTR, bStatic bool, RequestedPriority uint32, phChannel *uintptr) error {
 	_bStatic := win32.Bool32(bStatic)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szEndpointName)), uintptr(_bStatic), uintptr(RequestedPriority), uintptr(unsafe.Pointer(phChannel)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWTSProtocolConnection_QueryProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// QueryProperty dispatches through IWTSProtocolConnection's vtable slot 24.
+func (self *IWTSProtocolConnection) QueryProperty(QueryType win32.GUID, pPropertyEntriesIn []WTS_PROPERTY_VALUE, pPropertyEntriesOut []WTS_PROPERTY_VALUE) error {
+	var _pPropertyEntriesIn *WTS_PROPERTY_VALUE
+	if len(pPropertyEntriesIn) > 0 {
+		_pPropertyEntriesIn = &pPropertyEntriesIn[0]
+	}
+	var _pPropertyEntriesOut *WTS_PROPERTY_VALUE
+	if len(pPropertyEntriesOut) > 0 {
+		_pPropertyEntriesOut = &pPropertyEntriesOut[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIWTSProtocolConnection_QueryProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&QueryType)), uintptr(len(pPropertyEntriesIn)), uintptr(len(pPropertyEntriesOut)), uintptr(unsafe.Pointer(_pPropertyEntriesIn)), uintptr(unsafe.Pointer(_pPropertyEntriesOut))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3300,6 +3488,15 @@ type IWorkspace3 struct {
 // IID_IWorkspace3 is the interface identifier for IWorkspace3.
 var IID_IWorkspace3 = win32.GUID{Data1: 0x1becbe4a, Data2: 0xd654, Data3: 0x423b, Data4: [8]byte{0xaf, 0xeb, 0xbe, 0x8d, 0x53, 0x2c, 0x13, 0xc6}}
 
+var specIWorkspace3_GetClaimsToken2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetClaimsToken2 dispatches through IWorkspace3's vtable slot 7.
+func (self *IWorkspace3) GetClaimsToken2(bstrClaimsHint foundation.BSTR, bstrUserHint foundation.BSTR, claimCookie uint32, hwndCredUiParent uint32, rectCredUiParent foundation.RECT) (foundation.BSTR, error) {
+	_pbstrAccessToken := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIWorkspace3_GetClaimsToken2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrClaimsHint)), uintptr(unsafe.Pointer(bstrUserHint)), uintptr(claimCookie), uintptr(hwndCredUiParent), uintptr(unsafe.Pointer(&rectCredUiParent)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrAccessToken)))).Tuple()
+	return *_pbstrAccessToken, win32.ErrIfFailed(int32(r1))
+}
+
 // SetClaimsToken dispatches through IWorkspace3's vtable slot 8.
 func (self *IWorkspace3) SetClaimsToken(bstrAccessToken foundation.BSTR, ullAccessTokenExpiration uint64, bstrRefreshToken foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAccessToken)), uintptr(ullAccessTokenExpiration), uintptr(unsafe.Pointer(bstrRefreshToken)))
@@ -3362,6 +3559,22 @@ type IWorkspaceRegistration2 struct {
 
 // IID_IWorkspaceRegistration2 is the interface identifier for IWorkspaceRegistration2.
 var IID_IWorkspaceRegistration2 = win32.GUID{Data1: 0xcf59f654, Data2: 0x39bb, Data3: 0x44d8, Data4: [8]byte{0x94, 0xd0, 0x46, 0x35, 0x72, 0x89, 0x57, 0xe9}}
+
+var specIWorkspaceRegistration2_AddResourceEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// AddResourceEx dispatches through IWorkspaceRegistration2's vtable slot 5.
+func (self *IWorkspaceRegistration2) AddResourceEx(pUnk *IWorkspaceClientExt, bstrEventLogUploadAddress foundation.BSTR, pdwCookie *uint32, correlationId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIWorkspaceRegistration2_AddResourceEx, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)), uintptr(unsafe.Pointer(bstrEventLogUploadAddress)), uintptr(unsafe.Pointer(pdwCookie)), uintptr(unsafe.Pointer(&correlationId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWorkspaceRegistration2_RemoveResourceEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RemoveResourceEx dispatches through IWorkspaceRegistration2's vtable slot 6.
+func (self *IWorkspaceRegistration2) RemoveResourceEx(dwCookieConnection uint32, correlationId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIWorkspaceRegistration2_RemoveResourceEx, nil, uintptr(unsafe.Pointer(self)), uintptr(dwCookieConnection), uintptr(unsafe.Pointer(&correlationId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IWorkspaceReportMessage: https://learn.microsoft.com/windows/win32/api/workspaceruntime/nn-workspaceruntime-iworkspacereportmessage
 // IID: a7c06739-500f-4e8c-99a8-2bd6955899eb
@@ -3512,6 +3725,14 @@ type IWorkspaceScriptable3 struct {
 
 // IID_IWorkspaceScriptable3 is the interface identifier for IWorkspaceScriptable3.
 var IID_IWorkspaceScriptable3 = win32.GUID{Data1: 0x531e6512, Data2: 0x2cbf, Data3: 0x4bd2, Data4: [8]byte{0x80, 0xa5, 0xd9, 0x0a, 0x71, 0x63, 0x6a, 0x9a}}
+
+var specIWorkspaceScriptable3_StartWorkspaceEx2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// StartWorkspaceEx2 dispatches through IWorkspaceScriptable3's vtable slot 16.
+func (self *IWorkspaceScriptable3) StartWorkspaceEx2(bstrWorkspaceId foundation.BSTR, bstrWorkspaceFriendlyName foundation.BSTR, bstrRedirectorName foundation.BSTR, bstrUserName foundation.BSTR, bstrPassword foundation.BSTR, bstrAppContainer foundation.BSTR, bstrWorkspaceParams foundation.BSTR, lTimeout int32, lFlags int32, bstrEventLogUploadAddress foundation.BSTR, correlationId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIWorkspaceScriptable3_StartWorkspaceEx2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWorkspaceId)), uintptr(unsafe.Pointer(bstrWorkspaceFriendlyName)), uintptr(unsafe.Pointer(bstrRedirectorName)), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(bstrPassword)), uintptr(unsafe.Pointer(bstrAppContainer)), uintptr(unsafe.Pointer(bstrWorkspaceParams)), uintptr(lTimeout), uintptr(lFlags), uintptr(unsafe.Pointer(bstrEventLogUploadAddress)), uintptr(unsafe.Pointer(&correlationId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // ItsPubPlugin: https://learn.microsoft.com/windows/win32/api/tspubplugincom/nn-tspubplugincom-itspubplugin
 // IID: 70c04b05-f347-412b-822f-36c99c54ca45

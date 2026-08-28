@@ -243,6 +243,7 @@ var (
 	procRtmAddNextHop                              = modrtm.NewProc("RtmAddNextHop")
 	procRtmAddRouteToDest                          = modrtm.NewProc("RtmAddRouteToDest")
 	procRtmBlockMethods                            = modrtm.NewProc("RtmBlockMethods")
+	procRtmConvertIpv6AddressAndLengthToNetAddress = modrtm.NewProc("RtmConvertIpv6AddressAndLengthToNetAddress")
 	procRtmConvertNetAddressToIpv6AddressAndLength = modrtm.NewProc("RtmConvertNetAddressToIpv6AddressAndLength")
 	procRtmCreateDestEnum                          = modrtm.NewProc("RtmCreateDestEnum")
 	procRtmCreateNextHopEnum                       = modrtm.NewProc("RtmCreateNextHopEnum")
@@ -526,6 +527,7 @@ var Procs = struct {
 	RtmAddNextHop                              *win32.Proc
 	RtmAddRouteToDest                          *win32.Proc
 	RtmBlockMethods                            *win32.Proc
+	RtmConvertIpv6AddressAndLengthToNetAddress *win32.Proc
 	RtmConvertNetAddressToIpv6AddressAndLength *win32.Proc
 	RtmCreateDestEnum                          *win32.Proc
 	RtmCreateNextHopEnum                       *win32.Proc
@@ -803,6 +805,7 @@ var Procs = struct {
 	RtmAddNextHop:                              procRtmAddNextHop,
 	RtmAddRouteToDest:                          procRtmAddRouteToDest,
 	RtmBlockMethods:                            procRtmBlockMethods,
+	RtmConvertIpv6AddressAndLengthToNetAddress: procRtmConvertIpv6AddressAndLengthToNetAddress,
 	RtmConvertNetAddressToIpv6AddressAndLength: procRtmConvertNetAddressToIpv6AddressAndLength,
 	RtmCreateDestEnum:                          procRtmCreateDestEnum,
 	RtmCreateNextHopEnum:                       procRtmCreateNextHopEnum,
@@ -2739,6 +2742,14 @@ func RtmAddRouteToDest(RtmRegHandle uintptr, RouteHandle *uintptr, DestAddress *
 // Minimum OS: windowsserver2000.
 func RtmBlockMethods(RtmRegHandle uintptr, TargetHandle foundation.HANDLE, TargetType byte, BlockingFlag uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procRtmBlockMethods.Addr(), uintptr(RtmRegHandle), uintptr(TargetHandle), uintptr(TargetType), uintptr(BlockingFlag))
+	return uint32(r1)
+}
+
+var specRtmConvertIpv6AddressAndLengthToNetAddress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 2, 0, false), win32.Word, win32.Word}}
+
+// RtmConvertIpv6AddressAndLengthToNetAddress calls rtm!RtmConvertIpv6AddressAndLengthToNetAddress.
+func RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress *RTM_NET_ADDRESS, Address networkingwinsock.IN6_ADDR, dwLength uint32, dwAddressSize uint32) uint32 {
+	r1, _, _ := win32.Call(procRtmConvertIpv6AddressAndLengthToNetAddress.Addr(), specRtmConvertIpv6AddressAndLengthToNetAddress, nil, uintptr(unsafe.Pointer(pNetAddress)), uintptr(unsafe.Pointer(&Address)), uintptr(dwLength), uintptr(dwAddressSize)).Tuple()
 	return uint32(r1)
 }
 

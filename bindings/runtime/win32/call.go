@@ -98,6 +98,11 @@ type Result struct {
 	Err Errno
 }
 
+// Tuple returns the integer registers and error in syscall.SyscallN's shape,
+// so generated code can dispatch through Call where it would otherwise use
+// SyscallN without changing the code that consumes r1/e1.
+func (r Result) Tuple() (r1, r2 uintptr, err Errno) { return r.R1, r.R2, r.Err }
+
 // maxStackWords bounds the outgoing stack argument area the trampolines
 // reserve (Windows' own syscall path allows 42; 32 keeps the frame small).
 const maxStackWords = 32

@@ -5,6 +5,7 @@
 package direct3d12
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -2117,6 +2118,17 @@ func (self *ID3D12GraphicsCommandList) OMSetRenderTargets(NumRenderTargetDescrip
 	syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(NumRenderTargetDescriptors), uintptr(unsafe.Pointer(pRenderTargetDescriptors)), uintptr(_RTsSingleHandleToDescriptorRange), uintptr(unsafe.Pointer(pDepthStencilDescriptor)))
 }
 
+var specID3D12GraphicsCommandList_ClearDepthStencilView = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// ClearDepthStencilView dispatches through ID3D12GraphicsCommandList's vtable slot 47.
+func (self *ID3D12GraphicsCommandList) ClearDepthStencilView(DepthStencilView D3D12_CPU_DESCRIPTOR_HANDLE, ClearFlags D3D12_CLEAR_FLAGS, Depth float32, Stencil byte, pRects []foundation.RECT) {
+	var _pRects *foundation.RECT
+	if len(pRects) > 0 {
+		_pRects = &pRects[0]
+	}
+	win32.Call(self.LpVtbl[47], specID3D12GraphicsCommandList_ClearDepthStencilView, nil, uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(DepthStencilView)), uintptr(ClearFlags), uintptr(math.Float32bits(Depth)), uintptr(Stencil), uintptr(len(pRects)), uintptr(unsafe.Pointer(_pRects))).Tuple()
+}
+
 // ClearRenderTargetView dispatches through ID3D12GraphicsCommandList's vtable slot 48.
 func (self *ID3D12GraphicsCommandList) ClearRenderTargetView(RenderTargetView D3D12_CPU_DESCRIPTOR_HANDLE, ColorRGBA *float32, pRects []foundation.RECT) {
 	var _pRects *foundation.RECT
@@ -2214,6 +2226,13 @@ func (self *ID3D12GraphicsCommandList1) AtomicCopyBufferUINT(pDstBuffer *ID3D12R
 // AtomicCopyBufferUINT64 dispatches through ID3D12GraphicsCommandList1's vtable slot 61.
 func (self *ID3D12GraphicsCommandList1) AtomicCopyBufferUINT64(pDstBuffer *ID3D12Resource, DstOffset uint64, pSrcBuffer *ID3D12Resource, SrcOffset uint64, Dependencies uint32, ppDependentResources **ID3D12Resource, pDependentSubresourceRanges *D3D12_SUBRESOURCE_RANGE_UINT64) {
 	syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDstBuffer)), uintptr(DstOffset), uintptr(unsafe.Pointer(pSrcBuffer)), uintptr(SrcOffset), uintptr(Dependencies), uintptr(unsafe.Pointer(ppDependentResources)), uintptr(unsafe.Pointer(pDependentSubresourceRanges)))
+}
+
+var specID3D12GraphicsCommandList1_OMSetDepthBounds = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// OMSetDepthBounds dispatches through ID3D12GraphicsCommandList1's vtable slot 62.
+func (self *ID3D12GraphicsCommandList1) OMSetDepthBounds(Min float32, Max float32) {
+	win32.Call(self.LpVtbl[62], specID3D12GraphicsCommandList1_OMSetDepthBounds, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Min)), uintptr(math.Float32bits(Max))).Tuple()
 }
 
 // SetSamplePositions dispatches through ID3D12GraphicsCommandList1's vtable slot 63.
@@ -2421,6 +2440,13 @@ type ID3D12GraphicsCommandList9 struct {
 
 // IID_ID3D12GraphicsCommandList9 is the interface identifier for ID3D12GraphicsCommandList9.
 var IID_ID3D12GraphicsCommandList9 = win32.GUID{Data1: 0x34ed2808, Data2: 0xffe6, Data3: 0x4c2b, Data4: [8]byte{0xb1, 0x1a, 0xca, 0xbd, 0x2b, 0x0c, 0x59, 0xe1}}
+
+var specID3D12GraphicsCommandList9_RSSetDepthBias = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// RSSetDepthBias dispatches through ID3D12GraphicsCommandList9's vtable slot 82.
+func (self *ID3D12GraphicsCommandList9) RSSetDepthBias(DepthBias float32, DepthBiasClamp float32, SlopeScaledDepthBias float32) {
+	win32.Call(self.LpVtbl[82], specID3D12GraphicsCommandList9_RSSetDepthBias, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(DepthBias)), uintptr(math.Float32bits(DepthBiasClamp)), uintptr(math.Float32bits(SlopeScaledDepthBias))).Tuple()
+}
 
 // IASetIndexBufferStripCutValue dispatches through ID3D12GraphicsCommandList9's vtable slot 83.
 func (self *ID3D12GraphicsCommandList9) IASetIndexBufferStripCutValue(IBStripCutValue D3D12_INDEX_BUFFER_STRIP_CUT_VALUE) {
@@ -3815,6 +3841,14 @@ func (self *ID3D12WorkGraphProperties) GetNodeID(WorkGraphIndex uint32, NodeInde
 	return *_ret
 }
 
+var specID3D12WorkGraphProperties_GetNodeIndex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false)}}
+
+// GetNodeIndex dispatches through ID3D12WorkGraphProperties's vtable slot 8.
+func (self *ID3D12WorkGraphProperties) GetNodeIndex(WorkGraphIndex uint32, NodeID D3D12_NODE_ID) uint32 {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specID3D12WorkGraphProperties_GetNodeIndex, nil, uintptr(unsafe.Pointer(self)), uintptr(WorkGraphIndex), uintptr(unsafe.Pointer(&NodeID))).Tuple()
+	return uint32(r1)
+}
+
 // GetNodeLocalRootArgumentsTableIndex dispatches through ID3D12WorkGraphProperties's vtable slot 9.
 func (self *ID3D12WorkGraphProperties) GetNodeLocalRootArgumentsTableIndex(WorkGraphIndex uint32, NodeIndex uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(WorkGraphIndex), uintptr(NodeIndex))
@@ -3832,6 +3866,14 @@ func (self *ID3D12WorkGraphProperties) GetEntrypointID(WorkGraphIndex uint32, En
 	_ret := new(D3D12_NODE_ID)
 	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ret))), uintptr(WorkGraphIndex), uintptr(EntrypointIndex))
 	return *_ret
+}
+
+var specID3D12WorkGraphProperties_GetEntrypointIndex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false)}}
+
+// GetEntrypointIndex dispatches through ID3D12WorkGraphProperties's vtable slot 12.
+func (self *ID3D12WorkGraphProperties) GetEntrypointIndex(WorkGraphIndex uint32, NodeID D3D12_NODE_ID) uint32 {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specID3D12WorkGraphProperties_GetEntrypointIndex, nil, uintptr(unsafe.Pointer(self)), uintptr(WorkGraphIndex), uintptr(unsafe.Pointer(&NodeID))).Tuple()
+	return uint32(r1)
 }
 
 // GetEntrypointRecordSizeInBytes dispatches through ID3D12WorkGraphProperties's vtable slot 13.

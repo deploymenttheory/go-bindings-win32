@@ -5,6 +5,7 @@
 package mediafoundation
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -94,6 +95,14 @@ var IID_IClusterDetector = win32.GUID{Data1: 0x3f07f7b7, Data2: 0xc680, Data3: 0
 // Initialize dispatches through IClusterDetector's vtable slot 3.
 func (self *IClusterDetector) Initialize(wBaseEntryLevel uint16, wClusterEntryLevel uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(wBaseEntryLevel), uintptr(wClusterEntryLevel))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIClusterDetector_Detect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// Detect dispatches through IClusterDetector's vtable slot 4.
+func (self *IClusterDetector) Detect(dwMaxNumClusters uint32, fMinClusterDuration float32, fMaxClusterDuration float32, pSrcToc *IToc, ppDstToc **IToc) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIClusterDetector_Detect, nil, uintptr(unsafe.Pointer(self)), uintptr(dwMaxNumClusters), uintptr(math.Float32bits(fMinClusterDuration)), uintptr(math.Float32bits(fMaxClusterDuration)), uintptr(unsafe.Pointer(pSrcToc)), uintptr(unsafe.Pointer(ppDstToc))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -784,6 +793,22 @@ func (self *ID3D12VideoEncoder) GetCodec() D3D12_VIDEO_ENCODER_CODEC {
 	return D3D12_VIDEO_ENCODER_CODEC(r1)
 }
 
+var specID3D12VideoEncoder_GetCodecProfile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false)}}
+
+// GetCodecProfile dispatches through ID3D12VideoEncoder's vtable slot 11.
+func (self *ID3D12VideoEncoder) GetCodecProfile(dstProfile D3D12_VIDEO_ENCODER_PROFILE_DESC) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specID3D12VideoEncoder_GetCodecProfile, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&dstProfile))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID3D12VideoEncoder_GetCodecConfiguration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false)}}
+
+// GetCodecConfiguration dispatches through ID3D12VideoEncoder's vtable slot 12.
+func (self *ID3D12VideoEncoder) GetCodecConfiguration(dstCodecConfig D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specID3D12VideoEncoder_GetCodecConfiguration, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&dstCodecConfig))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetInputFormat dispatches through ID3D12VideoEncoder's vtable slot 13.
 func (self *ID3D12VideoEncoder) GetInputFormat() graphicsdxgicommon.DXGI_FORMAT {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
@@ -821,6 +846,22 @@ func (self *ID3D12VideoEncoderHeap) GetEncoderHeapFlags() D3D12_VIDEO_ENCODER_HE
 func (self *ID3D12VideoEncoderHeap) GetCodec() D3D12_VIDEO_ENCODER_CODEC {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
 	return D3D12_VIDEO_ENCODER_CODEC(r1)
+}
+
+var specID3D12VideoEncoderHeap_GetCodecProfile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false)}}
+
+// GetCodecProfile dispatches through ID3D12VideoEncoderHeap's vtable slot 11.
+func (self *ID3D12VideoEncoderHeap) GetCodecProfile(dstProfile D3D12_VIDEO_ENCODER_PROFILE_DESC) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specID3D12VideoEncoderHeap_GetCodecProfile, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&dstProfile))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID3D12VideoEncoderHeap_GetCodecLevel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false)}}
+
+// GetCodecLevel dispatches through ID3D12VideoEncoderHeap's vtable slot 12.
+func (self *ID3D12VideoEncoderHeap) GetCodecLevel(dstLevel D3D12_VIDEO_ENCODER_LEVEL_SETTING) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specID3D12VideoEncoderHeap_GetCodecLevel, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&dstLevel))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetResolutionListCount dispatches through ID3D12VideoEncoderHeap's vtable slot 13.
@@ -2457,6 +2498,18 @@ func (self *IMFASFStreamConfig) GetPayloadExtension(wPayloadExtensionNumber uint
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFASFStreamConfig_AddPayloadExtension = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// AddPayloadExtension dispatches through IMFASFStreamConfig's vtable slot 40.
+func (self *IMFASFStreamConfig) AddPayloadExtension(guidExtensionSystemID win32.GUID, cbExtensionDataSize uint16, pbExtensionSystemInfo []byte) error {
+	var _pbExtensionSystemInfo *byte
+	if len(pbExtensionSystemInfo) > 0 {
+		_pbExtensionSystemInfo = &pbExtensionSystemInfo[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIMFASFStreamConfig_AddPayloadExtension, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidExtensionSystemID)), uintptr(cbExtensionDataSize), uintptr(unsafe.Pointer(_pbExtensionSystemInfo)), uintptr(len(pbExtensionSystemInfo))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // RemoveAllPayloadExtensions dispatches through IMFASFStreamConfig's vtable slot 41.
 func (self *IMFASFStreamConfig) RemoveAllPayloadExtensions() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)))
@@ -2843,6 +2896,14 @@ func (self *IMFAttributes) SetUINT64(guidKey *win32.GUID, unValue uint64) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFAttributes_SetDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64}}
+
+// SetDouble dispatches through IMFAttributes's vtable slot 23.
+func (self *IMFAttributes) SetDouble(guidKey *win32.GUID, fValue float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIMFAttributes_SetDouble, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(math.Float64bits(fValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetGUID dispatches through IMFAttributes's vtable slot 24.
 func (self *IMFAttributes) SetGUID(guidKey *win32.GUID, guidValue *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(guidValue)))
@@ -2976,6 +3037,14 @@ var IID_IMFAudioStreamVolume = win32.GUID{Data1: 0x76b1bbdb, Data2: 0x4ec8, Data
 // GetChannelCount dispatches through IMFAudioStreamVolume's vtable slot 3.
 func (self *IMFAudioStreamVolume) GetChannelCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFAudioStreamVolume_SetChannelVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetChannelVolume dispatches through IMFAudioStreamVolume's vtable slot 4.
+func (self *IMFAudioStreamVolume) SetChannelVolume(dwIndex uint32, fLevel float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIMFAudioStreamVolume_SetChannelVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(math.Float32bits(fLevel))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3410,6 +3479,22 @@ func (self *IMFCameraControlMonitor) Stop() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFCameraControlMonitor_AddControlSubscription = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// AddControlSubscription dispatches through IMFCameraControlMonitor's vtable slot 5.
+func (self *IMFCameraControlMonitor) AddControlSubscription(controlSet win32.GUID, id uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIMFCameraControlMonitor_AddControlSubscription, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&controlSet)), uintptr(id)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFCameraControlMonitor_RemoveControlSubscription = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RemoveControlSubscription dispatches through IMFCameraControlMonitor's vtable slot 6.
+func (self *IMFCameraControlMonitor) RemoveControlSubscription(controlSet win32.GUID, id uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIMFCameraControlMonitor_RemoveControlSubscription, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&controlSet)), uintptr(id)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Shutdown dispatches through IMFCameraControlMonitor's vtable slot 7.
 func (self *IMFCameraControlMonitor) Shutdown() {
 	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
@@ -3641,6 +3726,14 @@ var IID_IMFCapturePhotoConfirmation = win32.GUID{Data1: 0x19f68549, Data2: 0xca8
 // SetPhotoConfirmationCallback dispatches through IMFCapturePhotoConfirmation's vtable slot 3.
 func (self *IMFCapturePhotoConfirmation) SetPhotoConfirmationCallback(pNotificationCallback *IMFAsyncCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotificationCallback)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFCapturePhotoConfirmation_SetPixelFormat = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// SetPixelFormat dispatches through IMFCapturePhotoConfirmation's vtable slot 4.
+func (self *IMFCapturePhotoConfirmation) SetPixelFormat(subtype win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIMFCapturePhotoConfirmation_SetPixelFormat, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&subtype))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4047,6 +4140,14 @@ func (self *IMFClockStateSink) OnClockPause(hnsSystemTime int64) error {
 // OnClockRestart dispatches through IMFClockStateSink's vtable slot 6.
 func (self *IMFClockStateSink) OnClockRestart(hnsSystemTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hnsSystemTime))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFClockStateSink_OnClockSetRate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// OnClockSetRate dispatches through IMFClockStateSink's vtable slot 7.
+func (self *IMFClockStateSink) OnClockSetRate(hnsSystemTime int64, flRate float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIMFClockStateSink_OnClockSetRate, nil, uintptr(unsafe.Pointer(self)), uintptr(hnsSystemTime), uintptr(math.Float32bits(flRate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5518,10 +5619,74 @@ func (self *IMFMediaEngine) IsSeeking() foundation.BOOL {
 	return foundation.BOOL(r1)
 }
 
+var specIMFMediaEngine_GetCurrentTime = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetCurrentTime dispatches through IMFMediaEngine's vtable slot 16.
+func (self *IMFMediaEngine) GetCurrentTime() float64 {
+	r := win32.Call(self.LpVtbl[16], specIMFMediaEngine_GetCurrentTime, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFMediaEngine_SetCurrentTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetCurrentTime dispatches through IMFMediaEngine's vtable slot 17.
+func (self *IMFMediaEngine) SetCurrentTime(seekTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIMFMediaEngine_SetCurrentTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(seekTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFMediaEngine_GetStartTime = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetStartTime dispatches through IMFMediaEngine's vtable slot 18.
+func (self *IMFMediaEngine) GetStartTime() float64 {
+	r := win32.Call(self.LpVtbl[18], specIMFMediaEngine_GetStartTime, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFMediaEngine_GetDuration = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetDuration dispatches through IMFMediaEngine's vtable slot 19.
+func (self *IMFMediaEngine) GetDuration() float64 {
+	r := win32.Call(self.LpVtbl[19], specIMFMediaEngine_GetDuration, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
 // IsPaused dispatches through IMFMediaEngine's vtable slot 20.
 func (self *IMFMediaEngine) IsPaused() foundation.BOOL {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
 	return foundation.BOOL(r1)
+}
+
+var specIMFMediaEngine_GetDefaultPlaybackRate = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetDefaultPlaybackRate dispatches through IMFMediaEngine's vtable slot 21.
+func (self *IMFMediaEngine) GetDefaultPlaybackRate() float64 {
+	r := win32.Call(self.LpVtbl[21], specIMFMediaEngine_GetDefaultPlaybackRate, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFMediaEngine_SetDefaultPlaybackRate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetDefaultPlaybackRate dispatches through IMFMediaEngine's vtable slot 22.
+func (self *IMFMediaEngine) SetDefaultPlaybackRate(Rate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIMFMediaEngine_SetDefaultPlaybackRate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Rate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFMediaEngine_GetPlaybackRate = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetPlaybackRate dispatches through IMFMediaEngine's vtable slot 23.
+func (self *IMFMediaEngine) GetPlaybackRate() float64 {
+	r := win32.Call(self.LpVtbl[23], specIMFMediaEngine_GetPlaybackRate, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFMediaEngine_SetPlaybackRate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetPlaybackRate dispatches through IMFMediaEngine's vtable slot 24.
+func (self *IMFMediaEngine) SetPlaybackRate(Rate float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIMFMediaEngine_SetPlaybackRate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Rate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetPlayed dispatches through IMFMediaEngine's vtable slot 25.
@@ -5590,6 +5755,22 @@ func (self *IMFMediaEngine) GetMuted() foundation.BOOL {
 func (self *IMFMediaEngine) SetMuted(Muted bool) error {
 	_Muted := win32.Bool32(Muted)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(_Muted))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFMediaEngine_GetVolume = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetVolume dispatches through IMFMediaEngine's vtable slot 36.
+func (self *IMFMediaEngine) GetVolume() float64 {
+	r := win32.Call(self.LpVtbl[36], specIMFMediaEngine_GetVolume, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFMediaEngine_SetVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetVolume dispatches through IMFMediaEngine's vtable slot 37.
+func (self *IMFMediaEngine) SetVolume(Volume float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIMFMediaEngine_SetVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(Volume))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5829,6 +6010,30 @@ func (self *IMFMediaEngineEx) UpdateVideoStream(pSrc *MFVideoNormalizedRect, pDs
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFMediaEngineEx_GetBalance = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetBalance dispatches through IMFMediaEngineEx's vtable slot 48.
+func (self *IMFMediaEngineEx) GetBalance() float64 {
+	r := win32.Call(self.LpVtbl[48], specIMFMediaEngineEx_GetBalance, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFMediaEngineEx_SetBalance = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetBalance dispatches through IMFMediaEngineEx's vtable slot 49.
+func (self *IMFMediaEngineEx) SetBalance(balance float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[49], specIMFMediaEngineEx_SetBalance, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(balance))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFMediaEngineEx_IsPlaybackRateSupported = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// IsPlaybackRateSupported dispatches through IMFMediaEngineEx's vtable slot 50.
+func (self *IMFMediaEngineEx) IsPlaybackRateSupported(rate float64) foundation.BOOL {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIMFMediaEngineEx_IsPlaybackRateSupported, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(rate))).Tuple()
+	return foundation.BOOL(r1)
+}
+
 // FrameStep dispatches through IMFMediaEngineEx's vtable slot 51.
 func (self *IMFMediaEngineEx) FrameStep(Forward bool) error {
 	_Forward := win32.Bool32(Forward)
@@ -5902,6 +6107,14 @@ func (self *IMFMediaEngineEx) InsertAudioEffect(pEffect *systemcom.IUnknown, fOp
 // RemoveAllEffects dispatches through IMFMediaEngineEx's vtable slot 62.
 func (self *IMFMediaEngineEx) RemoveAllEffects() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFMediaEngineEx_SetTimelineMarkerTimer = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetTimelineMarkerTimer dispatches through IMFMediaEngineEx's vtable slot 63.
+func (self *IMFMediaEngineEx) SetTimelineMarkerTimer(timeToFire float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIMFMediaEngineEx_SetTimelineMarkerTimer, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(timeToFire))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6001,6 +6214,14 @@ func (self *IMFMediaEngineEx) GetRealTimeMode(pfEnabled *foundation.BOOL) error 
 func (self *IMFMediaEngineEx) SetRealTimeMode(fEnable bool) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFMediaEngineEx_SetCurrentTimeEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// SetCurrentTimeEx dispatches through IMFMediaEngineEx's vtable slot 80.
+func (self *IMFMediaEngineEx) SetCurrentTimeEx(seekTime float64, seekMode MF_MEDIA_ENGINE_SEEK_MODE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[80], specIMFMediaEngineEx_SetCurrentTimeEx, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(seekTime)), uintptr(seekMode)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6954,6 +7175,22 @@ func (self *IMFMediaSourceExtension) GetReadyState() MF_MSE_READY {
 	return MF_MSE_READY(r1)
 }
 
+var specIMFMediaSourceExtension_GetDuration = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetDuration dispatches through IMFMediaSourceExtension's vtable slot 6.
+func (self *IMFMediaSourceExtension) GetDuration() float64 {
+	r := win32.Call(self.LpVtbl[6], specIMFMediaSourceExtension_GetDuration, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFMediaSourceExtension_SetDuration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetDuration dispatches through IMFMediaSourceExtension's vtable slot 7.
+func (self *IMFMediaSourceExtension) SetDuration(duration float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIMFMediaSourceExtension_SetDuration, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddSourceBuffer dispatches through IMFMediaSourceExtension's vtable slot 8.
 func (self *IMFMediaSourceExtension) AddSourceBuffer(type_ foundation.BSTR, pNotify *IMFSourceBufferNotify, ppSourceBuffer **IMFSourceBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(pNotify)), uintptr(unsafe.Pointer(ppSourceBuffer)))
@@ -6991,6 +7228,14 @@ type IMFMediaSourceExtensionLiveSeekableRange struct {
 
 // IID_IMFMediaSourceExtensionLiveSeekableRange is the interface identifier for IMFMediaSourceExtensionLiveSeekableRange.
 var IID_IMFMediaSourceExtensionLiveSeekableRange = win32.GUID{Data1: 0x5d1abfd6, Data2: 0x450a, Data3: 0x4d92, Data4: [8]byte{0x9e, 0xfc, 0xd6, 0xb6, 0xcb, 0xc1, 0xf4, 0xda}}
+
+var specIMFMediaSourceExtensionLiveSeekableRange_SetLiveSeekableRange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// SetLiveSeekableRange dispatches through IMFMediaSourceExtensionLiveSeekableRange's vtable slot 3.
+func (self *IMFMediaSourceExtensionLiveSeekableRange) SetLiveSeekableRange(start float64, end float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIMFMediaSourceExtensionLiveSeekableRange_SetLiveSeekableRange, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(start)), uintptr(math.Float64bits(end))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // ClearLiveSeekableRange dispatches through IMFMediaSourceExtensionLiveSeekableRange's vtable slot 4.
 func (self *IMFMediaSourceExtensionLiveSeekableRange) ClearLiveSeekableRange() error {
@@ -7141,6 +7386,22 @@ func (self *IMFMediaTimeRange) GetEnd(index uint32, pEnd *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFMediaTimeRange_ContainsTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// ContainsTime dispatches through IMFMediaTimeRange's vtable slot 6.
+func (self *IMFMediaTimeRange) ContainsTime(time float64) foundation.BOOL {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIMFMediaTimeRange_ContainsTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(time))).Tuple()
+	return foundation.BOOL(r1)
+}
+
+var specIMFMediaTimeRange_AddRange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// AddRange dispatches through IMFMediaTimeRange's vtable slot 7.
+func (self *IMFMediaTimeRange) AddRange(startTime float64, endTime float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIMFMediaTimeRange_AddRange, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(startTime)), uintptr(math.Float64bits(endTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Clear dispatches through IMFMediaTimeRange's vtable slot 8.
 func (self *IMFMediaTimeRange) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
@@ -7171,6 +7432,22 @@ func (self *IMFMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) erro
 // IsEqual dispatches through IMFMediaType's vtable slot 35.
 func (self *IMFMediaType) IsEqual(pIMediaType *IMFMediaType, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIMediaType)), uintptr(unsafe.Pointer(pdwFlags)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFMediaType_GetRepresentation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetRepresentation dispatches through IMFMediaType's vtable slot 36.
+func (self *IMFMediaType) GetRepresentation(guidRepresentation win32.GUID, ppvRepresentation *unsafe.Pointer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIMFMediaType_GetRepresentation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidRepresentation)), uintptr(unsafe.Pointer(ppvRepresentation))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFMediaType_FreeRepresentation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// FreeRepresentation dispatches through IMFMediaType's vtable slot 37.
+func (self *IMFMediaType) FreeRepresentation(guidRepresentation win32.GUID, pvRepresentation unsafe.Pointer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIMFMediaType_FreeRepresentation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidRepresentation)), uintptr(unsafe.Pointer(pvRepresentation))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7657,6 +7934,14 @@ type IMFOutputPolicy struct {
 // IID_IMFOutputPolicy is the interface identifier for IMFOutputPolicy.
 var IID_IMFOutputPolicy = win32.GUID{Data1: 0x7f00f10a, Data2: 0xdaed, Data3: 0x41af, Data4: [8]byte{0xab, 0x26, 0x5f, 0xdf, 0xa4, 0xdf, 0xba, 0x3c}}
 
+var specIMFOutputPolicy_GenerateRequiredSchemas = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// GenerateRequiredSchemas dispatches through IMFOutputPolicy's vtable slot 33.
+func (self *IMFOutputPolicy) GenerateRequiredSchemas(dwAttributes uint32, guidOutputSubType win32.GUID, rgGuidProtectionSchemasSupported *win32.GUID, cProtectionSchemasSupported uint32, ppRequiredProtectionSchemas **IMFCollection) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIMFOutputPolicy_GenerateRequiredSchemas, nil, uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(&guidOutputSubType)), uintptr(unsafe.Pointer(rgGuidProtectionSchemasSupported)), uintptr(cProtectionSchemasSupported), uintptr(unsafe.Pointer(ppRequiredProtectionSchemas))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetOriginatorID dispatches through IMFOutputPolicy's vtable slot 34.
 func (self *IMFOutputPolicy) GetOriginatorID(pguidOriginatorID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidOriginatorID)))
@@ -8008,6 +8293,14 @@ func (self *IMFPMediaPlayer) GetDuration(guidPositionType *win32.GUID, pvDuratio
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFPMediaPlayer_SetRate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetRate dispatches through IMFPMediaPlayer's vtable slot 10.
+func (self *IMFPMediaPlayer) SetRate(flRate float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIMFPMediaPlayer_SetRate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flRate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetRate dispatches through IMFPMediaPlayer's vtable slot 11.
 func (self *IMFPMediaPlayer) GetRate(pflRate *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflRate)))
@@ -8066,9 +8359,25 @@ func (self *IMFPMediaPlayer) GetVolume(pflVolume *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFPMediaPlayer_SetVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetVolume dispatches through IMFPMediaPlayer's vtable slot 20.
+func (self *IMFPMediaPlayer) SetVolume(flVolume float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIMFPMediaPlayer_SetVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flVolume))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetBalance dispatches through IMFPMediaPlayer's vtable slot 21.
 func (self *IMFPMediaPlayer) GetBalance(pflBalance *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pflBalance)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFPMediaPlayer_SetBalance = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBalance dispatches through IMFPMediaPlayer's vtable slot 22.
+func (self *IMFPMediaPlayer) SetBalance(flBalance float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIMFPMediaPlayer_SetBalance, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flBalance))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8516,6 +8825,15 @@ type IMFRateControl struct {
 // IID_IMFRateControl is the interface identifier for IMFRateControl.
 var IID_IMFRateControl = win32.GUID{Data1: 0x88ddcd21, Data2: 0x03c3, Data3: 0x4275, Data4: [8]byte{0x91, 0xed, 0x55, 0xee, 0x39, 0x29, 0x32, 0x8f}}
 
+var specIMFRateControl_SetRate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetRate dispatches through IMFRateControl's vtable slot 3.
+func (self *IMFRateControl) SetRate(fThin bool, flRate float32) error {
+	_fThin := win32.Bool32(fThin)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIMFRateControl_SetRate, nil, uintptr(unsafe.Pointer(self)), uintptr(_fThin), uintptr(math.Float32bits(flRate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetRate dispatches through IMFRateControl's vtable slot 4.
 func (self *IMFRateControl) GetRate(pfThin *foundation.BOOL, pflRate *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfThin)), uintptr(unsafe.Pointer(pflRate)))
@@ -8542,6 +8860,15 @@ func (self *IMFRateSupport) GetSlowestRate(eDirection MFRATE_DIRECTION, fThin bo
 func (self *IMFRateSupport) GetFastestRate(eDirection MFRATE_DIRECTION, fThin bool, pflRate *float32) error {
 	_fThin := win32.Bool32(fThin)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(eDirection), uintptr(_fThin), uintptr(unsafe.Pointer(pflRate)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFRateSupport_IsRateSupported = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// IsRateSupported dispatches through IMFRateSupport's vtable slot 5.
+func (self *IMFRateSupport) IsRateSupported(fThin bool, flRate float32, pflNearestSupportedRate *float32) error {
+	_fThin := win32.Bool32(fThin)
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIMFRateSupport_IsRateSupported, nil, uintptr(unsafe.Pointer(self)), uintptr(_fThin), uintptr(math.Float32bits(flRate)), uintptr(unsafe.Pointer(pflNearestSupportedRate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9635,6 +9962,14 @@ type IMFSimpleAudioVolume struct {
 // IID_IMFSimpleAudioVolume is the interface identifier for IMFSimpleAudioVolume.
 var IID_IMFSimpleAudioVolume = win32.GUID{Data1: 0x089edf13, Data2: 0xcf71, Data3: 0x4338, Data4: [8]byte{0x8d, 0x13, 0x9e, 0x56, 0x9d, 0xbd, 0xc3, 0x19}}
 
+var specIMFSimpleAudioVolume_SetMasterVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetMasterVolume dispatches through IMFSimpleAudioVolume's vtable slot 3.
+func (self *IMFSimpleAudioVolume) SetMasterVolume(fLevel float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIMFSimpleAudioVolume_SetMasterVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fLevel))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetMasterVolume dispatches through IMFSimpleAudioVolume's vtable slot 4.
 func (self *IMFSimpleAudioVolume) GetMasterVolume(pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLevel)))
@@ -9828,6 +10163,54 @@ func (self *IMFSourceBuffer) GetBuffered(ppBuffered **IMFMediaTimeRange) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFSourceBuffer_GetTimeStampOffset = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetTimeStampOffset dispatches through IMFSourceBuffer's vtable slot 5.
+func (self *IMFSourceBuffer) GetTimeStampOffset() float64 {
+	r := win32.Call(self.LpVtbl[5], specIMFSourceBuffer_GetTimeStampOffset, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFSourceBuffer_SetTimeStampOffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetTimeStampOffset dispatches through IMFSourceBuffer's vtable slot 6.
+func (self *IMFSourceBuffer) SetTimeStampOffset(offset float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIMFSourceBuffer_SetTimeStampOffset, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(offset))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFSourceBuffer_GetAppendWindowStart = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetAppendWindowStart dispatches through IMFSourceBuffer's vtable slot 7.
+func (self *IMFSourceBuffer) GetAppendWindowStart() float64 {
+	r := win32.Call(self.LpVtbl[7], specIMFSourceBuffer_GetAppendWindowStart, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFSourceBuffer_SetAppendWindowStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetAppendWindowStart dispatches through IMFSourceBuffer's vtable slot 8.
+func (self *IMFSourceBuffer) SetAppendWindowStart(time float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIMFSourceBuffer_SetAppendWindowStart, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(time))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFSourceBuffer_GetAppendWindowEnd = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetAppendWindowEnd dispatches through IMFSourceBuffer's vtable slot 9.
+func (self *IMFSourceBuffer) GetAppendWindowEnd() float64 {
+	r := win32.Call(self.LpVtbl[9], specIMFSourceBuffer_GetAppendWindowEnd, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFSourceBuffer_SetAppendWindowEnd = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetAppendWindowEnd dispatches through IMFSourceBuffer's vtable slot 10.
+func (self *IMFSourceBuffer) SetAppendWindowEnd(time float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIMFSourceBuffer_SetAppendWindowEnd, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(time))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Append dispatches through IMFSourceBuffer's vtable slot 11.
 func (self *IMFSourceBuffer) Append(pData []byte) error {
 	var _pData *byte
@@ -9847,6 +10230,14 @@ func (self *IMFSourceBuffer) AppendByteStream(pStream *IMFByteStream, pMaxLen *u
 // Abort dispatches through IMFSourceBuffer's vtable slot 13.
 func (self *IMFSourceBuffer) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFSourceBuffer_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// Remove dispatches through IMFSourceBuffer's vtable slot 14.
+func (self *IMFSourceBuffer) Remove(start float64, end float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIMFSourceBuffer_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(start)), uintptr(math.Float64bits(end))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -10413,6 +10804,14 @@ func (self *IMFTimedText) GetCueTimeOffset(offset *float64) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFTimedText_SetCueTimeOffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetCueTimeOffset dispatches through IMFTimedText's vtable slot 10.
+func (self *IMFTimedText) SetCueTimeOffset(offset float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIMFTimedText_SetCueTimeOffset, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(offset))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetTracks dispatches through IMFTimedText's vtable slot 11.
 func (self *IMFTimedText) GetTracks(tracks **IMFTimedTextTrackList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tracks)))
@@ -10518,6 +10917,22 @@ func (self *IMFTimedTextCue) GetCueKind() MF_TIMED_TEXT_TRACK_KIND {
 	return MF_TIMED_TEXT_TRACK_KIND(r1)
 }
 
+var specIMFTimedTextCue_GetStartTime = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetStartTime dispatches through IMFTimedTextCue's vtable slot 6.
+func (self *IMFTimedTextCue) GetStartTime() float64 {
+	r := win32.Call(self.LpVtbl[6], specIMFTimedTextCue_GetStartTime, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
+var specIMFTimedTextCue_GetDuration = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// GetDuration dispatches through IMFTimedTextCue's vtable slot 7.
+func (self *IMFTimedTextCue) GetDuration() float64 {
+	r := win32.Call(self.LpVtbl[7], specIMFTimedTextCue_GetDuration, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float64frombits(r.F0)
+}
+
 // GetTrackId dispatches through IMFTimedTextCue's vtable slot 8.
 func (self *IMFTimedTextCue) GetTrackId() uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
@@ -10587,6 +11002,27 @@ func (self *IMFTimedTextCueList) GetCueByOriginalId(originalId string, cue **IMF
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMFTimedTextCueList_AddTextCue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// AddTextCue dispatches through IMFTimedTextCueList's vtable slot 7.
+func (self *IMFTimedTextCueList) AddTextCue(start float64, duration float64, text string, cue **IMFTimedTextCue) error {
+	_text := win32.UTF16Ptr(text)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIMFTimedTextCueList_AddTextCue, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(start)), uintptr(math.Float64bits(duration)), uintptr(unsafe.Pointer(_text)), uintptr(unsafe.Pointer(cue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFTimedTextCueList_AddDataCue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// AddDataCue dispatches through IMFTimedTextCueList's vtable slot 8.
+func (self *IMFTimedTextCueList) AddDataCue(start float64, duration float64, data []byte, cue **IMFTimedTextCue) error {
+	var _data *byte
+	if len(data) > 0 {
+		_data = &data[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIMFTimedTextCueList_AddDataCue, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(start)), uintptr(math.Float64bits(duration)), uintptr(unsafe.Pointer(_data)), uintptr(len(data)), uintptr(unsafe.Pointer(cue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // RemoveCue dispatches through IMFTimedTextCueList's vtable slot 9.
 func (self *IMFTimedTextCueList) RemoveCue(cue *IMFTimedTextCue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cue)))
@@ -10653,6 +11089,13 @@ func (self *IMFTimedTextNotify) TrackReadyStateChanged(trackId uint32) {
 // Error dispatches through IMFTimedTextNotify's vtable slot 7.
 func (self *IMFTimedTextNotify) Error(errorCode MF_TIMED_TEXT_ERROR_CODE, extendedErrorCode foundation.HRESULT, sourceTrackId uint32) {
 	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(errorCode), uintptr(extendedErrorCode), uintptr(sourceTrackId))
+}
+
+var specIMFTimedTextNotify_Cue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64, win32.Word}}
+
+// Cue dispatches through IMFTimedTextNotify's vtable slot 8.
+func (self *IMFTimedTextNotify) Cue(cueEvent MF_TIMED_TEXT_CUE_EVENT, currentTime float64, cue *IMFTimedTextCue) {
+	win32.Call(self.LpVtbl[8], specIMFTimedTextNotify_Cue, nil, uintptr(unsafe.Pointer(self)), uintptr(cueEvent), uintptr(math.Float64bits(currentTime)), uintptr(unsafe.Pointer(cue))).Tuple()
 }
 
 // Reset dispatches through IMFTimedTextNotify's vtable slot 9.
@@ -11718,6 +12161,14 @@ func (self *IMFVideoMediaType) GetVideoFormat() *MFVIDEOFORMAT {
 	return (*MFVIDEOFORMAT)(unsafe.Pointer(r1))
 }
 
+var specIMFVideoMediaType_GetVideoRepresentation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetVideoRepresentation dispatches through IMFVideoMediaType's vtable slot 39.
+func (self *IMFVideoMediaType) GetVideoRepresentation(guidRepresentation win32.GUID, ppvRepresentation *unsafe.Pointer, lStride int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIMFVideoMediaType_GetVideoRepresentation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidRepresentation)), uintptr(unsafe.Pointer(ppvRepresentation)), uintptr(lStride)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IMFVideoMixerBitmap: https://learn.microsoft.com/windows/win32/api/evr9/nn-evr9-imfvideomixerbitmap
 // IID: 814c7b20-0fdb-4eec-af8f-f957c8f69edc
 type IMFVideoMixerBitmap struct {
@@ -11813,6 +12264,14 @@ type IMFVideoPositionMapper struct {
 
 // IID_IMFVideoPositionMapper is the interface identifier for IMFVideoPositionMapper.
 var IID_IMFVideoPositionMapper = win32.GUID{Data1: 0x1f6a9f17, Data2: 0xe70b, Data3: 0x4e24, Data4: [8]byte{0x8a, 0xe4, 0x0b, 0x2c, 0x3b, 0xa7, 0xa4, 0xae}}
+
+var specIMFVideoPositionMapper_MapOutputCoordinateToInputStream = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MapOutputCoordinateToInputStream dispatches through IMFVideoPositionMapper's vtable slot 3.
+func (self *IMFVideoPositionMapper) MapOutputCoordinateToInputStream(xOut float32, yOut float32, dwOutputStreamIndex uint32, dwInputStreamIndex uint32, pxIn *float32, pyIn *float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIMFVideoPositionMapper_MapOutputCoordinateToInputStream, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(xOut)), uintptr(math.Float32bits(yOut)), uintptr(dwOutputStreamIndex), uintptr(dwInputStreamIndex), uintptr(unsafe.Pointer(pxIn)), uintptr(unsafe.Pointer(pyIn))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IMFVideoPresenter: https://learn.microsoft.com/windows/win32/api/evr/nn-evr-imfvideopresenter
 // IID: 29aff080-182a-4a5d-af3b-448f3a6346cb
@@ -12007,6 +12466,14 @@ func (self *IMFVideoProcessorControl3) GetNaturalOutputType(ppType **IMFMediaTyp
 func (self *IMFVideoProcessorControl3) EnableSphericalVideoProcessing(fEnable bool, eFormat MFVideoSphericalFormat, eProjectionMode MFVideoSphericalProjectionMode) error {
 	_fEnable := win32.Bool32(fEnable)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(_fEnable), uintptr(eFormat), uintptr(eProjectionMode))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIMFVideoProcessorControl3_SetSphericalVideoProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetSphericalVideoProperties dispatches through IMFVideoProcessorControl3's vtable slot 14.
+func (self *IMFVideoProcessorControl3) SetSphericalVideoProperties(X float32, Y float32, Z float32, W float32, fieldOfView float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIMFVideoProcessorControl3_SetSphericalVideoProperties, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(X)), uintptr(math.Float32bits(Y)), uintptr(math.Float32bits(Z)), uintptr(math.Float32bits(W)), uintptr(math.Float32bits(fieldOfView))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -12682,6 +13149,14 @@ func (self *ITocParser) GetTocByIndex(enumTocPosType TOC_POS_TYPE, dwTocIndex ui
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITocParser_GetTocByType = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetTocByType dispatches through ITocParser's vtable slot 6.
+func (self *ITocParser) GetTocByType(enumTocPosType TOC_POS_TYPE, guidTocType win32.GUID, ppTocs **ITocCollection) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specITocParser_GetTocByType, nil, uintptr(unsafe.Pointer(self)), uintptr(enumTocPosType), uintptr(unsafe.Pointer(&guidTocType)), uintptr(unsafe.Pointer(ppTocs))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddToc dispatches through ITocParser's vtable slot 7.
 func (self *ITocParser) AddToc(enumTocPosType TOC_POS_TYPE, pToc *IToc, pdwTocIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enumTocPosType), uintptr(unsafe.Pointer(pToc)), uintptr(unsafe.Pointer(pdwTocIndex)))
@@ -12691,6 +13166,14 @@ func (self *ITocParser) AddToc(enumTocPosType TOC_POS_TYPE, pToc *IToc, pdwTocIn
 // RemoveTocByIndex dispatches through ITocParser's vtable slot 8.
 func (self *ITocParser) RemoveTocByIndex(enumTocPosType TOC_POS_TYPE, dwTocIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(enumTocPosType), uintptr(dwTocIndex))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITocParser_RemoveTocByType = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RemoveTocByType dispatches through ITocParser's vtable slot 9.
+func (self *ITocParser) RemoveTocByType(enumTocPosType TOC_POS_TYPE, guidTocType win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specITocParser_RemoveTocByType, nil, uintptr(unsafe.Pointer(self)), uintptr(enumTocPosType), uintptr(unsafe.Pointer(&guidTocType))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -12707,6 +13190,18 @@ type IValidateBinding struct {
 
 // IID_IValidateBinding is the interface identifier for IValidateBinding.
 var IID_IValidateBinding = win32.GUID{Data1: 0x04a578b2, Data2: 0xe778, Data3: 0x422a, Data4: [8]byte{0xa8, 0x05, 0xb3, 0xee, 0x54, 0xd9, 0x0b, 0xd9}}
+
+var specIValidateBinding_GetIdentifier = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetIdentifier dispatches through IValidateBinding's vtable slot 3.
+func (self *IValidateBinding) GetIdentifier(guidLicensorID win32.GUID, pbEphemeron []byte, ppbBlobValidationID **byte, pcbBlobSize *uint32) error {
+	var _pbEphemeron *byte
+	if len(pbEphemeron) > 0 {
+		_pbEphemeron = &pbEphemeron[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIValidateBinding_GetIdentifier, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidLicensorID)), uintptr(unsafe.Pointer(_pbEphemeron)), uintptr(len(pbEphemeron)), uintptr(unsafe.Pointer(ppbBlobValidationID)), uintptr(unsafe.Pointer(pcbBlobSize))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IWMCodecLeakyBucket: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmcodecleakybucket
 // IID: a81ba647-6227-43b7-b231-c7b15135dd7d
@@ -12998,6 +13493,14 @@ type IWMValidate struct {
 
 // IID_IWMValidate is the interface identifier for IWMValidate.
 var IID_IWMValidate = win32.GUID{Data1: 0xcee3def2, Data2: 0x3808, Data3: 0x414d, Data4: [8]byte{0xbe, 0x66, 0xfa, 0xfd, 0x47, 0x22, 0x10, 0xbc}}
+
+var specIWMValidate_SetIdentifier = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// SetIdentifier dispatches through IWMValidate's vtable slot 3.
+func (self *IWMValidate) SetIdentifier(guidValidationID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIWMValidate_SetIdentifier, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidValidationID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IWMVideoDecoderHurryup: https://learn.microsoft.com/windows/win32/api/wmcodecdsp/nn-wmcodecdsp-iwmvideodecoderhurryup
 // IID: 352bb3bd-2d4d-4323-9e71-dcdcfbd53ca6

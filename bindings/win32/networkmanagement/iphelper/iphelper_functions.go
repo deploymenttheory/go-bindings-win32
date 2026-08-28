@@ -99,6 +99,7 @@ var (
 	procGetIfTable2Ex                              = modIPHLPAPI.NewProc("GetIfTable2Ex")
 	procGetInterfaceActiveTimestampCapabilities    = modIPHLPAPI.NewProc("GetInterfaceActiveTimestampCapabilities")
 	procGetInterfaceCurrentTimestampCapabilities   = modIPHLPAPI.NewProc("GetInterfaceCurrentTimestampCapabilities")
+	procGetInterfaceDnsSettings                    = modIPHLPAPI.NewProc("GetInterfaceDnsSettings")
 	procGetInterfaceHardwareTimestampCapabilities  = modIPHLPAPI.NewProc("GetInterfaceHardwareTimestampCapabilities")
 	procGetInterfaceInfo                           = modIPHLPAPI.NewProc("GetInterfaceInfo")
 	procGetInterfaceSupportedTimestampCapabilities = modIPHLPAPI.NewProc("GetInterfaceSupportedTimestampCapabilities")
@@ -208,6 +209,7 @@ var (
 	procSetDnsSettings                             = modIPHLPAPI.NewProc("SetDnsSettings")
 	procSetFlVirtualInterface                      = modIPHLPAPI.NewProc("SetFlVirtualInterface")
 	procSetIfEntry                                 = modIPHLPAPI.NewProc("SetIfEntry")
+	procSetInterfaceDnsSettings                    = modIPHLPAPI.NewProc("SetInterfaceDnsSettings")
 	procSetIpForwardEntry                          = modIPHLPAPI.NewProc("SetIpForwardEntry")
 	procSetIpForwardEntry2                         = modIPHLPAPI.NewProc("SetIpForwardEntry2")
 	procSetIpInterfaceEntry                        = modIPHLPAPI.NewProc("SetIpInterfaceEntry")
@@ -311,6 +313,7 @@ var Procs = struct {
 	GetIfTable2Ex                              *win32.Proc
 	GetInterfaceActiveTimestampCapabilities    *win32.Proc
 	GetInterfaceCurrentTimestampCapabilities   *win32.Proc
+	GetInterfaceDnsSettings                    *win32.Proc
 	GetInterfaceHardwareTimestampCapabilities  *win32.Proc
 	GetInterfaceInfo                           *win32.Proc
 	GetInterfaceSupportedTimestampCapabilities *win32.Proc
@@ -420,6 +423,7 @@ var Procs = struct {
 	SetDnsSettings                             *win32.Proc
 	SetFlVirtualInterface                      *win32.Proc
 	SetIfEntry                                 *win32.Proc
+	SetInterfaceDnsSettings                    *win32.Proc
 	SetIpForwardEntry                          *win32.Proc
 	SetIpForwardEntry2                         *win32.Proc
 	SetIpInterfaceEntry                        *win32.Proc
@@ -517,6 +521,7 @@ var Procs = struct {
 	GetIfTable2Ex:                              procGetIfTable2Ex,
 	GetInterfaceActiveTimestampCapabilities:    procGetInterfaceActiveTimestampCapabilities,
 	GetInterfaceCurrentTimestampCapabilities:   procGetInterfaceCurrentTimestampCapabilities,
+	GetInterfaceDnsSettings:                    procGetInterfaceDnsSettings,
 	GetInterfaceHardwareTimestampCapabilities:  procGetInterfaceHardwareTimestampCapabilities,
 	GetInterfaceInfo:                           procGetInterfaceInfo,
 	GetInterfaceSupportedTimestampCapabilities: procGetInterfaceSupportedTimestampCapabilities,
@@ -626,6 +631,7 @@ var Procs = struct {
 	SetDnsSettings:                             procSetDnsSettings,
 	SetFlVirtualInterface:                      procSetFlVirtualInterface,
 	SetIfEntry:                                 procSetIfEntry,
+	SetInterfaceDnsSettings:                    procSetInterfaceDnsSettings,
 	SetIpForwardEntry:                          procSetIpForwardEntry,
 	SetIpForwardEntry2:                         procSetIpForwardEntry2,
 	SetIpInterfaceEntry:                        procSetIpInterfaceEntry,
@@ -1252,6 +1258,15 @@ func GetInterfaceActiveTimestampCapabilities(InterfaceLuid *networkmanagementndi
 func GetInterfaceCurrentTimestampCapabilities(InterfaceLuid *networkmanagementndis.NET_LUID_LH, TimestampCapabilites *INTERFACE_TIMESTAMP_CAPABILITIES) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetInterfaceCurrentTimestampCapabilities.Addr(), uintptr(unsafe.Pointer(InterfaceLuid)), uintptr(unsafe.Pointer(TimestampCapabilites)))
 	return uint32(r1)
+}
+
+var specGetInterfaceDnsSettings = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetInterfaceDnsSettings calls IPHLPAPI!GetInterfaceDnsSettings.
+// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-getinterfacednssettings
+func GetInterfaceDnsSettings(Interface win32.GUID, Settings *DNS_INTERFACE_SETTINGS) foundation.WIN32_ERROR {
+	r1, _, _ := win32.Call(procGetInterfaceDnsSettings.Addr(), specGetInterfaceDnsSettings, nil, uintptr(unsafe.Pointer(&Interface)), uintptr(unsafe.Pointer(Settings))).Tuple()
+	return foundation.WIN32_ERROR(r1)
 }
 
 // GetInterfaceHardwareTimestampCapabilities calls IPHLPAPI.DLL!GetInterfaceHardwareTimestampCapabilities.
@@ -2178,6 +2193,15 @@ func SetFlVirtualInterface(Row *MIB_FL_VIRTUAL_INTERFACE_ROW) uint32 {
 func SetIfEntry(pIfRow *MIB_IFROW) uint32 {
 	r1, _, _ := syscall.SyscallN(procSetIfEntry.Addr(), uintptr(unsafe.Pointer(pIfRow)))
 	return uint32(r1)
+}
+
+var specSetInterfaceDnsSettings = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetInterfaceDnsSettings calls IPHLPAPI!SetInterfaceDnsSettings.
+// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-setinterfacednssettings
+func SetInterfaceDnsSettings(Interface win32.GUID, Settings *DNS_INTERFACE_SETTINGS) foundation.WIN32_ERROR {
+	r1, _, _ := win32.Call(procSetInterfaceDnsSettings.Addr(), specSetInterfaceDnsSettings, nil, uintptr(unsafe.Pointer(&Interface)), uintptr(unsafe.Pointer(Settings))).Tuple()
+	return foundation.WIN32_ERROR(r1)
 }
 
 // SetIpForwardEntry calls IPHLPAPI!SetIpForwardEntry.

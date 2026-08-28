@@ -5,6 +5,7 @@
 package sensors
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -33,10 +34,12 @@ var (
 	procEvaluateActivityThresholds                           = modSensorsUtilsV2.NewProc("EvaluateActivityThresholds")
 	procGetPerformanceTime                                   = modSensorsUtilsV2.NewProc("GetPerformanceTime")
 	procInitPropVariantFromCLSIDArray                        = modSensorsUtilsV2.NewProc("InitPropVariantFromCLSIDArray")
+	procInitPropVariantFromFloat                             = modSensorsUtilsV2.NewProc("InitPropVariantFromFloat")
 	procIsCollectionListSame                                 = modSensorsUtilsV2.NewProc("IsCollectionListSame")
 	procIsGUIDPresentInList                                  = modSensorsUtilsV2.NewProc("IsGUIDPresentInList")
 	procIsKeyPresentInCollectionList                         = modSensorsUtilsV2.NewProc("IsKeyPresentInCollectionList")
 	procIsKeyPresentInPropertyList                           = modSensorsUtilsV2.NewProc("IsKeyPresentInPropertyList")
+	procIsSensorSubscribed                                   = modSensorsUtilsV2.NewProc("IsSensorSubscribed")
 	procPropKeyFindKeyGetBool                                = modSensorsUtilsV2.NewProc("PropKeyFindKeyGetBool")
 	procPropKeyFindKeyGetDouble                              = modSensorsUtilsV2.NewProc("PropKeyFindKeyGetDouble")
 	procPropKeyFindKeyGetFileTime                            = modSensorsUtilsV2.NewProc("PropKeyFindKeyGetFileTime")
@@ -78,10 +81,12 @@ var Procs = struct {
 	EvaluateActivityThresholds                           *win32.Proc
 	GetPerformanceTime                                   *win32.Proc
 	InitPropVariantFromCLSIDArray                        *win32.Proc
+	InitPropVariantFromFloat                             *win32.Proc
 	IsCollectionListSame                                 *win32.Proc
 	IsGUIDPresentInList                                  *win32.Proc
 	IsKeyPresentInCollectionList                         *win32.Proc
 	IsKeyPresentInPropertyList                           *win32.Proc
+	IsSensorSubscribed                                   *win32.Proc
 	PropKeyFindKeyGetBool                                *win32.Proc
 	PropKeyFindKeyGetDouble                              *win32.Proc
 	PropKeyFindKeyGetFileTime                            *win32.Proc
@@ -117,10 +122,12 @@ var Procs = struct {
 	EvaluateActivityThresholds:                           procEvaluateActivityThresholds,
 	GetPerformanceTime:                                   procGetPerformanceTime,
 	InitPropVariantFromCLSIDArray:                        procInitPropVariantFromCLSIDArray,
+	InitPropVariantFromFloat:                             procInitPropVariantFromFloat,
 	IsCollectionListSame:                                 procIsCollectionListSame,
 	IsGUIDPresentInList:                                  procIsGUIDPresentInList,
 	IsKeyPresentInCollectionList:                         procIsKeyPresentInCollectionList,
 	IsKeyPresentInPropertyList:                           procIsKeyPresentInPropertyList,
+	IsSensorSubscribed:                                   procIsSensorSubscribed,
 	PropKeyFindKeyGetBool:                                procPropKeyFindKeyGetBool,
 	PropKeyFindKeyGetDouble:                              procPropKeyFindKeyGetDouble,
 	PropKeyFindKeyGetFileTime:                            procPropKeyFindKeyGetFileTime,
@@ -239,6 +246,14 @@ func InitPropVariantFromCLSIDArray(members []win32.GUID, ppropvar *systemcomstru
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specInitPropVariantFromFloat = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Word}}
+
+// InitPropVariantFromFloat calls SensorsUtilsV2!InitPropVariantFromFloat.
+func InitPropVariantFromFloat(fltVal float32, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	r1, _, _ := win32.Call(procInitPropVariantFromFloat.Addr(), specInitPropVariantFromFloat, nil, uintptr(math.Float32bits(fltVal)), uintptr(unsafe.Pointer(ppropvar))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IsCollectionListSame calls SensorsUtilsV2!IsCollectionListSame.
 func IsCollectionListSame(ListA *SENSOR_COLLECTION_LIST, ListB *SENSOR_COLLECTION_LIST) foundation.BOOLEAN {
 	r1, _, _ := syscall.SyscallN(procIsCollectionListSame.Addr(), uintptr(unsafe.Pointer(ListA)), uintptr(unsafe.Pointer(ListB)))
@@ -264,6 +279,14 @@ func IsKeyPresentInCollectionList(pList *SENSOR_COLLECTION_LIST, pKey *foundatio
 // IsKeyPresentInPropertyList calls SensorsUtilsV2!IsKeyPresentInPropertyList.
 func IsKeyPresentInPropertyList(pList *SENSOR_PROPERTY_LIST, pKey *foundation.PROPERTYKEY) foundation.BOOLEAN {
 	r1, _, _ := syscall.SyscallN(procIsKeyPresentInPropertyList.Addr(), uintptr(unsafe.Pointer(pList)), uintptr(unsafe.Pointer(pKey)))
+	return foundation.BOOLEAN(r1)
+}
+
+var specIsSensorSubscribed = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// IsSensorSubscribed calls SensorsUtilsV2!IsSensorSubscribed.
+func IsSensorSubscribed(subscriptionList *SENSOR_COLLECTION_LIST, currentType win32.GUID) foundation.BOOLEAN {
+	r1, _, _ := win32.Call(procIsSensorSubscribed.Addr(), specIsSensorSubscribed, nil, uintptr(unsafe.Pointer(subscriptionList)), uintptr(unsafe.Pointer(&currentType))).Tuple()
 	return foundation.BOOLEAN(r1)
 }
 

@@ -5,6 +5,7 @@
 package richedit
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -269,6 +270,14 @@ func (self *ITextDocument) SetSaved(Value TomConstants) error {
 // GetDefaultTabStop dispatches through ITextDocument's vtable slot 13.
 func (self *ITextDocument) GetDefaultTabStop(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextDocument_SetDefaultTabStop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetDefaultTabStop dispatches through ITextDocument's vtable slot 14.
+func (self *ITextDocument) SetDefaultTabStop(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specITextDocument_SetDefaultTabStop, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -928,6 +937,14 @@ func (self *ITextFont) GetKerning(pValue *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITextFont_SetKerning = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetKerning dispatches through ITextFont's vtable slot 33.
+func (self *ITextFont) SetKerning(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specITextFont_SetKerning, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetLanguageID dispatches through ITextFont's vtable slot 34.
 func (self *ITextFont) GetLanguageID(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
@@ -970,6 +987,14 @@ func (self *ITextFont) GetPosition(pValue *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITextFont_SetPosition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetPosition dispatches through ITextFont's vtable slot 41.
+func (self *ITextFont) SetPosition(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specITextFont_SetPosition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetProtected dispatches through ITextFont's vtable slot 42.
 func (self *ITextFont) GetProtected(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
@@ -1000,6 +1025,14 @@ func (self *ITextFont) GetSize(pValue *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITextFont_SetSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSize dispatches through ITextFont's vtable slot 47.
+func (self *ITextFont) SetSize(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[47], specITextFont_SetSize, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetSmallCaps dispatches through ITextFont's vtable slot 48.
 func (self *ITextFont) GetSmallCaps(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
@@ -1015,6 +1048,14 @@ func (self *ITextFont) SetSmallCaps(Value int32) error {
 // GetSpacing dispatches through ITextFont's vtable slot 50.
 func (self *ITextFont) GetSpacing(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextFont_SetSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSpacing dispatches through ITextFont's vtable slot 51.
+func (self *ITextFont) SetSpacing(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specITextFont_SetSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1294,6 +1335,14 @@ func (self *ITextFont2) SetScaling(Value int32) error {
 // GetSpaceExtension dispatches through ITextFont2's vtable slot 96.
 func (self *ITextFont2) GetSpaceExtension(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextFont2_SetSpaceExtension = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSpaceExtension dispatches through ITextFont2's vtable slot 97.
+func (self *ITextFont2) SetSpaceExtension(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[97], specITextFont2_SetSpaceExtension, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1839,6 +1888,14 @@ func (self *ITextPara) GetListTab(pValue *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITextPara_SetListTab = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetListTab dispatches through ITextPara's vtable slot 33.
+func (self *ITextPara) SetListTab(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specITextPara_SetListTab, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetListType dispatches through ITextPara's vtable slot 34.
 func (self *ITextPara) GetListType(pValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
@@ -1881,15 +1938,55 @@ func (self *ITextPara) GetRightIndent(pValue *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITextPara_SetRightIndent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetRightIndent dispatches through ITextPara's vtable slot 41.
+func (self *ITextPara) SetRightIndent(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specITextPara_SetRightIndent, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextPara_SetIndents = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetIndents dispatches through ITextPara's vtable slot 42.
+func (self *ITextPara) SetIndents(First float32, Left float32, Right float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specITextPara_SetIndents, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(First)), uintptr(math.Float32bits(Left)), uintptr(math.Float32bits(Right))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextPara_SetLineSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetLineSpacing dispatches through ITextPara's vtable slot 43.
+func (self *ITextPara) SetLineSpacing(Rule int32, Spacing float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specITextPara_SetLineSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(Rule), uintptr(math.Float32bits(Spacing))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetSpaceAfter dispatches through ITextPara's vtable slot 44.
 func (self *ITextPara) GetSpaceAfter(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITextPara_SetSpaceAfter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSpaceAfter dispatches through ITextPara's vtable slot 45.
+func (self *ITextPara) SetSpaceAfter(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specITextPara_SetSpaceAfter, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetSpaceBefore dispatches through ITextPara's vtable slot 46.
 func (self *ITextPara) GetSpaceBefore(pValue *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextPara_SetSpaceBefore = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSpaceBefore dispatches through ITextPara's vtable slot 47.
+func (self *ITextPara) SetSpaceBefore(Value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[47], specITextPara_SetSpaceBefore, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1911,9 +2008,25 @@ func (self *ITextPara) GetTabCount(pCount *int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITextPara_AddTab = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// AddTab dispatches through ITextPara's vtable slot 51.
+func (self *ITextPara) AddTab(tbPos float32, tbAlign int32, tbLeader int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specITextPara_AddTab, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(tbPos)), uintptr(tbAlign), uintptr(tbLeader)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ClearAllTabs dispatches through ITextPara's vtable slot 52.
 func (self *ITextPara) ClearAllTabs() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITextPara_DeleteTab = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// DeleteTab dispatches through ITextPara's vtable slot 53.
+func (self *ITextPara) DeleteTab(tbPos float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specITextPara_DeleteTab, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(tbPos))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

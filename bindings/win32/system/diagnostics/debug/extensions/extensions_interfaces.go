@@ -166,6 +166,22 @@ func (self *IDataModelManager) CreateErrorObject(hrError foundation.HRESULT, pws
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDataModelManager_CreateTypedObject = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// CreateTypedObject dispatches through IDataModelManager's vtable slot 6.
+func (self *IDataModelManager) CreateTypedObject(context *IDebugHostContext, objectLocation Location, objectType *IDebugHostType, object **IModelObject) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDataModelManager_CreateTypedObject, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&objectLocation)), uintptr(unsafe.Pointer(objectType)), uintptr(unsafe.Pointer(object))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDataModelManager_CreateTypedObjectReference = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// CreateTypedObjectReference dispatches through IDataModelManager's vtable slot 7.
+func (self *IDataModelManager) CreateTypedObjectReference(context *IDebugHostContext, objectLocation Location, objectType *IDebugHostType, object **IModelObject) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDataModelManager_CreateTypedObjectReference, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&objectLocation)), uintptr(unsafe.Pointer(objectType)), uintptr(unsafe.Pointer(object))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CreateSyntheticObject dispatches through IDataModelManager's vtable slot 8.
 func (self *IDataModelManager) CreateSyntheticObject(context *IDebugHostContext, object **IModelObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(object)))
@@ -14562,6 +14578,14 @@ func (self *IDebugFailureAnalysis3) AttributeGetName(nIndex uint32, pName *found
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDebugFailureAnalysis3_AttributeSet = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AttributeSet dispatches through IDebugFailureAnalysis3's vtable slot 29.
+func (self *IDebugFailureAnalysis3) AttributeSet(nIndex uint32, Value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIDebugFailureAnalysis3_AttributeSet, nil, uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(&Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // BlameApplication dispatches through IDebugFailureAnalysis3's vtable slot 30.
 func (self *IDebugFailureAnalysis3) BlameApplication(Postfix foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Postfix)))
@@ -15272,6 +15296,62 @@ type IDebugHostMemory struct {
 // IID_IDebugHostMemory is the interface identifier for IDebugHostMemory.
 var IID_IDebugHostMemory = win32.GUID{Data1: 0x212149c9, Data2: 0x9183, Data3: 0x4a3e, Data4: [8]byte{0xb0, 0x0e, 0x4f, 0xd1, 0xdc, 0x95, 0x33, 0x9b}}
 
+var specIDebugHostMemory_ReadBytes = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// ReadBytes dispatches through IDebugHostMemory's vtable slot 3.
+func (self *IDebugHostMemory) ReadBytes(context *IDebugHostContext, location Location, buffer []byte, bytesRead *uint64) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIDebugHostMemory_ReadBytes, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&location)), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(bytesRead))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDebugHostMemory_WriteBytes = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// WriteBytes dispatches through IDebugHostMemory's vtable slot 4.
+func (self *IDebugHostMemory) WriteBytes(context *IDebugHostContext, location Location, buffer []byte, bytesWritten *uint64) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDebugHostMemory_WriteBytes, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&location)), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(bytesWritten))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDebugHostMemory_ReadPointers = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// ReadPointers dispatches through IDebugHostMemory's vtable slot 5.
+func (self *IDebugHostMemory) ReadPointers(context *IDebugHostContext, location Location, pointers []uint64) error {
+	var _pointers *uint64
+	if len(pointers) > 0 {
+		_pointers = &pointers[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDebugHostMemory_ReadPointers, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&location)), uintptr(len(pointers)), uintptr(unsafe.Pointer(_pointers))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDebugHostMemory_WritePointers = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// WritePointers dispatches through IDebugHostMemory's vtable slot 6.
+func (self *IDebugHostMemory) WritePointers(context *IDebugHostContext, location Location, pointers []uint64) error {
+	var _pointers *uint64
+	if len(pointers) > 0 {
+		_pointers = &pointers[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDebugHostMemory_WritePointers, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&location)), uintptr(len(pointers)), uintptr(unsafe.Pointer(_pointers))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDebugHostMemory_GetDisplayStringForLocation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// GetDisplayStringForLocation dispatches through IDebugHostMemory's vtable slot 7.
+func (self *IDebugHostMemory) GetDisplayStringForLocation(context *IDebugHostContext, location Location, verbose byte, locationName *foundation.BSTR) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDebugHostMemory_GetDisplayStringForLocation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&location)), uintptr(verbose), uintptr(unsafe.Pointer(locationName))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: eea033de-38f6-416b-a251-1d3771001270
 type IDebugHostMemory2 struct {
 	IDebugHostMemory
@@ -15280,6 +15360,14 @@ type IDebugHostMemory2 struct {
 // IID_IDebugHostMemory2 is the interface identifier for IDebugHostMemory2.
 var IID_IDebugHostMemory2 = win32.GUID{Data1: 0xeea033de, Data2: 0x38f6, Data3: 0x416b, Data4: [8]byte{0xa2, 0x51, 0x1d, 0x37, 0x71, 0x00, 0x12, 0x70}}
 
+var specIDebugHostMemory2_LinearizeLocation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// LinearizeLocation dispatches through IDebugHostMemory2's vtable slot 8.
+func (self *IDebugHostMemory2) LinearizeLocation(context *IDebugHostContext, location Location, pLinearizedLocation *Location) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDebugHostMemory2_LinearizeLocation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&location)), uintptr(unsafe.Pointer(pLinearizedLocation))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: a515ed09-2bf3-4499-bb03-553790079f84
 type IDebugHostMemory3 struct {
 	IDebugHostMemory2
@@ -15287,6 +15375,14 @@ type IDebugHostMemory3 struct {
 
 // IID_IDebugHostMemory3 is the interface identifier for IDebugHostMemory3.
 var IID_IDebugHostMemory3 = win32.GUID{Data1: 0xa515ed09, Data2: 0x2bf3, Data3: 0x4499, Data4: [8]byte{0xbb, 0x03, 0x55, 0x37, 0x90, 0x07, 0x9f, 0x84}}
+
+var specIDebugHostMemory3_CanonicalizeLocation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// CanonicalizeLocation dispatches through IDebugHostMemory3's vtable slot 9.
+func (self *IDebugHostMemory3) CanonicalizeLocation(context *IDebugHostContext, location Location, pCanonicalizedLocation *Location) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIDebugHostMemory3_CanonicalizeLocation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&location)), uintptr(unsafe.Pointer(pCanonicalizedLocation))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IID: fe6b3658-da4b-44e3-8a58-6201322280e6
 type IDebugHostMemory4 struct {
@@ -15315,6 +15411,30 @@ type IDebugHostMemory5 struct {
 
 // IID_IDebugHostMemory5 is the interface identifier for IDebugHostMemory5.
 var IID_IDebugHostMemory5 = win32.GUID{Data1: 0xdf033400, Data2: 0x4912, Data3: 0x46e9, Data4: [8]byte{0xba, 0x62, 0x6e, 0xf2, 0xeb, 0x4d, 0x87, 0xd4}}
+
+var specIDebugHostMemory5_ReadIntrinsics = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ReadIntrinsics dispatches through IDebugHostMemory5's vtable slot 12.
+func (self *IDebugHostMemory5) ReadIntrinsics(context *IDebugHostContext, location Location, vt uint16, vals []systemvariant.VARIANT, intrinsicsRead *uint64) error {
+	var _vals *systemvariant.VARIANT
+	if len(vals) > 0 {
+		_vals = &vals[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDebugHostMemory5_ReadIntrinsics, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&location)), uintptr(vt), uintptr(len(vals)), uintptr(unsafe.Pointer(_vals)), uintptr(unsafe.Pointer(intrinsicsRead))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDebugHostMemory5_ReadOrdinalIntrinsics = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ReadOrdinalIntrinsics dispatches through IDebugHostMemory5's vtable slot 13.
+func (self *IDebugHostMemory5) ReadOrdinalIntrinsics(context *IDebugHostContext, location Location, ordinalSize uint64, ordinalIsSigned byte, vals []systemvariant.VARIANT, intrinsicsRead *uint64) error {
+	var _vals *systemvariant.VARIANT
+	if len(vals) > 0 {
+		_vals = &vals[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDebugHostMemory5_ReadOrdinalIntrinsics, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&location)), uintptr(ordinalSize), uintptr(ordinalIsSigned), uintptr(len(vals)), uintptr(unsafe.Pointer(_vals)), uintptr(unsafe.Pointer(intrinsicsRead))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IID: c9ba3e18-d070-4378-bbd0-34613b346e1e
 type IDebugHostModule struct {
@@ -15658,6 +15778,22 @@ func (self *IDebugHostSymbols) EnumerateModules(context *IDebugHostContext, modu
 func (self *IDebugHostSymbols) FindModuleByName(context *IDebugHostContext, moduleName string, module **IDebugHostModule) error {
 	_moduleName := win32.UTF16Ptr(moduleName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(_moduleName)), uintptr(unsafe.Pointer(module)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDebugHostSymbols_FindModuleByLocation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word}}
+
+// FindModuleByLocation dispatches through IDebugHostSymbols's vtable slot 8.
+func (self *IDebugHostSymbols) FindModuleByLocation(context *IDebugHostContext, moduleLocation Location, module **IDebugHostModule) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDebugHostSymbols_FindModuleByLocation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(&moduleLocation)), uintptr(unsafe.Pointer(module))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDebugHostSymbols_GetMostDerivedObject = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// GetMostDerivedObject dispatches through IDebugHostSymbols's vtable slot 9.
+func (self *IDebugHostSymbols) GetMostDerivedObject(pContext *IDebugHostContext, location Location, objectType *IDebugHostType, derivedLocation *Location, derivedType **IDebugHostType) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIDebugHostSymbols_GetMostDerivedObject, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(&location)), uintptr(unsafe.Pointer(objectType)), uintptr(unsafe.Pointer(derivedLocation)), uintptr(unsafe.Pointer(derivedType))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

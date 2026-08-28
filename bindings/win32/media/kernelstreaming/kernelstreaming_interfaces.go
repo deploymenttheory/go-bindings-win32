@@ -601,6 +601,14 @@ func (self *IKsPinPipe) KsGetPinBusCache() win32.GUID {
 	return *_ret
 }
 
+var specIKsPinPipe_KsSetPinBusCache = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// KsSetPinBusCache dispatches through IKsPinPipe's vtable slot 11.
+func (self *IKsPinPipe) KsSetPinBusCache(Bus win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIKsPinPipe_KsSetPinBusCache, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Bus))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // KsGetPinName dispatches through IKsPinPipe's vtable slot 12.
 func (self *IKsPinPipe) KsGetPinName() foundation.PWSTR {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))

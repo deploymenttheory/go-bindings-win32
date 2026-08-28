@@ -5,6 +5,7 @@
 package variant
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -34,6 +35,8 @@ var (
 	procVariantCopy                     = modOLEAUT32.NewProc("VariantCopy")
 	procVariantCopyInd                  = modOLEAUT32.NewProc("VariantCopyInd")
 	procVariantInit                     = modOLEAUT32.NewProc("VariantInit")
+	procVariantTimeToDosDateTime        = modOLEAUT32.NewProc("VariantTimeToDosDateTime")
+	procVariantTimeToSystemTime         = modOLEAUT32.NewProc("VariantTimeToSystemTime")
 	procClearVariantArray               = modPROPSYS.NewProc("ClearVariantArray")
 	procInitVariantFromBooleanArray     = modPROPSYS.NewProc("InitVariantFromBooleanArray")
 	procInitVariantFromBuffer           = modPROPSYS.NewProc("InitVariantFromBuffer")
@@ -70,6 +73,7 @@ var (
 	procVariantToDouble                 = modPROPSYS.NewProc("VariantToDouble")
 	procVariantToDoubleArray            = modPROPSYS.NewProc("VariantToDoubleArray")
 	procVariantToDoubleArrayAlloc       = modPROPSYS.NewProc("VariantToDoubleArrayAlloc")
+	procVariantToDoubleWithDefault      = modPROPSYS.NewProc("VariantToDoubleWithDefault")
 	procVariantToFileTime               = modPROPSYS.NewProc("VariantToFileTime")
 	procVariantToGUID                   = modPROPSYS.NewProc("VariantToGUID")
 	procVariantToInt16                  = modPROPSYS.NewProc("VariantToInt16")
@@ -151,6 +155,8 @@ var Procs = struct {
 	VariantGetUInt32Elem            *win32.Proc
 	VariantGetUInt64Elem            *win32.Proc
 	VariantInit                     *win32.Proc
+	VariantTimeToDosDateTime        *win32.Proc
+	VariantTimeToSystemTime         *win32.Proc
 	VariantToBoolean                *win32.Proc
 	VariantToBooleanArray           *win32.Proc
 	VariantToBooleanArrayAlloc      *win32.Proc
@@ -160,6 +166,7 @@ var Procs = struct {
 	VariantToDouble                 *win32.Proc
 	VariantToDoubleArray            *win32.Proc
 	VariantToDoubleArrayAlloc       *win32.Proc
+	VariantToDoubleWithDefault      *win32.Proc
 	VariantToFileTime               *win32.Proc
 	VariantToGUID                   *win32.Proc
 	VariantToInt16                  *win32.Proc
@@ -235,6 +242,8 @@ var Procs = struct {
 	VariantGetUInt32Elem:            procVariantGetUInt32Elem,
 	VariantGetUInt64Elem:            procVariantGetUInt64Elem,
 	VariantInit:                     procVariantInit,
+	VariantTimeToDosDateTime:        procVariantTimeToDosDateTime,
+	VariantTimeToSystemTime:         procVariantTimeToSystemTime,
 	VariantToBoolean:                procVariantToBoolean,
 	VariantToBooleanArray:           procVariantToBooleanArray,
 	VariantToBooleanArrayAlloc:      procVariantToBooleanArrayAlloc,
@@ -244,6 +253,7 @@ var Procs = struct {
 	VariantToDouble:                 procVariantToDouble,
 	VariantToDoubleArray:            procVariantToDoubleArray,
 	VariantToDoubleArrayAlloc:       procVariantToDoubleArrayAlloc,
+	VariantToDoubleWithDefault:      procVariantToDoubleWithDefault,
 	VariantToFileTime:               procVariantToFileTime,
 	VariantToGUID:                   procVariantToGUID,
 	VariantToInt16:                  procVariantToInt16,
@@ -653,6 +663,24 @@ func VariantInit(pvarg *VARIANT) {
 	syscall.SyscallN(procVariantInit.Addr(), uintptr(unsafe.Pointer(pvarg)))
 }
 
+var specVariantTimeToDosDateTime = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word, win32.Word}}
+
+// VariantTimeToDosDateTime calls OLEAUT32!VariantTimeToDosDateTime.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varianttimetodosdatetime
+func VariantTimeToDosDateTime(vtime float64, pwDosDate *uint16, pwDosTime *uint16) int32 {
+	r1, _, _ := win32.Call(procVariantTimeToDosDateTime.Addr(), specVariantTimeToDosDateTime, nil, uintptr(math.Float64bits(vtime)), uintptr(unsafe.Pointer(pwDosDate)), uintptr(unsafe.Pointer(pwDosTime))).Tuple()
+	return int32(r1)
+}
+
+var specVariantTimeToSystemTime = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// VariantTimeToSystemTime calls OLEAUT32!VariantTimeToSystemTime.
+// https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varianttimetosystemtime
+func VariantTimeToSystemTime(vtime float64, lpSystemTime *foundation.SYSTEMTIME) int32 {
+	r1, _, _ := win32.Call(procVariantTimeToSystemTime.Addr(), specVariantTimeToSystemTime, nil, uintptr(math.Float64bits(vtime)), uintptr(unsafe.Pointer(lpSystemTime))).Tuple()
+	return int32(r1)
+}
+
 // VariantToBoolean calls PROPSYS!VariantToBoolean.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttoboolean
 // Minimum OS: windows5.1.2600.
@@ -736,6 +764,16 @@ func VariantToDoubleArray(var_ *VARIANT, prgn []float64, pcElem *uint32) error {
 func VariantToDoubleArrayAlloc(var_ *VARIANT, pprgn **float64, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVariantToDoubleArrayAlloc.Addr(), uintptr(unsafe.Pointer(var_)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specVariantToDoubleWithDefault = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}, Ret: win32.Float64}
+
+// VariantToDoubleWithDefault calls PROPSYS!VariantToDoubleWithDefault.
+// https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttodoublewithdefault
+// Minimum OS: windows5.1.2600.
+func VariantToDoubleWithDefault(varIn *VARIANT, dblDefault float64) float64 {
+	r := win32.Call(procVariantToDoubleWithDefault.Addr(), specVariantToDoubleWithDefault, nil, uintptr(unsafe.Pointer(varIn)), uintptr(math.Float64bits(dblDefault)))
+	return math.Float64frombits(r.F0)
 }
 
 // VariantToFileTime calls PROPSYS!VariantToFileTime.

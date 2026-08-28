@@ -5,6 +5,7 @@
 package gameinput
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -48,6 +49,14 @@ func (self *IGameInput) GetPreviousReading(referenceReading *IGameInputReading, 
 // GetTemporalReading dispatches through IGameInput's vtable slot 7.
 func (self *IGameInput) GetTemporalReading(timestamp uint64, device *IGameInputDevice, reading **IGameInputReading) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(timestamp), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(reading)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIGameInput_RegisterReadingCallback = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// RegisterReadingCallback dispatches through IGameInput's vtable slot 8.
+func (self *IGameInput) RegisterReadingCallback(device *IGameInputDevice, inputKind GameInputKind, analogThreshold float32, context unsafe.Pointer, callbackFunc GameInputReadingCallback, callbackToken *uint64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIGameInput_RegisterReadingCallback, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)), uintptr(inputKind), uintptr(math.Float32bits(analogThreshold)), uintptr(unsafe.Pointer(context)), uintptr(callbackFunc), uintptr(unsafe.Pointer(callbackToken))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -163,6 +172,13 @@ func (self *IGameInputDevice) CreateForceFeedbackEffect(motorIndex uint32, param
 func (self *IGameInputDevice) IsForceFeedbackMotorPoweredOn(motorIndex uint32) bool {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(motorIndex))
 	return byte(r1) != 0
+}
+
+var specIGameInputDevice_SetForceFeedbackMotorGain = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetForceFeedbackMotorGain dispatches through IGameInputDevice's vtable slot 8.
+func (self *IGameInputDevice) SetForceFeedbackMotorGain(motorIndex uint32, masterGain float32) {
+	win32.Call(self.LpVtbl[8], specIGameInputDevice_SetForceFeedbackMotorGain, nil, uintptr(unsafe.Pointer(self)), uintptr(motorIndex), uintptr(math.Float32bits(masterGain))).Tuple()
 }
 
 // SetHapticMotorState dispatches through IGameInputDevice's vtable slot 9.
@@ -283,6 +299,21 @@ func (self *IGameInputForceFeedbackEffect) GetDevice(device **IGameInputDevice) 
 func (self *IGameInputForceFeedbackEffect) GetMotorIndex() uint32 {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
 	return uint32(r1)
+}
+
+var specIGameInputForceFeedbackEffect_GetGain = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetGain dispatches through IGameInputForceFeedbackEffect's vtable slot 5.
+func (self *IGameInputForceFeedbackEffect) GetGain() float32 {
+	r := win32.Call(self.LpVtbl[5], specIGameInputForceFeedbackEffect_GetGain, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specIGameInputForceFeedbackEffect_SetGain = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetGain dispatches through IGameInputForceFeedbackEffect's vtable slot 6.
+func (self *IGameInputForceFeedbackEffect) SetGain(gain float32) {
+	win32.Call(self.LpVtbl[6], specIGameInputForceFeedbackEffect_SetGain, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(gain))).Tuple()
 }
 
 // GetParams dispatches through IGameInputForceFeedbackEffect's vtable slot 7.

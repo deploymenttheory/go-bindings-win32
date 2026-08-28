@@ -23,6 +23,7 @@ var (
 	modapi_ms_win_core_winrt_string_l1_1_0       = win32.NewDLL("api-ms-win-core-winrt-string-l1-1-0.dll")
 	modapi_ms_win_core_winrt_string_l1_1_1       = win32.NewDLL("api-ms-win-core-winrt-string-l1-1-1.dll")
 	modapi_ms_win_shcore_stream_winrt_l1_1_0     = win32.NewDLL("api-ms-win-shcore-stream-winrt-l1-1-0.dll")
+	modCoreMessaging                             = win32.NewDLL("CoreMessaging.dll")
 	modOLE32                                     = win32.NewDLL("OLE32.dll")
 	modWindows_UI                                = win32.NewDLL("Windows.UI.dll")
 )
@@ -89,6 +90,7 @@ var (
 	procCreateRandomAccessStreamOnFile        = modapi_ms_win_shcore_stream_winrt_l1_1_0.NewProc("CreateRandomAccessStreamOnFile")
 	procCreateRandomAccessStreamOverStream    = modapi_ms_win_shcore_stream_winrt_l1_1_0.NewProc("CreateRandomAccessStreamOverStream")
 	procCreateStreamOverRandomAccessStream    = modapi_ms_win_shcore_stream_winrt_l1_1_0.NewProc("CreateStreamOverRandomAccessStream")
+	procCreateDispatcherQueueController       = modCoreMessaging.NewProc("CreateDispatcherQueueController")
 	procCoDecodeProxy                         = modOLE32.NewProc("CoDecodeProxy")
 	procRoGetAgileReference                   = modOLE32.NewProc("RoGetAgileReference")
 	procCreateControlInput                    = modWindows_UI.NewProc("CreateControlInput")
@@ -103,6 +105,7 @@ var Procs = struct {
 	CoDecodeProxy                         *win32.Proc
 	CreateControlInput                    *win32.Proc
 	CreateControlInputEx                  *win32.Proc
+	CreateDispatcherQueueController       *win32.Proc
 	CreateRandomAccessStreamOnFile        *win32.Proc
 	CreateRandomAccessStreamOverStream    *win32.Proc
 	CreateStreamOverRandomAccessStream    *win32.Proc
@@ -169,6 +172,7 @@ var Procs = struct {
 	CoDecodeProxy:                         procCoDecodeProxy,
 	CreateControlInput:                    procCreateControlInput,
 	CreateControlInputEx:                  procCreateControlInputEx,
+	CreateDispatcherQueueController:       procCreateDispatcherQueueController,
 	CreateRandomAccessStreamOnFile:        procCreateRandomAccessStreamOnFile,
 	CreateRandomAccessStreamOverStream:    procCreateRandomAccessStreamOverStream,
 	CreateStreamOverRandomAccessStream:    procCreateStreamOverRandomAccessStream,
@@ -251,6 +255,15 @@ func CreateControlInput(riid *win32.GUID, ppv **win32.IUnknown) error {
 // https://learn.microsoft.com/windows/win32/api/corewindow/nf-corewindow-createcontrolinputex
 func CreateControlInputEx(pCoreWindow *systemcom.IUnknown, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateControlInputEx.Addr(), uintptr(unsafe.Pointer(pCoreWindow)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specCreateDispatcherQueueController = &win32.Spec{Args: []win32.Arg{win32.Struct(12, 4, 0, false), win32.Word}}
+
+// CreateDispatcherQueueController calls CoreMessaging!CreateDispatcherQueueController.
+// https://learn.microsoft.com/windows/win32/api/dispatcherqueue/nf-dispatcherqueue-createdispatcherqueuecontroller
+func CreateDispatcherQueueController(options DispatcherQueueOptions, dispatcherQueueController *uintptr) error {
+	r1, _, _ := win32.Call(procCreateDispatcherQueueController.Addr(), specCreateDispatcherQueueController, nil, uintptr(unsafe.Pointer(&options)), uintptr(unsafe.Pointer(dispatcherQueueController))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

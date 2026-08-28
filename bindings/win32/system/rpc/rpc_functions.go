@@ -20,513 +20,514 @@ var (
 )
 
 var (
-	procI_RpcNsGetBuffer                               = modRPCNS4.NewProc("I_RpcNsGetBuffer")
-	procI_RpcNsRaiseException                          = modRPCNS4.NewProc("I_RpcNsRaiseException")
-	procI_RpcNsSendReceive                             = modRPCNS4.NewProc("I_RpcNsSendReceive")
-	procI_RpcReBindBuffer                              = modRPCNS4.NewProc("I_RpcReBindBuffer")
-	procRpcIfIdVectorFree                              = modRPCNS4.NewProc("RpcIfIdVectorFree")
-	procRpcNsBindingExport                             = modRPCNS4.NewProc("RpcNsBindingExportW")
-	procRpcNsBindingExportA                            = modRPCNS4.NewProc("RpcNsBindingExportA")
-	procRpcNsBindingExportPnP                          = modRPCNS4.NewProc("RpcNsBindingExportPnPW")
-	procRpcNsBindingExportPnPA                         = modRPCNS4.NewProc("RpcNsBindingExportPnPA")
-	procRpcNsBindingImportBegin                        = modRPCNS4.NewProc("RpcNsBindingImportBeginW")
-	procRpcNsBindingImportBeginA                       = modRPCNS4.NewProc("RpcNsBindingImportBeginA")
-	procRpcNsBindingImportDone                         = modRPCNS4.NewProc("RpcNsBindingImportDone")
-	procRpcNsBindingImportNext                         = modRPCNS4.NewProc("RpcNsBindingImportNext")
-	procRpcNsBindingLookupBegin                        = modRPCNS4.NewProc("RpcNsBindingLookupBeginW")
-	procRpcNsBindingLookupBeginA                       = modRPCNS4.NewProc("RpcNsBindingLookupBeginA")
-	procRpcNsBindingLookupDone                         = modRPCNS4.NewProc("RpcNsBindingLookupDone")
-	procRpcNsBindingLookupNext                         = modRPCNS4.NewProc("RpcNsBindingLookupNext")
-	procRpcNsBindingSelect                             = modRPCNS4.NewProc("RpcNsBindingSelect")
-	procRpcNsBindingUnexport                           = modRPCNS4.NewProc("RpcNsBindingUnexportW")
-	procRpcNsBindingUnexportA                          = modRPCNS4.NewProc("RpcNsBindingUnexportA")
-	procRpcNsBindingUnexportPnP                        = modRPCNS4.NewProc("RpcNsBindingUnexportPnPW")
-	procRpcNsBindingUnexportPnPA                       = modRPCNS4.NewProc("RpcNsBindingUnexportPnPA")
-	procRpcNsEntryExpandName                           = modRPCNS4.NewProc("RpcNsEntryExpandNameW")
-	procRpcNsEntryExpandNameA                          = modRPCNS4.NewProc("RpcNsEntryExpandNameA")
-	procRpcNsEntryObjectInqBegin                       = modRPCNS4.NewProc("RpcNsEntryObjectInqBeginW")
-	procRpcNsEntryObjectInqBeginA                      = modRPCNS4.NewProc("RpcNsEntryObjectInqBeginA")
-	procRpcNsEntryObjectInqDone                        = modRPCNS4.NewProc("RpcNsEntryObjectInqDone")
-	procRpcNsEntryObjectInqNext                        = modRPCNS4.NewProc("RpcNsEntryObjectInqNext")
-	procRpcNsGroupDelete                               = modRPCNS4.NewProc("RpcNsGroupDeleteW")
-	procRpcNsGroupDeleteA                              = modRPCNS4.NewProc("RpcNsGroupDeleteA")
-	procRpcNsGroupMbrAdd                               = modRPCNS4.NewProc("RpcNsGroupMbrAddW")
-	procRpcNsGroupMbrAddA                              = modRPCNS4.NewProc("RpcNsGroupMbrAddA")
-	procRpcNsGroupMbrInqBegin                          = modRPCNS4.NewProc("RpcNsGroupMbrInqBeginW")
-	procRpcNsGroupMbrInqBeginA                         = modRPCNS4.NewProc("RpcNsGroupMbrInqBeginA")
-	procRpcNsGroupMbrInqDone                           = modRPCNS4.NewProc("RpcNsGroupMbrInqDone")
-	procRpcNsGroupMbrInqNext                           = modRPCNS4.NewProc("RpcNsGroupMbrInqNextW")
-	procRpcNsGroupMbrInqNextA                          = modRPCNS4.NewProc("RpcNsGroupMbrInqNextA")
-	procRpcNsGroupMbrRemove                            = modRPCNS4.NewProc("RpcNsGroupMbrRemoveW")
-	procRpcNsGroupMbrRemoveA                           = modRPCNS4.NewProc("RpcNsGroupMbrRemoveA")
-	procRpcNsMgmtBindingUnexport                       = modRPCNS4.NewProc("RpcNsMgmtBindingUnexportW")
-	procRpcNsMgmtBindingUnexportA                      = modRPCNS4.NewProc("RpcNsMgmtBindingUnexportA")
-	procRpcNsMgmtEntryCreate                           = modRPCNS4.NewProc("RpcNsMgmtEntryCreateW")
-	procRpcNsMgmtEntryCreateA                          = modRPCNS4.NewProc("RpcNsMgmtEntryCreateA")
-	procRpcNsMgmtEntryDelete                           = modRPCNS4.NewProc("RpcNsMgmtEntryDeleteW")
-	procRpcNsMgmtEntryDeleteA                          = modRPCNS4.NewProc("RpcNsMgmtEntryDeleteA")
-	procRpcNsMgmtEntryInqIfIds                         = modRPCNS4.NewProc("RpcNsMgmtEntryInqIfIdsW")
-	procRpcNsMgmtEntryInqIfIdsA                        = modRPCNS4.NewProc("RpcNsMgmtEntryInqIfIdsA")
-	procRpcNsMgmtHandleSetExpAge                       = modRPCNS4.NewProc("RpcNsMgmtHandleSetExpAge")
-	procRpcNsMgmtInqExpAge                             = modRPCNS4.NewProc("RpcNsMgmtInqExpAge")
-	procRpcNsMgmtSetExpAge                             = modRPCNS4.NewProc("RpcNsMgmtSetExpAge")
-	procRpcNsProfileDelete                             = modRPCNS4.NewProc("RpcNsProfileDeleteW")
-	procRpcNsProfileDeleteA                            = modRPCNS4.NewProc("RpcNsProfileDeleteA")
-	procRpcNsProfileEltAdd                             = modRPCNS4.NewProc("RpcNsProfileEltAddW")
-	procRpcNsProfileEltAddA                            = modRPCNS4.NewProc("RpcNsProfileEltAddA")
-	procRpcNsProfileEltInqBegin                        = modRPCNS4.NewProc("RpcNsProfileEltInqBeginW")
-	procRpcNsProfileEltInqBeginA                       = modRPCNS4.NewProc("RpcNsProfileEltInqBeginA")
-	procRpcNsProfileEltInqDone                         = modRPCNS4.NewProc("RpcNsProfileEltInqDone")
-	procRpcNsProfileEltInqNext                         = modRPCNS4.NewProc("RpcNsProfileEltInqNextW")
-	procRpcNsProfileEltInqNextA                        = modRPCNS4.NewProc("RpcNsProfileEltInqNextA")
-	procRpcNsProfileEltRemove                          = modRPCNS4.NewProc("RpcNsProfileEltRemoveW")
-	procRpcNsProfileEltRemoveA                         = modRPCNS4.NewProc("RpcNsProfileEltRemoveA")
-	procDceErrorInqText                                = modRPCRT4.NewProc("DceErrorInqTextW")
-	procDceErrorInqTextA                               = modRPCRT4.NewProc("DceErrorInqTextA")
-	procIUnknown_AddRef_Proxy                          = modRPCRT4.NewProc("IUnknown_AddRef_Proxy")
-	procIUnknown_QueryInterface_Proxy                  = modRPCRT4.NewProc("IUnknown_QueryInterface_Proxy")
-	procIUnknown_Release_Proxy                         = modRPCRT4.NewProc("IUnknown_Release_Proxy")
-	procI_RpcAllocate                                  = modRPCRT4.NewProc("I_RpcAllocate")
-	procI_RpcAsyncAbortCall                            = modRPCRT4.NewProc("I_RpcAsyncAbortCall")
-	procI_RpcAsyncSetHandle                            = modRPCRT4.NewProc("I_RpcAsyncSetHandle")
-	procI_RpcBindingCopy                               = modRPCRT4.NewProc("I_RpcBindingCopy")
-	procI_RpcBindingCreateNP                           = modRPCRT4.NewProc("I_RpcBindingCreateNP")
-	procI_RpcBindingHandleToAsyncHandle                = modRPCRT4.NewProc("I_RpcBindingHandleToAsyncHandle")
-	procI_RpcBindingInqClientTokenAttributes           = modRPCRT4.NewProc("I_RpcBindingInqClientTokenAttributes")
-	procI_RpcBindingInqDynamicEndpoint                 = modRPCRT4.NewProc("I_RpcBindingInqDynamicEndpointW")
-	procI_RpcBindingInqDynamicEndpointA                = modRPCRT4.NewProc("I_RpcBindingInqDynamicEndpointA")
-	procI_RpcBindingInqLocalClientPID                  = modRPCRT4.NewProc("I_RpcBindingInqLocalClientPID")
-	procI_RpcBindingInqMarshalledTargetInfo            = modRPCRT4.NewProc("I_RpcBindingInqMarshalledTargetInfo")
-	procI_RpcBindingInqSecurityContext                 = modRPCRT4.NewProc("I_RpcBindingInqSecurityContext")
-	procI_RpcBindingInqSecurityContextKeyInfo          = modRPCRT4.NewProc("I_RpcBindingInqSecurityContextKeyInfo")
-	procI_RpcBindingInqTransportType                   = modRPCRT4.NewProc("I_RpcBindingInqTransportType")
-	procI_RpcBindingInqWireIdForSnego                  = modRPCRT4.NewProc("I_RpcBindingInqWireIdForSnego")
-	procI_RpcBindingIsClientLocal                      = modRPCRT4.NewProc("I_RpcBindingIsClientLocal")
-	procI_RpcBindingIsServerLocal                      = modRPCRT4.NewProc("I_RpcBindingIsServerLocal")
-	procI_RpcBindingSetPrivateOption                   = modRPCRT4.NewProc("I_RpcBindingSetPrivateOption")
-	procI_RpcBindingToStaticStringBindingW             = modRPCRT4.NewProc("I_RpcBindingToStaticStringBindingW")
-	procI_RpcClearMutex                                = modRPCRT4.NewProc("I_RpcClearMutex")
-	procI_RpcDeleteMutex                               = modRPCRT4.NewProc("I_RpcDeleteMutex")
-	procI_RpcExceptionFilter                           = modRPCRT4.NewProc("I_RpcExceptionFilter")
-	procI_RpcFree                                      = modRPCRT4.NewProc("I_RpcFree")
-	procI_RpcFreeBuffer                                = modRPCRT4.NewProc("I_RpcFreeBuffer")
-	procI_RpcFreePipeBuffer                            = modRPCRT4.NewProc("I_RpcFreePipeBuffer")
-	procI_RpcGetBuffer                                 = modRPCRT4.NewProc("I_RpcGetBuffer")
-	procI_RpcGetBufferWithObject                       = modRPCRT4.NewProc("I_RpcGetBufferWithObject")
-	procI_RpcGetCurrentCallHandle                      = modRPCRT4.NewProc("I_RpcGetCurrentCallHandle")
-	procI_RpcGetDefaultSD                              = modRPCRT4.NewProc("I_RpcGetDefaultSD")
-	procI_RpcGetExtendedError                          = modRPCRT4.NewProc("I_RpcGetExtendedError")
-	procI_RpcIfInqTransferSyntaxes                     = modRPCRT4.NewProc("I_RpcIfInqTransferSyntaxes")
-	procI_RpcMapWin32Status                            = modRPCRT4.NewProc("I_RpcMapWin32Status")
-	procI_RpcMgmtEnableDedicatedThreadPool             = modRPCRT4.NewProc("I_RpcMgmtEnableDedicatedThreadPool")
-	procI_RpcNegotiateTransferSyntax                   = modRPCRT4.NewProc("I_RpcNegotiateTransferSyntax")
-	procI_RpcNsBindingSetEntryName                     = modRPCRT4.NewProc("I_RpcNsBindingSetEntryNameW")
-	procI_RpcNsBindingSetEntryNameA                    = modRPCRT4.NewProc("I_RpcNsBindingSetEntryNameA")
-	procI_RpcNsInterfaceExported                       = modRPCRT4.NewProc("I_RpcNsInterfaceExported")
-	procI_RpcNsInterfaceUnexported                     = modRPCRT4.NewProc("I_RpcNsInterfaceUnexported")
-	procI_RpcOpenClientProcess                         = modRPCRT4.NewProc("I_RpcOpenClientProcess")
-	procI_RpcPauseExecution                            = modRPCRT4.NewProc("I_RpcPauseExecution")
-	procI_RpcReallocPipeBuffer                         = modRPCRT4.NewProc("I_RpcReallocPipeBuffer")
-	procI_RpcReceive                                   = modRPCRT4.NewProc("I_RpcReceive")
-	procI_RpcRecordCalloutFailure                      = modRPCRT4.NewProc("I_RpcRecordCalloutFailure")
-	procI_RpcRequestMutex                              = modRPCRT4.NewProc("I_RpcRequestMutex")
-	procI_RpcSend                                      = modRPCRT4.NewProc("I_RpcSend")
-	procI_RpcSendReceive                               = modRPCRT4.NewProc("I_RpcSendReceive")
-	procI_RpcServerCheckClientRestriction              = modRPCRT4.NewProc("I_RpcServerCheckClientRestriction")
-	procI_RpcServerDisableExceptionFilter              = modRPCRT4.NewProc("I_RpcServerDisableExceptionFilter")
-	procI_RpcServerGetAssociationID                    = modRPCRT4.NewProc("I_RpcServerGetAssociationID")
-	procI_RpcServerInqAddressChangeFn                  = modRPCRT4.NewProc("I_RpcServerInqAddressChangeFn")
-	procI_RpcServerInqLocalConnAddress                 = modRPCRT4.NewProc("I_RpcServerInqLocalConnAddress")
-	procI_RpcServerInqRemoteConnAddress                = modRPCRT4.NewProc("I_RpcServerInqRemoteConnAddress")
-	procI_RpcServerInqTransportType                    = modRPCRT4.NewProc("I_RpcServerInqTransportType")
-	procI_RpcServerRegisterForwardFunction             = modRPCRT4.NewProc("I_RpcServerRegisterForwardFunction")
-	procI_RpcServerSetAddressChangeFn                  = modRPCRT4.NewProc("I_RpcServerSetAddressChangeFn")
-	procI_RpcServerStartService                        = modRPCRT4.NewProc("I_RpcServerStartService")
-	procI_RpcServerSubscribeForDisconnectNotification  = modRPCRT4.NewProc("I_RpcServerSubscribeForDisconnectNotification")
-	procI_RpcServerSubscribeForDisconnectNotification2 = modRPCRT4.NewProc("I_RpcServerSubscribeForDisconnectNotification2")
-	procI_RpcServerUseProtseq2                         = modRPCRT4.NewProc("I_RpcServerUseProtseq2W")
-	procI_RpcServerUseProtseq2A                        = modRPCRT4.NewProc("I_RpcServerUseProtseq2A")
-	procI_RpcServerUseProtseqEp2                       = modRPCRT4.NewProc("I_RpcServerUseProtseqEp2W")
-	procI_RpcServerUseProtseqEp2A                      = modRPCRT4.NewProc("I_RpcServerUseProtseqEp2A")
-	procI_RpcSessionStrictContextHandle                = modRPCRT4.NewProc("I_RpcSessionStrictContextHandle")
-	procI_RpcSsDontSerializeContext                    = modRPCRT4.NewProc("I_RpcSsDontSerializeContext")
-	procI_RpcSystemHandleTypeSpecificWork              = modRPCRT4.NewProc("I_RpcSystemHandleTypeSpecificWork")
-	procI_RpcTurnOnEEInfoPropagation                   = modRPCRT4.NewProc("I_RpcTurnOnEEInfoPropagation")
-	procI_UuidCreate                                   = modRPCRT4.NewProc("I_UuidCreate")
-	procMesBufferHandleReset                           = modRPCRT4.NewProc("MesBufferHandleReset")
-	procMesDecodeBufferHandleCreate                    = modRPCRT4.NewProc("MesDecodeBufferHandleCreate")
-	procMesDecodeIncrementalHandleCreate               = modRPCRT4.NewProc("MesDecodeIncrementalHandleCreate")
-	procMesEncodeDynBufferHandleCreate                 = modRPCRT4.NewProc("MesEncodeDynBufferHandleCreate")
-	procMesEncodeFixedBufferHandleCreate               = modRPCRT4.NewProc("MesEncodeFixedBufferHandleCreate")
-	procMesEncodeIncrementalHandleCreate               = modRPCRT4.NewProc("MesEncodeIncrementalHandleCreate")
-	procMesHandleFree                                  = modRPCRT4.NewProc("MesHandleFree")
-	procMesIncrementalHandleReset                      = modRPCRT4.NewProc("MesIncrementalHandleReset")
-	procMesInqProcEncodingId                           = modRPCRT4.NewProc("MesInqProcEncodingId")
-	procNDRCContextBinding                             = modRPCRT4.NewProc("NDRCContextBinding")
-	procNDRCContextMarshall                            = modRPCRT4.NewProc("NDRCContextMarshall")
-	procNDRCContextUnmarshall                          = modRPCRT4.NewProc("NDRCContextUnmarshall")
-	procNDRSContextMarshall                            = modRPCRT4.NewProc("NDRSContextMarshall")
-	procNDRSContextMarshall2                           = modRPCRT4.NewProc("NDRSContextMarshall2")
-	procNDRSContextMarshallEx                          = modRPCRT4.NewProc("NDRSContextMarshallEx")
-	procNDRSContextUnmarshall                          = modRPCRT4.NewProc("NDRSContextUnmarshall")
-	procNDRSContextUnmarshall2                         = modRPCRT4.NewProc("NDRSContextUnmarshall2")
-	procNDRSContextUnmarshallEx                        = modRPCRT4.NewProc("NDRSContextUnmarshallEx")
-	procNdr64AsyncClientCall                           = modRPCRT4.NewProc("Ndr64AsyncClientCall")
-	procNdr64AsyncServerCall64                         = modRPCRT4.NewProc("Ndr64AsyncServerCall64")
-	procNdr64AsyncServerCallAll                        = modRPCRT4.NewProc("Ndr64AsyncServerCallAll")
-	procNdr64DcomAsyncClientCall                       = modRPCRT4.NewProc("Ndr64DcomAsyncClientCall")
-	procNdr64DcomAsyncStubCall                         = modRPCRT4.NewProc("Ndr64DcomAsyncStubCall")
-	procNdrAllocate                                    = modRPCRT4.NewProc("NdrAllocate")
-	procNdrAsyncClientCall                             = modRPCRT4.NewProc("NdrAsyncClientCall")
-	procNdrAsyncServerCall                             = modRPCRT4.NewProc("NdrAsyncServerCall")
-	procNdrByteCountPointerBufferSize                  = modRPCRT4.NewProc("NdrByteCountPointerBufferSize")
-	procNdrByteCountPointerFree                        = modRPCRT4.NewProc("NdrByteCountPointerFree")
-	procNdrByteCountPointerMarshall                    = modRPCRT4.NewProc("NdrByteCountPointerMarshall")
-	procNdrByteCountPointerUnmarshall                  = modRPCRT4.NewProc("NdrByteCountPointerUnmarshall")
-	procNdrClearOutParameters                          = modRPCRT4.NewProc("NdrClearOutParameters")
-	procNdrClientCall2                                 = modRPCRT4.NewProc("NdrClientCall2")
-	procNdrClientCall3                                 = modRPCRT4.NewProc("NdrClientCall3")
-	procNdrClientContextMarshall                       = modRPCRT4.NewProc("NdrClientContextMarshall")
-	procNdrClientContextUnmarshall                     = modRPCRT4.NewProc("NdrClientContextUnmarshall")
-	procNdrClientInitialize                            = modRPCRT4.NewProc("NdrClientInitialize")
-	procNdrClientInitializeNew                         = modRPCRT4.NewProc("NdrClientInitializeNew")
-	procNdrComplexArrayBufferSize                      = modRPCRT4.NewProc("NdrComplexArrayBufferSize")
-	procNdrComplexArrayFree                            = modRPCRT4.NewProc("NdrComplexArrayFree")
-	procNdrComplexArrayMarshall                        = modRPCRT4.NewProc("NdrComplexArrayMarshall")
-	procNdrComplexArrayMemorySize                      = modRPCRT4.NewProc("NdrComplexArrayMemorySize")
-	procNdrComplexArrayUnmarshall                      = modRPCRT4.NewProc("NdrComplexArrayUnmarshall")
-	procNdrComplexStructBufferSize                     = modRPCRT4.NewProc("NdrComplexStructBufferSize")
-	procNdrComplexStructFree                           = modRPCRT4.NewProc("NdrComplexStructFree")
-	procNdrComplexStructMarshall                       = modRPCRT4.NewProc("NdrComplexStructMarshall")
-	procNdrComplexStructMemorySize                     = modRPCRT4.NewProc("NdrComplexStructMemorySize")
-	procNdrComplexStructUnmarshall                     = modRPCRT4.NewProc("NdrComplexStructUnmarshall")
-	procNdrConformantArrayBufferSize                   = modRPCRT4.NewProc("NdrConformantArrayBufferSize")
-	procNdrConformantArrayFree                         = modRPCRT4.NewProc("NdrConformantArrayFree")
-	procNdrConformantArrayMarshall                     = modRPCRT4.NewProc("NdrConformantArrayMarshall")
-	procNdrConformantArrayMemorySize                   = modRPCRT4.NewProc("NdrConformantArrayMemorySize")
-	procNdrConformantArrayUnmarshall                   = modRPCRT4.NewProc("NdrConformantArrayUnmarshall")
-	procNdrConformantStringBufferSize                  = modRPCRT4.NewProc("NdrConformantStringBufferSize")
-	procNdrConformantStringMarshall                    = modRPCRT4.NewProc("NdrConformantStringMarshall")
-	procNdrConformantStringMemorySize                  = modRPCRT4.NewProc("NdrConformantStringMemorySize")
-	procNdrConformantStringUnmarshall                  = modRPCRT4.NewProc("NdrConformantStringUnmarshall")
-	procNdrConformantStructBufferSize                  = modRPCRT4.NewProc("NdrConformantStructBufferSize")
-	procNdrConformantStructFree                        = modRPCRT4.NewProc("NdrConformantStructFree")
-	procNdrConformantStructMarshall                    = modRPCRT4.NewProc("NdrConformantStructMarshall")
-	procNdrConformantStructMemorySize                  = modRPCRT4.NewProc("NdrConformantStructMemorySize")
-	procNdrConformantStructUnmarshall                  = modRPCRT4.NewProc("NdrConformantStructUnmarshall")
-	procNdrConformantVaryingArrayBufferSize            = modRPCRT4.NewProc("NdrConformantVaryingArrayBufferSize")
-	procNdrConformantVaryingArrayFree                  = modRPCRT4.NewProc("NdrConformantVaryingArrayFree")
-	procNdrConformantVaryingArrayMarshall              = modRPCRT4.NewProc("NdrConformantVaryingArrayMarshall")
-	procNdrConformantVaryingArrayMemorySize            = modRPCRT4.NewProc("NdrConformantVaryingArrayMemorySize")
-	procNdrConformantVaryingArrayUnmarshall            = modRPCRT4.NewProc("NdrConformantVaryingArrayUnmarshall")
-	procNdrConformantVaryingStructBufferSize           = modRPCRT4.NewProc("NdrConformantVaryingStructBufferSize")
-	procNdrConformantVaryingStructFree                 = modRPCRT4.NewProc("NdrConformantVaryingStructFree")
-	procNdrConformantVaryingStructMarshall             = modRPCRT4.NewProc("NdrConformantVaryingStructMarshall")
-	procNdrConformantVaryingStructMemorySize           = modRPCRT4.NewProc("NdrConformantVaryingStructMemorySize")
-	procNdrConformantVaryingStructUnmarshall           = modRPCRT4.NewProc("NdrConformantVaryingStructUnmarshall")
-	procNdrContextHandleInitialize                     = modRPCRT4.NewProc("NdrContextHandleInitialize")
-	procNdrContextHandleSize                           = modRPCRT4.NewProc("NdrContextHandleSize")
-	procNdrConvert                                     = modRPCRT4.NewProc("NdrConvert")
-	procNdrConvert2                                    = modRPCRT4.NewProc("NdrConvert2")
-	procNdrCorrelationFree                             = modRPCRT4.NewProc("NdrCorrelationFree")
-	procNdrCorrelationInitialize                       = modRPCRT4.NewProc("NdrCorrelationInitialize")
-	procNdrCorrelationPass                             = modRPCRT4.NewProc("NdrCorrelationPass")
-	procNdrCreateServerInterfaceFromStub               = modRPCRT4.NewProc("NdrCreateServerInterfaceFromStub")
-	procNdrDcomAsyncClientCall                         = modRPCRT4.NewProc("NdrDcomAsyncClientCall")
-	procNdrDcomAsyncStubCall                           = modRPCRT4.NewProc("NdrDcomAsyncStubCall")
-	procNdrEncapsulatedUnionBufferSize                 = modRPCRT4.NewProc("NdrEncapsulatedUnionBufferSize")
-	procNdrEncapsulatedUnionFree                       = modRPCRT4.NewProc("NdrEncapsulatedUnionFree")
-	procNdrEncapsulatedUnionMarshall                   = modRPCRT4.NewProc("NdrEncapsulatedUnionMarshall")
-	procNdrEncapsulatedUnionMemorySize                 = modRPCRT4.NewProc("NdrEncapsulatedUnionMemorySize")
-	procNdrEncapsulatedUnionUnmarshall                 = modRPCRT4.NewProc("NdrEncapsulatedUnionUnmarshall")
-	procNdrFixedArrayBufferSize                        = modRPCRT4.NewProc("NdrFixedArrayBufferSize")
-	procNdrFixedArrayFree                              = modRPCRT4.NewProc("NdrFixedArrayFree")
-	procNdrFixedArrayMarshall                          = modRPCRT4.NewProc("NdrFixedArrayMarshall")
-	procNdrFixedArrayMemorySize                        = modRPCRT4.NewProc("NdrFixedArrayMemorySize")
-	procNdrFixedArrayUnmarshall                        = modRPCRT4.NewProc("NdrFixedArrayUnmarshall")
-	procNdrFreeBuffer                                  = modRPCRT4.NewProc("NdrFreeBuffer")
-	procNdrFullPointerXlatFree                         = modRPCRT4.NewProc("NdrFullPointerXlatFree")
-	procNdrFullPointerXlatInit                         = modRPCRT4.NewProc("NdrFullPointerXlatInit")
-	procNdrGetBuffer                                   = modRPCRT4.NewProc("NdrGetBuffer")
-	procNdrGetDcomProtocolVersion                      = modRPCRT4.NewProc("NdrGetDcomProtocolVersion")
-	procNdrGetUserMarshalInfo                          = modRPCRT4.NewProc("NdrGetUserMarshalInfo")
-	procNdrInterfacePointerBufferSize                  = modRPCRT4.NewProc("NdrInterfacePointerBufferSize")
-	procNdrInterfacePointerFree                        = modRPCRT4.NewProc("NdrInterfacePointerFree")
-	procNdrInterfacePointerMarshall                    = modRPCRT4.NewProc("NdrInterfacePointerMarshall")
-	procNdrInterfacePointerMemorySize                  = modRPCRT4.NewProc("NdrInterfacePointerMemorySize")
-	procNdrInterfacePointerUnmarshall                  = modRPCRT4.NewProc("NdrInterfacePointerUnmarshall")
-	procNdrMapCommAndFaultStatus                       = modRPCRT4.NewProc("NdrMapCommAndFaultStatus")
-	procNdrMesProcEncodeDecode                         = modRPCRT4.NewProc("NdrMesProcEncodeDecode")
-	procNdrMesProcEncodeDecode2                        = modRPCRT4.NewProc("NdrMesProcEncodeDecode2")
-	procNdrMesProcEncodeDecode3                        = modRPCRT4.NewProc("NdrMesProcEncodeDecode3")
-	procNdrMesSimpleTypeAlignSize                      = modRPCRT4.NewProc("NdrMesSimpleTypeAlignSize")
-	procNdrMesSimpleTypeAlignSizeAll                   = modRPCRT4.NewProc("NdrMesSimpleTypeAlignSizeAll")
-	procNdrMesSimpleTypeDecode                         = modRPCRT4.NewProc("NdrMesSimpleTypeDecode")
-	procNdrMesSimpleTypeDecodeAll                      = modRPCRT4.NewProc("NdrMesSimpleTypeDecodeAll")
-	procNdrMesSimpleTypeEncode                         = modRPCRT4.NewProc("NdrMesSimpleTypeEncode")
-	procNdrMesSimpleTypeEncodeAll                      = modRPCRT4.NewProc("NdrMesSimpleTypeEncodeAll")
-	procNdrMesTypeAlignSize                            = modRPCRT4.NewProc("NdrMesTypeAlignSize")
-	procNdrMesTypeAlignSize2                           = modRPCRT4.NewProc("NdrMesTypeAlignSize2")
-	procNdrMesTypeAlignSize3                           = modRPCRT4.NewProc("NdrMesTypeAlignSize3")
-	procNdrMesTypeDecode                               = modRPCRT4.NewProc("NdrMesTypeDecode")
-	procNdrMesTypeDecode2                              = modRPCRT4.NewProc("NdrMesTypeDecode2")
-	procNdrMesTypeDecode3                              = modRPCRT4.NewProc("NdrMesTypeDecode3")
-	procNdrMesTypeEncode                               = modRPCRT4.NewProc("NdrMesTypeEncode")
-	procNdrMesTypeEncode2                              = modRPCRT4.NewProc("NdrMesTypeEncode2")
-	procNdrMesTypeEncode3                              = modRPCRT4.NewProc("NdrMesTypeEncode3")
-	procNdrMesTypeFree2                                = modRPCRT4.NewProc("NdrMesTypeFree2")
-	procNdrMesTypeFree3                                = modRPCRT4.NewProc("NdrMesTypeFree3")
-	procNdrNonConformantStringBufferSize               = modRPCRT4.NewProc("NdrNonConformantStringBufferSize")
-	procNdrNonConformantStringMarshall                 = modRPCRT4.NewProc("NdrNonConformantStringMarshall")
-	procNdrNonConformantStringMemorySize               = modRPCRT4.NewProc("NdrNonConformantStringMemorySize")
-	procNdrNonConformantStringUnmarshall               = modRPCRT4.NewProc("NdrNonConformantStringUnmarshall")
-	procNdrNonEncapsulatedUnionBufferSize              = modRPCRT4.NewProc("NdrNonEncapsulatedUnionBufferSize")
-	procNdrNonEncapsulatedUnionFree                    = modRPCRT4.NewProc("NdrNonEncapsulatedUnionFree")
-	procNdrNonEncapsulatedUnionMarshall                = modRPCRT4.NewProc("NdrNonEncapsulatedUnionMarshall")
-	procNdrNonEncapsulatedUnionMemorySize              = modRPCRT4.NewProc("NdrNonEncapsulatedUnionMemorySize")
-	procNdrNonEncapsulatedUnionUnmarshall              = modRPCRT4.NewProc("NdrNonEncapsulatedUnionUnmarshall")
-	procNdrNsGetBuffer                                 = modRPCRT4.NewProc("NdrNsGetBuffer")
-	procNdrNsSendReceive                               = modRPCRT4.NewProc("NdrNsSendReceive")
-	procNdrOleAllocate                                 = modRPCRT4.NewProc("NdrOleAllocate")
-	procNdrOleFree                                     = modRPCRT4.NewProc("NdrOleFree")
-	procNdrPartialIgnoreClientBufferSize               = modRPCRT4.NewProc("NdrPartialIgnoreClientBufferSize")
-	procNdrPartialIgnoreClientMarshall                 = modRPCRT4.NewProc("NdrPartialIgnoreClientMarshall")
-	procNdrPartialIgnoreServerInitialize               = modRPCRT4.NewProc("NdrPartialIgnoreServerInitialize")
-	procNdrPartialIgnoreServerUnmarshall               = modRPCRT4.NewProc("NdrPartialIgnoreServerUnmarshall")
-	procNdrPointerBufferSize                           = modRPCRT4.NewProc("NdrPointerBufferSize")
-	procNdrPointerFree                                 = modRPCRT4.NewProc("NdrPointerFree")
-	procNdrPointerMarshall                             = modRPCRT4.NewProc("NdrPointerMarshall")
-	procNdrPointerMemorySize                           = modRPCRT4.NewProc("NdrPointerMemorySize")
-	procNdrPointerUnmarshall                           = modRPCRT4.NewProc("NdrPointerUnmarshall")
-	procNdrRangeUnmarshall                             = modRPCRT4.NewProc("NdrRangeUnmarshall")
-	procNdrRpcSmClientAllocate                         = modRPCRT4.NewProc("NdrRpcSmClientAllocate")
-	procNdrRpcSmClientFree                             = modRPCRT4.NewProc("NdrRpcSmClientFree")
-	procNdrRpcSmSetClientToOsf                         = modRPCRT4.NewProc("NdrRpcSmSetClientToOsf")
-	procNdrRpcSsDefaultAllocate                        = modRPCRT4.NewProc("NdrRpcSsDefaultAllocate")
-	procNdrRpcSsDefaultFree                            = modRPCRT4.NewProc("NdrRpcSsDefaultFree")
-	procNdrRpcSsDisableAllocate                        = modRPCRT4.NewProc("NdrRpcSsDisableAllocate")
-	procNdrRpcSsEnableAllocate                         = modRPCRT4.NewProc("NdrRpcSsEnableAllocate")
-	procNdrSendReceive                                 = modRPCRT4.NewProc("NdrSendReceive")
-	procNdrServerCall2                                 = modRPCRT4.NewProc("NdrServerCall2")
-	procNdrServerCallAll                               = modRPCRT4.NewProc("NdrServerCallAll")
-	procNdrServerCallNdr64                             = modRPCRT4.NewProc("NdrServerCallNdr64")
-	procNdrServerContextMarshall                       = modRPCRT4.NewProc("NdrServerContextMarshall")
-	procNdrServerContextNewMarshall                    = modRPCRT4.NewProc("NdrServerContextNewMarshall")
-	procNdrServerContextNewUnmarshall                  = modRPCRT4.NewProc("NdrServerContextNewUnmarshall")
-	procNdrServerContextUnmarshall                     = modRPCRT4.NewProc("NdrServerContextUnmarshall")
-	procNdrServerInitialize                            = modRPCRT4.NewProc("NdrServerInitialize")
-	procNdrServerInitializeMarshall                    = modRPCRT4.NewProc("NdrServerInitializeMarshall")
-	procNdrServerInitializeNew                         = modRPCRT4.NewProc("NdrServerInitializeNew")
-	procNdrServerInitializePartial                     = modRPCRT4.NewProc("NdrServerInitializePartial")
-	procNdrServerInitializeUnmarshall                  = modRPCRT4.NewProc("NdrServerInitializeUnmarshall")
-	procNdrSimpleStructBufferSize                      = modRPCRT4.NewProc("NdrSimpleStructBufferSize")
-	procNdrSimpleStructFree                            = modRPCRT4.NewProc("NdrSimpleStructFree")
-	procNdrSimpleStructMarshall                        = modRPCRT4.NewProc("NdrSimpleStructMarshall")
-	procNdrSimpleStructMemorySize                      = modRPCRT4.NewProc("NdrSimpleStructMemorySize")
-	procNdrSimpleStructUnmarshall                      = modRPCRT4.NewProc("NdrSimpleStructUnmarshall")
-	procNdrSimpleTypeMarshall                          = modRPCRT4.NewProc("NdrSimpleTypeMarshall")
-	procNdrSimpleTypeUnmarshall                        = modRPCRT4.NewProc("NdrSimpleTypeUnmarshall")
-	procNdrStubCall2                                   = modRPCRT4.NewProc("NdrStubCall2")
-	procNdrStubCall3                                   = modRPCRT4.NewProc("NdrStubCall3")
-	procNdrUserMarshalBufferSize                       = modRPCRT4.NewProc("NdrUserMarshalBufferSize")
-	procNdrUserMarshalFree                             = modRPCRT4.NewProc("NdrUserMarshalFree")
-	procNdrUserMarshalMarshall                         = modRPCRT4.NewProc("NdrUserMarshalMarshall")
-	procNdrUserMarshalMemorySize                       = modRPCRT4.NewProc("NdrUserMarshalMemorySize")
-	procNdrUserMarshalSimpleTypeConvert                = modRPCRT4.NewProc("NdrUserMarshalSimpleTypeConvert")
-	procNdrUserMarshalUnmarshall                       = modRPCRT4.NewProc("NdrUserMarshalUnmarshall")
-	procNdrVaryingArrayBufferSize                      = modRPCRT4.NewProc("NdrVaryingArrayBufferSize")
-	procNdrVaryingArrayFree                            = modRPCRT4.NewProc("NdrVaryingArrayFree")
-	procNdrVaryingArrayMarshall                        = modRPCRT4.NewProc("NdrVaryingArrayMarshall")
-	procNdrVaryingArrayMemorySize                      = modRPCRT4.NewProc("NdrVaryingArrayMemorySize")
-	procNdrVaryingArrayUnmarshall                      = modRPCRT4.NewProc("NdrVaryingArrayUnmarshall")
-	procNdrXmitOrRepAsBufferSize                       = modRPCRT4.NewProc("NdrXmitOrRepAsBufferSize")
-	procNdrXmitOrRepAsFree                             = modRPCRT4.NewProc("NdrXmitOrRepAsFree")
-	procNdrXmitOrRepAsMarshall                         = modRPCRT4.NewProc("NdrXmitOrRepAsMarshall")
-	procNdrXmitOrRepAsMemorySize                       = modRPCRT4.NewProc("NdrXmitOrRepAsMemorySize")
-	procNdrXmitOrRepAsUnmarshall                       = modRPCRT4.NewProc("NdrXmitOrRepAsUnmarshall")
-	procRpcAsyncAbortCall                              = modRPCRT4.NewProc("RpcAsyncAbortCall")
-	procRpcAsyncCancelCall                             = modRPCRT4.NewProc("RpcAsyncCancelCall")
-	procRpcAsyncCompleteCall                           = modRPCRT4.NewProc("RpcAsyncCompleteCall")
-	procRpcAsyncGetCallStatus                          = modRPCRT4.NewProc("RpcAsyncGetCallStatus")
-	procRpcAsyncInitializeHandle                       = modRPCRT4.NewProc("RpcAsyncInitializeHandle")
-	procRpcAsyncRegisterInfo                           = modRPCRT4.NewProc("RpcAsyncRegisterInfo")
-	procRpcBindingBind                                 = modRPCRT4.NewProc("RpcBindingBind")
-	procRpcBindingCopy                                 = modRPCRT4.NewProc("RpcBindingCopy")
-	procRpcBindingCreate                               = modRPCRT4.NewProc("RpcBindingCreateW")
-	procRpcBindingCreateA                              = modRPCRT4.NewProc("RpcBindingCreateA")
-	procRpcBindingFree                                 = modRPCRT4.NewProc("RpcBindingFree")
-	procRpcBindingFromStringBinding                    = modRPCRT4.NewProc("RpcBindingFromStringBindingW")
-	procRpcBindingFromStringBindingA                   = modRPCRT4.NewProc("RpcBindingFromStringBindingA")
-	procRpcBindingInqAuthClient                        = modRPCRT4.NewProc("RpcBindingInqAuthClientW")
-	procRpcBindingInqAuthClientA                       = modRPCRT4.NewProc("RpcBindingInqAuthClientA")
-	procRpcBindingInqAuthClientEx                      = modRPCRT4.NewProc("RpcBindingInqAuthClientExW")
-	procRpcBindingInqAuthClientExA                     = modRPCRT4.NewProc("RpcBindingInqAuthClientExA")
-	procRpcBindingInqAuthInfo                          = modRPCRT4.NewProc("RpcBindingInqAuthInfoW")
-	procRpcBindingInqAuthInfoA                         = modRPCRT4.NewProc("RpcBindingInqAuthInfoA")
-	procRpcBindingInqAuthInfoEx                        = modRPCRT4.NewProc("RpcBindingInqAuthInfoExW")
-	procRpcBindingInqAuthInfoExA                       = modRPCRT4.NewProc("RpcBindingInqAuthInfoExA")
-	procRpcBindingInqMaxCalls                          = modRPCRT4.NewProc("RpcBindingInqMaxCalls")
-	procRpcBindingInqObject                            = modRPCRT4.NewProc("RpcBindingInqObject")
-	procRpcBindingInqOption                            = modRPCRT4.NewProc("RpcBindingInqOption")
-	procRpcBindingReset                                = modRPCRT4.NewProc("RpcBindingReset")
-	procRpcBindingServerFromClient                     = modRPCRT4.NewProc("RpcBindingServerFromClient")
-	procRpcBindingSetAuthInfo                          = modRPCRT4.NewProc("RpcBindingSetAuthInfoW")
-	procRpcBindingSetAuthInfoA                         = modRPCRT4.NewProc("RpcBindingSetAuthInfoA")
-	procRpcBindingSetAuthInfoEx                        = modRPCRT4.NewProc("RpcBindingSetAuthInfoExW")
-	procRpcBindingSetAuthInfoExA                       = modRPCRT4.NewProc("RpcBindingSetAuthInfoExA")
-	procRpcBindingSetObject                            = modRPCRT4.NewProc("RpcBindingSetObject")
-	procRpcBindingSetOption                            = modRPCRT4.NewProc("RpcBindingSetOption")
-	procRpcBindingToStringBinding                      = modRPCRT4.NewProc("RpcBindingToStringBindingW")
-	procRpcBindingToStringBindingA                     = modRPCRT4.NewProc("RpcBindingToStringBindingA")
-	procRpcBindingUnbind                               = modRPCRT4.NewProc("RpcBindingUnbind")
-	procRpcBindingVectorFree                           = modRPCRT4.NewProc("RpcBindingVectorFree")
-	procRpcCancelThread                                = modRPCRT4.NewProc("RpcCancelThread")
-	procRpcCancelThreadEx                              = modRPCRT4.NewProc("RpcCancelThreadEx")
-	procRpcCertGeneratePrincipalName                   = modRPCRT4.NewProc("RpcCertGeneratePrincipalNameW")
-	procRpcCertGeneratePrincipalNameA                  = modRPCRT4.NewProc("RpcCertGeneratePrincipalNameA")
-	procRpcEpRegister                                  = modRPCRT4.NewProc("RpcEpRegisterW")
-	procRpcEpRegisterA                                 = modRPCRT4.NewProc("RpcEpRegisterA")
-	procRpcEpRegisterNoReplace                         = modRPCRT4.NewProc("RpcEpRegisterNoReplaceW")
-	procRpcEpRegisterNoReplaceA                        = modRPCRT4.NewProc("RpcEpRegisterNoReplaceA")
-	procRpcEpResolveBinding                            = modRPCRT4.NewProc("RpcEpResolveBinding")
-	procRpcEpUnregister                                = modRPCRT4.NewProc("RpcEpUnregister")
-	procRpcErrorAddRecord                              = modRPCRT4.NewProc("RpcErrorAddRecord")
-	procRpcErrorClearInformation                       = modRPCRT4.NewProc("RpcErrorClearInformation")
-	procRpcErrorEndEnumeration                         = modRPCRT4.NewProc("RpcErrorEndEnumeration")
-	procRpcErrorGetNextRecord                          = modRPCRT4.NewProc("RpcErrorGetNextRecord")
-	procRpcErrorGetNumberOfRecords                     = modRPCRT4.NewProc("RpcErrorGetNumberOfRecords")
-	procRpcErrorLoadErrorInfo                          = modRPCRT4.NewProc("RpcErrorLoadErrorInfo")
-	procRpcErrorResetEnumeration                       = modRPCRT4.NewProc("RpcErrorResetEnumeration")
-	procRpcErrorSaveErrorInfo                          = modRPCRT4.NewProc("RpcErrorSaveErrorInfo")
-	procRpcErrorStartEnumeration                       = modRPCRT4.NewProc("RpcErrorStartEnumeration")
-	procRpcExceptionFilter                             = modRPCRT4.NewProc("RpcExceptionFilter")
-	procRpcFreeAuthorizationContext                    = modRPCRT4.NewProc("RpcFreeAuthorizationContext")
-	procRpcGetAuthorizationContextForClient            = modRPCRT4.NewProc("RpcGetAuthorizationContextForClient")
-	procRpcIfInqId                                     = modRPCRT4.NewProc("RpcIfInqId")
-	procRpcImpersonateClient                           = modRPCRT4.NewProc("RpcImpersonateClient")
-	procRpcImpersonateClient2                          = modRPCRT4.NewProc("RpcImpersonateClient2")
-	procRpcImpersonateClientContainer                  = modRPCRT4.NewProc("RpcImpersonateClientContainer")
-	procRpcMgmtEnableIdleCleanup                       = modRPCRT4.NewProc("RpcMgmtEnableIdleCleanup")
-	procRpcMgmtEpEltInqBegin                           = modRPCRT4.NewProc("RpcMgmtEpEltInqBegin")
-	procRpcMgmtEpEltInqDone                            = modRPCRT4.NewProc("RpcMgmtEpEltInqDone")
-	procRpcMgmtEpEltInqNext                            = modRPCRT4.NewProc("RpcMgmtEpEltInqNextW")
-	procRpcMgmtEpEltInqNextA                           = modRPCRT4.NewProc("RpcMgmtEpEltInqNextA")
-	procRpcMgmtEpUnregister                            = modRPCRT4.NewProc("RpcMgmtEpUnregister")
-	procRpcMgmtInqComTimeout                           = modRPCRT4.NewProc("RpcMgmtInqComTimeout")
-	procRpcMgmtInqDefaultProtectLevel                  = modRPCRT4.NewProc("RpcMgmtInqDefaultProtectLevel")
-	procRpcMgmtInqIfIds                                = modRPCRT4.NewProc("RpcMgmtInqIfIds")
-	procRpcMgmtInqServerPrincName                      = modRPCRT4.NewProc("RpcMgmtInqServerPrincNameW")
-	procRpcMgmtInqServerPrincNameA                     = modRPCRT4.NewProc("RpcMgmtInqServerPrincNameA")
-	procRpcMgmtInqStats                                = modRPCRT4.NewProc("RpcMgmtInqStats")
-	procRpcMgmtIsServerListening                       = modRPCRT4.NewProc("RpcMgmtIsServerListening")
-	procRpcMgmtSetAuthorizationFn                      = modRPCRT4.NewProc("RpcMgmtSetAuthorizationFn")
-	procRpcMgmtSetCancelTimeout                        = modRPCRT4.NewProc("RpcMgmtSetCancelTimeout")
-	procRpcMgmtSetComTimeout                           = modRPCRT4.NewProc("RpcMgmtSetComTimeout")
-	procRpcMgmtSetServerStackSize                      = modRPCRT4.NewProc("RpcMgmtSetServerStackSize")
-	procRpcMgmtStatsVectorFree                         = modRPCRT4.NewProc("RpcMgmtStatsVectorFree")
-	procRpcMgmtStopServerListening                     = modRPCRT4.NewProc("RpcMgmtStopServerListening")
-	procRpcMgmtWaitServerListen                        = modRPCRT4.NewProc("RpcMgmtWaitServerListen")
-	procRpcNetworkInqProtseqs                          = modRPCRT4.NewProc("RpcNetworkInqProtseqsW")
-	procRpcNetworkInqProtseqsA                         = modRPCRT4.NewProc("RpcNetworkInqProtseqsA")
-	procRpcNetworkIsProtseqValid                       = modRPCRT4.NewProc("RpcNetworkIsProtseqValidW")
-	procRpcNetworkIsProtseqValidA                      = modRPCRT4.NewProc("RpcNetworkIsProtseqValidA")
-	procRpcNsBindingInqEntryName                       = modRPCRT4.NewProc("RpcNsBindingInqEntryNameW")
-	procRpcNsBindingInqEntryNameA                      = modRPCRT4.NewProc("RpcNsBindingInqEntryNameA")
-	procRpcObjectInqType                               = modRPCRT4.NewProc("RpcObjectInqType")
-	procRpcObjectSetInqFn                              = modRPCRT4.NewProc("RpcObjectSetInqFn")
-	procRpcObjectSetType                               = modRPCRT4.NewProc("RpcObjectSetType")
-	procRpcProtseqVectorFree                           = modRPCRT4.NewProc("RpcProtseqVectorFreeW")
-	procRpcProtseqVectorFreeA                          = modRPCRT4.NewProc("RpcProtseqVectorFreeA")
-	procRpcRaiseException                              = modRPCRT4.NewProc("RpcRaiseException")
-	procRpcRevertContainerImpersonation                = modRPCRT4.NewProc("RpcRevertContainerImpersonation")
-	procRpcRevertToSelf                                = modRPCRT4.NewProc("RpcRevertToSelf")
-	procRpcRevertToSelfEx                              = modRPCRT4.NewProc("RpcRevertToSelfEx")
-	procRpcServerCompleteSecurityCallback              = modRPCRT4.NewProc("RpcServerCompleteSecurityCallback")
-	procRpcServerInqBindingHandle                      = modRPCRT4.NewProc("RpcServerInqBindingHandle")
-	procRpcServerInqBindings                           = modRPCRT4.NewProc("RpcServerInqBindings")
-	procRpcServerInqBindingsEx                         = modRPCRT4.NewProc("RpcServerInqBindingsEx")
-	procRpcServerInqCallAttributes                     = modRPCRT4.NewProc("RpcServerInqCallAttributesW")
-	procRpcServerInqCallAttributesA                    = modRPCRT4.NewProc("RpcServerInqCallAttributesA")
-	procRpcServerInqDefaultPrincName                   = modRPCRT4.NewProc("RpcServerInqDefaultPrincNameW")
-	procRpcServerInqDefaultPrincNameA                  = modRPCRT4.NewProc("RpcServerInqDefaultPrincNameA")
-	procRpcServerInqIf                                 = modRPCRT4.NewProc("RpcServerInqIf")
-	procRpcServerInterfaceGroupActivate                = modRPCRT4.NewProc("RpcServerInterfaceGroupActivate")
-	procRpcServerInterfaceGroupClose                   = modRPCRT4.NewProc("RpcServerInterfaceGroupClose")
-	procRpcServerInterfaceGroupCreate                  = modRPCRT4.NewProc("RpcServerInterfaceGroupCreateW")
-	procRpcServerInterfaceGroupCreateA                 = modRPCRT4.NewProc("RpcServerInterfaceGroupCreateA")
-	procRpcServerInterfaceGroupDeactivate              = modRPCRT4.NewProc("RpcServerInterfaceGroupDeactivate")
-	procRpcServerInterfaceGroupInqBindings             = modRPCRT4.NewProc("RpcServerInterfaceGroupInqBindings")
-	procRpcServerListen                                = modRPCRT4.NewProc("RpcServerListen")
-	procRpcServerRegisterAuthInfo                      = modRPCRT4.NewProc("RpcServerRegisterAuthInfoW")
-	procRpcServerRegisterAuthInfoA                     = modRPCRT4.NewProc("RpcServerRegisterAuthInfoA")
-	procRpcServerRegisterIf                            = modRPCRT4.NewProc("RpcServerRegisterIf")
-	procRpcServerRegisterIf2                           = modRPCRT4.NewProc("RpcServerRegisterIf2")
-	procRpcServerRegisterIf3                           = modRPCRT4.NewProc("RpcServerRegisterIf3")
-	procRpcServerRegisterIfEx                          = modRPCRT4.NewProc("RpcServerRegisterIfEx")
-	procRpcServerSubscribeForNotification              = modRPCRT4.NewProc("RpcServerSubscribeForNotification")
-	procRpcServerTestCancel                            = modRPCRT4.NewProc("RpcServerTestCancel")
-	procRpcServerUnregisterIf                          = modRPCRT4.NewProc("RpcServerUnregisterIf")
-	procRpcServerUnregisterIfEx                        = modRPCRT4.NewProc("RpcServerUnregisterIfEx")
-	procRpcServerUnsubscribeForNotification            = modRPCRT4.NewProc("RpcServerUnsubscribeForNotification")
-	procRpcServerUseAllProtseqs                        = modRPCRT4.NewProc("RpcServerUseAllProtseqs")
-	procRpcServerUseAllProtseqsEx                      = modRPCRT4.NewProc("RpcServerUseAllProtseqsEx")
-	procRpcServerUseAllProtseqsIf                      = modRPCRT4.NewProc("RpcServerUseAllProtseqsIf")
-	procRpcServerUseAllProtseqsIfEx                    = modRPCRT4.NewProc("RpcServerUseAllProtseqsIfEx")
-	procRpcServerUseProtseq                            = modRPCRT4.NewProc("RpcServerUseProtseqW")
-	procRpcServerUseProtseqA                           = modRPCRT4.NewProc("RpcServerUseProtseqA")
-	procRpcServerUseProtseqEp                          = modRPCRT4.NewProc("RpcServerUseProtseqEpW")
-	procRpcServerUseProtseqEpA                         = modRPCRT4.NewProc("RpcServerUseProtseqEpA")
-	procRpcServerUseProtseqEpEx                        = modRPCRT4.NewProc("RpcServerUseProtseqEpExW")
-	procRpcServerUseProtseqEpExA                       = modRPCRT4.NewProc("RpcServerUseProtseqEpExA")
-	procRpcServerUseProtseqEx                          = modRPCRT4.NewProc("RpcServerUseProtseqExW")
-	procRpcServerUseProtseqExA                         = modRPCRT4.NewProc("RpcServerUseProtseqExA")
-	procRpcServerUseProtseqIf                          = modRPCRT4.NewProc("RpcServerUseProtseqIfW")
-	procRpcServerUseProtseqIfA                         = modRPCRT4.NewProc("RpcServerUseProtseqIfA")
-	procRpcServerUseProtseqIfEx                        = modRPCRT4.NewProc("RpcServerUseProtseqIfExW")
-	procRpcServerUseProtseqIfExA                       = modRPCRT4.NewProc("RpcServerUseProtseqIfExA")
-	procRpcServerYield                                 = modRPCRT4.NewProc("RpcServerYield")
-	procRpcSmAllocate                                  = modRPCRT4.NewProc("RpcSmAllocate")
-	procRpcSmClientFree                                = modRPCRT4.NewProc("RpcSmClientFree")
-	procRpcSmDestroyClientContext                      = modRPCRT4.NewProc("RpcSmDestroyClientContext")
-	procRpcSmDisableAllocate                           = modRPCRT4.NewProc("RpcSmDisableAllocate")
-	procRpcSmEnableAllocate                            = modRPCRT4.NewProc("RpcSmEnableAllocate")
-	procRpcSmFree                                      = modRPCRT4.NewProc("RpcSmFree")
-	procRpcSmGetThreadHandle                           = modRPCRT4.NewProc("RpcSmGetThreadHandle")
-	procRpcSmSetClientAllocFree                        = modRPCRT4.NewProc("RpcSmSetClientAllocFree")
-	procRpcSmSetThreadHandle                           = modRPCRT4.NewProc("RpcSmSetThreadHandle")
-	procRpcSmSwapClientAllocFree                       = modRPCRT4.NewProc("RpcSmSwapClientAllocFree")
-	procRpcSsAllocate                                  = modRPCRT4.NewProc("RpcSsAllocate")
-	procRpcSsContextLockExclusive                      = modRPCRT4.NewProc("RpcSsContextLockExclusive")
-	procRpcSsContextLockShared                         = modRPCRT4.NewProc("RpcSsContextLockShared")
-	procRpcSsDestroyClientContext                      = modRPCRT4.NewProc("RpcSsDestroyClientContext")
-	procRpcSsDisableAllocate                           = modRPCRT4.NewProc("RpcSsDisableAllocate")
-	procRpcSsDontSerializeContext                      = modRPCRT4.NewProc("RpcSsDontSerializeContext")
-	procRpcSsEnableAllocate                            = modRPCRT4.NewProc("RpcSsEnableAllocate")
-	procRpcSsFree                                      = modRPCRT4.NewProc("RpcSsFree")
-	procRpcSsGetContextBinding                         = modRPCRT4.NewProc("RpcSsGetContextBinding")
-	procRpcSsGetThreadHandle                           = modRPCRT4.NewProc("RpcSsGetThreadHandle")
-	procRpcSsSetClientAllocFree                        = modRPCRT4.NewProc("RpcSsSetClientAllocFree")
-	procRpcSsSetThreadHandle                           = modRPCRT4.NewProc("RpcSsSetThreadHandle")
-	procRpcSsSwapClientAllocFree                       = modRPCRT4.NewProc("RpcSsSwapClientAllocFree")
-	procRpcStringBindingCompose                        = modRPCRT4.NewProc("RpcStringBindingComposeW")
-	procRpcStringBindingComposeA                       = modRPCRT4.NewProc("RpcStringBindingComposeA")
-	procRpcStringBindingParse                          = modRPCRT4.NewProc("RpcStringBindingParseW")
-	procRpcStringBindingParseA                         = modRPCRT4.NewProc("RpcStringBindingParseA")
-	procRpcStringFree                                  = modRPCRT4.NewProc("RpcStringFreeW")
-	procRpcStringFreeA                                 = modRPCRT4.NewProc("RpcStringFreeA")
-	procRpcTestCancel                                  = modRPCRT4.NewProc("RpcTestCancel")
-	procRpcUserFree                                    = modRPCRT4.NewProc("RpcUserFree")
-	procUuidCompare                                    = modRPCRT4.NewProc("UuidCompare")
-	procUuidCreate                                     = modRPCRT4.NewProc("UuidCreate")
-	procUuidCreateNil                                  = modRPCRT4.NewProc("UuidCreateNil")
-	procUuidCreateSequential                           = modRPCRT4.NewProc("UuidCreateSequential")
-	procUuidEqual                                      = modRPCRT4.NewProc("UuidEqual")
-	procUuidFromString                                 = modRPCRT4.NewProc("UuidFromStringW")
-	procUuidFromStringA                                = modRPCRT4.NewProc("UuidFromStringA")
-	procUuidHash                                       = modRPCRT4.NewProc("UuidHash")
-	procUuidIsNil                                      = modRPCRT4.NewProc("UuidIsNil")
-	procUuidToString                                   = modRPCRT4.NewProc("UuidToStringW")
-	procUuidToStringA                                  = modRPCRT4.NewProc("UuidToStringA")
+	procI_RpcNsGetBuffer                                = modRPCNS4.NewProc("I_RpcNsGetBuffer")
+	procI_RpcNsRaiseException                           = modRPCNS4.NewProc("I_RpcNsRaiseException")
+	procI_RpcNsSendReceive                              = modRPCNS4.NewProc("I_RpcNsSendReceive")
+	procI_RpcReBindBuffer                               = modRPCNS4.NewProc("I_RpcReBindBuffer")
+	procRpcIfIdVectorFree                               = modRPCNS4.NewProc("RpcIfIdVectorFree")
+	procRpcNsBindingExport                              = modRPCNS4.NewProc("RpcNsBindingExportW")
+	procRpcNsBindingExportA                             = modRPCNS4.NewProc("RpcNsBindingExportA")
+	procRpcNsBindingExportPnP                           = modRPCNS4.NewProc("RpcNsBindingExportPnPW")
+	procRpcNsBindingExportPnPA                          = modRPCNS4.NewProc("RpcNsBindingExportPnPA")
+	procRpcNsBindingImportBegin                         = modRPCNS4.NewProc("RpcNsBindingImportBeginW")
+	procRpcNsBindingImportBeginA                        = modRPCNS4.NewProc("RpcNsBindingImportBeginA")
+	procRpcNsBindingImportDone                          = modRPCNS4.NewProc("RpcNsBindingImportDone")
+	procRpcNsBindingImportNext                          = modRPCNS4.NewProc("RpcNsBindingImportNext")
+	procRpcNsBindingLookupBegin                         = modRPCNS4.NewProc("RpcNsBindingLookupBeginW")
+	procRpcNsBindingLookupBeginA                        = modRPCNS4.NewProc("RpcNsBindingLookupBeginA")
+	procRpcNsBindingLookupDone                          = modRPCNS4.NewProc("RpcNsBindingLookupDone")
+	procRpcNsBindingLookupNext                          = modRPCNS4.NewProc("RpcNsBindingLookupNext")
+	procRpcNsBindingSelect                              = modRPCNS4.NewProc("RpcNsBindingSelect")
+	procRpcNsBindingUnexport                            = modRPCNS4.NewProc("RpcNsBindingUnexportW")
+	procRpcNsBindingUnexportA                           = modRPCNS4.NewProc("RpcNsBindingUnexportA")
+	procRpcNsBindingUnexportPnP                         = modRPCNS4.NewProc("RpcNsBindingUnexportPnPW")
+	procRpcNsBindingUnexportPnPA                        = modRPCNS4.NewProc("RpcNsBindingUnexportPnPA")
+	procRpcNsEntryExpandName                            = modRPCNS4.NewProc("RpcNsEntryExpandNameW")
+	procRpcNsEntryExpandNameA                           = modRPCNS4.NewProc("RpcNsEntryExpandNameA")
+	procRpcNsEntryObjectInqBegin                        = modRPCNS4.NewProc("RpcNsEntryObjectInqBeginW")
+	procRpcNsEntryObjectInqBeginA                       = modRPCNS4.NewProc("RpcNsEntryObjectInqBeginA")
+	procRpcNsEntryObjectInqDone                         = modRPCNS4.NewProc("RpcNsEntryObjectInqDone")
+	procRpcNsEntryObjectInqNext                         = modRPCNS4.NewProc("RpcNsEntryObjectInqNext")
+	procRpcNsGroupDelete                                = modRPCNS4.NewProc("RpcNsGroupDeleteW")
+	procRpcNsGroupDeleteA                               = modRPCNS4.NewProc("RpcNsGroupDeleteA")
+	procRpcNsGroupMbrAdd                                = modRPCNS4.NewProc("RpcNsGroupMbrAddW")
+	procRpcNsGroupMbrAddA                               = modRPCNS4.NewProc("RpcNsGroupMbrAddA")
+	procRpcNsGroupMbrInqBegin                           = modRPCNS4.NewProc("RpcNsGroupMbrInqBeginW")
+	procRpcNsGroupMbrInqBeginA                          = modRPCNS4.NewProc("RpcNsGroupMbrInqBeginA")
+	procRpcNsGroupMbrInqDone                            = modRPCNS4.NewProc("RpcNsGroupMbrInqDone")
+	procRpcNsGroupMbrInqNext                            = modRPCNS4.NewProc("RpcNsGroupMbrInqNextW")
+	procRpcNsGroupMbrInqNextA                           = modRPCNS4.NewProc("RpcNsGroupMbrInqNextA")
+	procRpcNsGroupMbrRemove                             = modRPCNS4.NewProc("RpcNsGroupMbrRemoveW")
+	procRpcNsGroupMbrRemoveA                            = modRPCNS4.NewProc("RpcNsGroupMbrRemoveA")
+	procRpcNsMgmtBindingUnexport                        = modRPCNS4.NewProc("RpcNsMgmtBindingUnexportW")
+	procRpcNsMgmtBindingUnexportA                       = modRPCNS4.NewProc("RpcNsMgmtBindingUnexportA")
+	procRpcNsMgmtEntryCreate                            = modRPCNS4.NewProc("RpcNsMgmtEntryCreateW")
+	procRpcNsMgmtEntryCreateA                           = modRPCNS4.NewProc("RpcNsMgmtEntryCreateA")
+	procRpcNsMgmtEntryDelete                            = modRPCNS4.NewProc("RpcNsMgmtEntryDeleteW")
+	procRpcNsMgmtEntryDeleteA                           = modRPCNS4.NewProc("RpcNsMgmtEntryDeleteA")
+	procRpcNsMgmtEntryInqIfIds                          = modRPCNS4.NewProc("RpcNsMgmtEntryInqIfIdsW")
+	procRpcNsMgmtEntryInqIfIdsA                         = modRPCNS4.NewProc("RpcNsMgmtEntryInqIfIdsA")
+	procRpcNsMgmtHandleSetExpAge                        = modRPCNS4.NewProc("RpcNsMgmtHandleSetExpAge")
+	procRpcNsMgmtInqExpAge                              = modRPCNS4.NewProc("RpcNsMgmtInqExpAge")
+	procRpcNsMgmtSetExpAge                              = modRPCNS4.NewProc("RpcNsMgmtSetExpAge")
+	procRpcNsProfileDelete                              = modRPCNS4.NewProc("RpcNsProfileDeleteW")
+	procRpcNsProfileDeleteA                             = modRPCNS4.NewProc("RpcNsProfileDeleteA")
+	procRpcNsProfileEltAdd                              = modRPCNS4.NewProc("RpcNsProfileEltAddW")
+	procRpcNsProfileEltAddA                             = modRPCNS4.NewProc("RpcNsProfileEltAddA")
+	procRpcNsProfileEltInqBegin                         = modRPCNS4.NewProc("RpcNsProfileEltInqBeginW")
+	procRpcNsProfileEltInqBeginA                        = modRPCNS4.NewProc("RpcNsProfileEltInqBeginA")
+	procRpcNsProfileEltInqDone                          = modRPCNS4.NewProc("RpcNsProfileEltInqDone")
+	procRpcNsProfileEltInqNext                          = modRPCNS4.NewProc("RpcNsProfileEltInqNextW")
+	procRpcNsProfileEltInqNextA                         = modRPCNS4.NewProc("RpcNsProfileEltInqNextA")
+	procRpcNsProfileEltRemove                           = modRPCNS4.NewProc("RpcNsProfileEltRemoveW")
+	procRpcNsProfileEltRemoveA                          = modRPCNS4.NewProc("RpcNsProfileEltRemoveA")
+	procDceErrorInqText                                 = modRPCRT4.NewProc("DceErrorInqTextW")
+	procDceErrorInqTextA                                = modRPCRT4.NewProc("DceErrorInqTextA")
+	procIUnknown_AddRef_Proxy                           = modRPCRT4.NewProc("IUnknown_AddRef_Proxy")
+	procIUnknown_QueryInterface_Proxy                   = modRPCRT4.NewProc("IUnknown_QueryInterface_Proxy")
+	procIUnknown_Release_Proxy                          = modRPCRT4.NewProc("IUnknown_Release_Proxy")
+	procI_RpcAllocate                                   = modRPCRT4.NewProc("I_RpcAllocate")
+	procI_RpcAsyncAbortCall                             = modRPCRT4.NewProc("I_RpcAsyncAbortCall")
+	procI_RpcAsyncSetHandle                             = modRPCRT4.NewProc("I_RpcAsyncSetHandle")
+	procI_RpcBindingCopy                                = modRPCRT4.NewProc("I_RpcBindingCopy")
+	procI_RpcBindingCreateNP                            = modRPCRT4.NewProc("I_RpcBindingCreateNP")
+	procI_RpcBindingHandleToAsyncHandle                 = modRPCRT4.NewProc("I_RpcBindingHandleToAsyncHandle")
+	procI_RpcBindingInqClientTokenAttributes            = modRPCRT4.NewProc("I_RpcBindingInqClientTokenAttributes")
+	procI_RpcBindingInqDynamicEndpoint                  = modRPCRT4.NewProc("I_RpcBindingInqDynamicEndpointW")
+	procI_RpcBindingInqDynamicEndpointA                 = modRPCRT4.NewProc("I_RpcBindingInqDynamicEndpointA")
+	procI_RpcBindingInqLocalClientPID                   = modRPCRT4.NewProc("I_RpcBindingInqLocalClientPID")
+	procI_RpcBindingInqMarshalledTargetInfo             = modRPCRT4.NewProc("I_RpcBindingInqMarshalledTargetInfo")
+	procI_RpcBindingInqSecurityContext                  = modRPCRT4.NewProc("I_RpcBindingInqSecurityContext")
+	procI_RpcBindingInqSecurityContextKeyInfo           = modRPCRT4.NewProc("I_RpcBindingInqSecurityContextKeyInfo")
+	procI_RpcBindingInqTransportType                    = modRPCRT4.NewProc("I_RpcBindingInqTransportType")
+	procI_RpcBindingInqWireIdForSnego                   = modRPCRT4.NewProc("I_RpcBindingInqWireIdForSnego")
+	procI_RpcBindingIsClientLocal                       = modRPCRT4.NewProc("I_RpcBindingIsClientLocal")
+	procI_RpcBindingIsServerLocal                       = modRPCRT4.NewProc("I_RpcBindingIsServerLocal")
+	procI_RpcBindingSetPrivateOption                    = modRPCRT4.NewProc("I_RpcBindingSetPrivateOption")
+	procI_RpcBindingToStaticStringBindingW              = modRPCRT4.NewProc("I_RpcBindingToStaticStringBindingW")
+	procI_RpcClearMutex                                 = modRPCRT4.NewProc("I_RpcClearMutex")
+	procI_RpcDeleteMutex                                = modRPCRT4.NewProc("I_RpcDeleteMutex")
+	procI_RpcExceptionFilter                            = modRPCRT4.NewProc("I_RpcExceptionFilter")
+	procI_RpcFree                                       = modRPCRT4.NewProc("I_RpcFree")
+	procI_RpcFreeBuffer                                 = modRPCRT4.NewProc("I_RpcFreeBuffer")
+	procI_RpcFreePipeBuffer                             = modRPCRT4.NewProc("I_RpcFreePipeBuffer")
+	procI_RpcGetBuffer                                  = modRPCRT4.NewProc("I_RpcGetBuffer")
+	procI_RpcGetBufferWithObject                        = modRPCRT4.NewProc("I_RpcGetBufferWithObject")
+	procI_RpcGetCurrentCallHandle                       = modRPCRT4.NewProc("I_RpcGetCurrentCallHandle")
+	procI_RpcGetDefaultSD                               = modRPCRT4.NewProc("I_RpcGetDefaultSD")
+	procI_RpcGetExtendedError                           = modRPCRT4.NewProc("I_RpcGetExtendedError")
+	procI_RpcIfInqTransferSyntaxes                      = modRPCRT4.NewProc("I_RpcIfInqTransferSyntaxes")
+	procI_RpcMapWin32Status                             = modRPCRT4.NewProc("I_RpcMapWin32Status")
+	procI_RpcMgmtEnableDedicatedThreadPool              = modRPCRT4.NewProc("I_RpcMgmtEnableDedicatedThreadPool")
+	procI_RpcNegotiateTransferSyntax                    = modRPCRT4.NewProc("I_RpcNegotiateTransferSyntax")
+	procI_RpcNsBindingSetEntryName                      = modRPCRT4.NewProc("I_RpcNsBindingSetEntryNameW")
+	procI_RpcNsBindingSetEntryNameA                     = modRPCRT4.NewProc("I_RpcNsBindingSetEntryNameA")
+	procI_RpcNsInterfaceExported                        = modRPCRT4.NewProc("I_RpcNsInterfaceExported")
+	procI_RpcNsInterfaceUnexported                      = modRPCRT4.NewProc("I_RpcNsInterfaceUnexported")
+	procI_RpcOpenClientProcess                          = modRPCRT4.NewProc("I_RpcOpenClientProcess")
+	procI_RpcPauseExecution                             = modRPCRT4.NewProc("I_RpcPauseExecution")
+	procI_RpcReallocPipeBuffer                          = modRPCRT4.NewProc("I_RpcReallocPipeBuffer")
+	procI_RpcReceive                                    = modRPCRT4.NewProc("I_RpcReceive")
+	procI_RpcRecordCalloutFailure                       = modRPCRT4.NewProc("I_RpcRecordCalloutFailure")
+	procI_RpcRequestMutex                               = modRPCRT4.NewProc("I_RpcRequestMutex")
+	procI_RpcSend                                       = modRPCRT4.NewProc("I_RpcSend")
+	procI_RpcSendReceive                                = modRPCRT4.NewProc("I_RpcSendReceive")
+	procI_RpcServerCheckClientRestriction               = modRPCRT4.NewProc("I_RpcServerCheckClientRestriction")
+	procI_RpcServerDisableExceptionFilter               = modRPCRT4.NewProc("I_RpcServerDisableExceptionFilter")
+	procI_RpcServerGetAssociationID                     = modRPCRT4.NewProc("I_RpcServerGetAssociationID")
+	procI_RpcServerInqAddressChangeFn                   = modRPCRT4.NewProc("I_RpcServerInqAddressChangeFn")
+	procI_RpcServerInqLocalConnAddress                  = modRPCRT4.NewProc("I_RpcServerInqLocalConnAddress")
+	procI_RpcServerInqRemoteConnAddress                 = modRPCRT4.NewProc("I_RpcServerInqRemoteConnAddress")
+	procI_RpcServerInqTransportType                     = modRPCRT4.NewProc("I_RpcServerInqTransportType")
+	procI_RpcServerRegisterForwardFunction              = modRPCRT4.NewProc("I_RpcServerRegisterForwardFunction")
+	procI_RpcServerSetAddressChangeFn                   = modRPCRT4.NewProc("I_RpcServerSetAddressChangeFn")
+	procI_RpcServerStartService                         = modRPCRT4.NewProc("I_RpcServerStartService")
+	procI_RpcServerSubscribeForDisconnectNotification   = modRPCRT4.NewProc("I_RpcServerSubscribeForDisconnectNotification")
+	procI_RpcServerSubscribeForDisconnectNotification2  = modRPCRT4.NewProc("I_RpcServerSubscribeForDisconnectNotification2")
+	procI_RpcServerUnsubscribeForDisconnectNotification = modRPCRT4.NewProc("I_RpcServerUnsubscribeForDisconnectNotification")
+	procI_RpcServerUseProtseq2                          = modRPCRT4.NewProc("I_RpcServerUseProtseq2W")
+	procI_RpcServerUseProtseq2A                         = modRPCRT4.NewProc("I_RpcServerUseProtseq2A")
+	procI_RpcServerUseProtseqEp2                        = modRPCRT4.NewProc("I_RpcServerUseProtseqEp2W")
+	procI_RpcServerUseProtseqEp2A                       = modRPCRT4.NewProc("I_RpcServerUseProtseqEp2A")
+	procI_RpcSessionStrictContextHandle                 = modRPCRT4.NewProc("I_RpcSessionStrictContextHandle")
+	procI_RpcSsDontSerializeContext                     = modRPCRT4.NewProc("I_RpcSsDontSerializeContext")
+	procI_RpcSystemHandleTypeSpecificWork               = modRPCRT4.NewProc("I_RpcSystemHandleTypeSpecificWork")
+	procI_RpcTurnOnEEInfoPropagation                    = modRPCRT4.NewProc("I_RpcTurnOnEEInfoPropagation")
+	procI_UuidCreate                                    = modRPCRT4.NewProc("I_UuidCreate")
+	procMesBufferHandleReset                            = modRPCRT4.NewProc("MesBufferHandleReset")
+	procMesDecodeBufferHandleCreate                     = modRPCRT4.NewProc("MesDecodeBufferHandleCreate")
+	procMesDecodeIncrementalHandleCreate                = modRPCRT4.NewProc("MesDecodeIncrementalHandleCreate")
+	procMesEncodeDynBufferHandleCreate                  = modRPCRT4.NewProc("MesEncodeDynBufferHandleCreate")
+	procMesEncodeFixedBufferHandleCreate                = modRPCRT4.NewProc("MesEncodeFixedBufferHandleCreate")
+	procMesEncodeIncrementalHandleCreate                = modRPCRT4.NewProc("MesEncodeIncrementalHandleCreate")
+	procMesHandleFree                                   = modRPCRT4.NewProc("MesHandleFree")
+	procMesIncrementalHandleReset                       = modRPCRT4.NewProc("MesIncrementalHandleReset")
+	procMesInqProcEncodingId                            = modRPCRT4.NewProc("MesInqProcEncodingId")
+	procNDRCContextBinding                              = modRPCRT4.NewProc("NDRCContextBinding")
+	procNDRCContextMarshall                             = modRPCRT4.NewProc("NDRCContextMarshall")
+	procNDRCContextUnmarshall                           = modRPCRT4.NewProc("NDRCContextUnmarshall")
+	procNDRSContextMarshall                             = modRPCRT4.NewProc("NDRSContextMarshall")
+	procNDRSContextMarshall2                            = modRPCRT4.NewProc("NDRSContextMarshall2")
+	procNDRSContextMarshallEx                           = modRPCRT4.NewProc("NDRSContextMarshallEx")
+	procNDRSContextUnmarshall                           = modRPCRT4.NewProc("NDRSContextUnmarshall")
+	procNDRSContextUnmarshall2                          = modRPCRT4.NewProc("NDRSContextUnmarshall2")
+	procNDRSContextUnmarshallEx                         = modRPCRT4.NewProc("NDRSContextUnmarshallEx")
+	procNdr64AsyncClientCall                            = modRPCRT4.NewProc("Ndr64AsyncClientCall")
+	procNdr64AsyncServerCall64                          = modRPCRT4.NewProc("Ndr64AsyncServerCall64")
+	procNdr64AsyncServerCallAll                         = modRPCRT4.NewProc("Ndr64AsyncServerCallAll")
+	procNdr64DcomAsyncClientCall                        = modRPCRT4.NewProc("Ndr64DcomAsyncClientCall")
+	procNdr64DcomAsyncStubCall                          = modRPCRT4.NewProc("Ndr64DcomAsyncStubCall")
+	procNdrAllocate                                     = modRPCRT4.NewProc("NdrAllocate")
+	procNdrAsyncClientCall                              = modRPCRT4.NewProc("NdrAsyncClientCall")
+	procNdrAsyncServerCall                              = modRPCRT4.NewProc("NdrAsyncServerCall")
+	procNdrByteCountPointerBufferSize                   = modRPCRT4.NewProc("NdrByteCountPointerBufferSize")
+	procNdrByteCountPointerFree                         = modRPCRT4.NewProc("NdrByteCountPointerFree")
+	procNdrByteCountPointerMarshall                     = modRPCRT4.NewProc("NdrByteCountPointerMarshall")
+	procNdrByteCountPointerUnmarshall                   = modRPCRT4.NewProc("NdrByteCountPointerUnmarshall")
+	procNdrClearOutParameters                           = modRPCRT4.NewProc("NdrClearOutParameters")
+	procNdrClientCall2                                  = modRPCRT4.NewProc("NdrClientCall2")
+	procNdrClientCall3                                  = modRPCRT4.NewProc("NdrClientCall3")
+	procNdrClientContextMarshall                        = modRPCRT4.NewProc("NdrClientContextMarshall")
+	procNdrClientContextUnmarshall                      = modRPCRT4.NewProc("NdrClientContextUnmarshall")
+	procNdrClientInitialize                             = modRPCRT4.NewProc("NdrClientInitialize")
+	procNdrClientInitializeNew                          = modRPCRT4.NewProc("NdrClientInitializeNew")
+	procNdrComplexArrayBufferSize                       = modRPCRT4.NewProc("NdrComplexArrayBufferSize")
+	procNdrComplexArrayFree                             = modRPCRT4.NewProc("NdrComplexArrayFree")
+	procNdrComplexArrayMarshall                         = modRPCRT4.NewProc("NdrComplexArrayMarshall")
+	procNdrComplexArrayMemorySize                       = modRPCRT4.NewProc("NdrComplexArrayMemorySize")
+	procNdrComplexArrayUnmarshall                       = modRPCRT4.NewProc("NdrComplexArrayUnmarshall")
+	procNdrComplexStructBufferSize                      = modRPCRT4.NewProc("NdrComplexStructBufferSize")
+	procNdrComplexStructFree                            = modRPCRT4.NewProc("NdrComplexStructFree")
+	procNdrComplexStructMarshall                        = modRPCRT4.NewProc("NdrComplexStructMarshall")
+	procNdrComplexStructMemorySize                      = modRPCRT4.NewProc("NdrComplexStructMemorySize")
+	procNdrComplexStructUnmarshall                      = modRPCRT4.NewProc("NdrComplexStructUnmarshall")
+	procNdrConformantArrayBufferSize                    = modRPCRT4.NewProc("NdrConformantArrayBufferSize")
+	procNdrConformantArrayFree                          = modRPCRT4.NewProc("NdrConformantArrayFree")
+	procNdrConformantArrayMarshall                      = modRPCRT4.NewProc("NdrConformantArrayMarshall")
+	procNdrConformantArrayMemorySize                    = modRPCRT4.NewProc("NdrConformantArrayMemorySize")
+	procNdrConformantArrayUnmarshall                    = modRPCRT4.NewProc("NdrConformantArrayUnmarshall")
+	procNdrConformantStringBufferSize                   = modRPCRT4.NewProc("NdrConformantStringBufferSize")
+	procNdrConformantStringMarshall                     = modRPCRT4.NewProc("NdrConformantStringMarshall")
+	procNdrConformantStringMemorySize                   = modRPCRT4.NewProc("NdrConformantStringMemorySize")
+	procNdrConformantStringUnmarshall                   = modRPCRT4.NewProc("NdrConformantStringUnmarshall")
+	procNdrConformantStructBufferSize                   = modRPCRT4.NewProc("NdrConformantStructBufferSize")
+	procNdrConformantStructFree                         = modRPCRT4.NewProc("NdrConformantStructFree")
+	procNdrConformantStructMarshall                     = modRPCRT4.NewProc("NdrConformantStructMarshall")
+	procNdrConformantStructMemorySize                   = modRPCRT4.NewProc("NdrConformantStructMemorySize")
+	procNdrConformantStructUnmarshall                   = modRPCRT4.NewProc("NdrConformantStructUnmarshall")
+	procNdrConformantVaryingArrayBufferSize             = modRPCRT4.NewProc("NdrConformantVaryingArrayBufferSize")
+	procNdrConformantVaryingArrayFree                   = modRPCRT4.NewProc("NdrConformantVaryingArrayFree")
+	procNdrConformantVaryingArrayMarshall               = modRPCRT4.NewProc("NdrConformantVaryingArrayMarshall")
+	procNdrConformantVaryingArrayMemorySize             = modRPCRT4.NewProc("NdrConformantVaryingArrayMemorySize")
+	procNdrConformantVaryingArrayUnmarshall             = modRPCRT4.NewProc("NdrConformantVaryingArrayUnmarshall")
+	procNdrConformantVaryingStructBufferSize            = modRPCRT4.NewProc("NdrConformantVaryingStructBufferSize")
+	procNdrConformantVaryingStructFree                  = modRPCRT4.NewProc("NdrConformantVaryingStructFree")
+	procNdrConformantVaryingStructMarshall              = modRPCRT4.NewProc("NdrConformantVaryingStructMarshall")
+	procNdrConformantVaryingStructMemorySize            = modRPCRT4.NewProc("NdrConformantVaryingStructMemorySize")
+	procNdrConformantVaryingStructUnmarshall            = modRPCRT4.NewProc("NdrConformantVaryingStructUnmarshall")
+	procNdrContextHandleInitialize                      = modRPCRT4.NewProc("NdrContextHandleInitialize")
+	procNdrContextHandleSize                            = modRPCRT4.NewProc("NdrContextHandleSize")
+	procNdrConvert                                      = modRPCRT4.NewProc("NdrConvert")
+	procNdrConvert2                                     = modRPCRT4.NewProc("NdrConvert2")
+	procNdrCorrelationFree                              = modRPCRT4.NewProc("NdrCorrelationFree")
+	procNdrCorrelationInitialize                        = modRPCRT4.NewProc("NdrCorrelationInitialize")
+	procNdrCorrelationPass                              = modRPCRT4.NewProc("NdrCorrelationPass")
+	procNdrCreateServerInterfaceFromStub                = modRPCRT4.NewProc("NdrCreateServerInterfaceFromStub")
+	procNdrDcomAsyncClientCall                          = modRPCRT4.NewProc("NdrDcomAsyncClientCall")
+	procNdrDcomAsyncStubCall                            = modRPCRT4.NewProc("NdrDcomAsyncStubCall")
+	procNdrEncapsulatedUnionBufferSize                  = modRPCRT4.NewProc("NdrEncapsulatedUnionBufferSize")
+	procNdrEncapsulatedUnionFree                        = modRPCRT4.NewProc("NdrEncapsulatedUnionFree")
+	procNdrEncapsulatedUnionMarshall                    = modRPCRT4.NewProc("NdrEncapsulatedUnionMarshall")
+	procNdrEncapsulatedUnionMemorySize                  = modRPCRT4.NewProc("NdrEncapsulatedUnionMemorySize")
+	procNdrEncapsulatedUnionUnmarshall                  = modRPCRT4.NewProc("NdrEncapsulatedUnionUnmarshall")
+	procNdrFixedArrayBufferSize                         = modRPCRT4.NewProc("NdrFixedArrayBufferSize")
+	procNdrFixedArrayFree                               = modRPCRT4.NewProc("NdrFixedArrayFree")
+	procNdrFixedArrayMarshall                           = modRPCRT4.NewProc("NdrFixedArrayMarshall")
+	procNdrFixedArrayMemorySize                         = modRPCRT4.NewProc("NdrFixedArrayMemorySize")
+	procNdrFixedArrayUnmarshall                         = modRPCRT4.NewProc("NdrFixedArrayUnmarshall")
+	procNdrFreeBuffer                                   = modRPCRT4.NewProc("NdrFreeBuffer")
+	procNdrFullPointerXlatFree                          = modRPCRT4.NewProc("NdrFullPointerXlatFree")
+	procNdrFullPointerXlatInit                          = modRPCRT4.NewProc("NdrFullPointerXlatInit")
+	procNdrGetBuffer                                    = modRPCRT4.NewProc("NdrGetBuffer")
+	procNdrGetDcomProtocolVersion                       = modRPCRT4.NewProc("NdrGetDcomProtocolVersion")
+	procNdrGetUserMarshalInfo                           = modRPCRT4.NewProc("NdrGetUserMarshalInfo")
+	procNdrInterfacePointerBufferSize                   = modRPCRT4.NewProc("NdrInterfacePointerBufferSize")
+	procNdrInterfacePointerFree                         = modRPCRT4.NewProc("NdrInterfacePointerFree")
+	procNdrInterfacePointerMarshall                     = modRPCRT4.NewProc("NdrInterfacePointerMarshall")
+	procNdrInterfacePointerMemorySize                   = modRPCRT4.NewProc("NdrInterfacePointerMemorySize")
+	procNdrInterfacePointerUnmarshall                   = modRPCRT4.NewProc("NdrInterfacePointerUnmarshall")
+	procNdrMapCommAndFaultStatus                        = modRPCRT4.NewProc("NdrMapCommAndFaultStatus")
+	procNdrMesProcEncodeDecode                          = modRPCRT4.NewProc("NdrMesProcEncodeDecode")
+	procNdrMesProcEncodeDecode2                         = modRPCRT4.NewProc("NdrMesProcEncodeDecode2")
+	procNdrMesProcEncodeDecode3                         = modRPCRT4.NewProc("NdrMesProcEncodeDecode3")
+	procNdrMesSimpleTypeAlignSize                       = modRPCRT4.NewProc("NdrMesSimpleTypeAlignSize")
+	procNdrMesSimpleTypeAlignSizeAll                    = modRPCRT4.NewProc("NdrMesSimpleTypeAlignSizeAll")
+	procNdrMesSimpleTypeDecode                          = modRPCRT4.NewProc("NdrMesSimpleTypeDecode")
+	procNdrMesSimpleTypeDecodeAll                       = modRPCRT4.NewProc("NdrMesSimpleTypeDecodeAll")
+	procNdrMesSimpleTypeEncode                          = modRPCRT4.NewProc("NdrMesSimpleTypeEncode")
+	procNdrMesSimpleTypeEncodeAll                       = modRPCRT4.NewProc("NdrMesSimpleTypeEncodeAll")
+	procNdrMesTypeAlignSize                             = modRPCRT4.NewProc("NdrMesTypeAlignSize")
+	procNdrMesTypeAlignSize2                            = modRPCRT4.NewProc("NdrMesTypeAlignSize2")
+	procNdrMesTypeAlignSize3                            = modRPCRT4.NewProc("NdrMesTypeAlignSize3")
+	procNdrMesTypeDecode                                = modRPCRT4.NewProc("NdrMesTypeDecode")
+	procNdrMesTypeDecode2                               = modRPCRT4.NewProc("NdrMesTypeDecode2")
+	procNdrMesTypeDecode3                               = modRPCRT4.NewProc("NdrMesTypeDecode3")
+	procNdrMesTypeEncode                                = modRPCRT4.NewProc("NdrMesTypeEncode")
+	procNdrMesTypeEncode2                               = modRPCRT4.NewProc("NdrMesTypeEncode2")
+	procNdrMesTypeEncode3                               = modRPCRT4.NewProc("NdrMesTypeEncode3")
+	procNdrMesTypeFree2                                 = modRPCRT4.NewProc("NdrMesTypeFree2")
+	procNdrMesTypeFree3                                 = modRPCRT4.NewProc("NdrMesTypeFree3")
+	procNdrNonConformantStringBufferSize                = modRPCRT4.NewProc("NdrNonConformantStringBufferSize")
+	procNdrNonConformantStringMarshall                  = modRPCRT4.NewProc("NdrNonConformantStringMarshall")
+	procNdrNonConformantStringMemorySize                = modRPCRT4.NewProc("NdrNonConformantStringMemorySize")
+	procNdrNonConformantStringUnmarshall                = modRPCRT4.NewProc("NdrNonConformantStringUnmarshall")
+	procNdrNonEncapsulatedUnionBufferSize               = modRPCRT4.NewProc("NdrNonEncapsulatedUnionBufferSize")
+	procNdrNonEncapsulatedUnionFree                     = modRPCRT4.NewProc("NdrNonEncapsulatedUnionFree")
+	procNdrNonEncapsulatedUnionMarshall                 = modRPCRT4.NewProc("NdrNonEncapsulatedUnionMarshall")
+	procNdrNonEncapsulatedUnionMemorySize               = modRPCRT4.NewProc("NdrNonEncapsulatedUnionMemorySize")
+	procNdrNonEncapsulatedUnionUnmarshall               = modRPCRT4.NewProc("NdrNonEncapsulatedUnionUnmarshall")
+	procNdrNsGetBuffer                                  = modRPCRT4.NewProc("NdrNsGetBuffer")
+	procNdrNsSendReceive                                = modRPCRT4.NewProc("NdrNsSendReceive")
+	procNdrOleAllocate                                  = modRPCRT4.NewProc("NdrOleAllocate")
+	procNdrOleFree                                      = modRPCRT4.NewProc("NdrOleFree")
+	procNdrPartialIgnoreClientBufferSize                = modRPCRT4.NewProc("NdrPartialIgnoreClientBufferSize")
+	procNdrPartialIgnoreClientMarshall                  = modRPCRT4.NewProc("NdrPartialIgnoreClientMarshall")
+	procNdrPartialIgnoreServerInitialize                = modRPCRT4.NewProc("NdrPartialIgnoreServerInitialize")
+	procNdrPartialIgnoreServerUnmarshall                = modRPCRT4.NewProc("NdrPartialIgnoreServerUnmarshall")
+	procNdrPointerBufferSize                            = modRPCRT4.NewProc("NdrPointerBufferSize")
+	procNdrPointerFree                                  = modRPCRT4.NewProc("NdrPointerFree")
+	procNdrPointerMarshall                              = modRPCRT4.NewProc("NdrPointerMarshall")
+	procNdrPointerMemorySize                            = modRPCRT4.NewProc("NdrPointerMemorySize")
+	procNdrPointerUnmarshall                            = modRPCRT4.NewProc("NdrPointerUnmarshall")
+	procNdrRangeUnmarshall                              = modRPCRT4.NewProc("NdrRangeUnmarshall")
+	procNdrRpcSmClientAllocate                          = modRPCRT4.NewProc("NdrRpcSmClientAllocate")
+	procNdrRpcSmClientFree                              = modRPCRT4.NewProc("NdrRpcSmClientFree")
+	procNdrRpcSmSetClientToOsf                          = modRPCRT4.NewProc("NdrRpcSmSetClientToOsf")
+	procNdrRpcSsDefaultAllocate                         = modRPCRT4.NewProc("NdrRpcSsDefaultAllocate")
+	procNdrRpcSsDefaultFree                             = modRPCRT4.NewProc("NdrRpcSsDefaultFree")
+	procNdrRpcSsDisableAllocate                         = modRPCRT4.NewProc("NdrRpcSsDisableAllocate")
+	procNdrRpcSsEnableAllocate                          = modRPCRT4.NewProc("NdrRpcSsEnableAllocate")
+	procNdrSendReceive                                  = modRPCRT4.NewProc("NdrSendReceive")
+	procNdrServerCall2                                  = modRPCRT4.NewProc("NdrServerCall2")
+	procNdrServerCallAll                                = modRPCRT4.NewProc("NdrServerCallAll")
+	procNdrServerCallNdr64                              = modRPCRT4.NewProc("NdrServerCallNdr64")
+	procNdrServerContextMarshall                        = modRPCRT4.NewProc("NdrServerContextMarshall")
+	procNdrServerContextNewMarshall                     = modRPCRT4.NewProc("NdrServerContextNewMarshall")
+	procNdrServerContextNewUnmarshall                   = modRPCRT4.NewProc("NdrServerContextNewUnmarshall")
+	procNdrServerContextUnmarshall                      = modRPCRT4.NewProc("NdrServerContextUnmarshall")
+	procNdrServerInitialize                             = modRPCRT4.NewProc("NdrServerInitialize")
+	procNdrServerInitializeMarshall                     = modRPCRT4.NewProc("NdrServerInitializeMarshall")
+	procNdrServerInitializeNew                          = modRPCRT4.NewProc("NdrServerInitializeNew")
+	procNdrServerInitializePartial                      = modRPCRT4.NewProc("NdrServerInitializePartial")
+	procNdrServerInitializeUnmarshall                   = modRPCRT4.NewProc("NdrServerInitializeUnmarshall")
+	procNdrSimpleStructBufferSize                       = modRPCRT4.NewProc("NdrSimpleStructBufferSize")
+	procNdrSimpleStructFree                             = modRPCRT4.NewProc("NdrSimpleStructFree")
+	procNdrSimpleStructMarshall                         = modRPCRT4.NewProc("NdrSimpleStructMarshall")
+	procNdrSimpleStructMemorySize                       = modRPCRT4.NewProc("NdrSimpleStructMemorySize")
+	procNdrSimpleStructUnmarshall                       = modRPCRT4.NewProc("NdrSimpleStructUnmarshall")
+	procNdrSimpleTypeMarshall                           = modRPCRT4.NewProc("NdrSimpleTypeMarshall")
+	procNdrSimpleTypeUnmarshall                         = modRPCRT4.NewProc("NdrSimpleTypeUnmarshall")
+	procNdrStubCall2                                    = modRPCRT4.NewProc("NdrStubCall2")
+	procNdrStubCall3                                    = modRPCRT4.NewProc("NdrStubCall3")
+	procNdrUserMarshalBufferSize                        = modRPCRT4.NewProc("NdrUserMarshalBufferSize")
+	procNdrUserMarshalFree                              = modRPCRT4.NewProc("NdrUserMarshalFree")
+	procNdrUserMarshalMarshall                          = modRPCRT4.NewProc("NdrUserMarshalMarshall")
+	procNdrUserMarshalMemorySize                        = modRPCRT4.NewProc("NdrUserMarshalMemorySize")
+	procNdrUserMarshalSimpleTypeConvert                 = modRPCRT4.NewProc("NdrUserMarshalSimpleTypeConvert")
+	procNdrUserMarshalUnmarshall                        = modRPCRT4.NewProc("NdrUserMarshalUnmarshall")
+	procNdrVaryingArrayBufferSize                       = modRPCRT4.NewProc("NdrVaryingArrayBufferSize")
+	procNdrVaryingArrayFree                             = modRPCRT4.NewProc("NdrVaryingArrayFree")
+	procNdrVaryingArrayMarshall                         = modRPCRT4.NewProc("NdrVaryingArrayMarshall")
+	procNdrVaryingArrayMemorySize                       = modRPCRT4.NewProc("NdrVaryingArrayMemorySize")
+	procNdrVaryingArrayUnmarshall                       = modRPCRT4.NewProc("NdrVaryingArrayUnmarshall")
+	procNdrXmitOrRepAsBufferSize                        = modRPCRT4.NewProc("NdrXmitOrRepAsBufferSize")
+	procNdrXmitOrRepAsFree                              = modRPCRT4.NewProc("NdrXmitOrRepAsFree")
+	procNdrXmitOrRepAsMarshall                          = modRPCRT4.NewProc("NdrXmitOrRepAsMarshall")
+	procNdrXmitOrRepAsMemorySize                        = modRPCRT4.NewProc("NdrXmitOrRepAsMemorySize")
+	procNdrXmitOrRepAsUnmarshall                        = modRPCRT4.NewProc("NdrXmitOrRepAsUnmarshall")
+	procRpcAsyncAbortCall                               = modRPCRT4.NewProc("RpcAsyncAbortCall")
+	procRpcAsyncCancelCall                              = modRPCRT4.NewProc("RpcAsyncCancelCall")
+	procRpcAsyncCompleteCall                            = modRPCRT4.NewProc("RpcAsyncCompleteCall")
+	procRpcAsyncGetCallStatus                           = modRPCRT4.NewProc("RpcAsyncGetCallStatus")
+	procRpcAsyncInitializeHandle                        = modRPCRT4.NewProc("RpcAsyncInitializeHandle")
+	procRpcAsyncRegisterInfo                            = modRPCRT4.NewProc("RpcAsyncRegisterInfo")
+	procRpcBindingBind                                  = modRPCRT4.NewProc("RpcBindingBind")
+	procRpcBindingCopy                                  = modRPCRT4.NewProc("RpcBindingCopy")
+	procRpcBindingCreate                                = modRPCRT4.NewProc("RpcBindingCreateW")
+	procRpcBindingCreateA                               = modRPCRT4.NewProc("RpcBindingCreateA")
+	procRpcBindingFree                                  = modRPCRT4.NewProc("RpcBindingFree")
+	procRpcBindingFromStringBinding                     = modRPCRT4.NewProc("RpcBindingFromStringBindingW")
+	procRpcBindingFromStringBindingA                    = modRPCRT4.NewProc("RpcBindingFromStringBindingA")
+	procRpcBindingInqAuthClient                         = modRPCRT4.NewProc("RpcBindingInqAuthClientW")
+	procRpcBindingInqAuthClientA                        = modRPCRT4.NewProc("RpcBindingInqAuthClientA")
+	procRpcBindingInqAuthClientEx                       = modRPCRT4.NewProc("RpcBindingInqAuthClientExW")
+	procRpcBindingInqAuthClientExA                      = modRPCRT4.NewProc("RpcBindingInqAuthClientExA")
+	procRpcBindingInqAuthInfo                           = modRPCRT4.NewProc("RpcBindingInqAuthInfoW")
+	procRpcBindingInqAuthInfoA                          = modRPCRT4.NewProc("RpcBindingInqAuthInfoA")
+	procRpcBindingInqAuthInfoEx                         = modRPCRT4.NewProc("RpcBindingInqAuthInfoExW")
+	procRpcBindingInqAuthInfoExA                        = modRPCRT4.NewProc("RpcBindingInqAuthInfoExA")
+	procRpcBindingInqMaxCalls                           = modRPCRT4.NewProc("RpcBindingInqMaxCalls")
+	procRpcBindingInqObject                             = modRPCRT4.NewProc("RpcBindingInqObject")
+	procRpcBindingInqOption                             = modRPCRT4.NewProc("RpcBindingInqOption")
+	procRpcBindingReset                                 = modRPCRT4.NewProc("RpcBindingReset")
+	procRpcBindingServerFromClient                      = modRPCRT4.NewProc("RpcBindingServerFromClient")
+	procRpcBindingSetAuthInfo                           = modRPCRT4.NewProc("RpcBindingSetAuthInfoW")
+	procRpcBindingSetAuthInfoA                          = modRPCRT4.NewProc("RpcBindingSetAuthInfoA")
+	procRpcBindingSetAuthInfoEx                         = modRPCRT4.NewProc("RpcBindingSetAuthInfoExW")
+	procRpcBindingSetAuthInfoExA                        = modRPCRT4.NewProc("RpcBindingSetAuthInfoExA")
+	procRpcBindingSetObject                             = modRPCRT4.NewProc("RpcBindingSetObject")
+	procRpcBindingSetOption                             = modRPCRT4.NewProc("RpcBindingSetOption")
+	procRpcBindingToStringBinding                       = modRPCRT4.NewProc("RpcBindingToStringBindingW")
+	procRpcBindingToStringBindingA                      = modRPCRT4.NewProc("RpcBindingToStringBindingA")
+	procRpcBindingUnbind                                = modRPCRT4.NewProc("RpcBindingUnbind")
+	procRpcBindingVectorFree                            = modRPCRT4.NewProc("RpcBindingVectorFree")
+	procRpcCancelThread                                 = modRPCRT4.NewProc("RpcCancelThread")
+	procRpcCancelThreadEx                               = modRPCRT4.NewProc("RpcCancelThreadEx")
+	procRpcCertGeneratePrincipalName                    = modRPCRT4.NewProc("RpcCertGeneratePrincipalNameW")
+	procRpcCertGeneratePrincipalNameA                   = modRPCRT4.NewProc("RpcCertGeneratePrincipalNameA")
+	procRpcEpRegister                                   = modRPCRT4.NewProc("RpcEpRegisterW")
+	procRpcEpRegisterA                                  = modRPCRT4.NewProc("RpcEpRegisterA")
+	procRpcEpRegisterNoReplace                          = modRPCRT4.NewProc("RpcEpRegisterNoReplaceW")
+	procRpcEpRegisterNoReplaceA                         = modRPCRT4.NewProc("RpcEpRegisterNoReplaceA")
+	procRpcEpResolveBinding                             = modRPCRT4.NewProc("RpcEpResolveBinding")
+	procRpcEpUnregister                                 = modRPCRT4.NewProc("RpcEpUnregister")
+	procRpcErrorAddRecord                               = modRPCRT4.NewProc("RpcErrorAddRecord")
+	procRpcErrorClearInformation                        = modRPCRT4.NewProc("RpcErrorClearInformation")
+	procRpcErrorEndEnumeration                          = modRPCRT4.NewProc("RpcErrorEndEnumeration")
+	procRpcErrorGetNextRecord                           = modRPCRT4.NewProc("RpcErrorGetNextRecord")
+	procRpcErrorGetNumberOfRecords                      = modRPCRT4.NewProc("RpcErrorGetNumberOfRecords")
+	procRpcErrorLoadErrorInfo                           = modRPCRT4.NewProc("RpcErrorLoadErrorInfo")
+	procRpcErrorResetEnumeration                        = modRPCRT4.NewProc("RpcErrorResetEnumeration")
+	procRpcErrorSaveErrorInfo                           = modRPCRT4.NewProc("RpcErrorSaveErrorInfo")
+	procRpcErrorStartEnumeration                        = modRPCRT4.NewProc("RpcErrorStartEnumeration")
+	procRpcExceptionFilter                              = modRPCRT4.NewProc("RpcExceptionFilter")
+	procRpcFreeAuthorizationContext                     = modRPCRT4.NewProc("RpcFreeAuthorizationContext")
+	procRpcGetAuthorizationContextForClient             = modRPCRT4.NewProc("RpcGetAuthorizationContextForClient")
+	procRpcIfInqId                                      = modRPCRT4.NewProc("RpcIfInqId")
+	procRpcImpersonateClient                            = modRPCRT4.NewProc("RpcImpersonateClient")
+	procRpcImpersonateClient2                           = modRPCRT4.NewProc("RpcImpersonateClient2")
+	procRpcImpersonateClientContainer                   = modRPCRT4.NewProc("RpcImpersonateClientContainer")
+	procRpcMgmtEnableIdleCleanup                        = modRPCRT4.NewProc("RpcMgmtEnableIdleCleanup")
+	procRpcMgmtEpEltInqBegin                            = modRPCRT4.NewProc("RpcMgmtEpEltInqBegin")
+	procRpcMgmtEpEltInqDone                             = modRPCRT4.NewProc("RpcMgmtEpEltInqDone")
+	procRpcMgmtEpEltInqNext                             = modRPCRT4.NewProc("RpcMgmtEpEltInqNextW")
+	procRpcMgmtEpEltInqNextA                            = modRPCRT4.NewProc("RpcMgmtEpEltInqNextA")
+	procRpcMgmtEpUnregister                             = modRPCRT4.NewProc("RpcMgmtEpUnregister")
+	procRpcMgmtInqComTimeout                            = modRPCRT4.NewProc("RpcMgmtInqComTimeout")
+	procRpcMgmtInqDefaultProtectLevel                   = modRPCRT4.NewProc("RpcMgmtInqDefaultProtectLevel")
+	procRpcMgmtInqIfIds                                 = modRPCRT4.NewProc("RpcMgmtInqIfIds")
+	procRpcMgmtInqServerPrincName                       = modRPCRT4.NewProc("RpcMgmtInqServerPrincNameW")
+	procRpcMgmtInqServerPrincNameA                      = modRPCRT4.NewProc("RpcMgmtInqServerPrincNameA")
+	procRpcMgmtInqStats                                 = modRPCRT4.NewProc("RpcMgmtInqStats")
+	procRpcMgmtIsServerListening                        = modRPCRT4.NewProc("RpcMgmtIsServerListening")
+	procRpcMgmtSetAuthorizationFn                       = modRPCRT4.NewProc("RpcMgmtSetAuthorizationFn")
+	procRpcMgmtSetCancelTimeout                         = modRPCRT4.NewProc("RpcMgmtSetCancelTimeout")
+	procRpcMgmtSetComTimeout                            = modRPCRT4.NewProc("RpcMgmtSetComTimeout")
+	procRpcMgmtSetServerStackSize                       = modRPCRT4.NewProc("RpcMgmtSetServerStackSize")
+	procRpcMgmtStatsVectorFree                          = modRPCRT4.NewProc("RpcMgmtStatsVectorFree")
+	procRpcMgmtStopServerListening                      = modRPCRT4.NewProc("RpcMgmtStopServerListening")
+	procRpcMgmtWaitServerListen                         = modRPCRT4.NewProc("RpcMgmtWaitServerListen")
+	procRpcNetworkInqProtseqs                           = modRPCRT4.NewProc("RpcNetworkInqProtseqsW")
+	procRpcNetworkInqProtseqsA                          = modRPCRT4.NewProc("RpcNetworkInqProtseqsA")
+	procRpcNetworkIsProtseqValid                        = modRPCRT4.NewProc("RpcNetworkIsProtseqValidW")
+	procRpcNetworkIsProtseqValidA                       = modRPCRT4.NewProc("RpcNetworkIsProtseqValidA")
+	procRpcNsBindingInqEntryName                        = modRPCRT4.NewProc("RpcNsBindingInqEntryNameW")
+	procRpcNsBindingInqEntryNameA                       = modRPCRT4.NewProc("RpcNsBindingInqEntryNameA")
+	procRpcObjectInqType                                = modRPCRT4.NewProc("RpcObjectInqType")
+	procRpcObjectSetInqFn                               = modRPCRT4.NewProc("RpcObjectSetInqFn")
+	procRpcObjectSetType                                = modRPCRT4.NewProc("RpcObjectSetType")
+	procRpcProtseqVectorFree                            = modRPCRT4.NewProc("RpcProtseqVectorFreeW")
+	procRpcProtseqVectorFreeA                           = modRPCRT4.NewProc("RpcProtseqVectorFreeA")
+	procRpcRaiseException                               = modRPCRT4.NewProc("RpcRaiseException")
+	procRpcRevertContainerImpersonation                 = modRPCRT4.NewProc("RpcRevertContainerImpersonation")
+	procRpcRevertToSelf                                 = modRPCRT4.NewProc("RpcRevertToSelf")
+	procRpcRevertToSelfEx                               = modRPCRT4.NewProc("RpcRevertToSelfEx")
+	procRpcServerCompleteSecurityCallback               = modRPCRT4.NewProc("RpcServerCompleteSecurityCallback")
+	procRpcServerInqBindingHandle                       = modRPCRT4.NewProc("RpcServerInqBindingHandle")
+	procRpcServerInqBindings                            = modRPCRT4.NewProc("RpcServerInqBindings")
+	procRpcServerInqBindingsEx                          = modRPCRT4.NewProc("RpcServerInqBindingsEx")
+	procRpcServerInqCallAttributes                      = modRPCRT4.NewProc("RpcServerInqCallAttributesW")
+	procRpcServerInqCallAttributesA                     = modRPCRT4.NewProc("RpcServerInqCallAttributesA")
+	procRpcServerInqDefaultPrincName                    = modRPCRT4.NewProc("RpcServerInqDefaultPrincNameW")
+	procRpcServerInqDefaultPrincNameA                   = modRPCRT4.NewProc("RpcServerInqDefaultPrincNameA")
+	procRpcServerInqIf                                  = modRPCRT4.NewProc("RpcServerInqIf")
+	procRpcServerInterfaceGroupActivate                 = modRPCRT4.NewProc("RpcServerInterfaceGroupActivate")
+	procRpcServerInterfaceGroupClose                    = modRPCRT4.NewProc("RpcServerInterfaceGroupClose")
+	procRpcServerInterfaceGroupCreate                   = modRPCRT4.NewProc("RpcServerInterfaceGroupCreateW")
+	procRpcServerInterfaceGroupCreateA                  = modRPCRT4.NewProc("RpcServerInterfaceGroupCreateA")
+	procRpcServerInterfaceGroupDeactivate               = modRPCRT4.NewProc("RpcServerInterfaceGroupDeactivate")
+	procRpcServerInterfaceGroupInqBindings              = modRPCRT4.NewProc("RpcServerInterfaceGroupInqBindings")
+	procRpcServerListen                                 = modRPCRT4.NewProc("RpcServerListen")
+	procRpcServerRegisterAuthInfo                       = modRPCRT4.NewProc("RpcServerRegisterAuthInfoW")
+	procRpcServerRegisterAuthInfoA                      = modRPCRT4.NewProc("RpcServerRegisterAuthInfoA")
+	procRpcServerRegisterIf                             = modRPCRT4.NewProc("RpcServerRegisterIf")
+	procRpcServerRegisterIf2                            = modRPCRT4.NewProc("RpcServerRegisterIf2")
+	procRpcServerRegisterIf3                            = modRPCRT4.NewProc("RpcServerRegisterIf3")
+	procRpcServerRegisterIfEx                           = modRPCRT4.NewProc("RpcServerRegisterIfEx")
+	procRpcServerSubscribeForNotification               = modRPCRT4.NewProc("RpcServerSubscribeForNotification")
+	procRpcServerTestCancel                             = modRPCRT4.NewProc("RpcServerTestCancel")
+	procRpcServerUnregisterIf                           = modRPCRT4.NewProc("RpcServerUnregisterIf")
+	procRpcServerUnregisterIfEx                         = modRPCRT4.NewProc("RpcServerUnregisterIfEx")
+	procRpcServerUnsubscribeForNotification             = modRPCRT4.NewProc("RpcServerUnsubscribeForNotification")
+	procRpcServerUseAllProtseqs                         = modRPCRT4.NewProc("RpcServerUseAllProtseqs")
+	procRpcServerUseAllProtseqsEx                       = modRPCRT4.NewProc("RpcServerUseAllProtseqsEx")
+	procRpcServerUseAllProtseqsIf                       = modRPCRT4.NewProc("RpcServerUseAllProtseqsIf")
+	procRpcServerUseAllProtseqsIfEx                     = modRPCRT4.NewProc("RpcServerUseAllProtseqsIfEx")
+	procRpcServerUseProtseq                             = modRPCRT4.NewProc("RpcServerUseProtseqW")
+	procRpcServerUseProtseqA                            = modRPCRT4.NewProc("RpcServerUseProtseqA")
+	procRpcServerUseProtseqEp                           = modRPCRT4.NewProc("RpcServerUseProtseqEpW")
+	procRpcServerUseProtseqEpA                          = modRPCRT4.NewProc("RpcServerUseProtseqEpA")
+	procRpcServerUseProtseqEpEx                         = modRPCRT4.NewProc("RpcServerUseProtseqEpExW")
+	procRpcServerUseProtseqEpExA                        = modRPCRT4.NewProc("RpcServerUseProtseqEpExA")
+	procRpcServerUseProtseqEx                           = modRPCRT4.NewProc("RpcServerUseProtseqExW")
+	procRpcServerUseProtseqExA                          = modRPCRT4.NewProc("RpcServerUseProtseqExA")
+	procRpcServerUseProtseqIf                           = modRPCRT4.NewProc("RpcServerUseProtseqIfW")
+	procRpcServerUseProtseqIfA                          = modRPCRT4.NewProc("RpcServerUseProtseqIfA")
+	procRpcServerUseProtseqIfEx                         = modRPCRT4.NewProc("RpcServerUseProtseqIfExW")
+	procRpcServerUseProtseqIfExA                        = modRPCRT4.NewProc("RpcServerUseProtseqIfExA")
+	procRpcServerYield                                  = modRPCRT4.NewProc("RpcServerYield")
+	procRpcSmAllocate                                   = modRPCRT4.NewProc("RpcSmAllocate")
+	procRpcSmClientFree                                 = modRPCRT4.NewProc("RpcSmClientFree")
+	procRpcSmDestroyClientContext                       = modRPCRT4.NewProc("RpcSmDestroyClientContext")
+	procRpcSmDisableAllocate                            = modRPCRT4.NewProc("RpcSmDisableAllocate")
+	procRpcSmEnableAllocate                             = modRPCRT4.NewProc("RpcSmEnableAllocate")
+	procRpcSmFree                                       = modRPCRT4.NewProc("RpcSmFree")
+	procRpcSmGetThreadHandle                            = modRPCRT4.NewProc("RpcSmGetThreadHandle")
+	procRpcSmSetClientAllocFree                         = modRPCRT4.NewProc("RpcSmSetClientAllocFree")
+	procRpcSmSetThreadHandle                            = modRPCRT4.NewProc("RpcSmSetThreadHandle")
+	procRpcSmSwapClientAllocFree                        = modRPCRT4.NewProc("RpcSmSwapClientAllocFree")
+	procRpcSsAllocate                                   = modRPCRT4.NewProc("RpcSsAllocate")
+	procRpcSsContextLockExclusive                       = modRPCRT4.NewProc("RpcSsContextLockExclusive")
+	procRpcSsContextLockShared                          = modRPCRT4.NewProc("RpcSsContextLockShared")
+	procRpcSsDestroyClientContext                       = modRPCRT4.NewProc("RpcSsDestroyClientContext")
+	procRpcSsDisableAllocate                            = modRPCRT4.NewProc("RpcSsDisableAllocate")
+	procRpcSsDontSerializeContext                       = modRPCRT4.NewProc("RpcSsDontSerializeContext")
+	procRpcSsEnableAllocate                             = modRPCRT4.NewProc("RpcSsEnableAllocate")
+	procRpcSsFree                                       = modRPCRT4.NewProc("RpcSsFree")
+	procRpcSsGetContextBinding                          = modRPCRT4.NewProc("RpcSsGetContextBinding")
+	procRpcSsGetThreadHandle                            = modRPCRT4.NewProc("RpcSsGetThreadHandle")
+	procRpcSsSetClientAllocFree                         = modRPCRT4.NewProc("RpcSsSetClientAllocFree")
+	procRpcSsSetThreadHandle                            = modRPCRT4.NewProc("RpcSsSetThreadHandle")
+	procRpcSsSwapClientAllocFree                        = modRPCRT4.NewProc("RpcSsSwapClientAllocFree")
+	procRpcStringBindingCompose                         = modRPCRT4.NewProc("RpcStringBindingComposeW")
+	procRpcStringBindingComposeA                        = modRPCRT4.NewProc("RpcStringBindingComposeA")
+	procRpcStringBindingParse                           = modRPCRT4.NewProc("RpcStringBindingParseW")
+	procRpcStringBindingParseA                          = modRPCRT4.NewProc("RpcStringBindingParseA")
+	procRpcStringFree                                   = modRPCRT4.NewProc("RpcStringFreeW")
+	procRpcStringFreeA                                  = modRPCRT4.NewProc("RpcStringFreeA")
+	procRpcTestCancel                                   = modRPCRT4.NewProc("RpcTestCancel")
+	procRpcUserFree                                     = modRPCRT4.NewProc("RpcUserFree")
+	procUuidCompare                                     = modRPCRT4.NewProc("UuidCompare")
+	procUuidCreate                                      = modRPCRT4.NewProc("UuidCreate")
+	procUuidCreateNil                                   = modRPCRT4.NewProc("UuidCreateNil")
+	procUuidCreateSequential                            = modRPCRT4.NewProc("UuidCreateSequential")
+	procUuidEqual                                       = modRPCRT4.NewProc("UuidEqual")
+	procUuidFromString                                  = modRPCRT4.NewProc("UuidFromStringW")
+	procUuidFromStringA                                 = modRPCRT4.NewProc("UuidFromStringA")
+	procUuidHash                                        = modRPCRT4.NewProc("UuidHash")
+	procUuidIsNil                                       = modRPCRT4.NewProc("UuidIsNil")
+	procUuidToString                                    = modRPCRT4.NewProc("UuidToStringW")
+	procUuidToStringA                                   = modRPCRT4.NewProc("UuidToStringA")
 )
 
 // Procs exposes this package's lazily resolved exports for availability
@@ -534,1021 +535,1023 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
-	DceErrorInqText                                *win32.Proc
-	DceErrorInqTextA                               *win32.Proc
-	IUnknown_AddRef_Proxy                          *win32.Proc
-	IUnknown_QueryInterface_Proxy                  *win32.Proc
-	IUnknown_Release_Proxy                         *win32.Proc
-	I_RpcAllocate                                  *win32.Proc
-	I_RpcAsyncAbortCall                            *win32.Proc
-	I_RpcAsyncSetHandle                            *win32.Proc
-	I_RpcBindingCopy                               *win32.Proc
-	I_RpcBindingCreateNP                           *win32.Proc
-	I_RpcBindingHandleToAsyncHandle                *win32.Proc
-	I_RpcBindingInqClientTokenAttributes           *win32.Proc
-	I_RpcBindingInqDynamicEndpoint                 *win32.Proc
-	I_RpcBindingInqDynamicEndpointA                *win32.Proc
-	I_RpcBindingInqLocalClientPID                  *win32.Proc
-	I_RpcBindingInqMarshalledTargetInfo            *win32.Proc
-	I_RpcBindingInqSecurityContext                 *win32.Proc
-	I_RpcBindingInqSecurityContextKeyInfo          *win32.Proc
-	I_RpcBindingInqTransportType                   *win32.Proc
-	I_RpcBindingInqWireIdForSnego                  *win32.Proc
-	I_RpcBindingIsClientLocal                      *win32.Proc
-	I_RpcBindingIsServerLocal                      *win32.Proc
-	I_RpcBindingSetPrivateOption                   *win32.Proc
-	I_RpcBindingToStaticStringBindingW             *win32.Proc
-	I_RpcClearMutex                                *win32.Proc
-	I_RpcDeleteMutex                               *win32.Proc
-	I_RpcExceptionFilter                           *win32.Proc
-	I_RpcFree                                      *win32.Proc
-	I_RpcFreeBuffer                                *win32.Proc
-	I_RpcFreePipeBuffer                            *win32.Proc
-	I_RpcGetBuffer                                 *win32.Proc
-	I_RpcGetBufferWithObject                       *win32.Proc
-	I_RpcGetCurrentCallHandle                      *win32.Proc
-	I_RpcGetDefaultSD                              *win32.Proc
-	I_RpcGetExtendedError                          *win32.Proc
-	I_RpcIfInqTransferSyntaxes                     *win32.Proc
-	I_RpcMapWin32Status                            *win32.Proc
-	I_RpcMgmtEnableDedicatedThreadPool             *win32.Proc
-	I_RpcNegotiateTransferSyntax                   *win32.Proc
-	I_RpcNsBindingSetEntryName                     *win32.Proc
-	I_RpcNsBindingSetEntryNameA                    *win32.Proc
-	I_RpcNsGetBuffer                               *win32.Proc
-	I_RpcNsInterfaceExported                       *win32.Proc
-	I_RpcNsInterfaceUnexported                     *win32.Proc
-	I_RpcNsRaiseException                          *win32.Proc
-	I_RpcNsSendReceive                             *win32.Proc
-	I_RpcOpenClientProcess                         *win32.Proc
-	I_RpcPauseExecution                            *win32.Proc
-	I_RpcReBindBuffer                              *win32.Proc
-	I_RpcReallocPipeBuffer                         *win32.Proc
-	I_RpcReceive                                   *win32.Proc
-	I_RpcRecordCalloutFailure                      *win32.Proc
-	I_RpcRequestMutex                              *win32.Proc
-	I_RpcSend                                      *win32.Proc
-	I_RpcSendReceive                               *win32.Proc
-	I_RpcServerCheckClientRestriction              *win32.Proc
-	I_RpcServerDisableExceptionFilter              *win32.Proc
-	I_RpcServerGetAssociationID                    *win32.Proc
-	I_RpcServerInqAddressChangeFn                  *win32.Proc
-	I_RpcServerInqLocalConnAddress                 *win32.Proc
-	I_RpcServerInqRemoteConnAddress                *win32.Proc
-	I_RpcServerInqTransportType                    *win32.Proc
-	I_RpcServerRegisterForwardFunction             *win32.Proc
-	I_RpcServerSetAddressChangeFn                  *win32.Proc
-	I_RpcServerStartService                        *win32.Proc
-	I_RpcServerSubscribeForDisconnectNotification  *win32.Proc
-	I_RpcServerSubscribeForDisconnectNotification2 *win32.Proc
-	I_RpcServerUseProtseq2                         *win32.Proc
-	I_RpcServerUseProtseq2A                        *win32.Proc
-	I_RpcServerUseProtseqEp2                       *win32.Proc
-	I_RpcServerUseProtseqEp2A                      *win32.Proc
-	I_RpcSessionStrictContextHandle                *win32.Proc
-	I_RpcSsDontSerializeContext                    *win32.Proc
-	I_RpcSystemHandleTypeSpecificWork              *win32.Proc
-	I_RpcTurnOnEEInfoPropagation                   *win32.Proc
-	I_UuidCreate                                   *win32.Proc
-	MesBufferHandleReset                           *win32.Proc
-	MesDecodeBufferHandleCreate                    *win32.Proc
-	MesDecodeIncrementalHandleCreate               *win32.Proc
-	MesEncodeDynBufferHandleCreate                 *win32.Proc
-	MesEncodeFixedBufferHandleCreate               *win32.Proc
-	MesEncodeIncrementalHandleCreate               *win32.Proc
-	MesHandleFree                                  *win32.Proc
-	MesIncrementalHandleReset                      *win32.Proc
-	MesInqProcEncodingId                           *win32.Proc
-	NDRCContextBinding                             *win32.Proc
-	NDRCContextMarshall                            *win32.Proc
-	NDRCContextUnmarshall                          *win32.Proc
-	NDRSContextMarshall                            *win32.Proc
-	NDRSContextMarshall2                           *win32.Proc
-	NDRSContextMarshallEx                          *win32.Proc
-	NDRSContextUnmarshall                          *win32.Proc
-	NDRSContextUnmarshall2                         *win32.Proc
-	NDRSContextUnmarshallEx                        *win32.Proc
-	Ndr64AsyncClientCall                           *win32.Proc
-	Ndr64AsyncServerCall64                         *win32.Proc
-	Ndr64AsyncServerCallAll                        *win32.Proc
-	Ndr64DcomAsyncClientCall                       *win32.Proc
-	Ndr64DcomAsyncStubCall                         *win32.Proc
-	NdrAllocate                                    *win32.Proc
-	NdrAsyncClientCall                             *win32.Proc
-	NdrAsyncServerCall                             *win32.Proc
-	NdrByteCountPointerBufferSize                  *win32.Proc
-	NdrByteCountPointerFree                        *win32.Proc
-	NdrByteCountPointerMarshall                    *win32.Proc
-	NdrByteCountPointerUnmarshall                  *win32.Proc
-	NdrClearOutParameters                          *win32.Proc
-	NdrClientCall2                                 *win32.Proc
-	NdrClientCall3                                 *win32.Proc
-	NdrClientContextMarshall                       *win32.Proc
-	NdrClientContextUnmarshall                     *win32.Proc
-	NdrClientInitialize                            *win32.Proc
-	NdrClientInitializeNew                         *win32.Proc
-	NdrComplexArrayBufferSize                      *win32.Proc
-	NdrComplexArrayFree                            *win32.Proc
-	NdrComplexArrayMarshall                        *win32.Proc
-	NdrComplexArrayMemorySize                      *win32.Proc
-	NdrComplexArrayUnmarshall                      *win32.Proc
-	NdrComplexStructBufferSize                     *win32.Proc
-	NdrComplexStructFree                           *win32.Proc
-	NdrComplexStructMarshall                       *win32.Proc
-	NdrComplexStructMemorySize                     *win32.Proc
-	NdrComplexStructUnmarshall                     *win32.Proc
-	NdrConformantArrayBufferSize                   *win32.Proc
-	NdrConformantArrayFree                         *win32.Proc
-	NdrConformantArrayMarshall                     *win32.Proc
-	NdrConformantArrayMemorySize                   *win32.Proc
-	NdrConformantArrayUnmarshall                   *win32.Proc
-	NdrConformantStringBufferSize                  *win32.Proc
-	NdrConformantStringMarshall                    *win32.Proc
-	NdrConformantStringMemorySize                  *win32.Proc
-	NdrConformantStringUnmarshall                  *win32.Proc
-	NdrConformantStructBufferSize                  *win32.Proc
-	NdrConformantStructFree                        *win32.Proc
-	NdrConformantStructMarshall                    *win32.Proc
-	NdrConformantStructMemorySize                  *win32.Proc
-	NdrConformantStructUnmarshall                  *win32.Proc
-	NdrConformantVaryingArrayBufferSize            *win32.Proc
-	NdrConformantVaryingArrayFree                  *win32.Proc
-	NdrConformantVaryingArrayMarshall              *win32.Proc
-	NdrConformantVaryingArrayMemorySize            *win32.Proc
-	NdrConformantVaryingArrayUnmarshall            *win32.Proc
-	NdrConformantVaryingStructBufferSize           *win32.Proc
-	NdrConformantVaryingStructFree                 *win32.Proc
-	NdrConformantVaryingStructMarshall             *win32.Proc
-	NdrConformantVaryingStructMemorySize           *win32.Proc
-	NdrConformantVaryingStructUnmarshall           *win32.Proc
-	NdrContextHandleInitialize                     *win32.Proc
-	NdrContextHandleSize                           *win32.Proc
-	NdrConvert                                     *win32.Proc
-	NdrConvert2                                    *win32.Proc
-	NdrCorrelationFree                             *win32.Proc
-	NdrCorrelationInitialize                       *win32.Proc
-	NdrCorrelationPass                             *win32.Proc
-	NdrCreateServerInterfaceFromStub               *win32.Proc
-	NdrDcomAsyncClientCall                         *win32.Proc
-	NdrDcomAsyncStubCall                           *win32.Proc
-	NdrEncapsulatedUnionBufferSize                 *win32.Proc
-	NdrEncapsulatedUnionFree                       *win32.Proc
-	NdrEncapsulatedUnionMarshall                   *win32.Proc
-	NdrEncapsulatedUnionMemorySize                 *win32.Proc
-	NdrEncapsulatedUnionUnmarshall                 *win32.Proc
-	NdrFixedArrayBufferSize                        *win32.Proc
-	NdrFixedArrayFree                              *win32.Proc
-	NdrFixedArrayMarshall                          *win32.Proc
-	NdrFixedArrayMemorySize                        *win32.Proc
-	NdrFixedArrayUnmarshall                        *win32.Proc
-	NdrFreeBuffer                                  *win32.Proc
-	NdrFullPointerXlatFree                         *win32.Proc
-	NdrFullPointerXlatInit                         *win32.Proc
-	NdrGetBuffer                                   *win32.Proc
-	NdrGetDcomProtocolVersion                      *win32.Proc
-	NdrGetUserMarshalInfo                          *win32.Proc
-	NdrInterfacePointerBufferSize                  *win32.Proc
-	NdrInterfacePointerFree                        *win32.Proc
-	NdrInterfacePointerMarshall                    *win32.Proc
-	NdrInterfacePointerMemorySize                  *win32.Proc
-	NdrInterfacePointerUnmarshall                  *win32.Proc
-	NdrMapCommAndFaultStatus                       *win32.Proc
-	NdrMesProcEncodeDecode                         *win32.Proc
-	NdrMesProcEncodeDecode2                        *win32.Proc
-	NdrMesProcEncodeDecode3                        *win32.Proc
-	NdrMesSimpleTypeAlignSize                      *win32.Proc
-	NdrMesSimpleTypeAlignSizeAll                   *win32.Proc
-	NdrMesSimpleTypeDecode                         *win32.Proc
-	NdrMesSimpleTypeDecodeAll                      *win32.Proc
-	NdrMesSimpleTypeEncode                         *win32.Proc
-	NdrMesSimpleTypeEncodeAll                      *win32.Proc
-	NdrMesTypeAlignSize                            *win32.Proc
-	NdrMesTypeAlignSize2                           *win32.Proc
-	NdrMesTypeAlignSize3                           *win32.Proc
-	NdrMesTypeDecode                               *win32.Proc
-	NdrMesTypeDecode2                              *win32.Proc
-	NdrMesTypeDecode3                              *win32.Proc
-	NdrMesTypeEncode                               *win32.Proc
-	NdrMesTypeEncode2                              *win32.Proc
-	NdrMesTypeEncode3                              *win32.Proc
-	NdrMesTypeFree2                                *win32.Proc
-	NdrMesTypeFree3                                *win32.Proc
-	NdrNonConformantStringBufferSize               *win32.Proc
-	NdrNonConformantStringMarshall                 *win32.Proc
-	NdrNonConformantStringMemorySize               *win32.Proc
-	NdrNonConformantStringUnmarshall               *win32.Proc
-	NdrNonEncapsulatedUnionBufferSize              *win32.Proc
-	NdrNonEncapsulatedUnionFree                    *win32.Proc
-	NdrNonEncapsulatedUnionMarshall                *win32.Proc
-	NdrNonEncapsulatedUnionMemorySize              *win32.Proc
-	NdrNonEncapsulatedUnionUnmarshall              *win32.Proc
-	NdrNsGetBuffer                                 *win32.Proc
-	NdrNsSendReceive                               *win32.Proc
-	NdrOleAllocate                                 *win32.Proc
-	NdrOleFree                                     *win32.Proc
-	NdrPartialIgnoreClientBufferSize               *win32.Proc
-	NdrPartialIgnoreClientMarshall                 *win32.Proc
-	NdrPartialIgnoreServerInitialize               *win32.Proc
-	NdrPartialIgnoreServerUnmarshall               *win32.Proc
-	NdrPointerBufferSize                           *win32.Proc
-	NdrPointerFree                                 *win32.Proc
-	NdrPointerMarshall                             *win32.Proc
-	NdrPointerMemorySize                           *win32.Proc
-	NdrPointerUnmarshall                           *win32.Proc
-	NdrRangeUnmarshall                             *win32.Proc
-	NdrRpcSmClientAllocate                         *win32.Proc
-	NdrRpcSmClientFree                             *win32.Proc
-	NdrRpcSmSetClientToOsf                         *win32.Proc
-	NdrRpcSsDefaultAllocate                        *win32.Proc
-	NdrRpcSsDefaultFree                            *win32.Proc
-	NdrRpcSsDisableAllocate                        *win32.Proc
-	NdrRpcSsEnableAllocate                         *win32.Proc
-	NdrSendReceive                                 *win32.Proc
-	NdrServerCall2                                 *win32.Proc
-	NdrServerCallAll                               *win32.Proc
-	NdrServerCallNdr64                             *win32.Proc
-	NdrServerContextMarshall                       *win32.Proc
-	NdrServerContextNewMarshall                    *win32.Proc
-	NdrServerContextNewUnmarshall                  *win32.Proc
-	NdrServerContextUnmarshall                     *win32.Proc
-	NdrServerInitialize                            *win32.Proc
-	NdrServerInitializeMarshall                    *win32.Proc
-	NdrServerInitializeNew                         *win32.Proc
-	NdrServerInitializePartial                     *win32.Proc
-	NdrServerInitializeUnmarshall                  *win32.Proc
-	NdrSimpleStructBufferSize                      *win32.Proc
-	NdrSimpleStructFree                            *win32.Proc
-	NdrSimpleStructMarshall                        *win32.Proc
-	NdrSimpleStructMemorySize                      *win32.Proc
-	NdrSimpleStructUnmarshall                      *win32.Proc
-	NdrSimpleTypeMarshall                          *win32.Proc
-	NdrSimpleTypeUnmarshall                        *win32.Proc
-	NdrStubCall2                                   *win32.Proc
-	NdrStubCall3                                   *win32.Proc
-	NdrUserMarshalBufferSize                       *win32.Proc
-	NdrUserMarshalFree                             *win32.Proc
-	NdrUserMarshalMarshall                         *win32.Proc
-	NdrUserMarshalMemorySize                       *win32.Proc
-	NdrUserMarshalSimpleTypeConvert                *win32.Proc
-	NdrUserMarshalUnmarshall                       *win32.Proc
-	NdrVaryingArrayBufferSize                      *win32.Proc
-	NdrVaryingArrayFree                            *win32.Proc
-	NdrVaryingArrayMarshall                        *win32.Proc
-	NdrVaryingArrayMemorySize                      *win32.Proc
-	NdrVaryingArrayUnmarshall                      *win32.Proc
-	NdrXmitOrRepAsBufferSize                       *win32.Proc
-	NdrXmitOrRepAsFree                             *win32.Proc
-	NdrXmitOrRepAsMarshall                         *win32.Proc
-	NdrXmitOrRepAsMemorySize                       *win32.Proc
-	NdrXmitOrRepAsUnmarshall                       *win32.Proc
-	RpcAsyncAbortCall                              *win32.Proc
-	RpcAsyncCancelCall                             *win32.Proc
-	RpcAsyncCompleteCall                           *win32.Proc
-	RpcAsyncGetCallStatus                          *win32.Proc
-	RpcAsyncInitializeHandle                       *win32.Proc
-	RpcAsyncRegisterInfo                           *win32.Proc
-	RpcBindingBind                                 *win32.Proc
-	RpcBindingCopy                                 *win32.Proc
-	RpcBindingCreate                               *win32.Proc
-	RpcBindingCreateA                              *win32.Proc
-	RpcBindingFree                                 *win32.Proc
-	RpcBindingFromStringBinding                    *win32.Proc
-	RpcBindingFromStringBindingA                   *win32.Proc
-	RpcBindingInqAuthClient                        *win32.Proc
-	RpcBindingInqAuthClientA                       *win32.Proc
-	RpcBindingInqAuthClientEx                      *win32.Proc
-	RpcBindingInqAuthClientExA                     *win32.Proc
-	RpcBindingInqAuthInfo                          *win32.Proc
-	RpcBindingInqAuthInfoA                         *win32.Proc
-	RpcBindingInqAuthInfoEx                        *win32.Proc
-	RpcBindingInqAuthInfoExA                       *win32.Proc
-	RpcBindingInqMaxCalls                          *win32.Proc
-	RpcBindingInqObject                            *win32.Proc
-	RpcBindingInqOption                            *win32.Proc
-	RpcBindingReset                                *win32.Proc
-	RpcBindingServerFromClient                     *win32.Proc
-	RpcBindingSetAuthInfo                          *win32.Proc
-	RpcBindingSetAuthInfoA                         *win32.Proc
-	RpcBindingSetAuthInfoEx                        *win32.Proc
-	RpcBindingSetAuthInfoExA                       *win32.Proc
-	RpcBindingSetObject                            *win32.Proc
-	RpcBindingSetOption                            *win32.Proc
-	RpcBindingToStringBinding                      *win32.Proc
-	RpcBindingToStringBindingA                     *win32.Proc
-	RpcBindingUnbind                               *win32.Proc
-	RpcBindingVectorFree                           *win32.Proc
-	RpcCancelThread                                *win32.Proc
-	RpcCancelThreadEx                              *win32.Proc
-	RpcCertGeneratePrincipalName                   *win32.Proc
-	RpcCertGeneratePrincipalNameA                  *win32.Proc
-	RpcEpRegister                                  *win32.Proc
-	RpcEpRegisterA                                 *win32.Proc
-	RpcEpRegisterNoReplace                         *win32.Proc
-	RpcEpRegisterNoReplaceA                        *win32.Proc
-	RpcEpResolveBinding                            *win32.Proc
-	RpcEpUnregister                                *win32.Proc
-	RpcErrorAddRecord                              *win32.Proc
-	RpcErrorClearInformation                       *win32.Proc
-	RpcErrorEndEnumeration                         *win32.Proc
-	RpcErrorGetNextRecord                          *win32.Proc
-	RpcErrorGetNumberOfRecords                     *win32.Proc
-	RpcErrorLoadErrorInfo                          *win32.Proc
-	RpcErrorResetEnumeration                       *win32.Proc
-	RpcErrorSaveErrorInfo                          *win32.Proc
-	RpcErrorStartEnumeration                       *win32.Proc
-	RpcExceptionFilter                             *win32.Proc
-	RpcFreeAuthorizationContext                    *win32.Proc
-	RpcGetAuthorizationContextForClient            *win32.Proc
-	RpcIfIdVectorFree                              *win32.Proc
-	RpcIfInqId                                     *win32.Proc
-	RpcImpersonateClient                           *win32.Proc
-	RpcImpersonateClient2                          *win32.Proc
-	RpcImpersonateClientContainer                  *win32.Proc
-	RpcMgmtEnableIdleCleanup                       *win32.Proc
-	RpcMgmtEpEltInqBegin                           *win32.Proc
-	RpcMgmtEpEltInqDone                            *win32.Proc
-	RpcMgmtEpEltInqNext                            *win32.Proc
-	RpcMgmtEpEltInqNextA                           *win32.Proc
-	RpcMgmtEpUnregister                            *win32.Proc
-	RpcMgmtInqComTimeout                           *win32.Proc
-	RpcMgmtInqDefaultProtectLevel                  *win32.Proc
-	RpcMgmtInqIfIds                                *win32.Proc
-	RpcMgmtInqServerPrincName                      *win32.Proc
-	RpcMgmtInqServerPrincNameA                     *win32.Proc
-	RpcMgmtInqStats                                *win32.Proc
-	RpcMgmtIsServerListening                       *win32.Proc
-	RpcMgmtSetAuthorizationFn                      *win32.Proc
-	RpcMgmtSetCancelTimeout                        *win32.Proc
-	RpcMgmtSetComTimeout                           *win32.Proc
-	RpcMgmtSetServerStackSize                      *win32.Proc
-	RpcMgmtStatsVectorFree                         *win32.Proc
-	RpcMgmtStopServerListening                     *win32.Proc
-	RpcMgmtWaitServerListen                        *win32.Proc
-	RpcNetworkInqProtseqs                          *win32.Proc
-	RpcNetworkInqProtseqsA                         *win32.Proc
-	RpcNetworkIsProtseqValid                       *win32.Proc
-	RpcNetworkIsProtseqValidA                      *win32.Proc
-	RpcNsBindingExport                             *win32.Proc
-	RpcNsBindingExportA                            *win32.Proc
-	RpcNsBindingExportPnP                          *win32.Proc
-	RpcNsBindingExportPnPA                         *win32.Proc
-	RpcNsBindingImportBegin                        *win32.Proc
-	RpcNsBindingImportBeginA                       *win32.Proc
-	RpcNsBindingImportDone                         *win32.Proc
-	RpcNsBindingImportNext                         *win32.Proc
-	RpcNsBindingInqEntryName                       *win32.Proc
-	RpcNsBindingInqEntryNameA                      *win32.Proc
-	RpcNsBindingLookupBegin                        *win32.Proc
-	RpcNsBindingLookupBeginA                       *win32.Proc
-	RpcNsBindingLookupDone                         *win32.Proc
-	RpcNsBindingLookupNext                         *win32.Proc
-	RpcNsBindingSelect                             *win32.Proc
-	RpcNsBindingUnexport                           *win32.Proc
-	RpcNsBindingUnexportA                          *win32.Proc
-	RpcNsBindingUnexportPnP                        *win32.Proc
-	RpcNsBindingUnexportPnPA                       *win32.Proc
-	RpcNsEntryExpandName                           *win32.Proc
-	RpcNsEntryExpandNameA                          *win32.Proc
-	RpcNsEntryObjectInqBegin                       *win32.Proc
-	RpcNsEntryObjectInqBeginA                      *win32.Proc
-	RpcNsEntryObjectInqDone                        *win32.Proc
-	RpcNsEntryObjectInqNext                        *win32.Proc
-	RpcNsGroupDelete                               *win32.Proc
-	RpcNsGroupDeleteA                              *win32.Proc
-	RpcNsGroupMbrAdd                               *win32.Proc
-	RpcNsGroupMbrAddA                              *win32.Proc
-	RpcNsGroupMbrInqBegin                          *win32.Proc
-	RpcNsGroupMbrInqBeginA                         *win32.Proc
-	RpcNsGroupMbrInqDone                           *win32.Proc
-	RpcNsGroupMbrInqNext                           *win32.Proc
-	RpcNsGroupMbrInqNextA                          *win32.Proc
-	RpcNsGroupMbrRemove                            *win32.Proc
-	RpcNsGroupMbrRemoveA                           *win32.Proc
-	RpcNsMgmtBindingUnexport                       *win32.Proc
-	RpcNsMgmtBindingUnexportA                      *win32.Proc
-	RpcNsMgmtEntryCreate                           *win32.Proc
-	RpcNsMgmtEntryCreateA                          *win32.Proc
-	RpcNsMgmtEntryDelete                           *win32.Proc
-	RpcNsMgmtEntryDeleteA                          *win32.Proc
-	RpcNsMgmtEntryInqIfIds                         *win32.Proc
-	RpcNsMgmtEntryInqIfIdsA                        *win32.Proc
-	RpcNsMgmtHandleSetExpAge                       *win32.Proc
-	RpcNsMgmtInqExpAge                             *win32.Proc
-	RpcNsMgmtSetExpAge                             *win32.Proc
-	RpcNsProfileDelete                             *win32.Proc
-	RpcNsProfileDeleteA                            *win32.Proc
-	RpcNsProfileEltAdd                             *win32.Proc
-	RpcNsProfileEltAddA                            *win32.Proc
-	RpcNsProfileEltInqBegin                        *win32.Proc
-	RpcNsProfileEltInqBeginA                       *win32.Proc
-	RpcNsProfileEltInqDone                         *win32.Proc
-	RpcNsProfileEltInqNext                         *win32.Proc
-	RpcNsProfileEltInqNextA                        *win32.Proc
-	RpcNsProfileEltRemove                          *win32.Proc
-	RpcNsProfileEltRemoveA                         *win32.Proc
-	RpcObjectInqType                               *win32.Proc
-	RpcObjectSetInqFn                              *win32.Proc
-	RpcObjectSetType                               *win32.Proc
-	RpcProtseqVectorFree                           *win32.Proc
-	RpcProtseqVectorFreeA                          *win32.Proc
-	RpcRaiseException                              *win32.Proc
-	RpcRevertContainerImpersonation                *win32.Proc
-	RpcRevertToSelf                                *win32.Proc
-	RpcRevertToSelfEx                              *win32.Proc
-	RpcServerCompleteSecurityCallback              *win32.Proc
-	RpcServerInqBindingHandle                      *win32.Proc
-	RpcServerInqBindings                           *win32.Proc
-	RpcServerInqBindingsEx                         *win32.Proc
-	RpcServerInqCallAttributes                     *win32.Proc
-	RpcServerInqCallAttributesA                    *win32.Proc
-	RpcServerInqDefaultPrincName                   *win32.Proc
-	RpcServerInqDefaultPrincNameA                  *win32.Proc
-	RpcServerInqIf                                 *win32.Proc
-	RpcServerInterfaceGroupActivate                *win32.Proc
-	RpcServerInterfaceGroupClose                   *win32.Proc
-	RpcServerInterfaceGroupCreate                  *win32.Proc
-	RpcServerInterfaceGroupCreateA                 *win32.Proc
-	RpcServerInterfaceGroupDeactivate              *win32.Proc
-	RpcServerInterfaceGroupInqBindings             *win32.Proc
-	RpcServerListen                                *win32.Proc
-	RpcServerRegisterAuthInfo                      *win32.Proc
-	RpcServerRegisterAuthInfoA                     *win32.Proc
-	RpcServerRegisterIf                            *win32.Proc
-	RpcServerRegisterIf2                           *win32.Proc
-	RpcServerRegisterIf3                           *win32.Proc
-	RpcServerRegisterIfEx                          *win32.Proc
-	RpcServerSubscribeForNotification              *win32.Proc
-	RpcServerTestCancel                            *win32.Proc
-	RpcServerUnregisterIf                          *win32.Proc
-	RpcServerUnregisterIfEx                        *win32.Proc
-	RpcServerUnsubscribeForNotification            *win32.Proc
-	RpcServerUseAllProtseqs                        *win32.Proc
-	RpcServerUseAllProtseqsEx                      *win32.Proc
-	RpcServerUseAllProtseqsIf                      *win32.Proc
-	RpcServerUseAllProtseqsIfEx                    *win32.Proc
-	RpcServerUseProtseq                            *win32.Proc
-	RpcServerUseProtseqA                           *win32.Proc
-	RpcServerUseProtseqEp                          *win32.Proc
-	RpcServerUseProtseqEpA                         *win32.Proc
-	RpcServerUseProtseqEpEx                        *win32.Proc
-	RpcServerUseProtseqEpExA                       *win32.Proc
-	RpcServerUseProtseqEx                          *win32.Proc
-	RpcServerUseProtseqExA                         *win32.Proc
-	RpcServerUseProtseqIf                          *win32.Proc
-	RpcServerUseProtseqIfA                         *win32.Proc
-	RpcServerUseProtseqIfEx                        *win32.Proc
-	RpcServerUseProtseqIfExA                       *win32.Proc
-	RpcServerYield                                 *win32.Proc
-	RpcSmAllocate                                  *win32.Proc
-	RpcSmClientFree                                *win32.Proc
-	RpcSmDestroyClientContext                      *win32.Proc
-	RpcSmDisableAllocate                           *win32.Proc
-	RpcSmEnableAllocate                            *win32.Proc
-	RpcSmFree                                      *win32.Proc
-	RpcSmGetThreadHandle                           *win32.Proc
-	RpcSmSetClientAllocFree                        *win32.Proc
-	RpcSmSetThreadHandle                           *win32.Proc
-	RpcSmSwapClientAllocFree                       *win32.Proc
-	RpcSsAllocate                                  *win32.Proc
-	RpcSsContextLockExclusive                      *win32.Proc
-	RpcSsContextLockShared                         *win32.Proc
-	RpcSsDestroyClientContext                      *win32.Proc
-	RpcSsDisableAllocate                           *win32.Proc
-	RpcSsDontSerializeContext                      *win32.Proc
-	RpcSsEnableAllocate                            *win32.Proc
-	RpcSsFree                                      *win32.Proc
-	RpcSsGetContextBinding                         *win32.Proc
-	RpcSsGetThreadHandle                           *win32.Proc
-	RpcSsSetClientAllocFree                        *win32.Proc
-	RpcSsSetThreadHandle                           *win32.Proc
-	RpcSsSwapClientAllocFree                       *win32.Proc
-	RpcStringBindingCompose                        *win32.Proc
-	RpcStringBindingComposeA                       *win32.Proc
-	RpcStringBindingParse                          *win32.Proc
-	RpcStringBindingParseA                         *win32.Proc
-	RpcStringFree                                  *win32.Proc
-	RpcStringFreeA                                 *win32.Proc
-	RpcTestCancel                                  *win32.Proc
-	RpcUserFree                                    *win32.Proc
-	UuidCompare                                    *win32.Proc
-	UuidCreate                                     *win32.Proc
-	UuidCreateNil                                  *win32.Proc
-	UuidCreateSequential                           *win32.Proc
-	UuidEqual                                      *win32.Proc
-	UuidFromString                                 *win32.Proc
-	UuidFromStringA                                *win32.Proc
-	UuidHash                                       *win32.Proc
-	UuidIsNil                                      *win32.Proc
-	UuidToString                                   *win32.Proc
-	UuidToStringA                                  *win32.Proc
+	DceErrorInqText                                 *win32.Proc
+	DceErrorInqTextA                                *win32.Proc
+	IUnknown_AddRef_Proxy                           *win32.Proc
+	IUnknown_QueryInterface_Proxy                   *win32.Proc
+	IUnknown_Release_Proxy                          *win32.Proc
+	I_RpcAllocate                                   *win32.Proc
+	I_RpcAsyncAbortCall                             *win32.Proc
+	I_RpcAsyncSetHandle                             *win32.Proc
+	I_RpcBindingCopy                                *win32.Proc
+	I_RpcBindingCreateNP                            *win32.Proc
+	I_RpcBindingHandleToAsyncHandle                 *win32.Proc
+	I_RpcBindingInqClientTokenAttributes            *win32.Proc
+	I_RpcBindingInqDynamicEndpoint                  *win32.Proc
+	I_RpcBindingInqDynamicEndpointA                 *win32.Proc
+	I_RpcBindingInqLocalClientPID                   *win32.Proc
+	I_RpcBindingInqMarshalledTargetInfo             *win32.Proc
+	I_RpcBindingInqSecurityContext                  *win32.Proc
+	I_RpcBindingInqSecurityContextKeyInfo           *win32.Proc
+	I_RpcBindingInqTransportType                    *win32.Proc
+	I_RpcBindingInqWireIdForSnego                   *win32.Proc
+	I_RpcBindingIsClientLocal                       *win32.Proc
+	I_RpcBindingIsServerLocal                       *win32.Proc
+	I_RpcBindingSetPrivateOption                    *win32.Proc
+	I_RpcBindingToStaticStringBindingW              *win32.Proc
+	I_RpcClearMutex                                 *win32.Proc
+	I_RpcDeleteMutex                                *win32.Proc
+	I_RpcExceptionFilter                            *win32.Proc
+	I_RpcFree                                       *win32.Proc
+	I_RpcFreeBuffer                                 *win32.Proc
+	I_RpcFreePipeBuffer                             *win32.Proc
+	I_RpcGetBuffer                                  *win32.Proc
+	I_RpcGetBufferWithObject                        *win32.Proc
+	I_RpcGetCurrentCallHandle                       *win32.Proc
+	I_RpcGetDefaultSD                               *win32.Proc
+	I_RpcGetExtendedError                           *win32.Proc
+	I_RpcIfInqTransferSyntaxes                      *win32.Proc
+	I_RpcMapWin32Status                             *win32.Proc
+	I_RpcMgmtEnableDedicatedThreadPool              *win32.Proc
+	I_RpcNegotiateTransferSyntax                    *win32.Proc
+	I_RpcNsBindingSetEntryName                      *win32.Proc
+	I_RpcNsBindingSetEntryNameA                     *win32.Proc
+	I_RpcNsGetBuffer                                *win32.Proc
+	I_RpcNsInterfaceExported                        *win32.Proc
+	I_RpcNsInterfaceUnexported                      *win32.Proc
+	I_RpcNsRaiseException                           *win32.Proc
+	I_RpcNsSendReceive                              *win32.Proc
+	I_RpcOpenClientProcess                          *win32.Proc
+	I_RpcPauseExecution                             *win32.Proc
+	I_RpcReBindBuffer                               *win32.Proc
+	I_RpcReallocPipeBuffer                          *win32.Proc
+	I_RpcReceive                                    *win32.Proc
+	I_RpcRecordCalloutFailure                       *win32.Proc
+	I_RpcRequestMutex                               *win32.Proc
+	I_RpcSend                                       *win32.Proc
+	I_RpcSendReceive                                *win32.Proc
+	I_RpcServerCheckClientRestriction               *win32.Proc
+	I_RpcServerDisableExceptionFilter               *win32.Proc
+	I_RpcServerGetAssociationID                     *win32.Proc
+	I_RpcServerInqAddressChangeFn                   *win32.Proc
+	I_RpcServerInqLocalConnAddress                  *win32.Proc
+	I_RpcServerInqRemoteConnAddress                 *win32.Proc
+	I_RpcServerInqTransportType                     *win32.Proc
+	I_RpcServerRegisterForwardFunction              *win32.Proc
+	I_RpcServerSetAddressChangeFn                   *win32.Proc
+	I_RpcServerStartService                         *win32.Proc
+	I_RpcServerSubscribeForDisconnectNotification   *win32.Proc
+	I_RpcServerSubscribeForDisconnectNotification2  *win32.Proc
+	I_RpcServerUnsubscribeForDisconnectNotification *win32.Proc
+	I_RpcServerUseProtseq2                          *win32.Proc
+	I_RpcServerUseProtseq2A                         *win32.Proc
+	I_RpcServerUseProtseqEp2                        *win32.Proc
+	I_RpcServerUseProtseqEp2A                       *win32.Proc
+	I_RpcSessionStrictContextHandle                 *win32.Proc
+	I_RpcSsDontSerializeContext                     *win32.Proc
+	I_RpcSystemHandleTypeSpecificWork               *win32.Proc
+	I_RpcTurnOnEEInfoPropagation                    *win32.Proc
+	I_UuidCreate                                    *win32.Proc
+	MesBufferHandleReset                            *win32.Proc
+	MesDecodeBufferHandleCreate                     *win32.Proc
+	MesDecodeIncrementalHandleCreate                *win32.Proc
+	MesEncodeDynBufferHandleCreate                  *win32.Proc
+	MesEncodeFixedBufferHandleCreate                *win32.Proc
+	MesEncodeIncrementalHandleCreate                *win32.Proc
+	MesHandleFree                                   *win32.Proc
+	MesIncrementalHandleReset                       *win32.Proc
+	MesInqProcEncodingId                            *win32.Proc
+	NDRCContextBinding                              *win32.Proc
+	NDRCContextMarshall                             *win32.Proc
+	NDRCContextUnmarshall                           *win32.Proc
+	NDRSContextMarshall                             *win32.Proc
+	NDRSContextMarshall2                            *win32.Proc
+	NDRSContextMarshallEx                           *win32.Proc
+	NDRSContextUnmarshall                           *win32.Proc
+	NDRSContextUnmarshall2                          *win32.Proc
+	NDRSContextUnmarshallEx                         *win32.Proc
+	Ndr64AsyncClientCall                            *win32.Proc
+	Ndr64AsyncServerCall64                          *win32.Proc
+	Ndr64AsyncServerCallAll                         *win32.Proc
+	Ndr64DcomAsyncClientCall                        *win32.Proc
+	Ndr64DcomAsyncStubCall                          *win32.Proc
+	NdrAllocate                                     *win32.Proc
+	NdrAsyncClientCall                              *win32.Proc
+	NdrAsyncServerCall                              *win32.Proc
+	NdrByteCountPointerBufferSize                   *win32.Proc
+	NdrByteCountPointerFree                         *win32.Proc
+	NdrByteCountPointerMarshall                     *win32.Proc
+	NdrByteCountPointerUnmarshall                   *win32.Proc
+	NdrClearOutParameters                           *win32.Proc
+	NdrClientCall2                                  *win32.Proc
+	NdrClientCall3                                  *win32.Proc
+	NdrClientContextMarshall                        *win32.Proc
+	NdrClientContextUnmarshall                      *win32.Proc
+	NdrClientInitialize                             *win32.Proc
+	NdrClientInitializeNew                          *win32.Proc
+	NdrComplexArrayBufferSize                       *win32.Proc
+	NdrComplexArrayFree                             *win32.Proc
+	NdrComplexArrayMarshall                         *win32.Proc
+	NdrComplexArrayMemorySize                       *win32.Proc
+	NdrComplexArrayUnmarshall                       *win32.Proc
+	NdrComplexStructBufferSize                      *win32.Proc
+	NdrComplexStructFree                            *win32.Proc
+	NdrComplexStructMarshall                        *win32.Proc
+	NdrComplexStructMemorySize                      *win32.Proc
+	NdrComplexStructUnmarshall                      *win32.Proc
+	NdrConformantArrayBufferSize                    *win32.Proc
+	NdrConformantArrayFree                          *win32.Proc
+	NdrConformantArrayMarshall                      *win32.Proc
+	NdrConformantArrayMemorySize                    *win32.Proc
+	NdrConformantArrayUnmarshall                    *win32.Proc
+	NdrConformantStringBufferSize                   *win32.Proc
+	NdrConformantStringMarshall                     *win32.Proc
+	NdrConformantStringMemorySize                   *win32.Proc
+	NdrConformantStringUnmarshall                   *win32.Proc
+	NdrConformantStructBufferSize                   *win32.Proc
+	NdrConformantStructFree                         *win32.Proc
+	NdrConformantStructMarshall                     *win32.Proc
+	NdrConformantStructMemorySize                   *win32.Proc
+	NdrConformantStructUnmarshall                   *win32.Proc
+	NdrConformantVaryingArrayBufferSize             *win32.Proc
+	NdrConformantVaryingArrayFree                   *win32.Proc
+	NdrConformantVaryingArrayMarshall               *win32.Proc
+	NdrConformantVaryingArrayMemorySize             *win32.Proc
+	NdrConformantVaryingArrayUnmarshall             *win32.Proc
+	NdrConformantVaryingStructBufferSize            *win32.Proc
+	NdrConformantVaryingStructFree                  *win32.Proc
+	NdrConformantVaryingStructMarshall              *win32.Proc
+	NdrConformantVaryingStructMemorySize            *win32.Proc
+	NdrConformantVaryingStructUnmarshall            *win32.Proc
+	NdrContextHandleInitialize                      *win32.Proc
+	NdrContextHandleSize                            *win32.Proc
+	NdrConvert                                      *win32.Proc
+	NdrConvert2                                     *win32.Proc
+	NdrCorrelationFree                              *win32.Proc
+	NdrCorrelationInitialize                        *win32.Proc
+	NdrCorrelationPass                              *win32.Proc
+	NdrCreateServerInterfaceFromStub                *win32.Proc
+	NdrDcomAsyncClientCall                          *win32.Proc
+	NdrDcomAsyncStubCall                            *win32.Proc
+	NdrEncapsulatedUnionBufferSize                  *win32.Proc
+	NdrEncapsulatedUnionFree                        *win32.Proc
+	NdrEncapsulatedUnionMarshall                    *win32.Proc
+	NdrEncapsulatedUnionMemorySize                  *win32.Proc
+	NdrEncapsulatedUnionUnmarshall                  *win32.Proc
+	NdrFixedArrayBufferSize                         *win32.Proc
+	NdrFixedArrayFree                               *win32.Proc
+	NdrFixedArrayMarshall                           *win32.Proc
+	NdrFixedArrayMemorySize                         *win32.Proc
+	NdrFixedArrayUnmarshall                         *win32.Proc
+	NdrFreeBuffer                                   *win32.Proc
+	NdrFullPointerXlatFree                          *win32.Proc
+	NdrFullPointerXlatInit                          *win32.Proc
+	NdrGetBuffer                                    *win32.Proc
+	NdrGetDcomProtocolVersion                       *win32.Proc
+	NdrGetUserMarshalInfo                           *win32.Proc
+	NdrInterfacePointerBufferSize                   *win32.Proc
+	NdrInterfacePointerFree                         *win32.Proc
+	NdrInterfacePointerMarshall                     *win32.Proc
+	NdrInterfacePointerMemorySize                   *win32.Proc
+	NdrInterfacePointerUnmarshall                   *win32.Proc
+	NdrMapCommAndFaultStatus                        *win32.Proc
+	NdrMesProcEncodeDecode                          *win32.Proc
+	NdrMesProcEncodeDecode2                         *win32.Proc
+	NdrMesProcEncodeDecode3                         *win32.Proc
+	NdrMesSimpleTypeAlignSize                       *win32.Proc
+	NdrMesSimpleTypeAlignSizeAll                    *win32.Proc
+	NdrMesSimpleTypeDecode                          *win32.Proc
+	NdrMesSimpleTypeDecodeAll                       *win32.Proc
+	NdrMesSimpleTypeEncode                          *win32.Proc
+	NdrMesSimpleTypeEncodeAll                       *win32.Proc
+	NdrMesTypeAlignSize                             *win32.Proc
+	NdrMesTypeAlignSize2                            *win32.Proc
+	NdrMesTypeAlignSize3                            *win32.Proc
+	NdrMesTypeDecode                                *win32.Proc
+	NdrMesTypeDecode2                               *win32.Proc
+	NdrMesTypeDecode3                               *win32.Proc
+	NdrMesTypeEncode                                *win32.Proc
+	NdrMesTypeEncode2                               *win32.Proc
+	NdrMesTypeEncode3                               *win32.Proc
+	NdrMesTypeFree2                                 *win32.Proc
+	NdrMesTypeFree3                                 *win32.Proc
+	NdrNonConformantStringBufferSize                *win32.Proc
+	NdrNonConformantStringMarshall                  *win32.Proc
+	NdrNonConformantStringMemorySize                *win32.Proc
+	NdrNonConformantStringUnmarshall                *win32.Proc
+	NdrNonEncapsulatedUnionBufferSize               *win32.Proc
+	NdrNonEncapsulatedUnionFree                     *win32.Proc
+	NdrNonEncapsulatedUnionMarshall                 *win32.Proc
+	NdrNonEncapsulatedUnionMemorySize               *win32.Proc
+	NdrNonEncapsulatedUnionUnmarshall               *win32.Proc
+	NdrNsGetBuffer                                  *win32.Proc
+	NdrNsSendReceive                                *win32.Proc
+	NdrOleAllocate                                  *win32.Proc
+	NdrOleFree                                      *win32.Proc
+	NdrPartialIgnoreClientBufferSize                *win32.Proc
+	NdrPartialIgnoreClientMarshall                  *win32.Proc
+	NdrPartialIgnoreServerInitialize                *win32.Proc
+	NdrPartialIgnoreServerUnmarshall                *win32.Proc
+	NdrPointerBufferSize                            *win32.Proc
+	NdrPointerFree                                  *win32.Proc
+	NdrPointerMarshall                              *win32.Proc
+	NdrPointerMemorySize                            *win32.Proc
+	NdrPointerUnmarshall                            *win32.Proc
+	NdrRangeUnmarshall                              *win32.Proc
+	NdrRpcSmClientAllocate                          *win32.Proc
+	NdrRpcSmClientFree                              *win32.Proc
+	NdrRpcSmSetClientToOsf                          *win32.Proc
+	NdrRpcSsDefaultAllocate                         *win32.Proc
+	NdrRpcSsDefaultFree                             *win32.Proc
+	NdrRpcSsDisableAllocate                         *win32.Proc
+	NdrRpcSsEnableAllocate                          *win32.Proc
+	NdrSendReceive                                  *win32.Proc
+	NdrServerCall2                                  *win32.Proc
+	NdrServerCallAll                                *win32.Proc
+	NdrServerCallNdr64                              *win32.Proc
+	NdrServerContextMarshall                        *win32.Proc
+	NdrServerContextNewMarshall                     *win32.Proc
+	NdrServerContextNewUnmarshall                   *win32.Proc
+	NdrServerContextUnmarshall                      *win32.Proc
+	NdrServerInitialize                             *win32.Proc
+	NdrServerInitializeMarshall                     *win32.Proc
+	NdrServerInitializeNew                          *win32.Proc
+	NdrServerInitializePartial                      *win32.Proc
+	NdrServerInitializeUnmarshall                   *win32.Proc
+	NdrSimpleStructBufferSize                       *win32.Proc
+	NdrSimpleStructFree                             *win32.Proc
+	NdrSimpleStructMarshall                         *win32.Proc
+	NdrSimpleStructMemorySize                       *win32.Proc
+	NdrSimpleStructUnmarshall                       *win32.Proc
+	NdrSimpleTypeMarshall                           *win32.Proc
+	NdrSimpleTypeUnmarshall                         *win32.Proc
+	NdrStubCall2                                    *win32.Proc
+	NdrStubCall3                                    *win32.Proc
+	NdrUserMarshalBufferSize                        *win32.Proc
+	NdrUserMarshalFree                              *win32.Proc
+	NdrUserMarshalMarshall                          *win32.Proc
+	NdrUserMarshalMemorySize                        *win32.Proc
+	NdrUserMarshalSimpleTypeConvert                 *win32.Proc
+	NdrUserMarshalUnmarshall                        *win32.Proc
+	NdrVaryingArrayBufferSize                       *win32.Proc
+	NdrVaryingArrayFree                             *win32.Proc
+	NdrVaryingArrayMarshall                         *win32.Proc
+	NdrVaryingArrayMemorySize                       *win32.Proc
+	NdrVaryingArrayUnmarshall                       *win32.Proc
+	NdrXmitOrRepAsBufferSize                        *win32.Proc
+	NdrXmitOrRepAsFree                              *win32.Proc
+	NdrXmitOrRepAsMarshall                          *win32.Proc
+	NdrXmitOrRepAsMemorySize                        *win32.Proc
+	NdrXmitOrRepAsUnmarshall                        *win32.Proc
+	RpcAsyncAbortCall                               *win32.Proc
+	RpcAsyncCancelCall                              *win32.Proc
+	RpcAsyncCompleteCall                            *win32.Proc
+	RpcAsyncGetCallStatus                           *win32.Proc
+	RpcAsyncInitializeHandle                        *win32.Proc
+	RpcAsyncRegisterInfo                            *win32.Proc
+	RpcBindingBind                                  *win32.Proc
+	RpcBindingCopy                                  *win32.Proc
+	RpcBindingCreate                                *win32.Proc
+	RpcBindingCreateA                               *win32.Proc
+	RpcBindingFree                                  *win32.Proc
+	RpcBindingFromStringBinding                     *win32.Proc
+	RpcBindingFromStringBindingA                    *win32.Proc
+	RpcBindingInqAuthClient                         *win32.Proc
+	RpcBindingInqAuthClientA                        *win32.Proc
+	RpcBindingInqAuthClientEx                       *win32.Proc
+	RpcBindingInqAuthClientExA                      *win32.Proc
+	RpcBindingInqAuthInfo                           *win32.Proc
+	RpcBindingInqAuthInfoA                          *win32.Proc
+	RpcBindingInqAuthInfoEx                         *win32.Proc
+	RpcBindingInqAuthInfoExA                        *win32.Proc
+	RpcBindingInqMaxCalls                           *win32.Proc
+	RpcBindingInqObject                             *win32.Proc
+	RpcBindingInqOption                             *win32.Proc
+	RpcBindingReset                                 *win32.Proc
+	RpcBindingServerFromClient                      *win32.Proc
+	RpcBindingSetAuthInfo                           *win32.Proc
+	RpcBindingSetAuthInfoA                          *win32.Proc
+	RpcBindingSetAuthInfoEx                         *win32.Proc
+	RpcBindingSetAuthInfoExA                        *win32.Proc
+	RpcBindingSetObject                             *win32.Proc
+	RpcBindingSetOption                             *win32.Proc
+	RpcBindingToStringBinding                       *win32.Proc
+	RpcBindingToStringBindingA                      *win32.Proc
+	RpcBindingUnbind                                *win32.Proc
+	RpcBindingVectorFree                            *win32.Proc
+	RpcCancelThread                                 *win32.Proc
+	RpcCancelThreadEx                               *win32.Proc
+	RpcCertGeneratePrincipalName                    *win32.Proc
+	RpcCertGeneratePrincipalNameA                   *win32.Proc
+	RpcEpRegister                                   *win32.Proc
+	RpcEpRegisterA                                  *win32.Proc
+	RpcEpRegisterNoReplace                          *win32.Proc
+	RpcEpRegisterNoReplaceA                         *win32.Proc
+	RpcEpResolveBinding                             *win32.Proc
+	RpcEpUnregister                                 *win32.Proc
+	RpcErrorAddRecord                               *win32.Proc
+	RpcErrorClearInformation                        *win32.Proc
+	RpcErrorEndEnumeration                          *win32.Proc
+	RpcErrorGetNextRecord                           *win32.Proc
+	RpcErrorGetNumberOfRecords                      *win32.Proc
+	RpcErrorLoadErrorInfo                           *win32.Proc
+	RpcErrorResetEnumeration                        *win32.Proc
+	RpcErrorSaveErrorInfo                           *win32.Proc
+	RpcErrorStartEnumeration                        *win32.Proc
+	RpcExceptionFilter                              *win32.Proc
+	RpcFreeAuthorizationContext                     *win32.Proc
+	RpcGetAuthorizationContextForClient             *win32.Proc
+	RpcIfIdVectorFree                               *win32.Proc
+	RpcIfInqId                                      *win32.Proc
+	RpcImpersonateClient                            *win32.Proc
+	RpcImpersonateClient2                           *win32.Proc
+	RpcImpersonateClientContainer                   *win32.Proc
+	RpcMgmtEnableIdleCleanup                        *win32.Proc
+	RpcMgmtEpEltInqBegin                            *win32.Proc
+	RpcMgmtEpEltInqDone                             *win32.Proc
+	RpcMgmtEpEltInqNext                             *win32.Proc
+	RpcMgmtEpEltInqNextA                            *win32.Proc
+	RpcMgmtEpUnregister                             *win32.Proc
+	RpcMgmtInqComTimeout                            *win32.Proc
+	RpcMgmtInqDefaultProtectLevel                   *win32.Proc
+	RpcMgmtInqIfIds                                 *win32.Proc
+	RpcMgmtInqServerPrincName                       *win32.Proc
+	RpcMgmtInqServerPrincNameA                      *win32.Proc
+	RpcMgmtInqStats                                 *win32.Proc
+	RpcMgmtIsServerListening                        *win32.Proc
+	RpcMgmtSetAuthorizationFn                       *win32.Proc
+	RpcMgmtSetCancelTimeout                         *win32.Proc
+	RpcMgmtSetComTimeout                            *win32.Proc
+	RpcMgmtSetServerStackSize                       *win32.Proc
+	RpcMgmtStatsVectorFree                          *win32.Proc
+	RpcMgmtStopServerListening                      *win32.Proc
+	RpcMgmtWaitServerListen                         *win32.Proc
+	RpcNetworkInqProtseqs                           *win32.Proc
+	RpcNetworkInqProtseqsA                          *win32.Proc
+	RpcNetworkIsProtseqValid                        *win32.Proc
+	RpcNetworkIsProtseqValidA                       *win32.Proc
+	RpcNsBindingExport                              *win32.Proc
+	RpcNsBindingExportA                             *win32.Proc
+	RpcNsBindingExportPnP                           *win32.Proc
+	RpcNsBindingExportPnPA                          *win32.Proc
+	RpcNsBindingImportBegin                         *win32.Proc
+	RpcNsBindingImportBeginA                        *win32.Proc
+	RpcNsBindingImportDone                          *win32.Proc
+	RpcNsBindingImportNext                          *win32.Proc
+	RpcNsBindingInqEntryName                        *win32.Proc
+	RpcNsBindingInqEntryNameA                       *win32.Proc
+	RpcNsBindingLookupBegin                         *win32.Proc
+	RpcNsBindingLookupBeginA                        *win32.Proc
+	RpcNsBindingLookupDone                          *win32.Proc
+	RpcNsBindingLookupNext                          *win32.Proc
+	RpcNsBindingSelect                              *win32.Proc
+	RpcNsBindingUnexport                            *win32.Proc
+	RpcNsBindingUnexportA                           *win32.Proc
+	RpcNsBindingUnexportPnP                         *win32.Proc
+	RpcNsBindingUnexportPnPA                        *win32.Proc
+	RpcNsEntryExpandName                            *win32.Proc
+	RpcNsEntryExpandNameA                           *win32.Proc
+	RpcNsEntryObjectInqBegin                        *win32.Proc
+	RpcNsEntryObjectInqBeginA                       *win32.Proc
+	RpcNsEntryObjectInqDone                         *win32.Proc
+	RpcNsEntryObjectInqNext                         *win32.Proc
+	RpcNsGroupDelete                                *win32.Proc
+	RpcNsGroupDeleteA                               *win32.Proc
+	RpcNsGroupMbrAdd                                *win32.Proc
+	RpcNsGroupMbrAddA                               *win32.Proc
+	RpcNsGroupMbrInqBegin                           *win32.Proc
+	RpcNsGroupMbrInqBeginA                          *win32.Proc
+	RpcNsGroupMbrInqDone                            *win32.Proc
+	RpcNsGroupMbrInqNext                            *win32.Proc
+	RpcNsGroupMbrInqNextA                           *win32.Proc
+	RpcNsGroupMbrRemove                             *win32.Proc
+	RpcNsGroupMbrRemoveA                            *win32.Proc
+	RpcNsMgmtBindingUnexport                        *win32.Proc
+	RpcNsMgmtBindingUnexportA                       *win32.Proc
+	RpcNsMgmtEntryCreate                            *win32.Proc
+	RpcNsMgmtEntryCreateA                           *win32.Proc
+	RpcNsMgmtEntryDelete                            *win32.Proc
+	RpcNsMgmtEntryDeleteA                           *win32.Proc
+	RpcNsMgmtEntryInqIfIds                          *win32.Proc
+	RpcNsMgmtEntryInqIfIdsA                         *win32.Proc
+	RpcNsMgmtHandleSetExpAge                        *win32.Proc
+	RpcNsMgmtInqExpAge                              *win32.Proc
+	RpcNsMgmtSetExpAge                              *win32.Proc
+	RpcNsProfileDelete                              *win32.Proc
+	RpcNsProfileDeleteA                             *win32.Proc
+	RpcNsProfileEltAdd                              *win32.Proc
+	RpcNsProfileEltAddA                             *win32.Proc
+	RpcNsProfileEltInqBegin                         *win32.Proc
+	RpcNsProfileEltInqBeginA                        *win32.Proc
+	RpcNsProfileEltInqDone                          *win32.Proc
+	RpcNsProfileEltInqNext                          *win32.Proc
+	RpcNsProfileEltInqNextA                         *win32.Proc
+	RpcNsProfileEltRemove                           *win32.Proc
+	RpcNsProfileEltRemoveA                          *win32.Proc
+	RpcObjectInqType                                *win32.Proc
+	RpcObjectSetInqFn                               *win32.Proc
+	RpcObjectSetType                                *win32.Proc
+	RpcProtseqVectorFree                            *win32.Proc
+	RpcProtseqVectorFreeA                           *win32.Proc
+	RpcRaiseException                               *win32.Proc
+	RpcRevertContainerImpersonation                 *win32.Proc
+	RpcRevertToSelf                                 *win32.Proc
+	RpcRevertToSelfEx                               *win32.Proc
+	RpcServerCompleteSecurityCallback               *win32.Proc
+	RpcServerInqBindingHandle                       *win32.Proc
+	RpcServerInqBindings                            *win32.Proc
+	RpcServerInqBindingsEx                          *win32.Proc
+	RpcServerInqCallAttributes                      *win32.Proc
+	RpcServerInqCallAttributesA                     *win32.Proc
+	RpcServerInqDefaultPrincName                    *win32.Proc
+	RpcServerInqDefaultPrincNameA                   *win32.Proc
+	RpcServerInqIf                                  *win32.Proc
+	RpcServerInterfaceGroupActivate                 *win32.Proc
+	RpcServerInterfaceGroupClose                    *win32.Proc
+	RpcServerInterfaceGroupCreate                   *win32.Proc
+	RpcServerInterfaceGroupCreateA                  *win32.Proc
+	RpcServerInterfaceGroupDeactivate               *win32.Proc
+	RpcServerInterfaceGroupInqBindings              *win32.Proc
+	RpcServerListen                                 *win32.Proc
+	RpcServerRegisterAuthInfo                       *win32.Proc
+	RpcServerRegisterAuthInfoA                      *win32.Proc
+	RpcServerRegisterIf                             *win32.Proc
+	RpcServerRegisterIf2                            *win32.Proc
+	RpcServerRegisterIf3                            *win32.Proc
+	RpcServerRegisterIfEx                           *win32.Proc
+	RpcServerSubscribeForNotification               *win32.Proc
+	RpcServerTestCancel                             *win32.Proc
+	RpcServerUnregisterIf                           *win32.Proc
+	RpcServerUnregisterIfEx                         *win32.Proc
+	RpcServerUnsubscribeForNotification             *win32.Proc
+	RpcServerUseAllProtseqs                         *win32.Proc
+	RpcServerUseAllProtseqsEx                       *win32.Proc
+	RpcServerUseAllProtseqsIf                       *win32.Proc
+	RpcServerUseAllProtseqsIfEx                     *win32.Proc
+	RpcServerUseProtseq                             *win32.Proc
+	RpcServerUseProtseqA                            *win32.Proc
+	RpcServerUseProtseqEp                           *win32.Proc
+	RpcServerUseProtseqEpA                          *win32.Proc
+	RpcServerUseProtseqEpEx                         *win32.Proc
+	RpcServerUseProtseqEpExA                        *win32.Proc
+	RpcServerUseProtseqEx                           *win32.Proc
+	RpcServerUseProtseqExA                          *win32.Proc
+	RpcServerUseProtseqIf                           *win32.Proc
+	RpcServerUseProtseqIfA                          *win32.Proc
+	RpcServerUseProtseqIfEx                         *win32.Proc
+	RpcServerUseProtseqIfExA                        *win32.Proc
+	RpcServerYield                                  *win32.Proc
+	RpcSmAllocate                                   *win32.Proc
+	RpcSmClientFree                                 *win32.Proc
+	RpcSmDestroyClientContext                       *win32.Proc
+	RpcSmDisableAllocate                            *win32.Proc
+	RpcSmEnableAllocate                             *win32.Proc
+	RpcSmFree                                       *win32.Proc
+	RpcSmGetThreadHandle                            *win32.Proc
+	RpcSmSetClientAllocFree                         *win32.Proc
+	RpcSmSetThreadHandle                            *win32.Proc
+	RpcSmSwapClientAllocFree                        *win32.Proc
+	RpcSsAllocate                                   *win32.Proc
+	RpcSsContextLockExclusive                       *win32.Proc
+	RpcSsContextLockShared                          *win32.Proc
+	RpcSsDestroyClientContext                       *win32.Proc
+	RpcSsDisableAllocate                            *win32.Proc
+	RpcSsDontSerializeContext                       *win32.Proc
+	RpcSsEnableAllocate                             *win32.Proc
+	RpcSsFree                                       *win32.Proc
+	RpcSsGetContextBinding                          *win32.Proc
+	RpcSsGetThreadHandle                            *win32.Proc
+	RpcSsSetClientAllocFree                         *win32.Proc
+	RpcSsSetThreadHandle                            *win32.Proc
+	RpcSsSwapClientAllocFree                        *win32.Proc
+	RpcStringBindingCompose                         *win32.Proc
+	RpcStringBindingComposeA                        *win32.Proc
+	RpcStringBindingParse                           *win32.Proc
+	RpcStringBindingParseA                          *win32.Proc
+	RpcStringFree                                   *win32.Proc
+	RpcStringFreeA                                  *win32.Proc
+	RpcTestCancel                                   *win32.Proc
+	RpcUserFree                                     *win32.Proc
+	UuidCompare                                     *win32.Proc
+	UuidCreate                                      *win32.Proc
+	UuidCreateNil                                   *win32.Proc
+	UuidCreateSequential                            *win32.Proc
+	UuidEqual                                       *win32.Proc
+	UuidFromString                                  *win32.Proc
+	UuidFromStringA                                 *win32.Proc
+	UuidHash                                        *win32.Proc
+	UuidIsNil                                       *win32.Proc
+	UuidToString                                    *win32.Proc
+	UuidToStringA                                   *win32.Proc
 }{
-	DceErrorInqText:                                procDceErrorInqText,
-	DceErrorInqTextA:                               procDceErrorInqTextA,
-	IUnknown_AddRef_Proxy:                          procIUnknown_AddRef_Proxy,
-	IUnknown_QueryInterface_Proxy:                  procIUnknown_QueryInterface_Proxy,
-	IUnknown_Release_Proxy:                         procIUnknown_Release_Proxy,
-	I_RpcAllocate:                                  procI_RpcAllocate,
-	I_RpcAsyncAbortCall:                            procI_RpcAsyncAbortCall,
-	I_RpcAsyncSetHandle:                            procI_RpcAsyncSetHandle,
-	I_RpcBindingCopy:                               procI_RpcBindingCopy,
-	I_RpcBindingCreateNP:                           procI_RpcBindingCreateNP,
-	I_RpcBindingHandleToAsyncHandle:                procI_RpcBindingHandleToAsyncHandle,
-	I_RpcBindingInqClientTokenAttributes:           procI_RpcBindingInqClientTokenAttributes,
-	I_RpcBindingInqDynamicEndpoint:                 procI_RpcBindingInqDynamicEndpoint,
-	I_RpcBindingInqDynamicEndpointA:                procI_RpcBindingInqDynamicEndpointA,
-	I_RpcBindingInqLocalClientPID:                  procI_RpcBindingInqLocalClientPID,
-	I_RpcBindingInqMarshalledTargetInfo:            procI_RpcBindingInqMarshalledTargetInfo,
-	I_RpcBindingInqSecurityContext:                 procI_RpcBindingInqSecurityContext,
-	I_RpcBindingInqSecurityContextKeyInfo:          procI_RpcBindingInqSecurityContextKeyInfo,
-	I_RpcBindingInqTransportType:                   procI_RpcBindingInqTransportType,
-	I_RpcBindingInqWireIdForSnego:                  procI_RpcBindingInqWireIdForSnego,
-	I_RpcBindingIsClientLocal:                      procI_RpcBindingIsClientLocal,
-	I_RpcBindingIsServerLocal:                      procI_RpcBindingIsServerLocal,
-	I_RpcBindingSetPrivateOption:                   procI_RpcBindingSetPrivateOption,
-	I_RpcBindingToStaticStringBindingW:             procI_RpcBindingToStaticStringBindingW,
-	I_RpcClearMutex:                                procI_RpcClearMutex,
-	I_RpcDeleteMutex:                               procI_RpcDeleteMutex,
-	I_RpcExceptionFilter:                           procI_RpcExceptionFilter,
-	I_RpcFree:                                      procI_RpcFree,
-	I_RpcFreeBuffer:                                procI_RpcFreeBuffer,
-	I_RpcFreePipeBuffer:                            procI_RpcFreePipeBuffer,
-	I_RpcGetBuffer:                                 procI_RpcGetBuffer,
-	I_RpcGetBufferWithObject:                       procI_RpcGetBufferWithObject,
-	I_RpcGetCurrentCallHandle:                      procI_RpcGetCurrentCallHandle,
-	I_RpcGetDefaultSD:                              procI_RpcGetDefaultSD,
-	I_RpcGetExtendedError:                          procI_RpcGetExtendedError,
-	I_RpcIfInqTransferSyntaxes:                     procI_RpcIfInqTransferSyntaxes,
-	I_RpcMapWin32Status:                            procI_RpcMapWin32Status,
-	I_RpcMgmtEnableDedicatedThreadPool:             procI_RpcMgmtEnableDedicatedThreadPool,
-	I_RpcNegotiateTransferSyntax:                   procI_RpcNegotiateTransferSyntax,
-	I_RpcNsBindingSetEntryName:                     procI_RpcNsBindingSetEntryName,
-	I_RpcNsBindingSetEntryNameA:                    procI_RpcNsBindingSetEntryNameA,
-	I_RpcNsGetBuffer:                               procI_RpcNsGetBuffer,
-	I_RpcNsInterfaceExported:                       procI_RpcNsInterfaceExported,
-	I_RpcNsInterfaceUnexported:                     procI_RpcNsInterfaceUnexported,
-	I_RpcNsRaiseException:                          procI_RpcNsRaiseException,
-	I_RpcNsSendReceive:                             procI_RpcNsSendReceive,
-	I_RpcOpenClientProcess:                         procI_RpcOpenClientProcess,
-	I_RpcPauseExecution:                            procI_RpcPauseExecution,
-	I_RpcReBindBuffer:                              procI_RpcReBindBuffer,
-	I_RpcReallocPipeBuffer:                         procI_RpcReallocPipeBuffer,
-	I_RpcReceive:                                   procI_RpcReceive,
-	I_RpcRecordCalloutFailure:                      procI_RpcRecordCalloutFailure,
-	I_RpcRequestMutex:                              procI_RpcRequestMutex,
-	I_RpcSend:                                      procI_RpcSend,
-	I_RpcSendReceive:                               procI_RpcSendReceive,
-	I_RpcServerCheckClientRestriction:              procI_RpcServerCheckClientRestriction,
-	I_RpcServerDisableExceptionFilter:              procI_RpcServerDisableExceptionFilter,
-	I_RpcServerGetAssociationID:                    procI_RpcServerGetAssociationID,
-	I_RpcServerInqAddressChangeFn:                  procI_RpcServerInqAddressChangeFn,
-	I_RpcServerInqLocalConnAddress:                 procI_RpcServerInqLocalConnAddress,
-	I_RpcServerInqRemoteConnAddress:                procI_RpcServerInqRemoteConnAddress,
-	I_RpcServerInqTransportType:                    procI_RpcServerInqTransportType,
-	I_RpcServerRegisterForwardFunction:             procI_RpcServerRegisterForwardFunction,
-	I_RpcServerSetAddressChangeFn:                  procI_RpcServerSetAddressChangeFn,
-	I_RpcServerStartService:                        procI_RpcServerStartService,
-	I_RpcServerSubscribeForDisconnectNotification:  procI_RpcServerSubscribeForDisconnectNotification,
-	I_RpcServerSubscribeForDisconnectNotification2: procI_RpcServerSubscribeForDisconnectNotification2,
-	I_RpcServerUseProtseq2:                         procI_RpcServerUseProtseq2,
-	I_RpcServerUseProtseq2A:                        procI_RpcServerUseProtseq2A,
-	I_RpcServerUseProtseqEp2:                       procI_RpcServerUseProtseqEp2,
-	I_RpcServerUseProtseqEp2A:                      procI_RpcServerUseProtseqEp2A,
-	I_RpcSessionStrictContextHandle:                procI_RpcSessionStrictContextHandle,
-	I_RpcSsDontSerializeContext:                    procI_RpcSsDontSerializeContext,
-	I_RpcSystemHandleTypeSpecificWork:              procI_RpcSystemHandleTypeSpecificWork,
-	I_RpcTurnOnEEInfoPropagation:                   procI_RpcTurnOnEEInfoPropagation,
-	I_UuidCreate:                                   procI_UuidCreate,
-	MesBufferHandleReset:                           procMesBufferHandleReset,
-	MesDecodeBufferHandleCreate:                    procMesDecodeBufferHandleCreate,
-	MesDecodeIncrementalHandleCreate:               procMesDecodeIncrementalHandleCreate,
-	MesEncodeDynBufferHandleCreate:                 procMesEncodeDynBufferHandleCreate,
-	MesEncodeFixedBufferHandleCreate:               procMesEncodeFixedBufferHandleCreate,
-	MesEncodeIncrementalHandleCreate:               procMesEncodeIncrementalHandleCreate,
-	MesHandleFree:                                  procMesHandleFree,
-	MesIncrementalHandleReset:                      procMesIncrementalHandleReset,
-	MesInqProcEncodingId:                           procMesInqProcEncodingId,
-	NDRCContextBinding:                             procNDRCContextBinding,
-	NDRCContextMarshall:                            procNDRCContextMarshall,
-	NDRCContextUnmarshall:                          procNDRCContextUnmarshall,
-	NDRSContextMarshall:                            procNDRSContextMarshall,
-	NDRSContextMarshall2:                           procNDRSContextMarshall2,
-	NDRSContextMarshallEx:                          procNDRSContextMarshallEx,
-	NDRSContextUnmarshall:                          procNDRSContextUnmarshall,
-	NDRSContextUnmarshall2:                         procNDRSContextUnmarshall2,
-	NDRSContextUnmarshallEx:                        procNDRSContextUnmarshallEx,
-	Ndr64AsyncClientCall:                           procNdr64AsyncClientCall,
-	Ndr64AsyncServerCall64:                         procNdr64AsyncServerCall64,
-	Ndr64AsyncServerCallAll:                        procNdr64AsyncServerCallAll,
-	Ndr64DcomAsyncClientCall:                       procNdr64DcomAsyncClientCall,
-	Ndr64DcomAsyncStubCall:                         procNdr64DcomAsyncStubCall,
-	NdrAllocate:                                    procNdrAllocate,
-	NdrAsyncClientCall:                             procNdrAsyncClientCall,
-	NdrAsyncServerCall:                             procNdrAsyncServerCall,
-	NdrByteCountPointerBufferSize:                  procNdrByteCountPointerBufferSize,
-	NdrByteCountPointerFree:                        procNdrByteCountPointerFree,
-	NdrByteCountPointerMarshall:                    procNdrByteCountPointerMarshall,
-	NdrByteCountPointerUnmarshall:                  procNdrByteCountPointerUnmarshall,
-	NdrClearOutParameters:                          procNdrClearOutParameters,
-	NdrClientCall2:                                 procNdrClientCall2,
-	NdrClientCall3:                                 procNdrClientCall3,
-	NdrClientContextMarshall:                       procNdrClientContextMarshall,
-	NdrClientContextUnmarshall:                     procNdrClientContextUnmarshall,
-	NdrClientInitialize:                            procNdrClientInitialize,
-	NdrClientInitializeNew:                         procNdrClientInitializeNew,
-	NdrComplexArrayBufferSize:                      procNdrComplexArrayBufferSize,
-	NdrComplexArrayFree:                            procNdrComplexArrayFree,
-	NdrComplexArrayMarshall:                        procNdrComplexArrayMarshall,
-	NdrComplexArrayMemorySize:                      procNdrComplexArrayMemorySize,
-	NdrComplexArrayUnmarshall:                      procNdrComplexArrayUnmarshall,
-	NdrComplexStructBufferSize:                     procNdrComplexStructBufferSize,
-	NdrComplexStructFree:                           procNdrComplexStructFree,
-	NdrComplexStructMarshall:                       procNdrComplexStructMarshall,
-	NdrComplexStructMemorySize:                     procNdrComplexStructMemorySize,
-	NdrComplexStructUnmarshall:                     procNdrComplexStructUnmarshall,
-	NdrConformantArrayBufferSize:                   procNdrConformantArrayBufferSize,
-	NdrConformantArrayFree:                         procNdrConformantArrayFree,
-	NdrConformantArrayMarshall:                     procNdrConformantArrayMarshall,
-	NdrConformantArrayMemorySize:                   procNdrConformantArrayMemorySize,
-	NdrConformantArrayUnmarshall:                   procNdrConformantArrayUnmarshall,
-	NdrConformantStringBufferSize:                  procNdrConformantStringBufferSize,
-	NdrConformantStringMarshall:                    procNdrConformantStringMarshall,
-	NdrConformantStringMemorySize:                  procNdrConformantStringMemorySize,
-	NdrConformantStringUnmarshall:                  procNdrConformantStringUnmarshall,
-	NdrConformantStructBufferSize:                  procNdrConformantStructBufferSize,
-	NdrConformantStructFree:                        procNdrConformantStructFree,
-	NdrConformantStructMarshall:                    procNdrConformantStructMarshall,
-	NdrConformantStructMemorySize:                  procNdrConformantStructMemorySize,
-	NdrConformantStructUnmarshall:                  procNdrConformantStructUnmarshall,
-	NdrConformantVaryingArrayBufferSize:            procNdrConformantVaryingArrayBufferSize,
-	NdrConformantVaryingArrayFree:                  procNdrConformantVaryingArrayFree,
-	NdrConformantVaryingArrayMarshall:              procNdrConformantVaryingArrayMarshall,
-	NdrConformantVaryingArrayMemorySize:            procNdrConformantVaryingArrayMemorySize,
-	NdrConformantVaryingArrayUnmarshall:            procNdrConformantVaryingArrayUnmarshall,
-	NdrConformantVaryingStructBufferSize:           procNdrConformantVaryingStructBufferSize,
-	NdrConformantVaryingStructFree:                 procNdrConformantVaryingStructFree,
-	NdrConformantVaryingStructMarshall:             procNdrConformantVaryingStructMarshall,
-	NdrConformantVaryingStructMemorySize:           procNdrConformantVaryingStructMemorySize,
-	NdrConformantVaryingStructUnmarshall:           procNdrConformantVaryingStructUnmarshall,
-	NdrContextHandleInitialize:                     procNdrContextHandleInitialize,
-	NdrContextHandleSize:                           procNdrContextHandleSize,
-	NdrConvert:                                     procNdrConvert,
-	NdrConvert2:                                    procNdrConvert2,
-	NdrCorrelationFree:                             procNdrCorrelationFree,
-	NdrCorrelationInitialize:                       procNdrCorrelationInitialize,
-	NdrCorrelationPass:                             procNdrCorrelationPass,
-	NdrCreateServerInterfaceFromStub:               procNdrCreateServerInterfaceFromStub,
-	NdrDcomAsyncClientCall:                         procNdrDcomAsyncClientCall,
-	NdrDcomAsyncStubCall:                           procNdrDcomAsyncStubCall,
-	NdrEncapsulatedUnionBufferSize:                 procNdrEncapsulatedUnionBufferSize,
-	NdrEncapsulatedUnionFree:                       procNdrEncapsulatedUnionFree,
-	NdrEncapsulatedUnionMarshall:                   procNdrEncapsulatedUnionMarshall,
-	NdrEncapsulatedUnionMemorySize:                 procNdrEncapsulatedUnionMemorySize,
-	NdrEncapsulatedUnionUnmarshall:                 procNdrEncapsulatedUnionUnmarshall,
-	NdrFixedArrayBufferSize:                        procNdrFixedArrayBufferSize,
-	NdrFixedArrayFree:                              procNdrFixedArrayFree,
-	NdrFixedArrayMarshall:                          procNdrFixedArrayMarshall,
-	NdrFixedArrayMemorySize:                        procNdrFixedArrayMemorySize,
-	NdrFixedArrayUnmarshall:                        procNdrFixedArrayUnmarshall,
-	NdrFreeBuffer:                                  procNdrFreeBuffer,
-	NdrFullPointerXlatFree:                         procNdrFullPointerXlatFree,
-	NdrFullPointerXlatInit:                         procNdrFullPointerXlatInit,
-	NdrGetBuffer:                                   procNdrGetBuffer,
-	NdrGetDcomProtocolVersion:                      procNdrGetDcomProtocolVersion,
-	NdrGetUserMarshalInfo:                          procNdrGetUserMarshalInfo,
-	NdrInterfacePointerBufferSize:                  procNdrInterfacePointerBufferSize,
-	NdrInterfacePointerFree:                        procNdrInterfacePointerFree,
-	NdrInterfacePointerMarshall:                    procNdrInterfacePointerMarshall,
-	NdrInterfacePointerMemorySize:                  procNdrInterfacePointerMemorySize,
-	NdrInterfacePointerUnmarshall:                  procNdrInterfacePointerUnmarshall,
-	NdrMapCommAndFaultStatus:                       procNdrMapCommAndFaultStatus,
-	NdrMesProcEncodeDecode:                         procNdrMesProcEncodeDecode,
-	NdrMesProcEncodeDecode2:                        procNdrMesProcEncodeDecode2,
-	NdrMesProcEncodeDecode3:                        procNdrMesProcEncodeDecode3,
-	NdrMesSimpleTypeAlignSize:                      procNdrMesSimpleTypeAlignSize,
-	NdrMesSimpleTypeAlignSizeAll:                   procNdrMesSimpleTypeAlignSizeAll,
-	NdrMesSimpleTypeDecode:                         procNdrMesSimpleTypeDecode,
-	NdrMesSimpleTypeDecodeAll:                      procNdrMesSimpleTypeDecodeAll,
-	NdrMesSimpleTypeEncode:                         procNdrMesSimpleTypeEncode,
-	NdrMesSimpleTypeEncodeAll:                      procNdrMesSimpleTypeEncodeAll,
-	NdrMesTypeAlignSize:                            procNdrMesTypeAlignSize,
-	NdrMesTypeAlignSize2:                           procNdrMesTypeAlignSize2,
-	NdrMesTypeAlignSize3:                           procNdrMesTypeAlignSize3,
-	NdrMesTypeDecode:                               procNdrMesTypeDecode,
-	NdrMesTypeDecode2:                              procNdrMesTypeDecode2,
-	NdrMesTypeDecode3:                              procNdrMesTypeDecode3,
-	NdrMesTypeEncode:                               procNdrMesTypeEncode,
-	NdrMesTypeEncode2:                              procNdrMesTypeEncode2,
-	NdrMesTypeEncode3:                              procNdrMesTypeEncode3,
-	NdrMesTypeFree2:                                procNdrMesTypeFree2,
-	NdrMesTypeFree3:                                procNdrMesTypeFree3,
-	NdrNonConformantStringBufferSize:               procNdrNonConformantStringBufferSize,
-	NdrNonConformantStringMarshall:                 procNdrNonConformantStringMarshall,
-	NdrNonConformantStringMemorySize:               procNdrNonConformantStringMemorySize,
-	NdrNonConformantStringUnmarshall:               procNdrNonConformantStringUnmarshall,
-	NdrNonEncapsulatedUnionBufferSize:              procNdrNonEncapsulatedUnionBufferSize,
-	NdrNonEncapsulatedUnionFree:                    procNdrNonEncapsulatedUnionFree,
-	NdrNonEncapsulatedUnionMarshall:                procNdrNonEncapsulatedUnionMarshall,
-	NdrNonEncapsulatedUnionMemorySize:              procNdrNonEncapsulatedUnionMemorySize,
-	NdrNonEncapsulatedUnionUnmarshall:              procNdrNonEncapsulatedUnionUnmarshall,
-	NdrNsGetBuffer:                                 procNdrNsGetBuffer,
-	NdrNsSendReceive:                               procNdrNsSendReceive,
-	NdrOleAllocate:                                 procNdrOleAllocate,
-	NdrOleFree:                                     procNdrOleFree,
-	NdrPartialIgnoreClientBufferSize:               procNdrPartialIgnoreClientBufferSize,
-	NdrPartialIgnoreClientMarshall:                 procNdrPartialIgnoreClientMarshall,
-	NdrPartialIgnoreServerInitialize:               procNdrPartialIgnoreServerInitialize,
-	NdrPartialIgnoreServerUnmarshall:               procNdrPartialIgnoreServerUnmarshall,
-	NdrPointerBufferSize:                           procNdrPointerBufferSize,
-	NdrPointerFree:                                 procNdrPointerFree,
-	NdrPointerMarshall:                             procNdrPointerMarshall,
-	NdrPointerMemorySize:                           procNdrPointerMemorySize,
-	NdrPointerUnmarshall:                           procNdrPointerUnmarshall,
-	NdrRangeUnmarshall:                             procNdrRangeUnmarshall,
-	NdrRpcSmClientAllocate:                         procNdrRpcSmClientAllocate,
-	NdrRpcSmClientFree:                             procNdrRpcSmClientFree,
-	NdrRpcSmSetClientToOsf:                         procNdrRpcSmSetClientToOsf,
-	NdrRpcSsDefaultAllocate:                        procNdrRpcSsDefaultAllocate,
-	NdrRpcSsDefaultFree:                            procNdrRpcSsDefaultFree,
-	NdrRpcSsDisableAllocate:                        procNdrRpcSsDisableAllocate,
-	NdrRpcSsEnableAllocate:                         procNdrRpcSsEnableAllocate,
-	NdrSendReceive:                                 procNdrSendReceive,
-	NdrServerCall2:                                 procNdrServerCall2,
-	NdrServerCallAll:                               procNdrServerCallAll,
-	NdrServerCallNdr64:                             procNdrServerCallNdr64,
-	NdrServerContextMarshall:                       procNdrServerContextMarshall,
-	NdrServerContextNewMarshall:                    procNdrServerContextNewMarshall,
-	NdrServerContextNewUnmarshall:                  procNdrServerContextNewUnmarshall,
-	NdrServerContextUnmarshall:                     procNdrServerContextUnmarshall,
-	NdrServerInitialize:                            procNdrServerInitialize,
-	NdrServerInitializeMarshall:                    procNdrServerInitializeMarshall,
-	NdrServerInitializeNew:                         procNdrServerInitializeNew,
-	NdrServerInitializePartial:                     procNdrServerInitializePartial,
-	NdrServerInitializeUnmarshall:                  procNdrServerInitializeUnmarshall,
-	NdrSimpleStructBufferSize:                      procNdrSimpleStructBufferSize,
-	NdrSimpleStructFree:                            procNdrSimpleStructFree,
-	NdrSimpleStructMarshall:                        procNdrSimpleStructMarshall,
-	NdrSimpleStructMemorySize:                      procNdrSimpleStructMemorySize,
-	NdrSimpleStructUnmarshall:                      procNdrSimpleStructUnmarshall,
-	NdrSimpleTypeMarshall:                          procNdrSimpleTypeMarshall,
-	NdrSimpleTypeUnmarshall:                        procNdrSimpleTypeUnmarshall,
-	NdrStubCall2:                                   procNdrStubCall2,
-	NdrStubCall3:                                   procNdrStubCall3,
-	NdrUserMarshalBufferSize:                       procNdrUserMarshalBufferSize,
-	NdrUserMarshalFree:                             procNdrUserMarshalFree,
-	NdrUserMarshalMarshall:                         procNdrUserMarshalMarshall,
-	NdrUserMarshalMemorySize:                       procNdrUserMarshalMemorySize,
-	NdrUserMarshalSimpleTypeConvert:                procNdrUserMarshalSimpleTypeConvert,
-	NdrUserMarshalUnmarshall:                       procNdrUserMarshalUnmarshall,
-	NdrVaryingArrayBufferSize:                      procNdrVaryingArrayBufferSize,
-	NdrVaryingArrayFree:                            procNdrVaryingArrayFree,
-	NdrVaryingArrayMarshall:                        procNdrVaryingArrayMarshall,
-	NdrVaryingArrayMemorySize:                      procNdrVaryingArrayMemorySize,
-	NdrVaryingArrayUnmarshall:                      procNdrVaryingArrayUnmarshall,
-	NdrXmitOrRepAsBufferSize:                       procNdrXmitOrRepAsBufferSize,
-	NdrXmitOrRepAsFree:                             procNdrXmitOrRepAsFree,
-	NdrXmitOrRepAsMarshall:                         procNdrXmitOrRepAsMarshall,
-	NdrXmitOrRepAsMemorySize:                       procNdrXmitOrRepAsMemorySize,
-	NdrXmitOrRepAsUnmarshall:                       procNdrXmitOrRepAsUnmarshall,
-	RpcAsyncAbortCall:                              procRpcAsyncAbortCall,
-	RpcAsyncCancelCall:                             procRpcAsyncCancelCall,
-	RpcAsyncCompleteCall:                           procRpcAsyncCompleteCall,
-	RpcAsyncGetCallStatus:                          procRpcAsyncGetCallStatus,
-	RpcAsyncInitializeHandle:                       procRpcAsyncInitializeHandle,
-	RpcAsyncRegisterInfo:                           procRpcAsyncRegisterInfo,
-	RpcBindingBind:                                 procRpcBindingBind,
-	RpcBindingCopy:                                 procRpcBindingCopy,
-	RpcBindingCreate:                               procRpcBindingCreate,
-	RpcBindingCreateA:                              procRpcBindingCreateA,
-	RpcBindingFree:                                 procRpcBindingFree,
-	RpcBindingFromStringBinding:                    procRpcBindingFromStringBinding,
-	RpcBindingFromStringBindingA:                   procRpcBindingFromStringBindingA,
-	RpcBindingInqAuthClient:                        procRpcBindingInqAuthClient,
-	RpcBindingInqAuthClientA:                       procRpcBindingInqAuthClientA,
-	RpcBindingInqAuthClientEx:                      procRpcBindingInqAuthClientEx,
-	RpcBindingInqAuthClientExA:                     procRpcBindingInqAuthClientExA,
-	RpcBindingInqAuthInfo:                          procRpcBindingInqAuthInfo,
-	RpcBindingInqAuthInfoA:                         procRpcBindingInqAuthInfoA,
-	RpcBindingInqAuthInfoEx:                        procRpcBindingInqAuthInfoEx,
-	RpcBindingInqAuthInfoExA:                       procRpcBindingInqAuthInfoExA,
-	RpcBindingInqMaxCalls:                          procRpcBindingInqMaxCalls,
-	RpcBindingInqObject:                            procRpcBindingInqObject,
-	RpcBindingInqOption:                            procRpcBindingInqOption,
-	RpcBindingReset:                                procRpcBindingReset,
-	RpcBindingServerFromClient:                     procRpcBindingServerFromClient,
-	RpcBindingSetAuthInfo:                          procRpcBindingSetAuthInfo,
-	RpcBindingSetAuthInfoA:                         procRpcBindingSetAuthInfoA,
-	RpcBindingSetAuthInfoEx:                        procRpcBindingSetAuthInfoEx,
-	RpcBindingSetAuthInfoExA:                       procRpcBindingSetAuthInfoExA,
-	RpcBindingSetObject:                            procRpcBindingSetObject,
-	RpcBindingSetOption:                            procRpcBindingSetOption,
-	RpcBindingToStringBinding:                      procRpcBindingToStringBinding,
-	RpcBindingToStringBindingA:                     procRpcBindingToStringBindingA,
-	RpcBindingUnbind:                               procRpcBindingUnbind,
-	RpcBindingVectorFree:                           procRpcBindingVectorFree,
-	RpcCancelThread:                                procRpcCancelThread,
-	RpcCancelThreadEx:                              procRpcCancelThreadEx,
-	RpcCertGeneratePrincipalName:                   procRpcCertGeneratePrincipalName,
-	RpcCertGeneratePrincipalNameA:                  procRpcCertGeneratePrincipalNameA,
-	RpcEpRegister:                                  procRpcEpRegister,
-	RpcEpRegisterA:                                 procRpcEpRegisterA,
-	RpcEpRegisterNoReplace:                         procRpcEpRegisterNoReplace,
-	RpcEpRegisterNoReplaceA:                        procRpcEpRegisterNoReplaceA,
-	RpcEpResolveBinding:                            procRpcEpResolveBinding,
-	RpcEpUnregister:                                procRpcEpUnregister,
-	RpcErrorAddRecord:                              procRpcErrorAddRecord,
-	RpcErrorClearInformation:                       procRpcErrorClearInformation,
-	RpcErrorEndEnumeration:                         procRpcErrorEndEnumeration,
-	RpcErrorGetNextRecord:                          procRpcErrorGetNextRecord,
-	RpcErrorGetNumberOfRecords:                     procRpcErrorGetNumberOfRecords,
-	RpcErrorLoadErrorInfo:                          procRpcErrorLoadErrorInfo,
-	RpcErrorResetEnumeration:                       procRpcErrorResetEnumeration,
-	RpcErrorSaveErrorInfo:                          procRpcErrorSaveErrorInfo,
-	RpcErrorStartEnumeration:                       procRpcErrorStartEnumeration,
-	RpcExceptionFilter:                             procRpcExceptionFilter,
-	RpcFreeAuthorizationContext:                    procRpcFreeAuthorizationContext,
-	RpcGetAuthorizationContextForClient:            procRpcGetAuthorizationContextForClient,
-	RpcIfIdVectorFree:                              procRpcIfIdVectorFree,
-	RpcIfInqId:                                     procRpcIfInqId,
-	RpcImpersonateClient:                           procRpcImpersonateClient,
-	RpcImpersonateClient2:                          procRpcImpersonateClient2,
-	RpcImpersonateClientContainer:                  procRpcImpersonateClientContainer,
-	RpcMgmtEnableIdleCleanup:                       procRpcMgmtEnableIdleCleanup,
-	RpcMgmtEpEltInqBegin:                           procRpcMgmtEpEltInqBegin,
-	RpcMgmtEpEltInqDone:                            procRpcMgmtEpEltInqDone,
-	RpcMgmtEpEltInqNext:                            procRpcMgmtEpEltInqNext,
-	RpcMgmtEpEltInqNextA:                           procRpcMgmtEpEltInqNextA,
-	RpcMgmtEpUnregister:                            procRpcMgmtEpUnregister,
-	RpcMgmtInqComTimeout:                           procRpcMgmtInqComTimeout,
-	RpcMgmtInqDefaultProtectLevel:                  procRpcMgmtInqDefaultProtectLevel,
-	RpcMgmtInqIfIds:                                procRpcMgmtInqIfIds,
-	RpcMgmtInqServerPrincName:                      procRpcMgmtInqServerPrincName,
-	RpcMgmtInqServerPrincNameA:                     procRpcMgmtInqServerPrincNameA,
-	RpcMgmtInqStats:                                procRpcMgmtInqStats,
-	RpcMgmtIsServerListening:                       procRpcMgmtIsServerListening,
-	RpcMgmtSetAuthorizationFn:                      procRpcMgmtSetAuthorizationFn,
-	RpcMgmtSetCancelTimeout:                        procRpcMgmtSetCancelTimeout,
-	RpcMgmtSetComTimeout:                           procRpcMgmtSetComTimeout,
-	RpcMgmtSetServerStackSize:                      procRpcMgmtSetServerStackSize,
-	RpcMgmtStatsVectorFree:                         procRpcMgmtStatsVectorFree,
-	RpcMgmtStopServerListening:                     procRpcMgmtStopServerListening,
-	RpcMgmtWaitServerListen:                        procRpcMgmtWaitServerListen,
-	RpcNetworkInqProtseqs:                          procRpcNetworkInqProtseqs,
-	RpcNetworkInqProtseqsA:                         procRpcNetworkInqProtseqsA,
-	RpcNetworkIsProtseqValid:                       procRpcNetworkIsProtseqValid,
-	RpcNetworkIsProtseqValidA:                      procRpcNetworkIsProtseqValidA,
-	RpcNsBindingExport:                             procRpcNsBindingExport,
-	RpcNsBindingExportA:                            procRpcNsBindingExportA,
-	RpcNsBindingExportPnP:                          procRpcNsBindingExportPnP,
-	RpcNsBindingExportPnPA:                         procRpcNsBindingExportPnPA,
-	RpcNsBindingImportBegin:                        procRpcNsBindingImportBegin,
-	RpcNsBindingImportBeginA:                       procRpcNsBindingImportBeginA,
-	RpcNsBindingImportDone:                         procRpcNsBindingImportDone,
-	RpcNsBindingImportNext:                         procRpcNsBindingImportNext,
-	RpcNsBindingInqEntryName:                       procRpcNsBindingInqEntryName,
-	RpcNsBindingInqEntryNameA:                      procRpcNsBindingInqEntryNameA,
-	RpcNsBindingLookupBegin:                        procRpcNsBindingLookupBegin,
-	RpcNsBindingLookupBeginA:                       procRpcNsBindingLookupBeginA,
-	RpcNsBindingLookupDone:                         procRpcNsBindingLookupDone,
-	RpcNsBindingLookupNext:                         procRpcNsBindingLookupNext,
-	RpcNsBindingSelect:                             procRpcNsBindingSelect,
-	RpcNsBindingUnexport:                           procRpcNsBindingUnexport,
-	RpcNsBindingUnexportA:                          procRpcNsBindingUnexportA,
-	RpcNsBindingUnexportPnP:                        procRpcNsBindingUnexportPnP,
-	RpcNsBindingUnexportPnPA:                       procRpcNsBindingUnexportPnPA,
-	RpcNsEntryExpandName:                           procRpcNsEntryExpandName,
-	RpcNsEntryExpandNameA:                          procRpcNsEntryExpandNameA,
-	RpcNsEntryObjectInqBegin:                       procRpcNsEntryObjectInqBegin,
-	RpcNsEntryObjectInqBeginA:                      procRpcNsEntryObjectInqBeginA,
-	RpcNsEntryObjectInqDone:                        procRpcNsEntryObjectInqDone,
-	RpcNsEntryObjectInqNext:                        procRpcNsEntryObjectInqNext,
-	RpcNsGroupDelete:                               procRpcNsGroupDelete,
-	RpcNsGroupDeleteA:                              procRpcNsGroupDeleteA,
-	RpcNsGroupMbrAdd:                               procRpcNsGroupMbrAdd,
-	RpcNsGroupMbrAddA:                              procRpcNsGroupMbrAddA,
-	RpcNsGroupMbrInqBegin:                          procRpcNsGroupMbrInqBegin,
-	RpcNsGroupMbrInqBeginA:                         procRpcNsGroupMbrInqBeginA,
-	RpcNsGroupMbrInqDone:                           procRpcNsGroupMbrInqDone,
-	RpcNsGroupMbrInqNext:                           procRpcNsGroupMbrInqNext,
-	RpcNsGroupMbrInqNextA:                          procRpcNsGroupMbrInqNextA,
-	RpcNsGroupMbrRemove:                            procRpcNsGroupMbrRemove,
-	RpcNsGroupMbrRemoveA:                           procRpcNsGroupMbrRemoveA,
-	RpcNsMgmtBindingUnexport:                       procRpcNsMgmtBindingUnexport,
-	RpcNsMgmtBindingUnexportA:                      procRpcNsMgmtBindingUnexportA,
-	RpcNsMgmtEntryCreate:                           procRpcNsMgmtEntryCreate,
-	RpcNsMgmtEntryCreateA:                          procRpcNsMgmtEntryCreateA,
-	RpcNsMgmtEntryDelete:                           procRpcNsMgmtEntryDelete,
-	RpcNsMgmtEntryDeleteA:                          procRpcNsMgmtEntryDeleteA,
-	RpcNsMgmtEntryInqIfIds:                         procRpcNsMgmtEntryInqIfIds,
-	RpcNsMgmtEntryInqIfIdsA:                        procRpcNsMgmtEntryInqIfIdsA,
-	RpcNsMgmtHandleSetExpAge:                       procRpcNsMgmtHandleSetExpAge,
-	RpcNsMgmtInqExpAge:                             procRpcNsMgmtInqExpAge,
-	RpcNsMgmtSetExpAge:                             procRpcNsMgmtSetExpAge,
-	RpcNsProfileDelete:                             procRpcNsProfileDelete,
-	RpcNsProfileDeleteA:                            procRpcNsProfileDeleteA,
-	RpcNsProfileEltAdd:                             procRpcNsProfileEltAdd,
-	RpcNsProfileEltAddA:                            procRpcNsProfileEltAddA,
-	RpcNsProfileEltInqBegin:                        procRpcNsProfileEltInqBegin,
-	RpcNsProfileEltInqBeginA:                       procRpcNsProfileEltInqBeginA,
-	RpcNsProfileEltInqDone:                         procRpcNsProfileEltInqDone,
-	RpcNsProfileEltInqNext:                         procRpcNsProfileEltInqNext,
-	RpcNsProfileEltInqNextA:                        procRpcNsProfileEltInqNextA,
-	RpcNsProfileEltRemove:                          procRpcNsProfileEltRemove,
-	RpcNsProfileEltRemoveA:                         procRpcNsProfileEltRemoveA,
-	RpcObjectInqType:                               procRpcObjectInqType,
-	RpcObjectSetInqFn:                              procRpcObjectSetInqFn,
-	RpcObjectSetType:                               procRpcObjectSetType,
-	RpcProtseqVectorFree:                           procRpcProtseqVectorFree,
-	RpcProtseqVectorFreeA:                          procRpcProtseqVectorFreeA,
-	RpcRaiseException:                              procRpcRaiseException,
-	RpcRevertContainerImpersonation:                procRpcRevertContainerImpersonation,
-	RpcRevertToSelf:                                procRpcRevertToSelf,
-	RpcRevertToSelfEx:                              procRpcRevertToSelfEx,
-	RpcServerCompleteSecurityCallback:              procRpcServerCompleteSecurityCallback,
-	RpcServerInqBindingHandle:                      procRpcServerInqBindingHandle,
-	RpcServerInqBindings:                           procRpcServerInqBindings,
-	RpcServerInqBindingsEx:                         procRpcServerInqBindingsEx,
-	RpcServerInqCallAttributes:                     procRpcServerInqCallAttributes,
-	RpcServerInqCallAttributesA:                    procRpcServerInqCallAttributesA,
-	RpcServerInqDefaultPrincName:                   procRpcServerInqDefaultPrincName,
-	RpcServerInqDefaultPrincNameA:                  procRpcServerInqDefaultPrincNameA,
-	RpcServerInqIf:                                 procRpcServerInqIf,
-	RpcServerInterfaceGroupActivate:                procRpcServerInterfaceGroupActivate,
-	RpcServerInterfaceGroupClose:                   procRpcServerInterfaceGroupClose,
-	RpcServerInterfaceGroupCreate:                  procRpcServerInterfaceGroupCreate,
-	RpcServerInterfaceGroupCreateA:                 procRpcServerInterfaceGroupCreateA,
-	RpcServerInterfaceGroupDeactivate:              procRpcServerInterfaceGroupDeactivate,
-	RpcServerInterfaceGroupInqBindings:             procRpcServerInterfaceGroupInqBindings,
-	RpcServerListen:                                procRpcServerListen,
-	RpcServerRegisterAuthInfo:                      procRpcServerRegisterAuthInfo,
-	RpcServerRegisterAuthInfoA:                     procRpcServerRegisterAuthInfoA,
-	RpcServerRegisterIf:                            procRpcServerRegisterIf,
-	RpcServerRegisterIf2:                           procRpcServerRegisterIf2,
-	RpcServerRegisterIf3:                           procRpcServerRegisterIf3,
-	RpcServerRegisterIfEx:                          procRpcServerRegisterIfEx,
-	RpcServerSubscribeForNotification:              procRpcServerSubscribeForNotification,
-	RpcServerTestCancel:                            procRpcServerTestCancel,
-	RpcServerUnregisterIf:                          procRpcServerUnregisterIf,
-	RpcServerUnregisterIfEx:                        procRpcServerUnregisterIfEx,
-	RpcServerUnsubscribeForNotification:            procRpcServerUnsubscribeForNotification,
-	RpcServerUseAllProtseqs:                        procRpcServerUseAllProtseqs,
-	RpcServerUseAllProtseqsEx:                      procRpcServerUseAllProtseqsEx,
-	RpcServerUseAllProtseqsIf:                      procRpcServerUseAllProtseqsIf,
-	RpcServerUseAllProtseqsIfEx:                    procRpcServerUseAllProtseqsIfEx,
-	RpcServerUseProtseq:                            procRpcServerUseProtseq,
-	RpcServerUseProtseqA:                           procRpcServerUseProtseqA,
-	RpcServerUseProtseqEp:                          procRpcServerUseProtseqEp,
-	RpcServerUseProtseqEpA:                         procRpcServerUseProtseqEpA,
-	RpcServerUseProtseqEpEx:                        procRpcServerUseProtseqEpEx,
-	RpcServerUseProtseqEpExA:                       procRpcServerUseProtseqEpExA,
-	RpcServerUseProtseqEx:                          procRpcServerUseProtseqEx,
-	RpcServerUseProtseqExA:                         procRpcServerUseProtseqExA,
-	RpcServerUseProtseqIf:                          procRpcServerUseProtseqIf,
-	RpcServerUseProtseqIfA:                         procRpcServerUseProtseqIfA,
-	RpcServerUseProtseqIfEx:                        procRpcServerUseProtseqIfEx,
-	RpcServerUseProtseqIfExA:                       procRpcServerUseProtseqIfExA,
-	RpcServerYield:                                 procRpcServerYield,
-	RpcSmAllocate:                                  procRpcSmAllocate,
-	RpcSmClientFree:                                procRpcSmClientFree,
-	RpcSmDestroyClientContext:                      procRpcSmDestroyClientContext,
-	RpcSmDisableAllocate:                           procRpcSmDisableAllocate,
-	RpcSmEnableAllocate:                            procRpcSmEnableAllocate,
-	RpcSmFree:                                      procRpcSmFree,
-	RpcSmGetThreadHandle:                           procRpcSmGetThreadHandle,
-	RpcSmSetClientAllocFree:                        procRpcSmSetClientAllocFree,
-	RpcSmSetThreadHandle:                           procRpcSmSetThreadHandle,
-	RpcSmSwapClientAllocFree:                       procRpcSmSwapClientAllocFree,
-	RpcSsAllocate:                                  procRpcSsAllocate,
-	RpcSsContextLockExclusive:                      procRpcSsContextLockExclusive,
-	RpcSsContextLockShared:                         procRpcSsContextLockShared,
-	RpcSsDestroyClientContext:                      procRpcSsDestroyClientContext,
-	RpcSsDisableAllocate:                           procRpcSsDisableAllocate,
-	RpcSsDontSerializeContext:                      procRpcSsDontSerializeContext,
-	RpcSsEnableAllocate:                            procRpcSsEnableAllocate,
-	RpcSsFree:                                      procRpcSsFree,
-	RpcSsGetContextBinding:                         procRpcSsGetContextBinding,
-	RpcSsGetThreadHandle:                           procRpcSsGetThreadHandle,
-	RpcSsSetClientAllocFree:                        procRpcSsSetClientAllocFree,
-	RpcSsSetThreadHandle:                           procRpcSsSetThreadHandle,
-	RpcSsSwapClientAllocFree:                       procRpcSsSwapClientAllocFree,
-	RpcStringBindingCompose:                        procRpcStringBindingCompose,
-	RpcStringBindingComposeA:                       procRpcStringBindingComposeA,
-	RpcStringBindingParse:                          procRpcStringBindingParse,
-	RpcStringBindingParseA:                         procRpcStringBindingParseA,
-	RpcStringFree:                                  procRpcStringFree,
-	RpcStringFreeA:                                 procRpcStringFreeA,
-	RpcTestCancel:                                  procRpcTestCancel,
-	RpcUserFree:                                    procRpcUserFree,
-	UuidCompare:                                    procUuidCompare,
-	UuidCreate:                                     procUuidCreate,
-	UuidCreateNil:                                  procUuidCreateNil,
-	UuidCreateSequential:                           procUuidCreateSequential,
-	UuidEqual:                                      procUuidEqual,
-	UuidFromString:                                 procUuidFromString,
-	UuidFromStringA:                                procUuidFromStringA,
-	UuidHash:                                       procUuidHash,
-	UuidIsNil:                                      procUuidIsNil,
-	UuidToString:                                   procUuidToString,
-	UuidToStringA:                                  procUuidToStringA,
+	DceErrorInqText:                                 procDceErrorInqText,
+	DceErrorInqTextA:                                procDceErrorInqTextA,
+	IUnknown_AddRef_Proxy:                           procIUnknown_AddRef_Proxy,
+	IUnknown_QueryInterface_Proxy:                   procIUnknown_QueryInterface_Proxy,
+	IUnknown_Release_Proxy:                          procIUnknown_Release_Proxy,
+	I_RpcAllocate:                                   procI_RpcAllocate,
+	I_RpcAsyncAbortCall:                             procI_RpcAsyncAbortCall,
+	I_RpcAsyncSetHandle:                             procI_RpcAsyncSetHandle,
+	I_RpcBindingCopy:                                procI_RpcBindingCopy,
+	I_RpcBindingCreateNP:                            procI_RpcBindingCreateNP,
+	I_RpcBindingHandleToAsyncHandle:                 procI_RpcBindingHandleToAsyncHandle,
+	I_RpcBindingInqClientTokenAttributes:            procI_RpcBindingInqClientTokenAttributes,
+	I_RpcBindingInqDynamicEndpoint:                  procI_RpcBindingInqDynamicEndpoint,
+	I_RpcBindingInqDynamicEndpointA:                 procI_RpcBindingInqDynamicEndpointA,
+	I_RpcBindingInqLocalClientPID:                   procI_RpcBindingInqLocalClientPID,
+	I_RpcBindingInqMarshalledTargetInfo:             procI_RpcBindingInqMarshalledTargetInfo,
+	I_RpcBindingInqSecurityContext:                  procI_RpcBindingInqSecurityContext,
+	I_RpcBindingInqSecurityContextKeyInfo:           procI_RpcBindingInqSecurityContextKeyInfo,
+	I_RpcBindingInqTransportType:                    procI_RpcBindingInqTransportType,
+	I_RpcBindingInqWireIdForSnego:                   procI_RpcBindingInqWireIdForSnego,
+	I_RpcBindingIsClientLocal:                       procI_RpcBindingIsClientLocal,
+	I_RpcBindingIsServerLocal:                       procI_RpcBindingIsServerLocal,
+	I_RpcBindingSetPrivateOption:                    procI_RpcBindingSetPrivateOption,
+	I_RpcBindingToStaticStringBindingW:              procI_RpcBindingToStaticStringBindingW,
+	I_RpcClearMutex:                                 procI_RpcClearMutex,
+	I_RpcDeleteMutex:                                procI_RpcDeleteMutex,
+	I_RpcExceptionFilter:                            procI_RpcExceptionFilter,
+	I_RpcFree:                                       procI_RpcFree,
+	I_RpcFreeBuffer:                                 procI_RpcFreeBuffer,
+	I_RpcFreePipeBuffer:                             procI_RpcFreePipeBuffer,
+	I_RpcGetBuffer:                                  procI_RpcGetBuffer,
+	I_RpcGetBufferWithObject:                        procI_RpcGetBufferWithObject,
+	I_RpcGetCurrentCallHandle:                       procI_RpcGetCurrentCallHandle,
+	I_RpcGetDefaultSD:                               procI_RpcGetDefaultSD,
+	I_RpcGetExtendedError:                           procI_RpcGetExtendedError,
+	I_RpcIfInqTransferSyntaxes:                      procI_RpcIfInqTransferSyntaxes,
+	I_RpcMapWin32Status:                             procI_RpcMapWin32Status,
+	I_RpcMgmtEnableDedicatedThreadPool:              procI_RpcMgmtEnableDedicatedThreadPool,
+	I_RpcNegotiateTransferSyntax:                    procI_RpcNegotiateTransferSyntax,
+	I_RpcNsBindingSetEntryName:                      procI_RpcNsBindingSetEntryName,
+	I_RpcNsBindingSetEntryNameA:                     procI_RpcNsBindingSetEntryNameA,
+	I_RpcNsGetBuffer:                                procI_RpcNsGetBuffer,
+	I_RpcNsInterfaceExported:                        procI_RpcNsInterfaceExported,
+	I_RpcNsInterfaceUnexported:                      procI_RpcNsInterfaceUnexported,
+	I_RpcNsRaiseException:                           procI_RpcNsRaiseException,
+	I_RpcNsSendReceive:                              procI_RpcNsSendReceive,
+	I_RpcOpenClientProcess:                          procI_RpcOpenClientProcess,
+	I_RpcPauseExecution:                             procI_RpcPauseExecution,
+	I_RpcReBindBuffer:                               procI_RpcReBindBuffer,
+	I_RpcReallocPipeBuffer:                          procI_RpcReallocPipeBuffer,
+	I_RpcReceive:                                    procI_RpcReceive,
+	I_RpcRecordCalloutFailure:                       procI_RpcRecordCalloutFailure,
+	I_RpcRequestMutex:                               procI_RpcRequestMutex,
+	I_RpcSend:                                       procI_RpcSend,
+	I_RpcSendReceive:                                procI_RpcSendReceive,
+	I_RpcServerCheckClientRestriction:               procI_RpcServerCheckClientRestriction,
+	I_RpcServerDisableExceptionFilter:               procI_RpcServerDisableExceptionFilter,
+	I_RpcServerGetAssociationID:                     procI_RpcServerGetAssociationID,
+	I_RpcServerInqAddressChangeFn:                   procI_RpcServerInqAddressChangeFn,
+	I_RpcServerInqLocalConnAddress:                  procI_RpcServerInqLocalConnAddress,
+	I_RpcServerInqRemoteConnAddress:                 procI_RpcServerInqRemoteConnAddress,
+	I_RpcServerInqTransportType:                     procI_RpcServerInqTransportType,
+	I_RpcServerRegisterForwardFunction:              procI_RpcServerRegisterForwardFunction,
+	I_RpcServerSetAddressChangeFn:                   procI_RpcServerSetAddressChangeFn,
+	I_RpcServerStartService:                         procI_RpcServerStartService,
+	I_RpcServerSubscribeForDisconnectNotification:   procI_RpcServerSubscribeForDisconnectNotification,
+	I_RpcServerSubscribeForDisconnectNotification2:  procI_RpcServerSubscribeForDisconnectNotification2,
+	I_RpcServerUnsubscribeForDisconnectNotification: procI_RpcServerUnsubscribeForDisconnectNotification,
+	I_RpcServerUseProtseq2:                          procI_RpcServerUseProtseq2,
+	I_RpcServerUseProtseq2A:                         procI_RpcServerUseProtseq2A,
+	I_RpcServerUseProtseqEp2:                        procI_RpcServerUseProtseqEp2,
+	I_RpcServerUseProtseqEp2A:                       procI_RpcServerUseProtseqEp2A,
+	I_RpcSessionStrictContextHandle:                 procI_RpcSessionStrictContextHandle,
+	I_RpcSsDontSerializeContext:                     procI_RpcSsDontSerializeContext,
+	I_RpcSystemHandleTypeSpecificWork:               procI_RpcSystemHandleTypeSpecificWork,
+	I_RpcTurnOnEEInfoPropagation:                    procI_RpcTurnOnEEInfoPropagation,
+	I_UuidCreate:                                    procI_UuidCreate,
+	MesBufferHandleReset:                            procMesBufferHandleReset,
+	MesDecodeBufferHandleCreate:                     procMesDecodeBufferHandleCreate,
+	MesDecodeIncrementalHandleCreate:                procMesDecodeIncrementalHandleCreate,
+	MesEncodeDynBufferHandleCreate:                  procMesEncodeDynBufferHandleCreate,
+	MesEncodeFixedBufferHandleCreate:                procMesEncodeFixedBufferHandleCreate,
+	MesEncodeIncrementalHandleCreate:                procMesEncodeIncrementalHandleCreate,
+	MesHandleFree:                                   procMesHandleFree,
+	MesIncrementalHandleReset:                       procMesIncrementalHandleReset,
+	MesInqProcEncodingId:                            procMesInqProcEncodingId,
+	NDRCContextBinding:                              procNDRCContextBinding,
+	NDRCContextMarshall:                             procNDRCContextMarshall,
+	NDRCContextUnmarshall:                           procNDRCContextUnmarshall,
+	NDRSContextMarshall:                             procNDRSContextMarshall,
+	NDRSContextMarshall2:                            procNDRSContextMarshall2,
+	NDRSContextMarshallEx:                           procNDRSContextMarshallEx,
+	NDRSContextUnmarshall:                           procNDRSContextUnmarshall,
+	NDRSContextUnmarshall2:                          procNDRSContextUnmarshall2,
+	NDRSContextUnmarshallEx:                         procNDRSContextUnmarshallEx,
+	Ndr64AsyncClientCall:                            procNdr64AsyncClientCall,
+	Ndr64AsyncServerCall64:                          procNdr64AsyncServerCall64,
+	Ndr64AsyncServerCallAll:                         procNdr64AsyncServerCallAll,
+	Ndr64DcomAsyncClientCall:                        procNdr64DcomAsyncClientCall,
+	Ndr64DcomAsyncStubCall:                          procNdr64DcomAsyncStubCall,
+	NdrAllocate:                                     procNdrAllocate,
+	NdrAsyncClientCall:                              procNdrAsyncClientCall,
+	NdrAsyncServerCall:                              procNdrAsyncServerCall,
+	NdrByteCountPointerBufferSize:                   procNdrByteCountPointerBufferSize,
+	NdrByteCountPointerFree:                         procNdrByteCountPointerFree,
+	NdrByteCountPointerMarshall:                     procNdrByteCountPointerMarshall,
+	NdrByteCountPointerUnmarshall:                   procNdrByteCountPointerUnmarshall,
+	NdrClearOutParameters:                           procNdrClearOutParameters,
+	NdrClientCall2:                                  procNdrClientCall2,
+	NdrClientCall3:                                  procNdrClientCall3,
+	NdrClientContextMarshall:                        procNdrClientContextMarshall,
+	NdrClientContextUnmarshall:                      procNdrClientContextUnmarshall,
+	NdrClientInitialize:                             procNdrClientInitialize,
+	NdrClientInitializeNew:                          procNdrClientInitializeNew,
+	NdrComplexArrayBufferSize:                       procNdrComplexArrayBufferSize,
+	NdrComplexArrayFree:                             procNdrComplexArrayFree,
+	NdrComplexArrayMarshall:                         procNdrComplexArrayMarshall,
+	NdrComplexArrayMemorySize:                       procNdrComplexArrayMemorySize,
+	NdrComplexArrayUnmarshall:                       procNdrComplexArrayUnmarshall,
+	NdrComplexStructBufferSize:                      procNdrComplexStructBufferSize,
+	NdrComplexStructFree:                            procNdrComplexStructFree,
+	NdrComplexStructMarshall:                        procNdrComplexStructMarshall,
+	NdrComplexStructMemorySize:                      procNdrComplexStructMemorySize,
+	NdrComplexStructUnmarshall:                      procNdrComplexStructUnmarshall,
+	NdrConformantArrayBufferSize:                    procNdrConformantArrayBufferSize,
+	NdrConformantArrayFree:                          procNdrConformantArrayFree,
+	NdrConformantArrayMarshall:                      procNdrConformantArrayMarshall,
+	NdrConformantArrayMemorySize:                    procNdrConformantArrayMemorySize,
+	NdrConformantArrayUnmarshall:                    procNdrConformantArrayUnmarshall,
+	NdrConformantStringBufferSize:                   procNdrConformantStringBufferSize,
+	NdrConformantStringMarshall:                     procNdrConformantStringMarshall,
+	NdrConformantStringMemorySize:                   procNdrConformantStringMemorySize,
+	NdrConformantStringUnmarshall:                   procNdrConformantStringUnmarshall,
+	NdrConformantStructBufferSize:                   procNdrConformantStructBufferSize,
+	NdrConformantStructFree:                         procNdrConformantStructFree,
+	NdrConformantStructMarshall:                     procNdrConformantStructMarshall,
+	NdrConformantStructMemorySize:                   procNdrConformantStructMemorySize,
+	NdrConformantStructUnmarshall:                   procNdrConformantStructUnmarshall,
+	NdrConformantVaryingArrayBufferSize:             procNdrConformantVaryingArrayBufferSize,
+	NdrConformantVaryingArrayFree:                   procNdrConformantVaryingArrayFree,
+	NdrConformantVaryingArrayMarshall:               procNdrConformantVaryingArrayMarshall,
+	NdrConformantVaryingArrayMemorySize:             procNdrConformantVaryingArrayMemorySize,
+	NdrConformantVaryingArrayUnmarshall:             procNdrConformantVaryingArrayUnmarshall,
+	NdrConformantVaryingStructBufferSize:            procNdrConformantVaryingStructBufferSize,
+	NdrConformantVaryingStructFree:                  procNdrConformantVaryingStructFree,
+	NdrConformantVaryingStructMarshall:              procNdrConformantVaryingStructMarshall,
+	NdrConformantVaryingStructMemorySize:            procNdrConformantVaryingStructMemorySize,
+	NdrConformantVaryingStructUnmarshall:            procNdrConformantVaryingStructUnmarshall,
+	NdrContextHandleInitialize:                      procNdrContextHandleInitialize,
+	NdrContextHandleSize:                            procNdrContextHandleSize,
+	NdrConvert:                                      procNdrConvert,
+	NdrConvert2:                                     procNdrConvert2,
+	NdrCorrelationFree:                              procNdrCorrelationFree,
+	NdrCorrelationInitialize:                        procNdrCorrelationInitialize,
+	NdrCorrelationPass:                              procNdrCorrelationPass,
+	NdrCreateServerInterfaceFromStub:                procNdrCreateServerInterfaceFromStub,
+	NdrDcomAsyncClientCall:                          procNdrDcomAsyncClientCall,
+	NdrDcomAsyncStubCall:                            procNdrDcomAsyncStubCall,
+	NdrEncapsulatedUnionBufferSize:                  procNdrEncapsulatedUnionBufferSize,
+	NdrEncapsulatedUnionFree:                        procNdrEncapsulatedUnionFree,
+	NdrEncapsulatedUnionMarshall:                    procNdrEncapsulatedUnionMarshall,
+	NdrEncapsulatedUnionMemorySize:                  procNdrEncapsulatedUnionMemorySize,
+	NdrEncapsulatedUnionUnmarshall:                  procNdrEncapsulatedUnionUnmarshall,
+	NdrFixedArrayBufferSize:                         procNdrFixedArrayBufferSize,
+	NdrFixedArrayFree:                               procNdrFixedArrayFree,
+	NdrFixedArrayMarshall:                           procNdrFixedArrayMarshall,
+	NdrFixedArrayMemorySize:                         procNdrFixedArrayMemorySize,
+	NdrFixedArrayUnmarshall:                         procNdrFixedArrayUnmarshall,
+	NdrFreeBuffer:                                   procNdrFreeBuffer,
+	NdrFullPointerXlatFree:                          procNdrFullPointerXlatFree,
+	NdrFullPointerXlatInit:                          procNdrFullPointerXlatInit,
+	NdrGetBuffer:                                    procNdrGetBuffer,
+	NdrGetDcomProtocolVersion:                       procNdrGetDcomProtocolVersion,
+	NdrGetUserMarshalInfo:                           procNdrGetUserMarshalInfo,
+	NdrInterfacePointerBufferSize:                   procNdrInterfacePointerBufferSize,
+	NdrInterfacePointerFree:                         procNdrInterfacePointerFree,
+	NdrInterfacePointerMarshall:                     procNdrInterfacePointerMarshall,
+	NdrInterfacePointerMemorySize:                   procNdrInterfacePointerMemorySize,
+	NdrInterfacePointerUnmarshall:                   procNdrInterfacePointerUnmarshall,
+	NdrMapCommAndFaultStatus:                        procNdrMapCommAndFaultStatus,
+	NdrMesProcEncodeDecode:                          procNdrMesProcEncodeDecode,
+	NdrMesProcEncodeDecode2:                         procNdrMesProcEncodeDecode2,
+	NdrMesProcEncodeDecode3:                         procNdrMesProcEncodeDecode3,
+	NdrMesSimpleTypeAlignSize:                       procNdrMesSimpleTypeAlignSize,
+	NdrMesSimpleTypeAlignSizeAll:                    procNdrMesSimpleTypeAlignSizeAll,
+	NdrMesSimpleTypeDecode:                          procNdrMesSimpleTypeDecode,
+	NdrMesSimpleTypeDecodeAll:                       procNdrMesSimpleTypeDecodeAll,
+	NdrMesSimpleTypeEncode:                          procNdrMesSimpleTypeEncode,
+	NdrMesSimpleTypeEncodeAll:                       procNdrMesSimpleTypeEncodeAll,
+	NdrMesTypeAlignSize:                             procNdrMesTypeAlignSize,
+	NdrMesTypeAlignSize2:                            procNdrMesTypeAlignSize2,
+	NdrMesTypeAlignSize3:                            procNdrMesTypeAlignSize3,
+	NdrMesTypeDecode:                                procNdrMesTypeDecode,
+	NdrMesTypeDecode2:                               procNdrMesTypeDecode2,
+	NdrMesTypeDecode3:                               procNdrMesTypeDecode3,
+	NdrMesTypeEncode:                                procNdrMesTypeEncode,
+	NdrMesTypeEncode2:                               procNdrMesTypeEncode2,
+	NdrMesTypeEncode3:                               procNdrMesTypeEncode3,
+	NdrMesTypeFree2:                                 procNdrMesTypeFree2,
+	NdrMesTypeFree3:                                 procNdrMesTypeFree3,
+	NdrNonConformantStringBufferSize:                procNdrNonConformantStringBufferSize,
+	NdrNonConformantStringMarshall:                  procNdrNonConformantStringMarshall,
+	NdrNonConformantStringMemorySize:                procNdrNonConformantStringMemorySize,
+	NdrNonConformantStringUnmarshall:                procNdrNonConformantStringUnmarshall,
+	NdrNonEncapsulatedUnionBufferSize:               procNdrNonEncapsulatedUnionBufferSize,
+	NdrNonEncapsulatedUnionFree:                     procNdrNonEncapsulatedUnionFree,
+	NdrNonEncapsulatedUnionMarshall:                 procNdrNonEncapsulatedUnionMarshall,
+	NdrNonEncapsulatedUnionMemorySize:               procNdrNonEncapsulatedUnionMemorySize,
+	NdrNonEncapsulatedUnionUnmarshall:               procNdrNonEncapsulatedUnionUnmarshall,
+	NdrNsGetBuffer:                                  procNdrNsGetBuffer,
+	NdrNsSendReceive:                                procNdrNsSendReceive,
+	NdrOleAllocate:                                  procNdrOleAllocate,
+	NdrOleFree:                                      procNdrOleFree,
+	NdrPartialIgnoreClientBufferSize:                procNdrPartialIgnoreClientBufferSize,
+	NdrPartialIgnoreClientMarshall:                  procNdrPartialIgnoreClientMarshall,
+	NdrPartialIgnoreServerInitialize:                procNdrPartialIgnoreServerInitialize,
+	NdrPartialIgnoreServerUnmarshall:                procNdrPartialIgnoreServerUnmarshall,
+	NdrPointerBufferSize:                            procNdrPointerBufferSize,
+	NdrPointerFree:                                  procNdrPointerFree,
+	NdrPointerMarshall:                              procNdrPointerMarshall,
+	NdrPointerMemorySize:                            procNdrPointerMemorySize,
+	NdrPointerUnmarshall:                            procNdrPointerUnmarshall,
+	NdrRangeUnmarshall:                              procNdrRangeUnmarshall,
+	NdrRpcSmClientAllocate:                          procNdrRpcSmClientAllocate,
+	NdrRpcSmClientFree:                              procNdrRpcSmClientFree,
+	NdrRpcSmSetClientToOsf:                          procNdrRpcSmSetClientToOsf,
+	NdrRpcSsDefaultAllocate:                         procNdrRpcSsDefaultAllocate,
+	NdrRpcSsDefaultFree:                             procNdrRpcSsDefaultFree,
+	NdrRpcSsDisableAllocate:                         procNdrRpcSsDisableAllocate,
+	NdrRpcSsEnableAllocate:                          procNdrRpcSsEnableAllocate,
+	NdrSendReceive:                                  procNdrSendReceive,
+	NdrServerCall2:                                  procNdrServerCall2,
+	NdrServerCallAll:                                procNdrServerCallAll,
+	NdrServerCallNdr64:                              procNdrServerCallNdr64,
+	NdrServerContextMarshall:                        procNdrServerContextMarshall,
+	NdrServerContextNewMarshall:                     procNdrServerContextNewMarshall,
+	NdrServerContextNewUnmarshall:                   procNdrServerContextNewUnmarshall,
+	NdrServerContextUnmarshall:                      procNdrServerContextUnmarshall,
+	NdrServerInitialize:                             procNdrServerInitialize,
+	NdrServerInitializeMarshall:                     procNdrServerInitializeMarshall,
+	NdrServerInitializeNew:                          procNdrServerInitializeNew,
+	NdrServerInitializePartial:                      procNdrServerInitializePartial,
+	NdrServerInitializeUnmarshall:                   procNdrServerInitializeUnmarshall,
+	NdrSimpleStructBufferSize:                       procNdrSimpleStructBufferSize,
+	NdrSimpleStructFree:                             procNdrSimpleStructFree,
+	NdrSimpleStructMarshall:                         procNdrSimpleStructMarshall,
+	NdrSimpleStructMemorySize:                       procNdrSimpleStructMemorySize,
+	NdrSimpleStructUnmarshall:                       procNdrSimpleStructUnmarshall,
+	NdrSimpleTypeMarshall:                           procNdrSimpleTypeMarshall,
+	NdrSimpleTypeUnmarshall:                         procNdrSimpleTypeUnmarshall,
+	NdrStubCall2:                                    procNdrStubCall2,
+	NdrStubCall3:                                    procNdrStubCall3,
+	NdrUserMarshalBufferSize:                        procNdrUserMarshalBufferSize,
+	NdrUserMarshalFree:                              procNdrUserMarshalFree,
+	NdrUserMarshalMarshall:                          procNdrUserMarshalMarshall,
+	NdrUserMarshalMemorySize:                        procNdrUserMarshalMemorySize,
+	NdrUserMarshalSimpleTypeConvert:                 procNdrUserMarshalSimpleTypeConvert,
+	NdrUserMarshalUnmarshall:                        procNdrUserMarshalUnmarshall,
+	NdrVaryingArrayBufferSize:                       procNdrVaryingArrayBufferSize,
+	NdrVaryingArrayFree:                             procNdrVaryingArrayFree,
+	NdrVaryingArrayMarshall:                         procNdrVaryingArrayMarshall,
+	NdrVaryingArrayMemorySize:                       procNdrVaryingArrayMemorySize,
+	NdrVaryingArrayUnmarshall:                       procNdrVaryingArrayUnmarshall,
+	NdrXmitOrRepAsBufferSize:                        procNdrXmitOrRepAsBufferSize,
+	NdrXmitOrRepAsFree:                              procNdrXmitOrRepAsFree,
+	NdrXmitOrRepAsMarshall:                          procNdrXmitOrRepAsMarshall,
+	NdrXmitOrRepAsMemorySize:                        procNdrXmitOrRepAsMemorySize,
+	NdrXmitOrRepAsUnmarshall:                        procNdrXmitOrRepAsUnmarshall,
+	RpcAsyncAbortCall:                               procRpcAsyncAbortCall,
+	RpcAsyncCancelCall:                              procRpcAsyncCancelCall,
+	RpcAsyncCompleteCall:                            procRpcAsyncCompleteCall,
+	RpcAsyncGetCallStatus:                           procRpcAsyncGetCallStatus,
+	RpcAsyncInitializeHandle:                        procRpcAsyncInitializeHandle,
+	RpcAsyncRegisterInfo:                            procRpcAsyncRegisterInfo,
+	RpcBindingBind:                                  procRpcBindingBind,
+	RpcBindingCopy:                                  procRpcBindingCopy,
+	RpcBindingCreate:                                procRpcBindingCreate,
+	RpcBindingCreateA:                               procRpcBindingCreateA,
+	RpcBindingFree:                                  procRpcBindingFree,
+	RpcBindingFromStringBinding:                     procRpcBindingFromStringBinding,
+	RpcBindingFromStringBindingA:                    procRpcBindingFromStringBindingA,
+	RpcBindingInqAuthClient:                         procRpcBindingInqAuthClient,
+	RpcBindingInqAuthClientA:                        procRpcBindingInqAuthClientA,
+	RpcBindingInqAuthClientEx:                       procRpcBindingInqAuthClientEx,
+	RpcBindingInqAuthClientExA:                      procRpcBindingInqAuthClientExA,
+	RpcBindingInqAuthInfo:                           procRpcBindingInqAuthInfo,
+	RpcBindingInqAuthInfoA:                          procRpcBindingInqAuthInfoA,
+	RpcBindingInqAuthInfoEx:                         procRpcBindingInqAuthInfoEx,
+	RpcBindingInqAuthInfoExA:                        procRpcBindingInqAuthInfoExA,
+	RpcBindingInqMaxCalls:                           procRpcBindingInqMaxCalls,
+	RpcBindingInqObject:                             procRpcBindingInqObject,
+	RpcBindingInqOption:                             procRpcBindingInqOption,
+	RpcBindingReset:                                 procRpcBindingReset,
+	RpcBindingServerFromClient:                      procRpcBindingServerFromClient,
+	RpcBindingSetAuthInfo:                           procRpcBindingSetAuthInfo,
+	RpcBindingSetAuthInfoA:                          procRpcBindingSetAuthInfoA,
+	RpcBindingSetAuthInfoEx:                         procRpcBindingSetAuthInfoEx,
+	RpcBindingSetAuthInfoExA:                        procRpcBindingSetAuthInfoExA,
+	RpcBindingSetObject:                             procRpcBindingSetObject,
+	RpcBindingSetOption:                             procRpcBindingSetOption,
+	RpcBindingToStringBinding:                       procRpcBindingToStringBinding,
+	RpcBindingToStringBindingA:                      procRpcBindingToStringBindingA,
+	RpcBindingUnbind:                                procRpcBindingUnbind,
+	RpcBindingVectorFree:                            procRpcBindingVectorFree,
+	RpcCancelThread:                                 procRpcCancelThread,
+	RpcCancelThreadEx:                               procRpcCancelThreadEx,
+	RpcCertGeneratePrincipalName:                    procRpcCertGeneratePrincipalName,
+	RpcCertGeneratePrincipalNameA:                   procRpcCertGeneratePrincipalNameA,
+	RpcEpRegister:                                   procRpcEpRegister,
+	RpcEpRegisterA:                                  procRpcEpRegisterA,
+	RpcEpRegisterNoReplace:                          procRpcEpRegisterNoReplace,
+	RpcEpRegisterNoReplaceA:                         procRpcEpRegisterNoReplaceA,
+	RpcEpResolveBinding:                             procRpcEpResolveBinding,
+	RpcEpUnregister:                                 procRpcEpUnregister,
+	RpcErrorAddRecord:                               procRpcErrorAddRecord,
+	RpcErrorClearInformation:                        procRpcErrorClearInformation,
+	RpcErrorEndEnumeration:                          procRpcErrorEndEnumeration,
+	RpcErrorGetNextRecord:                           procRpcErrorGetNextRecord,
+	RpcErrorGetNumberOfRecords:                      procRpcErrorGetNumberOfRecords,
+	RpcErrorLoadErrorInfo:                           procRpcErrorLoadErrorInfo,
+	RpcErrorResetEnumeration:                        procRpcErrorResetEnumeration,
+	RpcErrorSaveErrorInfo:                           procRpcErrorSaveErrorInfo,
+	RpcErrorStartEnumeration:                        procRpcErrorStartEnumeration,
+	RpcExceptionFilter:                              procRpcExceptionFilter,
+	RpcFreeAuthorizationContext:                     procRpcFreeAuthorizationContext,
+	RpcGetAuthorizationContextForClient:             procRpcGetAuthorizationContextForClient,
+	RpcIfIdVectorFree:                               procRpcIfIdVectorFree,
+	RpcIfInqId:                                      procRpcIfInqId,
+	RpcImpersonateClient:                            procRpcImpersonateClient,
+	RpcImpersonateClient2:                           procRpcImpersonateClient2,
+	RpcImpersonateClientContainer:                   procRpcImpersonateClientContainer,
+	RpcMgmtEnableIdleCleanup:                        procRpcMgmtEnableIdleCleanup,
+	RpcMgmtEpEltInqBegin:                            procRpcMgmtEpEltInqBegin,
+	RpcMgmtEpEltInqDone:                             procRpcMgmtEpEltInqDone,
+	RpcMgmtEpEltInqNext:                             procRpcMgmtEpEltInqNext,
+	RpcMgmtEpEltInqNextA:                            procRpcMgmtEpEltInqNextA,
+	RpcMgmtEpUnregister:                             procRpcMgmtEpUnregister,
+	RpcMgmtInqComTimeout:                            procRpcMgmtInqComTimeout,
+	RpcMgmtInqDefaultProtectLevel:                   procRpcMgmtInqDefaultProtectLevel,
+	RpcMgmtInqIfIds:                                 procRpcMgmtInqIfIds,
+	RpcMgmtInqServerPrincName:                       procRpcMgmtInqServerPrincName,
+	RpcMgmtInqServerPrincNameA:                      procRpcMgmtInqServerPrincNameA,
+	RpcMgmtInqStats:                                 procRpcMgmtInqStats,
+	RpcMgmtIsServerListening:                        procRpcMgmtIsServerListening,
+	RpcMgmtSetAuthorizationFn:                       procRpcMgmtSetAuthorizationFn,
+	RpcMgmtSetCancelTimeout:                         procRpcMgmtSetCancelTimeout,
+	RpcMgmtSetComTimeout:                            procRpcMgmtSetComTimeout,
+	RpcMgmtSetServerStackSize:                       procRpcMgmtSetServerStackSize,
+	RpcMgmtStatsVectorFree:                          procRpcMgmtStatsVectorFree,
+	RpcMgmtStopServerListening:                      procRpcMgmtStopServerListening,
+	RpcMgmtWaitServerListen:                         procRpcMgmtWaitServerListen,
+	RpcNetworkInqProtseqs:                           procRpcNetworkInqProtseqs,
+	RpcNetworkInqProtseqsA:                          procRpcNetworkInqProtseqsA,
+	RpcNetworkIsProtseqValid:                        procRpcNetworkIsProtseqValid,
+	RpcNetworkIsProtseqValidA:                       procRpcNetworkIsProtseqValidA,
+	RpcNsBindingExport:                              procRpcNsBindingExport,
+	RpcNsBindingExportA:                             procRpcNsBindingExportA,
+	RpcNsBindingExportPnP:                           procRpcNsBindingExportPnP,
+	RpcNsBindingExportPnPA:                          procRpcNsBindingExportPnPA,
+	RpcNsBindingImportBegin:                         procRpcNsBindingImportBegin,
+	RpcNsBindingImportBeginA:                        procRpcNsBindingImportBeginA,
+	RpcNsBindingImportDone:                          procRpcNsBindingImportDone,
+	RpcNsBindingImportNext:                          procRpcNsBindingImportNext,
+	RpcNsBindingInqEntryName:                        procRpcNsBindingInqEntryName,
+	RpcNsBindingInqEntryNameA:                       procRpcNsBindingInqEntryNameA,
+	RpcNsBindingLookupBegin:                         procRpcNsBindingLookupBegin,
+	RpcNsBindingLookupBeginA:                        procRpcNsBindingLookupBeginA,
+	RpcNsBindingLookupDone:                          procRpcNsBindingLookupDone,
+	RpcNsBindingLookupNext:                          procRpcNsBindingLookupNext,
+	RpcNsBindingSelect:                              procRpcNsBindingSelect,
+	RpcNsBindingUnexport:                            procRpcNsBindingUnexport,
+	RpcNsBindingUnexportA:                           procRpcNsBindingUnexportA,
+	RpcNsBindingUnexportPnP:                         procRpcNsBindingUnexportPnP,
+	RpcNsBindingUnexportPnPA:                        procRpcNsBindingUnexportPnPA,
+	RpcNsEntryExpandName:                            procRpcNsEntryExpandName,
+	RpcNsEntryExpandNameA:                           procRpcNsEntryExpandNameA,
+	RpcNsEntryObjectInqBegin:                        procRpcNsEntryObjectInqBegin,
+	RpcNsEntryObjectInqBeginA:                       procRpcNsEntryObjectInqBeginA,
+	RpcNsEntryObjectInqDone:                         procRpcNsEntryObjectInqDone,
+	RpcNsEntryObjectInqNext:                         procRpcNsEntryObjectInqNext,
+	RpcNsGroupDelete:                                procRpcNsGroupDelete,
+	RpcNsGroupDeleteA:                               procRpcNsGroupDeleteA,
+	RpcNsGroupMbrAdd:                                procRpcNsGroupMbrAdd,
+	RpcNsGroupMbrAddA:                               procRpcNsGroupMbrAddA,
+	RpcNsGroupMbrInqBegin:                           procRpcNsGroupMbrInqBegin,
+	RpcNsGroupMbrInqBeginA:                          procRpcNsGroupMbrInqBeginA,
+	RpcNsGroupMbrInqDone:                            procRpcNsGroupMbrInqDone,
+	RpcNsGroupMbrInqNext:                            procRpcNsGroupMbrInqNext,
+	RpcNsGroupMbrInqNextA:                           procRpcNsGroupMbrInqNextA,
+	RpcNsGroupMbrRemove:                             procRpcNsGroupMbrRemove,
+	RpcNsGroupMbrRemoveA:                            procRpcNsGroupMbrRemoveA,
+	RpcNsMgmtBindingUnexport:                        procRpcNsMgmtBindingUnexport,
+	RpcNsMgmtBindingUnexportA:                       procRpcNsMgmtBindingUnexportA,
+	RpcNsMgmtEntryCreate:                            procRpcNsMgmtEntryCreate,
+	RpcNsMgmtEntryCreateA:                           procRpcNsMgmtEntryCreateA,
+	RpcNsMgmtEntryDelete:                            procRpcNsMgmtEntryDelete,
+	RpcNsMgmtEntryDeleteA:                           procRpcNsMgmtEntryDeleteA,
+	RpcNsMgmtEntryInqIfIds:                          procRpcNsMgmtEntryInqIfIds,
+	RpcNsMgmtEntryInqIfIdsA:                         procRpcNsMgmtEntryInqIfIdsA,
+	RpcNsMgmtHandleSetExpAge:                        procRpcNsMgmtHandleSetExpAge,
+	RpcNsMgmtInqExpAge:                              procRpcNsMgmtInqExpAge,
+	RpcNsMgmtSetExpAge:                              procRpcNsMgmtSetExpAge,
+	RpcNsProfileDelete:                              procRpcNsProfileDelete,
+	RpcNsProfileDeleteA:                             procRpcNsProfileDeleteA,
+	RpcNsProfileEltAdd:                              procRpcNsProfileEltAdd,
+	RpcNsProfileEltAddA:                             procRpcNsProfileEltAddA,
+	RpcNsProfileEltInqBegin:                         procRpcNsProfileEltInqBegin,
+	RpcNsProfileEltInqBeginA:                        procRpcNsProfileEltInqBeginA,
+	RpcNsProfileEltInqDone:                          procRpcNsProfileEltInqDone,
+	RpcNsProfileEltInqNext:                          procRpcNsProfileEltInqNext,
+	RpcNsProfileEltInqNextA:                         procRpcNsProfileEltInqNextA,
+	RpcNsProfileEltRemove:                           procRpcNsProfileEltRemove,
+	RpcNsProfileEltRemoveA:                          procRpcNsProfileEltRemoveA,
+	RpcObjectInqType:                                procRpcObjectInqType,
+	RpcObjectSetInqFn:                               procRpcObjectSetInqFn,
+	RpcObjectSetType:                                procRpcObjectSetType,
+	RpcProtseqVectorFree:                            procRpcProtseqVectorFree,
+	RpcProtseqVectorFreeA:                           procRpcProtseqVectorFreeA,
+	RpcRaiseException:                               procRpcRaiseException,
+	RpcRevertContainerImpersonation:                 procRpcRevertContainerImpersonation,
+	RpcRevertToSelf:                                 procRpcRevertToSelf,
+	RpcRevertToSelfEx:                               procRpcRevertToSelfEx,
+	RpcServerCompleteSecurityCallback:               procRpcServerCompleteSecurityCallback,
+	RpcServerInqBindingHandle:                       procRpcServerInqBindingHandle,
+	RpcServerInqBindings:                            procRpcServerInqBindings,
+	RpcServerInqBindingsEx:                          procRpcServerInqBindingsEx,
+	RpcServerInqCallAttributes:                      procRpcServerInqCallAttributes,
+	RpcServerInqCallAttributesA:                     procRpcServerInqCallAttributesA,
+	RpcServerInqDefaultPrincName:                    procRpcServerInqDefaultPrincName,
+	RpcServerInqDefaultPrincNameA:                   procRpcServerInqDefaultPrincNameA,
+	RpcServerInqIf:                                  procRpcServerInqIf,
+	RpcServerInterfaceGroupActivate:                 procRpcServerInterfaceGroupActivate,
+	RpcServerInterfaceGroupClose:                    procRpcServerInterfaceGroupClose,
+	RpcServerInterfaceGroupCreate:                   procRpcServerInterfaceGroupCreate,
+	RpcServerInterfaceGroupCreateA:                  procRpcServerInterfaceGroupCreateA,
+	RpcServerInterfaceGroupDeactivate:               procRpcServerInterfaceGroupDeactivate,
+	RpcServerInterfaceGroupInqBindings:              procRpcServerInterfaceGroupInqBindings,
+	RpcServerListen:                                 procRpcServerListen,
+	RpcServerRegisterAuthInfo:                       procRpcServerRegisterAuthInfo,
+	RpcServerRegisterAuthInfoA:                      procRpcServerRegisterAuthInfoA,
+	RpcServerRegisterIf:                             procRpcServerRegisterIf,
+	RpcServerRegisterIf2:                            procRpcServerRegisterIf2,
+	RpcServerRegisterIf3:                            procRpcServerRegisterIf3,
+	RpcServerRegisterIfEx:                           procRpcServerRegisterIfEx,
+	RpcServerSubscribeForNotification:               procRpcServerSubscribeForNotification,
+	RpcServerTestCancel:                             procRpcServerTestCancel,
+	RpcServerUnregisterIf:                           procRpcServerUnregisterIf,
+	RpcServerUnregisterIfEx:                         procRpcServerUnregisterIfEx,
+	RpcServerUnsubscribeForNotification:             procRpcServerUnsubscribeForNotification,
+	RpcServerUseAllProtseqs:                         procRpcServerUseAllProtseqs,
+	RpcServerUseAllProtseqsEx:                       procRpcServerUseAllProtseqsEx,
+	RpcServerUseAllProtseqsIf:                       procRpcServerUseAllProtseqsIf,
+	RpcServerUseAllProtseqsIfEx:                     procRpcServerUseAllProtseqsIfEx,
+	RpcServerUseProtseq:                             procRpcServerUseProtseq,
+	RpcServerUseProtseqA:                            procRpcServerUseProtseqA,
+	RpcServerUseProtseqEp:                           procRpcServerUseProtseqEp,
+	RpcServerUseProtseqEpA:                          procRpcServerUseProtseqEpA,
+	RpcServerUseProtseqEpEx:                         procRpcServerUseProtseqEpEx,
+	RpcServerUseProtseqEpExA:                        procRpcServerUseProtseqEpExA,
+	RpcServerUseProtseqEx:                           procRpcServerUseProtseqEx,
+	RpcServerUseProtseqExA:                          procRpcServerUseProtseqExA,
+	RpcServerUseProtseqIf:                           procRpcServerUseProtseqIf,
+	RpcServerUseProtseqIfA:                          procRpcServerUseProtseqIfA,
+	RpcServerUseProtseqIfEx:                         procRpcServerUseProtseqIfEx,
+	RpcServerUseProtseqIfExA:                        procRpcServerUseProtseqIfExA,
+	RpcServerYield:                                  procRpcServerYield,
+	RpcSmAllocate:                                   procRpcSmAllocate,
+	RpcSmClientFree:                                 procRpcSmClientFree,
+	RpcSmDestroyClientContext:                       procRpcSmDestroyClientContext,
+	RpcSmDisableAllocate:                            procRpcSmDisableAllocate,
+	RpcSmEnableAllocate:                             procRpcSmEnableAllocate,
+	RpcSmFree:                                       procRpcSmFree,
+	RpcSmGetThreadHandle:                            procRpcSmGetThreadHandle,
+	RpcSmSetClientAllocFree:                         procRpcSmSetClientAllocFree,
+	RpcSmSetThreadHandle:                            procRpcSmSetThreadHandle,
+	RpcSmSwapClientAllocFree:                        procRpcSmSwapClientAllocFree,
+	RpcSsAllocate:                                   procRpcSsAllocate,
+	RpcSsContextLockExclusive:                       procRpcSsContextLockExclusive,
+	RpcSsContextLockShared:                          procRpcSsContextLockShared,
+	RpcSsDestroyClientContext:                       procRpcSsDestroyClientContext,
+	RpcSsDisableAllocate:                            procRpcSsDisableAllocate,
+	RpcSsDontSerializeContext:                       procRpcSsDontSerializeContext,
+	RpcSsEnableAllocate:                             procRpcSsEnableAllocate,
+	RpcSsFree:                                       procRpcSsFree,
+	RpcSsGetContextBinding:                          procRpcSsGetContextBinding,
+	RpcSsGetThreadHandle:                            procRpcSsGetThreadHandle,
+	RpcSsSetClientAllocFree:                         procRpcSsSetClientAllocFree,
+	RpcSsSetThreadHandle:                            procRpcSsSetThreadHandle,
+	RpcSsSwapClientAllocFree:                        procRpcSsSwapClientAllocFree,
+	RpcStringBindingCompose:                         procRpcStringBindingCompose,
+	RpcStringBindingComposeA:                        procRpcStringBindingComposeA,
+	RpcStringBindingParse:                           procRpcStringBindingParse,
+	RpcStringBindingParseA:                          procRpcStringBindingParseA,
+	RpcStringFree:                                   procRpcStringFree,
+	RpcStringFreeA:                                  procRpcStringFreeA,
+	RpcTestCancel:                                   procRpcTestCancel,
+	RpcUserFree:                                     procRpcUserFree,
+	UuidCompare:                                     procUuidCompare,
+	UuidCreate:                                      procUuidCreate,
+	UuidCreateNil:                                   procUuidCreateNil,
+	UuidCreateSequential:                            procUuidCreateSequential,
+	UuidEqual:                                       procUuidEqual,
+	UuidFromString:                                  procUuidFromString,
+	UuidFromStringA:                                 procUuidFromStringA,
+	UuidHash:                                        procUuidHash,
+	UuidIsNil:                                       procUuidIsNil,
+	UuidToString:                                    procUuidToString,
+	UuidToStringA:                                   procUuidToStringA,
 }
 
 // DceErrorInqText calls RPCRT4!DceErrorInqTextW.
@@ -1962,6 +1965,14 @@ func I_RpcServerSubscribeForDisconnectNotification(Binding unsafe.Pointer, hEven
 // I_RpcServerSubscribeForDisconnectNotification2 calls RPCRT4!I_RpcServerSubscribeForDisconnectNotification2.
 func I_RpcServerSubscribeForDisconnectNotification2(Binding unsafe.Pointer, hEvent unsafe.Pointer, SubscriptionId *win32.GUID) RPC_STATUS {
 	r1, _, _ := syscall.SyscallN(procI_RpcServerSubscribeForDisconnectNotification2.Addr(), uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(hEvent)), uintptr(unsafe.Pointer(SubscriptionId)))
+	return RPC_STATUS(r1)
+}
+
+var specI_RpcServerUnsubscribeForDisconnectNotification = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// I_RpcServerUnsubscribeForDisconnectNotification calls RPCRT4!I_RpcServerUnsubscribeForDisconnectNotification.
+func I_RpcServerUnsubscribeForDisconnectNotification(Binding unsafe.Pointer, SubscriptionId win32.GUID) RPC_STATUS {
+	r1, _, _ := win32.Call(procI_RpcServerUnsubscribeForDisconnectNotification.Addr(), specI_RpcServerUnsubscribeForDisconnectNotification, nil, uintptr(unsafe.Pointer(Binding)), uintptr(unsafe.Pointer(&SubscriptionId))).Tuple()
 	return RPC_STATUS(r1)
 }
 

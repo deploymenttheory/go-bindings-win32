@@ -5,6 +5,7 @@
 package globalization
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -73,6 +74,7 @@ var (
 	procUdatpg_getDefaultHourCycle                            = modicu.NewProc("udatpg_getDefaultHourCycle")
 	procUdatpg_getFieldDisplayName                            = modicu.NewProc("udatpg_getFieldDisplayName")
 	procUdtitvfmt_closeResult                                 = modicu.NewProc("udtitvfmt_closeResult")
+	procUdtitvfmt_formatToResult                              = modicu.NewProc("udtitvfmt_formatToResult")
 	procUdtitvfmt_getContext                                  = modicu.NewProc("udtitvfmt_getContext")
 	procUdtitvfmt_openResult                                  = modicu.NewProc("udtitvfmt_openResult")
 	procUdtitvfmt_resultAsValue                               = modicu.NewProc("udtitvfmt_resultAsValue")
@@ -98,6 +100,7 @@ var (
 	procUnumf_close                                           = modicu.NewProc("unumf_close")
 	procUnumf_closeResult                                     = modicu.NewProc("unumf_closeResult")
 	procUnumf_formatDecimal                                   = modicu.NewProc("unumf_formatDecimal")
+	procUnumf_formatDouble                                    = modicu.NewProc("unumf_formatDouble")
 	procUnumf_formatInt                                       = modicu.NewProc("unumf_formatInt")
 	procUnumf_openForSkeletonAndLocale                        = modicu.NewProc("unumf_openForSkeletonAndLocale")
 	procUnumf_openForSkeletonAndLocaleWithError               = modicu.NewProc("unumf_openForSkeletonAndLocaleWithError")
@@ -110,6 +113,7 @@ var (
 	procUnumrf_close                                          = modicu.NewProc("unumrf_close")
 	procUnumrf_closeResult                                    = modicu.NewProc("unumrf_closeResult")
 	procUnumrf_formatDecimalRange                             = modicu.NewProc("unumrf_formatDecimalRange")
+	procUnumrf_formatDoubleRange                              = modicu.NewProc("unumrf_formatDoubleRange")
 	procUnumrf_openForSkeletonWithCollapseAndIdentityFallback = modicu.NewProc("unumrf_openForSkeletonWithCollapseAndIdentityFallback")
 	procUnumrf_openResult                                     = modicu.NewProc("unumrf_openResult")
 	procUnumrf_resultAsValue                                  = modicu.NewProc("unumrf_resultAsValue")
@@ -118,6 +122,8 @@ var (
 	procUnumrf_resultGetSecondDecimalNumber                   = modicu.NewProc("unumrf_resultGetSecondDecimalNumber")
 	procUplrules_selectFormatted                              = modicu.NewProc("uplrules_selectFormatted")
 	procUreldatefmt_closeResult                               = modicu.NewProc("ureldatefmt_closeResult")
+	procUreldatefmt_formatNumericToResult                     = modicu.NewProc("ureldatefmt_formatNumericToResult")
+	procUreldatefmt_formatToResult                            = modicu.NewProc("ureldatefmt_formatToResult")
 	procUreldatefmt_openResult                                = modicu.NewProc("ureldatefmt_openResult")
 	procUreldatefmt_resultAsValue                             = modicu.NewProc("ureldatefmt_resultAsValue")
 	procUset_complementAllCodePoints                          = modicu.NewProc("uset_complementAllCodePoints")
@@ -150,9 +156,13 @@ var (
 	procUcal_getDSTSavings                                    = modicuin.NewProc("ucal_getDSTSavings")
 	procUcal_getDayOfWeekType                                 = modicuin.NewProc("ucal_getDayOfWeekType")
 	procUcal_getDefaultTimeZone                               = modicuin.NewProc("ucal_getDefaultTimeZone")
+	procUcal_getFieldDifference                               = modicuin.NewProc("ucal_getFieldDifference")
+	procUcal_getGregorianChange                               = modicuin.NewProc("ucal_getGregorianChange")
 	procUcal_getKeywordValuesForLocale                        = modicuin.NewProc("ucal_getKeywordValuesForLocale")
 	procUcal_getLimit                                         = modicuin.NewProc("ucal_getLimit")
 	procUcal_getLocaleByType                                  = modicuin.NewProc("ucal_getLocaleByType")
+	procUcal_getMillis                                        = modicuin.NewProc("ucal_getMillis")
+	procUcal_getNow                                           = modicuin.NewProc("ucal_getNow")
 	procUcal_getTZDataVersion                                 = modicuin.NewProc("ucal_getTZDataVersion")
 	procUcal_getTimeZoneDisplayName                           = modicuin.NewProc("ucal_getTimeZoneDisplayName")
 	procUcal_getTimeZoneID                                    = modicuin.NewProc("ucal_getTimeZoneID")
@@ -163,6 +173,7 @@ var (
 	procUcal_getWindowsTimeZoneID                             = modicuin.NewProc("ucal_getWindowsTimeZoneID")
 	procUcal_inDaylightTime                                   = modicuin.NewProc("ucal_inDaylightTime")
 	procUcal_isSet                                            = modicuin.NewProc("ucal_isSet")
+	procUcal_isWeekend                                        = modicuin.NewProc("ucal_isWeekend")
 	procUcal_open                                             = modicuin.NewProc("ucal_open")
 	procUcal_openCountryTimeZones                             = modicuin.NewProc("ucal_openCountryTimeZones")
 	procUcal_openTimeZoneIDEnumeration                        = modicuin.NewProc("ucal_openTimeZoneIDEnumeration")
@@ -173,6 +184,8 @@ var (
 	procUcal_setDate                                          = modicuin.NewProc("ucal_setDate")
 	procUcal_setDateTime                                      = modicuin.NewProc("ucal_setDateTime")
 	procUcal_setDefaultTimeZone                               = modicuin.NewProc("ucal_setDefaultTimeZone")
+	procUcal_setGregorianChange                               = modicuin.NewProc("ucal_setGregorianChange")
+	procUcal_setMillis                                        = modicuin.NewProc("ucal_setMillis")
 	procUcal_setTimeZone                                      = modicuin.NewProc("ucal_setTimeZone")
 	procUcol_cloneBinary                                      = modicuin.NewProc("ucol_cloneBinary")
 	procUcol_close                                            = modicuin.NewProc("ucol_close")
@@ -248,8 +261,11 @@ var (
 	procUdat_close                                            = modicuin.NewProc("udat_close")
 	procUdat_countAvailable                                   = modicuin.NewProc("udat_countAvailable")
 	procUdat_countSymbols                                     = modicuin.NewProc("udat_countSymbols")
+	procUdat_format                                           = modicuin.NewProc("udat_format")
 	procUdat_formatCalendar                                   = modicuin.NewProc("udat_formatCalendar")
 	procUdat_formatCalendarForFields                          = modicuin.NewProc("udat_formatCalendarForFields")
+	procUdat_formatForFields                                  = modicuin.NewProc("udat_formatForFields")
+	procUdat_get2DigitYearStart                               = modicuin.NewProc("udat_get2DigitYearStart")
 	procUdat_getAvailable                                     = modicuin.NewProc("udat_getAvailable")
 	procUdat_getBooleanAttribute                              = modicuin.NewProc("udat_getBooleanAttribute")
 	procUdat_getCalendar                                      = modicuin.NewProc("udat_getCalendar")
@@ -260,7 +276,9 @@ var (
 	procUdat_getSymbols                                       = modicuin.NewProc("udat_getSymbols")
 	procUdat_isLenient                                        = modicuin.NewProc("udat_isLenient")
 	procUdat_open                                             = modicuin.NewProc("udat_open")
+	procUdat_parse                                            = modicuin.NewProc("udat_parse")
 	procUdat_parseCalendar                                    = modicuin.NewProc("udat_parseCalendar")
+	procUdat_set2DigitYearStart                               = modicuin.NewProc("udat_set2DigitYearStart")
 	procUdat_setBooleanAttribute                              = modicuin.NewProc("udat_setBooleanAttribute")
 	procUdat_setCalendar                                      = modicuin.NewProc("udat_setCalendar")
 	procUdat_setContext                                       = modicuin.NewProc("udat_setContext")
@@ -292,6 +310,7 @@ var (
 	procUdatpg_setDateTimeFormat                              = modicuin.NewProc("udatpg_setDateTimeFormat")
 	procUdatpg_setDecimal                                     = modicuin.NewProc("udatpg_setDecimal")
 	procUdtitvfmt_close                                       = modicuin.NewProc("udtitvfmt_close")
+	procUdtitvfmt_format                                      = modicuin.NewProc("udtitvfmt_format")
 	procUdtitvfmt_open                                        = modicuin.NewProc("udtitvfmt_open")
 	procUfieldpositer_close                                   = modicuin.NewProc("ufieldpositer_close")
 	procUfieldpositer_next                                    = modicuin.NewProc("ufieldpositer_next")
@@ -299,7 +318,9 @@ var (
 	procUfmt_close                                            = modicuin.NewProc("ufmt_close")
 	procUfmt_getArrayItemByIndex                              = modicuin.NewProc("ufmt_getArrayItemByIndex")
 	procUfmt_getArrayLength                                   = modicuin.NewProc("ufmt_getArrayLength")
+	procUfmt_getDate                                          = modicuin.NewProc("ufmt_getDate")
 	procUfmt_getDecNumChars                                   = modicuin.NewProc("ufmt_getDecNumChars")
+	procUfmt_getDouble                                        = modicuin.NewProc("ufmt_getDouble")
 	procUfmt_getInt64                                         = modicuin.NewProc("ufmt_getInt64")
 	procUfmt_getLong                                          = modicuin.NewProc("ufmt_getLong")
 	procUfmt_getObject                                        = modicuin.NewProc("ufmt_getObject")
@@ -338,21 +359,28 @@ var (
 	procUnum_countAvailable                                   = modicuin.NewProc("unum_countAvailable")
 	procUnum_format                                           = modicuin.NewProc("unum_format")
 	procUnum_formatDecimal                                    = modicuin.NewProc("unum_formatDecimal")
+	procUnum_formatDouble                                     = modicuin.NewProc("unum_formatDouble")
+	procUnum_formatDoubleCurrency                             = modicuin.NewProc("unum_formatDoubleCurrency")
+	procUnum_formatDoubleForFields                            = modicuin.NewProc("unum_formatDoubleForFields")
 	procUnum_formatInt64                                      = modicuin.NewProc("unum_formatInt64")
 	procUnum_formatUFormattable                               = modicuin.NewProc("unum_formatUFormattable")
 	procUnum_getAttribute                                     = modicuin.NewProc("unum_getAttribute")
 	procUnum_getAvailable                                     = modicuin.NewProc("unum_getAvailable")
 	procUnum_getContext                                       = modicuin.NewProc("unum_getContext")
+	procUnum_getDoubleAttribute                               = modicuin.NewProc("unum_getDoubleAttribute")
 	procUnum_getLocaleByType                                  = modicuin.NewProc("unum_getLocaleByType")
 	procUnum_getSymbol                                        = modicuin.NewProc("unum_getSymbol")
 	procUnum_getTextAttribute                                 = modicuin.NewProc("unum_getTextAttribute")
 	procUnum_open                                             = modicuin.NewProc("unum_open")
 	procUnum_parse                                            = modicuin.NewProc("unum_parse")
 	procUnum_parseDecimal                                     = modicuin.NewProc("unum_parseDecimal")
+	procUnum_parseDouble                                      = modicuin.NewProc("unum_parseDouble")
+	procUnum_parseDoubleCurrency                              = modicuin.NewProc("unum_parseDoubleCurrency")
 	procUnum_parseInt64                                       = modicuin.NewProc("unum_parseInt64")
 	procUnum_parseToUFormattable                              = modicuin.NewProc("unum_parseToUFormattable")
 	procUnum_setAttribute                                     = modicuin.NewProc("unum_setAttribute")
 	procUnum_setContext                                       = modicuin.NewProc("unum_setContext")
+	procUnum_setDoubleAttribute                               = modicuin.NewProc("unum_setDoubleAttribute")
 	procUnum_setSymbol                                        = modicuin.NewProc("unum_setSymbol")
 	procUnum_setTextAttribute                                 = modicuin.NewProc("unum_setTextAttribute")
 	procUnum_toPattern                                        = modicuin.NewProc("unum_toPattern")
@@ -368,6 +396,7 @@ var (
 	procUplrules_getKeywords                                  = modicuin.NewProc("uplrules_getKeywords")
 	procUplrules_open                                         = modicuin.NewProc("uplrules_open")
 	procUplrules_openForType                                  = modicuin.NewProc("uplrules_openForType")
+	procUplrules_select                                       = modicuin.NewProc("uplrules_select")
 	procUregex_appendReplacement                              = modicuin.NewProc("uregex_appendReplacement")
 	procUregex_appendReplacementUText                         = modicuin.NewProc("uregex_appendReplacementUText")
 	procUregex_appendTail                                     = modicuin.NewProc("uregex_appendTail")
@@ -445,6 +474,8 @@ var (
 	procUregion_getType                                       = modicuin.NewProc("uregion_getType")
 	procUreldatefmt_close                                     = modicuin.NewProc("ureldatefmt_close")
 	procUreldatefmt_combineDateAndTime                        = modicuin.NewProc("ureldatefmt_combineDateAndTime")
+	procUreldatefmt_format                                    = modicuin.NewProc("ureldatefmt_format")
+	procUreldatefmt_formatNumeric                             = modicuin.NewProc("ureldatefmt_formatNumeric")
 	procUreldatefmt_open                                      = modicuin.NewProc("ureldatefmt_open")
 	procUsearch_close                                         = modicuin.NewProc("usearch_close")
 	procUsearch_first                                         = modicuin.NewProc("usearch_first")
@@ -556,6 +587,7 @@ var (
 	procU_getIntPropertyMaxValue                              = modicuuc.NewProc("u_getIntPropertyMaxValue")
 	procU_getIntPropertyMinValue                              = modicuuc.NewProc("u_getIntPropertyMinValue")
 	procU_getIntPropertyValue                                 = modicuuc.NewProc("u_getIntPropertyValue")
+	procU_getNumericValue                                     = modicuuc.NewProc("u_getNumericValue")
 	procU_getPropertyEnum                                     = modicuuc.NewProc("u_getPropertyEnum")
 	procU_getPropertyName                                     = modicuuc.NewProc("u_getPropertyName")
 	procU_getPropertyValueEnum                                = modicuuc.NewProc("u_getPropertyValueEnum")
@@ -808,13 +840,18 @@ var (
 	procUcnvsel_selectForString                               = modicuuc.NewProc("ucnvsel_selectForString")
 	procUcnvsel_selectForUTF8                                 = modicuuc.NewProc("ucnvsel_selectForUTF8")
 	procUcnvsel_serialize                                     = modicuuc.NewProc("ucnvsel_serialize")
+	procUcurr_countCurrencies                                 = modicuuc.NewProc("ucurr_countCurrencies")
 	procUcurr_forLocale                                       = modicuuc.NewProc("ucurr_forLocale")
+	procUcurr_forLocaleAndDate                                = modicuuc.NewProc("ucurr_forLocaleAndDate")
 	procUcurr_getDefaultFractionDigits                        = modicuuc.NewProc("ucurr_getDefaultFractionDigits")
 	procUcurr_getDefaultFractionDigitsForUsage                = modicuuc.NewProc("ucurr_getDefaultFractionDigitsForUsage")
 	procUcurr_getKeywordValuesForLocale                       = modicuuc.NewProc("ucurr_getKeywordValuesForLocale")
 	procUcurr_getName                                         = modicuuc.NewProc("ucurr_getName")
 	procUcurr_getNumericCode                                  = modicuuc.NewProc("ucurr_getNumericCode")
 	procUcurr_getPluralName                                   = modicuuc.NewProc("ucurr_getPluralName")
+	procUcurr_getRoundingIncrement                            = modicuuc.NewProc("ucurr_getRoundingIncrement")
+	procUcurr_getRoundingIncrementForUsage                    = modicuuc.NewProc("ucurr_getRoundingIncrementForUsage")
+	procUcurr_isAvailable                                     = modicuuc.NewProc("ucurr_isAvailable")
 	procUcurr_openISOCurrencies                               = modicuuc.NewProc("ucurr_openISOCurrencies")
 	procUcurr_register                                        = modicuuc.NewProc("ucurr_register")
 	procUcurr_unregister                                      = modicuuc.NewProc("ucurr_unregister")
@@ -1479,6 +1516,7 @@ var Procs = struct {
 	U_getIntPropertyMaxValue                              *win32.Proc
 	U_getIntPropertyMinValue                              *win32.Proc
 	U_getIntPropertyValue                                 *win32.Proc
+	U_getNumericValue                                     *win32.Proc
 	U_getPropertyEnum                                     *win32.Proc
 	U_getPropertyName                                     *win32.Proc
 	U_getPropertyValueEnum                                *win32.Proc
@@ -1670,10 +1708,14 @@ var Procs = struct {
 	Ucal_getDSTSavings                                    *win32.Proc
 	Ucal_getDayOfWeekType                                 *win32.Proc
 	Ucal_getDefaultTimeZone                               *win32.Proc
+	Ucal_getFieldDifference                               *win32.Proc
+	Ucal_getGregorianChange                               *win32.Proc
 	Ucal_getHostTimeZone                                  *win32.Proc
 	Ucal_getKeywordValuesForLocale                        *win32.Proc
 	Ucal_getLimit                                         *win32.Proc
 	Ucal_getLocaleByType                                  *win32.Proc
+	Ucal_getMillis                                        *win32.Proc
+	Ucal_getNow                                           *win32.Proc
 	Ucal_getTZDataVersion                                 *win32.Proc
 	Ucal_getTimeZoneDisplayName                           *win32.Proc
 	Ucal_getTimeZoneID                                    *win32.Proc
@@ -1685,6 +1727,7 @@ var Procs = struct {
 	Ucal_getWindowsTimeZoneID                             *win32.Proc
 	Ucal_inDaylightTime                                   *win32.Proc
 	Ucal_isSet                                            *win32.Proc
+	Ucal_isWeekend                                        *win32.Proc
 	Ucal_open                                             *win32.Proc
 	Ucal_openCountryTimeZones                             *win32.Proc
 	Ucal_openTimeZoneIDEnumeration                        *win32.Proc
@@ -1695,6 +1738,8 @@ var Procs = struct {
 	Ucal_setDate                                          *win32.Proc
 	Ucal_setDateTime                                      *win32.Proc
 	Ucal_setDefaultTimeZone                               *win32.Proc
+	Ucal_setGregorianChange                               *win32.Proc
+	Ucal_setMillis                                        *win32.Proc
 	Ucal_setTimeZone                                      *win32.Proc
 	Ucasemap_close                                        *win32.Proc
 	Ucasemap_getBreakIterator                             *win32.Proc
@@ -1872,13 +1917,18 @@ var Procs = struct {
 	Ucsdet_open                                           *win32.Proc
 	Ucsdet_setDeclaredEncoding                            *win32.Proc
 	Ucsdet_setText                                        *win32.Proc
+	Ucurr_countCurrencies                                 *win32.Proc
 	Ucurr_forLocale                                       *win32.Proc
+	Ucurr_forLocaleAndDate                                *win32.Proc
 	Ucurr_getDefaultFractionDigits                        *win32.Proc
 	Ucurr_getDefaultFractionDigitsForUsage                *win32.Proc
 	Ucurr_getKeywordValuesForLocale                       *win32.Proc
 	Ucurr_getName                                         *win32.Proc
 	Ucurr_getNumericCode                                  *win32.Proc
 	Ucurr_getPluralName                                   *win32.Proc
+	Ucurr_getRoundingIncrement                            *win32.Proc
+	Ucurr_getRoundingIncrementForUsage                    *win32.Proc
+	Ucurr_isAvailable                                     *win32.Proc
 	Ucurr_openISOCurrencies                               *win32.Proc
 	Ucurr_register                                        *win32.Proc
 	Ucurr_unregister                                      *win32.Proc
@@ -1889,8 +1939,11 @@ var Procs = struct {
 	Udat_close                                            *win32.Proc
 	Udat_countAvailable                                   *win32.Proc
 	Udat_countSymbols                                     *win32.Proc
+	Udat_format                                           *win32.Proc
 	Udat_formatCalendar                                   *win32.Proc
 	Udat_formatCalendarForFields                          *win32.Proc
+	Udat_formatForFields                                  *win32.Proc
+	Udat_get2DigitYearStart                               *win32.Proc
 	Udat_getAvailable                                     *win32.Proc
 	Udat_getBooleanAttribute                              *win32.Proc
 	Udat_getCalendar                                      *win32.Proc
@@ -1901,7 +1954,9 @@ var Procs = struct {
 	Udat_getSymbols                                       *win32.Proc
 	Udat_isLenient                                        *win32.Proc
 	Udat_open                                             *win32.Proc
+	Udat_parse                                            *win32.Proc
 	Udat_parseCalendar                                    *win32.Proc
+	Udat_set2DigitYearStart                               *win32.Proc
 	Udat_setBooleanAttribute                              *win32.Proc
 	Udat_setCalendar                                      *win32.Proc
 	Udat_setContext                                       *win32.Proc
@@ -1936,6 +1991,8 @@ var Procs = struct {
 	Udatpg_setDecimal                                     *win32.Proc
 	Udtitvfmt_close                                       *win32.Proc
 	Udtitvfmt_closeResult                                 *win32.Proc
+	Udtitvfmt_format                                      *win32.Proc
+	Udtitvfmt_formatToResult                              *win32.Proc
 	Udtitvfmt_getContext                                  *win32.Proc
 	Udtitvfmt_open                                        *win32.Proc
 	Udtitvfmt_openResult                                  *win32.Proc
@@ -1954,7 +2011,9 @@ var Procs = struct {
 	Ufmt_close                                            *win32.Proc
 	Ufmt_getArrayItemByIndex                              *win32.Proc
 	Ufmt_getArrayLength                                   *win32.Proc
+	Ufmt_getDate                                          *win32.Proc
 	Ufmt_getDecNumChars                                   *win32.Proc
+	Ufmt_getDouble                                        *win32.Proc
 	Ufmt_getInt64                                         *win32.Proc
 	Ufmt_getLong                                          *win32.Proc
 	Ufmt_getObject                                        *win32.Proc
@@ -2109,27 +2168,35 @@ var Procs = struct {
 	Unum_countAvailable                                   *win32.Proc
 	Unum_format                                           *win32.Proc
 	Unum_formatDecimal                                    *win32.Proc
+	Unum_formatDouble                                     *win32.Proc
+	Unum_formatDoubleCurrency                             *win32.Proc
+	Unum_formatDoubleForFields                            *win32.Proc
 	Unum_formatInt64                                      *win32.Proc
 	Unum_formatUFormattable                               *win32.Proc
 	Unum_getAttribute                                     *win32.Proc
 	Unum_getAvailable                                     *win32.Proc
 	Unum_getContext                                       *win32.Proc
+	Unum_getDoubleAttribute                               *win32.Proc
 	Unum_getLocaleByType                                  *win32.Proc
 	Unum_getSymbol                                        *win32.Proc
 	Unum_getTextAttribute                                 *win32.Proc
 	Unum_open                                             *win32.Proc
 	Unum_parse                                            *win32.Proc
 	Unum_parseDecimal                                     *win32.Proc
+	Unum_parseDouble                                      *win32.Proc
+	Unum_parseDoubleCurrency                              *win32.Proc
 	Unum_parseInt64                                       *win32.Proc
 	Unum_parseToUFormattable                              *win32.Proc
 	Unum_setAttribute                                     *win32.Proc
 	Unum_setContext                                       *win32.Proc
+	Unum_setDoubleAttribute                               *win32.Proc
 	Unum_setSymbol                                        *win32.Proc
 	Unum_setTextAttribute                                 *win32.Proc
 	Unum_toPattern                                        *win32.Proc
 	Unumf_close                                           *win32.Proc
 	Unumf_closeResult                                     *win32.Proc
 	Unumf_formatDecimal                                   *win32.Proc
+	Unumf_formatDouble                                    *win32.Proc
 	Unumf_formatInt                                       *win32.Proc
 	Unumf_openForSkeletonAndLocale                        *win32.Proc
 	Unumf_openForSkeletonAndLocaleWithError               *win32.Proc
@@ -2142,6 +2209,7 @@ var Procs = struct {
 	Unumrf_close                                          *win32.Proc
 	Unumrf_closeResult                                    *win32.Proc
 	Unumrf_formatDecimalRange                             *win32.Proc
+	Unumrf_formatDoubleRange                              *win32.Proc
 	Unumrf_openForSkeletonWithCollapseAndIdentityFallback *win32.Proc
 	Unumrf_openResult                                     *win32.Proc
 	Unumrf_resultAsValue                                  *win32.Proc
@@ -2161,6 +2229,7 @@ var Procs = struct {
 	Uplrules_getKeywords                                  *win32.Proc
 	Uplrules_open                                         *win32.Proc
 	Uplrules_openForType                                  *win32.Proc
+	Uplrules_select                                       *win32.Proc
 	Uplrules_selectFormatted                              *win32.Proc
 	Uregex_appendReplacement                              *win32.Proc
 	Uregex_appendReplacementUText                         *win32.Proc
@@ -2240,6 +2309,10 @@ var Procs = struct {
 	Ureldatefmt_close                                     *win32.Proc
 	Ureldatefmt_closeResult                               *win32.Proc
 	Ureldatefmt_combineDateAndTime                        *win32.Proc
+	Ureldatefmt_format                                    *win32.Proc
+	Ureldatefmt_formatNumeric                             *win32.Proc
+	Ureldatefmt_formatNumericToResult                     *win32.Proc
+	Ureldatefmt_formatToResult                            *win32.Proc
 	Ureldatefmt_open                                      *win32.Proc
 	Ureldatefmt_openResult                                *win32.Proc
 	Ureldatefmt_resultAsValue                             *win32.Proc
@@ -2692,6 +2765,7 @@ var Procs = struct {
 	U_getIntPropertyMaxValue:                procU_getIntPropertyMaxValue,
 	U_getIntPropertyMinValue:                procU_getIntPropertyMinValue,
 	U_getIntPropertyValue:                   procU_getIntPropertyValue,
+	U_getNumericValue:                       procU_getNumericValue,
 	U_getPropertyEnum:                       procU_getPropertyEnum,
 	U_getPropertyName:                       procU_getPropertyName,
 	U_getPropertyValueEnum:                  procU_getPropertyValueEnum,
@@ -2883,10 +2957,14 @@ var Procs = struct {
 	Ucal_getDSTSavings:                      procUcal_getDSTSavings,
 	Ucal_getDayOfWeekType:                   procUcal_getDayOfWeekType,
 	Ucal_getDefaultTimeZone:                 procUcal_getDefaultTimeZone,
+	Ucal_getFieldDifference:                 procUcal_getFieldDifference,
+	Ucal_getGregorianChange:                 procUcal_getGregorianChange,
 	Ucal_getHostTimeZone:                    procUcal_getHostTimeZone,
 	Ucal_getKeywordValuesForLocale:          procUcal_getKeywordValuesForLocale,
 	Ucal_getLimit:                           procUcal_getLimit,
 	Ucal_getLocaleByType:                    procUcal_getLocaleByType,
+	Ucal_getMillis:                          procUcal_getMillis,
+	Ucal_getNow:                             procUcal_getNow,
 	Ucal_getTZDataVersion:                   procUcal_getTZDataVersion,
 	Ucal_getTimeZoneDisplayName:             procUcal_getTimeZoneDisplayName,
 	Ucal_getTimeZoneID:                      procUcal_getTimeZoneID,
@@ -2898,6 +2976,7 @@ var Procs = struct {
 	Ucal_getWindowsTimeZoneID:               procUcal_getWindowsTimeZoneID,
 	Ucal_inDaylightTime:                     procUcal_inDaylightTime,
 	Ucal_isSet:                              procUcal_isSet,
+	Ucal_isWeekend:                          procUcal_isWeekend,
 	Ucal_open:                               procUcal_open,
 	Ucal_openCountryTimeZones:               procUcal_openCountryTimeZones,
 	Ucal_openTimeZoneIDEnumeration:          procUcal_openTimeZoneIDEnumeration,
@@ -2908,6 +2987,8 @@ var Procs = struct {
 	Ucal_setDate:                            procUcal_setDate,
 	Ucal_setDateTime:                        procUcal_setDateTime,
 	Ucal_setDefaultTimeZone:                 procUcal_setDefaultTimeZone,
+	Ucal_setGregorianChange:                 procUcal_setGregorianChange,
+	Ucal_setMillis:                          procUcal_setMillis,
 	Ucal_setTimeZone:                        procUcal_setTimeZone,
 	Ucasemap_close:                          procUcasemap_close,
 	Ucasemap_getBreakIterator:               procUcasemap_getBreakIterator,
@@ -3085,13 +3166,18 @@ var Procs = struct {
 	Ucsdet_open:                             procUcsdet_open,
 	Ucsdet_setDeclaredEncoding:              procUcsdet_setDeclaredEncoding,
 	Ucsdet_setText:                          procUcsdet_setText,
+	Ucurr_countCurrencies:                   procUcurr_countCurrencies,
 	Ucurr_forLocale:                         procUcurr_forLocale,
+	Ucurr_forLocaleAndDate:                  procUcurr_forLocaleAndDate,
 	Ucurr_getDefaultFractionDigits:          procUcurr_getDefaultFractionDigits,
 	Ucurr_getDefaultFractionDigitsForUsage:  procUcurr_getDefaultFractionDigitsForUsage,
 	Ucurr_getKeywordValuesForLocale:         procUcurr_getKeywordValuesForLocale,
 	Ucurr_getName:                           procUcurr_getName,
 	Ucurr_getNumericCode:                    procUcurr_getNumericCode,
 	Ucurr_getPluralName:                     procUcurr_getPluralName,
+	Ucurr_getRoundingIncrement:              procUcurr_getRoundingIncrement,
+	Ucurr_getRoundingIncrementForUsage:      procUcurr_getRoundingIncrementForUsage,
+	Ucurr_isAvailable:                       procUcurr_isAvailable,
 	Ucurr_openISOCurrencies:                 procUcurr_openISOCurrencies,
 	Ucurr_register:                          procUcurr_register,
 	Ucurr_unregister:                        procUcurr_unregister,
@@ -3102,8 +3188,11 @@ var Procs = struct {
 	Udat_close:                              procUdat_close,
 	Udat_countAvailable:                     procUdat_countAvailable,
 	Udat_countSymbols:                       procUdat_countSymbols,
+	Udat_format:                             procUdat_format,
 	Udat_formatCalendar:                     procUdat_formatCalendar,
 	Udat_formatCalendarForFields:            procUdat_formatCalendarForFields,
+	Udat_formatForFields:                    procUdat_formatForFields,
+	Udat_get2DigitYearStart:                 procUdat_get2DigitYearStart,
 	Udat_getAvailable:                       procUdat_getAvailable,
 	Udat_getBooleanAttribute:                procUdat_getBooleanAttribute,
 	Udat_getCalendar:                        procUdat_getCalendar,
@@ -3114,7 +3203,9 @@ var Procs = struct {
 	Udat_getSymbols:                         procUdat_getSymbols,
 	Udat_isLenient:                          procUdat_isLenient,
 	Udat_open:                               procUdat_open,
+	Udat_parse:                              procUdat_parse,
 	Udat_parseCalendar:                      procUdat_parseCalendar,
+	Udat_set2DigitYearStart:                 procUdat_set2DigitYearStart,
 	Udat_setBooleanAttribute:                procUdat_setBooleanAttribute,
 	Udat_setCalendar:                        procUdat_setCalendar,
 	Udat_setContext:                         procUdat_setContext,
@@ -3149,6 +3240,8 @@ var Procs = struct {
 	Udatpg_setDecimal:                       procUdatpg_setDecimal,
 	Udtitvfmt_close:                         procUdtitvfmt_close,
 	Udtitvfmt_closeResult:                   procUdtitvfmt_closeResult,
+	Udtitvfmt_format:                        procUdtitvfmt_format,
+	Udtitvfmt_formatToResult:                procUdtitvfmt_formatToResult,
 	Udtitvfmt_getContext:                    procUdtitvfmt_getContext,
 	Udtitvfmt_open:                          procUdtitvfmt_open,
 	Udtitvfmt_openResult:                    procUdtitvfmt_openResult,
@@ -3167,7 +3260,9 @@ var Procs = struct {
 	Ufmt_close:                              procUfmt_close,
 	Ufmt_getArrayItemByIndex:                procUfmt_getArrayItemByIndex,
 	Ufmt_getArrayLength:                     procUfmt_getArrayLength,
+	Ufmt_getDate:                            procUfmt_getDate,
 	Ufmt_getDecNumChars:                     procUfmt_getDecNumChars,
+	Ufmt_getDouble:                          procUfmt_getDouble,
 	Ufmt_getInt64:                           procUfmt_getInt64,
 	Ufmt_getLong:                            procUfmt_getLong,
 	Ufmt_getObject:                          procUfmt_getObject,
@@ -3322,27 +3417,35 @@ var Procs = struct {
 	Unum_countAvailable:                     procUnum_countAvailable,
 	Unum_format:                             procUnum_format,
 	Unum_formatDecimal:                      procUnum_formatDecimal,
+	Unum_formatDouble:                       procUnum_formatDouble,
+	Unum_formatDoubleCurrency:               procUnum_formatDoubleCurrency,
+	Unum_formatDoubleForFields:              procUnum_formatDoubleForFields,
 	Unum_formatInt64:                        procUnum_formatInt64,
 	Unum_formatUFormattable:                 procUnum_formatUFormattable,
 	Unum_getAttribute:                       procUnum_getAttribute,
 	Unum_getAvailable:                       procUnum_getAvailable,
 	Unum_getContext:                         procUnum_getContext,
+	Unum_getDoubleAttribute:                 procUnum_getDoubleAttribute,
 	Unum_getLocaleByType:                    procUnum_getLocaleByType,
 	Unum_getSymbol:                          procUnum_getSymbol,
 	Unum_getTextAttribute:                   procUnum_getTextAttribute,
 	Unum_open:                               procUnum_open,
 	Unum_parse:                              procUnum_parse,
 	Unum_parseDecimal:                       procUnum_parseDecimal,
+	Unum_parseDouble:                        procUnum_parseDouble,
+	Unum_parseDoubleCurrency:                procUnum_parseDoubleCurrency,
 	Unum_parseInt64:                         procUnum_parseInt64,
 	Unum_parseToUFormattable:                procUnum_parseToUFormattable,
 	Unum_setAttribute:                       procUnum_setAttribute,
 	Unum_setContext:                         procUnum_setContext,
+	Unum_setDoubleAttribute:                 procUnum_setDoubleAttribute,
 	Unum_setSymbol:                          procUnum_setSymbol,
 	Unum_setTextAttribute:                   procUnum_setTextAttribute,
 	Unum_toPattern:                          procUnum_toPattern,
 	Unumf_close:                             procUnumf_close,
 	Unumf_closeResult:                       procUnumf_closeResult,
 	Unumf_formatDecimal:                     procUnumf_formatDecimal,
+	Unumf_formatDouble:                      procUnumf_formatDouble,
 	Unumf_formatInt:                         procUnumf_formatInt,
 	Unumf_openForSkeletonAndLocale:          procUnumf_openForSkeletonAndLocale,
 	Unumf_openForSkeletonAndLocaleWithError: procUnumf_openForSkeletonAndLocaleWithError,
@@ -3355,6 +3458,7 @@ var Procs = struct {
 	Unumrf_close:                            procUnumrf_close,
 	Unumrf_closeResult:                      procUnumrf_closeResult,
 	Unumrf_formatDecimalRange:               procUnumrf_formatDecimalRange,
+	Unumrf_formatDoubleRange:                procUnumrf_formatDoubleRange,
 	Unumrf_openForSkeletonWithCollapseAndIdentityFallback: procUnumrf_openForSkeletonWithCollapseAndIdentityFallback,
 	Unumrf_openResult:                     procUnumrf_openResult,
 	Unumrf_resultAsValue:                  procUnumrf_resultAsValue,
@@ -3374,6 +3478,7 @@ var Procs = struct {
 	Uplrules_getKeywords:                  procUplrules_getKeywords,
 	Uplrules_open:                         procUplrules_open,
 	Uplrules_openForType:                  procUplrules_openForType,
+	Uplrules_select:                       procUplrules_select,
 	Uplrules_selectFormatted:              procUplrules_selectFormatted,
 	Uregex_appendReplacement:              procUregex_appendReplacement,
 	Uregex_appendReplacementUText:         procUregex_appendReplacementUText,
@@ -3453,6 +3558,10 @@ var Procs = struct {
 	Ureldatefmt_close:                     procUreldatefmt_close,
 	Ureldatefmt_closeResult:               procUreldatefmt_closeResult,
 	Ureldatefmt_combineDateAndTime:        procUreldatefmt_combineDateAndTime,
+	Ureldatefmt_format:                    procUreldatefmt_format,
+	Ureldatefmt_formatNumeric:             procUreldatefmt_formatNumeric,
+	Ureldatefmt_formatNumericToResult:     procUreldatefmt_formatNumericToResult,
+	Ureldatefmt_formatToResult:            procUreldatefmt_formatToResult,
 	Ureldatefmt_open:                      procUreldatefmt_open,
 	Ureldatefmt_openResult:                procUreldatefmt_openResult,
 	Ureldatefmt_resultAsValue:             procUreldatefmt_resultAsValue,
@@ -5855,6 +5964,14 @@ func U_getIntPropertyValue(c int32, which UProperty) int32 {
 	return int32(r1)
 }
 
+var specU_getNumericValue = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float64}
+
+// U_getNumericValue calls icuuc!u_getNumericValue.
+func U_getNumericValue(c int32) float64 {
+	r := win32.Call(procU_getNumericValue.Addr(), specU_getNumericValue, nil, uintptr(c))
+	return math.Float64frombits(r.F0)
+}
+
 // U_getPropertyEnum calls icuuc!u_getPropertyEnum.
 func U_getPropertyEnum(alias foundation.PSTR) UProperty {
 	r1, _, _ := syscall.SyscallN(procU_getPropertyEnum.Addr(), uintptr(unsafe.Pointer(alias)))
@@ -6139,8 +6256,8 @@ func U_parseMessageWithError(locale foundation.PSTR, pattern *uint16, patternLen
 }
 
 // U_setMemoryFunctions calls icuuc!u_setMemoryFunctions.
-func U_setMemoryFunctions(context unsafe.Pointer, a *UMemAllocFn, r *UMemReallocFn, f *UMemFreeFn, status *UErrorCode) {
-	syscall.SyscallN(procU_setMemoryFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(a)), uintptr(unsafe.Pointer(r)), uintptr(unsafe.Pointer(f)), uintptr(unsafe.Pointer(status)))
+func U_setMemoryFunctions(context unsafe.Pointer, a *UMemAllocFn, r_ *UMemReallocFn, f *UMemFreeFn, status *UErrorCode) {
+	syscall.SyscallN(procU_setMemoryFunctions.Addr(), uintptr(unsafe.Pointer(context)), uintptr(unsafe.Pointer(a)), uintptr(unsafe.Pointer(r_)), uintptr(unsafe.Pointer(f)), uintptr(unsafe.Pointer(status)))
 }
 
 // U_shapeArabic calls icuuc!u_shapeArabic.
@@ -6966,6 +7083,22 @@ func Ucal_getDefaultTimeZone(result *uint16, resultCapacity int32, ec *UErrorCod
 	return int32(r1)
 }
 
+var specUcal_getFieldDifference = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word}}
+
+// Ucal_getFieldDifference calls icuin!ucal_getFieldDifference.
+func Ucal_getFieldDifference(cal *unsafe.Pointer, target float64, field UCalendarDateFields, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUcal_getFieldDifference.Addr(), specUcal_getFieldDifference, nil, uintptr(unsafe.Pointer(cal)), uintptr(math.Float64bits(target)), uintptr(field), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUcal_getGregorianChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ucal_getGregorianChange calls icuin!ucal_getGregorianChange.
+func Ucal_getGregorianChange(cal *unsafe.Pointer, pErrorCode *UErrorCode) float64 {
+	r := win32.Call(procUcal_getGregorianChange.Addr(), specUcal_getGregorianChange, nil, uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(pErrorCode)))
+	return math.Float64frombits(r.F0)
+}
+
 // Ucal_getHostTimeZone calls icu!ucal_getHostTimeZone.
 func Ucal_getHostTimeZone(result *uint16, resultCapacity int32, ec *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUcal_getHostTimeZone.Addr(), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(ec)))
@@ -6988,6 +7121,22 @@ func Ucal_getLimit(cal *unsafe.Pointer, field UCalendarDateFields, type_ UCalend
 func Ucal_getLocaleByType(cal *unsafe.Pointer, type_ ULocDataLocaleType, status *UErrorCode) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procUcal_getLocaleByType.Addr(), uintptr(unsafe.Pointer(cal)), uintptr(type_), uintptr(unsafe.Pointer(status)))
 	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+var specUcal_getMillis = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ucal_getMillis calls icuin!ucal_getMillis.
+func Ucal_getMillis(cal *unsafe.Pointer, status *UErrorCode) float64 {
+	r := win32.Call(procUcal_getMillis.Addr(), specUcal_getMillis, nil, uintptr(unsafe.Pointer(cal)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
+var specUcal_getNow = &win32.Spec{Args: []win32.Arg{}, Ret: win32.Float64}
+
+// Ucal_getNow calls icuin!ucal_getNow.
+func Ucal_getNow() float64 {
+	r := win32.Call(procUcal_getNow.Addr(), specUcal_getNow, nil)
+	return math.Float64frombits(r.F0)
 }
 
 // Ucal_getTZDataVersion calls icuin!ucal_getTZDataVersion.
@@ -7055,6 +7204,14 @@ func Ucal_isSet(cal *unsafe.Pointer, field UCalendarDateFields) int8 {
 	return int8(r1)
 }
 
+var specUcal_isWeekend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Ucal_isWeekend calls icuin!ucal_isWeekend.
+func Ucal_isWeekend(cal *unsafe.Pointer, date float64, status *UErrorCode) int8 {
+	r1, _, _ := win32.Call(procUcal_isWeekend.Addr(), specUcal_isWeekend, nil, uintptr(unsafe.Pointer(cal)), uintptr(math.Float64bits(date)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int8(r1)
+}
+
 // Ucal_open calls icuin!ucal_open.
 func Ucal_open(zoneID *uint16, len_ int32, locale foundation.PSTR, type_ UCalendarType, status *UErrorCode) *unsafe.Pointer {
 	r1, _, _ := syscall.SyscallN(procUcal_open.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(len_), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(unsafe.Pointer(status)))
@@ -7107,6 +7264,20 @@ func Ucal_setDateTime(cal *unsafe.Pointer, year int32, month int32, date int32, 
 // Ucal_setDefaultTimeZone calls icuin!ucal_setDefaultTimeZone.
 func Ucal_setDefaultTimeZone(zoneID *uint16, ec *UErrorCode) {
 	syscall.SyscallN(procUcal_setDefaultTimeZone.Addr(), uintptr(unsafe.Pointer(zoneID)), uintptr(unsafe.Pointer(ec)))
+}
+
+var specUcal_setGregorianChange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Ucal_setGregorianChange calls icuin!ucal_setGregorianChange.
+func Ucal_setGregorianChange(cal *unsafe.Pointer, date float64, pErrorCode *UErrorCode) {
+	win32.Call(procUcal_setGregorianChange.Addr(), specUcal_setGregorianChange, nil, uintptr(unsafe.Pointer(cal)), uintptr(math.Float64bits(date)), uintptr(unsafe.Pointer(pErrorCode))).Tuple()
+}
+
+var specUcal_setMillis = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Ucal_setMillis calls icuin!ucal_setMillis.
+func Ucal_setMillis(cal *unsafe.Pointer, dateTime float64, status *UErrorCode) {
+	win32.Call(procUcal_setMillis.Addr(), specUcal_setMillis, nil, uintptr(unsafe.Pointer(cal)), uintptr(math.Float64bits(dateTime)), uintptr(unsafe.Pointer(status))).Tuple()
 }
 
 // Ucal_setTimeZone calls icuin!ucal_setTimeZone.
@@ -8115,9 +8286,25 @@ func Ucsdet_setText(ucsd *UCharsetDetector, textIn foundation.PSTR, len_ int32, 
 	syscall.SyscallN(procUcsdet_setText.Addr(), uintptr(unsafe.Pointer(ucsd)), uintptr(unsafe.Pointer(textIn)), uintptr(len_), uintptr(unsafe.Pointer(status)))
 }
 
+var specUcurr_countCurrencies = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Ucurr_countCurrencies calls icuuc!ucurr_countCurrencies.
+func Ucurr_countCurrencies(locale foundation.PSTR, date float64, ec *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUcurr_countCurrencies.Addr(), specUcurr_countCurrencies, nil, uintptr(unsafe.Pointer(locale)), uintptr(math.Float64bits(date)), uintptr(unsafe.Pointer(ec))).Tuple()
+	return int32(r1)
+}
+
 // Ucurr_forLocale calls icuuc!ucurr_forLocale.
 func Ucurr_forLocale(locale foundation.PSTR, buff *uint16, buffCapacity int32, ec *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUcurr_forLocale.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(buff)), uintptr(buffCapacity), uintptr(unsafe.Pointer(ec)))
+	return int32(r1)
+}
+
+var specUcurr_forLocaleAndDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Ucurr_forLocaleAndDate calls icuuc!ucurr_forLocaleAndDate.
+func Ucurr_forLocaleAndDate(locale foundation.PSTR, date float64, index int32, buff *uint16, buffCapacity int32, ec *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUcurr_forLocaleAndDate.Addr(), specUcurr_forLocaleAndDate, nil, uintptr(unsafe.Pointer(locale)), uintptr(math.Float64bits(date)), uintptr(index), uintptr(unsafe.Pointer(buff)), uintptr(buffCapacity), uintptr(unsafe.Pointer(ec))).Tuple()
 	return int32(r1)
 }
 
@@ -8155,6 +8342,30 @@ func Ucurr_getNumericCode(currency *uint16) int32 {
 func Ucurr_getPluralName(currency *uint16, locale foundation.PSTR, isChoiceFormat *int8, pluralCount foundation.PSTR, len_ *int32, ec *UErrorCode) *uint16 {
 	r1, _, _ := syscall.SyscallN(procUcurr_getPluralName.Addr(), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(isChoiceFormat)), uintptr(unsafe.Pointer(pluralCount)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(ec)))
 	return (*uint16)(unsafe.Pointer(r1))
+}
+
+var specUcurr_getRoundingIncrement = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ucurr_getRoundingIncrement calls icuuc!ucurr_getRoundingIncrement.
+func Ucurr_getRoundingIncrement(currency *uint16, ec *UErrorCode) float64 {
+	r := win32.Call(procUcurr_getRoundingIncrement.Addr(), specUcurr_getRoundingIncrement, nil, uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(ec)))
+	return math.Float64frombits(r.F0)
+}
+
+var specUcurr_getRoundingIncrementForUsage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ucurr_getRoundingIncrementForUsage calls icuuc!ucurr_getRoundingIncrementForUsage.
+func Ucurr_getRoundingIncrementForUsage(currency *uint16, usage UCurrencyUsage, ec *UErrorCode) float64 {
+	r := win32.Call(procUcurr_getRoundingIncrementForUsage.Addr(), specUcurr_getRoundingIncrementForUsage, nil, uintptr(unsafe.Pointer(currency)), uintptr(usage), uintptr(unsafe.Pointer(ec)))
+	return math.Float64frombits(r.F0)
+}
+
+var specUcurr_isAvailable = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// Ucurr_isAvailable calls icuuc!ucurr_isAvailable.
+func Ucurr_isAvailable(isoCode *uint16, from float64, to float64, errorCode *UErrorCode) int8 {
+	r1, _, _ := win32.Call(procUcurr_isAvailable.Addr(), specUcurr_isAvailable, nil, uintptr(unsafe.Pointer(isoCode)), uintptr(math.Float64bits(from)), uintptr(math.Float64bits(to)), uintptr(unsafe.Pointer(errorCode))).Tuple()
+	return int8(r1)
 }
 
 // Ucurr_openISOCurrencies calls icuuc!ucurr_openISOCurrencies.
@@ -8213,6 +8424,14 @@ func Udat_countSymbols(fmt *unsafe.Pointer, type_ UDateFormatSymbolType) int32 {
 	return int32(r1)
 }
 
+var specUdat_format = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Udat_format calls icuin!udat_format.
+func Udat_format(format *unsafe.Pointer, dateToFormat float64, result *uint16, resultLength int32, position *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUdat_format.Addr(), specUdat_format, nil, uintptr(unsafe.Pointer(format)), uintptr(math.Float64bits(dateToFormat)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
 // Udat_formatCalendar calls icuin!udat_formatCalendar.
 func Udat_formatCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, result *uint16, capacity int32, position *UFieldPosition, status *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUdat_formatCalendar.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(result)), uintptr(capacity), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status)))
@@ -8223,6 +8442,22 @@ func Udat_formatCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, resul
 func Udat_formatCalendarForFields(format *unsafe.Pointer, calendar *unsafe.Pointer, result *uint16, capacity int32, fpositer *UFieldPositionIterator, status *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUdat_formatCalendarForFields.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(result)), uintptr(capacity), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(status)))
 	return int32(r1)
+}
+
+var specUdat_formatForFields = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Udat_formatForFields calls icuin!udat_formatForFields.
+func Udat_formatForFields(format *unsafe.Pointer, dateToFormat float64, result *uint16, resultLength int32, fpositer *UFieldPositionIterator, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUdat_formatForFields.Addr(), specUdat_formatForFields, nil, uintptr(unsafe.Pointer(format)), uintptr(math.Float64bits(dateToFormat)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUdat_get2DigitYearStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Udat_get2DigitYearStart calls icuin!udat_get2DigitYearStart.
+func Udat_get2DigitYearStart(fmt *unsafe.Pointer, status *UErrorCode) float64 {
+	r := win32.Call(procUdat_get2DigitYearStart.Addr(), specUdat_get2DigitYearStart, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
 }
 
 // Udat_getAvailable calls icuin!udat_getAvailable.
@@ -8285,9 +8520,24 @@ func Udat_open(timeStyle UDateFormatStyle, dateStyle UDateFormatStyle, locale fo
 	return (*unsafe.Pointer)(unsafe.Pointer(r1))
 }
 
+var specUdat_parse = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Udat_parse calls icuin!udat_parse.
+func Udat_parse(format *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) float64 {
+	r := win32.Call(procUdat_parse.Addr(), specUdat_parse, nil, uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
 // Udat_parseCalendar calls icuin!udat_parseCalendar.
 func Udat_parseCalendar(format *unsafe.Pointer, calendar *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) {
 	syscall.SyscallN(procUdat_parseCalendar.Addr(), uintptr(unsafe.Pointer(format)), uintptr(unsafe.Pointer(calendar)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+}
+
+var specUdat_set2DigitYearStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Udat_set2DigitYearStart calls icuin!udat_set2DigitYearStart.
+func Udat_set2DigitYearStart(fmt *unsafe.Pointer, d float64, status *UErrorCode) {
+	win32.Call(procUdat_set2DigitYearStart.Addr(), specUdat_set2DigitYearStart, nil, uintptr(unsafe.Pointer(fmt)), uintptr(math.Float64bits(d)), uintptr(unsafe.Pointer(status))).Tuple()
 }
 
 // Udat_setBooleanAttribute calls icuin!udat_setBooleanAttribute.
@@ -8481,6 +8731,21 @@ func Udtitvfmt_closeResult(uresult *UFormattedDateInterval) {
 	syscall.SyscallN(procUdtitvfmt_closeResult.Addr(), uintptr(unsafe.Pointer(uresult)))
 }
 
+var specUdtitvfmt_format = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Udtitvfmt_format calls icuin!udtitvfmt_format.
+func Udtitvfmt_format(formatter *UDateIntervalFormat, fromDate float64, toDate float64, result *uint16, resultCapacity int32, position *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUdtitvfmt_format.Addr(), specUdtitvfmt_format, nil, uintptr(unsafe.Pointer(formatter)), uintptr(math.Float64bits(fromDate)), uintptr(math.Float64bits(toDate)), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(position)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUdtitvfmt_formatToResult = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// Udtitvfmt_formatToResult calls icu!udtitvfmt_formatToResult.
+func Udtitvfmt_formatToResult(formatter *UDateIntervalFormat, fromDate float64, toDate float64, result *UFormattedDateInterval, status *UErrorCode) {
+	win32.Call(procUdtitvfmt_formatToResult.Addr(), specUdtitvfmt_formatToResult, nil, uintptr(unsafe.Pointer(formatter)), uintptr(math.Float64bits(fromDate)), uintptr(math.Float64bits(toDate)), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(status))).Tuple()
+}
+
 // Udtitvfmt_getContext calls icu!udtitvfmt_getContext.
 func Udtitvfmt_getContext(formatter *UDateIntervalFormat, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
 	r1, _, _ := syscall.SyscallN(procUdtitvfmt_getContext.Addr(), uintptr(unsafe.Pointer(formatter)), uintptr(type_), uintptr(unsafe.Pointer(status)))
@@ -8584,10 +8849,26 @@ func Ufmt_getArrayLength(fmt *unsafe.Pointer, status *UErrorCode) int32 {
 	return int32(r1)
 }
 
+var specUfmt_getDate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ufmt_getDate calls icuin!ufmt_getDate.
+func Ufmt_getDate(fmt *unsafe.Pointer, status *UErrorCode) float64 {
+	r := win32.Call(procUfmt_getDate.Addr(), specUfmt_getDate, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
 // Ufmt_getDecNumChars calls icuin!ufmt_getDecNumChars.
 func Ufmt_getDecNumChars(fmt *unsafe.Pointer, len_ *int32, status *UErrorCode) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procUfmt_getDecNumChars.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(len_)), uintptr(unsafe.Pointer(status)))
 	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+var specUfmt_getDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Ufmt_getDouble calls icuin!ufmt_getDouble.
+func Ufmt_getDouble(fmt *unsafe.Pointer, status *UErrorCode) float64 {
+	r := win32.Call(procUfmt_getDouble.Addr(), specUfmt_getDouble, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
 }
 
 // Ufmt_getInt64 calls icuin!ufmt_getInt64.
@@ -9489,6 +9770,30 @@ func Unum_formatDecimal(fmt *unsafe.Pointer, number foundation.PSTR, length int3
 	return int32(r1)
 }
 
+var specUnum_formatDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Unum_formatDouble calls icuin!unum_formatDouble.
+func Unum_formatDouble(fmt *unsafe.Pointer, number float64, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUnum_formatDouble.Addr(), specUnum_formatDouble, nil, uintptr(unsafe.Pointer(fmt)), uintptr(math.Float64bits(number)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUnum_formatDoubleCurrency = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Unum_formatDoubleCurrency calls icuin!unum_formatDoubleCurrency.
+func Unum_formatDoubleCurrency(fmt *unsafe.Pointer, number float64, currency *uint16, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUnum_formatDoubleCurrency.Addr(), specUnum_formatDoubleCurrency, nil, uintptr(unsafe.Pointer(fmt)), uintptr(math.Float64bits(number)), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUnum_formatDoubleForFields = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Unum_formatDoubleForFields calls icuin!unum_formatDoubleForFields.
+func Unum_formatDoubleForFields(format *unsafe.Pointer, number float64, result *uint16, resultLength int32, fpositer *UFieldPositionIterator, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUnum_formatDoubleForFields.Addr(), specUnum_formatDoubleForFields, nil, uintptr(unsafe.Pointer(format)), uintptr(math.Float64bits(number)), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(fpositer)), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
 // Unum_formatInt64 calls icuin!unum_formatInt64.
 func Unum_formatInt64(fmt *unsafe.Pointer, number int64, result *uint16, resultLength int32, pos *UFieldPosition, status *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUnum_formatInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(number), uintptr(unsafe.Pointer(result)), uintptr(resultLength), uintptr(unsafe.Pointer(pos)), uintptr(unsafe.Pointer(status)))
@@ -9517,6 +9822,14 @@ func Unum_getAvailable(localeIndex int32) foundation.PSTR {
 func Unum_getContext(fmt *unsafe.Pointer, type_ UDisplayContextType, status *UErrorCode) UDisplayContext {
 	r1, _, _ := syscall.SyscallN(procUnum_getContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(type_), uintptr(unsafe.Pointer(status)))
 	return UDisplayContext(r1)
+}
+
+var specUnum_getDoubleAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Unum_getDoubleAttribute calls icuin!unum_getDoubleAttribute.
+func Unum_getDoubleAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute) float64 {
+	r := win32.Call(procUnum_getDoubleAttribute.Addr(), specUnum_getDoubleAttribute, nil, uintptr(unsafe.Pointer(fmt)), uintptr(attr))
+	return math.Float64frombits(r.F0)
 }
 
 // Unum_getLocaleByType calls icuin!unum_getLocaleByType.
@@ -9555,6 +9868,22 @@ func Unum_parseDecimal(fmt *unsafe.Pointer, text *uint16, textLength int32, pars
 	return int32(r1)
 }
 
+var specUnum_parseDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Unum_parseDouble calls icuin!unum_parseDouble.
+func Unum_parseDouble(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) float64 {
+	r := win32.Call(procUnum_parseDouble.Addr(), specUnum_parseDouble, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
+var specUnum_parseDoubleCurrency = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}, Ret: win32.Float64}
+
+// Unum_parseDoubleCurrency calls icuin!unum_parseDoubleCurrency.
+func Unum_parseDoubleCurrency(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, currency *uint16, status *UErrorCode) float64 {
+	r := win32.Call(procUnum_parseDoubleCurrency.Addr(), specUnum_parseDoubleCurrency, nil, uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(currency)), uintptr(unsafe.Pointer(status)))
+	return math.Float64frombits(r.F0)
+}
+
 // Unum_parseInt64 calls icuin!unum_parseInt64.
 func Unum_parseInt64(fmt *unsafe.Pointer, text *uint16, textLength int32, parsePos *int32, status *UErrorCode) int64 {
 	r1, _, _ := syscall.SyscallN(procUnum_parseInt64.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(unsafe.Pointer(text)), uintptr(textLength), uintptr(unsafe.Pointer(parsePos)), uintptr(unsafe.Pointer(status)))
@@ -9575,6 +9904,13 @@ func Unum_setAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute, newValu
 // Unum_setContext calls icuin!unum_setContext.
 func Unum_setContext(fmt *unsafe.Pointer, value UDisplayContext, status *UErrorCode) {
 	syscall.SyscallN(procUnum_setContext.Addr(), uintptr(unsafe.Pointer(fmt)), uintptr(value), uintptr(unsafe.Pointer(status)))
+}
+
+var specUnum_setDoubleAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64}}
+
+// Unum_setDoubleAttribute calls icuin!unum_setDoubleAttribute.
+func Unum_setDoubleAttribute(fmt *unsafe.Pointer, attr UNumberFormatAttribute, newValue float64) {
+	win32.Call(procUnum_setDoubleAttribute.Addr(), specUnum_setDoubleAttribute, nil, uintptr(unsafe.Pointer(fmt)), uintptr(attr), uintptr(math.Float64bits(newValue))).Tuple()
 }
 
 // Unum_setSymbol calls icuin!unum_setSymbol.
@@ -9606,6 +9942,13 @@ func Unumf_closeResult(uresult *UFormattedNumber) {
 // Unumf_formatDecimal calls icu!unumf_formatDecimal.
 func Unumf_formatDecimal(uformatter *UNumberFormatter, value foundation.PSTR, valueLen int32, uresult *UFormattedNumber, ec *UErrorCode) {
 	syscall.SyscallN(procUnumf_formatDecimal.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(unsafe.Pointer(value)), uintptr(valueLen), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+}
+
+var specUnumf_formatDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word}}
+
+// Unumf_formatDouble calls icu!unumf_formatDouble.
+func Unumf_formatDouble(uformatter *UNumberFormatter, value float64, uresult *UFormattedNumber, ec *UErrorCode) {
+	win32.Call(procUnumf_formatDouble.Addr(), specUnumf_formatDouble, nil, uintptr(unsafe.Pointer(uformatter)), uintptr(math.Float64bits(value)), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec))).Tuple()
 }
 
 // Unumf_formatInt calls icu!unumf_formatInt.
@@ -9673,6 +10016,13 @@ func Unumrf_closeResult(uresult *UFormattedNumberRange) {
 // Unumrf_formatDecimalRange calls icu!unumrf_formatDecimalRange.
 func Unumrf_formatDecimalRange(uformatter *UNumberRangeFormatter, first foundation.PSTR, firstLen int32, second foundation.PSTR, secondLen int32, uresult *UFormattedNumberRange, ec *UErrorCode) {
 	syscall.SyscallN(procUnumrf_formatDecimalRange.Addr(), uintptr(unsafe.Pointer(uformatter)), uintptr(unsafe.Pointer(first)), uintptr(firstLen), uintptr(unsafe.Pointer(second)), uintptr(secondLen), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec)))
+}
+
+var specUnumrf_formatDoubleRange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// Unumrf_formatDoubleRange calls icu!unumrf_formatDoubleRange.
+func Unumrf_formatDoubleRange(uformatter *UNumberRangeFormatter, first float64, second float64, uresult *UFormattedNumberRange, ec *UErrorCode) {
+	win32.Call(procUnumrf_formatDoubleRange.Addr(), specUnumrf_formatDoubleRange, nil, uintptr(unsafe.Pointer(uformatter)), uintptr(math.Float64bits(first)), uintptr(math.Float64bits(second)), uintptr(unsafe.Pointer(uresult)), uintptr(unsafe.Pointer(ec))).Tuple()
 }
 
 // Unumrf_openForSkeletonWithCollapseAndIdentityFallback calls icu!unumrf_openForSkeletonWithCollapseAndIdentityFallback.
@@ -9786,6 +10136,14 @@ func Uplrules_open(locale foundation.PSTR, status *UErrorCode) *UPluralRules {
 func Uplrules_openForType(locale foundation.PSTR, type_ UPluralType, status *UErrorCode) *UPluralRules {
 	r1, _, _ := syscall.SyscallN(procUplrules_openForType.Addr(), uintptr(unsafe.Pointer(locale)), uintptr(type_), uintptr(unsafe.Pointer(status)))
 	return (*UPluralRules)(unsafe.Pointer(r1))
+}
+
+var specUplrules_select = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// Uplrules_select calls icuin!uplrules_select.
+func Uplrules_select(uplrules *UPluralRules, number float64, keyword *uint16, capacity int32, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUplrules_select.Addr(), specUplrules_select, nil, uintptr(unsafe.Pointer(uplrules)), uintptr(math.Float64bits(number)), uintptr(unsafe.Pointer(keyword)), uintptr(capacity), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
 }
 
 // Uplrules_selectFormatted calls icu!uplrules_selectFormatted.
@@ -10240,6 +10598,36 @@ func Ureldatefmt_closeResult(ufrdt *UFormattedRelativeDateTime) {
 func Ureldatefmt_combineDateAndTime(reldatefmt *URelativeDateTimeFormatter, relativeDateString *uint16, relativeDateStringLen int32, timeString *uint16, timeStringLen int32, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
 	r1, _, _ := syscall.SyscallN(procUreldatefmt_combineDateAndTime.Addr(), uintptr(unsafe.Pointer(reldatefmt)), uintptr(unsafe.Pointer(relativeDateString)), uintptr(relativeDateStringLen), uintptr(unsafe.Pointer(timeString)), uintptr(timeStringLen), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status)))
 	return int32(r1)
+}
+
+var specUreldatefmt_format = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Ureldatefmt_format calls icuin!ureldatefmt_format.
+func Ureldatefmt_format(reldatefmt *URelativeDateTimeFormatter, offset float64, unit URelativeDateTimeUnit, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUreldatefmt_format.Addr(), specUreldatefmt_format, nil, uintptr(unsafe.Pointer(reldatefmt)), uintptr(math.Float64bits(offset)), uintptr(unit), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUreldatefmt_formatNumeric = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Ureldatefmt_formatNumeric calls icuin!ureldatefmt_formatNumeric.
+func Ureldatefmt_formatNumeric(reldatefmt *URelativeDateTimeFormatter, offset float64, unit URelativeDateTimeUnit, result *uint16, resultCapacity int32, status *UErrorCode) int32 {
+	r1, _, _ := win32.Call(procUreldatefmt_formatNumeric.Addr(), specUreldatefmt_formatNumeric, nil, uintptr(unsafe.Pointer(reldatefmt)), uintptr(math.Float64bits(offset)), uintptr(unit), uintptr(unsafe.Pointer(result)), uintptr(resultCapacity), uintptr(unsafe.Pointer(status))).Tuple()
+	return int32(r1)
+}
+
+var specUreldatefmt_formatNumericToResult = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// Ureldatefmt_formatNumericToResult calls icu!ureldatefmt_formatNumericToResult.
+func Ureldatefmt_formatNumericToResult(reldatefmt *URelativeDateTimeFormatter, offset float64, unit URelativeDateTimeUnit, result *UFormattedRelativeDateTime, status *UErrorCode) {
+	win32.Call(procUreldatefmt_formatNumericToResult.Addr(), specUreldatefmt_formatNumericToResult, nil, uintptr(unsafe.Pointer(reldatefmt)), uintptr(math.Float64bits(offset)), uintptr(unit), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(status))).Tuple()
+}
+
+var specUreldatefmt_formatToResult = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// Ureldatefmt_formatToResult calls icu!ureldatefmt_formatToResult.
+func Ureldatefmt_formatToResult(reldatefmt *URelativeDateTimeFormatter, offset float64, unit URelativeDateTimeUnit, result *UFormattedRelativeDateTime, status *UErrorCode) {
+	win32.Call(procUreldatefmt_formatToResult.Addr(), specUreldatefmt_formatToResult, nil, uintptr(unsafe.Pointer(reldatefmt)), uintptr(math.Float64bits(offset)), uintptr(unit), uintptr(unsafe.Pointer(result)), uintptr(unsafe.Pointer(status))).Tuple()
 }
 
 // Ureldatefmt_open calls icuin!ureldatefmt_open.

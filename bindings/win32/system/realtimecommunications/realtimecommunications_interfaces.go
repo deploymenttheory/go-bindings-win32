@@ -724,6 +724,30 @@ type IRTCClientPresence struct {
 // IID_IRTCClientPresence is the interface identifier for IRTCClientPresence.
 var IID_IRTCClientPresence = win32.GUID{Data1: 0x11c3cbcc, Data2: 0x0744, Data3: 0x42d1, Data4: [8]byte{0x96, 0x8a, 0x51, 0xaa, 0x1b, 0xb2, 0x74, 0xc6}}
 
+var specIRTCClientPresence_EnablePresence = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// EnablePresence dispatches through IRTCClientPresence's vtable slot 3.
+func (self *IRTCClientPresence) EnablePresence(fUseStorage foundation.VARIANT_BOOL, varStorage systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIRTCClientPresence_EnablePresence, nil, uintptr(unsafe.Pointer(self)), uintptr(fUseStorage), uintptr(unsafe.Pointer(&varStorage))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIRTCClientPresence_Export = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Export dispatches through IRTCClientPresence's vtable slot 4.
+func (self *IRTCClientPresence) Export(varStorage systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIRTCClientPresence_Export, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varStorage))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIRTCClientPresence_Import = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Import dispatches through IRTCClientPresence's vtable slot 5.
+func (self *IRTCClientPresence) Import(varStorage systemvariant.VARIANT, fReplaceAll foundation.VARIANT_BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIRTCClientPresence_Import, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varStorage)), uintptr(fReplaceAll)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // EnumerateBuddies dispatches through IRTCClientPresence's vtable slot 6.
 func (self *IRTCClientPresence) EnumerateBuddies() (*IRTCEnumBuddies, error) {
 	_ppEnum := new(*IRTCEnumBuddies)
@@ -831,6 +855,14 @@ type IRTCClientPresence2 struct {
 
 // IID_IRTCClientPresence2 is the interface identifier for IRTCClientPresence2.
 var IID_IRTCClientPresence2 = win32.GUID{Data1: 0xad1809e8, Data2: 0x62f7, Data3: 0x4783, Data4: [8]byte{0x90, 0x9a, 0x29, 0xc9, 0xd2, 0xcb, 0x1d, 0x34}}
+
+var specIRTCClientPresence2_EnablePresenceEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// EnablePresenceEx dispatches through IRTCClientPresence2's vtable slot 21.
+func (self *IRTCClientPresence2) EnablePresenceEx(pProfile *IRTCProfile, varStorage systemvariant.VARIANT, lFlags int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIRTCClientPresence2_EnablePresenceEx, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)), uintptr(unsafe.Pointer(&varStorage)), uintptr(lFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // DisablePresence dispatches through IRTCClientPresence2's vtable slot 22.
 func (self *IRTCClientPresence2) DisablePresence() error {

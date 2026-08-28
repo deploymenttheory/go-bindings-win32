@@ -559,6 +559,14 @@ func (self *IWiaImageFilter) SetNewCallback(pWiaTransferCallback *IWiaTransferCa
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIWiaImageFilter_FilterPreviewImage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// FilterPreviewImage dispatches through IWiaImageFilter's vtable slot 5.
+func (self *IWiaImageFilter) FilterPreviewImage(lFlags int32, pWiaChildItem2 *IWiaItem2, InputImageExtents foundation.RECT, pInputStream *systemcom.IStream) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIWiaImageFilter_FilterPreviewImage, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(pWiaChildItem2)), uintptr(unsafe.Pointer(&InputImageExtents)), uintptr(unsafe.Pointer(pInputStream))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ApplyProperties dispatches through IWiaImageFilter's vtable slot 6.
 func (self *IWiaImageFilter) ApplyProperties(pWiaPropertyStorage *IWiaPropertyStorage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWiaPropertyStorage)))

@@ -356,6 +356,7 @@ var (
 	procStgMakeUniqueName                           = modSHELL32.NewProc("StgMakeUniqueName")
 	procWin32DeleteFile                             = modSHELL32.NewProc("Win32DeleteFile")
 	procWriteCabinetState                           = modSHELL32.NewProc("WriteCabinetState")
+	procAssocCreate                                 = modSHLWAPI.NewProc("AssocCreate")
 	procAssocGetPerceivedType                       = modSHLWAPI.NewProc("AssocGetPerceivedType")
 	procAssocIsDangerous                            = modSHLWAPI.NewProc("AssocIsDangerous")
 	procAssocQueryKey                               = modSHLWAPI.NewProc("AssocQueryKeyW")
@@ -743,6 +744,7 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
+	AssocCreate                                 *win32.Proc
 	AssocCreateForClasses                       *win32.Proc
 	AssocGetDetailsOfPropKey                    *win32.Proc
 	AssocGetPerceivedType                       *win32.Proc
@@ -1436,6 +1438,7 @@ var Procs = struct {
 	Wvnsprintf                                  *win32.Proc
 	WvnsprintfA                                 *win32.Proc
 }{
+	AssocCreate:                              procAssocCreate,
 	AssocCreateForClasses:                    procAssocCreateForClasses,
 	AssocGetDetailsOfPropKey:                 procAssocGetDetailsOfPropKey,
 	AssocGetPerceivedType:                    procAssocGetPerceivedType,
@@ -2128,6 +2131,16 @@ var Procs = struct {
 	WriteCabinetState:                          procWriteCabinetState,
 	Wvnsprintf:                                 procWvnsprintf,
 	WvnsprintfA:                                procWvnsprintfA,
+}
+
+var specAssocCreate = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// AssocCreate calls SHLWAPI!AssocCreate.
+// https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-assoccreate
+// Minimum OS: windows5.0.
+func AssocCreate(clsid win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
+	r1, _, _ := win32.Call(procAssocCreate.Addr(), specAssocCreate, nil, uintptr(unsafe.Pointer(&clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // AssocCreateForClasses calls SHELL32!AssocCreateForClasses.

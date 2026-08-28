@@ -62,6 +62,25 @@ type IVdsAdmin struct {
 // IID_IVdsAdmin is the interface identifier for IVdsAdmin.
 var IID_IVdsAdmin = win32.GUID{Data1: 0xd188e97d, Data2: 0x85aa, Data3: 0x4d33, Data4: [8]byte{0xab, 0xc6, 0x26, 0x29, 0x9a, 0x10, 0xff, 0xc1}}
 
+var specIVdsAdmin_RegisterProvider = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RegisterProvider dispatches through IVdsAdmin's vtable slot 3.
+func (self *IVdsAdmin) RegisterProvider(providerId win32.GUID, providerClsid win32.GUID, pwszName string, type_ VDS_PROVIDER_TYPE, pwszMachineName string, pwszVersion string, guidVersionId win32.GUID) error {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	_pwszMachineName := win32.UTF16Ptr(pwszMachineName)
+	_pwszVersion := win32.UTF16Ptr(pwszVersion)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVdsAdmin_RegisterProvider, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&providerId)), uintptr(unsafe.Pointer(&providerClsid)), uintptr(unsafe.Pointer(_pwszName)), uintptr(type_), uintptr(unsafe.Pointer(_pwszMachineName)), uintptr(unsafe.Pointer(_pwszVersion)), uintptr(unsafe.Pointer(&guidVersionId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsAdmin_UnregisterProvider = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// UnregisterProvider dispatches through IVdsAdmin's vtable slot 4.
+func (self *IVdsAdmin) UnregisterProvider(providerId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIVdsAdmin_UnregisterProvider, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&providerId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IVdsAdvancedDisk: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsadvanceddisk
 // IID: 6e6f6b40-977c-4069-bddd-ac710059f8c0
 type IVdsAdvancedDisk struct {
@@ -645,6 +664,14 @@ type IVdsHwProviderPrivateMpio struct {
 // IID_IVdsHwProviderPrivateMpio is the interface identifier for IVdsHwProviderPrivateMpio.
 var IID_IVdsHwProviderPrivateMpio = win32.GUID{Data1: 0x310a7715, Data2: 0xac2b, Data3: 0x4c6f, Data4: [8]byte{0x98, 0x27, 0x3d, 0x74, 0x2f, 0x35, 0x16, 0x76}}
 
+var specIVdsHwProviderPrivateMpio_SetAllPathStatusesFromHbaPort = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(48, 4, 0, false), win32.Word}}
+
+// SetAllPathStatusesFromHbaPort dispatches through IVdsHwProviderPrivateMpio's vtable slot 3.
+func (self *IVdsHwProviderPrivateMpio) SetAllPathStatusesFromHbaPort(hbaPortProp VDS_HBAPORT_PROP, status VDS_PATH_STATUS) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVdsHwProviderPrivateMpio_SetAllPathStatusesFromHbaPort, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&hbaPortProp)), uintptr(status)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IVdsHwProviderStoragePools: https://learn.microsoft.com/windows/win32/api/vdshwprv/nn-vdshwprv-ivdshwproviderstoragepools
 // IID: d5b5937a-f188-4c79-b86c-11c920ad11b8
 type IVdsHwProviderStoragePools struct {
@@ -657,6 +684,23 @@ var IID_IVdsHwProviderStoragePools = win32.GUID{Data1: 0xd5b5937a, Data2: 0xf188
 // QueryStoragePools dispatches through IVdsHwProviderStoragePools's vtable slot 3.
 func (self *IVdsHwProviderStoragePools) QueryStoragePools(ulFlags uint32, ullRemainingFreeSpace uint64, pPoolAttributes *VDS_POOL_ATTRIBUTES, ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(ullRemainingFreeSpace), uintptr(unsafe.Pointer(pPoolAttributes)), uintptr(unsafe.Pointer(ppEnum)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsHwProviderStoragePools_CreateLunInStoragePool = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CreateLunInStoragePool dispatches through IVdsHwProviderStoragePools's vtable slot 4.
+func (self *IVdsHwProviderStoragePools) CreateLunInStoragePool(type_ VDS_LUN_TYPE, ullSizeInBytes uint64, StoragePoolId win32.GUID, pwszUnmaskingList string, pHints2 *VDS_HINTS2, ppAsync **IVdsAsync) error {
+	_pwszUnmaskingList := win32.UTF16Ptr(pwszUnmaskingList)
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIVdsHwProviderStoragePools_CreateLunInStoragePool, nil, uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(ullSizeInBytes), uintptr(unsafe.Pointer(&StoragePoolId)), uintptr(unsafe.Pointer(_pwszUnmaskingList)), uintptr(unsafe.Pointer(pHints2)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsHwProviderStoragePools_QueryMaxLunCreateSizeInStoragePool = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// QueryMaxLunCreateSizeInStoragePool dispatches through IVdsHwProviderStoragePools's vtable slot 5.
+func (self *IVdsHwProviderStoragePools) QueryMaxLunCreateSizeInStoragePool(type_ VDS_LUN_TYPE, StoragePoolId win32.GUID, pHints2 *VDS_HINTS2, pullMaxLunSize *uint64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIVdsHwProviderStoragePools_QueryMaxLunCreateSizeInStoragePool, nil, uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(&StoragePoolId)), uintptr(unsafe.Pointer(pHints2)), uintptr(unsafe.Pointer(pullMaxLunSize))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -711,6 +755,24 @@ func (self *IVdsIscsiInitiatorAdapter) QueryInitiatorPortals(ppEnum **IEnumVdsOb
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVdsIscsiInitiatorAdapter_LoginToTarget = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// LoginToTarget dispatches through IVdsIscsiInitiatorAdapter's vtable slot 5.
+func (self *IVdsIscsiInitiatorAdapter) LoginToTarget(loginType VDS_ISCSI_LOGIN_TYPE, targetId win32.GUID, targetPortalId win32.GUID, initiatorPortalId win32.GUID, ulLoginFlags uint32, bHeaderDigest bool, bDataDigest bool, authType VDS_ISCSI_AUTH_TYPE, ppAsync **IVdsAsync) error {
+	_bHeaderDigest := win32.Bool32(bHeaderDigest)
+	_bDataDigest := win32.Bool32(bDataDigest)
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIVdsIscsiInitiatorAdapter_LoginToTarget, nil, uintptr(unsafe.Pointer(self)), uintptr(loginType), uintptr(unsafe.Pointer(&targetId)), uintptr(unsafe.Pointer(&targetPortalId)), uintptr(unsafe.Pointer(&initiatorPortalId)), uintptr(ulLoginFlags), uintptr(_bHeaderDigest), uintptr(_bDataDigest), uintptr(authType), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsIscsiInitiatorAdapter_LogoutFromTarget = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// LogoutFromTarget dispatches through IVdsIscsiInitiatorAdapter's vtable slot 6.
+func (self *IVdsIscsiInitiatorAdapter) LogoutFromTarget(targetId win32.GUID, ppAsync **IVdsAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIVdsIscsiInitiatorAdapter_LogoutFromTarget, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&targetId)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IVdsIscsiInitiatorPortal: https://learn.microsoft.com/windows/win32/api/vds/nn-vds-ivdsiscsiinitiatorportal
 // IID: 38a0a9ab-7cc8-4693-ac07-1f28bd03c3da
 type IVdsIscsiInitiatorPortal struct {
@@ -735,6 +797,22 @@ func (self *IVdsIscsiInitiatorPortal) GetInitiatorAdapter(ppInitiatorAdapter **I
 // SetIpsecTunnelAddress dispatches through IVdsIscsiInitiatorPortal's vtable slot 5.
 func (self *IVdsIscsiInitiatorPortal) SetIpsecTunnelAddress(pTunnelAddress *VDS_IPADDRESS, pDestinationAddress *VDS_IPADDRESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTunnelAddress)), uintptr(unsafe.Pointer(pDestinationAddress)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsIscsiInitiatorPortal_GetIpsecSecurity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetIpsecSecurity dispatches through IVdsIscsiInitiatorPortal's vtable slot 6.
+func (self *IVdsIscsiInitiatorPortal) GetIpsecSecurity(targetPortalId win32.GUID, pullSecurityFlags *uint64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIVdsIscsiInitiatorPortal_GetIpsecSecurity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&targetPortalId)), uintptr(unsafe.Pointer(pullSecurityFlags))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsIscsiInitiatorPortal_SetIpsecSecurity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// SetIpsecSecurity dispatches through IVdsIscsiInitiatorPortal's vtable slot 7.
+func (self *IVdsIscsiInitiatorPortal) SetIpsecSecurity(targetPortalId win32.GUID, ullSecurityFlags uint64, pIpsecKey *VDS_ISCSI_IPSEC_KEY) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIVdsIscsiInitiatorPortal_SetIpsecSecurity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&targetPortalId)), uintptr(ullSecurityFlags), uintptr(unsafe.Pointer(pIpsecKey))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -813,6 +891,22 @@ func (self *IVdsIscsiPortalGroup) GetTarget(ppTarget **IVdsIscsiTarget) error {
 // QueryAssociatedPortals dispatches through IVdsIscsiPortalGroup's vtable slot 5.
 func (self *IVdsIscsiPortalGroup) QueryAssociatedPortals(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsIscsiPortalGroup_AddPortal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// AddPortal dispatches through IVdsIscsiPortalGroup's vtable slot 6.
+func (self *IVdsIscsiPortalGroup) AddPortal(portalId win32.GUID, ppAsync **IVdsAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIVdsIscsiPortalGroup_AddPortal, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&portalId)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsIscsiPortalGroup_RemovePortal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RemovePortal dispatches through IVdsIscsiPortalGroup's vtable slot 7.
+func (self *IVdsIscsiPortalGroup) RemovePortal(portalId win32.GUID, ppAsync **IVdsAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIVdsIscsiPortalGroup_RemovePortal, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&portalId)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -961,6 +1055,22 @@ func (self *IVdsLun) Shrink(ullNumberOfBytesToRemove uint64, ppAsync **IVdsAsync
 // QueryPlexes dispatches through IVdsLun's vtable slot 9.
 func (self *IVdsLun) QueryPlexes(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsLun_AddPlex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// AddPlex dispatches through IVdsLun's vtable slot 10.
+func (self *IVdsLun) AddPlex(lunId win32.GUID, ppAsync **IVdsAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIVdsLun_AddPlex, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&lunId)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsLun_RemovePlex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RemovePlex dispatches through IVdsLun's vtable slot 11.
+func (self *IVdsLun) RemovePlex(plexId win32.GUID, ppAsync **IVdsAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIVdsLun_RemovePlex, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&plexId)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1323,6 +1433,41 @@ func (self *IVdsPack) CreateVolume(type_ VDS_VOLUME_TYPE, pInputDiskArray []VDS_
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIVdsPack_AddDisk = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// AddDisk dispatches through IVdsPack's vtable slot 8.
+func (self *IVdsPack) AddDisk(DiskId win32.GUID, PartitionStyle VDS_PARTITION_STYLE, bAsHotSpare bool) error {
+	_bAsHotSpare := win32.Bool32(bAsHotSpare)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIVdsPack_AddDisk, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&DiskId)), uintptr(PartitionStyle), uintptr(_bAsHotSpare)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsPack_MigrateDisks = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MigrateDisks dispatches through IVdsPack's vtable slot 9.
+func (self *IVdsPack) MigrateDisks(pDiskArray *win32.GUID, lNumberOfDisks int32, TargetPack win32.GUID, bForce bool, bQueryOnly bool, pResults *foundation.HRESULT, pbRebootNeeded *foundation.BOOL) error {
+	_bForce := win32.Bool32(bForce)
+	_bQueryOnly := win32.Bool32(bQueryOnly)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIVdsPack_MigrateDisks, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDiskArray)), uintptr(lNumberOfDisks), uintptr(unsafe.Pointer(&TargetPack)), uintptr(_bForce), uintptr(_bQueryOnly), uintptr(unsafe.Pointer(pResults)), uintptr(unsafe.Pointer(pbRebootNeeded))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsPack_ReplaceDisk = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word}}
+
+// ReplaceDisk dispatches through IVdsPack's vtable slot 10.
+func (self *IVdsPack) ReplaceDisk(OldDiskId win32.GUID, NewDiskId win32.GUID, ppAsync **IVdsAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIVdsPack_ReplaceDisk, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&OldDiskId)), uintptr(unsafe.Pointer(&NewDiskId)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsPack_RemoveMissingDisk = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RemoveMissingDisk dispatches through IVdsPack's vtable slot 11.
+func (self *IVdsPack) RemoveMissingDisk(DiskId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIVdsPack_RemoveMissingDisk, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&DiskId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Recover dispatches through IVdsPack's vtable slot 12.
 func (self *IVdsPack) Recover(ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAsync)))
@@ -1371,6 +1516,14 @@ type IVdsProviderPrivate struct {
 
 // IID_IVdsProviderPrivate is the interface identifier for IVdsProviderPrivate.
 var IID_IVdsProviderPrivate = win32.GUID{Data1: 0x11f3cd41, Data2: 0xb7e8, Data3: 0x48ff, Data4: [8]byte{0x94, 0x72, 0x9d, 0xff, 0x01, 0x8a, 0xa2, 0x92}}
+
+var specIVdsProviderPrivate_GetObject = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetObject dispatches through IVdsProviderPrivate's vtable slot 3.
+func (self *IVdsProviderPrivate) GetObject(ObjectId win32.GUID, type_ VDS_OBJECT_TYPE, ppObjectUnk **systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIVdsProviderPrivate_GetObject, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ObjectId)), uintptr(type_), uintptr(unsafe.Pointer(ppObjectUnk))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // OnLoad dispatches through IVdsProviderPrivate's vtable slot 4.
 func (self *IVdsProviderPrivate) OnLoad(pwszMachineName string, pCallbackObject *systemcom.IUnknown) error {
@@ -1464,6 +1617,14 @@ func (self *IVdsService) QueryMaskedDisks(ppEnum **IEnumVdsObject) error {
 // QueryUnallocatedDisks dispatches through IVdsService's vtable slot 8.
 func (self *IVdsService) QueryUnallocatedDisks(ppEnum **IEnumVdsObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsService_GetObject = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// GetObject dispatches through IVdsService's vtable slot 9.
+func (self *IVdsService) GetObject(ObjectId win32.GUID, type_ VDS_OBJECT_TYPE, ppObjectUnk **systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIVdsService_GetObject, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ObjectId)), uintptr(type_), uintptr(unsafe.Pointer(ppObjectUnk))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1592,6 +1753,30 @@ func (self *IVdsServiceIscsi) SetIpsecGroupPresharedKey(pIpsecKey *VDS_ISCSI_IPS
 // SetAllIpsecTunnelAddresses dispatches through IVdsServiceIscsi's vtable slot 6.
 func (self *IVdsServiceIscsi) SetAllIpsecTunnelAddresses(pTunnelAddress *VDS_IPADDRESS, pDestinationAddress *VDS_IPADDRESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTunnelAddress)), uintptr(unsafe.Pointer(pDestinationAddress)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsServiceIscsi_SetAllIpsecSecurity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// SetAllIpsecSecurity dispatches through IVdsServiceIscsi's vtable slot 7.
+func (self *IVdsServiceIscsi) SetAllIpsecSecurity(targetPortalId win32.GUID, ullSecurityFlags uint64, pIpsecKey *VDS_ISCSI_IPSEC_KEY) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIVdsServiceIscsi_SetAllIpsecSecurity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&targetPortalId)), uintptr(ullSecurityFlags), uintptr(unsafe.Pointer(pIpsecKey))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsServiceIscsi_SetInitiatorSharedSecret = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// SetInitiatorSharedSecret dispatches through IVdsServiceIscsi's vtable slot 8.
+func (self *IVdsServiceIscsi) SetInitiatorSharedSecret(pInitiatorSharedSecret *VDS_ISCSI_SHARED_SECRET, targetId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIVdsServiceIscsi_SetInitiatorSharedSecret, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiatorSharedSecret)), uintptr(unsafe.Pointer(&targetId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsServiceIscsi_RememberTargetSharedSecret = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RememberTargetSharedSecret dispatches through IVdsServiceIscsi's vtable slot 9.
+func (self *IVdsServiceIscsi) RememberTargetSharedSecret(targetId win32.GUID, pTargetSharedSecret *VDS_ISCSI_SHARED_SECRET) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIVdsServiceIscsi_RememberTargetSharedSecret, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&targetId)), uintptr(unsafe.Pointer(pTargetSharedSecret))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1786,6 +1971,14 @@ func (self *IVdsSubSystem) CreateLun(type_ VDS_LUN_TYPE, ullSizeInBytes uint64, 
 	}
 	_pwszUnmaskingList := win32.UTF16Ptr(pwszUnmaskingList)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(ullSizeInBytes), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(_pwszUnmaskingList)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppAsync)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsSubSystem_ReplaceDrive = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// ReplaceDrive dispatches through IVdsSubSystem's vtable slot 12.
+func (self *IVdsSubSystem) ReplaceDrive(DriveToBeReplaced win32.GUID, ReplacementDrive win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIVdsSubSystem_ReplaceDrive, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&DriveToBeReplaced)), uintptr(unsafe.Pointer(&ReplacementDrive))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2071,6 +2264,30 @@ func (self *IVdsVolume) Extend(pInputDiskArray []VDS_INPUT_DISK, ppAsync **IVdsA
 // Shrink dispatches through IVdsVolume's vtable slot 7.
 func (self *IVdsVolume) Shrink(ullNumberOfBytesToRemove uint64, ppAsync **IVdsAsync) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ullNumberOfBytesToRemove), uintptr(unsafe.Pointer(ppAsync)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsVolume_AddPlex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// AddPlex dispatches through IVdsVolume's vtable slot 8.
+func (self *IVdsVolume) AddPlex(VolumeId win32.GUID, ppAsync **IVdsAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIVdsVolume_AddPlex, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&VolumeId)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsVolume_BreakPlex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// BreakPlex dispatches through IVdsVolume's vtable slot 9.
+func (self *IVdsVolume) BreakPlex(plexId win32.GUID, ppAsync **IVdsAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIVdsVolume_BreakPlex, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&plexId)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIVdsVolume_RemovePlex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// RemovePlex dispatches through IVdsVolume's vtable slot 10.
+func (self *IVdsVolume) RemovePlex(plexId win32.GUID, ppAsync **IVdsAsync) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIVdsVolume_RemovePlex, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&plexId)), uintptr(unsafe.Pointer(ppAsync))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

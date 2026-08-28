@@ -5,6 +5,7 @@
 package js
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -46,6 +47,7 @@ var (
 	procJsDeleteProperty                     = modchakra.NewProc("JsDeleteProperty")
 	procJsDisableRuntimeExecution            = modchakra.NewProc("JsDisableRuntimeExecution")
 	procJsDisposeRuntime                     = modchakra.NewProc("JsDisposeRuntime")
+	procJsDoubleToNumber                     = modchakra.NewProc("JsDoubleToNumber")
 	procJsEnableRuntimeExecution             = modchakra.NewProc("JsEnableRuntimeExecution")
 	procJsEnumerateHeap                      = modchakra.NewProc("JsEnumerateHeap")
 	procJsEquals                             = modchakra.NewProc("JsEquals")
@@ -137,6 +139,7 @@ var Procs = struct {
 	JsDeleteProperty                     *win32.Proc
 	JsDisableRuntimeExecution            *win32.Proc
 	JsDisposeRuntime                     *win32.Proc
+	JsDoubleToNumber                     *win32.Proc
 	JsEnableRuntimeExecution             *win32.Proc
 	JsEnumerateHeap                      *win32.Proc
 	JsEquals                             *win32.Proc
@@ -222,6 +225,7 @@ var Procs = struct {
 	JsDeleteProperty:                     procJsDeleteProperty,
 	JsDisableRuntimeExecution:            procJsDisableRuntimeExecution,
 	JsDisposeRuntime:                     procJsDisposeRuntime,
+	JsDoubleToNumber:                     procJsDoubleToNumber,
 	JsEnableRuntimeExecution:             procJsEnableRuntimeExecution,
 	JsEnumerateHeap:                      procJsEnumerateHeap,
 	JsEquals:                             procJsEquals,
@@ -440,6 +444,14 @@ func JsDisableRuntimeExecution(runtime unsafe.Pointer) JsErrorCode {
 // JsDisposeRuntime calls chakra!JsDisposeRuntime.
 func JsDisposeRuntime(runtime unsafe.Pointer) JsErrorCode {
 	r1, _, _ := syscall.SyscallN(procJsDisposeRuntime.Addr(), uintptr(unsafe.Pointer(runtime)))
+	return JsErrorCode(r1)
+}
+
+var specJsDoubleToNumber = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Word}}
+
+// JsDoubleToNumber calls chakra!JsDoubleToNumber.
+func JsDoubleToNumber(doubleValue float64, value *unsafe.Pointer) JsErrorCode {
+	r1, _, _ := win32.Call(procJsDoubleToNumber.Addr(), specJsDoubleToNumber, nil, uintptr(math.Float64bits(doubleValue)), uintptr(unsafe.Pointer(value))).Tuple()
 	return JsErrorCode(r1)
 }
 

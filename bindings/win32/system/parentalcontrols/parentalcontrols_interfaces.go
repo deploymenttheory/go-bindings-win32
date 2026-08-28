@@ -22,6 +22,14 @@ type IWPCGamesSettings struct {
 // IID_IWPCGamesSettings is the interface identifier for IWPCGamesSettings.
 var IID_IWPCGamesSettings = win32.GUID{Data1: 0x95e87780, Data2: 0xe158, Data3: 0x489e, Data4: [8]byte{0xb4, 0x52, 0xbb, 0xb8, 0x50, 0x79, 0x07, 0x15}}
 
+var specIWPCGamesSettings_IsBlocked = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// IsBlocked dispatches through IWPCGamesSettings's vtable slot 6.
+func (self *IWPCGamesSettings) IsBlocked(guidAppID win32.GUID, pdwReasons *uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIWPCGamesSettings_IsBlocked, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidAppID)), uintptr(unsafe.Pointer(pdwReasons))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IWPCProviderConfig: https://learn.microsoft.com/windows/win32/api/wpcapi/nn-wpcapi-iwpcproviderconfig
 // IID: bef54196-2d02-4a26-b6e5-d65af295d0f1
 type IWPCProviderConfig struct {

@@ -5,6 +5,7 @@
 package structuredstorage
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -106,6 +107,7 @@ var (
 	procPropVariantToDouble                      = modPROPSYS.NewProc("PropVariantToDouble")
 	procPropVariantToDoubleVector                = modPROPSYS.NewProc("PropVariantToDoubleVector")
 	procPropVariantToDoubleVectorAlloc           = modPROPSYS.NewProc("PropVariantToDoubleVectorAlloc")
+	procPropVariantToDoubleWithDefault           = modPROPSYS.NewProc("PropVariantToDoubleWithDefault")
 	procPropVariantToFileTime                    = modPROPSYS.NewProc("PropVariantToFileTime")
 	procPropVariantToFileTimeVector              = modPROPSYS.NewProc("PropVariantToFileTimeVector")
 	procPropVariantToFileTimeVectorAlloc         = modPROPSYS.NewProc("PropVariantToFileTimeVectorAlloc")
@@ -210,6 +212,7 @@ var Procs = struct {
 	PropVariantToDouble                      *win32.Proc
 	PropVariantToDoubleVector                *win32.Proc
 	PropVariantToDoubleVectorAlloc           *win32.Proc
+	PropVariantToDoubleWithDefault           *win32.Proc
 	PropVariantToFileTime                    *win32.Proc
 	PropVariantToFileTimeVector              *win32.Proc
 	PropVariantToFileTimeVectorAlloc         *win32.Proc
@@ -334,6 +337,7 @@ var Procs = struct {
 	PropVariantToDouble:                      procPropVariantToDouble,
 	PropVariantToDoubleVector:                procPropVariantToDoubleVector,
 	PropVariantToDoubleVectorAlloc:           procPropVariantToDoubleVectorAlloc,
+	PropVariantToDoubleWithDefault:           procPropVariantToDoubleWithDefault,
 	PropVariantToFileTime:                    procPropVariantToFileTime,
 	PropVariantToFileTimeVector:              procPropVariantToFileTimeVector,
 	PropVariantToFileTimeVectorAlloc:         procPropVariantToFileTimeVectorAlloc,
@@ -940,6 +944,16 @@ func PropVariantToDoubleVector(propvar *PROPVARIANT, prgn []float64, pcElem *uin
 func PropVariantToDoubleVectorAlloc(propvar *PROPVARIANT, pprgn **float64, pcElem *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPropVariantToDoubleVectorAlloc.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pprgn)), uintptr(unsafe.Pointer(pcElem)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specPropVariantToDoubleWithDefault = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}, Ret: win32.Float64}
+
+// PropVariantToDoubleWithDefault calls PROPSYS!PropVariantToDoubleWithDefault.
+// https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttodoublewithdefault
+// Minimum OS: windows5.1.2600.
+func PropVariantToDoubleWithDefault(propvarIn *PROPVARIANT, dblDefault float64) float64 {
+	r := win32.Call(procPropVariantToDoubleWithDefault.Addr(), specPropVariantToDoubleWithDefault, nil, uintptr(unsafe.Pointer(propvarIn)), uintptr(math.Float64bits(dblDefault)))
+	return math.Float64frombits(r.F0)
 }
 
 // PropVariantToFileTime calls PROPSYS!PropVariantToFileTime.

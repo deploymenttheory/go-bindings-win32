@@ -101,6 +101,8 @@ var (
 	procConfigurePort                                = modwinspool_drv.NewProc("ConfigurePortW")
 	procConfigurePortA                               = modwinspool_drv.NewProc("ConfigurePortA")
 	procConnectToPrinterDlg                          = modwinspool_drv.NewProc("ConnectToPrinterDlg")
+	procCorePrinterDriverInstalled                   = modwinspool_drv.NewProc("CorePrinterDriverInstalledW")
+	procCorePrinterDriverInstalledA                  = modwinspool_drv.NewProc("CorePrinterDriverInstalledA")
 	procCreatePrintAsyncNotifyChannel                = modwinspool_drv.NewProc("CreatePrintAsyncNotifyChannel")
 	procCreatePrinterIC                              = modwinspool_drv.NewProc("CreatePrinterIC")
 	procDeleteForm                                   = modwinspool_drv.NewProc("DeleteFormW")
@@ -281,6 +283,8 @@ var Procs = struct {
 	ConfigurePort                                *win32.Proc
 	ConfigurePortA                               *win32.Proc
 	ConnectToPrinterDlg                          *win32.Proc
+	CorePrinterDriverInstalled                   *win32.Proc
+	CorePrinterDriverInstalledA                  *win32.Proc
 	CreatePrintAsyncNotifyChannel                *win32.Proc
 	CreatePrinterIC                              *win32.Proc
 	DeleteForm                                   *win32.Proc
@@ -497,6 +501,8 @@ var Procs = struct {
 	ConfigurePort:                         procConfigurePort,
 	ConfigurePortA:                        procConfigurePortA,
 	ConnectToPrinterDlg:                   procConnectToPrinterDlg,
+	CorePrinterDriverInstalled:            procCorePrinterDriverInstalled,
+	CorePrinterDriverInstalledA:           procCorePrinterDriverInstalledA,
 	CreatePrintAsyncNotifyChannel:         procCreatePrintAsyncNotifyChannel,
 	CreatePrinterIC:                       procCreatePrinterIC,
 	DeleteForm:                            procDeleteForm,
@@ -973,6 +979,26 @@ func ConfigurePortA(pName foundation.PSTR, hWnd foundation.HWND, pPortName found
 func ConnectToPrinterDlg(hwnd foundation.HWND, Flags uint32) foundation.HANDLE {
 	r1, _, _ := syscall.SyscallN(procConnectToPrinterDlg.Addr(), uintptr(hwnd), uintptr(Flags))
 	return foundation.HANDLE(r1)
+}
+
+var specCorePrinterDriverInstalled = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CorePrinterDriverInstalled calls winspool.drv!CorePrinterDriverInstalledW.
+// https://learn.microsoft.com/windows/win32/printdocs/coreprinterdriverinstalled
+func CorePrinterDriverInstalled(pszServer string, pszEnvironment string, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *foundation.BOOL) error {
+	_pszServer := win32.UTF16Ptr(pszServer)
+	_pszEnvironment := win32.UTF16Ptr(pszEnvironment)
+	r1, _, _ := win32.Call(procCorePrinterDriverInstalled.Addr(), specCorePrinterDriverInstalled, nil, uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(&CoreDriverGUID)), uintptr(win32.StructArg(ftDriverDate)), uintptr(dwlDriverVersion), uintptr(unsafe.Pointer(pbDriverInstalled))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specCorePrinterDriverInstalledA = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CorePrinterDriverInstalledA calls winspool.drv!CorePrinterDriverInstalledA.
+// https://learn.microsoft.com/windows/win32/printdocs/coreprinterdriverinstalled
+func CorePrinterDriverInstalledA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *foundation.BOOL) error {
+	r1, _, _ := win32.Call(procCorePrinterDriverInstalledA.Addr(), specCorePrinterDriverInstalledA, nil, uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(&CoreDriverGUID)), uintptr(win32.StructArg(ftDriverDate)), uintptr(dwlDriverVersion), uintptr(unsafe.Pointer(pbDriverInstalled))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CreatePrintAsyncNotifyChannel calls winspool.drv!CreatePrintAsyncNotifyChannel.

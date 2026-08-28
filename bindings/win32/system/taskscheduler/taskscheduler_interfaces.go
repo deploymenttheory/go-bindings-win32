@@ -87,6 +87,14 @@ func (self *IActionCollection) Create(type_ TASK_ACTION_TYPE, ppAction **IAction
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIActionCollection_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through IActionCollection's vtable slot 13.
+func (self *IActionCollection) Remove(index systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIActionCollection_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Clear dispatches through IActionCollection's vtable slot 14.
 func (self *IActionCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
@@ -944,6 +952,22 @@ func (self *IRegisteredTask) Put_Enabled(enabled foundation.VARIANT_BOOL) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIRegisteredTask_Run = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Run dispatches through IRegisteredTask's vtable slot 12.
+func (self *IRegisteredTask) Run(params systemvariant.VARIANT, ppRunningTask **IRunningTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIRegisteredTask_Run, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&params)), uintptr(unsafe.Pointer(ppRunningTask))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIRegisteredTask_RunEx = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// RunEx dispatches through IRegisteredTask's vtable slot 13.
+func (self *IRegisteredTask) RunEx(params systemvariant.VARIANT, flags int32, sessionID int32, user foundation.BSTR, ppRunningTask **IRunningTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIRegisteredTask_RunEx, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&params)), uintptr(flags), uintptr(sessionID), uintptr(unsafe.Pointer(user)), uintptr(unsafe.Pointer(ppRunningTask))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetInstances dispatches through IRegisteredTask's vtable slot 14.
 func (self *IRegisteredTask) GetInstances(flags int32, ppRunningTasks **IRunningTaskCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(ppRunningTasks)))
@@ -1022,6 +1046,14 @@ var IID_IRegisteredTaskCollection = win32.GUID{Data1: 0x86627eb4, Data2: 0x42a7,
 // Get_Count dispatches through IRegisteredTaskCollection's vtable slot 7.
 func (self *IRegisteredTaskCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIRegisteredTaskCollection_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IRegisteredTaskCollection's vtable slot 8.
+func (self *IRegisteredTaskCollection) Get_Item(index systemvariant.VARIANT, ppRegisteredTask **IRegisteredTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIRegisteredTaskCollection_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(ppRegisteredTask))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1127,6 +1159,14 @@ func (self *IRegistrationInfo) Put_URI(uri foundation.BSTR) error {
 // Get_SecurityDescriptor dispatches through IRegistrationInfo's vtable slot 21.
 func (self *IRegistrationInfo) Get_SecurityDescriptor(pSddl *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSddl)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIRegistrationInfo_Put_SecurityDescriptor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_SecurityDescriptor dispatches through IRegistrationInfo's vtable slot 22.
+func (self *IRegistrationInfo) Put_SecurityDescriptor(sddl systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIRegistrationInfo_Put_SecurityDescriptor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&sddl))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1277,6 +1317,14 @@ var IID_IRunningTaskCollection = win32.GUID{Data1: 0x6a67614b, Data2: 0x6828, Da
 // Get_Count dispatches through IRunningTaskCollection's vtable slot 7.
 func (self *IRunningTaskCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIRunningTaskCollection_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through IRunningTaskCollection's vtable slot 8.
+func (self *IRunningTaskCollection) Get_Item(index systemvariant.VARIANT, ppRunningTask **IRunningTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIRunningTaskCollection_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(ppRunningTask))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1761,6 +1809,14 @@ func (self *ITaskFolder) GetFolders(flags int32, ppFolders **ITaskFolderCollecti
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specITaskFolder_CreateFolder = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateFolder dispatches through ITaskFolder's vtable slot 11.
+func (self *ITaskFolder) CreateFolder(subFolderName foundation.BSTR, sddl systemvariant.VARIANT, ppFolder **ITaskFolder) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specITaskFolder_CreateFolder, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subFolderName)), uintptr(unsafe.Pointer(&sddl)), uintptr(unsafe.Pointer(ppFolder))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // DeleteFolder dispatches through ITaskFolder's vtable slot 12.
 func (self *ITaskFolder) DeleteFolder(subFolderName foundation.BSTR, flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subFolderName)), uintptr(flags))
@@ -1782,6 +1838,22 @@ func (self *ITaskFolder) GetTasks(flags int32, ppTasks **IRegisteredTaskCollecti
 // DeleteTask dispatches through ITaskFolder's vtable slot 15.
 func (self *ITaskFolder) DeleteTask(name foundation.BSTR, flags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(flags))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITaskFolder_RegisterTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// RegisterTask dispatches through ITaskFolder's vtable slot 16.
+func (self *ITaskFolder) RegisterTask(path foundation.BSTR, xmlText foundation.BSTR, flags int32, userId systemvariant.VARIANT, password systemvariant.VARIANT, logonType TASK_LOGON_TYPE, sddl systemvariant.VARIANT, ppTask **IRegisteredTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specITaskFolder_RegisterTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(xmlText)), uintptr(flags), uintptr(unsafe.Pointer(&userId)), uintptr(unsafe.Pointer(&password)), uintptr(logonType), uintptr(unsafe.Pointer(&sddl)), uintptr(unsafe.Pointer(ppTask))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITaskFolder_RegisterTaskDefinition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// RegisterTaskDefinition dispatches through ITaskFolder's vtable slot 17.
+func (self *ITaskFolder) RegisterTaskDefinition(path foundation.BSTR, pDefinition *ITaskDefinition, flags int32, userId systemvariant.VARIANT, password systemvariant.VARIANT, logonType TASK_LOGON_TYPE, sddl systemvariant.VARIANT, ppTask **IRegisteredTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specITaskFolder_RegisterTaskDefinition, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(pDefinition)), uintptr(flags), uintptr(unsafe.Pointer(&userId)), uintptr(unsafe.Pointer(&password)), uintptr(logonType), uintptr(unsafe.Pointer(&sddl)), uintptr(unsafe.Pointer(ppTask))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1809,6 +1881,14 @@ var IID_ITaskFolderCollection = win32.GUID{Data1: 0x79184a66, Data2: 0x8664, Dat
 // Get_Count dispatches through ITaskFolderCollection's vtable slot 7.
 func (self *ITaskFolderCollection) Get_Count(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITaskFolderCollection_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ITaskFolderCollection's vtable slot 8.
+func (self *ITaskFolderCollection) Get_Item(index systemvariant.VARIANT, ppFolder **ITaskFolder) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specITaskFolderCollection_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(unsafe.Pointer(ppFolder))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2037,6 +2117,14 @@ func (self *ITaskService) GetRunningTasks(flags int32, ppRunningTasks **IRunning
 // NewTask dispatches through ITaskService's vtable slot 9.
 func (self *ITaskService) NewTask(flags uint32, ppDefinition **ITaskDefinition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(flags), uintptr(unsafe.Pointer(ppDefinition)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITaskService_Connect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// Connect dispatches through ITaskService's vtable slot 10.
+func (self *ITaskService) Connect(serverName systemvariant.VARIANT, user systemvariant.VARIANT, domain systemvariant.VARIANT, password systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specITaskService_Connect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&serverName)), uintptr(unsafe.Pointer(&user)), uintptr(unsafe.Pointer(&domain)), uintptr(unsafe.Pointer(&password))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2607,6 +2695,14 @@ func (self *ITriggerCollection) Get__NewEnum(ppEnum **systemcom.IUnknown) error 
 // Create dispatches through ITriggerCollection's vtable slot 10.
 func (self *ITriggerCollection) Create(type_ TASK_TRIGGER_TYPE2, ppTrigger **ITrigger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(ppTrigger)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITriggerCollection_Remove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Remove dispatches through ITriggerCollection's vtable slot 11.
+func (self *ITriggerCollection) Remove(index systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specITriggerCollection_Remove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

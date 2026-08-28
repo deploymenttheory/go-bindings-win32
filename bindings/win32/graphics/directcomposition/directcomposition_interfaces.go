@@ -5,6 +5,7 @@
 package directcomposition
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -49,9 +50,25 @@ func (self *IDCompositionAffineTransform2DEffect) SetTransformMatrixElement(row 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionAffineTransform2DEffect_SetTransformMatrixElement_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// SetTransformMatrixElement dispatches through IDCompositionAffineTransform2DEffect's vtable slot 8.
+func (self *IDCompositionAffineTransform2DEffect) SetTransformMatrixElement_(row int32, column int32, value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionAffineTransform2DEffect_SetTransformMatrixElement_, nil, uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetSharpness dispatches through IDCompositionAffineTransform2DEffect's vtable slot 9.
 func (self *IDCompositionAffineTransform2DEffect) SetSharpness(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionAffineTransform2DEffect_SetSharpness_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSharpness dispatches through IDCompositionAffineTransform2DEffect's vtable slot 10.
+func (self *IDCompositionAffineTransform2DEffect) SetSharpness_(sharpness float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDCompositionAffineTransform2DEffect_SetSharpness_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(sharpness))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -73,6 +90,38 @@ func (self *IDCompositionAnimation) Reset() error {
 // SetAbsoluteBeginTime dispatches through IDCompositionAnimation's vtable slot 4.
 func (self *IDCompositionAnimation) SetAbsoluteBeginTime(beginTime int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(beginTime))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionAnimation_AddCubic = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// AddCubic dispatches through IDCompositionAnimation's vtable slot 5.
+func (self *IDCompositionAnimation) AddCubic(beginOffset float64, constantCoefficient float32, linearCoefficient float32, quadraticCoefficient float32, cubicCoefficient float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDCompositionAnimation_AddCubic, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(beginOffset)), uintptr(math.Float32bits(constantCoefficient)), uintptr(math.Float32bits(linearCoefficient)), uintptr(math.Float32bits(quadraticCoefficient)), uintptr(math.Float32bits(cubicCoefficient))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionAnimation_AddSinusoidal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// AddSinusoidal dispatches through IDCompositionAnimation's vtable slot 6.
+func (self *IDCompositionAnimation) AddSinusoidal(beginOffset float64, bias float32, amplitude float32, frequency float32, phase float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionAnimation_AddSinusoidal, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(beginOffset)), uintptr(math.Float32bits(bias)), uintptr(math.Float32bits(amplitude)), uintptr(math.Float32bits(frequency)), uintptr(math.Float32bits(phase))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionAnimation_AddRepeat = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// AddRepeat dispatches through IDCompositionAnimation's vtable slot 7.
+func (self *IDCompositionAnimation) AddRepeat(beginOffset float64, durationToRepeat float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDCompositionAnimation_AddRepeat, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(beginOffset)), uintptr(math.Float64bits(durationToRepeat))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionAnimation_End = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float32}}
+
+// End dispatches through IDCompositionAnimation's vtable slot 8.
+func (self *IDCompositionAnimation) End(endOffset float64, endValue float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionAnimation_End, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(endOffset)), uintptr(math.Float32bits(endValue))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -104,9 +153,25 @@ func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient1(animation *I
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionArithmeticCompositeEffect_SetCoefficient1_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCoefficient1 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 7.
+func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient1_(Coeffcient1 float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDCompositionArithmeticCompositeEffect_SetCoefficient1_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Coeffcient1))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCoefficient2 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 8.
 func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient2(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionArithmeticCompositeEffect_SetCoefficient2_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCoefficient2 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 9.
+func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient2_(Coefficient2 float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIDCompositionArithmeticCompositeEffect_SetCoefficient2_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Coefficient2))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -116,9 +181,25 @@ func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient3(animation *I
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionArithmeticCompositeEffect_SetCoefficient3_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCoefficient3 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 11.
+func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient3_(Coefficient3 float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIDCompositionArithmeticCompositeEffect_SetCoefficient3_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Coefficient3))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCoefficient4 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 12.
 func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient4(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionArithmeticCompositeEffect_SetCoefficient4_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCoefficient4 dispatches through IDCompositionArithmeticCompositeEffect's vtable slot 13.
+func (self *IDCompositionArithmeticCompositeEffect) SetCoefficient4_(Coefficient4 float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDCompositionArithmeticCompositeEffect_SetCoefficient4_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(Coefficient4))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -164,9 +245,25 @@ func (self *IDCompositionBrightnessEffect) SetWhitePointX(animation *IDCompositi
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionBrightnessEffect_SetWhitePointX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetWhitePointX dispatches through IDCompositionBrightnessEffect's vtable slot 7.
+func (self *IDCompositionBrightnessEffect) SetWhitePointX_(whitePointX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDCompositionBrightnessEffect_SetWhitePointX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(whitePointX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetWhitePointY dispatches through IDCompositionBrightnessEffect's vtable slot 8.
 func (self *IDCompositionBrightnessEffect) SetWhitePointY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionBrightnessEffect_SetWhitePointY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetWhitePointY dispatches through IDCompositionBrightnessEffect's vtable slot 9.
+func (self *IDCompositionBrightnessEffect) SetWhitePointY_(whitePointY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIDCompositionBrightnessEffect_SetWhitePointY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(whitePointY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -176,9 +273,25 @@ func (self *IDCompositionBrightnessEffect) SetBlackPointX(animation *IDCompositi
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionBrightnessEffect_SetBlackPointX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBlackPointX dispatches through IDCompositionBrightnessEffect's vtable slot 11.
+func (self *IDCompositionBrightnessEffect) SetBlackPointX_(blackPointX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIDCompositionBrightnessEffect_SetBlackPointX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(blackPointX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetBlackPointY dispatches through IDCompositionBrightnessEffect's vtable slot 12.
 func (self *IDCompositionBrightnessEffect) SetBlackPointY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionBrightnessEffect_SetBlackPointY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBlackPointY dispatches through IDCompositionBrightnessEffect's vtable slot 13.
+func (self *IDCompositionBrightnessEffect) SetBlackPointY_(blackPointY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDCompositionBrightnessEffect_SetBlackPointY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(blackPointY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -209,6 +322,14 @@ func (self *IDCompositionColorMatrixEffect) SetMatrix(matrix *graphicsdirect2dco
 // SetMatrixElement dispatches through IDCompositionColorMatrixEffect's vtable slot 5.
 func (self *IDCompositionColorMatrixEffect) SetMatrixElement(row int32, column int32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionColorMatrixEffect_SetMatrixElement_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// SetMatrixElement dispatches through IDCompositionColorMatrixEffect's vtable slot 6.
+func (self *IDCompositionColorMatrixEffect) SetMatrixElement_(row int32, column int32, value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionColorMatrixEffect_SetMatrixElement_, nil, uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(math.Float32bits(value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -809,6 +930,14 @@ func (self *IDCompositionEffectGroup) SetOpacity(animation *IDCompositionAnimati
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionEffectGroup_SetOpacity_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOpacity dispatches through IDCompositionEffectGroup's vtable slot 4.
+func (self *IDCompositionEffectGroup) SetOpacity_(opacity float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionEffectGroup_SetOpacity_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(opacity))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetTransform3D dispatches through IDCompositionEffectGroup's vtable slot 5.
 func (self *IDCompositionEffectGroup) SetTransform3D(transform3D *IDCompositionTransform3D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform3D)))
@@ -845,6 +974,14 @@ func (self *IDCompositionGaussianBlurEffect) SetStandardDeviation(animation *IDC
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionGaussianBlurEffect_SetStandardDeviation_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetStandardDeviation dispatches through IDCompositionGaussianBlurEffect's vtable slot 5.
+func (self *IDCompositionGaussianBlurEffect) SetStandardDeviation_(amount float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDCompositionGaussianBlurEffect_SetStandardDeviation_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(amount))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetBorderMode dispatches through IDCompositionGaussianBlurEffect's vtable slot 6.
 func (self *IDCompositionGaussianBlurEffect) SetBorderMode(mode graphicsdirect2dcommon.D2D1_BORDER_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(mode))
@@ -863,6 +1000,14 @@ var IID_IDCompositionHueRotationEffect = win32.GUID{Data1: 0x6db9f920, Data2: 0x
 // SetAngle dispatches through IDCompositionHueRotationEffect's vtable slot 4.
 func (self *IDCompositionHueRotationEffect) SetAngle(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionHueRotationEffect_SetAngle_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAngle dispatches through IDCompositionHueRotationEffect's vtable slot 5.
+func (self *IDCompositionHueRotationEffect) SetAngle_(amountDegrees float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDCompositionHueRotationEffect_SetAngle_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(amountDegrees))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -901,9 +1046,25 @@ func (self *IDCompositionLinearTransferEffect) SetRedYIntercept(animation *IDCom
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionLinearTransferEffect_SetRedYIntercept_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetRedYIntercept dispatches through IDCompositionLinearTransferEffect's vtable slot 5.
+func (self *IDCompositionLinearTransferEffect) SetRedYIntercept_(redYIntercept float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDCompositionLinearTransferEffect_SetRedYIntercept_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(redYIntercept))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetRedSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 6.
 func (self *IDCompositionLinearTransferEffect) SetRedSlope(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionLinearTransferEffect_SetRedSlope_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetRedSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 7.
+func (self *IDCompositionLinearTransferEffect) SetRedSlope_(redSlope float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDCompositionLinearTransferEffect_SetRedSlope_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(redSlope))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -920,9 +1081,25 @@ func (self *IDCompositionLinearTransferEffect) SetGreenYIntercept(animation *IDC
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionLinearTransferEffect_SetGreenYIntercept_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetGreenYIntercept dispatches through IDCompositionLinearTransferEffect's vtable slot 10.
+func (self *IDCompositionLinearTransferEffect) SetGreenYIntercept_(greenYIntercept float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDCompositionLinearTransferEffect_SetGreenYIntercept_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(greenYIntercept))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetGreenSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 11.
 func (self *IDCompositionLinearTransferEffect) SetGreenSlope(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionLinearTransferEffect_SetGreenSlope_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetGreenSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 12.
+func (self *IDCompositionLinearTransferEffect) SetGreenSlope_(greenSlope float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDCompositionLinearTransferEffect_SetGreenSlope_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(greenSlope))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -939,9 +1116,25 @@ func (self *IDCompositionLinearTransferEffect) SetBlueYIntercept(animation *IDCo
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionLinearTransferEffect_SetBlueYIntercept_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBlueYIntercept dispatches through IDCompositionLinearTransferEffect's vtable slot 15.
+func (self *IDCompositionLinearTransferEffect) SetBlueYIntercept_(blueYIntercept float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIDCompositionLinearTransferEffect_SetBlueYIntercept_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(blueYIntercept))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetBlueSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 16.
 func (self *IDCompositionLinearTransferEffect) SetBlueSlope(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionLinearTransferEffect_SetBlueSlope_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBlueSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 17.
+func (self *IDCompositionLinearTransferEffect) SetBlueSlope_(blueSlope float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIDCompositionLinearTransferEffect_SetBlueSlope_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(blueSlope))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -958,9 +1151,25 @@ func (self *IDCompositionLinearTransferEffect) SetAlphaYIntercept(animation *IDC
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionLinearTransferEffect_SetAlphaYIntercept_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAlphaYIntercept dispatches through IDCompositionLinearTransferEffect's vtable slot 20.
+func (self *IDCompositionLinearTransferEffect) SetAlphaYIntercept_(alphaYIntercept float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIDCompositionLinearTransferEffect_SetAlphaYIntercept_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(alphaYIntercept))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetAlphaSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 21.
 func (self *IDCompositionLinearTransferEffect) SetAlphaSlope(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionLinearTransferEffect_SetAlphaSlope_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAlphaSlope dispatches through IDCompositionLinearTransferEffect's vtable slot 22.
+func (self *IDCompositionLinearTransferEffect) SetAlphaSlope_(alphaSlope float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIDCompositionLinearTransferEffect_SetAlphaSlope_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(alphaSlope))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -999,6 +1208,14 @@ func (self *IDCompositionMatrixTransform) SetMatrixElement(row int32, column int
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionMatrixTransform_SetMatrixElement_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// SetMatrixElement dispatches through IDCompositionMatrixTransform's vtable slot 5.
+func (self *IDCompositionMatrixTransform) SetMatrixElement_(row int32, column int32, value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDCompositionMatrixTransform_SetMatrixElement_, nil, uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDCompositionMatrixTransform3D: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionmatrixtransform3d
 // IID: 4b3363f0-643b-41b7-b6e0-ccf22d34467c
 type IDCompositionMatrixTransform3D struct {
@@ -1020,6 +1237,14 @@ func (self *IDCompositionMatrixTransform3D) SetMatrixElement(row int32, column i
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionMatrixTransform3D_SetMatrixElement_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// SetMatrixElement dispatches through IDCompositionMatrixTransform3D's vtable slot 5.
+func (self *IDCompositionMatrixTransform3D) SetMatrixElement_(row int32, column int32, value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDCompositionMatrixTransform3D_SetMatrixElement_, nil, uintptr(unsafe.Pointer(self)), uintptr(row), uintptr(column), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDCompositionRectangleClip: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionrectangleclip
 // IID: 9842ad7d-d9cf-4908-aed7-48b51da5e7c2
 type IDCompositionRectangleClip struct {
@@ -1035,9 +1260,25 @@ func (self *IDCompositionRectangleClip) SetLeft(animation *IDCompositionAnimatio
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRectangleClip_SetLeft_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetLeft dispatches through IDCompositionRectangleClip's vtable slot 4.
+func (self *IDCompositionRectangleClip) SetLeft_(left float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionRectangleClip_SetLeft_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(left))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetTop dispatches through IDCompositionRectangleClip's vtable slot 5.
 func (self *IDCompositionRectangleClip) SetTop(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRectangleClip_SetTop_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetTop dispatches through IDCompositionRectangleClip's vtable slot 6.
+func (self *IDCompositionRectangleClip) SetTop_(top float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionRectangleClip_SetTop_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(top))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1047,9 +1288,25 @@ func (self *IDCompositionRectangleClip) SetRight(animation *IDCompositionAnimati
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRectangleClip_SetRight_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetRight dispatches through IDCompositionRectangleClip's vtable slot 8.
+func (self *IDCompositionRectangleClip) SetRight_(right float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionRectangleClip_SetRight_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(right))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetBottom dispatches through IDCompositionRectangleClip's vtable slot 9.
 func (self *IDCompositionRectangleClip) SetBottom(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRectangleClip_SetBottom_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBottom dispatches through IDCompositionRectangleClip's vtable slot 10.
+func (self *IDCompositionRectangleClip) SetBottom_(bottom float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDCompositionRectangleClip_SetBottom_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(bottom))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1059,9 +1316,25 @@ func (self *IDCompositionRectangleClip) SetTopLeftRadiusX(animation *IDCompositi
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRectangleClip_SetTopLeftRadiusX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetTopLeftRadiusX dispatches through IDCompositionRectangleClip's vtable slot 12.
+func (self *IDCompositionRectangleClip) SetTopLeftRadiusX_(radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDCompositionRectangleClip_SetTopLeftRadiusX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radius))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetTopLeftRadiusY dispatches through IDCompositionRectangleClip's vtable slot 13.
 func (self *IDCompositionRectangleClip) SetTopLeftRadiusY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRectangleClip_SetTopLeftRadiusY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetTopLeftRadiusY dispatches through IDCompositionRectangleClip's vtable slot 14.
+func (self *IDCompositionRectangleClip) SetTopLeftRadiusY_(radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDCompositionRectangleClip_SetTopLeftRadiusY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radius))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1071,9 +1344,25 @@ func (self *IDCompositionRectangleClip) SetTopRightRadiusX(animation *IDComposit
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRectangleClip_SetTopRightRadiusX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetTopRightRadiusX dispatches through IDCompositionRectangleClip's vtable slot 16.
+func (self *IDCompositionRectangleClip) SetTopRightRadiusX_(radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIDCompositionRectangleClip_SetTopRightRadiusX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radius))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetTopRightRadiusY dispatches through IDCompositionRectangleClip's vtable slot 17.
 func (self *IDCompositionRectangleClip) SetTopRightRadiusY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRectangleClip_SetTopRightRadiusY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetTopRightRadiusY dispatches through IDCompositionRectangleClip's vtable slot 18.
+func (self *IDCompositionRectangleClip) SetTopRightRadiusY_(radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIDCompositionRectangleClip_SetTopRightRadiusY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radius))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1083,9 +1372,25 @@ func (self *IDCompositionRectangleClip) SetBottomLeftRadiusX(animation *IDCompos
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRectangleClip_SetBottomLeftRadiusX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBottomLeftRadiusX dispatches through IDCompositionRectangleClip's vtable slot 20.
+func (self *IDCompositionRectangleClip) SetBottomLeftRadiusX_(radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIDCompositionRectangleClip_SetBottomLeftRadiusX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radius))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetBottomLeftRadiusY dispatches through IDCompositionRectangleClip's vtable slot 21.
 func (self *IDCompositionRectangleClip) SetBottomLeftRadiusY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRectangleClip_SetBottomLeftRadiusY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBottomLeftRadiusY dispatches through IDCompositionRectangleClip's vtable slot 22.
+func (self *IDCompositionRectangleClip) SetBottomLeftRadiusY_(radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIDCompositionRectangleClip_SetBottomLeftRadiusY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radius))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1095,9 +1400,25 @@ func (self *IDCompositionRectangleClip) SetBottomRightRadiusX(animation *IDCompo
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRectangleClip_SetBottomRightRadiusX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBottomRightRadiusX dispatches through IDCompositionRectangleClip's vtable slot 24.
+func (self *IDCompositionRectangleClip) SetBottomRightRadiusX_(radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIDCompositionRectangleClip_SetBottomRightRadiusX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radius))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetBottomRightRadiusY dispatches through IDCompositionRectangleClip's vtable slot 25.
 func (self *IDCompositionRectangleClip) SetBottomRightRadiusY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRectangleClip_SetBottomRightRadiusY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBottomRightRadiusY dispatches through IDCompositionRectangleClip's vtable slot 26.
+func (self *IDCompositionRectangleClip) SetBottomRightRadiusY_(radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIDCompositionRectangleClip_SetBottomRightRadiusY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radius))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1116,15 +1437,39 @@ func (self *IDCompositionRotateTransform) SetAngle(animation *IDCompositionAnima
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRotateTransform_SetAngle_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAngle dispatches through IDCompositionRotateTransform's vtable slot 4.
+func (self *IDCompositionRotateTransform) SetAngle_(angle float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionRotateTransform_SetAngle_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angle))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCenterX dispatches through IDCompositionRotateTransform's vtable slot 5.
 func (self *IDCompositionRotateTransform) SetCenterX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRotateTransform_SetCenterX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterX dispatches through IDCompositionRotateTransform's vtable slot 6.
+func (self *IDCompositionRotateTransform) SetCenterX_(centerX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionRotateTransform_SetCenterX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCenterY dispatches through IDCompositionRotateTransform's vtable slot 7.
 func (self *IDCompositionRotateTransform) SetCenterY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRotateTransform_SetCenterY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterY dispatches through IDCompositionRotateTransform's vtable slot 8.
+func (self *IDCompositionRotateTransform) SetCenterY_(centerY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionRotateTransform_SetCenterY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1143,9 +1488,25 @@ func (self *IDCompositionRotateTransform3D) SetAngle(animation *IDCompositionAni
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRotateTransform3D_SetAngle_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAngle dispatches through IDCompositionRotateTransform3D's vtable slot 4.
+func (self *IDCompositionRotateTransform3D) SetAngle_(angle float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionRotateTransform3D_SetAngle_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angle))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetAxisX dispatches through IDCompositionRotateTransform3D's vtable slot 5.
 func (self *IDCompositionRotateTransform3D) SetAxisX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRotateTransform3D_SetAxisX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAxisX dispatches through IDCompositionRotateTransform3D's vtable slot 6.
+func (self *IDCompositionRotateTransform3D) SetAxisX_(axisX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionRotateTransform3D_SetAxisX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(axisX))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1155,9 +1516,25 @@ func (self *IDCompositionRotateTransform3D) SetAxisY(animation *IDCompositionAni
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRotateTransform3D_SetAxisY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAxisY dispatches through IDCompositionRotateTransform3D's vtable slot 8.
+func (self *IDCompositionRotateTransform3D) SetAxisY_(axisY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionRotateTransform3D_SetAxisY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(axisY))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetAxisZ dispatches through IDCompositionRotateTransform3D's vtable slot 9.
 func (self *IDCompositionRotateTransform3D) SetAxisZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRotateTransform3D_SetAxisZ_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAxisZ dispatches through IDCompositionRotateTransform3D's vtable slot 10.
+func (self *IDCompositionRotateTransform3D) SetAxisZ_(axisZ float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDCompositionRotateTransform3D_SetAxisZ_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(axisZ))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1167,15 +1544,39 @@ func (self *IDCompositionRotateTransform3D) SetCenterX(animation *IDCompositionA
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRotateTransform3D_SetCenterX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterX dispatches through IDCompositionRotateTransform3D's vtable slot 12.
+func (self *IDCompositionRotateTransform3D) SetCenterX_(centerX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDCompositionRotateTransform3D_SetCenterX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCenterY dispatches through IDCompositionRotateTransform3D's vtable slot 13.
 func (self *IDCompositionRotateTransform3D) SetCenterY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionRotateTransform3D_SetCenterY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterY dispatches through IDCompositionRotateTransform3D's vtable slot 14.
+func (self *IDCompositionRotateTransform3D) SetCenterY_(centerY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDCompositionRotateTransform3D_SetCenterY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerY))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCenterZ dispatches through IDCompositionRotateTransform3D's vtable slot 15.
 func (self *IDCompositionRotateTransform3D) SetCenterZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionRotateTransform3D_SetCenterZ_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterZ dispatches through IDCompositionRotateTransform3D's vtable slot 16.
+func (self *IDCompositionRotateTransform3D) SetCenterZ_(centerZ float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIDCompositionRotateTransform3D_SetCenterZ_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerZ))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1194,6 +1595,14 @@ func (self *IDCompositionSaturationEffect) SetSaturation(animation *IDCompositio
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionSaturationEffect_SetSaturation_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSaturation dispatches through IDCompositionSaturationEffect's vtable slot 5.
+func (self *IDCompositionSaturationEffect) SetSaturation_(ratio float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDCompositionSaturationEffect_SetSaturation_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(ratio))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDCompositionScaleTransform: https://learn.microsoft.com/windows/win32/api/dcomp/nn-dcomp-idcompositionscaletransform
 // IID: 71fde914-40ef-45ef-bd51-68b037c339f9
 type IDCompositionScaleTransform struct {
@@ -1209,9 +1618,25 @@ func (self *IDCompositionScaleTransform) SetScaleX(animation *IDCompositionAnima
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionScaleTransform_SetScaleX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetScaleX dispatches through IDCompositionScaleTransform's vtable slot 4.
+func (self *IDCompositionScaleTransform) SetScaleX_(scaleX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionScaleTransform_SetScaleX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(scaleX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetScaleY dispatches through IDCompositionScaleTransform's vtable slot 5.
 func (self *IDCompositionScaleTransform) SetScaleY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionScaleTransform_SetScaleY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetScaleY dispatches through IDCompositionScaleTransform's vtable slot 6.
+func (self *IDCompositionScaleTransform) SetScaleY_(scaleY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionScaleTransform_SetScaleY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(scaleY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1221,9 +1646,25 @@ func (self *IDCompositionScaleTransform) SetCenterX(animation *IDCompositionAnim
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionScaleTransform_SetCenterX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterX dispatches through IDCompositionScaleTransform's vtable slot 8.
+func (self *IDCompositionScaleTransform) SetCenterX_(centerX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionScaleTransform_SetCenterX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCenterY dispatches through IDCompositionScaleTransform's vtable slot 9.
 func (self *IDCompositionScaleTransform) SetCenterY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionScaleTransform_SetCenterY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterY dispatches through IDCompositionScaleTransform's vtable slot 10.
+func (self *IDCompositionScaleTransform) SetCenterY_(centerY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDCompositionScaleTransform_SetCenterY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1242,9 +1683,25 @@ func (self *IDCompositionScaleTransform3D) SetScaleX(animation *IDCompositionAni
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionScaleTransform3D_SetScaleX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetScaleX dispatches through IDCompositionScaleTransform3D's vtable slot 4.
+func (self *IDCompositionScaleTransform3D) SetScaleX_(scaleX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionScaleTransform3D_SetScaleX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(scaleX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetScaleY dispatches through IDCompositionScaleTransform3D's vtable slot 5.
 func (self *IDCompositionScaleTransform3D) SetScaleY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionScaleTransform3D_SetScaleY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetScaleY dispatches through IDCompositionScaleTransform3D's vtable slot 6.
+func (self *IDCompositionScaleTransform3D) SetScaleY_(scaleY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionScaleTransform3D_SetScaleY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(scaleY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1254,9 +1711,25 @@ func (self *IDCompositionScaleTransform3D) SetScaleZ(animation *IDCompositionAni
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionScaleTransform3D_SetScaleZ_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetScaleZ dispatches through IDCompositionScaleTransform3D's vtable slot 8.
+func (self *IDCompositionScaleTransform3D) SetScaleZ_(scaleZ float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionScaleTransform3D_SetScaleZ_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(scaleZ))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCenterX dispatches through IDCompositionScaleTransform3D's vtable slot 9.
 func (self *IDCompositionScaleTransform3D) SetCenterX(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionScaleTransform3D_SetCenterX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterX dispatches through IDCompositionScaleTransform3D's vtable slot 10.
+func (self *IDCompositionScaleTransform3D) SetCenterX_(centerX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDCompositionScaleTransform3D_SetCenterX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerX))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1266,9 +1739,25 @@ func (self *IDCompositionScaleTransform3D) SetCenterY(animation *IDCompositionAn
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionScaleTransform3D_SetCenterY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterY dispatches through IDCompositionScaleTransform3D's vtable slot 12.
+func (self *IDCompositionScaleTransform3D) SetCenterY_(centerY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDCompositionScaleTransform3D_SetCenterY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerY))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCenterZ dispatches through IDCompositionScaleTransform3D's vtable slot 13.
 func (self *IDCompositionScaleTransform3D) SetCenterZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionScaleTransform3D_SetCenterZ_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterZ dispatches through IDCompositionScaleTransform3D's vtable slot 14.
+func (self *IDCompositionScaleTransform3D) SetCenterZ_(centerZ float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDCompositionScaleTransform3D_SetCenterZ_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerZ))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1287,6 +1776,14 @@ func (self *IDCompositionShadowEffect) SetStandardDeviation(animation *IDComposi
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionShadowEffect_SetStandardDeviation_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetStandardDeviation dispatches through IDCompositionShadowEffect's vtable slot 5.
+func (self *IDCompositionShadowEffect) SetStandardDeviation_(amount float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIDCompositionShadowEffect_SetStandardDeviation_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(amount))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetColor dispatches through IDCompositionShadowEffect's vtable slot 6.
 func (self *IDCompositionShadowEffect) SetColor(color *graphicsdirect2dcommon.D2D_VECTOR_4F) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)))
@@ -1299,9 +1796,25 @@ func (self *IDCompositionShadowEffect) SetRed(animation *IDCompositionAnimation)
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionShadowEffect_SetRed_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetRed dispatches through IDCompositionShadowEffect's vtable slot 8.
+func (self *IDCompositionShadowEffect) SetRed_(amount float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionShadowEffect_SetRed_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(amount))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetGreen dispatches through IDCompositionShadowEffect's vtable slot 9.
 func (self *IDCompositionShadowEffect) SetGreen(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionShadowEffect_SetGreen_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetGreen dispatches through IDCompositionShadowEffect's vtable slot 10.
+func (self *IDCompositionShadowEffect) SetGreen_(amount float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDCompositionShadowEffect_SetGreen_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(amount))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1311,9 +1824,25 @@ func (self *IDCompositionShadowEffect) SetBlue(animation *IDCompositionAnimation
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionShadowEffect_SetBlue_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetBlue dispatches through IDCompositionShadowEffect's vtable slot 12.
+func (self *IDCompositionShadowEffect) SetBlue_(amount float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDCompositionShadowEffect_SetBlue_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(amount))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetAlpha dispatches through IDCompositionShadowEffect's vtable slot 13.
 func (self *IDCompositionShadowEffect) SetAlpha(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionShadowEffect_SetAlpha_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAlpha dispatches through IDCompositionShadowEffect's vtable slot 14.
+func (self *IDCompositionShadowEffect) SetAlpha_(amount float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDCompositionShadowEffect_SetAlpha_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(amount))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1332,9 +1861,25 @@ func (self *IDCompositionSkewTransform) SetAngleX(animation *IDCompositionAnimat
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionSkewTransform_SetAngleX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAngleX dispatches through IDCompositionSkewTransform's vtable slot 4.
+func (self *IDCompositionSkewTransform) SetAngleX_(angleX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionSkewTransform_SetAngleX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angleX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetAngleY dispatches through IDCompositionSkewTransform's vtable slot 5.
 func (self *IDCompositionSkewTransform) SetAngleY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionSkewTransform_SetAngleY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetAngleY dispatches through IDCompositionSkewTransform's vtable slot 6.
+func (self *IDCompositionSkewTransform) SetAngleY_(angleY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionSkewTransform_SetAngleY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angleY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1344,9 +1889,25 @@ func (self *IDCompositionSkewTransform) SetCenterX(animation *IDCompositionAnima
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionSkewTransform_SetCenterX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterX dispatches through IDCompositionSkewTransform's vtable slot 8.
+func (self *IDCompositionSkewTransform) SetCenterX_(centerX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionSkewTransform_SetCenterX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetCenterY dispatches through IDCompositionSkewTransform's vtable slot 9.
 func (self *IDCompositionSkewTransform) SetCenterY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionSkewTransform_SetCenterY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCenterY dispatches through IDCompositionSkewTransform's vtable slot 10.
+func (self *IDCompositionSkewTransform) SetCenterY_(centerY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDCompositionSkewTransform_SetCenterY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(centerY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1500,9 +2061,25 @@ func (self *IDCompositionTableTransferEffect) SetRedTableValue(index uint32, ani
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionTableTransferEffect_SetRedTableValue_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetRedTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 14.
+func (self *IDCompositionTableTransferEffect) SetRedTableValue_(index uint32, value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDCompositionTableTransferEffect_SetRedTableValue_, nil, uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetGreenTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 15.
 func (self *IDCompositionTableTransferEffect) SetGreenTableValue(index uint32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionTableTransferEffect_SetGreenTableValue_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetGreenTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 16.
+func (self *IDCompositionTableTransferEffect) SetGreenTableValue_(index uint32, value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIDCompositionTableTransferEffect_SetGreenTableValue_, nil, uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(math.Float32bits(value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1512,9 +2089,25 @@ func (self *IDCompositionTableTransferEffect) SetBlueTableValue(index uint32, an
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionTableTransferEffect_SetBlueTableValue_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetBlueTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 18.
+func (self *IDCompositionTableTransferEffect) SetBlueTableValue_(index uint32, value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIDCompositionTableTransferEffect_SetBlueTableValue_, nil, uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(math.Float32bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetAlphaTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 19.
 func (self *IDCompositionTableTransferEffect) SetAlphaTableValue(index uint32, animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionTableTransferEffect_SetAlphaTableValue_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetAlphaTableValue dispatches through IDCompositionTableTransferEffect's vtable slot 20.
+func (self *IDCompositionTableTransferEffect) SetAlphaTableValue_(index uint32, value float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIDCompositionTableTransferEffect_SetAlphaTableValue_, nil, uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(math.Float32bits(value))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1598,9 +2191,25 @@ func (self *IDCompositionTranslateTransform) SetOffsetX(animation *IDComposition
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionTranslateTransform_SetOffsetX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOffsetX dispatches through IDCompositionTranslateTransform's vtable slot 4.
+func (self *IDCompositionTranslateTransform) SetOffsetX_(offsetX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionTranslateTransform_SetOffsetX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offsetX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetOffsetY dispatches through IDCompositionTranslateTransform's vtable slot 5.
 func (self *IDCompositionTranslateTransform) SetOffsetY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionTranslateTransform_SetOffsetY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOffsetY dispatches through IDCompositionTranslateTransform's vtable slot 6.
+func (self *IDCompositionTranslateTransform) SetOffsetY_(offsetY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionTranslateTransform_SetOffsetY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offsetY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1619,15 +2228,39 @@ func (self *IDCompositionTranslateTransform3D) SetOffsetX(animation *IDCompositi
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionTranslateTransform3D_SetOffsetX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOffsetX dispatches through IDCompositionTranslateTransform3D's vtable slot 4.
+func (self *IDCompositionTranslateTransform3D) SetOffsetX_(offsetX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionTranslateTransform3D_SetOffsetX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offsetX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetOffsetY dispatches through IDCompositionTranslateTransform3D's vtable slot 5.
 func (self *IDCompositionTranslateTransform3D) SetOffsetY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionTranslateTransform3D_SetOffsetY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOffsetY dispatches through IDCompositionTranslateTransform3D's vtable slot 6.
+func (self *IDCompositionTranslateTransform3D) SetOffsetY_(offsetY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionTranslateTransform3D_SetOffsetY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offsetY))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetOffsetZ dispatches through IDCompositionTranslateTransform3D's vtable slot 7.
 func (self *IDCompositionTranslateTransform3D) SetOffsetZ(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionTranslateTransform3D_SetOffsetZ_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOffsetZ dispatches through IDCompositionTranslateTransform3D's vtable slot 8.
+func (self *IDCompositionTranslateTransform3D) SetOffsetZ_(offsetZ float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDCompositionTranslateTransform3D_SetOffsetZ_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offsetZ))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1723,9 +2356,25 @@ func (self *IDCompositionVisual) SetOffsetX(animation *IDCompositionAnimation) e
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionVisual_SetOffsetX_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOffsetX dispatches through IDCompositionVisual's vtable slot 4.
+func (self *IDCompositionVisual) SetOffsetX_(offsetX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDCompositionVisual_SetOffsetX_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offsetX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetOffsetY dispatches through IDCompositionVisual's vtable slot 5.
 func (self *IDCompositionVisual) SetOffsetY(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionVisual_SetOffsetY_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOffsetY dispatches through IDCompositionVisual's vtable slot 6.
+func (self *IDCompositionVisual) SetOffsetY_(offsetY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDCompositionVisual_SetOffsetY_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offsetY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1850,9 +2499,25 @@ func (self *IDCompositionVisual3) SetOffsetZ(animation *IDCompositionAnimation) 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDCompositionVisual3_SetOffsetZ_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOffsetZ dispatches through IDCompositionVisual3's vtable slot 28.
+func (self *IDCompositionVisual3) SetOffsetZ_(offsetZ float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIDCompositionVisual3_SetOffsetZ_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offsetZ))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetOpacity dispatches through IDCompositionVisual3's vtable slot 29.
 func (self *IDCompositionVisual3) SetOpacity(animation *IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDCompositionVisual3_SetOpacity_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOpacity dispatches through IDCompositionVisual3's vtable slot 30.
+func (self *IDCompositionVisual3) SetOpacity_(opacity float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIDCompositionVisual3_SetOpacity_, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(opacity))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

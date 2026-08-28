@@ -12,6 +12,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	securitycredentials "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/credentials"
+	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
 )
 
 var (
@@ -94,6 +95,7 @@ var (
 	procSspiPromptForCredentialsA              = modcredui.NewProc("SspiPromptForCredentialsA")
 	procSendSAS                                = modSAS.NewProc("SendSAS")
 	procSslCrackCertificate                    = modSCHANNEL.NewProc("SslCrackCertificate")
+	procSslDeserializeCertificateStore         = modSCHANNEL.NewProc("SslDeserializeCertificateStore")
 	procSslEmptyCache                          = modSCHANNEL.NewProc("SslEmptyCacheW")
 	procSslEmptyCacheA                         = modSCHANNEL.NewProc("SslEmptyCacheA")
 	procSslFreeCertificate                     = modSCHANNEL.NewProc("SslFreeCertificate")
@@ -429,6 +431,7 @@ var Procs = struct {
 	SetCredentialsAttributes               *win32.Proc
 	SetCredentialsAttributesA              *win32.Proc
 	SslCrackCertificate                    *win32.Proc
+	SslDeserializeCertificateStore         *win32.Proc
 	SslEmptyCache                          *win32.Proc
 	SslEmptyCacheA                         *win32.Proc
 	SslFreeCertificate                     *win32.Proc
@@ -648,6 +651,7 @@ var Procs = struct {
 	SetCredentialsAttributes:               procSetCredentialsAttributes,
 	SetCredentialsAttributesA:              procSetCredentialsAttributesA,
 	SslCrackCertificate:                    procSslCrackCertificate,
+	SslDeserializeCertificateStore:         procSslDeserializeCertificateStore,
 	SslEmptyCache:                          procSslEmptyCache,
 	SslEmptyCacheA:                         procSslEmptyCacheA,
 	SslFreeCertificate:                     procSslFreeCertificate,
@@ -2313,6 +2317,14 @@ func SetCredentialsAttributesA(phCredential *securitycredentials.SecHandle, ulAt
 func SslCrackCertificate(pbCertificate *byte, cbCertificate uint32, dwFlags uint32, ppCertificate **X509Certificate) bool {
 	r1, _, _ := syscall.SyscallN(procSslCrackCertificate.Addr(), uintptr(unsafe.Pointer(pbCertificate)), uintptr(cbCertificate), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCertificate)))
 	return r1 != 0
+}
+
+var specSslDeserializeCertificateStore = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 8, 0, false), win32.Word}}
+
+// SslDeserializeCertificateStore calls SCHANNEL!SslDeserializeCertificateStore.
+func SslDeserializeCertificateStore(SerializedCertificateStore securitycryptography.CRYPT_INTEGER_BLOB, ppCertContext **securitycryptography.CERT_CONTEXT) error {
+	r1, _, _ := win32.Call(procSslDeserializeCertificateStore.Addr(), specSslDeserializeCertificateStore, nil, uintptr(unsafe.Pointer(&SerializedCertificateStore)), uintptr(unsafe.Pointer(ppCertContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // SslEmptyCache calls SCHANNEL!SslEmptyCacheW.

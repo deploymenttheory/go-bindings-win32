@@ -5,6 +5,7 @@
 package opengl
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -32,9 +33,11 @@ var (
 	procGluBeginTrim              = modGLU32.NewProc("gluBeginTrim")
 	procGluBuild1DMipmaps         = modGLU32.NewProc("gluBuild1DMipmaps")
 	procGluBuild2DMipmaps         = modGLU32.NewProc("gluBuild2DMipmaps")
+	procGluCylinder               = modGLU32.NewProc("gluCylinder")
 	procGluDeleteNurbsRenderer    = modGLU32.NewProc("gluDeleteNurbsRenderer")
 	procGluDeleteQuadric          = modGLU32.NewProc("gluDeleteQuadric")
 	procGluDeleteTess             = modGLU32.NewProc("gluDeleteTess")
+	procGluDisk                   = modGLU32.NewProc("gluDisk")
 	procGluEndCurve               = modGLU32.NewProc("gluEndCurve")
 	procGluEndPolygon             = modGLU32.NewProc("gluEndPolygon")
 	procGluEndSurface             = modGLU32.NewProc("gluEndSurface")
@@ -45,13 +48,20 @@ var (
 	procGluGetString              = modGLU32.NewProc("gluGetString")
 	procGluGetTessProperty        = modGLU32.NewProc("gluGetTessProperty")
 	procGluLoadSamplingMatrices   = modGLU32.NewProc("gluLoadSamplingMatrices")
+	procGluLookAt                 = modGLU32.NewProc("gluLookAt")
 	procGluNewNurbsRenderer       = modGLU32.NewProc("gluNewNurbsRenderer")
 	procGluNewQuadric             = modGLU32.NewProc("gluNewQuadric")
 	procGluNewTess                = modGLU32.NewProc("gluNewTess")
 	procGluNextContour            = modGLU32.NewProc("gluNextContour")
 	procGluNurbsCallback          = modGLU32.NewProc("gluNurbsCallback")
 	procGluNurbsCurve             = modGLU32.NewProc("gluNurbsCurve")
+	procGluNurbsProperty          = modGLU32.NewProc("gluNurbsProperty")
 	procGluNurbsSurface           = modGLU32.NewProc("gluNurbsSurface")
+	procGluOrtho2D                = modGLU32.NewProc("gluOrtho2D")
+	procGluPartialDisk            = modGLU32.NewProc("gluPartialDisk")
+	procGluPerspective            = modGLU32.NewProc("gluPerspective")
+	procGluPickMatrix             = modGLU32.NewProc("gluPickMatrix")
+	procGluProject                = modGLU32.NewProc("gluProject")
 	procGluPwlCurve               = modGLU32.NewProc("gluPwlCurve")
 	procGluQuadricCallback        = modGLU32.NewProc("gluQuadricCallback")
 	procGluQuadricDrawStyle       = modGLU32.NewProc("gluQuadricDrawStyle")
@@ -59,25 +69,38 @@ var (
 	procGluQuadricOrientation     = modGLU32.NewProc("gluQuadricOrientation")
 	procGluQuadricTexture         = modGLU32.NewProc("gluQuadricTexture")
 	procGluScaleImage             = modGLU32.NewProc("gluScaleImage")
+	procGluSphere                 = modGLU32.NewProc("gluSphere")
 	procGluTessBeginContour       = modGLU32.NewProc("gluTessBeginContour")
 	procGluTessBeginPolygon       = modGLU32.NewProc("gluTessBeginPolygon")
 	procGluTessCallback           = modGLU32.NewProc("gluTessCallback")
 	procGluTessEndContour         = modGLU32.NewProc("gluTessEndContour")
 	procGluTessEndPolygon         = modGLU32.NewProc("gluTessEndPolygon")
+	procGluTessNormal             = modGLU32.NewProc("gluTessNormal")
+	procGluTessProperty           = modGLU32.NewProc("gluTessProperty")
 	procGluTessVertex             = modGLU32.NewProc("gluTessVertex")
+	procGluUnProject              = modGLU32.NewProc("gluUnProject")
+	procGlAccum                   = modOPENGL32.NewProc("glAccum")
+	procGlAlphaFunc               = modOPENGL32.NewProc("glAlphaFunc")
 	procGlAreTexturesResident     = modOPENGL32.NewProc("glAreTexturesResident")
 	procGlArrayElement            = modOPENGL32.NewProc("glArrayElement")
 	procGlBegin                   = modOPENGL32.NewProc("glBegin")
 	procGlBindTexture             = modOPENGL32.NewProc("glBindTexture")
+	procGlBitmap                  = modOPENGL32.NewProc("glBitmap")
 	procGlBlendFunc               = modOPENGL32.NewProc("glBlendFunc")
 	procGlCallList                = modOPENGL32.NewProc("glCallList")
 	procGlCallLists               = modOPENGL32.NewProc("glCallLists")
 	procGlClear                   = modOPENGL32.NewProc("glClear")
+	procGlClearAccum              = modOPENGL32.NewProc("glClearAccum")
+	procGlClearColor              = modOPENGL32.NewProc("glClearColor")
+	procGlClearDepth              = modOPENGL32.NewProc("glClearDepth")
+	procGlClearIndex              = modOPENGL32.NewProc("glClearIndex")
 	procGlClearStencil            = modOPENGL32.NewProc("glClearStencil")
 	procGlClipPlane               = modOPENGL32.NewProc("glClipPlane")
 	procGlColor3b                 = modOPENGL32.NewProc("glColor3b")
 	procGlColor3bv                = modOPENGL32.NewProc("glColor3bv")
+	procGlColor3d                 = modOPENGL32.NewProc("glColor3d")
 	procGlColor3dv                = modOPENGL32.NewProc("glColor3dv")
+	procGlColor3f                 = modOPENGL32.NewProc("glColor3f")
 	procGlColor3fv                = modOPENGL32.NewProc("glColor3fv")
 	procGlColor3i                 = modOPENGL32.NewProc("glColor3i")
 	procGlColor3iv                = modOPENGL32.NewProc("glColor3iv")
@@ -91,7 +114,9 @@ var (
 	procGlColor3usv               = modOPENGL32.NewProc("glColor3usv")
 	procGlColor4b                 = modOPENGL32.NewProc("glColor4b")
 	procGlColor4bv                = modOPENGL32.NewProc("glColor4bv")
+	procGlColor4d                 = modOPENGL32.NewProc("glColor4d")
 	procGlColor4dv                = modOPENGL32.NewProc("glColor4dv")
+	procGlColor4f                 = modOPENGL32.NewProc("glColor4f")
 	procGlColor4fv                = modOPENGL32.NewProc("glColor4fv")
 	procGlColor4i                 = modOPENGL32.NewProc("glColor4i")
 	procGlColor4iv                = modOPENGL32.NewProc("glColor4iv")
@@ -116,6 +141,7 @@ var (
 	procGlDeleteTextures          = modOPENGL32.NewProc("glDeleteTextures")
 	procGlDepthFunc               = modOPENGL32.NewProc("glDepthFunc")
 	procGlDepthMask               = modOPENGL32.NewProc("glDepthMask")
+	procGlDepthRange              = modOPENGL32.NewProc("glDepthRange")
 	procGlDisable                 = modOPENGL32.NewProc("glDisable")
 	procGlDisableClientState      = modOPENGL32.NewProc("glDisableClientState")
 	procGlDrawArrays              = modOPENGL32.NewProc("glDrawArrays")
@@ -129,9 +155,13 @@ var (
 	procGlEnableClientState       = modOPENGL32.NewProc("glEnableClientState")
 	procGlEnd                     = modOPENGL32.NewProc("glEnd")
 	procGlEndList                 = modOPENGL32.NewProc("glEndList")
+	procGlEvalCoord1d             = modOPENGL32.NewProc("glEvalCoord1d")
 	procGlEvalCoord1dv            = modOPENGL32.NewProc("glEvalCoord1dv")
+	procGlEvalCoord1f             = modOPENGL32.NewProc("glEvalCoord1f")
 	procGlEvalCoord1fv            = modOPENGL32.NewProc("glEvalCoord1fv")
+	procGlEvalCoord2d             = modOPENGL32.NewProc("glEvalCoord2d")
 	procGlEvalCoord2dv            = modOPENGL32.NewProc("glEvalCoord2dv")
+	procGlEvalCoord2f             = modOPENGL32.NewProc("glEvalCoord2f")
 	procGlEvalCoord2fv            = modOPENGL32.NewProc("glEvalCoord2fv")
 	procGlEvalMesh1               = modOPENGL32.NewProc("glEvalMesh1")
 	procGlEvalMesh2               = modOPENGL32.NewProc("glEvalMesh2")
@@ -140,10 +170,12 @@ var (
 	procGlFeedbackBuffer          = modOPENGL32.NewProc("glFeedbackBuffer")
 	procGlFinish                  = modOPENGL32.NewProc("glFinish")
 	procGlFlush                   = modOPENGL32.NewProc("glFlush")
+	procGlFogf                    = modOPENGL32.NewProc("glFogf")
 	procGlFogfv                   = modOPENGL32.NewProc("glFogfv")
 	procGlFogi                    = modOPENGL32.NewProc("glFogi")
 	procGlFogiv                   = modOPENGL32.NewProc("glFogiv")
 	procGlFrontFace               = modOPENGL32.NewProc("glFrontFace")
+	procGlFrustum                 = modOPENGL32.NewProc("glFrustum")
 	procGlGenLists                = modOPENGL32.NewProc("glGenLists")
 	procGlGenTextures             = modOPENGL32.NewProc("glGenTextures")
 	procGlGetBooleanv             = modOPENGL32.NewProc("glGetBooleanv")
@@ -178,7 +210,9 @@ var (
 	procGlHint                    = modOPENGL32.NewProc("glHint")
 	procGlIndexMask               = modOPENGL32.NewProc("glIndexMask")
 	procGlIndexPointer            = modOPENGL32.NewProc("glIndexPointer")
+	procGlIndexd                  = modOPENGL32.NewProc("glIndexd")
 	procGlIndexdv                 = modOPENGL32.NewProc("glIndexdv")
+	procGlIndexf                  = modOPENGL32.NewProc("glIndexf")
 	procGlIndexfv                 = modOPENGL32.NewProc("glIndexfv")
 	procGlIndexi                  = modOPENGL32.NewProc("glIndexi")
 	procGlIndexiv                 = modOPENGL32.NewProc("glIndexiv")
@@ -191,19 +225,31 @@ var (
 	procGlIsEnabled               = modOPENGL32.NewProc("glIsEnabled")
 	procGlIsList                  = modOPENGL32.NewProc("glIsList")
 	procGlIsTexture               = modOPENGL32.NewProc("glIsTexture")
+	procGlLightModelf             = modOPENGL32.NewProc("glLightModelf")
 	procGlLightModelfv            = modOPENGL32.NewProc("glLightModelfv")
 	procGlLightModeli             = modOPENGL32.NewProc("glLightModeli")
 	procGlLightModeliv            = modOPENGL32.NewProc("glLightModeliv")
+	procGlLightf                  = modOPENGL32.NewProc("glLightf")
 	procGlLightfv                 = modOPENGL32.NewProc("glLightfv")
 	procGlLighti                  = modOPENGL32.NewProc("glLighti")
 	procGlLightiv                 = modOPENGL32.NewProc("glLightiv")
 	procGlLineStipple             = modOPENGL32.NewProc("glLineStipple")
+	procGlLineWidth               = modOPENGL32.NewProc("glLineWidth")
 	procGlListBase                = modOPENGL32.NewProc("glListBase")
 	procGlLoadIdentity            = modOPENGL32.NewProc("glLoadIdentity")
 	procGlLoadMatrixd             = modOPENGL32.NewProc("glLoadMatrixd")
 	procGlLoadMatrixf             = modOPENGL32.NewProc("glLoadMatrixf")
 	procGlLoadName                = modOPENGL32.NewProc("glLoadName")
 	procGlLogicOp                 = modOPENGL32.NewProc("glLogicOp")
+	procGlMap1d                   = modOPENGL32.NewProc("glMap1d")
+	procGlMap1f                   = modOPENGL32.NewProc("glMap1f")
+	procGlMap2d                   = modOPENGL32.NewProc("glMap2d")
+	procGlMap2f                   = modOPENGL32.NewProc("glMap2f")
+	procGlMapGrid1d               = modOPENGL32.NewProc("glMapGrid1d")
+	procGlMapGrid1f               = modOPENGL32.NewProc("glMapGrid1f")
+	procGlMapGrid2d               = modOPENGL32.NewProc("glMapGrid2d")
+	procGlMapGrid2f               = modOPENGL32.NewProc("glMapGrid2f")
+	procGlMaterialf               = modOPENGL32.NewProc("glMaterialf")
 	procGlMaterialfv              = modOPENGL32.NewProc("glMaterialfv")
 	procGlMateriali               = modOPENGL32.NewProc("glMateriali")
 	procGlMaterialiv              = modOPENGL32.NewProc("glMaterialiv")
@@ -213,19 +259,28 @@ var (
 	procGlNewList                 = modOPENGL32.NewProc("glNewList")
 	procGlNormal3b                = modOPENGL32.NewProc("glNormal3b")
 	procGlNormal3bv               = modOPENGL32.NewProc("glNormal3bv")
+	procGlNormal3d                = modOPENGL32.NewProc("glNormal3d")
 	procGlNormal3dv               = modOPENGL32.NewProc("glNormal3dv")
+	procGlNormal3f                = modOPENGL32.NewProc("glNormal3f")
 	procGlNormal3fv               = modOPENGL32.NewProc("glNormal3fv")
 	procGlNormal3i                = modOPENGL32.NewProc("glNormal3i")
 	procGlNormal3iv               = modOPENGL32.NewProc("glNormal3iv")
 	procGlNormal3s                = modOPENGL32.NewProc("glNormal3s")
 	procGlNormal3sv               = modOPENGL32.NewProc("glNormal3sv")
 	procGlNormalPointer           = modOPENGL32.NewProc("glNormalPointer")
+	procGlOrtho                   = modOPENGL32.NewProc("glOrtho")
+	procGlPassThrough             = modOPENGL32.NewProc("glPassThrough")
 	procGlPixelMapfv              = modOPENGL32.NewProc("glPixelMapfv")
 	procGlPixelMapuiv             = modOPENGL32.NewProc("glPixelMapuiv")
 	procGlPixelMapusv             = modOPENGL32.NewProc("glPixelMapusv")
+	procGlPixelStoref             = modOPENGL32.NewProc("glPixelStoref")
 	procGlPixelStorei             = modOPENGL32.NewProc("glPixelStorei")
+	procGlPixelTransferf          = modOPENGL32.NewProc("glPixelTransferf")
 	procGlPixelTransferi          = modOPENGL32.NewProc("glPixelTransferi")
+	procGlPixelZoom               = modOPENGL32.NewProc("glPixelZoom")
+	procGlPointSize               = modOPENGL32.NewProc("glPointSize")
 	procGlPolygonMode             = modOPENGL32.NewProc("glPolygonMode")
+	procGlPolygonOffset           = modOPENGL32.NewProc("glPolygonOffset")
 	procGlPolygonStipple          = modOPENGL32.NewProc("glPolygonStipple")
 	procGlPopAttrib               = modOPENGL32.NewProc("glPopAttrib")
 	procGlPopClientAttrib         = modOPENGL32.NewProc("glPopClientAttrib")
@@ -236,19 +291,25 @@ var (
 	procGlPushClientAttrib        = modOPENGL32.NewProc("glPushClientAttrib")
 	procGlPushMatrix              = modOPENGL32.NewProc("glPushMatrix")
 	procGlPushName                = modOPENGL32.NewProc("glPushName")
+	procGlRasterPos2d             = modOPENGL32.NewProc("glRasterPos2d")
 	procGlRasterPos2dv            = modOPENGL32.NewProc("glRasterPos2dv")
+	procGlRasterPos2f             = modOPENGL32.NewProc("glRasterPos2f")
 	procGlRasterPos2fv            = modOPENGL32.NewProc("glRasterPos2fv")
 	procGlRasterPos2i             = modOPENGL32.NewProc("glRasterPos2i")
 	procGlRasterPos2iv            = modOPENGL32.NewProc("glRasterPos2iv")
 	procGlRasterPos2s             = modOPENGL32.NewProc("glRasterPos2s")
 	procGlRasterPos2sv            = modOPENGL32.NewProc("glRasterPos2sv")
+	procGlRasterPos3d             = modOPENGL32.NewProc("glRasterPos3d")
 	procGlRasterPos3dv            = modOPENGL32.NewProc("glRasterPos3dv")
+	procGlRasterPos3f             = modOPENGL32.NewProc("glRasterPos3f")
 	procGlRasterPos3fv            = modOPENGL32.NewProc("glRasterPos3fv")
 	procGlRasterPos3i             = modOPENGL32.NewProc("glRasterPos3i")
 	procGlRasterPos3iv            = modOPENGL32.NewProc("glRasterPos3iv")
 	procGlRasterPos3s             = modOPENGL32.NewProc("glRasterPos3s")
 	procGlRasterPos3sv            = modOPENGL32.NewProc("glRasterPos3sv")
+	procGlRasterPos4d             = modOPENGL32.NewProc("glRasterPos4d")
 	procGlRasterPos4dv            = modOPENGL32.NewProc("glRasterPos4dv")
+	procGlRasterPos4f             = modOPENGL32.NewProc("glRasterPos4f")
 	procGlRasterPos4fv            = modOPENGL32.NewProc("glRasterPos4fv")
 	procGlRasterPos4i             = modOPENGL32.NewProc("glRasterPos4i")
 	procGlRasterPos4iv            = modOPENGL32.NewProc("glRasterPos4iv")
@@ -256,71 +317,97 @@ var (
 	procGlRasterPos4sv            = modOPENGL32.NewProc("glRasterPos4sv")
 	procGlReadBuffer              = modOPENGL32.NewProc("glReadBuffer")
 	procGlReadPixels              = modOPENGL32.NewProc("glReadPixels")
+	procGlRectd                   = modOPENGL32.NewProc("glRectd")
 	procGlRectdv                  = modOPENGL32.NewProc("glRectdv")
+	procGlRectf                   = modOPENGL32.NewProc("glRectf")
 	procGlRectfv                  = modOPENGL32.NewProc("glRectfv")
 	procGlRecti                   = modOPENGL32.NewProc("glRecti")
 	procGlRectiv                  = modOPENGL32.NewProc("glRectiv")
 	procGlRects                   = modOPENGL32.NewProc("glRects")
 	procGlRectsv                  = modOPENGL32.NewProc("glRectsv")
 	procGlRenderMode              = modOPENGL32.NewProc("glRenderMode")
+	procGlRotated                 = modOPENGL32.NewProc("glRotated")
+	procGlRotatef                 = modOPENGL32.NewProc("glRotatef")
+	procGlScaled                  = modOPENGL32.NewProc("glScaled")
+	procGlScalef                  = modOPENGL32.NewProc("glScalef")
 	procGlScissor                 = modOPENGL32.NewProc("glScissor")
 	procGlSelectBuffer            = modOPENGL32.NewProc("glSelectBuffer")
 	procGlShadeModel              = modOPENGL32.NewProc("glShadeModel")
 	procGlStencilFunc             = modOPENGL32.NewProc("glStencilFunc")
 	procGlStencilMask             = modOPENGL32.NewProc("glStencilMask")
 	procGlStencilOp               = modOPENGL32.NewProc("glStencilOp")
+	procGlTexCoord1d              = modOPENGL32.NewProc("glTexCoord1d")
 	procGlTexCoord1dv             = modOPENGL32.NewProc("glTexCoord1dv")
+	procGlTexCoord1f              = modOPENGL32.NewProc("glTexCoord1f")
 	procGlTexCoord1fv             = modOPENGL32.NewProc("glTexCoord1fv")
 	procGlTexCoord1i              = modOPENGL32.NewProc("glTexCoord1i")
 	procGlTexCoord1iv             = modOPENGL32.NewProc("glTexCoord1iv")
 	procGlTexCoord1s              = modOPENGL32.NewProc("glTexCoord1s")
 	procGlTexCoord1sv             = modOPENGL32.NewProc("glTexCoord1sv")
+	procGlTexCoord2d              = modOPENGL32.NewProc("glTexCoord2d")
 	procGlTexCoord2dv             = modOPENGL32.NewProc("glTexCoord2dv")
+	procGlTexCoord2f              = modOPENGL32.NewProc("glTexCoord2f")
 	procGlTexCoord2fv             = modOPENGL32.NewProc("glTexCoord2fv")
 	procGlTexCoord2i              = modOPENGL32.NewProc("glTexCoord2i")
 	procGlTexCoord2iv             = modOPENGL32.NewProc("glTexCoord2iv")
 	procGlTexCoord2s              = modOPENGL32.NewProc("glTexCoord2s")
 	procGlTexCoord2sv             = modOPENGL32.NewProc("glTexCoord2sv")
+	procGlTexCoord3d              = modOPENGL32.NewProc("glTexCoord3d")
 	procGlTexCoord3dv             = modOPENGL32.NewProc("glTexCoord3dv")
+	procGlTexCoord3f              = modOPENGL32.NewProc("glTexCoord3f")
 	procGlTexCoord3fv             = modOPENGL32.NewProc("glTexCoord3fv")
 	procGlTexCoord3i              = modOPENGL32.NewProc("glTexCoord3i")
 	procGlTexCoord3iv             = modOPENGL32.NewProc("glTexCoord3iv")
 	procGlTexCoord3s              = modOPENGL32.NewProc("glTexCoord3s")
 	procGlTexCoord3sv             = modOPENGL32.NewProc("glTexCoord3sv")
+	procGlTexCoord4d              = modOPENGL32.NewProc("glTexCoord4d")
 	procGlTexCoord4dv             = modOPENGL32.NewProc("glTexCoord4dv")
+	procGlTexCoord4f              = modOPENGL32.NewProc("glTexCoord4f")
 	procGlTexCoord4fv             = modOPENGL32.NewProc("glTexCoord4fv")
 	procGlTexCoord4i              = modOPENGL32.NewProc("glTexCoord4i")
 	procGlTexCoord4iv             = modOPENGL32.NewProc("glTexCoord4iv")
 	procGlTexCoord4s              = modOPENGL32.NewProc("glTexCoord4s")
 	procGlTexCoord4sv             = modOPENGL32.NewProc("glTexCoord4sv")
 	procGlTexCoordPointer         = modOPENGL32.NewProc("glTexCoordPointer")
+	procGlTexEnvf                 = modOPENGL32.NewProc("glTexEnvf")
 	procGlTexEnvfv                = modOPENGL32.NewProc("glTexEnvfv")
 	procGlTexEnvi                 = modOPENGL32.NewProc("glTexEnvi")
 	procGlTexEnviv                = modOPENGL32.NewProc("glTexEnviv")
+	procGlTexGend                 = modOPENGL32.NewProc("glTexGend")
 	procGlTexGendv                = modOPENGL32.NewProc("glTexGendv")
+	procGlTexGenf                 = modOPENGL32.NewProc("glTexGenf")
 	procGlTexGenfv                = modOPENGL32.NewProc("glTexGenfv")
 	procGlTexGeni                 = modOPENGL32.NewProc("glTexGeni")
 	procGlTexGeniv                = modOPENGL32.NewProc("glTexGeniv")
 	procGlTexImage1D              = modOPENGL32.NewProc("glTexImage1D")
 	procGlTexImage2D              = modOPENGL32.NewProc("glTexImage2D")
+	procGlTexParameterf           = modOPENGL32.NewProc("glTexParameterf")
 	procGlTexParameterfv          = modOPENGL32.NewProc("glTexParameterfv")
 	procGlTexParameteri           = modOPENGL32.NewProc("glTexParameteri")
 	procGlTexParameteriv          = modOPENGL32.NewProc("glTexParameteriv")
 	procGlTexSubImage1D           = modOPENGL32.NewProc("glTexSubImage1D")
 	procGlTexSubImage2D           = modOPENGL32.NewProc("glTexSubImage2D")
+	procGlTranslated              = modOPENGL32.NewProc("glTranslated")
+	procGlTranslatef              = modOPENGL32.NewProc("glTranslatef")
+	procGlVertex2d                = modOPENGL32.NewProc("glVertex2d")
 	procGlVertex2dv               = modOPENGL32.NewProc("glVertex2dv")
+	procGlVertex2f                = modOPENGL32.NewProc("glVertex2f")
 	procGlVertex2fv               = modOPENGL32.NewProc("glVertex2fv")
 	procGlVertex2i                = modOPENGL32.NewProc("glVertex2i")
 	procGlVertex2iv               = modOPENGL32.NewProc("glVertex2iv")
 	procGlVertex2s                = modOPENGL32.NewProc("glVertex2s")
 	procGlVertex2sv               = modOPENGL32.NewProc("glVertex2sv")
+	procGlVertex3d                = modOPENGL32.NewProc("glVertex3d")
 	procGlVertex3dv               = modOPENGL32.NewProc("glVertex3dv")
+	procGlVertex3f                = modOPENGL32.NewProc("glVertex3f")
 	procGlVertex3fv               = modOPENGL32.NewProc("glVertex3fv")
 	procGlVertex3i                = modOPENGL32.NewProc("glVertex3i")
 	procGlVertex3iv               = modOPENGL32.NewProc("glVertex3iv")
 	procGlVertex3s                = modOPENGL32.NewProc("glVertex3s")
 	procGlVertex3sv               = modOPENGL32.NewProc("glVertex3sv")
+	procGlVertex4d                = modOPENGL32.NewProc("glVertex4d")
 	procGlVertex4dv               = modOPENGL32.NewProc("glVertex4dv")
+	procGlVertex4f                = modOPENGL32.NewProc("glVertex4f")
 	procGlVertex4fv               = modOPENGL32.NewProc("glVertex4fv")
 	procGlVertex4i                = modOPENGL32.NewProc("glVertex4i")
 	procGlVertex4iv               = modOPENGL32.NewProc("glVertex4iv")
@@ -344,6 +431,8 @@ var (
 	procWglSwapLayerBuffers       = modOPENGL32.NewProc("wglSwapLayerBuffers")
 	procWglUseFontBitmaps         = modOPENGL32.NewProc("wglUseFontBitmapsW")
 	procWglUseFontBitmapsA        = modOPENGL32.NewProc("wglUseFontBitmapsA")
+	procWglUseFontOutlines        = modOPENGL32.NewProc("wglUseFontOutlinesW")
+	procWglUseFontOutlinesA       = modOPENGL32.NewProc("wglUseFontOutlinesA")
 )
 
 // Procs exposes this package's lazily resolved exports for availability
@@ -355,19 +444,28 @@ var Procs = struct {
 	DescribePixelFormat       *win32.Proc
 	GetEnhMetaFilePixelFormat *win32.Proc
 	GetPixelFormat            *win32.Proc
+	GlAccum                   *win32.Proc
+	GlAlphaFunc               *win32.Proc
 	GlAreTexturesResident     *win32.Proc
 	GlArrayElement            *win32.Proc
 	GlBegin                   *win32.Proc
 	GlBindTexture             *win32.Proc
+	GlBitmap                  *win32.Proc
 	GlBlendFunc               *win32.Proc
 	GlCallList                *win32.Proc
 	GlCallLists               *win32.Proc
 	GlClear                   *win32.Proc
+	GlClearAccum              *win32.Proc
+	GlClearColor              *win32.Proc
+	GlClearDepth              *win32.Proc
+	GlClearIndex              *win32.Proc
 	GlClearStencil            *win32.Proc
 	GlClipPlane               *win32.Proc
 	GlColor3b                 *win32.Proc
 	GlColor3bv                *win32.Proc
+	GlColor3d                 *win32.Proc
 	GlColor3dv                *win32.Proc
+	GlColor3f                 *win32.Proc
 	GlColor3fv                *win32.Proc
 	GlColor3i                 *win32.Proc
 	GlColor3iv                *win32.Proc
@@ -381,7 +479,9 @@ var Procs = struct {
 	GlColor3usv               *win32.Proc
 	GlColor4b                 *win32.Proc
 	GlColor4bv                *win32.Proc
+	GlColor4d                 *win32.Proc
 	GlColor4dv                *win32.Proc
+	GlColor4f                 *win32.Proc
 	GlColor4fv                *win32.Proc
 	GlColor4i                 *win32.Proc
 	GlColor4iv                *win32.Proc
@@ -406,6 +506,7 @@ var Procs = struct {
 	GlDeleteTextures          *win32.Proc
 	GlDepthFunc               *win32.Proc
 	GlDepthMask               *win32.Proc
+	GlDepthRange              *win32.Proc
 	GlDisable                 *win32.Proc
 	GlDisableClientState      *win32.Proc
 	GlDrawArrays              *win32.Proc
@@ -419,9 +520,13 @@ var Procs = struct {
 	GlEnableClientState       *win32.Proc
 	GlEnd                     *win32.Proc
 	GlEndList                 *win32.Proc
+	GlEvalCoord1d             *win32.Proc
 	GlEvalCoord1dv            *win32.Proc
+	GlEvalCoord1f             *win32.Proc
 	GlEvalCoord1fv            *win32.Proc
+	GlEvalCoord2d             *win32.Proc
 	GlEvalCoord2dv            *win32.Proc
+	GlEvalCoord2f             *win32.Proc
 	GlEvalCoord2fv            *win32.Proc
 	GlEvalMesh1               *win32.Proc
 	GlEvalMesh2               *win32.Proc
@@ -430,10 +535,12 @@ var Procs = struct {
 	GlFeedbackBuffer          *win32.Proc
 	GlFinish                  *win32.Proc
 	GlFlush                   *win32.Proc
+	GlFogf                    *win32.Proc
 	GlFogfv                   *win32.Proc
 	GlFogi                    *win32.Proc
 	GlFogiv                   *win32.Proc
 	GlFrontFace               *win32.Proc
+	GlFrustum                 *win32.Proc
 	GlGenLists                *win32.Proc
 	GlGenTextures             *win32.Proc
 	GlGetBooleanv             *win32.Proc
@@ -468,7 +575,9 @@ var Procs = struct {
 	GlHint                    *win32.Proc
 	GlIndexMask               *win32.Proc
 	GlIndexPointer            *win32.Proc
+	GlIndexd                  *win32.Proc
 	GlIndexdv                 *win32.Proc
+	GlIndexf                  *win32.Proc
 	GlIndexfv                 *win32.Proc
 	GlIndexi                  *win32.Proc
 	GlIndexiv                 *win32.Proc
@@ -481,19 +590,31 @@ var Procs = struct {
 	GlIsEnabled               *win32.Proc
 	GlIsList                  *win32.Proc
 	GlIsTexture               *win32.Proc
+	GlLightModelf             *win32.Proc
 	GlLightModelfv            *win32.Proc
 	GlLightModeli             *win32.Proc
 	GlLightModeliv            *win32.Proc
+	GlLightf                  *win32.Proc
 	GlLightfv                 *win32.Proc
 	GlLighti                  *win32.Proc
 	GlLightiv                 *win32.Proc
 	GlLineStipple             *win32.Proc
+	GlLineWidth               *win32.Proc
 	GlListBase                *win32.Proc
 	GlLoadIdentity            *win32.Proc
 	GlLoadMatrixd             *win32.Proc
 	GlLoadMatrixf             *win32.Proc
 	GlLoadName                *win32.Proc
 	GlLogicOp                 *win32.Proc
+	GlMap1d                   *win32.Proc
+	GlMap1f                   *win32.Proc
+	GlMap2d                   *win32.Proc
+	GlMap2f                   *win32.Proc
+	GlMapGrid1d               *win32.Proc
+	GlMapGrid1f               *win32.Proc
+	GlMapGrid2d               *win32.Proc
+	GlMapGrid2f               *win32.Proc
+	GlMaterialf               *win32.Proc
 	GlMaterialfv              *win32.Proc
 	GlMateriali               *win32.Proc
 	GlMaterialiv              *win32.Proc
@@ -503,19 +624,28 @@ var Procs = struct {
 	GlNewList                 *win32.Proc
 	GlNormal3b                *win32.Proc
 	GlNormal3bv               *win32.Proc
+	GlNormal3d                *win32.Proc
 	GlNormal3dv               *win32.Proc
+	GlNormal3f                *win32.Proc
 	GlNormal3fv               *win32.Proc
 	GlNormal3i                *win32.Proc
 	GlNormal3iv               *win32.Proc
 	GlNormal3s                *win32.Proc
 	GlNormal3sv               *win32.Proc
 	GlNormalPointer           *win32.Proc
+	GlOrtho                   *win32.Proc
+	GlPassThrough             *win32.Proc
 	GlPixelMapfv              *win32.Proc
 	GlPixelMapuiv             *win32.Proc
 	GlPixelMapusv             *win32.Proc
+	GlPixelStoref             *win32.Proc
 	GlPixelStorei             *win32.Proc
+	GlPixelTransferf          *win32.Proc
 	GlPixelTransferi          *win32.Proc
+	GlPixelZoom               *win32.Proc
+	GlPointSize               *win32.Proc
 	GlPolygonMode             *win32.Proc
+	GlPolygonOffset           *win32.Proc
 	GlPolygonStipple          *win32.Proc
 	GlPopAttrib               *win32.Proc
 	GlPopClientAttrib         *win32.Proc
@@ -526,19 +656,25 @@ var Procs = struct {
 	GlPushClientAttrib        *win32.Proc
 	GlPushMatrix              *win32.Proc
 	GlPushName                *win32.Proc
+	GlRasterPos2d             *win32.Proc
 	GlRasterPos2dv            *win32.Proc
+	GlRasterPos2f             *win32.Proc
 	GlRasterPos2fv            *win32.Proc
 	GlRasterPos2i             *win32.Proc
 	GlRasterPos2iv            *win32.Proc
 	GlRasterPos2s             *win32.Proc
 	GlRasterPos2sv            *win32.Proc
+	GlRasterPos3d             *win32.Proc
 	GlRasterPos3dv            *win32.Proc
+	GlRasterPos3f             *win32.Proc
 	GlRasterPos3fv            *win32.Proc
 	GlRasterPos3i             *win32.Proc
 	GlRasterPos3iv            *win32.Proc
 	GlRasterPos3s             *win32.Proc
 	GlRasterPos3sv            *win32.Proc
+	GlRasterPos4d             *win32.Proc
 	GlRasterPos4dv            *win32.Proc
+	GlRasterPos4f             *win32.Proc
 	GlRasterPos4fv            *win32.Proc
 	GlRasterPos4i             *win32.Proc
 	GlRasterPos4iv            *win32.Proc
@@ -546,71 +682,97 @@ var Procs = struct {
 	GlRasterPos4sv            *win32.Proc
 	GlReadBuffer              *win32.Proc
 	GlReadPixels              *win32.Proc
+	GlRectd                   *win32.Proc
 	GlRectdv                  *win32.Proc
+	GlRectf                   *win32.Proc
 	GlRectfv                  *win32.Proc
 	GlRecti                   *win32.Proc
 	GlRectiv                  *win32.Proc
 	GlRects                   *win32.Proc
 	GlRectsv                  *win32.Proc
 	GlRenderMode              *win32.Proc
+	GlRotated                 *win32.Proc
+	GlRotatef                 *win32.Proc
+	GlScaled                  *win32.Proc
+	GlScalef                  *win32.Proc
 	GlScissor                 *win32.Proc
 	GlSelectBuffer            *win32.Proc
 	GlShadeModel              *win32.Proc
 	GlStencilFunc             *win32.Proc
 	GlStencilMask             *win32.Proc
 	GlStencilOp               *win32.Proc
+	GlTexCoord1d              *win32.Proc
 	GlTexCoord1dv             *win32.Proc
+	GlTexCoord1f              *win32.Proc
 	GlTexCoord1fv             *win32.Proc
 	GlTexCoord1i              *win32.Proc
 	GlTexCoord1iv             *win32.Proc
 	GlTexCoord1s              *win32.Proc
 	GlTexCoord1sv             *win32.Proc
+	GlTexCoord2d              *win32.Proc
 	GlTexCoord2dv             *win32.Proc
+	GlTexCoord2f              *win32.Proc
 	GlTexCoord2fv             *win32.Proc
 	GlTexCoord2i              *win32.Proc
 	GlTexCoord2iv             *win32.Proc
 	GlTexCoord2s              *win32.Proc
 	GlTexCoord2sv             *win32.Proc
+	GlTexCoord3d              *win32.Proc
 	GlTexCoord3dv             *win32.Proc
+	GlTexCoord3f              *win32.Proc
 	GlTexCoord3fv             *win32.Proc
 	GlTexCoord3i              *win32.Proc
 	GlTexCoord3iv             *win32.Proc
 	GlTexCoord3s              *win32.Proc
 	GlTexCoord3sv             *win32.Proc
+	GlTexCoord4d              *win32.Proc
 	GlTexCoord4dv             *win32.Proc
+	GlTexCoord4f              *win32.Proc
 	GlTexCoord4fv             *win32.Proc
 	GlTexCoord4i              *win32.Proc
 	GlTexCoord4iv             *win32.Proc
 	GlTexCoord4s              *win32.Proc
 	GlTexCoord4sv             *win32.Proc
 	GlTexCoordPointer         *win32.Proc
+	GlTexEnvf                 *win32.Proc
 	GlTexEnvfv                *win32.Proc
 	GlTexEnvi                 *win32.Proc
 	GlTexEnviv                *win32.Proc
+	GlTexGend                 *win32.Proc
 	GlTexGendv                *win32.Proc
+	GlTexGenf                 *win32.Proc
 	GlTexGenfv                *win32.Proc
 	GlTexGeni                 *win32.Proc
 	GlTexGeniv                *win32.Proc
 	GlTexImage1D              *win32.Proc
 	GlTexImage2D              *win32.Proc
+	GlTexParameterf           *win32.Proc
 	GlTexParameterfv          *win32.Proc
 	GlTexParameteri           *win32.Proc
 	GlTexParameteriv          *win32.Proc
 	GlTexSubImage1D           *win32.Proc
 	GlTexSubImage2D           *win32.Proc
+	GlTranslated              *win32.Proc
+	GlTranslatef              *win32.Proc
+	GlVertex2d                *win32.Proc
 	GlVertex2dv               *win32.Proc
+	GlVertex2f                *win32.Proc
 	GlVertex2fv               *win32.Proc
 	GlVertex2i                *win32.Proc
 	GlVertex2iv               *win32.Proc
 	GlVertex2s                *win32.Proc
 	GlVertex2sv               *win32.Proc
+	GlVertex3d                *win32.Proc
 	GlVertex3dv               *win32.Proc
+	GlVertex3f                *win32.Proc
 	GlVertex3fv               *win32.Proc
 	GlVertex3i                *win32.Proc
 	GlVertex3iv               *win32.Proc
 	GlVertex3s                *win32.Proc
 	GlVertex3sv               *win32.Proc
+	GlVertex4d                *win32.Proc
 	GlVertex4dv               *win32.Proc
+	GlVertex4f                *win32.Proc
 	GlVertex4fv               *win32.Proc
 	GlVertex4i                *win32.Proc
 	GlVertex4iv               *win32.Proc
@@ -624,9 +786,11 @@ var Procs = struct {
 	GluBeginTrim              *win32.Proc
 	GluBuild1DMipmaps         *win32.Proc
 	GluBuild2DMipmaps         *win32.Proc
+	GluCylinder               *win32.Proc
 	GluDeleteNurbsRenderer    *win32.Proc
 	GluDeleteQuadric          *win32.Proc
 	GluDeleteTess             *win32.Proc
+	GluDisk                   *win32.Proc
 	GluEndCurve               *win32.Proc
 	GluEndPolygon             *win32.Proc
 	GluEndSurface             *win32.Proc
@@ -637,13 +801,20 @@ var Procs = struct {
 	GluGetString              *win32.Proc
 	GluGetTessProperty        *win32.Proc
 	GluLoadSamplingMatrices   *win32.Proc
+	GluLookAt                 *win32.Proc
 	GluNewNurbsRenderer       *win32.Proc
 	GluNewQuadric             *win32.Proc
 	GluNewTess                *win32.Proc
 	GluNextContour            *win32.Proc
 	GluNurbsCallback          *win32.Proc
 	GluNurbsCurve             *win32.Proc
+	GluNurbsProperty          *win32.Proc
 	GluNurbsSurface           *win32.Proc
+	GluOrtho2D                *win32.Proc
+	GluPartialDisk            *win32.Proc
+	GluPerspective            *win32.Proc
+	GluPickMatrix             *win32.Proc
+	GluProject                *win32.Proc
 	GluPwlCurve               *win32.Proc
 	GluQuadricCallback        *win32.Proc
 	GluQuadricDrawStyle       *win32.Proc
@@ -651,12 +822,16 @@ var Procs = struct {
 	GluQuadricOrientation     *win32.Proc
 	GluQuadricTexture         *win32.Proc
 	GluScaleImage             *win32.Proc
+	GluSphere                 *win32.Proc
 	GluTessBeginContour       *win32.Proc
 	GluTessBeginPolygon       *win32.Proc
 	GluTessCallback           *win32.Proc
 	GluTessEndContour         *win32.Proc
 	GluTessEndPolygon         *win32.Proc
+	GluTessNormal             *win32.Proc
+	GluTessProperty           *win32.Proc
 	GluTessVertex             *win32.Proc
+	GluUnProject              *win32.Proc
 	SetPixelFormat            *win32.Proc
 	SwapBuffers               *win32.Proc
 	WglCopyContext            *win32.Proc
@@ -675,24 +850,35 @@ var Procs = struct {
 	WglSwapLayerBuffers       *win32.Proc
 	WglUseFontBitmaps         *win32.Proc
 	WglUseFontBitmapsA        *win32.Proc
+	WglUseFontOutlines        *win32.Proc
+	WglUseFontOutlinesA       *win32.Proc
 }{
 	ChoosePixelFormat:         procChoosePixelFormat,
 	DescribePixelFormat:       procDescribePixelFormat,
 	GetEnhMetaFilePixelFormat: procGetEnhMetaFilePixelFormat,
 	GetPixelFormat:            procGetPixelFormat,
+	GlAccum:                   procGlAccum,
+	GlAlphaFunc:               procGlAlphaFunc,
 	GlAreTexturesResident:     procGlAreTexturesResident,
 	GlArrayElement:            procGlArrayElement,
 	GlBegin:                   procGlBegin,
 	GlBindTexture:             procGlBindTexture,
+	GlBitmap:                  procGlBitmap,
 	GlBlendFunc:               procGlBlendFunc,
 	GlCallList:                procGlCallList,
 	GlCallLists:               procGlCallLists,
 	GlClear:                   procGlClear,
+	GlClearAccum:              procGlClearAccum,
+	GlClearColor:              procGlClearColor,
+	GlClearDepth:              procGlClearDepth,
+	GlClearIndex:              procGlClearIndex,
 	GlClearStencil:            procGlClearStencil,
 	GlClipPlane:               procGlClipPlane,
 	GlColor3b:                 procGlColor3b,
 	GlColor3bv:                procGlColor3bv,
+	GlColor3d:                 procGlColor3d,
 	GlColor3dv:                procGlColor3dv,
+	GlColor3f:                 procGlColor3f,
 	GlColor3fv:                procGlColor3fv,
 	GlColor3i:                 procGlColor3i,
 	GlColor3iv:                procGlColor3iv,
@@ -706,7 +892,9 @@ var Procs = struct {
 	GlColor3usv:               procGlColor3usv,
 	GlColor4b:                 procGlColor4b,
 	GlColor4bv:                procGlColor4bv,
+	GlColor4d:                 procGlColor4d,
 	GlColor4dv:                procGlColor4dv,
+	GlColor4f:                 procGlColor4f,
 	GlColor4fv:                procGlColor4fv,
 	GlColor4i:                 procGlColor4i,
 	GlColor4iv:                procGlColor4iv,
@@ -731,6 +919,7 @@ var Procs = struct {
 	GlDeleteTextures:          procGlDeleteTextures,
 	GlDepthFunc:               procGlDepthFunc,
 	GlDepthMask:               procGlDepthMask,
+	GlDepthRange:              procGlDepthRange,
 	GlDisable:                 procGlDisable,
 	GlDisableClientState:      procGlDisableClientState,
 	GlDrawArrays:              procGlDrawArrays,
@@ -744,9 +933,13 @@ var Procs = struct {
 	GlEnableClientState:       procGlEnableClientState,
 	GlEnd:                     procGlEnd,
 	GlEndList:                 procGlEndList,
+	GlEvalCoord1d:             procGlEvalCoord1d,
 	GlEvalCoord1dv:            procGlEvalCoord1dv,
+	GlEvalCoord1f:             procGlEvalCoord1f,
 	GlEvalCoord1fv:            procGlEvalCoord1fv,
+	GlEvalCoord2d:             procGlEvalCoord2d,
 	GlEvalCoord2dv:            procGlEvalCoord2dv,
+	GlEvalCoord2f:             procGlEvalCoord2f,
 	GlEvalCoord2fv:            procGlEvalCoord2fv,
 	GlEvalMesh1:               procGlEvalMesh1,
 	GlEvalMesh2:               procGlEvalMesh2,
@@ -755,10 +948,12 @@ var Procs = struct {
 	GlFeedbackBuffer:          procGlFeedbackBuffer,
 	GlFinish:                  procGlFinish,
 	GlFlush:                   procGlFlush,
+	GlFogf:                    procGlFogf,
 	GlFogfv:                   procGlFogfv,
 	GlFogi:                    procGlFogi,
 	GlFogiv:                   procGlFogiv,
 	GlFrontFace:               procGlFrontFace,
+	GlFrustum:                 procGlFrustum,
 	GlGenLists:                procGlGenLists,
 	GlGenTextures:             procGlGenTextures,
 	GlGetBooleanv:             procGlGetBooleanv,
@@ -793,7 +988,9 @@ var Procs = struct {
 	GlHint:                    procGlHint,
 	GlIndexMask:               procGlIndexMask,
 	GlIndexPointer:            procGlIndexPointer,
+	GlIndexd:                  procGlIndexd,
 	GlIndexdv:                 procGlIndexdv,
+	GlIndexf:                  procGlIndexf,
 	GlIndexfv:                 procGlIndexfv,
 	GlIndexi:                  procGlIndexi,
 	GlIndexiv:                 procGlIndexiv,
@@ -806,19 +1003,31 @@ var Procs = struct {
 	GlIsEnabled:               procGlIsEnabled,
 	GlIsList:                  procGlIsList,
 	GlIsTexture:               procGlIsTexture,
+	GlLightModelf:             procGlLightModelf,
 	GlLightModelfv:            procGlLightModelfv,
 	GlLightModeli:             procGlLightModeli,
 	GlLightModeliv:            procGlLightModeliv,
+	GlLightf:                  procGlLightf,
 	GlLightfv:                 procGlLightfv,
 	GlLighti:                  procGlLighti,
 	GlLightiv:                 procGlLightiv,
 	GlLineStipple:             procGlLineStipple,
+	GlLineWidth:               procGlLineWidth,
 	GlListBase:                procGlListBase,
 	GlLoadIdentity:            procGlLoadIdentity,
 	GlLoadMatrixd:             procGlLoadMatrixd,
 	GlLoadMatrixf:             procGlLoadMatrixf,
 	GlLoadName:                procGlLoadName,
 	GlLogicOp:                 procGlLogicOp,
+	GlMap1d:                   procGlMap1d,
+	GlMap1f:                   procGlMap1f,
+	GlMap2d:                   procGlMap2d,
+	GlMap2f:                   procGlMap2f,
+	GlMapGrid1d:               procGlMapGrid1d,
+	GlMapGrid1f:               procGlMapGrid1f,
+	GlMapGrid2d:               procGlMapGrid2d,
+	GlMapGrid2f:               procGlMapGrid2f,
+	GlMaterialf:               procGlMaterialf,
 	GlMaterialfv:              procGlMaterialfv,
 	GlMateriali:               procGlMateriali,
 	GlMaterialiv:              procGlMaterialiv,
@@ -828,19 +1037,28 @@ var Procs = struct {
 	GlNewList:                 procGlNewList,
 	GlNormal3b:                procGlNormal3b,
 	GlNormal3bv:               procGlNormal3bv,
+	GlNormal3d:                procGlNormal3d,
 	GlNormal3dv:               procGlNormal3dv,
+	GlNormal3f:                procGlNormal3f,
 	GlNormal3fv:               procGlNormal3fv,
 	GlNormal3i:                procGlNormal3i,
 	GlNormal3iv:               procGlNormal3iv,
 	GlNormal3s:                procGlNormal3s,
 	GlNormal3sv:               procGlNormal3sv,
 	GlNormalPointer:           procGlNormalPointer,
+	GlOrtho:                   procGlOrtho,
+	GlPassThrough:             procGlPassThrough,
 	GlPixelMapfv:              procGlPixelMapfv,
 	GlPixelMapuiv:             procGlPixelMapuiv,
 	GlPixelMapusv:             procGlPixelMapusv,
+	GlPixelStoref:             procGlPixelStoref,
 	GlPixelStorei:             procGlPixelStorei,
+	GlPixelTransferf:          procGlPixelTransferf,
 	GlPixelTransferi:          procGlPixelTransferi,
+	GlPixelZoom:               procGlPixelZoom,
+	GlPointSize:               procGlPointSize,
 	GlPolygonMode:             procGlPolygonMode,
+	GlPolygonOffset:           procGlPolygonOffset,
 	GlPolygonStipple:          procGlPolygonStipple,
 	GlPopAttrib:               procGlPopAttrib,
 	GlPopClientAttrib:         procGlPopClientAttrib,
@@ -851,19 +1069,25 @@ var Procs = struct {
 	GlPushClientAttrib:        procGlPushClientAttrib,
 	GlPushMatrix:              procGlPushMatrix,
 	GlPushName:                procGlPushName,
+	GlRasterPos2d:             procGlRasterPos2d,
 	GlRasterPos2dv:            procGlRasterPos2dv,
+	GlRasterPos2f:             procGlRasterPos2f,
 	GlRasterPos2fv:            procGlRasterPos2fv,
 	GlRasterPos2i:             procGlRasterPos2i,
 	GlRasterPos2iv:            procGlRasterPos2iv,
 	GlRasterPos2s:             procGlRasterPos2s,
 	GlRasterPos2sv:            procGlRasterPos2sv,
+	GlRasterPos3d:             procGlRasterPos3d,
 	GlRasterPos3dv:            procGlRasterPos3dv,
+	GlRasterPos3f:             procGlRasterPos3f,
 	GlRasterPos3fv:            procGlRasterPos3fv,
 	GlRasterPos3i:             procGlRasterPos3i,
 	GlRasterPos3iv:            procGlRasterPos3iv,
 	GlRasterPos3s:             procGlRasterPos3s,
 	GlRasterPos3sv:            procGlRasterPos3sv,
+	GlRasterPos4d:             procGlRasterPos4d,
 	GlRasterPos4dv:            procGlRasterPos4dv,
+	GlRasterPos4f:             procGlRasterPos4f,
 	GlRasterPos4fv:            procGlRasterPos4fv,
 	GlRasterPos4i:             procGlRasterPos4i,
 	GlRasterPos4iv:            procGlRasterPos4iv,
@@ -871,71 +1095,97 @@ var Procs = struct {
 	GlRasterPos4sv:            procGlRasterPos4sv,
 	GlReadBuffer:              procGlReadBuffer,
 	GlReadPixels:              procGlReadPixels,
+	GlRectd:                   procGlRectd,
 	GlRectdv:                  procGlRectdv,
+	GlRectf:                   procGlRectf,
 	GlRectfv:                  procGlRectfv,
 	GlRecti:                   procGlRecti,
 	GlRectiv:                  procGlRectiv,
 	GlRects:                   procGlRects,
 	GlRectsv:                  procGlRectsv,
 	GlRenderMode:              procGlRenderMode,
+	GlRotated:                 procGlRotated,
+	GlRotatef:                 procGlRotatef,
+	GlScaled:                  procGlScaled,
+	GlScalef:                  procGlScalef,
 	GlScissor:                 procGlScissor,
 	GlSelectBuffer:            procGlSelectBuffer,
 	GlShadeModel:              procGlShadeModel,
 	GlStencilFunc:             procGlStencilFunc,
 	GlStencilMask:             procGlStencilMask,
 	GlStencilOp:               procGlStencilOp,
+	GlTexCoord1d:              procGlTexCoord1d,
 	GlTexCoord1dv:             procGlTexCoord1dv,
+	GlTexCoord1f:              procGlTexCoord1f,
 	GlTexCoord1fv:             procGlTexCoord1fv,
 	GlTexCoord1i:              procGlTexCoord1i,
 	GlTexCoord1iv:             procGlTexCoord1iv,
 	GlTexCoord1s:              procGlTexCoord1s,
 	GlTexCoord1sv:             procGlTexCoord1sv,
+	GlTexCoord2d:              procGlTexCoord2d,
 	GlTexCoord2dv:             procGlTexCoord2dv,
+	GlTexCoord2f:              procGlTexCoord2f,
 	GlTexCoord2fv:             procGlTexCoord2fv,
 	GlTexCoord2i:              procGlTexCoord2i,
 	GlTexCoord2iv:             procGlTexCoord2iv,
 	GlTexCoord2s:              procGlTexCoord2s,
 	GlTexCoord2sv:             procGlTexCoord2sv,
+	GlTexCoord3d:              procGlTexCoord3d,
 	GlTexCoord3dv:             procGlTexCoord3dv,
+	GlTexCoord3f:              procGlTexCoord3f,
 	GlTexCoord3fv:             procGlTexCoord3fv,
 	GlTexCoord3i:              procGlTexCoord3i,
 	GlTexCoord3iv:             procGlTexCoord3iv,
 	GlTexCoord3s:              procGlTexCoord3s,
 	GlTexCoord3sv:             procGlTexCoord3sv,
+	GlTexCoord4d:              procGlTexCoord4d,
 	GlTexCoord4dv:             procGlTexCoord4dv,
+	GlTexCoord4f:              procGlTexCoord4f,
 	GlTexCoord4fv:             procGlTexCoord4fv,
 	GlTexCoord4i:              procGlTexCoord4i,
 	GlTexCoord4iv:             procGlTexCoord4iv,
 	GlTexCoord4s:              procGlTexCoord4s,
 	GlTexCoord4sv:             procGlTexCoord4sv,
 	GlTexCoordPointer:         procGlTexCoordPointer,
+	GlTexEnvf:                 procGlTexEnvf,
 	GlTexEnvfv:                procGlTexEnvfv,
 	GlTexEnvi:                 procGlTexEnvi,
 	GlTexEnviv:                procGlTexEnviv,
+	GlTexGend:                 procGlTexGend,
 	GlTexGendv:                procGlTexGendv,
+	GlTexGenf:                 procGlTexGenf,
 	GlTexGenfv:                procGlTexGenfv,
 	GlTexGeni:                 procGlTexGeni,
 	GlTexGeniv:                procGlTexGeniv,
 	GlTexImage1D:              procGlTexImage1D,
 	GlTexImage2D:              procGlTexImage2D,
+	GlTexParameterf:           procGlTexParameterf,
 	GlTexParameterfv:          procGlTexParameterfv,
 	GlTexParameteri:           procGlTexParameteri,
 	GlTexParameteriv:          procGlTexParameteriv,
 	GlTexSubImage1D:           procGlTexSubImage1D,
 	GlTexSubImage2D:           procGlTexSubImage2D,
+	GlTranslated:              procGlTranslated,
+	GlTranslatef:              procGlTranslatef,
+	GlVertex2d:                procGlVertex2d,
 	GlVertex2dv:               procGlVertex2dv,
+	GlVertex2f:                procGlVertex2f,
 	GlVertex2fv:               procGlVertex2fv,
 	GlVertex2i:                procGlVertex2i,
 	GlVertex2iv:               procGlVertex2iv,
 	GlVertex2s:                procGlVertex2s,
 	GlVertex2sv:               procGlVertex2sv,
+	GlVertex3d:                procGlVertex3d,
 	GlVertex3dv:               procGlVertex3dv,
+	GlVertex3f:                procGlVertex3f,
 	GlVertex3fv:               procGlVertex3fv,
 	GlVertex3i:                procGlVertex3i,
 	GlVertex3iv:               procGlVertex3iv,
 	GlVertex3s:                procGlVertex3s,
 	GlVertex3sv:               procGlVertex3sv,
+	GlVertex4d:                procGlVertex4d,
 	GlVertex4dv:               procGlVertex4dv,
+	GlVertex4f:                procGlVertex4f,
 	GlVertex4fv:               procGlVertex4fv,
 	GlVertex4i:                procGlVertex4i,
 	GlVertex4iv:               procGlVertex4iv,
@@ -949,9 +1199,11 @@ var Procs = struct {
 	GluBeginTrim:              procGluBeginTrim,
 	GluBuild1DMipmaps:         procGluBuild1DMipmaps,
 	GluBuild2DMipmaps:         procGluBuild2DMipmaps,
+	GluCylinder:               procGluCylinder,
 	GluDeleteNurbsRenderer:    procGluDeleteNurbsRenderer,
 	GluDeleteQuadric:          procGluDeleteQuadric,
 	GluDeleteTess:             procGluDeleteTess,
+	GluDisk:                   procGluDisk,
 	GluEndCurve:               procGluEndCurve,
 	GluEndPolygon:             procGluEndPolygon,
 	GluEndSurface:             procGluEndSurface,
@@ -962,13 +1214,20 @@ var Procs = struct {
 	GluGetString:              procGluGetString,
 	GluGetTessProperty:        procGluGetTessProperty,
 	GluLoadSamplingMatrices:   procGluLoadSamplingMatrices,
+	GluLookAt:                 procGluLookAt,
 	GluNewNurbsRenderer:       procGluNewNurbsRenderer,
 	GluNewQuadric:             procGluNewQuadric,
 	GluNewTess:                procGluNewTess,
 	GluNextContour:            procGluNextContour,
 	GluNurbsCallback:          procGluNurbsCallback,
 	GluNurbsCurve:             procGluNurbsCurve,
+	GluNurbsProperty:          procGluNurbsProperty,
 	GluNurbsSurface:           procGluNurbsSurface,
+	GluOrtho2D:                procGluOrtho2D,
+	GluPartialDisk:            procGluPartialDisk,
+	GluPerspective:            procGluPerspective,
+	GluPickMatrix:             procGluPickMatrix,
+	GluProject:                procGluProject,
 	GluPwlCurve:               procGluPwlCurve,
 	GluQuadricCallback:        procGluQuadricCallback,
 	GluQuadricDrawStyle:       procGluQuadricDrawStyle,
@@ -976,12 +1235,16 @@ var Procs = struct {
 	GluQuadricOrientation:     procGluQuadricOrientation,
 	GluQuadricTexture:         procGluQuadricTexture,
 	GluScaleImage:             procGluScaleImage,
+	GluSphere:                 procGluSphere,
 	GluTessBeginContour:       procGluTessBeginContour,
 	GluTessBeginPolygon:       procGluTessBeginPolygon,
 	GluTessCallback:           procGluTessCallback,
 	GluTessEndContour:         procGluTessEndContour,
 	GluTessEndPolygon:         procGluTessEndPolygon,
+	GluTessNormal:             procGluTessNormal,
+	GluTessProperty:           procGluTessProperty,
 	GluTessVertex:             procGluTessVertex,
+	GluUnProject:              procGluUnProject,
 	SetPixelFormat:            procSetPixelFormat,
 	SwapBuffers:               procSwapBuffers,
 	WglCopyContext:            procWglCopyContext,
@@ -1000,6 +1263,8 @@ var Procs = struct {
 	WglSwapLayerBuffers:       procWglSwapLayerBuffers,
 	WglUseFontBitmaps:         procWglUseFontBitmaps,
 	WglUseFontBitmapsA:        procWglUseFontBitmapsA,
+	WglUseFontOutlines:        procWglUseFontOutlines,
+	WglUseFontOutlinesA:       procWglUseFontOutlinesA,
 }
 
 // ChoosePixelFormat calls GDI32!ChoosePixelFormat.
@@ -1046,6 +1311,22 @@ func GetPixelFormat(hdc graphicsgdi.HDC) (int32, error) {
 	return int32(r1), nil
 }
 
+var specGlAccum = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GlAccum calls OPENGL32!glAccum.
+// https://learn.microsoft.com/windows/win32/OpenGL/glaccum
+func GlAccum(op uint32, value float32) {
+	win32.Call(procGlAccum.Addr(), specGlAccum, nil, uintptr(op), uintptr(math.Float32bits(value))).Tuple()
+}
+
+var specGlAlphaFunc = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GlAlphaFunc calls OPENGL32!glAlphaFunc.
+// https://learn.microsoft.com/windows/win32/OpenGL/glalphafunc
+func GlAlphaFunc(func_ uint32, ref float32) {
+	win32.Call(procGlAlphaFunc.Addr(), specGlAlphaFunc, nil, uintptr(func_), uintptr(math.Float32bits(ref))).Tuple()
+}
+
 // GlAreTexturesResident calls OPENGL32!glAreTexturesResident.
 // https://learn.microsoft.com/windows/win32/OpenGL/glaretexturesresident
 func GlAreTexturesResident(n int32, textures *uint32, residences *byte) byte {
@@ -1069,6 +1350,14 @@ func GlBegin(mode uint32) {
 // https://learn.microsoft.com/windows/win32/OpenGL/glbindtexture
 func GlBindTexture(target uint32, texture uint32) {
 	syscall.SyscallN(procGlBindTexture.Addr(), uintptr(target), uintptr(texture))
+}
+
+var specGlBitmap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// GlBitmap calls OPENGL32!glBitmap.
+// https://learn.microsoft.com/windows/win32/OpenGL/glbitmap
+func GlBitmap(width int32, height int32, xorig float32, yorig float32, xmove float32, ymove float32, bitmap *byte) {
+	win32.Call(procGlBitmap.Addr(), specGlBitmap, nil, uintptr(width), uintptr(height), uintptr(math.Float32bits(xorig)), uintptr(math.Float32bits(yorig)), uintptr(math.Float32bits(xmove)), uintptr(math.Float32bits(ymove)), uintptr(unsafe.Pointer(bitmap))).Tuple()
 }
 
 // GlBlendFunc calls OPENGL32!glBlendFunc.
@@ -1095,6 +1384,38 @@ func GlClear(mask uint32) {
 	syscall.SyscallN(procGlClear.Addr(), uintptr(mask))
 }
 
+var specGlClearAccum = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GlClearAccum calls OPENGL32!glClearAccum.
+// https://learn.microsoft.com/windows/win32/OpenGL/glclearaccum
+func GlClearAccum(red float32, green float32, blue float32, alpha float32) {
+	win32.Call(procGlClearAccum.Addr(), specGlClearAccum, nil, uintptr(math.Float32bits(red)), uintptr(math.Float32bits(green)), uintptr(math.Float32bits(blue)), uintptr(math.Float32bits(alpha))).Tuple()
+}
+
+var specGlClearColor = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GlClearColor calls OPENGL32!glClearColor.
+// https://learn.microsoft.com/windows/win32/OpenGL/glclearcolor
+func GlClearColor(red float32, green float32, blue float32, alpha float32) {
+	win32.Call(procGlClearColor.Addr(), specGlClearColor, nil, uintptr(math.Float32bits(red)), uintptr(math.Float32bits(green)), uintptr(math.Float32bits(blue)), uintptr(math.Float32bits(alpha))).Tuple()
+}
+
+var specGlClearDepth = &win32.Spec{Args: []win32.Arg{win32.Float64}}
+
+// GlClearDepth calls OPENGL32!glClearDepth.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcleardepth
+func GlClearDepth(depth float64) {
+	win32.Call(procGlClearDepth.Addr(), specGlClearDepth, nil, uintptr(math.Float64bits(depth))).Tuple()
+}
+
+var specGlClearIndex = &win32.Spec{Args: []win32.Arg{win32.Float32}}
+
+// GlClearIndex calls OPENGL32!glClearIndex.
+// https://learn.microsoft.com/windows/win32/OpenGL/glclearindex
+func GlClearIndex(c float32) {
+	win32.Call(procGlClearIndex.Addr(), specGlClearIndex, nil, uintptr(math.Float32bits(c))).Tuple()
+}
+
 // GlClearStencil calls OPENGL32!glClearStencil.
 // https://learn.microsoft.com/windows/win32/OpenGL/glclearstencil
 func GlClearStencil(s int32) {
@@ -1119,10 +1440,26 @@ func GlColor3bv(v *int8) {
 	syscall.SyscallN(procGlColor3bv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlColor3d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64}}
+
+// GlColor3d calls OPENGL32!glColor3d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3d
+func GlColor3d(red float64, green float64, blue float64) {
+	win32.Call(procGlColor3d.Addr(), specGlColor3d, nil, uintptr(math.Float64bits(red)), uintptr(math.Float64bits(green)), uintptr(math.Float64bits(blue))).Tuple()
+}
+
 // GlColor3dv calls OPENGL32!glColor3dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glcolor3dv
 func GlColor3dv(v *float64) {
 	syscall.SyscallN(procGlColor3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlColor3f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32}}
+
+// GlColor3f calls OPENGL32!glColor3f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3f
+func GlColor3f(red float32, green float32, blue float32) {
+	win32.Call(procGlColor3f.Addr(), specGlColor3f, nil, uintptr(math.Float32bits(red)), uintptr(math.Float32bits(green)), uintptr(math.Float32bits(blue))).Tuple()
 }
 
 // GlColor3fv calls OPENGL32!glColor3fv.
@@ -1203,10 +1540,26 @@ func GlColor4bv(v *int8) {
 	syscall.SyscallN(procGlColor4bv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlColor4d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GlColor4d calls OPENGL32!glColor4d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4d
+func GlColor4d(red float64, green float64, blue float64, alpha float64) {
+	win32.Call(procGlColor4d.Addr(), specGlColor4d, nil, uintptr(math.Float64bits(red)), uintptr(math.Float64bits(green)), uintptr(math.Float64bits(blue)), uintptr(math.Float64bits(alpha))).Tuple()
+}
+
 // GlColor4dv calls OPENGL32!glColor4dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glcolor4dv
 func GlColor4dv(v *float64) {
 	syscall.SyscallN(procGlColor4dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlColor4f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GlColor4f calls OPENGL32!glColor4f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4f
+func GlColor4f(red float32, green float32, blue float32, alpha float32) {
+	win32.Call(procGlColor4f.Addr(), specGlColor4f, nil, uintptr(math.Float32bits(red)), uintptr(math.Float32bits(green)), uintptr(math.Float32bits(blue)), uintptr(math.Float32bits(alpha))).Tuple()
 }
 
 // GlColor4fv calls OPENGL32!glColor4fv.
@@ -1353,6 +1706,14 @@ func GlDepthMask(flag byte) {
 	syscall.SyscallN(procGlDepthMask.Addr(), uintptr(flag))
 }
 
+var specGlDepthRange = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64}}
+
+// GlDepthRange calls OPENGL32!glDepthRange.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldepthrange
+func GlDepthRange(zNear float64, zFar float64) {
+	win32.Call(procGlDepthRange.Addr(), specGlDepthRange, nil, uintptr(math.Float64bits(zNear)), uintptr(math.Float64bits(zFar))).Tuple()
+}
+
 // GlDisable calls OPENGL32!glDisable.
 // https://learn.microsoft.com/windows/win32/OpenGL/gldisable
 func GlDisable(cap_ uint32) {
@@ -1431,10 +1792,26 @@ func GlEndList() {
 	syscall.SyscallN(procGlEndList.Addr())
 }
 
+var specGlEvalCoord1d = &win32.Spec{Args: []win32.Arg{win32.Float64}}
+
+// GlEvalCoord1d calls OPENGL32!glEvalCoord1d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord1d
+func GlEvalCoord1d(u float64) {
+	win32.Call(procGlEvalCoord1d.Addr(), specGlEvalCoord1d, nil, uintptr(math.Float64bits(u))).Tuple()
+}
+
 // GlEvalCoord1dv calls OPENGL32!glEvalCoord1dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord1dv
 func GlEvalCoord1dv(u *float64) {
 	syscall.SyscallN(procGlEvalCoord1dv.Addr(), uintptr(unsafe.Pointer(u)))
+}
+
+var specGlEvalCoord1f = &win32.Spec{Args: []win32.Arg{win32.Float32}}
+
+// GlEvalCoord1f calls OPENGL32!glEvalCoord1f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord1f
+func GlEvalCoord1f(u float32) {
+	win32.Call(procGlEvalCoord1f.Addr(), specGlEvalCoord1f, nil, uintptr(math.Float32bits(u))).Tuple()
 }
 
 // GlEvalCoord1fv calls OPENGL32!glEvalCoord1fv.
@@ -1443,10 +1820,26 @@ func GlEvalCoord1fv(u *float32) {
 	syscall.SyscallN(procGlEvalCoord1fv.Addr(), uintptr(unsafe.Pointer(u)))
 }
 
+var specGlEvalCoord2d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64}}
+
+// GlEvalCoord2d calls OPENGL32!glEvalCoord2d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord2d
+func GlEvalCoord2d(u float64, v float64) {
+	win32.Call(procGlEvalCoord2d.Addr(), specGlEvalCoord2d, nil, uintptr(math.Float64bits(u)), uintptr(math.Float64bits(v))).Tuple()
+}
+
 // GlEvalCoord2dv calls OPENGL32!glEvalCoord2dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord2dv
 func GlEvalCoord2dv(u *float64) {
 	syscall.SyscallN(procGlEvalCoord2dv.Addr(), uintptr(unsafe.Pointer(u)))
+}
+
+var specGlEvalCoord2f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32}}
+
+// GlEvalCoord2f calls OPENGL32!glEvalCoord2f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord2f
+func GlEvalCoord2f(u float32, v float32) {
+	win32.Call(procGlEvalCoord2f.Addr(), specGlEvalCoord2f, nil, uintptr(math.Float32bits(u)), uintptr(math.Float32bits(v))).Tuple()
 }
 
 // GlEvalCoord2fv calls OPENGL32!glEvalCoord2fv.
@@ -1497,6 +1890,14 @@ func GlFlush() {
 	syscall.SyscallN(procGlFlush.Addr())
 }
 
+var specGlFogf = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GlFogf calls OPENGL32!glFogf.
+// https://learn.microsoft.com/windows/win32/OpenGL/glfogf
+func GlFogf(pname uint32, param1 float32) {
+	win32.Call(procGlFogf.Addr(), specGlFogf, nil, uintptr(pname), uintptr(math.Float32bits(param1))).Tuple()
+}
+
 // GlFogfv calls OPENGL32!glFogfv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glfogfv
 func GlFogfv(pname uint32, params *float32) {
@@ -1519,6 +1920,14 @@ func GlFogiv(pname uint32, params *int32) {
 // https://learn.microsoft.com/windows/win32/OpenGL/glfrontface
 func GlFrontFace(mode uint32) {
 	syscall.SyscallN(procGlFrontFace.Addr(), uintptr(mode))
+}
+
+var specGlFrustum = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GlFrustum calls OPENGL32!glFrustum.
+// https://learn.microsoft.com/windows/win32/OpenGL/glfrustum
+func GlFrustum(left float64, right float64, bottom float64, top float64, zNear float64, zFar float64) {
+	win32.Call(procGlFrustum.Addr(), specGlFrustum, nil, uintptr(math.Float64bits(left)), uintptr(math.Float64bits(right)), uintptr(math.Float64bits(bottom)), uintptr(math.Float64bits(top)), uintptr(math.Float64bits(zNear)), uintptr(math.Float64bits(zFar))).Tuple()
 }
 
 // GlGenLists calls OPENGL32!glGenLists.
@@ -1728,10 +2137,26 @@ func GlIndexPointer(type_ uint32, stride int32, pointer unsafe.Pointer) {
 	syscall.SyscallN(procGlIndexPointer.Addr(), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
 }
 
+var specGlIndexd = &win32.Spec{Args: []win32.Arg{win32.Float64}}
+
+// GlIndexd calls OPENGL32!glIndexd.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexd
+func GlIndexd(c float64) {
+	win32.Call(procGlIndexd.Addr(), specGlIndexd, nil, uintptr(math.Float64bits(c))).Tuple()
+}
+
 // GlIndexdv calls OPENGL32!glIndexdv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glindexdv
 func GlIndexdv(c *float64) {
 	syscall.SyscallN(procGlIndexdv.Addr(), uintptr(unsafe.Pointer(c)))
+}
+
+var specGlIndexf = &win32.Spec{Args: []win32.Arg{win32.Float32}}
+
+// GlIndexf calls OPENGL32!glIndexf.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexf
+func GlIndexf(c float32) {
+	win32.Call(procGlIndexf.Addr(), specGlIndexf, nil, uintptr(math.Float32bits(c))).Tuple()
 }
 
 // GlIndexfv calls OPENGL32!glIndexfv.
@@ -1807,6 +2232,14 @@ func GlIsTexture(texture uint32) byte {
 	return byte(r1)
 }
 
+var specGlLightModelf = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GlLightModelf calls OPENGL32!glLightModelf.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllightmodelf
+func GlLightModelf(pname uint32, param1 float32) {
+	win32.Call(procGlLightModelf.Addr(), specGlLightModelf, nil, uintptr(pname), uintptr(math.Float32bits(param1))).Tuple()
+}
+
 // GlLightModelfv calls OPENGL32!glLightModelfv.
 // https://learn.microsoft.com/windows/win32/OpenGL/gllightmodelfv
 func GlLightModelfv(pname uint32, params *float32) {
@@ -1823,6 +2256,14 @@ func GlLightModeli(pname uint32, param1 int32) {
 // https://learn.microsoft.com/windows/win32/OpenGL/gllightmodeliv
 func GlLightModeliv(pname uint32, params *int32) {
 	syscall.SyscallN(procGlLightModeliv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+var specGlLightf = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// GlLightf calls OPENGL32!glLightf.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllightf
+func GlLightf(light uint32, pname uint32, param2 float32) {
+	win32.Call(procGlLightf.Addr(), specGlLightf, nil, uintptr(light), uintptr(pname), uintptr(math.Float32bits(param2))).Tuple()
 }
 
 // GlLightfv calls OPENGL32!glLightfv.
@@ -1847,6 +2288,14 @@ func GlLightiv(light uint32, pname uint32, params *int32) {
 // https://learn.microsoft.com/windows/win32/OpenGL/gllinestipple
 func GlLineStipple(factor int32, pattern uint16) {
 	syscall.SyscallN(procGlLineStipple.Addr(), uintptr(factor), uintptr(pattern))
+}
+
+var specGlLineWidth = &win32.Spec{Args: []win32.Arg{win32.Float32}}
+
+// GlLineWidth calls OPENGL32!glLineWidth.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllinewidth
+func GlLineWidth(width float32) {
+	win32.Call(procGlLineWidth.Addr(), specGlLineWidth, nil, uintptr(math.Float32bits(width))).Tuple()
 }
 
 // GlListBase calls OPENGL32!glListBase.
@@ -1883,6 +2332,78 @@ func GlLoadName(name uint32) {
 // https://learn.microsoft.com/windows/win32/OpenGL/gllogicop
 func GlLogicOp(opcode uint32) {
 	syscall.SyscallN(procGlLogicOp.Addr(), uintptr(opcode))
+}
+
+var specGlMap1d = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// GlMap1d calls OPENGL32!glMap1d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmap1d
+func GlMap1d(target uint32, u1 float64, u2 float64, stride int32, order int32, points *float64) {
+	win32.Call(procGlMap1d.Addr(), specGlMap1d, nil, uintptr(target), uintptr(math.Float64bits(u1)), uintptr(math.Float64bits(u2)), uintptr(stride), uintptr(order), uintptr(unsafe.Pointer(points))).Tuple()
+}
+
+var specGlMap1f = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// GlMap1f calls OPENGL32!glMap1f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmap1f
+func GlMap1f(target uint32, u1 float32, u2 float32, stride int32, order int32, points *float32) {
+	win32.Call(procGlMap1f.Addr(), specGlMap1f, nil, uintptr(target), uintptr(math.Float32bits(u1)), uintptr(math.Float32bits(u2)), uintptr(stride), uintptr(order), uintptr(unsafe.Pointer(points))).Tuple()
+}
+
+var specGlMap2d = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// GlMap2d calls OPENGL32!glMap2d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmap2d
+func GlMap2d(target uint32, u1 float64, u2 float64, ustride int32, uorder int32, v1 float64, v2 float64, vstride int32, vorder int32, points *float64) {
+	win32.Call(procGlMap2d.Addr(), specGlMap2d, nil, uintptr(target), uintptr(math.Float64bits(u1)), uintptr(math.Float64bits(u2)), uintptr(ustride), uintptr(uorder), uintptr(math.Float64bits(v1)), uintptr(math.Float64bits(v2)), uintptr(vstride), uintptr(vorder), uintptr(unsafe.Pointer(points))).Tuple()
+}
+
+var specGlMap2f = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// GlMap2f calls OPENGL32!glMap2f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmap2f
+func GlMap2f(target uint32, u1 float32, u2 float32, ustride int32, uorder int32, v1 float32, v2 float32, vstride int32, vorder int32, points *float32) {
+	win32.Call(procGlMap2f.Addr(), specGlMap2f, nil, uintptr(target), uintptr(math.Float32bits(u1)), uintptr(math.Float32bits(u2)), uintptr(ustride), uintptr(uorder), uintptr(math.Float32bits(v1)), uintptr(math.Float32bits(v2)), uintptr(vstride), uintptr(vorder), uintptr(unsafe.Pointer(points))).Tuple()
+}
+
+var specGlMapGrid1d = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// GlMapGrid1d calls OPENGL32!glMapGrid1d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmapgrid1d
+func GlMapGrid1d(un int32, u1 float64, u2 float64) {
+	win32.Call(procGlMapGrid1d.Addr(), specGlMapGrid1d, nil, uintptr(un), uintptr(math.Float64bits(u1)), uintptr(math.Float64bits(u2))).Tuple()
+}
+
+var specGlMapGrid1f = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// GlMapGrid1f calls OPENGL32!glMapGrid1f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmapgrid1f
+func GlMapGrid1f(un int32, u1 float32, u2 float32) {
+	win32.Call(procGlMapGrid1f.Addr(), specGlMapGrid1f, nil, uintptr(un), uintptr(math.Float32bits(u1)), uintptr(math.Float32bits(u2))).Tuple()
+}
+
+var specGlMapGrid2d = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Float64, win32.Float64}}
+
+// GlMapGrid2d calls OPENGL32!glMapGrid2d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmapgrid2d
+func GlMapGrid2d(un int32, u1 float64, u2 float64, vn int32, v1 float64, v2 float64) {
+	win32.Call(procGlMapGrid2d.Addr(), specGlMapGrid2d, nil, uintptr(un), uintptr(math.Float64bits(u1)), uintptr(math.Float64bits(u2)), uintptr(vn), uintptr(math.Float64bits(v1)), uintptr(math.Float64bits(v2))).Tuple()
+}
+
+var specGlMapGrid2f = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Float32, win32.Float32}}
+
+// GlMapGrid2f calls OPENGL32!glMapGrid2f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmapgrid2f
+func GlMapGrid2f(un int32, u1 float32, u2 float32, vn int32, v1 float32, v2 float32) {
+	win32.Call(procGlMapGrid2f.Addr(), specGlMapGrid2f, nil, uintptr(un), uintptr(math.Float32bits(u1)), uintptr(math.Float32bits(u2)), uintptr(vn), uintptr(math.Float32bits(v1)), uintptr(math.Float32bits(v2))).Tuple()
+}
+
+var specGlMaterialf = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// GlMaterialf calls OPENGL32!glMaterialf.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmaterialf
+func GlMaterialf(face uint32, pname uint32, param2 float32) {
+	win32.Call(procGlMaterialf.Addr(), specGlMaterialf, nil, uintptr(face), uintptr(pname), uintptr(math.Float32bits(param2))).Tuple()
 }
 
 // GlMaterialfv calls OPENGL32!glMaterialfv.
@@ -1939,10 +2460,26 @@ func GlNormal3bv(v *int8) {
 	syscall.SyscallN(procGlNormal3bv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlNormal3d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64}}
+
+// GlNormal3d calls OPENGL32!glNormal3d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3d
+func GlNormal3d(nx float64, ny float64, nz float64) {
+	win32.Call(procGlNormal3d.Addr(), specGlNormal3d, nil, uintptr(math.Float64bits(nx)), uintptr(math.Float64bits(ny)), uintptr(math.Float64bits(nz))).Tuple()
+}
+
 // GlNormal3dv calls OPENGL32!glNormal3dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glnormal3dv
 func GlNormal3dv(v *float64) {
 	syscall.SyscallN(procGlNormal3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlNormal3f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32}}
+
+// GlNormal3f calls OPENGL32!glNormal3f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3f
+func GlNormal3f(nx float32, ny float32, nz float32) {
+	win32.Call(procGlNormal3f.Addr(), specGlNormal3f, nil, uintptr(math.Float32bits(nx)), uintptr(math.Float32bits(ny)), uintptr(math.Float32bits(nz))).Tuple()
 }
 
 // GlNormal3fv calls OPENGL32!glNormal3fv.
@@ -1981,6 +2518,22 @@ func GlNormalPointer(type_ uint32, stride int32, pointer unsafe.Pointer) {
 	syscall.SyscallN(procGlNormalPointer.Addr(), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
 }
 
+var specGlOrtho = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GlOrtho calls OPENGL32!glOrtho.
+// https://learn.microsoft.com/windows/win32/OpenGL/glortho
+func GlOrtho(left float64, right float64, bottom float64, top float64, zNear float64, zFar float64) {
+	win32.Call(procGlOrtho.Addr(), specGlOrtho, nil, uintptr(math.Float64bits(left)), uintptr(math.Float64bits(right)), uintptr(math.Float64bits(bottom)), uintptr(math.Float64bits(top)), uintptr(math.Float64bits(zNear)), uintptr(math.Float64bits(zFar))).Tuple()
+}
+
+var specGlPassThrough = &win32.Spec{Args: []win32.Arg{win32.Float32}}
+
+// GlPassThrough calls OPENGL32!glPassThrough.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpassthrough
+func GlPassThrough(token float32) {
+	win32.Call(procGlPassThrough.Addr(), specGlPassThrough, nil, uintptr(math.Float32bits(token))).Tuple()
+}
+
 // GlPixelMapfv calls OPENGL32!glPixelMapfv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glpixelmapfv
 func GlPixelMapfv(map_ uint32, mapsize int32, values *float32) {
@@ -1999,10 +2552,26 @@ func GlPixelMapusv(map_ uint32, mapsize int32, values *uint16) {
 	syscall.SyscallN(procGlPixelMapusv.Addr(), uintptr(map_), uintptr(mapsize), uintptr(unsafe.Pointer(values)))
 }
 
+var specGlPixelStoref = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GlPixelStoref calls OPENGL32!glPixelStoref.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpixelstoref
+func GlPixelStoref(pname uint32, param1 float32) {
+	win32.Call(procGlPixelStoref.Addr(), specGlPixelStoref, nil, uintptr(pname), uintptr(math.Float32bits(param1))).Tuple()
+}
+
 // GlPixelStorei calls OPENGL32!glPixelStorei.
 // https://learn.microsoft.com/windows/win32/OpenGL/glpixelstorei
 func GlPixelStorei(pname uint32, param1 int32) {
 	syscall.SyscallN(procGlPixelStorei.Addr(), uintptr(pname), uintptr(param1))
+}
+
+var specGlPixelTransferf = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// GlPixelTransferf calls OPENGL32!glPixelTransferf.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpixeltransferf
+func GlPixelTransferf(pname uint32, param1 float32) {
+	win32.Call(procGlPixelTransferf.Addr(), specGlPixelTransferf, nil, uintptr(pname), uintptr(math.Float32bits(param1))).Tuple()
 }
 
 // GlPixelTransferi calls OPENGL32!glPixelTransferi.
@@ -2011,10 +2580,34 @@ func GlPixelTransferi(pname uint32, param1 int32) {
 	syscall.SyscallN(procGlPixelTransferi.Addr(), uintptr(pname), uintptr(param1))
 }
 
+var specGlPixelZoom = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32}}
+
+// GlPixelZoom calls OPENGL32!glPixelZoom.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpixelzoom
+func GlPixelZoom(xfactor float32, yfactor float32) {
+	win32.Call(procGlPixelZoom.Addr(), specGlPixelZoom, nil, uintptr(math.Float32bits(xfactor)), uintptr(math.Float32bits(yfactor))).Tuple()
+}
+
+var specGlPointSize = &win32.Spec{Args: []win32.Arg{win32.Float32}}
+
+// GlPointSize calls OPENGL32!glPointSize.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpointsize
+func GlPointSize(size float32) {
+	win32.Call(procGlPointSize.Addr(), specGlPointSize, nil, uintptr(math.Float32bits(size))).Tuple()
+}
+
 // GlPolygonMode calls OPENGL32!glPolygonMode.
 // https://learn.microsoft.com/windows/win32/OpenGL/glpolygonmode
 func GlPolygonMode(face uint32, mode uint32) {
 	syscall.SyscallN(procGlPolygonMode.Addr(), uintptr(face), uintptr(mode))
+}
+
+var specGlPolygonOffset = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32}}
+
+// GlPolygonOffset calls OPENGL32!glPolygonOffset.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpolygonoffset
+func GlPolygonOffset(factor float32, units float32) {
+	win32.Call(procGlPolygonOffset.Addr(), specGlPolygonOffset, nil, uintptr(math.Float32bits(factor)), uintptr(math.Float32bits(units))).Tuple()
 }
 
 // GlPolygonStipple calls OPENGL32!glPolygonStipple.
@@ -2077,10 +2670,26 @@ func GlPushName(name uint32) {
 	syscall.SyscallN(procGlPushName.Addr(), uintptr(name))
 }
 
+var specGlRasterPos2d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64}}
+
+// GlRasterPos2d calls OPENGL32!glRasterPos2d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2d
+func GlRasterPos2d(x float64, y float64) {
+	win32.Call(procGlRasterPos2d.Addr(), specGlRasterPos2d, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y))).Tuple()
+}
+
 // GlRasterPos2dv calls OPENGL32!glRasterPos2dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2dv
 func GlRasterPos2dv(v *float64) {
 	syscall.SyscallN(procGlRasterPos2dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlRasterPos2f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32}}
+
+// GlRasterPos2f calls OPENGL32!glRasterPos2f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2f
+func GlRasterPos2f(x float32, y float32) {
+	win32.Call(procGlRasterPos2f.Addr(), specGlRasterPos2f, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
 }
 
 // GlRasterPos2fv calls OPENGL32!glRasterPos2fv.
@@ -2113,10 +2722,26 @@ func GlRasterPos2sv(v *int16) {
 	syscall.SyscallN(procGlRasterPos2sv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlRasterPos3d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64}}
+
+// GlRasterPos3d calls OPENGL32!glRasterPos3d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3d
+func GlRasterPos3d(x float64, y float64, z float64) {
+	win32.Call(procGlRasterPos3d.Addr(), specGlRasterPos3d, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(math.Float64bits(z))).Tuple()
+}
+
 // GlRasterPos3dv calls OPENGL32!glRasterPos3dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3dv
 func GlRasterPos3dv(v *float64) {
 	syscall.SyscallN(procGlRasterPos3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlRasterPos3f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32}}
+
+// GlRasterPos3f calls OPENGL32!glRasterPos3f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3f
+func GlRasterPos3f(x float32, y float32, z float32) {
+	win32.Call(procGlRasterPos3f.Addr(), specGlRasterPos3f, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z))).Tuple()
 }
 
 // GlRasterPos3fv calls OPENGL32!glRasterPos3fv.
@@ -2149,10 +2774,26 @@ func GlRasterPos3sv(v *int16) {
 	syscall.SyscallN(procGlRasterPos3sv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlRasterPos4d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GlRasterPos4d calls OPENGL32!glRasterPos4d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4d
+func GlRasterPos4d(x float64, y float64, z float64, w float64) {
+	win32.Call(procGlRasterPos4d.Addr(), specGlRasterPos4d, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(math.Float64bits(z)), uintptr(math.Float64bits(w))).Tuple()
+}
+
 // GlRasterPos4dv calls OPENGL32!glRasterPos4dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4dv
 func GlRasterPos4dv(v *float64) {
 	syscall.SyscallN(procGlRasterPos4dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlRasterPos4f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GlRasterPos4f calls OPENGL32!glRasterPos4f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4f
+func GlRasterPos4f(x float32, y float32, z float32, w float32) {
+	win32.Call(procGlRasterPos4f.Addr(), specGlRasterPos4f, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z)), uintptr(math.Float32bits(w))).Tuple()
 }
 
 // GlRasterPos4fv calls OPENGL32!glRasterPos4fv.
@@ -2197,10 +2838,26 @@ func GlReadPixels(x int32, y int32, width int32, height int32, format uint32, ty
 	syscall.SyscallN(procGlReadPixels.Addr(), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
 }
 
+var specGlRectd = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GlRectd calls OPENGL32!glRectd.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrectd
+func GlRectd(x1 float64, y1 float64, x2 float64, y2 float64) {
+	win32.Call(procGlRectd.Addr(), specGlRectd, nil, uintptr(math.Float64bits(x1)), uintptr(math.Float64bits(y1)), uintptr(math.Float64bits(x2)), uintptr(math.Float64bits(y2))).Tuple()
+}
+
 // GlRectdv calls OPENGL32!glRectdv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glrectdv
 func GlRectdv(v1 *float64, v2 *float64) {
 	syscall.SyscallN(procGlRectdv.Addr(), uintptr(unsafe.Pointer(v1)), uintptr(unsafe.Pointer(v2)))
+}
+
+var specGlRectf = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GlRectf calls OPENGL32!glRectf.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrectf
+func GlRectf(x1 float32, y1 float32, x2 float32, y2 float32) {
+	win32.Call(procGlRectf.Addr(), specGlRectf, nil, uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2))).Tuple()
 }
 
 // GlRectfv calls OPENGL32!glRectfv.
@@ -2240,6 +2897,38 @@ func GlRenderMode(mode uint32) int32 {
 	return int32(r1)
 }
 
+var specGlRotated = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GlRotated calls OPENGL32!glRotated.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrotated
+func GlRotated(angle float64, x float64, y float64, z float64) {
+	win32.Call(procGlRotated.Addr(), specGlRotated, nil, uintptr(math.Float64bits(angle)), uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(math.Float64bits(z))).Tuple()
+}
+
+var specGlRotatef = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GlRotatef calls OPENGL32!glRotatef.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrotatef
+func GlRotatef(angle float32, x float32, y float32, z float32) {
+	win32.Call(procGlRotatef.Addr(), specGlRotatef, nil, uintptr(math.Float32bits(angle)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z))).Tuple()
+}
+
+var specGlScaled = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64}}
+
+// GlScaled calls OPENGL32!glScaled.
+// https://learn.microsoft.com/windows/win32/OpenGL/glscaled
+func GlScaled(x float64, y float64, z float64) {
+	win32.Call(procGlScaled.Addr(), specGlScaled, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(math.Float64bits(z))).Tuple()
+}
+
+var specGlScalef = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32}}
+
+// GlScalef calls OPENGL32!glScalef.
+// https://learn.microsoft.com/windows/win32/OpenGL/glscalef
+func GlScalef(x float32, y float32, z float32) {
+	win32.Call(procGlScalef.Addr(), specGlScalef, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z))).Tuple()
+}
+
 // GlScissor calls OPENGL32!glScissor.
 // https://learn.microsoft.com/windows/win32/OpenGL/glscissor
 func GlScissor(x int32, y int32, width int32, height int32) {
@@ -2276,10 +2965,26 @@ func GlStencilOp(fail uint32, zfail uint32, zpass uint32) {
 	syscall.SyscallN(procGlStencilOp.Addr(), uintptr(fail), uintptr(zfail), uintptr(zpass))
 }
 
+var specGlTexCoord1d = &win32.Spec{Args: []win32.Arg{win32.Float64}}
+
+// GlTexCoord1d calls OPENGL32!glTexCoord1d.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1d
+func GlTexCoord1d(s float64) {
+	win32.Call(procGlTexCoord1d.Addr(), specGlTexCoord1d, nil, uintptr(math.Float64bits(s))).Tuple()
+}
+
 // GlTexCoord1dv calls OPENGL32!glTexCoord1dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1dv
 func GlTexCoord1dv(v *float64) {
 	syscall.SyscallN(procGlTexCoord1dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlTexCoord1f = &win32.Spec{Args: []win32.Arg{win32.Float32}}
+
+// GlTexCoord1f calls OPENGL32!glTexCoord1f.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1f
+func GlTexCoord1f(s float32) {
+	win32.Call(procGlTexCoord1f.Addr(), specGlTexCoord1f, nil, uintptr(math.Float32bits(s))).Tuple()
 }
 
 // GlTexCoord1fv calls OPENGL32!glTexCoord1fv.
@@ -2312,10 +3017,25 @@ func GlTexCoord1sv(v *int16) {
 	syscall.SyscallN(procGlTexCoord1sv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlTexCoord2d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64}}
+
+// GlTexCoord2d calls OPENGL32!glTexCoord2d.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2d
+func GlTexCoord2d(s float64, t float64) {
+	win32.Call(procGlTexCoord2d.Addr(), specGlTexCoord2d, nil, uintptr(math.Float64bits(s)), uintptr(math.Float64bits(t))).Tuple()
+}
+
 // GlTexCoord2dv calls OPENGL32!glTexCoord2dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2dv
 func GlTexCoord2dv(v *float64) {
 	syscall.SyscallN(procGlTexCoord2dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlTexCoord2f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32}}
+
+// GlTexCoord2f calls OPENGL32!glTexCoord2f.
+func GlTexCoord2f(s float32, t float32) {
+	win32.Call(procGlTexCoord2f.Addr(), specGlTexCoord2f, nil, uintptr(math.Float32bits(s)), uintptr(math.Float32bits(t))).Tuple()
 }
 
 // GlTexCoord2fv calls OPENGL32!glTexCoord2fv.
@@ -2348,10 +3068,25 @@ func GlTexCoord2sv(v *int16) {
 	syscall.SyscallN(procGlTexCoord2sv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlTexCoord3d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64}}
+
+// GlTexCoord3d calls OPENGL32!glTexCoord3d.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3d
+func GlTexCoord3d(s float64, t float64, r_ float64) {
+	win32.Call(procGlTexCoord3d.Addr(), specGlTexCoord3d, nil, uintptr(math.Float64bits(s)), uintptr(math.Float64bits(t)), uintptr(math.Float64bits(r_))).Tuple()
+}
+
 // GlTexCoord3dv calls OPENGL32!glTexCoord3dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3dv
 func GlTexCoord3dv(v *float64) {
 	syscall.SyscallN(procGlTexCoord3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlTexCoord3f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32}}
+
+// GlTexCoord3f calls OPENGL32!glTexCoord3f.
+func GlTexCoord3f(s float32, t float32, r_ float32) {
+	win32.Call(procGlTexCoord3f.Addr(), specGlTexCoord3f, nil, uintptr(math.Float32bits(s)), uintptr(math.Float32bits(t)), uintptr(math.Float32bits(r_))).Tuple()
 }
 
 // GlTexCoord3fv calls OPENGL32!glTexCoord3fv.
@@ -2362,8 +3097,8 @@ func GlTexCoord3fv(v *float32) {
 
 // GlTexCoord3i calls OPENGL32!glTexCoord3i.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3i
-func GlTexCoord3i(s int32, t int32, r int32) {
-	syscall.SyscallN(procGlTexCoord3i.Addr(), uintptr(s), uintptr(t), uintptr(r))
+func GlTexCoord3i(s int32, t int32, r_ int32) {
+	syscall.SyscallN(procGlTexCoord3i.Addr(), uintptr(s), uintptr(t), uintptr(r_))
 }
 
 // GlTexCoord3iv calls OPENGL32!glTexCoord3iv.
@@ -2374,8 +3109,8 @@ func GlTexCoord3iv(v *int32) {
 
 // GlTexCoord3s calls OPENGL32!glTexCoord3s.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3s
-func GlTexCoord3s(s int16, t int16, r int16) {
-	syscall.SyscallN(procGlTexCoord3s.Addr(), uintptr(s), uintptr(t), uintptr(r))
+func GlTexCoord3s(s int16, t int16, r_ int16) {
+	syscall.SyscallN(procGlTexCoord3s.Addr(), uintptr(s), uintptr(t), uintptr(r_))
 }
 
 // GlTexCoord3sv calls OPENGL32!glTexCoord3sv.
@@ -2384,10 +3119,26 @@ func GlTexCoord3sv(v *int16) {
 	syscall.SyscallN(procGlTexCoord3sv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlTexCoord4d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GlTexCoord4d calls OPENGL32!glTexCoord4d.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4d
+func GlTexCoord4d(s float64, t float64, r_ float64, q float64) {
+	win32.Call(procGlTexCoord4d.Addr(), specGlTexCoord4d, nil, uintptr(math.Float64bits(s)), uintptr(math.Float64bits(t)), uintptr(math.Float64bits(r_)), uintptr(math.Float64bits(q))).Tuple()
+}
+
 // GlTexCoord4dv calls OPENGL32!glTexCoord4dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4dv
 func GlTexCoord4dv(v *float64) {
 	syscall.SyscallN(procGlTexCoord4dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlTexCoord4f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GlTexCoord4f calls OPENGL32!glTexCoord4f.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4f
+func GlTexCoord4f(s float32, t float32, r_ float32, q float32) {
+	win32.Call(procGlTexCoord4f.Addr(), specGlTexCoord4f, nil, uintptr(math.Float32bits(s)), uintptr(math.Float32bits(t)), uintptr(math.Float32bits(r_)), uintptr(math.Float32bits(q))).Tuple()
 }
 
 // GlTexCoord4fv calls OPENGL32!glTexCoord4fv.
@@ -2398,8 +3149,8 @@ func GlTexCoord4fv(v *float32) {
 
 // GlTexCoord4i calls OPENGL32!glTexCoord4i.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4i
-func GlTexCoord4i(s int32, t int32, r int32, q int32) {
-	syscall.SyscallN(procGlTexCoord4i.Addr(), uintptr(s), uintptr(t), uintptr(r), uintptr(q))
+func GlTexCoord4i(s int32, t int32, r_ int32, q int32) {
+	syscall.SyscallN(procGlTexCoord4i.Addr(), uintptr(s), uintptr(t), uintptr(r_), uintptr(q))
 }
 
 // GlTexCoord4iv calls OPENGL32!glTexCoord4iv.
@@ -2410,8 +3161,8 @@ func GlTexCoord4iv(v *int32) {
 
 // GlTexCoord4s calls OPENGL32!glTexCoord4s.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4s
-func GlTexCoord4s(s int16, t int16, r int16, q int16) {
-	syscall.SyscallN(procGlTexCoord4s.Addr(), uintptr(s), uintptr(t), uintptr(r), uintptr(q))
+func GlTexCoord4s(s int16, t int16, r_ int16, q int16) {
+	syscall.SyscallN(procGlTexCoord4s.Addr(), uintptr(s), uintptr(t), uintptr(r_), uintptr(q))
 }
 
 // GlTexCoord4sv calls OPENGL32!glTexCoord4sv.
@@ -2424,6 +3175,14 @@ func GlTexCoord4sv(v *int16) {
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexcoordpointer
 func GlTexCoordPointer(size int32, type_ uint32, stride int32, pointer unsafe.Pointer) {
 	syscall.SyscallN(procGlTexCoordPointer.Addr(), uintptr(size), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
+}
+
+var specGlTexEnvf = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// GlTexEnvf calls OPENGL32!glTexEnvf.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexenvf
+func GlTexEnvf(target uint32, pname uint32, param2 float32) {
+	win32.Call(procGlTexEnvf.Addr(), specGlTexEnvf, nil, uintptr(target), uintptr(pname), uintptr(math.Float32bits(param2))).Tuple()
 }
 
 // GlTexEnvfv calls OPENGL32!glTexEnvfv.
@@ -2444,10 +3203,26 @@ func GlTexEnviv(target uint32, pname uint32, params *int32) {
 	syscall.SyscallN(procGlTexEnviv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
 }
 
+var specGlTexGend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64}}
+
+// GlTexGend calls OPENGL32!glTexGend.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexgend
+func GlTexGend(coord uint32, pname uint32, param2 float64) {
+	win32.Call(procGlTexGend.Addr(), specGlTexGend, nil, uintptr(coord), uintptr(pname), uintptr(math.Float64bits(param2))).Tuple()
+}
+
 // GlTexGendv calls OPENGL32!glTexGendv.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexgendv
 func GlTexGendv(coord uint32, pname uint32, params *float64) {
 	syscall.SyscallN(procGlTexGendv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+var specGlTexGenf = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// GlTexGenf calls OPENGL32!glTexGenf.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexgenf
+func GlTexGenf(coord uint32, pname uint32, param2 float32) {
+	win32.Call(procGlTexGenf.Addr(), specGlTexGenf, nil, uintptr(coord), uintptr(pname), uintptr(math.Float32bits(param2))).Tuple()
 }
 
 // GlTexGenfv calls OPENGL32!glTexGenfv.
@@ -2480,6 +3255,14 @@ func GlTexImage2D(target uint32, level int32, internalformat int32, width int32,
 	syscall.SyscallN(procGlTexImage2D.Addr(), uintptr(target), uintptr(level), uintptr(internalformat), uintptr(width), uintptr(height), uintptr(border), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
 }
 
+var specGlTexParameterf = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// GlTexParameterf calls OPENGL32!glTexParameterf.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexparameterf
+func GlTexParameterf(target uint32, pname uint32, param2 float32) {
+	win32.Call(procGlTexParameterf.Addr(), specGlTexParameterf, nil, uintptr(target), uintptr(pname), uintptr(math.Float32bits(param2))).Tuple()
+}
+
 // GlTexParameterfv calls OPENGL32!glTexParameterfv.
 // https://learn.microsoft.com/windows/win32/OpenGL/gltexparameterfv
 func GlTexParameterfv(target uint32, pname uint32, params *float32) {
@@ -2510,10 +3293,42 @@ func GlTexSubImage2D(target uint32, level int32, xoffset int32, yoffset int32, w
 	syscall.SyscallN(procGlTexSubImage2D.Addr(), uintptr(target), uintptr(level), uintptr(xoffset), uintptr(yoffset), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
 }
 
+var specGlTranslated = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64}}
+
+// GlTranslated calls OPENGL32!glTranslated.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltranslated
+func GlTranslated(x float64, y float64, z float64) {
+	win32.Call(procGlTranslated.Addr(), specGlTranslated, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(math.Float64bits(z))).Tuple()
+}
+
+var specGlTranslatef = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32}}
+
+// GlTranslatef calls OPENGL32!glTranslatef.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltranslatef
+func GlTranslatef(x float32, y float32, z float32) {
+	win32.Call(procGlTranslatef.Addr(), specGlTranslatef, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z))).Tuple()
+}
+
+var specGlVertex2d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64}}
+
+// GlVertex2d calls OPENGL32!glVertex2d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2d
+func GlVertex2d(x float64, y float64) {
+	win32.Call(procGlVertex2d.Addr(), specGlVertex2d, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y))).Tuple()
+}
+
 // GlVertex2dv calls OPENGL32!glVertex2dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glvertex2dv
 func GlVertex2dv(v *float64) {
 	syscall.SyscallN(procGlVertex2dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlVertex2f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32}}
+
+// GlVertex2f calls OPENGL32!glVertex2f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2f
+func GlVertex2f(x float32, y float32) {
+	win32.Call(procGlVertex2f.Addr(), specGlVertex2f, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
 }
 
 // GlVertex2fv calls OPENGL32!glVertex2fv.
@@ -2546,10 +3361,26 @@ func GlVertex2sv(v *int16) {
 	syscall.SyscallN(procGlVertex2sv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlVertex3d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64}}
+
+// GlVertex3d calls OPENGL32!glVertex3d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3d
+func GlVertex3d(x float64, y float64, z float64) {
+	win32.Call(procGlVertex3d.Addr(), specGlVertex3d, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(math.Float64bits(z))).Tuple()
+}
+
 // GlVertex3dv calls OPENGL32!glVertex3dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glvertex3dv
 func GlVertex3dv(v *float64) {
 	syscall.SyscallN(procGlVertex3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlVertex3f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32}}
+
+// GlVertex3f calls OPENGL32!glVertex3f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3f
+func GlVertex3f(x float32, y float32, z float32) {
+	win32.Call(procGlVertex3f.Addr(), specGlVertex3f, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z))).Tuple()
 }
 
 // GlVertex3fv calls OPENGL32!glVertex3fv.
@@ -2582,10 +3413,26 @@ func GlVertex3sv(v *int16) {
 	syscall.SyscallN(procGlVertex3sv.Addr(), uintptr(unsafe.Pointer(v)))
 }
 
+var specGlVertex4d = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GlVertex4d calls OPENGL32!glVertex4d.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4d
+func GlVertex4d(x float64, y float64, z float64, w float64) {
+	win32.Call(procGlVertex4d.Addr(), specGlVertex4d, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(math.Float64bits(z)), uintptr(math.Float64bits(w))).Tuple()
+}
+
 // GlVertex4dv calls OPENGL32!glVertex4dv.
 // https://learn.microsoft.com/windows/win32/OpenGL/glvertex4dv
 func GlVertex4dv(v *float64) {
 	syscall.SyscallN(procGlVertex4dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+var specGlVertex4f = &win32.Spec{Args: []win32.Arg{win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// GlVertex4f calls OPENGL32!glVertex4f.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4f
+func GlVertex4f(x float32, y float32, z float32, w float32) {
+	win32.Call(procGlVertex4f.Addr(), specGlVertex4f, nil, uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z)), uintptr(math.Float32bits(w))).Tuple()
 }
 
 // GlVertex4fv calls OPENGL32!glVertex4fv.
@@ -2668,6 +3515,14 @@ func GluBuild2DMipmaps(target uint32, components int32, width int32, height int3
 	return int32(r1)
 }
 
+var specGluCylinder = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// GluCylinder calls GLU32!gluCylinder.
+// https://learn.microsoft.com/windows/win32/OpenGL/glucylinder
+func GluCylinder(qobj *GLUquadric, baseRadius float64, topRadius float64, height float64, slices int32, stacks int32) {
+	win32.Call(procGluCylinder.Addr(), specGluCylinder, nil, uintptr(unsafe.Pointer(qobj)), uintptr(math.Float64bits(baseRadius)), uintptr(math.Float64bits(topRadius)), uintptr(math.Float64bits(height)), uintptr(slices), uintptr(stacks)).Tuple()
+}
+
 // GluDeleteNurbsRenderer calls GLU32!gluDeleteNurbsRenderer.
 // https://learn.microsoft.com/windows/win32/OpenGL/gludeletenurbsrenderer
 func GluDeleteNurbsRenderer(nobj *GLUnurbs) {
@@ -2684,6 +3539,14 @@ func GluDeleteQuadric(state *GLUquadric) {
 // https://learn.microsoft.com/windows/win32/OpenGL/gludeletetess
 func GluDeleteTess(tess *GLUtesselator) {
 	syscall.SyscallN(procGluDeleteTess.Addr(), uintptr(unsafe.Pointer(tess)))
+}
+
+var specGluDisk = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// GluDisk calls GLU32!gluDisk.
+// https://learn.microsoft.com/windows/win32/OpenGL/gludisk
+func GluDisk(qobj *GLUquadric, innerRadius float64, outerRadius float64, slices int32, loops int32) {
+	win32.Call(procGluDisk.Addr(), specGluDisk, nil, uintptr(unsafe.Pointer(qobj)), uintptr(math.Float64bits(innerRadius)), uintptr(math.Float64bits(outerRadius)), uintptr(slices), uintptr(loops)).Tuple()
 }
 
 // GluEndCurve calls GLU32!gluEndCurve.
@@ -2748,6 +3611,14 @@ func GluLoadSamplingMatrices(nobj *GLUnurbs, modelMatrix *float32, projMatrix *f
 	syscall.SyscallN(procGluLoadSamplingMatrices.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(unsafe.Pointer(modelMatrix)), uintptr(unsafe.Pointer(projMatrix)), uintptr(unsafe.Pointer(viewport)))
 }
 
+var specGluLookAt = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GluLookAt calls GLU32!gluLookAt.
+// https://learn.microsoft.com/windows/win32/OpenGL/glulookat
+func GluLookAt(eyex float64, eyey float64, eyez float64, centerx float64, centery float64, centerz float64, upx float64, upy float64, upz float64) {
+	win32.Call(procGluLookAt.Addr(), specGluLookAt, nil, uintptr(math.Float64bits(eyex)), uintptr(math.Float64bits(eyey)), uintptr(math.Float64bits(eyez)), uintptr(math.Float64bits(centerx)), uintptr(math.Float64bits(centery)), uintptr(math.Float64bits(centerz)), uintptr(math.Float64bits(upx)), uintptr(math.Float64bits(upy)), uintptr(math.Float64bits(upz))).Tuple()
+}
+
 // GluNewNurbsRenderer calls GLU32!gluNewNurbsRenderer.
 // https://learn.microsoft.com/windows/win32/OpenGL/glunewnurbsrenderer
 func GluNewNurbsRenderer() *GLUnurbs {
@@ -2787,10 +3658,59 @@ func GluNurbsCurve(nobj *GLUnurbs, nknots int32, knot *float32, stride int32, ct
 	syscall.SyscallN(procGluNurbsCurve.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(nknots), uintptr(unsafe.Pointer(knot)), uintptr(stride), uintptr(unsafe.Pointer(ctlarray)), uintptr(order), uintptr(type_))
 }
 
+var specGluNurbsProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// GluNurbsProperty calls GLU32!gluNurbsProperty.
+// https://learn.microsoft.com/windows/win32/OpenGL/glunurbsproperty
+func GluNurbsProperty(nobj *GLUnurbs, property uint32, value float32) {
+	win32.Call(procGluNurbsProperty.Addr(), specGluNurbsProperty, nil, uintptr(unsafe.Pointer(nobj)), uintptr(property), uintptr(math.Float32bits(value))).Tuple()
+}
+
 // GluNurbsSurface calls GLU32!gluNurbsSurface.
 // https://learn.microsoft.com/windows/win32/OpenGL/glunurbssurface
 func GluNurbsSurface(nobj *GLUnurbs, sknot_count int32, sknot *float32, tknot_count int32, tknot *float32, s_stride int32, t_stride int32, ctlarray *float32, sorder int32, torder int32, type_ uint32) {
 	syscall.SyscallN(procGluNurbsSurface.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(sknot_count), uintptr(unsafe.Pointer(sknot)), uintptr(tknot_count), uintptr(unsafe.Pointer(tknot)), uintptr(s_stride), uintptr(t_stride), uintptr(unsafe.Pointer(ctlarray)), uintptr(sorder), uintptr(torder), uintptr(type_))
+}
+
+var specGluOrtho2D = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GluOrtho2D calls GLU32!gluOrtho2D.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluortho2d
+func GluOrtho2D(left float64, right float64, bottom float64, top float64) {
+	win32.Call(procGluOrtho2D.Addr(), specGluOrtho2D, nil, uintptr(math.Float64bits(left)), uintptr(math.Float64bits(right)), uintptr(math.Float64bits(bottom)), uintptr(math.Float64bits(top))).Tuple()
+}
+
+var specGluPartialDisk = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Float64, win32.Float64}}
+
+// GluPartialDisk calls GLU32!gluPartialDisk.
+// https://learn.microsoft.com/windows/win32/OpenGL/glupartialdisk
+func GluPartialDisk(qobj *GLUquadric, innerRadius float64, outerRadius float64, slices int32, loops int32, startAngle float64, sweepAngle float64) {
+	win32.Call(procGluPartialDisk.Addr(), specGluPartialDisk, nil, uintptr(unsafe.Pointer(qobj)), uintptr(math.Float64bits(innerRadius)), uintptr(math.Float64bits(outerRadius)), uintptr(slices), uintptr(loops), uintptr(math.Float64bits(startAngle)), uintptr(math.Float64bits(sweepAngle))).Tuple()
+}
+
+var specGluPerspective = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64}}
+
+// GluPerspective calls GLU32!gluPerspective.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluperspective
+func GluPerspective(fovy float64, aspect float64, zNear float64, zFar float64) {
+	win32.Call(procGluPerspective.Addr(), specGluPerspective, nil, uintptr(math.Float64bits(fovy)), uintptr(math.Float64bits(aspect)), uintptr(math.Float64bits(zNear)), uintptr(math.Float64bits(zFar))).Tuple()
+}
+
+var specGluPickMatrix = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// GluPickMatrix calls GLU32!gluPickMatrix.
+// https://learn.microsoft.com/windows/win32/OpenGL/glupickmatrix
+func GluPickMatrix(x float64, y float64, width float64, height float64, viewport *int32) {
+	win32.Call(procGluPickMatrix.Addr(), specGluPickMatrix, nil, uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(math.Float64bits(width)), uintptr(math.Float64bits(height)), uintptr(unsafe.Pointer(viewport))).Tuple()
+}
+
+var specGluProject = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GluProject calls GLU32!gluProject.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluproject
+func GluProject(objx float64, objy float64, objz float64, modelMatrix *float64, projMatrix *float64, viewport *int32, winx *float64, winy *float64, winz *float64) int32 {
+	r1, _, _ := win32.Call(procGluProject.Addr(), specGluProject, nil, uintptr(math.Float64bits(objx)), uintptr(math.Float64bits(objy)), uintptr(math.Float64bits(objz)), uintptr(unsafe.Pointer(modelMatrix)), uintptr(unsafe.Pointer(projMatrix)), uintptr(unsafe.Pointer(viewport)), uintptr(unsafe.Pointer(winx)), uintptr(unsafe.Pointer(winy)), uintptr(unsafe.Pointer(winz))).Tuple()
+	return int32(r1)
 }
 
 // GluPwlCurve calls GLU32!gluPwlCurve.
@@ -2836,6 +3756,14 @@ func GluScaleImage(format uint32, widthin int32, heightin int32, typein uint32, 
 	return int32(r1)
 }
 
+var specGluSphere = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word}}
+
+// GluSphere calls GLU32!gluSphere.
+// https://learn.microsoft.com/windows/win32/OpenGL/glusphere
+func GluSphere(qobj *GLUquadric, radius float64, slices int32, stacks int32) {
+	win32.Call(procGluSphere.Addr(), specGluSphere, nil, uintptr(unsafe.Pointer(qobj)), uintptr(math.Float64bits(radius)), uintptr(slices), uintptr(stacks)).Tuple()
+}
+
 // GluTessBeginContour calls GLU32!gluTessBeginContour.
 // https://learn.microsoft.com/windows/win32/OpenGL/glutessbegincontour
 func GluTessBeginContour(tess *GLUtesselator) {
@@ -2866,10 +3794,35 @@ func GluTessEndPolygon(tess *GLUtesselator) {
 	syscall.SyscallN(procGluTessEndPolygon.Addr(), uintptr(unsafe.Pointer(tess)))
 }
 
+var specGluTessNormal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64}}
+
+// GluTessNormal calls GLU32!gluTessNormal.
+// https://learn.microsoft.com/windows/win32/OpenGL/glutessnormal
+func GluTessNormal(tess *GLUtesselator, x float64, y float64, z float64) {
+	win32.Call(procGluTessNormal.Addr(), specGluTessNormal, nil, uintptr(unsafe.Pointer(tess)), uintptr(math.Float64bits(x)), uintptr(math.Float64bits(y)), uintptr(math.Float64bits(z))).Tuple()
+}
+
+var specGluTessProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64}}
+
+// GluTessProperty calls GLU32!gluTessProperty.
+// https://learn.microsoft.com/windows/win32/OpenGL/glutessproperty
+func GluTessProperty(tess *GLUtesselator, which uint32, value float64) {
+	win32.Call(procGluTessProperty.Addr(), specGluTessProperty, nil, uintptr(unsafe.Pointer(tess)), uintptr(which), uintptr(math.Float64bits(value))).Tuple()
+}
+
 // GluTessVertex calls GLU32!gluTessVertex.
 // https://learn.microsoft.com/windows/win32/OpenGL/glutessvertex
 func GluTessVertex(tess *GLUtesselator, coords *float64, data unsafe.Pointer) {
 	syscall.SyscallN(procGluTessVertex.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(unsafe.Pointer(coords)), uintptr(unsafe.Pointer(data)))
+}
+
+var specGluUnProject = &win32.Spec{Args: []win32.Arg{win32.Float64, win32.Float64, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GluUnProject calls GLU32!gluUnProject.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluunproject
+func GluUnProject(winx float64, winy float64, winz float64, modelMatrix *float64, projMatrix *float64, viewport *int32, objx *float64, objy *float64, objz *float64) int32 {
+	r1, _, _ := win32.Call(procGluUnProject.Addr(), specGluUnProject, nil, uintptr(math.Float64bits(winx)), uintptr(math.Float64bits(winy)), uintptr(math.Float64bits(winz)), uintptr(unsafe.Pointer(modelMatrix)), uintptr(unsafe.Pointer(projMatrix)), uintptr(unsafe.Pointer(viewport)), uintptr(unsafe.Pointer(objx)), uintptr(unsafe.Pointer(objy)), uintptr(unsafe.Pointer(objz))).Tuple()
+	return int32(r1)
 }
 
 // SetPixelFormat calls GDI32!SetPixelFormat.
@@ -3058,6 +4011,32 @@ func WglUseFontBitmaps(param0 graphicsgdi.HDC, param1 uint32, param2 uint32, par
 // Minimum OS: windows5.0.
 func WglUseFontBitmapsA(param0 graphicsgdi.HDC, param1 uint32, param2 uint32, param3 uint32) error {
 	r1, _, e1 := syscall.SyscallN(procWglUseFontBitmapsA.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+var specWglUseFontOutlines = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// WglUseFontOutlines calls OPENGL32!wglUseFontOutlinesW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglusefontoutlinesw
+// Minimum OS: windows5.0.
+func WglUseFontOutlines(param0 graphicsgdi.HDC, param1 uint32, param2 uint32, param3 uint32, param4 float32, param5 float32, param6 int32, param7 *GLYPHMETRICSFLOAT) error {
+	r1, _, e1 := win32.Call(procWglUseFontOutlines.Addr(), specWglUseFontOutlines, nil, uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(math.Float32bits(param4)), uintptr(math.Float32bits(param5)), uintptr(param6), uintptr(unsafe.Pointer(param7))).Tuple()
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+var specWglUseFontOutlinesA = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// WglUseFontOutlinesA calls OPENGL32!wglUseFontOutlinesA.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglusefontoutlinesa
+// Minimum OS: windows5.0.
+func WglUseFontOutlinesA(param0 graphicsgdi.HDC, param1 uint32, param2 uint32, param3 uint32, param4 float32, param5 float32, param6 int32, param7 *GLYPHMETRICSFLOAT) error {
+	r1, _, e1 := win32.Call(procWglUseFontOutlinesA.Addr(), specWglUseFontOutlinesA, nil, uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(math.Float32bits(param4)), uintptr(math.Float32bits(param5)), uintptr(param6), uintptr(unsafe.Pointer(param7))).Tuple()
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

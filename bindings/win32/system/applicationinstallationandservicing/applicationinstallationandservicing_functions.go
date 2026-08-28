@@ -39,11 +39,20 @@ var (
 	procZombifyActCtx                     = modKERNEL32.NewProc("ZombifyActCtx")
 	procApplyDelta                        = modmsdelta.NewProc("ApplyDeltaW")
 	procApplyDeltaA                       = modmsdelta.NewProc("ApplyDeltaA")
+	procApplyDeltaB                       = modmsdelta.NewProc("ApplyDeltaB")
+	procApplyDeltaGetReverseB             = modmsdelta.NewProc("ApplyDeltaGetReverseB")
+	procApplyDeltaProvidedB               = modmsdelta.NewProc("ApplyDeltaProvidedB")
+	procCreateDelta                       = modmsdelta.NewProc("CreateDeltaW")
+	procCreateDeltaA                      = modmsdelta.NewProc("CreateDeltaA")
+	procCreateDeltaB                      = modmsdelta.NewProc("CreateDeltaB")
 	procDeltaFree                         = modmsdelta.NewProc("DeltaFree")
+	procDeltaNormalizeProvidedB           = modmsdelta.NewProc("DeltaNormalizeProvidedB")
 	procGetDeltaInfo                      = modmsdelta.NewProc("GetDeltaInfoW")
 	procGetDeltaInfoA                     = modmsdelta.NewProc("GetDeltaInfoA")
+	procGetDeltaInfoB                     = modmsdelta.NewProc("GetDeltaInfoB")
 	procGetDeltaSignature                 = modmsdelta.NewProc("GetDeltaSignatureW")
 	procGetDeltaSignatureA                = modmsdelta.NewProc("GetDeltaSignatureA")
+	procGetDeltaSignatureB                = modmsdelta.NewProc("GetDeltaSignatureB")
 	procMsiAdvertiseProduct               = modmsi.NewProc("MsiAdvertiseProductW")
 	procMsiAdvertiseProductA              = modmsi.NewProc("MsiAdvertiseProductA")
 	procMsiAdvertiseProductEx             = modmsi.NewProc("MsiAdvertiseProductExW")
@@ -348,6 +357,9 @@ var Procs = struct {
 	AddRefActCtx                      *win32.Proc
 	ApplyDelta                        *win32.Proc
 	ApplyDeltaA                       *win32.Proc
+	ApplyDeltaB                       *win32.Proc
+	ApplyDeltaGetReverseB             *win32.Proc
+	ApplyDeltaProvidedB               *win32.Proc
 	ApplyPatchToFile                  *win32.Proc
 	ApplyPatchToFileA                 *win32.Proc
 	ApplyPatchToFileByBuffers         *win32.Proc
@@ -357,6 +369,9 @@ var Procs = struct {
 	ApplyPatchToFileExA               *win32.Proc
 	CreateActCtx                      *win32.Proc
 	CreateActCtxA                     *win32.Proc
+	CreateDelta                       *win32.Proc
+	CreateDeltaA                      *win32.Proc
+	CreateDeltaB                      *win32.Proc
 	CreatePatchFile                   *win32.Proc
 	CreatePatchFileA                  *win32.Proc
 	CreatePatchFileByHandles          *win32.Proc
@@ -365,6 +380,7 @@ var Procs = struct {
 	CreatePatchFileExA                *win32.Proc
 	DeactivateActCtx                  *win32.Proc
 	DeltaFree                         *win32.Proc
+	DeltaNormalizeProvidedB           *win32.Proc
 	ExtractPatchHeaderToFile          *win32.Proc
 	ExtractPatchHeaderToFileA         *win32.Proc
 	ExtractPatchHeaderToFileByHandles *win32.Proc
@@ -374,8 +390,10 @@ var Procs = struct {
 	GetCurrentActCtx                  *win32.Proc
 	GetDeltaInfo                      *win32.Proc
 	GetDeltaInfoA                     *win32.Proc
+	GetDeltaInfoB                     *win32.Proc
 	GetDeltaSignature                 *win32.Proc
 	GetDeltaSignatureA                *win32.Proc
+	GetDeltaSignatureB                *win32.Proc
 	GetFilePatchSignature             *win32.Proc
 	GetFilePatchSignatureA            *win32.Proc
 	GetFilePatchSignatureByBuffer     *win32.Proc
@@ -662,6 +680,9 @@ var Procs = struct {
 	AddRefActCtx:                      procAddRefActCtx,
 	ApplyDelta:                        procApplyDelta,
 	ApplyDeltaA:                       procApplyDeltaA,
+	ApplyDeltaB:                       procApplyDeltaB,
+	ApplyDeltaGetReverseB:             procApplyDeltaGetReverseB,
+	ApplyDeltaProvidedB:               procApplyDeltaProvidedB,
 	ApplyPatchToFile:                  procApplyPatchToFile,
 	ApplyPatchToFileA:                 procApplyPatchToFileA,
 	ApplyPatchToFileByBuffers:         procApplyPatchToFileByBuffers,
@@ -671,6 +692,9 @@ var Procs = struct {
 	ApplyPatchToFileExA:               procApplyPatchToFileExA,
 	CreateActCtx:                      procCreateActCtx,
 	CreateActCtxA:                     procCreateActCtxA,
+	CreateDelta:                       procCreateDelta,
+	CreateDeltaA:                      procCreateDeltaA,
+	CreateDeltaB:                      procCreateDeltaB,
 	CreatePatchFile:                   procCreatePatchFile,
 	CreatePatchFileA:                  procCreatePatchFileA,
 	CreatePatchFileByHandles:          procCreatePatchFileByHandles,
@@ -679,6 +703,7 @@ var Procs = struct {
 	CreatePatchFileExA:                procCreatePatchFileExA,
 	DeactivateActCtx:                  procDeactivateActCtx,
 	DeltaFree:                         procDeltaFree,
+	DeltaNormalizeProvidedB:           procDeltaNormalizeProvidedB,
 	ExtractPatchHeaderToFile:          procExtractPatchHeaderToFile,
 	ExtractPatchHeaderToFileA:         procExtractPatchHeaderToFileA,
 	ExtractPatchHeaderToFileByHandles: procExtractPatchHeaderToFileByHandles,
@@ -688,8 +713,10 @@ var Procs = struct {
 	GetCurrentActCtx:                  procGetCurrentActCtx,
 	GetDeltaInfo:                      procGetDeltaInfo,
 	GetDeltaInfoA:                     procGetDeltaInfoA,
+	GetDeltaInfoB:                     procGetDeltaInfoB,
 	GetDeltaSignature:                 procGetDeltaSignature,
 	GetDeltaSignatureA:                procGetDeltaSignatureA,
+	GetDeltaSignatureB:                procGetDeltaSignatureB,
 	GetFilePatchSignature:             procGetFilePatchSignature,
 	GetFilePatchSignatureA:            procGetFilePatchSignatureA,
 	GetFilePatchSignatureByBuffer:     procGetFilePatchSignatureByBuffer,
@@ -1007,6 +1034,35 @@ func ApplyDeltaA(ApplyFlags int64, lpSourceName foundation.PSTR, lpDeltaName fou
 	return r1 != 0
 }
 
+var specApplyDeltaB = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// ApplyDeltaB calls msdelta!ApplyDeltaB.
+// https://learn.microsoft.com/windows/win32/DevNotes/msdelta-applydeltab
+func ApplyDeltaB(ApplyFlags int64, Source DELTA_INPUT, Delta DELTA_INPUT, lpTarget *DELTA_OUTPUT) bool {
+	r1, _, _ := win32.Call(procApplyDeltaB.Addr(), specApplyDeltaB, nil, uintptr(ApplyFlags), uintptr(unsafe.Pointer(&Source)), uintptr(unsafe.Pointer(&Delta)), uintptr(unsafe.Pointer(lpTarget))).Tuple()
+	return r1 != 0
+}
+
+var specApplyDeltaGetReverseB = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// ApplyDeltaGetReverseB calls msdelta!ApplyDeltaGetReverseB.
+func ApplyDeltaGetReverseB(ApplyFlags int64, Source DELTA_INPUT, Delta DELTA_INPUT, lpReverseFileTime *foundation.FILETIME, lpTarget *DELTA_OUTPUT, lpTargetReverse *DELTA_OUTPUT) bool {
+	r1, _, _ := win32.Call(procApplyDeltaGetReverseB.Addr(), specApplyDeltaGetReverseB, nil, uintptr(ApplyFlags), uintptr(unsafe.Pointer(&Source)), uintptr(unsafe.Pointer(&Delta)), uintptr(unsafe.Pointer(lpReverseFileTime)), uintptr(unsafe.Pointer(lpTarget)), uintptr(unsafe.Pointer(lpTargetReverse))).Tuple()
+	return r1 != 0
+}
+
+var specApplyDeltaProvidedB = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// ApplyDeltaProvidedB calls msdelta!ApplyDeltaProvidedB.
+func ApplyDeltaProvidedB(ApplyFlags int64, Source DELTA_INPUT, Delta DELTA_INPUT, lpTarget []byte) bool {
+	var _lpTarget *byte
+	if len(lpTarget) > 0 {
+		_lpTarget = &lpTarget[0]
+	}
+	r1, _, _ := win32.Call(procApplyDeltaProvidedB.Addr(), specApplyDeltaProvidedB, nil, uintptr(ApplyFlags), uintptr(unsafe.Pointer(&Source)), uintptr(unsafe.Pointer(&Delta)), uintptr(unsafe.Pointer(_lpTarget)), uintptr(len(lpTarget))).Tuple()
+	return r1 != 0
+}
+
 // ApplyPatchToFile calls mspatcha!ApplyPatchToFileW.
 func ApplyPatchToFile(PatchFileName string, OldFileName string, NewFileName string, ApplyOptionFlags uint32) bool {
 	_PatchFileName := win32.UTF16Ptr(PatchFileName)
@@ -1087,6 +1143,37 @@ func CreateActCtxA(pActCtx *ACTCTXA) (foundation.HANDLE, error) {
 	return ret, nil
 }
 
+var specCreateDelta = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CreateDelta calls msdelta!CreateDeltaW.
+// https://learn.microsoft.com/windows/win32/DevNotes/msdelta-createdeltaw
+func CreateDelta(FileTypeSet int64, SetFlags int64, ResetFlags int64, lpSourceName string, lpTargetName string, lpSourceOptionsName string, lpTargetOptionsName string, GlobalOptions DELTA_INPUT, lpTargetFileTime *foundation.FILETIME, HashAlgId securitycryptography.ALG_ID, lpDeltaName string) bool {
+	_lpSourceName := win32.UTF16Ptr(lpSourceName)
+	_lpTargetName := win32.UTF16Ptr(lpTargetName)
+	_lpSourceOptionsName := win32.UTF16Ptr(lpSourceOptionsName)
+	_lpTargetOptionsName := win32.UTF16Ptr(lpTargetOptionsName)
+	_lpDeltaName := win32.UTF16Ptr(lpDeltaName)
+	r1, _, _ := win32.Call(procCreateDelta.Addr(), specCreateDelta, nil, uintptr(FileTypeSet), uintptr(SetFlags), uintptr(ResetFlags), uintptr(unsafe.Pointer(_lpSourceName)), uintptr(unsafe.Pointer(_lpTargetName)), uintptr(unsafe.Pointer(_lpSourceOptionsName)), uintptr(unsafe.Pointer(_lpTargetOptionsName)), uintptr(unsafe.Pointer(&GlobalOptions)), uintptr(unsafe.Pointer(lpTargetFileTime)), uintptr(HashAlgId), uintptr(unsafe.Pointer(_lpDeltaName))).Tuple()
+	return r1 != 0
+}
+
+var specCreateDeltaA = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CreateDeltaA calls msdelta!CreateDeltaA.
+func CreateDeltaA(FileTypeSet int64, SetFlags int64, ResetFlags int64, lpSourceName foundation.PSTR, lpTargetName foundation.PSTR, lpSourceOptionsName foundation.PSTR, lpTargetOptionsName foundation.PSTR, GlobalOptions DELTA_INPUT, lpTargetFileTime *foundation.FILETIME, HashAlgId securitycryptography.ALG_ID, lpDeltaName foundation.PSTR) bool {
+	r1, _, _ := win32.Call(procCreateDeltaA.Addr(), specCreateDeltaA, nil, uintptr(FileTypeSet), uintptr(SetFlags), uintptr(ResetFlags), uintptr(unsafe.Pointer(lpSourceName)), uintptr(unsafe.Pointer(lpTargetName)), uintptr(unsafe.Pointer(lpSourceOptionsName)), uintptr(unsafe.Pointer(lpTargetOptionsName)), uintptr(unsafe.Pointer(&GlobalOptions)), uintptr(unsafe.Pointer(lpTargetFileTime)), uintptr(HashAlgId), uintptr(unsafe.Pointer(lpDeltaName))).Tuple()
+	return r1 != 0
+}
+
+var specCreateDeltaB = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CreateDeltaB calls msdelta!CreateDeltaB.
+// https://learn.microsoft.com/windows/win32/DevNotes/msdelta-createdeltab
+func CreateDeltaB(FileTypeSet int64, SetFlags int64, ResetFlags int64, Source DELTA_INPUT, Target DELTA_INPUT, SourceOptions DELTA_INPUT, TargetOptions DELTA_INPUT, GlobalOptions DELTA_INPUT, lpTargetFileTime *foundation.FILETIME, HashAlgId securitycryptography.ALG_ID, lpDelta *DELTA_OUTPUT) bool {
+	r1, _, _ := win32.Call(procCreateDeltaB.Addr(), specCreateDeltaB, nil, uintptr(FileTypeSet), uintptr(SetFlags), uintptr(ResetFlags), uintptr(unsafe.Pointer(&Source)), uintptr(unsafe.Pointer(&Target)), uintptr(unsafe.Pointer(&SourceOptions)), uintptr(unsafe.Pointer(&TargetOptions)), uintptr(unsafe.Pointer(&GlobalOptions)), uintptr(unsafe.Pointer(lpTargetFileTime)), uintptr(HashAlgId), uintptr(unsafe.Pointer(lpDelta))).Tuple()
+	return r1 != 0
+}
+
 // CreatePatchFile calls mspatchc!CreatePatchFileW.
 func CreatePatchFile(OldFileName string, NewFileName string, PatchFileName string, OptionFlags uint32, OptionData *PATCH_OPTION_DATA) bool {
 	_OldFileName := win32.UTF16Ptr(OldFileName)
@@ -1157,6 +1244,18 @@ func DeactivateActCtx(dwFlags uint32, ulCookie uintptr) error {
 // https://learn.microsoft.com/windows/win32/DevNotes/msdelta-deltafree
 func DeltaFree(lpMemory unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procDeltaFree.Addr(), uintptr(unsafe.Pointer(lpMemory)))
+	return r1 != 0
+}
+
+var specDeltaNormalizeProvidedB = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// DeltaNormalizeProvidedB calls msdelta!DeltaNormalizeProvidedB.
+func DeltaNormalizeProvidedB(FileTypeSet int64, NormalizeFlags int64, NormalizeOptions DELTA_INPUT, lpSource []byte) bool {
+	var _lpSource *byte
+	if len(lpSource) > 0 {
+		_lpSource = &lpSource[0]
+	}
+	r1, _, _ := win32.Call(procDeltaNormalizeProvidedB.Addr(), specDeltaNormalizeProvidedB, nil, uintptr(FileTypeSet), uintptr(NormalizeFlags), uintptr(unsafe.Pointer(&NormalizeOptions)), uintptr(unsafe.Pointer(_lpSource)), uintptr(len(lpSource))).Tuple()
 	return r1 != 0
 }
 
@@ -1240,6 +1339,14 @@ func GetDeltaInfoA(lpDeltaName foundation.PSTR, lpHeaderInfo *DELTA_HEADER_INFO)
 	return r1 != 0
 }
 
+var specGetDeltaInfoB = &win32.Spec{Args: []win32.Arg{win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetDeltaInfoB calls msdelta!GetDeltaInfoB.
+func GetDeltaInfoB(Delta DELTA_INPUT, lpHeaderInfo *DELTA_HEADER_INFO) bool {
+	r1, _, _ := win32.Call(procGetDeltaInfoB.Addr(), specGetDeltaInfoB, nil, uintptr(unsafe.Pointer(&Delta)), uintptr(unsafe.Pointer(lpHeaderInfo))).Tuple()
+	return r1 != 0
+}
+
 // GetDeltaSignature calls msdelta!GetDeltaSignatureW.
 func GetDeltaSignature(FileTypeSet int64, HashAlgId securitycryptography.ALG_ID, lpSourceName string, lpHash *DELTA_HASH) bool {
 	_lpSourceName := win32.UTF16Ptr(lpSourceName)
@@ -1250,6 +1357,14 @@ func GetDeltaSignature(FileTypeSet int64, HashAlgId securitycryptography.ALG_ID,
 // GetDeltaSignatureA calls msdelta!GetDeltaSignatureA.
 func GetDeltaSignatureA(FileTypeSet int64, HashAlgId securitycryptography.ALG_ID, lpSourceName foundation.PSTR, lpHash *DELTA_HASH) bool {
 	r1, _, _ := syscall.SyscallN(procGetDeltaSignatureA.Addr(), uintptr(FileTypeSet), uintptr(HashAlgId), uintptr(unsafe.Pointer(lpSourceName)), uintptr(unsafe.Pointer(lpHash)))
+	return r1 != 0
+}
+
+var specGetDeltaSignatureB = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetDeltaSignatureB calls msdelta!GetDeltaSignatureB.
+func GetDeltaSignatureB(FileTypeSet int64, HashAlgId securitycryptography.ALG_ID, Source DELTA_INPUT, lpHash *DELTA_HASH) bool {
+	r1, _, _ := win32.Call(procGetDeltaSignatureB.Addr(), specGetDeltaSignatureB, nil, uintptr(FileTypeSet), uintptr(HashAlgId), uintptr(unsafe.Pointer(&Source)), uintptr(unsafe.Pointer(lpHash))).Tuple()
 	return r1 != 0
 }
 

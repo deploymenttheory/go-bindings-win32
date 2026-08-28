@@ -123,8 +123,11 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
   `LOAD_LIBRARY_SEARCH_SYSTEM32`, `loader.go`; a missing DLL/export is a
   typed `*ProcError` from `Proc.Find`, and the panic value of `Proc.Addr`),
   `LastError` normalization, the typed `HRESULT` error, `GUID`, UTF-16
-  helpers. Standard library only — nothing beyond the stdlib is ever linked
-  into consumer binaries.
+  helpers, the root `IUnknown` with `QueryInterface[T]`/`Cast[T]`, and the
+  register-aware `Call` (`call.go` + `call_amd64.s`/`call_arm64.s`: floats,
+  by-value composites and struct returns SyscallN cannot express). Standard
+  library only — nothing beyond the stdlib is ever linked into consumer
+  binaries, and no cgo.
 
 ### Generated output (`bindings/win32/`)
 
@@ -213,11 +216,25 @@ each call, then the template dispatches via `syscall.SyscallN`:
   (`RetStructOut`); a flat function returning a 1/2/4/8-byte non-float
   aggregate reconstructs it from `r1` (`win32.StructRet[T]`).
 
-The set of emittable functions is exactly what `syscall.SyscallN` can marshal:
-larger by-value struct/union/array/GUID params, float aggregates and floats
-are skipped with a diagnostic. `sizes.go` keeps a scalar-leaf census per
-layout so the ARM64 homogeneous-float-aggregate rule (`layout.hfa`) can be
-applied. The merged `view.ReturnKind` enumerates all the shapes above.
+- shapes `syscall.SyscallN` cannot marshal dispatch through the runtime's
+  register-aware `win32.Call(fn, spec, ret, args...)` instead (a Go planner
+  per architecture plus a per-arch assembly trampoline entered via SyscallN;
+  no cgo — `bindings/runtime/win32/call.go`): `float32`/`float64` params
+  (`uintptr(math.Float32bits(v))`, descriptor `win32.Float32`), float returns
+  (`RetFloat`: `math.Float32frombits(uint32(r.F0))`), by-value composites
+  that are not a 1/2/4/8-byte integer aggregate — HFAs like `D2D_POINT_2F`,
+  GUID, RECT, VARIANT — (`uintptr(unsafe.Pointer(&v))` with
+  `win32.Struct(size, align, hfa, hfa64)`), and flat struct returns larger
+  than a register or made of floats (`RetStructOut`/`RetStructOutLast` with a
+  `win32.OutParam` ret buffer). Each such call site gets a package-level
+  `spec<Name>` `*win32.Spec`; the gather composes `view.CallExpr` (`.Tuple()`
+  adapts the `Result` to SyscallN's `(r1, r2, err)`), so the templates never
+  know which dispatcher they render.
+
+Only by-value arrays and float returns with SetLastError remain skipped with
+a diagnostic. `sizes.go` keeps a scalar-leaf census per layout so the ARM64
+homogeneous-float-aggregate rule (`layout.hfa`) is applied to descriptors.
+The merged `view.ReturnKind` enumerates all the shapes above.
 
 **Handle closers** (`<pkg>_handles.go`): each `[RAIIFree]` handle typedef gets a
 `Close<Handle>(h) error` helper (a plain function, not RAII — Go has no

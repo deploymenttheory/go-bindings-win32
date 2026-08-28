@@ -5,6 +5,7 @@
 package directsound
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -145,15 +146,55 @@ func (self *IDirectSound3DBuffer) SetConeAngles(dwInsideConeAngle uint32, dwOuts
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDirectSound3DBuffer_SetConeOrientation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// SetConeOrientation dispatches through IDirectSound3DBuffer's vtable slot 14.
+func (self *IDirectSound3DBuffer) SetConeOrientation(x float32, y float32, z float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDirectSound3DBuffer_SetConeOrientation, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z)), uintptr(dwApply)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetConeOutsideVolume dispatches through IDirectSound3DBuffer's vtable slot 15.
 func (self *IDirectSound3DBuffer) SetConeOutsideVolume(lConeOutsideVolume int32, dwApply uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(lConeOutsideVolume), uintptr(dwApply))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDirectSound3DBuffer_SetMaxDistance = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetMaxDistance dispatches through IDirectSound3DBuffer's vtable slot 16.
+func (self *IDirectSound3DBuffer) SetMaxDistance(flMaxDistance float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIDirectSound3DBuffer_SetMaxDistance, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flMaxDistance)), uintptr(dwApply)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectSound3DBuffer_SetMinDistance = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetMinDistance dispatches through IDirectSound3DBuffer's vtable slot 17.
+func (self *IDirectSound3DBuffer) SetMinDistance(flMinDistance float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIDirectSound3DBuffer_SetMinDistance, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flMinDistance)), uintptr(dwApply)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetMode dispatches through IDirectSound3DBuffer's vtable slot 18.
 func (self *IDirectSound3DBuffer) SetMode(dwMode uint32, dwApply uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwMode), uintptr(dwApply))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectSound3DBuffer_SetPosition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// SetPosition dispatches through IDirectSound3DBuffer's vtable slot 19.
+func (self *IDirectSound3DBuffer) SetPosition(x float32, y float32, z float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIDirectSound3DBuffer_SetPosition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z)), uintptr(dwApply)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectSound3DBuffer_SetVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// SetVelocity dispatches through IDirectSound3DBuffer's vtable slot 20.
+func (self *IDirectSound3DBuffer) SetVelocity(x float32, y float32, z float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIDirectSound3DBuffer_SetVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z)), uintptr(dwApply)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -210,6 +251,54 @@ func (self *IDirectSound3DListener) GetVelocity(pvVelocity *graphicsdirect3d.D3D
 // SetAllParameters dispatches through IDirectSound3DListener's vtable slot 10.
 func (self *IDirectSound3DListener) SetAllParameters(pcListener *DS3DLISTENER, dwApply uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcListener)), uintptr(dwApply))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectSound3DListener_SetDistanceFactor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetDistanceFactor dispatches through IDirectSound3DListener's vtable slot 11.
+func (self *IDirectSound3DListener) SetDistanceFactor(flDistanceFactor float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIDirectSound3DListener_SetDistanceFactor, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flDistanceFactor)), uintptr(dwApply)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectSound3DListener_SetDopplerFactor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetDopplerFactor dispatches through IDirectSound3DListener's vtable slot 12.
+func (self *IDirectSound3DListener) SetDopplerFactor(flDopplerFactor float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDirectSound3DListener_SetDopplerFactor, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flDopplerFactor)), uintptr(dwApply)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectSound3DListener_SetOrientation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// SetOrientation dispatches through IDirectSound3DListener's vtable slot 13.
+func (self *IDirectSound3DListener) SetOrientation(xFront float32, yFront float32, zFront float32, xTop float32, yTop float32, zTop float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDirectSound3DListener_SetOrientation, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(xFront)), uintptr(math.Float32bits(yFront)), uintptr(math.Float32bits(zFront)), uintptr(math.Float32bits(xTop)), uintptr(math.Float32bits(yTop)), uintptr(math.Float32bits(zTop)), uintptr(dwApply)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectSound3DListener_SetPosition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// SetPosition dispatches through IDirectSound3DListener's vtable slot 14.
+func (self *IDirectSound3DListener) SetPosition(x float32, y float32, z float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDirectSound3DListener_SetPosition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z)), uintptr(dwApply)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectSound3DListener_SetRolloffFactor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetRolloffFactor dispatches through IDirectSound3DListener's vtable slot 15.
+func (self *IDirectSound3DListener) SetRolloffFactor(flRolloffFactor float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIDirectSound3DListener_SetRolloffFactor, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flRolloffFactor)), uintptr(dwApply)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectSound3DListener_SetVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// SetVelocity dispatches through IDirectSound3DListener's vtable slot 16.
+func (self *IDirectSound3DListener) SetVelocity(x float32, y float32, z float32, dwApply uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIDirectSound3DListener_SetVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z)), uintptr(dwApply)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	securityextensibleauthenticationprotocol "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/extensibleauthenticationprotocol"
 )
 
 var (
@@ -72,6 +73,7 @@ var (
 	procWlanSetInterface                         = modwlanapi.NewProc("WlanSetInterface")
 	procWlanSetProfile                           = modwlanapi.NewProc("WlanSetProfile")
 	procWlanSetProfileCustomUserData             = modwlanapi.NewProc("WlanSetProfileCustomUserData")
+	procWlanSetProfileEapUserData                = modwlanapi.NewProc("WlanSetProfileEapUserData")
 	procWlanSetProfileEapXmlUserData             = modwlanapi.NewProc("WlanSetProfileEapXmlUserData")
 	procWlanSetProfileList                       = modwlanapi.NewProc("WlanSetProfileList")
 	procWlanSetProfilePosition                   = modwlanapi.NewProc("WlanSetProfilePosition")
@@ -139,6 +141,7 @@ var Procs = struct {
 	WlanSetInterface                         *win32.Proc
 	WlanSetProfile                           *win32.Proc
 	WlanSetProfileCustomUserData             *win32.Proc
+	WlanSetProfileEapUserData                *win32.Proc
 	WlanSetProfileEapXmlUserData             *win32.Proc
 	WlanSetProfileList                       *win32.Proc
 	WlanSetProfilePosition                   *win32.Proc
@@ -200,6 +203,7 @@ var Procs = struct {
 	WlanSetInterface:                         procWlanSetInterface,
 	WlanSetProfile:                           procWlanSetProfile,
 	WlanSetProfileCustomUserData:             procWlanSetProfileCustomUserData,
+	WlanSetProfileEapUserData:                procWlanSetProfileEapUserData,
 	WlanSetProfileEapXmlUserData:             procWlanSetProfileEapXmlUserData,
 	WlanSetProfileList:                       procWlanSetProfileList,
 	WlanSetProfilePosition:                   procWlanSetProfilePosition,
@@ -692,6 +696,21 @@ func WlanSetProfileCustomUserData(hClientHandle foundation.HANDLE, pInterfaceGui
 		_pData = &pData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procWlanSetProfileCustomUserData.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)), 0)
+	return uint32(r1)
+}
+
+var specWlanSetProfileEapUserData = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// WlanSetProfileEapUserData calls wlanapi!WlanSetProfileEapUserData.
+// https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofileeapuserdata
+// Minimum OS: windows6.0.6000.
+func WlanSetProfileEapUserData(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, strProfileName string, eapType securityextensibleauthenticationprotocol.EAP_METHOD_TYPE, dwFlags WLAN_SET_EAPHOST_FLAGS, pbEapUserData []byte) uint32 {
+	_strProfileName := win32.UTF16Ptr(strProfileName)
+	var _pbEapUserData *byte
+	if len(pbEapUserData) > 0 {
+		_pbEapUserData = &pbEapUserData[0]
+	}
+	r1, _, _ := win32.Call(procWlanSetProfileEapUserData.Addr(), specWlanSetProfileEapUserData, nil, uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(unsafe.Pointer(&eapType)), uintptr(dwFlags), uintptr(len(pbEapUserData)), uintptr(unsafe.Pointer(_pbEapUserData)), 0).Tuple()
 	return uint32(r1)
 }
 

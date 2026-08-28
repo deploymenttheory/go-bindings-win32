@@ -5,6 +5,7 @@
 package animation
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -22,6 +23,22 @@ type IUIAnimationInterpolator struct {
 // IID_IUIAnimationInterpolator is the interface identifier for IUIAnimationInterpolator.
 var IID_IUIAnimationInterpolator = win32.GUID{Data1: 0x7815cbba, Data2: 0xddf7, Data3: 0x478c, Data4: [8]byte{0xa4, 0x6c, 0x7b, 0x6c, 0x73, 0x8b, 0x79, 0x78}}
 
+var specIUIAnimationInterpolator_SetInitialValueAndVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64}}
+
+// SetInitialValueAndVelocity dispatches through IUIAnimationInterpolator's vtable slot 3.
+func (self *IUIAnimationInterpolator) SetInitialValueAndVelocity(initialValue float64, initialVelocity float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAnimationInterpolator_SetInitialValueAndVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(initialValue)), uintptr(math.Float64bits(initialVelocity))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationInterpolator_SetDuration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetDuration dispatches through IUIAnimationInterpolator's vtable slot 4.
+func (self *IUIAnimationInterpolator) SetDuration(duration float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAnimationInterpolator_SetDuration, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetDuration dispatches through IUIAnimationInterpolator's vtable slot 5.
 func (self *IUIAnimationInterpolator) GetDuration(duration *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(duration)))
@@ -31,6 +48,22 @@ func (self *IUIAnimationInterpolator) GetDuration(duration *float64) error {
 // GetFinalValue dispatches through IUIAnimationInterpolator's vtable slot 6.
 func (self *IUIAnimationInterpolator) GetFinalValue(value *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationInterpolator_InterpolateValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// InterpolateValue dispatches through IUIAnimationInterpolator's vtable slot 7.
+func (self *IUIAnimationInterpolator) InterpolateValue(offset float64, value *float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIUIAnimationInterpolator_InterpolateValue, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(offset)), uintptr(unsafe.Pointer(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationInterpolator_InterpolateVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// InterpolateVelocity dispatches through IUIAnimationInterpolator's vtable slot 8.
+func (self *IUIAnimationInterpolator) InterpolateVelocity(offset float64, velocity *float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIUIAnimationInterpolator_InterpolateVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(offset)), uintptr(unsafe.Pointer(velocity))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -61,6 +94,14 @@ func (self *IUIAnimationInterpolator2) SetInitialValueAndVelocity(initialValue *
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationInterpolator2_SetDuration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetDuration dispatches through IUIAnimationInterpolator2's vtable slot 5.
+func (self *IUIAnimationInterpolator2) SetDuration(duration float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIUIAnimationInterpolator2_SetDuration, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetDuration dispatches through IUIAnimationInterpolator2's vtable slot 6.
 func (self *IUIAnimationInterpolator2) GetDuration(duration *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(duration)))
@@ -74,6 +115,30 @@ func (self *IUIAnimationInterpolator2) GetFinalValue(value []float64) error {
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationInterpolator2_InterpolateValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word}}
+
+// InterpolateValue dispatches through IUIAnimationInterpolator2's vtable slot 8.
+func (self *IUIAnimationInterpolator2) InterpolateValue(offset float64, value []float64) error {
+	var _value *float64
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIUIAnimationInterpolator2_InterpolateValue, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(offset)), uintptr(unsafe.Pointer(_value)), uintptr(len(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationInterpolator2_InterpolateVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word}}
+
+// InterpolateVelocity dispatches through IUIAnimationInterpolator2's vtable slot 9.
+func (self *IUIAnimationInterpolator2) InterpolateVelocity(offset float64, velocity []float64) error {
+	var _velocity *float64
+	if len(velocity) > 0 {
+		_velocity = &velocity[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIUIAnimationInterpolator2_InterpolateVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(offset)), uintptr(unsafe.Pointer(_velocity)), uintptr(len(velocity))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -113,15 +178,47 @@ type IUIAnimationManager struct {
 // IID_IUIAnimationManager is the interface identifier for IUIAnimationManager.
 var IID_IUIAnimationManager = win32.GUID{Data1: 0x9169896c, Data2: 0xac8d, Data3: 0x4e7d, Data4: [8]byte{0x94, 0xe5, 0x67, 0xfa, 0x4d, 0xc2, 0xf2, 0xe8}}
 
+var specIUIAnimationManager_CreateAnimationVariable = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// CreateAnimationVariable dispatches through IUIAnimationManager's vtable slot 3.
+func (self *IUIAnimationManager) CreateAnimationVariable(initialValue float64, variable **IUIAnimationVariable) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAnimationManager_CreateAnimationVariable, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(initialValue)), uintptr(unsafe.Pointer(variable))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationManager_ScheduleTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float64}}
+
+// ScheduleTransition dispatches through IUIAnimationManager's vtable slot 4.
+func (self *IUIAnimationManager) ScheduleTransition(variable *IUIAnimationVariable, transition *IUIAnimationTransition, timeNow float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAnimationManager_ScheduleTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(transition)), uintptr(math.Float64bits(timeNow))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CreateStoryboard dispatches through IUIAnimationManager's vtable slot 5.
 func (self *IUIAnimationManager) CreateStoryboard(storyboard **IUIAnimationStoryboard) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationManager_FinishAllStoryboards = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// FinishAllStoryboards dispatches through IUIAnimationManager's vtable slot 6.
+func (self *IUIAnimationManager) FinishAllStoryboards(completionDeadline float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIUIAnimationManager_FinishAllStoryboards, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(completionDeadline))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AbandonAllStoryboards dispatches through IUIAnimationManager's vtable slot 7.
 func (self *IUIAnimationManager) AbandonAllStoryboards() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationManager_Update = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Update dispatches through IUIAnimationManager's vtable slot 8.
+func (self *IUIAnimationManager) Update(timeNow float64, updateResult *UI_ANIMATION_UPDATE_RESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIUIAnimationManager_Update, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(timeNow)), uintptr(unsafe.Pointer(updateResult))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -191,6 +288,14 @@ func (self *IUIAnimationManager) SetConcludePriorityComparison(comparison *IUIAn
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationManager_SetDefaultLongestAcceptableDelay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetDefaultLongestAcceptableDelay dispatches through IUIAnimationManager's vtable slot 20.
+func (self *IUIAnimationManager) SetDefaultLongestAcceptableDelay(delay float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIUIAnimationManager_SetDefaultLongestAcceptableDelay, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(delay))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Shutdown dispatches through IUIAnimationManager's vtable slot 21.
 func (self *IUIAnimationManager) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
@@ -216,15 +321,47 @@ func (self *IUIAnimationManager2) CreateAnimationVectorVariable(initialValue []f
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationManager2_CreateAnimationVariable = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// CreateAnimationVariable dispatches through IUIAnimationManager2's vtable slot 4.
+func (self *IUIAnimationManager2) CreateAnimationVariable(initialValue float64, variable **IUIAnimationVariable2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAnimationManager2_CreateAnimationVariable, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(initialValue)), uintptr(unsafe.Pointer(variable))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationManager2_ScheduleTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float64}}
+
+// ScheduleTransition dispatches through IUIAnimationManager2's vtable slot 5.
+func (self *IUIAnimationManager2) ScheduleTransition(variable *IUIAnimationVariable2, transition *IUIAnimationTransition2, timeNow float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIUIAnimationManager2_ScheduleTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(transition)), uintptr(math.Float64bits(timeNow))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CreateStoryboard dispatches through IUIAnimationManager2's vtable slot 6.
 func (self *IUIAnimationManager2) CreateStoryboard(storyboard **IUIAnimationStoryboard2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationManager2_FinishAllStoryboards = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// FinishAllStoryboards dispatches through IUIAnimationManager2's vtable slot 7.
+func (self *IUIAnimationManager2) FinishAllStoryboards(completionDeadline float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIUIAnimationManager2_FinishAllStoryboards, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(completionDeadline))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AbandonAllStoryboards dispatches through IUIAnimationManager2's vtable slot 8.
 func (self *IUIAnimationManager2) AbandonAllStoryboards() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationManager2_Update = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Update dispatches through IUIAnimationManager2's vtable slot 9.
+func (self *IUIAnimationManager2) Update(timeNow float64, updateResult *UI_ANIMATION_UPDATE_RESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIUIAnimationManager2_Update, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(timeNow)), uintptr(unsafe.Pointer(updateResult))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -301,6 +438,14 @@ func (self *IUIAnimationManager2) SetConcludePriorityComparison(comparison *IUIA
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationManager2_SetDefaultLongestAcceptableDelay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetDefaultLongestAcceptableDelay dispatches through IUIAnimationManager2's vtable slot 22.
+func (self *IUIAnimationManager2) SetDefaultLongestAcceptableDelay(delay float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIUIAnimationManager2_SetDefaultLongestAcceptableDelay, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(delay))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Shutdown dispatches through IUIAnimationManager2's vtable slot 23.
 func (self *IUIAnimationManager2) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
@@ -345,6 +490,22 @@ type IUIAnimationPrimitiveInterpolation struct {
 
 // IID_IUIAnimationPrimitiveInterpolation is the interface identifier for IUIAnimationPrimitiveInterpolation.
 var IID_IUIAnimationPrimitiveInterpolation = win32.GUID{Data1: 0xbab20d63, Data2: 0x4361, Data3: 0x45da, Data4: [8]byte{0xa2, 0x4f, 0xab, 0x85, 0x08, 0x84, 0x6b, 0x5b}}
+
+var specIUIAnimationPrimitiveInterpolation_AddCubic = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// AddCubic dispatches through IUIAnimationPrimitiveInterpolation's vtable slot 3.
+func (self *IUIAnimationPrimitiveInterpolation) AddCubic(dimension uint32, beginOffset float64, constantCoefficient float32, linearCoefficient float32, quadraticCoefficient float32, cubicCoefficient float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAnimationPrimitiveInterpolation_AddCubic, nil, uintptr(unsafe.Pointer(self)), uintptr(dimension), uintptr(math.Float64bits(beginOffset)), uintptr(math.Float32bits(constantCoefficient)), uintptr(math.Float32bits(linearCoefficient)), uintptr(math.Float32bits(quadraticCoefficient)), uintptr(math.Float32bits(cubicCoefficient))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationPrimitiveInterpolation_AddSinusoidal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// AddSinusoidal dispatches through IUIAnimationPrimitiveInterpolation's vtable slot 4.
+func (self *IUIAnimationPrimitiveInterpolation) AddSinusoidal(dimension uint32, beginOffset float64, bias float32, amplitude float32, frequency float32, phase float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAnimationPrimitiveInterpolation_AddSinusoidal, nil, uintptr(unsafe.Pointer(self)), uintptr(dimension), uintptr(math.Float64bits(beginOffset)), uintptr(math.Float32bits(bias)), uintptr(math.Float32bits(amplitude)), uintptr(math.Float32bits(frequency)), uintptr(math.Float32bits(phase))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IUIAnimationPriorityComparison: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationprioritycomparison
 // IID: 83fa9b74-5f86-4618-bc6a-a2fac19b3f44
@@ -391,6 +552,14 @@ func (self *IUIAnimationStoryboard) AddTransition(variable *IUIAnimationVariable
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationStoryboard_AddKeyframeAtOffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64, win32.Word}}
+
+// AddKeyframeAtOffset dispatches through IUIAnimationStoryboard's vtable slot 4.
+func (self *IUIAnimationStoryboard) AddKeyframeAtOffset(existingKeyframe UI_ANIMATION_KEYFRAME, offset float64, keyframe *UI_ANIMATION_KEYFRAME) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAnimationStoryboard_AddKeyframeAtOffset, nil, uintptr(unsafe.Pointer(self)), uintptr(existingKeyframe), uintptr(math.Float64bits(offset)), uintptr(unsafe.Pointer(keyframe))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddKeyframeAfterTransition dispatches through IUIAnimationStoryboard's vtable slot 5.
 func (self *IUIAnimationStoryboard) AddKeyframeAfterTransition(transition *IUIAnimationTransition, keyframe *UI_ANIMATION_KEYFRAME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transition)), uintptr(unsafe.Pointer(keyframe)))
@@ -421,9 +590,33 @@ func (self *IUIAnimationStoryboard) HoldVariable(variable *IUIAnimationVariable)
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationStoryboard_SetLongestAcceptableDelay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetLongestAcceptableDelay dispatches through IUIAnimationStoryboard's vtable slot 10.
+func (self *IUIAnimationStoryboard) SetLongestAcceptableDelay(delay float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIUIAnimationStoryboard_SetLongestAcceptableDelay, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(delay))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationStoryboard_Schedule = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Schedule dispatches through IUIAnimationStoryboard's vtable slot 11.
+func (self *IUIAnimationStoryboard) Schedule(timeNow float64, schedulingResult *UI_ANIMATION_SCHEDULING_RESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIUIAnimationStoryboard_Schedule, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(timeNow)), uintptr(unsafe.Pointer(schedulingResult))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Conclude dispatches through IUIAnimationStoryboard's vtable slot 12.
 func (self *IUIAnimationStoryboard) Conclude() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationStoryboard_Finish = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Finish dispatches through IUIAnimationStoryboard's vtable slot 13.
+func (self *IUIAnimationStoryboard) Finish(completionDeadline float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIUIAnimationStoryboard_Finish, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(completionDeadline))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -478,6 +671,14 @@ func (self *IUIAnimationStoryboard2) AddTransition(variable *IUIAnimationVariabl
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationStoryboard2_AddKeyframeAtOffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float64, win32.Word}}
+
+// AddKeyframeAtOffset dispatches through IUIAnimationStoryboard2's vtable slot 4.
+func (self *IUIAnimationStoryboard2) AddKeyframeAtOffset(existingKeyframe UI_ANIMATION_KEYFRAME, offset float64, keyframe *UI_ANIMATION_KEYFRAME) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAnimationStoryboard2_AddKeyframeAtOffset, nil, uintptr(unsafe.Pointer(self)), uintptr(existingKeyframe), uintptr(math.Float64bits(offset)), uintptr(unsafe.Pointer(keyframe))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddKeyframeAfterTransition dispatches through IUIAnimationStoryboard2's vtable slot 5.
 func (self *IUIAnimationStoryboard2) AddKeyframeAfterTransition(transition *IUIAnimationTransition2, keyframe *UI_ANIMATION_KEYFRAME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transition)), uintptr(unsafe.Pointer(keyframe)))
@@ -496,15 +697,56 @@ func (self *IUIAnimationStoryboard2) AddTransitionBetweenKeyframes(variable *IUI
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationStoryboard2_RepeatBetweenKeyframes = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// RepeatBetweenKeyframes dispatches through IUIAnimationStoryboard2's vtable slot 8.
+func (self *IUIAnimationStoryboard2) RepeatBetweenKeyframes(startKeyframe UI_ANIMATION_KEYFRAME, endKeyframe UI_ANIMATION_KEYFRAME, cRepetition float64, repeatMode UI_ANIMATION_REPEAT_MODE, pIterationChangeHandler *IUIAnimationLoopIterationChangeHandler2, id uintptr, fRegisterForNextAnimationEvent bool) error {
+	_fRegisterForNextAnimationEvent := win32.Bool32(fRegisterForNextAnimationEvent)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIUIAnimationStoryboard2_RepeatBetweenKeyframes, nil, uintptr(unsafe.Pointer(self)), uintptr(startKeyframe), uintptr(endKeyframe), uintptr(math.Float64bits(cRepetition)), uintptr(repeatMode), uintptr(unsafe.Pointer(pIterationChangeHandler)), uintptr(id), uintptr(_fRegisterForNextAnimationEvent)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // HoldVariable dispatches through IUIAnimationStoryboard2's vtable slot 9.
 func (self *IUIAnimationStoryboard2) HoldVariable(variable *IUIAnimationVariable2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationStoryboard2_SetLongestAcceptableDelay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetLongestAcceptableDelay dispatches through IUIAnimationStoryboard2's vtable slot 10.
+func (self *IUIAnimationStoryboard2) SetLongestAcceptableDelay(delay float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIUIAnimationStoryboard2_SetLongestAcceptableDelay, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(delay))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationStoryboard2_SetSkipDuration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetSkipDuration dispatches through IUIAnimationStoryboard2's vtable slot 11.
+func (self *IUIAnimationStoryboard2) SetSkipDuration(secondsDuration float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIUIAnimationStoryboard2_SetSkipDuration, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(secondsDuration))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationStoryboard2_Schedule = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// Schedule dispatches through IUIAnimationStoryboard2's vtable slot 12.
+func (self *IUIAnimationStoryboard2) Schedule(timeNow float64, schedulingResult *UI_ANIMATION_SCHEDULING_RESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIUIAnimationStoryboard2_Schedule, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(timeNow)), uintptr(unsafe.Pointer(schedulingResult))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Conclude dispatches through IUIAnimationStoryboard2's vtable slot 13.
 func (self *IUIAnimationStoryboard2) Conclude() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationStoryboard2_Finish = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Finish dispatches through IUIAnimationStoryboard2's vtable slot 14.
+func (self *IUIAnimationStoryboard2) Finish(completionDeadline float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIUIAnimationStoryboard2_Finish, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(completionDeadline))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -690,6 +932,14 @@ type IUIAnimationTimerUpdateHandler struct {
 // IID_IUIAnimationTimerUpdateHandler is the interface identifier for IUIAnimationTimerUpdateHandler.
 var IID_IUIAnimationTimerUpdateHandler = win32.GUID{Data1: 0x195509b7, Data2: 0x5d5e, Data3: 0x4e3e, Data4: [8]byte{0xb2, 0x78, 0xee, 0x37, 0x59, 0xb3, 0x67, 0xad}}
 
+var specIUIAnimationTimerUpdateHandler_OnUpdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// OnUpdate dispatches through IUIAnimationTimerUpdateHandler's vtable slot 3.
+func (self *IUIAnimationTimerUpdateHandler) OnUpdate(timeNow float64, result *UI_ANIMATION_UPDATE_RESULT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAnimationTimerUpdateHandler_OnUpdate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(timeNow)), uintptr(unsafe.Pointer(result))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetTimerClientEventHandler dispatches through IUIAnimationTimerUpdateHandler's vtable slot 4.
 func (self *IUIAnimationTimerUpdateHandler) SetTimerClientEventHandler(handler *IUIAnimationTimerClientEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
@@ -710,6 +960,22 @@ type IUIAnimationTransition struct {
 
 // IID_IUIAnimationTransition is the interface identifier for IUIAnimationTransition.
 var IID_IUIAnimationTransition = win32.GUID{Data1: 0xdc6ce252, Data2: 0xf731, Data3: 0x41cf, Data4: [8]byte{0xb6, 0x10, 0x61, 0x4b, 0x6c, 0xa0, 0x49, 0xad}}
+
+var specIUIAnimationTransition_SetInitialValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetInitialValue dispatches through IUIAnimationTransition's vtable slot 3.
+func (self *IUIAnimationTransition) SetInitialValue(value float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAnimationTransition_SetInitialValue, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransition_SetInitialVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetInitialVelocity dispatches through IUIAnimationTransition's vtable slot 4.
+func (self *IUIAnimationTransition) SetInitialVelocity(velocity float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAnimationTransition_SetInitialVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(velocity))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IsDurationKnown dispatches through IUIAnimationTransition's vtable slot 5.
 func (self *IUIAnimationTransition) IsDurationKnown() error {
@@ -738,6 +1004,14 @@ func (self *IUIAnimationTransition2) GetDimension(dimension *uint32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationTransition2_SetInitialValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetInitialValue dispatches through IUIAnimationTransition2's vtable slot 4.
+func (self *IUIAnimationTransition2) SetInitialValue(value float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAnimationTransition2_SetInitialValue, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetInitialVectorValue dispatches through IUIAnimationTransition2's vtable slot 5.
 func (self *IUIAnimationTransition2) SetInitialVectorValue(value []float64) error {
 	var _value *float64
@@ -745,6 +1019,14 @@ func (self *IUIAnimationTransition2) SetInitialVectorValue(value []float64) erro
 		_value = &value[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransition2_SetInitialVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetInitialVelocity dispatches through IUIAnimationTransition2's vtable slot 6.
+func (self *IUIAnimationTransition2) SetInitialVelocity(velocity float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIUIAnimationTransition2_SetInitialVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(velocity))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -809,6 +1091,102 @@ type IUIAnimationTransitionLibrary struct {
 // IID_IUIAnimationTransitionLibrary is the interface identifier for IUIAnimationTransitionLibrary.
 var IID_IUIAnimationTransitionLibrary = win32.GUID{Data1: 0xca5a14b1, Data2: 0xd24f, Data3: 0x48b8, Data4: [8]byte{0x8f, 0xe4, 0xc7, 0x81, 0x69, 0xba, 0x95, 0x4e}}
 
+var specIUIAnimationTransitionLibrary_CreateInstantaneousTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// CreateInstantaneousTransition dispatches through IUIAnimationTransitionLibrary's vtable slot 3.
+func (self *IUIAnimationTransitionLibrary) CreateInstantaneousTransition(finalValue float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAnimationTransitionLibrary_CreateInstantaneousTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateConstantTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// CreateConstantTransition dispatches through IUIAnimationTransitionLibrary's vtable slot 4.
+func (self *IUIAnimationTransitionLibrary) CreateConstantTransition(duration float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIUIAnimationTransitionLibrary_CreateConstantTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateDiscreteTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateDiscreteTransition dispatches through IUIAnimationTransitionLibrary's vtable slot 5.
+func (self *IUIAnimationTransitionLibrary) CreateDiscreteTransition(delay float64, finalValue float64, hold float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIUIAnimationTransitionLibrary_CreateDiscreteTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(delay)), uintptr(math.Float64bits(finalValue)), uintptr(math.Float64bits(hold)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateLinearTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateLinearTransition dispatches through IUIAnimationTransitionLibrary's vtable slot 6.
+func (self *IUIAnimationTransitionLibrary) CreateLinearTransition(duration float64, finalValue float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIUIAnimationTransitionLibrary_CreateLinearTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateLinearTransitionFromSpeed = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateLinearTransitionFromSpeed dispatches through IUIAnimationTransitionLibrary's vtable slot 7.
+func (self *IUIAnimationTransitionLibrary) CreateLinearTransitionFromSpeed(speed float64, finalValue float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIUIAnimationTransitionLibrary_CreateLinearTransitionFromSpeed, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(speed)), uintptr(math.Float64bits(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateSinusoidalTransitionFromVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateSinusoidalTransitionFromVelocity dispatches through IUIAnimationTransitionLibrary's vtable slot 8.
+func (self *IUIAnimationTransitionLibrary) CreateSinusoidalTransitionFromVelocity(duration float64, period float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIUIAnimationTransitionLibrary_CreateSinusoidalTransitionFromVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(period)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateSinusoidalTransitionFromRange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// CreateSinusoidalTransitionFromRange dispatches through IUIAnimationTransitionLibrary's vtable slot 9.
+func (self *IUIAnimationTransitionLibrary) CreateSinusoidalTransitionFromRange(duration float64, minimumValue float64, maximumValue float64, period float64, slope UI_ANIMATION_SLOPE, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIUIAnimationTransitionLibrary_CreateSinusoidalTransitionFromRange, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(minimumValue)), uintptr(math.Float64bits(maximumValue)), uintptr(math.Float64bits(period)), uintptr(slope), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateAccelerateDecelerateTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateAccelerateDecelerateTransition dispatches through IUIAnimationTransitionLibrary's vtable slot 10.
+func (self *IUIAnimationTransitionLibrary) CreateAccelerateDecelerateTransition(duration float64, finalValue float64, accelerationRatio float64, decelerationRatio float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIUIAnimationTransitionLibrary_CreateAccelerateDecelerateTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(finalValue)), uintptr(math.Float64bits(accelerationRatio)), uintptr(math.Float64bits(decelerationRatio)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateReversalTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// CreateReversalTransition dispatches through IUIAnimationTransitionLibrary's vtable slot 11.
+func (self *IUIAnimationTransitionLibrary) CreateReversalTransition(duration float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIUIAnimationTransitionLibrary_CreateReversalTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateCubicTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateCubicTransition dispatches through IUIAnimationTransitionLibrary's vtable slot 12.
+func (self *IUIAnimationTransitionLibrary) CreateCubicTransition(duration float64, finalValue float64, finalVelocity float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIUIAnimationTransitionLibrary_CreateCubicTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(finalValue)), uintptr(math.Float64bits(finalVelocity)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateSmoothStopTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateSmoothStopTransition dispatches through IUIAnimationTransitionLibrary's vtable slot 13.
+func (self *IUIAnimationTransitionLibrary) CreateSmoothStopTransition(maximumDuration float64, finalValue float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIUIAnimationTransitionLibrary_CreateSmoothStopTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(maximumDuration)), uintptr(math.Float64bits(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary_CreateParabolicTransitionFromAcceleration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateParabolicTransitionFromAcceleration dispatches through IUIAnimationTransitionLibrary's vtable slot 14.
+func (self *IUIAnimationTransitionLibrary) CreateParabolicTransitionFromAcceleration(finalValue float64, finalVelocity float64, acceleration float64, transition **IUIAnimationTransition) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIUIAnimationTransitionLibrary_CreateParabolicTransitionFromAcceleration, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(finalValue)), uintptr(math.Float64bits(finalVelocity)), uintptr(math.Float64bits(acceleration)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IUIAnimationTransitionLibrary2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtransitionlibrary2
 // IID: 03cfae53-9580-4ee3-b363-2ece51b4af6a
 type IUIAnimationTransitionLibrary2 struct {
@@ -818,6 +1196,14 @@ type IUIAnimationTransitionLibrary2 struct {
 // IID_IUIAnimationTransitionLibrary2 is the interface identifier for IUIAnimationTransitionLibrary2.
 var IID_IUIAnimationTransitionLibrary2 = win32.GUID{Data1: 0x03cfae53, Data2: 0x9580, Data3: 0x4ee3, Data4: [8]byte{0xb3, 0x63, 0x2e, 0xce, 0x51, 0xb4, 0xaf, 0x6a}}
 
+var specIUIAnimationTransitionLibrary2_CreateInstantaneousTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// CreateInstantaneousTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 3.
+func (self *IUIAnimationTransitionLibrary2) CreateInstantaneousTransition(finalValue float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAnimationTransitionLibrary2_CreateInstantaneousTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CreateInstantaneousVectorTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 4.
 func (self *IUIAnimationTransitionLibrary2) CreateInstantaneousVectorTransition(finalValue []float64, transition **IUIAnimationTransition2) error {
 	var _finalValue *float64
@@ -825,6 +1211,158 @@ func (self *IUIAnimationTransitionLibrary2) CreateInstantaneousVectorTransition(
 		_finalValue = &finalValue[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_finalValue)), uintptr(len(finalValue)), uintptr(unsafe.Pointer(transition)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateConstantTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// CreateConstantTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 5.
+func (self *IUIAnimationTransitionLibrary2) CreateConstantTransition(duration float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIUIAnimationTransitionLibrary2_CreateConstantTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateDiscreteTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateDiscreteTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 6.
+func (self *IUIAnimationTransitionLibrary2) CreateDiscreteTransition(delay float64, finalValue float64, hold float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIUIAnimationTransitionLibrary2_CreateDiscreteTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(delay)), uintptr(math.Float64bits(finalValue)), uintptr(math.Float64bits(hold)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateDiscreteVectorTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Float64, win32.Word}}
+
+// CreateDiscreteVectorTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 7.
+func (self *IUIAnimationTransitionLibrary2) CreateDiscreteVectorTransition(delay float64, finalValue []float64, hold float64, transition **IUIAnimationTransition2) error {
+	var _finalValue *float64
+	if len(finalValue) > 0 {
+		_finalValue = &finalValue[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIUIAnimationTransitionLibrary2_CreateDiscreteVectorTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(delay)), uintptr(unsafe.Pointer(_finalValue)), uintptr(len(finalValue)), uintptr(math.Float64bits(hold)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateLinearTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateLinearTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 8.
+func (self *IUIAnimationTransitionLibrary2) CreateLinearTransition(duration float64, finalValue float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIUIAnimationTransitionLibrary2_CreateLinearTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateLinearVectorTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// CreateLinearVectorTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 9.
+func (self *IUIAnimationTransitionLibrary2) CreateLinearVectorTransition(duration float64, finalValue []float64, transition **IUIAnimationTransition2) error {
+	var _finalValue *float64
+	if len(finalValue) > 0 {
+		_finalValue = &finalValue[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIUIAnimationTransitionLibrary2_CreateLinearVectorTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(unsafe.Pointer(_finalValue)), uintptr(len(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateLinearTransitionFromSpeed = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateLinearTransitionFromSpeed dispatches through IUIAnimationTransitionLibrary2's vtable slot 10.
+func (self *IUIAnimationTransitionLibrary2) CreateLinearTransitionFromSpeed(speed float64, finalValue float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIUIAnimationTransitionLibrary2_CreateLinearTransitionFromSpeed, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(speed)), uintptr(math.Float64bits(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateLinearVectorTransitionFromSpeed = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word}}
+
+// CreateLinearVectorTransitionFromSpeed dispatches through IUIAnimationTransitionLibrary2's vtable slot 11.
+func (self *IUIAnimationTransitionLibrary2) CreateLinearVectorTransitionFromSpeed(speed float64, finalValue []float64, transition **IUIAnimationTransition2) error {
+	var _finalValue *float64
+	if len(finalValue) > 0 {
+		_finalValue = &finalValue[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIUIAnimationTransitionLibrary2_CreateLinearVectorTransitionFromSpeed, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(speed)), uintptr(unsafe.Pointer(_finalValue)), uintptr(len(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateSinusoidalTransitionFromVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateSinusoidalTransitionFromVelocity dispatches through IUIAnimationTransitionLibrary2's vtable slot 12.
+func (self *IUIAnimationTransitionLibrary2) CreateSinusoidalTransitionFromVelocity(duration float64, period float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIUIAnimationTransitionLibrary2_CreateSinusoidalTransitionFromVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(period)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateSinusoidalTransitionFromRange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Word, win32.Word}}
+
+// CreateSinusoidalTransitionFromRange dispatches through IUIAnimationTransitionLibrary2's vtable slot 13.
+func (self *IUIAnimationTransitionLibrary2) CreateSinusoidalTransitionFromRange(duration float64, minimumValue float64, maximumValue float64, period float64, slope UI_ANIMATION_SLOPE, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIUIAnimationTransitionLibrary2_CreateSinusoidalTransitionFromRange, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(minimumValue)), uintptr(math.Float64bits(maximumValue)), uintptr(math.Float64bits(period)), uintptr(slope), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateAccelerateDecelerateTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateAccelerateDecelerateTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 14.
+func (self *IUIAnimationTransitionLibrary2) CreateAccelerateDecelerateTransition(duration float64, finalValue float64, accelerationRatio float64, decelerationRatio float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIUIAnimationTransitionLibrary2_CreateAccelerateDecelerateTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(finalValue)), uintptr(math.Float64bits(accelerationRatio)), uintptr(math.Float64bits(decelerationRatio)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateReversalTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word}}
+
+// CreateReversalTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 15.
+func (self *IUIAnimationTransitionLibrary2) CreateReversalTransition(duration float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIUIAnimationTransitionLibrary2_CreateReversalTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateCubicTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateCubicTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 16.
+func (self *IUIAnimationTransitionLibrary2) CreateCubicTransition(duration float64, finalValue float64, finalVelocity float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIUIAnimationTransitionLibrary2_CreateCubicTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(finalValue)), uintptr(math.Float64bits(finalVelocity)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateCubicVectorTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// CreateCubicVectorTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 17.
+func (self *IUIAnimationTransitionLibrary2) CreateCubicVectorTransition(duration float64, finalValue *float64, finalVelocity *float64, cDimension uint32, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIUIAnimationTransitionLibrary2_CreateCubicVectorTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(unsafe.Pointer(finalValue)), uintptr(unsafe.Pointer(finalVelocity)), uintptr(cDimension), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateSmoothStopTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateSmoothStopTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 18.
+func (self *IUIAnimationTransitionLibrary2) CreateSmoothStopTransition(maximumDuration float64, finalValue float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIUIAnimationTransitionLibrary2_CreateSmoothStopTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(maximumDuration)), uintptr(math.Float64bits(finalValue)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateParabolicTransitionFromAcceleration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateParabolicTransitionFromAcceleration dispatches through IUIAnimationTransitionLibrary2's vtable slot 19.
+func (self *IUIAnimationTransitionLibrary2) CreateParabolicTransitionFromAcceleration(finalValue float64, finalVelocity float64, acceleration float64, transition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIUIAnimationTransitionLibrary2_CreateParabolicTransitionFromAcceleration, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(finalValue)), uintptr(math.Float64bits(finalVelocity)), uintptr(math.Float64bits(acceleration)), uintptr(unsafe.Pointer(transition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateCubicBezierLinearTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateCubicBezierLinearTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 20.
+func (self *IUIAnimationTransitionLibrary2) CreateCubicBezierLinearTransition(duration float64, finalValue float64, x1 float64, y1 float64, x2 float64, y2 float64, ppTransition **IUIAnimationTransition2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIUIAnimationTransitionLibrary2_CreateCubicBezierLinearTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(math.Float64bits(finalValue)), uintptr(math.Float64bits(x1)), uintptr(math.Float64bits(y1)), uintptr(math.Float64bits(x2)), uintptr(math.Float64bits(y2)), uintptr(unsafe.Pointer(ppTransition))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationTransitionLibrary2_CreateCubicBezierLinearVectorTransition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64, win32.Word, win32.Word, win32.Float64, win32.Float64, win32.Float64, win32.Float64, win32.Word}}
+
+// CreateCubicBezierLinearVectorTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 21.
+func (self *IUIAnimationTransitionLibrary2) CreateCubicBezierLinearVectorTransition(duration float64, finalValue []float64, x1 float64, y1 float64, x2 float64, y2 float64, ppTransition **IUIAnimationTransition2) error {
+	var _finalValue *float64
+	if len(finalValue) > 0 {
+		_finalValue = &finalValue[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIUIAnimationTransitionLibrary2_CreateCubicBezierLinearVectorTransition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(duration)), uintptr(unsafe.Pointer(_finalValue)), uintptr(len(finalValue)), uintptr(math.Float64bits(x1)), uintptr(math.Float64bits(y1)), uintptr(math.Float64bits(x2)), uintptr(math.Float64bits(y2)), uintptr(unsafe.Pointer(ppTransition))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -876,6 +1414,22 @@ func (self *IUIAnimationVariable) GetPreviousIntegerValue(previousValue *int32) 
 // GetCurrentStoryboard dispatches through IUIAnimationVariable's vtable slot 9.
 func (self *IUIAnimationVariable) GetCurrentStoryboard(storyboard **IUIAnimationStoryboard) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationVariable_SetLowerBound = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetLowerBound dispatches through IUIAnimationVariable's vtable slot 10.
+func (self *IUIAnimationVariable) SetLowerBound(bound float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIUIAnimationVariable_SetLowerBound, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(bound))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationVariable_SetUpperBound = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetUpperBound dispatches through IUIAnimationVariable's vtable slot 11.
+func (self *IUIAnimationVariable) SetUpperBound(bound float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIUIAnimationVariable_SetUpperBound, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(bound))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1042,6 +1596,14 @@ func (self *IUIAnimationVariable2) GetCurrentStoryboard(storyboard **IUIAnimatio
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUIAnimationVariable2_SetLowerBound = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetLowerBound dispatches through IUIAnimationVariable2's vtable slot 19.
+func (self *IUIAnimationVariable2) SetLowerBound(bound float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIUIAnimationVariable2_SetLowerBound, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(bound))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetLowerBoundVector dispatches through IUIAnimationVariable2's vtable slot 20.
 func (self *IUIAnimationVariable2) SetLowerBoundVector(bound []float64) error {
 	var _bound *float64
@@ -1049,6 +1611,14 @@ func (self *IUIAnimationVariable2) SetLowerBoundVector(bound []float64) error {
 		_bound = &bound[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_bound)), uintptr(len(bound)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUIAnimationVariable2_SetUpperBound = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetUpperBound dispatches through IUIAnimationVariable2's vtable slot 21.
+func (self *IUIAnimationVariable2) SetUpperBound(bound float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIUIAnimationVariable2_SetUpperBound, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(bound))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1108,6 +1678,14 @@ type IUIAnimationVariableChangeHandler struct {
 
 // IID_IUIAnimationVariableChangeHandler is the interface identifier for IUIAnimationVariableChangeHandler.
 var IID_IUIAnimationVariableChangeHandler = win32.GUID{Data1: 0x6358b7ba, Data2: 0x87d2, Data3: 0x42d5, Data4: [8]byte{0xbf, 0x71, 0x82, 0xe9, 0x19, 0xdd, 0x58, 0x62}}
+
+var specIUIAnimationVariableChangeHandler_OnValueChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float64, win32.Float64}}
+
+// OnValueChanged dispatches through IUIAnimationVariableChangeHandler's vtable slot 3.
+func (self *IUIAnimationVariableChangeHandler) OnValueChanged(storyboard *IUIAnimationStoryboard, variable *IUIAnimationVariable, newValue float64, previousValue float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIUIAnimationVariableChangeHandler_OnValueChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)), uintptr(unsafe.Pointer(variable)), uintptr(math.Float64bits(newValue)), uintptr(math.Float64bits(previousValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IUIAnimationVariableChangeHandler2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationvariablechangehandler2
 // IID: 63acc8d2-6eae-4bb0-b879-586dd8cfbe42

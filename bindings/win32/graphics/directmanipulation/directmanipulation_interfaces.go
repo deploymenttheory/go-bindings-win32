@@ -5,6 +5,7 @@
 package directmanipulation
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -329,6 +330,14 @@ type IDirectManipulationPrimaryContent struct {
 // IID_IDirectManipulationPrimaryContent is the interface identifier for IDirectManipulationPrimaryContent.
 var IID_IDirectManipulationPrimaryContent = win32.GUID{Data1: 0xc12851e4, Data2: 0x1698, Data3: 0x4625, Data4: [8]byte{0xb9, 0xb1, 0x7c, 0xa3, 0xec, 0x18, 0x63, 0x0b}}
 
+var specIDirectManipulationPrimaryContent_SetSnapInterval = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// SetSnapInterval dispatches through IDirectManipulationPrimaryContent's vtable slot 3.
+func (self *IDirectManipulationPrimaryContent) SetSnapInterval(motion DIRECTMANIPULATION_MOTION_TYPES, interval float32, offset float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIDirectManipulationPrimaryContent_SetSnapInterval, nil, uintptr(unsafe.Pointer(self)), uintptr(motion), uintptr(math.Float32bits(interval)), uintptr(math.Float32bits(offset))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetSnapPoints dispatches through IDirectManipulationPrimaryContent's vtable slot 4.
 func (self *IDirectManipulationPrimaryContent) SetSnapPoints(motion DIRECTMANIPULATION_MOTION_TYPES, points []float32) error {
 	var _points *float32
@@ -342,6 +351,22 @@ func (self *IDirectManipulationPrimaryContent) SetSnapPoints(motion DIRECTMANIPU
 // SetSnapType dispatches through IDirectManipulationPrimaryContent's vtable slot 5.
 func (self *IDirectManipulationPrimaryContent) SetSnapType(motion DIRECTMANIPULATION_MOTION_TYPES, type_ DIRECTMANIPULATION_SNAPPOINT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(motion), uintptr(type_))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectManipulationPrimaryContent_SetSnapCoordinate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// SetSnapCoordinate dispatches through IDirectManipulationPrimaryContent's vtable slot 6.
+func (self *IDirectManipulationPrimaryContent) SetSnapCoordinate(motion DIRECTMANIPULATION_MOTION_TYPES, coordinate DIRECTMANIPULATION_SNAPPOINT_COORDINATE, origin float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDirectManipulationPrimaryContent_SetSnapCoordinate, nil, uintptr(unsafe.Pointer(self)), uintptr(motion), uintptr(coordinate), uintptr(math.Float32bits(origin))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectManipulationPrimaryContent_SetZoomBoundaries = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// SetZoomBoundaries dispatches through IDirectManipulationPrimaryContent's vtable slot 7.
+func (self *IDirectManipulationPrimaryContent) SetZoomBoundaries(zoomMinimum float32, zoomMaximum float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDirectManipulationPrimaryContent_SetZoomBoundaries, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(zoomMinimum)), uintptr(math.Float32bits(zoomMaximum))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -481,6 +506,15 @@ func (self *IDirectManipulationViewport) GetViewportRect(viewport *foundation.RE
 // SetViewportRect dispatches through IDirectManipulationViewport's vtable slot 12.
 func (self *IDirectManipulationViewport) SetViewportRect(viewport *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDirectManipulationViewport_ZoomToRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// ZoomToRect dispatches through IDirectManipulationViewport's vtable slot 13.
+func (self *IDirectManipulationViewport) ZoomToRect(left float32, top float32, right float32, bottom float32, animate bool) error {
+	_animate := win32.Bool32(animate)
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDirectManipulationViewport_ZoomToRect, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(left)), uintptr(math.Float32bits(top)), uintptr(math.Float32bits(right)), uintptr(math.Float32bits(bottom)), uintptr(_animate)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

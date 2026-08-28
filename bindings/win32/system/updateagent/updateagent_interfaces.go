@@ -1662,6 +1662,15 @@ func (self *IUpdateDownloader) Put_Updates(value *IUpdateCollection) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUpdateDownloader_BeginDownload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// BeginDownload dispatches through IUpdateDownloader's vtable slot 15.
+func (self *IUpdateDownloader) BeginDownload(onProgressChanged *systemcom.IUnknown, onCompleted *systemcom.IUnknown, state systemvariant.VARIANT) (*IDownloadJob, error) {
+	_retval := new(*IDownloadJob)
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIUpdateDownloader_BeginDownload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(onProgressChanged)), uintptr(unsafe.Pointer(onCompleted)), uintptr(unsafe.Pointer(&state)), uintptr(win32.OutParam(unsafe.Pointer(_retval)))).Tuple()
+	return *_retval, win32.ErrIfFailed(int32(r1))
+}
+
 // Download dispatches through IUpdateDownloader's vtable slot 16.
 func (self *IUpdateDownloader) Download() (*IDownloadResult, error) {
 	_retval := new(*IDownloadResult)
@@ -1683,6 +1692,15 @@ type IUpdateDownloaderEx struct {
 
 // IID_IUpdateDownloaderEx is the interface identifier for IUpdateDownloaderEx.
 var IID_IUpdateDownloaderEx = win32.GUID{Data1: 0x94726306, Data2: 0xf12a, Data3: 0x482a, Data4: [8]byte{0xa7, 0x74, 0xfb, 0x4f, 0x87, 0x0d, 0x98, 0xc0}}
+
+var specIUpdateDownloaderEx_BeginDownload2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// BeginDownload2 dispatches through IUpdateDownloaderEx's vtable slot 18.
+func (self *IUpdateDownloaderEx) BeginDownload2(downloadType DownloadType, onProgressChanged *systemcom.IUnknown, onCompleted *systemcom.IUnknown, state systemvariant.VARIANT) (*IDownloadJob, error) {
+	_retval := new(*IDownloadJob)
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIUpdateDownloaderEx_BeginDownload2, nil, uintptr(unsafe.Pointer(self)), uintptr(downloadType), uintptr(unsafe.Pointer(onProgressChanged)), uintptr(unsafe.Pointer(onCompleted)), uintptr(unsafe.Pointer(&state)), uintptr(win32.OutParam(unsafe.Pointer(_retval)))).Tuple()
+	return *_retval, win32.ErrIfFailed(int32(r1))
+}
 
 // Download2 dispatches through IUpdateDownloaderEx's vtable slot 19.
 func (self *IUpdateDownloaderEx) Download2(downloadType DownloadType) (*IDownloadResult, error) {
@@ -2053,6 +2071,24 @@ func (self *IUpdateInstaller) Put_Updates(value *IUpdateCollection) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIUpdateInstaller_BeginInstall = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// BeginInstall dispatches through IUpdateInstaller's vtable slot 17.
+func (self *IUpdateInstaller) BeginInstall(onProgressChanged *systemcom.IUnknown, onCompleted *systemcom.IUnknown, state systemvariant.VARIANT) (*IInstallationJob, error) {
+	_retval := new(*IInstallationJob)
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIUpdateInstaller_BeginInstall, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(onProgressChanged)), uintptr(unsafe.Pointer(onCompleted)), uintptr(unsafe.Pointer(&state)), uintptr(win32.OutParam(unsafe.Pointer(_retval)))).Tuple()
+	return *_retval, win32.ErrIfFailed(int32(r1))
+}
+
+var specIUpdateInstaller_BeginUninstall = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// BeginUninstall dispatches through IUpdateInstaller's vtable slot 18.
+func (self *IUpdateInstaller) BeginUninstall(onProgressChanged *systemcom.IUnknown, onCompleted *systemcom.IUnknown, state systemvariant.VARIANT) (*IInstallationJob, error) {
+	_retval := new(*IInstallationJob)
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIUpdateInstaller_BeginUninstall, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(onProgressChanged)), uintptr(unsafe.Pointer(onCompleted)), uintptr(unsafe.Pointer(&state)), uintptr(win32.OutParam(unsafe.Pointer(_retval)))).Tuple()
+	return *_retval, win32.ErrIfFailed(int32(r1))
+}
+
 // EndInstall dispatches through IUpdateInstaller's vtable slot 19.
 func (self *IUpdateInstaller) EndInstall(value *IInstallationJob) (*IInstallationResult, error) {
 	_retval := new(*IInstallationResult)
@@ -2248,6 +2284,15 @@ func (self *IUpdateSearcher) Get_ServerSelection() (ServerSelection, error) {
 func (self *IUpdateSearcher) Put_ServerSelection(value ServerSelection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(value))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIUpdateSearcher_BeginSearch = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// BeginSearch dispatches through IUpdateSearcher's vtable slot 15.
+func (self *IUpdateSearcher) BeginSearch(criteria foundation.BSTR, onCompleted *systemcom.IUnknown, state systemvariant.VARIANT) (*ISearchJob, error) {
+	_retval := new(*ISearchJob)
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIUpdateSearcher_BeginSearch, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(criteria)), uintptr(unsafe.Pointer(onCompleted)), uintptr(unsafe.Pointer(&state)), uintptr(win32.OutParam(unsafe.Pointer(_retval)))).Tuple()
+	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
 // EndSearch dispatches through IUpdateSearcher's vtable slot 16.
@@ -2547,6 +2592,14 @@ func (self *IUpdateServiceManager) AddScanPackageService(serviceName foundation.
 	_ppService := new(*IUpdateService)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)), uintptr(unsafe.Pointer(scanFileLocation)), uintptr(flags), uintptr(win32.OutParam(unsafe.Pointer(_ppService))))
 	return *_ppService, win32.ErrIfFailed(int32(r1))
+}
+
+var specIUpdateServiceManager_SetOption = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetOption dispatches through IUpdateServiceManager's vtable slot 13.
+func (self *IUpdateServiceManager) SetOption(optionName foundation.BSTR, optionValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIUpdateServiceManager_SetOption, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(optionName)), uintptr(unsafe.Pointer(&optionValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IUpdateServiceManager2: https://learn.microsoft.com/windows/win32/api/wuapi/nn-wuapi-iupdateservicemanager2
@@ -3095,3 +3148,12 @@ type IWindowsUpdateAgentInfo struct {
 
 // IID_IWindowsUpdateAgentInfo is the interface identifier for IWindowsUpdateAgentInfo.
 var IID_IWindowsUpdateAgentInfo = win32.GUID{Data1: 0x85713fa1, Data2: 0x7796, Data3: 0x4fa2, Data4: [8]byte{0xbe, 0x3b, 0xe2, 0xd6, 0x12, 0x4d, 0xd3, 0x73}}
+
+var specIWindowsUpdateAgentInfo_GetInfo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetInfo dispatches through IWindowsUpdateAgentInfo's vtable slot 7.
+func (self *IWindowsUpdateAgentInfo) GetInfo(varInfoIdentifier systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_retval := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIWindowsUpdateAgentInfo_GetInfo, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varInfoIdentifier)), uintptr(win32.OutParam(unsafe.Pointer(_retval)))).Tuple()
+	return *_retval, win32.ErrIfFailed(int32(r1))
+}

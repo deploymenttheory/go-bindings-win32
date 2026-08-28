@@ -1639,6 +1639,14 @@ func (self *IGPMMigrationTable) Save(bstrMigrationTablePath foundation.BSTR) err
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIGPMMigrationTable_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Add dispatches through IGPMMigrationTable's vtable slot 8.
+func (self *IGPMMigrationTable) Add(lFlags int32, var_ systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIGPMMigrationTable_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(&var_))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddEntry dispatches through IGPMMigrationTable's vtable slot 9.
 func (self *IGPMMigrationTable) AddEntry(bstrSource foundation.BSTR, gpmEntryType GPMEntryType, pvarDestination *systemvariant.VARIANT) (*IGPMMapEntry, error) {
 	_ppEntry := new(*IGPMMapEntry)
@@ -1851,11 +1859,27 @@ func (self *IGPMRSOP) Get_PlanningUserSOM() (foundation.BSTR, error) {
 	return *_bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
+var specIGPMRSOP_Put_PlanningUserWMIFilters = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PlanningUserWMIFilters dispatches through IGPMRSOP's vtable slot 25.
+func (self *IGPMRSOP) Put_PlanningUserWMIFilters(varVal systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIGPMRSOP_Put_PlanningUserWMIFilters, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PlanningUserWMIFilters dispatches through IGPMRSOP's vtable slot 26.
 func (self *IGPMRSOP) Get_PlanningUserWMIFilters() (systemvariant.VARIANT, error) {
 	_varVal := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_varVal))))
 	return *_varVal, win32.ErrIfFailed(int32(r1))
+}
+
+var specIGPMRSOP_Put_PlanningUserSecurityGroups = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PlanningUserSecurityGroups dispatches through IGPMRSOP's vtable slot 27.
+func (self *IGPMRSOP) Put_PlanningUserSecurityGroups(varVal systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIGPMRSOP_Put_PlanningUserSecurityGroups, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningUserSecurityGroups dispatches through IGPMRSOP's vtable slot 28.
@@ -1891,11 +1915,27 @@ func (self *IGPMRSOP) Get_PlanningComputerSOM() (foundation.BSTR, error) {
 	return *_bstrVal, win32.ErrIfFailed(int32(r1))
 }
 
+var specIGPMRSOP_Put_PlanningComputerWMIFilters = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PlanningComputerWMIFilters dispatches through IGPMRSOP's vtable slot 33.
+func (self *IGPMRSOP) Put_PlanningComputerWMIFilters(varVal systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIGPMRSOP_Put_PlanningComputerWMIFilters, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PlanningComputerWMIFilters dispatches through IGPMRSOP's vtable slot 34.
 func (self *IGPMRSOP) Get_PlanningComputerWMIFilters() (systemvariant.VARIANT, error) {
 	_varVal := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_varVal))))
 	return *_varVal, win32.ErrIfFailed(int32(r1))
+}
+
+var specIGPMRSOP_Put_PlanningComputerSecurityGroups = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_PlanningComputerSecurityGroups dispatches through IGPMRSOP's vtable slot 35.
+func (self *IGPMRSOP) Put_PlanningComputerSecurityGroups(varVal systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIGPMRSOP_Put_PlanningComputerSecurityGroups, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varVal))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PlanningComputerSecurityGroups dispatches through IGPMRSOP's vtable slot 36.
@@ -2082,6 +2122,14 @@ type IGPMSearchCriteria struct {
 
 // IID_IGPMSearchCriteria is the interface identifier for IGPMSearchCriteria.
 var IID_IGPMSearchCriteria = win32.GUID{Data1: 0xd6f11c42, Data2: 0x829b, Data3: 0x48d4, Data4: [8]byte{0x83, 0xf5, 0x36, 0x15, 0xb6, 0x7d, 0xfc, 0x22}}
+
+var specIGPMSearchCriteria_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Add dispatches through IGPMSearchCriteria's vtable slot 7.
+func (self *IGPMSearchCriteria) Add(searchProperty GPMSearchProperty, searchOperation GPMSearchOperation, varValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIGPMSearchCriteria_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(searchProperty), uintptr(searchOperation), uintptr(unsafe.Pointer(&varValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IGPMSecurityInfo: https://learn.microsoft.com/windows/win32/api/gpmgmt/nn-gpmgmt-igpmsecurityinfo
 // IID: b6c31ed4-1c93-4d3e-ae84-eb6d61161b60

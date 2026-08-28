@@ -32,6 +32,9 @@ var Procs = struct {
 {{end}}
 
 {{define "function"}}
+{{- if .SpecDecl}}{{.SpecDecl}}
+
+{{end -}}
 {{- range .CommentLines}}// {{.}}
 {{end -}}
 func {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
@@ -39,51 +42,63 @@ func {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
 	{{.}}
 {{- end}}
 {{- if eq .ReturnKind 0}}
-	syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	{{.CallExpr}}
 {{- else if eq .ReturnKind 1}}
-	r1, _, e1 := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	r1, _, e1 := {{.CallExpr}}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 {{- else if eq .ReturnKind 2}}
-	r1, _, e1 := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	r1, _, e1 := {{.CallExpr}}
 	ret := {{.RetExpr}}
 	if {{join .FailureChecks " || "}} {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
 {{- else if eq .ReturnKind 3}}
-	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	r1, _, _ := {{.CallExpr}}
 	return {{.RetExpr}}
 {{- else if eq .ReturnKind 4}}
-	r1, _, e1 := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	r1, _, e1 := {{.CallExpr}}
 	if e1 != 0 {
 		return {{.RetExpr}}, e1
 	}
 	return {{.RetExpr}}, nil
 {{- else if eq .ReturnKind 5}}
-	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	r1, _, _ := {{.CallExpr}}
 	return win32.ErrIfFailed(int32(r1))
 {{- else if eq .ReturnKind 6}}
-	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	r1, _, _ := {{.CallExpr}}
 	return r1 != 0
 {{- else if eq .ReturnKind 7}}
-	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	r1, _, _ := {{.CallExpr}}
 	return {{range .ReturnValues}}{{.}}, {{end}}win32.ErrIfFailed(int32(r1))
 {{- else if eq .ReturnKind 8}}
-	r1, _, e1 := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	r1, _, e1 := {{.CallExpr}}
 	if r1 == 0 {
 		return {{range .ReturnValues}}{{.}}, {{end}}win32.LastError(e1)
 	}
 	return {{range .ReturnValues}}{{.}}, {{end}}nil
 {{- else if eq .ReturnKind 9}}
-	syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	{{.CallExpr}}
 	return {{join .ReturnValues ", "}}
 {{- else if eq .ReturnKind 10}}
-	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	r1, _, _ := {{.CallExpr}}
 	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 {{- else if eq .ReturnKind 11}}
+	return {{.RetExpr}}
+{{- else if eq .ReturnKind 12}}
+	{{.CallExpr}}
+	return {{.RetExpr}}
+{{- else if eq .ReturnKind 13}}
+	_, _, e1 := {{.CallExpr}}
+	if e1 != 0 {
+		return {{.RetExpr}}, e1
+	}
+	return {{.RetExpr}}, nil
+{{- else if eq .ReturnKind 14}}
+	r := {{.CallExpr}}
 	return {{.RetExpr}}
 {{- end}}
 }

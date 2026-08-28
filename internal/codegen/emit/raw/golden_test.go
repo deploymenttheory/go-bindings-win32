@@ -325,6 +325,9 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 			function("FpairParam", testDLL, native("Void"), param("p", apiRef(shapes, "FPAIR", "Struct"), in)),
 			function("FloatParam", testDLL, native("Void"), param("f", native("Single"), in)),
 			function("FloatReturn", testDLL, native("Double")),
+			withLastError(function("FloatReturnLastErr", testDLL, native("Single"))),
+			function("GuidParam", testDLL, native("Void"), param("id", native("Guid"), in), param("scale", native("Double"), in)),
+			withLastError(function("BigReturnLastErr", testDLL, apiRef(shapes, "BIG", "Struct"))),
 			function("StructReturn", testDLL, smallRef),
 			withLastError(function("StructReturnLastErr", testDLL, smallRef)),
 			function("FpairReturn", testDLL, apiRef(shapes, "FPAIR", "Struct")),
@@ -357,6 +360,8 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 					method("Plain", native("Void")),
 					method("GetChild", hresultType(), param("child", pointerTo(apiRef(shapes, "ITest", "Com")), retval)),
 					method("GetBig", apiRef(shapes, "BIG", "Struct"), param("index", native("UInt32"), in)),
+					method("GetRatio", native("Single")),
+					method("Draw", hresultType(), param("from", apiRef(shapes, "FPAIR", "Struct"), in), param("width", native("Single"), in)),
 				},
 			},
 			"ITest2": {

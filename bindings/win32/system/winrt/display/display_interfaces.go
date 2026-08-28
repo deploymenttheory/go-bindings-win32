@@ -30,6 +30,14 @@ func (self *IDisplayDeviceInterop) CreateSharedHandle(pObject *systemwinrt.IInsp
 	return *_pHandle, win32.ErrIfFailed(int32(r1))
 }
 
+var specIDisplayDeviceInterop_OpenSharedHandle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// OpenSharedHandle dispatches through IDisplayDeviceInterop's vtable slot 4.
+func (self *IDisplayDeviceInterop) OpenSharedHandle(NTHandle foundation.HANDLE, riid win32.GUID, ppvObj *unsafe.Pointer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIDisplayDeviceInterop_OpenSharedHandle, nil, uintptr(unsafe.Pointer(self)), uintptr(NTHandle), uintptr(unsafe.Pointer(&riid)), uintptr(unsafe.Pointer(ppvObj))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: a6ba4205-e59e-4e71-b25b-4e436d21ee3d
 type IDisplayPathInterop struct {
 	systemcom.IUnknown

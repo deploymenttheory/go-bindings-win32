@@ -19,14 +19,21 @@ var (
 )
 
 var (
+	procEapHostPeerConfigBlob2Xml                          = modeappcfg.NewProc("EapHostPeerConfigBlob2Xml")
 	procEapHostPeerConfigXml2Blob                          = modeappcfg.NewProc("EapHostPeerConfigXml2Blob")
 	procEapHostPeerCredentialsXml2Blob                     = modeappcfg.NewProc("EapHostPeerCredentialsXml2Blob")
 	procEapHostPeerFreeErrorMemory                         = modeappcfg.NewProc("EapHostPeerFreeErrorMemory")
 	procEapHostPeerFreeMemory                              = modeappcfg.NewProc("EapHostPeerFreeMemory")
+	procEapHostPeerGetMethodProperties                     = modeappcfg.NewProc("EapHostPeerGetMethodProperties")
 	procEapHostPeerGetMethods                              = modeappcfg.NewProc("EapHostPeerGetMethods")
+	procEapHostPeerInvokeConfigUI                          = modeappcfg.NewProc("EapHostPeerInvokeConfigUI")
+	procEapHostPeerInvokeIdentityUI                        = modeappcfg.NewProc("EapHostPeerInvokeIdentityUI")
 	procEapHostPeerInvokeInteractiveUI                     = modeappcfg.NewProc("EapHostPeerInvokeInteractiveUI")
+	procEapHostPeerQueryCredentialInputFields              = modeappcfg.NewProc("EapHostPeerQueryCredentialInputFields")
 	procEapHostPeerQueryInteractiveUIInputFields           = modeappcfg.NewProc("EapHostPeerQueryInteractiveUIInputFields")
 	procEapHostPeerQueryUIBlobFromInteractiveUIInputFields = modeappcfg.NewProc("EapHostPeerQueryUIBlobFromInteractiveUIInputFields")
+	procEapHostPeerQueryUserBlobFromCredentialInputFields  = modeappcfg.NewProc("EapHostPeerQueryUserBlobFromCredentialInputFields")
+	procEapHostPeerBeginSession                            = modeappprxy.NewProc("EapHostPeerBeginSession")
 	procEapHostPeerClearConnection                         = modeappprxy.NewProc("EapHostPeerClearConnection")
 	procEapHostPeerEndSession                              = modeappprxy.NewProc("EapHostPeerEndSession")
 	procEapHostPeerFreeEapError                            = modeappprxy.NewProc("EapHostPeerFreeEapError")
@@ -34,6 +41,7 @@ var (
 	procEapHostPeerGetAuthStatus                           = modeappprxy.NewProc("EapHostPeerGetAuthStatus")
 	procEapHostPeerGetDataToUnplumbCredentials             = modeappprxy.NewProc("EapHostPeerGetDataToUnplumbCredentials")
 	procEapHostPeerGetEncryptedPassword                    = modeappprxy.NewProc("EapHostPeerGetEncryptedPassword")
+	procEapHostPeerGetIdentity                             = modeappprxy.NewProc("EapHostPeerGetIdentity")
 	procEapHostPeerGetResponseAttributes                   = modeappprxy.NewProc("EapHostPeerGetResponseAttributes")
 	procEapHostPeerGetResult                               = modeappprxy.NewProc("EapHostPeerGetResult")
 	procEapHostPeerGetSendPacket                           = modeappprxy.NewProc("EapHostPeerGetSendPacket")
@@ -50,7 +58,9 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
+	EapHostPeerBeginSession                            *win32.Proc
 	EapHostPeerClearConnection                         *win32.Proc
+	EapHostPeerConfigBlob2Xml                          *win32.Proc
 	EapHostPeerConfigXml2Blob                          *win32.Proc
 	EapHostPeerCredentialsXml2Blob                     *win32.Proc
 	EapHostPeerEndSession                              *win32.Proc
@@ -61,21 +71,29 @@ var Procs = struct {
 	EapHostPeerGetAuthStatus                           *win32.Proc
 	EapHostPeerGetDataToUnplumbCredentials             *win32.Proc
 	EapHostPeerGetEncryptedPassword                    *win32.Proc
+	EapHostPeerGetIdentity                             *win32.Proc
+	EapHostPeerGetMethodProperties                     *win32.Proc
 	EapHostPeerGetMethods                              *win32.Proc
 	EapHostPeerGetResponseAttributes                   *win32.Proc
 	EapHostPeerGetResult                               *win32.Proc
 	EapHostPeerGetSendPacket                           *win32.Proc
 	EapHostPeerGetUIContext                            *win32.Proc
 	EapHostPeerInitialize                              *win32.Proc
+	EapHostPeerInvokeConfigUI                          *win32.Proc
+	EapHostPeerInvokeIdentityUI                        *win32.Proc
 	EapHostPeerInvokeInteractiveUI                     *win32.Proc
 	EapHostPeerProcessReceivedPacket                   *win32.Proc
+	EapHostPeerQueryCredentialInputFields              *win32.Proc
 	EapHostPeerQueryInteractiveUIInputFields           *win32.Proc
 	EapHostPeerQueryUIBlobFromInteractiveUIInputFields *win32.Proc
+	EapHostPeerQueryUserBlobFromCredentialInputFields  *win32.Proc
 	EapHostPeerSetResponseAttributes                   *win32.Proc
 	EapHostPeerSetUIContext                            *win32.Proc
 	EapHostPeerUninitialize                            *win32.Proc
 }{
+	EapHostPeerBeginSession:                            procEapHostPeerBeginSession,
 	EapHostPeerClearConnection:                         procEapHostPeerClearConnection,
+	EapHostPeerConfigBlob2Xml:                          procEapHostPeerConfigBlob2Xml,
 	EapHostPeerConfigXml2Blob:                          procEapHostPeerConfigXml2Blob,
 	EapHostPeerCredentialsXml2Blob:                     procEapHostPeerCredentialsXml2Blob,
 	EapHostPeerEndSession:                              procEapHostPeerEndSession,
@@ -86,19 +104,43 @@ var Procs = struct {
 	EapHostPeerGetAuthStatus:                           procEapHostPeerGetAuthStatus,
 	EapHostPeerGetDataToUnplumbCredentials:             procEapHostPeerGetDataToUnplumbCredentials,
 	EapHostPeerGetEncryptedPassword:                    procEapHostPeerGetEncryptedPassword,
+	EapHostPeerGetIdentity:                             procEapHostPeerGetIdentity,
+	EapHostPeerGetMethodProperties:                     procEapHostPeerGetMethodProperties,
 	EapHostPeerGetMethods:                              procEapHostPeerGetMethods,
 	EapHostPeerGetResponseAttributes:                   procEapHostPeerGetResponseAttributes,
 	EapHostPeerGetResult:                               procEapHostPeerGetResult,
 	EapHostPeerGetSendPacket:                           procEapHostPeerGetSendPacket,
 	EapHostPeerGetUIContext:                            procEapHostPeerGetUIContext,
 	EapHostPeerInitialize:                              procEapHostPeerInitialize,
+	EapHostPeerInvokeConfigUI:                          procEapHostPeerInvokeConfigUI,
+	EapHostPeerInvokeIdentityUI:                        procEapHostPeerInvokeIdentityUI,
 	EapHostPeerInvokeInteractiveUI:                     procEapHostPeerInvokeInteractiveUI,
 	EapHostPeerProcessReceivedPacket:                   procEapHostPeerProcessReceivedPacket,
+	EapHostPeerQueryCredentialInputFields:              procEapHostPeerQueryCredentialInputFields,
 	EapHostPeerQueryInteractiveUIInputFields:           procEapHostPeerQueryInteractiveUIInputFields,
 	EapHostPeerQueryUIBlobFromInteractiveUIInputFields: procEapHostPeerQueryUIBlobFromInteractiveUIInputFields,
+	EapHostPeerQueryUserBlobFromCredentialInputFields:  procEapHostPeerQueryUserBlobFromCredentialInputFields,
 	EapHostPeerSetResponseAttributes:                   procEapHostPeerSetResponseAttributes,
 	EapHostPeerSetUIContext:                            procEapHostPeerSetUIContext,
 	EapHostPeerUninitialize:                            procEapHostPeerUninitialize,
+}
+
+var specEapHostPeerBeginSession = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// EapHostPeerBeginSession calls eappprxy!EapHostPeerBeginSession.
+// https://learn.microsoft.com/windows/win32/api/eappapis/nf-eappapis-eaphostpeerbeginsession
+// Minimum OS: windows6.0.6000.
+func EapHostPeerBeginSession(dwFlags uint32, eapType EAP_METHOD_TYPE, pAttributeArray *EAP_ATTRIBUTES, hTokenImpersonateUser foundation.HANDLE, pConnectionData []byte, pUserData []byte, dwMaxSendPacketSize uint32, pConnectionId *win32.GUID, func_ NotificationHandler, pContextData unsafe.Pointer, pSessionId *uint32, ppEapError **EAP_ERROR) uint32 {
+	var _pConnectionData *byte
+	if len(pConnectionData) > 0 {
+		_pConnectionData = &pConnectionData[0]
+	}
+	var _pUserData *byte
+	if len(pUserData) > 0 {
+		_pUserData = &pUserData[0]
+	}
+	r1, _, _ := win32.Call(procEapHostPeerBeginSession.Addr(), specEapHostPeerBeginSession, nil, uintptr(dwFlags), uintptr(unsafe.Pointer(&eapType)), uintptr(unsafe.Pointer(pAttributeArray)), uintptr(hTokenImpersonateUser), uintptr(len(pConnectionData)), uintptr(unsafe.Pointer(_pConnectionData)), uintptr(len(pUserData)), uintptr(unsafe.Pointer(_pUserData)), uintptr(dwMaxSendPacketSize), uintptr(unsafe.Pointer(pConnectionId)), uintptr(func_), uintptr(unsafe.Pointer(pContextData)), uintptr(unsafe.Pointer(pSessionId)), uintptr(unsafe.Pointer(ppEapError))).Tuple()
+	return uint32(r1)
 }
 
 // EapHostPeerClearConnection calls eappprxy!EapHostPeerClearConnection.
@@ -106,6 +148,20 @@ var Procs = struct {
 // Minimum OS: windows6.0.6000.
 func EapHostPeerClearConnection(pConnectionId *win32.GUID, ppEapError **EAP_ERROR) uint32 {
 	r1, _, _ := syscall.SyscallN(procEapHostPeerClearConnection.Addr(), uintptr(unsafe.Pointer(pConnectionId)), uintptr(unsafe.Pointer(ppEapError)))
+	return uint32(r1)
+}
+
+var specEapHostPeerConfigBlob2Xml = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// EapHostPeerConfigBlob2Xml calls eappcfg!EapHostPeerConfigBlob2Xml.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerconfigblob2xml
+// Minimum OS: windows6.0.6000.
+func EapHostPeerConfigBlob2Xml(dwFlags uint32, eapMethodType EAP_METHOD_TYPE, pConfigIn []byte, ppConfigDoc **dataxmlmsxml.IXMLDOMDocument2, ppEapError **EAP_ERROR) uint32 {
+	var _pConfigIn *byte
+	if len(pConfigIn) > 0 {
+		_pConfigIn = &pConfigIn[0]
+	}
+	r1, _, _ := win32.Call(procEapHostPeerConfigBlob2Xml.Addr(), specEapHostPeerConfigBlob2Xml, nil, uintptr(dwFlags), uintptr(unsafe.Pointer(&eapMethodType)), uintptr(len(pConfigIn)), uintptr(unsafe.Pointer(_pConfigIn)), uintptr(unsafe.Pointer(ppConfigDoc)), uintptr(unsafe.Pointer(ppEapError))).Tuple()
 	return uint32(r1)
 }
 
@@ -188,6 +244,42 @@ func EapHostPeerGetEncryptedPassword(dwSizeofPassword uint32, szPassword string,
 	return uint32(r1)
 }
 
+var specEapHostPeerGetIdentity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// EapHostPeerGetIdentity calls eappprxy!EapHostPeerGetIdentity.
+// https://learn.microsoft.com/windows/win32/api/eappapis/nf-eappapis-eaphostpeergetidentity
+// Minimum OS: windows6.0.6000.
+func EapHostPeerGetIdentity(dwVersion uint32, dwFlags uint32, eapMethodType EAP_METHOD_TYPE, pConnectionData []byte, pUserData []byte, hTokenImpersonateUser foundation.HANDLE, pfInvokeUI *foundation.BOOL, pdwSizeOfUserDataOut *uint32, ppUserDataOut **byte, ppwszIdentity *foundation.PWSTR, ppEapError **EAP_ERROR, ppvReserved **byte) uint32 {
+	var _pConnectionData *byte
+	if len(pConnectionData) > 0 {
+		_pConnectionData = &pConnectionData[0]
+	}
+	var _pUserData *byte
+	if len(pUserData) > 0 {
+		_pUserData = &pUserData[0]
+	}
+	r1, _, _ := win32.Call(procEapHostPeerGetIdentity.Addr(), specEapHostPeerGetIdentity, nil, uintptr(dwVersion), uintptr(dwFlags), uintptr(unsafe.Pointer(&eapMethodType)), uintptr(len(pConnectionData)), uintptr(unsafe.Pointer(_pConnectionData)), uintptr(len(pUserData)), uintptr(unsafe.Pointer(_pUserData)), uintptr(hTokenImpersonateUser), uintptr(unsafe.Pointer(pfInvokeUI)), uintptr(unsafe.Pointer(pdwSizeOfUserDataOut)), uintptr(unsafe.Pointer(ppUserDataOut)), uintptr(unsafe.Pointer(ppwszIdentity)), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(ppvReserved))).Tuple()
+	return uint32(r1)
+}
+
+var specEapHostPeerGetMethodProperties = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// EapHostPeerGetMethodProperties calls eappcfg!EapHostPeerGetMethodProperties.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeergetmethodproperties
+// Minimum OS: windows6.1.
+func EapHostPeerGetMethodProperties(dwVersion uint32, dwFlags uint32, eapMethodType EAP_METHOD_TYPE, hUserImpersonationToken foundation.HANDLE, pbEapConnData []byte, pbUserData []byte, pMethodPropertyArray *EAP_METHOD_PROPERTY_ARRAY, ppEapError **EAP_ERROR) uint32 {
+	var _pbEapConnData *byte
+	if len(pbEapConnData) > 0 {
+		_pbEapConnData = &pbEapConnData[0]
+	}
+	var _pbUserData *byte
+	if len(pbUserData) > 0 {
+		_pbUserData = &pbUserData[0]
+	}
+	r1, _, _ := win32.Call(procEapHostPeerGetMethodProperties.Addr(), specEapHostPeerGetMethodProperties, nil, uintptr(dwVersion), uintptr(dwFlags), uintptr(unsafe.Pointer(&eapMethodType)), uintptr(hUserImpersonationToken), uintptr(len(pbEapConnData)), uintptr(unsafe.Pointer(_pbEapConnData)), uintptr(len(pbUserData)), uintptr(unsafe.Pointer(_pbUserData)), uintptr(unsafe.Pointer(pMethodPropertyArray)), uintptr(unsafe.Pointer(ppEapError))).Tuple()
+	return uint32(r1)
+}
+
 // EapHostPeerGetMethods calls eappcfg!EapHostPeerGetMethods.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeergetmethods
 // Minimum OS: windows6.0.6000.
@@ -236,6 +328,38 @@ func EapHostPeerInitialize() uint32 {
 	return uint32(r1)
 }
 
+var specEapHostPeerInvokeConfigUI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// EapHostPeerInvokeConfigUI calls eappcfg!EapHostPeerInvokeConfigUI.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerinvokeconfigui
+// Minimum OS: windows6.0.6000.
+func EapHostPeerInvokeConfigUI(hwndParent foundation.HWND, dwFlags uint32, eapMethodType EAP_METHOD_TYPE, pConfigIn []byte, pdwSizeOfConfigOut *uint32, ppConfigOut **byte, ppEapError **EAP_ERROR) uint32 {
+	var _pConfigIn *byte
+	if len(pConfigIn) > 0 {
+		_pConfigIn = &pConfigIn[0]
+	}
+	r1, _, _ := win32.Call(procEapHostPeerInvokeConfigUI.Addr(), specEapHostPeerInvokeConfigUI, nil, uintptr(hwndParent), uintptr(dwFlags), uintptr(unsafe.Pointer(&eapMethodType)), uintptr(len(pConfigIn)), uintptr(unsafe.Pointer(_pConfigIn)), uintptr(unsafe.Pointer(pdwSizeOfConfigOut)), uintptr(unsafe.Pointer(ppConfigOut)), uintptr(unsafe.Pointer(ppEapError))).Tuple()
+	return uint32(r1)
+}
+
+var specEapHostPeerInvokeIdentityUI = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// EapHostPeerInvokeIdentityUI calls eappcfg!EapHostPeerInvokeIdentityUI.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerinvokeidentityui
+// Minimum OS: windows6.0.6000.
+func EapHostPeerInvokeIdentityUI(dwVersion uint32, eapMethodType EAP_METHOD_TYPE, dwFlags uint32, hwndParent foundation.HWND, pConnectionData []byte, pUserData []byte, pdwSizeOfUserDataOut *uint32, ppUserDataOut **byte, ppwszIdentity *foundation.PWSTR, ppEapError **EAP_ERROR, ppvReserved *unsafe.Pointer) uint32 {
+	var _pConnectionData *byte
+	if len(pConnectionData) > 0 {
+		_pConnectionData = &pConnectionData[0]
+	}
+	var _pUserData *byte
+	if len(pUserData) > 0 {
+		_pUserData = &pUserData[0]
+	}
+	r1, _, _ := win32.Call(procEapHostPeerInvokeIdentityUI.Addr(), specEapHostPeerInvokeIdentityUI, nil, uintptr(dwVersion), uintptr(unsafe.Pointer(&eapMethodType)), uintptr(dwFlags), uintptr(hwndParent), uintptr(len(pConnectionData)), uintptr(unsafe.Pointer(_pConnectionData)), uintptr(len(pUserData)), uintptr(unsafe.Pointer(_pUserData)), uintptr(unsafe.Pointer(pdwSizeOfUserDataOut)), uintptr(unsafe.Pointer(ppUserDataOut)), uintptr(unsafe.Pointer(ppwszIdentity)), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(ppvReserved))).Tuple()
+	return uint32(r1)
+}
+
 // EapHostPeerInvokeInteractiveUI calls eappcfg!EapHostPeerInvokeInteractiveUI.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerinvokeinteractiveui
 // Minimum OS: windows6.0.6000.
@@ -260,6 +384,20 @@ func EapHostPeerProcessReceivedPacket(sessionHandle uint32, pReceivePacket []byt
 	return uint32(r1)
 }
 
+var specEapHostPeerQueryCredentialInputFields = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// EapHostPeerQueryCredentialInputFields calls eappcfg!EapHostPeerQueryCredentialInputFields.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerquerycredentialinputfields
+// Minimum OS: windows6.0.6000.
+func EapHostPeerQueryCredentialInputFields(hUserImpersonationToken foundation.HANDLE, eapMethodType EAP_METHOD_TYPE, dwFlags uint32, pbEapConnData []byte, pEapConfigInputFieldArray *EAP_CONFIG_INPUT_FIELD_ARRAY, ppEapError **EAP_ERROR) uint32 {
+	var _pbEapConnData *byte
+	if len(pbEapConnData) > 0 {
+		_pbEapConnData = &pbEapConnData[0]
+	}
+	r1, _, _ := win32.Call(procEapHostPeerQueryCredentialInputFields.Addr(), specEapHostPeerQueryCredentialInputFields, nil, uintptr(hUserImpersonationToken), uintptr(unsafe.Pointer(&eapMethodType)), uintptr(dwFlags), uintptr(len(pbEapConnData)), uintptr(unsafe.Pointer(_pbEapConnData)), uintptr(unsafe.Pointer(pEapConfigInputFieldArray)), uintptr(unsafe.Pointer(ppEapError))).Tuple()
+	return uint32(r1)
+}
+
 // EapHostPeerQueryInteractiveUIInputFields calls eappcfg!EapHostPeerQueryInteractiveUIInputFields.
 // https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerqueryinteractiveuiinputfields
 // Minimum OS: windows6.0.6000.
@@ -281,6 +419,20 @@ func EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion uint32, dwFlag
 		_pUIContextData = &pUIContextData[0]
 	}
 	r1, _, _ := syscall.SyscallN(procEapHostPeerQueryUIBlobFromInteractiveUIInputFields.Addr(), uintptr(dwVersion), uintptr(dwFlags), uintptr(len(pUIContextData)), uintptr(unsafe.Pointer(_pUIContextData)), uintptr(unsafe.Pointer(pEapInteractiveUIData)), uintptr(unsafe.Pointer(pdwSizeOfDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppDataFromInteractiveUI)), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(ppvReserved)))
+	return uint32(r1)
+}
+
+var specEapHostPeerQueryUserBlobFromCredentialInputFields = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// EapHostPeerQueryUserBlobFromCredentialInputFields calls eappcfg!EapHostPeerQueryUserBlobFromCredentialInputFields.
+// https://learn.microsoft.com/windows/win32/api/eaphostpeerconfigapis/nf-eaphostpeerconfigapis-eaphostpeerqueryuserblobfromcredentialinputfields
+// Minimum OS: windows6.0.6000.
+func EapHostPeerQueryUserBlobFromCredentialInputFields(hUserImpersonationToken foundation.HANDLE, eapMethodType EAP_METHOD_TYPE, dwFlags uint32, pbEapConnData []byte, pEapConfigInputFieldArray *EAP_CONFIG_INPUT_FIELD_ARRAY, pdwUserBlobSize *uint32, ppbUserBlob **byte, ppEapError **EAP_ERROR) uint32 {
+	var _pbEapConnData *byte
+	if len(pbEapConnData) > 0 {
+		_pbEapConnData = &pbEapConnData[0]
+	}
+	r1, _, _ := win32.Call(procEapHostPeerQueryUserBlobFromCredentialInputFields.Addr(), specEapHostPeerQueryUserBlobFromCredentialInputFields, nil, uintptr(hUserImpersonationToken), uintptr(unsafe.Pointer(&eapMethodType)), uintptr(dwFlags), uintptr(len(pbEapConnData)), uintptr(unsafe.Pointer(_pbEapConnData)), uintptr(unsafe.Pointer(pEapConfigInputFieldArray)), uintptr(unsafe.Pointer(pdwUserBlobSize)), uintptr(unsafe.Pointer(ppbUserBlob)), uintptr(unsafe.Pointer(ppEapError))).Tuple()
 	return uint32(r1)
 }
 

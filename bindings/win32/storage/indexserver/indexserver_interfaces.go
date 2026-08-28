@@ -5,6 +5,7 @@
 package indexserver
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -51,6 +52,14 @@ func (self *IFilter) GetValue(ppPropValue **systemcomstructuredstorage.PROPVARIA
 	return int32(r1)
 }
 
+var specIFilter_BindRegion = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(12, 4, 0, false), win32.Word, win32.Word}}
+
+// BindRegion dispatches through IFilter's vtable slot 7.
+func (self *IFilter) BindRegion(origPos FILTERREGION, riid *win32.GUID, ppunk **win32.IUnknown) int32 {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIFilter_BindRegion, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&origPos)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppunk))).Tuple()
+	return int32(r1)
+}
+
 // IPhraseSink: https://learn.microsoft.com/windows/win32/api/indexsrv/nn-indexsrv-iphrasesink
 // IID: cc906ff0-c058-101a-b554-08002b33b0e6
 type IPhraseSink struct {
@@ -86,5 +95,17 @@ var IID_IPixelFilter = win32.GUID{Data1: 0x3d7df9a7, Data2: 0x8da6, Data3: 0x4fb
 // GetImageInfo dispatches through IPixelFilter's vtable slot 8.
 func (self *IPixelFilter) GetImageInfo(imageInfo *IMAGE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageInfo)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPixelFilter_GetPixelsForImage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// GetPixelsForImage dispatches through IPixelFilter's vtable slot 9.
+func (self *IPixelFilter) GetPixelsForImage(scalingFactor float32, sourceRect *foundation.RECT, pixelBuffer []byte) error {
+	var _pixelBuffer *byte
+	if len(pixelBuffer) > 0 {
+		_pixelBuffer = &pixelBuffer[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIPixelFilter_GetPixelsForImage, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(scalingFactor)), uintptr(unsafe.Pointer(sourceRect)), uintptr(len(pixelBuffer)), uintptr(unsafe.Pointer(_pixelBuffer))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }

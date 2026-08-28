@@ -5,6 +5,7 @@
 package touch
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -28,9 +29,25 @@ func (self *IInertiaProcessor) Get_InitialOriginX(x *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_InitialOriginX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_InitialOriginX dispatches through IInertiaProcessor's vtable slot 4.
+func (self *IInertiaProcessor) Put_InitialOriginX(x float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIInertiaProcessor_Put_InitialOriginX, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_InitialOriginY dispatches through IInertiaProcessor's vtable slot 5.
 func (self *IInertiaProcessor) Get_InitialOriginY(y *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(y)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_InitialOriginY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_InitialOriginY dispatches through IInertiaProcessor's vtable slot 6.
+func (self *IInertiaProcessor) Put_InitialOriginY(y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIInertiaProcessor_Put_InitialOriginY, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(y))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -40,9 +57,25 @@ func (self *IInertiaProcessor) Get_InitialVelocityX(x *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_InitialVelocityX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_InitialVelocityX dispatches through IInertiaProcessor's vtable slot 8.
+func (self *IInertiaProcessor) Put_InitialVelocityX(x float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIInertiaProcessor_Put_InitialVelocityX, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_InitialVelocityY dispatches through IInertiaProcessor's vtable slot 9.
 func (self *IInertiaProcessor) Get_InitialVelocityY(y *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(y)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_InitialVelocityY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_InitialVelocityY dispatches through IInertiaProcessor's vtable slot 10.
+func (self *IInertiaProcessor) Put_InitialVelocityY(y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIInertiaProcessor_Put_InitialVelocityY, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(y))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -52,9 +85,25 @@ func (self *IInertiaProcessor) Get_InitialAngularVelocity(velocity *float32) err
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_InitialAngularVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_InitialAngularVelocity dispatches through IInertiaProcessor's vtable slot 12.
+func (self *IInertiaProcessor) Put_InitialAngularVelocity(velocity float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIInertiaProcessor_Put_InitialAngularVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(velocity))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_InitialExpansionVelocity dispatches through IInertiaProcessor's vtable slot 13.
 func (self *IInertiaProcessor) Get_InitialExpansionVelocity(velocity *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(velocity)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_InitialExpansionVelocity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_InitialExpansionVelocity dispatches through IInertiaProcessor's vtable slot 14.
+func (self *IInertiaProcessor) Put_InitialExpansionVelocity(velocity float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIInertiaProcessor_Put_InitialExpansionVelocity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(velocity))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -64,9 +113,25 @@ func (self *IInertiaProcessor) Get_InitialRadius(radius *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_InitialRadius = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_InitialRadius dispatches through IInertiaProcessor's vtable slot 16.
+func (self *IInertiaProcessor) Put_InitialRadius(radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIInertiaProcessor_Put_InitialRadius, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(radius))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_BoundaryLeft dispatches through IInertiaProcessor's vtable slot 17.
 func (self *IInertiaProcessor) Get_BoundaryLeft(left *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(left)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_BoundaryLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_BoundaryLeft dispatches through IInertiaProcessor's vtable slot 18.
+func (self *IInertiaProcessor) Put_BoundaryLeft(left float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIInertiaProcessor_Put_BoundaryLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(left))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -76,9 +141,25 @@ func (self *IInertiaProcessor) Get_BoundaryTop(top *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_BoundaryTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_BoundaryTop dispatches through IInertiaProcessor's vtable slot 20.
+func (self *IInertiaProcessor) Put_BoundaryTop(top float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIInertiaProcessor_Put_BoundaryTop, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(top))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_BoundaryRight dispatches through IInertiaProcessor's vtable slot 21.
 func (self *IInertiaProcessor) Get_BoundaryRight(right *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(right)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_BoundaryRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_BoundaryRight dispatches through IInertiaProcessor's vtable slot 22.
+func (self *IInertiaProcessor) Put_BoundaryRight(right float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIInertiaProcessor_Put_BoundaryRight, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(right))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -88,9 +169,25 @@ func (self *IInertiaProcessor) Get_BoundaryBottom(bottom *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_BoundaryBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_BoundaryBottom dispatches through IInertiaProcessor's vtable slot 24.
+func (self *IInertiaProcessor) Put_BoundaryBottom(bottom float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIInertiaProcessor_Put_BoundaryBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(bottom))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ElasticMarginLeft dispatches through IInertiaProcessor's vtable slot 25.
 func (self *IInertiaProcessor) Get_ElasticMarginLeft(left *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(left)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_ElasticMarginLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_ElasticMarginLeft dispatches through IInertiaProcessor's vtable slot 26.
+func (self *IInertiaProcessor) Put_ElasticMarginLeft(left float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIInertiaProcessor_Put_ElasticMarginLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(left))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -100,9 +197,25 @@ func (self *IInertiaProcessor) Get_ElasticMarginTop(top *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_ElasticMarginTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_ElasticMarginTop dispatches through IInertiaProcessor's vtable slot 28.
+func (self *IInertiaProcessor) Put_ElasticMarginTop(top float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIInertiaProcessor_Put_ElasticMarginTop, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(top))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ElasticMarginRight dispatches through IInertiaProcessor's vtable slot 29.
 func (self *IInertiaProcessor) Get_ElasticMarginRight(right *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(right)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_ElasticMarginRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_ElasticMarginRight dispatches through IInertiaProcessor's vtable slot 30.
+func (self *IInertiaProcessor) Put_ElasticMarginRight(right float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIInertiaProcessor_Put_ElasticMarginRight, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(right))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -112,9 +225,25 @@ func (self *IInertiaProcessor) Get_ElasticMarginBottom(bottom *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_ElasticMarginBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_ElasticMarginBottom dispatches through IInertiaProcessor's vtable slot 32.
+func (self *IInertiaProcessor) Put_ElasticMarginBottom(bottom float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIInertiaProcessor_Put_ElasticMarginBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(bottom))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DesiredDisplacement dispatches through IInertiaProcessor's vtable slot 33.
 func (self *IInertiaProcessor) Get_DesiredDisplacement(displacement *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(displacement)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_DesiredDisplacement = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_DesiredDisplacement dispatches through IInertiaProcessor's vtable slot 34.
+func (self *IInertiaProcessor) Put_DesiredDisplacement(displacement float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIInertiaProcessor_Put_DesiredDisplacement, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(displacement))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -124,9 +253,25 @@ func (self *IInertiaProcessor) Get_DesiredRotation(rotation *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_DesiredRotation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_DesiredRotation dispatches through IInertiaProcessor's vtable slot 36.
+func (self *IInertiaProcessor) Put_DesiredRotation(rotation float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIInertiaProcessor_Put_DesiredRotation, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(rotation))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DesiredExpansion dispatches through IInertiaProcessor's vtable slot 37.
 func (self *IInertiaProcessor) Get_DesiredExpansion(expansion *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(expansion)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_DesiredExpansion = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_DesiredExpansion dispatches through IInertiaProcessor's vtable slot 38.
+func (self *IInertiaProcessor) Put_DesiredExpansion(expansion float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIInertiaProcessor_Put_DesiredExpansion, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(expansion))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -136,15 +281,39 @@ func (self *IInertiaProcessor) Get_DesiredDeceleration(deceleration *float32) er
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_DesiredDeceleration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_DesiredDeceleration dispatches through IInertiaProcessor's vtable slot 40.
+func (self *IInertiaProcessor) Put_DesiredDeceleration(deceleration float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIInertiaProcessor_Put_DesiredDeceleration, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(deceleration))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DesiredAngularDeceleration dispatches through IInertiaProcessor's vtable slot 41.
 func (self *IInertiaProcessor) Get_DesiredAngularDeceleration(deceleration *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deceleration)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIInertiaProcessor_Put_DesiredAngularDeceleration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_DesiredAngularDeceleration dispatches through IInertiaProcessor's vtable slot 42.
+func (self *IInertiaProcessor) Put_DesiredAngularDeceleration(deceleration float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIInertiaProcessor_Put_DesiredAngularDeceleration, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(deceleration))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DesiredExpansionDeceleration dispatches through IInertiaProcessor's vtable slot 43.
 func (self *IInertiaProcessor) Get_DesiredExpansionDeceleration(deceleration *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deceleration)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIInertiaProcessor_Put_DesiredExpansionDeceleration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_DesiredExpansionDeceleration dispatches through IInertiaProcessor's vtable slot 44.
+func (self *IInertiaProcessor) Put_DesiredExpansionDeceleration(deceleration float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIInertiaProcessor_Put_DesiredExpansionDeceleration, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(deceleration))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -217,9 +386,25 @@ func (self *IManipulationProcessor) Get_PivotPointX(pivotPointX *float32) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIManipulationProcessor_Put_PivotPointX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_PivotPointX dispatches through IManipulationProcessor's vtable slot 6.
+func (self *IManipulationProcessor) Put_PivotPointX(pivotPointX float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIManipulationProcessor_Put_PivotPointX, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(pivotPointX))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PivotPointY dispatches through IManipulationProcessor's vtable slot 7.
 func (self *IManipulationProcessor) Get_PivotPointY(pivotPointY *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pivotPointY)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIManipulationProcessor_Put_PivotPointY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_PivotPointY dispatches through IManipulationProcessor's vtable slot 8.
+func (self *IManipulationProcessor) Put_PivotPointY(pivotPointY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIManipulationProcessor_Put_PivotPointY, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(pivotPointY))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -229,9 +414,65 @@ func (self *IManipulationProcessor) Get_PivotRadius(pivotRadius *float32) error 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIManipulationProcessor_Put_PivotRadius = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_PivotRadius dispatches through IManipulationProcessor's vtable slot 10.
+func (self *IManipulationProcessor) Put_PivotRadius(pivotRadius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIManipulationProcessor_Put_PivotRadius, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(pivotRadius))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CompleteManipulation dispatches through IManipulationProcessor's vtable slot 11.
 func (self *IManipulationProcessor) CompleteManipulation() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIManipulationProcessor_ProcessDown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// ProcessDown dispatches through IManipulationProcessor's vtable slot 12.
+func (self *IManipulationProcessor) ProcessDown(manipulatorId uint32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIManipulationProcessor_ProcessDown, nil, uintptr(unsafe.Pointer(self)), uintptr(manipulatorId), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIManipulationProcessor_ProcessMove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// ProcessMove dispatches through IManipulationProcessor's vtable slot 13.
+func (self *IManipulationProcessor) ProcessMove(manipulatorId uint32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIManipulationProcessor_ProcessMove, nil, uintptr(unsafe.Pointer(self)), uintptr(manipulatorId), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIManipulationProcessor_ProcessUp = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// ProcessUp dispatches through IManipulationProcessor's vtable slot 14.
+func (self *IManipulationProcessor) ProcessUp(manipulatorId uint32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIManipulationProcessor_ProcessUp, nil, uintptr(unsafe.Pointer(self)), uintptr(manipulatorId), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIManipulationProcessor_ProcessDownWithTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// ProcessDownWithTime dispatches through IManipulationProcessor's vtable slot 15.
+func (self *IManipulationProcessor) ProcessDownWithTime(manipulatorId uint32, x float32, y float32, timestamp uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIManipulationProcessor_ProcessDownWithTime, nil, uintptr(unsafe.Pointer(self)), uintptr(manipulatorId), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(timestamp)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIManipulationProcessor_ProcessMoveWithTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// ProcessMoveWithTime dispatches through IManipulationProcessor's vtable slot 16.
+func (self *IManipulationProcessor) ProcessMoveWithTime(manipulatorId uint32, x float32, y float32, timestamp uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIManipulationProcessor_ProcessMoveWithTime, nil, uintptr(unsafe.Pointer(self)), uintptr(manipulatorId), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(timestamp)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIManipulationProcessor_ProcessUpWithTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// ProcessUpWithTime dispatches through IManipulationProcessor's vtable slot 17.
+func (self *IManipulationProcessor) ProcessUpWithTime(manipulatorId uint32, x float32, y float32, timestamp uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIManipulationProcessor_ProcessUpWithTime, nil, uintptr(unsafe.Pointer(self)), uintptr(manipulatorId), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(timestamp)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -265,6 +506,14 @@ func (self *IManipulationProcessor) Get_MinimumScaleRotateRadius(minRadius *floa
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIManipulationProcessor_Put_MinimumScaleRotateRadius = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_MinimumScaleRotateRadius dispatches through IManipulationProcessor's vtable slot 23.
+func (self *IManipulationProcessor) Put_MinimumScaleRotateRadius(minRadius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIManipulationProcessor_Put_MinimumScaleRotateRadius, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(minRadius))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IManipulationEvents: https://learn.microsoft.com/windows/win32/api/manipulations/nn-manipulations-_imanipulationevents
 // IID: 4f62c8da-9c53-4b22-93df-927a862bbb03
 type IManipulationEvents struct {
@@ -273,3 +522,27 @@ type IManipulationEvents struct {
 
 // IID_IManipulationEvents is the interface identifier for IManipulationEvents.
 var IID_IManipulationEvents = win32.GUID{Data1: 0x4f62c8da, Data2: 0x9c53, Data3: 0x4b22, Data4: [8]byte{0x93, 0xdf, 0x92, 0x7a, 0x86, 0x2b, 0xbb, 0x03}}
+
+var specIManipulationEvents_ManipulationStarted = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// ManipulationStarted dispatches through _IManipulationEvents's vtable slot 3.
+func (self *IManipulationEvents) ManipulationStarted(x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIManipulationEvents_ManipulationStarted, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIManipulationEvents_ManipulationDelta = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// ManipulationDelta dispatches through _IManipulationEvents's vtable slot 4.
+func (self *IManipulationEvents) ManipulationDelta(x float32, y float32, translationDeltaX float32, translationDeltaY float32, scaleDelta float32, expansionDelta float32, rotationDelta float32, cumulativeTranslationX float32, cumulativeTranslationY float32, cumulativeScale float32, cumulativeExpansion float32, cumulativeRotation float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIManipulationEvents_ManipulationDelta, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(translationDeltaX)), uintptr(math.Float32bits(translationDeltaY)), uintptr(math.Float32bits(scaleDelta)), uintptr(math.Float32bits(expansionDelta)), uintptr(math.Float32bits(rotationDelta)), uintptr(math.Float32bits(cumulativeTranslationX)), uintptr(math.Float32bits(cumulativeTranslationY)), uintptr(math.Float32bits(cumulativeScale)), uintptr(math.Float32bits(cumulativeExpansion)), uintptr(math.Float32bits(cumulativeRotation))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIManipulationEvents_ManipulationCompleted = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// ManipulationCompleted dispatches through _IManipulationEvents's vtable slot 5.
+func (self *IManipulationEvents) ManipulationCompleted(x float32, y float32, cumulativeTranslationX float32, cumulativeTranslationY float32, cumulativeScale float32, cumulativeExpansion float32, cumulativeRotation float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIManipulationEvents_ManipulationCompleted, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(cumulativeTranslationX)), uintptr(math.Float32bits(cumulativeTranslationY)), uintptr(math.Float32bits(cumulativeScale)), uintptr(math.Float32bits(cumulativeExpansion)), uintptr(math.Float32bits(cumulativeRotation))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}

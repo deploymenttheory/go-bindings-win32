@@ -5,6 +5,7 @@
 package compositionswapchain
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -338,6 +339,14 @@ func (self *IPresentationSurface) RestrictToOutput(output *systemcom.IUnknown) e
 // SetDisableReadback dispatches through IPresentationSurface's vtable slot 10.
 func (self *IPresentationSurface) SetDisableReadback(value byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(value))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPresentationSurface_SetLetterboxingMargins = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetLetterboxingMargins dispatches through IPresentationSurface's vtable slot 11.
+func (self *IPresentationSurface) SetLetterboxingMargins(leftLetterboxSize float32, topLetterboxSize float32, rightLetterboxSize float32, bottomLetterboxSize float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIPresentationSurface_SetLetterboxingMargins, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(leftLetterboxSize)), uintptr(math.Float32bits(topLetterboxSize)), uintptr(math.Float32bits(rightLetterboxSize)), uintptr(math.Float32bits(bottomLetterboxSize))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

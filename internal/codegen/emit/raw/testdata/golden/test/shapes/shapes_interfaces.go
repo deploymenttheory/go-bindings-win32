@@ -5,6 +5,7 @@
 package shapes
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -77,6 +78,22 @@ func (self *ITest) IsOk() bool {
 	return byte(r1) != 0
 }
 
+var specITest_Scale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Scale dispatches through ITest's vtable slot 8.
+func (self *ITest) Scale(factor float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specITest_Scale, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(factor))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specITest_SetBig = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetBig dispatches through ITest's vtable slot 9.
+func (self *ITest) SetBig(value BIG) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specITest_SetBig, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetObject dispatches through ITest's vtable slot 10.
 func (self *ITest) GetObject(riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
@@ -112,6 +129,22 @@ func (self *ITest) GetBig(index uint32) BIG {
 	return *_ret
 }
 
+var specITest_GetRatio = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetRatio dispatches through ITest's vtable slot 15.
+func (self *ITest) GetRatio() float32 {
+	r := win32.Call(self.LpVtbl[15], specITest_GetRatio, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specITest_Draw = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Float32}}
+
+// Draw dispatches through ITest's vtable slot 16.
+func (self *ITest) Draw(from FPAIR, width float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specITest_Draw, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&from)), uintptr(math.Float32bits(width))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: aaaaaaaa-0000-0000-0000-000000000002
 type ITest2 struct {
 	ITest
@@ -120,9 +153,9 @@ type ITest2 struct {
 // IID_ITest2 is the interface identifier for ITest2.
 var IID_ITest2 = win32.GUID{Data1: 0xaaaaaaaa, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02}}
 
-// Extra dispatches through ITest2's vtable slot 15.
+// Extra dispatches through ITest2's vtable slot 17.
 func (self *ITest2) Extra(flag bool) error {
 	_flag := win32.Bool32(flag)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(_flag))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(_flag))
 	return win32.ErrIfFailed(int32(r1))
 }

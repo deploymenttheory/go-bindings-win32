@@ -122,10 +122,15 @@ const (
 	RetHResultValueErr = 10 // HRESULT → (win32.HRESULT, error); success codes preserved
 	// Header inline carrying a [Constant]: no dispatch, `return RetExpr`.
 	RetInline = 11
-	// COM method returning a struct by value: the callee writes it through a
-	// hidden result pointer passed right after `this` (ArgExprs[0]); the
-	// method returns the local (RetExpr).
+	// Struct returned by value through a result buffer: a COM method's
+	// hidden result pointer right after `this`, or a flat function's
+	// win32.Call ret buffer; the body returns the local (RetExpr).
 	RetStructOut = 12
+	// RetStructOut plus SetLastError: (T, error) with the error advisory.
+	RetStructOutLast = 13
+	// Floating-point return through win32.Call: the body binds `r` to the
+	// Result and returns RetExpr (a math.FloatNNfrombits of r.F0).
+	RetFloat = 14
 )
 
 // InterfaceModel is one COM interface: a pointer-sized struct dispatching
@@ -163,6 +168,13 @@ type ComMethodModel struct {
 	// syscall words (UTF-16, bool→BOOL, [out,retval] locals) before dispatch.
 	Preamble []string
 	ArgExprs []string
+	// CallExpr is the complete dispatch expression: syscall.SyscallN(...)
+	// or, for shapes SyscallN cannot marshal, win32.Call(...) — with .Tuple()
+	// appended unless ReturnKind is RetFloat, so it yields (r1, r2, err).
+	CallExpr string
+	// SpecDecl declares the package-level *win32.Spec a win32.Call
+	// dispatch references ("" for SyscallN dispatch).
+	SpecDecl string
 	// ReturnKind selects the body shape (Ret* constants). COM methods use
 	// RetVoid, RetHResultErr, the RetRetVal* elevation shapes, or RetVal.
 	ReturnKind int
@@ -189,6 +201,13 @@ type FunctionModel struct {
 	ProcVar string
 	// ArgExprs are the rendered SyscallN argument words.
 	ArgExprs []string
+	// CallExpr is the complete dispatch expression: syscall.SyscallN(...)
+	// or, for shapes SyscallN cannot marshal, win32.Call(...) — with .Tuple()
+	// appended unless ReturnKind is RetFloat, so it yields (r1, r2, err).
+	CallExpr string
+	// SpecDecl declares the package-level *win32.Spec a win32.Call
+	// dispatch references ("" for SyscallN dispatch).
+	SpecDecl string
 	// ReturnKind selects the body shape (Ret* constants).
 	ReturnKind int
 	// RetExpr converts r1 to the Go return value ("foundation.HANDLE(r1)").

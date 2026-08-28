@@ -5,6 +5,7 @@
 package direct3d11
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -1135,9 +1136,31 @@ func (self *ID3D11DeviceContext) ClearUnorderedAccessViewFloat(pUnorderedAccessV
 	syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnorderedAccessView)), uintptr(unsafe.Pointer(Values)))
 }
 
+var specID3D11DeviceContext_ClearDepthStencilView = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// ClearDepthStencilView dispatches through ID3D11DeviceContext's vtable slot 53.
+func (self *ID3D11DeviceContext) ClearDepthStencilView(pDepthStencilView *ID3D11DepthStencilView, ClearFlags uint32, Depth float32, Stencil byte) {
+	win32.Call(self.LpVtbl[53], specID3D11DeviceContext_ClearDepthStencilView, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDepthStencilView)), uintptr(ClearFlags), uintptr(math.Float32bits(Depth)), uintptr(Stencil)).Tuple()
+}
+
 // GenerateMips dispatches through ID3D11DeviceContext's vtable slot 54.
 func (self *ID3D11DeviceContext) GenerateMips(pShaderResourceView *ID3D11ShaderResourceView) {
 	syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShaderResourceView)))
+}
+
+var specID3D11DeviceContext_SetResourceMinLOD = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetResourceMinLOD dispatches through ID3D11DeviceContext's vtable slot 55.
+func (self *ID3D11DeviceContext) SetResourceMinLOD(pResource *ID3D11Resource, MinLOD float32) {
+	win32.Call(self.LpVtbl[55], specID3D11DeviceContext_SetResourceMinLOD, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(math.Float32bits(MinLOD))).Tuple()
+}
+
+var specID3D11DeviceContext_GetResourceMinLOD = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word}, Ret: win32.Float32}
+
+// GetResourceMinLOD dispatches through ID3D11DeviceContext's vtable slot 56.
+func (self *ID3D11DeviceContext) GetResourceMinLOD(pResource *ID3D11Resource) float32 {
+	r := win32.Call(self.LpVtbl[56], specID3D11DeviceContext_GetResourceMinLOD, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)))
+	return math.Float32frombits(uint32(r.F0))
 }
 
 // ResolveSubresource dispatches through ID3D11DeviceContext's vtable slot 57.
@@ -3236,6 +3259,14 @@ func (self *ID3D11VideoContext) VideoProcessorSetStreamDestRect(pVideoProcessor 
 	syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(_Enable), uintptr(unsafe.Pointer(pRect)))
 }
 
+var specID3D11VideoContext_VideoProcessorSetStreamAlpha = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// VideoProcessorSetStreamAlpha dispatches through ID3D11VideoContext's vtable slot 32.
+func (self *ID3D11VideoContext) VideoProcessorSetStreamAlpha(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, Enable bool, Alpha float32) {
+	_Enable := win32.Bool32(Enable)
+	win32.Call(self.LpVtbl[32], specID3D11VideoContext_VideoProcessorSetStreamAlpha, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(_Enable), uintptr(math.Float32bits(Alpha))).Tuple()
+}
+
 // VideoProcessorSetStreamPalette dispatches through ID3D11VideoContext's vtable slot 33.
 func (self *ID3D11VideoContext) VideoProcessorSetStreamPalette(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEntries []uint32) {
 	var _pEntries *uint32
@@ -3249,6 +3280,14 @@ func (self *ID3D11VideoContext) VideoProcessorSetStreamPalette(pVideoProcessor *
 func (self *ID3D11VideoContext) VideoProcessorSetStreamPixelAspectRatio(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, Enable bool, pSourceAspectRatio *graphicsdxgicommon.DXGI_RATIONAL, pDestinationAspectRatio *graphicsdxgicommon.DXGI_RATIONAL) {
 	_Enable := win32.Bool32(Enable)
 	syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(_Enable), uintptr(unsafe.Pointer(pSourceAspectRatio)), uintptr(unsafe.Pointer(pDestinationAspectRatio)))
+}
+
+var specID3D11VideoContext_VideoProcessorSetStreamLumaKey = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// VideoProcessorSetStreamLumaKey dispatches through ID3D11VideoContext's vtable slot 35.
+func (self *ID3D11VideoContext) VideoProcessorSetStreamLumaKey(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, Enable bool, Lower float32, Upper float32) {
+	_Enable := win32.Bool32(Enable)
+	win32.Call(self.LpVtbl[35], specID3D11VideoContext_VideoProcessorSetStreamLumaKey, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(_Enable), uintptr(math.Float32bits(Lower)), uintptr(math.Float32bits(Upper))).Tuple()
 }
 
 // VideoProcessorSetStreamStereoFormat dispatches through ID3D11VideoContext's vtable slot 36.
@@ -4017,6 +4056,38 @@ type ID3DX11FFT struct {
 
 // IID_ID3DX11FFT is the interface identifier for ID3DX11FFT.
 var IID_ID3DX11FFT = win32.GUID{Data1: 0xb3f7a938, Data2: 0x4c93, Data3: 0x4310, Data4: [8]byte{0xa6, 0x75, 0xb3, 0x0d, 0x6d, 0xe5, 0x05, 0x53}}
+
+var specID3DX11FFT_SetForwardScale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetForwardScale dispatches through ID3DX11FFT's vtable slot 3.
+func (self *ID3DX11FFT) SetForwardScale(ForwardScale float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specID3DX11FFT_SetForwardScale, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(ForwardScale))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID3DX11FFT_GetForwardScale = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetForwardScale dispatches through ID3DX11FFT's vtable slot 4.
+func (self *ID3DX11FFT) GetForwardScale() float32 {
+	r := win32.Call(self.LpVtbl[4], specID3DX11FFT_GetForwardScale, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specID3DX11FFT_SetInverseScale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetInverseScale dispatches through ID3DX11FFT's vtable slot 5.
+func (self *ID3DX11FFT) SetInverseScale(InverseScale float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specID3DX11FFT_SetInverseScale, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(InverseScale))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specID3DX11FFT_GetInverseScale = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetInverseScale dispatches through ID3DX11FFT's vtable slot 6.
+func (self *ID3DX11FFT) GetInverseScale() float32 {
+	r := win32.Call(self.LpVtbl[6], specID3DX11FFT_GetInverseScale, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
 
 // AttachBuffersAndPrecompute dispatches through ID3DX11FFT's vtable slot 7.
 func (self *ID3DX11FFT) AttachBuffersAndPrecompute(ppTempBuffers []*ID3D11UnorderedAccessView, ppPrecomputeBufferSizes []*ID3D11UnorderedAccessView) error {

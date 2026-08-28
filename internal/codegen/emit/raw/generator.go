@@ -378,6 +378,9 @@ func (g *Generator) writeFile(dir, fileName, packageName string, imports typemap
 	if referencesAlias(code, "win32") {
 		pruned["win32"] = g.mapper.RuntimeImportPath()
 	}
+	if referencesAlias(code, "math") {
+		pruned["math"] = "math"
+	}
 	path := filepath.Join(dir, fileName)
 	g.writtenFiles[path] = true
 	return fileasm.WriteGoFile(path, fileasm.File{

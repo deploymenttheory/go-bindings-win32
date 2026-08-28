@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 var (
@@ -20,6 +21,7 @@ var (
 	procCreateVssBackupComponentsInternal      = modVSSAPI.NewProc("CreateVssBackupComponentsInternal")
 	procCreateVssExamineWriterMetadataInternal = modVSSAPI.NewProc("CreateVssExamineWriterMetadataInternal")
 	procCreateVssExpressWriterInternal         = modVSSAPI.NewProc("CreateVssExpressWriterInternal")
+	procGetProviderMgmtInterfaceInternal       = modVSSAPI.NewProc("GetProviderMgmtInterfaceInternal")
 	procIsVolumeSnapshottedInternal            = modVSSAPI.NewProc("IsVolumeSnapshottedInternal")
 	procShouldBlockRevertInternal              = modVSSAPI.NewProc("ShouldBlockRevertInternal")
 	procVssFreeSnapshotPropertiesInternal      = modVSSAPI.NewProc("VssFreeSnapshotPropertiesInternal")
@@ -33,6 +35,7 @@ var Procs = struct {
 	CreateVssBackupComponentsInternal      *win32.Proc
 	CreateVssExamineWriterMetadataInternal *win32.Proc
 	CreateVssExpressWriterInternal         *win32.Proc
+	GetProviderMgmtInterfaceInternal       *win32.Proc
 	IsVolumeSnapshottedInternal            *win32.Proc
 	ShouldBlockRevertInternal              *win32.Proc
 	VssFreeSnapshotPropertiesInternal      *win32.Proc
@@ -40,6 +43,7 @@ var Procs = struct {
 	CreateVssBackupComponentsInternal:      procCreateVssBackupComponentsInternal,
 	CreateVssExamineWriterMetadataInternal: procCreateVssExamineWriterMetadataInternal,
 	CreateVssExpressWriterInternal:         procCreateVssExpressWriterInternal,
+	GetProviderMgmtInterfaceInternal:       procGetProviderMgmtInterfaceInternal,
 	IsVolumeSnapshottedInternal:            procIsVolumeSnapshottedInternal,
 	ShouldBlockRevertInternal:              procShouldBlockRevertInternal,
 	VssFreeSnapshotPropertiesInternal:      procVssFreeSnapshotPropertiesInternal,
@@ -66,6 +70,14 @@ func CreateVssExamineWriterMetadataInternal(bstrXML foundation.BSTR, ppMetadata 
 // Minimum OS: windows6.1.
 func CreateVssExpressWriterInternal(ppWriter **IVssExpressWriter) error {
 	r1, _, _ := syscall.SyscallN(procCreateVssExpressWriterInternal.Addr(), uintptr(unsafe.Pointer(ppWriter)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specGetProviderMgmtInterfaceInternal = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetProviderMgmtInterfaceInternal calls VSSAPI!GetProviderMgmtInterfaceInternal.
+func GetProviderMgmtInterfaceInternal(ProviderId win32.GUID, InterfaceId win32.GUID, ppItf **systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(procGetProviderMgmtInterfaceInternal.Addr(), specGetProviderMgmtInterfaceInternal, nil, uintptr(unsafe.Pointer(&ProviderId)), uintptr(unsafe.Pointer(&InterfaceId)), uintptr(unsafe.Pointer(ppItf))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

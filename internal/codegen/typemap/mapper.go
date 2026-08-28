@@ -312,7 +312,8 @@ const (
 	ArgScalar      ArgClass = iota // uintptr(x)
 	ArgPointer                     // uintptr(unsafe.Pointer(x))
 	ArgBool8                       // uintptr(win32.Bool8(x)): a C bool byte
-	ArgUnsupported                 // cannot marshal (by-value struct, float…)
+	ArgFloat                       // uintptr(math.FloatNNbits(x)), dispatched via win32.Call
+	ArgUnsupported                 // cannot marshal through SyscallN alone (by-value composite)
 )
 
 // ArgClassOf classifies a resolved parameter type for dispatch.
@@ -320,9 +321,9 @@ func ArgClassOf(resolved Resolved, goType string) ArgClass {
 	switch resolved.Kind {
 	case KindScalar:
 		if goType == "float32" || goType == "float64" {
-			// Floats travel in XMM registers, which syscall.SyscallN
-			// cannot populate.
-			return ArgUnsupported
+			// Floats travel in XMM/V registers, which syscall.SyscallN cannot
+			// populate; win32.Call can.
+			return ArgFloat
 		}
 		if goType == "bool" {
 			return ArgBool8

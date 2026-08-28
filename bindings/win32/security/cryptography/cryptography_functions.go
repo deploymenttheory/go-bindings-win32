@@ -297,6 +297,7 @@ var (
 	procCryptHashMessage                                   = modCRYPT32.NewProc("CryptHashMessage")
 	procCryptHashPublicKeyInfo                             = modCRYPT32.NewProc("CryptHashPublicKeyInfo")
 	procCryptHashToBeSigned                                = modCRYPT32.NewProc("CryptHashToBeSigned")
+	procCryptImportPKCS8                                   = modCRYPT32.NewProc("CryptImportPKCS8")
 	procCryptImportPublicKeyInfo                           = modCRYPT32.NewProc("CryptImportPublicKeyInfo")
 	procCryptImportPublicKeyInfoEx                         = modCRYPT32.NewProc("CryptImportPublicKeyInfoEx")
 	procCryptImportPublicKeyInfoEx2                        = modCRYPT32.NewProc("CryptImportPublicKeyInfoEx2")
@@ -755,6 +756,7 @@ var Procs = struct {
 	CryptHashSessionKey                                *win32.Proc
 	CryptHashToBeSigned                                *win32.Proc
 	CryptImportKey                                     *win32.Proc
+	CryptImportPKCS8                                   *win32.Proc
 	CryptImportPublicKeyInfo                           *win32.Proc
 	CryptImportPublicKeyInfoEx                         *win32.Proc
 	CryptImportPublicKeyInfoEx2                        *win32.Proc
@@ -1226,6 +1228,7 @@ var Procs = struct {
 	CryptHashSessionKey:                                procCryptHashSessionKey,
 	CryptHashToBeSigned:                                procCryptHashToBeSigned,
 	CryptImportKey:                                     procCryptImportKey,
+	CryptImportPKCS8:                                   procCryptImportPKCS8,
 	CryptImportPublicKeyInfo:                           procCryptImportPublicKeyInfo,
 	CryptImportPublicKeyInfoEx:                         procCryptImportPublicKeyInfoEx,
 	CryptImportPublicKeyInfoEx2:                        procCryptImportPublicKeyInfoEx2,
@@ -4185,6 +4188,19 @@ func CryptImportKey(hProv uintptr, pbData []byte, hPubKey uintptr, dwFlags CRYPT
 		_pbData = &pbData[0]
 	}
 	r1, _, e1 := syscall.SyscallN(procCryptImportKey.Addr(), uintptr(hProv), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(hPubKey), uintptr(dwFlags), uintptr(unsafe.Pointer(phKey)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+var specCryptImportPKCS8 = &win32.Spec{Args: []win32.Arg{win32.Struct(48, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// CryptImportPKCS8 calls CRYPT32!CryptImportPKCS8.
+// https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptimportpkcs8
+// Minimum OS: windows5.1.2600.
+func CryptImportPKCS8(sPrivateKeyAndParams CRYPT_PKCS8_IMPORT_PARAMS, dwFlags CRYPT_KEY_FLAGS, phCryptProv *uintptr, pvAuxInfo unsafe.Pointer) error {
+	r1, _, e1 := win32.Call(procCryptImportPKCS8.Addr(), specCryptImportPKCS8, nil, uintptr(unsafe.Pointer(&sPrivateKeyAndParams)), uintptr(dwFlags), uintptr(unsafe.Pointer(phCryptProv)), uintptr(unsafe.Pointer(pvAuxInfo))).Tuple()
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

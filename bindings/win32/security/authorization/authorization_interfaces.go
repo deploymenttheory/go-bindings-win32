@@ -115,6 +115,22 @@ func (self *IAzApplication) Get_Writable(pfProp *foundation.BOOL) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzApplication_GetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetProperty dispatches through IAzApplication's vtable slot 22.
+func (self *IAzApplication) GetProperty(lPropId int32, varReserved systemvariant.VARIANT, pvarProp *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIAzApplication_GetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(pvarProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetProperty dispatches through IAzApplication's vtable slot 23.
+func (self *IAzApplication) SetProperty(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIAzApplication_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PolicyAdministrators dispatches through IAzApplication's vtable slot 24.
 func (self *IAzApplication) Get_PolicyAdministrators(pvarAdmins *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarAdmins)))
@@ -127,9 +143,65 @@ func (self *IAzApplication) Get_PolicyReaders(pvarReaders *systemvariant.VARIANT
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzApplication_AddPolicyAdministrator = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyAdministrator dispatches through IAzApplication's vtable slot 26.
+func (self *IAzApplication) AddPolicyAdministrator(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIAzApplication_AddPolicyAdministrator, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeletePolicyAdministrator = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyAdministrator dispatches through IAzApplication's vtable slot 27.
+func (self *IAzApplication) DeletePolicyAdministrator(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIAzApplication_DeletePolicyAdministrator, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_AddPolicyReader = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyReader dispatches through IAzApplication's vtable slot 28.
+func (self *IAzApplication) AddPolicyReader(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIAzApplication_AddPolicyReader, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeletePolicyReader = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyReader dispatches through IAzApplication's vtable slot 29.
+func (self *IAzApplication) DeletePolicyReader(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIAzApplication_DeletePolicyReader, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Scopes dispatches through IAzApplication's vtable slot 30.
 func (self *IAzApplication) Get_Scopes(ppScopeCollection **IAzScopes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppScopeCollection)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_OpenScope = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenScope dispatches through IAzApplication's vtable slot 31.
+func (self *IAzApplication) OpenScope(bstrScopeName foundation.BSTR, varReserved systemvariant.VARIANT, ppScope **IAzScope) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIAzApplication_OpenScope, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppScope))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_CreateScope = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateScope dispatches through IAzApplication's vtable slot 32.
+func (self *IAzApplication) CreateScope(bstrScopeName foundation.BSTR, varReserved systemvariant.VARIANT, ppScope **IAzScope) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIAzApplication_CreateScope, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppScope))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeleteScope = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteScope dispatches through IAzApplication's vtable slot 33.
+func (self *IAzApplication) DeleteScope(bstrScopeName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIAzApplication_DeleteScope, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -139,9 +211,57 @@ func (self *IAzApplication) Get_Operations(ppOperationCollection **IAzOperations
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzApplication_OpenOperation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenOperation dispatches through IAzApplication's vtable slot 35.
+func (self *IAzApplication) OpenOperation(bstrOperationName foundation.BSTR, varReserved systemvariant.VARIANT, ppOperation **IAzOperation) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIAzApplication_OpenOperation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOperationName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppOperation))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_CreateOperation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateOperation dispatches through IAzApplication's vtable slot 36.
+func (self *IAzApplication) CreateOperation(bstrOperationName foundation.BSTR, varReserved systemvariant.VARIANT, ppOperation **IAzOperation) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIAzApplication_CreateOperation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOperationName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppOperation))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeleteOperation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteOperation dispatches through IAzApplication's vtable slot 37.
+func (self *IAzApplication) DeleteOperation(bstrOperationName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIAzApplication_DeleteOperation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOperationName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Tasks dispatches through IAzApplication's vtable slot 38.
 func (self *IAzApplication) Get_Tasks(ppTaskCollection **IAzTasks) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTaskCollection)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_OpenTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenTask dispatches through IAzApplication's vtable slot 39.
+func (self *IAzApplication) OpenTask(bstrTaskName foundation.BSTR, varReserved systemvariant.VARIANT, ppTask **IAzTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIAzApplication_OpenTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTaskName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppTask))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_CreateTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateTask dispatches through IAzApplication's vtable slot 40.
+func (self *IAzApplication) CreateTask(bstrTaskName foundation.BSTR, varReserved systemvariant.VARIANT, ppTask **IAzTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIAzApplication_CreateTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTaskName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppTask))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeleteTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteTask dispatches through IAzApplication's vtable slot 41.
+func (self *IAzApplication) DeleteTask(bstrTaskName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIAzApplication_DeleteTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTaskName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -151,15 +271,127 @@ func (self *IAzApplication) Get_ApplicationGroups(ppGroupCollection **IAzApplica
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzApplication_OpenApplicationGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenApplicationGroup dispatches through IAzApplication's vtable slot 43.
+func (self *IAzApplication) OpenApplicationGroup(bstrGroupName foundation.BSTR, varReserved systemvariant.VARIANT, ppGroup **IAzApplicationGroup) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIAzApplication_OpenApplicationGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppGroup))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_CreateApplicationGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateApplicationGroup dispatches through IAzApplication's vtable slot 44.
+func (self *IAzApplication) CreateApplicationGroup(bstrGroupName foundation.BSTR, varReserved systemvariant.VARIANT, ppGroup **IAzApplicationGroup) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIAzApplication_CreateApplicationGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppGroup))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeleteApplicationGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteApplicationGroup dispatches through IAzApplication's vtable slot 45.
+func (self *IAzApplication) DeleteApplicationGroup(bstrGroupName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specIAzApplication_DeleteApplicationGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Roles dispatches through IAzApplication's vtable slot 46.
 func (self *IAzApplication) Get_Roles(ppRoleCollection **IAzRoles) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRoleCollection)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzApplication_OpenRole = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenRole dispatches through IAzApplication's vtable slot 47.
+func (self *IAzApplication) OpenRole(bstrRoleName foundation.BSTR, varReserved systemvariant.VARIANT, ppRole **IAzRole) error {
+	r1, _, _ := win32.Call(self.LpVtbl[47], specIAzApplication_OpenRole, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppRole))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_CreateRole = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateRole dispatches through IAzApplication's vtable slot 48.
+func (self *IAzApplication) CreateRole(bstrRoleName foundation.BSTR, varReserved systemvariant.VARIANT, ppRole **IAzRole) error {
+	r1, _, _ := win32.Call(self.LpVtbl[48], specIAzApplication_CreateRole, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppRole))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeleteRole = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteRole dispatches through IAzApplication's vtable slot 49.
+func (self *IAzApplication) DeleteRole(bstrRoleName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[49], specIAzApplication_DeleteRole, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_InitializeClientContextFromToken = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// InitializeClientContextFromToken dispatches through IAzApplication's vtable slot 50.
+func (self *IAzApplication) InitializeClientContextFromToken(ullTokenHandle uint64, varReserved systemvariant.VARIANT, ppClientContext **IAzClientContext) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIAzApplication_InitializeClientContextFromToken, nil, uintptr(unsafe.Pointer(self)), uintptr(ullTokenHandle), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppClientContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_AddPropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// AddPropertyItem dispatches through IAzApplication's vtable slot 51.
+func (self *IAzApplication) AddPropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specIAzApplication_AddPropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeletePropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DeletePropertyItem dispatches through IAzApplication's vtable slot 52.
+func (self *IAzApplication) DeletePropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[52], specIAzApplication_DeletePropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_Submit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Submit dispatches through IAzApplication's vtable slot 53.
+func (self *IAzApplication) Submit(lFlags int32, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIAzApplication_Submit, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_InitializeClientContextFromName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// InitializeClientContextFromName dispatches through IAzApplication's vtable slot 54.
+func (self *IAzApplication) InitializeClientContextFromName(ClientName foundation.BSTR, DomainName foundation.BSTR, varReserved systemvariant.VARIANT, ppClientContext **IAzClientContext) error {
+	r1, _, _ := win32.Call(self.LpVtbl[54], specIAzApplication_InitializeClientContextFromName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ClientName)), uintptr(unsafe.Pointer(DomainName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppClientContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DelegatedPolicyUsers dispatches through IAzApplication's vtable slot 55.
 func (self *IAzApplication) Get_DelegatedPolicyUsers(pvarDelegatedPolicyUsers *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDelegatedPolicyUsers)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_AddDelegatedPolicyUser = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddDelegatedPolicyUser dispatches through IAzApplication's vtable slot 56.
+func (self *IAzApplication) AddDelegatedPolicyUser(bstrDelegatedPolicyUser foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[56], specIAzApplication_AddDelegatedPolicyUser, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDelegatedPolicyUser)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeleteDelegatedPolicyUser = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteDelegatedPolicyUser dispatches through IAzApplication's vtable slot 57.
+func (self *IAzApplication) DeleteDelegatedPolicyUser(bstrDelegatedPolicyUser foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[57], specIAzApplication_DeleteDelegatedPolicyUser, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDelegatedPolicyUser)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_InitializeClientContextFromStringSid = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// InitializeClientContextFromStringSid dispatches through IAzApplication's vtable slot 58.
+func (self *IAzApplication) InitializeClientContextFromStringSid(SidString foundation.BSTR, lOptions int32, varReserved systemvariant.VARIANT, ppClientContext **IAzClientContext) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIAzApplication_InitializeClientContextFromStringSid, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SidString)), uintptr(lOptions), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppClientContext))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -175,9 +407,57 @@ func (self *IAzApplication) Get_PolicyReadersName(pvarReaders *systemvariant.VAR
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzApplication_AddPolicyAdministratorName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyAdministratorName dispatches through IAzApplication's vtable slot 61.
+func (self *IAzApplication) AddPolicyAdministratorName(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[61], specIAzApplication_AddPolicyAdministratorName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeletePolicyAdministratorName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyAdministratorName dispatches through IAzApplication's vtable slot 62.
+func (self *IAzApplication) DeletePolicyAdministratorName(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[62], specIAzApplication_DeletePolicyAdministratorName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_AddPolicyReaderName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyReaderName dispatches through IAzApplication's vtable slot 63.
+func (self *IAzApplication) AddPolicyReaderName(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIAzApplication_AddPolicyReaderName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeletePolicyReaderName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyReaderName dispatches through IAzApplication's vtable slot 64.
+func (self *IAzApplication) DeletePolicyReaderName(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[64], specIAzApplication_DeletePolicyReaderName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DelegatedPolicyUsersName dispatches through IAzApplication's vtable slot 65.
 func (self *IAzApplication) Get_DelegatedPolicyUsersName(pvarDelegatedPolicyUsers *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDelegatedPolicyUsers)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_AddDelegatedPolicyUserName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddDelegatedPolicyUserName dispatches through IAzApplication's vtable slot 66.
+func (self *IAzApplication) AddDelegatedPolicyUserName(bstrDelegatedPolicyUser foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[66], specIAzApplication_AddDelegatedPolicyUserName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDelegatedPolicyUser)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication_DeleteDelegatedPolicyUserName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteDelegatedPolicyUserName dispatches through IAzApplication's vtable slot 67.
+func (self *IAzApplication) DeleteDelegatedPolicyUserName(bstrDelegatedPolicyUser foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[67], specIAzApplication_DeleteDelegatedPolicyUserName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDelegatedPolicyUser)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -189,6 +469,22 @@ type IAzApplication2 struct {
 
 // IID_IAzApplication2 is the interface identifier for IAzApplication2.
 var IID_IAzApplication2 = win32.GUID{Data1: 0x086a68af, Data2: 0xa249, Data3: 0x437c, Data4: [8]byte{0xb1, 0x8d, 0xd4, 0xd8, 0x6d, 0x6a, 0x96, 0x60}}
+
+var specIAzApplication2_InitializeClientContextFromToken2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// InitializeClientContextFromToken2 dispatches through IAzApplication2's vtable slot 68.
+func (self *IAzApplication2) InitializeClientContextFromToken2(ulTokenHandleLowPart uint32, ulTokenHandleHighPart uint32, varReserved systemvariant.VARIANT, ppClientContext **IAzClientContext2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[68], specIAzApplication2_InitializeClientContextFromToken2, nil, uintptr(unsafe.Pointer(self)), uintptr(ulTokenHandleLowPart), uintptr(ulTokenHandleHighPart), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppClientContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplication2_InitializeClientContext2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// InitializeClientContext2 dispatches through IAzApplication2's vtable slot 69.
+func (self *IAzApplication2) InitializeClientContext2(IdentifyingString foundation.BSTR, varReserved systemvariant.VARIANT, ppClientContext **IAzClientContext2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[69], specIAzApplication2_InitializeClientContext2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IdentifyingString)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppClientContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IAzApplication3: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazapplication3
 // IID: 181c845e-7196-4a7d-ac2e-020c0bb7a303
@@ -364,9 +660,145 @@ func (self *IAzApplicationGroup) Put_Description(bstrDescription foundation.BSTR
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzApplicationGroup_AddAppMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddAppMember dispatches through IAzApplicationGroup's vtable slot 19.
+func (self *IAzApplicationGroup) AddAppMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIAzApplicationGroup_AddAppMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_DeleteAppMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteAppMember dispatches through IAzApplicationGroup's vtable slot 20.
+func (self *IAzApplicationGroup) DeleteAppMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIAzApplicationGroup_DeleteAppMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_AddAppNonMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddAppNonMember dispatches through IAzApplicationGroup's vtable slot 21.
+func (self *IAzApplicationGroup) AddAppNonMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIAzApplicationGroup_AddAppNonMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_DeleteAppNonMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteAppNonMember dispatches through IAzApplicationGroup's vtable slot 22.
+func (self *IAzApplicationGroup) DeleteAppNonMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIAzApplicationGroup_DeleteAppNonMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_AddMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddMember dispatches through IAzApplicationGroup's vtable slot 23.
+func (self *IAzApplicationGroup) AddMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIAzApplicationGroup_AddMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_DeleteMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteMember dispatches through IAzApplicationGroup's vtable slot 24.
+func (self *IAzApplicationGroup) DeleteMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIAzApplicationGroup_DeleteMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_AddNonMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddNonMember dispatches through IAzApplicationGroup's vtable slot 25.
+func (self *IAzApplicationGroup) AddNonMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIAzApplicationGroup_AddNonMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_DeleteNonMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteNonMember dispatches through IAzApplicationGroup's vtable slot 26.
+func (self *IAzApplicationGroup) DeleteNonMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIAzApplicationGroup_DeleteNonMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Writable dispatches through IAzApplicationGroup's vtable slot 27.
 func (self *IAzApplicationGroup) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_GetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetProperty dispatches through IAzApplicationGroup's vtable slot 28.
+func (self *IAzApplicationGroup) GetProperty(lPropId int32, varReserved systemvariant.VARIANT, pvarProp *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIAzApplicationGroup_GetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(pvarProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetProperty dispatches through IAzApplicationGroup's vtable slot 29.
+func (self *IAzApplicationGroup) SetProperty(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIAzApplicationGroup_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_AddPropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// AddPropertyItem dispatches through IAzApplicationGroup's vtable slot 30.
+func (self *IAzApplicationGroup) AddPropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIAzApplicationGroup_AddPropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_DeletePropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DeletePropertyItem dispatches through IAzApplicationGroup's vtable slot 31.
+func (self *IAzApplicationGroup) DeletePropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIAzApplicationGroup_DeletePropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_Submit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Submit dispatches through IAzApplicationGroup's vtable slot 32.
+func (self *IAzApplicationGroup) Submit(lFlags int32, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIAzApplicationGroup_Submit, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_AddMemberName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddMemberName dispatches through IAzApplicationGroup's vtable slot 33.
+func (self *IAzApplicationGroup) AddMemberName(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIAzApplicationGroup_AddMemberName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_DeleteMemberName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteMemberName dispatches through IAzApplicationGroup's vtable slot 34.
+func (self *IAzApplicationGroup) DeleteMemberName(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIAzApplicationGroup_DeleteMemberName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_AddNonMemberName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddNonMemberName dispatches through IAzApplicationGroup's vtable slot 35.
+func (self *IAzApplicationGroup) AddNonMemberName(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIAzApplicationGroup_AddNonMemberName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzApplicationGroup_DeleteNonMemberName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteNonMemberName dispatches through IAzApplicationGroup's vtable slot 36.
+func (self *IAzApplicationGroup) DeleteNonMemberName(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIAzApplicationGroup_DeleteNonMemberName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -575,6 +1007,38 @@ func (self *IAzAuthorizationStore) Get_Writable(pfProp *foundation.BOOL) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzAuthorizationStore_GetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetProperty dispatches through IAzAuthorizationStore's vtable slot 20.
+func (self *IAzAuthorizationStore) GetProperty(lPropId int32, varReserved systemvariant.VARIANT, pvarProp *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIAzAuthorizationStore_GetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(pvarProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetProperty dispatches through IAzAuthorizationStore's vtable slot 21.
+func (self *IAzAuthorizationStore) SetProperty(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIAzAuthorizationStore_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_AddPropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// AddPropertyItem dispatches through IAzAuthorizationStore's vtable slot 22.
+func (self *IAzAuthorizationStore) AddPropertyItem(lPropId AZ_PROP_CONSTANTS, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIAzAuthorizationStore_AddPropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_DeletePropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DeletePropertyItem dispatches through IAzAuthorizationStore's vtable slot 23.
+func (self *IAzAuthorizationStore) DeletePropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIAzAuthorizationStore_DeletePropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PolicyAdministrators dispatches through IAzAuthorizationStore's vtable slot 24.
 func (self *IAzAuthorizationStore) Get_PolicyAdministrators(pvarAdmins *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarAdmins)))
@@ -587,9 +1051,89 @@ func (self *IAzAuthorizationStore) Get_PolicyReaders(pvarReaders *systemvariant.
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzAuthorizationStore_AddPolicyAdministrator = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyAdministrator dispatches through IAzAuthorizationStore's vtable slot 26.
+func (self *IAzAuthorizationStore) AddPolicyAdministrator(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIAzAuthorizationStore_AddPolicyAdministrator, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_DeletePolicyAdministrator = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyAdministrator dispatches through IAzAuthorizationStore's vtable slot 27.
+func (self *IAzAuthorizationStore) DeletePolicyAdministrator(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIAzAuthorizationStore_DeletePolicyAdministrator, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_AddPolicyReader = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyReader dispatches through IAzAuthorizationStore's vtable slot 28.
+func (self *IAzAuthorizationStore) AddPolicyReader(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIAzAuthorizationStore_AddPolicyReader, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_DeletePolicyReader = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyReader dispatches through IAzAuthorizationStore's vtable slot 29.
+func (self *IAzAuthorizationStore) DeletePolicyReader(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIAzAuthorizationStore_DeletePolicyReader, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_Initialize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Initialize dispatches through IAzAuthorizationStore's vtable slot 30.
+func (self *IAzAuthorizationStore) Initialize(lFlags AZ_PROP_CONSTANTS, bstrPolicyURL foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIAzAuthorizationStore_Initialize, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(bstrPolicyURL)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_UpdateCache = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// UpdateCache dispatches through IAzAuthorizationStore's vtable slot 31.
+func (self *IAzAuthorizationStore) UpdateCache(varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIAzAuthorizationStore_UpdateCache, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_Delete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Delete dispatches through IAzAuthorizationStore's vtable slot 32.
+func (self *IAzAuthorizationStore) Delete(varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIAzAuthorizationStore_Delete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Applications dispatches through IAzAuthorizationStore's vtable slot 33.
 func (self *IAzAuthorizationStore) Get_Applications(ppAppCollection **IAzApplications) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAppCollection)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_OpenApplication = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenApplication dispatches through IAzAuthorizationStore's vtable slot 34.
+func (self *IAzAuthorizationStore) OpenApplication(bstrApplicationName foundation.BSTR, varReserved systemvariant.VARIANT, ppApplication **IAzApplication) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIAzAuthorizationStore_OpenApplication, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppApplication))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_CreateApplication = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateApplication dispatches through IAzAuthorizationStore's vtable slot 35.
+func (self *IAzAuthorizationStore) CreateApplication(bstrApplicationName foundation.BSTR, varReserved systemvariant.VARIANT, ppApplication **IAzApplication) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIAzAuthorizationStore_CreateApplication, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppApplication))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_DeleteApplication = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteApplication dispatches through IAzAuthorizationStore's vtable slot 36.
+func (self *IAzAuthorizationStore) DeleteApplication(bstrApplicationName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIAzAuthorizationStore_DeleteApplication, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -599,9 +1143,57 @@ func (self *IAzAuthorizationStore) Get_ApplicationGroups(ppGroupCollection **IAz
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzAuthorizationStore_CreateApplicationGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateApplicationGroup dispatches through IAzAuthorizationStore's vtable slot 38.
+func (self *IAzAuthorizationStore) CreateApplicationGroup(bstrGroupName foundation.BSTR, varReserved systemvariant.VARIANT, ppGroup **IAzApplicationGroup) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIAzAuthorizationStore_CreateApplicationGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppGroup))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_OpenApplicationGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenApplicationGroup dispatches through IAzAuthorizationStore's vtable slot 39.
+func (self *IAzAuthorizationStore) OpenApplicationGroup(bstrGroupName foundation.BSTR, varReserved systemvariant.VARIANT, ppGroup **IAzApplicationGroup) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIAzAuthorizationStore_OpenApplicationGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppGroup))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_DeleteApplicationGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteApplicationGroup dispatches through IAzAuthorizationStore's vtable slot 40.
+func (self *IAzAuthorizationStore) DeleteApplicationGroup(bstrGroupName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIAzAuthorizationStore_DeleteApplicationGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_Submit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Submit dispatches through IAzAuthorizationStore's vtable slot 41.
+func (self *IAzAuthorizationStore) Submit(lFlags int32, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIAzAuthorizationStore_Submit, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DelegatedPolicyUsers dispatches through IAzAuthorizationStore's vtable slot 42.
 func (self *IAzAuthorizationStore) Get_DelegatedPolicyUsers(pvarDelegatedPolicyUsers *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDelegatedPolicyUsers)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_AddDelegatedPolicyUser = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddDelegatedPolicyUser dispatches through IAzAuthorizationStore's vtable slot 43.
+func (self *IAzAuthorizationStore) AddDelegatedPolicyUser(bstrDelegatedPolicyUser foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIAzAuthorizationStore_AddDelegatedPolicyUser, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDelegatedPolicyUser)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_DeleteDelegatedPolicyUser = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteDelegatedPolicyUser dispatches through IAzAuthorizationStore's vtable slot 44.
+func (self *IAzAuthorizationStore) DeleteDelegatedPolicyUser(bstrDelegatedPolicyUser foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIAzAuthorizationStore_DeleteDelegatedPolicyUser, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDelegatedPolicyUser)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -636,9 +1228,57 @@ func (self *IAzAuthorizationStore) Get_PolicyReadersName(pvarReaders *systemvari
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzAuthorizationStore_AddPolicyAdministratorName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyAdministratorName dispatches through IAzAuthorizationStore's vtable slot 50.
+func (self *IAzAuthorizationStore) AddPolicyAdministratorName(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIAzAuthorizationStore_AddPolicyAdministratorName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_DeletePolicyAdministratorName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyAdministratorName dispatches through IAzAuthorizationStore's vtable slot 51.
+func (self *IAzAuthorizationStore) DeletePolicyAdministratorName(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specIAzAuthorizationStore_DeletePolicyAdministratorName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_AddPolicyReaderName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyReaderName dispatches through IAzAuthorizationStore's vtable slot 52.
+func (self *IAzAuthorizationStore) AddPolicyReaderName(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[52], specIAzAuthorizationStore_AddPolicyReaderName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_DeletePolicyReaderName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyReaderName dispatches through IAzAuthorizationStore's vtable slot 53.
+func (self *IAzAuthorizationStore) DeletePolicyReaderName(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIAzAuthorizationStore_DeletePolicyReaderName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DelegatedPolicyUsersName dispatches through IAzAuthorizationStore's vtable slot 54.
 func (self *IAzAuthorizationStore) Get_DelegatedPolicyUsersName(pvarDelegatedPolicyUsers *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarDelegatedPolicyUsers)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_AddDelegatedPolicyUserName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddDelegatedPolicyUserName dispatches through IAzAuthorizationStore's vtable slot 55.
+func (self *IAzAuthorizationStore) AddDelegatedPolicyUserName(bstrDelegatedPolicyUser foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[55], specIAzAuthorizationStore_AddDelegatedPolicyUserName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDelegatedPolicyUser)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore_DeleteDelegatedPolicyUserName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteDelegatedPolicyUserName dispatches through IAzAuthorizationStore's vtable slot 56.
+func (self *IAzAuthorizationStore) DeleteDelegatedPolicyUserName(bstrDelegatedPolicyUser foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[56], specIAzAuthorizationStore_DeleteDelegatedPolicyUserName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDelegatedPolicyUser)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -656,6 +1296,22 @@ type IAzAuthorizationStore2 struct {
 
 // IID_IAzAuthorizationStore2 is the interface identifier for IAzAuthorizationStore2.
 var IID_IAzAuthorizationStore2 = win32.GUID{Data1: 0xb11e5584, Data2: 0xd577, Data3: 0x4273, Data4: [8]byte{0xb6, 0xc5, 0x09, 0x73, 0xe0, 0xf8, 0xe8, 0x0d}}
+
+var specIAzAuthorizationStore2_OpenApplication2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenApplication2 dispatches through IAzAuthorizationStore2's vtable slot 58.
+func (self *IAzAuthorizationStore2) OpenApplication2(bstrApplicationName foundation.BSTR, varReserved systemvariant.VARIANT, ppApplication **IAzApplication2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIAzAuthorizationStore2_OpenApplication2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppApplication))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzAuthorizationStore2_CreateApplication2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateApplication2 dispatches through IAzAuthorizationStore2's vtable slot 59.
+func (self *IAzAuthorizationStore2) CreateApplication2(bstrApplicationName foundation.BSTR, varReserved systemvariant.VARIANT, ppApplication **IAzApplication2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[59], specIAzAuthorizationStore2_CreateApplication2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrApplicationName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppApplication))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IAzAuthorizationStore3: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazauthorizationstore3
 // IID: abc08425-0c86-4fa0-9be3-7189956c926e
@@ -739,6 +1395,22 @@ type IAzBizRuleInterfaces struct {
 // IID_IAzBizRuleInterfaces is the interface identifier for IAzBizRuleInterfaces.
 var IID_IAzBizRuleInterfaces = win32.GUID{Data1: 0xe94128c7, Data2: 0xe9da, Data3: 0x44cc, Data4: [8]byte{0xb0, 0xbd, 0x53, 0x03, 0x6f, 0x3a, 0xab, 0x3d}}
 
+var specIAzBizRuleInterfaces_AddInterface = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddInterface dispatches through IAzBizRuleInterfaces's vtable slot 7.
+func (self *IAzBizRuleInterfaces) AddInterface(bstrInterfaceName foundation.BSTR, lInterfaceFlag int32, varInterface systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIAzBizRuleInterfaces_AddInterface, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInterfaceName)), uintptr(lInterfaceFlag), uintptr(unsafe.Pointer(&varInterface))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzBizRuleInterfaces_AddInterfaces = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// AddInterfaces dispatches through IAzBizRuleInterfaces's vtable slot 8.
+func (self *IAzBizRuleInterfaces) AddInterfaces(varInterfaceNames systemvariant.VARIANT, varInterfaceFlags systemvariant.VARIANT, varInterfaces systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIAzBizRuleInterfaces_AddInterfaces, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varInterfaceNames)), uintptr(unsafe.Pointer(&varInterfaceFlags)), uintptr(unsafe.Pointer(&varInterfaces))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetInterfaceValue dispatches through IAzBizRuleInterfaces's vtable slot 9.
 func (self *IAzBizRuleInterfaces) GetInterfaceValue(bstrInterfaceName foundation.BSTR, lInterfaceFlag *int32, varInterface *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInterfaceName)), uintptr(unsafe.Pointer(lInterfaceFlag)), uintptr(unsafe.Pointer(varInterface)))
@@ -772,6 +1444,22 @@ type IAzBizRuleParameters struct {
 // IID_IAzBizRuleParameters is the interface identifier for IAzBizRuleParameters.
 var IID_IAzBizRuleParameters = win32.GUID{Data1: 0xfc17685f, Data2: 0xe25d, Data3: 0x4dcd, Data4: [8]byte{0xba, 0xe1, 0x27, 0x6e, 0xc9, 0x53, 0x3c, 0xb5}}
 
+var specIAzBizRuleParameters_AddParameter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddParameter dispatches through IAzBizRuleParameters's vtable slot 7.
+func (self *IAzBizRuleParameters) AddParameter(bstrParameterName foundation.BSTR, varParameterValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIAzBizRuleParameters_AddParameter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrParameterName)), uintptr(unsafe.Pointer(&varParameterValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzBizRuleParameters_AddParameters = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// AddParameters dispatches through IAzBizRuleParameters's vtable slot 8.
+func (self *IAzBizRuleParameters) AddParameters(varParameterNames systemvariant.VARIANT, varParameterValues systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIAzBizRuleParameters_AddParameters, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varParameterNames)), uintptr(unsafe.Pointer(&varParameterValues))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetParameterValue dispatches through IAzBizRuleParameters's vtable slot 9.
 func (self *IAzBizRuleParameters) GetParameterValue(bstrParameterName foundation.BSTR, pvarParameterValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrParameterName)), uintptr(unsafe.Pointer(pvarParameterValue)))
@@ -804,6 +1492,14 @@ type IAzClientContext struct {
 
 // IID_IAzClientContext is the interface identifier for IAzClientContext.
 var IID_IAzClientContext = win32.GUID{Data1: 0xeff1f00b, Data2: 0x488a, Data3: 0x466d, Data4: [8]byte{0xaf, 0xd9, 0xa4, 0x01, 0xc5, 0xf9, 0xee, 0xf5}}
+
+var specIAzClientContext_AccessCheck = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// AccessCheck dispatches through IAzClientContext's vtable slot 7.
+func (self *IAzClientContext) AccessCheck(bstrObjectName foundation.BSTR, varScopeNames systemvariant.VARIANT, varOperations systemvariant.VARIANT, varParameterNames systemvariant.VARIANT, varParameterValues systemvariant.VARIANT, varInterfaceNames systemvariant.VARIANT, varInterfaceFlags systemvariant.VARIANT, varInterfaces systemvariant.VARIANT, pvarResults *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIAzClientContext_AccessCheck, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrObjectName)), uintptr(unsafe.Pointer(&varScopeNames)), uintptr(unsafe.Pointer(&varOperations)), uintptr(unsafe.Pointer(&varParameterNames)), uintptr(unsafe.Pointer(&varParameterValues)), uintptr(unsafe.Pointer(&varInterfaceNames)), uintptr(unsafe.Pointer(&varInterfaceFlags)), uintptr(unsafe.Pointer(&varInterfaces)), uintptr(unsafe.Pointer(pvarResults))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetBusinessRuleString dispatches through IAzClientContext's vtable slot 8.
 func (self *IAzClientContext) GetBusinessRuleString(pbstrBusinessRuleString *foundation.BSTR) error {
@@ -853,6 +1549,14 @@ func (self *IAzClientContext) Get_UserDnsSamCompat(pbstrProp *foundation.BSTR) e
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzClientContext_GetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetProperty dispatches through IAzClientContext's vtable slot 16.
+func (self *IAzClientContext) GetProperty(lPropId int32, varReserved systemvariant.VARIANT, pvarProp *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIAzClientContext_GetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(pvarProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetRoles dispatches through IAzClientContext's vtable slot 17.
 func (self *IAzClientContext) GetRoles(bstrScopeName foundation.BSTR, pvarRoleNames *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(unsafe.Pointer(pvarRoleNames)))
@@ -883,6 +1587,30 @@ var IID_IAzClientContext2 = win32.GUID{Data1: 0x2b0c92b8, Data2: 0x208a, Data3: 
 // GetAssignedScopesPage dispatches through IAzClientContext2's vtable slot 20.
 func (self *IAzClientContext2) GetAssignedScopesPage(lOptions int32, PageSize int32, pvarCursor *systemvariant.VARIANT, pvarScopeNames *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lOptions), uintptr(PageSize), uintptr(unsafe.Pointer(pvarCursor)), uintptr(unsafe.Pointer(pvarScopeNames)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzClientContext2_AddRoles = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// AddRoles dispatches through IAzClientContext2's vtable slot 21.
+func (self *IAzClientContext2) AddRoles(varRoles systemvariant.VARIANT, bstrScopeName foundation.BSTR) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIAzClientContext2_AddRoles, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varRoles)), uintptr(unsafe.Pointer(bstrScopeName))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzClientContext2_AddApplicationGroups = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddApplicationGroups dispatches through IAzClientContext2's vtable slot 22.
+func (self *IAzClientContext2) AddApplicationGroups(varApplicationGroups systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIAzClientContext2_AddApplicationGroups, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varApplicationGroups))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzClientContext2_AddStringSids = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddStringSids dispatches through IAzClientContext2's vtable slot 23.
+func (self *IAzClientContext2) AddStringSids(varStringSids systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIAzClientContext2_AddStringSids, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varStringSids))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -970,6 +1698,14 @@ func (self *IAzNameResolver) NameFromSid(bstrSid foundation.BSTR, pSidType *int3
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzNameResolver_NamesFromSids = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// NamesFromSids dispatches through IAzNameResolver's vtable slot 8.
+func (self *IAzNameResolver) NamesFromSids(vSids systemvariant.VARIANT, pvSidTypes *systemvariant.VARIANT, pvNames *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIAzNameResolver_NamesFromSids, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vSids)), uintptr(unsafe.Pointer(pvSidTypes)), uintptr(unsafe.Pointer(pvNames))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IAzObjectPicker: https://learn.microsoft.com/windows/win32/api/azroles/nn-azroles-iazobjectpicker
 // IID: 63130a48-699a-42d8-bf01-c62ac3fb79f9
 type IAzObjectPicker struct {
@@ -1051,6 +1787,30 @@ func (self *IAzOperation) Put_OperationID(lProp int32) error {
 // Get_Writable dispatches through IAzOperation's vtable slot 15.
 func (self *IAzOperation) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzOperation_GetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetProperty dispatches through IAzOperation's vtable slot 16.
+func (self *IAzOperation) GetProperty(lPropId int32, varReserved systemvariant.VARIANT, pvarProp *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIAzOperation_GetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(pvarProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzOperation_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetProperty dispatches through IAzOperation's vtable slot 17.
+func (self *IAzOperation) SetProperty(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIAzOperation_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzOperation_Submit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Submit dispatches through IAzOperation's vtable slot 18.
+func (self *IAzOperation) Submit(lFlags int32, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIAzOperation_Submit, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1162,9 +1922,89 @@ func (self *IAzRole) Put_ApplicationData(bstrApplicationData foundation.BSTR) er
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzRole_AddAppMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddAppMember dispatches through IAzRole's vtable slot 13.
+func (self *IAzRole) AddAppMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIAzRole_AddAppMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_DeleteAppMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteAppMember dispatches through IAzRole's vtable slot 14.
+func (self *IAzRole) DeleteAppMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIAzRole_DeleteAppMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_AddTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddTask dispatches through IAzRole's vtable slot 15.
+func (self *IAzRole) AddTask(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIAzRole_AddTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_DeleteTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteTask dispatches through IAzRole's vtable slot 16.
+func (self *IAzRole) DeleteTask(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIAzRole_DeleteTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_AddOperation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddOperation dispatches through IAzRole's vtable slot 17.
+func (self *IAzRole) AddOperation(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIAzRole_AddOperation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_DeleteOperation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteOperation dispatches through IAzRole's vtable slot 18.
+func (self *IAzRole) DeleteOperation(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIAzRole_DeleteOperation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_AddMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddMember dispatches through IAzRole's vtable slot 19.
+func (self *IAzRole) AddMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIAzRole_AddMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_DeleteMember = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteMember dispatches through IAzRole's vtable slot 20.
+func (self *IAzRole) DeleteMember(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIAzRole_DeleteMember, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Writable dispatches through IAzRole's vtable slot 21.
 func (self *IAzRole) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_GetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetProperty dispatches through IAzRole's vtable slot 22.
+func (self *IAzRole) GetProperty(lPropId int32, varReserved systemvariant.VARIANT, pvarProp *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIAzRole_GetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(pvarProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetProperty dispatches through IAzRole's vtable slot 23.
+func (self *IAzRole) SetProperty(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIAzRole_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1189,6 +2029,46 @@ func (self *IAzRole) Get_Operations(pvarProp *systemvariant.VARIANT) error {
 // Get_Tasks dispatches through IAzRole's vtable slot 27.
 func (self *IAzRole) Get_Tasks(pvarProp *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarProp)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_AddPropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// AddPropertyItem dispatches through IAzRole's vtable slot 28.
+func (self *IAzRole) AddPropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIAzRole_AddPropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_DeletePropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DeletePropertyItem dispatches through IAzRole's vtable slot 29.
+func (self *IAzRole) DeletePropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIAzRole_DeletePropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_Submit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Submit dispatches through IAzRole's vtable slot 30.
+func (self *IAzRole) Submit(lFlags int32, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIAzRole_Submit, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_AddMemberName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddMemberName dispatches through IAzRole's vtable slot 31.
+func (self *IAzRole) AddMemberName(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIAzRole_AddMemberName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzRole_DeleteMemberName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteMemberName dispatches through IAzRole's vtable slot 32.
+func (self *IAzRole) DeleteMemberName(bstrProp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIAzRole_DeleteMemberName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1396,6 +2276,38 @@ func (self *IAzScope) Get_Writable(pfProp *foundation.BOOL) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzScope_GetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetProperty dispatches through IAzScope's vtable slot 14.
+func (self *IAzScope) GetProperty(lPropId int32, varReserved systemvariant.VARIANT, pvarProp *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIAzScope_GetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(pvarProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetProperty dispatches through IAzScope's vtable slot 15.
+func (self *IAzScope) SetProperty(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIAzScope_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_AddPropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// AddPropertyItem dispatches through IAzScope's vtable slot 16.
+func (self *IAzScope) AddPropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIAzScope_AddPropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_DeletePropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DeletePropertyItem dispatches through IAzScope's vtable slot 17.
+func (self *IAzScope) DeletePropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIAzScope_DeletePropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_PolicyAdministrators dispatches through IAzScope's vtable slot 18.
 func (self *IAzScope) Get_PolicyAdministrators(pvarAdmins *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarAdmins)))
@@ -1408,9 +2320,65 @@ func (self *IAzScope) Get_PolicyReaders(pvarReaders *systemvariant.VARIANT) erro
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzScope_AddPolicyAdministrator = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyAdministrator dispatches through IAzScope's vtable slot 20.
+func (self *IAzScope) AddPolicyAdministrator(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIAzScope_AddPolicyAdministrator, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_DeletePolicyAdministrator = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyAdministrator dispatches through IAzScope's vtable slot 21.
+func (self *IAzScope) DeletePolicyAdministrator(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIAzScope_DeletePolicyAdministrator, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_AddPolicyReader = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyReader dispatches through IAzScope's vtable slot 22.
+func (self *IAzScope) AddPolicyReader(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIAzScope_AddPolicyReader, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_DeletePolicyReader = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyReader dispatches through IAzScope's vtable slot 23.
+func (self *IAzScope) DeletePolicyReader(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIAzScope_DeletePolicyReader, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ApplicationGroups dispatches through IAzScope's vtable slot 24.
 func (self *IAzScope) Get_ApplicationGroups(ppGroupCollection **IAzApplicationGroups) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroupCollection)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_OpenApplicationGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenApplicationGroup dispatches through IAzScope's vtable slot 25.
+func (self *IAzScope) OpenApplicationGroup(bstrGroupName foundation.BSTR, varReserved systemvariant.VARIANT, ppGroup **IAzApplicationGroup) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIAzScope_OpenApplicationGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppGroup))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_CreateApplicationGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateApplicationGroup dispatches through IAzScope's vtable slot 26.
+func (self *IAzScope) CreateApplicationGroup(bstrGroupName foundation.BSTR, varReserved systemvariant.VARIANT, ppGroup **IAzApplicationGroup) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIAzScope_CreateApplicationGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppGroup))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_DeleteApplicationGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteApplicationGroup dispatches through IAzScope's vtable slot 27.
+func (self *IAzScope) DeleteApplicationGroup(bstrGroupName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIAzScope_DeleteApplicationGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1420,9 +2388,65 @@ func (self *IAzScope) Get_Roles(ppRoleCollection **IAzRoles) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzScope_OpenRole = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenRole dispatches through IAzScope's vtable slot 29.
+func (self *IAzScope) OpenRole(bstrRoleName foundation.BSTR, varReserved systemvariant.VARIANT, ppRole **IAzRole) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIAzScope_OpenRole, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppRole))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_CreateRole = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateRole dispatches through IAzScope's vtable slot 30.
+func (self *IAzScope) CreateRole(bstrRoleName foundation.BSTR, varReserved systemvariant.VARIANT, ppRole **IAzRole) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIAzScope_CreateRole, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppRole))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_DeleteRole = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteRole dispatches through IAzScope's vtable slot 31.
+func (self *IAzScope) DeleteRole(bstrRoleName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIAzScope_DeleteRole, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRoleName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Tasks dispatches through IAzScope's vtable slot 32.
 func (self *IAzScope) Get_Tasks(ppTaskCollection **IAzTasks) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTaskCollection)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_OpenTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// OpenTask dispatches through IAzScope's vtable slot 33.
+func (self *IAzScope) OpenTask(bstrTaskName foundation.BSTR, varReserved systemvariant.VARIANT, ppTask **IAzTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIAzScope_OpenTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTaskName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppTask))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_CreateTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateTask dispatches through IAzScope's vtable slot 34.
+func (self *IAzScope) CreateTask(bstrTaskName foundation.BSTR, varReserved systemvariant.VARIANT, ppTask **IAzTask) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIAzScope_CreateTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTaskName)), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(ppTask))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_DeleteTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteTask dispatches through IAzScope's vtable slot 35.
+func (self *IAzScope) DeleteTask(bstrTaskName foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIAzScope_DeleteTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTaskName)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_Submit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Submit dispatches through IAzScope's vtable slot 36.
+func (self *IAzScope) Submit(lFlags int32, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIAzScope_Submit, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1447,6 +2471,38 @@ func (self *IAzScope) Get_PolicyAdministratorsName(pvarAdmins *systemvariant.VAR
 // Get_PolicyReadersName dispatches through IAzScope's vtable slot 40.
 func (self *IAzScope) Get_PolicyReadersName(pvarReaders *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarReaders)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_AddPolicyAdministratorName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyAdministratorName dispatches through IAzScope's vtable slot 41.
+func (self *IAzScope) AddPolicyAdministratorName(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIAzScope_AddPolicyAdministratorName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_DeletePolicyAdministratorName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyAdministratorName dispatches through IAzScope's vtable slot 42.
+func (self *IAzScope) DeletePolicyAdministratorName(bstrAdmin foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIAzScope_DeletePolicyAdministratorName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAdmin)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_AddPolicyReaderName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddPolicyReaderName dispatches through IAzScope's vtable slot 43.
+func (self *IAzScope) AddPolicyReaderName(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIAzScope_AddPolicyReaderName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzScope_DeletePolicyReaderName = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeletePolicyReaderName dispatches through IAzScope's vtable slot 44.
+func (self *IAzScope) DeletePolicyReaderName(bstrReader foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIAzScope_DeletePolicyReaderName, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrReader)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1640,9 +2696,81 @@ func (self *IAzTask) Get_Tasks(pvarProp *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAzTask_AddOperation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddOperation dispatches through IAzTask's vtable slot 23.
+func (self *IAzTask) AddOperation(bstrOp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIAzTask_AddOperation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzTask_DeleteOperation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteOperation dispatches through IAzTask's vtable slot 24.
+func (self *IAzTask) DeleteOperation(bstrOp foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIAzTask_DeleteOperation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrOp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzTask_AddTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddTask dispatches through IAzTask's vtable slot 25.
+func (self *IAzTask) AddTask(bstrTask foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIAzTask_AddTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTask)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzTask_DeleteTask = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteTask dispatches through IAzTask's vtable slot 26.
+func (self *IAzTask) DeleteTask(bstrTask foundation.BSTR, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIAzTask_DeleteTask, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTask)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Writable dispatches through IAzTask's vtable slot 27.
 func (self *IAzTask) Get_Writable(pfProp *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzTask_GetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetProperty dispatches through IAzTask's vtable slot 28.
+func (self *IAzTask) GetProperty(lPropId int32, varReserved systemvariant.VARIANT, pvarProp *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIAzTask_GetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varReserved)), uintptr(unsafe.Pointer(pvarProp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzTask_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// SetProperty dispatches through IAzTask's vtable slot 29.
+func (self *IAzTask) SetProperty(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIAzTask_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzTask_AddPropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// AddPropertyItem dispatches through IAzTask's vtable slot 30.
+func (self *IAzTask) AddPropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIAzTask_AddPropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzTask_DeletePropertyItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DeletePropertyItem dispatches through IAzTask's vtable slot 31.
+func (self *IAzTask) DeletePropertyItem(lPropId int32, varProp systemvariant.VARIANT, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIAzTask_DeletePropertyItem, nil, uintptr(unsafe.Pointer(self)), uintptr(lPropId), uintptr(unsafe.Pointer(&varProp)), uintptr(unsafe.Pointer(&varReserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAzTask_Submit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Submit dispatches through IAzTask's vtable slot 32.
+func (self *IAzTask) Submit(lFlags int32, varReserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIAzTask_Submit, nil, uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(unsafe.Pointer(&varReserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

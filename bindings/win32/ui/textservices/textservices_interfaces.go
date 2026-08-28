@@ -83,6 +83,14 @@ func (self *IAccDictionary) LookupMnemonicTerm(bstrMnemonic foundation.BSTR, pTe
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAccDictionary_ConvertValueToString = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// ConvertValueToString dispatches through IAccDictionary's vtable slot 7.
+func (self *IAccDictionary) ConvertValueToString(Term *win32.GUID, lcid uint32, varValue systemvariant.VARIANT, pbstrResult *foundation.BSTR, plcid *uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIAccDictionary_ConvertValueToString, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Term)), uintptr(lcid), uintptr(unsafe.Pointer(&varValue)), uintptr(unsafe.Pointer(pbstrResult)), uintptr(unsafe.Pointer(plcid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IAccServerDocMgr: https://learn.microsoft.com/windows/win32/api/msaatext/nn-msaatext-iaccserverdocmgr
 // IID: ad7c73cf-6dd5-4855-abc2-b04bad5b9153
 type IAccServerDocMgr struct {
@@ -258,6 +266,14 @@ type ICoCreateLocally struct {
 // IID_ICoCreateLocally is the interface identifier for ICoCreateLocally.
 var IID_ICoCreateLocally = win32.GUID{Data1: 0x03de00aa, Data2: 0xf272, Data3: 0x41e3, Data4: [8]byte{0x99, 0xcb, 0x03, 0xc5, 0xe8, 0x11, 0x4e, 0xa0}}
 
+var specICoCreateLocally_CoCreateLocally = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// CoCreateLocally dispatches through ICoCreateLocally's vtable slot 3.
+func (self *ICoCreateLocally) CoCreateLocally(rclsid *win32.GUID, dwClsContext uint32, riid *win32.GUID, punk **systemcom.IUnknown, riidParam *win32.GUID, punkParam *systemcom.IUnknown, varParam systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specICoCreateLocally_CoCreateLocally, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(riidParam)), uintptr(unsafe.Pointer(punkParam)), uintptr(unsafe.Pointer(&varParam))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ICoCreatedLocally: https://learn.microsoft.com/windows/win32/api/msaatext/nn-msaatext-icocreatedlocally
 // IID: 0a53eb6c-1908-4742-8cff-2cee2e93f94c
 type ICoCreatedLocally struct {
@@ -266,6 +282,14 @@ type ICoCreatedLocally struct {
 
 // IID_ICoCreatedLocally is the interface identifier for ICoCreatedLocally.
 var IID_ICoCreatedLocally = win32.GUID{Data1: 0x0a53eb6c, Data2: 0x1908, Data3: 0x4742, Data4: [8]byte{0x8c, 0xff, 0x2c, 0xee, 0x2e, 0x93, 0xf9, 0x4c}}
+
+var specICoCreatedLocally_LocalInit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// LocalInit dispatches through ICoCreatedLocally's vtable slot 3.
+func (self *ICoCreatedLocally) LocalInit(punkLocalObject *systemcom.IUnknown, riidParam *win32.GUID, punkParam *systemcom.IUnknown, varParam systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specICoCreatedLocally_LocalInit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkLocalObject)), uintptr(unsafe.Pointer(riidParam)), uintptr(unsafe.Pointer(punkParam)), uintptr(unsafe.Pointer(&varParam))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IID: dcd285fe-0be0-43bd-99c9-aaaec513c555
 type IDocWrap struct {
@@ -1345,6 +1369,14 @@ type ITextStoreACPEx struct {
 // IID_ITextStoreACPEx is the interface identifier for ITextStoreACPEx.
 var IID_ITextStoreACPEx = win32.GUID{Data1: 0xa2de3bc2, Data2: 0x3d8e, Data3: 0x11d3, Data4: [8]byte{0x81, 0xa9, 0xf7, 0x53, 0xfb, 0xe6, 0x1a, 0x00}}
 
+var specITextStoreACPEx_ScrollToRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// ScrollToRect dispatches through ITextStoreACPEx's vtable slot 3.
+func (self *ITextStoreACPEx) ScrollToRect(acpStart int32, acpEnd int32, rc foundation.RECT, dwPosition uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITextStoreACPEx_ScrollToRect, nil, uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpEnd), uintptr(unsafe.Pointer(&rc)), uintptr(dwPosition)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ITextStoreACPServices: https://learn.microsoft.com/windows/win32/api/msctf/nn-msctf-itextstoreacpservices
 // IID: aa80e901-2021-11d2-93e0-0060b067b86e
 type ITextStoreACPServices struct {
@@ -1662,6 +1694,14 @@ type ITextStoreAnchorEx struct {
 
 // IID_ITextStoreAnchorEx is the interface identifier for ITextStoreAnchorEx.
 var IID_ITextStoreAnchorEx = win32.GUID{Data1: 0xa2de3bc1, Data2: 0x3d8e, Data3: 0x11d3, Data4: [8]byte{0x81, 0xa9, 0xf7, 0x53, 0xfb, 0xe6, 0x1a, 0x00}}
+
+var specITextStoreAnchorEx_ScrollToRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// ScrollToRect dispatches through ITextStoreAnchorEx's vtable slot 3.
+func (self *ITextStoreAnchorEx) ScrollToRect(pStart *IAnchor, pEnd *IAnchor, rc foundation.RECT, dwPosition uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITextStoreAnchorEx_ScrollToRect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStart)), uintptr(unsafe.Pointer(pEnd)), uintptr(unsafe.Pointer(&rc)), uintptr(dwPosition)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // ITextStoreAnchorSink: https://learn.microsoft.com/windows/win32/api/textstor/nn-textstor-itextstoreanchorsink
 // IID: aa80e905-2021-11d2-93e0-0060b067b86e
@@ -3472,6 +3512,14 @@ type ITfIntegratableCandidateListUIElement struct {
 
 // IID_ITfIntegratableCandidateListUIElement is the interface identifier for ITfIntegratableCandidateListUIElement.
 var IID_ITfIntegratableCandidateListUIElement = win32.GUID{Data1: 0xc7a6f54f, Data2: 0xb180, Data3: 0x416f, Data4: [8]byte{0xb2, 0xbf, 0x7b, 0xf2, 0xe4, 0x68, 0x3d, 0x7b}}
+
+var specITfIntegratableCandidateListUIElement_SetIntegrationStyle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// SetIntegrationStyle dispatches through ITfIntegratableCandidateListUIElement's vtable slot 3.
+func (self *ITfIntegratableCandidateListUIElement) SetIntegrationStyle(guidIntegrationStyle win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITfIntegratableCandidateListUIElement_SetIntegrationStyle, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidIntegrationStyle))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetSelectionStyle dispatches through ITfIntegratableCandidateListUIElement's vtable slot 4.
 func (self *ITfIntegratableCandidateListUIElement) GetSelectionStyle(ptfSelectionStyle *TfIntegratableCandidateListSelectionStyle) error {

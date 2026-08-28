@@ -164,6 +164,7 @@ var (
 	procClusterResourceTypeGetEnumCount             = modCLUSAPI.NewProc("ClusterResourceTypeGetEnumCount")
 	procClusterResourceTypeOpenEnum                 = modCLUSAPI.NewProc("ClusterResourceTypeOpenEnum")
 	procClusterSetAccountAccess                     = modCLUSAPI.NewProc("ClusterSetAccountAccess")
+	procClusterSharedVolumeSetSnapshotState         = modCLUSAPI.NewProc("ClusterSharedVolumeSetSnapshotState")
 	procClusterUpgradeFunctionalLevel               = modCLUSAPI.NewProc("ClusterUpgradeFunctionalLevel")
 	procCreateCluster                               = modCLUSAPI.NewProc("CreateCluster")
 	procCreateClusterAvailabilitySet                = modCLUSAPI.NewProc("CreateClusterAvailabilitySet")
@@ -260,6 +261,7 @@ var (
 	procPauseClusterNodeEx                          = modCLUSAPI.NewProc("PauseClusterNodeEx")
 	procPauseClusterNodeEx2                         = modCLUSAPI.NewProc("PauseClusterNodeEx2")
 	procRegisterClusterNotify                       = modCLUSAPI.NewProc("RegisterClusterNotify")
+	procRegisterClusterNotifyV2                     = modCLUSAPI.NewProc("RegisterClusterNotifyV2")
 	procRegisterClusterResourceTypeNotifyV2         = modCLUSAPI.NewProc("RegisterClusterResourceTypeNotifyV2")
 	procRemoveClusterGroupDependency                = modCLUSAPI.NewProc("RemoveClusterGroupDependency")
 	procRemoveClusterGroupDependencyEx              = modCLUSAPI.NewProc("RemoveClusterGroupDependencyEx")
@@ -591,6 +593,7 @@ var Procs = struct {
 	ClusterResourceTypeGetEnumCount             *win32.Proc
 	ClusterResourceTypeOpenEnum                 *win32.Proc
 	ClusterSetAccountAccess                     *win32.Proc
+	ClusterSharedVolumeSetSnapshotState         *win32.Proc
 	ClusterUpgradeFunctionalLevel               *win32.Proc
 	CreateCluster                               *win32.Proc
 	CreateClusterAvailabilitySet                *win32.Proc
@@ -697,6 +700,7 @@ var Procs = struct {
 	RegisterAppInstance                         *win32.Proc
 	RegisterAppInstanceVersion                  *win32.Proc
 	RegisterClusterNotify                       *win32.Proc
+	RegisterClusterNotifyV2                     *win32.Proc
 	RegisterClusterResourceTypeNotifyV2         *win32.Proc
 	RemoveClusterGroupDependency                *win32.Proc
 	RemoveClusterGroupDependencyEx              *win32.Proc
@@ -996,6 +1000,7 @@ var Procs = struct {
 	ClusterResourceTypeGetEnumCount:             procClusterResourceTypeGetEnumCount,
 	ClusterResourceTypeOpenEnum:                 procClusterResourceTypeOpenEnum,
 	ClusterSetAccountAccess:                     procClusterSetAccountAccess,
+	ClusterSharedVolumeSetSnapshotState:         procClusterSharedVolumeSetSnapshotState,
 	ClusterUpgradeFunctionalLevel:               procClusterUpgradeFunctionalLevel,
 	CreateCluster:                               procCreateCluster,
 	CreateClusterAvailabilitySet:                procCreateClusterAvailabilitySet,
@@ -1102,6 +1107,7 @@ var Procs = struct {
 	RegisterAppInstance:                         procRegisterAppInstance,
 	RegisterAppInstanceVersion:                  procRegisterAppInstanceVersion,
 	RegisterClusterNotify:                       procRegisterClusterNotify,
+	RegisterClusterNotifyV2:                     procRegisterClusterNotifyV2,
 	RegisterClusterResourceTypeNotifyV2:         procRegisterClusterResourceTypeNotifyV2,
 	RemoveClusterGroupDependency:                procRemoveClusterGroupDependency,
 	RemoveClusterGroupDependencyEx:              procRemoveClusterGroupDependencyEx,
@@ -2746,6 +2752,20 @@ func ClusterSetAccountAccess(hCluster HCLUSTER, szAccountSID string, dwAccess ui
 	return uint32(r1)
 }
 
+var specClusterSharedVolumeSetSnapshotState = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// ClusterSharedVolumeSetSnapshotState calls CLUSAPI!ClusterSharedVolumeSetSnapshotState.
+// https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clustersharedvolumesetsnapshotstate
+// Minimum OS: windowsserver2008.
+func ClusterSharedVolumeSetSnapshotState(guidSnapshotSet win32.GUID, lpszVolumeName string, state CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE) (uint32, error) {
+	_lpszVolumeName := win32.UTF16Ptr(lpszVolumeName)
+	r1, _, e1 := win32.Call(procClusterSharedVolumeSetSnapshotState.Addr(), specClusterSharedVolumeSetSnapshotState, nil, uintptr(unsafe.Pointer(&guidSnapshotSet)), uintptr(unsafe.Pointer(_lpszVolumeName)), uintptr(state)).Tuple()
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // ClusterUpgradeFunctionalLevel calls CLUSAPI!ClusterUpgradeFunctionalLevel.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterupgradefunctionallevel
 // Minimum OS: windowsserver2016.
@@ -3747,6 +3767,16 @@ func RegisterAppInstanceVersion(AppInstanceId *win32.GUID, InstanceVersionHigh u
 // Minimum OS: windowsserver2008.
 func RegisterClusterNotify(hChange HCHANGE, dwFilterType uint32, hObject foundation.HANDLE, dwNotifyKey uintptr) uint32 {
 	r1, _, _ := syscall.SyscallN(procRegisterClusterNotify.Addr(), uintptr(hChange), uintptr(dwFilterType), uintptr(hObject), uintptr(dwNotifyKey))
+	return uint32(r1)
+}
+
+var specRegisterClusterNotifyV2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// RegisterClusterNotifyV2 calls CLUSAPI!RegisterClusterNotifyV2.
+// https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-registerclusternotifyv2
+// Minimum OS: windowsserver2016.
+func RegisterClusterNotifyV2(hChange HCHANGE, Filter NOTIFY_FILTER_AND_TYPE, hObject foundation.HANDLE, dwNotifyKey uintptr) uint32 {
+	r1, _, _ := win32.Call(procRegisterClusterNotifyV2.Addr(), specRegisterClusterNotifyV2, nil, uintptr(hChange), uintptr(unsafe.Pointer(&Filter)), uintptr(hObject), uintptr(dwNotifyKey)).Tuple()
 	return uint32(r1)
 }
 

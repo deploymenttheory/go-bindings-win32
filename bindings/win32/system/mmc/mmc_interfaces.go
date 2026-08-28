@@ -138,6 +138,15 @@ func (self *ContextMenu) Get__NewEnum() (*systemcom.IUnknown, error) {
 	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
+var specContextMenu_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ContextMenu's vtable slot 8.
+func (self *ContextMenu) Get_Item(IndexOrPath systemvariant.VARIANT) (*MenuItem, error) {
+	_MenuItem_ := new(*MenuItem)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specContextMenu_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&IndexOrPath)), uintptr(win32.OutParam(unsafe.Pointer(_MenuItem_)))).Tuple()
+	return *_MenuItem_, win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Count dispatches through ContextMenu's vtable slot 9.
 func (self *ContextMenu) Get_Count() (int32, error) {
 	_Count := new(int32)
@@ -2014,6 +2023,14 @@ func (self *Property) Get_Value() (systemvariant.VARIANT, error) {
 	return *_Value, win32.ErrIfFailed(int32(r1))
 }
 
+var specProperty_Put_Value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Value dispatches through Property's vtable slot 8.
+func (self *Property) Put_Value(Value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specProperty_Put_Value, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Name dispatches through Property's vtable slot 9.
 func (self *Property) Get_Name() (foundation.BSTR, error) {
 	_Name := new(foundation.BSTR)
@@ -2149,6 +2166,15 @@ func (self *SnapIns) Get_Count() (int32, error) {
 	return *_Count, win32.ErrIfFailed(int32(r1))
 }
 
+var specSnapIns_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Add dispatches through SnapIns's vtable slot 10.
+func (self *SnapIns) Add(SnapinNameOrCLSID foundation.BSTR, ParentSnapin systemvariant.VARIANT, Properties systemvariant.VARIANT) (*SnapIn, error) {
+	_SnapIn_ := new(*SnapIn)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specSnapIns_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SnapinNameOrCLSID)), uintptr(unsafe.Pointer(&ParentSnapin)), uintptr(unsafe.Pointer(&Properties)), uintptr(win32.OutParam(unsafe.Pointer(_SnapIn_)))).Tuple()
+	return *_SnapIn_, win32.ErrIfFailed(int32(r1))
+}
+
 // Remove dispatches through SnapIns's vtable slot 11.
 func (self *SnapIns) Remove(SnapIn_ *SnapIn) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SnapIn_)))
@@ -2189,6 +2215,15 @@ func (self *View) Get_ListItems() (*Nodes, error) {
 	_Nodes_ := new(*Nodes)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Nodes_))))
 	return *_Nodes_, win32.ErrIfFailed(int32(r1))
+}
+
+var specView_SnapinScopeObject = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// SnapinScopeObject dispatches through View's vtable slot 11.
+func (self *View) SnapinScopeObject(ScopeNode systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_ScopeNodeObject := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specView_SnapinScopeObject, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ScopeNode)), uintptr(win32.OutParam(unsafe.Pointer(_ScopeNodeObject)))).Tuple()
+	return *_ScopeNodeObject, win32.ErrIfFailed(int32(r1))
 }
 
 // SnapinSelectionObject dispatches through View's vtable slot 12.
@@ -2237,9 +2272,25 @@ func (self *View) IsSelected(Node_ *Node) (foundation.BOOL, error) {
 	return *_IsSelected, win32.ErrIfFailed(int32(r1))
 }
 
+var specView_DisplayScopeNodePropertySheet = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DisplayScopeNodePropertySheet dispatches through View's vtable slot 19.
+func (self *View) DisplayScopeNodePropertySheet(ScopeNode systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specView_DisplayScopeNodePropertySheet, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ScopeNode))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // DisplaySelectionPropertySheet dispatches through View's vtable slot 20.
 func (self *View) DisplaySelectionPropertySheet() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specView_CopyScopeNode = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// CopyScopeNode dispatches through View's vtable slot 21.
+func (self *View) CopyScopeNode(ScopeNode systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specView_CopyScopeNode, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ScopeNode))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2249,9 +2300,25 @@ func (self *View) CopySelection() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specView_DeleteScopeNode = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteScopeNode dispatches through View's vtable slot 23.
+func (self *View) DeleteScopeNode(ScopeNode systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specView_DeleteScopeNode, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ScopeNode))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // DeleteSelection dispatches through View's vtable slot 24.
 func (self *View) DeleteSelection() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specView_RenameScopeNode = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RenameScopeNode dispatches through View's vtable slot 25.
+func (self *View) RenameScopeNode(NewName foundation.BSTR, ScopeNode systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specView_RenameScopeNode, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewName)), uintptr(unsafe.Pointer(&ScopeNode))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2261,11 +2328,28 @@ func (self *View) RenameSelectedItem(NewName foundation.BSTR) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specView_Get_ScopeNodeContextMenu = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_ScopeNodeContextMenu dispatches through View's vtable slot 27.
+func (self *View) Get_ScopeNodeContextMenu(ScopeNode systemvariant.VARIANT) (*ContextMenu, error) {
+	_ContextMenu_ := new(*ContextMenu)
+	r1, _, _ := win32.Call(self.LpVtbl[27], specView_Get_ScopeNodeContextMenu, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ScopeNode)), uintptr(win32.OutParam(unsafe.Pointer(_ContextMenu_)))).Tuple()
+	return *_ContextMenu_, win32.ErrIfFailed(int32(r1))
+}
+
 // Get_SelectionContextMenu dispatches through View's vtable slot 28.
 func (self *View) Get_SelectionContextMenu() (*ContextMenu, error) {
 	_ContextMenu_ := new(*ContextMenu)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ContextMenu_))))
 	return *_ContextMenu_, win32.ErrIfFailed(int32(r1))
+}
+
+var specView_RefreshScopeNode = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RefreshScopeNode dispatches through View's vtable slot 29.
+func (self *View) RefreshScopeNode(ScopeNode systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specView_RefreshScopeNode, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ScopeNode))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RefreshSelection dispatches through View's vtable slot 30.
@@ -2277,6 +2361,14 @@ func (self *View) RefreshSelection() error {
 // ExecuteSelectionMenuItem dispatches through View's vtable slot 31.
 func (self *View) ExecuteSelectionMenuItem(MenuItemPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MenuItemPath)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specView_ExecuteScopeNodeMenuItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ExecuteScopeNodeMenuItem dispatches through View's vtable slot 32.
+func (self *View) ExecuteScopeNodeMenuItem(MenuItemPath foundation.BSTR, ScopeNode systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specView_ExecuteScopeNodeMenuItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MenuItemPath)), uintptr(unsafe.Pointer(&ScopeNode))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

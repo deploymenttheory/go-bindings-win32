@@ -5,6 +5,7 @@
 package shapes
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -17,6 +18,9 @@ var (
 )
 
 var (
+	procBigReturn           = modTEST.NewProc("BigReturn")
+	procBigReturnLastErr    = modTEST.NewProc("BigReturnLastErr")
+	procBigStruct           = modTEST.NewProc("BigStruct")
 	procBoolIn              = modTEST.NewProc("BoolIn")
 	procBoolNativeParam     = modTEST.NewProc("BoolNativeParam")
 	procBoolReturnNative    = modTEST.NewProc("BoolReturnNative")
@@ -24,10 +28,15 @@ var (
 	procCallbackParam       = modTEST.NewProc("CallbackParam")
 	procComOut              = modTEST.NewProc("ComOut")
 	procEnumParam           = modTEST.NewProc("EnumParam")
+	procFloatParam          = modTEST.NewProc("FloatParam")
+	procFloatReturn         = modTEST.NewProc("FloatReturn")
 	procFpairParam          = modTEST.NewProc("FpairParam")
+	procFpairReturn         = modTEST.NewProc("FpairReturn")
 	procFreeTest            = modTEST.NewProc("FreeTest")
+	procGuidParam           = modTEST.NewProc("GuidParam")
 	procHandleOpen          = modTEST.NewProc("HandleOpen")
 	procInOutString         = modTEST.NewProc("InOutString")
+	procMediumStruct        = modTEST.NewProc("MediumStruct")
 	procOptionalStringW     = modTEST.NewProc("OptionalStringW")
 	procPtrRet              = modTEST.NewProc("PtrRet")
 	procRequiredString      = modTEST.NewProc("RequiredStringW")
@@ -51,6 +60,9 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
+	BigReturn           *win32.Proc
+	BigReturnLastErr    *win32.Proc
+	BigStruct           *win32.Proc
 	BoolIn              *win32.Proc
 	BoolNativeParam     *win32.Proc
 	BoolReturnNative    *win32.Proc
@@ -58,10 +70,15 @@ var Procs = struct {
 	CallbackParam       *win32.Proc
 	ComOut              *win32.Proc
 	EnumParam           *win32.Proc
+	FloatParam          *win32.Proc
+	FloatReturn         *win32.Proc
 	FpairParam          *win32.Proc
+	FpairReturn         *win32.Proc
 	FreeTest            *win32.Proc
+	GuidParam           *win32.Proc
 	HandleOpen          *win32.Proc
 	InOutString         *win32.Proc
+	MediumStruct        *win32.Proc
 	OptionalStringW     *win32.Proc
 	PtrRet              *win32.Proc
 	RequiredString      *win32.Proc
@@ -79,6 +96,9 @@ var Procs = struct {
 	UseOther            *win32.Proc
 	ValueLastErr        *win32.Proc
 }{
+	BigReturn:           procBigReturn,
+	BigReturnLastErr:    procBigReturnLastErr,
+	BigStruct:           procBigStruct,
 	BoolIn:              procBoolIn,
 	BoolNativeParam:     procBoolNativeParam,
 	BoolReturnNative:    procBoolReturnNative,
@@ -86,10 +106,15 @@ var Procs = struct {
 	CallbackParam:       procCallbackParam,
 	ComOut:              procComOut,
 	EnumParam:           procEnumParam,
+	FloatParam:          procFloatParam,
+	FloatReturn:         procFloatReturn,
 	FpairParam:          procFpairParam,
+	FpairReturn:         procFpairReturn,
 	FreeTest:            procFreeTest,
+	GuidParam:           procGuidParam,
 	HandleOpen:          procHandleOpen,
 	InOutString:         procInOutString,
+	MediumStruct:        procMediumStruct,
 	OptionalStringW:     procOptionalStringW,
 	PtrRet:              procPtrRet,
 	RequiredString:      procRequiredString,
@@ -106,6 +131,34 @@ var Procs = struct {
 	TakenW:              procTakenW,
 	UseOther:            procUseOther,
 	ValueLastErr:        procValueLastErr,
+}
+
+var specBigReturn = &win32.Spec{Args: []win32.Arg{}, Ret: win32.Struct(24, 8, 0, false)}
+
+// BigReturn calls TEST!BigReturn.
+func BigReturn() BIG {
+	_ret := new(BIG)
+	win32.Call(procBigReturn.Addr(), specBigReturn, win32.OutParam(unsafe.Pointer(_ret))).Tuple()
+	return *_ret
+}
+
+var specBigReturnLastErr = &win32.Spec{Args: []win32.Arg{}, Ret: win32.Struct(24, 8, 0, false)}
+
+// BigReturnLastErr calls TEST!BigReturnLastErr.
+func BigReturnLastErr() (BIG, error) {
+	_ret := new(BIG)
+	_, _, e1 := win32.Call(procBigReturnLastErr.Addr(), specBigReturnLastErr, win32.OutParam(unsafe.Pointer(_ret))).Tuple()
+	if e1 != 0 {
+		return *_ret, e1
+	}
+	return *_ret, nil
+}
+
+var specBigStruct = &win32.Spec{Args: []win32.Arg{win32.Struct(24, 8, 0, false)}}
+
+// BigStruct calls TEST!BigStruct.
+func BigStruct(b BIG) {
+	win32.Call(procBigStruct.Addr(), specBigStruct, nil, uintptr(unsafe.Pointer(&b))).Tuple()
 }
 
 // BoolIn calls TEST!BoolIn.
@@ -156,9 +209,35 @@ func EnumParam(flags FLAGSX) MODE {
 	return MODE(r1)
 }
 
+var specFloatParam = &win32.Spec{Args: []win32.Arg{win32.Float32}}
+
+// FloatParam calls TEST!FloatParam.
+func FloatParam(f float32) {
+	win32.Call(procFloatParam.Addr(), specFloatParam, nil, uintptr(math.Float32bits(f))).Tuple()
+}
+
+var specFloatReturn = &win32.Spec{Args: []win32.Arg{}, Ret: win32.Float64}
+
+// FloatReturn calls TEST!FloatReturn.
+func FloatReturn() float64 {
+	r := win32.Call(procFloatReturn.Addr(), specFloatReturn, nil)
+	return math.Float64frombits(r.F0)
+}
+
+var specFpairParam = &win32.Spec{Args: []win32.Arg{win32.Struct(8, 4, 2, false)}}
+
 // FpairParam calls TEST!FpairParam.
 func FpairParam(p FPAIR) {
-	syscall.SyscallN(procFpairParam.Addr(), uintptr(win32.StructArg(p)))
+	win32.Call(procFpairParam.Addr(), specFpairParam, nil, uintptr(unsafe.Pointer(&p))).Tuple()
+}
+
+var specFpairReturn = &win32.Spec{Args: []win32.Arg{}, Ret: win32.Struct(8, 4, 2, false)}
+
+// FpairReturn calls TEST!FpairReturn.
+func FpairReturn() FPAIR {
+	_ret := new(FPAIR)
+	win32.Call(procFpairReturn.Addr(), specFpairReturn, win32.OutParam(unsafe.Pointer(_ret))).Tuple()
+	return *_ret
 }
 
 // FreeTest calls TEST!FreeTest.
@@ -169,6 +248,13 @@ func FreeTest(h HLOCALTEST) {
 // GetCurrentThingToken is a header inline, not a DLL export: it evaluates to the constant -4.
 func GetCurrentThingToken() foundation.HANDLE {
 	return ^foundation.HANDLE(3)
+}
+
+var specGuidParam = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Float64}}
+
+// GuidParam calls TEST!GuidParam.
+func GuidParam(id win32.GUID, scale float64) {
+	win32.Call(procGuidParam.Addr(), specGuidParam, nil, uintptr(unsafe.Pointer(&id)), uintptr(math.Float64bits(scale))).Tuple()
 }
 
 // HandleOpen calls TEST!HandleOpen.
@@ -189,6 +275,13 @@ func InOutString(buffer foundation.PWSTR) {
 // InlineInt is a header inline, not a DLL export: it evaluates to the constant -7.
 func InlineInt() int32 {
 	return int32(-7)
+}
+
+var specMediumStruct = &win32.Spec{Args: []win32.Arg{win32.Struct(12, 4, 0, false)}}
+
+// MediumStruct calls TEST!MediumStruct.
+func MediumStruct(m MEDIUM) {
+	win32.Call(procMediumStruct.Addr(), specMediumStruct, nil, uintptr(unsafe.Pointer(&m))).Tuple()
 }
 
 // OptionalStringW calls TEST!OptionalStringW.

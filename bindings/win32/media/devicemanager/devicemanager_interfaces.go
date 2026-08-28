@@ -1704,6 +1704,30 @@ type IWMDMProgress3 struct {
 // IID_IWMDMProgress3 is the interface identifier for IWMDMProgress3.
 var IID_IWMDMProgress3 = win32.GUID{Data1: 0x21de01cb, Data2: 0x3bb4, Data3: 0x4929, Data4: [8]byte{0xb2, 0x1a, 0x17, 0xaf, 0x3f, 0x80, 0xf6, 0x58}}
 
+var specIWMDMProgress3_Begin3 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// Begin3 dispatches through IWMDMProgress3's vtable slot 7.
+func (self *IWMDMProgress3) Begin3(EventId win32.GUID, dwEstimatedTicks uint32, pContext *OPAQUECOMMAND) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIWMDMProgress3_Begin3, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&EventId)), uintptr(dwEstimatedTicks), uintptr(unsafe.Pointer(pContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMDMProgress3_Progress3 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// Progress3 dispatches through IWMDMProgress3's vtable slot 8.
+func (self *IWMDMProgress3) Progress3(EventId win32.GUID, dwTranspiredTicks uint32, pContext *OPAQUECOMMAND) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIWMDMProgress3_Progress3, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&EventId)), uintptr(dwTranspiredTicks), uintptr(unsafe.Pointer(pContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWMDMProgress3_End3 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// End3 dispatches through IWMDMProgress3's vtable slot 9.
+func (self *IWMDMProgress3) End3(EventId win32.GUID, hrCompletionCode foundation.HRESULT, pContext *OPAQUECOMMAND) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIWMDMProgress3_End3, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&EventId)), uintptr(hrCompletionCode), uintptr(unsafe.Pointer(pContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IWMDMRevoked: https://learn.microsoft.com/windows/win32/api/mswmdm/nn-mswmdm-iwmdmrevoked
 // IID: ebeccedb-88ee-4e55-b6a4-8d9f07d696aa
 type IWMDMRevoked struct {

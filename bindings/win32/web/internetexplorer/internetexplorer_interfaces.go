@@ -497,6 +497,14 @@ func (self *IHTMLPersistDataOM) GetAttribute(name foundation.BSTR) (systemvarian
 	return *_pValue, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLPersistDataOM_SetAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetAttribute dispatches through IHTMLPersistDataOM's vtable slot 9.
+func (self *IHTMLPersistDataOM) SetAttribute(name foundation.BSTR, value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLPersistDataOM_SetAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // RemoveAttribute dispatches through IHTMLPersistDataOM's vtable slot 10.
 func (self *IHTMLPersistDataOM) RemoveAttribute(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
@@ -535,6 +543,14 @@ func (self *IHTMLUserDataOM) GetAttribute(name foundation.BSTR) (systemvariant.V
 	_pValue := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(win32.OutParam(unsafe.Pointer(_pValue))))
 	return *_pValue, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLUserDataOM_SetAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetAttribute dispatches through IHTMLUserDataOM's vtable slot 11.
+func (self *IHTMLUserDataOM) SetAttribute(name foundation.BSTR, value systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLUserDataOM_SetAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&value))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAttribute dispatches through IHTMLUserDataOM's vtable slot 12.
@@ -981,6 +997,14 @@ func (self *ILayoutRect) Get_nextRect() (foundation.BSTR, error) {
 	_pbstrElementId := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrElementId))))
 	return *_pbstrElementId, win32.ErrIfFailed(int32(r1))
+}
+
+var specILayoutRect_Put_contentSrc = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_contentSrc dispatches through ILayoutRect's vtable slot 9.
+func (self *ILayoutRect) Put_contentSrc(varContentSrc systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specILayoutRect_Put_contentSrc, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varContentSrc))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_contentSrc dispatches through ILayoutRect's vtable slot 10.
@@ -1894,6 +1918,14 @@ type ITimer struct {
 // IID_ITimer is the interface identifier for ITimer.
 var IID_ITimer = win32.GUID{Data1: 0x3050f360, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specITimer_Advise = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Advise dispatches through ITimer's vtable slot 3.
+func (self *ITimer) Advise(vtimeMin systemvariant.VARIANT, vtimeMax systemvariant.VARIANT, vtimeInterval systemvariant.VARIANT, dwFlags uint32, pTimerSink *ITimerSink, pdwCookie *uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITimer_Advise, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vtimeMin)), uintptr(unsafe.Pointer(&vtimeMax)), uintptr(unsafe.Pointer(&vtimeInterval)), uintptr(dwFlags), uintptr(unsafe.Pointer(pTimerSink)), uintptr(unsafe.Pointer(pdwCookie))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Unadvise dispatches through ITimer's vtable slot 4.
 func (self *ITimer) Unadvise(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
@@ -1960,6 +1992,14 @@ type ITimerSink struct {
 
 // IID_ITimerSink is the interface identifier for ITimerSink.
 var IID_ITimerSink = win32.GUID{Data1: 0x3050f361, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specITimerSink_OnTimer = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// OnTimer dispatches through ITimerSink's vtable slot 3.
+func (self *ITimerSink) OnTimer(vtimeAdvise systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITimerSink_OnTimer, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&vtimeAdvise))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IID: 30510850-98b5-11cf-bb82-00aa00bdce0b
 type ITridentTouchInput struct {

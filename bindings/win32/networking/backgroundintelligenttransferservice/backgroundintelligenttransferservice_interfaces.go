@@ -423,6 +423,14 @@ func (self *IBackgroundCopyGroup) GetStatus(pdwStatus *uint32, pdwJobIndex *uint
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIBackgroundCopyGroup_GetJob = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetJob dispatches through IBackgroundCopyGroup's vtable slot 7.
+func (self *IBackgroundCopyGroup) GetJob(jobID win32.GUID, ppJob **IBackgroundCopyJob1) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIBackgroundCopyGroup_GetJob, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&jobID)), uintptr(unsafe.Pointer(ppJob))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SuspendGroup dispatches through IBackgroundCopyGroup's vtable slot 8.
 func (self *IBackgroundCopyGroup) SuspendGroup() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
@@ -450,6 +458,14 @@ func (self *IBackgroundCopyGroup) Get_Size(pdwSize *uint32) error {
 // Get_GroupID dispatches through IBackgroundCopyGroup's vtable slot 12.
 func (self *IBackgroundCopyGroup) Get_GroupID(pguidGroupID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidGroupID)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIBackgroundCopyGroup_CreateJob = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// CreateJob dispatches through IBackgroundCopyGroup's vtable slot 13.
+func (self *IBackgroundCopyGroup) CreateJob(guidJobID win32.GUID, ppJob **IBackgroundCopyJob1) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIBackgroundCopyGroup_CreateJob, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidJobID)), uintptr(unsafe.Pointer(ppJob))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -904,6 +920,14 @@ type IBackgroundCopyJob5 struct {
 // IID_IBackgroundCopyJob5 is the interface identifier for IBackgroundCopyJob5.
 var IID_IBackgroundCopyJob5 = win32.GUID{Data1: 0xe847030c, Data2: 0xbbba, Data3: 0x4657, Data4: [8]byte{0xaf, 0x6d, 0x48, 0x4a, 0xa4, 0x2b, 0xf1, 0xfe}}
 
+var specIBackgroundCopyJob5_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 8, 0, false)}}
+
+// SetProperty dispatches through IBackgroundCopyJob5's vtable slot 53.
+func (self *IBackgroundCopyJob5) SetProperty(PropertyId BITS_JOB_PROPERTY_ID, PropertyValue BITS_JOB_PROPERTY_VALUE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIBackgroundCopyJob5_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(PropertyId), uintptr(unsafe.Pointer(&PropertyValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetProperty dispatches through IBackgroundCopyJob5's vtable slot 54.
 func (self *IBackgroundCopyJob5) GetProperty(PropertyId BITS_JOB_PROPERTY_ID, PropertyValue *BITS_JOB_PROPERTY_VALUE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(PropertyId), uintptr(unsafe.Pointer(PropertyValue)))
@@ -1056,6 +1080,22 @@ type IBackgroundCopyQMgr struct {
 
 // IID_IBackgroundCopyQMgr is the interface identifier for IBackgroundCopyQMgr.
 var IID_IBackgroundCopyQMgr = win32.GUID{Data1: 0x16f41c69, Data2: 0x09f5, Data3: 0x41d2, Data4: [8]byte{0x8c, 0xd8, 0x3c, 0x08, 0xc4, 0x7b, 0xc8, 0xa8}}
+
+var specIBackgroundCopyQMgr_CreateGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// CreateGroup dispatches through IBackgroundCopyQMgr's vtable slot 3.
+func (self *IBackgroundCopyQMgr) CreateGroup(guidGroupID win32.GUID, ppGroup **IBackgroundCopyGroup) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIBackgroundCopyQMgr_CreateGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidGroupID)), uintptr(unsafe.Pointer(ppGroup))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIBackgroundCopyQMgr_GetGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetGroup dispatches through IBackgroundCopyQMgr's vtable slot 4.
+func (self *IBackgroundCopyQMgr) GetGroup(groupID win32.GUID, ppGroup **IBackgroundCopyGroup) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIBackgroundCopyQMgr_GetGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&groupID)), uintptr(unsafe.Pointer(ppGroup))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // EnumGroups dispatches through IBackgroundCopyQMgr's vtable slot 5.
 func (self *IBackgroundCopyQMgr) EnumGroups(dwFlags uint32, ppEnumGroups **IEnumBackgroundCopyGroups) error {

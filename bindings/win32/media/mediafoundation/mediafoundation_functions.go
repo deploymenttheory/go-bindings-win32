@@ -75,6 +75,7 @@ var (
 	procMFCreateMP3MediaSink                          = modMF.NewProc("MFCreateMP3MediaSink")
 	procMFCreateMPEG4MediaSink                        = modMF.NewProc("MFCreateMPEG4MediaSink")
 	procMFCreateMediaSession                          = modMF.NewProc("MFCreateMediaSession")
+	procMFCreateMuxSink                               = modMF.NewProc("MFCreateMuxSink")
 	procMFCreateNetSchemePlugin                       = modMF.NewProc("MFCreateNetSchemePlugin")
 	procMFCreatePMPMediaSession                       = modMF.NewProc("MFCreatePMPMediaSession")
 	procMFCreatePMPServer                             = modMF.NewProc("MFCreatePMPServer")
@@ -133,6 +134,7 @@ var (
 	procMFConvertToFP16Array                          = modMFPlat.NewProc("MFConvertToFP16Array")
 	procMFCopyImage                                   = modMFPlat.NewProc("MFCopyImage")
 	procMFCreate2DMediaBuffer                         = modMFPlat.NewProc("MFCreate2DMediaBuffer")
+	procMFCreateAMMediaTypeFromMFMediaType            = modMFPlat.NewProc("MFCreateAMMediaTypeFromMFMediaType")
 	procMFCreateAlignedMemoryBuffer                   = modMFPlat.NewProc("MFCreateAlignedMemoryBuffer")
 	procMFCreateAsyncResult                           = modMFPlat.NewProc("MFCreateAsyncResult")
 	procMFCreateAttributes                            = modMFPlat.NewProc("MFCreateAttributes")
@@ -158,6 +160,7 @@ var (
 	procMFCreateMediaExtensionActivate                = modMFPlat.NewProc("MFCreateMediaExtensionActivate")
 	procMFCreateMediaType                             = modMFPlat.NewProc("MFCreateMediaType")
 	procMFCreateMediaTypeFromProperties               = modMFPlat.NewProc("MFCreateMediaTypeFromProperties")
+	procMFCreateMediaTypeFromRepresentation           = modMFPlat.NewProc("MFCreateMediaTypeFromRepresentation")
 	procMFCreateMemoryBuffer                          = modMFPlat.NewProc("MFCreateMemoryBuffer")
 	procMFCreateMuxStreamAttributes                   = modMFPlat.NewProc("MFCreateMuxStreamAttributes")
 	procMFCreateMuxStreamMediaType                    = modMFPlat.NewProc("MFCreateMuxStreamMediaType")
@@ -203,6 +206,7 @@ var (
 	procMFGetWorkQueueMMCSSTaskId                     = modMFPlat.NewProc("MFGetWorkQueueMMCSSTaskId")
 	procMFHeapAlloc                                   = modMFPlat.NewProc("MFHeapAlloc")
 	procMFHeapFree                                    = modMFPlat.NewProc("MFHeapFree")
+	procMFInitAMMediaTypeFromMFMediaType              = modMFPlat.NewProc("MFInitAMMediaTypeFromMFMediaType")
 	procMFInitAttributesFromBlob                      = modMFPlat.NewProc("MFInitAttributesFromBlob")
 	procMFInitMediaTypeFromAMMediaType                = modMFPlat.NewProc("MFInitMediaTypeFromAMMediaType")
 	procMFInitMediaTypeFromMFVideoFormat              = modMFPlat.NewProc("MFInitMediaTypeFromMFVideoFormat")
@@ -237,14 +241,22 @@ var (
 	procMFShutdown                                    = modMFPlat.NewProc("MFShutdown")
 	procMFSplitSample                                 = modMFPlat.NewProc("MFSplitSample")
 	procMFStartup                                     = modMFPlat.NewProc("MFStartup")
+	procMFTEnum                                       = modMFPlat.NewProc("MFTEnum")
+	procMFTEnum2                                      = modMFPlat.NewProc("MFTEnum2")
+	procMFTEnumEx                                     = modMFPlat.NewProc("MFTEnumEx")
+	procMFTGetInfo                                    = modMFPlat.NewProc("MFTGetInfo")
+	procMFTRegister                                   = modMFPlat.NewProc("MFTRegister")
 	procMFTRegisterLocal                              = modMFPlat.NewProc("MFTRegisterLocal")
 	procMFTRegisterLocalByCLSID                       = modMFPlat.NewProc("MFTRegisterLocalByCLSID")
+	procMFTUnregister                                 = modMFPlat.NewProc("MFTUnregister")
 	procMFTUnregisterLocal                            = modMFPlat.NewProc("MFTUnregisterLocal")
+	procMFTUnregisterLocalByCLSID                     = modMFPlat.NewProc("MFTUnregisterLocalByCLSID")
 	procMFUnlockDXGIDeviceManager                     = modMFPlat.NewProc("MFUnlockDXGIDeviceManager")
 	procMFUnlockPlatform                              = modMFPlat.NewProc("MFUnlockPlatform")
 	procMFUnlockWorkQueue                             = modMFPlat.NewProc("MFUnlockWorkQueue")
 	procMFUnregisterPlatformFromMMCSS                 = modMFPlat.NewProc("MFUnregisterPlatformFromMMCSS")
 	procMFUnwrapMediaType                             = modMFPlat.NewProc("MFUnwrapMediaType")
+	procMFValidateMediaTypeSize                       = modMFPlat.NewProc("MFValidateMediaTypeSize")
 	procMFWrapMediaType                               = modMFPlat.NewProc("MFWrapMediaType")
 	procMFllMulDiv                                    = modMFPlat.NewProc("MFllMulDiv")
 	procMFPCreateMediaPlayer                          = modMFPlay.NewProc("MFPCreateMediaPlayer")
@@ -304,6 +316,7 @@ var Procs = struct {
 	MFCreate3GPMediaSink                          *win32.Proc
 	MFCreateAC3MediaSink                          *win32.Proc
 	MFCreateADTSMediaSink                         *win32.Proc
+	MFCreateAMMediaTypeFromMFMediaType            *win32.Proc
 	MFCreateASFContentInfo                        *win32.Proc
 	MFCreateASFIndexer                            *win32.Proc
 	MFCreateASFIndexerByteStream                  *win32.Proc
@@ -357,7 +370,9 @@ var Procs = struct {
 	MFCreateMediaSession                          *win32.Proc
 	MFCreateMediaType                             *win32.Proc
 	MFCreateMediaTypeFromProperties               *win32.Proc
+	MFCreateMediaTypeFromRepresentation           *win32.Proc
 	MFCreateMemoryBuffer                          *win32.Proc
+	MFCreateMuxSink                               *win32.Proc
 	MFCreateMuxStreamAttributes                   *win32.Proc
 	MFCreateMuxStreamMediaType                    *win32.Proc
 	MFCreateMuxStreamSample                       *win32.Proc
@@ -451,6 +466,7 @@ var Procs = struct {
 	MFGetWorkQueueMMCSSTaskId                     *win32.Proc
 	MFHeapAlloc                                   *win32.Proc
 	MFHeapFree                                    *win32.Proc
+	MFInitAMMediaTypeFromMFMediaType              *win32.Proc
 	MFInitAttributesFromBlob                      *win32.Proc
 	MFInitMediaTypeFromAMMediaType                *win32.Proc
 	MFInitMediaTypeFromMFVideoFormat              *win32.Proc
@@ -491,15 +507,23 @@ var Procs = struct {
 	MFShutdownObject                              *win32.Proc
 	MFSplitSample                                 *win32.Proc
 	MFStartup                                     *win32.Proc
+	MFTEnum                                       *win32.Proc
+	MFTEnum2                                      *win32.Proc
+	MFTEnumEx                                     *win32.Proc
+	MFTGetInfo                                    *win32.Proc
+	MFTRegister                                   *win32.Proc
 	MFTRegisterLocal                              *win32.Proc
 	MFTRegisterLocalByCLSID                       *win32.Proc
+	MFTUnregister                                 *win32.Proc
 	MFTUnregisterLocal                            *win32.Proc
+	MFTUnregisterLocalByCLSID                     *win32.Proc
 	MFTranscodeGetAudioOutputAvailableTypes       *win32.Proc
 	MFUnlockDXGIDeviceManager                     *win32.Proc
 	MFUnlockPlatform                              *win32.Proc
 	MFUnlockWorkQueue                             *win32.Proc
 	MFUnregisterPlatformFromMMCSS                 *win32.Proc
 	MFUnwrapMediaType                             *win32.Proc
+	MFValidateMediaTypeSize                       *win32.Proc
 	MFWrapMediaType                               *win32.Proc
 	MFllMulDiv                                    *win32.Proc
 	OPMGetVideoOutputForTarget                    *win32.Proc
@@ -538,6 +562,7 @@ var Procs = struct {
 	MFCreate3GPMediaSink:                          procMFCreate3GPMediaSink,
 	MFCreateAC3MediaSink:                          procMFCreateAC3MediaSink,
 	MFCreateADTSMediaSink:                         procMFCreateADTSMediaSink,
+	MFCreateAMMediaTypeFromMFMediaType:            procMFCreateAMMediaTypeFromMFMediaType,
 	MFCreateASFContentInfo:                        procMFCreateASFContentInfo,
 	MFCreateASFIndexer:                            procMFCreateASFIndexer,
 	MFCreateASFIndexerByteStream:                  procMFCreateASFIndexerByteStream,
@@ -591,7 +616,9 @@ var Procs = struct {
 	MFCreateMediaSession:                          procMFCreateMediaSession,
 	MFCreateMediaType:                             procMFCreateMediaType,
 	MFCreateMediaTypeFromProperties:               procMFCreateMediaTypeFromProperties,
+	MFCreateMediaTypeFromRepresentation:           procMFCreateMediaTypeFromRepresentation,
 	MFCreateMemoryBuffer:                          procMFCreateMemoryBuffer,
+	MFCreateMuxSink:                               procMFCreateMuxSink,
 	MFCreateMuxStreamAttributes:                   procMFCreateMuxStreamAttributes,
 	MFCreateMuxStreamMediaType:                    procMFCreateMuxStreamMediaType,
 	MFCreateMuxStreamSample:                       procMFCreateMuxStreamSample,
@@ -685,6 +712,7 @@ var Procs = struct {
 	MFGetWorkQueueMMCSSTaskId:                     procMFGetWorkQueueMMCSSTaskId,
 	MFHeapAlloc:                                   procMFHeapAlloc,
 	MFHeapFree:                                    procMFHeapFree,
+	MFInitAMMediaTypeFromMFMediaType:              procMFInitAMMediaTypeFromMFMediaType,
 	MFInitAttributesFromBlob:                      procMFInitAttributesFromBlob,
 	MFInitMediaTypeFromAMMediaType:                procMFInitMediaTypeFromAMMediaType,
 	MFInitMediaTypeFromMFVideoFormat:              procMFInitMediaTypeFromMFVideoFormat,
@@ -725,15 +753,23 @@ var Procs = struct {
 	MFShutdownObject:                              procMFShutdownObject,
 	MFSplitSample:                                 procMFSplitSample,
 	MFStartup:                                     procMFStartup,
+	MFTEnum:                                       procMFTEnum,
+	MFTEnum2:                                      procMFTEnum2,
+	MFTEnumEx:                                     procMFTEnumEx,
+	MFTGetInfo:                                    procMFTGetInfo,
+	MFTRegister:                                   procMFTRegister,
 	MFTRegisterLocal:                              procMFTRegisterLocal,
 	MFTRegisterLocalByCLSID:                       procMFTRegisterLocalByCLSID,
+	MFTUnregister:                                 procMFTUnregister,
 	MFTUnregisterLocal:                            procMFTUnregisterLocal,
+	MFTUnregisterLocalByCLSID:                     procMFTUnregisterLocalByCLSID,
 	MFTranscodeGetAudioOutputAvailableTypes:       procMFTranscodeGetAudioOutputAvailableTypes,
 	MFUnlockDXGIDeviceManager:                     procMFUnlockDXGIDeviceManager,
 	MFUnlockPlatform:                              procMFUnlockPlatform,
 	MFUnlockWorkQueue:                             procMFUnlockWorkQueue,
 	MFUnregisterPlatformFromMMCSS:                 procMFUnregisterPlatformFromMMCSS,
 	MFUnwrapMediaType:                             procMFUnwrapMediaType,
+	MFValidateMediaTypeSize:                       procMFValidateMediaTypeSize,
 	MFWrapMediaType:                               procMFWrapMediaType,
 	MFllMulDiv:                                    procMFllMulDiv,
 	OPMGetVideoOutputForTarget:                    procOPMGetVideoOutputForTarget,
@@ -977,6 +1013,16 @@ func MFCreateAC3MediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMF
 // Minimum OS: windows8.0.
 func MFCreateADTSMediaSink(pTargetByteStream *IMFByteStream, pAudioMediaType *IMFMediaType, ppMediaSink **IMFMediaSink) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateADTSMediaSink.Addr(), uintptr(unsafe.Pointer(pTargetByteStream)), uintptr(unsafe.Pointer(pAudioMediaType)), uintptr(unsafe.Pointer(ppMediaSink)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFCreateAMMediaTypeFromMFMediaType = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// MFCreateAMMediaTypeFromMFMediaType calls MFPlat!MFCreateAMMediaTypeFromMFMediaType.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreateammediatypefrommfmediatype
+// Minimum OS: windows6.0.6000.
+func MFCreateAMMediaTypeFromMFMediaType(pMFType *IMFMediaType, guidFormatBlockType win32.GUID, ppAMType **AM_MEDIA_TYPE) error {
+	r1, _, _ := win32.Call(procMFCreateAMMediaTypeFromMFMediaType.Addr(), specMFCreateAMMediaTypeFromMFMediaType, nil, uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(&guidFormatBlockType)), uintptr(unsafe.Pointer(ppAMType))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1403,11 +1449,31 @@ func MFCreateMediaTypeFromProperties(punkStream *systemcom.IUnknown, ppMediaType
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specMFCreateMediaTypeFromRepresentation = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// MFCreateMediaTypeFromRepresentation calls MFPlat!MFCreateMediaTypeFromRepresentation.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatemediatypefromrepresentation
+// Minimum OS: windows6.0.6000.
+func MFCreateMediaTypeFromRepresentation(guidRepresentation win32.GUID, pvRepresentation unsafe.Pointer, ppIMediaType **IMFMediaType) error {
+	r1, _, _ := win32.Call(procMFCreateMediaTypeFromRepresentation.Addr(), specMFCreateMediaTypeFromRepresentation, nil, uintptr(unsafe.Pointer(&guidRepresentation)), uintptr(unsafe.Pointer(pvRepresentation)), uintptr(unsafe.Pointer(ppIMediaType))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MFCreateMemoryBuffer calls MFPlat!MFCreateMemoryBuffer.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatememorybuffer
 // Minimum OS: windows6.0.6000.
 func MFCreateMemoryBuffer(cbMaxLength uint32, ppBuffer **IMFMediaBuffer) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateMemoryBuffer.Addr(), uintptr(cbMaxLength), uintptr(unsafe.Pointer(ppBuffer)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFCreateMuxSink = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// MFCreateMuxSink calls MF!MFCreateMuxSink.
+// https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfcreatemuxsink
+// Minimum OS: windows8.0.
+func MFCreateMuxSink(guidOutputSubType win32.GUID, pOutputAttributes *IMFAttributes, pOutputByteStream *IMFByteStream, ppMuxSink **IMFMediaSink) error {
+	r1, _, _ := win32.Call(procMFCreateMuxSink.Addr(), specMFCreateMuxSink, nil, uintptr(unsafe.Pointer(&guidOutputSubType)), uintptr(unsafe.Pointer(pOutputAttributes)), uintptr(unsafe.Pointer(pOutputByteStream)), uintptr(unsafe.Pointer(ppMuxSink))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2183,6 +2249,16 @@ func MFHeapFree(pv unsafe.Pointer) {
 	syscall.SyscallN(procMFHeapFree.Addr(), uintptr(unsafe.Pointer(pv)))
 }
 
+var specMFInitAMMediaTypeFromMFMediaType = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// MFInitAMMediaTypeFromMFMediaType calls MFPlat!MFInitAMMediaTypeFromMFMediaType.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitammediatypefrommfmediatype
+// Minimum OS: windows6.0.6000.
+func MFInitAMMediaTypeFromMFMediaType(pMFType *IMFMediaType, guidFormatBlockType win32.GUID, pAMType *AM_MEDIA_TYPE) error {
+	r1, _, _ := win32.Call(procMFInitAMMediaTypeFromMFMediaType.Addr(), specMFInitAMMediaTypeFromMFMediaType, nil, uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(&guidFormatBlockType)), uintptr(unsafe.Pointer(pAMType))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MFInitAttributesFromBlob calls MFPlat!MFInitAttributesFromBlob.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitattributesfromblob
 // Minimum OS: windows6.0.6000.
@@ -2518,6 +2594,65 @@ func MFStartup(Version uint32, dwFlags uint32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specMFTEnum = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTEnum calls MFPlat!MFTEnum.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftenum
+// Minimum OS: windows6.0.6000.
+func MFTEnum(guidCategory win32.GUID, Flags uint32, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pAttributes *IMFAttributes, ppclsidMFT **win32.GUID, pcMFTs *uint32) error {
+	r1, _, _ := win32.Call(procMFTEnum.Addr(), specMFTEnum, nil, uintptr(unsafe.Pointer(&guidCategory)), uintptr(Flags), uintptr(unsafe.Pointer(pInputType)), uintptr(unsafe.Pointer(pOutputType)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(ppclsidMFT)), uintptr(unsafe.Pointer(pcMFTs))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTEnum2 = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTEnum2 calls MFPlat!MFTEnum2.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftenum2
+// Minimum OS: windows10.0.10240.
+func MFTEnum2(guidCategory win32.GUID, Flags uint32, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pAttributes *IMFAttributes, pppMFTActivate ***IMFActivate, pnumMFTActivate *uint32) error {
+	r1, _, _ := win32.Call(procMFTEnum2.Addr(), specMFTEnum2, nil, uintptr(unsafe.Pointer(&guidCategory)), uintptr(Flags), uintptr(unsafe.Pointer(pInputType)), uintptr(unsafe.Pointer(pOutputType)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pppMFTActivate)), uintptr(unsafe.Pointer(pnumMFTActivate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTEnumEx = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTEnumEx calls MFPlat!MFTEnumEx.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftenumex
+// Minimum OS: windows6.1.
+func MFTEnumEx(guidCategory win32.GUID, Flags uint32, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pppMFTActivate ***IMFActivate, pnumMFTActivate *uint32) error {
+	r1, _, _ := win32.Call(procMFTEnumEx.Addr(), specMFTEnumEx, nil, uintptr(unsafe.Pointer(&guidCategory)), uintptr(Flags), uintptr(unsafe.Pointer(pInputType)), uintptr(unsafe.Pointer(pOutputType)), uintptr(unsafe.Pointer(pppMFTActivate)), uintptr(unsafe.Pointer(pnumMFTActivate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTGetInfo = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTGetInfo calls MFPlat!MFTGetInfo.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftgetinfo
+// Minimum OS: windows6.0.6000.
+func MFTGetInfo(clsidMFT win32.GUID, pszName *foundation.PWSTR, ppInputTypes **MFT_REGISTER_TYPE_INFO, pcInputTypes *uint32, ppOutputTypes **MFT_REGISTER_TYPE_INFO, pcOutputTypes *uint32, ppAttributes **IMFAttributes) error {
+	r1, _, _ := win32.Call(procMFTGetInfo.Addr(), specMFTGetInfo, nil, uintptr(unsafe.Pointer(&clsidMFT)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(ppInputTypes)), uintptr(unsafe.Pointer(pcInputTypes)), uintptr(unsafe.Pointer(ppOutputTypes)), uintptr(unsafe.Pointer(pcOutputTypes)), uintptr(unsafe.Pointer(ppAttributes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTRegister = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// MFTRegister calls MFPlat!MFTRegister.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftregister
+// Minimum OS: windows6.0.6000.
+func MFTRegister(clsidMFT win32.GUID, guidCategory win32.GUID, pszName string, Flags uint32, pInputTypes []MFT_REGISTER_TYPE_INFO, pOutputTypes []MFT_REGISTER_TYPE_INFO, pAttributes *IMFAttributes) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	var _pInputTypes *MFT_REGISTER_TYPE_INFO
+	if len(pInputTypes) > 0 {
+		_pInputTypes = &pInputTypes[0]
+	}
+	var _pOutputTypes *MFT_REGISTER_TYPE_INFO
+	if len(pOutputTypes) > 0 {
+		_pOutputTypes = &pOutputTypes[0]
+	}
+	r1, _, _ := win32.Call(procMFTRegister.Addr(), specMFTRegister, nil, uintptr(unsafe.Pointer(&clsidMFT)), uintptr(unsafe.Pointer(&guidCategory)), uintptr(unsafe.Pointer(_pszName)), uintptr(Flags), uintptr(len(pInputTypes)), uintptr(unsafe.Pointer(_pInputTypes)), uintptr(len(pOutputTypes)), uintptr(unsafe.Pointer(_pOutputTypes)), uintptr(unsafe.Pointer(pAttributes))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MFTRegisterLocal calls MFPlat!MFTRegisterLocal.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftregisterlocal
 // Minimum OS: windows6.1.
@@ -2552,11 +2687,31 @@ func MFTRegisterLocalByCLSID(clisdMFT *win32.GUID, guidCategory *win32.GUID, psz
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specMFTUnregister = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false)}}
+
+// MFTUnregister calls MFPlat!MFTUnregister.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftunregister
+// Minimum OS: windows6.0.6000.
+func MFTUnregister(clsidMFT win32.GUID) error {
+	r1, _, _ := win32.Call(procMFTUnregister.Addr(), specMFTUnregister, nil, uintptr(unsafe.Pointer(&clsidMFT))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MFTUnregisterLocal calls MFPlat!MFTUnregisterLocal.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftunregisterlocal
 // Minimum OS: windows6.1.
 func MFTUnregisterLocal(pClassFactory *systemcom.IClassFactory) error {
 	r1, _, _ := syscall.SyscallN(procMFTUnregisterLocal.Addr(), uintptr(unsafe.Pointer(pClassFactory)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFTUnregisterLocalByCLSID = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false)}}
+
+// MFTUnregisterLocalByCLSID calls MFPlat!MFTUnregisterLocalByCLSID.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftunregisterlocalbyclsid
+// Minimum OS: windows6.1.
+func MFTUnregisterLocalByCLSID(clsidMFT win32.GUID) error {
+	r1, _, _ := win32.Call(procMFTUnregisterLocalByCLSID.Addr(), specMFTUnregisterLocalByCLSID, nil, uintptr(unsafe.Pointer(&clsidMFT))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2605,6 +2760,20 @@ func MFUnregisterPlatformFromMMCSS() error {
 // Minimum OS: windows6.0.6000.
 func MFUnwrapMediaType(pWrap *IMFMediaType, ppOrig **IMFMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFUnwrapMediaType.Addr(), uintptr(unsafe.Pointer(pWrap)), uintptr(unsafe.Pointer(ppOrig)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specMFValidateMediaTypeSize = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// MFValidateMediaTypeSize calls MFPlat!MFValidateMediaTypeSize.
+// https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfvalidatemediatypesize
+// Minimum OS: windows6.0.6000.
+func MFValidateMediaTypeSize(FormatType win32.GUID, pBlock []byte) error {
+	var _pBlock *byte
+	if len(pBlock) > 0 {
+		_pBlock = &pBlock[0]
+	}
+	r1, _, _ := win32.Call(procMFValidateMediaTypeSize.Addr(), specMFValidateMediaTypeSize, nil, uintptr(unsafe.Pointer(&FormatType)), uintptr(unsafe.Pointer(_pBlock)), uintptr(len(pBlock))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -5,12 +5,14 @@
 package assessmenttool
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	dataxmlmsxml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/xml/msxml"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 	uiaccessibility "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/accessibility"
@@ -135,6 +137,14 @@ type IProvideWinSATVisuals struct {
 
 // IID_IProvideWinSATVisuals is the interface identifier for IProvideWinSATVisuals.
 var IID_IProvideWinSATVisuals = win32.GUID{Data1: 0xa9f4ade0, Data2: 0x871a, Data3: 0x42a3, Data4: [8]byte{0xb8, 0x13, 0x30, 0x78, 0xd2, 0x51, 0x62, 0xc9}}
+
+var specIProvideWinSATVisuals_Get_Bitmap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// Get_Bitmap dispatches through IProvideWinSATVisuals's vtable slot 3.
+func (self *IProvideWinSATVisuals) Get_Bitmap(bitmapSize WINSAT_BITMAP_SIZE, state WINSAT_ASSESSMENT_STATE, rating float32, pBitmap *graphicsgdi.HBITMAP) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIProvideWinSATVisuals_Get_Bitmap, nil, uintptr(unsafe.Pointer(self)), uintptr(bitmapSize), uintptr(state), uintptr(math.Float32bits(rating)), uintptr(unsafe.Pointer(pBitmap))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IQueryAllWinSATAssessments: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/nn-winsatcominterfacei-iqueryallwinsatassessments
 // IID: 0b89ed1d-6398-4fea-87fc-567d8d19176f

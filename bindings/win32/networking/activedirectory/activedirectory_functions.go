@@ -50,6 +50,7 @@ var (
 	procPropVariantToAdsType              = modACTIVEDS.NewProc("PropVariantToAdsType")
 	procReallocADsMem                     = modACTIVEDS.NewProc("ReallocADsMem")
 	procReallocADsStr                     = modACTIVEDS.NewProc("ReallocADsStr")
+	procSecurityDescriptorToBinarySD      = modACTIVEDS.NewProc("SecurityDescriptorToBinarySD")
 	procDsCrackSpn                        = modDSPARSE.NewProc("DsCrackSpnW")
 	procDsCrackSpn2                       = modDSPARSE.NewProc("DsCrackSpn2W")
 	procDsCrackSpn2A                      = modDSPARSE.NewProc("DsCrackSpn2A")
@@ -350,6 +351,7 @@ var Procs = struct {
 	PropVariantToAdsType              *win32.Proc
 	ReallocADsMem                     *win32.Proc
 	ReallocADsStr                     *win32.Proc
+	SecurityDescriptorToBinarySD      *win32.Proc
 }{
 	ADsBuildEnumerator:                procADsBuildEnumerator,
 	ADsBuildVarArrayInt:               procADsBuildVarArrayInt,
@@ -508,6 +510,7 @@ var Procs = struct {
 	PropVariantToAdsType:              procPropVariantToAdsType,
 	ReallocADsMem:                     procReallocADsMem,
 	ReallocADsStr:                     procReallocADsStr,
+	SecurityDescriptorToBinarySD:      procSecurityDescriptorToBinarySD,
 }
 
 // ADsBuildEnumerator calls ACTIVEDS!ADsBuildEnumerator.
@@ -1903,4 +1906,17 @@ func ReallocADsStr(ppStr *foundation.PWSTR, pStr string) bool {
 	_pStr := win32.UTF16Ptr(pStr)
 	r1, _, _ := syscall.SyscallN(procReallocADsStr.Addr(), uintptr(unsafe.Pointer(ppStr)), uintptr(unsafe.Pointer(_pStr)))
 	return r1 != 0
+}
+
+var specSecurityDescriptorToBinarySD = &win32.Spec{Args: []win32.Arg{win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SecurityDescriptorToBinarySD calls ACTIVEDS!SecurityDescriptorToBinarySD.
+// https://learn.microsoft.com/windows/win32/api/adshlp/nf-adshlp-securitydescriptortobinarysd
+// Minimum OS: windows6.0.6000.
+func SecurityDescriptorToBinarySD(vVarSecDes systemvariant.VARIANT, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR, pdwSDLength *uint32, pszServerName string, userName string, passWord string, dwFlags uint32) error {
+	_pszServerName := win32.UTF16Ptr(pszServerName)
+	_userName := win32.UTF16Ptr(userName)
+	_passWord := win32.UTF16Ptr(passWord)
+	r1, _, _ := win32.Call(procSecurityDescriptorToBinarySD.Addr(), specSecurityDescriptorToBinarySD, nil, uintptr(unsafe.Pointer(&vVarSecDes)), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(unsafe.Pointer(pdwSDLength)), uintptr(unsafe.Pointer(_pszServerName)), uintptr(unsafe.Pointer(_userName)), uintptr(unsafe.Pointer(_passWord)), uintptr(dwFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }

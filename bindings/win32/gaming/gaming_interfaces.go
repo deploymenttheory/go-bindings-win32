@@ -27,6 +27,22 @@ func (self *IGameExplorer) AddGame(bstrGDFBinaryPath foundation.BSTR, bstrGameIn
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIGameExplorer_RemoveGame = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// RemoveGame dispatches through IGameExplorer's vtable slot 4.
+func (self *IGameExplorer) RemoveGame(guidInstanceID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIGameExplorer_RemoveGame, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidInstanceID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIGameExplorer_UpdateGame = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// UpdateGame dispatches through IGameExplorer's vtable slot 5.
+func (self *IGameExplorer) UpdateGame(guidInstanceID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIGameExplorer_UpdateGame, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guidInstanceID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // VerifyAccess dispatches through IGameExplorer's vtable slot 6.
 func (self *IGameExplorer) VerifyAccess(bstrGDFBinaryPath foundation.BSTR, pfHasAccess *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGDFBinaryPath)), uintptr(unsafe.Pointer(pfHasAccess)))

@@ -5,6 +5,7 @@
 package directwrite
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -46,10 +47,34 @@ type IDWriteBitmapRenderTarget struct {
 // IID_IDWriteBitmapRenderTarget is the interface identifier for IDWriteBitmapRenderTarget.
 var IID_IDWriteBitmapRenderTarget = win32.GUID{Data1: 0x5e5a32a3, Data2: 0x8dff, Data3: 0x4773, Data4: [8]byte{0x9f, 0xf6, 0x06, 0x96, 0xea, 0xb7, 0x72, 0x67}}
 
+var specIDWriteBitmapRenderTarget_DrawGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DrawGlyphRun dispatches through IDWriteBitmapRenderTarget's vtable slot 3.
+func (self *IDWriteBitmapRenderTarget) DrawGlyphRun(baselineOriginX float32, baselineOriginY float32, measuringMode DWRITE_MEASURING_MODE, glyphRun *DWRITE_GLYPH_RUN, renderingParams *IDWriteRenderingParams, textColor foundation.COLORREF, blackBoxRect *foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIDWriteBitmapRenderTarget_DrawGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(measuringMode), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(renderingParams)), uintptr(textColor), uintptr(unsafe.Pointer(blackBoxRect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetMemoryDC dispatches through IDWriteBitmapRenderTarget's vtable slot 4.
 func (self *IDWriteBitmapRenderTarget) GetMemoryDC() graphicsgdi.HDC {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
 	return graphicsgdi.HDC(r1)
+}
+
+var specIDWriteBitmapRenderTarget_GetPixelsPerDip = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetPixelsPerDip dispatches through IDWriteBitmapRenderTarget's vtable slot 5.
+func (self *IDWriteBitmapRenderTarget) GetPixelsPerDip() float32 {
+	r := win32.Call(self.LpVtbl[5], specIDWriteBitmapRenderTarget_GetPixelsPerDip, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specIDWriteBitmapRenderTarget_SetPixelsPerDip = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetPixelsPerDip dispatches through IDWriteBitmapRenderTarget's vtable slot 6.
+func (self *IDWriteBitmapRenderTarget) SetPixelsPerDip(pixelsPerDip float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDWriteBitmapRenderTarget_SetPixelsPerDip, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(pixelsPerDip))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrentTransform dispatches through IDWriteBitmapRenderTarget's vtable slot 7.
@@ -123,6 +148,22 @@ var IID_IDWriteBitmapRenderTarget3 = win32.GUID{Data1: 0xaeec37db, Data2: 0xc337
 func (self *IDWriteBitmapRenderTarget3) GetPaintFeatureLevel() DWRITE_PAINT_FEATURE_LEVEL {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
 	return DWRITE_PAINT_FEATURE_LEVEL(r1)
+}
+
+var specIDWriteBitmapRenderTarget3_DrawPaintGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DrawPaintGlyphRun dispatches through IDWriteBitmapRenderTarget3's vtable slot 15.
+func (self *IDWriteBitmapRenderTarget3) DrawPaintGlyphRun(baselineOriginX float32, baselineOriginY float32, measuringMode DWRITE_MEASURING_MODE, glyphRun *DWRITE_GLYPH_RUN, glyphImageFormat DWRITE_GLYPH_IMAGE_FORMATS, textColor foundation.COLORREF, colorPaletteIndex uint32, blackBoxRect *foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIDWriteBitmapRenderTarget3_DrawPaintGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(measuringMode), uintptr(unsafe.Pointer(glyphRun)), uintptr(glyphImageFormat), uintptr(textColor), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(blackBoxRect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteBitmapRenderTarget3_DrawGlyphRunWithColorSupport = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DrawGlyphRunWithColorSupport dispatches through IDWriteBitmapRenderTarget3's vtable slot 16.
+func (self *IDWriteBitmapRenderTarget3) DrawGlyphRunWithColorSupport(baselineOriginX float32, baselineOriginY float32, measuringMode DWRITE_MEASURING_MODE, glyphRun *DWRITE_GLYPH_RUN, renderingParams *IDWriteRenderingParams, textColor foundation.COLORREF, colorPaletteIndex uint32, blackBoxRect *foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIDWriteBitmapRenderTarget3_DrawGlyphRunWithColorSupport, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(measuringMode), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(renderingParams)), uintptr(textColor), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(blackBoxRect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IDWriteColorGlyphRunEnumerator: https://learn.microsoft.com/windows/win32/DirectWrite/idwritecolorglyphrunenumerator
@@ -238,6 +279,14 @@ func (self *IDWriteFactory) CreateMonitorRenderingParams(monitor graphicsgdi.HMO
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteFactory_CreateCustomRenderingParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// CreateCustomRenderingParams dispatches through IDWriteFactory's vtable slot 12.
+func (self *IDWriteFactory) CreateCustomRenderingParams(gamma float32, enhancedContrast float32, clearTypeLevel float32, pixelGeometry DWRITE_PIXEL_GEOMETRY, renderingMode DWRITE_RENDERING_MODE, renderingParams **IDWriteRenderingParams) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDWriteFactory_CreateCustomRenderingParams, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(gamma)), uintptr(math.Float32bits(enhancedContrast)), uintptr(math.Float32bits(clearTypeLevel)), uintptr(pixelGeometry), uintptr(renderingMode), uintptr(unsafe.Pointer(renderingParams))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // RegisterFontFileLoader dispatches through IDWriteFactory's vtable slot 13.
 func (self *IDWriteFactory) RegisterFontFileLoader(fontFileLoader *IDWriteFontFileLoader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFileLoader)))
@@ -250,6 +299,16 @@ func (self *IDWriteFactory) UnregisterFontFileLoader(fontFileLoader *IDWriteFont
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteFactory_CreateTextFormat = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// CreateTextFormat dispatches through IDWriteFactory's vtable slot 15.
+func (self *IDWriteFactory) CreateTextFormat(fontFamilyName string, fontCollection *IDWriteFontCollection, fontWeight DWRITE_FONT_WEIGHT, fontStyle DWRITE_FONT_STYLE, fontStretch DWRITE_FONT_STRETCH, fontSize float32, localeName string, textFormat **IDWriteTextFormat) error {
+	_fontFamilyName := win32.UTF16Ptr(fontFamilyName)
+	_localeName := win32.UTF16Ptr(localeName)
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIDWriteFactory_CreateTextFormat, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFamilyName)), uintptr(unsafe.Pointer(fontCollection)), uintptr(fontWeight), uintptr(fontStyle), uintptr(fontStretch), uintptr(math.Float32bits(fontSize)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(textFormat))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // CreateTypography dispatches through IDWriteFactory's vtable slot 16.
 func (self *IDWriteFactory) CreateTypography(typography **IDWriteTypography) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(typography)))
@@ -259,6 +318,25 @@ func (self *IDWriteFactory) CreateTypography(typography **IDWriteTypography) err
 // GetGdiInterop dispatches through IDWriteFactory's vtable slot 17.
 func (self *IDWriteFactory) GetGdiInterop(gdiInterop **IDWriteGdiInterop) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gdiInterop)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFactory_CreateTextLayout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateTextLayout dispatches through IDWriteFactory's vtable slot 18.
+func (self *IDWriteFactory) CreateTextLayout(string_ string, stringLength uint32, textFormat *IDWriteTextFormat, maxWidth float32, maxHeight float32, textLayout **IDWriteTextLayout) error {
+	_string_ := win32.UTF16Ptr(string_)
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIDWriteFactory_CreateTextLayout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(math.Float32bits(maxWidth)), uintptr(math.Float32bits(maxHeight)), uintptr(unsafe.Pointer(textLayout))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFactory_CreateGdiCompatibleTextLayout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// CreateGdiCompatibleTextLayout dispatches through IDWriteFactory's vtable slot 19.
+func (self *IDWriteFactory) CreateGdiCompatibleTextLayout(string_ string, stringLength uint32, textFormat *IDWriteTextFormat, layoutWidth float32, layoutHeight float32, pixelsPerDip float32, transform *DWRITE_MATRIX, useGdiNatural bool, textLayout **IDWriteTextLayout) error {
+	_string_ := win32.UTF16Ptr(string_)
+	_useGdiNatural := win32.Bool32(useGdiNatural)
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIDWriteFactory_CreateGdiCompatibleTextLayout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_string_)), uintptr(stringLength), uintptr(unsafe.Pointer(textFormat)), uintptr(math.Float32bits(layoutWidth)), uintptr(math.Float32bits(layoutHeight)), uintptr(math.Float32bits(pixelsPerDip)), uintptr(unsafe.Pointer(transform)), uintptr(_useGdiNatural), uintptr(unsafe.Pointer(textLayout))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -282,6 +360,14 @@ func (self *IDWriteFactory) CreateNumberSubstitution(substitutionMethod DWRITE_N
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteFactory_CreateGlyphRunAnalysis = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateGlyphRunAnalysis dispatches through IDWriteFactory's vtable slot 23.
+func (self *IDWriteFactory) CreateGlyphRunAnalysis(glyphRun *DWRITE_GLYPH_RUN, pixelsPerDip float32, transform *DWRITE_MATRIX, renderingMode DWRITE_RENDERING_MODE, measuringMode DWRITE_MEASURING_MODE, baselineOriginX float32, baselineOriginY float32, glyphRunAnalysis **IDWriteGlyphRunAnalysis) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIDWriteFactory_CreateGlyphRunAnalysis, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphRun)), uintptr(math.Float32bits(pixelsPerDip)), uintptr(unsafe.Pointer(transform)), uintptr(renderingMode), uintptr(measuringMode), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(unsafe.Pointer(glyphRunAnalysis))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDWriteFactory1: https://learn.microsoft.com/windows/win32/api/dwrite_1/nn-dwrite_1-idwritefactory1
 // IID: 30572f99-dac6-41db-a16e-0486307e606a
 type IDWriteFactory1 struct {
@@ -295,6 +381,14 @@ var IID_IDWriteFactory1 = win32.GUID{Data1: 0x30572f99, Data2: 0xdac6, Data3: 0x
 func (self *IDWriteFactory1) GetEudcFontCollection(fontCollection **IDWriteFontCollection, checkForUpdates bool) error {
 	_checkForUpdates := win32.Bool32(checkForUpdates)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontCollection)), uintptr(_checkForUpdates))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFactory1_CreateCustomRenderingParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// CreateCustomRenderingParams dispatches through IDWriteFactory1's vtable slot 25.
+func (self *IDWriteFactory1) CreateCustomRenderingParams(gamma float32, enhancedContrast float32, enhancedContrastGrayscale float32, clearTypeLevel float32, pixelGeometry DWRITE_PIXEL_GEOMETRY, renderingMode DWRITE_RENDERING_MODE, renderingParams **IDWriteRenderingParams1) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIDWriteFactory1_CreateCustomRenderingParams, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(gamma)), uintptr(math.Float32bits(enhancedContrast)), uintptr(math.Float32bits(enhancedContrastGrayscale)), uintptr(math.Float32bits(clearTypeLevel)), uintptr(pixelGeometry), uintptr(renderingMode), uintptr(unsafe.Pointer(renderingParams))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -319,6 +413,30 @@ func (self *IDWriteFactory2) CreateFontFallbackBuilder(fontFallbackBuilder **IDW
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteFactory2_TranslateColorGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// TranslateColorGlyphRun dispatches through IDWriteFactory2's vtable slot 28.
+func (self *IDWriteFactory2) TranslateColorGlyphRun(baselineOriginX float32, baselineOriginY float32, glyphRun *DWRITE_GLYPH_RUN, glyphRunDescription *DWRITE_GLYPH_RUN_DESCRIPTION, measuringMode DWRITE_MEASURING_MODE, worldToDeviceTransform *DWRITE_MATRIX, colorPaletteIndex uint32, colorLayers **IDWriteColorGlyphRunEnumerator) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIDWriteFactory2_TranslateColorGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(measuringMode), uintptr(unsafe.Pointer(worldToDeviceTransform)), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(colorLayers))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFactory2_CreateCustomRenderingParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// CreateCustomRenderingParams dispatches through IDWriteFactory2's vtable slot 29.
+func (self *IDWriteFactory2) CreateCustomRenderingParams(gamma float32, enhancedContrast float32, grayscaleEnhancedContrast float32, clearTypeLevel float32, pixelGeometry DWRITE_PIXEL_GEOMETRY, renderingMode DWRITE_RENDERING_MODE, gridFitMode DWRITE_GRID_FIT_MODE, renderingParams **IDWriteRenderingParams2) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIDWriteFactory2_CreateCustomRenderingParams, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(gamma)), uintptr(math.Float32bits(enhancedContrast)), uintptr(math.Float32bits(grayscaleEnhancedContrast)), uintptr(math.Float32bits(clearTypeLevel)), uintptr(pixelGeometry), uintptr(renderingMode), uintptr(gridFitMode), uintptr(unsafe.Pointer(renderingParams))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFactory2_CreateGlyphRunAnalysis = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateGlyphRunAnalysis dispatches through IDWriteFactory2's vtable slot 30.
+func (self *IDWriteFactory2) CreateGlyphRunAnalysis(glyphRun *DWRITE_GLYPH_RUN, transform *DWRITE_MATRIX, renderingMode DWRITE_RENDERING_MODE, measuringMode DWRITE_MEASURING_MODE, gridFitMode DWRITE_GRID_FIT_MODE, antialiasMode DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX float32, baselineOriginY float32, glyphRunAnalysis **IDWriteGlyphRunAnalysis) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIDWriteFactory2_CreateGlyphRunAnalysis, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(transform)), uintptr(renderingMode), uintptr(measuringMode), uintptr(gridFitMode), uintptr(antialiasMode), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(unsafe.Pointer(glyphRunAnalysis))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDWriteFactory3: https://learn.microsoft.com/windows/win32/api/dwrite_3/nn-dwrite_3-idwritefactory3
 // IID: 9a1b41c3-d3bb-466a-87fc-fe67556a3b65
 type IDWriteFactory3 struct {
@@ -327,6 +445,22 @@ type IDWriteFactory3 struct {
 
 // IID_IDWriteFactory3 is the interface identifier for IDWriteFactory3.
 var IID_IDWriteFactory3 = win32.GUID{Data1: 0x9a1b41c3, Data2: 0xd3bb, Data3: 0x466a, Data4: [8]byte{0x87, 0xfc, 0xfe, 0x67, 0x55, 0x6a, 0x3b, 0x65}}
+
+var specIDWriteFactory3_CreateGlyphRunAnalysis = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateGlyphRunAnalysis dispatches through IDWriteFactory3's vtable slot 31.
+func (self *IDWriteFactory3) CreateGlyphRunAnalysis(glyphRun *DWRITE_GLYPH_RUN, transform *DWRITE_MATRIX, renderingMode DWRITE_RENDERING_MODE1, measuringMode DWRITE_MEASURING_MODE, gridFitMode DWRITE_GRID_FIT_MODE, antialiasMode DWRITE_TEXT_ANTIALIAS_MODE, baselineOriginX float32, baselineOriginY float32, glyphRunAnalysis **IDWriteGlyphRunAnalysis) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIDWriteFactory3_CreateGlyphRunAnalysis, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(transform)), uintptr(renderingMode), uintptr(measuringMode), uintptr(gridFitMode), uintptr(antialiasMode), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(unsafe.Pointer(glyphRunAnalysis))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFactory3_CreateCustomRenderingParams = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// CreateCustomRenderingParams dispatches through IDWriteFactory3's vtable slot 32.
+func (self *IDWriteFactory3) CreateCustomRenderingParams(gamma float32, enhancedContrast float32, grayscaleEnhancedContrast float32, clearTypeLevel float32, pixelGeometry DWRITE_PIXEL_GEOMETRY, renderingMode DWRITE_RENDERING_MODE1, gridFitMode DWRITE_GRID_FIT_MODE, renderingParams **IDWriteRenderingParams3) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIDWriteFactory3_CreateCustomRenderingParams, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(gamma)), uintptr(math.Float32bits(enhancedContrast)), uintptr(math.Float32bits(grayscaleEnhancedContrast)), uintptr(math.Float32bits(clearTypeLevel)), uintptr(pixelGeometry), uintptr(renderingMode), uintptr(gridFitMode), uintptr(unsafe.Pointer(renderingParams))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // CreateFontFaceReference dispatches through IDWriteFactory3's vtable slot 33.
 func (self *IDWriteFactory3) CreateFontFaceReference(fontFile *IDWriteFontFile, faceIndex uint32, fontSimulations DWRITE_FONT_SIMULATIONS, fontFaceReference **IDWriteFontFaceReference) error {
@@ -382,21 +516,27 @@ type IDWriteFactory4 struct {
 // IID_IDWriteFactory4 is the interface identifier for IDWriteFactory4.
 var IID_IDWriteFactory4 = win32.GUID{Data1: 0x4b0b5bd3, Data2: 0x0797, Data3: 0x4549, Data4: [8]byte{0x8a, 0xc5, 0xfe, 0x91, 0x5c, 0xc5, 0x38, 0x56}}
 
+var specIDWriteFactory4_TranslateColorGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
 // TranslateColorGlyphRun dispatches through IDWriteFactory4's vtable slot 40.
 func (self *IDWriteFactory4) TranslateColorGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *DWRITE_GLYPH_RUN, glyphRunDescription *DWRITE_GLYPH_RUN_DESCRIPTION, desiredGlyphImageFormats DWRITE_GLYPH_IMAGE_FORMATS, measuringMode DWRITE_MEASURING_MODE, worldAndDpiTransform *DWRITE_MATRIX, colorPaletteIndex uint32, colorLayers **IDWriteColorGlyphRunEnumerator1) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(desiredGlyphImageFormats), uintptr(measuringMode), uintptr(unsafe.Pointer(worldAndDpiTransform)), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(colorLayers)))
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIDWriteFactory4_TranslateColorGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(desiredGlyphImageFormats), uintptr(measuringMode), uintptr(unsafe.Pointer(worldAndDpiTransform)), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(colorLayers))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
+
+var specIDWriteFactory4_ComputeGlyphOrigins = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(8, 4, 2, false), win32.Word}}
 
 // ComputeGlyphOrigins dispatches through IDWriteFactory4's vtable slot 41.
 func (self *IDWriteFactory4) ComputeGlyphOrigins(glyphRun *DWRITE_GLYPH_RUN, baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphOrigins *graphicsdirect2dcommon.D2D_POINT_2F) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphRun)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphOrigins)))
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIDWriteFactory4_ComputeGlyphOrigins, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphOrigins))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteFactory4_ComputeGlyphOrigins_ = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word}}
+
 // ComputeGlyphOrigins dispatches through IDWriteFactory4's vtable slot 42.
 func (self *IDWriteFactory4) ComputeGlyphOrigins_(glyphRun *DWRITE_GLYPH_RUN, measuringMode DWRITE_MEASURING_MODE, baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, worldAndDpiTransform *DWRITE_MATRIX, glyphOrigins *graphicsdirect2dcommon.D2D_POINT_2F) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphRun)), uintptr(measuringMode), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(worldAndDpiTransform)), uintptr(unsafe.Pointer(glyphOrigins)))
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIDWriteFactory4_ComputeGlyphOrigins_, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphRun)), uintptr(measuringMode), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(worldAndDpiTransform)), uintptr(unsafe.Pointer(glyphOrigins))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -500,6 +640,20 @@ func (self *IDWriteFactory6) CreateFontSetBuilder(fontSetBuilder **IDWriteFontSe
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteFactory6_CreateTextFormat = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// CreateTextFormat dispatches through IDWriteFactory6's vtable slot 54.
+func (self *IDWriteFactory6) CreateTextFormat(fontFamilyName string, fontCollection *IDWriteFontCollection, fontAxisValues []DWRITE_FONT_AXIS_VALUE, fontSize float32, localeName string, textFormat **IDWriteTextFormat3) error {
+	_fontFamilyName := win32.UTF16Ptr(fontFamilyName)
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	_localeName := win32.UTF16Ptr(localeName)
+	r1, _, _ := win32.Call(self.LpVtbl[54], specIDWriteFactory6_CreateTextFormat, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFamilyName)), uintptr(unsafe.Pointer(fontCollection)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(math.Float32bits(fontSize)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(textFormat))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDWriteFactory7: https://learn.microsoft.com/windows/win32/api/dwrite_3/nn-dwrite_3-idwritefactory7
 // IID: 35d0e0b3-9076-4d2e-a016-a91b568a06b4
 type IDWriteFactory7 struct {
@@ -531,9 +685,11 @@ type IDWriteFactory8 struct {
 // IID_IDWriteFactory8 is the interface identifier for IDWriteFactory8.
 var IID_IDWriteFactory8 = win32.GUID{Data1: 0xee0a7fb5, Data2: 0xdef4, Data3: 0x4c23, Data4: [8]byte{0xa4, 0x54, 0xc9, 0xc7, 0xdc, 0x87, 0x83, 0x98}}
 
+var specIDWriteFactory8_TranslateColorGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
 // TranslateColorGlyphRun dispatches through IDWriteFactory8's vtable slot 57.
 func (self *IDWriteFactory8) TranslateColorGlyphRun(baselineOrigin graphicsdirect2dcommon.D2D_POINT_2F, glyphRun *DWRITE_GLYPH_RUN, glyphRunDescription *DWRITE_GLYPH_RUN_DESCRIPTION, desiredGlyphImageFormats DWRITE_GLYPH_IMAGE_FORMATS, paintFeatureLevel DWRITE_PAINT_FEATURE_LEVEL, measuringMode DWRITE_MEASURING_MODE, worldAndDpiTransform *DWRITE_MATRIX, colorPaletteIndex uint32, colorEnumerator **IDWriteColorGlyphRunEnumerator1) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(desiredGlyphImageFormats), uintptr(paintFeatureLevel), uintptr(measuringMode), uintptr(unsafe.Pointer(worldAndDpiTransform)), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(colorEnumerator)))
+	r1, _, _ := win32.Call(self.LpVtbl[57], specIDWriteFactory8_TranslateColorGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&baselineOrigin)), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(desiredGlyphImageFormats), uintptr(paintFeatureLevel), uintptr(measuringMode), uintptr(unsafe.Pointer(worldAndDpiTransform)), uintptr(colorPaletteIndex), uintptr(unsafe.Pointer(colorEnumerator))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -960,6 +1116,42 @@ func (self *IDWriteFontFace) ReleaseFontTable(tableContext unsafe.Pointer) {
 	syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tableContext)))
 }
 
+var specIDWriteFontFace_GetGlyphRunOutline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetGlyphRunOutline dispatches through IDWriteFontFace's vtable slot 14.
+func (self *IDWriteFontFace) GetGlyphRunOutline(emSize float32, glyphIndices *uint16, glyphAdvances *float32, glyphOffsets *DWRITE_GLYPH_OFFSET, glyphCount uint32, isSideways bool, isRightToLeft bool, geometrySink *graphicsdirect2dcommon.ID2D1SimplifiedGeometrySink) error {
+	_isSideways := win32.Bool32(isSideways)
+	_isRightToLeft := win32.Bool32(isRightToLeft)
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIDWriteFontFace_GetGlyphRunOutline, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(emSize)), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(glyphAdvances)), uintptr(unsafe.Pointer(glyphOffsets)), uintptr(glyphCount), uintptr(_isSideways), uintptr(_isRightToLeft), uintptr(unsafe.Pointer(geometrySink))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFontFace_GetRecommendedRenderingMode = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// GetRecommendedRenderingMode dispatches through IDWriteFontFace's vtable slot 15.
+func (self *IDWriteFontFace) GetRecommendedRenderingMode(emSize float32, pixelsPerDip float32, measuringMode DWRITE_MEASURING_MODE, renderingParams *IDWriteRenderingParams, renderingMode *DWRITE_RENDERING_MODE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIDWriteFontFace_GetRecommendedRenderingMode, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(emSize)), uintptr(math.Float32bits(pixelsPerDip)), uintptr(measuringMode), uintptr(unsafe.Pointer(renderingParams)), uintptr(unsafe.Pointer(renderingMode))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFontFace_GetGdiCompatibleMetrics = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// GetGdiCompatibleMetrics dispatches through IDWriteFontFace's vtable slot 16.
+func (self *IDWriteFontFace) GetGdiCompatibleMetrics(emSize float32, pixelsPerDip float32, transform *DWRITE_MATRIX, fontFaceMetrics *DWRITE_FONT_METRICS) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIDWriteFontFace_GetGdiCompatibleMetrics, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(emSize)), uintptr(math.Float32bits(pixelsPerDip)), uintptr(unsafe.Pointer(transform)), uintptr(unsafe.Pointer(fontFaceMetrics))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFontFace_GetGdiCompatibleGlyphMetrics = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetGdiCompatibleGlyphMetrics dispatches through IDWriteFontFace's vtable slot 17.
+func (self *IDWriteFontFace) GetGdiCompatibleGlyphMetrics(emSize float32, pixelsPerDip float32, transform *DWRITE_MATRIX, useGdiNatural bool, glyphIndices *uint16, glyphCount uint32, glyphMetrics *DWRITE_GLYPH_METRICS, isSideways bool) error {
+	_useGdiNatural := win32.Bool32(useGdiNatural)
+	_isSideways := win32.Bool32(isSideways)
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIDWriteFontFace_GetGdiCompatibleGlyphMetrics, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(emSize)), uintptr(math.Float32bits(pixelsPerDip)), uintptr(unsafe.Pointer(transform)), uintptr(_useGdiNatural), uintptr(unsafe.Pointer(glyphIndices)), uintptr(glyphCount), uintptr(unsafe.Pointer(glyphMetrics)), uintptr(_isSideways)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDWriteFontFace1: https://learn.microsoft.com/windows/win32/api/dwrite_1/nn-dwrite_1-idwritefontface1
 // IID: a71efdb4-9fdb-4838-ad90-cfc3be8c3daf
 type IDWriteFontFace1 struct {
@@ -972,6 +1164,14 @@ var IID_IDWriteFontFace1 = win32.GUID{Data1: 0xa71efdb4, Data2: 0x9fdb, Data3: 0
 // GetMetrics dispatches through IDWriteFontFace1's vtable slot 18.
 func (self *IDWriteFontFace1) GetMetrics(fontMetrics *DWRITE_FONT_METRICS1) {
 	syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontMetrics)))
+}
+
+var specIDWriteFontFace1_GetGdiCompatibleMetrics = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// GetGdiCompatibleMetrics dispatches through IDWriteFontFace1's vtable slot 19.
+func (self *IDWriteFontFace1) GetGdiCompatibleMetrics(emSize float32, pixelsPerDip float32, transform *DWRITE_MATRIX, fontMetrics *DWRITE_FONT_METRICS1) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIDWriteFontFace1_GetGdiCompatibleMetrics, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(emSize)), uintptr(math.Float32bits(pixelsPerDip)), uintptr(unsafe.Pointer(transform)), uintptr(unsafe.Pointer(fontMetrics))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetCaretMetrics dispatches through IDWriteFontFace1's vtable slot 20.
@@ -1002,6 +1202,16 @@ func (self *IDWriteFontFace1) GetDesignGlyphAdvances(glyphCount uint32, glyphInd
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteFontFace1_GetGdiCompatibleGlyphAdvances = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetGdiCompatibleGlyphAdvances dispatches through IDWriteFontFace1's vtable slot 24.
+func (self *IDWriteFontFace1) GetGdiCompatibleGlyphAdvances(emSize float32, pixelsPerDip float32, transform *DWRITE_MATRIX, useGdiNatural bool, isSideways bool, glyphCount uint32, glyphIndices *uint16, glyphAdvances *int32) error {
+	_useGdiNatural := win32.Bool32(useGdiNatural)
+	_isSideways := win32.Bool32(isSideways)
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIDWriteFontFace1_GetGdiCompatibleGlyphAdvances, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(emSize)), uintptr(math.Float32bits(pixelsPerDip)), uintptr(unsafe.Pointer(transform)), uintptr(_useGdiNatural), uintptr(_isSideways), uintptr(glyphCount), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(glyphAdvances))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetKerningPairAdjustments dispatches through IDWriteFontFace1's vtable slot 25.
 func (self *IDWriteFontFace1) GetKerningPairAdjustments(glyphCount uint32, glyphIndices *uint16, glyphAdvanceAdjustments *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(glyphCount), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(glyphAdvanceAdjustments)))
@@ -1012,6 +1222,15 @@ func (self *IDWriteFontFace1) GetKerningPairAdjustments(glyphCount uint32, glyph
 func (self *IDWriteFontFace1) HasKerningPairs() foundation.BOOL {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
 	return foundation.BOOL(r1)
+}
+
+var specIDWriteFontFace1_GetRecommendedRenderingMode = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetRecommendedRenderingMode dispatches through IDWriteFontFace1's vtable slot 27.
+func (self *IDWriteFontFace1) GetRecommendedRenderingMode(fontEmSize float32, dpiX float32, dpiY float32, transform *DWRITE_MATRIX, isSideways bool, outlineThreshold DWRITE_OUTLINE_THRESHOLD, measuringMode DWRITE_MEASURING_MODE, renderingMode *DWRITE_RENDERING_MODE) error {
+	_isSideways := win32.Bool32(isSideways)
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIDWriteFontFace1_GetRecommendedRenderingMode, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fontEmSize)), uintptr(math.Float32bits(dpiX)), uintptr(math.Float32bits(dpiY)), uintptr(unsafe.Pointer(transform)), uintptr(_isSideways), uintptr(outlineThreshold), uintptr(measuringMode), uintptr(unsafe.Pointer(renderingMode))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetVerticalGlyphVariants dispatches through IDWriteFontFace1's vtable slot 28.
@@ -1060,6 +1279,15 @@ func (self *IDWriteFontFace2) GetPaletteEntries(colorPaletteIndex uint32, firstE
 		_paletteEntries = &paletteEntries[0]
 	}
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(colorPaletteIndex), uintptr(firstEntryIndex), uintptr(len(paletteEntries)), uintptr(unsafe.Pointer(_paletteEntries)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteFontFace2_GetRecommendedRenderingMode = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetRecommendedRenderingMode dispatches through IDWriteFontFace2's vtable slot 34.
+func (self *IDWriteFontFace2) GetRecommendedRenderingMode(fontEmSize float32, dpiX float32, dpiY float32, transform *DWRITE_MATRIX, isSideways bool, outlineThreshold DWRITE_OUTLINE_THRESHOLD, measuringMode DWRITE_MEASURING_MODE, renderingParams *IDWriteRenderingParams, renderingMode *DWRITE_RENDERING_MODE, gridFitMode *DWRITE_GRID_FIT_MODE) error {
+	_isSideways := win32.Bool32(isSideways)
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIDWriteFontFace2_GetRecommendedRenderingMode, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fontEmSize)), uintptr(math.Float32bits(dpiX)), uintptr(math.Float32bits(dpiY)), uintptr(unsafe.Pointer(transform)), uintptr(_isSideways), uintptr(outlineThreshold), uintptr(measuringMode), uintptr(unsafe.Pointer(renderingParams)), uintptr(unsafe.Pointer(renderingMode)), uintptr(unsafe.Pointer(gridFitMode))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1123,6 +1351,15 @@ func (self *IDWriteFontFace3) GetInformationalStrings(informationalStringID DWRI
 func (self *IDWriteFontFace3) HasCharacter(unicodeValue uint32) foundation.BOOL {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unicodeValue))
 	return foundation.BOOL(r1)
+}
+
+var specIDWriteFontFace3_GetRecommendedRenderingMode = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetRecommendedRenderingMode dispatches through IDWriteFontFace3's vtable slot 44.
+func (self *IDWriteFontFace3) GetRecommendedRenderingMode(fontEmSize float32, dpiX float32, dpiY float32, transform *DWRITE_MATRIX, isSideways bool, outlineThreshold DWRITE_OUTLINE_THRESHOLD, measuringMode DWRITE_MEASURING_MODE, renderingParams *IDWriteRenderingParams, renderingMode *DWRITE_RENDERING_MODE1, gridFitMode *DWRITE_GRID_FIT_MODE) error {
+	_isSideways := win32.Bool32(isSideways)
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIDWriteFontFace3_GetRecommendedRenderingMode, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fontEmSize)), uintptr(math.Float32bits(dpiX)), uintptr(math.Float32bits(dpiY)), uintptr(unsafe.Pointer(transform)), uintptr(_isSideways), uintptr(outlineThreshold), uintptr(measuringMode), uintptr(unsafe.Pointer(renderingParams)), uintptr(unsafe.Pointer(renderingMode)), uintptr(unsafe.Pointer(gridFitMode))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCharacterLocal dispatches through IDWriteFontFace3's vtable slot 45.
@@ -1444,6 +1681,24 @@ type IDWriteFontFallbackBuilder struct {
 
 // IID_IDWriteFontFallbackBuilder is the interface identifier for IDWriteFontFallbackBuilder.
 var IID_IDWriteFontFallbackBuilder = win32.GUID{Data1: 0xfd882d06, Data2: 0x8aba, Data3: 0x4fb8, Data4: [8]byte{0xb8, 0x49, 0x8b, 0xe8, 0xb7, 0x3e, 0x14, 0xde}}
+
+var specIDWriteFontFallbackBuilder_AddMapping = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// AddMapping dispatches through IDWriteFontFallbackBuilder's vtable slot 3.
+func (self *IDWriteFontFallbackBuilder) AddMapping(ranges []DWRITE_UNICODE_RANGE, targetFamilyNames []*uint16, fontCollection *IDWriteFontCollection, localeName string, baseFamilyName string, scale float32) error {
+	var _ranges *DWRITE_UNICODE_RANGE
+	if len(ranges) > 0 {
+		_ranges = &ranges[0]
+	}
+	var _targetFamilyNames **uint16
+	if len(targetFamilyNames) > 0 {
+		_targetFamilyNames = &targetFamilyNames[0]
+	}
+	_localeName := win32.UTF16Ptr(localeName)
+	_baseFamilyName := win32.UTF16Ptr(baseFamilyName)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIDWriteFontFallbackBuilder_AddMapping, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ranges)), uintptr(len(ranges)), uintptr(unsafe.Pointer(_targetFamilyNames)), uintptr(len(targetFamilyNames)), uintptr(unsafe.Pointer(fontCollection)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(_baseFamilyName)), uintptr(math.Float32bits(scale))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // AddMappings dispatches through IDWriteFontFallbackBuilder's vtable slot 4.
 func (self *IDWriteFontFallbackBuilder) AddMappings(fontFallback *IDWriteFontFallback) error {
@@ -2058,6 +2313,18 @@ type IDWriteFontSet4 struct {
 // IID_IDWriteFontSet4 is the interface identifier for IDWriteFontSet4.
 var IID_IDWriteFontSet4 = win32.GUID{Data1: 0xeec175fc, Data2: 0xbea9, Data3: 0x4c86, Data4: [8]byte{0x8b, 0x53, 0xcc, 0xbd, 0xd7, 0xdf, 0x0c, 0x82}}
 
+var specIDWriteFontSet4_ConvertWeightStretchStyleToFontAxisValues = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// ConvertWeightStretchStyleToFontAxisValues dispatches through IDWriteFontSet4's vtable slot 30.
+func (self *IDWriteFontSet4) ConvertWeightStretchStyleToFontAxisValues(inputAxisValues []DWRITE_FONT_AXIS_VALUE, fontWeight DWRITE_FONT_WEIGHT, fontStretch DWRITE_FONT_STRETCH, fontStyle DWRITE_FONT_STYLE, fontSize float32, outputAxisValues *DWRITE_FONT_AXIS_VALUE) uint32 {
+	var _inputAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(inputAxisValues) > 0 {
+		_inputAxisValues = &inputAxisValues[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIDWriteFontSet4_ConvertWeightStretchStyleToFontAxisValues, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_inputAxisValues)), uintptr(len(inputAxisValues)), uintptr(fontWeight), uintptr(fontStretch), uintptr(fontStyle), uintptr(math.Float32bits(fontSize)), uintptr(unsafe.Pointer(outputAxisValues))).Tuple()
+	return uint32(r1)
+}
+
 // GetMatchingFonts dispatches through IDWriteFontSet4's vtable slot 31.
 func (self *IDWriteFontSet4) GetMatchingFonts(familyName string, fontAxisValues []DWRITE_FONT_AXIS_VALUE, allowedSimulations DWRITE_FONT_SIMULATIONS, matchingFonts **IDWriteFontSet4) error {
 	_familyName := win32.UTF16Ptr(familyName)
@@ -2291,6 +2558,16 @@ type IDWriteInlineObject struct {
 
 // IID_IDWriteInlineObject is the interface identifier for IDWriteInlineObject.
 var IID_IDWriteInlineObject = win32.GUID{Data1: 0x8339fde3, Data2: 0x106f, Data3: 0x47ab, Data4: [8]byte{0x83, 0x73, 0x1c, 0x62, 0x95, 0xeb, 0x10, 0xb3}}
+
+var specIDWriteInlineObject_Draw = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// Draw dispatches through IDWriteInlineObject's vtable slot 3.
+func (self *IDWriteInlineObject) Draw(clientDrawingContext unsafe.Pointer, renderer *IDWriteTextRenderer, originX float32, originY float32, isSideways bool, isRightToLeft bool, clientDrawingEffect *systemcom.IUnknown) error {
+	_isSideways := win32.Bool32(isSideways)
+	_isRightToLeft := win32.Bool32(isRightToLeft)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIDWriteInlineObject_Draw, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(unsafe.Pointer(renderer)), uintptr(math.Float32bits(originX)), uintptr(math.Float32bits(originY)), uintptr(_isSideways), uintptr(_isRightToLeft), uintptr(unsafe.Pointer(clientDrawingEffect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetMetrics dispatches through IDWriteInlineObject's vtable slot 4.
 func (self *IDWriteInlineObject) GetMetrics(metrics *DWRITE_INLINE_OBJECT_METRICS) error {
@@ -2588,6 +2865,30 @@ type IDWriteRenderingParams struct {
 // IID_IDWriteRenderingParams is the interface identifier for IDWriteRenderingParams.
 var IID_IDWriteRenderingParams = win32.GUID{Data1: 0x2f0da53a, Data2: 0x2add, Data3: 0x47cd, Data4: [8]byte{0x82, 0xee, 0xd9, 0xec, 0x34, 0x68, 0x8e, 0x75}}
 
+var specIDWriteRenderingParams_GetGamma = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetGamma dispatches through IDWriteRenderingParams's vtable slot 3.
+func (self *IDWriteRenderingParams) GetGamma() float32 {
+	r := win32.Call(self.LpVtbl[3], specIDWriteRenderingParams_GetGamma, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specIDWriteRenderingParams_GetEnhancedContrast = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetEnhancedContrast dispatches through IDWriteRenderingParams's vtable slot 4.
+func (self *IDWriteRenderingParams) GetEnhancedContrast() float32 {
+	r := win32.Call(self.LpVtbl[4], specIDWriteRenderingParams_GetEnhancedContrast, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specIDWriteRenderingParams_GetClearTypeLevel = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetClearTypeLevel dispatches through IDWriteRenderingParams's vtable slot 5.
+func (self *IDWriteRenderingParams) GetClearTypeLevel() float32 {
+	r := win32.Call(self.LpVtbl[5], specIDWriteRenderingParams_GetClearTypeLevel, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
 // GetPixelGeometry dispatches through IDWriteRenderingParams's vtable slot 6.
 func (self *IDWriteRenderingParams) GetPixelGeometry() DWRITE_PIXEL_GEOMETRY {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
@@ -2608,6 +2909,14 @@ type IDWriteRenderingParams1 struct {
 
 // IID_IDWriteRenderingParams1 is the interface identifier for IDWriteRenderingParams1.
 var IID_IDWriteRenderingParams1 = win32.GUID{Data1: 0x94413cf4, Data2: 0xa6fc, Data3: 0x4248, Data4: [8]byte{0x8b, 0x50, 0x66, 0x74, 0x34, 0x8f, 0xca, 0xd3}}
+
+var specIDWriteRenderingParams1_GetGrayscaleEnhancedContrast = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetGrayscaleEnhancedContrast dispatches through IDWriteRenderingParams1's vtable slot 8.
+func (self *IDWriteRenderingParams1) GetGrayscaleEnhancedContrast() float32 {
+	r := win32.Call(self.LpVtbl[8], specIDWriteRenderingParams1_GetGrayscaleEnhancedContrast, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
 
 // IDWriteRenderingParams2: https://learn.microsoft.com/windows/win32/api/dwrite_2/nn-dwrite_2-idwriterenderingparams2
 // IID: f9d711c3-9777-40ae-87e8-3e5af9bf0948
@@ -2829,6 +3138,31 @@ func (self *IDWriteTextAnalyzer) GetGlyphs(textString string, textLength uint32,
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteTextAnalyzer_GetGlyphPlacements = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetGlyphPlacements dispatches through IDWriteTextAnalyzer's vtable slot 8.
+func (self *IDWriteTextAnalyzer) GetGlyphPlacements(textString string, clusterMap *uint16, textProps *DWRITE_SHAPING_TEXT_PROPERTIES, textLength uint32, glyphIndices *uint16, glyphProps *DWRITE_SHAPING_GLYPH_PROPERTIES, glyphCount uint32, fontFace *IDWriteFontFace, fontEmSize float32, isSideways bool, isRightToLeft bool, scriptAnalysis *DWRITE_SCRIPT_ANALYSIS, localeName string, features **DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, glyphAdvances *float32, glyphOffsets *DWRITE_GLYPH_OFFSET) error {
+	_textString := win32.UTF16Ptr(textString)
+	_isSideways := win32.Bool32(isSideways)
+	_isRightToLeft := win32.Bool32(isRightToLeft)
+	_localeName := win32.UTF16Ptr(localeName)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDWriteTextAnalyzer_GetGlyphPlacements, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_textString)), uintptr(unsafe.Pointer(clusterMap)), uintptr(unsafe.Pointer(textProps)), uintptr(textLength), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(glyphProps)), uintptr(glyphCount), uintptr(unsafe.Pointer(fontFace)), uintptr(math.Float32bits(fontEmSize)), uintptr(_isSideways), uintptr(_isRightToLeft), uintptr(unsafe.Pointer(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(features)), uintptr(unsafe.Pointer(featureRangeLengths)), uintptr(featureRanges), uintptr(unsafe.Pointer(glyphAdvances)), uintptr(unsafe.Pointer(glyphOffsets))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextAnalyzer_GetGdiCompatibleGlyphPlacements = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetGdiCompatibleGlyphPlacements dispatches through IDWriteTextAnalyzer's vtable slot 9.
+func (self *IDWriteTextAnalyzer) GetGdiCompatibleGlyphPlacements(textString string, clusterMap *uint16, textProps *DWRITE_SHAPING_TEXT_PROPERTIES, textLength uint32, glyphIndices *uint16, glyphProps *DWRITE_SHAPING_GLYPH_PROPERTIES, glyphCount uint32, fontFace *IDWriteFontFace, fontEmSize float32, pixelsPerDip float32, transform *DWRITE_MATRIX, useGdiNatural bool, isSideways bool, isRightToLeft bool, scriptAnalysis *DWRITE_SCRIPT_ANALYSIS, localeName string, features **DWRITE_TYPOGRAPHIC_FEATURES, featureRangeLengths *uint32, featureRanges uint32, glyphAdvances *float32, glyphOffsets *DWRITE_GLYPH_OFFSET) error {
+	_textString := win32.UTF16Ptr(textString)
+	_useGdiNatural := win32.Bool32(useGdiNatural)
+	_isSideways := win32.Bool32(isSideways)
+	_isRightToLeft := win32.Bool32(isRightToLeft)
+	_localeName := win32.UTF16Ptr(localeName)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIDWriteTextAnalyzer_GetGdiCompatibleGlyphPlacements, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_textString)), uintptr(unsafe.Pointer(clusterMap)), uintptr(unsafe.Pointer(textProps)), uintptr(textLength), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(glyphProps)), uintptr(glyphCount), uintptr(unsafe.Pointer(fontFace)), uintptr(math.Float32bits(fontEmSize)), uintptr(math.Float32bits(pixelsPerDip)), uintptr(unsafe.Pointer(transform)), uintptr(_useGdiNatural), uintptr(_isSideways), uintptr(_isRightToLeft), uintptr(unsafe.Pointer(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(features)), uintptr(unsafe.Pointer(featureRangeLengths)), uintptr(featureRanges), uintptr(unsafe.Pointer(glyphAdvances)), uintptr(unsafe.Pointer(glyphOffsets))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDWriteTextAnalyzer1: https://learn.microsoft.com/windows/win32/api/dwrite_1/nn-dwrite_1-idwritetextanalyzer1
 // IID: 80dad800-e21f-4e83-96ce-bfcce500db7c
 type IDWriteTextAnalyzer1 struct {
@@ -2837,6 +3171,18 @@ type IDWriteTextAnalyzer1 struct {
 
 // IID_IDWriteTextAnalyzer1 is the interface identifier for IDWriteTextAnalyzer1.
 var IID_IDWriteTextAnalyzer1 = win32.GUID{Data1: 0x80dad800, Data2: 0xe21f, Data3: 0x4e83, Data4: [8]byte{0x96, 0xce, 0xbf, 0xcc, 0xe5, 0x00, 0xdb, 0x7c}}
+
+var specIDWriteTextAnalyzer1_ApplyCharacterSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// ApplyCharacterSpacing dispatches through IDWriteTextAnalyzer1's vtable slot 10.
+func (self *IDWriteTextAnalyzer1) ApplyCharacterSpacing(leadingSpacing float32, trailingSpacing float32, minimumAdvanceWidth float32, glyphCount uint32, clusterMap []uint16, glyphAdvances *float32, glyphOffsets *DWRITE_GLYPH_OFFSET, glyphProperties *DWRITE_SHAPING_GLYPH_PROPERTIES, modifiedGlyphAdvances *float32, modifiedGlyphOffsets *DWRITE_GLYPH_OFFSET) error {
+	var _clusterMap *uint16
+	if len(clusterMap) > 0 {
+		_clusterMap = &clusterMap[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDWriteTextAnalyzer1_ApplyCharacterSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(leadingSpacing)), uintptr(math.Float32bits(trailingSpacing)), uintptr(math.Float32bits(minimumAdvanceWidth)), uintptr(len(clusterMap)), uintptr(glyphCount), uintptr(unsafe.Pointer(_clusterMap)), uintptr(unsafe.Pointer(glyphAdvances)), uintptr(unsafe.Pointer(glyphOffsets)), uintptr(unsafe.Pointer(glyphProperties)), uintptr(unsafe.Pointer(modifiedGlyphAdvances)), uintptr(unsafe.Pointer(modifiedGlyphOffsets))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetBaseline dispatches through IDWriteTextAnalyzer1's vtable slot 11.
 func (self *IDWriteTextAnalyzer1) GetBaseline(fontFace *IDWriteFontFace, baseline DWRITE_BASELINE, isVertical bool, isSimulationAllowed bool, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName string, baselineCoordinate *int32, exists *foundation.BOOL) error {
@@ -2873,6 +3219,31 @@ func (self *IDWriteTextAnalyzer1) GetTextComplexity(textString string, textLengt
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteTextAnalyzer1_GetJustificationOpportunities = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetJustificationOpportunities dispatches through IDWriteTextAnalyzer1's vtable slot 16.
+func (self *IDWriteTextAnalyzer1) GetJustificationOpportunities(fontFace *IDWriteFontFace, fontEmSize float32, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, textLength uint32, glyphCount uint32, textString string, clusterMap *uint16, glyphProperties *DWRITE_SHAPING_GLYPH_PROPERTIES, justificationOpportunities *DWRITE_JUSTIFICATION_OPPORTUNITY) error {
+	_textString := win32.UTF16Ptr(textString)
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIDWriteTextAnalyzer1_GetJustificationOpportunities, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(math.Float32bits(fontEmSize)), uintptr(win32.StructArg(scriptAnalysis)), uintptr(textLength), uintptr(glyphCount), uintptr(unsafe.Pointer(_textString)), uintptr(unsafe.Pointer(clusterMap)), uintptr(unsafe.Pointer(glyphProperties)), uintptr(unsafe.Pointer(justificationOpportunities))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextAnalyzer1_JustifyGlyphAdvances = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// JustifyGlyphAdvances dispatches through IDWriteTextAnalyzer1's vtable slot 17.
+func (self *IDWriteTextAnalyzer1) JustifyGlyphAdvances(lineWidth float32, glyphCount uint32, justificationOpportunities *DWRITE_JUSTIFICATION_OPPORTUNITY, glyphAdvances *float32, glyphOffsets *DWRITE_GLYPH_OFFSET, justifiedGlyphAdvances *float32, justifiedGlyphOffsets *DWRITE_GLYPH_OFFSET) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIDWriteTextAnalyzer1_JustifyGlyphAdvances, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(lineWidth)), uintptr(glyphCount), uintptr(unsafe.Pointer(justificationOpportunities)), uintptr(unsafe.Pointer(glyphAdvances)), uintptr(unsafe.Pointer(glyphOffsets)), uintptr(unsafe.Pointer(justifiedGlyphAdvances)), uintptr(unsafe.Pointer(justifiedGlyphOffsets))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextAnalyzer1_GetJustifiedGlyphs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// GetJustifiedGlyphs dispatches through IDWriteTextAnalyzer1's vtable slot 18.
+func (self *IDWriteTextAnalyzer1) GetJustifiedGlyphs(fontFace *IDWriteFontFace, fontEmSize float32, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, textLength uint32, glyphCount uint32, maxGlyphCount uint32, clusterMap *uint16, glyphIndices *uint16, glyphAdvances *float32, justifiedGlyphAdvances *float32, justifiedGlyphOffsets *DWRITE_GLYPH_OFFSET, glyphProperties *DWRITE_SHAPING_GLYPH_PROPERTIES, actualGlyphCount *uint32, modifiedClusterMap *uint16, modifiedGlyphIndices *uint16, modifiedGlyphAdvances *float32, modifiedGlyphOffsets *DWRITE_GLYPH_OFFSET) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIDWriteTextAnalyzer1_GetJustifiedGlyphs, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(math.Float32bits(fontEmSize)), uintptr(win32.StructArg(scriptAnalysis)), uintptr(textLength), uintptr(glyphCount), uintptr(maxGlyphCount), uintptr(unsafe.Pointer(clusterMap)), uintptr(unsafe.Pointer(glyphIndices)), uintptr(unsafe.Pointer(glyphAdvances)), uintptr(unsafe.Pointer(justifiedGlyphAdvances)), uintptr(unsafe.Pointer(justifiedGlyphOffsets)), uintptr(unsafe.Pointer(glyphProperties)), uintptr(unsafe.Pointer(actualGlyphCount)), uintptr(unsafe.Pointer(modifiedClusterMap)), uintptr(unsafe.Pointer(modifiedGlyphIndices)), uintptr(unsafe.Pointer(modifiedGlyphAdvances)), uintptr(unsafe.Pointer(modifiedGlyphOffsets))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDWriteTextAnalyzer2: https://learn.microsoft.com/windows/win32/DirectWrite/idwritetextanalyzer2
 // IID: 553a9ff3-5693-4df7-b52b-74806f7f2eb9
 type IDWriteTextAnalyzer2 struct {
@@ -2881,6 +3252,15 @@ type IDWriteTextAnalyzer2 struct {
 
 // IID_IDWriteTextAnalyzer2 is the interface identifier for IDWriteTextAnalyzer2.
 var IID_IDWriteTextAnalyzer2 = win32.GUID{Data1: 0x553a9ff3, Data2: 0x5693, Data3: 0x4df7, Data4: [8]byte{0xb5, 0x2b, 0x74, 0x80, 0x6f, 0x7f, 0x2e, 0xb9}}
+
+var specIDWriteTextAnalyzer2_GetGlyphOrientationTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// GetGlyphOrientationTransform dispatches through IDWriteTextAnalyzer2's vtable slot 19.
+func (self *IDWriteTextAnalyzer2) GetGlyphOrientationTransform(glyphOrientationAngle DWRITE_GLYPH_ORIENTATION_ANGLE, isSideways bool, originX float32, originY float32, transform *DWRITE_MATRIX) error {
+	_isSideways := win32.Bool32(isSideways)
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIDWriteTextAnalyzer2_GetGlyphOrientationTransform, nil, uintptr(unsafe.Pointer(self)), uintptr(glyphOrientationAngle), uintptr(_isSideways), uintptr(math.Float32bits(originX)), uintptr(math.Float32bits(originY)), uintptr(unsafe.Pointer(transform))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetTypographicFeatures dispatches through IDWriteTextAnalyzer2's vtable slot 20.
 func (self *IDWriteTextAnalyzer2) GetTypographicFeatures(fontFace *IDWriteFontFace, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName string, actualTagCount *uint32, tags []DWRITE_FONT_FEATURE_TAG) error {
@@ -2939,9 +3319,25 @@ func (self *IDWriteTextFormat) SetFlowDirection(flowDirection DWRITE_FLOW_DIRECT
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteTextFormat_SetIncrementalTabStop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetIncrementalTabStop dispatches through IDWriteTextFormat's vtable slot 8.
+func (self *IDWriteTextFormat) SetIncrementalTabStop(incrementalTabStop float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDWriteTextFormat_SetIncrementalTabStop, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(incrementalTabStop))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetTrimming dispatches through IDWriteTextFormat's vtable slot 9.
 func (self *IDWriteTextFormat) SetTrimming(trimmingOptions *DWRITE_TRIMMING, trimmingSign *IDWriteInlineObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(trimmingOptions)), uintptr(unsafe.Pointer(trimmingSign)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextFormat_SetLineSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// SetLineSpacing dispatches through IDWriteTextFormat's vtable slot 10.
+func (self *IDWriteTextFormat) SetLineSpacing(lineSpacingMethod DWRITE_LINE_SPACING_METHOD, lineSpacing float32, baseline float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDWriteTextFormat_SetLineSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(lineSpacingMethod), uintptr(math.Float32bits(lineSpacing)), uintptr(math.Float32bits(baseline))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2973,6 +3369,14 @@ func (self *IDWriteTextFormat) GetReadingDirection() DWRITE_READING_DIRECTION {
 func (self *IDWriteTextFormat) GetFlowDirection() DWRITE_FLOW_DIRECTION {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
 	return DWRITE_FLOW_DIRECTION(r1)
+}
+
+var specIDWriteTextFormat_GetIncrementalTabStop = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetIncrementalTabStop dispatches through IDWriteTextFormat's vtable slot 16.
+func (self *IDWriteTextFormat) GetIncrementalTabStop() float32 {
+	r := win32.Call(self.LpVtbl[16], specIDWriteTextFormat_GetIncrementalTabStop, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
 }
 
 // GetTrimming dispatches through IDWriteTextFormat's vtable slot 17.
@@ -3021,6 +3425,14 @@ func (self *IDWriteTextFormat) GetFontStyle() DWRITE_FONT_STYLE {
 func (self *IDWriteTextFormat) GetFontStretch() DWRITE_FONT_STRETCH {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
 	return DWRITE_FONT_STRETCH(r1)
+}
+
+var specIDWriteTextFormat_GetFontSize = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetFontSize dispatches through IDWriteTextFormat's vtable slot 25.
+func (self *IDWriteTextFormat) GetFontSize() float32 {
+	r := win32.Call(self.LpVtbl[25], specIDWriteTextFormat_GetFontSize, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
 }
 
 // GetLocaleNameLength dispatches through IDWriteTextFormat's vtable slot 26.
@@ -3170,6 +3582,22 @@ type IDWriteTextLayout struct {
 // IID_IDWriteTextLayout is the interface identifier for IDWriteTextLayout.
 var IID_IDWriteTextLayout = win32.GUID{Data1: 0x53737037, Data2: 0x6d14, Data3: 0x410b, Data4: [8]byte{0x9b, 0xfe, 0x0b, 0x18, 0x2b, 0xb7, 0x09, 0x61}}
 
+var specIDWriteTextLayout_SetMaxWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetMaxWidth dispatches through IDWriteTextLayout's vtable slot 28.
+func (self *IDWriteTextLayout) SetMaxWidth(maxWidth float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIDWriteTextLayout_SetMaxWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(maxWidth))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextLayout_SetMaxHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetMaxHeight dispatches through IDWriteTextLayout's vtable slot 29.
+func (self *IDWriteTextLayout) SetMaxHeight(maxHeight float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIDWriteTextLayout_SetMaxHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(maxHeight))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetFontCollection dispatches through IDWriteTextLayout's vtable slot 30.
 func (self *IDWriteTextLayout) SetFontCollection(fontCollection *IDWriteFontCollection, textRange DWRITE_TEXT_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontCollection)), uintptr(win32.StructArg(textRange)))
@@ -3198,6 +3626,14 @@ func (self *IDWriteTextLayout) SetFontStyle(fontStyle DWRITE_FONT_STYLE, textRan
 // SetFontStretch dispatches through IDWriteTextLayout's vtable slot 34.
 func (self *IDWriteTextLayout) SetFontStretch(fontStretch DWRITE_FONT_STRETCH, textRange DWRITE_TEXT_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(fontStretch), uintptr(win32.StructArg(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextLayout_SetFontSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetFontSize dispatches through IDWriteTextLayout's vtable slot 35.
+func (self *IDWriteTextLayout) SetFontSize(fontSize float32, textRange DWRITE_TEXT_RANGE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIDWriteTextLayout_SetFontSize, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fontSize)), uintptr(win32.StructArg(textRange))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3238,6 +3674,22 @@ func (self *IDWriteTextLayout) SetLocaleName(localeName string, textRange DWRITE
 	_localeName := win32.UTF16Ptr(localeName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_localeName)), uintptr(win32.StructArg(textRange)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextLayout_GetMaxWidth = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetMaxWidth dispatches through IDWriteTextLayout's vtable slot 42.
+func (self *IDWriteTextLayout) GetMaxWidth() float32 {
+	r := win32.Call(self.LpVtbl[42], specIDWriteTextLayout_GetMaxWidth, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
+}
+
+var specIDWriteTextLayout_GetMaxHeight = &win32.Spec{Args: []win32.Arg{win32.Word}, Ret: win32.Float32}
+
+// GetMaxHeight dispatches through IDWriteTextLayout's vtable slot 43.
+func (self *IDWriteTextLayout) GetMaxHeight() float32 {
+	r := win32.Call(self.LpVtbl[43], specIDWriteTextLayout_GetMaxHeight, nil, uintptr(unsafe.Pointer(self)))
+	return math.Float32frombits(uint32(r.F0))
 }
 
 // GetFontCollection dispatches through IDWriteTextLayout's vtable slot 44.
@@ -3324,6 +3776,14 @@ func (self *IDWriteTextLayout) GetLocaleName(currentPosition uint32, localeName 
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteTextLayout_Draw = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// Draw dispatches through IDWriteTextLayout's vtable slot 58.
+func (self *IDWriteTextLayout) Draw(clientDrawingContext unsafe.Pointer, renderer *IDWriteTextRenderer, originX float32, originY float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIDWriteTextLayout_Draw, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(unsafe.Pointer(renderer)), uintptr(math.Float32bits(originX)), uintptr(math.Float32bits(originY))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetLineMetrics dispatches through IDWriteTextLayout's vtable slot 59.
 func (self *IDWriteTextLayout) GetLineMetrics(lineMetrics []DWRITE_LINE_METRICS, actualLineCount *uint32) error {
 	var _lineMetrics *DWRITE_LINE_METRICS
@@ -3362,10 +3822,30 @@ func (self *IDWriteTextLayout) DetermineMinWidth(minWidth *float32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDWriteTextLayout_HitTestPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// HitTestPoint dispatches through IDWriteTextLayout's vtable slot 64.
+func (self *IDWriteTextLayout) HitTestPoint(pointX float32, pointY float32, isTrailingHit *foundation.BOOL, isInside *foundation.BOOL, hitTestMetrics *DWRITE_HIT_TEST_METRICS) error {
+	r1, _, _ := win32.Call(self.LpVtbl[64], specIDWriteTextLayout_HitTestPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(pointX)), uintptr(math.Float32bits(pointY)), uintptr(unsafe.Pointer(isTrailingHit)), uintptr(unsafe.Pointer(isInside)), uintptr(unsafe.Pointer(hitTestMetrics))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // HitTestTextPosition dispatches through IDWriteTextLayout's vtable slot 65.
 func (self *IDWriteTextLayout) HitTestTextPosition(textPosition uint32, isTrailingHit bool, pointX *float32, pointY *float32, hitTestMetrics *DWRITE_HIT_TEST_METRICS) error {
 	_isTrailingHit := win32.Bool32(isTrailingHit)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(textPosition), uintptr(_isTrailingHit), uintptr(unsafe.Pointer(pointX)), uintptr(unsafe.Pointer(pointY)), uintptr(unsafe.Pointer(hitTestMetrics)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextLayout_HitTestTextRange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// HitTestTextRange dispatches through IDWriteTextLayout's vtable slot 66.
+func (self *IDWriteTextLayout) HitTestTextRange(textPosition uint32, textLength uint32, originX float32, originY float32, hitTestMetrics []DWRITE_HIT_TEST_METRICS, actualHitTestMetricsCount *uint32) error {
+	var _hitTestMetrics *DWRITE_HIT_TEST_METRICS
+	if len(hitTestMetrics) > 0 {
+		_hitTestMetrics = &hitTestMetrics[0]
+	}
+	r1, _, _ := win32.Call(self.LpVtbl[66], specIDWriteTextLayout_HitTestTextRange, nil, uintptr(unsafe.Pointer(self)), uintptr(textPosition), uintptr(textLength), uintptr(math.Float32bits(originX)), uintptr(math.Float32bits(originY)), uintptr(unsafe.Pointer(_hitTestMetrics)), uintptr(len(hitTestMetrics)), uintptr(unsafe.Pointer(actualHitTestMetricsCount))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3388,6 +3868,14 @@ func (self *IDWriteTextLayout1) SetPairKerning(isPairKerningEnabled bool, textRa
 // GetPairKerning dispatches through IDWriteTextLayout1's vtable slot 68.
 func (self *IDWriteTextLayout1) GetPairKerning(currentPosition uint32, isPairKerningEnabled *foundation.BOOL, textRange *DWRITE_TEXT_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(unsafe.Pointer(isPairKerningEnabled)), uintptr(unsafe.Pointer(textRange)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextLayout1_SetCharacterSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// SetCharacterSpacing dispatches through IDWriteTextLayout1's vtable slot 69.
+func (self *IDWriteTextLayout1) SetCharacterSpacing(leadingSpacing float32, trailingSpacing float32, minimumAdvanceWidth float32, textRange DWRITE_TEXT_RANGE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[69], specIDWriteTextLayout1_SetCharacterSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(leadingSpacing)), uintptr(math.Float32bits(trailingSpacing)), uintptr(math.Float32bits(minimumAdvanceWidth)), uintptr(win32.StructArg(textRange))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3554,6 +4042,40 @@ type IDWriteTextRenderer struct {
 // IID_IDWriteTextRenderer is the interface identifier for IDWriteTextRenderer.
 var IID_IDWriteTextRenderer = win32.GUID{Data1: 0xef8a8135, Data2: 0x5cc6, Data3: 0x45fe, Data4: [8]byte{0x88, 0x25, 0xc5, 0xa0, 0x72, 0x4e, 0xb8, 0x19}}
 
+var specIDWriteTextRenderer_DrawGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DrawGlyphRun dispatches through IDWriteTextRenderer's vtable slot 6.
+func (self *IDWriteTextRenderer) DrawGlyphRun(clientDrawingContext unsafe.Pointer, baselineOriginX float32, baselineOriginY float32, measuringMode DWRITE_MEASURING_MODE, glyphRun *DWRITE_GLYPH_RUN, glyphRunDescription *DWRITE_GLYPH_RUN_DESCRIPTION, clientDrawingEffect *systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIDWriteTextRenderer_DrawGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(measuringMode), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(clientDrawingEffect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextRenderer_DrawUnderline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// DrawUnderline dispatches through IDWriteTextRenderer's vtable slot 7.
+func (self *IDWriteTextRenderer) DrawUnderline(clientDrawingContext unsafe.Pointer, baselineOriginX float32, baselineOriginY float32, underline *DWRITE_UNDERLINE, clientDrawingEffect *systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDWriteTextRenderer_DrawUnderline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(unsafe.Pointer(underline)), uintptr(unsafe.Pointer(clientDrawingEffect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextRenderer_DrawStrikethrough = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word}}
+
+// DrawStrikethrough dispatches through IDWriteTextRenderer's vtable slot 8.
+func (self *IDWriteTextRenderer) DrawStrikethrough(clientDrawingContext unsafe.Pointer, baselineOriginX float32, baselineOriginY float32, strikethrough *DWRITE_STRIKETHROUGH, clientDrawingEffect *systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDWriteTextRenderer_DrawStrikethrough, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(unsafe.Pointer(strikethrough)), uintptr(unsafe.Pointer(clientDrawingEffect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextRenderer_DrawInlineObject = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DrawInlineObject dispatches through IDWriteTextRenderer's vtable slot 9.
+func (self *IDWriteTextRenderer) DrawInlineObject(clientDrawingContext unsafe.Pointer, originX float32, originY float32, inlineObject *IDWriteInlineObject, isSideways bool, isRightToLeft bool, clientDrawingEffect *systemcom.IUnknown) error {
+	_isSideways := win32.Bool32(isSideways)
+	_isRightToLeft := win32.Bool32(isRightToLeft)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIDWriteTextRenderer_DrawInlineObject, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(math.Float32bits(originX)), uintptr(math.Float32bits(originY)), uintptr(unsafe.Pointer(inlineObject)), uintptr(_isSideways), uintptr(_isRightToLeft), uintptr(unsafe.Pointer(clientDrawingEffect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IDWriteTextRenderer1: https://learn.microsoft.com/windows/win32/api/dwrite_2/nn-dwrite_2-idwritetextrenderer1
 // IID: d3e0e934-22a0-427e-aae4-7d9574b59db1
 type IDWriteTextRenderer1 struct {
@@ -3562,6 +4084,40 @@ type IDWriteTextRenderer1 struct {
 
 // IID_IDWriteTextRenderer1 is the interface identifier for IDWriteTextRenderer1.
 var IID_IDWriteTextRenderer1 = win32.GUID{Data1: 0xd3e0e934, Data2: 0x22a0, Data3: 0x427e, Data4: [8]byte{0xaa, 0xe4, 0x7d, 0x95, 0x74, 0xb5, 0x9d, 0xb1}}
+
+var specIDWriteTextRenderer1_DrawGlyphRun = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DrawGlyphRun dispatches through IDWriteTextRenderer1's vtable slot 10.
+func (self *IDWriteTextRenderer1) DrawGlyphRun(clientDrawingContext unsafe.Pointer, baselineOriginX float32, baselineOriginY float32, orientationAngle DWRITE_GLYPH_ORIENTATION_ANGLE, measuringMode DWRITE_MEASURING_MODE, glyphRun *DWRITE_GLYPH_RUN, glyphRunDescription *DWRITE_GLYPH_RUN_DESCRIPTION, clientDrawingEffect *systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIDWriteTextRenderer1_DrawGlyphRun, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(orientationAngle), uintptr(measuringMode), uintptr(unsafe.Pointer(glyphRun)), uintptr(unsafe.Pointer(glyphRunDescription)), uintptr(unsafe.Pointer(clientDrawingEffect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextRenderer1_DrawUnderline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// DrawUnderline dispatches through IDWriteTextRenderer1's vtable slot 11.
+func (self *IDWriteTextRenderer1) DrawUnderline(clientDrawingContext unsafe.Pointer, baselineOriginX float32, baselineOriginY float32, orientationAngle DWRITE_GLYPH_ORIENTATION_ANGLE, underline *DWRITE_UNDERLINE, clientDrawingEffect *systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIDWriteTextRenderer1_DrawUnderline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(orientationAngle), uintptr(unsafe.Pointer(underline)), uintptr(unsafe.Pointer(clientDrawingEffect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextRenderer1_DrawStrikethrough = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// DrawStrikethrough dispatches through IDWriteTextRenderer1's vtable slot 12.
+func (self *IDWriteTextRenderer1) DrawStrikethrough(clientDrawingContext unsafe.Pointer, baselineOriginX float32, baselineOriginY float32, orientationAngle DWRITE_GLYPH_ORIENTATION_ANGLE, strikethrough *DWRITE_STRIKETHROUGH, clientDrawingEffect *systemcom.IUnknown) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIDWriteTextRenderer1_DrawStrikethrough, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(math.Float32bits(baselineOriginX)), uintptr(math.Float32bits(baselineOriginY)), uintptr(orientationAngle), uintptr(unsafe.Pointer(strikethrough)), uintptr(unsafe.Pointer(clientDrawingEffect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIDWriteTextRenderer1_DrawInlineObject = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// DrawInlineObject dispatches through IDWriteTextRenderer1's vtable slot 13.
+func (self *IDWriteTextRenderer1) DrawInlineObject(clientDrawingContext unsafe.Pointer, originX float32, originY float32, orientationAngle DWRITE_GLYPH_ORIENTATION_ANGLE, inlineObject *IDWriteInlineObject, isSideways bool, isRightToLeft bool, clientDrawingEffect *systemcom.IUnknown) error {
+	_isSideways := win32.Bool32(isSideways)
+	_isRightToLeft := win32.Bool32(isRightToLeft)
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIDWriteTextRenderer1_DrawInlineObject, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(math.Float32bits(originX)), uintptr(math.Float32bits(originY)), uintptr(orientationAngle), uintptr(unsafe.Pointer(inlineObject)), uintptr(_isSideways), uintptr(_isRightToLeft), uintptr(unsafe.Pointer(clientDrawingEffect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IDWriteTypography: https://learn.microsoft.com/windows/win32/api/dwrite/nn-dwrite-idwritetypography
 // IID: 55f1112b-1dc2-4b3c-9541-f46894ed85b6

@@ -5,6 +5,7 @@
 package componentservices
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -603,6 +604,15 @@ func (self *ICatalogCollection) SaveChanges() (int32, error) {
 	return *_pcChanges, win32.ErrIfFailed(int32(r1))
 }
 
+var specICatalogCollection_GetCollection = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetCollection dispatches through ICatalogCollection's vtable slot 14.
+func (self *ICatalogCollection) GetCollection(bstrCollName foundation.BSTR, varObjectKey systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_ppCatalogCollection := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[14], specICatalogCollection_GetCollection, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCollName)), uintptr(unsafe.Pointer(&varObjectKey)), uintptr(win32.OutParam(unsafe.Pointer(_ppCatalogCollection)))).Tuple()
+	return *_ppCatalogCollection, win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Name dispatches through ICatalogCollection's vtable slot 15.
 func (self *ICatalogCollection) Get_Name() (systemvariant.VARIANT, error) {
 	_pVarNamel := new(systemvariant.VARIANT)
@@ -671,6 +681,14 @@ func (self *ICatalogObject) Get_Value(bstrPropName foundation.BSTR) (systemvaria
 	_pvarRetVal := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(win32.OutParam(unsafe.Pointer(_pvarRetVal))))
 	return *_pvarRetVal, win32.ErrIfFailed(int32(r1))
+}
+
+var specICatalogObject_Put_Value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Value dispatches through ICatalogObject's vtable slot 8.
+func (self *ICatalogObject) Put_Value(bstrPropName foundation.BSTR, val systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specICatalogObject_Put_Value, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrPropName)), uintptr(unsafe.Pointer(&val))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Key dispatches through ICatalogObject's vtable slot 9.
@@ -786,6 +804,47 @@ type IComApp2Events struct {
 // IID_IComApp2Events is the interface identifier for IComApp2Events.
 var IID_IComApp2Events = win32.GUID{Data1: 0x1290bc1a, Data2: 0xb219, Data3: 0x418d, Data4: [8]byte{0xb0, 0x78, 0x59, 0x34, 0xde, 0xd0, 0x82, 0x42}}
 
+var specIComApp2Events_OnAppActivation2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// OnAppActivation2 dispatches through IComApp2Events's vtable slot 3.
+func (self *IComApp2Events) OnAppActivation2(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID, guidProcess win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIComApp2Events_OnAppActivation2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp)), uintptr(unsafe.Pointer(&guidProcess))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComApp2Events_OnAppShutdown2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnAppShutdown2 dispatches through IComApp2Events's vtable slot 4.
+func (self *IComApp2Events) OnAppShutdown2(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIComApp2Events_OnAppShutdown2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComApp2Events_OnAppForceShutdown2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnAppForceShutdown2 dispatches through IComApp2Events's vtable slot 5.
+func (self *IComApp2Events) OnAppForceShutdown2(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIComApp2Events_OnAppForceShutdown2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComApp2Events_OnAppPaused2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// OnAppPaused2 dispatches through IComApp2Events's vtable slot 6.
+func (self *IComApp2Events) OnAppPaused2(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID, bPaused bool) error {
+	_bPaused := win32.Bool32(bPaused)
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIComApp2Events_OnAppPaused2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp)), uintptr(_bPaused)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComApp2Events_OnAppRecycle2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word}}
+
+// OnAppRecycle2 dispatches through IComApp2Events's vtable slot 7.
+func (self *IComApp2Events) OnAppRecycle2(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID, guidProcess win32.GUID, lReason int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIComApp2Events_OnAppRecycle2, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp)), uintptr(unsafe.Pointer(&guidProcess)), uintptr(lReason)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IComAppEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomappevents
 // IID: 683130a6-2e50-11d2-98a5-00c04f8ee1c4
 type IComAppEvents struct {
@@ -795,6 +854,30 @@ type IComAppEvents struct {
 // IID_IComAppEvents is the interface identifier for IComAppEvents.
 var IID_IComAppEvents = win32.GUID{Data1: 0x683130a6, Data2: 0x2e50, Data3: 0x11d2, Data4: [8]byte{0x98, 0xa5, 0x00, 0xc0, 0x4f, 0x8e, 0xe1, 0xc4}}
 
+var specIComAppEvents_OnAppActivation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnAppActivation dispatches through IComAppEvents's vtable slot 3.
+func (self *IComAppEvents) OnAppActivation(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIComAppEvents_OnAppActivation, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComAppEvents_OnAppShutdown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnAppShutdown dispatches through IComAppEvents's vtable slot 4.
+func (self *IComAppEvents) OnAppShutdown(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIComAppEvents_OnAppShutdown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComAppEvents_OnAppForceShutdown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnAppForceShutdown dispatches through IComAppEvents's vtable slot 5.
+func (self *IComAppEvents) OnAppForceShutdown(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIComAppEvents_OnAppForceShutdown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IComCRMEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomcrmevents
 // IID: 683130b5-2e50-11d2-98a5-00c04f8ee1c4
 type IComCRMEvents struct {
@@ -803,6 +886,130 @@ type IComCRMEvents struct {
 
 // IID_IComCRMEvents is the interface identifier for IComCRMEvents.
 var IID_IComCRMEvents = win32.GUID{Data1: 0x683130b5, Data2: 0x2e50, Data3: 0x11d2, Data4: [8]byte{0x98, 0xa5, 0x00, 0xc0, 0x4f, 0x8e, 0xe1, 0xc4}}
+
+var specIComCRMEvents_OnCRMRecoveryStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMRecoveryStart dispatches through IComCRMEvents's vtable slot 3.
+func (self *IComCRMEvents) OnCRMRecoveryStart(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIComCRMEvents_OnCRMRecoveryStart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMRecoveryDone = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMRecoveryDone dispatches through IComCRMEvents's vtable slot 4.
+func (self *IComCRMEvents) OnCRMRecoveryDone(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIComCRMEvents_OnCRMRecoveryDone, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMCheckpoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMCheckpoint dispatches through IComCRMEvents's vtable slot 5.
+func (self *IComCRMEvents) OnCRMCheckpoint(pInfo *COMSVCSEVENTINFO, guidApp win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIComCRMEvents_OnCRMCheckpoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidApp))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMBegin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// OnCRMBegin dispatches through IComCRMEvents's vtable slot 6.
+func (self *IComCRMEvents) OnCRMBegin(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID, guidActivity win32.GUID, guidTx win32.GUID, szProgIdCompensator string, szDescription string) error {
+	_szProgIdCompensator := win32.UTF16Ptr(szProgIdCompensator)
+	_szDescription := win32.UTF16Ptr(szDescription)
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIComCRMEvents_OnCRMBegin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID)), uintptr(unsafe.Pointer(&guidActivity)), uintptr(unsafe.Pointer(&guidTx)), uintptr(unsafe.Pointer(_szProgIdCompensator)), uintptr(unsafe.Pointer(_szDescription))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMPrepare = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMPrepare dispatches through IComCRMEvents's vtable slot 7.
+func (self *IComCRMEvents) OnCRMPrepare(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIComCRMEvents_OnCRMPrepare, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMCommit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMCommit dispatches through IComCRMEvents's vtable slot 8.
+func (self *IComCRMEvents) OnCRMCommit(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIComCRMEvents_OnCRMCommit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMAbort = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMAbort dispatches through IComCRMEvents's vtable slot 9.
+func (self *IComCRMEvents) OnCRMAbort(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIComCRMEvents_OnCRMAbort, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMIndoubt = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMIndoubt dispatches through IComCRMEvents's vtable slot 10.
+func (self *IComCRMEvents) OnCRMIndoubt(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIComCRMEvents_OnCRMIndoubt, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMDone = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMDone dispatches through IComCRMEvents's vtable slot 11.
+func (self *IComCRMEvents) OnCRMDone(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIComCRMEvents_OnCRMDone, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMRelease = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMRelease dispatches through IComCRMEvents's vtable slot 12.
+func (self *IComCRMEvents) OnCRMRelease(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIComCRMEvents_OnCRMRelease, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMAnalyze = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// OnCRMAnalyze dispatches through IComCRMEvents's vtable slot 13.
+func (self *IComCRMEvents) OnCRMAnalyze(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID, dwCrmRecordType uint32, dwRecordSize uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIComCRMEvents_OnCRMAnalyze, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID)), uintptr(dwCrmRecordType), uintptr(dwRecordSize)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMWrite = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// OnCRMWrite dispatches through IComCRMEvents's vtable slot 14.
+func (self *IComCRMEvents) OnCRMWrite(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID, fVariants bool, dwRecordSize uint32) error {
+	_fVariants := win32.Bool32(fVariants)
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIComCRMEvents_OnCRMWrite, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID)), uintptr(_fVariants), uintptr(dwRecordSize)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMForget = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMForget dispatches through IComCRMEvents's vtable slot 15.
+func (self *IComCRMEvents) OnCRMForget(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIComCRMEvents_OnCRMForget, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMForce = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnCRMForce dispatches through IComCRMEvents's vtable slot 16.
+func (self *IComCRMEvents) OnCRMForce(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIComCRMEvents_OnCRMForce, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComCRMEvents_OnCRMDeliver = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// OnCRMDeliver dispatches through IComCRMEvents's vtable slot 17.
+func (self *IComCRMEvents) OnCRMDeliver(pInfo *COMSVCSEVENTINFO, guidClerkCLSID win32.GUID, fVariants bool, dwRecordSize uint32) error {
+	_fVariants := win32.Bool32(fVariants)
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIComCRMEvents_OnCRMDeliver, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidClerkCLSID)), uintptr(_fVariants), uintptr(dwRecordSize)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IComExceptionEvents: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icomexceptionevents
 // IID: 683130b3-2e50-11d2-98a5-00c04f8ee1c4
@@ -888,6 +1095,48 @@ type IComLTxEvents struct {
 
 // IID_IComLTxEvents is the interface identifier for IComLTxEvents.
 var IID_IComLTxEvents = win32.GUID{Data1: 0x605cf82c, Data2: 0x578e, Data3: 0x4298, Data4: [8]byte{0x97, 0x5d, 0x82, 0xba, 0xbc, 0xd9, 0xe0, 0x53}}
+
+var specIComLTxEvents_OnLtxTransactionStart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// OnLtxTransactionStart dispatches through IComLTxEvents's vtable slot 3.
+func (self *IComLTxEvents) OnLtxTransactionStart(pInfo *COMSVCSEVENTINFO, guidLtx win32.GUID, tsid win32.GUID, fRoot bool, nIsolationLevel int32) error {
+	_fRoot := win32.Bool32(fRoot)
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIComLTxEvents_OnLtxTransactionStart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidLtx)), uintptr(unsafe.Pointer(&tsid)), uintptr(_fRoot), uintptr(nIsolationLevel)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComLTxEvents_OnLtxTransactionPrepare = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// OnLtxTransactionPrepare dispatches through IComLTxEvents's vtable slot 4.
+func (self *IComLTxEvents) OnLtxTransactionPrepare(pInfo *COMSVCSEVENTINFO, guidLtx win32.GUID, fVote bool) error {
+	_fVote := win32.Bool32(fVote)
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIComLTxEvents_OnLtxTransactionPrepare, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidLtx)), uintptr(_fVote)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComLTxEvents_OnLtxTransactionAbort = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnLtxTransactionAbort dispatches through IComLTxEvents's vtable slot 5.
+func (self *IComLTxEvents) OnLtxTransactionAbort(pInfo *COMSVCSEVENTINFO, guidLtx win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIComLTxEvents_OnLtxTransactionAbort, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidLtx))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComLTxEvents_OnLtxTransactionCommit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnLtxTransactionCommit dispatches through IComLTxEvents's vtable slot 6.
+func (self *IComLTxEvents) OnLtxTransactionCommit(pInfo *COMSVCSEVENTINFO, guidLtx win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIComLTxEvents_OnLtxTransactionCommit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidLtx))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIComLTxEvents_OnLtxTransactionPromote = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false)}}
+
+// OnLtxTransactionPromote dispatches through IComLTxEvents's vtable slot 7.
+func (self *IComLTxEvents) OnLtxTransactionPromote(pInfo *COMSVCSEVENTINFO, guidLtx win32.GUID, txnId win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIComLTxEvents_OnLtxTransactionPromote, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(&guidLtx)), uintptr(unsafe.Pointer(&txnId))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IComMethod2Events: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icommethod2events
 // IID: fb388aaa-567d-4024-af8e-6e93ee748573
@@ -1340,6 +1589,14 @@ func (self *IComStaThreadPoolKnobs) GetActivityPerThread(activitiesPerThread *ui
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIComStaThreadPoolKnobs_SetActivityRatio = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// SetActivityRatio dispatches through IComStaThreadPoolKnobs's vtable slot 9.
+func (self *IComStaThreadPoolKnobs) SetActivityRatio(activityRatio float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIComStaThreadPoolKnobs_SetActivityRatio, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(activityRatio))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetActivityRatio dispatches through IComStaThreadPoolKnobs's vtable slot 10.
 func (self *IComStaThreadPoolKnobs) GetActivityRatio(activityRatio *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(activityRatio)))
@@ -1700,6 +1957,14 @@ func (self *IContextProperties) EnumNames(ppenum **IEnumNames) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIContextProperties_SetProperty = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetProperty dispatches through IContextProperties's vtable slot 6.
+func (self *IContextProperties) SetProperty(name foundation.BSTR, property systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIContextProperties_SetProperty, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&property))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // RemoveProperty dispatches through IContextProperties's vtable slot 7.
 func (self *IContextProperties) RemoveProperty(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
@@ -1826,6 +2091,14 @@ func (self *ICrmCompensator) BeginPrepare() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specICrmCompensator_PrepareRecord = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// PrepareRecord dispatches through ICrmCompensator's vtable slot 5.
+func (self *ICrmCompensator) PrepareRecord(crmLogRec CrmLogRecordRead, pfForget *foundation.BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specICrmCompensator_PrepareRecord, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&crmLogRec)), uintptr(unsafe.Pointer(pfForget))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // EndPrepare dispatches through ICrmCompensator's vtable slot 6.
 func (self *ICrmCompensator) EndPrepare(pfOkToPrepare *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfOkToPrepare)))
@@ -1839,6 +2112,14 @@ func (self *ICrmCompensator) BeginCommit(fRecovery bool) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specICrmCompensator_CommitRecord = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CommitRecord dispatches through ICrmCompensator's vtable slot 8.
+func (self *ICrmCompensator) CommitRecord(crmLogRec CrmLogRecordRead, pfForget *foundation.BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specICrmCompensator_CommitRecord, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&crmLogRec)), uintptr(unsafe.Pointer(pfForget))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // EndCommit dispatches through ICrmCompensator's vtable slot 9.
 func (self *ICrmCompensator) EndCommit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
@@ -1849,6 +2130,14 @@ func (self *ICrmCompensator) EndCommit() error {
 func (self *ICrmCompensator) BeginAbort(fRecovery bool) error {
 	_fRecovery := win32.Bool32(fRecovery)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_fRecovery))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICrmCompensator_AbortRecord = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// AbortRecord dispatches through ICrmCompensator's vtable slot 11.
+func (self *ICrmCompensator) AbortRecord(crmLogRec CrmLogRecordRead, pfForget *foundation.BOOL) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specICrmCompensator_AbortRecord, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&crmLogRec)), uintptr(unsafe.Pointer(pfForget))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1948,6 +2237,22 @@ func (self *ICrmFormatLogRecords) GetColumnHeaders(pHeaders *systemvariant.VARIA
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specICrmFormatLogRecords_GetColumn = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetColumn dispatches through ICrmFormatLogRecords's vtable slot 5.
+func (self *ICrmFormatLogRecords) GetColumn(CrmLogRec CrmLogRecordRead, pFormattedLogRecord *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specICrmFormatLogRecords_GetColumn, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&CrmLogRec)), uintptr(unsafe.Pointer(pFormattedLogRecord))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICrmFormatLogRecords_GetColumnVariants = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetColumnVariants dispatches through ICrmFormatLogRecords's vtable slot 6.
+func (self *ICrmFormatLogRecords) GetColumnVariants(LogRecord systemvariant.VARIANT, pFormattedLogRecord *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specICrmFormatLogRecords_GetColumnVariants, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&LogRecord)), uintptr(unsafe.Pointer(pFormattedLogRecord))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ICrmLogControl: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icrmlogcontrol
 // IID: a0e174b3-d26e-11d2-8f84-00805fc7bcd9
 type ICrmLogControl struct {
@@ -2020,6 +2325,14 @@ func (self *ICrmMonitor) GetClerks(pClerks **ICrmMonitorClerks) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specICrmMonitor_HoldClerk = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// HoldClerk dispatches through ICrmMonitor's vtable slot 4.
+func (self *ICrmMonitor) HoldClerk(Index systemvariant.VARIANT, pItem *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specICrmMonitor_HoldClerk, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(unsafe.Pointer(pItem))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ICrmMonitorClerks: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-icrmmonitorclerks
 // IID: 70c8e442-c7ed-11d1-82fb-00a0c91eede9
 type ICrmMonitorClerks struct {
@@ -2028,6 +2341,14 @@ type ICrmMonitorClerks struct {
 
 // IID_ICrmMonitorClerks is the interface identifier for ICrmMonitorClerks.
 var IID_ICrmMonitorClerks = win32.GUID{Data1: 0x70c8e442, Data2: 0xc7ed, Data3: 0x11d1, Data4: [8]byte{0x82, 0xfb, 0x00, 0xa0, 0xc9, 0x1e, 0xed, 0xe9}}
+
+var specICrmMonitorClerks_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through ICrmMonitorClerks's vtable slot 7.
+func (self *ICrmMonitorClerks) Item(Index systemvariant.VARIANT, pItem *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specICrmMonitorClerks_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(unsafe.Pointer(pItem))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get__NewEnum dispatches through ICrmMonitorClerks's vtable slot 8.
 func (self *ICrmMonitorClerks) Get__NewEnum(pVal **systemcom.IUnknown) error {
@@ -2038,6 +2359,38 @@ func (self *ICrmMonitorClerks) Get__NewEnum(pVal **systemcom.IUnknown) error {
 // Get_Count dispatches through ICrmMonitorClerks's vtable slot 9.
 func (self *ICrmMonitorClerks) Get_Count(pVal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICrmMonitorClerks_ProgIdCompensator = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// ProgIdCompensator dispatches through ICrmMonitorClerks's vtable slot 10.
+func (self *ICrmMonitorClerks) ProgIdCompensator(Index systemvariant.VARIANT, pItem *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specICrmMonitorClerks_ProgIdCompensator, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(unsafe.Pointer(pItem))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICrmMonitorClerks_Description = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Description dispatches through ICrmMonitorClerks's vtable slot 11.
+func (self *ICrmMonitorClerks) Description(Index systemvariant.VARIANT, pItem *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specICrmMonitorClerks_Description, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(unsafe.Pointer(pItem))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICrmMonitorClerks_TransactionUOW = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// TransactionUOW dispatches through ICrmMonitorClerks's vtable slot 12.
+func (self *ICrmMonitorClerks) TransactionUOW(Index systemvariant.VARIANT, pItem *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specICrmMonitorClerks_TransactionUOW, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(unsafe.Pointer(pItem))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICrmMonitorClerks_ActivityId = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// ActivityId dispatches through ICrmMonitorClerks's vtable slot 13.
+func (self *ICrmMonitorClerks) ActivityId(Index systemvariant.VARIANT, pItem *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specICrmMonitorClerks_ActivityId, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&Index)), uintptr(unsafe.Pointer(pItem))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2071,6 +2424,14 @@ func (self *ICrmMonitorLogRecords) Get_StructuredRecords(pVal *foundation.VARIAN
 // GetLogRecord dispatches through ICrmMonitorLogRecords's vtable slot 6.
 func (self *ICrmMonitorLogRecords) GetLogRecord(dwIndex uint32, pCrmLogRec *CrmLogRecordRead) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pCrmLogRec)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICrmMonitorLogRecords_GetLogRecordVariants = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// GetLogRecordVariants dispatches through ICrmMonitorLogRecords's vtable slot 7.
+func (self *ICrmMonitorLogRecords) GetLogRecordVariants(IndexNumber systemvariant.VARIANT, pLogRecord *systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specICrmMonitorLogRecords_GetLogRecordVariants, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&IndexNumber)), uintptr(unsafe.Pointer(pLogRecord))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3562,6 +3923,14 @@ func (self *ISharedProperty) Get_Value(pVal *systemvariant.VARIANT) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISharedProperty_Put_Value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Value dispatches through ISharedProperty's vtable slot 8.
+func (self *ISharedProperty) Put_Value(val systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specISharedProperty_Put_Value, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&val))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ISharedPropertyGroup: https://learn.microsoft.com/windows/win32/api/comsvcs/nn-comsvcs-isharedpropertygroup
 // IID: 2a005c07-a5de-11cf-9e66-00aa00a3f464
 type ISharedPropertyGroup struct {
@@ -3874,6 +4243,14 @@ type ITransactionProxy struct {
 
 // IID_ITransactionProxy is the interface identifier for ITransactionProxy.
 var IID_ITransactionProxy = win32.GUID{Data1: 0x02558374, Data2: 0xdf2e, Data3: 0x4dae, Data4: [8]byte{0xbd, 0x6b, 0x1d, 0x5c, 0x99, 0x4f, 0x9b, 0xdc}}
+
+var specITransactionProxy_Commit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// Commit dispatches through ITransactionProxy's vtable slot 3.
+func (self *ITransactionProxy) Commit(guid win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specITransactionProxy_Commit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&guid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Abort dispatches through ITransactionProxy's vtable slot 4.
 func (self *ITransactionProxy) Abort() error {

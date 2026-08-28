@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
 // IWSMan: https://learn.microsoft.com/windows/win32/api/wsmandisp/nn-wsmandisp-iwsman
@@ -425,6 +426,15 @@ type IWSManInternal struct {
 // IID_IWSManInternal is the interface identifier for IWSManInternal.
 var IID_IWSManInternal = win32.GUID{Data1: 0x04ae2b1d, Data2: 0x9954, Data3: 0x4d99, Data4: [8]byte{0x94, 0xa9, 0xa9, 0x61, 0xe7, 0x2c, 0x3a, 0x13}}
 
+var specIWSManInternal_ConfigSDDL = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// ConfigSDDL dispatches through IWSManInternal's vtable slot 7.
+func (self *IWSManInternal) ConfigSDDL(session *systemcom.IDispatch, resourceUri systemvariant.VARIANT, flags int32) (foundation.BSTR, error) {
+	_resource := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIWSManInternal_ConfigSDDL, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(session)), uintptr(unsafe.Pointer(&resourceUri)), uintptr(flags), uintptr(win32.OutParam(unsafe.Pointer(_resource)))).Tuple()
+	return *_resource, win32.ErrIfFailed(int32(r1))
+}
+
 // IWSManResourceLocator: https://learn.microsoft.com/windows/win32/api/wsmandisp/nn-wsmandisp-iwsmanresourcelocator
 // IID: a7a1ba28-de41-466a-ad0a-c4059ead7428
 type IWSManResourceLocator struct {
@@ -445,6 +455,14 @@ func (self *IWSManResourceLocator) Get_ResourceURI() (foundation.BSTR, error) {
 	_uri := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_uri))))
 	return *_uri, win32.ErrIfFailed(int32(r1))
+}
+
+var specIWSManResourceLocator_AddSelector = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// AddSelector dispatches through IWSManResourceLocator's vtable slot 9.
+func (self *IWSManResourceLocator) AddSelector(resourceSelName foundation.BSTR, selValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIWSManResourceLocator_AddSelector, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourceSelName)), uintptr(unsafe.Pointer(&selValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ClearSelectors dispatches through IWSManResourceLocator's vtable slot 10.
@@ -476,6 +494,15 @@ func (self *IWSManResourceLocator) Get_FragmentDialect() (foundation.BSTR, error
 // Put_FragmentDialect dispatches through IWSManResourceLocator's vtable slot 14.
 func (self *IWSManResourceLocator) Put_FragmentDialect(text foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWSManResourceLocator_AddOption = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// AddOption dispatches through IWSManResourceLocator's vtable slot 15.
+func (self *IWSManResourceLocator) AddOption(OptionName foundation.BSTR, OptionValue systemvariant.VARIANT, mustComply bool) error {
+	_mustComply := win32.Bool32(mustComply)
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIWSManResourceLocator_AddOption, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(OptionName)), uintptr(unsafe.Pointer(&OptionValue)), uintptr(_mustComply)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -522,6 +549,59 @@ type IWSManSession struct {
 
 // IID_IWSManSession is the interface identifier for IWSManSession.
 var IID_IWSManSession = win32.GUID{Data1: 0xfc84fc58, Data2: 0x1286, Data3: 0x40c4, Data4: [8]byte{0x9d, 0xa0, 0xc8, 0xef, 0x6e, 0xc2, 0x41, 0xe0}}
+
+var specIWSManSession_Get = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word}}
+
+// Get dispatches through IWSManSession's vtable slot 7.
+func (self *IWSManSession) Get(resourceUri systemvariant.VARIANT, flags int32) (foundation.BSTR, error) {
+	_resource := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIWSManSession_Get, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&resourceUri)), uintptr(flags), uintptr(win32.OutParam(unsafe.Pointer(_resource)))).Tuple()
+	return *_resource, win32.ErrIfFailed(int32(r1))
+}
+
+var specIWSManSession_Put = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Put dispatches through IWSManSession's vtable slot 8.
+func (self *IWSManSession) Put(resourceUri systemvariant.VARIANT, resource foundation.BSTR, flags int32) (foundation.BSTR, error) {
+	_resultResource := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIWSManSession_Put, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&resourceUri)), uintptr(unsafe.Pointer(resource)), uintptr(flags), uintptr(win32.OutParam(unsafe.Pointer(_resultResource)))).Tuple()
+	return *_resultResource, win32.ErrIfFailed(int32(r1))
+}
+
+var specIWSManSession_Create = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Create dispatches through IWSManSession's vtable slot 9.
+func (self *IWSManSession) Create(resourceUri systemvariant.VARIANT, resource foundation.BSTR, flags int32) (foundation.BSTR, error) {
+	_newUri := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIWSManSession_Create, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&resourceUri)), uintptr(unsafe.Pointer(resource)), uintptr(flags), uintptr(win32.OutParam(unsafe.Pointer(_newUri)))).Tuple()
+	return *_newUri, win32.ErrIfFailed(int32(r1))
+}
+
+var specIWSManSession_Delete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Delete dispatches through IWSManSession's vtable slot 10.
+func (self *IWSManSession) Delete(resourceUri systemvariant.VARIANT, flags int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIWSManSession_Delete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&resourceUri)), uintptr(flags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWSManSession_Invoke = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Invoke dispatches through IWSManSession's vtable slot 11.
+func (self *IWSManSession) Invoke(actionUri foundation.BSTR, resourceUri systemvariant.VARIANT, parameters foundation.BSTR, flags int32) (foundation.BSTR, error) {
+	_result := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIWSManSession_Invoke, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(actionUri)), uintptr(unsafe.Pointer(&resourceUri)), uintptr(unsafe.Pointer(parameters)), uintptr(flags), uintptr(win32.OutParam(unsafe.Pointer(_result)))).Tuple()
+	return *_result, win32.ErrIfFailed(int32(r1))
+}
+
+var specIWSManSession_Enumerate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// Enumerate dispatches through IWSManSession's vtable slot 12.
+func (self *IWSManSession) Enumerate(resourceUri systemvariant.VARIANT, filter foundation.BSTR, dialect foundation.BSTR, flags int32) (*systemcom.IDispatch, error) {
+	_resultSet := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIWSManSession_Enumerate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&resourceUri)), uintptr(unsafe.Pointer(filter)), uintptr(unsafe.Pointer(dialect)), uintptr(flags), uintptr(win32.OutParam(unsafe.Pointer(_resultSet)))).Tuple()
+	return *_resultSet, win32.ErrIfFailed(int32(r1))
+}
 
 // Identify dispatches through IWSManSession's vtable slot 13.
 func (self *IWSManSession) Identify(flags int32) (foundation.BSTR, error) {

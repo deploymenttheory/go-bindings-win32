@@ -19,21 +19,22 @@ var (
 )
 
 var (
-	procNdfCancelIncident             = modNDFAPI.NewProc("NdfCancelIncident")
-	procNdfCloseIncident              = modNDFAPI.NewProc("NdfCloseIncident")
-	procNdfCreateConnectivityIncident = modNDFAPI.NewProc("NdfCreateConnectivityIncident")
-	procNdfCreateDNSIncident          = modNDFAPI.NewProc("NdfCreateDNSIncident")
-	procNdfCreateGroupingIncident     = modNDFAPI.NewProc("NdfCreateGroupingIncident")
-	procNdfCreateIncident             = modNDFAPI.NewProc("NdfCreateIncident")
-	procNdfCreatePnrpIncident         = modNDFAPI.NewProc("NdfCreatePnrpIncident")
-	procNdfCreateSharingIncident      = modNDFAPI.NewProc("NdfCreateSharingIncident")
-	procNdfCreateWebIncident          = modNDFAPI.NewProc("NdfCreateWebIncident")
-	procNdfCreateWebIncidentEx        = modNDFAPI.NewProc("NdfCreateWebIncidentEx")
-	procNdfCreateWinSockIncident      = modNDFAPI.NewProc("NdfCreateWinSockIncident")
-	procNdfDiagnoseIncident           = modNDFAPI.NewProc("NdfDiagnoseIncident")
-	procNdfExecuteDiagnosis           = modNDFAPI.NewProc("NdfExecuteDiagnosis")
-	procNdfGetTraceFile               = modNDFAPI.NewProc("NdfGetTraceFile")
-	procNdfRepairIncident             = modNDFAPI.NewProc("NdfRepairIncident")
+	procNdfCancelIncident              = modNDFAPI.NewProc("NdfCancelIncident")
+	procNdfCloseIncident               = modNDFAPI.NewProc("NdfCloseIncident")
+	procNdfCreateConnectivityIncident  = modNDFAPI.NewProc("NdfCreateConnectivityIncident")
+	procNdfCreateDNSIncident           = modNDFAPI.NewProc("NdfCreateDNSIncident")
+	procNdfCreateGroupingIncident      = modNDFAPI.NewProc("NdfCreateGroupingIncident")
+	procNdfCreateIncident              = modNDFAPI.NewProc("NdfCreateIncident")
+	procNdfCreateNetConnectionIncident = modNDFAPI.NewProc("NdfCreateNetConnectionIncident")
+	procNdfCreatePnrpIncident          = modNDFAPI.NewProc("NdfCreatePnrpIncident")
+	procNdfCreateSharingIncident       = modNDFAPI.NewProc("NdfCreateSharingIncident")
+	procNdfCreateWebIncident           = modNDFAPI.NewProc("NdfCreateWebIncident")
+	procNdfCreateWebIncidentEx         = modNDFAPI.NewProc("NdfCreateWebIncidentEx")
+	procNdfCreateWinSockIncident       = modNDFAPI.NewProc("NdfCreateWinSockIncident")
+	procNdfDiagnoseIncident            = modNDFAPI.NewProc("NdfDiagnoseIncident")
+	procNdfExecuteDiagnosis            = modNDFAPI.NewProc("NdfExecuteDiagnosis")
+	procNdfGetTraceFile                = modNDFAPI.NewProc("NdfGetTraceFile")
+	procNdfRepairIncident              = modNDFAPI.NewProc("NdfRepairIncident")
 )
 
 // Procs exposes this package's lazily resolved exports for availability
@@ -41,37 +42,39 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
-	NdfCancelIncident             *win32.Proc
-	NdfCloseIncident              *win32.Proc
-	NdfCreateConnectivityIncident *win32.Proc
-	NdfCreateDNSIncident          *win32.Proc
-	NdfCreateGroupingIncident     *win32.Proc
-	NdfCreateIncident             *win32.Proc
-	NdfCreatePnrpIncident         *win32.Proc
-	NdfCreateSharingIncident      *win32.Proc
-	NdfCreateWebIncident          *win32.Proc
-	NdfCreateWebIncidentEx        *win32.Proc
-	NdfCreateWinSockIncident      *win32.Proc
-	NdfDiagnoseIncident           *win32.Proc
-	NdfExecuteDiagnosis           *win32.Proc
-	NdfGetTraceFile               *win32.Proc
-	NdfRepairIncident             *win32.Proc
+	NdfCancelIncident              *win32.Proc
+	NdfCloseIncident               *win32.Proc
+	NdfCreateConnectivityIncident  *win32.Proc
+	NdfCreateDNSIncident           *win32.Proc
+	NdfCreateGroupingIncident      *win32.Proc
+	NdfCreateIncident              *win32.Proc
+	NdfCreateNetConnectionIncident *win32.Proc
+	NdfCreatePnrpIncident          *win32.Proc
+	NdfCreateSharingIncident       *win32.Proc
+	NdfCreateWebIncident           *win32.Proc
+	NdfCreateWebIncidentEx         *win32.Proc
+	NdfCreateWinSockIncident       *win32.Proc
+	NdfDiagnoseIncident            *win32.Proc
+	NdfExecuteDiagnosis            *win32.Proc
+	NdfGetTraceFile                *win32.Proc
+	NdfRepairIncident              *win32.Proc
 }{
-	NdfCancelIncident:             procNdfCancelIncident,
-	NdfCloseIncident:              procNdfCloseIncident,
-	NdfCreateConnectivityIncident: procNdfCreateConnectivityIncident,
-	NdfCreateDNSIncident:          procNdfCreateDNSIncident,
-	NdfCreateGroupingIncident:     procNdfCreateGroupingIncident,
-	NdfCreateIncident:             procNdfCreateIncident,
-	NdfCreatePnrpIncident:         procNdfCreatePnrpIncident,
-	NdfCreateSharingIncident:      procNdfCreateSharingIncident,
-	NdfCreateWebIncident:          procNdfCreateWebIncident,
-	NdfCreateWebIncidentEx:        procNdfCreateWebIncidentEx,
-	NdfCreateWinSockIncident:      procNdfCreateWinSockIncident,
-	NdfDiagnoseIncident:           procNdfDiagnoseIncident,
-	NdfExecuteDiagnosis:           procNdfExecuteDiagnosis,
-	NdfGetTraceFile:               procNdfGetTraceFile,
-	NdfRepairIncident:             procNdfRepairIncident,
+	NdfCancelIncident:              procNdfCancelIncident,
+	NdfCloseIncident:               procNdfCloseIncident,
+	NdfCreateConnectivityIncident:  procNdfCreateConnectivityIncident,
+	NdfCreateDNSIncident:           procNdfCreateDNSIncident,
+	NdfCreateGroupingIncident:      procNdfCreateGroupingIncident,
+	NdfCreateIncident:              procNdfCreateIncident,
+	NdfCreateNetConnectionIncident: procNdfCreateNetConnectionIncident,
+	NdfCreatePnrpIncident:          procNdfCreatePnrpIncident,
+	NdfCreateSharingIncident:       procNdfCreateSharingIncident,
+	NdfCreateWebIncident:           procNdfCreateWebIncident,
+	NdfCreateWebIncidentEx:         procNdfCreateWebIncidentEx,
+	NdfCreateWinSockIncident:       procNdfCreateWinSockIncident,
+	NdfDiagnoseIncident:            procNdfDiagnoseIncident,
+	NdfExecuteDiagnosis:            procNdfExecuteDiagnosis,
+	NdfGetTraceFile:                procNdfGetTraceFile,
+	NdfRepairIncident:              procNdfRepairIncident,
 }
 
 // NdfCancelIncident calls NDFAPI!NdfCancelIncident.
@@ -130,6 +133,16 @@ func NdfCreateIncident(helperClassName string, attributes []HELPER_ATTRIBUTE, ha
 		_attributes = &attributes[0]
 	}
 	r1, _, _ := syscall.SyscallN(procNdfCreateIncident.Addr(), uintptr(unsafe.Pointer(_helperClassName)), uintptr(len(attributes)), uintptr(unsafe.Pointer(_attributes)), uintptr(unsafe.Pointer(handle)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specNdfCreateNetConnectionIncident = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// NdfCreateNetConnectionIncident calls NDFAPI!NdfCreateNetConnectionIncident.
+// https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcreatenetconnectionincident
+// Minimum OS: windows8.0.
+func NdfCreateNetConnectionIncident(handle *unsafe.Pointer, id win32.GUID) error {
+	r1, _, _ := win32.Call(procNdfCreateNetConnectionIncident.Addr(), specNdfCreateNetConnectionIncident, nil, uintptr(unsafe.Pointer(handle)), uintptr(unsafe.Pointer(&id))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

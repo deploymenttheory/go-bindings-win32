@@ -5,6 +5,7 @@
 package audio
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -89,6 +90,14 @@ func (self *IAudioAmbisonicsControl) SetHeadTracking(bEnableHeadTracking bool) e
 // GetHeadTracking dispatches through IAudioAmbisonicsControl's vtable slot 5.
 func (self *IAudioAmbisonicsControl) GetHeadTracking(pbEnableHeadTracking *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnableHeadTracking)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAudioAmbisonicsControl_SetRotation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetRotation dispatches through IAudioAmbisonicsControl's vtable slot 6.
+func (self *IAudioAmbisonicsControl) SetRotation(X float32, Y float32, Z float32, W float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIAudioAmbisonicsControl_SetRotation, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(X)), uintptr(math.Float32bits(Y)), uintptr(math.Float32bits(Z)), uintptr(math.Float32bits(W))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -374,6 +383,14 @@ type IAudioClockAdjustment struct {
 // IID_IAudioClockAdjustment is the interface identifier for IAudioClockAdjustment.
 var IID_IAudioClockAdjustment = win32.GUID{Data1: 0xf6e4c0a0, Data2: 0x46d9, Data3: 0x4fb8, Data4: [8]byte{0xbe, 0x21, 0x57, 0xa3, 0xef, 0x2b, 0x62, 0x6c}}
 
+var specIAudioClockAdjustment_SetSampleRate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSampleRate dispatches through IAudioClockAdjustment's vtable slot 3.
+func (self *IAudioClockAdjustment) SetSampleRate(flSampleRate float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIAudioClockAdjustment_SetSampleRate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(flSampleRate))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IAudioEffectsChangedNotificationClient: https://learn.microsoft.com/windows/win32/api/audioclient/nn-audioclient-iaudioeffectschangednotificationclient
 // IID: a5ded44f-3c5d-4b2b-bd1e-5dc1ee20bbf6
 type IAudioEffectsChangedNotificationClient struct {
@@ -413,6 +430,14 @@ func (self *IAudioEffectsManager) UnregisterAudioEffectsChangedNotificationCallb
 // GetAudioEffects dispatches through IAudioEffectsManager's vtable slot 5.
 func (self *IAudioEffectsManager) GetAudioEffects(effects **AUDIO_EFFECT, numEffects *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effects)), uintptr(unsafe.Pointer(numEffects)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIAudioEffectsManager_SetAudioEffectState = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetAudioEffectState dispatches through IAudioEffectsManager's vtable slot 6.
+func (self *IAudioEffectsManager) SetAudioEffectState(effectId win32.GUID, state AUDIO_EFFECT_STATE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIAudioEffectsManager_SetAudioEffectState, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&effectId)), uintptr(state)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -723,6 +748,15 @@ func (self *IAudioSessionEvents) OnIconPathChanged(NewIconPath string, EventCont
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAudioSessionEvents_OnSimpleVolumeChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word, win32.Word}}
+
+// OnSimpleVolumeChanged dispatches through IAudioSessionEvents's vtable slot 5.
+func (self *IAudioSessionEvents) OnSimpleVolumeChanged(NewVolume float32, NewMute bool, EventContext *win32.GUID) error {
+	_NewMute := win32.Bool32(NewMute)
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIAudioSessionEvents_OnSimpleVolumeChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(NewVolume)), uintptr(_NewMute), uintptr(unsafe.Pointer(EventContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // OnChannelVolumeChanged dispatches through IAudioSessionEvents's vtable slot 6.
 func (self *IAudioSessionEvents) OnChannelVolumeChanged(NewChannelVolumeArray []float32, ChangedChannel uint32, EventContext *win32.GUID) error {
 	var _NewChannelVolumeArray *float32
@@ -868,6 +902,14 @@ func (self *IAudioStreamVolume) GetChannelCount(pdwCount *uint32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAudioStreamVolume_SetChannelVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// SetChannelVolume dispatches through IAudioStreamVolume's vtable slot 4.
+func (self *IAudioStreamVolume) SetChannelVolume(dwIndex uint32, fLevel float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIAudioStreamVolume_SetChannelVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(math.Float32bits(fLevel))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetChannelVolume dispatches through IAudioStreamVolume's vtable slot 5.
 func (self *IAudioStreamVolume) GetChannelVolume(dwIndex uint32, pfLevel *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pfLevel)))
@@ -902,6 +944,14 @@ type IAudioSystemEffectsPropertyChangeNotificationClient struct {
 
 // IID_IAudioSystemEffectsPropertyChangeNotificationClient is the interface identifier for IAudioSystemEffectsPropertyChangeNotificationClient.
 var IID_IAudioSystemEffectsPropertyChangeNotificationClient = win32.GUID{Data1: 0x20049d40, Data2: 0x56d5, Data3: 0x400e, Data4: [8]byte{0xa2, 0xef, 0x38, 0x55, 0x99, 0xfe, 0xed, 0x49}}
+
+var specIAudioSystemEffectsPropertyChangeNotificationClient_OnPropertyChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(20, 4, 0, false)}}
+
+// OnPropertyChanged dispatches through IAudioSystemEffectsPropertyChangeNotificationClient's vtable slot 3.
+func (self *IAudioSystemEffectsPropertyChangeNotificationClient) OnPropertyChanged(type_ AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE, key foundation.PROPERTYKEY) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIAudioSystemEffectsPropertyChangeNotificationClient_OnPropertyChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(&key))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IAudioSystemEffectsPropertyStore: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-iaudiosystemeffectspropertystore
 // IID: 302ae7f9-d7e0-43e4-971b-1f8293613d2a
@@ -1022,6 +1072,14 @@ var IID_IChannelAudioVolume = win32.GUID{Data1: 0x1c158861, Data2: 0xb533, Data3
 // GetChannelCount dispatches through IChannelAudioVolume's vtable slot 3.
 func (self *IChannelAudioVolume) GetChannelCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIChannelAudioVolume_SetChannelVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// SetChannelVolume dispatches through IChannelAudioVolume's vtable slot 4.
+func (self *IChannelAudioVolume) SetChannelVolume(dwIndex uint32, fLevel float32, EventContext *win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[4], specIChannelAudioVolume_SetChannelVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(math.Float32bits(fLevel)), uintptr(unsafe.Pointer(EventContext))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1389,6 +1447,15 @@ func (self *IMMNotificationClient) OnDefaultDeviceChanged(flow EDataFlow, role E
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIMMNotificationClient_OnPropertyValueChanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(20, 4, 0, false)}}
+
+// OnPropertyValueChanged dispatches through IMMNotificationClient's vtable slot 7.
+func (self *IMMNotificationClient) OnPropertyValueChanged(pwstrDeviceId string, key foundation.PROPERTYKEY) error {
+	_pwstrDeviceId := win32.UTF16Ptr(pwstrDeviceId)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIMMNotificationClient_OnPropertyValueChanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwstrDeviceId)), uintptr(unsafe.Pointer(&key))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IMessageFilter: https://learn.microsoft.com/windows/win32/api/objidl/nn-objidl-imessagefilter
 // IID: 00000016-0000-0000-c000-000000000046
 type IMessageFilter struct {
@@ -1551,6 +1618,22 @@ func (self *IPerChannelDbLevel) GetLevel(nChannel uint32, pfLevelDB *float32) er
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIPerChannelDbLevel_SetLevel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// SetLevel dispatches through IPerChannelDbLevel's vtable slot 6.
+func (self *IPerChannelDbLevel) SetLevel(nChannel uint32, fLevelDB float32, pguidEventContext *win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIPerChannelDbLevel_SetLevel, nil, uintptr(unsafe.Pointer(self)), uintptr(nChannel), uintptr(math.Float32bits(fLevelDB)), uintptr(unsafe.Pointer(pguidEventContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIPerChannelDbLevel_SetLevelUniform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetLevelUniform dispatches through IPerChannelDbLevel's vtable slot 7.
+func (self *IPerChannelDbLevel) SetLevelUniform(fLevelDB float32, pguidEventContext *win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIPerChannelDbLevel_SetLevelUniform, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fLevelDB)), uintptr(unsafe.Pointer(pguidEventContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetLevelAllChannels dispatches through IPerChannelDbLevel's vtable slot 8.
 func (self *IPerChannelDbLevel) SetLevelAllChannels(aLevelsDB []float32, pguidEventContext *win32.GUID) error {
 	var _aLevelsDB *float32
@@ -1569,6 +1652,14 @@ type ISimpleAudioVolume struct {
 
 // IID_ISimpleAudioVolume is the interface identifier for ISimpleAudioVolume.
 var IID_ISimpleAudioVolume = win32.GUID{Data1: 0x87ce5498, Data2: 0x68d6, Data3: 0x44e5, Data4: [8]byte{0x92, 0x15, 0x6d, 0xa4, 0x7e, 0xf8, 0x83, 0xd8}}
+
+var specISimpleAudioVolume_SetMasterVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SetMasterVolume dispatches through ISimpleAudioVolume's vtable slot 3.
+func (self *ISimpleAudioVolume) SetMasterVolume(fLevel float32, EventContext *win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specISimpleAudioVolume_SetMasterVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fLevel)), uintptr(unsafe.Pointer(EventContext))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetMasterVolume dispatches through ISimpleAudioVolume's vtable slot 4.
 func (self *ISimpleAudioVolume) GetMasterVolume(pfLevel *float32) error {
@@ -1891,6 +1982,22 @@ type ISpatialAudioObject struct {
 // IID_ISpatialAudioObject is the interface identifier for ISpatialAudioObject.
 var IID_ISpatialAudioObject = win32.GUID{Data1: 0xdde28967, Data2: 0x521b, Data3: 0x46e5, Data4: [8]byte{0x8f, 0x00, 0xbd, 0x6f, 0x2b, 0xc8, 0xab, 0x1d}}
 
+var specISpatialAudioObject_SetPosition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetPosition dispatches through ISpatialAudioObject's vtable slot 7.
+func (self *ISpatialAudioObject) SetPosition(x float32, y float32, z float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISpatialAudioObject_SetPosition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpatialAudioObject_SetVolume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetVolume dispatches through ISpatialAudioObject's vtable slot 8.
+func (self *ISpatialAudioObject) SetVolume(volume float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specISpatialAudioObject_SetVolume, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(volume))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ISpatialAudioObjectBase: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/nn-spatialaudioclient-ispatialaudioobjectbase
 // IID: cce0b8f2-8d4d-4efb-a8cf-3d6ecf1c30e0
 type ISpatialAudioObjectBase struct {
@@ -1932,6 +2039,22 @@ type ISpatialAudioObjectForHrtf struct {
 
 // IID_ISpatialAudioObjectForHrtf is the interface identifier for ISpatialAudioObjectForHrtf.
 var IID_ISpatialAudioObjectForHrtf = win32.GUID{Data1: 0xd7436ade, Data2: 0x1978, Data3: 0x4e14, Data4: [8]byte{0xab, 0xa0, 0x55, 0x5b, 0xd8, 0xeb, 0x83, 0xb4}}
+
+var specISpatialAudioObjectForHrtf_SetPosition = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetPosition dispatches through ISpatialAudioObjectForHrtf's vtable slot 7.
+func (self *ISpatialAudioObjectForHrtf) SetPosition(x float32, y float32, z float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISpatialAudioObjectForHrtf_SetPosition, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(z))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISpatialAudioObjectForHrtf_SetGain = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetGain dispatches through ISpatialAudioObjectForHrtf's vtable slot 8.
+func (self *ISpatialAudioObjectForHrtf) SetGain(gain float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specISpatialAudioObjectForHrtf_SetGain, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(gain))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // SetOrientation dispatches through ISpatialAudioObjectForHrtf's vtable slot 9.
 func (self *ISpatialAudioObjectForHrtf) SetOrientation(orientation **float32) error {

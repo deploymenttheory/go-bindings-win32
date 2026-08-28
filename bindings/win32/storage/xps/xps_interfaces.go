@@ -5,6 +5,7 @@
 package xps
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -83,6 +84,14 @@ func (self *IXpsOMBrush) GetOpacity() (float32, error) {
 	_opacity := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_opacity))))
 	return *_opacity, win32.ErrIfFailed(int32(r1))
+}
+
+var specIXpsOMBrush_SetOpacity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOpacity dispatches through IXpsOMBrush's vtable slot 6.
+func (self *IXpsOMBrush) SetOpacity(opacity float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[6], specIXpsOMBrush_SetOpacity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(opacity))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMCanvas: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/nn-xpsobjectmodel-ixpsomcanvas
@@ -1222,6 +1231,14 @@ func (self *IXpsOMGlyphs) GetFontRenderingEmSize() (float32, error) {
 	return *_fontRenderingEmSize, win32.ErrIfFailed(int32(r1))
 }
 
+var specIXpsOMGlyphs_SetFontRenderingEmSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetFontRenderingEmSize dispatches through IXpsOMGlyphs's vtable slot 45.
+func (self *IXpsOMGlyphs) SetFontRenderingEmSize(fontRenderingEmSize float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specIXpsOMGlyphs_SetFontRenderingEmSize, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fontRenderingEmSize))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetFontResource dispatches through IXpsOMGlyphs's vtable slot 46.
 func (self *IXpsOMGlyphs) GetFontResource() (*IXpsOMFontResource, error) {
 	_fontResource := new(*IXpsOMFontResource)
@@ -1520,6 +1537,14 @@ func (self *IXpsOMGradientStop) GetOffset() (float32, error) {
 	_offset := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_offset))))
 	return *_offset, win32.ErrIfFailed(int32(r1))
+}
+
+var specIXpsOMGradientStop_SetOffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOffset dispatches through IXpsOMGradientStop's vtable slot 5.
+func (self *IXpsOMGradientStop) SetOffset(offset float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIXpsOMGradientStop_SetOffset, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offset))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetColor dispatches through IXpsOMGradientStop's vtable slot 6.
@@ -2010,6 +2035,15 @@ func (self *IXpsOMObjectFactory) CreateFontResource(acquiredStream *systemcom.IS
 	_fontResource := new(*IXpsOMFontResource)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(acquiredStream)), uintptr(fontEmbedding), uintptr(unsafe.Pointer(partUri)), uintptr(_isObfSourceStream), uintptr(win32.OutParam(unsafe.Pointer(_fontResource))))
 	return *_fontResource, win32.ErrIfFailed(int32(r1))
+}
+
+var specIXpsOMObjectFactory_CreateGradientStop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Float32, win32.Word}}
+
+// CreateGradientStop dispatches through IXpsOMObjectFactory's vtable slot 30.
+func (self *IXpsOMObjectFactory) CreateGradientStop(color *XPS_COLOR, colorProfile *IXpsOMColorProfileResource, offset float32) (*IXpsOMGradientStop, error) {
+	_gradientStop := new(*IXpsOMGradientStop)
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIXpsOMObjectFactory_CreateGradientStop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(color)), uintptr(unsafe.Pointer(colorProfile)), uintptr(math.Float32bits(offset)), uintptr(win32.OutParam(unsafe.Pointer(_gradientStop)))).Tuple()
+	return *_gradientStop, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateLinearGradientBrush dispatches through IXpsOMObjectFactory's vtable slot 31.
@@ -2965,6 +2999,14 @@ func (self *IXpsOMPath) GetStrokeDashOffset() (float32, error) {
 	return *_strokeDashOffset, win32.ErrIfFailed(int32(r1))
 }
 
+var specIXpsOMPath_SetStrokeDashOffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetStrokeDashOffset dispatches through IXpsOMPath's vtable slot 50.
+func (self *IXpsOMPath) SetStrokeDashOffset(strokeDashOffset float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIXpsOMPath_SetStrokeDashOffset, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(strokeDashOffset))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetStrokeStartLineCap dispatches through IXpsOMPath's vtable slot 51.
 func (self *IXpsOMPath) GetStrokeStartLineCap() (XPS_LINE_CAP, error) {
 	_strokeStartLineCap := new(XPS_LINE_CAP)
@@ -3011,11 +3053,27 @@ func (self *IXpsOMPath) GetStrokeMiterLimit() (float32, error) {
 	return *_strokeMiterLimit, win32.ErrIfFailed(int32(r1))
 }
 
+var specIXpsOMPath_SetStrokeMiterLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetStrokeMiterLimit dispatches through IXpsOMPath's vtable slot 58.
+func (self *IXpsOMPath) SetStrokeMiterLimit(strokeMiterLimit float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIXpsOMPath_SetStrokeMiterLimit, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(strokeMiterLimit))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetStrokeThickness dispatches through IXpsOMPath's vtable slot 59.
 func (self *IXpsOMPath) GetStrokeThickness() (float32, error) {
 	_strokeThickness := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_strokeThickness))))
 	return *_strokeThickness, win32.ErrIfFailed(int32(r1))
+}
+
+var specIXpsOMPath_SetStrokeThickness = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetStrokeThickness dispatches through IXpsOMPath's vtable slot 60.
+func (self *IXpsOMPath) SetStrokeThickness(strokeThickness float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[60], specIXpsOMPath_SetStrokeThickness, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(strokeThickness))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetFillBrush dispatches through IXpsOMPath's vtable slot 61.
@@ -3589,6 +3647,14 @@ func (self *IXpsOMVisual) GetOpacity() (float32, error) {
 	return *_opacity, win32.ErrIfFailed(int32(r1))
 }
 
+var specIXpsOMVisual_SetOpacity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetOpacity dispatches through IXpsOMVisual's vtable slot 16.
+func (self *IXpsOMVisual) SetOpacity(opacity float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIXpsOMVisual_SetOpacity, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(opacity))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetOpacityMaskBrush dispatches through IXpsOMVisual's vtable slot 17.
 func (self *IXpsOMVisual) GetOpacityMaskBrush() (*IXpsOMBrush, error) {
 	_opacityMaskBrush := new(*IXpsOMBrush)
@@ -4123,6 +4189,14 @@ func (self *IXpsSignatureRequest) SetSigningLocale(place string) error {
 // GetSpotLocation dispatches through IXpsSignatureRequest's vtable slot 11.
 func (self *IXpsSignatureRequest) GetSpotLocation(pageIndex *int32, pagePartName **storagepackagingopc.IOpcPartUri, x *float32, y *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pageIndex)), uintptr(unsafe.Pointer(pagePartName)), uintptr(unsafe.Pointer(x)), uintptr(unsafe.Pointer(y)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIXpsSignatureRequest_SetSpotLocation = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32}}
+
+// SetSpotLocation dispatches through IXpsSignatureRequest's vtable slot 12.
+func (self *IXpsSignatureRequest) SetSpotLocation(pageIndex int32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIXpsSignatureRequest_SetSpotLocation, nil, uintptr(unsafe.Pointer(self)), uintptr(pageIndex), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

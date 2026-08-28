@@ -4425,6 +4425,14 @@ func (self *ISecurityInfo) GetObjectTypes(cObjectTypes *uint32, rgObjectTypes **
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISecurityInfo_GetPermissions = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// GetPermissions dispatches through ISecurityInfo's vtable slot 5.
+func (self *ISecurityInfo) GetPermissions(ObjectType win32.GUID, pPermissions *uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specISecurityInfo_GetPermissions, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&ObjectType)), uintptr(unsafe.Pointer(pPermissions))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 06210e88-01f5-11d1-b512-0080c781c384
 type IService struct {
 	systemcom.IUnknown
@@ -5416,6 +5424,14 @@ func (self *OLEDBSimpleProvider) GetVariant(iRow uintptr, iColumn uintptr, forma
 	return *_pVar, win32.ErrIfFailed(int32(r1))
 }
 
+var specOLEDBSimpleProvider_SetVariant = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetVariant dispatches through OLEDBSimpleProvider's vtable slot 7.
+func (self *OLEDBSimpleProvider) SetVariant(iRow uintptr, iColumn uintptr, format OSPFORMAT, Var systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specOLEDBSimpleProvider_SetVariant, nil, uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(iColumn), uintptr(format), uintptr(unsafe.Pointer(&Var))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetLocale dispatches through OLEDBSimpleProvider's vtable slot 8.
 func (self *OLEDBSimpleProvider) GetLocale() (foundation.BSTR, error) {
 	_pbstrLocale := new(foundation.BSTR)
@@ -5435,6 +5451,15 @@ func (self *OLEDBSimpleProvider) InsertRows(iRow uintptr, cRows uintptr) (uintpt
 	_pcRowsInserted := new(uintptr)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows), uintptr(win32.OutParam(unsafe.Pointer(_pcRowsInserted))))
 	return *_pcRowsInserted, win32.ErrIfFailed(int32(r1))
+}
+
+var specOLEDBSimpleProvider_Find = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Find dispatches through OLEDBSimpleProvider's vtable slot 11.
+func (self *OLEDBSimpleProvider) Find(iRowStart uintptr, iColumn uintptr, val systemvariant.VARIANT, findFlags OSPFIND, compType OSPCOMP) (uintptr, error) {
+	_piRowFound := new(uintptr)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specOLEDBSimpleProvider_Find, nil, uintptr(unsafe.Pointer(self)), uintptr(iRowStart), uintptr(iColumn), uintptr(unsafe.Pointer(&val)), uintptr(findFlags), uintptr(compType), uintptr(win32.OutParam(unsafe.Pointer(_piRowFound)))).Tuple()
+	return *_piRowFound, win32.ErrIfFailed(int32(r1))
 }
 
 // AddOLEDBSimpleProviderListener dispatches through OLEDBSimpleProvider's vtable slot 12.

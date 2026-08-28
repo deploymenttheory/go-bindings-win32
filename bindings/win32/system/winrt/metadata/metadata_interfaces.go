@@ -1471,6 +1471,22 @@ type IRoSimpleMetaDataBuilder struct {
 	LpVtbl *[1024]uintptr
 }
 
+var specIRoSimpleMetaDataBuilder_SetWinRtInterface = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// SetWinRtInterface dispatches through IRoSimpleMetaDataBuilder's vtable slot 0.
+func (self *IRoSimpleMetaDataBuilder) SetWinRtInterface(iid win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[0], specIRoSimpleMetaDataBuilder_SetWinRtInterface, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&iid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIRoSimpleMetaDataBuilder_SetDelegate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// SetDelegate dispatches through IRoSimpleMetaDataBuilder's vtable slot 1.
+func (self *IRoSimpleMetaDataBuilder) SetDelegate(iid win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[1], specIRoSimpleMetaDataBuilder_SetDelegate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&iid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetInterfaceGroupSimpleDefault dispatches through IRoSimpleMetaDataBuilder's vtable slot 2.
 func (self *IRoSimpleMetaDataBuilder) SetInterfaceGroupSimpleDefault(name string, defaultInterfaceName string, defaultInterfaceIID *win32.GUID) error {
 	_name := win32.UTF16Ptr(name)
@@ -1525,5 +1541,21 @@ func (self *IRoSimpleMetaDataBuilder) SetEnum(name string, baseType string) erro
 	_name := win32.UTF16Ptr(name)
 	_baseType := win32.UTF16Ptr(baseType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(_baseType)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIRoSimpleMetaDataBuilder_SetParameterizedInterface = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetParameterizedInterface dispatches through IRoSimpleMetaDataBuilder's vtable slot 8.
+func (self *IRoSimpleMetaDataBuilder) SetParameterizedInterface(piid win32.GUID, numArgs uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIRoSimpleMetaDataBuilder_SetParameterizedInterface, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&piid)), uintptr(numArgs)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIRoSimpleMetaDataBuilder_SetParameterizedDelegate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetParameterizedDelegate dispatches through IRoSimpleMetaDataBuilder's vtable slot 9.
+func (self *IRoSimpleMetaDataBuilder) SetParameterizedDelegate(piid win32.GUID, numArgs uint32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIRoSimpleMetaDataBuilder_SetParameterizedDelegate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&piid)), uintptr(numArgs)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }

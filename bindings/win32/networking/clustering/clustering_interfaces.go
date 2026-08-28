@@ -241,9 +241,26 @@ func (self *ISClusCryptoKeys) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusCryptoKeys_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusCryptoKeys's vtable slot 10.
+func (self *ISClusCryptoKeys) Get_Item(varIndex systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pbstrCyrptoKey := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusCryptoKeys_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrCyrptoKey)))).Tuple()
+	return *_pbstrCyrptoKey, win32.ErrIfFailed(int32(r1))
+}
+
 // AddItem dispatches through ISClusCryptoKeys's vtable slot 11.
 func (self *ISClusCryptoKeys) AddItem(bstrCryptoKey foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrCryptoKey)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusCryptoKeys_RemoveItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RemoveItem dispatches through ISClusCryptoKeys's vtable slot 12.
+func (self *ISClusCryptoKeys) RemoveItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusCryptoKeys_RemoveItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -303,6 +320,15 @@ func (self *ISClusDisks) Get__NewEnum() (*systemcom.IUnknown, error) {
 	_retval := new(*systemcom.IUnknown)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
 	return *_retval, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusDisks_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusDisks's vtable slot 9.
+func (self *ISClusDisks) Get_Item(varIndex systemvariant.VARIANT) (*ISClusDisk, error) {
+	_ppDisk := new(*ISClusDisk)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISClusDisks_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppDisk)))).Tuple()
+	return *_ppDisk, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606ee-2631-11d1-89f1-00a0c90d061e
@@ -395,6 +421,15 @@ func (self *ISClusNetInterfaces) Get__NewEnum() (*systemcom.IUnknown, error) {
 func (self *ISClusNetInterfaces) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusNetInterfaces_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusNetInterfaces's vtable slot 10.
+func (self *ISClusNetInterfaces) Get_Item(varIndex systemvariant.VARIANT) (*ISClusNetInterface, error) {
+	_ppClusNetInterface := new(*ISClusNetInterface)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusNetInterfaces_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusNetInterface)))).Tuple()
+	return *_ppClusNetInterface, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606f2-2631-11d1-89f1-00a0c90d061e
@@ -509,6 +544,15 @@ func (self *ISClusNetworkNetInterfaces) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusNetworkNetInterfaces_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusNetworkNetInterfaces's vtable slot 10.
+func (self *ISClusNetworkNetInterfaces) Get_Item(varIndex systemvariant.VARIANT) (*ISClusNetInterface, error) {
+	_ppClusNetInterface := new(*ISClusNetInterface)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusNetworkNetInterfaces_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusNetInterface)))).Tuple()
+	return *_ppClusNetInterface, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: f2e606f4-2631-11d1-89f1-00a0c90d061e
 type ISClusNetworks struct {
 	systemcom.IDispatch
@@ -535,6 +579,15 @@ func (self *ISClusNetworks) Get__NewEnum() (*systemcom.IUnknown, error) {
 func (self *ISClusNetworks) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusNetworks_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusNetworks's vtable slot 10.
+func (self *ISClusNetworks) Get_Item(varIndex systemvariant.VARIANT) (*ISClusNetwork, error) {
+	_ppClusNetwork := new(*ISClusNetwork)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusNetworks_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusNetwork)))).Tuple()
+	return *_ppClusNetwork, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e606f8-2631-11d1-89f1-00a0c90d061e
@@ -668,6 +721,15 @@ func (self *ISClusNodeNetInterfaces) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusNodeNetInterfaces_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusNodeNetInterfaces's vtable slot 10.
+func (self *ISClusNodeNetInterfaces) Get_Item(varIndex systemvariant.VARIANT) (*ISClusNetInterface, error) {
+	_ppClusNetInterface := new(*ISClusNetInterface)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusNodeNetInterfaces_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusNetInterface)))).Tuple()
+	return *_ppClusNetInterface, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: f2e606fa-2631-11d1-89f1-00a0c90d061e
 type ISClusNodes struct {
 	systemcom.IDispatch
@@ -694,6 +756,15 @@ func (self *ISClusNodes) Get__NewEnum() (*systemcom.IUnknown, error) {
 func (self *ISClusNodes) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusNodes_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusNodes's vtable slot 10.
+func (self *ISClusNodes) Get_Item(varIndex systemvariant.VARIANT) (*ISClusNode, error) {
+	_ppNode := new(*ISClusNode)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusNodes_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppNode)))).Tuple()
+	return *_ppNode, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60720-2631-11d1-89f1-00a0c90d061e
@@ -819,6 +890,15 @@ func (self *ISClusPartitions) Get__NewEnum() (*systemcom.IUnknown, error) {
 	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusPartitions_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusPartitions's vtable slot 9.
+func (self *ISClusPartitions) Get_Item(varIndex systemvariant.VARIANT) (*ISClusPartition, error) {
+	_ppPartition := new(*ISClusPartition)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISClusPartitions_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppPartition)))).Tuple()
+	return *_ppPartition, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: f2e60700-2631-11d1-89f1-00a0c90d061e
 type ISClusProperties struct {
 	systemcom.IDispatch
@@ -844,6 +924,32 @@ func (self *ISClusProperties) Get__NewEnum() (*systemcom.IUnknown, error) {
 // Refresh dispatches through ISClusProperties's vtable slot 9.
 func (self *ISClusProperties) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusProperties_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusProperties's vtable slot 10.
+func (self *ISClusProperties) Get_Item(varIndex systemvariant.VARIANT) (*ISClusProperty, error) {
+	_ppClusProperty := new(*ISClusProperty)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusProperties_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusProperty)))).Tuple()
+	return *_ppClusProperty, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusProperties_CreateItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateItem dispatches through ISClusProperties's vtable slot 11.
+func (self *ISClusProperties) CreateItem(bstrName foundation.BSTR, varValue systemvariant.VARIANT) (*ISClusProperty, error) {
+	_pProperty := new(*ISClusProperty)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISClusProperties_CreateItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&varValue)), uintptr(win32.OutParam(unsafe.Pointer(_pProperty)))).Tuple()
+	return *_pProperty, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusProperties_UseDefaultValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// UseDefaultValue dispatches through ISClusProperties's vtable slot 12.
+func (self *ISClusProperties) UseDefaultValue(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusProperties_UseDefaultValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -924,6 +1030,14 @@ func (self *ISClusProperty) Get_Value() (systemvariant.VARIANT, error) {
 	return *_pvarValue, win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusProperty_Put_Value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Value dispatches through ISClusProperty's vtable slot 12.
+func (self *ISClusProperty) Put_Value(varValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusProperty_Put_Value, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Type dispatches through ISClusProperty's vtable slot 13.
 func (self *ISClusProperty) Get_Type() (CLUSTER_PROPERTY_TYPE, error) {
 	_pType := new(CLUSTER_PROPERTY_TYPE)
@@ -999,6 +1113,14 @@ func (self *ISClusPropertyValue) Get_Value() (systemvariant.VARIANT, error) {
 	return *_pvarValue, win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusPropertyValue_Put_Value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_Value dispatches through ISClusPropertyValue's vtable slot 8.
+func (self *ISClusPropertyValue) Put_Value(varValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specISClusPropertyValue_Put_Value, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Type dispatches through ISClusPropertyValue's vtable slot 9.
 func (self *ISClusPropertyValue) Get_Type() (CLUSTER_PROPERTY_TYPE, error) {
 	_pType := new(CLUSTER_PROPERTY_TYPE)
@@ -1068,6 +1190,32 @@ func (self *ISClusPropertyValueData) Get__NewEnum() (*systemcom.IUnknown, error)
 	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusPropertyValueData_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusPropertyValueData's vtable slot 9.
+func (self *ISClusPropertyValueData) Get_Item(varIndex systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_pvarValue := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISClusPropertyValueData_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_pvarValue)))).Tuple()
+	return *_pvarValue, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusPropertyValueData_CreateItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateItem dispatches through ISClusPropertyValueData's vtable slot 10.
+func (self *ISClusPropertyValueData) CreateItem(varValue systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_pvarData := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusPropertyValueData_CreateItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varValue)), uintptr(win32.OutParam(unsafe.Pointer(_pvarData)))).Tuple()
+	return *_pvarData, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusPropertyValueData_RemoveItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RemoveItem dispatches through ISClusPropertyValueData's vtable slot 11.
+func (self *ISClusPropertyValueData) RemoveItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISClusPropertyValueData_RemoveItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: f2e6071c-2631-11d1-89f1-00a0c90d061e
 type ISClusPropertyValues struct {
 	systemcom.IDispatch
@@ -1088,6 +1236,32 @@ func (self *ISClusPropertyValues) Get__NewEnum() (*systemcom.IUnknown, error) {
 	_retval := new(*systemcom.IUnknown)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_retval))))
 	return *_retval, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusPropertyValues_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusPropertyValues's vtable slot 9.
+func (self *ISClusPropertyValues) Get_Item(varIndex systemvariant.VARIANT) (*ISClusPropertyValue, error) {
+	_ppPropertyValue := new(*ISClusPropertyValue)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISClusPropertyValues_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertyValue)))).Tuple()
+	return *_ppPropertyValue, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusPropertyValues_CreateItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateItem dispatches through ISClusPropertyValues's vtable slot 10.
+func (self *ISClusPropertyValues) CreateItem(bstrName foundation.BSTR, varValue systemvariant.VARIANT) (*ISClusPropertyValue, error) {
+	_ppPropertyValue := new(*ISClusPropertyValue)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusPropertyValues_CreateItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&varValue)), uintptr(win32.OutParam(unsafe.Pointer(_ppPropertyValue)))).Tuple()
+	return *_ppPropertyValue, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusPropertyValues_RemoveItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RemoveItem dispatches through ISClusPropertyValues's vtable slot 11.
+func (self *ISClusPropertyValues) RemoveItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISClusPropertyValues_RemoveItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60702-2631-11d1-89f1-00a0c90d061e
@@ -1133,9 +1307,26 @@ func (self *ISClusRegistryKeys) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusRegistryKeys_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusRegistryKeys's vtable slot 10.
+func (self *ISClusRegistryKeys) Get_Item(varIndex systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pbstrRegistryKey := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusRegistryKeys_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrRegistryKey)))).Tuple()
+	return *_pbstrRegistryKey, win32.ErrIfFailed(int32(r1))
+}
+
 // AddItem dispatches through ISClusRegistryKeys's vtable slot 11.
 func (self *ISClusRegistryKeys) AddItem(bstrRegistryKey foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRegistryKey)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusRegistryKeys_RemoveItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RemoveItem dispatches through ISClusRegistryKeys's vtable slot 12.
+func (self *ISClusRegistryKeys) RemoveItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusRegistryKeys_RemoveItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1167,6 +1358,15 @@ func (self *ISClusResDependencies) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResDependencies_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResDependencies's vtable slot 10.
+func (self *ISClusResDependencies) Get_Item(varIndex systemvariant.VARIANT) (*ISClusResource, error) {
+	_ppClusResource := new(*ISClusResource)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResDependencies_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusResource)))).Tuple()
+	return *_ppClusResource, win32.ErrIfFailed(int32(r1))
+}
+
 // CreateItem dispatches through ISClusResDependencies's vtable slot 11.
 func (self *ISClusResDependencies) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
 	_ppClusterResource := new(*ISClusResource)
@@ -1174,9 +1374,25 @@ func (self *ISClusResDependencies) CreateItem(bstrResourceName foundation.BSTR, 
 	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResDependencies_DeleteItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteItem dispatches through ISClusResDependencies's vtable slot 12.
+func (self *ISClusResDependencies) DeleteItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusResDependencies_DeleteItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddItem dispatches through ISClusResDependencies's vtable slot 13.
 func (self *ISClusResDependencies) AddItem(pResource *ISClusResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResDependencies_RemoveItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RemoveItem dispatches through ISClusResDependencies's vtable slot 14.
+func (self *ISClusResDependencies) RemoveItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specISClusResDependencies_RemoveItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1208,6 +1424,15 @@ func (self *ISClusResDependents) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResDependents_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResDependents's vtable slot 10.
+func (self *ISClusResDependents) Get_Item(varIndex systemvariant.VARIANT) (*ISClusResource, error) {
+	_ppClusResource := new(*ISClusResource)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResDependents_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusResource)))).Tuple()
+	return *_ppClusResource, win32.ErrIfFailed(int32(r1))
+}
+
 // CreateItem dispatches through ISClusResDependents's vtable slot 11.
 func (self *ISClusResDependents) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
 	_ppClusterResource := new(*ISClusResource)
@@ -1215,9 +1440,25 @@ func (self *ISClusResDependents) CreateItem(bstrResourceName foundation.BSTR, bs
 	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResDependents_DeleteItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteItem dispatches through ISClusResDependents's vtable slot 12.
+func (self *ISClusResDependents) DeleteItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusResDependents_DeleteItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // AddItem dispatches through ISClusResDependents's vtable slot 13.
 func (self *ISClusResDependents) AddItem(pResource *ISClusResource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResDependents_RemoveItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RemoveItem dispatches through ISClusResDependents's vtable slot 14.
+func (self *ISClusResDependents) RemoveItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specISClusResDependents_RemoveItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1311,6 +1552,33 @@ func (self *ISClusResGroup) Delete() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResGroup_Online = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Online dispatches through ISClusResGroup's vtable slot 19.
+func (self *ISClusResGroup) Online(varTimeout systemvariant.VARIANT, varNode systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_pvarPending := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[19], specISClusResGroup_Online, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varTimeout)), uintptr(unsafe.Pointer(&varNode)), uintptr(win32.OutParam(unsafe.Pointer(_pvarPending)))).Tuple()
+	return *_pvarPending, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResGroup_Move = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Move dispatches through ISClusResGroup's vtable slot 20.
+func (self *ISClusResGroup) Move(varTimeout systemvariant.VARIANT, varNode systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_pvarPending := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[20], specISClusResGroup_Move, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varTimeout)), uintptr(unsafe.Pointer(&varNode)), uintptr(win32.OutParam(unsafe.Pointer(_pvarPending)))).Tuple()
+	return *_pvarPending, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResGroup_Offline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Offline dispatches through ISClusResGroup's vtable slot 21.
+func (self *ISClusResGroup) Offline(varTimeout systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_pvarPending := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[21], specISClusResGroup_Offline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varTimeout)), uintptr(win32.OutParam(unsafe.Pointer(_pvarPending)))).Tuple()
+	return *_pvarPending, win32.ErrIfFailed(int32(r1))
+}
+
 // Get_Cluster dispatches through ISClusResGroup's vtable slot 22.
 func (self *ISClusResGroup) Get_Cluster() (*ISCluster, error) {
 	_ppCluster := new(*ISCluster)
@@ -1346,9 +1614,26 @@ func (self *ISClusResGroupPreferredOwnerNodes) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResGroupPreferredOwnerNodes_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 10.
+func (self *ISClusResGroupPreferredOwnerNodes) Get_Item(varIndex systemvariant.VARIANT) (*ISClusNode, error) {
+	_ppNode := new(*ISClusNode)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResGroupPreferredOwnerNodes_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppNode)))).Tuple()
+	return *_ppNode, win32.ErrIfFailed(int32(r1))
+}
+
 // InsertItem dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 11.
 func (self *ISClusResGroupPreferredOwnerNodes) InsertItem(pNode *ISClusNode, nPosition int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)), uintptr(nPosition))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResGroupPreferredOwnerNodes_RemoveItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RemoveItem dispatches through ISClusResGroupPreferredOwnerNodes's vtable slot 12.
+func (self *ISClusResGroupPreferredOwnerNodes) RemoveItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusResGroupPreferredOwnerNodes_RemoveItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1399,11 +1684,28 @@ func (self *ISClusResGroupResources) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResGroupResources_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResGroupResources's vtable slot 10.
+func (self *ISClusResGroupResources) Get_Item(varIndex systemvariant.VARIANT) (*ISClusResource, error) {
+	_ppClusResource := new(*ISClusResource)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResGroupResources_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusResource)))).Tuple()
+	return *_ppClusResource, win32.ErrIfFailed(int32(r1))
+}
+
 // CreateItem dispatches through ISClusResGroupResources's vtable slot 11.
 func (self *ISClusResGroupResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
 	_ppClusterResource := new(*ISClusResource)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResource))))
 	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResGroupResources_DeleteItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteItem dispatches through ISClusResGroupResources's vtable slot 12.
+func (self *ISClusResGroupResources) DeleteItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusResGroupResources_DeleteItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60708-2631-11d1-89f1-00a0c90d061e
@@ -1434,11 +1736,28 @@ func (self *ISClusResGroups) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResGroups_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResGroups's vtable slot 10.
+func (self *ISClusResGroups) Get_Item(varIndex systemvariant.VARIANT) (*ISClusResGroup, error) {
+	_ppClusResGroup := new(*ISClusResGroup)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResGroups_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusResGroup)))).Tuple()
+	return *_ppClusResGroup, win32.ErrIfFailed(int32(r1))
+}
+
 // CreateItem dispatches through ISClusResGroups's vtable slot 11.
 func (self *ISClusResGroups) CreateItem(bstrResourceGroupName foundation.BSTR) (*ISClusResGroup, error) {
 	_ppResourceGroup := new(*ISClusResGroup)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceGroupName)), uintptr(win32.OutParam(unsafe.Pointer(_ppResourceGroup))))
 	return *_ppResourceGroup, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResGroups_DeleteItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteItem dispatches through ISClusResGroups's vtable slot 12.
+func (self *ISClusResGroups) DeleteItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusResGroups_DeleteItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e6070e-2631-11d1-89f1-00a0c90d061e
@@ -1469,9 +1788,26 @@ func (self *ISClusResPossibleOwnerNodes) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResPossibleOwnerNodes_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResPossibleOwnerNodes's vtable slot 10.
+func (self *ISClusResPossibleOwnerNodes) Get_Item(varIndex systemvariant.VARIANT) (*ISClusNode, error) {
+	_ppNode := new(*ISClusNode)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResPossibleOwnerNodes_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppNode)))).Tuple()
+	return *_ppNode, win32.ErrIfFailed(int32(r1))
+}
+
 // AddItem dispatches through ISClusResPossibleOwnerNodes's vtable slot 11.
 func (self *ISClusResPossibleOwnerNodes) AddItem(pNode *ISClusNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNode)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResPossibleOwnerNodes_RemoveItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RemoveItem dispatches through ISClusResPossibleOwnerNodes's vtable slot 12.
+func (self *ISClusResPossibleOwnerNodes) RemoveItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusResPossibleOwnerNodes_RemoveItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1587,6 +1923,15 @@ func (self *ISClusResTypePossibleOwnerNodes) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResTypePossibleOwnerNodes_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResTypePossibleOwnerNodes's vtable slot 10.
+func (self *ISClusResTypePossibleOwnerNodes) Get_Item(varIndex systemvariant.VARIANT) (*ISClusNode, error) {
+	_ppNode := new(*ISClusNode)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResTypePossibleOwnerNodes_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppNode)))).Tuple()
+	return *_ppNode, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: f2e60714-2631-11d1-89f1-00a0c90d061e
 type ISClusResTypeResources struct {
 	systemcom.IDispatch
@@ -1615,11 +1960,28 @@ func (self *ISClusResTypeResources) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResTypeResources_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResTypeResources's vtable slot 10.
+func (self *ISClusResTypeResources) Get_Item(varIndex systemvariant.VARIANT) (*ISClusResource, error) {
+	_ppClusResource := new(*ISClusResource)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResTypeResources_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusResource)))).Tuple()
+	return *_ppClusResource, win32.ErrIfFailed(int32(r1))
+}
+
 // CreateItem dispatches through ISClusResTypeResources's vtable slot 11.
 func (self *ISClusResTypeResources) CreateItem(bstrResourceName foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
 	_ppClusterResource := new(*ISClusResource)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResource))))
 	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResTypeResources_DeleteItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteItem dispatches through ISClusResTypeResources's vtable slot 12.
+func (self *ISClusResTypeResources) DeleteItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusResTypeResources_DeleteItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60712-2631-11d1-89f1-00a0c90d061e
@@ -1650,11 +2012,28 @@ func (self *ISClusResTypes) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResTypes_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResTypes's vtable slot 10.
+func (self *ISClusResTypes) Get_Item(varIndex systemvariant.VARIANT) (*ISClusResType, error) {
+	_ppClusResType := new(*ISClusResType)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResTypes_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusResType)))).Tuple()
+	return *_ppClusResType, win32.ErrIfFailed(int32(r1))
+}
+
 // CreateItem dispatches through ISClusResTypes's vtable slot 11.
 func (self *ISClusResTypes) CreateItem(bstrResourceTypeName foundation.BSTR, bstrDisplayName foundation.BSTR, bstrResourceTypeDll foundation.BSTR, dwLooksAlivePollInterval int32, dwIsAlivePollInterval int32) (*ISClusResType, error) {
 	_ppResourceType := new(*ISClusResType)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceTypeName)), uintptr(unsafe.Pointer(bstrDisplayName)), uintptr(unsafe.Pointer(bstrResourceTypeDll)), uintptr(dwLooksAlivePollInterval), uintptr(dwIsAlivePollInterval), uintptr(win32.OutParam(unsafe.Pointer(_ppResourceType))))
 	return *_ppResourceType, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResTypes_DeleteItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteItem dispatches through ISClusResTypes's vtable slot 12.
+func (self *ISClusResTypes) DeleteItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusResTypes_DeleteItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e6070a-2631-11d1-89f1-00a0c90d061e
@@ -1910,11 +2289,28 @@ func (self *ISClusResources) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusResources_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusResources's vtable slot 10.
+func (self *ISClusResources) Get_Item(varIndex systemvariant.VARIANT) (*ISClusResource, error) {
+	_ppClusResource := new(*ISClusResource)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusResources_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_ppClusResource)))).Tuple()
+	return *_ppClusResource, win32.ErrIfFailed(int32(r1))
+}
+
 // CreateItem dispatches through ISClusResources's vtable slot 11.
 func (self *ISClusResources) CreateItem(bstrResourceName foundation.BSTR, bstrResourceType foundation.BSTR, bstrGroupName foundation.BSTR, dwFlags CLUSTER_RESOURCE_CREATE_FLAGS) (*ISClusResource, error) {
 	_ppClusterResource := new(*ISClusResource)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceName)), uintptr(unsafe.Pointer(bstrResourceType)), uintptr(unsafe.Pointer(bstrGroupName)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_ppClusterResource))))
 	return *_ppClusterResource, win32.ErrIfFailed(int32(r1))
+}
+
+var specISClusResources_DeleteItem = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DeleteItem dispatches through ISClusResources's vtable slot 12.
+func (self *ISClusResources) DeleteItem(varIndex systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specISClusResources_DeleteItem, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f2e60728-2631-11d1-89f1-00a0c90d061e
@@ -2209,6 +2605,15 @@ func (self *ISClusterNames) Refresh() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specISClusterNames_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISClusterNames's vtable slot 10.
+func (self *ISClusterNames) Get_Item(varIndex systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pbstrClusterName := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISClusterNames_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrClusterName)))).Tuple()
+	return *_pbstrClusterName, win32.ErrIfFailed(int32(r1))
+}
+
 // Get_DomainName dispatches through ISClusterNames's vtable slot 11.
 func (self *ISClusterNames) Get_DomainName() (foundation.BSTR, error) {
 	_pbstrDomainName := new(foundation.BSTR)
@@ -2242,6 +2647,15 @@ func (self *ISDomainNames) Get__NewEnum() (*systemcom.IUnknown, error) {
 func (self *ISDomainNames) Refresh() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISDomainNames_Get_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Get_Item dispatches through ISDomainNames's vtable slot 10.
+func (self *ISDomainNames) Get_Item(varIndex systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pbstrDomainName := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISDomainNames_Get_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varIndex)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrDomainName)))).Tuple()
+	return *_pbstrDomainName, win32.ErrIfFailed(int32(r1))
 }
 
 // IWCContextMenuCallback: https://learn.microsoft.com/windows/win32/api/cluadmex/nn-cluadmex-iwccontextmenucallback

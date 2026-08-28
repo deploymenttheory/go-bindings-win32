@@ -1044,6 +1044,14 @@ type IActiveScriptSiteTraceInfo struct {
 // IID_IActiveScriptSiteTraceInfo is the interface identifier for IActiveScriptSiteTraceInfo.
 var IID_IActiveScriptSiteTraceInfo = win32.GUID{Data1: 0x4b7272ae, Data2: 0x1955, Data3: 0x4bfe, Data4: [8]byte{0x98, 0xb0, 0x78, 0x06, 0x21, 0x88, 0x85, 0x69}}
 
+var specIActiveScriptSiteTraceInfo_SendScriptTraceInfo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// SendScriptTraceInfo dispatches through IActiveScriptSiteTraceInfo's vtable slot 3.
+func (self *IActiveScriptSiteTraceInfo) SendScriptTraceInfo(stiEventType SCRIPTTRACEINFO, guidContextID win32.GUID, dwScriptContextCookie uint32, lScriptStatementStart int32, lScriptStatementEnd int32, dwReserved uint64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIActiveScriptSiteTraceInfo_SendScriptTraceInfo, nil, uintptr(unsafe.Pointer(self)), uintptr(stiEventType), uintptr(unsafe.Pointer(&guidContextID)), uintptr(dwScriptContextCookie), uintptr(lScriptStatementStart), uintptr(lScriptStatementEnd), uintptr(dwReserved)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: aedae97e-d7ee-4796-b960-7f092ae844ab
 type IActiveScriptSiteUIControl struct {
 	systemcom.IUnknown
@@ -1127,6 +1135,14 @@ type IActiveScriptTraceInfo struct {
 
 // IID_IActiveScriptTraceInfo is the interface identifier for IActiveScriptTraceInfo.
 var IID_IActiveScriptTraceInfo = win32.GUID{Data1: 0xc35456e7, Data2: 0xbebf, Data3: 0x4a1b, Data4: [8]byte{0x86, 0xa9, 0x24, 0xd5, 0x6b, 0xe8, 0xb3, 0x69}}
+
+var specIActiveScriptTraceInfo_StartScriptTracing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// StartScriptTracing dispatches through IActiveScriptTraceInfo's vtable slot 3.
+func (self *IActiveScriptTraceInfo) StartScriptTracing(pSiteTraceInfo *IActiveScriptSiteTraceInfo, guidContextID win32.GUID) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIActiveScriptTraceInfo_StartScriptTracing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSiteTraceInfo)), uintptr(unsafe.Pointer(&guidContextID))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // StopScriptTracing dispatches through IActiveScriptTraceInfo's vtable slot 4.
 func (self *IActiveScriptTraceInfo) StopScriptTracing() error {

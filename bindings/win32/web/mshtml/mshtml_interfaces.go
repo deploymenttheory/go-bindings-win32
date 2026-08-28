@@ -5,6 +5,7 @@
 package mshtml
 
 import (
+	"math"
 	"syscall"
 	"unsafe"
 
@@ -2502,6 +2503,14 @@ type ICanvasGradient struct {
 // IID_ICanvasGradient is the interface identifier for ICanvasGradient.
 var IID_ICanvasGradient = win32.GUID{Data1: 0x30510714, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specICanvasGradient_AddColorStop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// AddColorStop dispatches through ICanvasGradient's vtable slot 7.
+func (self *ICanvasGradient) AddColorStop(offset float32, color foundation.BSTR) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specICanvasGradient_AddColorStop, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(offset)), uintptr(unsafe.Pointer(color))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 3051071a-98b5-11cf-bb82-00aa00bdce0b
 type ICanvasImageData struct {
 	systemcom.IDispatch
@@ -2595,6 +2604,54 @@ func (self *ICanvasRenderingContext2D) Save() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specICanvasRenderingContext2D_Rotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Rotate dispatches through ICanvasRenderingContext2D's vtable slot 10.
+func (self *ICanvasRenderingContext2D) Rotate(angle float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specICanvasRenderingContext2D_Rotate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angle))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_Scale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// Scale dispatches through ICanvasRenderingContext2D's vtable slot 11.
+func (self *ICanvasRenderingContext2D) Scale(x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specICanvasRenderingContext2D_Scale, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_SetTransform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetTransform dispatches through ICanvasRenderingContext2D's vtable slot 12.
+func (self *ICanvasRenderingContext2D) SetTransform(m11 float32, m12 float32, m21 float32, m22 float32, dx float32, dy float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specICanvasRenderingContext2D_SetTransform, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(m11)), uintptr(math.Float32bits(m12)), uintptr(math.Float32bits(m21)), uintptr(math.Float32bits(m22)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_Transform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// Transform dispatches through ICanvasRenderingContext2D's vtable slot 13.
+func (self *ICanvasRenderingContext2D) Transform(m11 float32, m12 float32, m21 float32, m22 float32, dx float32, dy float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specICanvasRenderingContext2D_Transform, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(m11)), uintptr(math.Float32bits(m12)), uintptr(math.Float32bits(m21)), uintptr(math.Float32bits(m22)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_Translate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// Translate dispatches through ICanvasRenderingContext2D's vtable slot 14.
+func (self *ICanvasRenderingContext2D) Translate(x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specICanvasRenderingContext2D_Translate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_Put_globalAlpha = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_globalAlpha dispatches through ICanvasRenderingContext2D's vtable slot 15.
+func (self *ICanvasRenderingContext2D) Put_globalAlpha(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specICanvasRenderingContext2D_Put_globalAlpha, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_globalAlpha dispatches through ICanvasRenderingContext2D's vtable slot 16.
 func (self *ICanvasRenderingContext2D) Get_globalAlpha() (float32, error) {
 	_p := new(float32)
@@ -2615,6 +2672,14 @@ func (self *ICanvasRenderingContext2D) Get_globalCompositeOperation() (foundatio
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specICanvasRenderingContext2D_Put_fillStyle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_fillStyle dispatches through ICanvasRenderingContext2D's vtable slot 19.
+func (self *ICanvasRenderingContext2D) Put_fillStyle(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specICanvasRenderingContext2D_Put_fillStyle, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_fillStyle dispatches through ICanvasRenderingContext2D's vtable slot 20.
 func (self *ICanvasRenderingContext2D) Get_fillStyle() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -2622,11 +2687,46 @@ func (self *ICanvasRenderingContext2D) Get_fillStyle() (systemvariant.VARIANT, e
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specICanvasRenderingContext2D_Put_strokeStyle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_strokeStyle dispatches through ICanvasRenderingContext2D's vtable slot 21.
+func (self *ICanvasRenderingContext2D) Put_strokeStyle(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specICanvasRenderingContext2D_Put_strokeStyle, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_strokeStyle dispatches through ICanvasRenderingContext2D's vtable slot 22.
 func (self *ICanvasRenderingContext2D) Get_strokeStyle() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_CreateLinearGradient = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateLinearGradient dispatches through ICanvasRenderingContext2D's vtable slot 23.
+func (self *ICanvasRenderingContext2D) CreateLinearGradient(x0 float32, y0 float32, x1 float32, y1 float32) (*ICanvasGradient, error) {
+	_ppCanvasGradient := new(*ICanvasGradient)
+	r1, _, _ := win32.Call(self.LpVtbl[23], specICanvasRenderingContext2D_CreateLinearGradient, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x0)), uintptr(math.Float32bits(y0)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(win32.OutParam(unsafe.Pointer(_ppCanvasGradient)))).Tuple()
+	return *_ppCanvasGradient, win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_CreateRadialGradient = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateRadialGradient dispatches through ICanvasRenderingContext2D's vtable slot 24.
+func (self *ICanvasRenderingContext2D) CreateRadialGradient(x0 float32, y0 float32, r0 float32, x1 float32, y1 float32, r1_ float32) (*ICanvasGradient, error) {
+	_ppCanvasGradient := new(*ICanvasGradient)
+	r1, _, _ := win32.Call(self.LpVtbl[24], specICanvasRenderingContext2D_CreateRadialGradient, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x0)), uintptr(math.Float32bits(y0)), uintptr(math.Float32bits(r0)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(math.Float32bits(r1_)), uintptr(win32.OutParam(unsafe.Pointer(_ppCanvasGradient)))).Tuple()
+	return *_ppCanvasGradient, win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_CreatePattern = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreatePattern dispatches through ICanvasRenderingContext2D's vtable slot 25.
+func (self *ICanvasRenderingContext2D) CreatePattern(image *systemcom.IDispatch, repetition systemvariant.VARIANT) (*ICanvasPattern, error) {
+	_ppCanvasPattern := new(*ICanvasPattern)
+	r1, _, _ := win32.Call(self.LpVtbl[25], specICanvasRenderingContext2D_CreatePattern, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(image)), uintptr(unsafe.Pointer(&repetition)), uintptr(win32.OutParam(unsafe.Pointer(_ppCanvasPattern)))).Tuple()
+	return *_ppCanvasPattern, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_lineCap dispatches through ICanvasRenderingContext2D's vtable slot 26.
@@ -2655,6 +2755,14 @@ func (self *ICanvasRenderingContext2D) Get_lineJoin() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specICanvasRenderingContext2D_Put_lineWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_lineWidth dispatches through ICanvasRenderingContext2D's vtable slot 30.
+func (self *ICanvasRenderingContext2D) Put_lineWidth(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specICanvasRenderingContext2D_Put_lineWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_lineWidth dispatches through ICanvasRenderingContext2D's vtable slot 31.
 func (self *ICanvasRenderingContext2D) Get_lineWidth() (float32, error) {
 	_p := new(float32)
@@ -2662,11 +2770,27 @@ func (self *ICanvasRenderingContext2D) Get_lineWidth() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specICanvasRenderingContext2D_Put_miterLimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_miterLimit dispatches through ICanvasRenderingContext2D's vtable slot 32.
+func (self *ICanvasRenderingContext2D) Put_miterLimit(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specICanvasRenderingContext2D_Put_miterLimit, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_miterLimit dispatches through ICanvasRenderingContext2D's vtable slot 33.
 func (self *ICanvasRenderingContext2D) Get_miterLimit() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_Put_shadowBlur = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_shadowBlur dispatches through ICanvasRenderingContext2D's vtable slot 34.
+func (self *ICanvasRenderingContext2D) Put_shadowBlur(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specICanvasRenderingContext2D_Put_shadowBlur, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_shadowBlur dispatches through ICanvasRenderingContext2D's vtable slot 35.
@@ -2689,11 +2813,27 @@ func (self *ICanvasRenderingContext2D) Get_shadowColor() (foundation.BSTR, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specICanvasRenderingContext2D_Put_shadowOffsetX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_shadowOffsetX dispatches through ICanvasRenderingContext2D's vtable slot 38.
+func (self *ICanvasRenderingContext2D) Put_shadowOffsetX(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specICanvasRenderingContext2D_Put_shadowOffsetX, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_shadowOffsetX dispatches through ICanvasRenderingContext2D's vtable slot 39.
 func (self *ICanvasRenderingContext2D) Get_shadowOffsetX() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_Put_shadowOffsetY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_shadowOffsetY dispatches through ICanvasRenderingContext2D's vtable slot 40.
+func (self *ICanvasRenderingContext2D) Put_shadowOffsetY(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specICanvasRenderingContext2D_Put_shadowOffsetY, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_shadowOffsetY dispatches through ICanvasRenderingContext2D's vtable slot 41.
@@ -2703,9 +2843,58 @@ func (self *ICanvasRenderingContext2D) Get_shadowOffsetY() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specICanvasRenderingContext2D_ClearRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// ClearRect dispatches through ICanvasRenderingContext2D's vtable slot 42.
+func (self *ICanvasRenderingContext2D) ClearRect(x float32, y float32, w float32, h float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specICanvasRenderingContext2D_ClearRect, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(w)), uintptr(math.Float32bits(h))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_FillRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// FillRect dispatches through ICanvasRenderingContext2D's vtable slot 43.
+func (self *ICanvasRenderingContext2D) FillRect(x float32, y float32, w float32, h float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specICanvasRenderingContext2D_FillRect, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(w)), uintptr(math.Float32bits(h))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_StrokeRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// StrokeRect dispatches through ICanvasRenderingContext2D's vtable slot 44.
+func (self *ICanvasRenderingContext2D) StrokeRect(x float32, y float32, w float32, h float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specICanvasRenderingContext2D_StrokeRect, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(w)), uintptr(math.Float32bits(h))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_Arc = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// Arc dispatches through ICanvasRenderingContext2D's vtable slot 45.
+func (self *ICanvasRenderingContext2D) Arc(x float32, y float32, radius float32, startAngle float32, endAngle float32, anticlockwise bool) error {
+	_anticlockwise := win32.Bool32(anticlockwise)
+	r1, _, _ := win32.Call(self.LpVtbl[45], specICanvasRenderingContext2D_Arc, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(radius)), uintptr(math.Float32bits(startAngle)), uintptr(math.Float32bits(endAngle)), uintptr(_anticlockwise)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_ArcTo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// ArcTo dispatches through ICanvasRenderingContext2D's vtable slot 46.
+func (self *ICanvasRenderingContext2D) ArcTo(x1 float32, y1 float32, x2 float32, y2 float32, radius float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[46], specICanvasRenderingContext2D_ArcTo, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2)), uintptr(math.Float32bits(radius))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // BeginPath dispatches through ICanvasRenderingContext2D's vtable slot 47.
 func (self *ICanvasRenderingContext2D) BeginPath() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_BezierCurveTo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// BezierCurveTo dispatches through ICanvasRenderingContext2D's vtable slot 48.
+func (self *ICanvasRenderingContext2D) BezierCurveTo(cp1x float32, cp1y float32, cp2x float32, cp2y float32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[48], specICanvasRenderingContext2D_BezierCurveTo, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(cp1x)), uintptr(math.Float32bits(cp1y)), uintptr(math.Float32bits(cp2x)), uintptr(math.Float32bits(cp2y)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2727,10 +2916,51 @@ func (self *ICanvasRenderingContext2D) Fill() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specICanvasRenderingContext2D_LineTo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// LineTo dispatches through ICanvasRenderingContext2D's vtable slot 52.
+func (self *ICanvasRenderingContext2D) LineTo(x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[52], specICanvasRenderingContext2D_LineTo, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_MoveTo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// MoveTo dispatches through ICanvasRenderingContext2D's vtable slot 53.
+func (self *ICanvasRenderingContext2D) MoveTo(x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specICanvasRenderingContext2D_MoveTo, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_QuadraticCurveTo = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// QuadraticCurveTo dispatches through ICanvasRenderingContext2D's vtable slot 54.
+func (self *ICanvasRenderingContext2D) QuadraticCurveTo(cpx float32, cpy float32, x float32, y float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[54], specICanvasRenderingContext2D_QuadraticCurveTo, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(cpx)), uintptr(math.Float32bits(cpy)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_Rect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32}}
+
+// Rect dispatches through ICanvasRenderingContext2D's vtable slot 55.
+func (self *ICanvasRenderingContext2D) Rect(x float32, y float32, w float32, h float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[55], specICanvasRenderingContext2D_Rect, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(w)), uintptr(math.Float32bits(h))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Stroke dispatches through ICanvasRenderingContext2D's vtable slot 56.
 func (self *ICanvasRenderingContext2D) Stroke() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_IsPointInPath = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// IsPointInPath dispatches through ICanvasRenderingContext2D's vtable slot 57.
+func (self *ICanvasRenderingContext2D) IsPointInPath(x float32, y float32) (foundation.VARIANT_BOOL, error) {
+	_pResult := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[57], specICanvasRenderingContext2D_IsPointInPath, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_pResult)))).Tuple()
+	return *_pResult, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_font dispatches through ICanvasRenderingContext2D's vtable slot 58.
@@ -2772,11 +3002,61 @@ func (self *ICanvasRenderingContext2D) Get_textBaseline() (foundation.BSTR, erro
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specICanvasRenderingContext2D_FillText = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Struct(24, 8, 0, false)}}
+
+// FillText dispatches through ICanvasRenderingContext2D's vtable slot 64.
+func (self *ICanvasRenderingContext2D) FillText(text foundation.BSTR, x float32, y float32, maxWidth systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[64], specICanvasRenderingContext2D_FillText, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(unsafe.Pointer(&maxWidth))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // MeasureText dispatches through ICanvasRenderingContext2D's vtable slot 65.
 func (self *ICanvasRenderingContext2D) MeasureText(text foundation.BSTR) (*ICanvasTextMetrics, error) {
 	_ppCanvasTextMetrics := new(*ICanvasTextMetrics)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(win32.OutParam(unsafe.Pointer(_ppCanvasTextMetrics))))
 	return *_ppCanvasTextMetrics, win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_StrokeText = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Struct(24, 8, 0, false)}}
+
+// StrokeText dispatches through ICanvasRenderingContext2D's vtable slot 66.
+func (self *ICanvasRenderingContext2D) StrokeText(text foundation.BSTR, x float32, y float32, maxWidth systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[66], specICanvasRenderingContext2D_StrokeText, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(text)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(unsafe.Pointer(&maxWidth))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_DrawImage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DrawImage dispatches through ICanvasRenderingContext2D's vtable slot 67.
+func (self *ICanvasRenderingContext2D) DrawImage(pSrc *systemcom.IDispatch, a1 systemvariant.VARIANT, a2 systemvariant.VARIANT, a3 systemvariant.VARIANT, a4 systemvariant.VARIANT, a5 systemvariant.VARIANT, a6 systemvariant.VARIANT, a7 systemvariant.VARIANT, a8 systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[67], specICanvasRenderingContext2D_DrawImage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(&a1)), uintptr(unsafe.Pointer(&a2)), uintptr(unsafe.Pointer(&a3)), uintptr(unsafe.Pointer(&a4)), uintptr(unsafe.Pointer(&a5)), uintptr(unsafe.Pointer(&a6)), uintptr(unsafe.Pointer(&a7)), uintptr(unsafe.Pointer(&a8))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_CreateImageData = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// CreateImageData dispatches through ICanvasRenderingContext2D's vtable slot 68.
+func (self *ICanvasRenderingContext2D) CreateImageData(a1 systemvariant.VARIANT, a2 systemvariant.VARIANT) (*ICanvasImageData, error) {
+	_ppCanvasImageData := new(*ICanvasImageData)
+	r1, _, _ := win32.Call(self.LpVtbl[68], specICanvasRenderingContext2D_CreateImageData, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&a1)), uintptr(unsafe.Pointer(&a2)), uintptr(win32.OutParam(unsafe.Pointer(_ppCanvasImageData)))).Tuple()
+	return *_ppCanvasImageData, win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_GetImageData = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// GetImageData dispatches through ICanvasRenderingContext2D's vtable slot 69.
+func (self *ICanvasRenderingContext2D) GetImageData(sx float32, sy float32, sw float32, sh float32) (*ICanvasImageData, error) {
+	_ppCanvasImageData := new(*ICanvasImageData)
+	r1, _, _ := win32.Call(self.LpVtbl[69], specICanvasRenderingContext2D_GetImageData, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(sx)), uintptr(math.Float32bits(sy)), uintptr(math.Float32bits(sw)), uintptr(math.Float32bits(sh)), uintptr(win32.OutParam(unsafe.Pointer(_ppCanvasImageData)))).Tuple()
+	return *_ppCanvasImageData, win32.ErrIfFailed(int32(r1))
+}
+
+var specICanvasRenderingContext2D_PutImageData = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32, win32.Float32, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// PutImageData dispatches through ICanvasRenderingContext2D's vtable slot 70.
+func (self *ICanvasRenderingContext2D) PutImageData(imagedata *ICanvasImageData, dx float32, dy float32, dirtyX systemvariant.VARIANT, dirtyY systemvariant.VARIANT, dirtyWidth systemvariant.VARIANT, dirtyHeight systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[70], specICanvasRenderingContext2D_PutImageData, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imagedata)), uintptr(math.Float32bits(dx)), uintptr(math.Float32bits(dy)), uintptr(unsafe.Pointer(&dirtyX)), uintptr(unsafe.Pointer(&dirtyY)), uintptr(unsafe.Pointer(&dirtyWidth)), uintptr(unsafe.Pointer(&dirtyHeight))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 30510718-98b5-11cf-bb82-00aa00bdce0b
@@ -2982,6 +3262,14 @@ type IDOMBeforeUnloadEvent struct {
 
 // IID_IDOMBeforeUnloadEvent is the interface identifier for IDOMBeforeUnloadEvent.
 var IID_IDOMBeforeUnloadEvent = win32.GUID{Data1: 0x30510763, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIDOMBeforeUnloadEvent_Put_returnValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_returnValue dispatches through IDOMBeforeUnloadEvent's vtable slot 7.
+func (self *IDOMBeforeUnloadEvent) Put_returnValue(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIDOMBeforeUnloadEvent_Put_returnValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_returnValue dispatches through IDOMBeforeUnloadEvent's vtable slot 8.
 func (self *IDOMBeforeUnloadEvent) Get_returnValue() (systemvariant.VARIANT, error) {
@@ -3443,6 +3731,14 @@ func (self *IDOMMSAnimationEvent) Get_elapsedTime() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIDOMMSAnimationEvent_InitMSAnimationEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// InitMSAnimationEvent dispatches through IDOMMSAnimationEvent's vtable slot 9.
+func (self *IDOMMSAnimationEvent) InitMSAnimationEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, animationName foundation.BSTR, elapsedTime float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIDOMMSAnimationEvent_InitMSAnimationEvent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eventType)), uintptr(canBubble), uintptr(cancelable), uintptr(unsafe.Pointer(animationName)), uintptr(math.Float32bits(elapsedTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 30510816-98b5-11cf-bb82-00aa00bdce0b
 type IDOMMSManipulationEvent struct {
 	systemcom.IDispatch
@@ -3491,6 +3787,14 @@ func (self *IDOMMSTransitionEvent) Get_elapsedTime() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIDOMMSTransitionEvent_InitMSTransitionEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Float32}}
+
+// InitMSTransitionEvent dispatches through IDOMMSTransitionEvent's vtable slot 9.
+func (self *IDOMMSTransitionEvent) InitMSTransitionEvent(eventType foundation.BSTR, canBubble foundation.VARIANT_BOOL, cancelable foundation.VARIANT_BOOL, propertyName foundation.BSTR, elapsedTime float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIDOMMSTransitionEvent_InitMSTransitionEvent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eventType)), uintptr(canBubble), uintptr(cancelable), uintptr(unsafe.Pointer(propertyName)), uintptr(math.Float32bits(elapsedTime))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 30510720-98b5-11cf-bb82-00aa00bdce0b
@@ -4546,6 +4850,14 @@ func (self *IDisplayServices) GetComputedStyle(pPointer *IMarkupPointer, ppCompu
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIDisplayServices_ScrollRectIntoView = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// ScrollRectIntoView dispatches through IDisplayServices's vtable slot 8.
+func (self *IDisplayServices) ScrollRectIntoView(pIElement *IHTMLElement, rect foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIDisplayServices_ScrollRectIntoView, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIElement)), uintptr(unsafe.Pointer(&rect))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // HasFlowLayout dispatches through IDisplayServices's vtable slot 9.
 func (self *IDisplayServices) HasFlowLayout(pIElement *IHTMLElement, pfHasFlowLayout *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIElement)), uintptr(unsafe.Pointer(pfHasFlowLayout)))
@@ -5459,6 +5771,14 @@ type IHTCAttachBehavior2 struct {
 // IID_IHTCAttachBehavior2 is the interface identifier for IHTCAttachBehavior2.
 var IID_IHTCAttachBehavior2 = win32.GUID{Data1: 0x3050f7eb, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTCAttachBehavior2_FireEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// FireEvent dispatches through IHTCAttachBehavior2's vtable slot 7.
+func (self *IHTCAttachBehavior2) FireEvent(evt systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTCAttachBehavior2_FireEvent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&evt))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 3050f4fd-98b5-11cf-bb82-00aa00bdce0b
 type IHTCDefaultDispatch struct {
 	systemcom.IDispatch
@@ -5550,6 +5870,14 @@ var IID_IHTCPropertyBehavior = win32.GUID{Data1: 0x3050f5df, Data2: 0x98b5, Data
 // FireChange dispatches through IHTCPropertyBehavior's vtable slot 7.
 func (self *IHTCPropertyBehavior) FireChange() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTCPropertyBehavior_Put_value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_value dispatches through IHTCPropertyBehavior's vtable slot 8.
+func (self *IHTCPropertyBehavior) Put_value(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIHTCPropertyBehavior_Put_value, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5750,11 +6078,27 @@ func (self *IHTMLAnchorElement) Get_hash() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLAnchorElement_Put_onblur = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onblur dispatches through IHTMLAnchorElement's vtable slot 35.
+func (self *IHTMLAnchorElement) Put_onblur(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLAnchorElement_Put_onblur, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onblur dispatches through IHTMLAnchorElement's vtable slot 36.
 func (self *IHTMLAnchorElement) Get_onblur() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLAnchorElement_Put_onfocus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocus dispatches through IHTMLAnchorElement's vtable slot 37.
+func (self *IHTMLAnchorElement) Put_onfocus(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLAnchorElement_Put_onfocus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onfocus dispatches through IHTMLAnchorElement's vtable slot 38.
@@ -6223,11 +6567,27 @@ func (self *IHTMLApplicationCache) Get_status() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLApplicationCache_Put_onchecking = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchecking dispatches through IHTMLApplicationCache's vtable slot 8.
+func (self *IHTMLApplicationCache) Put_onchecking(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIHTMLApplicationCache_Put_onchecking, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onchecking dispatches through IHTMLApplicationCache's vtable slot 9.
 func (self *IHTMLApplicationCache) Get_onchecking() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLApplicationCache_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLApplicationCache's vtable slot 10.
+func (self *IHTMLApplicationCache) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLApplicationCache_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onerror dispatches through IHTMLApplicationCache's vtable slot 11.
@@ -6237,11 +6597,27 @@ func (self *IHTMLApplicationCache) Get_onerror() (systemvariant.VARIANT, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLApplicationCache_Put_onnoupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onnoupdate dispatches through IHTMLApplicationCache's vtable slot 12.
+func (self *IHTMLApplicationCache) Put_onnoupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLApplicationCache_Put_onnoupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onnoupdate dispatches through IHTMLApplicationCache's vtable slot 13.
 func (self *IHTMLApplicationCache) Get_onnoupdate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLApplicationCache_Put_ondownloading = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondownloading dispatches through IHTMLApplicationCache's vtable slot 14.
+func (self *IHTMLApplicationCache) Put_ondownloading(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLApplicationCache_Put_ondownloading, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondownloading dispatches through IHTMLApplicationCache's vtable slot 15.
@@ -6251,11 +6627,27 @@ func (self *IHTMLApplicationCache) Get_ondownloading() (systemvariant.VARIANT, e
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLApplicationCache_Put_onprogress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onprogress dispatches through IHTMLApplicationCache's vtable slot 16.
+func (self *IHTMLApplicationCache) Put_onprogress(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLApplicationCache_Put_onprogress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onprogress dispatches through IHTMLApplicationCache's vtable slot 17.
 func (self *IHTMLApplicationCache) Get_onprogress() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLApplicationCache_Put_onupdateready = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onupdateready dispatches through IHTMLApplicationCache's vtable slot 18.
+func (self *IHTMLApplicationCache) Put_onupdateready(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIHTMLApplicationCache_Put_onupdateready, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onupdateready dispatches through IHTMLApplicationCache's vtable slot 19.
@@ -6265,11 +6657,27 @@ func (self *IHTMLApplicationCache) Get_onupdateready() (systemvariant.VARIANT, e
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLApplicationCache_Put_oncached = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncached dispatches through IHTMLApplicationCache's vtable slot 20.
+func (self *IHTMLApplicationCache) Put_oncached(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIHTMLApplicationCache_Put_oncached, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oncached dispatches through IHTMLApplicationCache's vtable slot 21.
 func (self *IHTMLApplicationCache) Get_oncached() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLApplicationCache_Put_onobsolete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onobsolete dispatches through IHTMLApplicationCache's vtable slot 22.
+func (self *IHTMLApplicationCache) Put_onobsolete(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLApplicationCache_Put_onobsolete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onobsolete dispatches through IHTMLApplicationCache's vtable slot 23.
@@ -6474,11 +6882,27 @@ func (self *IHTMLAreaElement) Get_hash() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLAreaElement_Put_onblur = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onblur dispatches through IHTMLAreaElement's vtable slot 33.
+func (self *IHTMLAreaElement) Put_onblur(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLAreaElement_Put_onblur, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onblur dispatches through IHTMLAreaElement's vtable slot 34.
 func (self *IHTMLAreaElement) Get_onblur() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLAreaElement_Put_onfocus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocus dispatches through IHTMLAreaElement's vtable slot 35.
+func (self *IHTMLAreaElement) Put_onfocus(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLAreaElement_Put_onfocus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onfocus dispatches through IHTMLAreaElement's vtable slot 36.
@@ -6588,6 +7012,32 @@ func (self *IHTMLAreasCollection) Get__newEnum() (*systemcom.IUnknown, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLAreasCollection_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through IHTMLAreasCollection's vtable slot 10.
+func (self *IHTMLAreasCollection) Item(name systemvariant.VARIANT, index systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLAreasCollection_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&name)), uintptr(unsafe.Pointer(&index)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLAreasCollection_Tags = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Tags dispatches through IHTMLAreasCollection's vtable slot 11.
+func (self *IHTMLAreasCollection) Tags(tagName systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLAreasCollection_Tags, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&tagName)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLAreasCollection_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Add dispatches through IHTMLAreasCollection's vtable slot 12.
+func (self *IHTMLAreasCollection) Add(element *IHTMLElement, before systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLAreasCollection_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&before))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Remove dispatches through IHTMLAreasCollection's vtable slot 13.
 func (self *IHTMLAreasCollection) Remove(index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(index))
@@ -6601,6 +7051,15 @@ type IHTMLAreasCollection2 struct {
 
 // IID_IHTMLAreasCollection2 is the interface identifier for IHTMLAreasCollection2.
 var IID_IHTMLAreasCollection2 = win32.GUID{Data1: 0x3050f5ec, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLAreasCollection2_Urns = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Urns dispatches through IHTMLAreasCollection2's vtable slot 7.
+func (self *IHTMLAreasCollection2) Urns(urn systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLAreasCollection2_Urns, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&urn)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
 
 // IID: 3050f837-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLAreasCollection3 struct {
@@ -6827,6 +7286,15 @@ type IHTMLAudioElementFactory struct {
 // IID_IHTMLAudioElementFactory is the interface identifier for IHTMLAudioElementFactory.
 var IID_IHTMLAudioElementFactory = win32.GUID{Data1: 0x305107eb, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLAudioElementFactory_Create = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Create dispatches through IHTMLAudioElementFactory's vtable slot 7.
+func (self *IHTMLAudioElementFactory) Create(src systemvariant.VARIANT) (*IHTMLAudioElement, error) {
+	___MIDL__IHTMLAudioElementFactory0000 := new(*IHTMLAudioElement)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLAudioElementFactory_Create, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&src)), uintptr(win32.OutParam(unsafe.Pointer(___MIDL__IHTMLAudioElementFactory0000)))).Tuple()
+	return *___MIDL__IHTMLAudioElementFactory0000, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 3050f369-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLBGsound struct {
 	systemcom.IDispatch
@@ -6848,6 +7316,14 @@ func (self *IHTMLBGsound) Get_src() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBGsound_Put_loop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_loop dispatches through IHTMLBGsound's vtable slot 9.
+func (self *IHTMLBGsound) Put_loop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLBGsound_Put_loop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_loop dispatches through IHTMLBGsound's vtable slot 10.
 func (self *IHTMLBGsound) Get_loop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -6855,11 +7331,27 @@ func (self *IHTMLBGsound) Get_loop() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBGsound_Put_volume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_volume dispatches through IHTMLBGsound's vtable slot 11.
+func (self *IHTMLBGsound) Put_volume(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLBGsound_Put_volume, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_volume dispatches through IHTMLBGsound's vtable slot 12.
 func (self *IHTMLBGsound) Get_volume() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBGsound_Put_balance = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_balance dispatches through IHTMLBGsound's vtable slot 13.
+func (self *IHTMLBGsound) Put_balance(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLBGsound_Put_balance, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_balance dispatches through IHTMLBGsound's vtable slot 14.
@@ -6952,6 +7444,14 @@ type IHTMLBaseFontElement struct {
 
 // IID_IHTMLBaseFontElement is the interface identifier for IHTMLBaseFontElement.
 var IID_IHTMLBaseFontElement = win32.GUID{Data1: 0x3050f202, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLBaseFontElement_Put_color = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_color dispatches through IHTMLBaseFontElement's vtable slot 7.
+func (self *IHTMLBaseFontElement) Put_color(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLBaseFontElement_Put_color, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_color dispatches through IHTMLBaseFontElement's vtable slot 8.
 func (self *IHTMLBaseFontElement) Get_color() (systemvariant.VARIANT, error) {
@@ -7096,11 +7596,27 @@ func (self *IHTMLBodyElement) Get_bgProperties() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBodyElement_Put_leftMargin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_leftMargin dispatches through IHTMLBodyElement's vtable slot 11.
+func (self *IHTMLBodyElement) Put_leftMargin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLBodyElement_Put_leftMargin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_leftMargin dispatches through IHTMLBodyElement's vtable slot 12.
 func (self *IHTMLBodyElement) Get_leftMargin() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBodyElement_Put_topMargin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_topMargin dispatches through IHTMLBodyElement's vtable slot 13.
+func (self *IHTMLBodyElement) Put_topMargin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLBodyElement_Put_topMargin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_topMargin dispatches through IHTMLBodyElement's vtable slot 14.
@@ -7110,11 +7626,27 @@ func (self *IHTMLBodyElement) Get_topMargin() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBodyElement_Put_rightMargin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_rightMargin dispatches through IHTMLBodyElement's vtable slot 15.
+func (self *IHTMLBodyElement) Put_rightMargin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLBodyElement_Put_rightMargin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_rightMargin dispatches through IHTMLBodyElement's vtable slot 16.
 func (self *IHTMLBodyElement) Get_rightMargin() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBodyElement_Put_bottomMargin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bottomMargin dispatches through IHTMLBodyElement's vtable slot 17.
+func (self *IHTMLBodyElement) Put_bottomMargin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLBodyElement_Put_bottomMargin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_bottomMargin dispatches through IHTMLBodyElement's vtable slot 18.
@@ -7137,11 +7669,27 @@ func (self *IHTMLBodyElement) Get_noWrap() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBodyElement_Put_bgColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bgColor dispatches through IHTMLBodyElement's vtable slot 21.
+func (self *IHTMLBodyElement) Put_bgColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLBodyElement_Put_bgColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_bgColor dispatches through IHTMLBodyElement's vtable slot 22.
 func (self *IHTMLBodyElement) Get_bgColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBodyElement_Put_text = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_text dispatches through IHTMLBodyElement's vtable slot 23.
+func (self *IHTMLBodyElement) Put_text(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLBodyElement_Put_text, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_text dispatches through IHTMLBodyElement's vtable slot 24.
@@ -7151,11 +7699,27 @@ func (self *IHTMLBodyElement) Get_text() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBodyElement_Put_link = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_link dispatches through IHTMLBodyElement's vtable slot 25.
+func (self *IHTMLBodyElement) Put_link(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLBodyElement_Put_link, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_link dispatches through IHTMLBodyElement's vtable slot 26.
 func (self *IHTMLBodyElement) Get_link() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBodyElement_Put_vLink = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_vLink dispatches through IHTMLBodyElement's vtable slot 27.
+func (self *IHTMLBodyElement) Put_vLink(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLBodyElement_Put_vLink, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_vLink dispatches through IHTMLBodyElement's vtable slot 28.
@@ -7165,6 +7729,14 @@ func (self *IHTMLBodyElement) Get_vLink() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBodyElement_Put_aLink = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_aLink dispatches through IHTMLBodyElement's vtable slot 29.
+func (self *IHTMLBodyElement) Put_aLink(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLBodyElement_Put_aLink, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_aLink dispatches through IHTMLBodyElement's vtable slot 30.
 func (self *IHTMLBodyElement) Get_aLink() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -7172,11 +7744,27 @@ func (self *IHTMLBodyElement) Get_aLink() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBodyElement_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLBodyElement's vtable slot 31.
+func (self *IHTMLBodyElement) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIHTMLBodyElement_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onload dispatches through IHTMLBodyElement's vtable slot 32.
 func (self *IHTMLBodyElement) Get_onload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBodyElement_Put_onunload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onunload dispatches through IHTMLBodyElement's vtable slot 33.
+func (self *IHTMLBodyElement) Put_onunload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLBodyElement_Put_onunload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onunload dispatches through IHTMLBodyElement's vtable slot 34.
@@ -7199,11 +7787,27 @@ func (self *IHTMLBodyElement) Get_scroll() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBodyElement_Put_onselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselect dispatches through IHTMLBodyElement's vtable slot 37.
+func (self *IHTMLBodyElement) Put_onselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLBodyElement_Put_onselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onselect dispatches through IHTMLBodyElement's vtable slot 38.
 func (self *IHTMLBodyElement) Get_onselect() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBodyElement_Put_onbeforeunload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeunload dispatches through IHTMLBodyElement's vtable slot 39.
+func (self *IHTMLBodyElement) Put_onbeforeunload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIHTMLBodyElement_Put_onbeforeunload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onbeforeunload dispatches through IHTMLBodyElement's vtable slot 40.
@@ -7228,11 +7832,27 @@ type IHTMLBodyElement2 struct {
 // IID_IHTMLBodyElement2 is the interface identifier for IHTMLBodyElement2.
 var IID_IHTMLBodyElement2 = win32.GUID{Data1: 0x3050f5c5, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLBodyElement2_Put_onbeforeprint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeprint dispatches through IHTMLBodyElement2's vtable slot 7.
+func (self *IHTMLBodyElement2) Put_onbeforeprint(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLBodyElement2_Put_onbeforeprint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforeprint dispatches through IHTMLBodyElement2's vtable slot 8.
 func (self *IHTMLBodyElement2) Get_onbeforeprint() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBodyElement2_Put_onafterprint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onafterprint dispatches through IHTMLBodyElement2's vtable slot 9.
+func (self *IHTMLBodyElement2) Put_onafterprint(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLBodyElement2_Put_onafterprint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onafterprint dispatches through IHTMLBodyElement2's vtable slot 10.
@@ -7263,6 +7883,14 @@ func (self *IHTMLBodyElement3) Get_background() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBodyElement3_Put_ononline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ononline dispatches through IHTMLBodyElement3's vtable slot 9.
+func (self *IHTMLBodyElement3) Put_ononline(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLBodyElement3_Put_ononline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ononline dispatches through IHTMLBodyElement3's vtable slot 10.
 func (self *IHTMLBodyElement3) Get_ononline() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -7270,11 +7898,27 @@ func (self *IHTMLBodyElement3) Get_ononline() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLBodyElement3_Put_onoffline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onoffline dispatches through IHTMLBodyElement3's vtable slot 11.
+func (self *IHTMLBodyElement3) Put_onoffline(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLBodyElement3_Put_onoffline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onoffline dispatches through IHTMLBodyElement3's vtable slot 12.
 func (self *IHTMLBodyElement3) Get_onoffline() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBodyElement3_Put_onhashchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onhashchange dispatches through IHTMLBodyElement3's vtable slot 13.
+func (self *IHTMLBodyElement3) Put_onhashchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLBodyElement3_Put_onhashchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onhashchange dispatches through IHTMLBodyElement3's vtable slot 14.
@@ -7292,11 +7936,27 @@ type IHTMLBodyElement4 struct {
 // IID_IHTMLBodyElement4 is the interface identifier for IHTMLBodyElement4.
 var IID_IHTMLBodyElement4 = win32.GUID{Data1: 0x30510795, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLBodyElement4_Put_onmessage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmessage dispatches through IHTMLBodyElement4's vtable slot 7.
+func (self *IHTMLBodyElement4) Put_onmessage(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLBodyElement4_Put_onmessage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmessage dispatches through IHTMLBodyElement4's vtable slot 8.
 func (self *IHTMLBodyElement4) Get_onmessage() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLBodyElement4_Put_onstorage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstorage dispatches through IHTMLBodyElement4's vtable slot 9.
+func (self *IHTMLBodyElement4) Put_onstorage(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLBodyElement4_Put_onstorage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onstorage dispatches through IHTMLBodyElement4's vtable slot 10.
@@ -7313,6 +7973,14 @@ type IHTMLBodyElement5 struct {
 
 // IID_IHTMLBodyElement5 is the interface identifier for IHTMLBodyElement5.
 var IID_IHTMLBodyElement5 = win32.GUID{Data1: 0x30510822, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLBodyElement5_Put_onpopstate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onpopstate dispatches through IHTMLBodyElement5's vtable slot 7.
+func (self *IHTMLBodyElement5) Put_onpopstate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLBodyElement5_Put_onpopstate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_onpopstate dispatches through IHTMLBodyElement5's vtable slot 8.
 func (self *IHTMLBodyElement5) Get_onpopstate() (systemvariant.VARIANT, error) {
@@ -7391,6 +8059,14 @@ func (self *IHTMLButtonElement) Get_name() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLButtonElement_Put_status = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_status dispatches through IHTMLButtonElement's vtable slot 12.
+func (self *IHTMLButtonElement) Put_status(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLButtonElement_Put_status, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_status dispatches through IHTMLButtonElement's vtable slot 13.
 func (self *IHTMLButtonElement) Get_status() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -7461,6 +8137,14 @@ func (self *IHTMLCSSImportRule) Get_href() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSImportRule_Put_media = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_media dispatches through IHTMLCSSImportRule's vtable slot 8.
+func (self *IHTMLCSSImportRule) Put_media(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIHTMLCSSImportRule_Put_media, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_media dispatches through IHTMLCSSImportRule's vtable slot 9.
 func (self *IHTMLCSSImportRule) Get_media() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -7529,6 +8213,14 @@ type IHTMLCSSMediaRule struct {
 
 // IID_IHTMLCSSMediaRule is the interface identifier for IHTMLCSSMediaRule.
 var IID_IHTMLCSSMediaRule = win32.GUID{Data1: 0x305106eb, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLCSSMediaRule_Put_media = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_media dispatches through IHTMLCSSMediaRule's vtable slot 7.
+func (self *IHTMLCSSMediaRule) Put_media(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLCSSMediaRule_Put_media, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_media dispatches through IHTMLCSSMediaRule's vtable slot 8.
 func (self *IHTMLCSSMediaRule) Get_media() (systemvariant.VARIANT, error) {
@@ -7729,6 +8421,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_fontWeight() (foundation.BSTR, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_fontSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_fontSize dispatches through IHTMLCSSStyleDeclaration's vtable slot 22.
+func (self *IHTMLCSSStyleDeclaration) Put_fontSize(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLCSSStyleDeclaration_Put_fontSize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_fontSize dispatches through IHTMLCSSStyleDeclaration's vtable slot 23.
 func (self *IHTMLCSSStyleDeclaration) Get_fontSize() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -7749,6 +8449,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_font() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_color = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_color dispatches through IHTMLCSSStyleDeclaration's vtable slot 26.
+func (self *IHTMLCSSStyleDeclaration) Put_color(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIHTMLCSSStyleDeclaration_Put_color, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_color dispatches through IHTMLCSSStyleDeclaration's vtable slot 27.
 func (self *IHTMLCSSStyleDeclaration) Get_color() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -7767,6 +8475,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_background() (foundation.BSTR, error) 
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_backgroundColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_backgroundColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 30.
+func (self *IHTMLCSSStyleDeclaration) Put_backgroundColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIHTMLCSSStyleDeclaration_Put_backgroundColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_backgroundColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 31.
@@ -7828,11 +8544,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_backgroundPosition() (foundation.BSTR,
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_backgroundPositionX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_backgroundPositionX dispatches through IHTMLCSSStyleDeclaration's vtable slot 40.
+func (self *IHTMLCSSStyleDeclaration) Put_backgroundPositionX(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIHTMLCSSStyleDeclaration_Put_backgroundPositionX, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_backgroundPositionX dispatches through IHTMLCSSStyleDeclaration's vtable slot 41.
 func (self *IHTMLCSSStyleDeclaration) Get_backgroundPositionX() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_backgroundPositionY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_backgroundPositionY dispatches through IHTMLCSSStyleDeclaration's vtable slot 42.
+func (self *IHTMLCSSStyleDeclaration) Put_backgroundPositionY(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIHTMLCSSStyleDeclaration_Put_backgroundPositionY, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_backgroundPositionY dispatches through IHTMLCSSStyleDeclaration's vtable slot 43.
@@ -7842,11 +8574,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_backgroundPositionY() (systemvariant.V
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_wordSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_wordSpacing dispatches through IHTMLCSSStyleDeclaration's vtable slot 44.
+func (self *IHTMLCSSStyleDeclaration) Put_wordSpacing(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIHTMLCSSStyleDeclaration_Put_wordSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_wordSpacing dispatches through IHTMLCSSStyleDeclaration's vtable slot 45.
 func (self *IHTMLCSSStyleDeclaration) Get_wordSpacing() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_letterSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_letterSpacing dispatches through IHTMLCSSStyleDeclaration's vtable slot 46.
+func (self *IHTMLCSSStyleDeclaration) Put_letterSpacing(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[46], specIHTMLCSSStyleDeclaration_Put_letterSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_letterSpacing dispatches through IHTMLCSSStyleDeclaration's vtable slot 47.
@@ -7867,6 +8615,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_textDecoration() (foundation.BSTR, err
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_verticalAlign = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_verticalAlign dispatches through IHTMLCSSStyleDeclaration's vtable slot 50.
+func (self *IHTMLCSSStyleDeclaration) Put_verticalAlign(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIHTMLCSSStyleDeclaration_Put_verticalAlign, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_verticalAlign dispatches through IHTMLCSSStyleDeclaration's vtable slot 51.
@@ -7902,11 +8658,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_textAlign() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_textIndent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textIndent dispatches through IHTMLCSSStyleDeclaration's vtable slot 56.
+func (self *IHTMLCSSStyleDeclaration) Put_textIndent(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[56], specIHTMLCSSStyleDeclaration_Put_textIndent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textIndent dispatches through IHTMLCSSStyleDeclaration's vtable slot 57.
 func (self *IHTMLCSSStyleDeclaration) Get_textIndent() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_lineHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_lineHeight dispatches through IHTMLCSSStyleDeclaration's vtable slot 58.
+func (self *IHTMLCSSStyleDeclaration) Put_lineHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIHTMLCSSStyleDeclaration_Put_lineHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_lineHeight dispatches through IHTMLCSSStyleDeclaration's vtable slot 59.
@@ -7916,11 +8688,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_lineHeight() (systemvariant.VARIANT, e
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_marginTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginTop dispatches through IHTMLCSSStyleDeclaration's vtable slot 60.
+func (self *IHTMLCSSStyleDeclaration) Put_marginTop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[60], specIHTMLCSSStyleDeclaration_Put_marginTop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_marginTop dispatches through IHTMLCSSStyleDeclaration's vtable slot 61.
 func (self *IHTMLCSSStyleDeclaration) Get_marginTop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_marginRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginRight dispatches through IHTMLCSSStyleDeclaration's vtable slot 62.
+func (self *IHTMLCSSStyleDeclaration) Put_marginRight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[62], specIHTMLCSSStyleDeclaration_Put_marginRight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_marginRight dispatches through IHTMLCSSStyleDeclaration's vtable slot 63.
@@ -7930,11 +8718,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_marginRight() (systemvariant.VARIANT, 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_marginBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginBottom dispatches through IHTMLCSSStyleDeclaration's vtable slot 64.
+func (self *IHTMLCSSStyleDeclaration) Put_marginBottom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[64], specIHTMLCSSStyleDeclaration_Put_marginBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_marginBottom dispatches through IHTMLCSSStyleDeclaration's vtable slot 65.
 func (self *IHTMLCSSStyleDeclaration) Get_marginBottom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_marginLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginLeft dispatches through IHTMLCSSStyleDeclaration's vtable slot 66.
+func (self *IHTMLCSSStyleDeclaration) Put_marginLeft(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[66], specIHTMLCSSStyleDeclaration_Put_marginLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_marginLeft dispatches through IHTMLCSSStyleDeclaration's vtable slot 67.
@@ -7957,11 +8761,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_margin() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_paddingTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingTop dispatches through IHTMLCSSStyleDeclaration's vtable slot 70.
+func (self *IHTMLCSSStyleDeclaration) Put_paddingTop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[70], specIHTMLCSSStyleDeclaration_Put_paddingTop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_paddingTop dispatches through IHTMLCSSStyleDeclaration's vtable slot 71.
 func (self *IHTMLCSSStyleDeclaration) Get_paddingTop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_paddingRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingRight dispatches through IHTMLCSSStyleDeclaration's vtable slot 72.
+func (self *IHTMLCSSStyleDeclaration) Put_paddingRight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[72], specIHTMLCSSStyleDeclaration_Put_paddingRight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_paddingRight dispatches through IHTMLCSSStyleDeclaration's vtable slot 73.
@@ -7971,11 +8791,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_paddingRight() (systemvariant.VARIANT,
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_paddingBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingBottom dispatches through IHTMLCSSStyleDeclaration's vtable slot 74.
+func (self *IHTMLCSSStyleDeclaration) Put_paddingBottom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[74], specIHTMLCSSStyleDeclaration_Put_paddingBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_paddingBottom dispatches through IHTMLCSSStyleDeclaration's vtable slot 75.
 func (self *IHTMLCSSStyleDeclaration) Get_paddingBottom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_paddingLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingLeft dispatches through IHTMLCSSStyleDeclaration's vtable slot 76.
+func (self *IHTMLCSSStyleDeclaration) Put_paddingLeft(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[76], specIHTMLCSSStyleDeclaration_Put_paddingLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_paddingLeft dispatches through IHTMLCSSStyleDeclaration's vtable slot 77.
@@ -8076,11 +8912,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_borderColor() (foundation.BSTR, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_borderTopColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderTopColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 92.
+func (self *IHTMLCSSStyleDeclaration) Put_borderTopColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[92], specIHTMLCSSStyleDeclaration_Put_borderTopColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderTopColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 93.
 func (self *IHTMLCSSStyleDeclaration) Get_borderTopColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_borderRightColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderRightColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 94.
+func (self *IHTMLCSSStyleDeclaration) Put_borderRightColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[94], specIHTMLCSSStyleDeclaration_Put_borderRightColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderRightColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 95.
@@ -8090,11 +8942,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_borderRightColor() (systemvariant.VARI
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_borderBottomColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderBottomColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 96.
+func (self *IHTMLCSSStyleDeclaration) Put_borderBottomColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[96], specIHTMLCSSStyleDeclaration_Put_borderBottomColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderBottomColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 97.
 func (self *IHTMLCSSStyleDeclaration) Get_borderBottomColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_borderLeftColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderLeftColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 98.
+func (self *IHTMLCSSStyleDeclaration) Put_borderLeftColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[98], specIHTMLCSSStyleDeclaration_Put_borderLeftColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderLeftColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 99.
@@ -8117,11 +8985,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_borderWidth() (foundation.BSTR, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_borderTopWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderTopWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 102.
+func (self *IHTMLCSSStyleDeclaration) Put_borderTopWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[102], specIHTMLCSSStyleDeclaration_Put_borderTopWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderTopWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 103.
 func (self *IHTMLCSSStyleDeclaration) Get_borderTopWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_borderRightWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderRightWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 104.
+func (self *IHTMLCSSStyleDeclaration) Put_borderRightWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[104], specIHTMLCSSStyleDeclaration_Put_borderRightWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderRightWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 105.
@@ -8131,11 +9015,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_borderRightWidth() (systemvariant.VARI
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_borderBottomWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderBottomWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 106.
+func (self *IHTMLCSSStyleDeclaration) Put_borderBottomWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[106], specIHTMLCSSStyleDeclaration_Put_borderBottomWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderBottomWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 107.
 func (self *IHTMLCSSStyleDeclaration) Get_borderBottomWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_borderLeftWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderLeftWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 108.
+func (self *IHTMLCSSStyleDeclaration) Put_borderLeftWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[108], specIHTMLCSSStyleDeclaration_Put_borderLeftWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderLeftWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 109.
@@ -8210,11 +9110,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_borderLeftStyle() (foundation.BSTR, er
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLCSSStyleDeclaration's vtable slot 120.
+func (self *IHTMLCSSStyleDeclaration) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[120], specIHTMLCSSStyleDeclaration_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLCSSStyleDeclaration's vtable slot 121.
 func (self *IHTMLCSSStyleDeclaration) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLCSSStyleDeclaration's vtable slot 122.
+func (self *IHTMLCSSStyleDeclaration) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[122], specIHTMLCSSStyleDeclaration_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_height dispatches through IHTMLCSSStyleDeclaration's vtable slot 123.
@@ -8341,6 +9257,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_whiteSpace() (foundation.BSTR, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_top = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_top dispatches through IHTMLCSSStyleDeclaration's vtable slot 142.
+func (self *IHTMLCSSStyleDeclaration) Put_top(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[142], specIHTMLCSSStyleDeclaration_Put_top, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_top dispatches through IHTMLCSSStyleDeclaration's vtable slot 143.
 func (self *IHTMLCSSStyleDeclaration) Get_top() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -8348,11 +9272,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_top() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_left = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_left dispatches through IHTMLCSSStyleDeclaration's vtable slot 144.
+func (self *IHTMLCSSStyleDeclaration) Put_left(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[144], specIHTMLCSSStyleDeclaration_Put_left, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_left dispatches through IHTMLCSSStyleDeclaration's vtable slot 145.
 func (self *IHTMLCSSStyleDeclaration) Get_left() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[145], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_zIndex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_zIndex dispatches through IHTMLCSSStyleDeclaration's vtable slot 146.
+func (self *IHTMLCSSStyleDeclaration) Put_zIndex(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[146], specIHTMLCSSStyleDeclaration_Put_zIndex, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_zIndex dispatches through IHTMLCSSStyleDeclaration's vtable slot 147.
@@ -8531,11 +9471,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_unicodeBidi() (foundation.BSTR, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_bottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bottom dispatches through IHTMLCSSStyleDeclaration's vtable slot 174.
+func (self *IHTMLCSSStyleDeclaration) Put_bottom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[174], specIHTMLCSSStyleDeclaration_Put_bottom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_bottom dispatches through IHTMLCSSStyleDeclaration's vtable slot 175.
 func (self *IHTMLCSSStyleDeclaration) Get_bottom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[175], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_right = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_right dispatches through IHTMLCSSStyleDeclaration's vtable slot 176.
+func (self *IHTMLCSSStyleDeclaration) Put_right(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[176], specIHTMLCSSStyleDeclaration_Put_right, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_right dispatches through IHTMLCSSStyleDeclaration's vtable slot 177.
@@ -8597,11 +9553,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_rubyOverhang() (foundation.BSTR, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_layoutGridChar = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_layoutGridChar dispatches through IHTMLCSSStyleDeclaration's vtable slot 186.
+func (self *IHTMLCSSStyleDeclaration) Put_layoutGridChar(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[186], specIHTMLCSSStyleDeclaration_Put_layoutGridChar, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_layoutGridChar dispatches through IHTMLCSSStyleDeclaration's vtable slot 187.
 func (self *IHTMLCSSStyleDeclaration) Get_layoutGridChar() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[187], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_layoutGridLine = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_layoutGridLine dispatches through IHTMLCSSStyleDeclaration's vtable slot 188.
+func (self *IHTMLCSSStyleDeclaration) Put_layoutGridLine(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[188], specIHTMLCSSStyleDeclaration_Put_layoutGridLine, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_layoutGridLine dispatches through IHTMLCSSStyleDeclaration's vtable slot 189.
@@ -8715,6 +9687,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_textJustifyTrim() (foundation.BSTR, er
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_textKashida = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textKashida dispatches through IHTMLCSSStyleDeclaration's vtable slot 206.
+func (self *IHTMLCSSStyleDeclaration) Put_textKashida(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[206], specIHTMLCSSStyleDeclaration_Put_textKashida, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textKashida dispatches through IHTMLCSSStyleDeclaration's vtable slot 207.
 func (self *IHTMLCSSStyleDeclaration) Get_textKashida() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -8774,6 +9754,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_layoutFlow() (foundation.BSTR, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_zoom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_zoom dispatches through IHTMLCSSStyleDeclaration's vtable slot 216.
+func (self *IHTMLCSSStyleDeclaration) Put_zoom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[216], specIHTMLCSSStyleDeclaration_Put_zoom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_zoom dispatches through IHTMLCSSStyleDeclaration's vtable slot 217.
 func (self *IHTMLCSSStyleDeclaration) Get_zoom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -8807,11 +9795,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_textUnderlinePosition() (foundation.BS
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_scrollbarBaseColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarBaseColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 222.
+func (self *IHTMLCSSStyleDeclaration) Put_scrollbarBaseColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[222], specIHTMLCSSStyleDeclaration_Put_scrollbarBaseColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbarBaseColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 223.
 func (self *IHTMLCSSStyleDeclaration) Get_scrollbarBaseColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[223], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_scrollbarFaceColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarFaceColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 224.
+func (self *IHTMLCSSStyleDeclaration) Put_scrollbarFaceColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[224], specIHTMLCSSStyleDeclaration_Put_scrollbarFaceColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarFaceColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 225.
@@ -8821,11 +9825,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_scrollbarFaceColor() (systemvariant.VA
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_scrollbar3dLightColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbar3dLightColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 226.
+func (self *IHTMLCSSStyleDeclaration) Put_scrollbar3dLightColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[226], specIHTMLCSSStyleDeclaration_Put_scrollbar3dLightColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbar3dLightColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 227.
 func (self *IHTMLCSSStyleDeclaration) Get_scrollbar3dLightColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[227], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_scrollbarShadowColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarShadowColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 228.
+func (self *IHTMLCSSStyleDeclaration) Put_scrollbarShadowColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[228], specIHTMLCSSStyleDeclaration_Put_scrollbarShadowColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarShadowColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 229.
@@ -8835,11 +9855,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_scrollbarShadowColor() (systemvariant.
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_scrollbarHighlightColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarHighlightColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 230.
+func (self *IHTMLCSSStyleDeclaration) Put_scrollbarHighlightColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[230], specIHTMLCSSStyleDeclaration_Put_scrollbarHighlightColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbarHighlightColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 231.
 func (self *IHTMLCSSStyleDeclaration) Get_scrollbarHighlightColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[231], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_scrollbarDarkShadowColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarDarkShadowColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 232.
+func (self *IHTMLCSSStyleDeclaration) Put_scrollbarDarkShadowColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[232], specIHTMLCSSStyleDeclaration_Put_scrollbarDarkShadowColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarDarkShadowColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 233.
@@ -8849,11 +9885,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_scrollbarDarkShadowColor() (systemvari
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_scrollbarArrowColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarArrowColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 234.
+func (self *IHTMLCSSStyleDeclaration) Put_scrollbarArrowColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[234], specIHTMLCSSStyleDeclaration_Put_scrollbarArrowColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbarArrowColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 235.
 func (self *IHTMLCSSStyleDeclaration) Get_scrollbarArrowColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[235], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_scrollbarTrackColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarTrackColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 236.
+func (self *IHTMLCSSStyleDeclaration) Put_scrollbarTrackColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[236], specIHTMLCSSStyleDeclaration_Put_scrollbarTrackColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarTrackColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 237.
@@ -8889,6 +9941,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_textAlignLast() (foundation.BSTR, erro
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_textKashidaSpace = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textKashidaSpace dispatches through IHTMLCSSStyleDeclaration's vtable slot 242.
+func (self *IHTMLCSSStyleDeclaration) Put_textKashidaSpace(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[242], specIHTMLCSSStyleDeclaration_Put_textKashidaSpace, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textKashidaSpace dispatches through IHTMLCSSStyleDeclaration's vtable slot 243.
 func (self *IHTMLCSSStyleDeclaration) Get_textKashidaSpace() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -8907,6 +9967,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_textOverflow() (foundation.BSTR, error
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[245], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_minHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_minHeight dispatches through IHTMLCSSStyleDeclaration's vtable slot 246.
+func (self *IHTMLCSSStyleDeclaration) Put_minHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[246], specIHTMLCSSStyleDeclaration_Put_minHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_minHeight dispatches through IHTMLCSSStyleDeclaration's vtable slot 247.
@@ -8929,6 +9997,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_msInterpolationMode() (foundation.BSTR
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_maxHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_maxHeight dispatches through IHTMLCSSStyleDeclaration's vtable slot 250.
+func (self *IHTMLCSSStyleDeclaration) Put_maxHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[250], specIHTMLCSSStyleDeclaration_Put_maxHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_maxHeight dispatches through IHTMLCSSStyleDeclaration's vtable slot 251.
 func (self *IHTMLCSSStyleDeclaration) Get_maxHeight() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -8936,11 +10012,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_maxHeight() (systemvariant.VARIANT, er
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_minWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_minWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 252.
+func (self *IHTMLCSSStyleDeclaration) Put_minWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[252], specIHTMLCSSStyleDeclaration_Put_minWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_minWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 253.
 func (self *IHTMLCSSStyleDeclaration) Get_minWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[253], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_maxWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_maxWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 254.
+func (self *IHTMLCSSStyleDeclaration) Put_maxWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[254], specIHTMLCSSStyleDeclaration_Put_maxWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_maxWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 255.
@@ -9015,6 +10107,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_outline() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_outlineWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_outlineWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 266.
+func (self *IHTMLCSSStyleDeclaration) Put_outlineWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[266], specIHTMLCSSStyleDeclaration_Put_outlineWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_outlineWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 267.
 func (self *IHTMLCSSStyleDeclaration) Get_outlineWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -9033,6 +10133,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_outlineStyle() (foundation.BSTR, error
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[269], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_outlineColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_outlineColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 270.
+func (self *IHTMLCSSStyleDeclaration) Put_outlineColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[270], specIHTMLCSSStyleDeclaration_Put_outlineColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_outlineColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 271.
@@ -9068,11 +10176,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_borderSpacing() (foundation.BSTR, erro
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_orphans = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_orphans dispatches through IHTMLCSSStyleDeclaration's vtable slot 276.
+func (self *IHTMLCSSStyleDeclaration) Put_orphans(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[276], specIHTMLCSSStyleDeclaration_Put_orphans, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_orphans dispatches through IHTMLCSSStyleDeclaration's vtable slot 277.
 func (self *IHTMLCSSStyleDeclaration) Get_orphans() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[277], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_widows = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_widows dispatches through IHTMLCSSStyleDeclaration's vtable slot 278.
+func (self *IHTMLCSSStyleDeclaration) Put_widows(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[278], specIHTMLCSSStyleDeclaration_Put_widows, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_widows dispatches through IHTMLCSSStyleDeclaration's vtable slot 279.
@@ -9147,6 +10271,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_alignmentBaseline() (foundation.BSTR, 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_baselineShift = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_baselineShift dispatches through IHTMLCSSStyleDeclaration's vtable slot 290.
+func (self *IHTMLCSSStyleDeclaration) Put_baselineShift(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[290], specIHTMLCSSStyleDeclaration_Put_baselineShift, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_baselineShift dispatches through IHTMLCSSStyleDeclaration's vtable slot 291.
 func (self *IHTMLCSSStyleDeclaration) Get_baselineShift() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -9167,6 +10299,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_dominantBaseline() (foundation.BSTR, e
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_fontSizeAdjust = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_fontSizeAdjust dispatches through IHTMLCSSStyleDeclaration's vtable slot 294.
+func (self *IHTMLCSSStyleDeclaration) Put_fontSizeAdjust(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[294], specIHTMLCSSStyleDeclaration_Put_fontSizeAdjust, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_fontSizeAdjust dispatches through IHTMLCSSStyleDeclaration's vtable slot 295.
 func (self *IHTMLCSSStyleDeclaration) Get_fontSizeAdjust() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -9185,6 +10325,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_fontStretch() (foundation.BSTR, error)
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[297], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_opacity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_opacity dispatches through IHTMLCSSStyleDeclaration's vtable slot 298.
+func (self *IHTMLCSSStyleDeclaration) Put_opacity(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[298], specIHTMLCSSStyleDeclaration_Put_opacity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_opacity dispatches through IHTMLCSSStyleDeclaration's vtable slot 299.
@@ -9233,6 +10381,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_fill() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_fillOpacity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_fillOpacity dispatches through IHTMLCSSStyleDeclaration's vtable slot 306.
+func (self *IHTMLCSSStyleDeclaration) Put_fillOpacity(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[306], specIHTMLCSSStyleDeclaration_Put_fillOpacity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_fillOpacity dispatches through IHTMLCSSStyleDeclaration's vtable slot 307.
 func (self *IHTMLCSSStyleDeclaration) Get_fillOpacity() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -9251,6 +10407,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_fillRule() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[309], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_kerning = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_kerning dispatches through IHTMLCSSStyleDeclaration's vtable slot 310.
+func (self *IHTMLCSSStyleDeclaration) Put_kerning(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[310], specIHTMLCSSStyleDeclaration_Put_kerning, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_kerning dispatches through IHTMLCSSStyleDeclaration's vtable slot 311.
@@ -9338,11 +10502,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_pointerEvents() (foundation.BSTR, erro
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_stopColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_stopColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 324.
+func (self *IHTMLCSSStyleDeclaration) Put_stopColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[324], specIHTMLCSSStyleDeclaration_Put_stopColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_stopColor dispatches through IHTMLCSSStyleDeclaration's vtable slot 325.
 func (self *IHTMLCSSStyleDeclaration) Get_stopColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[325], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_stopOpacity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_stopOpacity dispatches through IHTMLCSSStyleDeclaration's vtable slot 326.
+func (self *IHTMLCSSStyleDeclaration) Put_stopOpacity(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[326], specIHTMLCSSStyleDeclaration_Put_stopOpacity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_stopOpacity dispatches through IHTMLCSSStyleDeclaration's vtable slot 327.
@@ -9378,6 +10558,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_strokeDasharray() (foundation.BSTR, er
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_strokeDashoffset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_strokeDashoffset dispatches through IHTMLCSSStyleDeclaration's vtable slot 332.
+func (self *IHTMLCSSStyleDeclaration) Put_strokeDashoffset(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[332], specIHTMLCSSStyleDeclaration_Put_strokeDashoffset, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_strokeDashoffset dispatches through IHTMLCSSStyleDeclaration's vtable slot 333.
 func (self *IHTMLCSSStyleDeclaration) Get_strokeDashoffset() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -9411,6 +10599,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_strokeLinejoin() (foundation.BSTR, err
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_strokeMiterlimit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_strokeMiterlimit dispatches through IHTMLCSSStyleDeclaration's vtable slot 338.
+func (self *IHTMLCSSStyleDeclaration) Put_strokeMiterlimit(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[338], specIHTMLCSSStyleDeclaration_Put_strokeMiterlimit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_strokeMiterlimit dispatches through IHTMLCSSStyleDeclaration's vtable slot 339.
 func (self *IHTMLCSSStyleDeclaration) Get_strokeMiterlimit() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -9418,11 +10614,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_strokeMiterlimit() (systemvariant.VARI
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_strokeOpacity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_strokeOpacity dispatches through IHTMLCSSStyleDeclaration's vtable slot 340.
+func (self *IHTMLCSSStyleDeclaration) Put_strokeOpacity(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[340], specIHTMLCSSStyleDeclaration_Put_strokeOpacity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_strokeOpacity dispatches through IHTMLCSSStyleDeclaration's vtable slot 341.
 func (self *IHTMLCSSStyleDeclaration) Get_strokeOpacity() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[341], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_strokeWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_strokeWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 342.
+func (self *IHTMLCSSStyleDeclaration) Put_strokeWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[342], specIHTMLCSSStyleDeclaration_Put_strokeWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_strokeWidth dispatches through IHTMLCSSStyleDeclaration's vtable slot 343.
@@ -9445,11 +10657,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_textAnchor() (foundation.BSTR, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_glyphOrientationHorizontal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_glyphOrientationHorizontal dispatches through IHTMLCSSStyleDeclaration's vtable slot 346.
+func (self *IHTMLCSSStyleDeclaration) Put_glyphOrientationHorizontal(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[346], specIHTMLCSSStyleDeclaration_Put_glyphOrientationHorizontal, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_glyphOrientationHorizontal dispatches through IHTMLCSSStyleDeclaration's vtable slot 347.
 func (self *IHTMLCSSStyleDeclaration) Get_glyphOrientationHorizontal() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[347], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_glyphOrientationVertical = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_glyphOrientationVertical dispatches through IHTMLCSSStyleDeclaration's vtable slot 348.
+func (self *IHTMLCSSStyleDeclaration) Put_glyphOrientationVertical(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[348], specIHTMLCSSStyleDeclaration_Put_glyphOrientationVertical, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_glyphOrientationVertical dispatches through IHTMLCSSStyleDeclaration's vtable slot 349.
@@ -9524,11 +10752,27 @@ func (self *IHTMLCSSStyleDeclaration) Get_borderBottomLeftRadius() (foundation.B
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration_Put_clipTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_clipTop dispatches through IHTMLCSSStyleDeclaration's vtable slot 360.
+func (self *IHTMLCSSStyleDeclaration) Put_clipTop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[360], specIHTMLCSSStyleDeclaration_Put_clipTop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_clipTop dispatches through IHTMLCSSStyleDeclaration's vtable slot 361.
 func (self *IHTMLCSSStyleDeclaration) Get_clipTop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[361], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_clipRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_clipRight dispatches through IHTMLCSSStyleDeclaration's vtable slot 362.
+func (self *IHTMLCSSStyleDeclaration) Put_clipRight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[362], specIHTMLCSSStyleDeclaration_Put_clipRight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_clipRight dispatches through IHTMLCSSStyleDeclaration's vtable slot 363.
@@ -9543,6 +10787,14 @@ func (self *IHTMLCSSStyleDeclaration) Get_clipBottom() (systemvariant.VARIANT, e
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[364], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration_Put_clipLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_clipLeft dispatches through IHTMLCSSStyleDeclaration's vtable slot 365.
+func (self *IHTMLCSSStyleDeclaration) Put_clipLeft(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[365], specIHTMLCSSStyleDeclaration_Put_clipLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_clipLeft dispatches through IHTMLCSSStyleDeclaration's vtable slot 366.
@@ -9768,11 +11020,27 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msContentZoomSnapPoints() (foundation
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msContentZoomLimitMin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msContentZoomLimitMin dispatches through IHTMLCSSStyleDeclaration2's vtable slot 25.
+func (self *IHTMLCSSStyleDeclaration2) Put_msContentZoomLimitMin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLCSSStyleDeclaration2_Put_msContentZoomLimitMin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msContentZoomLimitMin dispatches through IHTMLCSSStyleDeclaration2's vtable slot 26.
 func (self *IHTMLCSSStyleDeclaration2) Get_msContentZoomLimitMin() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_msContentZoomLimitMax = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msContentZoomLimitMax dispatches through IHTMLCSSStyleDeclaration2's vtable slot 27.
+func (self *IHTMLCSSStyleDeclaration2) Put_msContentZoomLimitMax(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLCSSStyleDeclaration2_Put_msContentZoomLimitMax, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_msContentZoomLimitMax dispatches through IHTMLCSSStyleDeclaration2's vtable slot 28.
@@ -9834,6 +11102,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msScrollSnapPointsY() (foundation.BST
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msGridColumn = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msGridColumn dispatches through IHTMLCSSStyleDeclaration2's vtable slot 37.
+func (self *IHTMLCSSStyleDeclaration2) Put_msGridColumn(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLCSSStyleDeclaration2_Put_msGridColumn, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msGridColumn dispatches through IHTMLCSSStyleDeclaration2's vtable slot 38.
 func (self *IHTMLCSSStyleDeclaration2) Get_msGridColumn() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -9867,11 +11143,27 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msGridColumns() (foundation.BSTR, err
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msGridColumnSpan = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msGridColumnSpan dispatches through IHTMLCSSStyleDeclaration2's vtable slot 43.
+func (self *IHTMLCSSStyleDeclaration2) Put_msGridColumnSpan(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIHTMLCSSStyleDeclaration2_Put_msGridColumnSpan, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msGridColumnSpan dispatches through IHTMLCSSStyleDeclaration2's vtable slot 44.
 func (self *IHTMLCSSStyleDeclaration2) Get_msGridColumnSpan() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_msGridRow = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msGridRow dispatches through IHTMLCSSStyleDeclaration2's vtable slot 45.
+func (self *IHTMLCSSStyleDeclaration2) Put_msGridRow(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specIHTMLCSSStyleDeclaration2_Put_msGridRow, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_msGridRow dispatches through IHTMLCSSStyleDeclaration2's vtable slot 46.
@@ -9907,6 +11199,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msGridRows() (foundation.BSTR, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msGridRowSpan = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msGridRowSpan dispatches through IHTMLCSSStyleDeclaration2's vtable slot 51.
+func (self *IHTMLCSSStyleDeclaration2) Put_msGridRowSpan(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specIHTMLCSSStyleDeclaration2_Put_msGridRowSpan, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msGridRowSpan dispatches through IHTMLCSSStyleDeclaration2's vtable slot 52.
 func (self *IHTMLCSSStyleDeclaration2) Get_msGridRowSpan() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -9925,6 +11225,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msWrapThrough() (foundation.BSTR, err
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_msWrapMargin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msWrapMargin dispatches through IHTMLCSSStyleDeclaration2's vtable slot 55.
+func (self *IHTMLCSSStyleDeclaration2) Put_msWrapMargin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[55], specIHTMLCSSStyleDeclaration2_Put_msWrapMargin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_msWrapMargin dispatches through IHTMLCSSStyleDeclaration2's vtable slot 56.
@@ -10077,6 +11385,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_colorInterpolationFilters() (foundati
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_columnCount = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_columnCount dispatches through IHTMLCSSStyleDeclaration2's vtable slot 79.
+func (self *IHTMLCSSStyleDeclaration2) Put_columnCount(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[79], specIHTMLCSSStyleDeclaration2_Put_columnCount, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_columnCount dispatches through IHTMLCSSStyleDeclaration2's vtable slot 80.
 func (self *IHTMLCSSStyleDeclaration2) Get_columnCount() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -10084,11 +11400,27 @@ func (self *IHTMLCSSStyleDeclaration2) Get_columnCount() (systemvariant.VARIANT,
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_columnWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_columnWidth dispatches through IHTMLCSSStyleDeclaration2's vtable slot 81.
+func (self *IHTMLCSSStyleDeclaration2) Put_columnWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[81], specIHTMLCSSStyleDeclaration2_Put_columnWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_columnWidth dispatches through IHTMLCSSStyleDeclaration2's vtable slot 82.
 func (self *IHTMLCSSStyleDeclaration2) Get_columnWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_columnGap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_columnGap dispatches through IHTMLCSSStyleDeclaration2's vtable slot 83.
+func (self *IHTMLCSSStyleDeclaration2) Put_columnGap(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[83], specIHTMLCSSStyleDeclaration2_Put_columnGap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_columnGap dispatches through IHTMLCSSStyleDeclaration2's vtable slot 84.
@@ -10150,6 +11482,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_columnRule() (foundation.BSTR, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_columnRuleColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_columnRuleColor dispatches through IHTMLCSSStyleDeclaration2's vtable slot 93.
+func (self *IHTMLCSSStyleDeclaration2) Put_columnRuleColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[93], specIHTMLCSSStyleDeclaration2_Put_columnRuleColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_columnRuleColor dispatches through IHTMLCSSStyleDeclaration2's vtable slot 94.
 func (self *IHTMLCSSStyleDeclaration2) Get_columnRuleColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -10168,6 +11508,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_columnRuleStyle() (foundation.BSTR, e
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_columnRuleWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_columnRuleWidth dispatches through IHTMLCSSStyleDeclaration2's vtable slot 97.
+func (self *IHTMLCSSStyleDeclaration2) Put_columnRuleWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[97], specIHTMLCSSStyleDeclaration2_Put_columnRuleWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_columnRuleWidth dispatches through IHTMLCSSStyleDeclaration2's vtable slot 98.
@@ -10216,11 +11564,27 @@ func (self *IHTMLCSSStyleDeclaration2) Get_breakInside() (foundation.BSTR, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_floodColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_floodColor dispatches through IHTMLCSSStyleDeclaration2's vtable slot 105.
+func (self *IHTMLCSSStyleDeclaration2) Put_floodColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[105], specIHTMLCSSStyleDeclaration2_Put_floodColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_floodColor dispatches through IHTMLCSSStyleDeclaration2's vtable slot 106.
 func (self *IHTMLCSSStyleDeclaration2) Get_floodColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_floodOpacity = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_floodOpacity dispatches through IHTMLCSSStyleDeclaration2's vtable slot 107.
+func (self *IHTMLCSSStyleDeclaration2) Put_floodOpacity(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[107], specIHTMLCSSStyleDeclaration2_Put_floodOpacity, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_floodOpacity dispatches through IHTMLCSSStyleDeclaration2's vtable slot 108.
@@ -10230,11 +11594,27 @@ func (self *IHTMLCSSStyleDeclaration2) Get_floodOpacity() (systemvariant.VARIANT
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_lightingColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_lightingColor dispatches through IHTMLCSSStyleDeclaration2's vtable slot 109.
+func (self *IHTMLCSSStyleDeclaration2) Put_lightingColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[109], specIHTMLCSSStyleDeclaration2_Put_lightingColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_lightingColor dispatches through IHTMLCSSStyleDeclaration2's vtable slot 110.
 func (self *IHTMLCSSStyleDeclaration2) Get_lightingColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_msScrollLimitXMin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msScrollLimitXMin dispatches through IHTMLCSSStyleDeclaration2's vtable slot 111.
+func (self *IHTMLCSSStyleDeclaration2) Put_msScrollLimitXMin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[111], specIHTMLCSSStyleDeclaration2_Put_msScrollLimitXMin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_msScrollLimitXMin dispatches through IHTMLCSSStyleDeclaration2's vtable slot 112.
@@ -10244,6 +11624,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msScrollLimitXMin() (systemvariant.VA
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msScrollLimitYMin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msScrollLimitYMin dispatches through IHTMLCSSStyleDeclaration2's vtable slot 113.
+func (self *IHTMLCSSStyleDeclaration2) Put_msScrollLimitYMin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[113], specIHTMLCSSStyleDeclaration2_Put_msScrollLimitYMin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msScrollLimitYMin dispatches through IHTMLCSSStyleDeclaration2's vtable slot 114.
 func (self *IHTMLCSSStyleDeclaration2) Get_msScrollLimitYMin() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -10251,11 +11639,27 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msScrollLimitYMin() (systemvariant.VA
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msScrollLimitXMax = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msScrollLimitXMax dispatches through IHTMLCSSStyleDeclaration2's vtable slot 115.
+func (self *IHTMLCSSStyleDeclaration2) Put_msScrollLimitXMax(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[115], specIHTMLCSSStyleDeclaration2_Put_msScrollLimitXMax, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msScrollLimitXMax dispatches through IHTMLCSSStyleDeclaration2's vtable slot 116.
 func (self *IHTMLCSSStyleDeclaration2) Get_msScrollLimitXMax() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_msScrollLimitYMax = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msScrollLimitYMax dispatches through IHTMLCSSStyleDeclaration2's vtable slot 117.
+func (self *IHTMLCSSStyleDeclaration2) Put_msScrollLimitYMax(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[117], specIHTMLCSSStyleDeclaration2_Put_msScrollLimitYMax, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_msScrollLimitYMax dispatches through IHTMLCSSStyleDeclaration2's vtable slot 118.
@@ -10330,6 +11734,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msHyphens() (foundation.BSTR, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msHyphenateLimitZone = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msHyphenateLimitZone dispatches through IHTMLCSSStyleDeclaration2's vtable slot 129.
+func (self *IHTMLCSSStyleDeclaration2) Put_msHyphenateLimitZone(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[129], specIHTMLCSSStyleDeclaration2_Put_msHyphenateLimitZone, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msHyphenateLimitZone dispatches through IHTMLCSSStyleDeclaration2's vtable slot 130.
 func (self *IHTMLCSSStyleDeclaration2) Get_msHyphenateLimitZone() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -10348,6 +11760,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msHyphenateLimitChars() (foundation.B
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[132], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_msHyphenateLimitLines = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msHyphenateLimitLines dispatches through IHTMLCSSStyleDeclaration2's vtable slot 133.
+func (self *IHTMLCSSStyleDeclaration2) Put_msHyphenateLimitLines(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[133], specIHTMLCSSStyleDeclaration2_Put_msHyphenateLimitLines, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_msHyphenateLimitLines dispatches through IHTMLCSSStyleDeclaration2's vtable slot 134.
@@ -10446,6 +11866,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msBackfaceVisibility() (foundation.BS
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[148], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_msPerspective = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msPerspective dispatches through IHTMLCSSStyleDeclaration2's vtable slot 149.
+func (self *IHTMLCSSStyleDeclaration2) Put_msPerspective(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[149], specIHTMLCSSStyleDeclaration2_Put_msPerspective, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_msPerspective dispatches through IHTMLCSSStyleDeclaration2's vtable slot 150.
@@ -10572,6 +12000,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msFlex() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msFlexPositive = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msFlexPositive dispatches through IHTMLCSSStyleDeclaration2's vtable slot 169.
+func (self *IHTMLCSSStyleDeclaration2) Put_msFlexPositive(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[169], specIHTMLCSSStyleDeclaration2_Put_msFlexPositive, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msFlexPositive dispatches through IHTMLCSSStyleDeclaration2's vtable slot 170.
 func (self *IHTMLCSSStyleDeclaration2) Get_msFlexPositive() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -10579,11 +12015,27 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msFlexPositive() (systemvariant.VARIA
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msFlexNegative = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msFlexNegative dispatches through IHTMLCSSStyleDeclaration2's vtable slot 171.
+func (self *IHTMLCSSStyleDeclaration2) Put_msFlexNegative(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[171], specIHTMLCSSStyleDeclaration2_Put_msFlexNegative, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msFlexNegative dispatches through IHTMLCSSStyleDeclaration2's vtable slot 172.
 func (self *IHTMLCSSStyleDeclaration2) Get_msFlexNegative() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[172], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_msFlexPreferredSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msFlexPreferredSize dispatches through IHTMLCSSStyleDeclaration2's vtable slot 173.
+func (self *IHTMLCSSStyleDeclaration2) Put_msFlexPreferredSize(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[173], specIHTMLCSSStyleDeclaration2_Put_msFlexPreferredSize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_msFlexPreferredSize dispatches through IHTMLCSSStyleDeclaration2's vtable slot 174.
@@ -10684,6 +12136,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_msFlexLinePack() (foundation.BSTR, er
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration2_Put_msFlexOrder = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msFlexOrder dispatches through IHTMLCSSStyleDeclaration2's vtable slot 189.
+func (self *IHTMLCSSStyleDeclaration2) Put_msFlexOrder(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[189], specIHTMLCSSStyleDeclaration2_Put_msFlexOrder, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msFlexOrder dispatches through IHTMLCSSStyleDeclaration2's vtable slot 190.
 func (self *IHTMLCSSStyleDeclaration2) Get_msFlexOrder() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -10754,6 +12214,14 @@ func (self *IHTMLCSSStyleDeclaration2) Get_backfaceVisibility() (foundation.BSTR
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[200], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration2_Put_perspective = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_perspective dispatches through IHTMLCSSStyleDeclaration2's vtable slot 201.
+func (self *IHTMLCSSStyleDeclaration2) Put_perspective(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[201], specIHTMLCSSStyleDeclaration2_Put_perspective, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_perspective dispatches through IHTMLCSSStyleDeclaration2's vtable slot 202.
@@ -11031,6 +12499,14 @@ func (self *IHTMLCSSStyleDeclaration3) Get_flexFlow() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration3_Put_flexGrow = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_flexGrow dispatches through IHTMLCSSStyleDeclaration3's vtable slot 15.
+func (self *IHTMLCSSStyleDeclaration3) Put_flexGrow(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLCSSStyleDeclaration3_Put_flexGrow, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_flexGrow dispatches through IHTMLCSSStyleDeclaration3's vtable slot 16.
 func (self *IHTMLCSSStyleDeclaration3) Get_flexGrow() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -11038,11 +12514,27 @@ func (self *IHTMLCSSStyleDeclaration3) Get_flexGrow() (systemvariant.VARIANT, er
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration3_Put_flexShrink = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_flexShrink dispatches through IHTMLCSSStyleDeclaration3's vtable slot 17.
+func (self *IHTMLCSSStyleDeclaration3) Put_flexShrink(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLCSSStyleDeclaration3_Put_flexShrink, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_flexShrink dispatches through IHTMLCSSStyleDeclaration3's vtable slot 18.
 func (self *IHTMLCSSStyleDeclaration3) Get_flexShrink() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration3_Put_flexBasis = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_flexBasis dispatches through IHTMLCSSStyleDeclaration3's vtable slot 19.
+func (self *IHTMLCSSStyleDeclaration3) Put_flexBasis(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLCSSStyleDeclaration3_Put_flexBasis, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_flexBasis dispatches through IHTMLCSSStyleDeclaration3's vtable slot 20.
@@ -11268,6 +12760,14 @@ func (self *IHTMLCSSStyleDeclaration4) Get_webkitBoxAlign() (foundation.BSTR, er
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration4_Put_webkitBoxOrdinalGroup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_webkitBoxOrdinalGroup dispatches through IHTMLCSSStyleDeclaration4's vtable slot 13.
+func (self *IHTMLCSSStyleDeclaration4) Put_webkitBoxOrdinalGroup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLCSSStyleDeclaration4_Put_webkitBoxOrdinalGroup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_webkitBoxOrdinalGroup dispatches through IHTMLCSSStyleDeclaration4's vtable slot 14.
 func (self *IHTMLCSSStyleDeclaration4) Get_webkitBoxOrdinalGroup() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -11286,6 +12786,14 @@ func (self *IHTMLCSSStyleDeclaration4) Get_webkitBoxPack() (foundation.BSTR, err
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration4_Put_webkitBoxFlex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_webkitBoxFlex dispatches through IHTMLCSSStyleDeclaration4's vtable slot 17.
+func (self *IHTMLCSSStyleDeclaration4) Put_webkitBoxFlex(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLCSSStyleDeclaration4_Put_webkitBoxFlex, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_webkitBoxFlex dispatches through IHTMLCSSStyleDeclaration4's vtable slot 18.
@@ -11542,6 +13050,14 @@ func (self *IHTMLCSSStyleDeclaration4) Get_webkitBackgroundAttachment() (foundat
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration4_Put_webkitBackgroundColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_webkitBackgroundColor dispatches through IHTMLCSSStyleDeclaration4's vtable slot 57.
+func (self *IHTMLCSSStyleDeclaration4) Put_webkitBackgroundColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[57], specIHTMLCSSStyleDeclaration4_Put_webkitBackgroundColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_webkitBackgroundColor dispatches through IHTMLCSSStyleDeclaration4's vtable slot 58.
 func (self *IHTMLCSSStyleDeclaration4) Get_webkitBackgroundColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -11614,11 +13130,27 @@ func (self *IHTMLCSSStyleDeclaration4) Get_webkitBackgroundPosition() (foundatio
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration4_Put_webkitBackgroundPositionX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_webkitBackgroundPositionX dispatches through IHTMLCSSStyleDeclaration4's vtable slot 69.
+func (self *IHTMLCSSStyleDeclaration4) Put_webkitBackgroundPositionX(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[69], specIHTMLCSSStyleDeclaration4_Put_webkitBackgroundPositionX, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_webkitBackgroundPositionX dispatches through IHTMLCSSStyleDeclaration4's vtable slot 70.
 func (self *IHTMLCSSStyleDeclaration4) Get_webkitBackgroundPositionX() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration4_Put_webkitBackgroundPositionY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_webkitBackgroundPositionY dispatches through IHTMLCSSStyleDeclaration4's vtable slot 71.
+func (self *IHTMLCSSStyleDeclaration4) Put_webkitBackgroundPositionY(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[71], specIHTMLCSSStyleDeclaration4_Put_webkitBackgroundPositionY, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_webkitBackgroundPositionY dispatches through IHTMLCSSStyleDeclaration4's vtable slot 72.
@@ -11654,11 +13186,27 @@ func (self *IHTMLCSSStyleDeclaration4) Get_webkitTransformOrigin() (foundation.B
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLCSSStyleDeclaration4_Put_msTextSizeAdjust = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_msTextSizeAdjust dispatches through IHTMLCSSStyleDeclaration4's vtable slot 77.
+func (self *IHTMLCSSStyleDeclaration4) Put_msTextSizeAdjust(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[77], specIHTMLCSSStyleDeclaration4_Put_msTextSizeAdjust, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_msTextSizeAdjust dispatches through IHTMLCSSStyleDeclaration4's vtable slot 78.
 func (self *IHTMLCSSStyleDeclaration4) Get_msTextSizeAdjust() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCSSStyleDeclaration4_Put_webkitTextSizeAdjust = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_webkitTextSizeAdjust dispatches through IHTMLCSSStyleDeclaration4's vtable slot 79.
+func (self *IHTMLCSSStyleDeclaration4) Put_webkitTextSizeAdjust(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[79], specIHTMLCSSStyleDeclaration4_Put_webkitTextSizeAdjust, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_webkitTextSizeAdjust dispatches through IHTMLCSSStyleDeclaration4's vtable slot 80.
@@ -11811,6 +13359,15 @@ func (self *IHTMLCanvasElement) GetContext(contextId foundation.BSTR) (*ICanvasR
 	_ppContext := new(*ICanvasRenderingContext2D)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextId)), uintptr(win32.OutParam(unsafe.Pointer(_ppContext))))
 	return *_ppContext, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLCanvasElement_ToDataURL = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// ToDataURL dispatches through IHTMLCanvasElement's vtable slot 12.
+func (self *IHTMLCanvasElement) ToDataURL(type_ foundation.BSTR, jpegquality systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pUrl := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLCanvasElement_ToDataURL, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(&jpegquality)), uintptr(win32.OutParam(unsafe.Pointer(_pUrl)))).Tuple()
+	return *_pUrl, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3050f604-98b5-11cf-bb82-00aa00bdce0b
@@ -12248,6 +13805,14 @@ func (self *IHTMLControlElement) Get_accessKey() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLControlElement_Put_onblur = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onblur dispatches through IHTMLControlElement's vtable slot 12.
+func (self *IHTMLControlElement) Put_onblur(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLControlElement_Put_onblur, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onblur dispatches through IHTMLControlElement's vtable slot 13.
 func (self *IHTMLControlElement) Get_onblur() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -12255,11 +13820,27 @@ func (self *IHTMLControlElement) Get_onblur() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLControlElement_Put_onfocus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocus dispatches through IHTMLControlElement's vtable slot 14.
+func (self *IHTMLControlElement) Put_onfocus(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLControlElement_Put_onfocus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onfocus dispatches through IHTMLControlElement's vtable slot 15.
 func (self *IHTMLControlElement) Get_onfocus() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLControlElement_Put_onresize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onresize dispatches through IHTMLControlElement's vtable slot 16.
+func (self *IHTMLControlElement) Put_onresize(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLControlElement_Put_onresize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onresize dispatches through IHTMLControlElement's vtable slot 17.
@@ -12348,6 +13929,14 @@ func (self *IHTMLControlRange) Item(index int32) (*IHTMLElement, error) {
 	return *_pdisp, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLControlRange_ScrollIntoView = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ScrollIntoView dispatches through IHTMLControlRange's vtable slot 11.
+func (self *IHTMLControlRange) ScrollIntoView(varargStart systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLControlRange_ScrollIntoView, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varargStart))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // QueryCommandSupported dispatches through IHTMLControlRange's vtable slot 12.
 func (self *IHTMLControlRange) QueryCommandSupported(cmdID foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	_pfRet := new(foundation.VARIANT_BOOL)
@@ -12388,6 +13977,15 @@ func (self *IHTMLControlRange) QueryCommandValue(cmdID foundation.BSTR) (systemv
 	_pcmdValue := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cmdID)), uintptr(win32.OutParam(unsafe.Pointer(_pcmdValue))))
 	return *_pcmdValue, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLControlRange_ExecCommand = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// ExecCommand dispatches through IHTMLControlRange's vtable slot 18.
+func (self *IHTMLControlRange) ExecCommand(cmdID foundation.BSTR, showUI foundation.VARIANT_BOOL, value systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_pfRet := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIHTMLControlRange_ExecCommand, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cmdID)), uintptr(showUI), uintptr(unsafe.Pointer(&value)), uintptr(win32.OutParam(unsafe.Pointer(_pfRet)))).Tuple()
+	return *_pfRet, win32.ErrIfFailed(int32(r1))
 }
 
 // ExecCommandShowHelp dispatches through IHTMLControlRange's vtable slot 19.
@@ -13432,6 +15030,14 @@ func (self *IHTMLDOMAttribute) Get_nodeName() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDOMAttribute_Put_nodeValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_nodeValue dispatches through IHTMLDOMAttribute's vtable slot 8.
+func (self *IHTMLDOMAttribute) Put_nodeValue(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIHTMLDOMAttribute_Put_nodeValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_nodeValue dispatches through IHTMLDOMAttribute's vtable slot 9.
 func (self *IHTMLDOMAttribute) Get_nodeValue() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -13544,6 +15150,15 @@ func (self *IHTMLDOMAttribute2) Get_ownerDocument() (*systemcom.IDispatch, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDOMAttribute2_InsertBefore = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// InsertBefore dispatches through IHTMLDOMAttribute2's vtable slot 20.
+func (self *IHTMLDOMAttribute2) InsertBefore(newChild *IHTMLDOMNode, refChild systemvariant.VARIANT) (*IHTMLDOMNode, error) {
+	_node := new(*IHTMLDOMNode)
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIHTMLDOMAttribute2_InsertBefore, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newChild)), uintptr(unsafe.Pointer(&refChild)), uintptr(win32.OutParam(unsafe.Pointer(_node)))).Tuple()
+	return *_node, win32.ErrIfFailed(int32(r1))
+}
+
 // ReplaceChild dispatches through IHTMLDOMAttribute2's vtable slot 21.
 func (self *IHTMLDOMAttribute2) ReplaceChild(newChild *IHTMLDOMNode, oldChild *IHTMLDOMNode) (*IHTMLDOMNode, error) {
 	_node := new(*IHTMLDOMNode)
@@ -13587,6 +15202,14 @@ type IHTMLDOMAttribute3 struct {
 // IID_IHTMLDOMAttribute3 is the interface identifier for IHTMLDOMAttribute3.
 var IID_IHTMLDOMAttribute3 = win32.GUID{Data1: 0x30510468, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLDOMAttribute3_Put_nodeValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_nodeValue dispatches through IHTMLDOMAttribute3's vtable slot 7.
+func (self *IHTMLDOMAttribute3) Put_nodeValue(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLDOMAttribute3_Put_nodeValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_nodeValue dispatches through IHTMLDOMAttribute3's vtable slot 8.
 func (self *IHTMLDOMAttribute3) Get_nodeValue() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -13628,6 +15251,14 @@ type IHTMLDOMAttribute4 struct {
 
 // IID_IHTMLDOMAttribute4 is the interface identifier for IHTMLDOMAttribute4.
 var IID_IHTMLDOMAttribute4 = win32.GUID{Data1: 0x305106f9, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLDOMAttribute4_Put_nodeValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_nodeValue dispatches through IHTMLDOMAttribute4's vtable slot 7.
+func (self *IHTMLDOMAttribute4) Put_nodeValue(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLDOMAttribute4_Put_nodeValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_nodeValue dispatches through IHTMLDOMAttribute4's vtable slot 8.
 func (self *IHTMLDOMAttribute4) Get_nodeValue() (systemvariant.VARIANT, error) {
@@ -14554,6 +16185,15 @@ type IHTMLDOMImplementation struct {
 // IID_IHTMLDOMImplementation is the interface identifier for IHTMLDOMImplementation.
 var IID_IHTMLDOMImplementation = win32.GUID{Data1: 0x3050f80d, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLDOMImplementation_HasFeature = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// HasFeature dispatches through IHTMLDOMImplementation's vtable slot 7.
+func (self *IHTMLDOMImplementation) HasFeature(bstrfeature foundation.BSTR, version systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_pfHasFeature := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLDOMImplementation_HasFeature, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrfeature)), uintptr(unsafe.Pointer(&version)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasFeature)))).Tuple()
+	return *_pfHasFeature, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 3051073c-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLDOMImplementation2 struct {
 	systemcom.IDispatch
@@ -14581,6 +16221,15 @@ func (self *IHTMLDOMImplementation2) CreateHTMLDocument(bstrTitle foundation.BST
 	_ppnewDocument := new(*IHTMLDocument7)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTitle)), uintptr(win32.OutParam(unsafe.Pointer(_ppnewDocument))))
 	return *_ppnewDocument, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDOMImplementation2_HasFeature = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// HasFeature dispatches through IHTMLDOMImplementation2's vtable slot 10.
+func (self *IHTMLDOMImplementation2) HasFeature(bstrfeature foundation.BSTR, version systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_pfHasFeature := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLDOMImplementation2_HasFeature, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrfeature)), uintptr(unsafe.Pointer(&version)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasFeature)))).Tuple()
+	return *_pfHasFeature, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3050f5da-98b5-11cf-bb82-00aa00bdce0b
@@ -14624,6 +16273,15 @@ func (self *IHTMLDOMNode) Get_attributes() (*systemcom.IDispatch, error) {
 	_p := new(*systemcom.IDispatch)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDOMNode_InsertBefore = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// InsertBefore dispatches through IHTMLDOMNode's vtable slot 12.
+func (self *IHTMLDOMNode) InsertBefore(newChild *IHTMLDOMNode, refChild systemvariant.VARIANT) (*IHTMLDOMNode, error) {
+	_node := new(*IHTMLDOMNode)
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLDOMNode_InsertBefore, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newChild)), uintptr(unsafe.Pointer(&refChild)), uintptr(win32.OutParam(unsafe.Pointer(_node)))).Tuple()
+	return *_node, win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveChild dispatches through IHTMLDOMNode's vtable slot 13.
@@ -14680,6 +16338,14 @@ func (self *IHTMLDOMNode) Get_nodeName() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDOMNode_Put_nodeValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_nodeValue dispatches through IHTMLDOMNode's vtable slot 21.
+func (self *IHTMLDOMNode) Put_nodeValue(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLDOMNode_Put_nodeValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_nodeValue dispatches through IHTMLDOMNode's vtable slot 22.
@@ -14740,6 +16406,14 @@ type IHTMLDOMNode3 struct {
 // IID_IHTMLDOMNode3 is the interface identifier for IHTMLDOMNode3.
 var IID_IHTMLDOMNode3 = win32.GUID{Data1: 0x305106e0, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLDOMNode3_Put_prefix = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_prefix dispatches through IHTMLDOMNode3's vtable slot 7.
+func (self *IHTMLDOMNode3) Put_prefix(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLDOMNode3_Put_prefix, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_prefix dispatches through IHTMLDOMNode3's vtable slot 8.
 func (self *IHTMLDOMNode3) Get_prefix() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -14759,6 +16433,14 @@ func (self *IHTMLDOMNode3) Get_namespaceURI() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDOMNode3_Put_textContent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textContent dispatches through IHTMLDOMNode3's vtable slot 11.
+func (self *IHTMLDOMNode3) Put_textContent(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLDOMNode3_Put_textContent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_textContent dispatches through IHTMLDOMNode3's vtable slot 12.
@@ -14803,6 +16485,15 @@ func (self *IHTMLDOMNode3) AppendChild(newChild *IHTMLDOMNode) (*IHTMLDOMNode, e
 	return *_node, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDOMNode3_InsertBefore = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// InsertBefore dispatches through IHTMLDOMNode3's vtable slot 18.
+func (self *IHTMLDOMNode3) InsertBefore(newChild *IHTMLDOMNode, refChild systemvariant.VARIANT) (*IHTMLDOMNode, error) {
+	_node := new(*IHTMLDOMNode)
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIHTMLDOMNode3_InsertBefore, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newChild)), uintptr(unsafe.Pointer(&refChild)), uintptr(win32.OutParam(unsafe.Pointer(_node)))).Tuple()
+	return *_node, win32.ErrIfFailed(int32(r1))
+}
+
 // RemoveChild dispatches through IHTMLDOMNode3's vtable slot 19.
 func (self *IHTMLDOMNode3) RemoveChild(oldChild *IHTMLDOMNode) (*IHTMLDOMNode, error) {
 	_node := new(*IHTMLDOMNode)
@@ -14829,6 +16520,15 @@ func (self *IHTMLDOMNode3) CompareDocumentPosition(otherNode *IHTMLDOMNode) (uin
 	_flags := new(uint16)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(otherNode)), uintptr(win32.OutParam(unsafe.Pointer(_flags))))
 	return *_flags, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDOMNode3_IsSupported = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// IsSupported dispatches through IHTMLDOMNode3's vtable slot 23.
+func (self *IHTMLDOMNode3) IsSupported(feature foundation.BSTR, version systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_pfisSupported := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLDOMNode3_IsSupported, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(feature)), uintptr(unsafe.Pointer(&version)), uintptr(win32.OutParam(unsafe.Pointer(_pfisSupported)))).Tuple()
+	return *_pfisSupported, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 305104ae-98b5-11cf-bb82-00aa00bdce0b
@@ -15287,11 +16987,27 @@ type IHTMLDialog struct {
 // IID_IHTMLDialog is the interface identifier for IHTMLDialog.
 var IID_IHTMLDialog = win32.GUID{Data1: 0x3050f216, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLDialog_Put_dialogTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_dialogTop dispatches through IHTMLDialog's vtable slot 7.
+func (self *IHTMLDialog) Put_dialogTop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLDialog_Put_dialogTop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_dialogTop dispatches through IHTMLDialog's vtable slot 8.
 func (self *IHTMLDialog) Get_dialogTop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDialog_Put_dialogLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_dialogLeft dispatches through IHTMLDialog's vtable slot 9.
+func (self *IHTMLDialog) Put_dialogLeft(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLDialog_Put_dialogLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_dialogLeft dispatches through IHTMLDialog's vtable slot 10.
@@ -15301,11 +17017,27 @@ func (self *IHTMLDialog) Get_dialogLeft() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDialog_Put_dialogWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_dialogWidth dispatches through IHTMLDialog's vtable slot 11.
+func (self *IHTMLDialog) Put_dialogWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLDialog_Put_dialogWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_dialogWidth dispatches through IHTMLDialog's vtable slot 12.
 func (self *IHTMLDialog) Get_dialogWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDialog_Put_dialogHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_dialogHeight dispatches through IHTMLDialog's vtable slot 13.
+func (self *IHTMLDialog) Put_dialogHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLDialog_Put_dialogHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_dialogHeight dispatches through IHTMLDialog's vtable slot 14.
@@ -15327,6 +17059,14 @@ func (self *IHTMLDialog) Get_menuArguments() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDialog_Put_returnValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_returnValue dispatches through IHTMLDialog's vtable slot 17.
+func (self *IHTMLDialog) Put_returnValue(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLDialog_Put_returnValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_returnValue dispatches through IHTMLDialog's vtable slot 18.
@@ -15619,11 +17359,27 @@ func (self *IHTMLDocument2) Get_plugins() (*IHTMLElementCollection, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_alinkColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_alinkColor dispatches through IHTMLDocument2's vtable slot 26.
+func (self *IHTMLDocument2) Put_alinkColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIHTMLDocument2_Put_alinkColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_alinkColor dispatches through IHTMLDocument2's vtable slot 27.
 func (self *IHTMLDocument2) Get_alinkColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_bgColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bgColor dispatches through IHTMLDocument2's vtable slot 28.
+func (self *IHTMLDocument2) Put_bgColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIHTMLDocument2_Put_bgColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_bgColor dispatches through IHTMLDocument2's vtable slot 29.
@@ -15633,6 +17389,14 @@ func (self *IHTMLDocument2) Get_bgColor() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_fgColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_fgColor dispatches through IHTMLDocument2's vtable slot 30.
+func (self *IHTMLDocument2) Put_fgColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIHTMLDocument2_Put_fgColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_fgColor dispatches through IHTMLDocument2's vtable slot 31.
 func (self *IHTMLDocument2) Get_fgColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -15640,11 +17404,27 @@ func (self *IHTMLDocument2) Get_fgColor() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_linkColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_linkColor dispatches through IHTMLDocument2's vtable slot 32.
+func (self *IHTMLDocument2) Put_linkColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIHTMLDocument2_Put_linkColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_linkColor dispatches through IHTMLDocument2's vtable slot 33.
 func (self *IHTMLDocument2) Get_linkColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_vlinkColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_vlinkColor dispatches through IHTMLDocument2's vtable slot 34.
+func (self *IHTMLDocument2) Put_vlinkColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIHTMLDocument2_Put_vlinkColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_vlinkColor dispatches through IHTMLDocument2's vtable slot 35.
@@ -15821,6 +17601,15 @@ func (self *IHTMLDocument2) Writeln(psarray *systemcom.SAFEARRAY) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Open = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Open dispatches through IHTMLDocument2's vtable slot 61.
+func (self *IHTMLDocument2) Open(url foundation.BSTR, name systemvariant.VARIANT, features systemvariant.VARIANT, replace systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pomWindowResult := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[61], specIHTMLDocument2_Open, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(url)), uintptr(unsafe.Pointer(&name)), uintptr(unsafe.Pointer(&features)), uintptr(unsafe.Pointer(&replace)), uintptr(win32.OutParam(unsafe.Pointer(_pomWindowResult)))).Tuple()
+	return *_pomWindowResult, win32.ErrIfFailed(int32(r1))
+}
+
 // Close dispatches through IHTMLDocument2's vtable slot 62.
 func (self *IHTMLDocument2) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)))
@@ -15875,6 +17664,15 @@ func (self *IHTMLDocument2) QueryCommandValue(cmdID foundation.BSTR) (systemvari
 	return *_pcmdValue, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_ExecCommand = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// ExecCommand dispatches through IHTMLDocument2's vtable slot 70.
+func (self *IHTMLDocument2) ExecCommand(cmdID foundation.BSTR, showUI foundation.VARIANT_BOOL, value systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_pfRet := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[70], specIHTMLDocument2_ExecCommand, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cmdID)), uintptr(showUI), uintptr(unsafe.Pointer(&value)), uintptr(win32.OutParam(unsafe.Pointer(_pfRet)))).Tuple()
+	return *_pfRet, win32.ErrIfFailed(int32(r1))
+}
+
 // ExecCommandShowHelp dispatches through IHTMLDocument2's vtable slot 71.
 func (self *IHTMLDocument2) ExecCommandShowHelp(cmdID foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	_pfRet := new(foundation.VARIANT_BOOL)
@@ -15889,11 +17687,27 @@ func (self *IHTMLDocument2) CreateElement(eTag foundation.BSTR) (*IHTMLElement, 
 	return *_newElem, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_onhelp = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onhelp dispatches through IHTMLDocument2's vtable slot 73.
+func (self *IHTMLDocument2) Put_onhelp(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[73], specIHTMLDocument2_Put_onhelp, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onhelp dispatches through IHTMLDocument2's vtable slot 74.
 func (self *IHTMLDocument2) Get_onhelp() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_onclick = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onclick dispatches through IHTMLDocument2's vtable slot 75.
+func (self *IHTMLDocument2) Put_onclick(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[75], specIHTMLDocument2_Put_onclick, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onclick dispatches through IHTMLDocument2's vtable slot 76.
@@ -15903,11 +17717,27 @@ func (self *IHTMLDocument2) Get_onclick() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_ondblclick = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondblclick dispatches through IHTMLDocument2's vtable slot 77.
+func (self *IHTMLDocument2) Put_ondblclick(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[77], specIHTMLDocument2_Put_ondblclick, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondblclick dispatches through IHTMLDocument2's vtable slot 78.
 func (self *IHTMLDocument2) Get_ondblclick() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_onkeyup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onkeyup dispatches through IHTMLDocument2's vtable slot 79.
+func (self *IHTMLDocument2) Put_onkeyup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[79], specIHTMLDocument2_Put_onkeyup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onkeyup dispatches through IHTMLDocument2's vtable slot 80.
@@ -15917,11 +17747,27 @@ func (self *IHTMLDocument2) Get_onkeyup() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_onkeydown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onkeydown dispatches through IHTMLDocument2's vtable slot 81.
+func (self *IHTMLDocument2) Put_onkeydown(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[81], specIHTMLDocument2_Put_onkeydown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onkeydown dispatches through IHTMLDocument2's vtable slot 82.
 func (self *IHTMLDocument2) Get_onkeydown() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_onkeypress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onkeypress dispatches through IHTMLDocument2's vtable slot 83.
+func (self *IHTMLDocument2) Put_onkeypress(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[83], specIHTMLDocument2_Put_onkeypress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onkeypress dispatches through IHTMLDocument2's vtable slot 84.
@@ -15931,11 +17777,27 @@ func (self *IHTMLDocument2) Get_onkeypress() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_onmouseup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseup dispatches through IHTMLDocument2's vtable slot 85.
+func (self *IHTMLDocument2) Put_onmouseup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[85], specIHTMLDocument2_Put_onmouseup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmouseup dispatches through IHTMLDocument2's vtable slot 86.
 func (self *IHTMLDocument2) Get_onmouseup() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_onmousedown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmousedown dispatches through IHTMLDocument2's vtable slot 87.
+func (self *IHTMLDocument2) Put_onmousedown(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[87], specIHTMLDocument2_Put_onmousedown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmousedown dispatches through IHTMLDocument2's vtable slot 88.
@@ -15945,11 +17807,27 @@ func (self *IHTMLDocument2) Get_onmousedown() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_onmousemove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmousemove dispatches through IHTMLDocument2's vtable slot 89.
+func (self *IHTMLDocument2) Put_onmousemove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[89], specIHTMLDocument2_Put_onmousemove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmousemove dispatches through IHTMLDocument2's vtable slot 90.
 func (self *IHTMLDocument2) Get_onmousemove() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_onmouseout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseout dispatches through IHTMLDocument2's vtable slot 91.
+func (self *IHTMLDocument2) Put_onmouseout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[91], specIHTMLDocument2_Put_onmouseout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmouseout dispatches through IHTMLDocument2's vtable slot 92.
@@ -15959,11 +17837,27 @@ func (self *IHTMLDocument2) Get_onmouseout() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_onmouseover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseover dispatches through IHTMLDocument2's vtable slot 93.
+func (self *IHTMLDocument2) Put_onmouseover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[93], specIHTMLDocument2_Put_onmouseover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmouseover dispatches through IHTMLDocument2's vtable slot 94.
 func (self *IHTMLDocument2) Get_onmouseover() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLDocument2's vtable slot 95.
+func (self *IHTMLDocument2) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[95], specIHTMLDocument2_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onreadystatechange dispatches through IHTMLDocument2's vtable slot 96.
@@ -15973,11 +17867,27 @@ func (self *IHTMLDocument2) Get_onreadystatechange() (systemvariant.VARIANT, err
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_onafterupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onafterupdate dispatches through IHTMLDocument2's vtable slot 97.
+func (self *IHTMLDocument2) Put_onafterupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[97], specIHTMLDocument2_Put_onafterupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onafterupdate dispatches through IHTMLDocument2's vtable slot 98.
 func (self *IHTMLDocument2) Get_onafterupdate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_onrowexit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onrowexit dispatches through IHTMLDocument2's vtable slot 99.
+func (self *IHTMLDocument2) Put_onrowexit(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[99], specIHTMLDocument2_Put_onrowexit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onrowexit dispatches through IHTMLDocument2's vtable slot 100.
@@ -15987,6 +17897,14 @@ func (self *IHTMLDocument2) Get_onrowexit() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_onrowenter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onrowenter dispatches through IHTMLDocument2's vtable slot 101.
+func (self *IHTMLDocument2) Put_onrowenter(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[101], specIHTMLDocument2_Put_onrowenter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onrowenter dispatches through IHTMLDocument2's vtable slot 102.
 func (self *IHTMLDocument2) Get_onrowenter() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -15994,11 +17912,27 @@ func (self *IHTMLDocument2) Get_onrowenter() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_ondragstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragstart dispatches through IHTMLDocument2's vtable slot 103.
+func (self *IHTMLDocument2) Put_ondragstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[103], specIHTMLDocument2_Put_ondragstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondragstart dispatches through IHTMLDocument2's vtable slot 104.
 func (self *IHTMLDocument2) Get_ondragstart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_onselectstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselectstart dispatches through IHTMLDocument2's vtable slot 105.
+func (self *IHTMLDocument2) Put_onselectstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[105], specIHTMLDocument2_Put_onselectstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onselectstart dispatches through IHTMLDocument2's vtable slot 106.
@@ -16029,11 +17963,27 @@ func (self *IHTMLDocument2) Get_styleSheets() (*IHTMLStyleSheetsCollection, erro
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument2_Put_onbeforeupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeupdate dispatches through IHTMLDocument2's vtable slot 110.
+func (self *IHTMLDocument2) Put_onbeforeupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[110], specIHTMLDocument2_Put_onbeforeupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforeupdate dispatches through IHTMLDocument2's vtable slot 111.
 func (self *IHTMLDocument2) Get_onbeforeupdate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument2_Put_onerrorupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerrorupdate dispatches through IHTMLDocument2's vtable slot 112.
+func (self *IHTMLDocument2) Put_onerrorupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[112], specIHTMLDocument2_Put_onerrorupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onerrorupdate dispatches through IHTMLDocument2's vtable slot 113.
@@ -16111,11 +18061,27 @@ func (self *IHTMLDocument3) DetachEvent(event foundation.BSTR, pDisp *systemcom.
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument3_Put_onrowsdelete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onrowsdelete dispatches through IHTMLDocument3's vtable slot 14.
+func (self *IHTMLDocument3) Put_onrowsdelete(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLDocument3_Put_onrowsdelete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onrowsdelete dispatches through IHTMLDocument3's vtable slot 15.
 func (self *IHTMLDocument3) Get_onrowsdelete() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument3_Put_onrowsinserted = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onrowsinserted dispatches through IHTMLDocument3's vtable slot 16.
+func (self *IHTMLDocument3) Put_onrowsinserted(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLDocument3_Put_onrowsinserted, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onrowsinserted dispatches through IHTMLDocument3's vtable slot 17.
@@ -16125,11 +18091,27 @@ func (self *IHTMLDocument3) Get_onrowsinserted() (systemvariant.VARIANT, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument3_Put_oncellchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncellchange dispatches through IHTMLDocument3's vtable slot 18.
+func (self *IHTMLDocument3) Put_oncellchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIHTMLDocument3_Put_oncellchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oncellchange dispatches through IHTMLDocument3's vtable slot 19.
 func (self *IHTMLDocument3) Get_oncellchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument3_Put_ondatasetchanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondatasetchanged dispatches through IHTMLDocument3's vtable slot 20.
+func (self *IHTMLDocument3) Put_ondatasetchanged(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIHTMLDocument3_Put_ondatasetchanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondatasetchanged dispatches through IHTMLDocument3's vtable slot 21.
@@ -16139,6 +18121,14 @@ func (self *IHTMLDocument3) Get_ondatasetchanged() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument3_Put_ondataavailable = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondataavailable dispatches through IHTMLDocument3's vtable slot 22.
+func (self *IHTMLDocument3) Put_ondataavailable(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLDocument3_Put_ondataavailable, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondataavailable dispatches through IHTMLDocument3's vtable slot 23.
 func (self *IHTMLDocument3) Get_ondataavailable() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -16146,11 +18136,27 @@ func (self *IHTMLDocument3) Get_ondataavailable() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument3_Put_ondatasetcomplete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondatasetcomplete dispatches through IHTMLDocument3's vtable slot 24.
+func (self *IHTMLDocument3) Put_ondatasetcomplete(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIHTMLDocument3_Put_ondatasetcomplete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondatasetcomplete dispatches through IHTMLDocument3's vtable slot 25.
 func (self *IHTMLDocument3) Get_ondatasetcomplete() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument3_Put_onpropertychange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onpropertychange dispatches through IHTMLDocument3's vtable slot 26.
+func (self *IHTMLDocument3) Put_onpropertychange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIHTMLDocument3_Put_onpropertychange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onpropertychange dispatches through IHTMLDocument3's vtable slot 27.
@@ -16173,11 +18179,27 @@ func (self *IHTMLDocument3) Get_dir() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument3_Put_oncontextmenu = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncontextmenu dispatches through IHTMLDocument3's vtable slot 30.
+func (self *IHTMLDocument3) Put_oncontextmenu(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIHTMLDocument3_Put_oncontextmenu, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oncontextmenu dispatches through IHTMLDocument3's vtable slot 31.
 func (self *IHTMLDocument3) Get_oncontextmenu() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument3_Put_onstop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstop dispatches through IHTMLDocument3's vtable slot 32.
+func (self *IHTMLDocument3) Put_onstop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIHTMLDocument3_Put_onstop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onstop dispatches through IHTMLDocument3's vtable slot 33.
@@ -16247,6 +18269,14 @@ func (self *IHTMLDocument3) Get_inheritStyleSheets() (foundation.VARIANT_BOOL, e
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument3_Put_onbeforeeditfocus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeeditfocus dispatches through IHTMLDocument3's vtable slot 43.
+func (self *IHTMLDocument3) Put_onbeforeeditfocus(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIHTMLDocument3_Put_onbeforeeditfocus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforeeditfocus dispatches through IHTMLDocument3's vtable slot 44.
 func (self *IHTMLDocument3) Get_onbeforeeditfocus() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -16294,6 +18324,14 @@ func (self *IHTMLDocument4) HasFocus() (foundation.VARIANT_BOOL, error) {
 	_pfFocus := new(foundation.VARIANT_BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfFocus))))
 	return *_pfFocus, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument4_Put_onselectionchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselectionchange dispatches through IHTMLDocument4's vtable slot 9.
+func (self *IHTMLDocument4) Put_onselectionchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLDocument4_Put_onselectionchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onselectionchange dispatches through IHTMLDocument4's vtable slot 10.
@@ -16351,6 +18389,14 @@ func (self *IHTMLDocument4) CreateRenderStyle(v foundation.BSTR) (*IHTMLRenderSt
 	return *_ppIHTMLRenderStyle, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument4_Put_oncontrolselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncontrolselect dispatches through IHTMLDocument4's vtable slot 18.
+func (self *IHTMLDocument4) Put_oncontrolselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIHTMLDocument4_Put_oncontrolselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oncontrolselect dispatches through IHTMLDocument4's vtable slot 19.
 func (self *IHTMLDocument4) Get_oncontrolselect() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -16372,6 +18418,14 @@ type IHTMLDocument5 struct {
 
 // IID_IHTMLDocument5 is the interface identifier for IHTMLDocument5.
 var IID_IHTMLDocument5 = win32.GUID{Data1: 0x3050f80c, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLDocument5_Put_onmousewheel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmousewheel dispatches through IHTMLDocument5's vtable slot 7.
+func (self *IHTMLDocument5) Put_onmousewheel(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLDocument5_Put_onmousewheel, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_onmousewheel dispatches through IHTMLDocument5's vtable slot 8.
 func (self *IHTMLDocument5) Get_onmousewheel() (systemvariant.VARIANT, error) {
@@ -16408,11 +18462,27 @@ func (self *IHTMLDocument5) CreateComment(bstrdata foundation.BSTR) (*IHTMLDOMNo
 	return *_ppRetNode, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument5_Put_onfocusin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocusin dispatches through IHTMLDocument5's vtable slot 13.
+func (self *IHTMLDocument5) Put_onfocusin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLDocument5_Put_onfocusin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onfocusin dispatches through IHTMLDocument5's vtable slot 14.
 func (self *IHTMLDocument5) Get_onfocusin() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument5_Put_onfocusout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocusout dispatches through IHTMLDocument5's vtable slot 15.
+func (self *IHTMLDocument5) Put_onfocusout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLDocument5_Put_onfocusout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onfocusout dispatches through IHTMLDocument5's vtable slot 16.
@@ -16422,11 +18492,27 @@ func (self *IHTMLDocument5) Get_onfocusout() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument5_Put_onactivate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onactivate dispatches through IHTMLDocument5's vtable slot 17.
+func (self *IHTMLDocument5) Put_onactivate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLDocument5_Put_onactivate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onactivate dispatches through IHTMLDocument5's vtable slot 18.
 func (self *IHTMLDocument5) Get_onactivate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument5_Put_ondeactivate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondeactivate dispatches through IHTMLDocument5's vtable slot 19.
+func (self *IHTMLDocument5) Put_ondeactivate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLDocument5_Put_ondeactivate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondeactivate dispatches through IHTMLDocument5's vtable slot 20.
@@ -16436,11 +18522,27 @@ func (self *IHTMLDocument5) Get_ondeactivate() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument5_Put_onbeforeactivate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeactivate dispatches through IHTMLDocument5's vtable slot 21.
+func (self *IHTMLDocument5) Put_onbeforeactivate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLDocument5_Put_onbeforeactivate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforeactivate dispatches through IHTMLDocument5's vtable slot 22.
 func (self *IHTMLDocument5) Get_onbeforeactivate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument5_Put_onbeforedeactivate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforedeactivate dispatches through IHTMLDocument5's vtable slot 23.
+func (self *IHTMLDocument5) Put_onbeforedeactivate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLDocument5_Put_onbeforedeactivate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onbeforedeactivate dispatches through IHTMLDocument5's vtable slot 24.
@@ -16479,11 +18581,27 @@ func (self *IHTMLDocument6) Get_documentMode() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument6_Put_onstorage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstorage dispatches through IHTMLDocument6's vtable slot 9.
+func (self *IHTMLDocument6) Put_onstorage(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLDocument6_Put_onstorage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onstorage dispatches through IHTMLDocument6's vtable slot 10.
 func (self *IHTMLDocument6) Get_onstorage() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument6_Put_onstoragecommit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstoragecommit dispatches through IHTMLDocument6's vtable slot 11.
+func (self *IHTMLDocument6) Put_onstoragecommit(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLDocument6_Put_onstoragecommit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onstoragecommit dispatches through IHTMLDocument6's vtable slot 12.
@@ -16556,6 +18674,14 @@ func (self *IHTMLDocument7) CreateAttributeNS(pvarNS *systemvariant.VARIANT, bst
 	return *_ppAttribute, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onmsthumbnailclick = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsthumbnailclick dispatches through IHTMLDocument7's vtable slot 13.
+func (self *IHTMLDocument7) Put_onmsthumbnailclick(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLDocument7_Put_onmsthumbnailclick, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsthumbnailclick dispatches through IHTMLDocument7's vtable slot 14.
 func (self *IHTMLDocument7) Get_onmsthumbnailclick() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -16603,6 +18729,14 @@ func (self *IHTMLDocument7) AdoptNode(pNodeSource *IHTMLDOMNode) (*IHTMLDOMNode3
 	_ppNodeDest := new(*IHTMLDOMNode3)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNodeSource)), uintptr(win32.OutParam(unsafe.Pointer(_ppNodeDest))))
 	return *_ppNodeDest, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onmssitemodejumplistitemremoved = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmssitemodejumplistitemremoved dispatches through IHTMLDocument7's vtable slot 21.
+func (self *IHTMLDocument7) Put_onmssitemodejumplistitemremoved(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLDocument7_Put_onmssitemodejumplistitemremoved, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmssitemodejumplistitemremoved dispatches through IHTMLDocument7's vtable slot 22.
@@ -16666,11 +18800,27 @@ func (self *IHTMLDocument7) HasAttributes() (foundation.VARIANT_BOOL, error) {
 	return *_pfHasAttributes, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onabort = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onabort dispatches through IHTMLDocument7's vtable slot 31.
+func (self *IHTMLDocument7) Put_onabort(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIHTMLDocument7_Put_onabort, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onabort dispatches through IHTMLDocument7's vtable slot 32.
 func (self *IHTMLDocument7) Get_onabort() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onblur = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onblur dispatches through IHTMLDocument7's vtable slot 33.
+func (self *IHTMLDocument7) Put_onblur(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLDocument7_Put_onblur, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onblur dispatches through IHTMLDocument7's vtable slot 34.
@@ -16680,11 +18830,27 @@ func (self *IHTMLDocument7) Get_onblur() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_oncanplay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncanplay dispatches through IHTMLDocument7's vtable slot 35.
+func (self *IHTMLDocument7) Put_oncanplay(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLDocument7_Put_oncanplay, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oncanplay dispatches through IHTMLDocument7's vtable slot 36.
 func (self *IHTMLDocument7) Get_oncanplay() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_oncanplaythrough = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncanplaythrough dispatches through IHTMLDocument7's vtable slot 37.
+func (self *IHTMLDocument7) Put_oncanplaythrough(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLDocument7_Put_oncanplaythrough, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_oncanplaythrough dispatches through IHTMLDocument7's vtable slot 38.
@@ -16694,11 +18860,27 @@ func (self *IHTMLDocument7) Get_oncanplaythrough() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchange dispatches through IHTMLDocument7's vtable slot 39.
+func (self *IHTMLDocument7) Put_onchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIHTMLDocument7_Put_onchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onchange dispatches through IHTMLDocument7's vtable slot 40.
 func (self *IHTMLDocument7) Get_onchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_ondrag = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondrag dispatches through IHTMLDocument7's vtable slot 41.
+func (self *IHTMLDocument7) Put_ondrag(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIHTMLDocument7_Put_ondrag, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondrag dispatches through IHTMLDocument7's vtable slot 42.
@@ -16708,11 +18890,27 @@ func (self *IHTMLDocument7) Get_ondrag() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_ondragend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragend dispatches through IHTMLDocument7's vtable slot 43.
+func (self *IHTMLDocument7) Put_ondragend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIHTMLDocument7_Put_ondragend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondragend dispatches through IHTMLDocument7's vtable slot 44.
 func (self *IHTMLDocument7) Get_ondragend() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_ondragenter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragenter dispatches through IHTMLDocument7's vtable slot 45.
+func (self *IHTMLDocument7) Put_ondragenter(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specIHTMLDocument7_Put_ondragenter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondragenter dispatches through IHTMLDocument7's vtable slot 46.
@@ -16722,11 +18920,27 @@ func (self *IHTMLDocument7) Get_ondragenter() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_ondragleave = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragleave dispatches through IHTMLDocument7's vtable slot 47.
+func (self *IHTMLDocument7) Put_ondragleave(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[47], specIHTMLDocument7_Put_ondragleave, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondragleave dispatches through IHTMLDocument7's vtable slot 48.
 func (self *IHTMLDocument7) Get_ondragleave() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_ondragover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragover dispatches through IHTMLDocument7's vtable slot 49.
+func (self *IHTMLDocument7) Put_ondragover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[49], specIHTMLDocument7_Put_ondragover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondragover dispatches through IHTMLDocument7's vtable slot 50.
@@ -16736,11 +18950,27 @@ func (self *IHTMLDocument7) Get_ondragover() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_ondrop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondrop dispatches through IHTMLDocument7's vtable slot 51.
+func (self *IHTMLDocument7) Put_ondrop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specIHTMLDocument7_Put_ondrop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondrop dispatches through IHTMLDocument7's vtable slot 52.
 func (self *IHTMLDocument7) Get_ondrop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_ondurationchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondurationchange dispatches through IHTMLDocument7's vtable slot 53.
+func (self *IHTMLDocument7) Put_ondurationchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIHTMLDocument7_Put_ondurationchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondurationchange dispatches through IHTMLDocument7's vtable slot 54.
@@ -16750,11 +18980,27 @@ func (self *IHTMLDocument7) Get_ondurationchange() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onemptied = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onemptied dispatches through IHTMLDocument7's vtable slot 55.
+func (self *IHTMLDocument7) Put_onemptied(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[55], specIHTMLDocument7_Put_onemptied, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onemptied dispatches through IHTMLDocument7's vtable slot 56.
 func (self *IHTMLDocument7) Get_onemptied() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onended = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onended dispatches through IHTMLDocument7's vtable slot 57.
+func (self *IHTMLDocument7) Put_onended(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[57], specIHTMLDocument7_Put_onended, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onended dispatches through IHTMLDocument7's vtable slot 58.
@@ -16764,11 +19010,27 @@ func (self *IHTMLDocument7) Get_onended() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLDocument7's vtable slot 59.
+func (self *IHTMLDocument7) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[59], specIHTMLDocument7_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onerror dispatches through IHTMLDocument7's vtable slot 60.
 func (self *IHTMLDocument7) Get_onerror() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onfocus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocus dispatches through IHTMLDocument7's vtable slot 61.
+func (self *IHTMLDocument7) Put_onfocus(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[61], specIHTMLDocument7_Put_onfocus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onfocus dispatches through IHTMLDocument7's vtable slot 62.
@@ -16778,11 +19040,27 @@ func (self *IHTMLDocument7) Get_onfocus() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_oninput = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oninput dispatches through IHTMLDocument7's vtable slot 63.
+func (self *IHTMLDocument7) Put_oninput(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIHTMLDocument7_Put_oninput, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oninput dispatches through IHTMLDocument7's vtable slot 64.
 func (self *IHTMLDocument7) Get_oninput() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLDocument7's vtable slot 65.
+func (self *IHTMLDocument7) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[65], specIHTMLDocument7_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onload dispatches through IHTMLDocument7's vtable slot 66.
@@ -16792,11 +19070,27 @@ func (self *IHTMLDocument7) Get_onload() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onloadeddata = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onloadeddata dispatches through IHTMLDocument7's vtable slot 67.
+func (self *IHTMLDocument7) Put_onloadeddata(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[67], specIHTMLDocument7_Put_onloadeddata, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onloadeddata dispatches through IHTMLDocument7's vtable slot 68.
 func (self *IHTMLDocument7) Get_onloadeddata() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onloadedmetadata = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onloadedmetadata dispatches through IHTMLDocument7's vtable slot 69.
+func (self *IHTMLDocument7) Put_onloadedmetadata(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[69], specIHTMLDocument7_Put_onloadedmetadata, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onloadedmetadata dispatches through IHTMLDocument7's vtable slot 70.
@@ -16806,11 +19100,27 @@ func (self *IHTMLDocument7) Get_onloadedmetadata() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onloadstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onloadstart dispatches through IHTMLDocument7's vtable slot 71.
+func (self *IHTMLDocument7) Put_onloadstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[71], specIHTMLDocument7_Put_onloadstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onloadstart dispatches through IHTMLDocument7's vtable slot 72.
 func (self *IHTMLDocument7) Get_onloadstart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onpause = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onpause dispatches through IHTMLDocument7's vtable slot 73.
+func (self *IHTMLDocument7) Put_onpause(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[73], specIHTMLDocument7_Put_onpause, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onpause dispatches through IHTMLDocument7's vtable slot 74.
@@ -16820,11 +19130,27 @@ func (self *IHTMLDocument7) Get_onpause() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onplay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onplay dispatches through IHTMLDocument7's vtable slot 75.
+func (self *IHTMLDocument7) Put_onplay(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[75], specIHTMLDocument7_Put_onplay, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onplay dispatches through IHTMLDocument7's vtable slot 76.
 func (self *IHTMLDocument7) Get_onplay() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onplaying = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onplaying dispatches through IHTMLDocument7's vtable slot 77.
+func (self *IHTMLDocument7) Put_onplaying(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[77], specIHTMLDocument7_Put_onplaying, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onplaying dispatches through IHTMLDocument7's vtable slot 78.
@@ -16834,11 +19160,27 @@ func (self *IHTMLDocument7) Get_onplaying() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onprogress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onprogress dispatches through IHTMLDocument7's vtable slot 79.
+func (self *IHTMLDocument7) Put_onprogress(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[79], specIHTMLDocument7_Put_onprogress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onprogress dispatches through IHTMLDocument7's vtable slot 80.
 func (self *IHTMLDocument7) Get_onprogress() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onratechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onratechange dispatches through IHTMLDocument7's vtable slot 81.
+func (self *IHTMLDocument7) Put_onratechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[81], specIHTMLDocument7_Put_onratechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onratechange dispatches through IHTMLDocument7's vtable slot 82.
@@ -16848,11 +19190,27 @@ func (self *IHTMLDocument7) Get_onratechange() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onreset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreset dispatches through IHTMLDocument7's vtable slot 83.
+func (self *IHTMLDocument7) Put_onreset(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[83], specIHTMLDocument7_Put_onreset, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onreset dispatches through IHTMLDocument7's vtable slot 84.
 func (self *IHTMLDocument7) Get_onreset() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onscroll = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onscroll dispatches through IHTMLDocument7's vtable slot 85.
+func (self *IHTMLDocument7) Put_onscroll(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[85], specIHTMLDocument7_Put_onscroll, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onscroll dispatches through IHTMLDocument7's vtable slot 86.
@@ -16862,11 +19220,27 @@ func (self *IHTMLDocument7) Get_onscroll() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onseeked = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onseeked dispatches through IHTMLDocument7's vtable slot 87.
+func (self *IHTMLDocument7) Put_onseeked(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[87], specIHTMLDocument7_Put_onseeked, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onseeked dispatches through IHTMLDocument7's vtable slot 88.
 func (self *IHTMLDocument7) Get_onseeked() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onseeking = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onseeking dispatches through IHTMLDocument7's vtable slot 89.
+func (self *IHTMLDocument7) Put_onseeking(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[89], specIHTMLDocument7_Put_onseeking, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onseeking dispatches through IHTMLDocument7's vtable slot 90.
@@ -16876,11 +19250,27 @@ func (self *IHTMLDocument7) Get_onseeking() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselect dispatches through IHTMLDocument7's vtable slot 91.
+func (self *IHTMLDocument7) Put_onselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[91], specIHTMLDocument7_Put_onselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onselect dispatches through IHTMLDocument7's vtable slot 92.
 func (self *IHTMLDocument7) Get_onselect() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onstalled = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstalled dispatches through IHTMLDocument7's vtable slot 93.
+func (self *IHTMLDocument7) Put_onstalled(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[93], specIHTMLDocument7_Put_onstalled, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onstalled dispatches through IHTMLDocument7's vtable slot 94.
@@ -16890,11 +19280,27 @@ func (self *IHTMLDocument7) Get_onstalled() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onsubmit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onsubmit dispatches through IHTMLDocument7's vtable slot 95.
+func (self *IHTMLDocument7) Put_onsubmit(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[95], specIHTMLDocument7_Put_onsubmit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onsubmit dispatches through IHTMLDocument7's vtable slot 96.
 func (self *IHTMLDocument7) Get_onsubmit() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onsuspend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onsuspend dispatches through IHTMLDocument7's vtable slot 97.
+func (self *IHTMLDocument7) Put_onsuspend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[97], specIHTMLDocument7_Put_onsuspend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onsuspend dispatches through IHTMLDocument7's vtable slot 98.
@@ -16904,6 +19310,14 @@ func (self *IHTMLDocument7) Get_onsuspend() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_ontimeupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ontimeupdate dispatches through IHTMLDocument7's vtable slot 99.
+func (self *IHTMLDocument7) Put_ontimeupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[99], specIHTMLDocument7_Put_ontimeupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ontimeupdate dispatches through IHTMLDocument7's vtable slot 100.
 func (self *IHTMLDocument7) Get_ontimeupdate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -16911,11 +19325,27 @@ func (self *IHTMLDocument7) Get_ontimeupdate() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument7_Put_onvolumechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onvolumechange dispatches through IHTMLDocument7's vtable slot 101.
+func (self *IHTMLDocument7) Put_onvolumechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[101], specIHTMLDocument7_Put_onvolumechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onvolumechange dispatches through IHTMLDocument7's vtable slot 102.
 func (self *IHTMLDocument7) Get_onvolumechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument7_Put_onwaiting = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onwaiting dispatches through IHTMLDocument7's vtable slot 103.
+func (self *IHTMLDocument7) Put_onwaiting(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[103], specIHTMLDocument7_Put_onwaiting, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onwaiting dispatches through IHTMLDocument7's vtable slot 104.
@@ -16973,11 +19403,27 @@ type IHTMLDocument8 struct {
 // IID_IHTMLDocument8 is the interface identifier for IHTMLDocument8.
 var IID_IHTMLDocument8 = win32.GUID{Data1: 0x305107d0, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLDocument8_Put_onmscontentzoom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmscontentzoom dispatches through IHTMLDocument8's vtable slot 7.
+func (self *IHTMLDocument8) Put_onmscontentzoom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLDocument8_Put_onmscontentzoom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmscontentzoom dispatches through IHTMLDocument8's vtable slot 8.
 func (self *IHTMLDocument8) Get_onmscontentzoom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_Put_onmspointerdown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerdown dispatches through IHTMLDocument8's vtable slot 9.
+func (self *IHTMLDocument8) Put_onmspointerdown(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLDocument8_Put_onmspointerdown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointerdown dispatches through IHTMLDocument8's vtable slot 10.
@@ -16987,11 +19433,27 @@ func (self *IHTMLDocument8) Get_onmspointerdown() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument8_Put_onmspointermove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointermove dispatches through IHTMLDocument8's vtable slot 11.
+func (self *IHTMLDocument8) Put_onmspointermove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLDocument8_Put_onmspointermove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointermove dispatches through IHTMLDocument8's vtable slot 12.
 func (self *IHTMLDocument8) Get_onmspointermove() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_Put_onmspointerup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerup dispatches through IHTMLDocument8's vtable slot 13.
+func (self *IHTMLDocument8) Put_onmspointerup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLDocument8_Put_onmspointerup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointerup dispatches through IHTMLDocument8's vtable slot 14.
@@ -17001,11 +19463,27 @@ func (self *IHTMLDocument8) Get_onmspointerup() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument8_Put_onmspointerover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerover dispatches through IHTMLDocument8's vtable slot 15.
+func (self *IHTMLDocument8) Put_onmspointerover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLDocument8_Put_onmspointerover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointerover dispatches through IHTMLDocument8's vtable slot 16.
 func (self *IHTMLDocument8) Get_onmspointerover() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_Put_onmspointerout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerout dispatches through IHTMLDocument8's vtable slot 17.
+func (self *IHTMLDocument8) Put_onmspointerout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLDocument8_Put_onmspointerout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointerout dispatches through IHTMLDocument8's vtable slot 18.
@@ -17015,11 +19493,27 @@ func (self *IHTMLDocument8) Get_onmspointerout() (systemvariant.VARIANT, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument8_Put_onmspointercancel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointercancel dispatches through IHTMLDocument8's vtable slot 19.
+func (self *IHTMLDocument8) Put_onmspointercancel(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLDocument8_Put_onmspointercancel, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointercancel dispatches through IHTMLDocument8's vtable slot 20.
 func (self *IHTMLDocument8) Get_onmspointercancel() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_Put_onmspointerhover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerhover dispatches through IHTMLDocument8's vtable slot 21.
+func (self *IHTMLDocument8) Put_onmspointerhover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLDocument8_Put_onmspointerhover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointerhover dispatches through IHTMLDocument8's vtable slot 22.
@@ -17029,11 +19523,27 @@ func (self *IHTMLDocument8) Get_onmspointerhover() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument8_Put_onmsgesturestart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturestart dispatches through IHTMLDocument8's vtable slot 23.
+func (self *IHTMLDocument8) Put_onmsgesturestart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLDocument8_Put_onmsgesturestart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgesturestart dispatches through IHTMLDocument8's vtable slot 24.
 func (self *IHTMLDocument8) Get_onmsgesturestart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_Put_onmsgesturechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturechange dispatches through IHTMLDocument8's vtable slot 25.
+func (self *IHTMLDocument8) Put_onmsgesturechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLDocument8_Put_onmsgesturechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsgesturechange dispatches through IHTMLDocument8's vtable slot 26.
@@ -17043,11 +19553,27 @@ func (self *IHTMLDocument8) Get_onmsgesturechange() (systemvariant.VARIANT, erro
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument8_Put_onmsgestureend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgestureend dispatches through IHTMLDocument8's vtable slot 27.
+func (self *IHTMLDocument8) Put_onmsgestureend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLDocument8_Put_onmsgestureend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgestureend dispatches through IHTMLDocument8's vtable slot 28.
 func (self *IHTMLDocument8) Get_onmsgestureend() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_Put_onmsgesturehold = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturehold dispatches through IHTMLDocument8's vtable slot 29.
+func (self *IHTMLDocument8) Put_onmsgesturehold(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLDocument8_Put_onmsgesturehold, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsgesturehold dispatches through IHTMLDocument8's vtable slot 30.
@@ -17057,11 +19583,27 @@ func (self *IHTMLDocument8) Get_onmsgesturehold() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument8_Put_onmsgesturetap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturetap dispatches through IHTMLDocument8's vtable slot 31.
+func (self *IHTMLDocument8) Put_onmsgesturetap(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIHTMLDocument8_Put_onmsgesturetap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgesturetap dispatches through IHTMLDocument8's vtable slot 32.
 func (self *IHTMLDocument8) Get_onmsgesturetap() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_Put_onmsgesturedoubletap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturedoubletap dispatches through IHTMLDocument8's vtable slot 33.
+func (self *IHTMLDocument8) Put_onmsgesturedoubletap(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLDocument8_Put_onmsgesturedoubletap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsgesturedoubletap dispatches through IHTMLDocument8's vtable slot 34.
@@ -17071,11 +19613,45 @@ func (self *IHTMLDocument8) Get_onmsgesturedoubletap() (systemvariant.VARIANT, e
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLDocument8_Put_onmsinertiastart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsinertiastart dispatches through IHTMLDocument8's vtable slot 35.
+func (self *IHTMLDocument8) Put_onmsinertiastart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLDocument8_Put_onmsinertiastart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsinertiastart dispatches through IHTMLDocument8's vtable slot 36.
 func (self *IHTMLDocument8) Get_onmsinertiastart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_ElementsFromPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// ElementsFromPoint dispatches through IHTMLDocument8's vtable slot 37.
+func (self *IHTMLDocument8) ElementsFromPoint(x float32, y float32) (*IHTMLDOMChildrenCollection, error) {
+	_elementsHit := new(*IHTMLDOMChildrenCollection)
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLDocument8_ElementsFromPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_elementsHit)))).Tuple()
+	return *_elementsHit, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_ElementsFromRect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// ElementsFromRect dispatches through IHTMLDocument8's vtable slot 38.
+func (self *IHTMLDocument8) ElementsFromRect(left float32, top float32, width float32, height float32) (*IHTMLDOMChildrenCollection, error) {
+	_elementsHit := new(*IHTMLDOMChildrenCollection)
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIHTMLDocument8_ElementsFromRect, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(left)), uintptr(math.Float32bits(top)), uintptr(math.Float32bits(width)), uintptr(math.Float32bits(height)), uintptr(win32.OutParam(unsafe.Pointer(_elementsHit)))).Tuple()
+	return *_elementsHit, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLDocument8_Put_onmsmanipulationstatechanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsmanipulationstatechanged dispatches through IHTMLDocument8's vtable slot 39.
+func (self *IHTMLDocument8) Put_onmsmanipulationstatechanged(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIHTMLDocument8_Put_onmsmanipulationstatechanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsmanipulationstatechanged dispatches through IHTMLDocument8's vtable slot 40.
@@ -17288,6 +19864,14 @@ type IHTMLElement struct {
 // IID_IHTMLElement is the interface identifier for IHTMLElement.
 var IID_IHTMLElement = win32.GUID{Data1: 0x3050f1ff, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLElement_SetAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// SetAttribute dispatches through IHTMLElement's vtable slot 7.
+func (self *IHTMLElement) SetAttribute(strAttributeName foundation.BSTR, AttributeValue systemvariant.VARIANT, lFlags int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLElement_SetAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAttributeName)), uintptr(unsafe.Pointer(&AttributeValue)), uintptr(lFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // GetAttribute dispatches through IHTMLElement's vtable slot 8.
 func (self *IHTMLElement) GetAttribute(strAttributeName foundation.BSTR, lFlags int32) (systemvariant.VARIANT, error) {
 	_AttributeValue := new(systemvariant.VARIANT)
@@ -17349,11 +19933,27 @@ func (self *IHTMLElement) Get_style() (*IHTMLStyle, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_onhelp = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onhelp dispatches through IHTMLElement's vtable slot 17.
+func (self *IHTMLElement) Put_onhelp(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLElement_Put_onhelp, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onhelp dispatches through IHTMLElement's vtable slot 18.
 func (self *IHTMLElement) Get_onhelp() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_Put_onclick = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onclick dispatches through IHTMLElement's vtable slot 19.
+func (self *IHTMLElement) Put_onclick(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLElement_Put_onclick, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onclick dispatches through IHTMLElement's vtable slot 20.
@@ -17363,11 +19963,27 @@ func (self *IHTMLElement) Get_onclick() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_ondblclick = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondblclick dispatches through IHTMLElement's vtable slot 21.
+func (self *IHTMLElement) Put_ondblclick(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLElement_Put_ondblclick, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondblclick dispatches through IHTMLElement's vtable slot 22.
 func (self *IHTMLElement) Get_ondblclick() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_Put_onkeydown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onkeydown dispatches through IHTMLElement's vtable slot 23.
+func (self *IHTMLElement) Put_onkeydown(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLElement_Put_onkeydown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onkeydown dispatches through IHTMLElement's vtable slot 24.
@@ -17377,11 +19993,27 @@ func (self *IHTMLElement) Get_onkeydown() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_onkeyup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onkeyup dispatches through IHTMLElement's vtable slot 25.
+func (self *IHTMLElement) Put_onkeyup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLElement_Put_onkeyup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onkeyup dispatches through IHTMLElement's vtable slot 26.
 func (self *IHTMLElement) Get_onkeyup() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_Put_onkeypress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onkeypress dispatches through IHTMLElement's vtable slot 27.
+func (self *IHTMLElement) Put_onkeypress(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLElement_Put_onkeypress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onkeypress dispatches through IHTMLElement's vtable slot 28.
@@ -17391,11 +20023,27 @@ func (self *IHTMLElement) Get_onkeypress() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_onmouseout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseout dispatches through IHTMLElement's vtable slot 29.
+func (self *IHTMLElement) Put_onmouseout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLElement_Put_onmouseout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmouseout dispatches through IHTMLElement's vtable slot 30.
 func (self *IHTMLElement) Get_onmouseout() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_Put_onmouseover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseover dispatches through IHTMLElement's vtable slot 31.
+func (self *IHTMLElement) Put_onmouseover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIHTMLElement_Put_onmouseover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmouseover dispatches through IHTMLElement's vtable slot 32.
@@ -17405,6 +20053,14 @@ func (self *IHTMLElement) Get_onmouseover() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_onmousemove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmousemove dispatches through IHTMLElement's vtable slot 33.
+func (self *IHTMLElement) Put_onmousemove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLElement_Put_onmousemove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmousemove dispatches through IHTMLElement's vtable slot 34.
 func (self *IHTMLElement) Get_onmousemove() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -17412,11 +20068,27 @@ func (self *IHTMLElement) Get_onmousemove() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_onmousedown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmousedown dispatches through IHTMLElement's vtable slot 35.
+func (self *IHTMLElement) Put_onmousedown(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLElement_Put_onmousedown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmousedown dispatches through IHTMLElement's vtable slot 36.
 func (self *IHTMLElement) Get_onmousedown() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_Put_onmouseup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseup dispatches through IHTMLElement's vtable slot 37.
+func (self *IHTMLElement) Put_onmouseup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLElement_Put_onmouseup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmouseup dispatches through IHTMLElement's vtable slot 38.
@@ -17459,11 +20131,27 @@ func (self *IHTMLElement) Get_language() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_onselectstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselectstart dispatches through IHTMLElement's vtable slot 44.
+func (self *IHTMLElement) Put_onselectstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIHTMLElement_Put_onselectstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onselectstart dispatches through IHTMLElement's vtable slot 45.
 func (self *IHTMLElement) Get_onselectstart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_ScrollIntoView = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// ScrollIntoView dispatches through IHTMLElement's vtable slot 46.
+func (self *IHTMLElement) ScrollIntoView(varargStart systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[46], specIHTMLElement_ScrollIntoView, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varargStart))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Contains dispatches through IHTMLElement's vtable slot 47.
@@ -17626,6 +20314,14 @@ func (self *IHTMLElement) Get_filters() (*IHTMLFiltersCollection, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_ondragstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragstart dispatches through IHTMLElement's vtable slot 71.
+func (self *IHTMLElement) Put_ondragstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[71], specIHTMLElement_Put_ondragstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondragstart dispatches through IHTMLElement's vtable slot 72.
 func (self *IHTMLElement) Get_ondragstart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -17640,11 +20336,27 @@ func (self *IHTMLElement) ToString() (foundation.BSTR, error) {
 	return *_String, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_onbeforeupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeupdate dispatches through IHTMLElement's vtable slot 74.
+func (self *IHTMLElement) Put_onbeforeupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[74], specIHTMLElement_Put_onbeforeupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforeupdate dispatches through IHTMLElement's vtable slot 75.
 func (self *IHTMLElement) Get_onbeforeupdate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_Put_onafterupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onafterupdate dispatches through IHTMLElement's vtable slot 76.
+func (self *IHTMLElement) Put_onafterupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[76], specIHTMLElement_Put_onafterupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onafterupdate dispatches through IHTMLElement's vtable slot 77.
@@ -17654,11 +20366,27 @@ func (self *IHTMLElement) Get_onafterupdate() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_onerrorupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerrorupdate dispatches through IHTMLElement's vtable slot 78.
+func (self *IHTMLElement) Put_onerrorupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[78], specIHTMLElement_Put_onerrorupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onerrorupdate dispatches through IHTMLElement's vtable slot 79.
 func (self *IHTMLElement) Get_onerrorupdate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_Put_onrowexit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onrowexit dispatches through IHTMLElement's vtable slot 80.
+func (self *IHTMLElement) Put_onrowexit(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[80], specIHTMLElement_Put_onrowexit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onrowexit dispatches through IHTMLElement's vtable slot 81.
@@ -17668,11 +20396,27 @@ func (self *IHTMLElement) Get_onrowexit() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_onrowenter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onrowenter dispatches through IHTMLElement's vtable slot 82.
+func (self *IHTMLElement) Put_onrowenter(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[82], specIHTMLElement_Put_onrowenter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onrowenter dispatches through IHTMLElement's vtable slot 83.
 func (self *IHTMLElement) Get_onrowenter() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_Put_ondatasetchanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondatasetchanged dispatches through IHTMLElement's vtable slot 84.
+func (self *IHTMLElement) Put_ondatasetchanged(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[84], specIHTMLElement_Put_ondatasetchanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondatasetchanged dispatches through IHTMLElement's vtable slot 85.
@@ -17682,6 +20426,14 @@ func (self *IHTMLElement) Get_ondatasetchanged() (systemvariant.VARIANT, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_ondataavailable = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondataavailable dispatches through IHTMLElement's vtable slot 86.
+func (self *IHTMLElement) Put_ondataavailable(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[86], specIHTMLElement_Put_ondataavailable, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondataavailable dispatches through IHTMLElement's vtable slot 87.
 func (self *IHTMLElement) Get_ondataavailable() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -17689,11 +20441,27 @@ func (self *IHTMLElement) Get_ondataavailable() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement_Put_ondatasetcomplete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondatasetcomplete dispatches through IHTMLElement's vtable slot 88.
+func (self *IHTMLElement) Put_ondatasetcomplete(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[88], specIHTMLElement_Put_ondatasetcomplete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondatasetcomplete dispatches through IHTMLElement's vtable slot 89.
 func (self *IHTMLElement) Get_ondatasetcomplete() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement_Put_onfilterchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfilterchange dispatches through IHTMLElement's vtable slot 90.
+func (self *IHTMLElement) Put_onfilterchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[90], specIHTMLElement_Put_onfilterchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onfilterchange dispatches through IHTMLElement's vtable slot 91.
@@ -17744,6 +20512,14 @@ func (self *IHTMLElement2) ReleaseCapture() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_onlosecapture = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onlosecapture dispatches through IHTMLElement2's vtable slot 10.
+func (self *IHTMLElement2) Put_onlosecapture(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLElement2_Put_onlosecapture, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onlosecapture dispatches through IHTMLElement2's vtable slot 11.
 func (self *IHTMLElement2) Get_onlosecapture() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -17758,11 +20534,35 @@ func (self *IHTMLElement2) ComponentFromPoint(x int32, y int32) (foundation.BSTR
 	return *_component, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_DoScroll = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// DoScroll dispatches through IHTMLElement2's vtable slot 13.
+func (self *IHTMLElement2) DoScroll(component systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLElement2_DoScroll, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&component))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_onscroll = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onscroll dispatches through IHTMLElement2's vtable slot 14.
+func (self *IHTMLElement2) Put_onscroll(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLElement2_Put_onscroll, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onscroll dispatches through IHTMLElement2's vtable slot 15.
 func (self *IHTMLElement2) Get_onscroll() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_ondrag = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondrag dispatches through IHTMLElement2's vtable slot 16.
+func (self *IHTMLElement2) Put_ondrag(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLElement2_Put_ondrag, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondrag dispatches through IHTMLElement2's vtable slot 17.
@@ -17772,11 +20572,27 @@ func (self *IHTMLElement2) Get_ondrag() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_ondragend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragend dispatches through IHTMLElement2's vtable slot 18.
+func (self *IHTMLElement2) Put_ondragend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIHTMLElement2_Put_ondragend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondragend dispatches through IHTMLElement2's vtable slot 19.
 func (self *IHTMLElement2) Get_ondragend() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_ondragenter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragenter dispatches through IHTMLElement2's vtable slot 20.
+func (self *IHTMLElement2) Put_ondragenter(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIHTMLElement2_Put_ondragenter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondragenter dispatches through IHTMLElement2's vtable slot 21.
@@ -17786,11 +20602,27 @@ func (self *IHTMLElement2) Get_ondragenter() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_ondragover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragover dispatches through IHTMLElement2's vtable slot 22.
+func (self *IHTMLElement2) Put_ondragover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLElement2_Put_ondragover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondragover dispatches through IHTMLElement2's vtable slot 23.
 func (self *IHTMLElement2) Get_ondragover() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_ondragleave = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragleave dispatches through IHTMLElement2's vtable slot 24.
+func (self *IHTMLElement2) Put_ondragleave(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIHTMLElement2_Put_ondragleave, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondragleave dispatches through IHTMLElement2's vtable slot 25.
@@ -17800,11 +20632,27 @@ func (self *IHTMLElement2) Get_ondragleave() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_ondrop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondrop dispatches through IHTMLElement2's vtable slot 26.
+func (self *IHTMLElement2) Put_ondrop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIHTMLElement2_Put_ondrop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondrop dispatches through IHTMLElement2's vtable slot 27.
 func (self *IHTMLElement2) Get_ondrop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_onbeforecut = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforecut dispatches through IHTMLElement2's vtable slot 28.
+func (self *IHTMLElement2) Put_onbeforecut(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIHTMLElement2_Put_onbeforecut, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onbeforecut dispatches through IHTMLElement2's vtable slot 29.
@@ -17814,11 +20662,27 @@ func (self *IHTMLElement2) Get_onbeforecut() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_oncut = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncut dispatches through IHTMLElement2's vtable slot 30.
+func (self *IHTMLElement2) Put_oncut(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIHTMLElement2_Put_oncut, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oncut dispatches through IHTMLElement2's vtable slot 31.
 func (self *IHTMLElement2) Get_oncut() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_onbeforecopy = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforecopy dispatches through IHTMLElement2's vtable slot 32.
+func (self *IHTMLElement2) Put_onbeforecopy(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIHTMLElement2_Put_onbeforecopy, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onbeforecopy dispatches through IHTMLElement2's vtable slot 33.
@@ -17828,6 +20692,14 @@ func (self *IHTMLElement2) Get_onbeforecopy() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_oncopy = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncopy dispatches through IHTMLElement2's vtable slot 34.
+func (self *IHTMLElement2) Put_oncopy(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIHTMLElement2_Put_oncopy, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oncopy dispatches through IHTMLElement2's vtable slot 35.
 func (self *IHTMLElement2) Get_oncopy() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -17835,11 +20707,27 @@ func (self *IHTMLElement2) Get_oncopy() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_onbeforepaste = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforepaste dispatches through IHTMLElement2's vtable slot 36.
+func (self *IHTMLElement2) Put_onbeforepaste(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIHTMLElement2_Put_onbeforepaste, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforepaste dispatches through IHTMLElement2's vtable slot 37.
 func (self *IHTMLElement2) Get_onbeforepaste() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_onpaste = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onpaste dispatches through IHTMLElement2's vtable slot 38.
+func (self *IHTMLElement2) Put_onpaste(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIHTMLElement2_Put_onpaste, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onpaste dispatches through IHTMLElement2's vtable slot 39.
@@ -17854,6 +20742,14 @@ func (self *IHTMLElement2) Get_currentStyle() (*IHTMLCurrentStyle, error) {
 	_p := new(*IHTMLCurrentStyle)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_onpropertychange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onpropertychange dispatches through IHTMLElement2's vtable slot 41.
+func (self *IHTMLElement2) Put_onpropertychange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIHTMLElement2_Put_onpropertychange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onpropertychange dispatches through IHTMLElement2's vtable slot 42.
@@ -17929,6 +20825,14 @@ func (self *IHTMLElement2) Get_accessKey() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_onblur = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onblur dispatches through IHTMLElement2's vtable slot 53.
+func (self *IHTMLElement2) Put_onblur(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIHTMLElement2_Put_onblur, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onblur dispatches through IHTMLElement2's vtable slot 54.
 func (self *IHTMLElement2) Get_onblur() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -17936,11 +20840,27 @@ func (self *IHTMLElement2) Get_onblur() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_onfocus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocus dispatches through IHTMLElement2's vtable slot 55.
+func (self *IHTMLElement2) Put_onfocus(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[55], specIHTMLElement2_Put_onfocus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onfocus dispatches through IHTMLElement2's vtable slot 56.
 func (self *IHTMLElement2) Get_onfocus() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_onresize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onresize dispatches through IHTMLElement2's vtable slot 57.
+func (self *IHTMLElement2) Put_onresize(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[57], specIHTMLElement2_Put_onresize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onresize dispatches through IHTMLElement2's vtable slot 58.
@@ -18016,11 +20936,27 @@ func (self *IHTMLElement2) Get_readyState() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLElement2's vtable slot 69.
+func (self *IHTMLElement2) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[69], specIHTMLElement2_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onreadystatechange dispatches through IHTMLElement2's vtable slot 70.
 func (self *IHTMLElement2) Get_onreadystatechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_onrowsdelete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onrowsdelete dispatches through IHTMLElement2's vtable slot 71.
+func (self *IHTMLElement2) Put_onrowsdelete(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[71], specIHTMLElement2_Put_onrowsdelete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onrowsdelete dispatches through IHTMLElement2's vtable slot 72.
@@ -18030,11 +20966,27 @@ func (self *IHTMLElement2) Get_onrowsdelete() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_onrowsinserted = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onrowsinserted dispatches through IHTMLElement2's vtable slot 73.
+func (self *IHTMLElement2) Put_onrowsinserted(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[73], specIHTMLElement2_Put_onrowsinserted, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onrowsinserted dispatches through IHTMLElement2's vtable slot 74.
 func (self *IHTMLElement2) Get_onrowsinserted() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_oncellchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncellchange dispatches through IHTMLElement2's vtable slot 75.
+func (self *IHTMLElement2) Put_oncellchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[75], specIHTMLElement2_Put_oncellchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_oncellchange dispatches through IHTMLElement2's vtable slot 76.
@@ -18113,6 +21065,14 @@ func (self *IHTMLElement2) ClearAttributes() error {
 // MergeAttributes dispatches through IHTMLElement2's vtable slot 87.
 func (self *IHTMLElement2) MergeAttributes(mergeThis *IHTMLElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mergeThis)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement2_Put_oncontextmenu = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncontextmenu dispatches through IHTMLElement2's vtable slot 88.
+func (self *IHTMLElement2) Put_oncontextmenu(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[88], specIHTMLElement2_Put_oncontextmenu, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -18199,6 +21159,14 @@ func (self *IHTMLElement2) Get_tagUrn() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement2_Put_onbeforeeditfocus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeeditfocus dispatches through IHTMLElement2's vtable slot 101.
+func (self *IHTMLElement2) Put_onbeforeeditfocus(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[101], specIHTMLElement2_Put_onbeforeeditfocus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforeeditfocus dispatches through IHTMLElement2's vtable slot 102.
 func (self *IHTMLElement2) Get_onbeforeeditfocus() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -18248,11 +21216,27 @@ func (self *IHTMLElement3) Get_canHaveHTML() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement3_Put_onlayoutcomplete = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onlayoutcomplete dispatches through IHTMLElement3's vtable slot 10.
+func (self *IHTMLElement3) Put_onlayoutcomplete(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLElement3_Put_onlayoutcomplete, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onlayoutcomplete dispatches through IHTMLElement3's vtable slot 11.
 func (self *IHTMLElement3) Get_onlayoutcomplete() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement3_Put_onpage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onpage dispatches through IHTMLElement3's vtable slot 12.
+func (self *IHTMLElement3) Put_onpage(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLElement3_Put_onpage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onpage dispatches through IHTMLElement3's vtable slot 13.
@@ -18273,6 +21257,14 @@ func (self *IHTMLElement3) Get_inflateBlock() (foundation.VARIANT_BOOL, error) {
 	_p := new(foundation.VARIANT_BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement3_Put_onbeforedeactivate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforedeactivate dispatches through IHTMLElement3's vtable slot 16.
+func (self *IHTMLElement3) Put_onbeforedeactivate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLElement3_Put_onbeforedeactivate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onbeforedeactivate dispatches through IHTMLElement3's vtable slot 17.
@@ -18341,11 +21333,27 @@ func (self *IHTMLElement3) Get_isDisabled() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement3_Put_onmove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmove dispatches through IHTMLElement3's vtable slot 27.
+func (self *IHTMLElement3) Put_onmove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLElement3_Put_onmove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmove dispatches through IHTMLElement3's vtable slot 28.
 func (self *IHTMLElement3) Get_onmove() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement3_Put_oncontrolselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncontrolselect dispatches through IHTMLElement3's vtable slot 29.
+func (self *IHTMLElement3) Put_oncontrolselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLElement3_Put_oncontrolselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_oncontrolselect dispatches through IHTMLElement3's vtable slot 30.
@@ -18362,11 +21370,27 @@ func (self *IHTMLElement3) FireEvent(bstrEventName foundation.BSTR, pvarEventObj
 	return *_pfCancelled, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement3_Put_onresizestart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onresizestart dispatches through IHTMLElement3's vtable slot 32.
+func (self *IHTMLElement3) Put_onresizestart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIHTMLElement3_Put_onresizestart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onresizestart dispatches through IHTMLElement3's vtable slot 33.
 func (self *IHTMLElement3) Get_onresizestart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement3_Put_onresizeend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onresizeend dispatches through IHTMLElement3's vtable slot 34.
+func (self *IHTMLElement3) Put_onresizeend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIHTMLElement3_Put_onresizeend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onresizeend dispatches through IHTMLElement3's vtable slot 35.
@@ -18376,11 +21400,27 @@ func (self *IHTMLElement3) Get_onresizeend() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement3_Put_onmovestart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmovestart dispatches through IHTMLElement3's vtable slot 36.
+func (self *IHTMLElement3) Put_onmovestart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIHTMLElement3_Put_onmovestart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmovestart dispatches through IHTMLElement3's vtable slot 37.
 func (self *IHTMLElement3) Get_onmovestart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement3_Put_onmoveend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmoveend dispatches through IHTMLElement3's vtable slot 38.
+func (self *IHTMLElement3) Put_onmoveend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIHTMLElement3_Put_onmoveend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmoveend dispatches through IHTMLElement3's vtable slot 39.
@@ -18390,11 +21430,27 @@ func (self *IHTMLElement3) Get_onmoveend() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement3_Put_onmouseenter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseenter dispatches through IHTMLElement3's vtable slot 40.
+func (self *IHTMLElement3) Put_onmouseenter(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIHTMLElement3_Put_onmouseenter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmouseenter dispatches through IHTMLElement3's vtable slot 41.
 func (self *IHTMLElement3) Get_onmouseenter() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement3_Put_onmouseleave = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseleave dispatches through IHTMLElement3's vtable slot 42.
+func (self *IHTMLElement3) Put_onmouseleave(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIHTMLElement3_Put_onmouseleave, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmouseleave dispatches through IHTMLElement3's vtable slot 43.
@@ -18404,11 +21460,27 @@ func (self *IHTMLElement3) Get_onmouseleave() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement3_Put_onactivate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onactivate dispatches through IHTMLElement3's vtable slot 44.
+func (self *IHTMLElement3) Put_onactivate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIHTMLElement3_Put_onactivate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onactivate dispatches through IHTMLElement3's vtable slot 45.
 func (self *IHTMLElement3) Get_onactivate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement3_Put_ondeactivate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondeactivate dispatches through IHTMLElement3's vtable slot 46.
+func (self *IHTMLElement3) Put_ondeactivate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[46], specIHTMLElement3_Put_ondeactivate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondeactivate dispatches through IHTMLElement3's vtable slot 47.
@@ -18439,6 +21511,14 @@ type IHTMLElement4 struct {
 
 // IID_IHTMLElement4 is the interface identifier for IHTMLElement4.
 var IID_IHTMLElement4 = win32.GUID{Data1: 0x3050f80f, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLElement4_Put_onmousewheel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmousewheel dispatches through IHTMLElement4's vtable slot 7.
+func (self *IHTMLElement4) Put_onmousewheel(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLElement4_Put_onmousewheel, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_onmousewheel dispatches through IHTMLElement4's vtable slot 8.
 func (self *IHTMLElement4) Get_onmousewheel() (systemvariant.VARIANT, error) {
@@ -18474,6 +21554,14 @@ func (self *IHTMLElement4) RemoveAttributeNode(pattr *IHTMLDOMAttribute) (*IHTML
 	return *_ppretAttribute, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement4_Put_onbeforeactivate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeactivate dispatches through IHTMLElement4's vtable slot 13.
+func (self *IHTMLElement4) Put_onbeforeactivate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLElement4_Put_onbeforeactivate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforeactivate dispatches through IHTMLElement4's vtable slot 14.
 func (self *IHTMLElement4) Get_onbeforeactivate() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -18481,11 +21569,27 @@ func (self *IHTMLElement4) Get_onbeforeactivate() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement4_Put_onfocusin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocusin dispatches through IHTMLElement4's vtable slot 15.
+func (self *IHTMLElement4) Put_onfocusin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLElement4_Put_onfocusin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onfocusin dispatches through IHTMLElement4's vtable slot 16.
 func (self *IHTMLElement4) Get_onfocusin() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement4_Put_onfocusout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocusout dispatches through IHTMLElement4's vtable slot 17.
+func (self *IHTMLElement4) Put_onfocusout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLElement4_Put_onfocusout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onfocusout dispatches through IHTMLElement4's vtable slot 18.
@@ -18718,6 +21822,14 @@ func (self *IHTMLElement5) GetAttribute(strAttributeName foundation.BSTR) (syste
 	_AttributeValue := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAttributeName)), uintptr(win32.OutParam(unsafe.Pointer(_AttributeValue))))
 	return *_AttributeValue, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement5_SetAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetAttribute dispatches through IHTMLElement5's vtable slot 40.
+func (self *IHTMLElement5) SetAttribute(strAttributeName foundation.BSTR, AttributeValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIHTMLElement5_SetAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAttributeName)), uintptr(unsafe.Pointer(&AttributeValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // RemoveAttribute dispatches through IHTMLElement5's vtable slot 41.
@@ -19053,11 +22165,27 @@ func (self *IHTMLElement6) MsMatchesSelector(v foundation.BSTR) (foundation.VARI
 	return *_pfMatches, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onabort = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onabort dispatches through IHTMLElement6's vtable slot 25.
+func (self *IHTMLElement6) Put_onabort(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLElement6_Put_onabort, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onabort dispatches through IHTMLElement6's vtable slot 26.
 func (self *IHTMLElement6) Get_onabort() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_oncanplay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncanplay dispatches through IHTMLElement6's vtable slot 27.
+func (self *IHTMLElement6) Put_oncanplay(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLElement6_Put_oncanplay, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_oncanplay dispatches through IHTMLElement6's vtable slot 28.
@@ -19067,11 +22195,27 @@ func (self *IHTMLElement6) Get_oncanplay() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_oncanplaythrough = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncanplaythrough dispatches through IHTMLElement6's vtable slot 29.
+func (self *IHTMLElement6) Put_oncanplaythrough(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLElement6_Put_oncanplaythrough, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oncanplaythrough dispatches through IHTMLElement6's vtable slot 30.
 func (self *IHTMLElement6) Get_oncanplaythrough() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchange dispatches through IHTMLElement6's vtable slot 31.
+func (self *IHTMLElement6) Put_onchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIHTMLElement6_Put_onchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onchange dispatches through IHTMLElement6's vtable slot 32.
@@ -19081,11 +22225,27 @@ func (self *IHTMLElement6) Get_onchange() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_ondurationchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondurationchange dispatches through IHTMLElement6's vtable slot 33.
+func (self *IHTMLElement6) Put_ondurationchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLElement6_Put_ondurationchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondurationchange dispatches through IHTMLElement6's vtable slot 34.
 func (self *IHTMLElement6) Get_ondurationchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onemptied = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onemptied dispatches through IHTMLElement6's vtable slot 35.
+func (self *IHTMLElement6) Put_onemptied(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLElement6_Put_onemptied, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onemptied dispatches through IHTMLElement6's vtable slot 36.
@@ -19095,11 +22255,27 @@ func (self *IHTMLElement6) Get_onemptied() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onended = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onended dispatches through IHTMLElement6's vtable slot 37.
+func (self *IHTMLElement6) Put_onended(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLElement6_Put_onended, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onended dispatches through IHTMLElement6's vtable slot 38.
 func (self *IHTMLElement6) Get_onended() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLElement6's vtable slot 39.
+func (self *IHTMLElement6) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIHTMLElement6_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onerror dispatches through IHTMLElement6's vtable slot 40.
@@ -19109,11 +22285,27 @@ func (self *IHTMLElement6) Get_onerror() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_oninput = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oninput dispatches through IHTMLElement6's vtable slot 41.
+func (self *IHTMLElement6) Put_oninput(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIHTMLElement6_Put_oninput, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oninput dispatches through IHTMLElement6's vtable slot 42.
 func (self *IHTMLElement6) Get_oninput() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLElement6's vtable slot 43.
+func (self *IHTMLElement6) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIHTMLElement6_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onload dispatches through IHTMLElement6's vtable slot 44.
@@ -19123,11 +22315,27 @@ func (self *IHTMLElement6) Get_onload() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onloadeddata = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onloadeddata dispatches through IHTMLElement6's vtable slot 45.
+func (self *IHTMLElement6) Put_onloadeddata(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specIHTMLElement6_Put_onloadeddata, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onloadeddata dispatches through IHTMLElement6's vtable slot 46.
 func (self *IHTMLElement6) Get_onloadeddata() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onloadedmetadata = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onloadedmetadata dispatches through IHTMLElement6's vtable slot 47.
+func (self *IHTMLElement6) Put_onloadedmetadata(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[47], specIHTMLElement6_Put_onloadedmetadata, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onloadedmetadata dispatches through IHTMLElement6's vtable slot 48.
@@ -19137,11 +22345,27 @@ func (self *IHTMLElement6) Get_onloadedmetadata() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onloadstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onloadstart dispatches through IHTMLElement6's vtable slot 49.
+func (self *IHTMLElement6) Put_onloadstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[49], specIHTMLElement6_Put_onloadstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onloadstart dispatches through IHTMLElement6's vtable slot 50.
 func (self *IHTMLElement6) Get_onloadstart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onpause = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onpause dispatches through IHTMLElement6's vtable slot 51.
+func (self *IHTMLElement6) Put_onpause(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specIHTMLElement6_Put_onpause, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onpause dispatches through IHTMLElement6's vtable slot 52.
@@ -19151,11 +22375,27 @@ func (self *IHTMLElement6) Get_onpause() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onplay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onplay dispatches through IHTMLElement6's vtable slot 53.
+func (self *IHTMLElement6) Put_onplay(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIHTMLElement6_Put_onplay, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onplay dispatches through IHTMLElement6's vtable slot 54.
 func (self *IHTMLElement6) Get_onplay() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onplaying = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onplaying dispatches through IHTMLElement6's vtable slot 55.
+func (self *IHTMLElement6) Put_onplaying(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[55], specIHTMLElement6_Put_onplaying, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onplaying dispatches through IHTMLElement6's vtable slot 56.
@@ -19165,11 +22405,27 @@ func (self *IHTMLElement6) Get_onplaying() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onprogress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onprogress dispatches through IHTMLElement6's vtable slot 57.
+func (self *IHTMLElement6) Put_onprogress(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[57], specIHTMLElement6_Put_onprogress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onprogress dispatches through IHTMLElement6's vtable slot 58.
 func (self *IHTMLElement6) Get_onprogress() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onratechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onratechange dispatches through IHTMLElement6's vtable slot 59.
+func (self *IHTMLElement6) Put_onratechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[59], specIHTMLElement6_Put_onratechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onratechange dispatches through IHTMLElement6's vtable slot 60.
@@ -19179,11 +22435,27 @@ func (self *IHTMLElement6) Get_onratechange() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onreset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreset dispatches through IHTMLElement6's vtable slot 61.
+func (self *IHTMLElement6) Put_onreset(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[61], specIHTMLElement6_Put_onreset, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onreset dispatches through IHTMLElement6's vtable slot 62.
 func (self *IHTMLElement6) Get_onreset() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onseeked = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onseeked dispatches through IHTMLElement6's vtable slot 63.
+func (self *IHTMLElement6) Put_onseeked(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIHTMLElement6_Put_onseeked, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onseeked dispatches through IHTMLElement6's vtable slot 64.
@@ -19193,11 +22465,27 @@ func (self *IHTMLElement6) Get_onseeked() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onseeking = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onseeking dispatches through IHTMLElement6's vtable slot 65.
+func (self *IHTMLElement6) Put_onseeking(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[65], specIHTMLElement6_Put_onseeking, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onseeking dispatches through IHTMLElement6's vtable slot 66.
 func (self *IHTMLElement6) Get_onseeking() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselect dispatches through IHTMLElement6's vtable slot 67.
+func (self *IHTMLElement6) Put_onselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[67], specIHTMLElement6_Put_onselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onselect dispatches through IHTMLElement6's vtable slot 68.
@@ -19207,11 +22495,27 @@ func (self *IHTMLElement6) Get_onselect() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onstalled = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstalled dispatches through IHTMLElement6's vtable slot 69.
+func (self *IHTMLElement6) Put_onstalled(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[69], specIHTMLElement6_Put_onstalled, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onstalled dispatches through IHTMLElement6's vtable slot 70.
 func (self *IHTMLElement6) Get_onstalled() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onsubmit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onsubmit dispatches through IHTMLElement6's vtable slot 71.
+func (self *IHTMLElement6) Put_onsubmit(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[71], specIHTMLElement6_Put_onsubmit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onsubmit dispatches through IHTMLElement6's vtable slot 72.
@@ -19221,11 +22525,27 @@ func (self *IHTMLElement6) Get_onsubmit() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onsuspend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onsuspend dispatches through IHTMLElement6's vtable slot 73.
+func (self *IHTMLElement6) Put_onsuspend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[73], specIHTMLElement6_Put_onsuspend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onsuspend dispatches through IHTMLElement6's vtable slot 74.
 func (self *IHTMLElement6) Get_onsuspend() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_ontimeupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ontimeupdate dispatches through IHTMLElement6's vtable slot 75.
+func (self *IHTMLElement6) Put_ontimeupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[75], specIHTMLElement6_Put_ontimeupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ontimeupdate dispatches through IHTMLElement6's vtable slot 76.
@@ -19235,11 +22555,27 @@ func (self *IHTMLElement6) Get_ontimeupdate() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement6_Put_onvolumechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onvolumechange dispatches through IHTMLElement6's vtable slot 77.
+func (self *IHTMLElement6) Put_onvolumechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[77], specIHTMLElement6_Put_onvolumechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onvolumechange dispatches through IHTMLElement6's vtable slot 78.
 func (self *IHTMLElement6) Get_onvolumechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement6_Put_onwaiting = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onwaiting dispatches through IHTMLElement6's vtable slot 79.
+func (self *IHTMLElement6) Put_onwaiting(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[79], specIHTMLElement6_Put_onwaiting, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onwaiting dispatches through IHTMLElement6's vtable slot 80.
@@ -19264,11 +22600,27 @@ type IHTMLElement7 struct {
 // IID_IHTMLElement7 is the interface identifier for IHTMLElement7.
 var IID_IHTMLElement7 = win32.GUID{Data1: 0x305107aa, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLElement7_Put_onmspointerdown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerdown dispatches through IHTMLElement7's vtable slot 7.
+func (self *IHTMLElement7) Put_onmspointerdown(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLElement7_Put_onmspointerdown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointerdown dispatches through IHTMLElement7's vtable slot 8.
 func (self *IHTMLElement7) Get_onmspointerdown() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmspointermove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointermove dispatches through IHTMLElement7's vtable slot 9.
+func (self *IHTMLElement7) Put_onmspointermove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLElement7_Put_onmspointermove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointermove dispatches through IHTMLElement7's vtable slot 10.
@@ -19278,11 +22630,27 @@ func (self *IHTMLElement7) Get_onmspointermove() (systemvariant.VARIANT, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmspointerup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerup dispatches through IHTMLElement7's vtable slot 11.
+func (self *IHTMLElement7) Put_onmspointerup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLElement7_Put_onmspointerup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointerup dispatches through IHTMLElement7's vtable slot 12.
 func (self *IHTMLElement7) Get_onmspointerup() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmspointerover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerover dispatches through IHTMLElement7's vtable slot 13.
+func (self *IHTMLElement7) Put_onmspointerover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLElement7_Put_onmspointerover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointerover dispatches through IHTMLElement7's vtable slot 14.
@@ -19292,11 +22660,27 @@ func (self *IHTMLElement7) Get_onmspointerover() (systemvariant.VARIANT, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmspointerout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerout dispatches through IHTMLElement7's vtable slot 15.
+func (self *IHTMLElement7) Put_onmspointerout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLElement7_Put_onmspointerout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointerout dispatches through IHTMLElement7's vtable slot 16.
 func (self *IHTMLElement7) Get_onmspointerout() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmspointercancel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointercancel dispatches through IHTMLElement7's vtable slot 17.
+func (self *IHTMLElement7) Put_onmspointercancel(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLElement7_Put_onmspointercancel, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointercancel dispatches through IHTMLElement7's vtable slot 18.
@@ -19306,11 +22690,27 @@ func (self *IHTMLElement7) Get_onmspointercancel() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmspointerhover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerhover dispatches through IHTMLElement7's vtable slot 19.
+func (self *IHTMLElement7) Put_onmspointerhover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLElement7_Put_onmspointerhover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointerhover dispatches through IHTMLElement7's vtable slot 20.
 func (self *IHTMLElement7) Get_onmspointerhover() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmslostpointercapture = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmslostpointercapture dispatches through IHTMLElement7's vtable slot 21.
+func (self *IHTMLElement7) Put_onmslostpointercapture(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLElement7_Put_onmslostpointercapture, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmslostpointercapture dispatches through IHTMLElement7's vtable slot 22.
@@ -19320,11 +22720,27 @@ func (self *IHTMLElement7) Get_onmslostpointercapture() (systemvariant.VARIANT, 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmsgotpointercapture = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgotpointercapture dispatches through IHTMLElement7's vtable slot 23.
+func (self *IHTMLElement7) Put_onmsgotpointercapture(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLElement7_Put_onmsgotpointercapture, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgotpointercapture dispatches through IHTMLElement7's vtable slot 24.
 func (self *IHTMLElement7) Get_onmsgotpointercapture() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmsgesturestart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturestart dispatches through IHTMLElement7's vtable slot 25.
+func (self *IHTMLElement7) Put_onmsgesturestart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLElement7_Put_onmsgesturestart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsgesturestart dispatches through IHTMLElement7's vtable slot 26.
@@ -19334,11 +22750,27 @@ func (self *IHTMLElement7) Get_onmsgesturestart() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmsgesturechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturechange dispatches through IHTMLElement7's vtable slot 27.
+func (self *IHTMLElement7) Put_onmsgesturechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLElement7_Put_onmsgesturechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgesturechange dispatches through IHTMLElement7's vtable slot 28.
 func (self *IHTMLElement7) Get_onmsgesturechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmsgestureend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgestureend dispatches through IHTMLElement7's vtable slot 29.
+func (self *IHTMLElement7) Put_onmsgestureend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLElement7_Put_onmsgestureend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsgestureend dispatches through IHTMLElement7's vtable slot 30.
@@ -19348,11 +22780,27 @@ func (self *IHTMLElement7) Get_onmsgestureend() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmsgesturehold = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturehold dispatches through IHTMLElement7's vtable slot 31.
+func (self *IHTMLElement7) Put_onmsgesturehold(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIHTMLElement7_Put_onmsgesturehold, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgesturehold dispatches through IHTMLElement7's vtable slot 32.
 func (self *IHTMLElement7) Get_onmsgesturehold() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmsgesturetap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturetap dispatches through IHTMLElement7's vtable slot 33.
+func (self *IHTMLElement7) Put_onmsgesturetap(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLElement7_Put_onmsgesturetap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsgesturetap dispatches through IHTMLElement7's vtable slot 34.
@@ -19362,11 +22810,27 @@ func (self *IHTMLElement7) Get_onmsgesturetap() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmsgesturedoubletap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturedoubletap dispatches through IHTMLElement7's vtable slot 35.
+func (self *IHTMLElement7) Put_onmsgesturedoubletap(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLElement7_Put_onmsgesturedoubletap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgesturedoubletap dispatches through IHTMLElement7's vtable slot 36.
 func (self *IHTMLElement7) Get_onmsgesturedoubletap() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmsinertiastart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsinertiastart dispatches through IHTMLElement7's vtable slot 37.
+func (self *IHTMLElement7) Put_onmsinertiastart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLElement7_Put_onmsinertiastart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsinertiastart dispatches through IHTMLElement7's vtable slot 38.
@@ -19388,11 +22852,27 @@ func (self *IHTMLElement7) MsReleasePointerCapture(pointerId int32) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmstransitionstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmstransitionstart dispatches through IHTMLElement7's vtable slot 41.
+func (self *IHTMLElement7) Put_onmstransitionstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIHTMLElement7_Put_onmstransitionstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmstransitionstart dispatches through IHTMLElement7's vtable slot 42.
 func (self *IHTMLElement7) Get_onmstransitionstart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmstransitionend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmstransitionend dispatches through IHTMLElement7's vtable slot 43.
+func (self *IHTMLElement7) Put_onmstransitionend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIHTMLElement7_Put_onmstransitionend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmstransitionend dispatches through IHTMLElement7's vtable slot 44.
@@ -19402,11 +22882,27 @@ func (self *IHTMLElement7) Get_onmstransitionend() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmsanimationstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsanimationstart dispatches through IHTMLElement7's vtable slot 45.
+func (self *IHTMLElement7) Put_onmsanimationstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specIHTMLElement7_Put_onmsanimationstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsanimationstart dispatches through IHTMLElement7's vtable slot 46.
 func (self *IHTMLElement7) Get_onmsanimationstart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_onmsanimationend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsanimationend dispatches through IHTMLElement7's vtable slot 47.
+func (self *IHTMLElement7) Put_onmsanimationend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[47], specIHTMLElement7_Put_onmsanimationend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsanimationend dispatches through IHTMLElement7's vtable slot 48.
@@ -19416,11 +22912,27 @@ func (self *IHTMLElement7) Get_onmsanimationend() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmsanimationiteration = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsanimationiteration dispatches through IHTMLElement7's vtable slot 49.
+func (self *IHTMLElement7) Put_onmsanimationiteration(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[49], specIHTMLElement7_Put_onmsanimationiteration, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsanimationiteration dispatches through IHTMLElement7's vtable slot 50.
 func (self *IHTMLElement7) Get_onmsanimationiteration() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_oninvalid = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oninvalid dispatches through IHTMLElement7's vtable slot 51.
+func (self *IHTMLElement7) Put_oninvalid(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[51], specIHTMLElement7_Put_oninvalid, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_oninvalid dispatches through IHTMLElement7's vtable slot 52.
@@ -19443,6 +22955,14 @@ func (self *IHTMLElement7) Get_xmsAcceleratorKey() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_spellcheck = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_spellcheck dispatches through IHTMLElement7's vtable slot 55.
+func (self *IHTMLElement7) Put_spellcheck(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[55], specIHTMLElement7_Put_spellcheck, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_spellcheck dispatches through IHTMLElement7's vtable slot 56.
 func (self *IHTMLElement7) Get_spellcheck() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -19450,11 +22970,27 @@ func (self *IHTMLElement7) Get_spellcheck() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElement7_Put_onmsmanipulationstatechanged = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsmanipulationstatechanged dispatches through IHTMLElement7's vtable slot 57.
+func (self *IHTMLElement7) Put_onmsmanipulationstatechanged(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[57], specIHTMLElement7_Put_onmsmanipulationstatechanged, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsmanipulationstatechanged dispatches through IHTMLElement7's vtable slot 58.
 func (self *IHTMLElement7) Get_onmsmanipulationstatechanged() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElement7_Put_oncuechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncuechange dispatches through IHTMLElement7's vtable slot 59.
+func (self *IHTMLElement7) Put_oncuechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[59], specIHTMLElement7_Put_oncuechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_oncuechange dispatches through IHTMLElement7's vtable slot 60.
@@ -19476,6 +23012,15 @@ var IID_IHTMLElementAppliedStyles = win32.GUID{Data1: 0x305104bd, Data2: 0x98b5,
 func (self *IHTMLElementAppliedStyles) MsGetRulesApplied() (*IRulesAppliedCollection, error) {
 	_ppRulesAppliedCollection := new(*IRulesAppliedCollection)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppRulesAppliedCollection))))
+	return *_ppRulesAppliedCollection, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElementAppliedStyles_MsGetRulesAppliedWithAncestor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// MsGetRulesAppliedWithAncestor dispatches through IHTMLElementAppliedStyles's vtable slot 8.
+func (self *IHTMLElementAppliedStyles) MsGetRulesAppliedWithAncestor(varContext systemvariant.VARIANT) (*IRulesAppliedCollection, error) {
+	_ppRulesAppliedCollection := new(*IRulesAppliedCollection)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIHTMLElementAppliedStyles_MsGetRulesAppliedWithAncestor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varContext)), uintptr(win32.OutParam(unsafe.Pointer(_ppRulesAppliedCollection)))).Tuple()
 	return *_ppRulesAppliedCollection, win32.ErrIfFailed(int32(r1))
 }
 
@@ -19514,6 +23059,24 @@ func (self *IHTMLElementCollection) Get__newEnum() (*systemcom.IUnknown, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLElementCollection_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through IHTMLElementCollection's vtable slot 11.
+func (self *IHTMLElementCollection) Item(name systemvariant.VARIANT, index systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLElementCollection_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&name)), uintptr(unsafe.Pointer(&index)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLElementCollection_Tags = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Tags dispatches through IHTMLElementCollection's vtable slot 12.
+func (self *IHTMLElementCollection) Tags(tagName systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLElementCollection_Tags, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&tagName)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 3050f5ee-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLElementCollection2 struct {
 	systemcom.IDispatch
@@ -19521,6 +23084,15 @@ type IHTMLElementCollection2 struct {
 
 // IID_IHTMLElementCollection2 is the interface identifier for IHTMLElementCollection2.
 var IID_IHTMLElementCollection2 = win32.GUID{Data1: 0x3050f5ee, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLElementCollection2_Urns = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Urns dispatches through IHTMLElementCollection2's vtable slot 7.
+func (self *IHTMLElementCollection2) Urns(urn systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLElementCollection2_Urns, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&urn)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
 
 // IID: 3050f835-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLElementCollection3 struct {
@@ -19805,11 +23377,27 @@ func (self *IHTMLEmbedElement) Get_name() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLEmbedElement_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLEmbedElement's vtable slot 17.
+func (self *IHTMLEmbedElement) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLEmbedElement_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLEmbedElement's vtable slot 18.
 func (self *IHTMLEmbedElement) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLEmbedElement_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLEmbedElement's vtable slot 19.
+func (self *IHTMLEmbedElement) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLEmbedElement_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_height dispatches through IHTMLEmbedElement's vtable slot 20.
@@ -19881,6 +23469,14 @@ func (self *IHTMLEventObj) Get_shiftKey() (foundation.VARIANT_BOOL, error) {
 	_p := new(foundation.VARIANT_BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLEventObj_Put_returnValue = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_returnValue dispatches through IHTMLEventObj's vtable slot 11.
+func (self *IHTMLEventObj) Put_returnValue(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLEventObj_Put_returnValue, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_returnValue dispatches through IHTMLEventObj's vtable slot 12.
@@ -20028,6 +23624,14 @@ type IHTMLEventObj2 struct {
 
 // IID_IHTMLEventObj2 is the interface identifier for IHTMLEventObj2.
 var IID_IHTMLEventObj2 = win32.GUID{Data1: 0x3050f48b, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLEventObj2_SetAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// SetAttribute dispatches through IHTMLEventObj2's vtable slot 7.
+func (self *IHTMLEventObj2) SetAttribute(strAttributeName foundation.BSTR, AttributeValue systemvariant.VARIANT, lFlags int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLEventObj2_SetAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAttributeName)), uintptr(unsafe.Pointer(&AttributeValue)), uintptr(lFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // GetAttribute dispatches through IHTMLEventObj2's vtable slot 8.
 func (self *IHTMLEventObj2) GetAttribute(strAttributeName foundation.BSTR, lFlags int32) (systemvariant.VARIANT, error) {
@@ -20682,6 +24286,14 @@ type IHTMLFontElement struct {
 // IID_IHTMLFontElement is the interface identifier for IHTMLFontElement.
 var IID_IHTMLFontElement = win32.GUID{Data1: 0x3050f1d9, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLFontElement_Put_color = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_color dispatches through IHTMLFontElement's vtable slot 7.
+func (self *IHTMLFontElement) Put_color(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLFontElement_Put_color, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_color dispatches through IHTMLFontElement's vtable slot 8.
 func (self *IHTMLFontElement) Get_color() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -20700,6 +24312,14 @@ func (self *IHTMLFontElement) Get_face() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFontElement_Put_size = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_size dispatches through IHTMLFontElement's vtable slot 11.
+func (self *IHTMLFontElement) Put_size(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLFontElement_Put_size, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_size dispatches through IHTMLFontElement's vtable slot 12.
@@ -20867,11 +24487,27 @@ func (self *IHTMLFormElement) Get_name() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFormElement_Put_onsubmit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onsubmit dispatches through IHTMLFormElement's vtable slot 20.
+func (self *IHTMLFormElement) Put_onsubmit(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIHTMLFormElement_Put_onsubmit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onsubmit dispatches through IHTMLFormElement's vtable slot 21.
 func (self *IHTMLFormElement) Get_onsubmit() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFormElement_Put_onreset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreset dispatches through IHTMLFormElement's vtable slot 22.
+func (self *IHTMLFormElement) Put_onreset(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLFormElement_Put_onreset, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onreset dispatches through IHTMLFormElement's vtable slot 23.
@@ -20913,6 +24549,24 @@ func (self *IHTMLFormElement) Get__newEnum() (*systemcom.IUnknown, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFormElement_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through IHTMLFormElement's vtable slot 29.
+func (self *IHTMLFormElement) Item(name systemvariant.VARIANT, index systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLFormElement_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&name)), uintptr(unsafe.Pointer(&index)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFormElement_Tags = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Tags dispatches through IHTMLFormElement's vtable slot 30.
+func (self *IHTMLFormElement) Tags(tagName systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIHTMLFormElement_Tags, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&tagName)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 3050f4f6-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLFormElement2 struct {
 	systemcom.IDispatch
@@ -20932,6 +24586,15 @@ func (self *IHTMLFormElement2) Get_acceptCharset() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFormElement2_Urns = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Urns dispatches through IHTMLFormElement2's vtable slot 9.
+func (self *IHTMLFormElement2) Urns(urn systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLFormElement2_Urns, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&urn)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3050f836-98b5-11cf-bb82-00aa00bdce0b
@@ -21004,6 +24667,14 @@ func (self *IHTMLFrameBase) Get_name() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameBase_Put_border = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_border dispatches through IHTMLFrameBase's vtable slot 11.
+func (self *IHTMLFrameBase) Put_border(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLFrameBase_Put_border, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_border dispatches through IHTMLFrameBase's vtable slot 12.
 func (self *IHTMLFrameBase) Get_border() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -21024,6 +24695,14 @@ func (self *IHTMLFrameBase) Get_frameBorder() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameBase_Put_frameSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_frameSpacing dispatches through IHTMLFrameBase's vtable slot 15.
+func (self *IHTMLFrameBase) Put_frameSpacing(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLFrameBase_Put_frameSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_frameSpacing dispatches through IHTMLFrameBase's vtable slot 16.
 func (self *IHTMLFrameBase) Get_frameSpacing() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -21031,11 +24710,27 @@ func (self *IHTMLFrameBase) Get_frameSpacing() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameBase_Put_marginWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginWidth dispatches through IHTMLFrameBase's vtable slot 17.
+func (self *IHTMLFrameBase) Put_marginWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLFrameBase_Put_marginWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_marginWidth dispatches through IHTMLFrameBase's vtable slot 18.
 func (self *IHTMLFrameBase) Get_marginWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFrameBase_Put_marginHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginHeight dispatches through IHTMLFrameBase's vtable slot 19.
+func (self *IHTMLFrameBase) Put_marginHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLFrameBase_Put_marginHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_marginHeight dispatches through IHTMLFrameBase's vtable slot 20.
@@ -21086,11 +24781,27 @@ func (self *IHTMLFrameBase2) Get_contentWindow() (*IHTMLWindow2, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameBase2_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLFrameBase2's vtable slot 8.
+func (self *IHTMLFrameBase2) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIHTMLFrameBase2_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onload dispatches through IHTMLFrameBase2's vtable slot 9.
 func (self *IHTMLFrameBase2) Get_onload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFrameBase2_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLFrameBase2's vtable slot 10.
+func (self *IHTMLFrameBase2) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLFrameBase2_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onreadystatechange dispatches through IHTMLFrameBase2's vtable slot 11.
@@ -21149,6 +24860,14 @@ type IHTMLFrameElement struct {
 // IID_IHTMLFrameElement is the interface identifier for IHTMLFrameElement.
 var IID_IHTMLFrameElement = win32.GUID{Data1: 0x3050f313, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLFrameElement_Put_borderColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColor dispatches through IHTMLFrameElement's vtable slot 7.
+func (self *IHTMLFrameElement) Put_borderColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLFrameElement_Put_borderColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderColor dispatches through IHTMLFrameElement's vtable slot 8.
 func (self *IHTMLFrameElement) Get_borderColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -21164,11 +24883,27 @@ type IHTMLFrameElement2 struct {
 // IID_IHTMLFrameElement2 is the interface identifier for IHTMLFrameElement2.
 var IID_IHTMLFrameElement2 = win32.GUID{Data1: 0x3050f7f5, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLFrameElement2_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLFrameElement2's vtable slot 7.
+func (self *IHTMLFrameElement2) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLFrameElement2_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_height dispatches through IHTMLFrameElement2's vtable slot 8.
 func (self *IHTMLFrameElement2) Get_height() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFrameElement2_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLFrameElement2's vtable slot 9.
+func (self *IHTMLFrameElement2) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLFrameElement2_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_width dispatches through IHTMLFrameElement2's vtable slot 10.
@@ -21266,11 +25001,27 @@ func (self *IHTMLFrameSetElement) Get_cols() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameSetElement_Put_border = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_border dispatches through IHTMLFrameSetElement's vtable slot 11.
+func (self *IHTMLFrameSetElement) Put_border(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLFrameSetElement_Put_border, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_border dispatches through IHTMLFrameSetElement's vtable slot 12.
 func (self *IHTMLFrameSetElement) Get_border() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFrameSetElement_Put_borderColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColor dispatches through IHTMLFrameSetElement's vtable slot 13.
+func (self *IHTMLFrameSetElement) Put_borderColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLFrameSetElement_Put_borderColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderColor dispatches through IHTMLFrameSetElement's vtable slot 14.
@@ -21293,6 +25044,14 @@ func (self *IHTMLFrameSetElement) Get_frameBorder() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameSetElement_Put_frameSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_frameSpacing dispatches through IHTMLFrameSetElement's vtable slot 17.
+func (self *IHTMLFrameSetElement) Put_frameSpacing(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLFrameSetElement_Put_frameSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_frameSpacing dispatches through IHTMLFrameSetElement's vtable slot 18.
 func (self *IHTMLFrameSetElement) Get_frameSpacing() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -21313,6 +25072,14 @@ func (self *IHTMLFrameSetElement) Get_name() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameSetElement_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLFrameSetElement's vtable slot 21.
+func (self *IHTMLFrameSetElement) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLFrameSetElement_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onload dispatches through IHTMLFrameSetElement's vtable slot 22.
 func (self *IHTMLFrameSetElement) Get_onload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -21320,11 +25087,27 @@ func (self *IHTMLFrameSetElement) Get_onload() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameSetElement_Put_onunload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onunload dispatches through IHTMLFrameSetElement's vtable slot 23.
+func (self *IHTMLFrameSetElement) Put_onunload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLFrameSetElement_Put_onunload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onunload dispatches through IHTMLFrameSetElement's vtable slot 24.
 func (self *IHTMLFrameSetElement) Get_onunload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFrameSetElement_Put_onbeforeunload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeunload dispatches through IHTMLFrameSetElement's vtable slot 25.
+func (self *IHTMLFrameSetElement) Put_onbeforeunload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLFrameSetElement_Put_onbeforeunload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onbeforeunload dispatches through IHTMLFrameSetElement's vtable slot 26.
@@ -21342,11 +25125,27 @@ type IHTMLFrameSetElement2 struct {
 // IID_IHTMLFrameSetElement2 is the interface identifier for IHTMLFrameSetElement2.
 var IID_IHTMLFrameSetElement2 = win32.GUID{Data1: 0x3050f5c6, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLFrameSetElement2_Put_onbeforeprint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeprint dispatches through IHTMLFrameSetElement2's vtable slot 7.
+func (self *IHTMLFrameSetElement2) Put_onbeforeprint(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLFrameSetElement2_Put_onbeforeprint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforeprint dispatches through IHTMLFrameSetElement2's vtable slot 8.
 func (self *IHTMLFrameSetElement2) Get_onbeforeprint() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFrameSetElement2_Put_onafterprint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onafterprint dispatches through IHTMLFrameSetElement2's vtable slot 9.
+func (self *IHTMLFrameSetElement2) Put_onafterprint(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLFrameSetElement2_Put_onafterprint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onafterprint dispatches through IHTMLFrameSetElement2's vtable slot 10.
@@ -21364,11 +25163,27 @@ type IHTMLFrameSetElement3 struct {
 // IID_IHTMLFrameSetElement3 is the interface identifier for IHTMLFrameSetElement3.
 var IID_IHTMLFrameSetElement3 = win32.GUID{Data1: 0x30510796, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLFrameSetElement3_Put_onhashchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onhashchange dispatches through IHTMLFrameSetElement3's vtable slot 7.
+func (self *IHTMLFrameSetElement3) Put_onhashchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLFrameSetElement3_Put_onhashchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onhashchange dispatches through IHTMLFrameSetElement3's vtable slot 8.
 func (self *IHTMLFrameSetElement3) Get_onhashchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFrameSetElement3_Put_onmessage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmessage dispatches through IHTMLFrameSetElement3's vtable slot 9.
+func (self *IHTMLFrameSetElement3) Put_onmessage(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLFrameSetElement3_Put_onmessage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmessage dispatches through IHTMLFrameSetElement3's vtable slot 10.
@@ -21378,6 +25193,14 @@ func (self *IHTMLFrameSetElement3) Get_onmessage() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameSetElement3_Put_onoffline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onoffline dispatches through IHTMLFrameSetElement3's vtable slot 11.
+func (self *IHTMLFrameSetElement3) Put_onoffline(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLFrameSetElement3_Put_onoffline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onoffline dispatches through IHTMLFrameSetElement3's vtable slot 12.
 func (self *IHTMLFrameSetElement3) Get_onoffline() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -21385,11 +25208,27 @@ func (self *IHTMLFrameSetElement3) Get_onoffline() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLFrameSetElement3_Put_ononline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ononline dispatches through IHTMLFrameSetElement3's vtable slot 13.
+func (self *IHTMLFrameSetElement3) Put_ononline(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLFrameSetElement3_Put_ononline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ononline dispatches through IHTMLFrameSetElement3's vtable slot 14.
 func (self *IHTMLFrameSetElement3) Get_ononline() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLFrameSetElement3_Put_onstorage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstorage dispatches through IHTMLFrameSetElement3's vtable slot 15.
+func (self *IHTMLFrameSetElement3) Put_onstorage(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLFrameSetElement3_Put_onstorage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onstorage dispatches through IHTMLFrameSetElement3's vtable slot 16.
@@ -21464,6 +25303,14 @@ func (self *IHTMLHRElement) Get_align() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLHRElement_Put_color = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_color dispatches through IHTMLHRElement's vtable slot 9.
+func (self *IHTMLHRElement) Put_color(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLHRElement_Put_color, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_color dispatches through IHTMLHRElement's vtable slot 10.
 func (self *IHTMLHRElement) Get_color() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -21484,11 +25331,27 @@ func (self *IHTMLHRElement) Get_noShade() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLHRElement_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLHRElement's vtable slot 13.
+func (self *IHTMLHRElement) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLHRElement_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLHRElement's vtable slot 14.
 func (self *IHTMLHRElement) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLHRElement_Put_size = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_size dispatches through IHTMLHRElement's vtable slot 15.
+func (self *IHTMLHRElement) Put_size(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLHRElement_Put_size, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_size dispatches through IHTMLHRElement's vtable slot 16.
@@ -21637,11 +25500,27 @@ type IHTMLIFrameElement2 struct {
 // IID_IHTMLIFrameElement2 is the interface identifier for IHTMLIFrameElement2.
 var IID_IHTMLIFrameElement2 = win32.GUID{Data1: 0x3050f4e6, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLIFrameElement2_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLIFrameElement2's vtable slot 7.
+func (self *IHTMLIFrameElement2) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLIFrameElement2_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_height dispatches through IHTMLIFrameElement2's vtable slot 8.
 func (self *IHTMLIFrameElement2) Get_height() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLIFrameElement2_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLIFrameElement2's vtable slot 9.
+func (self *IHTMLIFrameElement2) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLIFrameElement2_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_width dispatches through IHTMLIFrameElement2's vtable slot 10.
@@ -21742,6 +25621,15 @@ type IHTMLImageElementFactory struct {
 // IID_IHTMLImageElementFactory is the interface identifier for IHTMLImageElementFactory.
 var IID_IHTMLImageElementFactory = win32.GUID{Data1: 0x3050f38e, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLImageElementFactory_Create = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Create dispatches through IHTMLImageElementFactory's vtable slot 7.
+func (self *IHTMLImageElementFactory) Create(width systemvariant.VARIANT, height systemvariant.VARIANT) (*IHTMLImgElement, error) {
+	___MIDL__IHTMLImageElementFactory0000 := new(*IHTMLImgElement)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLImageElementFactory_Create, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&width)), uintptr(unsafe.Pointer(&height)), uintptr(win32.OutParam(unsafe.Pointer(___MIDL__IHTMLImageElementFactory0000)))).Tuple()
+	return *___MIDL__IHTMLImageElementFactory0000, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 3050f240-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLImgElement struct {
 	systemcom.IDispatch
@@ -21830,6 +25718,14 @@ func (self *IHTMLImgElement) Get_nameProp() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLImgElement_Put_border = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_border dispatches through IHTMLImgElement's vtable slot 19.
+func (self *IHTMLImgElement) Put_border(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLImgElement_Put_border, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_border dispatches through IHTMLImgElement's vtable slot 20.
@@ -21944,6 +25840,14 @@ func (self *IHTMLImgElement) Get_complete() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLImgElement_Put_loop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_loop dispatches through IHTMLImgElement's vtable slot 37.
+func (self *IHTMLImgElement) Put_loop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLImgElement_Put_loop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_loop dispatches through IHTMLImgElement's vtable slot 38.
 func (self *IHTMLImgElement) Get_loop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -21964,6 +25868,14 @@ func (self *IHTMLImgElement) Get_align() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLImgElement_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLImgElement's vtable slot 41.
+func (self *IHTMLImgElement) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIHTMLImgElement_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onload dispatches through IHTMLImgElement's vtable slot 42.
 func (self *IHTMLImgElement) Get_onload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -21971,11 +25883,27 @@ func (self *IHTMLImgElement) Get_onload() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLImgElement_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLImgElement's vtable slot 43.
+func (self *IHTMLImgElement) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[43], specIHTMLImgElement_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onerror dispatches through IHTMLImgElement's vtable slot 44.
 func (self *IHTMLImgElement) Get_onerror() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLImgElement_Put_onabort = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onabort dispatches through IHTMLImgElement's vtable slot 45.
+func (self *IHTMLImgElement) Put_onabort(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specIHTMLImgElement_Put_onabort, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onabort dispatches through IHTMLImgElement's vtable slot 46.
@@ -22181,6 +26109,14 @@ func (self *IHTMLInputButtonElement) Get_name() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputButtonElement_Put_status = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_status dispatches through IHTMLInputButtonElement's vtable slot 12.
+func (self *IHTMLInputButtonElement) Put_status(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLInputButtonElement_Put_status, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_status dispatches through IHTMLInputButtonElement's vtable slot 13.
 func (self *IHTMLInputButtonElement) Get_status() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -22327,11 +26263,27 @@ func (self *IHTMLInputElement) Select() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputElement_Put_onchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchange dispatches through IHTMLInputElement's vtable slot 23.
+func (self *IHTMLInputElement) Put_onchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLInputElement_Put_onchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onchange dispatches through IHTMLInputElement's vtable slot 24.
 func (self *IHTMLInputElement) Get_onchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLInputElement_Put_onselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselect dispatches through IHTMLInputElement's vtable slot 25.
+func (self *IHTMLInputElement) Put_onselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLInputElement_Put_onselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onselect dispatches through IHTMLInputElement's vtable slot 26.
@@ -22411,6 +26363,14 @@ func (self *IHTMLInputElement) Get_checked() (foundation.VARIANT_BOOL, error) {
 	_p := new(foundation.VARIANT_BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLInputElement_Put_border = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_border dispatches through IHTMLInputElement's vtable slot 38.
+func (self *IHTMLInputElement) Put_border(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIHTMLInputElement_Put_border, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_border dispatches through IHTMLInputElement's vtable slot 39.
@@ -22525,6 +26485,14 @@ func (self *IHTMLInputElement) Get_complete() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputElement_Put_loop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_loop dispatches through IHTMLInputElement's vtable slot 56.
+func (self *IHTMLInputElement) Put_loop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[56], specIHTMLInputElement_Put_loop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_loop dispatches through IHTMLInputElement's vtable slot 57.
 func (self *IHTMLInputElement) Get_loop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -22545,6 +26513,14 @@ func (self *IHTMLInputElement) Get_align() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputElement_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLInputElement's vtable slot 60.
+func (self *IHTMLInputElement) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[60], specIHTMLInputElement_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onload dispatches through IHTMLInputElement's vtable slot 61.
 func (self *IHTMLInputElement) Get_onload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -22552,11 +26528,27 @@ func (self *IHTMLInputElement) Get_onload() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputElement_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLInputElement's vtable slot 62.
+func (self *IHTMLInputElement) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[62], specIHTMLInputElement_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onerror dispatches through IHTMLInputElement's vtable slot 63.
 func (self *IHTMLInputElement) Get_onerror() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLInputElement_Put_onabort = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onabort dispatches through IHTMLInputElement's vtable slot 64.
+func (self *IHTMLInputElement) Put_onabort(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[64], specIHTMLInputElement_Put_onabort, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onabort dispatches through IHTMLInputElement's vtable slot 65.
@@ -22727,6 +26719,14 @@ func (self *IHTMLInputFileElement) Get_name() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputFileElement_Put_status = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_status dispatches through IHTMLInputFileElement's vtable slot 10.
+func (self *IHTMLInputFileElement) Put_status(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLInputFileElement_Put_status, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_status dispatches through IHTMLInputFileElement's vtable slot 11.
 func (self *IHTMLInputFileElement) Get_status() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -22786,11 +26786,27 @@ func (self *IHTMLInputFileElement) Select() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputFileElement_Put_onchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchange dispatches through IHTMLInputFileElement's vtable slot 20.
+func (self *IHTMLInputFileElement) Put_onchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIHTMLInputFileElement_Put_onchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onchange dispatches through IHTMLInputFileElement's vtable slot 21.
 func (self *IHTMLInputFileElement) Get_onchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLInputFileElement_Put_onselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselect dispatches through IHTMLInputFileElement's vtable slot 22.
+func (self *IHTMLInputFileElement) Put_onselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLInputFileElement_Put_onselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onselect dispatches through IHTMLInputFileElement's vtable slot 23.
@@ -22854,6 +26870,14 @@ func (self *IHTMLInputHiddenElement) Get_name() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputHiddenElement_Put_status = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_status dispatches through IHTMLInputHiddenElement's vtable slot 12.
+func (self *IHTMLInputHiddenElement) Put_status(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLInputHiddenElement_Put_status, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_status dispatches through IHTMLInputHiddenElement's vtable slot 13.
 func (self *IHTMLInputHiddenElement) Get_status() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -22914,6 +26938,14 @@ func (self *IHTMLInputImage) Get_disabled() (foundation.VARIANT_BOOL, error) {
 	_p := new(foundation.VARIANT_BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLInputImage_Put_border = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_border dispatches through IHTMLInputImage's vtable slot 10.
+func (self *IHTMLInputImage) Put_border(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLInputImage_Put_border, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_border dispatches through IHTMLInputImage's vtable slot 11.
@@ -23028,6 +27060,14 @@ func (self *IHTMLInputImage) Get_complete() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputImage_Put_loop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_loop dispatches through IHTMLInputImage's vtable slot 28.
+func (self *IHTMLInputImage) Put_loop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIHTMLInputImage_Put_loop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_loop dispatches through IHTMLInputImage's vtable slot 29.
 func (self *IHTMLInputImage) Get_loop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -23048,6 +27088,14 @@ func (self *IHTMLInputImage) Get_align() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputImage_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLInputImage's vtable slot 32.
+func (self *IHTMLInputImage) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIHTMLInputImage_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onload dispatches through IHTMLInputImage's vtable slot 33.
 func (self *IHTMLInputImage) Get_onload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -23055,11 +27103,27 @@ func (self *IHTMLInputImage) Get_onload() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputImage_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLInputImage's vtable slot 34.
+func (self *IHTMLInputImage) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIHTMLInputImage_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onerror dispatches through IHTMLInputImage's vtable slot 35.
 func (self *IHTMLInputImage) Get_onerror() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLInputImage_Put_onabort = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onabort dispatches through IHTMLInputImage's vtable slot 36.
+func (self *IHTMLInputImage) Put_onabort(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIHTMLInputImage_Put_onabort, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onabort dispatches through IHTMLInputImage's vtable slot 37.
@@ -23227,6 +27291,14 @@ func (self *IHTMLInputRangeElement) Get_step() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputRangeElement_Put_valueAsNumber = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_valueAsNumber dispatches through IHTMLInputRangeElement's vtable slot 22.
+func (self *IHTMLInputRangeElement) Put_valueAsNumber(v float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLInputRangeElement_Put_valueAsNumber, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_valueAsNumber dispatches through IHTMLInputRangeElement's vtable slot 23.
 func (self *IHTMLInputRangeElement) Get_valueAsNumber() (float64, error) {
 	_p := new(float64)
@@ -23285,6 +27357,14 @@ func (self *IHTMLInputTextElement) Get_name() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLInputTextElement_Put_status = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_status dispatches through IHTMLInputTextElement's vtable slot 12.
+func (self *IHTMLInputTextElement) Put_status(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLInputTextElement_Put_status, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_status dispatches through IHTMLInputTextElement's vtable slot 13.
@@ -23359,11 +27439,27 @@ func (self *IHTMLInputTextElement) Select() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLInputTextElement_Put_onchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchange dispatches through IHTMLInputTextElement's vtable slot 24.
+func (self *IHTMLInputTextElement) Put_onchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIHTMLInputTextElement_Put_onchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onchange dispatches through IHTMLInputTextElement's vtable slot 25.
 func (self *IHTMLInputTextElement) Get_onchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLInputTextElement_Put_onselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselect dispatches through IHTMLInputTextElement's vtable slot 26.
+func (self *IHTMLInputTextElement) Put_onselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIHTMLInputTextElement_Put_onselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onselect dispatches through IHTMLInputTextElement's vtable slot 27.
@@ -23668,6 +27764,14 @@ func (self *IHTMLLinkElement) Get_readyState() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLLinkElement_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLLinkElement's vtable slot 16.
+func (self *IHTMLLinkElement) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLLinkElement_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onreadystatechange dispatches through IHTMLLinkElement's vtable slot 17.
 func (self *IHTMLLinkElement) Get_onreadystatechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -23675,11 +27779,27 @@ func (self *IHTMLLinkElement) Get_onreadystatechange() (systemvariant.VARIANT, e
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLLinkElement_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLLinkElement's vtable slot 18.
+func (self *IHTMLLinkElement) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIHTMLLinkElement_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onload dispatches through IHTMLLinkElement's vtable slot 19.
 func (self *IHTMLLinkElement) Get_onload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLLinkElement_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLLinkElement's vtable slot 20.
+func (self *IHTMLLinkElement) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIHTMLLinkElement_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onerror dispatches through IHTMLLinkElement's vtable slot 21.
@@ -24158,6 +28278,14 @@ type IHTMLMarqueeElement struct {
 // IID_IHTMLMarqueeElement is the interface identifier for IHTMLMarqueeElement.
 var IID_IHTMLMarqueeElement = win32.GUID{Data1: 0x3050f2b5, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLMarqueeElement_Put_bgColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bgColor dispatches through IHTMLMarqueeElement's vtable slot 7.
+func (self *IHTMLMarqueeElement) Put_bgColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLMarqueeElement_Put_bgColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_bgColor dispatches through IHTMLMarqueeElement's vtable slot 8.
 func (self *IHTMLMarqueeElement) Get_bgColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -24256,11 +28384,27 @@ func (self *IHTMLMarqueeElement) Get_hspace() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLMarqueeElement_Put_onfinish = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfinish dispatches through IHTMLMarqueeElement's vtable slot 23.
+func (self *IHTMLMarqueeElement) Put_onfinish(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLMarqueeElement_Put_onfinish, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onfinish dispatches through IHTMLMarqueeElement's vtable slot 24.
 func (self *IHTMLMarqueeElement) Get_onfinish() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLMarqueeElement_Put_onstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstart dispatches through IHTMLMarqueeElement's vtable slot 25.
+func (self *IHTMLMarqueeElement) Put_onstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLMarqueeElement_Put_onstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onstart dispatches through IHTMLMarqueeElement's vtable slot 26.
@@ -24270,6 +28414,14 @@ func (self *IHTMLMarqueeElement) Get_onstart() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLMarqueeElement_Put_onbounce = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbounce dispatches through IHTMLMarqueeElement's vtable slot 27.
+func (self *IHTMLMarqueeElement) Put_onbounce(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLMarqueeElement_Put_onbounce, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbounce dispatches through IHTMLMarqueeElement's vtable slot 28.
 func (self *IHTMLMarqueeElement) Get_onbounce() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -24277,11 +28429,27 @@ func (self *IHTMLMarqueeElement) Get_onbounce() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLMarqueeElement_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLMarqueeElement's vtable slot 29.
+func (self *IHTMLMarqueeElement) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLMarqueeElement_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLMarqueeElement's vtable slot 30.
 func (self *IHTMLMarqueeElement) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLMarqueeElement_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLMarqueeElement's vtable slot 31.
+func (self *IHTMLMarqueeElement) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIHTMLMarqueeElement_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_height dispatches through IHTMLMarqueeElement's vtable slot 32.
@@ -24398,6 +28566,14 @@ func (self *IHTMLMediaElement) Get_seeking() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLMediaElement_Put_currentTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_currentTime dispatches through IHTMLMediaElement's vtable slot 18.
+func (self *IHTMLMediaElement) Put_currentTime(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIHTMLMediaElement_Put_currentTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_currentTime dispatches through IHTMLMediaElement's vtable slot 19.
 func (self *IHTMLMediaElement) Get_currentTime() (float32, error) {
 	_p := new(float32)
@@ -24426,11 +28602,27 @@ func (self *IHTMLMediaElement) Get_paused() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLMediaElement_Put_defaultPlaybackRate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_defaultPlaybackRate dispatches through IHTMLMediaElement's vtable slot 23.
+func (self *IHTMLMediaElement) Put_defaultPlaybackRate(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLMediaElement_Put_defaultPlaybackRate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_defaultPlaybackRate dispatches through IHTMLMediaElement's vtable slot 24.
 func (self *IHTMLMediaElement) Get_defaultPlaybackRate() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLMediaElement_Put_playbackRate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_playbackRate dispatches through IHTMLMediaElement's vtable slot 25.
+func (self *IHTMLMediaElement) Put_playbackRate(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLMediaElement_Put_playbackRate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_playbackRate dispatches through IHTMLMediaElement's vtable slot 26.
@@ -24512,6 +28704,14 @@ func (self *IHTMLMediaElement) Get_controls() (foundation.VARIANT_BOOL, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLMediaElement_Put_volume = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_volume dispatches through IHTMLMediaElement's vtable slot 38.
+func (self *IHTMLMediaElement) Put_volume(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIHTMLMediaElement_Put_volume, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_volume dispatches through IHTMLMediaElement's vtable slot 39.
 func (self *IHTMLMediaElement) Get_volume() (float32, error) {
 	_p := new(float32)
@@ -24553,6 +28753,14 @@ type IHTMLMediaElement2 struct {
 // IID_IHTMLMediaElement2 is the interface identifier for IHTMLMediaElement2.
 var IID_IHTMLMediaElement2 = win32.GUID{Data1: 0x30510809, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLMediaElement2_Put_currentTimeDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_currentTimeDouble dispatches through IHTMLMediaElement2's vtable slot 7.
+func (self *IHTMLMediaElement2) Put_currentTimeDouble(v float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLMediaElement2_Put_currentTimeDouble, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_currentTimeDouble dispatches through IHTMLMediaElement2's vtable slot 8.
 func (self *IHTMLMediaElement2) Get_currentTimeDouble() (float64, error) {
 	_p := new(float64)
@@ -24574,6 +28782,14 @@ func (self *IHTMLMediaElement2) Get_durationDouble() (float64, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLMediaElement2_Put_defaultPlaybackRateDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_defaultPlaybackRateDouble dispatches through IHTMLMediaElement2's vtable slot 11.
+func (self *IHTMLMediaElement2) Put_defaultPlaybackRateDouble(v float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLMediaElement2_Put_defaultPlaybackRateDouble, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_defaultPlaybackRateDouble dispatches through IHTMLMediaElement2's vtable slot 12.
 func (self *IHTMLMediaElement2) Get_defaultPlaybackRateDouble() (float64, error) {
 	_p := new(float64)
@@ -24581,11 +28797,27 @@ func (self *IHTMLMediaElement2) Get_defaultPlaybackRateDouble() (float64, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLMediaElement2_Put_playbackRateDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_playbackRateDouble dispatches through IHTMLMediaElement2's vtable slot 13.
+func (self *IHTMLMediaElement2) Put_playbackRateDouble(v float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLMediaElement2_Put_playbackRateDouble, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_playbackRateDouble dispatches through IHTMLMediaElement2's vtable slot 14.
 func (self *IHTMLMediaElement2) Get_playbackRateDouble() (float64, error) {
 	_p := new(float64)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLMediaElement2_Put_volumeDouble = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float64}}
+
+// Put_volumeDouble dispatches through IHTMLMediaElement2's vtable slot 15.
+func (self *IHTMLMediaElement2) Put_volumeDouble(v float64) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLMediaElement2_Put_volumeDouble, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float64bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_volumeDouble dispatches through IHTMLMediaElement2's vtable slot 16.
@@ -24812,6 +29044,14 @@ func (self *IHTMLNamespace) Get_readyState() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLNamespace_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLNamespace's vtable slot 11.
+func (self *IHTMLNamespace) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLNamespace_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onreadystatechange dispatches through IHTMLNamespace's vtable slot 12.
 func (self *IHTMLNamespace) Get_onreadystatechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -24851,6 +29091,24 @@ func (self *IHTMLNamespaceCollection) Get_length() (int32, error) {
 	_p := new(int32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLNamespaceCollection_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through IHTMLNamespaceCollection's vtable slot 8.
+func (self *IHTMLNamespaceCollection) Item(index systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_ppNamespace := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specIHTMLNamespaceCollection_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&index)), uintptr(win32.OutParam(unsafe.Pointer(_ppNamespace)))).Tuple()
+	return *_ppNamespace, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLNamespaceCollection_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Add dispatches through IHTMLNamespaceCollection's vtable slot 9.
+func (self *IHTMLNamespaceCollection) Add(bstrNamespace foundation.BSTR, bstrUrn foundation.BSTR, implementationUrl systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_ppNamespace := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLNamespaceCollection_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNamespace)), uintptr(unsafe.Pointer(bstrUrn)), uintptr(unsafe.Pointer(&implementationUrl)), uintptr(win32.OutParam(unsafe.Pointer(_ppNamespace)))).Tuple()
+	return *_ppNamespace, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3050f207-98b5-11cf-bb82-00aa00bdce0b
@@ -25095,11 +29353,27 @@ func (self *IHTMLObjectElement) Get_form() (*IHTMLFormElement, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLObjectElement_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLObjectElement's vtable slot 26.
+func (self *IHTMLObjectElement) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIHTMLObjectElement_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLObjectElement's vtable slot 27.
 func (self *IHTMLObjectElement) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLObjectElement_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLObjectElement's vtable slot 28.
+func (self *IHTMLObjectElement) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIHTMLObjectElement_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_height dispatches through IHTMLObjectElement's vtable slot 29.
@@ -25116,11 +29390,27 @@ func (self *IHTMLObjectElement) Get_readyState() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLObjectElement_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLObjectElement's vtable slot 31.
+func (self *IHTMLObjectElement) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIHTMLObjectElement_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onreadystatechange dispatches through IHTMLObjectElement's vtable slot 32.
 func (self *IHTMLObjectElement) Get_onreadystatechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLObjectElement_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLObjectElement's vtable slot 33.
+func (self *IHTMLObjectElement) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLObjectElement_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onerror dispatches through IHTMLObjectElement's vtable slot 34.
@@ -25270,6 +29560,14 @@ func (self *IHTMLObjectElement3) Get_standby() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLObjectElement3_Put_border = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_border dispatches through IHTMLObjectElement3's vtable slot 15.
+func (self *IHTMLObjectElement3) Put_border(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLObjectElement3_Put_border, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_border dispatches through IHTMLObjectElement3's vtable slot 16.
 func (self *IHTMLObjectElement3) Get_border() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -25360,9 +29658,26 @@ type IHTMLOpsProfile struct {
 // IID_IHTMLOpsProfile is the interface identifier for IHTMLOpsProfile.
 var IID_IHTMLOpsProfile = win32.GUID{Data1: 0x3050f401, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLOpsProfile_AddRequest = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// AddRequest dispatches through IHTMLOpsProfile's vtable slot 7.
+func (self *IHTMLOpsProfile) AddRequest(name foundation.BSTR, reserved systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_success := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLOpsProfile_AddRequest, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&reserved)), uintptr(win32.OutParam(unsafe.Pointer(_success)))).Tuple()
+	return *_success, win32.ErrIfFailed(int32(r1))
+}
+
 // ClearRequest dispatches through IHTMLOpsProfile's vtable slot 8.
 func (self *IHTMLOpsProfile) ClearRequest() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLOpsProfile_DoRequest = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DoRequest dispatches through IHTMLOpsProfile's vtable slot 9.
+func (self *IHTMLOpsProfile) DoRequest(usage systemvariant.VARIANT, fname systemvariant.VARIANT, domain systemvariant.VARIANT, path systemvariant.VARIANT, expire systemvariant.VARIANT, reserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLOpsProfile_DoRequest, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&usage)), uintptr(unsafe.Pointer(&fname)), uintptr(unsafe.Pointer(&domain)), uintptr(unsafe.Pointer(&path)), uintptr(unsafe.Pointer(&expire)), uintptr(unsafe.Pointer(&reserved))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -25373,11 +29688,37 @@ func (self *IHTMLOpsProfile) GetAttribute(name foundation.BSTR) (foundation.BSTR
 	return *_value, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLOpsProfile_SetAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// SetAttribute dispatches through IHTMLOpsProfile's vtable slot 11.
+func (self *IHTMLOpsProfile) SetAttribute(name foundation.BSTR, value foundation.BSTR, prefs systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_success := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLOpsProfile_SetAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(&prefs)), uintptr(win32.OutParam(unsafe.Pointer(_success)))).Tuple()
+	return *_success, win32.ErrIfFailed(int32(r1))
+}
+
 // CommitChanges dispatches through IHTMLOpsProfile's vtable slot 12.
 func (self *IHTMLOpsProfile) CommitChanges() (foundation.VARIANT_BOOL, error) {
 	_success := new(foundation.VARIANT_BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_success))))
 	return *_success, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLOpsProfile_AddReadRequest = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// AddReadRequest dispatches through IHTMLOpsProfile's vtable slot 13.
+func (self *IHTMLOpsProfile) AddReadRequest(name foundation.BSTR, reserved systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_success := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLOpsProfile_AddReadRequest, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&reserved)), uintptr(win32.OutParam(unsafe.Pointer(_success)))).Tuple()
+	return *_success, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLOpsProfile_DoReadRequest = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// DoReadRequest dispatches through IHTMLOpsProfile's vtable slot 14.
+func (self *IHTMLOpsProfile) DoReadRequest(usage systemvariant.VARIANT, fname systemvariant.VARIANT, domain systemvariant.VARIANT, path systemvariant.VARIANT, expire systemvariant.VARIANT, reserved systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLOpsProfile_DoReadRequest, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&usage)), uintptr(unsafe.Pointer(&fname)), uintptr(unsafe.Pointer(&domain)), uintptr(unsafe.Pointer(&path)), uintptr(unsafe.Pointer(&expire)), uintptr(unsafe.Pointer(&reserved))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoWriteRequest dispatches through IHTMLOpsProfile's vtable slot 15.
@@ -25452,6 +29793,14 @@ func (self *IHTMLOptionButtonElement) Get_defaultChecked() (foundation.VARIANT_B
 	_p := new(foundation.VARIANT_BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLOptionButtonElement_Put_onchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchange dispatches through IHTMLOptionButtonElement's vtable slot 16.
+func (self *IHTMLOptionButtonElement) Put_onchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLOptionButtonElement_Put_onchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onchange dispatches through IHTMLOptionButtonElement's vtable slot 17.
@@ -25637,6 +29986,15 @@ type IHTMLOptionElementFactory struct {
 // IID_IHTMLOptionElementFactory is the interface identifier for IHTMLOptionElementFactory.
 var IID_IHTMLOptionElementFactory = win32.GUID{Data1: 0x3050f38c, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLOptionElementFactory_Create = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Create dispatches through IHTMLOptionElementFactory's vtable slot 7.
+func (self *IHTMLOptionElementFactory) Create(text systemvariant.VARIANT, value systemvariant.VARIANT, defaultselected systemvariant.VARIANT, selected systemvariant.VARIANT) (*IHTMLOptionElement, error) {
+	___MIDL__IHTMLOptionElementFactory0000 := new(*IHTMLOptionElement)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLOptionElementFactory_Create, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&text)), uintptr(unsafe.Pointer(&value)), uintptr(unsafe.Pointer(&defaultselected)), uintptr(unsafe.Pointer(&selected)), uintptr(win32.OutParam(unsafe.Pointer(___MIDL__IHTMLOptionElementFactory0000)))).Tuple()
+	return *___MIDL__IHTMLOptionElementFactory0000, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 3050f378-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLOptionsHolder struct {
 	systemcom.IDispatch
@@ -25657,6 +30015,14 @@ func (self *IHTMLOptionsHolder) Get_fonts() (*IHTMLFontNamesCollection, error) {
 	_p := new(*IHTMLFontNamesCollection)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLOptionsHolder_Put_execArg = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_execArg dispatches through IHTMLOptionsHolder's vtable slot 9.
+func (self *IHTMLOptionsHolder) Put_execArg(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLOptionsHolder_Put_execArg, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_execArg dispatches through IHTMLOptionsHolder's vtable slot 10.
@@ -25771,6 +30137,33 @@ func (self *IHTMLOptionsHolder) Sizes(fontName foundation.BSTR) (*IHTMLFontSizes
 	return *_pSizesCollection, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLOptionsHolder_Openfiledlg = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Openfiledlg dispatches through IHTMLOptionsHolder's vtable slot 27.
+func (self *IHTMLOptionsHolder) Openfiledlg(initFile systemvariant.VARIANT, initDir systemvariant.VARIANT, filter systemvariant.VARIANT, title systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pathName := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLOptionsHolder_Openfiledlg, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&initFile)), uintptr(unsafe.Pointer(&initDir)), uintptr(unsafe.Pointer(&filter)), uintptr(unsafe.Pointer(&title)), uintptr(win32.OutParam(unsafe.Pointer(_pathName)))).Tuple()
+	return *_pathName, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLOptionsHolder_Savefiledlg = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Savefiledlg dispatches through IHTMLOptionsHolder's vtable slot 28.
+func (self *IHTMLOptionsHolder) Savefiledlg(initFile systemvariant.VARIANT, initDir systemvariant.VARIANT, filter systemvariant.VARIANT, title systemvariant.VARIANT) (foundation.BSTR, error) {
+	_pathName := new(foundation.BSTR)
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIHTMLOptionsHolder_Savefiledlg, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&initFile)), uintptr(unsafe.Pointer(&initDir)), uintptr(unsafe.Pointer(&filter)), uintptr(unsafe.Pointer(&title)), uintptr(win32.OutParam(unsafe.Pointer(_pathName)))).Tuple()
+	return *_pathName, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLOptionsHolder_Choosecolordlg = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Choosecolordlg dispatches through IHTMLOptionsHolder's vtable slot 29.
+func (self *IHTMLOptionsHolder) Choosecolordlg(initColor systemvariant.VARIANT) (int32, error) {
+	_rgbColor := new(int32)
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLOptionsHolder_Choosecolordlg, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&initColor)), uintptr(win32.OutParam(unsafe.Pointer(_rgbColor)))).Tuple()
+	return *_rgbColor, win32.ErrIfFailed(int32(r1))
+}
+
 // ShowSecurityInfo dispatches through IHTMLOptionsHolder's vtable slot 30.
 func (self *IHTMLOptionsHolder) ShowSecurityInfo() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)))
@@ -25856,6 +30249,14 @@ type IHTMLPainter struct {
 // IID_IHTMLPainter is the interface identifier for IHTMLPainter.
 var IID_IHTMLPainter = win32.GUID{Data1: 0x3050f6a6, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLPainter_Draw = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// Draw dispatches through IHTMLPainter's vtable slot 3.
+func (self *IHTMLPainter) Draw(rcBounds foundation.RECT, rcUpdate foundation.RECT, lDrawFlags int32, hdc graphicsgdi.HDC, pvDrawObject unsafe.Pointer) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIHTMLPainter_Draw, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&rcBounds)), uintptr(unsafe.Pointer(&rcUpdate)), uintptr(lDrawFlags), uintptr(hdc), uintptr(unsafe.Pointer(pvDrawObject))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // OnResize dispatches through IHTMLPainter's vtable slot 4.
 func (self *IHTMLPainter) OnResize(size foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(size)))
@@ -25913,6 +30314,14 @@ type IHTMLPainterOverlay struct {
 
 // IID_IHTMLPainterOverlay is the interface identifier for IHTMLPainterOverlay.
 var IID_IHTMLPainterOverlay = win32.GUID{Data1: 0x3050f7e3, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLPainterOverlay_OnMove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false)}}
+
+// OnMove dispatches through IHTMLPainterOverlay's vtable slot 3.
+func (self *IHTMLPainterOverlay) OnMove(rcDevice foundation.RECT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[3], specIHTMLPainterOverlay_OnMove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&rcDevice))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // IID: 3050f1f5-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLParaElement struct {
@@ -26422,11 +30831,27 @@ type IHTMLProgressElement struct {
 // IID_IHTMLProgressElement is the interface identifier for IHTMLProgressElement.
 var IID_IHTMLProgressElement = win32.GUID{Data1: 0x3050f2d6, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLProgressElement_Put_value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_value dispatches through IHTMLProgressElement's vtable slot 7.
+func (self *IHTMLProgressElement) Put_value(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLProgressElement_Put_value, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_value dispatches through IHTMLProgressElement's vtable slot 8.
 func (self *IHTMLProgressElement) Get_value() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLProgressElement_Put_max = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_max dispatches through IHTMLProgressElement's vtable slot 9.
+func (self *IHTMLProgressElement) Put_max(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLProgressElement_Put_max, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_max dispatches through IHTMLProgressElement's vtable slot 10.
@@ -26608,6 +31033,14 @@ func (self *IHTMLRenderStyle) Get_textEffect() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRenderStyle_Put_textColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textColor dispatches through IHTMLRenderStyle's vtable slot 13.
+func (self *IHTMLRenderStyle) Put_textColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLRenderStyle_Put_textColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textColor dispatches through IHTMLRenderStyle's vtable slot 14.
 func (self *IHTMLRenderStyle) Get_textColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -26615,11 +31048,27 @@ func (self *IHTMLRenderStyle) Get_textColor() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRenderStyle_Put_textBackgroundColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textBackgroundColor dispatches through IHTMLRenderStyle's vtable slot 15.
+func (self *IHTMLRenderStyle) Put_textBackgroundColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLRenderStyle_Put_textBackgroundColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textBackgroundColor dispatches through IHTMLRenderStyle's vtable slot 16.
 func (self *IHTMLRenderStyle) Get_textBackgroundColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRenderStyle_Put_textDecorationColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textDecorationColor dispatches through IHTMLRenderStyle's vtable slot 17.
+func (self *IHTMLRenderStyle) Put_textDecorationColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLRenderStyle_Put_textDecorationColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_textDecorationColor dispatches through IHTMLRenderStyle's vtable slot 18.
@@ -26728,6 +31177,14 @@ func (self *IHTMLRuleStyle) Get_fontWeight() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_fontSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_fontSize dispatches through IHTMLRuleStyle's vtable slot 15.
+func (self *IHTMLRuleStyle) Put_fontSize(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLRuleStyle_Put_fontSize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_fontSize dispatches through IHTMLRuleStyle's vtable slot 16.
 func (self *IHTMLRuleStyle) Get_fontSize() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -26748,6 +31205,14 @@ func (self *IHTMLRuleStyle) Get_font() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_color = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_color dispatches through IHTMLRuleStyle's vtable slot 19.
+func (self *IHTMLRuleStyle) Put_color(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLRuleStyle_Put_color, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_color dispatches through IHTMLRuleStyle's vtable slot 20.
 func (self *IHTMLRuleStyle) Get_color() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -26766,6 +31231,14 @@ func (self *IHTMLRuleStyle) Get_background() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_backgroundColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_backgroundColor dispatches through IHTMLRuleStyle's vtable slot 23.
+func (self *IHTMLRuleStyle) Put_backgroundColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLRuleStyle_Put_backgroundColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_backgroundColor dispatches through IHTMLRuleStyle's vtable slot 24.
@@ -26827,11 +31300,27 @@ func (self *IHTMLRuleStyle) Get_backgroundPosition() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_backgroundPositionX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_backgroundPositionX dispatches through IHTMLRuleStyle's vtable slot 33.
+func (self *IHTMLRuleStyle) Put_backgroundPositionX(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLRuleStyle_Put_backgroundPositionX, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_backgroundPositionX dispatches through IHTMLRuleStyle's vtable slot 34.
 func (self *IHTMLRuleStyle) Get_backgroundPositionX() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_backgroundPositionY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_backgroundPositionY dispatches through IHTMLRuleStyle's vtable slot 35.
+func (self *IHTMLRuleStyle) Put_backgroundPositionY(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLRuleStyle_Put_backgroundPositionY, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_backgroundPositionY dispatches through IHTMLRuleStyle's vtable slot 36.
@@ -26841,11 +31330,27 @@ func (self *IHTMLRuleStyle) Get_backgroundPositionY() (systemvariant.VARIANT, er
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_wordSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_wordSpacing dispatches through IHTMLRuleStyle's vtable slot 37.
+func (self *IHTMLRuleStyle) Put_wordSpacing(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLRuleStyle_Put_wordSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_wordSpacing dispatches through IHTMLRuleStyle's vtable slot 38.
 func (self *IHTMLRuleStyle) Get_wordSpacing() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_letterSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_letterSpacing dispatches through IHTMLRuleStyle's vtable slot 39.
+func (self *IHTMLRuleStyle) Put_letterSpacing(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIHTMLRuleStyle_Put_letterSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_letterSpacing dispatches through IHTMLRuleStyle's vtable slot 40.
@@ -26933,6 +31438,14 @@ func (self *IHTMLRuleStyle) Get_textDecorationBlink() (foundation.VARIANT_BOOL, 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_verticalAlign = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_verticalAlign dispatches through IHTMLRuleStyle's vtable slot 53.
+func (self *IHTMLRuleStyle) Put_verticalAlign(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIHTMLRuleStyle_Put_verticalAlign, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_verticalAlign dispatches through IHTMLRuleStyle's vtable slot 54.
 func (self *IHTMLRuleStyle) Get_verticalAlign() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -26966,11 +31479,27 @@ func (self *IHTMLRuleStyle) Get_textAlign() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_textIndent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textIndent dispatches through IHTMLRuleStyle's vtable slot 59.
+func (self *IHTMLRuleStyle) Put_textIndent(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[59], specIHTMLRuleStyle_Put_textIndent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textIndent dispatches through IHTMLRuleStyle's vtable slot 60.
 func (self *IHTMLRuleStyle) Get_textIndent() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_lineHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_lineHeight dispatches through IHTMLRuleStyle's vtable slot 61.
+func (self *IHTMLRuleStyle) Put_lineHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[61], specIHTMLRuleStyle_Put_lineHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_lineHeight dispatches through IHTMLRuleStyle's vtable slot 62.
@@ -26980,11 +31509,27 @@ func (self *IHTMLRuleStyle) Get_lineHeight() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_marginTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginTop dispatches through IHTMLRuleStyle's vtable slot 63.
+func (self *IHTMLRuleStyle) Put_marginTop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIHTMLRuleStyle_Put_marginTop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_marginTop dispatches through IHTMLRuleStyle's vtable slot 64.
 func (self *IHTMLRuleStyle) Get_marginTop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_marginRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginRight dispatches through IHTMLRuleStyle's vtable slot 65.
+func (self *IHTMLRuleStyle) Put_marginRight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[65], specIHTMLRuleStyle_Put_marginRight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_marginRight dispatches through IHTMLRuleStyle's vtable slot 66.
@@ -26994,11 +31539,27 @@ func (self *IHTMLRuleStyle) Get_marginRight() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_marginBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginBottom dispatches through IHTMLRuleStyle's vtable slot 67.
+func (self *IHTMLRuleStyle) Put_marginBottom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[67], specIHTMLRuleStyle_Put_marginBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_marginBottom dispatches through IHTMLRuleStyle's vtable slot 68.
 func (self *IHTMLRuleStyle) Get_marginBottom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_marginLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginLeft dispatches through IHTMLRuleStyle's vtable slot 69.
+func (self *IHTMLRuleStyle) Put_marginLeft(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[69], specIHTMLRuleStyle_Put_marginLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_marginLeft dispatches through IHTMLRuleStyle's vtable slot 70.
@@ -27021,11 +31582,27 @@ func (self *IHTMLRuleStyle) Get_margin() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_paddingTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingTop dispatches through IHTMLRuleStyle's vtable slot 73.
+func (self *IHTMLRuleStyle) Put_paddingTop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[73], specIHTMLRuleStyle_Put_paddingTop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_paddingTop dispatches through IHTMLRuleStyle's vtable slot 74.
 func (self *IHTMLRuleStyle) Get_paddingTop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_paddingRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingRight dispatches through IHTMLRuleStyle's vtable slot 75.
+func (self *IHTMLRuleStyle) Put_paddingRight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[75], specIHTMLRuleStyle_Put_paddingRight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_paddingRight dispatches through IHTMLRuleStyle's vtable slot 76.
@@ -27035,11 +31612,27 @@ func (self *IHTMLRuleStyle) Get_paddingRight() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_paddingBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingBottom dispatches through IHTMLRuleStyle's vtable slot 77.
+func (self *IHTMLRuleStyle) Put_paddingBottom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[77], specIHTMLRuleStyle_Put_paddingBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_paddingBottom dispatches through IHTMLRuleStyle's vtable slot 78.
 func (self *IHTMLRuleStyle) Get_paddingBottom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_paddingLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingLeft dispatches through IHTMLRuleStyle's vtable slot 79.
+func (self *IHTMLRuleStyle) Put_paddingLeft(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[79], specIHTMLRuleStyle_Put_paddingLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_paddingLeft dispatches through IHTMLRuleStyle's vtable slot 80.
@@ -27140,11 +31733,27 @@ func (self *IHTMLRuleStyle) Get_borderColor() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_borderTopColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderTopColor dispatches through IHTMLRuleStyle's vtable slot 95.
+func (self *IHTMLRuleStyle) Put_borderTopColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[95], specIHTMLRuleStyle_Put_borderTopColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderTopColor dispatches through IHTMLRuleStyle's vtable slot 96.
 func (self *IHTMLRuleStyle) Get_borderTopColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_borderRightColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderRightColor dispatches through IHTMLRuleStyle's vtable slot 97.
+func (self *IHTMLRuleStyle) Put_borderRightColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[97], specIHTMLRuleStyle_Put_borderRightColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderRightColor dispatches through IHTMLRuleStyle's vtable slot 98.
@@ -27154,11 +31763,27 @@ func (self *IHTMLRuleStyle) Get_borderRightColor() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_borderBottomColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderBottomColor dispatches through IHTMLRuleStyle's vtable slot 99.
+func (self *IHTMLRuleStyle) Put_borderBottomColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[99], specIHTMLRuleStyle_Put_borderBottomColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderBottomColor dispatches through IHTMLRuleStyle's vtable slot 100.
 func (self *IHTMLRuleStyle) Get_borderBottomColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_borderLeftColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderLeftColor dispatches through IHTMLRuleStyle's vtable slot 101.
+func (self *IHTMLRuleStyle) Put_borderLeftColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[101], specIHTMLRuleStyle_Put_borderLeftColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderLeftColor dispatches through IHTMLRuleStyle's vtable slot 102.
@@ -27181,11 +31806,27 @@ func (self *IHTMLRuleStyle) Get_borderWidth() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_borderTopWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderTopWidth dispatches through IHTMLRuleStyle's vtable slot 105.
+func (self *IHTMLRuleStyle) Put_borderTopWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[105], specIHTMLRuleStyle_Put_borderTopWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderTopWidth dispatches through IHTMLRuleStyle's vtable slot 106.
 func (self *IHTMLRuleStyle) Get_borderTopWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_borderRightWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderRightWidth dispatches through IHTMLRuleStyle's vtable slot 107.
+func (self *IHTMLRuleStyle) Put_borderRightWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[107], specIHTMLRuleStyle_Put_borderRightWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderRightWidth dispatches through IHTMLRuleStyle's vtable slot 108.
@@ -27195,11 +31836,27 @@ func (self *IHTMLRuleStyle) Get_borderRightWidth() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_borderBottomWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderBottomWidth dispatches through IHTMLRuleStyle's vtable slot 109.
+func (self *IHTMLRuleStyle) Put_borderBottomWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[109], specIHTMLRuleStyle_Put_borderBottomWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderBottomWidth dispatches through IHTMLRuleStyle's vtable slot 110.
 func (self *IHTMLRuleStyle) Get_borderBottomWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_borderLeftWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderLeftWidth dispatches through IHTMLRuleStyle's vtable slot 111.
+func (self *IHTMLRuleStyle) Put_borderLeftWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[111], specIHTMLRuleStyle_Put_borderLeftWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderLeftWidth dispatches through IHTMLRuleStyle's vtable slot 112.
@@ -27274,11 +31931,27 @@ func (self *IHTMLRuleStyle) Get_borderLeftStyle() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLRuleStyle's vtable slot 123.
+func (self *IHTMLRuleStyle) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[123], specIHTMLRuleStyle_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLRuleStyle's vtable slot 124.
 func (self *IHTMLRuleStyle) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLRuleStyle's vtable slot 125.
+func (self *IHTMLRuleStyle) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[125], specIHTMLRuleStyle_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_height dispatches through IHTMLRuleStyle's vtable slot 126.
@@ -27405,11 +32078,27 @@ func (self *IHTMLRuleStyle) Get_whiteSpace() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle_Put_top = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_top dispatches through IHTMLRuleStyle's vtable slot 145.
+func (self *IHTMLRuleStyle) Put_top(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[145], specIHTMLRuleStyle_Put_top, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_top dispatches through IHTMLRuleStyle's vtable slot 146.
 func (self *IHTMLRuleStyle) Get_top() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[146], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_left = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_left dispatches through IHTMLRuleStyle's vtable slot 147.
+func (self *IHTMLRuleStyle) Put_left(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[147], specIHTMLRuleStyle_Put_left, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_left dispatches through IHTMLRuleStyle's vtable slot 148.
@@ -27424,6 +32113,14 @@ func (self *IHTMLRuleStyle) Get_position() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[149], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_Put_zIndex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_zIndex dispatches through IHTMLRuleStyle's vtable slot 150.
+func (self *IHTMLRuleStyle) Put_zIndex(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[150], specIHTMLRuleStyle_Put_zIndex, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_zIndex dispatches through IHTMLRuleStyle's vtable slot 151.
@@ -27522,6 +32219,14 @@ func (self *IHTMLRuleStyle) Get_filter() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[165], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle_SetAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// SetAttribute dispatches through IHTMLRuleStyle's vtable slot 166.
+func (self *IHTMLRuleStyle) SetAttribute(strAttributeName foundation.BSTR, AttributeValue systemvariant.VARIANT, lFlags int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[166], specIHTMLRuleStyle_SetAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAttributeName)), uintptr(unsafe.Pointer(&AttributeValue)), uintptr(lFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttribute dispatches through IHTMLRuleStyle's vtable slot 167.
@@ -27624,11 +32329,27 @@ func (self *IHTMLRuleStyle2) Get_unicodeBidi() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle2_Put_bottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bottom dispatches through IHTMLRuleStyle2's vtable slot 19.
+func (self *IHTMLRuleStyle2) Put_bottom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLRuleStyle2_Put_bottom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_bottom dispatches through IHTMLRuleStyle2's vtable slot 20.
 func (self *IHTMLRuleStyle2) Get_bottom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle2_Put_right = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_right dispatches through IHTMLRuleStyle2's vtable slot 21.
+func (self *IHTMLRuleStyle2) Put_right(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLRuleStyle2_Put_right, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_right dispatches through IHTMLRuleStyle2's vtable slot 22.
@@ -27664,11 +32385,27 @@ func (self *IHTMLRuleStyle2) Get_pixelRight() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle2_Put_posBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_posBottom dispatches through IHTMLRuleStyle2's vtable slot 27.
+func (self *IHTMLRuleStyle2) Put_posBottom(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLRuleStyle2_Put_posBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_posBottom dispatches through IHTMLRuleStyle2's vtable slot 28.
 func (self *IHTMLRuleStyle2) Get_posBottom() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle2_Put_posRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_posRight dispatches through IHTMLRuleStyle2's vtable slot 29.
+func (self *IHTMLRuleStyle2) Put_posRight(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLRuleStyle2_Put_posRight, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_posRight dispatches through IHTMLRuleStyle2's vtable slot 30.
@@ -27730,11 +32467,27 @@ func (self *IHTMLRuleStyle2) Get_rubyOverhang() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle2_Put_layoutGridChar = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_layoutGridChar dispatches through IHTMLRuleStyle2's vtable slot 39.
+func (self *IHTMLRuleStyle2) Put_layoutGridChar(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIHTMLRuleStyle2_Put_layoutGridChar, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_layoutGridChar dispatches through IHTMLRuleStyle2's vtable slot 40.
 func (self *IHTMLRuleStyle2) Get_layoutGridChar() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle2_Put_layoutGridLine = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_layoutGridLine dispatches through IHTMLRuleStyle2's vtable slot 41.
+func (self *IHTMLRuleStyle2) Put_layoutGridLine(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[41], specIHTMLRuleStyle2_Put_layoutGridLine, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_layoutGridLine dispatches through IHTMLRuleStyle2's vtable slot 42.
@@ -27848,6 +32601,14 @@ func (self *IHTMLRuleStyle2) Get_textJustifyTrim() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle2_Put_textKashida = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textKashida dispatches through IHTMLRuleStyle2's vtable slot 59.
+func (self *IHTMLRuleStyle2) Put_textKashida(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[59], specIHTMLRuleStyle2_Put_textKashida, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textKashida dispatches through IHTMLRuleStyle2's vtable slot 60.
 func (self *IHTMLRuleStyle2) Get_textKashida() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -27915,6 +32676,14 @@ func (self *IHTMLRuleStyle3) Get_layoutFlow() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle3_Put_zoom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_zoom dispatches through IHTMLRuleStyle3's vtable slot 9.
+func (self *IHTMLRuleStyle3) Put_zoom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLRuleStyle3_Put_zoom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_zoom dispatches through IHTMLRuleStyle3's vtable slot 10.
 func (self *IHTMLRuleStyle3) Get_zoom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -27948,11 +32717,27 @@ func (self *IHTMLRuleStyle3) Get_textUnderlinePosition() (foundation.BSTR, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle3_Put_scrollbarBaseColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarBaseColor dispatches through IHTMLRuleStyle3's vtable slot 15.
+func (self *IHTMLRuleStyle3) Put_scrollbarBaseColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLRuleStyle3_Put_scrollbarBaseColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbarBaseColor dispatches through IHTMLRuleStyle3's vtable slot 16.
 func (self *IHTMLRuleStyle3) Get_scrollbarBaseColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle3_Put_scrollbarFaceColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarFaceColor dispatches through IHTMLRuleStyle3's vtable slot 17.
+func (self *IHTMLRuleStyle3) Put_scrollbarFaceColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLRuleStyle3_Put_scrollbarFaceColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarFaceColor dispatches through IHTMLRuleStyle3's vtable slot 18.
@@ -27962,11 +32747,27 @@ func (self *IHTMLRuleStyle3) Get_scrollbarFaceColor() (systemvariant.VARIANT, er
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle3_Put_scrollbar3dLightColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbar3dLightColor dispatches through IHTMLRuleStyle3's vtable slot 19.
+func (self *IHTMLRuleStyle3) Put_scrollbar3dLightColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLRuleStyle3_Put_scrollbar3dLightColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbar3dLightColor dispatches through IHTMLRuleStyle3's vtable slot 20.
 func (self *IHTMLRuleStyle3) Get_scrollbar3dLightColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle3_Put_scrollbarShadowColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarShadowColor dispatches through IHTMLRuleStyle3's vtable slot 21.
+func (self *IHTMLRuleStyle3) Put_scrollbarShadowColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLRuleStyle3_Put_scrollbarShadowColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarShadowColor dispatches through IHTMLRuleStyle3's vtable slot 22.
@@ -27976,11 +32777,27 @@ func (self *IHTMLRuleStyle3) Get_scrollbarShadowColor() (systemvariant.VARIANT, 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle3_Put_scrollbarHighlightColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarHighlightColor dispatches through IHTMLRuleStyle3's vtable slot 23.
+func (self *IHTMLRuleStyle3) Put_scrollbarHighlightColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLRuleStyle3_Put_scrollbarHighlightColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbarHighlightColor dispatches through IHTMLRuleStyle3's vtable slot 24.
 func (self *IHTMLRuleStyle3) Get_scrollbarHighlightColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle3_Put_scrollbarDarkShadowColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarDarkShadowColor dispatches through IHTMLRuleStyle3's vtable slot 25.
+func (self *IHTMLRuleStyle3) Put_scrollbarDarkShadowColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLRuleStyle3_Put_scrollbarDarkShadowColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarDarkShadowColor dispatches through IHTMLRuleStyle3's vtable slot 26.
@@ -27990,11 +32807,27 @@ func (self *IHTMLRuleStyle3) Get_scrollbarDarkShadowColor() (systemvariant.VARIA
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle3_Put_scrollbarArrowColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarArrowColor dispatches through IHTMLRuleStyle3's vtable slot 27.
+func (self *IHTMLRuleStyle3) Put_scrollbarArrowColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLRuleStyle3_Put_scrollbarArrowColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbarArrowColor dispatches through IHTMLRuleStyle3's vtable slot 28.
 func (self *IHTMLRuleStyle3) Get_scrollbarArrowColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle3_Put_scrollbarTrackColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarTrackColor dispatches through IHTMLRuleStyle3's vtable slot 29.
+func (self *IHTMLRuleStyle3) Put_scrollbarTrackColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLRuleStyle3_Put_scrollbarTrackColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarTrackColor dispatches through IHTMLRuleStyle3's vtable slot 30.
@@ -28030,6 +32863,14 @@ func (self *IHTMLRuleStyle3) Get_textAlignLast() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle3_Put_textKashidaSpace = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textKashidaSpace dispatches through IHTMLRuleStyle3's vtable slot 35.
+func (self *IHTMLRuleStyle3) Put_textKashidaSpace(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLRuleStyle3_Put_textKashidaSpace, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textKashidaSpace dispatches through IHTMLRuleStyle3's vtable slot 36.
 func (self *IHTMLRuleStyle3) Get_textKashidaSpace() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -28056,6 +32897,14 @@ func (self *IHTMLRuleStyle4) Get_textOverflow() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle4_Put_minHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_minHeight dispatches through IHTMLRuleStyle4's vtable slot 9.
+func (self *IHTMLRuleStyle4) Put_minHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLRuleStyle4_Put_minHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_minHeight dispatches through IHTMLRuleStyle4's vtable slot 10.
@@ -28086,6 +32935,14 @@ func (self *IHTMLRuleStyle5) Get_msInterpolationMode() (foundation.BSTR, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle5_Put_maxHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_maxHeight dispatches through IHTMLRuleStyle5's vtable slot 9.
+func (self *IHTMLRuleStyle5) Put_maxHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLRuleStyle5_Put_maxHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_maxHeight dispatches through IHTMLRuleStyle5's vtable slot 10.
 func (self *IHTMLRuleStyle5) Get_maxHeight() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -28093,11 +32950,27 @@ func (self *IHTMLRuleStyle5) Get_maxHeight() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle5_Put_minWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_minWidth dispatches through IHTMLRuleStyle5's vtable slot 11.
+func (self *IHTMLRuleStyle5) Put_minWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLRuleStyle5_Put_minWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_minWidth dispatches through IHTMLRuleStyle5's vtable slot 12.
 func (self *IHTMLRuleStyle5) Get_minWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle5_Put_maxWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_maxWidth dispatches through IHTMLRuleStyle5's vtable slot 13.
+func (self *IHTMLRuleStyle5) Put_maxWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLRuleStyle5_Put_maxWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_maxWidth dispatches through IHTMLRuleStyle5's vtable slot 14.
@@ -28180,6 +33053,14 @@ func (self *IHTMLRuleStyle6) Get_outline() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle6_Put_outlineWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_outlineWidth dispatches through IHTMLRuleStyle6's vtable slot 17.
+func (self *IHTMLRuleStyle6) Put_outlineWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLRuleStyle6_Put_outlineWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_outlineWidth dispatches through IHTMLRuleStyle6's vtable slot 18.
 func (self *IHTMLRuleStyle6) Get_outlineWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -28198,6 +33079,14 @@ func (self *IHTMLRuleStyle6) Get_outlineStyle() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle6_Put_outlineColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_outlineColor dispatches through IHTMLRuleStyle6's vtable slot 21.
+func (self *IHTMLRuleStyle6) Put_outlineColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLRuleStyle6_Put_outlineColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_outlineColor dispatches through IHTMLRuleStyle6's vtable slot 22.
@@ -28233,11 +33122,27 @@ func (self *IHTMLRuleStyle6) Get_borderSpacing() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLRuleStyle6_Put_orphans = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_orphans dispatches through IHTMLRuleStyle6's vtable slot 27.
+func (self *IHTMLRuleStyle6) Put_orphans(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLRuleStyle6_Put_orphans, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_orphans dispatches through IHTMLRuleStyle6's vtable slot 28.
 func (self *IHTMLRuleStyle6) Get_orphans() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLRuleStyle6_Put_widows = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_widows dispatches through IHTMLRuleStyle6's vtable slot 29.
+func (self *IHTMLRuleStyle6) Put_widows(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLRuleStyle6_Put_widows, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_widows dispatches through IHTMLRuleStyle6's vtable slot 30.
@@ -28528,6 +33433,14 @@ func (self *IHTMLScriptElement) Get_readyState() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLScriptElement_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLScriptElement's vtable slot 18.
+func (self *IHTMLScriptElement) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specIHTMLScriptElement_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onerror dispatches through IHTMLScriptElement's vtable slot 19.
 func (self *IHTMLScriptElement) Get_onerror() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -28659,6 +33572,14 @@ func (self *IHTMLSelectElement) Get_options() (*systemcom.IDispatch, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLSelectElement_Put_onchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchange dispatches through IHTMLSelectElement's vtable slot 14.
+func (self *IHTMLSelectElement) Put_onchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLSelectElement_Put_onchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onchange dispatches through IHTMLSelectElement's vtable slot 15.
 func (self *IHTMLSelectElement) Get_onchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -28719,6 +33640,14 @@ func (self *IHTMLSelectElement) Get_form() (*IHTMLFormElement, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLSelectElement_Add = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Add dispatches through IHTMLSelectElement's vtable slot 24.
+func (self *IHTMLSelectElement) Add(element *IHTMLElement, before systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIHTMLSelectElement_Add, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(unsafe.Pointer(&before))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Remove dispatches through IHTMLSelectElement's vtable slot 25.
 func (self *IHTMLSelectElement) Remove(index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(index))
@@ -28745,6 +33674,24 @@ func (self *IHTMLSelectElement) Get__newEnum() (*systemcom.IUnknown, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLSelectElement_Item = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Item dispatches through IHTMLSelectElement's vtable slot 29.
+func (self *IHTMLSelectElement) Item(name systemvariant.VARIANT, index systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLSelectElement_Item, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&name)), uintptr(unsafe.Pointer(&index)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLSelectElement_Tags = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Tags dispatches through IHTMLSelectElement's vtable slot 30.
+func (self *IHTMLSelectElement) Tags(tagName systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIHTMLSelectElement_Tags, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&tagName)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: 3050f5ed-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLSelectElement2 struct {
 	systemcom.IDispatch
@@ -28752,6 +33699,15 @@ type IHTMLSelectElement2 struct {
 
 // IID_IHTMLSelectElement2 is the interface identifier for IHTMLSelectElement2.
 var IID_IHTMLSelectElement2 = win32.GUID{Data1: 0x3050f5ed, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLSelectElement2_Urns = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Urns dispatches through IHTMLSelectElement2's vtable slot 7.
+func (self *IHTMLSelectElement2) Urns(urn systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	_pdisp := new(*systemcom.IDispatch)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLSelectElement2_Urns, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&urn)), uintptr(win32.OutParam(unsafe.Pointer(_pdisp)))).Tuple()
+	return *_pdisp, win32.ErrIfFailed(int32(r1))
+}
 
 // IID: 3050f838-98b5-11cf-bb82-00aa00bdce0b
 type IHTMLSelectElement4 struct {
@@ -29216,6 +34172,14 @@ func (self *IHTMLStyle) Get_fontWeight() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_fontSize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_fontSize dispatches through IHTMLStyle's vtable slot 15.
+func (self *IHTMLStyle) Put_fontSize(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLStyle_Put_fontSize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_fontSize dispatches through IHTMLStyle's vtable slot 16.
 func (self *IHTMLStyle) Get_fontSize() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -29236,6 +34200,14 @@ func (self *IHTMLStyle) Get_font() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_color = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_color dispatches through IHTMLStyle's vtable slot 19.
+func (self *IHTMLStyle) Put_color(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLStyle_Put_color, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_color dispatches through IHTMLStyle's vtable slot 20.
 func (self *IHTMLStyle) Get_color() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -29254,6 +34226,14 @@ func (self *IHTMLStyle) Get_background() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_backgroundColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_backgroundColor dispatches through IHTMLStyle's vtable slot 23.
+func (self *IHTMLStyle) Put_backgroundColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLStyle_Put_backgroundColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_backgroundColor dispatches through IHTMLStyle's vtable slot 24.
@@ -29315,11 +34295,27 @@ func (self *IHTMLStyle) Get_backgroundPosition() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_backgroundPositionX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_backgroundPositionX dispatches through IHTMLStyle's vtable slot 33.
+func (self *IHTMLStyle) Put_backgroundPositionX(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLStyle_Put_backgroundPositionX, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_backgroundPositionX dispatches through IHTMLStyle's vtable slot 34.
 func (self *IHTMLStyle) Get_backgroundPositionX() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_backgroundPositionY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_backgroundPositionY dispatches through IHTMLStyle's vtable slot 35.
+func (self *IHTMLStyle) Put_backgroundPositionY(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLStyle_Put_backgroundPositionY, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_backgroundPositionY dispatches through IHTMLStyle's vtable slot 36.
@@ -29329,11 +34325,27 @@ func (self *IHTMLStyle) Get_backgroundPositionY() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_wordSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_wordSpacing dispatches through IHTMLStyle's vtable slot 37.
+func (self *IHTMLStyle) Put_wordSpacing(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[37], specIHTMLStyle_Put_wordSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_wordSpacing dispatches through IHTMLStyle's vtable slot 38.
 func (self *IHTMLStyle) Get_wordSpacing() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_letterSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_letterSpacing dispatches through IHTMLStyle's vtable slot 39.
+func (self *IHTMLStyle) Put_letterSpacing(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[39], specIHTMLStyle_Put_letterSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_letterSpacing dispatches through IHTMLStyle's vtable slot 40.
@@ -29421,6 +34433,14 @@ func (self *IHTMLStyle) Get_textDecorationBlink() (foundation.VARIANT_BOOL, erro
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_verticalAlign = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_verticalAlign dispatches through IHTMLStyle's vtable slot 53.
+func (self *IHTMLStyle) Put_verticalAlign(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[53], specIHTMLStyle_Put_verticalAlign, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_verticalAlign dispatches through IHTMLStyle's vtable slot 54.
 func (self *IHTMLStyle) Get_verticalAlign() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -29454,11 +34474,27 @@ func (self *IHTMLStyle) Get_textAlign() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_textIndent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textIndent dispatches through IHTMLStyle's vtable slot 59.
+func (self *IHTMLStyle) Put_textIndent(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[59], specIHTMLStyle_Put_textIndent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textIndent dispatches through IHTMLStyle's vtable slot 60.
 func (self *IHTMLStyle) Get_textIndent() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_lineHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_lineHeight dispatches through IHTMLStyle's vtable slot 61.
+func (self *IHTMLStyle) Put_lineHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[61], specIHTMLStyle_Put_lineHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_lineHeight dispatches through IHTMLStyle's vtable slot 62.
@@ -29468,11 +34504,27 @@ func (self *IHTMLStyle) Get_lineHeight() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_marginTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginTop dispatches through IHTMLStyle's vtable slot 63.
+func (self *IHTMLStyle) Put_marginTop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[63], specIHTMLStyle_Put_marginTop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_marginTop dispatches through IHTMLStyle's vtable slot 64.
 func (self *IHTMLStyle) Get_marginTop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_marginRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginRight dispatches through IHTMLStyle's vtable slot 65.
+func (self *IHTMLStyle) Put_marginRight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[65], specIHTMLStyle_Put_marginRight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_marginRight dispatches through IHTMLStyle's vtable slot 66.
@@ -29482,11 +34534,27 @@ func (self *IHTMLStyle) Get_marginRight() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_marginBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginBottom dispatches through IHTMLStyle's vtable slot 67.
+func (self *IHTMLStyle) Put_marginBottom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[67], specIHTMLStyle_Put_marginBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_marginBottom dispatches through IHTMLStyle's vtable slot 68.
 func (self *IHTMLStyle) Get_marginBottom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_marginLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_marginLeft dispatches through IHTMLStyle's vtable slot 69.
+func (self *IHTMLStyle) Put_marginLeft(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[69], specIHTMLStyle_Put_marginLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_marginLeft dispatches through IHTMLStyle's vtable slot 70.
@@ -29509,11 +34577,27 @@ func (self *IHTMLStyle) Get_margin() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_paddingTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingTop dispatches through IHTMLStyle's vtable slot 73.
+func (self *IHTMLStyle) Put_paddingTop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[73], specIHTMLStyle_Put_paddingTop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_paddingTop dispatches through IHTMLStyle's vtable slot 74.
 func (self *IHTMLStyle) Get_paddingTop() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_paddingRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingRight dispatches through IHTMLStyle's vtable slot 75.
+func (self *IHTMLStyle) Put_paddingRight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[75], specIHTMLStyle_Put_paddingRight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_paddingRight dispatches through IHTMLStyle's vtable slot 76.
@@ -29523,11 +34607,27 @@ func (self *IHTMLStyle) Get_paddingRight() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_paddingBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingBottom dispatches through IHTMLStyle's vtable slot 77.
+func (self *IHTMLStyle) Put_paddingBottom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[77], specIHTMLStyle_Put_paddingBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_paddingBottom dispatches through IHTMLStyle's vtable slot 78.
 func (self *IHTMLStyle) Get_paddingBottom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_paddingLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_paddingLeft dispatches through IHTMLStyle's vtable slot 79.
+func (self *IHTMLStyle) Put_paddingLeft(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[79], specIHTMLStyle_Put_paddingLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_paddingLeft dispatches through IHTMLStyle's vtable slot 80.
@@ -29628,11 +34728,27 @@ func (self *IHTMLStyle) Get_borderColor() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_borderTopColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderTopColor dispatches through IHTMLStyle's vtable slot 95.
+func (self *IHTMLStyle) Put_borderTopColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[95], specIHTMLStyle_Put_borderTopColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderTopColor dispatches through IHTMLStyle's vtable slot 96.
 func (self *IHTMLStyle) Get_borderTopColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_borderRightColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderRightColor dispatches through IHTMLStyle's vtable slot 97.
+func (self *IHTMLStyle) Put_borderRightColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[97], specIHTMLStyle_Put_borderRightColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderRightColor dispatches through IHTMLStyle's vtable slot 98.
@@ -29642,11 +34758,27 @@ func (self *IHTMLStyle) Get_borderRightColor() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_borderBottomColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderBottomColor dispatches through IHTMLStyle's vtable slot 99.
+func (self *IHTMLStyle) Put_borderBottomColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[99], specIHTMLStyle_Put_borderBottomColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderBottomColor dispatches through IHTMLStyle's vtable slot 100.
 func (self *IHTMLStyle) Get_borderBottomColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_borderLeftColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderLeftColor dispatches through IHTMLStyle's vtable slot 101.
+func (self *IHTMLStyle) Put_borderLeftColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[101], specIHTMLStyle_Put_borderLeftColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderLeftColor dispatches through IHTMLStyle's vtable slot 102.
@@ -29669,11 +34801,27 @@ func (self *IHTMLStyle) Get_borderWidth() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_borderTopWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderTopWidth dispatches through IHTMLStyle's vtable slot 105.
+func (self *IHTMLStyle) Put_borderTopWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[105], specIHTMLStyle_Put_borderTopWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderTopWidth dispatches through IHTMLStyle's vtable slot 106.
 func (self *IHTMLStyle) Get_borderTopWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_borderRightWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderRightWidth dispatches through IHTMLStyle's vtable slot 107.
+func (self *IHTMLStyle) Put_borderRightWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[107], specIHTMLStyle_Put_borderRightWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderRightWidth dispatches through IHTMLStyle's vtable slot 108.
@@ -29683,11 +34831,27 @@ func (self *IHTMLStyle) Get_borderRightWidth() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_borderBottomWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderBottomWidth dispatches through IHTMLStyle's vtable slot 109.
+func (self *IHTMLStyle) Put_borderBottomWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[109], specIHTMLStyle_Put_borderBottomWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderBottomWidth dispatches through IHTMLStyle's vtable slot 110.
 func (self *IHTMLStyle) Get_borderBottomWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_borderLeftWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderLeftWidth dispatches through IHTMLStyle's vtable slot 111.
+func (self *IHTMLStyle) Put_borderLeftWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[111], specIHTMLStyle_Put_borderLeftWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderLeftWidth dispatches through IHTMLStyle's vtable slot 112.
@@ -29762,11 +34926,27 @@ func (self *IHTMLStyle) Get_borderLeftStyle() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLStyle's vtable slot 123.
+func (self *IHTMLStyle) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[123], specIHTMLStyle_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLStyle's vtable slot 124.
 func (self *IHTMLStyle) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLStyle's vtable slot 125.
+func (self *IHTMLStyle) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[125], specIHTMLStyle_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_height dispatches through IHTMLStyle's vtable slot 126.
@@ -29893,11 +35073,27 @@ func (self *IHTMLStyle) Get_whiteSpace() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_top = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_top dispatches through IHTMLStyle's vtable slot 145.
+func (self *IHTMLStyle) Put_top(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[145], specIHTMLStyle_Put_top, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_top dispatches through IHTMLStyle's vtable slot 146.
 func (self *IHTMLStyle) Get_top() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[146], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_left = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_left dispatches through IHTMLStyle's vtable slot 147.
+func (self *IHTMLStyle) Put_left(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[147], specIHTMLStyle_Put_left, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_left dispatches through IHTMLStyle's vtable slot 148.
@@ -29912,6 +35108,14 @@ func (self *IHTMLStyle) Get_position() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[149], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_zIndex = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_zIndex dispatches through IHTMLStyle's vtable slot 150.
+func (self *IHTMLStyle) Put_zIndex(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[150], specIHTMLStyle_Put_zIndex, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_zIndex dispatches through IHTMLStyle's vtable slot 151.
@@ -30025,11 +35229,27 @@ func (self *IHTMLStyle) Get_pixelHeight() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_posTop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_posTop dispatches through IHTMLStyle's vtable slot 168.
+func (self *IHTMLStyle) Put_posTop(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[168], specIHTMLStyle_Put_posTop, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_posTop dispatches through IHTMLStyle's vtable slot 169.
 func (self *IHTMLStyle) Get_posTop() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[169], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_posLeft = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_posLeft dispatches through IHTMLStyle's vtable slot 170.
+func (self *IHTMLStyle) Put_posLeft(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[170], specIHTMLStyle_Put_posLeft, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_posLeft dispatches through IHTMLStyle's vtable slot 171.
@@ -30039,11 +35259,27 @@ func (self *IHTMLStyle) Get_posLeft() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle_Put_posWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_posWidth dispatches through IHTMLStyle's vtable slot 172.
+func (self *IHTMLStyle) Put_posWidth(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[172], specIHTMLStyle_Put_posWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_posWidth dispatches through IHTMLStyle's vtable slot 173.
 func (self *IHTMLStyle) Get_posWidth() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[173], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_Put_posHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_posHeight dispatches through IHTMLStyle's vtable slot 174.
+func (self *IHTMLStyle) Put_posHeight(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[174], specIHTMLStyle_Put_posHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_posHeight dispatches through IHTMLStyle's vtable slot 175.
@@ -30090,6 +35326,14 @@ func (self *IHTMLStyle) Get_filter() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[181], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle_SetAttribute = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// SetAttribute dispatches through IHTMLStyle's vtable slot 182.
+func (self *IHTMLStyle) SetAttribute(strAttributeName foundation.BSTR, AttributeValue systemvariant.VARIANT, lFlags int32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[182], specIHTMLStyle_SetAttribute, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAttributeName)), uintptr(unsafe.Pointer(&AttributeValue)), uintptr(lFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetAttribute dispatches through IHTMLStyle's vtable slot 183.
@@ -30219,11 +35463,27 @@ func (self *IHTMLStyle2) Get_unicodeBidi() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle2_Put_bottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bottom dispatches through IHTMLStyle2's vtable slot 22.
+func (self *IHTMLStyle2) Put_bottom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLStyle2_Put_bottom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_bottom dispatches through IHTMLStyle2's vtable slot 23.
 func (self *IHTMLStyle2) Get_bottom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle2_Put_right = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_right dispatches through IHTMLStyle2's vtable slot 24.
+func (self *IHTMLStyle2) Put_right(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIHTMLStyle2_Put_right, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_right dispatches through IHTMLStyle2's vtable slot 25.
@@ -30259,11 +35519,27 @@ func (self *IHTMLStyle2) Get_pixelRight() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle2_Put_posBottom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_posBottom dispatches through IHTMLStyle2's vtable slot 30.
+func (self *IHTMLStyle2) Put_posBottom(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIHTMLStyle2_Put_posBottom, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_posBottom dispatches through IHTMLStyle2's vtable slot 31.
 func (self *IHTMLStyle2) Get_posBottom() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle2_Put_posRight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_posRight dispatches through IHTMLStyle2's vtable slot 32.
+func (self *IHTMLStyle2) Put_posRight(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIHTMLStyle2_Put_posRight, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_posRight dispatches through IHTMLStyle2's vtable slot 33.
@@ -30325,11 +35601,27 @@ func (self *IHTMLStyle2) Get_rubyOverhang() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle2_Put_layoutGridChar = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_layoutGridChar dispatches through IHTMLStyle2's vtable slot 42.
+func (self *IHTMLStyle2) Put_layoutGridChar(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIHTMLStyle2_Put_layoutGridChar, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_layoutGridChar dispatches through IHTMLStyle2's vtable slot 43.
 func (self *IHTMLStyle2) Get_layoutGridChar() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle2_Put_layoutGridLine = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_layoutGridLine dispatches through IHTMLStyle2's vtable slot 44.
+func (self *IHTMLStyle2) Put_layoutGridLine(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIHTMLStyle2_Put_layoutGridLine, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_layoutGridLine dispatches through IHTMLStyle2's vtable slot 45.
@@ -30430,6 +35722,14 @@ func (self *IHTMLStyle2) Get_textJustifyTrim() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle2_Put_textKashida = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textKashida dispatches through IHTMLStyle2's vtable slot 60.
+func (self *IHTMLStyle2) Put_textKashida(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[60], specIHTMLStyle2_Put_textKashida, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textKashida dispatches through IHTMLStyle2's vtable slot 61.
 func (self *IHTMLStyle2) Get_textKashida() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -30510,6 +35810,14 @@ func (self *IHTMLStyle3) Get_layoutFlow() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle3_Put_zoom = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_zoom dispatches through IHTMLStyle3's vtable slot 9.
+func (self *IHTMLStyle3) Put_zoom(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLStyle3_Put_zoom, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_zoom dispatches through IHTMLStyle3's vtable slot 10.
 func (self *IHTMLStyle3) Get_zoom() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -30543,11 +35851,27 @@ func (self *IHTMLStyle3) Get_textUnderlinePosition() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle3_Put_scrollbarBaseColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarBaseColor dispatches through IHTMLStyle3's vtable slot 15.
+func (self *IHTMLStyle3) Put_scrollbarBaseColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLStyle3_Put_scrollbarBaseColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbarBaseColor dispatches through IHTMLStyle3's vtable slot 16.
 func (self *IHTMLStyle3) Get_scrollbarBaseColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle3_Put_scrollbarFaceColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarFaceColor dispatches through IHTMLStyle3's vtable slot 17.
+func (self *IHTMLStyle3) Put_scrollbarFaceColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLStyle3_Put_scrollbarFaceColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarFaceColor dispatches through IHTMLStyle3's vtable slot 18.
@@ -30557,11 +35881,27 @@ func (self *IHTMLStyle3) Get_scrollbarFaceColor() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle3_Put_scrollbar3dLightColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbar3dLightColor dispatches through IHTMLStyle3's vtable slot 19.
+func (self *IHTMLStyle3) Put_scrollbar3dLightColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLStyle3_Put_scrollbar3dLightColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbar3dLightColor dispatches through IHTMLStyle3's vtable slot 20.
 func (self *IHTMLStyle3) Get_scrollbar3dLightColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle3_Put_scrollbarShadowColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarShadowColor dispatches through IHTMLStyle3's vtable slot 21.
+func (self *IHTMLStyle3) Put_scrollbarShadowColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLStyle3_Put_scrollbarShadowColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarShadowColor dispatches through IHTMLStyle3's vtable slot 22.
@@ -30571,11 +35911,27 @@ func (self *IHTMLStyle3) Get_scrollbarShadowColor() (systemvariant.VARIANT, erro
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle3_Put_scrollbarHighlightColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarHighlightColor dispatches through IHTMLStyle3's vtable slot 23.
+func (self *IHTMLStyle3) Put_scrollbarHighlightColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLStyle3_Put_scrollbarHighlightColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbarHighlightColor dispatches through IHTMLStyle3's vtable slot 24.
 func (self *IHTMLStyle3) Get_scrollbarHighlightColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle3_Put_scrollbarDarkShadowColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarDarkShadowColor dispatches through IHTMLStyle3's vtable slot 25.
+func (self *IHTMLStyle3) Put_scrollbarDarkShadowColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLStyle3_Put_scrollbarDarkShadowColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarDarkShadowColor dispatches through IHTMLStyle3's vtable slot 26.
@@ -30585,11 +35941,27 @@ func (self *IHTMLStyle3) Get_scrollbarDarkShadowColor() (systemvariant.VARIANT, 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle3_Put_scrollbarArrowColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarArrowColor dispatches through IHTMLStyle3's vtable slot 27.
+func (self *IHTMLStyle3) Put_scrollbarArrowColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLStyle3_Put_scrollbarArrowColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_scrollbarArrowColor dispatches through IHTMLStyle3's vtable slot 28.
 func (self *IHTMLStyle3) Get_scrollbarArrowColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle3_Put_scrollbarTrackColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_scrollbarTrackColor dispatches through IHTMLStyle3's vtable slot 29.
+func (self *IHTMLStyle3) Put_scrollbarTrackColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLStyle3_Put_scrollbarTrackColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_scrollbarTrackColor dispatches through IHTMLStyle3's vtable slot 30.
@@ -30625,6 +35997,14 @@ func (self *IHTMLStyle3) Get_textAlignLast() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle3_Put_textKashidaSpace = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_textKashidaSpace dispatches through IHTMLStyle3's vtable slot 35.
+func (self *IHTMLStyle3) Put_textKashidaSpace(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLStyle3_Put_textKashidaSpace, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_textKashidaSpace dispatches through IHTMLStyle3's vtable slot 36.
 func (self *IHTMLStyle3) Get_textKashidaSpace() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -30651,6 +36031,14 @@ func (self *IHTMLStyle4) Get_textOverflow() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle4_Put_minHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_minHeight dispatches through IHTMLStyle4's vtable slot 9.
+func (self *IHTMLStyle4) Put_minHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLStyle4_Put_minHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_minHeight dispatches through IHTMLStyle4's vtable slot 10.
@@ -30681,6 +36069,14 @@ func (self *IHTMLStyle5) Get_msInterpolationMode() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle5_Put_maxHeight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_maxHeight dispatches through IHTMLStyle5's vtable slot 9.
+func (self *IHTMLStyle5) Put_maxHeight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLStyle5_Put_maxHeight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_maxHeight dispatches through IHTMLStyle5's vtable slot 10.
 func (self *IHTMLStyle5) Get_maxHeight() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -30688,11 +36084,27 @@ func (self *IHTMLStyle5) Get_maxHeight() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle5_Put_minWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_minWidth dispatches through IHTMLStyle5's vtable slot 11.
+func (self *IHTMLStyle5) Put_minWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLStyle5_Put_minWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_minWidth dispatches through IHTMLStyle5's vtable slot 12.
 func (self *IHTMLStyle5) Get_minWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle5_Put_maxWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_maxWidth dispatches through IHTMLStyle5's vtable slot 13.
+func (self *IHTMLStyle5) Put_maxWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLStyle5_Put_maxWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_maxWidth dispatches through IHTMLStyle5's vtable slot 14.
@@ -30775,6 +36187,14 @@ func (self *IHTMLStyle6) Get_outline() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle6_Put_outlineWidth = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_outlineWidth dispatches through IHTMLStyle6's vtable slot 17.
+func (self *IHTMLStyle6) Put_outlineWidth(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLStyle6_Put_outlineWidth, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_outlineWidth dispatches through IHTMLStyle6's vtable slot 18.
 func (self *IHTMLStyle6) Get_outlineWidth() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -30793,6 +36213,14 @@ func (self *IHTMLStyle6) Get_outlineStyle() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle6_Put_outlineColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_outlineColor dispatches through IHTMLStyle6's vtable slot 21.
+func (self *IHTMLStyle6) Put_outlineColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLStyle6_Put_outlineColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_outlineColor dispatches through IHTMLStyle6's vtable slot 22.
@@ -30828,11 +36256,27 @@ func (self *IHTMLStyle6) Get_borderSpacing() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyle6_Put_orphans = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_orphans dispatches through IHTMLStyle6's vtable slot 27.
+func (self *IHTMLStyle6) Put_orphans(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLStyle6_Put_orphans, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_orphans dispatches through IHTMLStyle6's vtable slot 28.
 func (self *IHTMLStyle6) Get_orphans() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyle6_Put_widows = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_widows dispatches through IHTMLStyle6's vtable slot 29.
+func (self *IHTMLStyle6) Put_widows(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLStyle6_Put_widows, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_widows dispatches through IHTMLStyle6's vtable slot 30.
@@ -30922,6 +36366,14 @@ func (self *IHTMLStyleElement) Get_readyState() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyleElement_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLStyleElement's vtable slot 10.
+func (self *IHTMLStyleElement) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLStyleElement_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onreadystatechange dispatches through IHTMLStyleElement's vtable slot 11.
 func (self *IHTMLStyleElement) Get_onreadystatechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -30929,11 +36381,27 @@ func (self *IHTMLStyleElement) Get_onreadystatechange() (systemvariant.VARIANT, 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLStyleElement_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLStyleElement's vtable slot 12.
+func (self *IHTMLStyleElement) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLStyleElement_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onload dispatches through IHTMLStyleElement's vtable slot 13.
 func (self *IHTMLStyleElement) Get_onload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLStyleElement_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLStyleElement's vtable slot 14.
+func (self *IHTMLStyleElement) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLStyleElement_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onerror dispatches through IHTMLStyleElement's vtable slot 15.
@@ -31673,6 +37141,14 @@ func (self *IHTMLTable) Get_cols() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTable_Put_border = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_border dispatches through IHTMLTable's vtable slot 9.
+func (self *IHTMLTable) Put_border(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLTable_Put_border, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_border dispatches through IHTMLTable's vtable slot 10.
 func (self *IHTMLTable) Get_border() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -31706,11 +37182,27 @@ func (self *IHTMLTable) Get_rules() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTable_Put_cellSpacing = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_cellSpacing dispatches through IHTMLTable's vtable slot 15.
+func (self *IHTMLTable) Put_cellSpacing(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLTable_Put_cellSpacing, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_cellSpacing dispatches through IHTMLTable's vtable slot 16.
 func (self *IHTMLTable) Get_cellSpacing() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTable_Put_cellPadding = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_cellPadding dispatches through IHTMLTable's vtable slot 17.
+func (self *IHTMLTable) Put_cellPadding(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLTable_Put_cellPadding, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_cellPadding dispatches through IHTMLTable's vtable slot 18.
@@ -31733,11 +37225,27 @@ func (self *IHTMLTable) Get_background() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTable_Put_bgColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bgColor dispatches through IHTMLTable's vtable slot 21.
+func (self *IHTMLTable) Put_bgColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLTable_Put_bgColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_bgColor dispatches through IHTMLTable's vtable slot 22.
 func (self *IHTMLTable) Get_bgColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTable_Put_borderColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColor dispatches through IHTMLTable's vtable slot 23.
+func (self *IHTMLTable) Put_borderColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLTable_Put_borderColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderColor dispatches through IHTMLTable's vtable slot 24.
@@ -31747,11 +37255,27 @@ func (self *IHTMLTable) Get_borderColor() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTable_Put_borderColorLight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColorLight dispatches through IHTMLTable's vtable slot 25.
+func (self *IHTMLTable) Put_borderColorLight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLTable_Put_borderColorLight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderColorLight dispatches through IHTMLTable's vtable slot 26.
 func (self *IHTMLTable) Get_borderColorLight() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTable_Put_borderColorDark = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColorDark dispatches through IHTMLTable's vtable slot 27.
+func (self *IHTMLTable) Put_borderColorDark(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLTable_Put_borderColorDark, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderColorDark dispatches through IHTMLTable's vtable slot 28.
@@ -31787,11 +37311,27 @@ func (self *IHTMLTable) Get_rows() (*IHTMLElementCollection, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTable_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLTable's vtable slot 33.
+func (self *IHTMLTable) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLTable_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLTable's vtable slot 34.
 func (self *IHTMLTable) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTable_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLTable's vtable slot 35.
+func (self *IHTMLTable) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLTable_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_height dispatches through IHTMLTable's vtable slot 36.
@@ -31911,6 +37451,14 @@ func (self *IHTMLTable) Get_readyState() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTable_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLTable's vtable slot 54.
+func (self *IHTMLTable) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[54], specIHTMLTable_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onreadystatechange dispatches through IHTMLTable's vtable slot 55.
@@ -32136,6 +37684,14 @@ func (self *IHTMLTableCell) Get_vAlign() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTableCell_Put_bgColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bgColor dispatches through IHTMLTableCell's vtable slot 15.
+func (self *IHTMLTableCell) Put_bgColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLTableCell_Put_bgColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_bgColor dispatches through IHTMLTableCell's vtable slot 16.
 func (self *IHTMLTableCell) Get_bgColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -32169,11 +37725,27 @@ func (self *IHTMLTableCell) Get_background() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTableCell_Put_borderColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColor dispatches through IHTMLTableCell's vtable slot 21.
+func (self *IHTMLTableCell) Put_borderColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLTableCell_Put_borderColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderColor dispatches through IHTMLTableCell's vtable slot 22.
 func (self *IHTMLTableCell) Get_borderColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTableCell_Put_borderColorLight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColorLight dispatches through IHTMLTableCell's vtable slot 23.
+func (self *IHTMLTableCell) Put_borderColorLight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLTableCell_Put_borderColorLight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderColorLight dispatches through IHTMLTableCell's vtable slot 24.
@@ -32183,6 +37755,14 @@ func (self *IHTMLTableCell) Get_borderColorLight() (systemvariant.VARIANT, error
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTableCell_Put_borderColorDark = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColorDark dispatches through IHTMLTableCell's vtable slot 25.
+func (self *IHTMLTableCell) Put_borderColorDark(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLTableCell_Put_borderColorDark, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderColorDark dispatches through IHTMLTableCell's vtable slot 26.
 func (self *IHTMLTableCell) Get_borderColorDark() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -32190,11 +37770,27 @@ func (self *IHTMLTableCell) Get_borderColorDark() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTableCell_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLTableCell's vtable slot 27.
+func (self *IHTMLTableCell) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLTableCell_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLTableCell's vtable slot 28.
 func (self *IHTMLTableCell) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTableCell_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLTableCell's vtable slot 29.
+func (self *IHTMLTableCell) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLTableCell_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_height dispatches through IHTMLTableCell's vtable slot 30.
@@ -32352,6 +37948,14 @@ func (self *IHTMLTableCol) Get_span() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTableCol_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_width dispatches through IHTMLTableCol's vtable slot 9.
+func (self *IHTMLTableCol) Put_width(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLTableCol_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through IHTMLTableCol's vtable slot 10.
 func (self *IHTMLTableCol) Get_width() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -32487,11 +38091,27 @@ func (self *IHTMLTableRow) Get_vAlign() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTableRow_Put_bgColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bgColor dispatches through IHTMLTableRow's vtable slot 11.
+func (self *IHTMLTableRow) Put_bgColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLTableRow_Put_bgColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_bgColor dispatches through IHTMLTableRow's vtable slot 12.
 func (self *IHTMLTableRow) Get_bgColor() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTableRow_Put_borderColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColor dispatches through IHTMLTableRow's vtable slot 13.
+func (self *IHTMLTableRow) Put_borderColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLTableRow_Put_borderColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderColor dispatches through IHTMLTableRow's vtable slot 14.
@@ -32501,11 +38121,27 @@ func (self *IHTMLTableRow) Get_borderColor() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTableRow_Put_borderColorLight = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColorLight dispatches through IHTMLTableRow's vtable slot 15.
+func (self *IHTMLTableRow) Put_borderColorLight(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLTableRow_Put_borderColorLight, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_borderColorLight dispatches through IHTMLTableRow's vtable slot 16.
 func (self *IHTMLTableRow) Get_borderColorLight() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTableRow_Put_borderColorDark = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_borderColorDark dispatches through IHTMLTableRow's vtable slot 17.
+func (self *IHTMLTableRow) Put_borderColorDark(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLTableRow_Put_borderColorDark, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_borderColorDark dispatches through IHTMLTableRow's vtable slot 18.
@@ -32556,6 +38192,14 @@ type IHTMLTableRow2 struct {
 
 // IID_IHTMLTableRow2 is the interface identifier for IHTMLTableRow2.
 var IID_IHTMLTableRow2 = win32.GUID{Data1: 0x3050f4a1, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLTableRow2_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_height dispatches through IHTMLTableRow2's vtable slot 7.
+func (self *IHTMLTableRow2) Put_height(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLTableRow2_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_height dispatches through IHTMLTableRow2's vtable slot 8.
 func (self *IHTMLTableRow2) Get_height() (systemvariant.VARIANT, error) {
@@ -32713,6 +38357,14 @@ func (self *IHTMLTableSection) Get_vAlign() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTableSection_Put_bgColor = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_bgColor dispatches through IHTMLTableSection's vtable slot 11.
+func (self *IHTMLTableSection) Put_bgColor(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLTableSection_Put_bgColor, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_bgColor dispatches through IHTMLTableSection's vtable slot 12.
@@ -32879,6 +38531,14 @@ func (self *IHTMLTextAreaElement) Get_name() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTextAreaElement_Put_status = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_status dispatches through IHTMLTextAreaElement's vtable slot 12.
+func (self *IHTMLTextAreaElement) Put_status(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIHTMLTextAreaElement_Put_status, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_status dispatches through IHTMLTextAreaElement's vtable slot 13.
 func (self *IHTMLTextAreaElement) Get_status() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -32925,11 +38585,27 @@ func (self *IHTMLTextAreaElement) Select() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTextAreaElement_Put_onchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchange dispatches through IHTMLTextAreaElement's vtable slot 20.
+func (self *IHTMLTextAreaElement) Put_onchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIHTMLTextAreaElement_Put_onchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onchange dispatches through IHTMLTextAreaElement's vtable slot 21.
 func (self *IHTMLTextAreaElement) Get_onchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTextAreaElement_Put_onselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselect dispatches through IHTMLTextAreaElement's vtable slot 22.
+func (self *IHTMLTextAreaElement) Put_onselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLTextAreaElement_Put_onselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onselect dispatches through IHTMLTextAreaElement's vtable slot 23.
@@ -33091,6 +38767,14 @@ func (self *IHTMLTextContainer) Get_scrollLeft() (int32, error) {
 	_p := new(int32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLTextContainer_Put_onscroll = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onscroll dispatches through IHTMLTextContainer's vtable slot 14.
+func (self *IHTMLTextContainer) Put_onscroll(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLTextContainer_Put_onscroll, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onscroll dispatches through IHTMLTextContainer's vtable slot 15.
@@ -33448,6 +39132,15 @@ func (self *IHTMLTxtRange) QueryCommandValue(cmdID foundation.BSTR) (systemvaria
 	return *_pcmdValue, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLTxtRange_ExecCommand = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// ExecCommand dispatches through IHTMLTxtRange's vtable slot 35.
+func (self *IHTMLTxtRange) ExecCommand(cmdID foundation.BSTR, showUI foundation.VARIANT_BOOL, value systemvariant.VARIANT) (foundation.VARIANT_BOOL, error) {
+	_pfRet := new(foundation.VARIANT_BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[35], specIHTMLTxtRange_ExecCommand, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cmdID)), uintptr(showUI), uintptr(unsafe.Pointer(&value)), uintptr(win32.OutParam(unsafe.Pointer(_pfRet)))).Tuple()
+	return *_pfRet, win32.ErrIfFailed(int32(r1))
+}
+
 // ExecCommandShowHelp dispatches through IHTMLTxtRange's vtable slot 36.
 func (self *IHTMLTxtRange) ExecCommandShowHelp(cmdID foundation.BSTR) (foundation.VARIANT_BOOL, error) {
 	_pfRet := new(foundation.VARIANT_BOOL)
@@ -33732,6 +39425,14 @@ func (self *IHTMLWindow2) Close() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow2_Put_opener = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_opener dispatches through IHTMLWindow2's vtable slot 23.
+func (self *IHTMLWindow2) Put_opener(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLWindow2_Put_opener, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_opener dispatches through IHTMLWindow2's vtable slot 24.
 func (self *IHTMLWindow2) Get_opener() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -33800,11 +39501,27 @@ func (self *IHTMLWindow2) Navigate(url foundation.BSTR) error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow2_Put_onfocus = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocus dispatches through IHTMLWindow2's vtable slot 34.
+func (self *IHTMLWindow2) Put_onfocus(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIHTMLWindow2_Put_onfocus, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onfocus dispatches through IHTMLWindow2's vtable slot 35.
 func (self *IHTMLWindow2) Get_onfocus() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow2_Put_onblur = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onblur dispatches through IHTMLWindow2's vtable slot 36.
+func (self *IHTMLWindow2) Put_onblur(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIHTMLWindow2_Put_onblur, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onblur dispatches through IHTMLWindow2's vtable slot 37.
@@ -33814,11 +39531,27 @@ func (self *IHTMLWindow2) Get_onblur() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow2_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLWindow2's vtable slot 38.
+func (self *IHTMLWindow2) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIHTMLWindow2_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onload dispatches through IHTMLWindow2's vtable slot 39.
 func (self *IHTMLWindow2) Get_onload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow2_Put_onbeforeunload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeunload dispatches through IHTMLWindow2's vtable slot 40.
+func (self *IHTMLWindow2) Put_onbeforeunload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIHTMLWindow2_Put_onbeforeunload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onbeforeunload dispatches through IHTMLWindow2's vtable slot 41.
@@ -33828,11 +39561,27 @@ func (self *IHTMLWindow2) Get_onbeforeunload() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow2_Put_onunload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onunload dispatches through IHTMLWindow2's vtable slot 42.
+func (self *IHTMLWindow2) Put_onunload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIHTMLWindow2_Put_onunload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onunload dispatches through IHTMLWindow2's vtable slot 43.
 func (self *IHTMLWindow2) Get_onunload() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow2_Put_onhelp = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onhelp dispatches through IHTMLWindow2's vtable slot 44.
+func (self *IHTMLWindow2) Put_onhelp(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIHTMLWindow2_Put_onhelp, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onhelp dispatches through IHTMLWindow2's vtable slot 45.
@@ -33842,6 +39591,14 @@ func (self *IHTMLWindow2) Get_onhelp() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow2_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLWindow2's vtable slot 46.
+func (self *IHTMLWindow2) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[46], specIHTMLWindow2_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onerror dispatches through IHTMLWindow2's vtable slot 47.
 func (self *IHTMLWindow2) Get_onerror() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -33849,11 +39606,27 @@ func (self *IHTMLWindow2) Get_onerror() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow2_Put_onresize = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onresize dispatches through IHTMLWindow2's vtable slot 48.
+func (self *IHTMLWindow2) Put_onresize(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[48], specIHTMLWindow2_Put_onresize, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onresize dispatches through IHTMLWindow2's vtable slot 49.
 func (self *IHTMLWindow2) Get_onresize() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow2_Put_onscroll = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onscroll dispatches through IHTMLWindow2's vtable slot 50.
+func (self *IHTMLWindow2) Put_onscroll(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIHTMLWindow2_Put_onscroll, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onscroll dispatches through IHTMLWindow2's vtable slot 51.
@@ -33889,6 +39662,14 @@ func (self *IHTMLWindow2) ShowModalDialog(dialog foundation.BSTR, varArgIn *syst
 	_varArgOut := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dialog)), uintptr(unsafe.Pointer(varArgIn)), uintptr(unsafe.Pointer(varOptions)), uintptr(win32.OutParam(unsafe.Pointer(_varArgOut))))
 	return *_varArgOut, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow2_ShowHelp = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// ShowHelp dispatches through IHTMLWindow2's vtable slot 56.
+func (self *IHTMLWindow2) ShowHelp(helpURL foundation.BSTR, helpArg systemvariant.VARIANT, features foundation.BSTR) error {
+	r1, _, _ := win32.Call(self.LpVtbl[56], specIHTMLWindow2_ShowHelp, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(helpURL)), uintptr(unsafe.Pointer(&helpArg)), uintptr(unsafe.Pointer(features))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_screen dispatches through IHTMLWindow2's vtable slot 57.
@@ -33947,6 +39728,14 @@ func (self *IHTMLWindow2) SetInterval(expression foundation.BSTR, msec int32, la
 // ClearInterval dispatches through IHTMLWindow2's vtable slot 65.
 func (self *IHTMLWindow2) ClearInterval(timerID int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(timerID))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow2_Put_offscreenBuffering = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_offscreenBuffering dispatches through IHTMLWindow2's vtable slot 66.
+func (self *IHTMLWindow2) Put_offscreenBuffering(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[66], specIHTMLWindow2_Put_offscreenBuffering, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -34069,11 +39858,27 @@ func (self *IHTMLWindow3) Print() error {
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow3_Put_onbeforeprint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onbeforeprint dispatches through IHTMLWindow3's vtable slot 14.
+func (self *IHTMLWindow3) Put_onbeforeprint(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLWindow3_Put_onbeforeprint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onbeforeprint dispatches through IHTMLWindow3's vtable slot 15.
 func (self *IHTMLWindow3) Get_onbeforeprint() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow3_Put_onafterprint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onafterprint dispatches through IHTMLWindow3's vtable slot 16.
+func (self *IHTMLWindow3) Put_onafterprint(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLWindow3_Put_onafterprint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onafterprint dispatches through IHTMLWindow3's vtable slot 17.
@@ -34127,6 +39932,14 @@ type IHTMLWindow5 struct {
 // IID_IHTMLWindow5 is the interface identifier for IHTMLWindow5.
 var IID_IHTMLWindow5 = win32.GUID{Data1: 0x3051040e, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLWindow5_Put_XMLHttpRequest = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_XMLHttpRequest dispatches through IHTMLWindow5's vtable slot 7.
+func (self *IHTMLWindow5) Put_XMLHttpRequest(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLWindow5_Put_XMLHttpRequest, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_XMLHttpRequest dispatches through IHTMLWindow5's vtable slot 8.
 func (self *IHTMLWindow5) Get_XMLHttpRequest() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -34141,6 +39954,14 @@ type IHTMLWindow6 struct {
 
 // IID_IHTMLWindow6 is the interface identifier for IHTMLWindow6.
 var IID_IHTMLWindow6 = win32.GUID{Data1: 0x30510453, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHTMLWindow6_Put_XDomainRequest = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_XDomainRequest dispatches through IHTMLWindow6's vtable slot 7.
+func (self *IHTMLWindow6) Put_XDomainRequest(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLWindow6_Put_XDomainRequest, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_XDomainRequest dispatches through IHTMLWindow6's vtable slot 8.
 func (self *IHTMLWindow6) Get_XDomainRequest() (systemvariant.VARIANT, error) {
@@ -34163,6 +39984,14 @@ func (self *IHTMLWindow6) Get_localStorage() (*IHTMLStorage, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow6_Put_onhashchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onhashchange dispatches through IHTMLWindow6's vtable slot 11.
+func (self *IHTMLWindow6) Put_onhashchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLWindow6_Put_onhashchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onhashchange dispatches through IHTMLWindow6's vtable slot 12.
 func (self *IHTMLWindow6) Get_onhashchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -34177,11 +40006,27 @@ func (self *IHTMLWindow6) Get_maxConnectionsPerServer() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow6_PostMessage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// PostMessage dispatches through IHTMLWindow6's vtable slot 14.
+func (self *IHTMLWindow6) PostMessage(msg foundation.BSTR, targetOrigin systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specIHTMLWindow6_PostMessage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msg)), uintptr(unsafe.Pointer(&targetOrigin))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // ToStaticHTML dispatches through IHTMLWindow6's vtable slot 15.
 func (self *IHTMLWindow6) ToStaticHTML(bstrHTML foundation.BSTR) (foundation.BSTR, error) {
 	_pbstrStaticHTML := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrHTML)), uintptr(win32.OutParam(unsafe.Pointer(_pbstrStaticHTML))))
 	return *_pbstrStaticHTML, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow6_Put_onmessage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmessage dispatches through IHTMLWindow6's vtable slot 16.
+func (self *IHTMLWindow6) Put_onmessage(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLWindow6_Put_onmessage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmessage dispatches through IHTMLWindow6's vtable slot 17.
@@ -34224,6 +40069,14 @@ func (self *IHTMLWindow7) Get_styleMedia() (*IHTMLStyleMedia, error) {
 	_p := new(*IHTMLStyleMedia)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_performance = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_performance dispatches through IHTMLWindow7's vtable slot 10.
+func (self *IHTMLWindow7) Put_performance(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[10], specIHTMLWindow7_Put_performance, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_performance dispatches through IHTMLWindow7's vtable slot 11.
@@ -34289,11 +40142,27 @@ func (self *IHTMLWindow7) Get_outerHeight() (int32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onabort = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onabort dispatches through IHTMLWindow7's vtable slot 20.
+func (self *IHTMLWindow7) Put_onabort(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[20], specIHTMLWindow7_Put_onabort, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onabort dispatches through IHTMLWindow7's vtable slot 21.
 func (self *IHTMLWindow7) Get_onabort() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_oncanplay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncanplay dispatches through IHTMLWindow7's vtable slot 22.
+func (self *IHTMLWindow7) Put_oncanplay(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[22], specIHTMLWindow7_Put_oncanplay, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_oncanplay dispatches through IHTMLWindow7's vtable slot 23.
@@ -34303,11 +40172,27 @@ func (self *IHTMLWindow7) Get_oncanplay() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_oncanplaythrough = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncanplaythrough dispatches through IHTMLWindow7's vtable slot 24.
+func (self *IHTMLWindow7) Put_oncanplaythrough(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[24], specIHTMLWindow7_Put_oncanplaythrough, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_oncanplaythrough dispatches through IHTMLWindow7's vtable slot 25.
 func (self *IHTMLWindow7) Get_oncanplaythrough() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onchange dispatches through IHTMLWindow7's vtable slot 26.
+func (self *IHTMLWindow7) Put_onchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[26], specIHTMLWindow7_Put_onchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onchange dispatches through IHTMLWindow7's vtable slot 27.
@@ -34317,11 +40202,27 @@ func (self *IHTMLWindow7) Get_onchange() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onclick = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onclick dispatches through IHTMLWindow7's vtable slot 28.
+func (self *IHTMLWindow7) Put_onclick(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[28], specIHTMLWindow7_Put_onclick, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onclick dispatches through IHTMLWindow7's vtable slot 29.
 func (self *IHTMLWindow7) Get_onclick() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_oncontextmenu = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oncontextmenu dispatches through IHTMLWindow7's vtable slot 30.
+func (self *IHTMLWindow7) Put_oncontextmenu(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[30], specIHTMLWindow7_Put_oncontextmenu, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_oncontextmenu dispatches through IHTMLWindow7's vtable slot 31.
@@ -34331,11 +40232,27 @@ func (self *IHTMLWindow7) Get_oncontextmenu() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_ondblclick = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondblclick dispatches through IHTMLWindow7's vtable slot 32.
+func (self *IHTMLWindow7) Put_ondblclick(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[32], specIHTMLWindow7_Put_ondblclick, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondblclick dispatches through IHTMLWindow7's vtable slot 33.
 func (self *IHTMLWindow7) Get_ondblclick() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_ondrag = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondrag dispatches through IHTMLWindow7's vtable slot 34.
+func (self *IHTMLWindow7) Put_ondrag(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[34], specIHTMLWindow7_Put_ondrag, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondrag dispatches through IHTMLWindow7's vtable slot 35.
@@ -34345,11 +40262,27 @@ func (self *IHTMLWindow7) Get_ondrag() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_ondragend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragend dispatches through IHTMLWindow7's vtable slot 36.
+func (self *IHTMLWindow7) Put_ondragend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIHTMLWindow7_Put_ondragend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondragend dispatches through IHTMLWindow7's vtable slot 37.
 func (self *IHTMLWindow7) Get_ondragend() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_ondragenter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragenter dispatches through IHTMLWindow7's vtable slot 38.
+func (self *IHTMLWindow7) Put_ondragenter(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[38], specIHTMLWindow7_Put_ondragenter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondragenter dispatches through IHTMLWindow7's vtable slot 39.
@@ -34359,11 +40292,27 @@ func (self *IHTMLWindow7) Get_ondragenter() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_ondragleave = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragleave dispatches through IHTMLWindow7's vtable slot 40.
+func (self *IHTMLWindow7) Put_ondragleave(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[40], specIHTMLWindow7_Put_ondragleave, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondragleave dispatches through IHTMLWindow7's vtable slot 41.
 func (self *IHTMLWindow7) Get_ondragleave() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_ondragover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragover dispatches through IHTMLWindow7's vtable slot 42.
+func (self *IHTMLWindow7) Put_ondragover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[42], specIHTMLWindow7_Put_ondragover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondragover dispatches through IHTMLWindow7's vtable slot 43.
@@ -34373,11 +40322,27 @@ func (self *IHTMLWindow7) Get_ondragover() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_ondragstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondragstart dispatches through IHTMLWindow7's vtable slot 44.
+func (self *IHTMLWindow7) Put_ondragstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[44], specIHTMLWindow7_Put_ondragstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondragstart dispatches through IHTMLWindow7's vtable slot 45.
 func (self *IHTMLWindow7) Get_ondragstart() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_ondrop = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondrop dispatches through IHTMLWindow7's vtable slot 46.
+func (self *IHTMLWindow7) Put_ondrop(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[46], specIHTMLWindow7_Put_ondrop, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ondrop dispatches through IHTMLWindow7's vtable slot 47.
@@ -34387,11 +40352,27 @@ func (self *IHTMLWindow7) Get_ondrop() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_ondurationchange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ondurationchange dispatches through IHTMLWindow7's vtable slot 48.
+func (self *IHTMLWindow7) Put_ondurationchange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[48], specIHTMLWindow7_Put_ondurationchange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ondurationchange dispatches through IHTMLWindow7's vtable slot 49.
 func (self *IHTMLWindow7) Get_ondurationchange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onfocusin = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocusin dispatches through IHTMLWindow7's vtable slot 50.
+func (self *IHTMLWindow7) Put_onfocusin(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[50], specIHTMLWindow7_Put_onfocusin, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onfocusin dispatches through IHTMLWindow7's vtable slot 51.
@@ -34401,11 +40382,27 @@ func (self *IHTMLWindow7) Get_onfocusin() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onfocusout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onfocusout dispatches through IHTMLWindow7's vtable slot 52.
+func (self *IHTMLWindow7) Put_onfocusout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[52], specIHTMLWindow7_Put_onfocusout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onfocusout dispatches through IHTMLWindow7's vtable slot 53.
 func (self *IHTMLWindow7) Get_onfocusout() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_oninput = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_oninput dispatches through IHTMLWindow7's vtable slot 54.
+func (self *IHTMLWindow7) Put_oninput(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[54], specIHTMLWindow7_Put_oninput, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_oninput dispatches through IHTMLWindow7's vtable slot 55.
@@ -34415,11 +40412,27 @@ func (self *IHTMLWindow7) Get_oninput() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onemptied = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onemptied dispatches through IHTMLWindow7's vtable slot 56.
+func (self *IHTMLWindow7) Put_onemptied(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[56], specIHTMLWindow7_Put_onemptied, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onemptied dispatches through IHTMLWindow7's vtable slot 57.
 func (self *IHTMLWindow7) Get_onemptied() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onended = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onended dispatches through IHTMLWindow7's vtable slot 58.
+func (self *IHTMLWindow7) Put_onended(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[58], specIHTMLWindow7_Put_onended, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onended dispatches through IHTMLWindow7's vtable slot 59.
@@ -34429,11 +40442,27 @@ func (self *IHTMLWindow7) Get_onended() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onkeydown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onkeydown dispatches through IHTMLWindow7's vtable slot 60.
+func (self *IHTMLWindow7) Put_onkeydown(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[60], specIHTMLWindow7_Put_onkeydown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onkeydown dispatches through IHTMLWindow7's vtable slot 61.
 func (self *IHTMLWindow7) Get_onkeydown() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onkeypress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onkeypress dispatches through IHTMLWindow7's vtable slot 62.
+func (self *IHTMLWindow7) Put_onkeypress(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[62], specIHTMLWindow7_Put_onkeypress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onkeypress dispatches through IHTMLWindow7's vtable slot 63.
@@ -34443,11 +40472,27 @@ func (self *IHTMLWindow7) Get_onkeypress() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onkeyup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onkeyup dispatches through IHTMLWindow7's vtable slot 64.
+func (self *IHTMLWindow7) Put_onkeyup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[64], specIHTMLWindow7_Put_onkeyup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onkeyup dispatches through IHTMLWindow7's vtable slot 65.
 func (self *IHTMLWindow7) Get_onkeyup() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onloadeddata = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onloadeddata dispatches through IHTMLWindow7's vtable slot 66.
+func (self *IHTMLWindow7) Put_onloadeddata(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[66], specIHTMLWindow7_Put_onloadeddata, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onloadeddata dispatches through IHTMLWindow7's vtable slot 67.
@@ -34457,11 +40502,27 @@ func (self *IHTMLWindow7) Get_onloadeddata() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onloadedmetadata = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onloadedmetadata dispatches through IHTMLWindow7's vtable slot 68.
+func (self *IHTMLWindow7) Put_onloadedmetadata(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[68], specIHTMLWindow7_Put_onloadedmetadata, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onloadedmetadata dispatches through IHTMLWindow7's vtable slot 69.
 func (self *IHTMLWindow7) Get_onloadedmetadata() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onloadstart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onloadstart dispatches through IHTMLWindow7's vtable slot 70.
+func (self *IHTMLWindow7) Put_onloadstart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[70], specIHTMLWindow7_Put_onloadstart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onloadstart dispatches through IHTMLWindow7's vtable slot 71.
@@ -34471,11 +40532,27 @@ func (self *IHTMLWindow7) Get_onloadstart() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onmousedown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmousedown dispatches through IHTMLWindow7's vtable slot 72.
+func (self *IHTMLWindow7) Put_onmousedown(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[72], specIHTMLWindow7_Put_onmousedown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmousedown dispatches through IHTMLWindow7's vtable slot 73.
 func (self *IHTMLWindow7) Get_onmousedown() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onmouseenter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseenter dispatches through IHTMLWindow7's vtable slot 74.
+func (self *IHTMLWindow7) Put_onmouseenter(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[74], specIHTMLWindow7_Put_onmouseenter, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmouseenter dispatches through IHTMLWindow7's vtable slot 75.
@@ -34485,11 +40562,27 @@ func (self *IHTMLWindow7) Get_onmouseenter() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onmouseleave = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseleave dispatches through IHTMLWindow7's vtable slot 76.
+func (self *IHTMLWindow7) Put_onmouseleave(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[76], specIHTMLWindow7_Put_onmouseleave, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmouseleave dispatches through IHTMLWindow7's vtable slot 77.
 func (self *IHTMLWindow7) Get_onmouseleave() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onmousemove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmousemove dispatches through IHTMLWindow7's vtable slot 78.
+func (self *IHTMLWindow7) Put_onmousemove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[78], specIHTMLWindow7_Put_onmousemove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmousemove dispatches through IHTMLWindow7's vtable slot 79.
@@ -34499,11 +40592,27 @@ func (self *IHTMLWindow7) Get_onmousemove() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onmouseout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseout dispatches through IHTMLWindow7's vtable slot 80.
+func (self *IHTMLWindow7) Put_onmouseout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[80], specIHTMLWindow7_Put_onmouseout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmouseout dispatches through IHTMLWindow7's vtable slot 81.
 func (self *IHTMLWindow7) Get_onmouseout() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onmouseover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseover dispatches through IHTMLWindow7's vtable slot 82.
+func (self *IHTMLWindow7) Put_onmouseover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[82], specIHTMLWindow7_Put_onmouseover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmouseover dispatches through IHTMLWindow7's vtable slot 83.
@@ -34513,11 +40622,27 @@ func (self *IHTMLWindow7) Get_onmouseover() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onmouseup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmouseup dispatches through IHTMLWindow7's vtable slot 84.
+func (self *IHTMLWindow7) Put_onmouseup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[84], specIHTMLWindow7_Put_onmouseup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmouseup dispatches through IHTMLWindow7's vtable slot 85.
 func (self *IHTMLWindow7) Get_onmouseup() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onmousewheel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmousewheel dispatches through IHTMLWindow7's vtable slot 86.
+func (self *IHTMLWindow7) Put_onmousewheel(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[86], specIHTMLWindow7_Put_onmousewheel, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmousewheel dispatches through IHTMLWindow7's vtable slot 87.
@@ -34527,11 +40652,27 @@ func (self *IHTMLWindow7) Get_onmousewheel() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onoffline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onoffline dispatches through IHTMLWindow7's vtable slot 88.
+func (self *IHTMLWindow7) Put_onoffline(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[88], specIHTMLWindow7_Put_onoffline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onoffline dispatches through IHTMLWindow7's vtable slot 89.
 func (self *IHTMLWindow7) Get_onoffline() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_ononline = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ononline dispatches through IHTMLWindow7's vtable slot 90.
+func (self *IHTMLWindow7) Put_ononline(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[90], specIHTMLWindow7_Put_ononline, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ononline dispatches through IHTMLWindow7's vtable slot 91.
@@ -34541,11 +40682,27 @@ func (self *IHTMLWindow7) Get_ononline() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onprogress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onprogress dispatches through IHTMLWindow7's vtable slot 92.
+func (self *IHTMLWindow7) Put_onprogress(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[92], specIHTMLWindow7_Put_onprogress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onprogress dispatches through IHTMLWindow7's vtable slot 93.
 func (self *IHTMLWindow7) Get_onprogress() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onratechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onratechange dispatches through IHTMLWindow7's vtable slot 94.
+func (self *IHTMLWindow7) Put_onratechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[94], specIHTMLWindow7_Put_onratechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onratechange dispatches through IHTMLWindow7's vtable slot 95.
@@ -34555,11 +40712,27 @@ func (self *IHTMLWindow7) Get_onratechange() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLWindow7's vtable slot 96.
+func (self *IHTMLWindow7) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[96], specIHTMLWindow7_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onreadystatechange dispatches through IHTMLWindow7's vtable slot 97.
 func (self *IHTMLWindow7) Get_onreadystatechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onreset = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreset dispatches through IHTMLWindow7's vtable slot 98.
+func (self *IHTMLWindow7) Put_onreset(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[98], specIHTMLWindow7_Put_onreset, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onreset dispatches through IHTMLWindow7's vtable slot 99.
@@ -34569,11 +40742,27 @@ func (self *IHTMLWindow7) Get_onreset() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onseeked = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onseeked dispatches through IHTMLWindow7's vtable slot 100.
+func (self *IHTMLWindow7) Put_onseeked(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[100], specIHTMLWindow7_Put_onseeked, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onseeked dispatches through IHTMLWindow7's vtable slot 101.
 func (self *IHTMLWindow7) Get_onseeked() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onseeking = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onseeking dispatches through IHTMLWindow7's vtable slot 102.
+func (self *IHTMLWindow7) Put_onseeking(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[102], specIHTMLWindow7_Put_onseeking, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onseeking dispatches through IHTMLWindow7's vtable slot 103.
@@ -34583,11 +40772,27 @@ func (self *IHTMLWindow7) Get_onseeking() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onselect = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onselect dispatches through IHTMLWindow7's vtable slot 104.
+func (self *IHTMLWindow7) Put_onselect(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[104], specIHTMLWindow7_Put_onselect, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onselect dispatches through IHTMLWindow7's vtable slot 105.
 func (self *IHTMLWindow7) Get_onselect() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onstalled = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstalled dispatches through IHTMLWindow7's vtable slot 106.
+func (self *IHTMLWindow7) Put_onstalled(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[106], specIHTMLWindow7_Put_onstalled, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onstalled dispatches through IHTMLWindow7's vtable slot 107.
@@ -34597,11 +40802,27 @@ func (self *IHTMLWindow7) Get_onstalled() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onstorage = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onstorage dispatches through IHTMLWindow7's vtable slot 108.
+func (self *IHTMLWindow7) Put_onstorage(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[108], specIHTMLWindow7_Put_onstorage, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onstorage dispatches through IHTMLWindow7's vtable slot 109.
 func (self *IHTMLWindow7) Get_onstorage() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onsubmit = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onsubmit dispatches through IHTMLWindow7's vtable slot 110.
+func (self *IHTMLWindow7) Put_onsubmit(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[110], specIHTMLWindow7_Put_onsubmit, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onsubmit dispatches through IHTMLWindow7's vtable slot 111.
@@ -34611,11 +40832,27 @@ func (self *IHTMLWindow7) Get_onsubmit() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onsuspend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onsuspend dispatches through IHTMLWindow7's vtable slot 112.
+func (self *IHTMLWindow7) Put_onsuspend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[112], specIHTMLWindow7_Put_onsuspend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onsuspend dispatches through IHTMLWindow7's vtable slot 113.
 func (self *IHTMLWindow7) Get_onsuspend() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[113], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_ontimeupdate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ontimeupdate dispatches through IHTMLWindow7's vtable slot 114.
+func (self *IHTMLWindow7) Put_ontimeupdate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[114], specIHTMLWindow7_Put_ontimeupdate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ontimeupdate dispatches through IHTMLWindow7's vtable slot 115.
@@ -34625,11 +40862,27 @@ func (self *IHTMLWindow7) Get_ontimeupdate() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onpause = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onpause dispatches through IHTMLWindow7's vtable slot 116.
+func (self *IHTMLWindow7) Put_onpause(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[116], specIHTMLWindow7_Put_onpause, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onpause dispatches through IHTMLWindow7's vtable slot 117.
 func (self *IHTMLWindow7) Get_onpause() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onplay = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onplay dispatches through IHTMLWindow7's vtable slot 118.
+func (self *IHTMLWindow7) Put_onplay(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[118], specIHTMLWindow7_Put_onplay, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onplay dispatches through IHTMLWindow7's vtable slot 119.
@@ -34639,6 +40892,14 @@ func (self *IHTMLWindow7) Get_onplay() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onplaying = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onplaying dispatches through IHTMLWindow7's vtable slot 120.
+func (self *IHTMLWindow7) Put_onplaying(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[120], specIHTMLWindow7_Put_onplaying, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onplaying dispatches through IHTMLWindow7's vtable slot 121.
 func (self *IHTMLWindow7) Get_onplaying() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -34646,11 +40907,27 @@ func (self *IHTMLWindow7) Get_onplaying() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow7_Put_onvolumechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onvolumechange dispatches through IHTMLWindow7's vtable slot 122.
+func (self *IHTMLWindow7) Put_onvolumechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[122], specIHTMLWindow7_Put_onvolumechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onvolumechange dispatches through IHTMLWindow7's vtable slot 123.
 func (self *IHTMLWindow7) Get_onvolumechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[123], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow7_Put_onwaiting = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onwaiting dispatches through IHTMLWindow7's vtable slot 124.
+func (self *IHTMLWindow7) Put_onwaiting(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[124], specIHTMLWindow7_Put_onwaiting, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onwaiting dispatches through IHTMLWindow7's vtable slot 125.
@@ -34668,11 +40945,27 @@ type IHTMLWindow8 struct {
 // IID_IHTMLWindow8 is the interface identifier for IHTMLWindow8.
 var IID_IHTMLWindow8 = win32.GUID{Data1: 0x305107ab, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specIHTMLWindow8_Put_onmspointerdown = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerdown dispatches through IHTMLWindow8's vtable slot 7.
+func (self *IHTMLWindow8) Put_onmspointerdown(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHTMLWindow8_Put_onmspointerdown, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointerdown dispatches through IHTMLWindow8's vtable slot 8.
 func (self *IHTMLWindow8) Get_onmspointerdown() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow8_Put_onmspointermove = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointermove dispatches through IHTMLWindow8's vtable slot 9.
+func (self *IHTMLWindow8) Put_onmspointermove(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLWindow8_Put_onmspointermove, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointermove dispatches through IHTMLWindow8's vtable slot 10.
@@ -34682,11 +40975,27 @@ func (self *IHTMLWindow8) Get_onmspointermove() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow8_Put_onmspointerup = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerup dispatches through IHTMLWindow8's vtable slot 11.
+func (self *IHTMLWindow8) Put_onmspointerup(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLWindow8_Put_onmspointerup, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointerup dispatches through IHTMLWindow8's vtable slot 12.
 func (self *IHTMLWindow8) Get_onmspointerup() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow8_Put_onmspointerover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerover dispatches through IHTMLWindow8's vtable slot 13.
+func (self *IHTMLWindow8) Put_onmspointerover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLWindow8_Put_onmspointerover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointerover dispatches through IHTMLWindow8's vtable slot 14.
@@ -34696,11 +41005,27 @@ func (self *IHTMLWindow8) Get_onmspointerover() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow8_Put_onmspointerout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerout dispatches through IHTMLWindow8's vtable slot 15.
+func (self *IHTMLWindow8) Put_onmspointerout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLWindow8_Put_onmspointerout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointerout dispatches through IHTMLWindow8's vtable slot 16.
 func (self *IHTMLWindow8) Get_onmspointerout() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow8_Put_onmspointercancel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointercancel dispatches through IHTMLWindow8's vtable slot 17.
+func (self *IHTMLWindow8) Put_onmspointercancel(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLWindow8_Put_onmspointercancel, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmspointercancel dispatches through IHTMLWindow8's vtable slot 18.
@@ -34710,11 +41035,27 @@ func (self *IHTMLWindow8) Get_onmspointercancel() (systemvariant.VARIANT, error)
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow8_Put_onmspointerhover = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmspointerhover dispatches through IHTMLWindow8's vtable slot 19.
+func (self *IHTMLWindow8) Put_onmspointerhover(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[19], specIHTMLWindow8_Put_onmspointerhover, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmspointerhover dispatches through IHTMLWindow8's vtable slot 20.
 func (self *IHTMLWindow8) Get_onmspointerhover() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow8_Put_onmsgesturestart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturestart dispatches through IHTMLWindow8's vtable slot 21.
+func (self *IHTMLWindow8) Put_onmsgesturestart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLWindow8_Put_onmsgesturestart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsgesturestart dispatches through IHTMLWindow8's vtable slot 22.
@@ -34724,11 +41065,27 @@ func (self *IHTMLWindow8) Get_onmsgesturestart() (systemvariant.VARIANT, error) 
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow8_Put_onmsgesturechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturechange dispatches through IHTMLWindow8's vtable slot 23.
+func (self *IHTMLWindow8) Put_onmsgesturechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specIHTMLWindow8_Put_onmsgesturechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgesturechange dispatches through IHTMLWindow8's vtable slot 24.
 func (self *IHTMLWindow8) Get_onmsgesturechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow8_Put_onmsgestureend = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgestureend dispatches through IHTMLWindow8's vtable slot 25.
+func (self *IHTMLWindow8) Put_onmsgestureend(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specIHTMLWindow8_Put_onmsgestureend, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsgestureend dispatches through IHTMLWindow8's vtable slot 26.
@@ -34738,11 +41095,27 @@ func (self *IHTMLWindow8) Get_onmsgestureend() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow8_Put_onmsgesturehold = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturehold dispatches through IHTMLWindow8's vtable slot 27.
+func (self *IHTMLWindow8) Put_onmsgesturehold(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIHTMLWindow8_Put_onmsgesturehold, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgesturehold dispatches through IHTMLWindow8's vtable slot 28.
 func (self *IHTMLWindow8) Get_onmsgesturehold() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow8_Put_onmsgesturetap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturetap dispatches through IHTMLWindow8's vtable slot 29.
+func (self *IHTMLWindow8) Put_onmsgesturetap(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[29], specIHTMLWindow8_Put_onmsgesturetap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsgesturetap dispatches through IHTMLWindow8's vtable slot 30.
@@ -34752,11 +41125,27 @@ func (self *IHTMLWindow8) Get_onmsgesturetap() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLWindow8_Put_onmsgesturedoubletap = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsgesturedoubletap dispatches through IHTMLWindow8's vtable slot 31.
+func (self *IHTMLWindow8) Put_onmsgesturedoubletap(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[31], specIHTMLWindow8_Put_onmsgesturedoubletap, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onmsgesturedoubletap dispatches through IHTMLWindow8's vtable slot 32.
 func (self *IHTMLWindow8) Get_onmsgesturedoubletap() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow8_Put_onmsinertiastart = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onmsinertiastart dispatches through IHTMLWindow8's vtable slot 33.
+func (self *IHTMLWindow8) Put_onmsinertiastart(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specIHTMLWindow8_Put_onmsinertiastart, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onmsinertiastart dispatches through IHTMLWindow8's vtable slot 34.
@@ -34771,6 +41160,14 @@ func (self *IHTMLWindow8) Get_applicationCache() (*IHTMLApplicationCache, error)
 	_p := new(*IHTMLApplicationCache)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLWindow8_Put_onpopstate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onpopstate dispatches through IHTMLWindow8's vtable slot 36.
+func (self *IHTMLWindow8) Put_onpopstate(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[36], specIHTMLWindow8_Put_onpopstate, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onpopstate dispatches through IHTMLWindow8's vtable slot 37.
@@ -34815,11 +41212,27 @@ func (self *IHTMLXDomainRequest) Get_contentType() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLXDomainRequest_Put_onprogress = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onprogress dispatches through IHTMLXDomainRequest's vtable slot 11.
+func (self *IHTMLXDomainRequest) Put_onprogress(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specIHTMLXDomainRequest_Put_onprogress, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onprogress dispatches through IHTMLXDomainRequest's vtable slot 12.
 func (self *IHTMLXDomainRequest) Get_onprogress() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLXDomainRequest_Put_onerror = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onerror dispatches through IHTMLXDomainRequest's vtable slot 13.
+func (self *IHTMLXDomainRequest) Put_onerror(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLXDomainRequest_Put_onerror, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onerror dispatches through IHTMLXDomainRequest's vtable slot 14.
@@ -34829,11 +41242,27 @@ func (self *IHTMLXDomainRequest) Get_onerror() (systemvariant.VARIANT, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLXDomainRequest_Put_ontimeout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ontimeout dispatches through IHTMLXDomainRequest's vtable slot 15.
+func (self *IHTMLXDomainRequest) Put_ontimeout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specIHTMLXDomainRequest_Put_ontimeout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_ontimeout dispatches through IHTMLXDomainRequest's vtable slot 16.
 func (self *IHTMLXDomainRequest) Get_ontimeout() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLXDomainRequest_Put_onload = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onload dispatches through IHTMLXDomainRequest's vtable slot 17.
+func (self *IHTMLXDomainRequest) Put_onload(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLXDomainRequest_Put_onload, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onload dispatches through IHTMLXDomainRequest's vtable slot 18.
@@ -34852,6 +41281,14 @@ func (self *IHTMLXDomainRequest) Abort() error {
 // Open dispatches through IHTMLXDomainRequest's vtable slot 20.
 func (self *IHTMLXDomainRequest) Open(bstrMethod foundation.BSTR, bstrUrl foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMethod)), uintptr(unsafe.Pointer(bstrUrl)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLXDomainRequest_Send = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Send dispatches through IHTMLXDomainRequest's vtable slot 21.
+func (self *IHTMLXDomainRequest) Send(varBody systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specIHTMLXDomainRequest_Send, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varBody))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -34920,6 +41357,14 @@ func (self *IHTMLXMLHttpRequest) Get_statusText() (foundation.BSTR, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specIHTMLXMLHttpRequest_Put_onreadystatechange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onreadystatechange dispatches through IHTMLXMLHttpRequest's vtable slot 13.
+func (self *IHTMLXMLHttpRequest) Put_onreadystatechange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specIHTMLXMLHttpRequest_Put_onreadystatechange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_onreadystatechange dispatches through IHTMLXMLHttpRequest's vtable slot 14.
 func (self *IHTMLXMLHttpRequest) Get_onreadystatechange() (systemvariant.VARIANT, error) {
 	_p := new(systemvariant.VARIANT)
@@ -34930,6 +41375,22 @@ func (self *IHTMLXMLHttpRequest) Get_onreadystatechange() (systemvariant.VARIANT
 // Abort dispatches through IHTMLXMLHttpRequest's vtable slot 15.
 func (self *IHTMLXMLHttpRequest) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLXMLHttpRequest_Open = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false), win32.Struct(24, 8, 0, false)}}
+
+// Open dispatches through IHTMLXMLHttpRequest's vtable slot 16.
+func (self *IHTMLXMLHttpRequest) Open(bstrMethod foundation.BSTR, bstrUrl foundation.BSTR, varAsync systemvariant.VARIANT, varUser systemvariant.VARIANT, varPassword systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specIHTMLXMLHttpRequest_Open, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrMethod)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(unsafe.Pointer(&varAsync)), uintptr(unsafe.Pointer(&varUser)), uintptr(unsafe.Pointer(&varPassword))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLXMLHttpRequest_Send = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Send dispatches through IHTMLXMLHttpRequest's vtable slot 17.
+func (self *IHTMLXMLHttpRequest) Send(varBody systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIHTMLXMLHttpRequest_Send, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&varBody))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -34972,6 +41433,14 @@ func (self *IHTMLXMLHttpRequest2) Get_timeout() (int32, error) {
 	_p := new(int32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIHTMLXMLHttpRequest2_Put_ontimeout = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_ontimeout dispatches through IHTMLXMLHttpRequest2's vtable slot 9.
+func (self *IHTMLXMLHttpRequest2) Put_ontimeout(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIHTMLXMLHttpRequest2_Put_ontimeout, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ontimeout dispatches through IHTMLXMLHttpRequest2's vtable slot 10.
@@ -35066,6 +41535,15 @@ type IHtmlDlgSafeHelper struct {
 
 // IID_IHtmlDlgSafeHelper is the interface identifier for IHtmlDlgSafeHelper.
 var IID_IHtmlDlgSafeHelper = win32.GUID{Data1: 0x3050f81a, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specIHtmlDlgSafeHelper_Choosecolordlg = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
+
+// Choosecolordlg dispatches through IHtmlDlgSafeHelper's vtable slot 7.
+func (self *IHtmlDlgSafeHelper) Choosecolordlg(initColor systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	_rgbColor := new(systemvariant.VARIANT)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIHtmlDlgSafeHelper_Choosecolordlg, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&initColor)), uintptr(win32.OutParam(unsafe.Pointer(_rgbColor)))).Tuple()
+	return *_rgbColor, win32.ErrIfFailed(int32(r1))
+}
 
 // GetCharset dispatches through IHtmlDlgSafeHelper's vtable slot 8.
 func (self *IHtmlDlgSafeHelper) GetCharset(fontName foundation.BSTR) (systemvariant.VARIANT, error) {
@@ -36079,11 +42557,27 @@ func (self *ISVGAngle) Get_unitType() (int16, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGAngle_Put_value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_value dispatches through ISVGAngle's vtable slot 9.
+func (self *ISVGAngle) Put_value(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGAngle_Put_value, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_value dispatches through ISVGAngle's vtable slot 10.
 func (self *ISVGAngle) Get_value() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGAngle_Put_valueInSpecifiedUnits = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_valueInSpecifiedUnits dispatches through ISVGAngle's vtable slot 11.
+func (self *ISVGAngle) Put_valueInSpecifiedUnits(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGAngle_Put_valueInSpecifiedUnits, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_valueInSpecifiedUnits dispatches through ISVGAngle's vtable slot 12.
@@ -36104,6 +42598,14 @@ func (self *ISVGAngle) Get_valueAsString() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGAngle_NewValueSpecifiedUnits = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// NewValueSpecifiedUnits dispatches through ISVGAngle's vtable slot 15.
+func (self *ISVGAngle) NewValueSpecifiedUnits(unitType int16, valueInSpecifiedUnits float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISVGAngle_NewValueSpecifiedUnits, nil, uintptr(unsafe.Pointer(self)), uintptr(unitType), uintptr(math.Float32bits(valueInSpecifiedUnits))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertToSpecifiedUnits dispatches through ISVGAngle's vtable slot 16.
@@ -36324,11 +42826,27 @@ type ISVGAnimatedNumber struct {
 // IID_ISVGAnimatedNumber is the interface identifier for ISVGAnimatedNumber.
 var IID_ISVGAnimatedNumber = win32.GUID{Data1: 0x305104cc, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGAnimatedNumber_Put_baseVal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_baseVal dispatches through ISVGAnimatedNumber's vtable slot 7.
+func (self *ISVGAnimatedNumber) Put_baseVal(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGAnimatedNumber_Put_baseVal, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_baseVal dispatches through ISVGAnimatedNumber's vtable slot 8.
 func (self *ISVGAnimatedNumber) Get_baseVal() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGAnimatedNumber_Put_animVal = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_animVal dispatches through ISVGAnimatedNumber's vtable slot 9.
+func (self *ISVGAnimatedNumber) Put_animVal(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGAnimatedNumber_Put_animVal, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_animVal dispatches through ISVGAnimatedNumber's vtable slot 10.
@@ -37142,11 +43660,27 @@ func (self *ISVGLength) Get_unitType() (int16, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGLength_Put_value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_value dispatches through ISVGLength's vtable slot 9.
+func (self *ISVGLength) Put_value(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGLength_Put_value, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_value dispatches through ISVGLength's vtable slot 10.
 func (self *ISVGLength) Get_value() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGLength_Put_valueInSpecifiedUnits = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_valueInSpecifiedUnits dispatches through ISVGLength's vtable slot 11.
+func (self *ISVGLength) Put_valueInSpecifiedUnits(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGLength_Put_valueInSpecifiedUnits, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_valueInSpecifiedUnits dispatches through ISVGLength's vtable slot 12.
@@ -37167,6 +43701,14 @@ func (self *ISVGLength) Get_valueAsString() (foundation.BSTR, error) {
 	_p := new(foundation.BSTR)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGLength_NewValueSpecifiedUnits = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Float32}}
+
+// NewValueSpecifiedUnits dispatches through ISVGLength's vtable slot 15.
+func (self *ISVGLength) NewValueSpecifiedUnits(unitType int16, valueInSpecifiedUnits float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISVGLength_NewValueSpecifiedUnits, nil, uintptr(unsafe.Pointer(self)), uintptr(unitType), uintptr(math.Float32bits(valueInSpecifiedUnits))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // ConvertToSpecifiedUnits dispatches through ISVGLength's vtable slot 16.
@@ -37619,11 +44161,27 @@ type ISVGMatrix struct {
 // IID_ISVGMatrix is the interface identifier for ISVGMatrix.
 var IID_ISVGMatrix = win32.GUID{Data1: 0x305104f6, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGMatrix_Put_a = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_a dispatches through ISVGMatrix's vtable slot 7.
+func (self *ISVGMatrix) Put_a(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGMatrix_Put_a, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_a dispatches through ISVGMatrix's vtable slot 8.
 func (self *ISVGMatrix) Get_a() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGMatrix_Put_b = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_b dispatches through ISVGMatrix's vtable slot 9.
+func (self *ISVGMatrix) Put_b(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGMatrix_Put_b, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_b dispatches through ISVGMatrix's vtable slot 10.
@@ -37633,11 +44191,27 @@ func (self *ISVGMatrix) Get_b() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGMatrix_Put_c = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_c dispatches through ISVGMatrix's vtable slot 11.
+func (self *ISVGMatrix) Put_c(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGMatrix_Put_c, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_c dispatches through ISVGMatrix's vtable slot 12.
 func (self *ISVGMatrix) Get_c() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGMatrix_Put_d = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_d dispatches through ISVGMatrix's vtable slot 13.
+func (self *ISVGMatrix) Put_d(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGMatrix_Put_d, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_d dispatches through ISVGMatrix's vtable slot 14.
@@ -37647,11 +44221,27 @@ func (self *ISVGMatrix) Get_d() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGMatrix_Put_e = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_e dispatches through ISVGMatrix's vtable slot 15.
+func (self *ISVGMatrix) Put_e(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISVGMatrix_Put_e, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_e dispatches through ISVGMatrix's vtable slot 16.
 func (self *ISVGMatrix) Get_e() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGMatrix_Put_f = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_f dispatches through ISVGMatrix's vtable slot 17.
+func (self *ISVGMatrix) Put_f(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specISVGMatrix_Put_f, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_f dispatches through ISVGMatrix's vtable slot 18.
@@ -37675,6 +44265,51 @@ func (self *ISVGMatrix) Inverse() (*ISVGMatrix, error) {
 	return *_ppResult, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGMatrix_Translate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// Translate dispatches through ISVGMatrix's vtable slot 21.
+func (self *ISVGMatrix) Translate(x float32, y float32) (*ISVGMatrix, error) {
+	_ppResult := new(*ISVGMatrix)
+	r1, _, _ := win32.Call(self.LpVtbl[21], specISVGMatrix_Translate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGMatrix_Scale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// Scale dispatches through ISVGMatrix's vtable slot 22.
+func (self *ISVGMatrix) Scale(scaleFactor float32) (*ISVGMatrix, error) {
+	_ppResult := new(*ISVGMatrix)
+	r1, _, _ := win32.Call(self.LpVtbl[22], specISVGMatrix_Scale, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(scaleFactor)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGMatrix_ScaleNonUniform = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// ScaleNonUniform dispatches through ISVGMatrix's vtable slot 23.
+func (self *ISVGMatrix) ScaleNonUniform(scaleFactorX float32, scaleFactorY float32) (*ISVGMatrix, error) {
+	_ppResult := new(*ISVGMatrix)
+	r1, _, _ := win32.Call(self.LpVtbl[23], specISVGMatrix_ScaleNonUniform, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(scaleFactorX)), uintptr(math.Float32bits(scaleFactorY)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGMatrix_Rotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// Rotate dispatches through ISVGMatrix's vtable slot 24.
+func (self *ISVGMatrix) Rotate(angle float32) (*ISVGMatrix, error) {
+	_ppResult := new(*ISVGMatrix)
+	r1, _, _ := win32.Call(self.LpVtbl[24], specISVGMatrix_Rotate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angle)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGMatrix_RotateFromVector = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// RotateFromVector dispatches through ISVGMatrix's vtable slot 25.
+func (self *ISVGMatrix) RotateFromVector(x float32, y float32) (*ISVGMatrix, error) {
+	_ppResult := new(*ISVGMatrix)
+	r1, _, _ := win32.Call(self.LpVtbl[25], specISVGMatrix_RotateFromVector, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
 // FlipX dispatches through ISVGMatrix's vtable slot 26.
 func (self *ISVGMatrix) FlipX() (*ISVGMatrix, error) {
 	_ppResult := new(*ISVGMatrix)
@@ -37686,6 +44321,24 @@ func (self *ISVGMatrix) FlipX() (*ISVGMatrix, error) {
 func (self *ISVGMatrix) FlipY() (*ISVGMatrix, error) {
 	_ppResult := new(*ISVGMatrix)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult))))
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGMatrix_SkewX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SkewX dispatches through ISVGMatrix's vtable slot 28.
+func (self *ISVGMatrix) SkewX(angle float32) (*ISVGMatrix, error) {
+	_ppResult := new(*ISVGMatrix)
+	r1, _, _ := win32.Call(self.LpVtbl[28], specISVGMatrix_SkewX, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angle)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGMatrix_SkewY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// SkewY dispatches through ISVGMatrix's vtable slot 29.
+func (self *ISVGMatrix) SkewY(angle float32) (*ISVGMatrix, error) {
+	_ppResult := new(*ISVGMatrix)
+	r1, _, _ := win32.Call(self.LpVtbl[29], specISVGMatrix_SkewY, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angle)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
 	return *_ppResult, win32.ErrIfFailed(int32(r1))
 }
 
@@ -37704,6 +44357,14 @@ type ISVGNumber struct {
 
 // IID_ISVGNumber is the interface identifier for ISVGNumber.
 var IID_ISVGNumber = win32.GUID{Data1: 0x305104cb, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specISVGNumber_Put_value = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_value dispatches through ISVGNumber's vtable slot 7.
+func (self *ISVGNumber) Put_value(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGNumber_Put_value, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_value dispatches through ISVGNumber's vtable slot 8.
 func (self *ISVGNumber) Get_value() (float32, error) {
@@ -37817,10 +44478,190 @@ func (self *ISVGPathElement) GetTotalLength() (float32, error) {
 	return *_pfltResult, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathElement_GetPointAtLength = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// GetPointAtLength dispatches through ISVGPathElement's vtable slot 10.
+func (self *ISVGPathElement) GetPointAtLength(fltdistance float32) (*ISVGPoint, error) {
+	_ppPointResult := new(*ISVGPoint)
+	r1, _, _ := win32.Call(self.LpVtbl[10], specISVGPathElement_GetPointAtLength, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fltdistance)), uintptr(win32.OutParam(unsafe.Pointer(_ppPointResult)))).Tuple()
+	return *_ppPointResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_GetPathSegAtLength = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// GetPathSegAtLength dispatches through ISVGPathElement's vtable slot 11.
+func (self *ISVGPathElement) GetPathSegAtLength(fltdistance float32) (int32, error) {
+	_plResult := new(int32)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGPathElement_GetPathSegAtLength, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(fltdistance)), uintptr(win32.OutParam(unsafe.Pointer(_plResult)))).Tuple()
+	return *_plResult, win32.ErrIfFailed(int32(r1))
+}
+
 // CreateSVGPathSegClosePath dispatches through ISVGPathElement's vtable slot 12.
 func (self *ISVGPathElement) CreateSVGPathSegClosePath() (*ISVGPathSegClosePath, error) {
 	_ppResult := new(*ISVGPathSegClosePath)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult))))
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegMovetoAbs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegMovetoAbs dispatches through ISVGPathElement's vtable slot 13.
+func (self *ISVGPathElement) CreateSVGPathSegMovetoAbs(x float32, y float32) (*ISVGPathSegMovetoAbs, error) {
+	_ppResult := new(*ISVGPathSegMovetoAbs)
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGPathElement_CreateSVGPathSegMovetoAbs, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegMovetoRel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegMovetoRel dispatches through ISVGPathElement's vtable slot 14.
+func (self *ISVGPathElement) CreateSVGPathSegMovetoRel(x float32, y float32) (*ISVGPathSegMovetoRel, error) {
+	_ppResult := new(*ISVGPathSegMovetoRel)
+	r1, _, _ := win32.Call(self.LpVtbl[14], specISVGPathElement_CreateSVGPathSegMovetoRel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegLinetoAbs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegLinetoAbs dispatches through ISVGPathElement's vtable slot 15.
+func (self *ISVGPathElement) CreateSVGPathSegLinetoAbs(x float32, y float32) (*ISVGPathSegLinetoAbs, error) {
+	_ppResult := new(*ISVGPathSegLinetoAbs)
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISVGPathElement_CreateSVGPathSegLinetoAbs, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegLinetoRel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegLinetoRel dispatches through ISVGPathElement's vtable slot 16.
+func (self *ISVGPathElement) CreateSVGPathSegLinetoRel(x float32, y float32) (*ISVGPathSegLinetoRel, error) {
+	_ppResult := new(*ISVGPathSegLinetoRel)
+	r1, _, _ := win32.Call(self.LpVtbl[16], specISVGPathElement_CreateSVGPathSegLinetoRel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegCurvetoCubicAbs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegCurvetoCubicAbs dispatches through ISVGPathElement's vtable slot 17.
+func (self *ISVGPathElement) CreateSVGPathSegCurvetoCubicAbs(x float32, y float32, x1 float32, y1 float32, x2 float32, y2 float32) (*ISVGPathSegCurvetoCubicAbs, error) {
+	_ppResult := new(*ISVGPathSegCurvetoCubicAbs)
+	r1, _, _ := win32.Call(self.LpVtbl[17], specISVGPathElement_CreateSVGPathSegCurvetoCubicAbs, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegCurvetoCubicRel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegCurvetoCubicRel dispatches through ISVGPathElement's vtable slot 18.
+func (self *ISVGPathElement) CreateSVGPathSegCurvetoCubicRel(x float32, y float32, x1 float32, y1 float32, x2 float32, y2 float32) (*ISVGPathSegCurvetoCubicRel, error) {
+	_ppResult := new(*ISVGPathSegCurvetoCubicRel)
+	r1, _, _ := win32.Call(self.LpVtbl[18], specISVGPathElement_CreateSVGPathSegCurvetoCubicRel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegCurvetoQuadraticAbs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegCurvetoQuadraticAbs dispatches through ISVGPathElement's vtable slot 19.
+func (self *ISVGPathElement) CreateSVGPathSegCurvetoQuadraticAbs(x float32, y float32, x1 float32, y1 float32) (*ISVGPathSegCurvetoQuadraticAbs, error) {
+	_ppResult := new(*ISVGPathSegCurvetoQuadraticAbs)
+	r1, _, _ := win32.Call(self.LpVtbl[19], specISVGPathElement_CreateSVGPathSegCurvetoQuadraticAbs, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegCurvetoQuadraticRel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegCurvetoQuadraticRel dispatches through ISVGPathElement's vtable slot 20.
+func (self *ISVGPathElement) CreateSVGPathSegCurvetoQuadraticRel(x float32, y float32, x1 float32, y1 float32) (*ISVGPathSegCurvetoQuadraticRel, error) {
+	_ppResult := new(*ISVGPathSegCurvetoQuadraticRel)
+	r1, _, _ := win32.Call(self.LpVtbl[20], specISVGPathElement_CreateSVGPathSegCurvetoQuadraticRel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(x1)), uintptr(math.Float32bits(y1)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegArcAbs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// CreateSVGPathSegArcAbs dispatches through ISVGPathElement's vtable slot 21.
+func (self *ISVGPathElement) CreateSVGPathSegArcAbs(x float32, y float32, r1_ float32, r2_ float32, angle float32, largeArcFlag foundation.VARIANT_BOOL, sweepFlag foundation.VARIANT_BOOL) (*ISVGPathSegArcAbs, error) {
+	_ppResult := new(*ISVGPathSegArcAbs)
+	r1, _, _ := win32.Call(self.LpVtbl[21], specISVGPathElement_CreateSVGPathSegArcAbs, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(r1_)), uintptr(math.Float32bits(r2_)), uintptr(math.Float32bits(angle)), uintptr(largeArcFlag), uintptr(sweepFlag), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegArcRel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
+
+// CreateSVGPathSegArcRel dispatches through ISVGPathElement's vtable slot 22.
+func (self *ISVGPathElement) CreateSVGPathSegArcRel(x float32, y float32, r1_ float32, r2_ float32, angle float32, largeArcFlag foundation.VARIANT_BOOL, sweepFlag foundation.VARIANT_BOOL) (*ISVGPathSegArcRel, error) {
+	_ppResult := new(*ISVGPathSegArcRel)
+	r1, _, _ := win32.Call(self.LpVtbl[22], specISVGPathElement_CreateSVGPathSegArcRel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(r1_)), uintptr(math.Float32bits(r2_)), uintptr(math.Float32bits(angle)), uintptr(largeArcFlag), uintptr(sweepFlag), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegLinetoHorizontalAbs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegLinetoHorizontalAbs dispatches through ISVGPathElement's vtable slot 23.
+func (self *ISVGPathElement) CreateSVGPathSegLinetoHorizontalAbs(x float32) (*ISVGPathSegLinetoHorizontalAbs, error) {
+	_ppResult := new(*ISVGPathSegLinetoHorizontalAbs)
+	r1, _, _ := win32.Call(self.LpVtbl[23], specISVGPathElement_CreateSVGPathSegLinetoHorizontalAbs, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegLinetoHorizontalRel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegLinetoHorizontalRel dispatches through ISVGPathElement's vtable slot 24.
+func (self *ISVGPathElement) CreateSVGPathSegLinetoHorizontalRel(x float32) (*ISVGPathSegLinetoHorizontalRel, error) {
+	_ppResult := new(*ISVGPathSegLinetoHorizontalRel)
+	r1, _, _ := win32.Call(self.LpVtbl[24], specISVGPathElement_CreateSVGPathSegLinetoHorizontalRel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegLinetoVerticalAbs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegLinetoVerticalAbs dispatches through ISVGPathElement's vtable slot 25.
+func (self *ISVGPathElement) CreateSVGPathSegLinetoVerticalAbs(y float32) (*ISVGPathSegLinetoVerticalAbs, error) {
+	_ppResult := new(*ISVGPathSegLinetoVerticalAbs)
+	r1, _, _ := win32.Call(self.LpVtbl[25], specISVGPathElement_CreateSVGPathSegLinetoVerticalAbs, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegLinetoVerticalRel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegLinetoVerticalRel dispatches through ISVGPathElement's vtable slot 26.
+func (self *ISVGPathElement) CreateSVGPathSegLinetoVerticalRel(y float32) (*ISVGPathSegLinetoVerticalRel, error) {
+	_ppResult := new(*ISVGPathSegLinetoVerticalRel)
+	r1, _, _ := win32.Call(self.LpVtbl[26], specISVGPathElement_CreateSVGPathSegLinetoVerticalRel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegCurvetoCubicSmoothAbs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegCurvetoCubicSmoothAbs dispatches through ISVGPathElement's vtable slot 27.
+func (self *ISVGPathElement) CreateSVGPathSegCurvetoCubicSmoothAbs(x float32, y float32, x2 float32, y2 float32) (*ISVGPathSegCurvetoCubicSmoothAbs, error) {
+	_ppResult := new(*ISVGPathSegCurvetoCubicSmoothAbs)
+	r1, _, _ := win32.Call(self.LpVtbl[27], specISVGPathElement_CreateSVGPathSegCurvetoCubicSmoothAbs, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegCurvetoCubicSmoothRel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegCurvetoCubicSmoothRel dispatches through ISVGPathElement's vtable slot 28.
+func (self *ISVGPathElement) CreateSVGPathSegCurvetoCubicSmoothRel(x float32, y float32, x2 float32, y2 float32) (*ISVGPathSegCurvetoCubicSmoothRel, error) {
+	_ppResult := new(*ISVGPathSegCurvetoCubicSmoothRel)
+	r1, _, _ := win32.Call(self.LpVtbl[28], specISVGPathElement_CreateSVGPathSegCurvetoCubicSmoothRel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(math.Float32bits(x2)), uintptr(math.Float32bits(y2)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegCurvetoQuadraticSmoothAbs = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegCurvetoQuadraticSmoothAbs dispatches through ISVGPathElement's vtable slot 29.
+func (self *ISVGPathElement) CreateSVGPathSegCurvetoQuadraticSmoothAbs(x float32, y float32) (*ISVGPathSegCurvetoQuadraticSmoothAbs, error) {
+	_ppResult := new(*ISVGPathSegCurvetoQuadraticSmoothAbs)
+	r1, _, _ := win32.Call(self.LpVtbl[29], specISVGPathElement_CreateSVGPathSegCurvetoQuadraticSmoothAbs, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
+	return *_ppResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathElement_CreateSVGPathSegCurvetoQuadraticSmoothRel = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word}}
+
+// CreateSVGPathSegCurvetoQuadraticSmoothRel dispatches through ISVGPathElement's vtable slot 30.
+func (self *ISVGPathElement) CreateSVGPathSegCurvetoQuadraticSmoothRel(x float32, y float32) (*ISVGPathSegCurvetoQuadraticSmoothRel, error) {
+	_ppResult := new(*ISVGPathSegCurvetoQuadraticSmoothRel)
+	r1, _, _ := win32.Call(self.LpVtbl[30], specISVGPathElement_CreateSVGPathSegCurvetoQuadraticSmoothRel, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(x)), uintptr(math.Float32bits(y)), uintptr(win32.OutParam(unsafe.Pointer(_ppResult)))).Tuple()
 	return *_ppResult, win32.ErrIfFailed(int32(r1))
 }
 
@@ -37860,11 +44701,27 @@ type ISVGPathSegArcAbs struct {
 // IID_ISVGPathSegArcAbs is the interface identifier for ISVGPathSegArcAbs.
 var IID_ISVGPathSegArcAbs = win32.GUID{Data1: 0x30510506, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegArcAbs_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegArcAbs's vtable slot 7.
+func (self *ISVGPathSegArcAbs) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegArcAbs_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegArcAbs's vtable slot 8.
 func (self *ISVGPathSegArcAbs) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegArcAbs_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegArcAbs's vtable slot 9.
+func (self *ISVGPathSegArcAbs) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegArcAbs_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegArcAbs's vtable slot 10.
@@ -37874,6 +44731,14 @@ func (self *ISVGPathSegArcAbs) Get_y() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegArcAbs_Put_r1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_r1 dispatches through ISVGPathSegArcAbs's vtable slot 11.
+func (self *ISVGPathSegArcAbs) Put_r1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGPathSegArcAbs_Put_r1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_r1 dispatches through ISVGPathSegArcAbs's vtable slot 12.
 func (self *ISVGPathSegArcAbs) Get_r1() (float32, error) {
 	_p := new(float32)
@@ -37881,11 +44746,27 @@ func (self *ISVGPathSegArcAbs) Get_r1() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegArcAbs_Put_r2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_r2 dispatches through ISVGPathSegArcAbs's vtable slot 13.
+func (self *ISVGPathSegArcAbs) Put_r2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGPathSegArcAbs_Put_r2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_r2 dispatches through ISVGPathSegArcAbs's vtable slot 14.
 func (self *ISVGPathSegArcAbs) Get_r2() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegArcAbs_Put_angle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_angle dispatches through ISVGPathSegArcAbs's vtable slot 15.
+func (self *ISVGPathSegArcAbs) Put_angle(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISVGPathSegArcAbs_Put_angle, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_angle dispatches through ISVGPathSegArcAbs's vtable slot 16.
@@ -37929,11 +44810,27 @@ type ISVGPathSegArcRel struct {
 // IID_ISVGPathSegArcRel is the interface identifier for ISVGPathSegArcRel.
 var IID_ISVGPathSegArcRel = win32.GUID{Data1: 0x30510507, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegArcRel_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegArcRel's vtable slot 7.
+func (self *ISVGPathSegArcRel) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegArcRel_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegArcRel's vtable slot 8.
 func (self *ISVGPathSegArcRel) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegArcRel_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegArcRel's vtable slot 9.
+func (self *ISVGPathSegArcRel) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegArcRel_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegArcRel's vtable slot 10.
@@ -37943,6 +44840,14 @@ func (self *ISVGPathSegArcRel) Get_y() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegArcRel_Put_r1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_r1 dispatches through ISVGPathSegArcRel's vtable slot 11.
+func (self *ISVGPathSegArcRel) Put_r1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGPathSegArcRel_Put_r1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_r1 dispatches through ISVGPathSegArcRel's vtable slot 12.
 func (self *ISVGPathSegArcRel) Get_r1() (float32, error) {
 	_p := new(float32)
@@ -37950,11 +44855,27 @@ func (self *ISVGPathSegArcRel) Get_r1() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegArcRel_Put_r2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_r2 dispatches through ISVGPathSegArcRel's vtable slot 13.
+func (self *ISVGPathSegArcRel) Put_r2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGPathSegArcRel_Put_r2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_r2 dispatches through ISVGPathSegArcRel's vtable slot 14.
 func (self *ISVGPathSegArcRel) Get_r2() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegArcRel_Put_angle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_angle dispatches through ISVGPathSegArcRel's vtable slot 15.
+func (self *ISVGPathSegArcRel) Put_angle(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISVGPathSegArcRel_Put_angle, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_angle dispatches through ISVGPathSegArcRel's vtable slot 16.
@@ -38006,11 +44927,27 @@ type ISVGPathSegCurvetoCubicAbs struct {
 // IID_ISVGPathSegCurvetoCubicAbs is the interface identifier for ISVGPathSegCurvetoCubicAbs.
 var IID_ISVGPathSegCurvetoCubicAbs = win32.GUID{Data1: 0x30510502, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegCurvetoCubicAbs_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 7.
+func (self *ISVGPathSegCurvetoCubicAbs) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegCurvetoCubicAbs_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 8.
 func (self *ISVGPathSegCurvetoCubicAbs) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicAbs_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 9.
+func (self *ISVGPathSegCurvetoCubicAbs) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegCurvetoCubicAbs_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 10.
@@ -38020,11 +44957,27 @@ func (self *ISVGPathSegCurvetoCubicAbs) Get_y() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegCurvetoCubicAbs_Put_x1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x1 dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 11.
+func (self *ISVGPathSegCurvetoCubicAbs) Put_x1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGPathSegCurvetoCubicAbs_Put_x1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x1 dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 12.
 func (self *ISVGPathSegCurvetoCubicAbs) Get_x1() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicAbs_Put_y1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y1 dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 13.
+func (self *ISVGPathSegCurvetoCubicAbs) Put_y1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGPathSegCurvetoCubicAbs_Put_y1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y1 dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 14.
@@ -38034,11 +44987,27 @@ func (self *ISVGPathSegCurvetoCubicAbs) Get_y1() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegCurvetoCubicAbs_Put_x2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x2 dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 15.
+func (self *ISVGPathSegCurvetoCubicAbs) Put_x2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISVGPathSegCurvetoCubicAbs_Put_x2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x2 dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 16.
 func (self *ISVGPathSegCurvetoCubicAbs) Get_x2() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicAbs_Put_y2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y2 dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 17.
+func (self *ISVGPathSegCurvetoCubicAbs) Put_y2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specISVGPathSegCurvetoCubicAbs_Put_y2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y2 dispatches through ISVGPathSegCurvetoCubicAbs's vtable slot 18.
@@ -38056,11 +45025,27 @@ type ISVGPathSegCurvetoCubicRel struct {
 // IID_ISVGPathSegCurvetoCubicRel is the interface identifier for ISVGPathSegCurvetoCubicRel.
 var IID_ISVGPathSegCurvetoCubicRel = win32.GUID{Data1: 0x30510503, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegCurvetoCubicRel_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 7.
+func (self *ISVGPathSegCurvetoCubicRel) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegCurvetoCubicRel_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 8.
 func (self *ISVGPathSegCurvetoCubicRel) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicRel_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 9.
+func (self *ISVGPathSegCurvetoCubicRel) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegCurvetoCubicRel_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 10.
@@ -38070,11 +45055,27 @@ func (self *ISVGPathSegCurvetoCubicRel) Get_y() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegCurvetoCubicRel_Put_x1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x1 dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 11.
+func (self *ISVGPathSegCurvetoCubicRel) Put_x1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGPathSegCurvetoCubicRel_Put_x1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x1 dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 12.
 func (self *ISVGPathSegCurvetoCubicRel) Get_x1() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicRel_Put_y1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y1 dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 13.
+func (self *ISVGPathSegCurvetoCubicRel) Put_y1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGPathSegCurvetoCubicRel_Put_y1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y1 dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 14.
@@ -38084,11 +45085,27 @@ func (self *ISVGPathSegCurvetoCubicRel) Get_y1() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegCurvetoCubicRel_Put_x2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x2 dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 15.
+func (self *ISVGPathSegCurvetoCubicRel) Put_x2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISVGPathSegCurvetoCubicRel_Put_x2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x2 dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 16.
 func (self *ISVGPathSegCurvetoCubicRel) Get_x2() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicRel_Put_y2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y2 dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 17.
+func (self *ISVGPathSegCurvetoCubicRel) Put_y2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specISVGPathSegCurvetoCubicRel_Put_y2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y2 dispatches through ISVGPathSegCurvetoCubicRel's vtable slot 18.
@@ -38106,11 +45123,27 @@ type ISVGPathSegCurvetoCubicSmoothAbs struct {
 // IID_ISVGPathSegCurvetoCubicSmoothAbs is the interface identifier for ISVGPathSegCurvetoCubicSmoothAbs.
 var IID_ISVGPathSegCurvetoCubicSmoothAbs = win32.GUID{Data1: 0x3051050c, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegCurvetoCubicSmoothAbs_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegCurvetoCubicSmoothAbs's vtable slot 7.
+func (self *ISVGPathSegCurvetoCubicSmoothAbs) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegCurvetoCubicSmoothAbs_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegCurvetoCubicSmoothAbs's vtable slot 8.
 func (self *ISVGPathSegCurvetoCubicSmoothAbs) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicSmoothAbs_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegCurvetoCubicSmoothAbs's vtable slot 9.
+func (self *ISVGPathSegCurvetoCubicSmoothAbs) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegCurvetoCubicSmoothAbs_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegCurvetoCubicSmoothAbs's vtable slot 10.
@@ -38120,11 +45153,27 @@ func (self *ISVGPathSegCurvetoCubicSmoothAbs) Get_y() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegCurvetoCubicSmoothAbs_Put_x2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x2 dispatches through ISVGPathSegCurvetoCubicSmoothAbs's vtable slot 11.
+func (self *ISVGPathSegCurvetoCubicSmoothAbs) Put_x2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGPathSegCurvetoCubicSmoothAbs_Put_x2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x2 dispatches through ISVGPathSegCurvetoCubicSmoothAbs's vtable slot 12.
 func (self *ISVGPathSegCurvetoCubicSmoothAbs) Get_x2() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicSmoothAbs_Put_y2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y2 dispatches through ISVGPathSegCurvetoCubicSmoothAbs's vtable slot 13.
+func (self *ISVGPathSegCurvetoCubicSmoothAbs) Put_y2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGPathSegCurvetoCubicSmoothAbs_Put_y2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y2 dispatches through ISVGPathSegCurvetoCubicSmoothAbs's vtable slot 14.
@@ -38142,11 +45191,27 @@ type ISVGPathSegCurvetoCubicSmoothRel struct {
 // IID_ISVGPathSegCurvetoCubicSmoothRel is the interface identifier for ISVGPathSegCurvetoCubicSmoothRel.
 var IID_ISVGPathSegCurvetoCubicSmoothRel = win32.GUID{Data1: 0x3051050d, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegCurvetoCubicSmoothRel_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegCurvetoCubicSmoothRel's vtable slot 7.
+func (self *ISVGPathSegCurvetoCubicSmoothRel) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegCurvetoCubicSmoothRel_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegCurvetoCubicSmoothRel's vtable slot 8.
 func (self *ISVGPathSegCurvetoCubicSmoothRel) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicSmoothRel_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegCurvetoCubicSmoothRel's vtable slot 9.
+func (self *ISVGPathSegCurvetoCubicSmoothRel) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegCurvetoCubicSmoothRel_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegCurvetoCubicSmoothRel's vtable slot 10.
@@ -38156,11 +45221,27 @@ func (self *ISVGPathSegCurvetoCubicSmoothRel) Get_y() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegCurvetoCubicSmoothRel_Put_x2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x2 dispatches through ISVGPathSegCurvetoCubicSmoothRel's vtable slot 11.
+func (self *ISVGPathSegCurvetoCubicSmoothRel) Put_x2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGPathSegCurvetoCubicSmoothRel_Put_x2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x2 dispatches through ISVGPathSegCurvetoCubicSmoothRel's vtable slot 12.
 func (self *ISVGPathSegCurvetoCubicSmoothRel) Get_x2() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoCubicSmoothRel_Put_y2 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y2 dispatches through ISVGPathSegCurvetoCubicSmoothRel's vtable slot 13.
+func (self *ISVGPathSegCurvetoCubicSmoothRel) Put_y2(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGPathSegCurvetoCubicSmoothRel_Put_y2, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y2 dispatches through ISVGPathSegCurvetoCubicSmoothRel's vtable slot 14.
@@ -38178,11 +45259,27 @@ type ISVGPathSegCurvetoQuadraticAbs struct {
 // IID_ISVGPathSegCurvetoQuadraticAbs is the interface identifier for ISVGPathSegCurvetoQuadraticAbs.
 var IID_ISVGPathSegCurvetoQuadraticAbs = win32.GUID{Data1: 0x30510504, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegCurvetoQuadraticAbs_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegCurvetoQuadraticAbs's vtable slot 7.
+func (self *ISVGPathSegCurvetoQuadraticAbs) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegCurvetoQuadraticAbs_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegCurvetoQuadraticAbs's vtable slot 8.
 func (self *ISVGPathSegCurvetoQuadraticAbs) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoQuadraticAbs_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegCurvetoQuadraticAbs's vtable slot 9.
+func (self *ISVGPathSegCurvetoQuadraticAbs) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegCurvetoQuadraticAbs_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegCurvetoQuadraticAbs's vtable slot 10.
@@ -38192,11 +45289,27 @@ func (self *ISVGPathSegCurvetoQuadraticAbs) Get_y() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegCurvetoQuadraticAbs_Put_x1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x1 dispatches through ISVGPathSegCurvetoQuadraticAbs's vtable slot 11.
+func (self *ISVGPathSegCurvetoQuadraticAbs) Put_x1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGPathSegCurvetoQuadraticAbs_Put_x1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x1 dispatches through ISVGPathSegCurvetoQuadraticAbs's vtable slot 12.
 func (self *ISVGPathSegCurvetoQuadraticAbs) Get_x1() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoQuadraticAbs_Put_y1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y1 dispatches through ISVGPathSegCurvetoQuadraticAbs's vtable slot 13.
+func (self *ISVGPathSegCurvetoQuadraticAbs) Put_y1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGPathSegCurvetoQuadraticAbs_Put_y1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y1 dispatches through ISVGPathSegCurvetoQuadraticAbs's vtable slot 14.
@@ -38214,11 +45327,27 @@ type ISVGPathSegCurvetoQuadraticRel struct {
 // IID_ISVGPathSegCurvetoQuadraticRel is the interface identifier for ISVGPathSegCurvetoQuadraticRel.
 var IID_ISVGPathSegCurvetoQuadraticRel = win32.GUID{Data1: 0x30510505, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegCurvetoQuadraticRel_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegCurvetoQuadraticRel's vtable slot 7.
+func (self *ISVGPathSegCurvetoQuadraticRel) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegCurvetoQuadraticRel_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegCurvetoQuadraticRel's vtable slot 8.
 func (self *ISVGPathSegCurvetoQuadraticRel) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoQuadraticRel_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegCurvetoQuadraticRel's vtable slot 9.
+func (self *ISVGPathSegCurvetoQuadraticRel) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegCurvetoQuadraticRel_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegCurvetoQuadraticRel's vtable slot 10.
@@ -38228,11 +45357,27 @@ func (self *ISVGPathSegCurvetoQuadraticRel) Get_y() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGPathSegCurvetoQuadraticRel_Put_x1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x1 dispatches through ISVGPathSegCurvetoQuadraticRel's vtable slot 11.
+func (self *ISVGPathSegCurvetoQuadraticRel) Put_x1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGPathSegCurvetoQuadraticRel_Put_x1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x1 dispatches through ISVGPathSegCurvetoQuadraticRel's vtable slot 12.
 func (self *ISVGPathSegCurvetoQuadraticRel) Get_x1() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoQuadraticRel_Put_y1 = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y1 dispatches through ISVGPathSegCurvetoQuadraticRel's vtable slot 13.
+func (self *ISVGPathSegCurvetoQuadraticRel) Put_y1(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGPathSegCurvetoQuadraticRel_Put_y1, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y1 dispatches through ISVGPathSegCurvetoQuadraticRel's vtable slot 14.
@@ -38250,11 +45395,27 @@ type ISVGPathSegCurvetoQuadraticSmoothAbs struct {
 // IID_ISVGPathSegCurvetoQuadraticSmoothAbs is the interface identifier for ISVGPathSegCurvetoQuadraticSmoothAbs.
 var IID_ISVGPathSegCurvetoQuadraticSmoothAbs = win32.GUID{Data1: 0x3051050e, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegCurvetoQuadraticSmoothAbs_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegCurvetoQuadraticSmoothAbs's vtable slot 7.
+func (self *ISVGPathSegCurvetoQuadraticSmoothAbs) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegCurvetoQuadraticSmoothAbs_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegCurvetoQuadraticSmoothAbs's vtable slot 8.
 func (self *ISVGPathSegCurvetoQuadraticSmoothAbs) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoQuadraticSmoothAbs_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegCurvetoQuadraticSmoothAbs's vtable slot 9.
+func (self *ISVGPathSegCurvetoQuadraticSmoothAbs) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegCurvetoQuadraticSmoothAbs_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegCurvetoQuadraticSmoothAbs's vtable slot 10.
@@ -38272,11 +45433,27 @@ type ISVGPathSegCurvetoQuadraticSmoothRel struct {
 // IID_ISVGPathSegCurvetoQuadraticSmoothRel is the interface identifier for ISVGPathSegCurvetoQuadraticSmoothRel.
 var IID_ISVGPathSegCurvetoQuadraticSmoothRel = win32.GUID{Data1: 0x3051050f, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegCurvetoQuadraticSmoothRel_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegCurvetoQuadraticSmoothRel's vtable slot 7.
+func (self *ISVGPathSegCurvetoQuadraticSmoothRel) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegCurvetoQuadraticSmoothRel_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegCurvetoQuadraticSmoothRel's vtable slot 8.
 func (self *ISVGPathSegCurvetoQuadraticSmoothRel) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegCurvetoQuadraticSmoothRel_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegCurvetoQuadraticSmoothRel's vtable slot 9.
+func (self *ISVGPathSegCurvetoQuadraticSmoothRel) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegCurvetoQuadraticSmoothRel_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegCurvetoQuadraticSmoothRel's vtable slot 10.
@@ -38294,11 +45471,27 @@ type ISVGPathSegLinetoAbs struct {
 // IID_ISVGPathSegLinetoAbs is the interface identifier for ISVGPathSegLinetoAbs.
 var IID_ISVGPathSegLinetoAbs = win32.GUID{Data1: 0x30510500, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegLinetoAbs_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegLinetoAbs's vtable slot 7.
+func (self *ISVGPathSegLinetoAbs) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegLinetoAbs_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegLinetoAbs's vtable slot 8.
 func (self *ISVGPathSegLinetoAbs) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegLinetoAbs_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegLinetoAbs's vtable slot 9.
+func (self *ISVGPathSegLinetoAbs) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegLinetoAbs_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegLinetoAbs's vtable slot 10.
@@ -38316,6 +45509,14 @@ type ISVGPathSegLinetoHorizontalAbs struct {
 // IID_ISVGPathSegLinetoHorizontalAbs is the interface identifier for ISVGPathSegLinetoHorizontalAbs.
 var IID_ISVGPathSegLinetoHorizontalAbs = win32.GUID{Data1: 0x30510508, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegLinetoHorizontalAbs_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegLinetoHorizontalAbs's vtable slot 7.
+func (self *ISVGPathSegLinetoHorizontalAbs) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegLinetoHorizontalAbs_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegLinetoHorizontalAbs's vtable slot 8.
 func (self *ISVGPathSegLinetoHorizontalAbs) Get_x() (float32, error) {
 	_p := new(float32)
@@ -38330,6 +45531,14 @@ type ISVGPathSegLinetoHorizontalRel struct {
 
 // IID_ISVGPathSegLinetoHorizontalRel is the interface identifier for ISVGPathSegLinetoHorizontalRel.
 var IID_ISVGPathSegLinetoHorizontalRel = win32.GUID{Data1: 0x30510509, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specISVGPathSegLinetoHorizontalRel_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegLinetoHorizontalRel's vtable slot 7.
+func (self *ISVGPathSegLinetoHorizontalRel) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegLinetoHorizontalRel_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_x dispatches through ISVGPathSegLinetoHorizontalRel's vtable slot 8.
 func (self *ISVGPathSegLinetoHorizontalRel) Get_x() (float32, error) {
@@ -38346,11 +45555,27 @@ type ISVGPathSegLinetoRel struct {
 // IID_ISVGPathSegLinetoRel is the interface identifier for ISVGPathSegLinetoRel.
 var IID_ISVGPathSegLinetoRel = win32.GUID{Data1: 0x30510501, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegLinetoRel_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegLinetoRel's vtable slot 7.
+func (self *ISVGPathSegLinetoRel) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegLinetoRel_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegLinetoRel's vtable slot 8.
 func (self *ISVGPathSegLinetoRel) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegLinetoRel_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegLinetoRel's vtable slot 9.
+func (self *ISVGPathSegLinetoRel) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegLinetoRel_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegLinetoRel's vtable slot 10.
@@ -38368,6 +45593,14 @@ type ISVGPathSegLinetoVerticalAbs struct {
 // IID_ISVGPathSegLinetoVerticalAbs is the interface identifier for ISVGPathSegLinetoVerticalAbs.
 var IID_ISVGPathSegLinetoVerticalAbs = win32.GUID{Data1: 0x3051050a, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegLinetoVerticalAbs_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegLinetoVerticalAbs's vtable slot 7.
+func (self *ISVGPathSegLinetoVerticalAbs) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegLinetoVerticalAbs_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_y dispatches through ISVGPathSegLinetoVerticalAbs's vtable slot 8.
 func (self *ISVGPathSegLinetoVerticalAbs) Get_y() (float32, error) {
 	_p := new(float32)
@@ -38382,6 +45615,14 @@ type ISVGPathSegLinetoVerticalRel struct {
 
 // IID_ISVGPathSegLinetoVerticalRel is the interface identifier for ISVGPathSegLinetoVerticalRel.
 var IID_ISVGPathSegLinetoVerticalRel = win32.GUID{Data1: 0x3051050b, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
+
+var specISVGPathSegLinetoVerticalRel_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegLinetoVerticalRel's vtable slot 7.
+func (self *ISVGPathSegLinetoVerticalRel) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegLinetoVerticalRel_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
 
 // Get_y dispatches through ISVGPathSegLinetoVerticalRel's vtable slot 8.
 func (self *ISVGPathSegLinetoVerticalRel) Get_y() (float32, error) {
@@ -38467,11 +45708,27 @@ type ISVGPathSegMovetoAbs struct {
 // IID_ISVGPathSegMovetoAbs is the interface identifier for ISVGPathSegMovetoAbs.
 var IID_ISVGPathSegMovetoAbs = win32.GUID{Data1: 0x305104fe, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegMovetoAbs_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegMovetoAbs's vtable slot 7.
+func (self *ISVGPathSegMovetoAbs) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegMovetoAbs_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegMovetoAbs's vtable slot 8.
 func (self *ISVGPathSegMovetoAbs) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegMovetoAbs_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegMovetoAbs's vtable slot 9.
+func (self *ISVGPathSegMovetoAbs) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegMovetoAbs_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegMovetoAbs's vtable slot 10.
@@ -38489,11 +45746,27 @@ type ISVGPathSegMovetoRel struct {
 // IID_ISVGPathSegMovetoRel is the interface identifier for ISVGPathSegMovetoRel.
 var IID_ISVGPathSegMovetoRel = win32.GUID{Data1: 0x305104ff, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPathSegMovetoRel_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPathSegMovetoRel's vtable slot 7.
+func (self *ISVGPathSegMovetoRel) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPathSegMovetoRel_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPathSegMovetoRel's vtable slot 8.
 func (self *ISVGPathSegMovetoRel) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPathSegMovetoRel_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPathSegMovetoRel's vtable slot 9.
+func (self *ISVGPathSegMovetoRel) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPathSegMovetoRel_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPathSegMovetoRel's vtable slot 10.
@@ -38610,11 +45883,27 @@ type ISVGPoint struct {
 // IID_ISVGPoint is the interface identifier for ISVGPoint.
 var IID_ISVGPoint = win32.GUID{Data1: 0x305104f4, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGPoint_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGPoint's vtable slot 7.
+func (self *ISVGPoint) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGPoint_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGPoint's vtable slot 8.
 func (self *ISVGPoint) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGPoint_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGPoint's vtable slot 9.
+func (self *ISVGPoint) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGPoint_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGPoint's vtable slot 10.
@@ -38831,11 +46120,27 @@ type ISVGRect struct {
 // IID_ISVGRect is the interface identifier for ISVGRect.
 var IID_ISVGRect = win32.GUID{Data1: 0x305104d7, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
+var specISVGRect_Put_x = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_x dispatches through ISVGRect's vtable slot 7.
+func (self *ISVGRect) Put_x(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specISVGRect_Put_x, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_x dispatches through ISVGRect's vtable slot 8.
 func (self *ISVGRect) Get_x() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGRect_Put_y = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_y dispatches through ISVGRect's vtable slot 9.
+func (self *ISVGRect) Put_y(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specISVGRect_Put_y, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_y dispatches through ISVGRect's vtable slot 10.
@@ -38845,11 +46150,27 @@ func (self *ISVGRect) Get_y() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGRect_Put_width = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_width dispatches through ISVGRect's vtable slot 11.
+func (self *ISVGRect) Put_width(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGRect_Put_width, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_width dispatches through ISVGRect's vtable slot 12.
 func (self *ISVGRect) Get_width() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGRect_Put_height = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_height dispatches through ISVGRect's vtable slot 13.
+func (self *ISVGRect) Put_height(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[13], specISVGRect_Put_height, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_height dispatches through ISVGRect's vtable slot 14.
@@ -39044,11 +46365,27 @@ func (self *ISVGSVGElement) Get_viewport() (*ISVGRect, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGSVGElement_Put_pixelUnitToMillimeterX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_pixelUnitToMillimeterX dispatches through ISVGSVGElement's vtable slot 21.
+func (self *ISVGSVGElement) Put_pixelUnitToMillimeterX(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[21], specISVGSVGElement_Put_pixelUnitToMillimeterX, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_pixelUnitToMillimeterX dispatches through ISVGSVGElement's vtable slot 22.
 func (self *ISVGSVGElement) Get_pixelUnitToMillimeterX() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGSVGElement_Put_pixelUnitToMillimeterY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_pixelUnitToMillimeterY dispatches through ISVGSVGElement's vtable slot 23.
+func (self *ISVGSVGElement) Put_pixelUnitToMillimeterY(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[23], specISVGSVGElement_Put_pixelUnitToMillimeterY, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_pixelUnitToMillimeterY dispatches through ISVGSVGElement's vtable slot 24.
@@ -39058,11 +46395,27 @@ func (self *ISVGSVGElement) Get_pixelUnitToMillimeterY() (float32, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGSVGElement_Put_screenPixelToMillimeterX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_screenPixelToMillimeterX dispatches through ISVGSVGElement's vtable slot 25.
+func (self *ISVGSVGElement) Put_screenPixelToMillimeterX(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[25], specISVGSVGElement_Put_screenPixelToMillimeterX, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_screenPixelToMillimeterX dispatches through ISVGSVGElement's vtable slot 26.
 func (self *ISVGSVGElement) Get_screenPixelToMillimeterX() (float32, error) {
 	_p := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGSVGElement_Put_screenPixelToMillimeterY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_screenPixelToMillimeterY dispatches through ISVGSVGElement's vtable slot 27.
+func (self *ISVGSVGElement) Put_screenPixelToMillimeterY(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[27], specISVGSVGElement_Put_screenPixelToMillimeterY, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_screenPixelToMillimeterY dispatches through ISVGSVGElement's vtable slot 28.
@@ -39096,6 +46449,14 @@ func (self *ISVGSVGElement) Get_currentView() (*ISVGViewSpec, error) {
 	_p := new(*ISVGViewSpec)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGSVGElement_Put_currentScale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_currentScale dispatches through ISVGSVGElement's vtable slot 33.
+func (self *ISVGSVGElement) Put_currentScale(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[33], specISVGSVGElement_Put_currentScale, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_currentScale dispatches through ISVGSVGElement's vtable slot 34.
@@ -39167,6 +46528,14 @@ func (self *ISVGSVGElement) GetCurrentTime() (float32, error) {
 	_pResult := new(float32)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pResult))))
 	return *_pResult, win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGSVGElement_SetCurrentTime = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetCurrentTime dispatches through ISVGSVGElement's vtable slot 45.
+func (self *ISVGSVGElement) SetCurrentTime(seconds float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[45], specISVGSVGElement_SetCurrentTime, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(seconds))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetIntersectionList dispatches through ISVGSVGElement's vtable slot 46.
@@ -39752,6 +47121,14 @@ func (self *ISVGTransform) Get_matrix() (*ISVGMatrix, error) {
 	return *_p, win32.ErrIfFailed(int32(r1))
 }
 
+var specISVGTransform_Put_angle = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// Put_angle dispatches through ISVGTransform's vtable slot 11.
+func (self *ISVGTransform) Put_angle(v float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[11], specISVGTransform_Put_angle, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // Get_angle dispatches through ISVGTransform's vtable slot 12.
 func (self *ISVGTransform) Get_angle() (float32, error) {
 	_p := new(float32)
@@ -39762,6 +47139,46 @@ func (self *ISVGTransform) Get_angle() (float32, error) {
 // SetMatrix dispatches through ISVGTransform's vtable slot 13.
 func (self *ISVGTransform) SetMatrix(matrix *ISVGMatrix) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGTransform_SetTranslate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// SetTranslate dispatches through ISVGTransform's vtable slot 14.
+func (self *ISVGTransform) SetTranslate(tx float32, ty float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[14], specISVGTransform_SetTranslate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(tx)), uintptr(math.Float32bits(ty))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGTransform_SetScale = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32}}
+
+// SetScale dispatches through ISVGTransform's vtable slot 15.
+func (self *ISVGTransform) SetScale(sx float32, sy float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[15], specISVGTransform_SetScale, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(sx)), uintptr(math.Float32bits(sy))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGTransform_SetRotate = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Float32}}
+
+// SetRotate dispatches through ISVGTransform's vtable slot 16.
+func (self *ISVGTransform) SetRotate(angle float32, cx float32, cy float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[16], specISVGTransform_SetRotate, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angle)), uintptr(math.Float32bits(cx)), uintptr(math.Float32bits(cy))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGTransform_SetSkewX = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSkewX dispatches through ISVGTransform's vtable slot 17.
+func (self *ISVGTransform) SetSkewX(angle float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specISVGTransform_SetSkewX, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angle))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specISVGTransform_SetSkewY = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32}}
+
+// SetSkewY dispatches through ISVGTransform's vtable slot 18.
+func (self *ISVGTransform) SetSkewY(angle float32) error {
+	r1, _, _ := win32.Call(self.LpVtbl[18], specISVGTransform_SetSkewY, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(angle))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -40931,9 +48348,25 @@ type IWBScriptControl struct {
 // IID_IWBScriptControl is the interface identifier for IWBScriptControl.
 var IID_IWBScriptControl = win32.GUID{Data1: 0xa5170870, Data2: 0x0cf8, Data3: 0x11d1, Data4: [8]byte{0x8b, 0x91, 0x00, 0x80, 0xc7, 0x44, 0xf3, 0x89}}
 
+var specIWBScriptControl_RaiseEvent = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// RaiseEvent dispatches through IWBScriptControl's vtable slot 7.
+func (self *IWBScriptControl) RaiseEvent(name foundation.BSTR, eventData systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[7], specIWBScriptControl_RaiseEvent, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&eventData))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // BubbleEvent dispatches through IWBScriptControl's vtable slot 8.
 func (self *IWBScriptControl) BubbleEvent() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIWBScriptControl_SetContextMenu = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetContextMenu dispatches through IWBScriptControl's vtable slot 9.
+func (self *IWBScriptControl) SetContextMenu(menuItemPairs systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIWBScriptControl_SetContextMenu, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&menuItemPairs))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -40982,6 +48415,14 @@ func (self *IWBScriptControl) Get_visibility() (foundation.VARIANT_BOOL, error) 
 	_p := new(foundation.VARIANT_BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_p))))
 	return *_p, win32.ErrIfFailed(int32(r1))
+}
+
+var specIWBScriptControl_Put_onvisibilitychange = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// Put_onvisibilitychange dispatches through IWBScriptControl's vtable slot 17.
+func (self *IWBScriptControl) Put_onvisibilitychange(v systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[17], specIWBScriptControl_Put_onvisibilitychange, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&v))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_onvisibilitychange dispatches through IWBScriptControl's vtable slot 18.

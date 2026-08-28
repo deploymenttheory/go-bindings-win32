@@ -63,6 +63,8 @@ var (
 	procRemoveDirectoryFromAppW             = modapi_ms_win_core_file_fromapp_l1_1_0.NewProc("RemoveDirectoryFromAppW")
 	procReplaceFileFromAppW                 = modapi_ms_win_core_file_fromapp_l1_1_0.NewProc("ReplaceFileFromAppW")
 	procSetFileAttributesFromAppW           = modapi_ms_win_core_file_fromapp_l1_1_0.NewProc("SetFileAttributesFromAppW")
+	procBuildIoRingCancelRequest            = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingCancelRequest")
+	procBuildIoRingReadFile                 = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingReadFile")
 	procBuildIoRingRegisterBuffers          = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingRegisterBuffers")
 	procBuildIoRingRegisterFileHandles      = modapi_ms_win_core_ioring_l1_1_0.NewProc("BuildIoRingRegisterFileHandles")
 	procCloseIoRing                         = modapi_ms_win_core_ioring_l1_1_0.NewProc("CloseIoRing")
@@ -139,6 +141,10 @@ var (
 	procBackupRead                          = modKERNEL32.NewProc("BackupRead")
 	procBackupSeek                          = modKERNEL32.NewProc("BackupSeek")
 	procBackupWrite                         = modKERNEL32.NewProc("BackupWrite")
+	procBuildIoRingFlushFile                = modKERNEL32.NewProc("BuildIoRingFlushFile")
+	procBuildIoRingReadFileScatter          = modKERNEL32.NewProc("BuildIoRingReadFileScatter")
+	procBuildIoRingWriteFile                = modKERNEL32.NewProc("BuildIoRingWriteFile")
+	procBuildIoRingWriteFileGather          = modKERNEL32.NewProc("BuildIoRingWriteFileGather")
 	procCheckNameLegalDOS8Dot3              = modKERNEL32.NewProc("CheckNameLegalDOS8Dot3W")
 	procCheckNameLegalDOS8Dot3A             = modKERNEL32.NewProc("CheckNameLegalDOS8Dot3A")
 	procCompareFileTime                     = modKERNEL32.NewProc("CompareFileTime")
@@ -465,8 +471,14 @@ var Procs = struct {
 	BackupRead                          *win32.Proc
 	BackupSeek                          *win32.Proc
 	BackupWrite                         *win32.Proc
+	BuildIoRingCancelRequest            *win32.Proc
+	BuildIoRingFlushFile                *win32.Proc
+	BuildIoRingReadFile                 *win32.Proc
+	BuildIoRingReadFileScatter          *win32.Proc
 	BuildIoRingRegisterBuffers          *win32.Proc
 	BuildIoRingRegisterFileHandles      *win32.Proc
+	BuildIoRingWriteFile                *win32.Proc
+	BuildIoRingWriteFileGather          *win32.Proc
 	CheckNameLegalDOS8Dot3              *win32.Proc
 	CheckNameLegalDOS8Dot3A             *win32.Proc
 	CloseAndResetLogFile                *win32.Proc
@@ -884,8 +896,14 @@ var Procs = struct {
 	BackupRead:                          procBackupRead,
 	BackupSeek:                          procBackupSeek,
 	BackupWrite:                         procBackupWrite,
+	BuildIoRingCancelRequest:            procBuildIoRingCancelRequest,
+	BuildIoRingFlushFile:                procBuildIoRingFlushFile,
+	BuildIoRingReadFile:                 procBuildIoRingReadFile,
+	BuildIoRingReadFileScatter:          procBuildIoRingReadFileScatter,
 	BuildIoRingRegisterBuffers:          procBuildIoRingRegisterBuffers,
 	BuildIoRingRegisterFileHandles:      procBuildIoRingRegisterFileHandles,
+	BuildIoRingWriteFile:                procBuildIoRingWriteFile,
+	BuildIoRingWriteFileGather:          procBuildIoRingWriteFileGather,
 	CheckNameLegalDOS8Dot3:              procCheckNameLegalDOS8Dot3,
 	CheckNameLegalDOS8Dot3A:             procCheckNameLegalDOS8Dot3A,
 	CloseAndResetLogFile:                procCloseAndResetLogFile,
@@ -1422,6 +1440,44 @@ func BackupWrite(hFile foundation.HANDLE, lpBuffer []byte, lpNumberOfBytesWritte
 	return nil
 }
 
+var specBuildIoRingCancelRequest = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word}}
+
+// BuildIoRingCancelRequest calls api-ms-win-core-ioring-l1-1-0!BuildIoRingCancelRequest.
+// https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringcancelrequest
+func BuildIoRingCancelRequest(ioRing HIORING, file IORING_HANDLE_REF, opToCancel uintptr, userData uintptr) error {
+	r1, _, _ := win32.Call(procBuildIoRingCancelRequest.Addr(), specBuildIoRingCancelRequest, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&file)), uintptr(opToCancel), uintptr(userData)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingFlushFile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingFlushFile calls KERNEL32!BuildIoRingFlushFile.
+func BuildIoRingFlushFile(ioRing HIORING, fileRef IORING_HANDLE_REF, flushMode FILE_FLUSH_MODE, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	r1, _, _ := win32.Call(procBuildIoRingFlushFile.Addr(), specBuildIoRingFlushFile, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(flushMode), uintptr(userData), uintptr(sqeFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingReadFile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingReadFile calls api-ms-win-core-ioring-l1-1-0!BuildIoRingReadFile.
+// https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringreadfile
+func BuildIoRingReadFile(ioRing HIORING, fileRef IORING_HANDLE_REF, dataRef IORING_BUFFER_REF, numberOfBytesToRead uint32, fileOffset uint64, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	r1, _, _ := win32.Call(procBuildIoRingReadFile.Addr(), specBuildIoRingReadFile, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(unsafe.Pointer(&dataRef)), uintptr(numberOfBytesToRead), uintptr(fileOffset), uintptr(userData), uintptr(sqeFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingReadFileScatter = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingReadFileScatter calls KERNEL32!BuildIoRingReadFileScatter.
+func BuildIoRingReadFileScatter(ioRing HIORING, fileRef IORING_HANDLE_REF, segmentArray []FILE_SEGMENT_ELEMENT, numberOfBytesToRead uint32, fileOffset uint64, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	var _segmentArray *FILE_SEGMENT_ELEMENT
+	if len(segmentArray) > 0 {
+		_segmentArray = &segmentArray[0]
+	}
+	r1, _, _ := win32.Call(procBuildIoRingReadFileScatter.Addr(), specBuildIoRingReadFileScatter, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(len(segmentArray)), uintptr(unsafe.Pointer(_segmentArray)), uintptr(numberOfBytesToRead), uintptr(fileOffset), uintptr(userData), uintptr(sqeFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // BuildIoRingRegisterBuffers calls api-ms-win-core-ioring-l1-1-0!BuildIoRingRegisterBuffers.
 // https://learn.microsoft.com/windows/win32/api/ioringapi/nf-ioringapi-buildioringregisterbuffers
 func BuildIoRingRegisterBuffers(ioRing HIORING, buffers []IORING_BUFFER_INFO, userData uintptr) error {
@@ -1441,6 +1497,26 @@ func BuildIoRingRegisterFileHandles(ioRing HIORING, handles []foundation.HANDLE,
 		_handles = &handles[0]
 	}
 	r1, _, _ := syscall.SyscallN(procBuildIoRingRegisterFileHandles.Addr(), uintptr(ioRing), uintptr(len(handles)), uintptr(unsafe.Pointer(_handles)), uintptr(userData))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingWriteFile = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingWriteFile calls KERNEL32!BuildIoRingWriteFile.
+func BuildIoRingWriteFile(ioRing HIORING, fileRef IORING_HANDLE_REF, bufferRef IORING_BUFFER_REF, numberOfBytesToWrite uint32, fileOffset uint64, writeFlags FILE_WRITE_FLAGS, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	r1, _, _ := win32.Call(procBuildIoRingWriteFile.Addr(), specBuildIoRingWriteFile, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(unsafe.Pointer(&bufferRef)), uintptr(numberOfBytesToWrite), uintptr(fileOffset), uintptr(writeFlags), uintptr(userData), uintptr(sqeFlags)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specBuildIoRingWriteFileGather = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 8, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// BuildIoRingWriteFileGather calls KERNEL32!BuildIoRingWriteFileGather.
+func BuildIoRingWriteFileGather(ioRing HIORING, fileRef IORING_HANDLE_REF, segmentArray []FILE_SEGMENT_ELEMENT, numberOfBytesToWrite uint32, fileOffset uint64, writeFlags FILE_WRITE_FLAGS, userData uintptr, sqeFlags IORING_SQE_FLAGS) error {
+	var _segmentArray *FILE_SEGMENT_ELEMENT
+	if len(segmentArray) > 0 {
+		_segmentArray = &segmentArray[0]
+	}
+	r1, _, _ := win32.Call(procBuildIoRingWriteFileGather.Addr(), specBuildIoRingWriteFileGather, nil, uintptr(ioRing), uintptr(unsafe.Pointer(&fileRef)), uintptr(len(segmentArray)), uintptr(unsafe.Pointer(_segmentArray)), uintptr(numberOfBytesToWrite), uintptr(fileOffset), uintptr(writeFlags), uintptr(userData), uintptr(sqeFlags)).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

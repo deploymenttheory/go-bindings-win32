@@ -384,6 +384,14 @@ func (self *IAudioSystemEffects3) GetControllableSystemEffectsList(effects **AUD
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIAudioSystemEffects3_SetAudioSystemEffectState = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word}}
+
+// SetAudioSystemEffectState dispatches through IAudioSystemEffects3's vtable slot 5.
+func (self *IAudioSystemEffects3) SetAudioSystemEffectState(effectId win32.GUID, state AUDIO_SYSTEMEFFECT_STATE) error {
+	r1, _, _ := win32.Call(self.LpVtbl[5], specIAudioSystemEffects3_SetAudioSystemEffectState, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&effectId)), uintptr(state)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IAudioSystemEffectsCustomFormats: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudiosystemeffectscustomformats
 // IID: b1176e34-bb7f-4f05-bebd-1b18a534e097
 type IAudioSystemEffectsCustomFormats struct {

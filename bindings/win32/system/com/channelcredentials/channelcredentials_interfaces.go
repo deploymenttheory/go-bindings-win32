@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
 // IID: 181b448c-c17c-4b17-ac6d-06699b93198f
@@ -34,6 +35,14 @@ func (self *IChannelCredentials) SetUserNameCredential(username foundation.BSTR,
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIChannelCredentials_SetClientCertificateFromStore = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetClientCertificateFromStore dispatches through IChannelCredentials's vtable slot 9.
+func (self *IChannelCredentials) SetClientCertificateFromStore(storeLocation foundation.BSTR, storeName foundation.BSTR, findYype foundation.BSTR, findValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIChannelCredentials_SetClientCertificateFromStore, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storeLocation)), uintptr(unsafe.Pointer(storeName)), uintptr(unsafe.Pointer(findYype)), uintptr(unsafe.Pointer(&findValue))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // SetClientCertificateFromStoreByName dispatches through IChannelCredentials's vtable slot 10.
 func (self *IChannelCredentials) SetClientCertificateFromStoreByName(subjectName foundation.BSTR, storeLocation foundation.BSTR, storeName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subjectName)), uintptr(unsafe.Pointer(storeLocation)), uintptr(unsafe.Pointer(storeName)))
@@ -43,6 +52,14 @@ func (self *IChannelCredentials) SetClientCertificateFromStoreByName(subjectName
 // SetClientCertificateFromFile dispatches through IChannelCredentials's vtable slot 11.
 func (self *IChannelCredentials) SetClientCertificateFromFile(filename foundation.BSTR, password foundation.BSTR, keystorageFlags foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filename)), uintptr(unsafe.Pointer(password)), uintptr(unsafe.Pointer(keystorageFlags)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIChannelCredentials_SetDefaultServiceCertificateFromStore = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Word, win32.Struct(24, 8, 0, false)}}
+
+// SetDefaultServiceCertificateFromStore dispatches through IChannelCredentials's vtable slot 12.
+func (self *IChannelCredentials) SetDefaultServiceCertificateFromStore(storeLocation foundation.BSTR, storeName foundation.BSTR, findType foundation.BSTR, findValue systemvariant.VARIANT) error {
+	r1, _, _ := win32.Call(self.LpVtbl[12], specIChannelCredentials_SetDefaultServiceCertificateFromStore, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storeLocation)), uintptr(unsafe.Pointer(storeName)), uintptr(unsafe.Pointer(findType)), uintptr(unsafe.Pointer(&findValue))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
 

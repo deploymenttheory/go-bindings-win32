@@ -12,6 +12,7 @@ import (
 	datahtmlhelp "github.com/deploymenttheory/go-bindings-win32/bindings/win32/data/htmlhelp"
 	devicesproperties "github.com/deploymenttheory/go-bindings-win32/bindings/win32/devices/properties"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
@@ -334,6 +335,7 @@ var (
 	procSetupDiDestroyClassImageList                = modSETUPAPI.NewProc("SetupDiDestroyClassImageList")
 	procSetupDiDestroyDeviceInfoList                = modSETUPAPI.NewProc("SetupDiDestroyDeviceInfoList")
 	procSetupDiDestroyDriverInfoList                = modSETUPAPI.NewProc("SetupDiDestroyDriverInfoList")
+	procSetupDiDrawMiniIcon                         = modSETUPAPI.NewProc("SetupDiDrawMiniIcon")
 	procSetupDiEnumDeviceInfo                       = modSETUPAPI.NewProc("SetupDiEnumDeviceInfo")
 	procSetupDiEnumDeviceInterfaces                 = modSETUPAPI.NewProc("SetupDiEnumDeviceInterfaces")
 	procSetupDiEnumDriverInfo                       = modSETUPAPI.NewProc("SetupDiEnumDriverInfoW")
@@ -913,6 +915,7 @@ var Procs = struct {
 	SetupDiDestroyClassImageList                *win32.Proc
 	SetupDiDestroyDeviceInfoList                *win32.Proc
 	SetupDiDestroyDriverInfoList                *win32.Proc
+	SetupDiDrawMiniIcon                         *win32.Proc
 	SetupDiEnumDeviceInfo                       *win32.Proc
 	SetupDiEnumDeviceInterfaces                 *win32.Proc
 	SetupDiEnumDriverInfo                       *win32.Proc
@@ -1488,6 +1491,7 @@ var Procs = struct {
 	SetupDiDestroyClassImageList:                procSetupDiDestroyClassImageList,
 	SetupDiDestroyDeviceInfoList:                procSetupDiDestroyDeviceInfoList,
 	SetupDiDestroyDriverInfoList:                procSetupDiDestroyDriverInfoList,
+	SetupDiDrawMiniIcon:                         procSetupDiDrawMiniIcon,
 	SetupDiEnumDeviceInfo:                       procSetupDiEnumDeviceInfo,
 	SetupDiEnumDeviceInterfaces:                 procSetupDiEnumDeviceInterfaces,
 	SetupDiEnumDriverInfo:                       procSetupDiEnumDriverInfo,
@@ -4520,6 +4524,16 @@ func SetupDiDestroyDriverInfoList(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEV
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+var specSetupDiDrawMiniIcon = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// SetupDiDrawMiniIcon calls SETUPAPI!SetupDiDrawMiniIcon.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdidrawminiicon
+// Minimum OS: windows5.0.
+func SetupDiDrawMiniIcon(hdc graphicsgdi.HDC, rc foundation.RECT, MiniIconIndex int32, Flags uint32) int32 {
+	r1, _, _ := win32.Call(procSetupDiDrawMiniIcon.Addr(), specSetupDiDrawMiniIcon, nil, uintptr(hdc), uintptr(unsafe.Pointer(&rc)), uintptr(MiniIconIndex), uintptr(Flags)).Tuple()
+	return int32(r1)
 }
 
 // SetupDiEnumDeviceInfo calls SETUPAPI!SetupDiEnumDeviceInfo.

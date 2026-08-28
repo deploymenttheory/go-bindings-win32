@@ -26,60 +26,63 @@ var (
 )
 
 var (
-	procIEAssociateThreadWithTab    = modIeframe.NewProc("IEAssociateThreadWithTab")
-	procIECancelSaveFile            = modIeframe.NewProc("IECancelSaveFile")
-	procIECreateDirectory           = modIeframe.NewProc("IECreateDirectory")
-	procIECreateFile                = modIeframe.NewProc("IECreateFile")
-	procIEDeleteFile                = modIeframe.NewProc("IEDeleteFile")
-	procIEDisassociateThreadWithTab = modIeframe.NewProc("IEDisassociateThreadWithTab")
-	procIEFindFirstFile             = modIeframe.NewProc("IEFindFirstFile")
-	procIEGetFileAttributesEx       = modIeframe.NewProc("IEGetFileAttributesEx")
-	procIEGetProtectedModeCookie    = modIeframe.NewProc("IEGetProtectedModeCookie")
-	procIEGetWriteableFolderPath    = modIeframe.NewProc("IEGetWriteableFolderPath")
-	procIEGetWriteableLowHKCU       = modIeframe.NewProc("IEGetWriteableLowHKCU")
-	procIEInPrivateFilteringEnabled = modIeframe.NewProc("IEInPrivateFilteringEnabled")
-	procIEIsInPrivateBrowsing       = modIeframe.NewProc("IEIsInPrivateBrowsing")
-	procIEIsProtectedModeProcess    = modIeframe.NewProc("IEIsProtectedModeProcess")
-	procIEIsProtectedModeURL        = modIeframe.NewProc("IEIsProtectedModeURL")
-	procIELaunchURL                 = modIeframe.NewProc("IELaunchURL")
-	procIEMoveFileEx                = modIeframe.NewProc("IEMoveFileEx")
-	procIERefreshElevationPolicy    = modIeframe.NewProc("IERefreshElevationPolicy")
-	procIERegCreateKeyEx            = modIeframe.NewProc("IERegCreateKeyEx")
-	procIERegSetValueEx             = modIeframe.NewProc("IERegSetValueEx")
-	procIERemoveDirectory           = modIeframe.NewProc("IERemoveDirectory")
-	procIESaveFile                  = modIeframe.NewProc("IESaveFile")
-	procIESetProtectedModeCookie    = modIeframe.NewProc("IESetProtectedModeCookie")
-	procIEShowOpenFileDialog        = modIeframe.NewProc("IEShowOpenFileDialog")
-	procIEShowSaveFileDialog        = modIeframe.NewProc("IEShowSaveFileDialog")
-	procIETrackingProtectionEnabled = modIeframe.NewProc("IETrackingProtectionEnabled")
-	procComputeInvCMAP              = modImgUtil.NewProc("ComputeInvCMAP")
-	procCreateDDrawSurfaceOnDIB     = modImgUtil.NewProc("CreateDDrawSurfaceOnDIB")
-	procCreateMIMEMap               = modImgUtil.NewProc("CreateMIMEMap")
-	procDecodeImage                 = modImgUtil.NewProc("DecodeImage")
-	procDecodeImageEx               = modImgUtil.NewProc("DecodeImageEx")
-	procDitherTo8                   = modImgUtil.NewProc("DitherTo8")
-	procGetMaxMIMEIDBytes           = modImgUtil.NewProc("GetMaxMIMEIDBytes")
-	procIdentifyMIMEType            = modImgUtil.NewProc("IdentifyMIMEType")
-	procSniffStream                 = modImgUtil.NewProc("SniffStream")
-	procRatingAccessDeniedDialog    = modMSRATING.NewProc("RatingAccessDeniedDialog")
-	procRatingAccessDeniedDialog2   = modMSRATING.NewProc("RatingAccessDeniedDialog2")
-	procRatingAccessDeniedDialog2W  = modMSRATING.NewProc("RatingAccessDeniedDialog2W")
-	procRatingAccessDeniedDialogW   = modMSRATING.NewProc("RatingAccessDeniedDialogW")
-	procRatingAddToApprovedSites    = modMSRATING.NewProc("RatingAddToApprovedSites")
-	procRatingCheckUserAccess       = modMSRATING.NewProc("RatingCheckUserAccess")
-	procRatingCheckUserAccessW      = modMSRATING.NewProc("RatingCheckUserAccessW")
-	procRatingClickedOnPRFInternal  = modMSRATING.NewProc("RatingClickedOnPRFInternal")
-	procRatingClickedOnRATInternal  = modMSRATING.NewProc("RatingClickedOnRATInternal")
-	procRatingEnable                = modMSRATING.NewProc("RatingEnable")
-	procRatingEnableW               = modMSRATING.NewProc("RatingEnableW")
-	procRatingEnabledQuery          = modMSRATING.NewProc("RatingEnabledQuery")
-	procRatingFreeDetails           = modMSRATING.NewProc("RatingFreeDetails")
-	procRatingInit                  = modMSRATING.NewProc("RatingInit")
-	procRatingObtainCancel          = modMSRATING.NewProc("RatingObtainCancel")
-	procRatingObtainQuery           = modMSRATING.NewProc("RatingObtainQuery")
-	procRatingObtainQueryW          = modMSRATING.NewProc("RatingObtainQueryW")
-	procRatingSetupUI               = modMSRATING.NewProc("RatingSetupUI")
-	procRatingSetupUIW              = modMSRATING.NewProc("RatingSetupUIW")
+	procIEAssociateThreadWithTab        = modIeframe.NewProc("IEAssociateThreadWithTab")
+	procIECancelSaveFile                = modIeframe.NewProc("IECancelSaveFile")
+	procIECreateDirectory               = modIeframe.NewProc("IECreateDirectory")
+	procIECreateFile                    = modIeframe.NewProc("IECreateFile")
+	procIEDeleteFile                    = modIeframe.NewProc("IEDeleteFile")
+	procIEDisassociateThreadWithTab     = modIeframe.NewProc("IEDisassociateThreadWithTab")
+	procIEFindFirstFile                 = modIeframe.NewProc("IEFindFirstFile")
+	procIEGetFileAttributesEx           = modIeframe.NewProc("IEGetFileAttributesEx")
+	procIEGetProtectedModeCookie        = modIeframe.NewProc("IEGetProtectedModeCookie")
+	procIEGetWriteableFolderPath        = modIeframe.NewProc("IEGetWriteableFolderPath")
+	procIEGetWriteableLowHKCU           = modIeframe.NewProc("IEGetWriteableLowHKCU")
+	procIEInPrivateFilteringEnabled     = modIeframe.NewProc("IEInPrivateFilteringEnabled")
+	procIEIsInPrivateBrowsing           = modIeframe.NewProc("IEIsInPrivateBrowsing")
+	procIEIsProtectedModeProcess        = modIeframe.NewProc("IEIsProtectedModeProcess")
+	procIEIsProtectedModeURL            = modIeframe.NewProc("IEIsProtectedModeURL")
+	procIELaunchURL                     = modIeframe.NewProc("IELaunchURL")
+	procIEMoveFileEx                    = modIeframe.NewProc("IEMoveFileEx")
+	procIERefreshElevationPolicy        = modIeframe.NewProc("IERefreshElevationPolicy")
+	procIERegCreateKeyEx                = modIeframe.NewProc("IERegCreateKeyEx")
+	procIERegSetValueEx                 = modIeframe.NewProc("IERegSetValueEx")
+	procIERegisterWritableRegistryKey   = modIeframe.NewProc("IERegisterWritableRegistryKey")
+	procIERegisterWritableRegistryValue = modIeframe.NewProc("IERegisterWritableRegistryValue")
+	procIERemoveDirectory               = modIeframe.NewProc("IERemoveDirectory")
+	procIESaveFile                      = modIeframe.NewProc("IESaveFile")
+	procIESetProtectedModeCookie        = modIeframe.NewProc("IESetProtectedModeCookie")
+	procIEShowOpenFileDialog            = modIeframe.NewProc("IEShowOpenFileDialog")
+	procIEShowSaveFileDialog            = modIeframe.NewProc("IEShowSaveFileDialog")
+	procIETrackingProtectionEnabled     = modIeframe.NewProc("IETrackingProtectionEnabled")
+	procIEUnregisterWritableRegistry    = modIeframe.NewProc("IEUnregisterWritableRegistry")
+	procComputeInvCMAP                  = modImgUtil.NewProc("ComputeInvCMAP")
+	procCreateDDrawSurfaceOnDIB         = modImgUtil.NewProc("CreateDDrawSurfaceOnDIB")
+	procCreateMIMEMap                   = modImgUtil.NewProc("CreateMIMEMap")
+	procDecodeImage                     = modImgUtil.NewProc("DecodeImage")
+	procDecodeImageEx                   = modImgUtil.NewProc("DecodeImageEx")
+	procDitherTo8                       = modImgUtil.NewProc("DitherTo8")
+	procGetMaxMIMEIDBytes               = modImgUtil.NewProc("GetMaxMIMEIDBytes")
+	procIdentifyMIMEType                = modImgUtil.NewProc("IdentifyMIMEType")
+	procSniffStream                     = modImgUtil.NewProc("SniffStream")
+	procRatingAccessDeniedDialog        = modMSRATING.NewProc("RatingAccessDeniedDialog")
+	procRatingAccessDeniedDialog2       = modMSRATING.NewProc("RatingAccessDeniedDialog2")
+	procRatingAccessDeniedDialog2W      = modMSRATING.NewProc("RatingAccessDeniedDialog2W")
+	procRatingAccessDeniedDialogW       = modMSRATING.NewProc("RatingAccessDeniedDialogW")
+	procRatingAddToApprovedSites        = modMSRATING.NewProc("RatingAddToApprovedSites")
+	procRatingCheckUserAccess           = modMSRATING.NewProc("RatingCheckUserAccess")
+	procRatingCheckUserAccessW          = modMSRATING.NewProc("RatingCheckUserAccessW")
+	procRatingClickedOnPRFInternal      = modMSRATING.NewProc("RatingClickedOnPRFInternal")
+	procRatingClickedOnRATInternal      = modMSRATING.NewProc("RatingClickedOnRATInternal")
+	procRatingEnable                    = modMSRATING.NewProc("RatingEnable")
+	procRatingEnableW                   = modMSRATING.NewProc("RatingEnableW")
+	procRatingEnabledQuery              = modMSRATING.NewProc("RatingEnabledQuery")
+	procRatingFreeDetails               = modMSRATING.NewProc("RatingFreeDetails")
+	procRatingInit                      = modMSRATING.NewProc("RatingInit")
+	procRatingObtainCancel              = modMSRATING.NewProc("RatingObtainCancel")
+	procRatingObtainQuery               = modMSRATING.NewProc("RatingObtainQuery")
+	procRatingObtainQueryW              = modMSRATING.NewProc("RatingObtainQueryW")
+	procRatingSetupUI                   = modMSRATING.NewProc("RatingSetupUI")
+	procRatingSetupUIW                  = modMSRATING.NewProc("RatingSetupUIW")
 )
 
 // Procs exposes this package's lazily resolved exports for availability
@@ -87,115 +90,121 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
-	ComputeInvCMAP              *win32.Proc
-	CreateDDrawSurfaceOnDIB     *win32.Proc
-	CreateMIMEMap               *win32.Proc
-	DecodeImage                 *win32.Proc
-	DecodeImageEx               *win32.Proc
-	DitherTo8                   *win32.Proc
-	GetMaxMIMEIDBytes           *win32.Proc
-	IEAssociateThreadWithTab    *win32.Proc
-	IECancelSaveFile            *win32.Proc
-	IECreateDirectory           *win32.Proc
-	IECreateFile                *win32.Proc
-	IEDeleteFile                *win32.Proc
-	IEDisassociateThreadWithTab *win32.Proc
-	IEFindFirstFile             *win32.Proc
-	IEGetFileAttributesEx       *win32.Proc
-	IEGetProtectedModeCookie    *win32.Proc
-	IEGetWriteableFolderPath    *win32.Proc
-	IEGetWriteableLowHKCU       *win32.Proc
-	IEInPrivateFilteringEnabled *win32.Proc
-	IEIsInPrivateBrowsing       *win32.Proc
-	IEIsProtectedModeProcess    *win32.Proc
-	IEIsProtectedModeURL        *win32.Proc
-	IELaunchURL                 *win32.Proc
-	IEMoveFileEx                *win32.Proc
-	IERefreshElevationPolicy    *win32.Proc
-	IERegCreateKeyEx            *win32.Proc
-	IERegSetValueEx             *win32.Proc
-	IERemoveDirectory           *win32.Proc
-	IESaveFile                  *win32.Proc
-	IESetProtectedModeCookie    *win32.Proc
-	IEShowOpenFileDialog        *win32.Proc
-	IEShowSaveFileDialog        *win32.Proc
-	IETrackingProtectionEnabled *win32.Proc
-	IdentifyMIMEType            *win32.Proc
-	RatingAccessDeniedDialog    *win32.Proc
-	RatingAccessDeniedDialog2   *win32.Proc
-	RatingAccessDeniedDialog2W  *win32.Proc
-	RatingAccessDeniedDialogW   *win32.Proc
-	RatingAddToApprovedSites    *win32.Proc
-	RatingCheckUserAccess       *win32.Proc
-	RatingCheckUserAccessW      *win32.Proc
-	RatingClickedOnPRFInternal  *win32.Proc
-	RatingClickedOnRATInternal  *win32.Proc
-	RatingEnable                *win32.Proc
-	RatingEnableW               *win32.Proc
-	RatingEnabledQuery          *win32.Proc
-	RatingFreeDetails           *win32.Proc
-	RatingInit                  *win32.Proc
-	RatingObtainCancel          *win32.Proc
-	RatingObtainQuery           *win32.Proc
-	RatingObtainQueryW          *win32.Proc
-	RatingSetupUI               *win32.Proc
-	RatingSetupUIW              *win32.Proc
-	SniffStream                 *win32.Proc
+	ComputeInvCMAP                  *win32.Proc
+	CreateDDrawSurfaceOnDIB         *win32.Proc
+	CreateMIMEMap                   *win32.Proc
+	DecodeImage                     *win32.Proc
+	DecodeImageEx                   *win32.Proc
+	DitherTo8                       *win32.Proc
+	GetMaxMIMEIDBytes               *win32.Proc
+	IEAssociateThreadWithTab        *win32.Proc
+	IECancelSaveFile                *win32.Proc
+	IECreateDirectory               *win32.Proc
+	IECreateFile                    *win32.Proc
+	IEDeleteFile                    *win32.Proc
+	IEDisassociateThreadWithTab     *win32.Proc
+	IEFindFirstFile                 *win32.Proc
+	IEGetFileAttributesEx           *win32.Proc
+	IEGetProtectedModeCookie        *win32.Proc
+	IEGetWriteableFolderPath        *win32.Proc
+	IEGetWriteableLowHKCU           *win32.Proc
+	IEInPrivateFilteringEnabled     *win32.Proc
+	IEIsInPrivateBrowsing           *win32.Proc
+	IEIsProtectedModeProcess        *win32.Proc
+	IEIsProtectedModeURL            *win32.Proc
+	IELaunchURL                     *win32.Proc
+	IEMoveFileEx                    *win32.Proc
+	IERefreshElevationPolicy        *win32.Proc
+	IERegCreateKeyEx                *win32.Proc
+	IERegSetValueEx                 *win32.Proc
+	IERegisterWritableRegistryKey   *win32.Proc
+	IERegisterWritableRegistryValue *win32.Proc
+	IERemoveDirectory               *win32.Proc
+	IESaveFile                      *win32.Proc
+	IESetProtectedModeCookie        *win32.Proc
+	IEShowOpenFileDialog            *win32.Proc
+	IEShowSaveFileDialog            *win32.Proc
+	IETrackingProtectionEnabled     *win32.Proc
+	IEUnregisterWritableRegistry    *win32.Proc
+	IdentifyMIMEType                *win32.Proc
+	RatingAccessDeniedDialog        *win32.Proc
+	RatingAccessDeniedDialog2       *win32.Proc
+	RatingAccessDeniedDialog2W      *win32.Proc
+	RatingAccessDeniedDialogW       *win32.Proc
+	RatingAddToApprovedSites        *win32.Proc
+	RatingCheckUserAccess           *win32.Proc
+	RatingCheckUserAccessW          *win32.Proc
+	RatingClickedOnPRFInternal      *win32.Proc
+	RatingClickedOnRATInternal      *win32.Proc
+	RatingEnable                    *win32.Proc
+	RatingEnableW                   *win32.Proc
+	RatingEnabledQuery              *win32.Proc
+	RatingFreeDetails               *win32.Proc
+	RatingInit                      *win32.Proc
+	RatingObtainCancel              *win32.Proc
+	RatingObtainQuery               *win32.Proc
+	RatingObtainQueryW              *win32.Proc
+	RatingSetupUI                   *win32.Proc
+	RatingSetupUIW                  *win32.Proc
+	SniffStream                     *win32.Proc
 }{
-	ComputeInvCMAP:              procComputeInvCMAP,
-	CreateDDrawSurfaceOnDIB:     procCreateDDrawSurfaceOnDIB,
-	CreateMIMEMap:               procCreateMIMEMap,
-	DecodeImage:                 procDecodeImage,
-	DecodeImageEx:               procDecodeImageEx,
-	DitherTo8:                   procDitherTo8,
-	GetMaxMIMEIDBytes:           procGetMaxMIMEIDBytes,
-	IEAssociateThreadWithTab:    procIEAssociateThreadWithTab,
-	IECancelSaveFile:            procIECancelSaveFile,
-	IECreateDirectory:           procIECreateDirectory,
-	IECreateFile:                procIECreateFile,
-	IEDeleteFile:                procIEDeleteFile,
-	IEDisassociateThreadWithTab: procIEDisassociateThreadWithTab,
-	IEFindFirstFile:             procIEFindFirstFile,
-	IEGetFileAttributesEx:       procIEGetFileAttributesEx,
-	IEGetProtectedModeCookie:    procIEGetProtectedModeCookie,
-	IEGetWriteableFolderPath:    procIEGetWriteableFolderPath,
-	IEGetWriteableLowHKCU:       procIEGetWriteableLowHKCU,
-	IEInPrivateFilteringEnabled: procIEInPrivateFilteringEnabled,
-	IEIsInPrivateBrowsing:       procIEIsInPrivateBrowsing,
-	IEIsProtectedModeProcess:    procIEIsProtectedModeProcess,
-	IEIsProtectedModeURL:        procIEIsProtectedModeURL,
-	IELaunchURL:                 procIELaunchURL,
-	IEMoveFileEx:                procIEMoveFileEx,
-	IERefreshElevationPolicy:    procIERefreshElevationPolicy,
-	IERegCreateKeyEx:            procIERegCreateKeyEx,
-	IERegSetValueEx:             procIERegSetValueEx,
-	IERemoveDirectory:           procIERemoveDirectory,
-	IESaveFile:                  procIESaveFile,
-	IESetProtectedModeCookie:    procIESetProtectedModeCookie,
-	IEShowOpenFileDialog:        procIEShowOpenFileDialog,
-	IEShowSaveFileDialog:        procIEShowSaveFileDialog,
-	IETrackingProtectionEnabled: procIETrackingProtectionEnabled,
-	IdentifyMIMEType:            procIdentifyMIMEType,
-	RatingAccessDeniedDialog:    procRatingAccessDeniedDialog,
-	RatingAccessDeniedDialog2:   procRatingAccessDeniedDialog2,
-	RatingAccessDeniedDialog2W:  procRatingAccessDeniedDialog2W,
-	RatingAccessDeniedDialogW:   procRatingAccessDeniedDialogW,
-	RatingAddToApprovedSites:    procRatingAddToApprovedSites,
-	RatingCheckUserAccess:       procRatingCheckUserAccess,
-	RatingCheckUserAccessW:      procRatingCheckUserAccessW,
-	RatingClickedOnPRFInternal:  procRatingClickedOnPRFInternal,
-	RatingClickedOnRATInternal:  procRatingClickedOnRATInternal,
-	RatingEnable:                procRatingEnable,
-	RatingEnableW:               procRatingEnableW,
-	RatingEnabledQuery:          procRatingEnabledQuery,
-	RatingFreeDetails:           procRatingFreeDetails,
-	RatingInit:                  procRatingInit,
-	RatingObtainCancel:          procRatingObtainCancel,
-	RatingObtainQuery:           procRatingObtainQuery,
-	RatingObtainQueryW:          procRatingObtainQueryW,
-	RatingSetupUI:               procRatingSetupUI,
-	RatingSetupUIW:              procRatingSetupUIW,
-	SniffStream:                 procSniffStream,
+	ComputeInvCMAP:                  procComputeInvCMAP,
+	CreateDDrawSurfaceOnDIB:         procCreateDDrawSurfaceOnDIB,
+	CreateMIMEMap:                   procCreateMIMEMap,
+	DecodeImage:                     procDecodeImage,
+	DecodeImageEx:                   procDecodeImageEx,
+	DitherTo8:                       procDitherTo8,
+	GetMaxMIMEIDBytes:               procGetMaxMIMEIDBytes,
+	IEAssociateThreadWithTab:        procIEAssociateThreadWithTab,
+	IECancelSaveFile:                procIECancelSaveFile,
+	IECreateDirectory:               procIECreateDirectory,
+	IECreateFile:                    procIECreateFile,
+	IEDeleteFile:                    procIEDeleteFile,
+	IEDisassociateThreadWithTab:     procIEDisassociateThreadWithTab,
+	IEFindFirstFile:                 procIEFindFirstFile,
+	IEGetFileAttributesEx:           procIEGetFileAttributesEx,
+	IEGetProtectedModeCookie:        procIEGetProtectedModeCookie,
+	IEGetWriteableFolderPath:        procIEGetWriteableFolderPath,
+	IEGetWriteableLowHKCU:           procIEGetWriteableLowHKCU,
+	IEInPrivateFilteringEnabled:     procIEInPrivateFilteringEnabled,
+	IEIsInPrivateBrowsing:           procIEIsInPrivateBrowsing,
+	IEIsProtectedModeProcess:        procIEIsProtectedModeProcess,
+	IEIsProtectedModeURL:            procIEIsProtectedModeURL,
+	IELaunchURL:                     procIELaunchURL,
+	IEMoveFileEx:                    procIEMoveFileEx,
+	IERefreshElevationPolicy:        procIERefreshElevationPolicy,
+	IERegCreateKeyEx:                procIERegCreateKeyEx,
+	IERegSetValueEx:                 procIERegSetValueEx,
+	IERegisterWritableRegistryKey:   procIERegisterWritableRegistryKey,
+	IERegisterWritableRegistryValue: procIERegisterWritableRegistryValue,
+	IERemoveDirectory:               procIERemoveDirectory,
+	IESaveFile:                      procIESaveFile,
+	IESetProtectedModeCookie:        procIESetProtectedModeCookie,
+	IEShowOpenFileDialog:            procIEShowOpenFileDialog,
+	IEShowSaveFileDialog:            procIEShowSaveFileDialog,
+	IETrackingProtectionEnabled:     procIETrackingProtectionEnabled,
+	IEUnregisterWritableRegistry:    procIEUnregisterWritableRegistry,
+	IdentifyMIMEType:                procIdentifyMIMEType,
+	RatingAccessDeniedDialog:        procRatingAccessDeniedDialog,
+	RatingAccessDeniedDialog2:       procRatingAccessDeniedDialog2,
+	RatingAccessDeniedDialog2W:      procRatingAccessDeniedDialog2W,
+	RatingAccessDeniedDialogW:       procRatingAccessDeniedDialogW,
+	RatingAddToApprovedSites:        procRatingAddToApprovedSites,
+	RatingCheckUserAccess:           procRatingCheckUserAccess,
+	RatingCheckUserAccessW:          procRatingCheckUserAccessW,
+	RatingClickedOnPRFInternal:      procRatingClickedOnPRFInternal,
+	RatingClickedOnRATInternal:      procRatingClickedOnRATInternal,
+	RatingEnable:                    procRatingEnable,
+	RatingEnableW:                   procRatingEnableW,
+	RatingEnabledQuery:              procRatingEnabledQuery,
+	RatingFreeDetails:               procRatingFreeDetails,
+	RatingInit:                      procRatingInit,
+	RatingObtainCancel:              procRatingObtainCancel,
+	RatingObtainQuery:               procRatingObtainQuery,
+	RatingObtainQueryW:              procRatingObtainQueryW,
+	RatingSetupUI:                   procRatingSetupUI,
+	RatingSetupUIW:                  procRatingSetupUIW,
+	SniffStream:                     procSniffStream,
 }
 
 // ComputeInvCMAP calls ImgUtil!ComputeInvCMAP.
@@ -380,6 +389,30 @@ func IERegSetValueEx(lpSubKey string, lpValueName string, Reserved uint32, dwTyp
 	return win32.ErrIfFailed(int32(r1))
 }
 
+var specIERegisterWritableRegistryKey = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
+
+// IERegisterWritableRegistryKey calls Ieframe!IERegisterWritableRegistryKey.
+func IERegisterWritableRegistryKey(guid win32.GUID, lpSubkey string, fSubkeyAllowed bool) error {
+	_lpSubkey := win32.UTF16Ptr(lpSubkey)
+	_fSubkeyAllowed := win32.Bool32(fSubkeyAllowed)
+	r1, _, _ := win32.Call(procIERegisterWritableRegistryKey.Addr(), specIERegisterWritableRegistryKey, nil, uintptr(unsafe.Pointer(&guid)), uintptr(unsafe.Pointer(_lpSubkey)), uintptr(_fSubkeyAllowed)).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
+var specIERegisterWritableRegistryValue = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word, win32.Word}}
+
+// IERegisterWritableRegistryValue calls Ieframe!IERegisterWritableRegistryValue.
+func IERegisterWritableRegistryValue(guid win32.GUID, lpPath string, lpValueName string, dwType uint32, lpData []byte) error {
+	_lpPath := win32.UTF16Ptr(lpPath)
+	_lpValueName := win32.UTF16Ptr(lpValueName)
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := win32.Call(procIERegisterWritableRegistryValue.Addr(), specIERegisterWritableRegistryValue, nil, uintptr(unsafe.Pointer(&guid)), uintptr(unsafe.Pointer(_lpPath)), uintptr(unsafe.Pointer(_lpValueName)), uintptr(dwType), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
+}
+
 // IERemoveDirectory calls Ieframe!IERemoveDirectory.
 func IERemoveDirectory(lpPathName string) bool {
 	_lpPathName := win32.UTF16Ptr(lpPathName)
@@ -426,6 +459,14 @@ func IEShowSaveFileDialog(hwnd foundation.HWND, lpwstrInitialFileName string, lp
 func IETrackingProtectionEnabled() bool {
 	r1, _, _ := syscall.SyscallN(procIETrackingProtectionEnabled.Addr())
 	return r1 != 0
+}
+
+var specIEUnregisterWritableRegistry = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false)}}
+
+// IEUnregisterWritableRegistry calls Ieframe!IEUnregisterWritableRegistry.
+func IEUnregisterWritableRegistry(guid win32.GUID) error {
+	r1, _, _ := win32.Call(procIEUnregisterWritableRegistry.Addr(), specIEUnregisterWritableRegistry, nil, uintptr(unsafe.Pointer(&guid))).Tuple()
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // IdentifyMIMEType calls ImgUtil!IdentifyMIMEType.

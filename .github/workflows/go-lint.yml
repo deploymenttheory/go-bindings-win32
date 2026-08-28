@@ -49,7 +49,9 @@ jobs:
         with:
           version: latest
           args: --timeout=30m --verbose --config=./.golangci.yml
-          only-new-issues: true
+          # The whole tree is linted (the config is clean); only-new-issues
+          # cannot fetch the patch of a PR touching more than 300 files.
+          only-new-issues: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
           skip-cache: false              # restore and save cache
           skip-save-cache: false         # allow saving any new cache

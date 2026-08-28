@@ -177,6 +177,8 @@ Runnable programs, each with its own README, under [`examples/`](examples):
   self-sized structs, buffer ownership, handles
 - [Using COM interfaces](docs/com.md) — vtable structs, casting factory
   out-params, lifetime
+- [How calls reach Win32](docs/calling-convention.md) — the `SyscallN` path,
+  the register-aware `win32.Call` path and its assembly, the ABI rules
 - [Coverage](docs/COVERAGE.md) — what is emitted, what is not, and why
   (regenerated with the tree)
 - [`CLAUDE.md`](CLAUDE.md) — the as-built generator internals and pipeline
@@ -206,12 +208,14 @@ a new winmd. See [`CLAUDE.md`](CLAUDE.md) for the full pipeline.
   flagged in their doc comments. Every *call* shape — floats, by-value
   structs, struct returns — is covered by the runtime's assembly-backed
   `win32.Call` on both amd64 and arm64, without cgo.
-- **Architecture-specific struct layouts.** 231 structs (`CONTEXT`,
-  `IMAGEHLP_*`, …) have per-architecture layouts in the metadata; the amd64
-  layout is the one emitted, under the shared `amd64 || arm64` build tag.
-  They are listed in [`docs/COVERAGE.md`](docs/COVERAGE.md); treat them as
-  amd64-only until per-architecture emission lands. 386 is excluded
-  outright.
+- **Variadic functions.** The metadata declares the `wsprintf` family with
+  their fixed parameters only (all integers/pointers), so the bindings call
+  them correctly on both architectures but cannot pass a variadic tail.
+- **386 is excluded.** Structs whose amd64 and arm64 layouts differ
+  (`CONTEXT`, `SLIST_HEADER`, the unwind/minidump thread records and the
+  structs embedding them) are emitted per architecture under `amd64` /
+  `arm64` build tags, with per-architecture ABI assertions; structs whose
+  only other layout is x86 emit the shared 64-bit one.
 - **Absent APIs panic.** An export missing from the running Windows build
   (or a DLL that is not installed) has no address to call; the binding panics
   with a `*win32.ProcError`. Probe with `pkg.Procs.<Function>.Find()` —
@@ -219,9 +223,8 @@ a new winmd. See [`CLAUDE.md`](CLAUDE.md) for the full pipeline.
 - **Header inlines.** The three `FORCEINLINE` pseudo-exports
   (`GetCurrentProcessToken` and friends) are emitted from their `[Constant]`
   metadata values, not dispatched.
-- **arm64 runs in CI as a cross-compile plus a Windows-on-ARM acceptance job
-  where the hosted runner is available; report anything the amd64 job cannot
-  catch.**
+- **arm64 runs in CI** as a cross-compile plus a Windows-on-ARM job that
+  executes the runtime, acceptance and per-architecture ABI suites.
 
 ## Status & contributing
 

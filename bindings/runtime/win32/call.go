@@ -4,6 +4,7 @@ package win32
 
 import (
 	"runtime"
+	"sync"
 	"syscall"
 	"unsafe"
 )
@@ -104,8 +105,9 @@ type Result struct {
 func (r Result) Tuple() (r1, r2 uintptr, err Errno) { return r.R1, r.R2, r.Err }
 
 // maxStackWords bounds the outgoing stack argument area the trampolines
-// reserve (Windows' own syscall path allows 42; 32 keeps the frame small).
-const maxStackWords = 32
+// reserve — the same 42 words Go's own syscall path allows (the generator
+// refuses any call site that could need more, so Call never has to).
+const maxStackWords = 42
 
 // callFrame is the trampoline's contract; call_amd64.s and call_arm64.s
 // address its fields through the go_asm.h offsets.
@@ -127,7 +129,15 @@ type callFrame struct {
 	// Captured after the call.
 	r1, r2 uintptr
 	f      [4]uint64 // XMM0 (f[0]) on amd64; D0–D3 on arm64
+	// stackWords backs the stack argument list, so a call with no composite
+	// copies allocates nothing (frames are pooled).
+	stackWords [maxStackWords]uintptr
 }
+
+// framePool recycles call frames: a frame is only referenced by the
+// trampoline between SyscallN's entry and return, and a callee that
+// re-enters Go and calls again simply takes another frame.
+var framePool = sync.Pool{New: func() any { return new(callFrame) }}
 
 // callTrampolineABI0 is the ABI0 entry address of the trampoline, exported
 // by the assembly via a DATA symbol (a Go func value would resolve to the
@@ -151,15 +161,15 @@ func Call(fn uintptr, spec *Spec, ret unsafe.Pointer, args ...uintptr) Result {
 	if len(args) != len(spec.Args) {
 		panic("win32: Call argument count does not match its Spec")
 	}
-	frame := new(callFrame)
-	frame.fn = fn
+	frame := framePool.Get().(*callFrame)
+	*frame = callFrame{fn: fn}
 	var keep [][]byte
 	var stack []uintptr
 	switch runtime.GOARCH {
 	case "amd64":
-		keep, stack = planAMD64(frame, spec, ret, args)
+		keep, stack = planAMD64(frame, spec, ret, args, frame.stackWords[:0])
 	case "arm64":
-		keep, stack = planARM64(frame, spec, ret, args)
+		keep, stack = planARM64(frame, spec, ret, args, frame.stackWords[:0])
 	default:
 		panic("win32: Call is not supported on " + runtime.GOARCH)
 	}
@@ -171,18 +181,19 @@ func Call(fn uintptr, spec *Spec, ret unsafe.Pointer, args ...uintptr) Result {
 		frame.stack = &stack[0]
 	}
 	// The frame is written by the trampoline after the callee returns, and a
-	// callee that reenters Go can move this goroutine's stack meanwhile —
-	// OutParam keeps it on the heap (see outparam.go).
+	// callee that reenters Go can move this goroutine's stack meanwhile — the
+	// pooled frame lives on the heap (OutParam documents the invariant).
 	_, _, err := syscall.SyscallN(callTrampolineABI0, uintptr(OutParam(unsafe.Pointer(frame))))
 	runtime.KeepAlive(keep)
-	runtime.KeepAlive(stack)
 	switch runtime.GOARCH {
 	case "amd64":
 		finishAMD64(frame, spec, ret)
 	case "arm64":
 		finishARM64(frame, spec, ret)
 	}
-	return Result{R1: frame.r1, R2: frame.r2, F0: frame.f[0], Err: err}
+	result := Result{R1: frame.r1, R2: frame.r2, F0: frame.f[0], Err: err}
+	framePool.Put(frame)
+	return result
 }
 
 // ── x64 planner ──────────────────────────────────────────────────────────────
@@ -195,8 +206,9 @@ func Call(fn uintptr, spec *Spec, ret unsafe.Pointer, args ...uintptr) Result {
 // returns a 1/2/4/8-byte aggregate in RAX and anything else through a hidden
 // pointer passed as the first argument.
 
-func planAMD64(frame *callFrame, spec *Spec, ret unsafe.Pointer, args []uintptr) (keep [][]byte, stack []uintptr) {
-	words := make([]uintptr, 0, len(args)+1)
+func planAMD64(frame *callFrame, spec *Spec, ret unsafe.Pointer, args []uintptr, stack []uintptr) (keep [][]byte, _ []uintptr) {
+	var wordBuffer [maxStackWords + 4]uintptr
+	words := wordBuffer[:0]
 	if spec.Ret.Kind == ArgStruct && !registerSized(spec.Ret.Size) {
 		words = append(words, uintptr(ret))
 	}
@@ -243,7 +255,7 @@ func finishAMD64(frame *callFrame, spec *Spec, ret unsafe.Pointer) {
 // at most 8 bytes in X0, at most 16 in X0:X1, and anything larger through the
 // buffer whose address the caller places in X8.
 
-func planARM64(frame *callFrame, spec *Spec, ret unsafe.Pointer, args []uintptr) (keep [][]byte, stack []uintptr) {
+func planARM64(frame *callFrame, spec *Spec, ret unsafe.Pointer, args []uintptr, stack []uintptr) (keep [][]byte, _ []uintptr) {
 	ngrn, nsrn := 0, 0
 	putInt := func(word uintptr) {
 		if ngrn < 8 {

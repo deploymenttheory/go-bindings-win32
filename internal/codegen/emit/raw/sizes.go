@@ -117,8 +117,10 @@ func (g *Generator) layoutOfApiRef(ref *win32meta.TypeRef, nested map[string]win
 		return wordLayout
 	case "Struct", "Union":
 		if definition := g.registry.StructIndex[ref.Api+"."+ref.Name]; definition != nil {
-			// Layouts must describe the variant the generator emits.
-			if chosen := pickAmd64Variant(definition); chosen != nil {
+			// Layouts must describe the variant the generator emits for the
+			// architecture being laid out (amd64 unless an arm64 struct pass
+			// is running).
+			if chosen := pickVariant(definition, g.currentLayoutArch()); chosen != nil {
 				return g.layoutOfStruct(chosen)
 			}
 		}
@@ -186,6 +188,16 @@ func (g *Generator) structLayoutOf(definition *win32meta.Struct, clampPacking bo
 	result.size = roundUp(result.size, result.align)
 	result.ok = true
 	return result
+}
+
+// currentLayoutArch is the architecture the layout engine resolves struct
+// variants for: amd64 (the layout arm64 shares) unless an architecture-
+// specific struct pass set another.
+func (g *Generator) currentLayoutArch() string {
+	if g.layoutArch == "" {
+		return "amd64"
+	}
+	return g.layoutArch
 }
 
 func roundUp(value, multiple uint32) uint32 {

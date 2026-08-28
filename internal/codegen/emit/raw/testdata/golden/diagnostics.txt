@@ -3,3 +3,6 @@ function FloatReturnLastErr: float32 return with SetLastError not marshalable, f
 function GetCurrentThing: DLL "FORCEINLINE" is not a loadable module and no [Constant] value is recorded, skipped
 function Test.Shapes: bare name Taken taken, keeping TakenW
 informational-success entry Data.Xml.XmlLite.IXmlReader.Read matched no emitted API (stale entry?)
+struct ARCHCTX: architecture-specific layout, emitted per architecture (amd64, arm64)
+struct CONTAINER: architecture-specific layout, emitted per architecture (amd64, arm64)
+struct X86ONLY: no amd64 variant, skipped

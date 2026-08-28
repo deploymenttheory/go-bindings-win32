@@ -31,8 +31,16 @@ type Generator struct {
 	// enum member or constant can never steal a name a type needs.
 	typeNames map[string]bool
 
-	// abiRecords collects expected struct layouts, keyed "Namespace.Type".
+	// abiRecords collects expected struct layouts, keyed "Namespace.Type"
+	// ("Namespace.Type@arch" for architecture-specific layouts).
 	abiRecords map[string]ABIRecord
+
+	// archStructs marks structs ("Namespace.Name") whose amd64 and arm64
+	// layouts differ; they are emitted per architecture (archstructs.go).
+	archStructs map[string]bool
+	// layoutArch is the architecture the layout engine resolves struct
+	// variants for while an architecture-specific pass runs ("" = amd64).
+	layoutArch string
 
 	// writtenFiles records every path this run produced, so stale generated
 	// files from earlier runs can be pruned afterwards.
@@ -69,6 +77,7 @@ func New(registry *pipeline.Registry, modulePath, outDir string) *Generator {
 // the filter set plus the transitive closure of namespaces it references —
 // generated packages must always compile). Returns the package count.
 func (g *Generator) EmitAll(filter map[string]bool) (int, error) {
+	g.computeArchStructs()
 	g.computeSkippedTypes()
 	// ABI records and coverage counted by the pre-pass may include structs
 	// the real pass will skip; keep only real-pass records.
@@ -208,6 +217,11 @@ func (g *Generator) computeSkippedTypes() {
 			for _, model := range g.buildStructModels(meta, scratch) {
 				emittedTypes[model.TypeName] = true
 			}
+			for _, models := range g.buildArchStructModels(meta, scratch) {
+				for _, model := range models {
+					emittedTypes[model.TypeName] = true
+				}
+			}
 			for name := range meta.Structs {
 				exported := naming.Export(name)
 				key := meta.Namespace + "." + exported
@@ -271,6 +285,24 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 	}
 	if err := g.writeFile(packageDir, packageName+"_structs.go", packageName, structImports, structBody.String()); err != nil {
 		return err
+	}
+	// Architecture-specific layouts: one file per architecture, each under
+	// its own build tag, declaring the same type names.
+	archImports := typemap.ImportSet{}
+	archModels := g.buildArchStructModels(meta, archImports)
+	for _, arch := range emitArches {
+		var archBody strings.Builder
+		for _, model := range archModels[arch] {
+			if isTopLevelStruct(meta, model.TypeName) && arch == emitArches[0] {
+				coverage.StructsEmitted++
+			}
+			if err := renderInto(&archBody, render.Struct, model); err != nil {
+				return err
+			}
+		}
+		if err := g.writeFileTagged(packageDir, packageName+"_structs_"+arch+".go", packageName, archImports, archBody.String(), "windows && "+arch); err != nil {
+			return err
+		}
 	}
 
 	delegateImports := typemap.ImportSet{}
@@ -381,9 +413,15 @@ func renderInto[T any](body *strings.Builder, renderFunc func(T) (string, error)
 }
 
 // writeFile prunes unused imports (a resolution may have registered an
-// import that a later skip made unnecessary) and assembles the file. Empty
-// bodies produce no file.
+// import that a later skip made unnecessary) and assembles the file under
+// the shared build tag. Empty bodies produce no file.
 func (g *Generator) writeFile(dir, fileName, packageName string, imports typemap.ImportSet, body string) error {
+	return g.writeFileTagged(dir, fileName, packageName, imports, body, fileasm.GeneratedBuildTag)
+}
+
+// writeFileTagged is writeFile with an explicit //go:build expression (the
+// per-architecture struct files).
+func (g *Generator) writeFileTagged(dir, fileName, packageName string, imports typemap.ImportSet, body, buildTag string) error {
 	if strings.TrimSpace(body) == "" {
 		return nil
 	}
@@ -413,7 +451,7 @@ func (g *Generator) writeFile(dir, fileName, packageName string, imports typemap
 	g.writtenFiles[path] = true
 	return fileasm.WriteGoFile(path, fileasm.File{
 		PackageName: packageName,
-		BuildTag:    fileasm.GeneratedBuildTag,
+		BuildTag:    buildTag,
 		Imports:     pruned,
 		Body:        body,
 	})

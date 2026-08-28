@@ -27,7 +27,8 @@ var diagnosticClasses = []struct {
 	{"function skipped: not a DLL export and no [Constant]", true, regexp.MustCompile(`not a loadable module`)},
 	{"struct skipped: no amd64 layout", true, regexp.MustCompile(`no amd64 variant, skipped`)},
 	{"struct or union skipped: layout not computable", true, regexp.MustCompile(`layout not computable|type unresolved, struct skipped`)},
-	{"struct note: architecture-specific layouts, amd64 emitted", false, regexp.MustCompile(`emitting amd64 variant only`)},
+	{"struct note: x86 layout differs, 64-bit layout emitted", false, regexp.MustCompile(`emitting the 64-bit layout only`)},
+	{"struct note: amd64 and arm64 layouts differ, emitted per architecture", false, regexp.MustCompile(`emitted per architecture`)},
 	{"handle closer not emitted", true, regexp.MustCompile(`no closer|closer name .* already used`)},
 	{"name collision: construct dropped", true, regexp.MustCompile(`name already used|IID name .* already used|Procs table name`)},
 	{"name collision: -W suffix kept", false, regexp.MustCompile(`bare name .* taken, keeping`)},
@@ -42,7 +43,7 @@ var diagnosticClasses = []struct {
 
 var (
 	notMarshalableType = regexp.MustCompile(`not marshalable \(([^)]+)\)`)
-	archVariantStruct  = regexp.MustCompile(`^struct (\S+): emitting amd64 variant only`)
+	archVariantStruct  = regexp.MustCompile(`^struct (\S+): architecture-specific layout, emitted per architecture`)
 )
 
 // writeCoverage renders the report to path.
@@ -140,8 +141,9 @@ func writeCoverage(path, winmdVersion string, coverage []rawwin.NamespaceCoverag
 	if len(archVariants) > 0 {
 		sort.Strings(archVariants)
 		b.WriteString("\n## Structs with architecture-specific layouts\n\n")
-		b.WriteString("The metadata declares more than one layout for these; the amd64 layout is\n")
-		b.WriteString("emitted under the shared `amd64 || arm64` build tag, so treat them as amd64-only.\n\n")
+		b.WriteString("The amd64 and arm64 layouts of these differ (directly, or through a by-value\n")
+		b.WriteString("field); each is emitted from its own metadata variant into `<pkg>_structs_amd64.go`\n")
+		b.WriteString("and `<pkg>_structs_arm64.go`, and its ABI assertions run per architecture.\n\n")
 		for _, name := range archVariants {
 			fmt.Fprintf(&b, "- `%s`\n", name)
 		}

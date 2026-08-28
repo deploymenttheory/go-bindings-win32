@@ -295,6 +295,10 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		}
 	}
 	viaCall = viaCall || retSpec != ""
+	if viaCall && len(argWords) > maxCallWords {
+		g.diag("function %s: %d argument words exceed the register-aware call limit, function skipped", function.Name, len(argWords))
+		return view.FunctionModel{}, false
+	}
 
 	goName, ok := g.claimFunctionName(meta, function, rawName)
 	if !ok {
@@ -465,6 +469,12 @@ func registerStructWord(size uint32, name string) (string, bool) {
 	}
 	return "", false
 }
+
+// maxCallWords is the most argument words a win32.Call site may pass: the
+// trampolines reserve 42 stack words (Go's own syscall limit) beyond the
+// four register words x64 always uses, and a composite return may add a
+// hidden pointer.
+const maxCallWords = 4 + 42 - 1
 
 // specDecl renders the package-level *win32.Spec of a win32.Call site.
 func specDecl(specVar string, specArgs []string, retSpec string) string {

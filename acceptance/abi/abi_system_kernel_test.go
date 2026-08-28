@@ -70,7 +70,6 @@ var abiSystem_Kernel = []abiCase{
 	{"systemkernel.SINGLE_LIST_ENTRY32.Next", unsafe.Offsetof(systemkernel.SINGLE_LIST_ENTRY32{}.Next), 0},
 	{"systemkernel.SLIST_ENTRY size", unsafe.Sizeof(systemkernel.SLIST_ENTRY{}), 8},
 	{"systemkernel.SLIST_ENTRY.Next", unsafe.Offsetof(systemkernel.SLIST_ENTRY{}.Next), 0},
-	{"systemkernel.SLIST_HEADER size", unsafe.Sizeof(systemkernel.SLIST_HEADER{}), 16},
 	{"systemkernel.STRING size", unsafe.Sizeof(systemkernel.STRING{}), 16},
 	{"systemkernel.STRING.Length", unsafe.Offsetof(systemkernel.STRING{}.Length), 0},
 	{"systemkernel.STRING.MaximumLength", unsafe.Offsetof(systemkernel.STRING{}.MaximumLength), 2},

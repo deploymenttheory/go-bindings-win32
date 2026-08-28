@@ -118,10 +118,11 @@ review the changelog before upgrading.
 Win32's LLP64 layout). The only dependency is our own
 [go-winmd](https://github.com/deploymenttheory/go-winmd) metadata reader
 (used by the generator); the runtime and generated bindings link **nothing
-beyond the Go standard library**. The generated files carry
-`//go:build windows && (amd64 || arm64)` tags, so you can develop and
-**cross-compile from macOS/Linux** (`GOOS=windows go build ./...`) — only
-running requires Windows.
+beyond the Go standard library**. The 23 MB `Windows.Win32.winmd` lives in a
+nested, Go-code-free module (`metadata/`), so it is not part of what
+`go get` downloads. The generated files and the runtime carry `windows`
+build tags, so you can develop and **cross-compile from macOS/Linux**
+(`GOOS=windows go build ./...`) — only running requires Windows.
 
 ## Examples
 

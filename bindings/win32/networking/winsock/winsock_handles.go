@@ -4,7 +4,11 @@
 
 package winsock
 
-// CloseWSAEVENT releases a WSAEVENT handle by calling WSACloseEvent.
+// CloseWSAEVENT releases a WSAEVENT handle by calling WSACloseEvent. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseWSAEVENT(h WSAEVENT) error {
+	if h == 0 {
+		return nil
+	}
 	return WSACloseEvent(WSAEVENT(h))
 }

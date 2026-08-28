@@ -4,27 +4,47 @@
 
 package authorization
 
-// CloseAUTHZ_ACCESS_CHECK_RESULTS_HANDLE releases a AUTHZ_ACCESS_CHECK_RESULTS_HANDLE handle by calling AuthzFreeHandle.
+// CloseAUTHZ_ACCESS_CHECK_RESULTS_HANDLE releases a AUTHZ_ACCESS_CHECK_RESULTS_HANDLE handle by calling AuthzFreeHandle. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseAUTHZ_ACCESS_CHECK_RESULTS_HANDLE(h AUTHZ_ACCESS_CHECK_RESULTS_HANDLE) error {
+	if h == ^AUTHZ_ACCESS_CHECK_RESULTS_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return AuthzFreeHandle(AUTHZ_ACCESS_CHECK_RESULTS_HANDLE(h))
 }
 
-// CloseAUTHZ_AUDIT_EVENT_HANDLE releases a AUTHZ_AUDIT_EVENT_HANDLE handle by calling AuthzFreeAuditEvent.
+// CloseAUTHZ_AUDIT_EVENT_HANDLE releases a AUTHZ_AUDIT_EVENT_HANDLE handle by calling AuthzFreeAuditEvent. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseAUTHZ_AUDIT_EVENT_HANDLE(h AUTHZ_AUDIT_EVENT_HANDLE) error {
+	if h == ^AUTHZ_AUDIT_EVENT_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return AuthzFreeAuditEvent(AUTHZ_AUDIT_EVENT_HANDLE(h))
 }
 
-// CloseAUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE releases a AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE handle by calling AuthzUnregisterCapChangeNotification.
+// CloseAUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE releases a AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE handle by calling AuthzUnregisterCapChangeNotification. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseAUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE(h AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE) error {
+	if h == ^AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return AuthzUnregisterCapChangeNotification(AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE(h))
 }
 
-// CloseAUTHZ_CLIENT_CONTEXT_HANDLE releases a AUTHZ_CLIENT_CONTEXT_HANDLE handle by calling AuthzFreeContext.
+// CloseAUTHZ_CLIENT_CONTEXT_HANDLE releases a AUTHZ_CLIENT_CONTEXT_HANDLE handle by calling AuthzFreeContext. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseAUTHZ_CLIENT_CONTEXT_HANDLE(h AUTHZ_CLIENT_CONTEXT_HANDLE) error {
+	if h == ^AUTHZ_CLIENT_CONTEXT_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return AuthzFreeContext(AUTHZ_CLIENT_CONTEXT_HANDLE(h))
 }
 
-// CloseAUTHZ_RESOURCE_MANAGER_HANDLE releases a AUTHZ_RESOURCE_MANAGER_HANDLE handle by calling AuthzFreeResourceManager.
+// CloseAUTHZ_RESOURCE_MANAGER_HANDLE releases a AUTHZ_RESOURCE_MANAGER_HANDLE handle by calling AuthzFreeResourceManager. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseAUTHZ_RESOURCE_MANAGER_HANDLE(h AUTHZ_RESOURCE_MANAGER_HANDLE) error {
+	if h == ^AUTHZ_RESOURCE_MANAGER_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return AuthzFreeResourceManager(AUTHZ_RESOURCE_MANAGER_HANDLE(h))
 }

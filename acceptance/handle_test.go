@@ -30,4 +30,14 @@ func TestHandleCloser(t *testing.T) {
 	} else {
 		t.Logf("double-close error surfaced: %v", err)
 	}
+
+	// The zero value and INVALID_HANDLE_VALUE are never handed to CloseHandle
+	// (which would report ERROR_INVALID_HANDLE): a deferred close on an error
+	// path is a no-op.
+	if err := foundation.CloseHANDLE(0); err != nil {
+		t.Errorf("CloseHANDLE(0) = %v, want nil", err)
+	}
+	if err := foundation.CloseHANDLE(^foundation.HANDLE(0)); err != nil {
+		t.Errorf("CloseHANDLE(INVALID_HANDLE_VALUE) = %v, want nil", err)
+	}
 }

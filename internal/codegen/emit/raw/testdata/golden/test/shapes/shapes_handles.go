@@ -8,13 +8,21 @@ import (
 	testother "github.com/deploymenttheory/go-bindings-win32/bindings/win32/test/other"
 )
 
-// CloseHLOCALTEST releases a HLOCALTEST handle by calling FreeTest.
+// CloseHLOCALTEST releases a HLOCALTEST handle by calling FreeTest. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseHLOCALTEST(h HLOCALTEST) error {
+	if h == 0 {
+		return nil
+	}
 	FreeTest(HLOCALTEST(h))
 	return nil
 }
 
-// CloseHTEST releases a HTEST handle by calling CloseTest.
+// CloseHTEST releases a HTEST handle by calling CloseTest. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHTEST(h HTEST) error {
+	if h == ^HTEST(0) || h == 0 {
+		return nil
+	}
 	return testother.CloseTest(HTEST(h))
 }

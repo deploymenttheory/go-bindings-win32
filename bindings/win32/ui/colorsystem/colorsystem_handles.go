@@ -8,7 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseHCOLORSPACE releases a HCOLORSPACE handle by calling DeleteColorSpace.
+// CloseHCOLORSPACE releases a HCOLORSPACE handle by calling DeleteColorSpace. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHCOLORSPACE(h HCOLORSPACE) error {
+	if h == ^HCOLORSPACE(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteColorSpace(HCOLORSPACE(h))))
 }

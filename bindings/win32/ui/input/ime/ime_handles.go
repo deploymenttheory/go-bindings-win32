@@ -8,7 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseHIMC releases a HIMC handle by calling ImmDestroyContext.
+// CloseHIMC releases a HIMC handle by calling ImmDestroyContext. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHIMC(h HIMC) error {
+	if h == ^HIMC(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(ImmDestroyContext(HIMC(h))))
 }

@@ -4,7 +4,11 @@
 
 package interactioncontext
 
-// CloseHINTERACTIONCONTEXT releases a HINTERACTIONCONTEXT handle by calling DestroyInteractionContext.
+// CloseHINTERACTIONCONTEXT releases a HINTERACTIONCONTEXT handle by calling DestroyInteractionContext. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHINTERACTIONCONTEXT(h HINTERACTIONCONTEXT) error {
+	if h == ^HINTERACTIONCONTEXT(0) || h == 0 {
+		return nil
+	}
 	return DestroyInteractionContext(HINTERACTIONCONTEXT(h))
 }

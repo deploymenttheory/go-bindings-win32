@@ -4,8 +4,12 @@
 
 package console
 
-// CloseHPCON releases a HPCON handle by calling ClosePseudoConsole.
+// CloseHPCON releases a HPCON handle by calling ClosePseudoConsole. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHPCON(h HPCON) error {
+	if h == ^HPCON(0) || h == 0 {
+		return nil
+	}
 	ClosePseudoConsole(HPCON(h))
 	return nil
 }

@@ -455,23 +455,29 @@ func (g *Generator) failureChecks(resolved typemap.Resolved) []string {
 		if typedef == nil {
 			return nil
 		}
-		values := typedef.InvalidValues
-		if len(values) == 0 {
-			values = []string{"0"}
-		}
-		checks := make([]string, 0, len(values))
-		for _, value := range values {
-			if value == "-1" {
-				checks = append(checks, "ret == ^"+resolved.GoType+"(0)")
-				continue
-			}
-			checks = append(checks, "ret == "+value)
-		}
-		return checks
+		return invalidValueChecks(typedef.InvalidValues, resolved.GoType, "ret")
 	case typemap.KindPointer, typemap.KindPointerTypedef, typemap.KindComPtr:
 		return []string{"ret == nil"}
 	}
 	return nil
+}
+
+// invalidValueChecks renders `name == sentinel` predicates for a handle's
+// [InvalidHandleValue] sentinels (0 when the metadata records none); -1 is
+// spelled as the all-ones word of the handle type.
+func invalidValueChecks(values []string, goType, name string) []string {
+	if len(values) == 0 {
+		values = []string{"0"}
+	}
+	checks := make([]string, 0, len(values))
+	for _, value := range values {
+		if value == "-1" {
+			checks = append(checks, name+" == ^"+goType+"(0)")
+			continue
+		}
+		checks = append(checks, name+" == "+value)
+	}
+	return checks
 }
 
 // returnConversion renders the r1 → Go value conversion.

@@ -76,11 +76,13 @@ info := (*netmanagement.USER_INFO_1)(unsafe.Pointer(buf))
 Common frees: `NetApiBufferFree`, `LocalFree`, `CoTaskMemFree`,
 `SysFreeString`.
 
-## Handles and RAII
+## Handles and closers
 
 Handles are opaque `uintptr`-backed types (`HANDLE`, `HKEY`, …). Where the
 metadata records how a handle is closed (`[RAIIFree]`), the bindings
-generate a `Close<Handle>(h) error` helper — `defer` it:
+generate a `Close<Handle>(h) error` helper — `defer` it. Go has no
+destructors, so this is a plain function, not RAII: nothing closes a handle
+you forget to close.
 
 ```go
 h, err := threading.CreateEvent(nil, true, false, "")
@@ -88,8 +90,12 @@ if err != nil { return err }
 defer foundation.CloseHANDLE(h) // → CloseHandle, normalized to error
 ```
 
-`Close<Handle>` returns an `error` so a failed close is observable; ignore it
-with `_ =` if you don't care.
+Closing the zero value or the handle's `[InvalidHandleValue]` sentinel
+(`INVALID_HANDLE_VALUE` for `HANDLE`) is a no-op that returns `nil`, so a
+`defer` on an error path is safe. Closing a live handle twice is still an
+error. `Close<Handle>` returns an `error` where the free function reports
+one (`CloseHandle`, `RegCloseKey`, …); helpers over `void` frees such as
+`CloseThreadpool` always return `nil`.
 
 ## `unsafe` is expected here
 

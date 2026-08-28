@@ -4,32 +4,56 @@
 
 package diagnosticdataquery
 
-// CloseHDIAGNOSTIC_DATA_QUERY_SESSION releases a HDIAGNOSTIC_DATA_QUERY_SESSION handle by calling DdqCloseSession.
+// CloseHDIAGNOSTIC_DATA_QUERY_SESSION releases a HDIAGNOSTIC_DATA_QUERY_SESSION handle by calling DdqCloseSession. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDIAGNOSTIC_DATA_QUERY_SESSION(h HDIAGNOSTIC_DATA_QUERY_SESSION) error {
+	if h == ^HDIAGNOSTIC_DATA_QUERY_SESSION(0) || h == 0 {
+		return nil
+	}
 	return DdqCloseSession(HDIAGNOSTIC_DATA_QUERY_SESSION(h))
 }
 
-// CloseHDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION releases a HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION handle by calling DdqFreeDiagnosticRecordProducerCategories.
+// CloseHDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION releases a HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION handle by calling DdqFreeDiagnosticRecordProducerCategories. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION(h HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION) error {
+	if h == ^HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION(0) || h == 0 {
+		return nil
+	}
 	return DdqFreeDiagnosticRecordProducerCategories(HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION(h))
 }
 
-// CloseHDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION releases a HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION handle by calling DdqFreeDiagnosticRecordProducers.
+// CloseHDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION releases a HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION handle by calling DdqFreeDiagnosticRecordProducers. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION(h HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION) error {
+	if h == ^HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION(0) || h == 0 {
+		return nil
+	}
 	return DdqFreeDiagnosticRecordProducers(HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION(h))
 }
 
-// CloseHDIAGNOSTIC_EVENT_TAG_DESCRIPTION releases a HDIAGNOSTIC_EVENT_TAG_DESCRIPTION handle by calling DdqFreeDiagnosticRecordLocaleTags.
+// CloseHDIAGNOSTIC_EVENT_TAG_DESCRIPTION releases a HDIAGNOSTIC_EVENT_TAG_DESCRIPTION handle by calling DdqFreeDiagnosticRecordLocaleTags. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDIAGNOSTIC_EVENT_TAG_DESCRIPTION(h HDIAGNOSTIC_EVENT_TAG_DESCRIPTION) error {
+	if h == ^HDIAGNOSTIC_EVENT_TAG_DESCRIPTION(0) || h == 0 {
+		return nil
+	}
 	return DdqFreeDiagnosticRecordLocaleTags(HDIAGNOSTIC_EVENT_TAG_DESCRIPTION(h))
 }
 
-// CloseHDIAGNOSTIC_RECORD releases a HDIAGNOSTIC_RECORD handle by calling DdqFreeDiagnosticRecordPage.
+// CloseHDIAGNOSTIC_RECORD releases a HDIAGNOSTIC_RECORD handle by calling DdqFreeDiagnosticRecordPage. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDIAGNOSTIC_RECORD(h HDIAGNOSTIC_RECORD) error {
+	if h == ^HDIAGNOSTIC_RECORD(0) || h == 0 {
+		return nil
+	}
 	return DdqFreeDiagnosticRecordPage(HDIAGNOSTIC_RECORD(h))
 }
 
-// CloseHDIAGNOSTIC_REPORT releases a HDIAGNOSTIC_REPORT handle by calling DdqFreeDiagnosticReport.
+// CloseHDIAGNOSTIC_REPORT releases a HDIAGNOSTIC_REPORT handle by calling DdqFreeDiagnosticReport. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDIAGNOSTIC_REPORT(h HDIAGNOSTIC_REPORT) error {
+	if h == ^HDIAGNOSTIC_REPORT(0) || h == 0 {
+		return nil
+	}
 	return DdqFreeDiagnosticReport(HDIAGNOSTIC_REPORT(h))
 }

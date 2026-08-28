@@ -4,7 +4,11 @@
 
 package filesystem
 
-// CloseHIORING releases a HIORING handle by calling CloseIoRing.
+// CloseHIORING releases a HIORING handle by calling CloseIoRing. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHIORING(h HIORING) error {
+	if h == ^HIORING(0) || h == 0 {
+		return nil
+	}
 	return CloseIoRing(HIORING(h))
 }

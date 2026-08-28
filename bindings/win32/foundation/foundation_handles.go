@@ -4,17 +4,29 @@
 
 package foundation
 
-// CloseHANDLE releases a HANDLE handle by calling CloseHandle.
+// CloseHANDLE releases a HANDLE handle by calling CloseHandle. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHANDLE(h HANDLE) error {
+	if h == ^HANDLE(0) || h == 0 {
+		return nil
+	}
 	return CloseHandle(HANDLE(h))
 }
 
-// CloseHINSTANCE releases a HINSTANCE handle by calling FreeLibrary.
+// CloseHINSTANCE releases a HINSTANCE handle by calling FreeLibrary. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseHINSTANCE(h HINSTANCE) error {
+	if h == 0 {
+		return nil
+	}
 	return FreeLibrary(HMODULE(h))
 }
 
-// CloseHMODULE releases a HMODULE handle by calling FreeLibrary.
+// CloseHMODULE releases a HMODULE handle by calling FreeLibrary. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseHMODULE(h HMODULE) error {
+	if h == 0 {
+		return nil
+	}
 	return FreeLibrary(HMODULE(h))
 }

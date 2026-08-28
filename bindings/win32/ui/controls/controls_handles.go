@@ -8,27 +8,47 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseHDPA releases a HDPA handle by calling DPA_Destroy.
+// CloseHDPA releases a HDPA handle by calling DPA_Destroy. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDPA(h HDPA) error {
+	if h == ^HDPA(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DPA_Destroy(HDPA(h))))
 }
 
-// CloseHDSA releases a HDSA handle by calling DSA_Destroy.
+// CloseHDSA releases a HDSA handle by calling DSA_Destroy. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDSA(h HDSA) error {
+	if h == ^HDSA(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DSA_Destroy(HDSA(h))))
 }
 
-// CloseHIMAGELIST releases a HIMAGELIST handle by calling ImageList_Destroy.
+// CloseHIMAGELIST releases a HIMAGELIST handle by calling ImageList_Destroy. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHIMAGELIST(h HIMAGELIST) error {
+	if h == ^HIMAGELIST(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(ImageList_Destroy(HIMAGELIST(h))))
 }
 
-// CloseHPROPSHEETPAGE releases a HPROPSHEETPAGE handle by calling DestroyPropertySheetPage.
+// CloseHPROPSHEETPAGE releases a HPROPSHEETPAGE handle by calling DestroyPropertySheetPage. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHPROPSHEETPAGE(h HPROPSHEETPAGE) error {
+	if h == ^HPROPSHEETPAGE(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DestroyPropertySheetPage(HPROPSHEETPAGE(h))))
 }
 
-// CloseHTHEME releases a HTHEME handle by calling CloseThemeData.
+// CloseHTHEME releases a HTHEME handle by calling CloseThemeData. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseHTHEME(h HTHEME) error {
+	if h == 0 {
+		return nil
+	}
 	return CloseThemeData(HTHEME(h))
 }

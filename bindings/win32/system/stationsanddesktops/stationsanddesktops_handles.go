@@ -4,12 +4,20 @@
 
 package stationsanddesktops
 
-// CloseHDESK releases a HDESK handle by calling CloseDesktop.
+// CloseHDESK releases a HDESK handle by calling CloseDesktop. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHDESK(h HDESK) error {
+	if h == ^HDESK(0) || h == 0 {
+		return nil
+	}
 	return CloseDesktop(HDESK(h))
 }
 
-// CloseHWINSTA releases a HWINSTA handle by calling CloseWindowStation.
+// CloseHWINSTA releases a HWINSTA handle by calling CloseWindowStation. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHWINSTA(h HWINSTA) error {
+	if h == ^HWINSTA(0) || h == 0 {
+		return nil
+	}
 	return CloseWindowStation(HWINSTA(h))
 }

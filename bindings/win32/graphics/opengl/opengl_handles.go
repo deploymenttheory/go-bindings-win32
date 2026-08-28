@@ -4,7 +4,11 @@
 
 package opengl
 
-// CloseHGLRC releases a HGLRC handle by calling wglDeleteContext.
+// CloseHGLRC releases a HGLRC handle by calling wglDeleteContext. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHGLRC(h HGLRC) error {
+	if h == ^HGLRC(0) || h == 0 {
+		return nil
+	}
 	return WglDeleteContext(HGLRC(h))
 }

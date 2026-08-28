@@ -40,7 +40,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	defer foundation.CloseHANDLE(event) // generated RAII closer for HANDLE
+	defer foundation.CloseHANDLE(event) // generated Close<Handle> helper
 
 	if err := threading.SetEvent(event); err != nil {
 		panic(err)

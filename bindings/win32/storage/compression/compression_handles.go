@@ -4,12 +4,20 @@
 
 package compression
 
-// CloseCOMPRESSOR_HANDLE releases a COMPRESSOR_HANDLE handle by calling CloseCompressor.
+// CloseCOMPRESSOR_HANDLE releases a COMPRESSOR_HANDLE handle by calling CloseCompressor. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseCOMPRESSOR_HANDLE(h COMPRESSOR_HANDLE) error {
+	if h == ^COMPRESSOR_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return CloseCompressor(COMPRESSOR_HANDLE(h))
 }
 
-// CloseDECOMPRESSOR_HANDLE releases a DECOMPRESSOR_HANDLE handle by calling CloseDecompressor.
+// CloseDECOMPRESSOR_HANDLE releases a DECOMPRESSOR_HANDLE handle by calling CloseDecompressor. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseDECOMPRESSOR_HANDLE(h DECOMPRESSOR_HANDLE) error {
+	if h == ^DECOMPRESSOR_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return CloseDecompressor(DECOMPRESSOR_HANDLE(h))
 }

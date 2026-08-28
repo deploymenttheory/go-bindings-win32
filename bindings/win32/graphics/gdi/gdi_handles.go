@@ -8,47 +8,83 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseHBITMAP releases a HBITMAP handle by calling DeleteObject.
+// CloseHBITMAP releases a HBITMAP handle by calling DeleteObject. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHBITMAP(h HBITMAP) error {
+	if h == ^HBITMAP(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteObject(HGDIOBJ(h))))
 }
 
-// CloseHBRUSH releases a HBRUSH handle by calling DeleteObject.
+// CloseHBRUSH releases a HBRUSH handle by calling DeleteObject. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHBRUSH(h HBRUSH) error {
+	if h == ^HBRUSH(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteObject(HGDIOBJ(h))))
 }
 
-// CloseHENHMETAFILE releases a HENHMETAFILE handle by calling DeleteEnhMetaFile.
+// CloseHENHMETAFILE releases a HENHMETAFILE handle by calling DeleteEnhMetaFile. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHENHMETAFILE(h HENHMETAFILE) error {
+	if h == ^HENHMETAFILE(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteEnhMetaFile(HENHMETAFILE(h))))
 }
 
-// CloseHFONT releases a HFONT handle by calling DeleteObject.
+// CloseHFONT releases a HFONT handle by calling DeleteObject. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHFONT(h HFONT) error {
+	if h == ^HFONT(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteObject(HGDIOBJ(h))))
 }
 
-// CloseHGDIOBJ releases a HGDIOBJ handle by calling DeleteObject.
+// CloseHGDIOBJ releases a HGDIOBJ handle by calling DeleteObject. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHGDIOBJ(h HGDIOBJ) error {
+	if h == ^HGDIOBJ(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteObject(HGDIOBJ(h))))
 }
 
-// CloseHMETAFILE releases a HMETAFILE handle by calling DeleteMetaFile.
+// CloseHMETAFILE releases a HMETAFILE handle by calling DeleteMetaFile. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHMETAFILE(h HMETAFILE) error {
+	if h == ^HMETAFILE(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteMetaFile(HMETAFILE(h))))
 }
 
-// CloseHPALETTE releases a HPALETTE handle by calling DeleteObject.
+// CloseHPALETTE releases a HPALETTE handle by calling DeleteObject. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHPALETTE(h HPALETTE) error {
+	if h == ^HPALETTE(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteObject(HGDIOBJ(h))))
 }
 
-// CloseHPEN releases a HPEN handle by calling DeleteObject.
+// CloseHPEN releases a HPEN handle by calling DeleteObject. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHPEN(h HPEN) error {
+	if h == ^HPEN(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteObject(HGDIOBJ(h))))
 }
 
-// CloseHRGN releases a HRGN handle by calling DeleteObject.
+// CloseHRGN releases a HRGN handle by calling DeleteObject. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHRGN(h HRGN) error {
+	if h == ^HRGN(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(DeleteObject(HGDIOBJ(h))))
 }

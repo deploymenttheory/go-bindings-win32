@@ -4,8 +4,12 @@
 
 package websocket
 
-// CloseWEB_SOCKET_HANDLE releases a WEB_SOCKET_HANDLE handle by calling WebSocketDeleteHandle.
+// CloseWEB_SOCKET_HANDLE releases a WEB_SOCKET_HANDLE handle by calling WebSocketDeleteHandle. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseWEB_SOCKET_HANDLE(h WEB_SOCKET_HANDLE) error {
+	if h == ^WEB_SOCKET_HANDLE(0) || h == 0 {
+		return nil
+	}
 	WebSocketDeleteHandle(WEB_SOCKET_HANDLE(h))
 	return nil
 }

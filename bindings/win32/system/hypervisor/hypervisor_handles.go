@@ -4,7 +4,11 @@
 
 package hypervisor
 
-// CloseWHV_PARTITION_HANDLE releases a WHV_PARTITION_HANDLE handle by calling WHvDeletePartition.
+// CloseWHV_PARTITION_HANDLE releases a WHV_PARTITION_HANDLE handle by calling WHvDeletePartition. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseWHV_PARTITION_HANDLE(h WHV_PARTITION_HANDLE) error {
+	if h == ^WHV_PARTITION_HANDLE(0) || h == 0 {
+		return nil
+	}
 	return WHvDeletePartition(WHV_PARTITION_HANDLE(h))
 }

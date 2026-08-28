@@ -131,7 +131,7 @@ One package per namespace, directory = namespace path
 cross-refs = all segments joined: `systemthreading`). Files per package, split
 by construct: `doc.go`, `<pkg>_typedefs.go`, `<pkg>_enums.go`,
 `<pkg>_structs.go`, `<pkg>_delegates.go`, `<pkg>_constants.go`,
-`<pkg>_functions.go`, `<pkg>_interfaces.go` (COM), `<pkg>_handles.go` (RAII
+`<pkg>_functions.go`, `<pkg>_interfaces.go` (COM), `<pkg>_handles.go` (handle
 closers). Empty files are not written.
 
 There is **one** tree. The typed constructs (typedefs/enums/structs/delegates/
@@ -203,8 +203,10 @@ The set of emittable functions is exactly what `syscall.SyscallN` can marshal:
 by-value struct/union/array/GUID params and floats are skipped with a
 diagnostic. The merged `view.ReturnKind` enumerates all the shapes above.
 
-**Handle RAII** (`<pkg>_handles.go`): each `[RAIIFree]` handle typedef gets a
-`Close<Handle>(h) error` helper that calls the (idiomatic-shaped) free function
+**Handle closers** (`<pkg>_handles.go`): each `[RAIIFree]` handle typedef gets a
+`Close<Handle>(h) error` helper (a plain function, not RAII — Go has no
+destructors) that returns nil for the zero/`[InvalidHandleValue]` sentinels
+and otherwise calls the (idiomatic-shaped) free function
 — looked up via the registry's function-owner index, possibly cross-namespace —
 and normalizes its return to `error`. Emitted only when the closer is
 unambiguous, takes exactly the handle, and has a normalizable return; otherwise

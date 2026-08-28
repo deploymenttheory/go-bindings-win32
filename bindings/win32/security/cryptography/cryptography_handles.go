@@ -8,28 +8,48 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseHCERTCHAINENGINE releases a HCERTCHAINENGINE handle by calling CertFreeCertificateChainEngine.
+// CloseHCERTCHAINENGINE releases a HCERTCHAINENGINE handle by calling CertFreeCertificateChainEngine. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHCERTCHAINENGINE(h HCERTCHAINENGINE) error {
+	if h == ^HCERTCHAINENGINE(0) || h == 0 {
+		return nil
+	}
 	CertFreeCertificateChainEngine(HCERTCHAINENGINE(h))
 	return nil
 }
 
-// CloseHCRYPTASYNC releases a HCRYPTASYNC handle by calling CryptCloseAsyncHandle.
+// CloseHCRYPTASYNC releases a HCRYPTASYNC handle by calling CryptCloseAsyncHandle. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHCRYPTASYNC(h HCRYPTASYNC) error {
+	if h == ^HCRYPTASYNC(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(CryptCloseAsyncHandle(HCRYPTASYNC(h))))
 }
 
-// CloseNCRYPT_HANDLE releases a NCRYPT_HANDLE handle by calling NCryptFreeObject.
+// CloseNCRYPT_HANDLE releases a NCRYPT_HANDLE handle by calling NCryptFreeObject. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseNCRYPT_HANDLE(h NCRYPT_HANDLE) error {
+	if h == 0 {
+		return nil
+	}
 	return NCryptFreeObject(NCRYPT_HANDLE(h))
 }
 
-// CloseNCRYPT_KEY_HANDLE releases a NCRYPT_KEY_HANDLE handle by calling NCryptFreeObject.
+// CloseNCRYPT_KEY_HANDLE releases a NCRYPT_KEY_HANDLE handle by calling NCryptFreeObject. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseNCRYPT_KEY_HANDLE(h NCRYPT_KEY_HANDLE) error {
+	if h == 0 {
+		return nil
+	}
 	return NCryptFreeObject(NCRYPT_HANDLE(h))
 }
 
-// CloseNCRYPT_PROV_HANDLE releases a NCRYPT_PROV_HANDLE handle by calling NCryptFreeObject.
+// CloseNCRYPT_PROV_HANDLE releases a NCRYPT_PROV_HANDLE handle by calling NCryptFreeObject. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseNCRYPT_PROV_HANDLE(h NCRYPT_PROV_HANDLE) error {
+	if h == 0 {
+		return nil
+	}
 	return NCryptFreeObject(NCRYPT_HANDLE(h))
 }

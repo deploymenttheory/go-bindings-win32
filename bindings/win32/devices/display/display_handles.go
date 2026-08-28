@@ -4,8 +4,12 @@
 
 package display
 
-// CloseHSEMAPHORE releases a HSEMAPHORE handle by calling EngDeleteSemaphore.
+// CloseHSEMAPHORE releases a HSEMAPHORE handle by calling EngDeleteSemaphore. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHSEMAPHORE(h HSEMAPHORE) error {
+	if h == ^HSEMAPHORE(0) || h == 0 {
+		return nil
+	}
 	EngDeleteSemaphore(HSEMAPHORE(h))
 	return nil
 }

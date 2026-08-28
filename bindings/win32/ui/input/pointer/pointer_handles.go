@@ -4,8 +4,12 @@
 
 package pointer
 
-// CloseHSYNTHETICPOINTERDEVICE releases a HSYNTHETICPOINTERDEVICE handle by calling DestroySyntheticPointerDevice.
+// CloseHSYNTHETICPOINTERDEVICE releases a HSYNTHETICPOINTERDEVICE handle by calling DestroySyntheticPointerDevice. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHSYNTHETICPOINTERDEVICE(h HSYNTHETICPOINTERDEVICE) error {
+	if h == ^HSYNTHETICPOINTERDEVICE(0) || h == 0 {
+		return nil
+	}
 	DestroySyntheticPointerDevice(HSYNTHETICPOINTERDEVICE(h))
 	return nil
 }

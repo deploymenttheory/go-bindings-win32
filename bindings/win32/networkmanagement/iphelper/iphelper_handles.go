@@ -4,8 +4,12 @@
 
 package iphelper
 
-// CloseHIFTIMESTAMPCHANGE releases a HIFTIMESTAMPCHANGE handle by calling UnregisterInterfaceTimestampConfigChange.
+// CloseHIFTIMESTAMPCHANGE releases a HIFTIMESTAMPCHANGE handle by calling UnregisterInterfaceTimestampConfigChange. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHIFTIMESTAMPCHANGE(h HIFTIMESTAMPCHANGE) error {
+	if h == ^HIFTIMESTAMPCHANGE(0) || h == 0 {
+		return nil
+	}
 	UnregisterInterfaceTimestampConfigChange(HIFTIMESTAMPCHANGE(h))
 	return nil
 }

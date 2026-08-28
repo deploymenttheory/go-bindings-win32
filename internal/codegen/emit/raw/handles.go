@@ -18,6 +18,10 @@ import (
 // exactly the handle, and has a normalizable return (HRESULT / BOOL / void).
 // Everything else is skipped with a diagnostic — the close function is always
 // still callable directly.
+//
+// Closing the zero value or an [InvalidHandleValue] sentinel is a no-op that
+// returns nil: the helper exists to be deferred, and a handle that was never
+// acquired is not an error the caller can act on.
 func (g *Generator) buildHandleClosers(meta *win32meta.NamespaceMeta, imports typemap.ImportSet) string {
 	names := make([]string, 0, len(meta.Typedefs))
 	for name := range meta.Typedefs {
@@ -100,7 +104,13 @@ func (g *Generator) buildCloser(meta *win32meta.NamespaceMeta, handleName string
 		return "", false
 	}
 
+	sentinels := typedef.InvalidValues
+	if len(sentinels) == 0 {
+		sentinels = []string{"0"}
+	}
+	guard := strings.Join(invalidValueChecks(sentinels, handleResolved.GoType, "h"), " || ")
 	return fmt.Sprintf(
-		"// %s releases a %s handle by calling %s.\nfunc %s(h %s) error {\n\t%s\n}\n\n",
-		closerName, handleName, typedef.FreeFunc, closerName, handleResolved.GoType, returnStmt), true
+		"// %s releases a %s handle by calling %s. Closing the zero or invalid\n"+
+			"// sentinel value (%s) is a no-op that returns nil.\nfunc %s(h %s) error {\n\tif %s {\n\t\treturn nil\n\t}\n\t%s\n}\n\n",
+		closerName, handleName, typedef.FreeFunc, strings.Join(sentinels, ", "), closerName, handleResolved.GoType, guard, returnStmt), true
 }

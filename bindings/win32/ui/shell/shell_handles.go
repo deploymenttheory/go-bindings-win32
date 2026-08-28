@@ -4,8 +4,12 @@
 
 package shell
 
-// CloseHPSXA releases a HPSXA handle by calling SHDestroyPropSheetExtArray.
+// CloseHPSXA releases a HPSXA handle by calling SHDestroyPropSheetExtArray. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHPSXA(h HPSXA) error {
+	if h == ^HPSXA(0) || h == 0 {
+		return nil
+	}
 	SHDestroyPropSheetExtArray(HPSXA(h))
 	return nil
 }

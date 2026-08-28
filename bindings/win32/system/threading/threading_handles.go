@@ -4,54 +4,90 @@
 
 package threading
 
-// CloseAVRT_TASK_HANDLE releases a AVRT_TASK_HANDLE handle by calling AvRevertMmThreadCharacteristics.
+// CloseAVRT_TASK_HANDLE releases a AVRT_TASK_HANDLE handle by calling AvRevertMmThreadCharacteristics. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseAVRT_TASK_HANDLE(h AVRT_TASK_HANDLE) error {
+	if h == 0 {
+		return nil
+	}
 	return AvRevertMmThreadCharacteristics(AVRT_TASK_HANDLE(h))
 }
 
-// CloseAVRT_THREAD_ORDERING_GROUP_HANDLE releases a AVRT_THREAD_ORDERING_GROUP_HANDLE handle by calling AvRtDeleteThreadOrderingGroup.
+// CloseAVRT_THREAD_ORDERING_GROUP_HANDLE releases a AVRT_THREAD_ORDERING_GROUP_HANDLE handle by calling AvRtDeleteThreadOrderingGroup. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseAVRT_THREAD_ORDERING_GROUP_HANDLE(h AVRT_THREAD_ORDERING_GROUP_HANDLE) error {
+	if h == 0 {
+		return nil
+	}
 	return AvRtDeleteThreadOrderingGroup(AVRT_THREAD_ORDERING_GROUP_HANDLE(h))
 }
 
-// CloseLPPROC_THREAD_ATTRIBUTE_LIST releases a LPPROC_THREAD_ATTRIBUTE_LIST handle by calling DeleteProcThreadAttributeList.
+// CloseLPPROC_THREAD_ATTRIBUTE_LIST releases a LPPROC_THREAD_ATTRIBUTE_LIST handle by calling DeleteProcThreadAttributeList. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseLPPROC_THREAD_ATTRIBUTE_LIST(h LPPROC_THREAD_ATTRIBUTE_LIST) error {
+	if h == 0 {
+		return nil
+	}
 	DeleteProcThreadAttributeList(LPPROC_THREAD_ATTRIBUTE_LIST(h))
 	return nil
 }
 
-// ClosePTP_CLEANUP_GROUP releases a PTP_CLEANUP_GROUP handle by calling CloseThreadpoolCleanupGroup.
+// ClosePTP_CLEANUP_GROUP releases a PTP_CLEANUP_GROUP handle by calling CloseThreadpoolCleanupGroup. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func ClosePTP_CLEANUP_GROUP(h PTP_CLEANUP_GROUP) error {
+	if h == 0 {
+		return nil
+	}
 	CloseThreadpoolCleanupGroup(PTP_CLEANUP_GROUP(h))
 	return nil
 }
 
-// ClosePTP_IO releases a PTP_IO handle by calling CloseThreadpoolIo.
+// ClosePTP_IO releases a PTP_IO handle by calling CloseThreadpoolIo. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func ClosePTP_IO(h PTP_IO) error {
+	if h == 0 {
+		return nil
+	}
 	CloseThreadpoolIo(PTP_IO(h))
 	return nil
 }
 
-// ClosePTP_POOL releases a PTP_POOL handle by calling CloseThreadpool.
+// ClosePTP_POOL releases a PTP_POOL handle by calling CloseThreadpool. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func ClosePTP_POOL(h PTP_POOL) error {
+	if h == 0 {
+		return nil
+	}
 	CloseThreadpool(PTP_POOL(h))
 	return nil
 }
 
-// ClosePTP_TIMER releases a PTP_TIMER handle by calling CloseThreadpoolTimer.
+// ClosePTP_TIMER releases a PTP_TIMER handle by calling CloseThreadpoolTimer. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func ClosePTP_TIMER(h PTP_TIMER) error {
+	if h == 0 {
+		return nil
+	}
 	CloseThreadpoolTimer(PTP_TIMER(h))
 	return nil
 }
 
-// ClosePTP_WAIT releases a PTP_WAIT handle by calling CloseThreadpoolWait.
+// ClosePTP_WAIT releases a PTP_WAIT handle by calling CloseThreadpoolWait. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func ClosePTP_WAIT(h PTP_WAIT) error {
+	if h == 0 {
+		return nil
+	}
 	CloseThreadpoolWait(PTP_WAIT(h))
 	return nil
 }
 
-// ClosePTP_WORK releases a PTP_WORK handle by calling CloseThreadpoolWork.
+// ClosePTP_WORK releases a PTP_WORK handle by calling CloseThreadpoolWork. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func ClosePTP_WORK(h PTP_WORK) error {
+	if h == 0 {
+		return nil
+	}
 	CloseThreadpoolWork(PTP_WORK(h))
 	return nil
 }

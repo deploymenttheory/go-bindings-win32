@@ -8,7 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseWINUSB_INTERFACE_HANDLE releases a WINUSB_INTERFACE_HANDLE handle by calling WinUsb_Free.
+// CloseWINUSB_INTERFACE_HANDLE releases a WINUSB_INTERFACE_HANDLE handle by calling WinUsb_Free. Closing the zero or invalid
+// sentinel value (0) is a no-op that returns nil.
 func CloseWINUSB_INTERFACE_HANDLE(h WINUSB_INTERFACE_HANDLE) error {
+	if h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(WinUsb_Free(WINUSB_INTERFACE_HANDLE(h))))
 }

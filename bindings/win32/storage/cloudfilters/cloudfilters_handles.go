@@ -4,7 +4,11 @@
 
 package cloudfilters
 
-// CloseCF_CONNECTION_KEY releases a CF_CONNECTION_KEY handle by calling CfDisconnectSyncRoot.
+// CloseCF_CONNECTION_KEY releases a CF_CONNECTION_KEY handle by calling CfDisconnectSyncRoot. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseCF_CONNECTION_KEY(h CF_CONNECTION_KEY) error {
+	if h == ^CF_CONNECTION_KEY(0) || h == 0 {
+		return nil
+	}
 	return CfDisconnectSyncRoot(CF_CONNECTION_KEY(h))
 }

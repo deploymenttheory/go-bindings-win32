@@ -8,27 +8,47 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
-// CloseHUIAEVENT releases a HUIAEVENT handle by calling UiaRemoveEvent.
+// CloseHUIAEVENT releases a HUIAEVENT handle by calling UiaRemoveEvent. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHUIAEVENT(h HUIAEVENT) error {
+	if h == ^HUIAEVENT(0) || h == 0 {
+		return nil
+	}
 	return UiaRemoveEvent(HUIAEVENT(h))
 }
 
-// CloseHUIANODE releases a HUIANODE handle by calling UiaNodeRelease.
+// CloseHUIANODE releases a HUIANODE handle by calling UiaNodeRelease. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHUIANODE(h HUIANODE) error {
+	if h == ^HUIANODE(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(UiaNodeRelease(HUIANODE(h))))
 }
 
-// CloseHUIAPATTERNOBJECT releases a HUIAPATTERNOBJECT handle by calling UiaPatternRelease.
+// CloseHUIAPATTERNOBJECT releases a HUIAPATTERNOBJECT handle by calling UiaPatternRelease. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHUIAPATTERNOBJECT(h HUIAPATTERNOBJECT) error {
+	if h == ^HUIAPATTERNOBJECT(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(UiaPatternRelease(HUIAPATTERNOBJECT(h))))
 }
 
-// CloseHUIATEXTRANGE releases a HUIATEXTRANGE handle by calling UiaTextRangeRelease.
+// CloseHUIATEXTRANGE releases a HUIATEXTRANGE handle by calling UiaTextRangeRelease. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHUIATEXTRANGE(h HUIATEXTRANGE) error {
+	if h == ^HUIATEXTRANGE(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(UiaTextRangeRelease(HUIATEXTRANGE(h))))
 }
 
-// CloseHWINEVENTHOOK releases a HWINEVENTHOOK handle by calling UnhookWinEvent.
+// CloseHWINEVENTHOOK releases a HWINEVENTHOOK handle by calling UnhookWinEvent. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHWINEVENTHOOK(h HWINEVENTHOOK) error {
+	if h == ^HWINEVENTHOOK(0) || h == 0 {
+		return nil
+	}
 	return win32.BoolErr(win32.Bool32(UnhookWinEvent(HWINEVENTHOOK(h))))
 }

@@ -4,7 +4,11 @@
 
 package printticket
 
-// CloseHPTPROVIDER releases a HPTPROVIDER handle by calling PTCloseProvider.
+// CloseHPTPROVIDER releases a HPTPROVIDER handle by calling PTCloseProvider. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHPTPROVIDER(h HPTPROVIDER) error {
+	if h == ^HPTPROVIDER(0) || h == 0 {
+		return nil
+	}
 	return PTCloseProvider(HPTPROVIDER(h))
 }

@@ -4,13 +4,21 @@
 
 package errorreporting
 
-// CloseHREPORT releases a HREPORT handle by calling WerReportCloseHandle.
+// CloseHREPORT releases a HREPORT handle by calling WerReportCloseHandle. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHREPORT(h HREPORT) error {
+	if h == ^HREPORT(0) || h == 0 {
+		return nil
+	}
 	return WerReportCloseHandle(HREPORT(h))
 }
 
-// CloseHREPORTSTORE releases a HREPORTSTORE handle by calling WerStoreClose.
+// CloseHREPORTSTORE releases a HREPORTSTORE handle by calling WerStoreClose. Closing the zero or invalid
+// sentinel value (-1, 0) is a no-op that returns nil.
 func CloseHREPORTSTORE(h HREPORTSTORE) error {
+	if h == ^HREPORTSTORE(0) || h == 0 {
+		return nil
+	}
 	WerStoreClose(HREPORTSTORE(h))
 	return nil
 }

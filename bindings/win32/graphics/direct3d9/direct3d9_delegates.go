@@ -4,22 +4,27 @@
 
 package direct3d9
 
-// LPD3DENUMDEVICESCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PSTR, foundation.PSTR, *D3DDEVICEDESC, *D3DDEVICEDESC, unsafe.Pointer) foundation.HRESULT.
+// LPD3DENUMDEVICESCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PSTR, foundation.PSTR, *D3DDEVICEDESC, *D3DDEVICEDESC, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPD3DENUMDEVICESCALLBACK uintptr
 
-// LPD3DENUMDEVICESCALLBACK7 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, *D3DDEVICEDESC7, unsafe.Pointer) foundation.HRESULT.
+// LPD3DENUMDEVICESCALLBACK7 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, *D3DDEVICEDESC7, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPD3DENUMDEVICESCALLBACK7 uintptr
 
-// LPD3DENUMPIXELFORMATSCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsdirectdraw.DDPIXELFORMAT, unsafe.Pointer) foundation.HRESULT.
+// LPD3DENUMPIXELFORMATSCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsdirectdraw.DDPIXELFORMAT, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPD3DENUMPIXELFORMATSCALLBACK uintptr
 
-// LPD3DENUMTEXTUREFORMATSCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsdirectdraw.DDSURFACEDESC, unsafe.Pointer) foundation.HRESULT.
+// LPD3DENUMTEXTUREFORMATSCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsdirectdraw.DDSURFACEDESC, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPD3DENUMTEXTUREFORMATSCALLBACK uintptr
 
-// LPD3DVALIDATECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32) foundation.HRESULT.
+// LPD3DVALIDATECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPD3DVALIDATECALLBACK uintptr

@@ -4,18 +4,22 @@
 
 package winrt
 
-// PFNGETACTIVATIONFACTORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HSTRING, **IActivationFactory) foundation.HRESULT.
+// PFNGETACTIVATIONFACTORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HSTRING, **IActivationFactory) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNGETACTIVATIONFACTORY uintptr
 
-// PINSPECT_HSTRING_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, uint32, *byte) foundation.HRESULT.
+// PINSPECT_HSTRING_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, uint32, *byte) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PINSPECT_HSTRING_CALLBACK uintptr
 
-// PINSPECT_HSTRING_CALLBACK2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint64, uint32, *byte) foundation.HRESULT.
+// PINSPECT_HSTRING_CALLBACK2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint64, uint32, *byte) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PINSPECT_HSTRING_CALLBACK2 uintptr
 
-// PINSPECT_MEMORY_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, uint32, *byte) foundation.HRESULT.
+// PINSPECT_MEMORY_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, uint32, *byte) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PINSPECT_MEMORY_CALLBACK uintptr

@@ -4,10 +4,12 @@
 
 package search
 
-// PFNFILLTEXTBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*TEXT_SOURCE) foundation.HRESULT.
+// PFNFILLTEXTBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*TEXT_SOURCE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNFILLTEXTBUFFER uintptr
 
-// SQL_ASYNC_NOTIFICATION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.BOOL) int16.
+// SQL_ASYNC_NOTIFICATION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.BOOL) uintptr (the native return type is
+// int16; NewCallback requires a uintptr-sized result).
 type SQL_ASYNC_NOTIFICATION_CALLBACK uintptr

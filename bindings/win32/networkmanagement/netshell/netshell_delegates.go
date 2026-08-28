@@ -4,42 +4,52 @@
 
 package netshell
 
-// PFN_HANDLE_CMD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *foundation.PWSTR, uint32, uint32, uint32, unsafe.Pointer, *foundation.BOOL) uint32.
+// PFN_HANDLE_CMD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *foundation.PWSTR, uint32, uint32, uint32, unsafe.Pointer, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_HANDLE_CMD uintptr
 
-// PGET_RESOURCE_STRING_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PWSTR, uint32) uint32.
+// PGET_RESOURCE_STRING_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PWSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PGET_RESOURCE_STRING_FN uintptr
 
-// PNS_CONTEXT_COMMIT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) uint32.
+// PNS_CONTEXT_COMMIT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PNS_CONTEXT_COMMIT_FN uintptr
 
-// PNS_CONTEXT_CONNECT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) uint32.
+// PNS_CONTEXT_CONNECT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PNS_CONTEXT_CONNECT_FN uintptr
 
-// PNS_CONTEXT_DUMP_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *foundation.PWSTR, uint32, unsafe.Pointer) uint32.
+// PNS_CONTEXT_DUMP_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *foundation.PWSTR, uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PNS_CONTEXT_DUMP_FN uintptr
 
-// PNS_DLL_INIT_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer) uint32.
+// PNS_DLL_INIT_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PNS_DLL_INIT_FN uintptr
 
-// PNS_DLL_STOP_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) uint32.
+// PNS_DLL_STOP_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PNS_DLL_STOP_FN uintptr
 
-// PNS_HELPER_START_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, uint32) uint32.
+// PNS_HELPER_START_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PNS_HELPER_START_FN uintptr
 
-// PNS_HELPER_STOP_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) uint32.
+// PNS_HELPER_STOP_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PNS_HELPER_STOP_FN uintptr
 
-// PNS_OSVERSIONCHECK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, uint32) foundation.BOOL.
+// PNS_OSVERSIONCHECK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PNS_OSVERSIONCHECK uintptr

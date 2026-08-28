@@ -4,30 +4,37 @@
 
 package ime
 
-// IMCENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HIMC, foundation.LPARAM) foundation.BOOL.
+// IMCENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HIMC, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type IMCENUMPROC uintptr
 
-// PFNLOG is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IMEDP, foundation.HRESULT) foundation.BOOL.
+// PFNLOG is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IMEDP, foundation.HRESULT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNLOG uintptr
 
-// REGISTERWORDENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32, foundation.PSTR, unsafe.Pointer) int32.
+// REGISTERWORDENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32, foundation.PSTR, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type REGISTERWORDENUMPROCA uintptr
 
-// REGISTERWORDENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, foundation.PWSTR, unsafe.Pointer) int32.
+// REGISTERWORDENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type REGISTERWORDENUMPROCW uintptr
 
-// FpCreateIFECommonInstanceType is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer) foundation.HRESULT.
+// FpCreateIFECommonInstanceType is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FpCreateIFECommonInstanceType uintptr
 
-// FpCreateIFEDictionaryInstanceType is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*unsafe.Pointer) foundation.HRESULT.
+// FpCreateIFEDictionaryInstanceType is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FpCreateIFEDictionaryInstanceType uintptr
 
-// FpCreateIFELanguageInstanceType is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// FpCreateIFELanguageInstanceType is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type FpCreateIFELanguageInstanceType uintptr

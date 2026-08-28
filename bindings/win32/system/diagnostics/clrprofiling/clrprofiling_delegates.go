@@ -4,70 +4,74 @@
 
 package clrprofiling
 
-// EventPipeProviderCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, uint32, byte, uint64, uint64, *COR_PRF_FILTER_DATA, unsafe.Pointer).
+// EventPipeProviderCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, uint32, byte, uint64, uint64, *COR_PRF_FILTER_DATA, unsafe.Pointer) uintptr.
 type EventPipeProviderCallback uintptr
 
-// FunctionEnter is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// FunctionEnter is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr.
 type FunctionEnter uintptr
 
-// FunctionEnter2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, uintptr, *COR_PRF_FUNCTION_ARGUMENT_INFO).
+// FunctionEnter2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, uintptr, *COR_PRF_FUNCTION_ARGUMENT_INFO) uintptr.
 type FunctionEnter2 uintptr
 
-// FunctionEnter3 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(FunctionIDOrClientID).
+// FunctionEnter3 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(FunctionIDOrClientID) uintptr.
 type FunctionEnter3 uintptr
 
-// FunctionEnter3WithInfo is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(FunctionIDOrClientID, uintptr).
+// FunctionEnter3WithInfo is a callback pointer: create one with syscall.NewCallback
+// using the shape func(FunctionIDOrClientID, uintptr) uintptr.
 type FunctionEnter3WithInfo uintptr
 
-// FunctionIDMapper is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *foundation.BOOL) uintptr.
+// FunctionIDMapper is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *foundation.BOOL) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type FunctionIDMapper uintptr
 
-// FunctionIDMapper2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer, *foundation.BOOL) uintptr.
+// FunctionIDMapper2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer, *foundation.BOOL) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type FunctionIDMapper2 uintptr
 
-// FunctionLeave is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// FunctionLeave is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr.
 type FunctionLeave uintptr
 
-// FunctionLeave2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, uintptr, *COR_PRF_FUNCTION_ARGUMENT_RANGE).
+// FunctionLeave2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, uintptr, *COR_PRF_FUNCTION_ARGUMENT_RANGE) uintptr.
 type FunctionLeave2 uintptr
 
-// FunctionLeave3 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(FunctionIDOrClientID).
+// FunctionLeave3 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(FunctionIDOrClientID) uintptr.
 type FunctionLeave3 uintptr
 
-// FunctionLeave3WithInfo is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(FunctionIDOrClientID, uintptr).
+// FunctionLeave3WithInfo is a callback pointer: create one with syscall.NewCallback
+// using the shape func(FunctionIDOrClientID, uintptr) uintptr.
 type FunctionLeave3WithInfo uintptr
 
-// FunctionTailcall is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// FunctionTailcall is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr.
 type FunctionTailcall uintptr
 
-// FunctionTailcall2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, uintptr).
+// FunctionTailcall2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, uintptr) uintptr.
 type FunctionTailcall2 uintptr
 
-// FunctionTailcall3 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(FunctionIDOrClientID).
+// FunctionTailcall3 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(FunctionIDOrClientID) uintptr.
 type FunctionTailcall3 uintptr
 
-// FunctionTailcall3WithInfo is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(FunctionIDOrClientID, uintptr).
+// FunctionTailcall3WithInfo is a callback pointer: create one with syscall.NewCallback
+// using the shape func(FunctionIDOrClientID, uintptr) uintptr.
 type FunctionTailcall3WithInfo uintptr
 
-// ObjectReferenceCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *uintptr, unsafe.Pointer) foundation.BOOL.
+// ObjectReferenceCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *uintptr, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ObjectReferenceCallback uintptr
 
-// StackSnapshotCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, uintptr, uint32, *byte, unsafe.Pointer) foundation.HRESULT.
+// StackSnapshotCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, uintptr, uint32, *byte, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type StackSnapshotCallback uintptr

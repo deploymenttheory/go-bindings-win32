@@ -4,74 +4,76 @@
 
 package windowsfilteringplatform
 
-// FWPM_CALLOUT_CHANGE_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_CALLOUT_CHANGE0).
+// FWPM_CALLOUT_CHANGE_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_CALLOUT_CHANGE0) uintptr.
 type FWPM_CALLOUT_CHANGE_CALLBACK0 uintptr
 
-// FWPM_CONNECTION_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, FWPM_CONNECTION_EVENT_TYPE, *FWPM_CONNECTION0).
+// FWPM_CONNECTION_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, FWPM_CONNECTION_EVENT_TYPE, *FWPM_CONNECTION0) uintptr.
 type FWPM_CONNECTION_CALLBACK0 uintptr
 
-// FWPM_DYNAMIC_KEYWORD_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer).
+// FWPM_DYNAMIC_KEYWORD_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr.
 type FWPM_DYNAMIC_KEYWORD_CALLBACK0 uintptr
 
-// FWPM_FILTER_CHANGE_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_FILTER_CHANGE0).
+// FWPM_FILTER_CHANGE_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_FILTER_CHANGE0) uintptr.
 type FWPM_FILTER_CHANGE_CALLBACK0 uintptr
 
-// FWPM_NET_EVENT_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_NET_EVENT1).
+// FWPM_NET_EVENT_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_NET_EVENT1) uintptr.
 type FWPM_NET_EVENT_CALLBACK0 uintptr
 
-// FWPM_NET_EVENT_CALLBACK1 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_NET_EVENT2).
+// FWPM_NET_EVENT_CALLBACK1 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_NET_EVENT2) uintptr.
 type FWPM_NET_EVENT_CALLBACK1 uintptr
 
-// FWPM_NET_EVENT_CALLBACK2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_NET_EVENT3).
+// FWPM_NET_EVENT_CALLBACK2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_NET_EVENT3) uintptr.
 type FWPM_NET_EVENT_CALLBACK2 uintptr
 
-// FWPM_NET_EVENT_CALLBACK3 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_NET_EVENT4).
+// FWPM_NET_EVENT_CALLBACK3 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_NET_EVENT4) uintptr.
 type FWPM_NET_EVENT_CALLBACK3 uintptr
 
-// FWPM_NET_EVENT_CALLBACK4 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_NET_EVENT5).
+// FWPM_NET_EVENT_CALLBACK4 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_NET_EVENT5) uintptr.
 type FWPM_NET_EVENT_CALLBACK4 uintptr
 
-// FWPM_PROVIDER_CHANGE_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_PROVIDER_CHANGE0).
+// FWPM_PROVIDER_CHANGE_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_PROVIDER_CHANGE0) uintptr.
 type FWPM_PROVIDER_CHANGE_CALLBACK0 uintptr
 
-// FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_PROVIDER_CONTEXT_CHANGE0).
+// FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_PROVIDER_CONTEXT_CHANGE0) uintptr.
 type FWPM_PROVIDER_CONTEXT_CHANGE_CALLBACK0 uintptr
 
-// FWPM_SUBLAYER_CHANGE_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_SUBLAYER_CHANGE0).
+// FWPM_SUBLAYER_CHANGE_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_SUBLAYER_CHANGE0) uintptr.
 type FWPM_SUBLAYER_CHANGE_CALLBACK0 uintptr
 
-// FWPM_SYSTEM_PORTS_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_SYSTEM_PORTS0).
+// FWPM_SYSTEM_PORTS_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_SYSTEM_PORTS0) uintptr.
 type FWPM_SYSTEM_PORTS_CALLBACK0 uintptr
 
-// FWPM_VSWITCH_EVENT_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *FWPM_VSWITCH_EVENT0) uint32.
+// FWPM_VSWITCH_EVENT_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *FWPM_VSWITCH_EVENT0) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type FWPM_VSWITCH_EVENT_CALLBACK0 uintptr
 
-// IPSEC_KEY_MANAGER_DICTATE_KEY0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IPSEC_SA_DETAILS1, *IPSEC_SA_DETAILS1, *foundation.BOOL) uint32.
+// IPSEC_KEY_MANAGER_DICTATE_KEY0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IPSEC_SA_DETAILS1, *IPSEC_SA_DETAILS1, *foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type IPSEC_KEY_MANAGER_DICTATE_KEY0 uintptr
 
-// IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IKEEXT_TRAFFIC0, *foundation.BOOL, *uint32).
+// IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IKEEXT_TRAFFIC0, *foundation.BOOL, *uint32) uintptr.
 type IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0 uintptr
 
-// IPSEC_KEY_MANAGER_NOTIFY_KEY0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IPSEC_SA_DETAILS1, *IPSEC_SA_DETAILS1).
+// IPSEC_KEY_MANAGER_NOTIFY_KEY0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IPSEC_SA_DETAILS1, *IPSEC_SA_DETAILS1) uintptr.
 type IPSEC_KEY_MANAGER_NOTIFY_KEY0 uintptr
 
-// IPSEC_SA_CONTEXT_CALLBACK0 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *IPSEC_SA_CONTEXT_CHANGE0).
+// IPSEC_SA_CONTEXT_CALLBACK0 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *IPSEC_SA_CONTEXT_CHANGE0) uintptr.
 type IPSEC_SA_CONTEXT_CALLBACK0 uintptr

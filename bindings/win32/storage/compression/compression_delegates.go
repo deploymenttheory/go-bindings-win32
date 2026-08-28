@@ -4,10 +4,11 @@
 
 package compression
 
-// PFN_COMPRESS_ALLOCATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr) unsafe.Pointer.
+// PFN_COMPRESS_ALLOCATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_COMPRESS_ALLOCATE uintptr
 
-// PFN_COMPRESS_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer).
+// PFN_COMPRESS_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr.
 type PFN_COMPRESS_FREE uintptr

@@ -4,10 +4,12 @@
 
 package processstatus
 
-// PENUM_PAGE_FILE_CALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *ENUM_PAGE_FILE_INFORMATION, foundation.PSTR) foundation.BOOL.
+// PENUM_PAGE_FILE_CALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *ENUM_PAGE_FILE_INFORMATION, foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PENUM_PAGE_FILE_CALLBACKA uintptr
 
-// PENUM_PAGE_FILE_CALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *ENUM_PAGE_FILE_INFORMATION, foundation.PWSTR) foundation.BOOL.
+// PENUM_PAGE_FILE_CALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *ENUM_PAGE_FILE_INFORMATION, foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PENUM_PAGE_FILE_CALLBACKW uintptr

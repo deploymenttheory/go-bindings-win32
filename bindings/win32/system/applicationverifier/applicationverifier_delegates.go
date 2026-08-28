@@ -4,14 +4,17 @@
 
 package applicationverifier
 
-// AVRF_HANDLEOPERATION_ENUMERATE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*AVRF_HANDLE_OPERATION, unsafe.Pointer, *uint32) uint32.
+// AVRF_HANDLEOPERATION_ENUMERATE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*AVRF_HANDLE_OPERATION, unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type AVRF_HANDLEOPERATION_ENUMERATE_CALLBACK uintptr
 
-// AVRF_HEAPALLOCATION_ENUMERATE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*AVRF_HEAP_ALLOCATION, unsafe.Pointer, *uint32) uint32.
+// AVRF_HEAPALLOCATION_ENUMERATE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*AVRF_HEAP_ALLOCATION, unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type AVRF_HEAPALLOCATION_ENUMERATE_CALLBACK uintptr
 
-// AVRF_RESOURCE_ENUMERATE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer, *uint32) uint32.
+// AVRF_RESOURCE_ENUMERATE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type AVRF_RESOURCE_ENUMERATE_CALLBACK uintptr

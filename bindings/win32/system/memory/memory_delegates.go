@@ -4,10 +4,11 @@
 
 package memory
 
-// PBAD_MEMORY_CALLBACK_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func().
+// PBAD_MEMORY_CALLBACK_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr.
 type PBAD_MEMORY_CALLBACK_ROUTINE uintptr
 
-// PSECURE_MEMORY_CACHE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr) foundation.BOOLEAN.
+// PSECURE_MEMORY_CACHE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PSECURE_MEMORY_CACHE_CALLBACK uintptr

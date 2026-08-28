@@ -4,10 +4,12 @@
 
 package webapp
 
-// RegisterAuthoringClientFunctionType is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IWebApplicationAuthoringMode, *IWebApplicationHost) foundation.HRESULT.
+// RegisterAuthoringClientFunctionType is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IWebApplicationAuthoringMode, *IWebApplicationHost) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type RegisterAuthoringClientFunctionType uintptr
 
-// UnregisterAuthoringClientFunctionType is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IWebApplicationHost) foundation.HRESULT.
+// UnregisterAuthoringClientFunctionType is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IWebApplicationHost) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type UnregisterAuthoringClientFunctionType uintptr

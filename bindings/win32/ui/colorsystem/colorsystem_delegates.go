@@ -4,22 +4,27 @@
 
 package colorsystem
 
-// ICMENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.LPARAM) int32.
+// ICMENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type ICMENUMPROCA uintptr
 
-// ICMENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.LPARAM) int32.
+// ICMENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type ICMENUMPROCW uintptr
 
-// LPBMCALLBACKFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, foundation.LPARAM) foundation.BOOL.
+// LPBMCALLBACKFN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPBMCALLBACKFN uintptr
 
-// PCMSCALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*COLORMATCHSETUPA, foundation.LPARAM) foundation.BOOL.
+// PCMSCALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*COLORMATCHSETUPA, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCMSCALLBACKA uintptr
 
-// PCMSCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*COLORMATCHSETUPW, foundation.LPARAM) foundation.BOOL.
+// PCMSCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*COLORMATCHSETUPW, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCMSCALLBACKW uintptr

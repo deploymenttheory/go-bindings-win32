@@ -4,70 +4,85 @@
 
 package addressbook
 
-// CALLERRELEASE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *ITableData, *IMAPITable).
+// CALLERRELEASE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *ITableData, *IMAPITable) uintptr.
 type CALLERRELEASE uintptr
 
-// LPALLOCATEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *unsafe.Pointer) int32.
+// LPALLOCATEBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPALLOCATEBUFFER uintptr
 
-// LPALLOCATEMORE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer, *unsafe.Pointer) int32.
+// LPALLOCATEMORE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer, *unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPALLOCATEMORE uintptr
 
-// LPCREATECONVERSATIONINDEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *byte, *uint32, **byte) int32.
+// LPCREATECONVERSATIONINDEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *byte, *uint32, **byte) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPCREATECONVERSATIONINDEX uintptr
 
-// LPDISPATCHNOTIFICATIONS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) foundation.HRESULT.
+// LPDISPATCHNOTIFICATIONS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPDISPATCHNOTIFICATIONS uintptr
 
-// LPFNABSDI is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer) foundation.BOOL.
+// LPFNABSDI is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFNABSDI uintptr
 
-// LPFNBUTTON is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer, uint32, *ENTRYID, uint32) int32.
+// LPFNBUTTON is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer, uint32, *ENTRYID, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPFNBUTTON uintptr
 
-// LPFNDISMISS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer).
+// LPFNDISMISS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer) uintptr.
 type LPFNDISMISS uintptr
 
-// LPFREEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// LPFREEBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPFREEBUFFER uintptr
 
-// LPNOTIFCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, *NOTIFICATION) int32.
+// LPNOTIFCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, *NOTIFICATION) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPNOTIFCALLBACK uintptr
 
-// LPOPENSTREAMONFILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(LPALLOCATEBUFFER, LPFREEBUFFER, uint32, *int8, *int8, **systemcom.IStream) foundation.HRESULT.
+// LPOPENSTREAMONFILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(LPALLOCATEBUFFER, LPFREEBUFFER, uint32, *int8, *int8, **systemcom.IStream) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPOPENSTREAMONFILE uintptr
 
-// LPWABALLOCATEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IWABObject, uint32, *unsafe.Pointer) int32.
+// LPWABALLOCATEBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IWABObject, uint32, *unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWABALLOCATEBUFFER uintptr
 
-// LPWABALLOCATEMORE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IWABObject, uint32, unsafe.Pointer, *unsafe.Pointer) int32.
+// LPWABALLOCATEMORE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IWABObject, uint32, unsafe.Pointer, *unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type LPWABALLOCATEMORE uintptr
 
-// LPWABFREEBUFFER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IWABObject, unsafe.Pointer) uint32.
+// LPWABFREEBUFFER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IWABObject, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPWABFREEBUFFER uintptr
 
-// LPWABOPEN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(**IAddrBook, **IWABObject, *WAB_PARAM, uint32) foundation.HRESULT.
+// LPWABOPEN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(**IAddrBook, **IWABObject, *WAB_PARAM, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPWABOPEN uintptr
 
-// LPWABOPENEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(**IAddrBook, **IWABObject, *WAB_PARAM, uint32, LPALLOCATEBUFFER, LPALLOCATEMORE, LPFREEBUFFER) foundation.HRESULT.
+// LPWABOPENEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(**IAddrBook, **IWABObject, *WAB_PARAM, uint32, LPALLOCATEBUFFER, LPALLOCATEMORE, LPFREEBUFFER) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPWABOPENEX uintptr
 
-// PFNIDLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.BOOL.
+// PFNIDLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNIDLE uintptr

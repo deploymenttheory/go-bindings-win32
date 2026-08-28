@@ -4,6 +4,6 @@
 
 package devicequery
 
-// PDEV_QUERY_RESULT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HDEVQUERY, unsafe.Pointer, *DEV_QUERY_RESULT_ACTION_DATA).
+// PDEV_QUERY_RESULT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HDEVQUERY, unsafe.Pointer, *DEV_QUERY_RESULT_ACTION_DATA) uintptr.
 type PDEV_QUERY_RESULT_CALLBACK uintptr

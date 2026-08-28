@@ -71,8 +71,15 @@ type ConstantModel struct {
 type DelegateModel struct {
 	TypeName string
 	DocURL   string
-	// Signature documents the callback's Go shape in a comment.
+	// Signature documents the Go shape syscall.NewCallback accepts for this
+	// callback: the native parameter types and a uintptr result.
 	Signature string
+	// NativeReturn is the native return type when it is not void; the doc
+	// comment explains that NewCallback still needs a uintptr-sized result.
+	NativeReturn string
+	// HasFloat marks a callback with floating-point parameters or return,
+	// which syscall.NewCallback cannot marshal (golang/go#45300).
+	HasFloat bool
 }
 
 // DLLModel declares one lazily loaded DLL and its procs.

@@ -4,18 +4,22 @@
 
 package com
 
-// LPEXCEPFINO_DEFERRED_FILLIN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*EXCEPINFO) foundation.HRESULT.
+// LPEXCEPFINO_DEFERRED_FILLIN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*EXCEPINFO) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPEXCEPFINO_DEFERRED_FILLIN uintptr
 
-// LPFNCANUNLOADNOW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.HRESULT.
+// LPFNCANUNLOADNOW is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPFNCANUNLOADNOW uintptr
 
-// LPFNGETCLASSOBJECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// LPFNGETCLASSOBJECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPFNGETCLASSOBJECT uintptr
 
-// PFNCONTEXTCALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*ComCallData) foundation.HRESULT.
+// PFNCONTEXTCALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*ComCallData) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNCONTEXTCALL uintptr

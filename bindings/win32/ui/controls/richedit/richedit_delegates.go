@@ -4,22 +4,27 @@
 
 package richedit
 
-// AutoCorrectProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint16, foundation.PWSTR, foundation.PWSTR, int32, *int32) int32.
+// AutoCorrectProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint16, foundation.PWSTR, foundation.PWSTR, int32, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type AutoCorrectProc uintptr
 
-// EDITSTREAMCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *byte, int32, *int32) uint32.
+// EDITSTREAMCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *byte, int32, *int32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type EDITSTREAMCALLBACK uintptr
 
-// EDITWORDBREAKPROCEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, int32, byte, int32) int32.
+// EDITWORDBREAKPROCEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, int32, byte, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type EDITWORDBREAKPROCEX uintptr
 
-// PCreateTextServices is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown, *ITextHost, **systemcom.IUnknown) foundation.HRESULT.
+// PCreateTextServices is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown, *ITextHost, **systemcom.IUnknown) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PCreateTextServices uintptr
 
-// PShutdownTextServices is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown) foundation.HRESULT.
+// PShutdownTextServices is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PShutdownTextServices uintptr

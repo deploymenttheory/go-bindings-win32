@@ -4,6 +4,10 @@
 
 package imaging
 
-// PFNProgressNotification is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, WICProgressOperation, float64) foundation.HRESULT.
+// PFNProgressNotification is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, WICProgressOperation, float64) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
+// NewCallback cannot marshal this callback's floating-point parameters or
+// return (golang/go#45300): only a natively implemented function pointer can
+// be passed here.
 type PFNProgressNotification uintptr

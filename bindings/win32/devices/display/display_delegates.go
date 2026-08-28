@@ -4,366 +4,440 @@
 
 package display
 
-// FREEOBJPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*DRIVEROBJ) foundation.BOOL.
+// FREEOBJPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*DRIVEROBJ) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type FREEOBJPROC uintptr
 
-// PFN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uintptr.
+// PFN is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type PFN uintptr
 
-// PFN_DrvAccumulateD3DDirtyRect is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *CDDDXGK_REDIRBITMAPPRESENTINFO) foundation.BOOL.
+// PFN_DrvAccumulateD3DDirtyRect is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *CDDDXGK_REDIRBITMAPPRESENTINFO) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvAccumulateD3DDirtyRect uintptr
 
-// PFN_DrvAlphaBlend is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *foundation.RECTL, *foundation.RECTL, *BLENDOBJ) foundation.BOOL.
+// PFN_DrvAlphaBlend is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *foundation.RECTL, *foundation.RECTL, *BLENDOBJ) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvAlphaBlend uintptr
 
-// PFN_DrvAssertMode is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, foundation.BOOL) foundation.BOOL.
+// PFN_DrvAssertMode is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, foundation.BOOL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvAssertMode uintptr
 
-// PFN_DrvAssociateSharedSurface is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, foundation.HANDLE, foundation.HANDLE, foundation.SIZE) foundation.BOOL.
+// PFN_DrvAssociateSharedSurface is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, foundation.HANDLE, foundation.HANDLE, foundation.SIZE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvAssociateSharedSurface uintptr
 
-// PFN_DrvBitBlt is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *foundation.RECTL, *foundation.POINTL, *foundation.POINTL, *BRUSHOBJ, *foundation.POINTL, uint32) foundation.BOOL.
+// PFN_DrvBitBlt is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *foundation.RECTL, *foundation.POINTL, *foundation.POINTL, *BRUSHOBJ, *foundation.POINTL, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvBitBlt uintptr
 
-// PFN_DrvCompletePDEV is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, HDEV).
+// PFN_DrvCompletePDEV is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, HDEV) uintptr.
 type PFN_DrvCompletePDEV uintptr
 
-// PFN_DrvCopyBits is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *foundation.RECTL, *foundation.POINTL) foundation.BOOL.
+// PFN_DrvCopyBits is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *foundation.RECTL, *foundation.POINTL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvCopyBits uintptr
 
-// PFN_DrvCreateDeviceBitmap is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, foundation.SIZE, uint32) graphicsgdi.HBITMAP.
+// PFN_DrvCreateDeviceBitmap is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, foundation.SIZE, uint32) uintptr (the native return type is
+// graphicsgdi.HBITMAP; NewCallback requires a uintptr-sized result).
 type PFN_DrvCreateDeviceBitmap uintptr
 
-// PFN_DrvCreateDeviceBitmapEx is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, foundation.SIZE, uint32, uint32, DHSURF, uint32, uint32, *foundation.HANDLE) graphicsgdi.HBITMAP.
+// PFN_DrvCreateDeviceBitmapEx is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, foundation.SIZE, uint32, uint32, DHSURF, uint32, uint32, *foundation.HANDLE) uintptr (the native return type is
+// graphicsgdi.HBITMAP; NewCallback requires a uintptr-sized result).
 type PFN_DrvCreateDeviceBitmapEx uintptr
 
-// PFN_DrvDeleteDeviceBitmap is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHSURF).
+// PFN_DrvDeleteDeviceBitmap is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHSURF) uintptr.
 type PFN_DrvDeleteDeviceBitmap uintptr
 
-// PFN_DrvDeleteDeviceBitmapEx is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHSURF).
+// PFN_DrvDeleteDeviceBitmapEx is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHSURF) uintptr.
 type PFN_DrvDeleteDeviceBitmapEx uintptr
 
-// PFN_DrvDeriveSurface is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsdirectdraw.DD_DIRECTDRAW_GLOBAL, *graphicsdirectdraw.DD_SURFACE_LOCAL) graphicsgdi.HBITMAP.
+// PFN_DrvDeriveSurface is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsdirectdraw.DD_DIRECTDRAW_GLOBAL, *graphicsdirectdraw.DD_SURFACE_LOCAL) uintptr (the native return type is
+// graphicsgdi.HBITMAP; NewCallback requires a uintptr-sized result).
 type PFN_DrvDeriveSurface uintptr
 
-// PFN_DrvDescribePixelFormat is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, int32, uint32, *graphicsopengl.PIXELFORMATDESCRIPTOR) int32.
+// PFN_DrvDescribePixelFormat is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, int32, uint32, *graphicsopengl.PIXELFORMATDESCRIPTOR) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFN_DrvDescribePixelFormat uintptr
 
-// PFN_DrvDestroyFont is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*FONTOBJ).
+// PFN_DrvDestroyFont is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*FONTOBJ) uintptr.
 type PFN_DrvDestroyFont uintptr
 
-// PFN_DrvDisableDirectDraw is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV).
+// PFN_DrvDisableDirectDraw is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV) uintptr.
 type PFN_DrvDisableDirectDraw uintptr
 
-// PFN_DrvDisableDriver is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func().
+// PFN_DrvDisableDriver is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr.
 type PFN_DrvDisableDriver uintptr
 
-// PFN_DrvDisablePDEV is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV).
+// PFN_DrvDisablePDEV is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV) uintptr.
 type PFN_DrvDisablePDEV uintptr
 
-// PFN_DrvDisableSurface is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV).
+// PFN_DrvDisableSurface is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV) uintptr.
 type PFN_DrvDisableSurface uintptr
 
-// PFN_DrvDitherColor is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, uint32, uint32, *uint32) uint32.
+// PFN_DrvDitherColor is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, uint32, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_DrvDitherColor uintptr
 
-// PFN_DrvDrawEscape is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, uint32, *CLIPOBJ, *foundation.RECTL, uint32, unsafe.Pointer) uint32.
+// PFN_DrvDrawEscape is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, uint32, *CLIPOBJ, *foundation.RECTL, uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_DrvDrawEscape uintptr
 
-// PFN_DrvEnableDirectDraw is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *graphicsdirectdraw.DD_CALLBACKS, *graphicsdirectdraw.DD_SURFACECALLBACKS, *graphicsdirectdraw.DD_PALETTECALLBACKS) foundation.BOOL.
+// PFN_DrvEnableDirectDraw is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *graphicsdirectdraw.DD_CALLBACKS, *graphicsdirectdraw.DD_SURFACECALLBACKS, *graphicsdirectdraw.DD_PALETTECALLBACKS) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvEnableDirectDraw uintptr
 
-// PFN_DrvEnableDriver is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *DRVENABLEDATA) foundation.BOOL.
+// PFN_DrvEnableDriver is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *DRVENABLEDATA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvEnableDriver uintptr
 
-// PFN_DrvEnablePDEV is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsgdi.DEVMODEW, foundation.PWSTR, uint32, *HSURF, uint32, *GDIINFO, uint32, *DEVINFO, HDEV, foundation.PWSTR, foundation.HANDLE) DHPDEV.
+// PFN_DrvEnablePDEV is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsgdi.DEVMODEW, foundation.PWSTR, uint32, *HSURF, uint32, *GDIINFO, uint32, *DEVINFO, HDEV, foundation.PWSTR, foundation.HANDLE) uintptr (the native return type is
+// DHPDEV; NewCallback requires a uintptr-sized result).
 type PFN_DrvEnablePDEV uintptr
 
-// PFN_DrvEnableSurface is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV) HSURF.
+// PFN_DrvEnableSurface is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV) uintptr (the native return type is
+// HSURF; NewCallback requires a uintptr-sized result).
 type PFN_DrvEnableSurface uintptr
 
-// PFN_DrvEndDoc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, uint32) foundation.BOOL.
+// PFN_DrvEndDoc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvEndDoc uintptr
 
-// PFN_DrvEndDxInterop is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, foundation.BOOL, *foundation.BOOL, unsafe.Pointer) foundation.BOOL.
+// PFN_DrvEndDxInterop is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, foundation.BOOL, *foundation.BOOL, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvEndDxInterop uintptr
 
-// PFN_DrvEscape is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, uint32, uint32, unsafe.Pointer, uint32, unsafe.Pointer) uint32.
+// PFN_DrvEscape is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, uint32, uint32, unsafe.Pointer, uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_DrvEscape uintptr
 
-// PFN_DrvFillPath is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *PATHOBJ, *CLIPOBJ, *BRUSHOBJ, *foundation.POINTL, uint32, uint32) foundation.BOOL.
+// PFN_DrvFillPath is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *PATHOBJ, *CLIPOBJ, *BRUSHOBJ, *foundation.POINTL, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvFillPath uintptr
 
-// PFN_DrvFontManagement is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *FONTOBJ, uint32, uint32, unsafe.Pointer, uint32, unsafe.Pointer) uint32.
+// PFN_DrvFontManagement is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *FONTOBJ, uint32, uint32, unsafe.Pointer, uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_DrvFontManagement uintptr
 
-// PFN_DrvFree is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr).
+// PFN_DrvFree is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr) uintptr.
 type PFN_DrvFree uintptr
 
-// PFN_DrvGetDirectDrawInfo is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *graphicsdirectdraw.DD_HALINFO, *uint32, *graphicsdirectdraw.VIDEOMEMORY, *uint32, *uint32) foundation.BOOL.
+// PFN_DrvGetDirectDrawInfo is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *graphicsdirectdraw.DD_HALINFO, *uint32, *graphicsdirectdraw.VIDEOMEMORY, *uint32, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvGetDirectDrawInfo uintptr
 
-// PFN_DrvGetGlyphMode is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *FONTOBJ) uint32.
+// PFN_DrvGetGlyphMode is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *FONTOBJ) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_DrvGetGlyphMode uintptr
 
-// PFN_DrvGetModes is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, *graphicsgdi.DEVMODEW) uint32.
+// PFN_DrvGetModes is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, *graphicsgdi.DEVMODEW) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_DrvGetModes uintptr
 
-// PFN_DrvGetTrueTypeFile is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *uint32) unsafe.Pointer.
+// PFN_DrvGetTrueTypeFile is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_DrvGetTrueTypeFile uintptr
 
-// PFN_DrvGradientFill is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *CLIPOBJ, *XLATEOBJ, *graphicsgdi.TRIVERTEX, uint32, unsafe.Pointer, uint32, *foundation.RECTL, *foundation.POINTL, uint32) foundation.BOOL.
+// PFN_DrvGradientFill is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *CLIPOBJ, *XLATEOBJ, *graphicsgdi.TRIVERTEX, uint32, unsafe.Pointer, uint32, *foundation.RECTL, *foundation.POINTL, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvGradientFill uintptr
 
-// PFN_DrvIcmCheckBitmapBits is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, foundation.HANDLE, *SURFOBJ, *byte) foundation.BOOL.
+// PFN_DrvIcmCheckBitmapBits is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, foundation.HANDLE, *SURFOBJ, *byte) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvIcmCheckBitmapBits uintptr
 
-// PFN_DrvIcmCreateColorTransform is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *uicolorsystem.LOGCOLORSPACEW, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, uint32) foundation.HANDLE.
+// PFN_DrvIcmCreateColorTransform is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *uicolorsystem.LOGCOLORSPACEW, unsafe.Pointer, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, uint32) uintptr (the native return type is
+// foundation.HANDLE; NewCallback requires a uintptr-sized result).
 type PFN_DrvIcmCreateColorTransform uintptr
 
-// PFN_DrvIcmDeleteColorTransform is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, foundation.HANDLE) foundation.BOOL.
+// PFN_DrvIcmDeleteColorTransform is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvIcmDeleteColorTransform uintptr
 
-// PFN_DrvIcmSetDeviceGammaRamp is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_DrvIcmSetDeviceGammaRamp is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvIcmSetDeviceGammaRamp uintptr
 
-// PFN_DrvLineTo is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *CLIPOBJ, *BRUSHOBJ, int32, int32, int32, int32, *foundation.RECTL, uint32) foundation.BOOL.
+// PFN_DrvLineTo is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *CLIPOBJ, *BRUSHOBJ, int32, int32, int32, int32, *foundation.RECTL, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvLineTo uintptr
 
-// PFN_DrvLoadFontFile is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *uintptr, *unsafe.Pointer, *uint32, *graphicsgdi.DESIGNVECTOR, uint32, uint32) uintptr.
+// PFN_DrvLoadFontFile is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *uintptr, *unsafe.Pointer, *uint32, *graphicsgdi.DESIGNVECTOR, uint32, uint32) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type PFN_DrvLoadFontFile uintptr
 
-// PFN_DrvLockDisplayArea is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *foundation.RECTL).
+// PFN_DrvLockDisplayArea is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *foundation.RECTL) uintptr.
 type PFN_DrvLockDisplayArea uintptr
 
-// PFN_DrvMovePointer is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, int32, int32, *foundation.RECTL).
+// PFN_DrvMovePointer is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, int32, int32, *foundation.RECTL) uintptr.
 type PFN_DrvMovePointer uintptr
 
-// PFN_DrvNextBand is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *foundation.POINTL) foundation.BOOL.
+// PFN_DrvNextBand is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *foundation.POINTL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvNextBand uintptr
 
-// PFN_DrvNotify is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, uint32, unsafe.Pointer).
+// PFN_DrvNotify is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, uint32, unsafe.Pointer) uintptr.
 type PFN_DrvNotify uintptr
 
-// PFN_DrvPaint is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *CLIPOBJ, *BRUSHOBJ, *foundation.POINTL, uint32) foundation.BOOL.
+// PFN_DrvPaint is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *CLIPOBJ, *BRUSHOBJ, *foundation.POINTL, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvPaint uintptr
 
-// PFN_DrvPlgBlt is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *graphicsgdi.COLORADJUSTMENT, *foundation.POINTL, *POINTFIX, *foundation.RECTL, *foundation.POINTL, uint32) foundation.BOOL.
+// PFN_DrvPlgBlt is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *graphicsgdi.COLORADJUSTMENT, *foundation.POINTL, *POINTFIX, *foundation.RECTL, *foundation.POINTL, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvPlgBlt uintptr
 
-// PFN_DrvQueryAdvanceWidths is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *FONTOBJ, uint32, *uint32, unsafe.Pointer, uint32) foundation.BOOL.
+// PFN_DrvQueryAdvanceWidths is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *FONTOBJ, uint32, *uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryAdvanceWidths uintptr
 
-// PFN_DrvQueryDeviceSupport is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *XLATEOBJ, *XFORMOBJ, uint32, uint32, unsafe.Pointer, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_DrvQueryDeviceSupport is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *XLATEOBJ, *XFORMOBJ, uint32, uint32, unsafe.Pointer, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryDeviceSupport uintptr
 
-// PFN_DrvQueryFont is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, uintptr, uint32, *uintptr) *IFIMETRICS.
+// PFN_DrvQueryFont is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, uintptr, uint32, *uintptr) uintptr (the native return type is
+// *IFIMETRICS; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryFont uintptr
 
-// PFN_DrvQueryFontCaps is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *uint32) int32.
+// PFN_DrvQueryFontCaps is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryFontCaps uintptr
 
-// PFN_DrvQueryFontData is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *FONTOBJ, uint32, uint32, *GLYPHDATA, unsafe.Pointer, uint32) int32.
+// PFN_DrvQueryFontData is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *FONTOBJ, uint32, uint32, *GLYPHDATA, unsafe.Pointer, uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryFontData uintptr
 
-// PFN_DrvQueryFontFile is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, uint32, *uint32) int32.
+// PFN_DrvQueryFontFile is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, uint32, *uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryFontFile uintptr
 
-// PFN_DrvQueryFontTree is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, uintptr, uint32, uint32, *uintptr) unsafe.Pointer.
+// PFN_DrvQueryFontTree is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, uintptr, uint32, uint32, *uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryFontTree uintptr
 
-// PFN_DrvQueryGlyphAttrs is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*FONTOBJ, uint32) *FD_GLYPHATTR.
+// PFN_DrvQueryGlyphAttrs is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*FONTOBJ, uint32) uintptr (the native return type is
+// *FD_GLYPHATTR; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryGlyphAttrs uintptr
 
-// PFN_DrvQueryPerBandInfo is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *PERBANDINFO) foundation.BOOL.
+// PFN_DrvQueryPerBandInfo is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *PERBANDINFO) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryPerBandInfo uintptr
 
-// PFN_DrvQuerySpoolType is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, foundation.PWSTR) foundation.BOOL.
+// PFN_DrvQuerySpoolType is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvQuerySpoolType uintptr
 
-// PFN_DrvQueryTrueTypeOutline is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *FONTOBJ, uint32, foundation.BOOL, *GLYPHDATA, uint32, *graphicsgdi.TTPOLYGONHEADER) int32.
+// PFN_DrvQueryTrueTypeOutline is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *FONTOBJ, uint32, foundation.BOOL, *GLYPHDATA, uint32, *graphicsgdi.TTPOLYGONHEADER) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryTrueTypeOutline uintptr
 
-// PFN_DrvQueryTrueTypeSection is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, *foundation.HANDLE, *int32) int32.
+// PFN_DrvQueryTrueTypeSection is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, *foundation.HANDLE, *int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryTrueTypeSection uintptr
 
-// PFN_DrvQueryTrueTypeTable is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, uint32, int32, uint32, *byte, **byte, *uint32) int32.
+// PFN_DrvQueryTrueTypeTable is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, uint32, int32, uint32, *byte, **byte, *uint32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFN_DrvQueryTrueTypeTable uintptr
 
-// PFN_DrvRealizeBrush is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*BRUSHOBJ, *SURFOBJ, *SURFOBJ, *SURFOBJ, *XLATEOBJ, uint32) foundation.BOOL.
+// PFN_DrvRealizeBrush is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*BRUSHOBJ, *SURFOBJ, *SURFOBJ, *SURFOBJ, *XLATEOBJ, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvRealizeBrush uintptr
 
-// PFN_DrvRenderHint is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, uint32, uintptr, unsafe.Pointer) int32.
+// PFN_DrvRenderHint is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, uint32, uintptr, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFN_DrvRenderHint uintptr
 
-// PFN_DrvResetDevice is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, unsafe.Pointer) uint32.
+// PFN_DrvResetDevice is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_DrvResetDevice uintptr
 
-// PFN_DrvResetPDEV is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, DHPDEV) foundation.BOOL.
+// PFN_DrvResetPDEV is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, DHPDEV) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvResetPDEV uintptr
 
-// PFN_DrvSaveScreenBits is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, uint32, uintptr, *foundation.RECTL) uintptr.
+// PFN_DrvSaveScreenBits is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, uint32, uintptr, *foundation.RECTL) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type PFN_DrvSaveScreenBits uintptr
 
-// PFN_DrvSendPage is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ) foundation.BOOL.
+// PFN_DrvSendPage is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvSendPage uintptr
 
-// PFN_DrvSetPalette is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *PALOBJ, uint32, uint32, uint32) foundation.BOOL.
+// PFN_DrvSetPalette is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *PALOBJ, uint32, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvSetPalette uintptr
 
-// PFN_DrvSetPixelFormat is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, int32, foundation.HWND) foundation.BOOL.
+// PFN_DrvSetPixelFormat is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, int32, foundation.HWND) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvSetPixelFormat uintptr
 
-// PFN_DrvSetPointerShape is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *XLATEOBJ, int32, int32, int32, int32, *foundation.RECTL, uint32) uint32.
+// PFN_DrvSetPointerShape is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *XLATEOBJ, int32, int32, int32, int32, *foundation.RECTL, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_DrvSetPointerShape uintptr
 
-// PFN_DrvStartBanding is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *foundation.POINTL) foundation.BOOL.
+// PFN_DrvStartBanding is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *foundation.POINTL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvStartBanding uintptr
 
-// PFN_DrvStartDoc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, foundation.PWSTR, uint32) foundation.BOOL.
+// PFN_DrvStartDoc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvStartDoc uintptr
 
-// PFN_DrvStartDxInterop is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, foundation.BOOL, unsafe.Pointer) foundation.BOOL.
+// PFN_DrvStartDxInterop is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, foundation.BOOL, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvStartDxInterop uintptr
 
-// PFN_DrvStartPage is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ) foundation.BOOL.
+// PFN_DrvStartPage is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvStartPage uintptr
 
-// PFN_DrvStretchBlt is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *graphicsgdi.COLORADJUSTMENT, *foundation.POINTL, *foundation.RECTL, *foundation.RECTL, *foundation.POINTL, uint32) foundation.BOOL.
+// PFN_DrvStretchBlt is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *graphicsgdi.COLORADJUSTMENT, *foundation.POINTL, *foundation.RECTL, *foundation.RECTL, *foundation.POINTL, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvStretchBlt uintptr
 
-// PFN_DrvStretchBltROP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *graphicsgdi.COLORADJUSTMENT, *foundation.POINTL, *foundation.RECTL, *foundation.RECTL, *foundation.POINTL, uint32, *BRUSHOBJ, uint32) foundation.BOOL.
+// PFN_DrvStretchBltROP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *graphicsgdi.COLORADJUSTMENT, *foundation.POINTL, *foundation.RECTL, *foundation.RECTL, *foundation.POINTL, uint32, *BRUSHOBJ, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvStretchBltROP uintptr
 
-// PFN_DrvStrokeAndFillPath is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *PATHOBJ, *CLIPOBJ, *XFORMOBJ, *BRUSHOBJ, *LINEATTRS, *BRUSHOBJ, *foundation.POINTL, uint32, uint32) foundation.BOOL.
+// PFN_DrvStrokeAndFillPath is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *PATHOBJ, *CLIPOBJ, *XFORMOBJ, *BRUSHOBJ, *LINEATTRS, *BRUSHOBJ, *foundation.POINTL, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvStrokeAndFillPath uintptr
 
-// PFN_DrvStrokePath is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *PATHOBJ, *CLIPOBJ, *XFORMOBJ, *BRUSHOBJ, *foundation.POINTL, *LINEATTRS, uint32) foundation.BOOL.
+// PFN_DrvStrokePath is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *PATHOBJ, *CLIPOBJ, *XFORMOBJ, *BRUSHOBJ, *foundation.POINTL, *LINEATTRS, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvStrokePath uintptr
 
-// PFN_DrvSurfaceComplete is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, foundation.HANDLE) foundation.BOOL.
+// PFN_DrvSurfaceComplete is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvSurfaceComplete uintptr
 
-// PFN_DrvSwapBuffers is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *WNDOBJ) foundation.BOOL.
+// PFN_DrvSwapBuffers is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *WNDOBJ) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvSwapBuffers uintptr
 
-// PFN_DrvSynchronize is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *foundation.RECTL).
+// PFN_DrvSynchronize is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *foundation.RECTL) uintptr.
 type PFN_DrvSynchronize uintptr
 
-// PFN_DrvSynchronizeRedirectionBitmaps is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *uint64) foundation.NTSTATUS.
+// PFN_DrvSynchronizeRedirectionBitmaps is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *uint64) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type PFN_DrvSynchronizeRedirectionBitmaps uintptr
 
-// PFN_DrvSynchronizeSurface is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *foundation.RECTL, uint32).
+// PFN_DrvSynchronizeSurface is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *foundation.RECTL, uint32) uintptr.
 type PFN_DrvSynchronizeSurface uintptr
 
-// PFN_DrvTextOut is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *STROBJ, *FONTOBJ, *CLIPOBJ, *foundation.RECTL, *foundation.RECTL, *BRUSHOBJ, *BRUSHOBJ, *foundation.POINTL, uint32) foundation.BOOL.
+// PFN_DrvTextOut is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *STROBJ, *FONTOBJ, *CLIPOBJ, *foundation.RECTL, *foundation.RECTL, *BRUSHOBJ, *BRUSHOBJ, *foundation.POINTL, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvTextOut uintptr
 
-// PFN_DrvTransparentBlt is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *foundation.RECTL, *foundation.RECTL, uint32, uint32) foundation.BOOL.
+// PFN_DrvTransparentBlt is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SURFOBJ, *SURFOBJ, *CLIPOBJ, *XLATEOBJ, *foundation.RECTL, *foundation.RECTL, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvTransparentBlt uintptr
 
-// PFN_DrvUnloadFontFile is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) foundation.BOOL.
+// PFN_DrvUnloadFontFile is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_DrvUnloadFontFile uintptr
 
-// PFN_DrvUnlockDisplayArea is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DHPDEV, *foundation.RECTL).
+// PFN_DrvUnlockDisplayArea is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DHPDEV, *foundation.RECTL) uintptr.
 type PFN_DrvUnlockDisplayArea uintptr
 
-// PVIDEO_WIN32K_CALLOUT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PVIDEO_WIN32K_CALLOUT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PVIDEO_WIN32K_CALLOUT uintptr
 
-// SORTCOMP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer) int32.
+// SORTCOMP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type SORTCOMP uintptr
 
-// WNDOBJCHANGEPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*WNDOBJ, uint32).
+// WNDOBJCHANGEPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*WNDOBJ, uint32) uintptr.
 type WNDOBJCHANGEPROC uintptr

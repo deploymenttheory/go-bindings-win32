@@ -4,10 +4,12 @@
 
 package systeminformation
 
-// PGET_SYSTEM_WOW64_DIRECTORY_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32) uint32.
+// PGET_SYSTEM_WOW64_DIRECTORY_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PGET_SYSTEM_WOW64_DIRECTORY_A uintptr
 
-// PGET_SYSTEM_WOW64_DIRECTORY_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32) uint32.
+// PGET_SYSTEM_WOW64_DIRECTORY_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PGET_SYSTEM_WOW64_DIRECTORY_W uintptr

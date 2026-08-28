@@ -4,6 +4,7 @@
 
 package direct3d11on12
 
-// PFN_D3D11ON12_CREATE_DEVICE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown, uint32, *graphicsdirect3d.D3D_FEATURE_LEVEL, uint32, **systemcom.IUnknown, uint32, uint32, **graphicsdirect3d11.ID3D11Device, **graphicsdirect3d11.ID3D11DeviceContext, *graphicsdirect3d.D3D_FEATURE_LEVEL) foundation.HRESULT.
+// PFN_D3D11ON12_CREATE_DEVICE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown, uint32, *graphicsdirect3d.D3D_FEATURE_LEVEL, uint32, **systemcom.IUnknown, uint32, uint32, **graphicsdirect3d11.ID3D11Device, **graphicsdirect3d11.ID3D11DeviceContext, *graphicsdirect3d.D3D_FEATURE_LEVEL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_D3D11ON12_CREATE_DEVICE uintptr

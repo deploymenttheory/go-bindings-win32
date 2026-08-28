@@ -75,8 +75,14 @@ type {{.TypeName}} {{.Backing}}
 {{define "delegate"}}
 {{- if .DocURL}}// {{.TypeName}}: {{.DocURL}}
 {{end -}}
-// {{.TypeName}} is a callback pointer: create one with NewCallback (package
-// syscall) using the shape {{.Signature}}.
+// {{.TypeName}} is a callback pointer: create one with syscall.NewCallback
+// using the shape {{.Signature}}{{if .NativeReturn}} (the native return type is
+// {{.NativeReturn}}; NewCallback requires a uintptr-sized result){{end}}.
+{{- if .HasFloat}}
+// NewCallback cannot marshal this callback's floating-point parameters or
+// return (golang/go#45300): only a natively implemented function pointer can
+// be passed here.
+{{- end}}
 type {{.TypeName}} uintptr
 
 {{end}}

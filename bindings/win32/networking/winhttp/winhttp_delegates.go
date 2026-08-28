@@ -4,10 +4,10 @@
 
 package winhttp
 
-// WINHTTP_PROXY_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint64, unsafe.Pointer).
+// WINHTTP_PROXY_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint64, unsafe.Pointer) uintptr.
 type WINHTTP_PROXY_CHANGE_CALLBACK uintptr
 
-// WINHTTP_STATUS_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, uint32, unsafe.Pointer, uint32).
+// WINHTTP_STATUS_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, uint32, unsafe.Pointer, uint32) uintptr.
 type WINHTTP_STATUS_CALLBACK uintptr

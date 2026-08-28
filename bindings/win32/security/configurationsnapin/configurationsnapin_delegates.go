@@ -4,26 +4,32 @@
 
 package configurationsnapin
 
-// PFSCE_FREE_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// PFSCE_FREE_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFSCE_FREE_INFO uintptr
 
-// PFSCE_LOG_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(SCE_LOG_ERR_LEVEL, uint32, *int8) uint32.
+// PFSCE_LOG_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(SCE_LOG_ERR_LEVEL, uint32, *int8) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFSCE_LOG_INFO uintptr
 
-// PFSCE_QUERY_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, SCESVC_INFO_TYPE, *int8, foundation.BOOL, *unsafe.Pointer, *uint32) uint32.
+// PFSCE_QUERY_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, SCESVC_INFO_TYPE, *int8, foundation.BOOL, *unsafe.Pointer, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFSCE_QUERY_INFO uintptr
 
-// PFSCE_SET_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, SCESVC_INFO_TYPE, *int8, foundation.BOOL, unsafe.Pointer) uint32.
+// PFSCE_SET_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, SCESVC_INFO_TYPE, *int8, foundation.BOOL, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFSCE_SET_INFO uintptr
 
-// PF_ConfigAnalyzeService is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SCESVC_CALLBACK_INFO) uint32.
+// PF_ConfigAnalyzeService is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SCESVC_CALLBACK_INFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_ConfigAnalyzeService uintptr
 
-// PF_UpdateService is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SCESVC_CALLBACK_INFO, *SCESVC_CONFIGURATION_INFO) uint32.
+// PF_UpdateService is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SCESVC_CALLBACK_INFO, *SCESVC_CONFIGURATION_INFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PF_UpdateService uintptr

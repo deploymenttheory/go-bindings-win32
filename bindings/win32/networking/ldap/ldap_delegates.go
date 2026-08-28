@@ -4,26 +4,32 @@
 
 package ldap
 
-// DBGPRINT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) uint32.
+// DBGPRINT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type DBGPRINT uintptr
 
-// DEREFERENCECONNECTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LDAP, *LDAP) uint32.
+// DEREFERENCECONNECTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LDAP, *LDAP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type DEREFERENCECONNECTION uintptr
 
-// NOTIFYOFNEWCONNECTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LDAP, *LDAP, foundation.PWSTR, foundation.PSTR, *LDAP, uint32, unsafe.Pointer, unsafe.Pointer, uint32) foundation.BOOLEAN.
+// NOTIFYOFNEWCONNECTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LDAP, *LDAP, foundation.PWSTR, foundation.PSTR, *LDAP, uint32, unsafe.Pointer, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type NOTIFYOFNEWCONNECTION uintptr
 
-// QUERYCLIENTCERT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LDAP, *securityauthenticationidentity.SecPkgContext_IssuerListInfoEx, **securitycryptography.CERT_CONTEXT) foundation.BOOLEAN.
+// QUERYCLIENTCERT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LDAP, *securityauthenticationidentity.SecPkgContext_IssuerListInfoEx, **securitycryptography.CERT_CONTEXT) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type QUERYCLIENTCERT uintptr
 
-// QUERYFORCONNECTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LDAP, *LDAP, foundation.PWSTR, foundation.PSTR, uint32, unsafe.Pointer, unsafe.Pointer, **LDAP) uint32.
+// QUERYFORCONNECTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LDAP, *LDAP, foundation.PWSTR, foundation.PSTR, uint32, unsafe.Pointer, unsafe.Pointer, **LDAP) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type QUERYFORCONNECTION uintptr
 
-// VERIFYSERVERCERT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*LDAP, **securitycryptography.CERT_CONTEXT) foundation.BOOLEAN.
+// VERIFYSERVERCERT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*LDAP, **securitycryptography.CERT_CONTEXT) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type VERIFYSERVERCERT uintptr

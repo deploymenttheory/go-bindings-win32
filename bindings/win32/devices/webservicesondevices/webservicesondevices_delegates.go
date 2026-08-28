@@ -4,10 +4,12 @@
 
 package webservicesondevices
 
-// PWSD_SOAP_MESSAGE_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown, *WSD_EVENT) foundation.HRESULT.
+// PWSD_SOAP_MESSAGE_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown, *WSD_EVENT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PWSD_SOAP_MESSAGE_HANDLER uintptr
 
-// WSD_STUB_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown, *IWSDServiceMessaging, *WSD_EVENT) foundation.HRESULT.
+// WSD_STUB_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown, *IWSDServiceMessaging, *WSD_EVENT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type WSD_STUB_FUNCTION uintptr

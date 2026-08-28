@@ -4,6 +4,7 @@
 
 package rightsmanagement
 
-// DRMCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DRM_STATUS_MSG, foundation.HRESULT, unsafe.Pointer, unsafe.Pointer) foundation.HRESULT.
+// DRMCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DRM_STATUS_MSG, foundation.HRESULT, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type DRMCALLBACK uintptr

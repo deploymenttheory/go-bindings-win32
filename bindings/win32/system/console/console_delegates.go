@@ -4,6 +4,7 @@
 
 package console
 
-// PHANDLER_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) foundation.BOOL.
+// PHANDLER_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PHANDLER_ROUTINE uintptr

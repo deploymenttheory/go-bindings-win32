@@ -4,42 +4,44 @@
 
 package services
 
-// HANDLER_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32).
+// HANDLER_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr.
 type HANDLER_FUNCTION uintptr
 
-// HANDLER_FUNCTION_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, unsafe.Pointer, unsafe.Pointer) uint32.
+// HANDLER_FUNCTION_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type HANDLER_FUNCTION_EX uintptr
 
-// LPHANDLER_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32).
+// LPHANDLER_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr.
 type LPHANDLER_FUNCTION uintptr
 
-// LPHANDLER_FUNCTION_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, unsafe.Pointer, unsafe.Pointer) uint32.
+// LPHANDLER_FUNCTION_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPHANDLER_FUNCTION_EX uintptr
 
-// LPSERVICE_MAIN_FUNCTIONA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *foundation.PSTR).
+// LPSERVICE_MAIN_FUNCTIONA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *foundation.PSTR) uintptr.
 type LPSERVICE_MAIN_FUNCTIONA uintptr
 
-// LPSERVICE_MAIN_FUNCTIONW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *foundation.PWSTR).
+// LPSERVICE_MAIN_FUNCTIONW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *foundation.PWSTR) uintptr.
 type LPSERVICE_MAIN_FUNCTIONW uintptr
 
-// PFN_SC_NOTIFY_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFN_SC_NOTIFY_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFN_SC_NOTIFY_CALLBACK uintptr
 
-// PSC_NOTIFICATION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer).
+// PSC_NOTIFICATION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer) uintptr.
 type PSC_NOTIFICATION_CALLBACK uintptr
 
-// SERVICE_MAIN_FUNCTIONA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, **int8).
+// SERVICE_MAIN_FUNCTIONA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, **int8) uintptr.
 type SERVICE_MAIN_FUNCTIONA uintptr
 
-// SERVICE_MAIN_FUNCTIONW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *foundation.PWSTR).
+// SERVICE_MAIN_FUNCTIONW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *foundation.PWSTR) uintptr.
 type SERVICE_MAIN_FUNCTIONW uintptr

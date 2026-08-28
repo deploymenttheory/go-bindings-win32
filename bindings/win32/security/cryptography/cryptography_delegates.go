@@ -4,1082 +4,1337 @@
 
 package cryptography
 
-// BCryptCloseAlgorithmProviderFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_ALG_HANDLE, uint32) foundation.NTSTATUS.
+// BCryptCloseAlgorithmProviderFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_ALG_HANDLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptCloseAlgorithmProviderFn uintptr
 
-// BCryptCreateHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_ALG_HANDLE, *BCRYPT_HASH_HANDLE, *byte, uint32, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptCreateHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_ALG_HANDLE, *BCRYPT_HASH_HANDLE, *byte, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptCreateHashFn uintptr
 
-// BCryptCreateMultiHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_ALG_HANDLE, *BCRYPT_HASH_HANDLE, uint32, *byte, uint32, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptCreateMultiHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_ALG_HANDLE, *BCRYPT_HASH_HANDLE, uint32, *byte, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptCreateMultiHashFn uintptr
 
-// BCryptDecryptFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, *byte, uint32, unsafe.Pointer, *byte, uint32, *byte, uint32, *uint32, uint32) foundation.NTSTATUS.
+// BCryptDecryptFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, *byte, uint32, unsafe.Pointer, *byte, uint32, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptDecryptFn uintptr
 
-// BCryptDeriveKeyCapiFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_HASH_HANDLE, BCRYPT_ALG_HANDLE, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptDeriveKeyCapiFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_HASH_HANDLE, BCRYPT_ALG_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptDeriveKeyCapiFn uintptr
 
-// BCryptDeriveKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_SECRET_HANDLE, foundation.PWSTR, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) foundation.NTSTATUS.
+// BCryptDeriveKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_SECRET_HANDLE, foundation.PWSTR, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptDeriveKeyFn uintptr
 
-// BCryptDeriveKeyPBKDF2Fn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_ALG_HANDLE, *byte, uint32, *byte, uint32, uint64, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptDeriveKeyPBKDF2Fn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_ALG_HANDLE, *byte, uint32, *byte, uint32, uint64, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptDeriveKeyPBKDF2Fn uintptr
 
-// BCryptDestroyHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_HASH_HANDLE) foundation.NTSTATUS.
+// BCryptDestroyHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_HASH_HANDLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptDestroyHashFn uintptr
 
-// BCryptDestroyKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE) foundation.NTSTATUS.
+// BCryptDestroyKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptDestroyKeyFn uintptr
 
-// BCryptDestroySecretFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_SECRET_HANDLE) foundation.NTSTATUS.
+// BCryptDestroySecretFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_SECRET_HANDLE) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptDestroySecretFn uintptr
 
-// BCryptDuplicateHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_HASH_HANDLE, *BCRYPT_HASH_HANDLE, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptDuplicateHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_HASH_HANDLE, *BCRYPT_HASH_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptDuplicateHashFn uintptr
 
-// BCryptDuplicateKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, *BCRYPT_KEY_HANDLE, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptDuplicateKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, *BCRYPT_KEY_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptDuplicateKeyFn uintptr
 
-// BCryptEncryptFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, *byte, uint32, unsafe.Pointer, *byte, uint32, *byte, uint32, *uint32, uint32) foundation.NTSTATUS.
+// BCryptEncryptFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, *byte, uint32, unsafe.Pointer, *byte, uint32, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptEncryptFn uintptr
 
-// BCryptExportKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, BCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) foundation.NTSTATUS.
+// BCryptExportKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, BCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptExportKeyFn uintptr
 
-// BCryptFinalizeKeyPairFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, uint32) foundation.NTSTATUS.
+// BCryptFinalizeKeyPairFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptFinalizeKeyPairFn uintptr
 
-// BCryptFinishHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_HASH_HANDLE, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptFinishHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_HASH_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptFinishHashFn uintptr
 
-// BCryptFreeBufferFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// BCryptFreeBufferFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type BCryptFreeBufferFn uintptr
 
-// BCryptGenRandomFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_ALG_HANDLE, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptGenRandomFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_ALG_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptGenRandomFn uintptr
 
-// BCryptGenerateKeyPairFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_ALG_HANDLE, *BCRYPT_KEY_HANDLE, uint32, uint32) foundation.NTSTATUS.
+// BCryptGenerateKeyPairFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_ALG_HANDLE, *BCRYPT_KEY_HANDLE, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptGenerateKeyPairFn uintptr
 
-// BCryptGenerateSymmetricKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_ALG_HANDLE, *BCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptGenerateSymmetricKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_ALG_HANDLE, *BCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptGenerateSymmetricKeyFn uintptr
 
-// BCryptGetPropertyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) foundation.NTSTATUS.
+// BCryptGetPropertyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptGetPropertyFn uintptr
 
-// BCryptHashDataFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_HASH_HANDLE, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptHashDataFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_HASH_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptHashDataFn uintptr
 
-// BCryptImportKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_ALG_HANDLE, BCRYPT_KEY_HANDLE, foundation.PWSTR, *BCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptImportKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_ALG_HANDLE, BCRYPT_KEY_HANDLE, foundation.PWSTR, *BCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptImportKeyFn uintptr
 
-// BCryptImportKeyPairFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_ALG_HANDLE, BCRYPT_KEY_HANDLE, foundation.PWSTR, *BCRYPT_KEY_HANDLE, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptImportKeyPairFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_ALG_HANDLE, BCRYPT_KEY_HANDLE, foundation.PWSTR, *BCRYPT_KEY_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptImportKeyPairFn uintptr
 
-// BCryptKeyDerivationFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) foundation.NTSTATUS.
+// BCryptKeyDerivationFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptKeyDerivationFn uintptr
 
-// BCryptOpenAlgorithmProviderFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*BCRYPT_ALG_HANDLE, foundation.PWSTR, uint32) foundation.NTSTATUS.
+// BCryptOpenAlgorithmProviderFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*BCRYPT_ALG_HANDLE, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptOpenAlgorithmProviderFn uintptr
 
-// BCryptProcessMultiOperationsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_HANDLE, BCRYPT_MULTI_OPERATION_TYPE, unsafe.Pointer, uint32, uint32) foundation.NTSTATUS.
+// BCryptProcessMultiOperationsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_HANDLE, BCRYPT_MULTI_OPERATION_TYPE, unsafe.Pointer, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptProcessMultiOperationsFn uintptr
 
-// BCryptSecretAgreementFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, BCRYPT_KEY_HANDLE, *BCRYPT_SECRET_HANDLE, uint32) foundation.NTSTATUS.
+// BCryptSecretAgreementFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, BCRYPT_KEY_HANDLE, *BCRYPT_SECRET_HANDLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptSecretAgreementFn uintptr
 
-// BCryptSetPropertyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_HANDLE, foundation.PWSTR, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptSetPropertyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_HANDLE, foundation.PWSTR, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptSetPropertyFn uintptr
 
-// BCryptSignHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, unsafe.Pointer, *byte, uint32, *byte, uint32, *uint32, uint32) foundation.NTSTATUS.
+// BCryptSignHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, unsafe.Pointer, *byte, uint32, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptSignHashFn uintptr
 
-// BCryptVerifySignatureFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, unsafe.Pointer, *byte, uint32, *byte, uint32, uint32) foundation.NTSTATUS.
+// BCryptVerifySignatureFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, unsafe.Pointer, *byte, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type BCryptVerifySignatureFn uintptr
 
-// CRYPT_RETURN_HWND is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*foundation.HWND).
+// CRYPT_RETURN_HWND is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*foundation.HWND) uintptr.
 type CRYPT_RETURN_HWND uintptr
 
-// CRYPT_VERIFY_IMAGE_A is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, *byte) foundation.BOOL.
+// CRYPT_VERIFY_IMAGE_A is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, *byte) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CRYPT_VERIFY_IMAGE_A uintptr
 
-// CRYPT_VERIFY_IMAGE_W is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *byte) foundation.BOOL.
+// CRYPT_VERIFY_IMAGE_W is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *byte) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CRYPT_VERIFY_IMAGE_W uintptr
 
-// CryptXmlDllCloseDigest is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// CryptXmlDllCloseDigest is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllCloseDigest uintptr
 
-// CryptXmlDllCreateDigest is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_XML_ALGORITHM, *uint32, *unsafe.Pointer) foundation.HRESULT.
+// CryptXmlDllCreateDigest is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_XML_ALGORITHM, *uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllCreateDigest uintptr
 
-// CryptXmlDllCreateKey is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_XML_BLOB, *BCRYPT_KEY_HANDLE) foundation.HRESULT.
+// CryptXmlDllCreateKey is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_XML_BLOB, *BCRYPT_KEY_HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllCreateKey uintptr
 
-// CryptXmlDllDigestData is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte, uint32) foundation.HRESULT.
+// CryptXmlDllDigestData is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllDigestData uintptr
 
-// CryptXmlDllEncodeAlgorithm is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_XML_ALGORITHM_INFO, CRYPT_XML_CHARSET, unsafe.Pointer, PFN_CRYPT_XML_WRITE_CALLBACK) foundation.HRESULT.
+// CryptXmlDllEncodeAlgorithm is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_XML_ALGORITHM_INFO, CRYPT_XML_CHARSET, unsafe.Pointer, PFN_CRYPT_XML_WRITE_CALLBACK) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllEncodeAlgorithm uintptr
 
-// CryptXmlDllEncodeKeyValue is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_KEY_HANDLE, CRYPT_XML_CHARSET, unsafe.Pointer, PFN_CRYPT_XML_WRITE_CALLBACK) foundation.HRESULT.
+// CryptXmlDllEncodeKeyValue is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_KEY_HANDLE, CRYPT_XML_CHARSET, unsafe.Pointer, PFN_CRYPT_XML_WRITE_CALLBACK) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllEncodeKeyValue uintptr
 
-// CryptXmlDllFinalizeDigest is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte, uint32) foundation.HRESULT.
+// CryptXmlDllFinalizeDigest is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllFinalizeDigest uintptr
 
-// CryptXmlDllGetAlgorithmInfo is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_XML_ALGORITHM, **CRYPT_XML_ALGORITHM_INFO) foundation.HRESULT.
+// CryptXmlDllGetAlgorithmInfo is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_XML_ALGORITHM, **CRYPT_XML_ALGORITHM_INFO) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllGetAlgorithmInfo uintptr
 
-// CryptXmlDllGetInterface is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *CRYPT_XML_ALGORITHM_INFO, *CRYPT_XML_CRYPTOGRAPHIC_INTERFACE) foundation.HRESULT.
+// CryptXmlDllGetInterface is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *CRYPT_XML_ALGORITHM_INFO, *CRYPT_XML_CRYPTOGRAPHIC_INTERFACE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllGetInterface uintptr
 
-// CryptXmlDllSignData is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_XML_ALGORITHM, HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, uint32, *byte, uint32, *byte, uint32, *uint32) foundation.HRESULT.
+// CryptXmlDllSignData is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_XML_ALGORITHM, HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, uint32, *byte, uint32, *byte, uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllSignData uintptr
 
-// CryptXmlDllVerifySignature is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_XML_ALGORITHM, BCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32) foundation.HRESULT.
+// CryptXmlDllVerifySignature is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_XML_ALGORITHM, BCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type CryptXmlDllVerifySignature uintptr
 
-// GetAsymmetricEncryptionInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_ASYMMETRIC_ENCRYPTION_FUNCTION_TABLE, uint32) foundation.NTSTATUS.
+// GetAsymmetricEncryptionInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_ASYMMETRIC_ENCRYPTION_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type GetAsymmetricEncryptionInterfaceFn uintptr
 
-// GetCipherInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_CIPHER_FUNCTION_TABLE, uint32) foundation.NTSTATUS.
+// GetCipherInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_CIPHER_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type GetCipherInterfaceFn uintptr
 
-// GetHashInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_HASH_FUNCTION_TABLE, uint32) foundation.NTSTATUS.
+// GetHashInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_HASH_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type GetHashInterfaceFn uintptr
 
-// GetKeyDerivationInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_KEY_DERIVATION_FUNCTION_TABLE, uint32) foundation.NTSTATUS.
+// GetKeyDerivationInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_KEY_DERIVATION_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type GetKeyDerivationInterfaceFn uintptr
 
-// GetKeyStorageInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, **NCRYPT_KEY_STORAGE_FUNCTION_TABLE, uint32) foundation.NTSTATUS.
+// GetKeyStorageInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, **NCRYPT_KEY_STORAGE_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type GetKeyStorageInterfaceFn uintptr
 
-// GetRngInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, **BCRYPT_RNG_FUNCTION_TABLE, uint32) foundation.NTSTATUS.
+// GetRngInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, **BCRYPT_RNG_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type GetRngInterfaceFn uintptr
 
-// GetSChannelInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, **NCRYPT_SSL_FUNCTION_TABLE, uint32) foundation.NTSTATUS.
+// GetSChannelInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, **NCRYPT_SSL_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type GetSChannelInterfaceFn uintptr
 
-// GetSecretAgreementInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_SECRET_AGREEMENT_FUNCTION_TABLE, uint32) foundation.NTSTATUS.
+// GetSecretAgreementInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_SECRET_AGREEMENT_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type GetSecretAgreementInterfaceFn uintptr
 
-// GetSignatureInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_SIGNATURE_FUNCTION_TABLE, uint32) foundation.NTSTATUS.
+// GetSignatureInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, **BCRYPT_SIGNATURE_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.NTSTATUS; NewCallback requires a uintptr-sized result).
 type GetSignatureInterfaceFn uintptr
 
-// NCryptCreateClaimFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, uint32, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// NCryptCreateClaimFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, uint32, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptCreateClaimFn uintptr
 
-// NCryptCreatePersistedKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, foundation.PWSTR, foundation.PWSTR, uint32, uint32) foundation.HRESULT.
+// NCryptCreatePersistedKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, foundation.PWSTR, foundation.PWSTR, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptCreatePersistedKeyFn uintptr
 
-// NCryptDecryptFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, unsafe.Pointer, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// NCryptDecryptFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, unsafe.Pointer, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptDecryptFn uintptr
 
-// NCryptDeleteKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, uint32) foundation.HRESULT.
+// NCryptDeleteKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptDeleteKeyFn uintptr
 
-// NCryptDeriveKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_SECRET_HANDLE, foundation.PWSTR, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// NCryptDeriveKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_SECRET_HANDLE, foundation.PWSTR, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptDeriveKeyFn uintptr
 
-// NCryptEncryptFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, unsafe.Pointer, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// NCryptEncryptFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, unsafe.Pointer, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptEncryptFn uintptr
 
-// NCryptEnumAlgorithmsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, uint32, *uint32, **NCryptAlgorithmName, uint32) foundation.HRESULT.
+// NCryptEnumAlgorithmsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, uint32, *uint32, **NCryptAlgorithmName, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptEnumAlgorithmsFn uintptr
 
-// NCryptEnumKeysFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, **NCryptKeyName, *unsafe.Pointer, uint32) foundation.HRESULT.
+// NCryptEnumKeysFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, **NCryptKeyName, *unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptEnumKeysFn uintptr
 
-// NCryptEnumStorageProvidersFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, **NCryptProviderName, uint32) foundation.HRESULT.
+// NCryptEnumStorageProvidersFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, **NCryptProviderName, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptEnumStorageProvidersFn uintptr
 
-// NCryptExportKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// NCryptExportKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptExportKeyFn uintptr
 
-// NCryptFinalizeKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, uint32) foundation.HRESULT.
+// NCryptFinalizeKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptFinalizeKeyFn uintptr
 
-// NCryptFreeBufferFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// NCryptFreeBufferFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptFreeBufferFn uintptr
 
-// NCryptFreeKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE) foundation.HRESULT.
+// NCryptFreeKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptFreeKeyFn uintptr
 
-// NCryptFreeProviderFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE) foundation.HRESULT.
+// NCryptFreeProviderFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptFreeProviderFn uintptr
 
-// NCryptFreeSecretFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_SECRET_HANDLE) foundation.HRESULT.
+// NCryptFreeSecretFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_SECRET_HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptFreeSecretFn uintptr
 
-// NCryptGetKeyPropertyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// NCryptGetKeyPropertyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptGetKeyPropertyFn uintptr
 
-// NCryptGetProviderPropertyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// NCryptGetProviderPropertyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptGetProviderPropertyFn uintptr
 
-// NCryptImportKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *BCryptBufferDesc, *NCRYPT_KEY_HANDLE, *byte, uint32, uint32) foundation.HRESULT.
+// NCryptImportKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *BCryptBufferDesc, *NCRYPT_KEY_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptImportKeyFn uintptr
 
-// NCryptIsAlgSupportedFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, uint32) foundation.HRESULT.
+// NCryptIsAlgSupportedFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptIsAlgSupportedFn uintptr
 
-// NCryptKeyDerivationFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// NCryptKeyDerivationFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptKeyDerivationFn uintptr
 
-// NCryptNotifyChangeKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, *foundation.HANDLE, uint32) foundation.HRESULT.
+// NCryptNotifyChangeKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, *foundation.HANDLE, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptNotifyChangeKeyFn uintptr
 
-// NCryptOpenKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, foundation.PWSTR, uint32, uint32) foundation.HRESULT.
+// NCryptOpenKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, foundation.PWSTR, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptOpenKeyFn uintptr
 
-// NCryptOpenStorageProviderFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*NCRYPT_PROV_HANDLE, foundation.PWSTR, uint32) foundation.HRESULT.
+// NCryptOpenStorageProviderFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*NCRYPT_PROV_HANDLE, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptOpenStorageProviderFn uintptr
 
-// NCryptPromptUserFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, uint32) foundation.HRESULT.
+// NCryptPromptUserFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptPromptUserFn uintptr
 
-// NCryptSecretAgreementFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_SECRET_HANDLE, uint32) foundation.HRESULT.
+// NCryptSecretAgreementFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_SECRET_HANDLE, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptSecretAgreementFn uintptr
 
-// NCryptSetKeyPropertyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, uint32) foundation.HRESULT.
+// NCryptSetKeyPropertyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptSetKeyPropertyFn uintptr
 
-// NCryptSetProviderPropertyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, *byte, uint32, uint32) foundation.HRESULT.
+// NCryptSetProviderPropertyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptSetProviderPropertyFn uintptr
 
-// NCryptSignHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, unsafe.Pointer, *byte, uint32, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// NCryptSignHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, unsafe.Pointer, *byte, uint32, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptSignHashFn uintptr
 
-// NCryptVerifyClaimFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, uint32, *BCryptBufferDesc, *byte, uint32, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// NCryptVerifyClaimFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, uint32, *BCryptBufferDesc, *byte, uint32, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptVerifyClaimFn uintptr
 
-// NCryptVerifySignatureFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, unsafe.Pointer, *byte, uint32, *byte, uint32, uint32) foundation.HRESULT.
+// NCryptVerifySignatureFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, unsafe.Pointer, *byte, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type NCryptVerifySignatureFn uintptr
 
-// PCRYPT_DECRYPT_PRIVATE_KEY_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(CRYPT_ALGORITHM_IDENTIFIER, CRYPT_INTEGER_BLOB, *byte, *uint32, unsafe.Pointer) foundation.BOOL.
+// PCRYPT_DECRYPT_PRIVATE_KEY_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(CRYPT_ALGORITHM_IDENTIFIER, CRYPT_INTEGER_BLOB, *byte, *uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCRYPT_DECRYPT_PRIVATE_KEY_FUNC uintptr
 
-// PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_ALGORITHM_IDENTIFIER, *CRYPT_INTEGER_BLOB, *byte, *uint32, unsafe.Pointer) foundation.BOOL.
+// PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_ALGORITHM_IDENTIFIER, *CRYPT_INTEGER_BLOB, *byte, *uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC uintptr
 
-// PCRYPT_RESOLVE_HCRYPTPROV_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PRIVATE_KEY_INFO, *uintptr, unsafe.Pointer) foundation.BOOL.
+// PCRYPT_RESOLVE_HCRYPTPROV_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PRIVATE_KEY_INFO, *uintptr, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCRYPT_RESOLVE_HCRYPTPROV_FUNC uintptr
 
-// PFNCryptStreamOutputCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte, uintptr, foundation.BOOL) foundation.HRESULT.
+// PFNCryptStreamOutputCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte, uintptr, foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNCryptStreamOutputCallback uintptr
 
-// PFNCryptStreamOutputCallbackEx is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte, uintptr, security.NCRYPT_DESCRIPTOR_HANDLE, foundation.BOOL) foundation.HRESULT.
+// PFNCryptStreamOutputCallbackEx is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte, uintptr, security.NCRYPT_DESCRIPTOR_HANDLE, foundation.BOOL) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNCryptStreamOutputCallbackEx uintptr
 
-// PFN_AUTHENTICODE_DIGEST_SIGN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CERT_CONTEXT, *CRYPT_INTEGER_BLOB, ALG_ID, *byte, uint32, *CRYPT_INTEGER_BLOB) foundation.HRESULT.
+// PFN_AUTHENTICODE_DIGEST_SIGN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CERT_CONTEXT, *CRYPT_INTEGER_BLOB, ALG_ID, *byte, uint32, *CRYPT_INTEGER_BLOB) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_AUTHENTICODE_DIGEST_SIGN uintptr
 
-// PFN_AUTHENTICODE_DIGEST_SIGN_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_INTEGER_BLOB, ALG_ID, *byte, uint32, *CRYPT_INTEGER_BLOB, **CERT_CONTEXT, HCERTSTORE) foundation.HRESULT.
+// PFN_AUTHENTICODE_DIGEST_SIGN_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_INTEGER_BLOB, ALG_ID, *byte, uint32, *CRYPT_INTEGER_BLOB, **CERT_CONTEXT, HCERTSTORE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_AUTHENTICODE_DIGEST_SIGN_EX uintptr
 
-// PFN_AUTHENTICODE_DIGEST_SIGN_EX_WITHFILEHANDLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_INTEGER_BLOB, ALG_ID, *byte, uint32, foundation.HANDLE, *CRYPT_INTEGER_BLOB, **CERT_CONTEXT, HCERTSTORE) foundation.HRESULT.
+// PFN_AUTHENTICODE_DIGEST_SIGN_EX_WITHFILEHANDLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_INTEGER_BLOB, ALG_ID, *byte, uint32, foundation.HANDLE, *CRYPT_INTEGER_BLOB, **CERT_CONTEXT, HCERTSTORE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_AUTHENTICODE_DIGEST_SIGN_EX_WITHFILEHANDLE uintptr
 
-// PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CERT_CONTEXT, *CRYPT_INTEGER_BLOB, ALG_ID, *byte, uint32, foundation.HANDLE, *CRYPT_INTEGER_BLOB) foundation.HRESULT.
+// PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CERT_CONTEXT, *CRYPT_INTEGER_BLOB, ALG_ID, *byte, uint32, foundation.HANDLE, *CRYPT_INTEGER_BLOB) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE uintptr
 
-// PFN_CANCEL_ASYNC_RETRIEVAL_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCRYPTASYNC) foundation.BOOL.
+// PFN_CANCEL_ASYNC_RETRIEVAL_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCRYPTASYNC) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CANCEL_ASYNC_RETRIEVAL_FUNC uintptr
 
-// PFN_CARD_ACQUIRE_CONTEXT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uint32) uint32.
+// PFN_CARD_ACQUIRE_CONTEXT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_ACQUIRE_CONTEXT uintptr
 
-// PFN_CARD_AUTHENTICATE_CHALLENGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, *byte, uint32, *uint32) uint32.
+// PFN_CARD_AUTHENTICATE_CHALLENGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, *byte, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_AUTHENTICATE_CHALLENGE uintptr
 
-// PFN_CARD_AUTHENTICATE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uint32, uint32, *byte, uint32, **byte, *uint32, *uint32) uint32.
+// PFN_CARD_AUTHENTICATE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uint32, uint32, *byte, uint32, **byte, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_AUTHENTICATE_EX uintptr
 
-// PFN_CARD_AUTHENTICATE_PIN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, *uint32) uint32.
+// PFN_CARD_AUTHENTICATE_PIN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_AUTHENTICATE_PIN uintptr
 
-// PFN_CARD_CHANGE_AUTHENTICATOR is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, *byte, uint32, uint32, uint32, *uint32) uint32.
+// PFN_CARD_CHANGE_AUTHENTICATOR is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, *byte, uint32, uint32, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_CHANGE_AUTHENTICATOR uintptr
 
-// PFN_CARD_CHANGE_AUTHENTICATOR_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uint32, uint32, *byte, uint32, uint32, *byte, uint32, uint32, *uint32) uint32.
+// PFN_CARD_CHANGE_AUTHENTICATOR_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uint32, uint32, *byte, uint32, uint32, *byte, uint32, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_CHANGE_AUTHENTICATOR_EX uintptr
 
-// PFN_CARD_CONSTRUCT_DH_AGREEMENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, *CARD_DH_AGREEMENT_INFO) uint32.
+// PFN_CARD_CONSTRUCT_DH_AGREEMENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, *CARD_DH_AGREEMENT_INFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_CONSTRUCT_DH_AGREEMENT uintptr
 
-// PFN_CARD_CREATE_CONTAINER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, byte, uint32, uint32, uint32, *byte) uint32.
+// PFN_CARD_CREATE_CONTAINER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, byte, uint32, uint32, uint32, *byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_CREATE_CONTAINER uintptr
 
-// PFN_CARD_CREATE_CONTAINER_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, byte, uint32, uint32, uint32, *byte, uint32) uint32.
+// PFN_CARD_CREATE_CONTAINER_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, byte, uint32, uint32, uint32, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_CREATE_CONTAINER_EX uintptr
 
-// PFN_CARD_CREATE_DIRECTORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PSTR, CARD_DIRECTORY_ACCESS_CONDITION) uint32.
+// PFN_CARD_CREATE_DIRECTORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PSTR, CARD_DIRECTORY_ACCESS_CONDITION) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_CREATE_DIRECTORY uintptr
 
-// PFN_CARD_CREATE_FILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, uint32, CARD_FILE_ACCESS_CONDITION) uint32.
+// PFN_CARD_CREATE_FILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, uint32, CARD_FILE_ACCESS_CONDITION) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_CREATE_FILE uintptr
 
-// PFN_CARD_DEAUTHENTICATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PWSTR, uint32) uint32.
+// PFN_CARD_DEAUTHENTICATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PWSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_DEAUTHENTICATE uintptr
 
-// PFN_CARD_DEAUTHENTICATE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uint32, uint32) uint32.
+// PFN_CARD_DEAUTHENTICATE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_DEAUTHENTICATE_EX uintptr
 
-// PFN_CARD_DELETE_CONTAINER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, byte, uint32) uint32.
+// PFN_CARD_DELETE_CONTAINER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_DELETE_CONTAINER uintptr
 
-// PFN_CARD_DELETE_CONTEXT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA) uint32.
+// PFN_CARD_DELETE_CONTEXT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_DELETE_CONTEXT uintptr
 
-// PFN_CARD_DELETE_DIRECTORY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PSTR) uint32.
+// PFN_CARD_DELETE_DIRECTORY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_DELETE_DIRECTORY uintptr
 
-// PFN_CARD_DELETE_FILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, uint32) uint32.
+// PFN_CARD_DELETE_FILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_DELETE_FILE uintptr
 
-// PFN_CARD_DERIVE_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, *CARD_DERIVE_KEY) uint32.
+// PFN_CARD_DERIVE_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, *CARD_DERIVE_KEY) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_DERIVE_KEY uintptr
 
-// PFN_CARD_DESTROY_DH_AGREEMENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, byte, uint32) uint32.
+// PFN_CARD_DESTROY_DH_AGREEMENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_DESTROY_DH_AGREEMENT uintptr
 
-// PFN_CARD_DESTROY_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uintptr) uint32.
+// PFN_CARD_DESTROY_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_DESTROY_KEY uintptr
 
-// PFN_CARD_ENUM_FILES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PSTR, *foundation.PSTR, *uint32, uint32) uint32.
+// PFN_CARD_ENUM_FILES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PSTR, *foundation.PSTR, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_ENUM_FILES uintptr
 
-// PFN_CARD_GET_ALGORITHM_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PWSTR, foundation.PWSTR, *byte, uint32, *uint32, uint32) uint32.
+// PFN_CARD_GET_ALGORITHM_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PWSTR, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_GET_ALGORITHM_PROPERTY uintptr
 
-// PFN_CARD_GET_CHALLENGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, **byte, *uint32) uint32.
+// PFN_CARD_GET_CHALLENGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_GET_CHALLENGE uintptr
 
-// PFN_CARD_GET_CHALLENGE_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uint32, **byte, *uint32, uint32) uint32.
+// PFN_CARD_GET_CHALLENGE_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uint32, **byte, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_GET_CHALLENGE_EX uintptr
 
-// PFN_CARD_GET_CONTAINER_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, byte, uint32, *CONTAINER_INFO) uint32.
+// PFN_CARD_GET_CONTAINER_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, byte, uint32, *CONTAINER_INFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_GET_CONTAINER_INFO uintptr
 
-// PFN_CARD_GET_CONTAINER_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, byte, foundation.PWSTR, *byte, uint32, *uint32, uint32) uint32.
+// PFN_CARD_GET_CONTAINER_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, byte, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_GET_CONTAINER_PROPERTY uintptr
 
-// PFN_CARD_GET_FILE_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, *CARD_FILE_INFO) uint32.
+// PFN_CARD_GET_FILE_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, *CARD_FILE_INFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_GET_FILE_INFO uintptr
 
-// PFN_CARD_GET_KEY_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uintptr, foundation.PWSTR, *byte, uint32, *uint32, uint32) uint32.
+// PFN_CARD_GET_KEY_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uintptr, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_GET_KEY_PROPERTY uintptr
 
-// PFN_CARD_GET_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, *uint32, uint32) uint32.
+// PFN_CARD_GET_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_GET_PROPERTY uintptr
 
-// PFN_CARD_GET_SHARED_KEY_HANDLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, *byte, uint32, **byte, *uint32, *uintptr) uint32.
+// PFN_CARD_GET_SHARED_KEY_HANDLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, *byte, uint32, **byte, *uint32, *uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_GET_SHARED_KEY_HANDLE uintptr
 
-// PFN_CARD_IMPORT_SESSION_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, byte, unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, *uintptr, *byte, uint32, uint32) uint32.
+// PFN_CARD_IMPORT_SESSION_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, byte, unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, *uintptr, *byte, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_IMPORT_SESSION_KEY uintptr
 
-// PFN_CARD_PROCESS_ENCRYPTED_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uintptr, foundation.PWSTR, *CARD_ENCRYPTED_DATA, uint32, *byte, uint32, *uint32, uint32) uint32.
+// PFN_CARD_PROCESS_ENCRYPTED_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uintptr, foundation.PWSTR, *CARD_ENCRYPTED_DATA, uint32, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_PROCESS_ENCRYPTED_DATA uintptr
 
-// PFN_CARD_QUERY_CAPABILITIES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, *CARD_CAPABILITIES) uint32.
+// PFN_CARD_QUERY_CAPABILITIES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, *CARD_CAPABILITIES) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_QUERY_CAPABILITIES uintptr
 
-// PFN_CARD_QUERY_FREE_SPACE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uint32, *CARD_FREE_SPACE_INFO) uint32.
+// PFN_CARD_QUERY_FREE_SPACE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uint32, *CARD_FREE_SPACE_INFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_QUERY_FREE_SPACE uintptr
 
-// PFN_CARD_QUERY_KEY_SIZES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uint32, uint32, *CARD_KEY_SIZES) uint32.
+// PFN_CARD_QUERY_KEY_SIZES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uint32, uint32, *CARD_KEY_SIZES) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_QUERY_KEY_SIZES uintptr
 
-// PFN_CARD_READ_FILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, uint32, **byte, *uint32) uint32.
+// PFN_CARD_READ_FILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, uint32, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_READ_FILE uintptr
 
-// PFN_CARD_RSA_DECRYPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, *CARD_RSA_DECRYPT_INFO) uint32.
+// PFN_CARD_RSA_DECRYPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, *CARD_RSA_DECRYPT_INFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_RSA_DECRYPT uintptr
 
-// PFN_CARD_SET_CONTAINER_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, byte, foundation.PWSTR, *byte, uint32, uint32) uint32.
+// PFN_CARD_SET_CONTAINER_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, byte, foundation.PWSTR, *byte, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_SET_CONTAINER_PROPERTY uintptr
 
-// PFN_CARD_SET_KEY_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uintptr, foundation.PWSTR, *byte, uint32, uint32) uint32.
+// PFN_CARD_SET_KEY_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uintptr, foundation.PWSTR, *byte, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_SET_KEY_PROPERTY uintptr
 
-// PFN_CARD_SET_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, uint32) uint32.
+// PFN_CARD_SET_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_SET_PROPERTY uintptr
 
-// PFN_CARD_SIGN_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, *CARD_SIGNING_INFO) uint32.
+// PFN_CARD_SIGN_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, *CARD_SIGNING_INFO) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_SIGN_DATA uintptr
 
-// PFN_CARD_UNBLOCK_PIN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, *byte, uint32, uint32, uint32) uint32.
+// PFN_CARD_UNBLOCK_PIN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PWSTR, *byte, uint32, *byte, uint32, uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_UNBLOCK_PIN uintptr
 
-// PFN_CARD_WRITE_FILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, uint32, *byte, uint32) uint32.
+// PFN_CARD_WRITE_FILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PSTR, foundation.PSTR, uint32, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CARD_WRITE_FILE uintptr
 
-// PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CERT_CONTEXT, unsafe.Pointer) foundation.BOOL.
+// PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CERT_CONTEXT, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK uintptr
 
-// PFN_CERT_CREATE_CONTEXT_SORT_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CERT_CREATE_CONTEXT_SORT_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_CREATE_CONTEXT_SORT_FUNC uintptr
 
-// PFN_CERT_DLL_OPEN_STORE_PROV_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, CERT_QUERY_ENCODING_TYPE, HCRYPTPROV_LEGACY, CERT_OPEN_STORE_FLAGS, unsafe.Pointer, HCERTSTORE, *CERT_STORE_PROV_INFO) foundation.BOOL.
+// PFN_CERT_DLL_OPEN_STORE_PROV_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, CERT_QUERY_ENCODING_TYPE, HCRYPTPROV_LEGACY, CERT_OPEN_STORE_FLAGS, unsafe.Pointer, HCERTSTORE, *CERT_STORE_PROV_INFO) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_DLL_OPEN_STORE_PROV_FUNC uintptr
 
-// PFN_CERT_ENUM_PHYSICAL_STORE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *CERT_PHYSICAL_STORE_INFO, unsafe.Pointer, unsafe.Pointer) foundation.BOOL.
+// PFN_CERT_ENUM_PHYSICAL_STORE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PWSTR, *CERT_PHYSICAL_STORE_INFO, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_ENUM_PHYSICAL_STORE uintptr
 
-// PFN_CERT_ENUM_SYSTEM_STORE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, CERT_SYSTEM_STORE_FLAGS, *CERT_SYSTEM_STORE_INFO, unsafe.Pointer, unsafe.Pointer) foundation.BOOL.
+// PFN_CERT_ENUM_SYSTEM_STORE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, CERT_SYSTEM_STORE_FLAGS, *CERT_SYSTEM_STORE_INFO, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_ENUM_SYSTEM_STORE uintptr
 
-// PFN_CERT_ENUM_SYSTEM_STORE_LOCATION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, unsafe.Pointer) foundation.BOOL.
+// PFN_CERT_ENUM_SYSTEM_STORE_LOCATION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, unsafe.Pointer, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_ENUM_SYSTEM_STORE_LOCATION uintptr
 
-// PFN_CERT_IS_WEAK_HASH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PWSTR, uint32, *CERT_CHAIN_CONTEXT, *foundation.FILETIME, foundation.PWSTR) foundation.BOOL.
+// PFN_CERT_IS_WEAK_HASH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PWSTR, uint32, *CERT_CHAIN_CONTEXT, *foundation.FILETIME, foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_IS_WEAK_HASH uintptr
 
-// PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CERT_CHAIN_CONTEXT, *CERT_SERVER_OCSP_RESPONSE_CONTEXT, *CRL_CONTEXT, *CRL_CONTEXT, unsafe.Pointer, uint32).
+// PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CERT_CHAIN_CONTEXT, *CERT_SERVER_OCSP_RESPONSE_CONTEXT, *CRL_CONTEXT, *CRL_CONTEXT, unsafe.Pointer, uint32) uintptr.
 type PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK uintptr
 
-// PFN_CERT_STORE_PROV_CLOSE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, uint32).
+// PFN_CERT_STORE_PROV_CLOSE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, uint32) uintptr.
 type PFN_CERT_STORE_PROV_CLOSE uintptr
 
-// PFN_CERT_STORE_PROV_CONTROL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CERT_STORE_PROV_CONTROL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_CONTROL uintptr
 
-// PFN_CERT_STORE_PROV_DELETE_CERT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_DELETE_CERT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_DELETE_CERT uintptr
 
-// PFN_CERT_STORE_PROV_DELETE_CRL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_DELETE_CRL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_DELETE_CRL uintptr
 
-// PFN_CERT_STORE_PROV_DELETE_CTL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_DELETE_CTL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_DELETE_CTL uintptr
 
-// PFN_CERT_STORE_PROV_FIND_CERT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CERT_STORE_PROV_FIND_INFO, *CERT_CONTEXT, uint32, *unsafe.Pointer, **CERT_CONTEXT) foundation.BOOL.
+// PFN_CERT_STORE_PROV_FIND_CERT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CERT_STORE_PROV_FIND_INFO, *CERT_CONTEXT, uint32, *unsafe.Pointer, **CERT_CONTEXT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_FIND_CERT uintptr
 
-// PFN_CERT_STORE_PROV_FIND_CRL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CERT_STORE_PROV_FIND_INFO, *CRL_CONTEXT, uint32, *unsafe.Pointer, **CRL_CONTEXT) foundation.BOOL.
+// PFN_CERT_STORE_PROV_FIND_CRL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CERT_STORE_PROV_FIND_INFO, *CRL_CONTEXT, uint32, *unsafe.Pointer, **CRL_CONTEXT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_FIND_CRL uintptr
 
-// PFN_CERT_STORE_PROV_FIND_CTL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CERT_STORE_PROV_FIND_INFO, *CTL_CONTEXT, uint32, *unsafe.Pointer, **CTL_CONTEXT) foundation.BOOL.
+// PFN_CERT_STORE_PROV_FIND_CTL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CERT_STORE_PROV_FIND_INFO, *CTL_CONTEXT, uint32, *unsafe.Pointer, **CTL_CONTEXT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_FIND_CTL uintptr
 
-// PFN_CERT_STORE_PROV_FREE_FIND_CERT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, unsafe.Pointer, uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_FREE_FIND_CERT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_FREE_FIND_CERT uintptr
 
-// PFN_CERT_STORE_PROV_FREE_FIND_CRL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, unsafe.Pointer, uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_FREE_FIND_CRL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_FREE_FIND_CRL uintptr
 
-// PFN_CERT_STORE_PROV_FREE_FIND_CTL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, unsafe.Pointer, uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_FREE_FIND_CTL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_FREE_FIND_CTL uintptr
 
-// PFN_CERT_STORE_PROV_GET_CERT_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32, uint32, unsafe.Pointer, *uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_GET_CERT_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32, uint32, unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_GET_CERT_PROPERTY uintptr
 
-// PFN_CERT_STORE_PROV_GET_CRL_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32, uint32, unsafe.Pointer, *uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_GET_CRL_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32, uint32, unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_GET_CRL_PROPERTY uintptr
 
-// PFN_CERT_STORE_PROV_GET_CTL_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32, uint32, unsafe.Pointer, *uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_GET_CTL_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32, uint32, unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_GET_CTL_PROPERTY uintptr
 
-// PFN_CERT_STORE_PROV_READ_CERT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32, **CERT_CONTEXT) foundation.BOOL.
+// PFN_CERT_STORE_PROV_READ_CERT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32, **CERT_CONTEXT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_READ_CERT uintptr
 
-// PFN_CERT_STORE_PROV_READ_CRL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32, **CRL_CONTEXT) foundation.BOOL.
+// PFN_CERT_STORE_PROV_READ_CRL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32, **CRL_CONTEXT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_READ_CRL uintptr
 
-// PFN_CERT_STORE_PROV_READ_CTL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32, **CTL_CONTEXT) foundation.BOOL.
+// PFN_CERT_STORE_PROV_READ_CTL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32, **CTL_CONTEXT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_READ_CTL uintptr
 
-// PFN_CERT_STORE_PROV_SET_CERT_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CERT_STORE_PROV_SET_CERT_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_SET_CERT_PROPERTY uintptr
 
-// PFN_CERT_STORE_PROV_SET_CRL_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CERT_STORE_PROV_SET_CRL_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_SET_CRL_PROPERTY uintptr
 
-// PFN_CERT_STORE_PROV_SET_CTL_PROPERTY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CERT_STORE_PROV_SET_CTL_PROPERTY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_SET_CTL_PROPERTY uintptr
 
-// PFN_CERT_STORE_PROV_WRITE_CERT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_WRITE_CERT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CERT_CONTEXT, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_WRITE_CERT uintptr
 
-// PFN_CERT_STORE_PROV_WRITE_CRL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_WRITE_CRL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CRL_CONTEXT, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_WRITE_CRL uintptr
 
-// PFN_CERT_STORE_PROV_WRITE_CTL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32) foundation.BOOL.
+// PFN_CERT_STORE_PROV_WRITE_CTL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCERTSTOREPROV, *CTL_CONTEXT, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CERT_STORE_PROV_WRITE_CTL uintptr
 
-// PFN_CMSG_ALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) unsafe.Pointer.
+// PFN_CMSG_ALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_ALLOC uintptr
 
-// PFN_CMSG_CNG_IMPORT_CONTENT_ENCRYPT_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CMSG_CNG_CONTENT_DECRYPT_INFO, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CMSG_CNG_IMPORT_CONTENT_ENCRYPT_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CMSG_CNG_CONTENT_DECRYPT_INFO, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_CNG_IMPORT_CONTENT_ENCRYPT_KEY uintptr
 
-// PFN_CMSG_CNG_IMPORT_KEY_AGREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CMSG_CNG_CONTENT_DECRYPT_INFO, *CMSG_CTRL_KEY_AGREE_DECRYPT_PARA, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CMSG_CNG_IMPORT_KEY_AGREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CMSG_CNG_CONTENT_DECRYPT_INFO, *CMSG_CTRL_KEY_AGREE_DECRYPT_PARA, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_CNG_IMPORT_KEY_AGREE uintptr
 
-// PFN_CMSG_CNG_IMPORT_KEY_TRANS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CMSG_CNG_CONTENT_DECRYPT_INFO, *CMSG_CTRL_KEY_TRANS_DECRYPT_PARA, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CMSG_CNG_IMPORT_KEY_TRANS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CMSG_CNG_CONTENT_DECRYPT_INFO, *CMSG_CTRL_KEY_TRANS_DECRYPT_PARA, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_CNG_IMPORT_KEY_TRANS uintptr
 
-// PFN_CMSG_EXPORT_ENCRYPT_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uintptr, *CERT_PUBLIC_KEY_INFO, *byte, *uint32) foundation.BOOL.
+// PFN_CMSG_EXPORT_ENCRYPT_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uintptr, *CERT_PUBLIC_KEY_INFO, *byte, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_EXPORT_ENCRYPT_KEY uintptr
 
-// PFN_CMSG_EXPORT_KEY_AGREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CMSG_CONTENT_ENCRYPT_INFO, *CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO, *CMSG_KEY_AGREE_ENCRYPT_INFO, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CMSG_EXPORT_KEY_AGREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CMSG_CONTENT_ENCRYPT_INFO, *CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO, *CMSG_KEY_AGREE_ENCRYPT_INFO, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_EXPORT_KEY_AGREE uintptr
 
-// PFN_CMSG_EXPORT_KEY_TRANS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CMSG_CONTENT_ENCRYPT_INFO, *CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO, *CMSG_KEY_TRANS_ENCRYPT_INFO, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CMSG_EXPORT_KEY_TRANS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CMSG_CONTENT_ENCRYPT_INFO, *CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO, *CMSG_KEY_TRANS_ENCRYPT_INFO, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_EXPORT_KEY_TRANS uintptr
 
-// PFN_CMSG_EXPORT_MAIL_LIST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CMSG_CONTENT_ENCRYPT_INFO, *CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO, *CMSG_MAIL_LIST_ENCRYPT_INFO, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CMSG_EXPORT_MAIL_LIST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CMSG_CONTENT_ENCRYPT_INFO, *CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO, *CMSG_MAIL_LIST_ENCRYPT_INFO, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_EXPORT_MAIL_LIST uintptr
 
-// PFN_CMSG_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFN_CMSG_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFN_CMSG_FREE uintptr
 
-// PFN_CMSG_GEN_CONTENT_ENCRYPT_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CMSG_CONTENT_ENCRYPT_INFO, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CMSG_GEN_CONTENT_ENCRYPT_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CMSG_CONTENT_ENCRYPT_INFO, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_GEN_CONTENT_ENCRYPT_KEY uintptr
 
-// PFN_CMSG_GEN_ENCRYPT_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uintptr, *CRYPT_ALGORITHM_IDENTIFIER, unsafe.Pointer, *CERT_PUBLIC_KEY_INFO, PFN_CMSG_ALLOC, *uintptr, **byte, *uint32) foundation.BOOL.
+// PFN_CMSG_GEN_ENCRYPT_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uintptr, *CRYPT_ALGORITHM_IDENTIFIER, unsafe.Pointer, *CERT_PUBLIC_KEY_INFO, PFN_CMSG_ALLOC, *uintptr, **byte, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_GEN_ENCRYPT_KEY uintptr
 
-// PFN_CMSG_IMPORT_ENCRYPT_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, *CRYPT_ALGORITHM_IDENTIFIER, *CRYPT_ALGORITHM_IDENTIFIER, *byte, uint32, *uintptr) foundation.BOOL.
+// PFN_CMSG_IMPORT_ENCRYPT_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, *CRYPT_ALGORITHM_IDENTIFIER, *CRYPT_ALGORITHM_IDENTIFIER, *byte, uint32, *uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_IMPORT_ENCRYPT_KEY uintptr
 
-// PFN_CMSG_IMPORT_KEY_AGREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_ALGORITHM_IDENTIFIER, *CMSG_CTRL_KEY_AGREE_DECRYPT_PARA, uint32, unsafe.Pointer, *uintptr) foundation.BOOL.
+// PFN_CMSG_IMPORT_KEY_AGREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_ALGORITHM_IDENTIFIER, *CMSG_CTRL_KEY_AGREE_DECRYPT_PARA, uint32, unsafe.Pointer, *uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_IMPORT_KEY_AGREE uintptr
 
-// PFN_CMSG_IMPORT_KEY_TRANS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_ALGORITHM_IDENTIFIER, *CMSG_CTRL_KEY_TRANS_DECRYPT_PARA, uint32, unsafe.Pointer, *uintptr) foundation.BOOL.
+// PFN_CMSG_IMPORT_KEY_TRANS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_ALGORITHM_IDENTIFIER, *CMSG_CTRL_KEY_TRANS_DECRYPT_PARA, uint32, unsafe.Pointer, *uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_IMPORT_KEY_TRANS uintptr
 
-// PFN_CMSG_IMPORT_MAIL_LIST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_ALGORITHM_IDENTIFIER, *CMSG_CTRL_MAIL_LIST_DECRYPT_PARA, uint32, unsafe.Pointer, *uintptr) foundation.BOOL.
+// PFN_CMSG_IMPORT_MAIL_LIST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_ALGORITHM_IDENTIFIER, *CMSG_CTRL_MAIL_LIST_DECRYPT_PARA, uint32, unsafe.Pointer, *uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_IMPORT_MAIL_LIST uintptr
 
-// PFN_CMSG_STREAM_OUTPUT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte, uint32, foundation.BOOL) foundation.BOOL.
+// PFN_CMSG_STREAM_OUTPUT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte, uint32, foundation.BOOL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CMSG_STREAM_OUTPUT uintptr
 
-// PFN_CRYPT_ALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) unsafe.Pointer.
+// PFN_CRYPT_ALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_ALLOC uintptr
 
-// PFN_CRYPT_ASYNC_PARAM_FREE_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, unsafe.Pointer).
+// PFN_CRYPT_ASYNC_PARAM_FREE_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, unsafe.Pointer) uintptr.
 type PFN_CRYPT_ASYNC_PARAM_FREE_FUNC uintptr
 
-// PFN_CRYPT_ASYNC_RETRIEVAL_COMPLETION_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PSTR, foundation.PSTR, unsafe.Pointer).
+// PFN_CRYPT_ASYNC_RETRIEVAL_COMPLETION_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PSTR, foundation.PSTR, unsafe.Pointer) uintptr.
 type PFN_CRYPT_ASYNC_RETRIEVAL_COMPLETION_FUNC uintptr
 
-// PFN_CRYPT_CANCEL_RETRIEVAL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CRYPT_CANCEL_RETRIEVAL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_CANCEL_RETRIEVAL uintptr
 
-// PFN_CRYPT_ENUM_KEYID_PROP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_INTEGER_BLOB, uint32, unsafe.Pointer, unsafe.Pointer, uint32, *uint32, *unsafe.Pointer, *uint32) foundation.BOOL.
+// PFN_CRYPT_ENUM_KEYID_PROP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_INTEGER_BLOB, uint32, unsafe.Pointer, unsafe.Pointer, uint32, *uint32, *unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_ENUM_KEYID_PROP uintptr
 
-// PFN_CRYPT_ENUM_OID_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PSTR, foundation.PSTR, uint32, *uint32, *foundation.PWSTR, **byte, *uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_CRYPT_ENUM_OID_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PSTR, foundation.PSTR, uint32, *uint32, *foundation.PWSTR, **byte, *uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_ENUM_OID_FUNC uintptr
 
-// PFN_CRYPT_ENUM_OID_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_OID_INFO, unsafe.Pointer) foundation.BOOL.
+// PFN_CRYPT_ENUM_OID_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_OID_INFO, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_ENUM_OID_INFO uintptr
 
-// PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_KEY_HANDLE, CERT_QUERY_ENCODING_TYPE, foundation.PSTR, uint32, unsafe.Pointer, *CERT_PUBLIC_KEY_INFO, *uint32) foundation.BOOL.
+// PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_KEY_HANDLE, CERT_QUERY_ENCODING_TYPE, foundation.PSTR, uint32, unsafe.Pointer, *CERT_PUBLIC_KEY_INFO, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC uintptr
 
-// PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(BCRYPT_KEY_HANDLE, CERT_QUERY_ENCODING_TYPE, foundation.PSTR, uint32, unsafe.Pointer, *CERT_PUBLIC_KEY_INFO, *uint32) foundation.BOOL.
+// PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(BCRYPT_KEY_HANDLE, CERT_QUERY_ENCODING_TYPE, foundation.PSTR, uint32, unsafe.Pointer, *CERT_PUBLIC_KEY_INFO, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC uintptr
 
-// PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(CERT_QUERY_ENCODING_TYPE, *CRYPT_ALGORITHM_IDENTIFIER, *unsafe.Pointer, *foundation.PWSTR) foundation.BOOL.
+// PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(CERT_QUERY_ENCODING_TYPE, *CRYPT_ALGORITHM_IDENTIFIER, *unsafe.Pointer, *foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC uintptr
 
-// PFN_CRYPT_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFN_CRYPT_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFN_CRYPT_FREE uintptr
 
-// PFN_CRYPT_GET_SIGNER_CERTIFICATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, CERT_QUERY_ENCODING_TYPE, *CERT_INFO, HCERTSTORE) *CERT_CONTEXT.
+// PFN_CRYPT_GET_SIGNER_CERTIFICATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, CERT_QUERY_ENCODING_TYPE, *CERT_INFO, HCERTSTORE) uintptr (the native return type is
+// *CERT_CONTEXT; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_GET_SIGNER_CERTIFICATE uintptr
 
-// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, **CRYPT_INTEGER_BLOB, uint32) foundation.BOOL.
+// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, **CRYPT_INTEGER_BLOB, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH uintptr
 
-// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte).
+// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte) uintptr.
 type PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE uintptr
 
-// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *CRYPT_INTEGER_BLOB).
+// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *CRYPT_INTEGER_BLOB) uintptr.
 type PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER uintptr
 
-// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_PASSWORD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PWSTR).
+// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_PASSWORD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PWSTR) uintptr.
 type PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_PASSWORD uintptr
 
-// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *CRYPT_INTEGER_BLOB, uint32, *CRYPT_INTEGER_BLOB, **byte, *uint32, *foundation.PWSTR, **CRYPT_INTEGER_BLOB) foundation.BOOL.
+// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *CRYPT_INTEGER_BLOB, uint32, *CRYPT_INTEGER_BLOB, **byte, *uint32, *foundation.PWSTR, **CRYPT_INTEGER_BLOB) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET uintptr
 
-// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_INITIALIZE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH, unsafe.Pointer, *uint32, **CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE, *unsafe.Pointer) foundation.BOOL.
+// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_INITIALIZE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH, unsafe.Pointer, *uint32, **CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE, *unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_INITIALIZE uintptr
 
-// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(CRYPT_OBJECT_LOCATOR_RELEASE_REASON, unsafe.Pointer).
+// PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(CRYPT_OBJECT_LOCATOR_RELEASE_REASON, unsafe.Pointer) uintptr.
 type PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE uintptr
 
-// PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_KEY_HANDLE, CERT_QUERY_ENCODING_TYPE, *CRYPT_ALGORITHM_IDENTIFIER, unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, *byte, uint32, *byte, *uint32) foundation.BOOL.
+// PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_KEY_HANDLE, CERT_QUERY_ENCODING_TYPE, *CRYPT_ALGORITHM_IDENTIFIER, unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, *byte, uint32, *byte, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC uintptr
 
-// PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(CERT_QUERY_ENCODING_TYPE, *CERT_PUBLIC_KEY_INFO, *CRYPT_ALGORITHM_IDENTIFIER, unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, *byte, uint32, *byte, uint32) foundation.BOOL.
+// PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(CERT_QUERY_ENCODING_TYPE, *CERT_PUBLIC_KEY_INFO, *CRYPT_ALGORITHM_IDENTIFIER, unsafe.Pointer, foundation.PWSTR, foundation.PWSTR, *byte, uint32, *byte, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC uintptr
 
-// PFN_CRYPT_XML_CREATE_TRANSFORM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_XML_ALGORITHM, *CRYPT_XML_DATA_PROVIDER, *CRYPT_XML_DATA_PROVIDER) foundation.HRESULT.
+// PFN_CRYPT_XML_CREATE_TRANSFORM is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_XML_ALGORITHM, *CRYPT_XML_DATA_PROVIDER, *CRYPT_XML_DATA_PROVIDER) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_XML_CREATE_TRANSFORM uintptr
 
-// PFN_CRYPT_XML_DATA_PROVIDER_CLOSE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// PFN_CRYPT_XML_DATA_PROVIDER_CLOSE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_XML_DATA_PROVIDER_CLOSE uintptr
 
-// PFN_CRYPT_XML_DATA_PROVIDER_READ is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte, uint32, *uint32) foundation.HRESULT.
+// PFN_CRYPT_XML_DATA_PROVIDER_READ is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte, uint32, *uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_XML_DATA_PROVIDER_READ uintptr
 
-// PFN_CRYPT_XML_ENUM_ALG_INFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_XML_ALGORITHM_INFO, unsafe.Pointer) foundation.BOOL.
+// PFN_CRYPT_XML_ENUM_ALG_INFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_XML_ALGORITHM_INFO, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_XML_ENUM_ALG_INFO uintptr
 
-// PFN_CRYPT_XML_WRITE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *byte, uint32) foundation.HRESULT.
+// PFN_CRYPT_XML_WRITE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *byte, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_CRYPT_XML_WRITE_CALLBACK uintptr
 
-// PFN_CSP_ALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) unsafe.Pointer.
+// PFN_CSP_ALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_CSP_ALLOC uintptr
 
-// PFN_CSP_CACHE_ADD_FILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, *byte, uint32) uint32.
+// PFN_CSP_CACHE_ADD_FILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CSP_CACHE_ADD_FILE uintptr
 
-// PFN_CSP_CACHE_DELETE_FILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PWSTR, uint32) uint32.
+// PFN_CSP_CACHE_DELETE_FILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PWSTR, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CSP_CACHE_DELETE_FILE uintptr
 
-// PFN_CSP_CACHE_LOOKUP_FILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, **byte, *uint32) uint32.
+// PFN_CSP_CACHE_LOOKUP_FILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PWSTR, uint32, **byte, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CSP_CACHE_LOOKUP_FILE uintptr
 
-// PFN_CSP_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFN_CSP_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFN_CSP_FREE uintptr
 
-// PFN_CSP_GET_DH_AGREEMENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, unsafe.Pointer, *byte, uint32) uint32.
+// PFN_CSP_GET_DH_AGREEMENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, unsafe.Pointer, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CSP_GET_DH_AGREEMENT uintptr
 
-// PFN_CSP_PAD_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_SIGNING_INFO, uint32, *uint32, **byte) uint32.
+// PFN_CSP_PAD_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_SIGNING_INFO, uint32, *uint32, **byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CSP_PAD_DATA uintptr
 
-// PFN_CSP_REALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr) unsafe.Pointer.
+// PFN_CSP_REALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_CSP_REALLOC uintptr
 
-// PFN_CSP_UNPAD_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_RSA_DECRYPT_INFO, *uint32, **byte) uint32.
+// PFN_CSP_UNPAD_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_RSA_DECRYPT_INFO, *uint32, **byte) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CSP_UNPAD_DATA uintptr
 
-// PFN_EXPORT_PRIV_KEY_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, foundation.PSTR, uint32, unsafe.Pointer, *CRYPT_PRIVATE_KEY_INFO, *uint32) foundation.BOOL.
+// PFN_EXPORT_PRIV_KEY_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, foundation.PSTR, uint32, unsafe.Pointer, *CRYPT_PRIVATE_KEY_INFO, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_EXPORT_PRIV_KEY_FUNC uintptr
 
-// PFN_FREE_ENCODED_OBJECT_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, *CRYPT_BLOB_ARRAY, unsafe.Pointer).
+// PFN_FREE_ENCODED_OBJECT_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, *CRYPT_BLOB_ARRAY, unsafe.Pointer) uintptr.
 type PFN_FREE_ENCODED_OBJECT_FUNC uintptr
 
-// PFN_IMPORT_PRIV_KEY_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *CRYPT_PRIVATE_KEY_INFO, uint32, unsafe.Pointer) foundation.BOOL.
+// PFN_IMPORT_PRIV_KEY_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *CRYPT_PRIVATE_KEY_INFO, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_IMPORT_PRIV_KEY_FUNC uintptr
 
-// PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(CERT_QUERY_ENCODING_TYPE, *CERT_PUBLIC_KEY_INFO, uint32, unsafe.Pointer, *BCRYPT_KEY_HANDLE) foundation.BOOL.
+// PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(CERT_QUERY_ENCODING_TYPE, *CERT_PUBLIC_KEY_INFO, uint32, unsafe.Pointer, *BCRYPT_KEY_HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC uintptr
 
-// PFN_MD_ENCRYPT_DATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, uintptr, foundation.PWSTR, *byte, uint32, uint32, **CARD_ENCRYPTED_DATA, *uint32) uint32.
+// PFN_MD_ENCRYPT_DATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, uintptr, foundation.PWSTR, *byte, uint32, uint32, **CARD_ENCRYPTED_DATA, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_MD_ENCRYPT_DATA uintptr
 
-// PFN_MD_IMPORT_SESSION_KEY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CARD_DATA, foundation.PWSTR, foundation.PWSTR, *uintptr, *byte, uint32) uint32.
+// PFN_MD_IMPORT_SESSION_KEY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CARD_DATA, foundation.PWSTR, foundation.PWSTR, *uintptr, *byte, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_MD_IMPORT_SESSION_KEY uintptr
 
-// PFN_NCRYPT_ALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) unsafe.Pointer.
+// PFN_NCRYPT_ALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_NCRYPT_ALLOC uintptr
 
-// PFN_NCRYPT_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFN_NCRYPT_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFN_NCRYPT_FREE uintptr
 
-// PFN_OFFLOAD_MOD_EXPO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*byte, *byte, uint32, *byte, uint32, *byte, unsafe.Pointer, uint32) foundation.BOOL.
+// PFN_OFFLOAD_MOD_EXPO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*byte, *byte, uint32, *byte, uint32, *byte, unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_OFFLOAD_MOD_EXPO uintptr
 
-// SslComputeClientAuthHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// SslComputeClientAuthHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslComputeClientAuthHashFn uintptr
 
-// SslComputeEapKeyBlockFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// SslComputeEapKeyBlockFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslComputeEapKeyBlockFn uintptr
 
-// SslComputeFinishedHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, *byte, uint32, uint32) foundation.HRESULT.
+// SslComputeFinishedHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslComputeFinishedHashFn uintptr
 
-// SslComputeSessionHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_HASH_HANDLE, uint32, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// SslComputeSessionHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_HASH_HANDLE, uint32, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslComputeSessionHashFn uintptr
 
-// SslCreateClientAuthHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_HASH_HANDLE, uint32, uint32, foundation.PWSTR, uint32) foundation.HRESULT.
+// SslCreateClientAuthHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_HASH_HANDLE, uint32, uint32, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslCreateClientAuthHashFn uintptr
 
-// SslCreateEphemeralKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, uint32, uint32, *byte, uint32, uint32) foundation.HRESULT.
+// SslCreateEphemeralKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, uint32, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslCreateEphemeralKeyFn uintptr
 
-// SslCreateHandshakeHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_HASH_HANDLE, uint32, uint32, uint32) foundation.HRESULT.
+// SslCreateHandshakeHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_HASH_HANDLE, uint32, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslCreateHandshakeHashFn uintptr
 
-// SslDecryptPacketFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, *uint32, uint64, uint32) foundation.HRESULT.
+// SslDecryptPacketFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, *uint32, uint64, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslDecryptPacketFn uintptr
 
-// SslDuplicateTranscriptHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_HASH_HANDLE, *NCRYPT_HASH_HANDLE, uint32) foundation.HRESULT.
+// SslDuplicateTranscriptHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_HASH_HANDLE, *NCRYPT_HASH_HANDLE, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslDuplicateTranscriptHashFn uintptr
 
-// SslEncryptPacketFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, *uint32, uint64, uint32, uint32) foundation.HRESULT.
+// SslEncryptPacketFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, *uint32, uint64, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslEncryptPacketFn uintptr
 
-// SslEnumCipherSuitesExFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, **NCRYPT_SSL_CIPHER_SUITE_EX, *unsafe.Pointer, uint32) foundation.HRESULT.
+// SslEnumCipherSuitesExFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, **NCRYPT_SSL_CIPHER_SUITE_EX, *unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslEnumCipherSuitesExFn uintptr
 
-// SslEnumCipherSuitesFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, **NCRYPT_SSL_CIPHER_SUITE, *unsafe.Pointer, uint32) foundation.HRESULT.
+// SslEnumCipherSuitesFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, **NCRYPT_SSL_CIPHER_SUITE, *unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslEnumCipherSuitesFn uintptr
 
-// SslEnumEccCurvesFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, *uint32, **NCRYPT_SSL_ECC_CURVE, uint32) foundation.HRESULT.
+// SslEnumEccCurvesFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, *uint32, **NCRYPT_SSL_ECC_CURVE, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslEnumEccCurvesFn uintptr
 
-// SslExpandBinderKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslExpandBinderKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExpandBinderKeyFn uintptr
 
-// SslExpandExporterMasterKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslExpandExporterMasterKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExpandExporterMasterKeyFn uintptr
 
-// SslExpandPreSharedKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslExpandPreSharedKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExpandPreSharedKeyFn uintptr
 
-// SslExpandResumptionMasterKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslExpandResumptionMasterKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExpandResumptionMasterKeyFn uintptr
 
-// SslExpandTrafficKeysFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, *NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslExpandTrafficKeysFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_HASH_HANDLE, *NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExpandTrafficKeysFn uintptr
 
-// SslExpandWriteKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslExpandWriteKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExpandWriteKeyFn uintptr
 
-// SslExportKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// SslExportKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExportKeyFn uintptr
 
-// SslExportKeyingMaterialFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PSTR, *byte, uint32, *byte, uint16, *byte, uint32, uint32) foundation.HRESULT.
+// SslExportKeyingMaterialFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, foundation.PSTR, *byte, uint32, *byte, uint16, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExportKeyingMaterialFn uintptr
 
-// SslExtractEarlyKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslExtractEarlyKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExtractEarlyKeyFn uintptr
 
-// SslExtractHandshakeKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslExtractHandshakeKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExtractHandshakeKeyFn uintptr
 
-// SslExtractMasterKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslExtractMasterKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslExtractMasterKeyFn uintptr
 
-// SslFreeBufferFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.HRESULT.
+// SslFreeBufferFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslFreeBufferFn uintptr
 
-// SslFreeObjectFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_HANDLE, uint32) foundation.HRESULT.
+// SslFreeObjectFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_HANDLE, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslFreeObjectFn uintptr
 
-// SslGenerateMasterKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// SslGenerateMasterKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslGenerateMasterKeyFn uintptr
 
-// SslGeneratePreMasterKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// SslGeneratePreMasterKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, *BCryptBufferDesc, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslGeneratePreMasterKeyFn uintptr
 
-// SslGenerateSessionKeysFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) foundation.HRESULT.
+// SslGenerateSessionKeysFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, *BCryptBufferDesc, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslGenerateSessionKeysFn uintptr
 
-// SslGetCipherSuitePRFHashAlgorithmFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, uint32, uint32, uint32, foundation.PWSTR, uint32) foundation.HRESULT.
+// SslGetCipherSuitePRFHashAlgorithmFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, uint32, uint32, uint32, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslGetCipherSuitePRFHashAlgorithmFn uintptr
 
-// SslGetKeyPropertyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_KEY_HANDLE, foundation.PWSTR, **byte, *uint32, uint32) foundation.HRESULT.
+// SslGetKeyPropertyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_KEY_HANDLE, foundation.PWSTR, **byte, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslGetKeyPropertyFn uintptr
 
-// SslGetProviderPropertyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, **byte, *uint32, *unsafe.Pointer, uint32) foundation.HRESULT.
+// SslGetProviderPropertyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, foundation.PWSTR, **byte, *uint32, *unsafe.Pointer, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslGetProviderPropertyFn uintptr
 
-// SslHashHandshakeFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_HASH_HANDLE, *byte, uint32, uint32) foundation.HRESULT.
+// SslHashHandshakeFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_HASH_HANDLE, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslHashHandshakeFn uintptr
 
-// SslImportKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, uint32) foundation.HRESULT.
+// SslImportKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, foundation.PWSTR, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslImportKeyFn uintptr
 
-// SslImportMasterKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, *BCryptBufferDesc, *byte, uint32, uint32) foundation.HRESULT.
+// SslImportMasterKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *NCRYPT_KEY_HANDLE, uint32, uint32, *BCryptBufferDesc, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslImportMasterKeyFn uintptr
 
-// SslInitializeInterfaceFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *NCRYPT_SSL_FUNCTION_TABLE, uint32) foundation.HRESULT.
+// SslInitializeInterfaceFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *NCRYPT_SSL_FUNCTION_TABLE, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslInitializeInterfaceFn uintptr
 
-// SslLookupCipherLengthsFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, uint32, uint32, uint32, *NCRYPT_SSL_CIPHER_LENGTHS, uint32, uint32) foundation.HRESULT.
+// SslLookupCipherLengthsFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, uint32, uint32, uint32, *NCRYPT_SSL_CIPHER_LENGTHS, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslLookupCipherLengthsFn uintptr
 
-// SslLookupCipherSuiteInfoFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, uint32, uint32, uint32, *NCRYPT_SSL_CIPHER_SUITE, uint32) foundation.HRESULT.
+// SslLookupCipherSuiteInfoFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, uint32, uint32, uint32, *NCRYPT_SSL_CIPHER_SUITE, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslLookupCipherSuiteInfoFn uintptr
 
-// SslOpenPrivateKeyFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, *CERT_CONTEXT, uint32) foundation.HRESULT.
+// SslOpenPrivateKeyFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, *NCRYPT_KEY_HANDLE, *CERT_CONTEXT, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslOpenPrivateKeyFn uintptr
 
-// SslOpenProviderFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*NCRYPT_PROV_HANDLE, foundation.PWSTR, uint32) foundation.HRESULT.
+// SslOpenProviderFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*NCRYPT_PROV_HANDLE, foundation.PWSTR, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslOpenProviderFn uintptr
 
-// SslSignHashFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, *uint32, uint32) foundation.HRESULT.
+// SslSignHashFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, *uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslSignHashFn uintptr
 
-// SslVerifySignatureFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, uint32) foundation.HRESULT.
+// SslVerifySignatureFn is a callback pointer: create one with syscall.NewCallback
+// using the shape func(NCRYPT_PROV_HANDLE, NCRYPT_KEY_HANDLE, *byte, uint32, *byte, uint32, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type SslVerifySignatureFn uintptr

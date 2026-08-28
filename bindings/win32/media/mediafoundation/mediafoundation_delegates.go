@@ -4,78 +4,96 @@
 
 package mediafoundation
 
-// MFPERIODICCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown).
+// MFPERIODICCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown) uintptr.
 type MFPERIODICCALLBACK uintptr
 
-// PDXVAHDSW_CreateDevice is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsdirect3d9.IDirect3DDevice9Ex, *foundation.HANDLE) foundation.HRESULT.
+// PDXVAHDSW_CreateDevice is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsdirect3d9.IDirect3DDevice9Ex, *foundation.HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_CreateDevice uintptr
 
-// PDXVAHDSW_CreateVideoProcessor is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *win32.GUID, *foundation.HANDLE) foundation.HRESULT.
+// PDXVAHDSW_CreateVideoProcessor is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *win32.GUID, *foundation.HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_CreateVideoProcessor uintptr
 
-// PDXVAHDSW_DestroyDevice is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.HRESULT.
+// PDXVAHDSW_DestroyDevice is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_DestroyDevice uintptr
 
-// PDXVAHDSW_DestroyVideoProcessor is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.HRESULT.
+// PDXVAHDSW_DestroyVideoProcessor is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_DestroyVideoProcessor uintptr
 
-// PDXVAHDSW_GetVideoProcessBltStatePrivate is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *DXVAHD_BLT_STATE_PRIVATE_DATA) foundation.HRESULT.
+// PDXVAHDSW_GetVideoProcessBltStatePrivate is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *DXVAHD_BLT_STATE_PRIVATE_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_GetVideoProcessBltStatePrivate uintptr
 
-// PDXVAHDSW_GetVideoProcessStreamStatePrivate is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, *DXVAHD_STREAM_STATE_PRIVATE_DATA) foundation.HRESULT.
+// PDXVAHDSW_GetVideoProcessStreamStatePrivate is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, *DXVAHD_STREAM_STATE_PRIVATE_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_GetVideoProcessStreamStatePrivate uintptr
 
-// PDXVAHDSW_GetVideoProcessorCaps is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, uint32, *DXVAHD_VPCAPS) foundation.HRESULT.
+// PDXVAHDSW_GetVideoProcessorCaps is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, uint32, *DXVAHD_VPCAPS) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_GetVideoProcessorCaps uintptr
 
-// PDXVAHDSW_GetVideoProcessorCustomRates is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *win32.GUID, uint32, *DXVAHD_CUSTOM_RATE_DATA) foundation.HRESULT.
+// PDXVAHDSW_GetVideoProcessorCustomRates is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *win32.GUID, uint32, *DXVAHD_CUSTOM_RATE_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_GetVideoProcessorCustomRates uintptr
 
-// PDXVAHDSW_GetVideoProcessorDeviceCaps is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, *DXVAHD_VPDEVCAPS) foundation.HRESULT.
+// PDXVAHDSW_GetVideoProcessorDeviceCaps is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, *DXVAHD_VPDEVCAPS) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_GetVideoProcessorDeviceCaps uintptr
 
-// PDXVAHDSW_GetVideoProcessorFilterRange is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, DXVAHD_FILTER, *DXVAHD_FILTER_RANGE_DATA) foundation.HRESULT.
+// PDXVAHDSW_GetVideoProcessorFilterRange is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, DXVAHD_FILTER, *DXVAHD_FILTER_RANGE_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_GetVideoProcessorFilterRange uintptr
 
-// PDXVAHDSW_GetVideoProcessorInputFormats is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, uint32, *graphicsdirect3d9.D3DFORMAT) foundation.HRESULT.
+// PDXVAHDSW_GetVideoProcessorInputFormats is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, uint32, *graphicsdirect3d9.D3DFORMAT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_GetVideoProcessorInputFormats uintptr
 
-// PDXVAHDSW_GetVideoProcessorOutputFormats is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, uint32, *graphicsdirect3d9.D3DFORMAT) foundation.HRESULT.
+// PDXVAHDSW_GetVideoProcessorOutputFormats is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, uint32, *graphicsdirect3d9.D3DFORMAT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_GetVideoProcessorOutputFormats uintptr
 
-// PDXVAHDSW_Plugin is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer) foundation.HRESULT.
+// PDXVAHDSW_Plugin is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_Plugin uintptr
 
-// PDXVAHDSW_ProposeVideoPrivateFormat is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *graphicsdirect3d9.D3DFORMAT) foundation.HRESULT.
+// PDXVAHDSW_ProposeVideoPrivateFormat is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *graphicsdirect3d9.D3DFORMAT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_ProposeVideoPrivateFormat uintptr
 
-// PDXVAHDSW_SetVideoProcessBltState is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, DXVAHD_BLT_STATE, uint32, unsafe.Pointer) foundation.HRESULT.
+// PDXVAHDSW_SetVideoProcessBltState is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, DXVAHD_BLT_STATE, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_SetVideoProcessBltState uintptr
 
-// PDXVAHDSW_SetVideoProcessStreamState is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32, DXVAHD_STREAM_STATE, uint32, unsafe.Pointer) foundation.HRESULT.
+// PDXVAHDSW_SetVideoProcessStreamState is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32, DXVAHD_STREAM_STATE, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_SetVideoProcessStreamState uintptr
 
-// PDXVAHDSW_VideoProcessBltHD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *graphicsdirect3d9.IDirect3DSurface9, uint32, uint32, *DXVAHD_STREAM_DATA) foundation.HRESULT.
+// PDXVAHDSW_VideoProcessBltHD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *graphicsdirect3d9.IDirect3DSurface9, uint32, uint32, *DXVAHD_STREAM_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHDSW_VideoProcessBltHD uintptr
 
-// PDXVAHD_CreateDevice is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*graphicsdirect3d9.IDirect3DDevice9Ex, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, PDXVAHDSW_Plugin, **IDXVAHD_Device) foundation.HRESULT.
+// PDXVAHD_CreateDevice is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*graphicsdirect3d9.IDirect3DDevice9Ex, *DXVAHD_CONTENT_DESC, DXVAHD_DEVICE_USAGE, PDXVAHDSW_Plugin, **IDXVAHD_Device) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PDXVAHD_CreateDevice uintptr

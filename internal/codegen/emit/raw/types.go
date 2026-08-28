@@ -425,28 +425,36 @@ func (g *Generator) buildDelegateModels(meta *win32meta.NamespaceMeta, imports t
 			continue
 		}
 		delegate := meta.Delegates[name]
-		models = append(models, view.DelegateModel{
-			TypeName:  goName,
-			DocURL:    delegate.Availability.DocURL,
-			Signature: g.delegateSignature(meta, &delegate, imports),
-		})
+		model := view.DelegateModel{TypeName: goName, DocURL: delegate.Availability.DocURL}
+		model.Signature, model.NativeReturn, model.HasFloat = g.delegateSignature(meta, &delegate, imports)
+		models = append(models, model)
 	}
 	return models
 }
 
-// delegateSignature renders the callback's Go shape for the doc comment.
-func (g *Generator) delegateSignature(meta *win32meta.NamespaceMeta, delegate *win32meta.FuncPointer, imports typemap.ImportSet) string {
+// delegateSignature renders the Go shape syscall.NewCallback accepts for the
+// callback: the native parameter types and a uintptr result (NewCallback
+// requires exactly one uintptr-sized result, whatever the native return
+// type). nativeReturn is that native type ("" for void); hasFloat reports a
+// floating-point parameter or return, which NewCallback cannot marshal.
+func (g *Generator) delegateSignature(meta *win32meta.NamespaceMeta, delegate *win32meta.FuncPointer, imports typemap.ImportSet) (signature, nativeReturn string, hasFloat bool) {
 	params := make([]string, 0, len(delegate.Params))
 	for i := range delegate.Params {
 		resolved := g.mapper.GoType(&delegate.Params[i].Type, typemap.Context{Namespace: meta.Namespace}, imports)
 		params = append(params, resolved.GoType)
+		hasFloat = hasFloat || isFloat(resolved)
 	}
 	returnResolved := g.mapper.GoType(&delegate.Return, typemap.Context{Namespace: meta.Namespace, IsReturn: true}, imports)
-	signature := "func(" + strings.Join(params, ", ") + ")"
 	if returnResolved.Kind != typemap.KindVoid {
-		signature += " " + returnResolved.GoType
+		nativeReturn = returnResolved.GoType
+		hasFloat = hasFloat || isFloat(returnResolved)
 	}
-	return signature
+	return "func(" + strings.Join(params, ", ") + ") uintptr", nativeReturn, hasFloat
+}
+
+// isFloat reports a float32/float64 scalar.
+func isFloat(resolved typemap.Resolved) bool {
+	return resolved.Kind == typemap.KindScalar && (resolved.GoType == "float32" || resolved.GoType == "float64")
 }
 
 // buildConstantModels converts Apis constants.

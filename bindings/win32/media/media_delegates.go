@@ -4,10 +4,10 @@
 
 package media
 
-// LPDRVCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, uintptr, uintptr, uintptr).
+// LPDRVCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, uintptr, uintptr, uintptr) uintptr.
 type LPDRVCALLBACK uintptr
 
-// LPTIMECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uintptr, uintptr, uintptr).
+// LPTIMECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uintptr, uintptr, uintptr) uintptr.
 type LPTIMECALLBACK uintptr

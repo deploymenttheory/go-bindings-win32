@@ -4,74 +4,91 @@
 
 package wintrust
 
-// PFN_ALLOCANDFILLDEFUSAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, *CRYPT_PROVIDER_DEFUSAGE) foundation.BOOL.
+// PFN_ALLOCANDFILLDEFUSAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, *CRYPT_PROVIDER_DEFUSAGE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_ALLOCANDFILLDEFUSAGE uintptr
 
-// PFN_CPD_ADD_CERT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA, uint32, foundation.BOOL, uint32, *securitycryptography.CERT_CONTEXT) foundation.BOOL.
+// PFN_CPD_ADD_CERT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA, uint32, foundation.BOOL, uint32, *securitycryptography.CERT_CONTEXT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CPD_ADD_CERT uintptr
 
-// PFN_CPD_ADD_PRIVDATA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA, *CRYPT_PROVIDER_PRIVDATA) foundation.BOOL.
+// PFN_CPD_ADD_PRIVDATA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA, *CRYPT_PROVIDER_PRIVDATA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CPD_ADD_PRIVDATA uintptr
 
-// PFN_CPD_ADD_SGNR is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA, foundation.BOOL, uint32, *CRYPT_PROVIDER_SGNR) foundation.BOOL.
+// PFN_CPD_ADD_SGNR is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA, foundation.BOOL, uint32, *CRYPT_PROVIDER_SGNR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CPD_ADD_SGNR uintptr
 
-// PFN_CPD_ADD_STORE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA, securitycryptography.HCERTSTORE) foundation.BOOL.
+// PFN_CPD_ADD_STORE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA, securitycryptography.HCERTSTORE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_CPD_ADD_STORE uintptr
 
-// PFN_CPD_MEM_ALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) unsafe.Pointer.
+// PFN_CPD_MEM_ALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFN_CPD_MEM_ALLOC uintptr
 
-// PFN_CPD_MEM_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFN_CPD_MEM_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFN_CPD_MEM_FREE uintptr
 
-// PFN_FREEDEFUSAGE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, *CRYPT_PROVIDER_DEFUSAGE) foundation.BOOL.
+// PFN_FREEDEFUSAGE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, *CRYPT_PROVIDER_DEFUSAGE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_FREEDEFUSAGE uintptr
 
-// PFN_PROVIDER_CERTCHKPOLICY_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA, uint32, foundation.BOOL, uint32) foundation.BOOL.
+// PFN_PROVIDER_CERTCHKPOLICY_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA, uint32, foundation.BOOL, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_PROVIDER_CERTCHKPOLICY_CALL uintptr
 
-// PFN_PROVIDER_CERTTRUST_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA) foundation.HRESULT.
+// PFN_PROVIDER_CERTTRUST_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_PROVIDER_CERTTRUST_CALL uintptr
 
-// PFN_PROVIDER_CLEANUP_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA) foundation.HRESULT.
+// PFN_PROVIDER_CLEANUP_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_PROVIDER_CLEANUP_CALL uintptr
 
-// PFN_PROVIDER_FINALPOLICY_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA) foundation.HRESULT.
+// PFN_PROVIDER_FINALPOLICY_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_PROVIDER_FINALPOLICY_CALL uintptr
 
-// PFN_PROVIDER_INIT_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA) foundation.HRESULT.
+// PFN_PROVIDER_INIT_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_PROVIDER_INIT_CALL uintptr
 
-// PFN_PROVIDER_OBJTRUST_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA) foundation.HRESULT.
+// PFN_PROVIDER_OBJTRUST_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_PROVIDER_OBJTRUST_CALL uintptr
 
-// PFN_PROVIDER_SIGTRUST_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA) foundation.HRESULT.
+// PFN_PROVIDER_SIGTRUST_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_PROVIDER_SIGTRUST_CALL uintptr
 
-// PFN_PROVIDER_TESTFINALPOLICY_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA) foundation.HRESULT.
+// PFN_PROVIDER_TESTFINALPOLICY_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_PROVIDER_TESTFINALPOLICY_CALL uintptr
 
-// PFN_PROVUI_CALL is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *CRYPT_PROVIDER_DATA) foundation.BOOL.
+// PFN_PROVUI_CALL is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *CRYPT_PROVIDER_DATA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_PROVUI_CALL uintptr
 
-// PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CRYPT_PROVIDER_DATA, uint32, uint32, uint32, **WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO, unsafe.Pointer) foundation.HRESULT.
+// PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CRYPT_PROVIDER_DATA, uint32, uint32, uint32, **WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO, unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_WTD_GENERIC_CHAIN_POLICY_CALLBACK uintptr

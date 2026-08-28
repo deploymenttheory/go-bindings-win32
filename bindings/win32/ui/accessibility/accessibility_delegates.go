@@ -4,38 +4,45 @@
 
 package accessibility
 
-// LPFNACCESSIBLECHILDREN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IAccessible, int32, int32, *systemvariant.VARIANT, *int32) foundation.HRESULT.
+// LPFNACCESSIBLECHILDREN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IAccessible, int32, int32, *systemvariant.VARIANT, *int32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPFNACCESSIBLECHILDREN uintptr
 
-// LPFNACCESSIBLEOBJECTFROMPOINT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.POINT, **IAccessible, *systemvariant.VARIANT) foundation.HRESULT.
+// LPFNACCESSIBLEOBJECTFROMPOINT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.POINT, **IAccessible, *systemvariant.VARIANT) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPFNACCESSIBLEOBJECTFROMPOINT uintptr
 
-// LPFNACCESSIBLEOBJECTFROMWINDOW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// LPFNACCESSIBLEOBJECTFROMWINDOW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPFNACCESSIBLEOBJECTFROMWINDOW uintptr
 
-// LPFNCREATESTDACCESSIBLEOBJECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, int32, *win32.GUID, *unsafe.Pointer) foundation.HRESULT.
+// LPFNCREATESTDACCESSIBLEOBJECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, int32, *win32.GUID, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPFNCREATESTDACCESSIBLEOBJECT uintptr
 
-// LPFNLRESULTFROMOBJECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.WPARAM, *systemcom.IUnknown) foundation.LRESULT.
+// LPFNLRESULTFROMOBJECT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.WPARAM, *systemcom.IUnknown) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type LPFNLRESULTFROMOBJECT uintptr
 
-// LPFNOBJECTFROMLRESULT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.LRESULT, *win32.GUID, foundation.WPARAM, *unsafe.Pointer) foundation.HRESULT.
+// LPFNOBJECTFROMLRESULT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.LRESULT, *win32.GUID, foundation.WPARAM, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type LPFNOBJECTFROMLRESULT uintptr
 
-// UiaEventCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*UiaEventArgs, *systemcom.SAFEARRAY, foundation.BSTR).
+// UiaEventCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*UiaEventArgs, *systemcom.SAFEARRAY, foundation.BSTR) uintptr.
 type UiaEventCallback uintptr
 
-// UiaProviderCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, ProviderType) *systemcom.SAFEARRAY.
+// UiaProviderCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, ProviderType) uintptr (the native return type is
+// *systemcom.SAFEARRAY; NewCallback requires a uintptr-sized result).
 type UiaProviderCallback uintptr
 
-// WINEVENTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HWINEVENTHOOK, uint32, foundation.HWND, int32, int32, uint32, uint32).
+// WINEVENTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HWINEVENTHOOK, uint32, foundation.HWND, int32, int32, uint32, uint32) uintptr.
 type WINEVENTPROC uintptr

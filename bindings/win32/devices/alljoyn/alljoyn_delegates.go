@@ -4,198 +4,212 @@
 
 package alljoyn
 
-// Alljoyn_about_announced_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, uint16, uint16, Alljoyn_msgarg, Alljoyn_msgarg).
+// Alljoyn_about_announced_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, uint16, uint16, Alljoyn_msgarg, Alljoyn_msgarg) uintptr.
 type Alljoyn_about_announced_ptr uintptr
 
-// Alljoyn_aboutdatalistener_getaboutdata_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_msgarg, foundation.PSTR) QStatus.
+// Alljoyn_aboutdatalistener_getaboutdata_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_msgarg, foundation.PSTR) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_aboutdatalistener_getaboutdata_ptr uintptr
 
-// Alljoyn_aboutdatalistener_getannouncedaboutdata_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_msgarg) QStatus.
+// Alljoyn_aboutdatalistener_getannouncedaboutdata_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_msgarg) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_aboutdatalistener_getannouncedaboutdata_ptr uintptr
 
-// Alljoyn_applicationstatelistener_state_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*int8, *int8, Alljoyn_applicationstate, unsafe.Pointer).
+// Alljoyn_applicationstatelistener_state_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*int8, *int8, Alljoyn_applicationstate, unsafe.Pointer) uintptr.
 type Alljoyn_applicationstatelistener_state_ptr uintptr
 
-// Alljoyn_authlistener_authenticationcomplete_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, int32).
+// Alljoyn_authlistener_authenticationcomplete_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, int32) uintptr.
 type Alljoyn_authlistener_authenticationcomplete_ptr uintptr
 
-// Alljoyn_authlistener_requestcredentials_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, uint16, foundation.PSTR, uint16, Alljoyn_credentials) int32.
+// Alljoyn_authlistener_requestcredentials_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, uint16, foundation.PSTR, uint16, Alljoyn_credentials) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type Alljoyn_authlistener_requestcredentials_ptr uintptr
 
-// Alljoyn_authlistener_requestcredentialsasync_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_authlistener, foundation.PSTR, foundation.PSTR, uint16, foundation.PSTR, uint16, unsafe.Pointer) QStatus.
+// Alljoyn_authlistener_requestcredentialsasync_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_authlistener, foundation.PSTR, foundation.PSTR, uint16, foundation.PSTR, uint16, unsafe.Pointer) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_authlistener_requestcredentialsasync_ptr uintptr
 
-// Alljoyn_authlistener_securityviolation_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, QStatus, Alljoyn_message).
+// Alljoyn_authlistener_securityviolation_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, QStatus, Alljoyn_message) uintptr.
 type Alljoyn_authlistener_securityviolation_ptr uintptr
 
-// Alljoyn_authlistener_verifycredentials_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, Alljoyn_credentials) int32.
+// Alljoyn_authlistener_verifycredentials_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, Alljoyn_credentials) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type Alljoyn_authlistener_verifycredentials_ptr uintptr
 
-// Alljoyn_authlistener_verifycredentialsasync_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_authlistener, foundation.PSTR, foundation.PSTR, Alljoyn_credentials, unsafe.Pointer) QStatus.
+// Alljoyn_authlistener_verifycredentialsasync_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_authlistener, foundation.PSTR, foundation.PSTR, Alljoyn_credentials, unsafe.Pointer) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_authlistener_verifycredentialsasync_ptr uintptr
 
-// Alljoyn_autopinger_destination_found_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR).
+// Alljoyn_autopinger_destination_found_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR) uintptr.
 type Alljoyn_autopinger_destination_found_ptr uintptr
 
-// Alljoyn_autopinger_destination_lost_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR).
+// Alljoyn_autopinger_destination_lost_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR) uintptr.
 type Alljoyn_autopinger_destination_lost_ptr uintptr
 
-// Alljoyn_busattachment_joinsessioncb_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(QStatus, uint32, Alljoyn_sessionopts, unsafe.Pointer).
+// Alljoyn_busattachment_joinsessioncb_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(QStatus, uint32, Alljoyn_sessionopts, unsafe.Pointer) uintptr.
 type Alljoyn_busattachment_joinsessioncb_ptr uintptr
 
-// Alljoyn_busattachment_setlinktimeoutcb_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(QStatus, uint32, unsafe.Pointer).
+// Alljoyn_busattachment_setlinktimeoutcb_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(QStatus, uint32, unsafe.Pointer) uintptr.
 type Alljoyn_busattachment_setlinktimeoutcb_ptr uintptr
 
-// Alljoyn_buslistener_bus_disconnected_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// Alljoyn_buslistener_bus_disconnected_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type Alljoyn_buslistener_bus_disconnected_ptr uintptr
 
-// Alljoyn_buslistener_bus_prop_changed_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, Alljoyn_msgarg).
+// Alljoyn_buslistener_bus_prop_changed_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, Alljoyn_msgarg) uintptr.
 type Alljoyn_buslistener_bus_prop_changed_ptr uintptr
 
-// Alljoyn_buslistener_bus_stopping_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// Alljoyn_buslistener_bus_stopping_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type Alljoyn_buslistener_bus_stopping_ptr uintptr
 
-// Alljoyn_buslistener_found_advertised_name_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, uint16, foundation.PSTR).
+// Alljoyn_buslistener_found_advertised_name_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, uint16, foundation.PSTR) uintptr.
 type Alljoyn_buslistener_found_advertised_name_ptr uintptr
 
-// Alljoyn_buslistener_listener_registered_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_busattachment).
+// Alljoyn_buslistener_listener_registered_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_busattachment) uintptr.
 type Alljoyn_buslistener_listener_registered_ptr uintptr
 
-// Alljoyn_buslistener_listener_unregistered_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// Alljoyn_buslistener_listener_unregistered_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type Alljoyn_buslistener_listener_unregistered_ptr uintptr
 
-// Alljoyn_buslistener_lost_advertised_name_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, uint16, foundation.PSTR).
+// Alljoyn_buslistener_lost_advertised_name_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, uint16, foundation.PSTR) uintptr.
 type Alljoyn_buslistener_lost_advertised_name_ptr uintptr
 
-// Alljoyn_buslistener_name_owner_changed_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, foundation.PSTR).
+// Alljoyn_buslistener_name_owner_changed_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, foundation.PSTR) uintptr.
 type Alljoyn_buslistener_name_owner_changed_ptr uintptr
 
-// Alljoyn_busobject_object_registration_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// Alljoyn_busobject_object_registration_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type Alljoyn_busobject_object_registration_ptr uintptr
 
-// Alljoyn_busobject_prop_get_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, Alljoyn_msgarg) QStatus.
+// Alljoyn_busobject_prop_get_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, Alljoyn_msgarg) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_busobject_prop_get_ptr uintptr
 
-// Alljoyn_busobject_prop_set_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, Alljoyn_msgarg) QStatus.
+// Alljoyn_busobject_prop_set_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.PSTR, foundation.PSTR, Alljoyn_msgarg) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_busobject_prop_set_ptr uintptr
 
-// Alljoyn_interfacedescription_translation_callback_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR) foundation.PSTR.
+// Alljoyn_interfacedescription_translation_callback_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, foundation.PSTR) uintptr (the native return type is
+// foundation.PSTR; NewCallback requires a uintptr-sized result).
 type Alljoyn_interfacedescription_translation_callback_ptr uintptr
 
-// Alljoyn_keystorelistener_acquireexclusivelock_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_keystorelistener) QStatus.
+// Alljoyn_keystorelistener_acquireexclusivelock_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_keystorelistener) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_keystorelistener_acquireexclusivelock_ptr uintptr
 
-// Alljoyn_keystorelistener_loadrequest_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_keystorelistener, Alljoyn_keystore) QStatus.
+// Alljoyn_keystorelistener_loadrequest_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_keystorelistener, Alljoyn_keystore) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_keystorelistener_loadrequest_ptr uintptr
 
-// Alljoyn_keystorelistener_releaseexclusivelock_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_keystorelistener).
+// Alljoyn_keystorelistener_releaseexclusivelock_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_keystorelistener) uintptr.
 type Alljoyn_keystorelistener_releaseexclusivelock_ptr uintptr
 
-// Alljoyn_keystorelistener_storerequest_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_keystorelistener, Alljoyn_keystore) QStatus.
+// Alljoyn_keystorelistener_storerequest_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_keystorelistener, Alljoyn_keystore) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_keystorelistener_storerequest_ptr uintptr
 
-// Alljoyn_messagereceiver_methodhandler_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(Alljoyn_busobject, *Alljoyn_interfacedescription_member, Alljoyn_message).
+// Alljoyn_messagereceiver_methodhandler_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(Alljoyn_busobject, *Alljoyn_interfacedescription_member, Alljoyn_message) uintptr.
 type Alljoyn_messagereceiver_methodhandler_ptr uintptr
 
-// Alljoyn_messagereceiver_replyhandler_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(Alljoyn_message, unsafe.Pointer).
+// Alljoyn_messagereceiver_replyhandler_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(Alljoyn_message, unsafe.Pointer) uintptr.
 type Alljoyn_messagereceiver_replyhandler_ptr uintptr
 
-// Alljoyn_messagereceiver_signalhandler_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*Alljoyn_interfacedescription_member, foundation.PSTR, Alljoyn_message).
+// Alljoyn_messagereceiver_signalhandler_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*Alljoyn_interfacedescription_member, foundation.PSTR, Alljoyn_message) uintptr.
 type Alljoyn_messagereceiver_signalhandler_ptr uintptr
 
-// Alljoyn_observer_object_discovered_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_proxybusobject_ref).
+// Alljoyn_observer_object_discovered_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_proxybusobject_ref) uintptr.
 type Alljoyn_observer_object_discovered_ptr uintptr
 
-// Alljoyn_observer_object_lost_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, Alljoyn_proxybusobject_ref).
+// Alljoyn_observer_object_lost_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, Alljoyn_proxybusobject_ref) uintptr.
 type Alljoyn_observer_object_lost_ptr uintptr
 
-// Alljoyn_permissionconfigurationlistener_endmanagement_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// Alljoyn_permissionconfigurationlistener_endmanagement_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type Alljoyn_permissionconfigurationlistener_endmanagement_ptr uintptr
 
-// Alljoyn_permissionconfigurationlistener_factoryreset_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) QStatus.
+// Alljoyn_permissionconfigurationlistener_factoryreset_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// QStatus; NewCallback requires a uintptr-sized result).
 type Alljoyn_permissionconfigurationlistener_factoryreset_ptr uintptr
 
-// Alljoyn_permissionconfigurationlistener_policychanged_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// Alljoyn_permissionconfigurationlistener_policychanged_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type Alljoyn_permissionconfigurationlistener_policychanged_ptr uintptr
 
-// Alljoyn_permissionconfigurationlistener_startmanagement_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// Alljoyn_permissionconfigurationlistener_startmanagement_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type Alljoyn_permissionconfigurationlistener_startmanagement_ptr uintptr
 
-// Alljoyn_proxybusobject_listener_getallpropertiescb_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(QStatus, Alljoyn_proxybusobject, Alljoyn_msgarg, unsafe.Pointer).
+// Alljoyn_proxybusobject_listener_getallpropertiescb_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(QStatus, Alljoyn_proxybusobject, Alljoyn_msgarg, unsafe.Pointer) uintptr.
 type Alljoyn_proxybusobject_listener_getallpropertiescb_ptr uintptr
 
-// Alljoyn_proxybusobject_listener_getpropertycb_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(QStatus, Alljoyn_proxybusobject, Alljoyn_msgarg, unsafe.Pointer).
+// Alljoyn_proxybusobject_listener_getpropertycb_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(QStatus, Alljoyn_proxybusobject, Alljoyn_msgarg, unsafe.Pointer) uintptr.
 type Alljoyn_proxybusobject_listener_getpropertycb_ptr uintptr
 
-// Alljoyn_proxybusobject_listener_introspectcb_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(QStatus, Alljoyn_proxybusobject, unsafe.Pointer).
+// Alljoyn_proxybusobject_listener_introspectcb_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(QStatus, Alljoyn_proxybusobject, unsafe.Pointer) uintptr.
 type Alljoyn_proxybusobject_listener_introspectcb_ptr uintptr
 
-// Alljoyn_proxybusobject_listener_propertieschanged_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(Alljoyn_proxybusobject, foundation.PSTR, Alljoyn_msgarg, Alljoyn_msgarg, unsafe.Pointer).
+// Alljoyn_proxybusobject_listener_propertieschanged_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(Alljoyn_proxybusobject, foundation.PSTR, Alljoyn_msgarg, Alljoyn_msgarg, unsafe.Pointer) uintptr.
 type Alljoyn_proxybusobject_listener_propertieschanged_ptr uintptr
 
-// Alljoyn_proxybusobject_listener_setpropertycb_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(QStatus, Alljoyn_proxybusobject, unsafe.Pointer).
+// Alljoyn_proxybusobject_listener_setpropertycb_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(QStatus, Alljoyn_proxybusobject, unsafe.Pointer) uintptr.
 type Alljoyn_proxybusobject_listener_setpropertycb_ptr uintptr
 
-// Alljoyn_sessionlistener_sessionlost_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, Alljoyn_sessionlostreason).
+// Alljoyn_sessionlistener_sessionlost_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, Alljoyn_sessionlostreason) uintptr.
 type Alljoyn_sessionlistener_sessionlost_ptr uintptr
 
-// Alljoyn_sessionlistener_sessionmemberadded_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PSTR).
+// Alljoyn_sessionlistener_sessionmemberadded_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PSTR) uintptr.
 type Alljoyn_sessionlistener_sessionmemberadded_ptr uintptr
 
-// Alljoyn_sessionlistener_sessionmemberremoved_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, foundation.PSTR).
+// Alljoyn_sessionlistener_sessionmemberremoved_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, foundation.PSTR) uintptr.
 type Alljoyn_sessionlistener_sessionmemberremoved_ptr uintptr
 
-// Alljoyn_sessionportlistener_acceptsessionjoiner_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint16, foundation.PSTR, Alljoyn_sessionopts) int32.
+// Alljoyn_sessionportlistener_acceptsessionjoiner_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint16, foundation.PSTR, Alljoyn_sessionopts) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type Alljoyn_sessionportlistener_acceptsessionjoiner_ptr uintptr
 
-// Alljoyn_sessionportlistener_sessionjoined_ptr is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint16, uint32, foundation.PSTR).
+// Alljoyn_sessionportlistener_sessionjoined_ptr is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint16, uint32, foundation.PSTR) uintptr.
 type Alljoyn_sessionportlistener_sessionjoined_ptr uintptr

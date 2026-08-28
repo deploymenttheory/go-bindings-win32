@@ -4,10 +4,12 @@
 
 package directsound
 
-// LPDSENUMCALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PSTR, foundation.PSTR, unsafe.Pointer) foundation.BOOL.
+// LPDSENUMCALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PSTR, foundation.PSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDSENUMCALLBACKA uintptr
 
-// LPDSENUMCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*win32.GUID, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer) foundation.BOOL.
+// LPDSENUMCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*win32.GUID, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPDSENUMCALLBACKW uintptr

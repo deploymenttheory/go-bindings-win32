@@ -4,18 +4,18 @@
 
 package qos
 
-// TCI_ADD_FLOW_COMPLETE_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32).
+// TCI_ADD_FLOW_COMPLETE_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr.
 type TCI_ADD_FLOW_COMPLETE_HANDLER uintptr
 
-// TCI_DEL_FLOW_COMPLETE_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32).
+// TCI_DEL_FLOW_COMPLETE_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr.
 type TCI_DEL_FLOW_COMPLETE_HANDLER uintptr
 
-// TCI_MOD_FLOW_COMPLETE_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32).
+// TCI_MOD_FLOW_COMPLETE_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr.
 type TCI_MOD_FLOW_COMPLETE_HANDLER uintptr
 
-// TCI_NOTIFY_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, foundation.HANDLE, uint32, unsafe.Pointer).
+// TCI_NOTIFY_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, foundation.HANDLE, uint32, unsafe.Pointer) uintptr.
 type TCI_NOTIFY_HANDLER uintptr

@@ -4,34 +4,34 @@
 
 package deploymentservices
 
-// PFN_WdsCliCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PFN_WDS_CLI_CALLBACK_MESSAGE_ID, foundation.WPARAM, foundation.LPARAM, unsafe.Pointer).
+// PFN_WdsCliCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PFN_WDS_CLI_CALLBACK_MESSAGE_ID, foundation.WPARAM, foundation.LPARAM, unsafe.Pointer) uintptr.
 type PFN_WdsCliCallback uintptr
 
-// PFN_WdsCliTraceFunction is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *int8).
+// PFN_WdsCliTraceFunction is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *int8) uintptr.
 type PFN_WdsCliTraceFunction uintptr
 
-// PFN_WdsTransportClientReceiveContents is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, unsafe.Pointer, uint32, *uint64).
+// PFN_WdsTransportClientReceiveContents is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, unsafe.Pointer, uint32, *uint64) uintptr.
 type PFN_WdsTransportClientReceiveContents uintptr
 
-// PFN_WdsTransportClientReceiveMetadata is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, unsafe.Pointer, uint32).
+// PFN_WdsTransportClientReceiveMetadata is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, unsafe.Pointer, uint32) uintptr.
 type PFN_WdsTransportClientReceiveMetadata uintptr
 
-// PFN_WdsTransportClientSessionComplete is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, uint32).
+// PFN_WdsTransportClientSessionComplete is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, uint32) uintptr.
 type PFN_WdsTransportClientSessionComplete uintptr
 
-// PFN_WdsTransportClientSessionNegotiate is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, *TRANSPORTCLIENT_SESSION_INFO, foundation.HANDLE).
+// PFN_WdsTransportClientSessionNegotiate is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, *TRANSPORTCLIENT_SESSION_INFO, foundation.HANDLE) uintptr.
 type PFN_WdsTransportClientSessionNegotiate uintptr
 
-// PFN_WdsTransportClientSessionStart is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, *uint64).
+// PFN_WdsTransportClientSessionStart is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, *uint64) uintptr.
 type PFN_WdsTransportClientSessionStart uintptr
 
-// PFN_WdsTransportClientSessionStartEx is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer, *TRANSPORTCLIENT_SESSION_INFO).
+// PFN_WdsTransportClientSessionStartEx is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer, *TRANSPORTCLIENT_SESSION_INFO) uintptr.
 type PFN_WdsTransportClientSessionStartEx uintptr

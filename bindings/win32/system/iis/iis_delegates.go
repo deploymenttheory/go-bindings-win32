@@ -4,54 +4,66 @@
 
 package iis
 
-// PFN_GETEXTENSIONVERSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*HSE_VERSION_INFO) foundation.BOOL.
+// PFN_GETEXTENSIONVERSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*HSE_VERSION_INFO) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_GETEXTENSIONVERSION uintptr
 
-// PFN_HSE_CACHE_INVALIDATION_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.HRESULT.
+// PFN_HSE_CACHE_INVALIDATION_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_HSE_CACHE_INVALIDATION_CALLBACK uintptr
 
-// PFN_HSE_GET_PROTOCOL_MANAGER_CUSTOM_INTERFACE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, *unsafe.Pointer) foundation.HRESULT.
+// PFN_HSE_GET_PROTOCOL_MANAGER_CUSTOM_INTERFACE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, uint32, *unsafe.Pointer) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_HSE_GET_PROTOCOL_MANAGER_CUSTOM_INTERFACE_CALLBACK uintptr
 
-// PFN_HSE_IO_COMPLETION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*EXTENSION_CONTROL_BLOCK, unsafe.Pointer, uint32, uint32).
+// PFN_HSE_IO_COMPLETION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*EXTENSION_CONTROL_BLOCK, unsafe.Pointer, uint32, uint32) uintptr.
 type PFN_HSE_IO_COMPLETION uintptr
 
-// PFN_HTTPEXTENSIONPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*EXTENSION_CONTROL_BLOCK) uint32.
+// PFN_HTTPEXTENSIONPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*EXTENSION_CONTROL_BLOCK) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_HTTPEXTENSIONPROC uintptr
 
-// PFN_IIS_GETSERVERVARIABLE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCONN, foundation.PSTR, unsafe.Pointer, *uint32) foundation.BOOL.
+// PFN_IIS_GETSERVERVARIABLE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCONN, foundation.PSTR, unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_IIS_GETSERVERVARIABLE uintptr
 
-// PFN_IIS_READCLIENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCONN, unsafe.Pointer, *uint32) foundation.BOOL.
+// PFN_IIS_READCLIENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCONN, unsafe.Pointer, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_IIS_READCLIENT uintptr
 
-// PFN_IIS_SERVERSUPPORTFUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCONN, uint32, unsafe.Pointer, *uint32, *uint32) foundation.BOOL.
+// PFN_IIS_SERVERSUPPORTFUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCONN, uint32, unsafe.Pointer, *uint32, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_IIS_SERVERSUPPORTFUNCTION uintptr
 
-// PFN_IIS_WRITECLIENT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HCONN, unsafe.Pointer, *uint32, uint32) foundation.BOOL.
+// PFN_IIS_WRITECLIENT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HCONN, unsafe.Pointer, *uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_IIS_WRITECLIENT uintptr
 
-// PFN_TERMINATEEXTENSION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) foundation.BOOL.
+// PFN_TERMINATEEXTENSION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_TERMINATEEXTENSION uintptr
 
-// PFN_WEB_CORE_ACTIVATE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) foundation.HRESULT.
+// PFN_WEB_CORE_ACTIVATE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_WEB_CORE_ACTIVATE uintptr
 
-// PFN_WEB_CORE_SET_METADATA_DLL_ENTRY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR) foundation.HRESULT.
+// PFN_WEB_CORE_SET_METADATA_DLL_ENTRY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.PWSTR) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_WEB_CORE_SET_METADATA_DLL_ENTRY uintptr
 
-// PFN_WEB_CORE_SHUTDOWN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) foundation.HRESULT.
+// PFN_WEB_CORE_SHUTDOWN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_WEB_CORE_SHUTDOWN uintptr

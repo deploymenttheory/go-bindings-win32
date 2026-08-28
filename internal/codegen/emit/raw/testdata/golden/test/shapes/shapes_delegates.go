@@ -4,10 +4,14 @@
 
 package shapes
 
-// PFN_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, unsafe.Pointer) uint32.
+// PFN_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_CALLBACK uintptr
 
-// PFN_PROGRESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(float64).
+// PFN_PROGRESS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(float64) uintptr.
+// NewCallback cannot marshal this callback's floating-point parameters or
+// return (golang/go#45300): only a natively implemented function pointer can
+// be passed here.
 type PFN_PROGRESS uintptr

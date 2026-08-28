@@ -4,10 +4,12 @@
 
 package direct3d9on12
 
-// PFN_Direct3DCreate9On12 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *D3D9ON12_ARGS, uint32) *graphicsdirect3d9.IDirect3D9.
+// PFN_Direct3DCreate9On12 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *D3D9ON12_ARGS, uint32) uintptr (the native return type is
+// *graphicsdirect3d9.IDirect3D9; NewCallback requires a uintptr-sized result).
 type PFN_Direct3DCreate9On12 uintptr
 
-// PFN_Direct3DCreate9On12Ex is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *D3D9ON12_ARGS, uint32, **graphicsdirect3d9.IDirect3D9Ex) foundation.HRESULT.
+// PFN_Direct3DCreate9On12Ex is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *D3D9ON12_ARGS, uint32, **graphicsdirect3d9.IDirect3D9Ex) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFN_Direct3DCreate9On12Ex uintptr

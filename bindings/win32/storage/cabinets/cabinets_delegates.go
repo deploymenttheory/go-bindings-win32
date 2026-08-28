@@ -4,90 +4,110 @@
 
 package cabinets
 
-// PFNALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) unsafe.Pointer.
+// PFNALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFNALLOC uintptr
 
-// PFNCLOSE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) int32.
+// PFNCLOSE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNCLOSE uintptr
 
-// PFNFCIALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32) unsafe.Pointer.
+// PFNFCIALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PFNFCIALLOC uintptr
 
-// PFNFCICLOSE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, *int32, unsafe.Pointer) int32.
+// PFNFCICLOSE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, *int32, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNFCICLOSE uintptr
 
-// PFNFCIDELETE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, *int32, unsafe.Pointer) int32.
+// PFNFCIDELETE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, *int32, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNFCIDELETE uintptr
 
-// PFNFCIFILEPLACED is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CCAB, foundation.PSTR, int32, foundation.BOOL, unsafe.Pointer) int32.
+// PFNFCIFILEPLACED is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CCAB, foundation.PSTR, int32, foundation.BOOL, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNFCIFILEPLACED uintptr
 
-// PFNFCIFREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFNFCIFREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFNFCIFREE uintptr
 
-// PFNFCIGETNEXTCABINET is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*CCAB, uint32, unsafe.Pointer) foundation.BOOL.
+// PFNFCIGETNEXTCABINET is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*CCAB, uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNFCIGETNEXTCABINET uintptr
 
-// PFNFCIGETOPENINFO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, *uint16, *uint16, *uint16, *int32, unsafe.Pointer) uintptr.
+// PFNFCIGETOPENINFO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, *uint16, *uint16, *uint16, *int32, unsafe.Pointer) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type PFNFCIGETOPENINFO uintptr
 
-// PFNFCIGETTEMPFILE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, int32, unsafe.Pointer) foundation.BOOL.
+// PFNFCIGETTEMPFILE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, int32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNFCIGETTEMPFILE uintptr
 
-// PFNFCIOPEN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, int32, int32, *int32, unsafe.Pointer) uintptr.
+// PFNFCIOPEN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, int32, int32, *int32, unsafe.Pointer) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type PFNFCIOPEN uintptr
 
-// PFNFCIREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer, uint32, *int32, unsafe.Pointer) uint32.
+// PFNFCIREAD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer, uint32, *int32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNFCIREAD uintptr
 
-// PFNFCISEEK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, int32, int32, *int32, unsafe.Pointer) int32.
+// PFNFCISEEK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, int32, int32, *int32, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNFCISEEK uintptr
 
-// PFNFCISTATUS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, unsafe.Pointer) int32.
+// PFNFCISTATUS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNFCISTATUS uintptr
 
-// PFNFCIWRITE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer, uint32, *int32, unsafe.Pointer) uint32.
+// PFNFCIWRITE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer, uint32, *int32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNFCIWRITE uintptr
 
-// PFNFDIDECRYPT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*FDIDECRYPT) int32.
+// PFNFDIDECRYPT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*FDIDECRYPT) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNFDIDECRYPT uintptr
 
-// PFNFDINOTIFY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(FDINOTIFICATIONTYPE, *FDINOTIFICATION) uintptr.
+// PFNFDINOTIFY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(FDINOTIFICATIONTYPE, *FDINOTIFICATION) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type PFNFDINOTIFY uintptr
 
-// PFNFREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFNFREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFNFREE uintptr
 
-// PFNOPEN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, int32, int32) uintptr.
+// PFNOPEN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, int32, int32) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type PFNOPEN uintptr
 
-// PFNREAD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer, uint32) uint32.
+// PFNREAD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNREAD uintptr
 
-// PFNSEEK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, int32, int32) int32.
+// PFNSEEK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, int32, int32) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PFNSEEK uintptr
 
-// PFNWRITE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer, uint32) uint32.
+// PFNWRITE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNWRITE uintptr

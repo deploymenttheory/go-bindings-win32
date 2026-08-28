@@ -4,66 +4,81 @@
 
 package multimedia
 
-// AVISAVECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32) foundation.BOOL.
+// AVISAVECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type AVISAVECALLBACK uintptr
 
-// CAPCONTROLCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, int32) foundation.LRESULT.
+// CAPCONTROLCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, int32) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type CAPCONTROLCALLBACK uintptr
 
-// CAPERRORCALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, int32, foundation.PSTR) foundation.LRESULT.
+// CAPERRORCALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, int32, foundation.PSTR) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type CAPERRORCALLBACKA uintptr
 
-// CAPERRORCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, int32, foundation.PWSTR) foundation.LRESULT.
+// CAPERRORCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, int32, foundation.PWSTR) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type CAPERRORCALLBACKW uintptr
 
-// CAPSTATUSCALLBACKA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, int32, foundation.PSTR) foundation.LRESULT.
+// CAPSTATUSCALLBACKA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, int32, foundation.PSTR) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type CAPSTATUSCALLBACKA uintptr
 
-// CAPSTATUSCALLBACKW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, int32, foundation.PWSTR) foundation.LRESULT.
+// CAPSTATUSCALLBACKW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, int32, foundation.PWSTR) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type CAPSTATUSCALLBACKW uintptr
 
-// CAPVIDEOCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *VIDEOHDR) foundation.LRESULT.
+// CAPVIDEOCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *VIDEOHDR) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type CAPVIDEOCALLBACK uintptr
 
-// CAPWAVECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, *mediaaudio.WAVEHDR) foundation.LRESULT.
+// CAPWAVECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, *mediaaudio.WAVEHDR) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type CAPWAVECALLBACK uintptr
 
-// CAPYIELDCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND) foundation.LRESULT.
+// CAPYIELDCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type CAPYIELDCALLBACK uintptr
 
-// DRIVERMSGPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uintptr, uintptr, uintptr) uint32.
+// DRIVERMSGPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uintptr, uintptr, uintptr) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type DRIVERMSGPROC uintptr
 
-// DRIVERPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, HDRVR, uint32, foundation.LPARAM, foundation.LPARAM) foundation.LRESULT.
+// DRIVERPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, HDRVR, uint32, foundation.LPARAM, foundation.LPARAM) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type DRIVERPROC uintptr
 
-// LPFNEXTDEVIO is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.LPARAM, uint32, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, *systemio.OVERLAPPED) foundation.BOOL.
+// LPFNEXTDEVIO is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.LPARAM, uint32, uint32, unsafe.Pointer, uint32, unsafe.Pointer, uint32, *uint32, *systemio.OVERLAPPED) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type LPFNEXTDEVIO uintptr
 
-// LPMMIOPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32, foundation.LPARAM, foundation.LPARAM) foundation.LRESULT.
+// LPMMIOPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32, foundation.LPARAM, foundation.LPARAM) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type LPMMIOPROC uintptr
 
-// LPTASKCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// LPTASKCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr.
 type LPTASKCALLBACK uintptr
 
-// VFWWDMExtensionProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uicontrols.LPFNSVADDPROPSHEETPAGE, foundation.LPARAM) uint32.
+// VFWWDMExtensionProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uicontrols.LPFNSVADDPROPSHEETPAGE, foundation.LPARAM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type VFWWDMExtensionProc uintptr
 
-// YIELDPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32) uint32.
+// YIELDPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type YIELDPROC uintptr

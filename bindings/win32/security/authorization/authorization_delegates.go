@@ -4,26 +4,29 @@
 
 package authorization
 
-// FN_PROGRESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, uint32, *PROG_INVOKE_SETTING, unsafe.Pointer, foundation.BOOL).
+// FN_PROGRESS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, uint32, *PROG_INVOKE_SETTING, unsafe.Pointer, foundation.BOOL) uintptr.
 type FN_PROGRESS uintptr
 
-// PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(AUTHZ_CLIENT_CONTEXT_HANDLE, unsafe.Pointer, **security.SID_AND_ATTRIBUTES, *uint32, **security.SID_AND_ATTRIBUTES, *uint32) foundation.BOOL.
+// PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(AUTHZ_CLIENT_CONTEXT_HANDLE, unsafe.Pointer, **security.SID_AND_ATTRIBUTES, *uint32, **security.SID_AND_ATTRIBUTES, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS uintptr
 
-// PFN_AUTHZ_DYNAMIC_ACCESS_CHECK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(AUTHZ_CLIENT_CONTEXT_HANDLE, *security.ACE_HEADER, unsafe.Pointer, *foundation.BOOL) foundation.BOOL.
+// PFN_AUTHZ_DYNAMIC_ACCESS_CHECK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(AUTHZ_CLIENT_CONTEXT_HANDLE, *security.ACE_HEADER, unsafe.Pointer, *foundation.BOOL) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_AUTHZ_DYNAMIC_ACCESS_CHECK uintptr
 
-// PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY uintptr
 
-// PFN_AUTHZ_FREE_DYNAMIC_GROUPS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*security.SID_AND_ATTRIBUTES).
+// PFN_AUTHZ_FREE_DYNAMIC_GROUPS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*security.SID_AND_ATTRIBUTES) uintptr.
 type PFN_AUTHZ_FREE_DYNAMIC_GROUPS uintptr
 
-// PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(AUTHZ_CLIENT_CONTEXT_HANDLE, security.PSID, unsafe.Pointer, *foundation.BOOL, *unsafe.Pointer) foundation.BOOL.
+// PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(AUTHZ_CLIENT_CONTEXT_HANDLE, security.PSID, unsafe.Pointer, *foundation.BOOL, *unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY uintptr

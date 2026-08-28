@@ -4,42 +4,51 @@
 
 package snmp
 
-// PFNSNMPCLEANUPEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uint32.
+// PFNSNMPCLEANUPEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNSNMPCLEANUPEX uintptr
 
-// PFNSNMPEXTENSIONCLOSE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func().
+// PFNSNMPEXTENSIONCLOSE is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr.
 type PFNSNMPEXTENSIONCLOSE uintptr
 
-// PFNSNMPEXTENSIONINIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *foundation.HANDLE, *AsnObjectIdentifier) foundation.BOOL.
+// PFNSNMPEXTENSIONINIT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *foundation.HANDLE, *AsnObjectIdentifier) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNSNMPEXTENSIONINIT uintptr
 
-// PFNSNMPEXTENSIONINITEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*AsnObjectIdentifier) foundation.BOOL.
+// PFNSNMPEXTENSIONINITEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*AsnObjectIdentifier) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNSNMPEXTENSIONINITEX uintptr
 
-// PFNSNMPEXTENSIONMONITOR is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.BOOL.
+// PFNSNMPEXTENSIONMONITOR is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNSNMPEXTENSIONMONITOR uintptr
 
-// PFNSNMPEXTENSIONQUERY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(byte, *SnmpVarBindList, *int32, *int32) foundation.BOOL.
+// PFNSNMPEXTENSIONQUERY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(byte, *SnmpVarBindList, *int32, *int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNSNMPEXTENSIONQUERY uintptr
 
-// PFNSNMPEXTENSIONQUERYEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *SnmpVarBindList, *AsnOctetString, *int32, *int32) foundation.BOOL.
+// PFNSNMPEXTENSIONQUERYEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *SnmpVarBindList, *AsnOctetString, *int32, *int32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNSNMPEXTENSIONQUERYEX uintptr
 
-// PFNSNMPEXTENSIONTRAP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*AsnObjectIdentifier, *int32, *int32, *uint32, *SnmpVarBindList) foundation.BOOL.
+// PFNSNMPEXTENSIONTRAP is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*AsnObjectIdentifier, *int32, *int32, *uint32, *SnmpVarBindList) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNSNMPEXTENSIONTRAP uintptr
 
-// PFNSNMPSTARTUPEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uint32, *uint32, *uint32, *uint32, *uint32) uint32.
+// PFNSNMPSTARTUPEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uint32, *uint32, *uint32, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNSNMPSTARTUPEX uintptr
 
-// SNMPAPI_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM, unsafe.Pointer) uint32.
+// SNMPAPI_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type SNMPAPI_CALLBACK uintptr

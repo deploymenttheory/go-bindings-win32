@@ -4,30 +4,30 @@
 
 package dns
 
-// DNS_PROXY_COMPLETION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, int32).
+// DNS_PROXY_COMPLETION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, int32) uintptr.
 type DNS_PROXY_COMPLETION_ROUTINE uintptr
 
-// DNS_QUERY_RAW_COMPLETION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DNS_QUERY_RAW_RESULT).
+// DNS_QUERY_RAW_COMPLETION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DNS_QUERY_RAW_RESULT) uintptr.
 type DNS_QUERY_RAW_COMPLETION_ROUTINE uintptr
 
-// PDNS_QUERY_COMPLETION_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *DNS_QUERY_RESULT).
+// PDNS_QUERY_COMPLETION_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *DNS_QUERY_RESULT) uintptr.
 type PDNS_QUERY_COMPLETION_ROUTINE uintptr
 
-// PDNS_SERVICE_BROWSE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer, *DNS_RECORDW).
+// PDNS_SERVICE_BROWSE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer, *DNS_RECORDW) uintptr.
 type PDNS_SERVICE_BROWSE_CALLBACK uintptr
 
-// PDNS_SERVICE_REGISTER_COMPLETE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer, *DNS_SERVICE_INSTANCE).
+// PDNS_SERVICE_REGISTER_COMPLETE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer, *DNS_SERVICE_INSTANCE) uintptr.
 type PDNS_SERVICE_REGISTER_COMPLETE uintptr
 
-// PDNS_SERVICE_RESOLVE_COMPLETE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer, *DNS_SERVICE_INSTANCE).
+// PDNS_SERVICE_RESOLVE_COMPLETE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer, *DNS_SERVICE_INSTANCE) uintptr.
 type PDNS_SERVICE_RESOLVE_COMPLETE uintptr
 
-// PMDNS_QUERY_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *MDNS_QUERY_HANDLE, *DNS_QUERY_RESULT).
+// PMDNS_QUERY_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *MDNS_QUERY_HANDLE, *DNS_QUERY_RESULT) uintptr.
 type PMDNS_QUERY_CALLBACK uintptr

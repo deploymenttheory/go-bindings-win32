@@ -4,126 +4,126 @@
 
 package opengl
 
-// GLUnurbsErrorProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32).
+// GLUnurbsErrorProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr.
 type GLUnurbsErrorProc uintptr
 
-// GLUquadricErrorProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32).
+// GLUquadricErrorProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr.
 type GLUquadricErrorProc uintptr
 
-// GLUtessBeginDataProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer).
+// GLUtessBeginDataProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer) uintptr.
 type GLUtessBeginDataProc uintptr
 
-// GLUtessBeginProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32).
+// GLUtessBeginProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr.
 type GLUtessBeginProc uintptr
 
-// GLUtessCombineDataProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*float64, *unsafe.Pointer, *float32, *unsafe.Pointer, unsafe.Pointer).
+// GLUtessCombineDataProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*float64, *unsafe.Pointer, *float32, *unsafe.Pointer, unsafe.Pointer) uintptr.
 type GLUtessCombineDataProc uintptr
 
-// GLUtessCombineProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*float64, *unsafe.Pointer, *float32, *unsafe.Pointer).
+// GLUtessCombineProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*float64, *unsafe.Pointer, *float32, *unsafe.Pointer) uintptr.
 type GLUtessCombineProc uintptr
 
-// GLUtessEdgeFlagDataProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(byte, unsafe.Pointer).
+// GLUtessEdgeFlagDataProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(byte, unsafe.Pointer) uintptr.
 type GLUtessEdgeFlagDataProc uintptr
 
-// GLUtessEdgeFlagProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(byte).
+// GLUtessEdgeFlagProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(byte) uintptr.
 type GLUtessEdgeFlagProc uintptr
 
-// GLUtessEndDataProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// GLUtessEndDataProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type GLUtessEndDataProc uintptr
 
-// GLUtessEndProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func().
+// GLUtessEndProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr.
 type GLUtessEndProc uintptr
 
-// GLUtessErrorDataProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer).
+// GLUtessErrorDataProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer) uintptr.
 type GLUtessErrorDataProc uintptr
 
-// GLUtessErrorProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32).
+// GLUtessErrorProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr.
 type GLUtessErrorProc uintptr
 
-// GLUtessVertexDataProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer).
+// GLUtessVertexDataProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr.
 type GLUtessVertexDataProc uintptr
 
-// GLUtessVertexProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// GLUtessVertexProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type GLUtessVertexProc uintptr
 
-// PFNGLADDSWAPHINTRECTWINPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, int32, int32, int32).
+// PFNGLADDSWAPHINTRECTWINPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, int32, int32, int32) uintptr.
 type PFNGLADDSWAPHINTRECTWINPROC uintptr
 
-// PFNGLARRAYELEMENTARRAYEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, int32, unsafe.Pointer).
+// PFNGLARRAYELEMENTARRAYEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, int32, unsafe.Pointer) uintptr.
 type PFNGLARRAYELEMENTARRAYEXTPROC uintptr
 
-// PFNGLARRAYELEMENTEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32).
+// PFNGLARRAYELEMENTEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32) uintptr.
 type PFNGLARRAYELEMENTEXTPROC uintptr
 
-// PFNGLCOLORPOINTEREXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, uint32, int32, int32, unsafe.Pointer).
+// PFNGLCOLORPOINTEREXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, uint32, int32, int32, unsafe.Pointer) uintptr.
 type PFNGLCOLORPOINTEREXTPROC uintptr
 
-// PFNGLCOLORSUBTABLEEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, int32, int32, uint32, uint32, unsafe.Pointer).
+// PFNGLCOLORSUBTABLEEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, int32, int32, uint32, uint32, unsafe.Pointer) uintptr.
 type PFNGLCOLORSUBTABLEEXTPROC uintptr
 
-// PFNGLCOLORTABLEEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, int32, uint32, uint32, unsafe.Pointer).
+// PFNGLCOLORTABLEEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, int32, uint32, uint32, unsafe.Pointer) uintptr.
 type PFNGLCOLORTABLEEXTPROC uintptr
 
-// PFNGLDRAWARRAYSEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, int32, int32).
+// PFNGLDRAWARRAYSEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, int32, int32) uintptr.
 type PFNGLDRAWARRAYSEXTPROC uintptr
 
-// PFNGLDRAWRANGEELEMENTSWINPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, int32, uint32, unsafe.Pointer).
+// PFNGLDRAWRANGEELEMENTSWINPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, int32, uint32, unsafe.Pointer) uintptr.
 type PFNGLDRAWRANGEELEMENTSWINPROC uintptr
 
-// PFNGLEDGEFLAGPOINTEREXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, int32, *byte).
+// PFNGLEDGEFLAGPOINTEREXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, int32, *byte) uintptr.
 type PFNGLEDGEFLAGPOINTEREXTPROC uintptr
 
-// PFNGLGETCOLORTABLEEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, uint32, unsafe.Pointer).
+// PFNGLGETCOLORTABLEEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, uint32, unsafe.Pointer) uintptr.
 type PFNGLGETCOLORTABLEEXTPROC uintptr
 
-// PFNGLGETCOLORTABLEPARAMETERFVEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *float32).
+// PFNGLGETCOLORTABLEPARAMETERFVEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *float32) uintptr.
 type PFNGLGETCOLORTABLEPARAMETERFVEXTPROC uintptr
 
-// PFNGLGETCOLORTABLEPARAMETERIVEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, *int32).
+// PFNGLGETCOLORTABLEPARAMETERIVEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, *int32) uintptr.
 type PFNGLGETCOLORTABLEPARAMETERIVEXTPROC uintptr
 
-// PFNGLGETPOINTERVEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *unsafe.Pointer).
+// PFNGLGETPOINTERVEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *unsafe.Pointer) uintptr.
 type PFNGLGETPOINTERVEXTPROC uintptr
 
-// PFNGLINDEXPOINTEREXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, int32, int32, unsafe.Pointer).
+// PFNGLINDEXPOINTEREXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, int32, int32, unsafe.Pointer) uintptr.
 type PFNGLINDEXPOINTEREXTPROC uintptr
 
-// PFNGLNORMALPOINTEREXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, int32, int32, unsafe.Pointer).
+// PFNGLNORMALPOINTEREXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, int32, int32, unsafe.Pointer) uintptr.
 type PFNGLNORMALPOINTEREXTPROC uintptr
 
-// PFNGLTEXCOORDPOINTEREXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, uint32, int32, int32, unsafe.Pointer).
+// PFNGLTEXCOORDPOINTEREXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, uint32, int32, int32, unsafe.Pointer) uintptr.
 type PFNGLTEXCOORDPOINTEREXTPROC uintptr
 
-// PFNGLVERTEXPOINTEREXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, uint32, int32, int32, unsafe.Pointer).
+// PFNGLVERTEXPOINTEREXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, uint32, int32, int32, unsafe.Pointer) uintptr.
 type PFNGLVERTEXPOINTEREXTPROC uintptr

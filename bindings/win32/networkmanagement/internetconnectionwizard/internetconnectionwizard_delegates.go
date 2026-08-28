@@ -4,10 +4,12 @@
 
 package internetconnectionwizard
 
-// PFNCHECKCONNECTIONWIZARD is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *uint32) uint32.
+// PFNCHECKCONNECTIONWIZARD is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNCHECKCONNECTIONWIZARD uintptr
 
-// PFNSETSHELLNEXT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) uint32.
+// PFNSETSHELLNEXT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNSETSHELLNEXT uintptr

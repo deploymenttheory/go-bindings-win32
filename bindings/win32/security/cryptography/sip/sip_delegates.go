@@ -4,38 +4,47 @@
 
 package sip
 
-// PCryptSIPCreateIndirectData is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SIP_SUBJECTINFO, *uint32, *SIP_INDIRECT_DATA) foundation.BOOL.
+// PCryptSIPCreateIndirectData is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SIP_SUBJECTINFO, *uint32, *SIP_INDIRECT_DATA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCryptSIPCreateIndirectData uintptr
 
-// PCryptSIPGetCaps is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SIP_SUBJECTINFO, *SIP_CAP_SET_V3) foundation.BOOL.
+// PCryptSIPGetCaps is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SIP_SUBJECTINFO, *SIP_CAP_SET_V3) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCryptSIPGetCaps uintptr
 
-// PCryptSIPGetSealedDigest is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SIP_SUBJECTINFO, *byte, uint32, *byte, *uint32) foundation.BOOL.
+// PCryptSIPGetSealedDigest is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SIP_SUBJECTINFO, *byte, uint32, *byte, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCryptSIPGetSealedDigest uintptr
 
-// PCryptSIPGetSignedDataMsg is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SIP_SUBJECTINFO, *uint32, uint32, *uint32, *byte) foundation.BOOL.
+// PCryptSIPGetSignedDataMsg is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SIP_SUBJECTINFO, *uint32, uint32, *uint32, *byte) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCryptSIPGetSignedDataMsg uintptr
 
-// PCryptSIPPutSignedDataMsg is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SIP_SUBJECTINFO, uint32, *uint32, uint32, *byte) foundation.BOOL.
+// PCryptSIPPutSignedDataMsg is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SIP_SUBJECTINFO, uint32, *uint32, uint32, *byte) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCryptSIPPutSignedDataMsg uintptr
 
-// PCryptSIPRemoveSignedDataMsg is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SIP_SUBJECTINFO, uint32) foundation.BOOL.
+// PCryptSIPRemoveSignedDataMsg is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SIP_SUBJECTINFO, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCryptSIPRemoveSignedDataMsg uintptr
 
-// PCryptSIPVerifyIndirectData is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*SIP_SUBJECTINFO, *SIP_INDIRECT_DATA) foundation.BOOL.
+// PCryptSIPVerifyIndirectData is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*SIP_SUBJECTINFO, *SIP_INDIRECT_DATA) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PCryptSIPVerifyIndirectData uintptr
 
-// PfnIsFileSupported is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, *win32.GUID) foundation.BOOL.
+// PfnIsFileSupported is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, *win32.GUID) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PfnIsFileSupported uintptr
 
-// PfnIsFileSupportedName is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *win32.GUID) foundation.BOOL.
+// PfnIsFileSupportedName is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *win32.GUID) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PfnIsFileSupportedName uintptr

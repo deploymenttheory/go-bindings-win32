@@ -4,118 +4,147 @@
 
 package virtualdosmachines
 
-// DEBUGEVENTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemdiagnosticsdebug.DEBUG_EVENT, unsafe.Pointer) uint32.
+// DEBUGEVENTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemdiagnosticsdebug.DEBUG_EVENT, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type DEBUGEVENTPROC uintptr
 
-// PROCESSENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, foundation.LPARAM) foundation.BOOL.
+// PROCESSENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint32, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PROCESSENUMPROC uintptr
 
-// TASKENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint16, uint16, foundation.LPARAM) foundation.BOOL.
+// TASKENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint16, uint16, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type TASKENUMPROC uintptr
 
-// TASKENUMPROCEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint16, uint16, *int8, *int8, foundation.LPARAM) foundation.BOOL.
+// TASKENUMPROCEX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint16, uint16, *int8, *int8, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type TASKENUMPROCEX uintptr
 
-// VDMBREAKTHREADPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) foundation.BOOL.
+// VDMBREAKTHREADPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMBREAKTHREADPROC uintptr
 
-// VDMDETECTWOWPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.BOOL.
+// VDMDETECTWOWPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMDETECTWOWPROC uintptr
 
-// VDMENUMPROCESSWOWPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PROCESSENUMPROC, foundation.LPARAM) int32.
+// VDMENUMPROCESSWOWPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PROCESSENUMPROC, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VDMENUMPROCESSWOWPROC uintptr
 
-// VDMENUMTASKWOWEXPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, TASKENUMPROCEX, foundation.LPARAM) int32.
+// VDMENUMTASKWOWEXPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, TASKENUMPROCEX, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VDMENUMTASKWOWEXPROC uintptr
 
-// VDMENUMTASKWOWPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, TASKENUMPROC, foundation.LPARAM) int32.
+// VDMENUMTASKWOWPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, TASKENUMPROC, foundation.LPARAM) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type VDMENUMTASKWOWPROC uintptr
 
-// VDMGETADDREXPRESSIONPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, *uint16, *uint32, *uint16) foundation.BOOL.
+// VDMGETADDREXPRESSIONPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.PSTR, *uint16, *uint32, *uint16) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMGETADDREXPRESSIONPROC uintptr
 
-// VDMGETCONTEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *systemdiagnosticsdebug.CONTEXT) foundation.BOOL.
+// VDMGETCONTEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, *systemdiagnosticsdebug.CONTEXT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMGETCONTEXTPROC uintptr
 
-// VDMGETDBGFLAGSPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE) uint32.
+// VDMGETDBGFLAGSPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type VDMGETDBGFLAGSPROC uintptr
 
-// VDMGETMODULESELECTORPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, foundation.PSTR, *uint16) foundation.BOOL.
+// VDMGETMODULESELECTORPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, foundation.PSTR, *uint16) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMGETMODULESELECTORPROC uintptr
 
-// VDMGETPOINTERPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, uint16, uint32, foundation.BOOL) uint32.
+// VDMGETPOINTERPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, uint16, uint32, foundation.BOOL) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type VDMGETPOINTERPROC uintptr
 
-// VDMGETSEGMENTINFOPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint16, uint32, foundation.BOOL, VDM_SEGINFO) foundation.BOOL.
+// VDMGETSEGMENTINFOPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint16, uint32, foundation.BOOL, VDM_SEGINFO) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMGETSEGMENTINFOPROC uintptr
 
-// VDMGETSELECTORMODULEPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, uint16, *uint32, foundation.PSTR, uint32, foundation.PSTR, uint32) foundation.BOOL.
+// VDMGETSELECTORMODULEPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, uint16, *uint32, foundation.PSTR, uint32, foundation.PSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMGETSELECTORMODULEPROC uintptr
 
-// VDMGETSYMBOLPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint16, uint32, foundation.BOOL, foundation.BOOL, foundation.PSTR, *uint32) foundation.BOOL.
+// VDMGETSYMBOLPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint16, uint32, foundation.BOOL, foundation.BOOL, foundation.PSTR, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMGETSYMBOLPROC uintptr
 
-// VDMGETTHREADSELECTORENTRYPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, *systemdiagnosticsdebug.LDT_ENTRY) foundation.BOOL.
+// VDMGETTHREADSELECTORENTRYPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, uint32, *systemdiagnosticsdebug.LDT_ENTRY) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMGETTHREADSELECTORENTRYPROC uintptr
 
-// VDMGLOBALFIRSTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *GLOBALENTRY, uint16, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
+// VDMGLOBALFIRSTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, *GLOBALENTRY, uint16, DEBUGEVENTPROC, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMGLOBALFIRSTPROC uintptr
 
-// VDMGLOBALNEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *GLOBALENTRY, uint16, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
+// VDMGLOBALNEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, *GLOBALENTRY, uint16, DEBUGEVENTPROC, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMGLOBALNEXTPROC uintptr
 
-// VDMISMODULELOADEDPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR) foundation.BOOL.
+// VDMISMODULELOADEDPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMISMODULELOADEDPROC uintptr
 
-// VDMKILLWOWPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.BOOL.
+// VDMKILLWOWPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMKILLWOWPROC uintptr
 
-// VDMMODULEFIRSTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *MODULEENTRY, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
+// VDMMODULEFIRSTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, *MODULEENTRY, DEBUGEVENTPROC, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMMODULEFIRSTPROC uintptr
 
-// VDMMODULENEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *MODULEENTRY, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
+// VDMMODULENEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, *MODULEENTRY, DEBUGEVENTPROC, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMMODULENEXTPROC uintptr
 
-// VDMPROCESSEXCEPTIONPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemdiagnosticsdebug.DEBUG_EVENT) foundation.BOOL.
+// VDMPROCESSEXCEPTIONPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemdiagnosticsdebug.DEBUG_EVENT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMPROCESSEXCEPTIONPROC uintptr
 
-// VDMSETCONTEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *systemdiagnosticsdebug.CONTEXT) foundation.BOOL.
+// VDMSETCONTEXTPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, foundation.HANDLE, *systemdiagnosticsdebug.CONTEXT) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMSETCONTEXTPROC uintptr
 
-// VDMSETDBGFLAGSPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, uint32) foundation.BOOL.
+// VDMSETDBGFLAGSPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HANDLE, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMSETDBGFLAGSPROC uintptr
 
-// VDMSTARTTASKINWOWPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PSTR, uint16) foundation.BOOL.
+// VDMSTARTTASKINWOWPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PSTR, uint16) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMSTARTTASKINWOWPROC uintptr
 
-// VDMTERMINATETASKINWOWPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint16) foundation.BOOL.
+// VDMTERMINATETASKINWOWPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, uint16) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type VDMTERMINATETASKINWOWPROC uintptr

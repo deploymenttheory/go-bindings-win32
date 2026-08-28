@@ -4,34 +4,41 @@
 
 package projectedfilesystem
 
-// PRJ_CANCEL_COMMAND_CB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*PRJ_CALLBACK_DATA).
+// PRJ_CANCEL_COMMAND_CB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*PRJ_CALLBACK_DATA) uintptr.
 type PRJ_CANCEL_COMMAND_CB uintptr
 
-// PRJ_END_DIRECTORY_ENUMERATION_CB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*PRJ_CALLBACK_DATA, *win32.GUID) foundation.HRESULT.
+// PRJ_END_DIRECTORY_ENUMERATION_CB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*PRJ_CALLBACK_DATA, *win32.GUID) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PRJ_END_DIRECTORY_ENUMERATION_CB uintptr
 
-// PRJ_GET_DIRECTORY_ENUMERATION_CB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*PRJ_CALLBACK_DATA, *win32.GUID, foundation.PWSTR, PRJ_DIR_ENTRY_BUFFER_HANDLE) foundation.HRESULT.
+// PRJ_GET_DIRECTORY_ENUMERATION_CB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*PRJ_CALLBACK_DATA, *win32.GUID, foundation.PWSTR, PRJ_DIR_ENTRY_BUFFER_HANDLE) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PRJ_GET_DIRECTORY_ENUMERATION_CB uintptr
 
-// PRJ_GET_FILE_DATA_CB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*PRJ_CALLBACK_DATA, uint64, uint32) foundation.HRESULT.
+// PRJ_GET_FILE_DATA_CB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*PRJ_CALLBACK_DATA, uint64, uint32) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PRJ_GET_FILE_DATA_CB uintptr
 
-// PRJ_GET_PLACEHOLDER_INFO_CB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*PRJ_CALLBACK_DATA) foundation.HRESULT.
+// PRJ_GET_PLACEHOLDER_INFO_CB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*PRJ_CALLBACK_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PRJ_GET_PLACEHOLDER_INFO_CB uintptr
 
-// PRJ_NOTIFICATION_CB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*PRJ_CALLBACK_DATA, foundation.BOOLEAN, PRJ_NOTIFICATION, foundation.PWSTR, *PRJ_NOTIFICATION_PARAMETERS) foundation.HRESULT.
+// PRJ_NOTIFICATION_CB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*PRJ_CALLBACK_DATA, foundation.BOOLEAN, PRJ_NOTIFICATION, foundation.PWSTR, *PRJ_NOTIFICATION_PARAMETERS) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PRJ_NOTIFICATION_CB uintptr
 
-// PRJ_QUERY_FILE_NAME_CB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*PRJ_CALLBACK_DATA) foundation.HRESULT.
+// PRJ_QUERY_FILE_NAME_CB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*PRJ_CALLBACK_DATA) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PRJ_QUERY_FILE_NAME_CB uintptr
 
-// PRJ_START_DIRECTORY_ENUMERATION_CB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*PRJ_CALLBACK_DATA, *win32.GUID) foundation.HRESULT.
+// PRJ_START_DIRECTORY_ENUMERATION_CB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*PRJ_CALLBACK_DATA, *win32.GUID) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PRJ_START_DIRECTORY_ENUMERATION_CB uintptr

@@ -4,30 +4,30 @@
 
 package iphelper
 
-// PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK uintptr
 
-// PIPFORWARD_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *MIB_IPFORWARD_ROW2, MIB_NOTIFICATION_TYPE).
+// PIPFORWARD_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *MIB_IPFORWARD_ROW2, MIB_NOTIFICATION_TYPE) uintptr.
 type PIPFORWARD_CHANGE_CALLBACK uintptr
 
-// PIPINTERFACE_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *MIB_IPINTERFACE_ROW, MIB_NOTIFICATION_TYPE).
+// PIPINTERFACE_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *MIB_IPINTERFACE_ROW, MIB_NOTIFICATION_TYPE) uintptr.
 type PIPINTERFACE_CHANGE_CALLBACK uintptr
 
-// PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, networkingwinsock.NL_NETWORK_CONNECTIVITY_HINT).
+// PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, networkingwinsock.NL_NETWORK_CONNECTIVITY_HINT) uintptr.
 type PNETWORK_CONNECTIVITY_HINT_CHANGE_CALLBACK uintptr
 
-// PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *MIB_UNICASTIPADDRESS_TABLE).
+// PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *MIB_UNICASTIPADDRESS_TABLE) uintptr.
 type PSTABLE_UNICAST_IPADDRESS_TABLE_CALLBACK uintptr
 
-// PTEREDO_PORT_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint16, MIB_NOTIFICATION_TYPE).
+// PTEREDO_PORT_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint16, MIB_NOTIFICATION_TYPE) uintptr.
 type PTEREDO_PORT_CHANGE_CALLBACK uintptr
 
-// PUNICAST_IPADDRESS_CHANGE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *MIB_UNICASTIPADDRESS_ROW, MIB_NOTIFICATION_TYPE).
+// PUNICAST_IPADDRESS_CHANGE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, *MIB_UNICASTIPADDRESS_ROW, MIB_NOTIFICATION_TYPE) uintptr.
 type PUNICAST_IPADDRESS_CHANGE_CALLBACK uintptr

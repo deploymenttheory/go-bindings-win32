@@ -4,6 +4,7 @@
 
 package magnification
 
-// MagImageScalingCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, unsafe.Pointer, MAGIMAGEHEADER, unsafe.Pointer, MAGIMAGEHEADER, foundation.RECT, foundation.RECT, graphicsgdi.HRGN) foundation.BOOL.
+// MagImageScalingCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, unsafe.Pointer, MAGIMAGEHEADER, unsafe.Pointer, MAGIMAGEHEADER, foundation.RECT, foundation.RECT, graphicsgdi.HRGN) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type MagImageScalingCallback uintptr

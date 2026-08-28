@@ -4,6 +4,7 @@
 
 package iscsidisc
 
-// PDUMP_DEVICE_POWERON_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) int32.
+// PDUMP_DEVICE_POWERON_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type PDUMP_DEVICE_POWERON_ROUTINE uintptr

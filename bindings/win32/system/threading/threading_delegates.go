@@ -4,70 +4,72 @@
 
 package threading
 
-// APC_CALLBACK_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer, unsafe.Pointer).
+// APC_CALLBACK_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer, unsafe.Pointer) uintptr.
 type APC_CALLBACK_FUNCTION uintptr
 
-// LPFIBER_START_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// LPFIBER_START_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type LPFIBER_START_ROUTINE uintptr
 
-// LPTHREAD_START_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) uint32.
+// LPTHREAD_START_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type LPTHREAD_START_ROUTINE uintptr
 
-// PFLS_CALLBACK_FUNCTION is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// PFLS_CALLBACK_FUNCTION is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type PFLS_CALLBACK_FUNCTION uintptr
 
-// PINIT_ONCE_FN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*INIT_ONCE, unsafe.Pointer, *unsafe.Pointer) foundation.BOOL.
+// PINIT_ONCE_FN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*INIT_ONCE, unsafe.Pointer, *unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PINIT_ONCE_FN uintptr
 
-// PPS_POST_PROCESS_INIT_ROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func().
+// PPS_POST_PROCESS_INIT_ROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr.
 type PPS_POST_PROCESS_INIT_ROUTINE uintptr
 
-// PRTL_UMS_SCHEDULER_ENTRY_POINT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(systemsystemservices.RTL_UMS_SCHEDULER_REASON, uintptr, unsafe.Pointer).
+// PRTL_UMS_SCHEDULER_ENTRY_POINT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(systemsystemservices.RTL_UMS_SCHEDULER_REASON, uintptr, unsafe.Pointer) uintptr.
 type PRTL_UMS_SCHEDULER_ENTRY_POINT uintptr
 
-// PTIMERAPCROUTINE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uint32, uint32).
+// PTIMERAPCROUTINE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uint32, uint32) uintptr.
 type PTIMERAPCROUTINE uintptr
 
-// PTP_CLEANUP_GROUP_CANCEL_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer).
+// PTP_CLEANUP_GROUP_CANCEL_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr.
 type PTP_CLEANUP_GROUP_CANCEL_CALLBACK uintptr
 
-// PTP_SIMPLE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer).
+// PTP_SIMPLE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer) uintptr.
 type PTP_SIMPLE_CALLBACK uintptr
 
-// PTP_TIMER_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer, PTP_TIMER).
+// PTP_TIMER_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer, PTP_TIMER) uintptr.
 type PTP_TIMER_CALLBACK uintptr
 
-// PTP_WAIT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer, PTP_WAIT, uint32).
+// PTP_WAIT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer, PTP_WAIT, uint32) uintptr.
 type PTP_WAIT_CALLBACK uintptr
 
-// PTP_WIN32_IO_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer, unsafe.Pointer, uint32, uintptr, PTP_IO).
+// PTP_WIN32_IO_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer, unsafe.Pointer, uint32, uintptr, PTP_IO) uintptr.
 type PTP_WIN32_IO_CALLBACK uintptr
 
-// PTP_WORK_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer, PTP_WORK).
+// PTP_WORK_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(PTP_CALLBACK_INSTANCE, unsafe.Pointer, PTP_WORK) uintptr.
 type PTP_WORK_CALLBACK uintptr
 
-// RTWQPERIODICCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*systemcom.IUnknown).
+// RTWQPERIODICCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*systemcom.IUnknown) uintptr.
 type RTWQPERIODICCALLBACK uintptr
 
-// WAITORTIMERCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, foundation.BOOLEAN).
+// WAITORTIMERCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, foundation.BOOLEAN) uintptr.
 type WAITORTIMERCALLBACK uintptr
 
-// WORKERCALLBACKFUNC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// WORKERCALLBACKFUNC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type WORKERCALLBACKFUNC uintptr

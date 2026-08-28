@@ -4,6 +4,6 @@
 
 package restartmanager
 
-// RM_WRITE_STATUS_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32).
+// RM_WRITE_STATUS_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32) uintptr.
 type RM_WRITE_STATUS_CALLBACK uintptr

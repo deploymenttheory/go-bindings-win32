@@ -4,58 +4,69 @@
 
 package windowsandmessaging
 
-// DLGPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr.
+// DLGPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uintptr; NewCallback requires a uintptr-sized result).
 type DLGPROC uintptr
 
-// HOOKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(int32, foundation.WPARAM, foundation.LPARAM) foundation.LRESULT.
+// HOOKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(int32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type HOOKPROC uintptr
 
-// MSGBOXCALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// MSGBOXCALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type MSGBOXCALLBACK uintptr
 
-// NAMEENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.LPARAM) foundation.BOOL.
+// NAMEENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type NAMEENUMPROCA uintptr
 
-// NAMEENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.LPARAM) foundation.BOOL.
+// NAMEENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type NAMEENUMPROCW uintptr
 
-// PREGISTERCLASSNAMEW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) foundation.BOOLEAN.
+// PREGISTERCLASSNAMEW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// foundation.BOOLEAN; NewCallback requires a uintptr-sized result).
 type PREGISTERCLASSNAMEW uintptr
 
-// PROPENUMPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.PSTR, foundation.HANDLE) foundation.BOOL.
+// PROPENUMPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.PSTR, foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PROPENUMPROCA uintptr
 
-// PROPENUMPROCEXA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.PSTR, foundation.HANDLE, uintptr) foundation.BOOL.
+// PROPENUMPROCEXA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.PSTR, foundation.HANDLE, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PROPENUMPROCEXA uintptr
 
-// PROPENUMPROCEXW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.PWSTR, foundation.HANDLE, uintptr) foundation.BOOL.
+// PROPENUMPROCEXW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.PWSTR, foundation.HANDLE, uintptr) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PROPENUMPROCEXW uintptr
 
-// PROPENUMPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.PWSTR, foundation.HANDLE) foundation.BOOL.
+// PROPENUMPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.PWSTR, foundation.HANDLE) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PROPENUMPROCW uintptr
 
-// SENDASYNCPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, uintptr, foundation.LRESULT).
+// SENDASYNCPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, uintptr, foundation.LRESULT) uintptr.
 type SENDASYNCPROC uintptr
 
-// TIMERPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, uintptr, uint32).
+// TIMERPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, uintptr, uint32) uintptr.
 type TIMERPROC uintptr
 
-// WNDENUMPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.LPARAM) foundation.BOOL.
+// WNDENUMPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.LPARAM) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type WNDENUMPROC uintptr
 
-// WNDPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) foundation.LRESULT.
+// WNDPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type WNDPROC uintptr

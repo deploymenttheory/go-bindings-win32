@@ -4,42 +4,51 @@
 
 package wininet
 
-// CACHE_OPERATOR is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*INTERNET_CACHE_ENTRY_INFOA, *uint32, unsafe.Pointer) foundation.BOOL.
+// CACHE_OPERATOR is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*INTERNET_CACHE_ENTRY_INFOA, *uint32, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type CACHE_OPERATOR uintptr
 
-// GOPHER_ATTRIBUTE_ENUMERATOR is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*GOPHER_ATTRIBUTE_TYPE, uint32) foundation.BOOL.
+// GOPHER_ATTRIBUTE_ENUMERATOR is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*GOPHER_ATTRIBUTE_TYPE, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type GOPHER_ATTRIBUTE_ENUMERATOR uintptr
 
-// HTTP_POLICY_EXTENSION_INIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HTTP_POLICY_EXTENSION_VERSION, HTTP_POLICY_EXTENSION_TYPE, unsafe.Pointer, uint32) uint32.
+// HTTP_POLICY_EXTENSION_INIT is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HTTP_POLICY_EXTENSION_VERSION, HTTP_POLICY_EXTENSION_TYPE, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type HTTP_POLICY_EXTENSION_INIT uintptr
 
-// HTTP_POLICY_EXTENSION_SHUTDOWN is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HTTP_POLICY_EXTENSION_TYPE) uint32.
+// HTTP_POLICY_EXTENSION_SHUTDOWN is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HTTP_POLICY_EXTENSION_TYPE) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type HTTP_POLICY_EXTENSION_SHUTDOWN uintptr
 
-// LPINTERNET_STATUS_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, uintptr, uint32, unsafe.Pointer, uint32).
+// LPINTERNET_STATUS_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, uintptr, uint32, unsafe.Pointer, uint32) uintptr.
 type LPINTERNET_STATUS_CALLBACK uintptr
 
-// PFN_AUTH_NOTIFY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, unsafe.Pointer) uint32.
+// PFN_AUTH_NOTIFY is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, unsafe.Pointer) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_AUTH_NOTIFY uintptr
 
-// PFN_DIAL_HANDLER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, foundation.PSTR, uint32, *uint32) uint32.
+// PFN_DIAL_HANDLER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, foundation.PSTR, uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFN_DIAL_HANDLER uintptr
 
-// PfnInternetDeInitializeAutoProxyDll is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32) foundation.BOOL.
+// PfnInternetDeInitializeAutoProxyDll is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PfnInternetDeInitializeAutoProxyDll uintptr
 
-// PfnInternetGetProxyInfo is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, uint32, foundation.PSTR, uint32, *foundation.PSTR, *uint32) foundation.BOOL.
+// PfnInternetGetProxyInfo is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PSTR, uint32, foundation.PSTR, uint32, *foundation.PSTR, *uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PfnInternetGetProxyInfo uintptr
 
-// PfnInternetInitializeAutoProxyDll is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, foundation.PSTR, foundation.PSTR, *AutoProxyHelperFunctions, *AUTO_PROXY_SCRIPT_BUFFER) foundation.BOOL.
+// PfnInternetInitializeAutoProxyDll is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, foundation.PSTR, foundation.PSTR, *AutoProxyHelperFunctions, *AUTO_PROXY_SCRIPT_BUFFER) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PfnInternetInitializeAutoProxyDll uintptr

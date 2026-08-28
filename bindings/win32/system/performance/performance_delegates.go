@@ -4,34 +4,40 @@
 
 package performance
 
-// CounterPathCallBack is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr) int32.
+// CounterPathCallBack is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr (the native return type is
+// int32; NewCallback requires a uintptr-sized result).
 type CounterPathCallBack uintptr
 
-// PERFLIBREQUEST is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, unsafe.Pointer, uint32) uint32.
+// PERFLIBREQUEST is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uint32, unsafe.Pointer, uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PERFLIBREQUEST uintptr
 
-// PERF_MEM_ALLOC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, unsafe.Pointer) unsafe.Pointer.
+// PERF_MEM_ALLOC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, unsafe.Pointer) uintptr (the native return type is
+// unsafe.Pointer; NewCallback requires a uintptr-sized result).
 type PERF_MEM_ALLOC uintptr
 
-// PERF_MEM_FREE is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, unsafe.Pointer).
+// PERF_MEM_FREE is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer, unsafe.Pointer) uintptr.
 type PERF_MEM_FREE uintptr
 
-// PLA_CABEXTRACT_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, unsafe.Pointer).
+// PLA_CABEXTRACT_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, unsafe.Pointer) uintptr.
 type PLA_CABEXTRACT_CALLBACK uintptr
 
-// PM_CLOSE_PROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uint32.
+// PM_CLOSE_PROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PM_CLOSE_PROC uintptr
 
-// PM_COLLECT_PROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, *unsafe.Pointer, *uint32, *uint32) uint32.
+// PM_COLLECT_PROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR, *unsafe.Pointer, *uint32, *uint32) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PM_COLLECT_PROC uintptr
 
-// PM_OPEN_PROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR) uint32.
+// PM_OPEN_PROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.PWSTR) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PM_OPEN_PROC uintptr

@@ -4,30 +4,35 @@
 
 package gdiplus
 
-// DebugEventProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(DebugEventLevel, foundation.PSTR).
+// DebugEventProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(DebugEventLevel, foundation.PSTR) uintptr.
 type DebugEventProc uintptr
 
-// DrawImageAbort is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.BOOL.
+// DrawImageAbort is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type DrawImageAbort uintptr
 
-// EnumerateMetafileProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(EmfPlusRecordType, uint32, uint32, *byte, unsafe.Pointer) foundation.BOOL.
+// EnumerateMetafileProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(EmfPlusRecordType, uint32, uint32, *byte, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type EnumerateMetafileProc uintptr
 
-// GetThumbnailImageAbort is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() foundation.BOOL.
+// GetThumbnailImageAbort is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type GetThumbnailImageAbort uintptr
 
-// ImageAbort is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.BOOL.
+// ImageAbort is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ImageAbort uintptr
 
-// NotificationHookProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*uintptr) Status.
+// NotificationHookProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*uintptr) uintptr (the native return type is
+// Status; NewCallback requires a uintptr-sized result).
 type NotificationHookProc uintptr
 
-// NotificationUnhookProc is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr).
+// NotificationUnhookProc is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr) uintptr.
 type NotificationUnhookProc uintptr

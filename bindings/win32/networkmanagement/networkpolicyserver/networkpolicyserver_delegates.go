@@ -4,26 +4,30 @@
 
 package networkpolicyserver
 
-// PRADIUS_EXTENSION_FREE_ATTRIBUTES is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RADIUS_ATTRIBUTE).
+// PRADIUS_EXTENSION_FREE_ATTRIBUTES is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RADIUS_ATTRIBUTE) uintptr.
 type PRADIUS_EXTENSION_FREE_ATTRIBUTES uintptr
 
-// PRADIUS_EXTENSION_INIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func() uint32.
+// PRADIUS_EXTENSION_INIT is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRADIUS_EXTENSION_INIT uintptr
 
-// PRADIUS_EXTENSION_PROCESS is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RADIUS_ATTRIBUTE, *RADIUS_ACTION) uint32.
+// PRADIUS_EXTENSION_PROCESS is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RADIUS_ATTRIBUTE, *RADIUS_ACTION) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRADIUS_EXTENSION_PROCESS uintptr
 
-// PRADIUS_EXTENSION_PROCESS_2 is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RADIUS_EXTENSION_CONTROL_BLOCK) uint32.
+// PRADIUS_EXTENSION_PROCESS_2 is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RADIUS_EXTENSION_CONTROL_BLOCK) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRADIUS_EXTENSION_PROCESS_2 uintptr
 
-// PRADIUS_EXTENSION_PROCESS_EX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*RADIUS_ATTRIBUTE, **RADIUS_ATTRIBUTE, *RADIUS_ACTION) uint32.
+// PRADIUS_EXTENSION_PROCESS_EX is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*RADIUS_ATTRIBUTE, **RADIUS_ATTRIBUTE, *RADIUS_ACTION) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PRADIUS_EXTENSION_PROCESS_EX uintptr
 
-// PRADIUS_EXTENSION_TERM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func().
+// PRADIUS_EXTENSION_TERM is a callback pointer: create one with syscall.NewCallback
+// using the shape func() uintptr.
 type PRADIUS_EXTENSION_TERM uintptr

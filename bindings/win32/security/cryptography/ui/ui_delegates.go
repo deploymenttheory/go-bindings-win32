@@ -4,18 +4,22 @@
 
 package ui
 
-// PFNCFILTERPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycryptography.CERT_CONTEXT, *foundation.BOOL, unsafe.Pointer) foundation.BOOL.
+// PFNCFILTERPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycryptography.CERT_CONTEXT, *foundation.BOOL, unsafe.Pointer) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNCFILTERPROC uintptr
 
-// PFNCMFILTERPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycryptography.CERT_CONTEXT, foundation.LPARAM, uint32, uint32) foundation.BOOL.
+// PFNCMFILTERPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycryptography.CERT_CONTEXT, foundation.LPARAM, uint32, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type PFNCMFILTERPROC uintptr
 
-// PFNCMHOOKPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uint32.
+// PFNCMHOOKPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type PFNCMHOOKPROC uintptr
 
-// PFNTRUSTHELPER is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*securitycryptography.CERT_CONTEXT, foundation.LPARAM, foundation.BOOL, *byte) foundation.HRESULT.
+// PFNTRUSTHELPER is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*securitycryptography.CERT_CONTEXT, foundation.LPARAM, foundation.BOOL, *byte) uintptr (the native return type is
+// foundation.HRESULT; NewCallback requires a uintptr-sized result).
 type PFNTRUSTHELPER uintptr

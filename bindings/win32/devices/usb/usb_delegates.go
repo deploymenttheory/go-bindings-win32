@@ -4,6 +4,6 @@
 
 package usb
 
-// USB_IDLE_CALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer).
+// USB_IDLE_CALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(unsafe.Pointer) uintptr.
 type USB_IDLE_CALLBACK uintptr

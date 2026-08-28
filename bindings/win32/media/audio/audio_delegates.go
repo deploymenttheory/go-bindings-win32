@@ -4,70 +4,84 @@
 
 package audio
 
-// ACMDRIVERENUMCB is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, uintptr, uint32) foundation.BOOL.
+// ACMDRIVERENUMCB is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HACMDRIVERID, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ACMDRIVERENUMCB uintptr
 
-// ACMFILTERCHOOSEHOOKPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uint32.
+// ACMFILTERCHOOSEHOOKPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type ACMFILTERCHOOSEHOOKPROCA uintptr
 
-// ACMFILTERCHOOSEHOOKPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uint32.
+// ACMFILTERCHOOSEHOOKPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type ACMFILTERCHOOSEHOOKPROCW uintptr
 
-// ACMFILTERENUMCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, *ACMFILTERDETAILSA, uintptr, uint32) foundation.BOOL.
+// ACMFILTERENUMCBA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HACMDRIVERID, *ACMFILTERDETAILSA, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ACMFILTERENUMCBA uintptr
 
-// ACMFILTERENUMCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, *ACMFILTERDETAILSW, uintptr, uint32) foundation.BOOL.
+// ACMFILTERENUMCBW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HACMDRIVERID, *ACMFILTERDETAILSW, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ACMFILTERENUMCBW uintptr
 
-// ACMFILTERTAGENUMCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, *ACMFILTERTAGDETAILSA, uintptr, uint32) foundation.BOOL.
+// ACMFILTERTAGENUMCBA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HACMDRIVERID, *ACMFILTERTAGDETAILSA, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ACMFILTERTAGENUMCBA uintptr
 
-// ACMFILTERTAGENUMCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, *ACMFILTERTAGDETAILSW, uintptr, uint32) foundation.BOOL.
+// ACMFILTERTAGENUMCBW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HACMDRIVERID, *ACMFILTERTAGDETAILSW, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ACMFILTERTAGENUMCBW uintptr
 
-// ACMFORMATCHOOSEHOOKPROCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uint32.
+// ACMFORMATCHOOSEHOOKPROCA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type ACMFORMATCHOOSEHOOKPROCA uintptr
 
-// ACMFORMATCHOOSEHOOKPROCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uint32.
+// ACMFORMATCHOOSEHOOKPROCW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(foundation.HWND, uint32, foundation.WPARAM, foundation.LPARAM) uintptr (the native return type is
+// uint32; NewCallback requires a uintptr-sized result).
 type ACMFORMATCHOOSEHOOKPROCW uintptr
 
-// ACMFORMATENUMCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, *ACMFORMATDETAILSA, uintptr, uint32) foundation.BOOL.
+// ACMFORMATENUMCBA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HACMDRIVERID, *ACMFORMATDETAILSA, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ACMFORMATENUMCBA uintptr
 
-// ACMFORMATENUMCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, *TACMFORMATDETAILSW, uintptr, uint32) foundation.BOOL.
+// ACMFORMATENUMCBW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HACMDRIVERID, *TACMFORMATDETAILSW, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ACMFORMATENUMCBW uintptr
 
-// ACMFORMATTAGENUMCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, *ACMFORMATTAGDETAILSA, uintptr, uint32) foundation.BOOL.
+// ACMFORMATTAGENUMCBA is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HACMDRIVERID, *ACMFORMATTAGDETAILSA, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ACMFORMATTAGENUMCBA uintptr
 
-// ACMFORMATTAGENUMCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, *ACMFORMATTAGDETAILSW, uintptr, uint32) foundation.BOOL.
+// ACMFORMATTAGENUMCBW is a callback pointer: create one with syscall.NewCallback
+// using the shape func(HACMDRIVERID, *ACMFORMATTAGDETAILSW, uintptr, uint32) uintptr (the native return type is
+// foundation.BOOL; NewCallback requires a uintptr-sized result).
 type ACMFORMATTAGENUMCBW uintptr
 
-// LPACMDRIVERPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, HACMDRIVERID, uint32, foundation.LPARAM, foundation.LPARAM) foundation.LRESULT.
+// LPACMDRIVERPROC is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, HACMDRIVERID, uint32, foundation.LPARAM, foundation.LPARAM) uintptr (the native return type is
+// foundation.LRESULT; NewCallback requires a uintptr-sized result).
 type LPACMDRIVERPROC uintptr
 
-// LPMIDICALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, uintptr, uintptr, uintptr).
+// LPMIDICALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, uintptr, uintptr, uintptr) uintptr.
 type LPMIDICALLBACK uintptr
 
-// LPWAVECALLBACK is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uintptr, uint32, uintptr, uintptr, uintptr).
+// LPWAVECALLBACK is a callback pointer: create one with syscall.NewCallback
+// using the shape func(uintptr, uint32, uintptr, uintptr, uintptr) uintptr.
 type LPWAVECALLBACK uintptr
 
-// PAudioStateMonitorCallback is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(*IAudioStateMonitor, unsafe.Pointer).
+// PAudioStateMonitorCallback is a callback pointer: create one with syscall.NewCallback
+// using the shape func(*IAudioStateMonitor, unsafe.Pointer) uintptr.
 type PAudioStateMonitorCallback uintptr

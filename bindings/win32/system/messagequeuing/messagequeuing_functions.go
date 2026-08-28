@@ -57,6 +57,82 @@ var (
 	procMQSetQueueSecurity              = modmqrt.NewProc("MQSetQueueSecurity")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MQADsPathToFormatName           *win32.Proc
+	MQBeginTransaction              *win32.Proc
+	MQCloseCursor                   *win32.Proc
+	MQCloseQueue                    *win32.Proc
+	MQCreateCursor                  *win32.Proc
+	MQCreateQueue                   *win32.Proc
+	MQDeleteQueue                   *win32.Proc
+	MQFreeMemory                    *win32.Proc
+	MQFreeSecurityContext           *win32.Proc
+	MQGetMachineProperties          *win32.Proc
+	MQGetOverlappedResult           *win32.Proc
+	MQGetPrivateComputerInformation *win32.Proc
+	MQGetQueueProperties            *win32.Proc
+	MQGetQueueSecurity              *win32.Proc
+	MQGetSecurityContext            *win32.Proc
+	MQGetSecurityContextEx          *win32.Proc
+	MQHandleToFormatName            *win32.Proc
+	MQInstanceToFormatName          *win32.Proc
+	MQLocateBegin                   *win32.Proc
+	MQLocateEnd                     *win32.Proc
+	MQLocateNext                    *win32.Proc
+	MQMarkMessageRejected           *win32.Proc
+	MQMgmtAction                    *win32.Proc
+	MQMgmtGetInfo                   *win32.Proc
+	MQMoveMessage                   *win32.Proc
+	MQOpenQueue                     *win32.Proc
+	MQPathNameToFormatName          *win32.Proc
+	MQPurgeQueue                    *win32.Proc
+	MQReceiveMessage                *win32.Proc
+	MQReceiveMessageByLookupId      *win32.Proc
+	MQRegisterCertificate           *win32.Proc
+	MQSendMessage                   *win32.Proc
+	MQSetQueueProperties            *win32.Proc
+	MQSetQueueSecurity              *win32.Proc
+}{
+	MQADsPathToFormatName:           procMQADsPathToFormatName,
+	MQBeginTransaction:              procMQBeginTransaction,
+	MQCloseCursor:                   procMQCloseCursor,
+	MQCloseQueue:                    procMQCloseQueue,
+	MQCreateCursor:                  procMQCreateCursor,
+	MQCreateQueue:                   procMQCreateQueue,
+	MQDeleteQueue:                   procMQDeleteQueue,
+	MQFreeMemory:                    procMQFreeMemory,
+	MQFreeSecurityContext:           procMQFreeSecurityContext,
+	MQGetMachineProperties:          procMQGetMachineProperties,
+	MQGetOverlappedResult:           procMQGetOverlappedResult,
+	MQGetPrivateComputerInformation: procMQGetPrivateComputerInformation,
+	MQGetQueueProperties:            procMQGetQueueProperties,
+	MQGetQueueSecurity:              procMQGetQueueSecurity,
+	MQGetSecurityContext:            procMQGetSecurityContext,
+	MQGetSecurityContextEx:          procMQGetSecurityContextEx,
+	MQHandleToFormatName:            procMQHandleToFormatName,
+	MQInstanceToFormatName:          procMQInstanceToFormatName,
+	MQLocateBegin:                   procMQLocateBegin,
+	MQLocateEnd:                     procMQLocateEnd,
+	MQLocateNext:                    procMQLocateNext,
+	MQMarkMessageRejected:           procMQMarkMessageRejected,
+	MQMgmtAction:                    procMQMgmtAction,
+	MQMgmtGetInfo:                   procMQMgmtGetInfo,
+	MQMoveMessage:                   procMQMoveMessage,
+	MQOpenQueue:                     procMQOpenQueue,
+	MQPathNameToFormatName:          procMQPathNameToFormatName,
+	MQPurgeQueue:                    procMQPurgeQueue,
+	MQReceiveMessage:                procMQReceiveMessage,
+	MQReceiveMessageByLookupId:      procMQReceiveMessageByLookupId,
+	MQRegisterCertificate:           procMQRegisterCertificate,
+	MQSendMessage:                   procMQSendMessage,
+	MQSetQueueProperties:            procMQSetQueueProperties,
+	MQSetQueueSecurity:              procMQSetQueueSecurity,
+}
+
 // MQADsPathToFormatName calls mqrt!MQADsPathToFormatName.
 func MQADsPathToFormatName(lpwcsADsPath string, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) error {
 	_lpwcsADsPath := win32.UTF16Ptr(lpwcsADsPath)

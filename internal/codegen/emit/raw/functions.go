@@ -12,11 +12,12 @@ import (
 )
 
 // buildFunctionModels converts a namespace's functions plus the DLL/proc
-// declaration block that dispatches them. Each function is emitted once with
-// the best shape: idiomatic Go signature (string/bool/[]T/error/…) dispatching
-// directly through syscall.SyscallN.
-func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports typemap.ImportSet) ([]view.FunctionModel, []view.DLLModel) {
+// declaration block that dispatches them and the Procs probe table. Each
+// function is emitted once with the best shape: idiomatic Go signature
+// (string/bool/[]T/error/…) dispatching directly through syscall.SyscallN.
+func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports typemap.ImportSet) ([]view.FunctionModel, []view.DLLModel, []view.ProcModel) {
 	var functions []view.FunctionModel
+	var procTable []view.ProcModel
 	dllProcs := map[string][]view.ProcModel{}
 	dllSpelling := map[string]string{}
 
@@ -57,12 +58,17 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 		if dllSpelling[key] == "" {
 			dllSpelling[key] = function.DLL
 		}
-		dllProcs[key] = append(dllProcs[key], view.ProcModel{
-			VarName:    model.ProcVar,
-			ExportName: exportName,
-		})
+		proc := view.ProcModel{VarName: model.ProcVar, ExportName: exportName, GoName: model.GoName}
+		dllProcs[key] = append(dllProcs[key], proc)
+		procTable = append(procTable, proc)
 	}
 	sort.Slice(functions, func(i, j int) bool { return functions[i].GoName < functions[j].GoName })
+	sort.Slice(procTable, func(i, j int) bool { return procTable[i].GoName < procTable[j].GoName })
+	// The probe table is claimed last so it never costs a function its name.
+	if len(procTable) > 0 && !g.claimName("Procs") {
+		g.diag("package %s: Procs table name already used, probe table not emitted", meta.Namespace)
+		procTable = nil
+	}
 
 	dllKeys := make([]string, 0, len(dllProcs))
 	for key := range dllProcs {
@@ -79,7 +85,7 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 			Procs:    procs,
 		})
 	}
-	return functions, dlls
+	return functions, dlls, procTable
 }
 
 // splitIdents extracts the Go identifiers from a type expression

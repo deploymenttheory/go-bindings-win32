@@ -22,6 +22,22 @@ var (
 	procRtlValidateCorrelationVector   = modntdll.NewProc("RtlValidateCorrelationVector")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	RtlExtendCorrelationVector     *win32.Proc
+	RtlIncrementCorrelationVector  *win32.Proc
+	RtlInitializeCorrelationVector *win32.Proc
+	RtlValidateCorrelationVector   *win32.Proc
+}{
+	RtlExtendCorrelationVector:     procRtlExtendCorrelationVector,
+	RtlIncrementCorrelationVector:  procRtlIncrementCorrelationVector,
+	RtlInitializeCorrelationVector: procRtlInitializeCorrelationVector,
+	RtlValidateCorrelationVector:   procRtlValidateCorrelationVector,
+}
+
 // RtlExtendCorrelationVector calls ntdll!RtlExtendCorrelationVector.
 func RtlExtendCorrelationVector(CorrelationVector *CORRELATION_VECTOR) uint32 {
 	r1, _, _ := syscall.SyscallN(procRtlExtendCorrelationVector.Addr(), uintptr(unsafe.Pointer(CorrelationVector)))

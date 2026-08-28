@@ -21,6 +21,18 @@ var (
 	procUseShapes = modOTHER.NewProc("UseShapes")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CloseTest *win32.Proc
+	UseShapes *win32.Proc
+}{
+	CloseTest: procCloseTest,
+	UseShapes: procUseShapes,
+}
+
 // CloseTest calls OTHER!CloseTest.
 func CloseTest(h testshapes.HTEST) error {
 	r1, _, e1 := syscall.SyscallN(procCloseTest.Addr(), uintptr(h))

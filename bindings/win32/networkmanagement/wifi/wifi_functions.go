@@ -80,6 +80,134 @@ var (
 	procWlanUIEditProfile                        = modwlanui.NewProc("WlanUIEditProfile")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WFDCancelOpenSession                     *win32.Proc
+	WFDCloseHandle                           *win32.Proc
+	WFDCloseSession                          *win32.Proc
+	WFDOpenHandle                            *win32.Proc
+	WFDOpenLegacySession                     *win32.Proc
+	WFDStartOpenSession                      *win32.Proc
+	WFDUpdateDeviceVisibility                *win32.Proc
+	WlanAllocateMemory                       *win32.Proc
+	WlanCloseHandle                          *win32.Proc
+	WlanConnect                              *win32.Proc
+	WlanConnect2                             *win32.Proc
+	WlanDeleteProfile                        *win32.Proc
+	WlanDeviceServiceCommand                 *win32.Proc
+	WlanDisconnect                           *win32.Proc
+	WlanEnumInterfaces                       *win32.Proc
+	WlanExtractPsdIEDataList                 *win32.Proc
+	WlanFreeMemory                           *win32.Proc
+	WlanGetAvailableNetworkList              *win32.Proc
+	WlanGetAvailableNetworkList2             *win32.Proc
+	WlanGetFilterList                        *win32.Proc
+	WlanGetInterfaceCapability               *win32.Proc
+	WlanGetNetworkBssList                    *win32.Proc
+	WlanGetProfile                           *win32.Proc
+	WlanGetProfileCustomUserData             *win32.Proc
+	WlanGetProfileList                       *win32.Proc
+	WlanGetSecuritySettings                  *win32.Proc
+	WlanGetSupportedDeviceServices           *win32.Proc
+	WlanHostedNetworkForceStart              *win32.Proc
+	WlanHostedNetworkForceStop               *win32.Proc
+	WlanHostedNetworkInitSettings            *win32.Proc
+	WlanHostedNetworkQueryProperty           *win32.Proc
+	WlanHostedNetworkQuerySecondaryKey       *win32.Proc
+	WlanHostedNetworkQueryStatus             *win32.Proc
+	WlanHostedNetworkRefreshSecuritySettings *win32.Proc
+	WlanHostedNetworkSetProperty             *win32.Proc
+	WlanHostedNetworkSetSecondaryKey         *win32.Proc
+	WlanHostedNetworkStartUsing              *win32.Proc
+	WlanHostedNetworkStopUsing               *win32.Proc
+	WlanIhvControl                           *win32.Proc
+	WlanOpenHandle                           *win32.Proc
+	WlanQueryAutoConfigParameter             *win32.Proc
+	WlanQueryInterface                       *win32.Proc
+	WlanReasonCodeToString                   *win32.Proc
+	WlanRegisterDeviceServiceNotification    *win32.Proc
+	WlanRegisterNotification                 *win32.Proc
+	WlanRegisterVirtualStationNotification   *win32.Proc
+	WlanRenameProfile                        *win32.Proc
+	WlanSaveTemporaryProfile                 *win32.Proc
+	WlanScan                                 *win32.Proc
+	WlanSetAutoConfigParameter               *win32.Proc
+	WlanSetFilterList                        *win32.Proc
+	WlanSetInterface                         *win32.Proc
+	WlanSetProfile                           *win32.Proc
+	WlanSetProfileCustomUserData             *win32.Proc
+	WlanSetProfileEapXmlUserData             *win32.Proc
+	WlanSetProfileList                       *win32.Proc
+	WlanSetProfilePosition                   *win32.Proc
+	WlanSetPsdIEDataList                     *win32.Proc
+	WlanSetSecuritySettings                  *win32.Proc
+	WlanUIEditProfile                        *win32.Proc
+}{
+	WFDCancelOpenSession:                     procWFDCancelOpenSession,
+	WFDCloseHandle:                           procWFDCloseHandle,
+	WFDCloseSession:                          procWFDCloseSession,
+	WFDOpenHandle:                            procWFDOpenHandle,
+	WFDOpenLegacySession:                     procWFDOpenLegacySession,
+	WFDStartOpenSession:                      procWFDStartOpenSession,
+	WFDUpdateDeviceVisibility:                procWFDUpdateDeviceVisibility,
+	WlanAllocateMemory:                       procWlanAllocateMemory,
+	WlanCloseHandle:                          procWlanCloseHandle,
+	WlanConnect:                              procWlanConnect,
+	WlanConnect2:                             procWlanConnect2,
+	WlanDeleteProfile:                        procWlanDeleteProfile,
+	WlanDeviceServiceCommand:                 procWlanDeviceServiceCommand,
+	WlanDisconnect:                           procWlanDisconnect,
+	WlanEnumInterfaces:                       procWlanEnumInterfaces,
+	WlanExtractPsdIEDataList:                 procWlanExtractPsdIEDataList,
+	WlanFreeMemory:                           procWlanFreeMemory,
+	WlanGetAvailableNetworkList:              procWlanGetAvailableNetworkList,
+	WlanGetAvailableNetworkList2:             procWlanGetAvailableNetworkList2,
+	WlanGetFilterList:                        procWlanGetFilterList,
+	WlanGetInterfaceCapability:               procWlanGetInterfaceCapability,
+	WlanGetNetworkBssList:                    procWlanGetNetworkBssList,
+	WlanGetProfile:                           procWlanGetProfile,
+	WlanGetProfileCustomUserData:             procWlanGetProfileCustomUserData,
+	WlanGetProfileList:                       procWlanGetProfileList,
+	WlanGetSecuritySettings:                  procWlanGetSecuritySettings,
+	WlanGetSupportedDeviceServices:           procWlanGetSupportedDeviceServices,
+	WlanHostedNetworkForceStart:              procWlanHostedNetworkForceStart,
+	WlanHostedNetworkForceStop:               procWlanHostedNetworkForceStop,
+	WlanHostedNetworkInitSettings:            procWlanHostedNetworkInitSettings,
+	WlanHostedNetworkQueryProperty:           procWlanHostedNetworkQueryProperty,
+	WlanHostedNetworkQuerySecondaryKey:       procWlanHostedNetworkQuerySecondaryKey,
+	WlanHostedNetworkQueryStatus:             procWlanHostedNetworkQueryStatus,
+	WlanHostedNetworkRefreshSecuritySettings: procWlanHostedNetworkRefreshSecuritySettings,
+	WlanHostedNetworkSetProperty:             procWlanHostedNetworkSetProperty,
+	WlanHostedNetworkSetSecondaryKey:         procWlanHostedNetworkSetSecondaryKey,
+	WlanHostedNetworkStartUsing:              procWlanHostedNetworkStartUsing,
+	WlanHostedNetworkStopUsing:               procWlanHostedNetworkStopUsing,
+	WlanIhvControl:                           procWlanIhvControl,
+	WlanOpenHandle:                           procWlanOpenHandle,
+	WlanQueryAutoConfigParameter:             procWlanQueryAutoConfigParameter,
+	WlanQueryInterface:                       procWlanQueryInterface,
+	WlanReasonCodeToString:                   procWlanReasonCodeToString,
+	WlanRegisterDeviceServiceNotification:    procWlanRegisterDeviceServiceNotification,
+	WlanRegisterNotification:                 procWlanRegisterNotification,
+	WlanRegisterVirtualStationNotification:   procWlanRegisterVirtualStationNotification,
+	WlanRenameProfile:                        procWlanRenameProfile,
+	WlanSaveTemporaryProfile:                 procWlanSaveTemporaryProfile,
+	WlanScan:                                 procWlanScan,
+	WlanSetAutoConfigParameter:               procWlanSetAutoConfigParameter,
+	WlanSetFilterList:                        procWlanSetFilterList,
+	WlanSetInterface:                         procWlanSetInterface,
+	WlanSetProfile:                           procWlanSetProfile,
+	WlanSetProfileCustomUserData:             procWlanSetProfileCustomUserData,
+	WlanSetProfileEapXmlUserData:             procWlanSetProfileEapXmlUserData,
+	WlanSetProfileList:                       procWlanSetProfileList,
+	WlanSetProfilePosition:                   procWlanSetProfilePosition,
+	WlanSetPsdIEDataList:                     procWlanSetPsdIEDataList,
+	WlanSetSecuritySettings:                  procWlanSetSecuritySettings,
+	WlanUIEditProfile:                        procWlanUIEditProfile,
+}
+
 // WFDCancelOpenSession calls wlanapi!WFDCancelOpenSession.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wfdcancelopensession
 // Minimum OS: windows8.0.

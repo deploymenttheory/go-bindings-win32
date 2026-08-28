@@ -33,6 +33,36 @@ var (
 	procDCompositionWaitForCompositorClock = moddcomp.NewProc("DCompositionWaitForCompositorClock")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DCompositionAttachMouseDragToHwnd  *win32.Proc
+	DCompositionAttachMouseWheelToHwnd *win32.Proc
+	DCompositionBoostCompositorClock   *win32.Proc
+	DCompositionCreateDevice           *win32.Proc
+	DCompositionCreateDevice2          *win32.Proc
+	DCompositionCreateDevice3          *win32.Proc
+	DCompositionCreateSurfaceHandle    *win32.Proc
+	DCompositionGetFrameId             *win32.Proc
+	DCompositionGetStatistics          *win32.Proc
+	DCompositionGetTargetStatistics    *win32.Proc
+	DCompositionWaitForCompositorClock *win32.Proc
+}{
+	DCompositionAttachMouseDragToHwnd:  procDCompositionAttachMouseDragToHwnd,
+	DCompositionAttachMouseWheelToHwnd: procDCompositionAttachMouseWheelToHwnd,
+	DCompositionBoostCompositorClock:   procDCompositionBoostCompositorClock,
+	DCompositionCreateDevice:           procDCompositionCreateDevice,
+	DCompositionCreateDevice2:          procDCompositionCreateDevice2,
+	DCompositionCreateDevice3:          procDCompositionCreateDevice3,
+	DCompositionCreateSurfaceHandle:    procDCompositionCreateSurfaceHandle,
+	DCompositionGetFrameId:             procDCompositionGetFrameId,
+	DCompositionGetStatistics:          procDCompositionGetStatistics,
+	DCompositionGetTargetStatistics:    procDCompositionGetTargetStatistics,
+	DCompositionWaitForCompositorClock: procDCompositionWaitForCompositorClock,
+}
+
 // DCompositionAttachMouseDragToHwnd calls dcomp!DCompositionAttachMouseDragToHwnd.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionattachmousedragtohwnd
 func DCompositionAttachMouseDragToHwnd(visual *IDCompositionVisual, hwnd foundation.HWND, enable bool) error {

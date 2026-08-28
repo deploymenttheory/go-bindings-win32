@@ -97,6 +97,9 @@ type ProcModel struct {
 	VarName string
 	// ExportName is the DLL export ("CreateEventW").
 	ExportName string
+	// GoName is the exported Go function dispatching through this proc; the
+	// Procs probe table is keyed by it.
+	GoName string
 }
 
 // Return-shape discriminants for FunctionModel.ReturnKind and

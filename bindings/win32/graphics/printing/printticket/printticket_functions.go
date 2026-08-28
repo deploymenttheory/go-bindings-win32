@@ -32,6 +32,36 @@ var (
 	procPTReleaseMemory               = modprntvpt.NewProc("PTReleaseMemory")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	PTCloseProvider               *win32.Proc
+	PTConvertDevModeToPrintTicket *win32.Proc
+	PTConvertPrintTicketToDevMode *win32.Proc
+	PTGetPrintCapabilities        *win32.Proc
+	PTGetPrintDeviceCapabilities  *win32.Proc
+	PTGetPrintDeviceResources     *win32.Proc
+	PTMergeAndValidatePrintTicket *win32.Proc
+	PTOpenProvider                *win32.Proc
+	PTOpenProviderEx              *win32.Proc
+	PTQuerySchemaVersionSupport   *win32.Proc
+	PTReleaseMemory               *win32.Proc
+}{
+	PTCloseProvider:               procPTCloseProvider,
+	PTConvertDevModeToPrintTicket: procPTConvertDevModeToPrintTicket,
+	PTConvertPrintTicketToDevMode: procPTConvertPrintTicketToDevMode,
+	PTGetPrintCapabilities:        procPTGetPrintCapabilities,
+	PTGetPrintDeviceCapabilities:  procPTGetPrintDeviceCapabilities,
+	PTGetPrintDeviceResources:     procPTGetPrintDeviceResources,
+	PTMergeAndValidatePrintTicket: procPTMergeAndValidatePrintTicket,
+	PTOpenProvider:                procPTOpenProvider,
+	PTOpenProviderEx:              procPTOpenProviderEx,
+	PTQuerySchemaVersionSupport:   procPTQuerySchemaVersionSupport,
+	PTReleaseMemory:               procPTReleaseMemory,
+}
+
 // PTCloseProvider calls prntvpt!PTCloseProvider.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptcloseprovider
 // Minimum OS: windows5.1.2600.

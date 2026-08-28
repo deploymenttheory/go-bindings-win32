@@ -30,6 +30,34 @@ var (
 	procWcmSetProperty                      = modwcmapi.NewProc("WcmSetProperty")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	FreeInterfaceContextTable           *win32.Proc
+	GetInterfaceContextTableForHostName *win32.Proc
+	OnDemandGetRoutingHint              *win32.Proc
+	OnDemandRegisterNotification        *win32.Proc
+	OnDemandUnRegisterNotification      *win32.Proc
+	WcmFreeMemory                       *win32.Proc
+	WcmGetProfileList                   *win32.Proc
+	WcmQueryProperty                    *win32.Proc
+	WcmSetProfileList                   *win32.Proc
+	WcmSetProperty                      *win32.Proc
+}{
+	FreeInterfaceContextTable:           procFreeInterfaceContextTable,
+	GetInterfaceContextTableForHostName: procGetInterfaceContextTableForHostName,
+	OnDemandGetRoutingHint:              procOnDemandGetRoutingHint,
+	OnDemandRegisterNotification:        procOnDemandRegisterNotification,
+	OnDemandUnRegisterNotification:      procOnDemandUnRegisterNotification,
+	WcmFreeMemory:                       procWcmFreeMemory,
+	WcmGetProfileList:                   procWcmGetProfileList,
+	WcmQueryProperty:                    procWcmQueryProperty,
+	WcmSetProfileList:                   procWcmSetProfileList,
+	WcmSetProperty:                      procWcmSetProperty,
+}
+
 // FreeInterfaceContextTable calls OnDemandConnRouteHelper!FreeInterfaceContextTable.
 // https://learn.microsoft.com/windows/win32/api/ondemandconnroutehelper/nf-ondemandconnroutehelper-freeinterfacecontexttable
 // Minimum OS: windows10.0.10240.

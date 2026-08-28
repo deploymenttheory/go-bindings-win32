@@ -34,6 +34,42 @@ var (
 	procShutdownBlockReasonQuery   = modUSER32.NewProc("ShutdownBlockReasonQuery")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AbortSystemShutdown        *win32.Proc
+	AbortSystemShutdownA       *win32.Proc
+	CheckForHiberboot          *win32.Proc
+	ExitWindowsEx              *win32.Proc
+	InitiateShutdown           *win32.Proc
+	InitiateShutdownA          *win32.Proc
+	InitiateSystemShutdown     *win32.Proc
+	InitiateSystemShutdownA    *win32.Proc
+	InitiateSystemShutdownEx   *win32.Proc
+	InitiateSystemShutdownExA  *win32.Proc
+	LockWorkStation            *win32.Proc
+	ShutdownBlockReasonCreate  *win32.Proc
+	ShutdownBlockReasonDestroy *win32.Proc
+	ShutdownBlockReasonQuery   *win32.Proc
+}{
+	AbortSystemShutdown:        procAbortSystemShutdown,
+	AbortSystemShutdownA:       procAbortSystemShutdownA,
+	CheckForHiberboot:          procCheckForHiberboot,
+	ExitWindowsEx:              procExitWindowsEx,
+	InitiateShutdown:           procInitiateShutdown,
+	InitiateShutdownA:          procInitiateShutdownA,
+	InitiateSystemShutdown:     procInitiateSystemShutdown,
+	InitiateSystemShutdownA:    procInitiateSystemShutdownA,
+	InitiateSystemShutdownEx:   procInitiateSystemShutdownEx,
+	InitiateSystemShutdownExA:  procInitiateSystemShutdownExA,
+	LockWorkStation:            procLockWorkStation,
+	ShutdownBlockReasonCreate:  procShutdownBlockReasonCreate,
+	ShutdownBlockReasonDestroy: procShutdownBlockReasonDestroy,
+	ShutdownBlockReasonQuery:   procShutdownBlockReasonQuery,
+}
+
 // AbortSystemShutdown calls ADVAPI32!AbortSystemShutdownW.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-abortsystemshutdownw
 // Minimum OS: windows5.1.2600.

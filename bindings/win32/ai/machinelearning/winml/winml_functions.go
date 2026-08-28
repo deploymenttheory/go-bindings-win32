@@ -21,6 +21,18 @@ var (
 	procWinMLCreateRuntime       = modwinml.NewProc("WinMLCreateRuntime")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MLCreateOperatorRegistry *win32.Proc
+	WinMLCreateRuntime       *win32.Proc
+}{
+	MLCreateOperatorRegistry: procMLCreateOperatorRegistry,
+	WinMLCreateRuntime:       procWinMLCreateRuntime,
+}
+
 // MLCreateOperatorRegistry calls windows.ai.machinelearning!MLCreateOperatorRegistry.
 func MLCreateOperatorRegistry(registry **IMLOperatorRegistry) error {
 	r1, _, _ := syscall.SyscallN(procMLCreateOperatorRegistry.Addr(), uintptr(unsafe.Pointer(registry)))

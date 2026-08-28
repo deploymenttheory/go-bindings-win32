@@ -95,6 +95,144 @@ var (
 	procCreateControlInputEx                  = modWindows_UI.NewProc("CreateControlInputEx")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CoDecodeProxy                         *win32.Proc
+	CreateControlInput                    *win32.Proc
+	CreateControlInputEx                  *win32.Proc
+	CreateRandomAccessStreamOnFile        *win32.Proc
+	CreateRandomAccessStreamOverStream    *win32.Proc
+	CreateStreamOverRandomAccessStream    *win32.Proc
+	GetRestrictedErrorInfo                *win32.Proc
+	HSTRING_UserFree                      *win32.Proc
+	HSTRING_UserFree64                    *win32.Proc
+	HSTRING_UserMarshal                   *win32.Proc
+	HSTRING_UserMarshal64                 *win32.Proc
+	HSTRING_UserSize                      *win32.Proc
+	HSTRING_UserSize64                    *win32.Proc
+	HSTRING_UserUnmarshal                 *win32.Proc
+	HSTRING_UserUnmarshal64               *win32.Proc
+	IsErrorPropagationEnabled             *win32.Proc
+	RoActivateInstance                    *win32.Proc
+	RoCaptureErrorContext                 *win32.Proc
+	RoClearError                          *win32.Proc
+	RoFailFastWithErrorContext            *win32.Proc
+	RoGetActivationFactory                *win32.Proc
+	RoGetAgileReference                   *win32.Proc
+	RoGetApartmentIdentifier              *win32.Proc
+	RoGetBufferMarshaler                  *win32.Proc
+	RoGetErrorReportingFlags              *win32.Proc
+	RoGetMatchingRestrictedErrorInfo      *win32.Proc
+	RoGetServerActivatableClasses         *win32.Proc
+	RoInitialize                          *win32.Proc
+	RoInspectCapturedStackBackTrace       *win32.Proc
+	RoInspectThreadErrorInfo              *win32.Proc
+	RoOriginateError                      *win32.Proc
+	RoOriginateErrorW                     *win32.Proc
+	RoOriginateLanguageException          *win32.Proc
+	RoRegisterActivationFactories         *win32.Proc
+	RoRegisterForApartmentShutdown        *win32.Proc
+	RoReportFailedDelegate                *win32.Proc
+	RoReportUnhandledError                *win32.Proc
+	RoResolveRestrictedErrorInfoReference *win32.Proc
+	RoRevokeActivationFactories           *win32.Proc
+	RoSetErrorReportingFlags              *win32.Proc
+	RoTransformError                      *win32.Proc
+	RoTransformErrorW                     *win32.Proc
+	RoUninitialize                        *win32.Proc
+	RoUnregisterForApartmentShutdown      *win32.Proc
+	SetRestrictedErrorInfo                *win32.Proc
+	WindowsCompareStringOrdinal           *win32.Proc
+	WindowsConcatString                   *win32.Proc
+	WindowsCreateString                   *win32.Proc
+	WindowsCreateStringReference          *win32.Proc
+	WindowsDeleteString                   *win32.Proc
+	WindowsDeleteStringBuffer             *win32.Proc
+	WindowsDuplicateString                *win32.Proc
+	WindowsGetStringLen                   *win32.Proc
+	WindowsGetStringRawBuffer             *win32.Proc
+	WindowsInspectString                  *win32.Proc
+	WindowsInspectString2                 *win32.Proc
+	WindowsIsStringEmpty                  *win32.Proc
+	WindowsPreallocateStringBuffer        *win32.Proc
+	WindowsPromoteStringBuffer            *win32.Proc
+	WindowsReplaceString                  *win32.Proc
+	WindowsStringHasEmbeddedNull          *win32.Proc
+	WindowsSubstring                      *win32.Proc
+	WindowsSubstringWithSpecifiedLength   *win32.Proc
+	WindowsTrimStringEnd                  *win32.Proc
+	WindowsTrimStringStart                *win32.Proc
+}{
+	CoDecodeProxy:                         procCoDecodeProxy,
+	CreateControlInput:                    procCreateControlInput,
+	CreateControlInputEx:                  procCreateControlInputEx,
+	CreateRandomAccessStreamOnFile:        procCreateRandomAccessStreamOnFile,
+	CreateRandomAccessStreamOverStream:    procCreateRandomAccessStreamOverStream,
+	CreateStreamOverRandomAccessStream:    procCreateStreamOverRandomAccessStream,
+	GetRestrictedErrorInfo:                procGetRestrictedErrorInfo,
+	HSTRING_UserFree:                      procHSTRING_UserFree,
+	HSTRING_UserFree64:                    procHSTRING_UserFree64,
+	HSTRING_UserMarshal:                   procHSTRING_UserMarshal,
+	HSTRING_UserMarshal64:                 procHSTRING_UserMarshal64,
+	HSTRING_UserSize:                      procHSTRING_UserSize,
+	HSTRING_UserSize64:                    procHSTRING_UserSize64,
+	HSTRING_UserUnmarshal:                 procHSTRING_UserUnmarshal,
+	HSTRING_UserUnmarshal64:               procHSTRING_UserUnmarshal64,
+	IsErrorPropagationEnabled:             procIsErrorPropagationEnabled,
+	RoActivateInstance:                    procRoActivateInstance,
+	RoCaptureErrorContext:                 procRoCaptureErrorContext,
+	RoClearError:                          procRoClearError,
+	RoFailFastWithErrorContext:            procRoFailFastWithErrorContext,
+	RoGetActivationFactory:                procRoGetActivationFactory,
+	RoGetAgileReference:                   procRoGetAgileReference,
+	RoGetApartmentIdentifier:              procRoGetApartmentIdentifier,
+	RoGetBufferMarshaler:                  procRoGetBufferMarshaler,
+	RoGetErrorReportingFlags:              procRoGetErrorReportingFlags,
+	RoGetMatchingRestrictedErrorInfo:      procRoGetMatchingRestrictedErrorInfo,
+	RoGetServerActivatableClasses:         procRoGetServerActivatableClasses,
+	RoInitialize:                          procRoInitialize,
+	RoInspectCapturedStackBackTrace:       procRoInspectCapturedStackBackTrace,
+	RoInspectThreadErrorInfo:              procRoInspectThreadErrorInfo,
+	RoOriginateError:                      procRoOriginateError,
+	RoOriginateErrorW:                     procRoOriginateErrorW,
+	RoOriginateLanguageException:          procRoOriginateLanguageException,
+	RoRegisterActivationFactories:         procRoRegisterActivationFactories,
+	RoRegisterForApartmentShutdown:        procRoRegisterForApartmentShutdown,
+	RoReportFailedDelegate:                procRoReportFailedDelegate,
+	RoReportUnhandledError:                procRoReportUnhandledError,
+	RoResolveRestrictedErrorInfoReference: procRoResolveRestrictedErrorInfoReference,
+	RoRevokeActivationFactories:           procRoRevokeActivationFactories,
+	RoSetErrorReportingFlags:              procRoSetErrorReportingFlags,
+	RoTransformError:                      procRoTransformError,
+	RoTransformErrorW:                     procRoTransformErrorW,
+	RoUninitialize:                        procRoUninitialize,
+	RoUnregisterForApartmentShutdown:      procRoUnregisterForApartmentShutdown,
+	SetRestrictedErrorInfo:                procSetRestrictedErrorInfo,
+	WindowsCompareStringOrdinal:           procWindowsCompareStringOrdinal,
+	WindowsConcatString:                   procWindowsConcatString,
+	WindowsCreateString:                   procWindowsCreateString,
+	WindowsCreateStringReference:          procWindowsCreateStringReference,
+	WindowsDeleteString:                   procWindowsDeleteString,
+	WindowsDeleteStringBuffer:             procWindowsDeleteStringBuffer,
+	WindowsDuplicateString:                procWindowsDuplicateString,
+	WindowsGetStringLen:                   procWindowsGetStringLen,
+	WindowsGetStringRawBuffer:             procWindowsGetStringRawBuffer,
+	WindowsInspectString:                  procWindowsInspectString,
+	WindowsInspectString2:                 procWindowsInspectString2,
+	WindowsIsStringEmpty:                  procWindowsIsStringEmpty,
+	WindowsPreallocateStringBuffer:        procWindowsPreallocateStringBuffer,
+	WindowsPromoteStringBuffer:            procWindowsPromoteStringBuffer,
+	WindowsReplaceString:                  procWindowsReplaceString,
+	WindowsStringHasEmbeddedNull:          procWindowsStringHasEmbeddedNull,
+	WindowsSubstring:                      procWindowsSubstring,
+	WindowsSubstringWithSpecifiedLength:   procWindowsSubstringWithSpecifiedLength,
+	WindowsTrimStringEnd:                  procWindowsTrimStringEnd,
+	WindowsTrimStringStart:                procWindowsTrimStringStart,
+}
+
 // CoDecodeProxy calls OLE32!CoDecodeProxy.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-codecodeproxy
 func CoDecodeProxy(dwClientPid uint32, ui64ProxyAddress uint64, pServerInformation *ServerInformation) error {

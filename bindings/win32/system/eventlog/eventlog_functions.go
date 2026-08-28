@@ -76,6 +76,124 @@ var (
 	procEvtUpdateBookmark               = modwevtapi.NewProc("EvtUpdateBookmark")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BackupEventLog                  *win32.Proc
+	BackupEventLogA                 *win32.Proc
+	ClearEventLog                   *win32.Proc
+	ClearEventLogA                  *win32.Proc
+	CloseEventLog                   *win32.Proc
+	DeregisterEventSource           *win32.Proc
+	EvtArchiveExportedLog           *win32.Proc
+	EvtCancel                       *win32.Proc
+	EvtClearLog                     *win32.Proc
+	EvtClose                        *win32.Proc
+	EvtCreateBookmark               *win32.Proc
+	EvtCreateRenderContext          *win32.Proc
+	EvtExportLog                    *win32.Proc
+	EvtFormatMessage                *win32.Proc
+	EvtGetChannelConfigProperty     *win32.Proc
+	EvtGetEventInfo                 *win32.Proc
+	EvtGetEventMetadataProperty     *win32.Proc
+	EvtGetExtendedStatus            *win32.Proc
+	EvtGetLogInfo                   *win32.Proc
+	EvtGetObjectArrayProperty       *win32.Proc
+	EvtGetObjectArraySize           *win32.Proc
+	EvtGetPublisherMetadataProperty *win32.Proc
+	EvtGetQueryInfo                 *win32.Proc
+	EvtNext                         *win32.Proc
+	EvtNextChannelPath              *win32.Proc
+	EvtNextEventMetadata            *win32.Proc
+	EvtNextPublisherId              *win32.Proc
+	EvtOpenChannelConfig            *win32.Proc
+	EvtOpenChannelEnum              *win32.Proc
+	EvtOpenEventMetadataEnum        *win32.Proc
+	EvtOpenLog                      *win32.Proc
+	EvtOpenPublisherEnum            *win32.Proc
+	EvtOpenPublisherMetadata        *win32.Proc
+	EvtOpenSession                  *win32.Proc
+	EvtQuery                        *win32.Proc
+	EvtRender                       *win32.Proc
+	EvtSaveChannelConfig            *win32.Proc
+	EvtSeek                         *win32.Proc
+	EvtSetChannelConfigProperty     *win32.Proc
+	EvtSubscribe                    *win32.Proc
+	EvtUpdateBookmark               *win32.Proc
+	GetEventLogInformation          *win32.Proc
+	GetNumberOfEventLogRecords      *win32.Proc
+	GetOldestEventLogRecord         *win32.Proc
+	NotifyChangeEventLog            *win32.Proc
+	OpenBackupEventLog              *win32.Proc
+	OpenBackupEventLogA             *win32.Proc
+	OpenEventLog                    *win32.Proc
+	OpenEventLogA                   *win32.Proc
+	ReadEventLog                    *win32.Proc
+	ReadEventLogA                   *win32.Proc
+	RegisterEventSource             *win32.Proc
+	RegisterEventSourceA            *win32.Proc
+	ReportEvent                     *win32.Proc
+	ReportEventA                    *win32.Proc
+}{
+	BackupEventLog:                  procBackupEventLog,
+	BackupEventLogA:                 procBackupEventLogA,
+	ClearEventLog:                   procClearEventLog,
+	ClearEventLogA:                  procClearEventLogA,
+	CloseEventLog:                   procCloseEventLog,
+	DeregisterEventSource:           procDeregisterEventSource,
+	EvtArchiveExportedLog:           procEvtArchiveExportedLog,
+	EvtCancel:                       procEvtCancel,
+	EvtClearLog:                     procEvtClearLog,
+	EvtClose:                        procEvtClose,
+	EvtCreateBookmark:               procEvtCreateBookmark,
+	EvtCreateRenderContext:          procEvtCreateRenderContext,
+	EvtExportLog:                    procEvtExportLog,
+	EvtFormatMessage:                procEvtFormatMessage,
+	EvtGetChannelConfigProperty:     procEvtGetChannelConfigProperty,
+	EvtGetEventInfo:                 procEvtGetEventInfo,
+	EvtGetEventMetadataProperty:     procEvtGetEventMetadataProperty,
+	EvtGetExtendedStatus:            procEvtGetExtendedStatus,
+	EvtGetLogInfo:                   procEvtGetLogInfo,
+	EvtGetObjectArrayProperty:       procEvtGetObjectArrayProperty,
+	EvtGetObjectArraySize:           procEvtGetObjectArraySize,
+	EvtGetPublisherMetadataProperty: procEvtGetPublisherMetadataProperty,
+	EvtGetQueryInfo:                 procEvtGetQueryInfo,
+	EvtNext:                         procEvtNext,
+	EvtNextChannelPath:              procEvtNextChannelPath,
+	EvtNextEventMetadata:            procEvtNextEventMetadata,
+	EvtNextPublisherId:              procEvtNextPublisherId,
+	EvtOpenChannelConfig:            procEvtOpenChannelConfig,
+	EvtOpenChannelEnum:              procEvtOpenChannelEnum,
+	EvtOpenEventMetadataEnum:        procEvtOpenEventMetadataEnum,
+	EvtOpenLog:                      procEvtOpenLog,
+	EvtOpenPublisherEnum:            procEvtOpenPublisherEnum,
+	EvtOpenPublisherMetadata:        procEvtOpenPublisherMetadata,
+	EvtOpenSession:                  procEvtOpenSession,
+	EvtQuery:                        procEvtQuery,
+	EvtRender:                       procEvtRender,
+	EvtSaveChannelConfig:            procEvtSaveChannelConfig,
+	EvtSeek:                         procEvtSeek,
+	EvtSetChannelConfigProperty:     procEvtSetChannelConfigProperty,
+	EvtSubscribe:                    procEvtSubscribe,
+	EvtUpdateBookmark:               procEvtUpdateBookmark,
+	GetEventLogInformation:          procGetEventLogInformation,
+	GetNumberOfEventLogRecords:      procGetNumberOfEventLogRecords,
+	GetOldestEventLogRecord:         procGetOldestEventLogRecord,
+	NotifyChangeEventLog:            procNotifyChangeEventLog,
+	OpenBackupEventLog:              procOpenBackupEventLog,
+	OpenBackupEventLogA:             procOpenBackupEventLogA,
+	OpenEventLog:                    procOpenEventLog,
+	OpenEventLogA:                   procOpenEventLogA,
+	ReadEventLog:                    procReadEventLog,
+	ReadEventLogA:                   procReadEventLogA,
+	RegisterEventSource:             procRegisterEventSource,
+	RegisterEventSourceA:            procRegisterEventSourceA,
+	ReportEvent:                     procReportEvent,
+	ReportEventA:                    procReportEventA,
+}
+
 // BackupEventLog calls ADVAPI32!BackupEventLogW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-backupeventlogw
 // Minimum OS: windows5.0.

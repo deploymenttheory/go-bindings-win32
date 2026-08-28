@@ -25,6 +25,26 @@ var (
 	procCreateXmlWriterOutputWithEncodingName     = modXmlLite.NewProc("CreateXmlWriterOutputWithEncodingName")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateXmlReader                           *win32.Proc
+	CreateXmlReaderInputWithEncodingCodePage  *win32.Proc
+	CreateXmlReaderInputWithEncodingName      *win32.Proc
+	CreateXmlWriter                           *win32.Proc
+	CreateXmlWriterOutputWithEncodingCodePage *win32.Proc
+	CreateXmlWriterOutputWithEncodingName     *win32.Proc
+}{
+	CreateXmlReader:                           procCreateXmlReader,
+	CreateXmlReaderInputWithEncodingCodePage:  procCreateXmlReaderInputWithEncodingCodePage,
+	CreateXmlReaderInputWithEncodingName:      procCreateXmlReaderInputWithEncodingName,
+	CreateXmlWriter:                           procCreateXmlWriter,
+	CreateXmlWriterOutputWithEncodingCodePage: procCreateXmlWriterOutputWithEncodingCodePage,
+	CreateXmlWriterOutputWithEncodingName:     procCreateXmlWriterOutputWithEncodingName,
+}
+
 // CreateXmlReader calls XmlLite!CreateXmlReader.
 func CreateXmlReader(riid *win32.GUID, ppvObject **win32.IUnknown, pMalloc *systemcom.IMalloc) error {
 	r1, _, _ := syscall.SyscallN(procCreateXmlReader.Addr(), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)), uintptr(unsafe.Pointer(pMalloc)))

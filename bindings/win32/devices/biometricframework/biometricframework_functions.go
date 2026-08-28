@@ -72,6 +72,120 @@ var (
 	procWinBioWait                         = modwinbio.NewProc("WinBioWait")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WinBioAcquireFocus                 *win32.Proc
+	WinBioAsyncEnumBiometricUnits      *win32.Proc
+	WinBioAsyncEnumDatabases           *win32.Proc
+	WinBioAsyncEnumServiceProviders    *win32.Proc
+	WinBioAsyncMonitorFrameworkChanges *win32.Proc
+	WinBioAsyncOpenFramework           *win32.Proc
+	WinBioAsyncOpenSession             *win32.Proc
+	WinBioCancel                       *win32.Proc
+	WinBioCaptureSample                *win32.Proc
+	WinBioCaptureSampleWithCallback    *win32.Proc
+	WinBioCloseFramework               *win32.Proc
+	WinBioCloseSession                 *win32.Proc
+	WinBioControlUnit                  *win32.Proc
+	WinBioControlUnitPrivileged        *win32.Proc
+	WinBioDeleteTemplate               *win32.Proc
+	WinBioEnrollBegin                  *win32.Proc
+	WinBioEnrollCapture                *win32.Proc
+	WinBioEnrollCaptureWithCallback    *win32.Proc
+	WinBioEnrollCommit                 *win32.Proc
+	WinBioEnrollDiscard                *win32.Proc
+	WinBioEnrollSelect                 *win32.Proc
+	WinBioEnumBiometricUnits           *win32.Proc
+	WinBioEnumDatabases                *win32.Proc
+	WinBioEnumEnrollments              *win32.Proc
+	WinBioEnumServiceProviders         *win32.Proc
+	WinBioFree                         *win32.Proc
+	WinBioGetDomainLogonSetting        *win32.Proc
+	WinBioGetEnabledSetting            *win32.Proc
+	WinBioGetEnrolledFactors           *win32.Proc
+	WinBioGetLogonSetting              *win32.Proc
+	WinBioGetProperty                  *win32.Proc
+	WinBioIdentify                     *win32.Proc
+	WinBioIdentifyWithCallback         *win32.Proc
+	WinBioImproveBegin                 *win32.Proc
+	WinBioImproveEnd                   *win32.Proc
+	WinBioIsESSCapable                 *win32.Proc
+	WinBioLocateSensor                 *win32.Proc
+	WinBioLocateSensorWithCallback     *win32.Proc
+	WinBioLockUnit                     *win32.Proc
+	WinBioLogonIdentifiedUser          *win32.Proc
+	WinBioMonitorPresence              *win32.Proc
+	WinBioOpenSession                  *win32.Proc
+	WinBioRegisterEventMonitor         *win32.Proc
+	WinBioReleaseFocus                 *win32.Proc
+	WinBioRemoveAllCredentials         *win32.Proc
+	WinBioRemoveAllDomainCredentials   *win32.Proc
+	WinBioSetCredential                *win32.Proc
+	WinBioSetProperty                  *win32.Proc
+	WinBioUnlockUnit                   *win32.Proc
+	WinBioUnregisterEventMonitor       *win32.Proc
+	WinBioVerify                       *win32.Proc
+	WinBioVerifyWithCallback           *win32.Proc
+	WinBioWait                         *win32.Proc
+}{
+	WinBioAcquireFocus:                 procWinBioAcquireFocus,
+	WinBioAsyncEnumBiometricUnits:      procWinBioAsyncEnumBiometricUnits,
+	WinBioAsyncEnumDatabases:           procWinBioAsyncEnumDatabases,
+	WinBioAsyncEnumServiceProviders:    procWinBioAsyncEnumServiceProviders,
+	WinBioAsyncMonitorFrameworkChanges: procWinBioAsyncMonitorFrameworkChanges,
+	WinBioAsyncOpenFramework:           procWinBioAsyncOpenFramework,
+	WinBioAsyncOpenSession:             procWinBioAsyncOpenSession,
+	WinBioCancel:                       procWinBioCancel,
+	WinBioCaptureSample:                procWinBioCaptureSample,
+	WinBioCaptureSampleWithCallback:    procWinBioCaptureSampleWithCallback,
+	WinBioCloseFramework:               procWinBioCloseFramework,
+	WinBioCloseSession:                 procWinBioCloseSession,
+	WinBioControlUnit:                  procWinBioControlUnit,
+	WinBioControlUnitPrivileged:        procWinBioControlUnitPrivileged,
+	WinBioDeleteTemplate:               procWinBioDeleteTemplate,
+	WinBioEnrollBegin:                  procWinBioEnrollBegin,
+	WinBioEnrollCapture:                procWinBioEnrollCapture,
+	WinBioEnrollCaptureWithCallback:    procWinBioEnrollCaptureWithCallback,
+	WinBioEnrollCommit:                 procWinBioEnrollCommit,
+	WinBioEnrollDiscard:                procWinBioEnrollDiscard,
+	WinBioEnrollSelect:                 procWinBioEnrollSelect,
+	WinBioEnumBiometricUnits:           procWinBioEnumBiometricUnits,
+	WinBioEnumDatabases:                procWinBioEnumDatabases,
+	WinBioEnumEnrollments:              procWinBioEnumEnrollments,
+	WinBioEnumServiceProviders:         procWinBioEnumServiceProviders,
+	WinBioFree:                         procWinBioFree,
+	WinBioGetDomainLogonSetting:        procWinBioGetDomainLogonSetting,
+	WinBioGetEnabledSetting:            procWinBioGetEnabledSetting,
+	WinBioGetEnrolledFactors:           procWinBioGetEnrolledFactors,
+	WinBioGetLogonSetting:              procWinBioGetLogonSetting,
+	WinBioGetProperty:                  procWinBioGetProperty,
+	WinBioIdentify:                     procWinBioIdentify,
+	WinBioIdentifyWithCallback:         procWinBioIdentifyWithCallback,
+	WinBioImproveBegin:                 procWinBioImproveBegin,
+	WinBioImproveEnd:                   procWinBioImproveEnd,
+	WinBioIsESSCapable:                 procWinBioIsESSCapable,
+	WinBioLocateSensor:                 procWinBioLocateSensor,
+	WinBioLocateSensorWithCallback:     procWinBioLocateSensorWithCallback,
+	WinBioLockUnit:                     procWinBioLockUnit,
+	WinBioLogonIdentifiedUser:          procWinBioLogonIdentifiedUser,
+	WinBioMonitorPresence:              procWinBioMonitorPresence,
+	WinBioOpenSession:                  procWinBioOpenSession,
+	WinBioRegisterEventMonitor:         procWinBioRegisterEventMonitor,
+	WinBioReleaseFocus:                 procWinBioReleaseFocus,
+	WinBioRemoveAllCredentials:         procWinBioRemoveAllCredentials,
+	WinBioRemoveAllDomainCredentials:   procWinBioRemoveAllDomainCredentials,
+	WinBioSetCredential:                procWinBioSetCredential,
+	WinBioSetProperty:                  procWinBioSetProperty,
+	WinBioUnlockUnit:                   procWinBioUnlockUnit,
+	WinBioUnregisterEventMonitor:       procWinBioUnregisterEventMonitor,
+	WinBioVerify:                       procWinBioVerify,
+	WinBioVerifyWithCallback:           procWinBioVerifyWithCallback,
+	WinBioWait:                         procWinBioWait,
+}
+
 // WinBioAcquireFocus calls winbio!WinBioAcquireFocus.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbioacquirefocus
 // Minimum OS: windows6.1.

@@ -52,6 +52,76 @@ var (
 	procDwmUpdateThumbnailProperties      = moddwmapi.NewProc("DwmUpdateThumbnailProperties")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DwmAttachMilContent               *win32.Proc
+	DwmDefWindowProc                  *win32.Proc
+	DwmDetachMilContent               *win32.Proc
+	DwmEnableBlurBehindWindow         *win32.Proc
+	DwmEnableComposition              *win32.Proc
+	DwmEnableMMCSS                    *win32.Proc
+	DwmExtendFrameIntoClientArea      *win32.Proc
+	DwmFlush                          *win32.Proc
+	DwmGetColorizationColor           *win32.Proc
+	DwmGetCompositionTimingInfo       *win32.Proc
+	DwmGetGraphicsStreamClient        *win32.Proc
+	DwmGetGraphicsStreamTransformHint *win32.Proc
+	DwmGetTransportAttributes         *win32.Proc
+	DwmGetUnmetTabRequirements        *win32.Proc
+	DwmGetWindowAttribute             *win32.Proc
+	DwmInvalidateIconicBitmaps        *win32.Proc
+	DwmIsCompositionEnabled           *win32.Proc
+	DwmModifyPreviousDxFrameDuration  *win32.Proc
+	DwmQueryThumbnailSourceSize       *win32.Proc
+	DwmRegisterThumbnail              *win32.Proc
+	DwmRenderGesture                  *win32.Proc
+	DwmSetDxFrameDuration             *win32.Proc
+	DwmSetIconicLivePreviewBitmap     *win32.Proc
+	DwmSetIconicThumbnail             *win32.Proc
+	DwmSetPresentParameters           *win32.Proc
+	DwmSetWindowAttribute             *win32.Proc
+	DwmShowContact                    *win32.Proc
+	DwmTetherContact                  *win32.Proc
+	DwmTransitionOwnedWindow          *win32.Proc
+	DwmUnregisterThumbnail            *win32.Proc
+	DwmUpdateThumbnailProperties      *win32.Proc
+}{
+	DwmAttachMilContent:               procDwmAttachMilContent,
+	DwmDefWindowProc:                  procDwmDefWindowProc,
+	DwmDetachMilContent:               procDwmDetachMilContent,
+	DwmEnableBlurBehindWindow:         procDwmEnableBlurBehindWindow,
+	DwmEnableComposition:              procDwmEnableComposition,
+	DwmEnableMMCSS:                    procDwmEnableMMCSS,
+	DwmExtendFrameIntoClientArea:      procDwmExtendFrameIntoClientArea,
+	DwmFlush:                          procDwmFlush,
+	DwmGetColorizationColor:           procDwmGetColorizationColor,
+	DwmGetCompositionTimingInfo:       procDwmGetCompositionTimingInfo,
+	DwmGetGraphicsStreamClient:        procDwmGetGraphicsStreamClient,
+	DwmGetGraphicsStreamTransformHint: procDwmGetGraphicsStreamTransformHint,
+	DwmGetTransportAttributes:         procDwmGetTransportAttributes,
+	DwmGetUnmetTabRequirements:        procDwmGetUnmetTabRequirements,
+	DwmGetWindowAttribute:             procDwmGetWindowAttribute,
+	DwmInvalidateIconicBitmaps:        procDwmInvalidateIconicBitmaps,
+	DwmIsCompositionEnabled:           procDwmIsCompositionEnabled,
+	DwmModifyPreviousDxFrameDuration:  procDwmModifyPreviousDxFrameDuration,
+	DwmQueryThumbnailSourceSize:       procDwmQueryThumbnailSourceSize,
+	DwmRegisterThumbnail:              procDwmRegisterThumbnail,
+	DwmRenderGesture:                  procDwmRenderGesture,
+	DwmSetDxFrameDuration:             procDwmSetDxFrameDuration,
+	DwmSetIconicLivePreviewBitmap:     procDwmSetIconicLivePreviewBitmap,
+	DwmSetIconicThumbnail:             procDwmSetIconicThumbnail,
+	DwmSetPresentParameters:           procDwmSetPresentParameters,
+	DwmSetWindowAttribute:             procDwmSetWindowAttribute,
+	DwmShowContact:                    procDwmShowContact,
+	DwmTetherContact:                  procDwmTetherContact,
+	DwmTransitionOwnedWindow:          procDwmTransitionOwnedWindow,
+	DwmUnregisterThumbnail:            procDwmUnregisterThumbnail,
+	DwmUpdateThumbnailProperties:      procDwmUpdateThumbnailProperties,
+}
+
 // DwmAttachMilContent calls dwmapi!DwmAttachMilContent.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmattachmilcontent
 // Minimum OS: windows6.0.6000.

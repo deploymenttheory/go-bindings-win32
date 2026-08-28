@@ -25,6 +25,22 @@ var (
 	procDSEditSecurity                = modDSSEC.NewProc("DSEditSecurity")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DSCreateISecurityInfoObject   *win32.Proc
+	DSCreateISecurityInfoObjectEx *win32.Proc
+	DSCreateSecurityPage          *win32.Proc
+	DSEditSecurity                *win32.Proc
+}{
+	DSCreateISecurityInfoObject:   procDSCreateISecurityInfoObject,
+	DSCreateISecurityInfoObjectEx: procDSCreateISecurityInfoObjectEx,
+	DSCreateSecurityPage:          procDSCreateSecurityPage,
+	DSEditSecurity:                procDSEditSecurity,
+}
+
 // DSCreateISecurityInfoObject calls DSSEC!DSCreateISecurityInfoObject.
 // https://learn.microsoft.com/windows/win32/api/dssec/nf-dssec-dscreateisecurityinfoobject
 // Minimum OS: windowsserver2008.

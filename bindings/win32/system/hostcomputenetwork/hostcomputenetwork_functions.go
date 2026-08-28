@@ -62,6 +62,100 @@ var (
 	procHcnUnregisterServiceCallback                       = modcomputenetwork.NewProc("HcnUnregisterServiceCallback")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	HcnCloseEndpoint                                   *win32.Proc
+	HcnCloseGuestNetworkService                        *win32.Proc
+	HcnCloseLoadBalancer                               *win32.Proc
+	HcnCloseNamespace                                  *win32.Proc
+	HcnCloseNetwork                                    *win32.Proc
+	HcnCreateEndpoint                                  *win32.Proc
+	HcnCreateGuestNetworkService                       *win32.Proc
+	HcnCreateLoadBalancer                              *win32.Proc
+	HcnCreateNamespace                                 *win32.Proc
+	HcnCreateNetwork                                   *win32.Proc
+	HcnDeleteEndpoint                                  *win32.Proc
+	HcnDeleteGuestNetworkService                       *win32.Proc
+	HcnDeleteLoadBalancer                              *win32.Proc
+	HcnDeleteNamespace                                 *win32.Proc
+	HcnDeleteNetwork                                   *win32.Proc
+	HcnEnumerateEndpoints                              *win32.Proc
+	HcnEnumerateGuestNetworkPortReservations           *win32.Proc
+	HcnEnumerateLoadBalancers                          *win32.Proc
+	HcnEnumerateNamespaces                             *win32.Proc
+	HcnEnumerateNetworks                               *win32.Proc
+	HcnFreeGuestNetworkPortReservations                *win32.Proc
+	HcnModifyEndpoint                                  *win32.Proc
+	HcnModifyGuestNetworkService                       *win32.Proc
+	HcnModifyLoadBalancer                              *win32.Proc
+	HcnModifyNamespace                                 *win32.Proc
+	HcnModifyNetwork                                   *win32.Proc
+	HcnOpenEndpoint                                    *win32.Proc
+	HcnOpenLoadBalancer                                *win32.Proc
+	HcnOpenNamespace                                   *win32.Proc
+	HcnOpenNetwork                                     *win32.Proc
+	HcnQueryEndpointAddresses                          *win32.Proc
+	HcnQueryEndpointProperties                         *win32.Proc
+	HcnQueryEndpointStats                              *win32.Proc
+	HcnQueryLoadBalancerProperties                     *win32.Proc
+	HcnQueryNamespaceProperties                        *win32.Proc
+	HcnQueryNetworkProperties                          *win32.Proc
+	HcnRegisterGuestNetworkServiceCallback             *win32.Proc
+	HcnRegisterServiceCallback                         *win32.Proc
+	HcnReleaseGuestNetworkServicePortReservationHandle *win32.Proc
+	HcnReserveGuestNetworkServicePort                  *win32.Proc
+	HcnReserveGuestNetworkServicePortRange             *win32.Proc
+	HcnUnregisterGuestNetworkServiceCallback           *win32.Proc
+	HcnUnregisterServiceCallback                       *win32.Proc
+}{
+	HcnCloseEndpoint:                                   procHcnCloseEndpoint,
+	HcnCloseGuestNetworkService:                        procHcnCloseGuestNetworkService,
+	HcnCloseLoadBalancer:                               procHcnCloseLoadBalancer,
+	HcnCloseNamespace:                                  procHcnCloseNamespace,
+	HcnCloseNetwork:                                    procHcnCloseNetwork,
+	HcnCreateEndpoint:                                  procHcnCreateEndpoint,
+	HcnCreateGuestNetworkService:                       procHcnCreateGuestNetworkService,
+	HcnCreateLoadBalancer:                              procHcnCreateLoadBalancer,
+	HcnCreateNamespace:                                 procHcnCreateNamespace,
+	HcnCreateNetwork:                                   procHcnCreateNetwork,
+	HcnDeleteEndpoint:                                  procHcnDeleteEndpoint,
+	HcnDeleteGuestNetworkService:                       procHcnDeleteGuestNetworkService,
+	HcnDeleteLoadBalancer:                              procHcnDeleteLoadBalancer,
+	HcnDeleteNamespace:                                 procHcnDeleteNamespace,
+	HcnDeleteNetwork:                                   procHcnDeleteNetwork,
+	HcnEnumerateEndpoints:                              procHcnEnumerateEndpoints,
+	HcnEnumerateGuestNetworkPortReservations:           procHcnEnumerateGuestNetworkPortReservations,
+	HcnEnumerateLoadBalancers:                          procHcnEnumerateLoadBalancers,
+	HcnEnumerateNamespaces:                             procHcnEnumerateNamespaces,
+	HcnEnumerateNetworks:                               procHcnEnumerateNetworks,
+	HcnFreeGuestNetworkPortReservations:                procHcnFreeGuestNetworkPortReservations,
+	HcnModifyEndpoint:                                  procHcnModifyEndpoint,
+	HcnModifyGuestNetworkService:                       procHcnModifyGuestNetworkService,
+	HcnModifyLoadBalancer:                              procHcnModifyLoadBalancer,
+	HcnModifyNamespace:                                 procHcnModifyNamespace,
+	HcnModifyNetwork:                                   procHcnModifyNetwork,
+	HcnOpenEndpoint:                                    procHcnOpenEndpoint,
+	HcnOpenLoadBalancer:                                procHcnOpenLoadBalancer,
+	HcnOpenNamespace:                                   procHcnOpenNamespace,
+	HcnOpenNetwork:                                     procHcnOpenNetwork,
+	HcnQueryEndpointAddresses:                          procHcnQueryEndpointAddresses,
+	HcnQueryEndpointProperties:                         procHcnQueryEndpointProperties,
+	HcnQueryEndpointStats:                              procHcnQueryEndpointStats,
+	HcnQueryLoadBalancerProperties:                     procHcnQueryLoadBalancerProperties,
+	HcnQueryNamespaceProperties:                        procHcnQueryNamespaceProperties,
+	HcnQueryNetworkProperties:                          procHcnQueryNetworkProperties,
+	HcnRegisterGuestNetworkServiceCallback:             procHcnRegisterGuestNetworkServiceCallback,
+	HcnRegisterServiceCallback:                         procHcnRegisterServiceCallback,
+	HcnReleaseGuestNetworkServicePortReservationHandle: procHcnReleaseGuestNetworkServicePortReservationHandle,
+	HcnReserveGuestNetworkServicePort:                  procHcnReserveGuestNetworkServicePort,
+	HcnReserveGuestNetworkServicePortRange:             procHcnReserveGuestNetworkServicePortRange,
+	HcnUnregisterGuestNetworkServiceCallback:           procHcnUnregisterGuestNetworkServiceCallback,
+	HcnUnregisterServiceCallback:                       procHcnUnregisterServiceCallback,
+}
+
 // HcnCloseEndpoint calls computenetwork!HcnCloseEndpoint.
 // https://learn.microsoft.com/virtualization/api/hcn/Reference/HcnCloseEndpoint
 func HcnCloseEndpoint(Endpoint unsafe.Pointer) error {

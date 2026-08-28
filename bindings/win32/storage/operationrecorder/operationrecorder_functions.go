@@ -20,6 +20,18 @@ var (
 	procOperationStart = modADVAPI32.NewProc("OperationStart")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	OperationEnd   *win32.Proc
+	OperationStart *win32.Proc
+}{
+	OperationEnd:   procOperationEnd,
+	OperationStart: procOperationStart,
+}
+
 // OperationEnd calls ADVAPI32!OperationEnd.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-operationend
 // Minimum OS: windows8.0.

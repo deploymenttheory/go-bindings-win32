@@ -24,6 +24,22 @@ var (
 	procSetMailslotInfo = modKERNEL32.NewProc("SetMailslotInfo")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateMailslot  *win32.Proc
+	CreateMailslotA *win32.Proc
+	GetMailslotInfo *win32.Proc
+	SetMailslotInfo *win32.Proc
+}{
+	CreateMailslot:  procCreateMailslot,
+	CreateMailslotA: procCreateMailslotA,
+	GetMailslotInfo: procGetMailslotInfo,
+	SetMailslotInfo: procSetMailslotInfo,
+}
+
 // CreateMailslot calls KERNEL32!CreateMailslotW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createmailslotw
 // Minimum OS: windows5.0.

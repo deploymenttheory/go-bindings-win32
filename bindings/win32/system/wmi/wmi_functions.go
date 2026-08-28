@@ -19,6 +19,16 @@ var (
 	procMI_Application_InitializeV1 = modmi.NewProc("MI_Application_InitializeV1")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MI_Application_InitializeV1 *win32.Proc
+}{
+	MI_Application_InitializeV1: procMI_Application_InitializeV1,
+}
+
 // MI_Application_InitializeV1 calls mi!MI_Application_InitializeV1.
 // https://learn.microsoft.com/windows/win32/api/mi/nf-mi-mi_application_initializev1
 // Minimum OS: windows8.0.

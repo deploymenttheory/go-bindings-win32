@@ -25,6 +25,24 @@ var (
 	procCreateDataModelManager = moddbgmodel.NewProc("CreateDataModelManager")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateDataModelManager *win32.Proc
+	DebugConnect           *win32.Proc
+	DebugConnectWide       *win32.Proc
+	DebugCreate            *win32.Proc
+	DebugCreateEx          *win32.Proc
+}{
+	CreateDataModelManager: procCreateDataModelManager,
+	DebugConnect:           procDebugConnect,
+	DebugConnectWide:       procDebugConnectWide,
+	DebugCreate:            procDebugCreate,
+	DebugCreateEx:          procDebugCreateEx,
+}
+
 // CreateDataModelManager calls dbgmodel!CreateDataModelManager.
 func CreateDataModelManager(debugHost *IDebugHost, manager **IDataModelManager) error {
 	r1, _, _ := syscall.SyscallN(procCreateDataModelManager.Addr(), uintptr(unsafe.Pointer(debugHost)), uintptr(unsafe.Pointer(manager)))

@@ -47,6 +47,64 @@ var (
 	procD3DWriteBlobToFile                = modD3DCOMPILER_47.NewProc("D3DWriteBlobToFile")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	D3DCompile                        *win32.Proc
+	D3DCompile2                       *win32.Proc
+	D3DCompileFromFile                *win32.Proc
+	D3DCompressShaders                *win32.Proc
+	D3DCreateBlob                     *win32.Proc
+	D3DCreateFunctionLinkingGraph     *win32.Proc
+	D3DCreateLinker                   *win32.Proc
+	D3DDecompressShaders              *win32.Proc
+	D3DDisassemble                    *win32.Proc
+	D3DDisassemble10Effect            *win32.Proc
+	D3DDisassembleRegion              *win32.Proc
+	D3DGetBlobPart                    *win32.Proc
+	D3DGetDebugInfo                   *win32.Proc
+	D3DGetInputAndOutputSignatureBlob *win32.Proc
+	D3DGetInputSignatureBlob          *win32.Proc
+	D3DGetOutputSignatureBlob         *win32.Proc
+	D3DGetTraceInstructionOffsets     *win32.Proc
+	D3DLoadModule                     *win32.Proc
+	D3DPreprocess                     *win32.Proc
+	D3DReadFileToBlob                 *win32.Proc
+	D3DReflect                        *win32.Proc
+	D3DReflectLibrary                 *win32.Proc
+	D3DSetBlobPart                    *win32.Proc
+	D3DStripShader                    *win32.Proc
+	D3DWriteBlobToFile                *win32.Proc
+}{
+	D3DCompile:                        procD3DCompile,
+	D3DCompile2:                       procD3DCompile2,
+	D3DCompileFromFile:                procD3DCompileFromFile,
+	D3DCompressShaders:                procD3DCompressShaders,
+	D3DCreateBlob:                     procD3DCreateBlob,
+	D3DCreateFunctionLinkingGraph:     procD3DCreateFunctionLinkingGraph,
+	D3DCreateLinker:                   procD3DCreateLinker,
+	D3DDecompressShaders:              procD3DDecompressShaders,
+	D3DDisassemble:                    procD3DDisassemble,
+	D3DDisassemble10Effect:            procD3DDisassemble10Effect,
+	D3DDisassembleRegion:              procD3DDisassembleRegion,
+	D3DGetBlobPart:                    procD3DGetBlobPart,
+	D3DGetDebugInfo:                   procD3DGetDebugInfo,
+	D3DGetInputAndOutputSignatureBlob: procD3DGetInputAndOutputSignatureBlob,
+	D3DGetInputSignatureBlob:          procD3DGetInputSignatureBlob,
+	D3DGetOutputSignatureBlob:         procD3DGetOutputSignatureBlob,
+	D3DGetTraceInstructionOffsets:     procD3DGetTraceInstructionOffsets,
+	D3DLoadModule:                     procD3DLoadModule,
+	D3DPreprocess:                     procD3DPreprocess,
+	D3DReadFileToBlob:                 procD3DReadFileToBlob,
+	D3DReflect:                        procD3DReflect,
+	D3DReflectLibrary:                 procD3DReflectLibrary,
+	D3DSetBlobPart:                    procD3DSetBlobPart,
+	D3DStripShader:                    procD3DStripShader,
+	D3DWriteBlobToFile:                procD3DWriteBlobToFile,
+}
+
 // D3DCompile calls D3DCOMPILER_47!D3DCompile.
 // https://learn.microsoft.com/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile
 func D3DCompile(pSrcData []byte, pSourceName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, pEntrypoint foundation.PSTR, pTarget foundation.PSTR, Flags1 uint32, Flags2 uint32, ppCode **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {

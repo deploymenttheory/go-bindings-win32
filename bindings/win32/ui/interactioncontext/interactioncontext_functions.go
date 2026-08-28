@@ -43,6 +43,62 @@ var (
 	procStopInteractionContext                        = modNInput.NewProc("StopInteractionContext")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddPointerInteractionContext                  *win32.Proc
+	BufferPointerPacketsInteractionContext        *win32.Proc
+	CreateInteractionContext                      *win32.Proc
+	DestroyInteractionContext                     *win32.Proc
+	GetCrossSlideParameterInteractionContext      *win32.Proc
+	GetHoldParameterInteractionContext            *win32.Proc
+	GetInertiaParameterInteractionContext         *win32.Proc
+	GetInteractionConfigurationInteractionContext *win32.Proc
+	GetMouseWheelParameterInteractionContext      *win32.Proc
+	GetPropertyInteractionContext                 *win32.Proc
+	GetStateInteractionContext                    *win32.Proc
+	GetTapParameterInteractionContext             *win32.Proc
+	GetTranslationParameterInteractionContext     *win32.Proc
+	ProcessBufferedPacketsInteractionContext      *win32.Proc
+	ProcessInertiaInteractionContext              *win32.Proc
+	ProcessPointerFramesInteractionContext        *win32.Proc
+	RegisterOutputCallbackInteractionContext      *win32.Proc
+	RegisterOutputCallbackInteractionContext2     *win32.Proc
+	RemovePointerInteractionContext               *win32.Proc
+	ResetInteractionContext                       *win32.Proc
+	SetCrossSlideParametersInteractionContext     *win32.Proc
+	SetInteractionConfigurationInteractionContext *win32.Proc
+	SetPropertyInteractionContext                 *win32.Proc
+	StopInteractionContext                        *win32.Proc
+}{
+	AddPointerInteractionContext:                  procAddPointerInteractionContext,
+	BufferPointerPacketsInteractionContext:        procBufferPointerPacketsInteractionContext,
+	CreateInteractionContext:                      procCreateInteractionContext,
+	DestroyInteractionContext:                     procDestroyInteractionContext,
+	GetCrossSlideParameterInteractionContext:      procGetCrossSlideParameterInteractionContext,
+	GetHoldParameterInteractionContext:            procGetHoldParameterInteractionContext,
+	GetInertiaParameterInteractionContext:         procGetInertiaParameterInteractionContext,
+	GetInteractionConfigurationInteractionContext: procGetInteractionConfigurationInteractionContext,
+	GetMouseWheelParameterInteractionContext:      procGetMouseWheelParameterInteractionContext,
+	GetPropertyInteractionContext:                 procGetPropertyInteractionContext,
+	GetStateInteractionContext:                    procGetStateInteractionContext,
+	GetTapParameterInteractionContext:             procGetTapParameterInteractionContext,
+	GetTranslationParameterInteractionContext:     procGetTranslationParameterInteractionContext,
+	ProcessBufferedPacketsInteractionContext:      procProcessBufferedPacketsInteractionContext,
+	ProcessInertiaInteractionContext:              procProcessInertiaInteractionContext,
+	ProcessPointerFramesInteractionContext:        procProcessPointerFramesInteractionContext,
+	RegisterOutputCallbackInteractionContext:      procRegisterOutputCallbackInteractionContext,
+	RegisterOutputCallbackInteractionContext2:     procRegisterOutputCallbackInteractionContext2,
+	RemovePointerInteractionContext:               procRemovePointerInteractionContext,
+	ResetInteractionContext:                       procResetInteractionContext,
+	SetCrossSlideParametersInteractionContext:     procSetCrossSlideParametersInteractionContext,
+	SetInteractionConfigurationInteractionContext: procSetInteractionConfigurationInteractionContext,
+	SetPropertyInteractionContext:                 procSetPropertyInteractionContext,
+	StopInteractionContext:                        procStopInteractionContext,
+}
+
 // AddPointerInteractionContext calls NInput!AddPointerInteractionContext.
 // https://learn.microsoft.com/windows/win32/api/interactioncontext/nf-interactioncontext-addpointerinteractioncontext
 // Minimum OS: windows8.0.

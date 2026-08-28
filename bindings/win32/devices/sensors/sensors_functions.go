@@ -59,6 +59,90 @@ var (
 	procSerializationBufferFree                              = modSensorsUtilsV2.NewProc("SerializationBufferFree")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CollectionsListAllocateBufferAndSerialize            *win32.Proc
+	CollectionsListCopyAndMarshall                       *win32.Proc
+	CollectionsListDeserializeFromBuffer                 *win32.Proc
+	CollectionsListGetFillableCount                      *win32.Proc
+	CollectionsListGetMarshalledSize                     *win32.Proc
+	CollectionsListGetMarshalledSizeWithoutSerialization *win32.Proc
+	CollectionsListGetSerializedSize                     *win32.Proc
+	CollectionsListMarshall                              *win32.Proc
+	CollectionsListSerializeToBuffer                     *win32.Proc
+	CollectionsListSortSubscribedActivitiesByConfidence  *win32.Proc
+	CollectionsListUpdateMarshalledPointer               *win32.Proc
+	EvaluateActivityThresholds                           *win32.Proc
+	GetPerformanceTime                                   *win32.Proc
+	InitPropVariantFromCLSIDArray                        *win32.Proc
+	IsCollectionListSame                                 *win32.Proc
+	IsGUIDPresentInList                                  *win32.Proc
+	IsKeyPresentInCollectionList                         *win32.Proc
+	IsKeyPresentInPropertyList                           *win32.Proc
+	PropKeyFindKeyGetBool                                *win32.Proc
+	PropKeyFindKeyGetDouble                              *win32.Proc
+	PropKeyFindKeyGetFileTime                            *win32.Proc
+	PropKeyFindKeyGetFloat                               *win32.Proc
+	PropKeyFindKeyGetGuid                                *win32.Proc
+	PropKeyFindKeyGetInt32                               *win32.Proc
+	PropKeyFindKeyGetInt64                               *win32.Proc
+	PropKeyFindKeyGetNthInt64                            *win32.Proc
+	PropKeyFindKeyGetNthUlong                            *win32.Proc
+	PropKeyFindKeyGetNthUshort                           *win32.Proc
+	PropKeyFindKeyGetPropVariant                         *win32.Proc
+	PropKeyFindKeyGetUlong                               *win32.Proc
+	PropKeyFindKeyGetUshort                              *win32.Proc
+	PropKeyFindKeySetPropVariant                         *win32.Proc
+	PropVariantGetInformation                            *win32.Proc
+	PropertiesListCopy                                   *win32.Proc
+	PropertiesListGetFillableCount                       *win32.Proc
+	SensorCollectionGetAt                                *win32.Proc
+	SerializationBufferAllocate                          *win32.Proc
+	SerializationBufferFree                              *win32.Proc
+}{
+	CollectionsListAllocateBufferAndSerialize:            procCollectionsListAllocateBufferAndSerialize,
+	CollectionsListCopyAndMarshall:                       procCollectionsListCopyAndMarshall,
+	CollectionsListDeserializeFromBuffer:                 procCollectionsListDeserializeFromBuffer,
+	CollectionsListGetFillableCount:                      procCollectionsListGetFillableCount,
+	CollectionsListGetMarshalledSize:                     procCollectionsListGetMarshalledSize,
+	CollectionsListGetMarshalledSizeWithoutSerialization: procCollectionsListGetMarshalledSizeWithoutSerialization,
+	CollectionsListGetSerializedSize:                     procCollectionsListGetSerializedSize,
+	CollectionsListMarshall:                              procCollectionsListMarshall,
+	CollectionsListSerializeToBuffer:                     procCollectionsListSerializeToBuffer,
+	CollectionsListSortSubscribedActivitiesByConfidence:  procCollectionsListSortSubscribedActivitiesByConfidence,
+	CollectionsListUpdateMarshalledPointer:               procCollectionsListUpdateMarshalledPointer,
+	EvaluateActivityThresholds:                           procEvaluateActivityThresholds,
+	GetPerformanceTime:                                   procGetPerformanceTime,
+	InitPropVariantFromCLSIDArray:                        procInitPropVariantFromCLSIDArray,
+	IsCollectionListSame:                                 procIsCollectionListSame,
+	IsGUIDPresentInList:                                  procIsGUIDPresentInList,
+	IsKeyPresentInCollectionList:                         procIsKeyPresentInCollectionList,
+	IsKeyPresentInPropertyList:                           procIsKeyPresentInPropertyList,
+	PropKeyFindKeyGetBool:                                procPropKeyFindKeyGetBool,
+	PropKeyFindKeyGetDouble:                              procPropKeyFindKeyGetDouble,
+	PropKeyFindKeyGetFileTime:                            procPropKeyFindKeyGetFileTime,
+	PropKeyFindKeyGetFloat:                               procPropKeyFindKeyGetFloat,
+	PropKeyFindKeyGetGuid:                                procPropKeyFindKeyGetGuid,
+	PropKeyFindKeyGetInt32:                               procPropKeyFindKeyGetInt32,
+	PropKeyFindKeyGetInt64:                               procPropKeyFindKeyGetInt64,
+	PropKeyFindKeyGetNthInt64:                            procPropKeyFindKeyGetNthInt64,
+	PropKeyFindKeyGetNthUlong:                            procPropKeyFindKeyGetNthUlong,
+	PropKeyFindKeyGetNthUshort:                           procPropKeyFindKeyGetNthUshort,
+	PropKeyFindKeyGetPropVariant:                         procPropKeyFindKeyGetPropVariant,
+	PropKeyFindKeyGetUlong:                               procPropKeyFindKeyGetUlong,
+	PropKeyFindKeyGetUshort:                              procPropKeyFindKeyGetUshort,
+	PropKeyFindKeySetPropVariant:                         procPropKeyFindKeySetPropVariant,
+	PropVariantGetInformation:                            procPropVariantGetInformation,
+	PropertiesListCopy:                                   procPropertiesListCopy,
+	PropertiesListGetFillableCount:                       procPropertiesListGetFillableCount,
+	SensorCollectionGetAt:                                procSensorCollectionGetAt,
+	SerializationBufferAllocate:                          procSerializationBufferAllocate,
+	SerializationBufferFree:                              procSerializationBufferFree,
+}
+
 // CollectionsListAllocateBufferAndSerialize calls SensorsUtilsV2!CollectionsListAllocateBufferAndSerialize.
 func CollectionsListAllocateBufferAndSerialize(SourceCollection *SENSOR_COLLECTION_LIST, pTargetBufferSizeInBytes *uint32, pTargetBuffer **byte) foundation.NTSTATUS {
 	r1, _, _ := syscall.SyscallN(procCollectionsListAllocateBufferAndSerialize.Addr(), uintptr(unsafe.Pointer(SourceCollection)), uintptr(unsafe.Pointer(pTargetBufferSizeInBytes)), uintptr(unsafe.Pointer(pTargetBuffer)))

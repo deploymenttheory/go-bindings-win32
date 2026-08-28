@@ -22,6 +22,20 @@ var (
 	procIsNetworkAlive          = modSensApi.NewProc("IsNetworkAlive")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	IsDestinationReachable  *win32.Proc
+	IsDestinationReachableA *win32.Proc
+	IsNetworkAlive          *win32.Proc
+}{
+	IsDestinationReachable:  procIsDestinationReachable,
+	IsDestinationReachableA: procIsDestinationReachableA,
+	IsNetworkAlive:          procIsNetworkAlive,
+}
+
 // IsDestinationReachable calls SensApi!IsDestinationReachableW.
 // https://learn.microsoft.com/windows/win32/api/sensapi/nf-sensapi-isdestinationreachablew
 // Minimum OS: windows5.1.2600.

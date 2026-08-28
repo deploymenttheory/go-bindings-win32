@@ -54,6 +54,84 @@ var (
 	procDdqSetTranscriptConfiguration             = modDiagnosticDataQuery.NewProc("DdqSetTranscriptConfiguration")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DdqCancelDiagnosticRecordOperation        *win32.Proc
+	DdqCloseSession                           *win32.Proc
+	DdqCreateSession                          *win32.Proc
+	DdqExtractDiagnosticReport                *win32.Proc
+	DdqFreeDiagnosticRecordLocaleTags         *win32.Proc
+	DdqFreeDiagnosticRecordPage               *win32.Proc
+	DdqFreeDiagnosticRecordProducerCategories *win32.Proc
+	DdqFreeDiagnosticRecordProducers          *win32.Proc
+	DdqFreeDiagnosticReport                   *win32.Proc
+	DdqGetDiagnosticDataAccessLevelAllowed    *win32.Proc
+	DdqGetDiagnosticRecordAtIndex             *win32.Proc
+	DdqGetDiagnosticRecordBinaryDistribution  *win32.Proc
+	DdqGetDiagnosticRecordCategoryAtIndex     *win32.Proc
+	DdqGetDiagnosticRecordCategoryCount       *win32.Proc
+	DdqGetDiagnosticRecordCount               *win32.Proc
+	DdqGetDiagnosticRecordLocaleTagAtIndex    *win32.Proc
+	DdqGetDiagnosticRecordLocaleTagCount      *win32.Proc
+	DdqGetDiagnosticRecordLocaleTags          *win32.Proc
+	DdqGetDiagnosticRecordPage                *win32.Proc
+	DdqGetDiagnosticRecordPayload             *win32.Proc
+	DdqGetDiagnosticRecordProducerAtIndex     *win32.Proc
+	DdqGetDiagnosticRecordProducerCategories  *win32.Proc
+	DdqGetDiagnosticRecordProducerCount       *win32.Proc
+	DdqGetDiagnosticRecordProducers           *win32.Proc
+	DdqGetDiagnosticRecordStats               *win32.Proc
+	DdqGetDiagnosticRecordSummary             *win32.Proc
+	DdqGetDiagnosticRecordTagDistribution     *win32.Proc
+	DdqGetDiagnosticReport                    *win32.Proc
+	DdqGetDiagnosticReportAtIndex             *win32.Proc
+	DdqGetDiagnosticReportCount               *win32.Proc
+	DdqGetDiagnosticReportStoreReportCount    *win32.Proc
+	DdqGetSessionAccessLevel                  *win32.Proc
+	DdqGetTranscriptConfiguration             *win32.Proc
+	DdqIsDiagnosticRecordSampledIn            *win32.Proc
+	DdqSetTranscriptConfiguration             *win32.Proc
+}{
+	DdqCancelDiagnosticRecordOperation:        procDdqCancelDiagnosticRecordOperation,
+	DdqCloseSession:                           procDdqCloseSession,
+	DdqCreateSession:                          procDdqCreateSession,
+	DdqExtractDiagnosticReport:                procDdqExtractDiagnosticReport,
+	DdqFreeDiagnosticRecordLocaleTags:         procDdqFreeDiagnosticRecordLocaleTags,
+	DdqFreeDiagnosticRecordPage:               procDdqFreeDiagnosticRecordPage,
+	DdqFreeDiagnosticRecordProducerCategories: procDdqFreeDiagnosticRecordProducerCategories,
+	DdqFreeDiagnosticRecordProducers:          procDdqFreeDiagnosticRecordProducers,
+	DdqFreeDiagnosticReport:                   procDdqFreeDiagnosticReport,
+	DdqGetDiagnosticDataAccessLevelAllowed:    procDdqGetDiagnosticDataAccessLevelAllowed,
+	DdqGetDiagnosticRecordAtIndex:             procDdqGetDiagnosticRecordAtIndex,
+	DdqGetDiagnosticRecordBinaryDistribution:  procDdqGetDiagnosticRecordBinaryDistribution,
+	DdqGetDiagnosticRecordCategoryAtIndex:     procDdqGetDiagnosticRecordCategoryAtIndex,
+	DdqGetDiagnosticRecordCategoryCount:       procDdqGetDiagnosticRecordCategoryCount,
+	DdqGetDiagnosticRecordCount:               procDdqGetDiagnosticRecordCount,
+	DdqGetDiagnosticRecordLocaleTagAtIndex:    procDdqGetDiagnosticRecordLocaleTagAtIndex,
+	DdqGetDiagnosticRecordLocaleTagCount:      procDdqGetDiagnosticRecordLocaleTagCount,
+	DdqGetDiagnosticRecordLocaleTags:          procDdqGetDiagnosticRecordLocaleTags,
+	DdqGetDiagnosticRecordPage:                procDdqGetDiagnosticRecordPage,
+	DdqGetDiagnosticRecordPayload:             procDdqGetDiagnosticRecordPayload,
+	DdqGetDiagnosticRecordProducerAtIndex:     procDdqGetDiagnosticRecordProducerAtIndex,
+	DdqGetDiagnosticRecordProducerCategories:  procDdqGetDiagnosticRecordProducerCategories,
+	DdqGetDiagnosticRecordProducerCount:       procDdqGetDiagnosticRecordProducerCount,
+	DdqGetDiagnosticRecordProducers:           procDdqGetDiagnosticRecordProducers,
+	DdqGetDiagnosticRecordStats:               procDdqGetDiagnosticRecordStats,
+	DdqGetDiagnosticRecordSummary:             procDdqGetDiagnosticRecordSummary,
+	DdqGetDiagnosticRecordTagDistribution:     procDdqGetDiagnosticRecordTagDistribution,
+	DdqGetDiagnosticReport:                    procDdqGetDiagnosticReport,
+	DdqGetDiagnosticReportAtIndex:             procDdqGetDiagnosticReportAtIndex,
+	DdqGetDiagnosticReportCount:               procDdqGetDiagnosticReportCount,
+	DdqGetDiagnosticReportStoreReportCount:    procDdqGetDiagnosticReportStoreReportCount,
+	DdqGetSessionAccessLevel:                  procDdqGetSessionAccessLevel,
+	DdqGetTranscriptConfiguration:             procDdqGetTranscriptConfiguration,
+	DdqIsDiagnosticRecordSampledIn:            procDdqIsDiagnosticRecordSampledIn,
+	DdqSetTranscriptConfiguration:             procDdqSetTranscriptConfiguration,
+}
+
 // DdqCancelDiagnosticRecordOperation calls DiagnosticDataQuery!DdqCancelDiagnosticRecordOperation.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqcanceldiagnosticrecordoperation
 // Minimum OS: windows10.0.19041.

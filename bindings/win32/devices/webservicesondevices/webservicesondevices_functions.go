@@ -51,6 +51,78 @@ var (
 	procWSDXMLGetValueFromAny             = modwsdapi.NewProc("WSDXMLGetValueFromAny")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WSDAllocateLinkedMemory           *win32.Proc
+	WSDAttachLinkedMemory             *win32.Proc
+	WSDCreateDeviceHost               *win32.Proc
+	WSDCreateDeviceHost2              *win32.Proc
+	WSDCreateDeviceHostAdvanced       *win32.Proc
+	WSDCreateDeviceProxy              *win32.Proc
+	WSDCreateDeviceProxy2             *win32.Proc
+	WSDCreateDeviceProxyAdvanced      *win32.Proc
+	WSDCreateDiscoveryProvider        *win32.Proc
+	WSDCreateDiscoveryProvider2       *win32.Proc
+	WSDCreateDiscoveryPublisher       *win32.Proc
+	WSDCreateDiscoveryPublisher2      *win32.Proc
+	WSDCreateHttpAddress              *win32.Proc
+	WSDCreateHttpMessageParameters    *win32.Proc
+	WSDCreateOutboundAttachment       *win32.Proc
+	WSDCreateUdpAddress               *win32.Proc
+	WSDCreateUdpMessageParameters     *win32.Proc
+	WSDDetachLinkedMemory             *win32.Proc
+	WSDFreeLinkedMemory               *win32.Proc
+	WSDGenerateFault                  *win32.Proc
+	WSDGenerateFaultEx                *win32.Proc
+	WSDGetConfigurationOption         *win32.Proc
+	WSDSetConfigurationOption         *win32.Proc
+	WSDUriDecode                      *win32.Proc
+	WSDUriEncode                      *win32.Proc
+	WSDXMLAddChild                    *win32.Proc
+	WSDXMLAddSibling                  *win32.Proc
+	WSDXMLBuildAnyForSingleElement    *win32.Proc
+	WSDXMLCleanupElement              *win32.Proc
+	WSDXMLCreateContext               *win32.Proc
+	WSDXMLGetNameFromBuiltinNamespace *win32.Proc
+	WSDXMLGetValueFromAny             *win32.Proc
+}{
+	WSDAllocateLinkedMemory:           procWSDAllocateLinkedMemory,
+	WSDAttachLinkedMemory:             procWSDAttachLinkedMemory,
+	WSDCreateDeviceHost:               procWSDCreateDeviceHost,
+	WSDCreateDeviceHost2:              procWSDCreateDeviceHost2,
+	WSDCreateDeviceHostAdvanced:       procWSDCreateDeviceHostAdvanced,
+	WSDCreateDeviceProxy:              procWSDCreateDeviceProxy,
+	WSDCreateDeviceProxy2:             procWSDCreateDeviceProxy2,
+	WSDCreateDeviceProxyAdvanced:      procWSDCreateDeviceProxyAdvanced,
+	WSDCreateDiscoveryProvider:        procWSDCreateDiscoveryProvider,
+	WSDCreateDiscoveryProvider2:       procWSDCreateDiscoveryProvider2,
+	WSDCreateDiscoveryPublisher:       procWSDCreateDiscoveryPublisher,
+	WSDCreateDiscoveryPublisher2:      procWSDCreateDiscoveryPublisher2,
+	WSDCreateHttpAddress:              procWSDCreateHttpAddress,
+	WSDCreateHttpMessageParameters:    procWSDCreateHttpMessageParameters,
+	WSDCreateOutboundAttachment:       procWSDCreateOutboundAttachment,
+	WSDCreateUdpAddress:               procWSDCreateUdpAddress,
+	WSDCreateUdpMessageParameters:     procWSDCreateUdpMessageParameters,
+	WSDDetachLinkedMemory:             procWSDDetachLinkedMemory,
+	WSDFreeLinkedMemory:               procWSDFreeLinkedMemory,
+	WSDGenerateFault:                  procWSDGenerateFault,
+	WSDGenerateFaultEx:                procWSDGenerateFaultEx,
+	WSDGetConfigurationOption:         procWSDGetConfigurationOption,
+	WSDSetConfigurationOption:         procWSDSetConfigurationOption,
+	WSDUriDecode:                      procWSDUriDecode,
+	WSDUriEncode:                      procWSDUriEncode,
+	WSDXMLAddChild:                    procWSDXMLAddChild,
+	WSDXMLAddSibling:                  procWSDXMLAddSibling,
+	WSDXMLBuildAnyForSingleElement:    procWSDXMLBuildAnyForSingleElement,
+	WSDXMLCleanupElement:              procWSDXMLCleanupElement,
+	WSDXMLCreateContext:               procWSDXMLCreateContext,
+	WSDXMLGetNameFromBuiltinNamespace: procWSDXMLGetNameFromBuiltinNamespace,
+	WSDXMLGetValueFromAny:             procWSDXMLGetValueFromAny,
+}
+
 // WSDAllocateLinkedMemory calls wsdapi!WSDAllocateLinkedMemory.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdallocatelinkedmemory
 // Minimum OS: windows6.0.6000.

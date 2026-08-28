@@ -22,6 +22,20 @@ var (
 	procUnregisterWaitUntilOOBECompleted = modKERNEL32.NewProc("UnregisterWaitUntilOOBECompleted")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	OOBEComplete                     *win32.Proc
+	RegisterWaitUntilOOBECompleted   *win32.Proc
+	UnregisterWaitUntilOOBECompleted *win32.Proc
+}{
+	OOBEComplete:                     procOOBEComplete,
+	RegisterWaitUntilOOBECompleted:   procRegisterWaitUntilOOBECompleted,
+	UnregisterWaitUntilOOBECompleted: procUnregisterWaitUntilOOBECompleted,
+}
+
 // OOBEComplete calls KERNEL32!OOBEComplete.
 // https://learn.microsoft.com/windows/win32/api/oobenotification/nf-oobenotification-oobecomplete
 func OOBEComplete(isOOBEComplete *foundation.BOOL) error {

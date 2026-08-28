@@ -82,6 +82,122 @@ var (
 	procRatingSetupUIW              = modMSRATING.NewProc("RatingSetupUIW")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ComputeInvCMAP              *win32.Proc
+	CreateDDrawSurfaceOnDIB     *win32.Proc
+	CreateMIMEMap               *win32.Proc
+	DecodeImage                 *win32.Proc
+	DecodeImageEx               *win32.Proc
+	DitherTo8                   *win32.Proc
+	GetMaxMIMEIDBytes           *win32.Proc
+	IEAssociateThreadWithTab    *win32.Proc
+	IECancelSaveFile            *win32.Proc
+	IECreateDirectory           *win32.Proc
+	IECreateFile                *win32.Proc
+	IEDeleteFile                *win32.Proc
+	IEDisassociateThreadWithTab *win32.Proc
+	IEFindFirstFile             *win32.Proc
+	IEGetFileAttributesEx       *win32.Proc
+	IEGetProtectedModeCookie    *win32.Proc
+	IEGetWriteableFolderPath    *win32.Proc
+	IEGetWriteableLowHKCU       *win32.Proc
+	IEInPrivateFilteringEnabled *win32.Proc
+	IEIsInPrivateBrowsing       *win32.Proc
+	IEIsProtectedModeProcess    *win32.Proc
+	IEIsProtectedModeURL        *win32.Proc
+	IELaunchURL                 *win32.Proc
+	IEMoveFileEx                *win32.Proc
+	IERefreshElevationPolicy    *win32.Proc
+	IERegCreateKeyEx            *win32.Proc
+	IERegSetValueEx             *win32.Proc
+	IERemoveDirectory           *win32.Proc
+	IESaveFile                  *win32.Proc
+	IESetProtectedModeCookie    *win32.Proc
+	IEShowOpenFileDialog        *win32.Proc
+	IEShowSaveFileDialog        *win32.Proc
+	IETrackingProtectionEnabled *win32.Proc
+	IdentifyMIMEType            *win32.Proc
+	RatingAccessDeniedDialog    *win32.Proc
+	RatingAccessDeniedDialog2   *win32.Proc
+	RatingAccessDeniedDialog2W  *win32.Proc
+	RatingAccessDeniedDialogW   *win32.Proc
+	RatingAddToApprovedSites    *win32.Proc
+	RatingCheckUserAccess       *win32.Proc
+	RatingCheckUserAccessW      *win32.Proc
+	RatingClickedOnPRFInternal  *win32.Proc
+	RatingClickedOnRATInternal  *win32.Proc
+	RatingEnable                *win32.Proc
+	RatingEnableW               *win32.Proc
+	RatingEnabledQuery          *win32.Proc
+	RatingFreeDetails           *win32.Proc
+	RatingInit                  *win32.Proc
+	RatingObtainCancel          *win32.Proc
+	RatingObtainQuery           *win32.Proc
+	RatingObtainQueryW          *win32.Proc
+	RatingSetupUI               *win32.Proc
+	RatingSetupUIW              *win32.Proc
+	SniffStream                 *win32.Proc
+}{
+	ComputeInvCMAP:              procComputeInvCMAP,
+	CreateDDrawSurfaceOnDIB:     procCreateDDrawSurfaceOnDIB,
+	CreateMIMEMap:               procCreateMIMEMap,
+	DecodeImage:                 procDecodeImage,
+	DecodeImageEx:               procDecodeImageEx,
+	DitherTo8:                   procDitherTo8,
+	GetMaxMIMEIDBytes:           procGetMaxMIMEIDBytes,
+	IEAssociateThreadWithTab:    procIEAssociateThreadWithTab,
+	IECancelSaveFile:            procIECancelSaveFile,
+	IECreateDirectory:           procIECreateDirectory,
+	IECreateFile:                procIECreateFile,
+	IEDeleteFile:                procIEDeleteFile,
+	IEDisassociateThreadWithTab: procIEDisassociateThreadWithTab,
+	IEFindFirstFile:             procIEFindFirstFile,
+	IEGetFileAttributesEx:       procIEGetFileAttributesEx,
+	IEGetProtectedModeCookie:    procIEGetProtectedModeCookie,
+	IEGetWriteableFolderPath:    procIEGetWriteableFolderPath,
+	IEGetWriteableLowHKCU:       procIEGetWriteableLowHKCU,
+	IEInPrivateFilteringEnabled: procIEInPrivateFilteringEnabled,
+	IEIsInPrivateBrowsing:       procIEIsInPrivateBrowsing,
+	IEIsProtectedModeProcess:    procIEIsProtectedModeProcess,
+	IEIsProtectedModeURL:        procIEIsProtectedModeURL,
+	IELaunchURL:                 procIELaunchURL,
+	IEMoveFileEx:                procIEMoveFileEx,
+	IERefreshElevationPolicy:    procIERefreshElevationPolicy,
+	IERegCreateKeyEx:            procIERegCreateKeyEx,
+	IERegSetValueEx:             procIERegSetValueEx,
+	IERemoveDirectory:           procIERemoveDirectory,
+	IESaveFile:                  procIESaveFile,
+	IESetProtectedModeCookie:    procIESetProtectedModeCookie,
+	IEShowOpenFileDialog:        procIEShowOpenFileDialog,
+	IEShowSaveFileDialog:        procIEShowSaveFileDialog,
+	IETrackingProtectionEnabled: procIETrackingProtectionEnabled,
+	IdentifyMIMEType:            procIdentifyMIMEType,
+	RatingAccessDeniedDialog:    procRatingAccessDeniedDialog,
+	RatingAccessDeniedDialog2:   procRatingAccessDeniedDialog2,
+	RatingAccessDeniedDialog2W:  procRatingAccessDeniedDialog2W,
+	RatingAccessDeniedDialogW:   procRatingAccessDeniedDialogW,
+	RatingAddToApprovedSites:    procRatingAddToApprovedSites,
+	RatingCheckUserAccess:       procRatingCheckUserAccess,
+	RatingCheckUserAccessW:      procRatingCheckUserAccessW,
+	RatingClickedOnPRFInternal:  procRatingClickedOnPRFInternal,
+	RatingClickedOnRATInternal:  procRatingClickedOnRATInternal,
+	RatingEnable:                procRatingEnable,
+	RatingEnableW:               procRatingEnableW,
+	RatingEnabledQuery:          procRatingEnabledQuery,
+	RatingFreeDetails:           procRatingFreeDetails,
+	RatingInit:                  procRatingInit,
+	RatingObtainCancel:          procRatingObtainCancel,
+	RatingObtainQuery:           procRatingObtainQuery,
+	RatingObtainQueryW:          procRatingObtainQueryW,
+	RatingSetupUI:               procRatingSetupUI,
+	RatingSetupUIW:              procRatingSetupUIW,
+	SniffStream:                 procSniffStream,
+}
+
 // ComputeInvCMAP calls ImgUtil!ComputeInvCMAP.
 func ComputeInvCMAP(pRGBColors *graphicsgdi.RGBQUAD, nColors uint32, pInvTable *byte, cbTable uint32) error {
 	r1, _, _ := syscall.SyscallN(procComputeInvCMAP.Addr(), uintptr(unsafe.Pointer(pRGBColors)), uintptr(nColors), uintptr(unsafe.Pointer(pInvTable)), uintptr(cbTable))

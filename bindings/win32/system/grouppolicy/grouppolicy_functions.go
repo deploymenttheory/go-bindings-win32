@@ -56,6 +56,78 @@ var (
 	procUnregisterGPNotification        = modUSERENV.NewProc("UnregisterGPNotification")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BrowseForGPO                    *win32.Proc
+	CommandLineFromMsiDescriptor    *win32.Proc
+	CreateGPOLink                   *win32.Proc
+	DeleteAllGPOLinks               *win32.Proc
+	DeleteGPOLink                   *win32.Proc
+	EnterCriticalPolicySection      *win32.Proc
+	ExportRSoPData                  *win32.Proc
+	FreeGPOList                     *win32.Proc
+	FreeGPOListA                    *win32.Proc
+	GenerateGPNotification          *win32.Proc
+	GetAppliedGPOList               *win32.Proc
+	GetAppliedGPOListA              *win32.Proc
+	GetGPOList                      *win32.Proc
+	GetGPOListA                     *win32.Proc
+	GetLocalManagedApplicationData  *win32.Proc
+	GetLocalManagedApplications     *win32.Proc
+	GetManagedApplicationCategories *win32.Proc
+	GetManagedApplications          *win32.Proc
+	ImportRSoPData                  *win32.Proc
+	InstallApplication              *win32.Proc
+	LeaveCriticalPolicySection      *win32.Proc
+	ProcessGroupPolicyCompleted     *win32.Proc
+	ProcessGroupPolicyCompletedEx   *win32.Proc
+	RefreshPolicy                   *win32.Proc
+	RefreshPolicyEx                 *win32.Proc
+	RegisterGPNotification          *win32.Proc
+	RsopAccessCheckByType           *win32.Proc
+	RsopFileAccessCheck             *win32.Proc
+	RsopResetPolicySettingStatus    *win32.Proc
+	RsopSetPolicySettingStatus      *win32.Proc
+	UninstallApplication            *win32.Proc
+	UnregisterGPNotification        *win32.Proc
+}{
+	BrowseForGPO:                    procBrowseForGPO,
+	CommandLineFromMsiDescriptor:    procCommandLineFromMsiDescriptor,
+	CreateGPOLink:                   procCreateGPOLink,
+	DeleteAllGPOLinks:               procDeleteAllGPOLinks,
+	DeleteGPOLink:                   procDeleteGPOLink,
+	EnterCriticalPolicySection:      procEnterCriticalPolicySection,
+	ExportRSoPData:                  procExportRSoPData,
+	FreeGPOList:                     procFreeGPOList,
+	FreeGPOListA:                    procFreeGPOListA,
+	GenerateGPNotification:          procGenerateGPNotification,
+	GetAppliedGPOList:               procGetAppliedGPOList,
+	GetAppliedGPOListA:              procGetAppliedGPOListA,
+	GetGPOList:                      procGetGPOList,
+	GetGPOListA:                     procGetGPOListA,
+	GetLocalManagedApplicationData:  procGetLocalManagedApplicationData,
+	GetLocalManagedApplications:     procGetLocalManagedApplications,
+	GetManagedApplicationCategories: procGetManagedApplicationCategories,
+	GetManagedApplications:          procGetManagedApplications,
+	ImportRSoPData:                  procImportRSoPData,
+	InstallApplication:              procInstallApplication,
+	LeaveCriticalPolicySection:      procLeaveCriticalPolicySection,
+	ProcessGroupPolicyCompleted:     procProcessGroupPolicyCompleted,
+	ProcessGroupPolicyCompletedEx:   procProcessGroupPolicyCompletedEx,
+	RefreshPolicy:                   procRefreshPolicy,
+	RefreshPolicyEx:                 procRefreshPolicyEx,
+	RegisterGPNotification:          procRegisterGPNotification,
+	RsopAccessCheckByType:           procRsopAccessCheckByType,
+	RsopFileAccessCheck:             procRsopFileAccessCheck,
+	RsopResetPolicySettingStatus:    procRsopResetPolicySettingStatus,
+	RsopSetPolicySettingStatus:      procRsopSetPolicySettingStatus,
+	UninstallApplication:            procUninstallApplication,
+	UnregisterGPNotification:        procUnregisterGPNotification,
+}
+
 // BrowseForGPO calls GPEDIT!BrowseForGPO.
 // https://learn.microsoft.com/windows/win32/api/gpedit/nf-gpedit-browseforgpo
 // Minimum OS: windows6.0.6000.

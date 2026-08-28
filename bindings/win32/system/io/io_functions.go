@@ -30,6 +30,36 @@ var (
 	procPostQueuedCompletionStatus  = modKERNEL32.NewProc("PostQueuedCompletionStatus")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BindIoCompletionCallback    *win32.Proc
+	CancelIo                    *win32.Proc
+	CancelIoEx                  *win32.Proc
+	CancelSynchronousIo         *win32.Proc
+	CreateIoCompletionPort      *win32.Proc
+	DeviceIoControl             *win32.Proc
+	GetOverlappedResult         *win32.Proc
+	GetOverlappedResultEx       *win32.Proc
+	GetQueuedCompletionStatus   *win32.Proc
+	GetQueuedCompletionStatusEx *win32.Proc
+	PostQueuedCompletionStatus  *win32.Proc
+}{
+	BindIoCompletionCallback:    procBindIoCompletionCallback,
+	CancelIo:                    procCancelIo,
+	CancelIoEx:                  procCancelIoEx,
+	CancelSynchronousIo:         procCancelSynchronousIo,
+	CreateIoCompletionPort:      procCreateIoCompletionPort,
+	DeviceIoControl:             procDeviceIoControl,
+	GetOverlappedResult:         procGetOverlappedResult,
+	GetOverlappedResultEx:       procGetOverlappedResultEx,
+	GetQueuedCompletionStatus:   procGetQueuedCompletionStatus,
+	GetQueuedCompletionStatusEx: procGetQueuedCompletionStatusEx,
+	PostQueuedCompletionStatus:  procPostQueuedCompletionStatus,
+}
+
 // BindIoCompletionCallback calls KERNEL32!BindIoCompletionCallback.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-bindiocompletioncallback
 // Minimum OS: windows5.1.2600.

@@ -25,6 +25,28 @@ var (
 	procRtlQueryDepthSList            = modntdll.NewProc("RtlQueryDepthSList")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	RtlFirstEntrySList            *win32.Proc
+	RtlInitializeSListHead        *win32.Proc
+	RtlInterlockedFlushSList      *win32.Proc
+	RtlInterlockedPopEntrySList   *win32.Proc
+	RtlInterlockedPushEntrySList  *win32.Proc
+	RtlInterlockedPushListSListEx *win32.Proc
+	RtlQueryDepthSList            *win32.Proc
+}{
+	RtlFirstEntrySList:            procRtlFirstEntrySList,
+	RtlInitializeSListHead:        procRtlInitializeSListHead,
+	RtlInterlockedFlushSList:      procRtlInterlockedFlushSList,
+	RtlInterlockedPopEntrySList:   procRtlInterlockedPopEntrySList,
+	RtlInterlockedPushEntrySList:  procRtlInterlockedPushEntrySList,
+	RtlInterlockedPushListSListEx: procRtlInterlockedPushListSListEx,
+	RtlQueryDepthSList:            procRtlQueryDepthSList,
+}
+
 // RtlFirstEntrySList calls ntdll!RtlFirstEntrySList.
 // https://learn.microsoft.com/windows/win32/api/winnt/nf-winnt-rtlfirstentryslist
 // Minimum OS: windows5.1.2600.

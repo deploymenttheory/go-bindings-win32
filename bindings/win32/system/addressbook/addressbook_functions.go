@@ -74,6 +74,118 @@ var (
 	procCreateTable               = modrtm.NewProc("CreateTable")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BuildDisplayTable         *win32.Proc
+	ChangeIdleRoutine         *win32.Proc
+	CreateIProp               *win32.Proc
+	CreateTable               *win32.Proc
+	DeinitMapiUtil            *win32.Proc
+	DeregisterIdleRoutine     *win32.Proc
+	EnableIdleRoutine         *win32.Proc
+	FEqualNames               *win32.Proc
+	FPropCompareProp          *win32.Proc
+	FPropContainsProp         *win32.Proc
+	FPropExists               *win32.Proc
+	FreePadrlist              *win32.Proc
+	FreeProws                 *win32.Proc
+	FtgRegisterIdleRoutine    *win32.Proc
+	HrAddColumns              *win32.Proc
+	HrAddColumnsEx            *win32.Proc
+	HrAllocAdviseSink         *win32.Proc
+	HrDispatchNotifications   *win32.Proc
+	HrGetOneProp              *win32.Proc
+	HrIStorageFromStream      *win32.Proc
+	HrQueryAllRows            *win32.Proc
+	HrSetOneProp              *win32.Proc
+	HrThisThreadAdviseSink    *win32.Proc
+	LPropCompareProp          *win32.Proc
+	LpValFindProp             *win32.Proc
+	MAPIDeinitIdle            *win32.Proc
+	MAPIGetDefaultMalloc      *win32.Proc
+	MAPIInitIdle              *win32.Proc
+	OpenStreamOnFile          *win32.Proc
+	PpropFindProp             *win32.Proc
+	PropCopyMore              *win32.Proc
+	RTFSync                   *win32.Proc
+	ScCopyNotifications       *win32.Proc
+	ScCopyProps               *win32.Proc
+	ScCountNotifications      *win32.Proc
+	ScCountProps              *win32.Proc
+	ScCreateConversationIndex *win32.Proc
+	ScDupPropset              *win32.Proc
+	ScInitMapiUtil            *win32.Proc
+	ScLocalPathFromUNC        *win32.Proc
+	ScRelocNotifications      *win32.Proc
+	ScRelocProps              *win32.Proc
+	ScUNCFromLocalPath        *win32.Proc
+	SzFindCh                  *win32.Proc
+	SzFindLastCh              *win32.Proc
+	SzFindSz                  *win32.Proc
+	UFromSz                   *win32.Proc
+	UlAddRef                  *win32.Proc
+	UlPropSize                *win32.Proc
+	UlRelease                 *win32.Proc
+	WrapCompressedRTFStream   *win32.Proc
+	WrapStoreEntryID          *win32.Proc
+}{
+	BuildDisplayTable:         procBuildDisplayTable,
+	ChangeIdleRoutine:         procChangeIdleRoutine,
+	CreateIProp:               procCreateIProp,
+	CreateTable:               procCreateTable,
+	DeinitMapiUtil:            procDeinitMapiUtil,
+	DeregisterIdleRoutine:     procDeregisterIdleRoutine,
+	EnableIdleRoutine:         procEnableIdleRoutine,
+	FEqualNames:               procFEqualNames,
+	FPropCompareProp:          procFPropCompareProp,
+	FPropContainsProp:         procFPropContainsProp,
+	FPropExists:               procFPropExists,
+	FreePadrlist:              procFreePadrlist,
+	FreeProws:                 procFreeProws,
+	FtgRegisterIdleRoutine:    procFtgRegisterIdleRoutine,
+	HrAddColumns:              procHrAddColumns,
+	HrAddColumnsEx:            procHrAddColumnsEx,
+	HrAllocAdviseSink:         procHrAllocAdviseSink,
+	HrDispatchNotifications:   procHrDispatchNotifications,
+	HrGetOneProp:              procHrGetOneProp,
+	HrIStorageFromStream:      procHrIStorageFromStream,
+	HrQueryAllRows:            procHrQueryAllRows,
+	HrSetOneProp:              procHrSetOneProp,
+	HrThisThreadAdviseSink:    procHrThisThreadAdviseSink,
+	LPropCompareProp:          procLPropCompareProp,
+	LpValFindProp:             procLpValFindProp,
+	MAPIDeinitIdle:            procMAPIDeinitIdle,
+	MAPIGetDefaultMalloc:      procMAPIGetDefaultMalloc,
+	MAPIInitIdle:              procMAPIInitIdle,
+	OpenStreamOnFile:          procOpenStreamOnFile,
+	PpropFindProp:             procPpropFindProp,
+	PropCopyMore:              procPropCopyMore,
+	RTFSync:                   procRTFSync,
+	ScCopyNotifications:       procScCopyNotifications,
+	ScCopyProps:               procScCopyProps,
+	ScCountNotifications:      procScCountNotifications,
+	ScCountProps:              procScCountProps,
+	ScCreateConversationIndex: procScCreateConversationIndex,
+	ScDupPropset:              procScDupPropset,
+	ScInitMapiUtil:            procScInitMapiUtil,
+	ScLocalPathFromUNC:        procScLocalPathFromUNC,
+	ScRelocNotifications:      procScRelocNotifications,
+	ScRelocProps:              procScRelocProps,
+	ScUNCFromLocalPath:        procScUNCFromLocalPath,
+	SzFindCh:                  procSzFindCh,
+	SzFindLastCh:              procSzFindLastCh,
+	SzFindSz:                  procSzFindSz,
+	UFromSz:                   procUFromSz,
+	UlAddRef:                  procUlAddRef,
+	UlPropSize:                procUlPropSize,
+	UlRelease:                 procUlRelease,
+	WrapCompressedRTFStream:   procWrapCompressedRTFStream,
+	WrapStoreEntryID:          procWrapStoreEntryID,
+}
+
 // BuildDisplayTable calls MAPI32!BuildDisplayTable.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/builddisplaytable
 func BuildDisplayTable(lpAllocateBuffer LPALLOCATEBUFFER, lpAllocateMore LPALLOCATEMORE, lpFreeBuffer LPFREEBUFFER, lpMalloc *systemcom.IMalloc, hInstance foundation.HINSTANCE, cPages uint32, lpPage *DTPAGE, ulFlags uint32, lppTable **IMAPITable, lppTblData **ITableData) error {

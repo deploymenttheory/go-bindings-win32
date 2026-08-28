@@ -36,6 +36,44 @@ var (
 	procNdfRepairIncident             = modNDFAPI.NewProc("NdfRepairIncident")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	NdfCancelIncident             *win32.Proc
+	NdfCloseIncident              *win32.Proc
+	NdfCreateConnectivityIncident *win32.Proc
+	NdfCreateDNSIncident          *win32.Proc
+	NdfCreateGroupingIncident     *win32.Proc
+	NdfCreateIncident             *win32.Proc
+	NdfCreatePnrpIncident         *win32.Proc
+	NdfCreateSharingIncident      *win32.Proc
+	NdfCreateWebIncident          *win32.Proc
+	NdfCreateWebIncidentEx        *win32.Proc
+	NdfCreateWinSockIncident      *win32.Proc
+	NdfDiagnoseIncident           *win32.Proc
+	NdfExecuteDiagnosis           *win32.Proc
+	NdfGetTraceFile               *win32.Proc
+	NdfRepairIncident             *win32.Proc
+}{
+	NdfCancelIncident:             procNdfCancelIncident,
+	NdfCloseIncident:              procNdfCloseIncident,
+	NdfCreateConnectivityIncident: procNdfCreateConnectivityIncident,
+	NdfCreateDNSIncident:          procNdfCreateDNSIncident,
+	NdfCreateGroupingIncident:     procNdfCreateGroupingIncident,
+	NdfCreateIncident:             procNdfCreateIncident,
+	NdfCreatePnrpIncident:         procNdfCreatePnrpIncident,
+	NdfCreateSharingIncident:      procNdfCreateSharingIncident,
+	NdfCreateWebIncident:          procNdfCreateWebIncident,
+	NdfCreateWebIncidentEx:        procNdfCreateWebIncidentEx,
+	NdfCreateWinSockIncident:      procNdfCreateWinSockIncident,
+	NdfDiagnoseIncident:           procNdfDiagnoseIncident,
+	NdfExecuteDiagnosis:           procNdfExecuteDiagnosis,
+	NdfGetTraceFile:               procNdfGetTraceFile,
+	NdfRepairIncident:             procNdfRepairIncident,
+}
+
 // NdfCancelIncident calls NDFAPI!NdfCancelIncident.
 // https://learn.microsoft.com/windows/win32/api/ndfapi/nf-ndfapi-ndfcancelincident
 // Minimum OS: windows6.1.

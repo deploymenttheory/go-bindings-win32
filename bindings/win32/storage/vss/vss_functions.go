@@ -25,6 +25,26 @@ var (
 	procVssFreeSnapshotPropertiesInternal      = modVSSAPI.NewProc("VssFreeSnapshotPropertiesInternal")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateVssBackupComponentsInternal      *win32.Proc
+	CreateVssExamineWriterMetadataInternal *win32.Proc
+	CreateVssExpressWriterInternal         *win32.Proc
+	IsVolumeSnapshottedInternal            *win32.Proc
+	ShouldBlockRevertInternal              *win32.Proc
+	VssFreeSnapshotPropertiesInternal      *win32.Proc
+}{
+	CreateVssBackupComponentsInternal:      procCreateVssBackupComponentsInternal,
+	CreateVssExamineWriterMetadataInternal: procCreateVssExamineWriterMetadataInternal,
+	CreateVssExpressWriterInternal:         procCreateVssExpressWriterInternal,
+	IsVolumeSnapshottedInternal:            procIsVolumeSnapshottedInternal,
+	ShouldBlockRevertInternal:              procShouldBlockRevertInternal,
+	VssFreeSnapshotPropertiesInternal:      procVssFreeSnapshotPropertiesInternal,
+}
+
 // CreateVssBackupComponentsInternal calls VSSAPI!CreateVssBackupComponentsInternal.
 // https://learn.microsoft.com/windows/win32/api/vsbackup/nf-vsbackup-createvssbackupcomponentsinternal
 // Minimum OS: windows5.1.2600.

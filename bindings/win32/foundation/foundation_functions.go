@@ -44,6 +44,58 @@ var (
 	procSetLastErrorEx        = modUSER32.NewProc("SetLastErrorEx")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CloseHandle           *win32.Proc
+	CompareObjectHandles  *win32.Proc
+	DuplicateHandle       *win32.Proc
+	FreeLibrary           *win32.Proc
+	GetHandleInformation  *win32.Proc
+	GetLastError          *win32.Proc
+	GlobalFree            *win32.Proc
+	LocalFree             *win32.Proc
+	RtlNtStatusToDosError *win32.Proc
+	SetHandleInformation  *win32.Proc
+	SetLastError          *win32.Proc
+	SetLastErrorEx        *win32.Proc
+	SysAddRefString       *win32.Proc
+	SysAllocString        *win32.Proc
+	SysAllocStringByteLen *win32.Proc
+	SysAllocStringLen     *win32.Proc
+	SysFreeString         *win32.Proc
+	SysReAllocString      *win32.Proc
+	SysReAllocStringLen   *win32.Proc
+	SysReleaseString      *win32.Proc
+	SysStringByteLen      *win32.Proc
+	SysStringLen          *win32.Proc
+}{
+	CloseHandle:           procCloseHandle,
+	CompareObjectHandles:  procCompareObjectHandles,
+	DuplicateHandle:       procDuplicateHandle,
+	FreeLibrary:           procFreeLibrary,
+	GetHandleInformation:  procGetHandleInformation,
+	GetLastError:          procGetLastError,
+	GlobalFree:            procGlobalFree,
+	LocalFree:             procLocalFree,
+	RtlNtStatusToDosError: procRtlNtStatusToDosError,
+	SetHandleInformation:  procSetHandleInformation,
+	SetLastError:          procSetLastError,
+	SetLastErrorEx:        procSetLastErrorEx,
+	SysAddRefString:       procSysAddRefString,
+	SysAllocString:        procSysAllocString,
+	SysAllocStringByteLen: procSysAllocStringByteLen,
+	SysAllocStringLen:     procSysAllocStringLen,
+	SysFreeString:         procSysFreeString,
+	SysReAllocString:      procSysReAllocString,
+	SysReAllocStringLen:   procSysReAllocStringLen,
+	SysReleaseString:      procSysReleaseString,
+	SysStringByteLen:      procSysStringByteLen,
+	SysStringLen:          procSysStringLen,
+}
+
 // CloseHandle calls KERNEL32!CloseHandle.
 // https://learn.microsoft.com/windows/win32/api/handleapi/nf-handleapi-closehandle
 // Minimum OS: windows5.0.

@@ -18,6 +18,16 @@ var (
 	procCloseHandle = modKERNEL32.NewProc("CloseHandle")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CloseHandle *win32.Proc
+}{
+	CloseHandle: procCloseHandle,
+}
+
 // CloseHandle calls KERNEL32!CloseHandle.
 func CloseHandle(hObject HANDLE) error {
 	r1, _, e1 := syscall.SyscallN(procCloseHandle.Addr(), uintptr(hObject))

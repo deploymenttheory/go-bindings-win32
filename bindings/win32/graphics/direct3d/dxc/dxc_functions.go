@@ -21,6 +21,18 @@ var (
 	procDxcCreateInstance2 = moddxcompiler.NewProc("DxcCreateInstance2")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DxcCreateInstance  *win32.Proc
+	DxcCreateInstance2 *win32.Proc
+}{
+	DxcCreateInstance:  procDxcCreateInstance,
+	DxcCreateInstance2: procDxcCreateInstance2,
+}
+
 // DxcCreateInstance calls dxcompiler!DxcCreateInstance.
 func DxcCreateInstance(rclsid *win32.GUID, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDxcCreateInstance.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))

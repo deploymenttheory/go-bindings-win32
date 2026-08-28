@@ -52,6 +52,74 @@ var (
 	procWaitCommEvent            = modKERNEL32.NewProc("WaitCommEvent")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BuildCommDCB             *win32.Proc
+	BuildCommDCBA            *win32.Proc
+	BuildCommDCBAndTimeouts  *win32.Proc
+	BuildCommDCBAndTimeoutsA *win32.Proc
+	ClearCommBreak           *win32.Proc
+	ClearCommError           *win32.Proc
+	CommConfigDialog         *win32.Proc
+	CommConfigDialogA        *win32.Proc
+	EscapeCommFunction       *win32.Proc
+	GetCommConfig            *win32.Proc
+	GetCommMask              *win32.Proc
+	GetCommModemStatus       *win32.Proc
+	GetCommPorts             *win32.Proc
+	GetCommProperties        *win32.Proc
+	GetCommState             *win32.Proc
+	GetCommTimeouts          *win32.Proc
+	GetDefaultCommConfig     *win32.Proc
+	GetDefaultCommConfigA    *win32.Proc
+	OpenCommPort             *win32.Proc
+	PurgeComm                *win32.Proc
+	SetCommBreak             *win32.Proc
+	SetCommConfig            *win32.Proc
+	SetCommMask              *win32.Proc
+	SetCommState             *win32.Proc
+	SetCommTimeouts          *win32.Proc
+	SetDefaultCommConfig     *win32.Proc
+	SetDefaultCommConfigA    *win32.Proc
+	SetupComm                *win32.Proc
+	TransmitCommChar         *win32.Proc
+	WaitCommEvent            *win32.Proc
+}{
+	BuildCommDCB:             procBuildCommDCB,
+	BuildCommDCBA:            procBuildCommDCBA,
+	BuildCommDCBAndTimeouts:  procBuildCommDCBAndTimeouts,
+	BuildCommDCBAndTimeoutsA: procBuildCommDCBAndTimeoutsA,
+	ClearCommBreak:           procClearCommBreak,
+	ClearCommError:           procClearCommError,
+	CommConfigDialog:         procCommConfigDialog,
+	CommConfigDialogA:        procCommConfigDialogA,
+	EscapeCommFunction:       procEscapeCommFunction,
+	GetCommConfig:            procGetCommConfig,
+	GetCommMask:              procGetCommMask,
+	GetCommModemStatus:       procGetCommModemStatus,
+	GetCommPorts:             procGetCommPorts,
+	GetCommProperties:        procGetCommProperties,
+	GetCommState:             procGetCommState,
+	GetCommTimeouts:          procGetCommTimeouts,
+	GetDefaultCommConfig:     procGetDefaultCommConfig,
+	GetDefaultCommConfigA:    procGetDefaultCommConfigA,
+	OpenCommPort:             procOpenCommPort,
+	PurgeComm:                procPurgeComm,
+	SetCommBreak:             procSetCommBreak,
+	SetCommConfig:            procSetCommConfig,
+	SetCommMask:              procSetCommMask,
+	SetCommState:             procSetCommState,
+	SetCommTimeouts:          procSetCommTimeouts,
+	SetDefaultCommConfig:     procSetDefaultCommConfig,
+	SetDefaultCommConfigA:    procSetDefaultCommConfigA,
+	SetupComm:                procSetupComm,
+	TransmitCommChar:         procTransmitCommChar,
+	WaitCommEvent:            procWaitCommEvent,
+}
+
 // BuildCommDCB calls KERNEL32!BuildCommDCBW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-buildcommdcbw
 // Minimum OS: windows5.1.2600.

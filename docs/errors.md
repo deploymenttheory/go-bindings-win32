@@ -110,6 +110,32 @@ The subsystem's own constants live in the same package
 (`netmanagement.NERR_Success`, …), so you compare without importing anything
 extra.
 
+## Unavailable APIs (missing exports)
+
+Every binding resolves its export lazily on first call. A DLL that is not
+installed (an optional component) or an export newer than the running
+Windows build cannot be dispatched to at all, so the call **panics** with a
+`*win32.ProcError` rather than returning an error — there is no address to
+call, and most signatures have no error channel for it.
+
+Probe first when an API may be absent. Every generated package exposes its
+procs as `Procs.<Function>`:
+
+```go
+if err := threading.Procs.GetCurrentThreadStackLimits.Find(); err != nil {
+	var procErr *win32.ProcError
+	errors.As(err, &procErr)              // procErr.DLL, procErr.Proc
+	errors.Is(err, win32.ErrProcNotFound) // export missing from this build
+	errors.Is(err, win32.ErrDLLNotFound)  // DLL not installed / not in System32
+	return err
+}
+threading.GetCurrentThreadStackLimits(&low, &high) // safe: resolved above
+```
+
+`Find` memoizes, so probing costs one `GetProcAddress`. If you would rather
+recover than probe, the panic value is the same `*win32.ProcError`
+(`errors.As` on the recovered `error`).
+
 ## Hooking your logger
 
 There is no global error hook — errors flow back through normal Go return

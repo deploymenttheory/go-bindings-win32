@@ -26,6 +26,28 @@ var (
 	procComDBResizeDatabase      = modMSPORTS.NewProc("ComDBResizeDatabase")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ComDBClaimNextFreePort   *win32.Proc
+	ComDBClaimPort           *win32.Proc
+	ComDBClose               *win32.Proc
+	ComDBGetCurrentPortUsage *win32.Proc
+	ComDBOpen                *win32.Proc
+	ComDBReleasePort         *win32.Proc
+	ComDBResizeDatabase      *win32.Proc
+}{
+	ComDBClaimNextFreePort:   procComDBClaimNextFreePort,
+	ComDBClaimPort:           procComDBClaimPort,
+	ComDBClose:               procComDBClose,
+	ComDBGetCurrentPortUsage: procComDBGetCurrentPortUsage,
+	ComDBOpen:                procComDBOpen,
+	ComDBReleasePort:         procComDBReleasePort,
+	ComDBResizeDatabase:      procComDBResizeDatabase,
+}
+
 // ComDBClaimNextFreePort calls MSPORTS!ComDBClaimNextFreePort.
 // https://learn.microsoft.com/windows/win32/api/msports/nf-msports-comdbclaimnextfreeport
 func ComDBClaimNextFreePort(HComDB HCOMDB, ComNumber *uint32) int32 {

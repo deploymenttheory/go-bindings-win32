@@ -20,6 +20,16 @@ var (
 	procVerifierEnumerateResource = modverifier.NewProc("VerifierEnumerateResource")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	VerifierEnumerateResource *win32.Proc
+}{
+	VerifierEnumerateResource: procVerifierEnumerateResource,
+}
+
 // VerifierEnumerateResource calls verifier!VerifierEnumerateResource.
 // https://learn.microsoft.com/windows/win32/api/avrfsdk/nf-avrfsdk-verifierenumerateresource
 func VerifierEnumerateResource(Process foundation.HANDLE, Flags VERIFIER_ENUM_RESOURCE_FLAGS, ResourceType uint32, ResourceCallback AVRF_RESOURCE_ENUMERATE_CALLBACK, EnumerationContext unsafe.Pointer) uint32 {

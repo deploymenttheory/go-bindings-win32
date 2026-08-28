@@ -24,6 +24,26 @@ var (
 	procDXGIGetDebugInterface1           = moddxgi.NewProc("DXGIGetDebugInterface1")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateDXGIFactory                *win32.Proc
+	CreateDXGIFactory1               *win32.Proc
+	CreateDXGIFactory2               *win32.Proc
+	DXGIDeclareAdapterRemovalSupport *win32.Proc
+	DXGIDisableVBlankVirtualization  *win32.Proc
+	DXGIGetDebugInterface1           *win32.Proc
+}{
+	CreateDXGIFactory:                procCreateDXGIFactory,
+	CreateDXGIFactory1:               procCreateDXGIFactory1,
+	CreateDXGIFactory2:               procCreateDXGIFactory2,
+	DXGIDeclareAdapterRemovalSupport: procDXGIDeclareAdapterRemovalSupport,
+	DXGIDisableVBlankVirtualization:  procDXGIDisableVBlankVirtualization,
+	DXGIGetDebugInterface1:           procDXGIGetDebugInterface1,
+}
+
 // CreateDXGIFactory calls dxgi!CreateDXGIFactory.
 // https://learn.microsoft.com/windows/win32/api/dxgi/nf-dxgi-createdxgifactory
 func CreateDXGIFactory(riid *win32.GUID, ppFactory **win32.IUnknown) error {

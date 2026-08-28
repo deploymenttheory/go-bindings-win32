@@ -18,6 +18,16 @@ var (
 	procCoInitializeEx = modOLE32.NewProc("CoInitializeEx")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CoInitializeEx *win32.Proc
+}{
+	CoInitializeEx: procCoInitializeEx,
+}
+
 // CoInitializeEx calls OLE32!CoInitializeEx.
 // The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
 func CoInitializeEx(dwCoInit uint32) (win32.HRESULT, error) {

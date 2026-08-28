@@ -52,6 +52,80 @@ var (
 	procWSManSignalShell                   = modWsmSvc.NewProc("WSManSignalShell")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WSManCloseCommand                  *win32.Proc
+	WSManCloseOperation                *win32.Proc
+	WSManCloseSession                  *win32.Proc
+	WSManCloseShell                    *win32.Proc
+	WSManConnectShell                  *win32.Proc
+	WSManConnectShellCommand           *win32.Proc
+	WSManCreateSession                 *win32.Proc
+	WSManCreateShell                   *win32.Proc
+	WSManCreateShellEx                 *win32.Proc
+	WSManDeinitialize                  *win32.Proc
+	WSManDisconnectShell               *win32.Proc
+	WSManGetErrorMessage               *win32.Proc
+	WSManGetSessionOptionAsDword       *win32.Proc
+	WSManGetSessionOptionAsString      *win32.Proc
+	WSManInitialize                    *win32.Proc
+	WSManPluginAuthzOperationComplete  *win32.Proc
+	WSManPluginAuthzQueryQuotaComplete *win32.Proc
+	WSManPluginAuthzUserComplete       *win32.Proc
+	WSManPluginFreeRequestDetails      *win32.Proc
+	WSManPluginGetConfiguration        *win32.Proc
+	WSManPluginGetOperationParameters  *win32.Proc
+	WSManPluginOperationComplete       *win32.Proc
+	WSManPluginReceiveResult           *win32.Proc
+	WSManPluginReportCompletion        *win32.Proc
+	WSManPluginReportContext           *win32.Proc
+	WSManReceiveShellOutput            *win32.Proc
+	WSManReconnectShell                *win32.Proc
+	WSManReconnectShellCommand         *win32.Proc
+	WSManRunShellCommand               *win32.Proc
+	WSManRunShellCommandEx             *win32.Proc
+	WSManSendShellInput                *win32.Proc
+	WSManSetSessionOption              *win32.Proc
+	WSManSignalShell                   *win32.Proc
+}{
+	WSManCloseCommand:                  procWSManCloseCommand,
+	WSManCloseOperation:                procWSManCloseOperation,
+	WSManCloseSession:                  procWSManCloseSession,
+	WSManCloseShell:                    procWSManCloseShell,
+	WSManConnectShell:                  procWSManConnectShell,
+	WSManConnectShellCommand:           procWSManConnectShellCommand,
+	WSManCreateSession:                 procWSManCreateSession,
+	WSManCreateShell:                   procWSManCreateShell,
+	WSManCreateShellEx:                 procWSManCreateShellEx,
+	WSManDeinitialize:                  procWSManDeinitialize,
+	WSManDisconnectShell:               procWSManDisconnectShell,
+	WSManGetErrorMessage:               procWSManGetErrorMessage,
+	WSManGetSessionOptionAsDword:       procWSManGetSessionOptionAsDword,
+	WSManGetSessionOptionAsString:      procWSManGetSessionOptionAsString,
+	WSManInitialize:                    procWSManInitialize,
+	WSManPluginAuthzOperationComplete:  procWSManPluginAuthzOperationComplete,
+	WSManPluginAuthzQueryQuotaComplete: procWSManPluginAuthzQueryQuotaComplete,
+	WSManPluginAuthzUserComplete:       procWSManPluginAuthzUserComplete,
+	WSManPluginFreeRequestDetails:      procWSManPluginFreeRequestDetails,
+	WSManPluginGetConfiguration:        procWSManPluginGetConfiguration,
+	WSManPluginGetOperationParameters:  procWSManPluginGetOperationParameters,
+	WSManPluginOperationComplete:       procWSManPluginOperationComplete,
+	WSManPluginReceiveResult:           procWSManPluginReceiveResult,
+	WSManPluginReportCompletion:        procWSManPluginReportCompletion,
+	WSManPluginReportContext:           procWSManPluginReportContext,
+	WSManReceiveShellOutput:            procWSManReceiveShellOutput,
+	WSManReconnectShell:                procWSManReconnectShell,
+	WSManReconnectShellCommand:         procWSManReconnectShellCommand,
+	WSManRunShellCommand:               procWSManRunShellCommand,
+	WSManRunShellCommandEx:             procWSManRunShellCommandEx,
+	WSManSendShellInput:                procWSManSendShellInput,
+	WSManSetSessionOption:              procWSManSetSessionOption,
+	WSManSignalShell:                   procWSManSignalShell,
+}
+
 // WSManCloseCommand calls WsmSvc!WSManCloseCommand.
 // https://learn.microsoft.com/windows/win32/api/wsman/nf-wsman-wsmanclosecommand
 // Minimum OS: windows6.1.

@@ -26,6 +26,28 @@ var (
 	procDirectDrawEnumerateExA  = modDDRAW.NewProc("DirectDrawEnumerateExA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DirectDrawCreate        *win32.Proc
+	DirectDrawCreateClipper *win32.Proc
+	DirectDrawCreateEx      *win32.Proc
+	DirectDrawEnumerate     *win32.Proc
+	DirectDrawEnumerateA    *win32.Proc
+	DirectDrawEnumerateEx   *win32.Proc
+	DirectDrawEnumerateExA  *win32.Proc
+}{
+	DirectDrawCreate:        procDirectDrawCreate,
+	DirectDrawCreateClipper: procDirectDrawCreateClipper,
+	DirectDrawCreateEx:      procDirectDrawCreateEx,
+	DirectDrawEnumerate:     procDirectDrawEnumerate,
+	DirectDrawEnumerateA:    procDirectDrawEnumerateA,
+	DirectDrawEnumerateEx:   procDirectDrawEnumerateEx,
+	DirectDrawEnumerateExA:  procDirectDrawEnumerateExA,
+}
+
 // DirectDrawCreate calls DDRAW!DirectDrawCreate.
 // https://learn.microsoft.com/windows/win32/api/ddraw/nf-ddraw-directdrawcreate
 func DirectDrawCreate(lpGUID *win32.GUID, lplpDD **IDirectDraw, pUnkOuter *systemcom.IUnknown) error {

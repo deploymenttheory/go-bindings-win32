@@ -20,6 +20,16 @@ var (
 	procDMProcessConfigXMLFiltered = modDMProcessXMLFiltered.NewProc("DMProcessConfigXMLFiltered")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DMProcessConfigXMLFiltered *win32.Proc
+}{
+	DMProcessConfigXMLFiltered: procDMProcessConfigXMLFiltered,
+}
+
 // DMProcessConfigXMLFiltered calls DMProcessXMLFiltered!DMProcessConfigXMLFiltered.
 func DMProcessConfigXMLFiltered(pszXmlIn string, rgszAllowedCspNodes []foundation.PWSTR, pbstrXmlOut *foundation.BSTR) error {
 	_pszXmlIn := win32.UTF16Ptr(pszXmlIn)

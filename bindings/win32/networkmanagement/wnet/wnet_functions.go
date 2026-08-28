@@ -86,6 +86,144 @@ var (
 	procNPGetPersistentUseOptionsForConnection = modNTLANMAN.NewProc("NPGetPersistentUseOptionsForConnection")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MultinetGetConnectionPerformance       *win32.Proc
+	MultinetGetConnectionPerformanceA      *win32.Proc
+	NPAddConnection                        *win32.Proc
+	NPAddConnection3                       *win32.Proc
+	NPAddConnection4                       *win32.Proc
+	NPCancelConnection                     *win32.Proc
+	NPCancelConnection2                    *win32.Proc
+	NPCloseEnum                            *win32.Proc
+	NPEnumResource                         *win32.Proc
+	NPFormatNetworkName                    *win32.Proc
+	NPGetCaps                              *win32.Proc
+	NPGetConnection                        *win32.Proc
+	NPGetConnection3                       *win32.Proc
+	NPGetConnectionPerformance             *win32.Proc
+	NPGetPersistentUseOptionsForConnection *win32.Proc
+	NPGetResourceInformation               *win32.Proc
+	NPGetResourceParent                    *win32.Proc
+	NPGetUniversalName                     *win32.Proc
+	NPGetUser                              *win32.Proc
+	NPOpenEnum                             *win32.Proc
+	WNetAddConnection                      *win32.Proc
+	WNetAddConnection2                     *win32.Proc
+	WNetAddConnection2A                    *win32.Proc
+	WNetAddConnection3                     *win32.Proc
+	WNetAddConnection3A                    *win32.Proc
+	WNetAddConnection4                     *win32.Proc
+	WNetAddConnection4A                    *win32.Proc
+	WNetAddConnectionA                     *win32.Proc
+	WNetCancelConnection                   *win32.Proc
+	WNetCancelConnection2                  *win32.Proc
+	WNetCancelConnection2A                 *win32.Proc
+	WNetCancelConnectionA                  *win32.Proc
+	WNetCloseEnum                          *win32.Proc
+	WNetConnectionDialog                   *win32.Proc
+	WNetConnectionDialog1                  *win32.Proc
+	WNetConnectionDialog1A                 *win32.Proc
+	WNetDisconnectDialog                   *win32.Proc
+	WNetDisconnectDialog1                  *win32.Proc
+	WNetDisconnectDialog1A                 *win32.Proc
+	WNetEnumResource                       *win32.Proc
+	WNetEnumResourceA                      *win32.Proc
+	WNetGetConnection                      *win32.Proc
+	WNetGetConnectionA                     *win32.Proc
+	WNetGetLastError                       *win32.Proc
+	WNetGetLastErrorA                      *win32.Proc
+	WNetGetNetworkInformation              *win32.Proc
+	WNetGetNetworkInformationA             *win32.Proc
+	WNetGetProviderName                    *win32.Proc
+	WNetGetProviderNameA                   *win32.Proc
+	WNetGetResourceInformation             *win32.Proc
+	WNetGetResourceInformationA            *win32.Proc
+	WNetGetResourceParent                  *win32.Proc
+	WNetGetResourceParentA                 *win32.Proc
+	WNetGetUniversalName                   *win32.Proc
+	WNetGetUniversalNameA                  *win32.Proc
+	WNetGetUser                            *win32.Proc
+	WNetGetUserA                           *win32.Proc
+	WNetOpenEnum                           *win32.Proc
+	WNetOpenEnumA                          *win32.Proc
+	WNetSetLastError                       *win32.Proc
+	WNetSetLastErrorA                      *win32.Proc
+	WNetUseConnection                      *win32.Proc
+	WNetUseConnection4                     *win32.Proc
+	WNetUseConnection4A                    *win32.Proc
+	WNetUseConnectionA                     *win32.Proc
+}{
+	MultinetGetConnectionPerformance:       procMultinetGetConnectionPerformance,
+	MultinetGetConnectionPerformanceA:      procMultinetGetConnectionPerformanceA,
+	NPAddConnection:                        procNPAddConnection,
+	NPAddConnection3:                       procNPAddConnection3,
+	NPAddConnection4:                       procNPAddConnection4,
+	NPCancelConnection:                     procNPCancelConnection,
+	NPCancelConnection2:                    procNPCancelConnection2,
+	NPCloseEnum:                            procNPCloseEnum,
+	NPEnumResource:                         procNPEnumResource,
+	NPFormatNetworkName:                    procNPFormatNetworkName,
+	NPGetCaps:                              procNPGetCaps,
+	NPGetConnection:                        procNPGetConnection,
+	NPGetConnection3:                       procNPGetConnection3,
+	NPGetConnectionPerformance:             procNPGetConnectionPerformance,
+	NPGetPersistentUseOptionsForConnection: procNPGetPersistentUseOptionsForConnection,
+	NPGetResourceInformation:               procNPGetResourceInformation,
+	NPGetResourceParent:                    procNPGetResourceParent,
+	NPGetUniversalName:                     procNPGetUniversalName,
+	NPGetUser:                              procNPGetUser,
+	NPOpenEnum:                             procNPOpenEnum,
+	WNetAddConnection:                      procWNetAddConnection,
+	WNetAddConnection2:                     procWNetAddConnection2,
+	WNetAddConnection2A:                    procWNetAddConnection2A,
+	WNetAddConnection3:                     procWNetAddConnection3,
+	WNetAddConnection3A:                    procWNetAddConnection3A,
+	WNetAddConnection4:                     procWNetAddConnection4,
+	WNetAddConnection4A:                    procWNetAddConnection4A,
+	WNetAddConnectionA:                     procWNetAddConnectionA,
+	WNetCancelConnection:                   procWNetCancelConnection,
+	WNetCancelConnection2:                  procWNetCancelConnection2,
+	WNetCancelConnection2A:                 procWNetCancelConnection2A,
+	WNetCancelConnectionA:                  procWNetCancelConnectionA,
+	WNetCloseEnum:                          procWNetCloseEnum,
+	WNetConnectionDialog:                   procWNetConnectionDialog,
+	WNetConnectionDialog1:                  procWNetConnectionDialog1,
+	WNetConnectionDialog1A:                 procWNetConnectionDialog1A,
+	WNetDisconnectDialog:                   procWNetDisconnectDialog,
+	WNetDisconnectDialog1:                  procWNetDisconnectDialog1,
+	WNetDisconnectDialog1A:                 procWNetDisconnectDialog1A,
+	WNetEnumResource:                       procWNetEnumResource,
+	WNetEnumResourceA:                      procWNetEnumResourceA,
+	WNetGetConnection:                      procWNetGetConnection,
+	WNetGetConnectionA:                     procWNetGetConnectionA,
+	WNetGetLastError:                       procWNetGetLastError,
+	WNetGetLastErrorA:                      procWNetGetLastErrorA,
+	WNetGetNetworkInformation:              procWNetGetNetworkInformation,
+	WNetGetNetworkInformationA:             procWNetGetNetworkInformationA,
+	WNetGetProviderName:                    procWNetGetProviderName,
+	WNetGetProviderNameA:                   procWNetGetProviderNameA,
+	WNetGetResourceInformation:             procWNetGetResourceInformation,
+	WNetGetResourceInformationA:            procWNetGetResourceInformationA,
+	WNetGetResourceParent:                  procWNetGetResourceParent,
+	WNetGetResourceParentA:                 procWNetGetResourceParentA,
+	WNetGetUniversalName:                   procWNetGetUniversalName,
+	WNetGetUniversalNameA:                  procWNetGetUniversalNameA,
+	WNetGetUser:                            procWNetGetUser,
+	WNetGetUserA:                           procWNetGetUserA,
+	WNetOpenEnum:                           procWNetOpenEnum,
+	WNetOpenEnumA:                          procWNetOpenEnumA,
+	WNetSetLastError:                       procWNetSetLastError,
+	WNetSetLastErrorA:                      procWNetSetLastErrorA,
+	WNetUseConnection:                      procWNetUseConnection,
+	WNetUseConnection4:                     procWNetUseConnection4,
+	WNetUseConnection4A:                    procWNetUseConnection4A,
+	WNetUseConnectionA:                     procWNetUseConnectionA,
+}
+
 // MultinetGetConnectionPerformance calls MPR!MultinetGetConnectionPerformanceW.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-multinetgetconnectionperformancew
 // Minimum OS: windows5.0.

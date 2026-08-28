@@ -23,6 +23,22 @@ var (
 	procDtcGetTransactionManagerExA = modXOLEHLP.NewProc("DtcGetTransactionManagerExA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DtcGetTransactionManager    *win32.Proc
+	DtcGetTransactionManagerC   *win32.Proc
+	DtcGetTransactionManagerEx  *win32.Proc
+	DtcGetTransactionManagerExA *win32.Proc
+}{
+	DtcGetTransactionManager:    procDtcGetTransactionManager,
+	DtcGetTransactionManagerC:   procDtcGetTransactionManagerC,
+	DtcGetTransactionManagerEx:  procDtcGetTransactionManagerEx,
+	DtcGetTransactionManagerExA: procDtcGetTransactionManagerExA,
+}
+
 // DtcGetTransactionManager calls XOLEHLP!DtcGetTransactionManager.
 func DtcGetTransactionManager(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_dwReserved1 uint32, i_pvReserved2 []byte, o_ppvObject **win32.IUnknown) error {
 	var _i_pvReserved2 *byte

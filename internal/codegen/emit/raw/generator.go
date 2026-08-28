@@ -299,10 +299,17 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 
 	// Functions file: DLL/proc declarations plus wrappers.
 	funcImports := typemap.ImportSet{}
-	functions, dlls := g.buildFunctionModels(meta, funcImports)
+	functions, dlls, procTable := g.buildFunctionModels(meta, funcImports)
 	var funcBody strings.Builder
 	if len(dlls) > 0 {
 		block, err := render.DLL(dlls)
+		if err != nil {
+			return err
+		}
+		funcBody.WriteString(block)
+	}
+	if len(procTable) > 0 {
+		block, err := render.Procs(procTable)
 		if err != nil {
 			return err
 		}

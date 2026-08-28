@@ -35,6 +35,42 @@ var (
 	procDevGetObjectsEx               = modapi_ms_win_devices_query_l1_1_1.NewProc("DevGetObjectsEx")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DevCloseObjectQuery           *win32.Proc
+	DevCreateObjectQuery          *win32.Proc
+	DevCreateObjectQueryEx        *win32.Proc
+	DevCreateObjectQueryFromId    *win32.Proc
+	DevCreateObjectQueryFromIdEx  *win32.Proc
+	DevCreateObjectQueryFromIds   *win32.Proc
+	DevCreateObjectQueryFromIdsEx *win32.Proc
+	DevFindProperty               *win32.Proc
+	DevFreeObjectProperties       *win32.Proc
+	DevFreeObjects                *win32.Proc
+	DevGetObjectProperties        *win32.Proc
+	DevGetObjectPropertiesEx      *win32.Proc
+	DevGetObjects                 *win32.Proc
+	DevGetObjectsEx               *win32.Proc
+}{
+	DevCloseObjectQuery:           procDevCloseObjectQuery,
+	DevCreateObjectQuery:          procDevCreateObjectQuery,
+	DevCreateObjectQueryEx:        procDevCreateObjectQueryEx,
+	DevCreateObjectQueryFromId:    procDevCreateObjectQueryFromId,
+	DevCreateObjectQueryFromIdEx:  procDevCreateObjectQueryFromIdEx,
+	DevCreateObjectQueryFromIds:   procDevCreateObjectQueryFromIds,
+	DevCreateObjectQueryFromIdsEx: procDevCreateObjectQueryFromIdsEx,
+	DevFindProperty:               procDevFindProperty,
+	DevFreeObjectProperties:       procDevFreeObjectProperties,
+	DevFreeObjects:                procDevFreeObjects,
+	DevGetObjectProperties:        procDevGetObjectProperties,
+	DevGetObjectPropertiesEx:      procDevGetObjectPropertiesEx,
+	DevGetObjects:                 procDevGetObjects,
+	DevGetObjectsEx:               procDevGetObjectsEx,
+}
+
 // DevCloseObjectQuery calls api-ms-win-devices-query-l1-1-0!DevCloseObjectQuery.
 func DevCloseObjectQuery(hDevQuery HDEVQUERY) {
 	syscall.SyscallN(procDevCloseObjectQuery.Addr(), uintptr(hDevQuery))

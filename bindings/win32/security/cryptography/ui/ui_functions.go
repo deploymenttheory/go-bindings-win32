@@ -30,6 +30,34 @@ var (
 	procCryptUIWizImport                     = modCRYPTUI.NewProc("CryptUIWizImport")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CertSelectionGetSerializedBlob       *win32.Proc
+	CryptUIDlgCertMgr                    *win32.Proc
+	CryptUIDlgSelectCertificateFromStore *win32.Proc
+	CryptUIDlgViewCertificate            *win32.Proc
+	CryptUIDlgViewCertificateA           *win32.Proc
+	CryptUIDlgViewContext                *win32.Proc
+	CryptUIWizDigitalSign                *win32.Proc
+	CryptUIWizExport                     *win32.Proc
+	CryptUIWizFreeDigitalSignContext     *win32.Proc
+	CryptUIWizImport                     *win32.Proc
+}{
+	CertSelectionGetSerializedBlob:       procCertSelectionGetSerializedBlob,
+	CryptUIDlgCertMgr:                    procCryptUIDlgCertMgr,
+	CryptUIDlgSelectCertificateFromStore: procCryptUIDlgSelectCertificateFromStore,
+	CryptUIDlgViewCertificate:            procCryptUIDlgViewCertificate,
+	CryptUIDlgViewCertificateA:           procCryptUIDlgViewCertificateA,
+	CryptUIDlgViewContext:                procCryptUIDlgViewContext,
+	CryptUIWizDigitalSign:                procCryptUIWizDigitalSign,
+	CryptUIWizExport:                     procCryptUIWizExport,
+	CryptUIWizFreeDigitalSignContext:     procCryptUIWizFreeDigitalSignContext,
+	CryptUIWizImport:                     procCryptUIWizImport,
+}
+
 // CertSelectionGetSerializedBlob calls CRYPTUI!CertSelectionGetSerializedBlob.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-certselectiongetserializedblob
 // Minimum OS: windows6.1.

@@ -36,6 +36,48 @@ var (
 	procMagUninitialize             = modMAGNIFICATION.NewProc("MagUninitialize")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MagGetColorEffect           *win32.Proc
+	MagGetFullscreenColorEffect *win32.Proc
+	MagGetFullscreenTransform   *win32.Proc
+	MagGetImageScalingCallback  *win32.Proc
+	MagGetInputTransform        *win32.Proc
+	MagGetWindowFilterList      *win32.Proc
+	MagGetWindowSource          *win32.Proc
+	MagGetWindowTransform       *win32.Proc
+	MagInitialize               *win32.Proc
+	MagSetColorEffect           *win32.Proc
+	MagSetFullscreenColorEffect *win32.Proc
+	MagSetImageScalingCallback  *win32.Proc
+	MagSetInputTransform        *win32.Proc
+	MagSetWindowFilterList      *win32.Proc
+	MagSetWindowTransform       *win32.Proc
+	MagShowSystemCursor         *win32.Proc
+	MagUninitialize             *win32.Proc
+}{
+	MagGetColorEffect:           procMagGetColorEffect,
+	MagGetFullscreenColorEffect: procMagGetFullscreenColorEffect,
+	MagGetFullscreenTransform:   procMagGetFullscreenTransform,
+	MagGetImageScalingCallback:  procMagGetImageScalingCallback,
+	MagGetInputTransform:        procMagGetInputTransform,
+	MagGetWindowFilterList:      procMagGetWindowFilterList,
+	MagGetWindowSource:          procMagGetWindowSource,
+	MagGetWindowTransform:       procMagGetWindowTransform,
+	MagInitialize:               procMagInitialize,
+	MagSetColorEffect:           procMagSetColorEffect,
+	MagSetFullscreenColorEffect: procMagSetFullscreenColorEffect,
+	MagSetImageScalingCallback:  procMagSetImageScalingCallback,
+	MagSetInputTransform:        procMagSetInputTransform,
+	MagSetWindowFilterList:      procMagSetWindowFilterList,
+	MagSetWindowTransform:       procMagSetWindowTransform,
+	MagShowSystemCursor:         procMagShowSystemCursor,
+	MagUninitialize:             procMagUninitialize,
+}
+
 // MagGetColorEffect calls MAGNIFICATION!MagGetColorEffect.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maggetcoloreffect
 // Minimum OS: windows6.0.6000.

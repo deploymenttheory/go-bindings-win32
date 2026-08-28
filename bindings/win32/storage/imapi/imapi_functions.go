@@ -27,6 +27,26 @@ var (
 	procSetAttribIMsgOnIStg = modMAPI32.NewProc("SetAttribIMsgOnIStg")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CloseIMsgSession    *win32.Proc
+	GetAttribIMsgOnIStg *win32.Proc
+	MapStorageSCode     *win32.Proc
+	OpenIMsgOnIStg      *win32.Proc
+	OpenIMsgSession     *win32.Proc
+	SetAttribIMsgOnIStg *win32.Proc
+}{
+	CloseIMsgSession:    procCloseIMsgSession,
+	GetAttribIMsgOnIStg: procGetAttribIMsgOnIStg,
+	MapStorageSCode:     procMapStorageSCode,
+	OpenIMsgOnIStg:      procOpenIMsgOnIStg,
+	OpenIMsgSession:     procOpenIMsgSession,
+	SetAttribIMsgOnIStg: procSetAttribIMsgOnIStg,
+}
+
 // CloseIMsgSession calls MAPI32!CloseIMsgSession.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/closeimsgsession
 func CloseIMsgSession(lpMsgSess LPMSGSESS) {

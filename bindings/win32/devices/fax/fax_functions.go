@@ -81,6 +81,132 @@ var (
 	procFaxUnregisterServiceProviderW = modWINFAX.NewProc("FaxUnregisterServiceProviderW")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CanSendToFaxRecipient         *win32.Proc
+	FaxAbort                      *win32.Proc
+	FaxAccessCheck                *win32.Proc
+	FaxClose                      *win32.Proc
+	FaxCompleteJobParams          *win32.Proc
+	FaxCompleteJobParamsA         *win32.Proc
+	FaxConnectFaxServer           *win32.Proc
+	FaxConnectFaxServerA          *win32.Proc
+	FaxEnableRoutingMethod        *win32.Proc
+	FaxEnableRoutingMethodA       *win32.Proc
+	FaxEnumGlobalRoutingInfo      *win32.Proc
+	FaxEnumGlobalRoutingInfoA     *win32.Proc
+	FaxEnumJobs                   *win32.Proc
+	FaxEnumJobsA                  *win32.Proc
+	FaxEnumPorts                  *win32.Proc
+	FaxEnumPortsA                 *win32.Proc
+	FaxEnumRoutingMethods         *win32.Proc
+	FaxEnumRoutingMethodsA        *win32.Proc
+	FaxFreeBuffer                 *win32.Proc
+	FaxGetConfiguration           *win32.Proc
+	FaxGetConfigurationA          *win32.Proc
+	FaxGetDeviceStatus            *win32.Proc
+	FaxGetDeviceStatusA           *win32.Proc
+	FaxGetJob                     *win32.Proc
+	FaxGetJobA                    *win32.Proc
+	FaxGetLoggingCategories       *win32.Proc
+	FaxGetLoggingCategoriesA      *win32.Proc
+	FaxGetPageData                *win32.Proc
+	FaxGetPort                    *win32.Proc
+	FaxGetPortA                   *win32.Proc
+	FaxGetRoutingInfo             *win32.Proc
+	FaxGetRoutingInfoA            *win32.Proc
+	FaxInitializeEventQueue       *win32.Proc
+	FaxOpenPort                   *win32.Proc
+	FaxPrintCoverPage             *win32.Proc
+	FaxPrintCoverPageA            *win32.Proc
+	FaxRegisterRoutingExtensionW  *win32.Proc
+	FaxRegisterServiceProviderW   *win32.Proc
+	FaxSendDocument               *win32.Proc
+	FaxSendDocumentA              *win32.Proc
+	FaxSendDocumentForBroadcast   *win32.Proc
+	FaxSendDocumentForBroadcastA  *win32.Proc
+	FaxSetConfiguration           *win32.Proc
+	FaxSetConfigurationA          *win32.Proc
+	FaxSetGlobalRoutingInfo       *win32.Proc
+	FaxSetGlobalRoutingInfoA      *win32.Proc
+	FaxSetJob                     *win32.Proc
+	FaxSetJobA                    *win32.Proc
+	FaxSetLoggingCategories       *win32.Proc
+	FaxSetLoggingCategoriesA      *win32.Proc
+	FaxSetPort                    *win32.Proc
+	FaxSetPortA                   *win32.Proc
+	FaxSetRoutingInfo             *win32.Proc
+	FaxSetRoutingInfoA            *win32.Proc
+	FaxStartPrintJob              *win32.Proc
+	FaxStartPrintJobA             *win32.Proc
+	FaxUnregisterServiceProviderW *win32.Proc
+	SendToFaxRecipient            *win32.Proc
+	StiCreateInstanceW            *win32.Proc
+}{
+	CanSendToFaxRecipient:         procCanSendToFaxRecipient,
+	FaxAbort:                      procFaxAbort,
+	FaxAccessCheck:                procFaxAccessCheck,
+	FaxClose:                      procFaxClose,
+	FaxCompleteJobParams:          procFaxCompleteJobParams,
+	FaxCompleteJobParamsA:         procFaxCompleteJobParamsA,
+	FaxConnectFaxServer:           procFaxConnectFaxServer,
+	FaxConnectFaxServerA:          procFaxConnectFaxServerA,
+	FaxEnableRoutingMethod:        procFaxEnableRoutingMethod,
+	FaxEnableRoutingMethodA:       procFaxEnableRoutingMethodA,
+	FaxEnumGlobalRoutingInfo:      procFaxEnumGlobalRoutingInfo,
+	FaxEnumGlobalRoutingInfoA:     procFaxEnumGlobalRoutingInfoA,
+	FaxEnumJobs:                   procFaxEnumJobs,
+	FaxEnumJobsA:                  procFaxEnumJobsA,
+	FaxEnumPorts:                  procFaxEnumPorts,
+	FaxEnumPortsA:                 procFaxEnumPortsA,
+	FaxEnumRoutingMethods:         procFaxEnumRoutingMethods,
+	FaxEnumRoutingMethodsA:        procFaxEnumRoutingMethodsA,
+	FaxFreeBuffer:                 procFaxFreeBuffer,
+	FaxGetConfiguration:           procFaxGetConfiguration,
+	FaxGetConfigurationA:          procFaxGetConfigurationA,
+	FaxGetDeviceStatus:            procFaxGetDeviceStatus,
+	FaxGetDeviceStatusA:           procFaxGetDeviceStatusA,
+	FaxGetJob:                     procFaxGetJob,
+	FaxGetJobA:                    procFaxGetJobA,
+	FaxGetLoggingCategories:       procFaxGetLoggingCategories,
+	FaxGetLoggingCategoriesA:      procFaxGetLoggingCategoriesA,
+	FaxGetPageData:                procFaxGetPageData,
+	FaxGetPort:                    procFaxGetPort,
+	FaxGetPortA:                   procFaxGetPortA,
+	FaxGetRoutingInfo:             procFaxGetRoutingInfo,
+	FaxGetRoutingInfoA:            procFaxGetRoutingInfoA,
+	FaxInitializeEventQueue:       procFaxInitializeEventQueue,
+	FaxOpenPort:                   procFaxOpenPort,
+	FaxPrintCoverPage:             procFaxPrintCoverPage,
+	FaxPrintCoverPageA:            procFaxPrintCoverPageA,
+	FaxRegisterRoutingExtensionW:  procFaxRegisterRoutingExtensionW,
+	FaxRegisterServiceProviderW:   procFaxRegisterServiceProviderW,
+	FaxSendDocument:               procFaxSendDocument,
+	FaxSendDocumentA:              procFaxSendDocumentA,
+	FaxSendDocumentForBroadcast:   procFaxSendDocumentForBroadcast,
+	FaxSendDocumentForBroadcastA:  procFaxSendDocumentForBroadcastA,
+	FaxSetConfiguration:           procFaxSetConfiguration,
+	FaxSetConfigurationA:          procFaxSetConfigurationA,
+	FaxSetGlobalRoutingInfo:       procFaxSetGlobalRoutingInfo,
+	FaxSetGlobalRoutingInfoA:      procFaxSetGlobalRoutingInfoA,
+	FaxSetJob:                     procFaxSetJob,
+	FaxSetJobA:                    procFaxSetJobA,
+	FaxSetLoggingCategories:       procFaxSetLoggingCategories,
+	FaxSetLoggingCategoriesA:      procFaxSetLoggingCategoriesA,
+	FaxSetPort:                    procFaxSetPort,
+	FaxSetPortA:                   procFaxSetPortA,
+	FaxSetRoutingInfo:             procFaxSetRoutingInfo,
+	FaxSetRoutingInfoA:            procFaxSetRoutingInfoA,
+	FaxStartPrintJob:              procFaxStartPrintJob,
+	FaxStartPrintJobA:             procFaxStartPrintJobA,
+	FaxUnregisterServiceProviderW: procFaxUnregisterServiceProviderW,
+	SendToFaxRecipient:            procSendToFaxRecipient,
+	StiCreateInstanceW:            procStiCreateInstanceW,
+}
+
 // CanSendToFaxRecipient calls fxsutility!CanSendToFaxRecipient.
 // https://learn.microsoft.com/windows/win32/api/fxsutility/nf-fxsutility-cansendtofaxrecipient
 // Minimum OS: windows6.0.6000.

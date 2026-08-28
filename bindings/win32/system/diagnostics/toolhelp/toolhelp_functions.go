@@ -35,6 +35,46 @@ var (
 	procToolhelp32ReadProcessMemory = modKERNEL32.NewProc("Toolhelp32ReadProcessMemory")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateToolhelp32Snapshot    *win32.Proc
+	Heap32First                 *win32.Proc
+	Heap32ListFirst             *win32.Proc
+	Heap32ListNext              *win32.Proc
+	Heap32Next                  *win32.Proc
+	Module32First               *win32.Proc
+	Module32FirstW              *win32.Proc
+	Module32Next                *win32.Proc
+	Module32NextW               *win32.Proc
+	Process32First              *win32.Proc
+	Process32FirstW             *win32.Proc
+	Process32Next               *win32.Proc
+	Process32NextW              *win32.Proc
+	Thread32First               *win32.Proc
+	Thread32Next                *win32.Proc
+	Toolhelp32ReadProcessMemory *win32.Proc
+}{
+	CreateToolhelp32Snapshot:    procCreateToolhelp32Snapshot,
+	Heap32First:                 procHeap32First,
+	Heap32ListFirst:             procHeap32ListFirst,
+	Heap32ListNext:              procHeap32ListNext,
+	Heap32Next:                  procHeap32Next,
+	Module32First:               procModule32First,
+	Module32FirstW:              procModule32FirstW,
+	Module32Next:                procModule32Next,
+	Module32NextW:               procModule32NextW,
+	Process32First:              procProcess32First,
+	Process32FirstW:             procProcess32FirstW,
+	Process32Next:               procProcess32Next,
+	Process32NextW:              procProcess32NextW,
+	Thread32First:               procThread32First,
+	Thread32Next:                procThread32Next,
+	Toolhelp32ReadProcessMemory: procToolhelp32ReadProcessMemory,
+}
+
 // CreateToolhelp32Snapshot calls KERNEL32!CreateToolhelp32Snapshot.
 // https://learn.microsoft.com/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot
 // Minimum OS: windows5.1.2600.

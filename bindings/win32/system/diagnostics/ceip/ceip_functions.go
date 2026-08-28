@@ -18,6 +18,16 @@ var (
 	procCeipIsOptedIn = modKERNEL32.NewProc("CeipIsOptedIn")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CeipIsOptedIn *win32.Proc
+}{
+	CeipIsOptedIn: procCeipIsOptedIn,
+}
+
 // CeipIsOptedIn calls KERNEL32!CeipIsOptedIn.
 // https://learn.microsoft.com/windows/win32/api/windowsceip/nf-windowsceip-ceipisoptedin
 // Minimum OS: windows8.1.

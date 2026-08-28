@@ -53,6 +53,76 @@ var (
 	procTcSetInterface          = modTRAFFIC.NewProc("TcSetInterface")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	QOSAddSocketToFlow      *win32.Proc
+	QOSCancel               *win32.Proc
+	QOSCloseHandle          *win32.Proc
+	QOSCreateHandle         *win32.Proc
+	QOSEnumerateFlows       *win32.Proc
+	QOSNotifyFlow           *win32.Proc
+	QOSQueryFlow            *win32.Proc
+	QOSRemoveSocketFromFlow *win32.Proc
+	QOSSetFlow              *win32.Proc
+	QOSStartTrackingClient  *win32.Proc
+	QOSStopTrackingClient   *win32.Proc
+	TcAddFilter             *win32.Proc
+	TcAddFlow               *win32.Proc
+	TcCloseInterface        *win32.Proc
+	TcDeleteFilter          *win32.Proc
+	TcDeleteFlow            *win32.Proc
+	TcDeregisterClient      *win32.Proc
+	TcEnumerateFlows        *win32.Proc
+	TcEnumerateInterfaces   *win32.Proc
+	TcGetFlowName           *win32.Proc
+	TcGetFlowNameA          *win32.Proc
+	TcModifyFlow            *win32.Proc
+	TcOpenInterface         *win32.Proc
+	TcOpenInterfaceA        *win32.Proc
+	TcQueryFlow             *win32.Proc
+	TcQueryFlowA            *win32.Proc
+	TcQueryInterface        *win32.Proc
+	TcRegisterClient        *win32.Proc
+	TcSetFlow               *win32.Proc
+	TcSetFlowA              *win32.Proc
+	TcSetInterface          *win32.Proc
+}{
+	QOSAddSocketToFlow:      procQOSAddSocketToFlow,
+	QOSCancel:               procQOSCancel,
+	QOSCloseHandle:          procQOSCloseHandle,
+	QOSCreateHandle:         procQOSCreateHandle,
+	QOSEnumerateFlows:       procQOSEnumerateFlows,
+	QOSNotifyFlow:           procQOSNotifyFlow,
+	QOSQueryFlow:            procQOSQueryFlow,
+	QOSRemoveSocketFromFlow: procQOSRemoveSocketFromFlow,
+	QOSSetFlow:              procQOSSetFlow,
+	QOSStartTrackingClient:  procQOSStartTrackingClient,
+	QOSStopTrackingClient:   procQOSStopTrackingClient,
+	TcAddFilter:             procTcAddFilter,
+	TcAddFlow:               procTcAddFlow,
+	TcCloseInterface:        procTcCloseInterface,
+	TcDeleteFilter:          procTcDeleteFilter,
+	TcDeleteFlow:            procTcDeleteFlow,
+	TcDeregisterClient:      procTcDeregisterClient,
+	TcEnumerateFlows:        procTcEnumerateFlows,
+	TcEnumerateInterfaces:   procTcEnumerateInterfaces,
+	TcGetFlowName:           procTcGetFlowName,
+	TcGetFlowNameA:          procTcGetFlowNameA,
+	TcModifyFlow:            procTcModifyFlow,
+	TcOpenInterface:         procTcOpenInterface,
+	TcOpenInterfaceA:        procTcOpenInterfaceA,
+	TcQueryFlow:             procTcQueryFlow,
+	TcQueryFlowA:            procTcQueryFlowA,
+	TcQueryInterface:        procTcQueryInterface,
+	TcRegisterClient:        procTcRegisterClient,
+	TcSetFlow:               procTcSetFlow,
+	TcSetFlowA:              procTcSetFlowA,
+	TcSetInterface:          procTcSetInterface,
+}
+
 // QOSAddSocketToFlow calls qwave!QOSAddSocketToFlow.
 // https://learn.microsoft.com/windows/win32/api/qos2/nf-qos2-qosaddsockettoflow
 // Minimum OS: windows6.0.6000.

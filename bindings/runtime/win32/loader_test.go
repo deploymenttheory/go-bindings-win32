@@ -25,12 +25,49 @@ func TestLoaderResolvesSystemProc(t *testing.T) {
 }
 
 func TestLoaderMissingExportAndDLL(t *testing.T) {
-	if err := NewDLL("kernel32.dll").NewProc("NoSuchExport__winmd").Find(); err == nil {
-		t.Error("Find on a missing export succeeded")
+	err := NewDLL("kernel32.dll").NewProc("NoSuchExport__winmd").Find()
+	if err == nil {
+		t.Fatal("Find on a missing export succeeded")
 	}
-	if err := NewDLL("no-such-dll-go-bindings-win32.dll").NewProc("X").Find(); err == nil {
-		t.Error("Find on a missing DLL succeeded")
+	var procErr *ProcError
+	if !errors.As(err, &procErr) || procErr.DLL != "kernel32.dll" || procErr.Proc != "NoSuchExport__winmd" {
+		t.Errorf("missing export: err = %#v, want *ProcError naming the DLL and export", err)
 	}
+	if !errors.Is(err, ErrProcNotFound) || errors.Is(err, ErrDLLNotFound) {
+		t.Errorf("missing export: errors.Is = (proc %v, dll %v), want (true, false)", errors.Is(err, ErrProcNotFound), errors.Is(err, ErrDLLNotFound))
+	}
+	const errorProcNotFound = syscall.Errno(127)
+	if !errors.Is(err, errorProcNotFound) {
+		t.Errorf("missing export does not unwrap to ERROR_PROC_NOT_FOUND: %v", err)
+	}
+
+	err = NewDLL("no-such-dll-go-bindings-win32.dll").NewProc("X").Find()
+	if err == nil {
+		t.Fatal("Find on a missing DLL succeeded")
+	}
+	if !errors.As(err, &procErr) || procErr.Proc != "" {
+		t.Errorf("missing DLL: err = %#v, want *ProcError with empty Proc", err)
+	}
+	if !errors.Is(err, ErrDLLNotFound) || errors.Is(err, ErrProcNotFound) {
+		t.Errorf("missing DLL: errors.Is = (dll %v, proc %v), want (true, false)", errors.Is(err, ErrDLLNotFound), errors.Is(err, ErrProcNotFound))
+	}
+}
+
+// TestLoaderAddrPanicsWithProcError proves the panic value is the typed
+// error, so a recover handler can errors.As it.
+func TestLoaderAddrPanicsWithProcError(t *testing.T) {
+	defer func() {
+		recovered := recover()
+		err, ok := recovered.(error)
+		if !ok {
+			t.Fatalf("Addr panicked with %T, want error", recovered)
+		}
+		if !errors.Is(err, ErrProcNotFound) {
+			t.Fatalf("Addr panicked with %v, want ErrProcNotFound", err)
+		}
+	}()
+	NewDLL("kernel32.dll").NewProc("NoSuchExport__winmd").Addr()
+	t.Fatal("Addr on a missing export did not panic")
 }
 
 // TestLoaderIgnoresWorkingDirectory proves the System32-only policy: a decoy

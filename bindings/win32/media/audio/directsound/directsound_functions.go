@@ -30,6 +30,34 @@ var (
 	procGetDeviceID                  = modDSOUND.NewProc("GetDeviceID")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DirectSoundCaptureCreate     *win32.Proc
+	DirectSoundCaptureCreate8    *win32.Proc
+	DirectSoundCaptureEnumerate  *win32.Proc
+	DirectSoundCaptureEnumerateA *win32.Proc
+	DirectSoundCreate            *win32.Proc
+	DirectSoundCreate8           *win32.Proc
+	DirectSoundEnumerate         *win32.Proc
+	DirectSoundEnumerateA        *win32.Proc
+	DirectSoundFullDuplexCreate  *win32.Proc
+	GetDeviceID                  *win32.Proc
+}{
+	DirectSoundCaptureCreate:     procDirectSoundCaptureCreate,
+	DirectSoundCaptureCreate8:    procDirectSoundCaptureCreate8,
+	DirectSoundCaptureEnumerate:  procDirectSoundCaptureEnumerate,
+	DirectSoundCaptureEnumerateA: procDirectSoundCaptureEnumerateA,
+	DirectSoundCreate:            procDirectSoundCreate,
+	DirectSoundCreate8:           procDirectSoundCreate8,
+	DirectSoundEnumerate:         procDirectSoundEnumerate,
+	DirectSoundEnumerateA:        procDirectSoundEnumerateA,
+	DirectSoundFullDuplexCreate:  procDirectSoundFullDuplexCreate,
+	GetDeviceID:                  procGetDeviceID,
+}
+
 // DirectSoundCaptureCreate calls DSOUND!DirectSoundCaptureCreate.
 func DirectSoundCaptureCreate(pcGuidDevice *win32.GUID, ppDSC **IDirectSoundCapture, pUnkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectSoundCaptureCreate.Addr(), uintptr(unsafe.Pointer(pcGuidDevice)), uintptr(unsafe.Pointer(ppDSC)), uintptr(unsafe.Pointer(pUnkOuter)))

@@ -38,6 +38,50 @@ var (
 	procWintrustSetRegPolicyFlags             = modWINTRUST.NewProc("WintrustSetRegPolicyFlags")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	OpenPersonalTrustDBDialog             *win32.Proc
+	OpenPersonalTrustDBDialogEx           *win32.Proc
+	WTHelperCertCheckValidSignature       *win32.Proc
+	WTHelperCertIsSelfSigned              *win32.Proc
+	WTHelperGetProvCertFromChain          *win32.Proc
+	WTHelperGetProvPrivateDataFromChain   *win32.Proc
+	WTHelperGetProvSignerFromChain        *win32.Proc
+	WTHelperProvDataFromStateData         *win32.Proc
+	WinVerifyTrust                        *win32.Proc
+	WinVerifyTrustEx                      *win32.Proc
+	WintrustAddActionID                   *win32.Proc
+	WintrustAddDefaultForUsage            *win32.Proc
+	WintrustGetDefaultForUsage            *win32.Proc
+	WintrustGetRegPolicyFlags             *win32.Proc
+	WintrustLoadFunctionPointers          *win32.Proc
+	WintrustRemoveActionID                *win32.Proc
+	WintrustSetDefaultIncludePEPageHashes *win32.Proc
+	WintrustSetRegPolicyFlags             *win32.Proc
+}{
+	OpenPersonalTrustDBDialog:             procOpenPersonalTrustDBDialog,
+	OpenPersonalTrustDBDialogEx:           procOpenPersonalTrustDBDialogEx,
+	WTHelperCertCheckValidSignature:       procWTHelperCertCheckValidSignature,
+	WTHelperCertIsSelfSigned:              procWTHelperCertIsSelfSigned,
+	WTHelperGetProvCertFromChain:          procWTHelperGetProvCertFromChain,
+	WTHelperGetProvPrivateDataFromChain:   procWTHelperGetProvPrivateDataFromChain,
+	WTHelperGetProvSignerFromChain:        procWTHelperGetProvSignerFromChain,
+	WTHelperProvDataFromStateData:         procWTHelperProvDataFromStateData,
+	WinVerifyTrust:                        procWinVerifyTrust,
+	WinVerifyTrustEx:                      procWinVerifyTrustEx,
+	WintrustAddActionID:                   procWintrustAddActionID,
+	WintrustAddDefaultForUsage:            procWintrustAddDefaultForUsage,
+	WintrustGetDefaultForUsage:            procWintrustGetDefaultForUsage,
+	WintrustGetRegPolicyFlags:             procWintrustGetRegPolicyFlags,
+	WintrustLoadFunctionPointers:          procWintrustLoadFunctionPointers,
+	WintrustRemoveActionID:                procWintrustRemoveActionID,
+	WintrustSetDefaultIncludePEPageHashes: procWintrustSetDefaultIncludePEPageHashes,
+	WintrustSetRegPolicyFlags:             procWintrustSetRegPolicyFlags,
+}
+
 // OpenPersonalTrustDBDialog calls WINTRUST!OpenPersonalTrustDBDialog.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-openpersonaltrustdbdialog
 // Minimum OS: windows5.1.2600.

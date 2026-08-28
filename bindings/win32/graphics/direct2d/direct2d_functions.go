@@ -26,6 +26,26 @@ var (
 	procD2D1IsMatrixInvertible                          = modd2d1.NewProc("D2D1IsMatrixInvertible")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	D2D1CreateDevice                                *win32.Proc
+	D2D1CreateDeviceContext                         *win32.Proc
+	D2D1CreateFactory                               *win32.Proc
+	D2D1GetGradientMeshInteriorPointsFromCoonsPatch *win32.Proc
+	D2D1InvertMatrix                                *win32.Proc
+	D2D1IsMatrixInvertible                          *win32.Proc
+}{
+	D2D1CreateDevice:        procD2D1CreateDevice,
+	D2D1CreateDeviceContext: procD2D1CreateDeviceContext,
+	D2D1CreateFactory:       procD2D1CreateFactory,
+	D2D1GetGradientMeshInteriorPointsFromCoonsPatch: procD2D1GetGradientMeshInteriorPointsFromCoonsPatch,
+	D2D1InvertMatrix:       procD2D1InvertMatrix,
+	D2D1IsMatrixInvertible: procD2D1IsMatrixInvertible,
+}
+
 // D2D1CreateDevice calls d2d1!D2D1CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d2d1_1/nf-d2d1_1-d2d1createdevice
 // Minimum OS: windows8.0.

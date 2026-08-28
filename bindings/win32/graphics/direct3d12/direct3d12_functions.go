@@ -28,6 +28,30 @@ var (
 	procD3D12SerializeVersionedRootSignature          = modd3d12.NewProc("D3D12SerializeVersionedRootSignature")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	D3D12CreateDevice                             *win32.Proc
+	D3D12CreateRootSignatureDeserializer          *win32.Proc
+	D3D12CreateVersionedRootSignatureDeserializer *win32.Proc
+	D3D12EnableExperimentalFeatures               *win32.Proc
+	D3D12GetDebugInterface                        *win32.Proc
+	D3D12GetInterface                             *win32.Proc
+	D3D12SerializeRootSignature                   *win32.Proc
+	D3D12SerializeVersionedRootSignature          *win32.Proc
+}{
+	D3D12CreateDevice:                             procD3D12CreateDevice,
+	D3D12CreateRootSignatureDeserializer:          procD3D12CreateRootSignatureDeserializer,
+	D3D12CreateVersionedRootSignatureDeserializer: procD3D12CreateVersionedRootSignatureDeserializer,
+	D3D12EnableExperimentalFeatures:               procD3D12EnableExperimentalFeatures,
+	D3D12GetDebugInterface:                        procD3D12GetDebugInterface,
+	D3D12GetInterface:                             procD3D12GetInterface,
+	D3D12SerializeRootSignature:                   procD3D12SerializeRootSignature,
+	D3D12SerializeVersionedRootSignature:          procD3D12SerializeVersionedRootSignature,
+}
+
 // D3D12CreateDevice calls d3d12!D3D12CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12createdevice
 func D3D12CreateDevice(pAdapter *systemcom.IUnknown, MinimumFeatureLevel graphicsdirect3d.D3D_FEATURE_LEVEL, riid *win32.GUID, ppDevice **win32.IUnknown) error {

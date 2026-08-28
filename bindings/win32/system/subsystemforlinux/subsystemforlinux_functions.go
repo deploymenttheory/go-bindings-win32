@@ -26,6 +26,28 @@ var (
 	procWslUnregisterDistribution       = modApi_ms_win_wsl_api_l1_1_0.NewProc("WslUnregisterDistribution")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WslConfigureDistribution        *win32.Proc
+	WslGetDistributionConfiguration *win32.Proc
+	WslIsDistributionRegistered     *win32.Proc
+	WslLaunch                       *win32.Proc
+	WslLaunchInteractive            *win32.Proc
+	WslRegisterDistribution         *win32.Proc
+	WslUnregisterDistribution       *win32.Proc
+}{
+	WslConfigureDistribution:        procWslConfigureDistribution,
+	WslGetDistributionConfiguration: procWslGetDistributionConfiguration,
+	WslIsDistributionRegistered:     procWslIsDistributionRegistered,
+	WslLaunch:                       procWslLaunch,
+	WslLaunchInteractive:            procWslLaunchInteractive,
+	WslRegisterDistribution:         procWslRegisterDistribution,
+	WslUnregisterDistribution:       procWslUnregisterDistribution,
+}
+
 // WslConfigureDistribution calls Api-ms-win-wsl-api-l1-1-0!WslConfigureDistribution.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslconfiguredistribution
 func WslConfigureDistribution(distributionName string, defaultUID uint32, wslDistributionFlags WSL_DISTRIBUTION_FLAGS) error {

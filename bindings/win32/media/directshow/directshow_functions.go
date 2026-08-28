@@ -21,6 +21,18 @@ var (
 	procAMGetErrorTextA = modQUARTZ.NewProc("AMGetErrorTextA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AMGetErrorText  *win32.Proc
+	AMGetErrorTextA *win32.Proc
+}{
+	AMGetErrorText:  procAMGetErrorText,
+	AMGetErrorTextA: procAMGetErrorTextA,
+}
+
 // AMGetErrorText calls QUARTZ!AMGetErrorTextW.
 // https://learn.microsoft.com/windows/win32/api/errors/nf-errors-amgeterrortextw
 func AMGetErrorText(hr foundation.HRESULT, pbuffer foundation.PWSTR, MaxLen uint32) uint32 {

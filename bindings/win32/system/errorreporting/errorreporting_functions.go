@@ -63,6 +63,96 @@ var (
 	procWerStoreUploadReport                = modwer.NewProc("WerStoreUploadReport")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AddERExcludedApplication            *win32.Proc
+	AddERExcludedApplicationA           *win32.Proc
+	ReportFault                         *win32.Proc
+	WerAddExcludedApplication           *win32.Proc
+	WerFreeString                       *win32.Proc
+	WerGetFlags                         *win32.Proc
+	WerRegisterAdditionalProcess        *win32.Proc
+	WerRegisterAppLocalDump             *win32.Proc
+	WerRegisterCustomMetadata           *win32.Proc
+	WerRegisterExcludedMemoryBlock      *win32.Proc
+	WerRegisterFile                     *win32.Proc
+	WerRegisterMemoryBlock              *win32.Proc
+	WerRegisterRuntimeExceptionModule   *win32.Proc
+	WerRemoveExcludedApplication        *win32.Proc
+	WerReportAddDump                    *win32.Proc
+	WerReportAddFile                    *win32.Proc
+	WerReportCloseHandle                *win32.Proc
+	WerReportCreate                     *win32.Proc
+	WerReportHang                       *win32.Proc
+	WerReportSetParameter               *win32.Proc
+	WerReportSetUIOption                *win32.Proc
+	WerReportSubmit                     *win32.Proc
+	WerSetFlags                         *win32.Proc
+	WerStoreClose                       *win32.Proc
+	WerStoreGetFirstReportKey           *win32.Proc
+	WerStoreGetNextReportKey            *win32.Proc
+	WerStoreGetReportCount              *win32.Proc
+	WerStoreGetSizeOnDisk               *win32.Proc
+	WerStoreOpen                        *win32.Proc
+	WerStorePurge                       *win32.Proc
+	WerStoreQueryReportMetadataV1       *win32.Proc
+	WerStoreQueryReportMetadataV2       *win32.Proc
+	WerStoreQueryReportMetadataV3       *win32.Proc
+	WerStoreUploadReport                *win32.Proc
+	WerUnregisterAdditionalProcess      *win32.Proc
+	WerUnregisterAppLocalDump           *win32.Proc
+	WerUnregisterCustomMetadata         *win32.Proc
+	WerUnregisterExcludedMemoryBlock    *win32.Proc
+	WerUnregisterFile                   *win32.Proc
+	WerUnregisterMemoryBlock            *win32.Proc
+	WerUnregisterRuntimeExceptionModule *win32.Proc
+}{
+	AddERExcludedApplication:            procAddERExcludedApplication,
+	AddERExcludedApplicationA:           procAddERExcludedApplicationA,
+	ReportFault:                         procReportFault,
+	WerAddExcludedApplication:           procWerAddExcludedApplication,
+	WerFreeString:                       procWerFreeString,
+	WerGetFlags:                         procWerGetFlags,
+	WerRegisterAdditionalProcess:        procWerRegisterAdditionalProcess,
+	WerRegisterAppLocalDump:             procWerRegisterAppLocalDump,
+	WerRegisterCustomMetadata:           procWerRegisterCustomMetadata,
+	WerRegisterExcludedMemoryBlock:      procWerRegisterExcludedMemoryBlock,
+	WerRegisterFile:                     procWerRegisterFile,
+	WerRegisterMemoryBlock:              procWerRegisterMemoryBlock,
+	WerRegisterRuntimeExceptionModule:   procWerRegisterRuntimeExceptionModule,
+	WerRemoveExcludedApplication:        procWerRemoveExcludedApplication,
+	WerReportAddDump:                    procWerReportAddDump,
+	WerReportAddFile:                    procWerReportAddFile,
+	WerReportCloseHandle:                procWerReportCloseHandle,
+	WerReportCreate:                     procWerReportCreate,
+	WerReportHang:                       procWerReportHang,
+	WerReportSetParameter:               procWerReportSetParameter,
+	WerReportSetUIOption:                procWerReportSetUIOption,
+	WerReportSubmit:                     procWerReportSubmit,
+	WerSetFlags:                         procWerSetFlags,
+	WerStoreClose:                       procWerStoreClose,
+	WerStoreGetFirstReportKey:           procWerStoreGetFirstReportKey,
+	WerStoreGetNextReportKey:            procWerStoreGetNextReportKey,
+	WerStoreGetReportCount:              procWerStoreGetReportCount,
+	WerStoreGetSizeOnDisk:               procWerStoreGetSizeOnDisk,
+	WerStoreOpen:                        procWerStoreOpen,
+	WerStorePurge:                       procWerStorePurge,
+	WerStoreQueryReportMetadataV1:       procWerStoreQueryReportMetadataV1,
+	WerStoreQueryReportMetadataV2:       procWerStoreQueryReportMetadataV2,
+	WerStoreQueryReportMetadataV3:       procWerStoreQueryReportMetadataV3,
+	WerStoreUploadReport:                procWerStoreUploadReport,
+	WerUnregisterAdditionalProcess:      procWerUnregisterAdditionalProcess,
+	WerUnregisterAppLocalDump:           procWerUnregisterAppLocalDump,
+	WerUnregisterCustomMetadata:         procWerUnregisterCustomMetadata,
+	WerUnregisterExcludedMemoryBlock:    procWerUnregisterExcludedMemoryBlock,
+	WerUnregisterFile:                   procWerUnregisterFile,
+	WerUnregisterMemoryBlock:            procWerUnregisterMemoryBlock,
+	WerUnregisterRuntimeExceptionModule: procWerUnregisterRuntimeExceptionModule,
+}
+
 // AddERExcludedApplication calls faultrep!AddERExcludedApplicationW.
 // https://learn.microsoft.com/windows/win32/api/errorrep/nf-errorrep-adderexcludedapplicationw
 // Minimum OS: windows5.1.2600.

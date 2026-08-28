@@ -30,6 +30,36 @@ var (
 	procMoInitMediaType      = modmsdmo.NewProc("MoInitMediaType")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DMOEnum              *win32.Proc
+	DMOGetName           *win32.Proc
+	DMOGetTypes          *win32.Proc
+	DMORegister          *win32.Proc
+	DMOUnregister        *win32.Proc
+	MoCopyMediaType      *win32.Proc
+	MoCreateMediaType    *win32.Proc
+	MoDeleteMediaType    *win32.Proc
+	MoDuplicateMediaType *win32.Proc
+	MoFreeMediaType      *win32.Proc
+	MoInitMediaType      *win32.Proc
+}{
+	DMOEnum:              procDMOEnum,
+	DMOGetName:           procDMOGetName,
+	DMOGetTypes:          procDMOGetTypes,
+	DMORegister:          procDMORegister,
+	DMOUnregister:        procDMOUnregister,
+	MoCopyMediaType:      procMoCopyMediaType,
+	MoCreateMediaType:    procMoCreateMediaType,
+	MoDeleteMediaType:    procMoDeleteMediaType,
+	MoDuplicateMediaType: procMoDuplicateMediaType,
+	MoFreeMediaType:      procMoFreeMediaType,
+	MoInitMediaType:      procMoInitMediaType,
+}
+
 // DMOEnum calls msdmo!DMOEnum.
 // https://learn.microsoft.com/windows/win32/api/dmoreg/nf-dmoreg-dmoenum
 func DMOEnum(guidCategory *win32.GUID, dwFlags uint32, cInTypes uint32, pInTypes *DMO_PARTIAL_MEDIATYPE, cOutTypes uint32, pOutTypes *DMO_PARTIAL_MEDIATYPE, ppEnum **IEnumDMO) error {

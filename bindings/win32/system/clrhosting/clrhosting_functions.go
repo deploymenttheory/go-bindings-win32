@@ -48,6 +48,68 @@ var (
 	procRunDll32ShimW                       = modMSCorEE.NewProc("RunDll32ShimW")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CLRCreateInstance                   *win32.Proc
+	CallFunctionShim                    *win32.Proc
+	ClrCreateManagedInstance            *win32.Proc
+	CorBindToCurrentRuntime             *win32.Proc
+	CorBindToRuntime                    *win32.Proc
+	CorBindToRuntimeByCfg               *win32.Proc
+	CorBindToRuntimeEx                  *win32.Proc
+	CorBindToRuntimeHost                *win32.Proc
+	CorExitProcess                      *win32.Proc
+	CorLaunchApplication                *win32.Proc
+	CorMarkThreadInThreadPool           *win32.Proc
+	CreateDebuggingInterfaceFromVersion *win32.Proc
+	GetCLRIdentityManager               *win32.Proc
+	GetCORRequiredVersion               *win32.Proc
+	GetCORSystemDirectory               *win32.Proc
+	GetCORVersion                       *win32.Proc
+	GetFileVersion                      *win32.Proc
+	GetRealProcAddress                  *win32.Proc
+	GetRequestedRuntimeInfo             *win32.Proc
+	GetRequestedRuntimeVersion          *win32.Proc
+	GetRequestedRuntimeVersionForCLSID  *win32.Proc
+	GetVersionFromProcess               *win32.Proc
+	LoadLibraryShim                     *win32.Proc
+	LoadStringRC                        *win32.Proc
+	LoadStringRCEx                      *win32.Proc
+	LockClrVersion                      *win32.Proc
+	RunDll32ShimW                       *win32.Proc
+}{
+	CLRCreateInstance:                   procCLRCreateInstance,
+	CallFunctionShim:                    procCallFunctionShim,
+	ClrCreateManagedInstance:            procClrCreateManagedInstance,
+	CorBindToCurrentRuntime:             procCorBindToCurrentRuntime,
+	CorBindToRuntime:                    procCorBindToRuntime,
+	CorBindToRuntimeByCfg:               procCorBindToRuntimeByCfg,
+	CorBindToRuntimeEx:                  procCorBindToRuntimeEx,
+	CorBindToRuntimeHost:                procCorBindToRuntimeHost,
+	CorExitProcess:                      procCorExitProcess,
+	CorLaunchApplication:                procCorLaunchApplication,
+	CorMarkThreadInThreadPool:           procCorMarkThreadInThreadPool,
+	CreateDebuggingInterfaceFromVersion: procCreateDebuggingInterfaceFromVersion,
+	GetCLRIdentityManager:               procGetCLRIdentityManager,
+	GetCORRequiredVersion:               procGetCORRequiredVersion,
+	GetCORSystemDirectory:               procGetCORSystemDirectory,
+	GetCORVersion:                       procGetCORVersion,
+	GetFileVersion:                      procGetFileVersion,
+	GetRealProcAddress:                  procGetRealProcAddress,
+	GetRequestedRuntimeInfo:             procGetRequestedRuntimeInfo,
+	GetRequestedRuntimeVersion:          procGetRequestedRuntimeVersion,
+	GetRequestedRuntimeVersionForCLSID:  procGetRequestedRuntimeVersionForCLSID,
+	GetVersionFromProcess:               procGetVersionFromProcess,
+	LoadLibraryShim:                     procLoadLibraryShim,
+	LoadStringRC:                        procLoadStringRC,
+	LoadStringRCEx:                      procLoadStringRCEx,
+	LockClrVersion:                      procLockClrVersion,
+	RunDll32ShimW:                       procRunDll32ShimW,
+}
+
 // CLRCreateInstance calls MSCorEE!CLRCreateInstance.
 func CLRCreateInstance(clsid *win32.GUID, riid *win32.GUID, ppInterface **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCLRCreateInstance.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppInterface)))

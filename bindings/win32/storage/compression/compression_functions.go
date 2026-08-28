@@ -30,6 +30,38 @@ var (
 	procSetDecompressorInformation   = modCabinet.NewProc("SetDecompressorInformation")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CloseCompressor              *win32.Proc
+	CloseDecompressor            *win32.Proc
+	Compress                     *win32.Proc
+	CreateCompressor             *win32.Proc
+	CreateDecompressor           *win32.Proc
+	Decompress                   *win32.Proc
+	QueryCompressorInformation   *win32.Proc
+	QueryDecompressorInformation *win32.Proc
+	ResetCompressor              *win32.Proc
+	ResetDecompressor            *win32.Proc
+	SetCompressorInformation     *win32.Proc
+	SetDecompressorInformation   *win32.Proc
+}{
+	CloseCompressor:              procCloseCompressor,
+	CloseDecompressor:            procCloseDecompressor,
+	Compress:                     procCompress,
+	CreateCompressor:             procCreateCompressor,
+	CreateDecompressor:           procCreateDecompressor,
+	Decompress:                   procDecompress,
+	QueryCompressorInformation:   procQueryCompressorInformation,
+	QueryDecompressorInformation: procQueryDecompressorInformation,
+	ResetCompressor:              procResetCompressor,
+	ResetDecompressor:            procResetDecompressor,
+	SetCompressorInformation:     procSetCompressorInformation,
+	SetDecompressorInformation:   procSetDecompressorInformation,
+}
+
 // CloseCompressor calls Cabinet!CloseCompressor.
 // https://learn.microsoft.com/windows/win32/api/compressapi/nf-compressapi-closecompressor
 // Minimum OS: windows8.0.

@@ -51,6 +51,72 @@ var (
 	procD3D10CreateDeviceAndSwapChain1      = modd3d10_1.NewProc("D3D10CreateDeviceAndSwapChain1")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	D3D10CompileEffectFromMemory        *win32.Proc
+	D3D10CompileShader                  *win32.Proc
+	D3D10CreateBlob                     *win32.Proc
+	D3D10CreateDevice                   *win32.Proc
+	D3D10CreateDevice1                  *win32.Proc
+	D3D10CreateDeviceAndSwapChain       *win32.Proc
+	D3D10CreateDeviceAndSwapChain1      *win32.Proc
+	D3D10CreateEffectFromMemory         *win32.Proc
+	D3D10CreateEffectPoolFromMemory     *win32.Proc
+	D3D10CreateStateBlock               *win32.Proc
+	D3D10DisassembleEffect              *win32.Proc
+	D3D10DisassembleShader              *win32.Proc
+	D3D10GetGeometryShaderProfile       *win32.Proc
+	D3D10GetInputAndOutputSignatureBlob *win32.Proc
+	D3D10GetInputSignatureBlob          *win32.Proc
+	D3D10GetOutputSignatureBlob         *win32.Proc
+	D3D10GetPixelShaderProfile          *win32.Proc
+	D3D10GetShaderDebugInfo             *win32.Proc
+	D3D10GetVertexShaderProfile         *win32.Proc
+	D3D10PreprocessShader               *win32.Proc
+	D3D10ReflectShader                  *win32.Proc
+	D3D10StateBlockMaskDifference       *win32.Proc
+	D3D10StateBlockMaskDisableAll       *win32.Proc
+	D3D10StateBlockMaskDisableCapture   *win32.Proc
+	D3D10StateBlockMaskEnableAll        *win32.Proc
+	D3D10StateBlockMaskEnableCapture    *win32.Proc
+	D3D10StateBlockMaskGetSetting       *win32.Proc
+	D3D10StateBlockMaskIntersect        *win32.Proc
+	D3D10StateBlockMaskUnion            *win32.Proc
+}{
+	D3D10CompileEffectFromMemory:        procD3D10CompileEffectFromMemory,
+	D3D10CompileShader:                  procD3D10CompileShader,
+	D3D10CreateBlob:                     procD3D10CreateBlob,
+	D3D10CreateDevice:                   procD3D10CreateDevice,
+	D3D10CreateDevice1:                  procD3D10CreateDevice1,
+	D3D10CreateDeviceAndSwapChain:       procD3D10CreateDeviceAndSwapChain,
+	D3D10CreateDeviceAndSwapChain1:      procD3D10CreateDeviceAndSwapChain1,
+	D3D10CreateEffectFromMemory:         procD3D10CreateEffectFromMemory,
+	D3D10CreateEffectPoolFromMemory:     procD3D10CreateEffectPoolFromMemory,
+	D3D10CreateStateBlock:               procD3D10CreateStateBlock,
+	D3D10DisassembleEffect:              procD3D10DisassembleEffect,
+	D3D10DisassembleShader:              procD3D10DisassembleShader,
+	D3D10GetGeometryShaderProfile:       procD3D10GetGeometryShaderProfile,
+	D3D10GetInputAndOutputSignatureBlob: procD3D10GetInputAndOutputSignatureBlob,
+	D3D10GetInputSignatureBlob:          procD3D10GetInputSignatureBlob,
+	D3D10GetOutputSignatureBlob:         procD3D10GetOutputSignatureBlob,
+	D3D10GetPixelShaderProfile:          procD3D10GetPixelShaderProfile,
+	D3D10GetShaderDebugInfo:             procD3D10GetShaderDebugInfo,
+	D3D10GetVertexShaderProfile:         procD3D10GetVertexShaderProfile,
+	D3D10PreprocessShader:               procD3D10PreprocessShader,
+	D3D10ReflectShader:                  procD3D10ReflectShader,
+	D3D10StateBlockMaskDifference:       procD3D10StateBlockMaskDifference,
+	D3D10StateBlockMaskDisableAll:       procD3D10StateBlockMaskDisableAll,
+	D3D10StateBlockMaskDisableCapture:   procD3D10StateBlockMaskDisableCapture,
+	D3D10StateBlockMaskEnableAll:        procD3D10StateBlockMaskEnableAll,
+	D3D10StateBlockMaskEnableCapture:    procD3D10StateBlockMaskEnableCapture,
+	D3D10StateBlockMaskGetSetting:       procD3D10StateBlockMaskGetSetting,
+	D3D10StateBlockMaskIntersect:        procD3D10StateBlockMaskIntersect,
+	D3D10StateBlockMaskUnion:            procD3D10StateBlockMaskUnion,
+}
+
 // D3D10CompileEffectFromMemory calls d3d10!D3D10CompileEffectFromMemory.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10compileeffectfrommemory
 func D3D10CompileEffectFromMemory(pData []byte, pSrcFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, HLSLFlags uint32, FXFlags uint32, ppCompiledEffect **graphicsdirect3d.ID3DBlob, ppErrors **graphicsdirect3d.ID3DBlob) error {

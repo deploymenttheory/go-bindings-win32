@@ -78,6 +78,132 @@ var (
 	procWinHttpWriteProxySettings                = modWINHTTP.NewProc("WinHttpWriteProxySettings")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WinHttpAddRequestHeaders                 *win32.Proc
+	WinHttpAddRequestHeadersEx               *win32.Proc
+	WinHttpCheckPlatform                     *win32.Proc
+	WinHttpCloseHandle                       *win32.Proc
+	WinHttpConnect                           *win32.Proc
+	WinHttpCrackUrl                          *win32.Proc
+	WinHttpCreateProxyResolver               *win32.Proc
+	WinHttpCreateUrl                         *win32.Proc
+	WinHttpDetectAutoProxyConfigUrl          *win32.Proc
+	WinHttpFreeProxyResult                   *win32.Proc
+	WinHttpFreeProxyResultEx                 *win32.Proc
+	WinHttpFreeProxySettings                 *win32.Proc
+	WinHttpFreeProxySettingsEx               *win32.Proc
+	WinHttpFreeQueryConnectionGroupResult    *win32.Proc
+	WinHttpGetDefaultProxyConfiguration      *win32.Proc
+	WinHttpGetIEProxyConfigForCurrentUser    *win32.Proc
+	WinHttpGetProxyForUrl                    *win32.Proc
+	WinHttpGetProxyForUrlEx                  *win32.Proc
+	WinHttpGetProxyForUrlEx2                 *win32.Proc
+	WinHttpGetProxyResult                    *win32.Proc
+	WinHttpGetProxyResultEx                  *win32.Proc
+	WinHttpGetProxySettingsEx                *win32.Proc
+	WinHttpGetProxySettingsResultEx          *win32.Proc
+	WinHttpGetProxySettingsVersion           *win32.Proc
+	WinHttpOpen                              *win32.Proc
+	WinHttpOpenRequest                       *win32.Proc
+	WinHttpProtocolCompleteUpgrade           *win32.Proc
+	WinHttpProtocolReceive                   *win32.Proc
+	WinHttpProtocolSend                      *win32.Proc
+	WinHttpQueryAuthSchemes                  *win32.Proc
+	WinHttpQueryConnectionGroup              *win32.Proc
+	WinHttpQueryDataAvailable                *win32.Proc
+	WinHttpQueryHeaders                      *win32.Proc
+	WinHttpQueryHeadersEx                    *win32.Proc
+	WinHttpQueryOption                       *win32.Proc
+	WinHttpReadData                          *win32.Proc
+	WinHttpReadDataEx                        *win32.Proc
+	WinHttpReadProxySettings                 *win32.Proc
+	WinHttpReceiveResponse                   *win32.Proc
+	WinHttpRegisterProxyChangeNotification   *win32.Proc
+	WinHttpResetAutoProxy                    *win32.Proc
+	WinHttpSendRequest                       *win32.Proc
+	WinHttpSetCredentials                    *win32.Proc
+	WinHttpSetDefaultProxyConfiguration      *win32.Proc
+	WinHttpSetOption                         *win32.Proc
+	WinHttpSetProxySettingsPerUser           *win32.Proc
+	WinHttpSetStatusCallback                 *win32.Proc
+	WinHttpSetTimeouts                       *win32.Proc
+	WinHttpTimeFromSystemTime                *win32.Proc
+	WinHttpTimeToSystemTime                  *win32.Proc
+	WinHttpUnregisterProxyChangeNotification *win32.Proc
+	WinHttpWebSocketClose                    *win32.Proc
+	WinHttpWebSocketCompleteUpgrade          *win32.Proc
+	WinHttpWebSocketQueryCloseStatus         *win32.Proc
+	WinHttpWebSocketReceive                  *win32.Proc
+	WinHttpWebSocketSend                     *win32.Proc
+	WinHttpWebSocketShutdown                 *win32.Proc
+	WinHttpWriteData                         *win32.Proc
+	WinHttpWriteProxySettings                *win32.Proc
+}{
+	WinHttpAddRequestHeaders:                 procWinHttpAddRequestHeaders,
+	WinHttpAddRequestHeadersEx:               procWinHttpAddRequestHeadersEx,
+	WinHttpCheckPlatform:                     procWinHttpCheckPlatform,
+	WinHttpCloseHandle:                       procWinHttpCloseHandle,
+	WinHttpConnect:                           procWinHttpConnect,
+	WinHttpCrackUrl:                          procWinHttpCrackUrl,
+	WinHttpCreateProxyResolver:               procWinHttpCreateProxyResolver,
+	WinHttpCreateUrl:                         procWinHttpCreateUrl,
+	WinHttpDetectAutoProxyConfigUrl:          procWinHttpDetectAutoProxyConfigUrl,
+	WinHttpFreeProxyResult:                   procWinHttpFreeProxyResult,
+	WinHttpFreeProxyResultEx:                 procWinHttpFreeProxyResultEx,
+	WinHttpFreeProxySettings:                 procWinHttpFreeProxySettings,
+	WinHttpFreeProxySettingsEx:               procWinHttpFreeProxySettingsEx,
+	WinHttpFreeQueryConnectionGroupResult:    procWinHttpFreeQueryConnectionGroupResult,
+	WinHttpGetDefaultProxyConfiguration:      procWinHttpGetDefaultProxyConfiguration,
+	WinHttpGetIEProxyConfigForCurrentUser:    procWinHttpGetIEProxyConfigForCurrentUser,
+	WinHttpGetProxyForUrl:                    procWinHttpGetProxyForUrl,
+	WinHttpGetProxyForUrlEx:                  procWinHttpGetProxyForUrlEx,
+	WinHttpGetProxyForUrlEx2:                 procWinHttpGetProxyForUrlEx2,
+	WinHttpGetProxyResult:                    procWinHttpGetProxyResult,
+	WinHttpGetProxyResultEx:                  procWinHttpGetProxyResultEx,
+	WinHttpGetProxySettingsEx:                procWinHttpGetProxySettingsEx,
+	WinHttpGetProxySettingsResultEx:          procWinHttpGetProxySettingsResultEx,
+	WinHttpGetProxySettingsVersion:           procWinHttpGetProxySettingsVersion,
+	WinHttpOpen:                              procWinHttpOpen,
+	WinHttpOpenRequest:                       procWinHttpOpenRequest,
+	WinHttpProtocolCompleteUpgrade:           procWinHttpProtocolCompleteUpgrade,
+	WinHttpProtocolReceive:                   procWinHttpProtocolReceive,
+	WinHttpProtocolSend:                      procWinHttpProtocolSend,
+	WinHttpQueryAuthSchemes:                  procWinHttpQueryAuthSchemes,
+	WinHttpQueryConnectionGroup:              procWinHttpQueryConnectionGroup,
+	WinHttpQueryDataAvailable:                procWinHttpQueryDataAvailable,
+	WinHttpQueryHeaders:                      procWinHttpQueryHeaders,
+	WinHttpQueryHeadersEx:                    procWinHttpQueryHeadersEx,
+	WinHttpQueryOption:                       procWinHttpQueryOption,
+	WinHttpReadData:                          procWinHttpReadData,
+	WinHttpReadDataEx:                        procWinHttpReadDataEx,
+	WinHttpReadProxySettings:                 procWinHttpReadProxySettings,
+	WinHttpReceiveResponse:                   procWinHttpReceiveResponse,
+	WinHttpRegisterProxyChangeNotification:   procWinHttpRegisterProxyChangeNotification,
+	WinHttpResetAutoProxy:                    procWinHttpResetAutoProxy,
+	WinHttpSendRequest:                       procWinHttpSendRequest,
+	WinHttpSetCredentials:                    procWinHttpSetCredentials,
+	WinHttpSetDefaultProxyConfiguration:      procWinHttpSetDefaultProxyConfiguration,
+	WinHttpSetOption:                         procWinHttpSetOption,
+	WinHttpSetProxySettingsPerUser:           procWinHttpSetProxySettingsPerUser,
+	WinHttpSetStatusCallback:                 procWinHttpSetStatusCallback,
+	WinHttpSetTimeouts:                       procWinHttpSetTimeouts,
+	WinHttpTimeFromSystemTime:                procWinHttpTimeFromSystemTime,
+	WinHttpTimeToSystemTime:                  procWinHttpTimeToSystemTime,
+	WinHttpUnregisterProxyChangeNotification: procWinHttpUnregisterProxyChangeNotification,
+	WinHttpWebSocketClose:                    procWinHttpWebSocketClose,
+	WinHttpWebSocketCompleteUpgrade:          procWinHttpWebSocketCompleteUpgrade,
+	WinHttpWebSocketQueryCloseStatus:         procWinHttpWebSocketQueryCloseStatus,
+	WinHttpWebSocketReceive:                  procWinHttpWebSocketReceive,
+	WinHttpWebSocketSend:                     procWinHttpWebSocketSend,
+	WinHttpWebSocketShutdown:                 procWinHttpWebSocketShutdown,
+	WinHttpWriteData:                         procWinHttpWriteData,
+	WinHttpWriteProxySettings:                procWinHttpWriteProxySettings,
+}
+
 // WinHttpAddRequestHeaders calls WINHTTP!WinHttpAddRequestHeaders.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpaddrequestheaders
 // Minimum OS: windows5.1.2600.

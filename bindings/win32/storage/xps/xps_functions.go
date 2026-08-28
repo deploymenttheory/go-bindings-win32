@@ -34,6 +34,38 @@ var (
 	procDeviceCapabilitiesA = modwinspool_drv.NewProc("DeviceCapabilitiesA")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AbortDoc            *win32.Proc
+	DeviceCapabilities  *win32.Proc
+	DeviceCapabilitiesA *win32.Proc
+	EndDoc              *win32.Proc
+	EndPage             *win32.Proc
+	Escape              *win32.Proc
+	ExtEscape           *win32.Proc
+	PrintWindow         *win32.Proc
+	SetAbortProc        *win32.Proc
+	StartDoc            *win32.Proc
+	StartDocA           *win32.Proc
+	StartPage           *win32.Proc
+}{
+	AbortDoc:            procAbortDoc,
+	DeviceCapabilities:  procDeviceCapabilities,
+	DeviceCapabilitiesA: procDeviceCapabilitiesA,
+	EndDoc:              procEndDoc,
+	EndPage:             procEndPage,
+	Escape:              procEscape,
+	ExtEscape:           procExtEscape,
+	PrintWindow:         procPrintWindow,
+	SetAbortProc:        procSetAbortProc,
+	StartDoc:            procStartDoc,
+	StartDocA:           procStartDocA,
+	StartPage:           procStartPage,
+}
+
 // AbortDoc calls GDI32!AbortDoc.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-abortdoc
 // Minimum OS: windows5.0.

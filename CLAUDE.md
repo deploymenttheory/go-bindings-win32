@@ -120,9 +120,11 @@ Windows.Win32.winmd → .w32meta.json (IR) → Go source
   through it.
 - **`bindings/runtime/win32/`** — the hand-written runtime: lazy system-DLL
   loading (System32-only via `LoadLibraryExW` +
-  `LOAD_LIBRARY_SEARCH_SYSTEM32`, `loader.go`), `LastError` normalization,
-  the typed `HRESULT` error, `GUID`, UTF-16 helpers. Standard library only —
-  nothing beyond the stdlib is ever linked into consumer binaries.
+  `LOAD_LIBRARY_SEARCH_SYSTEM32`, `loader.go`; a missing DLL/export is a
+  typed `*ProcError` from `Proc.Find`, and the panic value of `Proc.Addr`),
+  `LastError` normalization, the typed `HRESULT` error, `GUID`, UTF-16
+  helpers. Standard library only — nothing beyond the stdlib is ever linked
+  into consumer binaries.
 
 ### Generated output (`bindings/win32/`)
 
@@ -131,7 +133,8 @@ One package per namespace, directory = namespace path
 cross-refs = all segments joined: `systemthreading`). Files per package, split
 by construct: `doc.go`, `<pkg>_typedefs.go`, `<pkg>_enums.go`,
 `<pkg>_structs.go`, `<pkg>_delegates.go`, `<pkg>_constants.go`,
-`<pkg>_functions.go`, `<pkg>_interfaces.go` (COM), `<pkg>_handles.go` (handle
+`<pkg>_functions.go` (DLL/proc vars, the `Procs` availability-probe table,
+then the functions), `<pkg>_interfaces.go` (COM), `<pkg>_handles.go` (handle
 closers). Empty files are not written.
 
 There is **one** tree. The typed constructs (typedefs/enums/structs/delegates/

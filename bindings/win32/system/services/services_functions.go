@@ -83,6 +83,130 @@ var (
 	procUnsubscribeServiceChangeNotifications = modSecHost.NewProc("UnsubscribeServiceChangeNotifications")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ChangeServiceConfig                   *win32.Proc
+	ChangeServiceConfig2                  *win32.Proc
+	ChangeServiceConfig2A                 *win32.Proc
+	ChangeServiceConfigA                  *win32.Proc
+	CloseServiceHandle                    *win32.Proc
+	ControlService                        *win32.Proc
+	ControlServiceEx                      *win32.Proc
+	ControlServiceExA                     *win32.Proc
+	CreateService                         *win32.Proc
+	CreateServiceA                        *win32.Proc
+	DeleteService                         *win32.Proc
+	EnumDependentServices                 *win32.Proc
+	EnumDependentServicesA                *win32.Proc
+	EnumServicesStatus                    *win32.Proc
+	EnumServicesStatusA                   *win32.Proc
+	EnumServicesStatusEx                  *win32.Proc
+	EnumServicesStatusExA                 *win32.Proc
+	GetServiceDirectory                   *win32.Proc
+	GetServiceDisplayName                 *win32.Proc
+	GetServiceDisplayNameA                *win32.Proc
+	GetServiceKeyName                     *win32.Proc
+	GetServiceKeyNameA                    *win32.Proc
+	GetServiceRegistryStateKey            *win32.Proc
+	GetSharedServiceDirectory             *win32.Proc
+	GetSharedServiceRegistryStateKey      *win32.Proc
+	LockServiceDatabase                   *win32.Proc
+	NotifyBootConfigStatus                *win32.Proc
+	NotifyServiceStatusChange             *win32.Proc
+	NotifyServiceStatusChangeA            *win32.Proc
+	OpenSCManager                         *win32.Proc
+	OpenSCManagerA                        *win32.Proc
+	OpenService                           *win32.Proc
+	OpenServiceA                          *win32.Proc
+	QueryServiceConfig                    *win32.Proc
+	QueryServiceConfig2                   *win32.Proc
+	QueryServiceConfig2A                  *win32.Proc
+	QueryServiceConfigA                   *win32.Proc
+	QueryServiceDynamicInformation        *win32.Proc
+	QueryServiceLockStatus                *win32.Proc
+	QueryServiceLockStatusA               *win32.Proc
+	QueryServiceObjectSecurity            *win32.Proc
+	QueryServiceStatus                    *win32.Proc
+	QueryServiceStatusEx                  *win32.Proc
+	RegisterServiceCtrlHandler            *win32.Proc
+	RegisterServiceCtrlHandlerA           *win32.Proc
+	RegisterServiceCtrlHandlerEx          *win32.Proc
+	RegisterServiceCtrlHandlerExA         *win32.Proc
+	SetServiceBits                        *win32.Proc
+	SetServiceObjectSecurity              *win32.Proc
+	SetServiceStatus                      *win32.Proc
+	StartService                          *win32.Proc
+	StartServiceA                         *win32.Proc
+	StartServiceCtrlDispatcher            *win32.Proc
+	StartServiceCtrlDispatcherA           *win32.Proc
+	SubscribeServiceChangeNotifications   *win32.Proc
+	UnlockServiceDatabase                 *win32.Proc
+	UnsubscribeServiceChangeNotifications *win32.Proc
+	WaitServiceState                      *win32.Proc
+}{
+	ChangeServiceConfig:                   procChangeServiceConfig,
+	ChangeServiceConfig2:                  procChangeServiceConfig2,
+	ChangeServiceConfig2A:                 procChangeServiceConfig2A,
+	ChangeServiceConfigA:                  procChangeServiceConfigA,
+	CloseServiceHandle:                    procCloseServiceHandle,
+	ControlService:                        procControlService,
+	ControlServiceEx:                      procControlServiceEx,
+	ControlServiceExA:                     procControlServiceExA,
+	CreateService:                         procCreateService,
+	CreateServiceA:                        procCreateServiceA,
+	DeleteService:                         procDeleteService,
+	EnumDependentServices:                 procEnumDependentServices,
+	EnumDependentServicesA:                procEnumDependentServicesA,
+	EnumServicesStatus:                    procEnumServicesStatus,
+	EnumServicesStatusA:                   procEnumServicesStatusA,
+	EnumServicesStatusEx:                  procEnumServicesStatusEx,
+	EnumServicesStatusExA:                 procEnumServicesStatusExA,
+	GetServiceDirectory:                   procGetServiceDirectory,
+	GetServiceDisplayName:                 procGetServiceDisplayName,
+	GetServiceDisplayNameA:                procGetServiceDisplayNameA,
+	GetServiceKeyName:                     procGetServiceKeyName,
+	GetServiceKeyNameA:                    procGetServiceKeyNameA,
+	GetServiceRegistryStateKey:            procGetServiceRegistryStateKey,
+	GetSharedServiceDirectory:             procGetSharedServiceDirectory,
+	GetSharedServiceRegistryStateKey:      procGetSharedServiceRegistryStateKey,
+	LockServiceDatabase:                   procLockServiceDatabase,
+	NotifyBootConfigStatus:                procNotifyBootConfigStatus,
+	NotifyServiceStatusChange:             procNotifyServiceStatusChange,
+	NotifyServiceStatusChangeA:            procNotifyServiceStatusChangeA,
+	OpenSCManager:                         procOpenSCManager,
+	OpenSCManagerA:                        procOpenSCManagerA,
+	OpenService:                           procOpenService,
+	OpenServiceA:                          procOpenServiceA,
+	QueryServiceConfig:                    procQueryServiceConfig,
+	QueryServiceConfig2:                   procQueryServiceConfig2,
+	QueryServiceConfig2A:                  procQueryServiceConfig2A,
+	QueryServiceConfigA:                   procQueryServiceConfigA,
+	QueryServiceDynamicInformation:        procQueryServiceDynamicInformation,
+	QueryServiceLockStatus:                procQueryServiceLockStatus,
+	QueryServiceLockStatusA:               procQueryServiceLockStatusA,
+	QueryServiceObjectSecurity:            procQueryServiceObjectSecurity,
+	QueryServiceStatus:                    procQueryServiceStatus,
+	QueryServiceStatusEx:                  procQueryServiceStatusEx,
+	RegisterServiceCtrlHandler:            procRegisterServiceCtrlHandler,
+	RegisterServiceCtrlHandlerA:           procRegisterServiceCtrlHandlerA,
+	RegisterServiceCtrlHandlerEx:          procRegisterServiceCtrlHandlerEx,
+	RegisterServiceCtrlHandlerExA:         procRegisterServiceCtrlHandlerExA,
+	SetServiceBits:                        procSetServiceBits,
+	SetServiceObjectSecurity:              procSetServiceObjectSecurity,
+	SetServiceStatus:                      procSetServiceStatus,
+	StartService:                          procStartService,
+	StartServiceA:                         procStartServiceA,
+	StartServiceCtrlDispatcher:            procStartServiceCtrlDispatcher,
+	StartServiceCtrlDispatcherA:           procStartServiceCtrlDispatcherA,
+	SubscribeServiceChangeNotifications:   procSubscribeServiceChangeNotifications,
+	UnlockServiceDatabase:                 procUnlockServiceDatabase,
+	UnsubscribeServiceChangeNotifications: procUnsubscribeServiceChangeNotifications,
+	WaitServiceState:                      procWaitServiceState,
+}
+
 // ChangeServiceConfig calls ADVAPI32!ChangeServiceConfigW.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-changeserviceconfigw
 // Minimum OS: windows5.1.2600.

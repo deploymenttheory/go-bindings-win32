@@ -22,6 +22,20 @@ var (
 	procRemoveDeveloperLicense  = modWSClient.NewProc("RemoveDeveloperLicense")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AcquireDeveloperLicense *win32.Proc
+	CheckDeveloperLicense   *win32.Proc
+	RemoveDeveloperLicense  *win32.Proc
+}{
+	AcquireDeveloperLicense: procAcquireDeveloperLicense,
+	CheckDeveloperLicense:   procCheckDeveloperLicense,
+	RemoveDeveloperLicense:  procRemoveDeveloperLicense,
+}
+
 // AcquireDeveloperLicense calls WSClient!AcquireDeveloperLicense.
 // https://learn.microsoft.com/windows/win32/api/wsdevlicensing/nf-wsdevlicensing-acquiredeveloperlicense
 func AcquireDeveloperLicense(hwndParent foundation.HWND, pExpiration *foundation.FILETIME) error {

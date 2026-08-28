@@ -84,7 +84,7 @@ so the coverage is broad and the mapping is faithful.
 | Package | Import | What you get |
 |---|---|---|
 | **Bindings** | `bindings/win32/<namespace>` | The full typed surface — structs, enums, constants, COM interfaces — with idiomatic-shaped calls: Go `string` for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to returns, `Close<Handle>` helpers (from `[RAIIFree]`), and COM interfaces as method-bearing vtable structs. Each function dispatches through `syscall` inline — no wrapper layer. |
-| **Runtime** | `bindings/runtime/win32` | Shared helpers: `UTF16Ptr`, `UTF16ToString`, `GUID`, `Bool32`, and the typed `HRESULT` error (`ErrIfFailed`, `S_OK`/`S_FALSE`/`E_*` sentinels, `errors.Is` interop). |
+| **Runtime** | `bindings/runtime/win32` | Shared helpers: `UTF16Ptr`, `UTF16ToString`, `GUID`, `Bool32`, the typed `HRESULT` error (`ErrIfFailed`, `S_OK`/`S_FALSE`/`E_*` sentinels, `errors.Is` interop), and the System32-only loader (`ProcError`, `ErrProcNotFound`/`ErrDLLNotFound`). |
 
 Everything lives in one tree: import `bindings/win32/<namespace>` and the runtime.
 
@@ -103,6 +103,11 @@ if errors.Is(err, windows.ERROR_ACCESS_DENIED) { /* matches E_ACCESSDENIED too *
 A curated set of APIs whose *success* codes matter (`IEnum*::Next`/`::Skip`,
 `IXmlReader::Read`, `CoInitializeEx`) returns `(win32.HRESULT, error)` so
 `S_FALSE`-style informational successes are never lost.
+
+An API that is absent on the running Windows build (a newer export, or an
+optional component's DLL) cannot be dispatched to and **panics** with a
+`*win32.ProcError`; probe first with `pkg.Procs.<Function>.Find()` — see
+[Unavailable APIs](docs/errors.md#unavailable-apis-missing-exports).
 
 ## Install
 

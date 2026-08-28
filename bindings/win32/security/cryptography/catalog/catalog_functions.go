@@ -56,6 +56,86 @@ var (
 	procIsCatalogFile                        = modWINTRUST.NewProc("IsCatalogFile")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CryptCATAdminAcquireContext          *win32.Proc
+	CryptCATAdminAcquireContext2         *win32.Proc
+	CryptCATAdminAddCatalog              *win32.Proc
+	CryptCATAdminCalcHashFromFileHandle  *win32.Proc
+	CryptCATAdminCalcHashFromFileHandle2 *win32.Proc
+	CryptCATAdminEnumCatalogFromHash     *win32.Proc
+	CryptCATAdminPauseServiceForBackup   *win32.Proc
+	CryptCATAdminReleaseCatalogContext   *win32.Proc
+	CryptCATAdminReleaseContext          *win32.Proc
+	CryptCATAdminRemoveCatalog           *win32.Proc
+	CryptCATAdminResolveCatalogPath      *win32.Proc
+	CryptCATAllocSortedMemberInfo        *win32.Proc
+	CryptCATCDFClose                     *win32.Proc
+	CryptCATCDFEnumAttributes            *win32.Proc
+	CryptCATCDFEnumAttributesWithCDFTag  *win32.Proc
+	CryptCATCDFEnumCatAttributes         *win32.Proc
+	CryptCATCDFEnumMembers               *win32.Proc
+	CryptCATCDFEnumMembersByCDFTagEx     *win32.Proc
+	CryptCATCDFOpen                      *win32.Proc
+	CryptCATCatalogInfoFromContext       *win32.Proc
+	CryptCATClose                        *win32.Proc
+	CryptCATEnumerateAttr                *win32.Proc
+	CryptCATEnumerateCatAttr             *win32.Proc
+	CryptCATEnumerateMember              *win32.Proc
+	CryptCATFreeSortedMemberInfo         *win32.Proc
+	CryptCATGetAttrInfo                  *win32.Proc
+	CryptCATGetCatAttrInfo               *win32.Proc
+	CryptCATGetMemberInfo                *win32.Proc
+	CryptCATHandleFromStore              *win32.Proc
+	CryptCATOpen                         *win32.Proc
+	CryptCATPersistStore                 *win32.Proc
+	CryptCATPutAttrInfo                  *win32.Proc
+	CryptCATPutCatAttrInfo               *win32.Proc
+	CryptCATPutMemberInfo                *win32.Proc
+	CryptCATStoreFromHandle              *win32.Proc
+	IsCatalogFile                        *win32.Proc
+}{
+	CryptCATAdminAcquireContext:          procCryptCATAdminAcquireContext,
+	CryptCATAdminAcquireContext2:         procCryptCATAdminAcquireContext2,
+	CryptCATAdminAddCatalog:              procCryptCATAdminAddCatalog,
+	CryptCATAdminCalcHashFromFileHandle:  procCryptCATAdminCalcHashFromFileHandle,
+	CryptCATAdminCalcHashFromFileHandle2: procCryptCATAdminCalcHashFromFileHandle2,
+	CryptCATAdminEnumCatalogFromHash:     procCryptCATAdminEnumCatalogFromHash,
+	CryptCATAdminPauseServiceForBackup:   procCryptCATAdminPauseServiceForBackup,
+	CryptCATAdminReleaseCatalogContext:   procCryptCATAdminReleaseCatalogContext,
+	CryptCATAdminReleaseContext:          procCryptCATAdminReleaseContext,
+	CryptCATAdminRemoveCatalog:           procCryptCATAdminRemoveCatalog,
+	CryptCATAdminResolveCatalogPath:      procCryptCATAdminResolveCatalogPath,
+	CryptCATAllocSortedMemberInfo:        procCryptCATAllocSortedMemberInfo,
+	CryptCATCDFClose:                     procCryptCATCDFClose,
+	CryptCATCDFEnumAttributes:            procCryptCATCDFEnumAttributes,
+	CryptCATCDFEnumAttributesWithCDFTag:  procCryptCATCDFEnumAttributesWithCDFTag,
+	CryptCATCDFEnumCatAttributes:         procCryptCATCDFEnumCatAttributes,
+	CryptCATCDFEnumMembers:               procCryptCATCDFEnumMembers,
+	CryptCATCDFEnumMembersByCDFTagEx:     procCryptCATCDFEnumMembersByCDFTagEx,
+	CryptCATCDFOpen:                      procCryptCATCDFOpen,
+	CryptCATCatalogInfoFromContext:       procCryptCATCatalogInfoFromContext,
+	CryptCATClose:                        procCryptCATClose,
+	CryptCATEnumerateAttr:                procCryptCATEnumerateAttr,
+	CryptCATEnumerateCatAttr:             procCryptCATEnumerateCatAttr,
+	CryptCATEnumerateMember:              procCryptCATEnumerateMember,
+	CryptCATFreeSortedMemberInfo:         procCryptCATFreeSortedMemberInfo,
+	CryptCATGetAttrInfo:                  procCryptCATGetAttrInfo,
+	CryptCATGetCatAttrInfo:               procCryptCATGetCatAttrInfo,
+	CryptCATGetMemberInfo:                procCryptCATGetMemberInfo,
+	CryptCATHandleFromStore:              procCryptCATHandleFromStore,
+	CryptCATOpen:                         procCryptCATOpen,
+	CryptCATPersistStore:                 procCryptCATPersistStore,
+	CryptCATPutAttrInfo:                  procCryptCATPutAttrInfo,
+	CryptCATPutCatAttrInfo:               procCryptCATPutCatAttrInfo,
+	CryptCATPutMemberInfo:                procCryptCATPutMemberInfo,
+	CryptCATStoreFromHandle:              procCryptCATStoreFromHandle,
+	IsCatalogFile:                        procIsCatalogFile,
+}
+
 // CryptCATAdminAcquireContext calls WINTRUST!CryptCATAdminAcquireContext.
 // https://learn.microsoft.com/windows/win32/api/mscat/nf-mscat-cryptcatadminacquirecontext
 // Minimum OS: windows5.1.2600.

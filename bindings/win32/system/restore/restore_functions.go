@@ -22,6 +22,20 @@ var (
 	procSRRemoveRestorePoint = modSrClient.NewProc("SRRemoveRestorePoint")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	SRRemoveRestorePoint *win32.Proc
+	SRSetRestorePoint    *win32.Proc
+	SRSetRestorePointA   *win32.Proc
+}{
+	SRRemoveRestorePoint: procSRRemoveRestorePoint,
+	SRSetRestorePoint:    procSRSetRestorePoint,
+	SRSetRestorePointA:   procSRSetRestorePointA,
+}
+
 // SRRemoveRestorePoint calls SrClient!SRRemoveRestorePoint.
 // https://learn.microsoft.com/windows/win32/api/srrestoreptapi/nf-srrestoreptapi-srremoverestorepoint
 // Minimum OS: windows5.1.2600.

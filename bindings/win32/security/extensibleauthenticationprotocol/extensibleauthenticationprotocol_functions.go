@@ -45,6 +45,62 @@ var (
 	procEapHostPeerUninitialize                            = modeappprxy.NewProc("EapHostPeerUninitialize")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	EapHostPeerClearConnection                         *win32.Proc
+	EapHostPeerConfigXml2Blob                          *win32.Proc
+	EapHostPeerCredentialsXml2Blob                     *win32.Proc
+	EapHostPeerEndSession                              *win32.Proc
+	EapHostPeerFreeEapError                            *win32.Proc
+	EapHostPeerFreeErrorMemory                         *win32.Proc
+	EapHostPeerFreeMemory                              *win32.Proc
+	EapHostPeerFreeRuntimeMemory                       *win32.Proc
+	EapHostPeerGetAuthStatus                           *win32.Proc
+	EapHostPeerGetDataToUnplumbCredentials             *win32.Proc
+	EapHostPeerGetEncryptedPassword                    *win32.Proc
+	EapHostPeerGetMethods                              *win32.Proc
+	EapHostPeerGetResponseAttributes                   *win32.Proc
+	EapHostPeerGetResult                               *win32.Proc
+	EapHostPeerGetSendPacket                           *win32.Proc
+	EapHostPeerGetUIContext                            *win32.Proc
+	EapHostPeerInitialize                              *win32.Proc
+	EapHostPeerInvokeInteractiveUI                     *win32.Proc
+	EapHostPeerProcessReceivedPacket                   *win32.Proc
+	EapHostPeerQueryInteractiveUIInputFields           *win32.Proc
+	EapHostPeerQueryUIBlobFromInteractiveUIInputFields *win32.Proc
+	EapHostPeerSetResponseAttributes                   *win32.Proc
+	EapHostPeerSetUIContext                            *win32.Proc
+	EapHostPeerUninitialize                            *win32.Proc
+}{
+	EapHostPeerClearConnection:                         procEapHostPeerClearConnection,
+	EapHostPeerConfigXml2Blob:                          procEapHostPeerConfigXml2Blob,
+	EapHostPeerCredentialsXml2Blob:                     procEapHostPeerCredentialsXml2Blob,
+	EapHostPeerEndSession:                              procEapHostPeerEndSession,
+	EapHostPeerFreeEapError:                            procEapHostPeerFreeEapError,
+	EapHostPeerFreeErrorMemory:                         procEapHostPeerFreeErrorMemory,
+	EapHostPeerFreeMemory:                              procEapHostPeerFreeMemory,
+	EapHostPeerFreeRuntimeMemory:                       procEapHostPeerFreeRuntimeMemory,
+	EapHostPeerGetAuthStatus:                           procEapHostPeerGetAuthStatus,
+	EapHostPeerGetDataToUnplumbCredentials:             procEapHostPeerGetDataToUnplumbCredentials,
+	EapHostPeerGetEncryptedPassword:                    procEapHostPeerGetEncryptedPassword,
+	EapHostPeerGetMethods:                              procEapHostPeerGetMethods,
+	EapHostPeerGetResponseAttributes:                   procEapHostPeerGetResponseAttributes,
+	EapHostPeerGetResult:                               procEapHostPeerGetResult,
+	EapHostPeerGetSendPacket:                           procEapHostPeerGetSendPacket,
+	EapHostPeerGetUIContext:                            procEapHostPeerGetUIContext,
+	EapHostPeerInitialize:                              procEapHostPeerInitialize,
+	EapHostPeerInvokeInteractiveUI:                     procEapHostPeerInvokeInteractiveUI,
+	EapHostPeerProcessReceivedPacket:                   procEapHostPeerProcessReceivedPacket,
+	EapHostPeerQueryInteractiveUIInputFields:           procEapHostPeerQueryInteractiveUIInputFields,
+	EapHostPeerQueryUIBlobFromInteractiveUIInputFields: procEapHostPeerQueryUIBlobFromInteractiveUIInputFields,
+	EapHostPeerSetResponseAttributes:                   procEapHostPeerSetResponseAttributes,
+	EapHostPeerSetUIContext:                            procEapHostPeerSetUIContext,
+	EapHostPeerUninitialize:                            procEapHostPeerUninitialize,
+}
+
 // EapHostPeerClearConnection calls eappprxy!EapHostPeerClearConnection.
 // https://learn.microsoft.com/windows/win32/api/eappapis/nf-eappapis-eaphostpeerclearconnection
 // Minimum OS: windows6.0.6000.

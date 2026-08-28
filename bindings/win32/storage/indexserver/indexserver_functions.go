@@ -24,6 +24,22 @@ var (
 	procLoadIFilterEx          = modquery.NewProc("LoadIFilterEx")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BindIFilterFromStorage *win32.Proc
+	BindIFilterFromStream  *win32.Proc
+	LoadIFilter            *win32.Proc
+	LoadIFilterEx          *win32.Proc
+}{
+	BindIFilterFromStorage: procBindIFilterFromStorage,
+	BindIFilterFromStream:  procBindIFilterFromStream,
+	LoadIFilter:            procLoadIFilter,
+	LoadIFilterEx:          procLoadIFilterEx,
+}
+
 // BindIFilterFromStorage calls query!BindIFilterFromStorage.
 // https://learn.microsoft.com/windows/win32/api/ntquery/nf-ntquery-bindifilterfromstorage
 // Minimum OS: windows5.0.

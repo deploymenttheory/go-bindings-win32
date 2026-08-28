@@ -69,6 +69,108 @@ var (
 	procJoyConfigChanged                     = modWINMM.NewProc("joyConfigChanged")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	DirectInput8Create                   *win32.Proc
+	HidD_FlushQueue                      *win32.Proc
+	HidD_FreePreparsedData               *win32.Proc
+	HidD_GetAttributes                   *win32.Proc
+	HidD_GetConfiguration                *win32.Proc
+	HidD_GetFeature                      *win32.Proc
+	HidD_GetHidGuid                      *win32.Proc
+	HidD_GetIndexedString                *win32.Proc
+	HidD_GetInputReport                  *win32.Proc
+	HidD_GetManufacturerString           *win32.Proc
+	HidD_GetMsGenreDescriptor            *win32.Proc
+	HidD_GetNumInputBuffers              *win32.Proc
+	HidD_GetPhysicalDescriptor           *win32.Proc
+	HidD_GetPreparsedData                *win32.Proc
+	HidD_GetProductString                *win32.Proc
+	HidD_GetSerialNumberString           *win32.Proc
+	HidD_SetConfiguration                *win32.Proc
+	HidD_SetFeature                      *win32.Proc
+	HidD_SetNumInputBuffers              *win32.Proc
+	HidD_SetOutputReport                 *win32.Proc
+	HidP_GetButtonArray                  *win32.Proc
+	HidP_GetButtonCaps                   *win32.Proc
+	HidP_GetCaps                         *win32.Proc
+	HidP_GetData                         *win32.Proc
+	HidP_GetExtendedAttributes           *win32.Proc
+	HidP_GetLinkCollectionNodes          *win32.Proc
+	HidP_GetScaledUsageValue             *win32.Proc
+	HidP_GetSpecificButtonCaps           *win32.Proc
+	HidP_GetSpecificValueCaps            *win32.Proc
+	HidP_GetUsageValue                   *win32.Proc
+	HidP_GetUsageValueArray              *win32.Proc
+	HidP_GetUsages                       *win32.Proc
+	HidP_GetUsagesEx                     *win32.Proc
+	HidP_GetValueCaps                    *win32.Proc
+	HidP_InitializeReportForID           *win32.Proc
+	HidP_MaxDataListLength               *win32.Proc
+	HidP_MaxUsageListLength              *win32.Proc
+	HidP_SetButtonArray                  *win32.Proc
+	HidP_SetData                         *win32.Proc
+	HidP_SetScaledUsageValue             *win32.Proc
+	HidP_SetUsageValue                   *win32.Proc
+	HidP_SetUsageValueArray              *win32.Proc
+	HidP_SetUsages                       *win32.Proc
+	HidP_TranslateUsagesToI8042ScanCodes *win32.Proc
+	HidP_UnsetUsages                     *win32.Proc
+	HidP_UsageListDifference             *win32.Proc
+	JoyConfigChanged                     *win32.Proc
+}{
+	DirectInput8Create:                   procDirectInput8Create,
+	HidD_FlushQueue:                      procHidD_FlushQueue,
+	HidD_FreePreparsedData:               procHidD_FreePreparsedData,
+	HidD_GetAttributes:                   procHidD_GetAttributes,
+	HidD_GetConfiguration:                procHidD_GetConfiguration,
+	HidD_GetFeature:                      procHidD_GetFeature,
+	HidD_GetHidGuid:                      procHidD_GetHidGuid,
+	HidD_GetIndexedString:                procHidD_GetIndexedString,
+	HidD_GetInputReport:                  procHidD_GetInputReport,
+	HidD_GetManufacturerString:           procHidD_GetManufacturerString,
+	HidD_GetMsGenreDescriptor:            procHidD_GetMsGenreDescriptor,
+	HidD_GetNumInputBuffers:              procHidD_GetNumInputBuffers,
+	HidD_GetPhysicalDescriptor:           procHidD_GetPhysicalDescriptor,
+	HidD_GetPreparsedData:                procHidD_GetPreparsedData,
+	HidD_GetProductString:                procHidD_GetProductString,
+	HidD_GetSerialNumberString:           procHidD_GetSerialNumberString,
+	HidD_SetConfiguration:                procHidD_SetConfiguration,
+	HidD_SetFeature:                      procHidD_SetFeature,
+	HidD_SetNumInputBuffers:              procHidD_SetNumInputBuffers,
+	HidD_SetOutputReport:                 procHidD_SetOutputReport,
+	HidP_GetButtonArray:                  procHidP_GetButtonArray,
+	HidP_GetButtonCaps:                   procHidP_GetButtonCaps,
+	HidP_GetCaps:                         procHidP_GetCaps,
+	HidP_GetData:                         procHidP_GetData,
+	HidP_GetExtendedAttributes:           procHidP_GetExtendedAttributes,
+	HidP_GetLinkCollectionNodes:          procHidP_GetLinkCollectionNodes,
+	HidP_GetScaledUsageValue:             procHidP_GetScaledUsageValue,
+	HidP_GetSpecificButtonCaps:           procHidP_GetSpecificButtonCaps,
+	HidP_GetSpecificValueCaps:            procHidP_GetSpecificValueCaps,
+	HidP_GetUsageValue:                   procHidP_GetUsageValue,
+	HidP_GetUsageValueArray:              procHidP_GetUsageValueArray,
+	HidP_GetUsages:                       procHidP_GetUsages,
+	HidP_GetUsagesEx:                     procHidP_GetUsagesEx,
+	HidP_GetValueCaps:                    procHidP_GetValueCaps,
+	HidP_InitializeReportForID:           procHidP_InitializeReportForID,
+	HidP_MaxDataListLength:               procHidP_MaxDataListLength,
+	HidP_MaxUsageListLength:              procHidP_MaxUsageListLength,
+	HidP_SetButtonArray:                  procHidP_SetButtonArray,
+	HidP_SetData:                         procHidP_SetData,
+	HidP_SetScaledUsageValue:             procHidP_SetScaledUsageValue,
+	HidP_SetUsageValue:                   procHidP_SetUsageValue,
+	HidP_SetUsageValueArray:              procHidP_SetUsageValueArray,
+	HidP_SetUsages:                       procHidP_SetUsages,
+	HidP_TranslateUsagesToI8042ScanCodes: procHidP_TranslateUsagesToI8042ScanCodes,
+	HidP_UnsetUsages:                     procHidP_UnsetUsages,
+	HidP_UsageListDifference:             procHidP_UsageListDifference,
+	JoyConfigChanged:                     procJoyConfigChanged,
+}
+
 // DirectInput8Create calls DINPUT8!DirectInput8Create.
 func DirectInput8Create(hinst foundation.HINSTANCE, dwVersion uint32, riidltf *win32.GUID, ppvOut **win32.IUnknown, punkOuter *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procDirectInput8Create.Addr(), uintptr(hinst), uintptr(dwVersion), uintptr(unsafe.Pointer(riidltf)), uintptr(unsafe.Pointer(ppvOut)), uintptr(unsafe.Pointer(punkOuter)))

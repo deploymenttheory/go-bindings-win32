@@ -54,6 +54,82 @@ var (
 	procWinUsb_WritePipe                    = modWINUSB.NewProc("WinUsb_WritePipe")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	WinUsb_AbortPipe                    *win32.Proc
+	WinUsb_ControlTransfer              *win32.Proc
+	WinUsb_FlushPipe                    *win32.Proc
+	WinUsb_Free                         *win32.Proc
+	WinUsb_GetAdjustedFrameNumber       *win32.Proc
+	WinUsb_GetAssociatedInterface       *win32.Proc
+	WinUsb_GetCurrentAlternateSetting   *win32.Proc
+	WinUsb_GetCurrentFrameNumber        *win32.Proc
+	WinUsb_GetCurrentFrameNumberAndQpc  *win32.Proc
+	WinUsb_GetDescriptor                *win32.Proc
+	WinUsb_GetOverlappedResult          *win32.Proc
+	WinUsb_GetPipePolicy                *win32.Proc
+	WinUsb_GetPowerPolicy               *win32.Proc
+	WinUsb_Initialize                   *win32.Proc
+	WinUsb_ParseConfigurationDescriptor *win32.Proc
+	WinUsb_ParseDescriptors             *win32.Proc
+	WinUsb_QueryDeviceInformation       *win32.Proc
+	WinUsb_QueryInterfaceSettings       *win32.Proc
+	WinUsb_QueryPipe                    *win32.Proc
+	WinUsb_QueryPipeEx                  *win32.Proc
+	WinUsb_ReadIsochPipe                *win32.Proc
+	WinUsb_ReadIsochPipeAsap            *win32.Proc
+	WinUsb_ReadPipe                     *win32.Proc
+	WinUsb_RegisterIsochBuffer          *win32.Proc
+	WinUsb_ResetPipe                    *win32.Proc
+	WinUsb_SetCurrentAlternateSetting   *win32.Proc
+	WinUsb_SetPipePolicy                *win32.Proc
+	WinUsb_SetPowerPolicy               *win32.Proc
+	WinUsb_StartTrackingForTimeSync     *win32.Proc
+	WinUsb_StopTrackingForTimeSync      *win32.Proc
+	WinUsb_UnregisterIsochBuffer        *win32.Proc
+	WinUsb_WriteIsochPipe               *win32.Proc
+	WinUsb_WriteIsochPipeAsap           *win32.Proc
+	WinUsb_WritePipe                    *win32.Proc
+}{
+	WinUsb_AbortPipe:                    procWinUsb_AbortPipe,
+	WinUsb_ControlTransfer:              procWinUsb_ControlTransfer,
+	WinUsb_FlushPipe:                    procWinUsb_FlushPipe,
+	WinUsb_Free:                         procWinUsb_Free,
+	WinUsb_GetAdjustedFrameNumber:       procWinUsb_GetAdjustedFrameNumber,
+	WinUsb_GetAssociatedInterface:       procWinUsb_GetAssociatedInterface,
+	WinUsb_GetCurrentAlternateSetting:   procWinUsb_GetCurrentAlternateSetting,
+	WinUsb_GetCurrentFrameNumber:        procWinUsb_GetCurrentFrameNumber,
+	WinUsb_GetCurrentFrameNumberAndQpc:  procWinUsb_GetCurrentFrameNumberAndQpc,
+	WinUsb_GetDescriptor:                procWinUsb_GetDescriptor,
+	WinUsb_GetOverlappedResult:          procWinUsb_GetOverlappedResult,
+	WinUsb_GetPipePolicy:                procWinUsb_GetPipePolicy,
+	WinUsb_GetPowerPolicy:               procWinUsb_GetPowerPolicy,
+	WinUsb_Initialize:                   procWinUsb_Initialize,
+	WinUsb_ParseConfigurationDescriptor: procWinUsb_ParseConfigurationDescriptor,
+	WinUsb_ParseDescriptors:             procWinUsb_ParseDescriptors,
+	WinUsb_QueryDeviceInformation:       procWinUsb_QueryDeviceInformation,
+	WinUsb_QueryInterfaceSettings:       procWinUsb_QueryInterfaceSettings,
+	WinUsb_QueryPipe:                    procWinUsb_QueryPipe,
+	WinUsb_QueryPipeEx:                  procWinUsb_QueryPipeEx,
+	WinUsb_ReadIsochPipe:                procWinUsb_ReadIsochPipe,
+	WinUsb_ReadIsochPipeAsap:            procWinUsb_ReadIsochPipeAsap,
+	WinUsb_ReadPipe:                     procWinUsb_ReadPipe,
+	WinUsb_RegisterIsochBuffer:          procWinUsb_RegisterIsochBuffer,
+	WinUsb_ResetPipe:                    procWinUsb_ResetPipe,
+	WinUsb_SetCurrentAlternateSetting:   procWinUsb_SetCurrentAlternateSetting,
+	WinUsb_SetPipePolicy:                procWinUsb_SetPipePolicy,
+	WinUsb_SetPowerPolicy:               procWinUsb_SetPowerPolicy,
+	WinUsb_StartTrackingForTimeSync:     procWinUsb_StartTrackingForTimeSync,
+	WinUsb_StopTrackingForTimeSync:      procWinUsb_StopTrackingForTimeSync,
+	WinUsb_UnregisterIsochBuffer:        procWinUsb_UnregisterIsochBuffer,
+	WinUsb_WriteIsochPipe:               procWinUsb_WriteIsochPipe,
+	WinUsb_WriteIsochPipeAsap:           procWinUsb_WriteIsochPipeAsap,
+	WinUsb_WritePipe:                    procWinUsb_WritePipe,
+}
+
 // WinUsb_AbortPipe calls WINUSB!WinUsb_AbortPipe.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_abortpipe
 func WinUsb_AbortPipe(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte) error {

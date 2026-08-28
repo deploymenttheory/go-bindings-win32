@@ -36,6 +36,36 @@ var (
 	procGetAppContainerRegistryLocation                                     = modUSERENV.NewProc("GetAppContainerRegistryLocation")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CreateAppContainerProfile                                           *win32.Proc
+	DeleteAppContainerProfile                                           *win32.Proc
+	DeriveAppContainerSidFromAppContainerName                           *win32.Proc
+	DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName *win32.Proc
+	GetAppContainerFolderPath                                           *win32.Proc
+	GetAppContainerNamedObjectPath                                      *win32.Proc
+	GetAppContainerRegistryLocation                                     *win32.Proc
+	IsCrossIsolatedEnvironmentClipboardContent                          *win32.Proc
+	IsProcessInIsolatedContainer                                        *win32.Proc
+	IsProcessInIsolatedWindowsEnvironment                               *win32.Proc
+	IsProcessInWDAGContainer                                            *win32.Proc
+}{
+	CreateAppContainerProfile:                                           procCreateAppContainerProfile,
+	DeleteAppContainerProfile:                                           procDeleteAppContainerProfile,
+	DeriveAppContainerSidFromAppContainerName:                           procDeriveAppContainerSidFromAppContainerName,
+	DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName: procDeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName,
+	GetAppContainerFolderPath:                                           procGetAppContainerFolderPath,
+	GetAppContainerNamedObjectPath:                                      procGetAppContainerNamedObjectPath,
+	GetAppContainerRegistryLocation:                                     procGetAppContainerRegistryLocation,
+	IsCrossIsolatedEnvironmentClipboardContent:                          procIsCrossIsolatedEnvironmentClipboardContent,
+	IsProcessInIsolatedContainer:                                        procIsProcessInIsolatedContainer,
+	IsProcessInIsolatedWindowsEnvironment:                               procIsProcessInIsolatedWindowsEnvironment,
+	IsProcessInWDAGContainer:                                            procIsProcessInWDAGContainer,
+}
+
 // CreateAppContainerProfile calls USERENV!CreateAppContainerProfile.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-createappcontainerprofile
 // Minimum OS: windows8.0.

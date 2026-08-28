@@ -41,6 +41,58 @@ var (
 	procNetDfsSetStdContainerSecurity      = modNETAPI32.NewProc("NetDfsSetStdContainerSecurity")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	NetDfsAdd                          *win32.Proc
+	NetDfsAddFtRoot                    *win32.Proc
+	NetDfsAddRootTarget                *win32.Proc
+	NetDfsAddStdRoot                   *win32.Proc
+	NetDfsEnum                         *win32.Proc
+	NetDfsGetClientInfo                *win32.Proc
+	NetDfsGetFtContainerSecurity       *win32.Proc
+	NetDfsGetInfo                      *win32.Proc
+	NetDfsGetSecurity                  *win32.Proc
+	NetDfsGetStdContainerSecurity      *win32.Proc
+	NetDfsGetSupportedNamespaceVersion *win32.Proc
+	NetDfsMove                         *win32.Proc
+	NetDfsRemove                       *win32.Proc
+	NetDfsRemoveFtRoot                 *win32.Proc
+	NetDfsRemoveFtRootForced           *win32.Proc
+	NetDfsRemoveRootTarget             *win32.Proc
+	NetDfsRemoveStdRoot                *win32.Proc
+	NetDfsSetClientInfo                *win32.Proc
+	NetDfsSetFtContainerSecurity       *win32.Proc
+	NetDfsSetInfo                      *win32.Proc
+	NetDfsSetSecurity                  *win32.Proc
+	NetDfsSetStdContainerSecurity      *win32.Proc
+}{
+	NetDfsAdd:                          procNetDfsAdd,
+	NetDfsAddFtRoot:                    procNetDfsAddFtRoot,
+	NetDfsAddRootTarget:                procNetDfsAddRootTarget,
+	NetDfsAddStdRoot:                   procNetDfsAddStdRoot,
+	NetDfsEnum:                         procNetDfsEnum,
+	NetDfsGetClientInfo:                procNetDfsGetClientInfo,
+	NetDfsGetFtContainerSecurity:       procNetDfsGetFtContainerSecurity,
+	NetDfsGetInfo:                      procNetDfsGetInfo,
+	NetDfsGetSecurity:                  procNetDfsGetSecurity,
+	NetDfsGetStdContainerSecurity:      procNetDfsGetStdContainerSecurity,
+	NetDfsGetSupportedNamespaceVersion: procNetDfsGetSupportedNamespaceVersion,
+	NetDfsMove:                         procNetDfsMove,
+	NetDfsRemove:                       procNetDfsRemove,
+	NetDfsRemoveFtRoot:                 procNetDfsRemoveFtRoot,
+	NetDfsRemoveFtRootForced:           procNetDfsRemoveFtRootForced,
+	NetDfsRemoveRootTarget:             procNetDfsRemoveRootTarget,
+	NetDfsRemoveStdRoot:                procNetDfsRemoveStdRoot,
+	NetDfsSetClientInfo:                procNetDfsSetClientInfo,
+	NetDfsSetFtContainerSecurity:       procNetDfsSetFtContainerSecurity,
+	NetDfsSetInfo:                      procNetDfsSetInfo,
+	NetDfsSetSecurity:                  procNetDfsSetSecurity,
+	NetDfsSetStdContainerSecurity:      procNetDfsSetStdContainerSecurity,
+}
+
 // NetDfsAdd calls NETAPI32!NetDfsAdd.
 // https://learn.microsoft.com/windows/win32/api/lmdfs/nf-lmdfs-netdfsadd
 // Minimum OS: windows6.0.6000.

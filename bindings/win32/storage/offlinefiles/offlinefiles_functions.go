@@ -23,6 +23,22 @@ var (
 	procOfflineFilesStart         = modCSCAPI.NewProc("OfflineFilesStart")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	OfflineFilesEnable        *win32.Proc
+	OfflineFilesQueryStatus   *win32.Proc
+	OfflineFilesQueryStatusEx *win32.Proc
+	OfflineFilesStart         *win32.Proc
+}{
+	OfflineFilesEnable:        procOfflineFilesEnable,
+	OfflineFilesQueryStatus:   procOfflineFilesQueryStatus,
+	OfflineFilesQueryStatusEx: procOfflineFilesQueryStatusEx,
+	OfflineFilesStart:         procOfflineFilesStart,
+}
+
 // OfflineFilesEnable calls CSCAPI!OfflineFilesEnable.
 // https://learn.microsoft.com/windows/win32/api/cscapi/nf-cscapi-offlinefilesenable
 // Minimum OS: windows6.0.6000.

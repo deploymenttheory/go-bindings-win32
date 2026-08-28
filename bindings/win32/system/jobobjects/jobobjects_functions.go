@@ -35,6 +35,42 @@ var (
 	procUserHandleGrantAccess                  = modUSER32.NewProc("UserHandleGrantAccess")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	AssignProcessToJobObject               *win32.Proc
+	CreateJobObject                        *win32.Proc
+	CreateJobObjectA                       *win32.Proc
+	CreateJobSet                           *win32.Proc
+	FreeMemoryJobObject                    *win32.Proc
+	IsProcessInJob                         *win32.Proc
+	OpenJobObject                          *win32.Proc
+	OpenJobObjectA                         *win32.Proc
+	QueryInformationJobObject              *win32.Proc
+	QueryIoRateControlInformationJobObject *win32.Proc
+	SetInformationJobObject                *win32.Proc
+	SetIoRateControlInformationJobObject   *win32.Proc
+	TerminateJobObject                     *win32.Proc
+	UserHandleGrantAccess                  *win32.Proc
+}{
+	AssignProcessToJobObject:               procAssignProcessToJobObject,
+	CreateJobObject:                        procCreateJobObject,
+	CreateJobObjectA:                       procCreateJobObjectA,
+	CreateJobSet:                           procCreateJobSet,
+	FreeMemoryJobObject:                    procFreeMemoryJobObject,
+	IsProcessInJob:                         procIsProcessInJob,
+	OpenJobObject:                          procOpenJobObject,
+	OpenJobObjectA:                         procOpenJobObjectA,
+	QueryInformationJobObject:              procQueryInformationJobObject,
+	QueryIoRateControlInformationJobObject: procQueryIoRateControlInformationJobObject,
+	SetInformationJobObject:                procSetInformationJobObject,
+	SetIoRateControlInformationJobObject:   procSetIoRateControlInformationJobObject,
+	TerminateJobObject:                     procTerminateJobObject,
+	UserHandleGrantAccess:                  procUserHandleGrantAccess,
+}
+
 // AssignProcessToJobObject calls KERNEL32!AssignProcessToJobObject.
 // https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-assignprocesstojobobject
 // Minimum OS: windows5.1.2600.

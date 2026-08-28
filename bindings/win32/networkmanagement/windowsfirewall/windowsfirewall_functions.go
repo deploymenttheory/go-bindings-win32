@@ -36,6 +36,40 @@ var (
 	procNcIsValidConnectionName                          = modNetshell.NewProc("NcIsValidConnectionName")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	NcFreeNetconProperties                           *win32.Proc
+	NcIsValidConnectionName                          *win32.Proc
+	NetworkIsolationDiagnoseConnectFailureAndGetInfo *win32.Proc
+	NetworkIsolationEnumAppContainers                *win32.Proc
+	NetworkIsolationEnumerateAppContainerRules       *win32.Proc
+	NetworkIsolationFreeAppContainers                *win32.Proc
+	NetworkIsolationGetAppContainerConfig            *win32.Proc
+	NetworkIsolationGetEnterpriseIdAsync             *win32.Proc
+	NetworkIsolationGetEnterpriseIdClose             *win32.Proc
+	NetworkIsolationRegisterForAppContainerChanges   *win32.Proc
+	NetworkIsolationSetAppContainerConfig            *win32.Proc
+	NetworkIsolationSetupAppContainerBinaries        *win32.Proc
+	NetworkIsolationUnregisterForAppContainerChanges *win32.Proc
+}{
+	NcFreeNetconProperties:                           procNcFreeNetconProperties,
+	NcIsValidConnectionName:                          procNcIsValidConnectionName,
+	NetworkIsolationDiagnoseConnectFailureAndGetInfo: procNetworkIsolationDiagnoseConnectFailureAndGetInfo,
+	NetworkIsolationEnumAppContainers:                procNetworkIsolationEnumAppContainers,
+	NetworkIsolationEnumerateAppContainerRules:       procNetworkIsolationEnumerateAppContainerRules,
+	NetworkIsolationFreeAppContainers:                procNetworkIsolationFreeAppContainers,
+	NetworkIsolationGetAppContainerConfig:            procNetworkIsolationGetAppContainerConfig,
+	NetworkIsolationGetEnterpriseIdAsync:             procNetworkIsolationGetEnterpriseIdAsync,
+	NetworkIsolationGetEnterpriseIdClose:             procNetworkIsolationGetEnterpriseIdClose,
+	NetworkIsolationRegisterForAppContainerChanges:   procNetworkIsolationRegisterForAppContainerChanges,
+	NetworkIsolationSetAppContainerConfig:            procNetworkIsolationSetAppContainerConfig,
+	NetworkIsolationSetupAppContainerBinaries:        procNetworkIsolationSetupAppContainerBinaries,
+	NetworkIsolationUnregisterForAppContainerChanges: procNetworkIsolationUnregisterForAppContainerChanges,
+}
+
 // NcFreeNetconProperties calls Netshell!NcFreeNetconProperties.
 // https://learn.microsoft.com/windows/win32/api/netcon/nf-netcon-ncfreenetconproperties
 // Minimum OS: windows5.1.2600.

@@ -34,6 +34,44 @@ var (
 	procTbsip_Submit_Command             = modtbs.NewProc("Tbsip_Submit_Command")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	GetDeviceID                      *win32.Proc
+	GetDeviceIDString                *win32.Proc
+	Tbsi_Context_Create              *win32.Proc
+	Tbsi_Create_Windows_Key          *win32.Proc
+	Tbsi_GetDeviceInfo               *win32.Proc
+	Tbsi_Get_OwnerAuth               *win32.Proc
+	Tbsi_Get_TCG_Log                 *win32.Proc
+	Tbsi_Get_TCG_Log_Ex              *win32.Proc
+	Tbsi_Is_Tpm_Present              *win32.Proc
+	Tbsi_Physical_Presence_Command   *win32.Proc
+	Tbsi_Revoke_Attestation          *win32.Proc
+	Tbsi_Tpm_Vendor_Maintenance_Mode *win32.Proc
+	Tbsip_Cancel_Commands            *win32.Proc
+	Tbsip_Context_Close              *win32.Proc
+	Tbsip_Submit_Command             *win32.Proc
+}{
+	GetDeviceID:                      procGetDeviceID,
+	GetDeviceIDString:                procGetDeviceIDString,
+	Tbsi_Context_Create:              procTbsi_Context_Create,
+	Tbsi_Create_Windows_Key:          procTbsi_Create_Windows_Key,
+	Tbsi_GetDeviceInfo:               procTbsi_GetDeviceInfo,
+	Tbsi_Get_OwnerAuth:               procTbsi_Get_OwnerAuth,
+	Tbsi_Get_TCG_Log:                 procTbsi_Get_TCG_Log,
+	Tbsi_Get_TCG_Log_Ex:              procTbsi_Get_TCG_Log_Ex,
+	Tbsi_Is_Tpm_Present:              procTbsi_Is_Tpm_Present,
+	Tbsi_Physical_Presence_Command:   procTbsi_Physical_Presence_Command,
+	Tbsi_Revoke_Attestation:          procTbsi_Revoke_Attestation,
+	Tbsi_Tpm_Vendor_Maintenance_Mode: procTbsi_Tpm_Vendor_Maintenance_Mode,
+	Tbsip_Cancel_Commands:            procTbsip_Cancel_Commands,
+	Tbsip_Context_Close:              procTbsip_Context_Close,
+	Tbsip_Submit_Command:             procTbsip_Submit_Command,
+}
+
 // GetDeviceID calls tbs!GetDeviceID.
 func GetDeviceID(pbWindowsAIK []byte, pcbResult *uint32, pfProtectedByTPM *foundation.BOOL) error {
 	var _pbWindowsAIK *byte

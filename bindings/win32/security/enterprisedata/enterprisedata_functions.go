@@ -35,6 +35,42 @@ var (
 	procSrpSetTokenEnterpriseId                = modsrpapi.NewProc("SrpSetTokenEnterpriseId")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	ProtectFileToEnterpriseIdentity        *win32.Proc
+	SrpCloseThreadNetworkContext           *win32.Proc
+	SrpCreateThreadNetworkContext          *win32.Proc
+	SrpDisablePermissiveModeFileEncryption *win32.Proc
+	SrpDoesPolicyAllowAppExecution         *win32.Proc
+	SrpEnablePermissiveModeFileEncryption  *win32.Proc
+	SrpGetEnterpriseIds                    *win32.Proc
+	SrpGetEnterprisePolicy                 *win32.Proc
+	SrpHostingInitialize                   *win32.Proc
+	SrpHostingTerminate                    *win32.Proc
+	SrpIsAllowed                           *win32.Proc
+	SrpIsTokenService                      *win32.Proc
+	SrpSetTokenEnterpriseId                *win32.Proc
+	UnprotectFile                          *win32.Proc
+}{
+	ProtectFileToEnterpriseIdentity:        procProtectFileToEnterpriseIdentity,
+	SrpCloseThreadNetworkContext:           procSrpCloseThreadNetworkContext,
+	SrpCreateThreadNetworkContext:          procSrpCreateThreadNetworkContext,
+	SrpDisablePermissiveModeFileEncryption: procSrpDisablePermissiveModeFileEncryption,
+	SrpDoesPolicyAllowAppExecution:         procSrpDoesPolicyAllowAppExecution,
+	SrpEnablePermissiveModeFileEncryption:  procSrpEnablePermissiveModeFileEncryption,
+	SrpGetEnterpriseIds:                    procSrpGetEnterpriseIds,
+	SrpGetEnterprisePolicy:                 procSrpGetEnterprisePolicy,
+	SrpHostingInitialize:                   procSrpHostingInitialize,
+	SrpHostingTerminate:                    procSrpHostingTerminate,
+	SrpIsAllowed:                           procSrpIsAllowed,
+	SrpIsTokenService:                      procSrpIsTokenService,
+	SrpSetTokenEnterpriseId:                procSrpSetTokenEnterpriseId,
+	UnprotectFile:                          procUnprotectFile,
+}
+
 // ProtectFileToEnterpriseIdentity calls efswrt!ProtectFileToEnterpriseIdentity.
 // https://learn.microsoft.com/windows/win32/api/edpwin32/nf-edpwin32-protectfiletoenterpriseidentity
 // Minimum OS: windows10.0.10240.

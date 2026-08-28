@@ -48,6 +48,66 @@ var (
 	procPstValidate                         = modcertpoleng.NewProc("PstValidate")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CertSrvBackupClose                  *win32.Proc
+	CertSrvBackupEnd                    *win32.Proc
+	CertSrvBackupFree                   *win32.Proc
+	CertSrvBackupGetBackupLogsW         *win32.Proc
+	CertSrvBackupGetDatabaseNamesW      *win32.Proc
+	CertSrvBackupGetDynamicFileListW    *win32.Proc
+	CertSrvBackupOpenFileW              *win32.Proc
+	CertSrvBackupPrepareW               *win32.Proc
+	CertSrvBackupRead                   *win32.Proc
+	CertSrvBackupTruncateLogs           *win32.Proc
+	CertSrvIsServerOnlineW              *win32.Proc
+	CertSrvRestoreEnd                   *win32.Proc
+	CertSrvRestoreGetDatabaseLocationsW *win32.Proc
+	CertSrvRestorePrepareW              *win32.Proc
+	CertSrvRestoreRegisterComplete      *win32.Proc
+	CertSrvRestoreRegisterThroughFile   *win32.Proc
+	CertSrvRestoreRegisterW             *win32.Proc
+	CertSrvServerControlW               *win32.Proc
+	PstAcquirePrivateKey                *win32.Proc
+	PstGetCertificateChain              *win32.Proc
+	PstGetCertificates                  *win32.Proc
+	PstGetTrustAnchors                  *win32.Proc
+	PstGetTrustAnchorsEx                *win32.Proc
+	PstGetUserNameForCertificate        *win32.Proc
+	PstMapCertificate                   *win32.Proc
+	PstValidate                         *win32.Proc
+}{
+	CertSrvBackupClose:                  procCertSrvBackupClose,
+	CertSrvBackupEnd:                    procCertSrvBackupEnd,
+	CertSrvBackupFree:                   procCertSrvBackupFree,
+	CertSrvBackupGetBackupLogsW:         procCertSrvBackupGetBackupLogsW,
+	CertSrvBackupGetDatabaseNamesW:      procCertSrvBackupGetDatabaseNamesW,
+	CertSrvBackupGetDynamicFileListW:    procCertSrvBackupGetDynamicFileListW,
+	CertSrvBackupOpenFileW:              procCertSrvBackupOpenFileW,
+	CertSrvBackupPrepareW:               procCertSrvBackupPrepareW,
+	CertSrvBackupRead:                   procCertSrvBackupRead,
+	CertSrvBackupTruncateLogs:           procCertSrvBackupTruncateLogs,
+	CertSrvIsServerOnlineW:              procCertSrvIsServerOnlineW,
+	CertSrvRestoreEnd:                   procCertSrvRestoreEnd,
+	CertSrvRestoreGetDatabaseLocationsW: procCertSrvRestoreGetDatabaseLocationsW,
+	CertSrvRestorePrepareW:              procCertSrvRestorePrepareW,
+	CertSrvRestoreRegisterComplete:      procCertSrvRestoreRegisterComplete,
+	CertSrvRestoreRegisterThroughFile:   procCertSrvRestoreRegisterThroughFile,
+	CertSrvRestoreRegisterW:             procCertSrvRestoreRegisterW,
+	CertSrvServerControlW:               procCertSrvServerControlW,
+	PstAcquirePrivateKey:                procPstAcquirePrivateKey,
+	PstGetCertificateChain:              procPstGetCertificateChain,
+	PstGetCertificates:                  procPstGetCertificates,
+	PstGetTrustAnchors:                  procPstGetTrustAnchors,
+	PstGetTrustAnchorsEx:                procPstGetTrustAnchorsEx,
+	PstGetUserNameForCertificate:        procPstGetUserNameForCertificate,
+	PstMapCertificate:                   procPstMapCertificate,
+	PstValidate:                         procPstValidate,
+}
+
 // CertSrvBackupClose calls certadm!CertSrvBackupClose.
 // https://learn.microsoft.com/windows/win32/api/certbcli/nf-certbcli-certsrvbackupclose
 // Minimum OS: windowsserver2003.

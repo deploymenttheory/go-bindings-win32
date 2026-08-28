@@ -33,6 +33,38 @@ var (
 	procCryptSIPVerifyIndirectData                = modWINTRUST.NewProc("CryptSIPVerifyIndirectData")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	CryptSIPAddProvider                       *win32.Proc
+	CryptSIPCreateIndirectData                *win32.Proc
+	CryptSIPGetCaps                           *win32.Proc
+	CryptSIPGetSealedDigest                   *win32.Proc
+	CryptSIPGetSignedDataMsg                  *win32.Proc
+	CryptSIPLoad                              *win32.Proc
+	CryptSIPPutSignedDataMsg                  *win32.Proc
+	CryptSIPRemoveProvider                    *win32.Proc
+	CryptSIPRemoveSignedDataMsg               *win32.Proc
+	CryptSIPRetrieveSubjectGuid               *win32.Proc
+	CryptSIPRetrieveSubjectGuidForCatalogFile *win32.Proc
+	CryptSIPVerifyIndirectData                *win32.Proc
+}{
+	CryptSIPAddProvider:                       procCryptSIPAddProvider,
+	CryptSIPCreateIndirectData:                procCryptSIPCreateIndirectData,
+	CryptSIPGetCaps:                           procCryptSIPGetCaps,
+	CryptSIPGetSealedDigest:                   procCryptSIPGetSealedDigest,
+	CryptSIPGetSignedDataMsg:                  procCryptSIPGetSignedDataMsg,
+	CryptSIPLoad:                              procCryptSIPLoad,
+	CryptSIPPutSignedDataMsg:                  procCryptSIPPutSignedDataMsg,
+	CryptSIPRemoveProvider:                    procCryptSIPRemoveProvider,
+	CryptSIPRemoveSignedDataMsg:               procCryptSIPRemoveSignedDataMsg,
+	CryptSIPRetrieveSubjectGuid:               procCryptSIPRetrieveSubjectGuid,
+	CryptSIPRetrieveSubjectGuidForCatalogFile: procCryptSIPRetrieveSubjectGuidForCatalogFile,
+	CryptSIPVerifyIndirectData:                procCryptSIPVerifyIndirectData,
+}
+
 // CryptSIPAddProvider calls CRYPT32!CryptSIPAddProvider.
 // https://learn.microsoft.com/windows/win32/api/mssip/nf-mssip-cryptsipaddprovider
 // Minimum OS: windows5.1.2600.

@@ -27,6 +27,30 @@ var (
 	procRegisterHelper         = modNETSH.NewProc("RegisterHelper")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	MatchEnumTag           *win32.Proc
+	MatchToken             *win32.Proc
+	PreprocessCommand      *win32.Proc
+	PrintError             *win32.Proc
+	PrintMessage           *win32.Proc
+	PrintMessageFromModule *win32.Proc
+	RegisterContext        *win32.Proc
+	RegisterHelper         *win32.Proc
+}{
+	MatchEnumTag:           procMatchEnumTag,
+	MatchToken:             procMatchToken,
+	PreprocessCommand:      procPreprocessCommand,
+	PrintError:             procPrintError,
+	PrintMessage:           procPrintMessage,
+	PrintMessageFromModule: procPrintMessageFromModule,
+	RegisterContext:        procRegisterContext,
+	RegisterHelper:         procRegisterHelper,
+}
+
 // MatchEnumTag calls NETSH!MatchEnumTag.
 // https://learn.microsoft.com/windows/win32/api/netsh/nf-netsh-matchenumtag
 // Minimum OS: windows5.1.2600.

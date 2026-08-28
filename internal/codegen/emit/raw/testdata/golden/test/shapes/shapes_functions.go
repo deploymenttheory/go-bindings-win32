@@ -42,6 +42,60 @@ var (
 	procValueLastErr    = modTEST.NewProc("ValueLastErr")
 )
 
+// Procs exposes this package's lazily resolved exports for availability
+// probing: Procs.<Function>.Find() reports nil, or the *win32.ProcError a
+// call to <Function> would panic with on this system (an export missing from
+// this Windows build, or a DLL that is not installed).
+var Procs = struct {
+	BoolIn          *win32.Proc
+	ByteBuffer      *win32.Proc
+	CallbackParam   *win32.Proc
+	ComOut          *win32.Proc
+	EnumParam       *win32.Proc
+	FpairParam      *win32.Proc
+	FreeTest        *win32.Proc
+	HandleOpen      *win32.Proc
+	InOutString     *win32.Proc
+	OptionalStringW *win32.Proc
+	PtrRet          *win32.Proc
+	RequiredString  *win32.Proc
+	ReservedParam   *win32.Proc
+	RetValBool      *win32.Proc
+	RetValHR        *win32.Proc
+	RetValVoid      *win32.Proc
+	RiidPair        *win32.Proc
+	ShadowParam     *win32.Proc
+	SliceParam      *win32.Proc
+	SmallStruct     *win32.Proc
+	TakenW          *win32.Proc
+	UseOther        *win32.Proc
+	ValueLastErr    *win32.Proc
+}{
+	BoolIn:          procBoolIn,
+	ByteBuffer:      procByteBuffer,
+	CallbackParam:   procCallbackParam,
+	ComOut:          procComOut,
+	EnumParam:       procEnumParam,
+	FpairParam:      procFpairParam,
+	FreeTest:        procFreeTest,
+	HandleOpen:      procHandleOpen,
+	InOutString:     procInOutString,
+	OptionalStringW: procOptionalStringW,
+	PtrRet:          procPtrRet,
+	RequiredString:  procRequiredString,
+	ReservedParam:   procReservedParam,
+	RetValBool:      procRetValBool,
+	RetValHR:        procRetValHR,
+	RetValVoid:      procRetValVoid,
+	RiidPair:        procRiidPair,
+	ShadowParam:     procShadowParam,
+	SliceParam:      procSliceParam,
+	SmallStruct:     procSmallStruct,
+	TakenW:          procTakenW,
+	UseOther:        procUseOther,
+	ValueLastErr:    procValueLastErr,
+}
+
 // BoolIn calls TEST!BoolIn.
 func BoolIn(flag bool) bool {
 	_flag := win32.Bool32(flag)

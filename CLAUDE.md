@@ -68,7 +68,8 @@ This is a **code generator** that reads Microsoft's `Windows.Win32.winmd`
 `Microsoft.Windows.SDK.Win32Metadata` NuGet package) and emits Go bindings for
 the Win32 API. It mirrors the architecture of the sibling
 `go-bindings-macosplatform` generator; the design rationale and milestones live
-in [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md).
+in the git history (the original implementation plan has been superseded by
+this file).
 
 ```
 Windows.Win32.winmd → .w32meta.json (IR) → Go source

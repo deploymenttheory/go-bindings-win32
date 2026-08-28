@@ -652,8 +652,8 @@ func returnConversion(resolved typemap.Resolved) string {
 
 // functionComments assembles the doc comment lines.
 func functionComments(function *win32meta.Function, goName string) []string {
-	lines := []string{fmt.Sprintf("%s calls %s!%s.", goName, strings.TrimSuffix(function.DLL, ".dll"), exportOf(function))}
-	return append(lines, availabilityComments(function)...)
+	return append([]string{fmt.Sprintf("%s calls %s!%s.", goName, strings.TrimSuffix(function.DLL, ".dll"), exportOf(function))},
+		availabilityComments(function)...)
 }
 
 // availabilityComments renders the doc link and minimum-OS lines.

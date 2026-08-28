@@ -5,17 +5,18 @@
 [![Go Version](https://img.shields.io/github/go-mod/go-version/deploymenttheory/go-bindings-win32)](https://go.dev/)
 [![Release](https://img.shields.io/github/v/release/deploymenttheory/go-bindings-win32)](https://github.com/deploymenttheory/go-bindings-win32/releases)
 [![codecov](https://codecov.io/gh/deploymenttheory/go-bindings-win32/graph/badge.svg)](https://codecov.io/gh/deploymenttheory/go-bindings-win32)
-![Status: GA](https://img.shields.io/badge/status-GA-green)
+![Status: pre-v1](https://img.shields.io/badge/status-pre--v1-orange)
 
 Idiomatic Go bindings for the **Win32 API**, generated from Microsoft's
 [win32metadata](https://github.com/microsoft/win32metadata) — the same
-metadata Microsoft's own C#/Rust projections build on. The full surface,
-minus only a small tracked set of constructs that can't be represented
-faithfully (see [Status](#status--contributing)), as Go you can actually
-enjoy calling: Go strings, Go errors, Go slices, and typed COM interfaces.
+metadata Microsoft's own C#/Rust projections build on. The full surface —
+every function and 99.9% of COM methods; the exact numbers, and what the
+remaining diagnostics mean, are in [`docs/COVERAGE.md`](docs/COVERAGE.md) —
+as Go you can actually enjoy calling: Go strings, Go errors, Go slices, and
+typed COM interfaces.
 
-Today that's **324 packages**: roughly **17,700 functions**, **43,700 COM
-methods**, and **16,500 structs**.
+Today that's **324 packages**: **18,278 functions**, **46,326 COM methods**,
+and **15,315 structs** (plus their nested types).
 
 ```go
 //go:build windows
@@ -102,14 +103,15 @@ func countNodes(document []byte) (int, error) {
 `golang.org/x/sys/windows` is hand-curated and covers a small slice of Win32.
 This project generates the **whole** surface from the metadata — kept honest
 by a regenerate-and-diff gate, a diagnostics ratchet, and live round-trip
-tests, with generated ABI assertions checking the layout of ~14,000 structs —
+tests, with generated ABI assertions checking the size and every field offset of
+all ~13,900 emitted structs —
 so the coverage is broad and the mapping is faithful.
 
 ## One tree
 
 | Package | Import | What you get |
 |---|---|---|
-| **Bindings** | `bindings/win32/<namespace>` | The full typed surface — structs, enums, constants, COM interfaces — with idiomatic-shaped calls: Go `string` for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to returns, `Close<Handle>` helpers (from `[RAIIFree]`), and COM interfaces as method-bearing vtable structs. Each function dispatches through `syscall` inline — no wrapper layer. |
+| **Bindings** | `bindings/win32/<namespace>` | The full typed surface — structs, enums, constants, COM interfaces — with idiomatic-shaped calls: Go `string` for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to returns, `Close<Handle>` helpers (from `[RAIIFree]`), and COM interfaces as method-bearing vtable structs. The shaping is inlined into each function: nothing sits between you and `syscall.SyscallN` (or `win32.Call`, the runtime's register-aware dispatch for floats and by-value structs). |
 | **Runtime** | `bindings/runtime/win32` | Shared helpers: `UTF16Ptr`, `UTF16ToString`, `GUID`, `Bool32`, the typed `HRESULT` error (`ErrIfFailed`, `S_OK`/`S_FALSE`/`E_*` sentinels, `errors.Is` interop), and the System32-only loader (`ProcError`, `ErrProcNotFound`/`ErrDLLNotFound`). |
 
 Everything lives in one tree: import `bindings/win32/<namespace>` and the runtime.
@@ -175,9 +177,9 @@ Runnable programs, each with its own README, under [`examples/`](examples):
   self-sized structs, buffer ownership, handles
 - [Using COM interfaces](docs/com.md) — vtable structs, casting factory
   out-params, lifetime
-- [Implementation plan / architecture](docs/IMPLEMENTATION_PLAN.md) — how the
-  generator works
-- [`CLAUDE.md`](CLAUDE.md) — the as-built generator internals
+- [Coverage](docs/COVERAGE.md) — what is emitted, what is not, and why
+  (regenerated with the tree)
+- [`CLAUDE.md`](CLAUDE.md) — the as-built generator internals and pipeline
 
 ## How it's built
 
@@ -193,15 +195,43 @@ go run ./cmd/generate bindings  # IR → bindings/win32 (self-cleaning)
 Regeneration is byte-deterministic and gated in CI; a diagnostics **ratchet**
 fails the build if a change introduces any new degradation beyond the
 committed baseline; and a scheduled workflow opens a PR when Microsoft ships
-a new winmd. See [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md)
-for the full pipeline.
+a new winmd. See [`CLAUDE.md`](CLAUDE.md) for the full pipeline.
+
+## Known limitations
+
+- **Callbacks with floats.** Delegates are `uintptr` function pointers you
+  create with `syscall.NewCallback`, which cannot marshal floating-point
+  parameters or results ([golang/go#45300](https://github.com/golang/go/issues/45300))
+  and needs exactly one `uintptr`-sized result; the four such callbacks are
+  flagged in their doc comments. Every *call* shape — floats, by-value
+  structs, struct returns — is covered by the runtime's assembly-backed
+  `win32.Call` on both amd64 and arm64, without cgo.
+- **Architecture-specific struct layouts.** 231 structs (`CONTEXT`,
+  `IMAGEHLP_*`, …) have per-architecture layouts in the metadata; the amd64
+  layout is the one emitted, under the shared `amd64 || arm64` build tag.
+  They are listed in [`docs/COVERAGE.md`](docs/COVERAGE.md); treat them as
+  amd64-only until per-architecture emission lands. 386 is excluded
+  outright.
+- **Absent APIs panic.** An export missing from the running Windows build
+  (or a DLL that is not installed) has no address to call; the binding panics
+  with a `*win32.ProcError`. Probe with `pkg.Procs.<Function>.Find()` —
+  see [docs/errors.md](docs/errors.md#unavailable-apis-missing-exports).
+- **Header inlines.** The three `FORCEINLINE` pseudo-exports
+  (`GetCurrentProcessToken` and friends) are emitted from their `[Constant]`
+  metadata values, not dispatched.
+- **arm64 runs in CI as a cross-compile plus a Windows-on-ARM acceptance job
+  where the hosted runner is available; report anything the amd64 job cannot
+  catch.**
 
 ## Status & contributing
 
 The generator covers the flat Win32 surface and COM interfaces across all
-namespaces on amd64/arm64. Constructs that can't be faithfully represented
-(e.g. some packed structs, by-value struct/float parameters) are deliberately
-skipped rather than emitted wrong; these are tracked in
+namespaces on amd64/arm64. Every construct is emitted unless a diagnostic
+says why not — 567 of them today, most informational (`-W` names kept,
+architecture-specific layouts); the skips are 44 handle closers whose free
+function is ambiguous, 29 name collisions, 15 structs without an amd64
+layout and 3 struct-initializer constants. The full breakdown is in
+[`docs/COVERAGE.md`](docs/COVERAGE.md) and the set is ratcheted in
 `metadata/diagnostics-baseline.json`.
 
 Generated code (`bindings/`) is never hand-edited — fix the generator under

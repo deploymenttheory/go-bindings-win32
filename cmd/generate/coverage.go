@@ -40,7 +40,10 @@ var diagnosticClasses = []struct {
 	{"informational-success annotation not applied", false, regexp.MustCompile(`annotation not applied`)},
 }
 
-var notMarshalableType = regexp.MustCompile(`not marshalable \(([^)]+)\)`)
+var (
+	notMarshalableType = regexp.MustCompile(`not marshalable \(([^)]+)\)`)
+	archVariantStruct  = regexp.MustCompile(`^struct (\S+): emitting amd64 variant only`)
+)
 
 // writeCoverage renders the report to path.
 func writeCoverage(path, winmdVersion string, coverage []rawwin.NamespaceCoverage, diagnostics []string) error {
@@ -125,6 +128,22 @@ func writeCoverage(path, winmdVersion string, coverage []rawwin.NamespaceCoverag
 		})
 		for _, name := range types {
 			fmt.Fprintf(&b, "| `%s` | %d |\n", name, typeCounts[name])
+		}
+	}
+
+	var archVariants []string
+	for _, diagnostic := range diagnostics {
+		if m := archVariantStruct.FindStringSubmatch(diagnostic); m != nil {
+			archVariants = append(archVariants, m[1])
+		}
+	}
+	if len(archVariants) > 0 {
+		sort.Strings(archVariants)
+		b.WriteString("\n## Structs with architecture-specific layouts\n\n")
+		b.WriteString("The metadata declares more than one layout for these; the amd64 layout is\n")
+		b.WriteString("emitted under the shared `amd64 || arm64` build tag, so treat them as amd64-only.\n\n")
+		for _, name := range archVariants {
+			fmt.Fprintf(&b, "- `%s`\n", name)
 		}
 	}
 

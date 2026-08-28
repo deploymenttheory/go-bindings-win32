@@ -16,7 +16,8 @@ func TestStructRetMirrorsStructArg(t *testing.T) {
 		t.Errorf("8-byte round trip = %+v", got)
 	}
 	// Only the struct's own bytes are read; garbage above them is ignored.
-	if got := StructRet[coord](0xFFFF_FFFF_5678_1234); got != want {
+	var garbage uint64 = 0xFFFF_FFFF_5678_1234
+	if got := StructRet[coord](uintptr(garbage)); got != want {
 		t.Errorf("high garbage leaked: %+v", got)
 	}
 }

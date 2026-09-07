@@ -1267,6 +1267,9 @@ const KAGPROP_SPECIALCHARACTERS uint32 = 11
 const KAGPROP_STRINGFUNCTIONS uint32 = 20
 const KAGPROP_SYSTEMFUNCTIONS uint32 = 21
 const KAGPROP_TIMEDATEFUNCTIONS uint32 = 22
+
+var LIBID_SubscriptionMgr win32.GUID = win32.GUID{Data1: 0xabbe31d0, Data2: 0x6dae, Data3: 0x11d0, Data4: [8]byte{0xbe, 0xca, 0x00, 0xc0, 0x4f, 0xd9, 0x40, 0xbe}}
+
 const MAXNAME uint32 = 129
 const MAXNUMERICLEN uint32 = 16
 const MAXUSEVERITY uint32 = 18

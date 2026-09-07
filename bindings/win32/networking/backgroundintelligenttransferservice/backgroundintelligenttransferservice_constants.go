@@ -4,6 +4,10 @@
 
 package backgroundintelligenttransferservice
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
 const BG_COPY_FILE_ALL uint32 = 15
 const BG_COPY_FILE_DACL uint32 = 4
 const BG_COPY_FILE_GROUP uint32 = 2
@@ -186,6 +190,19 @@ const BITS_MC_JOB_TAKE_OWNERSHIP int32 = -2145828860
 const BITS_MC_PEERCACHING_PORT int32 = -2145828854
 const BITS_MC_STATE_FILE_CORRUPT int32 = -2145828857
 const BITS_MC_WSD_PORT int32 = -2145828853
+
+var LIBID_BackgroundCopyManager win32.GUID = win32.GUID{Data1: 0x4991d34b, Data2: 0x80a1, Data3: 0x4291, Data4: [8]byte{0x83, 0xb6, 0x33, 0x28, 0x36, 0x6b, 0x90, 0x97}}
+var LIBID_BackgroundCopyManager10_1 win32.GUID = win32.GUID{Data1: 0x4bd3e4e1, Data2: 0x7bd4, Data3: 0x4a2b, Data4: [8]byte{0x99, 0x64, 0x49, 0x64, 0x00, 0xde, 0x51, 0x93}}
+var LIBID_BackgroundCopyManager10_2 win32.GUID = win32.GUID{Data1: 0x4575438f, Data2: 0xa6c8, Data3: 0x4976, Data4: [8]byte{0xb0, 0xfe, 0x2f, 0x26, 0xb8, 0x0d, 0x95, 0x9e}}
+var LIBID_BackgroundCopyManager10_3 win32.GUID = win32.GUID{Data1: 0x5fd42ad5, Data2: 0xc04e, Data3: 0x4d36, Data4: [8]byte{0xad, 0xc7, 0xe0, 0x8f, 0xf1, 0x57, 0x37, 0xad}}
+var LIBID_BackgroundCopyManager1_5 win32.GUID = win32.GUID{Data1: 0xf087771f, Data2: 0xd74f, Data3: 0x4c1a, Data4: [8]byte{0xbb, 0x8a, 0xe1, 0x6a, 0xca, 0x91, 0x24, 0xea}}
+var LIBID_BackgroundCopyManager2_0 win32.GUID = win32.GUID{Data1: 0x6d18ad12, Data2: 0xbde3, Data3: 0x4393, Data4: [8]byte{0xb3, 0x11, 0x09, 0x9c, 0x34, 0x6e, 0x6d, 0xf9}}
+var LIBID_BackgroundCopyManager2_5 win32.GUID = win32.GUID{Data1: 0x03ca98d6, Data2: 0xff5d, Data3: 0x49b8, Data4: [8]byte{0xab, 0xc6, 0x03, 0xdd, 0x84, 0x12, 0x70, 0x20}}
+var LIBID_BackgroundCopyManager3_0 win32.GUID = win32.GUID{Data1: 0x659cdea7, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
+var LIBID_BackgroundCopyManager4_0 win32.GUID = win32.GUID{Data1: 0xbb6df56b, Data2: 0xcace, Data3: 0x11dc, Data4: [8]byte{0x99, 0x92, 0x00, 0x19, 0xb9, 0x3a, 0x3a, 0x84}}
+var LIBID_BackgroundCopyManager5_0 win32.GUID = win32.GUID{Data1: 0x1ecca34c, Data2: 0xe88a, Data3: 0x44e3, Data4: [8]byte{0x8d, 0x6a, 0x89, 0x21, 0xbd, 0xe9, 0xe4, 0x52}}
+var LIBID_BackgroundCopyQMgr win32.GUID = win32.GUID{Data1: 0x69ad4aee, Data2: 0x51be, Data3: 0x439b, Data4: [8]byte{0xa9, 0x2c, 0x86, 0xae, 0x49, 0x0e, 0x8b, 0x30}}
+
 const QM_E_DOWNLOADER_UNAVAILABLE uint32 = 2164264963
 const QM_E_INVALID_STATE uint32 = 2164264961
 const QM_E_ITEM_NOT_FOUND uint32 = 2164264964

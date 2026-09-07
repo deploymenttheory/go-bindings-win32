@@ -130,6 +130,9 @@ const ISDB_SDTT_ALT_PID uint32 = 40
 const ISDB_SDTT_PID uint32 = 35
 const ISDB_SDTT_TID uint32 = 195
 const ISDB_ST_TID uint32 = 114
+
+var LIBID_Mpeg2DataLib win32.GUID = win32.GUID{Data1: 0xdbaf6c1b, Data2: 0xb6a4, Data3: 0x4898, Data4: [8]byte{0xae, 0x65, 0x20, 0x4f, 0x0d, 0x95, 0x09, 0xa1}}
+
 const MAX_COUNTRY_CODE_STRING uint32 = 3
 
 var MEDIASUBTYPE_CPFilters_Processed win32.GUID = win32.GUID{Data1: 0x46adbd28, Data2: 0x6fd0, Data3: 0x4796, Data4: [8]byte{0x93, 0xb2, 0x15, 0x5c, 0x51, 0xdc, 0x04, 0x8d}}

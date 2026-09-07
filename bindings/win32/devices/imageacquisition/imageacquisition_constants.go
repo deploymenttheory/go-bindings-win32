@@ -147,6 +147,9 @@ const LAMP_ERR uint32 = 2048
 const LANDSCAPE uint32 = 1
 const LANSCAPE uint32 = 1
 const LEFT_JUSTIFIED uint32 = 0
+
+var LIBID_WiaDevMgr win32.GUID = win32.GUID{Data1: 0xa1f4e726, Data2: 0x8cf1, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x92, 0x00, 0x60, 0x08, 0x1e, 0xd8, 0x11}}
+
 const LIGHT_SOURCE_DETECT_READY uint32 = 4
 const LIGHT_SOURCE_NEGATIVE uint32 = 4
 const LIGHT_SOURCE_POSITIVE uint32 = 2

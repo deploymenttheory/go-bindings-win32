@@ -4,4 +4,10 @@
 
 package datadeduplication
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
 const DEDUP_CHUNKLIB_MAX_CHUNKS_ENUM uint32 = 1024
+
+var LIBID_DedupDataPort win32.GUID = win32.GUID{Data1: 0x8f107207, Data2: 0x1829, Data3: 0x48b2, Data4: [8]byte{0xa6, 0x4b, 0xe6, 0x1f, 0x8e, 0x0d, 0x9a, 0xcb}}

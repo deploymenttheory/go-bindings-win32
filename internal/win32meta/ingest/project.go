@@ -233,6 +233,10 @@ func (in *Ingester) applyParamAttributes(param *win32meta.Param, target winmd.Co
 			if len(attr.Fixed) == 1 {
 				param.IidParamIndex = intValue(attr.Fixed[0])
 			}
+		case "AssociatedEnumAttribute":
+			if len(attr.Fixed) == 1 {
+				param.AssociatedEnum, _ = attr.Fixed[0].(string)
+			}
 		}
 	}
 }

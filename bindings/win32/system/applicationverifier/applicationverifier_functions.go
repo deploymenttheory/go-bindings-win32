@@ -32,7 +32,7 @@ var Procs = struct {
 
 // VerifierEnumerateResource calls verifier!VerifierEnumerateResource.
 // https://learn.microsoft.com/windows/win32/api/avrfsdk/nf-avrfsdk-verifierenumerateresource
-func VerifierEnumerateResource(Process foundation.HANDLE, Flags VERIFIER_ENUM_RESOURCE_FLAGS, ResourceType uint32, ResourceCallback AVRF_RESOURCE_ENUMERATE_CALLBACK, EnumerationContext unsafe.Pointer) uint32 {
+func VerifierEnumerateResource(Process foundation.HANDLE, Flags VERIFIER_ENUM_RESOURCE_FLAGS, ResourceType EAvrfResourceTypes, ResourceCallback AVRF_RESOURCE_ENUMERATE_CALLBACK, EnumerationContext unsafe.Pointer) uint32 {
 	r1, _, _ := syscall.SyscallN(procVerifierEnumerateResource.Addr(), uintptr(Process), uintptr(Flags), uintptr(ResourceType), uintptr(ResourceCallback), uintptr(unsafe.Pointer(EnumerationContext)))
 	return uint32(r1)
 }

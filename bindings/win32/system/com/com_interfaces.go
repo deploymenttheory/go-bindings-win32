@@ -949,7 +949,7 @@ func (self *IClientSecurity) QueryBlanket(pProxy *IUnknown, pAuthnSvc *uint32, p
 }
 
 // SetBlanket dispatches through IClientSecurity's vtable slot 4.
-func (self *IClientSecurity) SetBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName *string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
+func (self *IClientSecurity) SetBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName *string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities EOLE_AUTHENTICATION_CAPABILITIES) error {
 	_pServerPrincName := win32.UTF16PtrOrNil(pServerPrincName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProxy)), uintptr(dwAuthnSvc), uintptr(dwAuthzSvc), uintptr(unsafe.Pointer(_pServerPrincName)), uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(dwCapabilities))
 	return win32.ErrIfFailed(int32(r1))
@@ -2953,7 +2953,7 @@ func (self *IStream) CopyTo(pstm *IStream, cb uint64, pcbRead *uint64, pcbWritte
 }
 
 // Commit dispatches through IStream's vtable slot 8.
-func (self *IStream) Commit(grfCommitFlags uint32) error {
+func (self *IStream) Commit(grfCommitFlags STGC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(grfCommitFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2965,7 +2965,7 @@ func (self *IStream) Revert() error {
 }
 
 // LockRegion dispatches through IStream's vtable slot 10.
-func (self *IStream) LockRegion(libOffset uint64, cb uint64, dwLockType uint32) error {
+func (self *IStream) LockRegion(libOffset uint64, cb uint64, dwLockType LOCKTYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(libOffset), uintptr(cb), uintptr(dwLockType))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2977,7 +2977,7 @@ func (self *IStream) UnlockRegion(libOffset uint64, cb uint64, dwLockType uint32
 }
 
 // Stat dispatches through IStream's vtable slot 12.
-func (self *IStream) Stat(pstatstg *STATSTG, grfStatFlag uint32) error {
+func (self *IStream) Stat(pstatstg *STATSTG, grfStatFlag STATFLAG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstatstg)), uintptr(grfStatFlag))
 	return win32.ErrIfFailed(int32(r1))
 }

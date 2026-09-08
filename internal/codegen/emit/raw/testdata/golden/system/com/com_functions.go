@@ -15,6 +15,7 @@ var (
 )
 
 var (
+	procCoDeclined     = modOLE32.NewProc("CoDeclined")
 	procCoInitializeEx = modOLE32.NewProc("CoInitializeEx")
 )
 
@@ -23,14 +24,22 @@ var (
 // call to <Function> would panic with on this system (an export missing from
 // this Windows build, or a DLL that is not installed).
 var Procs = struct {
+	CoDeclined     *win32.Proc
 	CoInitializeEx *win32.Proc
 }{
+	CoDeclined:     procCoDeclined,
 	CoInitializeEx: procCoInitializeEx,
+}
+
+// CoDeclined calls OLE32!CoDeclined.
+func CoDeclined(narrow uint32, unknown uint32) error {
+	r1, _, _ := syscall.SyscallN(procCoDeclined.Addr(), uintptr(narrow), uintptr(unknown))
+	return win32.ErrIfFailed(int32(r1))
 }
 
 // CoInitializeEx calls OLE32!CoInitializeEx.
 // The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
-func CoInitializeEx(dwCoInit uint32) (win32.HRESULT, error) {
+func CoInitializeEx(dwCoInit COINIT) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(procCoInitializeEx.Addr(), 0, uintptr(dwCoInit))
 	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }

@@ -2609,7 +2609,7 @@ var specMFTEnum2 = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false), 
 // MFTEnum2 calls MFPlat!MFTEnum2.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftenum2
 // Minimum OS: windows10.0.10240.
-func MFTEnum2(guidCategory win32.GUID, Flags uint32, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pAttributes *IMFAttributes, pppMFTActivate ***IMFActivate, pnumMFTActivate *uint32) error {
+func MFTEnum2(guidCategory win32.GUID, Flags MFT_ENUM_FLAG, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pAttributes *IMFAttributes, pppMFTActivate ***IMFActivate, pnumMFTActivate *uint32) error {
 	r1, _, _ := win32.Call(procMFTEnum2.Addr(), specMFTEnum2, nil, uintptr(unsafe.Pointer(&guidCategory)), uintptr(Flags), uintptr(unsafe.Pointer(pInputType)), uintptr(unsafe.Pointer(pOutputType)), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pppMFTActivate)), uintptr(unsafe.Pointer(pnumMFTActivate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2619,7 +2619,7 @@ var specMFTEnumEx = &win32.Spec{Args: []win32.Arg{win32.Struct(16, 4, 0, false),
 // MFTEnumEx calls MFPlat!MFTEnumEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mftenumex
 // Minimum OS: windows6.1.
-func MFTEnumEx(guidCategory win32.GUID, Flags uint32, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pppMFTActivate ***IMFActivate, pnumMFTActivate *uint32) error {
+func MFTEnumEx(guidCategory win32.GUID, Flags MFT_ENUM_FLAG, pInputType *MFT_REGISTER_TYPE_INFO, pOutputType *MFT_REGISTER_TYPE_INFO, pppMFTActivate ***IMFActivate, pnumMFTActivate *uint32) error {
 	r1, _, _ := win32.Call(procMFTEnumEx.Addr(), specMFTEnumEx, nil, uintptr(unsafe.Pointer(&guidCategory)), uintptr(Flags), uintptr(unsafe.Pointer(pInputType)), uintptr(unsafe.Pointer(pOutputType)), uintptr(unsafe.Pointer(pppMFTActivate)), uintptr(unsafe.Pointer(pnumMFTActivate))).Tuple()
 	return win32.ErrIfFailed(int32(r1))
 }

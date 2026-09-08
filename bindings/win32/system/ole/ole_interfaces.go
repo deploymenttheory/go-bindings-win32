@@ -1252,7 +1252,7 @@ func (self *IOleClientSite) SaveObject() error {
 }
 
 // GetMoniker dispatches through IOleClientSite's vtable slot 4.
-func (self *IOleClientSite) GetMoniker(dwAssign uint32, dwWhichMoniker uint32, ppmk **systemcom.IMoniker) error {
+func (self *IOleClientSite) GetMoniker(dwAssign OLEGETMONIKER, dwWhichMoniker OLEWHICHMK, ppmk **systemcom.IMoniker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwAssign), uintptr(dwWhichMoniker), uintptr(unsafe.Pointer(ppmk)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1313,7 +1313,7 @@ type IOleContainer struct {
 var IID_IOleContainer = win32.GUID{Data1: 0x0000011b, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // EnumObjects dispatches through IOleContainer's vtable slot 4.
-func (self *IOleContainer) EnumObjects(grfFlags uint32, ppenum **systemcom.IEnumUnknown) error {
+func (self *IOleContainer) EnumObjects(grfFlags OLECONTF, ppenum **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(grfFlags), uintptr(unsafe.Pointer(ppenum)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1388,7 +1388,7 @@ func (self *IOleControlSite) GetExtendedControl(ppDisp **systemcom.IDispatch) er
 }
 
 // TransformCoords dispatches through IOleControlSite's vtable slot 6.
-func (self *IOleControlSite) TransformCoords(pPtlHimetric *foundation.POINTL, pPtfContainer *POINTF, dwFlags uint32) error {
+func (self *IOleControlSite) TransformCoords(pPtlHimetric *foundation.POINTL, pPtfContainer *POINTF, dwFlags XFORMCOORDS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPtlHimetric)), uintptr(unsafe.Pointer(pPtfContainer)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2040,19 +2040,19 @@ func (self *IOleObject) SetHostNames(szContainerApp string, szContainerObj strin
 }
 
 // Close dispatches through IOleObject's vtable slot 6.
-func (self *IOleObject) Close(dwSaveOption uint32) error {
+func (self *IOleObject) Close(dwSaveOption OLECLOSE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwSaveOption))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // SetMoniker dispatches through IOleObject's vtable slot 7.
-func (self *IOleObject) SetMoniker(dwWhichMoniker uint32, pmk *systemcom.IMoniker) error {
+func (self *IOleObject) SetMoniker(dwWhichMoniker OLEWHICHMK, pmk *systemcom.IMoniker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwWhichMoniker), uintptr(unsafe.Pointer(pmk)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMoniker dispatches through IOleObject's vtable slot 8.
-func (self *IOleObject) GetMoniker(dwAssign uint32, dwWhichMoniker uint32, ppmk **systemcom.IMoniker) error {
+func (self *IOleObject) GetMoniker(dwAssign OLEGETMONIKER, dwWhichMoniker OLEWHICHMK, ppmk **systemcom.IMoniker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwAssign), uintptr(dwWhichMoniker), uintptr(unsafe.Pointer(ppmk)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2101,7 +2101,7 @@ func (self *IOleObject) GetUserClassID(pClsid *win32.GUID) error {
 }
 
 // GetUserType dispatches through IOleObject's vtable slot 16.
-func (self *IOleObject) GetUserType(dwFormOfType uint32, pszUserType *foundation.PWSTR) error {
+func (self *IOleObject) GetUserType(dwFormOfType USERCLASSTYPE, pszUserType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwFormOfType), uintptr(unsafe.Pointer(pszUserType)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3025,7 +3025,7 @@ type IPropertyPageSite struct {
 var IID_IPropertyPageSite = win32.GUID{Data1: 0xb196b28c, Data2: 0xbab4, Data3: 0x101a, Data4: [8]byte{0xb6, 0x9c, 0x00, 0xaa, 0x00, 0x34, 0x1d, 0x07}}
 
 // OnStatusChange dispatches through IPropertyPageSite's vtable slot 3.
-func (self *IPropertyPageSite) OnStatusChange(dwFlags uint32) error {
+func (self *IPropertyPageSite) OnStatusChange(dwFlags PROPPAGESTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -3430,7 +3430,7 @@ type IVBGetControl struct {
 var IID_IVBGetControl = win32.GUID{Data1: 0x40a050a0, Data2: 0x3c31, Data3: 0x101b, Data4: [8]byte{0xa8, 0x2e, 0x08, 0x00, 0x2b, 0x2b, 0x23, 0x37}}
 
 // EnumControls dispatches through IVBGetControl's vtable slot 3.
-func (self *IVBGetControl) EnumControls(dwOleContF uint32, dwWhich ENUM_CONTROLS_WHICH_FLAGS, ppenumUnk **systemcom.IEnumUnknown) error {
+func (self *IVBGetControl) EnumControls(dwOleContF OLECONTF, dwWhich ENUM_CONTROLS_WHICH_FLAGS, ppenumUnk **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwOleContF), uintptr(dwWhich), uintptr(unsafe.Pointer(ppenumUnk)))
 	return win32.ErrIfFailed(int32(r1))
 }

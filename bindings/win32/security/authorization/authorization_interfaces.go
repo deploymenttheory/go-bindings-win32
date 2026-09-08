@@ -1672,7 +1672,7 @@ func (self *IAzClientContext3) Get_BizRuleInterfaces(ppBizRuleInterfaces **IAzBi
 }
 
 // GetGroups dispatches through IAzClientContext3's vtable slot 32.
-func (self *IAzClientContext3) GetGroups(bstrScopeName foundation.BSTR, ulOptions uint32, pGroupArray *systemvariant.VARIANT) error {
+func (self *IAzClientContext3) GetGroups(bstrScopeName foundation.BSTR, ulOptions AZ_PROP_CONSTANTS, pGroupArray *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrScopeName)), uintptr(ulOptions), uintptr(unsafe.Pointer(pGroupArray)))
 	return win32.ErrIfFailed(int32(r1))
 }

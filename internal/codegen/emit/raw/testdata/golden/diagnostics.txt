@@ -1,4 +1,6 @@
 [Test.Shapes] cycle break: Struct Test.Other.OTHER_STRUCT not representable without import
+function CoDeclined: param narrow associated enum TINY is uint8 against a uint32 parameter, left as uint32
+function CoDeclined: param unknown associated enum NOSUCHENUM unknown or ambiguous, left as uint32
 function FloatReturnLastErr: float32 return with SetLastError not marshalable, function skipped
 function GetCurrentThing: DLL "FORCEINLINE" is not a loadable module and no [Constant] value is recorded, skipped
 function Test.Shapes: bare name Taken taken, keeping TakenW

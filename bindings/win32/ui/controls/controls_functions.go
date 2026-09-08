@@ -1440,7 +1440,7 @@ func FlatSB_SetScrollPos(param0 foundation.HWND, code uiwindowsandmessaging.SCRO
 // FlatSB_SetScrollProp calls COMCTL32!FlatSB_SetScrollProp.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-flatsb_setscrollprop
 // Minimum OS: windows6.0.6000.
-func FlatSB_SetScrollProp(param0 foundation.HWND, index uint32, newValue uintptr, param3 bool) bool {
+func FlatSB_SetScrollProp(param0 foundation.HWND, index WSB_PROP, newValue uintptr, param3 bool) bool {
 	_param3 := win32.Bool32(param3)
 	r1, _, _ := syscall.SyscallN(procFlatSB_SetScrollProp.Addr(), uintptr(param0), uintptr(index), uintptr(newValue), uintptr(_param3))
 	return r1 != 0
@@ -1593,7 +1593,7 @@ func GetThemeBackgroundRegion(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32,
 // GetThemeBitmap calls UXTHEME!GetThemeBitmap.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemebitmap
 // Minimum OS: windows6.0.6000.
-func GetThemeBitmap(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, dwFlags GET_THEME_BITMAP_FLAGS, phBitmap *graphicsgdi.HBITMAP) error {
+func GetThemeBitmap(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, dwFlags GET_THEME_BITMAP_FLAGS, phBitmap *graphicsgdi.HBITMAP) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBitmap.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(dwFlags), uintptr(unsafe.Pointer(phBitmap)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1601,7 +1601,7 @@ func GetThemeBitmap(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32,
 // GetThemeBool calls UxTheme!GetThemeBool.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemebool
 // Minimum OS: windows6.0.6000.
-func GetThemeBool(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pfVal *foundation.BOOL) error {
+func GetThemeBool(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, pfVal *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeBool.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pfVal)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1609,7 +1609,7 @@ func GetThemeBool(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, p
 // GetThemeColor calls UXTHEME!GetThemeColor.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemecolor
 // Minimum OS: windows6.0.6000.
-func GetThemeColor(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pColor *foundation.COLORREF) error {
+func GetThemeColor(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, pColor *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeColor.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pColor)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1627,7 +1627,7 @@ func GetThemeDocumentationProperty(pszThemeName string, pszPropertyName string, 
 // GetThemeEnumValue calls UXTHEME!GetThemeEnumValue.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeenumvalue
 // Minimum OS: windows6.0.6000.
-func GetThemeEnumValue(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, piVal *int32) error {
+func GetThemeEnumValue(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, piVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeEnumValue.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(piVal)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1635,7 +1635,7 @@ func GetThemeEnumValue(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int
 // GetThemeFilename calls UxTheme!GetThemeFilename.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemefilename
 // Minimum OS: windows6.0.6000.
-func GetThemeFilename(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pszThemeFileName foundation.PWSTR, cchMaxBuffChars int32) error {
+func GetThemeFilename(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, pszThemeFileName foundation.PWSTR, cchMaxBuffChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeFilename.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pszThemeFileName)), uintptr(cchMaxBuffChars))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1651,7 +1651,7 @@ func GetThemeFont(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId in
 // GetThemeInt calls UXTHEME!GetThemeInt.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeint
 // Minimum OS: windows6.0.6000.
-func GetThemeInt(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, piVal *int32) error {
+func GetThemeInt(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, piVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeInt.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(piVal)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1659,7 +1659,7 @@ func GetThemeInt(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pi
 // GetThemeIntList calls UxTheme!GetThemeIntList.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeintlist
 // Minimum OS: windows6.0.6000.
-func GetThemeIntList(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pIntList *INTLIST) error {
+func GetThemeIntList(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, pIntList *INTLIST) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeIntList.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pIntList)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1667,7 +1667,7 @@ func GetThemeIntList(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32
 // GetThemeMargins calls UXTHEME!GetThemeMargins.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthememargins
 // Minimum OS: windows6.0.6000.
-func GetThemeMargins(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, prc *foundation.RECT, pMargins *MARGINS) error {
+func GetThemeMargins(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, prc *foundation.RECT, pMargins *MARGINS) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeMargins.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(prc)), uintptr(unsafe.Pointer(pMargins)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1675,7 +1675,7 @@ func GetThemeMargins(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId
 // GetThemeMetric calls UXTHEME!GetThemeMetric.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthememetric
 // Minimum OS: windows6.0.6000.
-func GetThemeMetric(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId int32, piVal *int32) error {
+func GetThemeMetric(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, piVal *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeMetric.Addr(), uintptr(hTheme), uintptr(hdc), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(piVal)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1691,7 +1691,7 @@ func GetThemePartSize(hTheme HTHEME, hdc graphicsgdi.HDC, iPartId int32, iStateI
 // GetThemePosition calls UXTHEME!GetThemePosition.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeposition
 // Minimum OS: windows6.0.6000.
-func GetThemePosition(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32, pPoint *foundation.POINT) error {
+func GetThemePosition(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, pPoint *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(procGetThemePosition.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pPoint)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1731,7 +1731,7 @@ func GetThemeString(hTheme HTHEME, iPartId int32, iStateId int32, iPropId int32,
 // GetThemeSysBool calls UxTheme!GetThemeSysBool.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemesysbool
 // Minimum OS: windows6.0.6000.
-func GetThemeSysBool(hTheme HTHEME, iBoolId int32) bool {
+func GetThemeSysBool(hTheme HTHEME, iBoolId THEME_PROPERTY_SYMBOL_ID) bool {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysBool.Addr(), uintptr(hTheme), uintptr(iBoolId))
 	return r1 != 0
 }
@@ -1747,7 +1747,7 @@ func GetThemeSysColor(hTheme HTHEME, iColorId int32) foundation.COLORREF {
 // GetThemeSysColorBrush calls UxTheme!GetThemeSysColorBrush.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemesyscolorbrush
 // Minimum OS: windows6.0.6000.
-func GetThemeSysColorBrush(hTheme HTHEME, iColorId int32) graphicsgdi.HBRUSH {
+func GetThemeSysColorBrush(hTheme HTHEME, iColorId THEME_PROPERTY_SYMBOL_ID) graphicsgdi.HBRUSH {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysColorBrush.Addr(), uintptr(hTheme), uintptr(iColorId))
 	return graphicsgdi.HBRUSH(r1)
 }
@@ -1755,7 +1755,7 @@ func GetThemeSysColorBrush(hTheme HTHEME, iColorId int32) graphicsgdi.HBRUSH {
 // GetThemeSysFont calls UxTheme!GetThemeSysFont.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemesysfont
 // Minimum OS: windows6.0.6000.
-func GetThemeSysFont(hTheme HTHEME, iFontId int32, plf *graphicsgdi.LOGFONTW) error {
+func GetThemeSysFont(hTheme HTHEME, iFontId THEME_PROPERTY_SYMBOL_ID, plf *graphicsgdi.LOGFONTW) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysFont.Addr(), uintptr(hTheme), uintptr(iFontId), uintptr(unsafe.Pointer(plf)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1763,7 +1763,7 @@ func GetThemeSysFont(hTheme HTHEME, iFontId int32, plf *graphicsgdi.LOGFONTW) er
 // GetThemeSysInt calls UxTheme!GetThemeSysInt.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemesysint
 // Minimum OS: windows6.0.6000.
-func GetThemeSysInt(hTheme HTHEME, iIntId int32, piValue *int32) error {
+func GetThemeSysInt(hTheme HTHEME, iIntId THEME_PROPERTY_SYMBOL_ID, piValue *int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysInt.Addr(), uintptr(hTheme), uintptr(iIntId), uintptr(unsafe.Pointer(piValue)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1779,7 +1779,7 @@ func GetThemeSysSize(hTheme HTHEME, iSizeId int32) int32 {
 // GetThemeSysString calls UxTheme!GetThemeSysString.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemesysstring
 // Minimum OS: windows6.0.6000.
-func GetThemeSysString(hTheme HTHEME, iStringId int32, pszStringBuff foundation.PWSTR, cchMaxStringChars int32) error {
+func GetThemeSysString(hTheme HTHEME, iStringId THEME_PROPERTY_SYMBOL_ID, pszStringBuff foundation.PWSTR, cchMaxStringChars int32) error {
 	r1, _, _ := syscall.SyscallN(procGetThemeSysString.Addr(), uintptr(hTheme), uintptr(iStringId), uintptr(unsafe.Pointer(pszStringBuff)), uintptr(cchMaxStringChars))
 	return win32.ErrIfFailed(int32(r1))
 }

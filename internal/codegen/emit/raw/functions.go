@@ -180,6 +180,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		resolvedParams[i] = g.mapper.GoType(&function.Params[i].Type, context, scratch)
 	}
 	retypeComOutParams(function.Params, resolvedParams, scratch, g.mapper.RuntimeImportPath())
+	g.retypeAssociatedEnums(meta.Namespace, "function "+function.Name, function.Params, resolvedParams, scratch)
 	slicePlans, elidedCounts := planSliceParams(function.Params, resolvedParams, true)
 
 	returnContext := context
@@ -868,6 +869,65 @@ func retypeComOutParams(params []win32meta.Param, resolved []typemap.Resolved, i
 		resolved[i] = typemap.Resolved{GoType: "**win32.IUnknown", Kind: typemap.KindPointer}
 		imports["win32"] = runtimeImportPath
 	}
+}
+
+// retypeAssociatedEnums replaces a plain-integer parameter with the enum the
+// metadata associates with it ([AssociatedEnum]). The winmd types flag
+// arguments like CoInitializeEx's dwCoInit as a bare UInt32 even though only
+// COINIT members are meaningful, which leaves the generated constants
+// unusable as arguments without a cast. The marshaling word is unchanged —
+// an enum argument is still a scalar — so this is purely a signature repair.
+//
+// The association names the enum without qualifying it, so it is resolved
+// through the registry's enum-owner index; an unknown, ambiguous or
+// differently sized enum is left alone with a diagnostic rather than guessed.
+func (g *Generator) retypeAssociatedEnums(namespace, context string, params []win32meta.Param, resolved []typemap.Resolved, imports typemap.ImportSet) {
+	for i := range params {
+		param := &params[i]
+		if param.AssociatedEnum == "" || param.IsReserved {
+			continue
+		}
+		// Only an untyped integer needs the association; anything the winmd
+		// already typed carries its own meaning.
+		if resolved[i].Kind != typemap.KindScalar || !isIntegerCount(resolved[i]) {
+			continue
+		}
+		owner := g.registry.EnumNamespace(param.AssociatedEnum)
+		if owner == "" {
+			g.diag("%s: param %s associated enum %s unknown or ambiguous, left as %s",
+				context, param.Name, param.AssociatedEnum, resolved[i].GoType)
+			continue
+		}
+		if base := g.registry.EnumBase(owner, param.AssociatedEnum); goScalarSize(base) != goScalarSize(resolved[i].GoType) {
+			g.diag("%s: param %s associated enum %s is %s against a %s parameter, left as %s",
+				context, param.Name, param.AssociatedEnum, base, resolved[i].GoType, resolved[i].GoType)
+			continue
+		}
+		enumRef := win32meta.TypeRef{Kind: "ApiRef", Api: owner, Name: param.AssociatedEnum, TargetKind: "Enum"}
+		enumResolved := g.mapper.GoType(&enumRef, typemap.Context{Namespace: namespace}, imports)
+		if enumResolved.Kind != typemap.KindEnum {
+			// A severed import edge degrades the enum to its base type,
+			// which is what the parameter already is.
+			continue
+		}
+		resolved[i] = enumResolved
+	}
+}
+
+// goScalarSize is the byte width of a Go integer type name, or 0 when it is
+// not one.
+func goScalarSize(goType string) int {
+	switch goType {
+	case "int8", "uint8", "byte", "bool":
+		return 1
+	case "int16", "uint16":
+		return 2
+	case "int32", "uint32":
+		return 4
+	case "int64", "uint64", "int", "uint", "uintptr":
+		return 8
+	}
+	return 0
 }
 
 // isBytePointer reports whether a metadata type is literally byte*.

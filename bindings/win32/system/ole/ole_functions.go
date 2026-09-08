@@ -1630,7 +1630,7 @@ func OleConvertOLESTREAMToIStorageEx2(polestm *systemcomstructuredstorage.OLESTR
 // OleCreate calls OLE32!OleCreate.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreate
 // Minimum OS: windows5.0.
-func OleCreate(rclsid *win32.GUID, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreate(rclsid *win32.GUID, riid *win32.GUID, renderopt OLERENDER, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleCreate.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(pFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1654,7 +1654,7 @@ func OleCreateEmbeddingHelper(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, 
 // OleCreateEx calls ole32!OleCreateEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreateex
 // Minimum OS: windows5.0.
-func OleCreateEx(rclsid *win32.GUID, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateEx(rclsid *win32.GUID, riid *win32.GUID, dwFlags OLECREATE, renderopt OLERENDER, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateEx.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1670,7 +1670,7 @@ func OleCreateFontIndirect(lpFontDesc *FONTDESC, riid *win32.GUID, lplpvObj **wi
 // OleCreateFromData calls OLE32!OleCreateFromData.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromdata
 // Minimum OS: windows5.0.
-func OleCreateFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt OLERENDER, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateFromData.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(pFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1678,7 +1678,7 @@ func OleCreateFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, ren
 // OleCreateFromDataEx calls ole32!OleCreateFromDataEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromdataex
 // Minimum OS: windows5.0.
-func OleCreateFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags OLECREATE, renderopt OLERENDER, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateFromDataEx.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1686,7 +1686,7 @@ func OleCreateFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, d
 // OleCreateFromFile calls OLE32!OleCreateFromFile.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromfile
 // Minimum OS: windows5.0.
-func OleCreateFromFile(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateFromFile(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, renderopt OLERENDER, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	_lpszFileName := win32.UTF16Ptr(lpszFileName)
 	r1, _, _ := syscall.SyscallN(procOleCreateFromFile.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(lpFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
@@ -1695,7 +1695,7 @@ func OleCreateFromFile(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID
 // OleCreateFromFileEx calls ole32!OleCreateFromFileEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromfileex
 // Minimum OS: windows5.0.
-func OleCreateFromFileEx(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateFromFileEx(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, dwFlags OLECREATE, renderopt OLERENDER, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	_lpszFileName := win32.UTF16Ptr(lpszFileName)
 	r1, _, _ := syscall.SyscallN(procOleCreateFromFileEx.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
@@ -1704,7 +1704,7 @@ func OleCreateFromFileEx(rclsid *win32.GUID, lpszFileName string, riid *win32.GU
 // OleCreateLink calls ole32!OleCreateLink.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelink
 // Minimum OS: windows5.0.
-func OleCreateLink(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateLink(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, renderopt OLERENDER, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateLink.Addr(), uintptr(unsafe.Pointer(pmkLinkSrc)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(lpFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1712,7 +1712,7 @@ func OleCreateLink(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, renderopt u
 // OleCreateLinkEx calls ole32!OleCreateLinkEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinkex
 // Minimum OS: windows5.0.
-func OleCreateLinkEx(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateLinkEx(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, dwFlags OLECREATE, renderopt OLERENDER, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateLinkEx.Addr(), uintptr(unsafe.Pointer(pmkLinkSrc)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1720,7 +1720,7 @@ func OleCreateLinkEx(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, dwFlags O
 // OleCreateLinkFromData calls OLE32!OleCreateLinkFromData.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinkfromdata
 // Minimum OS: windows5.0.
-func OleCreateLinkFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateLinkFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt OLERENDER, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateLinkFromData.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(pFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1728,7 +1728,7 @@ func OleCreateLinkFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID,
 // OleCreateLinkFromDataEx calls ole32!OleCreateLinkFromDataEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinkfromdataex
 // Minimum OS: windows5.0.
-func OleCreateLinkFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateLinkFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags OLECREATE, renderopt OLERENDER, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateLinkFromDataEx.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1736,7 +1736,7 @@ func OleCreateLinkFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUI
 // OleCreateLinkToFile calls OLE32!OleCreateLinkToFile.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinktofile
 // Minimum OS: windows5.0.
-func OleCreateLinkToFile(lpszFileName string, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateLinkToFile(lpszFileName string, riid *win32.GUID, renderopt OLERENDER, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	_lpszFileName := win32.UTF16Ptr(lpszFileName)
 	r1, _, _ := syscall.SyscallN(procOleCreateLinkToFile.Addr(), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(lpFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
@@ -1745,7 +1745,7 @@ func OleCreateLinkToFile(lpszFileName string, riid *win32.GUID, renderopt uint32
 // OleCreateLinkToFileEx calls ole32!OleCreateLinkToFileEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinktofileex
 // Minimum OS: windows5.0.
-func OleCreateLinkToFileEx(lpszFileName string, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateLinkToFileEx(lpszFileName string, riid *win32.GUID, dwFlags OLECREATE, renderopt OLERENDER, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	_lpszFileName := win32.UTF16Ptr(lpszFileName)
 	r1, _, _ := syscall.SyscallN(procOleCreateLinkToFileEx.Addr(), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
@@ -1788,7 +1788,7 @@ func OleCreatePropertyFrameIndirect(lpParams *OCPFIPARAMS) error {
 // OleCreateStaticFromData calls OLE32!OleCreateStaticFromData.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatestaticfromdata
 // Minimum OS: windows5.0.
-func OleCreateStaticFromData(pSrcDataObj *systemcom.IDataObject, iid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
+func OleCreateStaticFromData(pSrcDataObj *systemcom.IDataObject, iid *win32.GUID, renderopt OLERENDER, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateStaticFromData.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(iid)), uintptr(renderopt), uintptr(unsafe.Pointer(pFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -2046,7 +2046,7 @@ func OleRegGetMiscStatus(clsid *win32.GUID, dwAspect uint32, pdwStatus *uint32) 
 // OleRegGetUserType calls OLE32!OleRegGetUserType.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olereggetusertype
 // Minimum OS: windows5.0.
-func OleRegGetUserType(clsid *win32.GUID, dwFormOfType uint32, pszUserType *foundation.PWSTR) error {
+func OleRegGetUserType(clsid *win32.GUID, dwFormOfType USERCLASSTYPE, pszUserType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procOleRegGetUserType.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(dwFormOfType), uintptr(unsafe.Pointer(pszUserType)))
 	return win32.ErrIfFailed(int32(r1))
 }

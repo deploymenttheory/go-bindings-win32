@@ -1521,7 +1521,7 @@ type IDirectXVideoAccelerationService struct {
 var IID_IDirectXVideoAccelerationService = win32.GUID{Data1: 0xfc51a550, Data2: 0xd5e7, Data3: 0x11d9, Data4: [8]byte{0xaf, 0x55, 0x00, 0x05, 0x4e, 0x43, 0xff, 0x02}}
 
 // CreateSurface dispatches through IDirectXVideoAccelerationService's vtable slot 3.
-func (self *IDirectXVideoAccelerationService) CreateSurface(Width uint32, Height uint32, BackBuffers uint32, Format graphicsdirect3d9.D3DFORMAT, Pool graphicsdirect3d9.D3DPOOL, Usage uint32, DxvaType uint32, ppSurface **graphicsdirect3d9.IDirect3DSurface9, pSharedHandle *foundation.HANDLE) error {
+func (self *IDirectXVideoAccelerationService) CreateSurface(Width uint32, Height uint32, BackBuffers uint32, Format graphicsdirect3d9.D3DFORMAT, Pool graphicsdirect3d9.D3DPOOL, Usage uint32, DxvaType DXVA2_VideoRenderTargetType, ppSurface **graphicsdirect3d9.IDirect3DSurface9, pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(BackBuffers), uintptr(Format), uintptr(Pool), uintptr(Usage), uintptr(DxvaType), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1548,7 +1548,7 @@ func (self *IDirectXVideoDecoder) GetCreationParameters(pDeviceGuid *win32.GUID,
 }
 
 // GetBuffer dispatches through IDirectXVideoDecoder's vtable slot 5.
-func (self *IDirectXVideoDecoder) GetBuffer(BufferType uint32, ppBuffer *unsafe.Pointer, pBufferSize *uint32) error {
+func (self *IDirectXVideoDecoder) GetBuffer(BufferType DXVA2_BufferfType, ppBuffer *unsafe.Pointer, pBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(BufferType), uintptr(unsafe.Pointer(ppBuffer)), uintptr(unsafe.Pointer(pBufferSize)))
 	return win32.ErrIfFailed(int32(r1))
 }

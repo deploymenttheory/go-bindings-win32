@@ -2638,7 +2638,7 @@ func SymGetFileLineOffsets64(hProcess foundation.HANDLE, ModuleName foundation.P
 
 // SymGetHomeDirectory calls dbghelp!SymGetHomeDirectory.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgethomedirectory
-func SymGetHomeDirectory(type_ uint32, dir foundation.PSTR, size uintptr) (foundation.PSTR, error) {
+func SymGetHomeDirectory(type_ IMAGEHLP_HD_TYPE, dir foundation.PSTR, size uintptr) (foundation.PSTR, error) {
 	r1, _, e1 := syscall.SyscallN(procSymGetHomeDirectory.Addr(), uintptr(type_), uintptr(unsafe.Pointer(dir)), uintptr(size))
 	ret := foundation.PSTR(unsafe.Pointer(r1))
 	if ret == nil {
@@ -2649,7 +2649,7 @@ func SymGetHomeDirectory(type_ uint32, dir foundation.PSTR, size uintptr) (found
 
 // SymGetHomeDirectoryW calls dbghelp!SymGetHomeDirectoryW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgethomedirectoryw
-func SymGetHomeDirectoryW(type_ uint32, dir foundation.PWSTR, size uintptr) (foundation.PWSTR, error) {
+func SymGetHomeDirectoryW(type_ IMAGEHLP_HD_TYPE, dir foundation.PWSTR, size uintptr) (foundation.PWSTR, error) {
 	r1, _, e1 := syscall.SyscallN(procSymGetHomeDirectoryW.Addr(), uintptr(type_), uintptr(unsafe.Pointer(dir)), uintptr(size))
 	ret := foundation.PWSTR(unsafe.Pointer(r1))
 	if ret == nil {
@@ -3039,7 +3039,7 @@ func SymGetSymPrev64(hProcess foundation.HANDLE, Symbol *IMAGEHLP_SYMBOL64) erro
 
 // SymGetSymbolFile calls dbghelp!SymGetSymbolFile.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsymbolfile
-func SymGetSymbolFile(hProcess foundation.HANDLE, SymPath foundation.PSTR, ImageFile foundation.PSTR, Type uint32, SymbolFile foundation.PSTR, cSymbolFile uintptr, DbgFile foundation.PSTR, cDbgFile uintptr) error {
+func SymGetSymbolFile(hProcess foundation.HANDLE, SymPath foundation.PSTR, ImageFile foundation.PSTR, Type IMAGEHLP_SF_TYPE, SymbolFile foundation.PSTR, cSymbolFile uintptr, DbgFile foundation.PSTR, cDbgFile uintptr) error {
 	r1, _, e1 := syscall.SyscallN(procSymGetSymbolFile.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(SymPath)), uintptr(unsafe.Pointer(ImageFile)), uintptr(Type), uintptr(unsafe.Pointer(SymbolFile)), uintptr(cSymbolFile), uintptr(unsafe.Pointer(DbgFile)), uintptr(cDbgFile))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -3049,7 +3049,7 @@ func SymGetSymbolFile(hProcess foundation.HANDLE, SymPath foundation.PSTR, Image
 
 // SymGetSymbolFileW calls dbghelp!SymGetSymbolFileW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symgetsymbolfilew
-func SymGetSymbolFileW(hProcess foundation.HANDLE, SymPath *string, ImageFile string, Type uint32, SymbolFile foundation.PWSTR, cSymbolFile uintptr, DbgFile foundation.PWSTR, cDbgFile uintptr) error {
+func SymGetSymbolFileW(hProcess foundation.HANDLE, SymPath *string, ImageFile string, Type IMAGEHLP_SF_TYPE, SymbolFile foundation.PWSTR, cSymbolFile uintptr, DbgFile foundation.PWSTR, cDbgFile uintptr) error {
 	_SymPath := win32.UTF16PtrOrNil(SymPath)
 	_ImageFile := win32.UTF16Ptr(ImageFile)
 	r1, _, e1 := syscall.SyscallN(procSymGetSymbolFileW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_SymPath)), uintptr(unsafe.Pointer(_ImageFile)), uintptr(Type), uintptr(unsafe.Pointer(SymbolFile)), uintptr(cSymbolFile), uintptr(unsafe.Pointer(DbgFile)), uintptr(cDbgFile))

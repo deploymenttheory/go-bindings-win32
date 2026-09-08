@@ -867,7 +867,7 @@ func RegReplaceKeyA(hKey HKEY, lpSubKey foundation.PSTR, lpNewFile foundation.PS
 // RegRestoreKey calls ADVAPI32!RegRestoreKeyW.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-regrestorekeyw
 // Minimum OS: windows5.0.
-func RegRestoreKey(hKey HKEY, lpFile string, dwFlags uint32) foundation.WIN32_ERROR {
+func RegRestoreKey(hKey HKEY, lpFile string, dwFlags REG_RESTORE_KEY_FLAGS) foundation.WIN32_ERROR {
 	_lpFile := win32.UTF16Ptr(lpFile)
 	r1, _, _ := syscall.SyscallN(procRegRestoreKey.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpFile)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
@@ -876,7 +876,7 @@ func RegRestoreKey(hKey HKEY, lpFile string, dwFlags uint32) foundation.WIN32_ER
 // RegRestoreKeyA calls ADVAPI32!RegRestoreKeyA.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-regrestorekeya
 // Minimum OS: windows5.0.
-func RegRestoreKeyA(hKey HKEY, lpFile foundation.PSTR, dwFlags uint32) foundation.WIN32_ERROR {
+func RegRestoreKeyA(hKey HKEY, lpFile foundation.PSTR, dwFlags REG_RESTORE_KEY_FLAGS) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procRegRestoreKeyA.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(lpFile)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }

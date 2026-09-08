@@ -9,7 +9,7 @@ package win32meta
 
 // CurrentSchemaVersion is bumped when the IR changes incompatibly; readers
 // reject files with a different version so stale caches are re-ingested.
-const CurrentSchemaVersion = 3
+const CurrentSchemaVersion = 4
 
 // NamespaceMeta is the serialized unit: the full API surface of one
 // Windows.Win32 namespace.
@@ -95,6 +95,10 @@ type Param struct {
 	IidParamIndex int `json:"iid_param_index,omitempty"`
 	// FreeWith names the function that releases this out param's resource.
 	FreeWith string `json:"free_with,omitempty"`
+	// AssociatedEnum names the enum whose members this parameter accepts,
+	// for parameters the metadata types as a plain integer
+	// ([AssociatedEnum], e.g. CoInitializeEx's dwCoInit → COINIT).
+	AssociatedEnum string `json:"associated_enum,omitempty"`
 }
 
 // Function is a flat Win32 function exported from a DLL.

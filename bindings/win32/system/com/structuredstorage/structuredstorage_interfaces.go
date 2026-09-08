@@ -617,7 +617,7 @@ func (self *IStorage) CopyTo(rgiidExclude []win32.GUID, snbExclude **uint16, pst
 }
 
 // MoveElementTo dispatches through IStorage's vtable slot 8.
-func (self *IStorage) MoveElementTo(pwcsName string, pstgDest *IStorage, pwcsNewName string, grfFlags uint32) error {
+func (self *IStorage) MoveElementTo(pwcsName string, pstgDest *IStorage, pwcsNewName string, grfFlags STGMOVE) error {
 	_pwcsName := win32.UTF16Ptr(pwcsName)
 	_pwcsNewName := win32.UTF16Ptr(pwcsNewName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsName)), uintptr(unsafe.Pointer(pstgDest)), uintptr(unsafe.Pointer(_pwcsNewName)), uintptr(grfFlags))

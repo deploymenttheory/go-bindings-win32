@@ -238,7 +238,7 @@ func DwmGetUnmetTabRequirements(appWindow foundation.HWND, value *DWM_TAB_WINDOW
 // DwmGetWindowAttribute calls dwmapi!DwmGetWindowAttribute.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetwindowattribute
 // Minimum OS: windows6.0.6000.
-func DwmGetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute []byte) error {
+func DwmGetWindowAttribute(hwnd foundation.HWND, dwAttribute DWMWINDOWATTRIBUTE, pvAttribute []byte) error {
 	var _pvAttribute *byte
 	if len(pvAttribute) > 0 {
 		_pvAttribute = &pvAttribute[0]
@@ -331,7 +331,7 @@ func DwmSetPresentParameters(hwnd foundation.HWND, pPresentParams *DWM_PRESENT_P
 // DwmSetWindowAttribute calls dwmapi!DwmSetWindowAttribute.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmsetwindowattribute
 // Minimum OS: windows6.0.6000.
-func DwmSetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute []byte) error {
+func DwmSetWindowAttribute(hwnd foundation.HWND, dwAttribute DWMWINDOWATTRIBUTE, pvAttribute []byte) error {
 	var _pvAttribute *byte
 	if len(pvAttribute) > 0 {
 		_pvAttribute = &pvAttribute[0]

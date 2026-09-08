@@ -52,7 +52,7 @@ func (self *IWPCProviderConfig) Configure(hWnd foundation.HWND, bstrSID foundati
 }
 
 // RequestOverride dispatches through IWPCProviderConfig's vtable slot 5.
-func (self *IWPCProviderConfig) RequestOverride(hWnd foundation.HWND, bstrPath foundation.BSTR, dwFlags uint32) error {
+func (self *IWPCProviderConfig) RequestOverride(hWnd foundation.HWND, bstrPath foundation.BSTR, dwFlags WPCFLAG_RESTRICTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(bstrPath)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }

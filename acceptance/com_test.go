@@ -81,7 +81,7 @@ func TestComStreamRoundTrip(t *testing.T) {
 	}
 	defer again.Release()
 	var size com.STATSTG
-	if err := again.Stat(&size, uint32(com.STATFLAG_NONAME)); err != nil {
+	if err := again.Stat(&size, com.STATFLAG_NONAME); err != nil {
 		t.Fatalf("IStream.Stat through the QueryInterface[T] result: %v", err)
 	}
 	if size.CbSize != uint64(len(payload)) {

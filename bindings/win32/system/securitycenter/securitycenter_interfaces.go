@@ -37,7 +37,7 @@ type IWSCProductList struct {
 var IID_IWSCProductList = win32.GUID{Data1: 0x722a338c, Data2: 0x6e8e, Data3: 0x4e72, Data4: [8]byte{0xac, 0x27, 0x14, 0x17, 0xfb, 0x0c, 0x81, 0xc2}}
 
 // Initialize dispatches through IWSCProductList's vtable slot 7.
-func (self *IWSCProductList) Initialize(provider uint32) error {
+func (self *IWSCProductList) Initialize(provider WSC_SECURITY_PROVIDER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(provider))
 	return win32.ErrIfFailed(int32(r1))
 }

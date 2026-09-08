@@ -1870,7 +1870,7 @@ func MsiDoActionA(hInstall MSIHANDLE, szAction foundation.PSTR) uint32 {
 // MsiEnableLog calls msi!MsiEnableLogW.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienablelogw
 // Minimum OS: windows8.0.
-func MsiEnableLog(dwLogMode uint32, szLogFile *string, dwLogAttributes uint32) uint32 {
+func MsiEnableLog(dwLogMode INSTALLLOGMODE, szLogFile *string, dwLogAttributes uint32) uint32 {
 	_szLogFile := win32.UTF16PtrOrNil(szLogFile)
 	r1, _, _ := syscall.SyscallN(procMsiEnableLog.Addr(), uintptr(dwLogMode), uintptr(unsafe.Pointer(_szLogFile)), uintptr(dwLogAttributes))
 	return uint32(r1)
@@ -1879,7 +1879,7 @@ func MsiEnableLog(dwLogMode uint32, szLogFile *string, dwLogAttributes uint32) u
 // MsiEnableLogA calls msi!MsiEnableLogA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienableloga
 // Minimum OS: windows8.0.
-func MsiEnableLogA(dwLogMode uint32, szLogFile foundation.PSTR, dwLogAttributes uint32) uint32 {
+func MsiEnableLogA(dwLogMode INSTALLLOGMODE, szLogFile foundation.PSTR, dwLogAttributes uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiEnableLogA.Addr(), uintptr(dwLogMode), uintptr(unsafe.Pointer(szLogFile)), uintptr(dwLogAttributes))
 	return uint32(r1)
 }
@@ -1920,7 +1920,7 @@ func MsiEnumClientsA(szComponent foundation.PSTR, iProductIndex uint32, lpProduc
 // MsiEnumClientsEx calls msi!MsiEnumClientsExW.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumclientsexw
 // Minimum OS: windows8.0.
-func MsiEnumClientsEx(szComponent string, szUserSid *string, dwContext uint32, dwProductIndex uint32, szProductBuf foundation.PWSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PWSTR, pcchSid *uint32) uint32 {
+func MsiEnumClientsEx(szComponent string, szUserSid *string, dwContext MSIINSTALLCONTEXT, dwProductIndex uint32, szProductBuf foundation.PWSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PWSTR, pcchSid *uint32) uint32 {
 	_szComponent := win32.UTF16Ptr(szComponent)
 	_szUserSid := win32.UTF16PtrOrNil(szUserSid)
 	r1, _, _ := syscall.SyscallN(procMsiEnumClientsEx.Addr(), uintptr(unsafe.Pointer(_szComponent)), uintptr(unsafe.Pointer(_szUserSid)), uintptr(dwContext), uintptr(dwProductIndex), uintptr(unsafe.Pointer(szProductBuf)), uintptr(unsafe.Pointer(pdwInstalledContext)), uintptr(unsafe.Pointer(szSid)), uintptr(unsafe.Pointer(pcchSid)))
@@ -1930,7 +1930,7 @@ func MsiEnumClientsEx(szComponent string, szUserSid *string, dwContext uint32, d
 // MsiEnumClientsExA calls msi!MsiEnumClientsExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msienumclientsexa
 // Minimum OS: windows8.0.
-func MsiEnumClientsExA(szComponent foundation.PSTR, szUserSid foundation.PSTR, dwContext uint32, dwProductIndex uint32, szProductBuf foundation.PSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PSTR, pcchSid *uint32) uint32 {
+func MsiEnumClientsExA(szComponent foundation.PSTR, szUserSid foundation.PSTR, dwContext MSIINSTALLCONTEXT, dwProductIndex uint32, szProductBuf foundation.PSTR, pdwInstalledContext *MSIINSTALLCONTEXT, szSid foundation.PSTR, pcchSid *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiEnumClientsExA.Addr(), uintptr(unsafe.Pointer(szComponent)), uintptr(unsafe.Pointer(szUserSid)), uintptr(dwContext), uintptr(dwProductIndex), uintptr(unsafe.Pointer(szProductBuf)), uintptr(unsafe.Pointer(pdwInstalledContext)), uintptr(unsafe.Pointer(szSid)), uintptr(unsafe.Pointer(pcchSid)))
 	return uint32(r1)
 }
@@ -2883,7 +2883,7 @@ func MsiProcessMessage(hInstall MSIHANDLE, eMessageType INSTALLMESSAGE, hRecord 
 // MsiProvideAssembly calls msi!MsiProvideAssemblyW.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovideassemblyw
 // Minimum OS: windows8.0.
-func MsiProvideAssembly(szAssemblyName string, szAppContext *string, dwInstallMode uint32, dwAssemblyInfo MSIASSEMBLYINFO, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+func MsiProvideAssembly(szAssemblyName string, szAppContext *string, dwInstallMode INSTALLMODE, dwAssemblyInfo MSIASSEMBLYINFO, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
 	_szAssemblyName := win32.UTF16Ptr(szAssemblyName)
 	_szAppContext := win32.UTF16PtrOrNil(szAppContext)
 	r1, _, _ := syscall.SyscallN(procMsiProvideAssembly.Addr(), uintptr(unsafe.Pointer(_szAssemblyName)), uintptr(unsafe.Pointer(_szAppContext)), uintptr(dwInstallMode), uintptr(dwAssemblyInfo), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
@@ -2893,7 +2893,7 @@ func MsiProvideAssembly(szAssemblyName string, szAppContext *string, dwInstallMo
 // MsiProvideAssemblyA calls msi!MsiProvideAssemblyA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovideassemblya
 // Minimum OS: windows8.0.
-func MsiProvideAssemblyA(szAssemblyName foundation.PSTR, szAppContext foundation.PSTR, dwInstallMode uint32, dwAssemblyInfo MSIASSEMBLYINFO, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
+func MsiProvideAssemblyA(szAssemblyName foundation.PSTR, szAppContext foundation.PSTR, dwInstallMode INSTALLMODE, dwAssemblyInfo MSIASSEMBLYINFO, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiProvideAssemblyA.Addr(), uintptr(unsafe.Pointer(szAssemblyName)), uintptr(unsafe.Pointer(szAppContext)), uintptr(dwInstallMode), uintptr(dwAssemblyInfo), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
 	return uint32(r1)
 }
@@ -2901,7 +2901,7 @@ func MsiProvideAssemblyA(szAssemblyName foundation.PSTR, szAppContext foundation
 // MsiProvideComponent calls msi!MsiProvideComponentW.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidecomponentw
 // Minimum OS: windows8.0.
-func MsiProvideComponent(szProduct string, szFeature string, szComponent string, dwInstallMode uint32, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+func MsiProvideComponent(szProduct string, szFeature string, szComponent string, dwInstallMode INSTALLMODE, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
 	_szProduct := win32.UTF16Ptr(szProduct)
 	_szFeature := win32.UTF16Ptr(szFeature)
 	_szComponent := win32.UTF16Ptr(szComponent)
@@ -2912,7 +2912,7 @@ func MsiProvideComponent(szProduct string, szFeature string, szComponent string,
 // MsiProvideComponentA calls msi!MsiProvideComponentA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidecomponenta
 // Minimum OS: windows8.0.
-func MsiProvideComponentA(szProduct foundation.PSTR, szFeature foundation.PSTR, szComponent foundation.PSTR, dwInstallMode uint32, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
+func MsiProvideComponentA(szProduct foundation.PSTR, szFeature foundation.PSTR, szComponent foundation.PSTR, dwInstallMode INSTALLMODE, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiProvideComponentA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)), uintptr(unsafe.Pointer(szComponent)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
 	return uint32(r1)
 }
@@ -2920,7 +2920,7 @@ func MsiProvideComponentA(szProduct foundation.PSTR, szFeature foundation.PSTR, 
 // MsiProvideQualifiedComponent calls msi!MsiProvideQualifiedComponentW.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidequalifiedcomponentw
 // Minimum OS: windows8.0.
-func MsiProvideQualifiedComponent(szCategory string, szQualifier string, dwInstallMode uint32, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+func MsiProvideQualifiedComponent(szCategory string, szQualifier string, dwInstallMode INSTALLMODE, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
 	_szCategory := win32.UTF16Ptr(szCategory)
 	_szQualifier := win32.UTF16Ptr(szQualifier)
 	r1, _, _ := syscall.SyscallN(procMsiProvideQualifiedComponent.Addr(), uintptr(unsafe.Pointer(_szCategory)), uintptr(unsafe.Pointer(_szQualifier)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
@@ -2930,7 +2930,7 @@ func MsiProvideQualifiedComponent(szCategory string, szQualifier string, dwInsta
 // MsiProvideQualifiedComponentA calls msi!MsiProvideQualifiedComponentA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidequalifiedcomponenta
 // Minimum OS: windows8.0.
-func MsiProvideQualifiedComponentA(szCategory foundation.PSTR, szQualifier foundation.PSTR, dwInstallMode uint32, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
+func MsiProvideQualifiedComponentA(szCategory foundation.PSTR, szQualifier foundation.PSTR, dwInstallMode INSTALLMODE, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiProvideQualifiedComponentA.Addr(), uintptr(unsafe.Pointer(szCategory)), uintptr(unsafe.Pointer(szQualifier)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
 	return uint32(r1)
 }
@@ -2938,7 +2938,7 @@ func MsiProvideQualifiedComponentA(szCategory foundation.PSTR, szQualifier found
 // MsiProvideQualifiedComponentEx calls msi!MsiProvideQualifiedComponentExW.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidequalifiedcomponentexw
 // Minimum OS: windows8.0.
-func MsiProvideQualifiedComponentEx(szCategory string, szQualifier string, dwInstallMode uint32, szProduct *string, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
+func MsiProvideQualifiedComponentEx(szCategory string, szQualifier string, dwInstallMode INSTALLMODE, szProduct *string, lpPathBuf foundation.PWSTR, pcchPathBuf *uint32) uint32 {
 	_szCategory := win32.UTF16Ptr(szCategory)
 	_szQualifier := win32.UTF16Ptr(szQualifier)
 	_szProduct := win32.UTF16PtrOrNil(szProduct)
@@ -2949,7 +2949,7 @@ func MsiProvideQualifiedComponentEx(szCategory string, szQualifier string, dwIns
 // MsiProvideQualifiedComponentExA calls msi!MsiProvideQualifiedComponentExA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiprovidequalifiedcomponentexa
 // Minimum OS: windows8.0.
-func MsiProvideQualifiedComponentExA(szCategory foundation.PSTR, szQualifier foundation.PSTR, dwInstallMode uint32, szProduct foundation.PSTR, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
+func MsiProvideQualifiedComponentExA(szCategory foundation.PSTR, szQualifier foundation.PSTR, dwInstallMode INSTALLMODE, szProduct foundation.PSTR, lpPathBuf foundation.PSTR, pcchPathBuf *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiProvideQualifiedComponentExA.Addr(), uintptr(unsafe.Pointer(szCategory)), uintptr(unsafe.Pointer(szQualifier)), uintptr(dwInstallMode), uintptr(unsafe.Pointer(szProduct)), 0, 0, uintptr(unsafe.Pointer(lpPathBuf)), uintptr(unsafe.Pointer(pcchPathBuf)))
 	return uint32(r1)
 }
@@ -3136,7 +3136,7 @@ func MsiRecordSetStringA(hRecord MSIHANDLE, iField uint32, szValue foundation.PS
 // MsiReinstallFeature calls msi!MsiReinstallFeatureW.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msireinstallfeaturew
 // Minimum OS: windows8.0.
-func MsiReinstallFeature(szProduct string, szFeature string, dwReinstallMode uint32) uint32 {
+func MsiReinstallFeature(szProduct string, szFeature string, dwReinstallMode REINSTALLMODE) uint32 {
 	_szProduct := win32.UTF16Ptr(szProduct)
 	_szFeature := win32.UTF16Ptr(szFeature)
 	r1, _, _ := syscall.SyscallN(procMsiReinstallFeature.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(_szFeature)), uintptr(dwReinstallMode))
@@ -3146,7 +3146,7 @@ func MsiReinstallFeature(szProduct string, szFeature string, dwReinstallMode uin
 // MsiReinstallFeatureA calls msi!MsiReinstallFeatureA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msireinstallfeaturea
 // Minimum OS: windows8.0.
-func MsiReinstallFeatureA(szProduct foundation.PSTR, szFeature foundation.PSTR, dwReinstallMode uint32) uint32 {
+func MsiReinstallFeatureA(szProduct foundation.PSTR, szFeature foundation.PSTR, dwReinstallMode REINSTALLMODE) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiReinstallFeatureA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(szFeature)), uintptr(dwReinstallMode))
 	return uint32(r1)
 }
@@ -3154,7 +3154,7 @@ func MsiReinstallFeatureA(szProduct foundation.PSTR, szFeature foundation.PSTR, 
 // MsiReinstallProduct calls msi!MsiReinstallProductW.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msireinstallproductw
 // Minimum OS: windows8.0.
-func MsiReinstallProduct(szProduct string, szReinstallMode uint32) uint32 {
+func MsiReinstallProduct(szProduct string, szReinstallMode REINSTALLMODE) uint32 {
 	_szProduct := win32.UTF16Ptr(szProduct)
 	r1, _, _ := syscall.SyscallN(procMsiReinstallProduct.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(szReinstallMode))
 	return uint32(r1)
@@ -3163,7 +3163,7 @@ func MsiReinstallProduct(szProduct string, szReinstallMode uint32) uint32 {
 // MsiReinstallProductA calls msi!MsiReinstallProductA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msireinstallproducta
 // Minimum OS: windows8.0.
-func MsiReinstallProductA(szProduct foundation.PSTR, szReinstallMode uint32) uint32 {
+func MsiReinstallProductA(szProduct foundation.PSTR, szReinstallMode REINSTALLMODE) uint32 {
 	r1, _, _ := syscall.SyscallN(procMsiReinstallProductA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(szReinstallMode))
 	return uint32(r1)
 }

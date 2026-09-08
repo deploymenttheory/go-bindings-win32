@@ -136,6 +136,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		resolvedParams[i] = g.mapper.GoType(&method.Params[i].Type, context, scratch)
 	}
 	retypeComOutParams(method.Params, resolvedParams, scratch, g.mapper.RuntimeImportPath())
+	g.retypeAssociatedEnums(meta.Namespace, "interface "+interfaceName+": method "+method.Name, method.Params, resolvedParams, scratch)
 	slicePlans, elidedCounts := planSliceParams(method.Params, resolvedParams, true)
 	returnContext := context
 	returnContext.IsReturn = true

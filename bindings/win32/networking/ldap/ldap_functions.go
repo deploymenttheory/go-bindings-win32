@@ -905,7 +905,7 @@ func LdapGetLastError() uint32 {
 // LdapMapErrorToWin32 calls WLDAP32!LdapMapErrorToWin32.
 // https://learn.microsoft.com/windows/win32/api/winldap/nf-winldap-ldapmaperrortowin32
 // Minimum OS: windows6.0.6000.
-func LdapMapErrorToWin32(LdapError uint32) foundation.WIN32_ERROR {
+func LdapMapErrorToWin32(LdapError LDAP_RETCODE) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procLdapMapErrorToWin32.Addr(), uintptr(LdapError))
 	return foundation.WIN32_ERROR(r1)
 }

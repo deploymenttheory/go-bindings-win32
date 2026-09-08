@@ -129,3 +129,10 @@ err := com.CoCreateInstance(&audio.CLSID_MMDeviceEnumerator, nil,
 	com.CLSCTX_ALL, &audio.IID_IMMDeviceEnumerator, &out)
 enum := win32.Cast[audio.IMMDeviceEnumerator](out)
 ```
+
+## A worked example
+
+[`examples/volume`](../examples/volume) drives all of the above end to end
+against Core Audio: apartment, coclass by CLSID, `win32.Cast` from `IUnknown`,
+typed interface out-params, a `PROPVARIANT` read through its union accessors,
+and a `BOOL` out-param.

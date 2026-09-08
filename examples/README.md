@@ -12,11 +12,13 @@ Everything here is Windows-only, amd64/arm64 (`//go:build windows`).
 |---|---|---|
 | [`sysinfo`](sysinfo) | Read-only host info — computer name, user, CPU topology, memory, OS version. Size-probe strings, self-sized structs, and a C union. | No |
 | [`localaccount`](localaccount) | Full lifecycle of a local user account — create, query, enumerate, delete (`NetUserAdd`/`GetInfo`/`Enum`/`Del`). Structs, constants, `NetApiBuffer` ownership, handle-free cleanup. | Only with `-apply` |
+| [`volume`](volume) | The default playback device's name, volume and mute state (Core Audio). COM apartments, a coclass by CLSID, `win32.Cast` from `IUnknown`, a `PROPVARIANT` read through union accessors. | No |
 
-Both import the generated packages under `bindings/win32` (plus the runtime).
-Run one with `go run ./examples/<name>`. `sysinfo` is entirely read-only;
-`localaccount` does a safe read-only dry run unless you pass `-apply` (which
-needs Administrator to create an account) and self-cleans what it creates.
+They all import the generated packages under `bindings/win32` (plus the
+runtime). Run one with `go run ./examples/<name>`. `sysinfo` and `volume` are
+entirely read-only; `localaccount` does a safe read-only dry run unless you
+pass `-apply` (which needs Administrator to create an account) and self-cleans
+what it creates.
 
 ## What you import, and why
 

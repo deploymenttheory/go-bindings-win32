@@ -26,9 +26,6 @@ type DTR struct {
 	Data [14]byte
 }
 
-type DispatchMapper struct {
-}
-
 // LINEADDRESSCAPS: https://learn.microsoft.com/windows/win32/api/tapi/ns-tapi-lineaddresscaps
 // LINEADDRESSCAPS is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
@@ -544,9 +541,6 @@ type MSP_EVENT_INFO struct {
 	Anonymous MSP_EVENT_INFO_Anonymous_e__Union
 }
 
-type McastAddressAllocation struct {
-}
-
 // NSID_address_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage. Every member overlays that storage from offset 0; read or write one
 // through its accessor.
@@ -627,12 +621,6 @@ type RENDDATA struct {
 	Data [14]byte
 }
 
-type Rendezvous struct {
-}
-
-type RequestMakeCall struct {
-}
-
 // STnefProblem: https://learn.microsoft.com/office/client-developer/outlook/mapi/stnefproblem
 type STnefProblem struct {
 	UlComponent uint32
@@ -645,9 +633,6 @@ type STnefProblem struct {
 type STnefProblemArray struct {
 	CProblem uint32
 	AProblem [1]STnefProblem
-}
-
-type TAPI struct {
 }
 
 // TAPI_CUSTOMTONE: https://learn.microsoft.com/windows/win32/api/tapi3if/ns-tapi3if-tapi_customtone

@@ -116,6 +116,12 @@ const CE_MODE uint32 = 32768
 const CE_OOP uint32 = 4096
 const CE_PTO uint32 = 512
 const CE_TXFULL uint32 = 256
+
+var CLSID_CameraUIControl win32.GUID = win32.GUID{Data1: 0x16d5a2be, Data2: 0xb1c5, Data3: 0x47b3, Data4: [8]byte{0x8e, 0xae, 0xcc, 0xbc, 0xf4, 0x52, 0xc7, 0xe8}}
+var CLSID_DefaultBrowserSyncSettings win32.GUID = win32.GUID{Data1: 0x3ac83423, Data2: 0x3112, Data3: 0x4aa6, Data4: [8]byte{0x9b, 0x5b, 0x1f, 0xeb, 0x23, 0xd0, 0xc5, 0xf9}}
+var CLSID_EditionUpgradeBroker win32.GUID = win32.GUID{Data1: 0xc4270827, Data2: 0x4f39, Data3: 0x45df, Data4: [8]byte{0x92, 0x88, 0x12, 0xff, 0x6b, 0x85, 0xa9, 0x21}}
+var CLSID_EditionUpgradeHelper win32.GUID = win32.GUID{Data1: 0x01776df3, Data2: 0xb9af, Data3: 0x4e50, Data4: [8]byte{0x9b, 0x1c, 0x56, 0xe9, 0x31, 0x16, 0xd7, 0x04}}
+
 const CL_NL_IP uint32 = 771
 const CL_NL_IPX uint32 = 769
 const CL_TL_NBF uint32 = 1025

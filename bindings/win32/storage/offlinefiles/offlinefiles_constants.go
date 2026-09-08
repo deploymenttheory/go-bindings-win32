@@ -4,6 +4,13 @@
 
 package offlinefiles
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
+var CLSID_OfflineFilesCache win32.GUID = win32.GUID{Data1: 0x48c6be7c, Data2: 0x3871, Data3: 0x43cc, Data4: [8]byte{0xb4, 0x6f, 0x14, 0x49, 0xa1, 0xbb, 0x2f, 0xf3}}
+var CLSID_OfflineFilesSetting win32.GUID = win32.GUID{Data1: 0xfd3659e9, Data2: 0xa920, Data3: 0x4123, Data4: [8]byte{0xad, 0x64, 0x7f, 0xc7, 0x6c, 0x7a, 0xac, 0xdf}}
+
 const OFFLINEFILES_CHANGES_LOCAL_ATTRIBUTES uint32 = 2
 const OFFLINEFILES_CHANGES_LOCAL_SIZE uint32 = 1
 const OFFLINEFILES_CHANGES_LOCAL_TIME uint32 = 4

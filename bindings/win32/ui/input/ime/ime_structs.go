@@ -53,9 +53,6 @@ type CANDIDATELIST struct {
 	DwOffset    [1]uint32
 }
 
-type CActiveIMM struct {
-}
-
 // COMPOSITIONFORM: https://learn.microsoft.com/windows/win32/api/immdev/ns-immdev-compositionform
 type COMPOSITIONFORM struct {
 	DwStyle      uint32

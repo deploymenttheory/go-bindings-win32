@@ -4,4 +4,11 @@
 
 package tpm
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
+var CLSID_RemoteTpmVirtualSmartCardManager win32.GUID = win32.GUID{Data1: 0x152ea2a8, Data2: 0x70dc, Data3: 0x4c59, Data4: [8]byte{0x8b, 0x2a, 0x32, 0xaa, 0x3c, 0xa0, 0xdc, 0xac}}
+var CLSID_TpmVirtualSmartCardManager win32.GUID = win32.GUID{Data1: 0x16a18e86, Data2: 0x7f6e, Data3: 0x4c20, Data4: [8]byte{0xad, 0x89, 0x4f, 0xfc, 0x0d, 0xb7, 0xa9, 0x6a}}
+
 const TPMVSC_DEFAULT_ADMIN_ALGORITHM_ID uint32 = 130

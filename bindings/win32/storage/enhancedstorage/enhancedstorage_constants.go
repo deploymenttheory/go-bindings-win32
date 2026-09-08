@@ -45,6 +45,12 @@ const CERT_VALIDATION_POLICY_BASIC uint32 = 2
 const CERT_VALIDATION_POLICY_EXTENDED uint32 = 3
 const CERT_VALIDATION_POLICY_NONE uint32 = 1
 const CERT_VALIDATION_POLICY_RESERVED uint32 = 0
+
+var CLSID_EnhancedStorageACT win32.GUID = win32.GUID{Data1: 0xaf076a15, Data2: 0x2ece, Data3: 0x4ad4, Data4: [8]byte{0xbb, 0x21, 0x29, 0xf0, 0x40, 0xe1, 0x76, 0xd8}}
+var CLSID_EnhancedStorageSilo win32.GUID = win32.GUID{Data1: 0xcb25220c, Data2: 0x76c7, Data3: 0x4fee, Data4: [8]byte{0x84, 0x2b, 0xf3, 0x38, 0x3c, 0xd0, 0x22, 0xbc}}
+var CLSID_EnhancedStorageSiloAction win32.GUID = win32.GUID{Data1: 0x886d29dd, Data2: 0xb506, Data3: 0x466b, Data4: [8]byte{0x9f, 0xbf, 0xb4, 0x4f, 0xf3, 0x83, 0xfb, 0x3f}}
+var CLSID_EnumEnhancedStorageACT win32.GUID = win32.GUID{Data1: 0xfe841493, Data2: 0x835c, Data3: 0x4fa3, Data4: [8]byte{0xb6, 0xcc, 0xb4, 0xb2, 0xd4, 0x71, 0x98, 0x48}}
+
 const CREATOROPENWITHUIOPTION_HIDDEN uint32 = 0
 const CREATOROPENWITHUIOPTION_VISIBLE uint32 = 1
 const ENHANCED_STORAGE_AUTHN_STATE_AUTHENTICATED uint32 = 3

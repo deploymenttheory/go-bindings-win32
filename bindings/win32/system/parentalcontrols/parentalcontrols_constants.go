@@ -9,6 +9,11 @@ import (
 )
 
 const ARRAY_SEP_CHAR uint32 = 9
+
+var CLSID_WindowsParentalControls win32.GUID = win32.GUID{Data1: 0xe77cc89b, Data2: 0x7401, Data3: 0x4c04, Data4: [8]byte{0x8c, 0xed, 0x14, 0x9d, 0xb3, 0x5a, 0xdd, 0x04}}
+var CLSID_WpcProviderSupport win32.GUID = win32.GUID{Data1: 0xbb18c7a0, Data2: 0x2186, Data3: 0x4be0, Data4: [8]byte{0x97, 0xd8, 0x04, 0x84, 0x7b, 0x62, 0x8e, 0x02}}
+var CLSID_WpcSettingsProvider win32.GUID = win32.GUID{Data1: 0x355dffaa, Data2: 0x3b9f, Data3: 0x435c, Data4: [8]byte{0xb4, 0x28, 0x5d, 0x44, 0x29, 0x0b, 0xc5, 0xf2}}
+
 const FACILITY_WPC uint32 = 2457
 const MSG_Event_AppBlocked int32 = -1342177264
 const MSG_Event_AppOverride int32 = -1342177263

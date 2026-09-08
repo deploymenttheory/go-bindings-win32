@@ -4,57 +4,6 @@
 
 package desktopsharing
 
-type RDPSRAPIApplication struct {
-}
-
-type RDPSRAPIApplicationFilter struct {
-}
-
-type RDPSRAPIApplicationList struct {
-}
-
-type RDPSRAPIAttendee struct {
-}
-
-type RDPSRAPIAttendeeDisconnectInfo struct {
-}
-
-type RDPSRAPIAttendeeManager struct {
-}
-
-type RDPSRAPIFrameBuffer struct {
-}
-
-type RDPSRAPIInvitation struct {
-}
-
-type RDPSRAPIInvitationManager struct {
-}
-
-type RDPSRAPISessionProperties struct {
-}
-
-type RDPSRAPITcpConnectionInfo struct {
-}
-
-type RDPSRAPIWindow struct {
-}
-
-type RDPSRAPIWindowList struct {
-}
-
-type RDPSession struct {
-}
-
-type RDPTransportStreamBuffer struct {
-}
-
-type RDPTransportStreamEvents struct {
-}
-
-type RDPViewer struct {
-}
-
 type ReferenceRemainingTypes__ struct {
 	CtrlLevel__                CTRL_LEVEL
 	AttendeeDisconnectReason__ ATTENDEE_DISCONNECT_REASON

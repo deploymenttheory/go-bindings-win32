@@ -526,9 +526,6 @@ type NET_VALIDATE_PERSISTED_FIELDS struct {
 	PasswordHistory       *NET_VALIDATE_PASSWORD_HASH
 }
 
-type NetProvisioning struct {
-}
-
 type OBO_TOKEN struct {
 	Type             OBO_TOKEN_TYPE
 	Pncc             *INetCfgComponent

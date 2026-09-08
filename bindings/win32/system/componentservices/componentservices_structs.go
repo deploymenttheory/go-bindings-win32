@@ -24,10 +24,6 @@ type APPSTATISTICS struct {
 	M_cCallsPerSecond uint32
 }
 
-// AppDomainHelper: https://learn.microsoft.com/windows/win32/cossdk/appdomainhelper
-type AppDomainHelper struct {
-}
-
 // ApplicationProcessRecycleInfo: https://learn.microsoft.com/windows/win32/api/comsvcs/ns-comsvcs-applicationprocessrecycleinfo
 type ApplicationProcessRecycleInfo struct {
 	IsRecyclable                  foundation.BOOL
@@ -82,9 +78,6 @@ type ApplicationSummary struct {
 	NumComponentInstances uint32
 }
 
-type ByotServerEx struct {
-}
-
 type CLSIDDATA struct {
 	M_clsid           win32.GUID
 	M_cReferences     uint32
@@ -112,21 +105,6 @@ type CLSIDDATA2 struct {
 	M_cCallsFailed    uint32
 }
 
-// COMAdminCatalog: https://learn.microsoft.com/windows/win32/cossdk/comadmincatalog
-type COMAdminCatalog struct {
-}
-
-// COMAdminCatalogCollection: https://learn.microsoft.com/windows/win32/cossdk/comadmincatalogcollection
-type COMAdminCatalogCollection struct {
-}
-
-// COMAdminCatalogObject: https://learn.microsoft.com/windows/win32/cossdk/comadmincatalogobject
-type COMAdminCatalogObject struct {
-}
-
-type COMEvents struct {
-}
-
 // COMSVCSEVENTINFO: https://learn.microsoft.com/windows/win32/api/comsvcs/ns-comsvcs-comsvcseventinfo
 type COMSVCSEVENTINFO struct {
 	CbSize       uint32
@@ -136,29 +114,6 @@ type COMSVCSEVENTINFO struct {
 	PerfCount    int64
 	GuidApp      win32.GUID
 	SMachineName foundation.PWSTR
-}
-
-type CRMClerk struct {
-}
-
-type CRMRecoveryClerk struct {
-}
-
-// CServiceConfig: https://learn.microsoft.com/windows/win32/cossdk/cserviceconfig
-type CServiceConfig struct {
-}
-
-// ClrAssemblyLocator: https://learn.microsoft.com/windows/win32/cossdk/clrassemblylocator
-type ClrAssemblyLocator struct {
-}
-
-type CoMTSLocator struct {
-}
-
-type ComServiceEvents struct {
-}
-
-type ComSystemAppEventData struct {
 }
 
 // ComponentHangMonitorInfo: https://learn.microsoft.com/windows/win32/api/comsvcs/ns-comsvcs-componenthangmonitorinfo
@@ -202,18 +157,6 @@ type CrmLogRecordRead struct {
 	BlobUserData     systemcom.BLOB
 }
 
-type DispenserManager struct {
-}
-
-type Dummy30040732 struct {
-}
-
-type EventServer struct {
-}
-
-type GetSecurityCallContextAppObject struct {
-}
-
 type HANG_INFO struct {
 	FAppHangMonitorEnabled foundation.BOOL
 	FTerminateOnHang       foundation.BOOL
@@ -223,63 +166,10 @@ type HANG_INFO struct {
 	DwInfoMsgCount         uint32
 }
 
-type LBEvents struct {
-}
-
-type MessageMover struct {
-}
-
-type MtsGrp struct {
-}
-
-type PoolMgr struct {
-}
-
 type RECYCLE_INFO struct {
 	GuidCombaseProcessIdentifier win32.GUID
 	ProcessStartTime             int64
 	DwRecycleLifetimeLimit       uint32
 	DwRecycleMemoryLimit         uint32
 	DwRecycleExpirationTimeout   uint32
-}
-
-// SecurityCallContext: https://learn.microsoft.com/windows/win32/cossdk/securitycallcontext
-type SecurityCallContext struct {
-}
-
-// SecurityCallers: https://learn.microsoft.com/windows/win32/cossdk/securitycallers
-type SecurityCallers struct {
-}
-
-// SecurityIdentity: https://learn.microsoft.com/windows/win32/cossdk/securityidentity
-type SecurityIdentity struct {
-}
-
-type ServicePool struct {
-}
-
-type ServicePoolConfig struct {
-}
-
-// SharedProperty: https://learn.microsoft.com/windows/win32/cossdk/sharedproperty
-type SharedProperty struct {
-}
-
-// SharedPropertyGroup: https://learn.microsoft.com/windows/win32/cossdk/sharedpropertygroup
-type SharedPropertyGroup struct {
-}
-
-// SharedPropertyGroupManager: https://learn.microsoft.com/windows/win32/cossdk/sharedpropertygroupmanager
-type SharedPropertyGroupManager struct {
-}
-
-type TrackerServer struct {
-}
-
-// TransactionContext: https://learn.microsoft.com/windows/win32/cossdk/transactioncontext
-type TransactionContext struct {
-}
-
-// TransactionContextEx: https://learn.microsoft.com/windows/win32/cossdk/transactioncontextex
-type TransactionContextEx struct {
 }

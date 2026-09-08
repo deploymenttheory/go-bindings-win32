@@ -4,6 +4,12 @@
 
 package remoteassistance
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
+var CLSID_RendezvousApplication win32.GUID = win32.GUID{Data1: 0x0b7e019a, Data2: 0xb5de, Data3: 0x47fa, Data4: [8]byte{0x89, 0x66, 0x90, 0x82, 0xf8, 0x2f, 0xb1, 0x92}}
+
 const DISPID_EVENT_ON_CONTEXT_DATA uint32 = 7
 const DISPID_EVENT_ON_SEND_ERROR uint32 = 8
 const DISPID_EVENT_ON_STATE_CHANGED uint32 = 5

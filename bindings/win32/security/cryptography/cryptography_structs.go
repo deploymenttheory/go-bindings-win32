@@ -561,18 +561,6 @@ type CARD_SIGNING_INFO struct {
 	DwPaddingType   uint32
 }
 
-type CCertSrvSetup struct {
-}
-
-type CCertSrvSetupKeyInformation struct {
-}
-
-type CCertificateEnrollmentPolicyServerSetup struct {
-}
-
-type CCertificateEnrollmentServerSetup struct {
-}
-
 type CERTIFICATE_CHAIN_BLOB struct {
 	CertCount       uint32
 	RawCertificates *CRYPT_INTEGER_BLOB
@@ -1657,9 +1645,6 @@ func (u *CMC_TAGGED_REQUEST_Anonymous_e__Union) PTaggedCertRequest() **CMC_TAGGE
 type CMC_TAGGED_REQUEST struct {
 	DwTaggedRequestChoice uint32
 	Anonymous             CMC_TAGGED_REQUEST_Anonymous_e__Union
-}
-
-type CMSCEPSetup struct {
 }
 
 // CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing

@@ -27,9 +27,6 @@ type AAAccountingData struct {
 	SubSessionId            int32
 }
 
-type ADsTSUserEx struct {
-}
-
 // AE_CURRENT_POSITION: https://learn.microsoft.com/windows/win32/api/audioengineendpoint/ns-audioengineendpoint-ae_current_position
 type AE_CURRENT_POSITION struct {
 	U64DevicePosition  uint64
@@ -159,9 +156,6 @@ type TSSD_ConnectionPoint struct {
 	AddressType    TSSD_AddrV46Type
 	PortNumber     uint16
 	AddressScope   uint32
-}
-
-type TSUserExInterfaces struct {
 }
 
 type VM_NOTIFY_ENTRY struct {
@@ -1144,9 +1138,6 @@ type WTS_VALIDATION_INFORMATIONW struct {
 	LicenseLength    uint32
 	HardwareID       [20]byte
 	HardwareIDLength uint32
-}
-
-type Workspace struct {
 }
 
 // PluginResource: https://learn.microsoft.com/windows/win32/api/tspubplugincom/ns-tspubplugincom-pluginresource

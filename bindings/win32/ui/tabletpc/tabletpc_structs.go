@@ -22,9 +22,6 @@ type DYNAMIC_RENDERER_CACHED_DATA struct {
 	DynamicRenderer *IDynamicRenderer
 }
 
-type DynamicRenderer struct {
-}
-
 // FLICK_DATA: https://learn.microsoft.com/windows/win32/api/tabflicks/ns-tabflicks-flick_data
 type FLICK_DATA struct {
 	Bitfield int32
@@ -39,13 +36,6 @@ type GESTURE_DATA struct {
 	GestureId      int32
 	RecoConfidence int32
 	StrokeCount    int32
-}
-
-// GestureRecognizer: https://learn.microsoft.com/windows/win32/tablet/gesturerecognizer-class
-type GestureRecognizer struct {
-}
-
-type HandwrittenTextInsertion struct {
 }
 
 // IEC_GESTUREINFO: https://learn.microsoft.com/windows/win32/api/inked/ns-inked-iec_gestureinfo
@@ -78,37 +68,6 @@ type INKMETRIC struct {
 	Color        foundation.COLORREF
 }
 
-type Ink struct {
-}
-
-// InkCollector: https://learn.microsoft.com/windows/win32/tablet/inkcollector-class
-type InkCollector struct {
-}
-
-// InkDisp: https://learn.microsoft.com/windows/win32/tablet/inkdisp-class
-type InkDisp struct {
-}
-
-// InkDivider: https://learn.microsoft.com/windows/win32/tablet/inkdivider-class
-type InkDivider struct {
-}
-
-// InkDrawingAttributes: https://learn.microsoft.com/windows/win32/tablet/inkdrawingattributes-class
-type InkDrawingAttributes struct {
-}
-
-// InkEdit: https://learn.microsoft.com/windows/win32/tablet/inkedit-methods
-type InkEdit struct {
-}
-
-// InkOverlay: https://learn.microsoft.com/windows/win32/tablet/inkoverlay-class
-type InkOverlay struct {
-}
-
-// InkPicture: https://learn.microsoft.com/windows/win32/tablet/inkpicture-methods
-type InkPicture struct {
-}
-
 // InkRecoGuide: https://learn.microsoft.com/windows/win32/api/msinkaut/ns-msinkaut-inkrecoguide
 type InkRecoGuide struct {
 	RectWritingBox foundation.RECT
@@ -116,39 +75,6 @@ type InkRecoGuide struct {
 	CRows          int32
 	CColumns       int32
 	Midline        int32
-}
-
-// InkRecognizerContext: https://learn.microsoft.com/windows/win32/tablet/inkrecognizercontext-class
-type InkRecognizerContext struct {
-}
-
-// InkRecognizerGuide: https://learn.microsoft.com/windows/win32/tablet/inkrecognizerguide-class
-type InkRecognizerGuide struct {
-}
-
-type InkRecognizers struct {
-}
-
-// InkRectangle: https://learn.microsoft.com/windows/win32/tablet/inkrectangle-class
-type InkRectangle struct {
-}
-
-// InkRenderer: https://learn.microsoft.com/windows/win32/tablet/inkrenderer-class
-type InkRenderer struct {
-}
-
-type InkStrokes struct {
-}
-
-type InkTablets struct {
-}
-
-// InkTransform: https://learn.microsoft.com/windows/win32/tablet/inktransform-class
-type InkTransform struct {
-}
-
-// InkWordList: https://learn.microsoft.com/windows/win32/tablet/inkwordlist-class
-type InkWordList struct {
 }
 
 // LATTICE_METRICS: https://learn.microsoft.com/windows/win32/api/rectypes/ns-rectypes-lattice_metrics
@@ -161,9 +87,6 @@ type LATTICE_METRICS struct {
 type LINE_SEGMENT struct {
 	PtA foundation.POINT
 	PtB foundation.POINT
-}
-
-type MathInputControl struct {
 }
 
 // PACKET_DESCRIPTION: https://learn.microsoft.com/windows/win32/api/tpcshrd/ns-tpcshrd-packet_description
@@ -187,13 +110,6 @@ type PROPERTY_METRICS struct {
 	NLogicalMax int32
 	Units       PROPERTY_UNITS
 	FResolution float32
-}
-
-// PenInputPanel: https://learn.microsoft.com/windows/win32/tablet/peninputpanel-class
-type PenInputPanel struct {
-}
-
-type PenInputPanel_Internal struct {
 }
 
 // RECO_ATTRS: https://learn.microsoft.com/windows/win32/api/rectypes/ns-rectypes-reco_attrs
@@ -267,10 +183,6 @@ type RECO_RANGE struct {
 	CCount   uint32
 }
 
-// RealTimeStylus: https://learn.microsoft.com/windows/win32/tablet/realtimestylus-class
-type RealTimeStylus struct {
-}
-
 // STROKE_RANGE: https://learn.microsoft.com/windows/win32/api/tpcshrd/ns-tpcshrd-stroke_range
 type STROKE_RANGE struct {
 	IStrokeBegin uint32
@@ -287,22 +199,9 @@ type SYSTEM_EVENT_DATA struct {
 	DwButtonState uint32
 }
 
-type SketchInk struct {
-}
-
-// StrokeBuilder: https://learn.microsoft.com/windows/win32/tablet/strokebuilder-class
-type StrokeBuilder struct {
-}
-
 // StylusInfo: https://learn.microsoft.com/windows/win32/api/rtscom/ns-rtscom-stylusinfo
 type StylusInfo struct {
 	Tcid              uint32
 	Cid               uint32
 	BIsInvertedCursor foundation.BOOL
-}
-
-type TextInputPanel struct {
-}
-
-type TipAutoCompleteClient struct {
 }

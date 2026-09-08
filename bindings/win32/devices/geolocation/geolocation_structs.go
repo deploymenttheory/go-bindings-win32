@@ -10,21 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-type CivicAddressReport struct {
-}
-
-type CivicAddressReportFactory struct {
-}
-
-type DefaultLocation struct {
-}
-
-type DispCivicAddressReport struct {
-}
-
-type DispLatLongReport struct {
-}
-
 // GNSS_AGNSS_INJECT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage. Every member overlays that storage from offset 0; read or write one
 // through its accessor.
@@ -730,14 +715,4 @@ type GNSS_V2UPL_NI_INFO struct {
 	Size        uint32
 	Version     uint32
 	RequestorId [260]uint16
-}
-
-type LatLongReport struct {
-}
-
-type LatLongReportFactory struct {
-}
-
-// Location: https://learn.microsoft.com/windows/win32/WMP/location-attribute
-type Location struct {
 }

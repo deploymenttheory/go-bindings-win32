@@ -75,15 +75,6 @@ func (u *TRIGGER_TYPE_UNION) MonthlyDOW() *MONTHLYDOW {
 	return (*MONTHLYDOW)(unsafe.Pointer(u))
 }
 
-type TaskHandlerPS struct {
-}
-
-type TaskHandlerStatusPS struct {
-}
-
-type TaskScheduler struct {
-}
-
 // WEEKLY: https://learn.microsoft.com/windows/win32/api/mstask/ns-mstask-weekly
 type WEEKLY struct {
 	WeeksInterval    uint16

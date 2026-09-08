@@ -98,6 +98,9 @@ const ALIGN_SHIFT uint32 = 7
 const ALIGN_SIZE uint32 = 8
 const ALLOCATE_RESPONSE uint32 = 2
 const BACKUP_MSG_FILENAME = "BAK.MSG"
+
+var CLSID_NetProvisioning win32.GUID = win32.GUID{Data1: 0x2aa2b5fe, Data2: 0xb846, Data3: 0x4d07, Data4: [8]byte{0x81, 0x0c, 0xb2, 0x1e, 0xe4, 0x53, 0x20, 0xe3}}
+
 const CLTYPE_LEN uint32 = 12
 const CNLEN uint32 = 15
 const COULD_NOT_VERIFY_VOLUMES int32 = -1073727512

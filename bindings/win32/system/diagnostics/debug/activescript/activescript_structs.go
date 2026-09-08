@@ -11,12 +11,6 @@ import (
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
-type CDebugDocumentHelper struct {
-}
-
-type DebugHelper struct {
-}
-
 type DebugStackFrameDescriptor struct {
 	Pdsf      *IDebugStackFrame
 	DwMin     uint32
@@ -33,9 +27,6 @@ type DebugStackFrameDescriptor64 struct {
 	PunkFinal *systemcom.IUnknown
 }
 
-type DefaultDebugSessionProvider struct {
-}
-
 type JS_NATIVE_FRAME struct {
 	InstructionOffset uint64
 	ReturnOffset      uint64
@@ -49,12 +40,6 @@ type JsDebugPropertyInfo struct {
 	Value    foundation.BSTR
 	FullName foundation.BSTR
 	Attr     JS_PROPERTY_ATTRIBUTES
-}
-
-type MachineDebugManager_DEBUG struct {
-}
-
-type MachineDebugManager_RETAIL struct {
 }
 
 // PROFILER_HEAP_OBJECT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -221,9 +206,6 @@ type PROFILER_HEAP_SUMMARY struct {
 type PROFILER_PROPERTY_TYPE_SUBSTRING_INFO struct {
 	Length uint32
 	Value  foundation.PWSTR
-}
-
-type ProcessDebugManager struct {
 }
 
 type TEXT_DOCUMENT_ARRAY struct {

@@ -73,24 +73,6 @@ type CONTENTRESTRICTION struct {
 	UlGenerateMethod uint32
 }
 
-type CSearchLanguageSupport struct {
-}
-
-type CSearchManager struct {
-}
-
-type CSearchRoot struct {
-}
-
-type CSearchScopeRule struct {
-}
-
-type CompoundCondition struct {
-}
-
-type ConditionFactory struct {
-}
-
 type DATE_STRUCT struct {
 	Year  int16
 	Month uint16
@@ -349,9 +331,6 @@ type DCINFO struct {
 	VData     systemvariant.VARIANT
 }
 
-type DataLinks struct {
-}
-
 type ERRORINFO struct {
 	HrError foundation.HRESULT
 	DwMinor uint32
@@ -366,9 +345,6 @@ type FILTERED_DATA_SOURCES struct {
 	PwcsMime      foundation.PWSTR
 	PClsid        *win32.GUID
 	PwcsOverride  foundation.PWSTR
-}
-
-type FilterRegistration struct {
 }
 
 // HITRANGE: https://learn.microsoft.com/windows/win32/api/structuredquery/ns-structuredquery-hitrange
@@ -398,10 +374,6 @@ type ITEM_INFO struct {
 	PcwszContentClass    foundation.PWSTR
 }
 
-// Interval: https://learn.microsoft.com/windows/win32/TaskSchd/taskschedulerschema-interval-restarttype-element
-type Interval struct {
-}
-
 type KAGGETDIAG struct {
 	UlSize     uint32
 	VDiagInfo  systemvariant.VARIANT
@@ -414,9 +386,6 @@ type KAGREQDIAG struct {
 	SDiagField  int16
 }
 
-type LeafCondition struct {
-}
-
 type MDAXISINFO struct {
 	CbSize               uintptr
 	IAxis                uintptr
@@ -424,21 +393,6 @@ type MDAXISINFO struct {
 	CCoordinates         uintptr
 	RgcColumns           *uintptr
 	RgpwszDimensionNames *foundation.PWSTR
-}
-
-type MSDAINITIALIZE struct {
-}
-
-type MSDAORA struct {
-}
-
-type MSDAORA8 struct {
-}
-
-type MSDAORA8_ERROR struct {
-}
-
-type MSDAORA_ERROR struct {
 }
 
 type NATLANGUAGERESTRICTION struct {
@@ -455,9 +409,6 @@ type NODERESTRICTION struct {
 
 type NOTRESTRICTION struct {
 	PRes *RESTRICTION
-}
-
-type NegationCondition struct {
 }
 
 // ODBC_VS_ARGS_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -502,9 +453,6 @@ type ODBC_VS_ARGS struct {
 	RetCode    int16
 }
 
-type PDPO struct {
-}
-
 type PROPERTYRESTRICTION struct {
 	Rel   uint32
 	Prop  storageindexserver.FULLPROPSPEC
@@ -520,12 +468,6 @@ type PROXY_INFO struct {
 	DwPortNumber    uint32
 	PcwszProxyName  foundation.PWSTR
 	PcwszBypassList foundation.PWSTR
-}
-
-type QueryParser struct {
-}
-
-type QueryParserManager struct {
 }
 
 type RANGECATEGORIZE struct {
@@ -601,9 +543,6 @@ type RMTPACK struct {
 	RgPROPVARIANT *systemcomstructuredstorage.PROPVARIANT
 	CArray        uint32
 	RgArray       *systemvariant.VARIANT
-}
-
-type RootBinder struct {
 }
 
 // SEARCH_COLUMN_PROPERTIES: https://learn.microsoft.com/windows/win32/api/searchapi/ns-searchapi-search_column_properties
@@ -903,9 +842,6 @@ type SUBSCRIPTIONITEMINFO struct {
 	DwPriority    uint32
 	ScheduleGroup win32.GUID
 	ClsidAgent    win32.GUID
-}
-
-type SubscriptionMgr struct {
 }
 
 // TEXT_SOURCE: https://learn.microsoft.com/windows/win32/api/indexsrv/ns-indexsrv-text_source

@@ -12,9 +12,6 @@ type QOCINFO struct {
 	DwOutSpeed uint32
 }
 
-type SENS struct {
-}
-
 // SENS_QOCINFO: https://learn.microsoft.com/windows/win32/api/sensevts/ns-sensevts-sens_qocinfo
 type SENS_QOCINFO struct {
 	DwSize     uint32

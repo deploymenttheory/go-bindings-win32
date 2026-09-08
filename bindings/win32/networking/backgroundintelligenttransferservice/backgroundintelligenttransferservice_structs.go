@@ -77,9 +77,6 @@ type BG_JOB_TIMES struct {
 	TransferCompletionTime foundation.FILETIME
 }
 
-type BITSExtensionSetupFactory struct {
-}
-
 // BITS_FILE_PROPERTY_VALUE: https://learn.microsoft.com/windows/win32/api/bits5_0/ns-bits5_0-bits_file_property_value
 // BITS_FILE_PROPERTY_VALUE is a C union, exposed as correctly sized and aligned backing
 // storage. Every member overlays that storage from offset 0; read or write one
@@ -124,39 +121,6 @@ func (u *BITS_JOB_PROPERTY_VALUE) Uint64() *uint64 {
 // Target reinterprets the union as its Target member.
 func (u *BITS_JOB_PROPERTY_VALUE) Target() *BG_AUTH_TARGET {
 	return (*BG_AUTH_TARGET)(unsafe.Pointer(u))
-}
-
-type BackgroundCopyManager struct {
-}
-
-type BackgroundCopyManager10_1 struct {
-}
-
-type BackgroundCopyManager10_2 struct {
-}
-
-type BackgroundCopyManager10_3 struct {
-}
-
-type BackgroundCopyManager1_5 struct {
-}
-
-type BackgroundCopyManager2_0 struct {
-}
-
-type BackgroundCopyManager2_5 struct {
-}
-
-type BackgroundCopyManager3_0 struct {
-}
-
-type BackgroundCopyManager4_0 struct {
-}
-
-type BackgroundCopyManager5_0 struct {
-}
-
-type BackgroundCopyQMgr struct {
 }
 
 // FILESETINFO: https://learn.microsoft.com/windows/win32/api/qmgr/ns-qmgr-filesetinfo

@@ -28,17 +28,11 @@ type DEDUP_CONTAINER_EXTENT struct {
 	Length         int64
 }
 
-type DedupBackupSupport struct {
-}
-
 type DedupChunk struct {
 	Hash        DedupHash
 	Flags       DedupChunkFlags
 	LogicalSize uint32
 	DataSize    uint32
-}
-
-type DedupDataPort struct {
 }
 
 type DedupHash struct {

@@ -79,19 +79,6 @@ type SENSOR_VALUE_PAIR struct {
 	Value systemcomstructuredstorage.PROPVARIANT
 }
 
-// Sensor: https://learn.microsoft.com/windows/win32/medfound/sensor-profile-guids
-type Sensor struct {
-}
-
-type SensorCollection struct {
-}
-
-type SensorDataReport struct {
-}
-
-type SensorManager struct {
-}
-
 type VEC3D struct {
 	X float32
 	Y float32

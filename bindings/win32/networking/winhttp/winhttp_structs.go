@@ -312,7 +312,3 @@ type WINHTTP_WEB_SOCKET_STATUS struct {
 	DwBytesTransferred uint32
 	EBufferType        WINHTTP_WEB_SOCKET_BUFFER_TYPE
 }
-
-// WinHttpRequest: https://learn.microsoft.com/windows/win32/WinHttp/winhttprequest
-type WinHttpRequest struct {
-}

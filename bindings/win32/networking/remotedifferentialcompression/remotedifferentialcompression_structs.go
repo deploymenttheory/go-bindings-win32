@@ -10,32 +10,11 @@ type FindSimilarFileIndexResults struct {
 	M_MatchCount uint32
 }
 
-type FindSimilarResults struct {
-}
-
 // RdcBufferPointer: https://learn.microsoft.com/windows/win32/api/msrdc/ns-msrdc-rdcbufferpointer
 type RdcBufferPointer struct {
 	M_Size uint32
 	M_Used uint32
 	M_Data *byte
-}
-
-type RdcComparator struct {
-}
-
-type RdcFileReader struct {
-}
-
-type RdcGenerator struct {
-}
-
-type RdcGeneratorFilterMaxParameters struct {
-}
-
-type RdcGeneratorParameters struct {
-}
-
-type RdcLibrary struct {
 }
 
 // RdcNeed: https://learn.microsoft.com/windows/win32/api/msrdc/ns-msrdc-rdcneed
@@ -65,15 +44,6 @@ type RdcSignaturePointer struct {
 	M_Data *RdcSignature
 }
 
-type RdcSignatureReader struct {
-}
-
-type RdcSimilarityGenerator struct {
-}
-
-type Similarity struct {
-}
-
 // SimilarityData: https://learn.microsoft.com/windows/win32/api/msrdc/ns-msrdc-similaritydata
 type SimilarityData struct {
 	M_Data [16]byte
@@ -90,26 +60,8 @@ type SimilarityFileId struct {
 	M_FileId [32]byte
 }
 
-type SimilarityFileIdTable struct {
-}
-
 // SimilarityMappedViewInfo: https://learn.microsoft.com/windows/win32/api/msrdc/ns-msrdc-similaritymappedviewinfo
 type SimilarityMappedViewInfo struct {
 	M_Data   *byte
 	M_Length uint32
-}
-
-type SimilarityReportProgress struct {
-}
-
-type SimilarityTableDumpState struct {
-}
-
-type SimilarityTraitsMappedView struct {
-}
-
-type SimilarityTraitsMapping struct {
-}
-
-type SimilarityTraitsTable struct {
 }

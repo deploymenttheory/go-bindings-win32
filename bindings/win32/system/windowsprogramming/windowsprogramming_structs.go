@@ -64,9 +64,6 @@ type CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG struct {
 	TriggerId foundation.PWSTR
 }
 
-type CameraUIControl struct {
-}
-
 type DATETIME struct {
 	Year  uint16
 	Month uint16
@@ -167,15 +164,6 @@ func (u *DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union) Ordinal() *uint32 {
 type DELAYLOAD_PROC_DESCRIPTOR struct {
 	ImportDescribedByName uint32
 	Description           DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union
-}
-
-type DefaultBrowserSyncSettings struct {
-}
-
-type EditionUpgradeBroker struct {
-}
-
-type EditionUpgradeHelper struct {
 }
 
 // FEATURE_ERROR: https://learn.microsoft.com/windows/win32/api/featurestagingapi/ns-featurestagingapi-feature_error

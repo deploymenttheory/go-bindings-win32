@@ -4,6 +4,13 @@
 
 package remotemanagement
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
+var CLSID_WSMan win32.GUID = win32.GUID{Data1: 0xbced617b, Data2: 0xec03, Data3: 0x420b, Data4: [8]byte{0x85, 0x08, 0x97, 0x7d, 0xc7, 0xa6, 0x86, 0xbd}}
+var CLSID_WSManInternal win32.GUID = win32.GUID{Data1: 0x7de087a5, Data2: 0x5dcb, Data3: 0x4df7, Data4: [8]byte{0xbb, 0x12, 0x09, 0x24, 0xad, 0x8f, 0xbd, 0x9a}}
+
 const ERROR_REDIRECT_LOCATION_INVALID uint32 = 2150859191
 const ERROR_REDIRECT_LOCATION_TOO_LONG uint32 = 2150859190
 const ERROR_SERVICE_CBT_HARDENING_INVALID uint32 = 2150859192

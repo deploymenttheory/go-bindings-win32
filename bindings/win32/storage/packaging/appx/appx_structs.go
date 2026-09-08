@@ -56,24 +56,6 @@ type APPX_PACKAGE_WRITER_PAYLOAD_STREAM struct {
 	CompressionOption APPX_COMPRESSION_OPTION
 }
 
-type AppxBundleFactory struct {
-}
-
-type AppxEncryptionFactory struct {
-}
-
-type AppxFactory struct {
-}
-
-type AppxPackageEditor struct {
-}
-
-type AppxPackagingDiagnosticEventSinkManager struct {
-}
-
-type AppxPackagingServiceProvider struct {
-}
-
 type FindPackageDependencyCriteria struct {
 	User              security.PSID
 	ScopeIsSystem     foundation.BOOL

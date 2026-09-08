@@ -24,9 +24,6 @@ type BucketParameters struct {
 	PszParams        [2550]uint16
 }
 
-type CLRRuntimeHost struct {
-}
-
 type CLR_DEBUGGING_VERSION struct {
 	WStructVersion uint16
 	WMajor         uint16
@@ -52,15 +49,6 @@ type COR_GC_STATS struct {
 type COR_GC_THREAD_STATS struct {
 	PerThreadAllocation uint64
 	Flags               uint32
-}
-
-type ComCallUnmarshal struct {
-}
-
-type ComCallUnmarshalV4 struct {
-}
-
-type CorRuntimeHost struct {
 }
 
 // CustomDumpItem_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -95,7 +83,4 @@ type ModuleBindInfo struct {
 type StackOverflowInfo struct {
 	SoType         StackOverflowType
 	PExceptionInfo *systemdiagnosticsdebug.EXCEPTION_POINTERS
-}
-
-type TypeNameFactory struct {
 }

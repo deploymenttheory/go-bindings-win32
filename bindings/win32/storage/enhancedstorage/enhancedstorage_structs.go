@@ -43,18 +43,6 @@ type ENHANCED_STORAGE_PASSWORD_SILO_INFORMATION struct {
 	MaxChallengeSize                      uint16
 }
 
-type EnhancedStorageACT struct {
-}
-
-type EnhancedStorageSilo struct {
-}
-
-type EnhancedStorageSiloAction struct {
-}
-
-type EnumEnhancedStorageACT struct {
-}
-
 // SILO_INFO: https://learn.microsoft.com/windows/win32/api/ehstorapi/ns-ehstorapi-silo_info
 type SILO_INFO struct {
 	UlSTID              uint32

@@ -78,18 +78,6 @@ type MBN_SMS_STATUS_INFO struct {
 	MessageIndex uint32
 }
 
-type MbnConnectionManager struct {
-}
-
-type MbnConnectionProfileManager struct {
-}
-
-type MbnDeviceServicesManager struct {
-}
-
-type MbnInterfaceManager struct {
-}
-
 type DummyPinType__ struct {
 	PinType uint32
 }

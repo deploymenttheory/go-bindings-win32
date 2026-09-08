@@ -9,9 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-type IsolatedAppLauncher struct {
-}
-
 type IsolatedAppLauncherTelemetryParameters struct {
 	EnableForLaunch foundation.BOOL
 	CorrelationGUID win32.GUID

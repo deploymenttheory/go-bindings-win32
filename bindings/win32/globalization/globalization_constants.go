@@ -128,6 +128,12 @@ const CAL_THAI uint32 = 7
 const CAL_UMALQURA uint32 = 23
 const CAL_USE_CP_ACP uint32 = 1073741824
 const CANITER_SKIP_ZEROES uint32 = 1
+
+var CLSID_CMLangConvertCharset win32.GUID = win32.GUID{Data1: 0xd66d6f99, Data2: 0xcdaa, Data3: 0x11d0, Data4: [8]byte{0xb8, 0x22, 0x00, 0xc0, 0x4f, 0xc9, 0xb3, 0x1f}}
+var CLSID_CMLangString win32.GUID = win32.GUID{Data1: 0xc04d65cf, Data2: 0xb70d, Data3: 0x11d0, Data4: [8]byte{0xb1, 0x88, 0x00, 0xaa, 0x00, 0x38, 0xc9, 0x69}}
+var CLSID_CMultiLanguage win32.GUID = win32.GUID{Data1: 0x275c23e2, Data2: 0x3747, Data3: 0x11d0, Data4: [8]byte{0x9f, 0xea, 0x00, 0xaa, 0x00, 0x3f, 0x86, 0x46}}
+var CLSID_SpellCheckerFactory win32.GUID = win32.GUID{Data1: 0x7ab36653, Data2: 0x1796, Data3: 0x484b, Data4: [8]byte{0xbd, 0xfa, 0xe7, 0x4f, 0x1d, 0xb7, 0xc1, 0xdc}}
+
 const CPIOD_FORCE_PROMPT int32 = -2147483648
 const CPIOD_PEEK int32 = 1073741824
 const CP_ACP uint32 = 0

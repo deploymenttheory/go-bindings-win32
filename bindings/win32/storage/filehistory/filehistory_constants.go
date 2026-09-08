@@ -5,8 +5,12 @@
 package filehistory
 
 import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
+
+var CLSID_FhConfigMgr win32.GUID = win32.GUID{Data1: 0xed43bb3c, Data2: 0x09e9, Data3: 0x498a, Data4: [8]byte{0x9d, 0xf6, 0x21, 0x77, 0x24, 0x4c, 0x6d, 0xb4}}
+var CLSID_FhReassociation win32.GUID = win32.GUID{Data1: 0x4d728e35, Data2: 0x16fa, Data3: 0x4320, Data4: [8]byte{0x9e, 0x8b, 0xbf, 0xd7, 0x10, 0x0a, 0x88, 0x46}}
 
 const FHCFG_E_CONFIGURATION_PREVIOUSLY_LOADED foundation.HRESULT = -2147220731
 const FHCFG_E_CONFIG_ALREADY_EXISTS foundation.HRESULT = -2147220734

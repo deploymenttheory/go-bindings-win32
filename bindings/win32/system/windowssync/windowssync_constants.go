@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+var CLSID_SyncProviderRegistration win32.GUID = win32.GUID{Data1: 0xf82b4ef1, Data2: 0x93a9, Data3: 0x4dde, Data4: [8]byte{0x80, 0x15, 0xf7, 0x95, 0x0a, 0x1a, 0x6e, 0x31}}
 var PKEY_CONFIGUI_CAPABILITIES = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 1430988010, Data2: 59619, Data3: 17850, Data4: [8]byte{147, 82, 223, 181, 97, 225, 113, 228}}, Pid: 5}
 var PKEY_CONFIGUI_CLSID = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 1430988010, Data2: 59619, Data3: 17850, Data4: [8]byte{147, 82, 223, 181, 97, 225, 113, 228}}, Pid: 3}
 var PKEY_CONFIGUI_CONTENTTYPE = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 1430988010, Data2: 59619, Data3: 17850, Data4: [8]byte{147, 82, 223, 181, 97, 225, 113, 228}}, Pid: 4}

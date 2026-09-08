@@ -228,6 +228,13 @@ func (in *Ingester) classifyTypeDef(typeDef *winmd.TypeDefRow, row uint32) strin
 			in.hasAttribute(typeDefTarget(row), "MetadataTypedefAttribute") {
 			return "Typedef"
 		}
+		// A COM coclass is projected as a fieldless value type carrying only
+		// a [Guid]: that GUID is the class's CLSID, and there is no layout to
+		// emit. Without this it classifies as a struct and lands in the
+		// bindings as an empty type, losing the CLSID entirely.
+		if typeDef.FieldFirst == typeDef.FieldEnd && in.guidOf(typeDefTarget(row)) != "" {
+			return "ComClassID"
+		}
 		if typeDef.Flags&winmd.TypeAttrExplicitLayout != 0 {
 			return "Union"
 		}
@@ -279,8 +286,14 @@ func (in *Ingester) projectTypeDef(meta *win32meta.NamespaceMeta, typeDef *winmd
 		meta.Interfaces[typeDef.Name] = in.projectInterface(typeDef, row)
 	case "ComClassID":
 		if guid := in.guidOf(typeDefTarget(row)); guid != "" {
+			// Name it the way the C headers (and CsWin32) do, so callers can
+			// grep the CLSID they know: CLSID_MMDeviceEnumerator.
+			name := typeDef.Name
+			if !strings.HasPrefix(name, "CLSID_") {
+				name = "CLSID_" + name
+			}
 			meta.Constants = append(meta.Constants, win32meta.Constant{
-				Name:      typeDef.Name,
+				Name:      name,
 				Type:      win32meta.TypeRef{Kind: "Native", Name: "Guid"},
 				Value:     guid,
 				ValueKind: "Guid",

@@ -8,6 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
+var CLSID_SENS win32.GUID = win32.GUID{Data1: 0xd597cafe, Data2: 0x5b9f, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xd2, 0x00, 0xaa, 0x00, 0x4a, 0xbd, 0x5e}}
+
 const CONNECTION_AOL uint32 = 4
 const NETWORK_ALIVE_AOL uint32 = 4
 const NETWORK_ALIVE_INTERNET uint32 = 8

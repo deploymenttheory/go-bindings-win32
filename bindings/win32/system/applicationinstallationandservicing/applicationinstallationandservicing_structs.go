@@ -212,9 +212,6 @@ type MSIPATCHSEQUENCEINFOW struct {
 	UStatus        uint32
 }
 
-type MsmMerge struct {
-}
-
 type PATCH_IGNORE_RANGE struct {
 	OffsetInOldFile uint32
 	LengthInBytes   uint32
@@ -309,9 +306,6 @@ type PATCH_RETAIN_RANGE struct {
 
 type PMSIHANDLE struct {
 	M_h MSIHANDLE
-}
-
-type PMSvc struct {
 }
 
 type PM_APPTASKTYPE struct {

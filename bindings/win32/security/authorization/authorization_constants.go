@@ -5,6 +5,7 @@
 package authorization
 
 import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -129,6 +130,11 @@ const AUTHZ_SECURITY_ATTRIBUTE_TYPE_STRING uint32 = 3
 const AUTHZ_SECURITY_ATTRIBUTE_TYPE_UINT64 uint32 = 2
 const AUTHZ_SKIP_TOKEN_GROUPS uint32 = 2
 const AUTHZ_WPD_CATEGORY_FLAG uint32 = 16
+
+var CLSID_AzAuthorizationStore win32.GUID = win32.GUID{Data1: 0xb2bcff59, Data2: 0xa757, Data3: 0x4b0b, Data4: [8]byte{0xa1, 0xbc, 0xea, 0x69, 0x98, 0x1d, 0xa6, 0x9e}}
+var CLSID_AzBizRuleContext win32.GUID = win32.GUID{Data1: 0x5c2dc96f, Data2: 0x8d51, Data3: 0x434b, Data4: [8]byte{0xb3, 0x3c, 0x37, 0x9b, 0xcc, 0xae, 0x77, 0xc3}}
+var CLSID_AzPrincipalLocator win32.GUID = win32.GUID{Data1: 0x483afb5d, Data2: 0x70df, Data3: 0x4e16, Data4: [8]byte{0xab, 0xdc, 0xa1, 0xde, 0x4d, 0x01, 0x5a, 0x3e}}
+
 const INHERITED_ACCESS_ENTRY uint32 = 16
 const INHERITED_GRANDPARENT uint32 = 536870912
 const INHERITED_PARENT uint32 = 268435456

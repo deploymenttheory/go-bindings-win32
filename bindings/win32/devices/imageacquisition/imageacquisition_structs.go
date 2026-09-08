@@ -474,22 +474,10 @@ type WIA_RAW_HEADER struct {
 	PaletteSize       uint32
 }
 
-type WiaDevMgr struct {
-}
-
-type WiaDevMgr2 struct {
-}
-
-type WiaLog struct {
-}
-
 // WiaTransferParams: https://learn.microsoft.com/windows/win32/wia/-wia-wiatransferparams
 type WiaTransferParams struct {
 	LMessage           int32
 	LPercentComplete   int32
 	UlTransferredBytes uint64
 	HrErrorStatus      foundation.HRESULT
-}
-
-type WiaVideo struct {
 }

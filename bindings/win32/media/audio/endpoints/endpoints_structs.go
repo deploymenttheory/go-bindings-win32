@@ -14,6 +14,3 @@ type AUDIO_ENDPOINT_SHARED_CREATE_PARAMS struct {
 	TargetEndpointConnectorType EndpointConnectorType
 	WfxDeviceFormat             mediaaudio.WAVEFORMATEX
 }
-
-type DEVINTERFACE_AUDIOENDPOINTPLUGIN struct {
-}

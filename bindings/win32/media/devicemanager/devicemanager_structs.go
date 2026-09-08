@@ -33,12 +33,6 @@ type MTP_COMMAND_DATA_OUT struct {
 	Data [31]byte
 }
 
-type MediaDevMgr struct {
-}
-
-type MediaDevMgrClassFactory struct {
-}
-
 // OPAQUECOMMAND: https://learn.microsoft.com/windows/win32/WMDM/opaquecommand
 type OPAQUECOMMAND struct {
 	GuidCommand win32.GUID
@@ -474,21 +468,12 @@ func (u *WMDMDetermineMaxPropStringLen) Sz086() *[30]uint16 {
 	return (*[30]uint16)(unsafe.Pointer(u))
 }
 
-type WMDMDevice struct {
-}
-
-type WMDMDeviceEnum struct {
-}
-
 // WMDMID: https://learn.microsoft.com/windows/win32/WMDM/wmdmid
 type WMDMID struct {
 	CbSize             uint32
 	DwVendorID         uint32
 	PID                [128]byte
 	SerialNumberLength uint32
-}
-
-type WMDMLogger struct {
 }
 
 // WMDMMetadataView: https://learn.microsoft.com/windows/win32/WMDM/wmdmmetadataview
@@ -507,15 +492,6 @@ type WMDMRIGHTS struct {
 	DwAppSec        uint32
 	DwPlaybackCount uint32
 	ExpirationDate  WMDMDATETIME
-}
-
-type WMDMStorage struct {
-}
-
-type WMDMStorageEnum struct {
-}
-
-type WMDMStorageGlobal struct {
 }
 
 // WMDM_FORMAT_CAPABILITY: https://learn.microsoft.com/windows/win32/WMDM/wmdm-format-capability

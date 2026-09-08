@@ -8,39 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-type DOMDocument struct {
-}
-
-type DOMDocument60 struct {
-}
-
-type DOMFreeThreadedDocument struct {
-}
-
-type FreeThreadedDOMDocument60 struct {
-}
-
-type FreeThreadedXMLHTTP60 struct {
-}
-
-type MXHTMLWriter60 struct {
-}
-
-type MXNamespaceManager60 struct {
-}
-
-type MXXMLWriter60 struct {
-}
-
-type SAXAttributes60 struct {
-}
-
-type SAXXMLReader60 struct {
-}
-
-type ServerXMLHTTP60 struct {
-}
-
 // XHR_CERT: https://learn.microsoft.com/windows/win32/api/msxml6/ns-msxml6-xhr_cert
 type XHR_CERT struct {
 	CbCert uint32
@@ -57,21 +24,6 @@ type XHR_COOKIE struct {
 	DwFlags       uint32
 }
 
-type XMLDSOControl struct {
-}
-
-type XMLDocument struct {
-}
-
-type XMLHTTP60 struct {
-}
-
-type XMLHTTPRequest struct {
-}
-
-type XMLSchemaCache60 struct {
-}
-
 type XML_ERROR struct {
 	NLine       uint32
 	PchBuf      foundation.BSTR
@@ -81,9 +33,6 @@ type XML_ERROR struct {
 	PszExpected foundation.BSTR
 	Reserved1   uint32
 	Reserved2   uint32
-}
-
-type XSLTemplate60 struct {
 }
 
 type Msxml6_ReferenceRemainingTypes__ struct {

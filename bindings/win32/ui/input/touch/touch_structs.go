@@ -37,12 +37,6 @@ type GESTURENOTIFYSTRUCT struct {
 	DwInstanceID uint32
 }
 
-type InertiaProcessor struct {
-}
-
-type ManipulationProcessor struct {
-}
-
 // TOUCHINPUT: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-touchinput
 type TOUCHINPUT struct {
 	X           int32

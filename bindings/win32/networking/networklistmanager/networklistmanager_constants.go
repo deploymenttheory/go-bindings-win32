@@ -4,6 +4,12 @@
 
 package networklistmanager
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
+var CLSID_NetworkListManager win32.GUID = win32.GUID{Data1: 0xdcb00c01, Data2: 0x570f, Data3: 0x4a9b, Data4: [8]byte{0x8d, 0x69, 0x19, 0x9f, 0xdb, 0xa5, 0x72, 0x3b}}
+
 const NA_AllowMerge = "NA_AllowMerge"
 const NA_CategoryReadOnly = "NA_CategoryReadOnly"
 const NA_CategorySetByPolicy = "NA_CategorySetByPolicy"

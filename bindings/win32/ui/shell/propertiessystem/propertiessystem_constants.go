@@ -4,4 +4,12 @@
 
 package propertiessystem
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
+var CLSID_InMemoryPropertyStore win32.GUID = win32.GUID{Data1: 0x9a02e012, Data2: 0x6303, Data3: 0x4e1e, Data4: [8]byte{0xb9, 0xa1, 0x63, 0x0f, 0x80, 0x25, 0x92, 0xc5}}
+var CLSID_InMemoryPropertyStoreMarshalByValue win32.GUID = win32.GUID{Data1: 0xd4ca0e2d, Data2: 0x6da7, Data3: 0x4b75, Data4: [8]byte{0xa9, 0x7c, 0x5f, 0x30, 0x6f, 0x0e, 0xae, 0xdc}}
+var CLSID_PropertySystem win32.GUID = win32.GUID{Data1: 0xb8967f85, Data2: 0x58ae, Data3: 0x4f46, Data4: [8]byte{0x9f, 0xb2, 0x5d, 0x79, 0x04, 0x79, 0x8f, 0x4b}}
+
 const PKEY_PIDSTR_MAX uint32 = 10

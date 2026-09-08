@@ -13,24 +13,6 @@ import (
 	uiinputkeyboardandmouse "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/input/keyboardandmouse"
 )
 
-type AccClientDocMgr struct {
-}
-
-type AccDictionary struct {
-}
-
-type AccServerDocMgr struct {
-}
-
-type AccStore struct {
-}
-
-type DocWrap struct {
-}
-
-type MSAAControl struct {
-}
-
 // TF_DA_COLOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage. Every member overlays that storage from offset 0; read or write one
 // through its accessor.

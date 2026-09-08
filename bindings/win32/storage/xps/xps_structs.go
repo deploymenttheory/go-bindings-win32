@@ -156,12 +156,3 @@ type XPS_SIZE struct {
 	Width  float32
 	Height float32
 }
-
-type XpsOMObjectFactory struct {
-}
-
-type XpsOMThumbnailGenerator struct {
-}
-
-type XpsSignatureManager struct {
-}

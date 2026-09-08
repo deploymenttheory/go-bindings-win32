@@ -4,10 +4,17 @@
 
 package networkpolicyserver
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
 const AUTHSRV_AUTHORIZATION_VALUE_W = "AuthorizationDLLs"
 const AUTHSRV_ENFORCE_NP_FOR_PAP_CHALLENGE_RESPONSE_VALUE_W = "EnforceNetworkPolicyForPAPBasedChallengeResponse"
 const AUTHSRV_EXTENSIONS_VALUE_W = "ExtensionDLLs"
 const AUTHSRV_PARAMETERS_KEY_W = "System\\CurrentControlSet\\Services\\AuthSrv\\Parameters"
+
+var CLSID_SdoMachine win32.GUID = win32.GUID{Data1: 0xe9218ae7, Data2: 0x9e91, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x60, 0x00, 0x80, 0xc7, 0x84, 0x6b, 0xc0}}
+
 const RADIUS_EXTENSION_FREE_ATTRIBUTES = "RadiusExtensionFreeAttributes"
 const RADIUS_EXTENSION_INIT = "RadiusExtensionInit"
 const RADIUS_EXTENSION_PROCESS = "RadiusExtensionProcess"

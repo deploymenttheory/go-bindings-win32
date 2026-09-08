@@ -64,15 +64,3 @@ type SCF_NAVIGATION_EVENT struct {
 	TargetPage   uint32
 	Button       uint32
 }
-
-type SideShowKeyCollection struct {
-}
-
-type SideShowNotification struct {
-}
-
-type SideShowPropVariantCollection struct {
-}
-
-type SideShowSession struct {
-}

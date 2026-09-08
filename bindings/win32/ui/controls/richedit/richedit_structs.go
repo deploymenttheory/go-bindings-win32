@@ -22,9 +22,20 @@ type BIDIOPTIONS struct {
 }
 
 // CARET_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CARET_INFO struct {
 	Data [1]uint64
+}
+
+// Hbitmap reinterprets the union as its hbitmap member.
+func (u *CARET_INFO) Hbitmap() *graphicsgdi.HBITMAP {
+	return (*graphicsgdi.HBITMAP)(unsafe.Pointer(u))
+}
+
+// CaretFlags reinterprets the union as its caretFlags member.
+func (u *CARET_INFO) CaretFlags() *CARET_FLAGS {
+	return (*CARET_FLAGS)(unsafe.Pointer(u))
 }
 
 // CHANGENOTIFY: https://learn.microsoft.com/windows/win32/api/textserv/ns-textserv-changenotify
@@ -34,9 +45,20 @@ type CHANGENOTIFY struct {
 }
 
 // CHARFORMAT2A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CHARFORMAT2A_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwReserved reinterprets the union as its dwReserved member.
+func (u *CHARFORMAT2A_Anonymous_e__Union) DwReserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwCookie reinterprets the union as its dwCookie member.
+func (u *CHARFORMAT2A_Anonymous_e__Union) DwCookie() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // CHARFORMAT2A: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-charformat2a
@@ -56,9 +78,20 @@ type CHARFORMAT2A struct {
 }
 
 // CHARFORMAT2W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CHARFORMAT2W_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwReserved reinterprets the union as its dwReserved member.
+func (u *CHARFORMAT2W_Anonymous_e__Union) DwReserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwCookie reinterprets the union as its dwCookie member.
+func (u *CHARFORMAT2W_Anonymous_e__Union) DwCookie() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // CHARFORMAT2W: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-charformat2w
@@ -303,9 +336,20 @@ type OBJECTPOSITIONS struct {
 }
 
 // PARAFORMAT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PARAFORMAT_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// WReserved reinterprets the union as its wReserved member.
+func (u *PARAFORMAT_Anonymous_e__Union) WReserved() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// WEffects reinterprets the union as its wEffects member.
+func (u *PARAFORMAT_Anonymous_e__Union) WEffects() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 // PARAFORMAT: https://learn.microsoft.com/windows/win32/api/richedit/ns-richedit-paraformat

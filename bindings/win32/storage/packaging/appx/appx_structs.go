@@ -96,10 +96,28 @@ type PACKAGE_INFO struct {
 	Data [20]uint32
 }
 
+type PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Revision uint16
+	Build    uint16
+	Minor    uint16
+	Major    uint16
+}
+
 // PACKAGE_VERSION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PACKAGE_VERSION_Anonymous_e__Union struct {
 	Data [2]uint32
+}
+
+// Version reinterprets the union as its Version member.
+func (u *PACKAGE_VERSION_Anonymous_e__Union) Version() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PACKAGE_VERSION_Anonymous_e__Union) Anonymous() *PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PACKAGE_VERSION: https://learn.microsoft.com/windows/win32/api/appmodel/ns-appmodel-package_version

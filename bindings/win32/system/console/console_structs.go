@@ -23,9 +23,20 @@ type APPKEY struct {
 }
 
 // CHAR_INFO_Char_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CHAR_INFO_Char_e__Union struct {
 	Data [1]uint16
+}
+
+// UnicodeChar reinterprets the union as its UnicodeChar member.
+func (u *CHAR_INFO_Char_e__Union) UnicodeChar() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// AsciiChar reinterprets the union as its AsciiChar member.
+func (u *CHAR_INFO_Char_e__Union) AsciiChar() *foundation.CHAR {
+	return (*foundation.CHAR)(unsafe.Pointer(u))
 }
 
 // CHAR_INFO: https://learn.microsoft.com/windows/console/char-info-str
@@ -166,9 +177,35 @@ type FOCUS_EVENT_RECORD struct {
 }
 
 // INPUT_RECORD_Event_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INPUT_RECORD_Event_e__Union struct {
 	Data [4]uint32
+}
+
+// KeyEvent reinterprets the union as its KeyEvent member.
+func (u *INPUT_RECORD_Event_e__Union) KeyEvent() *KEY_EVENT_RECORD {
+	return (*KEY_EVENT_RECORD)(unsafe.Pointer(u))
+}
+
+// MouseEvent reinterprets the union as its MouseEvent member.
+func (u *INPUT_RECORD_Event_e__Union) MouseEvent() *MOUSE_EVENT_RECORD {
+	return (*MOUSE_EVENT_RECORD)(unsafe.Pointer(u))
+}
+
+// WindowBufferSizeEvent reinterprets the union as its WindowBufferSizeEvent member.
+func (u *INPUT_RECORD_Event_e__Union) WindowBufferSizeEvent() *WINDOW_BUFFER_SIZE_RECORD {
+	return (*WINDOW_BUFFER_SIZE_RECORD)(unsafe.Pointer(u))
+}
+
+// MenuEvent reinterprets the union as its MenuEvent member.
+func (u *INPUT_RECORD_Event_e__Union) MenuEvent() *MENU_EVENT_RECORD {
+	return (*MENU_EVENT_RECORD)(unsafe.Pointer(u))
+}
+
+// FocusEvent reinterprets the union as its FocusEvent member.
+func (u *INPUT_RECORD_Event_e__Union) FocusEvent() *FOCUS_EVENT_RECORD {
+	return (*FOCUS_EVENT_RECORD)(unsafe.Pointer(u))
 }
 
 // INPUT_RECORD: https://learn.microsoft.com/windows/console/input-record-str
@@ -178,9 +215,20 @@ type INPUT_RECORD struct {
 }
 
 // KEY_EVENT_RECORD_uChar_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KEY_EVENT_RECORD_uChar_e__Union struct {
 	Data [1]uint16
+}
+
+// UnicodeChar reinterprets the union as its UnicodeChar member.
+func (u *KEY_EVENT_RECORD_uChar_e__Union) UnicodeChar() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// AsciiChar reinterprets the union as its AsciiChar member.
+func (u *KEY_EVENT_RECORD_uChar_e__Union) AsciiChar() *foundation.CHAR {
+	return (*foundation.CHAR)(unsafe.Pointer(u))
 }
 
 // KEY_EVENT_RECORD: https://learn.microsoft.com/windows/console/key-event-record-str

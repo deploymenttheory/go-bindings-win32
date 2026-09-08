@@ -178,9 +178,20 @@ type CONTAINER_VOLUME_STATE struct {
 }
 
 // CREATE_DISK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CREATE_DISK_Anonymous_e__Union struct {
 	Data [5]uint32
+}
+
+// Mbr reinterprets the union as its Mbr member.
+func (u *CREATE_DISK_Anonymous_e__Union) Mbr() *CREATE_DISK_MBR {
+	return (*CREATE_DISK_MBR)(unsafe.Pointer(u))
+}
+
+// Gpt reinterprets the union as its Gpt member.
+func (u *CREATE_DISK_Anonymous_e__Union) Gpt() *CREATE_DISK_GPT {
+	return (*CREATE_DISK_GPT)(unsafe.Pointer(u))
 }
 
 // CREATE_DISK: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-create_disk
@@ -585,10 +596,31 @@ type DEVICE_LB_PROVISIONING_DESCRIPTOR struct {
 	MaxUnmapBlockDescriptorCount uint32
 }
 
+type DEVICE_LOCATION_Anonymous_e__Union_Anonymous1_e__Struct struct {
+	Channel uint32
+	Device  uint32
+}
+
+type DEVICE_LOCATION_Anonymous_e__Union_Anonymous2_e__Struct struct {
+	Target uint32
+	Lun    uint32
+}
+
 // DEVICE_LOCATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEVICE_LOCATION_Anonymous_e__Union struct {
 	Data [2]uint32
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *DEVICE_LOCATION_Anonymous_e__Union) Anonymous1() *DEVICE_LOCATION_Anonymous_e__Union_Anonymous1_e__Struct {
+	return (*DEVICE_LOCATION_Anonymous_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *DEVICE_LOCATION_Anonymous_e__Union) Anonymous2() *DEVICE_LOCATION_Anonymous_e__Union_Anonymous2_e__Struct {
+	return (*DEVICE_LOCATION_Anonymous_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
 }
 
 type DEVICE_LOCATION struct {
@@ -623,10 +655,71 @@ type DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT struct {
 	OutputBlockLength   uint32
 }
 
+type DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_DiskInfo_e__Struct struct {
+	Cylinders            int64
+	MediaType            STORAGE_MEDIA_TYPE
+	TracksPerCylinder    uint32
+	SectorsPerTrack      uint32
+	BytesPerSector       uint32
+	NumberMediaSides     uint32
+	MediaCharacteristics uint32
+}
+
+type DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_RemovableDiskInfo_e__Struct struct {
+	Cylinders            int64
+	MediaType            STORAGE_MEDIA_TYPE
+	TracksPerCylinder    uint32
+	SectorsPerTrack      uint32
+	BytesPerSector       uint32
+	NumberMediaSides     uint32
+	MediaCharacteristics uint32
+}
+
+type DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union_ScsiInformation_e__Struct struct {
+	MediumType  byte
+	DensityCode byte
+}
+
+// DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union struct {
+	Data [2]byte
+}
+
+// ScsiInformation reinterprets the union as its ScsiInformation member.
+func (u *DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union) ScsiInformation() *DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union_ScsiInformation_e__Struct {
+	return (*DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union_ScsiInformation_e__Struct)(unsafe.Pointer(u))
+}
+
+type DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct struct {
+	MediaType            STORAGE_MEDIA_TYPE
+	MediaCharacteristics uint32
+	CurrentBlockSize     uint32
+	BusType              storagefilesystem.STORAGE_BUS_TYPE
+	BusSpecificData      DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union
+}
+
 // DEVICE_MEDIA_INFO_DeviceSpecific_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEVICE_MEDIA_INFO_DeviceSpecific_e__Union struct {
 	Data [4]uint64
+}
+
+// DiskInfo reinterprets the union as its DiskInfo member.
+func (u *DEVICE_MEDIA_INFO_DeviceSpecific_e__Union) DiskInfo() *DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_DiskInfo_e__Struct {
+	return (*DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_DiskInfo_e__Struct)(unsafe.Pointer(u))
+}
+
+// RemovableDiskInfo reinterprets the union as its RemovableDiskInfo member.
+func (u *DEVICE_MEDIA_INFO_DeviceSpecific_e__Union) RemovableDiskInfo() *DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_RemovableDiskInfo_e__Struct {
+	return (*DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_RemovableDiskInfo_e__Struct)(unsafe.Pointer(u))
+}
+
+// TapeInfo reinterprets the union as its TapeInfo member.
+func (u *DEVICE_MEDIA_INFO_DeviceSpecific_e__Union) TapeInfo() *DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct {
+	return (*DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct)(unsafe.Pointer(u))
 }
 
 // DEVICE_MEDIA_INFO: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-device_media_info
@@ -660,10 +753,25 @@ type DEVICE_STORAGE_ADDRESS_RANGE struct {
 	LengthInBytes uint64
 }
 
+type DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// AllFlags reinterprets the union as its AllFlags member.
+func (u *DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union) AllFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union) Anonymous() *DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type DEVICE_STORAGE_RANGE_ATTRIBUTES struct {
@@ -686,10 +794,32 @@ type DEVICE_WRITE_AGGREGATION_DESCRIPTOR struct {
 	BenefitsFromWriteAggregation foundation.BOOLEAN
 }
 
+type DISK_CACHE_INFORMATION_Anonymous_e__Union_BlockPrefetch_e__Struct struct {
+	Minimum uint16
+	Maximum uint16
+}
+
+type DISK_CACHE_INFORMATION_Anonymous_e__Union_ScalarPrefetch_e__Struct struct {
+	Minimum       uint16
+	Maximum       uint16
+	MaximumBlocks uint16
+}
+
 // DISK_CACHE_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISK_CACHE_INFORMATION_Anonymous_e__Union struct {
 	Data [3]uint16
+}
+
+// ScalarPrefetch reinterprets the union as its ScalarPrefetch member.
+func (u *DISK_CACHE_INFORMATION_Anonymous_e__Union) ScalarPrefetch() *DISK_CACHE_INFORMATION_Anonymous_e__Union_ScalarPrefetch_e__Struct {
+	return (*DISK_CACHE_INFORMATION_Anonymous_e__Union_ScalarPrefetch_e__Struct)(unsafe.Pointer(u))
+}
+
+// BlockPrefetch reinterprets the union as its BlockPrefetch member.
+func (u *DISK_CACHE_INFORMATION_Anonymous_e__Union) BlockPrefetch() *DISK_CACHE_INFORMATION_Anonymous_e__Union_BlockPrefetch_e__Struct {
+	return (*DISK_CACHE_INFORMATION_Anonymous_e__Union_BlockPrefetch_e__Struct)(unsafe.Pointer(u))
 }
 
 // DISK_CACHE_INFORMATION: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-disk_cache_information
@@ -709,10 +839,21 @@ type DISK_CONTROLLER_NUMBER struct {
 	DiskNumber       uint32
 }
 
+type DISK_DETECTION_INFO_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Int13   DISK_INT13_INFO
+	ExInt13 DISK_EX_INT13_INFO
+}
+
 // DISK_DETECTION_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISK_DETECTION_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISK_DETECTION_INFO_Anonymous_e__Union) Anonymous() *DISK_DETECTION_INFO_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISK_DETECTION_INFO_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // DISK_DETECTION_INFO: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-disk_detection_info
@@ -792,10 +933,30 @@ type DISK_LOGGING struct {
 	BufferSize    uint32
 }
 
+type DISK_PARTITION_INFO_Anonymous_e__Union_Gpt_e__Struct struct {
+	DiskId win32.GUID
+}
+
+type DISK_PARTITION_INFO_Anonymous_e__Union_Mbr_e__Struct struct {
+	Signature uint32
+	CheckSum  uint32
+}
+
 // DISK_PARTITION_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISK_PARTITION_INFO_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Mbr reinterprets the union as its Mbr member.
+func (u *DISK_PARTITION_INFO_Anonymous_e__Union) Mbr() *DISK_PARTITION_INFO_Anonymous_e__Union_Mbr_e__Struct {
+	return (*DISK_PARTITION_INFO_Anonymous_e__Union_Mbr_e__Struct)(unsafe.Pointer(u))
+}
+
+// Gpt reinterprets the union as its Gpt member.
+func (u *DISK_PARTITION_INFO_Anonymous_e__Union) Gpt() *DISK_PARTITION_INFO_Anonymous_e__Union_Gpt_e__Struct {
+	return (*DISK_PARTITION_INFO_Anonymous_e__Union_Gpt_e__Struct)(unsafe.Pointer(u))
 }
 
 // DISK_PARTITION_INFO: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-disk_partition_info
@@ -846,9 +1007,20 @@ type DRIVE_LAYOUT_INFORMATION struct {
 }
 
 // DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// Mbr reinterprets the union as its Mbr member.
+func (u *DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union) Mbr() *DRIVE_LAYOUT_INFORMATION_MBR {
+	return (*DRIVE_LAYOUT_INFORMATION_MBR)(unsafe.Pointer(u))
+}
+
+// Gpt reinterprets the union as its Gpt member.
+func (u *DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union) Gpt() *DRIVE_LAYOUT_INFORMATION_GPT {
+	return (*DRIVE_LAYOUT_INFORMATION_GPT)(unsafe.Pointer(u))
 }
 
 // DRIVE_LAYOUT_INFORMATION_EX: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-drive_layout_information_ex
@@ -1091,10 +1263,27 @@ type FILE_MAKE_COMPATIBLE_BUFFER struct {
 	CloseDisc foundation.BOOLEAN
 }
 
+type FILE_OBJECTID_BUFFER_Anonymous_e__Union_Anonymous_e__Struct struct {
+	BirthVolumeId [16]byte
+	BirthObjectId [16]byte
+	DomainId      [16]byte
+}
+
 // FILE_OBJECTID_BUFFER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FILE_OBJECTID_BUFFER_Anonymous_e__Union struct {
 	Data [48]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *FILE_OBJECTID_BUFFER_Anonymous_e__Union) Anonymous() *FILE_OBJECTID_BUFFER_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*FILE_OBJECTID_BUFFER_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// ExtendedInfo reinterprets the union as its ExtendedInfo member.
+func (u *FILE_OBJECTID_BUFFER_Anonymous_e__Union) ExtendedInfo() *[48]byte {
+	return (*[48]byte)(unsafe.Pointer(u))
 }
 
 // FILE_OBJECTID_BUFFER: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-file_objectid_buffer
@@ -1367,9 +1556,35 @@ type FS_BPIO_INPUT struct {
 }
 
 // FS_BPIO_OUTPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FS_BPIO_OUTPUT_Anonymous_e__Union struct {
 	Data [82]uint32
+}
+
+// Enable reinterprets the union as its Enable member.
+func (u *FS_BPIO_OUTPUT_Anonymous_e__Union) Enable() *FS_BPIO_RESULTS {
+	return (*FS_BPIO_RESULTS)(unsafe.Pointer(u))
+}
+
+// Query reinterprets the union as its Query member.
+func (u *FS_BPIO_OUTPUT_Anonymous_e__Union) Query() *FS_BPIO_RESULTS {
+	return (*FS_BPIO_RESULTS)(unsafe.Pointer(u))
+}
+
+// VolumeStackResume reinterprets the union as its VolumeStackResume member.
+func (u *FS_BPIO_OUTPUT_Anonymous_e__Union) VolumeStackResume() *FS_BPIO_RESULTS {
+	return (*FS_BPIO_RESULTS)(unsafe.Pointer(u))
+}
+
+// StreamResume reinterprets the union as its StreamResume member.
+func (u *FS_BPIO_OUTPUT_Anonymous_e__Union) StreamResume() *FS_BPIO_RESULTS {
+	return (*FS_BPIO_RESULTS)(unsafe.Pointer(u))
+}
+
+// GetInfo reinterprets the union as its GetInfo member.
+func (u *FS_BPIO_OUTPUT_Anonymous_e__Union) GetInfo() *FS_BPIO_INFO {
+	return (*FS_BPIO_INFO)(unsafe.Pointer(u))
 }
 
 type FS_BPIO_OUTPUT struct {
@@ -1524,9 +1739,20 @@ type LOOKUP_STREAM_FROM_CLUSTER_OUTPUT struct {
 }
 
 // MARK_HANDLE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MARK_HANDLE_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// UsnSourceInfo reinterprets the union as its UsnSourceInfo member.
+func (u *MARK_HANDLE_INFO_Anonymous_e__Union) UsnSourceInfo() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CopyNumber reinterprets the union as its CopyNumber member.
+func (u *MARK_HANDLE_INFO_Anonymous_e__Union) CopyNumber() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // MARK_HANDLE_INFO: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-mark_handle_info
@@ -1537,9 +1763,20 @@ type MARK_HANDLE_INFO struct {
 }
 
 // MARK_HANDLE_INFO32_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MARK_HANDLE_INFO32_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// UsnSourceInfo reinterprets the union as its UsnSourceInfo member.
+func (u *MARK_HANDLE_INFO32_Anonymous_e__Union) UsnSourceInfo() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CopyNumber reinterprets the union as its CopyNumber member.
+func (u *MARK_HANDLE_INFO32_Anonymous_e__Union) CopyNumber() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // MARK_HANDLE_INFO32: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-mark_handle_info32
@@ -1835,9 +2072,20 @@ type PARTITION_INFORMATION struct {
 }
 
 // PARTITION_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PARTITION_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [14]uint64
+}
+
+// Mbr reinterprets the union as its Mbr member.
+func (u *PARTITION_INFORMATION_EX_Anonymous_e__Union) Mbr() *PARTITION_INFORMATION_MBR {
+	return (*PARTITION_INFORMATION_MBR)(unsafe.Pointer(u))
+}
+
+// Gpt reinterprets the union as its Gpt member.
+func (u *PARTITION_INFORMATION_EX_Anonymous_e__Union) Gpt() *PARTITION_INFORMATION_GPT {
+	return (*PARTITION_INFORMATION_GPT)(unsafe.Pointer(u))
 }
 
 // PARTITION_INFORMATION_EX: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-partition_information_ex
@@ -1879,10 +2127,32 @@ type PERF_BIN struct {
 	BinsRanges   [1]BIN_RANGE
 }
 
+type PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_IN_e__Struct struct {
+	Bitfield         byte
+	AllocationLength uint16
+}
+
+type PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_OUT_e__Struct struct {
+	Bitfield1     byte
+	Bitfield2     byte
+	ParameterList [1]byte
+}
+
 // PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union struct {
 	Data [2]uint16
+}
+
+// PR_IN reinterprets the union as its PR_IN member.
+func (u *PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union) PR_IN() *PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_IN_e__Struct {
+	return (*PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_IN_e__Struct)(unsafe.Pointer(u))
+}
+
+// PR_OUT reinterprets the union as its PR_OUT member.
+func (u *PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union) PR_OUT() *PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_OUT_e__Struct {
+	return (*PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_OUT_e__Struct)(unsafe.Pointer(u))
 }
 
 type PERSISTENT_RESERVE_COMMAND struct {
@@ -1959,15 +2229,42 @@ type QUERY_BAD_RANGES_OUTPUT_RANGE struct {
 }
 
 // QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union struct {
 	Data [1]uint32
 }
 
+// FilterEntryCount reinterprets the union as its FilterEntryCount member.
+func (u *QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union) FilterEntryCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// NumberOfPairs reinterprets the union as its NumberOfPairs member.
+func (u *QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union) NumberOfPairs() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // QUERY_FILE_LAYOUT_INPUT_Filter_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type QUERY_FILE_LAYOUT_INPUT_Filter_e__Union struct {
 	Data [2]uint64
+}
+
+// ClusterRanges reinterprets the union as its ClusterRanges member.
+func (u *QUERY_FILE_LAYOUT_INPUT_Filter_e__Union) ClusterRanges() *[1]CLUSTER_RANGE {
+	return (*[1]CLUSTER_RANGE)(unsafe.Pointer(u))
+}
+
+// FileReferenceRanges reinterprets the union as its FileReferenceRanges member.
+func (u *QUERY_FILE_LAYOUT_INPUT_Filter_e__Union) FileReferenceRanges() *[1]FILE_REFERENCE_RANGE {
+	return (*[1]FILE_REFERENCE_RANGE)(unsafe.Pointer(u))
+}
+
+// StorageReserveIds reinterprets the union as its StorageReserveIds member.
+func (u *QUERY_FILE_LAYOUT_INPUT_Filter_e__Union) StorageReserveIds() *[1]STORAGE_RESERVE_ID {
+	return (*[1]STORAGE_RESERVE_ID)(unsafe.Pointer(u))
 }
 
 type QUERY_FILE_LAYOUT_INPUT struct {
@@ -2502,9 +2799,25 @@ type SD_ENUM_SDS_OUTPUT struct {
 }
 
 // SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// SdChange reinterprets the union as its SdChange member.
+func (u *SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union) SdChange() *SD_CHANGE_MACHINE_SID_INPUT {
+	return (*SD_CHANGE_MACHINE_SID_INPUT)(unsafe.Pointer(u))
+}
+
+// SdQueryStats reinterprets the union as its SdQueryStats member.
+func (u *SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union) SdQueryStats() *SD_QUERY_STATS_INPUT {
+	return (*SD_QUERY_STATS_INPUT)(unsafe.Pointer(u))
+}
+
+// SdEnumSds reinterprets the union as its SdEnumSds member.
+func (u *SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union) SdEnumSds() *SD_ENUM_SDS_INPUT {
+	return (*SD_ENUM_SDS_INPUT)(unsafe.Pointer(u))
 }
 
 type SD_GLOBAL_CHANGE_INPUT struct {
@@ -2514,9 +2827,25 @@ type SD_GLOBAL_CHANGE_INPUT struct {
 }
 
 // SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union struct {
 	Data [8]uint64
+}
+
+// SdChange reinterprets the union as its SdChange member.
+func (u *SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union) SdChange() *SD_CHANGE_MACHINE_SID_OUTPUT {
+	return (*SD_CHANGE_MACHINE_SID_OUTPUT)(unsafe.Pointer(u))
+}
+
+// SdQueryStats reinterprets the union as its SdQueryStats member.
+func (u *SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union) SdQueryStats() *SD_QUERY_STATS_OUTPUT {
+	return (*SD_QUERY_STATS_OUTPUT)(unsafe.Pointer(u))
+}
+
+// SdEnumSds reinterprets the union as its SdEnumSds member.
+func (u *SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union) SdEnumSds() *SD_ENUM_SDS_OUTPUT {
+	return (*SD_ENUM_SDS_OUTPUT)(unsafe.Pointer(u))
 }
 
 type SD_GLOBAL_CHANGE_OUTPUT struct {
@@ -2577,9 +2906,20 @@ type SET_PARTITION_INFORMATION struct {
 }
 
 // SET_PARTITION_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SET_PARTITION_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [14]uint64
+}
+
+// Mbr reinterprets the union as its Mbr member.
+func (u *SET_PARTITION_INFORMATION_EX_Anonymous_e__Union) Mbr() *SET_PARTITION_INFORMATION {
+	return (*SET_PARTITION_INFORMATION)(unsafe.Pointer(u))
+}
+
+// Gpt reinterprets the union as its Gpt member.
+func (u *SET_PARTITION_INFORMATION_EX_Anonymous_e__Union) Gpt() *PARTITION_INFORMATION_GPT {
+	return (*PARTITION_INFORMATION_GPT)(unsafe.Pointer(u))
 }
 
 type SET_PARTITION_INFORMATION_EX struct {
@@ -2698,10 +3038,26 @@ type STORAGE_BUS_RESET_REQUEST struct {
 	PathId byte
 }
 
+type STORAGE_COUNTER_Value_e__Union_ManufactureDate_e__Struct struct {
+	Week uint32
+	Year uint32
+}
+
 // STORAGE_COUNTER_Value_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_COUNTER_Value_e__Union struct {
 	Data [1]uint64
+}
+
+// ManufactureDate reinterprets the union as its ManufactureDate member.
+func (u *STORAGE_COUNTER_Value_e__Union) ManufactureDate() *STORAGE_COUNTER_Value_e__Union_ManufactureDate_e__Struct {
+	return (*STORAGE_COUNTER_Value_e__Union_ManufactureDate_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlonglong reinterprets the union as its AsUlonglong member.
+func (u *STORAGE_COUNTER_Value_e__Union) AsUlonglong() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type STORAGE_COUNTER struct {
@@ -2756,10 +3112,25 @@ type STORAGE_CRYPTO_DESCRIPTOR_V2 struct {
 	CryptoCapabilities        [1]STORAGE_CRYPTO_CAPABILITY_V2
 }
 
+type STORAGE_CRYPTO_KEY_TYPE_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // STORAGE_CRYPTO_KEY_TYPE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_CRYPTO_KEY_TYPE struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *STORAGE_CRYPTO_KEY_TYPE) Anonymous() *STORAGE_CRYPTO_KEY_TYPE_Anonymous_e__Struct {
+	return (*STORAGE_CRYPTO_KEY_TYPE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *STORAGE_CRYPTO_KEY_TYPE) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 // STORAGE_DESCRIPTOR_HEADER: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_descriptor_header
@@ -2947,10 +3318,25 @@ type STORAGE_FAILURE_PREDICTION_CONFIG struct {
 	Reserved uint16
 }
 
+type STORAGE_FEATURE_SUPPORT_Flags_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint64
+}
+
 // STORAGE_FEATURE_SUPPORT_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_FEATURE_SUPPORT_Flags_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *STORAGE_FEATURE_SUPPORT_Flags_e__Union) Anonymous() *STORAGE_FEATURE_SUPPORT_Flags_e__Union_Anonymous_e__Struct {
+	return (*STORAGE_FEATURE_SUPPORT_Flags_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlonglong reinterprets the union as its AsUlonglong member.
+func (u *STORAGE_FEATURE_SUPPORT_Flags_e__Union) AsUlonglong() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type STORAGE_FEATURE_SUPPORT struct {
@@ -3140,10 +3526,25 @@ type STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR struct {
 	MediumProductType uint32
 }
 
+type STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union) Anonymous() *STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union_Anonymous_e__Struct {
+	return (*STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsBYTE reinterprets the union as its AsBYTE member.
+func (u *STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union) AsBYTE() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 // STORAGE_MINIPORT_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_miniport_descriptor
@@ -3169,10 +3570,25 @@ type STORAGE_OFFLOAD_READ_OUTPUT struct {
 	Token            STORAGE_OFFLOAD_TOKEN
 }
 
+type STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union_StorageOffloadZeroDataToken_e__Struct struct {
+	Reserved2 [504]byte
+}
+
 // STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union struct {
 	Data [504]byte
+}
+
+// StorageOffloadZeroDataToken reinterprets the union as its StorageOffloadZeroDataToken member.
+func (u *STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union) StorageOffloadZeroDataToken() *STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union_StorageOffloadZeroDataToken_e__Struct {
+	return (*STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union_StorageOffloadZeroDataToken_e__Struct)(unsafe.Pointer(u))
+}
+
+// Token reinterprets the union as its Token member.
+func (u *STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union) Token() *[504]byte {
+	return (*[504]byte)(unsafe.Pointer(u))
 }
 
 // STORAGE_OFFLOAD_TOKEN: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_offload_token
@@ -3190,10 +3606,39 @@ type STORAGE_OFFLOAD_WRITE_OUTPUT struct {
 	LengthCopied      uint64
 }
 
+type STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_NVDIMM_N_e__Struct struct {
+	CriticalHealth       byte
+	ModuleHealth         [2]byte
+	ErrorThresholdStatus byte
+}
+
+type STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_ScsiSenseKey_e__Struct struct {
+	SenseKey byte
+	ASC      byte
+	ASCQ     byte
+	Reserved byte
+}
+
 // STORAGE_OPERATIONAL_REASON_RawBytes_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_OPERATIONAL_REASON_RawBytes_e__Union struct {
 	Data [1]uint32
+}
+
+// ScsiSenseKey reinterprets the union as its ScsiSenseKey member.
+func (u *STORAGE_OPERATIONAL_REASON_RawBytes_e__Union) ScsiSenseKey() *STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_ScsiSenseKey_e__Struct {
+	return (*STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_ScsiSenseKey_e__Struct)(unsafe.Pointer(u))
+}
+
+// NVDIMM_N reinterprets the union as its NVDIMM_N member.
+func (u *STORAGE_OPERATIONAL_REASON_RawBytes_e__Union) NVDIMM_N() *STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_NVDIMM_N_e__Struct {
+	return (*STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_NVDIMM_N_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *STORAGE_OPERATIONAL_REASON_RawBytes_e__Union) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type STORAGE_OPERATIONAL_REASON struct {
@@ -3314,10 +3759,25 @@ type STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT struct {
 	ProtocolSpecificData STORAGE_PROTOCOL_SPECIFIC_DATA_EXT
 }
 
+type STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE) Anonymous() *STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE_Anonymous_e__Struct {
+	return (*STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // STORAGE_PROTOCOL_SPECIFIC_DATA: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_protocol_specific_data
@@ -3379,9 +3839,20 @@ type STORAGE_QUERY_DEPENDENT_VOLUME_REQUEST struct {
 }
 
 // STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union struct {
 	Data [17]uint32
+}
+
+// Lev1Depends reinterprets the union as its Lev1Depends member.
+func (u *STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union) Lev1Depends() *[1]STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY {
+	return (*[1]STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY)(unsafe.Pointer(u))
+}
+
+// Lev2Depends reinterprets the union as its Lev2Depends member.
+func (u *STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union) Lev2Depends() *[1]STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY {
+	return (*[1]STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY)(unsafe.Pointer(u))
 }
 
 type STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE struct {
@@ -3432,17 +3903,70 @@ type STORAGE_RPMB_DESCRIPTOR struct {
 	FrameFormat                 STORAGE_RPMB_FRAME_TYPE
 }
 
+type STORAGE_SECURITY_COMPLIANCE_BITMASK_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // STORAGE_SECURITY_COMPLIANCE_BITMASK is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_SECURITY_COMPLIANCE_BITMASK struct {
 	Data [1]byte
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *STORAGE_SECURITY_COMPLIANCE_BITMASK) Anonymous() *STORAGE_SECURITY_COMPLIANCE_BITMASK_Anonymous_e__Struct {
+	return (*STORAGE_SECURITY_COMPLIANCE_BITMASK_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUchar reinterprets the union as its AsUchar member.
+func (u *STORAGE_SECURITY_COMPLIANCE_BITMASK) AsUchar() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+type STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union_Anonymous_e__Struct struct {
+	SubMinor byte
+	Minor    byte
+}
+
+// STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union struct {
+	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union) Anonymous() *STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union_Anonymous_e__Struct {
+	return (*STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUshort reinterprets the union as its AsUshort member.
+func (u *STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union) AsUshort() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+type STORAGE_SPEC_VERSION_Anonymous_e__Struct struct {
+	MinorVersion STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union
+	MajorVersion uint16
+}
+
 // STORAGE_SPEC_VERSION: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-storage_spec_version
 // STORAGE_SPEC_VERSION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_SPEC_VERSION struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *STORAGE_SPEC_VERSION) Anonymous() *STORAGE_SPEC_VERSION_Anonymous_e__Struct {
+	return (*STORAGE_SPEC_VERSION_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *STORAGE_SPEC_VERSION) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type STORAGE_STACK_DESCRIPTOR struct {
@@ -3516,10 +4040,32 @@ type STORAGE_WRITE_CACHE_PROPERTY struct {
 	NVCacheEnabled             foundation.BOOLEAN
 }
 
+type STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialPreferredZone_e__Struct struct {
+	OptimalOpenZoneCount uint32
+	Reserved             uint32
+}
+
+type STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialRequiredZone_e__Struct struct {
+	MaxOpenZoneCount uint32
+	UnrestrictedRead foundation.BOOLEAN
+	Reserved         [3]byte
+}
+
 // STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union struct {
 	Data [2]uint32
+}
+
+// SequentialRequiredZone reinterprets the union as its SequentialRequiredZone member.
+func (u *STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union) SequentialRequiredZone() *STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialRequiredZone_e__Struct {
+	return (*STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialRequiredZone_e__Struct)(unsafe.Pointer(u))
+}
+
+// SequentialPreferredZone reinterprets the union as its SequentialPreferredZone member.
+func (u *STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union) SequentialPreferredZone() *STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialPreferredZone_e__Struct {
+	return (*STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialPreferredZone_e__Struct)(unsafe.Pointer(u))
 }
 
 type STORAGE_ZONED_DEVICE_DESCRIPTOR struct {
@@ -3565,9 +4111,15 @@ type STREAMS_QUERY_PARAMETERS_OUTPUT_BUFFER struct {
 }
 
 // STREAM_EXTENT_ENTRY_ExtentInformation_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STREAM_EXTENT_ENTRY_ExtentInformation_e__Union struct {
 	Data [4]uint64
+}
+
+// RetrievalPointers reinterprets the union as its RetrievalPointers member.
+func (u *STREAM_EXTENT_ENTRY_ExtentInformation_e__Union) RetrievalPointers() *RETRIEVAL_POINTERS_BUFFER {
+	return (*RETRIEVAL_POINTERS_BUFFER)(unsafe.Pointer(u))
 }
 
 type STREAM_EXTENT_ENTRY struct {
@@ -3575,10 +4127,57 @@ type STREAM_EXTENT_ENTRY struct {
 	ExtentInformation STREAM_EXTENT_ENTRY_ExtentInformation_e__Union
 }
 
+type STREAM_INFORMATION_ENTRY_StreamInformation_DataStream struct {
+	Length   uint16
+	Flags    uint16
+	Reserved uint32
+	Vdl      uint64
+}
+
+type STREAM_INFORMATION_ENTRY_StreamInformation_DesiredStorageClass struct {
+	Class FILE_STORAGE_TIER_CLASS
+	Flags uint32
+}
+
+type STREAM_INFORMATION_ENTRY_StreamInformation_Ea struct {
+	Length              uint16
+	Flags               uint16
+	EaSize              uint32
+	EaInformationOffset uint32
+}
+
+type STREAM_INFORMATION_ENTRY_StreamInformation_Reparse struct {
+	Length            uint16
+	Flags             uint16
+	ReparseDataSize   uint32
+	ReparseDataOffset uint32
+}
+
 // STREAM_INFORMATION_ENTRY_StreamInformation is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STREAM_INFORMATION_ENTRY_StreamInformation struct {
 	Data [2]uint64
+}
+
+// DesiredStorageClass reinterprets the union as its DesiredStorageClass member.
+func (u *STREAM_INFORMATION_ENTRY_StreamInformation) DesiredStorageClass() *STREAM_INFORMATION_ENTRY_StreamInformation_DesiredStorageClass {
+	return (*STREAM_INFORMATION_ENTRY_StreamInformation_DesiredStorageClass)(unsafe.Pointer(u))
+}
+
+// DataStream reinterprets the union as its DataStream member.
+func (u *STREAM_INFORMATION_ENTRY_StreamInformation) DataStream() *STREAM_INFORMATION_ENTRY_StreamInformation_DataStream {
+	return (*STREAM_INFORMATION_ENTRY_StreamInformation_DataStream)(unsafe.Pointer(u))
+}
+
+// Reparse reinterprets the union as its Reparse member.
+func (u *STREAM_INFORMATION_ENTRY_StreamInformation) Reparse() *STREAM_INFORMATION_ENTRY_StreamInformation_Reparse {
+	return (*STREAM_INFORMATION_ENTRY_StreamInformation_Reparse)(unsafe.Pointer(u))
+}
+
+// Ea reinterprets the union as its Ea member.
+func (u *STREAM_INFORMATION_ENTRY_StreamInformation) Ea() *STREAM_INFORMATION_ENTRY_StreamInformation_Ea {
+	return (*STREAM_INFORMATION_ENTRY_StreamInformation_Ea)(unsafe.Pointer(u))
 }
 
 type STREAM_INFORMATION_ENTRY struct {
@@ -3723,9 +4322,20 @@ type TXFS_QUERY_RM_INFORMATION struct {
 }
 
 // TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// BufferLength reinterprets the union as its BufferLength member.
+func (u *TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union) BufferLength() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union) Buffer() *[1]byte {
+	return (*[1]byte)(unsafe.Pointer(u))
 }
 
 // TXFS_READ_BACKUP_INFORMATION_OUT: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-txfs_read_backup_information_out
@@ -3831,9 +4441,30 @@ type USN_RECORD_EXTENT struct {
 }
 
 // USN_RECORD_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type USN_RECORD_UNION struct {
 	Data [10]uint64
+}
+
+// Header reinterprets the union as its Header member.
+func (u *USN_RECORD_UNION) Header() *USN_RECORD_COMMON_HEADER {
+	return (*USN_RECORD_COMMON_HEADER)(unsafe.Pointer(u))
+}
+
+// V2 reinterprets the union as its V2 member.
+func (u *USN_RECORD_UNION) V2() *USN_RECORD_V2 {
+	return (*USN_RECORD_V2)(unsafe.Pointer(u))
+}
+
+// V3 reinterprets the union as its V3 member.
+func (u *USN_RECORD_UNION) V3() *USN_RECORD_V3 {
+	return (*USN_RECORD_V3)(unsafe.Pointer(u))
+}
+
+// V4 reinterprets the union as its V4 member.
+func (u *USN_RECORD_UNION) V4() *USN_RECORD_V4 {
+	return (*USN_RECORD_V4)(unsafe.Pointer(u))
 }
 
 // USN_RECORD_V2: https://learn.microsoft.com/windows/win32/api/winioctl/ns-winioctl-usn_record_v2

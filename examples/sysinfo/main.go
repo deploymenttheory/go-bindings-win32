@@ -85,7 +85,7 @@ func userName() (string, error) {
 
 // printProcessorInfo fills a SYSTEM_INFO via GetNativeSystemInfo (a void
 // function that writes into the struct you hand it). The leading field is a C
-// union whose low 16 bits hold the processor architecture.
+// union, overlaying a DWORD dwOemId with a struct holding the architecture.
 func printProcessorInfo() {
 	var info sysinfo.SYSTEM_INFO
 	sysinfo.GetNativeSystemInfo(&info)
@@ -93,25 +93,11 @@ func printProcessorInfo() {
 	fmt.Printf("cpus:       %d logical\n", info.DwNumberOfProcessors)
 	fmt.Printf("page size:  %d bytes (allocation granularity %d)\n",
 		info.DwPageSize, info.DwAllocationGranularity)
-	// The leading union is exposed as a correctly sized backing blob; its
-	// low 16 bits hold wProcessorArchitecture (the dwOemId overlay).
-	fmt.Printf("arch:       %s\n", processorArch(uint16(info.Anonymous.Data[0]&0xFFFF)))
-}
-
-// processorArch decodes wProcessorArchitecture (PROCESSOR_ARCHITECTURE_*).
-func processorArch(code uint16) string {
-	switch code {
-	case 9:
-		return "x64 (AMD64)"
-	case 12:
-		return "ARM64"
-	case 5:
-		return "ARM"
-	case 0:
-		return "x86"
-	default:
-		return fmt.Sprintf("unknown (%d)", code)
-	}
+	// A union is a correctly sized backing blob plus one accessor per member,
+	// each reinterpreting that storage as the member's real type. The second
+	// overlay here is a nested struct, so wProcessorArchitecture arrives as
+	// the typed PROCESSOR_ARCHITECTURE enum, which knows its own String().
+	fmt.Printf("arch:       %s\n", info.Anonymous.Anonymous().WProcessorArchitecture)
 }
 
 // printMemory fills MEMORYSTATUSEX. Its DwLength self-size field must be set

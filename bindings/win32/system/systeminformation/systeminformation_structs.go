@@ -20,9 +20,20 @@ type CACHE_DESCRIPTOR struct {
 }
 
 // CACHE_RELATIONSHIP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CACHE_RELATIONSHIP_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// GroupMask reinterprets the union as its GroupMask member.
+func (u *CACHE_RELATIONSHIP_Anonymous_e__Union) GroupMask() *GROUP_AFFINITY {
+	return (*GROUP_AFFINITY)(unsafe.Pointer(u))
+}
+
+// GroupMasks reinterprets the union as its GroupMasks member.
+func (u *CACHE_RELATIONSHIP_Anonymous_e__Union) GroupMasks() *[1]GROUP_AFFINITY {
+	return (*[1]GROUP_AFFINITY)(unsafe.Pointer(u))
 }
 
 // CACHE_RELATIONSHIP: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-cache_relationship
@@ -90,9 +101,20 @@ type MEMORYSTATUSEX struct {
 }
 
 // NUMA_NODE_RELATIONSHIP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NUMA_NODE_RELATIONSHIP_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// GroupMask reinterprets the union as its GroupMask member.
+func (u *NUMA_NODE_RELATIONSHIP_Anonymous_e__Union) GroupMask() *GROUP_AFFINITY {
+	return (*GROUP_AFFINITY)(unsafe.Pointer(u))
+}
+
+// GroupMasks reinterprets the union as its GroupMasks member.
+func (u *NUMA_NODE_RELATIONSHIP_Anonymous_e__Union) GroupMasks() *[1]GROUP_AFFINITY {
+	return (*[1]GROUP_AFFINITY)(unsafe.Pointer(u))
 }
 
 // NUMA_NODE_RELATIONSHIP: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-numa_node_relationship
@@ -170,10 +192,67 @@ type PROCESSOR_RELATIONSHIP struct {
 	GroupMask       [1]GROUP_AFFINITY
 }
 
+type SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
+// SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union struct {
+	Data [1]byte
+}
+
+// AllFlags reinterprets the union as its AllFlags member.
+func (u *SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union) AllFlags() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union) Anonymous() *SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous2_e__Union struct {
+	Data [1]uint32
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous2_e__Union) Reserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// SchedulingClass reinterprets the union as its SchedulingClass member.
+func (u *SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous2_e__Union) SchedulingClass() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+type SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct struct {
+	Id                    uint32
+	Group                 uint16
+	LogicalProcessorIndex byte
+	CoreIndex             byte
+	LastLevelCacheIndex   byte
+	NumaNodeIndex         byte
+	EfficiencyClass       byte
+	Anonymous1            SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous1_e__Union
+	Anonymous2            SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct_Anonymous2_e__Union
+	AllocationTag         uint64
+}
+
 // SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// CpuSet reinterprets the union as its CpuSet member.
+func (u *SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union) CpuSet() *SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct {
+	return (*SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union_CpuSet_e__Struct)(unsafe.Pointer(u))
 }
 
 // SYSTEM_CPU_SET_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-system_cpu_set_information
@@ -183,10 +262,26 @@ type SYSTEM_CPU_SET_INFORMATION struct {
 	Anonymous SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union
 }
 
+type SYSTEM_INFO_Anonymous_e__Union_Anonymous_e__Struct struct {
+	WProcessorArchitecture PROCESSOR_ARCHITECTURE
+	WReserved              uint16
+}
+
 // SYSTEM_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SYSTEM_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwOemId reinterprets the union as its dwOemId member.
+func (u *SYSTEM_INFO_Anonymous_e__Union) DwOemId() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *SYSTEM_INFO_Anonymous_e__Union) Anonymous() *SYSTEM_INFO_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*SYSTEM_INFO_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // SYSTEM_INFO: https://learn.microsoft.com/windows/win32/api/sysinfoapi/ns-sysinfoapi-system_info
@@ -203,10 +298,39 @@ type SYSTEM_INFO struct {
 	WProcessorRevision          uint16
 }
 
+type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_NumaNode_e__Struct struct {
+	NodeNumber uint32
+}
+
+type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_ProcessorCore_e__Struct struct {
+	Flags byte
+}
+
 // SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// ProcessorCore reinterprets the union as its ProcessorCore member.
+func (u *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union) ProcessorCore() *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_ProcessorCore_e__Struct {
+	return (*SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_ProcessorCore_e__Struct)(unsafe.Pointer(u))
+}
+
+// NumaNode reinterprets the union as its NumaNode member.
+func (u *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union) NumaNode() *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_NumaNode_e__Struct {
+	return (*SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union_NumaNode_e__Struct)(unsafe.Pointer(u))
+}
+
+// Cache reinterprets the union as its Cache member.
+func (u *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union) Cache() *CACHE_DESCRIPTOR {
+	return (*CACHE_DESCRIPTOR)(unsafe.Pointer(u))
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union) Reserved() *[2]uint64 {
+	return (*[2]uint64)(unsafe.Pointer(u))
 }
 
 // SYSTEM_LOGICAL_PROCESSOR_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-system_logical_processor_information
@@ -217,9 +341,30 @@ type SYSTEM_LOGICAL_PROCESSOR_INFORMATION struct {
 }
 
 // SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [9]uint64
+}
+
+// Processor reinterprets the union as its Processor member.
+func (u *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union) Processor() *PROCESSOR_RELATIONSHIP {
+	return (*PROCESSOR_RELATIONSHIP)(unsafe.Pointer(u))
+}
+
+// NumaNode reinterprets the union as its NumaNode member.
+func (u *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union) NumaNode() *NUMA_NODE_RELATIONSHIP {
+	return (*NUMA_NODE_RELATIONSHIP)(unsafe.Pointer(u))
+}
+
+// Cache reinterprets the union as its Cache member.
+func (u *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union) Cache() *CACHE_RELATIONSHIP {
+	return (*CACHE_RELATIONSHIP)(unsafe.Pointer(u))
+}
+
+// Group reinterprets the union as its Group member.
+func (u *SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union) Group() *GROUP_RELATIONSHIP {
+	return (*GROUP_RELATIONSHIP)(unsafe.Pointer(u))
 }
 
 // SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-system_logical_processor_information_ex

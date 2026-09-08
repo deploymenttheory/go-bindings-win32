@@ -4,6 +4,10 @@
 
 package media
 
+import (
+	"unsafe"
+)
+
 // MMTIME is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
@@ -17,11 +21,28 @@ type TIMECAPS struct {
 	WPeriodMax uint32
 }
 
+type TIMECODE_Anonymous_e__Struct struct {
+	WFrameRate  uint16
+	WFrameFract uint16
+	DwFrames    uint32
+}
+
 // TIMECODE: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-timecode
 // TIMECODE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TIMECODE struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *TIMECODE) Anonymous() *TIMECODE_Anonymous_e__Struct {
+	return (*TIMECODE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Qw reinterprets the union as its qw member.
+func (u *TIMECODE) Qw() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // TIMECODE_SAMPLE: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-timecode_sample

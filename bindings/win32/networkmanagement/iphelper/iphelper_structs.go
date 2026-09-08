@@ -101,9 +101,20 @@ type DNS_SERVER_PROPERTY struct {
 
 // DNS_SERVER_PROPERTY_TYPES: https://learn.microsoft.com/windows/win32/api/netioapi/ns-netioapi-dns_server_property_types
 // DNS_SERVER_PROPERTY_TYPES is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_SERVER_PROPERTY_TYPES struct {
 	Data [1]uint64
+}
+
+// DohSettings reinterprets the union as its DohSettings member.
+func (u *DNS_SERVER_PROPERTY_TYPES) DohSettings() **DNS_DOH_SERVER_SETTINGS {
+	return (**DNS_DOH_SERVER_SETTINGS)(unsafe.Pointer(u))
+}
+
+// DotSettings reinterprets the union as its DotSettings member.
+func (u *DNS_SERVER_PROPERTY_TYPES) DotSettings() **DNS_DOT_SERVER_SETTINGS {
+	return (**DNS_DOT_SERVER_SETTINGS)(unsafe.Pointer(u))
 }
 
 type DNS_SETTINGS struct {
@@ -210,16 +221,47 @@ type IPV6_ADDRESS_EX struct {
 	Data [26]byte
 }
 
+type IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Length  uint32
+	IfIndex uint32
+}
+
 // IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union) Anonymous() *IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union) Anonymous() *IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_ADDRESSES_LH_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_ADDRESSES_LH: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_addresses_lh
@@ -262,10 +304,26 @@ type IP_ADAPTER_ADDRESSES_LH struct {
 	FirstDnsSuffix         *IP_ADAPTER_DNS_SUFFIX
 }
 
+type IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Length  uint32
+	IfIndex uint32
+}
+
 // IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union) Anonymous() *IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_ADDRESSES_XP_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_ADDRESSES_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_addresses_xp
@@ -291,10 +349,26 @@ type IP_ADAPTER_ADDRESSES_XP struct {
 	FirstPrefix           *IP_ADAPTER_PREFIX_XP
 }
 
+type IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Length uint32
+	Flags  uint32
+}
+
 // IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union) Anonymous() *IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_ANYCAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_ANYCAST_ADDRESS_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_anycast_address_xp
@@ -304,10 +378,26 @@ type IP_ADAPTER_ANYCAST_ADDRESS_XP struct {
 	Address   networkingwinsock.SOCKET_ADDRESS
 }
 
+type IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Length   uint32
+	Reserved uint32
+}
+
 // IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union) Anonymous() *IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_DNS_SERVER_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_DNS_SERVER_ADDRESS_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_dns_server_address_xp
@@ -323,10 +413,26 @@ type IP_ADAPTER_DNS_SUFFIX struct {
 	String [256]uint16
 }
 
+type IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Length   uint32
+	Reserved uint32
+}
+
 // IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union) Anonymous() *IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_GATEWAY_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_GATEWAY_ADDRESS_LH: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_gateway_address_lh
@@ -364,10 +470,26 @@ type IP_ADAPTER_INFO struct {
 	LeaseExpires        int64
 }
 
+type IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Length uint32
+	Flags  uint32
+}
+
 // IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union) Anonymous() *IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_MULTICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_MULTICAST_ADDRESS_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_multicast_address_xp
@@ -383,10 +505,26 @@ type IP_ADAPTER_ORDER_MAP struct {
 	AdapterOrder [1]uint32
 }
 
+type IP_ADAPTER_PREFIX_XP_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Length uint32
+	Flags  uint32
+}
+
 // IP_ADAPTER_PREFIX_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_PREFIX_XP_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_PREFIX_XP_Anonymous_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_PREFIX_XP_Anonymous_e__Union) Anonymous() *IP_ADAPTER_PREFIX_XP_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_PREFIX_XP_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_PREFIX_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_prefix_xp
@@ -397,10 +535,26 @@ type IP_ADAPTER_PREFIX_XP struct {
 	PrefixLength uint32
 }
 
+type IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Length uint32
+	Flags  uint32
+}
+
 // IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union) Anonymous() *IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_UNICAST_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_UNICAST_ADDRESS_LH: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_unicast_address_lh
@@ -417,10 +571,26 @@ type IP_ADAPTER_UNICAST_ADDRESS_LH struct {
 	OnLinkPrefixLength byte
 }
 
+type IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Length uint32
+	Flags  uint32
+}
+
 // IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union) Anonymous() *IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_UNICAST_ADDRESS_XP_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_UNICAST_ADDRESS_XP: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_unicast_address_xp
@@ -436,10 +606,26 @@ type IP_ADAPTER_UNICAST_ADDRESS_XP struct {
 	LeaseLifetime     uint32
 }
 
+type IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Length   uint32
+	Reserved uint32
+}
+
 // IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union) Anonymous() *IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IP_ADAPTER_WINS_SERVER_ADDRESS_LH_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // IP_ADAPTER_WINS_SERVER_ADDRESS_LH: https://learn.microsoft.com/windows/win32/api/iptypes/ns-iptypes-ip_adapter_wins_server_address_lh
@@ -797,15 +983,37 @@ type MIB_IPFORWARDNUMBER struct {
 }
 
 // MIB_IPFORWARDROW_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_IPFORWARDROW_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// DwForwardType reinterprets the union as its dwForwardType member.
+func (u *MIB_IPFORWARDROW_Anonymous1_e__Union) DwForwardType() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ForwardType reinterprets the union as its ForwardType member.
+func (u *MIB_IPFORWARDROW_Anonymous1_e__Union) ForwardType() *MIB_IPFORWARD_TYPE {
+	return (*MIB_IPFORWARD_TYPE)(unsafe.Pointer(u))
+}
+
 // MIB_IPFORWARDROW_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_IPFORWARDROW_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// DwForwardProto reinterprets the union as its dwForwardProto member.
+func (u *MIB_IPFORWARDROW_Anonymous2_e__Union) DwForwardProto() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ForwardProto reinterprets the union as its ForwardProto member.
+func (u *MIB_IPFORWARDROW_Anonymous2_e__Union) ForwardProto() *networkingwinsock.NL_ROUTE_PROTOCOL {
+	return (*networkingwinsock.NL_ROUTE_PROTOCOL)(unsafe.Pointer(u))
 }
 
 // MIB_IPFORWARDROW: https://learn.microsoft.com/windows/win32/api/ipmib/ns-ipmib-mib_ipforwardrow
@@ -1051,9 +1259,20 @@ type MIB_IPMCAST_SCOPE struct {
 }
 
 // MIB_IPNETROW_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_IPNETROW_LH_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwType reinterprets the union as its dwType member.
+func (u *MIB_IPNETROW_LH_Anonymous_e__Union) DwType() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Type reinterprets the union as its Type member.
+func (u *MIB_IPNETROW_LH_Anonymous_e__Union) Type() *MIB_IPNET_TYPE {
+	return (*MIB_IPNET_TYPE)(unsafe.Pointer(u))
 }
 
 // MIB_IPNETROW_LH: https://learn.microsoft.com/windows/win32/api/ipmib/ns-ipmib-mib_ipnetrow_lh
@@ -1080,16 +1299,42 @@ type MIB_IPNETTABLE struct {
 	Table        [1]MIB_IPNETROW_LH
 }
 
+type MIB_IPNET_ROW2_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // MIB_IPNET_ROW2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_IPNET_ROW2_Anonymous_e__Union struct {
 	Data [1]byte
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MIB_IPNET_ROW2_Anonymous_e__Union) Anonymous() *MIB_IPNET_ROW2_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*MIB_IPNET_ROW2_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *MIB_IPNET_ROW2_Anonymous_e__Union) Flags() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
 // MIB_IPNET_ROW2_ReachabilityTime_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_IPNET_ROW2_ReachabilityTime_e__Union struct {
 	Data [1]uint32
+}
+
+// LastReachable reinterprets the union as its LastReachable member.
+func (u *MIB_IPNET_ROW2_ReachabilityTime_e__Union) LastReachable() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LastUnreachable reinterprets the union as its LastUnreachable member.
+func (u *MIB_IPNET_ROW2_ReachabilityTime_e__Union) LastUnreachable() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // MIB_IPNET_ROW2: https://learn.microsoft.com/windows/win32/api/netioapi/ns-netioapi-mib_ipnet_row2
@@ -1111,9 +1356,20 @@ type MIB_IPNET_TABLE2 struct {
 }
 
 // MIB_IPPATH_ROW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_IPPATH_ROW_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// LastReachable reinterprets the union as its LastReachable member.
+func (u *MIB_IPPATH_ROW_Anonymous_e__Union) LastReachable() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LastUnreachable reinterprets the union as its LastUnreachable member.
+func (u *MIB_IPPATH_ROW_Anonymous_e__Union) LastUnreachable() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // MIB_IPPATH_ROW: https://learn.microsoft.com/windows/win32/api/netioapi/ns-netioapi-mib_ippath_row
@@ -1139,9 +1395,20 @@ type MIB_IPPATH_TABLE struct {
 }
 
 // MIB_IPSTATS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_IPSTATS_LH_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwForwarding reinterprets the union as its dwForwarding member.
+func (u *MIB_IPSTATS_LH_Anonymous_e__Union) DwForwarding() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Forwarding reinterprets the union as its Forwarding member.
+func (u *MIB_IPSTATS_LH_Anonymous_e__Union) Forwarding() *MIB_IPSTATS_FORWARDING {
+	return (*MIB_IPSTATS_FORWARDING)(unsafe.Pointer(u))
 }
 
 // MIB_IPSTATS_LH: https://learn.microsoft.com/windows/win32/api/ipmib/ns-ipmib-mib_ipstats_lh
@@ -1243,9 +1510,20 @@ type MIB_MULTICASTIPADDRESS_TABLE struct {
 }
 
 // MIB_OPAQUE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_OPAQUE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// UllAlign reinterprets the union as its ullAlign member.
+func (u *MIB_OPAQUE_INFO_Anonymous_e__Union) UllAlign() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// RgbyData reinterprets the union as its rgbyData member.
+func (u *MIB_OPAQUE_INFO_Anonymous_e__Union) RgbyData() *[1]byte {
+	return (*[1]byte)(unsafe.Pointer(u))
 }
 
 // MIB_OPAQUE_INFO: https://learn.microsoft.com/windows/win32/api/iprtrmib/ns-iprtrmib-mib_opaque_info
@@ -1357,9 +1635,20 @@ type MIB_TCPROW2 struct {
 }
 
 // MIB_TCPROW_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_TCPROW_LH_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwState reinterprets the union as its dwState member.
+func (u *MIB_TCPROW_LH_Anonymous_e__Union) DwState() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// State reinterprets the union as its State member.
+func (u *MIB_TCPROW_LH_Anonymous_e__Union) State() *MIB_TCP_STATE {
+	return (*MIB_TCP_STATE)(unsafe.Pointer(u))
 }
 
 // MIB_TCPROW_LH: https://learn.microsoft.com/windows/win32/api/tcpmib/ns-tcpmib-mib_tcprow_lh
@@ -1422,9 +1711,20 @@ type MIB_TCPSTATS2 struct {
 }
 
 // MIB_TCPSTATS_LH_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_TCPSTATS_LH_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwRtoAlgorithm reinterprets the union as its dwRtoAlgorithm member.
+func (u *MIB_TCPSTATS_LH_Anonymous_e__Union) DwRtoAlgorithm() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RtoAlgorithm reinterprets the union as its RtoAlgorithm member.
+func (u *MIB_TCPSTATS_LH_Anonymous_e__Union) RtoAlgorithm() *TCP_RTO_ALGORITHM {
+	return (*TCP_RTO_ALGORITHM)(unsafe.Pointer(u))
 }
 
 // MIB_TCPSTATS_LH: https://learn.microsoft.com/windows/win32/api/tcpmib/ns-tcpmib-mib_tcpstats_lh
@@ -1496,10 +1796,25 @@ type MIB_UDP6ROW struct {
 	DwLocalPort    uint32
 }
 
+type MIB_UDP6ROW2_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield int32
+}
+
 // MIB_UDP6ROW2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_UDP6ROW2_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MIB_UDP6ROW2_Anonymous_e__Union) Anonymous() *MIB_UDP6ROW2_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*MIB_UDP6ROW2_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// DwFlags reinterprets the union as its dwFlags member.
+func (u *MIB_UDP6ROW2_Anonymous_e__Union) DwFlags() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 type MIB_UDP6ROW2 struct {
@@ -1515,10 +1830,25 @@ type MIB_UDP6ROW2 struct {
 	DwRemotePort      uint32
 }
 
+type MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield int32
+}
+
 // MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union) Anonymous() *MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// DwFlags reinterprets the union as its dwFlags member.
+func (u *MIB_UDP6ROW_OWNER_MODULE_Anonymous_e__Union) DwFlags() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 // MIB_UDP6ROW_OWNER_MODULE: https://learn.microsoft.com/windows/win32/api/udpmib/ns-udpmib-mib_udp6row_owner_module
@@ -1569,10 +1899,25 @@ type MIB_UDPROW struct {
 	DwLocalPort uint32
 }
 
+type MIB_UDPROW2_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield int32
+}
+
 // MIB_UDPROW2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_UDPROW2_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MIB_UDPROW2_Anonymous_e__Union) Anonymous() *MIB_UDPROW2_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*MIB_UDPROW2_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// DwFlags reinterprets the union as its dwFlags member.
+func (u *MIB_UDPROW2_Anonymous_e__Union) DwFlags() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 type MIB_UDPROW2 struct {
@@ -1586,10 +1931,25 @@ type MIB_UDPROW2 struct {
 	DwRemotePort      uint32
 }
 
+type MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield int32
+}
+
 // MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union) Anonymous() *MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// DwFlags reinterprets the union as its dwFlags member.
+func (u *MIB_UDPROW_OWNER_MODULE_Anonymous_e__Union) DwFlags() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 // MIB_UDPROW_OWNER_MODULE: https://learn.microsoft.com/windows/win32/api/udpmib/ns-udpmib-mib_udprow_owner_module
@@ -1672,10 +2032,36 @@ type MIB_UNICASTIPADDRESS_TABLE struct {
 	Table      [1]MIB_UNICASTIPADDRESS_ROW
 }
 
+type NET_ADDRESS_INFO_Anonymous_e__Union_NamedAddress_e__Struct struct {
+	Address [256]uint16
+	Port    [6]uint16
+}
+
 // NET_ADDRESS_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NET_ADDRESS_INFO_Anonymous_e__Union struct {
 	Data [131]uint32
+}
+
+// NamedAddress reinterprets the union as its NamedAddress member.
+func (u *NET_ADDRESS_INFO_Anonymous_e__Union) NamedAddress() *NET_ADDRESS_INFO_Anonymous_e__Union_NamedAddress_e__Struct {
+	return (*NET_ADDRESS_INFO_Anonymous_e__Union_NamedAddress_e__Struct)(unsafe.Pointer(u))
+}
+
+// Ipv4Address reinterprets the union as its Ipv4Address member.
+func (u *NET_ADDRESS_INFO_Anonymous_e__Union) Ipv4Address() *networkingwinsock.SOCKADDR_IN {
+	return (*networkingwinsock.SOCKADDR_IN)(unsafe.Pointer(u))
+}
+
+// Ipv6Address reinterprets the union as its Ipv6Address member.
+func (u *NET_ADDRESS_INFO_Anonymous_e__Union) Ipv6Address() *networkingwinsock.SOCKADDR_IN6 {
+	return (*networkingwinsock.SOCKADDR_IN6)(unsafe.Pointer(u))
+}
+
+// IpAddress reinterprets the union as its IpAddress member.
+func (u *NET_ADDRESS_INFO_Anonymous_e__Union) IpAddress() *networkingwinsock.SOCKADDR {
+	return (*networkingwinsock.SOCKADDR)(unsafe.Pointer(u))
 }
 
 // NET_ADDRESS_INFO: https://learn.microsoft.com/windows/win32/api/iphlpapi/ns-iphlpapi-net_address_info

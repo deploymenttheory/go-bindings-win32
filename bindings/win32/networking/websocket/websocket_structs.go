@@ -10,11 +10,33 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+type WEB_SOCKET_BUFFER_CloseStatus_e__Struct struct {
+	PbReason       *byte
+	UlReasonLength uint32
+	UsStatus       uint16
+}
+
+type WEB_SOCKET_BUFFER_Data_e__Struct struct {
+	PbBuffer       *byte
+	UlBufferLength uint32
+}
+
 // WEB_SOCKET_BUFFER: https://learn.microsoft.com/windows/win32/api/websocket/ns-websocket-web_socket_buffer
 // WEB_SOCKET_BUFFER is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WEB_SOCKET_BUFFER struct {
 	Data [2]uint64
+}
+
+// Data_ reinterprets the union as its Data member.
+func (u *WEB_SOCKET_BUFFER) Data_() *WEB_SOCKET_BUFFER_Data_e__Struct {
+	return (*WEB_SOCKET_BUFFER_Data_e__Struct)(unsafe.Pointer(u))
+}
+
+// CloseStatus reinterprets the union as its CloseStatus member.
+func (u *WEB_SOCKET_BUFFER) CloseStatus() *WEB_SOCKET_BUFFER_CloseStatus_e__Struct {
+	return (*WEB_SOCKET_BUFFER_CloseStatus_e__Struct)(unsafe.Pointer(u))
 }
 
 // WEB_SOCKET_HTTP_HEADER: https://learn.microsoft.com/windows/win32/api/websocket/ns-websocket-web_socket_http_header

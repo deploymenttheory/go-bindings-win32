@@ -199,6 +199,8 @@ var abiSystem_Power = []abiCase{
 	{"systempower.POWER_ADAPTER_CHARGE_REQUIREMENT.NominalPower", unsafe.Offsetof(systempower.POWER_ADAPTER_CHARGE_REQUIREMENT{}.NominalPower), 8},
 	{"systempower.POWER_ADAPTER_CHARGE_REQUIREMENT.MaximumPower", unsafe.Offsetof(systempower.POWER_ADAPTER_CHARGE_REQUIREMENT{}.MaximumPower), 12},
 	{"systempower.POWER_ADAPTER_POWER_STATES size", unsafe.Sizeof(systempower.POWER_ADAPTER_POWER_STATES{}), 4},
+	{"systempower.POWER_ADAPTER_POWER_STATES_States_e__Struct size", unsafe.Sizeof(systempower.POWER_ADAPTER_POWER_STATES_States_e__Struct{}), 4},
+	{"systempower.POWER_ADAPTER_POWER_STATES_States_e__Struct.Bitfield", unsafe.Offsetof(systempower.POWER_ADAPTER_POWER_STATES_States_e__Struct{}.Bitfield), 0},
 	{"systempower.POWER_ADAPTER_SET_STATUS_BUFFER size", unsafe.Sizeof(systempower.POWER_ADAPTER_SET_STATUS_BUFFER{}), 4},
 	{"systempower.POWER_ADAPTER_SET_STATUS_BUFFER.Version", unsafe.Offsetof(systempower.POWER_ADAPTER_SET_STATUS_BUFFER{}.Version), 0},
 	{"systempower.POWER_ADAPTER_SET_STATUS_BUFFER.RecOverride", unsafe.Offsetof(systempower.POWER_ADAPTER_SET_STATUS_BUFFER{}.RecOverride), 1},

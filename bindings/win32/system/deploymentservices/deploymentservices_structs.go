@@ -12,9 +12,20 @@ import (
 )
 
 // PXE_ADDRESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PXE_ADDRESS_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// BAddress reinterprets the union as its bAddress member.
+func (u *PXE_ADDRESS_Anonymous_e__Union) BAddress() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
+// UIpAddress reinterprets the union as its uIpAddress member.
+func (u *PXE_ADDRESS_Anonymous_e__Union) UIpAddress() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // PXE_ADDRESS: https://learn.microsoft.com/windows/win32/api/wdspxe/ns-wdspxe-pxe_address

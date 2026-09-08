@@ -200,9 +200,65 @@ type GameInputForceFeedbackMotorInfo struct {
 }
 
 // GameInputForceFeedbackParams_data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GameInputForceFeedbackParams_data_e__Union struct {
 	Data [13]uint64
+}
+
+// Constant reinterprets the union as its constant member.
+func (u *GameInputForceFeedbackParams_data_e__Union) Constant() *GameInputForceFeedbackConstantParams {
+	return (*GameInputForceFeedbackConstantParams)(unsafe.Pointer(u))
+}
+
+// Ramp reinterprets the union as its ramp member.
+func (u *GameInputForceFeedbackParams_data_e__Union) Ramp() *GameInputForceFeedbackRampParams {
+	return (*GameInputForceFeedbackRampParams)(unsafe.Pointer(u))
+}
+
+// SineWave reinterprets the union as its sineWave member.
+func (u *GameInputForceFeedbackParams_data_e__Union) SineWave() *GameInputForceFeedbackPeriodicParams {
+	return (*GameInputForceFeedbackPeriodicParams)(unsafe.Pointer(u))
+}
+
+// SquareWave reinterprets the union as its squareWave member.
+func (u *GameInputForceFeedbackParams_data_e__Union) SquareWave() *GameInputForceFeedbackPeriodicParams {
+	return (*GameInputForceFeedbackPeriodicParams)(unsafe.Pointer(u))
+}
+
+// TriangleWave reinterprets the union as its triangleWave member.
+func (u *GameInputForceFeedbackParams_data_e__Union) TriangleWave() *GameInputForceFeedbackPeriodicParams {
+	return (*GameInputForceFeedbackPeriodicParams)(unsafe.Pointer(u))
+}
+
+// SawtoothUpWave reinterprets the union as its sawtoothUpWave member.
+func (u *GameInputForceFeedbackParams_data_e__Union) SawtoothUpWave() *GameInputForceFeedbackPeriodicParams {
+	return (*GameInputForceFeedbackPeriodicParams)(unsafe.Pointer(u))
+}
+
+// SawtoothDownWave reinterprets the union as its sawtoothDownWave member.
+func (u *GameInputForceFeedbackParams_data_e__Union) SawtoothDownWave() *GameInputForceFeedbackPeriodicParams {
+	return (*GameInputForceFeedbackPeriodicParams)(unsafe.Pointer(u))
+}
+
+// Spring reinterprets the union as its spring member.
+func (u *GameInputForceFeedbackParams_data_e__Union) Spring() *GameInputForceFeedbackConditionParams {
+	return (*GameInputForceFeedbackConditionParams)(unsafe.Pointer(u))
+}
+
+// Friction reinterprets the union as its friction member.
+func (u *GameInputForceFeedbackParams_data_e__Union) Friction() *GameInputForceFeedbackConditionParams {
+	return (*GameInputForceFeedbackConditionParams)(unsafe.Pointer(u))
+}
+
+// Damper reinterprets the union as its damper member.
+func (u *GameInputForceFeedbackParams_data_e__Union) Damper() *GameInputForceFeedbackConditionParams {
+	return (*GameInputForceFeedbackConditionParams)(unsafe.Pointer(u))
+}
+
+// Inertia reinterprets the union as its inertia member.
+func (u *GameInputForceFeedbackParams_data_e__Union) Inertia() *GameInputForceFeedbackConditionParams {
+	return (*GameInputForceFeedbackConditionParams)(unsafe.Pointer(u))
 }
 
 type GameInputForceFeedbackParams struct {

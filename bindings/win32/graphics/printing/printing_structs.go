@@ -81,9 +81,35 @@ type ATTRIBUTE_INFO_4 struct {
 }
 
 // BIDI_DATA_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BIDI_DATA_u_e__Union struct {
 	Data [2]uint64
+}
+
+// BData reinterprets the union as its bData member.
+func (u *BIDI_DATA_u_e__Union) BData() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// IData reinterprets the union as its iData member.
+func (u *BIDI_DATA_u_e__Union) IData() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// SData reinterprets the union as its sData member.
+func (u *BIDI_DATA_u_e__Union) SData() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// FData reinterprets the union as its fData member.
+func (u *BIDI_DATA_u_e__Union) FData() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// BiData reinterprets the union as its biData member.
+func (u *BIDI_DATA_u_e__Union) BiData() *BINARY_CONTAINER {
+	return (*BINARY_CONTAINER)(unsafe.Pointer(u))
 }
 
 type BIDI_DATA struct {
@@ -133,9 +159,35 @@ type BidiSpl struct {
 }
 
 // BranchOfficeJobData_JobInfo_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BranchOfficeJobData_JobInfo_e__Union struct {
 	Data [11]uint64
+}
+
+// LogJobPrinted reinterprets the union as its LogJobPrinted member.
+func (u *BranchOfficeJobData_JobInfo_e__Union) LogJobPrinted() *BranchOfficeJobDataPrinted {
+	return (*BranchOfficeJobDataPrinted)(unsafe.Pointer(u))
+}
+
+// LogJobRendered reinterprets the union as its LogJobRendered member.
+func (u *BranchOfficeJobData_JobInfo_e__Union) LogJobRendered() *BranchOfficeJobDataRendered {
+	return (*BranchOfficeJobDataRendered)(unsafe.Pointer(u))
+}
+
+// LogJobError reinterprets the union as its LogJobError member.
+func (u *BranchOfficeJobData_JobInfo_e__Union) LogJobError() *BranchOfficeJobDataError {
+	return (*BranchOfficeJobDataError)(unsafe.Pointer(u))
+}
+
+// LogPipelineFailed reinterprets the union as its LogPipelineFailed member.
+func (u *BranchOfficeJobData_JobInfo_e__Union) LogPipelineFailed() *BranchOfficeJobDataPipelineFailed {
+	return (*BranchOfficeJobDataPipelineFailed)(unsafe.Pointer(u))
+}
+
+// LogOfflineFileFull reinterprets the union as its LogOfflineFileFull member.
+func (u *BranchOfficeJobData_JobInfo_e__Union) LogOfflineFileFull() *BranchOfficeLogOfflineFileFull {
+	return (*BranchOfficeLogOfflineFileFull)(unsafe.Pointer(u))
 }
 
 type BranchOfficeJobData struct {
@@ -236,9 +288,20 @@ type CORE_PRINTER_DRIVERW struct {
 }
 
 // CPSUICBPARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CPSUICBPARAM_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// OldSel reinterprets the union as its OldSel member.
+func (u *CPSUICBPARAM_Anonymous_e__Union) OldSel() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// POldSel reinterprets the union as its pOldSel member.
+func (u *CPSUICBPARAM_Anonymous_e__Union) POldSel() **int8 {
+	return (**int8)(unsafe.Pointer(u))
 }
 
 type CPSUICBPARAM struct {
@@ -308,9 +371,20 @@ type DEVQUERYPRINT_INFO struct {
 }
 
 // DLGPAGE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DLGPAGE_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// DlgTemplateID reinterprets the union as its DlgTemplateID member.
+func (u *DLGPAGE_Anonymous_e__Union) DlgTemplateID() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// HDlgTemplate reinterprets the union as its hDlgTemplate member.
+func (u *DLGPAGE_Anonymous_e__Union) HDlgTemplate() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
 }
 
 type DLGPAGE struct {
@@ -657,15 +731,37 @@ type EXTCHKBOX struct {
 }
 
 // EXTPUSH_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EXTPUSH_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// DlgProc reinterprets the union as its DlgProc member.
+func (u *EXTPUSH_Anonymous1_e__Union) DlgProc() *uiwindowsandmessaging.DLGPROC {
+	return (*uiwindowsandmessaging.DLGPROC)(unsafe.Pointer(u))
+}
+
+// PfnCallBack reinterprets the union as its pfnCallBack member.
+func (u *EXTPUSH_Anonymous1_e__Union) PfnCallBack() *foundation.FARPROC {
+	return (*foundation.FARPROC)(unsafe.Pointer(u))
+}
+
 // EXTPUSH_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EXTPUSH_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// DlgTemplateID reinterprets the union as its DlgTemplateID member.
+func (u *EXTPUSH_Anonymous2_e__Union) DlgTemplateID() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// HDlgTemplate reinterprets the union as its hDlgTemplate member.
+func (u *EXTPUSH_Anonymous2_e__Union) HDlgTemplate() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
 }
 
 type EXTPUSH struct {
@@ -1213,15 +1309,37 @@ type OPTCOMBO struct {
 }
 
 // OPTITEM_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type OPTITEM_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// Sel reinterprets the union as its Sel member.
+func (u *OPTITEM_Anonymous1_e__Union) Sel() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// PSel reinterprets the union as its pSel member.
+func (u *OPTITEM_Anonymous1_e__Union) PSel() **int8 {
+	return (**int8)(unsafe.Pointer(u))
+}
+
 // OPTITEM_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type OPTITEM_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// PExtChkBox reinterprets the union as its pExtChkBox member.
+func (u *OPTITEM_Anonymous2_e__Union) PExtChkBox() **EXTCHKBOX {
+	return (**EXTCHKBOX)(unsafe.Pointer(u))
+}
+
+// PExtPush reinterprets the union as its pExtPush member.
+func (u *OPTITEM_Anonymous2_e__Union) PExtPush() **EXTPUSH {
+	return (**EXTPUSH)(unsafe.Pointer(u))
 }
 
 type OPTITEM struct {
@@ -1542,10 +1660,26 @@ type PRINTER_NOTIFY_INFO struct {
 	AData   [1]PRINTER_NOTIFY_INFO_DATA
 }
 
+type PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union_Data_e__Struct struct {
+	CbBuf uint32
+	PBuf  unsafe.Pointer
+}
+
 // PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union struct {
 	Data [2]uint64
+}
+
+// AdwData reinterprets the union as its adwData member.
+func (u *PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union) AdwData() *[2]uint32 {
+	return (*[2]uint32)(unsafe.Pointer(u))
+}
+
+// Data_ reinterprets the union as its Data member.
+func (u *PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union) Data_() *PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union_Data_e__Struct {
+	return (*PRINTER_NOTIFY_INFO_DATA_NotifyData_e__Union_Data_e__Struct)(unsafe.Pointer(u))
 }
 
 // PRINTER_NOTIFY_INFO_DATA: https://learn.microsoft.com/windows/win32/printdocs/printer-notify-info-data
@@ -1837,9 +1971,20 @@ type PROPSHEETUI_INFO struct {
 }
 
 // PROPSHEETUI_INFO_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETUI_INFO_HEADER_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETUI_INFO_HEADER_Anonymous_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// IconID reinterprets the union as its IconID member.
+func (u *PROPSHEETUI_INFO_HEADER_Anonymous_e__Union) IconID() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }
 
 type PROPSHEETUI_INFO_HEADER struct {
@@ -1904,10 +2049,41 @@ type PrintPropertiesCollection struct {
 	PropertiesCollection *PrintNamedProperty
 }
 
+type PrintPropertyValue_value_e__Union_propertyBlob_e__Struct struct {
+	CbBuf uint32
+	PBuf  unsafe.Pointer
+}
+
 // PrintPropertyValue_value_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PrintPropertyValue_value_e__Union struct {
 	Data [2]uint64
+}
+
+// PropertyByte reinterprets the union as its propertyByte member.
+func (u *PrintPropertyValue_value_e__Union) PropertyByte() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// PropertyString reinterprets the union as its propertyString member.
+func (u *PrintPropertyValue_value_e__Union) PropertyString() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PropertyInt32 reinterprets the union as its propertyInt32 member.
+func (u *PrintPropertyValue_value_e__Union) PropertyInt32() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// PropertyInt64 reinterprets the union as its propertyInt64 member.
+func (u *PrintPropertyValue_value_e__Union) PropertyInt64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// PropertyBlob reinterprets the union as its propertyBlob member.
+func (u *PrintPropertyValue_value_e__Union) PropertyBlob() *PrintPropertyValue_value_e__Union_propertyBlob_e__Struct {
+	return (*PrintPropertyValue_value_e__Union_propertyBlob_e__Struct)(unsafe.Pointer(u))
 }
 
 type PrintPropertyValue struct {
@@ -1994,9 +2170,25 @@ type SPLCLIENT_INFO_INTERNAL struct {
 }
 
 // TRANSDATA_uCode_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRANSDATA_uCode_e__Union struct {
 	Data [1]uint16
+}
+
+// SCode reinterprets the union as its sCode member.
+func (u *TRANSDATA_uCode_e__Union) SCode() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// UbCode reinterprets the union as its ubCode member.
+func (u *TRANSDATA_uCode_e__Union) UbCode() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// UbPairs reinterprets the union as its ubPairs member.
+func (u *TRANSDATA_uCode_e__Union) UbPairs() *[2]byte {
+	return (*[2]byte)(unsafe.Pointer(u))
 }
 
 type TRANSDATA struct {

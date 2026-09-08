@@ -131,10 +131,27 @@ type SPPHRASEELEMENT struct {
 	SREngineConfidence     float32
 }
 
+type SPPHRASEPROPERTY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	BType        byte
+	BReserved    byte
+	UsArrayIndex uint16
+}
+
 // SPPHRASEPROPERTY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SPPHRASEPROPERTY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// UlId reinterprets the union as its ulId member.
+func (u *SPPHRASEPROPERTY_Anonymous_e__Union) UlId() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *SPPHRASEPROPERTY_Anonymous_e__Union) Anonymous() *SPPHRASEPROPERTY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*SPPHRASEPROPERTY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type SPPHRASEPROPERTY struct {
@@ -328,10 +345,41 @@ type SPTRANSITIONENTRY_Anonymous1_e__Struct struct {
 	FHasProperty uint32
 }
 
+type SPTRANSITIONENTRY_Anonymous2_e__Union_Anonymous1_e__Struct struct {
+	HRuleInitialState   SPSTATEHANDLE
+	HRule               SPRULEHANDLE
+	PvClientRuleContext unsafe.Pointer
+}
+
+type SPTRANSITIONENTRY_Anonymous2_e__Union_Anonymous2_e__Struct struct {
+	HWord               SPWORDHANDLE
+	PvClientWordContext unsafe.Pointer
+}
+
+type SPTRANSITIONENTRY_Anonymous2_e__Union_Anonymous3_e__Struct struct {
+	PvGrammarCookie unsafe.Pointer
+}
+
 // SPTRANSITIONENTRY_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SPTRANSITIONENTRY_Anonymous2_e__Union struct {
 	Data [3]uint64
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *SPTRANSITIONENTRY_Anonymous2_e__Union) Anonymous1() *SPTRANSITIONENTRY_Anonymous2_e__Union_Anonymous1_e__Struct {
+	return (*SPTRANSITIONENTRY_Anonymous2_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *SPTRANSITIONENTRY_Anonymous2_e__Union) Anonymous2() *SPTRANSITIONENTRY_Anonymous2_e__Union_Anonymous2_e__Struct {
+	return (*SPTRANSITIONENTRY_Anonymous2_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous3 reinterprets the union as its Anonymous3 member.
+func (u *SPTRANSITIONENTRY_Anonymous2_e__Union) Anonymous3() *SPTRANSITIONENTRY_Anonymous2_e__Union_Anonymous3_e__Struct {
+	return (*SPTRANSITIONENTRY_Anonymous2_e__Union_Anonymous3_e__Struct)(unsafe.Pointer(u))
 }
 
 type SPTRANSITIONENTRY struct {

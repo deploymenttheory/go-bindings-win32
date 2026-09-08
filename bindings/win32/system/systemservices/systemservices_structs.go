@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 )
 
@@ -66,16 +67,47 @@ type COMPONENT_FILTER struct {
 	ComponentFlags uint32
 }
 
+type DISPATCHER_CONTEXT_NONVOLREG_ARM64_Anonymous_e__Struct struct {
+	GpNvRegs [11]uint64
+	FpNvRegs [8]float64
+}
+
 // DISPATCHER_CONTEXT_NONVOLREG_ARM64 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPATCHER_CONTEXT_NONVOLREG_ARM64 struct {
 	Data [19]uint64
 }
 
+// Buffer reinterprets the union as its Buffer member.
+func (u *DISPATCHER_CONTEXT_NONVOLREG_ARM64) Buffer() *[152]byte {
+	return (*[152]byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPATCHER_CONTEXT_NONVOLREG_ARM64) Anonymous() *DISPATCHER_CONTEXT_NONVOLREG_ARM64_Anonymous_e__Struct {
+	return (*DISPATCHER_CONTEXT_NONVOLREG_ARM64_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type DRIVER_INFO_ENTRY_Flags_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // DRIVER_INFO_ENTRY_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DRIVER_INFO_ENTRY_Flags_e__Union struct {
 	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DRIVER_INFO_ENTRY_Flags_e__Union) Anonymous() *DRIVER_INFO_ENTRY_Flags_e__Union_Anonymous_e__Struct {
+	return (*DRIVER_INFO_ENTRY_Flags_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUInt16 reinterprets the union as its AsUInt16 member.
+func (u *DRIVER_INFO_ENTRY_Flags_e__Union) AsUInt16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type DRIVER_INFO_ENTRY struct {
@@ -91,10 +123,25 @@ type DRIVER_INFO_ENTRY struct {
 	Padding                          uint16
 }
 
+type DRIVER_RUNTIME_REPORT_Flags_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // DRIVER_RUNTIME_REPORT_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DRIVER_RUNTIME_REPORT_Flags_e__Union struct {
 	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DRIVER_RUNTIME_REPORT_Flags_e__Union) Anonymous() *DRIVER_RUNTIME_REPORT_Flags_e__Union_Anonymous_e__Struct {
+	return (*DRIVER_RUNTIME_REPORT_Flags_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUInt16 reinterprets the union as its AsUInt16 member.
+func (u *DRIVER_RUNTIME_REPORT_Flags_e__Union) AsUInt16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type DRIVER_RUNTIME_REPORT struct {
@@ -121,9 +168,20 @@ type FILE_CASE_SENSITIVE_INFORMATION struct {
 }
 
 // FILE_NOTIFY_FULL_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FILE_NOTIFY_FULL_INFORMATION_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// ReparsePointTag reinterprets the union as its ReparsePointTag member.
+func (u *FILE_NOTIFY_FULL_INFORMATION_Anonymous_e__Union) ReparsePointTag() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// EaSize reinterprets the union as its EaSize member.
+func (u *FILE_NOTIFY_FULL_INFORMATION_Anonymous_e__Union) EaSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type FILE_NOTIFY_FULL_INFORMATION struct {
@@ -180,9 +238,20 @@ type FILE_STAT_LX_INFORMATION struct {
 }
 
 // GDI_NONREMOTE_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GDI_NONREMOTE_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// HInproc reinterprets the union as its hInproc member.
+func (u *GDI_NONREMOTE_u_e__Struct) HInproc() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// HRemote reinterprets the union as its hRemote member.
+func (u *GDI_NONREMOTE_u_e__Struct) HRemote() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type GDI_NONREMOTE struct {
@@ -236,28 +305,88 @@ type IMAGE_ARCHIVE_MEMBER_HEADER struct {
 	EndHeader [2]byte
 }
 
+type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA struct {
 	Data [1]uint32
 }
 
+// HeaderData reinterprets the union as its HeaderData member.
+func (u *IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA) HeaderData() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA) Anonymous() *IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_Anonymous_e__Struct {
+	return (*IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE struct {
 	Data [1]uint32
 }
 
+// EpilogScopeData reinterprets the union as its EpilogScopeData member.
+func (u *IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE) EpilogScopeData() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE) Anonymous() *IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE_Anonymous_e__Struct {
+	return (*IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EPILOG_SCOPE_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EXTENDED_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EXTENDED is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EXTENDED struct {
 	Data [1]uint32
 }
 
+// ExtendedHeaderData reinterprets the union as its ExtendedHeaderData member.
+func (u *IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EXTENDED) ExtendedHeaderData() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EXTENDED) Anonymous() *IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EXTENDED_Anonymous_e__Struct {
+	return (*IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA_EXTENDED_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// UnwindData reinterprets the union as its UnwindData member.
+func (u *IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union) UnwindData() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union) Anonymous() *IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IMAGE_ARM_RUNTIME_FUNCTION_ENTRY struct {
@@ -265,16 +394,123 @@ type IMAGE_ARM_RUNTIME_FUNCTION_ENTRY struct {
 	Anonymous    IMAGE_ARM_RUNTIME_FUNCTION_ENTRY_Anonymous_e__Union
 }
 
+// IMAGE_AUX_SYMBOL_CRC_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_AUX_SYMBOL_CRC_e__Struct struct {
+	Data [9]uint16
+}
+
+type IMAGE_AUX_SYMBOL_File_e__Struct struct {
+	Name [18]byte
+}
+
+// IMAGE_AUX_SYMBOL_Section_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_AUX_SYMBOL_Section_e__Struct struct {
+	Data [9]uint16
+}
+
+// IMAGE_AUX_SYMBOL_Sym_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_AUX_SYMBOL_Sym_e__Struct struct {
+	Data [9]uint16
+}
+
 // IMAGE_AUX_SYMBOL is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_AUX_SYMBOL struct {
 	Data [9]uint16
 }
 
+// Sym reinterprets the union as its Sym member.
+func (u *IMAGE_AUX_SYMBOL) Sym() *IMAGE_AUX_SYMBOL_Sym_e__Struct {
+	return (*IMAGE_AUX_SYMBOL_Sym_e__Struct)(unsafe.Pointer(u))
+}
+
+// File reinterprets the union as its File member.
+func (u *IMAGE_AUX_SYMBOL) File() *IMAGE_AUX_SYMBOL_File_e__Struct {
+	return (*IMAGE_AUX_SYMBOL_File_e__Struct)(unsafe.Pointer(u))
+}
+
+// Section reinterprets the union as its Section member.
+func (u *IMAGE_AUX_SYMBOL) Section() *IMAGE_AUX_SYMBOL_Section_e__Struct {
+	return (*IMAGE_AUX_SYMBOL_Section_e__Struct)(unsafe.Pointer(u))
+}
+
+// TokenDef reinterprets the union as its TokenDef member.
+func (u *IMAGE_AUX_SYMBOL) TokenDef() *IMAGE_AUX_SYMBOL_TOKEN_DEF {
+	return (*IMAGE_AUX_SYMBOL_TOKEN_DEF)(unsafe.Pointer(u))
+}
+
+// CRC reinterprets the union as its CRC member.
+func (u *IMAGE_AUX_SYMBOL) CRC() *IMAGE_AUX_SYMBOL_CRC_e__Struct {
+	return (*IMAGE_AUX_SYMBOL_CRC_e__Struct)(unsafe.Pointer(u))
+}
+
+type IMAGE_AUX_SYMBOL_EX_Anonymous_e__Struct struct {
+	TokenDef    IMAGE_AUX_SYMBOL_TOKEN_DEF
+	RgbReserved [2]byte
+}
+
+// IMAGE_AUX_SYMBOL_EX_CRC_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_AUX_SYMBOL_EX_CRC_e__Struct struct {
+	Data [10]uint16
+}
+
+type IMAGE_AUX_SYMBOL_EX_File_e__Struct struct {
+	Name [20]byte
+}
+
+// IMAGE_AUX_SYMBOL_EX_Section_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_AUX_SYMBOL_EX_Section_e__Struct struct {
+	Data [10]uint16
+}
+
+// IMAGE_AUX_SYMBOL_EX_Sym_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAGE_AUX_SYMBOL_EX_Sym_e__Struct struct {
+	Data [10]uint16
+}
+
 // IMAGE_AUX_SYMBOL_EX is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_AUX_SYMBOL_EX struct {
 	Data [10]uint16
+}
+
+// Sym reinterprets the union as its Sym member.
+func (u *IMAGE_AUX_SYMBOL_EX) Sym() *IMAGE_AUX_SYMBOL_EX_Sym_e__Struct {
+	return (*IMAGE_AUX_SYMBOL_EX_Sym_e__Struct)(unsafe.Pointer(u))
+}
+
+// File reinterprets the union as its File member.
+func (u *IMAGE_AUX_SYMBOL_EX) File() *IMAGE_AUX_SYMBOL_EX_File_e__Struct {
+	return (*IMAGE_AUX_SYMBOL_EX_File_e__Struct)(unsafe.Pointer(u))
+}
+
+// Section reinterprets the union as its Section member.
+func (u *IMAGE_AUX_SYMBOL_EX) Section() *IMAGE_AUX_SYMBOL_EX_Section_e__Struct {
+	return (*IMAGE_AUX_SYMBOL_EX_Section_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IMAGE_AUX_SYMBOL_EX) Anonymous() *IMAGE_AUX_SYMBOL_EX_Anonymous_e__Struct {
+	return (*IMAGE_AUX_SYMBOL_EX_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// CRC reinterprets the union as its CRC member.
+func (u *IMAGE_AUX_SYMBOL_EX) CRC() *IMAGE_AUX_SYMBOL_EX_CRC_e__Struct {
+	return (*IMAGE_AUX_SYMBOL_EX_CRC_e__Struct)(unsafe.Pointer(u))
 }
 
 // IMAGE_AUX_SYMBOL_TOKEN_DEF is a packed C struct (non-default field alignment), exposed as
@@ -459,9 +695,20 @@ type IMAGE_IMPORT_CONTROL_TRANSFER_DYNAMIC_RELOCATION struct {
 }
 
 // IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Characteristics reinterprets the union as its Characteristics member.
+func (u *IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union) Characteristics() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// OriginalFirstThunk reinterprets the union as its OriginalFirstThunk member.
+func (u *IMAGE_IMPORT_DESCRIPTOR_Anonymous_e__Union) OriginalFirstThunk() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type IMAGE_IMPORT_DESCRIPTOR struct {
@@ -480,9 +727,20 @@ type IMAGE_INDIR_CONTROL_TRANSFER_DYNAMIC_RELOCATION struct {
 }
 
 // IMAGE_LINENUMBER_Type_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_LINENUMBER_Type_e__Union struct {
 	Data [2]uint16
+}
+
+// SymbolTableIndex reinterprets the union as its SymbolTableIndex member.
+func (u *IMAGE_LINENUMBER_Type_e__Union) SymbolTableIndex() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// VirtualAddress reinterprets the union as its VirtualAddress member.
+func (u *IMAGE_LINENUMBER_Type_e__Union) VirtualAddress() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type IMAGE_LINENUMBER struct {
@@ -498,9 +756,70 @@ type IMAGE_OS2_HEADER struct {
 }
 
 // IMAGE_POLICY_ENTRY_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_POLICY_ENTRY_u_e__Union struct {
 	Data [1]uint64
+}
+
+// None reinterprets the union as its None member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) None() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// BoolValue reinterprets the union as its BoolValue member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) BoolValue() *foundation.BOOLEAN {
+	return (*foundation.BOOLEAN)(unsafe.Pointer(u))
+}
+
+// Int8Value reinterprets the union as its Int8Value member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) Int8Value() *int8 {
+	return (*int8)(unsafe.Pointer(u))
+}
+
+// UInt8Value reinterprets the union as its UInt8Value member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) UInt8Value() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Int16Value reinterprets the union as its Int16Value member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) Int16Value() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// UInt16Value reinterprets the union as its UInt16Value member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) UInt16Value() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Int32Value reinterprets the union as its Int32Value member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) Int32Value() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// UInt32Value reinterprets the union as its UInt32Value member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) UInt32Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Int64Value reinterprets the union as its Int64Value member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) Int64Value() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// UInt64Value reinterprets the union as its UInt64Value member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) UInt64Value() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// AnsiStringValue reinterprets the union as its AnsiStringValue member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) AnsiStringValue() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// UnicodeStringValue reinterprets the union as its UnicodeStringValue member.
+func (u *IMAGE_POLICY_ENTRY_u_e__Union) UnicodeStringValue() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 type IMAGE_POLICY_ENTRY struct {
@@ -543,16 +862,51 @@ type IMAGE_RESOURCE_DIRECTORY struct {
 	NumberOfIdEntries    uint16
 }
 
+type IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union) Anonymous() *IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Name reinterprets the union as its Name member.
+func (u *IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union) Name() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Id reinterprets the union as its Id member.
+func (u *IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous1_e__Union) Id() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+type IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// OffsetToData reinterprets the union as its OffsetToData member.
+func (u *IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union) OffsetToData() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union) Anonymous() *IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*IMAGE_RESOURCE_DIRECTORY_ENTRY_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IMAGE_RESOURCE_DIRECTORY_ENTRY struct {
@@ -607,10 +961,25 @@ type IMAGE_SYMBOL_EX struct {
 	Data [10]uint16
 }
 
+type IMAGE_TLS_DIRECTORY32_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IMAGE_TLS_DIRECTORY32_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMAGE_TLS_DIRECTORY32_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Characteristics reinterprets the union as its Characteristics member.
+func (u *IMAGE_TLS_DIRECTORY32_Anonymous_e__Union) Characteristics() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IMAGE_TLS_DIRECTORY32_Anonymous_e__Union) Anonymous() *IMAGE_TLS_DIRECTORY32_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IMAGE_TLS_DIRECTORY32_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IMAGE_TLS_DIRECTORY32 struct {
@@ -637,9 +1006,20 @@ type IMAGE_VXD_HEADER struct {
 }
 
 // IMPORT_OBJECT_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IMPORT_OBJECT_HEADER_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Ordinal reinterprets the union as its Ordinal member.
+func (u *IMPORT_OBJECT_HEADER_Anonymous_e__Union) Ordinal() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Hint reinterprets the union as its Hint member.
+func (u *IMPORT_OBJECT_HEADER_Anonymous_e__Union) Hint() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type IMPORT_OBJECT_HEADER struct {
@@ -658,10 +1038,25 @@ type JOBOBJECT_NETWORK_ACCOUNTING_INFORMATION struct {
 	DataBytesOut uint64
 }
 
+type KERNEL_CET_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // KERNEL_CET_CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KERNEL_CET_CONTEXT_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// AllFlags reinterprets the union as its AllFlags member.
+func (u *KERNEL_CET_CONTEXT_Anonymous_e__Union) AllFlags() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *KERNEL_CET_CONTEXT_Anonymous_e__Union) Anonymous() *KERNEL_CET_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*KERNEL_CET_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type KERNEL_CET_CONTEXT struct {
@@ -699,9 +1094,20 @@ type NOTIFY_USER_POWER_SETTING struct {
 }
 
 // NT_TIB32_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NT_TIB32_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// FiberData reinterprets the union as its FiberData member.
+func (u *NT_TIB32_Anonymous_e__Union) FiberData() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Version reinterprets the union as its Version member.
+func (u *NT_TIB32_Anonymous_e__Union) Version() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NT_TIB32 struct {
@@ -715,9 +1121,20 @@ type NT_TIB32 struct {
 }
 
 // NT_TIB64_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NT_TIB64_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// FiberData reinterprets the union as its FiberData member.
+func (u *NT_TIB64_Anonymous_e__Union) FiberData() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Version reinterprets the union as its Version member.
+func (u *NT_TIB64_Anonymous_e__Union) Version() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type NT_TIB64 struct {
@@ -736,10 +1153,25 @@ type PACKEDEVENTINFO struct {
 	UlOffsets             [1]uint32
 }
 
+type POWER_LIMIT_ATTRIBUTES_Flags_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // POWER_LIMIT_ATTRIBUTES_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type POWER_LIMIT_ATTRIBUTES_Flags_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *POWER_LIMIT_ATTRIBUTES_Flags_e__Union) Anonymous() *POWER_LIMIT_ATTRIBUTES_Flags_e__Union_Anonymous_e__Struct {
+	return (*POWER_LIMIT_ATTRIBUTES_Flags_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *POWER_LIMIT_ATTRIBUTES_Flags_e__Union) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type POWER_LIMIT_ATTRIBUTES struct {
@@ -768,10 +1200,25 @@ type PROCESSOR_IDLESTATE_INFO struct {
 	Spare          [2]byte
 }
 
+type PROCESSOR_IDLESTATE_POLICY_Flags_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // PROCESSOR_IDLESTATE_POLICY_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESSOR_IDLESTATE_POLICY_Flags_e__Union struct {
 	Data [1]uint16
+}
+
+// AsWORD reinterprets the union as its AsWORD member.
+func (u *PROCESSOR_IDLESTATE_POLICY_Flags_e__Union) AsWORD() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESSOR_IDLESTATE_POLICY_Flags_e__Union) Anonymous() *PROCESSOR_IDLESTATE_POLICY_Flags_e__Union_Anonymous_e__Struct {
+	return (*PROCESSOR_IDLESTATE_POLICY_Flags_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type PROCESSOR_IDLESTATE_POLICY struct {
@@ -781,10 +1228,42 @@ type PROCESSOR_IDLESTATE_POLICY struct {
 	Policy      [3]PROCESSOR_IDLESTATE_INFO
 }
 
+type PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
+// PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union struct {
+	Data [1]byte
+}
+
+// AsBYTE reinterprets the union as its AsBYTE member.
+func (u *PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union) AsBYTE() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union) Anonymous() *PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union_Anonymous_e__Struct {
+	return (*PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
 // PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union struct {
 	Data [1]byte
+}
+
+// Spare reinterprets the union as its Spare member.
+func (u *PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union) Spare() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union) Flags() *PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union {
+	return (*PROCESSOR_PERFSTATE_POLICY_Anonymous_e__Union_Flags_e__Union)(unsafe.Pointer(u))
 }
 
 type PROCESSOR_PERFSTATE_POLICY struct {
@@ -800,10 +1279,25 @@ type PROCESSOR_PERFSTATE_POLICY struct {
 	DecreasePercent  uint32
 }
 
+type PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_ASLR_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_aslr_policy
@@ -811,10 +1305,25 @@ type PROCESS_MITIGATION_ASLR_POLICY struct {
 	Anonymous PROCESS_MITIGATION_ASLR_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_binary_signature_policy
@@ -822,20 +1331,50 @@ type PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY struct {
 	Anonymous PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type PROCESS_MITIGATION_CHILD_PROCESS_POLICY struct {
 	Anonymous PROCESS_MITIGATION_CHILD_PROCESS_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_control_flow_guard_policy
@@ -843,10 +1382,25 @@ type PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY struct {
 	Anonymous PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_DEP_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_DEP_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_dep_policy
@@ -855,10 +1409,25 @@ type PROCESS_MITIGATION_DEP_POLICY struct {
 	Permanent foundation.BOOLEAN
 }
 
+type PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_DYNAMIC_CODE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_dynamic_code_policy
@@ -866,10 +1435,25 @@ type PROCESS_MITIGATION_DYNAMIC_CODE_POLICY struct {
 	Anonymous PROCESS_MITIGATION_DYNAMIC_CODE_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_extension_point_disable_policy
@@ -877,10 +1461,25 @@ type PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY struct {
 	Anonymous PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_FONT_DISABLE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_font_disable_policy
@@ -888,10 +1487,25 @@ type PROCESS_MITIGATION_FONT_DISABLE_POLICY struct {
 	Anonymous PROCESS_MITIGATION_FONT_DISABLE_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_IMAGE_LOAD_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_image_load_policy
@@ -899,20 +1513,50 @@ type PROCESS_MITIGATION_IMAGE_LOAD_POLICY struct {
 	Anonymous PROCESS_MITIGATION_IMAGE_LOAD_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY struct {
 	Anonymous PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process-mitigation-redirection-trust-policy
@@ -920,20 +1564,50 @@ type PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY struct {
 	Anonymous PROCESS_MITIGATION_REDIRECTION_TRUST_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type PROCESS_MITIGATION_SEHOP_POLICY struct {
 	Anonymous PROCESS_MITIGATION_SEHOP_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_side_channel_isolation_policy
@@ -941,10 +1615,25 @@ type PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY struct {
 	Anonymous PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_strict_handle_check_policy
@@ -952,10 +1641,25 @@ type PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY struct {
 	Anonymous PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_system_call_disable_policy
@@ -963,30 +1667,75 @@ type PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY struct {
 	Anonymous PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY struct {
 	Anonymous PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY struct {
 	Anonymous PROCESS_MITIGATION_USER_POINTER_AUTH_POLICY_Anonymous_e__Union
 }
 
+type PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union) Anonymous() *PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-process_mitigation_user_shadow_stack_policy
@@ -1014,10 +1763,25 @@ type QUOTA_LIMITS_EX struct {
 	CpuRateLimit          RATE_QUOTA_LIMIT
 }
 
+type RATE_QUOTA_LIMIT_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // RATE_QUOTA_LIMIT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RATE_QUOTA_LIMIT struct {
 	Data [1]uint32
+}
+
+// RateData reinterprets the union as its RateData member.
+func (u *RATE_QUOTA_LIMIT) RateData() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *RATE_QUOTA_LIMIT) Anonymous() *RATE_QUOTA_LIMIT_Anonymous_e__Struct {
+	return (*RATE_QUOTA_LIMIT_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type REARRANGE_FILE_DATA struct {
@@ -1115,9 +1879,20 @@ type RemHPALETTE struct {
 }
 
 // RemotableHandle_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RemotableHandle_u_e__Struct struct {
 	Data [1]uint32
+}
+
+// HInproc reinterprets the union as its hInproc member.
+func (u *RemotableHandle_u_e__Struct) HInproc() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// HRemote reinterprets the union as its hRemote member.
+func (u *RemotableHandle_u_e__Struct) HRemote() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 type RemotableHandle struct {
@@ -1237,15 +2012,37 @@ type SERVERSILO_DIAGNOSTIC_INFORMATION struct {
 }
 
 // SE_TOKEN_USER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SE_TOKEN_USER_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
+// TokenUser reinterprets the union as its TokenUser member.
+func (u *SE_TOKEN_USER_Anonymous1_e__Union) TokenUser() *security.TOKEN_USER {
+	return (*security.TOKEN_USER)(unsafe.Pointer(u))
+}
+
+// User reinterprets the union as its User member.
+func (u *SE_TOKEN_USER_Anonymous1_e__Union) User() *security.SID_AND_ATTRIBUTES {
+	return (*security.SID_AND_ATTRIBUTES)(unsafe.Pointer(u))
+}
+
 // SE_TOKEN_USER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SE_TOKEN_USER_Anonymous2_e__Union struct {
 	Data [17]uint32
+}
+
+// Sid reinterprets the union as its Sid member.
+func (u *SE_TOKEN_USER_Anonymous2_e__Union) Sid() *security.SID {
+	return (*security.SID)(unsafe.Pointer(u))
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *SE_TOKEN_USER_Anonymous2_e__Union) Buffer() *[68]byte {
+	return (*[68]byte)(unsafe.Pointer(u))
 }
 
 type SE_TOKEN_USER struct {
@@ -1467,9 +2264,20 @@ type UserBITMAP struct {
 }
 
 // UserCLIPFORMAT_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UserCLIPFORMAT_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// DwValue reinterprets the union as its dwValue member.
+func (u *UserCLIPFORMAT_u_e__Struct) DwValue() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PwszName reinterprets the union as its pwszName member.
+func (u *UserCLIPFORMAT_u_e__Struct) PwszName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 type UserCLIPFORMAT struct {
@@ -1478,9 +2286,25 @@ type UserCLIPFORMAT struct {
 }
 
 // UserHBITMAP_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UserHBITMAP_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// HInproc reinterprets the union as its hInproc member.
+func (u *UserHBITMAP_u_e__Struct) HInproc() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// HRemote reinterprets the union as its hRemote member.
+func (u *UserHBITMAP_u_e__Struct) HRemote() **UserBITMAP {
+	return (**UserBITMAP)(unsafe.Pointer(u))
+}
+
+// HInproc64 reinterprets the union as its hInproc64 member.
+func (u *UserHBITMAP_u_e__Struct) HInproc64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type UserHBITMAP struct {
@@ -1489,9 +2313,25 @@ type UserHBITMAP struct {
 }
 
 // UserHENHMETAFILE_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UserHENHMETAFILE_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// HInproc reinterprets the union as its hInproc member.
+func (u *UserHENHMETAFILE_u_e__Struct) HInproc() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// HRemote reinterprets the union as its hRemote member.
+func (u *UserHENHMETAFILE_u_e__Struct) HRemote() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// HInproc64 reinterprets the union as its hInproc64 member.
+func (u *UserHENHMETAFILE_u_e__Struct) HInproc64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type UserHENHMETAFILE struct {
@@ -1500,9 +2340,25 @@ type UserHENHMETAFILE struct {
 }
 
 // UserHGLOBAL_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UserHGLOBAL_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// HInproc reinterprets the union as its hInproc member.
+func (u *UserHGLOBAL_u_e__Struct) HInproc() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// HRemote reinterprets the union as its hRemote member.
+func (u *UserHGLOBAL_u_e__Struct) HRemote() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// HInproc64 reinterprets the union as its hInproc64 member.
+func (u *UserHGLOBAL_u_e__Struct) HInproc64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type UserHGLOBAL struct {
@@ -1511,9 +2367,25 @@ type UserHGLOBAL struct {
 }
 
 // UserHMETAFILE_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UserHMETAFILE_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// HInproc reinterprets the union as its hInproc member.
+func (u *UserHMETAFILE_u_e__Struct) HInproc() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// HRemote reinterprets the union as its hRemote member.
+func (u *UserHMETAFILE_u_e__Struct) HRemote() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// HInproc64 reinterprets the union as its hInproc64 member.
+func (u *UserHMETAFILE_u_e__Struct) HInproc64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type UserHMETAFILE struct {
@@ -1522,9 +2394,25 @@ type UserHMETAFILE struct {
 }
 
 // UserHMETAFILEPICT_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UserHMETAFILEPICT_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// HInproc reinterprets the union as its hInproc member.
+func (u *UserHMETAFILEPICT_u_e__Struct) HInproc() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// HRemote reinterprets the union as its hRemote member.
+func (u *UserHMETAFILEPICT_u_e__Struct) HRemote() **RemoteMETAFILEPICT {
+	return (**RemoteMETAFILEPICT)(unsafe.Pointer(u))
+}
+
+// HInproc64 reinterprets the union as its hInproc64 member.
+func (u *UserHMETAFILEPICT_u_e__Struct) HInproc64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type UserHMETAFILEPICT struct {
@@ -1533,9 +2421,25 @@ type UserHMETAFILEPICT struct {
 }
 
 // UserHPALETTE_u_e__Struct is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UserHPALETTE_u_e__Struct struct {
 	Data [1]uint64
+}
+
+// HInproc reinterprets the union as its hInproc member.
+func (u *UserHPALETTE_u_e__Struct) HInproc() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// HRemote reinterprets the union as its hRemote member.
+func (u *UserHPALETTE_u_e__Struct) HRemote() **graphicsgdi.LOGPALETTE {
+	return (**graphicsgdi.LOGPALETTE)(unsafe.Pointer(u))
+}
+
+// HInproc64 reinterprets the union as its hInproc64 member.
+func (u *UserHPALETTE_u_e__Struct) HInproc64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type UserHPALETTE struct {

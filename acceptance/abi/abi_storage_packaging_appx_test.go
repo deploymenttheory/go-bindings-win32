@@ -51,6 +51,11 @@ var abiStorage_Packaging_Appx = []abiCase{
 	{"storagepackagingappx.PACKAGE_VERSION size", unsafe.Sizeof(storagepackagingappx.PACKAGE_VERSION{}), 8},
 	{"storagepackagingappx.PACKAGE_VERSION.Anonymous", unsafe.Offsetof(storagepackagingappx.PACKAGE_VERSION{}.Anonymous), 0},
 	{"storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union size", unsafe.Sizeof(storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union{}), 8},
+	{"storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct size", unsafe.Sizeof(storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct{}), 8},
+	{"storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct.Revision", unsafe.Offsetof(storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct{}.Revision), 0},
+	{"storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct.Build", unsafe.Offsetof(storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct{}.Build), 2},
+	{"storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct.Minor", unsafe.Offsetof(storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct{}.Minor), 4},
+	{"storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct.Major", unsafe.Offsetof(storagepackagingappx.PACKAGE_VERSION_Anonymous_e__Union_Anonymous_e__Struct{}.Major), 6},
 }
 
 func TestABI_Storage_Packaging_Appx(t *testing.T) { checkABI(t, abiStorage_Packaging_Appx) }

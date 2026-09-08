@@ -33,10 +33,85 @@ type PSS_AUXILIARY_PAGE_ENTRY struct {
 	PageSize         uint32
 }
 
+type PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Event_e__Struct struct {
+	ManualReset foundation.BOOL
+	Signaled    foundation.BOOL
+}
+
+type PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Mutant_e__Struct struct {
+	CurrentCount   int32
+	Abandoned      foundation.BOOL
+	OwnerProcessId uint32
+	OwnerThreadId  uint32
+}
+
+type PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Process_e__Struct struct {
+	ExitStatus      uint32
+	PebBaseAddress  unsafe.Pointer
+	AffinityMask    uintptr
+	BasePriority    int32
+	ProcessId       uint32
+	ParentProcessId uint32
+	Flags           uint32
+}
+
+type PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Section_e__Struct struct {
+	BaseAddress          unsafe.Pointer
+	AllocationAttributes uint32
+	MaximumSize          int64
+}
+
+type PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Semaphore_e__Struct struct {
+	CurrentCount int32
+	MaximumCount int32
+}
+
+type PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Thread_e__Struct struct {
+	ExitStatus        uint32
+	TebBaseAddress    unsafe.Pointer
+	ProcessId         uint32
+	ThreadId          uint32
+	AffinityMask      uintptr
+	Priority          int32
+	BasePriority      int32
+	Win32StartAddress unsafe.Pointer
+}
+
 // PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union struct {
 	Data [6]uint64
+}
+
+// Process reinterprets the union as its Process member.
+func (u *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union) Process() *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Process_e__Struct {
+	return (*PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Process_e__Struct)(unsafe.Pointer(u))
+}
+
+// Thread reinterprets the union as its Thread member.
+func (u *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union) Thread() *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Thread_e__Struct {
+	return (*PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Thread_e__Struct)(unsafe.Pointer(u))
+}
+
+// Mutant reinterprets the union as its Mutant member.
+func (u *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union) Mutant() *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Mutant_e__Struct {
+	return (*PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Mutant_e__Struct)(unsafe.Pointer(u))
+}
+
+// Event reinterprets the union as its Event member.
+func (u *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union) Event() *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Event_e__Struct {
+	return (*PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Event_e__Struct)(unsafe.Pointer(u))
+}
+
+// Section reinterprets the union as its Section member.
+func (u *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union) Section() *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Section_e__Struct {
+	return (*PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Section_e__Struct)(unsafe.Pointer(u))
+}
+
+// Semaphore reinterprets the union as its Semaphore member.
+func (u *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union) Semaphore() *PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Semaphore_e__Struct {
+	return (*PSS_HANDLE_ENTRY_TypeSpecificInformation_e__Union_Semaphore_e__Struct)(unsafe.Pointer(u))
 }
 
 // PSS_HANDLE_ENTRY: https://learn.microsoft.com/windows/win32/api/processsnapshot/ns-processsnapshot-pss_handle_entry

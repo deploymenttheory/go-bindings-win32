@@ -901,9 +901,20 @@ type DVD_TIMECODE struct {
 }
 
 // DVD_TitleAttributes_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DVD_TitleAttributes_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// AppMode reinterprets the union as its AppMode member.
+func (u *DVD_TitleAttributes_Anonymous_e__Union) AppMode() *DVD_TITLE_APPMODE {
+	return (*DVD_TITLE_APPMODE)(unsafe.Pointer(u))
+}
+
+// TitleLength reinterprets the union as its TitleLength member.
+func (u *DVD_TitleAttributes_Anonymous_e__Union) TitleLength() *DVD_HMSF_TIMECODE {
+	return (*DVD_HMSF_TIMECODE)(unsafe.Pointer(u))
 }
 
 // DVD_TitleAttributes: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-dvd_titleattributes
@@ -1250,10 +1261,31 @@ type REGFILTER struct {
 	Name  foundation.PWSTR
 }
 
+type REGFILTER2_Anonymous_e__Union_Anonymous1_e__Struct struct {
+	CPins  uint32
+	RgPins *REGFILTERPINS
+}
+
+type REGFILTER2_Anonymous_e__Union_Anonymous2_e__Struct struct {
+	CPins2  uint32
+	RgPins2 *REGFILTERPINS2
+}
+
 // REGFILTER2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type REGFILTER2_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *REGFILTER2_Anonymous_e__Union) Anonymous1() *REGFILTER2_Anonymous_e__Union_Anonymous1_e__Struct {
+	return (*REGFILTER2_Anonymous_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *REGFILTER2_Anonymous_e__Union) Anonymous2() *REGFILTER2_Anonymous_e__Union_Anonymous2_e__Struct {
+	return (*REGFILTER2_Anonymous_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
 }
 
 // REGFILTER2: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-regfilter2
@@ -1349,9 +1381,25 @@ type VFW_FILTERLIST struct {
 }
 
 // VIDEOINFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VIDEOINFO_Anonymous_e__Union struct {
 	Data [259]uint32
+}
+
+// BmiColors reinterprets the union as its bmiColors member.
+func (u *VIDEOINFO_Anonymous_e__Union) BmiColors() *[256]graphicsgdi.RGBQUAD {
+	return (*[256]graphicsgdi.RGBQUAD)(unsafe.Pointer(u))
+}
+
+// DwBitMasks reinterprets the union as its dwBitMasks member.
+func (u *VIDEOINFO_Anonymous_e__Union) DwBitMasks() *[3]uint32 {
+	return (*[3]uint32)(unsafe.Pointer(u))
+}
+
+// TrueColorInfo reinterprets the union as its TrueColorInfo member.
+func (u *VIDEOINFO_Anonymous_e__Union) TrueColorInfo() *TRUECOLORINFO {
+	return (*TRUECOLORINFO)(unsafe.Pointer(u))
 }
 
 // VIDEOINFO: https://learn.microsoft.com/windows/win32/api/amvideo/ns-amvideo-videoinfo

@@ -71,11 +71,26 @@ type D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT struct {
 	AllowAccess   foundation.BOOL
 }
 
+type D3D11_AUTHENTICATED_PROTECTION_FLAGS_Flags_e__Struct struct {
+	Bitfield uint32
+}
+
 // D3D11_AUTHENTICATED_PROTECTION_FLAGS: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_protection_flags
 // D3D11_AUTHENTICATED_PROTECTION_FLAGS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_AUTHENTICATED_PROTECTION_FLAGS struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *D3D11_AUTHENTICATED_PROTECTION_FLAGS) Flags() *D3D11_AUTHENTICATED_PROTECTION_FLAGS_Flags_e__Struct {
+	return (*D3D11_AUTHENTICATED_PROTECTION_FLAGS_Flags_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *D3D11_AUTHENTICATED_PROTECTION_FLAGS) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_authenticated_query_accessibility_encryption_guid_count_output
@@ -259,15 +274,37 @@ type D3D11_BUFFER_DESC struct {
 }
 
 // D3D11_BUFFER_RTV_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_BUFFER_RTV_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// FirstElement reinterprets the union as its FirstElement member.
+func (u *D3D11_BUFFER_RTV_Anonymous1_e__Union) FirstElement() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ElementOffset reinterprets the union as its ElementOffset member.
+func (u *D3D11_BUFFER_RTV_Anonymous1_e__Union) ElementOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // D3D11_BUFFER_RTV_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_BUFFER_RTV_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// NumElements reinterprets the union as its NumElements member.
+func (u *D3D11_BUFFER_RTV_Anonymous2_e__Union) NumElements() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ElementWidth reinterprets the union as its ElementWidth member.
+func (u *D3D11_BUFFER_RTV_Anonymous2_e__Union) ElementWidth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // D3D11_BUFFER_RTV: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_buffer_rtv
@@ -277,15 +314,37 @@ type D3D11_BUFFER_RTV struct {
 }
 
 // D3D11_BUFFER_SRV_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_BUFFER_SRV_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// FirstElement reinterprets the union as its FirstElement member.
+func (u *D3D11_BUFFER_SRV_Anonymous1_e__Union) FirstElement() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ElementOffset reinterprets the union as its ElementOffset member.
+func (u *D3D11_BUFFER_SRV_Anonymous1_e__Union) ElementOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // D3D11_BUFFER_SRV_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_BUFFER_SRV_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// NumElements reinterprets the union as its NumElements member.
+func (u *D3D11_BUFFER_SRV_Anonymous2_e__Union) NumElements() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// ElementWidth reinterprets the union as its ElementWidth member.
+func (u *D3D11_BUFFER_SRV_Anonymous2_e__Union) ElementWidth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // D3D11_BUFFER_SRV: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_buffer_srv
@@ -354,9 +413,40 @@ type D3D11_DEPTH_STENCIL_DESC struct {
 }
 
 // D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture1D() *D3D11_TEX1D_DSV {
+	return (*D3D11_TEX1D_DSV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture1DArray() *D3D11_TEX1D_ARRAY_DSV {
+	return (*D3D11_TEX1D_ARRAY_DSV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_DSV {
+	return (*D3D11_TEX2D_DSV)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture2DArray() *D3D11_TEX2D_ARRAY_DSV {
+	return (*D3D11_TEX2D_ARRAY_DSV)(unsafe.Pointer(u))
+}
+
+// Texture2DMS reinterprets the union as its Texture2DMS member.
+func (u *D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture2DMS() *D3D11_TEX2DMS_DSV {
+	return (*D3D11_TEX2DMS_DSV)(unsafe.Pointer(u))
+}
+
+// Texture2DMSArray reinterprets the union as its Texture2DMSArray member.
+func (u *D3D11_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union) Texture2DMSArray() *D3D11_TEX2DMS_ARRAY_DSV {
+	return (*D3D11_TEX2DMS_ARRAY_DSV)(unsafe.Pointer(u))
 }
 
 // D3D11_DEPTH_STENCIL_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_depth_stencil_view_desc
@@ -815,9 +905,50 @@ type D3D11_RENDER_TARGET_BLEND_DESC1 struct {
 }
 
 // D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Buffer() *D3D11_BUFFER_RTV {
+	return (*D3D11_BUFFER_RTV)(unsafe.Pointer(u))
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture1D() *D3D11_TEX1D_RTV {
+	return (*D3D11_TEX1D_RTV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture1DArray() *D3D11_TEX1D_ARRAY_RTV {
+	return (*D3D11_TEX1D_ARRAY_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_RTV {
+	return (*D3D11_TEX2D_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture2DArray() *D3D11_TEX2D_ARRAY_RTV {
+	return (*D3D11_TEX2D_ARRAY_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2DMS reinterprets the union as its Texture2DMS member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture2DMS() *D3D11_TEX2DMS_RTV {
+	return (*D3D11_TEX2DMS_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2DMSArray reinterprets the union as its Texture2DMSArray member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture2DMSArray() *D3D11_TEX2DMS_ARRAY_RTV {
+	return (*D3D11_TEX2DMS_ARRAY_RTV)(unsafe.Pointer(u))
+}
+
+// Texture3D reinterprets the union as its Texture3D member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union) Texture3D() *D3D11_TEX3D_RTV {
+	return (*D3D11_TEX3D_RTV)(unsafe.Pointer(u))
 }
 
 // D3D11_RENDER_TARGET_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_render_target_view_desc
@@ -828,9 +959,50 @@ type D3D11_RENDER_TARGET_VIEW_DESC struct {
 }
 
 // D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union) Buffer() *D3D11_BUFFER_RTV {
+	return (*D3D11_BUFFER_RTV)(unsafe.Pointer(u))
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union) Texture1D() *D3D11_TEX1D_RTV {
+	return (*D3D11_TEX1D_RTV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union) Texture1DArray() *D3D11_TEX1D_ARRAY_RTV {
+	return (*D3D11_TEX1D_ARRAY_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_RTV1 {
+	return (*D3D11_TEX2D_RTV1)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union) Texture2DArray() *D3D11_TEX2D_ARRAY_RTV1 {
+	return (*D3D11_TEX2D_ARRAY_RTV1)(unsafe.Pointer(u))
+}
+
+// Texture2DMS reinterprets the union as its Texture2DMS member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union) Texture2DMS() *D3D11_TEX2DMS_RTV {
+	return (*D3D11_TEX2DMS_RTV)(unsafe.Pointer(u))
+}
+
+// Texture2DMSArray reinterprets the union as its Texture2DMSArray member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union) Texture2DMSArray() *D3D11_TEX2DMS_ARRAY_RTV {
+	return (*D3D11_TEX2DMS_ARRAY_RTV)(unsafe.Pointer(u))
+}
+
+// Texture3D reinterprets the union as its Texture3D member.
+func (u *D3D11_RENDER_TARGET_VIEW_DESC1_Anonymous_e__Union) Texture3D() *D3D11_TEX3D_RTV {
+	return (*D3D11_TEX3D_RTV)(unsafe.Pointer(u))
 }
 
 // D3D11_RENDER_TARGET_VIEW_DESC1: https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_render_target_view_desc1
@@ -918,9 +1090,65 @@ type D3D11_SHADER_INPUT_BIND_DESC struct {
 }
 
 // D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Buffer() *D3D11_BUFFER_SRV {
+	return (*D3D11_BUFFER_SRV)(unsafe.Pointer(u))
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture1D() *D3D11_TEX1D_SRV {
+	return (*D3D11_TEX1D_SRV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture1DArray() *D3D11_TEX1D_ARRAY_SRV {
+	return (*D3D11_TEX1D_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_SRV {
+	return (*D3D11_TEX2D_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture2DArray() *D3D11_TEX2D_ARRAY_SRV {
+	return (*D3D11_TEX2D_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DMS reinterprets the union as its Texture2DMS member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture2DMS() *D3D11_TEX2DMS_SRV {
+	return (*D3D11_TEX2DMS_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DMSArray reinterprets the union as its Texture2DMSArray member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture2DMSArray() *D3D11_TEX2DMS_ARRAY_SRV {
+	return (*D3D11_TEX2DMS_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture3D reinterprets the union as its Texture3D member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) Texture3D() *D3D11_TEX3D_SRV {
+	return (*D3D11_TEX3D_SRV)(unsafe.Pointer(u))
+}
+
+// TextureCube reinterprets the union as its TextureCube member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) TextureCube() *D3D11_TEXCUBE_SRV {
+	return (*D3D11_TEXCUBE_SRV)(unsafe.Pointer(u))
+}
+
+// TextureCubeArray reinterprets the union as its TextureCubeArray member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) TextureCubeArray() *D3D11_TEXCUBE_ARRAY_SRV {
+	return (*D3D11_TEXCUBE_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// BufferEx reinterprets the union as its BufferEx member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union) BufferEx() *D3D11_BUFFEREX_SRV {
+	return (*D3D11_BUFFEREX_SRV)(unsafe.Pointer(u))
 }
 
 // D3D11_SHADER_RESOURCE_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_shader_resource_view_desc
@@ -931,9 +1159,65 @@ type D3D11_SHADER_RESOURCE_VIEW_DESC struct {
 }
 
 // D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union struct {
 	Data [5]uint32
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Buffer() *D3D11_BUFFER_SRV {
+	return (*D3D11_BUFFER_SRV)(unsafe.Pointer(u))
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture1D() *D3D11_TEX1D_SRV {
+	return (*D3D11_TEX1D_SRV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture1DArray() *D3D11_TEX1D_ARRAY_SRV {
+	return (*D3D11_TEX1D_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_SRV1 {
+	return (*D3D11_TEX2D_SRV1)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture2DArray() *D3D11_TEX2D_ARRAY_SRV1 {
+	return (*D3D11_TEX2D_ARRAY_SRV1)(unsafe.Pointer(u))
+}
+
+// Texture2DMS reinterprets the union as its Texture2DMS member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture2DMS() *D3D11_TEX2DMS_SRV {
+	return (*D3D11_TEX2DMS_SRV)(unsafe.Pointer(u))
+}
+
+// Texture2DMSArray reinterprets the union as its Texture2DMSArray member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture2DMSArray() *D3D11_TEX2DMS_ARRAY_SRV {
+	return (*D3D11_TEX2DMS_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// Texture3D reinterprets the union as its Texture3D member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) Texture3D() *D3D11_TEX3D_SRV {
+	return (*D3D11_TEX3D_SRV)(unsafe.Pointer(u))
+}
+
+// TextureCube reinterprets the union as its TextureCube member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) TextureCube() *D3D11_TEXCUBE_SRV {
+	return (*D3D11_TEXCUBE_SRV)(unsafe.Pointer(u))
+}
+
+// TextureCubeArray reinterprets the union as its TextureCubeArray member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) TextureCubeArray() *D3D11_TEXCUBE_ARRAY_SRV {
+	return (*D3D11_TEXCUBE_ARRAY_SRV)(unsafe.Pointer(u))
+}
+
+// BufferEx reinterprets the union as its BufferEx member.
+func (u *D3D11_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union) BufferEx() *D3D11_BUFFEREX_SRV {
+	return (*D3D11_BUFFEREX_SRV)(unsafe.Pointer(u))
 }
 
 // D3D11_SHADER_RESOURCE_VIEW_DESC1: https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_shader_resource_view_desc1
@@ -944,9 +1228,40 @@ type D3D11_SHADER_RESOURCE_VIEW_DESC1 struct {
 }
 
 // D3D11_SHADER_TRACE_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_SHADER_TRACE_DESC_Anonymous_e__Union struct {
 	Data [4]uint64
+}
+
+// VertexShaderTraceDesc reinterprets the union as its VertexShaderTraceDesc member.
+func (u *D3D11_SHADER_TRACE_DESC_Anonymous_e__Union) VertexShaderTraceDesc() *D3D11_VERTEX_SHADER_TRACE_DESC {
+	return (*D3D11_VERTEX_SHADER_TRACE_DESC)(unsafe.Pointer(u))
+}
+
+// HullShaderTraceDesc reinterprets the union as its HullShaderTraceDesc member.
+func (u *D3D11_SHADER_TRACE_DESC_Anonymous_e__Union) HullShaderTraceDesc() *D3D11_HULL_SHADER_TRACE_DESC {
+	return (*D3D11_HULL_SHADER_TRACE_DESC)(unsafe.Pointer(u))
+}
+
+// DomainShaderTraceDesc reinterprets the union as its DomainShaderTraceDesc member.
+func (u *D3D11_SHADER_TRACE_DESC_Anonymous_e__Union) DomainShaderTraceDesc() *D3D11_DOMAIN_SHADER_TRACE_DESC {
+	return (*D3D11_DOMAIN_SHADER_TRACE_DESC)(unsafe.Pointer(u))
+}
+
+// GeometryShaderTraceDesc reinterprets the union as its GeometryShaderTraceDesc member.
+func (u *D3D11_SHADER_TRACE_DESC_Anonymous_e__Union) GeometryShaderTraceDesc() *D3D11_GEOMETRY_SHADER_TRACE_DESC {
+	return (*D3D11_GEOMETRY_SHADER_TRACE_DESC)(unsafe.Pointer(u))
+}
+
+// PixelShaderTraceDesc reinterprets the union as its PixelShaderTraceDesc member.
+func (u *D3D11_SHADER_TRACE_DESC_Anonymous_e__Union) PixelShaderTraceDesc() *D3D11_PIXEL_SHADER_TRACE_DESC {
+	return (*D3D11_PIXEL_SHADER_TRACE_DESC)(unsafe.Pointer(u))
+}
+
+// ComputeShaderTraceDesc reinterprets the union as its ComputeShaderTraceDesc member.
+func (u *D3D11_SHADER_TRACE_DESC_Anonymous_e__Union) ComputeShaderTraceDesc() *D3D11_COMPUTE_SHADER_TRACE_DESC {
+	return (*D3D11_COMPUTE_SHADER_TRACE_DESC)(unsafe.Pointer(u))
 }
 
 // D3D11_SHADER_TRACE_DESC: https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_shader_trace_desc
@@ -1346,9 +1661,20 @@ type D3D11_TILE_SHAPE struct {
 }
 
 // D3D11_TRACE_REGISTER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_TRACE_REGISTER_Anonymous_e__Union struct {
 	Data [2]uint16
+}
+
+// Index1D reinterprets the union as its Index1D member.
+func (u *D3D11_TRACE_REGISTER_Anonymous_e__Union) Index1D() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Index2D reinterprets the union as its Index2D member.
+func (u *D3D11_TRACE_REGISTER_Anonymous_e__Union) Index2D() *[2]uint16 {
+	return (*[2]uint16)(unsafe.Pointer(u))
 }
 
 // D3D11_TRACE_REGISTER: https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ns-d3d11shadertracing-d3d11_trace_register
@@ -1404,9 +1730,40 @@ type D3D11_TRACE_VALUE struct {
 }
 
 // D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union) Buffer() *D3D11_BUFFER_UAV {
+	return (*D3D11_BUFFER_UAV)(unsafe.Pointer(u))
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union) Texture1D() *D3D11_TEX1D_UAV {
+	return (*D3D11_TEX1D_UAV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union) Texture1DArray() *D3D11_TEX1D_ARRAY_UAV {
+	return (*D3D11_TEX1D_ARRAY_UAV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_UAV {
+	return (*D3D11_TEX2D_UAV)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union) Texture2DArray() *D3D11_TEX2D_ARRAY_UAV {
+	return (*D3D11_TEX2D_ARRAY_UAV)(unsafe.Pointer(u))
+}
+
+// Texture3D reinterprets the union as its Texture3D member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC_Anonymous_e__Union) Texture3D() *D3D11_TEX3D_UAV {
+	return (*D3D11_TEX3D_UAV)(unsafe.Pointer(u))
 }
 
 // D3D11_UNORDERED_ACCESS_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_unordered_access_view_desc
@@ -1417,9 +1774,40 @@ type D3D11_UNORDERED_ACCESS_VIEW_DESC struct {
 }
 
 // D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union) Buffer() *D3D11_BUFFER_UAV {
+	return (*D3D11_BUFFER_UAV)(unsafe.Pointer(u))
+}
+
+// Texture1D reinterprets the union as its Texture1D member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union) Texture1D() *D3D11_TEX1D_UAV {
+	return (*D3D11_TEX1D_UAV)(unsafe.Pointer(u))
+}
+
+// Texture1DArray reinterprets the union as its Texture1DArray member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union) Texture1DArray() *D3D11_TEX1D_ARRAY_UAV {
+	return (*D3D11_TEX1D_ARRAY_UAV)(unsafe.Pointer(u))
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_UAV1 {
+	return (*D3D11_TEX2D_UAV1)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union) Texture2DArray() *D3D11_TEX2D_ARRAY_UAV1 {
+	return (*D3D11_TEX2D_ARRAY_UAV1)(unsafe.Pointer(u))
+}
+
+// Texture3D reinterprets the union as its Texture3D member.
+func (u *D3D11_UNORDERED_ACCESS_VIEW_DESC1_Anonymous_e__Union) Texture3D() *D3D11_TEX3D_UAV {
+	return (*D3D11_TEX3D_UAV)(unsafe.Pointer(u))
 }
 
 // D3D11_UNORDERED_ACCESS_VIEW_DESC1: https://learn.microsoft.com/windows/win32/api/d3d11_3/ns-d3d11_3-d3d11_unordered_access_view_desc1
@@ -1435,9 +1823,20 @@ type D3D11_VERTEX_SHADER_TRACE_DESC struct {
 }
 
 // D3D11_VIDEO_COLOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_VIDEO_COLOR_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// YCbCr reinterprets the union as its YCbCr member.
+func (u *D3D11_VIDEO_COLOR_Anonymous_e__Union) YCbCr() *D3D11_VIDEO_COLOR_YCbCrA {
+	return (*D3D11_VIDEO_COLOR_YCbCrA)(unsafe.Pointer(u))
+}
+
+// RGBA reinterprets the union as its RGBA member.
+func (u *D3D11_VIDEO_COLOR_Anonymous_e__Union) RGBA() *D3D11_VIDEO_COLOR_RGBA {
+	return (*D3D11_VIDEO_COLOR_RGBA)(unsafe.Pointer(u))
 }
 
 // D3D11_VIDEO_COLOR: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_color
@@ -1561,9 +1960,15 @@ type D3D11_VIDEO_DECODER_EXTENSION struct {
 }
 
 // D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_VDOV {
+	return (*D3D11_TEX2D_VDOV)(unsafe.Pointer(u))
 }
 
 // D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_decoder_output_view_desc
@@ -1626,9 +2031,15 @@ type D3D11_VIDEO_PROCESSOR_FILTER_RANGE struct {
 }
 
 // D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union struct {
 	Data [2]uint32
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_VPIV {
+	return (*D3D11_TEX2D_VPIV)(unsafe.Pointer(u))
 }
 
 // D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_input_view_desc
@@ -1639,9 +2050,20 @@ type D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC struct {
 }
 
 // D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
+}
+
+// Texture2D reinterprets the union as its Texture2D member.
+func (u *D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union) Texture2D() *D3D11_TEX2D_VPOV {
+	return (*D3D11_TEX2D_VPOV)(unsafe.Pointer(u))
+}
+
+// Texture2DArray reinterprets the union as its Texture2DArray member.
+func (u *D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC_Anonymous_e__Union) Texture2DArray() *D3D11_TEX2D_ARRAY_VPOV {
+	return (*D3D11_TEX2D_ARRAY_VPOV)(unsafe.Pointer(u))
 }
 
 // D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC: https://learn.microsoft.com/windows/win32/api/d3d11/ns-d3d11-d3d11_video_processor_output_view_desc

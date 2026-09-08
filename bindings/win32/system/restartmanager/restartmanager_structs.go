@@ -5,13 +5,31 @@
 package restartmanager
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 // RM_FILTER_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RM_FILTER_INFO_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// StrFilename reinterprets the union as its strFilename member.
+func (u *RM_FILTER_INFO_Anonymous_e__Union) StrFilename() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// Process reinterprets the union as its Process member.
+func (u *RM_FILTER_INFO_Anonymous_e__Union) Process() *RM_UNIQUE_PROCESS {
+	return (*RM_UNIQUE_PROCESS)(unsafe.Pointer(u))
+}
+
+// StrServiceShortName reinterprets the union as its strServiceShortName member.
+func (u *RM_FILTER_INFO_Anonymous_e__Union) StrServiceShortName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // RM_FILTER_INFO: https://learn.microsoft.com/windows/win32/api/restartmanager/ns-restartmanager-rm_filter_info

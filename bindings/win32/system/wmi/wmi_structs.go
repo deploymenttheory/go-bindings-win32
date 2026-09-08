@@ -506,9 +506,20 @@ type MI_ContextFT struct {
 }
 
 // MI_Datetime_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MI_Datetime_u_e__Union struct {
 	Data [8]uint32
+}
+
+// Timestamp reinterprets the union as its timestamp member.
+func (u *MI_Datetime_u_e__Union) Timestamp() *MI_Timestamp {
+	return (*MI_Timestamp)(unsafe.Pointer(u))
+}
+
+// Interval reinterprets the union as its interval member.
+func (u *MI_Datetime_u_e__Union) Interval() *MI_Interval {
+	return (*MI_Interval)(unsafe.Pointer(u))
 }
 
 // MI_Datetime: https://learn.microsoft.com/windows/win32/api/mi/ns-mi-mi_datetime
@@ -1239,9 +1250,20 @@ type MI_Uint8Field struct {
 }
 
 // MI_UserCredentials_credentials_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MI_UserCredentials_credentials_e__Union struct {
 	Data [3]uint64
+}
+
+// UsernamePassword reinterprets the union as its usernamePassword member.
+func (u *MI_UserCredentials_credentials_e__Union) UsernamePassword() *MI_UsernamePasswordCreds {
+	return (*MI_UsernamePasswordCreds)(unsafe.Pointer(u))
+}
+
+// CertificateThumbprint reinterprets the union as its certificateThumbprint member.
+func (u *MI_UserCredentials_credentials_e__Union) CertificateThumbprint() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
 }
 
 // MI_UserCredentials: https://learn.microsoft.com/windows/win32/api/mi/ns-mi-mi_usercredentials
@@ -1265,9 +1287,175 @@ type MI_UtilitiesFT struct {
 
 // MI_Value: https://learn.microsoft.com/windows/win32/api/mi/ns-mi-mi_value
 // MI_Value is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MI_Value struct {
 	Data [5]uint64
+}
+
+// Boolean reinterprets the union as its boolean member.
+func (u *MI_Value) Boolean() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Uint8 reinterprets the union as its uint8 member.
+func (u *MI_Value) Uint8() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Sint8 reinterprets the union as its sint8 member.
+func (u *MI_Value) Sint8() *int8 {
+	return (*int8)(unsafe.Pointer(u))
+}
+
+// Uint16 reinterprets the union as its uint16 member.
+func (u *MI_Value) Uint16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Sint16 reinterprets the union as its sint16 member.
+func (u *MI_Value) Sint16() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// Uint32 reinterprets the union as its uint32 member.
+func (u *MI_Value) Uint32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Sint32 reinterprets the union as its sint32 member.
+func (u *MI_Value) Sint32() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Uint64 reinterprets the union as its uint64 member.
+func (u *MI_Value) Uint64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Sint64 reinterprets the union as its sint64 member.
+func (u *MI_Value) Sint64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// Real32 reinterprets the union as its real32 member.
+func (u *MI_Value) Real32() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// Real64 reinterprets the union as its real64 member.
+func (u *MI_Value) Real64() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// Char16 reinterprets the union as its char16 member.
+func (u *MI_Value) Char16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Datetime reinterprets the union as its datetime member.
+func (u *MI_Value) Datetime() *MI_Datetime {
+	return (*MI_Datetime)(unsafe.Pointer(u))
+}
+
+// String reinterprets the union as its string member.
+func (u *MI_Value) String() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// Instance reinterprets the union as its instance member.
+func (u *MI_Value) Instance() **MI_Instance {
+	return (**MI_Instance)(unsafe.Pointer(u))
+}
+
+// Reference reinterprets the union as its reference member.
+func (u *MI_Value) Reference() **MI_Instance {
+	return (**MI_Instance)(unsafe.Pointer(u))
+}
+
+// Booleana reinterprets the union as its booleana member.
+func (u *MI_Value) Booleana() *MI_BooleanA {
+	return (*MI_BooleanA)(unsafe.Pointer(u))
+}
+
+// Uint8a reinterprets the union as its uint8a member.
+func (u *MI_Value) Uint8a() *MI_Uint8A {
+	return (*MI_Uint8A)(unsafe.Pointer(u))
+}
+
+// Sint8a reinterprets the union as its sint8a member.
+func (u *MI_Value) Sint8a() *MI_Sint8A {
+	return (*MI_Sint8A)(unsafe.Pointer(u))
+}
+
+// Uint16a reinterprets the union as its uint16a member.
+func (u *MI_Value) Uint16a() *MI_Uint16A {
+	return (*MI_Uint16A)(unsafe.Pointer(u))
+}
+
+// Sint16a reinterprets the union as its sint16a member.
+func (u *MI_Value) Sint16a() *MI_Sint16A {
+	return (*MI_Sint16A)(unsafe.Pointer(u))
+}
+
+// Uint32a reinterprets the union as its uint32a member.
+func (u *MI_Value) Uint32a() *MI_Uint32A {
+	return (*MI_Uint32A)(unsafe.Pointer(u))
+}
+
+// Sint32a reinterprets the union as its sint32a member.
+func (u *MI_Value) Sint32a() *MI_Sint32A {
+	return (*MI_Sint32A)(unsafe.Pointer(u))
+}
+
+// Uint64a reinterprets the union as its uint64a member.
+func (u *MI_Value) Uint64a() *MI_Uint64A {
+	return (*MI_Uint64A)(unsafe.Pointer(u))
+}
+
+// Sint64a reinterprets the union as its sint64a member.
+func (u *MI_Value) Sint64a() *MI_Sint64A {
+	return (*MI_Sint64A)(unsafe.Pointer(u))
+}
+
+// Real32a reinterprets the union as its real32a member.
+func (u *MI_Value) Real32a() *MI_Real32A {
+	return (*MI_Real32A)(unsafe.Pointer(u))
+}
+
+// Real64a reinterprets the union as its real64a member.
+func (u *MI_Value) Real64a() *MI_Real64A {
+	return (*MI_Real64A)(unsafe.Pointer(u))
+}
+
+// Char16a reinterprets the union as its char16a member.
+func (u *MI_Value) Char16a() *MI_Char16A {
+	return (*MI_Char16A)(unsafe.Pointer(u))
+}
+
+// Datetimea reinterprets the union as its datetimea member.
+func (u *MI_Value) Datetimea() *MI_DatetimeA {
+	return (*MI_DatetimeA)(unsafe.Pointer(u))
+}
+
+// Stringa reinterprets the union as its stringa member.
+func (u *MI_Value) Stringa() *MI_StringA {
+	return (*MI_StringA)(unsafe.Pointer(u))
+}
+
+// Referencea reinterprets the union as its referencea member.
+func (u *MI_Value) Referencea() *MI_ReferenceA {
+	return (*MI_ReferenceA)(unsafe.Pointer(u))
+}
+
+// Instancea reinterprets the union as its instancea member.
+func (u *MI_Value) Instancea() *MI_InstanceA {
+	return (*MI_InstanceA)(unsafe.Pointer(u))
+}
+
+// Array reinterprets the union as its array member.
+func (u *MI_Value) Array() *MI_Array {
+	return (*MI_Array)(unsafe.Pointer(u))
 }
 
 // MofCompiler: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-imofcompiler
@@ -1379,9 +1567,45 @@ type SWbemRefresher struct {
 }
 
 // SWbemRpnConst is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SWbemRpnConst struct {
 	Data [1]uint64
+}
+
+// M_pszStrVal reinterprets the union as its m_pszStrVal member.
+func (u *SWbemRpnConst) M_pszStrVal() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// M_bBoolVal reinterprets the union as its m_bBoolVal member.
+func (u *SWbemRpnConst) M_bBoolVal() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// M_lLongVal reinterprets the union as its m_lLongVal member.
+func (u *SWbemRpnConst) M_lLongVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// M_uLongVal reinterprets the union as its m_uLongVal member.
+func (u *SWbemRpnConst) M_uLongVal() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// M_dblVal reinterprets the union as its m_dblVal member.
+func (u *SWbemRpnConst) M_dblVal() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// M_lVal64 reinterprets the union as its m_lVal64 member.
+func (u *SWbemRpnConst) M_lVal64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// M_uVal64 reinterprets the union as its m_uVal64 member.
+func (u *SWbemRpnConst) M_uVal64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 // SWbemRpnEncodedQuery: https://learn.microsoft.com/windows/win32/api/wmiutils/ns-wmiutils-swbemrpnencodedquery

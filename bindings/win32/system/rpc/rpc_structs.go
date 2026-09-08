@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
+	systemio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/io"
 )
 
 type ARRAY_INFO struct {
@@ -27,9 +28,20 @@ type BinaryParam struct {
 }
 
 // CLIENT_CALL_RETURN is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLIENT_CALL_RETURN struct {
 	Data [1]uint64
+}
+
+// Pointer reinterprets the union as its Pointer member.
+func (u *CLIENT_CALL_RETURN) Pointer() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Simple reinterprets the union as its Simple member.
+func (u *CLIENT_CALL_RETURN) Simple() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }
 
 type COMM_FAULT_OFFSETS struct {
@@ -122,9 +134,25 @@ type MIDL_STUBLESS_PROXY_INFO struct {
 }
 
 // MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union struct {
 	Data [1]uint64
+}
+
+// PAutoHandle reinterprets the union as its pAutoHandle member.
+func (u *MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union) PAutoHandle() **unsafe.Pointer {
+	return (**unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PPrimitiveHandle reinterprets the union as its pPrimitiveHandle member.
+func (u *MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union) PPrimitiveHandle() **unsafe.Pointer {
+	return (**unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PGenericBindingInfo reinterprets the union as its pGenericBindingInfo member.
+func (u *MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union) PGenericBindingInfo() **GENERIC_BINDING_INFO {
+	return (**GENERIC_BINDING_INFO)(unsafe.Pointer(u))
 }
 
 // MIDL_STUB_DESC: https://learn.microsoft.com/windows/win32/api/rpcndr/ns-rpcndr-midl_stub_desc
@@ -249,9 +277,25 @@ type NDR64_ARRAY_FLAGS struct {
 }
 
 // NDR64_BINDINGS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NDR64_BINDINGS struct {
 	Data [3]uint16
+}
+
+// Primitive reinterprets the union as its Primitive member.
+func (u *NDR64_BINDINGS) Primitive() *NDR64_BIND_PRIMITIVE {
+	return (*NDR64_BIND_PRIMITIVE)(unsafe.Pointer(u))
+}
+
+// Generic reinterprets the union as its Generic member.
+func (u *NDR64_BINDINGS) Generic() *NDR64_BIND_GENERIC {
+	return (*NDR64_BIND_GENERIC)(unsafe.Pointer(u))
+}
+
+// Context reinterprets the union as its Context member.
+func (u *NDR64_BINDINGS) Context() *NDR64_BIND_CONTEXT {
+	return (*NDR64_BIND_CONTEXT)(unsafe.Pointer(u))
 }
 
 type NDR64_BIND_AND_NOTIFY_EXTENSION struct {
@@ -711,9 +755,15 @@ type NDR_SCONTEXT struct {
 }
 
 // NDR_USER_MARSHAL_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NDR_USER_MARSHAL_INFO_Anonymous_e__Union struct {
 	Data [10]uint64
+}
+
+// Level1 reinterprets the union as its Level1 member.
+func (u *NDR_USER_MARSHAL_INFO_Anonymous_e__Union) Level1() *NDR_USER_MARSHAL_INFO_LEVEL1 {
+	return (*NDR_USER_MARSHAL_INFO_LEVEL1)(unsafe.Pointer(u))
 }
 
 // NDR_USER_MARSHAL_INFO: https://learn.microsoft.com/windows/win32/api/rpcndr/ns-rpcndr-ndr_user_marshal_info
@@ -749,11 +799,54 @@ type RDR_CALLOUT_STATE struct {
 	CertContext         unsafe.Pointer
 }
 
+type RPC_ASYNC_NOTIFICATION_INFO_APC_e__Struct struct {
+	NotificationRoutine PFN_RPCNOTIFICATION_ROUTINE
+	HThread             foundation.HANDLE
+}
+
+type RPC_ASYNC_NOTIFICATION_INFO_IOC_e__Struct struct {
+	HIOPort                    foundation.HANDLE
+	DwNumberOfBytesTransferred uint32
+	DwCompletionKey            uintptr
+	LpOverlapped               *systemio.OVERLAPPED
+}
+
+type RPC_ASYNC_NOTIFICATION_INFO_IntPtr_e__Struct struct {
+	HWnd foundation.HWND
+	Msg  uint32
+}
+
 // RPC_ASYNC_NOTIFICATION_INFO: https://learn.microsoft.com/windows/win32/api/rpcasync/ns-rpcasync-rpc_async_notification_info
 // RPC_ASYNC_NOTIFICATION_INFO is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_ASYNC_NOTIFICATION_INFO struct {
 	Data [4]uint64
+}
+
+// APC reinterprets the union as its APC member.
+func (u *RPC_ASYNC_NOTIFICATION_INFO) APC() *RPC_ASYNC_NOTIFICATION_INFO_APC_e__Struct {
+	return (*RPC_ASYNC_NOTIFICATION_INFO_APC_e__Struct)(unsafe.Pointer(u))
+}
+
+// IOC reinterprets the union as its IOC member.
+func (u *RPC_ASYNC_NOTIFICATION_INFO) IOC() *RPC_ASYNC_NOTIFICATION_INFO_IOC_e__Struct {
+	return (*RPC_ASYNC_NOTIFICATION_INFO_IOC_e__Struct)(unsafe.Pointer(u))
+}
+
+// IntPtr reinterprets the union as its IntPtr member.
+func (u *RPC_ASYNC_NOTIFICATION_INFO) IntPtr() *RPC_ASYNC_NOTIFICATION_INFO_IntPtr_e__Struct {
+	return (*RPC_ASYNC_NOTIFICATION_INFO_IntPtr_e__Struct)(unsafe.Pointer(u))
+}
+
+// HEvent reinterprets the union as its hEvent member.
+func (u *RPC_ASYNC_NOTIFICATION_INFO) HEvent() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
+}
+
+// NotificationRoutine reinterprets the union as its NotificationRoutine member.
+func (u *RPC_ASYNC_NOTIFICATION_INFO) NotificationRoutine() *PFN_RPCNOTIFICATION_ROUTINE {
+	return (*PFN_RPCNOTIFICATION_ROUTINE)(unsafe.Pointer(u))
 }
 
 // RPC_ASYNC_STATE: https://learn.microsoft.com/windows/win32/api/rpcasync/ns-rpcasync-rpc_async_state
@@ -800,9 +893,15 @@ type RPC_BINDING_HANDLE_SECURITY_V1_W struct {
 }
 
 // RPC_BINDING_HANDLE_TEMPLATE_V1_A_u1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_BINDING_HANDLE_TEMPLATE_V1_A_u1_e__Union struct {
 	Data [1]uint64
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *RPC_BINDING_HANDLE_TEMPLATE_V1_A_u1_e__Union) Reserved() **byte {
+	return (**byte)(unsafe.Pointer(u))
 }
 
 // RPC_BINDING_HANDLE_TEMPLATE_V1_A: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_binding_handle_template_v1_a
@@ -817,9 +916,15 @@ type RPC_BINDING_HANDLE_TEMPLATE_V1_A struct {
 }
 
 // RPC_BINDING_HANDLE_TEMPLATE_V1_W_u1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_BINDING_HANDLE_TEMPLATE_V1_W_u1_e__Union struct {
 	Data [1]uint64
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *RPC_BINDING_HANDLE_TEMPLATE_V1_W_u1_e__Union) Reserved() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
 }
 
 // RPC_BINDING_HANDLE_TEMPLATE_V1_W: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_binding_handle_template_v1_w
@@ -997,9 +1102,40 @@ type RPC_DISPATCH_TABLE struct {
 }
 
 // RPC_EE_INFO_PARAM_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_EE_INFO_PARAM_u_e__Union struct {
 	Data [2]uint64
+}
+
+// AnsiString reinterprets the union as its AnsiString member.
+func (u *RPC_EE_INFO_PARAM_u_e__Union) AnsiString() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// UnicodeString reinterprets the union as its UnicodeString member.
+func (u *RPC_EE_INFO_PARAM_u_e__Union) UnicodeString() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// LVal reinterprets the union as its LVal member.
+func (u *RPC_EE_INFO_PARAM_u_e__Union) LVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// SVal reinterprets the union as its SVal member.
+func (u *RPC_EE_INFO_PARAM_u_e__Union) SVal() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// PVal reinterprets the union as its PVal member.
+func (u *RPC_EE_INFO_PARAM_u_e__Union) PVal() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// BVal reinterprets the union as its BVal member.
+func (u *RPC_EE_INFO_PARAM_u_e__Union) BVal() *BinaryParam {
+	return (*BinaryParam)(unsafe.Pointer(u))
 }
 
 // RPC_EE_INFO_PARAM: https://learn.microsoft.com/windows/win32/api/rpcasync/ns-rpcasync-rpc_ee_info_param
@@ -1034,9 +1170,20 @@ type RPC_ERROR_ENUM_HANDLE struct {
 }
 
 // RPC_EXTENDED_ERROR_INFO_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_EXTENDED_ERROR_INFO_u_e__Union struct {
 	Data [4]uint32
+}
+
+// SystemTime reinterprets the union as its SystemTime member.
+func (u *RPC_EXTENDED_ERROR_INFO_u_e__Union) SystemTime() *foundation.SYSTEMTIME {
+	return (*foundation.SYSTEMTIME)(unsafe.Pointer(u))
+}
+
+// FileTime reinterprets the union as its FileTime member.
+func (u *RPC_EXTENDED_ERROR_INFO_u_e__Union) FileTime() *foundation.FILETIME {
+	return (*foundation.FILETIME)(unsafe.Pointer(u))
 }
 
 // RPC_EXTENDED_ERROR_INFO: https://learn.microsoft.com/windows/win32/api/rpcasync/ns-rpcasync-rpc_extended_error_info
@@ -1220,9 +1367,15 @@ type RPC_SECURITY_QOS struct {
 }
 
 // RPC_SECURITY_QOS_V2_A_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_SECURITY_QOS_V2_A_u_e__Union struct {
 	Data [1]uint64
+}
+
+// HttpCredentials reinterprets the union as its HttpCredentials member.
+func (u *RPC_SECURITY_QOS_V2_A_u_e__Union) HttpCredentials() **RPC_HTTP_TRANSPORT_CREDENTIALS_A {
+	return (**RPC_HTTP_TRANSPORT_CREDENTIALS_A)(unsafe.Pointer(u))
 }
 
 // RPC_SECURITY_QOS_V2_A: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_security_qos_v2_a
@@ -1236,9 +1389,15 @@ type RPC_SECURITY_QOS_V2_A struct {
 }
 
 // RPC_SECURITY_QOS_V2_W_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_SECURITY_QOS_V2_W_u_e__Union struct {
 	Data [1]uint64
+}
+
+// HttpCredentials reinterprets the union as its HttpCredentials member.
+func (u *RPC_SECURITY_QOS_V2_W_u_e__Union) HttpCredentials() **RPC_HTTP_TRANSPORT_CREDENTIALS_W {
+	return (**RPC_HTTP_TRANSPORT_CREDENTIALS_W)(unsafe.Pointer(u))
 }
 
 // RPC_SECURITY_QOS_V2_W: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_security_qos_v2_w
@@ -1252,9 +1411,15 @@ type RPC_SECURITY_QOS_V2_W struct {
 }
 
 // RPC_SECURITY_QOS_V3_A_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_SECURITY_QOS_V3_A_u_e__Union struct {
 	Data [1]uint64
+}
+
+// HttpCredentials reinterprets the union as its HttpCredentials member.
+func (u *RPC_SECURITY_QOS_V3_A_u_e__Union) HttpCredentials() **RPC_HTTP_TRANSPORT_CREDENTIALS_A {
+	return (**RPC_HTTP_TRANSPORT_CREDENTIALS_A)(unsafe.Pointer(u))
 }
 
 // RPC_SECURITY_QOS_V3_A: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_security_qos_v3_a
@@ -1269,9 +1434,15 @@ type RPC_SECURITY_QOS_V3_A struct {
 }
 
 // RPC_SECURITY_QOS_V3_W_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_SECURITY_QOS_V3_W_u_e__Union struct {
 	Data [1]uint64
+}
+
+// HttpCredentials reinterprets the union as its HttpCredentials member.
+func (u *RPC_SECURITY_QOS_V3_W_u_e__Union) HttpCredentials() **RPC_HTTP_TRANSPORT_CREDENTIALS_W {
+	return (**RPC_HTTP_TRANSPORT_CREDENTIALS_W)(unsafe.Pointer(u))
 }
 
 // RPC_SECURITY_QOS_V3_W: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_security_qos_v3_w
@@ -1286,9 +1457,15 @@ type RPC_SECURITY_QOS_V3_W struct {
 }
 
 // RPC_SECURITY_QOS_V4_A_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_SECURITY_QOS_V4_A_u_e__Union struct {
 	Data [1]uint64
+}
+
+// HttpCredentials reinterprets the union as its HttpCredentials member.
+func (u *RPC_SECURITY_QOS_V4_A_u_e__Union) HttpCredentials() **RPC_HTTP_TRANSPORT_CREDENTIALS_A {
+	return (**RPC_HTTP_TRANSPORT_CREDENTIALS_A)(unsafe.Pointer(u))
 }
 
 // RPC_SECURITY_QOS_V4_A: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_security_qos_v4_a
@@ -1304,9 +1481,15 @@ type RPC_SECURITY_QOS_V4_A struct {
 }
 
 // RPC_SECURITY_QOS_V4_W_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_SECURITY_QOS_V4_W_u_e__Union struct {
 	Data [1]uint64
+}
+
+// HttpCredentials reinterprets the union as its HttpCredentials member.
+func (u *RPC_SECURITY_QOS_V4_W_u_e__Union) HttpCredentials() **RPC_HTTP_TRANSPORT_CREDENTIALS_W {
+	return (**RPC_HTTP_TRANSPORT_CREDENTIALS_W)(unsafe.Pointer(u))
 }
 
 // RPC_SECURITY_QOS_V4_W: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_security_qos_v4_w
@@ -1322,9 +1505,15 @@ type RPC_SECURITY_QOS_V4_W struct {
 }
 
 // RPC_SECURITY_QOS_V5_A_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_SECURITY_QOS_V5_A_u_e__Union struct {
 	Data [1]uint64
+}
+
+// HttpCredentials reinterprets the union as its HttpCredentials member.
+func (u *RPC_SECURITY_QOS_V5_A_u_e__Union) HttpCredentials() **RPC_HTTP_TRANSPORT_CREDENTIALS_A {
+	return (**RPC_HTTP_TRANSPORT_CREDENTIALS_A)(unsafe.Pointer(u))
 }
 
 // RPC_SECURITY_QOS_V5_A: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_security_qos_v5_a
@@ -1341,9 +1530,15 @@ type RPC_SECURITY_QOS_V5_A struct {
 }
 
 // RPC_SECURITY_QOS_V5_W_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RPC_SECURITY_QOS_V5_W_u_e__Union struct {
 	Data [1]uint64
+}
+
+// HttpCredentials reinterprets the union as its HttpCredentials member.
+func (u *RPC_SECURITY_QOS_V5_W_u_e__Union) HttpCredentials() **RPC_HTTP_TRANSPORT_CREDENTIALS_W {
+	return (**RPC_HTTP_TRANSPORT_CREDENTIALS_W)(unsafe.Pointer(u))
 }
 
 // RPC_SECURITY_QOS_V5_W: https://learn.microsoft.com/windows/win32/api/rpcdce/ns-rpcdce-rpc_security_qos_v5_w

@@ -62,6 +62,8 @@ var abiGraphics_Direct3D9 = []abiCase{
 	{"graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS size", unsafe.Sizeof(graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS{}), 4},
 	{"graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS.Anonymous", unsafe.Offsetof(graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS{}.Anonymous), 0},
 	{"graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union size", unsafe.Sizeof(graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union{}), 4},
+	{"graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union_Anonymous_e__Struct size", unsafe.Sizeof(graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union_Anonymous_e__Struct{}), 4},
+	{"graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union_Anonymous_e__Struct.Bitfield", unsafe.Offsetof(graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS_Anonymous_e__Union_Anonymous_e__Struct{}.Bitfield), 0},
 	{"graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT size", unsafe.Sizeof(graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT{}), 56},
 	{"graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT.Output", unsafe.Offsetof(graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT{}.Output), 0},
 	{"graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT.ChannelType", unsafe.Offsetof(graphicsdirect3d9.D3DAUTHENTICATEDCHANNEL_QUERYCHANNELTYPE_OUTPUT{}.ChannelType), 48},

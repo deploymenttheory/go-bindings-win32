@@ -31,7 +31,7 @@ faithfully:
 |---|---|---|
 | **Size probe, then fill** | `GetComputerNameEx`, `GetUserName` | Call once with a `nil` buffer to learn the required length, allocate a `[]uint16`, call again. |
 | **Struct with a self-size field** | `MEMORYSTATUSEX.DwLength`, `OSVERSIONINFOW.DwOSVersionInfoSize` | Set the size field to `unsafe.Sizeof(v)` before the call or the API rejects it. |
-| **Value struct filled by a void call** | `GetNativeSystemInfo(&SYSTEM_INFO)` | Includes a leading **C union** (`dwOemId` overlaying `wProcessorArchitecture`), exposed as a correctly sized backing blob you read via `.Anonymous.Data[0]`. |
+| **Value struct filled by a void call** | `GetNativeSystemInfo(&SYSTEM_INFO)` | Includes a leading **C union** (`dwOemId` overlaying `wProcessorArchitecture`), exposed as a correctly sized backing blob with one typed accessor per member: `.Anonymous.Anonymous().WProcessorArchitecture`. |
 
 ## A note on the OS version
 

@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
+	securitycryptographycatalog "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography/catalog"
 )
 
 // MS_ADDINFO_BLOB: https://learn.microsoft.com/windows/win32/api/mssip/ns-mssip-ms_addinfo_blob
@@ -59,9 +60,20 @@ type SIP_CAP_SET_V2 struct {
 }
 
 // SIP_CAP_SET_V3_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SIP_CAP_SET_V3_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwFlags reinterprets the union as its dwFlags member.
+func (u *SIP_CAP_SET_V3_Anonymous_e__Union) DwFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwReserved reinterprets the union as its dwReserved member.
+func (u *SIP_CAP_SET_V3_Anonymous_e__Union) DwReserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // SIP_CAP_SET_V3: https://learn.microsoft.com/windows/win32/api/mssip/ns-mssip-sip_cap_set_v3
@@ -91,9 +103,30 @@ type SIP_INDIRECT_DATA struct {
 }
 
 // SIP_SUBJECTINFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SIP_SUBJECTINFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PsFlat reinterprets the union as its psFlat member.
+func (u *SIP_SUBJECTINFO_Anonymous_e__Union) PsFlat() **MS_ADDINFO_FLAT {
+	return (**MS_ADDINFO_FLAT)(unsafe.Pointer(u))
+}
+
+// PsCatMember reinterprets the union as its psCatMember member.
+func (u *SIP_SUBJECTINFO_Anonymous_e__Union) PsCatMember() **securitycryptographycatalog.MS_ADDINFO_CATALOGMEMBER {
+	return (**securitycryptographycatalog.MS_ADDINFO_CATALOGMEMBER)(unsafe.Pointer(u))
+}
+
+// PsBlob reinterprets the union as its psBlob member.
+func (u *SIP_SUBJECTINFO_Anonymous_e__Union) PsBlob() **MS_ADDINFO_BLOB {
+	return (**MS_ADDINFO_BLOB)(unsafe.Pointer(u))
+}
+
+// PsDetachedSig reinterprets the union as its psDetachedSig member.
+func (u *SIP_SUBJECTINFO_Anonymous_e__Union) PsDetachedSig() **MS_ADDINFO_DETACHEDSIG {
+	return (**MS_ADDINFO_DETACHEDSIG)(unsafe.Pointer(u))
 }
 
 // SIP_SUBJECTINFO: https://learn.microsoft.com/windows/win32/api/mssip/ns-mssip-sip_subjectinfo

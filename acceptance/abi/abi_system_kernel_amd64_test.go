@@ -15,6 +15,12 @@ import (
 // Windows.Win32.System.Kernel.
 var abiSystem_Kernel_amd64 = []abiCase{
 	{"systemkernel.SLIST_HEADER size", unsafe.Sizeof(systemkernel.SLIST_HEADER{}), 16},
+	{"systemkernel.SLIST_HEADER_Anonymous_e__Struct size", unsafe.Sizeof(systemkernel.SLIST_HEADER_Anonymous_e__Struct{}), 16},
+	{"systemkernel.SLIST_HEADER_Anonymous_e__Struct.Alignment", unsafe.Offsetof(systemkernel.SLIST_HEADER_Anonymous_e__Struct{}.Alignment), 0},
+	{"systemkernel.SLIST_HEADER_Anonymous_e__Struct.Region", unsafe.Offsetof(systemkernel.SLIST_HEADER_Anonymous_e__Struct{}.Region), 8},
+	{"systemkernel.SLIST_HEADER_HeaderX64_e__Struct size", unsafe.Sizeof(systemkernel.SLIST_HEADER_HeaderX64_e__Struct{}), 16},
+	{"systemkernel.SLIST_HEADER_HeaderX64_e__Struct.Bitfield1", unsafe.Offsetof(systemkernel.SLIST_HEADER_HeaderX64_e__Struct{}.Bitfield1), 0},
+	{"systemkernel.SLIST_HEADER_HeaderX64_e__Struct.Bitfield2", unsafe.Offsetof(systemkernel.SLIST_HEADER_HeaderX64_e__Struct{}.Bitfield2), 8},
 }
 
 func TestABI_System_Kernel_amd64(t *testing.T) { checkABI(t, abiSystem_Kernel_amd64) }

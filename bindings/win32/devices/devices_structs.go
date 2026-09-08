@@ -4,10 +4,25 @@
 
 package devices
 
+import (
+	"unsafe"
+)
+
 // IEEE1394_API_REQUEST_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IEEE1394_API_REQUEST_u_e__Union struct {
 	Data [3]uint64
+}
+
+// AddVirtualDevice reinterprets the union as its AddVirtualDevice member.
+func (u *IEEE1394_API_REQUEST_u_e__Union) AddVirtualDevice() *IEEE1394_VDEV_PNP_REQUEST {
+	return (*IEEE1394_VDEV_PNP_REQUEST)(unsafe.Pointer(u))
+}
+
+// RemoveVirtualDevice reinterprets the union as its RemoveVirtualDevice member.
+func (u *IEEE1394_API_REQUEST_u_e__Union) RemoveVirtualDevice() *IEEE1394_VDEV_PNP_REQUEST {
+	return (*IEEE1394_VDEV_PNP_REQUEST)(unsafe.Pointer(u))
 }
 
 type IEEE1394_API_REQUEST struct {

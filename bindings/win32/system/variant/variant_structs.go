@@ -4,10 +4,277 @@
 
 package variant
 
+import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+)
+
+type VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct struct {
+	PvRecord unsafe.Pointer
+	PRecInfo unsafe.Pointer
+}
+
+// VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union struct {
+	Data [2]uint64
+}
+
+// LlVal reinterprets the union as its llVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) LlVal() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// LVal reinterprets the union as its lVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) LVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// BVal reinterprets the union as its bVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) BVal() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// IVal reinterprets the union as its iVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) IVal() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// FltVal reinterprets the union as its fltVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) FltVal() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DblVal reinterprets the union as its dblVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) DblVal() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// BoolVal reinterprets the union as its boolVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) BoolVal() *foundation.VARIANT_BOOL {
+	return (*foundation.VARIANT_BOOL)(unsafe.Pointer(u))
+}
+
+// OBSOLETE__VARIANT_BOOL reinterprets the union as its __OBSOLETE__VARIANT_BOOL member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) OBSOLETE__VARIANT_BOOL() *foundation.VARIANT_BOOL {
+	return (*foundation.VARIANT_BOOL)(unsafe.Pointer(u))
+}
+
+// Scode reinterprets the union as its scode member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Scode() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// CyVal reinterprets the union as its cyVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) CyVal() *[1]uint64 {
+	return (*[1]uint64)(unsafe.Pointer(u))
+}
+
+// Date reinterprets the union as its date member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Date() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// BstrVal reinterprets the union as its bstrVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) BstrVal() *foundation.BSTR {
+	return (*foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// PunkVal reinterprets the union as its punkVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PunkVal() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PdispVal reinterprets the union as its pdispVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PdispVal() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Parray reinterprets the union as its parray member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Parray() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PbVal reinterprets the union as its pbVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PbVal() **byte {
+	return (**byte)(unsafe.Pointer(u))
+}
+
+// PiVal reinterprets the union as its piVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PiVal() **int16 {
+	return (**int16)(unsafe.Pointer(u))
+}
+
+// PlVal reinterprets the union as its plVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PlVal() **int32 {
+	return (**int32)(unsafe.Pointer(u))
+}
+
+// PllVal reinterprets the union as its pllVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PllVal() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
+// PfltVal reinterprets the union as its pfltVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PfltVal() **float32 {
+	return (**float32)(unsafe.Pointer(u))
+}
+
+// PdblVal reinterprets the union as its pdblVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PdblVal() **float64 {
+	return (**float64)(unsafe.Pointer(u))
+}
+
+// PboolVal reinterprets the union as its pboolVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PboolVal() **foundation.VARIANT_BOOL {
+	return (**foundation.VARIANT_BOOL)(unsafe.Pointer(u))
+}
+
+// OBSOLETE__VARIANT_PBOOL reinterprets the union as its __OBSOLETE__VARIANT_PBOOL member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) OBSOLETE__VARIANT_PBOOL() **foundation.VARIANT_BOOL {
+	return (**foundation.VARIANT_BOOL)(unsafe.Pointer(u))
+}
+
+// Pscode reinterprets the union as its pscode member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Pscode() **int32 {
+	return (**int32)(unsafe.Pointer(u))
+}
+
+// PcyVal reinterprets the union as its pcyVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PcyVal() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Pdate reinterprets the union as its pdate member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Pdate() **float64 {
+	return (**float64)(unsafe.Pointer(u))
+}
+
+// PbstrVal reinterprets the union as its pbstrVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PbstrVal() **foundation.BSTR {
+	return (**foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// PpunkVal reinterprets the union as its ppunkVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PpunkVal() **unsafe.Pointer {
+	return (**unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PpdispVal reinterprets the union as its ppdispVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PpdispVal() **unsafe.Pointer {
+	return (**unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Pparray reinterprets the union as its pparray member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Pparray() **unsafe.Pointer {
+	return (**unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PvarVal reinterprets the union as its pvarVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PvarVal() **VARIANT {
+	return (**VARIANT)(unsafe.Pointer(u))
+}
+
+// Byref reinterprets the union as its byref member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Byref() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// CVal reinterprets the union as its cVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) CVal() *foundation.CHAR {
+	return (*foundation.CHAR)(unsafe.Pointer(u))
+}
+
+// UiVal reinterprets the union as its uiVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) UiVal() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// UlVal reinterprets the union as its ulVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) UlVal() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// UllVal reinterprets the union as its ullVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) UllVal() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// IntVal reinterprets the union as its intVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) IntVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// UintVal reinterprets the union as its uintVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) UintVal() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PdecVal reinterprets the union as its pdecVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PdecVal() **foundation.DECIMAL {
+	return (**foundation.DECIMAL)(unsafe.Pointer(u))
+}
+
+// PcVal reinterprets the union as its pcVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PcVal() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// PuiVal reinterprets the union as its puiVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PuiVal() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// PulVal reinterprets the union as its pulVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PulVal() **uint32 {
+	return (**uint32)(unsafe.Pointer(u))
+}
+
+// PullVal reinterprets the union as its pullVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PullVal() **uint64 {
+	return (**uint64)(unsafe.Pointer(u))
+}
+
+// PintVal reinterprets the union as its pintVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PintVal() **int32 {
+	return (**int32)(unsafe.Pointer(u))
+}
+
+// PuintVal reinterprets the union as its puintVal member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) PuintVal() **uint32 {
+	return (**uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union) Anonymous() *VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type VARIANT_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Vt         VARENUM
+	WReserved1 uint16
+	WReserved2 uint16
+	WReserved3 uint16
+	Anonymous  VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union
+}
+
 // VARIANT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VARIANT_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *VARIANT_Anonymous_e__Union) Anonymous() *VARIANT_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*VARIANT_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// DecVal reinterprets the union as its decVal member.
+func (u *VARIANT_Anonymous_e__Union) DecVal() *foundation.DECIMAL {
+	return (*foundation.DECIMAL)(unsafe.Pointer(u))
 }
 
 // VARIANT: https://learn.microsoft.com/windows/win32/api/oaidl/ns-oaidl-variant

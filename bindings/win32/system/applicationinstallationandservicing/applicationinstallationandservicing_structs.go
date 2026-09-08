@@ -154,9 +154,20 @@ type DELTA_HEADER_INFO struct {
 }
 
 // DELTA_INPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DELTA_INPUT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// LpcStart reinterprets the union as its lpcStart member.
+func (u *DELTA_INPUT_Anonymous_e__Union) LpcStart() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// LpStart reinterprets the union as its lpStart member.
+func (u *DELTA_INPUT_Anonymous_e__Union) LpStart() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type DELTA_INPUT struct {
@@ -221,9 +232,25 @@ type PATCH_INTERLEAVE_MAP struct {
 }
 
 // PATCH_OLD_FILE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PATCH_OLD_FILE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// OldFileNameA reinterprets the union as its OldFileNameA member.
+func (u *PATCH_OLD_FILE_INFO_Anonymous_e__Union) OldFileNameA() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// OldFileNameW reinterprets the union as its OldFileNameW member.
+func (u *PATCH_OLD_FILE_INFO_Anonymous_e__Union) OldFileNameW() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// OldFileHandle reinterprets the union as its OldFileHandle member.
+func (u *PATCH_OLD_FILE_INFO_Anonymous_e__Union) OldFileHandle() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
 }
 
 type PATCH_OLD_FILE_INFO struct {
@@ -303,9 +330,95 @@ type PM_BWTASKID struct {
 }
 
 // PM_ENUM_FILTER_FilterParameter_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PM_ENUM_FILTER_FilterParameter_e__Union struct {
 	Data [3]uint64
+}
+
+// Dummy reinterprets the union as its Dummy member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) Dummy() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Genre reinterprets the union as its Genre member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) Genre() *PM_APP_GENRE {
+	return (*PM_APP_GENRE)(unsafe.Pointer(u))
+}
+
+// AppHubType reinterprets the union as its AppHubType member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) AppHubType() *PM_APPLICATION_HUBTYPE {
+	return (*PM_APPLICATION_HUBTYPE)(unsafe.Pointer(u))
+}
+
+// HubType reinterprets the union as its HubType member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) HubType() *PM_TILE_HUBTYPE {
+	return (*PM_TILE_HUBTYPE)(unsafe.Pointer(u))
+}
+
+// Tasktype reinterprets the union as its Tasktype member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) Tasktype() *PM_TASK_TYPE {
+	return (*PM_TASK_TYPE)(unsafe.Pointer(u))
+}
+
+// TaskProductID reinterprets the union as its TaskProductID member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) TaskProductID() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// TileProductID reinterprets the union as its TileProductID member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) TileProductID() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// AppTaskType reinterprets the union as its AppTaskType member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) AppTaskType() *PM_APPTASKTYPE {
+	return (*PM_APPTASKTYPE)(unsafe.Pointer(u))
+}
+
+// Consumer reinterprets the union as its Consumer member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) Consumer() *PM_EXTENSIONCONSUMER {
+	return (*PM_EXTENSIONCONSUMER)(unsafe.Pointer(u))
+}
+
+// BSATask reinterprets the union as its BSATask member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) BSATask() *PM_BSATASKID {
+	return (*PM_BSATASKID)(unsafe.Pointer(u))
+}
+
+// BSAProductID reinterprets the union as its BSAProductID member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) BSAProductID() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// BWTask reinterprets the union as its BWTask member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) BWTask() *PM_BWTASKID {
+	return (*PM_BWTASKID)(unsafe.Pointer(u))
+}
+
+// ProtocolName reinterprets the union as its ProtocolName member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) ProtocolName() *foundation.BSTR {
+	return (*foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// FileType reinterprets the union as its FileType member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) FileType() *foundation.BSTR {
+	return (*foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// ContentType reinterprets the union as its ContentType member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) ContentType() *foundation.BSTR {
+	return (*foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// AppSupportedFileExtPID reinterprets the union as its AppSupportedFileExtPID member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) AppSupportedFileExtPID() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// ShareTargetFileType reinterprets the union as its ShareTargetFileType member.
+func (u *PM_ENUM_FILTER_FilterParameter_e__Union) ShareTargetFileType() *foundation.BSTR {
+	return (*foundation.BSTR)(unsafe.Pointer(u))
 }
 
 type PM_ENUM_FILTER struct {

@@ -16,9 +16,15 @@ type DNS_AAAA_DATA struct {
 }
 
 // DNS_ADDR_Data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_ADDR_Data_e__Union struct {
 	Data [32]byte
+}
+
+// DnsAddrUserDword reinterprets the union as its DnsAddrUserDword member.
+func (u *DNS_ADDR_Data_e__Union) DnsAddrUserDword() *[8]uint32 {
+	return (*[8]uint32)(unsafe.Pointer(u))
 }
 
 // DNS_ADDR: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_addr
@@ -91,10 +97,36 @@ type DNS_CONNECTION_PROXY_ELEMENT struct {
 	Info DNS_CONNECTION_PROXY_INFO
 }
 
+type DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_CONFIG struct {
+	PwszServer    foundation.PWSTR
+	PwszUsername  foundation.PWSTR
+	PwszPassword  foundation.PWSTR
+	PwszException foundation.PWSTR
+	PwszExtraInfo foundation.PWSTR
+	Port          uint16
+}
+
+type DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_SCRIPT struct {
+	PwszScript   foundation.PWSTR
+	PwszUsername foundation.PWSTR
+	PwszPassword foundation.PWSTR
+}
+
 // DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// Config reinterprets the union as its Config member.
+func (u *DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union) Config() *DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_CONFIG {
+	return (*DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_CONFIG)(unsafe.Pointer(u))
+}
+
+// Script reinterprets the union as its Script member.
+func (u *DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union) Script() *DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_SCRIPT {
+	return (*DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union_DNS_CONNECTION_PROXY_INFO_SCRIPT)(unsafe.Pointer(u))
 }
 
 type DNS_CONNECTION_PROXY_INFO struct {
@@ -119,15 +151,32 @@ type DNS_CONNECTION_PROXY_LIST struct {
 }
 
 // DNS_CUSTOM_SERVER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_CUSTOM_SERVER_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PwszTemplate reinterprets the union as its pwszTemplate member.
+func (u *DNS_CUSTOM_SERVER_Anonymous1_e__Union) PwszTemplate() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PwszHostname reinterprets the union as its pwszHostname member.
+func (u *DNS_CUSTOM_SERVER_Anonymous1_e__Union) PwszHostname() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
 // DNS_CUSTOM_SERVER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_CUSTOM_SERVER_Anonymous2_e__Union struct {
 	Data [32]byte
+}
+
+// MaxSa reinterprets the union as its MaxSa member.
+func (u *DNS_CUSTOM_SERVER_Anonymous2_e__Union) MaxSa() *[32]foundation.CHAR {
+	return (*[32]foundation.CHAR)(unsafe.Pointer(u))
 }
 
 // DNS_CUSTOM_SERVER: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_custom_server
@@ -330,9 +379,15 @@ type DNS_QUERY_RAW_CANCEL struct {
 }
 
 // DNS_QUERY_RAW_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_QUERY_RAW_REQUEST_Anonymous_e__Union struct {
 	Data [32]byte
+}
+
+// MaxSa reinterprets the union as its maxSa member.
+func (u *DNS_QUERY_RAW_REQUEST_Anonymous_e__Union) MaxSa() *[32]foundation.CHAR {
+	return (*[32]foundation.CHAR)(unsafe.Pointer(u))
 }
 
 type DNS_QUERY_RAW_REQUEST struct {
@@ -354,9 +409,15 @@ type DNS_QUERY_RAW_REQUEST struct {
 }
 
 // DNS_QUERY_RAW_RESULT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_QUERY_RAW_RESULT_Anonymous_e__Union struct {
 	Data [32]byte
+}
+
+// MaxSa reinterprets the union as its maxSa member.
+func (u *DNS_QUERY_RAW_RESULT_Anonymous_e__Union) MaxSa() *[32]foundation.CHAR {
+	return (*[32]foundation.CHAR)(unsafe.Pointer(u))
 }
 
 type DNS_QUERY_RAW_RESULT struct {
@@ -410,15 +471,457 @@ type DNS_QUERY_RESULT struct {
 }
 
 // DNS_RECORDA_Data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_RECORDA_Data_e__Union struct {
 	Data [7]uint64
 }
 
+// A reinterprets the union as its A member.
+func (u *DNS_RECORDA_Data_e__Union) A() *DNS_A_DATA {
+	return (*DNS_A_DATA)(unsafe.Pointer(u))
+}
+
+// SOA reinterprets the union as its SOA member.
+func (u *DNS_RECORDA_Data_e__Union) SOA() *DNS_SOA_DATAA {
+	return (*DNS_SOA_DATAA)(unsafe.Pointer(u))
+}
+
+// Soa reinterprets the union as its Soa member.
+func (u *DNS_RECORDA_Data_e__Union) Soa() *DNS_SOA_DATAA {
+	return (*DNS_SOA_DATAA)(unsafe.Pointer(u))
+}
+
+// PTR reinterprets the union as its PTR member.
+func (u *DNS_RECORDA_Data_e__Union) PTR() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Ptr reinterprets the union as its Ptr member.
+func (u *DNS_RECORDA_Data_e__Union) Ptr() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// NS reinterprets the union as its NS member.
+func (u *DNS_RECORDA_Data_e__Union) NS() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Ns reinterprets the union as its Ns member.
+func (u *DNS_RECORDA_Data_e__Union) Ns() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// CNAME reinterprets the union as its CNAME member.
+func (u *DNS_RECORDA_Data_e__Union) CNAME() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Cname reinterprets the union as its Cname member.
+func (u *DNS_RECORDA_Data_e__Union) Cname() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// DNAME reinterprets the union as its DNAME member.
+func (u *DNS_RECORDA_Data_e__Union) DNAME() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Dname reinterprets the union as its Dname member.
+func (u *DNS_RECORDA_Data_e__Union) Dname() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// MB reinterprets the union as its MB member.
+func (u *DNS_RECORDA_Data_e__Union) MB() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Mb reinterprets the union as its Mb member.
+func (u *DNS_RECORDA_Data_e__Union) Mb() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// MD reinterprets the union as its MD member.
+func (u *DNS_RECORDA_Data_e__Union) MD() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Md reinterprets the union as its Md member.
+func (u *DNS_RECORDA_Data_e__Union) Md() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// MF reinterprets the union as its MF member.
+func (u *DNS_RECORDA_Data_e__Union) MF() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Mf reinterprets the union as its Mf member.
+func (u *DNS_RECORDA_Data_e__Union) Mf() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// MG reinterprets the union as its MG member.
+func (u *DNS_RECORDA_Data_e__Union) MG() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Mg reinterprets the union as its Mg member.
+func (u *DNS_RECORDA_Data_e__Union) Mg() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// MR reinterprets the union as its MR member.
+func (u *DNS_RECORDA_Data_e__Union) MR() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Mr reinterprets the union as its Mr member.
+func (u *DNS_RECORDA_Data_e__Union) Mr() *DNS_PTR_DATAA {
+	return (*DNS_PTR_DATAA)(unsafe.Pointer(u))
+}
+
+// MINFO reinterprets the union as its MINFO member.
+func (u *DNS_RECORDA_Data_e__Union) MINFO() *DNS_MINFO_DATAA {
+	return (*DNS_MINFO_DATAA)(unsafe.Pointer(u))
+}
+
+// Minfo reinterprets the union as its Minfo member.
+func (u *DNS_RECORDA_Data_e__Union) Minfo() *DNS_MINFO_DATAA {
+	return (*DNS_MINFO_DATAA)(unsafe.Pointer(u))
+}
+
+// RP reinterprets the union as its RP member.
+func (u *DNS_RECORDA_Data_e__Union) RP() *DNS_MINFO_DATAA {
+	return (*DNS_MINFO_DATAA)(unsafe.Pointer(u))
+}
+
+// Rp reinterprets the union as its Rp member.
+func (u *DNS_RECORDA_Data_e__Union) Rp() *DNS_MINFO_DATAA {
+	return (*DNS_MINFO_DATAA)(unsafe.Pointer(u))
+}
+
+// MX reinterprets the union as its MX member.
+func (u *DNS_RECORDA_Data_e__Union) MX() *DNS_MX_DATAA {
+	return (*DNS_MX_DATAA)(unsafe.Pointer(u))
+}
+
+// Mx reinterprets the union as its Mx member.
+func (u *DNS_RECORDA_Data_e__Union) Mx() *DNS_MX_DATAA {
+	return (*DNS_MX_DATAA)(unsafe.Pointer(u))
+}
+
+// AFSDB reinterprets the union as its AFSDB member.
+func (u *DNS_RECORDA_Data_e__Union) AFSDB() *DNS_MX_DATAA {
+	return (*DNS_MX_DATAA)(unsafe.Pointer(u))
+}
+
+// Afsdb reinterprets the union as its Afsdb member.
+func (u *DNS_RECORDA_Data_e__Union) Afsdb() *DNS_MX_DATAA {
+	return (*DNS_MX_DATAA)(unsafe.Pointer(u))
+}
+
+// RT reinterprets the union as its RT member.
+func (u *DNS_RECORDA_Data_e__Union) RT() *DNS_MX_DATAA {
+	return (*DNS_MX_DATAA)(unsafe.Pointer(u))
+}
+
+// Rt reinterprets the union as its Rt member.
+func (u *DNS_RECORDA_Data_e__Union) Rt() *DNS_MX_DATAA {
+	return (*DNS_MX_DATAA)(unsafe.Pointer(u))
+}
+
+// HINFO reinterprets the union as its HINFO member.
+func (u *DNS_RECORDA_Data_e__Union) HINFO() *DNS_TXT_DATAA {
+	return (*DNS_TXT_DATAA)(unsafe.Pointer(u))
+}
+
+// Hinfo reinterprets the union as its Hinfo member.
+func (u *DNS_RECORDA_Data_e__Union) Hinfo() *DNS_TXT_DATAA {
+	return (*DNS_TXT_DATAA)(unsafe.Pointer(u))
+}
+
+// ISDN reinterprets the union as its ISDN member.
+func (u *DNS_RECORDA_Data_e__Union) ISDN() *DNS_TXT_DATAA {
+	return (*DNS_TXT_DATAA)(unsafe.Pointer(u))
+}
+
+// Isdn reinterprets the union as its Isdn member.
+func (u *DNS_RECORDA_Data_e__Union) Isdn() *DNS_TXT_DATAA {
+	return (*DNS_TXT_DATAA)(unsafe.Pointer(u))
+}
+
+// TXT reinterprets the union as its TXT member.
+func (u *DNS_RECORDA_Data_e__Union) TXT() *DNS_TXT_DATAA {
+	return (*DNS_TXT_DATAA)(unsafe.Pointer(u))
+}
+
+// Txt reinterprets the union as its Txt member.
+func (u *DNS_RECORDA_Data_e__Union) Txt() *DNS_TXT_DATAA {
+	return (*DNS_TXT_DATAA)(unsafe.Pointer(u))
+}
+
+// X25 reinterprets the union as its X25 member.
+func (u *DNS_RECORDA_Data_e__Union) X25() *DNS_TXT_DATAA {
+	return (*DNS_TXT_DATAA)(unsafe.Pointer(u))
+}
+
+// Null reinterprets the union as its Null member.
+func (u *DNS_RECORDA_Data_e__Union) Null() *DNS_NULL_DATA {
+	return (*DNS_NULL_DATA)(unsafe.Pointer(u))
+}
+
+// WKS reinterprets the union as its WKS member.
+func (u *DNS_RECORDA_Data_e__Union) WKS() *DNS_WKS_DATA {
+	return (*DNS_WKS_DATA)(unsafe.Pointer(u))
+}
+
+// Wks reinterprets the union as its Wks member.
+func (u *DNS_RECORDA_Data_e__Union) Wks() *DNS_WKS_DATA {
+	return (*DNS_WKS_DATA)(unsafe.Pointer(u))
+}
+
+// AAAA reinterprets the union as its AAAA member.
+func (u *DNS_RECORDA_Data_e__Union) AAAA() *DNS_AAAA_DATA {
+	return (*DNS_AAAA_DATA)(unsafe.Pointer(u))
+}
+
+// KEY reinterprets the union as its KEY member.
+func (u *DNS_RECORDA_Data_e__Union) KEY() *DNS_KEY_DATA {
+	return (*DNS_KEY_DATA)(unsafe.Pointer(u))
+}
+
+// Key reinterprets the union as its Key member.
+func (u *DNS_RECORDA_Data_e__Union) Key() *DNS_KEY_DATA {
+	return (*DNS_KEY_DATA)(unsafe.Pointer(u))
+}
+
+// SIG reinterprets the union as its SIG member.
+func (u *DNS_RECORDA_Data_e__Union) SIG() *DNS_SIG_DATAA {
+	return (*DNS_SIG_DATAA)(unsafe.Pointer(u))
+}
+
+// Sig reinterprets the union as its Sig member.
+func (u *DNS_RECORDA_Data_e__Union) Sig() *DNS_SIG_DATAA {
+	return (*DNS_SIG_DATAA)(unsafe.Pointer(u))
+}
+
+// ATMA reinterprets the union as its ATMA member.
+func (u *DNS_RECORDA_Data_e__Union) ATMA() *DNS_ATMA_DATA {
+	return (*DNS_ATMA_DATA)(unsafe.Pointer(u))
+}
+
+// Atma reinterprets the union as its Atma member.
+func (u *DNS_RECORDA_Data_e__Union) Atma() *DNS_ATMA_DATA {
+	return (*DNS_ATMA_DATA)(unsafe.Pointer(u))
+}
+
+// NXT reinterprets the union as its NXT member.
+func (u *DNS_RECORDA_Data_e__Union) NXT() *DNS_NXT_DATAA {
+	return (*DNS_NXT_DATAA)(unsafe.Pointer(u))
+}
+
+// Nxt reinterprets the union as its Nxt member.
+func (u *DNS_RECORDA_Data_e__Union) Nxt() *DNS_NXT_DATAA {
+	return (*DNS_NXT_DATAA)(unsafe.Pointer(u))
+}
+
+// SRV reinterprets the union as its SRV member.
+func (u *DNS_RECORDA_Data_e__Union) SRV() *DNS_SRV_DATAA {
+	return (*DNS_SRV_DATAA)(unsafe.Pointer(u))
+}
+
+// Srv reinterprets the union as its Srv member.
+func (u *DNS_RECORDA_Data_e__Union) Srv() *DNS_SRV_DATAA {
+	return (*DNS_SRV_DATAA)(unsafe.Pointer(u))
+}
+
+// NAPTR reinterprets the union as its NAPTR member.
+func (u *DNS_RECORDA_Data_e__Union) NAPTR() *DNS_NAPTR_DATAA {
+	return (*DNS_NAPTR_DATAA)(unsafe.Pointer(u))
+}
+
+// Naptr reinterprets the union as its Naptr member.
+func (u *DNS_RECORDA_Data_e__Union) Naptr() *DNS_NAPTR_DATAA {
+	return (*DNS_NAPTR_DATAA)(unsafe.Pointer(u))
+}
+
+// OPT reinterprets the union as its OPT member.
+func (u *DNS_RECORDA_Data_e__Union) OPT() *DNS_OPT_DATA {
+	return (*DNS_OPT_DATA)(unsafe.Pointer(u))
+}
+
+// Opt reinterprets the union as its Opt member.
+func (u *DNS_RECORDA_Data_e__Union) Opt() *DNS_OPT_DATA {
+	return (*DNS_OPT_DATA)(unsafe.Pointer(u))
+}
+
+// DS reinterprets the union as its DS member.
+func (u *DNS_RECORDA_Data_e__Union) DS() *DNS_DS_DATA {
+	return (*DNS_DS_DATA)(unsafe.Pointer(u))
+}
+
+// Ds reinterprets the union as its Ds member.
+func (u *DNS_RECORDA_Data_e__Union) Ds() *DNS_DS_DATA {
+	return (*DNS_DS_DATA)(unsafe.Pointer(u))
+}
+
+// RRSIG reinterprets the union as its RRSIG member.
+func (u *DNS_RECORDA_Data_e__Union) RRSIG() *DNS_SIG_DATAA {
+	return (*DNS_SIG_DATAA)(unsafe.Pointer(u))
+}
+
+// Rrsig reinterprets the union as its Rrsig member.
+func (u *DNS_RECORDA_Data_e__Union) Rrsig() *DNS_SIG_DATAA {
+	return (*DNS_SIG_DATAA)(unsafe.Pointer(u))
+}
+
+// NSEC reinterprets the union as its NSEC member.
+func (u *DNS_RECORDA_Data_e__Union) NSEC() *DNS_NSEC_DATAA {
+	return (*DNS_NSEC_DATAA)(unsafe.Pointer(u))
+}
+
+// Nsec reinterprets the union as its Nsec member.
+func (u *DNS_RECORDA_Data_e__Union) Nsec() *DNS_NSEC_DATAA {
+	return (*DNS_NSEC_DATAA)(unsafe.Pointer(u))
+}
+
+// DNSKEY reinterprets the union as its DNSKEY member.
+func (u *DNS_RECORDA_Data_e__Union) DNSKEY() *DNS_KEY_DATA {
+	return (*DNS_KEY_DATA)(unsafe.Pointer(u))
+}
+
+// Dnskey reinterprets the union as its Dnskey member.
+func (u *DNS_RECORDA_Data_e__Union) Dnskey() *DNS_KEY_DATA {
+	return (*DNS_KEY_DATA)(unsafe.Pointer(u))
+}
+
+// TKEY reinterprets the union as its TKEY member.
+func (u *DNS_RECORDA_Data_e__Union) TKEY() *DNS_TKEY_DATAA {
+	return (*DNS_TKEY_DATAA)(unsafe.Pointer(u))
+}
+
+// Tkey reinterprets the union as its Tkey member.
+func (u *DNS_RECORDA_Data_e__Union) Tkey() *DNS_TKEY_DATAA {
+	return (*DNS_TKEY_DATAA)(unsafe.Pointer(u))
+}
+
+// TSIG reinterprets the union as its TSIG member.
+func (u *DNS_RECORDA_Data_e__Union) TSIG() *DNS_TSIG_DATAA {
+	return (*DNS_TSIG_DATAA)(unsafe.Pointer(u))
+}
+
+// Tsig reinterprets the union as its Tsig member.
+func (u *DNS_RECORDA_Data_e__Union) Tsig() *DNS_TSIG_DATAA {
+	return (*DNS_TSIG_DATAA)(unsafe.Pointer(u))
+}
+
+// WINS reinterprets the union as its WINS member.
+func (u *DNS_RECORDA_Data_e__Union) WINS() *DNS_WINS_DATA {
+	return (*DNS_WINS_DATA)(unsafe.Pointer(u))
+}
+
+// Wins reinterprets the union as its Wins member.
+func (u *DNS_RECORDA_Data_e__Union) Wins() *DNS_WINS_DATA {
+	return (*DNS_WINS_DATA)(unsafe.Pointer(u))
+}
+
+// WINSR reinterprets the union as its WINSR member.
+func (u *DNS_RECORDA_Data_e__Union) WINSR() *DNS_WINSR_DATAA {
+	return (*DNS_WINSR_DATAA)(unsafe.Pointer(u))
+}
+
+// WinsR reinterprets the union as its WinsR member.
+func (u *DNS_RECORDA_Data_e__Union) WinsR() *DNS_WINSR_DATAA {
+	return (*DNS_WINSR_DATAA)(unsafe.Pointer(u))
+}
+
+// NBSTAT reinterprets the union as its NBSTAT member.
+func (u *DNS_RECORDA_Data_e__Union) NBSTAT() *DNS_WINSR_DATAA {
+	return (*DNS_WINSR_DATAA)(unsafe.Pointer(u))
+}
+
+// Nbstat reinterprets the union as its Nbstat member.
+func (u *DNS_RECORDA_Data_e__Union) Nbstat() *DNS_WINSR_DATAA {
+	return (*DNS_WINSR_DATAA)(unsafe.Pointer(u))
+}
+
+// DHCID reinterprets the union as its DHCID member.
+func (u *DNS_RECORDA_Data_e__Union) DHCID() *DNS_DHCID_DATA {
+	return (*DNS_DHCID_DATA)(unsafe.Pointer(u))
+}
+
+// NSEC3 reinterprets the union as its NSEC3 member.
+func (u *DNS_RECORDA_Data_e__Union) NSEC3() *DNS_NSEC3_DATA {
+	return (*DNS_NSEC3_DATA)(unsafe.Pointer(u))
+}
+
+// Nsec3 reinterprets the union as its Nsec3 member.
+func (u *DNS_RECORDA_Data_e__Union) Nsec3() *DNS_NSEC3_DATA {
+	return (*DNS_NSEC3_DATA)(unsafe.Pointer(u))
+}
+
+// NSEC3PARAM reinterprets the union as its NSEC3PARAM member.
+func (u *DNS_RECORDA_Data_e__Union) NSEC3PARAM() *DNS_NSEC3PARAM_DATA {
+	return (*DNS_NSEC3PARAM_DATA)(unsafe.Pointer(u))
+}
+
+// Nsec3Param reinterprets the union as its Nsec3Param member.
+func (u *DNS_RECORDA_Data_e__Union) Nsec3Param() *DNS_NSEC3PARAM_DATA {
+	return (*DNS_NSEC3PARAM_DATA)(unsafe.Pointer(u))
+}
+
+// TLSA reinterprets the union as its TLSA member.
+func (u *DNS_RECORDA_Data_e__Union) TLSA() *DNS_TLSA_DATA {
+	return (*DNS_TLSA_DATA)(unsafe.Pointer(u))
+}
+
+// Tlsa reinterprets the union as its Tlsa member.
+func (u *DNS_RECORDA_Data_e__Union) Tlsa() *DNS_TLSA_DATA {
+	return (*DNS_TLSA_DATA)(unsafe.Pointer(u))
+}
+
+// SVCB reinterprets the union as its SVCB member.
+func (u *DNS_RECORDA_Data_e__Union) SVCB() *DNS_SVCB_DATA {
+	return (*DNS_SVCB_DATA)(unsafe.Pointer(u))
+}
+
+// Svcb reinterprets the union as its Svcb member.
+func (u *DNS_RECORDA_Data_e__Union) Svcb() *DNS_SVCB_DATA {
+	return (*DNS_SVCB_DATA)(unsafe.Pointer(u))
+}
+
+// UNKNOWN reinterprets the union as its UNKNOWN member.
+func (u *DNS_RECORDA_Data_e__Union) UNKNOWN() *DNS_UNKNOWN_DATA {
+	return (*DNS_UNKNOWN_DATA)(unsafe.Pointer(u))
+}
+
+// Unknown reinterprets the union as its Unknown member.
+func (u *DNS_RECORDA_Data_e__Union) Unknown() *DNS_UNKNOWN_DATA {
+	return (*DNS_UNKNOWN_DATA)(unsafe.Pointer(u))
+}
+
+// PDataPtr reinterprets the union as its pDataPtr member.
+func (u *DNS_RECORDA_Data_e__Union) PDataPtr() **byte {
+	return (**byte)(unsafe.Pointer(u))
+}
+
 // DNS_RECORDA_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_RECORDA_Flags_e__Union struct {
 	Data [1]uint32
+}
+
+// DW reinterprets the union as its DW member.
+func (u *DNS_RECORDA_Flags_e__Union) DW() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// S reinterprets the union as its S member.
+func (u *DNS_RECORDA_Flags_e__Union) S() *DNS_RECORD_FLAGS {
+	return (*DNS_RECORD_FLAGS)(unsafe.Pointer(u))
 }
 
 // DNS_RECORDA: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_recorda
@@ -434,15 +937,457 @@ type DNS_RECORDA struct {
 }
 
 // DNS_RECORDW_Data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_RECORDW_Data_e__Union struct {
 	Data [7]uint64
 }
 
+// A reinterprets the union as its A member.
+func (u *DNS_RECORDW_Data_e__Union) A() *DNS_A_DATA {
+	return (*DNS_A_DATA)(unsafe.Pointer(u))
+}
+
+// SOA reinterprets the union as its SOA member.
+func (u *DNS_RECORDW_Data_e__Union) SOA() *DNS_SOA_DATAW {
+	return (*DNS_SOA_DATAW)(unsafe.Pointer(u))
+}
+
+// Soa reinterprets the union as its Soa member.
+func (u *DNS_RECORDW_Data_e__Union) Soa() *DNS_SOA_DATAW {
+	return (*DNS_SOA_DATAW)(unsafe.Pointer(u))
+}
+
+// PTR reinterprets the union as its PTR member.
+func (u *DNS_RECORDW_Data_e__Union) PTR() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Ptr reinterprets the union as its Ptr member.
+func (u *DNS_RECORDW_Data_e__Union) Ptr() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// NS reinterprets the union as its NS member.
+func (u *DNS_RECORDW_Data_e__Union) NS() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Ns reinterprets the union as its Ns member.
+func (u *DNS_RECORDW_Data_e__Union) Ns() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// CNAME reinterprets the union as its CNAME member.
+func (u *DNS_RECORDW_Data_e__Union) CNAME() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Cname reinterprets the union as its Cname member.
+func (u *DNS_RECORDW_Data_e__Union) Cname() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// DNAME reinterprets the union as its DNAME member.
+func (u *DNS_RECORDW_Data_e__Union) DNAME() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Dname reinterprets the union as its Dname member.
+func (u *DNS_RECORDW_Data_e__Union) Dname() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// MB reinterprets the union as its MB member.
+func (u *DNS_RECORDW_Data_e__Union) MB() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Mb reinterprets the union as its Mb member.
+func (u *DNS_RECORDW_Data_e__Union) Mb() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// MD reinterprets the union as its MD member.
+func (u *DNS_RECORDW_Data_e__Union) MD() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Md reinterprets the union as its Md member.
+func (u *DNS_RECORDW_Data_e__Union) Md() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// MF reinterprets the union as its MF member.
+func (u *DNS_RECORDW_Data_e__Union) MF() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Mf reinterprets the union as its Mf member.
+func (u *DNS_RECORDW_Data_e__Union) Mf() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// MG reinterprets the union as its MG member.
+func (u *DNS_RECORDW_Data_e__Union) MG() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Mg reinterprets the union as its Mg member.
+func (u *DNS_RECORDW_Data_e__Union) Mg() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// MR reinterprets the union as its MR member.
+func (u *DNS_RECORDW_Data_e__Union) MR() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Mr reinterprets the union as its Mr member.
+func (u *DNS_RECORDW_Data_e__Union) Mr() *DNS_PTR_DATAW {
+	return (*DNS_PTR_DATAW)(unsafe.Pointer(u))
+}
+
+// MINFO reinterprets the union as its MINFO member.
+func (u *DNS_RECORDW_Data_e__Union) MINFO() *DNS_MINFO_DATAW {
+	return (*DNS_MINFO_DATAW)(unsafe.Pointer(u))
+}
+
+// Minfo reinterprets the union as its Minfo member.
+func (u *DNS_RECORDW_Data_e__Union) Minfo() *DNS_MINFO_DATAW {
+	return (*DNS_MINFO_DATAW)(unsafe.Pointer(u))
+}
+
+// RP reinterprets the union as its RP member.
+func (u *DNS_RECORDW_Data_e__Union) RP() *DNS_MINFO_DATAW {
+	return (*DNS_MINFO_DATAW)(unsafe.Pointer(u))
+}
+
+// Rp reinterprets the union as its Rp member.
+func (u *DNS_RECORDW_Data_e__Union) Rp() *DNS_MINFO_DATAW {
+	return (*DNS_MINFO_DATAW)(unsafe.Pointer(u))
+}
+
+// MX reinterprets the union as its MX member.
+func (u *DNS_RECORDW_Data_e__Union) MX() *DNS_MX_DATAW {
+	return (*DNS_MX_DATAW)(unsafe.Pointer(u))
+}
+
+// Mx reinterprets the union as its Mx member.
+func (u *DNS_RECORDW_Data_e__Union) Mx() *DNS_MX_DATAW {
+	return (*DNS_MX_DATAW)(unsafe.Pointer(u))
+}
+
+// AFSDB reinterprets the union as its AFSDB member.
+func (u *DNS_RECORDW_Data_e__Union) AFSDB() *DNS_MX_DATAW {
+	return (*DNS_MX_DATAW)(unsafe.Pointer(u))
+}
+
+// Afsdb reinterprets the union as its Afsdb member.
+func (u *DNS_RECORDW_Data_e__Union) Afsdb() *DNS_MX_DATAW {
+	return (*DNS_MX_DATAW)(unsafe.Pointer(u))
+}
+
+// RT reinterprets the union as its RT member.
+func (u *DNS_RECORDW_Data_e__Union) RT() *DNS_MX_DATAW {
+	return (*DNS_MX_DATAW)(unsafe.Pointer(u))
+}
+
+// Rt reinterprets the union as its Rt member.
+func (u *DNS_RECORDW_Data_e__Union) Rt() *DNS_MX_DATAW {
+	return (*DNS_MX_DATAW)(unsafe.Pointer(u))
+}
+
+// HINFO reinterprets the union as its HINFO member.
+func (u *DNS_RECORDW_Data_e__Union) HINFO() *DNS_TXT_DATAW {
+	return (*DNS_TXT_DATAW)(unsafe.Pointer(u))
+}
+
+// Hinfo reinterprets the union as its Hinfo member.
+func (u *DNS_RECORDW_Data_e__Union) Hinfo() *DNS_TXT_DATAW {
+	return (*DNS_TXT_DATAW)(unsafe.Pointer(u))
+}
+
+// ISDN reinterprets the union as its ISDN member.
+func (u *DNS_RECORDW_Data_e__Union) ISDN() *DNS_TXT_DATAW {
+	return (*DNS_TXT_DATAW)(unsafe.Pointer(u))
+}
+
+// Isdn reinterprets the union as its Isdn member.
+func (u *DNS_RECORDW_Data_e__Union) Isdn() *DNS_TXT_DATAW {
+	return (*DNS_TXT_DATAW)(unsafe.Pointer(u))
+}
+
+// TXT reinterprets the union as its TXT member.
+func (u *DNS_RECORDW_Data_e__Union) TXT() *DNS_TXT_DATAW {
+	return (*DNS_TXT_DATAW)(unsafe.Pointer(u))
+}
+
+// Txt reinterprets the union as its Txt member.
+func (u *DNS_RECORDW_Data_e__Union) Txt() *DNS_TXT_DATAW {
+	return (*DNS_TXT_DATAW)(unsafe.Pointer(u))
+}
+
+// X25 reinterprets the union as its X25 member.
+func (u *DNS_RECORDW_Data_e__Union) X25() *DNS_TXT_DATAW {
+	return (*DNS_TXT_DATAW)(unsafe.Pointer(u))
+}
+
+// Null reinterprets the union as its Null member.
+func (u *DNS_RECORDW_Data_e__Union) Null() *DNS_NULL_DATA {
+	return (*DNS_NULL_DATA)(unsafe.Pointer(u))
+}
+
+// WKS reinterprets the union as its WKS member.
+func (u *DNS_RECORDW_Data_e__Union) WKS() *DNS_WKS_DATA {
+	return (*DNS_WKS_DATA)(unsafe.Pointer(u))
+}
+
+// Wks reinterprets the union as its Wks member.
+func (u *DNS_RECORDW_Data_e__Union) Wks() *DNS_WKS_DATA {
+	return (*DNS_WKS_DATA)(unsafe.Pointer(u))
+}
+
+// AAAA reinterprets the union as its AAAA member.
+func (u *DNS_RECORDW_Data_e__Union) AAAA() *DNS_AAAA_DATA {
+	return (*DNS_AAAA_DATA)(unsafe.Pointer(u))
+}
+
+// KEY reinterprets the union as its KEY member.
+func (u *DNS_RECORDW_Data_e__Union) KEY() *DNS_KEY_DATA {
+	return (*DNS_KEY_DATA)(unsafe.Pointer(u))
+}
+
+// Key reinterprets the union as its Key member.
+func (u *DNS_RECORDW_Data_e__Union) Key() *DNS_KEY_DATA {
+	return (*DNS_KEY_DATA)(unsafe.Pointer(u))
+}
+
+// SIG reinterprets the union as its SIG member.
+func (u *DNS_RECORDW_Data_e__Union) SIG() *DNS_SIG_DATAW {
+	return (*DNS_SIG_DATAW)(unsafe.Pointer(u))
+}
+
+// Sig reinterprets the union as its Sig member.
+func (u *DNS_RECORDW_Data_e__Union) Sig() *DNS_SIG_DATAW {
+	return (*DNS_SIG_DATAW)(unsafe.Pointer(u))
+}
+
+// ATMA reinterprets the union as its ATMA member.
+func (u *DNS_RECORDW_Data_e__Union) ATMA() *DNS_ATMA_DATA {
+	return (*DNS_ATMA_DATA)(unsafe.Pointer(u))
+}
+
+// Atma reinterprets the union as its Atma member.
+func (u *DNS_RECORDW_Data_e__Union) Atma() *DNS_ATMA_DATA {
+	return (*DNS_ATMA_DATA)(unsafe.Pointer(u))
+}
+
+// NXT reinterprets the union as its NXT member.
+func (u *DNS_RECORDW_Data_e__Union) NXT() *DNS_NXT_DATAW {
+	return (*DNS_NXT_DATAW)(unsafe.Pointer(u))
+}
+
+// Nxt reinterprets the union as its Nxt member.
+func (u *DNS_RECORDW_Data_e__Union) Nxt() *DNS_NXT_DATAW {
+	return (*DNS_NXT_DATAW)(unsafe.Pointer(u))
+}
+
+// SRV reinterprets the union as its SRV member.
+func (u *DNS_RECORDW_Data_e__Union) SRV() *DNS_SRV_DATAW {
+	return (*DNS_SRV_DATAW)(unsafe.Pointer(u))
+}
+
+// Srv reinterprets the union as its Srv member.
+func (u *DNS_RECORDW_Data_e__Union) Srv() *DNS_SRV_DATAW {
+	return (*DNS_SRV_DATAW)(unsafe.Pointer(u))
+}
+
+// NAPTR reinterprets the union as its NAPTR member.
+func (u *DNS_RECORDW_Data_e__Union) NAPTR() *DNS_NAPTR_DATAW {
+	return (*DNS_NAPTR_DATAW)(unsafe.Pointer(u))
+}
+
+// Naptr reinterprets the union as its Naptr member.
+func (u *DNS_RECORDW_Data_e__Union) Naptr() *DNS_NAPTR_DATAW {
+	return (*DNS_NAPTR_DATAW)(unsafe.Pointer(u))
+}
+
+// OPT reinterprets the union as its OPT member.
+func (u *DNS_RECORDW_Data_e__Union) OPT() *DNS_OPT_DATA {
+	return (*DNS_OPT_DATA)(unsafe.Pointer(u))
+}
+
+// Opt reinterprets the union as its Opt member.
+func (u *DNS_RECORDW_Data_e__Union) Opt() *DNS_OPT_DATA {
+	return (*DNS_OPT_DATA)(unsafe.Pointer(u))
+}
+
+// DS reinterprets the union as its DS member.
+func (u *DNS_RECORDW_Data_e__Union) DS() *DNS_DS_DATA {
+	return (*DNS_DS_DATA)(unsafe.Pointer(u))
+}
+
+// Ds reinterprets the union as its Ds member.
+func (u *DNS_RECORDW_Data_e__Union) Ds() *DNS_DS_DATA {
+	return (*DNS_DS_DATA)(unsafe.Pointer(u))
+}
+
+// RRSIG reinterprets the union as its RRSIG member.
+func (u *DNS_RECORDW_Data_e__Union) RRSIG() *DNS_SIG_DATAW {
+	return (*DNS_SIG_DATAW)(unsafe.Pointer(u))
+}
+
+// Rrsig reinterprets the union as its Rrsig member.
+func (u *DNS_RECORDW_Data_e__Union) Rrsig() *DNS_SIG_DATAW {
+	return (*DNS_SIG_DATAW)(unsafe.Pointer(u))
+}
+
+// NSEC reinterprets the union as its NSEC member.
+func (u *DNS_RECORDW_Data_e__Union) NSEC() *DNS_NSEC_DATAW {
+	return (*DNS_NSEC_DATAW)(unsafe.Pointer(u))
+}
+
+// Nsec reinterprets the union as its Nsec member.
+func (u *DNS_RECORDW_Data_e__Union) Nsec() *DNS_NSEC_DATAW {
+	return (*DNS_NSEC_DATAW)(unsafe.Pointer(u))
+}
+
+// DNSKEY reinterprets the union as its DNSKEY member.
+func (u *DNS_RECORDW_Data_e__Union) DNSKEY() *DNS_KEY_DATA {
+	return (*DNS_KEY_DATA)(unsafe.Pointer(u))
+}
+
+// Dnskey reinterprets the union as its Dnskey member.
+func (u *DNS_RECORDW_Data_e__Union) Dnskey() *DNS_KEY_DATA {
+	return (*DNS_KEY_DATA)(unsafe.Pointer(u))
+}
+
+// TKEY reinterprets the union as its TKEY member.
+func (u *DNS_RECORDW_Data_e__Union) TKEY() *DNS_TKEY_DATAW {
+	return (*DNS_TKEY_DATAW)(unsafe.Pointer(u))
+}
+
+// Tkey reinterprets the union as its Tkey member.
+func (u *DNS_RECORDW_Data_e__Union) Tkey() *DNS_TKEY_DATAW {
+	return (*DNS_TKEY_DATAW)(unsafe.Pointer(u))
+}
+
+// TSIG reinterprets the union as its TSIG member.
+func (u *DNS_RECORDW_Data_e__Union) TSIG() *DNS_TSIG_DATAW {
+	return (*DNS_TSIG_DATAW)(unsafe.Pointer(u))
+}
+
+// Tsig reinterprets the union as its Tsig member.
+func (u *DNS_RECORDW_Data_e__Union) Tsig() *DNS_TSIG_DATAW {
+	return (*DNS_TSIG_DATAW)(unsafe.Pointer(u))
+}
+
+// WINS reinterprets the union as its WINS member.
+func (u *DNS_RECORDW_Data_e__Union) WINS() *DNS_WINS_DATA {
+	return (*DNS_WINS_DATA)(unsafe.Pointer(u))
+}
+
+// Wins reinterprets the union as its Wins member.
+func (u *DNS_RECORDW_Data_e__Union) Wins() *DNS_WINS_DATA {
+	return (*DNS_WINS_DATA)(unsafe.Pointer(u))
+}
+
+// WINSR reinterprets the union as its WINSR member.
+func (u *DNS_RECORDW_Data_e__Union) WINSR() *DNS_WINSR_DATAW {
+	return (*DNS_WINSR_DATAW)(unsafe.Pointer(u))
+}
+
+// WinsR reinterprets the union as its WinsR member.
+func (u *DNS_RECORDW_Data_e__Union) WinsR() *DNS_WINSR_DATAW {
+	return (*DNS_WINSR_DATAW)(unsafe.Pointer(u))
+}
+
+// NBSTAT reinterprets the union as its NBSTAT member.
+func (u *DNS_RECORDW_Data_e__Union) NBSTAT() *DNS_WINSR_DATAW {
+	return (*DNS_WINSR_DATAW)(unsafe.Pointer(u))
+}
+
+// Nbstat reinterprets the union as its Nbstat member.
+func (u *DNS_RECORDW_Data_e__Union) Nbstat() *DNS_WINSR_DATAW {
+	return (*DNS_WINSR_DATAW)(unsafe.Pointer(u))
+}
+
+// DHCID reinterprets the union as its DHCID member.
+func (u *DNS_RECORDW_Data_e__Union) DHCID() *DNS_DHCID_DATA {
+	return (*DNS_DHCID_DATA)(unsafe.Pointer(u))
+}
+
+// NSEC3 reinterprets the union as its NSEC3 member.
+func (u *DNS_RECORDW_Data_e__Union) NSEC3() *DNS_NSEC3_DATA {
+	return (*DNS_NSEC3_DATA)(unsafe.Pointer(u))
+}
+
+// Nsec3 reinterprets the union as its Nsec3 member.
+func (u *DNS_RECORDW_Data_e__Union) Nsec3() *DNS_NSEC3_DATA {
+	return (*DNS_NSEC3_DATA)(unsafe.Pointer(u))
+}
+
+// NSEC3PARAM reinterprets the union as its NSEC3PARAM member.
+func (u *DNS_RECORDW_Data_e__Union) NSEC3PARAM() *DNS_NSEC3PARAM_DATA {
+	return (*DNS_NSEC3PARAM_DATA)(unsafe.Pointer(u))
+}
+
+// Nsec3Param reinterprets the union as its Nsec3Param member.
+func (u *DNS_RECORDW_Data_e__Union) Nsec3Param() *DNS_NSEC3PARAM_DATA {
+	return (*DNS_NSEC3PARAM_DATA)(unsafe.Pointer(u))
+}
+
+// TLSA reinterprets the union as its TLSA member.
+func (u *DNS_RECORDW_Data_e__Union) TLSA() *DNS_TLSA_DATA {
+	return (*DNS_TLSA_DATA)(unsafe.Pointer(u))
+}
+
+// Tlsa reinterprets the union as its Tlsa member.
+func (u *DNS_RECORDW_Data_e__Union) Tlsa() *DNS_TLSA_DATA {
+	return (*DNS_TLSA_DATA)(unsafe.Pointer(u))
+}
+
+// SVCB reinterprets the union as its SVCB member.
+func (u *DNS_RECORDW_Data_e__Union) SVCB() *DNS_SVCB_DATA {
+	return (*DNS_SVCB_DATA)(unsafe.Pointer(u))
+}
+
+// Svcb reinterprets the union as its Svcb member.
+func (u *DNS_RECORDW_Data_e__Union) Svcb() *DNS_SVCB_DATA {
+	return (*DNS_SVCB_DATA)(unsafe.Pointer(u))
+}
+
+// UNKNOWN reinterprets the union as its UNKNOWN member.
+func (u *DNS_RECORDW_Data_e__Union) UNKNOWN() *DNS_UNKNOWN_DATA {
+	return (*DNS_UNKNOWN_DATA)(unsafe.Pointer(u))
+}
+
+// Unknown reinterprets the union as its Unknown member.
+func (u *DNS_RECORDW_Data_e__Union) Unknown() *DNS_UNKNOWN_DATA {
+	return (*DNS_UNKNOWN_DATA)(unsafe.Pointer(u))
+}
+
+// PDataPtr reinterprets the union as its pDataPtr member.
+func (u *DNS_RECORDW_Data_e__Union) PDataPtr() **byte {
+	return (**byte)(unsafe.Pointer(u))
+}
+
 // DNS_RECORDW_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_RECORDW_Flags_e__Union struct {
 	Data [1]uint32
+}
+
+// DW reinterprets the union as its DW member.
+func (u *DNS_RECORDW_Flags_e__Union) DW() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// S reinterprets the union as its S member.
+func (u *DNS_RECORDW_Flags_e__Union) S() *DNS_RECORD_FLAGS {
+	return (*DNS_RECORD_FLAGS)(unsafe.Pointer(u))
 }
 
 // DNS_RECORDW: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_recordw
@@ -463,15 +1408,37 @@ type DNS_RECORD_FLAGS struct {
 }
 
 // DNS_RECORD_OPTW_Data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_RECORD_OPTW_Data_e__Union struct {
 	Data [3]uint16
 }
 
+// OPT reinterprets the union as its OPT member.
+func (u *DNS_RECORD_OPTW_Data_e__Union) OPT() *DNS_OPT_DATA {
+	return (*DNS_OPT_DATA)(unsafe.Pointer(u))
+}
+
+// Opt reinterprets the union as its Opt member.
+func (u *DNS_RECORD_OPTW_Data_e__Union) Opt() *DNS_OPT_DATA {
+	return (*DNS_OPT_DATA)(unsafe.Pointer(u))
+}
+
 // DNS_RECORD_OPTW_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_RECORD_OPTW_Flags_e__Union struct {
 	Data [1]uint32
+}
+
+// DW reinterprets the union as its DW member.
+func (u *DNS_RECORD_OPTW_Flags_e__Union) DW() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// S reinterprets the union as its S member.
+func (u *DNS_RECORD_OPTW_Flags_e__Union) S() *DNS_RECORD_FLAGS {
+	return (*DNS_RECORD_FLAGS)(unsafe.Pointer(u))
 }
 
 type DNS_RECORD_OPTW struct {
@@ -493,9 +1460,20 @@ type DNS_RRSET struct {
 }
 
 // DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PBrowseCallback reinterprets the union as its pBrowseCallback member.
+func (u *DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union) PBrowseCallback() *PDNS_SERVICE_BROWSE_CALLBACK {
+	return (*PDNS_SERVICE_BROWSE_CALLBACK)(unsafe.Pointer(u))
+}
+
+// PBrowseCallbackV2 reinterprets the union as its pBrowseCallbackV2 member.
+func (u *DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union) PBrowseCallbackV2() *PDNS_QUERY_COMPLETION_ROUTINE {
+	return (*PDNS_QUERY_COMPLETION_ROUTINE)(unsafe.Pointer(u))
 }
 
 // DNS_SERVICE_BROWSE_REQUEST: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_service_browse_request
@@ -623,9 +1601,50 @@ type DNS_SVCB_DATA struct {
 }
 
 // DNS_SVCB_PARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DNS_SVCB_PARAM_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PIpv4Hints reinterprets the union as its pIpv4Hints member.
+func (u *DNS_SVCB_PARAM_Anonymous_e__Union) PIpv4Hints() **DNS_SVCB_PARAM_IPV4 {
+	return (**DNS_SVCB_PARAM_IPV4)(unsafe.Pointer(u))
+}
+
+// PIpv6Hints reinterprets the union as its pIpv6Hints member.
+func (u *DNS_SVCB_PARAM_Anonymous_e__Union) PIpv6Hints() **DNS_SVCB_PARAM_IPV6 {
+	return (**DNS_SVCB_PARAM_IPV6)(unsafe.Pointer(u))
+}
+
+// PMandatory reinterprets the union as its pMandatory member.
+func (u *DNS_SVCB_PARAM_Anonymous_e__Union) PMandatory() **DNS_SVCB_PARAM_MANDATORY {
+	return (**DNS_SVCB_PARAM_MANDATORY)(unsafe.Pointer(u))
+}
+
+// PAlpn reinterprets the union as its pAlpn member.
+func (u *DNS_SVCB_PARAM_Anonymous_e__Union) PAlpn() **DNS_SVCB_PARAM_ALPN {
+	return (**DNS_SVCB_PARAM_ALPN)(unsafe.Pointer(u))
+}
+
+// WPort reinterprets the union as its wPort member.
+func (u *DNS_SVCB_PARAM_Anonymous_e__Union) WPort() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// PUnknown reinterprets the union as its pUnknown member.
+func (u *DNS_SVCB_PARAM_Anonymous_e__Union) PUnknown() **DNS_SVCB_PARAM_UNKNOWN {
+	return (**DNS_SVCB_PARAM_UNKNOWN)(unsafe.Pointer(u))
+}
+
+// PszDohPath reinterprets the union as its pszDohPath member.
+func (u *DNS_SVCB_PARAM_Anonymous_e__Union) PszDohPath() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// PReserved reinterprets the union as its pReserved member.
+func (u *DNS_SVCB_PARAM_Anonymous_e__Union) PReserved() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type DNS_SVCB_PARAM struct {
@@ -809,9 +1828,30 @@ type IP4_ARRAY struct {
 
 // IP6_ADDRESS: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-ip6_address
 // IP6_ADDRESS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IP6_ADDRESS struct {
 	Data [2]uint64
+}
+
+// IP6Qword reinterprets the union as its IP6Qword member.
+func (u *IP6_ADDRESS) IP6Qword() *[2]uint64 {
+	return (*[2]uint64)(unsafe.Pointer(u))
+}
+
+// IP6Dword reinterprets the union as its IP6Dword member.
+func (u *IP6_ADDRESS) IP6Dword() *[4]uint32 {
+	return (*[4]uint32)(unsafe.Pointer(u))
+}
+
+// IP6Word reinterprets the union as its IP6Word member.
+func (u *IP6_ADDRESS) IP6Word() *[8]uint16 {
+	return (*[8]uint16)(unsafe.Pointer(u))
+}
+
+// IP6Byte reinterprets the union as its IP6Byte member.
+func (u *IP6_ADDRESS) IP6Byte() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // MDNS_QUERY_HANDLE: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-mdns_query_handle
@@ -838,15 +1878,37 @@ type MDNS_QUERY_REQUEST struct {
 }
 
 // DnsRecordOptA_Data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DnsRecordOptA_Data_e__Union struct {
 	Data [3]uint16
 }
 
+// OPT reinterprets the union as its OPT member.
+func (u *DnsRecordOptA_Data_e__Union) OPT() *DNS_OPT_DATA {
+	return (*DNS_OPT_DATA)(unsafe.Pointer(u))
+}
+
+// Opt reinterprets the union as its Opt member.
+func (u *DnsRecordOptA_Data_e__Union) Opt() *DNS_OPT_DATA {
+	return (*DNS_OPT_DATA)(unsafe.Pointer(u))
+}
+
 // DnsRecordOptA_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DnsRecordOptA_Flags_e__Union struct {
 	Data [1]uint32
+}
+
+// DW reinterprets the union as its DW member.
+func (u *DnsRecordOptA_Flags_e__Union) DW() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// S reinterprets the union as its S member.
+func (u *DnsRecordOptA_Flags_e__Union) S() *DNS_RECORD_FLAGS {
+	return (*DNS_RECORD_FLAGS)(unsafe.Pointer(u))
 }
 
 type DnsRecordOptA struct {

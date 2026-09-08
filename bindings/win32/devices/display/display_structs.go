@@ -138,9 +138,30 @@ type COLORSPACE_SCALAR_MULTIPLIER_CAPS struct {
 }
 
 // COLORSPACE_TRANSFORM_Data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type COLORSPACE_TRANSFORM_Data_e__Union struct {
 	Data [24588]uint32
+}
+
+// Rgb256x3x16 reinterprets the union as its Rgb256x3x16 member.
+func (u *COLORSPACE_TRANSFORM_Data_e__Union) Rgb256x3x16() *GAMMA_RAMP_RGB256x3x16 {
+	return (*GAMMA_RAMP_RGB256x3x16)(unsafe.Pointer(u))
+}
+
+// Dxgi1 reinterprets the union as its Dxgi1 member.
+func (u *COLORSPACE_TRANSFORM_Data_e__Union) Dxgi1() *GAMMA_RAMP_DXGI_1 {
+	return (*GAMMA_RAMP_DXGI_1)(unsafe.Pointer(u))
+}
+
+// T3x4 reinterprets the union as its T3x4 member.
+func (u *COLORSPACE_TRANSFORM_Data_e__Union) T3x4() *COLORSPACE_TRANSFORM_3x4 {
+	return (*COLORSPACE_TRANSFORM_3x4)(unsafe.Pointer(u))
+}
+
+// MatrixV2 reinterprets the union as its MatrixV2 member.
+func (u *COLORSPACE_TRANSFORM_Data_e__Union) MatrixV2() *COLORSPACE_TRANSFORM_MATRIX_V2 {
+	return (*COLORSPACE_TRANSFORM_MATRIX_V2)(unsafe.Pointer(u))
 }
 
 type COLORSPACE_TRANSFORM struct {
@@ -159,10 +180,34 @@ type COLORSPACE_TRANSFORM_3x4 struct {
 	LookupTable1D    [4096]GAMMA_RAMP_RGB
 }
 
+type COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous1_e__Struct struct {
+	Bitfield uint32
+}
+
+type COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous2_e__Struct struct {
+	Bitfield uint32
+}
+
 // COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union) Anonymous1() *COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous1_e__Struct {
+	return (*COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union) Anonymous2() *COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous2_e__Struct {
+	return (*COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type COLORSPACE_TRANSFORM_DATA_CAP struct {
@@ -172,10 +217,25 @@ type COLORSPACE_TRANSFORM_DATA_CAP struct {
 	NumericRangeMax float32
 }
 
+type COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union) Anonymous() *COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type COLORSPACE_TRANSFORM_MATRIX_CAP struct {
@@ -263,10 +323,25 @@ type DISPLAYCONFIG_DEVICE_INFO_HEADER struct {
 	Id        uint32
 }
 
+type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO struct {
@@ -276,10 +351,25 @@ type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO struct {
 	BitsPerColorChannel uint32
 }
 
+type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2 struct {
@@ -290,10 +380,25 @@ type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2 struct {
 	ActiveColorMode     graphicsgdi.DISPLAYCONFIG_ADVANCED_COLOR_MODE
 }
 
+type DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION struct {
@@ -302,9 +407,25 @@ type DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION struct {
 }
 
 // DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// TargetMode reinterprets the union as its targetMode member.
+func (u *DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union) TargetMode() *DISPLAYCONFIG_TARGET_MODE {
+	return (*DISPLAYCONFIG_TARGET_MODE)(unsafe.Pointer(u))
+}
+
+// SourceMode reinterprets the union as its sourceMode member.
+func (u *DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union) SourceMode() *DISPLAYCONFIG_SOURCE_MODE {
+	return (*DISPLAYCONFIG_SOURCE_MODE)(unsafe.Pointer(u))
+}
+
+// DesktopImageInfo reinterprets the union as its desktopImageInfo member.
+func (u *DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union) DesktopImageInfo() *DISPLAYCONFIG_DESKTOP_IMAGE_INFO {
+	return (*DISPLAYCONFIG_DESKTOP_IMAGE_INFO)(unsafe.Pointer(u))
 }
 
 // DISPLAYCONFIG_MODE_INFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_mode_info
@@ -322,10 +443,25 @@ type DISPLAYCONFIG_PATH_INFO struct {
 	Flags      uint32
 }
 
+type DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// ModeInfoIdx reinterprets the union as its modeInfoIdx member.
+func (u *DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union) ModeInfoIdx() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // DISPLAYCONFIG_PATH_SOURCE_INFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_path_source_info
@@ -336,10 +472,25 @@ type DISPLAYCONFIG_PATH_SOURCE_INFO struct {
 	StatusFlags uint32
 }
 
+type DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// ModeInfoIdx reinterprets the union as its modeInfoIdx member.
+func (u *DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union) ModeInfoIdx() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // DISPLAYCONFIG_PATH_TARGET_INFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_path_target_info
@@ -368,10 +519,25 @@ type DISPLAYCONFIG_SDR_WHITE_LEVEL struct {
 	SDRWhiteLevel uint32
 }
 
+type DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE struct {
@@ -379,10 +545,25 @@ type DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE struct {
 	Anonymous DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union
 }
 
+type DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DISPLAYCONFIG_SET_HDR_STATE struct {
@@ -390,10 +571,25 @@ type DISPLAYCONFIG_SET_HDR_STATE struct {
 	Anonymous DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union
 }
 
+type DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION struct {
@@ -404,10 +600,25 @@ type DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION struct {
 	SpecializationApplicationName [128]uint16
 }
 
+type DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DISPLAYCONFIG_SET_TARGET_PERSISTENCE: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_set_target_persistence
@@ -416,10 +627,25 @@ type DISPLAYCONFIG_SET_TARGET_PERSISTENCE struct {
 	Anonymous DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union
 }
 
+type DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DISPLAYCONFIG_SET_WCG_STATE struct {
@@ -441,10 +667,25 @@ type DISPLAYCONFIG_SOURCE_MODE struct {
 	Position    foundation.POINTL
 }
 
+type DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_support_virtual_resolution
@@ -471,10 +712,25 @@ type DISPLAYCONFIG_TARGET_DEVICE_NAME struct {
 	MonitorDevicePath         [128]uint16
 }
 
+type DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union) Anonymous() *DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its value member.
+func (u *DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_target_device_name_flags
@@ -495,10 +751,25 @@ type DISPLAYCONFIG_TARGET_PREFERRED_MODE struct {
 	TargetMode DISPLAYCONFIG_TARGET_MODE
 }
 
+type DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union_AdditionalSignalInfo_e__Struct struct {
+	Bitfield uint32
+}
+
 // DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// AdditionalSignalInfo reinterprets the union as its AdditionalSignalInfo member.
+func (u *DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union) AdditionalSignalInfo() *DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union_AdditionalSignalInfo_e__Struct {
+	return (*DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union_AdditionalSignalInfo_e__Struct)(unsafe.Pointer(u))
+}
+
+// VideoStandard reinterprets the union as its videoStandard member.
+func (u *DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union) VideoStandard() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DISPLAYCONFIG_VIDEO_SIGNAL_INFO: https://learn.microsoft.com/windows/win32/api/wingdi/ns-wingdi-displayconfig_video_signal_info
@@ -676,9 +947,20 @@ type FLOATOBJ_XFORM struct {
 }
 
 // FLOAT_LONG is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FLOAT_LONG struct {
 	Data [1]uint32
+}
+
+// E reinterprets the union as its e member.
+func (u *FLOAT_LONG) E() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// L reinterprets the union as its l member.
+func (u *FLOAT_LONG) L() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 // FONTDIFF: https://learn.microsoft.com/windows/win32/api/winddi/ns-winddi-fontdiff
@@ -863,9 +1145,20 @@ type GLYPHDATA struct {
 
 // GLYPHDEF: https://learn.microsoft.com/windows/win32/api/winddi/ns-winddi-glyphdef
 // GLYPHDEF is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GLYPHDEF struct {
 	Data [1]uint64
+}
+
+// Pgb reinterprets the union as its pgb member.
+func (u *GLYPHDEF) Pgb() **GLYPHBITS {
+	return (**GLYPHBITS)(unsafe.Pointer(u))
+}
+
+// Ppo reinterprets the union as its ppo member.
+func (u *GLYPHDEF) Ppo() **PATHOBJ {
+	return (**PATHOBJ)(unsafe.Pointer(u))
 }
 
 // GLYPHPOS: https://learn.microsoft.com/windows/win32/api/winddi/ns-winddi-glyphpos
@@ -1006,16 +1299,47 @@ type MIPI_DSI_CAPS struct {
 	LengthLo                      byte
 }
 
+type MIPI_DSI_PACKET_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // MIPI_DSI_PACKET_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIPI_DSI_PACKET_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
+// DataId reinterprets the union as its DataId member.
+func (u *MIPI_DSI_PACKET_Anonymous1_e__Union) DataId() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MIPI_DSI_PACKET_Anonymous1_e__Union) Anonymous() *MIPI_DSI_PACKET_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*MIPI_DSI_PACKET_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type MIPI_DSI_PACKET_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Data0 byte
+	Data1 byte
+}
+
 // MIPI_DSI_PACKET_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIPI_DSI_PACKET_Anonymous2_e__Union struct {
 	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MIPI_DSI_PACKET_Anonymous2_e__Union) Anonymous() *MIPI_DSI_PACKET_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*MIPI_DSI_PACKET_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// LongWriteWordCount reinterprets the union as its LongWriteWordCount member.
+func (u *MIPI_DSI_PACKET_Anonymous2_e__Union) LongWriteWordCount() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type MIPI_DSI_PACKET struct {
@@ -1025,10 +1349,25 @@ type MIPI_DSI_PACKET struct {
 	Payload    [8]byte
 }
 
+type MIPI_DSI_RESET_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // MIPI_DSI_RESET_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIPI_DSI_RESET_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MIPI_DSI_RESET_Anonymous_e__Union) Anonymous() *MIPI_DSI_RESET_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*MIPI_DSI_RESET_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Results reinterprets the union as its Results member.
+func (u *MIPI_DSI_RESET_Anonymous_e__Union) Results() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type MIPI_DSI_RESET struct {
@@ -1062,10 +1401,25 @@ type PALOBJ struct {
 	UlReserved uint32
 }
 
+type PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union) Anonymous() *PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type PANEL_BRIGHTNESS_SENSOR_DATA struct {
@@ -1081,10 +1435,26 @@ type PANEL_GET_BACKLIGHT_REDUCTION struct {
 	GammaRamp            BACKLIGHT_REDUCTION_GAMMA_RAMP
 }
 
+type PANEL_GET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	CurrentInMillinits uint32
+	TargetInMillinits  uint32
+}
+
 // PANEL_GET_BRIGHTNESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PANEL_GET_BRIGHTNESS_Anonymous_e__Union struct {
 	Data [2]uint32
+}
+
+// Level reinterprets the union as its Level member.
+func (u *PANEL_GET_BRIGHTNESS_Anonymous_e__Union) Level() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PANEL_GET_BRIGHTNESS_Anonymous_e__Union) Anonymous() *PANEL_GET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PANEL_GET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type PANEL_GET_BRIGHTNESS struct {
@@ -1092,10 +1462,25 @@ type PANEL_GET_BRIGHTNESS struct {
 	Anonymous PANEL_GET_BRIGHTNESS_Anonymous_e__Union
 }
 
+type PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union) Anonymous() *PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type PANEL_QUERY_BRIGHTNESS_CAPS struct {
@@ -1104,9 +1489,20 @@ type PANEL_QUERY_BRIGHTNESS_CAPS struct {
 }
 
 // PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union struct {
 	Data [51]uint32
+}
+
+// BrightnessLevel reinterprets the union as its BrightnessLevel member.
+func (u *PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union) BrightnessLevel() *BRIGHTNESS_LEVEL {
+	return (*BRIGHTNESS_LEVEL)(unsafe.Pointer(u))
+}
+
+// NitRanges reinterprets the union as its NitRanges member.
+func (u *PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union) NitRanges() *BRIGHTNESS_NIT_RANGES {
+	return (*BRIGHTNESS_NIT_RANGES)(unsafe.Pointer(u))
 }
 
 type PANEL_QUERY_BRIGHTNESS_RANGES struct {
@@ -1118,10 +1514,27 @@ type PANEL_SET_BACKLIGHT_OPTIMIZATION struct {
 	Level BACKLIGHT_OPTIMIZATION_LEVEL
 }
 
+type PANEL_SET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Millinits          uint32
+	TransitionTimeInMs uint32
+	SensorData         PANEL_BRIGHTNESS_SENSOR_DATA
+}
+
 // PANEL_SET_BRIGHTNESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PANEL_SET_BRIGHTNESS_Anonymous_e__Union struct {
 	Data [7]uint32
+}
+
+// Level reinterprets the union as its Level member.
+func (u *PANEL_SET_BRIGHTNESS_Anonymous_e__Union) Level() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PANEL_SET_BRIGHTNESS_Anonymous_e__Union) Anonymous() *PANEL_SET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PANEL_SET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type PANEL_SET_BRIGHTNESS struct {
@@ -1129,10 +1542,25 @@ type PANEL_SET_BRIGHTNESS struct {
 	Anonymous PANEL_SET_BRIGHTNESS_Anonymous_e__Union
 }
 
+type PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union) Anonymous() *PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type PANEL_SET_BRIGHTNESS_STATE struct {
@@ -1301,9 +1729,20 @@ type VIDEO_BRIGHTNESS_POLICY struct {
 }
 
 // VIDEO_CLUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VIDEO_CLUT_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// RgbArray reinterprets the union as its RgbArray member.
+func (u *VIDEO_CLUT_Anonymous_e__Union) RgbArray() *VIDEO_CLUTDATA {
+	return (*VIDEO_CLUTDATA)(unsafe.Pointer(u))
+}
+
+// RgbLong reinterprets the union as its RgbLong member.
+func (u *VIDEO_CLUT_Anonymous_e__Union) RgbLong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type VIDEO_CLUT struct {

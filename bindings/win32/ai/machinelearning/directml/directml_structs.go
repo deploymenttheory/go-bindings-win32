@@ -1401,9 +1401,65 @@ type DML_ROI_POOLING_OPERATOR_DESC struct {
 
 // DML_SCALAR_UNION: https://learn.microsoft.com/windows/win32/api/directml/ns-directml-dml_scalar_union
 // DML_SCALAR_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DML_SCALAR_UNION struct {
 	Data [1]uint64
+}
+
+// Bytes reinterprets the union as its Bytes member.
+func (u *DML_SCALAR_UNION) Bytes() *[8]byte {
+	return (*[8]byte)(unsafe.Pointer(u))
+}
+
+// Int8 reinterprets the union as its Int8 member.
+func (u *DML_SCALAR_UNION) Int8() *int8 {
+	return (*int8)(unsafe.Pointer(u))
+}
+
+// UInt8 reinterprets the union as its UInt8 member.
+func (u *DML_SCALAR_UNION) UInt8() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Int16 reinterprets the union as its Int16 member.
+func (u *DML_SCALAR_UNION) Int16() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// UInt16 reinterprets the union as its UInt16 member.
+func (u *DML_SCALAR_UNION) UInt16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Int32 reinterprets the union as its Int32 member.
+func (u *DML_SCALAR_UNION) Int32() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// UInt32 reinterprets the union as its UInt32 member.
+func (u *DML_SCALAR_UNION) UInt32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Int64 reinterprets the union as its Int64 member.
+func (u *DML_SCALAR_UNION) Int64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// UInt64 reinterprets the union as its UInt64 member.
+func (u *DML_SCALAR_UNION) UInt64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Float32 reinterprets the union as its Float32 member.
+func (u *DML_SCALAR_UNION) Float32() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// Float64 reinterprets the union as its Float64 member.
+func (u *DML_SCALAR_UNION) Float64() *float64 {
+	return (*float64)(unsafe.Pointer(u))
 }
 
 // DML_SCALE_BIAS: https://learn.microsoft.com/windows/win32/api/directml/ns-directml-dml_scale_bias

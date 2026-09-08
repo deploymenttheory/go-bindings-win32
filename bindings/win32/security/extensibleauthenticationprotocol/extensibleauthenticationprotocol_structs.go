@@ -168,9 +168,25 @@ type EAP_METHOD_PROPERTY_ARRAY struct {
 
 // EAP_METHOD_PROPERTY_VALUE: https://learn.microsoft.com/windows/win32/api/eaptypes/ns-eaptypes-eap_method_property_value
 // EAP_METHOD_PROPERTY_VALUE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EAP_METHOD_PROPERTY_VALUE struct {
 	Data [2]uint64
+}
+
+// EmpvBool reinterprets the union as its empvBool member.
+func (u *EAP_METHOD_PROPERTY_VALUE) EmpvBool() *EAP_METHOD_PROPERTY_VALUE_BOOL {
+	return (*EAP_METHOD_PROPERTY_VALUE_BOOL)(unsafe.Pointer(u))
+}
+
+// EmpvDword reinterprets the union as its empvDword member.
+func (u *EAP_METHOD_PROPERTY_VALUE) EmpvDword() *EAP_METHOD_PROPERTY_VALUE_DWORD {
+	return (*EAP_METHOD_PROPERTY_VALUE_DWORD)(unsafe.Pointer(u))
+}
+
+// EmpvString reinterprets the union as its empvString member.
+func (u *EAP_METHOD_PROPERTY_VALUE) EmpvString() *EAP_METHOD_PROPERTY_VALUE_STRING {
+	return (*EAP_METHOD_PROPERTY_VALUE_STRING)(unsafe.Pointer(u))
 }
 
 // EAP_METHOD_PROPERTY_VALUE_BOOL: https://learn.microsoft.com/windows/win32/api/eaptypes/ns-eaptypes-eap_method_property_value_bool
@@ -225,9 +241,25 @@ type EAP_TYPE struct {
 
 // EAP_UI_DATA_FORMAT: https://learn.microsoft.com/windows/win32/api/eaptypes/ns-eaptypes-eap_ui_data_format
 // EAP_UI_DATA_FORMAT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EAP_UI_DATA_FORMAT struct {
 	Data [1]uint64
+}
+
+// CredData reinterprets the union as its credData member.
+func (u *EAP_UI_DATA_FORMAT) CredData() **EAP_CONFIG_INPUT_FIELD_ARRAY {
+	return (**EAP_CONFIG_INPUT_FIELD_ARRAY)(unsafe.Pointer(u))
+}
+
+// CredExpiryData reinterprets the union as its credExpiryData member.
+func (u *EAP_UI_DATA_FORMAT) CredExpiryData() **EAP_CRED_EXPIRY_REQ {
+	return (**EAP_CRED_EXPIRY_REQ)(unsafe.Pointer(u))
+}
+
+// CredLogonData reinterprets the union as its credLogonData member.
+func (u *EAP_UI_DATA_FORMAT) CredLogonData() **EAP_CONFIG_INPUT_FIELD_ARRAY {
+	return (**EAP_CONFIG_INPUT_FIELD_ARRAY)(unsafe.Pointer(u))
 }
 
 // EapCertificateCredential: https://learn.microsoft.com/windows/win32/api/eaptypes/ns-eaptypes-eapcertificatecredential
@@ -243,9 +275,25 @@ type EapCredential struct {
 }
 
 // EapCredentialTypeData is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EapCredentialTypeData struct {
 	Data [4]uint64
+}
+
+// Username_password reinterprets the union as its username_password member.
+func (u *EapCredentialTypeData) Username_password() *EapUsernamePasswordCredential {
+	return (*EapUsernamePasswordCredential)(unsafe.Pointer(u))
+}
+
+// Certificate reinterprets the union as its certificate member.
+func (u *EapCredentialTypeData) Certificate() *EapCertificateCredential {
+	return (*EapCertificateCredential)(unsafe.Pointer(u))
+}
+
+// Sim reinterprets the union as its sim member.
+func (u *EapCredentialTypeData) Sim() *EapSimCredential {
+	return (*EapSimCredential)(unsafe.Pointer(u))
 }
 
 // EapHostPeerMethodResult: https://learn.microsoft.com/windows/win32/api/eaphostpeertypes/ns-eaphostpeertypes-eaphostpeermethodresult

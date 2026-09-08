@@ -17,6 +17,16 @@ var abiSystem_Variant = []abiCase{
 	{"systemvariant.VARIANT size", unsafe.Sizeof(systemvariant.VARIANT{}), 24},
 	{"systemvariant.VARIANT.Anonymous", unsafe.Offsetof(systemvariant.VARIANT{}.Anonymous), 0},
 	{"systemvariant.VARIANT_Anonymous_e__Union size", unsafe.Sizeof(systemvariant.VARIANT_Anonymous_e__Union{}), 24},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct size", unsafe.Sizeof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct{}), 24},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct.Vt", unsafe.Offsetof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct{}.Vt), 0},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct.WReserved1", unsafe.Offsetof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct{}.WReserved1), 2},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct.WReserved2", unsafe.Offsetof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct{}.WReserved2), 4},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct.WReserved3", unsafe.Offsetof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct{}.WReserved3), 6},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct.Anonymous", unsafe.Offsetof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct{}.Anonymous), 8},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union size", unsafe.Sizeof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union{}), 16},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct size", unsafe.Sizeof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct{}), 16},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct.PvRecord", unsafe.Offsetof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct{}.PvRecord), 0},
+	{"systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct.PRecInfo", unsafe.Offsetof(systemvariant.VARIANT_Anonymous_e__Union_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct{}.PRecInfo), 8},
 }
 
 func TestABI_System_Variant(t *testing.T) { checkABI(t, abiSystem_Variant) }

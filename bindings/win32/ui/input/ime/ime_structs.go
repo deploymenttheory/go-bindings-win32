@@ -305,9 +305,20 @@ type IMEWRD struct {
 }
 
 // INPUTCONTEXT_lfFont_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INPUTCONTEXT_lfFont_e__Union struct {
 	Data [23]uint32
+}
+
+// A reinterprets the union as its A member.
+func (u *INPUTCONTEXT_lfFont_e__Union) A() *graphicsgdi.LOGFONTA {
+	return (*graphicsgdi.LOGFONTA)(unsafe.Pointer(u))
+}
+
+// W reinterprets the union as its W member.
+func (u *INPUTCONTEXT_lfFont_e__Union) W() *graphicsgdi.LOGFONTW {
+	return (*graphicsgdi.LOGFONTW)(unsafe.Pointer(u))
 }
 
 type INPUTCONTEXT struct {

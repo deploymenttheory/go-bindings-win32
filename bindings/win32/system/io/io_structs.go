@@ -5,13 +5,26 @@
 package io
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 // IO_STATUS_BLOCK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IO_STATUS_BLOCK_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Status reinterprets the union as its Status member.
+func (u *IO_STATUS_BLOCK_Anonymous_e__Union) Status() *foundation.NTSTATUS {
+	return (*foundation.NTSTATUS)(unsafe.Pointer(u))
+}
+
+// Pointer reinterprets the union as its Pointer member.
+func (u *IO_STATUS_BLOCK_Anonymous_e__Union) Pointer() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type IO_STATUS_BLOCK struct {
@@ -19,10 +32,26 @@ type IO_STATUS_BLOCK struct {
 	Information uintptr
 }
 
+type OVERLAPPED_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Offset     uint32
+	OffsetHigh uint32
+}
+
 // OVERLAPPED_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type OVERLAPPED_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *OVERLAPPED_Anonymous_e__Union) Anonymous() *OVERLAPPED_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*OVERLAPPED_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Pointer reinterprets the union as its Pointer member.
+func (u *OVERLAPPED_Anonymous_e__Union) Pointer() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 // OVERLAPPED: https://learn.microsoft.com/windows/win32/api/minwinbase/ns-minwinbase-overlapped

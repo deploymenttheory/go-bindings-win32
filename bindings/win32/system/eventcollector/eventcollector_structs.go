@@ -4,10 +4,62 @@
 
 package eventcollector
 
+import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+)
+
 // EC_VARIANT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EC_VARIANT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// BooleanVal reinterprets the union as its BooleanVal member.
+func (u *EC_VARIANT_Anonymous_e__Union) BooleanVal() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// UInt32Val reinterprets the union as its UInt32Val member.
+func (u *EC_VARIANT_Anonymous_e__Union) UInt32Val() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DateTimeVal reinterprets the union as its DateTimeVal member.
+func (u *EC_VARIANT_Anonymous_e__Union) DateTimeVal() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// StringVal reinterprets the union as its StringVal member.
+func (u *EC_VARIANT_Anonymous_e__Union) StringVal() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// BinaryVal reinterprets the union as its BinaryVal member.
+func (u *EC_VARIANT_Anonymous_e__Union) BinaryVal() **byte {
+	return (**byte)(unsafe.Pointer(u))
+}
+
+// BooleanArr reinterprets the union as its BooleanArr member.
+func (u *EC_VARIANT_Anonymous_e__Union) BooleanArr() **foundation.BOOL {
+	return (**foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// Int32Arr reinterprets the union as its Int32Arr member.
+func (u *EC_VARIANT_Anonymous_e__Union) Int32Arr() **int32 {
+	return (**int32)(unsafe.Pointer(u))
+}
+
+// StringArr reinterprets the union as its StringArr member.
+func (u *EC_VARIANT_Anonymous_e__Union) StringArr() **foundation.PWSTR {
+	return (**foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PropertyHandleVal reinterprets the union as its PropertyHandleVal member.
+func (u *EC_VARIANT_Anonymous_e__Union) PropertyHandleVal() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }
 
 // EC_VARIANT: https://learn.microsoft.com/windows/win32/api/evcoll/ns-evcoll-ec_variant

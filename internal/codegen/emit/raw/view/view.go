@@ -36,12 +36,25 @@ type StructModel struct {
 	// correctly sized and aligned backing array in the single Fields entry.
 	IsPackedBlob bool
 	Fields       []StructFieldModel
+	// Accessors are the typed member views on a union blob. Every C union
+	// member starts at offset 0, so each is a single pointer reinterpretation
+	// of the backing storage.
+	Accessors []UnionAccessorModel
 }
 
 // StructFieldModel is one struct field, fully resolved.
 type StructFieldModel struct {
 	Name   string
 	GoType string
+}
+
+// UnionAccessorModel is one typed view onto a union's backing storage: the
+// method Name, the member's resolved Go type, and the C member name it
+// reinterprets (rendered into the doc comment).
+type UnionAccessorModel struct {
+	Name   string
+	GoType string
+	Member string
 }
 
 // TypedefModel is a named handle/scalar/pointer typedef.

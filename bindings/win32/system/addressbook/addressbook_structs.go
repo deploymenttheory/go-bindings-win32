@@ -133,9 +133,75 @@ type DTBLRADIOBUTTON struct {
 }
 
 // DTCTL_ctl_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DTCTL_ctl_e__Union struct {
 	Data [1]uint64
+}
+
+// Lpv reinterprets the union as its lpv member.
+func (u *DTCTL_ctl_e__Union) Lpv() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Lplabel reinterprets the union as its lplabel member.
+func (u *DTCTL_ctl_e__Union) Lplabel() **DTBLLABEL {
+	return (**DTBLLABEL)(unsafe.Pointer(u))
+}
+
+// Lpedit reinterprets the union as its lpedit member.
+func (u *DTCTL_ctl_e__Union) Lpedit() **DTBLEDIT {
+	return (**DTBLEDIT)(unsafe.Pointer(u))
+}
+
+// Lplbx reinterprets the union as its lplbx member.
+func (u *DTCTL_ctl_e__Union) Lplbx() **DTBLLBX {
+	return (**DTBLLBX)(unsafe.Pointer(u))
+}
+
+// Lpcombobox reinterprets the union as its lpcombobox member.
+func (u *DTCTL_ctl_e__Union) Lpcombobox() **DTBLCOMBOBOX {
+	return (**DTBLCOMBOBOX)(unsafe.Pointer(u))
+}
+
+// Lpddlbx reinterprets the union as its lpddlbx member.
+func (u *DTCTL_ctl_e__Union) Lpddlbx() **DTBLDDLBX {
+	return (**DTBLDDLBX)(unsafe.Pointer(u))
+}
+
+// Lpcheckbox reinterprets the union as its lpcheckbox member.
+func (u *DTCTL_ctl_e__Union) Lpcheckbox() **DTBLCHECKBOX {
+	return (**DTBLCHECKBOX)(unsafe.Pointer(u))
+}
+
+// Lpgroupbox reinterprets the union as its lpgroupbox member.
+func (u *DTCTL_ctl_e__Union) Lpgroupbox() **DTBLGROUPBOX {
+	return (**DTBLGROUPBOX)(unsafe.Pointer(u))
+}
+
+// Lpbutton reinterprets the union as its lpbutton member.
+func (u *DTCTL_ctl_e__Union) Lpbutton() **DTBLBUTTON {
+	return (**DTBLBUTTON)(unsafe.Pointer(u))
+}
+
+// Lpradiobutton reinterprets the union as its lpradiobutton member.
+func (u *DTCTL_ctl_e__Union) Lpradiobutton() **DTBLRADIOBUTTON {
+	return (**DTBLRADIOBUTTON)(unsafe.Pointer(u))
+}
+
+// Lpmvlbx reinterprets the union as its lpmvlbx member.
+func (u *DTCTL_ctl_e__Union) Lpmvlbx() **DTBLMVLISTBOX {
+	return (**DTBLMVLISTBOX)(unsafe.Pointer(u))
+}
+
+// Lpmvddlbx reinterprets the union as its lpmvddlbx member.
+func (u *DTCTL_ctl_e__Union) Lpmvddlbx() **DTBLMVDDLBX {
+	return (**DTBLMVDDLBX)(unsafe.Pointer(u))
+}
+
+// Lppage reinterprets the union as its lppage member.
+func (u *DTCTL_ctl_e__Union) Lppage() **DTBLPAGE {
+	return (**DTBLPAGE)(unsafe.Pointer(u))
 }
 
 // DTCTL: https://learn.microsoft.com/office/client-developer/outlook/mapi/dtctl
@@ -150,9 +216,20 @@ type DTCTL struct {
 }
 
 // DTPAGE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DTPAGE_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// LpszComponent reinterprets the union as its lpszComponent member.
+func (u *DTPAGE_Anonymous_e__Union) LpszComponent() **int8 {
+	return (**int8)(unsafe.Pointer(u))
+}
+
+// UlItemID reinterprets the union as its ulItemID member.
+func (u *DTPAGE_Anonymous_e__Union) UlItemID() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DTPAGE: https://learn.microsoft.com/office/client-developer/outlook/mapi/dtpage
@@ -220,9 +297,20 @@ type MAPIERROR struct {
 }
 
 // MAPINAMEID_Kind_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MAPINAMEID_Kind_e__Union struct {
 	Data [1]uint64
+}
+
+// LID reinterprets the union as its lID member.
+func (u *MAPINAMEID_Kind_e__Union) LID() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// LpwstrName reinterprets the union as its lpwstrName member.
+func (u *MAPINAMEID_Kind_e__Union) LpwstrName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // MAPINAMEID: https://learn.microsoft.com/office/client-developer/outlook/mapi/mapinameid
@@ -255,9 +343,40 @@ type NEWMAIL_NOTIFICATION struct {
 }
 
 // NOTIFICATION_info_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NOTIFICATION_info_e__Union struct {
 	Data [10]uint64
+}
+
+// Err reinterprets the union as its err member.
+func (u *NOTIFICATION_info_e__Union) Err() *ERROR_NOTIFICATION {
+	return (*ERROR_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Newmail reinterprets the union as its newmail member.
+func (u *NOTIFICATION_info_e__Union) Newmail() *NEWMAIL_NOTIFICATION {
+	return (*NEWMAIL_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Obj reinterprets the union as its obj member.
+func (u *NOTIFICATION_info_e__Union) Obj() *OBJECT_NOTIFICATION {
+	return (*OBJECT_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Tab reinterprets the union as its tab member.
+func (u *NOTIFICATION_info_e__Union) Tab() *TABLE_NOTIFICATION {
+	return (*TABLE_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Ext reinterprets the union as its ext member.
+func (u *NOTIFICATION_info_e__Union) Ext() *EXTENDED_NOTIFICATION {
+	return (*EXTENDED_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Statobj reinterprets the union as its statobj member.
+func (u *NOTIFICATION_info_e__Union) Statobj() *STATUS_OBJECT_NOTIFICATION {
+	return (*STATUS_OBJECT_NOTIFICATION)(unsafe.Pointer(u))
 }
 
 // NOTIFICATION: https://learn.microsoft.com/office/client-developer/outlook/mapi/notification
@@ -440,9 +559,65 @@ type SRealArray struct {
 }
 
 // SRestriction_res_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SRestriction_res_e__Union struct {
 	Data [3]uint64
+}
+
+// ResCompareProps reinterprets the union as its resCompareProps member.
+func (u *SRestriction_res_e__Union) ResCompareProps() *SComparePropsRestriction {
+	return (*SComparePropsRestriction)(unsafe.Pointer(u))
+}
+
+// ResAnd reinterprets the union as its resAnd member.
+func (u *SRestriction_res_e__Union) ResAnd() *SAndRestriction {
+	return (*SAndRestriction)(unsafe.Pointer(u))
+}
+
+// ResOr reinterprets the union as its resOr member.
+func (u *SRestriction_res_e__Union) ResOr() *SOrRestriction {
+	return (*SOrRestriction)(unsafe.Pointer(u))
+}
+
+// ResNot reinterprets the union as its resNot member.
+func (u *SRestriction_res_e__Union) ResNot() *SNotRestriction {
+	return (*SNotRestriction)(unsafe.Pointer(u))
+}
+
+// ResContent reinterprets the union as its resContent member.
+func (u *SRestriction_res_e__Union) ResContent() *SContentRestriction {
+	return (*SContentRestriction)(unsafe.Pointer(u))
+}
+
+// ResProperty reinterprets the union as its resProperty member.
+func (u *SRestriction_res_e__Union) ResProperty() *SPropertyRestriction {
+	return (*SPropertyRestriction)(unsafe.Pointer(u))
+}
+
+// ResBitMask reinterprets the union as its resBitMask member.
+func (u *SRestriction_res_e__Union) ResBitMask() *SBitMaskRestriction {
+	return (*SBitMaskRestriction)(unsafe.Pointer(u))
+}
+
+// ResSize reinterprets the union as its resSize member.
+func (u *SRestriction_res_e__Union) ResSize() *SSizeRestriction {
+	return (*SSizeRestriction)(unsafe.Pointer(u))
+}
+
+// ResExist reinterprets the union as its resExist member.
+func (u *SRestriction_res_e__Union) ResExist() *SExistRestriction {
+	return (*SExistRestriction)(unsafe.Pointer(u))
+}
+
+// ResSub reinterprets the union as its resSub member.
+func (u *SRestriction_res_e__Union) ResSub() *SSubRestriction {
+	return (*SSubRestriction)(unsafe.Pointer(u))
+}
+
+// ResComment reinterprets the union as its resComment member.
+func (u *SRestriction_res_e__Union) ResComment() *SCommentRestriction {
+	return (*SCommentRestriction)(unsafe.Pointer(u))
 }
 
 // SRestriction: https://learn.microsoft.com/office/client-developer/outlook/mapi/srestriction
@@ -553,7 +728,148 @@ type WAB_PARAM struct {
 }
 
 // UPV is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UPV struct {
 	Data [2]uint64
+}
+
+// I reinterprets the union as its i member.
+func (u *UPV) I() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// L reinterprets the union as its l member.
+func (u *UPV) L() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Ul reinterprets the union as its ul member.
+func (u *UPV) Ul() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Flt reinterprets the union as its flt member.
+func (u *UPV) Flt() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// Dbl reinterprets the union as its dbl member.
+func (u *UPV) Dbl() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// B reinterprets the union as its b member.
+func (u *UPV) B() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Cur reinterprets the union as its cur member.
+func (u *UPV) Cur() *systemcom.CY {
+	return (*systemcom.CY)(unsafe.Pointer(u))
+}
+
+// At reinterprets the union as its at member.
+func (u *UPV) At() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// Ft reinterprets the union as its ft member.
+func (u *UPV) Ft() *foundation.FILETIME {
+	return (*foundation.FILETIME)(unsafe.Pointer(u))
+}
+
+// LpszA reinterprets the union as its lpszA member.
+func (u *UPV) LpszA() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// Bin reinterprets the union as its bin member.
+func (u *UPV) Bin() *SBinary {
+	return (*SBinary)(unsafe.Pointer(u))
+}
+
+// LpszW reinterprets the union as its lpszW member.
+func (u *UPV) LpszW() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// Lpguid reinterprets the union as its lpguid member.
+func (u *UPV) Lpguid() **win32.GUID {
+	return (**win32.GUID)(unsafe.Pointer(u))
+}
+
+// Li reinterprets the union as its li member.
+func (u *UPV) Li() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// MVi reinterprets the union as its MVi member.
+func (u *UPV) MVi() *SShortArray {
+	return (*SShortArray)(unsafe.Pointer(u))
+}
+
+// MVl reinterprets the union as its MVl member.
+func (u *UPV) MVl() *SLongArray {
+	return (*SLongArray)(unsafe.Pointer(u))
+}
+
+// MVflt reinterprets the union as its MVflt member.
+func (u *UPV) MVflt() *SRealArray {
+	return (*SRealArray)(unsafe.Pointer(u))
+}
+
+// MVdbl reinterprets the union as its MVdbl member.
+func (u *UPV) MVdbl() *SDoubleArray {
+	return (*SDoubleArray)(unsafe.Pointer(u))
+}
+
+// MVcur reinterprets the union as its MVcur member.
+func (u *UPV) MVcur() *SCurrencyArray {
+	return (*SCurrencyArray)(unsafe.Pointer(u))
+}
+
+// MVat reinterprets the union as its MVat member.
+func (u *UPV) MVat() *SAppTimeArray {
+	return (*SAppTimeArray)(unsafe.Pointer(u))
+}
+
+// MVft reinterprets the union as its MVft member.
+func (u *UPV) MVft() *SDateTimeArray {
+	return (*SDateTimeArray)(unsafe.Pointer(u))
+}
+
+// MVbin reinterprets the union as its MVbin member.
+func (u *UPV) MVbin() *SBinaryArray {
+	return (*SBinaryArray)(unsafe.Pointer(u))
+}
+
+// MVszA reinterprets the union as its MVszA member.
+func (u *UPV) MVszA() *SLPSTRArray {
+	return (*SLPSTRArray)(unsafe.Pointer(u))
+}
+
+// MVszW reinterprets the union as its MVszW member.
+func (u *UPV) MVszW() *SWStringArray {
+	return (*SWStringArray)(unsafe.Pointer(u))
+}
+
+// MVguid reinterprets the union as its MVguid member.
+func (u *UPV) MVguid() *SGuidArray {
+	return (*SGuidArray)(unsafe.Pointer(u))
+}
+
+// MVli reinterprets the union as its MVli member.
+func (u *UPV) MVli() *SLargeIntegerArray {
+	return (*SLargeIntegerArray)(unsafe.Pointer(u))
+}
+
+// Err reinterprets the union as its err member.
+func (u *UPV) Err() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// X reinterprets the union as its x member.
+func (u *UPV) X() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }

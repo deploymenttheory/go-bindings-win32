@@ -190,9 +190,20 @@ type NDIS_802_11_STATUS_INDICATION struct {
 }
 
 // NDIS_802_11_TEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NDIS_802_11_TEST_Anonymous_e__Union struct {
 	Data [5]uint32
+}
+
+// AuthenticationEvent reinterprets the union as its AuthenticationEvent member.
+func (u *NDIS_802_11_TEST_Anonymous_e__Union) AuthenticationEvent() *NDIS_802_11_AUTHENTICATION_EVENT {
+	return (*NDIS_802_11_AUTHENTICATION_EVENT)(unsafe.Pointer(u))
+}
+
+// RssiTrigger reinterprets the union as its RssiTrigger member.
+func (u *NDIS_802_11_TEST_Anonymous_e__Union) RssiTrigger() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 type NDIS_802_11_TEST struct {
@@ -251,9 +262,20 @@ type NDIS_CO_LINK_SPEED struct {
 }
 
 // NDIS_GUID_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NDIS_GUID_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Oid reinterprets the union as its Oid member.
+func (u *NDIS_GUID_Anonymous_e__Union) Oid() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Status reinterprets the union as its Status member.
+func (u *NDIS_GUID_Anonymous_e__Union) Status() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 type NDIS_GUID struct {
@@ -951,11 +973,26 @@ type NET_IF_RCV_ADDRESS_LH struct {
 	IfRcvAddressOffset uint16
 }
 
+type NET_LUID_LH_Info_e__Struct struct {
+	Bitfield uint64
+}
+
 // NET_LUID_LH: https://learn.microsoft.com/windows/win32/api/ifdef/ns-ifdef-net_luid_lh
 // NET_LUID_LH is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NET_LUID_LH struct {
 	Data [1]uint64
+}
+
+// Value reinterprets the union as its Value member.
+func (u *NET_LUID_LH) Value() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Info reinterprets the union as its Info member.
+func (u *NET_LUID_LH) Info() *NET_LUID_LH_Info_e__Struct {
+	return (*NET_LUID_LH_Info_e__Struct)(unsafe.Pointer(u))
 }
 
 // NET_PHYSICAL_LOCATION_LH: https://learn.microsoft.com/windows/win32/api/ifdef/ns-ifdef-net_physical_location_lh

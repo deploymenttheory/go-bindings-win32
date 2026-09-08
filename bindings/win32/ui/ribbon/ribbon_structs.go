@@ -5,6 +5,8 @@
 package ribbon
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -15,9 +17,20 @@ type UIRibbonImageFromBitmapFactory struct {
 }
 
 // UI_EVENTPARAMS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UI_EVENTPARAMS_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// Modes reinterprets the union as its Modes member.
+func (u *UI_EVENTPARAMS_Anonymous_e__Union) Modes() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Params reinterprets the union as its Params member.
+func (u *UI_EVENTPARAMS_Anonymous_e__Union) Params() *UI_EVENTPARAMS_COMMAND {
+	return (*UI_EVENTPARAMS_COMMAND)(unsafe.Pointer(u))
 }
 
 // UI_EVENTPARAMS: https://learn.microsoft.com/windows/win32/api/uiribbon/ns-uiribbon-ui_eventparams

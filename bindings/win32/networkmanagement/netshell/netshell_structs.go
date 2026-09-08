@@ -31,10 +31,26 @@ type CMD_GROUP_ENTRY struct {
 	POsVersionCheck     PNS_OSVERSIONCHECK
 }
 
+type NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct struct {
+	DwVersion  uint32
+	DwReserved uint32
+}
+
 // NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union) Anonymous() *NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// UllAlign reinterprets the union as its _ullAlign member.
+func (u *NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union) UllAlign() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // NS_CONTEXT_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/netsh/ns-netsh-ns_context_attributes
@@ -55,10 +71,26 @@ type NS_CONTEXT_ATTRIBUTES struct {
 	PfnOsVersionCheck PNS_OSVERSIONCHECK
 }
 
+type NS_HELPER_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct struct {
+	DwVersion  uint32
+	DwReserved uint32
+}
+
 // NS_HELPER_ATTRIBUTES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NS_HELPER_ATTRIBUTES_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *NS_HELPER_ATTRIBUTES_Anonymous_e__Union) Anonymous() *NS_HELPER_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*NS_HELPER_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// UllAlign reinterprets the union as its _ullAlign member.
+func (u *NS_HELPER_ATTRIBUTES_Anonymous_e__Union) UllAlign() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // NS_HELPER_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/netsh/ns-netsh-ns_helper_attributes

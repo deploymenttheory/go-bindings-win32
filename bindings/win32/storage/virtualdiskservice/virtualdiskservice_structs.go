@@ -5,15 +5,37 @@
 package virtualdiskservice
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	storagevhd "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/vhd"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
+type CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union_GptPartInfo_e__Struct struct {
+	Attributes uint64
+}
+
+type CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union_MbrPartInfo_e__Struct struct {
+	BootIndicator foundation.BOOLEAN
+}
+
 // CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// MbrPartInfo reinterprets the union as its MbrPartInfo member.
+func (u *CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union) MbrPartInfo() *CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union_MbrPartInfo_e__Struct {
+	return (*CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union_MbrPartInfo_e__Struct)(unsafe.Pointer(u))
+}
+
+// GptPartInfo reinterprets the union as its GptPartInfo member.
+func (u *CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union) GptPartInfo() *CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union_GptPartInfo_e__Struct {
+	return (*CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union_GptPartInfo_e__Struct)(unsafe.Pointer(u))
 }
 
 // CHANGE_ATTRIBUTES_PARAMETERS: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-change_attributes_parameters
@@ -22,10 +44,29 @@ type CHANGE_ATTRIBUTES_PARAMETERS struct {
 	Anonymous CHANGE_ATTRIBUTES_PARAMETERS_Anonymous_e__Union
 }
 
+type CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union_GptPartInfo_e__Struct struct {
+	PartitionType win32.GUID
+}
+
+type CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union_MbrPartInfo_e__Struct struct {
+	PartitionType byte
+}
+
 // CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// MbrPartInfo reinterprets the union as its MbrPartInfo member.
+func (u *CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union) MbrPartInfo() *CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union_MbrPartInfo_e__Struct {
+	return (*CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union_MbrPartInfo_e__Struct)(unsafe.Pointer(u))
+}
+
+// GptPartInfo reinterprets the union as its GptPartInfo member.
+func (u *CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union) GptPartInfo() *CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union_GptPartInfo_e__Struct {
+	return (*CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union_GptPartInfo_e__Struct)(unsafe.Pointer(u))
 }
 
 // CHANGE_PARTITION_TYPE_PARAMETERS: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-change_partition_type_parameters
@@ -34,10 +75,33 @@ type CHANGE_PARTITION_TYPE_PARAMETERS struct {
 	Anonymous CHANGE_PARTITION_TYPE_PARAMETERS_Anonymous_e__Union
 }
 
+type CREATE_PARTITION_PARAMETERS_Anonymous_e__Union_GptPartInfo_e__Struct struct {
+	PartitionType win32.GUID
+	PartitionId   win32.GUID
+	Attributes    uint64
+	Name          [36]uint16
+}
+
+type CREATE_PARTITION_PARAMETERS_Anonymous_e__Union_MbrPartInfo_e__Struct struct {
+	PartitionType byte
+	BootIndicator foundation.BOOLEAN
+}
+
 // CREATE_PARTITION_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CREATE_PARTITION_PARAMETERS_Anonymous_e__Union struct {
 	Data [14]uint64
+}
+
+// MbrPartInfo reinterprets the union as its MbrPartInfo member.
+func (u *CREATE_PARTITION_PARAMETERS_Anonymous_e__Union) MbrPartInfo() *CREATE_PARTITION_PARAMETERS_Anonymous_e__Union_MbrPartInfo_e__Struct {
+	return (*CREATE_PARTITION_PARAMETERS_Anonymous_e__Union_MbrPartInfo_e__Struct)(unsafe.Pointer(u))
+}
+
+// GptPartInfo reinterprets the union as its GptPartInfo member.
+func (u *CREATE_PARTITION_PARAMETERS_Anonymous_e__Union) GptPartInfo() *CREATE_PARTITION_PARAMETERS_Anonymous_e__Union_GptPartInfo_e__Struct {
+	return (*CREATE_PARTITION_PARAMETERS_Anonymous_e__Union_GptPartInfo_e__Struct)(unsafe.Pointer(u))
 }
 
 // CREATE_PARTITION_PARAMETERS: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-create_partition_parameters
@@ -47,9 +111,20 @@ type CREATE_PARTITION_PARAMETERS struct {
 }
 
 // VDS_ADVANCEDDISK_PROP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_ADVANCEDDISK_PROP_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// DwSignature reinterprets the union as its dwSignature member.
+func (u *VDS_ADVANCEDDISK_PROP_Anonymous_e__Union) DwSignature() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DiskGuid reinterprets the union as its DiskGuid member.
+func (u *VDS_ADVANCEDDISK_PROP_Anonymous_e__Union) DiskGuid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
 }
 
 type VDS_ADVANCEDDISK_PROP struct {
@@ -78,10 +153,84 @@ type VDS_ADVANCEDDISK_PROP struct {
 	DwDeviceType         uint32
 }
 
+type VDS_ASYNC_OUTPUT_Anonymous_e__Union_bvp struct {
+	PVolumeUnk *systemcom.IUnknown
+}
+
+type VDS_ASYNC_OUTPUT_Anonymous_e__Union_cl struct {
+	PLunUnk *systemcom.IUnknown
+}
+
+type VDS_ASYNC_OUTPUT_Anonymous_e__Union_cp struct {
+	UllOffset uint64
+	VolumeId  win32.GUID
+}
+
+type VDS_ASYNC_OUTPUT_Anonymous_e__Union_cpg struct {
+	PPortalGroupUnk *systemcom.IUnknown
+}
+
+type VDS_ASYNC_OUTPUT_Anonymous_e__Union_ct struct {
+	PTargetUnk *systemcom.IUnknown
+}
+
+type VDS_ASYNC_OUTPUT_Anonymous_e__Union_cv struct {
+	PVolumeUnk *systemcom.IUnknown
+}
+
+type VDS_ASYNC_OUTPUT_Anonymous_e__Union_cvd struct {
+	PVDiskUnk *systemcom.IUnknown
+}
+
+type VDS_ASYNC_OUTPUT_Anonymous_e__Union_sv struct {
+	UllReclaimedBytes uint64
+}
+
 // VDS_ASYNC_OUTPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_ASYNC_OUTPUT_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// Cp reinterprets the union as its cp member.
+func (u *VDS_ASYNC_OUTPUT_Anonymous_e__Union) Cp() *VDS_ASYNC_OUTPUT_Anonymous_e__Union_cp {
+	return (*VDS_ASYNC_OUTPUT_Anonymous_e__Union_cp)(unsafe.Pointer(u))
+}
+
+// Cv reinterprets the union as its cv member.
+func (u *VDS_ASYNC_OUTPUT_Anonymous_e__Union) Cv() *VDS_ASYNC_OUTPUT_Anonymous_e__Union_cv {
+	return (*VDS_ASYNC_OUTPUT_Anonymous_e__Union_cv)(unsafe.Pointer(u))
+}
+
+// Bvp reinterprets the union as its bvp member.
+func (u *VDS_ASYNC_OUTPUT_Anonymous_e__Union) Bvp() *VDS_ASYNC_OUTPUT_Anonymous_e__Union_bvp {
+	return (*VDS_ASYNC_OUTPUT_Anonymous_e__Union_bvp)(unsafe.Pointer(u))
+}
+
+// Sv reinterprets the union as its sv member.
+func (u *VDS_ASYNC_OUTPUT_Anonymous_e__Union) Sv() *VDS_ASYNC_OUTPUT_Anonymous_e__Union_sv {
+	return (*VDS_ASYNC_OUTPUT_Anonymous_e__Union_sv)(unsafe.Pointer(u))
+}
+
+// Cl reinterprets the union as its cl member.
+func (u *VDS_ASYNC_OUTPUT_Anonymous_e__Union) Cl() *VDS_ASYNC_OUTPUT_Anonymous_e__Union_cl {
+	return (*VDS_ASYNC_OUTPUT_Anonymous_e__Union_cl)(unsafe.Pointer(u))
+}
+
+// Ct reinterprets the union as its ct member.
+func (u *VDS_ASYNC_OUTPUT_Anonymous_e__Union) Ct() *VDS_ASYNC_OUTPUT_Anonymous_e__Union_ct {
+	return (*VDS_ASYNC_OUTPUT_Anonymous_e__Union_ct)(unsafe.Pointer(u))
+}
+
+// Cpg reinterprets the union as its cpg member.
+func (u *VDS_ASYNC_OUTPUT_Anonymous_e__Union) Cpg() *VDS_ASYNC_OUTPUT_Anonymous_e__Union_cpg {
+	return (*VDS_ASYNC_OUTPUT_Anonymous_e__Union_cpg)(unsafe.Pointer(u))
+}
+
+// Cvd reinterprets the union as its cvd member.
+func (u *VDS_ASYNC_OUTPUT_Anonymous_e__Union) Cvd() *VDS_ASYNC_OUTPUT_Anonymous_e__Union_cvd {
+	return (*VDS_ASYNC_OUTPUT_Anonymous_e__Union_cvd)(unsafe.Pointer(u))
 }
 
 // VDS_ASYNC_OUTPUT: https://learn.microsoft.com/windows/win32/api/vdshwprv/ns-vdshwprv-vds_async_output
@@ -141,9 +290,20 @@ type VDS_DISK_NOTIFICATION struct {
 }
 
 // VDS_DISK_PROP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_DISK_PROP_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// DwSignature reinterprets the union as its dwSignature member.
+func (u *VDS_DISK_PROP_Anonymous_e__Union) DwSignature() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DiskGuid reinterprets the union as its DiskGuid member.
+func (u *VDS_DISK_PROP_Anonymous_e__Union) DiskGuid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
 }
 
 // VDS_DISK_PROP: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-vds_disk_prop
@@ -170,9 +330,20 @@ type VDS_DISK_PROP struct {
 }
 
 // VDS_DISK_PROP2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_DISK_PROP2_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// DwSignature reinterprets the union as its dwSignature member.
+func (u *VDS_DISK_PROP2_Anonymous_e__Union) DwSignature() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DiskGuid reinterprets the union as its DiskGuid member.
+func (u *VDS_DISK_PROP2_Anonymous_e__Union) DiskGuid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
 }
 
 // VDS_DISK_PROP2: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-vds_disk_prop2
@@ -495,9 +666,90 @@ type VDS_MOUNT_POINT_NOTIFICATION struct {
 }
 
 // VDS_NOTIFICATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_NOTIFICATION_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// Pack reinterprets the union as its Pack member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Pack() *VDS_PACK_NOTIFICATION {
+	return (*VDS_PACK_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Disk reinterprets the union as its Disk member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Disk() *VDS_DISK_NOTIFICATION {
+	return (*VDS_DISK_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Volume reinterprets the union as its Volume member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Volume() *VDS_VOLUME_NOTIFICATION {
+	return (*VDS_VOLUME_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Partition reinterprets the union as its Partition member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Partition() *VDS_PARTITION_NOTIFICATION {
+	return (*VDS_PARTITION_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Letter reinterprets the union as its Letter member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Letter() *VDS_DRIVE_LETTER_NOTIFICATION {
+	return (*VDS_DRIVE_LETTER_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// FileSystem reinterprets the union as its FileSystem member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) FileSystem() *VDS_FILE_SYSTEM_NOTIFICATION {
+	return (*VDS_FILE_SYSTEM_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// MountPoint reinterprets the union as its MountPoint member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) MountPoint() *VDS_MOUNT_POINT_NOTIFICATION {
+	return (*VDS_MOUNT_POINT_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// SubSystem reinterprets the union as its SubSystem member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) SubSystem() *VDS_SUB_SYSTEM_NOTIFICATION {
+	return (*VDS_SUB_SYSTEM_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Controller reinterprets the union as its Controller member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Controller() *VDS_CONTROLLER_NOTIFICATION {
+	return (*VDS_CONTROLLER_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Drive reinterprets the union as its Drive member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Drive() *VDS_DRIVE_NOTIFICATION {
+	return (*VDS_DRIVE_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Lun reinterprets the union as its Lun member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Lun() *VDS_LUN_NOTIFICATION {
+	return (*VDS_LUN_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Port reinterprets the union as its Port member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Port() *VDS_PORT_NOTIFICATION {
+	return (*VDS_PORT_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Portal reinterprets the union as its Portal member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Portal() *VDS_PORTAL_NOTIFICATION {
+	return (*VDS_PORTAL_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Target reinterprets the union as its Target member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Target() *VDS_TARGET_NOTIFICATION {
+	return (*VDS_TARGET_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// PortalGroup reinterprets the union as its PortalGroup member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) PortalGroup() *VDS_PORTAL_GROUP_NOTIFICATION {
+	return (*VDS_PORTAL_GROUP_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// Service reinterprets the union as its Service member.
+func (u *VDS_NOTIFICATION_Anonymous_e__Union) Service() *VDS_SERVICE_NOTIFICATION {
+	return (*VDS_SERVICE_NOTIFICATION)(unsafe.Pointer(u))
 }
 
 // VDS_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/vdshwprv/ns-vdshwprv-vds_notification
@@ -521,9 +773,20 @@ type VDS_PACK_PROP struct {
 }
 
 // VDS_PARTITION_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_PARTITION_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [14]uint64
+}
+
+// Mbr reinterprets the union as its Mbr member.
+func (u *VDS_PARTITION_INFORMATION_EX_Anonymous_e__Union) Mbr() *VDS_PARTITION_INFO_MBR {
+	return (*VDS_PARTITION_INFO_MBR)(unsafe.Pointer(u))
+}
+
+// Gpt reinterprets the union as its Gpt member.
+func (u *VDS_PARTITION_INFORMATION_EX_Anonymous_e__Union) Gpt() *VDS_PARTITION_INFO_GPT {
+	return (*VDS_PARTITION_INFO_GPT)(unsafe.Pointer(u))
 }
 
 // VDS_PARTITION_INFORMATION_EX: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-vds_partition_information_ex
@@ -560,9 +823,20 @@ type VDS_PARTITION_NOTIFICATION struct {
 }
 
 // VDS_PARTITION_PROP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_PARTITION_PROP_Anonymous_e__Union struct {
 	Data [14]uint64
+}
+
+// Mbr reinterprets the union as its Mbr member.
+func (u *VDS_PARTITION_PROP_Anonymous_e__Union) Mbr() *VDS_PARTITION_INFO_MBR {
+	return (*VDS_PARTITION_INFO_MBR)(unsafe.Pointer(u))
+}
+
+// Gpt reinterprets the union as its Gpt member.
+func (u *VDS_PARTITION_PROP_Anonymous_e__Union) Gpt() *VDS_PARTITION_INFO_GPT {
+	return (*VDS_PARTITION_INFO_GPT)(unsafe.Pointer(u))
 }
 
 // VDS_PARTITION_PROP: https://learn.microsoft.com/windows/win32/api/vds/ns-vds-vds_partition_prop
@@ -582,21 +856,54 @@ type VDS_PATH_ID struct {
 }
 
 // VDS_PATH_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_PATH_INFO_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
+// ControllerPortId reinterprets the union as its controllerPortId member.
+func (u *VDS_PATH_INFO_Anonymous1_e__Union) ControllerPortId() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// TargetPortalId reinterprets the union as its targetPortalId member.
+func (u *VDS_PATH_INFO_Anonymous1_e__Union) TargetPortalId() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
 // VDS_PATH_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_PATH_INFO_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
 
+// HbaPortId reinterprets the union as its hbaPortId member.
+func (u *VDS_PATH_INFO_Anonymous2_e__Union) HbaPortId() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// InitiatorAdapterId reinterprets the union as its initiatorAdapterId member.
+func (u *VDS_PATH_INFO_Anonymous2_e__Union) InitiatorAdapterId() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
 // VDS_PATH_INFO_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDS_PATH_INFO_Anonymous3_e__Union struct {
 	Data [1]uint64
+}
+
+// PHbaPortProp reinterprets the union as its pHbaPortProp member.
+func (u *VDS_PATH_INFO_Anonymous3_e__Union) PHbaPortProp() **VDS_HBAPORT_PROP {
+	return (**VDS_HBAPORT_PROP)(unsafe.Pointer(u))
+}
+
+// PInitiatorPortalIpAddr reinterprets the union as its pInitiatorPortalIpAddr member.
+func (u *VDS_PATH_INFO_Anonymous3_e__Union) PInitiatorPortalIpAddr() **VDS_IPADDRESS {
+	return (**VDS_IPADDRESS)(unsafe.Pointer(u))
 }
 
 // VDS_PATH_INFO: https://learn.microsoft.com/windows/win32/api/vdshwprv/ns-vdshwprv-vds_path_info

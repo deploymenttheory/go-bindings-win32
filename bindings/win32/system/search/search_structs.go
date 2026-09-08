@@ -29,9 +29,25 @@ type BUCKETCATEGORIZE struct {
 }
 
 // CATEGORIZATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CATEGORIZATION_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// CClusters reinterprets the union as its cClusters member.
+func (u *CATEGORIZATION_Anonymous_e__Union) CClusters() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Bucket reinterprets the union as its bucket member.
+func (u *CATEGORIZATION_Anonymous_e__Union) Bucket() *BUCKETCATEGORIZE {
+	return (*BUCKETCATEGORIZE)(unsafe.Pointer(u))
+}
+
+// Range reinterprets the union as its range member.
+func (u *CATEGORIZATION_Anonymous_e__Union) Range() *RANGECATEGORIZE {
+	return (*RANGECATEGORIZE)(unsafe.Pointer(u))
 }
 
 type CATEGORIZATION struct {
@@ -445,15 +461,37 @@ type NegationCondition struct {
 }
 
 // ODBC_VS_ARGS_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ODBC_VS_ARGS_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// WszArg reinterprets the union as its wszArg member.
+func (u *ODBC_VS_ARGS_Anonymous1_e__Union) WszArg() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// SzArg reinterprets the union as its szArg member.
+func (u *ODBC_VS_ARGS_Anonymous1_e__Union) SzArg() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
 // ODBC_VS_ARGS_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ODBC_VS_ARGS_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// WszCorrelation reinterprets the union as its wszCorrelation member.
+func (u *ODBC_VS_ARGS_Anonymous2_e__Union) WszCorrelation() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// SzCorrelation reinterprets the union as its szCorrelation member.
+func (u *ODBC_VS_ARGS_Anonymous2_e__Union) SzCorrelation() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 type ODBC_VS_ARGS struct {
@@ -496,9 +534,50 @@ type RANGECATEGORIZE struct {
 }
 
 // RESTRICTION_URes is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RESTRICTION_URes struct {
 	Data [8]uint64
+}
+
+// Ar reinterprets the union as its ar member.
+func (u *RESTRICTION_URes) Ar() *NODERESTRICTION {
+	return (*NODERESTRICTION)(unsafe.Pointer(u))
+}
+
+// OrRestriction reinterprets the union as its orRestriction member.
+func (u *RESTRICTION_URes) OrRestriction() *NODERESTRICTION {
+	return (*NODERESTRICTION)(unsafe.Pointer(u))
+}
+
+// Pxr reinterprets the union as its pxr member.
+func (u *RESTRICTION_URes) Pxr() *NODERESTRICTION {
+	return (*NODERESTRICTION)(unsafe.Pointer(u))
+}
+
+// Vr reinterprets the union as its vr member.
+func (u *RESTRICTION_URes) Vr() *VECTORRESTRICTION {
+	return (*VECTORRESTRICTION)(unsafe.Pointer(u))
+}
+
+// Nr reinterprets the union as its nr member.
+func (u *RESTRICTION_URes) Nr() *NOTRESTRICTION {
+	return (*NOTRESTRICTION)(unsafe.Pointer(u))
+}
+
+// Cr reinterprets the union as its cr member.
+func (u *RESTRICTION_URes) Cr() *CONTENTRESTRICTION {
+	return (*CONTENTRESTRICTION)(unsafe.Pointer(u))
+}
+
+// Nlr reinterprets the union as its nlr member.
+func (u *RESTRICTION_URes) Nlr() *NATLANGUAGERESTRICTION {
+	return (*NATLANGUAGERESTRICTION)(unsafe.Pointer(u))
+}
+
+// Pr reinterprets the union as its pr member.
+func (u *RESTRICTION_URes) Pr() *PROPERTYRESTRICTION {
+	return (*PROPERTYRESTRICTION)(unsafe.Pointer(u))
 }
 
 type RESTRICTION struct {
@@ -622,9 +701,20 @@ type SQL_DAY_SECOND_STRUCT struct {
 }
 
 // SQL_INTERVAL_STRUCT_intval_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SQL_INTERVAL_STRUCT_intval_e__Union struct {
 	Data [5]uint32
+}
+
+// Year_month reinterprets the union as its year_month member.
+func (u *SQL_INTERVAL_STRUCT_intval_e__Union) Year_month() *SQL_YEAR_MONTH_STRUCT {
+	return (*SQL_YEAR_MONTH_STRUCT)(unsafe.Pointer(u))
+}
+
+// Day_second reinterprets the union as its day_second member.
+func (u *SQL_INTERVAL_STRUCT_intval_e__Union) Day_second() *SQL_DAY_SECOND_STRUCT {
+	return (*SQL_DAY_SECOND_STRUCT)(unsafe.Pointer(u))
 }
 
 type SQL_INTERVAL_STRUCT struct {
@@ -655,10 +745,127 @@ type SSERRORINFO struct {
 	WLineNumber   uint16
 }
 
+type SSVARIANT_Anonymous_e__Union_BLOBType struct {
+	Dbobj DBOBJECT
+	PUnk  *systemcom.IUnknown
+}
+
+type SSVARIANT_Anonymous_e__Union_BinaryVal struct {
+	SActualLength int16
+	SMaxLength    int16
+	PrgbBinaryVal *byte
+	DwReserved    uint32
+}
+
+type SSVARIANT_Anonymous_e__Union_CharVal struct {
+	SActualLength int16
+	SMaxLength    int16
+	PchCharVal    foundation.PSTR
+	RgbReserved   [5]byte
+	DwReserved    uint32
+	PwchReserved  foundation.PWSTR
+}
+
+type SSVARIANT_Anonymous_e__Union_NCharVal struct {
+	SActualLength int16
+	SMaxLength    int16
+	PwchNCharVal  foundation.PWSTR
+	RgbReserved   [5]byte
+	DwReserved    uint32
+	PwchReserved  foundation.PWSTR
+}
+
+type SSVARIANT_Anonymous_e__Union_UnknownType struct {
+	DwActualLength uint32
+	RgMetadata     [16]byte
+	PUnknownData   *byte
+}
+
 // SSVARIANT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SSVARIANT_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// BTinyIntVal reinterprets the union as its bTinyIntVal member.
+func (u *SSVARIANT_Anonymous_e__Union) BTinyIntVal() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// SShortIntVal reinterprets the union as its sShortIntVal member.
+func (u *SSVARIANT_Anonymous_e__Union) SShortIntVal() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// LIntVal reinterprets the union as its lIntVal member.
+func (u *SSVARIANT_Anonymous_e__Union) LIntVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// LlBigIntVal reinterprets the union as its llBigIntVal member.
+func (u *SSVARIANT_Anonymous_e__Union) LlBigIntVal() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// FltRealVal reinterprets the union as its fltRealVal member.
+func (u *SSVARIANT_Anonymous_e__Union) FltRealVal() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DblFloatVal reinterprets the union as its dblFloatVal member.
+func (u *SSVARIANT_Anonymous_e__Union) DblFloatVal() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// CyMoneyVal reinterprets the union as its cyMoneyVal member.
+func (u *SSVARIANT_Anonymous_e__Union) CyMoneyVal() *systemcom.CY {
+	return (*systemcom.CY)(unsafe.Pointer(u))
+}
+
+// NCharVal reinterprets the union as its NCharVal member.
+func (u *SSVARIANT_Anonymous_e__Union) NCharVal() *SSVARIANT_Anonymous_e__Union_NCharVal {
+	return (*SSVARIANT_Anonymous_e__Union_NCharVal)(unsafe.Pointer(u))
+}
+
+// CharVal reinterprets the union as its CharVal member.
+func (u *SSVARIANT_Anonymous_e__Union) CharVal() *SSVARIANT_Anonymous_e__Union_CharVal {
+	return (*SSVARIANT_Anonymous_e__Union_CharVal)(unsafe.Pointer(u))
+}
+
+// FBitVal reinterprets the union as its fBitVal member.
+func (u *SSVARIANT_Anonymous_e__Union) FBitVal() *foundation.VARIANT_BOOL {
+	return (*foundation.VARIANT_BOOL)(unsafe.Pointer(u))
+}
+
+// RgbGuidVal reinterprets the union as its rgbGuidVal member.
+func (u *SSVARIANT_Anonymous_e__Union) RgbGuidVal() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
+// NumNumericVal reinterprets the union as its numNumericVal member.
+func (u *SSVARIANT_Anonymous_e__Union) NumNumericVal() *DB_NUMERIC {
+	return (*DB_NUMERIC)(unsafe.Pointer(u))
+}
+
+// BinaryVal reinterprets the union as its BinaryVal member.
+func (u *SSVARIANT_Anonymous_e__Union) BinaryVal() *SSVARIANT_Anonymous_e__Union_BinaryVal {
+	return (*SSVARIANT_Anonymous_e__Union_BinaryVal)(unsafe.Pointer(u))
+}
+
+// TsDateTimeVal reinterprets the union as its tsDateTimeVal member.
+func (u *SSVARIANT_Anonymous_e__Union) TsDateTimeVal() *DBTIMESTAMP {
+	return (*DBTIMESTAMP)(unsafe.Pointer(u))
+}
+
+// UnknownType reinterprets the union as its UnknownType member.
+func (u *SSVARIANT_Anonymous_e__Union) UnknownType() *SSVARIANT_Anonymous_e__Union_UnknownType {
+	return (*SSVARIANT_Anonymous_e__Union_UnknownType)(unsafe.Pointer(u))
+}
+
+// BLOBType reinterprets the union as its BLOBType member.
+func (u *SSVARIANT_Anonymous_e__Union) BLOBType() *SSVARIANT_Anonymous_e__Union_BLOBType {
+	return (*SSVARIANT_Anonymous_e__Union_BLOBType)(unsafe.Pointer(u))
 }
 
 type SSVARIANT struct {

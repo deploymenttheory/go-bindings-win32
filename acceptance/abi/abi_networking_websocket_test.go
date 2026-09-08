@@ -15,6 +15,13 @@ import (
 // Windows.Win32.Networking.WebSocket.
 var abiNetworking_WebSocket = []abiCase{
 	{"networkingwebsocket.WEB_SOCKET_BUFFER size", unsafe.Sizeof(networkingwebsocket.WEB_SOCKET_BUFFER{}), 16},
+	{"networkingwebsocket.WEB_SOCKET_BUFFER_CloseStatus_e__Struct size", unsafe.Sizeof(networkingwebsocket.WEB_SOCKET_BUFFER_CloseStatus_e__Struct{}), 16},
+	{"networkingwebsocket.WEB_SOCKET_BUFFER_CloseStatus_e__Struct.PbReason", unsafe.Offsetof(networkingwebsocket.WEB_SOCKET_BUFFER_CloseStatus_e__Struct{}.PbReason), 0},
+	{"networkingwebsocket.WEB_SOCKET_BUFFER_CloseStatus_e__Struct.UlReasonLength", unsafe.Offsetof(networkingwebsocket.WEB_SOCKET_BUFFER_CloseStatus_e__Struct{}.UlReasonLength), 8},
+	{"networkingwebsocket.WEB_SOCKET_BUFFER_CloseStatus_e__Struct.UsStatus", unsafe.Offsetof(networkingwebsocket.WEB_SOCKET_BUFFER_CloseStatus_e__Struct{}.UsStatus), 12},
+	{"networkingwebsocket.WEB_SOCKET_BUFFER_Data_e__Struct size", unsafe.Sizeof(networkingwebsocket.WEB_SOCKET_BUFFER_Data_e__Struct{}), 16},
+	{"networkingwebsocket.WEB_SOCKET_BUFFER_Data_e__Struct.PbBuffer", unsafe.Offsetof(networkingwebsocket.WEB_SOCKET_BUFFER_Data_e__Struct{}.PbBuffer), 0},
+	{"networkingwebsocket.WEB_SOCKET_BUFFER_Data_e__Struct.UlBufferLength", unsafe.Offsetof(networkingwebsocket.WEB_SOCKET_BUFFER_Data_e__Struct{}.UlBufferLength), 8},
 	{"networkingwebsocket.WEB_SOCKET_HTTP_HEADER size", unsafe.Sizeof(networkingwebsocket.WEB_SOCKET_HTTP_HEADER{}), 32},
 	{"networkingwebsocket.WEB_SOCKET_HTTP_HEADER.PcName", unsafe.Offsetof(networkingwebsocket.WEB_SOCKET_HTTP_HEADER{}.PcName), 0},
 	{"networkingwebsocket.WEB_SOCKET_HTTP_HEADER.UlNameLength", unsafe.Offsetof(networkingwebsocket.WEB_SOCKET_HTTP_HEADER{}.UlNameLength), 8},

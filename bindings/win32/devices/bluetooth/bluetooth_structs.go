@@ -7,13 +7,25 @@ package bluetooth
 import (
 	"unsafe"
 
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 // BLUETOOTH_ADDRESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BLUETOOTH_ADDRESS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// UllLong reinterprets the union as its ullLong member.
+func (u *BLUETOOTH_ADDRESS_Anonymous_e__Union) UllLong() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// RgBytes reinterprets the union as its rgBytes member.
+func (u *BLUETOOTH_ADDRESS_Anonymous_e__Union) RgBytes() *[6]byte {
+	return (*[6]byte)(unsafe.Pointer(u))
 }
 
 type BLUETOOTH_ADDRESS struct {
@@ -21,9 +33,30 @@ type BLUETOOTH_ADDRESS struct {
 }
 
 // BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union struct {
 	Data [8]uint32
+}
+
+// PinInfo reinterprets the union as its pinInfo member.
+func (u *BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union) PinInfo() *BLUETOOTH_PIN_INFO {
+	return (*BLUETOOTH_PIN_INFO)(unsafe.Pointer(u))
+}
+
+// OobInfo reinterprets the union as its oobInfo member.
+func (u *BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union) OobInfo() *BLUETOOTH_OOB_DATA_INFO {
+	return (*BLUETOOTH_OOB_DATA_INFO)(unsafe.Pointer(u))
+}
+
+// NumericCompInfo reinterprets the union as its numericCompInfo member.
+func (u *BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union) NumericCompInfo() *BLUETOOTH_NUMERIC_COMPARISON_INFO {
+	return (*BLUETOOTH_NUMERIC_COMPARISON_INFO)(unsafe.Pointer(u))
+}
+
+// PasskeyInfo reinterprets the union as its passkeyInfo member.
+func (u *BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union) PasskeyInfo() *BLUETOOTH_PASSKEY_INFO {
+	return (*BLUETOOTH_PASSKEY_INFO)(unsafe.Pointer(u))
 }
 
 // BLUETOOTH_AUTHENTICATE_RESPONSE: https://learn.microsoft.com/windows/win32/api/bluetoothapis/ns-bluetoothapis-bluetooth_authenticate_response
@@ -35,9 +68,20 @@ type BLUETOOTH_AUTHENTICATE_RESPONSE struct {
 }
 
 // BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Numeric_Value reinterprets the union as its Numeric_Value member.
+func (u *BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union) Numeric_Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Passkey reinterprets the union as its Passkey member.
+func (u *BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union) Passkey() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS: https://learn.microsoft.com/windows/win32/api/bluetoothapis/ns-bluetoothapis-bluetooth_authentication_callback_params
@@ -223,10 +267,53 @@ type BTH_LE_GATT_DESCRIPTOR struct {
 	AttributeHandle      uint16
 }
 
+type BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_CharacteristicExtendedProperties_e__Struct struct {
+	IsReliableWriteEnabled foundation.BOOLEAN
+	IsAuxiliariesWritable  foundation.BOOLEAN
+}
+
+type BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_CharacteristicFormat_e__Struct struct {
+	Format      byte
+	Exponent    byte
+	Unit        BTH_LE_UUID
+	NameSpace   byte
+	Description BTH_LE_UUID
+}
+
+type BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_ClientCharacteristicConfiguration_e__Struct struct {
+	IsSubscribeToNotification foundation.BOOLEAN
+	IsSubscribeToIndication   foundation.BOOLEAN
+}
+
+type BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_ServerCharacteristicConfiguration_e__Struct struct {
+	IsBroadcast foundation.BOOLEAN
+}
+
 // BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union struct {
 	Data [12]uint32
+}
+
+// CharacteristicExtendedProperties reinterprets the union as its CharacteristicExtendedProperties member.
+func (u *BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union) CharacteristicExtendedProperties() *BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_CharacteristicExtendedProperties_e__Struct {
+	return (*BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_CharacteristicExtendedProperties_e__Struct)(unsafe.Pointer(u))
+}
+
+// ClientCharacteristicConfiguration reinterprets the union as its ClientCharacteristicConfiguration member.
+func (u *BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union) ClientCharacteristicConfiguration() *BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_ClientCharacteristicConfiguration_e__Struct {
+	return (*BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_ClientCharacteristicConfiguration_e__Struct)(unsafe.Pointer(u))
+}
+
+// ServerCharacteristicConfiguration reinterprets the union as its ServerCharacteristicConfiguration member.
+func (u *BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union) ServerCharacteristicConfiguration() *BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_ServerCharacteristicConfiguration_e__Struct {
+	return (*BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_ServerCharacteristicConfiguration_e__Struct)(unsafe.Pointer(u))
+}
+
+// CharacteristicFormat reinterprets the union as its CharacteristicFormat member.
+func (u *BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union) CharacteristicFormat() *BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_CharacteristicFormat_e__Struct {
+	return (*BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union_CharacteristicFormat_e__Struct)(unsafe.Pointer(u))
 }
 
 // BTH_LE_GATT_DESCRIPTOR_VALUE: https://learn.microsoft.com/windows/win32/api/bthledef/ns-bthledef-bth_le_gatt_descriptor_value
@@ -245,9 +332,20 @@ type BTH_LE_GATT_SERVICE struct {
 }
 
 // BTH_LE_UUID_Value_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type BTH_LE_UUID_Value_e__Union struct {
 	Data [4]uint32
+}
+
+// ShortUuid reinterprets the union as its ShortUuid member.
+func (u *BTH_LE_UUID_Value_e__Union) ShortUuid() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// LongUuid reinterprets the union as its LongUuid member.
+func (u *BTH_LE_UUID_Value_e__Union) LongUuid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
 }
 
 // BTH_LE_UUID: https://learn.microsoft.com/windows/win32/api/bthledef/ns-bthledef-bth_le_uuid
@@ -324,10 +422,121 @@ type RFCOMM_RPN_DATA struct {
 	ParameterMask2 byte
 }
 
+type SDP_ELEMENT_DATA_data_e__Union_alternative_e__Struct struct {
+	Value  *byte
+	Length uint32
+}
+
+type SDP_ELEMENT_DATA_data_e__Union_sequence_e__Struct struct {
+	Value  *byte
+	Length uint32
+}
+
+type SDP_ELEMENT_DATA_data_e__Union_string_e__Struct struct {
+	Value  *byte
+	Length uint32
+}
+
+type SDP_ELEMENT_DATA_data_e__Union_url_e__Struct struct {
+	Value  *byte
+	Length uint32
+}
+
 // SDP_ELEMENT_DATA_data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SDP_ELEMENT_DATA_data_e__Union struct {
 	Data [2]uint64
+}
+
+// Int128 reinterprets the union as its int128 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Int128() *SDP_LARGE_INTEGER_16 {
+	return (*SDP_LARGE_INTEGER_16)(unsafe.Pointer(u))
+}
+
+// Int64 reinterprets the union as its int64 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Int64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// Int32 reinterprets the union as its int32 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Int32() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Int16 reinterprets the union as its int16 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Int16() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// Int8 reinterprets the union as its int8 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Int8() *foundation.CHAR {
+	return (*foundation.CHAR)(unsafe.Pointer(u))
+}
+
+// Uint128 reinterprets the union as its uint128 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Uint128() *SDP_ULARGE_INTEGER_16 {
+	return (*SDP_ULARGE_INTEGER_16)(unsafe.Pointer(u))
+}
+
+// Uint64 reinterprets the union as its uint64 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Uint64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Uint32 reinterprets the union as its uint32 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Uint32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Uint16 reinterprets the union as its uint16 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Uint16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Uint8 reinterprets the union as its uint8 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Uint8() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// BooleanVal reinterprets the union as its booleanVal member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) BooleanVal() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Uuid128 reinterprets the union as its uuid128 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Uuid128() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// Uuid32 reinterprets the union as its uuid32 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Uuid32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Uuid16 reinterprets the union as its uuid16 member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Uuid16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// String reinterprets the union as its string member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) String() *SDP_ELEMENT_DATA_data_e__Union_string_e__Struct {
+	return (*SDP_ELEMENT_DATA_data_e__Union_string_e__Struct)(unsafe.Pointer(u))
+}
+
+// Url reinterprets the union as its url member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Url() *SDP_ELEMENT_DATA_data_e__Union_url_e__Struct {
+	return (*SDP_ELEMENT_DATA_data_e__Union_url_e__Struct)(unsafe.Pointer(u))
+}
+
+// Sequence reinterprets the union as its sequence member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Sequence() *SDP_ELEMENT_DATA_data_e__Union_sequence_e__Struct {
+	return (*SDP_ELEMENT_DATA_data_e__Union_sequence_e__Struct)(unsafe.Pointer(u))
+}
+
+// Alternative reinterprets the union as its alternative member.
+func (u *SDP_ELEMENT_DATA_data_e__Union) Alternative() *SDP_ELEMENT_DATA_data_e__Union_alternative_e__Struct {
+	return (*SDP_ELEMENT_DATA_data_e__Union_alternative_e__Struct)(unsafe.Pointer(u))
 }
 
 // SDP_ELEMENT_DATA: https://learn.microsoft.com/windows/win32/api/bluetoothapis/ns-bluetoothapis-sdp_element_data
@@ -376,7 +585,23 @@ type SdpQueryUuid struct {
 
 // SdpQueryUuidUnion: https://learn.microsoft.com/windows/win32/api/bthsdpdef/ns-bthsdpdef-sdpqueryuuidunion
 // SdpQueryUuidUnion is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SdpQueryUuidUnion struct {
 	Data [4]uint32
+}
+
+// Uuid128 reinterprets the union as its uuid128 member.
+func (u *SdpQueryUuidUnion) Uuid128() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// Uuid32 reinterprets the union as its uuid32 member.
+func (u *SdpQueryUuidUnion) Uuid32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Uuid16 reinterprets the union as its uuid16 member.
+func (u *SdpQueryUuidUnion) Uuid16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }

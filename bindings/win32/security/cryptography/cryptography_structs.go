@@ -585,9 +585,45 @@ type CERT_ACCESS_DESCRIPTION struct {
 }
 
 // CERT_ALT_NAME_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CERT_ALT_NAME_ENTRY_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// POtherName reinterprets the union as its pOtherName member.
+func (u *CERT_ALT_NAME_ENTRY_Anonymous_e__Union) POtherName() **CERT_OTHER_NAME {
+	return (**CERT_OTHER_NAME)(unsafe.Pointer(u))
+}
+
+// PwszRfc822Name reinterprets the union as its pwszRfc822Name member.
+func (u *CERT_ALT_NAME_ENTRY_Anonymous_e__Union) PwszRfc822Name() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PwszDNSName reinterprets the union as its pwszDNSName member.
+func (u *CERT_ALT_NAME_ENTRY_Anonymous_e__Union) PwszDNSName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// DirectoryName reinterprets the union as its DirectoryName member.
+func (u *CERT_ALT_NAME_ENTRY_Anonymous_e__Union) DirectoryName() *CRYPT_INTEGER_BLOB {
+	return (*CRYPT_INTEGER_BLOB)(unsafe.Pointer(u))
+}
+
+// PwszURL reinterprets the union as its pwszURL member.
+func (u *CERT_ALT_NAME_ENTRY_Anonymous_e__Union) PwszURL() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// IPAddress reinterprets the union as its IPAddress member.
+func (u *CERT_ALT_NAME_ENTRY_Anonymous_e__Union) IPAddress() *CRYPT_INTEGER_BLOB {
+	return (*CRYPT_INTEGER_BLOB)(unsafe.Pointer(u))
+}
+
+// PszRegisteredID reinterprets the union as its pszRegisteredID member.
+func (u *CERT_ALT_NAME_ENTRY_Anonymous_e__Union) PszRegisteredID() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 // CERT_ALT_NAME_ENTRY: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_alt_name_entry
@@ -639,9 +675,20 @@ type CERT_BASIC_CONSTRAINTS_INFO struct {
 }
 
 // CERT_BIOMETRIC_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CERT_BIOMETRIC_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// DwPredefined reinterprets the union as its dwPredefined member.
+func (u *CERT_BIOMETRIC_DATA_Anonymous_e__Union) DwPredefined() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PszObjId reinterprets the union as its pszObjId member.
+func (u *CERT_BIOMETRIC_DATA_Anonymous_e__Union) PszObjId() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 // CERT_BIOMETRIC_DATA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_biometric_data
@@ -824,9 +871,25 @@ type CERT_HASHED_URL struct {
 }
 
 // CERT_ID_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CERT_ID_Anonymous_e__Union struct {
 	Data [4]uint64
+}
+
+// IssuerSerialNumber reinterprets the union as its IssuerSerialNumber member.
+func (u *CERT_ID_Anonymous_e__Union) IssuerSerialNumber() *CERT_ISSUER_SERIAL_NUMBER {
+	return (*CERT_ISSUER_SERIAL_NUMBER)(unsafe.Pointer(u))
+}
+
+// KeyId reinterprets the union as its KeyId member.
+func (u *CERT_ID_Anonymous_e__Union) KeyId() *CRYPT_INTEGER_BLOB {
+	return (*CRYPT_INTEGER_BLOB)(unsafe.Pointer(u))
+}
+
+// HashId reinterprets the union as its HashId member.
+func (u *CERT_ID_Anonymous_e__Union) HashId() *CRYPT_INTEGER_BLOB {
+	return (*CRYPT_INTEGER_BLOB)(unsafe.Pointer(u))
 }
 
 // CERT_ID: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_id
@@ -872,9 +935,20 @@ type CERT_KEY_ATTRIBUTES_INFO struct {
 }
 
 // CERT_KEY_CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CERT_KEY_CONTEXT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HCryptProv reinterprets the union as its hCryptProv member.
+func (u *CERT_KEY_CONTEXT_Anonymous_e__Union) HCryptProv() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// HNCryptKey reinterprets the union as its hNCryptKey member.
+func (u *CERT_KEY_CONTEXT_Anonymous_e__Union) HNCryptKey() *NCRYPT_KEY_HANDLE {
+	return (*NCRYPT_KEY_HANDLE)(unsafe.Pointer(u))
 }
 
 // CERT_KEY_CONTEXT: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_key_context
@@ -944,9 +1018,20 @@ type CERT_LOGOTYPE_IMAGE struct {
 }
 
 // CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwNumBits reinterprets the union as its dwNumBits member.
+func (u *CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union) DwNumBits() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwTableSize reinterprets the union as its dwTableSize member.
+func (u *CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union) DwTableSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // CERT_LOGOTYPE_IMAGE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_logotype_image_info
@@ -961,9 +1046,20 @@ type CERT_LOGOTYPE_IMAGE_INFO struct {
 }
 
 // CERT_LOGOTYPE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CERT_LOGOTYPE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PLogotypeDirectInfo reinterprets the union as its pLogotypeDirectInfo member.
+func (u *CERT_LOGOTYPE_INFO_Anonymous_e__Union) PLogotypeDirectInfo() **CERT_LOGOTYPE_DATA {
+	return (**CERT_LOGOTYPE_DATA)(unsafe.Pointer(u))
+}
+
+// PLogotypeIndirectInfo reinterprets the union as its pLogotypeIndirectInfo member.
+func (u *CERT_LOGOTYPE_INFO_Anonymous_e__Union) PLogotypeIndirectInfo() **CERT_LOGOTYPE_REFERENCE {
+	return (**CERT_LOGOTYPE_REFERENCE)(unsafe.Pointer(u))
 }
 
 // CERT_LOGOTYPE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_logotype_info
@@ -1281,9 +1377,25 @@ type CERT_STORE_PROV_INFO struct {
 }
 
 // CERT_STRONG_SIGN_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CERT_STRONG_SIGN_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PvInfo reinterprets the union as its pvInfo member.
+func (u *CERT_STRONG_SIGN_PARA_Anonymous_e__Union) PvInfo() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PSerializedInfo reinterprets the union as its pSerializedInfo member.
+func (u *CERT_STRONG_SIGN_PARA_Anonymous_e__Union) PSerializedInfo() **CERT_STRONG_SIGN_SERIALIZED_INFO {
+	return (**CERT_STRONG_SIGN_SERIALIZED_INFO)(unsafe.Pointer(u))
+}
+
+// PszOID reinterprets the union as its pszOID member.
+func (u *CERT_STRONG_SIGN_PARA_Anonymous_e__Union) PszOID() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 // CERT_STRONG_SIGN_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_strong_sign_para
@@ -1312,15 +1424,42 @@ type CERT_SYSTEM_STORE_INFO struct {
 }
 
 // CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// HKeyBase reinterprets the union as its hKeyBase member.
+func (u *CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union) HKeyBase() *systemregistry.HKEY {
+	return (*systemregistry.HKEY)(unsafe.Pointer(u))
+}
+
+// PvBase reinterprets the union as its pvBase member.
+func (u *CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union) PvBase() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
 // CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// PvSystemStore reinterprets the union as its pvSystemStore member.
+func (u *CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union) PvSystemStore() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PszSystemStore reinterprets the union as its pszSystemStore member.
+func (u *CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union) PszSystemStore() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// PwszSystemStore reinterprets the union as its pwszSystemStore member.
+func (u *CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union) PwszSystemStore() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // CERT_SYSTEM_STORE_RELOCATE_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cert_system_store_relocate_para
@@ -1451,9 +1590,20 @@ type CMC_RESPONSE_INFO struct {
 }
 
 // CMC_STATUS_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMC_STATUS_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// DwFailInfo reinterprets the union as its dwFailInfo member.
+func (u *CMC_STATUS_INFO_Anonymous_e__Union) DwFailInfo() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PPendInfo reinterprets the union as its pPendInfo member.
+func (u *CMC_STATUS_INFO_Anonymous_e__Union) PPendInfo() **CMC_PEND_INFO {
+	return (**CMC_PEND_INFO)(unsafe.Pointer(u))
 }
 
 // CMC_STATUS_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmc_status_info
@@ -1492,9 +1642,15 @@ type CMC_TAGGED_OTHER_MSG struct {
 }
 
 // CMC_TAGGED_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMC_TAGGED_REQUEST_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PTaggedCertRequest reinterprets the union as its pTaggedCertRequest member.
+func (u *CMC_TAGGED_REQUEST_Anonymous_e__Union) PTaggedCertRequest() **CMC_TAGGED_CERT_REQUEST {
+	return (**CMC_TAGGED_CERT_REQUEST)(unsafe.Pointer(u))
 }
 
 // CMC_TAGGED_REQUEST: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmc_tagged_request
@@ -1507,9 +1663,25 @@ type CMSCEPSetup struct {
 }
 
 // CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PKeyTrans reinterprets the union as its pKeyTrans member.
+func (u *CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union) PKeyTrans() **CMSG_KEY_TRANS_RECIPIENT_INFO {
+	return (**CMSG_KEY_TRANS_RECIPIENT_INFO)(unsafe.Pointer(u))
+}
+
+// PKeyAgree reinterprets the union as its pKeyAgree member.
+func (u *CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union) PKeyAgree() **CMSG_KEY_AGREE_RECIPIENT_INFO {
+	return (**CMSG_KEY_AGREE_RECIPIENT_INFO)(unsafe.Pointer(u))
+}
+
+// PMailList reinterprets the union as its pMailList member.
+func (u *CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union) PMailList() **CMSG_MAIL_LIST_RECIPIENT_INFO {
+	return (**CMSG_MAIL_LIST_RECIPIENT_INFO)(unsafe.Pointer(u))
 }
 
 // CMSG_CMS_RECIPIENT_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_cms_recipient_info
@@ -1543,9 +1715,20 @@ type CMSG_CNG_CONTENT_DECRYPT_INFO struct {
 }
 
 // CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HContentEncryptKey reinterprets the union as its hContentEncryptKey member.
+func (u *CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union) HContentEncryptKey() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// HCNGContentEncryptKey reinterprets the union as its hCNGContentEncryptKey member.
+func (u *CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union) HCNGContentEncryptKey() *BCRYPT_KEY_HANDLE {
+	return (*BCRYPT_KEY_HANDLE)(unsafe.Pointer(u))
 }
 
 // CMSG_CONTENT_ENCRYPT_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_content_encrypt_info
@@ -1575,9 +1758,20 @@ type CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA struct {
 }
 
 // CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HCryptProv reinterprets the union as its hCryptProv member.
+func (u *CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union) HCryptProv() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// HNCryptKey reinterprets the union as its hNCryptKey member.
+func (u *CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union) HNCryptKey() *NCRYPT_KEY_HANDLE {
+	return (*NCRYPT_KEY_HANDLE)(unsafe.Pointer(u))
 }
 
 // CMSG_CTRL_DECRYPT_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_ctrl_decrypt_para
@@ -1596,9 +1790,20 @@ type CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA struct {
 }
 
 // CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HCryptProv reinterprets the union as its hCryptProv member.
+func (u *CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union) HCryptProv() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// HNCryptKey reinterprets the union as its hNCryptKey member.
+func (u *CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union) HNCryptKey() *NCRYPT_KEY_HANDLE {
+	return (*NCRYPT_KEY_HANDLE)(unsafe.Pointer(u))
 }
 
 // CMSG_CTRL_KEY_AGREE_DECRYPT_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_ctrl_key_agree_decrypt_para
@@ -1613,9 +1818,20 @@ type CMSG_CTRL_KEY_AGREE_DECRYPT_PARA struct {
 }
 
 // CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HCryptProv reinterprets the union as its hCryptProv member.
+func (u *CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union) HCryptProv() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// HNCryptKey reinterprets the union as its hNCryptKey member.
+func (u *CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union) HNCryptKey() *NCRYPT_KEY_HANDLE {
+	return (*NCRYPT_KEY_HANDLE)(unsafe.Pointer(u))
 }
 
 // CMSG_CTRL_KEY_TRANS_DECRYPT_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_ctrl_key_trans_decrypt_para
@@ -1628,9 +1844,20 @@ type CMSG_CTRL_KEY_TRANS_DECRYPT_PARA struct {
 }
 
 // CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HKeyEncryptionKey reinterprets the union as its hKeyEncryptionKey member.
+func (u *CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union) HKeyEncryptionKey() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// PvKeyEncryptionKey reinterprets the union as its pvKeyEncryptionKey member.
+func (u *CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union) PvKeyEncryptionKey() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 // CMSG_CTRL_MAIL_LIST_DECRYPT_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_ctrl_mail_list_decrypt_para
@@ -1677,9 +1904,20 @@ type CMSG_HASHED_ENCODE_INFO struct {
 }
 
 // CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// OriginatorCertId reinterprets the union as its OriginatorCertId member.
+func (u *CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union) OriginatorCertId() *CERT_ID {
+	return (*CERT_ID)(unsafe.Pointer(u))
+}
+
+// OriginatorPublicKeyInfo reinterprets the union as its OriginatorPublicKeyInfo member.
+func (u *CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union) OriginatorPublicKeyInfo() *CERT_PUBLIC_KEY_INFO {
+	return (*CERT_PUBLIC_KEY_INFO)(unsafe.Pointer(u))
 }
 
 // CMSG_KEY_AGREE_ENCRYPT_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_key_agree_encrypt_info
@@ -1702,9 +1940,20 @@ type CMSG_KEY_AGREE_KEY_ENCRYPT_INFO struct {
 }
 
 // CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PEphemeralAlgorithm reinterprets the union as its pEphemeralAlgorithm member.
+func (u *CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union) PEphemeralAlgorithm() **CRYPT_ALGORITHM_IDENTIFIER {
+	return (**CRYPT_ALGORITHM_IDENTIFIER)(unsafe.Pointer(u))
+}
+
+// PSenderId reinterprets the union as its pSenderId member.
+func (u *CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union) PSenderId() **CERT_ID {
+	return (**CERT_ID)(unsafe.Pointer(u))
 }
 
 // CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_key_agree_recipient_encode_info
@@ -1724,9 +1973,20 @@ type CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO struct {
 }
 
 // CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// OriginatorCertId reinterprets the union as its OriginatorCertId member.
+func (u *CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union) OriginatorCertId() *CERT_ID {
+	return (*CERT_ID)(unsafe.Pointer(u))
+}
+
+// OriginatorPublicKeyInfo reinterprets the union as its OriginatorPublicKeyInfo member.
+func (u *CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union) OriginatorPublicKeyInfo() *CERT_PUBLIC_KEY_INFO {
+	return (*CERT_PUBLIC_KEY_INFO)(unsafe.Pointer(u))
 }
 
 // CMSG_KEY_AGREE_RECIPIENT_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_key_agree_recipient_info
@@ -1777,9 +2037,20 @@ type CMSG_MAIL_LIST_ENCRYPT_INFO struct {
 }
 
 // CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HKeyEncryptionKey reinterprets the union as its hKeyEncryptionKey member.
+func (u *CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union) HKeyEncryptionKey() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// PvKeyEncryptionKey reinterprets the union as its pvKeyEncryptionKey member.
+func (u *CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union) PvKeyEncryptionKey() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 // CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_mail_list_recipient_encode_info
@@ -1818,9 +2089,25 @@ type CMSG_RC4_AUX_INFO struct {
 }
 
 // CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PKeyTrans reinterprets the union as its pKeyTrans member.
+func (u *CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union) PKeyTrans() **CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO {
+	return (**CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO)(unsafe.Pointer(u))
+}
+
+// PKeyAgree reinterprets the union as its pKeyAgree member.
+func (u *CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union) PKeyAgree() **CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {
+	return (**CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO)(unsafe.Pointer(u))
+}
+
+// PMailList reinterprets the union as its pMailList member.
+func (u *CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union) PMailList() **CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO {
+	return (**CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO)(unsafe.Pointer(u))
 }
 
 // CMSG_RECIPIENT_ENCODE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_recipient_encode_info
@@ -1864,9 +2151,20 @@ type CMSG_SIGNED_ENCODE_INFO struct {
 }
 
 // CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HCryptProv reinterprets the union as its hCryptProv member.
+func (u *CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union) HCryptProv() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// HNCryptKey reinterprets the union as its hNCryptKey member.
+func (u *CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union) HNCryptKey() *NCRYPT_KEY_HANDLE {
+	return (*NCRYPT_KEY_HANDLE)(unsafe.Pointer(u))
 }
 
 // CMSG_SIGNER_ENCODE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-cmsg_signer_encode_info
@@ -1971,9 +2269,15 @@ type CRL_DIST_POINTS_INFO struct {
 }
 
 // CRL_DIST_POINT_NAME_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRL_DIST_POINT_NAME_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// FullName reinterprets the union as its FullName member.
+func (u *CRL_DIST_POINT_NAME_Anonymous_e__Union) FullName() *CERT_ALT_NAME_INFO {
+	return (*CERT_ALT_NAME_INFO)(unsafe.Pointer(u))
 }
 
 // CRL_DIST_POINT_NAME: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-crl_dist_point_name
@@ -2334,9 +2638,20 @@ type CRYPT_KEY_PROV_PARAM struct {
 }
 
 // CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// HCryptProv reinterprets the union as its hCryptProv member.
+func (u *CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union) HCryptProv() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// HNCryptKey reinterprets the union as its hNCryptKey member.
+func (u *CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union) HNCryptKey() *NCRYPT_KEY_HANDLE {
+	return (*NCRYPT_KEY_HANDLE)(unsafe.Pointer(u))
 }
 
 // CRYPT_KEY_SIGN_MESSAGE_PARA: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-crypt_key_sign_message_para
@@ -2385,9 +2700,25 @@ type CRYPT_OID_FUNC_ENTRY struct {
 }
 
 // CRYPT_OID_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPT_OID_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwValue reinterprets the union as its dwValue member.
+func (u *CRYPT_OID_INFO_Anonymous_e__Union) DwValue() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Algid reinterprets the union as its Algid member.
+func (u *CRYPT_OID_INFO_Anonymous_e__Union) Algid() *ALG_ID {
+	return (*ALG_ID)(unsafe.Pointer(u))
+}
+
+// DwLength reinterprets the union as its dwLength member.
+func (u *CRYPT_OID_INFO_Anonymous_e__Union) DwLength() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // CRYPT_OID_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-crypt_oid_info
@@ -2800,9 +3131,35 @@ type CRYPT_XML_KEY_INFO struct {
 }
 
 // CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union struct {
 	Data [15]uint64
+}
+
+// WszKeyName reinterprets the union as its wszKeyName member.
+func (u *CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union) WszKeyName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// KeyValue reinterprets the union as its KeyValue member.
+func (u *CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union) KeyValue() *CRYPT_XML_KEY_VALUE {
+	return (*CRYPT_XML_KEY_VALUE)(unsafe.Pointer(u))
+}
+
+// RetrievalMethod reinterprets the union as its RetrievalMethod member.
+func (u *CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union) RetrievalMethod() *CRYPT_XML_BLOB {
+	return (*CRYPT_XML_BLOB)(unsafe.Pointer(u))
+}
+
+// X509Data reinterprets the union as its X509Data member.
+func (u *CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union) X509Data() *CRYPT_XML_X509DATA {
+	return (*CRYPT_XML_X509DATA)(unsafe.Pointer(u))
+}
+
+// Custom reinterprets the union as its Custom member.
+func (u *CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union) Custom() *CRYPT_XML_BLOB {
+	return (*CRYPT_XML_BLOB)(unsafe.Pointer(u))
 }
 
 // CRYPT_XML_KEY_INFO_ITEM: https://learn.microsoft.com/windows/win32/api/cryptxml/ns-cryptxml-crypt_xml_key_info_item
@@ -2818,9 +3175,30 @@ type CRYPT_XML_KEY_RSA_KEY_VALUE struct {
 }
 
 // CRYPT_XML_KEY_VALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPT_XML_KEY_VALUE_Anonymous_e__Union struct {
 	Data [14]uint64
+}
+
+// DSAKeyValue reinterprets the union as its DSAKeyValue member.
+func (u *CRYPT_XML_KEY_VALUE_Anonymous_e__Union) DSAKeyValue() *CRYPT_XML_KEY_DSA_KEY_VALUE {
+	return (*CRYPT_XML_KEY_DSA_KEY_VALUE)(unsafe.Pointer(u))
+}
+
+// RSAKeyValue reinterprets the union as its RSAKeyValue member.
+func (u *CRYPT_XML_KEY_VALUE_Anonymous_e__Union) RSAKeyValue() *CRYPT_XML_KEY_RSA_KEY_VALUE {
+	return (*CRYPT_XML_KEY_RSA_KEY_VALUE)(unsafe.Pointer(u))
+}
+
+// ECDSAKeyValue reinterprets the union as its ECDSAKeyValue member.
+func (u *CRYPT_XML_KEY_VALUE_Anonymous_e__Union) ECDSAKeyValue() *CRYPT_XML_KEY_ECDSA_KEY_VALUE {
+	return (*CRYPT_XML_KEY_ECDSA_KEY_VALUE)(unsafe.Pointer(u))
+}
+
+// Custom reinterprets the union as its Custom member.
+func (u *CRYPT_XML_KEY_VALUE_Anonymous_e__Union) Custom() *CRYPT_XML_BLOB {
+	return (*CRYPT_XML_BLOB)(unsafe.Pointer(u))
 }
 
 // CRYPT_XML_KEY_VALUE: https://learn.microsoft.com/windows/win32/api/cryptxml/ns-cryptxml-crypt_xml_key_value
@@ -2919,9 +3297,40 @@ type CRYPT_XML_X509DATA struct {
 }
 
 // CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// IssuerSerial reinterprets the union as its IssuerSerial member.
+func (u *CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union) IssuerSerial() *CRYPT_XML_ISSUER_SERIAL {
+	return (*CRYPT_XML_ISSUER_SERIAL)(unsafe.Pointer(u))
+}
+
+// SKI reinterprets the union as its SKI member.
+func (u *CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union) SKI() *CRYPT_XML_DATA_BLOB {
+	return (*CRYPT_XML_DATA_BLOB)(unsafe.Pointer(u))
+}
+
+// WszSubjectName reinterprets the union as its wszSubjectName member.
+func (u *CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union) WszSubjectName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// Certificate reinterprets the union as its Certificate member.
+func (u *CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union) Certificate() *CRYPT_XML_DATA_BLOB {
+	return (*CRYPT_XML_DATA_BLOB)(unsafe.Pointer(u))
+}
+
+// CRL reinterprets the union as its CRL member.
+func (u *CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union) CRL() *CRYPT_XML_DATA_BLOB {
+	return (*CRYPT_XML_DATA_BLOB)(unsafe.Pointer(u))
+}
+
+// Custom reinterprets the union as its Custom member.
+func (u *CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union) Custom() *CRYPT_XML_BLOB {
+	return (*CRYPT_XML_BLOB)(unsafe.Pointer(u))
 }
 
 // CRYPT_XML_X509DATA_ITEM: https://learn.microsoft.com/windows/win32/api/cryptxml/ns-cryptxml-crypt_xml_x509data_item
@@ -3076,9 +3485,20 @@ type HMAC_INFO struct {
 }
 
 // HTTPSPolicyCallbackData_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type HTTPSPolicyCallbackData_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// CbStruct reinterprets the union as its cbStruct member.
+func (u *HTTPSPolicyCallbackData_Anonymous_e__Union) CbStruct() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CbSize reinterprets the union as its cbSize member.
+func (u *HTTPSPolicyCallbackData_Anonymous_e__Union) CbSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // HTTPSPolicyCallbackData: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-httpspolicycallbackdata
@@ -3492,9 +3912,15 @@ type NCryptProviderName struct {
 }
 
 // OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PRevokedInfo reinterprets the union as its pRevokedInfo member.
+func (u *OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union) PRevokedInfo() **OCSP_BASIC_REVOKED_INFO {
+	return (**OCSP_BASIC_REVOKED_INFO)(unsafe.Pointer(u))
 }
 
 // OCSP_BASIC_RESPONSE_ENTRY: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-ocsp_basic_response_entry
@@ -3509,9 +3935,20 @@ type OCSP_BASIC_RESPONSE_ENTRY struct {
 }
 
 // OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// ByNameResponderId reinterprets the union as its ByNameResponderId member.
+func (u *OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union) ByNameResponderId() *CRYPT_INTEGER_BLOB {
+	return (*CRYPT_INTEGER_BLOB)(unsafe.Pointer(u))
+}
+
+// ByKeyResponderId reinterprets the union as its ByKeyResponderId member.
+func (u *OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union) ByKeyResponderId() *CRYPT_INTEGER_BLOB {
+	return (*CRYPT_INTEGER_BLOB)(unsafe.Pointer(u))
 }
 
 // OCSP_BASIC_RESPONSE_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-ocsp_basic_response_info
@@ -3738,9 +4175,25 @@ type SIGNER_BLOB_INFO struct {
 }
 
 // SIGNER_CERT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SIGNER_CERT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PwszSpcFile reinterprets the union as its pwszSpcFile member.
+func (u *SIGNER_CERT_Anonymous_e__Union) PwszSpcFile() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PCertStoreInfo reinterprets the union as its pCertStoreInfo member.
+func (u *SIGNER_CERT_Anonymous_e__Union) PCertStoreInfo() **SIGNER_CERT_STORE_INFO {
+	return (**SIGNER_CERT_STORE_INFO)(unsafe.Pointer(u))
+}
+
+// PSpcChainInfo reinterprets the union as its pSpcChainInfo member.
+func (u *SIGNER_CERT_Anonymous_e__Union) PSpcChainInfo() **SIGNER_SPC_CHAIN_INFO {
+	return (**SIGNER_SPC_CHAIN_INFO)(unsafe.Pointer(u))
 }
 
 // SIGNER_CERT: https://learn.microsoft.com/windows/win32/SecCrypto/signer-cert
@@ -3767,9 +4220,30 @@ type SIGNER_CONTEXT struct {
 }
 
 // SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PfnAuthenticodeDigestSign reinterprets the union as its pfnAuthenticodeDigestSign member.
+func (u *SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union) PfnAuthenticodeDigestSign() *PFN_AUTHENTICODE_DIGEST_SIGN {
+	return (*PFN_AUTHENTICODE_DIGEST_SIGN)(unsafe.Pointer(u))
+}
+
+// PfnAuthenticodeDigestSignWithFileHandle reinterprets the union as its pfnAuthenticodeDigestSignWithFileHandle member.
+func (u *SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union) PfnAuthenticodeDigestSignWithFileHandle() *PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE {
+	return (*PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE)(unsafe.Pointer(u))
+}
+
+// PfnAuthenticodeDigestSignEx reinterprets the union as its pfnAuthenticodeDigestSignEx member.
+func (u *SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union) PfnAuthenticodeDigestSignEx() *PFN_AUTHENTICODE_DIGEST_SIGN_EX {
+	return (*PFN_AUTHENTICODE_DIGEST_SIGN_EX)(unsafe.Pointer(u))
+}
+
+// PfnAuthenticodeDigestSignExWithFileHandle reinterprets the union as its pfnAuthenticodeDigestSignExWithFileHandle member.
+func (u *SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union) PfnAuthenticodeDigestSignExWithFileHandle() *PFN_AUTHENTICODE_DIGEST_SIGN_EX_WITHFILEHANDLE {
+	return (*PFN_AUTHENTICODE_DIGEST_SIGN_EX_WITHFILEHANDLE)(unsafe.Pointer(u))
 }
 
 // SIGNER_DIGEST_SIGN_INFO: https://learn.microsoft.com/windows/win32/SecCrypto/signer-digest-sign-info
@@ -3806,9 +4280,20 @@ type SIGNER_FILE_INFO struct {
 }
 
 // SIGNER_PROVIDER_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SIGNER_PROVIDER_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PwszPvkFileName reinterprets the union as its pwszPvkFileName member.
+func (u *SIGNER_PROVIDER_INFO_Anonymous_e__Union) PwszPvkFileName() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PwszKeyContainer reinterprets the union as its pwszKeyContainer member.
+func (u *SIGNER_PROVIDER_INFO_Anonymous_e__Union) PwszKeyContainer() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // SIGNER_PROVIDER_INFO: https://learn.microsoft.com/windows/win32/SecCrypto/signer-provider-info
@@ -3822,9 +4307,15 @@ type SIGNER_PROVIDER_INFO struct {
 }
 
 // SIGNER_SIGNATURE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SIGNER_SIGNATURE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PAttrAuthcode reinterprets the union as its pAttrAuthcode member.
+func (u *SIGNER_SIGNATURE_INFO_Anonymous_e__Union) PAttrAuthcode() **SIGNER_ATTR_AUTHCODE {
+	return (**SIGNER_ATTR_AUTHCODE)(unsafe.Pointer(u))
 }
 
 // SIGNER_SIGNATURE_INFO: https://learn.microsoft.com/windows/win32/SecCrypto/signer-signature-info
@@ -3846,9 +4337,20 @@ type SIGNER_SPC_CHAIN_INFO struct {
 }
 
 // SIGNER_SUBJECT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SIGNER_SUBJECT_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PSignerFileInfo reinterprets the union as its pSignerFileInfo member.
+func (u *SIGNER_SUBJECT_INFO_Anonymous_e__Union) PSignerFileInfo() **SIGNER_FILE_INFO {
+	return (**SIGNER_FILE_INFO)(unsafe.Pointer(u))
+}
+
+// PSignerBlobInfo reinterprets the union as its pSignerBlobInfo member.
+func (u *SIGNER_SUBJECT_INFO_Anonymous_e__Union) PSignerBlobInfo() **SIGNER_BLOB_INFO {
+	return (**SIGNER_BLOB_INFO)(unsafe.Pointer(u))
 }
 
 // SIGNER_SUBJECT_INFO: https://learn.microsoft.com/windows/win32/SecCrypto/signer-subject-info

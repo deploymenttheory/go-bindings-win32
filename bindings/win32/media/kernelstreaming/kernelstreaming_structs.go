@@ -179,21 +179,54 @@ type DEVCAPS struct {
 }
 
 // DS3DVECTOR_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DS3DVECTOR_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// X reinterprets the union as its x member.
+func (u *DS3DVECTOR_Anonymous1_e__Union) X() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvX reinterprets the union as its dvX member.
+func (u *DS3DVECTOR_Anonymous1_e__Union) DvX() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // DS3DVECTOR_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DS3DVECTOR_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// Y reinterprets the union as its y member.
+func (u *DS3DVECTOR_Anonymous2_e__Union) Y() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvY reinterprets the union as its dvY member.
+func (u *DS3DVECTOR_Anonymous2_e__Union) DvY() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
 // DS3DVECTOR_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DS3DVECTOR_Anonymous3_e__Union struct {
 	Data [1]uint32
+}
+
+// Z reinterprets the union as its z member.
+func (u *DS3DVECTOR_Anonymous3_e__Union) Z() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DvZ reinterprets the union as its dvZ member.
+func (u *DS3DVECTOR_Anonymous3_e__Union) DvZ() *float32 {
+	return (*float32)(unsafe.Pointer(u))
 }
 
 type DS3DVECTOR struct {
@@ -267,15 +300,37 @@ type KSALGORITHMINSTANCE_SYSTEM_NOISE_SUPPRESS struct {
 }
 
 // KSALLOCATOR_FRAMING_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSALLOCATOR_FRAMING_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// OptionsFlags reinterprets the union as its OptionsFlags member.
+func (u *KSALLOCATOR_FRAMING_Anonymous1_e__Union) OptionsFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RequirementsFlags reinterprets the union as its RequirementsFlags member.
+func (u *KSALLOCATOR_FRAMING_Anonymous1_e__Union) RequirementsFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // KSALLOCATOR_FRAMING_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSALLOCATOR_FRAMING_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// FileAlignment reinterprets the union as its FileAlignment member.
+func (u *KSALLOCATOR_FRAMING_Anonymous2_e__Union) FileAlignment() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FramePitch reinterprets the union as its FramePitch member.
+func (u *KSALLOCATOR_FRAMING_Anonymous2_e__Union) FramePitch() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 type KSALLOCATOR_FRAMING struct {
@@ -504,10 +559,28 @@ type KSAUDIOMODULE_DESCRIPTOR struct {
 	Name         [128]uint16
 }
 
+type KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union_ProviderId_e__Struct struct {
+	DeviceId   win32.GUID
+	ClassId    win32.GUID
+	InstanceId uint32
+	Reserved   uint32
+}
+
 // KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// ProviderId reinterprets the union as its ProviderId member.
+func (u *KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union) ProviderId() *KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union_ProviderId_e__Struct {
+	return (*KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union_ProviderId_e__Struct)(unsafe.Pointer(u))
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *KSAUDIOMODULE_NOTIFICATION_Anonymous_e__Union) Alignment() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type KSAUDIOMODULE_NOTIFICATION struct {
@@ -568,9 +641,20 @@ type KSAUDIO_MIXLEVEL struct {
 }
 
 // KSAUDIO_MIX_CAPS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSAUDIO_MIX_CAPS_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Reset reinterprets the union as its Reset member.
+func (u *KSAUDIO_MIX_CAPS_Anonymous_e__Union) Reset() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Resolution reinterprets the union as its Resolution member.
+func (u *KSAUDIO_MIX_CAPS_Anonymous_e__Union) Resolution() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 type KSAUDIO_MIX_CAPS struct {
@@ -799,9 +883,40 @@ type KSCAMERA_EXTENDEDPROP_ROI_WHITEBALANCE struct {
 }
 
 // KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union struct {
 	Data [1]uint64
+}
+
+// Dbl reinterprets the union as its dbl member.
+func (u *KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union) Dbl() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// Ull reinterprets the union as its ull member.
+func (u *KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union) Ull() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Ul reinterprets the union as its ul member.
+func (u *KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union) Ul() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Ratio reinterprets the union as its ratio member.
+func (u *KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union) Ratio() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// L reinterprets the union as its l member.
+func (u *KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union) L() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Ll reinterprets the union as its ll member.
+func (u *KSCAMERA_EXTENDEDPROP_VALUE_Value_e__Union) Ll() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type KSCAMERA_EXTENDEDPROP_VALUE struct {
@@ -948,10 +1063,26 @@ type KSCAMERA_PROFILE_MEDIAINFO struct {
 	Data3        uint32
 }
 
+type KSCAMERA_PROFILE_PININFO_Anonymous_e__Union_Anonymous_e__Struct struct {
+	PinIndex          uint16
+	ProfileSensorType uint16
+}
+
 // KSCAMERA_PROFILE_PININFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSCAMERA_PROFILE_PININFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *KSCAMERA_PROFILE_PININFO_Anonymous_e__Union) Anonymous() *KSCAMERA_PROFILE_PININFO_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*KSCAMERA_PROFILE_PININFO_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *KSCAMERA_PROFILE_PININFO_Anonymous_e__Union) Reserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type KSCAMERA_PROFILE_PININFO struct {
@@ -1093,10 +1224,31 @@ type KSCORRELATED_TIME struct {
 	SystemTime int64
 }
 
+type KSDATAFORMAT_Anonymous_e__Struct struct {
+	FormatSize  uint32
+	Flags       uint32
+	SampleSize  uint32
+	Reserved    uint32
+	MajorFormat win32.GUID
+	SubFormat   win32.GUID
+	Specifier   win32.GUID
+}
+
 // KSDATAFORMAT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSDATAFORMAT struct {
 	Data [8]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *KSDATAFORMAT) Anonymous() *KSDATAFORMAT_Anonymous_e__Struct {
+	return (*KSDATAFORMAT_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *KSDATAFORMAT) Alignment() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type KSDATAFORMAT_SPECIFIER_AC3_AUDIO struct {
@@ -1494,10 +1646,23 @@ type KSDATARANGE_MUSIC struct {
 type KSDEGRADESETID_Standard struct {
 }
 
+type KSDEVICE_PROFILE_INFO_Anonymous_e__Union_Camera_e__Struct struct {
+	Info             KSCAMERA_PROFILE_INFO
+	Reserved         uint32
+	ConcurrencyCount uint32
+	Concurrency      *KSCAMERA_PROFILE_CONCURRENCYINFO
+}
+
 // KSDEVICE_PROFILE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSDEVICE_PROFILE_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// Camera reinterprets the union as its Camera member.
+func (u *KSDEVICE_PROFILE_INFO_Anonymous_e__Union) Camera() *KSDEVICE_PROFILE_INFO_Anonymous_e__Union_Camera_e__Struct {
+	return (*KSDEVICE_PROFILE_INFO_Anonymous_e__Union_Camera_e__Struct)(unsafe.Pointer(u))
 }
 
 type KSDEVICE_PROFILE_INFO struct {
@@ -1593,10 +1758,42 @@ type KSERROR struct {
 	Status  uint32
 }
 
+type KSEVENTDATA_Anonymous_e__Union_Alignment_e__Struct struct {
+	Unused    unsafe.Pointer
+	Alignment [2]uintptr
+}
+
+type KSEVENTDATA_Anonymous_e__Union_EventHandle_e__Struct struct {
+	Event    foundation.HANDLE
+	Reserved [2]uintptr
+}
+
+type KSEVENTDATA_Anonymous_e__Union_SemaphoreHandle_e__Struct struct {
+	Semaphore  foundation.HANDLE
+	Reserved   uint32
+	Adjustment int32
+}
+
 // KSEVENTDATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSEVENTDATA_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// EventHandle reinterprets the union as its EventHandle member.
+func (u *KSEVENTDATA_Anonymous_e__Union) EventHandle() *KSEVENTDATA_Anonymous_e__Union_EventHandle_e__Struct {
+	return (*KSEVENTDATA_Anonymous_e__Union_EventHandle_e__Struct)(unsafe.Pointer(u))
+}
+
+// SemaphoreHandle reinterprets the union as its SemaphoreHandle member.
+func (u *KSEVENTDATA_Anonymous_e__Union) SemaphoreHandle() *KSEVENTDATA_Anonymous_e__Union_SemaphoreHandle_e__Struct {
+	return (*KSEVENTDATA_Anonymous_e__Union_SemaphoreHandle_e__Struct)(unsafe.Pointer(u))
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *KSEVENTDATA_Anonymous_e__Union) Alignment() *KSEVENTDATA_Anonymous_e__Union_Alignment_e__Struct {
+	return (*KSEVENTDATA_Anonymous_e__Union_Alignment_e__Struct)(unsafe.Pointer(u))
 }
 
 type KSEVENTDATA struct {
@@ -1703,10 +1900,27 @@ type KSGOP_USERDATA struct {
 	L21Data   [3]foundation.CHAR
 }
 
+type KSIDENTIFIER_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Set   win32.GUID
+	Id    uint32
+	Flags uint32
+}
+
 // KSIDENTIFIER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSIDENTIFIER_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *KSIDENTIFIER_Anonymous_e__Union) Anonymous() *KSIDENTIFIER_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*KSIDENTIFIER_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *KSIDENTIFIER_Anonymous_e__Union) Alignment() *int64 {
+	return (*int64)(unsafe.Pointer(u))
 }
 
 type KSIDENTIFIER struct {
@@ -2304,16 +2518,58 @@ type KSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE_S struct {
 	CY uint32
 }
 
+type KSPROPERTY_BOUNDS_LONG_Anonymous1_e__Struct struct {
+	SignedMinimum int32
+	SignedMaximum int32
+}
+
+type KSPROPERTY_BOUNDS_LONG_Anonymous2_e__Struct struct {
+	UnsignedMinimum uint32
+	UnsignedMaximum uint32
+}
+
 // KSPROPERTY_BOUNDS_LONG is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSPROPERTY_BOUNDS_LONG struct {
 	Data [2]uint32
 }
 
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *KSPROPERTY_BOUNDS_LONG) Anonymous1() *KSPROPERTY_BOUNDS_LONG_Anonymous1_e__Struct {
+	return (*KSPROPERTY_BOUNDS_LONG_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *KSPROPERTY_BOUNDS_LONG) Anonymous2() *KSPROPERTY_BOUNDS_LONG_Anonymous2_e__Struct {
+	return (*KSPROPERTY_BOUNDS_LONG_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
+type KSPROPERTY_BOUNDS_LONGLONG_Anonymous1_e__Struct struct {
+	SignedMinimum int64
+	SignedMaximum int64
+}
+
+type KSPROPERTY_BOUNDS_LONGLONG_Anonymous2_e__Struct struct {
+	UnsignedMinimum uint64
+	UnsignedMaximum uint64
+}
+
 // KSPROPERTY_BOUNDS_LONGLONG is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSPROPERTY_BOUNDS_LONGLONG struct {
 	Data [2]uint64
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *KSPROPERTY_BOUNDS_LONGLONG) Anonymous1() *KSPROPERTY_BOUNDS_LONGLONG_Anonymous1_e__Struct {
+	return (*KSPROPERTY_BOUNDS_LONGLONG_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *KSPROPERTY_BOUNDS_LONGLONG) Anonymous2() *KSPROPERTY_BOUNDS_LONGLONG_Anonymous2_e__Struct {
+	return (*KSPROPERTY_BOUNDS_LONGLONG_Anonymous2_e__Struct)(unsafe.Pointer(u))
 }
 
 type KSPROPERTY_CAMERACONTROL_FLASH_S struct {
@@ -2356,9 +2612,20 @@ type KSPROPERTY_CAMERACONTROL_NODE_S2 struct {
 }
 
 // KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Capabilities reinterprets the union as its Capabilities member.
+func (u *KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union) Capabilities() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Configuration reinterprets the union as its Configuration member.
+func (u *KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S_Anonymous_e__Union) Configuration() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S struct {
@@ -2441,9 +2708,35 @@ type KSPROPERTY_DROPPEDFRAMES_CURRENT_S struct {
 }
 
 // KSPROPERTY_EXTDEVICE_S_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSPROPERTY_EXTDEVICE_S_u_e__Union struct {
 	Data [130]uint32
+}
+
+// Capabilities reinterprets the union as its Capabilities member.
+func (u *KSPROPERTY_EXTDEVICE_S_u_e__Union) Capabilities() *DEVCAPS {
+	return (*DEVCAPS)(unsafe.Pointer(u))
+}
+
+// DevPort reinterprets the union as its DevPort member.
+func (u *KSPROPERTY_EXTDEVICE_S_u_e__Union) DevPort() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PowerState reinterprets the union as its PowerState member.
+func (u *KSPROPERTY_EXTDEVICE_S_u_e__Union) PowerState() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PawchString reinterprets the union as its pawchString member.
+func (u *KSPROPERTY_EXTDEVICE_S_u_e__Union) PawchString() *[260]uint16 {
+	return (*[260]uint16)(unsafe.Pointer(u))
+}
+
+// NodeUniqueID reinterprets the union as its NodeUniqueID member.
+func (u *KSPROPERTY_EXTDEVICE_S_u_e__Union) NodeUniqueID() *[2]uint32 {
+	return (*[2]uint32)(unsafe.Pointer(u))
 }
 
 type KSPROPERTY_EXTDEVICE_S struct {
@@ -2451,10 +2744,68 @@ type KSPROPERTY_EXTDEVICE_S struct {
 	U        KSPROPERTY_EXTDEVICE_S_u_e__Union
 }
 
+type KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_RawAVC_e__Struct struct {
+	PayloadSize uint32
+	Payload     [512]byte
+}
+
+type KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_Timecode_e__Struct struct {
+	Frame  byte
+	Second byte
+	Minute byte
+	Hour   byte
+}
+
 // KSPROPERTY_EXTXPORT_NODE_S_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSPROPERTY_EXTXPORT_NODE_S_u_e__Union struct {
 	Data [129]uint32
+}
+
+// Capabilities reinterprets the union as its Capabilities member.
+func (u *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union) Capabilities() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// SignalMode reinterprets the union as its SignalMode member.
+func (u *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union) SignalMode() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LoadMedium reinterprets the union as its LoadMedium member.
+func (u *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union) LoadMedium() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// MediumInfo reinterprets the union as its MediumInfo member.
+func (u *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union) MediumInfo() *MEDIUM_INFO {
+	return (*MEDIUM_INFO)(unsafe.Pointer(u))
+}
+
+// XPrtState reinterprets the union as its XPrtState member.
+func (u *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union) XPrtState() *TRANSPORT_STATE {
+	return (*TRANSPORT_STATE)(unsafe.Pointer(u))
+}
+
+// Timecode reinterprets the union as its Timecode member.
+func (u *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union) Timecode() *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_Timecode_e__Struct {
+	return (*KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_Timecode_e__Struct)(unsafe.Pointer(u))
+}
+
+// DwTimecode reinterprets the union as its dwTimecode member.
+func (u *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union) DwTimecode() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwAbsTrackNumber reinterprets the union as its dwAbsTrackNumber member.
+func (u *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union) DwAbsTrackNumber() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RawAVC reinterprets the union as its RawAVC member.
+func (u *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union) RawAVC() *KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_RawAVC_e__Struct {
+	return (*KSPROPERTY_EXTXPORT_NODE_S_u_e__Union_RawAVC_e__Struct)(unsafe.Pointer(u))
 }
 
 type KSPROPERTY_EXTXPORT_NODE_S struct {
@@ -2462,10 +2813,68 @@ type KSPROPERTY_EXTXPORT_NODE_S struct {
 	U            KSPROPERTY_EXTXPORT_NODE_S_u_e__Union
 }
 
+type KSPROPERTY_EXTXPORT_S_u_e__Union_RawAVC_e__Struct struct {
+	PayloadSize uint32
+	Payload     [512]byte
+}
+
+type KSPROPERTY_EXTXPORT_S_u_e__Union_Timecode_e__Struct struct {
+	Frame  byte
+	Second byte
+	Minute byte
+	Hour   byte
+}
+
 // KSPROPERTY_EXTXPORT_S_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSPROPERTY_EXTXPORT_S_u_e__Union struct {
 	Data [129]uint32
+}
+
+// Capabilities reinterprets the union as its Capabilities member.
+func (u *KSPROPERTY_EXTXPORT_S_u_e__Union) Capabilities() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// SignalMode reinterprets the union as its SignalMode member.
+func (u *KSPROPERTY_EXTXPORT_S_u_e__Union) SignalMode() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LoadMedium reinterprets the union as its LoadMedium member.
+func (u *KSPROPERTY_EXTXPORT_S_u_e__Union) LoadMedium() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// MediumInfo reinterprets the union as its MediumInfo member.
+func (u *KSPROPERTY_EXTXPORT_S_u_e__Union) MediumInfo() *MEDIUM_INFO {
+	return (*MEDIUM_INFO)(unsafe.Pointer(u))
+}
+
+// XPrtState reinterprets the union as its XPrtState member.
+func (u *KSPROPERTY_EXTXPORT_S_u_e__Union) XPrtState() *TRANSPORT_STATE {
+	return (*TRANSPORT_STATE)(unsafe.Pointer(u))
+}
+
+// Timecode reinterprets the union as its Timecode member.
+func (u *KSPROPERTY_EXTXPORT_S_u_e__Union) Timecode() *KSPROPERTY_EXTXPORT_S_u_e__Union_Timecode_e__Struct {
+	return (*KSPROPERTY_EXTXPORT_S_u_e__Union_Timecode_e__Struct)(unsafe.Pointer(u))
+}
+
+// DwTimecode reinterprets the union as its dwTimecode member.
+func (u *KSPROPERTY_EXTXPORT_S_u_e__Union) DwTimecode() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwAbsTrackNumber reinterprets the union as its dwAbsTrackNumber member.
+func (u *KSPROPERTY_EXTXPORT_S_u_e__Union) DwAbsTrackNumber() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// RawAVC reinterprets the union as its RawAVC member.
+func (u *KSPROPERTY_EXTXPORT_S_u_e__Union) RawAVC() *KSPROPERTY_EXTXPORT_S_u_e__Union_RawAVC_e__Struct {
+	return (*KSPROPERTY_EXTXPORT_S_u_e__Union_RawAVC_e__Struct)(unsafe.Pointer(u))
 }
 
 type KSPROPERTY_EXTXPORT_S struct {
@@ -3000,9 +3409,20 @@ type KSP_NODE struct {
 }
 
 // KSP_PIN_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSP_PIN_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *KSP_PIN_Anonymous_e__Union) Reserved() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *KSP_PIN_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type KSP_PIN struct {
@@ -3049,9 +3469,20 @@ type KSRATE_CAPABILITY struct {
 }
 
 // KSRELATIVEEVENT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSRELATIVEEVENT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// ObjectHandle reinterprets the union as its ObjectHandle member.
+func (u *KSRELATIVEEVENT_Anonymous_e__Union) ObjectHandle() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
+}
+
+// ObjectPointer reinterprets the union as its ObjectPointer member.
+func (u *KSRELATIVEEVENT_Anonymous_e__Union) ObjectPointer() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type KSRELATIVEEVENT struct {
@@ -3222,10 +3653,25 @@ type KSSTREAM_UVC_METADATA struct {
 	EndOfFrameTimestamp   KSSTREAM_UVC_METADATATYPE_TIMESTAMP
 }
 
+type KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union) Anonymous() *KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// SCRToken reinterprets the union as its SCRToken member.
+func (u *KSSTREAM_UVC_METADATATYPE_TIMESTAMP_Anonymous_e__Union) SCRToken() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type KSSTREAM_UVC_METADATATYPE_TIMESTAMP struct {
@@ -3615,15 +4061,42 @@ type KS_DVD_YUV struct {
 }
 
 // KS_FRAME_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KS_FRAME_INFO_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// LSurfacePitch reinterprets the union as its lSurfacePitch member.
+func (u *KS_FRAME_INFO_Anonymous1_e__Union) LSurfacePitch() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Reserved1 reinterprets the union as its Reserved1 member.
+func (u *KS_FRAME_INFO_Anonymous1_e__Union) Reserved1() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type KS_FRAME_INFO_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Reserved3 uint32
+	Reserved4 uint32
+}
+
 // KS_FRAME_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KS_FRAME_INFO_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *KS_FRAME_INFO_Anonymous2_e__Union) Anonymous() *KS_FRAME_INFO_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*KS_FRAME_INFO_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// FrameCompletionNumber reinterprets the union as its FrameCompletionNumber member.
+func (u *KS_FRAME_INFO_Anonymous2_e__Union) FrameCompletionNumber() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type KS_FRAME_INFO struct {
@@ -3640,9 +4113,20 @@ type KS_FRAME_INFO struct {
 }
 
 // KS_FRAMING_ITEM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KS_FRAMING_ITEM_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// FileAlignment reinterprets the union as its FileAlignment member.
+func (u *KS_FRAMING_ITEM_Anonymous_e__Union) FileAlignment() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FramePitch reinterprets the union as its FramePitch member.
+func (u *KS_FRAMING_ITEM_Anonymous_e__Union) FramePitch() *int32 {
+	return (*int32)(unsafe.Pointer(u))
 }
 
 type KS_FRAMING_ITEM struct {
@@ -3782,9 +4266,25 @@ type KS_VBI_FRAME_INFO struct {
 }
 
 // KS_VIDEOINFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KS_VIDEOINFO_Anonymous_e__Union struct {
 	Data [259]uint32
+}
+
+// BmiColors reinterprets the union as its bmiColors member.
+func (u *KS_VIDEOINFO_Anonymous_e__Union) BmiColors() *[256]KS_RGBQUAD {
+	return (*[256]KS_RGBQUAD)(unsafe.Pointer(u))
+}
+
+// DwBitMasks reinterprets the union as its dwBitMasks member.
+func (u *KS_VIDEOINFO_Anonymous_e__Union) DwBitMasks() *[3]uint32 {
+	return (*[3]uint32)(unsafe.Pointer(u))
+}
+
+// TrueColorInfo reinterprets the union as its TrueColorInfo member.
+func (u *KS_VIDEOINFO_Anonymous_e__Union) TrueColorInfo() *KS_TRUECOLORINFO {
+	return (*KS_TRUECOLORINFO)(unsafe.Pointer(u))
 }
 
 type KS_VIDEOINFO struct {
@@ -3807,9 +4307,20 @@ type KS_VIDEOINFOHEADER struct {
 }
 
 // KS_VIDEOINFOHEADER2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type KS_VIDEOINFOHEADER2_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwControlFlags reinterprets the union as its dwControlFlags member.
+func (u *KS_VIDEOINFOHEADER2_Anonymous_e__Union) DwControlFlags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwReserved1 reinterprets the union as its dwReserved1 member.
+func (u *KS_VIDEOINFOHEADER2_Anonymous_e__Union) DwReserved1() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type KS_VIDEOINFOHEADER2 struct {
@@ -3862,10 +4373,27 @@ type MEDIUM_INFO struct {
 	RecordInhibit foundation.BOOL
 }
 
+type MF_MDL_SHARED_PAYLOAD_KEY_combined_e__Struct struct {
+	PHandle  uint32
+	FHandle  uint32
+	UPayload uint64
+}
+
 // MF_MDL_SHARED_PAYLOAD_KEY is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MF_MDL_SHARED_PAYLOAD_KEY struct {
 	Data [2]uint64
+}
+
+// Combined reinterprets the union as its combined member.
+func (u *MF_MDL_SHARED_PAYLOAD_KEY) Combined() *MF_MDL_SHARED_PAYLOAD_KEY_combined_e__Struct {
+	return (*MF_MDL_SHARED_PAYLOAD_KEY_combined_e__Struct)(unsafe.Pointer(u))
+}
+
+// GMDLHandle reinterprets the union as its GMDLHandle member.
+func (u *MF_MDL_SHARED_PAYLOAD_KEY) GMDLHandle() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
 }
 
 type NABTSFEC_BUFFER struct {

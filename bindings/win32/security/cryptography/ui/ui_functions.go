@@ -87,8 +87,12 @@ func CryptUIDlgSelectCertificateFromStore(hCertStore securitycryptography.HCERTS
 // CryptUIDlgViewCertificate calls CRYPTUI!CryptUIDlgViewCertificateW.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuidlgviewcertificatew
 // Minimum OS: windows5.1.2600.
-func CryptUIDlgViewCertificate(pCertViewInfo *CRYPTUI_VIEWCERTIFICATE_STRUCTW, pfPropertiesChanged *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCryptUIDlgViewCertificate.Addr(), uintptr(unsafe.Pointer(pCertViewInfo)), uintptr(unsafe.Pointer(pfPropertiesChanged)))
+func CryptUIDlgViewCertificate(pCertViewInfo *CRYPTUI_VIEWCERTIFICATE_STRUCTW, pfPropertiesChanged *bool) error {
+	_pfPropertiesChanged := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procCryptUIDlgViewCertificate.Addr(), uintptr(unsafe.Pointer(pCertViewInfo)), uintptr(win32.OutParam(unsafe.Pointer(_pfPropertiesChanged))))
+	if pfPropertiesChanged != nil {
+		*pfPropertiesChanged = *_pfPropertiesChanged != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -98,8 +102,12 @@ func CryptUIDlgViewCertificate(pCertViewInfo *CRYPTUI_VIEWCERTIFICATE_STRUCTW, p
 // CryptUIDlgViewCertificateA calls CRYPTUI!CryptUIDlgViewCertificateA.
 // https://learn.microsoft.com/windows/win32/api/cryptuiapi/nf-cryptuiapi-cryptuidlgviewcertificatea
 // Minimum OS: windows5.1.2600.
-func CryptUIDlgViewCertificateA(pCertViewInfo *CRYPTUI_VIEWCERTIFICATE_STRUCTA, pfPropertiesChanged *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCryptUIDlgViewCertificateA.Addr(), uintptr(unsafe.Pointer(pCertViewInfo)), uintptr(unsafe.Pointer(pfPropertiesChanged)))
+func CryptUIDlgViewCertificateA(pCertViewInfo *CRYPTUI_VIEWCERTIFICATE_STRUCTA, pfPropertiesChanged *bool) error {
+	_pfPropertiesChanged := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procCryptUIDlgViewCertificateA.Addr(), uintptr(unsafe.Pointer(pCertViewInfo)), uintptr(win32.OutParam(unsafe.Pointer(_pfPropertiesChanged))))
+	if pfPropertiesChanged != nil {
+		*pfPropertiesChanged = *_pfPropertiesChanged != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

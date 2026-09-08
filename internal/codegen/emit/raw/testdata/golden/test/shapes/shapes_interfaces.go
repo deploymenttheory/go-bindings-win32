@@ -10,6 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -158,4 +159,21 @@ func (self *ITest2) Extra(flag bool) error {
 	_flag := win32.Bool32(flag)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(_flag))
 	return win32.ErrIfFailed(int32(r1))
+}
+
+// GetMute dispatches through ITest2's vtable slot 18.
+func (self *ITest2) GetMute(muted *bool) error {
+	_muted := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_muted))))
+	if muted != nil {
+		*muted = *_muted != 0
+	}
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// IsSupported dispatches through ITest2's vtable slot 19.
+func (self *ITest2) IsSupported() (bool, error) {
+	_supported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_supported))))
+	return *_supported != 0, win32.ErrIfFailed(int32(r1))
 }

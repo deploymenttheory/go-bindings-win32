@@ -1642,8 +1642,12 @@ func (self *IComStaThreadPoolKnobs2) SetMaxCPULoad(pdwLoad int32) error {
 }
 
 // GetCPUMetricEnabled dispatches through IComStaThreadPoolKnobs2's vtable slot 16.
-func (self *IComStaThreadPoolKnobs2) GetCPUMetricEnabled(pbMetricEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMetricEnabled)))
+func (self *IComStaThreadPoolKnobs2) GetCPUMetricEnabled(pbMetricEnabled *bool) error {
+	_pbMetricEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbMetricEnabled))))
+	if pbMetricEnabled != nil {
+		*pbMetricEnabled = *_pbMetricEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1655,8 +1659,12 @@ func (self *IComStaThreadPoolKnobs2) SetCPUMetricEnabled(bMetricEnabled bool) er
 }
 
 // GetCreateThreadsAggressively dispatches through IComStaThreadPoolKnobs2's vtable slot 18.
-func (self *IComStaThreadPoolKnobs2) GetCreateThreadsAggressively(pbMetricEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMetricEnabled)))
+func (self *IComStaThreadPoolKnobs2) GetCreateThreadsAggressively(pbMetricEnabled *bool) error {
+	_pbMetricEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbMetricEnabled))))
+	if pbMetricEnabled != nil {
+		*pbMetricEnabled = *_pbMetricEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2094,14 +2102,22 @@ func (self *ICrmCompensator) BeginPrepare() error {
 var specICrmCompensator_PrepareRecord = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
 
 // PrepareRecord dispatches through ICrmCompensator's vtable slot 5.
-func (self *ICrmCompensator) PrepareRecord(crmLogRec CrmLogRecordRead, pfForget *foundation.BOOL) error {
-	r1, _, _ := win32.Call(self.LpVtbl[5], specICrmCompensator_PrepareRecord, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&crmLogRec)), uintptr(unsafe.Pointer(pfForget))).Tuple()
+func (self *ICrmCompensator) PrepareRecord(crmLogRec CrmLogRecordRead, pfForget *bool) error {
+	_pfForget := new(foundation.BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[5], specICrmCompensator_PrepareRecord, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&crmLogRec)), uintptr(win32.OutParam(unsafe.Pointer(_pfForget)))).Tuple()
+	if pfForget != nil {
+		*pfForget = *_pfForget != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // EndPrepare dispatches through ICrmCompensator's vtable slot 6.
-func (self *ICrmCompensator) EndPrepare(pfOkToPrepare *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfOkToPrepare)))
+func (self *ICrmCompensator) EndPrepare(pfOkToPrepare *bool) error {
+	_pfOkToPrepare := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfOkToPrepare))))
+	if pfOkToPrepare != nil {
+		*pfOkToPrepare = *_pfOkToPrepare != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2115,8 +2131,12 @@ func (self *ICrmCompensator) BeginCommit(fRecovery bool) error {
 var specICrmCompensator_CommitRecord = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
 
 // CommitRecord dispatches through ICrmCompensator's vtable slot 8.
-func (self *ICrmCompensator) CommitRecord(crmLogRec CrmLogRecordRead, pfForget *foundation.BOOL) error {
-	r1, _, _ := win32.Call(self.LpVtbl[8], specICrmCompensator_CommitRecord, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&crmLogRec)), uintptr(unsafe.Pointer(pfForget))).Tuple()
+func (self *ICrmCompensator) CommitRecord(crmLogRec CrmLogRecordRead, pfForget *bool) error {
+	_pfForget := new(foundation.BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[8], specICrmCompensator_CommitRecord, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&crmLogRec)), uintptr(win32.OutParam(unsafe.Pointer(_pfForget)))).Tuple()
+	if pfForget != nil {
+		*pfForget = *_pfForget != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2136,8 +2156,12 @@ func (self *ICrmCompensator) BeginAbort(fRecovery bool) error {
 var specICrmCompensator_AbortRecord = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false), win32.Word}}
 
 // AbortRecord dispatches through ICrmCompensator's vtable slot 11.
-func (self *ICrmCompensator) AbortRecord(crmLogRec CrmLogRecordRead, pfForget *foundation.BOOL) error {
-	r1, _, _ := win32.Call(self.LpVtbl[11], specICrmCompensator_AbortRecord, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&crmLogRec)), uintptr(unsafe.Pointer(pfForget))).Tuple()
+func (self *ICrmCompensator) AbortRecord(crmLogRec CrmLogRecordRead, pfForget *bool) error {
+	_pfForget := new(foundation.BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[11], specICrmCompensator_AbortRecord, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&crmLogRec)), uintptr(win32.OutParam(unsafe.Pointer(_pfForget)))).Tuple()
+	if pfForget != nil {
+		*pfForget = *_pfForget != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2580,8 +2604,12 @@ func (self *IGetAppTrackerData) GetApplicationProcesses(PartitionId *win32.GUID,
 }
 
 // GetApplicationProcessDetails dispatches through IGetAppTrackerData's vtable slot 4.
-func (self *IGetAppTrackerData) GetApplicationProcessDetails(ApplicationInstanceId *win32.GUID, ProcessId uint32, Flags uint32, Summary *ApplicationProcessSummary, Statistics *ApplicationProcessStatistics, RecycleInfo *ApplicationProcessRecycleInfo, AnyComponentsHangMonitored *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ApplicationInstanceId)), uintptr(ProcessId), uintptr(Flags), uintptr(unsafe.Pointer(Summary)), uintptr(unsafe.Pointer(Statistics)), uintptr(unsafe.Pointer(RecycleInfo)), uintptr(unsafe.Pointer(AnyComponentsHangMonitored)))
+func (self *IGetAppTrackerData) GetApplicationProcessDetails(ApplicationInstanceId *win32.GUID, ProcessId uint32, Flags uint32, Summary *ApplicationProcessSummary, Statistics *ApplicationProcessStatistics, RecycleInfo *ApplicationProcessRecycleInfo, AnyComponentsHangMonitored *bool) error {
+	_AnyComponentsHangMonitored := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ApplicationInstanceId)), uintptr(ProcessId), uintptr(Flags), uintptr(unsafe.Pointer(Summary)), uintptr(unsafe.Pointer(Statistics)), uintptr(unsafe.Pointer(RecycleInfo)), uintptr(win32.OutParam(unsafe.Pointer(_AnyComponentsHangMonitored))))
+	if AnyComponentsHangMonitored != nil {
+		*AnyComponentsHangMonitored = *_AnyComponentsHangMonitored != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

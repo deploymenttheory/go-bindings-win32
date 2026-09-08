@@ -127,8 +127,12 @@ func FreeMemoryJobObject(Buffer unsafe.Pointer) {
 // IsProcessInJob calls KERNEL32!IsProcessInJob.
 // https://learn.microsoft.com/windows/win32/api/jobapi/nf-jobapi-isprocessinjob
 // Minimum OS: windows5.1.2600.
-func IsProcessInJob(ProcessHandle foundation.HANDLE, JobHandle foundation.HANDLE, Result *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procIsProcessInJob.Addr(), uintptr(ProcessHandle), uintptr(JobHandle), uintptr(unsafe.Pointer(Result)))
+func IsProcessInJob(ProcessHandle foundation.HANDLE, JobHandle foundation.HANDLE, Result *bool) error {
+	_Result := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procIsProcessInJob.Addr(), uintptr(ProcessHandle), uintptr(JobHandle), uintptr(win32.OutParam(unsafe.Pointer(_Result))))
+	if Result != nil {
+		*Result = *_Result != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

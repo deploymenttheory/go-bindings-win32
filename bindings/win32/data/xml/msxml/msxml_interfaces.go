@@ -3656,10 +3656,10 @@ func (self *IXMLDSOControl) Put_XMLDocument(ppDoc *IXMLDOMDocument) error {
 }
 
 // Get_JavaDSOCompatible dispatches through IXMLDSOControl's vtable slot 9.
-func (self *IXMLDSOControl) Get_JavaDSOCompatible() (foundation.BOOL, error) {
+func (self *IXMLDSOControl) Get_JavaDSOCompatible() (bool, error) {
 	_fJavaDSOCompatible := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fJavaDSOCompatible))))
-	return *_fJavaDSOCompatible, win32.ErrIfFailed(int32(r1))
+	return *_fJavaDSOCompatible != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_JavaDSOCompatible dispatches through IXMLDSOControl's vtable slot 10.

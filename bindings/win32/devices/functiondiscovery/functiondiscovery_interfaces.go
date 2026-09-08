@@ -204,14 +204,22 @@ type IFunctionDiscoveryProviderQuery struct {
 var IID_IFunctionDiscoveryProviderQuery = win32.GUID{Data1: 0x6876ea98, Data2: 0xbaec, Data3: 0x46db, Data4: [8]byte{0xbc, 0x20, 0x75, 0xa7, 0x6e, 0x26, 0x7a, 0x3a}}
 
 // IsInstanceQuery dispatches through IFunctionDiscoveryProviderQuery's vtable slot 3.
-func (self *IFunctionDiscoveryProviderQuery) IsInstanceQuery(pisInstanceQuery *foundation.BOOL, ppszConstraintValue **uint16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisInstanceQuery)), uintptr(unsafe.Pointer(ppszConstraintValue)))
+func (self *IFunctionDiscoveryProviderQuery) IsInstanceQuery(pisInstanceQuery *bool, ppszConstraintValue **uint16) error {
+	_pisInstanceQuery := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pisInstanceQuery))), uintptr(unsafe.Pointer(ppszConstraintValue)))
+	if pisInstanceQuery != nil {
+		*pisInstanceQuery = *_pisInstanceQuery != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSubcategoryQuery dispatches through IFunctionDiscoveryProviderQuery's vtable slot 4.
-func (self *IFunctionDiscoveryProviderQuery) IsSubcategoryQuery(pisSubcategoryQuery *foundation.BOOL, ppszConstraintValue **uint16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisSubcategoryQuery)), uintptr(unsafe.Pointer(ppszConstraintValue)))
+func (self *IFunctionDiscoveryProviderQuery) IsSubcategoryQuery(pisSubcategoryQuery *bool, ppszConstraintValue **uint16) error {
+	_pisSubcategoryQuery := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pisSubcategoryQuery))), uintptr(unsafe.Pointer(ppszConstraintValue)))
+	if pisSubcategoryQuery != nil {
+		*pisSubcategoryQuery = *_pisSubcategoryQuery != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

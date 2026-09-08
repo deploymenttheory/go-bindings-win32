@@ -965,8 +965,12 @@ func BindImageEx(Flags uint32, ImageName foundation.PSTR, DllPath foundation.PST
 // CheckRemoteDebuggerPresent calls KERNEL32!CheckRemoteDebuggerPresent.
 // https://learn.microsoft.com/windows/win32/api/debugapi/nf-debugapi-checkremotedebuggerpresent
 // Minimum OS: windows6.0.6000.
-func CheckRemoteDebuggerPresent(hProcess foundation.HANDLE, pbDebuggerPresent *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCheckRemoteDebuggerPresent.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pbDebuggerPresent)))
+func CheckRemoteDebuggerPresent(hProcess foundation.HANDLE, pbDebuggerPresent *bool) error {
+	_pbDebuggerPresent := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procCheckRemoteDebuggerPresent.Addr(), uintptr(hProcess), uintptr(win32.OutParam(unsafe.Pointer(_pbDebuggerPresent))))
+	if pbDebuggerPresent != nil {
+		*pbDebuggerPresent = *_pbDebuggerPresent != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1396,8 +1400,12 @@ func GetThreadSelectorEntry(hThread foundation.HANDLE, dwSelector uint32, lpSele
 // GetThreadWaitChain calls ADVAPI32!GetThreadWaitChain.
 // https://learn.microsoft.com/windows/win32/api/wct/nf-wct-getthreadwaitchain
 // Minimum OS: windows6.0.6000.
-func GetThreadWaitChain(WctHandle unsafe.Pointer, Context uintptr, Flags WAIT_CHAIN_THREAD_OPTIONS, ThreadId uint32, NodeCount *uint32, NodeInfoArray *WAITCHAIN_NODE_INFO, IsCycle *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetThreadWaitChain.Addr(), uintptr(unsafe.Pointer(WctHandle)), uintptr(Context), uintptr(Flags), uintptr(ThreadId), uintptr(unsafe.Pointer(NodeCount)), uintptr(unsafe.Pointer(NodeInfoArray)), uintptr(unsafe.Pointer(IsCycle)))
+func GetThreadWaitChain(WctHandle unsafe.Pointer, Context uintptr, Flags WAIT_CHAIN_THREAD_OPTIONS, ThreadId uint32, NodeCount *uint32, NodeInfoArray *WAITCHAIN_NODE_INFO, IsCycle *bool) error {
+	_IsCycle := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procGetThreadWaitChain.Addr(), uintptr(unsafe.Pointer(WctHandle)), uintptr(Context), uintptr(Flags), uintptr(ThreadId), uintptr(unsafe.Pointer(NodeCount)), uintptr(unsafe.Pointer(NodeInfoArray)), uintptr(win32.OutParam(unsafe.Pointer(_IsCycle))))
+	if IsCycle != nil {
+		*IsCycle = *_IsCycle != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

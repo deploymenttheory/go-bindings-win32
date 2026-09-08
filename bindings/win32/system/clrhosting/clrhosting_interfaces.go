@@ -133,9 +133,13 @@ func (self *ICLRAssemblyIdentityManager) GetProbingAssembliesFromReference(dwMac
 }
 
 // IsStronglyNamed dispatches through ICLRAssemblyIdentityManager's vtable slot 9.
-func (self *ICLRAssemblyIdentityManager) IsStronglyNamed(pwzAssemblyIdentity string, pbIsStronglyNamed *foundation.BOOL) error {
+func (self *ICLRAssemblyIdentityManager) IsStronglyNamed(pwzAssemblyIdentity string, pbIsStronglyNamed *bool) error {
 	_pwzAssemblyIdentity := win32.UTF16Ptr(pwzAssemblyIdentity)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzAssemblyIdentity)), uintptr(unsafe.Pointer(pbIsStronglyNamed)))
+	_pbIsStronglyNamed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzAssemblyIdentity)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsStronglyNamed))))
+	if pbIsStronglyNamed != nil {
+		*pbIsStronglyNamed = *_pbIsStronglyNamed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -226,8 +230,12 @@ func (self *ICLRDebugManager) GetDacl(pacl **security.ACL) error {
 }
 
 // IsDebuggerAttached dispatches through ICLRDebugManager's vtable slot 8.
-func (self *ICLRDebugManager) IsDebuggerAttached(pbAttached *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAttached)))
+func (self *ICLRDebugManager) IsDebuggerAttached(pbAttached *bool) error {
+	_pbAttached := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbAttached))))
+	if pbAttached != nil {
+		*pbAttached = *_pbAttached != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -703,10 +711,10 @@ func (self *ICLRRuntimeInfo) GetRuntimeDirectory(pwzBuffer foundation.PWSTR, pcc
 }
 
 // IsLoaded dispatches through ICLRRuntimeInfo's vtable slot 5.
-func (self *ICLRRuntimeInfo) IsLoaded(hndProcess foundation.HANDLE) (foundation.BOOL, error) {
+func (self *ICLRRuntimeInfo) IsLoaded(hndProcess foundation.HANDLE) (bool, error) {
 	_pbLoaded := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hndProcess), uintptr(win32.OutParam(unsafe.Pointer(_pbLoaded))))
-	return *_pbLoaded, win32.ErrIfFailed(int32(r1))
+	return *_pbLoaded != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // LoadErrorString dispatches through ICLRRuntimeInfo's vtable slot 6.
@@ -737,10 +745,10 @@ func (self *ICLRRuntimeInfo) GetInterface(rclsid *win32.GUID, riid *win32.GUID) 
 }
 
 // IsLoadable dispatches through ICLRRuntimeInfo's vtable slot 10.
-func (self *ICLRRuntimeInfo) IsLoadable() (foundation.BOOL, error) {
+func (self *ICLRRuntimeInfo) IsLoadable() (bool, error) {
 	_pbLoadable := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbLoadable))))
-	return *_pbLoadable, win32.ErrIfFailed(int32(r1))
+	return *_pbLoadable != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDefaultStartupFlags dispatches through ICLRRuntimeInfo's vtable slot 11.
@@ -763,8 +771,12 @@ func (self *ICLRRuntimeInfo) BindAsLegacyV2Runtime() error {
 }
 
 // IsStarted dispatches through ICLRRuntimeInfo's vtable slot 14.
-func (self *ICLRRuntimeInfo) IsStarted(pbStarted *foundation.BOOL, pdwStartupFlags *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbStarted)), uintptr(unsafe.Pointer(pdwStartupFlags)))
+func (self *ICLRRuntimeInfo) IsStarted(pbStarted *bool, pdwStartupFlags *uint32) error {
+	_pbStarted := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbStarted))), uintptr(unsafe.Pointer(pdwStartupFlags)))
+	if pbStarted != nil {
+		*pbStarted = *_pbStarted != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1124,8 +1136,12 @@ func (self *ICLRTask) RudeAbort() error {
 }
 
 // NeedsPriorityScheduling dispatches through ICLRTask's vtable slot 10.
-func (self *ICLRTask) NeedsPriorityScheduling(pbNeedsPriorityScheduling *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbNeedsPriorityScheduling)))
+func (self *ICLRTask) NeedsPriorityScheduling(pbNeedsPriorityScheduling *bool) error {
+	_pbNeedsPriorityScheduling := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbNeedsPriorityScheduling))))
+	if pbNeedsPriorityScheduling != nil {
+		*pbNeedsPriorityScheduling = *_pbNeedsPriorityScheduling != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1390,40 +1406,64 @@ type ICorThreadpool struct {
 var IID_ICorThreadpool = win32.GUID{Data1: 0x84680d3a, Data2: 0xb2c1, Data3: 0x46e8, Data4: [8]byte{0xac, 0xc2, 0xdb, 0xc0, 0xa3, 0x59, 0x15, 0x9a}}
 
 // CorRegisterWaitForSingleObject dispatches through ICorThreadpool's vtable slot 3.
-func (self *ICorThreadpool) CorRegisterWaitForSingleObject(phNewWaitObject *foundation.HANDLE, hWaitObject foundation.HANDLE, Callback systemthreading.WAITORTIMERCALLBACK, Context unsafe.Pointer, timeout uint32, executeOnlyOnce bool, result *foundation.BOOL) error {
+func (self *ICorThreadpool) CorRegisterWaitForSingleObject(phNewWaitObject *foundation.HANDLE, hWaitObject foundation.HANDLE, Callback systemthreading.WAITORTIMERCALLBACK, Context unsafe.Pointer, timeout uint32, executeOnlyOnce bool, result *bool) error {
 	_executeOnlyOnce := win32.Bool32(executeOnlyOnce)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phNewWaitObject)), uintptr(hWaitObject), uintptr(Callback), uintptr(unsafe.Pointer(Context)), uintptr(timeout), uintptr(_executeOnlyOnce), uintptr(unsafe.Pointer(result)))
+	_result := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phNewWaitObject)), uintptr(hWaitObject), uintptr(Callback), uintptr(unsafe.Pointer(Context)), uintptr(timeout), uintptr(_executeOnlyOnce), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	if result != nil {
+		*result = *_result != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CorUnregisterWait dispatches through ICorThreadpool's vtable slot 4.
-func (self *ICorThreadpool) CorUnregisterWait(hWaitObject foundation.HANDLE, CompletionEvent foundation.HANDLE, result *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWaitObject), uintptr(CompletionEvent), uintptr(unsafe.Pointer(result)))
+func (self *ICorThreadpool) CorUnregisterWait(hWaitObject foundation.HANDLE, CompletionEvent foundation.HANDLE, result *bool) error {
+	_result := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWaitObject), uintptr(CompletionEvent), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	if result != nil {
+		*result = *_result != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CorQueueUserWorkItem dispatches through ICorThreadpool's vtable slot 5.
-func (self *ICorThreadpool) CorQueueUserWorkItem(Function systemthreading.LPTHREAD_START_ROUTINE, Context unsafe.Pointer, executeOnlyOnce bool, result *foundation.BOOL) error {
+func (self *ICorThreadpool) CorQueueUserWorkItem(Function systemthreading.LPTHREAD_START_ROUTINE, Context unsafe.Pointer, executeOnlyOnce bool, result *bool) error {
 	_executeOnlyOnce := win32.Bool32(executeOnlyOnce)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Function), uintptr(unsafe.Pointer(Context)), uintptr(_executeOnlyOnce), uintptr(unsafe.Pointer(result)))
+	_result := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Function), uintptr(unsafe.Pointer(Context)), uintptr(_executeOnlyOnce), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	if result != nil {
+		*result = *_result != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CorCreateTimer dispatches through ICorThreadpool's vtable slot 6.
-func (self *ICorThreadpool) CorCreateTimer(phNewTimer *foundation.HANDLE, Callback systemthreading.WAITORTIMERCALLBACK, Parameter unsafe.Pointer, DueTime uint32, Period uint32, result *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phNewTimer)), uintptr(Callback), uintptr(unsafe.Pointer(Parameter)), uintptr(DueTime), uintptr(Period), uintptr(unsafe.Pointer(result)))
+func (self *ICorThreadpool) CorCreateTimer(phNewTimer *foundation.HANDLE, Callback systemthreading.WAITORTIMERCALLBACK, Parameter unsafe.Pointer, DueTime uint32, Period uint32, result *bool) error {
+	_result := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phNewTimer)), uintptr(Callback), uintptr(unsafe.Pointer(Parameter)), uintptr(DueTime), uintptr(Period), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	if result != nil {
+		*result = *_result != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CorChangeTimer dispatches through ICorThreadpool's vtable slot 7.
-func (self *ICorThreadpool) CorChangeTimer(Timer foundation.HANDLE, DueTime uint32, Period uint32, result *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Timer), uintptr(DueTime), uintptr(Period), uintptr(unsafe.Pointer(result)))
+func (self *ICorThreadpool) CorChangeTimer(Timer foundation.HANDLE, DueTime uint32, Period uint32, result *bool) error {
+	_result := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Timer), uintptr(DueTime), uintptr(Period), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	if result != nil {
+		*result = *_result != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CorDeleteTimer dispatches through ICorThreadpool's vtable slot 8.
-func (self *ICorThreadpool) CorDeleteTimer(Timer foundation.HANDLE, CompletionEvent foundation.HANDLE, result *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Timer), uintptr(CompletionEvent), uintptr(unsafe.Pointer(result)))
+func (self *ICorThreadpool) CorDeleteTimer(Timer foundation.HANDLE, CompletionEvent foundation.HANDLE, result *bool) error {
+	_result := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Timer), uintptr(CompletionEvent), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	if result != nil {
+		*result = *_result != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1434,8 +1474,12 @@ func (self *ICorThreadpool) CorBindIoCompletionCallback(fileHandle foundation.HA
 }
 
 // CorCallOrQueueUserWorkItem dispatches through ICorThreadpool's vtable slot 10.
-func (self *ICorThreadpool) CorCallOrQueueUserWorkItem(Function systemthreading.LPTHREAD_START_ROUTINE, Context unsafe.Pointer, result *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Function), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(result)))
+func (self *ICorThreadpool) CorCallOrQueueUserWorkItem(Function systemthreading.LPTHREAD_START_ROUTINE, Context unsafe.Pointer, result *bool) error {
+	_result := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Function), uintptr(unsafe.Pointer(Context)), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	if result != nil {
+		*result = *_result != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1466,8 +1510,12 @@ type IDebuggerInfo struct {
 var IID_IDebuggerInfo = win32.GUID{Data1: 0xbf24142d, Data2: 0xa47d, Data3: 0x4d24, Data4: [8]byte{0xa6, 0x6d, 0x8c, 0x21, 0x41, 0x94, 0x4e, 0x44}}
 
 // IsDebuggerAttached dispatches through IDebuggerInfo's vtable slot 3.
-func (self *IDebuggerInfo) IsDebuggerAttached(pbAttached *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAttached)))
+func (self *IDebuggerInfo) IsDebuggerAttached(pbAttached *bool) error {
+	_pbAttached := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbAttached))))
+	if pbAttached != nil {
+		*pbAttached = *_pbAttached != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1690,8 +1738,12 @@ func (self *IHostCrst) Leave() error {
 }
 
 // TryEnter dispatches through IHostCrst's vtable slot 5.
-func (self *IHostCrst) TryEnter(option uint32, pbSucceeded *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(option), uintptr(unsafe.Pointer(pbSucceeded)))
+func (self *IHostCrst) TryEnter(option uint32, pbSucceeded *bool) error {
+	_pbSucceeded := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(option), uintptr(win32.OutParam(unsafe.Pointer(_pbSucceeded))))
+	if pbSucceeded != nil {
+		*pbSucceeded = *_pbSucceeded != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2179,8 +2231,12 @@ func (self *IHostTaskManager) SetLocale(lcid uint32) error {
 }
 
 // CallNeedsHostHook dispatches through IHostTaskManager's vtable slot 9.
-func (self *IHostTaskManager) CallNeedsHostHook(target uintptr, pbCallNeedsHostHook *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(target), uintptr(unsafe.Pointer(pbCallNeedsHostHook)))
+func (self *IHostTaskManager) CallNeedsHostHook(target uintptr, pbCallNeedsHostHook *bool) error {
+	_pbCallNeedsHostHook := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(target), uintptr(win32.OutParam(unsafe.Pointer(_pbCallNeedsHostHook))))
+	if pbCallNeedsHostHook != nil {
+		*pbCallNeedsHostHook = *_pbCallNeedsHostHook != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -27,8 +27,12 @@ type IDynamicRenderer struct {
 var IID_IDynamicRenderer = win32.GUID{Data1: 0xa079468e, Data2: 0x7165, Data3: 0x46f9, Data4: [8]byte{0xb7, 0xaf, 0x98, 0xad, 0x01, 0xa9, 0x30, 0x09}}
 
 // Get_Enabled dispatches through IDynamicRenderer's vtable slot 3.
-func (self *IDynamicRenderer) Get_Enabled(bEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bEnabled)))
+func (self *IDynamicRenderer) Get_Enabled(bEnabled *bool) error {
+	_bEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bEnabled))))
+	if bEnabled != nil {
+		*bEnabled = *_bEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -88,8 +92,12 @@ func (self *IDynamicRenderer) Putref_DrawingAttributes(piDA *IInkDrawingAttribut
 }
 
 // Get_DataCacheEnabled dispatches through IDynamicRenderer's vtable slot 13.
-func (self *IDynamicRenderer) Get_DataCacheEnabled(pfCacheData *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCacheData)))
+func (self *IDynamicRenderer) Get_DataCacheEnabled(pfCacheData *bool) error {
+	_pfCacheData := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCacheData))))
+	if pfCacheData != nil {
+		*pfCacheData = *_pfCacheData != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -128,8 +136,12 @@ type IGestureRecognizer struct {
 var IID_IGestureRecognizer = win32.GUID{Data1: 0xae9ef86b, Data2: 0x7054, Data3: 0x45e3, Data4: [8]byte{0xae, 0x22, 0x31, 0x74, 0xdc, 0x88, 0x11, 0xb7}}
 
 // Get_Enabled dispatches through IGestureRecognizer's vtable slot 3.
-func (self *IGestureRecognizer) Get_Enabled(pfEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
+func (self *IGestureRecognizer) Get_Enabled(pfEnabled *bool) error {
+	_pfEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))))
+	if pfEnabled != nil {
+		*pfEnabled = *_pfEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4156,8 +4168,12 @@ type IRealTimeStylus struct {
 var IID_IRealTimeStylus = win32.GUID{Data1: 0xa8bb5d22, Data2: 0x3144, Data3: 0x4a7b, Data4: [8]byte{0x93, 0xcd, 0xf3, 0x4a, 0x16, 0xbe, 0x51, 0x3a}}
 
 // Get_Enabled dispatches through IRealTimeStylus's vtable slot 3.
-func (self *IRealTimeStylus) Get_Enabled(pfEnable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnable)))
+func (self *IRealTimeStylus) Get_Enabled(pfEnable *bool) error {
+	_pfEnable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnable))))
+	if pfEnable != nil {
+		*pfEnable = *_pfEnable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4361,8 +4377,12 @@ type IRealTimeStylus2 struct {
 var IID_IRealTimeStylus2 = win32.GUID{Data1: 0xb5f2a6cd, Data2: 0x3179, Data3: 0x4a3e, Data4: [8]byte{0xb9, 0xc4, 0xbb, 0x58, 0x65, 0x96, 0x2b, 0xe2}}
 
 // Get_FlicksEnabled dispatches through IRealTimeStylus2's vtable slot 3.
-func (self *IRealTimeStylus2) Get_FlicksEnabled(pfEnable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnable)))
+func (self *IRealTimeStylus2) Get_FlicksEnabled(pfEnable *bool) error {
+	_pfEnable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnable))))
+	if pfEnable != nil {
+		*pfEnable = *_pfEnable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4383,8 +4403,12 @@ type IRealTimeStylus3 struct {
 var IID_IRealTimeStylus3 = win32.GUID{Data1: 0xd70230a3, Data2: 0x6986, Data3: 0x4051, Data4: [8]byte{0xb5, 0x7a, 0x1c, 0xf6, 0x9f, 0x4d, 0x9d, 0xb5}}
 
 // Get_MultiTouchEnabled dispatches through IRealTimeStylus3's vtable slot 3.
-func (self *IRealTimeStylus3) Get_MultiTouchEnabled(pfEnable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnable)))
+func (self *IRealTimeStylus3) Get_MultiTouchEnabled(pfEnable *bool) error {
+	_pfEnable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnable))))
+	if pfEnable != nil {
+		*pfEnable = *_pfEnable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4730,8 +4754,12 @@ func (self *ITextInputPanel) Put_PreferredInPlaceDirection(Direction InPlaceDire
 }
 
 // Get_ExpandPostInsertionCorrection dispatches through ITextInputPanel's vtable slot 15.
-func (self *ITextInputPanel) Get_ExpandPostInsertionCorrection(Expand *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Expand)))
+func (self *ITextInputPanel) Get_ExpandPostInsertionCorrection(Expand *bool) error {
+	_Expand := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Expand))))
+	if Expand != nil {
+		*Expand = *_Expand != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4743,8 +4771,12 @@ func (self *ITextInputPanel) Put_ExpandPostInsertionCorrection(Expand bool) erro
 }
 
 // Get_InPlaceVisibleOnFocus dispatches through ITextInputPanel's vtable slot 17.
-func (self *ITextInputPanel) Get_InPlaceVisibleOnFocus(Visible *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Visible)))
+func (self *ITextInputPanel) Get_InPlaceVisibleOnFocus(Visible *bool) error {
+	_Visible := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Visible))))
+	if Visible != nil {
+		*Visible = *_Visible != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4909,8 +4941,12 @@ type ITextInputPanelRunInfo struct {
 var IID_ITextInputPanelRunInfo = win32.GUID{Data1: 0x9f424568, Data2: 0x1920, Data3: 0x48cc, Data4: [8]byte{0x98, 0x11, 0xa9, 0x93, 0xcb, 0xf5, 0xad, 0xba}}
 
 // IsTipRunning dispatches through ITextInputPanelRunInfo's vtable slot 3.
-func (self *ITextInputPanelRunInfo) IsTipRunning(pfRunning *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRunning)))
+func (self *ITextInputPanelRunInfo) IsTipRunning(pfRunning *bool) error {
+	_pfRunning := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfRunning))))
+	if pfRunning != nil {
+		*pfRunning = *_pfRunning != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4941,14 +4977,22 @@ func (self *ITipAutoCompleteClient) UserSelection() error {
 }
 
 // PreferredRects dispatches through ITipAutoCompleteClient's vtable slot 6.
-func (self *ITipAutoCompleteClient) PreferredRects(prcACList *foundation.RECT, prcField *foundation.RECT, prcModifiedACList *foundation.RECT, pfShownAboveTip *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcACList)), uintptr(unsafe.Pointer(prcField)), uintptr(unsafe.Pointer(prcModifiedACList)), uintptr(unsafe.Pointer(pfShownAboveTip)))
+func (self *ITipAutoCompleteClient) PreferredRects(prcACList *foundation.RECT, prcField *foundation.RECT, prcModifiedACList *foundation.RECT, pfShownAboveTip *bool) error {
+	_pfShownAboveTip := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcACList)), uintptr(unsafe.Pointer(prcField)), uintptr(unsafe.Pointer(prcModifiedACList)), uintptr(win32.OutParam(unsafe.Pointer(_pfShownAboveTip))))
+	if pfShownAboveTip != nil {
+		*pfShownAboveTip = *_pfShownAboveTip != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // RequestShowUI dispatches through ITipAutoCompleteClient's vtable slot 7.
-func (self *ITipAutoCompleteClient) RequestShowUI(hWndList foundation.HWND, pfAllowShowing *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWndList), uintptr(unsafe.Pointer(pfAllowShowing)))
+func (self *ITipAutoCompleteClient) RequestShowUI(hWndList foundation.HWND, pfAllowShowing *bool) error {
+	_pfAllowShowing := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWndList), uintptr(win32.OutParam(unsafe.Pointer(_pfAllowShowing))))
+	if pfAllowShowing != nil {
+		*pfAllowShowing = *_pfAllowShowing != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

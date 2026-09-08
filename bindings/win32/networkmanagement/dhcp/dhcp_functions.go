@@ -2407,10 +2407,14 @@ func DhcpV4GetPolicyEx(ServerIpAddress *string, GlobalPolicy bool, SubnetAddress
 // DhcpV4QueryPolicyEnforcement calls DHCPSAPI!DhcpV4QueryPolicyEnforcement.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcpv4querypolicyenforcement
 // Minimum OS: windowsserver2012.
-func DhcpV4QueryPolicyEnforcement(ServerIpAddress *string, fGlobalPolicy bool, SubnetAddress uint32, Enabled *foundation.BOOL) uint32 {
+func DhcpV4QueryPolicyEnforcement(ServerIpAddress *string, fGlobalPolicy bool, SubnetAddress uint32, Enabled *bool) uint32 {
 	_ServerIpAddress := win32.UTF16PtrOrNil(ServerIpAddress)
 	_fGlobalPolicy := win32.Bool32(fGlobalPolicy)
-	r1, _, _ := syscall.SyscallN(procDhcpV4QueryPolicyEnforcement.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fGlobalPolicy), uintptr(SubnetAddress), uintptr(unsafe.Pointer(Enabled)))
+	_Enabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procDhcpV4QueryPolicyEnforcement.Addr(), uintptr(unsafe.Pointer(_ServerIpAddress)), uintptr(_fGlobalPolicy), uintptr(SubnetAddress), uintptr(win32.OutParam(unsafe.Pointer(_Enabled))))
+	if Enabled != nil {
+		*Enabled = *_Enabled != 0
+	}
 	return uint32(r1)
 }
 

@@ -386,8 +386,12 @@ func (self *IXAudio2Voice) DisableEffect(EffectIndex uint32, OperationSet uint32
 }
 
 // GetEffectState dispatches through IXAudio2Voice's vtable slot 5.
-func (self *IXAudio2Voice) GetEffectState(EffectIndex uint32, pEnabled *foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(EffectIndex), uintptr(unsafe.Pointer(pEnabled)))
+func (self *IXAudio2Voice) GetEffectState(EffectIndex uint32, pEnabled *bool) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(EffectIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // SetEffectParameters dispatches through IXAudio2Voice's vtable slot 6.

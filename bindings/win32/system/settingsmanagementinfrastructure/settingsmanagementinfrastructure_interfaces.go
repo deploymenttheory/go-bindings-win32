@@ -31,10 +31,10 @@ func (self *IItemEnumerator) Current() (systemvariant.VARIANT, error) {
 }
 
 // MoveNext dispatches through IItemEnumerator's vtable slot 4.
-func (self *IItemEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IItemEnumerator) MoveNext() (bool, error) {
 	_ItemValid := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ItemValid))))
-	return *_ItemValid, win32.ErrIfFailed(int32(r1))
+	return *_ItemValid != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Reset dispatches through IItemEnumerator's vtable slot 5.
@@ -313,10 +313,10 @@ func (self *ISettingsItem) SetValueRaw(DataType int32, Data []byte) error {
 }
 
 // HasChild dispatches through ISettingsItem's vtable slot 10.
-func (self *ISettingsItem) HasChild() (foundation.BOOL, error) {
+func (self *ISettingsItem) HasChild() (bool, error) {
 	_ItemHasChild := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ItemHasChild))))
-	return *_ItemHasChild, win32.ErrIfFailed(int32(r1))
+	return *_ItemHasChild != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Children dispatches through ISettingsItem's vtable slot 11.

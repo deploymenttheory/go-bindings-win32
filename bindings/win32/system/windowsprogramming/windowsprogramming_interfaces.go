@@ -37,8 +37,12 @@ func (self *ICameraUIControl) Close() error {
 }
 
 // Suspend dispatches through ICameraUIControl's vtable slot 5.
-func (self *ICameraUIControl) Suspend(pbDeferralRequired *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDeferralRequired)))
+func (self *ICameraUIControl) Suspend(pbDeferralRequired *bool) error {
+	_pbDeferralRequired := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbDeferralRequired))))
+	if pbDeferralRequired != nil {
+		*pbDeferralRequired = *_pbDeferralRequired != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -208,8 +212,12 @@ type IEditionUpgradeHelper struct {
 var IID_IEditionUpgradeHelper = win32.GUID{Data1: 0xd3e9e342, Data2: 0x5deb, Data3: 0x43b6, Data4: [8]byte{0x84, 0x9e, 0x69, 0x13, 0xb8, 0x5d, 0x50, 0x3a}}
 
 // CanUpgrade dispatches through IEditionUpgradeHelper's vtable slot 3.
-func (self *IEditionUpgradeHelper) CanUpgrade(isAllowed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isAllowed)))
+func (self *IEditionUpgradeHelper) CanUpgrade(isAllowed *bool) error {
+	_isAllowed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isAllowed))))
+	if isAllowed != nil {
+		*isAllowed = *_isAllowed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -233,8 +241,12 @@ func (self *IEditionUpgradeHelper) GetOsProductContentId(contentId *foundation.P
 }
 
 // GetGenuineLocalStatus dispatches through IEditionUpgradeHelper's vtable slot 7.
-func (self *IEditionUpgradeHelper) GetGenuineLocalStatus(isGenuine *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isGenuine)))
+func (self *IEditionUpgradeHelper) GetGenuineLocalStatus(isGenuine *bool) error {
+	_isGenuine := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isGenuine))))
+	if isGenuine != nil {
+		*isGenuine = *_isGenuine != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -261,7 +273,11 @@ type IWindowsLockModeHelper struct {
 var IID_IWindowsLockModeHelper = win32.GUID{Data1: 0xf342d19e, Data2: 0xcc22, Data3: 0x4648, Data4: [8]byte{0xbb, 0x5d, 0x03, 0xcc, 0xf7, 0x5b, 0x47, 0xc5}}
 
 // GetSMode dispatches through IWindowsLockModeHelper's vtable slot 3.
-func (self *IWindowsLockModeHelper) GetSMode(isSmode *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isSmode)))
+func (self *IWindowsLockModeHelper) GetSMode(isSmode *bool) error {
+	_isSmode := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isSmode))))
+	if isSmode != nil {
+		*isSmode = *_isSmode != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }

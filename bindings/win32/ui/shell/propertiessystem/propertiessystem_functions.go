@@ -495,9 +495,13 @@ func PSPropertyBag_Delete(propBag *systemcomstructuredstorage.IPropertyBag, prop
 // PSPropertyBag_ReadBOOL calls PROPSYS!PSPropertyBag_ReadBOOL.
 // https://learn.microsoft.com/windows/win32/api/propsys/nf-propsys-pspropertybag_readbool
 // Minimum OS: windows6.1.
-func PSPropertyBag_ReadBOOL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *foundation.BOOL) error {
+func PSPropertyBag_ReadBOOL(propBag *systemcomstructuredstorage.IPropertyBag, propName string, value *bool) error {
 	_propName := win32.UTF16Ptr(propName)
-	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadBOOL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(unsafe.Pointer(value)))
+	_value := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procPSPropertyBag_ReadBOOL.Addr(), uintptr(unsafe.Pointer(propBag)), uintptr(unsafe.Pointer(_propName)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	if value != nil {
+		*value = *_value != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

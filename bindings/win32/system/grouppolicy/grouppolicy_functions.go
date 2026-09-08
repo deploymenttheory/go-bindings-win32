@@ -383,21 +383,29 @@ func RegisterGPNotification(hEvent foundation.HANDLE, bMachine bool) error {
 // RsopAccessCheckByType calls USERENV!RsopAccessCheckByType.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopaccesscheckbytype
 // Minimum OS: windows6.0.6000.
-func RsopAccessCheckByType(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, pPrincipalSelfSid security.PSID, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pObjectTypeList []security.OBJECT_TYPE_LIST, pGenericMapping *security.GENERIC_MAPPING, pPrivilegeSet *security.PRIVILEGE_SET, pdwPrivilegeSetLength *uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *foundation.BOOL) error {
+func RsopAccessCheckByType(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, pPrincipalSelfSid security.PSID, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pObjectTypeList []security.OBJECT_TYPE_LIST, pGenericMapping *security.GENERIC_MAPPING, pPrivilegeSet *security.PRIVILEGE_SET, pdwPrivilegeSetLength *uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *bool) error {
 	var _pObjectTypeList *security.OBJECT_TYPE_LIST
 	if len(pObjectTypeList) > 0 {
 		_pObjectTypeList = &pObjectTypeList[0]
 	}
-	r1, _, _ := syscall.SyscallN(procRsopAccessCheckByType.Addr(), uintptr(pSecurityDescriptor), uintptr(pPrincipalSelfSid), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(_pObjectTypeList)), uintptr(len(pObjectTypeList)), uintptr(unsafe.Pointer(pGenericMapping)), uintptr(unsafe.Pointer(pPrivilegeSet)), uintptr(unsafe.Pointer(pdwPrivilegeSetLength)), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(unsafe.Pointer(pbAccessStatus)))
+	_pbAccessStatus := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRsopAccessCheckByType.Addr(), uintptr(pSecurityDescriptor), uintptr(pPrincipalSelfSid), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(_pObjectTypeList)), uintptr(len(pObjectTypeList)), uintptr(unsafe.Pointer(pGenericMapping)), uintptr(unsafe.Pointer(pPrivilegeSet)), uintptr(unsafe.Pointer(pdwPrivilegeSetLength)), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(win32.OutParam(unsafe.Pointer(_pbAccessStatus))))
+	if pbAccessStatus != nil {
+		*pbAccessStatus = *_pbAccessStatus != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // RsopFileAccessCheck calls USERENV!RsopFileAccessCheck.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopfileaccesscheck
 // Minimum OS: windows6.0.6000.
-func RsopFileAccessCheck(pszFileName string, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *foundation.BOOL) error {
+func RsopFileAccessCheck(pszFileName string, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *bool) error {
 	_pszFileName := win32.UTF16Ptr(pszFileName)
-	r1, _, _ := syscall.SyscallN(procRsopFileAccessCheck.Addr(), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(unsafe.Pointer(pbAccessStatus)))
+	_pbAccessStatus := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRsopFileAccessCheck.Addr(), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(win32.OutParam(unsafe.Pointer(_pbAccessStatus))))
+	if pbAccessStatus != nil {
+		*pbAccessStatus = *_pbAccessStatus != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

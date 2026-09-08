@@ -64,8 +64,12 @@ type IPrintDocumentPackageTarget2 struct {
 var IID_IPrintDocumentPackageTarget2 = win32.GUID{Data1: 0xc560298a, Data2: 0x535c, Data3: 0x48f9, Data4: [8]byte{0x86, 0x6a, 0x63, 0x25, 0x40, 0x66, 0x0c, 0xb4}}
 
 // GetIsTargetIppPrinter dispatches through IPrintDocumentPackageTarget2's vtable slot 3.
-func (self *IPrintDocumentPackageTarget2) GetIsTargetIppPrinter(isIppPrinter *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isIppPrinter)))
+func (self *IPrintDocumentPackageTarget2) GetIsTargetIppPrinter(isIppPrinter *bool) error {
+	_isIppPrinter := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isIppPrinter))))
+	if isIppPrinter != nil {
+		*isIppPrinter = *_isIppPrinter != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

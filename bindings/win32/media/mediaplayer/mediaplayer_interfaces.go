@@ -5127,8 +5127,12 @@ func (self *IXFeed) SetMaxItemCount(uiMaxItemCount uint32) error {
 }
 
 // DownloadEnclosuresAutomatically dispatches through IXFeed's vtable slot 28.
-func (self *IXFeed) DownloadEnclosuresAutomatically(pbDownloadEnclosuresAutomatically *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDownloadEnclosuresAutomatically)))
+func (self *IXFeed) DownloadEnclosuresAutomatically(pbDownloadEnclosuresAutomatically *bool) error {
+	_pbDownloadEnclosuresAutomatically := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbDownloadEnclosuresAutomatically))))
+	if pbDownloadEnclosuresAutomatically != nil {
+		*pbDownloadEnclosuresAutomatically = *_pbDownloadEnclosuresAutomatically != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5219,8 +5223,12 @@ func (self *IXFeed) Copyright(ppszCopyright *foundation.PWSTR) error {
 }
 
 // IsList dispatches through IXFeed's vtable slot 43.
-func (self *IXFeed) IsList(pbIsList *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsList)))
+func (self *IXFeed) IsList(pbIsList *bool) error {
+	_pbIsList := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsList))))
+	if pbIsList != nil {
+		*pbIsList = *_pbIsList != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5545,8 +5553,12 @@ func (self *IXFeedFolder) Parent(riid *win32.GUID, ppv **win32.IUnknown) error {
 }
 
 // IsRoot dispatches through IXFeedFolder's vtable slot 17.
-func (self *IXFeedFolder) IsRoot(pbIsRootFeedFolder *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsRootFeedFolder)))
+func (self *IXFeedFolder) IsRoot(pbIsRootFeedFolder *bool) error {
+	_pbIsRootFeedFolder := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsRootFeedFolder))))
+	if pbIsRootFeedFolder != nil {
+		*pbIsRootFeedFolder = *_pbIsRootFeedFolder != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5756,8 +5768,12 @@ func (self *IXFeedItem) Enclosure(riid *win32.GUID, ppv **win32.IUnknown) error 
 }
 
 // IsRead dispatches through IXFeedItem's vtable slot 12.
-func (self *IXFeedItem) IsRead(pbIsRead *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsRead)))
+func (self *IXFeedItem) IsRead(pbIsRead *bool) error {
+	_pbIsRead := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsRead))))
+	if pbIsRead != nil {
+		*pbIsRead = *_pbIsRead != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5853,16 +5869,24 @@ func (self *IXFeedsManager) RootFolder(riid *win32.GUID, ppv **win32.IUnknown) e
 }
 
 // IsSubscribed dispatches through IXFeedsManager's vtable slot 4.
-func (self *IXFeedsManager) IsSubscribed(pszUrl string, pbSubscribed *foundation.BOOL) error {
+func (self *IXFeedsManager) IsSubscribed(pszUrl string, pbSubscribed *bool) error {
 	_pszUrl := win32.UTF16Ptr(pszUrl)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(pbSubscribed)))
+	_pbSubscribed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUrl)), uintptr(win32.OutParam(unsafe.Pointer(_pbSubscribed))))
+	if pbSubscribed != nil {
+		*pbSubscribed = *_pbSubscribed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // ExistsFeed dispatches through IXFeedsManager's vtable slot 5.
-func (self *IXFeedsManager) ExistsFeed(pszPath string, pbFeedExists *foundation.BOOL) error {
+func (self *IXFeedsManager) ExistsFeed(pszPath string, pbFeedExists *bool) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(pbFeedExists)))
+	_pbFeedExists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(win32.OutParam(unsafe.Pointer(_pbFeedExists))))
+	if pbFeedExists != nil {
+		*pbFeedExists = *_pbFeedExists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5881,9 +5905,13 @@ func (self *IXFeedsManager) GetFeedByUrl(pszUrl string, riid *win32.GUID, ppv **
 }
 
 // ExistsFolder dispatches through IXFeedsManager's vtable slot 8.
-func (self *IXFeedsManager) ExistsFolder(pszPath string, pbFolderExists *foundation.BOOL) error {
+func (self *IXFeedsManager) ExistsFolder(pszPath string, pbFolderExists *bool) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(pbFolderExists)))
+	_pbFolderExists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(win32.OutParam(unsafe.Pointer(_pbFolderExists))))
+	if pbFolderExists != nil {
+		*pbFolderExists = *_pbFolderExists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

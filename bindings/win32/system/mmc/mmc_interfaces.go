@@ -67,10 +67,10 @@ func (self *Column) Put_DisplayPosition(Index int32) error {
 }
 
 // Get_Hidden dispatches through Column's vtable slot 12.
-func (self *Column) Get_Hidden() (foundation.BOOL, error) {
+func (self *Column) Get_Hidden() (bool, error) {
 	_Hidden := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Hidden))))
-	return *_Hidden, win32.ErrIfFailed(int32(r1))
+	return *_Hidden != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Hidden dispatches through Column's vtable slot 13.
@@ -87,10 +87,10 @@ func (self *Column) SetAsSortColumn(SortOrder ColumnSortOrder) error {
 }
 
 // IsSortColumn dispatches through Column's vtable slot 15.
-func (self *Column) IsSortColumn() (foundation.BOOL, error) {
+func (self *Column) IsSortColumn() (bool, error) {
 	_IsSortColumn := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_IsSortColumn))))
-	return *_IsSortColumn, win32.ErrIfFailed(int32(r1))
+	return *_IsSortColumn != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 383d4d97-fc44-478b-b139-6323dc48611c
@@ -223,10 +223,10 @@ func (self *Document) Get_Location() (foundation.BSTR, error) {
 }
 
 // Get_IsSaved dispatches through Document's vtable slot 16.
-func (self *Document) Get_IsSaved() (foundation.BOOL, error) {
+func (self *Document) Get_IsSaved() (bool, error) {
 	_IsSaved := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_IsSaved))))
-	return *_IsSaved, win32.ErrIfFailed(int32(r1))
+	return *_IsSaved != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Mode dispatches through Document's vtable slot 17.
@@ -853,8 +853,12 @@ type IConsoleVerb struct {
 var IID_IConsoleVerb = win32.GUID{Data1: 0xe49f7a60, Data2: 0x74af, Data3: 0x11d0, Data4: [8]byte{0xa2, 0x86, 0x00, 0xc0, 0x4f, 0xd8, 0xfe, 0x93}}
 
 // GetVerbState dispatches through IConsoleVerb's vtable slot 3.
-func (self *IConsoleVerb) GetVerbState(eCmdID MMC_CONSOLE_VERB, nState MMC_BUTTON_STATE, pState *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eCmdID), uintptr(nState), uintptr(unsafe.Pointer(pState)))
+func (self *IConsoleVerb) GetVerbState(eCmdID MMC_CONSOLE_VERB, nState MMC_BUTTON_STATE, pState *bool) error {
+	_pState := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eCmdID), uintptr(nState), uintptr(win32.OutParam(unsafe.Pointer(_pState))))
+	if pState != nil {
+		*pState = *_pState != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1096,8 +1100,12 @@ type IExtendPropertySheet2 struct {
 var IID_IExtendPropertySheet2 = win32.GUID{Data1: 0xb7a87232, Data2: 0x4a51, Data3: 0x11d1, Data4: [8]byte{0xa7, 0xea, 0x00, 0xc0, 0x4f, 0xd9, 0x09, 0xdd}}
 
 // GetWatermarks dispatches through IExtendPropertySheet2's vtable slot 5.
-func (self *IExtendPropertySheet2) GetWatermarks(lpIDataObject *systemcom.IDataObject, lphWatermark *graphicsgdi.HBITMAP, lphHeader *graphicsgdi.HBITMAP, lphPalette *graphicsgdi.HPALETTE, bStretch *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIDataObject)), uintptr(unsafe.Pointer(lphWatermark)), uintptr(unsafe.Pointer(lphHeader)), uintptr(unsafe.Pointer(lphPalette)), uintptr(unsafe.Pointer(bStretch)))
+func (self *IExtendPropertySheet2) GetWatermarks(lpIDataObject *systemcom.IDataObject, lphWatermark *graphicsgdi.HBITMAP, lphHeader *graphicsgdi.HBITMAP, lphPalette *graphicsgdi.HPALETTE, bStretch *bool) error {
+	_bStretch := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIDataObject)), uintptr(unsafe.Pointer(lphWatermark)), uintptr(unsafe.Pointer(lphHeader)), uintptr(unsafe.Pointer(lphPalette)), uintptr(win32.OutParam(unsafe.Pointer(_bStretch))))
+	if bStretch != nil {
+		*bStretch = *_bStretch != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1823,8 +1831,12 @@ func (self *IToolbar) DeleteButton(nIndex int32) error {
 }
 
 // GetButtonState dispatches through IToolbar's vtable slot 7.
-func (self *IToolbar) GetButtonState(idCommand int32, nState MMC_BUTTON_STATE, pState *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(idCommand), uintptr(nState), uintptr(unsafe.Pointer(pState)))
+func (self *IToolbar) GetButtonState(idCommand int32, nState MMC_BUTTON_STATE, pState *bool) error {
+	_pState := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(idCommand), uintptr(nState), uintptr(win32.OutParam(unsafe.Pointer(_pState))))
+	if pState != nil {
+		*pState = *_pState != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1893,10 +1905,10 @@ func (self *MenuItem) Execute() error {
 }
 
 // Get_Enabled dispatches through MenuItem's vtable slot 12.
-func (self *MenuItem) Get_Enabled() (foundation.BOOL, error) {
+func (self *MenuItem) Get_Enabled() (bool, error) {
 	_Enabled := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Enabled))))
-	return *_Enabled, win32.ErrIfFailed(int32(r1))
+	return *_Enabled != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: f81ed800-7839-4447-945d-8e15da59ca55
@@ -1929,10 +1941,10 @@ func (self *Node) Get_Bookmark() (foundation.BSTR, error) {
 }
 
 // IsScopeNode dispatches through Node's vtable slot 10.
-func (self *Node) IsScopeNode() (foundation.BOOL, error) {
+func (self *Node) IsScopeNode() (bool, error) {
 	_IsScopeNode := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_IsScopeNode))))
-	return *_IsScopeNode, win32.ErrIfFailed(int32(r1))
+	return *_IsScopeNode != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Nodetype dispatches through Node's vtable slot 11.
@@ -2266,10 +2278,10 @@ func (self *View) Deselect(Node_ *Node) error {
 }
 
 // IsSelected dispatches through View's vtable slot 18.
-func (self *View) IsSelected(Node_ *Node) (foundation.BOOL, error) {
+func (self *View) IsSelected(Node_ *Node) (bool, error) {
 	_IsSelected := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Node_)), uintptr(win32.OutParam(unsafe.Pointer(_IsSelected))))
-	return *_IsSelected, win32.ErrIfFailed(int32(r1))
+	return *_IsSelected != 0, win32.ErrIfFailed(int32(r1))
 }
 
 var specView_DisplayScopeNodePropertySheet = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(24, 8, 0, false)}}
@@ -2392,10 +2404,10 @@ func (self *View) Close() error {
 }
 
 // Get_ScopeTreeVisible dispatches through View's vtable slot 36.
-func (self *View) Get_ScopeTreeVisible() (foundation.BOOL, error) {
+func (self *View) Get_ScopeTreeVisible() (bool, error) {
 	_Visible := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Visible))))
-	return *_Visible, win32.ErrIfFailed(int32(r1))
+	return *_Visible != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ScopeTreeVisible dispatches through View's vtable slot 37.
@@ -2550,10 +2562,10 @@ func (self *Application) Get_Frame() (*Frame, error) {
 }
 
 // Get_Visible dispatches through _Application's vtable slot 12.
-func (self *Application) Get_Visible() (foundation.BOOL, error) {
+func (self *Application) Get_Visible() (bool, error) {
 	_Visible := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Visible))))
-	return *_Visible, win32.ErrIfFailed(int32(r1))
+	return *_Visible != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Show dispatches through _Application's vtable slot 13.
@@ -2569,10 +2581,10 @@ func (self *Application) Hide() error {
 }
 
 // Get_UserControl dispatches through _Application's vtable slot 15.
-func (self *Application) Get_UserControl() (foundation.BOOL, error) {
+func (self *Application) Get_UserControl() (bool, error) {
 	_UserControl := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_UserControl))))
-	return *_UserControl, win32.ErrIfFailed(int32(r1))
+	return *_UserControl != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UserControl dispatches through _Application's vtable slot 16.

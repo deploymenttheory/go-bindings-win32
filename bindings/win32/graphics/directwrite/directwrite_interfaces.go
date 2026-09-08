@@ -176,8 +176,12 @@ type IDWriteColorGlyphRunEnumerator struct {
 var IID_IDWriteColorGlyphRunEnumerator = win32.GUID{Data1: 0xd31fbe17, Data2: 0xf157, Data3: 0x41a2, Data4: [8]byte{0x8d, 0x24, 0xcb, 0x77, 0x9e, 0x05, 0x60, 0xe8}}
 
 // MoveNext dispatches through IDWriteColorGlyphRunEnumerator's vtable slot 3.
-func (self *IDWriteColorGlyphRunEnumerator) MoveNext(hasRun *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasRun)))
+func (self *IDWriteColorGlyphRunEnumerator) MoveNext(hasRun *bool) error {
+	_hasRun := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasRun))))
+	if hasRun != nil {
+		*hasRun = *_hasRun != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -739,8 +743,12 @@ func (self *IDWriteFont) GetFaceNames(names **IDWriteLocalizedStrings) error {
 }
 
 // GetInformationalStrings dispatches through IDWriteFont's vtable slot 9.
-func (self *IDWriteFont) GetInformationalStrings(informationalStringID DWRITE_INFORMATIONAL_STRING_ID, informationalStrings **IDWriteLocalizedStrings, exists *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(informationalStringID), uintptr(unsafe.Pointer(informationalStrings)), uintptr(unsafe.Pointer(exists)))
+func (self *IDWriteFont) GetInformationalStrings(informationalStringID DWRITE_INFORMATIONAL_STRING_ID, informationalStrings **IDWriteLocalizedStrings, exists *bool) error {
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(informationalStringID), uintptr(unsafe.Pointer(informationalStrings)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -756,8 +764,12 @@ func (self *IDWriteFont) GetMetrics(fontMetrics *DWRITE_FONT_METRICS) {
 }
 
 // HasCharacter dispatches through IDWriteFont's vtable slot 12.
-func (self *IDWriteFont) HasCharacter(unicodeValue uint32, exists *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unicodeValue), uintptr(unsafe.Pointer(exists)))
+func (self *IDWriteFont) HasCharacter(unicodeValue uint32, exists *bool) error {
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unicodeValue), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -878,9 +890,13 @@ func (self *IDWriteFontCollection) GetFontFamily(index uint32, fontFamily **IDWr
 }
 
 // FindFamilyName dispatches through IDWriteFontCollection's vtable slot 5.
-func (self *IDWriteFontCollection) FindFamilyName(familyName string, index *uint32, exists *foundation.BOOL) error {
+func (self *IDWriteFontCollection) FindFamilyName(familyName string, index *uint32, exists *bool) error {
 	_familyName := win32.UTF16Ptr(familyName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_familyName)), uintptr(unsafe.Pointer(index)), uintptr(unsafe.Pointer(exists)))
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_familyName)), uintptr(unsafe.Pointer(index)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1106,8 +1122,12 @@ func (self *IDWriteFontFace) GetGlyphIndices(codePoints *uint32, codePointCount 
 }
 
 // TryGetFontTable dispatches through IDWriteFontFace's vtable slot 12.
-func (self *IDWriteFontFace) TryGetFontTable(openTypeTableTag uint32, tableData *unsafe.Pointer, tableSize *uint32, tableContext *unsafe.Pointer, exists *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(openTypeTableTag), uintptr(unsafe.Pointer(tableData)), uintptr(unsafe.Pointer(tableSize)), uintptr(unsafe.Pointer(tableContext)), uintptr(unsafe.Pointer(exists)))
+func (self *IDWriteFontFace) TryGetFontTable(openTypeTableTag uint32, tableData *unsafe.Pointer, tableSize *uint32, tableContext *unsafe.Pointer, exists *bool) error {
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(openTypeTableTag), uintptr(unsafe.Pointer(tableData)), uintptr(unsafe.Pointer(tableSize)), uintptr(unsafe.Pointer(tableContext)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1342,8 +1362,12 @@ func (self *IDWriteFontFace3) GetFaceNames(names **IDWriteLocalizedStrings) erro
 }
 
 // GetInformationalStrings dispatches through IDWriteFontFace3's vtable slot 42.
-func (self *IDWriteFontFace3) GetInformationalStrings(informationalStringID DWRITE_INFORMATIONAL_STRING_ID, informationalStrings **IDWriteLocalizedStrings, exists *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(informationalStringID), uintptr(unsafe.Pointer(informationalStrings)), uintptr(unsafe.Pointer(exists)))
+func (self *IDWriteFontFace3) GetInformationalStrings(informationalStringID DWRITE_INFORMATIONAL_STRING_ID, informationalStrings **IDWriteLocalizedStrings, exists *bool) error {
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(informationalStringID), uintptr(unsafe.Pointer(informationalStrings)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1375,21 +1399,29 @@ func (self *IDWriteFontFace3) IsGlyphLocal(glyphId uint16) foundation.BOOL {
 }
 
 // AreCharactersLocal dispatches through IDWriteFontFace3's vtable slot 47.
-func (self *IDWriteFontFace3) AreCharactersLocal(characters string, characterCount uint32, enqueueIfNotLocal bool, isLocal *foundation.BOOL) error {
+func (self *IDWriteFontFace3) AreCharactersLocal(characters string, characterCount uint32, enqueueIfNotLocal bool, isLocal *bool) error {
 	_characters := win32.UTF16Ptr(characters)
 	_enqueueIfNotLocal := win32.Bool32(enqueueIfNotLocal)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_characters)), uintptr(characterCount), uintptr(_enqueueIfNotLocal), uintptr(unsafe.Pointer(isLocal)))
+	_isLocal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_characters)), uintptr(characterCount), uintptr(_enqueueIfNotLocal), uintptr(win32.OutParam(unsafe.Pointer(_isLocal))))
+	if isLocal != nil {
+		*isLocal = *_isLocal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // AreGlyphsLocal dispatches through IDWriteFontFace3's vtable slot 48.
-func (self *IDWriteFontFace3) AreGlyphsLocal(glyphIndices []uint16, enqueueIfNotLocal bool, isLocal *foundation.BOOL) error {
+func (self *IDWriteFontFace3) AreGlyphsLocal(glyphIndices []uint16, enqueueIfNotLocal bool, isLocal *bool) error {
 	var _glyphIndices *uint16
 	if len(glyphIndices) > 0 {
 		_glyphIndices = &glyphIndices[0]
 	}
 	_enqueueIfNotLocal := win32.Bool32(enqueueIfNotLocal)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_glyphIndices)), uintptr(len(glyphIndices)), uintptr(_enqueueIfNotLocal), uintptr(unsafe.Pointer(isLocal)))
+	_isLocal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_glyphIndices)), uintptr(len(glyphIndices)), uintptr(_enqueueIfNotLocal), uintptr(win32.OutParam(unsafe.Pointer(_isLocal))))
+	if isLocal != nil {
+		*isLocal = *_isLocal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1813,8 +1845,12 @@ func (self *IDWriteFontFile) GetLoader(fontFileLoader **IDWriteFontFileLoader) e
 }
 
 // Analyze dispatches through IDWriteFontFile's vtable slot 5.
-func (self *IDWriteFontFile) Analyze(isSupportedFontType *foundation.BOOL, fontFileType *DWRITE_FONT_FILE_TYPE, fontFaceType *DWRITE_FONT_FACE_TYPE, numberOfFaces *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isSupportedFontType)), uintptr(unsafe.Pointer(fontFileType)), uintptr(unsafe.Pointer(fontFaceType)), uintptr(unsafe.Pointer(numberOfFaces)))
+func (self *IDWriteFontFile) Analyze(isSupportedFontType *bool, fontFileType *DWRITE_FONT_FILE_TYPE, fontFaceType *DWRITE_FONT_FACE_TYPE, numberOfFaces *uint32) error {
+	_isSupportedFontType := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isSupportedFontType))), uintptr(unsafe.Pointer(fontFileType)), uintptr(unsafe.Pointer(fontFaceType)), uintptr(unsafe.Pointer(numberOfFaces)))
+	if isSupportedFontType != nil {
+		*isSupportedFontType = *_isSupportedFontType != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1828,8 +1864,12 @@ type IDWriteFontFileEnumerator struct {
 var IID_IDWriteFontFileEnumerator = win32.GUID{Data1: 0x72755049, Data2: 0x5ff7, Data3: 0x435d, Data4: [8]byte{0x83, 0x48, 0x4b, 0xe9, 0x7c, 0xfa, 0x6c, 0x7c}}
 
 // MoveNext dispatches through IDWriteFontFileEnumerator's vtable slot 3.
-func (self *IDWriteFontFileEnumerator) MoveNext(hasCurrentFile *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hasCurrentFile)))
+func (self *IDWriteFontFileEnumerator) MoveNext(hasCurrentFile *bool) error {
+	_hasCurrentFile := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrentFile))))
+	if hasCurrentFile != nil {
+		*hasCurrentFile = *_hasCurrentFile != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2078,14 +2118,22 @@ func (self *IDWriteFontSet) GetFontFaceReference(listIndex uint32, fontFaceRefer
 }
 
 // FindFontFaceReference dispatches through IDWriteFontSet's vtable slot 5.
-func (self *IDWriteFontSet) FindFontFaceReference(fontFaceReference *IDWriteFontFaceReference, listIndex *uint32, exists *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFaceReference)), uintptr(unsafe.Pointer(listIndex)), uintptr(unsafe.Pointer(exists)))
+func (self *IDWriteFontSet) FindFontFaceReference(fontFaceReference *IDWriteFontFaceReference, listIndex *uint32, exists *bool) error {
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFaceReference)), uintptr(unsafe.Pointer(listIndex)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // FindFontFace dispatches through IDWriteFontSet's vtable slot 6.
-func (self *IDWriteFontSet) FindFontFace(fontFace *IDWriteFontFace, listIndex *uint32, exists *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(unsafe.Pointer(listIndex)), uintptr(unsafe.Pointer(exists)))
+func (self *IDWriteFontSet) FindFontFace(fontFace *IDWriteFontFace, listIndex *uint32, exists *bool) error {
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(unsafe.Pointer(listIndex)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2103,8 +2151,12 @@ func (self *IDWriteFontSet) GetPropertyValues_(propertyID DWRITE_FONT_PROPERTY_I
 }
 
 // GetPropertyValues dispatches through IDWriteFontSet's vtable slot 9.
-func (self *IDWriteFontSet) GetPropertyValues__(listIndex uint32, propertyId DWRITE_FONT_PROPERTY_ID, exists *foundation.BOOL, values **IDWriteLocalizedStrings) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(listIndex), uintptr(propertyId), uintptr(unsafe.Pointer(exists)), uintptr(unsafe.Pointer(values)))
+func (self *IDWriteFontSet) GetPropertyValues__(listIndex uint32, propertyId DWRITE_FONT_PROPERTY_ID, exists *bool, values **IDWriteLocalizedStrings) error {
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(listIndex), uintptr(propertyId), uintptr(win32.OutParam(unsafe.Pointer(_exists))), uintptr(unsafe.Pointer(values)))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2438,8 +2490,12 @@ func (self *IDWriteGdiInterop) CreateFontFromLOGFONT(logFont *graphicsgdi.LOGFON
 }
 
 // ConvertFontToLOGFONT dispatches through IDWriteGdiInterop's vtable slot 4.
-func (self *IDWriteGdiInterop) ConvertFontToLOGFONT(font *IDWriteFont, logFont *graphicsgdi.LOGFONTW, isSystemFont *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(logFont)), uintptr(unsafe.Pointer(isSystemFont)))
+func (self *IDWriteGdiInterop) ConvertFontToLOGFONT(font *IDWriteFont, logFont *graphicsgdi.LOGFONTW, isSystemFont *bool) error {
+	_isSystemFont := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(font)), uintptr(unsafe.Pointer(logFont)), uintptr(win32.OutParam(unsafe.Pointer(_isSystemFont))))
+	if isSystemFont != nil {
+		*isSystemFont = *_isSystemFont != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2642,9 +2698,13 @@ func (self *IDWriteLocalizedStrings) GetCount() uint32 {
 }
 
 // FindLocaleName dispatches through IDWriteLocalizedStrings's vtable slot 4.
-func (self *IDWriteLocalizedStrings) FindLocaleName(localeName string, index *uint32, exists *foundation.BOOL) error {
+func (self *IDWriteLocalizedStrings) FindLocaleName(localeName string, index *uint32, exists *bool) error {
 	_localeName := win32.UTF16Ptr(localeName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(index)), uintptr(unsafe.Pointer(exists)))
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(index)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2765,8 +2825,12 @@ type IDWritePixelSnapping struct {
 var IID_IDWritePixelSnapping = win32.GUID{Data1: 0xeaf3a2da, Data2: 0xecf4, Data3: 0x4d24, Data4: [8]byte{0xb6, 0x44, 0xb3, 0x4f, 0x68, 0x42, 0x02, 0x4b}}
 
 // IsPixelSnappingDisabled dispatches through IDWritePixelSnapping's vtable slot 3.
-func (self *IDWritePixelSnapping) IsPixelSnappingDisabled(clientDrawingContext unsafe.Pointer, isDisabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(unsafe.Pointer(isDisabled)))
+func (self *IDWritePixelSnapping) IsPixelSnappingDisabled(clientDrawingContext unsafe.Pointer, isDisabled *bool) error {
+	_isDisabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clientDrawingContext)), uintptr(win32.OutParam(unsafe.Pointer(_isDisabled))))
+	if isDisabled != nil {
+		*isDisabled = *_isDisabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2835,8 +2899,12 @@ func (self *IDWriteRemoteFontFileStream) GetLocalFileSize(localFileSize *uint64)
 }
 
 // GetFileFragmentLocality dispatches through IDWriteRemoteFontFileStream's vtable slot 8.
-func (self *IDWriteRemoteFontFileStream) GetFileFragmentLocality(fileOffset uint64, fragmentSize uint64, isLocal *foundation.BOOL, partialSize *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fileOffset), uintptr(fragmentSize), uintptr(unsafe.Pointer(isLocal)), uintptr(unsafe.Pointer(partialSize)))
+func (self *IDWriteRemoteFontFileStream) GetFileFragmentLocality(fileOffset uint64, fragmentSize uint64, isLocal *bool, partialSize *uint64) error {
+	_isLocal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(fileOffset), uintptr(fragmentSize), uintptr(win32.OutParam(unsafe.Pointer(_isLocal))), uintptr(unsafe.Pointer(partialSize)))
+	if isLocal != nil {
+		*isLocal = *_isLocal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3185,11 +3253,15 @@ func (self *IDWriteTextAnalyzer1) ApplyCharacterSpacing(leadingSpacing float32, 
 }
 
 // GetBaseline dispatches through IDWriteTextAnalyzer1's vtable slot 11.
-func (self *IDWriteTextAnalyzer1) GetBaseline(fontFace *IDWriteFontFace, baseline DWRITE_BASELINE, isVertical bool, isSimulationAllowed bool, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName *string, baselineCoordinate *int32, exists *foundation.BOOL) error {
+func (self *IDWriteTextAnalyzer1) GetBaseline(fontFace *IDWriteFontFace, baseline DWRITE_BASELINE, isVertical bool, isSimulationAllowed bool, scriptAnalysis DWRITE_SCRIPT_ANALYSIS, localeName *string, baselineCoordinate *int32, exists *bool) error {
 	_isVertical := win32.Bool32(isVertical)
 	_isSimulationAllowed := win32.Bool32(isSimulationAllowed)
 	_localeName := win32.UTF16PtrOrNil(localeName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(baseline), uintptr(_isVertical), uintptr(_isSimulationAllowed), uintptr(win32.StructArg(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(baselineCoordinate)), uintptr(unsafe.Pointer(exists)))
+	_exists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFace)), uintptr(baseline), uintptr(_isVertical), uintptr(_isSimulationAllowed), uintptr(win32.StructArg(scriptAnalysis)), uintptr(unsafe.Pointer(_localeName)), uintptr(unsafe.Pointer(baselineCoordinate)), uintptr(win32.OutParam(unsafe.Pointer(_exists))))
+	if exists != nil {
+		*exists = *_exists != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3213,9 +3285,13 @@ func (self *IDWriteTextAnalyzer1) GetScriptProperties(scriptAnalysis DWRITE_SCRI
 }
 
 // GetTextComplexity dispatches through IDWriteTextAnalyzer1's vtable slot 15.
-func (self *IDWriteTextAnalyzer1) GetTextComplexity(textString string, textLength uint32, fontFace *IDWriteFontFace, isTextSimple *foundation.BOOL, textLengthRead *uint32, glyphIndices *uint16) error {
+func (self *IDWriteTextAnalyzer1) GetTextComplexity(textString string, textLength uint32, fontFace *IDWriteFontFace, isTextSimple *bool, textLengthRead *uint32, glyphIndices *uint16) error {
 	_textString := win32.UTF16Ptr(textString)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_textString)), uintptr(textLength), uintptr(unsafe.Pointer(fontFace)), uintptr(unsafe.Pointer(isTextSimple)), uintptr(unsafe.Pointer(textLengthRead)), uintptr(unsafe.Pointer(glyphIndices)))
+	_isTextSimple := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_textString)), uintptr(textLength), uintptr(unsafe.Pointer(fontFace)), uintptr(win32.OutParam(unsafe.Pointer(_isTextSimple))), uintptr(unsafe.Pointer(textLengthRead)), uintptr(unsafe.Pointer(glyphIndices)))
+	if isTextSimple != nil {
+		*isTextSimple = *_isTextSimple != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3735,14 +3811,22 @@ func (self *IDWriteTextLayout) GetFontSize(currentPosition uint32, fontSize *flo
 }
 
 // GetUnderline dispatches through IDWriteTextLayout's vtable slot 51.
-func (self *IDWriteTextLayout) GetUnderline(currentPosition uint32, hasUnderline *foundation.BOOL, textRange *DWRITE_TEXT_RANGE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(unsafe.Pointer(hasUnderline)), uintptr(unsafe.Pointer(textRange)))
+func (self *IDWriteTextLayout) GetUnderline(currentPosition uint32, hasUnderline *bool, textRange *DWRITE_TEXT_RANGE) error {
+	_hasUnderline := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(win32.OutParam(unsafe.Pointer(_hasUnderline))), uintptr(unsafe.Pointer(textRange)))
+	if hasUnderline != nil {
+		*hasUnderline = *_hasUnderline != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetStrikethrough dispatches through IDWriteTextLayout's vtable slot 52.
-func (self *IDWriteTextLayout) GetStrikethrough(currentPosition uint32, hasStrikethrough *foundation.BOOL, textRange *DWRITE_TEXT_RANGE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(unsafe.Pointer(hasStrikethrough)), uintptr(unsafe.Pointer(textRange)))
+func (self *IDWriteTextLayout) GetStrikethrough(currentPosition uint32, hasStrikethrough *bool, textRange *DWRITE_TEXT_RANGE) error {
+	_hasStrikethrough := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(win32.OutParam(unsafe.Pointer(_hasStrikethrough))), uintptr(unsafe.Pointer(textRange)))
+	if hasStrikethrough != nil {
+		*hasStrikethrough = *_hasStrikethrough != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3825,8 +3909,16 @@ func (self *IDWriteTextLayout) DetermineMinWidth(minWidth *float32) error {
 var specIDWriteTextLayout_HitTestPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Float32, win32.Float32, win32.Word, win32.Word, win32.Word}}
 
 // HitTestPoint dispatches through IDWriteTextLayout's vtable slot 64.
-func (self *IDWriteTextLayout) HitTestPoint(pointX float32, pointY float32, isTrailingHit *foundation.BOOL, isInside *foundation.BOOL, hitTestMetrics *DWRITE_HIT_TEST_METRICS) error {
-	r1, _, _ := win32.Call(self.LpVtbl[64], specIDWriteTextLayout_HitTestPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(pointX)), uintptr(math.Float32bits(pointY)), uintptr(unsafe.Pointer(isTrailingHit)), uintptr(unsafe.Pointer(isInside)), uintptr(unsafe.Pointer(hitTestMetrics))).Tuple()
+func (self *IDWriteTextLayout) HitTestPoint(pointX float32, pointY float32, isTrailingHit *bool, isInside *bool, hitTestMetrics *DWRITE_HIT_TEST_METRICS) error {
+	_isTrailingHit := new(foundation.BOOL)
+	_isInside := new(foundation.BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[64], specIDWriteTextLayout_HitTestPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(math.Float32bits(pointX)), uintptr(math.Float32bits(pointY)), uintptr(win32.OutParam(unsafe.Pointer(_isTrailingHit))), uintptr(win32.OutParam(unsafe.Pointer(_isInside))), uintptr(unsafe.Pointer(hitTestMetrics))).Tuple()
+	if isTrailingHit != nil {
+		*isTrailingHit = *_isTrailingHit != 0
+	}
+	if isInside != nil {
+		*isInside = *_isInside != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3866,8 +3958,12 @@ func (self *IDWriteTextLayout1) SetPairKerning(isPairKerningEnabled bool, textRa
 }
 
 // GetPairKerning dispatches through IDWriteTextLayout1's vtable slot 68.
-func (self *IDWriteTextLayout1) GetPairKerning(currentPosition uint32, isPairKerningEnabled *foundation.BOOL, textRange *DWRITE_TEXT_RANGE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(unsafe.Pointer(isPairKerningEnabled)), uintptr(unsafe.Pointer(textRange)))
+func (self *IDWriteTextLayout1) GetPairKerning(currentPosition uint32, isPairKerningEnabled *bool, textRange *DWRITE_TEXT_RANGE) error {
+	_isPairKerningEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(win32.OutParam(unsafe.Pointer(_isPairKerningEnabled))), uintptr(unsafe.Pointer(textRange)))
+	if isPairKerningEnabled != nil {
+		*isPairKerningEnabled = *_isPairKerningEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

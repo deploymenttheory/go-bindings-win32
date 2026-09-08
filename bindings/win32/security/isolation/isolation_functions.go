@@ -138,26 +138,42 @@ func GetAppContainerRegistryLocation(desiredAccess uint32, phAppContainerKey *sy
 
 // IsCrossIsolatedEnvironmentClipboardContent calls IsolatedWindowsEnvironmentUtils!IsCrossIsolatedEnvironmentClipboardContent.
 // https://learn.microsoft.com/windows/win32/api/isolatedwindowsenvironmentutils/nf-isolatedwindowsenvironmentutils-iscrossisolatedenvironmentclipboardcontent
-func IsCrossIsolatedEnvironmentClipboardContent(isCrossIsolatedEnvironmentClipboardContent *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIsCrossIsolatedEnvironmentClipboardContent.Addr(), uintptr(unsafe.Pointer(isCrossIsolatedEnvironmentClipboardContent)))
+func IsCrossIsolatedEnvironmentClipboardContent(isCrossIsolatedEnvironmentClipboardContent *bool) error {
+	_isCrossIsolatedEnvironmentClipboardContent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsCrossIsolatedEnvironmentClipboardContent.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_isCrossIsolatedEnvironmentClipboardContent))))
+	if isCrossIsolatedEnvironmentClipboardContent != nil {
+		*isCrossIsolatedEnvironmentClipboardContent = *_isCrossIsolatedEnvironmentClipboardContent != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsProcessInIsolatedContainer calls api-ms-win-security-isolatedcontainer-l1-1-0!IsProcessInIsolatedContainer.
-func IsProcessInIsolatedContainer(isProcessInIsolatedContainer *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIsProcessInIsolatedContainer.Addr(), uintptr(unsafe.Pointer(isProcessInIsolatedContainer)))
+func IsProcessInIsolatedContainer(isProcessInIsolatedContainer *bool) error {
+	_isProcessInIsolatedContainer := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsProcessInIsolatedContainer.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_isProcessInIsolatedContainer))))
+	if isProcessInIsolatedContainer != nil {
+		*isProcessInIsolatedContainer = *_isProcessInIsolatedContainer != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsProcessInIsolatedWindowsEnvironment calls IsolatedWindowsEnvironmentUtils!IsProcessInIsolatedWindowsEnvironment.
 // https://learn.microsoft.com/windows/win32/api/isolatedwindowsenvironmentutils/nf-isolatedwindowsenvironmentutils-isprocessinisolatedwindowsenvironment
-func IsProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIsProcessInIsolatedWindowsEnvironment.Addr(), uintptr(unsafe.Pointer(isProcessInIsolatedWindowsEnvironment)))
+func IsProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment *bool) error {
+	_isProcessInIsolatedWindowsEnvironment := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsProcessInIsolatedWindowsEnvironment.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_isProcessInIsolatedWindowsEnvironment))))
+	if isProcessInIsolatedWindowsEnvironment != nil {
+		*isProcessInIsolatedWindowsEnvironment = *_isProcessInIsolatedWindowsEnvironment != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsProcessInWDAGContainer calls api-ms-win-security-isolatedcontainer-l1-1-1!IsProcessInWDAGContainer.
-func IsProcessInWDAGContainer(Reserved unsafe.Pointer, isProcessInWDAGContainer *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIsProcessInWDAGContainer.Addr(), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(isProcessInWDAGContainer)))
+func IsProcessInWDAGContainer(Reserved unsafe.Pointer, isProcessInWDAGContainer *bool) error {
+	_isProcessInWDAGContainer := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsProcessInWDAGContainer.Addr(), uintptr(unsafe.Pointer(Reserved)), uintptr(win32.OutParam(unsafe.Pointer(_isProcessInWDAGContainer))))
+	if isProcessInWDAGContainer != nil {
+		*isProcessInWDAGContainer = *_isProcessInWDAGContainer != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }

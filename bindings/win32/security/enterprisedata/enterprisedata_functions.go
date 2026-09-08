@@ -109,8 +109,12 @@ func SrpDisablePermissiveModeFileEncryption() error {
 // SrpDoesPolicyAllowAppExecution calls srpapi!SrpDoesPolicyAllowAppExecution.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpdoespolicyallowappexecution
 // Minimum OS: windows10.0.10240.
-func SrpDoesPolicyAllowAppExecution(packageId *storagepackagingappx.PACKAGE_ID, isAllowed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procSrpDoesPolicyAllowAppExecution.Addr(), uintptr(unsafe.Pointer(packageId)), uintptr(unsafe.Pointer(isAllowed)))
+func SrpDoesPolicyAllowAppExecution(packageId *storagepackagingappx.PACKAGE_ID, isAllowed *bool) error {
+	_isAllowed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procSrpDoesPolicyAllowAppExecution.Addr(), uintptr(unsafe.Pointer(packageId)), uintptr(win32.OutParam(unsafe.Pointer(_isAllowed))))
+	if isAllowed != nil {
+		*isAllowed = *_isAllowed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

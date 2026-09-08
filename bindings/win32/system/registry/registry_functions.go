@@ -797,8 +797,12 @@ func RegQueryMultipleValuesA(hKey HKEY, val_list []VALENTA, lpValueBuf foundatio
 // RegQueryReflectionKey calls ADVAPI32!RegQueryReflectionKey.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-regqueryreflectionkey
 // Minimum OS: windows6.0.6000.
-func RegQueryReflectionKey(hBase HKEY, bIsReflectionDisabled *foundation.BOOL) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRegQueryReflectionKey.Addr(), uintptr(hBase), uintptr(unsafe.Pointer(bIsReflectionDisabled)))
+func RegQueryReflectionKey(hBase HKEY, bIsReflectionDisabled *bool) foundation.WIN32_ERROR {
+	_bIsReflectionDisabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRegQueryReflectionKey.Addr(), uintptr(hBase), uintptr(win32.OutParam(unsafe.Pointer(_bIsReflectionDisabled))))
+	if bIsReflectionDisabled != nil {
+		*bIsReflectionDisabled = *_bIsReflectionDisabled != 0
+	}
 	return foundation.WIN32_ERROR(r1)
 }
 

@@ -2689,17 +2689,25 @@ func MsiInstallProductA(szPackagePath foundation.PSTR, szCommandLine foundation.
 // MsiIsProductElevated calls msi!MsiIsProductElevatedW.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiisproductelevatedw
 // Minimum OS: windows8.0.
-func MsiIsProductElevated(szProduct string, pfElevated *foundation.BOOL) uint32 {
+func MsiIsProductElevated(szProduct string, pfElevated *bool) uint32 {
 	_szProduct := win32.UTF16Ptr(szProduct)
-	r1, _, _ := syscall.SyscallN(procMsiIsProductElevated.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(unsafe.Pointer(pfElevated)))
+	_pfElevated := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procMsiIsProductElevated.Addr(), uintptr(unsafe.Pointer(_szProduct)), uintptr(win32.OutParam(unsafe.Pointer(_pfElevated))))
+	if pfElevated != nil {
+		*pfElevated = *_pfElevated != 0
+	}
 	return uint32(r1)
 }
 
 // MsiIsProductElevatedA calls msi!MsiIsProductElevatedA.
 // https://learn.microsoft.com/windows/win32/api/msi/nf-msi-msiisproductelevateda
 // Minimum OS: windows8.0.
-func MsiIsProductElevatedA(szProduct foundation.PSTR, pfElevated *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procMsiIsProductElevatedA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(unsafe.Pointer(pfElevated)))
+func MsiIsProductElevatedA(szProduct foundation.PSTR, pfElevated *bool) uint32 {
+	_pfElevated := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procMsiIsProductElevatedA.Addr(), uintptr(unsafe.Pointer(szProduct)), uintptr(win32.OutParam(unsafe.Pointer(_pfElevated))))
+	if pfElevated != nil {
+		*pfElevated = *_pfElevated != 0
+	}
 	return uint32(r1)
 }
 

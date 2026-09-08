@@ -11881,9 +11881,13 @@ func VerifyScripts(dwFlags uint32, lpLocaleScripts string, cchLocaleScripts int3
 // WideCharToMultiByte calls KERNEL32!WideCharToMultiByte.
 // https://learn.microsoft.com/windows/win32/api/stringapiset/nf-stringapiset-widechartomultibyte
 // Minimum OS: windows5.0.
-func WideCharToMultiByte(CodePage uint32, dwFlags uint32, lpWideCharStr string, cchWideChar int32, lpMultiByteStr foundation.PSTR, cbMultiByte int32, lpDefaultChar foundation.PSTR, lpUsedDefaultChar *foundation.BOOL) (int32, error) {
+func WideCharToMultiByte(CodePage uint32, dwFlags uint32, lpWideCharStr string, cchWideChar int32, lpMultiByteStr foundation.PSTR, cbMultiByte int32, lpDefaultChar foundation.PSTR, lpUsedDefaultChar *bool) (int32, error) {
 	_lpWideCharStr := win32.UTF16Ptr(lpWideCharStr)
-	r1, _, e1 := syscall.SyscallN(procWideCharToMultiByte.Addr(), uintptr(CodePage), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpWideCharStr)), uintptr(cchWideChar), uintptr(unsafe.Pointer(lpMultiByteStr)), uintptr(cbMultiByte), uintptr(unsafe.Pointer(lpDefaultChar)), uintptr(unsafe.Pointer(lpUsedDefaultChar)))
+	_lpUsedDefaultChar := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procWideCharToMultiByte.Addr(), uintptr(CodePage), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpWideCharStr)), uintptr(cchWideChar), uintptr(unsafe.Pointer(lpMultiByteStr)), uintptr(cbMultiByte), uintptr(unsafe.Pointer(lpDefaultChar)), uintptr(win32.OutParam(unsafe.Pointer(_lpUsedDefaultChar))))
+	if lpUsedDefaultChar != nil {
+		*lpUsedDefaultChar = *_lpUsedDefaultChar != 0
+	}
 	if e1 != 0 {
 		return int32(r1), e1
 	}

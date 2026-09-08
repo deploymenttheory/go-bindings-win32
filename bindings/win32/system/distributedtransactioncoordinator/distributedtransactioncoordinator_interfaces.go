@@ -502,8 +502,12 @@ type IDtcNetworkAccessConfig struct {
 var IID_IDtcNetworkAccessConfig = win32.GUID{Data1: 0x9797c15d, Data2: 0xa428, Data3: 0x4291, Data4: [8]byte{0x87, 0xb6, 0x09, 0x95, 0x03, 0x1a, 0x67, 0x8d}}
 
 // GetAnyNetworkAccess dispatches through IDtcNetworkAccessConfig's vtable slot 3.
-func (self *IDtcNetworkAccessConfig) GetAnyNetworkAccess(pbAnyNetworkAccess *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAnyNetworkAccess)))
+func (self *IDtcNetworkAccessConfig) GetAnyNetworkAccess(pbAnyNetworkAccess *bool) error {
+	_pbAnyNetworkAccess := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbAnyNetworkAccess))))
+	if pbAnyNetworkAccess != nil {
+		*pbAnyNetworkAccess = *_pbAnyNetworkAccess != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -515,8 +519,12 @@ func (self *IDtcNetworkAccessConfig) SetAnyNetworkAccess(bAnyNetworkAccess bool)
 }
 
 // GetNetworkAdministrationAccess dispatches through IDtcNetworkAccessConfig's vtable slot 5.
-func (self *IDtcNetworkAccessConfig) GetNetworkAdministrationAccess(pbNetworkAdministrationAccess *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbNetworkAdministrationAccess)))
+func (self *IDtcNetworkAccessConfig) GetNetworkAdministrationAccess(pbNetworkAdministrationAccess *bool) error {
+	_pbNetworkAdministrationAccess := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbNetworkAdministrationAccess))))
+	if pbNetworkAdministrationAccess != nil {
+		*pbNetworkAdministrationAccess = *_pbNetworkAdministrationAccess != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -528,8 +536,12 @@ func (self *IDtcNetworkAccessConfig) SetNetworkAdministrationAccess(bNetworkAdmi
 }
 
 // GetNetworkTransactionAccess dispatches through IDtcNetworkAccessConfig's vtable slot 7.
-func (self *IDtcNetworkAccessConfig) GetNetworkTransactionAccess(pbNetworkTransactionAccess *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbNetworkTransactionAccess)))
+func (self *IDtcNetworkAccessConfig) GetNetworkTransactionAccess(pbNetworkTransactionAccess *bool) error {
+	_pbNetworkTransactionAccess := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbNetworkTransactionAccess))))
+	if pbNetworkTransactionAccess != nil {
+		*pbNetworkTransactionAccess = *_pbNetworkTransactionAccess != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -541,8 +553,12 @@ func (self *IDtcNetworkAccessConfig) SetNetworkTransactionAccess(bNetworkTransac
 }
 
 // GetNetworkClientAccess dispatches through IDtcNetworkAccessConfig's vtable slot 9.
-func (self *IDtcNetworkAccessConfig) GetNetworkClientAccess(pbNetworkClientAccess *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbNetworkClientAccess)))
+func (self *IDtcNetworkAccessConfig) GetNetworkClientAccess(pbNetworkClientAccess *bool) error {
+	_pbNetworkClientAccess := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbNetworkClientAccess))))
+	if pbNetworkClientAccess != nil {
+		*pbNetworkClientAccess = *_pbNetworkClientAccess != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -554,8 +570,12 @@ func (self *IDtcNetworkAccessConfig) SetNetworkClientAccess(bNetworkClientAccess
 }
 
 // GetNetworkTIPAccess dispatches through IDtcNetworkAccessConfig's vtable slot 11.
-func (self *IDtcNetworkAccessConfig) GetNetworkTIPAccess(pbNetworkTIPAccess *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbNetworkTIPAccess)))
+func (self *IDtcNetworkAccessConfig) GetNetworkTIPAccess(pbNetworkTIPAccess *bool) error {
+	_pbNetworkTIPAccess := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbNetworkTIPAccess))))
+	if pbNetworkTIPAccess != nil {
+		*pbNetworkTIPAccess = *_pbNetworkTIPAccess != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -567,8 +587,12 @@ func (self *IDtcNetworkAccessConfig) SetNetworkTIPAccess(bNetworkTIPAccess bool)
 }
 
 // GetXAAccess dispatches through IDtcNetworkAccessConfig's vtable slot 13.
-func (self *IDtcNetworkAccessConfig) GetXAAccess(pbXAAccess *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbXAAccess)))
+func (self *IDtcNetworkAccessConfig) GetXAAccess(pbXAAccess *bool) error {
+	_pbXAAccess := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbXAAccess))))
+	if pbXAAccess != nil {
+		*pbXAAccess = *_pbXAAccess != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -594,14 +618,22 @@ type IDtcNetworkAccessConfig2 struct {
 var IID_IDtcNetworkAccessConfig2 = win32.GUID{Data1: 0xa7aa013b, Data2: 0xeb7d, Data3: 0x4f42, Data4: [8]byte{0xb4, 0x1c, 0xb2, 0xde, 0xc0, 0x9a, 0xe0, 0x34}}
 
 // GetNetworkInboundAccess dispatches through IDtcNetworkAccessConfig2's vtable slot 16.
-func (self *IDtcNetworkAccessConfig2) GetNetworkInboundAccess(pbInbound *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbInbound)))
+func (self *IDtcNetworkAccessConfig2) GetNetworkInboundAccess(pbInbound *bool) error {
+	_pbInbound := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbInbound))))
+	if pbInbound != nil {
+		*pbInbound = *_pbInbound != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetNetworkOutboundAccess dispatches through IDtcNetworkAccessConfig2's vtable slot 17.
-func (self *IDtcNetworkAccessConfig2) GetNetworkOutboundAccess(pbOutbound *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbOutbound)))
+func (self *IDtcNetworkAccessConfig2) GetNetworkOutboundAccess(pbOutbound *bool) error {
+	_pbOutbound := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbOutbound))))
+	if pbOutbound != nil {
+		*pbOutbound = *_pbOutbound != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -640,8 +672,12 @@ type IDtcNetworkAccessConfig3 struct {
 var IID_IDtcNetworkAccessConfig3 = win32.GUID{Data1: 0x76e4b4f3, Data2: 0x2ca5, Data3: 0x466b, Data4: [8]byte{0x89, 0xd5, 0xfd, 0x21, 0x8e, 0xe7, 0x5b, 0x49}}
 
 // GetLUAccess dispatches through IDtcNetworkAccessConfig3's vtable slot 22.
-func (self *IDtcNetworkAccessConfig3) GetLUAccess(pbLUAccess *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLUAccess)))
+func (self *IDtcNetworkAccessConfig3) GetLUAccess(pbLUAccess *bool) error {
+	_pbLUAccess := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbLUAccess))))
+	if pbLUAccess != nil {
+		*pbLUAccess = *_pbLUAccess != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

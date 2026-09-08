@@ -336,8 +336,12 @@ func IEIsInPrivateBrowsing() bool {
 }
 
 // IEIsProtectedModeProcess calls Ieframe!IEIsProtectedModeProcess.
-func IEIsProtectedModeProcess(pbResult *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIEIsProtectedModeProcess.Addr(), uintptr(unsafe.Pointer(pbResult)))
+func IEIsProtectedModeProcess(pbResult *bool) error {
+	_pbResult := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIEIsProtectedModeProcess.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbResult))))
+	if pbResult != nil {
+		*pbResult = *_pbResult != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -125,14 +125,22 @@ var Procs = struct {
 }
 
 // CheckGamingPrivilegeSilently calls api-ms-win-gaming-tcui-l1-1-1!CheckGamingPrivilegeSilently.
-func CheckGamingPrivilegeSilently(privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procCheckGamingPrivilegeSilently.Addr(), uintptr(privilegeId), uintptr(scope), uintptr(policy), uintptr(unsafe.Pointer(hasPrivilege)))
+func CheckGamingPrivilegeSilently(privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *bool) error {
+	_hasPrivilege := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procCheckGamingPrivilegeSilently.Addr(), uintptr(privilegeId), uintptr(scope), uintptr(policy), uintptr(win32.OutParam(unsafe.Pointer(_hasPrivilege))))
+	if hasPrivilege != nil {
+		*hasPrivilege = *_hasPrivilege != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CheckGamingPrivilegeSilentlyForUser calls api-ms-win-gaming-tcui-l1-1-2!CheckGamingPrivilegeSilentlyForUser.
-func CheckGamingPrivilegeSilentlyForUser(user *systemwinrt.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procCheckGamingPrivilegeSilentlyForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(privilegeId), uintptr(scope), uintptr(policy), uintptr(unsafe.Pointer(hasPrivilege)))
+func CheckGamingPrivilegeSilentlyForUser(user *systemwinrt.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *bool) error {
+	_hasPrivilege := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procCheckGamingPrivilegeSilentlyForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(privilegeId), uintptr(scope), uintptr(policy), uintptr(win32.OutParam(unsafe.Pointer(_hasPrivilege))))
+	if hasPrivilege != nil {
+		*hasPrivilege = *_hasPrivilege != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -165,8 +173,12 @@ func GetGamingDeviceModelInformation(information *GAMING_DEVICE_MODEL_INFORMATIO
 
 // HasExpandedResources calls api-ms-win-gaming-expandedresources-l1-1-0!HasExpandedResources.
 // https://learn.microsoft.com/windows/win32/api/expandedresources/nf-expandedresources-hasexpandedresources
-func HasExpandedResources(hasExpandedResources *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procHasExpandedResources.Addr(), uintptr(unsafe.Pointer(hasExpandedResources)))
+func HasExpandedResources(hasExpandedResources *bool) error {
+	_hasExpandedResources := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procHasExpandedResources.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_hasExpandedResources))))
+	if hasExpandedResources != nil {
+		*hasExpandedResources = *_hasExpandedResources != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

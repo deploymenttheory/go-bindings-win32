@@ -3381,9 +3381,13 @@ func InitializeClusterHealthFaultArray(clusterHealthFaultArray *CLUSTER_HEALTH_F
 // IsFileOnClusterSharedVolume calls CLUSAPI!IsFileOnClusterSharedVolume.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-isfileonclustersharedvolume
 // Minimum OS: windowsserver2008.
-func IsFileOnClusterSharedVolume(lpszPathName string, pbFileIsOnSharedVolume *foundation.BOOL) uint32 {
+func IsFileOnClusterSharedVolume(lpszPathName string, pbFileIsOnSharedVolume *bool) uint32 {
 	_lpszPathName := win32.UTF16Ptr(lpszPathName)
-	r1, _, _ := syscall.SyscallN(procIsFileOnClusterSharedVolume.Addr(), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(unsafe.Pointer(pbFileIsOnSharedVolume)))
+	_pbFileIsOnSharedVolume := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsFileOnClusterSharedVolume.Addr(), uintptr(unsafe.Pointer(_lpszPathName)), uintptr(win32.OutParam(unsafe.Pointer(_pbFileIsOnSharedVolume))))
+	if pbFileIsOnSharedVolume != nil {
+		*pbFileIsOnSharedVolume = *_pbFileIsOnSharedVolume != 0
+	}
 	return uint32(r1)
 }
 

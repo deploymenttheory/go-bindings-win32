@@ -84,8 +84,12 @@ func GetProviderMgmtInterfaceInternal(ProviderId win32.GUID, InterfaceId win32.G
 // IsVolumeSnapshottedInternal calls VSSAPI!IsVolumeSnapshottedInternal.
 // https://learn.microsoft.com/windows/win32/api/vsbackup/nf-vsbackup-isvolumesnapshottedinternal
 // Minimum OS: windows5.1.2600.
-func IsVolumeSnapshottedInternal(pwszVolumeName *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCapability *int32) error {
-	r1, _, _ := syscall.SyscallN(procIsVolumeSnapshottedInternal.Addr(), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSnapshotsPresent)), uintptr(unsafe.Pointer(plSnapshotCapability)))
+func IsVolumeSnapshottedInternal(pwszVolumeName *uint16, pbSnapshotsPresent *bool, plSnapshotCapability *int32) error {
+	_pbSnapshotsPresent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsVolumeSnapshottedInternal.Addr(), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(win32.OutParam(unsafe.Pointer(_pbSnapshotsPresent))), uintptr(unsafe.Pointer(plSnapshotCapability)))
+	if pbSnapshotsPresent != nil {
+		*pbSnapshotsPresent = *_pbSnapshotsPresent != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

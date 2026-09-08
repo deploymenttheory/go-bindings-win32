@@ -1970,23 +1970,31 @@ func CM_Delete_Range(ullStartValue uint64, ullEndValue uint64, rlh uintptr, ulFl
 
 // CM_Detect_Resource_Conflict calls CFGMGR32!CM_Detect_Resource_Conflict.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_detect_resource_conflict
-func CM_Detect_Resource_Conflict(dnDevInst uint32, ResourceID uint32, ResourceData []byte, pbConflictDetected *foundation.BOOL, ulFlags uint32) CONFIGRET {
+func CM_Detect_Resource_Conflict(dnDevInst uint32, ResourceID uint32, ResourceData []byte, pbConflictDetected *bool, ulFlags uint32) CONFIGRET {
 	var _ResourceData *byte
 	if len(ResourceData) > 0 {
 		_ResourceData = &ResourceData[0]
 	}
-	r1, _, _ := syscall.SyscallN(procCM_Detect_Resource_Conflict.Addr(), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(unsafe.Pointer(pbConflictDetected)), uintptr(ulFlags))
+	_pbConflictDetected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procCM_Detect_Resource_Conflict.Addr(), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(win32.OutParam(unsafe.Pointer(_pbConflictDetected))), uintptr(ulFlags))
+	if pbConflictDetected != nil {
+		*pbConflictDetected = *_pbConflictDetected != 0
+	}
 	return CONFIGRET(r1)
 }
 
 // CM_Detect_Resource_Conflict_Ex calls CFGMGR32!CM_Detect_Resource_Conflict_Ex.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_detect_resource_conflict_ex
-func CM_Detect_Resource_Conflict_Ex(dnDevInst uint32, ResourceID uint32, ResourceData []byte, pbConflictDetected *foundation.BOOL, ulFlags uint32, hMachine uintptr) CONFIGRET {
+func CM_Detect_Resource_Conflict_Ex(dnDevInst uint32, ResourceID uint32, ResourceData []byte, pbConflictDetected *bool, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	var _ResourceData *byte
 	if len(ResourceData) > 0 {
 		_ResourceData = &ResourceData[0]
 	}
-	r1, _, _ := syscall.SyscallN(procCM_Detect_Resource_Conflict_Ex.Addr(), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(unsafe.Pointer(pbConflictDetected)), uintptr(ulFlags), uintptr(hMachine))
+	_pbConflictDetected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procCM_Detect_Resource_Conflict_Ex.Addr(), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(win32.OutParam(unsafe.Pointer(_pbConflictDetected))), uintptr(ulFlags), uintptr(hMachine))
+	if pbConflictDetected != nil {
+		*pbConflictDetected = *_pbConflictDetected != 0
+	}
 	return CONFIGRET(r1)
 }
 
@@ -2917,16 +2925,24 @@ func CM_Invert_Range_List(rlhOld uintptr, rlhNew uintptr, ullMaxValue uint64, ul
 // CM_Is_Dock_Station_Present calls CFGMGR32!CM_Is_Dock_Station_Present.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_is_dock_station_present
 // Minimum OS: windows5.0.
-func CM_Is_Dock_Station_Present(pbPresent *foundation.BOOL) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Is_Dock_Station_Present.Addr(), uintptr(unsafe.Pointer(pbPresent)))
+func CM_Is_Dock_Station_Present(pbPresent *bool) CONFIGRET {
+	_pbPresent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procCM_Is_Dock_Station_Present.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbPresent))))
+	if pbPresent != nil {
+		*pbPresent = *_pbPresent != 0
+	}
 	return CONFIGRET(r1)
 }
 
 // CM_Is_Dock_Station_Present_Ex calls CFGMGR32!CM_Is_Dock_Station_Present_Ex.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_is_dock_station_present_ex
 // Minimum OS: windows5.0.
-func CM_Is_Dock_Station_Present_Ex(pbPresent *foundation.BOOL, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Is_Dock_Station_Present_Ex.Addr(), uintptr(unsafe.Pointer(pbPresent)), uintptr(hMachine))
+func CM_Is_Dock_Station_Present_Ex(pbPresent *bool, hMachine uintptr) CONFIGRET {
+	_pbPresent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procCM_Is_Dock_Station_Present_Ex.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbPresent))), uintptr(hMachine))
+	if pbPresent != nil {
+		*pbPresent = *_pbPresent != 0
+	}
 	return CONFIGRET(r1)
 }
 
@@ -3633,8 +3649,12 @@ func CM_Unregister_Notification(NotifyContext HCMNOTIFICATION) CONFIGRET {
 // DiInstallDevice calls newdev!DiInstallDevice.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diinstalldevice
 // Minimum OS: windows6.0.6000.
-func DiInstallDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W, Flags DIINSTALLDEVICE_FLAGS, NeedReboot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDiInstallDevice.Addr(), uintptr(hwndParent), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+func DiInstallDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W, Flags DIINSTALLDEVICE_FLAGS, NeedReboot *bool) error {
+	_NeedReboot := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procDiInstallDevice.Addr(), uintptr(hwndParent), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_NeedReboot))))
+	if NeedReboot != nil {
+		*NeedReboot = *_NeedReboot != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3644,9 +3664,13 @@ func DiInstallDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, DeviceI
 // DiInstallDriver calls newdev!DiInstallDriverW.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diinstalldriverw
 // Minimum OS: windows6.0.6000.
-func DiInstallDriver(hwndParent foundation.HWND, InfPath string, Flags DIINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
+func DiInstallDriver(hwndParent foundation.HWND, InfPath string, Flags DIINSTALLDRIVER_FLAGS, NeedReboot *bool) error {
 	_InfPath := win32.UTF16Ptr(InfPath)
-	r1, _, e1 := syscall.SyscallN(procDiInstallDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+	_NeedReboot := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procDiInstallDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_InfPath)), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_NeedReboot))))
+	if NeedReboot != nil {
+		*NeedReboot = *_NeedReboot != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3656,8 +3680,12 @@ func DiInstallDriver(hwndParent foundation.HWND, InfPath string, Flags DIINSTALL
 // DiInstallDriverA calls newdev!DiInstallDriverA.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diinstalldrivera
 // Minimum OS: windows6.0.6000.
-func DiInstallDriverA(hwndParent foundation.HWND, InfPath foundation.PSTR, Flags DIINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDiInstallDriverA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+func DiInstallDriverA(hwndParent foundation.HWND, InfPath foundation.PSTR, Flags DIINSTALLDRIVER_FLAGS, NeedReboot *bool) error {
+	_NeedReboot := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procDiInstallDriverA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfPath)), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_NeedReboot))))
+	if NeedReboot != nil {
+		*NeedReboot = *_NeedReboot != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3667,8 +3695,12 @@ func DiInstallDriverA(hwndParent foundation.HWND, InfPath foundation.PSTR, Flags
 // DiRollbackDriver calls newdev!DiRollbackDriver.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-dirollbackdriver
 // Minimum OS: windows6.0.6000.
-func DiRollbackDriver(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, hwndParent foundation.HWND, Flags DIROLLBACKDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDiRollbackDriver.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(hwndParent), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+func DiRollbackDriver(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, hwndParent foundation.HWND, Flags DIROLLBACKDRIVER_FLAGS, NeedReboot *bool) error {
+	_NeedReboot := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procDiRollbackDriver.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(hwndParent), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_NeedReboot))))
+	if NeedReboot != nil {
+		*NeedReboot = *_NeedReboot != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3678,8 +3710,12 @@ func DiRollbackDriver(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, h
 // DiShowUpdateDevice calls newdev!DiShowUpdateDevice.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-dishowupdatedevice
 // Minimum OS: windows6.0.6000.
-func DiShowUpdateDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Flags uint32, NeedReboot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDiShowUpdateDevice.Addr(), uintptr(hwndParent), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+func DiShowUpdateDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Flags uint32, NeedReboot *bool) error {
+	_NeedReboot := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procDiShowUpdateDevice.Addr(), uintptr(hwndParent), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_NeedReboot))))
+	if NeedReboot != nil {
+		*NeedReboot = *_NeedReboot != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3687,17 +3723,25 @@ func DiShowUpdateDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, Devi
 }
 
 // DiShowUpdateDriver calls newdev!DiShowUpdateDriver.
-func DiShowUpdateDriver(hwndParent foundation.HWND, FilePath *string, Flags uint32, NeedReboot *foundation.BOOL) bool {
+func DiShowUpdateDriver(hwndParent foundation.HWND, FilePath *string, Flags uint32, NeedReboot *bool) bool {
 	_FilePath := win32.UTF16PtrOrNil(FilePath)
-	r1, _, _ := syscall.SyscallN(procDiShowUpdateDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_FilePath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+	_NeedReboot := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procDiShowUpdateDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_FilePath)), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_NeedReboot))))
+	if NeedReboot != nil {
+		*NeedReboot = *_NeedReboot != 0
+	}
 	return r1 != 0
 }
 
 // DiUninstallDevice calls newdev!DiUninstallDevice.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diuninstalldevice
 // Minimum OS: windows6.1.
-func DiUninstallDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Flags uint32, NeedReboot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDiUninstallDevice.Addr(), uintptr(hwndParent), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+func DiUninstallDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Flags uint32, NeedReboot *bool) error {
+	_NeedReboot := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procDiUninstallDevice.Addr(), uintptr(hwndParent), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_NeedReboot))))
+	if NeedReboot != nil {
+		*NeedReboot = *_NeedReboot != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3707,9 +3751,13 @@ func DiUninstallDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, Devic
 // DiUninstallDriver calls newdev!DiUninstallDriverW.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diuninstalldriverw
 // Minimum OS: windows10.0.10240.
-func DiUninstallDriver(hwndParent foundation.HWND, InfPath string, Flags DIUNINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
+func DiUninstallDriver(hwndParent foundation.HWND, InfPath string, Flags DIUNINSTALLDRIVER_FLAGS, NeedReboot *bool) error {
 	_InfPath := win32.UTF16Ptr(InfPath)
-	r1, _, e1 := syscall.SyscallN(procDiUninstallDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+	_NeedReboot := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procDiUninstallDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_InfPath)), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_NeedReboot))))
+	if NeedReboot != nil {
+		*NeedReboot = *_NeedReboot != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3718,8 +3766,12 @@ func DiUninstallDriver(hwndParent foundation.HWND, InfPath string, Flags DIUNINS
 
 // DiUninstallDriverA calls newdev!DiUninstallDriverA.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diuninstalldrivera
-func DiUninstallDriverA(hwndParent foundation.HWND, InfPath foundation.PSTR, Flags DIUNINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDiUninstallDriverA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+func DiUninstallDriverA(hwndParent foundation.HWND, InfPath foundation.PSTR, Flags DIUNINSTALLDRIVER_FLAGS, NeedReboot *bool) error {
+	_NeedReboot := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procDiUninstallDriverA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfPath)), uintptr(Flags), uintptr(win32.OutParam(unsafe.Pointer(_NeedReboot))))
+	if NeedReboot != nil {
+		*NeedReboot = *_NeedReboot != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -6533,11 +6585,15 @@ func SetupInstallFileA(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceF
 // SetupInstallFileEx calls SETUPAPI!SetupInstallFileExW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfileexw
 // Minimum OS: windows5.1.2600.
-func SetupInstallFileEx(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceFile *string, SourcePathRoot *string, DestinationName *string, CopyStyle SP_COPY_STYLE, CopyMsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer, FileWasInUse *foundation.BOOL) error {
+func SetupInstallFileEx(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceFile *string, SourcePathRoot *string, DestinationName *string, CopyStyle SP_COPY_STYLE, CopyMsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer, FileWasInUse *bool) error {
 	_SourceFile := win32.UTF16PtrOrNil(SourceFile)
 	_SourcePathRoot := win32.UTF16PtrOrNil(SourcePathRoot)
 	_DestinationName := win32.UTF16PtrOrNil(DestinationName)
-	r1, _, e1 := syscall.SyscallN(procSetupInstallFileEx.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(_SourceFile)), uintptr(unsafe.Pointer(_SourcePathRoot)), uintptr(unsafe.Pointer(_DestinationName)), uintptr(CopyStyle), uintptr(CopyMsgHandler), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(FileWasInUse)))
+	_FileWasInUse := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procSetupInstallFileEx.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(_SourceFile)), uintptr(unsafe.Pointer(_SourcePathRoot)), uintptr(unsafe.Pointer(_DestinationName)), uintptr(CopyStyle), uintptr(CopyMsgHandler), uintptr(unsafe.Pointer(Context)), uintptr(win32.OutParam(unsafe.Pointer(_FileWasInUse))))
+	if FileWasInUse != nil {
+		*FileWasInUse = *_FileWasInUse != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -6547,8 +6603,12 @@ func SetupInstallFileEx(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, Source
 // SetupInstallFileExA calls SETUPAPI!SetupInstallFileExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfileexa
 // Minimum OS: windows5.1.2600.
-func SetupInstallFileExA(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceFile foundation.PSTR, SourcePathRoot foundation.PSTR, DestinationName foundation.PSTR, CopyStyle SP_COPY_STYLE, CopyMsgHandler PSP_FILE_CALLBACK_A, Context unsafe.Pointer, FileWasInUse *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetupInstallFileExA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(SourceFile)), uintptr(unsafe.Pointer(SourcePathRoot)), uintptr(unsafe.Pointer(DestinationName)), uintptr(CopyStyle), uintptr(CopyMsgHandler), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(FileWasInUse)))
+func SetupInstallFileExA(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceFile foundation.PSTR, SourcePathRoot foundation.PSTR, DestinationName foundation.PSTR, CopyStyle SP_COPY_STYLE, CopyMsgHandler PSP_FILE_CALLBACK_A, Context unsafe.Pointer, FileWasInUse *bool) error {
+	_FileWasInUse := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procSetupInstallFileExA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(SourceFile)), uintptr(unsafe.Pointer(SourcePathRoot)), uintptr(unsafe.Pointer(DestinationName)), uintptr(CopyStyle), uintptr(CopyMsgHandler), uintptr(unsafe.Pointer(Context)), uintptr(win32.OutParam(unsafe.Pointer(_FileWasInUse))))
+	if FileWasInUse != nil {
+		*FileWasInUse = *_FileWasInUse != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -7613,10 +7673,14 @@ func SetupWriteTextLogInfLine(LogToken uint64, Flags uint32, InfHandle unsafe.Po
 // UpdateDriverForPlugAndPlayDevices calls newdev!UpdateDriverForPlugAndPlayDevicesW.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-updatedriverforplugandplaydevicesw
 // Minimum OS: windows5.0.
-func UpdateDriverForPlugAndPlayDevices(hwndParent foundation.HWND, HardwareId string, FullInfPath string, InstallFlags UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired *foundation.BOOL) error {
+func UpdateDriverForPlugAndPlayDevices(hwndParent foundation.HWND, HardwareId string, FullInfPath string, InstallFlags UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired *bool) error {
 	_HardwareId := win32.UTF16Ptr(HardwareId)
 	_FullInfPath := win32.UTF16Ptr(FullInfPath)
-	r1, _, e1 := syscall.SyscallN(procUpdateDriverForPlugAndPlayDevices.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_HardwareId)), uintptr(unsafe.Pointer(_FullInfPath)), uintptr(InstallFlags), uintptr(unsafe.Pointer(bRebootRequired)))
+	_bRebootRequired := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procUpdateDriverForPlugAndPlayDevices.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_HardwareId)), uintptr(unsafe.Pointer(_FullInfPath)), uintptr(InstallFlags), uintptr(win32.OutParam(unsafe.Pointer(_bRebootRequired))))
+	if bRebootRequired != nil {
+		*bRebootRequired = *_bRebootRequired != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -7626,8 +7690,12 @@ func UpdateDriverForPlugAndPlayDevices(hwndParent foundation.HWND, HardwareId st
 // UpdateDriverForPlugAndPlayDevicesA calls newdev!UpdateDriverForPlugAndPlayDevicesA.
 // https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-updatedriverforplugandplaydevicesa
 // Minimum OS: windows5.0.
-func UpdateDriverForPlugAndPlayDevicesA(hwndParent foundation.HWND, HardwareId foundation.PSTR, FullInfPath foundation.PSTR, InstallFlags UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procUpdateDriverForPlugAndPlayDevicesA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(HardwareId)), uintptr(unsafe.Pointer(FullInfPath)), uintptr(InstallFlags), uintptr(unsafe.Pointer(bRebootRequired)))
+func UpdateDriverForPlugAndPlayDevicesA(hwndParent foundation.HWND, HardwareId foundation.PSTR, FullInfPath foundation.PSTR, InstallFlags UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired *bool) error {
+	_bRebootRequired := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procUpdateDriverForPlugAndPlayDevicesA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(HardwareId)), uintptr(unsafe.Pointer(FullInfPath)), uintptr(InstallFlags), uintptr(win32.OutParam(unsafe.Pointer(_bRebootRequired))))
+	if bRebootRequired != nil {
+		*bRebootRequired = *_bRebootRequired != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

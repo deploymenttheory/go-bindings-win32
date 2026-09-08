@@ -378,6 +378,11 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 			withLastError(function("ByteBuffer", testDLL, boolType(),
 				param("buffer", voidPtrType(), in, sizedBy(1)),
 				param("size", native("UInt32"), in))),
+			// BOOL out-params: a [retval] one elevates to a bool return, a
+			// plain one becomes *bool with a post-dispatch write-back.
+			function("RetValBoolOut", testDLL, hresultType(), param("value", pointerTo(boolType()), retval)),
+			withLastError(function("BoolOut", testDLL, boolType(), param("flag", pointerTo(boolType()), out))),
+			function("BoolOutVoid", testDLL, native("Void"), param("flag", pointerTo(boolType()), out)),
 			function("RetValHR", testDLL, hresultType(), param("value", pointerTo(native("UInt32")), retval)),
 			withLastError(function("RetValBool", testDLL, boolType(), param("value", pointerTo(native("UInt32")), retval))),
 			function("RetValVoid", testDLL, native("Void"), param("value", pointerTo(native("UInt32")), retval)),
@@ -433,7 +438,11 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 			},
 			"ITest2": {
 				GUID: "aaaaaaaa-0000-0000-0000-000000000002", BaseInterface: "ITest", BaseInterfaceApi: shapes,
-				Methods: []win32meta.ComMethod{method("Extra", hresultType(), param("flag", boolType(), in))},
+				Methods: []win32meta.ComMethod{
+					method("Extra", hresultType(), param("flag", boolType(), in)),
+					method("GetMute", hresultType(), param("muted", pointerTo(boolType()), out)),
+					method("IsSupported", hresultType(), param("supported", pointerTo(boolType()), retval)),
+				},
 			},
 			"IEnumTest": {
 				GUID: "aaaaaaaa-0000-0000-0000-000000000003", BaseInterface: "IUnknown", BaseInterfaceApi: systemCom,

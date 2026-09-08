@@ -1445,10 +1445,14 @@ func (self *IVdsPack) AddDisk(DiskId win32.GUID, PartitionStyle VDS_PARTITION_ST
 var specIVdsPack_MigrateDisks = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Word, win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word, win32.Word, win32.Word}}
 
 // MigrateDisks dispatches through IVdsPack's vtable slot 9.
-func (self *IVdsPack) MigrateDisks(pDiskArray *win32.GUID, lNumberOfDisks int32, TargetPack win32.GUID, bForce bool, bQueryOnly bool, pResults *foundation.HRESULT, pbRebootNeeded *foundation.BOOL) error {
+func (self *IVdsPack) MigrateDisks(pDiskArray *win32.GUID, lNumberOfDisks int32, TargetPack win32.GUID, bForce bool, bQueryOnly bool, pResults *foundation.HRESULT, pbRebootNeeded *bool) error {
 	_bForce := win32.Bool32(bForce)
 	_bQueryOnly := win32.Bool32(bQueryOnly)
-	r1, _, _ := win32.Call(self.LpVtbl[9], specIVdsPack_MigrateDisks, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDiskArray)), uintptr(lNumberOfDisks), uintptr(unsafe.Pointer(&TargetPack)), uintptr(_bForce), uintptr(_bQueryOnly), uintptr(unsafe.Pointer(pResults)), uintptr(unsafe.Pointer(pbRebootNeeded))).Tuple()
+	_pbRebootNeeded := new(foundation.BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[9], specIVdsPack_MigrateDisks, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDiskArray)), uintptr(lNumberOfDisks), uintptr(unsafe.Pointer(&TargetPack)), uintptr(_bForce), uintptr(_bQueryOnly), uintptr(unsafe.Pointer(pResults)), uintptr(win32.OutParam(unsafe.Pointer(_pbRebootNeeded)))).Tuple()
+	if pbRebootNeeded != nil {
+		*pbRebootNeeded = *_pbRebootNeeded != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

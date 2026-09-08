@@ -88,8 +88,12 @@ func (self *IAudioAmbisonicsControl) SetHeadTracking(bEnableHeadTracking bool) e
 }
 
 // GetHeadTracking dispatches through IAudioAmbisonicsControl's vtable slot 5.
-func (self *IAudioAmbisonicsControl) GetHeadTracking(pbEnableHeadTracking *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnableHeadTracking)))
+func (self *IAudioAmbisonicsControl) GetHeadTracking(pbEnableHeadTracking *bool) error {
+	_pbEnableHeadTracking := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbEnableHeadTracking))))
+	if pbEnableHeadTracking != nil {
+		*pbEnableHeadTracking = *_pbEnableHeadTracking != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -111,8 +115,12 @@ type IAudioAutoGainControl struct {
 var IID_IAudioAutoGainControl = win32.GUID{Data1: 0x85401fd4, Data2: 0x6de4, Data3: 0x4b9d, Data4: [8]byte{0x98, 0x69, 0x2d, 0x67, 0x53, 0xa8, 0x2f, 0x3c}}
 
 // GetEnabled dispatches through IAudioAutoGainControl's vtable slot 3.
-func (self *IAudioAutoGainControl) GetEnabled(pbEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
+func (self *IAudioAutoGainControl) GetEnabled(pbEnabled *bool) error {
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -272,8 +280,12 @@ type IAudioClient2 struct {
 var IID_IAudioClient2 = win32.GUID{Data1: 0x726778cd, Data2: 0xf60a, Data3: 0x4eda, Data4: [8]byte{0x82, 0xde, 0xe4, 0x76, 0x10, 0xcd, 0x78, 0xaa}}
 
 // IsOffloadCapable dispatches through IAudioClient2's vtable slot 15.
-func (self *IAudioClient2) IsOffloadCapable(Category AUDIO_STREAM_CATEGORY, pbOffloadCapable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Category), uintptr(unsafe.Pointer(pbOffloadCapable)))
+func (self *IAudioClient2) IsOffloadCapable(Category AUDIO_STREAM_CATEGORY, pbOffloadCapable *bool) error {
+	_pbOffloadCapable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Category), uintptr(win32.OutParam(unsafe.Pointer(_pbOffloadCapable))))
+	if pbOffloadCapable != nil {
+		*pbOffloadCapable = *_pbOffloadCapable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -493,8 +505,12 @@ type IAudioLoudness struct {
 var IID_IAudioLoudness = win32.GUID{Data1: 0x7d8b1437, Data2: 0xdd53, Data3: 0x4350, Data4: [8]byte{0x9c, 0x1b, 0x1e, 0xe2, 0x89, 0x0b, 0xd9, 0x38}}
 
 // GetEnabled dispatches through IAudioLoudness's vtable slot 3.
-func (self *IAudioLoudness) GetEnabled(pbEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
+func (self *IAudioLoudness) GetEnabled(pbEnabled *bool) error {
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -531,8 +547,12 @@ func (self *IAudioMute) SetMute(bMuted bool, pguidEventContext *win32.GUID) erro
 }
 
 // GetMute dispatches through IAudioMute's vtable slot 4.
-func (self *IAudioMute) GetMute(pbMuted *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMuted)))
+func (self *IAudioMute) GetMute(pbMuted *bool) error {
+	_pbMuted := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbMuted))))
+	if pbMuted != nil {
+		*pbMuted = *_pbMuted != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1143,8 +1163,12 @@ func (self *IConnector) Disconnect() error {
 }
 
 // IsConnected dispatches through IConnector's vtable slot 7.
-func (self *IConnector) IsConnected(pbConnected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbConnected)))
+func (self *IConnector) IsConnected(pbConnected *bool) error {
+	_pbConnected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbConnected))))
+	if pbConnected != nil {
+		*pbConnected = *_pbConnected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1675,8 +1699,12 @@ func (self *ISimpleAudioVolume) SetMute(bMute bool, EventContext *win32.GUID) er
 }
 
 // GetMute dispatches through ISimpleAudioVolume's vtable slot 6.
-func (self *ISimpleAudioVolume) GetMute(pbMute *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMute)))
+func (self *ISimpleAudioVolume) GetMute(pbMute *bool) error {
+	_pbMute := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbMute))))
+	if pbMute != nil {
+		*pbMute = *_pbMute != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1747,8 +1775,12 @@ type ISpatialAudioClient2 struct {
 var IID_ISpatialAudioClient2 = win32.GUID{Data1: 0xcaabe452, Data2: 0xa66a, Data3: 0x4bee, Data4: [8]byte{0xa9, 0x3e, 0xe3, 0x20, 0x46, 0x3f, 0x6a, 0x53}}
 
 // IsOffloadCapable dispatches through ISpatialAudioClient2's vtable slot 11.
-func (self *ISpatialAudioClient2) IsOffloadCapable(category AUDIO_STREAM_CATEGORY, isOffloadCapable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(category), uintptr(unsafe.Pointer(isOffloadCapable)))
+func (self *ISpatialAudioClient2) IsOffloadCapable(category AUDIO_STREAM_CATEGORY, isOffloadCapable *bool) error {
+	_isOffloadCapable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(category), uintptr(win32.OutParam(unsafe.Pointer(_isOffloadCapable))))
+	if isOffloadCapable != nil {
+		*isOffloadCapable = *_isOffloadCapable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2020,8 +2052,12 @@ func (self *ISpatialAudioObjectBase) SetEndOfStream(frameCount uint32) error {
 }
 
 // IsActive dispatches through ISpatialAudioObjectBase's vtable slot 5.
-func (self *ISpatialAudioObjectBase) IsActive(isActive *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isActive)))
+func (self *ISpatialAudioObjectBase) IsActive(isActive *bool) error {
+	_isActive := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isActive))))
+	if isActive != nil {
+		*isActive = *_isActive != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

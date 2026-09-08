@@ -107,8 +107,12 @@ type IAudioMediaType struct {
 var IID_IAudioMediaType = win32.GUID{Data1: 0x4e997f73, Data2: 0xb71f, Data3: 0x4798, Data4: [8]byte{0x87, 0x3b, 0xed, 0x7d, 0xfc, 0xf1, 0x5b, 0x4d}}
 
 // IsCompressedFormat dispatches through IAudioMediaType's vtable slot 3.
-func (self *IAudioMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCompressed)))
+func (self *IAudioMediaType) IsCompressedFormat(pfCompressed *bool) error {
+	_pfCompressed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCompressed))))
+	if pfCompressed != nil {
+		*pfCompressed = *_pfCompressed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -205,17 +205,17 @@ func (self *IContactAggregationContact) Get_Id() (foundation.PWSTR, error) {
 }
 
 // Get_IsMe dispatches through IContactAggregationContact's vtable slot 11.
-func (self *IContactAggregationContact) Get_IsMe() (foundation.BOOL, error) {
+func (self *IContactAggregationContact) Get_IsMe() (bool, error) {
 	_pIsMe := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsMe))))
-	return *_pIsMe, win32.ErrIfFailed(int32(r1))
+	return *_pIsMe != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsExternal dispatches through IContactAggregationContact's vtable slot 12.
-func (self *IContactAggregationContact) Get_IsExternal() (foundation.BOOL, error) {
+func (self *IContactAggregationContact) Get_IsExternal() (bool, error) {
 	_pIsExternal := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsExternal))))
-	return *_pIsExternal, win32.ErrIfFailed(int32(r1))
+	return *_pIsExternal != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_NetworkSourceId dispatches through IContactAggregationContact's vtable slot 13.
@@ -471,10 +471,10 @@ func (self *IContactAggregationLink) Get_Id() (foundation.PWSTR, error) {
 }
 
 // Get_IsLinkResolved dispatches through IContactAggregationLink's vtable slot 8.
-func (self *IContactAggregationLink) Get_IsLinkResolved() (foundation.BOOL, error) {
+func (self *IContactAggregationLink) Get_IsLinkResolved() (bool, error) {
 	_pIsLinkResolved := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsLinkResolved))))
-	return *_pIsLinkResolved, win32.ErrIfFailed(int32(r1))
+	return *_pIsLinkResolved != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsLinkResolved dispatches through IContactAggregationLink's vtable slot 9.
@@ -605,10 +605,14 @@ func (self *IContactAggregationManager) GetVersionInfo(plMajorVersion *int32, pl
 }
 
 // CreateOrOpenGroup dispatches through IContactAggregationManager's vtable slot 4.
-func (self *IContactAggregationManager) CreateOrOpenGroup(pGroupName string, options CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, pCreatedGroup *foundation.BOOL) (*IContactAggregationGroup, error) {
+func (self *IContactAggregationManager) CreateOrOpenGroup(pGroupName string, options CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, pCreatedGroup *bool) (*IContactAggregationGroup, error) {
 	_pGroupName := win32.UTF16Ptr(pGroupName)
+	_pCreatedGroup := new(foundation.BOOL)
 	_ppGroup := new(*IContactAggregationGroup)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pGroupName)), uintptr(options), uintptr(unsafe.Pointer(pCreatedGroup)), uintptr(win32.OutParam(unsafe.Pointer(_ppGroup))))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pGroupName)), uintptr(options), uintptr(win32.OutParam(unsafe.Pointer(_pCreatedGroup))), uintptr(win32.OutParam(unsafe.Pointer(_ppGroup))))
+	if pCreatedGroup != nil {
+		*pCreatedGroup = *_pCreatedGroup != 0
+	}
 	return *_ppGroup, win32.ErrIfFailed(int32(r1))
 }
 
@@ -819,10 +823,10 @@ func (self *IContactAggregationServerPerson) Get_Id() (foundation.PWSTR, error) 
 }
 
 // Get_IsTombstone dispatches through IContactAggregationServerPerson's vtable slot 20.
-func (self *IContactAggregationServerPerson) Get_IsTombstone() (foundation.BOOL, error) {
+func (self *IContactAggregationServerPerson) Get_IsTombstone() (bool, error) {
 	_pIsTombstone := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsTombstone))))
-	return *_pIsTombstone, win32.ErrIfFailed(int32(r1))
+	return *_pIsTombstone != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_IsTombstone dispatches through IContactAggregationServerPerson's vtable slot 21.

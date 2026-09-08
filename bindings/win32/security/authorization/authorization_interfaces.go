@@ -84,8 +84,12 @@ func (self *IAzApplication) Put_Version(bstrProp foundation.BSTR) error {
 }
 
 // Get_GenerateAudits dispatches through IAzApplication's vtable slot 17.
-func (self *IAzApplication) Get_GenerateAudits(pbProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbProp)))
+func (self *IAzApplication) Get_GenerateAudits(pbProp *bool) error {
+	_pbProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbProp))))
+	if pbProp != nil {
+		*pbProp = *_pbProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -97,8 +101,12 @@ func (self *IAzApplication) Put_GenerateAudits(bProp bool) error {
 }
 
 // Get_ApplyStoreSacl dispatches through IAzApplication's vtable slot 19.
-func (self *IAzApplication) Get_ApplyStoreSacl(pbProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbProp)))
+func (self *IAzApplication) Get_ApplyStoreSacl(pbProp *bool) error {
+	_pbProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbProp))))
+	if pbProp != nil {
+		*pbProp = *_pbProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -110,8 +118,12 @@ func (self *IAzApplication) Put_ApplyStoreSacl(bProp bool) error {
 }
 
 // Get_Writable dispatches through IAzApplication's vtable slot 21.
-func (self *IAzApplication) Get_Writable(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzApplication) Get_Writable(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -725,8 +737,12 @@ func (self *IAzApplicationGroup) DeleteNonMember(bstrProp foundation.BSTR, varRe
 }
 
 // Get_Writable dispatches through IAzApplicationGroup's vtable slot 27.
-func (self *IAzApplicationGroup) Get_Writable(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzApplicationGroup) Get_Writable(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -989,8 +1005,12 @@ func (self *IAzAuthorizationStore) Put_MaxScriptEngines(lProp int32) error {
 }
 
 // Get_GenerateAudits dispatches through IAzAuthorizationStore's vtable slot 17.
-func (self *IAzAuthorizationStore) Get_GenerateAudits(pbProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbProp)))
+func (self *IAzAuthorizationStore) Get_GenerateAudits(pbProp *bool) error {
+	_pbProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbProp))))
+	if pbProp != nil {
+		*pbProp = *_pbProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1002,8 +1022,12 @@ func (self *IAzAuthorizationStore) Put_GenerateAudits(bProp bool) error {
 }
 
 // Get_Writable dispatches through IAzAuthorizationStore's vtable slot 19.
-func (self *IAzAuthorizationStore) Get_Writable(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzAuthorizationStore) Get_Writable(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1204,8 +1228,12 @@ func (self *IAzAuthorizationStore) Get_TargetMachine(pbstrTargetMachine *foundat
 }
 
 // Get_ApplyStoreSacl dispatches through IAzAuthorizationStore's vtable slot 46.
-func (self *IAzAuthorizationStore) Get_ApplyStoreSacl(pbApplyStoreSacl *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbApplyStoreSacl)))
+func (self *IAzAuthorizationStore) Get_ApplyStoreSacl(pbApplyStoreSacl *bool) error {
+	_pbApplyStoreSacl := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbApplyStoreSacl))))
+	if pbApplyStoreSacl != nil {
+		*pbApplyStoreSacl = *_pbApplyStoreSacl != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1785,8 +1813,12 @@ func (self *IAzOperation) Put_OperationID(lProp int32) error {
 }
 
 // Get_Writable dispatches through IAzOperation's vtable slot 15.
-func (self *IAzOperation) Get_Writable(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzOperation) Get_Writable(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1987,8 +2019,12 @@ func (self *IAzRole) DeleteMember(bstrProp foundation.BSTR, varReserved systemva
 }
 
 // Get_Writable dispatches through IAzRole's vtable slot 21.
-func (self *IAzRole) Get_Writable(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzRole) Get_Writable(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2271,8 +2307,12 @@ func (self *IAzScope) Put_ApplicationData(bstrApplicationData foundation.BSTR) e
 }
 
 // Get_Writable dispatches through IAzScope's vtable slot 13.
-func (self *IAzScope) Get_Writable(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzScope) Get_Writable(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2451,14 +2491,22 @@ func (self *IAzScope) Submit(lFlags int32, varReserved systemvariant.VARIANT) er
 }
 
 // Get_CanBeDelegated dispatches through IAzScope's vtable slot 37.
-func (self *IAzScope) Get_CanBeDelegated(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzScope) Get_CanBeDelegated(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_BizrulesWritable dispatches through IAzScope's vtable slot 38.
-func (self *IAzScope) Get_BizrulesWritable(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzScope) Get_BizrulesWritable(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2672,8 +2720,12 @@ func (self *IAzTask) Put_BizRuleImportedPath(bstrProp foundation.BSTR) error {
 }
 
 // Get_IsRoleDefinition dispatches through IAzTask's vtable slot 19.
-func (self *IAzTask) Get_IsRoleDefinition(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzTask) Get_IsRoleDefinition(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2729,8 +2781,12 @@ func (self *IAzTask) DeleteTask(bstrTask foundation.BSTR, varReserved systemvari
 }
 
 // Get_Writable dispatches through IAzTask's vtable slot 27.
-func (self *IAzTask) Get_Writable(pfProp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProp)))
+func (self *IAzTask) Get_Writable(pfProp *bool) error {
+	_pfProp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProp))))
+	if pfProp != nil {
+		*pfProp = *_pfProp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -421,8 +421,12 @@ func (self *ICEnroll) Put_ProviderFlags(dwFlags int32) error {
 }
 
 // Get_UseExistingKeySet dispatches through ICEnroll's vtable slot 49.
-func (self *ICEnroll) Get_UseExistingKeySet(fUseExistingKeys *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fUseExistingKeys)))
+func (self *ICEnroll) Get_UseExistingKeySet(fUseExistingKeys *bool) error {
+	_fUseExistingKeys := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fUseExistingKeys))))
+	if fUseExistingKeys != nil {
+		*fUseExistingKeys = *_fUseExistingKeys != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -446,8 +450,12 @@ func (self *ICEnroll) Put_GenKeyFlags(dwFlags int32) error {
 }
 
 // Get_DeleteRequestCert dispatches through ICEnroll's vtable slot 53.
-func (self *ICEnroll) Get_DeleteRequestCert(fDelete *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fDelete)))
+func (self *ICEnroll) Get_DeleteRequestCert(fDelete *bool) error {
+	_fDelete := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fDelete))))
+	if fDelete != nil {
+		*fDelete = *_fDelete != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -459,8 +467,12 @@ func (self *ICEnroll) Put_DeleteRequestCert(fDelete bool) error {
 }
 
 // Get_WriteCertToCSP dispatches through ICEnroll's vtable slot 55.
-func (self *ICEnroll) Get_WriteCertToCSP(fBool *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fBool)))
+func (self *ICEnroll) Get_WriteCertToCSP(fBool *bool) error {
+	_fBool := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fBool))))
+	if fBool != nil {
+		*fBool = *_fBool != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -529,8 +541,12 @@ func (self *ICEnroll2) AddNameValuePairToSignature(Name foundation.BSTR, Value f
 }
 
 // Get_WriteCertToUserDS dispatches through ICEnroll2's vtable slot 65.
-func (self *ICEnroll2) Get_WriteCertToUserDS(fBool *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fBool)))
+func (self *ICEnroll2) Get_WriteCertToUserDS(fBool *bool) error {
+	_fBool := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fBool))))
+	if fBool != nil {
+		*fBool = *_fBool != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -542,8 +558,12 @@ func (self *ICEnroll2) Put_WriteCertToUserDS(fBool bool) error {
 }
 
 // Get_EnableT61DNEncoding dispatches through ICEnroll2's vtable slot 67.
-func (self *ICEnroll2) Get_EnableT61DNEncoding(fBool *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fBool)))
+func (self *ICEnroll2) Get_EnableT61DNEncoding(fBool *bool) error {
+	_fBool := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fBool))))
+	if fBool != nil {
+		*fBool = *_fBool != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -609,8 +629,12 @@ func (self *ICEnroll3) Put_ReuseHardwareKeyIfUnableToGenNew(fReuseHardwareKeyIfU
 }
 
 // Get_ReuseHardwareKeyIfUnableToGenNew dispatches through ICEnroll3's vtable slot 76.
-func (self *ICEnroll3) Get_ReuseHardwareKeyIfUnableToGenNew(fReuseHardwareKeyIfUnableToGenNew *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fReuseHardwareKeyIfUnableToGenNew)))
+func (self *ICEnroll3) Get_ReuseHardwareKeyIfUnableToGenNew(fReuseHardwareKeyIfUnableToGenNew *bool) error {
+	_fReuseHardwareKeyIfUnableToGenNew := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fReuseHardwareKeyIfUnableToGenNew))))
+	if fReuseHardwareKeyIfUnableToGenNew != nil {
+		*fReuseHardwareKeyIfUnableToGenNew = *_fReuseHardwareKeyIfUnableToGenNew != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -634,8 +658,12 @@ func (self *ICEnroll3) Put_LimitExchangeKeyToEncipherment(fLimitExchangeKeyToEnc
 }
 
 // Get_LimitExchangeKeyToEncipherment dispatches through ICEnroll3's vtable slot 80.
-func (self *ICEnroll3) Get_LimitExchangeKeyToEncipherment(fLimitExchangeKeyToEncipherment *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fLimitExchangeKeyToEncipherment)))
+func (self *ICEnroll3) Get_LimitExchangeKeyToEncipherment(fLimitExchangeKeyToEncipherment *bool) error {
+	_fLimitExchangeKeyToEncipherment := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fLimitExchangeKeyToEncipherment))))
+	if fLimitExchangeKeyToEncipherment != nil {
+		*fLimitExchangeKeyToEncipherment = *_fLimitExchangeKeyToEncipherment != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -647,8 +675,12 @@ func (self *ICEnroll3) Put_EnableSMIMECapabilities(fEnableSMIMECapabilities bool
 }
 
 // Get_EnableSMIMECapabilities dispatches through ICEnroll3's vtable slot 82.
-func (self *ICEnroll3) Get_EnableSMIMECapabilities(fEnableSMIMECapabilities *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fEnableSMIMECapabilities)))
+func (self *ICEnroll3) Get_EnableSMIMECapabilities(fEnableSMIMECapabilities *bool) error {
+	_fEnableSMIMECapabilities := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_fEnableSMIMECapabilities))))
+	if fEnableSMIMECapabilities != nil {
+		*fEnableSMIMECapabilities = *_fEnableSMIMECapabilities != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -856,8 +888,12 @@ func (self *ICEnroll4) Put_IncludeSubjectKeyID(fInclude bool) error {
 }
 
 // Get_IncludeSubjectKeyID dispatches through ICEnroll4's vtable slot 115.
-func (self *ICEnroll4) Get_IncludeSubjectKeyID(pfInclude *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfInclude)))
+func (self *ICEnroll4) Get_IncludeSubjectKeyID(pfInclude *bool) error {
+	_pfInclude := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfInclude))))
+	if pfInclude != nil {
+		*pfInclude = *_pfInclude != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4298,12 +4334,12 @@ func (self *INDESPolicy) GenerateChallenge(pwszTemplate string, pwszParams strin
 }
 
 // VerifyRequest dispatches through INDESPolicy's vtable slot 6.
-func (self *INDESPolicy) VerifyRequest(pctbRequest *CERTTRANSBLOB, pctbSigningCertEncoded *CERTTRANSBLOB, pwszTemplate string, pwszTransactionId string) (foundation.BOOL, error) {
+func (self *INDESPolicy) VerifyRequest(pctbRequest *CERTTRANSBLOB, pctbSigningCertEncoded *CERTTRANSBLOB, pwszTemplate string, pwszTransactionId string) (bool, error) {
 	_pwszTemplate := win32.UTF16Ptr(pwszTemplate)
 	_pwszTransactionId := win32.UTF16Ptr(pwszTransactionId)
 	_pfVerified := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pctbRequest)), uintptr(unsafe.Pointer(pctbSigningCertEncoded)), uintptr(unsafe.Pointer(_pwszTemplate)), uintptr(unsafe.Pointer(_pwszTransactionId)), uintptr(win32.OutParam(unsafe.Pointer(_pfVerified))))
-	return *_pfVerified, win32.ErrIfFailed(int32(r1))
+	return *_pfVerified != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Notify dispatches through INDESPolicy's vtable slot 7.

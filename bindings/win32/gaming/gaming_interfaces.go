@@ -44,8 +44,12 @@ func (self *IGameExplorer) UpdateGame(guidInstanceID win32.GUID) error {
 }
 
 // VerifyAccess dispatches through IGameExplorer's vtable slot 6.
-func (self *IGameExplorer) VerifyAccess(bstrGDFBinaryPath foundation.BSTR, pfHasAccess *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGDFBinaryPath)), uintptr(unsafe.Pointer(pfHasAccess)))
+func (self *IGameExplorer) VerifyAccess(bstrGDFBinaryPath foundation.BSTR, pfHasAccess *bool) error {
+	_pfHasAccess := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGDFBinaryPath)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasAccess))))
+	if pfHasAccess != nil {
+		*pfHasAccess = *_pfHasAccess != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -73,9 +77,13 @@ func (self *IGameExplorer2) UninstallGame(binaryGDFPath string) error {
 }
 
 // CheckAccess dispatches through IGameExplorer2's vtable slot 5.
-func (self *IGameExplorer2) CheckAccess(binaryGDFPath string, pHasAccess *foundation.BOOL) error {
+func (self *IGameExplorer2) CheckAccess(binaryGDFPath string, pHasAccess *bool) error {
 	_binaryGDFPath := win32.UTF16Ptr(binaryGDFPath)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)), uintptr(unsafe.Pointer(pHasAccess)))
+	_pHasAccess := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)), uintptr(win32.OutParam(unsafe.Pointer(_pHasAccess))))
+	if pHasAccess != nil {
+		*pHasAccess = *_pHasAccess != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

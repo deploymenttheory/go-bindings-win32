@@ -1793,14 +1793,22 @@ type IEVRTrustedVideoPlugin struct {
 var IID_IEVRTrustedVideoPlugin = win32.GUID{Data1: 0x83a4ce40, Data2: 0x7710, Data3: 0x494b, Data4: [8]byte{0xa8, 0x93, 0xa4, 0x72, 0x04, 0x9a, 0xf6, 0x30}}
 
 // IsInTrustedVideoMode dispatches through IEVRTrustedVideoPlugin's vtable slot 3.
-func (self *IEVRTrustedVideoPlugin) IsInTrustedVideoMode(pYes *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pYes)))
+func (self *IEVRTrustedVideoPlugin) IsInTrustedVideoMode(pYes *bool) error {
+	_pYes := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pYes))))
+	if pYes != nil {
+		*pYes = *_pYes != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanConstrict dispatches through IEVRTrustedVideoPlugin's vtable slot 4.
-func (self *IEVRTrustedVideoPlugin) CanConstrict(pYes *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pYes)))
+func (self *IEVRTrustedVideoPlugin) CanConstrict(pYes *bool) error {
+	_pYes := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pYes))))
+	if pYes != nil {
+		*pYes = *_pYes != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1834,8 +1842,12 @@ func (self *IEVRVideoStreamControl) SetStreamActiveState(fActive bool) error {
 }
 
 // GetStreamActiveState dispatches through IEVRVideoStreamControl's vtable slot 4.
-func (self *IEVRVideoStreamControl) GetStreamActiveState(lpfActive *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpfActive)))
+func (self *IEVRVideoStreamControl) GetStreamActiveState(lpfActive *bool) error {
+	_lpfActive := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lpfActive))))
+	if lpfActive != nil {
+		*lpfActive = *_lpfActive != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1962,8 +1974,12 @@ func (self *IMF2DBuffer) GetScanline0AndPitch(pbScanline0 **byte, plPitch *int32
 }
 
 // IsContiguousFormat dispatches through IMF2DBuffer's vtable slot 6.
-func (self *IMF2DBuffer) IsContiguousFormat(pfIsContiguous *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsContiguous)))
+func (self *IMF2DBuffer) IsContiguousFormat(pfIsContiguous *bool) error {
+	_pfIsContiguous := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsContiguous))))
+	if pfIsContiguous != nil {
+		*pfIsContiguous = *_pfIsContiguous != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2111,8 +2127,12 @@ func (self *IMFASFIndexer) GetIndexByteStreamCount(pcByteStreams *uint32) error 
 }
 
 // GetIndexStatus dispatches through IMFASFIndexer's vtable slot 9.
-func (self *IMFASFIndexer) GetIndexStatus(pIndexIdentifier *ASF_INDEX_IDENTIFIER, pfIsIndexed *foundation.BOOL, pbIndexDescriptor *byte, pcbIndexDescriptor *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndexIdentifier)), uintptr(unsafe.Pointer(pfIsIndexed)), uintptr(unsafe.Pointer(pbIndexDescriptor)), uintptr(unsafe.Pointer(pcbIndexDescriptor)))
+func (self *IMFASFIndexer) GetIndexStatus(pIndexIdentifier *ASF_INDEX_IDENTIFIER, pfIsIndexed *bool, pbIndexDescriptor *byte, pcbIndexDescriptor *uint32) error {
+	_pfIsIndexed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndexIdentifier)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsIndexed))), uintptr(unsafe.Pointer(pbIndexDescriptor)), uintptr(unsafe.Pointer(pcbIndexDescriptor)))
+	if pfIsIndexed != nil {
+		*pfIsIndexed = *_pfIsIndexed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2785,14 +2805,22 @@ func (self *IMFAttributes) GetItemType(guidKey *win32.GUID, pType *MF_ATTRIBUTE_
 }
 
 // CompareItem dispatches through IMFAttributes's vtable slot 5.
-func (self *IMFAttributes) CompareItem(guidKey *win32.GUID, Value *systemcomstructuredstorage.PROPVARIANT, pbResult *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(Value)), uintptr(unsafe.Pointer(pbResult)))
+func (self *IMFAttributes) CompareItem(guidKey *win32.GUID, Value *systemcomstructuredstorage.PROPVARIANT, pbResult *bool) error {
+	_pbResult := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(Value)), uintptr(win32.OutParam(unsafe.Pointer(_pbResult))))
+	if pbResult != nil {
+		*pbResult = *_pbResult != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Compare dispatches through IMFAttributes's vtable slot 6.
-func (self *IMFAttributes) Compare(pTheirs *IMFAttributes, MatchType MF_ATTRIBUTES_MATCH_TYPE, pbResult *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTheirs)), uintptr(MatchType), uintptr(unsafe.Pointer(pbResult)))
+func (self *IMFAttributes) Compare(pTheirs *IMFAttributes, MatchType MF_ATTRIBUTES_MATCH_TYPE, pbResult *bool) error {
+	_pbResult := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTheirs)), uintptr(MatchType), uintptr(win32.OutParam(unsafe.Pointer(_pbResult))))
+	if pbResult != nil {
+		*pbResult = *_pbResult != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3133,8 +3161,12 @@ func (self *IMFByteStream) SetCurrentPosition(qwPosition uint64) error {
 }
 
 // IsEndOfStream dispatches through IMFByteStream's vtable slot 8.
-func (self *IMFByteStream) IsEndOfStream(pfEndOfStream *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEndOfStream)))
+func (self *IMFByteStream) IsEndOfStream(pfEndOfStream *bool) error {
+	_pfEndOfStream := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEndOfStream))))
+	if pfEndOfStream != nil {
+		*pfEndOfStream = *_pfEndOfStream != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3273,8 +3305,12 @@ func (self *IMFByteStreamCacheControl2) SetCacheLimit(qwBytes uint64) error {
 }
 
 // IsBackgroundTransferActive dispatches through IMFByteStreamCacheControl2's vtable slot 6.
-func (self *IMFByteStreamCacheControl2) IsBackgroundTransferActive(pfActive *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfActive)))
+func (self *IMFByteStreamCacheControl2) IsBackgroundTransferActive(pfActive *bool) error {
+	_pfActive := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfActive))))
+	if pfActive != nil {
+		*pfActive = *_pfActive != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3337,8 +3373,12 @@ type IMFByteStreamTimeSeek struct {
 var IID_IMFByteStreamTimeSeek = win32.GUID{Data1: 0x64976bfa, Data2: 0xfb61, Data3: 0x4041, Data4: [8]byte{0x90, 0x69, 0x8c, 0x9a, 0x5f, 0x65, 0x9b, 0xeb}}
 
 // IsTimeSeekSupported dispatches through IMFByteStreamTimeSeek's vtable slot 3.
-func (self *IMFByteStreamTimeSeek) IsTimeSeekSupported(pfTimeSeekIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfTimeSeekIsSupported)))
+func (self *IMFByteStreamTimeSeek) IsTimeSeekSupported(pfTimeSeekIsSupported *bool) error {
+	_pfTimeSeekIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfTimeSeekIsSupported))))
+	if pfTimeSeekIsSupported != nil {
+		*pfTimeSeekIsSupported = *_pfTimeSeekIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3805,8 +3845,12 @@ func (self *IMFCapturePreviewSink) SetSampleCallback(dwStreamSinkIndex uint32, p
 }
 
 // GetMirrorState dispatches through IMFCapturePreviewSink's vtable slot 12.
-func (self *IMFCapturePreviewSink) GetMirrorState(pfMirrorState *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfMirrorState)))
+func (self *IMFCapturePreviewSink) GetMirrorState(pfMirrorState *bool) error {
+	_pfMirrorState := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfMirrorState))))
+	if pfMirrorState != nil {
+		*pfMirrorState = *_pfMirrorState != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4011,8 +4055,12 @@ func (self *IMFCaptureSource) GetDeviceStreamCategory(dwSourceStreamIndex uint32
 }
 
 // GetMirrorState dispatches through IMFCaptureSource's vtable slot 14.
-func (self *IMFCaptureSource) GetMirrorState(dwStreamIndex uint32, pfMirrorState *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pfMirrorState)))
+func (self *IMFCaptureSource) GetMirrorState(dwStreamIndex uint32, pfMirrorState *bool) error {
+	_pfMirrorState := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfMirrorState))))
+	if pfMirrorState != nil {
+		*pfMirrorState = *_pfMirrorState != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4338,9 +4386,13 @@ func (self *IMFContentDecryptionModuleSession) GetKeyStatuses(keyStatuses **MFMe
 }
 
 // Load dispatches through IMFContentDecryptionModuleSession's vtable slot 6.
-func (self *IMFContentDecryptionModuleSession) Load(sessionId string, loaded *foundation.BOOL) error {
+func (self *IMFContentDecryptionModuleSession) Load(sessionId string, loaded *bool) error {
 	_sessionId := win32.UTF16Ptr(sessionId)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_sessionId)), uintptr(unsafe.Pointer(loaded)))
+	_loaded := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_sessionId)), uintptr(win32.OutParam(unsafe.Pointer(_loaded))))
+	if loaded != nil {
+		*loaded = *_loaded != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4446,8 +4498,12 @@ func (self *IMFContentEnabler) GetEnableData(ppbData **byte, pcbData *uint32) er
 }
 
 // IsAutomaticSupported dispatches through IMFContentEnabler's vtable slot 6.
-func (self *IMFContentEnabler) IsAutomaticSupported(pfAutomatic *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAutomatic)))
+func (self *IMFContentEnabler) IsAutomaticSupported(pfAutomatic *bool) error {
+	_pfAutomatic := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAutomatic))))
+	if pfAutomatic != nil {
+		*pfAutomatic = *_pfAutomatic != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5297,8 +5353,12 @@ func (self *IMFHttpDownloadRequest) GetURL(ppszURL *foundation.PWSTR) error {
 }
 
 // HasNullSourceOrigin dispatches through IMFHttpDownloadRequest's vtable slot 12.
-func (self *IMFHttpDownloadRequest) HasNullSourceOrigin(pfNullSourceOrigin *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfNullSourceOrigin)))
+func (self *IMFHttpDownloadRequest) HasNullSourceOrigin(pfNullSourceOrigin *bool) error {
+	_pfNullSourceOrigin := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfNullSourceOrigin))))
+	if pfNullSourceOrigin != nil {
+		*pfNullSourceOrigin = *_pfNullSourceOrigin != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5315,8 +5375,12 @@ func (self *IMFHttpDownloadRequest) GetHttpStatus(pdwHttpStatus *uint32) error {
 }
 
 // GetAtEndOfPayload dispatches through IMFHttpDownloadRequest's vtable slot 15.
-func (self *IMFHttpDownloadRequest) GetAtEndOfPayload(pfAtEndOfPayload *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAtEndOfPayload)))
+func (self *IMFHttpDownloadRequest) GetAtEndOfPayload(pfAtEndOfPayload *bool) error {
+	_pfAtEndOfPayload := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAtEndOfPayload))))
+	if pfAtEndOfPayload != nil {
+		*pfAtEndOfPayload = *_pfAtEndOfPayload != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5935,8 +5999,12 @@ func (self *IMFMediaEngineClassFactoryEx) CreateMediaKeys(keySystem foundation.B
 }
 
 // IsTypeSupported dispatches through IMFMediaEngineClassFactoryEx's vtable slot 8.
-func (self *IMFMediaEngineClassFactoryEx) IsTypeSupported(type_ foundation.BSTR, keySystem foundation.BSTR, isSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(keySystem)), uintptr(unsafe.Pointer(isSupported)))
+func (self *IMFMediaEngineClassFactoryEx) IsTypeSupported(type_ foundation.BSTR, keySystem foundation.BSTR, isSupported *bool) error {
+	_isSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)), uintptr(unsafe.Pointer(keySystem)), uintptr(win32.OutParam(unsafe.Pointer(_isSupported))))
+	if isSupported != nil {
+		*isSupported = *_isSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6066,8 +6134,12 @@ func (self *IMFMediaEngineEx) GetStreamAttribute(dwStreamIndex uint32, guidMFAtt
 }
 
 // GetStreamSelection dispatches through IMFMediaEngineEx's vtable slot 56.
-func (self *IMFMediaEngineEx) GetStreamSelection(dwStreamIndex uint32, pEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pEnabled)))
+func (self *IMFMediaEngineEx) GetStreamSelection(dwStreamIndex uint32, pEnabled *bool) error {
+	_pEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6085,8 +6157,12 @@ func (self *IMFMediaEngineEx) ApplyStreamSelections() error {
 }
 
 // IsProtected dispatches through IMFMediaEngineEx's vtable slot 59.
-func (self *IMFMediaEngineEx) IsProtected(pProtected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProtected)))
+func (self *IMFMediaEngineEx) IsProtected(pProtected *bool) error {
+	_pProtected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pProtected))))
+	if pProtected != nil {
+		*pProtected = *_pProtected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6205,8 +6281,12 @@ func (self *IMFMediaEngineEx) SetAudioEndpointRole(role uint32) error {
 }
 
 // GetRealTimeMode dispatches through IMFMediaEngineEx's vtable slot 78.
-func (self *IMFMediaEngineEx) GetRealTimeMode(pfEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
+func (self *IMFMediaEngineEx) GetRealTimeMode(pfEnabled *bool) error {
+	_pfEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))))
+	if pfEnabled != nil {
+		*pfEnabled = *_pfEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6309,8 +6389,12 @@ type IMFMediaEngineOPMInfo struct {
 var IID_IMFMediaEngineOPMInfo = win32.GUID{Data1: 0x765763e6, Data2: 0x6c01, Data3: 0x4b01, Data4: [8]byte{0xbb, 0x0f, 0xb8, 0x29, 0xf6, 0x0e, 0xd2, 0x8c}}
 
 // GetOPMInfo dispatches through IMFMediaEngineOPMInfo's vtable slot 3.
-func (self *IMFMediaEngineOPMInfo) GetOPMInfo(pStatus *MF_MEDIA_ENGINE_OPM_STATUS, pConstricted *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)), uintptr(unsafe.Pointer(pConstricted)))
+func (self *IMFMediaEngineOPMInfo) GetOPMInfo(pStatus *MF_MEDIA_ENGINE_OPM_STATUS, pConstricted *bool) error {
+	_pConstricted := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)), uintptr(win32.OutParam(unsafe.Pointer(_pConstricted))))
+	if pConstricted != nil {
+		*pConstricted = *_pConstricted != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6439,8 +6523,12 @@ type IMFMediaEngineSupportsSourceTransfer struct {
 var IID_IMFMediaEngineSupportsSourceTransfer = win32.GUID{Data1: 0xa724b056, Data2: 0x1b2e, Data3: 0x4642, Data4: [8]byte{0xa6, 0xf3, 0xdb, 0x94, 0x20, 0xc5, 0x29, 0x08}}
 
 // ShouldTransferSource dispatches through IMFMediaEngineSupportsSourceTransfer's vtable slot 3.
-func (self *IMFMediaEngineSupportsSourceTransfer) ShouldTransferSource(pfShouldTransfer *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfShouldTransfer)))
+func (self *IMFMediaEngineSupportsSourceTransfer) ShouldTransferSource(pfShouldTransfer *bool) error {
+	_pfShouldTransfer := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfShouldTransfer))))
+	if pfShouldTransfer != nil {
+		*pfShouldTransfer = *_pfShouldTransfer != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6705,8 +6793,12 @@ func (self *IMFMediaKeySession2) Get_KeyStatuses(pKeyStatusesArray **MFMediaKeyS
 }
 
 // Load dispatches through IMFMediaKeySession2's vtable slot 9.
-func (self *IMFMediaKeySession2) Load(bstrSessionId foundation.BSTR, pfLoaded *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSessionId)), uintptr(unsafe.Pointer(pfLoaded)))
+func (self *IMFMediaKeySession2) Load(bstrSessionId foundation.BSTR, pfLoaded *bool) error {
+	_pfLoaded := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSessionId)), uintptr(win32.OutParam(unsafe.Pointer(_pfLoaded))))
+	if pfLoaded != nil {
+		*pfLoaded = *_pfLoaded != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7424,8 +7516,12 @@ func (self *IMFMediaType) GetMajorType(pguidMajorType *win32.GUID) error {
 }
 
 // IsCompressedFormat dispatches through IMFMediaType's vtable slot 34.
-func (self *IMFMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCompressed)))
+func (self *IMFMediaType) IsCompressedFormat(pfCompressed *bool) error {
+	_pfCompressed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCompressed))))
+	if pfCompressed != nil {
+		*pfCompressed = *_pfCompressed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7705,8 +7801,12 @@ func (self *IMFNetCredential) GetPassword(pbData *byte, pcbData *uint32, fEncryp
 }
 
 // LoggedOnUser dispatches through IMFNetCredential's vtable slot 7.
-func (self *IMFNetCredential) LoggedOnUser(pfLoggedOnUser *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLoggedOnUser)))
+func (self *IMFNetCredential) LoggedOnUser(pfLoggedOnUser *bool) error {
+	_pfLoggedOnUser := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfLoggedOnUser))))
+	if pfLoggedOnUser != nil {
+		*pfLoggedOnUser = *_pfLoggedOnUser != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7790,9 +7890,13 @@ func (self *IMFNetCrossOriginSupport) GetSourceOrigin(wszSourceOrigin *foundatio
 }
 
 // IsSameOrigin dispatches through IMFNetCrossOriginSupport's vtable slot 5.
-func (self *IMFNetCrossOriginSupport) IsSameOrigin(wszURL string, pfIsSameOrigin *foundation.BOOL) error {
+func (self *IMFNetCrossOriginSupport) IsSameOrigin(wszURL string, pfIsSameOrigin *bool) error {
 	_wszURL := win32.UTF16Ptr(wszURL)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszURL)), uintptr(unsafe.Pointer(pfIsSameOrigin)))
+	_pfIsSameOrigin := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszURL)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsSameOrigin))))
+	if pfIsSameOrigin != nil {
+		*pfIsSameOrigin = *_pfIsSameOrigin != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8170,20 +8274,40 @@ func (self *IMFPMediaItem) SetStartStopPosition(pguidStartPositionType *win32.GU
 }
 
 // HasVideo dispatches through IMFPMediaItem's vtable slot 10.
-func (self *IMFPMediaItem) HasVideo(pfHasVideo *foundation.BOOL, pfSelected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfHasVideo)), uintptr(unsafe.Pointer(pfSelected)))
+func (self *IMFPMediaItem) HasVideo(pfHasVideo *bool, pfSelected *bool) error {
+	_pfHasVideo := new(foundation.BOOL)
+	_pfSelected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasVideo))), uintptr(win32.OutParam(unsafe.Pointer(_pfSelected))))
+	if pfHasVideo != nil {
+		*pfHasVideo = *_pfHasVideo != 0
+	}
+	if pfSelected != nil {
+		*pfSelected = *_pfSelected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HasAudio dispatches through IMFPMediaItem's vtable slot 11.
-func (self *IMFPMediaItem) HasAudio(pfHasAudio *foundation.BOOL, pfSelected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfHasAudio)), uintptr(unsafe.Pointer(pfSelected)))
+func (self *IMFPMediaItem) HasAudio(pfHasAudio *bool, pfSelected *bool) error {
+	_pfHasAudio := new(foundation.BOOL)
+	_pfSelected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasAudio))), uintptr(win32.OutParam(unsafe.Pointer(_pfSelected))))
+	if pfHasAudio != nil {
+		*pfHasAudio = *_pfHasAudio != 0
+	}
+	if pfSelected != nil {
+		*pfSelected = *_pfSelected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsProtected dispatches through IMFPMediaItem's vtable slot 12.
-func (self *IMFPMediaItem) IsProtected(pfProtected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProtected)))
+func (self *IMFPMediaItem) IsProtected(pfProtected *bool) error {
+	_pfProtected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProtected))))
+	if pfProtected != nil {
+		*pfProtected = *_pfProtected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8200,8 +8324,12 @@ func (self *IMFPMediaItem) GetNumberOfStreams(pdwStreamCount *uint32) error {
 }
 
 // GetStreamSelection dispatches through IMFPMediaItem's vtable slot 15.
-func (self *IMFPMediaItem) GetStreamSelection(dwStreamIndex uint32, pfEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pfEnabled)))
+func (self *IMFPMediaItem) GetStreamSelection(dwStreamIndex uint32, pfEnabled *bool) error {
+	_pfEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))))
+	if pfEnabled != nil {
+		*pfEnabled = *_pfEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8382,8 +8510,12 @@ func (self *IMFPMediaPlayer) SetBalance(flBalance float32) error {
 }
 
 // GetMute dispatches through IMFPMediaPlayer's vtable slot 23.
-func (self *IMFPMediaPlayer) GetMute(pfMute *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfMute)))
+func (self *IMFPMediaPlayer) GetMute(pfMute *bool) error {
+	_pfMute := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfMute))))
+	if pfMute != nil {
+		*pfMute = *_pfMute != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8629,8 +8761,12 @@ func (self *IMFPresentationDescriptor) GetStreamDescriptorCount(pdwDescriptorCou
 }
 
 // GetStreamDescriptorByIndex dispatches through IMFPresentationDescriptor's vtable slot 34.
-func (self *IMFPresentationDescriptor) GetStreamDescriptorByIndex(dwIndex uint32, pfSelected *foundation.BOOL, ppDescriptor **IMFStreamDescriptor) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pfSelected)), uintptr(unsafe.Pointer(ppDescriptor)))
+func (self *IMFPresentationDescriptor) GetStreamDescriptorByIndex(dwIndex uint32, pfSelected *bool, ppDescriptor **IMFStreamDescriptor) error {
+	_pfSelected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfSelected))), uintptr(unsafe.Pointer(ppDescriptor)))
+	if pfSelected != nil {
+		*pfSelected = *_pfSelected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9107,20 +9243,32 @@ func (self *IMFSSLCertificateManager) EndGetClientCertificate(pResult *IMFAsyncR
 }
 
 // GetCertificatePolicy dispatches through IMFSSLCertificateManager's vtable slot 6.
-func (self *IMFSSLCertificateManager) GetCertificatePolicy(pszURL string, pfOverrideAutomaticCheck *foundation.BOOL, pfClientCertificateAvailable *foundation.BOOL) error {
+func (self *IMFSSLCertificateManager) GetCertificatePolicy(pszURL string, pfOverrideAutomaticCheck *bool, pfClientCertificateAvailable *bool) error {
 	_pszURL := win32.UTF16Ptr(pszURL)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(pfOverrideAutomaticCheck)), uintptr(unsafe.Pointer(pfClientCertificateAvailable)))
+	_pfOverrideAutomaticCheck := new(foundation.BOOL)
+	_pfClientCertificateAvailable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(win32.OutParam(unsafe.Pointer(_pfOverrideAutomaticCheck))), uintptr(win32.OutParam(unsafe.Pointer(_pfClientCertificateAvailable))))
+	if pfOverrideAutomaticCheck != nil {
+		*pfOverrideAutomaticCheck = *_pfOverrideAutomaticCheck != 0
+	}
+	if pfClientCertificateAvailable != nil {
+		*pfClientCertificateAvailable = *_pfClientCertificateAvailable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // OnServerCertificate dispatches through IMFSSLCertificateManager's vtable slot 7.
-func (self *IMFSSLCertificateManager) OnServerCertificate(pszURL string, pbData []byte, pfIsGood *foundation.BOOL) error {
+func (self *IMFSSLCertificateManager) OnServerCertificate(pszURL string, pbData []byte, pfIsGood *bool) error {
 	_pszURL := win32.UTF16Ptr(pszURL)
 	var _pbData *byte
 	if len(pbData) > 0 {
 		_pbData = &pbData[0]
 	}
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(unsafe.Pointer(pfIsGood)))
+	_pfIsGood := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsGood))))
+	if pfIsGood != nil {
+		*pfIsGood = *_pfIsGood != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9702,8 +9850,12 @@ func (self *IMFSensorProcessActivity) GetProcessId(pPID *uint32) error {
 }
 
 // GetStreamingState dispatches through IMFSensorProcessActivity's vtable slot 4.
-func (self *IMFSensorProcessActivity) GetStreamingState(pfStreaming *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfStreaming)))
+func (self *IMFSensorProcessActivity) GetStreamingState(pfStreaming *bool) error {
+	_pfStreaming := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfStreaming))))
+	if pfStreaming != nil {
+		*pfStreaming = *_pfStreaming != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9742,8 +9894,12 @@ func (self *IMFSensorProfile) AddProfileFilter(StreamId uint32, wzFilterSetStrin
 }
 
 // IsMediaTypeSupported dispatches through IMFSensorProfile's vtable slot 5.
-func (self *IMFSensorProfile) IsMediaTypeSupported(StreamId uint32, pMediaType *IMFMediaType, pfSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(StreamId), uintptr(unsafe.Pointer(pMediaType)), uintptr(unsafe.Pointer(pfSupported)))
+func (self *IMFSensorProfile) IsMediaTypeSupported(StreamId uint32, pMediaType *IMFMediaType, pfSupported *bool) error {
+	_pfSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(StreamId), uintptr(unsafe.Pointer(pMediaType)), uintptr(win32.OutParam(unsafe.Pointer(_pfSupported))))
+	if pfSupported != nil {
+		*pfSupported = *_pfSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9984,8 +10140,12 @@ func (self *IMFSimpleAudioVolume) SetMute(bMute bool) error {
 }
 
 // GetMute dispatches through IMFSimpleAudioVolume's vtable slot 6.
-func (self *IMFSimpleAudioVolume) GetMute(pbMute *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMute)))
+func (self *IMFSimpleAudioVolume) GetMute(pbMute *bool) error {
+	_pbMute := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbMute))))
+	if pbMute != nil {
+		*pbMute = *_pbMute != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -10341,8 +10501,12 @@ type IMFSourceReader struct {
 var IID_IMFSourceReader = win32.GUID{Data1: 0x70ae66f2, Data2: 0xc809, Data3: 0x4e4f, Data4: [8]byte{0x89, 0x15, 0xbd, 0xcb, 0x40, 0x6b, 0x79, 0x93}}
 
 // GetStreamSelection dispatches through IMFSourceReader's vtable slot 3.
-func (self *IMFSourceReader) GetStreamSelection(dwStreamIndex uint32, pfSelected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(unsafe.Pointer(pfSelected)))
+func (self *IMFSourceReader) GetStreamSelection(dwStreamIndex uint32, pfSelected *bool) error {
+	_pfSelected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwStreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfSelected))))
+	if pfSelected != nil {
+		*pfSelected = *_pfSelected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11155,8 +11319,12 @@ func (self *IMFTimedTextRegion) GetLineHeight(pLineHeight *float64, unitType *MF
 }
 
 // GetClipOverflow dispatches through IMFTimedTextRegion's vtable slot 10.
-func (self *IMFTimedTextRegion) GetClipOverflow(clipOverflow *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clipOverflow)))
+func (self *IMFTimedTextRegion) GetClipOverflow(clipOverflow *bool) error {
+	_clipOverflow := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_clipOverflow))))
+	if clipOverflow != nil {
+		*clipOverflow = *_clipOverflow != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11167,8 +11335,12 @@ func (self *IMFTimedTextRegion) GetPadding(before *float64, start *float64, afte
 }
 
 // GetWrap dispatches through IMFTimedTextRegion's vtable slot 12.
-func (self *IMFTimedTextRegion) GetWrap(wrap *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wrap)))
+func (self *IMFTimedTextRegion) GetWrap(wrap *bool) error {
+	_wrap := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_wrap))))
+	if wrap != nil {
+		*wrap = *_wrap != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11262,8 +11434,12 @@ func (self *IMFTimedTextStyle) GetBackgroundColor(bgColor *MFARGB) error {
 }
 
 // GetShowBackgroundAlways dispatches through IMFTimedTextStyle's vtable slot 9.
-func (self *IMFTimedTextStyle) GetShowBackgroundAlways(showBackgroundAlways *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(showBackgroundAlways)))
+func (self *IMFTimedTextStyle) GetShowBackgroundAlways(showBackgroundAlways *bool) error {
+	_showBackgroundAlways := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_showBackgroundAlways))))
+	if showBackgroundAlways != nil {
+		*showBackgroundAlways = *_showBackgroundAlways != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11274,14 +11450,22 @@ func (self *IMFTimedTextStyle) GetFontStyle(fontStyle *MF_TIMED_TEXT_FONT_STYLE)
 }
 
 // GetBold dispatches through IMFTimedTextStyle's vtable slot 11.
-func (self *IMFTimedTextStyle) GetBold(bold *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bold)))
+func (self *IMFTimedTextStyle) GetBold(bold *bool) error {
+	_bold := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bold))))
+	if bold != nil {
+		*bold = *_bold != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRightToLeft dispatches through IMFTimedTextStyle's vtable slot 12.
-func (self *IMFTimedTextStyle) GetRightToLeft(rightToLeft *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rightToLeft)))
+func (self *IMFTimedTextStyle) GetRightToLeft(rightToLeft *bool) error {
+	_rightToLeft := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_rightToLeft))))
+	if rightToLeft != nil {
+		*rightToLeft = *_rightToLeft != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11324,8 +11508,12 @@ func (self *IMFTimedTextStyle2) GetBouten(bouten **IMFTimedTextBouten) error {
 }
 
 // IsTextCombined dispatches through IMFTimedTextStyle2's vtable slot 5.
-func (self *IMFTimedTextStyle2) IsTextCombined(value *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
+func (self *IMFTimedTextStyle2) IsTextCombined(value *bool) error {
+	_value := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	if value != nil {
+		*value = *_value != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -12005,8 +12193,12 @@ func (self *IMFTrustedOutput) GetOutputTrustAuthorityByIndex(dwIndex uint32, ppa
 }
 
 // IsFinal dispatches through IMFTrustedOutput's vtable slot 5.
-func (self *IMFTrustedOutput) IsFinal(pfIsFinal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsFinal)))
+func (self *IMFTrustedOutput) IsFinal(pfIsFinal *bool) error {
+	_pfIsFinal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsFinal))))
+	if pfIsFinal != nil {
+		*pfIsFinal = *_pfIsFinal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -12141,8 +12333,12 @@ func (self *IMFVideoDisplayControl) SetFullscreen(fFullscreen bool) error {
 }
 
 // GetFullscreen dispatches through IMFVideoDisplayControl's vtable slot 18.
-func (self *IMFVideoDisplayControl) GetFullscreen(pfFullscreen *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfFullscreen)))
+func (self *IMFVideoDisplayControl) GetFullscreen(pfFullscreen *bool) error {
+	_pfFullscreen := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfFullscreen))))
+	if pfFullscreen != nil {
+		*pfFullscreen = *_pfFullscreen != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

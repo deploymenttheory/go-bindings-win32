@@ -4500,16 +4500,24 @@ func TTGetNewFontName(phFontReference *foundation.HANDLE, wzWinFamilyName founda
 // TTIsEmbeddingEnabled calls t2embed!TTIsEmbeddingEnabled.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttisembeddingenabled
 // Minimum OS: windows5.0.
-func TTIsEmbeddingEnabled(hDC HDC, pbEnabled *foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procTTIsEmbeddingEnabled.Addr(), uintptr(hDC), uintptr(unsafe.Pointer(pbEnabled)))
+func TTIsEmbeddingEnabled(hDC HDC, pbEnabled *bool) int32 {
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procTTIsEmbeddingEnabled.Addr(), uintptr(hDC), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return int32(r1)
 }
 
 // TTIsEmbeddingEnabledForFacename calls t2embed!TTIsEmbeddingEnabledForFacename.
 // https://learn.microsoft.com/windows/win32/api/t2embapi/nf-t2embapi-ttisembeddingenabledforfacename
 // Minimum OS: windows5.0.
-func TTIsEmbeddingEnabledForFacename(lpszFacename foundation.PSTR, pbEnabled *foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procTTIsEmbeddingEnabledForFacename.Addr(), uintptr(unsafe.Pointer(lpszFacename)), uintptr(unsafe.Pointer(pbEnabled)))
+func TTIsEmbeddingEnabledForFacename(lpszFacename foundation.PSTR, pbEnabled *bool) int32 {
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procTTIsEmbeddingEnabledForFacename.Addr(), uintptr(unsafe.Pointer(lpszFacename)), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return int32(r1)
 }
 

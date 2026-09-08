@@ -3408,8 +3408,12 @@ func CloseCryptoHandle(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE) error {
 // CryptAcquireCertificatePrivateKey calls CRYPT32!CryptAcquireCertificatePrivateKey.
 // https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptacquirecertificateprivatekey
 // Minimum OS: windows5.1.2600.
-func CryptAcquireCertificatePrivateKey(pCert *CERT_CONTEXT, dwFlags CRYPT_ACQUIRE_FLAGS, pvParameters unsafe.Pointer, phCryptProvOrNCryptKey *HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, pdwKeySpec *CERT_KEY_SPEC, pfCallerFreeProvOrNCryptKey *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCryptAcquireCertificatePrivateKey.Addr(), uintptr(unsafe.Pointer(pCert)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvParameters)), uintptr(unsafe.Pointer(phCryptProvOrNCryptKey)), uintptr(unsafe.Pointer(pdwKeySpec)), uintptr(unsafe.Pointer(pfCallerFreeProvOrNCryptKey)))
+func CryptAcquireCertificatePrivateKey(pCert *CERT_CONTEXT, dwFlags CRYPT_ACQUIRE_FLAGS, pvParameters unsafe.Pointer, phCryptProvOrNCryptKey *HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, pdwKeySpec *CERT_KEY_SPEC, pfCallerFreeProvOrNCryptKey *bool) error {
+	_pfCallerFreeProvOrNCryptKey := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procCryptAcquireCertificatePrivateKey.Addr(), uintptr(unsafe.Pointer(pCert)), uintptr(dwFlags), uintptr(unsafe.Pointer(pvParameters)), uintptr(unsafe.Pointer(phCryptProvOrNCryptKey)), uintptr(unsafe.Pointer(pdwKeySpec)), uintptr(win32.OutParam(unsafe.Pointer(_pfCallerFreeProvOrNCryptKey))))
+	if pfCallerFreeProvOrNCryptKey != nil {
+		*pfCallerFreeProvOrNCryptKey = *_pfCallerFreeProvOrNCryptKey != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -6454,7 +6458,7 @@ func TransformFinalBlock(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pInData []byte,
 }
 
 // VerifyHash calls infocardapi!VerifyHash.
-func VerifyHash(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pHash []byte, hashAlgOid string, pSig []byte, pfVerified *foundation.BOOL) error {
+func VerifyHash(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pHash []byte, hashAlgOid string, pSig []byte, pfVerified *bool) error {
 	var _pHash *byte
 	if len(pHash) > 0 {
 		_pHash = &pHash[0]
@@ -6464,6 +6468,10 @@ func VerifyHash(hCrypto *INFORMATIONCARD_CRYPTO_HANDLE, pHash []byte, hashAlgOid
 	if len(pSig) > 0 {
 		_pSig = &pSig[0]
 	}
-	r1, _, _ := syscall.SyscallN(procVerifyHash.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(len(pHash)), uintptr(unsafe.Pointer(_pHash)), uintptr(unsafe.Pointer(_hashAlgOid)), uintptr(len(pSig)), uintptr(unsafe.Pointer(_pSig)), uintptr(unsafe.Pointer(pfVerified)))
+	_pfVerified := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procVerifyHash.Addr(), uintptr(unsafe.Pointer(hCrypto)), uintptr(len(pHash)), uintptr(unsafe.Pointer(_pHash)), uintptr(unsafe.Pointer(_hashAlgOid)), uintptr(len(pSig)), uintptr(unsafe.Pointer(_pSig)), uintptr(win32.OutParam(unsafe.Pointer(_pfVerified))))
+	if pfVerified != nil {
+		*pfVerified = *_pfVerified != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }

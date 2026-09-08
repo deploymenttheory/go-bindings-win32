@@ -214,10 +214,10 @@ type INetwork2 struct {
 var IID_INetwork2 = win32.GUID{Data1: 0xb5550abb, Data2: 0x3391, Data3: 0x4310, Data4: [8]byte{0x80, 0x4f, 0x25, 0xdc, 0xc3, 0x25, 0xed, 0x81}}
 
 // IsDomainAuthenticatedBy dispatches through INetwork2's vtable slot 20.
-func (self *INetwork2) IsDomainAuthenticatedBy(domainAuthenticationKind NLM_DOMAIN_AUTHENTICATION_KIND) (foundation.BOOL, error) {
+func (self *INetwork2) IsDomainAuthenticatedBy(domainAuthenticationKind NLM_DOMAIN_AUTHENTICATION_KIND) (bool, error) {
 	_pValue := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(domainAuthenticationKind), uintptr(win32.OutParam(unsafe.Pointer(_pValue))))
-	return *_pValue, win32.ErrIfFailed(int32(r1))
+	return *_pValue != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // INetworkConnection: https://learn.microsoft.com/windows/win32/api/netlistmgr/nn-netlistmgr-inetworkconnection
@@ -288,8 +288,12 @@ type INetworkConnection2 struct {
 var IID_INetworkConnection2 = win32.GUID{Data1: 0x00e676ed, Data2: 0x5a35, Data3: 0x4738, Data4: [8]byte{0x92, 0xeb, 0x85, 0x81, 0x73, 0x8d, 0x0f, 0x0a}}
 
 // IsDomainAuthenticatedBy dispatches through INetworkConnection2's vtable slot 14.
-func (self *INetworkConnection2) IsDomainAuthenticatedBy(domainAuthenticationKind NLM_DOMAIN_AUTHENTICATION_KIND, pValue *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(domainAuthenticationKind), uintptr(unsafe.Pointer(pValue)))
+func (self *INetworkConnection2) IsDomainAuthenticatedBy(domainAuthenticationKind NLM_DOMAIN_AUTHENTICATION_KIND, pValue *bool) error {
+	_pValue := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(domainAuthenticationKind), uintptr(win32.OutParam(unsafe.Pointer(_pValue))))
+	if pValue != nil {
+		*pValue = *_pValue != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

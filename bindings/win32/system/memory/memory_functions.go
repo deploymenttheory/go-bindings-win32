@@ -1148,8 +1148,12 @@ func PrefetchVirtualMemory(hProcess foundation.HANDLE, VirtualAddresses []WIN32_
 // QueryMemoryResourceNotification calls KERNEL32!QueryMemoryResourceNotification.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-querymemoryresourcenotification
 // Minimum OS: windows5.1.2600.
-func QueryMemoryResourceNotification(ResourceNotificationHandle foundation.HANDLE, ResourceState *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procQueryMemoryResourceNotification.Addr(), uintptr(ResourceNotificationHandle), uintptr(unsafe.Pointer(ResourceState)))
+func QueryMemoryResourceNotification(ResourceNotificationHandle foundation.HANDLE, ResourceState *bool) error {
+	_ResourceState := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procQueryMemoryResourceNotification.Addr(), uintptr(ResourceNotificationHandle), uintptr(win32.OutParam(unsafe.Pointer(_ResourceState))))
+	if ResourceState != nil {
+		*ResourceState = *_ResourceState != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

@@ -444,8 +444,12 @@ func GetCurrentPowerPolicies(pGlobalPowerPolicy *GLOBAL_POWER_POLICY, pPowerPoli
 // GetDevicePowerState calls KERNEL32!GetDevicePowerState.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdevicepowerstate
 // Minimum OS: windows5.1.2600.
-func GetDevicePowerState(hDevice foundation.HANDLE, pfOn *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procGetDevicePowerState.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(pfOn)))
+func GetDevicePowerState(hDevice foundation.HANDLE, pfOn *bool) bool {
+	_pfOn := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetDevicePowerState.Addr(), uintptr(hDevice), uintptr(win32.OutParam(unsafe.Pointer(_pfOn))))
+	if pfOn != nil {
+		*pfOn = *_pfOn != 0
+	}
 	return r1 != 0
 }
 

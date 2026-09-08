@@ -541,32 +541,52 @@ func (self *IATSC_VCT) GetRecordEtmLocation(dwRecordIndex uint32, pbVal *byte) e
 }
 
 // GetRecordIsAccessControlledBitSet dispatches through IATSC_VCT's vtable slot 16.
-func (self *IATSC_VCT) GetRecordIsAccessControlledBitSet(dwRecordIndex uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IATSC_VCT) GetRecordIsAccessControlledBitSet(dwRecordIndex uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecordIsHiddenBitSet dispatches through IATSC_VCT's vtable slot 17.
-func (self *IATSC_VCT) GetRecordIsHiddenBitSet(dwRecordIndex uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IATSC_VCT) GetRecordIsHiddenBitSet(dwRecordIndex uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecordIsPathSelectBitSet dispatches through IATSC_VCT's vtable slot 18.
-func (self *IATSC_VCT) GetRecordIsPathSelectBitSet(dwRecordIndex uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IATSC_VCT) GetRecordIsPathSelectBitSet(dwRecordIndex uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecordIsOutOfBandBitSet dispatches through IATSC_VCT's vtable slot 19.
-func (self *IATSC_VCT) GetRecordIsOutOfBandBitSet(dwRecordIndex uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IATSC_VCT) GetRecordIsOutOfBandBitSet(dwRecordIndex uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecordIsHideGuideBitSet dispatches through IATSC_VCT's vtable slot 20.
-func (self *IATSC_VCT) GetRecordIsHideGuideBitSet(dwRecordIndex uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IATSC_VCT) GetRecordIsHideGuideBitSet(dwRecordIndex uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1681,10 +1701,10 @@ func (self *IDTFilter) Put_BlockedRatingAttributes(enSystem EnTvRat_System, enLe
 }
 
 // Get_BlockUnRated dispatches through IDTFilter's vtable slot 7.
-func (self *IDTFilter) Get_BlockUnRated() (foundation.BOOL, error) {
+func (self *IDTFilter) Get_BlockUnRated() (bool, error) {
 	_pfBlockUnRatedShows := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfBlockUnRatedShows))))
-	return *_pfBlockUnRatedShows, win32.ErrIfFailed(int32(r1))
+	return *_pfBlockUnRatedShows != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BlockUnRated dispatches through IDTFilter's vtable slot 8.
@@ -1750,8 +1770,12 @@ func (self *IDTFilter3) GetProtectionType(pProtectionType *ProtType) error {
 }
 
 // LicenseHasExpirationDate dispatches through IDTFilter3's vtable slot 15.
-func (self *IDTFilter3) LicenseHasExpirationDate(pfLicenseHasExpirationDate *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLicenseHasExpirationDate)))
+func (self *IDTFilter3) LicenseHasExpirationDate(pfLicenseHasExpirationDate *bool) error {
+	_pfLicenseHasExpirationDate := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfLicenseHasExpirationDate))))
+	if pfLicenseHasExpirationDate != nil {
+		*pfLicenseHasExpirationDate = *_pfLicenseHasExpirationDate != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2390,8 +2414,12 @@ func (self *IDVB_DIT) Initialize(pSectionList *ISectionList) error {
 }
 
 // GetTransitionFlag dispatches through IDVB_DIT's vtable slot 4.
-func (self *IDVB_DIT) GetTransitionFlag(pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfVal)))
+func (self *IDVB_DIT) GetTransitionFlag(pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2477,8 +2505,12 @@ func (self *IDVB_EIT) GetRecordRunningStatus(dwRecordIndex uint32, pbVal *byte) 
 }
 
 // GetRecordFreeCAMode dispatches through IDVB_EIT's vtable slot 15.
-func (self *IDVB_EIT) GetRecordFreeCAMode(dwRecordIndex uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IDVB_EIT) GetRecordFreeCAMode(dwRecordIndex uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2759,14 +2791,22 @@ func (self *IDVB_SDT) GetRecordServiceId(dwRecordIndex uint32, pwVal *uint16) er
 }
 
 // GetRecordEITScheduleFlag dispatches through IDVB_SDT's vtable slot 9.
-func (self *IDVB_SDT) GetRecordEITScheduleFlag(dwRecordIndex uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IDVB_SDT) GetRecordEITScheduleFlag(dwRecordIndex uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecordEITPresentFollowingFlag dispatches through IDVB_SDT's vtable slot 10.
-func (self *IDVB_SDT) GetRecordEITPresentFollowingFlag(dwRecordIndex uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IDVB_SDT) GetRecordEITPresentFollowingFlag(dwRecordIndex uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2777,8 +2817,12 @@ func (self *IDVB_SDT) GetRecordRunningStatus(dwRecordIndex uint32, pbVal *byte) 
 }
 
 // GetRecordFreeCAMode dispatches through IDVB_SDT's vtable slot 12.
-func (self *IDVB_SDT) GetRecordFreeCAMode(dwRecordIndex uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IDVB_SDT) GetRecordFreeCAMode(dwRecordIndex uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3952,14 +3996,22 @@ func (self *IDvbServiceAttributeDescriptor) GetRecordServiceId(bRecordIndex byte
 }
 
 // GetRecordNumericSelectionFlag dispatches through IDvbServiceAttributeDescriptor's vtable slot 7.
-func (self *IDvbServiceAttributeDescriptor) GetRecordNumericSelectionFlag(bRecordIndex byte, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(bRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IDvbServiceAttributeDescriptor) GetRecordNumericSelectionFlag(bRecordIndex byte, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(bRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetRecordVisibleServiceFlag dispatches through IDvbServiceAttributeDescriptor's vtable slot 8.
-func (self *IDvbServiceAttributeDescriptor) GetRecordVisibleServiceFlag(bRecordIndex byte, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bRecordIndex), uintptr(unsafe.Pointer(pfVal)))
+func (self *IDvbServiceAttributeDescriptor) GetRecordVisibleServiceFlag(bRecordIndex byte, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bRecordIndex), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4631,17 +4683,17 @@ func (self *IESFileExpiryDateEvent) GetMaxRenewalCount() (uint32, error) {
 }
 
 // IsEntitlementTokenPresent dispatches through IESFileExpiryDateEvent's vtable slot 12.
-func (self *IESFileExpiryDateEvent) IsEntitlementTokenPresent() (foundation.BOOL, error) {
+func (self *IESFileExpiryDateEvent) IsEntitlementTokenPresent() (bool, error) {
 	_pfEntTokenPresent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEntTokenPresent))))
-	return *_pfEntTokenPresent, win32.ErrIfFailed(int32(r1))
+	return *_pfEntTokenPresent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // DoesExpireAfterFirstUse dispatches through IESFileExpiryDateEvent's vtable slot 13.
-func (self *IESFileExpiryDateEvent) DoesExpireAfterFirstUse() (foundation.BOOL, error) {
+func (self *IESFileExpiryDateEvent) DoesExpireAfterFirstUse() (bool, error) {
 	_pfExpireAfterFirstUse := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfExpireAfterFirstUse))))
-	return *_pfExpireAfterFirstUse, win32.ErrIfFailed(int32(r1))
+	return *_pfExpireAfterFirstUse != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IESIsdbCasResponseEvent: https://learn.microsoft.com/windows/win32/api/tuner/nn-tuner-iesisdbcasresponseevent
@@ -4705,17 +4757,17 @@ func (self *IESLicenseRenewalResultEvent) GetFileName() (foundation.BSTR, error)
 }
 
 // IsRenewalSuccessful dispatches through IESLicenseRenewalResultEvent's vtable slot 10.
-func (self *IESLicenseRenewalResultEvent) IsRenewalSuccessful() (foundation.BOOL, error) {
+func (self *IESLicenseRenewalResultEvent) IsRenewalSuccessful() (bool, error) {
 	_pfRenewalSuccessful := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfRenewalSuccessful))))
-	return *_pfRenewalSuccessful, win32.ErrIfFailed(int32(r1))
+	return *_pfRenewalSuccessful != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IsCheckEntitlementCallRequired dispatches through IESLicenseRenewalResultEvent's vtable slot 11.
-func (self *IESLicenseRenewalResultEvent) IsCheckEntitlementCallRequired() (foundation.BOOL, error) {
+func (self *IESLicenseRenewalResultEvent) IsCheckEntitlementCallRequired() (bool, error) {
 	_pfCheckEntTokenCallNeeded := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCheckEntTokenCallNeeded))))
-	return *_pfCheckEntTokenCallNeeded, win32.ErrIfFailed(int32(r1))
+	return *_pfCheckEntTokenCallNeeded != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDescrambledStatus dispatches through IESLicenseRenewalResultEvent's vtable slot 12.
@@ -5210,10 +5262,10 @@ func (self *IEvalRat) Put_BlockedRatingAttributes(enSystem EnTvRat_System, enLev
 }
 
 // Get_BlockUnRated dispatches through IEvalRat's vtable slot 9.
-func (self *IEvalRat) Get_BlockUnRated() (foundation.BOOL, error) {
+func (self *IEvalRat) Get_BlockUnRated() (bool, error) {
 	_pfBlockUnRatedShows := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfBlockUnRatedShows))))
-	return *_pfBlockUnRatedShows, win32.ErrIfFailed(int32(r1))
+	return *_pfBlockUnRatedShows != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_BlockUnRated dispatches through IEvalRat's vtable slot 10.
@@ -6065,14 +6117,22 @@ func (self *IIsdbAudioComponentDescriptor) GetSimulcastGroupTag(pbVal *byte) err
 }
 
 // GetESMultiLingualFlag dispatches through IIsdbAudioComponentDescriptor's vtable slot 10.
-func (self *IIsdbAudioComponentDescriptor) GetESMultiLingualFlag(pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfVal)))
+func (self *IIsdbAudioComponentDescriptor) GetESMultiLingualFlag(pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetMainComponentFlag dispatches through IIsdbAudioComponentDescriptor's vtable slot 11.
-func (self *IIsdbAudioComponentDescriptor) GetMainComponentFlag(pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfVal)))
+func (self *IIsdbAudioComponentDescriptor) GetMainComponentFlag(pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6464,8 +6524,28 @@ func (self *IIsdbDownloadContentDescriptor) GetLength(pbVal *byte) error {
 }
 
 // GetFlags dispatches through IIsdbDownloadContentDescriptor's vtable slot 5.
-func (self *IIsdbDownloadContentDescriptor) GetFlags(pfReboot *foundation.BOOL, pfAddOn *foundation.BOOL, pfCompatibility *foundation.BOOL, pfModuleInfo *foundation.BOOL, pfTextInfo *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfReboot)), uintptr(unsafe.Pointer(pfAddOn)), uintptr(unsafe.Pointer(pfCompatibility)), uintptr(unsafe.Pointer(pfModuleInfo)), uintptr(unsafe.Pointer(pfTextInfo)))
+func (self *IIsdbDownloadContentDescriptor) GetFlags(pfReboot *bool, pfAddOn *bool, pfCompatibility *bool, pfModuleInfo *bool, pfTextInfo *bool) error {
+	_pfReboot := new(foundation.BOOL)
+	_pfAddOn := new(foundation.BOOL)
+	_pfCompatibility := new(foundation.BOOL)
+	_pfModuleInfo := new(foundation.BOOL)
+	_pfTextInfo := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfReboot))), uintptr(win32.OutParam(unsafe.Pointer(_pfAddOn))), uintptr(win32.OutParam(unsafe.Pointer(_pfCompatibility))), uintptr(win32.OutParam(unsafe.Pointer(_pfModuleInfo))), uintptr(win32.OutParam(unsafe.Pointer(_pfTextInfo))))
+	if pfReboot != nil {
+		*pfReboot = *_pfReboot != 0
+	}
+	if pfAddOn != nil {
+		*pfAddOn = *_pfAddOn != 0
+	}
+	if pfCompatibility != nil {
+		*pfCompatibility = *_pfCompatibility != 0
+	}
+	if pfModuleInfo != nil {
+		*pfModuleInfo = *_pfModuleInfo != 0
+	}
+	if pfTextInfo != nil {
+		*pfTextInfo = *_pfTextInfo != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6848,8 +6928,12 @@ func (self *IIsdbSeriesDescriptor) GetProgramPattern(pbVal *byte) error {
 }
 
 // GetExpireDate dispatches through IIsdbSeriesDescriptor's vtable slot 8.
-func (self *IIsdbSeriesDescriptor) GetExpireDate(pfValid *foundation.BOOL, pmdtVal *MPEG_DATE_AND_TIME) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfValid)), uintptr(unsafe.Pointer(pmdtVal)))
+func (self *IIsdbSeriesDescriptor) GetExpireDate(pfValid *bool, pmdtVal *MPEG_DATE_AND_TIME) error {
+	_pfValid := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfValid))), uintptr(unsafe.Pointer(pmdtVal)))
+	if pfValid != nil {
+		*pfValid = *_pfValid != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11762,8 +11846,12 @@ type ISBE2GlobalEvent struct {
 var IID_ISBE2GlobalEvent = win32.GUID{Data1: 0xcaede759, Data2: 0xb6b1, Data3: 0x11db, Data4: [8]byte{0xa5, 0x78, 0x00, 0x18, 0xf3, 0xfa, 0x24, 0xc6}}
 
 // GetEvent dispatches through ISBE2GlobalEvent's vtable slot 3.
-func (self *ISBE2GlobalEvent) GetEvent(idEvt *win32.GUID, param1 uint32, param2 uint32, param3 uint32, param4 uint32, pSpanning *foundation.BOOL, pcb *uint32, pb *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(idEvt)), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(param4), uintptr(unsafe.Pointer(pSpanning)), uintptr(unsafe.Pointer(pcb)), uintptr(unsafe.Pointer(pb)))
+func (self *ISBE2GlobalEvent) GetEvent(idEvt *win32.GUID, param1 uint32, param2 uint32, param3 uint32, param4 uint32, pSpanning *bool, pcb *uint32, pb *byte) error {
+	_pSpanning := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(idEvt)), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(param4), uintptr(win32.OutParam(unsafe.Pointer(_pSpanning))), uintptr(unsafe.Pointer(pcb)), uintptr(unsafe.Pointer(pb)))
+	if pSpanning != nil {
+		*pSpanning = *_pSpanning != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11777,8 +11865,12 @@ type ISBE2GlobalEvent2 struct {
 var IID_ISBE2GlobalEvent2 = win32.GUID{Data1: 0x6d8309bf, Data2: 0x00fe, Data3: 0x4506, Data4: [8]byte{0x8b, 0x03, 0xf8, 0xc6, 0x5b, 0x5c, 0x9b, 0x39}}
 
 // GetEventEx dispatches through ISBE2GlobalEvent2's vtable slot 4.
-func (self *ISBE2GlobalEvent2) GetEventEx(idEvt *win32.GUID, param1 uint32, param2 uint32, param3 uint32, param4 uint32, pSpanning *foundation.BOOL, pcb *uint32, pb *byte, pStreamTime *int64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(idEvt)), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(param4), uintptr(unsafe.Pointer(pSpanning)), uintptr(unsafe.Pointer(pcb)), uintptr(unsafe.Pointer(pb)), uintptr(unsafe.Pointer(pStreamTime)))
+func (self *ISBE2GlobalEvent2) GetEventEx(idEvt *win32.GUID, param1 uint32, param2 uint32, param3 uint32, param4 uint32, pSpanning *bool, pcb *uint32, pb *byte, pStreamTime *int64) error {
+	_pSpanning := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(idEvt)), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(param4), uintptr(win32.OutParam(unsafe.Pointer(_pSpanning))), uintptr(unsafe.Pointer(pcb)), uintptr(unsafe.Pointer(pb)), uintptr(unsafe.Pointer(pStreamTime)))
+	if pSpanning != nil {
+		*pSpanning = *_pSpanning != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -12061,10 +12153,10 @@ func (self *ISIInbandEPG) StopSIEPGScan() error {
 }
 
 // IsSIEPGScanRunning dispatches through ISIInbandEPG's vtable slot 5.
-func (self *ISIInbandEPG) IsSIEPGScanRunning() (foundation.BOOL, error) {
+func (self *ISIInbandEPG) IsSIEPGScanRunning() (bool, error) {
 	_bRunning := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_bRunning))))
-	return *_bRunning, win32.ErrIfFailed(int32(r1))
+	return *_bRunning != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 7e47913a-5a89-423d-9a2b-e15168858934
@@ -12366,8 +12458,12 @@ func (self *IStreamBufferConfigure3) SetStartRecConfig(fStartStopsCur bool) erro
 }
 
 // GetStartRecConfig dispatches through IStreamBufferConfigure3's vtable slot 14.
-func (self *IStreamBufferConfigure3) GetStartRecConfig(pfStartStopsCur *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfStartStopsCur)))
+func (self *IStreamBufferConfigure3) GetStartRecConfig(pfStartStopsCur *bool) error {
+	_pfStartStopsCur := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfStartStopsCur))))
+	if pfStartStopsCur != nil {
+		*pfStartStopsCur = *_pfStartStopsCur != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -12523,8 +12619,16 @@ func (self *IStreamBufferRecordControl) Stop(rtStop int64) error {
 }
 
 // GetRecordingStatus dispatches through IStreamBufferRecordControl's vtable slot 5.
-func (self *IStreamBufferRecordControl) GetRecordingStatus(phResult *foundation.HRESULT, pbStarted *foundation.BOOL, pbStopped *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phResult)), uintptr(unsafe.Pointer(pbStarted)), uintptr(unsafe.Pointer(pbStopped)))
+func (self *IStreamBufferRecordControl) GetRecordingStatus(phResult *foundation.HRESULT, pbStarted *bool, pbStopped *bool) error {
+	_pbStarted := new(foundation.BOOL)
+	_pbStopped := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phResult)), uintptr(win32.OutParam(unsafe.Pointer(_pbStarted))), uintptr(win32.OutParam(unsafe.Pointer(_pbStopped))))
+	if pbStarted != nil {
+		*pbStarted = *_pbStarted != 0
+	}
+	if pbStopped != nil {
+		*pbStopped = *_pbStopped != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

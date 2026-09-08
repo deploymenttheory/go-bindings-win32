@@ -477,8 +477,16 @@ func WlanHostedNetworkQueryProperty(hClientHandle foundation.HANDLE, OpCode WLAN
 // WlanHostedNetworkQuerySecondaryKey calls wlanapi!WlanHostedNetworkQuerySecondaryKey.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworkquerysecondarykey
 // Minimum OS: windows6.1.
-func WlanHostedNetworkQuerySecondaryKey(hClientHandle foundation.HANDLE, pdwKeyLength *uint32, ppucKeyData **byte, pbIsPassPhrase *foundation.BOOL, pbPersistent *foundation.BOOL, pFailReason *WLAN_HOSTED_NETWORK_REASON) uint32 {
-	r1, _, _ := syscall.SyscallN(procWlanHostedNetworkQuerySecondaryKey.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pdwKeyLength)), uintptr(unsafe.Pointer(ppucKeyData)), uintptr(unsafe.Pointer(pbIsPassPhrase)), uintptr(unsafe.Pointer(pbPersistent)), uintptr(unsafe.Pointer(pFailReason)), 0)
+func WlanHostedNetworkQuerySecondaryKey(hClientHandle foundation.HANDLE, pdwKeyLength *uint32, ppucKeyData **byte, pbIsPassPhrase *bool, pbPersistent *bool, pFailReason *WLAN_HOSTED_NETWORK_REASON) uint32 {
+	_pbIsPassPhrase := new(foundation.BOOL)
+	_pbPersistent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWlanHostedNetworkQuerySecondaryKey.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pdwKeyLength)), uintptr(unsafe.Pointer(ppucKeyData)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsPassPhrase))), uintptr(win32.OutParam(unsafe.Pointer(_pbPersistent))), uintptr(unsafe.Pointer(pFailReason)), 0)
+	if pbIsPassPhrase != nil {
+		*pbIsPassPhrase = *_pbIsPassPhrase != 0
+	}
+	if pbPersistent != nil {
+		*pbPersistent = *_pbPersistent != 0
+	}
 	return uint32(r1)
 }
 

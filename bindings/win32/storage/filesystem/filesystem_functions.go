@@ -1390,8 +1390,12 @@ func AreFileApisANSI() bool {
 
 // AreShortNamesEnabled calls KERNEL32!AreShortNamesEnabled.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-areshortnamesenabled
-func AreShortNamesEnabled(Handle foundation.HANDLE, Enabled *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procAreShortNamesEnabled.Addr(), uintptr(Handle), uintptr(unsafe.Pointer(Enabled)))
+func AreShortNamesEnabled(Handle foundation.HANDLE, Enabled *bool) bool {
+	_Enabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procAreShortNamesEnabled.Addr(), uintptr(Handle), uintptr(win32.OutParam(unsafe.Pointer(_Enabled))))
+	if Enabled != nil {
+		*Enabled = *_Enabled != 0
+	}
 	return r1 != 0
 }
 
@@ -1523,9 +1527,17 @@ func BuildIoRingWriteFileGather(ioRing HIORING, fileRef IORING_HANDLE_REF, segme
 // CheckNameLegalDOS8Dot3 calls KERNEL32!CheckNameLegalDOS8Dot3W.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-checknamelegaldos8dot3w
 // Minimum OS: windows6.0.6000.
-func CheckNameLegalDOS8Dot3(lpName string, lpOemName foundation.PSTR, OemNameSize uint32, pbNameContainsSpaces *foundation.BOOL, pbNameLegal *foundation.BOOL) error {
+func CheckNameLegalDOS8Dot3(lpName string, lpOemName foundation.PSTR, OemNameSize uint32, pbNameContainsSpaces *bool, pbNameLegal *bool) error {
 	_lpName := win32.UTF16Ptr(lpName)
-	r1, _, e1 := syscall.SyscallN(procCheckNameLegalDOS8Dot3.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpOemName)), uintptr(OemNameSize), uintptr(unsafe.Pointer(pbNameContainsSpaces)), uintptr(unsafe.Pointer(pbNameLegal)))
+	_pbNameContainsSpaces := new(foundation.BOOL)
+	_pbNameLegal := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procCheckNameLegalDOS8Dot3.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpOemName)), uintptr(OemNameSize), uintptr(win32.OutParam(unsafe.Pointer(_pbNameContainsSpaces))), uintptr(win32.OutParam(unsafe.Pointer(_pbNameLegal))))
+	if pbNameContainsSpaces != nil {
+		*pbNameContainsSpaces = *_pbNameContainsSpaces != 0
+	}
+	if pbNameLegal != nil {
+		*pbNameLegal = *_pbNameLegal != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1535,8 +1547,16 @@ func CheckNameLegalDOS8Dot3(lpName string, lpOemName foundation.PSTR, OemNameSiz
 // CheckNameLegalDOS8Dot3A calls KERNEL32!CheckNameLegalDOS8Dot3A.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-checknamelegaldos8dot3a
 // Minimum OS: windows6.0.6000.
-func CheckNameLegalDOS8Dot3A(lpName foundation.PSTR, lpOemName foundation.PSTR, OemNameSize uint32, pbNameContainsSpaces *foundation.BOOL, pbNameLegal *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCheckNameLegalDOS8Dot3A.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpOemName)), uintptr(OemNameSize), uintptr(unsafe.Pointer(pbNameContainsSpaces)), uintptr(unsafe.Pointer(pbNameLegal)))
+func CheckNameLegalDOS8Dot3A(lpName foundation.PSTR, lpOemName foundation.PSTR, OemNameSize uint32, pbNameContainsSpaces *bool, pbNameLegal *bool) error {
+	_pbNameContainsSpaces := new(foundation.BOOL)
+	_pbNameLegal := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procCheckNameLegalDOS8Dot3A.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpOemName)), uintptr(OemNameSize), uintptr(win32.OutParam(unsafe.Pointer(_pbNameContainsSpaces))), uintptr(win32.OutParam(unsafe.Pointer(_pbNameLegal))))
+	if pbNameContainsSpaces != nil {
+		*pbNameContainsSpaces = *_pbNameContainsSpaces != 0
+	}
+	if pbNameLegal != nil {
+		*pbNameLegal = *_pbNameLegal != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3078,8 +3098,12 @@ func GetFileAttributesTransactedA(lpFileName foundation.PSTR, fInfoLevelId GET_F
 // GetFileBandwidthReservation calls KERNEL32!GetFileBandwidthReservation.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfilebandwidthreservation
 // Minimum OS: windows6.0.6000.
-func GetFileBandwidthReservation(hFile foundation.HANDLE, lpPeriodMilliseconds *uint32, lpBytesPerPeriod *uint32, pDiscardable *foundation.BOOL, lpTransferSize *uint32, lpNumOutstandingRequests *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileBandwidthReservation.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpPeriodMilliseconds)), uintptr(unsafe.Pointer(lpBytesPerPeriod)), uintptr(unsafe.Pointer(pDiscardable)), uintptr(unsafe.Pointer(lpTransferSize)), uintptr(unsafe.Pointer(lpNumOutstandingRequests)))
+func GetFileBandwidthReservation(hFile foundation.HANDLE, lpPeriodMilliseconds *uint32, lpBytesPerPeriod *uint32, pDiscardable *bool, lpTransferSize *uint32, lpNumOutstandingRequests *uint32) error {
+	_pDiscardable := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procGetFileBandwidthReservation.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpPeriodMilliseconds)), uintptr(unsafe.Pointer(lpBytesPerPeriod)), uintptr(win32.OutParam(unsafe.Pointer(_pDiscardable))), uintptr(unsafe.Pointer(lpTransferSize)), uintptr(unsafe.Pointer(lpNumOutstandingRequests)))
+	if pDiscardable != nil {
+		*pDiscardable = *_pDiscardable != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5621,9 +5645,13 @@ func WofGetDriverVersion(FileOrVolumeHandle foundation.HANDLE, Provider uint32, 
 
 // WofIsExternalFile calls WOFUTIL!WofIsExternalFile.
 // https://learn.microsoft.com/windows/win32/api/wofapi/nf-wofapi-wofisexternalfile
-func WofIsExternalFile(FilePath string, IsExternalFile *foundation.BOOL, Provider *uint32, ExternalFileInfo unsafe.Pointer, BufferLength *uint32) error {
+func WofIsExternalFile(FilePath string, IsExternalFile *bool, Provider *uint32, ExternalFileInfo unsafe.Pointer, BufferLength *uint32) error {
 	_FilePath := win32.UTF16Ptr(FilePath)
-	r1, _, _ := syscall.SyscallN(procWofIsExternalFile.Addr(), uintptr(unsafe.Pointer(_FilePath)), uintptr(unsafe.Pointer(IsExternalFile)), uintptr(unsafe.Pointer(Provider)), uintptr(unsafe.Pointer(ExternalFileInfo)), uintptr(unsafe.Pointer(BufferLength)))
+	_IsExternalFile := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWofIsExternalFile.Addr(), uintptr(unsafe.Pointer(_FilePath)), uintptr(win32.OutParam(unsafe.Pointer(_IsExternalFile))), uintptr(unsafe.Pointer(Provider)), uintptr(unsafe.Pointer(ExternalFileInfo)), uintptr(unsafe.Pointer(BufferLength)))
+	if IsExternalFile != nil {
+		*IsExternalFile = *_IsExternalFile != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

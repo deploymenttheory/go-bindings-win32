@@ -268,8 +268,12 @@ func (self *IDirectManipulationManager) RegisterHitTestTarget(window foundation.
 }
 
 // ProcessInput dispatches through IDirectManipulationManager's vtable slot 6.
-func (self *IDirectManipulationManager) ProcessInput(message *uiwindowsandmessaging.MSG, handled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(handled)))
+func (self *IDirectManipulationManager) ProcessInput(message *uiwindowsandmessaging.MSG, handled *bool) error {
+	_handled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(message)), uintptr(win32.OutParam(unsafe.Pointer(_handled))))
+	if handled != nil {
+		*handled = *_handled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

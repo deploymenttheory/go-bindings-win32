@@ -223,14 +223,22 @@ func (self *IAudioDeviceEndpoint) SetBuffer(MaxPeriod int64, u32LatencyCoefficie
 }
 
 // GetRTCaps dispatches through IAudioDeviceEndpoint's vtable slot 4.
-func (self *IAudioDeviceEndpoint) GetRTCaps(pbIsRTCapable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsRTCapable)))
+func (self *IAudioDeviceEndpoint) GetRTCaps(pbIsRTCapable *bool) error {
+	_pbIsRTCapable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsRTCapable))))
+	if pbIsRTCapable != nil {
+		*pbIsRTCapable = *_pbIsRTCapable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEventDrivenCapable dispatches through IAudioDeviceEndpoint's vtable slot 5.
-func (self *IAudioDeviceEndpoint) GetEventDrivenCapable(pbisEventCapable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbisEventCapable)))
+func (self *IAudioDeviceEndpoint) GetEventDrivenCapable(pbisEventCapable *bool) error {
+	_pbisEventCapable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbisEventCapable))))
+	if pbisEventCapable != nil {
+		*pbisEventCapable = *_pbisEventCapable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -755,8 +763,12 @@ func (self *ITSGPolicyEngine) Refresh() error {
 }
 
 // IsQuarantineEnabled dispatches through ITSGPolicyEngine's vtable slot 6.
-func (self *ITSGPolicyEngine) IsQuarantineEnabled(quarantineEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(quarantineEnabled)))
+func (self *ITSGPolicyEngine) IsQuarantineEnabled(quarantineEnabled *bool) error {
+	_quarantineEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_quarantineEnabled))))
+	if quarantineEnabled != nil {
+		*quarantineEnabled = *_quarantineEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -868,10 +880,10 @@ func (self *ITsSbClientConnection) Get_ClientConnectionPropertySet() (*ITsSbClie
 }
 
 // Get_IsFirstAssignment dispatches through ITsSbClientConnection's vtable slot 14.
-func (self *ITsSbClientConnection) Get_IsFirstAssignment() (foundation.BOOL, error) {
+func (self *ITsSbClientConnection) Get_IsFirstAssignment() (bool, error) {
 	_ppVal := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_ppVal))))
-	return *_ppVal, win32.ErrIfFailed(int32(r1))
+	return *_ppVal != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_RdFarmType dispatches through ITsSbClientConnection's vtable slot 15.
@@ -2819,8 +2831,12 @@ type IWTSListenerCallback struct {
 var IID_IWTSListenerCallback = win32.GUID{Data1: 0xa1230203, Data2: 0xd6a7, Data3: 0x11d8, Data4: [8]byte{0xb9, 0xfd, 0x00, 0x0b, 0xdb, 0xd1, 0xf1, 0x98}}
 
 // OnNewChannelConnection dispatches through IWTSListenerCallback's vtable slot 3.
-func (self *IWTSListenerCallback) OnNewChannelConnection(pChannel *IWTSVirtualChannel, data foundation.BSTR, pbAccept *foundation.BOOL, ppCallback **IWTSVirtualChannelCallback) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChannel)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(pbAccept)), uintptr(unsafe.Pointer(ppCallback)))
+func (self *IWTSListenerCallback) OnNewChannelConnection(pChannel *IWTSVirtualChannel, data foundation.BSTR, pbAccept *bool, ppCallback **IWTSVirtualChannelCallback) error {
+	_pbAccept := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChannel)), uintptr(unsafe.Pointer(data)), uintptr(win32.OutParam(unsafe.Pointer(_pbAccept))), uintptr(unsafe.Pointer(ppCallback)))
+	if pbAccept != nil {
+		*pbAccept = *_pbAccept != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

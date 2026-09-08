@@ -265,9 +265,13 @@ func EnclaveGetEnclaveInformation(InformationSize uint32, EnclaveInformation *EN
 }
 
 // EnclaveRestrictContainingProcessAccess calls vertdll!EnclaveRestrictContainingProcessAccess.
-func EnclaveRestrictContainingProcessAccess(RestrictAccess bool, PreviouslyRestricted *foundation.BOOL) error {
+func EnclaveRestrictContainingProcessAccess(RestrictAccess bool, PreviouslyRestricted *bool) error {
 	_RestrictAccess := win32.Bool32(RestrictAccess)
-	r1, _, _ := syscall.SyscallN(procEnclaveRestrictContainingProcessAccess.Addr(), uintptr(_RestrictAccess), uintptr(unsafe.Pointer(PreviouslyRestricted)))
+	_PreviouslyRestricted := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procEnclaveRestrictContainingProcessAccess.Addr(), uintptr(_RestrictAccess), uintptr(win32.OutParam(unsafe.Pointer(_PreviouslyRestricted))))
+	if PreviouslyRestricted != nil {
+		*PreviouslyRestricted = *_PreviouslyRestricted != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

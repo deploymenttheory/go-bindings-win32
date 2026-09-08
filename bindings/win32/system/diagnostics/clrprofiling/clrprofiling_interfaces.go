@@ -171,8 +171,12 @@ func (self *ICorProfilerCallback) JITCompilationFinished(functionId uintptr, hrS
 }
 
 // JITCachedFunctionSearchStarted dispatches through ICorProfilerCallback's vtable slot 25.
-func (self *ICorProfilerCallback) JITCachedFunctionSearchStarted(functionId uintptr, pbUseCachedFunction *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(unsafe.Pointer(pbUseCachedFunction)))
+func (self *ICorProfilerCallback) JITCachedFunctionSearchStarted(functionId uintptr, pbUseCachedFunction *bool) error {
+	_pbUseCachedFunction := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(win32.OutParam(unsafe.Pointer(_pbUseCachedFunction))))
+	if pbUseCachedFunction != nil {
+		*pbUseCachedFunction = *_pbUseCachedFunction != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -189,8 +193,12 @@ func (self *ICorProfilerCallback) JITFunctionPitched(functionId uintptr) error {
 }
 
 // JITInlining dispatches through ICorProfilerCallback's vtable slot 28.
-func (self *ICorProfilerCallback) JITInlining(callerId uintptr, calleeId uintptr, pfShouldInline *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(callerId), uintptr(calleeId), uintptr(unsafe.Pointer(pfShouldInline)))
+func (self *ICorProfilerCallback) JITInlining(callerId uintptr, calleeId uintptr, pfShouldInline *bool) error {
+	_pfShouldInline := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(callerId), uintptr(calleeId), uintptr(win32.OutParam(unsafe.Pointer(_pfShouldInline))))
+	if pfShouldInline != nil {
+		*pfShouldInline = *_pfShouldInline != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1561,8 +1569,12 @@ type ICorProfilerInfo6 struct {
 var IID_ICorProfilerInfo6 = win32.GUID{Data1: 0xf30a070d, Data2: 0xbffb, Data3: 0x46a7, Data4: [8]byte{0xb1, 0xd8, 0x87, 0x81, 0xef, 0x7b, 0x69, 0x8a}}
 
 // EnumNgenModuleMethodsInliningThisMethod dispatches through ICorProfilerInfo6's vtable slot 83.
-func (self *ICorProfilerInfo6) EnumNgenModuleMethodsInliningThisMethod(inlinersModuleId uintptr, inlineeModuleId uintptr, inlineeMethodId uint32, incompleteData *foundation.BOOL, ppEnum **ICorProfilerMethodEnum) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(inlinersModuleId), uintptr(inlineeModuleId), uintptr(inlineeMethodId), uintptr(unsafe.Pointer(incompleteData)), uintptr(unsafe.Pointer(ppEnum)))
+func (self *ICorProfilerInfo6) EnumNgenModuleMethodsInliningThisMethod(inlinersModuleId uintptr, inlineeModuleId uintptr, inlineeMethodId uint32, incompleteData *bool, ppEnum **ICorProfilerMethodEnum) error {
+	_incompleteData := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(inlinersModuleId), uintptr(inlineeModuleId), uintptr(inlineeMethodId), uintptr(win32.OutParam(unsafe.Pointer(_incompleteData))), uintptr(unsafe.Pointer(ppEnum)))
+	if incompleteData != nil {
+		*incompleteData = *_incompleteData != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1601,8 +1613,12 @@ type ICorProfilerInfo8 struct {
 var IID_ICorProfilerInfo8 = win32.GUID{Data1: 0xc5ac80a6, Data2: 0x782e, Data3: 0x4716, Data4: [8]byte{0x80, 0x44, 0x39, 0x59, 0x8c, 0x60, 0xcf, 0xbf}}
 
 // IsFunctionDynamic dispatches through ICorProfilerInfo8's vtable slot 87.
-func (self *ICorProfilerInfo8) IsFunctionDynamic(functionId uintptr, isDynamic *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(unsafe.Pointer(isDynamic)))
+func (self *ICorProfilerInfo8) IsFunctionDynamic(functionId uintptr, isDynamic *bool) error {
+	_isDynamic := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(win32.OutParam(unsafe.Pointer(_isDynamic))))
+	if isDynamic != nil {
+		*isDynamic = *_isDynamic != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

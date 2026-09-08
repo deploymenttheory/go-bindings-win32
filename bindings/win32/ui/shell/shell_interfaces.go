@@ -700,8 +700,12 @@ func (self *IActionProgress) UpdateText(sptext SPTEXT, pszText string, fMayCompa
 }
 
 // QueryCancel dispatches through IActionProgress's vtable slot 6.
-func (self *IActionProgress) QueryCancel(pfCancelled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCancelled)))
+func (self *IActionProgress) QueryCancel(pfCancelled *bool) error {
+	_pfCancelled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCancelled))))
+	if pfCancelled != nil {
+		*pfCancelled = *_pfCancelled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -767,8 +771,12 @@ func (self *IAppActivationUIInfo) GetShowCommand(value *int32) error {
 }
 
 // GetShowUI dispatches through IAppActivationUIInfo's vtable slot 6.
-func (self *IAppActivationUIInfo) GetShowUI(value *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
+func (self *IAppActivationUIInfo) GetShowUI(value *bool) error {
+	_value := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	if value != nil {
+		*value = *_value != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -827,8 +835,12 @@ func (self *IAppVisibility) GetAppVisibilityOnMonitor(hMonitor graphicsgdi.HMONI
 }
 
 // IsLauncherVisible dispatches through IAppVisibility's vtable slot 4.
-func (self *IAppVisibility) IsLauncherVisible(pfVisible *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfVisible)))
+func (self *IAppVisibility) IsLauncherVisible(pfVisible *bool) error {
+	_pfVisible := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfVisible))))
+	if pfVisible != nil {
+		*pfVisible = *_pfVisible != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -915,17 +927,25 @@ func (self *IApplicationAssociationRegistration) QueryCurrentDefault(pszQuery st
 }
 
 // QueryAppIsDefault dispatches through IApplicationAssociationRegistration's vtable slot 4.
-func (self *IApplicationAssociationRegistration) QueryAppIsDefault(pszQuery string, atQueryType ASSOCIATIONTYPE, alQueryLevel ASSOCIATIONLEVEL, pszAppRegistryName string, pfDefault *foundation.BOOL) error {
+func (self *IApplicationAssociationRegistration) QueryAppIsDefault(pszQuery string, atQueryType ASSOCIATIONTYPE, alQueryLevel ASSOCIATIONLEVEL, pszAppRegistryName string, pfDefault *bool) error {
 	_pszQuery := win32.UTF16Ptr(pszQuery)
 	_pszAppRegistryName := win32.UTF16Ptr(pszAppRegistryName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszQuery)), uintptr(atQueryType), uintptr(alQueryLevel), uintptr(unsafe.Pointer(_pszAppRegistryName)), uintptr(unsafe.Pointer(pfDefault)))
+	_pfDefault := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszQuery)), uintptr(atQueryType), uintptr(alQueryLevel), uintptr(unsafe.Pointer(_pszAppRegistryName)), uintptr(win32.OutParam(unsafe.Pointer(_pfDefault))))
+	if pfDefault != nil {
+		*pfDefault = *_pfDefault != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAppIsDefaultAll dispatches through IApplicationAssociationRegistration's vtable slot 5.
-func (self *IApplicationAssociationRegistration) QueryAppIsDefaultAll(alQueryLevel ASSOCIATIONLEVEL, pszAppRegistryName string, pfDefault *foundation.BOOL) error {
+func (self *IApplicationAssociationRegistration) QueryAppIsDefaultAll(alQueryLevel ASSOCIATIONLEVEL, pszAppRegistryName string, pfDefault *bool) error {
 	_pszAppRegistryName := win32.UTF16Ptr(pszAppRegistryName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(alQueryLevel), uintptr(unsafe.Pointer(_pszAppRegistryName)), uintptr(unsafe.Pointer(pfDefault)))
+	_pfDefault := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(alQueryLevel), uintptr(unsafe.Pointer(_pszAppRegistryName)), uintptr(win32.OutParam(unsafe.Pointer(_pfDefault))))
+	if pfDefault != nil {
+		*pfDefault = *_pfDefault != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1000,8 +1020,12 @@ func (self *IApplicationDesignModeSettings) ComputeApplicationSize(applicationSi
 }
 
 // IsApplicationViewStateSupported dispatches through IApplicationDesignModeSettings's vtable slot 7.
-func (self *IApplicationDesignModeSettings) IsApplicationViewStateSupported(viewState APPLICATION_VIEW_STATE, nativeDisplaySizePixels foundation.SIZE, scaleFactor uishellcommon.DEVICE_SCALE_FACTOR, supported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(viewState), uintptr(win32.StructArg(nativeDisplaySizePixels)), uintptr(scaleFactor), uintptr(unsafe.Pointer(supported)))
+func (self *IApplicationDesignModeSettings) IsApplicationViewStateSupported(viewState APPLICATION_VIEW_STATE, nativeDisplaySizePixels foundation.SIZE, scaleFactor uishellcommon.DEVICE_SCALE_FACTOR, supported *bool) error {
+	_supported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(viewState), uintptr(win32.StructArg(nativeDisplaySizePixels)), uintptr(scaleFactor), uintptr(win32.OutParam(unsafe.Pointer(_supported))))
+	if supported != nil {
+		*supported = *_supported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1555,8 +1579,12 @@ func (self *IBrowserService) ShowControlWindow(id uint32, fShow bool) error {
 }
 
 // IsControlWindowShown dispatches through IBrowserService's vtable slot 9.
-func (self *IBrowserService) IsControlWindowShown(id uint32, pfShown *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(id), uintptr(unsafe.Pointer(pfShown)))
+func (self *IBrowserService) IsControlWindowShown(id uint32, pfShown *bool) error {
+	_pfShown := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(id), uintptr(win32.OutParam(unsafe.Pointer(_pfShown))))
+	if pfShown != nil {
+		*pfShown = *_pfShown != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1599,8 +1627,12 @@ func (self *IBrowserService) GetNavigateState(pbnstate *BNSTATE) error {
 }
 
 // NotifyRedirect dispatches through IBrowserService's vtable slot 16.
-func (self *IBrowserService) NotifyRedirect(psv *IShellView, pidl *uishellcommon.ITEMIDLIST, pfDidBrowse *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psv)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pfDidBrowse)))
+func (self *IBrowserService) NotifyRedirect(psv *IShellView, pidl *uishellcommon.ITEMIDLIST, pfDidBrowse *bool) error {
+	_pfDidBrowse := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psv)), uintptr(unsafe.Pointer(pidl)), uintptr(win32.OutParam(unsafe.Pointer(_pfDidBrowse))))
+	if pfDidBrowse != nil {
+		*pfDidBrowse = *_pfDidBrowse != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2166,8 +2198,12 @@ func (self *ICDBurn) Burn(hwnd foundation.HWND) error {
 }
 
 // HasRecordableDrive dispatches through ICDBurn's vtable slot 5.
-func (self *ICDBurn) HasRecordableDrive(pfHasRecorder *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfHasRecorder)))
+func (self *ICDBurn) HasRecordableDrive(pfHasRecorder *bool) error {
+	_pfHasRecorder := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasRecorder))))
+	if pfHasRecorder != nil {
+		*pfHasRecorder = *_pfHasRecorder != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2704,8 +2740,12 @@ func (self *ICredentialProvider) GetFieldDescriptorAt(dwIndex uint32, ppcpfd **C
 }
 
 // GetCredentialCount dispatches through ICredentialProvider's vtable slot 9.
-func (self *ICredentialProvider) GetCredentialCount(pdwCount *uint32, pdwDefault *uint32, pbAutoLogonWithDefault *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)), uintptr(unsafe.Pointer(pdwDefault)), uintptr(unsafe.Pointer(pbAutoLogonWithDefault)))
+func (self *ICredentialProvider) GetCredentialCount(pdwCount *uint32, pdwDefault *uint32, pbAutoLogonWithDefault *bool) error {
+	_pbAutoLogonWithDefault := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)), uintptr(unsafe.Pointer(pdwDefault)), uintptr(win32.OutParam(unsafe.Pointer(_pbAutoLogonWithDefault))))
+	if pbAutoLogonWithDefault != nil {
+		*pbAutoLogonWithDefault = *_pbAutoLogonWithDefault != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2737,8 +2777,12 @@ func (self *ICredentialProviderCredential) UnAdvise() error {
 }
 
 // SetSelected dispatches through ICredentialProviderCredential's vtable slot 5.
-func (self *ICredentialProviderCredential) SetSelected(pbAutoLogon *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAutoLogon)))
+func (self *ICredentialProviderCredential) SetSelected(pbAutoLogon *bool) error {
+	_pbAutoLogon := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbAutoLogon))))
+	if pbAutoLogon != nil {
+		*pbAutoLogon = *_pbAutoLogon != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2767,8 +2811,12 @@ func (self *ICredentialProviderCredential) GetBitmapValue(dwFieldID uint32, phbm
 }
 
 // GetCheckboxValue dispatches through ICredentialProviderCredential's vtable slot 10.
-func (self *ICredentialProviderCredential) GetCheckboxValue(dwFieldID uint32, pbChecked *foundation.BOOL, ppszLabel *foundation.PWSTR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwFieldID), uintptr(unsafe.Pointer(pbChecked)), uintptr(unsafe.Pointer(ppszLabel)))
+func (self *ICredentialProviderCredential) GetCheckboxValue(dwFieldID uint32, pbChecked *bool, ppszLabel *foundation.PWSTR) error {
+	_pbChecked := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwFieldID), uintptr(win32.OutParam(unsafe.Pointer(_pbChecked))), uintptr(unsafe.Pointer(ppszLabel)))
+	if pbChecked != nil {
+		*pbChecked = *_pbChecked != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3189,8 +3237,12 @@ func (self *IDataObjectAsyncCapability) SetAsyncMode(fDoOpAsync bool) error {
 }
 
 // GetAsyncMode dispatches through IDataObjectAsyncCapability's vtable slot 4.
-func (self *IDataObjectAsyncCapability) GetAsyncMode(pfIsOpAsync *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsOpAsync)))
+func (self *IDataObjectAsyncCapability) GetAsyncMode(pfIsOpAsync *bool) error {
+	_pfIsOpAsync := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsOpAsync))))
+	if pfIsOpAsync != nil {
+		*pfIsOpAsync = *_pfIsOpAsync != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3201,8 +3253,12 @@ func (self *IDataObjectAsyncCapability) StartOperation(pbcReserved *systemcom.IB
 }
 
 // InOperation dispatches through IDataObjectAsyncCapability's vtable slot 6.
-func (self *IDataObjectAsyncCapability) InOperation(pfInAsyncOp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfInAsyncOp)))
+func (self *IDataObjectAsyncCapability) InOperation(pfInAsyncOp *bool) error {
+	_pfInAsyncOp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfInAsyncOp))))
+	if pfInAsyncOp != nil {
+		*pfInAsyncOp = *_pfInAsyncOp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3390,8 +3446,12 @@ type IDeskBand2 struct {
 var IID_IDeskBand2 = win32.GUID{Data1: 0x79d16de4, Data2: 0xabee, Data3: 0x4021, Data4: [8]byte{0x8d, 0x9d, 0x91, 0x69, 0xb2, 0x61, 0xd6, 0x57}}
 
 // CanRenderComposited dispatches through IDeskBand2's vtable slot 9.
-func (self *IDeskBand2) CanRenderComposited(pfCanRenderComposited *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCanRenderComposited)))
+func (self *IDeskBand2) CanRenderComposited(pfCanRenderComposited *bool) error {
+	_pfCanRenderComposited := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanRenderComposited))))
+	if pfCanRenderComposited != nil {
+		*pfCanRenderComposited = *_pfCanRenderComposited != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3403,8 +3463,12 @@ func (self *IDeskBand2) SetCompositionState(fCompositionEnabled bool) error {
 }
 
 // GetCompositionState dispatches through IDeskBand2's vtable slot 11.
-func (self *IDeskBand2) GetCompositionState(pfCompositionEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCompositionEnabled)))
+func (self *IDeskBand2) GetCompositionState(pfCompositionEnabled *bool) error {
+	_pfCompositionEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCompositionEnabled))))
+	if pfCompositionEnabled != nil {
+		*pfCompositionEnabled = *_pfCompositionEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5191,8 +5255,12 @@ func (self *IFileDialogCustomize) SetEditBoxText(dwIDCtl uint32, pszText string)
 }
 
 // GetCheckButtonState dispatches through IFileDialogCustomize's vtable slot 17.
-func (self *IFileDialogCustomize) GetCheckButtonState(dwIDCtl uint32, pbChecked *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwIDCtl), uintptr(unsafe.Pointer(pbChecked)))
+func (self *IFileDialogCustomize) GetCheckButtonState(dwIDCtl uint32, pbChecked *bool) error {
+	_pbChecked := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwIDCtl), uintptr(win32.OutParam(unsafe.Pointer(_pbChecked))))
+	if pbChecked != nil {
+		*pbChecked = *_pbChecked != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5514,8 +5582,12 @@ func (self *IFileOperation) PerformOperations() error {
 }
 
 // GetAnyOperationsAborted dispatches through IFileOperation's vtable slot 22.
-func (self *IFileOperation) GetAnyOperationsAborted(pfAnyOperationsAborted *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAnyOperationsAborted)))
+func (self *IFileOperation) GetAnyOperationsAborted(pfAnyOperationsAborted *bool) error {
+	_pfAnyOperationsAborted := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAnyOperationsAborted))))
+	if pfAnyOperationsAborted != nil {
+		*pfAnyOperationsAborted = *_pfAnyOperationsAborted != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5990,8 +6062,12 @@ func (self *IFolderView2) SetGroupBy(key *foundation.PROPERTYKEY, fAscending boo
 }
 
 // GetGroupBy dispatches through IFolderView2's vtable slot 18.
-func (self *IFolderView2) GetGroupBy(pkey *foundation.PROPERTYKEY, pfAscending *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pkey)), uintptr(unsafe.Pointer(pfAscending)))
+func (self *IFolderView2) GetGroupBy(pkey *foundation.PROPERTYKEY, pfAscending *bool) error {
+	_pfAscending := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pkey)), uintptr(win32.OutParam(unsafe.Pointer(_pfAscending))))
+	if pfAscending != nil {
+		*pfAscending = *_pfAscending != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6213,8 +6289,12 @@ func (self *IFolderViewSettings) GetColumnPropertyList(riid *win32.GUID, ppv **w
 }
 
 // GetGroupByProperty dispatches through IFolderViewSettings's vtable slot 4.
-func (self *IFolderViewSettings) GetGroupByProperty(pkey *foundation.PROPERTYKEY, pfGroupAscending *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pkey)), uintptr(unsafe.Pointer(pfGroupAscending)))
+func (self *IFolderViewSettings) GetGroupByProperty(pkey *foundation.PROPERTYKEY, pfGroupAscending *bool) error {
+	_pfGroupAscending := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pkey)), uintptr(win32.OutParam(unsafe.Pointer(_pfGroupAscending))))
+	if pfGroupAscending != nil {
+		*pfGroupAscending = *_pfGroupAscending != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6762,8 +6842,12 @@ type IHomeGroup struct {
 var IID_IHomeGroup = win32.GUID{Data1: 0x7a3bd1d9, Data2: 0x35a9, Data3: 0x4fb3, Data4: [8]byte{0xa4, 0x67, 0xf4, 0x8c, 0xac, 0x35, 0xe2, 0xd0}}
 
 // IsMember dispatches through IHomeGroup's vtable slot 3.
-func (self *IHomeGroup) IsMember(member *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(member)))
+func (self *IHomeGroup) IsMember(member *bool) error {
+	_member := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_member))))
+	if member != nil {
+		*member = *_member != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8728,10 +8812,14 @@ type IPreviousVersionsInfo struct {
 var IID_IPreviousVersionsInfo = win32.GUID{Data1: 0x76e54780, Data2: 0xad74, Data3: 0x48e3, Data4: [8]byte{0xa6, 0x95, 0x3b, 0xa9, 0xa0, 0xaf, 0xf1, 0x0d}}
 
 // AreSnapshotsAvailable dispatches through IPreviousVersionsInfo's vtable slot 3.
-func (self *IPreviousVersionsInfo) AreSnapshotsAvailable(pszPath string, fOkToBeSlow bool, pfAvailable *foundation.BOOL) error {
+func (self *IPreviousVersionsInfo) AreSnapshotsAvailable(pszPath string, fOkToBeSlow bool, pfAvailable *bool) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
 	_fOkToBeSlow := win32.Bool32(fOkToBeSlow)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(_fOkToBeSlow), uintptr(unsafe.Pointer(pfAvailable)))
+	_pfAvailable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(_fOkToBeSlow), uintptr(win32.OutParam(unsafe.Pointer(_pfAvailable))))
+	if pfAvailable != nil {
+		*pfAvailable = *_pfAvailable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9081,8 +9169,12 @@ type IRegTreeItem struct {
 var IID_IRegTreeItem = win32.GUID{Data1: 0xa9521922, Data2: 0x0812, Data3: 0x4d44, Data4: [8]byte{0x9e, 0xc3, 0x7f, 0xd3, 0x8c, 0x72, 0x6f, 0x3d}}
 
 // GetCheckState dispatches through IRegTreeItem's vtable slot 3.
-func (self *IRegTreeItem) GetCheckState(pbCheck *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbCheck)))
+func (self *IRegTreeItem) GetCheckState(pbCheck *bool) error {
+	_pbCheck := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbCheck))))
+	if pbCheck != nil {
+		*pbCheck = *_pbCheck != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9246,17 +9338,17 @@ func (self *IScriptErrorList) RetreatError() error {
 }
 
 // CanAdvanceError dispatches through IScriptErrorList's vtable slot 9.
-func (self *IScriptErrorList) CanAdvanceError() (foundation.BOOL, error) {
+func (self *IScriptErrorList) CanAdvanceError() (bool, error) {
 	_pfCanAdvance := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanAdvance))))
-	return *_pfCanAdvance, win32.ErrIfFailed(int32(r1))
+	return *_pfCanAdvance != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // CanRetreatError dispatches through IScriptErrorList's vtable slot 10.
-func (self *IScriptErrorList) CanRetreatError() (foundation.BOOL, error) {
+func (self *IScriptErrorList) CanRetreatError() (bool, error) {
 	_pfCanRetreat := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanRetreat))))
-	return *_pfCanRetreat, win32.ErrIfFailed(int32(r1))
+	return *_pfCanRetreat != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetErrorLine dispatches through IScriptErrorList's vtable slot 11.
@@ -9295,17 +9387,17 @@ func (self *IScriptErrorList) GetErrorUrl() (foundation.BSTR, error) {
 }
 
 // GetAlwaysShowLockState dispatches through IScriptErrorList's vtable slot 16.
-func (self *IScriptErrorList) GetAlwaysShowLockState() (foundation.BOOL, error) {
+func (self *IScriptErrorList) GetAlwaysShowLockState() (bool, error) {
 	_pfAlwaysShowLocked := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAlwaysShowLocked))))
-	return *_pfAlwaysShowLocked, win32.ErrIfFailed(int32(r1))
+	return *_pfAlwaysShowLocked != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDetailsPaneOpen dispatches through IScriptErrorList's vtable slot 17.
-func (self *IScriptErrorList) GetDetailsPaneOpen() (foundation.BOOL, error) {
+func (self *IScriptErrorList) GetDetailsPaneOpen() (bool, error) {
 	_pfDetailsPaneOpen := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfDetailsPaneOpen))))
-	return *_pfDetailsPaneOpen, win32.ErrIfFailed(int32(r1))
+	return *_pfDetailsPaneOpen != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetDetailsPaneOpen dispatches through IScriptErrorList's vtable slot 18.
@@ -9316,10 +9408,10 @@ func (self *IScriptErrorList) SetDetailsPaneOpen(fDetailsPaneOpen bool) error {
 }
 
 // GetPerErrorDisplay dispatches through IScriptErrorList's vtable slot 19.
-func (self *IScriptErrorList) GetPerErrorDisplay() (foundation.BOOL, error) {
+func (self *IScriptErrorList) GetPerErrorDisplay() (bool, error) {
 	_pfPerErrorDisplay := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfPerErrorDisplay))))
-	return *_pfPerErrorDisplay, win32.ErrIfFailed(int32(r1))
+	return *_pfPerErrorDisplay != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetPerErrorDisplay dispatches through IScriptErrorList's vtable slot 20.
@@ -11145,8 +11237,12 @@ func (self *IShellItem2) GetUInt64(key *foundation.PROPERTYKEY, pull *uint64) er
 }
 
 // GetBool dispatches through IShellItem2's vtable slot 20.
-func (self *IShellItem2) GetBool(key *foundation.PROPERTYKEY, pf *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pf)))
+func (self *IShellItem2) GetBool(key *foundation.PROPERTYKEY, pf *bool) error {
+	_pf := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(win32.OutParam(unsafe.Pointer(_pf))))
+	if pf != nil {
+		*pf = *_pf != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -13099,9 +13195,13 @@ type IStaticVerbProvider struct {
 var IID_IStaticVerbProvider = win32.GUID{Data1: 0x4b770da6, Data2: 0xd111, Data3: 0x4015, Data4: [8]byte{0x96, 0xfd, 0x8c, 0x1c, 0x56, 0xf0, 0x6c, 0x55}}
 
 // IsVerbSupported dispatches through IStaticVerbProvider's vtable slot 3.
-func (self *IStaticVerbProvider) IsVerbSupported(verbName string, result *foundation.BOOL) error {
+func (self *IStaticVerbProvider) IsVerbSupported(verbName string, result *bool) error {
 	_verbName := win32.UTF16Ptr(verbName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_verbName)), uintptr(unsafe.Pointer(result)))
+	_result := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_verbName)), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	if result != nil {
+		*result = *_result != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -13434,8 +13534,12 @@ func (self *ISyncMgrConflictResolveInfo) GetPresenterNextStep(pnPresenterNextSte
 }
 
 // GetPresenterChoice dispatches through ISyncMgrConflictResolveInfo's vtable slot 5.
-func (self *ISyncMgrConflictResolveInfo) GetPresenterChoice(pnPresenterChoice *SYNCMGR_PRESENTER_CHOICE, pfApplyToAll *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnPresenterChoice)), uintptr(unsafe.Pointer(pfApplyToAll)))
+func (self *ISyncMgrConflictResolveInfo) GetPresenterChoice(pnPresenterChoice *SYNCMGR_PRESENTER_CHOICE, pfApplyToAll *bool) error {
+	_pfApplyToAll := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnPresenterChoice)), uintptr(win32.OutParam(unsafe.Pointer(_pfApplyToAll))))
+	if pfApplyToAll != nil {
+		*pfApplyToAll = *_pfApplyToAll != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -15442,8 +15546,12 @@ type IVirtualDesktopManager struct {
 var IID_IVirtualDesktopManager = win32.GUID{Data1: 0xa5cd92ff, Data2: 0x29be, Data3: 0x454c, Data4: [8]byte{0x8d, 0x04, 0xd8, 0x28, 0x79, 0xfb, 0x3f, 0x1b}}
 
 // IsWindowOnCurrentVirtualDesktop dispatches through IVirtualDesktopManager's vtable slot 3.
-func (self *IVirtualDesktopManager) IsWindowOnCurrentVirtualDesktop(topLevelWindow foundation.HWND, onCurrentDesktop *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(topLevelWindow), uintptr(unsafe.Pointer(onCurrentDesktop)))
+func (self *IVirtualDesktopManager) IsWindowOnCurrentVirtualDesktop(topLevelWindow foundation.HWND, onCurrentDesktop *bool) error {
+	_onCurrentDesktop := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(topLevelWindow), uintptr(win32.OutParam(unsafe.Pointer(_onCurrentDesktop))))
+	if onCurrentDesktop != nil {
+		*onCurrentDesktop = *_onCurrentDesktop != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

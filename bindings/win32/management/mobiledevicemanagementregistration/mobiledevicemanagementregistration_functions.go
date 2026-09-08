@@ -135,28 +135,44 @@ func GetManagementAppHyperlink(cchHyperlink uint32, pszHyperlink foundation.PWST
 // IsDeviceRegisteredWithManagement calls MDMRegistration!IsDeviceRegisteredWithManagement.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-isdeviceregisteredwithmanagement
 // Minimum OS: windows8.1.
-func IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement *foundation.BOOL, cchUPN uint32, pszUPN foundation.PWSTR) error {
-	r1, _, _ := syscall.SyscallN(procIsDeviceRegisteredWithManagement.Addr(), uintptr(unsafe.Pointer(pfIsDeviceRegisteredWithManagement)), uintptr(cchUPN), uintptr(unsafe.Pointer(pszUPN)))
+func IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement *bool, cchUPN uint32, pszUPN foundation.PWSTR) error {
+	_pfIsDeviceRegisteredWithManagement := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsDeviceRegisteredWithManagement.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pfIsDeviceRegisteredWithManagement))), uintptr(cchUPN), uintptr(unsafe.Pointer(pszUPN)))
+	if pfIsDeviceRegisteredWithManagement != nil {
+		*pfIsDeviceRegisteredWithManagement = *_pfIsDeviceRegisteredWithManagement != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsManagementRegistrationAllowed calls MDMRegistration!IsManagementRegistrationAllowed.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-ismanagementregistrationallowed
 // Minimum OS: windows8.1.
-func IsManagementRegistrationAllowed(pfIsManagementRegistrationAllowed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIsManagementRegistrationAllowed.Addr(), uintptr(unsafe.Pointer(pfIsManagementRegistrationAllowed)))
+func IsManagementRegistrationAllowed(pfIsManagementRegistrationAllowed *bool) error {
+	_pfIsManagementRegistrationAllowed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsManagementRegistrationAllowed.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pfIsManagementRegistrationAllowed))))
+	if pfIsManagementRegistrationAllowed != nil {
+		*pfIsManagementRegistrationAllowed = *_pfIsManagementRegistrationAllowed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsMdmUxWithoutAadAllowed calls MDMRegistration!IsMdmUxWithoutAadAllowed.
-func IsMdmUxWithoutAadAllowed(isEnrollmentAllowed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIsMdmUxWithoutAadAllowed.Addr(), uintptr(unsafe.Pointer(isEnrollmentAllowed)))
+func IsMdmUxWithoutAadAllowed(isEnrollmentAllowed *bool) error {
+	_isEnrollmentAllowed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsMdmUxWithoutAadAllowed.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_isEnrollmentAllowed))))
+	if isEnrollmentAllowed != nil {
+		*isEnrollmentAllowed = *_isEnrollmentAllowed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // RegisterDeviceWithLocalManagement calls MDMLocalManagement!RegisterDeviceWithLocalManagement.
-func RegisterDeviceWithLocalManagement(alreadyRegistered *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithLocalManagement.Addr(), uintptr(unsafe.Pointer(alreadyRegistered)))
+func RegisterDeviceWithLocalManagement(alreadyRegistered *bool) error {
+	_alreadyRegistered := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithLocalManagement.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_alreadyRegistered))))
+	if alreadyRegistered != nil {
+		*alreadyRegistered = *_alreadyRegistered != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

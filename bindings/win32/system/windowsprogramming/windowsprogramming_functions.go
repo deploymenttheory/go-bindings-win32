@@ -1098,8 +1098,12 @@ func GetFeatureEnabledState(featureId uint32, changeTime FEATURE_CHANGE_TIME) FE
 
 // GetFeatureVariant calls api-ms-win-core-featurestaging-l1-1-1!GetFeatureVariant.
 // https://learn.microsoft.com/windows/win32/api/featurestagingapi/nf-featurestagingapi-getfeaturevariant
-func GetFeatureVariant(featureId uint32, changeTime FEATURE_CHANGE_TIME, payloadId *uint32, hasNotification *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetFeatureVariant.Addr(), uintptr(featureId), uintptr(changeTime), uintptr(unsafe.Pointer(payloadId)), uintptr(unsafe.Pointer(hasNotification)))
+func GetFeatureVariant(featureId uint32, changeTime FEATURE_CHANGE_TIME, payloadId *uint32, hasNotification *bool) uint32 {
+	_hasNotification := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetFeatureVariant.Addr(), uintptr(featureId), uintptr(changeTime), uintptr(unsafe.Pointer(payloadId)), uintptr(win32.OutParam(unsafe.Pointer(_hasNotification))))
+	if hasNotification != nil {
+		*hasNotification = *_hasNotification != 0
+	}
 	return uint32(r1)
 }
 
@@ -1512,8 +1516,12 @@ func IsNTAdmin(dwReserved uint32, lpdwReserved *uint32) bool {
 // IsNativeVhdBoot calls KERNEL32!IsNativeVhdBoot.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-isnativevhdboot
 // Minimum OS: windows8.0.
-func IsNativeVhdBoot(NativeVhdBoot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procIsNativeVhdBoot.Addr(), uintptr(unsafe.Pointer(NativeVhdBoot)))
+func IsNativeVhdBoot(NativeVhdBoot *bool) error {
+	_NativeVhdBoot := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procIsNativeVhdBoot.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_NativeVhdBoot))))
+	if NativeVhdBoot != nil {
+		*NativeVhdBoot = *_NativeVhdBoot != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2305,10 +2313,14 @@ func WldpCanExecuteStream(host *win32.GUID, options WLDP_EXECUTION_EVALUATION_OP
 }
 
 // WldpGetApplicationSettingBoolean calls Wldp!WldpGetApplicationSettingBoolean.
-func WldpGetApplicationSettingBoolean(id string, setting string, result *foundation.BOOL) error {
+func WldpGetApplicationSettingBoolean(id string, setting string, result *bool) error {
 	_id := win32.UTF16Ptr(id)
 	_setting := win32.UTF16Ptr(setting)
-	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingBoolean.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_setting)), uintptr(unsafe.Pointer(result)))
+	_result := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWldpGetApplicationSettingBoolean.Addr(), uintptr(unsafe.Pointer(_id)), uintptr(unsafe.Pointer(_setting)), uintptr(win32.OutParam(unsafe.Pointer(_result))))
+	if result != nil {
+		*result = *_result != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2344,27 +2356,43 @@ func WldpIsAppApprovedByPolicy(PackageFamilyName string, PackageVersion uint64) 
 
 // WldpIsClassInApprovedList calls Wldp!WldpIsClassInApprovedList.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpisclassinapprovedlist
-func WldpIsClassInApprovedList(classID *win32.GUID, hostInformation *WLDP_HOST_INFORMATION, isApproved *foundation.BOOL, optionalFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(procWldpIsClassInApprovedList.Addr(), uintptr(unsafe.Pointer(classID)), uintptr(unsafe.Pointer(hostInformation)), uintptr(unsafe.Pointer(isApproved)), uintptr(optionalFlags))
+func WldpIsClassInApprovedList(classID *win32.GUID, hostInformation *WLDP_HOST_INFORMATION, isApproved *bool, optionalFlags uint32) error {
+	_isApproved := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWldpIsClassInApprovedList.Addr(), uintptr(unsafe.Pointer(classID)), uintptr(unsafe.Pointer(hostInformation)), uintptr(win32.OutParam(unsafe.Pointer(_isApproved))), uintptr(optionalFlags))
+	if isApproved != nil {
+		*isApproved = *_isApproved != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpIsDynamicCodePolicyEnabled calls Wldp!WldpIsDynamicCodePolicyEnabled.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpisdynamiccodepolicyenabled
-func WldpIsDynamicCodePolicyEnabled(isEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procWldpIsDynamicCodePolicyEnabled.Addr(), uintptr(unsafe.Pointer(isEnabled)))
+func WldpIsDynamicCodePolicyEnabled(isEnabled *bool) error {
+	_isEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWldpIsDynamicCodePolicyEnabled.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_isEnabled))))
+	if isEnabled != nil {
+		*isEnabled = *_isEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpIsProductionConfiguration calls Wldp!WldpIsProductionConfiguration.
-func WldpIsProductionConfiguration(IsProductionConfiguration *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procWldpIsProductionConfiguration.Addr(), uintptr(unsafe.Pointer(IsProductionConfiguration)))
+func WldpIsProductionConfiguration(IsProductionConfiguration *bool) error {
+	_IsProductionConfiguration := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWldpIsProductionConfiguration.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_IsProductionConfiguration))))
+	if IsProductionConfiguration != nil {
+		*IsProductionConfiguration = *_IsProductionConfiguration != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpIsWcosProductionConfiguration calls Wldp!WldpIsWcosProductionConfiguration.
-func WldpIsWcosProductionConfiguration(IsProductionConfiguration *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procWldpIsWcosProductionConfiguration.Addr(), uintptr(unsafe.Pointer(IsProductionConfiguration)))
+func WldpIsWcosProductionConfiguration(IsProductionConfiguration *bool) error {
+	_IsProductionConfiguration := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWldpIsWcosProductionConfiguration.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_IsProductionConfiguration))))
+	if IsProductionConfiguration != nil {
+		*IsProductionConfiguration = *_IsProductionConfiguration != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2390,15 +2418,23 @@ func WldpQueryDynamicCodeTrust(fileHandle foundation.HANDLE, baseImage []byte) e
 }
 
 // WldpQueryPolicySettingEnabled calls Wldp!WldpQueryPolicySettingEnabled.
-func WldpQueryPolicySettingEnabled(Setting WLDP_POLICY_SETTING, Enabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procWldpQueryPolicySettingEnabled.Addr(), uintptr(Setting), uintptr(unsafe.Pointer(Enabled)))
+func WldpQueryPolicySettingEnabled(Setting WLDP_POLICY_SETTING, Enabled *bool) error {
+	_Enabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWldpQueryPolicySettingEnabled.Addr(), uintptr(Setting), uintptr(win32.OutParam(unsafe.Pointer(_Enabled))))
+	if Enabled != nil {
+		*Enabled = *_Enabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WldpQueryPolicySettingEnabled2 calls Wldp!WldpQueryPolicySettingEnabled2.
-func WldpQueryPolicySettingEnabled2(SettingString string, Enabled *foundation.BOOL) error {
+func WldpQueryPolicySettingEnabled2(SettingString string, Enabled *bool) error {
 	_SettingString := win32.UTF16Ptr(SettingString)
-	r1, _, _ := syscall.SyscallN(procWldpQueryPolicySettingEnabled2.Addr(), uintptr(unsafe.Pointer(_SettingString)), uintptr(unsafe.Pointer(Enabled)))
+	_Enabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWldpQueryPolicySettingEnabled2.Addr(), uintptr(unsafe.Pointer(_SettingString)), uintptr(win32.OutParam(unsafe.Pointer(_Enabled))))
+	if Enabled != nil {
+		*Enabled = *_Enabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

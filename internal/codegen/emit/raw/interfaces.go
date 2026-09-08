@@ -160,7 +160,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		paramNames[i] = avoidCollision(naming.ParamName(method.Params[i].Name), reserved)
 	}
 
-	var decls, preamble, argWords, specArgs, returnValues, returnTypes []string
+	var decls, preamble, postamble, argWords, specArgs, returnValues, returnTypes []string
 	viaCall := false
 	for i := range method.Params {
 		param := &method.Params[i]
@@ -172,11 +172,12 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 		if elevate {
 			if element, ok := retValElement(param, resolved); ok {
 				local := "_" + paramNames[i]
+				exposed, value := retValExposure(param, element, local)
 				preamble = append(preamble, local+" := new("+element+")")
 				argWords = append(argWords, "uintptr(win32.OutParam(unsafe.Pointer("+local+")))")
 				specArgs = append(specArgs, specWord)
-				returnValues = append(returnValues, "*"+local)
-				returnTypes = append(returnTypes, element)
+				returnValues = append(returnValues, value)
+				returnTypes = append(returnTypes, exposed)
 				continue
 			}
 		}
@@ -207,17 +208,19 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 			decls = append(decls, shaped.decl)
 		}
 		preamble = append(preamble, shaped.preamble...)
+		postamble = append(postamble, shaped.postamble...)
 		argWords = append(argWords, shaped.word)
 		specArgs = append(specArgs, shaped.spec)
 		viaCall = viaCall || shaped.call
 	}
 
 	model := view.ComMethodModel{
-		GoName:   naming.Export(method.Name),
-		ParamStr: strings.Join(decls, ", "),
-		Slot:     slot,
-		Preamble: preamble,
-		ArgExprs: argWords,
+		GoName:    naming.Export(method.Name),
+		ParamStr:  strings.Join(decls, ", "),
+		Slot:      slot,
+		Preamble:  preamble,
+		Postamble: postamble,
+		ArgExprs:  argWords,
 	}
 	retSpec := ""
 	switch {

@@ -212,8 +212,12 @@ func (self *IAudioEndpointVolume) SetMute(bMute bool, pguidEventContext *win32.G
 }
 
 // GetMute dispatches through IAudioEndpointVolume's vtable slot 15.
-func (self *IAudioEndpointVolume) GetMute(pbMute *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMute)))
+func (self *IAudioEndpointVolume) GetMute(pbMute *bool) error {
+	_pbMute := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbMute))))
+	if pbMute != nil {
+		*pbMute = *_pbMute != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -294,8 +298,12 @@ func (self *IAudioLfxControl) SetLocalEffectsState(bEnabled bool) error {
 }
 
 // GetLocalEffectsState dispatches through IAudioLfxControl's vtable slot 4.
-func (self *IAudioLfxControl) GetLocalEffectsState(pbEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
+func (self *IAudioLfxControl) GetLocalEffectsState(pbEnabled *bool) error {
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -373,7 +381,11 @@ func (self *IHardwareAudioEngineBase) SetGfxState(pDevice *mediaaudio.IMMDevice,
 }
 
 // GetGfxState dispatches through IHardwareAudioEngineBase's vtable slot 7.
-func (self *IHardwareAudioEngineBase) GetGfxState(pDevice *mediaaudio.IMMDevice, _pbEnable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(_pbEnable)))
+func (self *IHardwareAudioEngineBase) GetGfxState(pDevice *mediaaudio.IMMDevice, _pbEnable *bool) error {
+	__pbEnable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(win32.OutParam(unsafe.Pointer(__pbEnable))))
+	if _pbEnable != nil {
+		*_pbEnable = *__pbEnable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }

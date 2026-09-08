@@ -253,8 +253,12 @@ type IKsFormatSupport struct {
 var IID_IKsFormatSupport = win32.GUID{Data1: 0x3cb4a69d, Data2: 0xbb6f, Data3: 0x4d2b, Data4: [8]byte{0x95, 0xb7, 0x45, 0x2d, 0x2c, 0x15, 0x5d, 0xb5}}
 
 // IsFormatSupported dispatches through IKsFormatSupport's vtable slot 3.
-func (self *IKsFormatSupport) IsFormatSupported(pKsFormat *KSDATAFORMAT, cbFormat uint32, pbSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKsFormat)), uintptr(cbFormat), uintptr(unsafe.Pointer(pbSupported)))
+func (self *IKsFormatSupport) IsFormatSupported(pKsFormat *KSDATAFORMAT, cbFormat uint32, pbSupported *bool) error {
+	_pbSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKsFormat)), uintptr(cbFormat), uintptr(win32.OutParam(unsafe.Pointer(_pbSupported))))
+	if pbSupported != nil {
+		*pbSupported = *_pbSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

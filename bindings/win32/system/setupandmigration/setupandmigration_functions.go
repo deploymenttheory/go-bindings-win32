@@ -38,8 +38,12 @@ var Procs = struct {
 
 // OOBEComplete calls KERNEL32!OOBEComplete.
 // https://learn.microsoft.com/windows/win32/api/oobenotification/nf-oobenotification-oobecomplete
-func OOBEComplete(isOOBEComplete *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procOOBEComplete.Addr(), uintptr(unsafe.Pointer(isOOBEComplete)))
+func OOBEComplete(isOOBEComplete *bool) error {
+	_isOOBEComplete := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procOOBEComplete.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_isOOBEComplete))))
+	if isOOBEComplete != nil {
+		*isOOBEComplete = *_isOOBEComplete != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

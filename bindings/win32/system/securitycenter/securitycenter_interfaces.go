@@ -100,8 +100,12 @@ func (self *IWscProduct) Get_ProductGuid(pVal *foundation.BSTR) error {
 }
 
 // Get_ProductIsDefault dispatches through IWscProduct's vtable slot 13.
-func (self *IWscProduct) Get_ProductIsDefault(pVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
+func (self *IWscProduct) Get_ProductIsDefault(pVal *bool) error {
+	_pVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	if pVal != nil {
+		*pVal = *_pVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -151,8 +151,12 @@ type IAMAsyncReaderTimestampScaling struct {
 var IID_IAMAsyncReaderTimestampScaling = win32.GUID{Data1: 0xcf7b26fc, Data2: 0x9a00, Data3: 0x485b, Data4: [8]byte{0x81, 0x47, 0x3e, 0x78, 0x9d, 0x5e, 0x8f, 0x67}}
 
 // GetTimestampMode dispatches through IAMAsyncReaderTimestampScaling's vtable slot 3.
-func (self *IAMAsyncReaderTimestampScaling) GetTimestampMode(pfRaw *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRaw)))
+func (self *IAMAsyncReaderTimestampScaling) GetTimestampMode(pfRaw *bool) error {
+	_pfRaw := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfRaw))))
+	if pfRaw != nil {
+		*pfRaw = *_pfRaw != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -180,8 +184,12 @@ func (self *IAMAudioInputMixer) Put_Enable(fEnable bool) error {
 }
 
 // Get_Enable dispatches through IAMAudioInputMixer's vtable slot 4.
-func (self *IAMAudioInputMixer) Get_Enable(pfEnable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnable)))
+func (self *IAMAudioInputMixer) Get_Enable(pfEnable *bool) error {
+	_pfEnable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnable))))
+	if pfEnable != nil {
+		*pfEnable = *_pfEnable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -193,8 +201,12 @@ func (self *IAMAudioInputMixer) Put_Mono(fMono bool) error {
 }
 
 // Get_Mono dispatches through IAMAudioInputMixer's vtable slot 6.
-func (self *IAMAudioInputMixer) Get_Mono(pfMono *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfMono)))
+func (self *IAMAudioInputMixer) Get_Mono(pfMono *bool) error {
+	_pfMono := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfMono))))
+	if pfMono != nil {
+		*pfMono = *_pfMono != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -234,8 +246,12 @@ func (self *IAMAudioInputMixer) Put_Loudness(fLoudness bool) error {
 }
 
 // Get_Loudness dispatches through IAMAudioInputMixer's vtable slot 12.
-func (self *IAMAudioInputMixer) Get_Loudness(pfLoudness *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLoudness)))
+func (self *IAMAudioInputMixer) Get_Loudness(pfLoudness *bool) error {
+	_pfLoudness := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfLoudness))))
+	if pfLoudness != nil {
+		*pfLoudness = *_pfLoudness != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3991,8 +4007,12 @@ func (self *IBDA_Encoder) SetParameters(AudioBitrateMode uint32, AudioBitrate ui
 }
 
 // GetState dispatches through IBDA_Encoder's vtable slot 7.
-func (self *IBDA_Encoder) GetState(AudioBitrateMax *uint32, AudioBitrateMin *uint32, AudioBitrateMode *uint32, AudioBitrateStepping *uint32, AudioBitrate *uint32, AudioMethodID *uint32, AvailableAudioPrograms *uint32, AudioProgram *uint32, VideoBitrateMax *uint32, VideoBitrateMin *uint32, VideoBitrateMode *uint32, VideoBitrate *uint32, VideoBitrateStepping *uint32, VideoMethodID *uint32, SignalSourceID *uint32, SignalFormat *uint64, SignalLock *foundation.BOOL, SignalLevel *int32, SignalToNoiseRatio *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioBitrateMax)), uintptr(unsafe.Pointer(AudioBitrateMin)), uintptr(unsafe.Pointer(AudioBitrateMode)), uintptr(unsafe.Pointer(AudioBitrateStepping)), uintptr(unsafe.Pointer(AudioBitrate)), uintptr(unsafe.Pointer(AudioMethodID)), uintptr(unsafe.Pointer(AvailableAudioPrograms)), uintptr(unsafe.Pointer(AudioProgram)), uintptr(unsafe.Pointer(VideoBitrateMax)), uintptr(unsafe.Pointer(VideoBitrateMin)), uintptr(unsafe.Pointer(VideoBitrateMode)), uintptr(unsafe.Pointer(VideoBitrate)), uintptr(unsafe.Pointer(VideoBitrateStepping)), uintptr(unsafe.Pointer(VideoMethodID)), uintptr(unsafe.Pointer(SignalSourceID)), uintptr(unsafe.Pointer(SignalFormat)), uintptr(unsafe.Pointer(SignalLock)), uintptr(unsafe.Pointer(SignalLevel)), uintptr(unsafe.Pointer(SignalToNoiseRatio)))
+func (self *IBDA_Encoder) GetState(AudioBitrateMax *uint32, AudioBitrateMin *uint32, AudioBitrateMode *uint32, AudioBitrateStepping *uint32, AudioBitrate *uint32, AudioMethodID *uint32, AvailableAudioPrograms *uint32, AudioProgram *uint32, VideoBitrateMax *uint32, VideoBitrateMin *uint32, VideoBitrateMode *uint32, VideoBitrate *uint32, VideoBitrateStepping *uint32, VideoMethodID *uint32, SignalSourceID *uint32, SignalFormat *uint64, SignalLock *bool, SignalLevel *int32, SignalToNoiseRatio *uint32) error {
+	_SignalLock := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioBitrateMax)), uintptr(unsafe.Pointer(AudioBitrateMin)), uintptr(unsafe.Pointer(AudioBitrateMode)), uintptr(unsafe.Pointer(AudioBitrateStepping)), uintptr(unsafe.Pointer(AudioBitrate)), uintptr(unsafe.Pointer(AudioMethodID)), uintptr(unsafe.Pointer(AvailableAudioPrograms)), uintptr(unsafe.Pointer(AudioProgram)), uintptr(unsafe.Pointer(VideoBitrateMax)), uintptr(unsafe.Pointer(VideoBitrateMin)), uintptr(unsafe.Pointer(VideoBitrateMode)), uintptr(unsafe.Pointer(VideoBitrate)), uintptr(unsafe.Pointer(VideoBitrateStepping)), uintptr(unsafe.Pointer(VideoMethodID)), uintptr(unsafe.Pointer(SignalSourceID)), uintptr(unsafe.Pointer(SignalFormat)), uintptr(win32.OutParam(unsafe.Pointer(_SignalLock))), uintptr(unsafe.Pointer(SignalLevel)), uintptr(unsafe.Pointer(SignalToNoiseRatio)))
+	if SignalLock != nil {
+		*SignalLock = *_SignalLock != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4064,8 +4084,20 @@ type IBDA_FDC struct {
 var IID_IBDA_FDC = win32.GUID{Data1: 0x138adc7e, Data2: 0x58ae, Data3: 0x437f, Data4: [8]byte{0xb0, 0xb4, 0xc9, 0xfe, 0x19, 0xd5, 0xb4, 0xac}}
 
 // GetStatus dispatches through IBDA_FDC's vtable slot 3.
-func (self *IBDA_FDC) GetStatus(CurrentBitrate *uint32, CarrierLock *foundation.BOOL, CurrentFrequency *uint32, CurrentSpectrumInversion *foundation.BOOL, CurrentPIDList *foundation.BSTR, CurrentTIDList *foundation.BSTR, Overflow *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentBitrate)), uintptr(unsafe.Pointer(CarrierLock)), uintptr(unsafe.Pointer(CurrentFrequency)), uintptr(unsafe.Pointer(CurrentSpectrumInversion)), uintptr(unsafe.Pointer(CurrentPIDList)), uintptr(unsafe.Pointer(CurrentTIDList)), uintptr(unsafe.Pointer(Overflow)))
+func (self *IBDA_FDC) GetStatus(CurrentBitrate *uint32, CarrierLock *bool, CurrentFrequency *uint32, CurrentSpectrumInversion *bool, CurrentPIDList *foundation.BSTR, CurrentTIDList *foundation.BSTR, Overflow *bool) error {
+	_CarrierLock := new(foundation.BOOL)
+	_CurrentSpectrumInversion := new(foundation.BOOL)
+	_Overflow := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentBitrate)), uintptr(win32.OutParam(unsafe.Pointer(_CarrierLock))), uintptr(unsafe.Pointer(CurrentFrequency)), uintptr(win32.OutParam(unsafe.Pointer(_CurrentSpectrumInversion))), uintptr(unsafe.Pointer(CurrentPIDList)), uintptr(unsafe.Pointer(CurrentTIDList)), uintptr(win32.OutParam(unsafe.Pointer(_Overflow))))
+	if CarrierLock != nil {
+		*CarrierLock = *_CarrierLock != 0
+	}
+	if CurrentSpectrumInversion != nil {
+		*CurrentSpectrumInversion = *_CurrentSpectrumInversion != 0
+	}
+	if Overflow != nil {
+		*Overflow = *_Overflow != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5940,8 +5972,12 @@ func (self *IConfigAsfWriter) SetIndexMode(bIndexFile bool) error {
 }
 
 // GetIndexMode dispatches through IConfigAsfWriter's vtable slot 10.
-func (self *IConfigAsfWriter) GetIndexMode(pbIndexFile *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIndexFile)))
+func (self *IConfigAsfWriter) GetIndexMode(pbIndexFile *bool) error {
+	_pbIndexFile := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIndexFile))))
+	if pbIndexFile != nil {
+		*pbIndexFile = *_pbIndexFile != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6007,8 +6043,12 @@ func (self *IConfigAviMux) SetOutputCompatibilityIndex(fOldIndex bool) error {
 }
 
 // GetOutputCompatibilityIndex dispatches through IConfigAviMux's vtable slot 6.
-func (self *IConfigAviMux) GetOutputCompatibilityIndex(pfOldIndex *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfOldIndex)))
+func (self *IConfigAviMux) GetOutputCompatibilityIndex(pfOldIndex *bool) error {
+	_pfOldIndex := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfOldIndex))))
+	if pfOldIndex != nil {
+		*pfOldIndex = *_pfOldIndex != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6076,8 +6116,12 @@ func (self *IDDrawExclModeVideo) SetDDrawObject(pDDrawObject *graphicsdirectdraw
 }
 
 // GetDDrawObject dispatches through IDDrawExclModeVideo's vtable slot 4.
-func (self *IDDrawExclModeVideo) GetDDrawObject(ppDDrawObject **graphicsdirectdraw.IDirectDraw, pbUsingExternal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDDrawObject)), uintptr(unsafe.Pointer(pbUsingExternal)))
+func (self *IDDrawExclModeVideo) GetDDrawObject(ppDDrawObject **graphicsdirectdraw.IDirectDraw, pbUsingExternal *bool) error {
+	_pbUsingExternal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDDrawObject)), uintptr(win32.OutParam(unsafe.Pointer(_pbUsingExternal))))
+	if pbUsingExternal != nil {
+		*pbUsingExternal = *_pbUsingExternal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6088,8 +6132,12 @@ func (self *IDDrawExclModeVideo) SetDDrawSurface(pDDrawSurface *graphicsdirectdr
 }
 
 // GetDDrawSurface dispatches through IDDrawExclModeVideo's vtable slot 6.
-func (self *IDDrawExclModeVideo) GetDDrawSurface(ppDDrawSurface **graphicsdirectdraw.IDirectDrawSurface, pbUsingExternal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDDrawSurface)), uintptr(unsafe.Pointer(pbUsingExternal)))
+func (self *IDDrawExclModeVideo) GetDDrawSurface(ppDDrawSurface **graphicsdirectdraw.IDirectDrawSurface, pbUsingExternal *bool) error {
+	_pbUsingExternal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDDrawSurface)), uintptr(win32.OutParam(unsafe.Pointer(_pbUsingExternal))))
+	if pbUsingExternal != nil {
+		*pbUsingExternal = *_pbUsingExternal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7136,8 +7184,12 @@ func (self *IDvdInfo) GetCurrentAudio(pulStreamsAvailable *uint32, pulCurrentStr
 }
 
 // GetCurrentSubpicture dispatches through IDvdInfo's vtable slot 9.
-func (self *IDvdInfo) GetCurrentSubpicture(pulStreamsAvailable *uint32, pulCurrentStream *uint32, pIsDisabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStreamsAvailable)), uintptr(unsafe.Pointer(pulCurrentStream)), uintptr(unsafe.Pointer(pIsDisabled)))
+func (self *IDvdInfo) GetCurrentSubpicture(pulStreamsAvailable *uint32, pulCurrentStream *uint32, pIsDisabled *bool) error {
+	_pIsDisabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStreamsAvailable)), uintptr(unsafe.Pointer(pulCurrentStream)), uintptr(win32.OutParam(unsafe.Pointer(_pIsDisabled))))
+	if pIsDisabled != nil {
+		*pIsDisabled = *_pIsDisabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7287,8 +7339,12 @@ func (self *IDvdInfo2) GetCurrentAudio(pulStreamsAvailable *uint32, pulCurrentSt
 }
 
 // GetCurrentSubpicture dispatches through IDvdInfo2's vtable slot 9.
-func (self *IDvdInfo2) GetCurrentSubpicture(pulStreamsAvailable *uint32, pulCurrentStream *uint32, pbIsDisabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStreamsAvailable)), uintptr(unsafe.Pointer(pulCurrentStream)), uintptr(unsafe.Pointer(pbIsDisabled)))
+func (self *IDvdInfo2) GetCurrentSubpicture(pulStreamsAvailable *uint32, pulCurrentStream *uint32, pbIsDisabled *bool) error {
+	_pbIsDisabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStreamsAvailable)), uintptr(unsafe.Pointer(pulCurrentStream)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsDisabled))))
+	if pbIsDisabled != nil {
+		*pbIsDisabled = *_pbIsDisabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7413,8 +7469,12 @@ func (self *IDvdInfo2) GetDVDDirectory(pszwPath foundation.PWSTR, ulMaxSize uint
 }
 
 // IsAudioStreamEnabled dispatches through IDvdInfo2's vtable slot 30.
-func (self *IDvdInfo2) IsAudioStreamEnabled(ulStreamNum uint32, pbEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(ulStreamNum), uintptr(unsafe.Pointer(pbEnabled)))
+func (self *IDvdInfo2) IsAudioStreamEnabled(ulStreamNum uint32, pbEnabled *bool) error {
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(ulStreamNum), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7480,8 +7540,12 @@ func (self *IDvdInfo2) GetButtonRect(ulButton uint32, pRect *foundation.RECT) er
 }
 
 // IsSubpictureStreamEnabled dispatches through IDvdInfo2's vtable slot 41.
-func (self *IDvdInfo2) IsSubpictureStreamEnabled(ulStreamNum uint32, pbEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(ulStreamNum), uintptr(unsafe.Pointer(pbEnabled)))
+func (self *IDvdInfo2) IsSubpictureStreamEnabled(ulStreamNum uint32, pbEnabled *bool) error {
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(ulStreamNum), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11696,8 +11760,12 @@ func (self *IVMRVideoStreamControl) SetStreamActiveState(fActive bool) error {
 }
 
 // GetStreamActiveState dispatches through IVMRVideoStreamControl's vtable slot 6.
-func (self *IVMRVideoStreamControl) GetStreamActiveState(lpfActive *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpfActive)))
+func (self *IVMRVideoStreamControl) GetStreamActiveState(lpfActive *bool) error {
+	_lpfActive := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lpfActive))))
+	if lpfActive != nil {
+		*lpfActive = *_lpfActive != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11718,8 +11786,12 @@ func (self *IVMRVideoStreamControl9) SetStreamActiveState(fActive bool) error {
 }
 
 // GetStreamActiveState dispatches through IVMRVideoStreamControl9's vtable slot 4.
-func (self *IVMRVideoStreamControl9) GetStreamActiveState(lpfActive *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpfActive)))
+func (self *IVMRVideoStreamControl9) GetStreamActiveState(lpfActive *bool) error {
+	_lpfActive := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_lpfActive))))
+	if lpfActive != nil {
+		*lpfActive = *_lpfActive != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

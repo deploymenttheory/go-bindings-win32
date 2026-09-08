@@ -2158,8 +2158,12 @@ func AssocCreateForClasses(rgClasses []ASSOCIATIONELEMENT, riid *win32.GUID, ppv
 // AssocGetDetailsOfPropKey calls SHELL32!AssocGetDetailsOfPropKey.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-assocgetdetailsofpropkey
 // Minimum OS: windows6.0.6000.
-func AssocGetDetailsOfPropKey(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, pkey *foundation.PROPERTYKEY, pv *systemvariant.VARIANT, pfFoundPropKey *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procAssocGetDetailsOfPropKey.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pkey)), uintptr(unsafe.Pointer(pv)), uintptr(unsafe.Pointer(pfFoundPropKey)))
+func AssocGetDetailsOfPropKey(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, pkey *foundation.PROPERTYKEY, pv *systemvariant.VARIANT, pfFoundPropKey *bool) error {
+	_pfFoundPropKey := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procAssocGetDetailsOfPropKey.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pkey)), uintptr(unsafe.Pointer(pv)), uintptr(win32.OutParam(unsafe.Pointer(_pfFoundPropKey))))
+	if pfFoundPropKey != nil {
+		*pfFoundPropKey = *_pfFoundPropKey != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5819,18 +5823,26 @@ func SHGetNameFromIDList(pidl *uishellcommon.ITEMIDLIST, sigdnName SIGDN, ppszNa
 // SHGetNewLinkInfo calls SHELL32!SHGetNewLinkInfoW.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetnewlinkinfow
 // Minimum OS: windows5.0.
-func SHGetNewLinkInfo(pszLinkTo string, pszDir string, pszName foundation.PWSTR, pfMustCopy *foundation.BOOL, uFlags uint32) bool {
+func SHGetNewLinkInfo(pszLinkTo string, pszDir string, pszName foundation.PWSTR, pfMustCopy *bool, uFlags uint32) bool {
 	_pszLinkTo := win32.UTF16Ptr(pszLinkTo)
 	_pszDir := win32.UTF16Ptr(pszDir)
-	r1, _, _ := syscall.SyscallN(procSHGetNewLinkInfo.Addr(), uintptr(unsafe.Pointer(_pszLinkTo)), uintptr(unsafe.Pointer(_pszDir)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pfMustCopy)), uintptr(uFlags))
+	_pfMustCopy := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procSHGetNewLinkInfo.Addr(), uintptr(unsafe.Pointer(_pszLinkTo)), uintptr(unsafe.Pointer(_pszDir)), uintptr(unsafe.Pointer(pszName)), uintptr(win32.OutParam(unsafe.Pointer(_pfMustCopy))), uintptr(uFlags))
+	if pfMustCopy != nil {
+		*pfMustCopy = *_pfMustCopy != 0
+	}
 	return r1 != 0
 }
 
 // SHGetNewLinkInfoA calls SHELL32!SHGetNewLinkInfoA.
 // https://learn.microsoft.com/windows/win32/api/shellapi/nf-shellapi-shgetnewlinkinfoa
 // Minimum OS: windows5.0.
-func SHGetNewLinkInfoA(pszLinkTo foundation.PSTR, pszDir foundation.PSTR, pszName foundation.PSTR, pfMustCopy *foundation.BOOL, uFlags uint32) bool {
-	r1, _, _ := syscall.SyscallN(procSHGetNewLinkInfoA.Addr(), uintptr(unsafe.Pointer(pszLinkTo)), uintptr(unsafe.Pointer(pszDir)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pfMustCopy)), uintptr(uFlags))
+func SHGetNewLinkInfoA(pszLinkTo foundation.PSTR, pszDir foundation.PSTR, pszName foundation.PSTR, pfMustCopy *bool, uFlags uint32) bool {
+	_pfMustCopy := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procSHGetNewLinkInfoA.Addr(), uintptr(unsafe.Pointer(pszLinkTo)), uintptr(unsafe.Pointer(pszDir)), uintptr(unsafe.Pointer(pszName)), uintptr(win32.OutParam(unsafe.Pointer(_pfMustCopy))), uintptr(uFlags))
+	if pfMustCopy != nil {
+		*pfMustCopy = *_pfMustCopy != 0
+	}
 	return r1 != 0
 }
 

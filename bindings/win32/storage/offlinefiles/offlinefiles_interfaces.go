@@ -160,8 +160,16 @@ func (self *IOfflineFilesCache) Unpin(hwndParent foundation.HWND, rgpszPaths []f
 }
 
 // GetEncryptionStatus dispatches through IOfflineFilesCache's vtable slot 8.
-func (self *IOfflineFilesCache) GetEncryptionStatus(pbEncrypted *foundation.BOOL, pbPartial *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEncrypted)), uintptr(unsafe.Pointer(pbPartial)))
+func (self *IOfflineFilesCache) GetEncryptionStatus(pbEncrypted *bool, pbPartial *bool) error {
+	_pbEncrypted := new(foundation.BOOL)
+	_pbPartial := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbEncrypted))), uintptr(win32.OutParam(unsafe.Pointer(_pbPartial))))
+	if pbEncrypted != nil {
+		*pbEncrypted = *_pbEncrypted != 0
+	}
+	if pbPartial != nil {
+		*pbPartial = *_pbPartial != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -234,9 +242,13 @@ func (self *IOfflineFilesCache) EnumSettingObjects(ppEnum **IEnumOfflineFilesSet
 }
 
 // IsPathCacheable dispatches through IOfflineFilesCache's vtable slot 19.
-func (self *IOfflineFilesCache) IsPathCacheable(pszPath string, pbCacheable *foundation.BOOL, pShareCachingMode *OFFLINEFILES_CACHING_MODE) error {
+func (self *IOfflineFilesCache) IsPathCacheable(pszPath string, pbCacheable *bool, pShareCachingMode *OFFLINEFILES_CACHING_MODE) error {
 	_pszPath := win32.UTF16Ptr(pszPath)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(unsafe.Pointer(pbCacheable)), uintptr(unsafe.Pointer(pShareCachingMode)))
+	_pbCacheable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)), uintptr(win32.OutParam(unsafe.Pointer(_pbCacheable))), uintptr(unsafe.Pointer(pShareCachingMode)))
+	if pbCacheable != nil {
+		*pbCacheable = *_pbCacheable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -268,38 +280,62 @@ type IOfflineFilesChangeInfo struct {
 var IID_IOfflineFilesChangeInfo = win32.GUID{Data1: 0xa96e6fa4, Data2: 0xe0d1, Data3: 0x4c29, Data4: [8]byte{0x96, 0x0b, 0xee, 0x50, 0x8f, 0xe6, 0x8c, 0x72}}
 
 // IsDirty dispatches through IOfflineFilesChangeInfo's vtable slot 3.
-func (self *IOfflineFilesChangeInfo) IsDirty(pbDirty *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDirty)))
+func (self *IOfflineFilesChangeInfo) IsDirty(pbDirty *bool) error {
+	_pbDirty := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbDirty))))
+	if pbDirty != nil {
+		*pbDirty = *_pbDirty != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDeletedOffline dispatches through IOfflineFilesChangeInfo's vtable slot 4.
-func (self *IOfflineFilesChangeInfo) IsDeletedOffline(pbDeletedOffline *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDeletedOffline)))
+func (self *IOfflineFilesChangeInfo) IsDeletedOffline(pbDeletedOffline *bool) error {
+	_pbDeletedOffline := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbDeletedOffline))))
+	if pbDeletedOffline != nil {
+		*pbDeletedOffline = *_pbDeletedOffline != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsCreatedOffline dispatches through IOfflineFilesChangeInfo's vtable slot 5.
-func (self *IOfflineFilesChangeInfo) IsCreatedOffline(pbCreatedOffline *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbCreatedOffline)))
+func (self *IOfflineFilesChangeInfo) IsCreatedOffline(pbCreatedOffline *bool) error {
+	_pbCreatedOffline := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbCreatedOffline))))
+	if pbCreatedOffline != nil {
+		*pbCreatedOffline = *_pbCreatedOffline != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsLocallyModifiedData dispatches through IOfflineFilesChangeInfo's vtable slot 6.
-func (self *IOfflineFilesChangeInfo) IsLocallyModifiedData(pbLocallyModifiedData *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLocallyModifiedData)))
+func (self *IOfflineFilesChangeInfo) IsLocallyModifiedData(pbLocallyModifiedData *bool) error {
+	_pbLocallyModifiedData := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbLocallyModifiedData))))
+	if pbLocallyModifiedData != nil {
+		*pbLocallyModifiedData = *_pbLocallyModifiedData != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsLocallyModifiedAttributes dispatches through IOfflineFilesChangeInfo's vtable slot 7.
-func (self *IOfflineFilesChangeInfo) IsLocallyModifiedAttributes(pbLocallyModifiedAttributes *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLocallyModifiedAttributes)))
+func (self *IOfflineFilesChangeInfo) IsLocallyModifiedAttributes(pbLocallyModifiedAttributes *bool) error {
+	_pbLocallyModifiedAttributes := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbLocallyModifiedAttributes))))
+	if pbLocallyModifiedAttributes != nil {
+		*pbLocallyModifiedAttributes = *_pbLocallyModifiedAttributes != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsLocallyModifiedTime dispatches through IOfflineFilesChangeInfo's vtable slot 8.
-func (self *IOfflineFilesChangeInfo) IsLocallyModifiedTime(pbLocallyModifiedTime *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLocallyModifiedTime)))
+func (self *IOfflineFilesChangeInfo) IsLocallyModifiedTime(pbLocallyModifiedTime *bool) error {
+	_pbLocallyModifiedTime := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbLocallyModifiedTime))))
+	if pbLocallyModifiedTime != nil {
+		*pbLocallyModifiedTime = *_pbLocallyModifiedTime != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -331,9 +367,13 @@ func (self *IOfflineFilesConnectionInfo) TransitionOnline(hwndParent foundation.
 }
 
 // TransitionOffline dispatches through IOfflineFilesConnectionInfo's vtable slot 6.
-func (self *IOfflineFilesConnectionInfo) TransitionOffline(hwndParent foundation.HWND, dwFlags uint32, bForceOpenFilesClosed bool, pbOpenFilesPreventedTransition *foundation.BOOL) error {
+func (self *IOfflineFilesConnectionInfo) TransitionOffline(hwndParent foundation.HWND, dwFlags uint32, bForceOpenFilesClosed bool, pbOpenFilesPreventedTransition *bool) error {
 	_bForceOpenFilesClosed := win32.Bool32(bForceOpenFilesClosed)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(dwFlags), uintptr(_bForceOpenFilesClosed), uintptr(unsafe.Pointer(pbOpenFilesPreventedTransition)))
+	_pbOpenFilesPreventedTransition := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(dwFlags), uintptr(_bForceOpenFilesClosed), uintptr(win32.OutParam(unsafe.Pointer(_pbOpenFilesPreventedTransition))))
+	if pbOpenFilesPreventedTransition != nil {
+		*pbOpenFilesPreventedTransition = *_pbOpenFilesPreventedTransition != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -732,14 +772,22 @@ type IOfflineFilesFileItem struct {
 var IID_IOfflineFilesFileItem = win32.GUID{Data1: 0x8dfadead, Data2: 0x26c2, Data3: 0x4eff, Data4: [8]byte{0x8a, 0x72, 0x6b, 0x50, 0x72, 0x3d, 0x9a, 0x00}}
 
 // IsSparse dispatches through IOfflineFilesFileItem's vtable slot 8.
-func (self *IOfflineFilesFileItem) IsSparse(pbIsSparse *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsSparse)))
+func (self *IOfflineFilesFileItem) IsSparse(pbIsSparse *bool) error {
+	_pbIsSparse := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsSparse))))
+	if pbIsSparse != nil {
+		*pbIsSparse = *_pbIsSparse != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsEncrypted dispatches through IOfflineFilesFileItem's vtable slot 9.
-func (self *IOfflineFilesFileItem) IsEncrypted(pbIsEncrypted *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsEncrypted)))
+func (self *IOfflineFilesFileItem) IsEncrypted(pbIsEncrypted *bool) error {
+	_pbIsEncrypted := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsEncrypted))))
+	if pbIsEncrypted != nil {
+		*pbIsEncrypted = *_pbIsEncrypted != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -780,8 +828,12 @@ type IOfflineFilesGhostInfo struct {
 var IID_IOfflineFilesGhostInfo = win32.GUID{Data1: 0x2b09d48c, Data2: 0x8ab5, Data3: 0x464f, Data4: [8]byte{0xa7, 0x55, 0xa5, 0x9d, 0x92, 0xf9, 0x94, 0x29}}
 
 // IsGhosted dispatches through IOfflineFilesGhostInfo's vtable slot 3.
-func (self *IOfflineFilesGhostInfo) IsGhosted(pbGhosted *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbGhosted)))
+func (self *IOfflineFilesGhostInfo) IsGhosted(pbGhosted *bool) error {
+	_pbGhosted := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbGhosted))))
+	if pbGhosted != nil {
+		*pbGhosted = *_pbGhosted != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -819,8 +871,12 @@ func (self *IOfflineFilesItem) Refresh(dwQueryFlags uint32) error {
 }
 
 // IsMarkedForDeletion dispatches through IOfflineFilesItem's vtable slot 7.
-func (self *IOfflineFilesItem) IsMarkedForDeletion(pbMarkedForDeletion *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbMarkedForDeletion)))
+func (self *IOfflineFilesItem) IsMarkedForDeletion(pbMarkedForDeletion *bool) error {
+	_pbMarkedForDeletion := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbMarkedForDeletion))))
+	if pbMarkedForDeletion != nil {
+		*pbMarkedForDeletion = *_pbMarkedForDeletion != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -861,8 +917,12 @@ func (self *IOfflineFilesItemFilter) GetFilterFlags(pullFlags *uint64, pullMask 
 }
 
 // GetTimeFilter dispatches through IOfflineFilesItemFilter's vtable slot 4.
-func (self *IOfflineFilesItemFilter) GetTimeFilter(pftTime *foundation.FILETIME, pbEvalTimeOfDay *foundation.BOOL, pTimeType *OFFLINEFILES_ITEM_TIME, pCompare *OFFLINEFILES_COMPARE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pftTime)), uintptr(unsafe.Pointer(pbEvalTimeOfDay)), uintptr(unsafe.Pointer(pTimeType)), uintptr(unsafe.Pointer(pCompare)))
+func (self *IOfflineFilesItemFilter) GetTimeFilter(pftTime *foundation.FILETIME, pbEvalTimeOfDay *bool, pTimeType *OFFLINEFILES_ITEM_TIME, pCompare *OFFLINEFILES_COMPARE) error {
+	_pbEvalTimeOfDay := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pftTime)), uintptr(win32.OutParam(unsafe.Pointer(_pbEvalTimeOfDay))), uintptr(unsafe.Pointer(pTimeType)), uintptr(unsafe.Pointer(pCompare)))
+	if pbEvalTimeOfDay != nil {
+		*pbEvalTimeOfDay = *_pbEvalTimeOfDay != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -882,32 +942,68 @@ type IOfflineFilesPinInfo struct {
 var IID_IOfflineFilesPinInfo = win32.GUID{Data1: 0x5b2b0655, Data2: 0xb3fd, Data3: 0x497d, Data4: [8]byte{0xad, 0xeb, 0xbd, 0x15, 0x6b, 0xc8, 0x35, 0x5b}}
 
 // IsPinned dispatches through IOfflineFilesPinInfo's vtable slot 3.
-func (self *IOfflineFilesPinInfo) IsPinned(pbPinned *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPinned)))
+func (self *IOfflineFilesPinInfo) IsPinned(pbPinned *bool) error {
+	_pbPinned := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbPinned))))
+	if pbPinned != nil {
+		*pbPinned = *_pbPinned != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPinnedForUser dispatches through IOfflineFilesPinInfo's vtable slot 4.
-func (self *IOfflineFilesPinInfo) IsPinnedForUser(pbPinnedForUser *foundation.BOOL, pbInherit *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPinnedForUser)), uintptr(unsafe.Pointer(pbInherit)))
+func (self *IOfflineFilesPinInfo) IsPinnedForUser(pbPinnedForUser *bool, pbInherit *bool) error {
+	_pbPinnedForUser := new(foundation.BOOL)
+	_pbInherit := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbPinnedForUser))), uintptr(win32.OutParam(unsafe.Pointer(_pbInherit))))
+	if pbPinnedForUser != nil {
+		*pbPinnedForUser = *_pbPinnedForUser != 0
+	}
+	if pbInherit != nil {
+		*pbInherit = *_pbInherit != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPinnedForUserByPolicy dispatches through IOfflineFilesPinInfo's vtable slot 5.
-func (self *IOfflineFilesPinInfo) IsPinnedForUserByPolicy(pbPinnedForUser *foundation.BOOL, pbInherit *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPinnedForUser)), uintptr(unsafe.Pointer(pbInherit)))
+func (self *IOfflineFilesPinInfo) IsPinnedForUserByPolicy(pbPinnedForUser *bool, pbInherit *bool) error {
+	_pbPinnedForUser := new(foundation.BOOL)
+	_pbInherit := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbPinnedForUser))), uintptr(win32.OutParam(unsafe.Pointer(_pbInherit))))
+	if pbPinnedForUser != nil {
+		*pbPinnedForUser = *_pbPinnedForUser != 0
+	}
+	if pbInherit != nil {
+		*pbInherit = *_pbInherit != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPinnedForComputer dispatches through IOfflineFilesPinInfo's vtable slot 6.
-func (self *IOfflineFilesPinInfo) IsPinnedForComputer(pbPinnedForComputer *foundation.BOOL, pbInherit *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPinnedForComputer)), uintptr(unsafe.Pointer(pbInherit)))
+func (self *IOfflineFilesPinInfo) IsPinnedForComputer(pbPinnedForComputer *bool, pbInherit *bool) error {
+	_pbPinnedForComputer := new(foundation.BOOL)
+	_pbInherit := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbPinnedForComputer))), uintptr(win32.OutParam(unsafe.Pointer(_pbInherit))))
+	if pbPinnedForComputer != nil {
+		*pbPinnedForComputer = *_pbPinnedForComputer != 0
+	}
+	if pbInherit != nil {
+		*pbInherit = *_pbInherit != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPinnedForFolderRedirection dispatches through IOfflineFilesPinInfo's vtable slot 7.
-func (self *IOfflineFilesPinInfo) IsPinnedForFolderRedirection(pbPinnedForFolderRedirection *foundation.BOOL, pbInherit *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPinnedForFolderRedirection)), uintptr(unsafe.Pointer(pbInherit)))
+func (self *IOfflineFilesPinInfo) IsPinnedForFolderRedirection(pbPinnedForFolderRedirection *bool, pbInherit *bool) error {
+	_pbPinnedForFolderRedirection := new(foundation.BOOL)
+	_pbInherit := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbPinnedForFolderRedirection))), uintptr(win32.OutParam(unsafe.Pointer(_pbInherit))))
+	if pbPinnedForFolderRedirection != nil {
+		*pbPinnedForFolderRedirection = *_pbPinnedForFolderRedirection != 0
+	}
+	if pbInherit != nil {
+		*pbInherit = *_pbInherit != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -921,8 +1017,12 @@ type IOfflineFilesPinInfo2 struct {
 var IID_IOfflineFilesPinInfo2 = win32.GUID{Data1: 0x623c58a2, Data2: 0x42ed, Data3: 0x4ad7, Data4: [8]byte{0xb6, 0x9a, 0x0f, 0x1b, 0x30, 0xa7, 0x2d, 0x0d}}
 
 // IsPartlyPinned dispatches through IOfflineFilesPinInfo2's vtable slot 8.
-func (self *IOfflineFilesPinInfo2) IsPartlyPinned(pbPartlyPinned *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPartlyPinned)))
+func (self *IOfflineFilesPinInfo2) IsPartlyPinned(pbPartlyPinned *bool) error {
+	_pbPartlyPinned := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbPartlyPinned))))
+	if pbPartlyPinned != nil {
+		*pbPartlyPinned = *_pbPartlyPinned != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -936,14 +1036,22 @@ type IOfflineFilesProgress struct {
 var IID_IOfflineFilesProgress = win32.GUID{Data1: 0xfad63237, Data2: 0xc55b, Data3: 0x4911, Data4: [8]byte{0x98, 0x50, 0xbc, 0xf9, 0x6d, 0x4c, 0x97, 0x9e}}
 
 // Begin dispatches through IOfflineFilesProgress's vtable slot 3.
-func (self *IOfflineFilesProgress) Begin(pbAbort *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAbort)))
+func (self *IOfflineFilesProgress) Begin(pbAbort *bool) error {
+	_pbAbort := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbAbort))))
+	if pbAbort != nil {
+		*pbAbort = *_pbAbort != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // QueryAbort dispatches through IOfflineFilesProgress's vtable slot 4.
-func (self *IOfflineFilesProgress) QueryAbort(pbAbort *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAbort)))
+func (self *IOfflineFilesProgress) QueryAbort(pbAbort *bool) error {
+	_pbAbort := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbAbort))))
+	if pbAbort != nil {
+		*pbAbort = *_pbAbort != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1020,8 +1128,12 @@ func (self *IOfflineFilesSetting) GetPolicyScope(pdwScope *uint32) error {
 }
 
 // GetValue dispatches through IOfflineFilesSetting's vtable slot 11.
-func (self *IOfflineFilesSetting) GetValue(pvarValue *systemvariant.VARIANT, pbSetByPolicy *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarValue)), uintptr(unsafe.Pointer(pbSetByPolicy)))
+func (self *IOfflineFilesSetting) GetValue(pvarValue *systemvariant.VARIANT, pbSetByPolicy *bool) error {
+	_pbSetByPolicy := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarValue)), uintptr(win32.OutParam(unsafe.Pointer(_pbSetByPolicy))))
+	if pbSetByPolicy != nil {
+		*pbSetByPolicy = *_pbSetByPolicy != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1047,8 +1159,12 @@ func (self *IOfflineFilesShareInfo) GetShareCachingMode(pCachingMode *OFFLINEFIL
 }
 
 // IsShareDfsJunction dispatches through IOfflineFilesShareInfo's vtable slot 5.
-func (self *IOfflineFilesShareInfo) IsShareDfsJunction(pbIsDfsJunction *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbIsDfsJunction)))
+func (self *IOfflineFilesShareInfo) IsShareDfsJunction(pbIsDfsJunction *bool) error {
+	_pbIsDfsJunction := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsDfsJunction))))
+	if pbIsDfsJunction != nil {
+		*pbIsDfsJunction = *_pbIsDfsJunction != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1110,8 +1226,16 @@ type IOfflineFilesSuspendInfo struct {
 var IID_IOfflineFilesSuspendInfo = win32.GUID{Data1: 0xa457c25b, Data2: 0x4e9c, Data3: 0x4b04, Data4: [8]byte{0x85, 0xaf, 0x89, 0x32, 0xcc, 0xd9, 0x78, 0x89}}
 
 // IsSuspended dispatches through IOfflineFilesSuspendInfo's vtable slot 3.
-func (self *IOfflineFilesSuspendInfo) IsSuspended(pbSuspended *foundation.BOOL, pbSuspendedRoot *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSuspended)), uintptr(unsafe.Pointer(pbSuspendedRoot)))
+func (self *IOfflineFilesSuspendInfo) IsSuspended(pbSuspended *bool, pbSuspendedRoot *bool) error {
+	_pbSuspended := new(foundation.BOOL)
+	_pbSuspendedRoot := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbSuspended))), uintptr(win32.OutParam(unsafe.Pointer(_pbSuspendedRoot))))
+	if pbSuspended != nil {
+		*pbSuspended = *_pbSuspended != 0
+	}
+	if pbSuspendedRoot != nil {
+		*pbSuspendedRoot = *_pbSuspendedRoot != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1153,14 +1277,38 @@ func (self *IOfflineFilesSyncErrorInfo) GetItemChangeFlags(pdwItemChangeFlags *u
 }
 
 // InfoEnumerated dispatches through IOfflineFilesSyncErrorInfo's vtable slot 7.
-func (self *IOfflineFilesSyncErrorInfo) InfoEnumerated(pbLocalEnumerated *foundation.BOOL, pbRemoteEnumerated *foundation.BOOL, pbOriginalEnumerated *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLocalEnumerated)), uintptr(unsafe.Pointer(pbRemoteEnumerated)), uintptr(unsafe.Pointer(pbOriginalEnumerated)))
+func (self *IOfflineFilesSyncErrorInfo) InfoEnumerated(pbLocalEnumerated *bool, pbRemoteEnumerated *bool, pbOriginalEnumerated *bool) error {
+	_pbLocalEnumerated := new(foundation.BOOL)
+	_pbRemoteEnumerated := new(foundation.BOOL)
+	_pbOriginalEnumerated := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbLocalEnumerated))), uintptr(win32.OutParam(unsafe.Pointer(_pbRemoteEnumerated))), uintptr(win32.OutParam(unsafe.Pointer(_pbOriginalEnumerated))))
+	if pbLocalEnumerated != nil {
+		*pbLocalEnumerated = *_pbLocalEnumerated != 0
+	}
+	if pbRemoteEnumerated != nil {
+		*pbRemoteEnumerated = *_pbRemoteEnumerated != 0
+	}
+	if pbOriginalEnumerated != nil {
+		*pbOriginalEnumerated = *_pbOriginalEnumerated != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // InfoAvailable dispatches through IOfflineFilesSyncErrorInfo's vtable slot 8.
-func (self *IOfflineFilesSyncErrorInfo) InfoAvailable(pbLocalInfo *foundation.BOOL, pbRemoteInfo *foundation.BOOL, pbOriginalInfo *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLocalInfo)), uintptr(unsafe.Pointer(pbRemoteInfo)), uintptr(unsafe.Pointer(pbOriginalInfo)))
+func (self *IOfflineFilesSyncErrorInfo) InfoAvailable(pbLocalInfo *bool, pbRemoteInfo *bool, pbOriginalInfo *bool) error {
+	_pbLocalInfo := new(foundation.BOOL)
+	_pbRemoteInfo := new(foundation.BOOL)
+	_pbOriginalInfo := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbLocalInfo))), uintptr(win32.OutParam(unsafe.Pointer(_pbRemoteInfo))), uintptr(win32.OutParam(unsafe.Pointer(_pbOriginalInfo))))
+	if pbLocalInfo != nil {
+		*pbLocalInfo = *_pbLocalInfo != 0
+	}
+	if pbRemoteInfo != nil {
+		*pbRemoteInfo = *_pbRemoteInfo != 0
+	}
+	if pbOriginalInfo != nil {
+		*pbOriginalInfo = *_pbOriginalInfo != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1242,7 +1390,11 @@ type IOfflineFilesTransparentCacheInfo struct {
 var IID_IOfflineFilesTransparentCacheInfo = win32.GUID{Data1: 0xbcaf4a01, Data2: 0x5b68, Data3: 0x4b56, Data4: [8]byte{0xa6, 0xa1, 0x8d, 0x27, 0x86, 0xed, 0xe8, 0xe3}}
 
 // IsTransparentlyCached dispatches through IOfflineFilesTransparentCacheInfo's vtable slot 3.
-func (self *IOfflineFilesTransparentCacheInfo) IsTransparentlyCached(pbTransparentlyCached *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbTransparentlyCached)))
+func (self *IOfflineFilesTransparentCacheInfo) IsTransparentlyCached(pbTransparentlyCached *bool) error {
+	_pbTransparentlyCached := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbTransparentlyCached))))
+	if pbTransparentlyCached != nil {
+		*pbTransparentlyCached = *_pbTransparentlyCached != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }

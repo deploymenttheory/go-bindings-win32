@@ -84,8 +84,12 @@ func (self *ISideShowContent) Get_ContentId(out_pcontentId *uint32) error {
 }
 
 // Get_DifferentiateContent dispatches through ISideShowContent's vtable slot 5.
-func (self *ISideShowContent) Get_DifferentiateContent(out_pfDifferentiateContent *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pfDifferentiateContent)))
+func (self *ISideShowContent) Get_DifferentiateContent(out_pfDifferentiateContent *bool) error {
+	_out_pfDifferentiateContent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_out_pfDifferentiateContent))))
+	if out_pfDifferentiateContent != nil {
+		*out_pfDifferentiateContent = *_out_pfDifferentiateContent != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

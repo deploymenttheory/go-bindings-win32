@@ -56,8 +56,12 @@ type IDxcBlobEncoding struct {
 var IID_IDxcBlobEncoding = win32.GUID{Data1: 0x7241d424, Data2: 0x2646, Data3: 0x4191, Data4: [8]byte{0x97, 0xc0, 0x98, 0xe9, 0x6e, 0x42, 0xfc, 0x68}}
 
 // GetEncoding dispatches through IDxcBlobEncoding's vtable slot 5.
-func (self *IDxcBlobEncoding) GetEncoding(pKnown *foundation.BOOL, pCodePage *DXC_CP) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnown)), uintptr(unsafe.Pointer(pCodePage)))
+func (self *IDxcBlobEncoding) GetEncoding(pKnown *bool, pCodePage *DXC_CP) error {
+	_pKnown := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pKnown))), uintptr(unsafe.Pointer(pCodePage)))
+	if pKnown != nil {
+		*pKnown = *_pKnown != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

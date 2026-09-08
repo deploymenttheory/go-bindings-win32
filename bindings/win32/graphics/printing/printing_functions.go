@@ -985,10 +985,14 @@ var specCorePrinterDriverInstalled = &win32.Spec{Args: []win32.Arg{win32.Word, w
 
 // CorePrinterDriverInstalled calls winspool.drv!CorePrinterDriverInstalledW.
 // https://learn.microsoft.com/windows/win32/printdocs/coreprinterdriverinstalled
-func CorePrinterDriverInstalled(pszServer *string, pszEnvironment *string, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *foundation.BOOL) error {
+func CorePrinterDriverInstalled(pszServer *string, pszEnvironment *string, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *bool) error {
 	_pszServer := win32.UTF16PtrOrNil(pszServer)
 	_pszEnvironment := win32.UTF16PtrOrNil(pszEnvironment)
-	r1, _, _ := win32.Call(procCorePrinterDriverInstalled.Addr(), specCorePrinterDriverInstalled, nil, uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(&CoreDriverGUID)), uintptr(win32.StructArg(ftDriverDate)), uintptr(dwlDriverVersion), uintptr(unsafe.Pointer(pbDriverInstalled))).Tuple()
+	_pbDriverInstalled := new(foundation.BOOL)
+	r1, _, _ := win32.Call(procCorePrinterDriverInstalled.Addr(), specCorePrinterDriverInstalled, nil, uintptr(unsafe.Pointer(_pszServer)), uintptr(unsafe.Pointer(_pszEnvironment)), uintptr(unsafe.Pointer(&CoreDriverGUID)), uintptr(win32.StructArg(ftDriverDate)), uintptr(dwlDriverVersion), uintptr(win32.OutParam(unsafe.Pointer(_pbDriverInstalled)))).Tuple()
+	if pbDriverInstalled != nil {
+		*pbDriverInstalled = *_pbDriverInstalled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -996,8 +1000,12 @@ var specCorePrinterDriverInstalledA = &win32.Spec{Args: []win32.Arg{win32.Word, 
 
 // CorePrinterDriverInstalledA calls winspool.drv!CorePrinterDriverInstalledA.
 // https://learn.microsoft.com/windows/win32/printdocs/coreprinterdriverinstalled
-func CorePrinterDriverInstalledA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *foundation.BOOL) error {
-	r1, _, _ := win32.Call(procCorePrinterDriverInstalledA.Addr(), specCorePrinterDriverInstalledA, nil, uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(&CoreDriverGUID)), uintptr(win32.StructArg(ftDriverDate)), uintptr(dwlDriverVersion), uintptr(unsafe.Pointer(pbDriverInstalled))).Tuple()
+func CorePrinterDriverInstalledA(pszServer foundation.PSTR, pszEnvironment foundation.PSTR, CoreDriverGUID win32.GUID, ftDriverDate foundation.FILETIME, dwlDriverVersion uint64, pbDriverInstalled *bool) error {
+	_pbDriverInstalled := new(foundation.BOOL)
+	r1, _, _ := win32.Call(procCorePrinterDriverInstalledA.Addr(), specCorePrinterDriverInstalledA, nil, uintptr(unsafe.Pointer(pszServer)), uintptr(unsafe.Pointer(pszEnvironment)), uintptr(unsafe.Pointer(&CoreDriverGUID)), uintptr(win32.StructArg(ftDriverDate)), uintptr(dwlDriverVersion), uintptr(win32.OutParam(unsafe.Pointer(_pbDriverInstalled)))).Tuple()
+	if pbDriverInstalled != nil {
+		*pbDriverInstalled = *_pbDriverInstalled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2428,8 +2436,12 @@ func SetPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pValue
 }
 
 // SplIsSessionZero calls SPOOLSS!SplIsSessionZero.
-func SplIsSessionZero(hPrinter PRINTER_HANDLE, JobId uint32, pIsSessionZero *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procSplIsSessionZero.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(unsafe.Pointer(pIsSessionZero)))
+func SplIsSessionZero(hPrinter PRINTER_HANDLE, JobId uint32, pIsSessionZero *bool) uint32 {
+	_pIsSessionZero := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procSplIsSessionZero.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(win32.OutParam(unsafe.Pointer(_pIsSessionZero))))
+	if pIsSessionZero != nil {
+		*pIsSessionZero = *_pIsSessionZero != 0
+	}
 	return uint32(r1)
 }
 

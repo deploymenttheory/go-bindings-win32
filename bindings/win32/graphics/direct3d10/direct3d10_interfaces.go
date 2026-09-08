@@ -537,8 +537,12 @@ func (self *ID3D10Device) VSGetSamplers(StartSlot uint32, ppSamplers []*ID3D10Sa
 }
 
 // GetPredication dispatches through ID3D10Device's vtable slot 53.
-func (self *ID3D10Device) GetPredication(ppPredicate **ID3D10Predicate, pPredicateValue *foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPredicate)), uintptr(unsafe.Pointer(pPredicateValue)))
+func (self *ID3D10Device) GetPredication(ppPredicate **ID3D10Predicate, pPredicateValue *bool) {
+	_pPredicateValue := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPredicate)), uintptr(win32.OutParam(unsafe.Pointer(_pPredicateValue))))
+	if pPredicateValue != nil {
+		*pPredicateValue = *_pPredicateValue != 0
+	}
 }
 
 // GSGetShaderResources dispatches through ID3D10Device's vtable slot 54.
@@ -1382,8 +1386,12 @@ func (self *ID3D10EffectScalarVariable) SetBool(Value bool) error {
 }
 
 // GetBool dispatches through ID3D10EffectScalarVariable's vtable slot 34.
-func (self *ID3D10EffectScalarVariable) GetBool(pValue *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
+func (self *ID3D10EffectScalarVariable) GetBool(pValue *bool) error {
+	_pValue := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pValue))))
+	if pValue != nil {
+		*pValue = *_pValue != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2367,14 +2375,22 @@ func (self *ID3D10ShaderReflection1) GetGSInputPrimitive(pPrim *graphicsdirect3d
 }
 
 // IsLevel9Shader dispatches through ID3D10ShaderReflection1's vtable slot 16.
-func (self *ID3D10ShaderReflection1) IsLevel9Shader(pbLevel9Shader *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLevel9Shader)))
+func (self *ID3D10ShaderReflection1) IsLevel9Shader(pbLevel9Shader *bool) error {
+	_pbLevel9Shader := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbLevel9Shader))))
+	if pbLevel9Shader != nil {
+		*pbLevel9Shader = *_pbLevel9Shader != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsSampleFrequencyShader dispatches through ID3D10ShaderReflection1's vtable slot 17.
-func (self *ID3D10ShaderReflection1) IsSampleFrequencyShader(pbSampleFrequency *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSampleFrequency)))
+func (self *ID3D10ShaderReflection1) IsSampleFrequencyShader(pbSampleFrequency *bool) error {
+	_pbSampleFrequency := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbSampleFrequency))))
+	if pbSampleFrequency != nil {
+		*pbSampleFrequency = *_pbSampleFrequency != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

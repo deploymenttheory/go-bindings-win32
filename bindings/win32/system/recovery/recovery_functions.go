@@ -63,8 +63,12 @@ func ApplicationRecoveryFinished(bSuccess bool) {
 // ApplicationRecoveryInProgress calls KERNEL32!ApplicationRecoveryInProgress.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-applicationrecoveryinprogress
 // Minimum OS: windows6.0.6000.
-func ApplicationRecoveryInProgress(pbCancelled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procApplicationRecoveryInProgress.Addr(), uintptr(unsafe.Pointer(pbCancelled)))
+func ApplicationRecoveryInProgress(pbCancelled *bool) error {
+	_pbCancelled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procApplicationRecoveryInProgress.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbCancelled))))
+	if pbCancelled != nil {
+		*pbCancelled = *_pbCancelled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

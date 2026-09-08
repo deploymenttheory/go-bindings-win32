@@ -3098,8 +3098,12 @@ type ISurrogateService struct {
 var IID_ISurrogateService = win32.GUID{Data1: 0x000001d4, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Init dispatches through ISurrogateService's vtable slot 3.
-func (self *ISurrogateService) Init(rguidProcessID *win32.GUID, pProcessLock *IProcessLock, pfApplicationAware *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidProcessID)), uintptr(unsafe.Pointer(pProcessLock)), uintptr(unsafe.Pointer(pfApplicationAware)))
+func (self *ISurrogateService) Init(rguidProcessID *win32.GUID, pProcessLock *IProcessLock, pfApplicationAware *bool) error {
+	_pfApplicationAware := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidProcessID)), uintptr(unsafe.Pointer(pProcessLock)), uintptr(win32.OutParam(unsafe.Pointer(_pfApplicationAware))))
+	if pfApplicationAware != nil {
+		*pfApplicationAware = *_pfApplicationAware != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3531,8 +3535,12 @@ func (self *ITypeLib) GetDocumentation(index int32, pBstrName *foundation.BSTR, 
 }
 
 // IsName dispatches through ITypeLib's vtable slot 10.
-func (self *ITypeLib) IsName(szNameBuf foundation.PWSTR, lHashVal uint32, pfName *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szNameBuf)), uintptr(lHashVal), uintptr(unsafe.Pointer(pfName)))
+func (self *ITypeLib) IsName(szNameBuf foundation.PWSTR, lHashVal uint32, pfName *bool) error {
+	_pfName := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szNameBuf)), uintptr(lHashVal), uintptr(win32.OutParam(unsafe.Pointer(_pfName))))
+	if pfName != nil {
+		*pfName = *_pfName != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3686,8 +3694,12 @@ func (self *IUri) GetPropertyDWORD(uriProp Uri_PROPERTY, pdwProperty *uint32, dw
 }
 
 // HasProperty dispatches through IUri's vtable slot 6.
-func (self *IUri) HasProperty(uriProp Uri_PROPERTY, pfHasProperty *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uriProp), uintptr(unsafe.Pointer(pfHasProperty)))
+func (self *IUri) HasProperty(uriProp Uri_PROPERTY, pfHasProperty *bool) error {
+	_pfHasProperty := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(uriProp), uintptr(win32.OutParam(unsafe.Pointer(_pfHasProperty))))
+	if pfHasProperty != nil {
+		*pfHasProperty = *_pfHasProperty != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3812,8 +3824,12 @@ func (self *IUri) GetProperties(pdwFlags *uint32) error {
 }
 
 // IsEqual dispatches through IUri's vtable slot 27.
-func (self *IUri) IsEqual(pUri *IUri, pfEqual *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)), uintptr(unsafe.Pointer(pfEqual)))
+func (self *IUri) IsEqual(pUri *IUri, pfEqual *bool) error {
+	_pfEqual := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)), uintptr(win32.OutParam(unsafe.Pointer(_pfEqual))))
+	if pfEqual != nil {
+		*pfEqual = *_pfEqual != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3880,8 +3896,12 @@ func (self *IUriBuilder) GetPath(pcchPath *uint32, ppwzPath *foundation.PWSTR) e
 }
 
 // GetPort dispatches through IUriBuilder's vtable slot 12.
-func (self *IUriBuilder) GetPort(pfHasPort *foundation.BOOL, pdwPort *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfHasPort)), uintptr(unsafe.Pointer(pdwPort)))
+func (self *IUriBuilder) GetPort(pfHasPort *bool, pdwPort *uint32) error {
+	_pfHasPort := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasPort))), uintptr(unsafe.Pointer(pdwPort)))
+	if pfHasPort != nil {
+		*pfHasPort = *_pfHasPort != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3966,8 +3986,12 @@ func (self *IUriBuilder) RemoveProperties(dwPropertyMask uint32) error {
 }
 
 // HasBeenModified dispatches through IUriBuilder's vtable slot 25.
-func (self *IUriBuilder) HasBeenModified(pfModified *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfModified)))
+func (self *IUriBuilder) HasBeenModified(pfModified *bool) error {
+	_pfModified := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfModified))))
+	if pfModified != nil {
+		*pfModified = *_pfModified != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

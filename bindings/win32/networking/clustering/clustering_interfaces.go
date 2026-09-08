@@ -2248,10 +2248,10 @@ func (self *ISClusResource) Get_Type() (*ISClusResType, error) {
 }
 
 // Get_MaintenanceMode dispatches through ISClusResource's vtable slot 37.
-func (self *ISClusResource) Get_MaintenanceMode() (foundation.BOOL, error) {
+func (self *ISClusResource) Get_MaintenanceMode() (bool, error) {
 	_pbMaintenanceMode := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbMaintenanceMode))))
-	return *_pbMaintenanceMode, win32.ErrIfFailed(int32(r1))
+	return *_pbMaintenanceMode != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_MaintenanceMode dispatches through ISClusResource's vtable slot 38.

@@ -1007,11 +1007,11 @@ func (self *ISpellCheckProviderFactory) Get_SupportedLanguages() (*systemcom.IEn
 }
 
 // IsSupported dispatches through ISpellCheckProviderFactory's vtable slot 4.
-func (self *ISpellCheckProviderFactory) IsSupported(languageTag string) (foundation.BOOL, error) {
+func (self *ISpellCheckProviderFactory) IsSupported(languageTag string) (bool, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
 	_value := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
-	return *_value, win32.ErrIfFailed(int32(r1))
+	return *_value != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSpellCheckProvider dispatches through ISpellCheckProviderFactory's vtable slot 5.
@@ -1182,11 +1182,11 @@ func (self *ISpellCheckerFactory) Get_SupportedLanguages() (*systemcom.IEnumStri
 }
 
 // IsSupported dispatches through ISpellCheckerFactory's vtable slot 4.
-func (self *ISpellCheckerFactory) IsSupported(languageTag string) (foundation.BOOL, error) {
+func (self *ISpellCheckerFactory) IsSupported(languageTag string) (bool, error) {
 	_languageTag := win32.UTF16Ptr(languageTag)
 	_value := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_languageTag)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
-	return *_value, win32.ErrIfFailed(int32(r1))
+	return *_value != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // CreateSpellChecker dispatches through ISpellCheckerFactory's vtable slot 5.

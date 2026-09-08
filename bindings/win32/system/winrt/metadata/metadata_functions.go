@@ -114,18 +114,26 @@ func RoGetParameterizedTypeInstanceIID(nameElements []foundation.PWSTR, metaData
 // RoIsApiContractMajorVersionPresent calls api-ms-win-ro-typeresolution-l1-1-1!RoIsApiContractMajorVersionPresent.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-roisapicontractmajorversionpresent
 // Minimum OS: windows10.0.10240.
-func RoIsApiContractMajorVersionPresent(name string, majorVersion uint16, present *foundation.BOOL) error {
+func RoIsApiContractMajorVersionPresent(name string, majorVersion uint16, present *bool) error {
 	_name := win32.UTF16Ptr(name)
-	r1, _, _ := syscall.SyscallN(procRoIsApiContractMajorVersionPresent.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(majorVersion), uintptr(unsafe.Pointer(present)))
+	_present := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRoIsApiContractMajorVersionPresent.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(majorVersion), uintptr(win32.OutParam(unsafe.Pointer(_present))))
+	if present != nil {
+		*present = *_present != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // RoIsApiContractPresent calls api-ms-win-ro-typeresolution-l1-1-1!RoIsApiContractPresent.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-roisapicontractpresent
 // Minimum OS: windows10.0.10240.
-func RoIsApiContractPresent(name string, majorVersion uint16, minorVersion uint16, present *foundation.BOOL) error {
+func RoIsApiContractPresent(name string, majorVersion uint16, minorVersion uint16, present *bool) error {
 	_name := win32.UTF16Ptr(name)
-	r1, _, _ := syscall.SyscallN(procRoIsApiContractPresent.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(majorVersion), uintptr(minorVersion), uintptr(unsafe.Pointer(present)))
+	_present := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRoIsApiContractPresent.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(majorVersion), uintptr(minorVersion), uintptr(win32.OutParam(unsafe.Pointer(_present))))
+	if present != nil {
+		*present = *_present != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -449,9 +449,13 @@ func ForceArchitecture(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, archi
 }
 
 // ForceNestedHostMode calls VmSavedStateDumpProvider!ForceNestedHostMode.
-func ForceNestedHostMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, hostMode bool, oldMode *foundation.BOOL) error {
+func ForceNestedHostMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, hostMode bool, oldMode *bool) error {
 	_hostMode := win32.Bool32(hostMode)
-	r1, _, _ := syscall.SyscallN(procForceNestedHostMode.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(_hostMode), uintptr(unsafe.Pointer(oldMode)))
+	_oldMode := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procForceNestedHostMode.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(_hostMode), uintptr(win32.OutParam(unsafe.Pointer(_oldMode))))
+	if oldMode != nil {
+		*oldMode = *_oldMode != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -510,8 +514,12 @@ func GetMemoryBlockCacheLimit(vmSavedStateDumpHandle unsafe.Pointer, memoryBlock
 }
 
 // GetNestedVirtualizationMode calls VmSavedStateDumpProvider!GetNestedVirtualizationMode.
-func GetNestedVirtualizationMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, enabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procGetNestedVirtualizationMode.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(enabled)))
+func GetNestedVirtualizationMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, enabled *bool) error {
+	_enabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetNestedVirtualizationMode.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(win32.OutParam(unsafe.Pointer(_enabled))))
+	if enabled != nil {
+		*enabled = *_enabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -658,20 +666,32 @@ func HdvWriteGuestMemory(requestor unsafe.Pointer, guestPhysicalAddress uint64, 
 }
 
 // InKernelSpace calls VmSavedStateDumpProvider!InKernelSpace.
-func InKernelSpace(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, inKernelSpace *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procInKernelSpace.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(inKernelSpace)))
+func InKernelSpace(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, inKernelSpace *bool) error {
+	_inKernelSpace := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procInKernelSpace.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(win32.OutParam(unsafe.Pointer(_inKernelSpace))))
+	if inKernelSpace != nil {
+		*inKernelSpace = *_inKernelSpace != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsActiveVirtualTrustLevelEnabled calls VmSavedStateDumpProvider!IsActiveVirtualTrustLevelEnabled.
-func IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, activeVirtualTrustLevelEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIsActiveVirtualTrustLevelEnabled.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(activeVirtualTrustLevelEnabled)))
+func IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, activeVirtualTrustLevelEnabled *bool) error {
+	_activeVirtualTrustLevelEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsActiveVirtualTrustLevelEnabled.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(win32.OutParam(unsafe.Pointer(_activeVirtualTrustLevelEnabled))))
+	if activeVirtualTrustLevelEnabled != nil {
+		*activeVirtualTrustLevelEnabled = *_activeVirtualTrustLevelEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsNestedVirtualizationEnabled calls VmSavedStateDumpProvider!IsNestedVirtualizationEnabled.
-func IsNestedVirtualizationEnabled(vmSavedStateDumpHandle unsafe.Pointer, enabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIsNestedVirtualizationEnabled.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(enabled)))
+func IsNestedVirtualizationEnabled(vmSavedStateDumpHandle unsafe.Pointer, enabled *bool) error {
+	_enabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsNestedVirtualizationEnabled.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(win32.OutParam(unsafe.Pointer(_enabled))))
+	if enabled != nil {
+		*enabled = *_enabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1219,8 +1239,12 @@ func WHvSetupPartition(Partition WHV_PARTITION_HANDLE) error {
 }
 
 // WHvSignalVirtualProcessorSynicEvent calls WinHvPlatform!WHvSignalVirtualProcessorSynicEvent.
-func WHvSignalVirtualProcessorSynicEvent(Partition WHV_PARTITION_HANDLE, SynicEvent WHV_SYNIC_EVENT_PARAMETERS, NewlySignaled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procWHvSignalVirtualProcessorSynicEvent.Addr(), uintptr(Partition), uintptr(win32.StructArg(SynicEvent)), uintptr(unsafe.Pointer(NewlySignaled)))
+func WHvSignalVirtualProcessorSynicEvent(Partition WHV_PARTITION_HANDLE, SynicEvent WHV_SYNIC_EVENT_PARAMETERS, NewlySignaled *bool) error {
+	_NewlySignaled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWHvSignalVirtualProcessorSynicEvent.Addr(), uintptr(Partition), uintptr(win32.StructArg(SynicEvent)), uintptr(win32.OutParam(unsafe.Pointer(_NewlySignaled))))
+	if NewlySignaled != nil {
+		*NewlySignaled = *_NewlySignaled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

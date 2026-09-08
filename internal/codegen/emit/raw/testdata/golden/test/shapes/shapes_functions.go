@@ -23,6 +23,8 @@ var (
 	procBigStruct           = modTEST.NewProc("BigStruct")
 	procBoolIn              = modTEST.NewProc("BoolIn")
 	procBoolNativeParam     = modTEST.NewProc("BoolNativeParam")
+	procBoolOut             = modTEST.NewProc("BoolOut")
+	procBoolOutVoid         = modTEST.NewProc("BoolOutVoid")
 	procBoolReturnNative    = modTEST.NewProc("BoolReturnNative")
 	procByteBuffer          = modTEST.NewProc("ByteBuffer")
 	procCallbackParam       = modTEST.NewProc("CallbackParam")
@@ -42,6 +44,7 @@ var (
 	procRequiredString      = modTEST.NewProc("RequiredStringW")
 	procReservedParam       = modTEST.NewProc("ReservedParam")
 	procRetValBool          = modTEST.NewProc("RetValBool")
+	procRetValBoolOut       = modTEST.NewProc("RetValBoolOut")
 	procRetValHR            = modTEST.NewProc("RetValHR")
 	procRetValVoid          = modTEST.NewProc("RetValVoid")
 	procRiidPair            = modTEST.NewProc("RiidPair")
@@ -65,6 +68,8 @@ var Procs = struct {
 	BigStruct           *win32.Proc
 	BoolIn              *win32.Proc
 	BoolNativeParam     *win32.Proc
+	BoolOut             *win32.Proc
+	BoolOutVoid         *win32.Proc
 	BoolReturnNative    *win32.Proc
 	ByteBuffer          *win32.Proc
 	CallbackParam       *win32.Proc
@@ -84,6 +89,7 @@ var Procs = struct {
 	RequiredString      *win32.Proc
 	ReservedParam       *win32.Proc
 	RetValBool          *win32.Proc
+	RetValBoolOut       *win32.Proc
 	RetValHR            *win32.Proc
 	RetValVoid          *win32.Proc
 	RiidPair            *win32.Proc
@@ -101,6 +107,8 @@ var Procs = struct {
 	BigStruct:           procBigStruct,
 	BoolIn:              procBoolIn,
 	BoolNativeParam:     procBoolNativeParam,
+	BoolOut:             procBoolOut,
+	BoolOutVoid:         procBoolOutVoid,
 	BoolReturnNative:    procBoolReturnNative,
 	ByteBuffer:          procByteBuffer,
 	CallbackParam:       procCallbackParam,
@@ -120,6 +128,7 @@ var Procs = struct {
 	RequiredString:      procRequiredString,
 	ReservedParam:       procReservedParam,
 	RetValBool:          procRetValBool,
+	RetValBoolOut:       procRetValBoolOut,
 	RetValHR:            procRetValHR,
 	RetValVoid:          procRetValVoid,
 	RiidPair:            procRiidPair,
@@ -171,6 +180,28 @@ func BoolIn(flag bool) bool {
 // BoolNativeParam calls TEST!BoolNativeParam.
 func BoolNativeParam(flag bool) {
 	syscall.SyscallN(procBoolNativeParam.Addr(), uintptr(win32.Bool8(flag)))
+}
+
+// BoolOut calls TEST!BoolOut.
+func BoolOut(flag *bool) error {
+	_flag := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procBoolOut.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_flag))))
+	if flag != nil {
+		*flag = *_flag != 0
+	}
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// BoolOutVoid calls TEST!BoolOutVoid.
+func BoolOutVoid(flag *bool) {
+	_flag := new(foundation.BOOL)
+	syscall.SyscallN(procBoolOutVoid.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_flag))))
+	if flag != nil {
+		*flag = *_flag != 0
+	}
 }
 
 // BoolReturnNative calls TEST!BoolReturnNative.
@@ -324,6 +355,13 @@ func RetValBool() (uint32, error) {
 		return *_value, win32.LastError(e1)
 	}
 	return *_value, nil
+}
+
+// RetValBoolOut calls TEST!RetValBoolOut.
+func RetValBoolOut() (bool, error) {
+	_value := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRetValBoolOut.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	return *_value != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // RetValHR calls TEST!RetValHR.

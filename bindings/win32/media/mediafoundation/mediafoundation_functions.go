@@ -898,8 +898,12 @@ func MFBeginUnregisterWorkQueueWithMMCSS(dwWorkQueueId uint32, pDoneCallback *IM
 // MFCalculateBitmapImageSize calls MFPlat!MFCalculateBitmapImageSize.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcalculatebitmapimagesize
 // Minimum OS: windows6.0.6000.
-func MFCalculateBitmapImageSize(pBMIH *graphicsgdi.BITMAPINFOHEADER, cbBufSize uint32, pcbImageSize *uint32, pbKnown *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procMFCalculateBitmapImageSize.Addr(), uintptr(unsafe.Pointer(pBMIH)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbImageSize)), uintptr(unsafe.Pointer(pbKnown)))
+func MFCalculateBitmapImageSize(pBMIH *graphicsgdi.BITMAPINFOHEADER, cbBufSize uint32, pcbImageSize *uint32, pbKnown *bool) error {
+	_pbKnown := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procMFCalculateBitmapImageSize.Addr(), uintptr(unsafe.Pointer(pBMIH)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbImageSize)), uintptr(win32.OutParam(unsafe.Pointer(_pbKnown))))
+	if pbKnown != nil {
+		*pbKnown = *_pbKnown != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -930,8 +934,12 @@ func MFCancelWorkItem(Key uint64) error {
 // MFCombineSamples calls MFPlat!MFCombineSamples.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcombinesamples
 // Minimum OS: windows10.0.19041.
-func MFCombineSamples(pSample *IMFSample, pSampleToAdd *IMFSample, dwMaxMergedDurationInMS uint32, pMerged *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procMFCombineSamples.Addr(), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(pSampleToAdd)), uintptr(dwMaxMergedDurationInMS), uintptr(unsafe.Pointer(pMerged)))
+func MFCombineSamples(pSample *IMFSample, pSampleToAdd *IMFSample, dwMaxMergedDurationInMS uint32, pMerged *bool) error {
+	_pMerged := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procMFCombineSamples.Addr(), uintptr(unsafe.Pointer(pSample)), uintptr(unsafe.Pointer(pSampleToAdd)), uintptr(dwMaxMergedDurationInMS), uintptr(win32.OutParam(unsafe.Pointer(_pMerged))))
+	if pMerged != nil {
+		*pMerged = *_pMerged != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2354,8 +2362,12 @@ func MFInvokeCallback(pAsyncResult *IMFAsyncResult) error {
 // MFIsContentProtectionDeviceSupported calls MFPlat!MFIsContentProtectionDeviceSupported.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfiscontentprotectiondevicesupported
 // Minimum OS: windows10.0.10240.
-func MFIsContentProtectionDeviceSupported(ProtectionSystemId *win32.GUID, isSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procMFIsContentProtectionDeviceSupported.Addr(), uintptr(unsafe.Pointer(ProtectionSystemId)), uintptr(unsafe.Pointer(isSupported)))
+func MFIsContentProtectionDeviceSupported(ProtectionSystemId *win32.GUID, isSupported *bool) error {
+	_isSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procMFIsContentProtectionDeviceSupported.Addr(), uintptr(unsafe.Pointer(ProtectionSystemId)), uintptr(win32.OutParam(unsafe.Pointer(_isSupported))))
+	if isSupported != nil {
+		*isSupported = *_isSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2369,8 +2381,12 @@ func MFIsFormatYUV(Format uint32) bool {
 
 // MFIsVirtualCameraTypeSupported calls MFSENSORGROUP!MFIsVirtualCameraTypeSupported.
 // https://learn.microsoft.com/windows/win32/api/mfvirtualcamera/nf-mfvirtualcamera-mfisvirtualcameratypesupported
-func MFIsVirtualCameraTypeSupported(type_ MFVirtualCameraType, supported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procMFIsVirtualCameraTypeSupported.Addr(), uintptr(type_), uintptr(unsafe.Pointer(supported)))
+func MFIsVirtualCameraTypeSupported(type_ MFVirtualCameraType, supported *bool) error {
+	_supported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procMFIsVirtualCameraTypeSupported.Addr(), uintptr(type_), uintptr(win32.OutParam(unsafe.Pointer(_supported))))
+	if supported != nil {
+		*supported = *_supported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -1901,8 +1901,12 @@ func (self *ITAllocatorProperties) SetAllocateBuffers(bAllocBuffers bool) error 
 }
 
 // GetAllocateBuffers dispatches through ITAllocatorProperties's vtable slot 6.
-func (self *ITAllocatorProperties) GetAllocateBuffers(pbAllocBuffers *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAllocBuffers)))
+func (self *ITAllocatorProperties) GetAllocateBuffers(pbAllocBuffers *bool) error {
+	_pbAllocBuffers := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbAllocBuffers))))
+	if pbAllocBuffers != nil {
+		*pbAllocBuffers = *_pbAllocBuffers != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

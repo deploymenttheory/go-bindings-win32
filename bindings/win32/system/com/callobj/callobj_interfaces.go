@@ -195,8 +195,12 @@ func (self *ICallIndirect) GetStackSize(iMethod uint32, cbArgs *uint32) error {
 }
 
 // GetIID dispatches through ICallIndirect's vtable slot 6.
-func (self *ICallIndirect) GetIID(piid *win32.GUID, pfDerivesFromIDispatch *foundation.BOOL, pcMethod *uint32, pwszInterface *foundation.PWSTR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piid)), uintptr(unsafe.Pointer(pfDerivesFromIDispatch)), uintptr(unsafe.Pointer(pcMethod)), uintptr(unsafe.Pointer(pwszInterface)))
+func (self *ICallIndirect) GetIID(piid *win32.GUID, pfDerivesFromIDispatch *bool, pcMethod *uint32, pwszInterface *foundation.PWSTR) error {
+	_pfDerivesFromIDispatch := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piid)), uintptr(win32.OutParam(unsafe.Pointer(_pfDerivesFromIDispatch))), uintptr(unsafe.Pointer(pcMethod)), uintptr(unsafe.Pointer(pwszInterface)))
+	if pfDerivesFromIDispatch != nil {
+		*pfDerivesFromIDispatch = *_pfDerivesFromIDispatch != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

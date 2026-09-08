@@ -1246,8 +1246,12 @@ func (self *IPortableDeviceValues) SetBoolValue(key *foundation.PROPERTYKEY, Val
 }
 
 // GetBoolValue dispatches through IPortableDeviceValues's vtable slot 24.
-func (self *IPortableDeviceValues) GetBoolValue(key *foundation.PROPERTYKEY, pValue *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)))
+func (self *IPortableDeviceValues) GetBoolValue(key *foundation.PROPERTYKEY, pValue *bool) error {
+	_pValue := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(win32.OutParam(unsafe.Pointer(_pValue))))
+	if pValue != nil {
+		*pValue = *_pValue != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

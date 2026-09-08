@@ -118,33 +118,53 @@ func (self *IWICBitmapCodecInfo) GetFileExtensions(cchFileExtensions uint32, wzF
 }
 
 // DoesSupportAnimation dispatches through IWICBitmapCodecInfo's vtable slot 18.
-func (self *IWICBitmapCodecInfo) DoesSupportAnimation(pfSupportAnimation *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfSupportAnimation)))
+func (self *IWICBitmapCodecInfo) DoesSupportAnimation(pfSupportAnimation *bool) error {
+	_pfSupportAnimation := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfSupportAnimation))))
+	if pfSupportAnimation != nil {
+		*pfSupportAnimation = *_pfSupportAnimation != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoesSupportChromakey dispatches through IWICBitmapCodecInfo's vtable slot 19.
-func (self *IWICBitmapCodecInfo) DoesSupportChromakey(pfSupportChromakey *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfSupportChromakey)))
+func (self *IWICBitmapCodecInfo) DoesSupportChromakey(pfSupportChromakey *bool) error {
+	_pfSupportChromakey := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfSupportChromakey))))
+	if pfSupportChromakey != nil {
+		*pfSupportChromakey = *_pfSupportChromakey != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoesSupportLossless dispatches through IWICBitmapCodecInfo's vtable slot 20.
-func (self *IWICBitmapCodecInfo) DoesSupportLossless(pfSupportLossless *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfSupportLossless)))
+func (self *IWICBitmapCodecInfo) DoesSupportLossless(pfSupportLossless *bool) error {
+	_pfSupportLossless := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfSupportLossless))))
+	if pfSupportLossless != nil {
+		*pfSupportLossless = *_pfSupportLossless != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoesSupportMultiframe dispatches through IWICBitmapCodecInfo's vtable slot 21.
-func (self *IWICBitmapCodecInfo) DoesSupportMultiframe(pfSupportMultiframe *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfSupportMultiframe)))
+func (self *IWICBitmapCodecInfo) DoesSupportMultiframe(pfSupportMultiframe *bool) error {
+	_pfSupportMultiframe := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfSupportMultiframe))))
+	if pfSupportMultiframe != nil {
+		*pfSupportMultiframe = *_pfSupportMultiframe != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // MatchesMimeType dispatches through IWICBitmapCodecInfo's vtable slot 22.
-func (self *IWICBitmapCodecInfo) MatchesMimeType(wzMimeType string, pfMatches *foundation.BOOL) error {
+func (self *IWICBitmapCodecInfo) MatchesMimeType(wzMimeType string, pfMatches *bool) error {
 	_wzMimeType := win32.UTF16Ptr(wzMimeType)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wzMimeType)), uintptr(unsafe.Pointer(pfMatches)))
+	_pfMatches := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wzMimeType)), uintptr(win32.OutParam(unsafe.Pointer(_pfMatches))))
+	if pfMatches != nil {
+		*pfMatches = *_pfMatches != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -258,8 +278,12 @@ func (self *IWICBitmapDecoderInfo) GetPatterns(cbSizePatterns uint32, pPatterns 
 }
 
 // MatchesPattern dispatches through IWICBitmapDecoderInfo's vtable slot 24.
-func (self *IWICBitmapDecoderInfo) MatchesPattern(pIStream *systemcom.IStream, pfMatches *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStream)), uintptr(unsafe.Pointer(pfMatches)))
+func (self *IWICBitmapDecoderInfo) MatchesPattern(pIStream *systemcom.IStream, pfMatches *bool) error {
+	_pfMatches := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStream)), uintptr(win32.OutParam(unsafe.Pointer(_pfMatches))))
+	if pfMatches != nil {
+		*pfMatches = *_pfMatches != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -407,8 +431,12 @@ func (self *IWICBitmapFrameChainWriter) AppendFrameToChain(chainType WICBitmapCh
 }
 
 // DoesSupportChainType dispatches through IWICBitmapFrameChainWriter's vtable slot 4.
-func (self *IWICBitmapFrameChainWriter) DoesSupportChainType(chainType WICBitmapChainType, pfIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(chainType), uintptr(unsafe.Pointer(pfIsSupported)))
+func (self *IWICBitmapFrameChainWriter) DoesSupportChainType(chainType WICBitmapChainType, pfIsSupported *bool) error {
+	_pfIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(chainType), uintptr(win32.OutParam(unsafe.Pointer(_pfIsSupported))))
+	if pfIsSupported != nil {
+		*pfIsSupported = *_pfIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -651,8 +679,12 @@ func (self *IWICBitmapSourceTransform) GetClosestPixelFormat(pguidDstFormat *win
 }
 
 // DoesSupportTransform dispatches through IWICBitmapSourceTransform's vtable slot 6.
-func (self *IWICBitmapSourceTransform) DoesSupportTransform(dstTransform WICBitmapTransformOptions, pfIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dstTransform), uintptr(unsafe.Pointer(pfIsSupported)))
+func (self *IWICBitmapSourceTransform) DoesSupportTransform(dstTransform WICBitmapTransformOptions, pfIsSupported *bool) error {
+	_pfIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dstTransform), uintptr(win32.OutParam(unsafe.Pointer(_pfIsSupported))))
+	if pfIsSupported != nil {
+		*pfIsSupported = *_pfIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -898,8 +930,12 @@ func (self *IWICD3DTextureSource) GetTransformedTexture(prc *WICRect, uiWidth ui
 }
 
 // DoesSupportD3DDeviceType dispatches through IWICD3DTextureSource's vtable slot 5.
-func (self *IWICD3DTextureSource) DoesSupportD3DDeviceType(riid *win32.GUID, pfIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pfIsSupported)))
+func (self *IWICD3DTextureSource) DoesSupportD3DDeviceType(riid *win32.GUID, pfIsSupported *bool) error {
+	_pfIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsSupported))))
+	if pfIsSupported != nil {
+		*pfIsSupported = *_pfIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1230,8 +1266,12 @@ type IWICDisplayAdaptationControl struct {
 var IID_IWICDisplayAdaptationControl = win32.GUID{Data1: 0xde9d91d2, Data2: 0x70b4, Data3: 0x4f41, Data4: [8]byte{0x83, 0x6c, 0x25, 0xfc, 0xd3, 0x96, 0x26, 0xd3}}
 
 // DoesSupportChangingMaxLuminance dispatches through IWICDisplayAdaptationControl's vtable slot 3.
-func (self *IWICDisplayAdaptationControl) DoesSupportChangingMaxLuminance(pguidDstFormat *win32.GUID, pfIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidDstFormat)), uintptr(unsafe.Pointer(pfIsSupported)))
+func (self *IWICDisplayAdaptationControl) DoesSupportChangingMaxLuminance(pguidDstFormat *win32.GUID, pfIsSupported *bool) error {
+	_pfIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidDstFormat)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsSupported))))
+	if pfIsSupported != nil {
+		*pfIsSupported = *_pfIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1287,8 +1327,12 @@ func (self *IWICDisplayAdaptationControl2) GetToneMappingMode() (WICBitmapToneMa
 }
 
 // DoesSupportToneMappingMode dispatches through IWICDisplayAdaptationControl2's vtable slot 10.
-func (self *IWICDisplayAdaptationControl2) DoesSupportToneMappingMode(mode WICBitmapToneMappingMode, pfIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(mode), uintptr(unsafe.Pointer(pfIsSupported)))
+func (self *IWICDisplayAdaptationControl2) DoesSupportToneMappingMode(mode WICBitmapToneMappingMode, pfIsSupported *bool) error {
+	_pfIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(mode), uintptr(win32.OutParam(unsafe.Pointer(_pfIsSupported))))
+	if pfIsSupported != nil {
+		*pfIsSupported = *_pfIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1364,8 +1408,12 @@ func (self *IWICFormatConverter) Initialize(pISource *IWICBitmapSource, dstForma
 }
 
 // CanConvert dispatches through IWICFormatConverter's vtable slot 9.
-func (self *IWICFormatConverter) CanConvert(srcPixelFormat *win32.GUID, dstPixelFormat *win32.GUID, pfCanConvert *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(srcPixelFormat)), uintptr(unsafe.Pointer(dstPixelFormat)), uintptr(unsafe.Pointer(pfCanConvert)))
+func (self *IWICFormatConverter) CanConvert(srcPixelFormat *win32.GUID, dstPixelFormat *win32.GUID, pfCanConvert *bool) error {
+	_pfCanConvert := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(srcPixelFormat)), uintptr(unsafe.Pointer(dstPixelFormat)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanConvert))))
+	if pfCanConvert != nil {
+		*pfCanConvert = *_pfCanConvert != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1573,8 +1621,12 @@ type IWICJpegFrameDecode struct {
 var IID_IWICJpegFrameDecode = win32.GUID{Data1: 0x8939f66e, Data2: 0xc46a, Data3: 0x4c21, Data4: [8]byte{0xa9, 0xd1, 0x98, 0xb3, 0x27, 0xce, 0x16, 0x79}}
 
 // DoesSupportIndexing dispatches through IWICJpegFrameDecode's vtable slot 3.
-func (self *IWICJpegFrameDecode) DoesSupportIndexing(pfIndexingSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIndexingSupported)))
+func (self *IWICJpegFrameDecode) DoesSupportIndexing(pfIndexingSupported *bool) error {
+	_pfIndexingSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIndexingSupported))))
+	if pfIndexingSupported != nil {
+		*pfIndexingSupported = *_pfIndexingSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1787,20 +1839,32 @@ func (self *IWICMetadataHandlerInfo) GetDeviceModels(cchDeviceModels uint32, wzD
 }
 
 // DoesRequireFullStream dispatches through IWICMetadataHandlerInfo's vtable slot 15.
-func (self *IWICMetadataHandlerInfo) DoesRequireFullStream(pfRequiresFullStream *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRequiresFullStream)))
+func (self *IWICMetadataHandlerInfo) DoesRequireFullStream(pfRequiresFullStream *bool) error {
+	_pfRequiresFullStream := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfRequiresFullStream))))
+	if pfRequiresFullStream != nil {
+		*pfRequiresFullStream = *_pfRequiresFullStream != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoesSupportPadding dispatches through IWICMetadataHandlerInfo's vtable slot 16.
-func (self *IWICMetadataHandlerInfo) DoesSupportPadding(pfSupportsPadding *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfSupportsPadding)))
+func (self *IWICMetadataHandlerInfo) DoesSupportPadding(pfSupportsPadding *bool) error {
+	_pfSupportsPadding := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfSupportsPadding))))
+	if pfSupportsPadding != nil {
+		*pfSupportsPadding = *_pfSupportsPadding != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DoesRequireFixedSize dispatches through IWICMetadataHandlerInfo's vtable slot 17.
-func (self *IWICMetadataHandlerInfo) DoesRequireFixedSize(pfFixedSize *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfFixedSize)))
+func (self *IWICMetadataHandlerInfo) DoesRequireFixedSize(pfFixedSize *bool) error {
+	_pfFixedSize := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfFixedSize))))
+	if pfFixedSize != nil {
+		*pfFixedSize = *_pfFixedSize != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1922,8 +1986,12 @@ func (self *IWICMetadataReaderInfo) GetPatterns(guidContainerFormat *win32.GUID,
 }
 
 // MatchesPattern dispatches through IWICMetadataReaderInfo's vtable slot 19.
-func (self *IWICMetadataReaderInfo) MatchesPattern(guidContainerFormat *win32.GUID, pIStream *systemcom.IStream, pfMatches *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pIStream)), uintptr(unsafe.Pointer(pfMatches)))
+func (self *IWICMetadataReaderInfo) MatchesPattern(guidContainerFormat *win32.GUID, pIStream *systemcom.IStream, pfMatches *bool) error {
+	_pfMatches := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pIStream)), uintptr(win32.OutParam(unsafe.Pointer(_pfMatches))))
+	if pfMatches != nil {
+		*pfMatches = *_pfMatches != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2049,20 +2117,32 @@ func (self *IWICPalette) GetColors(pColors []uint32, pcActualColors *uint32) err
 }
 
 // IsBlackWhite dispatches through IWICPalette's vtable slot 10.
-func (self *IWICPalette) IsBlackWhite(pfIsBlackWhite *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsBlackWhite)))
+func (self *IWICPalette) IsBlackWhite(pfIsBlackWhite *bool) error {
+	_pfIsBlackWhite := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsBlackWhite))))
+	if pfIsBlackWhite != nil {
+		*pfIsBlackWhite = *_pfIsBlackWhite != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsGrayscale dispatches through IWICPalette's vtable slot 11.
-func (self *IWICPalette) IsGrayscale(pfIsGrayscale *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsGrayscale)))
+func (self *IWICPalette) IsGrayscale(pfIsGrayscale *bool) error {
+	_pfIsGrayscale := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsGrayscale))))
+	if pfIsGrayscale != nil {
+		*pfIsGrayscale = *_pfIsGrayscale != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // HasAlpha dispatches through IWICPalette's vtable slot 12.
-func (self *IWICPalette) HasAlpha(pfHasAlpha *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfHasAlpha)))
+func (self *IWICPalette) HasAlpha(pfHasAlpha *bool) error {
+	_pfHasAlpha := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasAlpha))))
+	if pfHasAlpha != nil {
+		*pfHasAlpha = *_pfHasAlpha != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2141,8 +2221,12 @@ type IWICPixelFormatInfo2 struct {
 var IID_IWICPixelFormatInfo2 = win32.GUID{Data1: 0xa9db33a2, Data2: 0xaf5f, Data3: 0x43c7, Data4: [8]byte{0xb6, 0x79, 0x74, 0xf5, 0x98, 0x4b, 0x5a, 0xa4}}
 
 // SupportsTransparency dispatches through IWICPixelFormatInfo2's vtable slot 16.
-func (self *IWICPixelFormatInfo2) SupportsTransparency(pfSupportsTransparency *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfSupportsTransparency)))
+func (self *IWICPixelFormatInfo2) SupportsTransparency(pfSupportsTransparency *bool) error {
+	_pfSupportsTransparency := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfSupportsTransparency))))
+	if pfSupportsTransparency != nil {
+		*pfSupportsTransparency = *_pfSupportsTransparency != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2191,8 +2275,12 @@ type IWICPlanarBitmapSourceTransform struct {
 var IID_IWICPlanarBitmapSourceTransform = win32.GUID{Data1: 0x3aff9cce, Data2: 0xbe95, Data3: 0x4303, Data4: [8]byte{0xb9, 0x27, 0xe7, 0xd1, 0x6f, 0xf4, 0xa6, 0x13}}
 
 // DoesSupportTransform dispatches through IWICPlanarBitmapSourceTransform's vtable slot 3.
-func (self *IWICPlanarBitmapSourceTransform) DoesSupportTransform(puiWidth *uint32, puiHeight *uint32, dstTransform WICBitmapTransformOptions, dstPlanarOptions WICPlanarOptions, pguidDstFormats *win32.GUID, pPlaneDescriptions *WICBitmapPlaneDescription, cPlanes uint32, pfIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiWidth)), uintptr(unsafe.Pointer(puiHeight)), uintptr(dstTransform), uintptr(dstPlanarOptions), uintptr(unsafe.Pointer(pguidDstFormats)), uintptr(unsafe.Pointer(pPlaneDescriptions)), uintptr(cPlanes), uintptr(unsafe.Pointer(pfIsSupported)))
+func (self *IWICPlanarBitmapSourceTransform) DoesSupportTransform(puiWidth *uint32, puiHeight *uint32, dstTransform WICBitmapTransformOptions, dstPlanarOptions WICPlanarOptions, pguidDstFormats *win32.GUID, pPlaneDescriptions *WICBitmapPlaneDescription, cPlanes uint32, pfIsSupported *bool) error {
+	_pfIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiWidth)), uintptr(unsafe.Pointer(puiHeight)), uintptr(dstTransform), uintptr(dstPlanarOptions), uintptr(unsafe.Pointer(pguidDstFormats)), uintptr(unsafe.Pointer(pPlaneDescriptions)), uintptr(cPlanes), uintptr(win32.OutParam(unsafe.Pointer(_pfIsSupported))))
+	if pfIsSupported != nil {
+		*pfIsSupported = *_pfIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2228,12 +2316,16 @@ func (self *IWICPlanarFormatConverter) Initialize(ppPlanes []*IWICBitmapSource, 
 }
 
 // CanConvert dispatches through IWICPlanarFormatConverter's vtable slot 9.
-func (self *IWICPlanarFormatConverter) CanConvert(pSrcPixelFormats []win32.GUID, dstPixelFormat *win32.GUID, pfCanConvert *foundation.BOOL) error {
+func (self *IWICPlanarFormatConverter) CanConvert(pSrcPixelFormats []win32.GUID, dstPixelFormat *win32.GUID, pfCanConvert *bool) error {
 	var _pSrcPixelFormats *win32.GUID
 	if len(pSrcPixelFormats) > 0 {
 		_pSrcPixelFormats = &pSrcPixelFormats[0]
 	}
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSrcPixelFormats)), uintptr(len(pSrcPixelFormats)), uintptr(unsafe.Pointer(dstPixelFormat)), uintptr(unsafe.Pointer(pfCanConvert)))
+	_pfCanConvert := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSrcPixelFormats)), uintptr(len(pSrcPixelFormats)), uintptr(unsafe.Pointer(dstPixelFormat)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanConvert))))
+	if pfCanConvert != nil {
+		*pfCanConvert = *_pfCanConvert != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

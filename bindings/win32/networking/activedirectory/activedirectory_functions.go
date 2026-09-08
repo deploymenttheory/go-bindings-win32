@@ -1582,20 +1582,28 @@ func DsRemoveDsDomainA(hDs foundation.HANDLE, DomainDN foundation.PSTR) uint32 {
 // DsRemoveDsServer calls NTDSAPI!DsRemoveDsServerW.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsremovedsserverw
 // Minimum OS: windows6.0.6000.
-func DsRemoveDsServer(hDs foundation.HANDLE, ServerDN string, DomainDN *string, fLastDcInDomain *foundation.BOOL, fCommit bool) uint32 {
+func DsRemoveDsServer(hDs foundation.HANDLE, ServerDN string, DomainDN *string, fLastDcInDomain *bool, fCommit bool) uint32 {
 	_ServerDN := win32.UTF16Ptr(ServerDN)
 	_DomainDN := win32.UTF16PtrOrNil(DomainDN)
+	_fLastDcInDomain := new(foundation.BOOL)
 	_fCommit := win32.Bool32(fCommit)
-	r1, _, _ := syscall.SyscallN(procDsRemoveDsServer.Addr(), uintptr(hDs), uintptr(unsafe.Pointer(_ServerDN)), uintptr(unsafe.Pointer(_DomainDN)), uintptr(unsafe.Pointer(fLastDcInDomain)), uintptr(_fCommit))
+	r1, _, _ := syscall.SyscallN(procDsRemoveDsServer.Addr(), uintptr(hDs), uintptr(unsafe.Pointer(_ServerDN)), uintptr(unsafe.Pointer(_DomainDN)), uintptr(win32.OutParam(unsafe.Pointer(_fLastDcInDomain))), uintptr(_fCommit))
+	if fLastDcInDomain != nil {
+		*fLastDcInDomain = *_fLastDcInDomain != 0
+	}
 	return uint32(r1)
 }
 
 // DsRemoveDsServerA calls NTDSAPI!DsRemoveDsServerA.
 // https://learn.microsoft.com/windows/win32/api/ntdsapi/nf-ntdsapi-dsremovedsservera
 // Minimum OS: windows6.0.6000.
-func DsRemoveDsServerA(hDs foundation.HANDLE, ServerDN foundation.PSTR, DomainDN foundation.PSTR, fLastDcInDomain *foundation.BOOL, fCommit bool) uint32 {
+func DsRemoveDsServerA(hDs foundation.HANDLE, ServerDN foundation.PSTR, DomainDN foundation.PSTR, fLastDcInDomain *bool, fCommit bool) uint32 {
+	_fLastDcInDomain := new(foundation.BOOL)
 	_fCommit := win32.Bool32(fCommit)
-	r1, _, _ := syscall.SyscallN(procDsRemoveDsServerA.Addr(), uintptr(hDs), uintptr(unsafe.Pointer(ServerDN)), uintptr(unsafe.Pointer(DomainDN)), uintptr(unsafe.Pointer(fLastDcInDomain)), uintptr(_fCommit))
+	r1, _, _ := syscall.SyscallN(procDsRemoveDsServerA.Addr(), uintptr(hDs), uintptr(unsafe.Pointer(ServerDN)), uintptr(unsafe.Pointer(DomainDN)), uintptr(win32.OutParam(unsafe.Pointer(_fLastDcInDomain))), uintptr(_fCommit))
+	if fLastDcInDomain != nil {
+		*fLastDcInDomain = *_fLastDcInDomain != 0
+	}
 	return uint32(r1)
 }
 

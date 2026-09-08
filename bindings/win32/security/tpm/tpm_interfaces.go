@@ -23,7 +23,7 @@ type ITpmVirtualSmartCardManager struct {
 var IID_ITpmVirtualSmartCardManager = win32.GUID{Data1: 0x112b1dff, Data2: 0xd9dc, Data3: 0x41f7, Data4: [8]byte{0x86, 0x9f, 0xd6, 0x7f, 0xee, 0x7c, 0xb5, 0x91}}
 
 // CreateVirtualSmartCard dispatches through ITpmVirtualSmartCardManager's vtable slot 3.
-func (self *ITpmVirtualSmartCardManager) CreateVirtualSmartCard(pszFriendlyName string, bAdminAlgId byte, pbAdminKey []byte, pbAdminKcv []byte, pbPuk []byte, pbPin []byte, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
+func (self *ITpmVirtualSmartCardManager) CreateVirtualSmartCard(pszFriendlyName string, bAdminAlgId byte, pbAdminKey []byte, pbAdminKcv []byte, pbPuk []byte, pbPin []byte, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *bool) error {
 	_pszFriendlyName := win32.UTF16Ptr(pszFriendlyName)
 	var _pbAdminKey *byte
 	if len(pbAdminKey) > 0 {
@@ -42,14 +42,22 @@ func (self *ITpmVirtualSmartCardManager) CreateVirtualSmartCard(pszFriendlyName 
 		_pbPin = &pbPin[0]
 	}
 	_fGenerate := win32.Bool32(fGenerate)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(unsafe.Pointer(pfNeedReboot)))
+	_pfNeedReboot := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(win32.OutParam(unsafe.Pointer(_pfNeedReboot))))
+	if pfNeedReboot != nil {
+		*pfNeedReboot = *_pfNeedReboot != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // DestroyVirtualSmartCard dispatches through ITpmVirtualSmartCardManager's vtable slot 4.
-func (self *ITpmVirtualSmartCardManager) DestroyVirtualSmartCard(pszInstanceId string, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, pfNeedReboot *foundation.BOOL) error {
+func (self *ITpmVirtualSmartCardManager) DestroyVirtualSmartCard(pszInstanceId string, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, pfNeedReboot *bool) error {
 	_pszInstanceId := win32.UTF16Ptr(pszInstanceId)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInstanceId)), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(pfNeedReboot)))
+	_pfNeedReboot := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInstanceId)), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(win32.OutParam(unsafe.Pointer(_pfNeedReboot))))
+	if pfNeedReboot != nil {
+		*pfNeedReboot = *_pfNeedReboot != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -62,7 +70,7 @@ type ITpmVirtualSmartCardManager2 struct {
 var IID_ITpmVirtualSmartCardManager2 = win32.GUID{Data1: 0xfdf8a2b9, Data2: 0x02de, Data3: 0x47f4, Data4: [8]byte{0xbc, 0x26, 0xaa, 0x85, 0xab, 0x5e, 0x52, 0x67}}
 
 // CreateVirtualSmartCardWithPinPolicy dispatches through ITpmVirtualSmartCardManager2's vtable slot 5.
-func (self *ITpmVirtualSmartCardManager2) CreateVirtualSmartCardWithPinPolicy(pszFriendlyName string, bAdminAlgId byte, pbAdminKey []byte, pbAdminKcv []byte, pbPuk []byte, pbPin []byte, pbPinPolicy []byte, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
+func (self *ITpmVirtualSmartCardManager2) CreateVirtualSmartCardWithPinPolicy(pszFriendlyName string, bAdminAlgId byte, pbAdminKey []byte, pbAdminKcv []byte, pbPuk []byte, pbPin []byte, pbPinPolicy []byte, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *bool) error {
 	_pszFriendlyName := win32.UTF16Ptr(pszFriendlyName)
 	var _pbAdminKey *byte
 	if len(pbAdminKey) > 0 {
@@ -85,7 +93,11 @@ func (self *ITpmVirtualSmartCardManager2) CreateVirtualSmartCardWithPinPolicy(ps
 		_pbPinPolicy = &pbPinPolicy[0]
 	}
 	_fGenerate := win32.Bool32(fGenerate)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(unsafe.Pointer(_pbPinPolicy)), uintptr(len(pbPinPolicy)), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(unsafe.Pointer(pfNeedReboot)))
+	_pfNeedReboot := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(unsafe.Pointer(_pbPinPolicy)), uintptr(len(pbPinPolicy)), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(win32.OutParam(unsafe.Pointer(_pfNeedReboot))))
+	if pfNeedReboot != nil {
+		*pfNeedReboot = *_pfNeedReboot != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

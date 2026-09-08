@@ -1290,10 +1290,14 @@ func MprAdminInterfaceUpdateRoutes(hMprServer uintptr, hInterface foundation.HAN
 // MprAdminIsDomainRasServer calls MPRAPI!MprAdminIsDomainRasServer.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mpradminisdomainrasserver
 // Minimum OS: windowsserver2003.
-func MprAdminIsDomainRasServer(pszDomain string, pszMachine string, pbIsRasServer *foundation.BOOL) uint32 {
+func MprAdminIsDomainRasServer(pszDomain string, pszMachine string, pbIsRasServer *bool) uint32 {
 	_pszDomain := win32.UTF16Ptr(pszDomain)
 	_pszMachine := win32.UTF16Ptr(pszMachine)
-	r1, _, _ := syscall.SyscallN(procMprAdminIsDomainRasServer.Addr(), uintptr(unsafe.Pointer(_pszDomain)), uintptr(unsafe.Pointer(_pszMachine)), uintptr(unsafe.Pointer(pbIsRasServer)))
+	_pbIsRasServer := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procMprAdminIsDomainRasServer.Addr(), uintptr(unsafe.Pointer(_pszDomain)), uintptr(unsafe.Pointer(_pszMachine)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsRasServer))))
+	if pbIsRasServer != nil {
+		*pbIsRasServer = *_pbIsRasServer != 0
+	}
 	return uint32(r1)
 }
 
@@ -2200,16 +2204,24 @@ func RasGetAutodialAddressA(param0 foundation.PSTR, param1 *uint32, param2 *RASA
 // RasGetAutodialEnable calls RASAPI32!RasGetAutodialEnableW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetautodialenablew
 // Minimum OS: windows5.0.
-func RasGetAutodialEnable(param0 uint32, param1 *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procRasGetAutodialEnable.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
+func RasGetAutodialEnable(param0 uint32, param1 *bool) uint32 {
+	_param1 := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRasGetAutodialEnable.Addr(), uintptr(param0), uintptr(win32.OutParam(unsafe.Pointer(_param1))))
+	if param1 != nil {
+		*param1 = *_param1 != 0
+	}
 	return uint32(r1)
 }
 
 // RasGetAutodialEnableA calls RASAPI32!RasGetAutodialEnableA.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetautodialenablea
 // Minimum OS: windows5.0.
-func RasGetAutodialEnableA(param0 uint32, param1 *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procRasGetAutodialEnableA.Addr(), uintptr(param0), uintptr(unsafe.Pointer(param1)))
+func RasGetAutodialEnableA(param0 uint32, param1 *bool) uint32 {
+	_param1 := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRasGetAutodialEnableA.Addr(), uintptr(param0), uintptr(win32.OutParam(unsafe.Pointer(_param1))))
+	if param1 != nil {
+		*param1 = *_param1 != 0
+	}
 	return uint32(r1)
 }
 
@@ -2344,17 +2356,25 @@ func RasGetEapUserIdentityA(pszPhonebook foundation.PSTR, pszEntry foundation.PS
 // RasGetEntryDialParams calls RASAPI32!RasGetEntryDialParamsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetentrydialparamsw
 // Minimum OS: windows5.0.
-func RasGetEntryDialParams(param0 *string, param1 *RASDIALPARAMSW, param2 *foundation.BOOL) uint32 {
+func RasGetEntryDialParams(param0 *string, param1 *RASDIALPARAMSW, param2 *bool) uint32 {
 	_param0 := win32.UTF16PtrOrNil(param0)
-	r1, _, _ := syscall.SyscallN(procRasGetEntryDialParams.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
+	_param2 := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRasGetEntryDialParams.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(win32.OutParam(unsafe.Pointer(_param2))))
+	if param2 != nil {
+		*param2 = *_param2 != 0
+	}
 	return uint32(r1)
 }
 
 // RasGetEntryDialParamsA calls RASAPI32!RasGetEntryDialParamsA.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetentrydialparamsa
 // Minimum OS: windows5.0.
-func RasGetEntryDialParamsA(param0 foundation.PSTR, param1 *RASDIALPARAMSA, param2 *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procRasGetEntryDialParamsA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
+func RasGetEntryDialParamsA(param0 foundation.PSTR, param1 *RASDIALPARAMSA, param2 *bool) uint32 {
+	_param2 := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procRasGetEntryDialParamsA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(win32.OutParam(unsafe.Pointer(_param2))))
+	if param2 != nil {
+		*param2 = *_param2 != 0
+	}
 	return uint32(r1)
 }
 

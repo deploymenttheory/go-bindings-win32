@@ -25,8 +25,12 @@ type ILocationPermissions struct {
 var IID_ILocationPermissions = win32.GUID{Data1: 0xd5fb0a7f, Data2: 0xe74e, Data3: 0x44f5, Data4: [8]byte{0x8e, 0x02, 0x48, 0x06, 0x86, 0x3a, 0x27, 0x4f}}
 
 // GetGlobalLocationPermission dispatches through ILocationPermissions's vtable slot 3.
-func (self *ILocationPermissions) GetGlobalLocationPermission(pfEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
+func (self *ILocationPermissions) GetGlobalLocationPermission(pfEnabled *bool) error {
+	_pfEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))))
+	if pfEnabled != nil {
+		*pfEnabled = *_pfEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

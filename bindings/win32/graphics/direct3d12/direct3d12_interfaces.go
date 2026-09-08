@@ -1367,8 +1367,12 @@ type ID3D12Device6 struct {
 var IID_ID3D12Device6 = win32.GUID{Data1: 0xc70b221b, Data2: 0x40e4, Data3: 0x4a17, Data4: [8]byte{0x89, 0xaf, 0x02, 0x5a, 0x07, 0x27, 0xa6, 0xdc}}
 
 // SetBackgroundProcessingMode dispatches through ID3D12Device6's vtable slot 65.
-func (self *ID3D12Device6) SetBackgroundProcessingMode(Mode D3D12_BACKGROUND_PROCESSING_MODE, MeasurementsAction D3D12_MEASUREMENTS_ACTION, hEventToSignalUponCompletion foundation.HANDLE, pbFurtherMeasurementsDesired *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(Mode), uintptr(MeasurementsAction), uintptr(hEventToSignalUponCompletion), uintptr(unsafe.Pointer(pbFurtherMeasurementsDesired)))
+func (self *ID3D12Device6) SetBackgroundProcessingMode(Mode D3D12_BACKGROUND_PROCESSING_MODE, MeasurementsAction D3D12_MEASUREMENTS_ACTION, hEventToSignalUponCompletion foundation.HANDLE, pbFurtherMeasurementsDesired *bool) error {
+	_pbFurtherMeasurementsDesired := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(Mode), uintptr(MeasurementsAction), uintptr(hEventToSignalUponCompletion), uintptr(win32.OutParam(unsafe.Pointer(_pbFurtherMeasurementsDesired))))
+	if pbFurtherMeasurementsDesired != nil {
+		*pbFurtherMeasurementsDesired = *_pbFurtherMeasurementsDesired != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

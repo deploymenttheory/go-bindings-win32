@@ -1550,14 +1550,22 @@ func (self *IVssFileShareSnapshotProvider) BeginPrepareSnapshot(SnapshotSetId wi
 }
 
 // IsPathSupported dispatches through IVssFileShareSnapshotProvider's vtable slot 8.
-func (self *IVssFileShareSnapshotProvider) IsPathSupported(pwszSharePath *uint16, pbSupportedByThisProvider *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSharePath)), uintptr(unsafe.Pointer(pbSupportedByThisProvider)))
+func (self *IVssFileShareSnapshotProvider) IsPathSupported(pwszSharePath *uint16, pbSupportedByThisProvider *bool) error {
+	_pbSupportedByThisProvider := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSharePath)), uintptr(win32.OutParam(unsafe.Pointer(_pbSupportedByThisProvider))))
+	if pbSupportedByThisProvider != nil {
+		*pbSupportedByThisProvider = *_pbSupportedByThisProvider != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsPathSnapshotted dispatches through IVssFileShareSnapshotProvider's vtable slot 9.
-func (self *IVssFileShareSnapshotProvider) IsPathSnapshotted(pwszSharePath *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCompatibility *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSharePath)), uintptr(unsafe.Pointer(pbSnapshotsPresent)), uintptr(unsafe.Pointer(plSnapshotCompatibility)))
+func (self *IVssFileShareSnapshotProvider) IsPathSnapshotted(pwszSharePath *uint16, pbSnapshotsPresent *bool, plSnapshotCompatibility *int32) error {
+	_pbSnapshotsPresent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSharePath)), uintptr(win32.OutParam(unsafe.Pointer(_pbSnapshotsPresent))), uintptr(unsafe.Pointer(plSnapshotCompatibility)))
+	if pbSnapshotsPresent != nil {
+		*pbSnapshotsPresent = *_pbSnapshotsPresent != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1579,14 +1587,22 @@ type IVssHardwareSnapshotProvider struct {
 var IID_IVssHardwareSnapshotProvider = win32.GUID{Data1: 0x9593a157, Data2: 0x44e9, Data3: 0x4344, Data4: [8]byte{0xbb, 0xeb, 0x44, 0xfb, 0xf9, 0xb0, 0x6b, 0x10}}
 
 // AreLunsSupported dispatches through IVssHardwareSnapshotProvider's vtable slot 3.
-func (self *IVssHardwareSnapshotProvider) AreLunsSupported(lLunCount int32, lContext int32, rgwszDevices **uint16, pLunInformation *storagevirtualdiskservice.VDS_LUN_INFORMATION, pbIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lLunCount), uintptr(lContext), uintptr(unsafe.Pointer(rgwszDevices)), uintptr(unsafe.Pointer(pLunInformation)), uintptr(unsafe.Pointer(pbIsSupported)))
+func (self *IVssHardwareSnapshotProvider) AreLunsSupported(lLunCount int32, lContext int32, rgwszDevices **uint16, pLunInformation *storagevirtualdiskservice.VDS_LUN_INFORMATION, pbIsSupported *bool) error {
+	_pbIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lLunCount), uintptr(lContext), uintptr(unsafe.Pointer(rgwszDevices)), uintptr(unsafe.Pointer(pLunInformation)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsSupported))))
+	if pbIsSupported != nil {
+		*pbIsSupported = *_pbIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // FillInLunInfo dispatches through IVssHardwareSnapshotProvider's vtable slot 4.
-func (self *IVssHardwareSnapshotProvider) FillInLunInfo(wszDeviceName *uint16, pLunInfo *storagevirtualdiskservice.VDS_LUN_INFORMATION, pbIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszDeviceName)), uintptr(unsafe.Pointer(pLunInfo)), uintptr(unsafe.Pointer(pbIsSupported)))
+func (self *IVssHardwareSnapshotProvider) FillInLunInfo(wszDeviceName *uint16, pLunInfo *storagevirtualdiskservice.VDS_LUN_INFORMATION, pbIsSupported *bool) error {
+	_pbIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszDeviceName)), uintptr(unsafe.Pointer(pLunInfo)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsSupported))))
+	if pbIsSupported != nil {
+		*pbIsSupported = *_pbIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1837,14 +1853,22 @@ func (self *IVssSoftwareSnapshotProvider) BeginPrepareSnapshot(SnapshotSetId win
 }
 
 // IsVolumeSupported dispatches through IVssSoftwareSnapshotProvider's vtable slot 8.
-func (self *IVssSoftwareSnapshotProvider) IsVolumeSupported(pwszVolumeName *uint16, pbSupportedByThisProvider *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSupportedByThisProvider)))
+func (self *IVssSoftwareSnapshotProvider) IsVolumeSupported(pwszVolumeName *uint16, pbSupportedByThisProvider *bool) error {
+	_pbSupportedByThisProvider := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(win32.OutParam(unsafe.Pointer(_pbSupportedByThisProvider))))
+	if pbSupportedByThisProvider != nil {
+		*pbSupportedByThisProvider = *_pbSupportedByThisProvider != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsVolumeSnapshotted dispatches through IVssSoftwareSnapshotProvider's vtable slot 9.
-func (self *IVssSoftwareSnapshotProvider) IsVolumeSnapshotted(pwszVolumeName *uint16, pbSnapshotsPresent *foundation.BOOL, plSnapshotCompatibility *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(unsafe.Pointer(pbSnapshotsPresent)), uintptr(unsafe.Pointer(plSnapshotCompatibility)))
+func (self *IVssSoftwareSnapshotProvider) IsVolumeSnapshotted(pwszVolumeName *uint16, pbSnapshotsPresent *bool, plSnapshotCompatibility *int32) error {
+	_pbSnapshotsPresent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszVolumeName)), uintptr(win32.OutParam(unsafe.Pointer(_pbSnapshotsPresent))), uintptr(unsafe.Pointer(plSnapshotCompatibility)))
+	if pbSnapshotsPresent != nil {
+		*pbSnapshotsPresent = *_pbSnapshotsPresent != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

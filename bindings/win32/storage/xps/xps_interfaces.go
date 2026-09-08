@@ -111,10 +111,10 @@ func (self *IXpsOMCanvas) GetVisuals() (*IXpsOMVisualCollection, error) {
 }
 
 // GetUseAliasedEdgeMode dispatches through IXpsOMCanvas's vtable slot 31.
-func (self *IXpsOMCanvas) GetUseAliasedEdgeMode() (foundation.BOOL, error) {
+func (self *IXpsOMCanvas) GetUseAliasedEdgeMode() (bool, error) {
 	_useAliasedEdgeMode := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_useAliasedEdgeMode))))
-	return *_useAliasedEdgeMode, win32.ErrIfFailed(int32(r1))
+	return *_useAliasedEdgeMode != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetUseAliasedEdgeMode dispatches through IXpsOMCanvas's vtable slot 32.
@@ -1020,10 +1020,10 @@ func (self *IXpsOMGeometryFigure) SetStartPoint(startPoint *XPS_POINT) error {
 }
 
 // GetIsClosed dispatches through IXpsOMGeometryFigure's vtable slot 10.
-func (self *IXpsOMGeometryFigure) GetIsClosed() (foundation.BOOL, error) {
+func (self *IXpsOMGeometryFigure) GetIsClosed() (bool, error) {
 	_isClosed := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isClosed))))
-	return *_isClosed, win32.ErrIfFailed(int32(r1))
+	return *_isClosed != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsClosed dispatches through IXpsOMGeometryFigure's vtable slot 11.
@@ -1034,10 +1034,10 @@ func (self *IXpsOMGeometryFigure) SetIsClosed(isClosed bool) error {
 }
 
 // GetIsFilled dispatches through IXpsOMGeometryFigure's vtable slot 12.
-func (self *IXpsOMGeometryFigure) GetIsFilled() (foundation.BOOL, error) {
+func (self *IXpsOMGeometryFigure) GetIsFilled() (bool, error) {
 	_isFilled := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isFilled))))
-	return *_isFilled, win32.ErrIfFailed(int32(r1))
+	return *_isFilled != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsFilled dispatches through IXpsOMGeometryFigure's vtable slot 13.
@@ -1185,10 +1185,10 @@ func (self *IXpsOMGlyphs) GetBidiLevel() (uint32, error) {
 }
 
 // GetIsSideways dispatches through IXpsOMGlyphs's vtable slot 38.
-func (self *IXpsOMGlyphs) GetIsSideways() (foundation.BOOL, error) {
+func (self *IXpsOMGlyphs) GetIsSideways() (bool, error) {
 	_isSideways := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isSideways))))
-	return *_isSideways, win32.ErrIfFailed(int32(r1))
+	return *_isSideways != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceFontName dispatches through IXpsOMGlyphs's vtable slot 39.
@@ -1413,10 +1413,10 @@ func (self *IXpsOMGlyphsEditor) SetBidiLevel(bidiLevel uint32) error {
 }
 
 // GetIsSideways dispatches through IXpsOMGlyphsEditor's vtable slot 17.
-func (self *IXpsOMGlyphsEditor) GetIsSideways() (foundation.BOOL, error) {
+func (self *IXpsOMGlyphsEditor) GetIsSideways() (bool, error) {
 	_isSideways := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isSideways))))
-	return *_isSideways, win32.ErrIfFailed(int32(r1))
+	return *_isSideways != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsSideways dispatches through IXpsOMGlyphsEditor's vtable slot 18.
@@ -2370,10 +2370,10 @@ func (self *IXpsOMPackageWriter) Close() error {
 }
 
 // IsClosed dispatches through IXpsOMPackageWriter's vtable slot 7.
-func (self *IXpsOMPackageWriter) IsClosed() (foundation.BOOL, error) {
+func (self *IXpsOMPackageWriter) IsClosed() (bool, error) {
 	_isClosed := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isClosed))))
-	return *_isClosed, win32.ErrIfFailed(int32(r1))
+	return *_isClosed != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IXpsOMPackageWriter3D: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel_2/nn-xpsobjectmodel_2-ixpsompackagewriter3d
@@ -2488,10 +2488,10 @@ func (self *IXpsOMPage) SetName(name string) error {
 }
 
 // GetIsHyperlinkTarget dispatches through IXpsOMPage's vtable slot 17.
-func (self *IXpsOMPage) GetIsHyperlinkTarget() (foundation.BOOL, error) {
+func (self *IXpsOMPage) GetIsHyperlinkTarget() (bool, error) {
 	_isHyperlinkTarget := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isHyperlinkTarget))))
-	return *_isHyperlinkTarget, win32.ErrIfFailed(int32(r1))
+	return *_isHyperlinkTarget != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsHyperlinkTarget dispatches through IXpsOMPage's vtable slot 18.
@@ -2614,10 +2614,10 @@ func (self *IXpsOMPageReference) DiscardPage() error {
 }
 
 // IsPageLoaded dispatches through IXpsOMPageReference's vtable slot 7.
-func (self *IXpsOMPageReference) IsPageLoaded() (foundation.BOOL, error) {
+func (self *IXpsOMPageReference) IsPageLoaded() (bool, error) {
 	_isPageLoaded := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isPageLoaded))))
-	return *_isPageLoaded, win32.ErrIfFailed(int32(r1))
+	return *_isPageLoaded != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetAdvisoryPageDimensions dispatches through IXpsOMPageReference's vtable slot 8.
@@ -2687,10 +2687,10 @@ func (self *IXpsOMPageReference) CollectPartResources() (*IXpsOMPartResources, e
 }
 
 // HasRestrictedFonts dispatches through IXpsOMPageReference's vtable slot 18.
-func (self *IXpsOMPageReference) HasRestrictedFonts() (foundation.BOOL, error) {
+func (self *IXpsOMPageReference) HasRestrictedFonts() (bool, error) {
 	_restrictedFonts := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_restrictedFonts))))
-	return *_restrictedFonts, win32.ErrIfFailed(int32(r1))
+	return *_restrictedFonts != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Clone dispatches through IXpsOMPageReference's vtable slot 19.
@@ -2925,10 +2925,10 @@ func (self *IXpsOMPath) SetAccessibilityLongDescription(longDescription string) 
 }
 
 // GetSnapsToPixels dispatches through IXpsOMPath's vtable slot 39.
-func (self *IXpsOMPath) GetSnapsToPixels() (foundation.BOOL, error) {
+func (self *IXpsOMPath) GetSnapsToPixels() (bool, error) {
 	_snapsToPixels := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_snapsToPixels))))
-	return *_snapsToPixels, win32.ErrIfFailed(int32(r1))
+	return *_snapsToPixels != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetSnapsToPixels dispatches through IXpsOMPath's vtable slot 40.
@@ -3704,10 +3704,10 @@ func (self *IXpsOMVisual) SetName(name string) error {
 }
 
 // GetIsHyperlinkTarget dispatches through IXpsOMVisual's vtable slot 24.
-func (self *IXpsOMVisual) GetIsHyperlinkTarget() (foundation.BOOL, error) {
+func (self *IXpsOMVisual) GetIsHyperlinkTarget() (bool, error) {
 	_isHyperlink := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isHyperlink))))
-	return *_isHyperlink, win32.ErrIfFailed(int32(r1))
+	return *_isHyperlink != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetIsHyperlinkTarget dispatches through IXpsOMVisual's vtable slot 25.

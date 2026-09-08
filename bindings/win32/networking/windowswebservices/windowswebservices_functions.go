@@ -1526,16 +1526,24 @@ func WsMatchPolicyAlternative(policy *WS_POLICY, alternativeIndex uint32, policy
 // WsMoveReader calls webservices!WsMoveReader.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsmovereader
 // Minimum OS: windows6.1.
-func WsMoveReader(reader *WS_XML_READER, moveTo WS_MOVE_TO, found *foundation.BOOL, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsMoveReader.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(moveTo), uintptr(unsafe.Pointer(found)), uintptr(unsafe.Pointer(error_)))
+func WsMoveReader(reader *WS_XML_READER, moveTo WS_MOVE_TO, found *bool, error_ *WS_ERROR) error {
+	_found := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWsMoveReader.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(moveTo), uintptr(win32.OutParam(unsafe.Pointer(_found))), uintptr(unsafe.Pointer(error_)))
+	if found != nil {
+		*found = *_found != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // WsMoveWriter calls webservices!WsMoveWriter.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsmovewriter
 // Minimum OS: windows6.1.
-func WsMoveWriter(writer *WS_XML_WRITER, moveTo WS_MOVE_TO, found *foundation.BOOL, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsMoveWriter.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(moveTo), uintptr(unsafe.Pointer(found)), uintptr(unsafe.Pointer(error_)))
+func WsMoveWriter(writer *WS_XML_WRITER, moveTo WS_MOVE_TO, found *bool, error_ *WS_ERROR) error {
+	_found := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWsMoveWriter.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(moveTo), uintptr(win32.OutParam(unsafe.Pointer(_found))), uintptr(unsafe.Pointer(error_)))
+	if found != nil {
+		*found = *_found != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1770,8 +1778,12 @@ func WsReadStartElement(reader *WS_XML_READER, error_ *WS_ERROR) error {
 // WsReadToStartElement calls webservices!WsReadToStartElement.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadtostartelement
 // Minimum OS: windows6.1.
-func WsReadToStartElement(reader *WS_XML_READER, localName *WS_XML_STRING, ns *WS_XML_STRING, found *foundation.BOOL, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsReadToStartElement.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(unsafe.Pointer(found)), uintptr(unsafe.Pointer(error_)))
+func WsReadToStartElement(reader *WS_XML_READER, localName *WS_XML_STRING, ns *WS_XML_STRING, found *bool, error_ *WS_ERROR) error {
+	_found := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWsReadToStartElement.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(win32.OutParam(unsafe.Pointer(_found))), uintptr(unsafe.Pointer(error_)))
+	if found != nil {
+		*found = *_found != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

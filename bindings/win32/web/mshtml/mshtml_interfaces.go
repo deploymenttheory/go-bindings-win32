@@ -4747,8 +4747,12 @@ func (self *IDisplayPointer) GetDisplayGravity(peGravity *DISPLAY_GRAVITY) error
 }
 
 // IsPositioned dispatches through IDisplayPointer's vtable slot 11.
-func (self *IDisplayPointer) IsPositioned(pfPositioned *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfPositioned)))
+func (self *IDisplayPointer) IsPositioned(pfPositioned *bool) error {
+	_pfPositioned := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfPositioned))))
+	if pfPositioned != nil {
+		*pfPositioned = *_pfPositioned != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4759,26 +4763,42 @@ func (self *IDisplayPointer) Unposition() error {
 }
 
 // IsEqualTo dispatches through IDisplayPointer's vtable slot 13.
-func (self *IDisplayPointer) IsEqualTo(pDispPointer *IDisplayPointer, pfIsEqual *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDispPointer)), uintptr(unsafe.Pointer(pfIsEqual)))
+func (self *IDisplayPointer) IsEqualTo(pDispPointer *IDisplayPointer, pfIsEqual *bool) error {
+	_pfIsEqual := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDispPointer)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsEqual))))
+	if pfIsEqual != nil {
+		*pfIsEqual = *_pfIsEqual != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsLeftOf dispatches through IDisplayPointer's vtable slot 14.
-func (self *IDisplayPointer) IsLeftOf(pDispPointer *IDisplayPointer, pfIsLeftOf *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDispPointer)), uintptr(unsafe.Pointer(pfIsLeftOf)))
+func (self *IDisplayPointer) IsLeftOf(pDispPointer *IDisplayPointer, pfIsLeftOf *bool) error {
+	_pfIsLeftOf := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDispPointer)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsLeftOf))))
+	if pfIsLeftOf != nil {
+		*pfIsLeftOf = *_pfIsLeftOf != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsRightOf dispatches through IDisplayPointer's vtable slot 15.
-func (self *IDisplayPointer) IsRightOf(pDispPointer *IDisplayPointer, pfIsRightOf *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDispPointer)), uintptr(unsafe.Pointer(pfIsRightOf)))
+func (self *IDisplayPointer) IsRightOf(pDispPointer *IDisplayPointer, pfIsRightOf *bool) error {
+	_pfIsRightOf := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDispPointer)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsRightOf))))
+	if pfIsRightOf != nil {
+		*pfIsRightOf = *_pfIsRightOf != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsAtBOL dispatches through IDisplayPointer's vtable slot 16.
-func (self *IDisplayPointer) IsAtBOL(pfBOL *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfBOL)))
+func (self *IDisplayPointer) IsAtBOL(pfBOL *bool) error {
+	_pfBOL := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfBOL))))
+	if pfBOL != nil {
+		*pfBOL = *_pfBOL != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4859,8 +4879,12 @@ func (self *IDisplayServices) ScrollRectIntoView(pIElement *IHTMLElement, rect f
 }
 
 // HasFlowLayout dispatches through IDisplayServices's vtable slot 9.
-func (self *IDisplayServices) HasFlowLayout(pIElement *IHTMLElement, pfHasFlowLayout *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIElement)), uintptr(unsafe.Pointer(pfHasFlowLayout)))
+func (self *IDisplayServices) HasFlowLayout(pIElement *IHTMLElement, pfHasFlowLayout *bool) error {
+	_pfHasFlowLayout := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIElement)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasFlowLayout))))
+	if pfHasFlowLayout != nil {
+		*pfHasFlowLayout = *_pfHasFlowLayout != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5218,10 +5242,10 @@ func (self *IElementBehaviorRender) GetRenderInfo() (int32, error) {
 }
 
 // HitTestPoint dispatches through IElementBehaviorRender's vtable slot 5.
-func (self *IElementBehaviorRender) HitTestPoint(pPoint *foundation.POINT, pReserved *systemcom.IUnknown) (foundation.BOOL, error) {
+func (self *IElementBehaviorRender) HitTestPoint(pPoint *foundation.POINT, pReserved *systemcom.IUnknown) (bool, error) {
 	_pbHit := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPoint)), uintptr(unsafe.Pointer(pReserved)), uintptr(win32.OutParam(unsafe.Pointer(_pbHit))))
-	return *_pbHit, win32.ErrIfFailed(int32(r1))
+	return *_pbHit != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3050f427-98b5-11cf-bb82-00aa00bdce0b
@@ -5506,8 +5530,12 @@ func (self *IElementSegment) SetPrimary(fPrimary bool) error {
 }
 
 // IsPrimary dispatches through IElementSegment's vtable slot 6.
-func (self *IElementSegment) IsPrimary(pfPrimary *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfPrimary)))
+func (self *IElementSegment) IsPrimary(pfPrimary *bool) error {
+	_pfPrimary := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfPrimary))))
+	if pfPrimary != nil {
+		*pfPrimary = *_pfPrimary != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5597,8 +5625,12 @@ func (self *IEnumPrivacyRecords) GetSize(pSize *uint32) error {
 }
 
 // GetPrivacyImpacted dispatches through IEnumPrivacyRecords's vtable slot 5.
-func (self *IEnumPrivacyRecords) GetPrivacyImpacted(pState *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
+func (self *IEnumPrivacyRecords) GetPrivacyImpacted(pState *bool) error {
+	_pState := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pState))))
+	if pState != nil {
+		*pState = *_pState != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -13406,8 +13438,12 @@ func (self *IHTMLCaret) MoveDisplayPointerToCaret(pDispPointer *IDisplayPointer)
 }
 
 // IsVisible dispatches through IHTMLCaret's vtable slot 7.
-func (self *IHTMLCaret) IsVisible(pIsVisible *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsVisible)))
+func (self *IHTMLCaret) IsVisible(pIsVisible *bool) error {
+	_pIsVisible := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsVisible))))
+	if pIsVisible != nil {
+		*pIsVisible = *_pIsVisible != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -30270,8 +30306,12 @@ func (self *IHTMLPainter) GetPainterInfo(pInfo *HTML_PAINTER_INFO) error {
 }
 
 // HitTestPoint dispatches through IHTMLPainter's vtable slot 6.
-func (self *IHTMLPainter) HitTestPoint(pt foundation.POINT, pbHit *foundation.BOOL, plPartID *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(pt)), uintptr(unsafe.Pointer(pbHit)), uintptr(unsafe.Pointer(plPartID)))
+func (self *IHTMLPainter) HitTestPoint(pt foundation.POINT, pbHit *bool, plPartID *int32) error {
+	_pbHit := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.StructArg(pt)), uintptr(win32.OutParam(unsafe.Pointer(_pbHit))), uintptr(unsafe.Pointer(plPartID)))
+	if pbHit != nil {
+		*pbHit = *_pbHit != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -33794,10 +33834,10 @@ func (self *IHTMLSelectElementEx) GetSelectExFlags() (uint32, error) {
 }
 
 // GetDropdownOpen dispatches through IHTMLSelectElementEx's vtable slot 6.
-func (self *IHTMLSelectElementEx) GetDropdownOpen() (foundation.BOOL, error) {
+func (self *IHTMLSelectElementEx) GetDropdownOpen() (bool, error) {
 	_pfOpen := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfOpen))))
-	return *_pfOpen, win32.ErrIfFailed(int32(r1))
+	return *_pfOpen != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 305104b6-98b5-11cf-bb82-00aa00bdce0b
@@ -41734,8 +41774,12 @@ func (self *IMarkupPointer) SetGravity(Gravity POINTER_GRAVITY) error {
 }
 
 // Cling dispatches through IMarkupPointer's vtable slot 6.
-func (self *IMarkupPointer) Cling(pfCling *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCling)))
+func (self *IMarkupPointer) Cling(pfCling *bool) error {
+	_pfCling := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCling))))
+	if pfCling != nil {
+		*pfCling = *_pfCling != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -41753,8 +41797,12 @@ func (self *IMarkupPointer) Unposition() error {
 }
 
 // IsPositioned dispatches through IMarkupPointer's vtable slot 9.
-func (self *IMarkupPointer) IsPositioned(pfPositioned *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfPositioned)))
+func (self *IMarkupPointer) IsPositioned(pfPositioned *bool) error {
+	_pfPositioned := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfPositioned))))
+	if pfPositioned != nil {
+		*pfPositioned = *_pfPositioned != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -41804,32 +41852,52 @@ func (self *IMarkupPointer) CurrentScope(ppElemCurrent **IHTMLElement) error {
 }
 
 // IsLeftOf dispatches through IMarkupPointer's vtable slot 17.
-func (self *IMarkupPointer) IsLeftOf(pPointerThat *IMarkupPointer, pfResult *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(unsafe.Pointer(pfResult)))
+func (self *IMarkupPointer) IsLeftOf(pPointerThat *IMarkupPointer, pfResult *bool) error {
+	_pfResult := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(win32.OutParam(unsafe.Pointer(_pfResult))))
+	if pfResult != nil {
+		*pfResult = *_pfResult != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsLeftOfOrEqualTo dispatches through IMarkupPointer's vtable slot 18.
-func (self *IMarkupPointer) IsLeftOfOrEqualTo(pPointerThat *IMarkupPointer, pfResult *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(unsafe.Pointer(pfResult)))
+func (self *IMarkupPointer) IsLeftOfOrEqualTo(pPointerThat *IMarkupPointer, pfResult *bool) error {
+	_pfResult := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(win32.OutParam(unsafe.Pointer(_pfResult))))
+	if pfResult != nil {
+		*pfResult = *_pfResult != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsRightOf dispatches through IMarkupPointer's vtable slot 19.
-func (self *IMarkupPointer) IsRightOf(pPointerThat *IMarkupPointer, pfResult *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(unsafe.Pointer(pfResult)))
+func (self *IMarkupPointer) IsRightOf(pPointerThat *IMarkupPointer, pfResult *bool) error {
+	_pfResult := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(win32.OutParam(unsafe.Pointer(_pfResult))))
+	if pfResult != nil {
+		*pfResult = *_pfResult != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsRightOfOrEqualTo dispatches through IMarkupPointer's vtable slot 20.
-func (self *IMarkupPointer) IsRightOfOrEqualTo(pPointerThat *IMarkupPointer, pfResult *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(unsafe.Pointer(pfResult)))
+func (self *IMarkupPointer) IsRightOfOrEqualTo(pPointerThat *IMarkupPointer, pfResult *bool) error {
+	_pfResult := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(win32.OutParam(unsafe.Pointer(_pfResult))))
+	if pfResult != nil {
+		*pfResult = *_pfResult != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsEqualTo dispatches through IMarkupPointer's vtable slot 21.
-func (self *IMarkupPointer) IsEqualTo(pPointerThat *IMarkupPointer, pfAreEqual *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(unsafe.Pointer(pfAreEqual)))
+func (self *IMarkupPointer) IsEqualTo(pPointerThat *IMarkupPointer, pfAreEqual *bool) error {
+	_pfAreEqual := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerThat)), uintptr(win32.OutParam(unsafe.Pointer(_pfAreEqual))))
+	if pfAreEqual != nil {
+		*pfAreEqual = *_pfAreEqual != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -41855,8 +41923,12 @@ type IMarkupPointer2 struct {
 var IID_IMarkupPointer2 = win32.GUID{Data1: 0x3050f675, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
 // IsAtWordBreak dispatches through IMarkupPointer2's vtable slot 24.
-func (self *IMarkupPointer2) IsAtWordBreak(pfAtBreak *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAtBreak)))
+func (self *IMarkupPointer2) IsAtWordBreak(pfAtBreak *bool) error {
+	_pfAtBreak := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAtBreak))))
+	if pfAtBreak != nil {
+		*pfAtBreak = *_pfAtBreak != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -41879,8 +41951,12 @@ func (self *IMarkupPointer2) MoveUnitBounded(muAction MOVEUNIT_ACTION, pIBoundar
 }
 
 // IsInsideURL dispatches through IMarkupPointer2's vtable slot 28.
-func (self *IMarkupPointer2) IsInsideURL(pRight *IMarkupPointer, pfResult *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRight)), uintptr(unsafe.Pointer(pfResult)))
+func (self *IMarkupPointer2) IsInsideURL(pRight *IMarkupPointer, pfResult *bool) error {
+	_pfResult := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRight)), uintptr(win32.OutParam(unsafe.Pointer(_pfResult))))
+	if pfResult != nil {
+		*pfResult = *_pfResult != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -41975,8 +42051,12 @@ func (self *IMarkupServices) ParseGlobal(hglobalHTML foundation.HGLOBAL, dwFlags
 }
 
 // IsScopedElement dispatches through IMarkupServices's vtable slot 15.
-func (self *IMarkupServices) IsScopedElement(pElement *IHTMLElement, pfScoped *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pElement)), uintptr(unsafe.Pointer(pfScoped)))
+func (self *IMarkupServices) IsScopedElement(pElement *IHTMLElement, pfScoped *bool) error {
+	_pfScoped := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pElement)), uintptr(win32.OutParam(unsafe.Pointer(_pfScoped))))
+	if pfScoped != nil {
+		*pfScoped = *_pfScoped != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -42082,8 +42162,12 @@ func (self *IMarkupTextFrags) InsertTextFrag(iFrag int32, bstrInsert foundation.
 }
 
 // FindTextFragFromMarkupPointer dispatches through IMarkupTextFrags's vtable slot 7.
-func (self *IMarkupTextFrags) FindTextFragFromMarkupPointer(pPointerFind *IMarkupPointer, piFrag *int32, pfFragFound *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerFind)), uintptr(unsafe.Pointer(piFrag)), uintptr(unsafe.Pointer(pfFragFound)))
+func (self *IMarkupTextFrags) FindTextFragFromMarkupPointer(pPointerFind *IMarkupPointer, piFrag *int32, pfFragFound *bool) error {
+	_pfFragFound := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPointerFind)), uintptr(unsafe.Pointer(piFrag)), uintptr(win32.OutParam(unsafe.Pointer(_pfFragFound))))
+	if pfFragFound != nil {
+		*pfFragFound = *_pfFragFound != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -47498,10 +47582,10 @@ func (self *IScriptEventHandler) EventHandlerDispatch() (*systemcom.IDispatch, e
 }
 
 // UsesCapture dispatches through IScriptEventHandler's vtable slot 6.
-func (self *IScriptEventHandler) UsesCapture() (foundation.BOOL, error) {
+func (self *IScriptEventHandler) UsesCapture() (bool, error) {
 	_pfUsesCapture := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfUsesCapture))))
-	return *_pfUsesCapture, win32.ErrIfFailed(int32(r1))
+	return *_pfUsesCapture != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Cookie dispatches through IScriptEventHandler's vtable slot 7.
@@ -47534,9 +47618,13 @@ type ISecureUrlHost struct {
 var IID_ISecureUrlHost = win32.GUID{Data1: 0xc81984c4, Data2: 0x74c8, Data3: 0x11d2, Data4: [8]byte{0xba, 0xa9, 0x00, 0xc0, 0x4f, 0xc2, 0x04, 0x0e}}
 
 // ValidateSecureUrl dispatches through ISecureUrlHost's vtable slot 3.
-func (self *ISecureUrlHost) ValidateSecureUrl(pfAllow *foundation.BOOL, pchUrlInQuestion string, dwFlags uint32) error {
+func (self *ISecureUrlHost) ValidateSecureUrl(pfAllow *bool, pchUrlInQuestion string, dwFlags uint32) error {
+	_pfAllow := new(foundation.BOOL)
 	_pchUrlInQuestion := win32.UTF16Ptr(pchUrlInQuestion)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAllow)), uintptr(unsafe.Pointer(_pchUrlInQuestion)), uintptr(dwFlags))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAllow))), uintptr(unsafe.Pointer(_pchUrlInQuestion)), uintptr(dwFlags))
+	if pfAllow != nil {
+		*pfAllow = *_pfAllow != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -47575,8 +47663,12 @@ func (self *ISegmentList) GetType(peType *SELECTION_TYPE) error {
 }
 
 // IsEmpty dispatches through ISegmentList's vtable slot 5.
-func (self *ISegmentList) IsEmpty(pfEmpty *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEmpty)))
+func (self *ISegmentList) IsEmpty(pfEmpty *bool) error {
+	_pfEmpty := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEmpty))))
+	if pfEmpty != nil {
+		*pfEmpty = *_pfEmpty != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -47730,10 +47822,10 @@ func (self *ISurfacePresenter) GetBuffer(backBufferIndex uint32, riid *win32.GUI
 }
 
 // IsCurrent dispatches through ISurfacePresenter's vtable slot 5.
-func (self *ISurfacePresenter) IsCurrent() (foundation.BOOL, error) {
+func (self *ISurfacePresenter) IsCurrent() (bool, error) {
 	_pIsCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsCurrent))))
-	return *_pIsCurrent, win32.ErrIfFailed(int32(r1))
+	return *_pIsCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3050f6b4-98b5-11cf-bb82-00aa00bdce0b
@@ -48258,14 +48350,22 @@ type ITrackingProtection struct {
 var IID_ITrackingProtection = win32.GUID{Data1: 0x30510803, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
 // EvaluateUrl dispatches through ITrackingProtection's vtable slot 3.
-func (self *ITrackingProtection) EvaluateUrl(bstrUrl foundation.BSTR, pfAllowed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(unsafe.Pointer(pfAllowed)))
+func (self *ITrackingProtection) EvaluateUrl(bstrUrl foundation.BSTR, pfAllowed *bool) error {
+	_pfAllowed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(win32.OutParam(unsafe.Pointer(_pfAllowed))))
+	if pfAllowed != nil {
+		*pfAllowed = *_pfAllowed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnabled dispatches through ITrackingProtection's vtable slot 4.
-func (self *ITrackingProtection) GetEnabled(pfEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
+func (self *ITrackingProtection) GetEnabled(pfEnabled *bool) error {
+	_pfEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))))
+	if pfEnabled != nil {
+		*pfEnabled = *_pfEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -48313,10 +48413,10 @@ func (self *IViewObjectPresentSite) CreateSurfacePresenter(pDevice *systemcom.IU
 }
 
 // IsHardwareComposition dispatches through IViewObjectPresentSite's vtable slot 4.
-func (self *IViewObjectPresentSite) IsHardwareComposition() (foundation.BOOL, error) {
+func (self *IViewObjectPresentSite) IsHardwareComposition() (bool, error) {
 	_pIsHardwareComposition := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsHardwareComposition))))
-	return *_pIsHardwareComposition, win32.ErrIfFailed(int32(r1))
+	return *_pIsHardwareComposition != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetCompositionMode dispatches through IViewObjectPresentSite's vtable slot 5.

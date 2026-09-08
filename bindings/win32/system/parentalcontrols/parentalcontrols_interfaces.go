@@ -103,8 +103,12 @@ type IWPCSettings struct {
 var IID_IWPCSettings = win32.GUID{Data1: 0x8fdf6ca1, Data2: 0x0189, Data3: 0x47e4, Data4: [8]byte{0xb6, 0x70, 0x1a, 0x8a, 0x46, 0x36, 0xe3, 0x40}}
 
 // IsLoggingRequired dispatches through IWPCSettings's vtable slot 3.
-func (self *IWPCSettings) IsLoggingRequired(pfRequired *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRequired)))
+func (self *IWPCSettings) IsLoggingRequired(pfRequired *bool) error {
+	_pfRequired := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfRequired))))
+	if pfRequired != nil {
+		*pfRequired = *_pfRequired != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -136,13 +140,17 @@ func (self *IWPCWebSettings) GetSettings(pdwSettings *WPCFLAG_WEB_SETTING) error
 }
 
 // RequestURLOverride dispatches through IWPCWebSettings's vtable slot 7.
-func (self *IWPCWebSettings) RequestURLOverride(hWnd foundation.HWND, pcszURL string, ppcszSubURLs []foundation.PWSTR, pfChanged *foundation.BOOL) error {
+func (self *IWPCWebSettings) RequestURLOverride(hWnd foundation.HWND, pcszURL string, ppcszSubURLs []foundation.PWSTR, pfChanged *bool) error {
 	_pcszURL := win32.UTF16Ptr(pcszURL)
 	var _ppcszSubURLs *foundation.PWSTR
 	if len(ppcszSubURLs) > 0 {
 		_ppcszSubURLs = &ppcszSubURLs[0]
 	}
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(_pcszURL)), uintptr(len(ppcszSubURLs)), uintptr(unsafe.Pointer(_ppcszSubURLs)), uintptr(unsafe.Pointer(pfChanged)))
+	_pfChanged := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(_pcszURL)), uintptr(len(ppcszSubURLs)), uintptr(unsafe.Pointer(_ppcszSubURLs)), uintptr(win32.OutParam(unsafe.Pointer(_pfChanged))))
+	if pfChanged != nil {
+		*pfChanged = *_pfChanged != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -776,8 +776,12 @@ func PropVariantCopy(pvarDest *PROPVARIANT, pvarSrc *PROPVARIANT) error {
 // PropVariantGetBooleanElem calls PROPSYS!PropVariantGetBooleanElem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvariantgetbooleanelem
 // Minimum OS: windows5.1.2600.
-func PropVariantGetBooleanElem(propvar *PROPVARIANT, iElem uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procPropVariantGetBooleanElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(unsafe.Pointer(pfVal)))
+func PropVariantGetBooleanElem(propvar *PROPVARIANT, iElem uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procPropVariantGetBooleanElem.Addr(), uintptr(unsafe.Pointer(propvar)), uintptr(iElem), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -872,8 +876,12 @@ func PropVariantToBSTR(propvar *PROPVARIANT, pbstrOut *foundation.BSTR) error {
 // PropVariantToBoolean calls PROPSYS!PropVariantToBoolean.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-propvarianttoboolean
 // Minimum OS: windows5.1.2600.
-func PropVariantToBoolean(propvarIn *PROPVARIANT, pfRet *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procPropVariantToBoolean.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(unsafe.Pointer(pfRet)))
+func PropVariantToBoolean(propvarIn *PROPVARIANT, pfRet *bool) error {
+	_pfRet := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procPropVariantToBoolean.Addr(), uintptr(unsafe.Pointer(propvarIn)), uintptr(win32.OutParam(unsafe.Pointer(_pfRet))))
+	if pfRet != nil {
+		*pfRet = *_pfRet != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

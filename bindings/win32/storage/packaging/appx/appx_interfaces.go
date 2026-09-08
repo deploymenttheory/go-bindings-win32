@@ -70,17 +70,17 @@ func (self *IAppxBlockMapBlocksEnumerator) GetCurrent() (*IAppxBlockMapBlock, er
 }
 
 // GetHasCurrent dispatches through IAppxBlockMapBlocksEnumerator's vtable slot 4.
-func (self *IAppxBlockMapBlocksEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxBlockMapBlocksEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxBlockMapBlocksEnumerator's vtable slot 5.
-func (self *IAppxBlockMapBlocksEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxBlockMapBlocksEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBlockMapFile: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxblockmapfile
@@ -121,10 +121,10 @@ func (self *IAppxBlockMapFile) GetUncompressedSize() (uint64, error) {
 }
 
 // ValidateFileHash dispatches through IAppxBlockMapFile's vtable slot 7.
-func (self *IAppxBlockMapFile) ValidateFileHash(fileStream *systemcom.IStream) (foundation.BOOL, error) {
+func (self *IAppxBlockMapFile) ValidateFileHash(fileStream *systemcom.IStream) (bool, error) {
 	_isValid := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileStream)), uintptr(win32.OutParam(unsafe.Pointer(_isValid))))
-	return *_isValid, win32.ErrIfFailed(int32(r1))
+	return *_isValid != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 54785f78-40e9-11ee-be56-0242ac120002
@@ -159,17 +159,17 @@ func (self *IAppxBlockMapFilesEnumerator) GetCurrent() (*IAppxBlockMapFile, erro
 }
 
 // GetHasCurrent dispatches through IAppxBlockMapFilesEnumerator's vtable slot 4.
-func (self *IAppxBlockMapFilesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxBlockMapFilesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxBlockMapFilesEnumerator's vtable slot 5.
-func (self *IAppxBlockMapFilesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxBlockMapFilesEnumerator) MoveNext() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBlockMapReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxblockmapreader
@@ -321,17 +321,17 @@ func (self *IAppxBundleManifestOptionalBundleInfoEnumerator) GetCurrent() (*IApp
 }
 
 // GetHasCurrent dispatches through IAppxBundleManifestOptionalBundleInfoEnumerator's vtable slot 4.
-func (self *IAppxBundleManifestOptionalBundleInfoEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxBundleManifestOptionalBundleInfoEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxBundleManifestOptionalBundleInfoEnumerator's vtable slot 5.
-func (self *IAppxBundleManifestOptionalBundleInfoEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxBundleManifestOptionalBundleInfoEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestPackageInfo: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestpackageinfo
@@ -395,24 +395,24 @@ type IAppxBundleManifestPackageInfo2 struct {
 var IID_IAppxBundleManifestPackageInfo2 = win32.GUID{Data1: 0x44c2acbc, Data2: 0xb2cf, Data3: 0x4ccb, Data4: [8]byte{0xbb, 0xdb, 0x9c, 0x6d, 0xa8, 0xc3, 0xbc, 0x9e}}
 
 // GetIsPackageReference dispatches through IAppxBundleManifestPackageInfo2's vtable slot 3.
-func (self *IAppxBundleManifestPackageInfo2) GetIsPackageReference() (foundation.BOOL, error) {
+func (self *IAppxBundleManifestPackageInfo2) GetIsPackageReference() (bool, error) {
 	_isPackageReference := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isPackageReference))))
-	return *_isPackageReference, win32.ErrIfFailed(int32(r1))
+	return *_isPackageReference != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsNonQualifiedResourcePackage dispatches through IAppxBundleManifestPackageInfo2's vtable slot 4.
-func (self *IAppxBundleManifestPackageInfo2) GetIsNonQualifiedResourcePackage() (foundation.BOOL, error) {
+func (self *IAppxBundleManifestPackageInfo2) GetIsNonQualifiedResourcePackage() (bool, error) {
 	_isNonQualifiedResourcePackage := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isNonQualifiedResourcePackage))))
-	return *_isNonQualifiedResourcePackage, win32.ErrIfFailed(int32(r1))
+	return *_isNonQualifiedResourcePackage != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetIsDefaultApplicablePackage dispatches through IAppxBundleManifestPackageInfo2's vtable slot 5.
-func (self *IAppxBundleManifestPackageInfo2) GetIsDefaultApplicablePackage() (foundation.BOOL, error) {
+func (self *IAppxBundleManifestPackageInfo2) GetIsDefaultApplicablePackage() (bool, error) {
 	_isDefaultApplicablePackage := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isDefaultApplicablePackage))))
-	return *_isDefaultApplicablePackage, win32.ErrIfFailed(int32(r1))
+	return *_isDefaultApplicablePackage != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 6ba74b98-bb74-4296-80d0-5f4256a99675
@@ -439,10 +439,10 @@ type IAppxBundleManifestPackageInfo4 struct {
 var IID_IAppxBundleManifestPackageInfo4 = win32.GUID{Data1: 0x5da6f13d, Data2: 0xa8a7, Data3: 0x4532, Data4: [8]byte{0x85, 0x7c, 0x13, 0x93, 0xd6, 0x59, 0x37, 0x1d}}
 
 // GetIsStub dispatches through IAppxBundleManifestPackageInfo4's vtable slot 3.
-func (self *IAppxBundleManifestPackageInfo4) GetIsStub() (foundation.BOOL, error) {
+func (self *IAppxBundleManifestPackageInfo4) GetIsStub() (bool, error) {
 	_isStub := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isStub))))
-	return *_isStub, win32.ErrIfFailed(int32(r1))
+	return *_isStub != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestPackageInfoEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestpackageinfoenumerator
@@ -462,17 +462,17 @@ func (self *IAppxBundleManifestPackageInfoEnumerator) GetCurrent() (*IAppxBundle
 }
 
 // GetHasCurrent dispatches through IAppxBundleManifestPackageInfoEnumerator's vtable slot 4.
-func (self *IAppxBundleManifestPackageInfoEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxBundleManifestPackageInfoEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxBundleManifestPackageInfoEnumerator's vtable slot 5.
-func (self *IAppxBundleManifestPackageInfoEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxBundleManifestPackageInfoEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxBundleManifestReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxbundlemanifestreader
@@ -716,17 +716,17 @@ func (self *IAppxContentGroupFilesEnumerator) GetCurrent() (foundation.PWSTR, er
 }
 
 // GetHasCurrent dispatches through IAppxContentGroupFilesEnumerator's vtable slot 4.
-func (self *IAppxContentGroupFilesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxContentGroupFilesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxContentGroupFilesEnumerator's vtable slot 5.
-func (self *IAppxContentGroupFilesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxContentGroupFilesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxContentGroupMapReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxcontentgroupmapreader
@@ -798,17 +798,17 @@ func (self *IAppxContentGroupsEnumerator) GetCurrent() (*IAppxContentGroup, erro
 }
 
 // GetHasCurrent dispatches through IAppxContentGroupsEnumerator's vtable slot 4.
-func (self *IAppxContentGroupsEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxContentGroupsEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxContentGroupsEnumerator's vtable slot 5.
-func (self *IAppxContentGroupsEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxContentGroupsEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxDigestProvider: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxdigestprovider
@@ -1284,17 +1284,17 @@ func (self *IAppxFilesEnumerator) GetCurrent() (*IAppxFile, error) {
 }
 
 // GetHasCurrent dispatches through IAppxFilesEnumerator's vtable slot 4.
-func (self *IAppxFilesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxFilesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxFilesEnumerator's vtable slot 5.
-func (self *IAppxFilesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxFilesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestApplication: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestapplication
@@ -1338,17 +1338,17 @@ func (self *IAppxManifestApplicationsEnumerator) GetCurrent() (*IAppxManifestApp
 }
 
 // GetHasCurrent dispatches through IAppxManifestApplicationsEnumerator's vtable slot 4.
-func (self *IAppxManifestApplicationsEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestApplicationsEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestApplicationsEnumerator's vtable slot 5.
-func (self *IAppxManifestApplicationsEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestApplicationsEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 11d22258-f470-42c1-b291-8361c5437e41
@@ -1367,17 +1367,17 @@ func (self *IAppxManifestCapabilitiesEnumerator) GetCurrent() (foundation.PWSTR,
 }
 
 // GetHasCurrent dispatches through IAppxManifestCapabilitiesEnumerator's vtable slot 4.
-func (self *IAppxManifestCapabilitiesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestCapabilitiesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestCapabilitiesEnumerator's vtable slot 5.
-func (self *IAppxManifestCapabilitiesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestCapabilitiesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestDeviceCapabilitiesEnumerator: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestdevicecapabilitiesenumerator
@@ -1397,17 +1397,17 @@ func (self *IAppxManifestDeviceCapabilitiesEnumerator) GetCurrent() (foundation.
 }
 
 // GetHasCurrent dispatches through IAppxManifestDeviceCapabilitiesEnumerator's vtable slot 4.
-func (self *IAppxManifestDeviceCapabilitiesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestDeviceCapabilitiesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestDeviceCapabilitiesEnumerator's vtable slot 5.
-func (self *IAppxManifestDeviceCapabilitiesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestDeviceCapabilitiesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: c031bee4-bbcc-48ea-a237-c34045c80a07
@@ -1455,17 +1455,17 @@ func (self *IAppxManifestDriverConstraintsEnumerator) GetCurrent() (*IAppxManife
 }
 
 // GetHasCurrent dispatches through IAppxManifestDriverConstraintsEnumerator's vtable slot 4.
-func (self *IAppxManifestDriverConstraintsEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestDriverConstraintsEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestDriverConstraintsEnumerator's vtable slot 5.
-func (self *IAppxManifestDriverConstraintsEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestDriverConstraintsEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: fe039db2-467f-4755-8404-8f5eb6865b33
@@ -1484,17 +1484,17 @@ func (self *IAppxManifestDriverDependenciesEnumerator) GetCurrent() (*IAppxManif
 }
 
 // GetHasCurrent dispatches through IAppxManifestDriverDependenciesEnumerator's vtable slot 4.
-func (self *IAppxManifestDriverDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestDriverDependenciesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestDriverDependenciesEnumerator's vtable slot 5.
-func (self *IAppxManifestDriverDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestDriverDependenciesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1210cb94-5a92-4602-be24-79f318af4af9
@@ -1528,17 +1528,17 @@ func (self *IAppxManifestHostRuntimeDependenciesEnumerator) GetCurrent() (*IAppx
 }
 
 // GetHasCurrent dispatches through IAppxManifestHostRuntimeDependenciesEnumerator's vtable slot 4.
-func (self *IAppxManifestHostRuntimeDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestHostRuntimeDependenciesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestHostRuntimeDependenciesEnumerator's vtable slot 5.
-func (self *IAppxManifestHostRuntimeDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestHostRuntimeDependenciesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 3455d234-8414-410d-95c7-7b35255b8391
@@ -1602,17 +1602,17 @@ func (self *IAppxManifestMainPackageDependenciesEnumerator) GetCurrent() (*IAppx
 }
 
 // GetHasCurrent dispatches through IAppxManifestMainPackageDependenciesEnumerator's vtable slot 4.
-func (self *IAppxManifestMainPackageDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestMainPackageDependenciesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestMainPackageDependenciesEnumerator's vtable slot 5.
-func (self *IAppxManifestMainPackageDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestMainPackageDependenciesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestMainPackageDependency: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestmainpackagedependency
@@ -1661,17 +1661,17 @@ func (self *IAppxManifestOSPackageDependenciesEnumerator) GetCurrent() (*IAppxMa
 }
 
 // GetHasCurrent dispatches through IAppxManifestOSPackageDependenciesEnumerator's vtable slot 4.
-func (self *IAppxManifestOSPackageDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestOSPackageDependenciesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestOSPackageDependenciesEnumerator's vtable slot 5.
-func (self *IAppxManifestOSPackageDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestOSPackageDependenciesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 154995ee-54a6-4f14-ac97-d8cf0519644b
@@ -1706,10 +1706,10 @@ type IAppxManifestOptionalPackageInfo struct {
 var IID_IAppxManifestOptionalPackageInfo = win32.GUID{Data1: 0x2634847d, Data2: 0x5b5d, Data3: 0x4fe5, Data4: [8]byte{0xa2, 0x43, 0x00, 0x2f, 0xf9, 0x5e, 0xdc, 0x7e}}
 
 // GetIsOptionalPackage dispatches through IAppxManifestOptionalPackageInfo's vtable slot 3.
-func (self *IAppxManifestOptionalPackageInfo) GetIsOptionalPackage() (foundation.BOOL, error) {
+func (self *IAppxManifestOptionalPackageInfo) GetIsOptionalPackage() (bool, error) {
 	_isOptionalPackage := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isOptionalPackage))))
-	return *_isOptionalPackage, win32.ErrIfFailed(int32(r1))
+	return *_isOptionalPackage != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetMainPackageName dispatches through IAppxManifestOptionalPackageInfo's vtable slot 4.
@@ -1736,17 +1736,17 @@ func (self *IAppxManifestPackageDependenciesEnumerator) GetCurrent() (*IAppxMani
 }
 
 // GetHasCurrent dispatches through IAppxManifestPackageDependenciesEnumerator's vtable slot 4.
-func (self *IAppxManifestPackageDependenciesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestPackageDependenciesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestPackageDependenciesEnumerator's vtable slot 5.
-func (self *IAppxManifestPackageDependenciesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestPackageDependenciesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestPackageDependency: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestpackagedependency
@@ -1804,10 +1804,10 @@ type IAppxManifestPackageDependency3 struct {
 var IID_IAppxManifestPackageDependency3 = win32.GUID{Data1: 0x1ac56374, Data2: 0x6198, Data3: 0x4d6b, Data4: [8]byte{0x92, 0xe4, 0x74, 0x9d, 0x5a, 0xb8, 0xa8, 0x95}}
 
 // GetIsOptional dispatches through IAppxManifestPackageDependency3's vtable slot 3.
-func (self *IAppxManifestPackageDependency3) GetIsOptional() (foundation.BOOL, error) {
+func (self *IAppxManifestPackageDependency3) GetIsOptional() (bool, error) {
 	_isOptional := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isOptional))))
-	return *_isOptional, win32.ErrIfFailed(int32(r1))
+	return *_isOptional != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestPackageId: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestpackageid
@@ -1855,11 +1855,11 @@ func (self *IAppxManifestPackageId) GetResourceId() (foundation.PWSTR, error) {
 }
 
 // ComparePublisher dispatches through IAppxManifestPackageId's vtable slot 8.
-func (self *IAppxManifestPackageId) ComparePublisher(other string) (foundation.BOOL, error) {
+func (self *IAppxManifestPackageId) ComparePublisher(other string) (bool, error) {
 	_other := win32.UTF16Ptr(other)
 	_isSame := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_other)), uintptr(win32.OutParam(unsafe.Pointer(_isSame))))
-	return *_isSame, win32.ErrIfFailed(int32(r1))
+	return *_isSame != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetPackageFullName dispatches through IAppxManifestPackageId's vtable slot 9.
@@ -1902,11 +1902,11 @@ type IAppxManifestProperties struct {
 var IID_IAppxManifestProperties = win32.GUID{Data1: 0x03faf64d, Data2: 0xf26f, Data3: 0x4b2c, Data4: [8]byte{0xaa, 0xf7, 0x8f, 0xe7, 0x78, 0x9b, 0x8b, 0xca}}
 
 // GetBoolValue dispatches through IAppxManifestProperties's vtable slot 3.
-func (self *IAppxManifestProperties) GetBoolValue(name string) (foundation.BOOL, error) {
+func (self *IAppxManifestProperties) GetBoolValue(name string) (bool, error) {
 	_name := win32.UTF16Ptr(name)
 	_value := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
-	return *_value, win32.ErrIfFailed(int32(r1))
+	return *_value != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetStringValue dispatches through IAppxManifestProperties's vtable slot 4.
@@ -1962,17 +1962,17 @@ func (self *IAppxManifestQualifiedResourcesEnumerator) GetCurrent() (*IAppxManif
 }
 
 // GetHasCurrent dispatches through IAppxManifestQualifiedResourcesEnumerator's vtable slot 4.
-func (self *IAppxManifestQualifiedResourcesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestQualifiedResourcesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestQualifiedResourcesEnumerator's vtable slot 5.
-func (self *IAppxManifestQualifiedResourcesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestQualifiedResourcesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestReader: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifestreader
@@ -2127,10 +2127,10 @@ type IAppxManifestReader6 struct {
 var IID_IAppxManifestReader6 = win32.GUID{Data1: 0x34deaca4, Data2: 0xd3c0, Data3: 0x4e3e, Data4: [8]byte{0xb3, 0x12, 0xe4, 0x26, 0x25, 0xe3, 0x80, 0x7e}}
 
 // GetIsNonQualifiedResourcePackage dispatches through IAppxManifestReader6's vtable slot 3.
-func (self *IAppxManifestReader6) GetIsNonQualifiedResourcePackage() (foundation.BOOL, error) {
+func (self *IAppxManifestReader6) GetIsNonQualifiedResourcePackage() (bool, error) {
 	_isNonQualifiedResourcePackage := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isNonQualifiedResourcePackage))))
-	return *_isNonQualifiedResourcePackage, win32.ErrIfFailed(int32(r1))
+	return *_isNonQualifiedResourcePackage != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 8efe6f27-0ce0-4988-b32d-738eb63db3b7
@@ -2179,17 +2179,17 @@ func (self *IAppxManifestResourcesEnumerator) GetCurrent() (foundation.PWSTR, er
 }
 
 // GetHasCurrent dispatches through IAppxManifestResourcesEnumerator's vtable slot 4.
-func (self *IAppxManifestResourcesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestResourcesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestResourcesEnumerator's vtable slot 5.
-func (self *IAppxManifestResourcesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestResourcesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 36537f36-27a4-4788-88c0-733819575017
@@ -2208,17 +2208,17 @@ func (self *IAppxManifestTargetDeviceFamiliesEnumerator) GetCurrent() (*IAppxMan
 }
 
 // GetHasCurrent dispatches through IAppxManifestTargetDeviceFamiliesEnumerator's vtable slot 4.
-func (self *IAppxManifestTargetDeviceFamiliesEnumerator) GetHasCurrent() (foundation.BOOL, error) {
+func (self *IAppxManifestTargetDeviceFamiliesEnumerator) GetHasCurrent() (bool, error) {
 	_hasCurrent := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasCurrent))))
-	return *_hasCurrent, win32.ErrIfFailed(int32(r1))
+	return *_hasCurrent != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MoveNext dispatches through IAppxManifestTargetDeviceFamiliesEnumerator's vtable slot 5.
-func (self *IAppxManifestTargetDeviceFamiliesEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IAppxManifestTargetDeviceFamiliesEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IAppxManifestTargetDeviceFamily: https://learn.microsoft.com/windows/win32/api/appxpackaging/nn-appxpackaging-iappxmanifesttargetdevicefamily

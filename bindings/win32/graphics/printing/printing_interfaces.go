@@ -1357,12 +1357,16 @@ func (self *IPrintReadStream) Seek(dlibMove int64, dwOrigin uint32, plibNewPosit
 }
 
 // ReadBytes dispatches through IPrintReadStream's vtable slot 4.
-func (self *IPrintReadStream) ReadBytes(pvBuffer []byte, pcbRead *uint32, pbEndOfFile *foundation.BOOL) error {
+func (self *IPrintReadStream) ReadBytes(pvBuffer []byte, pcbRead *uint32, pbEndOfFile *bool) error {
 	var _pvBuffer *byte
 	if len(pvBuffer) > 0 {
 		_pvBuffer = &pvBuffer[0]
 	}
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(pcbRead)), uintptr(unsafe.Pointer(pbEndOfFile)))
+	_pbEndOfFile := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(pcbRead)), uintptr(win32.OutParam(unsafe.Pointer(_pbEndOfFile))))
+	if pbEndOfFile != nil {
+		*pbEndOfFile = *_pbEndOfFile != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1566,10 +1570,10 @@ func (self *IPrintSchemaFeature) GetOption(bstrName foundation.BSTR, bstrNamespa
 }
 
 // Get_DisplayUI dispatches through IPrintSchemaFeature's vtable slot 15.
-func (self *IPrintSchemaFeature) Get_DisplayUI() (foundation.BOOL, error) {
+func (self *IPrintSchemaFeature) Get_DisplayUI() (bool, error) {
 	_pbShow := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbShow))))
-	return *_pbShow, win32.ErrIfFailed(int32(r1))
+	return *_pbShow != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IID: 1f6342f2-d848-42e3-8995-c10a9ef9a3ba
@@ -1596,10 +1600,10 @@ type IPrintSchemaOption struct {
 var IID_IPrintSchemaOption = win32.GUID{Data1: 0x66bb2f51, Data2: 0x5844, Data3: 0x4997, Data4: [8]byte{0x8d, 0x70, 0x4b, 0x7c, 0xc2, 0x21, 0xcf, 0x92}}
 
 // Get_Selected dispatches through IPrintSchemaOption's vtable slot 11.
-func (self *IPrintSchemaOption) Get_Selected() (foundation.BOOL, error) {
+func (self *IPrintSchemaOption) Get_Selected() (bool, error) {
 	_pbIsSelected := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsSelected))))
-	return *_pbIsSelected, win32.ErrIfFailed(int32(r1))
+	return *_pbIsSelected != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_Constrained dispatches through IPrintSchemaOption's vtable slot 12.
@@ -1726,10 +1730,10 @@ type IPrintSchemaParameterDefinition struct {
 var IID_IPrintSchemaParameterDefinition = win32.GUID{Data1: 0xb5ade81e, Data2: 0x0e61, Data3: 0x4fe1, Data4: [8]byte{0x81, 0xc6, 0xc3, 0x33, 0xe4, 0xff, 0xe0, 0xf1}}
 
 // Get_UserInputRequired dispatches through IPrintSchemaParameterDefinition's vtable slot 11.
-func (self *IPrintSchemaParameterDefinition) Get_UserInputRequired() (foundation.BOOL, error) {
+func (self *IPrintSchemaParameterDefinition) Get_UserInputRequired() (bool, error) {
 	_pbIsRequired := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbIsRequired))))
-	return *_pbIsRequired, win32.ErrIfFailed(int32(r1))
+	return *_pbIsRequired != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UnitType dispatches through IPrintSchemaParameterDefinition's vtable slot 12.
@@ -2131,10 +2135,10 @@ func (self *IPrinterExtensionEventArgs) Get_DetailedReasonId() (win32.GUID, erro
 }
 
 // Get_WindowModal dispatches through IPrinterExtensionEventArgs's vtable slot 16.
-func (self *IPrinterExtensionEventArgs) Get_WindowModal() (foundation.BOOL, error) {
+func (self *IPrinterExtensionEventArgs) Get_WindowModal() (bool, error) {
 	_pbModal := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbModal))))
-	return *_pbModal, win32.ErrIfFailed(int32(r1))
+	return *_pbModal != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_WindowParent dispatches through IPrinterExtensionEventArgs's vtable slot 17.
@@ -2195,10 +2199,10 @@ type IPrinterPropertyBag struct {
 var IID_IPrinterPropertyBag = win32.GUID{Data1: 0xfea77364, Data2: 0xdf95, Data3: 0x4a23, Data4: [8]byte{0xa9, 0x05, 0x01, 0x9b, 0x79, 0xa8, 0xe4, 0x81}}
 
 // GetBool dispatches through IPrinterPropertyBag's vtable slot 7.
-func (self *IPrinterPropertyBag) GetBool(bstrName foundation.BSTR) (foundation.BOOL, error) {
+func (self *IPrinterPropertyBag) GetBool(bstrName foundation.BSTR) (bool, error) {
 	_pbValue := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_pbValue))))
-	return *_pbValue, win32.ErrIfFailed(int32(r1))
+	return *_pbValue != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetBool dispatches through IPrinterPropertyBag's vtable slot 8.
@@ -2401,10 +2405,10 @@ type IPrinterScriptablePropertyBag struct {
 var IID_IPrinterScriptablePropertyBag = win32.GUID{Data1: 0x91c7765f, Data2: 0xed57, Data3: 0x49ad, Data4: [8]byte{0x8b, 0x01, 0xdc, 0x24, 0x81, 0x6a, 0x52, 0x94}}
 
 // GetBool dispatches through IPrinterScriptablePropertyBag's vtable slot 7.
-func (self *IPrinterScriptablePropertyBag) GetBool(bstrName foundation.BSTR) (foundation.BOOL, error) {
+func (self *IPrinterScriptablePropertyBag) GetBool(bstrName foundation.BSTR) (bool, error) {
 	_pbValue := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(win32.OutParam(unsafe.Pointer(_pbValue))))
-	return *_pbValue, win32.ErrIfFailed(int32(r1))
+	return *_pbValue != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // SetBool dispatches through IPrinterScriptablePropertyBag's vtable slot 8.

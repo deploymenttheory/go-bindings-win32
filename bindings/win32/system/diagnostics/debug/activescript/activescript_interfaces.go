@@ -265,8 +265,12 @@ func (self *IActiveScriptAuthor) GetInfoFromContext(pszCode string, cchCode uint
 }
 
 // IsCommitChar dispatches through IActiveScriptAuthor's vtable slot 16.
-func (self *IActiveScriptAuthor) IsCommitChar(ch uint16, pfcommit *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ch), uintptr(unsafe.Pointer(pfcommit)))
+func (self *IActiveScriptAuthor) IsCommitChar(ch uint16, pfcommit *bool) error {
+	_pfcommit := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ch), uintptr(win32.OutParam(unsafe.Pointer(_pfcommit))))
+	if pfcommit != nil {
+		*pfcommit = *_pfcommit != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -971,8 +975,16 @@ func (self *IActiveScriptSiteDebug32) GetRootApplicationNode(ppdanRoot **IDebugA
 }
 
 // OnScriptErrorDebug dispatches through IActiveScriptSiteDebug32's vtable slot 6.
-func (self *IActiveScriptSiteDebug32) OnScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pfEnterDebugger)), uintptr(unsafe.Pointer(pfCallOnScriptErrorWhenContinuing)))
+func (self *IActiveScriptSiteDebug32) OnScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfEnterDebugger *bool, pfCallOnScriptErrorWhenContinuing *bool) error {
+	_pfEnterDebugger := new(foundation.BOOL)
+	_pfCallOnScriptErrorWhenContinuing := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnterDebugger))), uintptr(win32.OutParam(unsafe.Pointer(_pfCallOnScriptErrorWhenContinuing))))
+	if pfEnterDebugger != nil {
+		*pfEnterDebugger = *_pfEnterDebugger != 0
+	}
+	if pfCallOnScriptErrorWhenContinuing != nil {
+		*pfCallOnScriptErrorWhenContinuing = *_pfCallOnScriptErrorWhenContinuing != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1003,8 +1015,16 @@ func (self *IActiveScriptSiteDebug64) GetRootApplicationNode(ppdanRoot **IDebugA
 }
 
 // OnScriptErrorDebug dispatches through IActiveScriptSiteDebug64's vtable slot 6.
-func (self *IActiveScriptSiteDebug64) OnScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pfEnterDebugger)), uintptr(unsafe.Pointer(pfCallOnScriptErrorWhenContinuing)))
+func (self *IActiveScriptSiteDebug64) OnScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfEnterDebugger *bool, pfCallOnScriptErrorWhenContinuing *bool) error {
+	_pfEnterDebugger := new(foundation.BOOL)
+	_pfCallOnScriptErrorWhenContinuing := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnterDebugger))), uintptr(win32.OutParam(unsafe.Pointer(_pfCallOnScriptErrorWhenContinuing))))
+	if pfEnterDebugger != nil {
+		*pfEnterDebugger = *_pfEnterDebugger != 0
+	}
+	if pfCallOnScriptErrorWhenContinuing != nil {
+		*pfCallOnScriptErrorWhenContinuing = *_pfCallOnScriptErrorWhenContinuing != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1017,8 +1037,12 @@ type IActiveScriptSiteDebugEx struct {
 var IID_IActiveScriptSiteDebugEx = win32.GUID{Data1: 0xbb722ccb, Data2: 0x6ad2, Data3: 0x41c6, Data4: [8]byte{0xb7, 0x80, 0xaf, 0x9c, 0x03, 0xee, 0x69, 0xf5}}
 
 // OnCanNotJITScriptErrorDebug dispatches through IActiveScriptSiteDebugEx's vtable slot 3.
-func (self *IActiveScriptSiteDebugEx) OnCanNotJITScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pfCallOnScriptErrorWhenContinuing)))
+func (self *IActiveScriptSiteDebugEx) OnCanNotJITScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfCallOnScriptErrorWhenContinuing *bool) error {
+	_pfCallOnScriptErrorWhenContinuing := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(win32.OutParam(unsafe.Pointer(_pfCallOnScriptErrorWhenContinuing))))
+	if pfCallOnScriptErrorWhenContinuing != nil {
+		*pfCallOnScriptErrorWhenContinuing = *_pfCallOnScriptErrorWhenContinuing != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1417,8 +1441,12 @@ func (self *IDebugApplication32) FireDebuggerEvent(riid *win32.GUID, punk *syste
 }
 
 // HandleRuntimeError dispatches through IDebugApplication32's vtable slot 29.
-func (self *IDebugApplication32) HandleRuntimeError(pErrorDebug *IActiveScriptErrorDebug, pScriptSite *IActiveScriptSite, pbra *BREAKRESUMEACTION, perra *ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pScriptSite)), uintptr(unsafe.Pointer(pbra)), uintptr(unsafe.Pointer(perra)), uintptr(unsafe.Pointer(pfCallOnScriptError)))
+func (self *IDebugApplication32) HandleRuntimeError(pErrorDebug *IActiveScriptErrorDebug, pScriptSite *IActiveScriptSite, pbra *BREAKRESUMEACTION, perra *ERRORRESUMEACTION, pfCallOnScriptError *bool) error {
+	_pfCallOnScriptError := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pScriptSite)), uintptr(unsafe.Pointer(pbra)), uintptr(unsafe.Pointer(perra)), uintptr(win32.OutParam(unsafe.Pointer(_pfCallOnScriptError))))
+	if pfCallOnScriptError != nil {
+		*pfCallOnScriptError = *_pfCallOnScriptError != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1547,8 +1575,12 @@ func (self *IDebugApplication64) FireDebuggerEvent(riid *win32.GUID, punk *syste
 }
 
 // HandleRuntimeError dispatches through IDebugApplication64's vtable slot 29.
-func (self *IDebugApplication64) HandleRuntimeError(pErrorDebug *IActiveScriptErrorDebug, pScriptSite *IActiveScriptSite, pbra *BREAKRESUMEACTION, perra *ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pScriptSite)), uintptr(unsafe.Pointer(pbra)), uintptr(unsafe.Pointer(perra)), uintptr(unsafe.Pointer(pfCallOnScriptError)))
+func (self *IDebugApplication64) HandleRuntimeError(pErrorDebug *IActiveScriptErrorDebug, pScriptSite *IActiveScriptSite, pbra *BREAKRESUMEACTION, perra *ERRORRESUMEACTION, pfCallOnScriptError *bool) error {
+	_pfCallOnScriptError := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pScriptSite)), uintptr(unsafe.Pointer(pbra)), uintptr(unsafe.Pointer(perra)), uintptr(win32.OutParam(unsafe.Pointer(_pfCallOnScriptError))))
+	if pfCallOnScriptError != nil {
+		*pfCallOnScriptError = *_pfCallOnScriptError != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1733,14 +1765,22 @@ func (self *IDebugApplicationThread11032) GetActiveThreadRequestCount(puiThreadR
 }
 
 // IsSuspendedForBreakPoint dispatches through IDebugApplicationThread11032's vtable slot 4.
-func (self *IDebugApplicationThread11032) IsSuspendedForBreakPoint(pfIsSuspended *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsSuspended)))
+func (self *IDebugApplicationThread11032) IsSuspendedForBreakPoint(pfIsSuspended *bool) error {
+	_pfIsSuspended := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsSuspended))))
+	if pfIsSuspended != nil {
+		*pfIsSuspended = *_pfIsSuspended != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsThreadCallable dispatches through IDebugApplicationThread11032's vtable slot 5.
-func (self *IDebugApplicationThread11032) IsThreadCallable(pfIsCallable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsCallable)))
+func (self *IDebugApplicationThread11032) IsThreadCallable(pfIsCallable *bool) error {
+	_pfIsCallable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsCallable))))
+	if pfIsCallable != nil {
+		*pfIsCallable = *_pfIsCallable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1765,14 +1805,22 @@ func (self *IDebugApplicationThread11064) GetActiveThreadRequestCount(puiThreadR
 }
 
 // IsSuspendedForBreakPoint dispatches through IDebugApplicationThread11064's vtable slot 4.
-func (self *IDebugApplicationThread11064) IsSuspendedForBreakPoint(pfIsSuspended *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsSuspended)))
+func (self *IDebugApplicationThread11064) IsSuspendedForBreakPoint(pfIsSuspended *bool) error {
+	_pfIsSuspended := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsSuspended))))
+	if pfIsSuspended != nil {
+		*pfIsSuspended = *_pfIsSuspended != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsThreadCallable dispatches through IDebugApplicationThread11064's vtable slot 5.
-func (self *IDebugApplicationThread11064) IsThreadCallable(pfIsCallable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsCallable)))
+func (self *IDebugApplicationThread11064) IsThreadCallable(pfIsCallable *bool) error {
+	_pfIsCallable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsCallable))))
+	if pfIsCallable != nil {
+		*pfIsCallable = *_pfIsCallable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2223,8 +2271,12 @@ func (self *IDebugDocumentHost) OnCreateDocumentContext(ppunkOuter **systemcom.I
 }
 
 // GetPathName dispatches through IDebugDocumentHost's vtable slot 6.
-func (self *IDebugDocumentHost) GetPathName(pbstrLongName *foundation.BSTR, pfIsOriginalFile *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLongName)), uintptr(unsafe.Pointer(pfIsOriginalFile)))
+func (self *IDebugDocumentHost) GetPathName(pbstrLongName *foundation.BSTR, pfIsOriginalFile *bool) error {
+	_pfIsOriginalFile := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLongName)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsOriginalFile))))
+	if pfIsOriginalFile != nil {
+		*pfIsOriginalFile = *_pfIsOriginalFile != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2405,8 +2457,12 @@ type IDebugDocumentTextExternalAuthor struct {
 var IID_IDebugDocumentTextExternalAuthor = win32.GUID{Data1: 0x51973c25, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetPathName dispatches through IDebugDocumentTextExternalAuthor's vtable slot 3.
-func (self *IDebugDocumentTextExternalAuthor) GetPathName(pbstrLongName *foundation.BSTR, pfIsOriginalFile *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLongName)), uintptr(unsafe.Pointer(pfIsOriginalFile)))
+func (self *IDebugDocumentTextExternalAuthor) GetPathName(pbstrLongName *foundation.BSTR, pfIsOriginalFile *bool) error {
+	_pfIsOriginalFile := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLongName)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsOriginalFile))))
+	if pfIsOriginalFile != nil {
+		*pfIsOriginalFile = *_pfIsOriginalFile != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2987,8 +3043,12 @@ type IJsDebugBreakPoint struct {
 var IID_IJsDebugBreakPoint = win32.GUID{Data1: 0xdf6773e3, Data2: 0xed8d, Data3: 0x488b, Data4: [8]byte{0x8a, 0x3e, 0x58, 0x12, 0x57, 0x7d, 0x15, 0x42}}
 
 // IsEnabled dispatches through IJsDebugBreakPoint's vtable slot 3.
-func (self *IJsDebugBreakPoint) IsEnabled(pIsEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsEnabled)))
+func (self *IJsDebugBreakPoint) IsEnabled(pIsEnabled *bool) error {
+	_pIsEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsEnabled))))
+	if pIsEnabled != nil {
+		*pIsEnabled = *_pIsEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -120,8 +120,12 @@ func MagGetImageScalingCallback(hwnd foundation.HWND) MagImageScalingCallback {
 // MagGetInputTransform calls MAGNIFICATION!MagGetInputTransform.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maggetinputtransform
 // Minimum OS: windows8.0.
-func MagGetInputTransform(pfEnabled *foundation.BOOL, pRectSource *foundation.RECT, pRectDest *foundation.RECT) bool {
-	r1, _, _ := syscall.SyscallN(procMagGetInputTransform.Addr(), uintptr(unsafe.Pointer(pfEnabled)), uintptr(unsafe.Pointer(pRectSource)), uintptr(unsafe.Pointer(pRectDest)))
+func MagGetInputTransform(pfEnabled *bool, pRectSource *foundation.RECT, pRectDest *foundation.RECT) bool {
+	_pfEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procMagGetInputTransform.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))), uintptr(unsafe.Pointer(pRectSource)), uintptr(unsafe.Pointer(pRectDest)))
+	if pfEnabled != nil {
+		*pfEnabled = *_pfEnabled != 0
+	}
 	return r1 != 0
 }
 

@@ -258,8 +258,12 @@ func ProcessIdToSessionId(dwProcessId uint32, pSessionId *uint32) error {
 }
 
 // WTSActiveSessionExists calls WTSAPI32!WTSActiveSessionExists.
-func WTSActiveSessionExists(pbActiveSessionExists *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procWTSActiveSessionExists.Addr(), uintptr(unsafe.Pointer(pbActiveSessionExists)))
+func WTSActiveSessionExists(pbActiveSessionExists *bool) bool {
+	_pbActiveSessionExists := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWTSActiveSessionExists.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbActiveSessionExists))))
+	if pbActiveSessionExists != nil {
+		*pbActiveSessionExists = *_pbActiveSessionExists != 0
+	}
 	return r1 != 0
 }
 
@@ -579,8 +583,12 @@ func WTSGetListenerSecurityA(pReserved unsafe.Pointer, Reserved uint32, pListene
 // WTSIsChildSessionsEnabled calls WTSAPI32!WTSIsChildSessionsEnabled.
 // https://learn.microsoft.com/windows/win32/api/wtsapi32/nf-wtsapi32-wtsischildsessionsenabled
 // Minimum OS: windows8.0.
-func WTSIsChildSessionsEnabled(pbEnabled *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procWTSIsChildSessionsEnabled.Addr(), uintptr(unsafe.Pointer(pbEnabled)))
+func WTSIsChildSessionsEnabled(pbEnabled *bool) bool {
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWTSIsChildSessionsEnabled.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return r1 != 0
 }
 

@@ -1428,8 +1428,12 @@ func ICSendMessage(hic HIC, msg uint32, dw1 uintptr, dw2 uintptr) foundation.LRE
 // ICSeqCompressFrame calls MSVFW32!ICSeqCompressFrame.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-icseqcompressframe
 // Minimum OS: windows5.0.
-func ICSeqCompressFrame(pc *COMPVARS, lpBits unsafe.Pointer, pfKey *foundation.BOOL, plSize *int32) unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procICSeqCompressFrame.Addr(), uintptr(unsafe.Pointer(pc)), 0, uintptr(unsafe.Pointer(lpBits)), uintptr(unsafe.Pointer(pfKey)), uintptr(unsafe.Pointer(plSize)))
+func ICSeqCompressFrame(pc *COMPVARS, lpBits unsafe.Pointer, pfKey *bool, plSize *int32) unsafe.Pointer {
+	_pfKey := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procICSeqCompressFrame.Addr(), uintptr(unsafe.Pointer(pc)), 0, uintptr(unsafe.Pointer(lpBits)), uintptr(win32.OutParam(unsafe.Pointer(_pfKey))), uintptr(unsafe.Pointer(plSize)))
+	if pfKey != nil {
+		*pfKey = *_pfKey != 0
+	}
 	return unsafe.Pointer(r1)
 }
 

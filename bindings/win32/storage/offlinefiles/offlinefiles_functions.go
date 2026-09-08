@@ -42,25 +42,49 @@ var Procs = struct {
 // OfflineFilesEnable calls CSCAPI!OfflineFilesEnable.
 // https://learn.microsoft.com/windows/win32/api/cscapi/nf-cscapi-offlinefilesenable
 // Minimum OS: windows6.0.6000.
-func OfflineFilesEnable(bEnable bool, pbRebootRequired *foundation.BOOL) uint32 {
+func OfflineFilesEnable(bEnable bool, pbRebootRequired *bool) uint32 {
 	_bEnable := win32.Bool32(bEnable)
-	r1, _, _ := syscall.SyscallN(procOfflineFilesEnable.Addr(), uintptr(_bEnable), uintptr(unsafe.Pointer(pbRebootRequired)))
+	_pbRebootRequired := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procOfflineFilesEnable.Addr(), uintptr(_bEnable), uintptr(win32.OutParam(unsafe.Pointer(_pbRebootRequired))))
+	if pbRebootRequired != nil {
+		*pbRebootRequired = *_pbRebootRequired != 0
+	}
 	return uint32(r1)
 }
 
 // OfflineFilesQueryStatus calls CSCAPI!OfflineFilesQueryStatus.
 // https://learn.microsoft.com/windows/win32/api/cscapi/nf-cscapi-offlinefilesquerystatus
 // Minimum OS: windows6.0.6000.
-func OfflineFilesQueryStatus(pbActive *foundation.BOOL, pbEnabled *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procOfflineFilesQueryStatus.Addr(), uintptr(unsafe.Pointer(pbActive)), uintptr(unsafe.Pointer(pbEnabled)))
+func OfflineFilesQueryStatus(pbActive *bool, pbEnabled *bool) uint32 {
+	_pbActive := new(foundation.BOOL)
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procOfflineFilesQueryStatus.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbActive))), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbActive != nil {
+		*pbActive = *_pbActive != 0
+	}
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return uint32(r1)
 }
 
 // OfflineFilesQueryStatusEx calls CSCAPI!OfflineFilesQueryStatusEx.
 // https://learn.microsoft.com/windows/win32/api/cscapi/nf-cscapi-offlinefilesquerystatusex
 // Minimum OS: windows8.0.
-func OfflineFilesQueryStatusEx(pbActive *foundation.BOOL, pbEnabled *foundation.BOOL, pbAvailable *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procOfflineFilesQueryStatusEx.Addr(), uintptr(unsafe.Pointer(pbActive)), uintptr(unsafe.Pointer(pbEnabled)), uintptr(unsafe.Pointer(pbAvailable)))
+func OfflineFilesQueryStatusEx(pbActive *bool, pbEnabled *bool, pbAvailable *bool) uint32 {
+	_pbActive := new(foundation.BOOL)
+	_pbEnabled := new(foundation.BOOL)
+	_pbAvailable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procOfflineFilesQueryStatusEx.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbActive))), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))), uintptr(win32.OutParam(unsafe.Pointer(_pbAvailable))))
+	if pbActive != nil {
+		*pbActive = *_pbActive != 0
+	}
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
+	if pbAvailable != nil {
+		*pbAvailable = *_pbAvailable != 0
+	}
 	return uint32(r1)
 }
 

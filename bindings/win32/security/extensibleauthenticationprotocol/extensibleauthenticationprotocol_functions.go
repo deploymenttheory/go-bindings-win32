@@ -232,8 +232,12 @@ func EapHostPeerGetAuthStatus(sessionHandle uint32, authParam EapHostPeerAuthPar
 // EapHostPeerGetDataToUnplumbCredentials calls eappprxy!EapHostPeerGetDataToUnplumbCredentials.
 // https://learn.microsoft.com/windows/win32/api/eappapis/nf-eappapis-eaphostpeergetdatatounplumbcredentials
 // Minimum OS: windows10.0.10240.
-func EapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds *win32.GUID, phCredentialImpersonationToken *uintptr, sessionHandle uint32, ppEapError **EAP_ERROR, fSaveToCredMan *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procEapHostPeerGetDataToUnplumbCredentials.Addr(), uintptr(unsafe.Pointer(pConnectionIdThatLastSavedCreds)), uintptr(unsafe.Pointer(phCredentialImpersonationToken)), uintptr(sessionHandle), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(fSaveToCredMan)))
+func EapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds *win32.GUID, phCredentialImpersonationToken *uintptr, sessionHandle uint32, ppEapError **EAP_ERROR, fSaveToCredMan *bool) uint32 {
+	_fSaveToCredMan := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procEapHostPeerGetDataToUnplumbCredentials.Addr(), uintptr(unsafe.Pointer(pConnectionIdThatLastSavedCreds)), uintptr(unsafe.Pointer(phCredentialImpersonationToken)), uintptr(sessionHandle), uintptr(unsafe.Pointer(ppEapError)), uintptr(win32.OutParam(unsafe.Pointer(_fSaveToCredMan))))
+	if fSaveToCredMan != nil {
+		*fSaveToCredMan = *_fSaveToCredMan != 0
+	}
 	return uint32(r1)
 }
 
@@ -249,7 +253,7 @@ var specEapHostPeerGetIdentity = &win32.Spec{Args: []win32.Arg{win32.Word, win32
 // EapHostPeerGetIdentity calls eappprxy!EapHostPeerGetIdentity.
 // https://learn.microsoft.com/windows/win32/api/eappapis/nf-eappapis-eaphostpeergetidentity
 // Minimum OS: windows6.0.6000.
-func EapHostPeerGetIdentity(dwVersion uint32, dwFlags uint32, eapMethodType EAP_METHOD_TYPE, pConnectionData []byte, pUserData []byte, hTokenImpersonateUser foundation.HANDLE, pfInvokeUI *foundation.BOOL, pdwSizeOfUserDataOut *uint32, ppUserDataOut **byte, ppwszIdentity *foundation.PWSTR, ppEapError **EAP_ERROR, ppvReserved **byte) uint32 {
+func EapHostPeerGetIdentity(dwVersion uint32, dwFlags uint32, eapMethodType EAP_METHOD_TYPE, pConnectionData []byte, pUserData []byte, hTokenImpersonateUser foundation.HANDLE, pfInvokeUI *bool, pdwSizeOfUserDataOut *uint32, ppUserDataOut **byte, ppwszIdentity *foundation.PWSTR, ppEapError **EAP_ERROR, ppvReserved **byte) uint32 {
 	var _pConnectionData *byte
 	if len(pConnectionData) > 0 {
 		_pConnectionData = &pConnectionData[0]
@@ -258,7 +262,11 @@ func EapHostPeerGetIdentity(dwVersion uint32, dwFlags uint32, eapMethodType EAP_
 	if len(pUserData) > 0 {
 		_pUserData = &pUserData[0]
 	}
-	r1, _, _ := win32.Call(procEapHostPeerGetIdentity.Addr(), specEapHostPeerGetIdentity, nil, uintptr(dwVersion), uintptr(dwFlags), uintptr(unsafe.Pointer(&eapMethodType)), uintptr(len(pConnectionData)), uintptr(unsafe.Pointer(_pConnectionData)), uintptr(len(pUserData)), uintptr(unsafe.Pointer(_pUserData)), uintptr(hTokenImpersonateUser), uintptr(unsafe.Pointer(pfInvokeUI)), uintptr(unsafe.Pointer(pdwSizeOfUserDataOut)), uintptr(unsafe.Pointer(ppUserDataOut)), uintptr(unsafe.Pointer(ppwszIdentity)), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(ppvReserved))).Tuple()
+	_pfInvokeUI := new(foundation.BOOL)
+	r1, _, _ := win32.Call(procEapHostPeerGetIdentity.Addr(), specEapHostPeerGetIdentity, nil, uintptr(dwVersion), uintptr(dwFlags), uintptr(unsafe.Pointer(&eapMethodType)), uintptr(len(pConnectionData)), uintptr(unsafe.Pointer(_pConnectionData)), uintptr(len(pUserData)), uintptr(unsafe.Pointer(_pUserData)), uintptr(hTokenImpersonateUser), uintptr(win32.OutParam(unsafe.Pointer(_pfInvokeUI))), uintptr(unsafe.Pointer(pdwSizeOfUserDataOut)), uintptr(unsafe.Pointer(ppUserDataOut)), uintptr(unsafe.Pointer(ppwszIdentity)), uintptr(unsafe.Pointer(ppEapError)), uintptr(unsafe.Pointer(ppvReserved))).Tuple()
+	if pfInvokeUI != nil {
+		*pfInvokeUI = *_pfInvokeUI != 0
+	}
 	return uint32(r1)
 }
 

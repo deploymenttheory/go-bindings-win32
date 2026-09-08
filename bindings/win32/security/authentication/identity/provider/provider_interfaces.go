@@ -105,8 +105,12 @@ func (self *AsyncIConnectedIdentityProvider) Begin_IsConnected() error {
 }
 
 // Finish_IsConnected dispatches through AsyncIConnectedIdentityProvider's vtable slot 8.
-func (self *AsyncIConnectedIdentityProvider) Finish_IsConnected(Connected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Connected)))
+func (self *AsyncIConnectedIdentityProvider) Finish_IsConnected(Connected *bool) error {
+	_Connected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Connected))))
+	if Connected != nil {
+		*Connected = *_Connected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -474,8 +478,12 @@ func (self *IConnectedIdentityProvider) DisconnectIdentity() error {
 }
 
 // IsConnected dispatches through IConnectedIdentityProvider's vtable slot 5.
-func (self *IConnectedIdentityProvider) IsConnected(Connected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Connected)))
+func (self *IConnectedIdentityProvider) IsConnected(Connected *bool) error {
+	_Connected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Connected))))
+	if Connected != nil {
+		*Connected = *_Connected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

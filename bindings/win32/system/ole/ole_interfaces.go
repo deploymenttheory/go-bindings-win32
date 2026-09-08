@@ -712,10 +712,10 @@ func (self *IEnterpriseDropTarget) SetDropSourceEnterpriseId(identity string) er
 }
 
 // IsEvaluatingEdpPolicy dispatches through IEnterpriseDropTarget's vtable slot 4.
-func (self *IEnterpriseDropTarget) IsEvaluatingEdpPolicy() (foundation.BOOL, error) {
+func (self *IEnterpriseDropTarget) IsEvaluatingEdpPolicy() (bool, error) {
 	_value := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
-	return *_value, win32.ErrIfFailed(int32(r1))
+	return *_value != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IEnumOLEVERB: https://learn.microsoft.com/windows/win32/api/oleidl/nn-oleidl-ienumoleverb
@@ -904,8 +904,12 @@ func (self *IFont) Put_Size(size systemcom.CY) error {
 }
 
 // Get_Bold dispatches through IFont's vtable slot 7.
-func (self *IFont) Get_Bold(pBold *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBold)))
+func (self *IFont) Get_Bold(pBold *bool) error {
+	_pBold := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pBold))))
+	if pBold != nil {
+		*pBold = *_pBold != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -917,8 +921,12 @@ func (self *IFont) Put_Bold(bold bool) error {
 }
 
 // Get_Italic dispatches through IFont's vtable slot 9.
-func (self *IFont) Get_Italic(pItalic *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItalic)))
+func (self *IFont) Get_Italic(pItalic *bool) error {
+	_pItalic := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pItalic))))
+	if pItalic != nil {
+		*pItalic = *_pItalic != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -930,8 +938,12 @@ func (self *IFont) Put_Italic(italic bool) error {
 }
 
 // Get_Underline dispatches through IFont's vtable slot 11.
-func (self *IFont) Get_Underline(pUnderline *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnderline)))
+func (self *IFont) Get_Underline(pUnderline *bool) error {
+	_pUnderline := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pUnderline))))
+	if pUnderline != nil {
+		*pUnderline = *_pUnderline != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -943,8 +955,12 @@ func (self *IFont) Put_Underline(underline bool) error {
 }
 
 // Get_Strikethrough dispatches through IFont's vtable slot 13.
-func (self *IFont) Get_Strikethrough(pStrikethrough *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStrikethrough)))
+func (self *IFont) Get_Strikethrough(pStrikethrough *bool) error {
+	_pStrikethrough := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pStrikethrough))))
+	if pStrikethrough != nil {
+		*pStrikethrough = *_pStrikethrough != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1767,8 +1783,12 @@ type IOleInPlaceSiteEx struct {
 var IID_IOleInPlaceSiteEx = win32.GUID{Data1: 0x9c2cad80, Data2: 0x3424, Data3: 0x11cf, Data4: [8]byte{0xb6, 0x70, 0x00, 0xaa, 0x00, 0x4c, 0xd6, 0xd8}}
 
 // OnInPlaceActivateEx dispatches through IOleInPlaceSiteEx's vtable slot 15.
-func (self *IOleInPlaceSiteEx) OnInPlaceActivateEx(pfNoRedraw *foundation.BOOL, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfNoRedraw)), uintptr(dwFlags))
+func (self *IOleInPlaceSiteEx) OnInPlaceActivateEx(pfNoRedraw *bool, dwFlags uint32) error {
+	_pfNoRedraw := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfNoRedraw))), uintptr(dwFlags))
+	if pfNoRedraw != nil {
+		*pfNoRedraw = *_pfNoRedraw != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2219,8 +2239,16 @@ func (self *IOleUILinkContainerA) SetLinkSource(dwLink uint32, lpszDisplayName f
 }
 
 // GetLinkSource dispatches through IOleUILinkContainerA's vtable slot 7.
-func (self *IOleUILinkContainerA) GetLinkSource(dwLink uint32, lplpszDisplayName *foundation.PSTR, lplenFileName *uint32, lplpszFullLinkType *foundation.PSTR, lplpszShortLinkType *foundation.PSTR, lpfSourceAvailable *foundation.BOOL, lpfIsSelected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwLink), uintptr(unsafe.Pointer(lplpszDisplayName)), uintptr(unsafe.Pointer(lplenFileName)), uintptr(unsafe.Pointer(lplpszFullLinkType)), uintptr(unsafe.Pointer(lplpszShortLinkType)), uintptr(unsafe.Pointer(lpfSourceAvailable)), uintptr(unsafe.Pointer(lpfIsSelected)))
+func (self *IOleUILinkContainerA) GetLinkSource(dwLink uint32, lplpszDisplayName *foundation.PSTR, lplenFileName *uint32, lplpszFullLinkType *foundation.PSTR, lplpszShortLinkType *foundation.PSTR, lpfSourceAvailable *bool, lpfIsSelected *bool) error {
+	_lpfSourceAvailable := new(foundation.BOOL)
+	_lpfIsSelected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwLink), uintptr(unsafe.Pointer(lplpszDisplayName)), uintptr(unsafe.Pointer(lplenFileName)), uintptr(unsafe.Pointer(lplpszFullLinkType)), uintptr(unsafe.Pointer(lplpszShortLinkType)), uintptr(win32.OutParam(unsafe.Pointer(_lpfSourceAvailable))), uintptr(win32.OutParam(unsafe.Pointer(_lpfIsSelected))))
+	if lpfSourceAvailable != nil {
+		*lpfSourceAvailable = *_lpfSourceAvailable != 0
+	}
+	if lpfIsSelected != nil {
+		*lpfIsSelected = *_lpfIsSelected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2276,8 +2304,16 @@ func (self *IOleUILinkContainerW) SetLinkSource(dwLink uint32, lpszDisplayName s
 }
 
 // GetLinkSource dispatches through IOleUILinkContainerW's vtable slot 7.
-func (self *IOleUILinkContainerW) GetLinkSource(dwLink uint32, lplpszDisplayName *foundation.PWSTR, lplenFileName *uint32, lplpszFullLinkType *foundation.PWSTR, lplpszShortLinkType *foundation.PWSTR, lpfSourceAvailable *foundation.BOOL, lpfIsSelected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwLink), uintptr(unsafe.Pointer(lplpszDisplayName)), uintptr(unsafe.Pointer(lplenFileName)), uintptr(unsafe.Pointer(lplpszFullLinkType)), uintptr(unsafe.Pointer(lplpszShortLinkType)), uintptr(unsafe.Pointer(lpfSourceAvailable)), uintptr(unsafe.Pointer(lpfIsSelected)))
+func (self *IOleUILinkContainerW) GetLinkSource(dwLink uint32, lplpszDisplayName *foundation.PWSTR, lplenFileName *uint32, lplpszFullLinkType *foundation.PWSTR, lplpszShortLinkType *foundation.PWSTR, lpfSourceAvailable *bool, lpfIsSelected *bool) error {
+	_lpfSourceAvailable := new(foundation.BOOL)
+	_lpfIsSelected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwLink), uintptr(unsafe.Pointer(lplpszDisplayName)), uintptr(unsafe.Pointer(lplenFileName)), uintptr(unsafe.Pointer(lplpszFullLinkType)), uintptr(unsafe.Pointer(lplpszShortLinkType)), uintptr(win32.OutParam(unsafe.Pointer(_lpfSourceAvailable))), uintptr(win32.OutParam(unsafe.Pointer(_lpfIsSelected))))
+	if lpfSourceAvailable != nil {
+		*lpfSourceAvailable = *_lpfSourceAvailable != 0
+	}
+	if lpfIsSelected != nil {
+		*lpfIsSelected = *_lpfIsSelected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2709,8 +2745,12 @@ func (self *IPicture) SelectPicture(hDCIn graphicsgdi.HDC, phDCOut *graphicsgdi.
 }
 
 // Get_KeepOriginalFormat dispatches through IPicture's vtable slot 12.
-func (self *IPicture) Get_KeepOriginalFormat(pKeep *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKeep)))
+func (self *IPicture) Get_KeepOriginalFormat(pKeep *bool) error {
+	_pKeep := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pKeep))))
+	if pKeep != nil {
+		*pKeep = *_pKeep != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2803,8 +2843,12 @@ func (self *IPicture2) SelectPicture(hDCIn graphicsgdi.HDC, phDCOut *graphicsgdi
 }
 
 // Get_KeepOriginalFormat dispatches through IPicture2's vtable slot 12.
-func (self *IPicture2) Get_KeepOriginalFormat(pKeep *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKeep)))
+func (self *IPicture2) Get_KeepOriginalFormat(pKeep *bool) error {
+	_pKeep := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pKeep))))
+	if pKeep != nil {
+		*pKeep = *_pKeep != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3057,8 +3101,12 @@ type IProtectFocus struct {
 var IID_IProtectFocus = win32.GUID{Data1: 0xd81f90a3, Data2: 0x8156, Data3: 0x44f7, Data4: [8]byte{0xad, 0x28, 0x5a, 0xbb, 0x87, 0x00, 0x32, 0x74}}
 
 // AllowFocusChange dispatches through IProtectFocus's vtable slot 3.
-func (self *IProtectFocus) AllowFocusChange(pfAllow *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAllow)))
+func (self *IProtectFocus) AllowFocusChange(pfAllow *bool) error {
+	_pfAllow := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAllow))))
+	if pfAllow != nil {
+		*pfAllow = *_pfAllow != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -1043,8 +1043,12 @@ type ISpPhoneticAlphabetSelection struct {
 var IID_ISpPhoneticAlphabetSelection = win32.GUID{Data1: 0xb2745efd, Data2: 0x42ce, Data3: 0x48ca, Data4: [8]byte{0x81, 0xf1, 0xa9, 0x6e, 0x02, 0x53, 0x8a, 0x90}}
 
 // IsAlphabetUPS dispatches through ISpPhoneticAlphabetSelection's vtable slot 3.
-func (self *ISpPhoneticAlphabetSelection) IsAlphabetUPS(pfIsUPS *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsUPS)))
+func (self *ISpPhoneticAlphabetSelection) IsAlphabetUPS(pfIsUPS *bool) error {
+	_pfIsUPS := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsUPS))))
+	if pfIsUPS != nil {
+		*pfIsUPS = *_pfIsUPS != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2690,9 +2694,13 @@ type ISpTokenUI struct {
 var IID_ISpTokenUI = win32.GUID{Data1: 0xf8e690f0, Data2: 0x39cb, Data3: 0x4843, Data4: [8]byte{0xb8, 0xd7, 0xc8, 0x46, 0x96, 0xe1, 0x11, 0x9d}}
 
 // IsUISupported dispatches through ISpTokenUI's vtable slot 3.
-func (self *ISpTokenUI) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown, pfSupported *foundation.BOOL) error {
+func (self *ISpTokenUI) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown, pfSupported *bool) error {
 	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(pfSupported)))
+	_pfSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(punkObject)), uintptr(win32.OutParam(unsafe.Pointer(_pfSupported))))
+	if pfSupported != nil {
+		*pfSupported = *_pfSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

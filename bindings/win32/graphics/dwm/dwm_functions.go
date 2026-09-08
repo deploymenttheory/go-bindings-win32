@@ -190,8 +190,12 @@ func DwmFlush() error {
 // DwmGetColorizationColor calls dwmapi!DwmGetColorizationColor.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetcolorizationcolor
 // Minimum OS: windows6.0.6000.
-func DwmGetColorizationColor(pcrColorization *uint32, pfOpaqueBlend *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procDwmGetColorizationColor.Addr(), uintptr(unsafe.Pointer(pcrColorization)), uintptr(unsafe.Pointer(pfOpaqueBlend)))
+func DwmGetColorizationColor(pcrColorization *uint32, pfOpaqueBlend *bool) error {
+	_pfOpaqueBlend := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procDwmGetColorizationColor.Addr(), uintptr(unsafe.Pointer(pcrColorization)), uintptr(win32.OutParam(unsafe.Pointer(_pfOpaqueBlend))))
+	if pfOpaqueBlend != nil {
+		*pfOpaqueBlend = *_pfOpaqueBlend != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -222,8 +226,16 @@ func DwmGetGraphicsStreamTransformHint(uIndex uint32, pTransform *MilMatrix3x2D)
 // DwmGetTransportAttributes calls dwmapi!DwmGetTransportAttributes.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgettransportattributes
 // Minimum OS: windows6.0.6000.
-func DwmGetTransportAttributes(pfIsRemoting *foundation.BOOL, pfIsConnected *foundation.BOOL, pDwGeneration *uint32) error {
-	r1, _, _ := syscall.SyscallN(procDwmGetTransportAttributes.Addr(), uintptr(unsafe.Pointer(pfIsRemoting)), uintptr(unsafe.Pointer(pfIsConnected)), uintptr(unsafe.Pointer(pDwGeneration)))
+func DwmGetTransportAttributes(pfIsRemoting *bool, pfIsConnected *bool, pDwGeneration *uint32) error {
+	_pfIsRemoting := new(foundation.BOOL)
+	_pfIsConnected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procDwmGetTransportAttributes.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pfIsRemoting))), uintptr(win32.OutParam(unsafe.Pointer(_pfIsConnected))), uintptr(unsafe.Pointer(pDwGeneration)))
+	if pfIsRemoting != nil {
+		*pfIsRemoting = *_pfIsRemoting != 0
+	}
+	if pfIsConnected != nil {
+		*pfIsConnected = *_pfIsConnected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -258,8 +270,12 @@ func DwmInvalidateIconicBitmaps(hwnd foundation.HWND) error {
 // DwmIsCompositionEnabled calls dwmapi!DwmIsCompositionEnabled.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmiscompositionenabled
 // Minimum OS: windows6.0.6000.
-func DwmIsCompositionEnabled(pfEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procDwmIsCompositionEnabled.Addr(), uintptr(unsafe.Pointer(pfEnabled)))
+func DwmIsCompositionEnabled(pfEnabled *bool) error {
+	_pfEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procDwmIsCompositionEnabled.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))))
+	if pfEnabled != nil {
+		*pfEnabled = *_pfEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

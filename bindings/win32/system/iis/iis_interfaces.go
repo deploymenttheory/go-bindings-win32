@@ -32,8 +32,12 @@ func (self *AsyncIFtpAuthenticationProvider) Begin_AuthenticateUser(pszSessionId
 }
 
 // Finish_AuthenticateUser dispatches through AsyncIFtpAuthenticationProvider's vtable slot 4.
-func (self *AsyncIFtpAuthenticationProvider) Finish_AuthenticateUser(ppszCanonicalUserName *foundation.PWSTR, pfAuthenticated *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCanonicalUserName)), uintptr(unsafe.Pointer(pfAuthenticated)))
+func (self *AsyncIFtpAuthenticationProvider) Finish_AuthenticateUser(ppszCanonicalUserName *foundation.PWSTR, pfAuthenticated *bool) error {
+	_pfAuthenticated := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCanonicalUserName)), uintptr(win32.OutParam(unsafe.Pointer(_pfAuthenticated))))
+	if pfAuthenticated != nil {
+		*pfAuthenticated = *_pfAuthenticated != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -163,8 +167,12 @@ func (self *AsyncIFtpRoleProvider) Begin_IsUserInRole(pszSessionId string, pszSi
 }
 
 // Finish_IsUserInRole dispatches through AsyncIFtpRoleProvider's vtable slot 4.
-func (self *AsyncIFtpRoleProvider) Finish_IsUserInRole(pfIsInRole *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsInRole)))
+func (self *AsyncIFtpRoleProvider) Finish_IsUserInRole(pfIsInRole *bool) error {
+	_pfIsInRole := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsInRole))))
+	if pfIsInRole != nil {
+		*pfIsInRole = *_pfIsInRole != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -239,12 +247,16 @@ type IFtpAuthenticationProvider struct {
 var IID_IFtpAuthenticationProvider = win32.GUID{Data1: 0x4659f95c, Data2: 0xd5a8, Data3: 0x4707, Data4: [8]byte{0xb2, 0xfc, 0x6f, 0xd5, 0x79, 0x42, 0x46, 0xcf}}
 
 // AuthenticateUser dispatches through IFtpAuthenticationProvider's vtable slot 3.
-func (self *IFtpAuthenticationProvider) AuthenticateUser(pszSessionId string, pszSiteName string, pszUserName string, pszPassword string, ppszCanonicalUserName *foundation.PWSTR, pfAuthenticated *foundation.BOOL) error {
+func (self *IFtpAuthenticationProvider) AuthenticateUser(pszSessionId string, pszSiteName string, pszUserName string, pszPassword string, ppszCanonicalUserName *foundation.PWSTR, pfAuthenticated *bool) error {
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
 	_pszSiteName := win32.UTF16Ptr(pszSiteName)
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	_pszPassword := win32.UTF16Ptr(pszPassword)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszPassword)), uintptr(unsafe.Pointer(ppszCanonicalUserName)), uintptr(unsafe.Pointer(pfAuthenticated)))
+	_pfAuthenticated := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszPassword)), uintptr(unsafe.Pointer(ppszCanonicalUserName)), uintptr(win32.OutParam(unsafe.Pointer(_pfAuthenticated))))
+	if pfAuthenticated != nil {
+		*pfAuthenticated = *_pfAuthenticated != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -348,12 +360,16 @@ type IFtpRoleProvider struct {
 var IID_IFtpRoleProvider = win32.GUID{Data1: 0x909c850d, Data2: 0x8ca0, Data3: 0x4674, Data4: [8]byte{0x96, 0xb8, 0xcc, 0x29, 0x41, 0x53, 0x57, 0x25}}
 
 // IsUserInRole dispatches through IFtpRoleProvider's vtable slot 3.
-func (self *IFtpRoleProvider) IsUserInRole(pszSessionId string, pszSiteName string, pszUserName string, pszRole string, pfIsInRole *foundation.BOOL) error {
+func (self *IFtpRoleProvider) IsUserInRole(pszSessionId string, pszSiteName string, pszUserName string, pszRole string, pfIsInRole *bool) error {
 	_pszSessionId := win32.UTF16Ptr(pszSessionId)
 	_pszSiteName := win32.UTF16Ptr(pszSiteName)
 	_pszUserName := win32.UTF16Ptr(pszUserName)
 	_pszRole := win32.UTF16Ptr(pszRole)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszRole)), uintptr(unsafe.Pointer(pfIsInRole)))
+	_pfIsInRole := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszRole)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsInRole))))
+	if pfIsInRole != nil {
+		*pfIsInRole = *_pfIsInRole != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

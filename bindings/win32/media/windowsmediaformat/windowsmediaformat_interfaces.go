@@ -1986,8 +1986,12 @@ func (self *IWMReaderAdvanced) SetUserProvidedClock(fUserClock bool) error {
 }
 
 // GetUserProvidedClock dispatches through IWMReaderAdvanced's vtable slot 4.
-func (self *IWMReaderAdvanced) GetUserProvidedClock(pfUserClock *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfUserClock)))
+func (self *IWMReaderAdvanced) GetUserProvidedClock(pfUserClock *bool) error {
+	_pfUserClock := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfUserClock))))
+	if pfUserClock != nil {
+		*pfUserClock = *_pfUserClock != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2005,8 +2009,12 @@ func (self *IWMReaderAdvanced) SetManualStreamSelection(fSelection bool) error {
 }
 
 // GetManualStreamSelection dispatches through IWMReaderAdvanced's vtable slot 7.
-func (self *IWMReaderAdvanced) GetManualStreamSelection(pfSelection *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfSelection)))
+func (self *IWMReaderAdvanced) GetManualStreamSelection(pfSelection *bool) error {
+	_pfSelection := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfSelection))))
+	if pfSelection != nil {
+		*pfSelection = *_pfSelection != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2030,8 +2038,12 @@ func (self *IWMReaderAdvanced) SetReceiveSelectionCallbacks(fGetCallbacks bool) 
 }
 
 // GetReceiveSelectionCallbacks dispatches through IWMReaderAdvanced's vtable slot 11.
-func (self *IWMReaderAdvanced) GetReceiveSelectionCallbacks(pfGetCallbacks *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfGetCallbacks)))
+func (self *IWMReaderAdvanced) GetReceiveSelectionCallbacks(pfGetCallbacks *bool) error {
+	_pfGetCallbacks := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfGetCallbacks))))
+	if pfGetCallbacks != nil {
+		*pfGetCallbacks = *_pfGetCallbacks != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2043,8 +2055,12 @@ func (self *IWMReaderAdvanced) SetReceiveStreamSamples(wStreamNum uint16, fRecei
 }
 
 // GetReceiveStreamSamples dispatches through IWMReaderAdvanced's vtable slot 13.
-func (self *IWMReaderAdvanced) GetReceiveStreamSamples(wStreamNum uint16, pfReceiveStreamSamples *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(pfReceiveStreamSamples)))
+func (self *IWMReaderAdvanced) GetReceiveStreamSamples(wStreamNum uint16, pfReceiveStreamSamples *bool) error {
+	_pfReceiveStreamSamples := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(win32.OutParam(unsafe.Pointer(_pfReceiveStreamSamples))))
+	if pfReceiveStreamSamples != nil {
+		*pfReceiveStreamSamples = *_pfReceiveStreamSamples != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2056,8 +2072,12 @@ func (self *IWMReaderAdvanced) SetAllocateForOutput(dwOutputNum uint32, fAllocat
 }
 
 // GetAllocateForOutput dispatches through IWMReaderAdvanced's vtable slot 15.
-func (self *IWMReaderAdvanced) GetAllocateForOutput(dwOutputNum uint32, pfAllocate *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(pfAllocate)))
+func (self *IWMReaderAdvanced) GetAllocateForOutput(dwOutputNum uint32, pfAllocate *bool) error {
+	_pfAllocate := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(win32.OutParam(unsafe.Pointer(_pfAllocate))))
+	if pfAllocate != nil {
+		*pfAllocate = *_pfAllocate != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2069,8 +2089,12 @@ func (self *IWMReaderAdvanced) SetAllocateForStream(wStreamNum uint16, fAllocate
 }
 
 // GetAllocateForStream dispatches through IWMReaderAdvanced's vtable slot 17.
-func (self *IWMReaderAdvanced) GetAllocateForStream(dwSreamNum uint16, pfAllocate *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwSreamNum), uintptr(unsafe.Pointer(pfAllocate)))
+func (self *IWMReaderAdvanced) GetAllocateForStream(dwSreamNum uint16, pfAllocate *bool) error {
+	_pfAllocate := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwSreamNum), uintptr(win32.OutParam(unsafe.Pointer(_pfAllocate))))
+	if pfAllocate != nil {
+		*pfAllocate = *_pfAllocate != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2198,8 +2222,12 @@ func (self *IWMReaderAdvanced2) SetLogClientID(fLogClientID bool) error {
 }
 
 // GetLogClientID dispatches through IWMReaderAdvanced2's vtable slot 35.
-func (self *IWMReaderAdvanced2) GetLogClientID(pfLogClientID *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLogClientID)))
+func (self *IWMReaderAdvanced2) GetLogClientID(pfLogClientID *bool) error {
+	_pfLogClientID := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfLogClientID))))
+	if pfLogClientID != nil {
+		*pfLogClientID = *_pfLogClientID != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2266,8 +2294,12 @@ func (self *IWMReaderAdvanced4) GetMaxSpeedFactor(pdblFactor *float64) error {
 }
 
 // IsUsingFastCache dispatches through IWMReaderAdvanced4's vtable slot 43.
-func (self *IWMReaderAdvanced4) IsUsingFastCache(pfUsingFastCache *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfUsingFastCache)))
+func (self *IWMReaderAdvanced4) IsUsingFastCache(pfUsingFastCache *bool) error {
+	_pfUsingFastCache := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfUsingFastCache))))
+	if pfUsingFastCache != nil {
+		*pfUsingFastCache = *_pfUsingFastCache != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2287,8 +2319,12 @@ func (self *IWMReaderAdvanced4) SendLogParams() error {
 }
 
 // CanSaveFileAs dispatches through IWMReaderAdvanced4's vtable slot 46.
-func (self *IWMReaderAdvanced4) CanSaveFileAs(pfCanSave *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCanSave)))
+func (self *IWMReaderAdvanced4) CanSaveFileAs(pfCanSave *bool) error {
+	_pfCanSave := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanSave))))
+	if pfCanSave != nil {
+		*pfCanSave = *_pfCanSave != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2515,9 +2551,13 @@ func (self *IWMReaderNetworkConfig) SetProxyExceptionList(pwszProtocol string, p
 }
 
 // GetProxyBypassForLocal dispatches through IWMReaderNetworkConfig's vtable slot 15.
-func (self *IWMReaderNetworkConfig) GetProxyBypassForLocal(pwszProtocol string, pfBypassForLocal *foundation.BOOL) error {
+func (self *IWMReaderNetworkConfig) GetProxyBypassForLocal(pwszProtocol string, pfBypassForLocal *bool) error {
 	_pwszProtocol := win32.UTF16Ptr(pwszProtocol)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszProtocol)), uintptr(unsafe.Pointer(pfBypassForLocal)))
+	_pfBypassForLocal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszProtocol)), uintptr(win32.OutParam(unsafe.Pointer(_pfBypassForLocal))))
+	if pfBypassForLocal != nil {
+		*pfBypassForLocal = *_pfBypassForLocal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2530,8 +2570,12 @@ func (self *IWMReaderNetworkConfig) SetProxyBypassForLocal(pwszProtocol string, 
 }
 
 // GetForceRerunAutoProxyDetection dispatches through IWMReaderNetworkConfig's vtable slot 17.
-func (self *IWMReaderNetworkConfig) GetForceRerunAutoProxyDetection(pfForceRerunDetection *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfForceRerunDetection)))
+func (self *IWMReaderNetworkConfig) GetForceRerunAutoProxyDetection(pfForceRerunDetection *bool) error {
+	_pfForceRerunDetection := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfForceRerunDetection))))
+	if pfForceRerunDetection != nil {
+		*pfForceRerunDetection = *_pfForceRerunDetection != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2543,8 +2587,12 @@ func (self *IWMReaderNetworkConfig) SetForceRerunAutoProxyDetection(fForceRerunD
 }
 
 // GetEnableMulticast dispatches through IWMReaderNetworkConfig's vtable slot 19.
-func (self *IWMReaderNetworkConfig) GetEnableMulticast(pfEnableMulticast *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnableMulticast)))
+func (self *IWMReaderNetworkConfig) GetEnableMulticast(pfEnableMulticast *bool) error {
+	_pfEnableMulticast := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnableMulticast))))
+	if pfEnableMulticast != nil {
+		*pfEnableMulticast = *_pfEnableMulticast != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2556,8 +2604,12 @@ func (self *IWMReaderNetworkConfig) SetEnableMulticast(fEnableMulticast bool) er
 }
 
 // GetEnableHTTP dispatches through IWMReaderNetworkConfig's vtable slot 21.
-func (self *IWMReaderNetworkConfig) GetEnableHTTP(pfEnableHTTP *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnableHTTP)))
+func (self *IWMReaderNetworkConfig) GetEnableHTTP(pfEnableHTTP *bool) error {
+	_pfEnableHTTP := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnableHTTP))))
+	if pfEnableHTTP != nil {
+		*pfEnableHTTP = *_pfEnableHTTP != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2569,8 +2621,12 @@ func (self *IWMReaderNetworkConfig) SetEnableHTTP(fEnableHTTP bool) error {
 }
 
 // GetEnableUDP dispatches through IWMReaderNetworkConfig's vtable slot 23.
-func (self *IWMReaderNetworkConfig) GetEnableUDP(pfEnableUDP *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnableUDP)))
+func (self *IWMReaderNetworkConfig) GetEnableUDP(pfEnableUDP *bool) error {
+	_pfEnableUDP := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnableUDP))))
+	if pfEnableUDP != nil {
+		*pfEnableUDP = *_pfEnableUDP != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2582,8 +2638,12 @@ func (self *IWMReaderNetworkConfig) SetEnableUDP(fEnableUDP bool) error {
 }
 
 // GetEnableTCP dispatches through IWMReaderNetworkConfig's vtable slot 25.
-func (self *IWMReaderNetworkConfig) GetEnableTCP(pfEnableTCP *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnableTCP)))
+func (self *IWMReaderNetworkConfig) GetEnableTCP(pfEnableTCP *bool) error {
+	_pfEnableTCP := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnableTCP))))
+	if pfEnableTCP != nil {
+		*pfEnableTCP = *_pfEnableTCP != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2659,8 +2719,12 @@ type IWMReaderNetworkConfig2 struct {
 var IID_IWMReaderNetworkConfig2 = win32.GUID{Data1: 0xd979a853, Data2: 0x042b, Data3: 0x4050, Data4: [8]byte{0x83, 0x87, 0xc9, 0x39, 0xdb, 0x22, 0x01, 0x3f}}
 
 // GetEnableContentCaching dispatches through IWMReaderNetworkConfig2's vtable slot 36.
-func (self *IWMReaderNetworkConfig2) GetEnableContentCaching(pfEnableContentCaching *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnableContentCaching)))
+func (self *IWMReaderNetworkConfig2) GetEnableContentCaching(pfEnableContentCaching *bool) error {
+	_pfEnableContentCaching := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnableContentCaching))))
+	if pfEnableContentCaching != nil {
+		*pfEnableContentCaching = *_pfEnableContentCaching != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2672,8 +2736,12 @@ func (self *IWMReaderNetworkConfig2) SetEnableContentCaching(fEnableContentCachi
 }
 
 // GetEnableFastCache dispatches through IWMReaderNetworkConfig2's vtable slot 38.
-func (self *IWMReaderNetworkConfig2) GetEnableFastCache(pfEnableFastCache *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnableFastCache)))
+func (self *IWMReaderNetworkConfig2) GetEnableFastCache(pfEnableFastCache *bool) error {
+	_pfEnableFastCache := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnableFastCache))))
+	if pfEnableFastCache != nil {
+		*pfEnableFastCache = *_pfEnableFastCache != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2709,8 +2777,12 @@ func (self *IWMReaderNetworkConfig2) SetAutoReconnectLimit(dwAutoReconnectLimit 
 }
 
 // GetEnableResends dispatches through IWMReaderNetworkConfig2's vtable slot 44.
-func (self *IWMReaderNetworkConfig2) GetEnableResends(pfEnableResends *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnableResends)))
+func (self *IWMReaderNetworkConfig2) GetEnableResends(pfEnableResends *bool) error {
+	_pfEnableResends := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnableResends))))
+	if pfEnableResends != nil {
+		*pfEnableResends = *_pfEnableResends != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2722,8 +2794,12 @@ func (self *IWMReaderNetworkConfig2) SetEnableResends(fEnableResends bool) error
 }
 
 // GetEnableThinning dispatches through IWMReaderNetworkConfig2's vtable slot 46.
-func (self *IWMReaderNetworkConfig2) GetEnableThinning(pfEnableThinning *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnableThinning)))
+func (self *IWMReaderNetworkConfig2) GetEnableThinning(pfEnableThinning *bool) error {
+	_pfEnableThinning := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnableThinning))))
+	if pfEnableThinning != nil {
+		*pfEnableThinning = *_pfEnableThinning != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2916,26 +2992,42 @@ func (self *IWMRegisteredDevice) Approve(fApprove bool) error {
 }
 
 // IsValid dispatches through IWMRegisteredDevice's vtable slot 11.
-func (self *IWMRegisteredDevice) IsValid(pfValid *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfValid)))
+func (self *IWMRegisteredDevice) IsValid(pfValid *bool) error {
+	_pfValid := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfValid))))
+	if pfValid != nil {
+		*pfValid = *_pfValid != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsApproved dispatches through IWMRegisteredDevice's vtable slot 12.
-func (self *IWMRegisteredDevice) IsApproved(pfApproved *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfApproved)))
+func (self *IWMRegisteredDevice) IsApproved(pfApproved *bool) error {
+	_pfApproved := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfApproved))))
+	if pfApproved != nil {
+		*pfApproved = *_pfApproved != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsWmdrmCompliant dispatches through IWMRegisteredDevice's vtable slot 13.
-func (self *IWMRegisteredDevice) IsWmdrmCompliant(pfCompliant *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCompliant)))
+func (self *IWMRegisteredDevice) IsWmdrmCompliant(pfCompliant *bool) error {
+	_pfCompliant := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCompliant))))
+	if pfCompliant != nil {
+		*pfCompliant = *_pfCompliant != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsOpened dispatches through IWMRegisteredDevice's vtable slot 14.
-func (self *IWMRegisteredDevice) IsOpened(pfOpened *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfOpened)))
+func (self *IWMRegisteredDevice) IsOpened(pfOpened *bool) error {
+	_pfOpened := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfOpened))))
+	if pfOpened != nil {
+		*pfOpened = *_pfOpened != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3003,8 +3095,12 @@ func (self *IWMSInternalAdminNetSource) SetCredentials(bstrRealm foundation.BSTR
 }
 
 // GetCredentials dispatches through IWMSInternalAdminNetSource's vtable slot 6.
-func (self *IWMSInternalAdminNetSource) GetCredentials(bstrRealm foundation.BSTR, pbstrName *foundation.BSTR, pbstrPassword *foundation.BSTR, pfConfirmedGood *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRealm)), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pbstrPassword)), uintptr(unsafe.Pointer(pfConfirmedGood)))
+func (self *IWMSInternalAdminNetSource) GetCredentials(bstrRealm foundation.BSTR, pbstrName *foundation.BSTR, pbstrPassword *foundation.BSTR, pfConfirmedGood *bool) error {
+	_pfConfirmedGood := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRealm)), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pbstrPassword)), uintptr(win32.OutParam(unsafe.Pointer(_pfConfirmedGood))))
+	if pfConfirmedGood != nil {
+		*pfConfirmedGood = *_pfConfirmedGood != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3027,8 +3123,12 @@ func (self *IWMSInternalAdminNetSource) SetCredentialFlags(dwFlags uint32) error
 }
 
 // FindProxyForURL dispatches through IWMSInternalAdminNetSource's vtable slot 10.
-func (self *IWMSInternalAdminNetSource) FindProxyForURL(bstrProtocol foundation.BSTR, bstrHost foundation.BSTR, pfProxyEnabled *foundation.BOOL, pbstrProxyServer *foundation.BSTR, pdwProxyPort *uint32, pdwProxyContext *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(bstrHost)), uintptr(unsafe.Pointer(pfProxyEnabled)), uintptr(unsafe.Pointer(pbstrProxyServer)), uintptr(unsafe.Pointer(pdwProxyPort)), uintptr(unsafe.Pointer(pdwProxyContext)))
+func (self *IWMSInternalAdminNetSource) FindProxyForURL(bstrProtocol foundation.BSTR, bstrHost foundation.BSTR, pfProxyEnabled *bool, pbstrProxyServer *foundation.BSTR, pdwProxyPort *uint32, pdwProxyContext *uint32) error {
+	_pfProxyEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(bstrHost)), uintptr(win32.OutParam(unsafe.Pointer(_pfProxyEnabled))), uintptr(unsafe.Pointer(pbstrProxyServer)), uintptr(unsafe.Pointer(pdwProxyPort)), uintptr(unsafe.Pointer(pdwProxyContext)))
+	if pfProxyEnabled != nil {
+		*pfProxyEnabled = *_pfProxyEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3045,8 +3145,12 @@ func (self *IWMSInternalAdminNetSource) ShutdownProxyContext(dwProxyContext uint
 }
 
 // IsUsingIE dispatches through IWMSInternalAdminNetSource's vtable slot 13.
-func (self *IWMSInternalAdminNetSource) IsUsingIE(dwProxyContext uint32, pfIsUsingIE *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwProxyContext), uintptr(unsafe.Pointer(pfIsUsingIE)))
+func (self *IWMSInternalAdminNetSource) IsUsingIE(dwProxyContext uint32, pfIsUsingIE *bool) error {
+	_pfIsUsingIE := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwProxyContext), uintptr(win32.OutParam(unsafe.Pointer(_pfIsUsingIE))))
+	if pfIsUsingIE != nil {
+		*pfIsUsingIE = *_pfIsUsingIE != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3069,9 +3173,13 @@ func (self *IWMSInternalAdminNetSource2) SetCredentialsEx(bstrRealm foundation.B
 }
 
 // GetCredentialsEx dispatches through IWMSInternalAdminNetSource2's vtable slot 4.
-func (self *IWMSInternalAdminNetSource2) GetCredentialsEx(bstrRealm foundation.BSTR, bstrUrl foundation.BSTR, fProxy bool, pdwUrlPolicy *NETSOURCE_URLCREDPOLICY_SETTINGS, pbstrName *foundation.BSTR, pbstrPassword *foundation.BSTR, pfConfirmedGood *foundation.BOOL) error {
+func (self *IWMSInternalAdminNetSource2) GetCredentialsEx(bstrRealm foundation.BSTR, bstrUrl foundation.BSTR, fProxy bool, pdwUrlPolicy *NETSOURCE_URLCREDPOLICY_SETTINGS, pbstrName *foundation.BSTR, pbstrPassword *foundation.BSTR, pfConfirmedGood *bool) error {
 	_fProxy := win32.Bool32(fProxy)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRealm)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(_fProxy), uintptr(unsafe.Pointer(pdwUrlPolicy)), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pbstrPassword)), uintptr(unsafe.Pointer(pfConfirmedGood)))
+	_pfConfirmedGood := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRealm)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(_fProxy), uintptr(unsafe.Pointer(pdwUrlPolicy)), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pbstrPassword)), uintptr(win32.OutParam(unsafe.Pointer(_pfConfirmedGood))))
+	if pfConfirmedGood != nil {
+		*pfConfirmedGood = *_pfConfirmedGood != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3083,8 +3191,12 @@ func (self *IWMSInternalAdminNetSource2) DeleteCredentialsEx(bstrRealm foundatio
 }
 
 // FindProxyForURLEx dispatches through IWMSInternalAdminNetSource2's vtable slot 6.
-func (self *IWMSInternalAdminNetSource2) FindProxyForURLEx(bstrProtocol foundation.BSTR, bstrHost foundation.BSTR, bstrUrl foundation.BSTR, pfProxyEnabled *foundation.BOOL, pbstrProxyServer *foundation.BSTR, pdwProxyPort *uint32, pdwProxyContext *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(bstrHost)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(unsafe.Pointer(pfProxyEnabled)), uintptr(unsafe.Pointer(pbstrProxyServer)), uintptr(unsafe.Pointer(pdwProxyPort)), uintptr(unsafe.Pointer(pdwProxyContext)))
+func (self *IWMSInternalAdminNetSource2) FindProxyForURLEx(bstrProtocol foundation.BSTR, bstrHost foundation.BSTR, bstrUrl foundation.BSTR, pfProxyEnabled *bool, pbstrProxyServer *foundation.BSTR, pdwProxyPort *uint32, pdwProxyContext *uint32) error {
+	_pfProxyEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(bstrHost)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(win32.OutParam(unsafe.Pointer(_pfProxyEnabled))), uintptr(unsafe.Pointer(pbstrProxyServer)), uintptr(unsafe.Pointer(pdwProxyPort)), uintptr(unsafe.Pointer(pdwProxyContext)))
+	if pfProxyEnabled != nil {
+		*pfProxyEnabled = *_pfProxyEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3104,8 +3216,12 @@ func (self *IWMSInternalAdminNetSource3) GetNetSourceCreator2(ppNetSourceCreator
 }
 
 // FindProxyForURLEx2 dispatches through IWMSInternalAdminNetSource3's vtable slot 8.
-func (self *IWMSInternalAdminNetSource3) FindProxyForURLEx2(bstrProtocol foundation.BSTR, bstrHost foundation.BSTR, bstrUrl foundation.BSTR, pfProxyEnabled *foundation.BOOL, pbstrProxyServer *foundation.BSTR, pdwProxyPort *uint32, pqwProxyContext *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(bstrHost)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(unsafe.Pointer(pfProxyEnabled)), uintptr(unsafe.Pointer(pbstrProxyServer)), uintptr(unsafe.Pointer(pdwProxyPort)), uintptr(unsafe.Pointer(pqwProxyContext)))
+func (self *IWMSInternalAdminNetSource3) FindProxyForURLEx2(bstrProtocol foundation.BSTR, bstrHost foundation.BSTR, bstrUrl foundation.BSTR, pfProxyEnabled *bool, pbstrProxyServer *foundation.BSTR, pdwProxyPort *uint32, pqwProxyContext *uint64) error {
+	_pfProxyEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(bstrHost)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(win32.OutParam(unsafe.Pointer(_pfProxyEnabled))), uintptr(unsafe.Pointer(pbstrProxyServer)), uintptr(unsafe.Pointer(pdwProxyPort)), uintptr(unsafe.Pointer(pqwProxyContext)))
+	if pfProxyEnabled != nil {
+		*pfProxyEnabled = *_pfProxyEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3122,8 +3238,12 @@ func (self *IWMSInternalAdminNetSource3) ShutdownProxyContext2(qwProxyContext ui
 }
 
 // IsUsingIE2 dispatches through IWMSInternalAdminNetSource3's vtable slot 11.
-func (self *IWMSInternalAdminNetSource3) IsUsingIE2(qwProxyContext uint64, pfIsUsingIE *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(qwProxyContext), uintptr(unsafe.Pointer(pfIsUsingIE)))
+func (self *IWMSInternalAdminNetSource3) IsUsingIE2(qwProxyContext uint64, pfIsUsingIE *bool) error {
+	_pfIsUsingIE := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(qwProxyContext), uintptr(win32.OutParam(unsafe.Pointer(_pfIsUsingIE))))
+	if pfIsUsingIE != nil {
+		*pfIsUsingIE = *_pfIsUsingIE != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3138,10 +3258,14 @@ func (self *IWMSInternalAdminNetSource3) SetCredentialsEx2(bstrRealm foundation.
 }
 
 // GetCredentialsEx2 dispatches through IWMSInternalAdminNetSource3's vtable slot 13.
-func (self *IWMSInternalAdminNetSource3) GetCredentialsEx2(bstrRealm foundation.BSTR, bstrUrl foundation.BSTR, fProxy bool, fClearTextAuthentication bool, pdwUrlPolicy *NETSOURCE_URLCREDPOLICY_SETTINGS, pbstrName *foundation.BSTR, pbstrPassword *foundation.BSTR, pfConfirmedGood *foundation.BOOL) error {
+func (self *IWMSInternalAdminNetSource3) GetCredentialsEx2(bstrRealm foundation.BSTR, bstrUrl foundation.BSTR, fProxy bool, fClearTextAuthentication bool, pdwUrlPolicy *NETSOURCE_URLCREDPOLICY_SETTINGS, pbstrName *foundation.BSTR, pbstrPassword *foundation.BSTR, pfConfirmedGood *bool) error {
 	_fProxy := win32.Bool32(fProxy)
 	_fClearTextAuthentication := win32.Bool32(fClearTextAuthentication)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRealm)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(_fProxy), uintptr(_fClearTextAuthentication), uintptr(unsafe.Pointer(pdwUrlPolicy)), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pbstrPassword)), uintptr(unsafe.Pointer(pfConfirmedGood)))
+	_pfConfirmedGood := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRealm)), uintptr(unsafe.Pointer(bstrUrl)), uintptr(_fProxy), uintptr(_fClearTextAuthentication), uintptr(unsafe.Pointer(pdwUrlPolicy)), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pbstrPassword)), uintptr(win32.OutParam(unsafe.Pointer(_pfConfirmedGood))))
+	if pfConfirmedGood != nil {
+		*pfConfirmedGood = *_pfConfirmedGood != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3173,8 +3297,12 @@ func (self *IWMSecureChannel) WMSC_Connect(pOtherSide *IWMSecureChannel) error {
 }
 
 // WMSC_IsConnected dispatches through IWMSecureChannel's vtable slot 9.
-func (self *IWMSecureChannel) WMSC_IsConnected(pfIsConnected *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsConnected)))
+func (self *IWMSecureChannel) WMSC_IsConnected(pfIsConnected *bool) error {
+	_pfIsConnected := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsConnected))))
+	if pfIsConnected != nil {
+		*pfIsConnected = *_pfIsConnected != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3493,8 +3621,12 @@ func (self *IWMSyncReader) SetReadStreamSamples(wStreamNum uint16, fCompressed b
 }
 
 // GetReadStreamSamples dispatches through IWMSyncReader's vtable slot 11.
-func (self *IWMSyncReader) GetReadStreamSamples(wStreamNum uint16, pfCompressed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(pfCompressed)))
+func (self *IWMSyncReader) GetReadStreamSamples(wStreamNum uint16, pfCompressed *bool) error {
+	_pfCompressed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(win32.OutParam(unsafe.Pointer(_pfCompressed))))
+	if pfCompressed != nil {
+		*pfCompressed = *_pfCompressed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3810,8 +3942,12 @@ func (self *IWMWriterAdvanced) SetLiveSource(fIsLiveSource bool) error {
 }
 
 // IsRealTime dispatches through IWMWriterAdvanced's vtable slot 9.
-func (self *IWMWriterAdvanced) IsRealTime(pfRealTime *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRealTime)))
+func (self *IWMWriterAdvanced) IsRealTime(pfRealTime *bool) error {
+	_pfRealTime := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfRealTime))))
+	if pfRealTime != nil {
+		*pfRealTime = *_pfRealTime != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3925,8 +4061,12 @@ func (self *IWMWriterFileSink2) Stop(cnsStopTime uint64) error {
 }
 
 // IsStopped dispatches through IWMWriterFileSink2's vtable slot 11.
-func (self *IWMWriterFileSink2) IsStopped(pfStopped *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfStopped)))
+func (self *IWMWriterFileSink2) IsStopped(pfStopped *bool) error {
+	_pfStopped := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfStopped))))
+	if pfStopped != nil {
+		*pfStopped = *_pfStopped != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3949,8 +4089,12 @@ func (self *IWMWriterFileSink2) Close() error {
 }
 
 // IsClosed dispatches through IWMWriterFileSink2's vtable slot 15.
-func (self *IWMWriterFileSink2) IsClosed(pfClosed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfClosed)))
+func (self *IWMWriterFileSink2) IsClosed(pfClosed *bool) error {
+	_pfClosed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfClosed))))
+	if pfClosed != nil {
+		*pfClosed = *_pfClosed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3971,8 +4115,12 @@ func (self *IWMWriterFileSink3) SetAutoIndexing(fDoAutoIndexing bool) error {
 }
 
 // GetAutoIndexing dispatches through IWMWriterFileSink3's vtable slot 17.
-func (self *IWMWriterFileSink3) GetAutoIndexing(pfAutoIndexing *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAutoIndexing)))
+func (self *IWMWriterFileSink3) GetAutoIndexing(pfAutoIndexing *bool) error {
+	_pfAutoIndexing := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAutoIndexing))))
+	if pfAutoIndexing != nil {
+		*pfAutoIndexing = *_pfAutoIndexing != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4004,8 +4152,12 @@ func (self *IWMWriterFileSink3) SetUnbufferedIO(fUnbufferedIO bool, fRestrictMem
 }
 
 // GetUnbufferedIO dispatches through IWMWriterFileSink3's vtable slot 22.
-func (self *IWMWriterFileSink3) GetUnbufferedIO(pfUnbufferedIO *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfUnbufferedIO)))
+func (self *IWMWriterFileSink3) GetUnbufferedIO(pfUnbufferedIO *bool) error {
+	_pfUnbufferedIO := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfUnbufferedIO))))
+	if pfUnbufferedIO != nil {
+		*pfUnbufferedIO = *_pfUnbufferedIO != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4095,8 +4247,12 @@ func (self *IWMWriterPostView) SetReceivePostViewSamples(wStreamNum uint16, fRec
 }
 
 // GetReceivePostViewSamples dispatches through IWMWriterPostView's vtable slot 5.
-func (self *IWMWriterPostView) GetReceivePostViewSamples(wStreamNum uint16, pfReceivePostViewSamples *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(pfReceivePostViewSamples)))
+func (self *IWMWriterPostView) GetReceivePostViewSamples(wStreamNum uint16, pfReceivePostViewSamples *bool) error {
+	_pfReceivePostViewSamples := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(win32.OutParam(unsafe.Pointer(_pfReceivePostViewSamples))))
+	if pfReceivePostViewSamples != nil {
+		*pfReceivePostViewSamples = *_pfReceivePostViewSamples != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4132,8 +4288,12 @@ func (self *IWMWriterPostView) SetAllocateForPostView(wStreamNumber uint16, fAll
 }
 
 // GetAllocateForPostView dispatches through IWMWriterPostView's vtable slot 11.
-func (self *IWMWriterPostView) GetAllocateForPostView(wStreamNumber uint16, pfAllocate *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(wStreamNumber), uintptr(unsafe.Pointer(pfAllocate)))
+func (self *IWMWriterPostView) GetAllocateForPostView(wStreamNumber uint16, pfAllocate *bool) error {
+	_pfAllocate := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(wStreamNumber), uintptr(win32.OutParam(unsafe.Pointer(_pfAllocate))))
+	if pfAllocate != nil {
+		*pfAllocate = *_pfAllocate != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4243,8 +4403,12 @@ func (self *IWMWriterSink) OnHeader(pHeader *INSSBuffer) error {
 }
 
 // IsRealTime dispatches through IWMWriterSink's vtable slot 4.
-func (self *IWMWriterSink) IsRealTime(pfRealTime *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRealTime)))
+func (self *IWMWriterSink) IsRealTime(pfRealTime *bool) error {
+	_pfRealTime := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfRealTime))))
+	if pfRealTime != nil {
+		*pfRealTime = *_pfRealTime != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

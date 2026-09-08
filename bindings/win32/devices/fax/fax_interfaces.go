@@ -4567,9 +4567,13 @@ func (self *IStillImageW) EnableHwNotifications(pwszDeviceName string, bNewState
 }
 
 // GetHwNotificationState dispatches through IStillImageW's vtable slot 13.
-func (self *IStillImageW) GetHwNotificationState(pwszDeviceName string, pbCurrentState *foundation.BOOL) error {
+func (self *IStillImageW) GetHwNotificationState(pwszDeviceName string, pbCurrentState *bool) error {
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(unsafe.Pointer(pbCurrentState)))
+	_pbCurrentState := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(win32.OutParam(unsafe.Pointer(_pbCurrentState))))
+	if pbCurrentState != nil {
+		*pbCurrentState = *_pbCurrentState != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

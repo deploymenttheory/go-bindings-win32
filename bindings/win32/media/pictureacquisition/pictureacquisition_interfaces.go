@@ -116,8 +116,12 @@ func (self *IPhotoAcquireItem) GetStream(ppStream **systemcom.IStream) error {
 }
 
 // CanDelete dispatches through IPhotoAcquireItem's vtable slot 8.
-func (self *IPhotoAcquireItem) CanDelete(pfCanDelete *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCanDelete)))
+func (self *IPhotoAcquireItem) CanDelete(pfCanDelete *bool) error {
+	_pfCanDelete := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanDelete))))
+	if pfCanDelete != nil {
+		*pfCanDelete = *_pfCanDelete != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -223,8 +227,12 @@ type IPhotoAcquireProgressCB struct {
 var IID_IPhotoAcquireProgressCB = win32.GUID{Data1: 0x00f2ce1e, Data2: 0x935e, Data3: 0x4248, Data4: [8]byte{0x89, 0x2c, 0x13, 0x0f, 0x32, 0xc4, 0x5c, 0xb4}}
 
 // Cancelled dispatches through IPhotoAcquireProgressCB's vtable slot 3.
-func (self *IPhotoAcquireProgressCB) Cancelled(pfCancelled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCancelled)))
+func (self *IPhotoAcquireProgressCB) Cancelled(pfCancelled *bool) error {
+	_pfCancelled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCancelled))))
+	if pfCancelled != nil {
+		*pfCancelled = *_pfCancelled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -321,8 +329,12 @@ func (self *IPhotoAcquireProgressCB) EndSession(hr foundation.HRESULT) error {
 }
 
 // GetDeleteAfterAcquire dispatches through IPhotoAcquireProgressCB's vtable slot 19.
-func (self *IPhotoAcquireProgressCB) GetDeleteAfterAcquire(pfDeleteAfterAcquire *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfDeleteAfterAcquire)))
+func (self *IPhotoAcquireProgressCB) GetDeleteAfterAcquire(pfDeleteAfterAcquire *bool) error {
+	_pfDeleteAfterAcquire := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfDeleteAfterAcquire))))
+	if pfDeleteAfterAcquire != nil {
+		*pfDeleteAfterAcquire = *_pfDeleteAfterAcquire != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -413,8 +425,12 @@ func (self *IPhotoAcquireSettings) GetSequencePaddingWidth(pdwWidth *uint32) err
 }
 
 // GetSequenceZeroPadding dispatches through IPhotoAcquireSettings's vtable slot 13.
-func (self *IPhotoAcquireSettings) GetSequenceZeroPadding(pfZeroPad *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfZeroPad)))
+func (self *IPhotoAcquireSettings) GetSequenceZeroPadding(pfZeroPad *bool) error {
+	_pfZeroPad := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfZeroPad))))
+	if pfZeroPad != nil {
+		*pfZeroPad = *_pfZeroPad != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -565,8 +581,12 @@ func (self *IPhotoProgressDialog) SetCheckboxTooltip(nCheckboxId PROGRESS_DIALOG
 }
 
 // IsCheckboxChecked dispatches through IPhotoProgressDialog's vtable slot 11.
-func (self *IPhotoProgressDialog) IsCheckboxChecked(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, pfChecked *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(unsafe.Pointer(pfChecked)))
+func (self *IPhotoProgressDialog) IsCheckboxChecked(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, pfChecked *bool) error {
+	_pfChecked := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(win32.OutParam(unsafe.Pointer(_pfChecked))))
+	if pfChecked != nil {
+		*pfChecked = *_pfChecked != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -617,8 +637,12 @@ func (self *IPhotoProgressDialog) ShowActionLink(fShow bool) error {
 }
 
 // IsCancelled dispatches through IPhotoProgressDialog's vtable slot 19.
-func (self *IPhotoProgressDialog) IsCancelled(pfCancelled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCancelled)))
+func (self *IPhotoProgressDialog) IsCancelled(pfCancelled *bool) error {
+	_pfCancelled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfCancelled))))
+	if pfCancelled != nil {
+		*pfCancelled = *_pfCancelled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

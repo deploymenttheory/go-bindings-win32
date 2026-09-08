@@ -285,8 +285,12 @@ func WebAuthNGetW3CExceptionDOMError(hr foundation.HRESULT) error {
 
 // WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable calls webauthn!WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable.
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthnisuserverifyingplatformauthenticatoravailable
-func WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procWebAuthNIsUserVerifyingPlatformAuthenticatorAvailable.Addr(), uintptr(unsafe.Pointer(pbIsUserVerifyingPlatformAuthenticatorAvailable)))
+func WebAuthNIsUserVerifyingPlatformAuthenticatorAvailable(pbIsUserVerifyingPlatformAuthenticatorAvailable *bool) error {
+	_pbIsUserVerifyingPlatformAuthenticatorAvailable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWebAuthNIsUserVerifyingPlatformAuthenticatorAvailable.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbIsUserVerifyingPlatformAuthenticatorAvailable))))
+	if pbIsUserVerifyingPlatformAuthenticatorAvailable != nil {
+		*pbIsUserVerifyingPlatformAuthenticatorAvailable = *_pbIsUserVerifyingPlatformAuthenticatorAvailable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

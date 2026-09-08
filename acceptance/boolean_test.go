@@ -7,6 +7,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxcore"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 )
 
 // TestNativeBoolReturn drives a COM method declared with the one-byte C++
@@ -26,5 +27,24 @@ func TestNativeBoolReturn(t *testing.T) {
 	}
 	if factory.IsNotificationTypeSupported(dxcore.DXCoreNotificationType(0xFFFF)) {
 		t.Error("IsNotificationTypeSupported(bogus) = true, want false")
+	}
+}
+
+// TestBoolOutParam drives a Win32 BOOL [out] parameter, which the binding
+// exposes as *bool: the callee writes a 4-byte BOOL into a hidden local and
+// the generated write-back converts it. IsWow64Process is false for a native
+// amd64/arm64 process, which is the only kind this module builds.
+func TestBoolOutParam(t *testing.T) {
+	var wow64 bool
+	if err := threading.IsWow64Process(threading.GetCurrentProcess(), &wow64); err != nil {
+		t.Fatalf("IsWow64Process: %v", err)
+	}
+	if wow64 {
+		t.Error("IsWow64Process = true for a native 64-bit process, want false")
+	}
+
+	// A nil out-param must not panic: the write-back is guarded.
+	if err := threading.IsWow64Process(threading.GetCurrentProcess(), nil); err != nil {
+		t.Fatalf("IsWow64Process(nil): %v", err)
 	}
 }

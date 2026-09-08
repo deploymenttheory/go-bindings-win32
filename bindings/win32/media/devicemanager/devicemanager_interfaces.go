@@ -1387,8 +1387,12 @@ type IWMDMLogger struct {
 var IID_IWMDMLogger = win32.GUID{Data1: 0x110a3200, Data2: 0x5a79, Data3: 0x11d3, Data4: [8]byte{0x8d, 0x78, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00}}
 
 // IsEnabled dispatches through IWMDMLogger's vtable slot 3.
-func (self *IWMDMLogger) IsEnabled(pfEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
+func (self *IWMDMLogger) IsEnabled(pfEnabled *bool) error {
+	_pfEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))))
+	if pfEnabled != nil {
+		*pfEnabled = *_pfEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

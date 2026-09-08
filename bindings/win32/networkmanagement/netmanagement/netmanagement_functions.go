@@ -1025,18 +1025,26 @@ func NetGroupSetUsers(servername *string, groupname string, level uint32, buf *b
 // NetIsServiceAccount calls NETAPI32!NetIsServiceAccount.
 // https://learn.microsoft.com/windows/win32/api/lmaccess/nf-lmaccess-netisserviceaccount
 // Minimum OS: windows6.1.
-func NetIsServiceAccount(ServerName *string, AccountName string, IsService *foundation.BOOL) foundation.NTSTATUS {
+func NetIsServiceAccount(ServerName *string, AccountName string, IsService *bool) foundation.NTSTATUS {
 	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	_AccountName := win32.UTF16Ptr(AccountName)
-	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(unsafe.Pointer(IsService)))
+	_IsService := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(win32.OutParam(unsafe.Pointer(_IsService))))
+	if IsService != nil {
+		*IsService = *_IsService != 0
+	}
 	return foundation.NTSTATUS(r1)
 }
 
 // NetIsServiceAccount2 calls NETAPI32!NetIsServiceAccount2.
-func NetIsServiceAccount2(ServerName *string, AccountName string, IsService *foundation.BOOL, AccountType *MSA_INFO_ACCOUNT_TYPE) foundation.NTSTATUS {
+func NetIsServiceAccount2(ServerName *string, AccountName string, IsService *bool, AccountType *MSA_INFO_ACCOUNT_TYPE) foundation.NTSTATUS {
 	_ServerName := win32.UTF16PtrOrNil(ServerName)
 	_AccountName := win32.UTF16Ptr(AccountName)
-	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount2.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(unsafe.Pointer(IsService)), uintptr(unsafe.Pointer(AccountType)))
+	_IsService := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procNetIsServiceAccount2.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_AccountName)), uintptr(win32.OutParam(unsafe.Pointer(_IsService))), uintptr(unsafe.Pointer(AccountType)))
+	if IsService != nil {
+		*IsService = *_IsService != 0
+	}
 	return foundation.NTSTATUS(r1)
 }
 

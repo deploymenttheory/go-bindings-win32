@@ -514,10 +514,10 @@ func (self *IWSManResourceLocator) Put_MustUnderstandOptions(mustUnderstand bool
 }
 
 // Get_MustUnderstandOptions dispatches through IWSManResourceLocator's vtable slot 17.
-func (self *IWSManResourceLocator) Get_MustUnderstandOptions() (foundation.BOOL, error) {
+func (self *IWSManResourceLocator) Get_MustUnderstandOptions() (bool, error) {
 	_mustUnderstand := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_mustUnderstand))))
-	return *_mustUnderstand, win32.ErrIfFailed(int32(r1))
+	return *_mustUnderstand != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // ClearOptions dispatches through IWSManResourceLocator's vtable slot 18.

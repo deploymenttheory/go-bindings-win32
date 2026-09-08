@@ -397,13 +397,17 @@ func PxeDhcpInitialize(pRecvPacket []byte, pReplyPacket []byte, puReplyPacketLen
 // PxeDhcpIsValid calls WDSPXE!PxeDhcpIsValid.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpisvalid
 // Minimum OS: windowsserver2008.
-func PxeDhcpIsValid(pPacket []byte, bRequestPacket bool, pbPxeOptionPresent *foundation.BOOL) uint32 {
+func PxeDhcpIsValid(pPacket []byte, bRequestPacket bool, pbPxeOptionPresent *bool) uint32 {
 	var _pPacket *byte
 	if len(pPacket) > 0 {
 		_pPacket = &pPacket[0]
 	}
 	_bRequestPacket := win32.Bool32(bRequestPacket)
-	r1, _, _ := syscall.SyscallN(procPxeDhcpIsValid.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(_bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
+	_pbPxeOptionPresent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procPxeDhcpIsValid.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(_bRequestPacket), uintptr(win32.OutParam(unsafe.Pointer(_pbPxeOptionPresent))))
+	if pbPxeOptionPresent != nil {
+		*pbPxeOptionPresent = *_pbPxeOptionPresent != 0
+	}
 	return uint32(r1)
 }
 
@@ -502,13 +506,17 @@ func PxeDhcpv6Initialize(pRequest []byte, pReply []byte, pcbReplyUsed *uint32) u
 // PxeDhcpv6IsValid calls WDSPXE!PxeDhcpv6IsValid.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6isvalid
 // Minimum OS: windows8.0.
-func PxeDhcpv6IsValid(pPacket []byte, bRequestPacket bool, pbPxeOptionPresent *foundation.BOOL) uint32 {
+func PxeDhcpv6IsValid(pPacket []byte, bRequestPacket bool, pbPxeOptionPresent *bool) uint32 {
 	var _pPacket *byte
 	if len(pPacket) > 0 {
 		_pPacket = &pPacket[0]
 	}
 	_bRequestPacket := win32.Bool32(bRequestPacket)
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6IsValid.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(_bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
+	_pbPxeOptionPresent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6IsValid.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(_bRequestPacket), uintptr(win32.OutParam(unsafe.Pointer(_pbPxeOptionPresent))))
+	if pbPxeOptionPresent != nil {
+		*pbPxeOptionPresent = *_pbPxeOptionPresent != 0
+	}
 	return uint32(r1)
 }
 

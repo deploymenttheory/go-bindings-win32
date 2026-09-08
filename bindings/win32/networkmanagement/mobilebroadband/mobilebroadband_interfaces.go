@@ -357,14 +357,22 @@ func (self *IMbnDeviceService) Get_DeviceServiceID(DeviceServiceID *foundation.B
 }
 
 // Get_IsCommandSessionOpen dispatches through IMbnDeviceService's vtable slot 13.
-func (self *IMbnDeviceService) Get_IsCommandSessionOpen(value *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
+func (self *IMbnDeviceService) Get_IsCommandSessionOpen(value *bool) error {
+	_value := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	if value != nil {
+		*value = *_value != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsDataSessionOpen dispatches through IMbnDeviceService's vtable slot 14.
-func (self *IMbnDeviceService) Get_IsDataSessionOpen(value *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
+func (self *IMbnDeviceService) Get_IsDataSessionOpen(value *bool) error {
+	_value := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_value))))
+	if value != nil {
+		*value = *_value != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

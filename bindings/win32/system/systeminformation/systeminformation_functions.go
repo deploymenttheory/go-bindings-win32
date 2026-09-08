@@ -332,8 +332,12 @@ func GetNativeSystemInfo(lpSystemInfo *SYSTEM_INFO) {
 }
 
 // GetOsManufacturingMode calls api-ms-win-core-sysinfo-l1-2-3!GetOsManufacturingMode.
-func GetOsManufacturingMode(pbEnabled *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procGetOsManufacturingMode.Addr(), uintptr(unsafe.Pointer(pbEnabled)))
+func GetOsManufacturingMode(pbEnabled *bool) bool {
+	_pbEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetOsManufacturingMode.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbEnabled))))
+	if pbEnabled != nil {
+		*pbEnabled = *_pbEnabled != 0
+	}
 	return r1 != 0
 }
 
@@ -439,8 +443,12 @@ func GetSystemInfo(lpSystemInfo *SYSTEM_INFO) {
 }
 
 // GetSystemLeapSecondInformation calls KERNEL32!GetSystemLeapSecondInformation.
-func GetSystemLeapSecondInformation(Enabled *foundation.BOOL, Flags *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procGetSystemLeapSecondInformation.Addr(), uintptr(unsafe.Pointer(Enabled)), uintptr(unsafe.Pointer(Flags)))
+func GetSystemLeapSecondInformation(Enabled *bool, Flags *uint32) bool {
+	_Enabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetSystemLeapSecondInformation.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_Enabled))), uintptr(unsafe.Pointer(Flags)))
+	if Enabled != nil {
+		*Enabled = *_Enabled != 0
+	}
 	return r1 != 0
 }
 
@@ -454,8 +462,12 @@ func GetSystemTime(lpSystemTime *foundation.SYSTEMTIME) {
 // GetSystemTimeAdjustment calls KERNEL32!GetSystemTimeAdjustment.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemtimeadjustment
 // Minimum OS: windows5.0.
-func GetSystemTimeAdjustment(lpTimeAdjustment *uint32, lpTimeIncrement *uint32, lpTimeAdjustmentDisabled *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetSystemTimeAdjustment.Addr(), uintptr(unsafe.Pointer(lpTimeAdjustment)), uintptr(unsafe.Pointer(lpTimeIncrement)), uintptr(unsafe.Pointer(lpTimeAdjustmentDisabled)))
+func GetSystemTimeAdjustment(lpTimeAdjustment *uint32, lpTimeIncrement *uint32, lpTimeAdjustmentDisabled *bool) error {
+	_lpTimeAdjustmentDisabled := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procGetSystemTimeAdjustment.Addr(), uintptr(unsafe.Pointer(lpTimeAdjustment)), uintptr(unsafe.Pointer(lpTimeIncrement)), uintptr(win32.OutParam(unsafe.Pointer(_lpTimeAdjustmentDisabled))))
+	if lpTimeAdjustmentDisabled != nil {
+		*lpTimeAdjustmentDisabled = *_lpTimeAdjustmentDisabled != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -465,8 +477,12 @@ func GetSystemTimeAdjustment(lpTimeAdjustment *uint32, lpTimeIncrement *uint32, 
 // GetSystemTimeAdjustmentPrecise calls api-ms-win-core-sysinfo-l1-2-4!GetSystemTimeAdjustmentPrecise.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemtimeadjustmentprecise
 // Minimum OS: windows10.0.10240.
-func GetSystemTimeAdjustmentPrecise(lpTimeAdjustment *uint64, lpTimeIncrement *uint64, lpTimeAdjustmentDisabled *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetSystemTimeAdjustmentPrecise.Addr(), uintptr(unsafe.Pointer(lpTimeAdjustment)), uintptr(unsafe.Pointer(lpTimeIncrement)), uintptr(unsafe.Pointer(lpTimeAdjustmentDisabled)))
+func GetSystemTimeAdjustmentPrecise(lpTimeAdjustment *uint64, lpTimeIncrement *uint64, lpTimeAdjustmentDisabled *bool) error {
+	_lpTimeAdjustmentDisabled := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procGetSystemTimeAdjustmentPrecise.Addr(), uintptr(unsafe.Pointer(lpTimeAdjustment)), uintptr(unsafe.Pointer(lpTimeIncrement)), uintptr(win32.OutParam(unsafe.Pointer(_lpTimeAdjustmentDisabled))))
+	if lpTimeAdjustmentDisabled != nil {
+		*lpTimeAdjustmentDisabled = *_lpTimeAdjustmentDisabled != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -649,8 +665,12 @@ func IsUserCetAvailableInEnvironment(UserCetEnvironment USER_CET_ENVIRONMENT) bo
 // IsWow64GuestMachineSupported calls KERNEL32!IsWow64GuestMachineSupported.
 // https://learn.microsoft.com/windows/win32/api/wow64apiset/nf-wow64apiset-iswow64guestmachinesupported
 // Minimum OS: windows10.0.16299.
-func IsWow64GuestMachineSupported(WowGuestMachine IMAGE_FILE_MACHINE, MachineIsSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procIsWow64GuestMachineSupported.Addr(), uintptr(WowGuestMachine), uintptr(unsafe.Pointer(MachineIsSupported)))
+func IsWow64GuestMachineSupported(WowGuestMachine IMAGE_FILE_MACHINE, MachineIsSupported *bool) error {
+	_MachineIsSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsWow64GuestMachineSupported.Addr(), uintptr(WowGuestMachine), uintptr(win32.OutParam(unsafe.Pointer(_MachineIsSupported))))
+	if MachineIsSupported != nil {
+		*MachineIsSupported = *_MachineIsSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

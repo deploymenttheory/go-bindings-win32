@@ -642,10 +642,14 @@ func (self *IWSDScopeMatchingRule) GetScopeRule(ppszScopeMatchingRule *foundatio
 }
 
 // MatchScopes dispatches through IWSDScopeMatchingRule's vtable slot 4.
-func (self *IWSDScopeMatchingRule) MatchScopes(pszScope1 string, pszScope2 string, pfMatch *foundation.BOOL) error {
+func (self *IWSDScopeMatchingRule) MatchScopes(pszScope1 string, pszScope2 string, pfMatch *bool) error {
 	_pszScope1 := win32.UTF16Ptr(pszScope1)
 	_pszScope2 := win32.UTF16Ptr(pszScope2)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszScope1)), uintptr(unsafe.Pointer(_pszScope2)), uintptr(unsafe.Pointer(pfMatch)))
+	_pfMatch := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszScope1)), uintptr(unsafe.Pointer(_pszScope2)), uintptr(win32.OutParam(unsafe.Pointer(_pfMatch))))
+	if pfMatch != nil {
+		*pfMatch = *_pfMatch != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -860,14 +864,22 @@ type IWSDSignatureProperty struct {
 var IID_IWSDSignatureProperty = win32.GUID{Data1: 0x03ce20aa, Data2: 0x71c4, Data3: 0x45e2, Data4: [8]byte{0xb3, 0x2e, 0x37, 0x66, 0xc6, 0x1c, 0x79, 0x0f}}
 
 // IsMessageSigned dispatches through IWSDSignatureProperty's vtable slot 3.
-func (self *IWSDSignatureProperty) IsMessageSigned(pbSigned *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSigned)))
+func (self *IWSDSignatureProperty) IsMessageSigned(pbSigned *bool) error {
+	_pbSigned := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbSigned))))
+	if pbSigned != nil {
+		*pbSigned = *_pbSigned != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsMessageSignatureTrusted dispatches through IWSDSignatureProperty's vtable slot 4.
-func (self *IWSDSignatureProperty) IsMessageSignatureTrusted(pbSignatureTrusted *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSignatureTrusted)))
+func (self *IWSDSignatureProperty) IsMessageSignatureTrusted(pbSignatureTrusted *bool) error {
+	_pbSignatureTrusted := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbSignatureTrusted))))
+	if pbSignatureTrusted != nil {
+		*pbSignatureTrusted = *_pbSignatureTrusted != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

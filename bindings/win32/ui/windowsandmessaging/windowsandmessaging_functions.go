@@ -2800,9 +2800,13 @@ func GetDlgItem(hDlg foundation.HWND, nIDDlgItem int32) (foundation.HWND, error)
 // GetDlgItemInt calls USER32!GetDlgItemInt.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getdlgitemint
 // Minimum OS: windows5.0.
-func GetDlgItemInt(hDlg foundation.HWND, nIDDlgItem int32, lpTranslated *foundation.BOOL, bSigned bool) (uint32, error) {
+func GetDlgItemInt(hDlg foundation.HWND, nIDDlgItem int32, lpTranslated *bool, bSigned bool) (uint32, error) {
+	_lpTranslated := new(foundation.BOOL)
 	_bSigned := win32.Bool32(bSigned)
-	r1, _, e1 := syscall.SyscallN(procGetDlgItemInt.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(unsafe.Pointer(lpTranslated)), uintptr(_bSigned))
+	r1, _, e1 := syscall.SyscallN(procGetDlgItemInt.Addr(), uintptr(hDlg), uintptr(nIDDlgItem), uintptr(win32.OutParam(unsafe.Pointer(_lpTranslated))), uintptr(_bSigned))
+	if lpTranslated != nil {
+		*lpTranslated = *_lpTranslated != 0
+	}
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -3682,8 +3686,12 @@ func IsIconic(hWnd foundation.HWND) bool {
 }
 
 // IsInterceptWindow calls USER32!IsInterceptWindow.
-func IsInterceptWindow(topLevelWindow foundation.HWND, isIntercept *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procIsInterceptWindow.Addr(), uintptr(topLevelWindow), uintptr(unsafe.Pointer(isIntercept)))
+func IsInterceptWindow(topLevelWindow foundation.HWND, isIntercept *bool) bool {
+	_isIntercept := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsInterceptWindow.Addr(), uintptr(topLevelWindow), uintptr(win32.OutParam(unsafe.Pointer(_isIntercept))))
+	if isIntercept != nil {
+		*isIntercept = *_isIntercept != 0
+	}
 	return r1 != 0
 }
 

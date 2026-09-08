@@ -591,8 +591,12 @@ func (self *IDCompositionDevice) CreateAnimation(animation **IDCompositionAnimat
 }
 
 // CheckDeviceState dispatches through IDCompositionDevice's vtable slot 26.
-func (self *IDCompositionDevice) CheckDeviceState(pfValid *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfValid)))
+func (self *IDCompositionDevice) CheckDeviceState(pfValid *bool) error {
+	_pfValid := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfValid))))
+	if pfValid != nil {
+		*pfValid = *_pfValid != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -836,8 +840,12 @@ type IDCompositionDevice4 struct {
 var IID_IDCompositionDevice4 = win32.GUID{Data1: 0x85fc5cca, Data2: 0x2da6, Data3: 0x494c, Data4: [8]byte{0x86, 0xb6, 0x4a, 0x77, 0x5c, 0x04, 0x9b, 0x8a}}
 
 // CheckCompositionTextureSupport dispatches through IDCompositionDevice4's vtable slot 37.
-func (self *IDCompositionDevice4) CheckCompositionTextureSupport(renderingDevice *systemcom.IUnknown, supportsCompositionTextures *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(supportsCompositionTextures)))
+func (self *IDCompositionDevice4) CheckCompositionTextureSupport(renderingDevice *systemcom.IUnknown, supportsCompositionTextures *bool) error {
+	_supportsCompositionTextures := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderingDevice)), uintptr(win32.OutParam(unsafe.Pointer(_supportsCompositionTextures))))
+	if supportsCompositionTextures != nil {
+		*supportsCompositionTextures = *_supportsCompositionTextures != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

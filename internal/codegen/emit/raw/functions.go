@@ -204,7 +204,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		paramNames[i] = avoidCollision(naming.ParamName(function.Params[i].Name), reserved)
 	}
 
-	var decls, preamble, argWords, specArgs, returnValues, returnTypes []string
+	var decls, preamble, postamble, argWords, specArgs, returnValues, returnTypes []string
 	usesUnsafe, viaCall := false, false
 	for i := range function.Params {
 		param := &function.Params[i]
@@ -218,11 +218,12 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 		if retValMode != retValNone {
 			if element, ok := retValElement(param, resolved); ok {
 				local := "_" + paramNames[i]
+				exposed, value := retValExposure(param, element, local)
 				preamble = append(preamble, local+" := new("+element+")")
 				argWords = append(argWords, "uintptr(win32.OutParam(unsafe.Pointer("+local+")))")
 				specArgs = append(specArgs, specWord)
-				returnValues = append(returnValues, "*"+local)
-				returnTypes = append(returnTypes, element)
+				returnValues = append(returnValues, value)
+				returnTypes = append(returnTypes, exposed)
 				usesUnsafe = true
 				continue
 			}
@@ -256,6 +257,7 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 			decls = append(decls, shaped.decl)
 		}
 		preamble = append(preamble, shaped.preamble...)
+		postamble = append(postamble, shaped.postamble...)
 		argWords = append(argWords, shaped.word)
 		specArgs = append(specArgs, shaped.spec)
 		usesUnsafe = usesUnsafe || shaped.pointer
@@ -263,10 +265,11 @@ func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32
 	}
 
 	model := view.FunctionModel{
-		ProcVar:  "proc" + rawName,
-		ParamStr: strings.Join(decls, ", "),
-		Preamble: preamble,
-		ArgExprs: argWords,
+		ProcVar:   "proc" + rawName,
+		ParamStr:  strings.Join(decls, ", "),
+		Preamble:  preamble,
+		Postamble: postamble,
+		ArgExprs:  argWords,
 	}
 	retSpec, retArg := "", "nil"
 	if len(returnValues) > 0 {
@@ -359,10 +362,14 @@ const specWord = "win32.Word"
 type shapedParam struct {
 	decl     string
 	preamble []string
-	word     string
-	spec     string
-	pointer  bool
-	call     bool
+	// postamble holds statements that run after the dispatch, before any
+	// return — the write-back half of an out-param the signature exposes as
+	// a different Go type than the callee writes.
+	postamble []string
+	word      string
+	spec      string
+	pointer   bool
+	call      bool
 }
 
 // shapeParam maps one non-slice, non-retval parameter to its idiomatic Go
@@ -395,6 +402,22 @@ func (g *Generator) shapeParam(name string, param *win32meta.Param, resolved typ
 			word:     "uintptr(unsafe.Pointer(" + local + "))",
 			spec:     specWord,
 			pointer:  true,
+		}, true
+	}
+	// BOOL [out] → *bool: the callee writes a 4-byte BOOL into a local, and
+	// the write-back converts it. The local is heap-escaped via
+	// win32.OutParam for the same reason the [out,retval] locals are (a
+	// callee that reenters Go can move this goroutine's stack).
+	if isBOOLPointer(&param.Type) && param.IsOut && !param.IsIn && strings.HasPrefix(resolved.GoType, "*") {
+		local := "_" + name
+		element := resolved.GoType[1:]
+		return shapedParam{
+			decl:      name + " *bool",
+			preamble:  []string{local + " := new(" + element + ")"},
+			postamble: []string{"if " + name + " != nil { *" + name + " = *" + local + " != 0 }"},
+			word:      "uintptr(win32.OutParam(unsafe.Pointer(" + local + ")))",
+			spec:      specWord,
+			pointer:   true,
 		}, true
 	}
 	// BOOL input → Go bool.
@@ -1001,6 +1024,25 @@ func isWideStringPtr(resolved typemap.Resolved) bool {
 
 func isBOOL(resolved typemap.Resolved) bool {
 	return resolved.TypedefApi == foundationApi && resolved.TypedefName == "BOOL"
+}
+
+// isBOOLPointer reports whether a metadata type is literally Foundation.BOOL*.
+// The resolved form of a pointer is just KindPointer, so BOOL-ness has to be
+// read off the metadata rather than the resolution.
+func isBOOLPointer(ref *win32meta.TypeRef) bool {
+	return ref.Kind == "PointerTo" && ref.Child != nil &&
+		ref.Child.Kind == "ApiRef" && ref.Child.Api == foundationApi && ref.Child.Name == "BOOL"
+}
+
+// retValExposure maps an elevated [out,retval] out-param onto the type the
+// signature exposes and the expression that produces it from the local. A
+// BOOL out is a Win32 boolean, not a number, so it surfaces as Go bool — the
+// same normalization input BOOL params and plain BOOL returns already get.
+func retValExposure(param *win32meta.Param, element, local string) (goType, value string) {
+	if isBOOLPointer(&param.Type) {
+		return "bool", "*" + local + " != 0"
+	}
+	return element, "*" + local
 }
 
 func isHRESULT(resolved typemap.Resolved) bool {

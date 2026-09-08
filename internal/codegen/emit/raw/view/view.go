@@ -180,7 +180,11 @@ type ComMethodModel struct {
 	// Preamble holds statements that convert idiomatic params into raw
 	// syscall words (UTF-16, bool→BOOL, [out,retval] locals) before dispatch.
 	Preamble []string
-	ArgExprs []string
+	// Postamble holds statements that run after the dispatch and before any
+	// return — the write-back for an out-param the signature exposes as a
+	// different Go type than the callee writes ([out] BOOL → *bool).
+	Postamble []string
+	ArgExprs  []string
 	// CallExpr is the complete dispatch expression: syscall.SyscallN(...)
 	// or, for shapes SyscallN cannot marshal, win32.Call(...) — with .Tuple()
 	// appended unless ReturnKind is RetFloat, so it yields (r1, r2, err).
@@ -210,6 +214,10 @@ type FunctionModel struct {
 	// syscall words (UTF-16, bool→BOOL, slice address-of, [out,retval]
 	// locals) before dispatch.
 	Preamble []string
+	// Postamble holds statements that run after the dispatch and before any
+	// return — the write-back for an out-param the signature exposes as a
+	// different Go type than the callee writes ([out] BOOL → *bool).
+	Postamble []string
 	// ProcVar is the proc variable dispatched through.
 	ProcVar string
 	// ArgExprs are the rendered SyscallN argument words.

@@ -75,8 +75,12 @@ func (self *IEnhancedStorageACT2) GetDeviceName(ppwszDeviceName *foundation.PWST
 }
 
 // IsDeviceRemovable dispatches through IEnhancedStorageACT2's vtable slot 10.
-func (self *IEnhancedStorageACT2) IsDeviceRemovable(pIsDeviceRemovable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsDeviceRemovable)))
+func (self *IEnhancedStorageACT2) IsDeviceRemovable(pIsDeviceRemovable *bool) error {
+	_pIsDeviceRemovable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsDeviceRemovable))))
+	if pIsDeviceRemovable != nil {
+		*pIsDeviceRemovable = *_pIsDeviceRemovable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -95,14 +99,22 @@ func (self *IEnhancedStorageACT3) UnauthorizeEx(dwFlags uint32) error {
 }
 
 // IsQueueFrozen dispatches through IEnhancedStorageACT3's vtable slot 12.
-func (self *IEnhancedStorageACT3) IsQueueFrozen(pIsQueueFrozen *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsQueueFrozen)))
+func (self *IEnhancedStorageACT3) IsQueueFrozen(pIsQueueFrozen *bool) error {
+	_pIsQueueFrozen := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsQueueFrozen))))
+	if pIsQueueFrozen != nil {
+		*pIsQueueFrozen = *_pIsQueueFrozen != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetShellExtSupport dispatches through IEnhancedStorageACT3's vtable slot 13.
-func (self *IEnhancedStorageACT3) GetShellExtSupport(pShellExtSupport *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShellExtSupport)))
+func (self *IEnhancedStorageACT3) GetShellExtSupport(pShellExtSupport *bool) error {
+	_pShellExtSupport := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pShellExtSupport))))
+	if pShellExtSupport != nil {
+		*pShellExtSupport = *_pShellExtSupport != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -2213,16 +2213,24 @@ func (self *ID2D1Geometry) GetWidenedBounds(strokeWidth float32, strokeStyle *ID
 var specID2D1Geometry_StrokeContainsPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Float32, win32.Word, win32.Word, win32.Float32, win32.Word}}
 
 // StrokeContainsPoint dispatches through ID2D1Geometry's vtable slot 6.
-func (self *ID2D1Geometry) StrokeContainsPoint(point graphicsdirect2dcommon.D2D_POINT_2F, strokeWidth float32, strokeStyle *ID2D1StrokeStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, contains *foundation.BOOL) error {
-	r1, _, _ := win32.Call(self.LpVtbl[6], specID2D1Geometry_StrokeContainsPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(contains))).Tuple()
+func (self *ID2D1Geometry) StrokeContainsPoint(point graphicsdirect2dcommon.D2D_POINT_2F, strokeWidth float32, strokeStyle *ID2D1StrokeStyle, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, contains *bool) error {
+	_contains := new(foundation.BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[6], specID2D1Geometry_StrokeContainsPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point)), uintptr(math.Float32bits(strokeWidth)), uintptr(unsafe.Pointer(strokeStyle)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(win32.OutParam(unsafe.Pointer(_contains)))).Tuple()
+	if contains != nil {
+		*contains = *_contains != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 var specID2D1Geometry_FillContainsPoint = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(8, 4, 2, false), win32.Word, win32.Float32, win32.Word}}
 
 // FillContainsPoint dispatches through ID2D1Geometry's vtable slot 7.
-func (self *ID2D1Geometry) FillContainsPoint(point graphicsdirect2dcommon.D2D_POINT_2F, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, contains *foundation.BOOL) error {
-	r1, _, _ := win32.Call(self.LpVtbl[7], specID2D1Geometry_FillContainsPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(unsafe.Pointer(contains))).Tuple()
+func (self *ID2D1Geometry) FillContainsPoint(point graphicsdirect2dcommon.D2D_POINT_2F, worldTransform *graphicsdirect2dcommon.D2D_MATRIX_3X2_F, flatteningTolerance float32, contains *bool) error {
+	_contains := new(foundation.BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[7], specID2D1Geometry_FillContainsPoint, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&point)), uintptr(unsafe.Pointer(worldTransform)), uintptr(math.Float32bits(flatteningTolerance)), uintptr(win32.OutParam(unsafe.Pointer(_contains)))).Tuple()
+	if contains != nil {
+		*contains = *_contains != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2594,8 +2602,12 @@ func (self *ID2D1ImageSource) OfferResources() error {
 }
 
 // TryReclaimResources dispatches through ID2D1ImageSource's vtable slot 5.
-func (self *ID2D1ImageSource) TryReclaimResources(resourcesDiscarded *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resourcesDiscarded)))
+func (self *ID2D1ImageSource) TryReclaimResources(resourcesDiscarded *bool) error {
+	_resourcesDiscarded := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_resourcesDiscarded))))
+	if resourcesDiscarded != nil {
+		*resourcesDiscarded = *_resourcesDiscarded != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3895,9 +3907,13 @@ func (self *ID2D1SvgElement) CreateChild(tagName string, newChild **ID2D1SvgElem
 }
 
 // IsAttributeSpecified dispatches through ID2D1SvgElement's vtable slot 19.
-func (self *ID2D1SvgElement) IsAttributeSpecified(name string, inherited *foundation.BOOL) foundation.BOOL {
+func (self *ID2D1SvgElement) IsAttributeSpecified(name string, inherited *bool) foundation.BOOL {
 	_name := win32.UTF16Ptr(name)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(inherited)))
+	_inherited := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(win32.OutParam(unsafe.Pointer(_inherited))))
+	if inherited != nil {
+		*inherited = *_inherited != 0
+	}
 	return foundation.BOOL(r1)
 }
 
@@ -3908,14 +3924,22 @@ func (self *ID2D1SvgElement) GetSpecifiedAttributeCount() uint32 {
 }
 
 // GetSpecifiedAttributeName dispatches through ID2D1SvgElement's vtable slot 21.
-func (self *ID2D1SvgElement) GetSpecifiedAttributeName(index uint32, name foundation.PWSTR, nameCount uint32, inherited *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(nameCount), uintptr(unsafe.Pointer(inherited)))
+func (self *ID2D1SvgElement) GetSpecifiedAttributeName(index uint32, name foundation.PWSTR, nameCount uint32, inherited *bool) error {
+	_inherited := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(name)), uintptr(nameCount), uintptr(win32.OutParam(unsafe.Pointer(_inherited))))
+	if inherited != nil {
+		*inherited = *_inherited != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetSpecifiedAttributeNameLength dispatches through ID2D1SvgElement's vtable slot 22.
-func (self *ID2D1SvgElement) GetSpecifiedAttributeNameLength(index uint32, nameLength *uint32, inherited *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(nameLength)), uintptr(unsafe.Pointer(inherited)))
+func (self *ID2D1SvgElement) GetSpecifiedAttributeNameLength(index uint32, nameLength *uint32, inherited *bool) error {
+	_inherited := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(nameLength)), uintptr(win32.OutParam(unsafe.Pointer(_inherited))))
+	if inherited != nil {
+		*inherited = *_inherited != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

@@ -44,9 +44,13 @@ type IRdcComparator struct {
 var IID_IRdcComparator = win32.GUID{Data1: 0x96236a77, Data2: 0x9dbc, Data3: 0x11da, Data4: [8]byte{0x9e, 0x3f, 0x00, 0x11, 0x11, 0x4a, 0xe3, 0x11}}
 
 // Process dispatches through IRdcComparator's vtable slot 3.
-func (self *IRdcComparator) Process(endOfInput bool, endOfOutput *foundation.BOOL, inputBuffer *RdcBufferPointer, outputBuffer *RdcNeedPointer, rdc_ErrorCode *RDC_ErrorCode) error {
+func (self *IRdcComparator) Process(endOfInput bool, endOfOutput *bool, inputBuffer *RdcBufferPointer, outputBuffer *RdcNeedPointer, rdc_ErrorCode *RDC_ErrorCode) error {
 	_endOfInput := win32.Bool32(endOfInput)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_endOfInput), uintptr(unsafe.Pointer(endOfOutput)), uintptr(unsafe.Pointer(inputBuffer)), uintptr(unsafe.Pointer(outputBuffer)), uintptr(unsafe.Pointer(rdc_ErrorCode)))
+	_endOfOutput := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_endOfInput), uintptr(win32.OutParam(unsafe.Pointer(_endOfOutput))), uintptr(unsafe.Pointer(inputBuffer)), uintptr(unsafe.Pointer(outputBuffer)), uintptr(unsafe.Pointer(rdc_ErrorCode)))
+	if endOfOutput != nil {
+		*endOfOutput = *_endOfOutput != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -66,8 +70,12 @@ func (self *IRdcFileReader) GetFileSize(fileSize *uint64) error {
 }
 
 // Read dispatches through IRdcFileReader's vtable slot 4.
-func (self *IRdcFileReader) Read(offsetFileStart uint64, bytesToRead uint32, bytesActuallyRead *uint32, buffer *byte, eof *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(offsetFileStart), uintptr(bytesToRead), uintptr(unsafe.Pointer(bytesActuallyRead)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(eof)))
+func (self *IRdcFileReader) Read(offsetFileStart uint64, bytesToRead uint32, bytesActuallyRead *uint32, buffer *byte, eof *bool) error {
+	_eof := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(offsetFileStart), uintptr(bytesToRead), uintptr(unsafe.Pointer(bytesActuallyRead)), uintptr(unsafe.Pointer(buffer)), uintptr(win32.OutParam(unsafe.Pointer(_eof))))
+	if eof != nil {
+		*eof = *_eof != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -120,13 +128,17 @@ func (self *IRdcGenerator) GetGeneratorParameters(level uint32, iGeneratorParame
 }
 
 // Process dispatches through IRdcGenerator's vtable slot 4.
-func (self *IRdcGenerator) Process(endOfInput bool, endOfOutput *foundation.BOOL, inputBuffer *RdcBufferPointer, outputBuffers []*RdcBufferPointer, rdc_ErrorCode *RDC_ErrorCode) error {
+func (self *IRdcGenerator) Process(endOfInput bool, endOfOutput *bool, inputBuffer *RdcBufferPointer, outputBuffers []*RdcBufferPointer, rdc_ErrorCode *RDC_ErrorCode) error {
 	_endOfInput := win32.Bool32(endOfInput)
+	_endOfOutput := new(foundation.BOOL)
 	var _outputBuffers **RdcBufferPointer
 	if len(outputBuffers) > 0 {
 		_outputBuffers = &outputBuffers[0]
 	}
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_endOfInput), uintptr(unsafe.Pointer(endOfOutput)), uintptr(unsafe.Pointer(inputBuffer)), uintptr(len(outputBuffers)), uintptr(unsafe.Pointer(_outputBuffers)), uintptr(unsafe.Pointer(rdc_ErrorCode)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_endOfInput), uintptr(win32.OutParam(unsafe.Pointer(_endOfOutput))), uintptr(unsafe.Pointer(inputBuffer)), uintptr(len(outputBuffers)), uintptr(unsafe.Pointer(_outputBuffers)), uintptr(unsafe.Pointer(rdc_ErrorCode)))
+	if endOfOutput != nil {
+		*endOfOutput = *_endOfOutput != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -267,8 +279,12 @@ func (self *IRdcSignatureReader) ReadHeader(rdc_ErrorCode *RDC_ErrorCode) error 
 }
 
 // ReadSignatures dispatches through IRdcSignatureReader's vtable slot 4.
-func (self *IRdcSignatureReader) ReadSignatures(rdcSignaturePointer *RdcSignaturePointer, endOfOutput *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rdcSignaturePointer)), uintptr(unsafe.Pointer(endOfOutput)))
+func (self *IRdcSignatureReader) ReadSignatures(rdcSignaturePointer *RdcSignaturePointer, endOfOutput *bool) error {
+	_endOfOutput := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rdcSignaturePointer)), uintptr(win32.OutParam(unsafe.Pointer(_endOfOutput))))
+	if endOfOutput != nil {
+		*endOfOutput = *_endOfOutput != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -428,8 +444,12 @@ type ISimilarityTableDumpState struct {
 var IID_ISimilarityTableDumpState = win32.GUID{Data1: 0x96236a7b, Data2: 0x9dbc, Data3: 0x11da, Data4: [8]byte{0x9e, 0x3f, 0x00, 0x11, 0x11, 0x4a, 0xe3, 0x11}}
 
 // GetNextData dispatches through ISimilarityTableDumpState's vtable slot 3.
-func (self *ISimilarityTableDumpState) GetNextData(resultsSize uint32, resultsUsed *uint32, eof *foundation.BOOL, results *SimilarityDumpData) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(resultsSize), uintptr(unsafe.Pointer(resultsUsed)), uintptr(unsafe.Pointer(eof)), uintptr(unsafe.Pointer(results)))
+func (self *ISimilarityTableDumpState) GetNextData(resultsSize uint32, resultsUsed *uint32, eof *bool, results *SimilarityDumpData) error {
+	_eof := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(resultsSize), uintptr(unsafe.Pointer(resultsUsed)), uintptr(win32.OutParam(unsafe.Pointer(_eof))), uintptr(unsafe.Pointer(results)))
+	if eof != nil {
+		*eof = *_eof != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

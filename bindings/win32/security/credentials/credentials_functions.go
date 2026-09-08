@@ -974,8 +974,12 @@ func KeyCredentialManagerGetInformation(keyCredentialManagerInfo **KeyCredential
 
 // KeyCredentialManagerGetOperationErrorStates calls KeyCredMgr!KeyCredentialManagerGetOperationErrorStates.
 // https://learn.microsoft.com/windows/win32/api/keycredmgr/nf-keycredmgr-keycredentialmanagergetoperationerrorstates
-func KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType KeyCredentialManagerOperationType, isReady *foundation.BOOL, keyCredentialManagerOperationErrorStates *KeyCredentialManagerOperationErrorStates) error {
-	r1, _, _ := syscall.SyscallN(procKeyCredentialManagerGetOperationErrorStates.Addr(), uintptr(keyCredentialManagerOperationType), uintptr(unsafe.Pointer(isReady)), uintptr(unsafe.Pointer(keyCredentialManagerOperationErrorStates)))
+func KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType KeyCredentialManagerOperationType, isReady *bool, keyCredentialManagerOperationErrorStates *KeyCredentialManagerOperationErrorStates) error {
+	_isReady := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procKeyCredentialManagerGetOperationErrorStates.Addr(), uintptr(keyCredentialManagerOperationType), uintptr(win32.OutParam(unsafe.Pointer(_isReady))), uintptr(unsafe.Pointer(keyCredentialManagerOperationErrorStates)))
+	if isReady != nil {
+		*isReady = *_isReady != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

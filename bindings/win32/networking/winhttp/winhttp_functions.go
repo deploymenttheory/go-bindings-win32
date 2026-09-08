@@ -565,11 +565,15 @@ func WinHttpReadDataEx(hRequest unsafe.Pointer, lpBuffer []byte, lpdwNumberOfByt
 }
 
 // WinHttpReadProxySettings calls WINHTTP!WinHttpReadProxySettings.
-func WinHttpReadProxySettings(hSession unsafe.Pointer, pcwszConnectionName *string, fFallBackToDefaultSettings bool, fSetAutoDiscoverForDefaultSettings bool, pdwSettingsVersion *uint32, pfDefaultSettingsAreReturned *foundation.BOOL, pWinHttpProxySettings *WINHTTP_PROXY_SETTINGS) uint32 {
+func WinHttpReadProxySettings(hSession unsafe.Pointer, pcwszConnectionName *string, fFallBackToDefaultSettings bool, fSetAutoDiscoverForDefaultSettings bool, pdwSettingsVersion *uint32, pfDefaultSettingsAreReturned *bool, pWinHttpProxySettings *WINHTTP_PROXY_SETTINGS) uint32 {
 	_pcwszConnectionName := win32.UTF16PtrOrNil(pcwszConnectionName)
 	_fFallBackToDefaultSettings := win32.Bool32(fFallBackToDefaultSettings)
 	_fSetAutoDiscoverForDefaultSettings := win32.Bool32(fSetAutoDiscoverForDefaultSettings)
-	r1, _, _ := syscall.SyscallN(procWinHttpReadProxySettings.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(unsafe.Pointer(_pcwszConnectionName)), uintptr(_fFallBackToDefaultSettings), uintptr(_fSetAutoDiscoverForDefaultSettings), uintptr(unsafe.Pointer(pdwSettingsVersion)), uintptr(unsafe.Pointer(pfDefaultSettingsAreReturned)), uintptr(unsafe.Pointer(pWinHttpProxySettings)))
+	_pfDefaultSettingsAreReturned := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWinHttpReadProxySettings.Addr(), uintptr(unsafe.Pointer(hSession)), uintptr(unsafe.Pointer(_pcwszConnectionName)), uintptr(_fFallBackToDefaultSettings), uintptr(_fSetAutoDiscoverForDefaultSettings), uintptr(unsafe.Pointer(pdwSettingsVersion)), uintptr(win32.OutParam(unsafe.Pointer(_pfDefaultSettingsAreReturned))), uintptr(unsafe.Pointer(pWinHttpProxySettings)))
+	if pfDefaultSettingsAreReturned != nil {
+		*pfDefaultSettingsAreReturned = *_pfDefaultSettingsAreReturned != 0
+	}
 	return uint32(r1)
 }
 

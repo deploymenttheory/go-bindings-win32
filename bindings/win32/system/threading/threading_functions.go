@@ -2422,8 +2422,12 @@ func GetProcessAffinityMask(hProcess foundation.HANDLE, lpProcessAffinityMask *u
 // GetProcessDEPPolicy calls KERNEL32!GetProcessDEPPolicy.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprocessdeppolicy
 // Minimum OS: windows6.0.6000.
-func GetProcessDEPPolicy(hProcess foundation.HANDLE, lpFlags *uint32, lpPermanent *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetProcessDEPPolicy.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpFlags)), uintptr(unsafe.Pointer(lpPermanent)))
+func GetProcessDEPPolicy(hProcess foundation.HANDLE, lpFlags *uint32, lpPermanent *bool) error {
+	_lpPermanent := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procGetProcessDEPPolicy.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpFlags)), uintptr(win32.OutParam(unsafe.Pointer(_lpPermanent))))
+	if lpPermanent != nil {
+		*lpPermanent = *_lpPermanent != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2544,8 +2548,12 @@ func GetProcessMitigationPolicy(hProcess foundation.HANDLE, MitigationPolicy PRO
 // GetProcessPriorityBoost calls KERNEL32!GetProcessPriorityBoost.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocesspriorityboost
 // Minimum OS: windows5.1.2600.
-func GetProcessPriorityBoost(hProcess foundation.HANDLE, pDisablePriorityBoost *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetProcessPriorityBoost.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pDisablePriorityBoost)))
+func GetProcessPriorityBoost(hProcess foundation.HANDLE, pDisablePriorityBoost *bool) error {
+	_pDisablePriorityBoost := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procGetProcessPriorityBoost.Addr(), uintptr(hProcess), uintptr(win32.OutParam(unsafe.Pointer(_pDisablePriorityBoost))))
+	if pDisablePriorityBoost != nil {
+		*pDisablePriorityBoost = *_pDisablePriorityBoost != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2639,8 +2647,12 @@ func GetThreadGroupAffinity(hThread foundation.HANDLE, GroupAffinity *systemsyst
 // GetThreadIOPendingFlag calls KERNEL32!GetThreadIOPendingFlag.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadiopendingflag
 // Minimum OS: windows6.0.6000.
-func GetThreadIOPendingFlag(hThread foundation.HANDLE, lpIOIsPending *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetThreadIOPendingFlag.Addr(), uintptr(hThread), uintptr(unsafe.Pointer(lpIOIsPending)))
+func GetThreadIOPendingFlag(hThread foundation.HANDLE, lpIOIsPending *bool) error {
+	_lpIOIsPending := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procGetThreadIOPendingFlag.Addr(), uintptr(hThread), uintptr(win32.OutParam(unsafe.Pointer(_lpIOIsPending))))
+	if lpIOIsPending != nil {
+		*lpIOIsPending = *_lpIOIsPending != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2698,8 +2710,12 @@ func GetThreadPriority(hThread foundation.HANDLE) (int32, error) {
 // GetThreadPriorityBoost calls KERNEL32!GetThreadPriorityBoost.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadpriorityboost
 // Minimum OS: windows5.1.2600.
-func GetThreadPriorityBoost(hThread foundation.HANDLE, pDisablePriorityBoost *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetThreadPriorityBoost.Addr(), uintptr(hThread), uintptr(unsafe.Pointer(pDisablePriorityBoost)))
+func GetThreadPriorityBoost(hThread foundation.HANDLE, pDisablePriorityBoost *bool) error {
+	_pDisablePriorityBoost := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procGetThreadPriorityBoost.Addr(), uintptr(hThread), uintptr(win32.OutParam(unsafe.Pointer(_pDisablePriorityBoost))))
+	if pDisablePriorityBoost != nil {
+		*pDisablePriorityBoost = *_pDisablePriorityBoost != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2761,8 +2777,12 @@ func GetUmsSystemThreadInformation(ThreadHandle foundation.HANDLE, SystemThreadI
 // InitOnceBeginInitialize calls KERNEL32!InitOnceBeginInitialize.
 // https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-initoncebegininitialize
 // Minimum OS: windows6.0.6000.
-func InitOnceBeginInitialize(lpInitOnce *INIT_ONCE, dwFlags uint32, fPending *foundation.BOOL, lpContext *unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procInitOnceBeginInitialize.Addr(), uintptr(unsafe.Pointer(lpInitOnce)), uintptr(dwFlags), uintptr(unsafe.Pointer(fPending)), uintptr(unsafe.Pointer(lpContext)))
+func InitOnceBeginInitialize(lpInitOnce *INIT_ONCE, dwFlags uint32, fPending *bool, lpContext *unsafe.Pointer) error {
+	_fPending := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procInitOnceBeginInitialize.Addr(), uintptr(unsafe.Pointer(lpInitOnce)), uintptr(dwFlags), uintptr(win32.OutParam(unsafe.Pointer(_fPending))), uintptr(unsafe.Pointer(lpContext)))
+	if fPending != nil {
+		*fPending = *_fPending != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2916,8 +2936,12 @@ func IsImmersiveProcess(hProcess foundation.HANDLE) error {
 // IsProcessCritical calls KERNEL32!IsProcessCritical.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-isprocesscritical
 // Minimum OS: windows8.1.
-func IsProcessCritical(hProcess foundation.HANDLE, Critical *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procIsProcessCritical.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Critical)))
+func IsProcessCritical(hProcess foundation.HANDLE, Critical *bool) error {
+	_Critical := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procIsProcessCritical.Addr(), uintptr(hProcess), uintptr(win32.OutParam(unsafe.Pointer(_Critical))))
+	if Critical != nil {
+		*Critical = *_Critical != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2951,8 +2975,12 @@ func IsThreadpoolTimerSet(pti PTP_TIMER) bool {
 // IsWow64Process calls KERNEL32!IsWow64Process.
 // https://learn.microsoft.com/windows/win32/api/wow64apiset/nf-wow64apiset-iswow64process
 // Minimum OS: windows6.0.6000.
-func IsWow64Process(hProcess foundation.HANDLE, Wow64Process *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procIsWow64Process.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(Wow64Process)))
+func IsWow64Process(hProcess foundation.HANDLE, Wow64Process *bool) error {
+	_Wow64Process := new(foundation.BOOL)
+	r1, _, e1 := syscall.SyscallN(procIsWow64Process.Addr(), uintptr(hProcess), uintptr(win32.OutParam(unsafe.Pointer(_Wow64Process))))
+	if Wow64Process != nil {
+		*Wow64Process = *_Wow64Process != 0
+	}
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

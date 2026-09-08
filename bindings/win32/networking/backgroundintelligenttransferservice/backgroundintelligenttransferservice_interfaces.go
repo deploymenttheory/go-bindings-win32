@@ -312,14 +312,22 @@ func (self *IBackgroundCopyFile3) SetValidationState(state bool) error {
 }
 
 // GetValidationState dispatches through IBackgroundCopyFile3's vtable slot 10.
-func (self *IBackgroundCopyFile3) GetValidationState(pState *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
+func (self *IBackgroundCopyFile3) GetValidationState(pState *bool) error {
+	_pState := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pState))))
+	if pState != nil {
+		*pState = *_pState != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsDownloadedFromPeer dispatches through IBackgroundCopyFile3's vtable slot 11.
-func (self *IBackgroundCopyFile3) IsDownloadedFromPeer(pVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
+func (self *IBackgroundCopyFile3) IsDownloadedFromPeer(pVal *bool) error {
+	_pVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pVal))))
+	if pVal != nil {
+		*pVal = *_pVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -894,8 +902,12 @@ func (self *IBackgroundCopyJob4) GetOwnerIntegrityLevel(pLevel *uint32) error {
 }
 
 // GetOwnerElevationState dispatches through IBackgroundCopyJob4's vtable slot 50.
-func (self *IBackgroundCopyJob4) GetOwnerElevationState(pElevated *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pElevated)))
+func (self *IBackgroundCopyJob4) GetOwnerElevationState(pElevated *bool) error {
+	_pElevated := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pElevated))))
+	if pElevated != nil {
+		*pElevated = *_pElevated != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1142,14 +1154,22 @@ func (self *IBitsPeer) GetPeerName(pName *foundation.PWSTR) error {
 }
 
 // IsAuthenticated dispatches through IBitsPeer's vtable slot 4.
-func (self *IBitsPeer) IsAuthenticated(pAuth *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAuth)))
+func (self *IBitsPeer) IsAuthenticated(pAuth *bool) error {
+	_pAuth := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pAuth))))
+	if pAuth != nil {
+		*pAuth = *_pAuth != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsAvailable dispatches through IBitsPeer's vtable slot 5.
-func (self *IBitsPeer) IsAvailable(pOnline *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOnline)))
+func (self *IBitsPeer) IsAvailable(pOnline *bool) error {
+	_pOnline := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pOnline))))
+	if pOnline != nil {
+		*pOnline = *_pOnline != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

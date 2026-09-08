@@ -180,8 +180,12 @@ type ICompositorInterop2 struct {
 var IID_ICompositorInterop2 = win32.GUID{Data1: 0xd3eef34c, Data2: 0x0667, Data3: 0x4afc, Data4: [8]byte{0x8d, 0x13, 0x86, 0x76, 0x07, 0xb0, 0xfe, 0x91}}
 
 // CheckCompositionTextureSupport dispatches through ICompositorInterop2's vtable slot 3.
-func (self *ICompositorInterop2) CheckCompositionTextureSupport(renderingDevice *systemcom.IUnknown, supportsCompositionTextures *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(supportsCompositionTextures)))
+func (self *ICompositorInterop2) CheckCompositionTextureSupport(renderingDevice *systemcom.IUnknown, supportsCompositionTextures *bool) error {
+	_supportsCompositionTextures := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderingDevice)), uintptr(win32.OutParam(unsafe.Pointer(_supportsCompositionTextures))))
+	if supportsCompositionTextures != nil {
+		*supportsCompositionTextures = *_supportsCompositionTextures != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

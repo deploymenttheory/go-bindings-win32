@@ -73,18 +73,26 @@ var Procs = struct {
 }
 
 // GetDeviceID calls tbs!GetDeviceID.
-func GetDeviceID(pbWindowsAIK []byte, pcbResult *uint32, pfProtectedByTPM *foundation.BOOL) error {
+func GetDeviceID(pbWindowsAIK []byte, pcbResult *uint32, pfProtectedByTPM *bool) error {
 	var _pbWindowsAIK *byte
 	if len(pbWindowsAIK) > 0 {
 		_pbWindowsAIK = &pbWindowsAIK[0]
 	}
-	r1, _, _ := syscall.SyscallN(procGetDeviceID.Addr(), uintptr(unsafe.Pointer(_pbWindowsAIK)), uintptr(len(pbWindowsAIK)), uintptr(unsafe.Pointer(pcbResult)), uintptr(unsafe.Pointer(pfProtectedByTPM)))
+	_pfProtectedByTPM := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetDeviceID.Addr(), uintptr(unsafe.Pointer(_pbWindowsAIK)), uintptr(len(pbWindowsAIK)), uintptr(unsafe.Pointer(pcbResult)), uintptr(win32.OutParam(unsafe.Pointer(_pfProtectedByTPM))))
+	if pfProtectedByTPM != nil {
+		*pfProtectedByTPM = *_pfProtectedByTPM != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // GetDeviceIDString calls tbs!GetDeviceIDString.
-func GetDeviceIDString(pszWindowsAIK foundation.PWSTR, cchWindowsAIK uint32, pcchResult *uint32, pfProtectedByTPM *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procGetDeviceIDString.Addr(), uintptr(unsafe.Pointer(pszWindowsAIK)), uintptr(cchWindowsAIK), uintptr(unsafe.Pointer(pcchResult)), uintptr(unsafe.Pointer(pfProtectedByTPM)))
+func GetDeviceIDString(pszWindowsAIK foundation.PWSTR, cchWindowsAIK uint32, pcchResult *uint32, pfProtectedByTPM *bool) error {
+	_pfProtectedByTPM := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetDeviceIDString.Addr(), uintptr(unsafe.Pointer(pszWindowsAIK)), uintptr(cchWindowsAIK), uintptr(unsafe.Pointer(pcchResult)), uintptr(win32.OutParam(unsafe.Pointer(_pfProtectedByTPM))))
+	if pfProtectedByTPM != nil {
+		*pfProtectedByTPM = *_pfProtectedByTPM != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

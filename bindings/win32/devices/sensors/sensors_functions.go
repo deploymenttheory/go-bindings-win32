@@ -291,8 +291,12 @@ func IsSensorSubscribed(subscriptionList *SENSOR_COLLECTION_LIST, currentType wi
 }
 
 // PropKeyFindKeyGetBool calls SensorsUtilsV2!PropKeyFindKeyGetBool.
-func PropKeyFindKeyGetBool(pList *SENSOR_COLLECTION_LIST, pKey *foundation.PROPERTYKEY, pRetValue *foundation.BOOL) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procPropKeyFindKeyGetBool.Addr(), uintptr(unsafe.Pointer(pList)), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pRetValue)))
+func PropKeyFindKeyGetBool(pList *SENSOR_COLLECTION_LIST, pKey *foundation.PROPERTYKEY, pRetValue *bool) foundation.NTSTATUS {
+	_pRetValue := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procPropKeyFindKeyGetBool.Addr(), uintptr(unsafe.Pointer(pList)), uintptr(unsafe.Pointer(pKey)), uintptr(win32.OutParam(unsafe.Pointer(_pRetValue))))
+	if pRetValue != nil {
+		*pRetValue = *_pRetValue != 0
+	}
 	return foundation.NTSTATUS(r1)
 }
 

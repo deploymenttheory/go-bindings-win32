@@ -349,9 +349,13 @@ func AuthzEnumerateSecurityEventSources(dwFlags uint32, Buffer *AUTHZ_SOURCE_SCH
 }
 
 // AuthzEvaluateSacl calls AUTHZ!AuthzEvaluateSacl.
-func AuthzEvaluateSacl(AuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *AUTHZ_ACCESS_REQUEST, Sacl *security.ACL, GrantedAccess uint32, AccessGranted bool, pbGenerateAudit *foundation.BOOL) bool {
+func AuthzEvaluateSacl(AuthzClientContext AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest *AUTHZ_ACCESS_REQUEST, Sacl *security.ACL, GrantedAccess uint32, AccessGranted bool, pbGenerateAudit *bool) bool {
 	_AccessGranted := win32.Bool32(AccessGranted)
-	r1, _, _ := syscall.SyscallN(procAuthzEvaluateSacl.Addr(), uintptr(AuthzClientContext), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(Sacl)), uintptr(GrantedAccess), uintptr(_AccessGranted), uintptr(unsafe.Pointer(pbGenerateAudit)))
+	_pbGenerateAudit := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procAuthzEvaluateSacl.Addr(), uintptr(AuthzClientContext), uintptr(unsafe.Pointer(pRequest)), uintptr(unsafe.Pointer(Sacl)), uintptr(GrantedAccess), uintptr(_AccessGranted), uintptr(win32.OutParam(unsafe.Pointer(_pbGenerateAudit))))
+	if pbGenerateAudit != nil {
+		*pbGenerateAudit = *_pbGenerateAudit != 0
+	}
 	return r1 != 0
 }
 

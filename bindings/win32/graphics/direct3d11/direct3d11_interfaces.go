@@ -1386,8 +1386,12 @@ func (self *ID3D11DeviceContext) VSGetSamplers(StartSlot uint32, ppSamplers []*I
 }
 
 // GetPredication dispatches through ID3D11DeviceContext's vtable slot 86.
-func (self *ID3D11DeviceContext) GetPredication(ppPredicate **ID3D11Predicate, pPredicateValue *foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPredicate)), uintptr(unsafe.Pointer(pPredicateValue)))
+func (self *ID3D11DeviceContext) GetPredication(ppPredicate **ID3D11Predicate, pPredicateValue *bool) {
+	_pPredicateValue := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPredicate)), uintptr(win32.OutParam(unsafe.Pointer(_pPredicateValue))))
+	if pPredicateValue != nil {
+		*pPredicateValue = *_pPredicateValue != 0
+	}
 }
 
 // GSGetShaderResources dispatches through ID3D11DeviceContext's vtable slot 87.
@@ -1796,8 +1800,12 @@ func (self *ID3D11DeviceContext3) SetHardwareProtectionState(HwProtectionEnable 
 }
 
 // GetHardwareProtectionState dispatches through ID3D11DeviceContext3's vtable slot 146.
-func (self *ID3D11DeviceContext3) GetHardwareProtectionState(pHwProtectionEnable *foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[146], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHwProtectionEnable)))
+func (self *ID3D11DeviceContext3) GetHardwareProtectionState(pHwProtectionEnable *bool) {
+	_pHwProtectionEnable := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[146], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pHwProtectionEnable))))
+	if pHwProtectionEnable != nil {
+		*pHwProtectionEnable = *_pHwProtectionEnable != 0
+	}
 }
 
 // ID3D11DeviceContext4: https://learn.microsoft.com/windows/win32/api/d3d11_3/nn-d3d11_3-id3d11devicecontext4
@@ -3192,13 +3200,21 @@ func (self *ID3D11VideoContext) VideoProcessorSetOutputExtension(pVideoProcessor
 }
 
 // VideoProcessorGetOutputTargetRect dispatches through ID3D11VideoContext's vtable slot 20.
-func (self *ID3D11VideoContext) VideoProcessorGetOutputTargetRect(pVideoProcessor *ID3D11VideoProcessor, Enabled *foundation.BOOL, pRect *foundation.RECT) {
-	syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(Enabled)), uintptr(unsafe.Pointer(pRect)))
+func (self *ID3D11VideoContext) VideoProcessorGetOutputTargetRect(pVideoProcessor *ID3D11VideoProcessor, Enabled *bool, pRect *foundation.RECT) {
+	_Enabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(win32.OutParam(unsafe.Pointer(_Enabled))), uintptr(unsafe.Pointer(pRect)))
+	if Enabled != nil {
+		*Enabled = *_Enabled != 0
+	}
 }
 
 // VideoProcessorGetOutputBackgroundColor dispatches through ID3D11VideoContext's vtable slot 21.
-func (self *ID3D11VideoContext) VideoProcessorGetOutputBackgroundColor(pVideoProcessor *ID3D11VideoProcessor, pYCbCr *foundation.BOOL, pColor *D3D11_VIDEO_COLOR) {
-	syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pYCbCr)), uintptr(unsafe.Pointer(pColor)))
+func (self *ID3D11VideoContext) VideoProcessorGetOutputBackgroundColor(pVideoProcessor *ID3D11VideoProcessor, pYCbCr *bool, pColor *D3D11_VIDEO_COLOR) {
+	_pYCbCr := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(win32.OutParam(unsafe.Pointer(_pYCbCr))), uintptr(unsafe.Pointer(pColor)))
+	if pYCbCr != nil {
+		*pYCbCr = *_pYCbCr != 0
+	}
 }
 
 // VideoProcessorGetOutputColorSpace dispatches through ID3D11VideoContext's vtable slot 22.
@@ -3212,13 +3228,21 @@ func (self *ID3D11VideoContext) VideoProcessorGetOutputAlphaFillMode(pVideoProce
 }
 
 // VideoProcessorGetOutputConstriction dispatches through ID3D11VideoContext's vtable slot 24.
-func (self *ID3D11VideoContext) VideoProcessorGetOutputConstriction(pVideoProcessor *ID3D11VideoProcessor, pEnabled *foundation.BOOL, pSize *foundation.SIZE) {
-	syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pEnabled)), uintptr(unsafe.Pointer(pSize)))
+func (self *ID3D11VideoContext) VideoProcessorGetOutputConstriction(pVideoProcessor *ID3D11VideoProcessor, pEnabled *bool, pSize *foundation.SIZE) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))), uintptr(unsafe.Pointer(pSize)))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // VideoProcessorGetOutputStereoMode dispatches through ID3D11VideoContext's vtable slot 25.
-func (self *ID3D11VideoContext) VideoProcessorGetOutputStereoMode(pVideoProcessor *ID3D11VideoProcessor, pEnabled *foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pEnabled)))
+func (self *ID3D11VideoContext) VideoProcessorGetOutputStereoMode(pVideoProcessor *ID3D11VideoProcessor, pEnabled *bool) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // VideoProcessorGetOutputExtension dispatches through ID3D11VideoContext's vtable slot 26.
@@ -3327,23 +3351,39 @@ func (self *ID3D11VideoContext) VideoProcessorGetStreamColorSpace(pVideoProcesso
 }
 
 // VideoProcessorGetStreamOutputRate dispatches through ID3D11VideoContext's vtable slot 42.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamOutputRate(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pOutputRate *D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, pRepeatFrame *foundation.BOOL, pCustomRate *graphicsdxgicommon.DXGI_RATIONAL) {
-	syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pOutputRate)), uintptr(unsafe.Pointer(pRepeatFrame)), uintptr(unsafe.Pointer(pCustomRate)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamOutputRate(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pOutputRate *D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, pRepeatFrame *bool, pCustomRate *graphicsdxgicommon.DXGI_RATIONAL) {
+	_pRepeatFrame := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pOutputRate)), uintptr(win32.OutParam(unsafe.Pointer(_pRepeatFrame))), uintptr(unsafe.Pointer(pCustomRate)))
+	if pRepeatFrame != nil {
+		*pRepeatFrame = *_pRepeatFrame != 0
+	}
 }
 
 // VideoProcessorGetStreamSourceRect dispatches through ID3D11VideoContext's vtable slot 43.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamSourceRect(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pRect *foundation.RECT) {
-	syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pEnabled)), uintptr(unsafe.Pointer(pRect)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamSourceRect(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *bool, pRect *foundation.RECT) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))), uintptr(unsafe.Pointer(pRect)))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // VideoProcessorGetStreamDestRect dispatches through ID3D11VideoContext's vtable slot 44.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamDestRect(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pRect *foundation.RECT) {
-	syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pEnabled)), uintptr(unsafe.Pointer(pRect)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamDestRect(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *bool, pRect *foundation.RECT) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))), uintptr(unsafe.Pointer(pRect)))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // VideoProcessorGetStreamAlpha dispatches through ID3D11VideoContext's vtable slot 45.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamAlpha(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pAlpha *float32) {
-	syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pEnabled)), uintptr(unsafe.Pointer(pAlpha)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamAlpha(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *bool, pAlpha *float32) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))), uintptr(unsafe.Pointer(pAlpha)))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // VideoProcessorGetStreamPalette dispatches through ID3D11VideoContext's vtable slot 46.
@@ -3356,28 +3396,56 @@ func (self *ID3D11VideoContext) VideoProcessorGetStreamPalette(pVideoProcessor *
 }
 
 // VideoProcessorGetStreamPixelAspectRatio dispatches through ID3D11VideoContext's vtable slot 47.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamPixelAspectRatio(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pSourceAspectRatio *graphicsdxgicommon.DXGI_RATIONAL, pDestinationAspectRatio *graphicsdxgicommon.DXGI_RATIONAL) {
-	syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pEnabled)), uintptr(unsafe.Pointer(pSourceAspectRatio)), uintptr(unsafe.Pointer(pDestinationAspectRatio)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamPixelAspectRatio(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *bool, pSourceAspectRatio *graphicsdxgicommon.DXGI_RATIONAL, pDestinationAspectRatio *graphicsdxgicommon.DXGI_RATIONAL) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))), uintptr(unsafe.Pointer(pSourceAspectRatio)), uintptr(unsafe.Pointer(pDestinationAspectRatio)))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // VideoProcessorGetStreamLumaKey dispatches through ID3D11VideoContext's vtable slot 48.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamLumaKey(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL, pLower *float32, pUpper *float32) {
-	syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pEnabled)), uintptr(unsafe.Pointer(pLower)), uintptr(unsafe.Pointer(pUpper)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamLumaKey(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *bool, pLower *float32, pUpper *float32) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))), uintptr(unsafe.Pointer(pLower)), uintptr(unsafe.Pointer(pUpper)))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // VideoProcessorGetStreamStereoFormat dispatches through ID3D11VideoContext's vtable slot 49.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamStereoFormat(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnable *foundation.BOOL, pFormat *D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, pLeftViewFrame0 *foundation.BOOL, pBaseViewFrame0 *foundation.BOOL, pFlipMode *D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, MonoOffset *int32) {
-	syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pEnable)), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(pLeftViewFrame0)), uintptr(unsafe.Pointer(pBaseViewFrame0)), uintptr(unsafe.Pointer(pFlipMode)), uintptr(unsafe.Pointer(MonoOffset)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamStereoFormat(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnable *bool, pFormat *D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, pLeftViewFrame0 *bool, pBaseViewFrame0 *bool, pFlipMode *D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, MonoOffset *int32) {
+	_pEnable := new(foundation.BOOL)
+	_pLeftViewFrame0 := new(foundation.BOOL)
+	_pBaseViewFrame0 := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnable))), uintptr(unsafe.Pointer(pFormat)), uintptr(win32.OutParam(unsafe.Pointer(_pLeftViewFrame0))), uintptr(win32.OutParam(unsafe.Pointer(_pBaseViewFrame0))), uintptr(unsafe.Pointer(pFlipMode)), uintptr(unsafe.Pointer(MonoOffset)))
+	if pEnable != nil {
+		*pEnable = *_pEnable != 0
+	}
+	if pLeftViewFrame0 != nil {
+		*pLeftViewFrame0 = *_pLeftViewFrame0 != 0
+	}
+	if pBaseViewFrame0 != nil {
+		*pBaseViewFrame0 = *_pBaseViewFrame0 != 0
+	}
 }
 
 // VideoProcessorGetStreamAutoProcessingMode dispatches through ID3D11VideoContext's vtable slot 50.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamAutoProcessingMode(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pEnabled)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamAutoProcessingMode(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnabled *bool) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // VideoProcessorGetStreamFilter dispatches through ID3D11VideoContext's vtable slot 51.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamFilter(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, Filter D3D11_VIDEO_PROCESSOR_FILTER, pEnabled *foundation.BOOL, pLevel *int32) {
-	syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(Filter), uintptr(unsafe.Pointer(pEnabled)), uintptr(unsafe.Pointer(pLevel)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamFilter(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, Filter D3D11_VIDEO_PROCESSOR_FILTER, pEnabled *bool, pLevel *int32) {
+	_pEnabled := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(Filter), uintptr(win32.OutParam(unsafe.Pointer(_pEnabled))), uintptr(unsafe.Pointer(pLevel)))
+	if pEnabled != nil {
+		*pEnabled = *_pEnabled != 0
+	}
 }
 
 // VideoProcessorGetStreamExtension dispatches through ID3D11VideoContext's vtable slot 52.
@@ -3497,8 +3565,12 @@ func (self *ID3D11VideoContext) VideoProcessorSetStreamRotation(pVideoProcessor 
 }
 
 // VideoProcessorGetStreamRotation dispatches through ID3D11VideoContext's vtable slot 64.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamRotation(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnable *foundation.BOOL, pRotation *D3D11_VIDEO_PROCESSOR_ROTATION) {
-	syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pEnable)), uintptr(unsafe.Pointer(pRotation)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamRotation(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnable *bool, pRotation *D3D11_VIDEO_PROCESSOR_ROTATION) {
+	_pEnable := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnable))), uintptr(unsafe.Pointer(pRotation)))
+	if pEnable != nil {
+		*pEnable = *_pEnable != 0
+	}
 }
 
 // ID3D11VideoContext1: https://learn.microsoft.com/windows/win32/api/d3d11_1/nn-d3d11_1-id3d11videocontext1
@@ -3561,8 +3633,12 @@ func (self *ID3D11VideoContext1) VideoProcessorGetOutputColorSpace1(pVideoProces
 }
 
 // VideoProcessorGetOutputShaderUsage dispatches through ID3D11VideoContext1's vtable slot 73.
-func (self *ID3D11VideoContext1) VideoProcessorGetOutputShaderUsage(pVideoProcessor *ID3D11VideoProcessor, pShaderUsage *foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pShaderUsage)))
+func (self *ID3D11VideoContext1) VideoProcessorGetOutputShaderUsage(pVideoProcessor *ID3D11VideoProcessor, pShaderUsage *bool) {
+	_pShaderUsage := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(win32.OutParam(unsafe.Pointer(_pShaderUsage))))
+	if pShaderUsage != nil {
+		*pShaderUsage = *_pShaderUsage != 0
+	}
 }
 
 // VideoProcessorSetStreamColorSpace1 dispatches through ID3D11VideoContext1's vtable slot 74.
@@ -3584,8 +3660,20 @@ func (self *ID3D11VideoContext1) VideoProcessorGetStreamColorSpace1(pVideoProces
 }
 
 // VideoProcessorGetStreamMirror dispatches through ID3D11VideoContext1's vtable slot 77.
-func (self *ID3D11VideoContext1) VideoProcessorGetStreamMirror(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnable *foundation.BOOL, pFlipHorizontal *foundation.BOOL, pFlipVertical *foundation.BOOL) {
-	syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pEnable)), uintptr(unsafe.Pointer(pFlipHorizontal)), uintptr(unsafe.Pointer(pFlipVertical)))
+func (self *ID3D11VideoContext1) VideoProcessorGetStreamMirror(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEnable *bool, pFlipHorizontal *bool, pFlipVertical *bool) {
+	_pEnable := new(foundation.BOOL)
+	_pFlipHorizontal := new(foundation.BOOL)
+	_pFlipVertical := new(foundation.BOOL)
+	syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(win32.OutParam(unsafe.Pointer(_pEnable))), uintptr(win32.OutParam(unsafe.Pointer(_pFlipHorizontal))), uintptr(win32.OutParam(unsafe.Pointer(_pFlipVertical))))
+	if pEnable != nil {
+		*pEnable = *_pEnable != 0
+	}
+	if pFlipHorizontal != nil {
+		*pFlipHorizontal = *_pFlipHorizontal != 0
+	}
+	if pFlipVertical != nil {
+		*pFlipVertical = *_pFlipVertical != 0
+	}
 }
 
 // VideoProcessorGetBehaviorHints dispatches through ID3D11VideoContext1's vtable slot 78.
@@ -3777,8 +3865,12 @@ func (self *ID3D11VideoDevice) GetVideoDecoderProfile(Index uint32, pDecoderProf
 }
 
 // CheckVideoDecoderFormat dispatches through ID3D11VideoDevice's vtable slot 13.
-func (self *ID3D11VideoDevice) CheckVideoDecoderFormat(pDecoderProfile *win32.GUID, Format graphicsdxgicommon.DXGI_FORMAT, pSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoderProfile)), uintptr(Format), uintptr(unsafe.Pointer(pSupported)))
+func (self *ID3D11VideoDevice) CheckVideoDecoderFormat(pDecoderProfile *win32.GUID, Format graphicsdxgicommon.DXGI_FORMAT, pSupported *bool) error {
+	_pSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoderProfile)), uintptr(Format), uintptr(win32.OutParam(unsafe.Pointer(_pSupported))))
+	if pSupported != nil {
+		*pSupported = *_pSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3844,8 +3936,16 @@ func (self *ID3D11VideoDevice1) GetVideoDecoderCaps(pDecoderProfile *win32.GUID,
 }
 
 // CheckVideoDecoderDownsampling dispatches through ID3D11VideoDevice1's vtable slot 22.
-func (self *ID3D11VideoDevice1) CheckVideoDecoderDownsampling(pInputDesc *D3D11_VIDEO_DECODER_DESC, InputColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pInputConfig *D3D11_VIDEO_DECODER_CONFIG, pFrameRate *graphicsdxgicommon.DXGI_RATIONAL, pOutputDesc *D3D11_VIDEO_SAMPLE_DESC, pSupported *foundation.BOOL, pRealTimeHint *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInputDesc)), uintptr(InputColorSpace), uintptr(unsafe.Pointer(pInputConfig)), uintptr(unsafe.Pointer(pFrameRate)), uintptr(unsafe.Pointer(pOutputDesc)), uintptr(unsafe.Pointer(pSupported)), uintptr(unsafe.Pointer(pRealTimeHint)))
+func (self *ID3D11VideoDevice1) CheckVideoDecoderDownsampling(pInputDesc *D3D11_VIDEO_DECODER_DESC, InputColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pInputConfig *D3D11_VIDEO_DECODER_CONFIG, pFrameRate *graphicsdxgicommon.DXGI_RATIONAL, pOutputDesc *D3D11_VIDEO_SAMPLE_DESC, pSupported *bool, pRealTimeHint *bool) error {
+	_pSupported := new(foundation.BOOL)
+	_pRealTimeHint := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInputDesc)), uintptr(InputColorSpace), uintptr(unsafe.Pointer(pInputConfig)), uintptr(unsafe.Pointer(pFrameRate)), uintptr(unsafe.Pointer(pOutputDesc)), uintptr(win32.OutParam(unsafe.Pointer(_pSupported))), uintptr(win32.OutParam(unsafe.Pointer(_pRealTimeHint))))
+	if pSupported != nil {
+		*pSupported = *_pSupported != 0
+	}
+	if pRealTimeHint != nil {
+		*pRealTimeHint = *_pRealTimeHint != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3958,8 +4058,12 @@ type ID3D11VideoProcessorEnumerator1 struct {
 var IID_ID3D11VideoProcessorEnumerator1 = win32.GUID{Data1: 0x465217f2, Data2: 0x5568, Data3: 0x43cf, Data4: [8]byte{0xb5, 0xb9, 0xf6, 0x1d, 0x54, 0x53, 0x1c, 0xa1}}
 
 // CheckVideoProcessorFormatConversion dispatches through ID3D11VideoProcessorEnumerator1's vtable slot 13.
-func (self *ID3D11VideoProcessorEnumerator1) CheckVideoProcessorFormatConversion(InputFormat graphicsdxgicommon.DXGI_FORMAT, InputColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, OutputFormat graphicsdxgicommon.DXGI_FORMAT, OutputColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pSupported *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(InputFormat), uintptr(InputColorSpace), uintptr(OutputFormat), uintptr(OutputColorSpace), uintptr(unsafe.Pointer(pSupported)))
+func (self *ID3D11VideoProcessorEnumerator1) CheckVideoProcessorFormatConversion(InputFormat graphicsdxgicommon.DXGI_FORMAT, InputColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, OutputFormat graphicsdxgicommon.DXGI_FORMAT, OutputColorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE, pSupported *bool) error {
+	_pSupported := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(InputFormat), uintptr(InputColorSpace), uintptr(OutputFormat), uintptr(OutputColorSpace), uintptr(win32.OutParam(unsafe.Pointer(_pSupported))))
+	if pSupported != nil {
+		*pSupported = *_pSupported != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

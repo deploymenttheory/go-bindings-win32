@@ -69,8 +69,12 @@ func (self *IIsolatedProcessLauncher) AllowSetForegroundAccess(pid uint32) error
 }
 
 // IsContainerRunning dispatches through IIsolatedProcessLauncher's vtable slot 7.
-func (self *IIsolatedProcessLauncher) IsContainerRunning(running *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(running)))
+func (self *IIsolatedProcessLauncher) IsContainerRunning(running *bool) error {
+	_running := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_running))))
+	if running != nil {
+		*running = *_running != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

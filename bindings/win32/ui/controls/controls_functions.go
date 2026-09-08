@@ -1601,8 +1601,12 @@ func GetThemeBitmap(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_
 // GetThemeBool calls UxTheme!GetThemeBool.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemebool
 // Minimum OS: windows6.0.6000.
-func GetThemeBool(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procGetThemeBool.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(unsafe.Pointer(pfVal)))
+func GetThemeBool(hTheme HTHEME, iPartId int32, iStateId int32, iPropId THEME_PROPERTY_SYMBOL_ID, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetThemeBool.Addr(), uintptr(hTheme), uintptr(iPartId), uintptr(iStateId), uintptr(iPropId), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2466,8 +2470,12 @@ func TaskDialog(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszWi
 // TaskDialogIndirect calls COMCTL32!TaskDialogIndirect.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-taskdialogindirect
 // Minimum OS: windows6.0.6000.
-func TaskDialogIndirect(pTaskConfig *TASKDIALOGCONFIG, pnButton *int32, pnRadioButton *int32, pfVerificationFlagChecked *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procTaskDialogIndirect.Addr(), uintptr(unsafe.Pointer(pTaskConfig)), uintptr(unsafe.Pointer(pnButton)), uintptr(unsafe.Pointer(pnRadioButton)), uintptr(unsafe.Pointer(pfVerificationFlagChecked)))
+func TaskDialogIndirect(pTaskConfig *TASKDIALOGCONFIG, pnButton *int32, pnRadioButton *int32, pfVerificationFlagChecked *bool) error {
+	_pfVerificationFlagChecked := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procTaskDialogIndirect.Addr(), uintptr(unsafe.Pointer(pTaskConfig)), uintptr(unsafe.Pointer(pnButton)), uintptr(unsafe.Pointer(pnRadioButton)), uintptr(win32.OutParam(unsafe.Pointer(_pfVerificationFlagChecked))))
+	if pfVerificationFlagChecked != nil {
+		*pfVerificationFlagChecked = *_pfVerificationFlagChecked != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

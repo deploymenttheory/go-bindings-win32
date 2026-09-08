@@ -1318,8 +1318,12 @@ type IWiaVideo struct {
 var IID_IWiaVideo = win32.GUID{Data1: 0xd52920aa, Data2: 0xdb88, Data3: 0x41f0, Data4: [8]byte{0x94, 0x6c, 0xe0, 0x0d, 0xc0, 0xa1, 0x9c, 0xfa}}
 
 // Get_PreviewVisible dispatches through IWiaVideo's vtable slot 3.
-func (self *IWiaVideo) Get_PreviewVisible(pbPreviewVisible *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPreviewVisible)))
+func (self *IWiaVideo) Get_PreviewVisible(pbPreviewVisible *bool) error {
+	_pbPreviewVisible := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbPreviewVisible))))
+	if pbPreviewVisible != nil {
+		*pbPreviewVisible = *_pbPreviewVisible != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

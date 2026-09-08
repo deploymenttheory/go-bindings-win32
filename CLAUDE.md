@@ -164,6 +164,12 @@ each call, then the template dispatches via `syscall.SyscallN`:
 - input `BOOL` → Go `bool` (`win32.Bool32`); plain `BOOL` return → `bool`;
   a native C `bool`/`BOOLEAN` param → `bool` (`win32.Bool8`, one byte in the
   word) and return → `bool` (`byte(r1) != 0`: only AL is defined)
+- an `[out] BOOL*` param → `*bool`: the callee writes a 4-byte `BOOL` into a
+  hidden heap-escaped local (`win32.OutParam`) and a post-dispatch write-back
+  converts it (`shapedParam.postamble` → `view.*.Postamble`), guarded against
+  a nil out and rendered before every return so the value survives the
+  failure path. An `[out,retval] BOOL*` elevates to a `bool` return value
+  (`retValExposure`) rather than `foundation.BOOL`.
 - `HRESULT` return → `error` (failures surface as the typed `win32.HRESULT`,
   which `errors.Is`-matches `syscall.Errno` for `FACILITY_WIN32` codes);
   `BOOL` + SetLastError → `error`

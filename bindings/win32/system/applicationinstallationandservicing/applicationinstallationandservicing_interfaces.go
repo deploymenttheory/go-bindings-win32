@@ -553,8 +553,12 @@ func (self *IPMApplicationInfo) Get_IconPath(pAppIconPath *foundation.BSTR) erro
 }
 
 // Get_NotificationState dispatches through IPMApplicationInfo's vtable slot 9.
-func (self *IPMApplicationInfo) Get_NotificationState(pIsNotified *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsNotified)))
+func (self *IPMApplicationInfo) Get_NotificationState(pIsNotified *bool) error {
+	_pIsNotified := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsNotified))))
+	if pIsNotified != nil {
+		*pIsNotified = *_pIsNotified != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -571,14 +575,22 @@ func (self *IPMApplicationInfo) Get_State(pState *PM_APPLICATION_STATE) error {
 }
 
 // Get_IsRevoked dispatches through IPMApplicationInfo's vtable slot 12.
-func (self *IPMApplicationInfo) Get_IsRevoked(pIsRevoked *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsRevoked)))
+func (self *IPMApplicationInfo) Get_IsRevoked(pIsRevoked *bool) error {
+	_pIsRevoked := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsRevoked))))
+	if pIsRevoked != nil {
+		*pIsRevoked = *_pIsRevoked != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_UpdateAvailable dispatches through IPMApplicationInfo's vtable slot 13.
-func (self *IPMApplicationInfo) Get_UpdateAvailable(pIsUpdateAvailable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsUpdateAvailable)))
+func (self *IPMApplicationInfo) Get_UpdateAvailable(pIsUpdateAvailable *bool) error {
+	_pIsUpdateAvailable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsUpdateAvailable))))
+	if pIsUpdateAvailable != nil {
+		*pIsUpdateAvailable = *_pIsUpdateAvailable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -589,20 +601,32 @@ func (self *IPMApplicationInfo) Get_InstallDate(pInstallDate *foundation.FILETIM
 }
 
 // Get_IsUninstallable dispatches through IPMApplicationInfo's vtable slot 15.
-func (self *IPMApplicationInfo) Get_IsUninstallable(pIsUninstallable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsUninstallable)))
+func (self *IPMApplicationInfo) Get_IsUninstallable(pIsUninstallable *bool) error {
+	_pIsUninstallable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsUninstallable))))
+	if pIsUninstallable != nil {
+		*pIsUninstallable = *_pIsUninstallable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsThemable dispatches through IPMApplicationInfo's vtable slot 16.
-func (self *IPMApplicationInfo) Get_IsThemable(pIsThemable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsThemable)))
+func (self *IPMApplicationInfo) Get_IsThemable(pIsThemable *bool) error {
+	_pIsThemable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsThemable))))
+	if pIsThemable != nil {
+		*pIsThemable = *_pIsThemable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsTrial dispatches through IPMApplicationInfo's vtable slot 17.
-func (self *IPMApplicationInfo) Get_IsTrial(pIsTrial *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsTrial)))
+func (self *IPMApplicationInfo) Get_IsTrial(pIsTrial *bool) error {
+	_pIsTrial := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsTrial))))
+	if pIsTrial != nil {
+		*pIsTrial = *_pIsTrial != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -673,8 +697,12 @@ func (self *IPMApplicationInfo) Get_PublisherID(pPublisherID *win32.GUID) error 
 }
 
 // Get_IsMultiCore dispatches through IPMApplicationInfo's vtable slot 29.
-func (self *IPMApplicationInfo) Get_IsMultiCore(pIsMultiCore *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsMultiCore)))
+func (self *IPMApplicationInfo) Get_IsMultiCore(pIsMultiCore *bool) error {
+	_pIsMultiCore := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsMultiCore))))
+	if pIsMultiCore != nil {
+		*pIsMultiCore = *_pIsMultiCore != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -724,32 +752,52 @@ func (self *IPMApplicationInfo) Set_UninstallableState(IsUninstallable bool) err
 }
 
 // Get_IsPinableOnKidZone dispatches through IPMApplicationInfo's vtable slot 37.
-func (self *IPMApplicationInfo) Get_IsPinableOnKidZone(pIsPinable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsPinable)))
+func (self *IPMApplicationInfo) Get_IsPinableOnKidZone(pIsPinable *bool) error {
+	_pIsPinable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsPinable))))
+	if pIsPinable != nil {
+		*pIsPinable = *_pIsPinable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsOriginallyPreInstalled dispatches through IPMApplicationInfo's vtable slot 38.
-func (self *IPMApplicationInfo) Get_IsOriginallyPreInstalled(pIsPreinstalled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsPreinstalled)))
+func (self *IPMApplicationInfo) Get_IsOriginallyPreInstalled(pIsPreinstalled *bool) error {
+	_pIsPreinstalled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsPreinstalled))))
+	if pIsPreinstalled != nil {
+		*pIsPreinstalled = *_pIsPreinstalled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsInstallOnSD dispatches through IPMApplicationInfo's vtable slot 39.
-func (self *IPMApplicationInfo) Get_IsInstallOnSD(pIsInstallOnSD *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsInstallOnSD)))
+func (self *IPMApplicationInfo) Get_IsInstallOnSD(pIsInstallOnSD *bool) error {
+	_pIsInstallOnSD := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsInstallOnSD))))
+	if pIsInstallOnSD != nil {
+		*pIsInstallOnSD = *_pIsInstallOnSD != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsOptoutOnSD dispatches through IPMApplicationInfo's vtable slot 40.
-func (self *IPMApplicationInfo) Get_IsOptoutOnSD(pIsOptoutOnSD *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsOptoutOnSD)))
+func (self *IPMApplicationInfo) Get_IsOptoutOnSD(pIsOptoutOnSD *bool) error {
+	_pIsOptoutOnSD := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsOptoutOnSD))))
+	if pIsOptoutOnSD != nil {
+		*pIsOptoutOnSD = *_pIsOptoutOnSD != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsOptoutBackupRestore dispatches through IPMApplicationInfo's vtable slot 41.
-func (self *IPMApplicationInfo) Get_IsOptoutBackupRestore(pIsOptoutBackupRestore *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsOptoutBackupRestore)))
+func (self *IPMApplicationInfo) Get_IsOptoutBackupRestore(pIsOptoutBackupRestore *bool) error {
+	_pIsOptoutBackupRestore := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsOptoutBackupRestore))))
+	if pIsOptoutBackupRestore != nil {
+		*pIsOptoutBackupRestore = *_pIsOptoutBackupRestore != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -768,26 +816,42 @@ func (self *IPMApplicationInfo) Set_EnterpriseUninstallable(IsUninstallable bool
 }
 
 // Get_EnterpriseDisabled dispatches through IPMApplicationInfo's vtable slot 44.
-func (self *IPMApplicationInfo) Get_EnterpriseDisabled(IsDisabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsDisabled)))
+func (self *IPMApplicationInfo) Get_EnterpriseDisabled(IsDisabled *bool) error {
+	_IsDisabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_IsDisabled))))
+	if IsDisabled != nil {
+		*IsDisabled = *_IsDisabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_EnterpriseUninstallable dispatches through IPMApplicationInfo's vtable slot 45.
-func (self *IPMApplicationInfo) Get_EnterpriseUninstallable(IsUninstallable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsUninstallable)))
+func (self *IPMApplicationInfo) Get_EnterpriseUninstallable(IsUninstallable *bool) error {
+	_IsUninstallable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_IsUninstallable))))
+	if IsUninstallable != nil {
+		*IsUninstallable = *_IsUninstallable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsVisibleOnAppList dispatches through IPMApplicationInfo's vtable slot 46.
-func (self *IPMApplicationInfo) Get_IsVisibleOnAppList(pIsVisible *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsVisible)))
+func (self *IPMApplicationInfo) Get_IsVisibleOnAppList(pIsVisible *bool) error {
+	_pIsVisible := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsVisible))))
+	if pIsVisible != nil {
+		*pIsVisible = *_pIsVisible != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsInboxApp dispatches through IPMApplicationInfo's vtable slot 47.
-func (self *IPMApplicationInfo) Get_IsInboxApp(pIsInboxApp *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsInboxApp)))
+func (self *IPMApplicationInfo) Get_IsInboxApp(pIsInboxApp *bool) error {
+	_pIsInboxApp := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsInboxApp))))
+	if pIsInboxApp != nil {
+		*pIsInboxApp = *_pIsInboxApp != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -804,8 +868,12 @@ func (self *IPMApplicationInfo) Get_StartAppBlob(pBlob *PM_STARTAPPBLOB) error {
 }
 
 // Get_IsMovable dispatches through IPMApplicationInfo's vtable slot 50.
-func (self *IPMApplicationInfo) Get_IsMovable(pIsMovable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsMovable)))
+func (self *IPMApplicationInfo) Get_IsMovable(pIsMovable *bool) error {
+	_pIsMovable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsMovable))))
+	if pIsMovable != nil {
+		*pIsMovable = *_pIsMovable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -822,20 +890,32 @@ func (self *IPMApplicationInfo) Get_ModifiedDate(pModifiedDate *foundation.FILET
 }
 
 // Get_IsOriginallyRestored dispatches through IPMApplicationInfo's vtable slot 53.
-func (self *IPMApplicationInfo) Get_IsOriginallyRestored(pIsRestored *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsRestored)))
+func (self *IPMApplicationInfo) Get_IsOriginallyRestored(pIsRestored *bool) error {
+	_pIsRestored := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsRestored))))
+	if pIsRestored != nil {
+		*pIsRestored = *_pIsRestored != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_ShouldDeferMdilBind dispatches through IPMApplicationInfo's vtable slot 54.
-func (self *IPMApplicationInfo) Get_ShouldDeferMdilBind(pfDeferMdilBind *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfDeferMdilBind)))
+func (self *IPMApplicationInfo) Get_ShouldDeferMdilBind(pfDeferMdilBind *bool) error {
+	_pfDeferMdilBind := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfDeferMdilBind))))
+	if pfDeferMdilBind != nil {
+		*pfDeferMdilBind = *_pfDeferMdilBind != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsFullyPreInstall dispatches through IPMApplicationInfo's vtable slot 55.
-func (self *IPMApplicationInfo) Get_IsFullyPreInstall(pfIsFullyPreInstall *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsFullyPreInstall)))
+func (self *IPMApplicationInfo) Get_IsFullyPreInstall(pfIsFullyPreInstall *bool) error {
+	_pfIsFullyPreInstall := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsFullyPreInstall))))
+	if pfIsFullyPreInstall != nil {
+		*pfIsFullyPreInstall = *_pfIsFullyPreInstall != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -917,20 +997,32 @@ func (self *IPMBackgroundServiceAgentInfo) Get_BGType(pBGType *foundation.BSTR) 
 }
 
 // Get_IsPeriodic dispatches through IPMBackgroundServiceAgentInfo's vtable slot 10.
-func (self *IPMBackgroundServiceAgentInfo) Get_IsPeriodic(pIsPeriodic *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsPeriodic)))
+func (self *IPMBackgroundServiceAgentInfo) Get_IsPeriodic(pIsPeriodic *bool) error {
+	_pIsPeriodic := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsPeriodic))))
+	if pIsPeriodic != nil {
+		*pIsPeriodic = *_pIsPeriodic != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsScheduled dispatches through IPMBackgroundServiceAgentInfo's vtable slot 11.
-func (self *IPMBackgroundServiceAgentInfo) Get_IsScheduled(pIsScheduled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsScheduled)))
+func (self *IPMBackgroundServiceAgentInfo) Get_IsScheduled(pIsScheduled *bool) error {
+	_pIsScheduled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsScheduled))))
+	if pIsScheduled != nil {
+		*pIsScheduled = *_pIsScheduled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsScheduleAllowed dispatches through IPMBackgroundServiceAgentInfo's vtable slot 12.
-func (self *IPMBackgroundServiceAgentInfo) Get_IsScheduleAllowed(pIsScheduleAllowed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsScheduleAllowed)))
+func (self *IPMBackgroundServiceAgentInfo) Get_IsScheduleAllowed(pIsScheduleAllowed *bool) error {
+	_pIsScheduleAllowed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsScheduleAllowed))))
+	if pIsScheduleAllowed != nil {
+		*pIsScheduleAllowed = *_pIsScheduleAllowed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -941,8 +1033,12 @@ func (self *IPMBackgroundServiceAgentInfo) Get_Description(pDescription *foundat
 }
 
 // Get_IsLaunchOnBoot dispatches through IPMBackgroundServiceAgentInfo's vtable slot 14.
-func (self *IPMBackgroundServiceAgentInfo) Get_IsLaunchOnBoot(pLaunchOnBoot *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLaunchOnBoot)))
+func (self *IPMBackgroundServiceAgentInfo) Get_IsLaunchOnBoot(pLaunchOnBoot *bool) error {
+	_pLaunchOnBoot := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pLaunchOnBoot))))
+	if pLaunchOnBoot != nil {
+		*pLaunchOnBoot = *_pLaunchOnBoot != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1013,8 +1109,12 @@ func (self *IPMBackgroundWorkerInfo) Get_ExpectedRuntime(pExpectedRuntime *uint3
 }
 
 // Get_IsBootWorker dispatches through IPMBackgroundWorkerInfo's vtable slot 8.
-func (self *IPMBackgroundWorkerInfo) Get_IsBootWorker(pIsBootWorker *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsBootWorker)))
+func (self *IPMBackgroundWorkerInfo) Get_IsBootWorker(pIsBootWorker *bool) error {
+	_pIsBootWorker := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsBootWorker))))
+	if pIsBootWorker != nil {
+		*pIsBootWorker = *_pIsBootWorker != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1223,9 +1323,13 @@ func (self *IPMDeploymentManager) UpdateChamberProfile(ProductID win32.GUID) err
 var specIPMDeploymentManager_EnterprisePolicyIsApplicationAllowed = &win32.Spec{Args: []win32.Arg{win32.Word, win32.Struct(16, 4, 0, false), win32.Word, win32.Word}}
 
 // EnterprisePolicyIsApplicationAllowed dispatches through IPMDeploymentManager's vtable slot 27.
-func (self *IPMDeploymentManager) EnterprisePolicyIsApplicationAllowed(productId win32.GUID, publisherName string, pIsAllowed *foundation.BOOL) error {
+func (self *IPMDeploymentManager) EnterprisePolicyIsApplicationAllowed(productId win32.GUID, publisherName string, pIsAllowed *bool) error {
 	_publisherName := win32.UTF16Ptr(publisherName)
-	r1, _, _ := win32.Call(self.LpVtbl[27], specIPMDeploymentManager_EnterprisePolicyIsApplicationAllowed, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productId)), uintptr(unsafe.Pointer(_publisherName)), uintptr(unsafe.Pointer(pIsAllowed))).Tuple()
+	_pIsAllowed := new(foundation.BOOL)
+	r1, _, _ := win32.Call(self.LpVtbl[27], specIPMDeploymentManager_EnterprisePolicyIsApplicationAllowed, nil, uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&productId)), uintptr(unsafe.Pointer(_publisherName)), uintptr(win32.OutParam(unsafe.Pointer(_pIsAllowed)))).Tuple()
+	if pIsAllowed != nil {
+		*pIsAllowed = *_pIsAllowed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1460,8 +1564,12 @@ type IPMExtensionCachedFileUpdaterInfo struct {
 var IID_IPMExtensionCachedFileUpdaterInfo = win32.GUID{Data1: 0xe2d77509, Data2: 0x4e58, Data3: 0x4ba9, Data4: [8]byte{0xaf, 0x7e, 0xb6, 0x42, 0xe3, 0x70, 0xe1, 0xb0}}
 
 // Get_SupportsUpdates dispatches through IPMExtensionCachedFileUpdaterInfo's vtable slot 3.
-func (self *IPMExtensionCachedFileUpdaterInfo) Get_SupportsUpdates(pSupportsUpdates *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupportsUpdates)))
+func (self *IPMExtensionCachedFileUpdaterInfo) Get_SupportsUpdates(pSupportsUpdates *bool) error {
+	_pSupportsUpdates := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pSupportsUpdates))))
+	if pSupportsUpdates != nil {
+		*pSupportsUpdates = *_pSupportsUpdates != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1544,8 +1652,12 @@ func (self *IPMExtensionFileOpenPickerInfo) Get_AllFileTypes(pcTypes *uint32, pp
 }
 
 // Get_SupportsAllFileTypes dispatches through IPMExtensionFileOpenPickerInfo's vtable slot 4.
-func (self *IPMExtensionFileOpenPickerInfo) Get_SupportsAllFileTypes(pSupportsAllTypes *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupportsAllTypes)))
+func (self *IPMExtensionFileOpenPickerInfo) Get_SupportsAllFileTypes(pSupportsAllTypes *bool) error {
+	_pSupportsAllTypes := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pSupportsAllTypes))))
+	if pSupportsAllTypes != nil {
+		*pSupportsAllTypes = *_pSupportsAllTypes != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1564,8 +1676,12 @@ func (self *IPMExtensionFileSavePickerInfo) Get_AllFileTypes(pcTypes *uint32, pp
 }
 
 // Get_SupportsAllFileTypes dispatches through IPMExtensionFileSavePickerInfo's vtable slot 4.
-func (self *IPMExtensionFileSavePickerInfo) Get_SupportsAllFileTypes(pSupportsAllTypes *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupportsAllTypes)))
+func (self *IPMExtensionFileSavePickerInfo) Get_SupportsAllFileTypes(pSupportsAllTypes *bool) error {
+	_pSupportsAllTypes := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pSupportsAllTypes))))
+	if pSupportsAllTypes != nil {
+		*pSupportsAllTypes = *_pSupportsAllTypes != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1668,8 +1784,12 @@ func (self *IPMExtensionShareTargetInfo) Get_AllDataFormats(pcDataFormats *uint3
 }
 
 // Get_SupportsAllFileTypes dispatches through IPMExtensionShareTargetInfo's vtable slot 5.
-func (self *IPMExtensionShareTargetInfo) Get_SupportsAllFileTypes(pSupportsAllTypes *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupportsAllTypes)))
+func (self *IPMExtensionShareTargetInfo) Get_SupportsAllFileTypes(pSupportsAllTypes *bool) error {
+	_pSupportsAllTypes := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pSupportsAllTypes))))
+	if pSupportsAllTypes != nil {
+		*pSupportsAllTypes = *_pSupportsAllTypes != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1730,8 +1850,12 @@ func (self *IPMLiveTileJobInfo) Set_IntervalDuration(ulIntervalDuration uint32) 
 }
 
 // Get_RunForever dispatches through IPMLiveTileJobInfo's vtable slot 11.
-func (self *IPMLiveTileJobInfo) Get_RunForever(IsRunForever *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(IsRunForever)))
+func (self *IPMLiveTileJobInfo) Get_RunForever(IsRunForever *bool) error {
+	_IsRunForever := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_IsRunForever))))
+	if IsRunForever != nil {
+		*IsRunForever = *_IsRunForever != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1929,14 +2053,22 @@ func (self *IPMTaskInfo) Get_DataRootFolder(pDataRootFolder *foundation.BSTR) er
 }
 
 // Get_IsSingleInstanceHost dispatches through IPMTaskInfo's vtable slot 15.
-func (self *IPMTaskInfo) Get_IsSingleInstanceHost(pIsSingleInstanceHost *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsSingleInstanceHost)))
+func (self *IPMTaskInfo) Get_IsSingleInstanceHost(pIsSingleInstanceHost *bool) error {
+	_pIsSingleInstanceHost := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsSingleInstanceHost))))
+	if pIsSingleInstanceHost != nil {
+		*pIsSingleInstanceHost = *_pIsSingleInstanceHost != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsInteropEnabled dispatches through IPMTaskInfo's vtable slot 16.
-func (self *IPMTaskInfo) Get_IsInteropEnabled(pIsInteropEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsInteropEnabled)))
+func (self *IPMTaskInfo) Get_IsInteropEnabled(pIsInteropEnabled *bool) error {
+	_pIsInteropEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsInteropEnabled))))
+	if pIsInteropEnabled != nil {
+		*pIsInteropEnabled = *_pIsInteropEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1965,8 +2097,12 @@ func (self *IPMTaskInfo) Get_BitsPerPixel(pBitsPerPixel *uint16) error {
 }
 
 // Get_SuppressesDehydration dispatches through IPMTaskInfo's vtable slot 21.
-func (self *IPMTaskInfo) Get_SuppressesDehydration(pSuppressesDehydration *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSuppressesDehydration)))
+func (self *IPMTaskInfo) Get_SuppressesDehydration(pSuppressesDehydration *bool) error {
+	_pSuppressesDehydration := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pSuppressesDehydration))))
+	if pSuppressesDehydration != nil {
+		*pSuppressesDehydration = *_pSuppressesDehydration != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1977,8 +2113,12 @@ func (self *IPMTaskInfo) Get_BackgroundExecutionAbilities(pBackgroundExecutionAb
 }
 
 // Get_IsOptedForExtendedMem dispatches through IPMTaskInfo's vtable slot 23.
-func (self *IPMTaskInfo) Get_IsOptedForExtendedMem(pIsOptedIn *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsOptedIn)))
+func (self *IPMTaskInfo) Get_IsOptedForExtendedMem(pIsOptedIn *bool) error {
+	_pIsOptedIn := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsOptedIn))))
+	if pIsOptedIn != nil {
+		*pIsOptedIn = *_pIsOptedIn != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2023,8 +2163,12 @@ func (self *IPMTileInfo) Get_TemplateType(pTemplateType *TILE_TEMPLATE_TYPE) err
 }
 
 // Get_HubPinnedState dispatches through IPMTileInfo's vtable slot 6.
-func (self *IPMTileInfo) Get_HubPinnedState(HubType PM_TILE_HUBTYPE, pPinned *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(HubType), uintptr(unsafe.Pointer(pPinned)))
+func (self *IPMTileInfo) Get_HubPinnedState(HubType PM_TILE_HUBTYPE, pPinned *bool) error {
+	_pPinned := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(HubType), uintptr(win32.OutParam(unsafe.Pointer(_pPinned))))
+	if pPinned != nil {
+		*pPinned = *_pPinned != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2035,14 +2179,22 @@ func (self *IPMTileInfo) Get_HubPosition(HubType PM_TILE_HUBTYPE, pPosition *uin
 }
 
 // Get_IsNotified dispatches through IPMTileInfo's vtable slot 8.
-func (self *IPMTileInfo) Get_IsNotified(pIsNotified *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsNotified)))
+func (self *IPMTileInfo) Get_IsNotified(pIsNotified *bool) error {
+	_pIsNotified := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsNotified))))
+	if pIsNotified != nil {
+		*pIsNotified = *_pIsNotified != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsDefault dispatches through IPMTileInfo's vtable slot 9.
-func (self *IPMTileInfo) Get_IsDefault(pIsDefault *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsDefault)))
+func (self *IPMTileInfo) Get_IsDefault(pIsDefault *bool) error {
+	_pIsDefault := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsDefault))))
+	if pIsDefault != nil {
+		*pIsDefault = *_pIsDefault != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2059,8 +2211,12 @@ func (self *IPMTileInfo) Get_TileType(pStartTileType *PM_STARTTILE_TYPE) error {
 }
 
 // Get_IsThemable dispatches through IPMTileInfo's vtable slot 12.
-func (self *IPMTileInfo) Get_IsThemable(pIsThemable *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsThemable)))
+func (self *IPMTileInfo) Get_IsThemable(pIsThemable *bool) error {
+	_pIsThemable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsThemable))))
+	if pIsThemable != nil {
+		*pIsThemable = *_pIsThemable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2127,14 +2283,22 @@ func (self *IPMTileInfo) Get_StartTileBlob(pBlob *PM_STARTTILEBLOB) error {
 }
 
 // Get_IsRestoring dispatches through IPMTileInfo's vtable slot 23.
-func (self *IPMTileInfo) Get_IsRestoring(pIsRestoring *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsRestoring)))
+func (self *IPMTileInfo) Get_IsRestoring(pIsRestoring *bool) error {
+	_pIsRestoring := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsRestoring))))
+	if pIsRestoring != nil {
+		*pIsRestoring = *_pIsRestoring != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsAutoRestoreDisabled dispatches through IPMTileInfo's vtable slot 24.
-func (self *IPMTileInfo) Get_IsAutoRestoreDisabled(pIsAutoRestoreDisabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsAutoRestoreDisabled)))
+func (self *IPMTileInfo) Get_IsAutoRestoreDisabled(pIsAutoRestoreDisabled *bool) error {
+	_pIsAutoRestoreDisabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsAutoRestoreDisabled))))
+	if pIsAutoRestoreDisabled != nil {
+		*pIsAutoRestoreDisabled = *_pIsAutoRestoreDisabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

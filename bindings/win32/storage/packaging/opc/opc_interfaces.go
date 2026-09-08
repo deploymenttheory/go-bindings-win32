@@ -25,17 +25,17 @@ type IOpcCertificateEnumerator struct {
 var IID_IOpcCertificateEnumerator = win32.GUID{Data1: 0x85131937, Data2: 0x8f24, Data3: 0x421f, Data4: [8]byte{0xb4, 0x39, 0x59, 0xab, 0x24, 0xd1, 0x40, 0xb8}}
 
 // MoveNext dispatches through IOpcCertificateEnumerator's vtable slot 3.
-func (self *IOpcCertificateEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IOpcCertificateEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcCertificateEnumerator's vtable slot 4.
-func (self *IOpcCertificateEnumerator) MovePrevious() (foundation.BOOL, error) {
+func (self *IOpcCertificateEnumerator) MovePrevious() (bool, error) {
 	_hasPrevious := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasPrevious))))
-	return *_hasPrevious, win32.ErrIfFailed(int32(r1))
+	return *_hasPrevious != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcCertificateEnumerator's vtable slot 5.
@@ -198,17 +198,17 @@ type IOpcDigitalSignatureEnumerator struct {
 var IID_IOpcDigitalSignatureEnumerator = win32.GUID{Data1: 0x967b6882, Data2: 0x0ba3, Data3: 0x4358, Data4: [8]byte{0xb9, 0xe7, 0xb6, 0x4c, 0x75, 0x06, 0x3c, 0x5e}}
 
 // MoveNext dispatches through IOpcDigitalSignatureEnumerator's vtable slot 3.
-func (self *IOpcDigitalSignatureEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IOpcDigitalSignatureEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcDigitalSignatureEnumerator's vtable slot 4.
-func (self *IOpcDigitalSignatureEnumerator) MovePrevious() (foundation.BOOL, error) {
+func (self *IOpcDigitalSignatureEnumerator) MovePrevious() (bool, error) {
 	_hasPrevious := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasPrevious))))
-	return *_hasPrevious, win32.ErrIfFailed(int32(r1))
+	return *_hasPrevious != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcDigitalSignatureEnumerator's vtable slot 5.
@@ -428,17 +428,17 @@ type IOpcPartEnumerator struct {
 var IID_IOpcPartEnumerator = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, Data4: [8]byte{0x89, 0xc6, 0xfc, 0x7f, 0xb9, 0x79, 0xee, 0x75}}
 
 // MoveNext dispatches through IOpcPartEnumerator's vtable slot 3.
-func (self *IOpcPartEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IOpcPartEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcPartEnumerator's vtable slot 4.
-func (self *IOpcPartEnumerator) MovePrevious() (foundation.BOOL, error) {
+func (self *IOpcPartEnumerator) MovePrevious() (bool, error) {
 	_hasPrevious := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasPrevious))))
-	return *_hasPrevious, win32.ErrIfFailed(int32(r1))
+	return *_hasPrevious != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcPartEnumerator's vtable slot 5.
@@ -486,10 +486,10 @@ func (self *IOpcPartSet) DeletePart(name *IOpcPartUri) error {
 }
 
 // PartExists dispatches through IOpcPartSet's vtable slot 6.
-func (self *IOpcPartSet) PartExists(name *IOpcPartUri) (foundation.BOOL, error) {
+func (self *IOpcPartSet) PartExists(name *IOpcPartUri) (bool, error) {
 	_partExists := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(win32.OutParam(unsafe.Pointer(_partExists))))
-	return *_partExists, win32.ErrIfFailed(int32(r1))
+	return *_partExists != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcPartSet's vtable slot 7.
@@ -523,10 +523,10 @@ func (self *IOpcPartUri) GetSourceUri() (*IOpcUri, error) {
 }
 
 // IsRelationshipsPartUri dispatches through IOpcPartUri's vtable slot 33.
-func (self *IOpcPartUri) IsRelationshipsPartUri() (foundation.BOOL, error) {
+func (self *IOpcPartUri) IsRelationshipsPartUri() (bool, error) {
 	_isRelationshipUri := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isRelationshipUri))))
-	return *_isRelationshipUri, win32.ErrIfFailed(int32(r1))
+	return *_isRelationshipUri != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IOpcRelationship: https://learn.microsoft.com/windows/win32/api/msopc/nn-msopc-iopcrelationship
@@ -583,17 +583,17 @@ type IOpcRelationshipEnumerator struct {
 var IID_IOpcRelationshipEnumerator = win32.GUID{Data1: 0x42195949, Data2: 0x3b79, Data3: 0x4fc8, Data4: [8]byte{0x89, 0xc6, 0xfc, 0x7f, 0xb9, 0x79, 0xee, 0x76}}
 
 // MoveNext dispatches through IOpcRelationshipEnumerator's vtable slot 3.
-func (self *IOpcRelationshipEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IOpcRelationshipEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcRelationshipEnumerator's vtable slot 4.
-func (self *IOpcRelationshipEnumerator) MovePrevious() (foundation.BOOL, error) {
+func (self *IOpcRelationshipEnumerator) MovePrevious() (bool, error) {
 	_hasPrevious := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasPrevious))))
-	return *_hasPrevious, win32.ErrIfFailed(int32(r1))
+	return *_hasPrevious != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcRelationshipEnumerator's vtable slot 5.
@@ -643,17 +643,17 @@ type IOpcRelationshipSelectorEnumerator struct {
 var IID_IOpcRelationshipSelectorEnumerator = win32.GUID{Data1: 0x5e50a181, Data2: 0xa91b, Data3: 0x48ac, Data4: [8]byte{0x88, 0xd2, 0xbc, 0xa3, 0xd8, 0xf8, 0xc0, 0xb1}}
 
 // MoveNext dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 3.
-func (self *IOpcRelationshipSelectorEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IOpcRelationshipSelectorEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 4.
-func (self *IOpcRelationshipSelectorEnumerator) MovePrevious() (foundation.BOOL, error) {
+func (self *IOpcRelationshipSelectorEnumerator) MovePrevious() (bool, error) {
 	_hasPrevious := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasPrevious))))
-	return *_hasPrevious, win32.ErrIfFailed(int32(r1))
+	return *_hasPrevious != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcRelationshipSelectorEnumerator's vtable slot 5.
@@ -734,11 +734,11 @@ func (self *IOpcRelationshipSet) DeleteRelationship(relationshipIdentifier strin
 }
 
 // RelationshipExists dispatches through IOpcRelationshipSet's vtable slot 6.
-func (self *IOpcRelationshipSet) RelationshipExists(relationshipIdentifier string) (foundation.BOOL, error) {
+func (self *IOpcRelationshipSet) RelationshipExists(relationshipIdentifier string) (bool, error) {
 	_relationshipIdentifier := win32.UTF16Ptr(relationshipIdentifier)
 	_relationshipExists := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_relationshipIdentifier)), uintptr(win32.OutParam(unsafe.Pointer(_relationshipExists))))
-	return *_relationshipExists, win32.ErrIfFailed(int32(r1))
+	return *_relationshipExists != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEnumerator dispatches through IOpcRelationshipSet's vtable slot 7.
@@ -788,17 +788,17 @@ type IOpcSignatureCustomObjectEnumerator struct {
 var IID_IOpcSignatureCustomObjectEnumerator = win32.GUID{Data1: 0x5ee4fe1d, Data2: 0xe1b0, Data3: 0x4683, Data4: [8]byte{0x80, 0x79, 0x7e, 0xa0, 0xfc, 0xf8, 0x0b, 0x4c}}
 
 // MoveNext dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 3.
-func (self *IOpcSignatureCustomObjectEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IOpcSignatureCustomObjectEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 4.
-func (self *IOpcSignatureCustomObjectEnumerator) MovePrevious() (foundation.BOOL, error) {
+func (self *IOpcSignatureCustomObjectEnumerator) MovePrevious() (bool, error) {
 	_hasPrevious := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasPrevious))))
-	return *_hasPrevious, win32.ErrIfFailed(int32(r1))
+	return *_hasPrevious != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignatureCustomObjectEnumerator's vtable slot 5.
@@ -901,17 +901,17 @@ type IOpcSignaturePartReferenceEnumerator struct {
 var IID_IOpcSignaturePartReferenceEnumerator = win32.GUID{Data1: 0x80eb1561, Data2: 0x8c77, Data3: 0x49cf, Data4: [8]byte{0x82, 0x66, 0x45, 0x9b, 0x35, 0x6e, 0xe9, 0x9a}}
 
 // MoveNext dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 3.
-func (self *IOpcSignaturePartReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IOpcSignaturePartReferenceEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 4.
-func (self *IOpcSignaturePartReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
+func (self *IOpcSignaturePartReferenceEnumerator) MovePrevious() (bool, error) {
 	_hasPrevious := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasPrevious))))
-	return *_hasPrevious, win32.ErrIfFailed(int32(r1))
+	return *_hasPrevious != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignaturePartReferenceEnumerator's vtable slot 5.
@@ -1018,17 +1018,17 @@ type IOpcSignatureReferenceEnumerator struct {
 var IID_IOpcSignatureReferenceEnumerator = win32.GUID{Data1: 0xcfa59a45, Data2: 0x28b1, Data3: 0x4868, Data4: [8]byte{0x96, 0x9e, 0xfa, 0x80, 0x97, 0xfd, 0xc1, 0x2a}}
 
 // MoveNext dispatches through IOpcSignatureReferenceEnumerator's vtable slot 3.
-func (self *IOpcSignatureReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IOpcSignatureReferenceEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignatureReferenceEnumerator's vtable slot 4.
-func (self *IOpcSignatureReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
+func (self *IOpcSignatureReferenceEnumerator) MovePrevious() (bool, error) {
 	_hasPrevious := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasPrevious))))
-	return *_hasPrevious, win32.ErrIfFailed(int32(r1))
+	return *_hasPrevious != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignatureReferenceEnumerator's vtable slot 5.
@@ -1137,17 +1137,17 @@ type IOpcSignatureRelationshipReferenceEnumerator struct {
 var IID_IOpcSignatureRelationshipReferenceEnumerator = win32.GUID{Data1: 0x773ba3e4, Data2: 0xf021, Data3: 0x48e4, Data4: [8]byte{0xaa, 0x04, 0x98, 0x16, 0xdb, 0x5d, 0x34, 0x95}}
 
 // MoveNext dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 3.
-func (self *IOpcSignatureRelationshipReferenceEnumerator) MoveNext() (foundation.BOOL, error) {
+func (self *IOpcSignatureRelationshipReferenceEnumerator) MoveNext() (bool, error) {
 	_hasNext := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasNext))))
-	return *_hasNext, win32.ErrIfFailed(int32(r1))
+	return *_hasNext != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // MovePrevious dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 4.
-func (self *IOpcSignatureRelationshipReferenceEnumerator) MovePrevious() (foundation.BOOL, error) {
+func (self *IOpcSignatureRelationshipReferenceEnumerator) MovePrevious() (bool, error) {
 	_hasPrevious := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_hasPrevious))))
-	return *_hasPrevious, win32.ErrIfFailed(int32(r1))
+	return *_hasPrevious != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCurrent dispatches through IOpcSignatureRelationshipReferenceEnumerator's vtable slot 5.

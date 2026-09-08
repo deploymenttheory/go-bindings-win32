@@ -197,10 +197,10 @@ func (self *IEventClass2) Put_MultiInterfacePublisherFilterCLSID(bstrPubFilCLSID
 }
 
 // Get_AllowInprocActivation dispatches through IEventClass2's vtable slot 25.
-func (self *IEventClass2) Get_AllowInprocActivation() (foundation.BOOL, error) {
+func (self *IEventClass2) Get_AllowInprocActivation() (bool, error) {
 	_pfAllowInprocActivation := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAllowInprocActivation))))
-	return *_pfAllowInprocActivation, win32.ErrIfFailed(int32(r1))
+	return *_pfAllowInprocActivation != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowInprocActivation dispatches through IEventClass2's vtable slot 26.
@@ -211,10 +211,10 @@ func (self *IEventClass2) Put_AllowInprocActivation(fAllowInprocActivation bool)
 }
 
 // Get_FireInParallel dispatches through IEventClass2's vtable slot 27.
-func (self *IEventClass2) Get_FireInParallel() (foundation.BOOL, error) {
+func (self *IEventClass2) Get_FireInParallel() (bool, error) {
 	_pfFireInParallel := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfFireInParallel))))
-	return *_pfFireInParallel, win32.ErrIfFailed(int32(r1))
+	return *_pfFireInParallel != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FireInParallel dispatches through IEventClass2's vtable slot 28.
@@ -240,10 +240,10 @@ func (self *IEventControl) SetPublisherFilter(methodName foundation.BSTR, pPubli
 }
 
 // Get_AllowInprocActivation dispatches through IEventControl's vtable slot 8.
-func (self *IEventControl) Get_AllowInprocActivation() (foundation.BOOL, error) {
+func (self *IEventControl) Get_AllowInprocActivation() (bool, error) {
 	_pfAllowInprocActivation := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAllowInprocActivation))))
-	return *_pfAllowInprocActivation, win32.ErrIfFailed(int32(r1))
+	return *_pfAllowInprocActivation != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowInprocActivation dispatches through IEventControl's vtable slot 9.
@@ -600,10 +600,10 @@ func (self *IEventSubscription) Put_SubscriberInterface(pSubscriberInterface *sy
 }
 
 // Get_PerUser dispatches through IEventSubscription's vtable slot 21.
-func (self *IEventSubscription) Get_PerUser() (foundation.BOOL, error) {
+func (self *IEventSubscription) Get_PerUser() (bool, error) {
 	_pfPerUser := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfPerUser))))
-	return *_pfPerUser, win32.ErrIfFailed(int32(r1))
+	return *_pfPerUser != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_PerUser dispatches through IEventSubscription's vtable slot 22.
@@ -627,10 +627,10 @@ func (self *IEventSubscription) Put_OwnerSID(bstrOwnerSID foundation.BSTR) error
 }
 
 // Get_Enabled dispatches through IEventSubscription's vtable slot 25.
-func (self *IEventSubscription) Get_Enabled() (foundation.BOOL, error) {
+func (self *IEventSubscription) Get_Enabled() (bool, error) {
 	_pfEnabled := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfEnabled))))
-	return *_pfEnabled, win32.ErrIfFailed(int32(r1))
+	return *_pfEnabled != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_Enabled dispatches through IEventSubscription's vtable slot 26.
@@ -824,10 +824,10 @@ func (self *IMultiInterfaceEventControl) SetDefaultQuery(eventIID *win32.GUID, b
 }
 
 // Get_AllowInprocActivation dispatches through IMultiInterfaceEventControl's vtable slot 6.
-func (self *IMultiInterfaceEventControl) Get_AllowInprocActivation() (foundation.BOOL, error) {
+func (self *IMultiInterfaceEventControl) Get_AllowInprocActivation() (bool, error) {
 	_pfAllowInprocActivation := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfAllowInprocActivation))))
-	return *_pfAllowInprocActivation, win32.ErrIfFailed(int32(r1))
+	return *_pfAllowInprocActivation != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AllowInprocActivation dispatches through IMultiInterfaceEventControl's vtable slot 7.
@@ -838,10 +838,10 @@ func (self *IMultiInterfaceEventControl) Put_AllowInprocActivation(fAllowInprocA
 }
 
 // Get_FireInParallel dispatches through IMultiInterfaceEventControl's vtable slot 8.
-func (self *IMultiInterfaceEventControl) Get_FireInParallel() (foundation.BOOL, error) {
+func (self *IMultiInterfaceEventControl) Get_FireInParallel() (bool, error) {
 	_pfFireInParallel := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfFireInParallel))))
-	return *_pfFireInParallel, win32.ErrIfFailed(int32(r1))
+	return *_pfFireInParallel != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_FireInParallel dispatches through IMultiInterfaceEventControl's vtable slot 9.

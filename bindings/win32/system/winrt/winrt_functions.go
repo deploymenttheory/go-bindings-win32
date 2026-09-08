@@ -723,8 +723,12 @@ func WindowsReplaceString(string_ HSTRING, stringReplaced HSTRING, stringReplace
 // WindowsStringHasEmbeddedNull calls api-ms-win-core-winrt-string-l1-1-0!WindowsStringHasEmbeddedNull.
 // https://learn.microsoft.com/windows/win32/api/winstring/nf-winstring-windowsstringhasembeddednull
 // Minimum OS: windows8.0.
-func WindowsStringHasEmbeddedNull(string_ HSTRING, hasEmbedNull *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procWindowsStringHasEmbeddedNull.Addr(), uintptr(string_), uintptr(unsafe.Pointer(hasEmbedNull)))
+func WindowsStringHasEmbeddedNull(string_ HSTRING, hasEmbedNull *bool) error {
+	_hasEmbedNull := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWindowsStringHasEmbeddedNull.Addr(), uintptr(string_), uintptr(win32.OutParam(unsafe.Pointer(_hasEmbedNull))))
+	if hasEmbedNull != nil {
+		*hasEmbedNull = *_hasEmbedNull != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

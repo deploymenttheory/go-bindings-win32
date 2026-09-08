@@ -415,10 +415,14 @@ func DdqGetTranscriptConfiguration(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, curr
 // DdqIsDiagnosticRecordSampledIn calls DiagnosticDataQuery!DdqIsDiagnosticRecordSampledIn.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqisdiagnosticrecordsampledin
 // Minimum OS: windows10.0.19041.
-func DdqIsDiagnosticRecordSampledIn(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, providerGroup *win32.GUID, providerId *win32.GUID, providerName string, eventId *uint32, eventName string, eventVersion *uint32, eventKeywords *uint64, isSampledIn *foundation.BOOL) error {
+func DdqIsDiagnosticRecordSampledIn(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, providerGroup *win32.GUID, providerId *win32.GUID, providerName string, eventId *uint32, eventName string, eventVersion *uint32, eventKeywords *uint64, isSampledIn *bool) error {
 	_providerName := win32.UTF16Ptr(providerName)
 	_eventName := win32.UTF16Ptr(eventName)
-	r1, _, _ := syscall.SyscallN(procDdqIsDiagnosticRecordSampledIn.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(providerGroup)), uintptr(unsafe.Pointer(providerId)), uintptr(unsafe.Pointer(_providerName)), uintptr(unsafe.Pointer(eventId)), uintptr(unsafe.Pointer(_eventName)), uintptr(unsafe.Pointer(eventVersion)), uintptr(unsafe.Pointer(eventKeywords)), uintptr(unsafe.Pointer(isSampledIn)))
+	_isSampledIn := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procDdqIsDiagnosticRecordSampledIn.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(providerGroup)), uintptr(unsafe.Pointer(providerId)), uintptr(unsafe.Pointer(_providerName)), uintptr(unsafe.Pointer(eventId)), uintptr(unsafe.Pointer(_eventName)), uintptr(unsafe.Pointer(eventVersion)), uintptr(unsafe.Pointer(eventKeywords)), uintptr(win32.OutParam(unsafe.Pointer(_isSampledIn))))
+	if isSampledIn != nil {
+		*isSampledIn = *_isSampledIn != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

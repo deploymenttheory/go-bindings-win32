@@ -324,9 +324,13 @@ func AppPolicyGetWindowingModel(processToken foundation.HANDLE, policy *AppPolic
 }
 
 // CheckIsMSIXPackage calls KERNEL32!CheckIsMSIXPackage.
-func CheckIsMSIXPackage(packageFullName string, isMSIXPackage *foundation.BOOL) error {
+func CheckIsMSIXPackage(packageFullName string, isMSIXPackage *bool) error {
 	_packageFullName := win32.UTF16Ptr(packageFullName)
-	r1, _, _ := syscall.SyscallN(procCheckIsMSIXPackage.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(isMSIXPackage)))
+	_isMSIXPackage := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procCheckIsMSIXPackage.Addr(), uintptr(unsafe.Pointer(_packageFullName)), uintptr(win32.OutParam(unsafe.Pointer(_isMSIXPackage))))
+	if isMSIXPackage != nil {
+		*isMSIXPackage = *_isMSIXPackage != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

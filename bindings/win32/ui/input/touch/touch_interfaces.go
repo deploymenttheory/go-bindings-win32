@@ -336,14 +336,22 @@ func (self *IInertiaProcessor) Reset() error {
 }
 
 // Process dispatches through IInertiaProcessor's vtable slot 48.
-func (self *IInertiaProcessor) Process(completed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(completed)))
+func (self *IInertiaProcessor) Process(completed *bool) error {
+	_completed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_completed))))
+	if completed != nil {
+		*completed = *_completed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // ProcessTime dispatches through IInertiaProcessor's vtable slot 49.
-func (self *IInertiaProcessor) ProcessTime(timestamp uint32, completed *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(timestamp), uintptr(unsafe.Pointer(completed)))
+func (self *IInertiaProcessor) ProcessTime(timestamp uint32, completed *bool) error {
+	_completed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(timestamp), uintptr(win32.OutParam(unsafe.Pointer(_completed))))
+	if completed != nil {
+		*completed = *_completed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

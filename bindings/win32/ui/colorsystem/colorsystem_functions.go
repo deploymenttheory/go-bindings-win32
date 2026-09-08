@@ -548,8 +548,12 @@ func CMGetNamedProfileInfo(hProfile uintptr, pNamedProfileInfo *NAMED_PROFILE_IN
 
 // CMIsProfileValid calls ICM32!CMIsProfileValid.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmisprofilevalid
-func CMIsProfileValid(hProfile uintptr, lpbValid *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procCMIsProfileValid.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(lpbValid)))
+func CMIsProfileValid(hProfile uintptr, lpbValid *bool) bool {
+	_lpbValid := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procCMIsProfileValid.Addr(), uintptr(hProfile), uintptr(win32.OutParam(unsafe.Pointer(_lpbValid))))
+	if lpbValid != nil {
+		*lpbValid = *_lpbValid != 0
+	}
 	return r1 != 0
 }
 
@@ -859,8 +863,12 @@ func GetColorDirectoryA(pMachineName foundation.PSTR, pBuffer foundation.PSTR, p
 
 // GetColorProfileElement calls mscms!GetColorProfileElement.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolorprofileelement
-func GetColorProfileElement(hProfile uintptr, tag uint32, dwOffset uint32, pcbElement *uint32, pElement unsafe.Pointer, pbReference *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procGetColorProfileElement.Addr(), uintptr(hProfile), uintptr(tag), uintptr(dwOffset), uintptr(unsafe.Pointer(pcbElement)), uintptr(unsafe.Pointer(pElement)), uintptr(unsafe.Pointer(pbReference)))
+func GetColorProfileElement(hProfile uintptr, tag uint32, dwOffset uint32, pcbElement *uint32, pElement unsafe.Pointer, pbReference *bool) bool {
+	_pbReference := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetColorProfileElement.Addr(), uintptr(hProfile), uintptr(tag), uintptr(dwOffset), uintptr(unsafe.Pointer(pcbElement)), uintptr(unsafe.Pointer(pElement)), uintptr(win32.OutParam(unsafe.Pointer(_pbReference))))
+	if pbReference != nil {
+		*pbReference = *_pbReference != 0
+	}
 	return r1 != 0
 }
 
@@ -963,8 +971,12 @@ func GetPS2ColorRenderingIntent(hProfile uintptr, dwIntent uint32, pBuffer *byte
 
 // GetPS2ColorSpaceArray calls mscms!GetPS2ColorSpaceArray.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getps2colorspacearray
-func GetPS2ColorSpaceArray(hProfile uintptr, dwIntent uint32, dwCSAType uint32, pPS2ColorSpaceArray *byte, pcbPS2ColorSpaceArray *uint32, pbBinary *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procGetPS2ColorSpaceArray.Addr(), uintptr(hProfile), uintptr(dwIntent), uintptr(dwCSAType), uintptr(unsafe.Pointer(pPS2ColorSpaceArray)), uintptr(unsafe.Pointer(pcbPS2ColorSpaceArray)), uintptr(unsafe.Pointer(pbBinary)))
+func GetPS2ColorSpaceArray(hProfile uintptr, dwIntent uint32, dwCSAType uint32, pPS2ColorSpaceArray *byte, pcbPS2ColorSpaceArray *uint32, pbBinary *bool) bool {
+	_pbBinary := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetPS2ColorSpaceArray.Addr(), uintptr(hProfile), uintptr(dwIntent), uintptr(dwCSAType), uintptr(unsafe.Pointer(pPS2ColorSpaceArray)), uintptr(unsafe.Pointer(pcbPS2ColorSpaceArray)), uintptr(win32.OutParam(unsafe.Pointer(_pbBinary))))
+	if pbBinary != nil {
+		*pbBinary = *_pbBinary != 0
+	}
 	return r1 != 0
 }
 
@@ -1001,15 +1013,23 @@ func InstallColorProfileA(pMachineName foundation.PSTR, pProfileName foundation.
 
 // IsColorProfileTagPresent calls mscms!IsColorProfileTagPresent.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-iscolorprofiletagpresent
-func IsColorProfileTagPresent(hProfile uintptr, tag uint32, pbPresent *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procIsColorProfileTagPresent.Addr(), uintptr(hProfile), uintptr(tag), uintptr(unsafe.Pointer(pbPresent)))
+func IsColorProfileTagPresent(hProfile uintptr, tag uint32, pbPresent *bool) bool {
+	_pbPresent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsColorProfileTagPresent.Addr(), uintptr(hProfile), uintptr(tag), uintptr(win32.OutParam(unsafe.Pointer(_pbPresent))))
+	if pbPresent != nil {
+		*pbPresent = *_pbPresent != 0
+	}
 	return r1 != 0
 }
 
 // IsColorProfileValid calls mscms!IsColorProfileValid.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-iscolorprofilevalid
-func IsColorProfileValid(hProfile uintptr, pbValid *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procIsColorProfileValid.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(pbValid)))
+func IsColorProfileValid(hProfile uintptr, pbValid *bool) bool {
+	_pbValid := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procIsColorProfileValid.Addr(), uintptr(hProfile), uintptr(win32.OutParam(unsafe.Pointer(_pbValid))))
+	if pbValid != nil {
+		*pbValid = *_pbValid != 0
+	}
 	return r1 != 0
 }
 
@@ -1274,8 +1294,12 @@ func WcsEnumColorProfilesSize(scope WCS_PROFILE_MANAGEMENT_SCOPE, pEnumRecord *E
 
 // WcsGetCalibrationManagementState calls mscms!WcsGetCalibrationManagementState.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetcalibrationmanagementstate
-func WcsGetCalibrationManagementState(pbIsEnabled *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procWcsGetCalibrationManagementState.Addr(), uintptr(unsafe.Pointer(pbIsEnabled)))
+func WcsGetCalibrationManagementState(pbIsEnabled *bool) bool {
+	_pbIsEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWcsGetCalibrationManagementState.Addr(), uintptr(win32.OutParam(unsafe.Pointer(_pbIsEnabled))))
+	if pbIsEnabled != nil {
+		*pbIsEnabled = *_pbIsEnabled != 0
+	}
 	return r1 != 0
 }
 
@@ -1304,9 +1328,13 @@ func WcsGetDefaultRenderingIntent(scope WCS_PROFILE_MANAGEMENT_SCOPE, pdwRenderi
 
 // WcsGetUsePerUserProfiles calls mscms!WcsGetUsePerUserProfiles.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetuseperuserprofiles
-func WcsGetUsePerUserProfiles(pDeviceName string, dwDeviceClass uint32, pUsePerUserProfiles *foundation.BOOL) bool {
+func WcsGetUsePerUserProfiles(pDeviceName string, dwDeviceClass uint32, pUsePerUserProfiles *bool) bool {
 	_pDeviceName := win32.UTF16Ptr(pDeviceName)
-	r1, _, _ := syscall.SyscallN(procWcsGetUsePerUserProfiles.Addr(), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(dwDeviceClass), uintptr(unsafe.Pointer(pUsePerUserProfiles)))
+	_pUsePerUserProfiles := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procWcsGetUsePerUserProfiles.Addr(), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(dwDeviceClass), uintptr(win32.OutParam(unsafe.Pointer(_pUsePerUserProfiles))))
+	if pUsePerUserProfiles != nil {
+		*pUsePerUserProfiles = *_pUsePerUserProfiles != 0
+	}
 	return r1 != 0
 }
 

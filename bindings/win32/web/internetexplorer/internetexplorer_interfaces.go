@@ -170,12 +170,16 @@ type IDocObjectService struct {
 var IID_IDocObjectService = win32.GUID{Data1: 0x3050f801, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
 // FireBeforeNavigate2 dispatches through IDocObjectService's vtable slot 3.
-func (self *IDocObjectService) FireBeforeNavigate2(pDispatch *systemcom.IDispatch, lpszUrl string, dwFlags uint32, lpszFrameName string, pPostData *byte, cbPostData uint32, lpszHeaders string, fPlayNavSound bool, pfCancel *foundation.BOOL) error {
+func (self *IDocObjectService) FireBeforeNavigate2(pDispatch *systemcom.IDispatch, lpszUrl string, dwFlags uint32, lpszFrameName string, pPostData *byte, cbPostData uint32, lpszHeaders string, fPlayNavSound bool, pfCancel *bool) error {
 	_lpszUrl := win32.UTF16Ptr(lpszUrl)
 	_lpszFrameName := win32.UTF16Ptr(lpszFrameName)
 	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
 	_fPlayNavSound := win32.Bool32(fPlayNavSound)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDispatch)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszFrameName)), uintptr(unsafe.Pointer(pPostData)), uintptr(cbPostData), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(_fPlayNavSound), uintptr(unsafe.Pointer(pfCancel)))
+	_pfCancel := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDispatch)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszFrameName)), uintptr(unsafe.Pointer(pPostData)), uintptr(cbPostData), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(_fPlayNavSound), uintptr(win32.OutParam(unsafe.Pointer(_pfCancel))))
+	if pfCancel != nil {
+		*pfCancel = *_pfCancel != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -228,9 +232,13 @@ func (self *IDocObjectService) GetUrlSearchComponent(pbstrSearch *foundation.BST
 }
 
 // IsErrorUrl dispatches through IDocObjectService's vtable slot 12.
-func (self *IDocObjectService) IsErrorUrl(lpszUrl string, pfIsError *foundation.BOOL) error {
+func (self *IDocObjectService) IsErrorUrl(lpszUrl string, pfIsError *bool) error {
 	_lpszUrl := win32.UTF16Ptr(lpszUrl)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(pfIsError)))
+	_pfIsError := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsError))))
+	if pfIsError != nil {
+		*pfIsError = *_pfIsError != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -789,9 +797,13 @@ func (self *IHomePageSetting) SetHomePage(hwnd foundation.HWND, homePageUri stri
 }
 
 // IsHomePage dispatches through IHomePageSetting's vtable slot 4.
-func (self *IHomePageSetting) IsHomePage(uri string, isDefault *foundation.BOOL) error {
+func (self *IHomePageSetting) IsHomePage(uri string, isDefault *bool) error {
 	_uri := win32.UTF16Ptr(uri)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(isDefault)))
+	_isDefault := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_uri)), uintptr(win32.OutParam(unsafe.Pointer(_isDefault))))
+	if isDefault != nil {
+		*isDefault = *_isDefault != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -897,8 +909,12 @@ type IImageDecodeEventSink2 struct {
 var IID_IImageDecodeEventSink2 = win32.GUID{Data1: 0x8ebd8a57, Data2: 0x8a96, Data3: 0x48c9, Data4: [8]byte{0x84, 0xa6, 0x96, 0x2e, 0x2d, 0xb9, 0xc9, 0x31}}
 
 // IsAlphaPremultRequired dispatches through IImageDecodeEventSink2's vtable slot 9.
-func (self *IImageDecodeEventSink2) IsAlphaPremultRequired(pfPremultAlpha *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfPremultAlpha)))
+func (self *IImageDecodeEventSink2) IsAlphaPremultRequired(pfPremultAlpha *bool) error {
+	_pfPremultAlpha := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfPremultAlpha))))
+	if pfPremultAlpha != nil {
+		*pfPremultAlpha = *_pfPremultAlpha != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1118,8 +1134,12 @@ type IOpenService struct {
 var IID_IOpenService = win32.GUID{Data1: 0xc2952ed1, Data2: 0x6a89, Data3: 0x4606, Data4: [8]byte{0x92, 0x5f, 0x1e, 0xd8, 0xb4, 0xbe, 0x06, 0x30}}
 
 // IsDefault dispatches through IOpenService's vtable slot 3.
-func (self *IOpenService) IsDefault(pfIsDefault *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsDefault)))
+func (self *IOpenService) IsDefault(pfIsDefault *bool) error {
+	_pfIsDefault := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsDefault))))
+	if pfIsDefault != nil {
+		*pfIsDefault = *_pfIsDefault != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1151,14 +1171,22 @@ func (self *IOpenServiceActivity) Execute(pInput *IOpenServiceActivityInput, pOu
 }
 
 // CanExecute dispatches through IOpenServiceActivity's vtable slot 7.
-func (self *IOpenServiceActivity) CanExecute(pInput *IOpenServiceActivityInput, pOutput *IOpenServiceActivityOutputContext, pfCanExecute *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInput)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfCanExecute)))
+func (self *IOpenServiceActivity) CanExecute(pInput *IOpenServiceActivityInput, pOutput *IOpenServiceActivityOutputContext, pfCanExecute *bool) error {
+	_pfCanExecute := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInput)), uintptr(unsafe.Pointer(pOutput)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanExecute))))
+	if pfCanExecute != nil {
+		*pfCanExecute = *_pfCanExecute != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanExecuteType dispatches through IOpenServiceActivity's vtable slot 8.
-func (self *IOpenServiceActivity) CanExecuteType(type_ OpenServiceActivityContentType, pfCanExecute *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pfCanExecute)))
+func (self *IOpenServiceActivity) CanExecuteType(type_ OpenServiceActivityContentType, pfCanExecute *bool) error {
+	_pfCanExecute := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(win32.OutParam(unsafe.Pointer(_pfCanExecute))))
+	if pfCanExecute != nil {
+		*pfCanExecute = *_pfCanExecute != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1169,14 +1197,22 @@ func (self *IOpenServiceActivity) Preview(pInput *IOpenServiceActivityInput, pOu
 }
 
 // CanPreview dispatches through IOpenServiceActivity's vtable slot 10.
-func (self *IOpenServiceActivity) CanPreview(pInput *IOpenServiceActivityInput, pOutput *IOpenServiceActivityOutputContext, pfCanPreview *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInput)), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pfCanPreview)))
+func (self *IOpenServiceActivity) CanPreview(pInput *IOpenServiceActivityInput, pOutput *IOpenServiceActivityOutputContext, pfCanPreview *bool) error {
+	_pfCanPreview := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInput)), uintptr(unsafe.Pointer(pOutput)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanPreview))))
+	if pfCanPreview != nil {
+		*pfCanPreview = *_pfCanPreview != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // CanPreviewType dispatches through IOpenServiceActivity's vtable slot 11.
-func (self *IOpenServiceActivity) CanPreviewType(type_ OpenServiceActivityContentType, pfCanPreview *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pfCanPreview)))
+func (self *IOpenServiceActivity) CanPreviewType(type_ OpenServiceActivityContentType, pfCanPreview *bool) error {
+	_pfCanPreview := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(win32.OutParam(unsafe.Pointer(_pfCanPreview))))
+	if pfCanPreview != nil {
+		*pfCanPreview = *_pfCanPreview != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1242,8 +1278,12 @@ func (self *IOpenServiceActivity) GetInstallUrl(pbstrInstallUri *foundation.BSTR
 }
 
 // IsEnabled dispatches through IOpenServiceActivity's vtable slot 22.
-func (self *IOpenServiceActivity) IsEnabled(pfIsEnabled *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsEnabled)))
+func (self *IOpenServiceActivity) IsEnabled(pfIsEnabled *bool) error {
+	_pfIsEnabled := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsEnabled))))
+	if pfIsEnabled != nil {
+		*pfIsEnabled = *_pfIsEnabled != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1263,8 +1303,12 @@ type IOpenServiceActivityCategory struct {
 var IID_IOpenServiceActivityCategory = win32.GUID{Data1: 0x850af9d6, Data2: 0x7309, Data3: 0x40b5, Data4: [8]byte{0xbd, 0xb8, 0x78, 0x6c, 0x10, 0x6b, 0x21, 0x53}}
 
 // HasDefaultActivity dispatches through IOpenServiceActivityCategory's vtable slot 3.
-func (self *IOpenServiceActivityCategory) HasDefaultActivity(pfHasDefaultActivity *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfHasDefaultActivity)))
+func (self *IOpenServiceActivityCategory) HasDefaultActivity(pfHasDefaultActivity *bool) error {
+	_pfHasDefaultActivity := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasDefaultActivity))))
+	if pfHasDefaultActivity != nil {
+		*pfHasDefaultActivity = *_pfHasDefaultActivity != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1309,10 +1353,14 @@ func (self *IOpenServiceActivityInput) GetVariable(pwzVariableName string, pwzVa
 }
 
 // HasVariable dispatches through IOpenServiceActivityInput's vtable slot 4.
-func (self *IOpenServiceActivityInput) HasVariable(pwzVariableName string, pwzVariableType string, pfHasVariable *foundation.BOOL) error {
+func (self *IOpenServiceActivityInput) HasVariable(pwzVariableName string, pwzVariableType string, pfHasVariable *bool) error {
 	_pwzVariableName := win32.UTF16Ptr(pwzVariableName)
 	_pwzVariableType := win32.UTF16Ptr(pwzVariableType)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzVariableName)), uintptr(unsafe.Pointer(_pwzVariableType)), uintptr(unsafe.Pointer(pfHasVariable)))
+	_pfHasVariable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzVariableName)), uintptr(unsafe.Pointer(_pwzVariableType)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasVariable))))
+	if pfHasVariable != nil {
+		*pfHasVariable = *_pfHasVariable != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1375,11 +1423,15 @@ func (self *IOpenServiceActivityOutputContext) Navigate(pwzUri string, pwzMethod
 }
 
 // CanNavigate dispatches through IOpenServiceActivityOutputContext's vtable slot 4.
-func (self *IOpenServiceActivityOutputContext) CanNavigate(pwzUri string, pwzMethod string, pwzHeaders string, pPostData *systemcom.IStream, pfCanNavigate *foundation.BOOL) error {
+func (self *IOpenServiceActivityOutputContext) CanNavigate(pwzUri string, pwzMethod string, pwzHeaders string, pPostData *systemcom.IStream, pfCanNavigate *bool) error {
 	_pwzUri := win32.UTF16Ptr(pwzUri)
 	_pwzMethod := win32.UTF16Ptr(pwzMethod)
 	_pwzHeaders := win32.UTF16Ptr(pwzHeaders)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzUri)), uintptr(unsafe.Pointer(_pwzMethod)), uintptr(unsafe.Pointer(_pwzHeaders)), uintptr(unsafe.Pointer(pPostData)), uintptr(unsafe.Pointer(pfCanNavigate)))
+	_pfCanNavigate := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzUri)), uintptr(unsafe.Pointer(_pwzMethod)), uintptr(unsafe.Pointer(_pwzHeaders)), uintptr(unsafe.Pointer(pPostData)), uintptr(win32.OutParam(unsafe.Pointer(_pfCanNavigate))))
+	if pfCanNavigate != nil {
+		*pfCanNavigate = *_pfCanNavigate != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2010,8 +2062,12 @@ type ITridentTouchInput struct {
 var IID_ITridentTouchInput = win32.GUID{Data1: 0x30510850, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
 // OnPointerMessage dispatches through ITridentTouchInput's vtable slot 3.
-func (self *ITridentTouchInput) OnPointerMessage(msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, pfAllowManipulations *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(msg), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(pfAllowManipulations)))
+func (self *ITridentTouchInput) OnPointerMessage(msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, pfAllowManipulations *bool) error {
+	_pfAllowManipulations := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(msg), uintptr(wParam), uintptr(lParam), uintptr(win32.OutParam(unsafe.Pointer(_pfAllowManipulations))))
+	if pfAllowManipulations != nil {
+		*pfAllowManipulations = *_pfAllowManipulations != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2183,8 +2239,12 @@ func (self *IViewObjectPresentFlipSite) ExitFullScreen() error {
 }
 
 // IsFullScreen dispatches through IViewObjectPresentFlipSite's vtable slot 7.
-func (self *IViewObjectPresentFlipSite) IsFullScreen(pfFullScreen *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfFullScreen)))
+func (self *IViewObjectPresentFlipSite) IsFullScreen(pfFullScreen *bool) error {
+	_pfFullScreen := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfFullScreen))))
+	if pfFullScreen != nil {
+		*pfFullScreen = *_pfFullScreen != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

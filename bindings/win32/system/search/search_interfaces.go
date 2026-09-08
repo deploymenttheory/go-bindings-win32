@@ -782,14 +782,18 @@ func (self *IConditionGenerator) RecognizeNamedEntities(pszInputString string, l
 }
 
 // GenerateForLeaf dispatches through IConditionGenerator's vtable slot 5.
-func (self *IConditionGenerator) GenerateForLeaf(pConditionFactory *IConditionFactory, pszPropertyName string, cop systemsearchcommon.CONDITION_OPERATION, pszValueType string, pszValue string, pszValue2 string, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, automaticWildcard bool, pNoStringQuery *foundation.BOOL) (*ICondition, error) {
+func (self *IConditionGenerator) GenerateForLeaf(pConditionFactory *IConditionFactory, pszPropertyName string, cop systemsearchcommon.CONDITION_OPERATION, pszValueType string, pszValue string, pszValue2 string, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, automaticWildcard bool, pNoStringQuery *bool) (*ICondition, error) {
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
 	_pszValueType := win32.UTF16Ptr(pszValueType)
 	_pszValue := win32.UTF16Ptr(pszValue)
 	_pszValue2 := win32.UTF16Ptr(pszValue2)
 	_automaticWildcard := win32.Bool32(automaticWildcard)
+	_pNoStringQuery := new(foundation.BOOL)
 	_ppQueryExpression := new(*ICondition)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConditionFactory)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(cop), uintptr(unsafe.Pointer(_pszValueType)), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(_pszValue2)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(_automaticWildcard), uintptr(unsafe.Pointer(pNoStringQuery)), uintptr(win32.OutParam(unsafe.Pointer(_ppQueryExpression))))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConditionFactory)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(cop), uintptr(unsafe.Pointer(_pszValueType)), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(_pszValue2)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(_automaticWildcard), uintptr(win32.OutParam(unsafe.Pointer(_pNoStringQuery))), uintptr(win32.OutParam(unsafe.Pointer(_ppQueryExpression))))
+	if pNoStringQuery != nil {
+		*pNoStringQuery = *_pNoStringQuery != 0
+	}
 	return *_ppQueryExpression, win32.ErrIfFailed(int32(r1))
 }
 
@@ -1710,9 +1714,13 @@ type ILoadFilterWithPrivateComActivation struct {
 var IID_ILoadFilterWithPrivateComActivation = win32.GUID{Data1: 0x40bdbd34, Data2: 0x780b, Data3: 0x48d3, Data4: [8]byte{0x9b, 0xb6, 0x12, 0xeb, 0xd4, 0xad, 0x2e, 0x75}}
 
 // LoadIFilterWithPrivateComActivation dispatches through ILoadFilterWithPrivateComActivation's vtable slot 6.
-func (self *ILoadFilterWithPrivateComActivation) LoadIFilterWithPrivateComActivation(filteredSources *FILTERED_DATA_SOURCES, useDefault bool, filterClsid *win32.GUID, isFilterPrivateComActivated *foundation.BOOL, filterObj **storageindexserver.IFilter) error {
+func (self *ILoadFilterWithPrivateComActivation) LoadIFilterWithPrivateComActivation(filteredSources *FILTERED_DATA_SOURCES, useDefault bool, filterClsid *win32.GUID, isFilterPrivateComActivated *bool, filterObj **storageindexserver.IFilter) error {
 	_useDefault := win32.Bool32(useDefault)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filteredSources)), uintptr(_useDefault), uintptr(unsafe.Pointer(filterClsid)), uintptr(unsafe.Pointer(isFilterPrivateComActivated)), uintptr(unsafe.Pointer(filterObj)))
+	_isFilterPrivateComActivated := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filteredSources)), uintptr(_useDefault), uintptr(unsafe.Pointer(filterClsid)), uintptr(win32.OutParam(unsafe.Pointer(_isFilterPrivateComActivated))), uintptr(unsafe.Pointer(filterObj)))
+	if isFilterPrivateComActivated != nil {
+		*isFilterPrivateComActivated = *_isFilterPrivateComActivated != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1896,8 +1904,12 @@ func (self *IObjectAccessControl) GetObjectOwner(pObject *SEC_OBJECT, ppOwner **
 }
 
 // IsObjectAccessAllowed dispatches through IObjectAccessControl's vtable slot 5.
-func (self *IObjectAccessControl) IsObjectAccessAllowed(pObject *SEC_OBJECT, pAccessEntry *securityauthorization.EXPLICIT_ACCESS_W, pfResult *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pAccessEntry)), uintptr(unsafe.Pointer(pfResult)))
+func (self *IObjectAccessControl) IsObjectAccessAllowed(pObject *SEC_OBJECT, pAccessEntry *securityauthorization.EXPLICIT_ACCESS_W, pfResult *bool) error {
+	_pfResult := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pAccessEntry)), uintptr(win32.OutParam(unsafe.Pointer(_pfResult))))
+	if pfResult != nil {
+		*pfResult = *_pfResult != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1923,14 +1935,22 @@ type IOpLockStatus struct {
 var IID_IOpLockStatus = win32.GUID{Data1: 0xc731065d, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x4f}}
 
 // IsOplockValid dispatches through IOpLockStatus's vtable slot 3.
-func (self *IOpLockStatus) IsOplockValid(pfIsOplockValid *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsOplockValid)))
+func (self *IOpLockStatus) IsOplockValid(pfIsOplockValid *bool) error {
+	_pfIsOplockValid := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsOplockValid))))
+	if pfIsOplockValid != nil {
+		*pfIsOplockValid = *_pfIsOplockValid != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // IsOplockBroken dispatches through IOpLockStatus's vtable slot 4.
-func (self *IOpLockStatus) IsOplockBroken(pfIsOplockBroken *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsOplockBroken)))
+func (self *IOpLockStatus) IsOplockBroken(pfIsOplockBroken *bool) error {
+	_pfIsOplockBroken := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsOplockBroken))))
+	if pfIsOplockBroken != nil {
+		*pfIsOplockBroken = *_pfIsOplockBroken != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -2198,10 +2218,10 @@ func (self *IRelationship) Name(ppszName *foundation.PWSTR) error {
 }
 
 // IsReal dispatches through IRelationship's vtable slot 4.
-func (self *IRelationship) IsReal() (foundation.BOOL, error) {
+func (self *IRelationship) IsReal() (bool, error) {
 	_pIsReal := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pIsReal))))
-	return *_pIsReal, win32.ErrIfFailed(int32(r1))
+	return *_pIsReal != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Destination dispatches through IRelationship's vtable slot 5.
@@ -2411,8 +2431,12 @@ type IRowsetAsynch struct {
 var IID_IRowsetAsynch = win32.GUID{Data1: 0x0c733a0f, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // RatioFinished dispatches through IRowsetAsynch's vtable slot 3.
-func (self *IRowsetAsynch) RatioFinished(pulDenominator *uintptr, pulNumerator *uintptr, pcRows *uintptr, pfNewRows *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulDenominator)), uintptr(unsafe.Pointer(pulNumerator)), uintptr(unsafe.Pointer(pcRows)), uintptr(unsafe.Pointer(pfNewRows)))
+func (self *IRowsetAsynch) RatioFinished(pulDenominator *uintptr, pulNumerator *uintptr, pcRows *uintptr, pfNewRows *bool) error {
+	_pfNewRows := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulDenominator)), uintptr(unsafe.Pointer(pulNumerator)), uintptr(unsafe.Pointer(pcRows)), uintptr(win32.OutParam(unsafe.Pointer(_pfNewRows))))
+	if pfNewRows != nil {
+		*pfNewRows = *_pfNewRows != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3501,10 +3525,10 @@ func (self *ISearchCatalogManager) Put_DiacriticSensitivity(fDiacriticSensitive 
 }
 
 // Get_DiacriticSensitivity dispatches through ISearchCatalogManager's vtable slot 27.
-func (self *ISearchCatalogManager) Get_DiacriticSensitivity() (foundation.BOOL, error) {
+func (self *ISearchCatalogManager) Get_DiacriticSensitivity() (bool, error) {
 	_pfDiacriticSensitive := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfDiacriticSensitive))))
-	return *_pfDiacriticSensitive, win32.ErrIfFailed(int32(r1))
+	return *_pfDiacriticSensitive != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetCrawlScopeManager dispatches through ISearchCatalogManager's vtable slot 28.
@@ -3539,10 +3563,10 @@ type ISearchCatalogManager3 struct {
 var IID_ISearchCatalogManager3 = win32.GUID{Data1: 0xde837e8f, Data2: 0x634f, Data3: 0x4ab0, Data4: [8]byte{0xbd, 0xfc, 0x9f, 0xc3, 0xa1, 0xfc, 0x50, 0xdc}}
 
 // IsContainsSemanticSupported dispatches through ISearchCatalogManager3's vtable slot 30.
-func (self *ISearchCatalogManager3) IsContainsSemanticSupported() (foundation.BOOL, error) {
+func (self *ISearchCatalogManager3) IsContainsSemanticSupported() (bool, error) {
 	_isContainsSemanticSupported := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_isContainsSemanticSupported))))
-	return *_isContainsSemanticSupported, win32.ErrIfFailed(int32(r1))
+	return *_isContainsSemanticSupported != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // ISearchCrawlScopeManager: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchcrawlscopemanager
@@ -3616,33 +3640,37 @@ func (self *ISearchCrawlScopeManager) EnumerateScopeRules() (*IEnumSearchScopeRu
 }
 
 // HasParentScopeRule dispatches through ISearchCrawlScopeManager's vtable slot 11.
-func (self *ISearchCrawlScopeManager) HasParentScopeRule(pszURL string) (foundation.BOOL, error) {
+func (self *ISearchCrawlScopeManager) HasParentScopeRule(pszURL string) (bool, error) {
 	_pszURL := win32.UTF16Ptr(pszURL)
 	_pfHasParentRule := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasParentRule))))
-	return *_pfHasParentRule, win32.ErrIfFailed(int32(r1))
+	return *_pfHasParentRule != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // HasChildScopeRule dispatches through ISearchCrawlScopeManager's vtable slot 12.
-func (self *ISearchCrawlScopeManager) HasChildScopeRule(pszURL string) (foundation.BOOL, error) {
+func (self *ISearchCrawlScopeManager) HasChildScopeRule(pszURL string) (bool, error) {
 	_pszURL := win32.UTF16Ptr(pszURL)
 	_pfHasChildRule := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(win32.OutParam(unsafe.Pointer(_pfHasChildRule))))
-	return *_pfHasChildRule, win32.ErrIfFailed(int32(r1))
+	return *_pfHasChildRule != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IncludedInCrawlScope dispatches through ISearchCrawlScopeManager's vtable slot 13.
-func (self *ISearchCrawlScopeManager) IncludedInCrawlScope(pszURL string) (foundation.BOOL, error) {
+func (self *ISearchCrawlScopeManager) IncludedInCrawlScope(pszURL string) (bool, error) {
 	_pszURL := win32.UTF16Ptr(pszURL)
 	_pfIsIncluded := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsIncluded))))
-	return *_pfIsIncluded, win32.ErrIfFailed(int32(r1))
+	return *_pfIsIncluded != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // IncludedInCrawlScopeEx dispatches through ISearchCrawlScopeManager's vtable slot 14.
-func (self *ISearchCrawlScopeManager) IncludedInCrawlScopeEx(pszURL string, pfIsIncluded *foundation.BOOL, pReason *CLUSION_REASON) error {
+func (self *ISearchCrawlScopeManager) IncludedInCrawlScopeEx(pszURL string, pfIsIncluded *bool, pReason *CLUSION_REASON) error {
 	_pszURL := win32.UTF16Ptr(pszURL)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(pfIsIncluded)), uintptr(unsafe.Pointer(pReason)))
+	_pfIsIncluded := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsIncluded))), uintptr(unsafe.Pointer(pReason)))
+	if pfIsIncluded != nil {
+		*pfIsIncluded = *_pfIsIncluded != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -3734,10 +3762,10 @@ func (self *ISearchLanguageSupport) SetDiacriticSensitivity(fDiacriticSensitive 
 }
 
 // GetDiacriticSensitivity dispatches through ISearchLanguageSupport's vtable slot 4.
-func (self *ISearchLanguageSupport) GetDiacriticSensitivity() (foundation.BOOL, error) {
+func (self *ISearchLanguageSupport) GetDiacriticSensitivity() (bool, error) {
 	_pfDiacriticSensitive := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfDiacriticSensitive))))
-	return *_pfDiacriticSensitive, win32.ErrIfFailed(int32(r1))
+	return *_pfDiacriticSensitive != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // LoadWordBreaker dispatches through ISearchLanguageSupport's vtable slot 5.
@@ -3849,10 +3877,10 @@ func (self *ISearchManager) Get_UseProxy() (PROXY_ACCESS, error) {
 }
 
 // Get_LocalBypass dispatches through ISearchManager's vtable slot 14.
-func (self *ISearchManager) Get_LocalBypass() (foundation.BOOL, error) {
+func (self *ISearchManager) Get_LocalBypass() (bool, error) {
 	_pfLocalBypass := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfLocalBypass))))
-	return *_pfLocalBypass, win32.ErrIfFailed(int32(r1))
+	return *_pfLocalBypass != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_PortNumber dispatches through ISearchManager's vtable slot 15.
@@ -4238,10 +4266,10 @@ func (self *ISearchRoot) Put_IsHierarchical(fIsHierarchical bool) error {
 }
 
 // Get_IsHierarchical dispatches through ISearchRoot's vtable slot 8.
-func (self *ISearchRoot) Get_IsHierarchical() (foundation.BOOL, error) {
+func (self *ISearchRoot) Get_IsHierarchical() (bool, error) {
 	_pfIsHierarchical := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsHierarchical))))
-	return *_pfIsHierarchical, win32.ErrIfFailed(int32(r1))
+	return *_pfIsHierarchical != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_ProvidesNotifications dispatches through ISearchRoot's vtable slot 9.
@@ -4252,10 +4280,10 @@ func (self *ISearchRoot) Put_ProvidesNotifications(fProvidesNotifications bool) 
 }
 
 // Get_ProvidesNotifications dispatches through ISearchRoot's vtable slot 10.
-func (self *ISearchRoot) Get_ProvidesNotifications() (foundation.BOOL, error) {
+func (self *ISearchRoot) Get_ProvidesNotifications() (bool, error) {
 	_pfProvidesNotifications := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfProvidesNotifications))))
-	return *_pfProvidesNotifications, win32.ErrIfFailed(int32(r1))
+	return *_pfProvidesNotifications != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_UseNotificationsOnly dispatches through ISearchRoot's vtable slot 11.
@@ -4266,10 +4294,10 @@ func (self *ISearchRoot) Put_UseNotificationsOnly(fUseNotificationsOnly bool) er
 }
 
 // Get_UseNotificationsOnly dispatches through ISearchRoot's vtable slot 12.
-func (self *ISearchRoot) Get_UseNotificationsOnly() (foundation.BOOL, error) {
+func (self *ISearchRoot) Get_UseNotificationsOnly() (bool, error) {
 	_pfUseNotificationsOnly := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfUseNotificationsOnly))))
-	return *_pfUseNotificationsOnly, win32.ErrIfFailed(int32(r1))
+	return *_pfUseNotificationsOnly != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_EnumerationDepth dispatches through ISearchRoot's vtable slot 13.
@@ -4306,10 +4334,10 @@ func (self *ISearchRoot) Put_FollowDirectories(fFollowDirectories bool) error {
 }
 
 // Get_FollowDirectories dispatches through ISearchRoot's vtable slot 18.
-func (self *ISearchRoot) Get_FollowDirectories() (foundation.BOOL, error) {
+func (self *ISearchRoot) Get_FollowDirectories() (bool, error) {
 	_pfFollowDirectories := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfFollowDirectories))))
-	return *_pfFollowDirectories, win32.ErrIfFailed(int32(r1))
+	return *_pfFollowDirectories != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Put_AuthenticationType dispatches through ISearchRoot's vtable slot 19.
@@ -4370,17 +4398,17 @@ func (self *ISearchScopeRule) Get_PatternOrURL() (foundation.PWSTR, error) {
 }
 
 // Get_IsIncluded dispatches through ISearchScopeRule's vtable slot 4.
-func (self *ISearchScopeRule) Get_IsIncluded() (foundation.BOOL, error) {
+func (self *ISearchScopeRule) Get_IsIncluded() (bool, error) {
 	_pfIsIncluded := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsIncluded))))
-	return *_pfIsIncluded, win32.ErrIfFailed(int32(r1))
+	return *_pfIsIncluded != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_IsDefault dispatches through ISearchScopeRule's vtable slot 5.
-func (self *ISearchScopeRule) Get_IsDefault() (foundation.BOOL, error) {
+func (self *ISearchScopeRule) Get_IsDefault() (bool, error) {
 	_pfIsDefault := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsDefault))))
-	return *_pfIsDefault, win32.ErrIfFailed(int32(r1))
+	return *_pfIsDefault != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // Get_FollowFlags dispatches through ISearchScopeRule's vtable slot 6.
@@ -4630,9 +4658,13 @@ func (self *ISubscriptionMgr) UpdateAll() error {
 }
 
 // IsSubscribed dispatches through ISubscriptionMgr's vtable slot 6.
-func (self *ISubscriptionMgr) IsSubscribed(pwszURL string, pfSubscribed *foundation.BOOL) error {
+func (self *ISubscriptionMgr) IsSubscribed(pwszURL string, pfSubscribed *bool) error {
 	_pwszURL := win32.UTF16Ptr(pwszURL)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(unsafe.Pointer(pfSubscribed)))
+	_pfSubscribed := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(win32.OutParam(unsafe.Pointer(_pfSubscribed))))
+	if pfSubscribed != nil {
+		*pfSubscribed = *_pfSubscribed != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -4981,8 +5013,12 @@ func (self *ITrusteeGroupAdmin) DeleteMember(pMembershipTrustee *securityauthori
 }
 
 // IsMember dispatches through ITrusteeGroupAdmin's vtable slot 5.
-func (self *ITrusteeGroupAdmin) IsMember(pMembershipTrustee *securityauthorization.TRUSTEE_W, pMemberTrustee *securityauthorization.TRUSTEE_W, pfStatus *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMembershipTrustee)), uintptr(unsafe.Pointer(pMemberTrustee)), uintptr(unsafe.Pointer(pfStatus)))
+func (self *ITrusteeGroupAdmin) IsMember(pMembershipTrustee *securityauthorization.TRUSTEE_W, pMemberTrustee *securityauthorization.TRUSTEE_W, pfStatus *bool) error {
+	_pfStatus := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMembershipTrustee)), uintptr(unsafe.Pointer(pMemberTrustee)), uintptr(win32.OutParam(unsafe.Pointer(_pfStatus))))
+	if pfStatus != nil {
+		*pfStatus = *_pfStatus != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5186,14 +5222,22 @@ type IUrlAccessor4 struct {
 var IID_IUrlAccessor4 = win32.GUID{Data1: 0x5cc51041, Data2: 0xc8d2, Data3: 0x41d7, Data4: [8]byte{0xbc, 0xa3, 0x9e, 0x9e, 0x28, 0x62, 0x97, 0xdc}}
 
 // ShouldIndexItemContent dispatches through IUrlAccessor4's vtable slot 20.
-func (self *IUrlAccessor4) ShouldIndexItemContent(pfIndexContent *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIndexContent)))
+func (self *IUrlAccessor4) ShouldIndexItemContent(pfIndexContent *bool) error {
+	_pfIndexContent := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pfIndexContent))))
+	if pfIndexContent != nil {
+		*pfIndexContent = *_pfIndexContent != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // ShouldIndexProperty dispatches through IUrlAccessor4's vtable slot 21.
-func (self *IUrlAccessor4) ShouldIndexProperty(key *foundation.PROPERTYKEY, pfIndexProperty *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pfIndexProperty)))
+func (self *IUrlAccessor4) ShouldIndexProperty(key *foundation.PROPERTYKEY, pfIndexProperty *bool) error {
+	_pfIndexProperty := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(win32.OutParam(unsafe.Pointer(_pfIndexProperty))))
+	if pfIndexProperty != nil {
+		*pfIndexProperty = *_pfIndexProperty != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -5475,10 +5519,10 @@ func (self *OLEDBSimpleProvider) RemoveOLEDBSimpleProviderListener(pospIListener
 }
 
 // IsAsync dispatches through OLEDBSimpleProvider's vtable slot 14.
-func (self *OLEDBSimpleProvider) IsAsync() (foundation.BOOL, error) {
+func (self *OLEDBSimpleProvider) IsAsync() (bool, error) {
 	_pbAsynch := new(foundation.BOOL)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pbAsynch))))
-	return *_pbAsynch, win32.ErrIfFailed(int32(r1))
+	return *_pbAsynch != 0, win32.ErrIfFailed(int32(r1))
 }
 
 // GetEstimatedRows dispatches through OLEDBSimpleProvider's vtable slot 15.

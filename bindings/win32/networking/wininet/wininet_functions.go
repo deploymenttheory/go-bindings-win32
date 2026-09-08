@@ -2072,9 +2072,13 @@ func HttpIndicatePageLoadComplete(hDependencyHandle unsafe.Pointer) uint32 {
 }
 
 // HttpIsHostHstsEnabled calls WININET!HttpIsHostHstsEnabled.
-func HttpIsHostHstsEnabled(pcwszUrl string, pfIsHsts *foundation.BOOL) uint32 {
+func HttpIsHostHstsEnabled(pcwszUrl string, pfIsHsts *bool) uint32 {
 	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
-	r1, _, _ := syscall.SyscallN(procHttpIsHostHstsEnabled.Addr(), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pfIsHsts)))
+	_pfIsHsts := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procHttpIsHostHstsEnabled.Addr(), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(win32.OutParam(unsafe.Pointer(_pfIsHsts))))
+	if pfIsHsts != nil {
+		*pfIsHsts = *_pfIsHsts != 0
+	}
 	return uint32(r1)
 }
 
@@ -3615,8 +3619,12 @@ func UpdateUrlCacheContentPath(szNewPath foundation.PSTR) bool {
 }
 
 // UrlCacheCheckEntriesExist calls WININET!UrlCacheCheckEntriesExist.
-func UrlCacheCheckEntriesExist(rgpwszUrls *foundation.PWSTR, cEntries uint32, rgfExist *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procUrlCacheCheckEntriesExist.Addr(), uintptr(unsafe.Pointer(rgpwszUrls)), uintptr(cEntries), uintptr(unsafe.Pointer(rgfExist)))
+func UrlCacheCheckEntriesExist(rgpwszUrls *foundation.PWSTR, cEntries uint32, rgfExist *bool) uint32 {
+	_rgfExist := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procUrlCacheCheckEntriesExist.Addr(), uintptr(unsafe.Pointer(rgpwszUrls)), uintptr(cEntries), uintptr(win32.OutParam(unsafe.Pointer(_rgfExist))))
+	if rgfExist != nil {
+		*rgfExist = *_rgfExist != 0
+	}
 	return uint32(r1)
 }
 

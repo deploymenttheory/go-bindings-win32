@@ -324,8 +324,12 @@ func (self *IDXGIDevice2) OfferResources(ppResources []*IDXGIResource, Priority 
 }
 
 // ReclaimResources dispatches through IDXGIDevice2's vtable slot 15.
-func (self *IDXGIDevice2) ReclaimResources(NumResources uint32, ppResources **IDXGIResource, pDiscarded *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(unsafe.Pointer(pDiscarded)))
+func (self *IDXGIDevice2) ReclaimResources(NumResources uint32, ppResources **IDXGIResource, pDiscarded *bool) error {
+	_pDiscarded := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(win32.OutParam(unsafe.Pointer(_pDiscarded))))
+	if pDiscarded != nil {
+		*pDiscarded = *_pDiscarded != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -1424,8 +1428,12 @@ func (self *IDXGISwapChain) SetFullscreenState(Fullscreen bool, pTarget *IDXGIOu
 }
 
 // GetFullscreenState dispatches through IDXGISwapChain's vtable slot 11.
-func (self *IDXGISwapChain) GetFullscreenState(pFullscreen *foundation.BOOL, ppTarget **IDXGIOutput) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFullscreen)), uintptr(unsafe.Pointer(ppTarget)))
+func (self *IDXGISwapChain) GetFullscreenState(pFullscreen *bool, ppTarget **IDXGIOutput) error {
+	_pFullscreen := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_pFullscreen))), uintptr(unsafe.Pointer(ppTarget)))
+	if pFullscreen != nil {
+		*pFullscreen = *_pFullscreen != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

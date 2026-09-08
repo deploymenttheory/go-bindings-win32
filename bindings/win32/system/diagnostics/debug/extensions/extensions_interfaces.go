@@ -6178,8 +6178,12 @@ func (self *IDebugControl) SetInterruptTimeout(Seconds uint32) error {
 }
 
 // GetLogFile dispatches through IDebugControl's vtable slot 7.
-func (self *IDebugControl) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -6775,8 +6779,12 @@ func (self *IDebugControl2) SetInterruptTimeout(Seconds uint32) error {
 }
 
 // GetLogFile dispatches through IDebugControl2's vtable slot 7.
-func (self *IDebugControl2) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl2) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -7420,8 +7428,12 @@ func (self *IDebugControl3) SetInterruptTimeout(Seconds uint32) error {
 }
 
 // GetLogFile dispatches through IDebugControl3's vtable slot 7.
-func (self *IDebugControl3) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl3) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8143,8 +8155,12 @@ func (self *IDebugControl4) SetInterruptTimeout(Seconds uint32) error {
 }
 
 // GetLogFile dispatches through IDebugControl4's vtable slot 7.
-func (self *IDebugControl4) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl4) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -8834,8 +8850,12 @@ func (self *IDebugControl4) SetNextEventIndex(Relation uint32, Value uint32, Nex
 }
 
 // GetLogFileWide dispatches through IDebugControl4's vtable slot 116.
-func (self *IDebugControl4) GetLogFileWide(Buffer foundation.PWSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl4) GetLogFileWide(Buffer foundation.PWSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9244,8 +9264,12 @@ func (self *IDebugControl5) SetInterruptTimeout(Seconds uint32) error {
 }
 
 // GetLogFile dispatches through IDebugControl5's vtable slot 7.
-func (self *IDebugControl5) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl5) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -9935,8 +9959,12 @@ func (self *IDebugControl5) SetNextEventIndex(Relation uint32, Value uint32, Nex
 }
 
 // GetLogFileWide dispatches through IDebugControl5's vtable slot 116.
-func (self *IDebugControl5) GetLogFileWide(Buffer foundation.PWSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl5) GetLogFileWide(Buffer foundation.PWSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -10403,8 +10431,12 @@ func (self *IDebugControl6) SetInterruptTimeout(Seconds uint32) error {
 }
 
 // GetLogFile dispatches through IDebugControl6's vtable slot 7.
-func (self *IDebugControl6) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl6) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11094,8 +11126,12 @@ func (self *IDebugControl6) SetNextEventIndex(Relation uint32, Value uint32, Nex
 }
 
 // GetLogFileWide dispatches through IDebugControl6's vtable slot 116.
-func (self *IDebugControl6) GetLogFileWide(Buffer foundation.PWSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl6) GetLogFileWide(Buffer foundation.PWSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -11574,8 +11610,12 @@ func (self *IDebugControl7) SetInterruptTimeout(Seconds uint32) error {
 }
 
 // GetLogFile dispatches through IDebugControl7's vtable slot 7.
-func (self *IDebugControl7) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl7) GetLogFile(Buffer foundation.PSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -12265,8 +12305,12 @@ func (self *IDebugControl7) SetNextEventIndex(Relation uint32, Value uint32, Nex
 }
 
 // GetLogFileWide dispatches through IDebugControl7's vtable slot 116.
-func (self *IDebugControl7) GetLogFileWide(Buffer foundation.PWSTR, BufferSize uint32, FileSize *uint32, Append *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(unsafe.Pointer(Append)))
+func (self *IDebugControl7) GetLogFileWide(Buffer foundation.PWSTR, BufferSize uint32, FileSize *uint32, Append *bool) error {
+	_Append := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FileSize)), uintptr(win32.OutParam(unsafe.Pointer(_Append))))
+	if Append != nil {
+		*Append = *_Append != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

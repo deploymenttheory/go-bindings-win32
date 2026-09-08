@@ -580,8 +580,12 @@ func VariantCopyInd(pvarDest *VARIANT, pvargSrc *VARIANT) error {
 // VariantGetBooleanElem calls PROPSYS!VariantGetBooleanElem.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-variantgetbooleanelem
 // Minimum OS: windows5.1.2600.
-func VariantGetBooleanElem(var_ *VARIANT, iElem uint32, pfVal *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procVariantGetBooleanElem.Addr(), uintptr(unsafe.Pointer(var_)), uintptr(iElem), uintptr(unsafe.Pointer(pfVal)))
+func VariantGetBooleanElem(var_ *VARIANT, iElem uint32, pfVal *bool) error {
+	_pfVal := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procVariantGetBooleanElem.Addr(), uintptr(unsafe.Pointer(var_)), uintptr(iElem), uintptr(win32.OutParam(unsafe.Pointer(_pfVal))))
+	if pfVal != nil {
+		*pfVal = *_pfVal != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 
@@ -684,8 +688,12 @@ func VariantTimeToSystemTime(vtime float64, lpSystemTime *foundation.SYSTEMTIME)
 // VariantToBoolean calls PROPSYS!VariantToBoolean.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttoboolean
 // Minimum OS: windows5.1.2600.
-func VariantToBoolean(varIn *VARIANT, pfRet *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procVariantToBoolean.Addr(), uintptr(unsafe.Pointer(varIn)), uintptr(unsafe.Pointer(pfRet)))
+func VariantToBoolean(varIn *VARIANT, pfRet *bool) error {
+	_pfRet := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procVariantToBoolean.Addr(), uintptr(unsafe.Pointer(varIn)), uintptr(win32.OutParam(unsafe.Pointer(_pfRet))))
+	if pfRet != nil {
+		*pfRet = *_pfRet != 0
+	}
 	return win32.ErrIfFailed(int32(r1))
 }
 

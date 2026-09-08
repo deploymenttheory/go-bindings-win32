@@ -401,8 +401,12 @@ func DnsGetProxyInformation(hostName string, proxyInformation *DNS_PROXY_INFORMA
 }
 
 // DnsIsFlatRecord calls DNSAPI!DnsIsFlatRecord.
-func DnsIsFlatRecord(pRecord *DNS_RECORDA, ullFlags uint64, pfFlat *foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procDnsIsFlatRecord.Addr(), uintptr(unsafe.Pointer(pRecord)), uintptr(ullFlags), uintptr(unsafe.Pointer(pfFlat)))
+func DnsIsFlatRecord(pRecord *DNS_RECORDA, ullFlags uint64, pfFlat *bool) int32 {
+	_pfFlat := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procDnsIsFlatRecord.Addr(), uintptr(unsafe.Pointer(pRecord)), uintptr(ullFlags), uintptr(win32.OutParam(unsafe.Pointer(_pfFlat))))
+	if pfFlat != nil {
+		*pfFlat = *_pfFlat != 0
+	}
 	return int32(r1)
 }
 

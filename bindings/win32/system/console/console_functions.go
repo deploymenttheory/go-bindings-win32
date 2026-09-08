@@ -763,8 +763,16 @@ func GetConsoleCursorInfo(hConsoleOutput foundation.HANDLE, lpConsoleCursorInfo 
 }
 
 // GetConsoleCursorMode calls KERNEL32!GetConsoleCursorMode.
-func GetConsoleCursorMode(hConsoleHandle foundation.HANDLE, pbBlink *foundation.BOOL, pbDBEnable *foundation.BOOL) bool {
-	r1, _, _ := syscall.SyscallN(procGetConsoleCursorMode.Addr(), uintptr(hConsoleHandle), uintptr(unsafe.Pointer(pbBlink)), uintptr(unsafe.Pointer(pbDBEnable)))
+func GetConsoleCursorMode(hConsoleHandle foundation.HANDLE, pbBlink *bool, pbDBEnable *bool) bool {
+	_pbBlink := new(foundation.BOOL)
+	_pbDBEnable := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(procGetConsoleCursorMode.Addr(), uintptr(hConsoleHandle), uintptr(win32.OutParam(unsafe.Pointer(_pbBlink))), uintptr(win32.OutParam(unsafe.Pointer(_pbDBEnable))))
+	if pbBlink != nil {
+		*pbBlink = *_pbBlink != 0
+	}
+	if pbDBEnable != nil {
+		*pbDBEnable = *_pbDBEnable != 0
+	}
 	return r1 != 0
 }
 

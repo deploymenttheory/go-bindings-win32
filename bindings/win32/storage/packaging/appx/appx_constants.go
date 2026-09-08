@@ -4,8 +4,20 @@
 
 package appx
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
 const APPLICATION_USER_MODEL_ID_MAX_LENGTH uint32 = 130
 const APPLICATION_USER_MODEL_ID_MIN_LENGTH uint32 = 20
+
+var CLSID_AppxBundleFactory win32.GUID = win32.GUID{Data1: 0x378e0446, Data2: 0x5384, Data3: 0x43b7, Data4: [8]byte{0x88, 0x77, 0xe7, 0xdb, 0xdd, 0x88, 0x34, 0x46}}
+var CLSID_AppxEncryptionFactory win32.GUID = win32.GUID{Data1: 0xdc664fdd, Data2: 0xd868, Data3: 0x46ee, Data4: [8]byte{0x87, 0x80, 0x8d, 0x19, 0x6c, 0xb7, 0x39, 0xf7}}
+var CLSID_AppxFactory win32.GUID = win32.GUID{Data1: 0x5842a140, Data2: 0xff9f, Data3: 0x4166, Data4: [8]byte{0x8f, 0x5c, 0x62, 0xf5, 0xb7, 0xb0, 0xc7, 0x81}}
+var CLSID_AppxPackageEditor win32.GUID = win32.GUID{Data1: 0xf004f2ca, Data2: 0xaebc, Data3: 0x4b0d, Data4: [8]byte{0xbf, 0x58, 0xe5, 0x16, 0xd5, 0xbc, 0xc0, 0xab}}
+var CLSID_AppxPackagingDiagnosticEventSinkManager win32.GUID = win32.GUID{Data1: 0x50ca0a46, Data2: 0x1588, Data3: 0x4161, Data4: [8]byte{0x8e, 0xd2, 0xef, 0x9e, 0x46, 0x9c, 0xed, 0x5d}}
+var CLSID_AppxPackagingServiceProvider win32.GUID = win32.GUID{Data1: 0xfb1b3839, Data2: 0x09da, Data3: 0x404f, Data4: [8]byte{0xb0, 0x02, 0x9c, 0xbb, 0x8d, 0xa5, 0xca, 0x4f}}
+
 const PACKAGE_APPLICATIONS_MAX_COUNT uint32 = 100
 const PACKAGE_APPLICATIONS_MIN_COUNT uint32 = 0
 const PACKAGE_ARCHITECTURE_MAX_LENGTH uint32 = 7

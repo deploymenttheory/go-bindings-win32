@@ -4,7 +4,17 @@
 
 package mmc
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
 const AUTO_WIDTH int32 = -1
+
+var CLSID_AppEventsDHTMLConnector win32.GUID = win32.GUID{Data1: 0xade6444b, Data2: 0xc91f, Data3: 0x4e37, Data4: [8]byte{0x92, 0xa4, 0x5b, 0xb4, 0x30, 0xa3, 0x33, 0x40}}
+var CLSID_Application win32.GUID = win32.GUID{Data1: 0x49b2791a, Data2: 0xb1ae, Data3: 0x4c90, Data4: [8]byte{0x9b, 0x8e, 0xe8, 0x60, 0xba, 0x07, 0xf8, 0x89}}
+var CLSID_ConsolePower win32.GUID = win32.GUID{Data1: 0xf0285374, Data2: 0xdff1, Data3: 0x11d3, Data4: [8]byte{0xb4, 0x33, 0x00, 0xc0, 0x4f, 0x8e, 0xcd, 0x78}}
+var CLSID_MMCVersionInfo win32.GUID = win32.GUID{Data1: 0xd6fedb1d, Data2: 0xcf21, Data3: 0x4bd9, Data4: [8]byte{0xaf, 0x3b, 0xc5, 0x46, 0x8e, 0x9c, 0x66, 0x84}}
+
 const HDI_HIDDEN uint32 = 1
 const HIDE_COLUMN int32 = -4
 const ILSIF_LEAVE_LARGE_ICON uint32 = 1073741824

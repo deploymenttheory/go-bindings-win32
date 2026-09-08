@@ -33,6 +33,3 @@ type UpdateAssessment struct {
 	Impact        UpdateImpactLevel
 	DaysOutOfDate uint32
 }
-
-type WaaSAssessor struct {
-}

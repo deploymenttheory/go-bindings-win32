@@ -385,15 +385,6 @@ type AUTHZ_SOURCE_SCHEMA_REGISTRATION struct {
 	ObjectTypeNames            [1]AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET
 }
 
-type AzAuthorizationStore struct {
-}
-
-type AzBizRuleContext struct {
-}
-
-type AzPrincipalLocator struct {
-}
-
 // EXPLICIT_ACCESS_A: https://learn.microsoft.com/windows/win32/api/accctrl/ns-accctrl-explicit_access_a
 type EXPLICIT_ACCESS_A struct {
 	GrfAccessPermissions uint32

@@ -5,8 +5,11 @@
 package realtimecommunications
 
 import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
+
+var CLSID_RTCClient win32.GUID = win32.GUID{Data1: 0x7a42ea29, Data2: 0xa2b7, Data3: 0x40c4, Data4: [8]byte{0xb0, 0x91, 0xf6, 0xf0, 0x24, 0xaa, 0x89, 0xbe}}
 
 const FACILITY_PINT_STATUS_CODE uint32 = 240
 const FACILITY_RTC_INTERFACE uint32 = 238

@@ -8,6 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
+var CLSID_DeliveryOptimization win32.GUID = win32.GUID{Data1: 0x5b99fa76, Data2: 0x721c, Data3: 0x423c, Data4: [8]byte{0xad, 0xac, 0x56, 0xd0, 0x3c, 0x8a, 0x80, 0x07}}
+
 const DecryptionInfo_AlgorithmName = "AlgorithmName"
 const DecryptionInfo_ChainingMode = "ChainingMode"
 const DecryptionInfo_EncryptionBufferSize = "EncryptionBufferSize"

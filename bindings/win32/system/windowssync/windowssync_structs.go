@@ -73,6 +73,3 @@ type SyncProviderConfiguration struct {
 	DwCapabilities          uint32
 	DwSupportedArchitecture uint32
 }
-
-type SyncProviderRegistration struct {
-}

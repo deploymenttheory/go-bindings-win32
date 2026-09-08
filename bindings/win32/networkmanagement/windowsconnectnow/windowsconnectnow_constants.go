@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+var CLSID_WCNDeviceObject win32.GUID = win32.GUID{Data1: 0xc100bea7, Data2: 0xd33a, Data3: 0x4a4b, Data4: [8]byte{0xbf, 0x23, 0xbb, 0xef, 0x46, 0x63, 0xd0, 0x17}}
 var PKEY_WCN_DeviceType_Category = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 2283342731, Data2: 18052, Data3: 4570, Data4: [8]byte{162, 106, 0, 2, 179, 152, 142, 129}}, Pid: 16}
 var PKEY_WCN_DeviceType_SubCategory = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 2283342731, Data2: 18052, Data3: 4570, Data4: [8]byte{162, 106, 0, 2, 179, 152, 142, 129}}, Pid: 18}
 var PKEY_WCN_DeviceType_SubCategoryOUI = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 2283342731, Data2: 18052, Data3: 4570, Data4: [8]byte{162, 106, 0, 2, 179, 152, 142, 129}}, Pid: 17}

@@ -15,7 +15,9 @@ const CGD_DEFAULT uint32 = 0
 const CGD_STRING_PROPERTY uint32 = 1
 const CGD_UNKNOWN_PROPERTY uint32 = 0
 
+var CLSID_Contact win32.GUID = win32.GUID{Data1: 0x61b68808, Data2: 0x8eee, Data3: 0x4fd1, Data4: [8]byte{0xac, 0xb8, 0x3d, 0x80, 0x4c, 0x8d, 0xb0, 0x56}}
 var CLSID_ContactAggregationManager win32.GUID = win32.GUID{Data1: 0x96c8ad95, Data2: 0xc199, Data3: 0x44de, Data4: [8]byte{0xb3, 0x4e, 0xac, 0x33, 0xc4, 0x42, 0xdf, 0x39}}
+var CLSID_ContactManager win32.GUID = win32.GUID{Data1: 0x7165c8ab, Data2: 0xaf88, Data3: 0x42bd, Data4: [8]byte{0x86, 0xfd, 0x53, 0x10, 0xb4, 0x28, 0x5a, 0x02}}
 
 const CONTACTLABEL_PUB_AGENT = "Agent"
 const CONTACTLABEL_PUB_BBS = "BBS"

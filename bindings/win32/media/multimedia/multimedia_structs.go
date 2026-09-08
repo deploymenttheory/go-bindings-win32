@@ -600,9 +600,6 @@ type JPEGINFOHEADER struct {
 	Data [24]byte
 }
 
-type KSDATAFORMAT_SUBTYPE_IEEE_FLOAT struct {
-}
-
 // MCI_ANIM_OPEN_PARMSA is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.

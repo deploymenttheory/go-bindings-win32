@@ -63,6 +63,3 @@ type RADIUS_VSA_FORMAT struct {
 	VendorLength      byte
 	AttributeSpecific [1]byte
 }
-
-type SdoMachine struct {
-}

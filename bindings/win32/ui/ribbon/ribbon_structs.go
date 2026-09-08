@@ -10,12 +10,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-type UIRibbonFramework struct {
-}
-
-type UIRibbonImageFromBitmapFactory struct {
-}
-
 // UI_EVENTPARAMS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage. Every member overlays that storage from offset 0; read or write one
 // through its accessor.

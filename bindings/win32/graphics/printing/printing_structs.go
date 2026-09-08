@@ -149,15 +149,6 @@ type BINARY_CONTAINER struct {
 	PData *byte
 }
 
-type BidiRequest struct {
-}
-
-type BidiRequestContainer struct {
-}
-
-type BidiSpl struct {
-}
-
 // BranchOfficeJobData_JobInfo_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage. Every member overlays that storage from offset 0; read or write one
 // through its accessor.
@@ -2089,18 +2080,6 @@ func (u *PrintPropertyValue_value_e__Union) PropertyBlob() *PrintPropertyValue_v
 type PrintPropertyValue struct {
 	EPropertyType EPrintPropertyType
 	Value         PrintPropertyValue_value_e__Union
-}
-
-type PrintSchemaAsyncOperation struct {
-}
-
-type PrinterExtensionManager struct {
-}
-
-type PrinterQueue struct {
-}
-
-type PrinterQueueView struct {
 }
 
 type SETRESULT_INFO struct {

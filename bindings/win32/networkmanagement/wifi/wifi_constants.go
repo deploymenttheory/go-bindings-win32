@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+var CLSID_Dot11AdHocManager win32.GUID = win32.GUID{Data1: 0xdd06a84f, Data2: 0x83bd, Data3: 0x4d01, Data4: [8]byte{0x8a, 0xb9, 0x23, 0x89, 0xfe, 0xa0, 0x86, 0x9e}}
 var DEVPKEY_InfraCast_AccessPointBssid = foundation.DEVPROPKEY{Fmtid: win32.GUID{Data1: 352752477, Data2: 58343, Data3: 17679, Data4: [8]byte{134, 55, 130, 35, 62, 190, 95, 110}}, Pid: 19}
 var DEVPKEY_InfraCast_ChallengeAep = foundation.DEVPROPKEY{Fmtid: win32.GUID{Data1: 352752477, Data2: 58343, Data3: 17679, Data4: [8]byte{134, 55, 130, 35, 62, 190, 95, 110}}, Pid: 21}
 var DEVPKEY_InfraCast_DevnodeAep = foundation.DEVPROPKEY{Fmtid: win32.GUID{Data1: 352752477, Data2: 58343, Data3: 17679, Data4: [8]byte{134, 55, 130, 35, 62, 190, 95, 110}}, Pid: 23}

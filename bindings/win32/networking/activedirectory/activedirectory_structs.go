@@ -369,26 +369,6 @@ type ADS_VLV struct {
 	LpContextID       *byte
 }
 
-// ADSystemInfo: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsadsysteminfo
-type ADSystemInfo struct {
-}
-
-// ADsSecurityUtility: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadssecuritydescriptor
-type ADsSecurityUtility struct {
-}
-
-// AccessControlEntry: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsaccesscontrolentry
-type AccessControlEntry struct {
-}
-
-// AccessControlList: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsaccesscontrollist
-type AccessControlList struct {
-}
-
-// BackLink: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsbacklink
-type BackLink struct {
-}
-
 // CQFORM: https://learn.microsoft.com/windows/win32/api/cmnquery/ns-cmnquery-cqform
 type CQFORM struct {
 	CbStruct uint32
@@ -408,17 +388,6 @@ type CQPAGE struct {
 	IdPageTemplate int32
 	PDlgProc       uiwindowsandmessaging.DLGPROC
 	LParam         foundation.LPARAM
-}
-
-type CaseIgnoreList struct {
-}
-
-// DNWithBinary: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsdnwithbinary
-type DNWithBinary struct {
-}
-
-// DNWithString: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsdnwithstring
-type DNWithString struct {
 }
 
 // DOMAINDESC: https://learn.microsoft.com/windows/win32/api/dsclient/ns-dsclient-domaindesc
@@ -1223,28 +1192,6 @@ type DS_SITE_COST_INFO struct {
 	Cost      uint32
 }
 
-// Email: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsemail
-type Email struct {
-}
-
-type FaxNumber struct {
-}
-
-// Hold: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadshold
-type Hold struct {
-}
-
-type LargeInteger struct {
-}
-
-// NameTranslate: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsnametranslate
-type NameTranslate struct {
-}
-
-// NetAddress: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsnetaddress
-type NetAddress struct {
-}
-
 // OPENQUERYWINDOW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage. Every member overlays that storage from offset 0; read or write one
 // through its accessor.
@@ -1273,32 +1220,6 @@ type OPENQUERYWINDOW struct {
 	Anonymous          OPENQUERYWINDOW_Anonymous_e__Union
 }
 
-type OctetList struct {
-}
-
-// Path: https://learn.microsoft.com/windows/win32/tablet/path-element
-type Path struct {
-}
-
-// Pathname: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspathname
-type Pathname struct {
-}
-
-type PostalAddress struct {
-}
-
-// PropertyEntry: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspropertyentry
-type PropertyEntry struct {
-}
-
-// PropertyValue: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadspropertyvalue
-type PropertyValue struct {
-}
-
-// ReplicaPointer: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadsreplicapointer
-type ReplicaPointer struct {
-}
-
 // SCHEDULE: https://learn.microsoft.com/windows/win32/api/schedule/ns-schedule-schedule
 type SCHEDULE struct {
 	Size              uint32
@@ -1311,19 +1232,4 @@ type SCHEDULE struct {
 type SCHEDULE_HEADER struct {
 	Type   uint32
 	Offset uint32
-}
-
-// SecurityDescriptor: https://learn.microsoft.com/windows/win32/TaskSchd/taskschedulerschema-securitydescriptor-registrationinfotype-element
-type SecurityDescriptor struct {
-}
-
-// Timestamp: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadstimestamp
-type Timestamp struct {
-}
-
-// TypedName: https://learn.microsoft.com/windows/win32/api/iads/nn-iads-iadstypedname
-type TypedName struct {
-}
-
-type WinNTSystemInfo struct {
 }

@@ -283,10 +283,3 @@ type WSMAN_USERNAME_PASSWORD_CREDS struct {
 	Username foundation.PWSTR
 	Password foundation.PWSTR
 }
-
-// WSMan: https://learn.microsoft.com/windows/win32/WinRM/wsman
-type WSMan struct {
-}
-
-type WSManInternal struct {
-}

@@ -8,6 +8,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
+var CLSID_CIdentityProfileHandler win32.GUID = win32.GUID{Data1: 0xecf5bf46, Data2: 0xe3b6, Data3: 0x449a, Data4: [8]byte{0xb5, 0x6b, 0x43, 0xf5, 0x8f, 0x86, 0x78, 0x14}}
+var CLSID_CoClassIdentityStore win32.GUID = win32.GUID{Data1: 0x30d49246, Data2: 0xd217, Data3: 0x465f, Data4: [8]byte{0xb0, 0x0b, 0xac, 0x9d, 0xdd, 0x65, 0x2e, 0xb7}}
+
 const IDENTITY_KEYWORD_ASSOCIATED = "associated"
 const IDENTITY_KEYWORD_CONNECTED = "connected"
 const IDENTITY_KEYWORD_HOMEGROUP = "homegroup"

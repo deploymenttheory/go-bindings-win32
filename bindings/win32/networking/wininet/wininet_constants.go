@@ -4,6 +4,10 @@
 
 package wininet
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
 const ANY_CACHE_ENTRY uint32 = 4294967295
 const APP_CACHE_ENTRY_TYPE_EXPLICIT uint32 = 2
 const APP_CACHE_ENTRY_TYPE_FALLBACK uint32 = 4
@@ -99,6 +103,9 @@ const CACHE_NOTIFY_SET_ONLINE uint32 = 256
 const CACHE_NOTIFY_UPDATE_URL uint32 = 4
 const CACHE_NOTIFY_URL_SET_STICKY uint32 = 16
 const CACHE_NOTIFY_URL_UNSET_STICKY uint32 = 32
+
+var CLSID_ProofOfPossessionCookieInfoManager win32.GUID = win32.GUID{Data1: 0xa9927f85, Data2: 0xa304, Data3: 0x4390, Data4: [8]byte{0x8b, 0x23, 0xa7, 0x5f, 0x1c, 0x66, 0x86, 0x00}}
+
 const COOKIE_ACCEPTED_CACHE_ENTRY uint32 = 4096
 const COOKIE_ALLOW uint32 = 2
 const COOKIE_ALLOW_ALL uint32 = 4

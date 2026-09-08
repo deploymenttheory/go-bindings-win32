@@ -260,9 +260,6 @@ type DIRECTX_AUDIO_ACTIVATION_PARAMS struct {
 	DwAudioStreamFlags             uint32
 }
 
-type DeviceTopology struct {
-}
-
 // ECHOWAVEFILTER is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
@@ -494,9 +491,6 @@ type MIXERLINECONTROLSW struct {
 // field through an unsafe.Pointer cast.
 type MIXERLINEW struct {
 	Data [284]byte
-}
-
-type MMDeviceEnumerator struct {
 }
 
 // PCMWAVEFORMAT: https://learn.microsoft.com/windows/win32/api/mmeapi/ns-mmeapi-pcmwaveformat

@@ -1202,6 +1202,13 @@ const CLMD_FILE_TAG_UNSIGNED_CHUID uint32 = 6275332
 const CLMD_PIV_CERT_DATA_CURRENT_VERSION uint32 = 0
 const CLMD_PIV_GENERATE_ASYMMETRIC_KEY_CURRENT_VERSION uint32 = 0
 const CLMD_PIV_PUBLIC_KEY_DATA_CURRENT_VERSION uint32 = 0
+
+var CLSID_CCertSrvSetup win32.GUID = win32.GUID{Data1: 0x961f180f, Data2: 0xf55c, Data3: 0x413d, Data4: [8]byte{0xa9, 0xb3, 0x7d, 0x2a, 0xf4, 0xd8, 0xe4, 0x2f}}
+var CLSID_CCertSrvSetupKeyInformation win32.GUID = win32.GUID{Data1: 0x38373906, Data2: 0x5433, Data3: 0x4633, Data4: [8]byte{0xb0, 0xfb, 0x29, 0xb7, 0xe7, 0x82, 0x62, 0xe1}}
+var CLSID_CCertificateEnrollmentPolicyServerSetup win32.GUID = win32.GUID{Data1: 0xafe2fa32, Data2: 0x41b1, Data3: 0x459d, Data4: [8]byte{0xa5, 0xde, 0x49, 0xad, 0xd8, 0xa7, 0x21, 0x82}}
+var CLSID_CCertificateEnrollmentServerSetup win32.GUID = win32.GUID{Data1: 0x9902f3bc, Data2: 0x88af, Data3: 0x4cf8, Data4: [8]byte{0xae, 0x62, 0x71, 0x40, 0x53, 0x15, 0x52, 0xb6}}
+var CLSID_CMSCEPSetup win32.GUID = win32.GUID{Data1: 0xaa4f5c02, Data2: 0x8e7c, Data3: 0x49c4, Data4: [8]byte{0x94, 0xfa, 0x67, 0xa5, 0xcc, 0x5e, 0xad, 0xb4}}
+
 const CMC_ADD_ATTRIBUTES uintptr = 63
 const CMC_ADD_EXTENSIONS uintptr = 62
 const CMC_DATA uintptr = 59

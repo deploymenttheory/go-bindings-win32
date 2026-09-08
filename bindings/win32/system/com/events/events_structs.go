@@ -9,18 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-type CEventClass struct {
-}
-
-type CEventPublisher struct {
-}
-
-type CEventSubscription struct {
-}
-
-type CEventSystem struct {
-}
-
 // COMEVENTSYSCHANGEINFO: https://learn.microsoft.com/windows/win32/api/eventsys/ns-eventsys-comeventsyschangeinfo
 type COMEVENTSYSCHANGEINFO struct {
 	CbSize        uint32
@@ -29,10 +17,4 @@ type COMEVENTSYSCHANGEINFO struct {
 	PartitionId   foundation.BSTR
 	ApplicationId foundation.BSTR
 	Reserved      [10]win32.GUID
-}
-
-type EventObjectChange struct {
-}
-
-type EventObjectChange2 struct {
 }

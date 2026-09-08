@@ -11,9 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-type VSSCoordinator struct {
-}
-
 // VSS_COMPONENTINFO: https://learn.microsoft.com/windows/win32/api/vsbackup/ns-vsbackup-vss_componentinfo
 type VSS_COMPONENTINFO struct {
 	Type                    VSS_COMPONENT_TYPE
@@ -142,7 +139,4 @@ type VSS_VOLUME_PROTECTION_INFO struct {
 	M_failureStatus                int32
 	M_volumeHasUnusedDiffArea      foundation.BOOL
 	M_reserved                     uint32
-}
-
-type VssSnapshotMgmt struct {
 }

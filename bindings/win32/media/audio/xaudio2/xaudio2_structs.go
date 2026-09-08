@@ -4,12 +4,6 @@
 
 package xaudio2
 
-type AudioReverb struct {
-}
-
-type AudioVolumeMeter struct {
-}
-
 // FXECHO_INITDATA: https://learn.microsoft.com/windows/win32/api/xapofx/ns-xapofx-fxecho_initdata
 // FXECHO_INITDATA is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
@@ -26,19 +20,12 @@ type FXECHO_PARAMETERS struct {
 	Data [12]byte
 }
 
-// FXEQ: https://learn.microsoft.com/windows/win32/xaudio2/fxeq-constants
-type FXEQ struct {
-}
-
 // FXEQ_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xapofx/ns-xapofx-fxeq_parameters
 // FXEQ_PARAMETERS is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
 type FXEQ_PARAMETERS struct {
 	Data [48]byte
-}
-
-type FXEcho struct {
 }
 
 // FXMASTERINGLIMITER_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xapofx/ns-xapofx-fxmasteringlimiter_parameters
@@ -49,18 +36,12 @@ type FXMASTERINGLIMITER_PARAMETERS struct {
 	Data [8]byte
 }
 
-type FXMasteringLimiter struct {
-}
-
 // FXREVERB_PARAMETERS: https://learn.microsoft.com/windows/win32/api/xapofx/ns-xapofx-fxreverb_parameters
 // FXREVERB_PARAMETERS is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
 type FXREVERB_PARAMETERS struct {
 	Data [8]byte
-}
-
-type FXReverb struct {
 }
 
 // HrtfApoInit: https://learn.microsoft.com/windows/win32/api/hrtfapoapi/ns-hrtfapoapi-hrtfapoinit

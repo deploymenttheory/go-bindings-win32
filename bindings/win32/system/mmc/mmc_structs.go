@@ -13,13 +13,6 @@ import (
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
 
-type AppEventsDHTMLConnector struct {
-}
-
-// Application: https://learn.microsoft.com/windows/win32/windowsribbon/windowsribbon-element-application
-type Application struct {
-}
-
 // CONTEXTMENUITEM: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-contextmenuitem
 type CONTEXTMENUITEM struct {
 	StrName           foundation.PWSTR
@@ -41,10 +34,6 @@ type CONTEXTMENUITEM2 struct {
 	StrLanguageIndependentName foundation.PWSTR
 }
 
-// ConsolePower: https://learn.microsoft.com/windows/win32/api/mmc/nn-mmc-iconsolepower
-type ConsolePower struct {
-}
-
 // MENUBUTTONDATA: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-menubuttondata
 type MENUBUTTONDATA struct {
 	IdCommand int32
@@ -60,10 +49,6 @@ type MMCBUTTON struct {
 	FsType        byte
 	LpButtonText  foundation.PWSTR
 	LpTooltipText foundation.PWSTR
-}
-
-// MMCVersionInfo: https://learn.microsoft.com/windows/win32/api/mmc/nn-mmc-immcversioninfo
-type MMCVersionInfo struct {
 }
 
 // MMC_COLUMN_DATA: https://learn.microsoft.com/windows/win32/api/mmc/ns-mmc-mmc_column_data

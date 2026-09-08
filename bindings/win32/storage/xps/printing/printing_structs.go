@@ -18,12 +18,6 @@ type PrintDocumentPackageStatus struct {
 	PackageStatus    foundation.HRESULT
 }
 
-type PrintDocumentPackageTarget struct {
-}
-
-type PrintDocumentPackageTargetFactory struct {
-}
-
 // XPS_JOB_STATUS: https://learn.microsoft.com/windows/win32/api/xpsprint/ns-xpsprint-xps_job_status
 type XPS_JOB_STATUS struct {
 	JobId            uint32

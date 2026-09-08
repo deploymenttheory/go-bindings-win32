@@ -43,9 +43,6 @@ type EXTENSION_CONTROL_BLOCK struct {
 	ServerSupportFunction PFN_IIS_SERVERSUPPORTFUNCTION
 }
 
-type FtpProvider struct {
-}
-
 type HSE_CUSTOM_ERROR_INFO struct {
 	PszStatus     foundation.PSTR
 	UHttpSubError uint16

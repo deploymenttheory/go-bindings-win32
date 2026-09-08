@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+var CLSID_DEVINTERFACE_AUDIOENDPOINTPLUGIN win32.GUID = win32.GUID{Data1: 0x9f2f7b66, Data2: 0x65ac, Data3: 0x4fa6, Data4: [8]byte{0x8a, 0xe4, 0x12, 0x3c, 0x78, 0xb8, 0x93, 0x13}}
 var DEVPKEY_AudioEndpointPlugin2_FactoryCLSID = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 316160983, Data2: 53010, Data3: 18110, Data4: [8]byte{133, 64, 129, 39, 16, 211, 2, 28}}, Pid: 4}
 var DEVPKEY_AudioEndpointPlugin_DataFlow = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 316160983, Data2: 53010, Data3: 18110, Data4: [8]byte{133, 64, 129, 39, 16, 211, 2, 28}}, Pid: 2}
 var DEVPKEY_AudioEndpointPlugin_FactoryCLSID = foundation.PROPERTYKEY{Fmtid: win32.GUID{Data1: 316160983, Data2: 53010, Data3: 18110, Data4: [8]byte{133, 64, 129, 39, 16, 211, 2, 28}}, Pid: 1}

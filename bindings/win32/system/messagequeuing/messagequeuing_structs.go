@@ -70,51 +70,6 @@ type MQSORTSET struct {
 	ACol *MQSORTKEY
 }
 
-type MSMQApplication struct {
-}
-
-type MSMQCollection struct {
-}
-
-type MSMQCoordinatedTransactionDispenser struct {
-}
-
-type MSMQDestination struct {
-}
-
-type MSMQEvent struct {
-}
-
-type MSMQManagement struct {
-}
-
-type MSMQMessage struct {
-}
-
-type MSMQOutgoingQueueManagement struct {
-}
-
-type MSMQQuery struct {
-}
-
-type MSMQQueue struct {
-}
-
-type MSMQQueueInfo struct {
-}
-
-type MSMQQueueInfos struct {
-}
-
-type MSMQQueueManagement struct {
-}
-
-type MSMQTransaction struct {
-}
-
-type MSMQTransactionDispenser struct {
-}
-
 type SEQUENCE_INFO struct {
 	SeqID  int64
 	SeqNo  uint32

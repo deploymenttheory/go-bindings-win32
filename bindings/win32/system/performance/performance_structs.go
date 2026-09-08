@@ -11,61 +11,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-type AppearPropPage struct {
-}
-
-type BootTraceSession struct {
-}
-
-type BootTraceSessionCollection struct {
-}
-
-// CounterItem: https://learn.microsoft.com/windows/win32/SysMon/counteritem
-type CounterItem struct {
-}
-
-type CounterItem2 struct {
-}
-
-type CounterPropPage struct {
-}
-
-// Counters: https://learn.microsoft.com/windows/win32/SysMon/counters
-type Counters struct {
-}
-
-type DataCollectorSet struct {
-}
-
-type DataCollectorSetCollection struct {
-}
-
-type GeneralPropPage struct {
-}
-
-type GraphPropPage struct {
-}
-
-type LegacyDataCollectorSet struct {
-}
-
-type LegacyDataCollectorSetCollection struct {
-}
-
-type LegacyTraceSession struct {
-}
-
-type LegacyTraceSessionCollection struct {
-}
-
-// LogFileItem: https://learn.microsoft.com/windows/win32/SysMon/logfileitem
-type LogFileItem struct {
-}
-
-// LogFiles: https://learn.microsoft.com/windows/win32/SysMon/logfiles
-type LogFiles struct {
-}
-
 // PDH_BROWSE_DLG_CONFIG_A: https://learn.microsoft.com/windows/win32/api/pdh/ns-pdh-pdh_browse_dlg_config_a
 type PDH_BROWSE_DLG_CONFIG_A struct {
 	Bitfield             uint32
@@ -654,38 +599,4 @@ type PERF_STRING_BUFFER_HEADER struct {
 type PERF_STRING_COUNTER_HEADER struct {
 	DwCounterId uint32
 	DwOffset    uint32
-}
-
-type ServerDataCollectorSet struct {
-}
-
-type ServerDataCollectorSetCollection struct {
-}
-
-type SourcePropPage struct {
-}
-
-type SystemDataCollectorSet struct {
-}
-
-type SystemDataCollectorSetCollection struct {
-}
-
-// SystemMonitor: https://learn.microsoft.com/windows/win32/SysMon/systemmonitor
-type SystemMonitor struct {
-}
-
-type SystemMonitor2 struct {
-}
-
-type TraceDataProvider struct {
-}
-
-type TraceDataProviderCollection struct {
-}
-
-type TraceSession struct {
-}
-
-type TraceSessionCollection struct {
 }

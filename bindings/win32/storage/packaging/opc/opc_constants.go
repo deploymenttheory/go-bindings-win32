@@ -5,8 +5,11 @@
 package opc
 
 import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
+
+var CLSID_OpcFactory win32.GUID = win32.GUID{Data1: 0x6b2d6ba0, Data2: 0x9f3e, Data3: 0x4f27, Data4: [8]byte{0x92, 0x0b, 0x31, 0x3c, 0xc4, 0x26, 0xa3, 0x9e}}
 
 const OPC_E_CONFLICTING_SETTINGS foundation.HRESULT = -2142175212
 const OPC_E_COULD_NOT_RECOVER foundation.HRESULT = -2142175154

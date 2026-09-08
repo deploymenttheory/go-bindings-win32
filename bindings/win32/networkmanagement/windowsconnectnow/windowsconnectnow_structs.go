@@ -4,9 +4,6 @@
 
 package windowsconnectnow
 
-type WCNDeviceObject struct {
-}
-
 // WCN_VALUE_TYPE_PRIMARY_DEVICE_TYPE: https://learn.microsoft.com/windows/win32/api/wcntypes/ns-wcntypes-wcn_value_type_primary_device_type
 // WCN_VALUE_TYPE_PRIMARY_DEVICE_TYPE is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific

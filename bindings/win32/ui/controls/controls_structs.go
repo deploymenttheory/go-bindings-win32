@@ -359,9 +359,6 @@ type INTLIST struct {
 	IValues     [402]int32
 }
 
-type ImageList struct {
-}
-
 // LHITTESTINFO: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-lhittestinfo
 type LHITTESTINFO struct {
 	Pt   foundation.POINT

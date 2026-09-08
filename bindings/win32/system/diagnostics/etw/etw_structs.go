@@ -19,9 +19,6 @@ type CLASSIC_EVENT_ID struct {
 	Reserved  [7]byte
 }
 
-type CTraceRelogger struct {
-}
-
 // ENABLE_TRACE_PARAMETERS: https://learn.microsoft.com/windows/win32/api/evntrace/ns-evntrace-enable_trace_parameters
 type ENABLE_TRACE_PARAMETERS struct {
 	Version          uint32

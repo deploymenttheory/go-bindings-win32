@@ -1997,9 +1997,6 @@ type DOT11_WPS_DEVICE_NAME struct {
 	UcDeviceName      [32]byte
 }
 
-type Dot11AdHocManager struct {
-}
-
 // L2_NOTIFICATION_DATA: https://learn.microsoft.com/windows/win32/api/l2cmn/ns-l2cmn-l2_notification_data
 type L2_NOTIFICATION_DATA struct {
 	NotificationSource WLAN_NOTIFICATION_SOURCES

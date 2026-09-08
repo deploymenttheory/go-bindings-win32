@@ -1143,9 +1143,6 @@ type FILTER_INFO struct {
 	PGraph  *IFilterGraph
 }
 
-type FilgraphManager struct {
-}
-
 // HEAACWAVEFORMAT: https://learn.microsoft.com/windows/win32/api/mmreg/ns-mmreg-heaacwaveformat
 type HEAACWAVEFORMAT struct {
 	WfInfo                HEAACWAVEINFO

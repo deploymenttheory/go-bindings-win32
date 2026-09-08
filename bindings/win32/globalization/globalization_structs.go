@@ -33,15 +33,6 @@ type CHARSETINFO struct {
 	Fs        FONTSIGNATURE
 }
 
-type CMLangConvertCharset struct {
-}
-
-type CMLangString struct {
-}
-
-type CMultiLanguage struct {
-}
-
 // CPINFO: https://learn.microsoft.com/windows/win32/api/winnls/ns-winnls-cpinfo
 type CPINFO struct {
 	MaxCharSize uint32
@@ -403,9 +394,6 @@ type SCRIPT_TABDEF struct {
 // SCRIPT_VISATTR: https://learn.microsoft.com/windows/win32/api/usp10/ns-usp10-script_visattr
 type SCRIPT_VISATTR struct {
 	Bitfield uint16
-}
-
-type SpellCheckerFactory struct {
 }
 
 // TEXTRANGE_PROPERTIES: https://learn.microsoft.com/windows/win32/api/usp10/ns-usp10-textrange_properties

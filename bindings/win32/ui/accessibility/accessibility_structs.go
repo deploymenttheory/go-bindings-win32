@@ -20,24 +20,6 @@ type ACCESSTIMEOUT struct {
 	ITimeOutMSec uint32
 }
 
-type CAccPropServices struct {
-}
-
-type CUIAutomation struct {
-}
-
-type CUIAutomation8 struct {
-}
-
-type CUIAutomationClientInfo struct {
-}
-
-type CUIAutomationClientInfoSource struct {
-}
-
-type CUIAutomationRegistrar struct {
-}
-
 // ExtendedProperty: https://learn.microsoft.com/windows/win32/SecCrypto/extendedproperty
 type ExtendedProperty struct {
 	PropertyName  foundation.BSTR

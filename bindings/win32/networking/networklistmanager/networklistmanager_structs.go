@@ -39,6 +39,3 @@ type NLM_USAGE_DATA struct {
 	UsageInMegabytes uint32
 	LastSyncTime     foundation.FILETIME
 }
-
-type NetworkListManager struct {
-}

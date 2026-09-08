@@ -2511,6 +2511,91 @@ func (self *Views) Get__NewEnum() (*systemcom.IUnknown, error) {
 	return *_retval, win32.ErrIfFailed(int32(r1))
 }
 
+// IID: a3afb9cc-b653-4741-86ab-f0470ec1384c
+type Application struct {
+	systemcom.IDispatch
+}
+
+// IID_Application is the interface identifier for Application.
+var IID_Application = win32.GUID{Data1: 0xa3afb9cc, Data2: 0xb653, Data3: 0x4741, Data4: [8]byte{0x86, 0xab, 0xf0, 0x47, 0x0e, 0xc1, 0x38, 0x4c}}
+
+// Help dispatches through _Application's vtable slot 7.
+func (self *Application) Help() {
+	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
+}
+
+// Quit dispatches through _Application's vtable slot 8.
+func (self *Application) Quit() {
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
+}
+
+// Get_Document dispatches through _Application's vtable slot 9.
+func (self *Application) Get_Document() (*Document, error) {
+	_Document_ := new(*Document)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Document_))))
+	return *_Document_, win32.ErrIfFailed(int32(r1))
+}
+
+// Load dispatches through _Application's vtable slot 10.
+func (self *Application) Load(Filename foundation.BSTR) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Filename)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// Get_Frame dispatches through _Application's vtable slot 11.
+func (self *Application) Get_Frame() (*Frame, error) {
+	_Frame_ := new(*Frame)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Frame_))))
+	return *_Frame_, win32.ErrIfFailed(int32(r1))
+}
+
+// Get_Visible dispatches through _Application's vtable slot 12.
+func (self *Application) Get_Visible() (foundation.BOOL, error) {
+	_Visible := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_Visible))))
+	return *_Visible, win32.ErrIfFailed(int32(r1))
+}
+
+// Show dispatches through _Application's vtable slot 13.
+func (self *Application) Show() error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// Hide dispatches through _Application's vtable slot 14.
+func (self *Application) Hide() error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// Get_UserControl dispatches through _Application's vtable slot 15.
+func (self *Application) Get_UserControl() (foundation.BOOL, error) {
+	_UserControl := new(foundation.BOOL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_UserControl))))
+	return *_UserControl, win32.ErrIfFailed(int32(r1))
+}
+
+// Put_UserControl dispatches through _Application's vtable slot 16.
+func (self *Application) Put_UserControl(UserControl bool) error {
+	_UserControl := win32.Bool32(UserControl)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(_UserControl))
+	return win32.ErrIfFailed(int32(r1))
+}
+
+// Get_VersionMajor dispatches through _Application's vtable slot 17.
+func (self *Application) Get_VersionMajor() (int32, error) {
+	_VersionMajor := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_VersionMajor))))
+	return *_VersionMajor, win32.ErrIfFailed(int32(r1))
+}
+
+// Get_VersionMinor dispatches through _Application's vtable slot 18.
+func (self *Application) Get_VersionMinor() (int32, error) {
+	_VersionMinor := new(int32)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(win32.OutParam(unsafe.Pointer(_VersionMinor))))
+	return *_VersionMinor, win32.ErrIfFailed(int32(r1))
+}
+
 // IID: c0bccd30-de44-4528-8403-a05a6a1cc8ea
 type EventConnector struct {
 	systemcom.IDispatch

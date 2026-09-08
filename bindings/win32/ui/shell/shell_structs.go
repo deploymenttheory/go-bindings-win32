@@ -100,42 +100,6 @@ type AUTO_SCROLL_DATA struct {
 	Data [48]byte
 }
 
-type AccessibilityDockingService struct {
-}
-
-type AlphabeticalCategorizer struct {
-}
-
-type AppShellVerbHandler struct {
-}
-
-type AppStartupLink struct {
-}
-
-type AppVisibility struct {
-}
-
-type ApplicationActivationManager struct {
-}
-
-type ApplicationAssociationRegistration struct {
-}
-
-type ApplicationAssociationRegistrationUI struct {
-}
-
-type ApplicationDesignModeSettings struct {
-}
-
-type ApplicationDestinations struct {
-}
-
-type ApplicationDocumentLists struct {
-}
-
-type AttachmentServices struct {
-}
-
 // BANDINFOSFB: https://learn.microsoft.com/windows/win32/api/shlobj/ns-shlobj-bandinfosfb
 type BANDINFOSFB struct {
 	DwMask      uint32
@@ -262,9 +226,6 @@ type CATEGORY_INFO struct {
 	WszName [260]uint16
 }
 
-type CDBurn struct {
-}
-
 // CIDA: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-cida
 // CIDA is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
@@ -386,12 +347,6 @@ type CSFV struct {
 	Fvm         FOLDERVIEWMODE
 }
 
-type CScriptErrorList struct {
-}
-
-type ConflictFolder struct {
-}
-
 // DATABLOCK_HEADER: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-datablock_header
 // DATABLOCK_HEADER is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
@@ -501,30 +456,6 @@ type DROPFILES struct {
 	Data [20]byte
 }
 
-type DefFolderMenu struct {
-}
-
-type DesktopGadget struct {
-}
-
-type DesktopWallpaper struct {
-}
-
-type DestinationList struct {
-}
-
-type DestinationListBoth struct {
-}
-
-type DocPropShellExtension struct {
-}
-
-type DriveSizeCategorizer struct {
-}
-
-type DriveTypeCategorizer struct {
-}
-
 // EXP_DARWIN_LINK: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-exp_darwin_link
 // EXP_DARWIN_LINK is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
@@ -562,18 +493,6 @@ type EXTRASEARCH struct {
 	GuidSearch      win32.GUID
 	WszFriendlyName [80]uint16
 	WszUrl          [2084]uint16
-}
-
-type EnumerableObjectCollection struct {
-}
-
-type ExecuteFolder struct {
-}
-
-type ExecuteUnknown struct {
-}
-
-type ExplorerBrowser struct {
 }
 
 // FILEDESCRIPTORA: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-filedescriptora
@@ -629,33 +548,6 @@ type FOLDERSETTINGS struct {
 	FFlags   uint32
 }
 
-type FSCopyHandler struct {
-}
-
-type FileOpenDialog struct {
-}
-
-type FileOperation struct {
-}
-
-type FileSaveDialog struct {
-}
-
-type FileSearchBand struct {
-}
-
-type FolderViewHost struct {
-}
-
-type FrameworkInputPane struct {
-}
-
-type FreeSpaceCategorizer struct {
-}
-
-type GenericCredentialProvider struct {
-}
-
 // HELPINFO: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-helpinfo
 type HELPINFO struct {
 	CbSize       uint32
@@ -706,42 +598,12 @@ type HLTBINFO struct {
 	RcTbPos   foundation.RECT
 }
 
-type HideInputPaneAnimationCoordinator struct {
-}
-
-type HomeGroup struct {
-}
-
-type IENamespaceTreeControl struct {
-}
-
 // ITEMSPACING: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-itemspacing
 type ITEMSPACING struct {
 	CxSmall int32
 	CySmall int32
 	CxLarge int32
 	CyLarge int32
-}
-
-type ImageProperties struct {
-}
-
-type ImageRecompress struct {
-}
-
-type ImageTranscode struct {
-}
-
-type InputPanelConfiguration struct {
-}
-
-type InternetExplorer struct {
-}
-
-type InternetExplorerMedium struct {
-}
-
-type InternetPrintOrdering struct {
 }
 
 // KNOWNFOLDER_DEFINITION: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ns-shobjidl_core-knownfolder_definition
@@ -761,12 +623,6 @@ type KNOWNFOLDER_DEFINITION struct {
 	FtidType         win32.GUID
 }
 
-type KnownFolderManager struct {
-}
-
-type LocalThumbnailCache struct {
-}
-
 // MULTIKEYHELPA: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-multikeyhelpa
 type MULTIKEYHELPA struct {
 	MkSize      uint32
@@ -779,12 +635,6 @@ type MULTIKEYHELPW struct {
 	MkSize      uint32
 	MkKeylist   uint16
 	SzKeyphrase [1]uint16
-}
-
-type MailRecipient struct {
-}
-
-type MergedCategorizer struct {
 }
 
 // NC_ADDRESS: https://learn.microsoft.com/windows/win32/api/shellapi/ns-shellapi-nc_address
@@ -890,9 +740,6 @@ type NOTIFYICONIDENTIFIER struct {
 	GuidItem win32.GUID
 }
 
-type NPCredentialProvider struct {
-}
-
 // NRESARRAY: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-nresarray
 type NRESARRAY struct {
 	CItems uint32
@@ -927,21 +774,6 @@ type NT_FE_CONSOLE_PROPS struct {
 	Data [12]byte
 }
 
-type NamespaceTreeControl struct {
-}
-
-type NamespaceWalker struct {
-}
-
-type NetworkConnections struct {
-}
-
-type NetworkExplorerFolder struct {
-}
-
-type NetworkPlaces struct {
-}
-
 // OPENASINFO: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-openasinfo
 type OPENASINFO struct {
 	PcszFile    foundation.PWSTR
@@ -965,15 +797,6 @@ type OPEN_PRINTER_PROPS_INFOW struct {
 	USheetIndex  uint32
 	DwFlags      uint32
 	BModal       foundation.BOOL
-}
-
-type OnexCredentialProvider struct {
-}
-
-type OnexPlapSmartcardCredentialProvider struct {
-}
-
-type OpenControlPanel struct {
 }
 
 // PARSEDURLA: https://learn.microsoft.com/windows/win32/api/shlwapi/ns-shlwapi-parsedurla
@@ -1003,9 +826,6 @@ type PERSIST_FOLDER_TARGET_INFO struct {
 	SzNetworkProvider   [260]uint16
 	DwAttributes        uint32
 	Csidl               int32
-}
-
-type PINLogonCredentialProvider struct {
 }
 
 // PREVIEWHANDLERFRAMEINFO: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ns-shobjidl_core-previewhandlerframeinfo
@@ -1049,24 +869,6 @@ type PUBAPPINFO struct {
 	StExpire    foundation.SYSTEMTIME
 }
 
-type PackageDebugSettings struct {
-}
-
-type PasswordCredentialProvider struct {
-}
-
-type PreviousVersions struct {
-}
-
-type PropertiesUI struct {
-}
-
-type PublishDropTarget struct {
-}
-
-type PublishingWizard struct {
-}
-
 // QCMINFO: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-qcminfo
 type QCMINFO struct {
 	Hmenu      uiwindowsandmessaging.HMENU
@@ -1090,12 +892,6 @@ type QCMINFO_IDMAP_PLACEMENT struct {
 type QITAB struct {
 	Piid     *win32.GUID
 	DwOffset uint32
-}
-
-type QueryCancelAutoPlay struct {
-}
-
-type RASProvider struct {
 }
 
 // SFVM_HELPTOPIC_DATA: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-sfvm_helptopic_data
@@ -1531,124 +1327,6 @@ type SYNCMGR_CONFLICT_ID_INFO struct {
 	PblobExtra *systemcom.BYTE_BLOB
 }
 
-type ScheduledTasks struct {
-}
-
-type SearchFolderItemFactory struct {
-}
-
-type SharedBitmap struct {
-}
-
-type SharingConfigurationManager struct {
-}
-
-// Shell: https://learn.microsoft.com/windows/win32/shell/shell
-type Shell struct {
-}
-
-type ShellBrowserWindow struct {
-}
-
-type ShellDesktop struct {
-}
-
-type ShellDispatchInproc struct {
-}
-
-type ShellFSFolder struct {
-}
-
-// ShellFolderItem: https://learn.microsoft.com/windows/win32/shell/shellfolderitem-object
-type ShellFolderItem struct {
-}
-
-// ShellFolderView: https://learn.microsoft.com/windows/win32/shell/shellfolderview
-type ShellFolderView struct {
-}
-
-// ShellFolderViewOC: https://learn.microsoft.com/windows/win32/shell/shellfolderviewoc-object
-type ShellFolderViewOC struct {
-}
-
-type ShellImageDataFactory struct {
-}
-
-type ShellItem struct {
-}
-
-type ShellLibrary struct {
-}
-
-type ShellLink struct {
-}
-
-// ShellLinkObject: https://learn.microsoft.com/windows/win32/shell/shelllinkobject-object
-type ShellLinkObject struct {
-}
-
-type ShellNameSpace struct {
-}
-
-// ShellUIHelper: https://learn.microsoft.com/windows/win32/shell/shelluihelper
-type ShellUIHelper struct {
-}
-
-// ShellWindows: https://learn.microsoft.com/windows/win32/shell/shellwindows
-type ShellWindows struct {
-}
-
-type ShowInputPaneAnimationCoordinator struct {
-}
-
-type SimpleConflictPresenter struct {
-}
-
-type SizeCategorizer struct {
-}
-
-type SmartcardCredentialProvider struct {
-}
-
-type SmartcardPinProvider struct {
-}
-
-type SmartcardReaderSelectionProvider struct {
-}
-
-type SmartcardWinRTProvider struct {
-}
-
-type StartMenuPin struct {
-}
-
-type StorageProviderBanners struct {
-}
-
-type SuspensionDependencyManager struct {
-}
-
-type SyncMgr struct {
-}
-
-type SyncMgrClient struct {
-}
-
-type SyncMgrControl struct {
-}
-
-type SyncMgrFolder struct {
-}
-
-type SyncMgrScheduleWizard struct {
-}
-
-type SyncResultsFolder struct {
-}
-
-type SyncSetupFolder struct {
-}
-
 // TBINFO: https://learn.microsoft.com/windows/win32/api/shlobj/ns-shlobj-tbinfo
 type TBINFO struct {
 	Cbuttons uint32
@@ -1674,24 +1352,6 @@ type TOOLBARITEM struct {
 	HMon         graphicsgdi.HMONITOR
 }
 
-type TaskbarList struct {
-}
-
-type ThumbnailStreamCache struct {
-}
-
-type TimeCategorizer struct {
-}
-
-type TrackShellMenu struct {
-}
-
-type TrayBandSiteService struct {
-}
-
-type TrayDeskBand struct {
-}
-
 type URLINVOKECOMMANDINFOA struct {
 	DwcbSize   uint32
 	DwFlags    uint32
@@ -1704,25 +1364,6 @@ type URLINVOKECOMMANDINFOW struct {
 	DwFlags    uint32
 	HwndParent foundation.HWND
 	PcszVerb   foundation.PWSTR
-}
-
-type UserNotification struct {
-}
-
-type V1PasswordCredentialProvider struct {
-}
-
-type V1SmartcardCredentialProvider struct {
-}
-
-type V1WinBioCredentialProvider struct {
-}
-
-type VaultProvider struct {
-}
-
-// VirtualDesktopManager: https://learn.microsoft.com/windows/win32/shell/virtualdesktopmanager
-type VirtualDesktopManager struct {
 }
 
 // WINDOWDATA: https://learn.microsoft.com/windows/win32/api/tlogstg/ns-tlogstg-windowdata
@@ -1738,17 +1379,4 @@ type WINDOWDATA struct {
 // WTS_THUMBNAILID: https://learn.microsoft.com/windows/win32/api/thumbcache/ns-thumbcache-wts_thumbnailid
 type WTS_THUMBNAILID struct {
 	RgbKey [16]byte
-}
-
-type WebBrowser struct {
-}
-
-type WebBrowser_V1 struct {
-}
-
-// WebWizardHost: https://learn.microsoft.com/windows/win32/shell/webwizardhost
-type WebWizardHost struct {
-}
-
-type WinBioCredentialProvider struct {
 }

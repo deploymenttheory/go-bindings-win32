@@ -9,15 +9,3 @@ type GAMING_DEVICE_MODEL_INFORMATION struct {
 	VendorId GAMING_DEVICE_VENDOR_ID
 	DeviceId GAMING_DEVICE_DEVICE_ID
 }
-
-type GameExplorer struct {
-}
-
-type GameStatistics struct {
-}
-
-type XblIdpAuthManager struct {
-}
-
-type XblIdpAuthTokenResult struct {
-}

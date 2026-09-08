@@ -120,4 +120,12 @@ by plain factory functions (like `CreateStreamOnHGlobal`) need no apartment.
 
 Every interface's IID is generated as `IID_IFoo`, and coclass CLSIDs as
 `CLSID_*`, in the same package — pass a pointer to them where an API wants an
-`*GUID`.
+`*GUID`. A coclass carries no layout of its own, so it exists only as its
+CLSID:
+
+```go
+var out *win32.IUnknown
+err := com.CoCreateInstance(&audio.CLSID_MMDeviceEnumerator, nil,
+	com.CLSCTX_ALL, &audio.IID_IMMDeviceEnumerator, &out)
+enum := win32.Cast[audio.IMMDeviceEnumerator](out)
+```

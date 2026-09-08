@@ -202,6 +202,10 @@ const AUXCAPS_AUXIN uint32 = 2
 const AUXCAPS_CDAUDIO uint32 = 1
 const AUXCAPS_LRVOLUME uint32 = 2
 const AUXCAPS_VOLUME uint32 = 1
+
+var CLSID_DeviceTopology win32.GUID = win32.GUID{Data1: 0x1df639d0, Data2: 0x5ec1, Data3: 0x47aa, Data4: [8]byte{0x93, 0x79, 0x82, 0x8d, 0xc1, 0xaa, 0x8c, 0x59}}
+var CLSID_MMDeviceEnumerator win32.GUID = win32.GUID{Data1: 0xbcde0395, Data2: 0xe52f, Data3: 0x467c, Data4: [8]byte{0x8e, 0x3d, 0xc4, 0x57, 0x92, 0x91, 0x69, 0x2e}}
+
 const DEVICE_STATEMASK_ALL uint32 = 15
 
 var DEVINTERFACE_AUDIO_CAPTURE win32.GUID = win32.GUID{Data1: 0x2eef81be, Data2: 0x33fa, Data3: 0x4800, Data4: [8]byte{0x96, 0x70, 0x1c, 0xd4, 0x74, 0x97, 0x2c, 0x3f}}

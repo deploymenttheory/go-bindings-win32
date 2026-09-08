@@ -8,10 +8,3 @@ type CONTACT_AGGREGATION_BLOB struct {
 	DwCount uint32
 	Lpb     *byte
 }
-
-// Contact: https://learn.microsoft.com/windows/win32/wpd_sdk/contact-properties
-type Contact struct {
-}
-
-type ContactManager struct {
-}

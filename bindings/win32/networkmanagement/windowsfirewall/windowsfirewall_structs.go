@@ -91,30 +91,3 @@ type NETCON_PROPERTIES struct {
 	ClsidThisObject win32.GUID
 	ClsidUiObject   win32.GUID
 }
-
-type NetFwAuthorizedApplication struct {
-}
-
-type NetFwMgr struct {
-}
-
-type NetFwOpenPort struct {
-}
-
-type NetFwPolicy2 struct {
-}
-
-type NetFwProduct struct {
-}
-
-type NetFwProducts struct {
-}
-
-type NetFwRule struct {
-}
-
-type NetSharingManager struct {
-}
-
-type UPnPNAT struct {
-}

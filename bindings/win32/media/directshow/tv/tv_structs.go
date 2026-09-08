@@ -13,27 +13,6 @@ import (
 	mediamediafoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediafoundation"
 )
 
-type ANALOG_AUXIN_NETWORK_TYPE struct {
-}
-
-type ANALOG_FM_NETWORK_TYPE struct {
-}
-
-type ANALOG_TV_NETWORK_TYPE struct {
-}
-
-type ATSCChannelTuneRequest struct {
-}
-
-type ATSCComponentType struct {
-}
-
-type ATSCLocator struct {
-}
-
-type ATSCTuningSpace struct {
-}
-
 // ATSC_FILTER_OPTIONS: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-atsc_filter_options
 // ATSC_FILTER_OPTIONS is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
@@ -42,38 +21,11 @@ type ATSC_FILTER_OPTIONS struct {
 	Data [8]byte
 }
 
-type ATSC_TERRESTRIAL_TV_NETWORK_TYPE struct {
-}
-
-type AnalogAudioComponentType struct {
-}
-
-type AnalogLocator struct {
-}
-
-type AnalogRadioTuningSpace struct {
-}
-
-type AnalogTVTuningSpace struct {
-}
-
-type AuxInTuningSpace struct {
-}
-
-type BDANETWORKTYPE_ATSC struct {
-}
-
 type BDA_DEBUG_DATA struct {
 	LResult           int32
 	UuidDebugDataType win32.GUID
 	UlDataSize        uint32
 	ArgbDebugData     [1]byte
-}
-
-type BDA_DEBUG_DATA_AVAILABLE struct {
-}
-
-type BDA_DEBUG_DATA_TYPE_STRING struct {
 }
 
 type BDA_EVENT_DATA struct {
@@ -91,9 +43,6 @@ type BDA_TRANSPORT_INFO struct {
 	AvgTimePerFrame            int64
 }
 
-type BSKYB_TERRESTRIAL_TV_NETWORK_TYPE struct {
-}
-
 // BadSampleInfo is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
@@ -101,25 +50,13 @@ type BadSampleInfo struct {
 	Data [4]byte
 }
 
-type BroadcastEventService struct {
-}
-
 type CAPTURE_STREAMTIME struct {
 	StreamTime int64
-}
-
-type CXDSData struct {
 }
 
 type ChannelChangeInfo struct {
 	State     ChannelChangeSpanningEvent_State
 	TimeStamp uint64
-}
-
-type ChannelIDTuneRequest struct {
-}
-
-type ChannelIDTuningSpace struct {
 }
 
 type ChannelInfo_Anonymous_e__Union_ATSC_e__Struct struct {
@@ -163,35 +100,9 @@ type ChannelInfo struct {
 	Anonymous  ChannelInfo_Anonymous_e__Union
 }
 
-type ChannelTuneRequest struct {
-}
-
 type ChannelTypeInfo struct {
 	ChannelType ChannelType
 	TimeStamp   uint64
-}
-
-// Component: https://learn.microsoft.com/windows/win32/Msi/components
-type Component struct {
-}
-
-type ComponentType struct {
-}
-
-type ComponentTypes struct {
-}
-
-// Components: https://learn.microsoft.com/windows/win32/cossdk/components
-type Components struct {
-}
-
-type CreatePropBagOnRegKey struct {
-}
-
-type DIGITAL_CABLE_NETWORK_TYPE struct {
-}
-
-type DIRECT_TV_SATELLITE_TV_NETWORK_TYPE struct {
 }
 
 type DSHOW_STREAM_DESC struct {
@@ -226,36 +137,9 @@ type DSMCC_SECTION struct {
 	Data [21]byte
 }
 
-type DTFilter struct {
-}
-
-type DVBCLocator struct {
-}
-
-type DVBSLocator struct {
-}
-
-type DVBSTuningSpace struct {
-}
-
 type DVBScramblingControlSpanningEvent struct {
 	UlPID      uint32
 	FScrambled foundation.BOOL
-}
-
-type DVBTLocator struct {
-}
-
-type DVBTLocator2 struct {
-}
-
-type DVBTuneRequest struct {
-}
-
-type DVBTuningSpace struct {
-}
-
-type DVB_CABLE_TV_NETWORK_TYPE struct {
 }
 
 // DVB_EIT_FILTER_OPTIONS: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-dvb_eit_filter_options
@@ -264,12 +148,6 @@ type DVB_CABLE_TV_NETWORK_TYPE struct {
 // field through an unsafe.Pointer cast.
 type DVB_EIT_FILTER_OPTIONS struct {
 	Data [5]byte
-}
-
-type DVB_SATELLITE_TV_NETWORK_TYPE struct {
-}
-
-type DVB_TERRESTRIAL_TV_NETWORK_TYPE struct {
 }
 
 // DVR_STREAM_DESC: https://learn.microsoft.com/windows/win32/api/sbe/ns-sbe-dvr_stream_desc
@@ -282,18 +160,6 @@ type DVR_STREAM_DESC struct {
 	GuidSubMediaType win32.GUID
 	GuidFormatType   win32.GUID
 	MediaType        mediamediafoundation.AM_MEDIA_TYPE
-}
-
-type DigitalCableLocator struct {
-}
-
-type DigitalCableTuneRequest struct {
-}
-
-type DigitalCableTuningSpace struct {
-}
-
-type DigitalLocator struct {
 }
 
 type DualMonoInfo struct {
@@ -313,377 +179,11 @@ type DvbParentalRatingParam struct {
 	BRating       byte
 }
 
-type ECHOSTAR_SATELLITE_TV_NETWORK_TYPE struct {
-}
-
-type ESEventFactory struct {
-}
-
-type ESEventService struct {
-}
-
-type ETFilter struct {
-}
-
-type EVENTID_ARIBcontentSpanningEvent struct {
-}
-
-type EVENTID_AudioDescriptorSpanningEvent struct {
-}
-
-type EVENTID_AudioTypeSpanningEvent struct {
-}
-
-type EVENTID_BDAConditionalAccessTAG struct {
-}
-
-type EVENTID_BDAEventingServicePendingEvent struct {
-}
-
-type EVENTID_BDA_CASBroadcastMMI struct {
-}
-
-type EVENTID_BDA_CASCloseMMI struct {
-}
-
-type EVENTID_BDA_CASOpenMMI struct {
-}
-
-type EVENTID_BDA_CASReleaseTuner struct {
-}
-
-type EVENTID_BDA_CASRequestTuner struct {
-}
-
-type EVENTID_BDA_DiseqCResponseAvailable struct {
-}
-
-type EVENTID_BDA_EncoderSignalLock struct {
-}
-
-type EVENTID_BDA_FdcStatus struct {
-}
-
-type EVENTID_BDA_FdcTableSection struct {
-}
-
-type EVENTID_BDA_GPNVValueUpdate struct {
-}
-
-type EVENTID_BDA_GuideDataAvailable struct {
-}
-
-type EVENTID_BDA_GuideDataError struct {
-}
-
-type EVENTID_BDA_GuideServiceInformationUpdated struct {
-}
-
-type EVENTID_BDA_IsdbCASResponse struct {
-}
-
-type EVENTID_BDA_LbigsCloseConnectionHandle struct {
-}
-
-type EVENTID_BDA_LbigsOpenConnection struct {
-}
-
-type EVENTID_BDA_LbigsSendData struct {
-}
-
-type EVENTID_BDA_RatingPinReset struct {
-}
-
-type EVENTID_BDA_TransprtStreamSelectorInfo struct {
-}
-
-type EVENTID_BDA_TunerNoSignal struct {
-}
-
-type EVENTID_BDA_TunerSignalLock struct {
-}
-
-type EVENTID_BDA_UpdateDrmStatus struct {
-}
-
-type EVENTID_BDA_UpdateScanState struct {
-}
-
-type EVENTID_CADenialCountChanged struct {
-}
-
-type EVENTID_CASFailureSpanningEvent struct {
-}
-
-type EVENTID_CSDescriptorSpanningEvent struct {
-}
-
-type EVENTID_CandidatePostTuneData struct {
-}
-
-type EVENTID_CardStatusChanged struct {
-}
-
-type EVENTID_ChannelChangeSpanningEvent struct {
-}
-
-type EVENTID_ChannelInfoSpanningEvent struct {
-}
-
-type EVENTID_ChannelTypeSpanningEvent struct {
-}
-
-type EVENTID_CtxADescriptorSpanningEvent struct {
-}
-
-type EVENTID_DFNWithNoActualAVData struct {
-}
-
-type EVENTID_DRMParingStatusChanged struct {
-}
-
-type EVENTID_DRMParingStepComplete struct {
-}
-
-type EVENTID_DVBScramblingControlSpanningEvent struct {
-}
-
-type EVENTID_DualMonoSpanningEvent struct {
-}
-
-type EVENTID_DvbParentalRatingDescriptor struct {
-}
-
-type EVENTID_EASMessageReceived struct {
-}
-
-type EVENTID_EmmMessageSpanningEvent struct {
-}
-
-type EVENTID_EntitlementChanged struct {
-}
-
-type EVENTID_LanguageSpanningEvent struct {
-}
-
-type EVENTID_MMIMessage struct {
-}
-
-type EVENTID_NewSignalAcquired struct {
-}
-
-type EVENTID_PBDAParentalControlEvent struct {
-}
-
-type EVENTID_PIDListSpanningEvent struct {
-}
-
-type EVENTID_PSITable struct {
-}
-
-type EVENTID_RRTSpanningEvent struct {
-}
-
-type EVENTID_STBChannelNumber struct {
-}
-
-type EVENTID_ServiceTerminated struct {
-}
-
-type EVENTID_SignalAndServiceStatusSpanningEvent struct {
-}
-
-type EVENTID_SignalStatusChanged struct {
-}
-
-type EVENTID_StreamIDSpanningEvent struct {
-}
-
-type EVENTID_StreamTypeSpanningEvent struct {
-}
-
-type EVENTID_SubtitleSpanningEvent struct {
-}
-
-type EVENTID_TeletextSpanningEvent struct {
-}
-
-type EVENTID_TuneFailureEvent struct {
-}
-
-type EVENTID_TuneFailureSpanningEvent struct {
-}
-
-type EVENTID_TuningChanged struct {
-}
-
-type EVENTID_TuningChanging struct {
-}
-
-type EVENTTYPE_CASDescrambleFailureEvent struct {
-}
-
-type EvalRat struct {
-}
-
-type ISDBSLocator struct {
-}
-
-type ISDB_CABLE_TV_NETWORK_TYPE struct {
-}
-
-type ISDB_SATELLITE_TV_NETWORK_TYPE struct {
-}
-
-type ISDB_S_NETWORK_TYPE struct {
-}
-
-type ISDB_TERRESTRIAL_TV_NETWORK_TYPE struct {
-}
-
-type ISDB_T_NETWORK_TYPE struct {
-}
-
-type KSCATEGORY_BDA_IP_SINK struct {
-}
-
-type KSCATEGORY_BDA_NETWORK_EPG struct {
-}
-
-type KSCATEGORY_BDA_NETWORK_PROVIDER struct {
-}
-
-type KSCATEGORY_BDA_NETWORK_TUNER struct {
-}
-
-type KSCATEGORY_BDA_RECEIVER_COMPONENT struct {
-}
-
-type KSCATEGORY_BDA_TRANSPORT_INFORMATION struct {
-}
-
-type KSDATAFORMAT_SPECIFIER_BDA_IP struct {
-}
-
-type KSDATAFORMAT_SPECIFIER_BDA_TRANSPORT struct {
-}
-
-type KSDATAFORMAT_SUBTYPE_ATSC_SI struct {
-}
-
-type KSDATAFORMAT_SUBTYPE_BDA_IP struct {
-}
-
-type KSDATAFORMAT_SUBTYPE_BDA_IP_CONTROL struct {
-}
-
-type KSDATAFORMAT_SUBTYPE_BDA_MPEG2_TRANSPORT struct {
-}
-
-type KSDATAFORMAT_SUBTYPE_BDA_OPENCABLE_OOB_PSIP struct {
-}
-
-type KSDATAFORMAT_SUBTYPE_BDA_OPENCABLE_PSIP struct {
-}
-
-type KSDATAFORMAT_SUBTYPE_DVB_SI struct {
-}
-
-type KSDATAFORMAT_SUBTYPE_ISDB_SI struct {
-}
-
-type KSDATAFORMAT_SUBTYPE_PBDA_TRANSPORT_RAW struct {
-}
-
-type KSDATAFORMAT_TYPE_BDA_ANTENNA struct {
-}
-
-type KSDATAFORMAT_TYPE_BDA_IF_SIGNAL struct {
-}
-
-type KSDATAFORMAT_TYPE_BDA_IP struct {
-}
-
-type KSDATAFORMAT_TYPE_BDA_IP_CONTROL struct {
-}
-
-type KSDATAFORMAT_TYPE_MPE struct {
-}
-
-type KSDATAFORMAT_TYPE_MPEG2_SECTIONS struct {
-}
-
 type KSEVENTDATA_BDA_RF_TUNER_SCAN_S struct {
 	EventData      mediakernelstreaming.KSEVENTDATA
 	StartFrequency uint32
 	EndFrequency   uint32
 	LockRequested  BDA_LockType
-}
-
-type KSEVENTSETID_BdaCAEvent struct {
-}
-
-type KSEVENTSETID_BdaDiseqCEvent struct {
-}
-
-type KSEVENTSETID_BdaEvent struct {
-}
-
-type KSEVENTSETID_BdaPinEvent struct {
-}
-
-type KSEVENTSETID_BdaTunerEvent struct {
-}
-
-type KSMETHODSETID_BdaChangeSync struct {
-}
-
-type KSMETHODSETID_BdaConditionalAccessService struct {
-}
-
-type KSMETHODSETID_BdaDebug struct {
-}
-
-type KSMETHODSETID_BdaDeviceConfiguration struct {
-}
-
-type KSMETHODSETID_BdaDrmService struct {
-}
-
-type KSMETHODSETID_BdaEventing struct {
-}
-
-type KSMETHODSETID_BdaGuideDataDeliveryService struct {
-}
-
-type KSMETHODSETID_BdaIsdbConditionalAccess struct {
-}
-
-type KSMETHODSETID_BdaMux struct {
-}
-
-type KSMETHODSETID_BdaNameValue struct {
-}
-
-type KSMETHODSETID_BdaNameValueA struct {
-}
-
-type KSMETHODSETID_BdaScanning struct {
-}
-
-type KSMETHODSETID_BdaTSSelector struct {
-}
-
-type KSMETHODSETID_BdaTuner struct {
-}
-
-type KSMETHODSETID_BdaUserActivity struct {
-}
-
-type KSMETHODSETID_BdaWmdrmSession struct {
-}
-
-type KSMETHODSETID_BdaWmdrmTuner struct {
 }
 
 type KSM_BDA_BUFFER struct {
@@ -912,69 +412,6 @@ type KSM_BDA_WMDRM_RENEWLICENSE struct {
 	ArgbDataBuffer           [1]byte
 }
 
-type KSNODE_BDA_8PSK_DEMODULATOR struct {
-}
-
-type KSNODE_BDA_8VSB_DEMODULATOR struct {
-}
-
-type KSNODE_BDA_ANALOG_DEMODULATOR struct {
-}
-
-type KSNODE_BDA_COFDM_DEMODULATOR struct {
-}
-
-type KSNODE_BDA_COMMON_CA_POD struct {
-}
-
-type KSNODE_BDA_DRI_DRM struct {
-}
-
-type KSNODE_BDA_IP_SINK struct {
-}
-
-type KSNODE_BDA_ISDB_S_DEMODULATOR struct {
-}
-
-type KSNODE_BDA_ISDB_T_DEMODULATOR struct {
-}
-
-type KSNODE_BDA_OPENCABLE_POD struct {
-}
-
-type KSNODE_BDA_PBDA_CAS struct {
-}
-
-type KSNODE_BDA_PBDA_DRM struct {
-}
-
-type KSNODE_BDA_PBDA_ISDBCAS struct {
-}
-
-type KSNODE_BDA_PBDA_MUX struct {
-}
-
-type KSNODE_BDA_PBDA_TUNER struct {
-}
-
-type KSNODE_BDA_PID_FILTER struct {
-}
-
-type KSNODE_BDA_QAM_DEMODULATOR struct {
-}
-
-type KSNODE_BDA_QPSK_DEMODULATOR struct {
-}
-
-type KSNODE_BDA_RF_TUNER struct {
-}
-
-type KSNODE_BDA_TS_SELECTOR struct {
-}
-
-type KSNODE_BDA_VIDEO_ENCODER struct {
-}
-
 type KSPROPERTY_BDA_RF_TUNER_CAPS_S struct {
 	Property                  mediakernelstreaming.KSP_NODE
 	Mode                      uint32
@@ -1007,54 +444,6 @@ type KSPROPERTY_BDA_RF_TUNER_STANDARD_S struct {
 	SignalStandard uint32
 }
 
-type KSPROPSETID_BdaAutodemodulate struct {
-}
-
-type KSPROPSETID_BdaCA struct {
-}
-
-type KSPROPSETID_BdaDigitalDemodulator struct {
-}
-
-type KSPROPSETID_BdaDiseqCommand struct {
-}
-
-type KSPROPSETID_BdaEthernetFilter struct {
-}
-
-type KSPROPSETID_BdaFrequencyFilter struct {
-}
-
-type KSPROPSETID_BdaIPv4Filter struct {
-}
-
-type KSPROPSETID_BdaIPv6Filter struct {
-}
-
-type KSPROPSETID_BdaLNBInfo struct {
-}
-
-type KSPROPSETID_BdaNullTransform struct {
-}
-
-type KSPROPSETID_BdaPIDFilter struct {
-}
-
-type KSPROPSETID_BdaPinControl struct {
-}
-
-type KSPROPSETID_BdaSignalStats struct {
-}
-
-type KSPROPSETID_BdaTableSection struct {
-}
-
-type KSPROPSETID_BdaTopology struct {
-}
-
-type KSPROPSETID_BdaVoidTransform struct {
-}
-
 type KSP_BDA_NODE_PIN struct {
 	Property      mediakernelstreaming.KSIDENTIFIER
 	UlNodeType    uint32
@@ -1084,27 +473,9 @@ type LONG_SECTION struct {
 	Data [9]byte
 }
 
-type LanguageComponentType struct {
-}
-
 type LanguageInfo struct {
 	LangID       uint16
 	LISOLangCode int32
-}
-
-type Locator struct {
-}
-
-type MPEG2Component struct {
-}
-
-type MPEG2ComponentType struct {
-}
-
-type MPEG2TuneRequest struct {
-}
-
-type MPEG2TuneRequestFactory struct {
 }
 
 // MPEG2_FILTER: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg2_filter
@@ -1245,204 +616,6 @@ type MPE_ELEMENT struct {
 	Data [11]byte
 }
 
-type MSEventBinder struct {
-}
-
-type MSVidAnalogCaptureToCCA struct {
-}
-
-type MSVidAnalogCaptureToDataServices struct {
-}
-
-type MSVidAnalogCaptureToOverlayMixer struct {
-}
-
-type MSVidAnalogCaptureToStreamBufferSink struct {
-}
-
-type MSVidAnalogCaptureToXDS struct {
-}
-
-type MSVidAnalogTVToEncoder struct {
-}
-
-type MSVidAnalogTunerDevice struct {
-}
-
-type MSVidAudioRenderer struct {
-}
-
-type MSVidAudioRendererDevices struct {
-}
-
-type MSVidBDATunerDevice struct {
-}
-
-type MSVidCCA struct {
-}
-
-type MSVidCCAToStreamBufferSink struct {
-}
-
-type MSVidCCToAR struct {
-}
-
-type MSVidCCToVMR struct {
-}
-
-type MSVidClosedCaptioning struct {
-}
-
-type MSVidClosedCaptioningSI struct {
-}
-
-type MSVidCtl struct {
-}
-
-type MSVidDataServices struct {
-}
-
-type MSVidDataServicesToStreamBufferSink struct {
-}
-
-type MSVidDataServicesToXDS struct {
-}
-
-type MSVidDevice struct {
-}
-
-type MSVidDevice2 struct {
-}
-
-type MSVidDigitalCaptureToCCA struct {
-}
-
-type MSVidDigitalCaptureToITV struct {
-}
-
-type MSVidDigitalCaptureToStreamBufferSink struct {
-}
-
-type MSVidEVR struct {
-}
-
-type MSVidEncoder struct {
-}
-
-type MSVidEncoderToStreamBufferSink struct {
-}
-
-type MSVidFeature struct {
-}
-
-type MSVidFeatures struct {
-}
-
-type MSVidFilePlaybackDevice struct {
-}
-
-type MSVidFilePlaybackToAudioRenderer struct {
-}
-
-type MSVidFilePlaybackToVideoRenderer struct {
-}
-
-type MSVidGenericComposite struct {
-}
-
-type MSVidGenericSink struct {
-}
-
-type MSVidITVCapture struct {
-}
-
-type MSVidITVPlayback struct {
-}
-
-type MSVidITVToStreamBufferSink struct {
-}
-
-type MSVidInputDevice struct {
-}
-
-type MSVidInputDevices struct {
-}
-
-type MSVidMPEG2DecoderToClosedCaptioning struct {
-}
-
-type MSVidOutput struct {
-}
-
-type MSVidOutputDevices struct {
-}
-
-type MSVidRect struct {
-}
-
-type MSVidSBESourceToCC struct {
-}
-
-type MSVidSBESourceToGenericSink struct {
-}
-
-type MSVidSBESourceToITV struct {
-}
-
-type MSVidStreamBufferRecordingControl struct {
-}
-
-type MSVidStreamBufferSink struct {
-}
-
-type MSVidStreamBufferSource struct {
-}
-
-type MSVidStreamBufferSourceToVideoRenderer struct {
-}
-
-type MSVidStreamBufferV2Source struct {
-}
-
-type MSVidVMR9 struct {
-}
-
-type MSVidVideoInputDevice struct {
-}
-
-type MSVidVideoPlaybackDevice struct {
-}
-
-type MSVidVideoRenderer struct {
-}
-
-type MSVidVideoRendererDevices struct {
-}
-
-type MSVidWebDVD struct {
-}
-
-type MSVidWebDVDAdm struct {
-}
-
-type MSVidWebDVDToAudioRenderer struct {
-}
-
-type MSVidWebDVDToVideoRenderer struct {
-}
-
-type MSVidXDS struct {
-}
-
-type Mpeg2Data struct {
-}
-
-type Mpeg2DataLib struct {
-}
-
-type Mpeg2Stream struct {
-}
-
 // Mpeg2TableSampleHdr is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
@@ -1455,9 +628,6 @@ type Mpeg2TableSampleHdr struct {
 // field through an unsafe.Pointer cast.
 type PBDAParentalControl struct {
 	Data [12]byte
-}
-
-type PBDA_ALWAYS_TUNE_IN_MUX struct {
 }
 
 type PBDA_TAG_ATTRIBUTE struct {
@@ -1489,33 +659,6 @@ type PID_BITS struct {
 // field through an unsafe.Pointer cast.
 type PID_BITS_MIDL struct {
 	Data [2]byte
-}
-
-type PINNAME_BDA_ANALOG_AUDIO struct {
-}
-
-type PINNAME_BDA_ANALOG_VIDEO struct {
-}
-
-type PINNAME_BDA_FM_RADIO struct {
-}
-
-type PINNAME_BDA_IF_PIN struct {
-}
-
-type PINNAME_BDA_OPENCABLE_PSIP_PIN struct {
-}
-
-type PINNAME_BDA_TRANSPORT struct {
-}
-
-type PINNAME_IPSINK_INPUT struct {
-}
-
-type PINNAME_MPE struct {
-}
-
-type PersistTuneXmlUtility struct {
 }
 
 type ProgramElement struct {
@@ -1602,9 +745,6 @@ type STREAMBUFFER_ATTRIBUTE struct {
 	CbLength                  uint16
 }
 
-type SectionList struct {
-}
-
 type SpanningEventDescriptor struct {
 	WDataLen    uint16
 	WProgNumber uint16
@@ -1628,17 +768,11 @@ type SpanningEventEmmMessage struct {
 	SzMessageArea         [1]uint16
 }
 
-type SystemTuningSpaces struct {
-}
-
 // TID_EXTENSION is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
 // field through an unsafe.Pointer cast.
 type TID_EXTENSION struct {
 	Data [4]byte
-}
-
-type TIFLoad struct {
 }
 
 type TRANSPORT_PROPERTIES_Fields_e__Union_Others struct {
@@ -1668,15 +802,6 @@ type TRANSPORT_PROPERTIES struct {
 	Fields TRANSPORT_PROPERTIES_Fields_e__Union
 }
 
-type TuneRequest struct {
-}
-
-type TunerMarshaler struct {
-}
-
-type TuningSpace struct {
-}
-
 type UDCR_TAG struct {
 	BVersion            byte
 	KID                 [25]byte
@@ -1704,10 +829,4 @@ type VA_OPTIONAL_VIDEO_PROPERTIES struct {
 // field through an unsafe.Pointer cast.
 type WMDRMProtectionInfo struct {
 	Data [67]byte
-}
-
-type XDSCodec struct {
-}
-
-type XDSToRat struct {
 }

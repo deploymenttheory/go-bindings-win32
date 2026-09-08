@@ -5,8 +5,11 @@
 package settingsmanagementinfrastructure
 
 import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
+
+var CLSID_SettingsEngine win32.GUID = win32.GUID{Data1: 0x9f7d7bb5, Data2: 0x20b3, Data3: 0x11da, Data4: [8]byte{0x81, 0xa5, 0x00, 0x30, 0xf1, 0x64, 0x2e, 0x3c}}
 
 const LIMITED_VALIDATION_MODE uint32 = 1
 const LINK_STORE_TO_ENGINE_INSTANCE uint32 = 1

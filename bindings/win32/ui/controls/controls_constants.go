@@ -4,6 +4,10 @@
 
 package controls
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
 const ACM_ISPLAYING uint32 = 1128
 const ACM_OPEN uint32 = 1127
 const ACM_OPENA uint32 = 1124
@@ -150,6 +154,9 @@ const CDRF_SKIPPOSTPAINT uint32 = 256
 const CLR_DEFAULT int32 = -16777216
 const CLR_HILIGHT int32 = -16777216
 const CLR_NONE int32 = -1
+
+var CLSID_ImageList win32.GUID = win32.GUID{Data1: 0x7c476ba2, Data2: 0x02b1, Data3: 0x48f4, Data4: [8]byte{0x80, 0x48, 0xb2, 0x46, 0x19, 0xdd, 0xc0, 0x58}}
+
 const CMB_MASKED uint32 = 2
 const COLORMGMTDLGORD uint32 = 1551
 const COMCTL32_VERSION uint32 = 6

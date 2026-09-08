@@ -4,4 +4,10 @@
 
 package isolation
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
+var CLSID_IsolatedAppLauncher win32.GUID = win32.GUID{Data1: 0xbc812430, Data2: 0xe75e, Data3: 0x4fd1, Data4: [8]byte{0x96, 0x41, 0x1f, 0x9f, 0x1e, 0x2d, 0x9a, 0x1f}}
+
 const WDAG_CLIPBOARD_TAG = "CrossIsolatedEnvironmentContent"

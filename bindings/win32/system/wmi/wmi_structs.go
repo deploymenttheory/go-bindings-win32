@@ -1458,10 +1458,6 @@ func (u *MI_Value) Array() *MI_Array {
 	return (*MI_Array)(unsafe.Pointer(u))
 }
 
-// MofCompiler: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-imofcompiler
-type MofCompiler struct {
-}
-
 type SWbemAnalysisMatrix struct {
 	M_uVersion      uint32
 	M_uMatrixType   uint32
@@ -1495,60 +1491,6 @@ type SWbemAssocQueryInf struct {
 	M_pszRequiredAssocQualifier foundation.PWSTR
 }
 
-type SWbemDateTime struct {
-}
-
-type SWbemEventSource struct {
-}
-
-type SWbemLastError struct {
-}
-
-type SWbemLocator struct {
-}
-
-type SWbemMethod struct {
-}
-
-type SWbemMethodSet struct {
-}
-
-type SWbemNamedValue struct {
-}
-
-type SWbemNamedValueSet struct {
-}
-
-type SWbemObject struct {
-}
-
-type SWbemObjectEx struct {
-}
-
-type SWbemObjectPath struct {
-}
-
-type SWbemObjectSet struct {
-}
-
-type SWbemPrivilege struct {
-}
-
-type SWbemPrivilegeSet struct {
-}
-
-type SWbemProperty struct {
-}
-
-type SWbemPropertySet struct {
-}
-
-type SWbemQualifier struct {
-}
-
-type SWbemQualifierSet struct {
-}
-
 // SWbemQueryQualifiedName: https://learn.microsoft.com/windows/win32/api/wmiutils/ns-wmiutils-swbemqueryqualifiedname
 type SWbemQueryQualifiedName struct {
 	M_uVersion      uint32
@@ -1558,12 +1500,6 @@ type SWbemQueryQualifiedName struct {
 	M_bArraysUsed   foundation.BOOL
 	M_pbArrayElUsed *foundation.BOOL
 	M_puArrayIndex  *uint32
-}
-
-type SWbemRefreshableItem struct {
-}
-
-type SWbemRefresher struct {
 }
 
 // SWbemRpnConst is a C union, exposed as correctly sized and aligned backing
@@ -1652,22 +1588,6 @@ type SWbemRpnTokenList struct {
 	M_uNumTokens uint32
 }
 
-type SWbemSecurity struct {
-}
-
-type SWbemServices struct {
-}
-
-type SWbemServicesEx struct {
-}
-
-type SWbemSink struct {
-}
-
-// UnsecuredApartment: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iunsecuredapartment
-type UnsecuredApartment struct {
-}
-
 type WBEM_COMPILE_STATUS_INFO struct {
 	LPhaseError int32
 	HRes        foundation.HRESULT
@@ -1675,69 +1595,4 @@ type WBEM_COMPILE_STATUS_INFO struct {
 	FirstLine   int32
 	LastLine    int32
 	DwOutFlags  uint32
-}
-
-type WMIExtension struct {
-}
-
-type WbemAdministrativeLocator struct {
-}
-
-type WbemAuthenticatedLocator struct {
-}
-
-// WbemBackupRestore: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iwbembackuprestore
-type WbemBackupRestore struct {
-}
-
-// WbemClassObject: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iwbemclassobject
-type WbemClassObject struct {
-}
-
-// WbemContext: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iwbemcontext
-type WbemContext struct {
-}
-
-type WbemDCOMTransport struct {
-}
-
-type WbemDecoupledBasicEventProvider struct {
-}
-
-type WbemDecoupledRegistrar struct {
-}
-
-// WbemDefPath: https://learn.microsoft.com/windows/win32/api/wmiutils/nn-wmiutils-iwbempath
-type WbemDefPath struct {
-}
-
-type WbemLevel1Login struct {
-}
-
-type WbemLocalAddrRes struct {
-}
-
-type WbemLocator struct {
-}
-
-// WbemObjectTextSrc: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iwbemobjecttextsrc
-type WbemObjectTextSrc struct {
-}
-
-// WbemQuery: https://learn.microsoft.com/windows/win32/api/wmiutils/nn-wmiutils-iwbemquery
-type WbemQuery struct {
-}
-
-// WbemRefresher: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iwbemrefresher
-type WbemRefresher struct {
-}
-
-// WbemStatusCodeText: https://learn.microsoft.com/windows/win32/api/wbemcli/nn-wbemcli-iwbemstatuscodetext
-type WbemStatusCodeText struct {
-}
-
-type WbemUnauthenticatedLocator struct {
-}
-
-type WbemUninitializedClassObject struct {
 }

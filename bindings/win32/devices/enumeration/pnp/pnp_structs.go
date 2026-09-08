@@ -22,33 +22,3 @@ type SW_DEVICE_CREATE_INFO struct {
 	PszDeviceLocation    foundation.PWSTR
 	PSecurityDescriptor  *security.SECURITY_DESCRIPTOR
 }
-
-type UPnPDescriptionDocument struct {
-}
-
-type UPnPDescriptionDocumentEx struct {
-}
-
-type UPnPDevice struct {
-}
-
-type UPnPDeviceFinder struct {
-}
-
-type UPnPDeviceFinderEx struct {
-}
-
-type UPnPDevices struct {
-}
-
-type UPnPRegistrar struct {
-}
-
-type UPnPRemoteEndpointInfo struct {
-}
-
-type UPnPService struct {
-}
-
-type UPnPServices struct {
-}

@@ -5,8 +5,13 @@
 package xps
 
 import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
+
+var CLSID_XpsOMObjectFactory win32.GUID = win32.GUID{Data1: 0xe974d26d, Data2: 0x3d9b, Data3: 0x4d47, Data4: [8]byte{0x88, 0xcc, 0x38, 0x72, 0xf2, 0xdc, 0x35, 0x85}}
+var CLSID_XpsOMThumbnailGenerator win32.GUID = win32.GUID{Data1: 0x7e4a23e2, Data2: 0xb969, Data3: 0x4761, Data4: [8]byte{0xbe, 0x35, 0x1a, 0x8c, 0xed, 0x58, 0xe3, 0x23}}
+var CLSID_XpsSignatureManager win32.GUID = win32.GUID{Data1: 0xb0c43320, Data2: 0x2315, Data3: 0x44a2, Data4: [8]byte{0xb7, 0x0a, 0x09, 0x43, 0xa1, 0x40, 0xa8, 0xee}}
 
 const XPS_E_ABSOLUTE_REFERENCE foundation.HRESULT = -2142108159
 const XPS_E_ALREADY_OWNED foundation.HRESULT = -2142108413

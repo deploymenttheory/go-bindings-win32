@@ -8,15 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-type FeedFolderWatcher struct {
-}
-
-type FeedWatcher struct {
-}
-
-type FeedsManager struct {
-}
-
 // TimedLevel: https://learn.microsoft.com/windows/win32/api/effects/ns-effects-timedlevel
 type TimedLevel struct {
 	Frequency [2048]byte
@@ -30,12 +21,6 @@ type WMPContextMenuInfo struct {
 	DwID         uint32
 	BstrMenuText foundation.BSTR
 	BstrHelpText foundation.BSTR
-}
-
-type WMPLib struct {
-}
-
-type WMPRemoteMediaServices struct {
 }
 
 // WMP_WMDM_METADATA_ROUND_TRIP_DEVICE2PC: https://learn.microsoft.com/windows/win32/api/wmpdevices/ns-wmpdevices-wmp_wmdm_metadata_round_trip_device2pc
@@ -52,7 +37,4 @@ type WMP_WMDM_METADATA_ROUND_TRIP_DEVICE2PC struct {
 // field through an unsafe.Pointer cast.
 type WMP_WMDM_METADATA_ROUND_TRIP_PC2DEVICE struct {
 	Data [8]byte
-}
-
-type WindowsMediaPlayer struct {
 }

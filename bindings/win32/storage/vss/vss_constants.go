@@ -5,8 +5,12 @@
 package vss
 
 import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
+
+var CLSID_VSSCoordinator win32.GUID = win32.GUID{Data1: 0xe579ab5f, Data2: 0x1cc4, Data3: 0x44b4, Data4: [8]byte{0xbe, 0xd9, 0xde, 0x09, 0x91, 0xff, 0x06, 0x23}}
+var CLSID_VssSnapshotMgmt win32.GUID = win32.GUID{Data1: 0x0b5a2c52, Data2: 0x3eb9, Data3: 0x470a, Data4: [8]byte{0x96, 0xe2, 0x6c, 0x6d, 0x45, 0x70, 0xe4, 0x0f}}
 
 const VSS_ASSOC_NO_MAX_SPACE int32 = -1
 const VSS_ASSOC_REMOVE uint32 = 0

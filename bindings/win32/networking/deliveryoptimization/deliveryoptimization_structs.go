@@ -34,6 +34,3 @@ type DO_DOWNLOAD_STATUS struct {
 	Error            foundation.HRESULT
 	ExtendedError    foundation.HRESULT
 }
-
-type DeliveryOptimization struct {
-}

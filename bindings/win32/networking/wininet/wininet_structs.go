@@ -788,9 +788,6 @@ type ProofOfPossessionCookieInfo struct {
 	P3pHeader foundation.PWSTR
 }
 
-type ProofOfPossessionCookieInfoManager struct {
-}
-
 type URLCACHE_ENTRY_INFO struct {
 	PwszSourceUrlName  foundation.PWSTR
 	PwszLocalFileName  foundation.PWSTR

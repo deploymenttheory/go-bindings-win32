@@ -4,6 +4,10 @@
 
 package winhttp
 
+import (
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
+)
+
 const API_GET_PROXY_FOR_URL uint32 = 6
 const API_GET_PROXY_SETTINGS uint32 = 7
 const API_QUERY_DATA_AVAILABLE uint32 = 2
@@ -11,6 +15,9 @@ const API_READ_DATA uint32 = 3
 const API_RECEIVE_RESPONSE uint32 = 1
 const API_SEND_REQUEST uint32 = 5
 const API_WRITE_DATA uint32 = 4
+
+var CLSID_WinHttpRequest win32.GUID = win32.GUID{Data1: 0x2087c2f4, Data2: 0x2cef, Data3: 0x4953, Data4: [8]byte{0xa8, 0xab, 0x66, 0x77, 0x9b, 0x67, 0x04, 0x95}}
+
 const ERROR_WINHTTP_AUTODETECTION_FAILED uint32 = 12180
 const ERROR_WINHTTP_AUTO_PROXY_SERVICE_ERROR uint32 = 12178
 const ERROR_WINHTTP_BAD_AUTO_PROXY_SCRIPT uint32 = 12166

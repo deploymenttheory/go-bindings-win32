@@ -501,7 +501,7 @@ type IIdentityAdvise struct {
 var IID_IIdentityAdvise = win32.GUID{Data1: 0x4e982fed, Data2: 0xd14b, Data3: 0x440c, Data4: [8]byte{0xb8, 0xd6, 0xbb, 0x38, 0x64, 0x53, 0xd3, 0x86}}
 
 // IdentityUpdated dispatches through IIdentityAdvise's vtable slot 3.
-func (self *IIdentityAdvise) IdentityUpdated(dwIdentityUpdateEvents uint32, lpszUniqueID string) error {
+func (self *IIdentityAdvise) IdentityUpdated(dwIdentityUpdateEvents IdentityUpdateEvent, lpszUniqueID string) error {
 	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwIdentityUpdateEvents), uintptr(unsafe.Pointer(_lpszUniqueID)))
 	return win32.ErrIfFailed(int32(r1))
@@ -584,7 +584,7 @@ func (self *IIdentityProvider) GetProviderPropertyStore(ppPropertyStore **uishel
 }
 
 // Advise dispatches through IIdentityProvider's vtable slot 9.
-func (self *IIdentityProvider) Advise(pIdentityAdvise *IIdentityAdvise, dwIdentityUpdateEvents uint32, pdwCookie *uint32) error {
+func (self *IIdentityProvider) Advise(pIdentityAdvise *IIdentityAdvise, dwIdentityUpdateEvents IdentityUpdateEvent, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdentityAdvise)), uintptr(dwIdentityUpdateEvents), uintptr(unsafe.Pointer(pdwCookie)))
 	return win32.ErrIfFailed(int32(r1))
 }

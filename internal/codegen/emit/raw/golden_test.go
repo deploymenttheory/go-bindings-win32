@@ -159,7 +159,11 @@ func apiRef(api, name, kind string) win32meta.TypeRef {
 }
 
 func optional(p *win32meta.Param) { p.IsOptional = true }
-func retval(p *win32meta.Param)   { p.IsOut = true; p.IsRetVal = true }
+
+func associatedEnum(name string) func(*win32meta.Param) {
+	return func(p *win32meta.Param) { p.AssociatedEnum = name }
+}
+func retval(p *win32meta.Param) { p.IsOut = true; p.IsRetVal = true }
 
 func countedBy(index int) func(*win32meta.Param) {
 	return func(p *win32meta.Param) { p.NativeArrayCountParamIndex = index }
@@ -243,11 +247,25 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 	comMeta := &win32meta.NamespaceMeta{
 		Namespace:  systemCom,
 		Interfaces: map[string]win32meta.ComInterface{"IUnknown": unknown},
+		Enums: map[string]win32meta.Enum{
+			"COINIT": {BaseType: "int32", IsFlags: true, Members: []win32meta.EnumMember{
+				{Name: "COINIT_MULTITHREADED", Value: "0"}, {Name: "COINIT_APARTMENTTHREADED", Value: "2"},
+			}},
+			// Narrower than the parameters that name it: the association is
+			// reported and declined rather than silently narrowing them.
+			"TINY": {BaseType: "uint8", Members: []win32meta.EnumMember{{Name: "TINY_A", Value: "0"}}},
+		},
 		Functions: []win32meta.Function{
 			// The curated informational-success entry (S_FALSE survives).
+			// dwCoInit is a bare UInt32 the metadata associates with COINIT.
 			function("CoInitializeEx", "OLE32.dll", hresultType(),
 				param("pvReserved", voidPtrType(), in, reserved),
-				param("dwCoInit", native("UInt32"), in)),
+				param("dwCoInit", native("UInt32"), in, associatedEnum("COINIT"))),
+			// Declined associations: a width mismatch, and a name no
+			// namespace declares.
+			function("CoDeclined", "OLE32.dll", hresultType(),
+				param("narrow", native("UInt32"), in, associatedEnum("TINY")),
+				param("unknown", native("UInt32"), in, associatedEnum("NOSUCHENUM"))),
 		},
 	}
 

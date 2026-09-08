@@ -4538,7 +4538,7 @@ func PathRenameExtensionA(pszPath foundation.PSTR, pszExt foundation.PSTR) bool 
 // PathResolve calls SHELL32!PathResolve.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pathresolve
 // Minimum OS: windows5.1.2600.
-func PathResolve(pszPath foundation.PWSTR, dirs **uint16, fFlags uint32) (int32, error) {
+func PathResolve(pszPath foundation.PWSTR, dirs **uint16, fFlags PRF_FLAGS) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procPathResolve.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(unsafe.Pointer(dirs)), uintptr(fFlags))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -4965,7 +4965,7 @@ func SHChangeNotification_Unlock(hLock foundation.HANDLE) bool {
 // SHChangeNotify calls SHELL32!SHChangeNotify.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shchangenotify
 // Minimum OS: windows5.1.2600.
-func SHChangeNotify(wEventId int32, uFlags SHCNF_FLAGS, dwItem1 unsafe.Pointer, dwItem2 unsafe.Pointer) {
+func SHChangeNotify(wEventId SHCNE_ID, uFlags SHCNF_FLAGS, dwItem1 unsafe.Pointer, dwItem2 unsafe.Pointer) {
 	syscall.SyscallN(procSHChangeNotify.Addr(), uintptr(wEventId), uintptr(uFlags), uintptr(unsafe.Pointer(dwItem1)), uintptr(unsafe.Pointer(dwItem2)))
 }
 
@@ -5135,7 +5135,7 @@ func SHCreateItemFromRelativeName(psiParent *IShellItem, pszName string, pbc *sy
 // SHCreateItemInKnownFolder calls SHELL32!SHCreateItemInKnownFolder.
 // https://learn.microsoft.com/windows/win32/api/shobjidl_core/nf-shobjidl_core-shcreateiteminknownfolder
 // Minimum OS: windows6.0.6000.
-func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags uint32, pszItem *string, riid *win32.GUID, ppv **win32.IUnknown) error {
+func SHCreateItemInKnownFolder(kfid *win32.GUID, dwKFFlags KNOWN_FOLDER_FLAG, pszItem *string, riid *win32.GUID, ppv **win32.IUnknown) error {
 	_pszItem := win32.UTF16PtrOrNil(pszItem)
 	r1, _, _ := syscall.SyscallN(procSHCreateItemInKnownFolder.Addr(), uintptr(unsafe.Pointer(kfid)), uintptr(dwKFFlags), uintptr(unsafe.Pointer(_pszItem)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
@@ -5544,7 +5544,7 @@ func SHFormatDateTimeA(pft *foundation.FILETIME, pdwFlags *uint32, pszBuf founda
 // SHFormatDrive calls SHELL32!SHFormatDrive.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shformatdrive
 // Minimum OS: windows5.1.2600.
-func SHFormatDrive(hwnd foundation.HWND, drive uint32, fmtID SHFMT_ID, options uint32) uint32 {
+func SHFormatDrive(hwnd foundation.HWND, drive uint32, fmtID SHFMT_ID, options SHFMT_OPT) uint32 {
 	r1, _, _ := syscall.SyscallN(procSHFormatDrive.Addr(), uintptr(hwnd), uintptr(drive), uintptr(fmtID), uintptr(options))
 	return uint32(r1)
 }
@@ -5786,7 +5786,7 @@ func SHGetKnownFolderItem(rfid *win32.GUID, flags KNOWN_FOLDER_FLAG, hToken foun
 // SHGetKnownFolderPath calls SHELL32!SHGetKnownFolderPath.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetknownfolderpath
 // Minimum OS: windows6.0.6000.
-func SHGetKnownFolderPath(rfid *win32.GUID, dwFlags uint32, hToken foundation.HANDLE, ppszPath *foundation.PWSTR) error {
+func SHGetKnownFolderPath(rfid *win32.GUID, dwFlags KNOWN_FOLDER_FLAG, hToken foundation.HANDLE, ppszPath *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procSHGetKnownFolderPath.Addr(), uintptr(unsafe.Pointer(rfid)), uintptr(dwFlags), uintptr(hToken), uintptr(unsafe.Pointer(ppszPath)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -6133,7 +6133,7 @@ func SHMultiFileProperties(pdtobj *systemcom.IDataObject, dwFlags uint32) error 
 // SHObjectProperties calls SHELL32!SHObjectProperties.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shobjectproperties
 // Minimum OS: windows5.1.2600.
-func SHObjectProperties(hwnd foundation.HWND, shopObjectType uint32, pszObjectName string, pszPropertyPage *string) bool {
+func SHObjectProperties(hwnd foundation.HWND, shopObjectType SHOP_TYPE, pszObjectName string, pszPropertyPage *string) bool {
 	_pszObjectName := win32.UTF16Ptr(pszObjectName)
 	_pszPropertyPage := win32.UTF16PtrOrNil(pszPropertyPage)
 	r1, _, _ := syscall.SyscallN(procSHObjectProperties.Addr(), uintptr(hwnd), uintptr(shopObjectType), uintptr(unsafe.Pointer(_pszObjectName)), uintptr(unsafe.Pointer(_pszPropertyPage)))
@@ -6922,7 +6922,7 @@ func SHUpdateImageA(pszHashItem foundation.PSTR, iIndex int32, uFlags uint32, iI
 // SHValidateUNC calls SHELL32!SHValidateUNC.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shvalidateunc
 // Minimum OS: windows5.1.2600.
-func SHValidateUNC(hwndOwner foundation.HWND, pszFile foundation.PWSTR, fConnect uint32) bool {
+func SHValidateUNC(hwndOwner foundation.HWND, pszFile foundation.PWSTR, fConnect VALIDATEUNC_OPTION) bool {
 	r1, _, _ := syscall.SyscallN(procSHValidateUNC.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(pszFile)), uintptr(fConnect))
 	return r1 != 0
 }

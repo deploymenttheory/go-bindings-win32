@@ -2178,7 +2178,7 @@ func ExcludeUpdateRgn(hDC HDC, hWnd foundation.HWND) int32 {
 // ExtCreatePen calls GDI32!ExtCreatePen.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-extcreatepen
 // Minimum OS: windows5.0.
-func ExtCreatePen(iPenStyle uint32, cWidth uint32, plbrush *LOGBRUSH, pstyle []uint32) HPEN {
+func ExtCreatePen(iPenStyle PEN_STYLE, cWidth uint32, plbrush *LOGBRUSH, pstyle []uint32) HPEN {
 	var _pstyle *uint32
 	if len(pstyle) > 0 {
 		_pstyle = &pstyle[0]
@@ -2562,7 +2562,7 @@ func GetColorAdjustment(hdc HDC, lpca *COLORADJUSTMENT) bool {
 // GetCurrentObject calls GDI32!GetCurrentObject.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getcurrentobject
 // Minimum OS: windows5.0.
-func GetCurrentObject(hdc HDC, type_ uint32) HGDIOBJ {
+func GetCurrentObject(hdc HDC, type_ OBJ_TYPE) HGDIOBJ {
 	r1, _, _ := syscall.SyscallN(procGetCurrentObject.Addr(), uintptr(hdc), uintptr(type_))
 	return HGDIOBJ(r1)
 }
@@ -2638,7 +2638,7 @@ func GetDIBits(hdc HDC, hbm HBITMAP, start uint32, cLines uint32, lpvBits unsafe
 // GetDeviceCaps calls GDI32!GetDeviceCaps.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getdevicecaps
 // Minimum OS: windows5.0.
-func GetDeviceCaps(hdc HDC, index int32) int32 {
+func GetDeviceCaps(hdc HDC, index GET_DEVICE_CAPS_INDEX) int32 {
 	r1, _, _ := syscall.SyscallN(procGetDeviceCaps.Addr(), uintptr(hdc), uintptr(index))
 	return int32(r1)
 }
@@ -4041,7 +4041,7 @@ func SetBkColor(hdc HDC, color foundation.COLORREF) foundation.COLORREF {
 // SetBkMode calls GDI32!SetBkMode.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setbkmode
 // Minimum OS: windows5.0.
-func SetBkMode(hdc HDC, mode int32) int32 {
+func SetBkMode(hdc HDC, mode BACKGROUND_MODE) int32 {
 	r1, _, _ := syscall.SyscallN(procSetBkMode.Addr(), uintptr(hdc), uintptr(mode))
 	return int32(r1)
 }

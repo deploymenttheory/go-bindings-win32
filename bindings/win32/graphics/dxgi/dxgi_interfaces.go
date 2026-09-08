@@ -359,7 +359,7 @@ type IDXGIDevice4 struct {
 var IID_IDXGIDevice4 = win32.GUID{Data1: 0x95b4f95f, Data2: 0xd8da, Data3: 0x4ca4, Data4: [8]byte{0x9e, 0xe6, 0x3b, 0x76, 0xd5, 0x96, 0x8a, 0x10}}
 
 // OfferResources1 dispatches through IDXGIDevice4's vtable slot 18.
-func (self *IDXGIDevice4) OfferResources1(ppResources []*IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY, Flags uint32) error {
+func (self *IDXGIDevice4) OfferResources1(ppResources []*IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY, Flags DXGI_OFFER_RESOURCE_FLAGS) error {
 	var _ppResources **IDXGIResource
 	if len(ppResources) > 0 {
 		_ppResources = &ppResources[0]
@@ -1437,7 +1437,7 @@ func (self *IDXGISwapChain) GetDesc() (DXGI_SWAP_CHAIN_DESC, error) {
 }
 
 // ResizeBuffers dispatches through IDXGISwapChain's vtable slot 13.
-func (self *IDXGISwapChain) ResizeBuffers(BufferCount uint32, Width uint32, Height uint32, NewFormat graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags uint32) error {
+func (self *IDXGISwapChain) ResizeBuffers(BufferCount uint32, Width uint32, Height uint32, NewFormat graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags DXGI_SWAP_CHAIN_FLAG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(BufferCount), uintptr(Width), uintptr(Height), uintptr(NewFormat), uintptr(SwapChainFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1622,7 +1622,7 @@ func (self *IDXGISwapChain3) SetColorSpace1(ColorSpace graphicsdxgicommon.DXGI_C
 }
 
 // ResizeBuffers1 dispatches through IDXGISwapChain3's vtable slot 39.
-func (self *IDXGISwapChain3) ResizeBuffers1(BufferCount uint32, Width uint32, Height uint32, Format graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags uint32, pCreationNodeMask *uint32, ppPresentQueue **systemcom.IUnknown) error {
+func (self *IDXGISwapChain3) ResizeBuffers1(BufferCount uint32, Width uint32, Height uint32, Format graphicsdxgicommon.DXGI_FORMAT, SwapChainFlags DXGI_SWAP_CHAIN_FLAG, pCreationNodeMask *uint32, ppPresentQueue **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(BufferCount), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(SwapChainFlags), uintptr(unsafe.Pointer(pCreationNodeMask)), uintptr(unsafe.Pointer(ppPresentQueue)))
 	return win32.ErrIfFailed(int32(r1))
 }

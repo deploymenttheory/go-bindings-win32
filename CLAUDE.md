@@ -182,6 +182,12 @@ each call, then the template dispatches via `syscall.SyscallN`:
   `[InvalidHandleValue]` metadata; other + SetLastError → `(T, error)` where
   err is the advisory GetLastError; no SetLastError → bare `T`
 - `[Reserved]` params elided from the signature (passed as `0`)
+- a plain-integer param carrying `[AssociatedEnum]` is retyped as that enum
+  (`CoInitializeEx(dwCoInit COINIT)`), so the generated constants are usable
+  as arguments without a cast. The association names the enum unqualified, so
+  it resolves through the registry's enum-owner index; an unknown, ambiguous
+  or differently sized enum is declined with a diagnostic. The marshaling
+  word is unchanged — an enum argument is still a scalar.
 - `-W` functions de-suffixed when the bare name is free (`CreateEventW` →
   `CreateEvent`); `-A` variants and unsuffixed names keep their name
 - an array-pointer param + its input count param (`[NativeArrayInfo]`

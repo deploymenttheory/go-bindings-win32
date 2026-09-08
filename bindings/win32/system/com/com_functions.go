@@ -615,7 +615,7 @@ func CoGetCancelObject(dwThreadId uint32, iid *win32.GUID, ppUnk **win32.IUnknow
 // CoGetClassObject calls OLE32!CoGetClassObject.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cogetclassobject
 // Minimum OS: windows5.0.
-func CoGetClassObject(rclsid *win32.GUID, dwClsContext uint32, pvReserved unsafe.Pointer, riid *win32.GUID, ppv **win32.IUnknown) error {
+func CoGetClassObject(rclsid *win32.GUID, dwClsContext CLSCTX, pvReserved unsafe.Pointer, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCoGetClassObject.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(dwClsContext), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -720,7 +720,7 @@ func CoInitialize() error {
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coinitializeex
 // Minimum OS: windows5.0.
 // The returned HRESULT preserves informational successes (e.g. S_FALSE); the error is non-nil only on failure.
-func CoInitializeEx(dwCoInit uint32) (win32.HRESULT, error) {
+func CoInitializeEx(dwCoInit COINIT) (win32.HRESULT, error) {
 	r1, _, _ := syscall.SyscallN(procCoInitializeEx.Addr(), 0, uintptr(dwCoInit))
 	return win32.HRESULT(r1), win32.ErrIfFailed(int32(r1))
 }
@@ -728,7 +728,7 @@ func CoInitializeEx(dwCoInit uint32) (win32.HRESULT, error) {
 // CoInitializeSecurity calls OLE32!CoInitializeSecurity.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coinitializesecurity
 // Minimum OS: windows5.0.
-func CoInitializeSecurity(pSecDesc security.PSECURITY_DESCRIPTOR, cAuthSvc int32, asAuthSvc *SOLE_AUTHENTICATION_SERVICE, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthList unsafe.Pointer, dwCapabilities uint32) error {
+func CoInitializeSecurity(pSecDesc security.PSECURITY_DESCRIPTOR, cAuthSvc int32, asAuthSvc *SOLE_AUTHENTICATION_SERVICE, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthList unsafe.Pointer, dwCapabilities EOLE_AUTHENTICATION_CAPABILITIES) error {
 	r1, _, _ := syscall.SyscallN(procCoInitializeSecurity.Addr(), uintptr(pSecDesc), uintptr(cAuthSvc), uintptr(unsafe.Pointer(asAuthSvc)), 0, uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthList)), uintptr(dwCapabilities), 0)
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -828,7 +828,7 @@ func CoRegisterChannelHook(ExtensionUuid *win32.GUID, pChannelHook *IChannelHook
 // CoRegisterClassObject calls OLE32!CoRegisterClassObject.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-coregisterclassobject
 // Minimum OS: windows5.0.
-func CoRegisterClassObject(rclsid *win32.GUID, pUnk *IUnknown, dwClsContext CLSCTX, flags uint32, lpdwRegister *uint32) error {
+func CoRegisterClassObject(rclsid *win32.GUID, pUnk *IUnknown, dwClsContext CLSCTX, flags REGCLS, lpdwRegister *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCoRegisterClassObject.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pUnk)), uintptr(dwClsContext), uintptr(flags), uintptr(unsafe.Pointer(lpdwRegister)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -939,7 +939,7 @@ func CoSetCancelObject(pUnk *IUnknown) error {
 // CoSetProxyBlanket calls OLE32!CoSetProxyBlanket.
 // https://learn.microsoft.com/windows/win32/api/combaseapi/nf-combaseapi-cosetproxyblanket
 // Minimum OS: windows5.0.
-func CoSetProxyBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName *string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities uint32) error {
+func CoSetProxyBlanket(pProxy *IUnknown, dwAuthnSvc uint32, dwAuthzSvc uint32, pServerPrincName *string, dwAuthnLevel RPC_C_AUTHN_LEVEL, dwImpLevel RPC_C_IMP_LEVEL, pAuthInfo unsafe.Pointer, dwCapabilities EOLE_AUTHENTICATION_CAPABILITIES) error {
 	_pServerPrincName := win32.UTF16PtrOrNil(pServerPrincName)
 	r1, _, _ := syscall.SyscallN(procCoSetProxyBlanket.Addr(), uintptr(unsafe.Pointer(pProxy)), uintptr(dwAuthnSvc), uintptr(dwAuthzSvc), uintptr(unsafe.Pointer(_pServerPrincName)), uintptr(dwAuthnLevel), uintptr(dwImpLevel), uintptr(unsafe.Pointer(pAuthInfo)), uintptr(dwCapabilities))
 	return win32.ErrIfFailed(int32(r1))

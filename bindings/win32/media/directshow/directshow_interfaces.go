@@ -1555,7 +1555,7 @@ type IAMMultiMediaStream struct {
 var IID_IAMMultiMediaStream = win32.GUID{Data1: 0xbebe595c, Data2: 0x9a6f, Data3: 0x11d0, Data4: [8]byte{0x8f, 0xde, 0x00, 0xc0, 0x4f, 0xd9, 0x18, 0x9d}}
 
 // Initialize dispatches through IAMMultiMediaStream's vtable slot 12.
-func (self *IAMMultiMediaStream) Initialize(StreamType STREAM_TYPE, dwFlags uint32, pFilterGraph *IGraphBuilder) error {
+func (self *IAMMultiMediaStream) Initialize(StreamType STREAM_TYPE, dwFlags AMMSF_MMS_INIT_FLAGS, pFilterGraph *IGraphBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(StreamType), uintptr(dwFlags), uintptr(unsafe.Pointer(pFilterGraph)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -1573,7 +1573,7 @@ func (self *IAMMultiMediaStream) GetFilter(ppFilter **IMediaStreamFilter) error 
 }
 
 // AddMediaStream dispatches through IAMMultiMediaStream's vtable slot 15.
-func (self *IAMMultiMediaStream) AddMediaStream(pStreamObject *systemcom.IUnknown, PurposeId *win32.GUID, dwFlags uint32, ppNewStream **IMediaStream) error {
+func (self *IAMMultiMediaStream) AddMediaStream(pStreamObject *systemcom.IUnknown, PurposeId *win32.GUID, dwFlags AMMSF_MS_FLAGS, ppNewStream **IMediaStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStreamObject)), uintptr(unsafe.Pointer(PurposeId)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppNewStream)))
 	return win32.ErrIfFailed(int32(r1))
 }

@@ -1502,7 +1502,7 @@ type IImePad struct {
 var IID_IImePad = win32.GUID{Data1: 0x5d8e643a, Data2: 0xc3a9, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xef, 0x00, 0x80, 0x5f, 0x0c, 0x8b, 0x6d}}
 
 // Request dispatches through IImePad's vtable slot 3.
-func (self *IImePad) Request(pIImePadApplet *IImePadApplet, reqId int32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
+func (self *IImePad) Request(pIImePadApplet *IImePadApplet, reqId IME_PAD_REQUEST_FLAGS, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIImePadApplet)), uintptr(reqId), uintptr(wParam), uintptr(lParam))
 	return win32.ErrIfFailed(int32(r1))
 }

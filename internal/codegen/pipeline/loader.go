@@ -21,6 +21,11 @@ type Registry struct {
 	TypedefIndex map[string]*win32meta.Typedef
 	// EnumBaseIndex maps "Api.Name" → the enum's Go base type.
 	EnumBaseIndex map[string]string
+	// EnumOwner maps a bare enum name → its owning namespace. A name
+	// declared in more than one namespace maps to "" (ambiguous; callers
+	// skip these). Used to resolve [AssociatedEnum], which names an enum
+	// without qualifying it.
+	EnumOwner map[string]string
 	// StructIndex maps "Api.Name" → the struct definition.
 	StructIndex map[string]*win32meta.Struct
 	// DelegateIndex maps "Api.Name" → the function-pointer definition.
@@ -69,6 +74,7 @@ func LoadAll(dirs ...string) (*Registry, error) {
 		ByNamespace:    make(map[string]*win32meta.NamespaceMeta, len(namespaces)),
 		TypedefIndex:   map[string]*win32meta.Typedef{},
 		EnumBaseIndex:  map[string]string{},
+		EnumOwner:      map[string]string{},
 		StructIndex:    map[string]*win32meta.Struct{},
 		DelegateIndex:  map[string]*win32meta.FuncPointer{},
 		InterfaceIndex: map[string]*win32meta.ComInterface{},
@@ -103,6 +109,11 @@ func LoadAll(dirs ...string) (*Registry, error) {
 		}
 		for name := range meta.Enums {
 			registry.EnumBaseIndex[qualified(meta.Namespace, name)] = meta.Enums[name].BaseType
+			if owner, seen := registry.EnumOwner[name]; seen && owner != meta.Namespace {
+				registry.EnumOwner[name] = "" // ambiguous, whatever the load order
+			} else if !seen {
+				registry.EnumOwner[name] = meta.Namespace
+			}
 		}
 		for name := range meta.Structs {
 			definition := meta.Structs[name]
@@ -156,4 +167,10 @@ func (r *Registry) VtableStartSlot(api, name string) (int, bool) {
 // EnumBase resolves an enum's Go base type, or "".
 func (r *Registry) EnumBase(api, name string) string {
 	return r.EnumBaseIndex[qualified(api, name)]
+}
+
+// EnumNamespace resolves an unqualified enum name to its owning namespace,
+// or "" when it is unknown or declared in more than one.
+func (r *Registry) EnumNamespace(name string) string {
+	return r.EnumOwner[name]
 }

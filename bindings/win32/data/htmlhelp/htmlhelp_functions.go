@@ -35,7 +35,7 @@ var Procs = struct {
 
 // HtmlHelp calls hhctrl.ocx!HtmlHelpW.
 // https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw
-func HtmlHelp(hwndCaller foundation.HWND, pszFile string, uCommand uint32, dwData uintptr) foundation.HWND {
+func HtmlHelp(hwndCaller foundation.HWND, pszFile string, uCommand HTML_HELP_COMMAND, dwData uintptr) foundation.HWND {
 	_pszFile := win32.UTF16Ptr(pszFile)
 	r1, _, _ := syscall.SyscallN(procHtmlHelp.Addr(), uintptr(hwndCaller), uintptr(unsafe.Pointer(_pszFile)), uintptr(uCommand), uintptr(dwData))
 	return foundation.HWND(r1)
@@ -43,7 +43,7 @@ func HtmlHelp(hwndCaller foundation.HWND, pszFile string, uCommand uint32, dwDat
 
 // HtmlHelpA calls hhctrl.ocx!HtmlHelpA.
 // https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa
-func HtmlHelpA(hwndCaller foundation.HWND, pszFile foundation.PSTR, uCommand uint32, dwData uintptr) foundation.HWND {
+func HtmlHelpA(hwndCaller foundation.HWND, pszFile foundation.PSTR, uCommand HTML_HELP_COMMAND, dwData uintptr) foundation.HWND {
 	r1, _, _ := syscall.SyscallN(procHtmlHelpA.Addr(), uintptr(hwndCaller), uintptr(unsafe.Pointer(pszFile)), uintptr(uCommand), uintptr(dwData))
 	return foundation.HWND(r1)
 }

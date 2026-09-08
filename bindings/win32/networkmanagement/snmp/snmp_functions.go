@@ -774,7 +774,7 @@ func SnmpSvcSetLogLevel(nLogLevel SNMP_LOG) {
 // SnmpSvcSetLogType calls snmpapi!SnmpSvcSetLogType.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmpsvcsetlogtype
 // Minimum OS: windows5.0.
-func SnmpSvcSetLogType(nLogType int32) {
+func SnmpSvcSetLogType(nLogType SNMP_OUTPUT_LOG_TYPE) {
 	syscall.SyscallN(procSnmpSvcSetLogType.Addr(), uintptr(nLogType))
 }
 

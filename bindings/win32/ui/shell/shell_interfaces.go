@@ -5914,13 +5914,13 @@ func (self *IFolderView) Item(iItemIndex int32, ppidl **uishellcommon.ITEMIDLIST
 }
 
 // ItemCount dispatches through IFolderView's vtable slot 7.
-func (self *IFolderView) ItemCount(uFlags uint32, pcItems *int32) error {
+func (self *IFolderView) ItemCount(uFlags SVGIO, pcItems *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(uFlags), uintptr(unsafe.Pointer(pcItems)))
 	return win32.ErrIfFailed(int32(r1))
 }
 
 // Items dispatches through IFolderView's vtable slot 8.
-func (self *IFolderView) Items(uFlags uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
+func (self *IFolderView) Items(uFlags SVGIO, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -9060,7 +9060,7 @@ type IQueryInfo struct {
 var IID_IQueryInfo = win32.GUID{Data1: 0x00021500, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // GetInfoTip dispatches through IQueryInfo's vtable slot 3.
-func (self *IQueryInfo) GetInfoTip(dwFlags uint32, ppwszTip *foundation.PWSTR) error {
+func (self *IQueryInfo) GetInfoTip(dwFlags QITIPF_FLAGS, ppwszTip *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppwszTip)))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -10474,7 +10474,7 @@ func (self *IShellFolderView) SetCallback(pNewCB *IShellFolderViewCB, ppOldCB **
 }
 
 // Select dispatches through IShellFolderView's vtable slot 28.
-func (self *IShellFolderView) Select(dwFlags uint32) error {
+func (self *IShellFolderView) Select(dwFlags SFVS_SELECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -10501,7 +10501,7 @@ type IShellFolderViewCB struct {
 var IID_IShellFolderViewCB = win32.GUID{Data1: 0x2047e320, Data2: 0xf2a9, Data3: 0x11ce, Data4: [8]byte{0xae, 0x65, 0x08, 0x00, 0x2b, 0x2e, 0x12, 0x62}}
 
 // MessageSFVCB dispatches through IShellFolderViewCB's vtable slot 3.
-func (self *IShellFolderViewCB) MessageSFVCB(uMsg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
+func (self *IShellFolderViewCB) MessageSFVCB(uMsg SFVM_MESSAGE_ID, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(uMsg), uintptr(wParam), uintptr(lParam))
 	return win32.ErrIfFailed(int32(r1))
 }
@@ -12915,7 +12915,7 @@ func (self *IShellView) SelectItem(pidlItem *uishellcommon.ITEMIDLIST, uFlags ui
 }
 
 // GetItemObject dispatches through IShellView's vtable slot 15.
-func (self *IShellView) GetItemObject(uItem uint32, riid *win32.GUID, ppv **win32.IUnknown) error {
+func (self *IShellView) GetItemObject(uItem SVGIO, riid *win32.GUID, ppv **win32.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(uItem), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.ErrIfFailed(int32(r1))
 }

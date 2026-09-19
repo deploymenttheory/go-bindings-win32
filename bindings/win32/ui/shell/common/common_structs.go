@@ -5,6 +5,8 @@
 package common
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -36,9 +38,25 @@ type SHITEMID struct {
 }
 
 // STRRET_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STRRET_Anonymous_e__Union struct {
 	Data [33]uint64
+}
+
+// POleStr reinterprets the union as its pOleStr member.
+func (u *STRRET_Anonymous_e__Union) POleStr() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// UOffset reinterprets the union as its uOffset member.
+func (u *STRRET_Anonymous_e__Union) UOffset() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// CStr reinterprets the union as its cStr member.
+func (u *STRRET_Anonymous_e__Union) CStr() *[260]byte {
+	return (*[260]byte)(unsafe.Pointer(u))
 }
 
 // STRRET: https://learn.microsoft.com/windows/win32/api/shtypes/ns-shtypes-strret

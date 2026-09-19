@@ -26,9 +26,20 @@ type AALUSER_PARAMETERS struct {
 }
 
 // AAL_PARAMETERS_IE_AALSpecificParameters_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AAL_PARAMETERS_IE_AALSpecificParameters_e__Union struct {
 	Data [3]uint32
+}
+
+// AAL5Parameters reinterprets the union as its AAL5Parameters member.
+func (u *AAL_PARAMETERS_IE_AALSpecificParameters_e__Union) AAL5Parameters() *AAL5_PARAMETERS {
+	return (*AAL5_PARAMETERS)(unsafe.Pointer(u))
+}
+
+// AALUserParameters reinterprets the union as its AALUserParameters member.
+func (u *AAL_PARAMETERS_IE_AALSpecificParameters_e__Union) AALUserParameters() *AALUSER_PARAMETERS {
+	return (*AALUSER_PARAMETERS)(unsafe.Pointer(u))
 }
 
 type AAL_PARAMETERS_IE struct {
@@ -228,9 +239,20 @@ type ADDRINFOW struct {
 }
 
 // ADDRINFO_DNS_SERVER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ADDRINFO_DNS_SERVER_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Ai_template reinterprets the union as its ai_template member.
+func (u *ADDRINFO_DNS_SERVER_Anonymous_e__Union) Ai_template() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// Ai_hostname reinterprets the union as its ai_hostname member.
+func (u *ADDRINFO_DNS_SERVER_Anonymous_e__Union) Ai_hostname() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // ADDRINFO_DNS_SERVER: https://learn.microsoft.com/windows/win32/api/ws2def/ns-ws2def-addrinfo_dns_server
@@ -378,39 +400,144 @@ type CSADDR_INFO struct {
 }
 
 // DL_EI48 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DL_EI48 struct {
 	Data [3]byte
 }
 
+// Byte reinterprets the union as its Byte member.
+func (u *DL_EI48) Byte() *[3]byte {
+	return (*[3]byte)(unsafe.Pointer(u))
+}
+
 // DL_EI64 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DL_EI64 struct {
 	Data [5]byte
 }
 
+// Byte reinterprets the union as its Byte member.
+func (u *DL_EI64) Byte() *[5]byte {
+	return (*[5]byte)(unsafe.Pointer(u))
+}
+
+type DL_EUI48_Anonymous_e__Struct struct {
+	Oui  DL_OUI
+	Ei48 DL_EI48
+}
+
 // DL_EUI48 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DL_EUI48 struct {
 	Data [6]byte
 }
 
+// Byte reinterprets the union as its Byte member.
+func (u *DL_EUI48) Byte() *[6]byte {
+	return (*[6]byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DL_EUI48) Anonymous() *DL_EUI48_Anonymous_e__Struct {
+	return (*DL_EUI48_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Type byte
+	Tse  byte
+	Ei48 DL_EI48
+}
+
+// DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union struct {
+	Data [5]byte
+}
+
+// Ei64 reinterprets the union as its Ei64 member.
+func (u *DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union) Ei64() *DL_EI64 {
+	return (*DL_EI64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union) Anonymous() *DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type DL_EUI64_Anonymous_e__Struct struct {
+	Oui       DL_OUI
+	Anonymous DL_EUI64_Anonymous_e__Struct_Anonymous_e__Union
+}
+
 // DL_EUI64 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DL_EUI64 struct {
 	Data [1]uint64
 }
 
+// Byte reinterprets the union as its Byte member.
+func (u *DL_EUI64) Byte() *[8]byte {
+	return (*[8]byte)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *DL_EUI64) Value() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DL_EUI64) Anonymous() *DL_EUI64_Anonymous_e__Struct {
+	return (*DL_EUI64_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type DL_OUI_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // DL_OUI is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DL_OUI struct {
 	Data [3]byte
 }
 
+// Byte reinterprets the union as its Byte member.
+func (u *DL_OUI) Byte() *[3]byte {
+	return (*[3]byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DL_OUI) Anonymous() *DL_OUI_Anonymous_e__Struct {
+	return (*DL_OUI_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// DL_TEREDO_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DL_TEREDO_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Data [8]byte
+}
+
 // DL_TEREDO_ADDRESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DL_TEREDO_ADDRESS_Anonymous_e__Union struct {
 	Data [8]byte
+}
+
+// Eui64 reinterprets the union as its Eui64 member.
+func (u *DL_TEREDO_ADDRESS_Anonymous_e__Union) Eui64() *DL_EUI64 {
+	return (*DL_EUI64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DL_TEREDO_ADDRESS_Anonymous_e__Union) Anonymous() *DL_TEREDO_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DL_TEREDO_ADDRESS_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type DL_TEREDO_ADDRESS struct {
@@ -418,10 +545,28 @@ type DL_TEREDO_ADDRESS struct {
 	Anonymous DL_TEREDO_ADDRESS_Anonymous_e__Union
 }
 
+// DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Data [24]byte
+}
+
 // DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union struct {
 	Data [24]byte
+}
+
+// Eui64 reinterprets the union as its Eui64 member.
+func (u *DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union) Eui64() *DL_EUI64 {
+	return (*DL_EUI64)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union) Anonymous() *DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DL_TEREDO_ADDRESS_PRV_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type DL_TEREDO_ADDRESS_PRV struct {
@@ -436,9 +581,20 @@ type DL_TUNNEL_ADDRESS struct {
 }
 
 // ETHERNET_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ETHERNET_HEADER_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Type reinterprets the union as its Type member.
+func (u *ETHERNET_HEADER_Anonymous_e__Union) Type() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Length reinterprets the union as its Length member.
+func (u *ETHERNET_HEADER_Anonymous_e__Union) Length() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type ETHERNET_HEADER struct {
@@ -536,9 +692,25 @@ type ICMP_HEADER struct {
 }
 
 // ICMP_MESSAGE_Data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ICMP_MESSAGE_Data_e__Union struct {
 	Data [1]uint32
+}
+
+// Data32 reinterprets the union as its Data32 member.
+func (u *ICMP_MESSAGE_Data_e__Union) Data32() *[1]uint32 {
+	return (*[1]uint32)(unsafe.Pointer(u))
+}
+
+// Data16 reinterprets the union as its Data16 member.
+func (u *ICMP_MESSAGE_Data_e__Union) Data16() *[2]uint16 {
+	return (*[2]uint16)(unsafe.Pointer(u))
+}
+
+// Data8 reinterprets the union as its Data8 member.
+func (u *ICMP_MESSAGE_Data_e__Union) Data8() *[4]byte {
+	return (*[4]byte)(unsafe.Pointer(u))
 }
 
 type ICMP_MESSAGE struct {
@@ -546,16 +718,46 @@ type ICMP_MESSAGE struct {
 	Data   ICMP_MESSAGE_Data_e__Union
 }
 
+type IGMPV3_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // IGMPV3_QUERY_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IGMPV3_QUERY_HEADER_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
+// MaxRespCode reinterprets the union as its MaxRespCode member.
+func (u *IGMPV3_QUERY_HEADER_Anonymous1_e__Union) MaxRespCode() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IGMPV3_QUERY_HEADER_Anonymous1_e__Union) Anonymous() *IGMPV3_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*IGMPV3_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type IGMPV3_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // IGMPV3_QUERY_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IGMPV3_QUERY_HEADER_Anonymous2_e__Union struct {
 	Data [1]byte
+}
+
+// QueriersQueryInterfaceCode reinterprets the union as its QueriersQueryInterfaceCode member.
+func (u *IGMPV3_QUERY_HEADER_Anonymous2_e__Union) QueriersQueryInterfaceCode() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IGMPV3_QUERY_HEADER_Anonymous2_e__Union) Anonymous() *IGMPV3_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*IGMPV3_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IGMPV3_QUERY_HEADER struct {
@@ -583,16 +785,47 @@ type IGMPV3_REPORT_RECORD_HEADER struct {
 	MulticastAddress    IN_ADDR
 }
 
+type IGMP_HEADER_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // IGMP_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IGMP_HEADER_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IGMP_HEADER_Anonymous1_e__Union) Anonymous() *IGMP_HEADER_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*IGMP_HEADER_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// VersionType reinterprets the union as its VersionType member.
+func (u *IGMP_HEADER_Anonymous1_e__Union) VersionType() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
 // IGMP_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IGMP_HEADER_Anonymous2_e__Union struct {
 	Data [1]byte
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *IGMP_HEADER_Anonymous2_e__Union) Reserved() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// MaxRespTime reinterprets the union as its MaxRespTime member.
+func (u *IGMP_HEADER_Anonymous2_e__Union) MaxRespTime() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Code reinterprets the union as its Code member.
+func (u *IGMP_HEADER_Anonymous2_e__Union) Code() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type IGMP_HEADER struct {
@@ -603,9 +836,20 @@ type IGMP_HEADER struct {
 }
 
 // IN6_ADDR_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IN6_ADDR_u_e__Union struct {
 	Data [8]uint16
+}
+
+// Byte reinterprets the union as its Byte member.
+func (u *IN6_ADDR_u_e__Union) Byte() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
+// Word reinterprets the union as its Word member.
+func (u *IN6_ADDR_u_e__Union) Word() *[8]uint16 {
+	return (*[8]uint16)(unsafe.Pointer(u))
 }
 
 // IN6_ADDR: https://learn.microsoft.com/windows/win32/api/in6addr/ns-in6addr-in6_addr
@@ -661,10 +905,38 @@ type INTERFACE_INFO_EX struct {
 	IiNetmask          SOCKET_ADDRESS
 }
 
+type IN_ADDR_S_un_e__Union_S_un_b_e__Struct struct {
+	S_b1 byte
+	S_b2 byte
+	S_b3 byte
+	S_b4 byte
+}
+
+type IN_ADDR_S_un_e__Union_S_un_w_e__Struct struct {
+	S_w1 uint16
+	S_w2 uint16
+}
+
 // IN_ADDR_S_un_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IN_ADDR_S_un_e__Union struct {
 	Data [1]uint32
+}
+
+// S_un_b reinterprets the union as its S_un_b member.
+func (u *IN_ADDR_S_un_e__Union) S_un_b() *IN_ADDR_S_un_e__Union_S_un_b_e__Struct {
+	return (*IN_ADDR_S_un_e__Union_S_un_b_e__Struct)(unsafe.Pointer(u))
+}
+
+// S_un_w reinterprets the union as its S_un_w member.
+func (u *IN_ADDR_S_un_e__Union) S_un_w() *IN_ADDR_S_un_e__Union_S_un_w_e__Struct {
+	return (*IN_ADDR_S_un_e__Union_S_un_w_e__Struct)(unsafe.Pointer(u))
+}
+
+// S_addr reinterprets the union as its S_addr member.
+func (u *IN_ADDR_S_un_e__Union) S_addr() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // IN_ADDR: https://learn.microsoft.com/windows/win32/api/inaddr/ns-inaddr-in_addr
@@ -697,22 +969,67 @@ type IPTLS_METADATA struct {
 	Data [8]byte
 }
 
+type IPV4_HEADER_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // IPV4_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPV4_HEADER_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
+// VersionAndHeaderLength reinterprets the union as its VersionAndHeaderLength member.
+func (u *IPV4_HEADER_Anonymous1_e__Union) VersionAndHeaderLength() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IPV4_HEADER_Anonymous1_e__Union) Anonymous() *IPV4_HEADER_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*IPV4_HEADER_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type IPV4_HEADER_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // IPV4_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPV4_HEADER_Anonymous2_e__Union struct {
 	Data [1]byte
 }
 
+// TypeOfServiceAndEcnField reinterprets the union as its TypeOfServiceAndEcnField member.
+func (u *IPV4_HEADER_Anonymous2_e__Union) TypeOfServiceAndEcnField() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IPV4_HEADER_Anonymous2_e__Union) Anonymous() *IPV4_HEADER_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*IPV4_HEADER_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type IPV4_HEADER_Anonymous3_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // IPV4_HEADER_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPV4_HEADER_Anonymous3_e__Union struct {
 	Data [1]uint16
+}
+
+// FlagsAndOffset reinterprets the union as its FlagsAndOffset member.
+func (u *IPV4_HEADER_Anonymous3_e__Union) FlagsAndOffset() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IPV4_HEADER_Anonymous3_e__Union) Anonymous() *IPV4_HEADER_Anonymous3_e__Union_Anonymous_e__Struct {
+	return (*IPV4_HEADER_Anonymous3_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IPV4_HEADER struct {
@@ -728,10 +1045,25 @@ type IPV4_HEADER struct {
 	DestinationAddress IN_ADDR
 }
 
+type IPV4_OPTION_HEADER_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // IPV4_OPTION_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPV4_OPTION_HEADER_Anonymous_e__Union struct {
 	Data [1]byte
+}
+
+// OptionType reinterprets the union as its OptionType member.
+func (u *IPV4_OPTION_HEADER_Anonymous_e__Union) OptionType() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IPV4_OPTION_HEADER_Anonymous_e__Union) Anonymous() *IPV4_OPTION_HEADER_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IPV4_OPTION_HEADER_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IPV4_OPTION_HEADER struct {
@@ -744,10 +1076,25 @@ type IPV4_ROUTING_HEADER struct {
 	Pointer      byte
 }
 
+type IPV4_TIMESTAMP_OPTION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // IPV4_TIMESTAMP_OPTION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPV4_TIMESTAMP_OPTION_Anonymous_e__Union struct {
 	Data [1]byte
+}
+
+// FlagsOverflow reinterprets the union as its FlagsOverflow member.
+func (u *IPV4_TIMESTAMP_OPTION_Anonymous_e__Union) FlagsOverflow() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IPV4_TIMESTAMP_OPTION_Anonymous_e__Union) Anonymous() *IPV4_TIMESTAMP_OPTION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IPV4_TIMESTAMP_OPTION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IPV4_TIMESTAMP_OPTION struct {
@@ -761,10 +1108,25 @@ type IPV6_EXTENSION_HEADER struct {
 	Length     byte
 }
 
+type IPV6_FRAGMENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // IPV6_FRAGMENT_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPV6_FRAGMENT_HEADER_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IPV6_FRAGMENT_HEADER_Anonymous_e__Union) Anonymous() *IPV6_FRAGMENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IPV6_FRAGMENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// OffsetAndFlags reinterprets the union as its OffsetAndFlags member.
+func (u *IPV6_FRAGMENT_HEADER_Anonymous_e__Union) OffsetAndFlags() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
 }
 
 type IPV6_FRAGMENT_HEADER struct {
@@ -774,10 +1136,25 @@ type IPV6_FRAGMENT_HEADER struct {
 	Id         uint32
 }
 
+type IPV6_HEADER_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // IPV6_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPV6_HEADER_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// VersionClassFlow reinterprets the union as its VersionClassFlow member.
+func (u *IPV6_HEADER_Anonymous_e__Union) VersionClassFlow() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IPV6_HEADER_Anonymous_e__Union) Anonymous() *IPV6_HEADER_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*IPV6_HEADER_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IPV6_HEADER struct {
@@ -795,10 +1172,26 @@ type IPV6_MREQ struct {
 	Ipv6mr_interface uint32
 }
 
+type IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS_Anonymous_e__Struct struct {
+	Bitfield  byte
+	Reserved2 [3]byte
+}
+
 // IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS) Anonymous() *IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS_Anonymous_e__Struct {
+	return (*IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type IPV6_OPTION_HEADER struct {
@@ -816,10 +1209,25 @@ type IPV6_OPTION_ROUTER_ALERT struct {
 	Value  [2]byte
 }
 
+type IPV6_ROUTER_ADVERTISEMENT_FLAGS_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // IPV6_ROUTER_ADVERTISEMENT_FLAGS is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IPV6_ROUTER_ADVERTISEMENT_FLAGS struct {
 	Data [1]byte
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *IPV6_ROUTER_ADVERTISEMENT_FLAGS) Anonymous() *IPV6_ROUTER_ADVERTISEMENT_FLAGS_Anonymous_e__Struct {
+	return (*IPV6_ROUTER_ADVERTISEMENT_FLAGS_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *IPV6_ROUTER_ADVERTISEMENT_FLAGS) Value() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type IPV6_ROUTING_HEADER struct {
@@ -911,16 +1319,46 @@ type LM_IRPARMS struct {
 	NRXPackets    byte
 }
 
+type MLDV2_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // MLDV2_QUERY_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MLDV2_QUERY_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
+// MaxRespCode reinterprets the union as its MaxRespCode member.
+func (u *MLDV2_QUERY_HEADER_Anonymous1_e__Union) MaxRespCode() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MLDV2_QUERY_HEADER_Anonymous1_e__Union) Anonymous() *MLDV2_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*MLDV2_QUERY_HEADER_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+type MLDV2_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Bitfield byte
+}
+
 // MLDV2_QUERY_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MLDV2_QUERY_HEADER_Anonymous2_e__Union struct {
 	Data [1]byte
+}
+
+// QueriersQueryInterfaceCode reinterprets the union as its QueriersQueryInterfaceCode member.
+func (u *MLDV2_QUERY_HEADER_Anonymous2_e__Union) QueriersQueryInterfaceCode() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *MLDV2_QUERY_HEADER_Anonymous2_e__Union) Anonymous() *MLDV2_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*MLDV2_QUERY_HEADER_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type MLDV2_QUERY_HEADER struct {
@@ -999,10 +1437,25 @@ type ND_OPTION_MTU struct {
 	Nd_opt_mtu_mtu      uint32
 }
 
+type ND_OPTION_PREF64_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // ND_OPTION_PREF64_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ND_OPTION_PREF64_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Nd_opt_p64_lifetime_plc reinterprets the union as its nd_opt_p64_lifetime_plc member.
+func (u *ND_OPTION_PREF64_Anonymous_e__Union) Nd_opt_p64_lifetime_plc() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *ND_OPTION_PREF64_Anonymous_e__Union) Anonymous() *ND_OPTION_PREF64_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*ND_OPTION_PREF64_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type ND_OPTION_PREF64 struct {
@@ -1012,16 +1465,47 @@ type ND_OPTION_PREF64 struct {
 	Nd_opt_p64_prefix [12]byte
 }
 
+type ND_OPTION_PREFIX_INFO_Anonymous1_e__Union_Flags_e__Struct struct {
+	Bitfield byte
+}
+
 // ND_OPTION_PREFIX_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ND_OPTION_PREFIX_INFO_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
+// Nd_opt_pi_flags_reserved reinterprets the union as its nd_opt_pi_flags_reserved member.
+func (u *ND_OPTION_PREFIX_INFO_Anonymous1_e__Union) Nd_opt_pi_flags_reserved() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *ND_OPTION_PREFIX_INFO_Anonymous1_e__Union) Flags() *ND_OPTION_PREFIX_INFO_Anonymous1_e__Union_Flags_e__Struct {
+	return (*ND_OPTION_PREFIX_INFO_Anonymous1_e__Union_Flags_e__Struct)(unsafe.Pointer(u))
+}
+
+type ND_OPTION_PREFIX_INFO_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Nd_opt_pi_reserved3       [3]byte
+	Nd_opt_pi_site_prefix_len byte
+}
+
 // ND_OPTION_PREFIX_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ND_OPTION_PREFIX_INFO_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// Nd_opt_pi_reserved2 reinterprets the union as its nd_opt_pi_reserved2 member.
+func (u *ND_OPTION_PREFIX_INFO_Anonymous2_e__Union) Nd_opt_pi_reserved2() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *ND_OPTION_PREFIX_INFO_Anonymous2_e__Union) Anonymous() *ND_OPTION_PREFIX_INFO_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*ND_OPTION_PREFIX_INFO_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type ND_OPTION_PREFIX_INFO struct {
@@ -1049,10 +1533,25 @@ type ND_OPTION_RD_HDR struct {
 	Nd_opt_rh_reserved2 uint32
 }
 
+type ND_OPTION_ROUTE_INFO_Anonymous_e__Union_Flags_e__Struct struct {
+	Bitfield byte
+}
+
 // ND_OPTION_ROUTE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ND_OPTION_ROUTE_INFO_Anonymous_e__Union struct {
 	Data [1]byte
+}
+
+// Nd_opt_ri_flags_reserved reinterprets the union as its nd_opt_ri_flags_reserved member.
+func (u *ND_OPTION_ROUTE_INFO_Anonymous_e__Union) Nd_opt_ri_flags_reserved() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *ND_OPTION_ROUTE_INFO_Anonymous_e__Union) Flags() *ND_OPTION_ROUTE_INFO_Anonymous_e__Union_Flags_e__Struct {
+	return (*ND_OPTION_ROUTE_INFO_Anonymous_e__Union_Flags_e__Struct)(unsafe.Pointer(u))
 }
 
 type ND_OPTION_ROUTE_INFO struct {
@@ -1108,10 +1607,63 @@ type NETRESOURCE2W struct {
 	LpiProtocols  *int32
 }
 
+type NLA_BLOB_data_e__Union_ICS_e__Struct_remote_e__Struct struct {
+	Speed             uint32
+	Type              uint32
+	State             uint32
+	MachineName       [256]uint16
+	SharedAdapterName [256]uint16
+}
+
+type NLA_BLOB_data_e__Union_ICS_e__Struct struct {
+	Remote NLA_BLOB_data_e__Union_ICS_e__Struct_remote_e__Struct
+}
+
+type NLA_BLOB_data_e__Union_connectivity_e__Struct struct {
+	Type     NLA_CONNECTIVITY_TYPE
+	Internet NLA_INTERNET
+}
+
+type NLA_BLOB_data_e__Union_interfaceData_e__Struct struct {
+	DwType      uint32
+	DwSpeed     uint32
+	AdapterName [1]foundation.CHAR
+}
+
+type NLA_BLOB_data_e__Union_locationData_e__Struct struct {
+	Information [1]foundation.CHAR
+}
+
 // NLA_BLOB_data_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NLA_BLOB_data_e__Union struct {
 	Data [259]uint32
+}
+
+// RawData reinterprets the union as its rawData member.
+func (u *NLA_BLOB_data_e__Union) RawData() *[1]foundation.CHAR {
+	return (*[1]foundation.CHAR)(unsafe.Pointer(u))
+}
+
+// InterfaceData reinterprets the union as its interfaceData member.
+func (u *NLA_BLOB_data_e__Union) InterfaceData() *NLA_BLOB_data_e__Union_interfaceData_e__Struct {
+	return (*NLA_BLOB_data_e__Union_interfaceData_e__Struct)(unsafe.Pointer(u))
+}
+
+// LocationData reinterprets the union as its locationData member.
+func (u *NLA_BLOB_data_e__Union) LocationData() *NLA_BLOB_data_e__Union_locationData_e__Struct {
+	return (*NLA_BLOB_data_e__Union_locationData_e__Struct)(unsafe.Pointer(u))
+}
+
+// Connectivity reinterprets the union as its connectivity member.
+func (u *NLA_BLOB_data_e__Union) Connectivity() *NLA_BLOB_data_e__Union_connectivity_e__Struct {
+	return (*NLA_BLOB_data_e__Union_connectivity_e__Struct)(unsafe.Pointer(u))
+}
+
+// ICS reinterprets the union as its ICS member.
+func (u *NLA_BLOB_data_e__Union) ICS() *NLA_BLOB_data_e__Union_ICS_e__Struct {
+	return (*NLA_BLOB_data_e__Union_ICS_e__Struct)(unsafe.Pointer(u))
 }
 
 type NLA_BLOB_header_e__Struct struct {
@@ -1153,9 +1705,20 @@ type NL_PATH_BANDWIDTH_ROD struct {
 }
 
 // NPI_MODULEID_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NPI_MODULEID_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Guid reinterprets the union as its Guid member.
+func (u *NPI_MODULEID_Anonymous_e__Union) Guid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// IfLuid reinterprets the union as its IfLuid member.
+func (u *NPI_MODULEID_Anonymous_e__Union) IfLuid() *foundation.LUID {
+	return (*foundation.LUID)(unsafe.Pointer(u))
 }
 
 type NPI_MODULEID struct {
@@ -1326,10 +1889,32 @@ type RIO_EXTENSION_FUNCTION_TABLE struct {
 	RIOResizeRequestQueue    LPFN_RIORESIZEREQUESTQUEUE
 }
 
+type RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Event_e__Struct struct {
+	EventHandle foundation.HANDLE
+	NotifyReset foundation.BOOL
+}
+
+type RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Iocp_e__Struct struct {
+	IocpHandle    foundation.HANDLE
+	CompletionKey unsafe.Pointer
+	Overlapped    unsafe.Pointer
+}
+
 // RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// Event reinterprets the union as its Event member.
+func (u *RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union) Event() *RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Event_e__Struct {
+	return (*RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Event_e__Struct)(unsafe.Pointer(u))
+}
+
+// Iocp reinterprets the union as its Iocp member.
+func (u *RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union) Iocp() *RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Iocp_e__Struct {
+	return (*RIO_NOTIFICATION_COMPLETION_Anonymous_e__Union_Iocp_e__Struct)(unsafe.Pointer(u))
 }
 
 // RIO_NOTIFICATION_COMPLETION: https://learn.microsoft.com/windows/win32/api/mswsock/ns-mswsock-rio_notification_completion
@@ -1396,10 +1981,25 @@ type RSS_SCALABILITY_INFO struct {
 	RssEnabled foundation.BOOLEAN
 }
 
+type SCOPE_ID_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // SCOPE_ID_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SCOPE_ID_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *SCOPE_ID_Anonymous_e__Union) Anonymous() *SCOPE_ID_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*SCOPE_ID_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Value reinterprets the union as its Value member.
+func (u *SCOPE_ID_Anonymous_e__Union) Value() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type SCOPE_ID struct {
@@ -1546,9 +2146,20 @@ type SOCKADDR_IN struct {
 }
 
 // SOCKADDR_IN6_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SOCKADDR_IN6_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Sin6_scope_id reinterprets the union as its sin6_scope_id member.
+func (u *SOCKADDR_IN6_Anonymous_e__Union) Sin6_scope_id() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Sin6_scope_struct reinterprets the union as its sin6_scope_struct member.
+func (u *SOCKADDR_IN6_Anonymous_e__Union) Sin6_scope_struct() *SCOPE_ID {
+	return (*SCOPE_ID)(unsafe.Pointer(u))
 }
 
 type SOCKADDR_IN6 struct {
@@ -1576,9 +2187,25 @@ type SOCKADDR_IN6_W2KSP1 struct {
 
 // SOCKADDR_INET: https://learn.microsoft.com/windows/win32/api/ws2ipdef/ns-ws2ipdef-sockaddr_inet
 // SOCKADDR_INET is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SOCKADDR_INET struct {
 	Data [7]uint32
+}
+
+// Ipv4 reinterprets the union as its Ipv4 member.
+func (u *SOCKADDR_INET) Ipv4() *SOCKADDR_IN {
+	return (*SOCKADDR_IN)(unsafe.Pointer(u))
+}
+
+// Ipv6 reinterprets the union as its Ipv6 member.
+func (u *SOCKADDR_INET) Ipv6() *SOCKADDR_IN6 {
+	return (*SOCKADDR_IN6)(unsafe.Pointer(u))
+}
+
+// Si_family reinterprets the union as its si_family member.
+func (u *SOCKADDR_INET) Si_family() *ADDRESS_FAMILY {
+	return (*ADDRESS_FAMILY)(unsafe.Pointer(u))
 }
 
 type SOCKADDR_IPX struct {
@@ -1910,10 +2537,26 @@ type TRANSMIT_FILE_BUFFERS struct {
 	TailLength uint32
 }
 
+type TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union_Anonymous_e__Struct struct {
+	NFileOffset int64
+	HFile       foundation.HANDLE
+}
+
 // TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union) Anonymous() *TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// PBuffer reinterprets the union as its pBuffer member.
+func (u *TRANSMIT_PACKETS_ELEMENT_Anonymous_e__Union) PBuffer() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 // TRANSMIT_PACKETS_ELEMENT: https://learn.microsoft.com/windows/win32/api/mswsock/ns-mswsock-transmit_packets_element
@@ -1928,10 +2571,25 @@ type TRANSPORT_SETTING_ID struct {
 	Guid win32.GUID
 }
 
+type VLAN_TAG_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint16
+}
+
 // VLAN_TAG_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VLAN_TAG_Anonymous_e__Union struct {
 	Data [1]uint16
+}
+
+// Tag reinterprets the union as its Tag member.
+func (u *VLAN_TAG_Anonymous_e__Union) Tag() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *VLAN_TAG_Anonymous_e__Union) Anonymous() *VLAN_TAG_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*VLAN_TAG_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type VLAN_TAG struct {
@@ -1955,10 +2613,37 @@ type WINDOWS_DEVICELIST struct {
 	Device    [1]WINDOWS_IRDA_DEVICE_INFO
 }
 
+type WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct struct {
+	Len      uint32
+	OctetSeq [1024]byte
+}
+
+type WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct struct {
+	Len     uint32
+	CharSet uint32
+	UsrStr  [256]byte
+}
+
 // WINDOWS_IAS_QUERY_irdaAttribute_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINDOWS_IAS_QUERY_irdaAttribute_e__Union struct {
 	Data [257]uint32
+}
+
+// IrdaAttribInt reinterprets the union as its irdaAttribInt member.
+func (u *WINDOWS_IAS_QUERY_irdaAttribute_e__Union) IrdaAttribInt() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// IrdaAttribOctetSeq reinterprets the union as its irdaAttribOctetSeq member.
+func (u *WINDOWS_IAS_QUERY_irdaAttribute_e__Union) IrdaAttribOctetSeq() *WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct {
+	return (*WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct)(unsafe.Pointer(u))
+}
+
+// IrdaAttribUsrStr reinterprets the union as its irdaAttribUsrStr member.
+func (u *WINDOWS_IAS_QUERY_irdaAttribute_e__Union) IrdaAttribUsrStr() *WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct {
+	return (*WINDOWS_IAS_QUERY_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct)(unsafe.Pointer(u))
 }
 
 type WINDOWS_IAS_QUERY struct {
@@ -1969,10 +2654,37 @@ type WINDOWS_IAS_QUERY struct {
 	IrdaAttribute  WINDOWS_IAS_QUERY_irdaAttribute_e__Union
 }
 
+type WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct struct {
+	Len      uint16
+	OctetSeq [1024]byte
+}
+
+type WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct struct {
+	Len     byte
+	CharSet byte
+	UsrStr  [256]byte
+}
+
 // WINDOWS_IAS_SET_irdaAttribute_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WINDOWS_IAS_SET_irdaAttribute_e__Union struct {
 	Data [257]uint32
+}
+
+// IrdaAttribInt reinterprets the union as its irdaAttribInt member.
+func (u *WINDOWS_IAS_SET_irdaAttribute_e__Union) IrdaAttribInt() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// IrdaAttribOctetSeq reinterprets the union as its irdaAttribOctetSeq member.
+func (u *WINDOWS_IAS_SET_irdaAttribute_e__Union) IrdaAttribOctetSeq() *WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct {
+	return (*WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribOctetSeq_e__Struct)(unsafe.Pointer(u))
+}
+
+// IrdaAttribUsrStr reinterprets the union as its irdaAttribUsrStr member.
+func (u *WINDOWS_IAS_SET_irdaAttribute_e__Union) IrdaAttribUsrStr() *WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct {
+	return (*WINDOWS_IAS_SET_irdaAttribute_e__Union_irdaAttribUsrStr_e__Struct)(unsafe.Pointer(u))
 }
 
 type WINDOWS_IAS_SET struct {
@@ -1996,10 +2708,52 @@ type WSABUF struct {
 	Buf foundation.PSTR
 }
 
+type WSACOMPLETION_Parameters_e__Union_Apc_e__Struct struct {
+	LpOverlapped       *systemio.OVERLAPPED
+	LpfnCompletionProc LPWSAOVERLAPPED_COMPLETION_ROUTINE
+}
+
+type WSACOMPLETION_Parameters_e__Union_Event_e__Struct struct {
+	LpOverlapped *systemio.OVERLAPPED
+}
+
+type WSACOMPLETION_Parameters_e__Union_Port_e__Struct struct {
+	LpOverlapped *systemio.OVERLAPPED
+	HPort        foundation.HANDLE
+	Key          uintptr
+}
+
+type WSACOMPLETION_Parameters_e__Union_WindowMessage_e__Struct struct {
+	HWnd    foundation.HWND
+	UMsg    uint32
+	Context foundation.WPARAM
+}
+
 // WSACOMPLETION_Parameters_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WSACOMPLETION_Parameters_e__Union struct {
 	Data [3]uint64
+}
+
+// WindowMessage reinterprets the union as its WindowMessage member.
+func (u *WSACOMPLETION_Parameters_e__Union) WindowMessage() *WSACOMPLETION_Parameters_e__Union_WindowMessage_e__Struct {
+	return (*WSACOMPLETION_Parameters_e__Union_WindowMessage_e__Struct)(unsafe.Pointer(u))
+}
+
+// Event reinterprets the union as its Event member.
+func (u *WSACOMPLETION_Parameters_e__Union) Event() *WSACOMPLETION_Parameters_e__Union_Event_e__Struct {
+	return (*WSACOMPLETION_Parameters_e__Union_Event_e__Struct)(unsafe.Pointer(u))
+}
+
+// Apc reinterprets the union as its Apc member.
+func (u *WSACOMPLETION_Parameters_e__Union) Apc() *WSACOMPLETION_Parameters_e__Union_Apc_e__Struct {
+	return (*WSACOMPLETION_Parameters_e__Union_Apc_e__Struct)(unsafe.Pointer(u))
+}
+
+// Port reinterprets the union as its Port member.
+func (u *WSACOMPLETION_Parameters_e__Union) Port() *WSACOMPLETION_Parameters_e__Union_Port_e__Struct {
+	return (*WSACOMPLETION_Parameters_e__Union_Port_e__Struct)(unsafe.Pointer(u))
 }
 
 // WSACOMPLETION: https://learn.microsoft.com/windows/win32/api/winsock2/ns-winsock2-wsacompletion
@@ -2349,9 +3103,25 @@ type Netent struct {
 
 // Sockaddr_gen: https://learn.microsoft.com/windows/win32/api/ws2ipdef/ns-ws2ipdef-sockaddr_gen
 // Sockaddr_gen is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type Sockaddr_gen struct {
 	Data [6]uint32
+}
+
+// Address reinterprets the union as its Address member.
+func (u *Sockaddr_gen) Address() *SOCKADDR {
+	return (*SOCKADDR)(unsafe.Pointer(u))
+}
+
+// AddressIn reinterprets the union as its AddressIn member.
+func (u *Sockaddr_gen) AddressIn() *SOCKADDR_IN {
+	return (*SOCKADDR_IN)(unsafe.Pointer(u))
+}
+
+// AddressIn6 reinterprets the union as its AddressIn6 member.
+func (u *Sockaddr_gen) AddressIn6() *Sockaddr_in6_old {
+	return (*Sockaddr_in6_old)(unsafe.Pointer(u))
 }
 
 // Sockaddr_in6_old: https://learn.microsoft.com/windows/win32/api/ws2ipdef/ns-ws2ipdef-sockaddr_in6_old

@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	networkingwinsock "github.com/deploymenttheory/go-bindings-win32/bindings/win32/networking/winsock"
 	securitycryptography "github.com/deploymenttheory/go-bindings-win32/bindings/win32/security/cryptography"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 // DRT_ADDRESS: https://learn.microsoft.com/windows/win32/api/drt/ns-drt-drt_address
@@ -45,10 +46,47 @@ type DRT_DATA struct {
 	Pb *byte
 }
 
+type DRT_EVENT_DATA_Anonymous_e__Union_leafsetKeyChange_e__Struct struct {
+	Change    DRT_LEAFSET_KEY_CHANGE_TYPE
+	LocalKey  DRT_DATA
+	RemoteKey DRT_DATA
+}
+
+type DRT_EVENT_DATA_Anonymous_e__Union_registrationStateChange_e__Struct struct {
+	State    DRT_REGISTRATION_STATE
+	LocalKey DRT_DATA
+}
+
+type DRT_EVENT_DATA_Anonymous_e__Union_statusChange_e__Struct_bootstrapAddresses_e__Struct struct {
+	CntAddress uint32
+	PAddresses *networkingwinsock.SOCKADDR_STORAGE
+}
+
+type DRT_EVENT_DATA_Anonymous_e__Union_statusChange_e__Struct struct {
+	Status             DRT_STATUS
+	BootstrapAddresses DRT_EVENT_DATA_Anonymous_e__Union_statusChange_e__Struct_bootstrapAddresses_e__Struct
+}
+
 // DRT_EVENT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DRT_EVENT_DATA_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// LeafsetKeyChange reinterprets the union as its leafsetKeyChange member.
+func (u *DRT_EVENT_DATA_Anonymous_e__Union) LeafsetKeyChange() *DRT_EVENT_DATA_Anonymous_e__Union_leafsetKeyChange_e__Struct {
+	return (*DRT_EVENT_DATA_Anonymous_e__Union_leafsetKeyChange_e__Struct)(unsafe.Pointer(u))
+}
+
+// RegistrationStateChange reinterprets the union as its registrationStateChange member.
+func (u *DRT_EVENT_DATA_Anonymous_e__Union) RegistrationStateChange() *DRT_EVENT_DATA_Anonymous_e__Union_registrationStateChange_e__Struct {
+	return (*DRT_EVENT_DATA_Anonymous_e__Union_registrationStateChange_e__Struct)(unsafe.Pointer(u))
+}
+
+// StatusChange reinterprets the union as its statusChange member.
+func (u *DRT_EVENT_DATA_Anonymous_e__Union) StatusChange() *DRT_EVENT_DATA_Anonymous_e__Union_statusChange_e__Struct {
+	return (*DRT_EVENT_DATA_Anonymous_e__Union_statusChange_e__Struct)(unsafe.Pointer(u))
 }
 
 // DRT_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/drt/ns-drt-drt_event_data
@@ -177,9 +215,45 @@ type PEER_APP_LAUNCH_INFO struct {
 }
 
 // PEER_COLLAB_EVENT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PEER_COLLAB_EVENT_DATA_Anonymous_e__Union struct {
 	Data [4]uint64
+}
+
+// WatchListChangedData reinterprets the union as its watchListChangedData member.
+func (u *PEER_COLLAB_EVENT_DATA_Anonymous_e__Union) WatchListChangedData() *PEER_EVENT_WATCHLIST_CHANGED_DATA {
+	return (*PEER_EVENT_WATCHLIST_CHANGED_DATA)(unsafe.Pointer(u))
+}
+
+// PresenceChangedData reinterprets the union as its presenceChangedData member.
+func (u *PEER_COLLAB_EVENT_DATA_Anonymous_e__Union) PresenceChangedData() *PEER_EVENT_PRESENCE_CHANGED_DATA {
+	return (*PEER_EVENT_PRESENCE_CHANGED_DATA)(unsafe.Pointer(u))
+}
+
+// ApplicationChangedData reinterprets the union as its applicationChangedData member.
+func (u *PEER_COLLAB_EVENT_DATA_Anonymous_e__Union) ApplicationChangedData() *PEER_EVENT_APPLICATION_CHANGED_DATA {
+	return (*PEER_EVENT_APPLICATION_CHANGED_DATA)(unsafe.Pointer(u))
+}
+
+// ObjectChangedData reinterprets the union as its objectChangedData member.
+func (u *PEER_COLLAB_EVENT_DATA_Anonymous_e__Union) ObjectChangedData() *PEER_EVENT_OBJECT_CHANGED_DATA {
+	return (*PEER_EVENT_OBJECT_CHANGED_DATA)(unsafe.Pointer(u))
+}
+
+// EndpointChangedData reinterprets the union as its endpointChangedData member.
+func (u *PEER_COLLAB_EVENT_DATA_Anonymous_e__Union) EndpointChangedData() *PEER_EVENT_ENDPOINT_CHANGED_DATA {
+	return (*PEER_EVENT_ENDPOINT_CHANGED_DATA)(unsafe.Pointer(u))
+}
+
+// PeopleNearMeChangedData reinterprets the union as its peopleNearMeChangedData member.
+func (u *PEER_COLLAB_EVENT_DATA_Anonymous_e__Union) PeopleNearMeChangedData() *PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA {
+	return (*PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA)(unsafe.Pointer(u))
+}
+
+// RequestStatusChangedData reinterprets the union as its requestStatusChangedData member.
+func (u *PEER_COLLAB_EVENT_DATA_Anonymous_e__Union) RequestStatusChangedData() *PEER_EVENT_REQUEST_STATUS_CHANGED_DATA {
+	return (*PEER_EVENT_REQUEST_STATUS_CHANGED_DATA)(unsafe.Pointer(u))
 }
 
 // PEER_COLLAB_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/p2p/ns-p2p-peer_collab_event_data~r1
@@ -337,9 +411,40 @@ type PEER_EVENT_WATCHLIST_CHANGED_DATA struct {
 }
 
 // PEER_GRAPH_EVENT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PEER_GRAPH_EVENT_DATA_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// DwStatus reinterprets the union as its dwStatus member.
+func (u *PEER_GRAPH_EVENT_DATA_Anonymous_e__Union) DwStatus() *PEER_GRAPH_STATUS_FLAGS {
+	return (*PEER_GRAPH_STATUS_FLAGS)(unsafe.Pointer(u))
+}
+
+// IncomingData reinterprets the union as its incomingData member.
+func (u *PEER_GRAPH_EVENT_DATA_Anonymous_e__Union) IncomingData() *PEER_EVENT_INCOMING_DATA {
+	return (*PEER_EVENT_INCOMING_DATA)(unsafe.Pointer(u))
+}
+
+// RecordChangeData reinterprets the union as its recordChangeData member.
+func (u *PEER_GRAPH_EVENT_DATA_Anonymous_e__Union) RecordChangeData() *PEER_EVENT_RECORD_CHANGE_DATA {
+	return (*PEER_EVENT_RECORD_CHANGE_DATA)(unsafe.Pointer(u))
+}
+
+// ConnectionChangeData reinterprets the union as its connectionChangeData member.
+func (u *PEER_GRAPH_EVENT_DATA_Anonymous_e__Union) ConnectionChangeData() *PEER_EVENT_CONNECTION_CHANGE_DATA {
+	return (*PEER_EVENT_CONNECTION_CHANGE_DATA)(unsafe.Pointer(u))
+}
+
+// NodeChangeData reinterprets the union as its nodeChangeData member.
+func (u *PEER_GRAPH_EVENT_DATA_Anonymous_e__Union) NodeChangeData() *PEER_EVENT_NODE_CHANGE_DATA {
+	return (*PEER_EVENT_NODE_CHANGE_DATA)(unsafe.Pointer(u))
+}
+
+// SynchronizedData reinterprets the union as its synchronizedData member.
+func (u *PEER_GRAPH_EVENT_DATA_Anonymous_e__Union) SynchronizedData() *PEER_EVENT_SYNCHRONIZED_DATA {
+	return (*PEER_EVENT_SYNCHRONIZED_DATA)(unsafe.Pointer(u))
 }
 
 // PEER_GRAPH_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/p2p/ns-p2p-peer_graph_event_data
@@ -369,9 +474,40 @@ type PEER_GRAPH_PROPERTIES struct {
 }
 
 // PEER_GROUP_EVENT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PEER_GROUP_EVENT_DATA_Anonymous_e__Union struct {
 	Data [6]uint64
+}
+
+// DwStatus reinterprets the union as its dwStatus member.
+func (u *PEER_GROUP_EVENT_DATA_Anonymous_e__Union) DwStatus() *PEER_GROUP_STATUS {
+	return (*PEER_GROUP_STATUS)(unsafe.Pointer(u))
+}
+
+// IncomingData reinterprets the union as its incomingData member.
+func (u *PEER_GROUP_EVENT_DATA_Anonymous_e__Union) IncomingData() *PEER_EVENT_INCOMING_DATA {
+	return (*PEER_EVENT_INCOMING_DATA)(unsafe.Pointer(u))
+}
+
+// RecordChangeData reinterprets the union as its recordChangeData member.
+func (u *PEER_GROUP_EVENT_DATA_Anonymous_e__Union) RecordChangeData() *PEER_EVENT_RECORD_CHANGE_DATA {
+	return (*PEER_EVENT_RECORD_CHANGE_DATA)(unsafe.Pointer(u))
+}
+
+// ConnectionChangeData reinterprets the union as its connectionChangeData member.
+func (u *PEER_GROUP_EVENT_DATA_Anonymous_e__Union) ConnectionChangeData() *PEER_EVENT_CONNECTION_CHANGE_DATA {
+	return (*PEER_EVENT_CONNECTION_CHANGE_DATA)(unsafe.Pointer(u))
+}
+
+// MemberChangeData reinterprets the union as its memberChangeData member.
+func (u *PEER_GROUP_EVENT_DATA_Anonymous_e__Union) MemberChangeData() *PEER_EVENT_MEMBER_CHANGE_DATA {
+	return (*PEER_EVENT_MEMBER_CHANGE_DATA)(unsafe.Pointer(u))
+}
+
+// HrConnectionFailedReason reinterprets the union as its hrConnectionFailedReason member.
+func (u *PEER_GROUP_EVENT_DATA_Anonymous_e__Union) HrConnectionFailedReason() *foundation.HRESULT {
+	return (*foundation.HRESULT)(unsafe.Pointer(u))
 }
 
 // PEER_GROUP_EVENT_DATA: https://learn.microsoft.com/windows/win32/api/p2p/ns-p2p-peer_group_event_data~r1
@@ -575,9 +711,20 @@ type PNRPINFO_V1 struct {
 }
 
 // PNRPINFO_V2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PNRPINFO_V2_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// BlobPayload reinterprets the union as its blobPayload member.
+func (u *PNRPINFO_V2_Anonymous_e__Union) BlobPayload() *systemcom.BLOB {
+	return (*systemcom.BLOB)(unsafe.Pointer(u))
+}
+
+// PwszPayload reinterprets the union as its pwszPayload member.
+func (u *PNRPINFO_V2_Anonymous_e__Union) PwszPayload() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // PNRPINFO_V2: https://learn.microsoft.com/windows/win32/api/pnrpns/ns-pnrpns-pnrpinfo_v2

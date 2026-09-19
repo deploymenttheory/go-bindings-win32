@@ -5,6 +5,8 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 )
 
@@ -12,16 +14,48 @@ type APP_LOCAL_DEVICE_ID struct {
 	Value [32]byte
 }
 
+type DECIMAL_Anonymous1_e__Union_Anonymous_e__Struct struct {
+	Scale byte
+	Sign  byte
+}
+
 // DECIMAL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DECIMAL_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DECIMAL_Anonymous1_e__Union) Anonymous() *DECIMAL_Anonymous1_e__Union_Anonymous_e__Struct {
+	return (*DECIMAL_Anonymous1_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Signscale reinterprets the union as its signscale member.
+func (u *DECIMAL_Anonymous1_e__Union) Signscale() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+type DECIMAL_Anonymous2_e__Union_Anonymous_e__Struct struct {
+	Lo32  uint32
+	Mid32 uint32
+}
+
 // DECIMAL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DECIMAL_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DECIMAL_Anonymous2_e__Union) Anonymous() *DECIMAL_Anonymous2_e__Union_Anonymous_e__Struct {
+	return (*DECIMAL_Anonymous2_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Lo64 reinterprets the union as its Lo64 member.
+func (u *DECIMAL_Anonymous2_e__Union) Lo64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // DECIMAL: https://learn.microsoft.com/windows/win32/api/wtypes/ns-wtypes-decimal~r1

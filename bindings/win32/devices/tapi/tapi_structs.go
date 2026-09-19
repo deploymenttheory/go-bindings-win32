@@ -8,6 +8,7 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
 type ADDRALIAS struct {
@@ -442,10 +443,97 @@ type LINETRANSLATEOUTPUT struct {
 	Data [40]byte
 }
 
+type MSP_EVENT_INFO_Anonymous_e__Union_MSP_ADDRESS_EVENT_INFO_e__Struct struct {
+	Type      MSP_ADDRESS_EVENT
+	PTerminal *ITTerminal
+}
+
+type MSP_EVENT_INFO_Anonymous_e__Union_MSP_ASR_TERMINAL_EVENT_INFO_e__Struct struct {
+	PASRTerminal *ITTerminal
+	HrErrorCode  foundation.HRESULT
+}
+
+type MSP_EVENT_INFO_Anonymous_e__Union_MSP_CALL_EVENT_INFO_e__Struct struct {
+	Type      MSP_CALL_EVENT
+	Cause     MSP_CALL_EVENT_CAUSE
+	PStream   *ITStream
+	PTerminal *ITTerminal
+	HrError   foundation.HRESULT
+}
+
+type MSP_EVENT_INFO_Anonymous_e__Union_MSP_FILE_TERMINAL_EVENT_INFO_e__Struct struct {
+	PParentFileTerminal *ITTerminal
+	PFileTrack          *ITFileTrack
+	TerminalMediaState  TERMINAL_MEDIA_STATE
+	FtecEventCause      FT_STATE_EVENT_CAUSE
+	HrErrorCode         foundation.HRESULT
+}
+
+type MSP_EVENT_INFO_Anonymous_e__Union_MSP_PRIVATE_EVENT_INFO_e__Struct struct {
+	PEvent     *systemcom.IDispatch
+	LEventCode int32
+}
+
+type MSP_EVENT_INFO_Anonymous_e__Union_MSP_TONE_TERMINAL_EVENT_INFO_e__Struct struct {
+	PToneTerminal *ITTerminal
+	HrErrorCode   foundation.HRESULT
+}
+
+type MSP_EVENT_INFO_Anonymous_e__Union_MSP_TSP_DATA_e__Struct struct {
+	DwBufferSize uint32
+	PBuffer      [1]byte
+}
+
+type MSP_EVENT_INFO_Anonymous_e__Union_MSP_TTS_TERMINAL_EVENT_INFO_e__Struct struct {
+	PTTSTerminal *ITTerminal
+	HrErrorCode  foundation.HRESULT
+}
+
 // MSP_EVENT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MSP_EVENT_INFO_Anonymous_e__Union struct {
 	Data [4]uint64
+}
+
+// MSP_ADDRESS_EVENT_INFO reinterprets the union as its MSP_ADDRESS_EVENT_INFO member.
+func (u *MSP_EVENT_INFO_Anonymous_e__Union) MSP_ADDRESS_EVENT_INFO() *MSP_EVENT_INFO_Anonymous_e__Union_MSP_ADDRESS_EVENT_INFO_e__Struct {
+	return (*MSP_EVENT_INFO_Anonymous_e__Union_MSP_ADDRESS_EVENT_INFO_e__Struct)(unsafe.Pointer(u))
+}
+
+// MSP_CALL_EVENT_INFO reinterprets the union as its MSP_CALL_EVENT_INFO member.
+func (u *MSP_EVENT_INFO_Anonymous_e__Union) MSP_CALL_EVENT_INFO() *MSP_EVENT_INFO_Anonymous_e__Union_MSP_CALL_EVENT_INFO_e__Struct {
+	return (*MSP_EVENT_INFO_Anonymous_e__Union_MSP_CALL_EVENT_INFO_e__Struct)(unsafe.Pointer(u))
+}
+
+// MSP_TSP_DATA reinterprets the union as its MSP_TSP_DATA member.
+func (u *MSP_EVENT_INFO_Anonymous_e__Union) MSP_TSP_DATA() *MSP_EVENT_INFO_Anonymous_e__Union_MSP_TSP_DATA_e__Struct {
+	return (*MSP_EVENT_INFO_Anonymous_e__Union_MSP_TSP_DATA_e__Struct)(unsafe.Pointer(u))
+}
+
+// MSP_PRIVATE_EVENT_INFO reinterprets the union as its MSP_PRIVATE_EVENT_INFO member.
+func (u *MSP_EVENT_INFO_Anonymous_e__Union) MSP_PRIVATE_EVENT_INFO() *MSP_EVENT_INFO_Anonymous_e__Union_MSP_PRIVATE_EVENT_INFO_e__Struct {
+	return (*MSP_EVENT_INFO_Anonymous_e__Union_MSP_PRIVATE_EVENT_INFO_e__Struct)(unsafe.Pointer(u))
+}
+
+// MSP_FILE_TERMINAL_EVENT_INFO reinterprets the union as its MSP_FILE_TERMINAL_EVENT_INFO member.
+func (u *MSP_EVENT_INFO_Anonymous_e__Union) MSP_FILE_TERMINAL_EVENT_INFO() *MSP_EVENT_INFO_Anonymous_e__Union_MSP_FILE_TERMINAL_EVENT_INFO_e__Struct {
+	return (*MSP_EVENT_INFO_Anonymous_e__Union_MSP_FILE_TERMINAL_EVENT_INFO_e__Struct)(unsafe.Pointer(u))
+}
+
+// MSP_ASR_TERMINAL_EVENT_INFO reinterprets the union as its MSP_ASR_TERMINAL_EVENT_INFO member.
+func (u *MSP_EVENT_INFO_Anonymous_e__Union) MSP_ASR_TERMINAL_EVENT_INFO() *MSP_EVENT_INFO_Anonymous_e__Union_MSP_ASR_TERMINAL_EVENT_INFO_e__Struct {
+	return (*MSP_EVENT_INFO_Anonymous_e__Union_MSP_ASR_TERMINAL_EVENT_INFO_e__Struct)(unsafe.Pointer(u))
+}
+
+// MSP_TTS_TERMINAL_EVENT_INFO reinterprets the union as its MSP_TTS_TERMINAL_EVENT_INFO member.
+func (u *MSP_EVENT_INFO_Anonymous_e__Union) MSP_TTS_TERMINAL_EVENT_INFO() *MSP_EVENT_INFO_Anonymous_e__Union_MSP_TTS_TERMINAL_EVENT_INFO_e__Struct {
+	return (*MSP_EVENT_INFO_Anonymous_e__Union_MSP_TTS_TERMINAL_EVENT_INFO_e__Struct)(unsafe.Pointer(u))
+}
+
+// MSP_TONE_TERMINAL_EVENT_INFO reinterprets the union as its MSP_TONE_TERMINAL_EVENT_INFO member.
+func (u *MSP_EVENT_INFO_Anonymous_e__Union) MSP_TONE_TERMINAL_EVENT_INFO() *MSP_EVENT_INFO_Anonymous_e__Union_MSP_TONE_TERMINAL_EVENT_INFO_e__Struct {
+	return (*MSP_EVENT_INFO_Anonymous_e__Union_MSP_TONE_TERMINAL_EVENT_INFO_e__Struct)(unsafe.Pointer(u))
 }
 
 // MSP_EVENT_INFO: https://learn.microsoft.com/windows/win32/api/msp/ns-msp-msp_event_info
@@ -460,9 +548,20 @@ type McastAddressAllocation struct {
 }
 
 // NSID_address_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NSID_address_e__Union struct {
 	Data [18]uint32
+}
+
+// Alias reinterprets the union as its alias member.
+func (u *NSID_address_e__Union) Alias() *ADDRALIAS {
+	return (*ADDRALIAS)(unsafe.Pointer(u))
+}
+
+// RgchInterNet reinterprets the union as its rgchInterNet member.
+func (u *NSID_address_e__Union) RgchInterNet() *[1]foundation.CHAR {
+	return (*[1]foundation.CHAR)(unsafe.Pointer(u))
 }
 
 type NSID struct {

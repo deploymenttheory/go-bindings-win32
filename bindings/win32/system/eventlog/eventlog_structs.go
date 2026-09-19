@@ -5,7 +5,11 @@
 package eventlog
 
 import (
+	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 )
 
 // EVENTLOGRECORD: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-eventlogrecord
@@ -50,9 +54,210 @@ type EVT_RPC_LOGIN struct {
 }
 
 // EVT_VARIANT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EVT_VARIANT_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// BooleanVal reinterprets the union as its BooleanVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) BooleanVal() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// SByteVal reinterprets the union as its SByteVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SByteVal() *int8 {
+	return (*int8)(unsafe.Pointer(u))
+}
+
+// Int16Val reinterprets the union as its Int16Val member.
+func (u *EVT_VARIANT_Anonymous_e__Union) Int16Val() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// Int32Val reinterprets the union as its Int32Val member.
+func (u *EVT_VARIANT_Anonymous_e__Union) Int32Val() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Int64Val reinterprets the union as its Int64Val member.
+func (u *EVT_VARIANT_Anonymous_e__Union) Int64Val() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// ByteVal reinterprets the union as its ByteVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) ByteVal() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// UInt16Val reinterprets the union as its UInt16Val member.
+func (u *EVT_VARIANT_Anonymous_e__Union) UInt16Val() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// UInt32Val reinterprets the union as its UInt32Val member.
+func (u *EVT_VARIANT_Anonymous_e__Union) UInt32Val() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// UInt64Val reinterprets the union as its UInt64Val member.
+func (u *EVT_VARIANT_Anonymous_e__Union) UInt64Val() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// SingleVal reinterprets the union as its SingleVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SingleVal() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// DoubleVal reinterprets the union as its DoubleVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) DoubleVal() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// FileTimeVal reinterprets the union as its FileTimeVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) FileTimeVal() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// SysTimeVal reinterprets the union as its SysTimeVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SysTimeVal() **foundation.SYSTEMTIME {
+	return (**foundation.SYSTEMTIME)(unsafe.Pointer(u))
+}
+
+// GuidVal reinterprets the union as its GuidVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) GuidVal() **win32.GUID {
+	return (**win32.GUID)(unsafe.Pointer(u))
+}
+
+// StringVal reinterprets the union as its StringVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) StringVal() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// AnsiStringVal reinterprets the union as its AnsiStringVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) AnsiStringVal() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// BinaryVal reinterprets the union as its BinaryVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) BinaryVal() **byte {
+	return (**byte)(unsafe.Pointer(u))
+}
+
+// SidVal reinterprets the union as its SidVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SidVal() *security.PSID {
+	return (*security.PSID)(unsafe.Pointer(u))
+}
+
+// SizeTVal reinterprets the union as its SizeTVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SizeTVal() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// BooleanArr reinterprets the union as its BooleanArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) BooleanArr() **foundation.BOOL {
+	return (**foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// SByteArr reinterprets the union as its SByteArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SByteArr() **int8 {
+	return (**int8)(unsafe.Pointer(u))
+}
+
+// Int16Arr reinterprets the union as its Int16Arr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) Int16Arr() **int16 {
+	return (**int16)(unsafe.Pointer(u))
+}
+
+// Int32Arr reinterprets the union as its Int32Arr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) Int32Arr() **int32 {
+	return (**int32)(unsafe.Pointer(u))
+}
+
+// Int64Arr reinterprets the union as its Int64Arr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) Int64Arr() **int64 {
+	return (**int64)(unsafe.Pointer(u))
+}
+
+// ByteArr reinterprets the union as its ByteArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) ByteArr() **byte {
+	return (**byte)(unsafe.Pointer(u))
+}
+
+// UInt16Arr reinterprets the union as its UInt16Arr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) UInt16Arr() **uint16 {
+	return (**uint16)(unsafe.Pointer(u))
+}
+
+// UInt32Arr reinterprets the union as its UInt32Arr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) UInt32Arr() **uint32 {
+	return (**uint32)(unsafe.Pointer(u))
+}
+
+// UInt64Arr reinterprets the union as its UInt64Arr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) UInt64Arr() **uint64 {
+	return (**uint64)(unsafe.Pointer(u))
+}
+
+// SingleArr reinterprets the union as its SingleArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SingleArr() **float32 {
+	return (**float32)(unsafe.Pointer(u))
+}
+
+// DoubleArr reinterprets the union as its DoubleArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) DoubleArr() **float64 {
+	return (**float64)(unsafe.Pointer(u))
+}
+
+// FileTimeArr reinterprets the union as its FileTimeArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) FileTimeArr() **foundation.FILETIME {
+	return (**foundation.FILETIME)(unsafe.Pointer(u))
+}
+
+// SysTimeArr reinterprets the union as its SysTimeArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SysTimeArr() **foundation.SYSTEMTIME {
+	return (**foundation.SYSTEMTIME)(unsafe.Pointer(u))
+}
+
+// GuidArr reinterprets the union as its GuidArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) GuidArr() **win32.GUID {
+	return (**win32.GUID)(unsafe.Pointer(u))
+}
+
+// StringArr reinterprets the union as its StringArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) StringArr() **foundation.PWSTR {
+	return (**foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// AnsiStringArr reinterprets the union as its AnsiStringArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) AnsiStringArr() **foundation.PSTR {
+	return (**foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// SidArr reinterprets the union as its SidArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SidArr() **security.PSID {
+	return (**security.PSID)(unsafe.Pointer(u))
+}
+
+// SizeTArr reinterprets the union as its SizeTArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) SizeTArr() **uintptr {
+	return (**uintptr)(unsafe.Pointer(u))
+}
+
+// EvtHandleVal reinterprets the union as its EvtHandleVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) EvtHandleVal() *EVT_HANDLE {
+	return (*EVT_HANDLE)(unsafe.Pointer(u))
+}
+
+// XmlVal reinterprets the union as its XmlVal member.
+func (u *EVT_VARIANT_Anonymous_e__Union) XmlVal() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// XmlValArr reinterprets the union as its XmlValArr member.
+func (u *EVT_VARIANT_Anonymous_e__Union) XmlValArr() **foundation.PWSTR {
+	return (**foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // EVT_VARIANT: https://learn.microsoft.com/windows/win32/api/winevt/ns-winevt-evt_variant

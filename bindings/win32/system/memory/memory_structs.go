@@ -6,6 +6,8 @@ package memory
 
 import (
 	"unsafe"
+
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 // CFG_CALL_TARGET_INFO: https://learn.microsoft.com/windows/win32/Memory/-cfg-call-target-info
@@ -85,9 +87,35 @@ type MEM_EXTENDED_PARAMETER_Anonymous1_e__Struct struct {
 }
 
 // MEM_EXTENDED_PARAMETER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MEM_EXTENDED_PARAMETER_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// ULong64 reinterprets the union as its ULong64 member.
+func (u *MEM_EXTENDED_PARAMETER_Anonymous2_e__Union) ULong64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// Pointer reinterprets the union as its Pointer member.
+func (u *MEM_EXTENDED_PARAMETER_Anonymous2_e__Union) Pointer() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Size reinterprets the union as its Size member.
+func (u *MEM_EXTENDED_PARAMETER_Anonymous2_e__Union) Size() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// Handle reinterprets the union as its Handle member.
+func (u *MEM_EXTENDED_PARAMETER_Anonymous2_e__Union) Handle() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
+}
+
+// ULong reinterprets the union as its ULong member.
+func (u *MEM_EXTENDED_PARAMETER_Anonymous2_e__Union) ULong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // MEM_EXTENDED_PARAMETER: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-mem_extended_parameter
@@ -96,10 +124,33 @@ type MEM_EXTENDED_PARAMETER struct {
 	Anonymous2 MEM_EXTENDED_PARAMETER_Anonymous2_e__Union
 }
 
+type PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct struct {
+	HMem       foundation.HANDLE
+	DwReserved [3]uint32
+}
+
+type PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct struct {
+	DwCommittedSize   uint32
+	DwUnCommittedSize uint32
+	LpFirstBlock      unsafe.Pointer
+	LpLastBlock       unsafe.Pointer
+}
+
 // PROCESS_HEAP_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROCESS_HEAP_ENTRY_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// Block reinterprets the union as its Block member.
+func (u *PROCESS_HEAP_ENTRY_Anonymous_e__Union) Block() *PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct {
+	return (*PROCESS_HEAP_ENTRY_Anonymous_e__Union_Block_e__Struct)(unsafe.Pointer(u))
+}
+
+// Region reinterprets the union as its Region member.
+func (u *PROCESS_HEAP_ENTRY_Anonymous_e__Union) Region() *PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct {
+	return (*PROCESS_HEAP_ENTRY_Anonymous_e__Union_Region_e__Struct)(unsafe.Pointer(u))
 }
 
 // PROCESS_HEAP_ENTRY: https://learn.microsoft.com/windows/win32/api/minwinbase/ns-minwinbase-process_heap_entry
@@ -156,10 +207,25 @@ type WIN32_MEMORY_RANGE_ENTRY struct {
 	NumberOfBytes  uintptr
 }
 
+type WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union) Anonymous() *WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*WIN32_MEMORY_REGION_INFORMATION_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 // WIN32_MEMORY_REGION_INFORMATION: https://learn.microsoft.com/windows/win32/api/memoryapi/ns-memoryapi-win32_memory_region_information

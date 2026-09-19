@@ -256,10 +256,114 @@ type DWRITE_PAINT_COLOR struct {
 	ColorAttributes   DWRITE_PAINT_ATTRIBUTES
 }
 
+type DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH struct {
+	GlyphIndex uint32
+	ClipBox    graphicsdirect2dcommon.D2D_RECT_F
+}
+
+type DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COMPOSITE struct {
+	Mode DWRITE_COLOR_COMPOSITE_MODE
+}
+
+type DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_GLYPH struct {
+	GlyphIndex uint32
+}
+
+type DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_LAYERS struct {
+	ChildCount uint32
+}
+
+type DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_LINEAR_GRADIENT struct {
+	ExtendMode        uint32
+	GradientStopCount uint32
+	X0                float32
+	Y0                float32
+	X1                float32
+	Y1                float32
+	X2                float32
+	Y2                float32
+}
+
+type DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_RADIAL_GRADIENT struct {
+	ExtendMode        uint32
+	GradientStopCount uint32
+	X0                float32
+	Y0                float32
+	Radius0           float32
+	X1                float32
+	Y1                float32
+	Radius1           float32
+}
+
+type DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_SOLID_GLYPH struct {
+	GlyphIndex uint32
+	Color      DWRITE_PAINT_COLOR
+}
+
+type DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_SWEEP_GRADIENT struct {
+	ExtendMode        uint32
+	GradientStopCount uint32
+	CenterX           float32
+	CenterY           float32
+	StartAngle        float32
+	EndAngle          float32
+}
+
 // DWRITE_PAINT_ELEMENT_PAINT_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DWRITE_PAINT_ELEMENT_PAINT_UNION struct {
 	Data [8]uint32
+}
+
+// Layers reinterprets the union as its layers member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) Layers() *DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_LAYERS {
+	return (*DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_LAYERS)(unsafe.Pointer(u))
+}
+
+// SolidGlyph reinterprets the union as its solidGlyph member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) SolidGlyph() *DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_SOLID_GLYPH {
+	return (*DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_SOLID_GLYPH)(unsafe.Pointer(u))
+}
+
+// Solid reinterprets the union as its solid member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) Solid() *DWRITE_PAINT_COLOR {
+	return (*DWRITE_PAINT_COLOR)(unsafe.Pointer(u))
+}
+
+// LinearGradient reinterprets the union as its linearGradient member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) LinearGradient() *DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_LINEAR_GRADIENT {
+	return (*DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_LINEAR_GRADIENT)(unsafe.Pointer(u))
+}
+
+// RadialGradient reinterprets the union as its radialGradient member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) RadialGradient() *DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_RADIAL_GRADIENT {
+	return (*DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_RADIAL_GRADIENT)(unsafe.Pointer(u))
+}
+
+// SweepGradient reinterprets the union as its sweepGradient member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) SweepGradient() *DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_SWEEP_GRADIENT {
+	return (*DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_SWEEP_GRADIENT)(unsafe.Pointer(u))
+}
+
+// Glyph reinterprets the union as its glyph member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) Glyph() *DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_GLYPH {
+	return (*DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_GLYPH)(unsafe.Pointer(u))
+}
+
+// ColorGlyph reinterprets the union as its colorGlyph member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) ColorGlyph() *DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH {
+	return (*DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COLOR_GLYPH)(unsafe.Pointer(u))
+}
+
+// Transform reinterprets the union as its transform member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) Transform() *DWRITE_MATRIX {
+	return (*DWRITE_MATRIX)(unsafe.Pointer(u))
+}
+
+// Composite reinterprets the union as its composite member.
+func (u *DWRITE_PAINT_ELEMENT_PAINT_UNION) Composite() *DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COMPOSITE {
+	return (*DWRITE_PAINT_ELEMENT_PAINT_UNION_PAINT_COMPOSITE)(unsafe.Pointer(u))
 }
 
 type DWRITE_PAINT_ELEMENT struct {
@@ -267,11 +371,94 @@ type DWRITE_PAINT_ELEMENT struct {
 	Paint     DWRITE_PAINT_ELEMENT_PAINT_UNION
 }
 
+type DWRITE_PANOSE_decorative_e__Struct struct {
+	FamilyKind         byte
+	DecorativeClass    byte
+	Weight             byte
+	Aspect             byte
+	Contrast           byte
+	SerifVariant       byte
+	Fill               byte
+	Lining             byte
+	DecorativeTopology byte
+	CharacterRange     byte
+}
+
+type DWRITE_PANOSE_script_e__Struct struct {
+	FamilyKind     byte
+	ToolKind       byte
+	Weight         byte
+	Spacing        byte
+	AspectRatio    byte
+	Contrast       byte
+	ScriptTopology byte
+	ScriptForm     byte
+	Finials        byte
+	XAscent        byte
+}
+
+type DWRITE_PANOSE_symbol_e__Struct struct {
+	FamilyKind             byte
+	SymbolKind             byte
+	Weight                 byte
+	Spacing                byte
+	AspectRatioAndContrast byte
+	AspectRatio94          byte
+	AspectRatio119         byte
+	AspectRatio157         byte
+	AspectRatio163         byte
+	AspectRatio211         byte
+}
+
+type DWRITE_PANOSE_text_e__Struct struct {
+	FamilyKind      byte
+	SerifStyle      byte
+	Weight          byte
+	Proportion      byte
+	Contrast        byte
+	StrokeVariation byte
+	ArmStyle        byte
+	Letterform      byte
+	Midline         byte
+	XHeight         byte
+}
+
 // DWRITE_PANOSE: https://learn.microsoft.com/windows/win32/api/dwrite_1/ns-dwrite_1-dwrite_panose
 // DWRITE_PANOSE is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DWRITE_PANOSE struct {
 	Data [10]byte
+}
+
+// Values reinterprets the union as its values member.
+func (u *DWRITE_PANOSE) Values() *[10]byte {
+	return (*[10]byte)(unsafe.Pointer(u))
+}
+
+// FamilyKind reinterprets the union as its familyKind member.
+func (u *DWRITE_PANOSE) FamilyKind() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Text reinterprets the union as its text member.
+func (u *DWRITE_PANOSE) Text() *DWRITE_PANOSE_text_e__Struct {
+	return (*DWRITE_PANOSE_text_e__Struct)(unsafe.Pointer(u))
+}
+
+// Script reinterprets the union as its script member.
+func (u *DWRITE_PANOSE) Script() *DWRITE_PANOSE_script_e__Struct {
+	return (*DWRITE_PANOSE_script_e__Struct)(unsafe.Pointer(u))
+}
+
+// Decorative reinterprets the union as its decorative member.
+func (u *DWRITE_PANOSE) Decorative() *DWRITE_PANOSE_decorative_e__Struct {
+	return (*DWRITE_PANOSE_decorative_e__Struct)(unsafe.Pointer(u))
+}
+
+// Symbol reinterprets the union as its symbol member.
+func (u *DWRITE_PANOSE) Symbol() *DWRITE_PANOSE_symbol_e__Struct {
+	return (*DWRITE_PANOSE_symbol_e__Struct)(unsafe.Pointer(u))
 }
 
 // DWRITE_SCRIPT_ANALYSIS: https://learn.microsoft.com/windows/win32/api/dwrite/ns-dwrite-dwrite_script_analysis

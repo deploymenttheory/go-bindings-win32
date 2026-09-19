@@ -5,6 +5,8 @@
 package nfc
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
@@ -59,9 +61,20 @@ type NFC_LLCP_SOCKET_CL_PAYLOAD struct {
 }
 
 // NFC_LLCP_SOCKET_CONNECT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NFC_LLCP_SOCKET_CONNECT_INFO_Anonymous_e__Union struct {
 	Data [2]uint32
+}
+
+// BSAP reinterprets the union as its bSAP member.
+func (u *NFC_LLCP_SOCKET_CONNECT_INFO_Anonymous_e__Union) BSAP() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// SServiceName reinterprets the union as its sServiceName member.
+func (u *NFC_LLCP_SOCKET_CONNECT_INFO_Anonymous_e__Union) SServiceName() *NFC_LLCP_SERVICE_NAME_ENTRY {
+	return (*NFC_LLCP_SERVICE_NAME_ENTRY)(unsafe.Pointer(u))
 }
 
 type NFC_LLCP_SOCKET_CONNECT_INFO struct {
@@ -192,9 +205,25 @@ type NFC_SE_ROUTING_TABLE struct {
 }
 
 // NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union struct {
 	Data [4]uint64
+}
+
+// TechRoutingInfo reinterprets the union as its TechRoutingInfo member.
+func (u *NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union) TechRoutingInfo() *NFC_SE_TECH_ROUTING_INFO {
+	return (*NFC_SE_TECH_ROUTING_INFO)(unsafe.Pointer(u))
+}
+
+// ProtoRoutingInfo reinterprets the union as its ProtoRoutingInfo member.
+func (u *NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union) ProtoRoutingInfo() *NFC_SE_PROTO_ROUTING_INFO {
+	return (*NFC_SE_PROTO_ROUTING_INFO)(unsafe.Pointer(u))
+}
+
+// AidRoutingInfo reinterprets the union as its AidRoutingInfo member.
+func (u *NFC_SE_ROUTING_TABLE_ENTRY_Anonymous_e__Union) AidRoutingInfo() *NFC_SE_AID_ROUTING_INFO {
+	return (*NFC_SE_AID_ROUTING_INFO)(unsafe.Pointer(u))
 }
 
 type NFC_SE_ROUTING_TABLE_ENTRY struct {
@@ -311,9 +340,25 @@ type SECURE_ELEMENT_ROUTING_TABLE struct {
 }
 
 // SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union struct {
 	Data [9]uint32
+}
+
+// TechRoutingInfo reinterprets the union as its TechRoutingInfo member.
+func (u *SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union) TechRoutingInfo() *SECURE_ELEMENT_TECH_ROUTING_INFO {
+	return (*SECURE_ELEMENT_TECH_ROUTING_INFO)(unsafe.Pointer(u))
+}
+
+// ProtoRoutingInfo reinterprets the union as its ProtoRoutingInfo member.
+func (u *SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union) ProtoRoutingInfo() *SECURE_ELEMENT_PROTO_ROUTING_INFO {
+	return (*SECURE_ELEMENT_PROTO_ROUTING_INFO)(unsafe.Pointer(u))
+}
+
+// AidRoutingInfo reinterprets the union as its AidRoutingInfo member.
+func (u *SECURE_ELEMENT_ROUTING_TABLE_ENTRY_Anonymous_e__Union) AidRoutingInfo() *SECURE_ELEMENT_AID_ROUTING_INFO {
+	return (*SECURE_ELEMENT_AID_ROUTING_INFO)(unsafe.Pointer(u))
 }
 
 type SECURE_ELEMENT_ROUTING_TABLE_ENTRY struct {

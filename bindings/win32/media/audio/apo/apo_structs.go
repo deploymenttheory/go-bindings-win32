@@ -77,9 +77,45 @@ type APO_CONNECTION_PROPERTY_V2 struct {
 }
 
 // APO_NOTIFICATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type APO_NOTIFICATION_Anonymous_e__Union struct {
 	Data [8]uint64
+}
+
+// AudioEndpointVolumeChange reinterprets the union as its audioEndpointVolumeChange member.
+func (u *APO_NOTIFICATION_Anonymous_e__Union) AudioEndpointVolumeChange() *AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION {
+	return (*AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// AudioEndpointPropertyChange reinterprets the union as its audioEndpointPropertyChange member.
+func (u *APO_NOTIFICATION_Anonymous_e__Union) AudioEndpointPropertyChange() *AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION {
+	return (*AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// AudioSystemEffectsPropertyChange reinterprets the union as its audioSystemEffectsPropertyChange member.
+func (u *APO_NOTIFICATION_Anonymous_e__Union) AudioSystemEffectsPropertyChange() *AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION {
+	return (*AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// AudioEndpointVolumeChange2 reinterprets the union as its audioEndpointVolumeChange2 member.
+func (u *APO_NOTIFICATION_Anonymous_e__Union) AudioEndpointVolumeChange2() *AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2 {
+	return (*AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2)(unsafe.Pointer(u))
+}
+
+// DeviceOrientation reinterprets the union as its deviceOrientation member.
+func (u *APO_NOTIFICATION_Anonymous_e__Union) DeviceOrientation() *DEVICE_ORIENTATION_TYPE {
+	return (*DEVICE_ORIENTATION_TYPE)(unsafe.Pointer(u))
+}
+
+// AudioMicrophoneBoostChange reinterprets the union as its audioMicrophoneBoostChange member.
+func (u *APO_NOTIFICATION_Anonymous_e__Union) AudioMicrophoneBoostChange() *AUDIO_MICROPHONE_BOOST_NOTIFICATION {
+	return (*AUDIO_MICROPHONE_BOOST_NOTIFICATION)(unsafe.Pointer(u))
+}
+
+// AudioEnvironmentChange reinterprets the union as its audioEnvironmentChange member.
+func (u *APO_NOTIFICATION_Anonymous_e__Union) AudioEnvironmentChange() *AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION {
+	return (*AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION)(unsafe.Pointer(u))
 }
 
 // APO_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-apo_notification
@@ -89,9 +125,30 @@ type APO_NOTIFICATION struct {
 }
 
 // APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// AudioEndpointVolume reinterprets the union as its audioEndpointVolume member.
+func (u *APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union) AudioEndpointVolume() *AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR {
+	return (*AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR)(unsafe.Pointer(u))
+}
+
+// AudioEndpointPropertyChange reinterprets the union as its audioEndpointPropertyChange member.
+func (u *APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union) AudioEndpointPropertyChange() *AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR {
+	return (*AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR)(unsafe.Pointer(u))
+}
+
+// AudioSystemEffectsPropertyChange reinterprets the union as its audioSystemEffectsPropertyChange member.
+func (u *APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union) AudioSystemEffectsPropertyChange() *AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR {
+	return (*AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR)(unsafe.Pointer(u))
+}
+
+// AudioMicrophoneBoost reinterprets the union as its audioMicrophoneBoost member.
+func (u *APO_NOTIFICATION_DESCRIPTOR_Anonymous_e__Union) AudioMicrophoneBoost() *AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR {
+	return (*AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR)(unsafe.Pointer(u))
 }
 
 // APO_NOTIFICATION_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ns-audioengineextensionapo-apo_notification_descriptor

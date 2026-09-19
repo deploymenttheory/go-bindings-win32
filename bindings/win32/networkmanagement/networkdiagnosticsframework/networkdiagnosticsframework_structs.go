@@ -5,6 +5,8 @@
 package networkdiagnosticsframework
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
@@ -22,9 +24,80 @@ type DiagnosticsInfo struct {
 }
 
 // HELPER_ATTRIBUTE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type HELPER_ATTRIBUTE_Anonymous_e__Union struct {
 	Data [16]uint64
+}
+
+// Boolean reinterprets the union as its Boolean member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) Boolean() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// Char reinterprets the union as its Char member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) Char() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Byte reinterprets the union as its Byte member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) Byte() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// Short reinterprets the union as its Short member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) Short() *int16 {
+	return (*int16)(unsafe.Pointer(u))
+}
+
+// Word reinterprets the union as its Word member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) Word() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// Int reinterprets the union as its Int member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) Int() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// DWord reinterprets the union as its DWord member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) DWord() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Int64 reinterprets the union as its Int64 member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) Int64() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// UInt64 reinterprets the union as its UInt64 member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) UInt64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// PWStr reinterprets the union as its PWStr member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) PWStr() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// Guid reinterprets the union as its Guid member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) Guid() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// LifeTime reinterprets the union as its LifeTime member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) LifeTime() *LIFE_TIME {
+	return (*LIFE_TIME)(unsafe.Pointer(u))
+}
+
+// Address reinterprets the union as its Address member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) Address() *DIAG_SOCKADDR {
+	return (*DIAG_SOCKADDR)(unsafe.Pointer(u))
+}
+
+// OctetString reinterprets the union as its OctetString member.
+func (u *HELPER_ATTRIBUTE_Anonymous_e__Union) OctetString() *OCTET_STRING {
+	return (*OCTET_STRING)(unsafe.Pointer(u))
 }
 
 // HELPER_ATTRIBUTE: https://learn.microsoft.com/windows/win32/api/ndattrib/ns-ndattrib-helper_attribute
@@ -106,9 +179,30 @@ type ShellCommandInfo struct {
 }
 
 // UiInfo_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type UiInfo_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// PwzNull reinterprets the union as its pwzNull member.
+func (u *UiInfo_Anonymous_e__Union) PwzNull() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// ShellInfo reinterprets the union as its ShellInfo member.
+func (u *UiInfo_Anonymous_e__Union) ShellInfo() *ShellCommandInfo {
+	return (*ShellCommandInfo)(unsafe.Pointer(u))
+}
+
+// PwzHelpUrl reinterprets the union as its pwzHelpUrl member.
+func (u *UiInfo_Anonymous_e__Union) PwzHelpUrl() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PwzDui reinterprets the union as its pwzDui member.
+func (u *UiInfo_Anonymous_e__Union) PwzDui() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // UiInfo: https://learn.microsoft.com/windows/win32/api/ndattrib/ns-ndattrib-uiinfo

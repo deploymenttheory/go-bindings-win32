@@ -5,14 +5,27 @@
 package vhd
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
+type APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	SnapshotId     win32.GUID
+	LeafSnapshotId win32.GUID
+}
+
 // APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union struct {
 	Data [8]uint32
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union) Version1() *APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 // APPLY_SNAPSHOT_VHDSET_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-apply_snapshot_vhdset_parameters
@@ -21,10 +34,30 @@ type APPLY_SNAPSHOT_VHDSET_PARAMETERS struct {
 	Anonymous APPLY_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
+type ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	Reserved uint32
+}
+
+type ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct struct {
+	RestrictedOffset uint64
+	RestrictedLength uint64
+}
+
 // ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Version2 reinterprets the union as its Version2 member.
+func (u *ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version2() *ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct {
+	return (*ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct)(unsafe.Pointer(u))
 }
 
 // ATTACH_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-attach_virtual_disk_parameters
@@ -33,10 +66,20 @@ type ATTACH_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous ATTACH_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
+type COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	Reserved uint32
+}
+
 // COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 // COMPACT_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-compact_virtual_disk_parameters
@@ -45,10 +88,88 @@ type COMPACT_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous COMPACT_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
+type CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	UniqueId          win32.GUID
+	MaximumSize       uint64
+	BlockSizeInBytes  uint32
+	SectorSizeInBytes uint32
+	ParentPath        foundation.PWSTR
+	SourcePath        foundation.PWSTR
+}
+
+type CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct struct {
+	UniqueId                  win32.GUID
+	MaximumSize               uint64
+	BlockSizeInBytes          uint32
+	SectorSizeInBytes         uint32
+	PhysicalSectorSizeInBytes uint32
+	ParentPath                foundation.PWSTR
+	SourcePath                foundation.PWSTR
+	OpenFlags                 OPEN_VIRTUAL_DISK_FLAG
+	ParentVirtualStorageType  VIRTUAL_STORAGE_TYPE
+	SourceVirtualStorageType  VIRTUAL_STORAGE_TYPE
+	ResiliencyGuid            win32.GUID
+}
+
+type CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct struct {
+	UniqueId                  win32.GUID
+	MaximumSize               uint64
+	BlockSizeInBytes          uint32
+	SectorSizeInBytes         uint32
+	PhysicalSectorSizeInBytes uint32
+	ParentPath                foundation.PWSTR
+	SourcePath                foundation.PWSTR
+	OpenFlags                 OPEN_VIRTUAL_DISK_FLAG
+	ParentVirtualStorageType  VIRTUAL_STORAGE_TYPE
+	SourceVirtualStorageType  VIRTUAL_STORAGE_TYPE
+	ResiliencyGuid            win32.GUID
+	SourceLimitPath           foundation.PWSTR
+	BackingStorageType        VIRTUAL_STORAGE_TYPE
+}
+
+type CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version4_e__Struct struct {
+	UniqueId                   win32.GUID
+	MaximumSize                uint64
+	BlockSizeInBytes           uint32
+	SectorSizeInBytes          uint32
+	PhysicalSectorSizeInBytes  uint32
+	ParentPath                 foundation.PWSTR
+	SourcePath                 foundation.PWSTR
+	OpenFlags                  OPEN_VIRTUAL_DISK_FLAG
+	ParentVirtualStorageType   VIRTUAL_STORAGE_TYPE
+	SourceVirtualStorageType   VIRTUAL_STORAGE_TYPE
+	ResiliencyGuid             win32.GUID
+	SourceLimitPath            foundation.PWSTR
+	BackingStorageType         VIRTUAL_STORAGE_TYPE
+	PmemAddressAbstractionType win32.GUID
+	DataAlignment              uint64
+}
+
 // CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [22]uint64
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Version2 reinterprets the union as its Version2 member.
+func (u *CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version2() *CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct {
+	return (*CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct)(unsafe.Pointer(u))
+}
+
+// Version3 reinterprets the union as its Version3 member.
+func (u *CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version3() *CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct {
+	return (*CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct)(unsafe.Pointer(u))
+}
+
+// Version4 reinterprets the union as its Version4 member.
+func (u *CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version4() *CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version4_e__Struct {
+	return (*CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version4_e__Struct)(unsafe.Pointer(u))
 }
 
 // CREATE_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-create_virtual_disk_parameters
@@ -57,10 +178,20 @@ type CREATE_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous CREATE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
+type DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	SnapshotId win32.GUID
+}
+
 // DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union) Version1() *DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 // DELETE_SNAPSHOT_VHDSET_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-delete_snapshot_vhdset_parameters
@@ -69,10 +200,20 @@ type DELETE_SNAPSHOT_VHDSET_PARAMETERS struct {
 	Anonymous DELETE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
+type EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	NewSize uint64
+}
+
 // EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 // EXPAND_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-expand_virtual_disk_parameters
@@ -81,10 +222,20 @@ type EXPAND_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous EXPAND_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
+type FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	ForkedVirtualDiskPath foundation.PWSTR
+}
+
 // FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 type FORK_VIRTUAL_DISK_PARAMETERS struct {
@@ -92,10 +243,110 @@ type FORK_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous FORK_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
+type GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ChangeTrackingState_e__Struct struct {
+	Enabled      foundation.BOOL
+	NewerChanges foundation.BOOL
+	MostRecentId [1]uint16
+}
+
+type GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocation_e__Struct struct {
+	ParentResolved       foundation.BOOL
+	ParentLocationBuffer [1]uint16
+}
+
+type GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_PhysicalDisk_e__Struct struct {
+	LogicalSectorSize  uint32
+	PhysicalSectorSize uint32
+	IsRemote           foundation.BOOL
+}
+
+type GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_Size_e__Struct struct {
+	VirtualSize  uint64
+	PhysicalSize uint64
+	BlockSize    uint32
+	SectorSize   uint32
+}
+
 // GET_VIRTUAL_DISK_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GET_VIRTUAL_DISK_INFO_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// Size reinterprets the union as its Size member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) Size() *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_Size_e__Struct {
+	return (*GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_Size_e__Struct)(unsafe.Pointer(u))
+}
+
+// Identifier reinterprets the union as its Identifier member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) Identifier() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// ParentLocation reinterprets the union as its ParentLocation member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) ParentLocation() *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocation_e__Struct {
+	return (*GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocation_e__Struct)(unsafe.Pointer(u))
+}
+
+// ParentIdentifier reinterprets the union as its ParentIdentifier member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) ParentIdentifier() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// ParentTimestamp reinterprets the union as its ParentTimestamp member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) ParentTimestamp() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// VirtualStorageType reinterprets the union as its VirtualStorageType member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) VirtualStorageType() *VIRTUAL_STORAGE_TYPE {
+	return (*VIRTUAL_STORAGE_TYPE)(unsafe.Pointer(u))
+}
+
+// ProviderSubtype reinterprets the union as its ProviderSubtype member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) ProviderSubtype() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Is4kAligned reinterprets the union as its Is4kAligned member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) Is4kAligned() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// IsLoaded reinterprets the union as its IsLoaded member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) IsLoaded() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// PhysicalDisk reinterprets the union as its PhysicalDisk member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) PhysicalDisk() *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_PhysicalDisk_e__Struct {
+	return (*GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_PhysicalDisk_e__Struct)(unsafe.Pointer(u))
+}
+
+// VhdPhysicalSectorSize reinterprets the union as its VhdPhysicalSectorSize member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) VhdPhysicalSectorSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// SmallestSafeVirtualSize reinterprets the union as its SmallestSafeVirtualSize member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) SmallestSafeVirtualSize() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// FragmentationPercentage reinterprets the union as its FragmentationPercentage member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) FragmentationPercentage() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// VirtualDiskId reinterprets the union as its VirtualDiskId member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) VirtualDiskId() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// ChangeTrackingState reinterprets the union as its ChangeTrackingState member.
+func (u *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union) ChangeTrackingState() *GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ChangeTrackingState_e__Struct {
+	return (*GET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ChangeTrackingState_e__Struct)(unsafe.Pointer(u))
 }
 
 // GET_VIRTUAL_DISK_INFO: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-get_virtual_disk_info
@@ -104,10 +355,30 @@ type GET_VIRTUAL_DISK_INFO struct {
 	Anonymous GET_VIRTUAL_DISK_INFO_Anonymous_e__Union
 }
 
+type MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	MergeDepth uint32
+}
+
+type MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct struct {
+	MergeSourceDepth uint32
+	MergeTargetDepth uint32
+}
+
 // MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [2]uint32
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Version2 reinterprets the union as its Version2 member.
+func (u *MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version2() *MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct {
+	return (*MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct)(unsafe.Pointer(u))
 }
 
 // MERGE_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-merge_virtual_disk_parameters
@@ -116,10 +387,20 @@ type MERGE_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous MERGE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
+type MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	MirrorVirtualDiskPath foundation.PWSTR
+}
+
 // MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 // MIRROR_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-mirror_virtual_disk_parameters
@@ -128,10 +409,31 @@ type MIRROR_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous MIRROR_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
+type MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union_SnapshotPath_e__Struct struct {
+	SnapshotId       win32.GUID
+	SnapshotFilePath foundation.PWSTR
+}
+
 // MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// SnapshotPath reinterprets the union as its SnapshotPath member.
+func (u *MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union) SnapshotPath() *MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union_SnapshotPath_e__Struct {
+	return (*MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union_SnapshotPath_e__Struct)(unsafe.Pointer(u))
+}
+
+// SnapshotId reinterprets the union as its SnapshotId member.
+func (u *MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union) SnapshotId() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// DefaultFilePath reinterprets the union as its DefaultFilePath member.
+func (u *MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union) DefaultFilePath() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // MODIFY_VHDSET_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-modify_vhdset_parameters
@@ -140,10 +442,43 @@ type MODIFY_VHDSET_PARAMETERS struct {
 	Anonymous MODIFY_VHDSET_PARAMETERS_Anonymous_e__Union
 }
 
+type OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	RWDepth uint32
+}
+
+type OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct struct {
+	GetInfoOnly    foundation.BOOL
+	ReadOnly       foundation.BOOL
+	ResiliencyGuid win32.GUID
+}
+
+type OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct struct {
+	GetInfoOnly    foundation.BOOL
+	ReadOnly       foundation.BOOL
+	ResiliencyGuid win32.GUID
+	SnapshotId     win32.GUID
+}
+
 // OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [10]uint32
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Version2 reinterprets the union as its Version2 member.
+func (u *OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version2() *OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct {
+	return (*OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version2_e__Struct)(unsafe.Pointer(u))
+}
+
+// Version3 reinterprets the union as its Version3 member.
+func (u *OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version3() *OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct {
+	return (*OPEN_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version3_e__Struct)(unsafe.Pointer(u))
 }
 
 // OPEN_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-open_virtual_disk_parameters
@@ -159,10 +494,28 @@ type QUERY_CHANGES_VIRTUAL_DISK_RANGE struct {
 	Reserved   uint64
 }
 
+type RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	RSVDHandle         foundation.BOOL
+	DataIn             byte
+	CdbLength          byte
+	SenseInfoLength    byte
+	SrbFlags           uint32
+	DataTransferLength uint32
+	DataBuffer         unsafe.Pointer
+	SenseInfo          *byte
+	Cdb                *byte
+}
+
 // RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 // RAW_SCSI_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-raw_scsi_virtual_disk_parameters
@@ -171,10 +524,22 @@ type RAW_SCSI_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous RAW_SCSI_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
+type RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union_Version1_e__Struct struct {
+	ScsiStatus         byte
+	SenseInfoLength    byte
+	DataTransferLength uint32
+}
+
 // RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union struct {
 	Data [2]uint32
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union) Version1() *RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union_Version1_e__Struct {
+	return (*RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 // RAW_SCSI_VIRTUAL_DISK_RESPONSE: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-raw_scsi_virtual_disk_response
@@ -183,10 +548,20 @@ type RAW_SCSI_VIRTUAL_DISK_RESPONSE struct {
 	Anonymous RAW_SCSI_VIRTUAL_DISK_RESPONSE_Anonymous_e__Union
 }
 
+type RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	NewSize uint64
+}
+
 // RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union) Version1() *RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 // RESIZE_VIRTUAL_DISK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-resize_virtual_disk_parameters
@@ -195,10 +570,56 @@ type RESIZE_VIRTUAL_DISK_PARAMETERS struct {
 	Anonymous RESIZE_VIRTUAL_DISK_PARAMETERS_Anonymous_e__Union
 }
 
+type SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocator_e__Struct struct {
+	LinkageId      win32.GUID
+	ParentFilePath foundation.PWSTR
+}
+
+type SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentPathWithDepthInfo_e__Struct struct {
+	ChildDepth     uint32
+	ParentFilePath foundation.PWSTR
+}
+
 // SET_VIRTUAL_DISK_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SET_VIRTUAL_DISK_INFO_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// ParentFilePath reinterprets the union as its ParentFilePath member.
+func (u *SET_VIRTUAL_DISK_INFO_Anonymous_e__Union) ParentFilePath() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// UniqueIdentifier reinterprets the union as its UniqueIdentifier member.
+func (u *SET_VIRTUAL_DISK_INFO_Anonymous_e__Union) UniqueIdentifier() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// ParentPathWithDepthInfo reinterprets the union as its ParentPathWithDepthInfo member.
+func (u *SET_VIRTUAL_DISK_INFO_Anonymous_e__Union) ParentPathWithDepthInfo() *SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentPathWithDepthInfo_e__Struct {
+	return (*SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentPathWithDepthInfo_e__Struct)(unsafe.Pointer(u))
+}
+
+// VhdPhysicalSectorSize reinterprets the union as its VhdPhysicalSectorSize member.
+func (u *SET_VIRTUAL_DISK_INFO_Anonymous_e__Union) VhdPhysicalSectorSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// VirtualDiskId reinterprets the union as its VirtualDiskId member.
+func (u *SET_VIRTUAL_DISK_INFO_Anonymous_e__Union) VirtualDiskId() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// ChangeTrackingEnabled reinterprets the union as its ChangeTrackingEnabled member.
+func (u *SET_VIRTUAL_DISK_INFO_Anonymous_e__Union) ChangeTrackingEnabled() *foundation.BOOL {
+	return (*foundation.BOOL)(unsafe.Pointer(u))
+}
+
+// ParentLocator reinterprets the union as its ParentLocator member.
+func (u *SET_VIRTUAL_DISK_INFO_Anonymous_e__Union) ParentLocator() *SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocator_e__Struct {
+	return (*SET_VIRTUAL_DISK_INFO_Anonymous_e__Union_ParentLocator_e__Struct)(unsafe.Pointer(u))
 }
 
 // SET_VIRTUAL_DISK_INFO: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-set_virtual_disk_info
@@ -208,9 +629,20 @@ type SET_VIRTUAL_DISK_INFO struct {
 }
 
 // STORAGE_DEPENDENCY_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_DEPENDENCY_INFO_Anonymous_e__Union struct {
 	Data [8]uint64
+}
+
+// Version1Entries reinterprets the union as its Version1Entries member.
+func (u *STORAGE_DEPENDENCY_INFO_Anonymous_e__Union) Version1Entries() *[1]STORAGE_DEPENDENCY_INFO_TYPE_1 {
+	return (*[1]STORAGE_DEPENDENCY_INFO_TYPE_1)(unsafe.Pointer(u))
+}
+
+// Version2Entries reinterprets the union as its Version2Entries member.
+func (u *STORAGE_DEPENDENCY_INFO_Anonymous_e__Union) Version2Entries() *[1]STORAGE_DEPENDENCY_INFO_TYPE_2 {
+	return (*[1]STORAGE_DEPENDENCY_INFO_TYPE_2)(unsafe.Pointer(u))
 }
 
 // STORAGE_DEPENDENCY_INFO: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-storage_dependency_info
@@ -239,10 +671,20 @@ type STORAGE_DEPENDENCY_INFO_TYPE_2 struct {
 	DependentVolumeRelativePath foundation.PWSTR
 }
 
+type TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct struct {
+	SnapshotId win32.GUID
+}
+
 // TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Version1 reinterprets the union as its Version1 member.
+func (u *TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union) Version1() *TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct {
+	return (*TAKE_SNAPSHOT_VHDSET_PARAMETERS_Anonymous_e__Union_Version1_e__Struct)(unsafe.Pointer(u))
 }
 
 // TAKE_SNAPSHOT_VHDSET_PARAMETERS: https://learn.microsoft.com/windows/win32/api/virtdisk/ns-virtdisk-take_snapshot_vhdset_parameters

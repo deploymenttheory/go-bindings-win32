@@ -1424,21 +1424,54 @@ type PBRANGE struct {
 }
 
 // PROPSHEETHEADERA_V1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERA_V1_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETHEADERA_V1_Anonymous1_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETHEADERA_V1_Anonymous1_e__Union) PszIcon() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERA_V1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERA_V1_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
+// NStartPage reinterprets the union as its nStartPage member.
+func (u *PROPSHEETHEADERA_V1_Anonymous2_e__Union) NStartPage() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PStartPage reinterprets the union as its pStartPage member.
+func (u *PROPSHEETHEADERA_V1_Anonymous2_e__Union) PStartPage() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERA_V1_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERA_V1_Anonymous3_e__Union struct {
 	Data [1]uint64
+}
+
+// Ppsp reinterprets the union as its ppsp member.
+func (u *PROPSHEETHEADERA_V1_Anonymous3_e__Union) Ppsp() **PROPSHEETPAGEA {
+	return (**PROPSHEETPAGEA)(unsafe.Pointer(u))
+}
+
+// Phpage reinterprets the union as its phpage member.
+func (u *PROPSHEETHEADERA_V1_Anonymous3_e__Union) Phpage() **HPROPSHEETPAGE {
+	return (**HPROPSHEETPAGE)(unsafe.Pointer(u))
 }
 
 type PROPSHEETHEADERA_V1 struct {
@@ -1455,33 +1488,88 @@ type PROPSHEETHEADERA_V1 struct {
 }
 
 // PROPSHEETHEADERA_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERA_V2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETHEADERA_V2_Anonymous1_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETHEADERA_V2_Anonymous1_e__Union) PszIcon() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERA_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERA_V2_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
+// NStartPage reinterprets the union as its nStartPage member.
+func (u *PROPSHEETHEADERA_V2_Anonymous2_e__Union) NStartPage() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PStartPage reinterprets the union as its pStartPage member.
+func (u *PROPSHEETHEADERA_V2_Anonymous2_e__Union) PStartPage() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERA_V2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERA_V2_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
 
+// Ppsp reinterprets the union as its ppsp member.
+func (u *PROPSHEETHEADERA_V2_Anonymous3_e__Union) Ppsp() **PROPSHEETPAGEA {
+	return (**PROPSHEETPAGEA)(unsafe.Pointer(u))
+}
+
+// Phpage reinterprets the union as its phpage member.
+func (u *PROPSHEETHEADERA_V2_Anonymous3_e__Union) Phpage() **HPROPSHEETPAGE {
+	return (**HPROPSHEETPAGE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERA_V2_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERA_V2_Anonymous4_e__Union struct {
 	Data [1]uint64
 }
 
+// HbmWatermark reinterprets the union as its hbmWatermark member.
+func (u *PROPSHEETHEADERA_V2_Anonymous4_e__Union) HbmWatermark() *graphicsgdi.HBITMAP {
+	return (*graphicsgdi.HBITMAP)(unsafe.Pointer(u))
+}
+
+// PszbmWatermark reinterprets the union as its pszbmWatermark member.
+func (u *PROPSHEETHEADERA_V2_Anonymous4_e__Union) PszbmWatermark() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERA_V2_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERA_V2_Anonymous5_e__Union struct {
 	Data [1]uint64
+}
+
+// HbmHeader reinterprets the union as its hbmHeader member.
+func (u *PROPSHEETHEADERA_V2_Anonymous5_e__Union) HbmHeader() *graphicsgdi.HBITMAP {
+	return (*graphicsgdi.HBITMAP)(unsafe.Pointer(u))
+}
+
+// PszbmHeader reinterprets the union as its pszbmHeader member.
+func (u *PROPSHEETHEADERA_V2_Anonymous5_e__Union) PszbmHeader() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 // PROPSHEETHEADERA_V2: https://learn.microsoft.com/windows/win32/api/prsht/ns-prsht-propsheetheadera_v2
@@ -1502,21 +1590,54 @@ type PROPSHEETHEADERA_V2 struct {
 }
 
 // PROPSHEETHEADERW_V1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERW_V1_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETHEADERW_V1_Anonymous1_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETHEADERW_V1_Anonymous1_e__Union) PszIcon() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERW_V1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERW_V1_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
+// NStartPage reinterprets the union as its nStartPage member.
+func (u *PROPSHEETHEADERW_V1_Anonymous2_e__Union) NStartPage() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PStartPage reinterprets the union as its pStartPage member.
+func (u *PROPSHEETHEADERW_V1_Anonymous2_e__Union) PStartPage() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERW_V1_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERW_V1_Anonymous3_e__Union struct {
 	Data [1]uint64
+}
+
+// Ppsp reinterprets the union as its ppsp member.
+func (u *PROPSHEETHEADERW_V1_Anonymous3_e__Union) Ppsp() **PROPSHEETPAGEW {
+	return (**PROPSHEETPAGEW)(unsafe.Pointer(u))
+}
+
+// Phpage reinterprets the union as its phpage member.
+func (u *PROPSHEETHEADERW_V1_Anonymous3_e__Union) Phpage() **HPROPSHEETPAGE {
+	return (**HPROPSHEETPAGE)(unsafe.Pointer(u))
 }
 
 type PROPSHEETHEADERW_V1 struct {
@@ -1533,33 +1654,88 @@ type PROPSHEETHEADERW_V1 struct {
 }
 
 // PROPSHEETHEADERW_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERW_V2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETHEADERW_V2_Anonymous1_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETHEADERW_V2_Anonymous1_e__Union) PszIcon() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERW_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERW_V2_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
+// NStartPage reinterprets the union as its nStartPage member.
+func (u *PROPSHEETHEADERW_V2_Anonymous2_e__Union) NStartPage() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// PStartPage reinterprets the union as its pStartPage member.
+func (u *PROPSHEETHEADERW_V2_Anonymous2_e__Union) PStartPage() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERW_V2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERW_V2_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
 
+// Ppsp reinterprets the union as its ppsp member.
+func (u *PROPSHEETHEADERW_V2_Anonymous3_e__Union) Ppsp() **PROPSHEETPAGEW {
+	return (**PROPSHEETPAGEW)(unsafe.Pointer(u))
+}
+
+// Phpage reinterprets the union as its phpage member.
+func (u *PROPSHEETHEADERW_V2_Anonymous3_e__Union) Phpage() **HPROPSHEETPAGE {
+	return (**HPROPSHEETPAGE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERW_V2_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERW_V2_Anonymous4_e__Union struct {
 	Data [1]uint64
 }
 
+// HbmWatermark reinterprets the union as its hbmWatermark member.
+func (u *PROPSHEETHEADERW_V2_Anonymous4_e__Union) HbmWatermark() *graphicsgdi.HBITMAP {
+	return (*graphicsgdi.HBITMAP)(unsafe.Pointer(u))
+}
+
+// PszbmWatermark reinterprets the union as its pszbmWatermark member.
+func (u *PROPSHEETHEADERW_V2_Anonymous4_e__Union) PszbmWatermark() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETHEADERW_V2_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETHEADERW_V2_Anonymous5_e__Union struct {
 	Data [1]uint64
+}
+
+// HbmHeader reinterprets the union as its hbmHeader member.
+func (u *PROPSHEETHEADERW_V2_Anonymous5_e__Union) HbmHeader() *graphicsgdi.HBITMAP {
+	return (*graphicsgdi.HBITMAP)(unsafe.Pointer(u))
+}
+
+// PszbmHeader reinterprets the union as its pszbmHeader member.
+func (u *PROPSHEETHEADERW_V2_Anonymous5_e__Union) PszbmHeader() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // PROPSHEETHEADERW_V2: https://learn.microsoft.com/windows/win32/api/prsht/ns-prsht-propsheetheaderw_v2
@@ -1580,21 +1756,54 @@ type PROPSHEETHEADERW_V2 struct {
 }
 
 // PROPSHEETPAGEA_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEA_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PszTemplate reinterprets the union as its pszTemplate member.
+func (u *PROPSHEETPAGEA_Anonymous1_e__Union) PszTemplate() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// PResource reinterprets the union as its pResource member.
+func (u *PROPSHEETPAGEA_Anonymous1_e__Union) PResource() **uiwindowsandmessaging.DLGTEMPLATE {
+	return (**uiwindowsandmessaging.DLGTEMPLATE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEA_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEA_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETPAGEA_Anonymous2_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETPAGEA_Anonymous2_e__Union) PszIcon() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEA_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEA_Anonymous3_e__Union struct {
 	Data [1]uint64
+}
+
+// HbmHeader reinterprets the union as its hbmHeader member.
+func (u *PROPSHEETPAGEA_Anonymous3_e__Union) HbmHeader() *graphicsgdi.HBITMAP {
+	return (*graphicsgdi.HBITMAP)(unsafe.Pointer(u))
+}
+
+// PszbmHeader reinterprets the union as its pszbmHeader member.
+func (u *PROPSHEETPAGEA_Anonymous3_e__Union) PszbmHeader() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 type PROPSHEETPAGEA struct {
@@ -1615,15 +1824,37 @@ type PROPSHEETPAGEA struct {
 }
 
 // PROPSHEETPAGEA_V1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEA_V1_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PszTemplate reinterprets the union as its pszTemplate member.
+func (u *PROPSHEETPAGEA_V1_Anonymous1_e__Union) PszTemplate() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// PResource reinterprets the union as its pResource member.
+func (u *PROPSHEETPAGEA_V1_Anonymous1_e__Union) PResource() **uiwindowsandmessaging.DLGTEMPLATE {
+	return (**uiwindowsandmessaging.DLGTEMPLATE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEA_V1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEA_V1_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETPAGEA_V1_Anonymous2_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETPAGEA_V1_Anonymous2_e__Union) PszIcon() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 type PROPSHEETPAGEA_V1 struct {
@@ -1640,15 +1871,37 @@ type PROPSHEETPAGEA_V1 struct {
 }
 
 // PROPSHEETPAGEA_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEA_V2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PszTemplate reinterprets the union as its pszTemplate member.
+func (u *PROPSHEETPAGEA_V2_Anonymous1_e__Union) PszTemplate() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// PResource reinterprets the union as its pResource member.
+func (u *PROPSHEETPAGEA_V2_Anonymous1_e__Union) PResource() **uiwindowsandmessaging.DLGTEMPLATE {
+	return (**uiwindowsandmessaging.DLGTEMPLATE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEA_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEA_V2_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETPAGEA_V2_Anonymous2_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETPAGEA_V2_Anonymous2_e__Union) PszIcon() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 // PROPSHEETPAGEA_V2: https://learn.microsoft.com/windows/win32/api/prsht/ns-prsht-propsheetpagea_v2
@@ -1668,15 +1921,37 @@ type PROPSHEETPAGEA_V2 struct {
 }
 
 // PROPSHEETPAGEA_V3_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEA_V3_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PszTemplate reinterprets the union as its pszTemplate member.
+func (u *PROPSHEETPAGEA_V3_Anonymous1_e__Union) PszTemplate() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
+}
+
+// PResource reinterprets the union as its pResource member.
+func (u *PROPSHEETPAGEA_V3_Anonymous1_e__Union) PResource() **uiwindowsandmessaging.DLGTEMPLATE {
+	return (**uiwindowsandmessaging.DLGTEMPLATE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEA_V3_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEA_V3_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETPAGEA_V3_Anonymous2_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETPAGEA_V3_Anonymous2_e__Union) PszIcon() *foundation.PSTR {
+	return (*foundation.PSTR)(unsafe.Pointer(u))
 }
 
 // PROPSHEETPAGEA_V3: https://learn.microsoft.com/windows/win32/api/prsht/ns-prsht-propsheetpagea_v3
@@ -1697,21 +1972,54 @@ type PROPSHEETPAGEA_V3 struct {
 }
 
 // PROPSHEETPAGEW_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEW_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PszTemplate reinterprets the union as its pszTemplate member.
+func (u *PROPSHEETPAGEW_Anonymous1_e__Union) PszTemplate() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PResource reinterprets the union as its pResource member.
+func (u *PROPSHEETPAGEW_Anonymous1_e__Union) PResource() **uiwindowsandmessaging.DLGTEMPLATE {
+	return (**uiwindowsandmessaging.DLGTEMPLATE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEW_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEW_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETPAGEW_Anonymous2_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETPAGEW_Anonymous2_e__Union) PszIcon() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEW_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEW_Anonymous3_e__Union struct {
 	Data [1]uint64
+}
+
+// HbmHeader reinterprets the union as its hbmHeader member.
+func (u *PROPSHEETPAGEW_Anonymous3_e__Union) HbmHeader() *graphicsgdi.HBITMAP {
+	return (*graphicsgdi.HBITMAP)(unsafe.Pointer(u))
+}
+
+// PszbmHeader reinterprets the union as its pszbmHeader member.
+func (u *PROPSHEETPAGEW_Anonymous3_e__Union) PszbmHeader() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 type PROPSHEETPAGEW struct {
@@ -1732,15 +2040,37 @@ type PROPSHEETPAGEW struct {
 }
 
 // PROPSHEETPAGEW_V1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEW_V1_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PszTemplate reinterprets the union as its pszTemplate member.
+func (u *PROPSHEETPAGEW_V1_Anonymous1_e__Union) PszTemplate() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PResource reinterprets the union as its pResource member.
+func (u *PROPSHEETPAGEW_V1_Anonymous1_e__Union) PResource() **uiwindowsandmessaging.DLGTEMPLATE {
+	return (**uiwindowsandmessaging.DLGTEMPLATE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEW_V1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEW_V1_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETPAGEW_V1_Anonymous2_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETPAGEW_V1_Anonymous2_e__Union) PszIcon() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 type PROPSHEETPAGEW_V1 struct {
@@ -1757,15 +2087,37 @@ type PROPSHEETPAGEW_V1 struct {
 }
 
 // PROPSHEETPAGEW_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEW_V2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PszTemplate reinterprets the union as its pszTemplate member.
+func (u *PROPSHEETPAGEW_V2_Anonymous1_e__Union) PszTemplate() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PResource reinterprets the union as its pResource member.
+func (u *PROPSHEETPAGEW_V2_Anonymous1_e__Union) PResource() **uiwindowsandmessaging.DLGTEMPLATE {
+	return (**uiwindowsandmessaging.DLGTEMPLATE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEW_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEW_V2_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETPAGEW_V2_Anonymous2_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETPAGEW_V2_Anonymous2_e__Union) PszIcon() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // PROPSHEETPAGEW_V2: https://learn.microsoft.com/windows/win32/api/prsht/ns-prsht-propsheetpagew_v2
@@ -1785,15 +2137,37 @@ type PROPSHEETPAGEW_V2 struct {
 }
 
 // PROPSHEETPAGEW_V3_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEW_V3_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// PszTemplate reinterprets the union as its pszTemplate member.
+func (u *PROPSHEETPAGEW_V3_Anonymous1_e__Union) PszTemplate() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// PResource reinterprets the union as its pResource member.
+func (u *PROPSHEETPAGEW_V3_Anonymous1_e__Union) PResource() **uiwindowsandmessaging.DLGTEMPLATE {
+	return (**uiwindowsandmessaging.DLGTEMPLATE)(unsafe.Pointer(u))
+}
+
 // PROPSHEETPAGEW_V3_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type PROPSHEETPAGEW_V3_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// HIcon reinterprets the union as its hIcon member.
+func (u *PROPSHEETPAGEW_V3_Anonymous2_e__Union) HIcon() *uiwindowsandmessaging.HICON {
+	return (*uiwindowsandmessaging.HICON)(unsafe.Pointer(u))
+}
+
+// PszIcon reinterprets the union as its pszIcon member.
+func (u *PROPSHEETPAGEW_V3_Anonymous2_e__Union) PszIcon() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // PROPSHEETPAGEW_V3: https://learn.microsoft.com/windows/win32/api/prsht/ns-prsht-propsheetpagew_v3
@@ -2161,9 +2535,20 @@ type TVHITTESTINFO struct {
 }
 
 // TVINSERTSTRUCTA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TVINSERTSTRUCTA_Anonymous_e__Union struct {
 	Data [10]uint64
+}
+
+// Itemex reinterprets the union as its itemex member.
+func (u *TVINSERTSTRUCTA_Anonymous_e__Union) Itemex() *TVITEMEXA {
+	return (*TVITEMEXA)(unsafe.Pointer(u))
+}
+
+// Item reinterprets the union as its item member.
+func (u *TVINSERTSTRUCTA_Anonymous_e__Union) Item() *TVITEMA {
+	return (*TVITEMA)(unsafe.Pointer(u))
 }
 
 // TVINSERTSTRUCTA: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-tvinsertstructa
@@ -2174,9 +2559,20 @@ type TVINSERTSTRUCTA struct {
 }
 
 // TVINSERTSTRUCTW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TVINSERTSTRUCTW_Anonymous_e__Union struct {
 	Data [10]uint64
+}
+
+// Itemex reinterprets the union as its itemex member.
+func (u *TVINSERTSTRUCTW_Anonymous_e__Union) Itemex() *TVITEMEXW {
+	return (*TVITEMEXW)(unsafe.Pointer(u))
+}
+
+// Item reinterprets the union as its item member.
+func (u *TVINSERTSTRUCTW_Anonymous_e__Union) Item() *TVITEMW {
+	return (*TVITEMW)(unsafe.Pointer(u))
 }
 
 // TVINSERTSTRUCTW: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-tvinsertstructw

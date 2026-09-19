@@ -5,6 +5,8 @@
 package clrhosting
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemdiagnosticsdebug "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/diagnostics/debug"
 )
@@ -62,9 +64,15 @@ type CorRuntimeHost struct {
 }
 
 // CustomDumpItem_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CustomDumpItem_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// PReserved reinterprets the union as its pReserved member.
+func (u *CustomDumpItem_Anonymous_e__Union) PReserved() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }
 
 type CustomDumpItem struct {

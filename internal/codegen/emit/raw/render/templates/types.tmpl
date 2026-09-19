@@ -43,7 +43,8 @@ func (e {{.TypeName}}) String() string {
 {{- if .DocURL}}// {{.TypeName}}: {{.DocURL}}
 {{end -}}
 {{- if .IsUnionBlob}}// {{.TypeName}} is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor{{if not .Accessors}}, or through an unsafe.Pointer cast{{end}}.
 {{end -}}
 {{- if .IsPackedBlob}}// {{.TypeName}} is a packed C struct (non-default field alignment), exposed as
 // correctly sized and aligned opaque backing storage; read or write a specific
@@ -54,7 +55,12 @@ type {{.TypeName}} struct {
 	{{.Name}} {{.GoType}}
 {{- end}}
 }
-
+{{range .Accessors}}
+// {{.Name}} reinterprets the union as its {{.Member}} member.
+func (u *{{$.TypeName}}) {{.Name}}() *{{.GoType}} {
+	return (*{{.GoType}})(unsafe.Pointer(u))
+}
+{{end}}
 {{end}}
 
 {{define "typedef"}}

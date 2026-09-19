@@ -39,10 +39,105 @@ type CLFS_MGMT_NOTIFICATION struct {
 	LogIsPinned  uint16
 }
 
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoGrow_e__Struct struct {
+	Enabled uint32
+}
+
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoShrink_e__Struct struct {
+	Percentage uint32
+}
+
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_GrowthRate_e__Struct struct {
+	AbsoluteGrowthInContainers uint32
+	RelativeGrowthPercentage   uint32
+}
+
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_LogTail_e__Struct struct {
+	MinimumAvailablePercentage uint32
+	MinimumAvailableContainers uint32
+}
+
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_MaximumSize_e__Struct struct {
+	Containers uint32
+}
+
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_MinimumSize_e__Struct struct {
+	Containers uint32
+}
+
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerExtension_e__Struct struct {
+	ExtensionLengthInBytes uint16
+	ExtensionString        [1]uint16
+}
+
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerPrefix_e__Struct struct {
+	PrefixLengthInBytes uint16
+	PrefixString        [1]uint16
+}
+
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSize_e__Struct struct {
+	SizeInBytes uint32
+}
+
+type CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSuffix_e__Struct struct {
+	NextContainerSuffix uint64
+}
+
 // CLFS_MGMT_POLICY_PolicyParameters_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CLFS_MGMT_POLICY_PolicyParameters_e__Union struct {
 	Data [1]uint64
+}
+
+// MaximumSize reinterprets the union as its MaximumSize member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) MaximumSize() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_MaximumSize_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_MaximumSize_e__Struct)(unsafe.Pointer(u))
+}
+
+// MinimumSize reinterprets the union as its MinimumSize member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) MinimumSize() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_MinimumSize_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_MinimumSize_e__Struct)(unsafe.Pointer(u))
+}
+
+// NewContainerSize reinterprets the union as its NewContainerSize member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) NewContainerSize() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSize_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSize_e__Struct)(unsafe.Pointer(u))
+}
+
+// GrowthRate reinterprets the union as its GrowthRate member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) GrowthRate() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_GrowthRate_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_GrowthRate_e__Struct)(unsafe.Pointer(u))
+}
+
+// LogTail reinterprets the union as its LogTail member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) LogTail() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_LogTail_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_LogTail_e__Struct)(unsafe.Pointer(u))
+}
+
+// AutoShrink reinterprets the union as its AutoShrink member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) AutoShrink() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoShrink_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoShrink_e__Struct)(unsafe.Pointer(u))
+}
+
+// AutoGrow reinterprets the union as its AutoGrow member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) AutoGrow() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoGrow_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_AutoGrow_e__Struct)(unsafe.Pointer(u))
+}
+
+// NewContainerPrefix reinterprets the union as its NewContainerPrefix member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) NewContainerPrefix() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerPrefix_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerPrefix_e__Struct)(unsafe.Pointer(u))
+}
+
+// NewContainerSuffix reinterprets the union as its NewContainerSuffix member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) NewContainerSuffix() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSuffix_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerSuffix_e__Struct)(unsafe.Pointer(u))
+}
+
+// NewContainerExtension reinterprets the union as its NewContainerExtension member.
+func (u *CLFS_MGMT_POLICY_PolicyParameters_e__Union) NewContainerExtension() *CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerExtension_e__Struct {
+	return (*CLFS_MGMT_POLICY_PolicyParameters_e__Union_NewContainerExtension_e__Struct)(unsafe.Pointer(u))
 }
 
 // CLFS_MGMT_POLICY: https://learn.microsoft.com/windows/win32/api/clfsmgmt/ns-clfsmgmt-clfs_mgmt_policy
@@ -197,10 +292,101 @@ type COPYFILE2_EXTENDED_PARAMETERS_V2 struct {
 	Reserved            [6]unsafe.Pointer
 }
 
+type COPYFILE2_MESSAGE_Info_e__Union_ChunkFinished_e__Struct struct {
+	DwStreamNumber            uint32
+	DwFlags                   uint32
+	HSourceFile               foundation.HANDLE
+	HDestinationFile          foundation.HANDLE
+	UliChunkNumber            uint64
+	UliChunkSize              uint64
+	UliStreamSize             uint64
+	UliStreamBytesTransferred uint64
+	UliTotalFileSize          uint64
+	UliTotalBytesTransferred  uint64
+}
+
+type COPYFILE2_MESSAGE_Info_e__Union_ChunkStarted_e__Struct struct {
+	DwStreamNumber   uint32
+	DwReserved       uint32
+	HSourceFile      foundation.HANDLE
+	HDestinationFile foundation.HANDLE
+	UliChunkNumber   uint64
+	UliChunkSize     uint64
+	UliStreamSize    uint64
+	UliTotalFileSize uint64
+}
+
+type COPYFILE2_MESSAGE_Info_e__Union_Error_e__Struct struct {
+	CopyPhase                 COPYFILE2_COPY_PHASE
+	DwStreamNumber            uint32
+	HrFailure                 foundation.HRESULT
+	DwReserved                uint32
+	UliChunkNumber            uint64
+	UliStreamSize             uint64
+	UliStreamBytesTransferred uint64
+	UliTotalFileSize          uint64
+	UliTotalBytesTransferred  uint64
+}
+
+type COPYFILE2_MESSAGE_Info_e__Union_PollContinue_e__Struct struct {
+	DwReserved uint32
+}
+
+type COPYFILE2_MESSAGE_Info_e__Union_StreamFinished_e__Struct struct {
+	DwStreamNumber            uint32
+	DwReserved                uint32
+	HSourceFile               foundation.HANDLE
+	HDestinationFile          foundation.HANDLE
+	UliStreamSize             uint64
+	UliStreamBytesTransferred uint64
+	UliTotalFileSize          uint64
+	UliTotalBytesTransferred  uint64
+}
+
+type COPYFILE2_MESSAGE_Info_e__Union_StreamStarted_e__Struct struct {
+	DwStreamNumber   uint32
+	DwReserved       uint32
+	HSourceFile      foundation.HANDLE
+	HDestinationFile foundation.HANDLE
+	UliStreamSize    uint64
+	UliTotalFileSize uint64
+}
+
 // COPYFILE2_MESSAGE_Info_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type COPYFILE2_MESSAGE_Info_e__Union struct {
 	Data [9]uint64
+}
+
+// ChunkStarted reinterprets the union as its ChunkStarted member.
+func (u *COPYFILE2_MESSAGE_Info_e__Union) ChunkStarted() *COPYFILE2_MESSAGE_Info_e__Union_ChunkStarted_e__Struct {
+	return (*COPYFILE2_MESSAGE_Info_e__Union_ChunkStarted_e__Struct)(unsafe.Pointer(u))
+}
+
+// ChunkFinished reinterprets the union as its ChunkFinished member.
+func (u *COPYFILE2_MESSAGE_Info_e__Union) ChunkFinished() *COPYFILE2_MESSAGE_Info_e__Union_ChunkFinished_e__Struct {
+	return (*COPYFILE2_MESSAGE_Info_e__Union_ChunkFinished_e__Struct)(unsafe.Pointer(u))
+}
+
+// StreamStarted reinterprets the union as its StreamStarted member.
+func (u *COPYFILE2_MESSAGE_Info_e__Union) StreamStarted() *COPYFILE2_MESSAGE_Info_e__Union_StreamStarted_e__Struct {
+	return (*COPYFILE2_MESSAGE_Info_e__Union_StreamStarted_e__Struct)(unsafe.Pointer(u))
+}
+
+// StreamFinished reinterprets the union as its StreamFinished member.
+func (u *COPYFILE2_MESSAGE_Info_e__Union) StreamFinished() *COPYFILE2_MESSAGE_Info_e__Union_StreamFinished_e__Struct {
+	return (*COPYFILE2_MESSAGE_Info_e__Union_StreamFinished_e__Struct)(unsafe.Pointer(u))
+}
+
+// PollContinue reinterprets the union as its PollContinue member.
+func (u *COPYFILE2_MESSAGE_Info_e__Union) PollContinue() *COPYFILE2_MESSAGE_Info_e__Union_PollContinue_e__Struct {
+	return (*COPYFILE2_MESSAGE_Info_e__Union_PollContinue_e__Struct)(unsafe.Pointer(u))
+}
+
+// Error reinterprets the union as its Error member.
+func (u *COPYFILE2_MESSAGE_Info_e__Union) Error() *COPYFILE2_MESSAGE_Info_e__Union_Error_e__Struct {
+	return (*COPYFILE2_MESSAGE_Info_e__Union_Error_e__Struct)(unsafe.Pointer(u))
 }
 
 // COPYFILE2_MESSAGE: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-copyfile2_message
@@ -463,9 +649,25 @@ type FILE_ID_BOTH_DIR_INFO struct {
 }
 
 // FILE_ID_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FILE_ID_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// FileId reinterprets the union as its FileId member.
+func (u *FILE_ID_DESCRIPTOR_Anonymous_e__Union) FileId() *int64 {
+	return (*int64)(unsafe.Pointer(u))
+}
+
+// ObjectId reinterprets the union as its ObjectId member.
+func (u *FILE_ID_DESCRIPTOR_Anonymous_e__Union) ObjectId() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
+// ExtendedFileId reinterprets the union as its ExtendedFileId member.
+func (u *FILE_ID_DESCRIPTOR_Anonymous_e__Union) ExtendedFileId() *FILE_ID_128 {
+	return (*FILE_ID_128)(unsafe.Pointer(u))
 }
 
 // FILE_ID_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-file_id_descriptor
@@ -525,9 +727,20 @@ type FILE_NAME_INFO struct {
 }
 
 // FILE_NOTIFY_EXTENDED_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FILE_NOTIFY_EXTENDED_INFORMATION_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// ReparsePointTag reinterprets the union as its ReparsePointTag member.
+func (u *FILE_NOTIFY_EXTENDED_INFORMATION_Anonymous_e__Union) ReparsePointTag() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// EaSize reinterprets the union as its EaSize member.
+func (u *FILE_NOTIFY_EXTENDED_INFORMATION_Anonymous_e__Union) EaSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // FILE_NOTIFY_EXTENDED_INFORMATION: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-file_notify_extended_information
@@ -560,10 +773,35 @@ type FILE_REMOTE_PROTOCOL_INFO_GenericReserved_e__Struct struct {
 	Reserved [8]uint32
 }
 
+type FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union_Smb2_e__Struct_Server_e__Struct struct {
+	Capabilities uint32
+}
+
+type FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union_Smb2_e__Struct_Share_e__Struct struct {
+	Capabilities uint32
+	ShareFlags   uint32
+}
+
+type FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union_Smb2_e__Struct struct {
+	Server FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union_Smb2_e__Struct_Server_e__Struct
+	Share  FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union_Smb2_e__Struct_Share_e__Struct
+}
+
 // FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union struct {
 	Data [16]uint32
+}
+
+// Smb2 reinterprets the union as its Smb2 member.
+func (u *FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union) Smb2() *FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union_Smb2_e__Struct {
+	return (*FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union_Smb2_e__Struct)(unsafe.Pointer(u))
+}
+
+// Reserved reinterprets the union as its Reserved member.
+func (u *FILE_REMOTE_PROTOCOL_INFO_ProtocolSpecific_e__Union) Reserved() *[16]uint32 {
+	return (*[16]uint32)(unsafe.Pointer(u))
 }
 
 // FILE_REMOTE_PROTOCOL_INFO: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-file_remote_protocol_info
@@ -581,9 +819,20 @@ type FILE_REMOTE_PROTOCOL_INFO struct {
 }
 
 // FILE_RENAME_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FILE_RENAME_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// ReplaceIfExists reinterprets the union as its ReplaceIfExists member.
+func (u *FILE_RENAME_INFO_Anonymous_e__Union) ReplaceIfExists() *foundation.BOOLEAN {
+	return (*foundation.BOOLEAN)(unsafe.Pointer(u))
+}
+
+// Flags reinterprets the union as its Flags member.
+func (u *FILE_RENAME_INFO_Anonymous_e__Union) Flags() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // FILE_RENAME_INFO: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-file_rename_info
@@ -596,9 +845,20 @@ type FILE_RENAME_INFO struct {
 
 // FILE_SEGMENT_ELEMENT: https://learn.microsoft.com/windows/win32/api/winnt/ns-winnt-file_segment_element
 // FILE_SEGMENT_ELEMENT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FILE_SEGMENT_ELEMENT struct {
 	Data [1]uint64
+}
+
+// Buffer reinterprets the union as its Buffer member.
+func (u *FILE_SEGMENT_ELEMENT) Buffer() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// Alignment reinterprets the union as its Alignment member.
+func (u *FILE_SEGMENT_ELEMENT) Alignment() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 // FILE_STANDARD_INFO: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-file_standard_info
@@ -663,9 +923,20 @@ type IORING_BUFFER_INFO struct {
 }
 
 // IORING_BUFFER_REF_BufferUnion is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IORING_BUFFER_REF_BufferUnion struct {
 	Data [1]uint64
+}
+
+// Address reinterprets the union as its Address member.
+func (u *IORING_BUFFER_REF_BufferUnion) Address() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// IndexAndOffset reinterprets the union as its IndexAndOffset member.
+func (u *IORING_BUFFER_REF_BufferUnion) IndexAndOffset() *IORING_REGISTERED_BUFFER {
+	return (*IORING_REGISTERED_BUFFER)(unsafe.Pointer(u))
 }
 
 // IORING_BUFFER_REF: https://learn.microsoft.com/windows/win32/api/ioringapi/ns-ioringapi-ioring_buffer_ref
@@ -696,9 +967,20 @@ type IORING_CREATE_FLAGS struct {
 }
 
 // IORING_HANDLE_REF_HandleUnion is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IORING_HANDLE_REF_HandleUnion struct {
 	Data [1]uint64
+}
+
+// Handle reinterprets the union as its Handle member.
+func (u *IORING_HANDLE_REF_HandleUnion) Handle() *foundation.HANDLE {
+	return (*foundation.HANDLE)(unsafe.Pointer(u))
+}
+
+// Index reinterprets the union as its Index member.
+func (u *IORING_HANDLE_REF_HandleUnion) Index() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // IORING_HANDLE_REF: https://learn.microsoft.com/windows/win32/api/ioringapi/ns-ioringapi-ioring_handle_ref
@@ -953,9 +1235,85 @@ type NTMS_I1_LIBREQUESTINFORMATIONW struct {
 }
 
 // NTMS_I1_OBJECTINFORMATIONA_Info_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NTMS_I1_OBJECTINFORMATIONA_Info_e__Union struct {
 	Data [157]uint32
+}
+
+// Drive reinterprets the union as its Drive member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) Drive() *NTMS_DRIVEINFORMATIONA {
+	return (*NTMS_DRIVEINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// DriveType reinterprets the union as its DriveType member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) DriveType() *NTMS_DRIVETYPEINFORMATIONA {
+	return (*NTMS_DRIVETYPEINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// Library reinterprets the union as its Library member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) Library() *NTMS_I1_LIBRARYINFORMATION {
+	return (*NTMS_I1_LIBRARYINFORMATION)(unsafe.Pointer(u))
+}
+
+// Changer reinterprets the union as its Changer member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) Changer() *NTMS_CHANGERINFORMATIONA {
+	return (*NTMS_CHANGERINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// ChangerType reinterprets the union as its ChangerType member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) ChangerType() *NTMS_CHANGERTYPEINFORMATIONA {
+	return (*NTMS_CHANGERTYPEINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// StorageSlot reinterprets the union as its StorageSlot member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) StorageSlot() *NTMS_STORAGESLOTINFORMATION {
+	return (*NTMS_STORAGESLOTINFORMATION)(unsafe.Pointer(u))
+}
+
+// IEDoor reinterprets the union as its IEDoor member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) IEDoor() *NTMS_IEDOORINFORMATION {
+	return (*NTMS_IEDOORINFORMATION)(unsafe.Pointer(u))
+}
+
+// IEPort reinterprets the union as its IEPort member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) IEPort() *NTMS_IEPORTINFORMATION {
+	return (*NTMS_IEPORTINFORMATION)(unsafe.Pointer(u))
+}
+
+// PhysicalMedia reinterprets the union as its PhysicalMedia member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) PhysicalMedia() *NTMS_I1_PMIDINFORMATIONA {
+	return (*NTMS_I1_PMIDINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// LogicalMedia reinterprets the union as its LogicalMedia member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) LogicalMedia() *NTMS_LMIDINFORMATION {
+	return (*NTMS_LMIDINFORMATION)(unsafe.Pointer(u))
+}
+
+// Partition reinterprets the union as its Partition member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) Partition() *NTMS_I1_PARTITIONINFORMATIONA {
+	return (*NTMS_I1_PARTITIONINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// MediaPool reinterprets the union as its MediaPool member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) MediaPool() *NTMS_MEDIAPOOLINFORMATION {
+	return (*NTMS_MEDIAPOOLINFORMATION)(unsafe.Pointer(u))
+}
+
+// MediaType reinterprets the union as its MediaType member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) MediaType() *NTMS_MEDIATYPEINFORMATION {
+	return (*NTMS_MEDIATYPEINFORMATION)(unsafe.Pointer(u))
+}
+
+// LibRequest reinterprets the union as its LibRequest member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) LibRequest() *NTMS_I1_LIBREQUESTINFORMATIONA {
+	return (*NTMS_I1_LIBREQUESTINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// OpRequest reinterprets the union as its OpRequest member.
+func (u *NTMS_I1_OBJECTINFORMATIONA_Info_e__Union) OpRequest() *NTMS_I1_OPREQUESTINFORMATIONA {
+	return (*NTMS_I1_OPREQUESTINFORMATIONA)(unsafe.Pointer(u))
 }
 
 type NTMS_I1_OBJECTINFORMATIONA struct {
@@ -972,9 +1330,85 @@ type NTMS_I1_OBJECTINFORMATIONA struct {
 }
 
 // NTMS_I1_OBJECTINFORMATIONW_Info_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NTMS_I1_OBJECTINFORMATIONW_Info_e__Union struct {
 	Data [237]uint32
+}
+
+// Drive reinterprets the union as its Drive member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) Drive() *NTMS_DRIVEINFORMATIONW {
+	return (*NTMS_DRIVEINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// DriveType reinterprets the union as its DriveType member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) DriveType() *NTMS_DRIVETYPEINFORMATIONW {
+	return (*NTMS_DRIVETYPEINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// Library reinterprets the union as its Library member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) Library() *NTMS_I1_LIBRARYINFORMATION {
+	return (*NTMS_I1_LIBRARYINFORMATION)(unsafe.Pointer(u))
+}
+
+// Changer reinterprets the union as its Changer member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) Changer() *NTMS_CHANGERINFORMATIONW {
+	return (*NTMS_CHANGERINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// ChangerType reinterprets the union as its ChangerType member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) ChangerType() *NTMS_CHANGERTYPEINFORMATIONW {
+	return (*NTMS_CHANGERTYPEINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// StorageSlot reinterprets the union as its StorageSlot member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) StorageSlot() *NTMS_STORAGESLOTINFORMATION {
+	return (*NTMS_STORAGESLOTINFORMATION)(unsafe.Pointer(u))
+}
+
+// IEDoor reinterprets the union as its IEDoor member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) IEDoor() *NTMS_IEDOORINFORMATION {
+	return (*NTMS_IEDOORINFORMATION)(unsafe.Pointer(u))
+}
+
+// IEPort reinterprets the union as its IEPort member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) IEPort() *NTMS_IEPORTINFORMATION {
+	return (*NTMS_IEPORTINFORMATION)(unsafe.Pointer(u))
+}
+
+// PhysicalMedia reinterprets the union as its PhysicalMedia member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) PhysicalMedia() *NTMS_I1_PMIDINFORMATIONW {
+	return (*NTMS_I1_PMIDINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// LogicalMedia reinterprets the union as its LogicalMedia member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) LogicalMedia() *NTMS_LMIDINFORMATION {
+	return (*NTMS_LMIDINFORMATION)(unsafe.Pointer(u))
+}
+
+// Partition reinterprets the union as its Partition member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) Partition() *NTMS_I1_PARTITIONINFORMATIONW {
+	return (*NTMS_I1_PARTITIONINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// MediaPool reinterprets the union as its MediaPool member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) MediaPool() *NTMS_MEDIAPOOLINFORMATION {
+	return (*NTMS_MEDIAPOOLINFORMATION)(unsafe.Pointer(u))
+}
+
+// MediaType reinterprets the union as its MediaType member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) MediaType() *NTMS_MEDIATYPEINFORMATION {
+	return (*NTMS_MEDIATYPEINFORMATION)(unsafe.Pointer(u))
+}
+
+// LibRequest reinterprets the union as its LibRequest member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) LibRequest() *NTMS_I1_LIBREQUESTINFORMATIONW {
+	return (*NTMS_I1_LIBREQUESTINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// OpRequest reinterprets the union as its OpRequest member.
+func (u *NTMS_I1_OBJECTINFORMATIONW_Info_e__Union) OpRequest() *NTMS_I1_OPREQUESTINFORMATIONW {
+	return (*NTMS_I1_OPREQUESTINFORMATIONW)(unsafe.Pointer(u))
 }
 
 type NTMS_I1_OBJECTINFORMATIONW struct {
@@ -1195,9 +1629,90 @@ type NTMS_NOTIFICATIONINFORMATION struct {
 }
 
 // NTMS_OBJECTINFORMATIONA_Info_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NTMS_OBJECTINFORMATIONA_Info_e__Union struct {
 	Data [80]uint64
+}
+
+// Drive reinterprets the union as its Drive member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) Drive() *NTMS_DRIVEINFORMATIONA {
+	return (*NTMS_DRIVEINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// DriveType reinterprets the union as its DriveType member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) DriveType() *NTMS_DRIVETYPEINFORMATIONA {
+	return (*NTMS_DRIVETYPEINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// Library reinterprets the union as its Library member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) Library() *NTMS_LIBRARYINFORMATION {
+	return (*NTMS_LIBRARYINFORMATION)(unsafe.Pointer(u))
+}
+
+// Changer reinterprets the union as its Changer member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) Changer() *NTMS_CHANGERINFORMATIONA {
+	return (*NTMS_CHANGERINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// ChangerType reinterprets the union as its ChangerType member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) ChangerType() *NTMS_CHANGERTYPEINFORMATIONA {
+	return (*NTMS_CHANGERTYPEINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// StorageSlot reinterprets the union as its StorageSlot member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) StorageSlot() *NTMS_STORAGESLOTINFORMATION {
+	return (*NTMS_STORAGESLOTINFORMATION)(unsafe.Pointer(u))
+}
+
+// IEDoor reinterprets the union as its IEDoor member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) IEDoor() *NTMS_IEDOORINFORMATION {
+	return (*NTMS_IEDOORINFORMATION)(unsafe.Pointer(u))
+}
+
+// IEPort reinterprets the union as its IEPort member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) IEPort() *NTMS_IEPORTINFORMATION {
+	return (*NTMS_IEPORTINFORMATION)(unsafe.Pointer(u))
+}
+
+// PhysicalMedia reinterprets the union as its PhysicalMedia member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) PhysicalMedia() *NTMS_PMIDINFORMATIONA {
+	return (*NTMS_PMIDINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// LogicalMedia reinterprets the union as its LogicalMedia member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) LogicalMedia() *NTMS_LMIDINFORMATION {
+	return (*NTMS_LMIDINFORMATION)(unsafe.Pointer(u))
+}
+
+// Partition reinterprets the union as its Partition member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) Partition() *NTMS_PARTITIONINFORMATIONA {
+	return (*NTMS_PARTITIONINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// MediaPool reinterprets the union as its MediaPool member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) MediaPool() *NTMS_MEDIAPOOLINFORMATION {
+	return (*NTMS_MEDIAPOOLINFORMATION)(unsafe.Pointer(u))
+}
+
+// MediaType reinterprets the union as its MediaType member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) MediaType() *NTMS_MEDIATYPEINFORMATION {
+	return (*NTMS_MEDIATYPEINFORMATION)(unsafe.Pointer(u))
+}
+
+// LibRequest reinterprets the union as its LibRequest member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) LibRequest() *NTMS_LIBREQUESTINFORMATIONA {
+	return (*NTMS_LIBREQUESTINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// OpRequest reinterprets the union as its OpRequest member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) OpRequest() *NTMS_OPREQUESTINFORMATIONA {
+	return (*NTMS_OPREQUESTINFORMATIONA)(unsafe.Pointer(u))
+}
+
+// Computer reinterprets the union as its Computer member.
+func (u *NTMS_OBJECTINFORMATIONA_Info_e__Union) Computer() *NTMS_COMPUTERINFORMATION {
+	return (*NTMS_COMPUTERINFORMATION)(unsafe.Pointer(u))
 }
 
 // NTMS_OBJECTINFORMATIONA: https://learn.microsoft.com/windows/win32/api/ntmsapi/ns-ntmsapi-ntms_objectinformationa
@@ -1215,9 +1730,90 @@ type NTMS_OBJECTINFORMATIONA struct {
 }
 
 // NTMS_OBJECTINFORMATIONW_Info_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NTMS_OBJECTINFORMATIONW_Info_e__Union struct {
 	Data [120]uint64
+}
+
+// Drive reinterprets the union as its Drive member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) Drive() *NTMS_DRIVEINFORMATIONW {
+	return (*NTMS_DRIVEINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// DriveType reinterprets the union as its DriveType member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) DriveType() *NTMS_DRIVETYPEINFORMATIONW {
+	return (*NTMS_DRIVETYPEINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// Library reinterprets the union as its Library member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) Library() *NTMS_LIBRARYINFORMATION {
+	return (*NTMS_LIBRARYINFORMATION)(unsafe.Pointer(u))
+}
+
+// Changer reinterprets the union as its Changer member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) Changer() *NTMS_CHANGERINFORMATIONW {
+	return (*NTMS_CHANGERINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// ChangerType reinterprets the union as its ChangerType member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) ChangerType() *NTMS_CHANGERTYPEINFORMATIONW {
+	return (*NTMS_CHANGERTYPEINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// StorageSlot reinterprets the union as its StorageSlot member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) StorageSlot() *NTMS_STORAGESLOTINFORMATION {
+	return (*NTMS_STORAGESLOTINFORMATION)(unsafe.Pointer(u))
+}
+
+// IEDoor reinterprets the union as its IEDoor member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) IEDoor() *NTMS_IEDOORINFORMATION {
+	return (*NTMS_IEDOORINFORMATION)(unsafe.Pointer(u))
+}
+
+// IEPort reinterprets the union as its IEPort member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) IEPort() *NTMS_IEPORTINFORMATION {
+	return (*NTMS_IEPORTINFORMATION)(unsafe.Pointer(u))
+}
+
+// PhysicalMedia reinterprets the union as its PhysicalMedia member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) PhysicalMedia() *NTMS_PMIDINFORMATIONW {
+	return (*NTMS_PMIDINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// LogicalMedia reinterprets the union as its LogicalMedia member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) LogicalMedia() *NTMS_LMIDINFORMATION {
+	return (*NTMS_LMIDINFORMATION)(unsafe.Pointer(u))
+}
+
+// Partition reinterprets the union as its Partition member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) Partition() *NTMS_PARTITIONINFORMATIONW {
+	return (*NTMS_PARTITIONINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// MediaPool reinterprets the union as its MediaPool member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) MediaPool() *NTMS_MEDIAPOOLINFORMATION {
+	return (*NTMS_MEDIAPOOLINFORMATION)(unsafe.Pointer(u))
+}
+
+// MediaType reinterprets the union as its MediaType member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) MediaType() *NTMS_MEDIATYPEINFORMATION {
+	return (*NTMS_MEDIATYPEINFORMATION)(unsafe.Pointer(u))
+}
+
+// LibRequest reinterprets the union as its LibRequest member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) LibRequest() *NTMS_LIBREQUESTINFORMATIONW {
+	return (*NTMS_LIBREQUESTINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// OpRequest reinterprets the union as its OpRequest member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) OpRequest() *NTMS_OPREQUESTINFORMATIONW {
+	return (*NTMS_OPREQUESTINFORMATIONW)(unsafe.Pointer(u))
+}
+
+// Computer reinterprets the union as its Computer member.
+func (u *NTMS_OBJECTINFORMATIONW_Info_e__Union) Computer() *NTMS_COMPUTERINFORMATION {
+	return (*NTMS_COMPUTERINFORMATION)(unsafe.Pointer(u))
 }
 
 // NTMS_OBJECTINFORMATIONW: https://learn.microsoft.com/windows/win32/api/ntmsapi/ns-ntmsapi-ntms_objectinformationw

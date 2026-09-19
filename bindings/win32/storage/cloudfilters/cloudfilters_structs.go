@@ -36,10 +36,150 @@ type CF_CALLBACK_INFO struct {
 	RequestKey             int64
 }
 
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union_FetchData_e__Struct struct {
+	FileOffset int64
+	Length     int64
+}
+
+// CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union struct {
+	Data [2]uint64
+}
+
+// FetchData reinterprets the union as its FetchData member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union) FetchData() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union_FetchData_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union_FetchData_e__Struct)(unsafe.Pointer(u))
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct struct {
+	Flags     CF_CALLBACK_CANCEL_FLAGS
+	Anonymous CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct_Anonymous_e__Union
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_CloseCompletion_e__Struct struct {
+	Flags CF_CALLBACK_CLOSE_COMPLETION_FLAGS
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DehydrateCompletion_e__Struct struct {
+	Flags  CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS
+	Reason CF_CALLBACK_DEHYDRATION_REASON
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Dehydrate_e__Struct struct {
+	Flags  CF_CALLBACK_DEHYDRATE_FLAGS
+	Reason CF_CALLBACK_DEHYDRATION_REASON
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DeleteCompletion_e__Struct struct {
+	Flags CF_CALLBACK_DELETE_COMPLETION_FLAGS
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Delete_e__Struct struct {
+	Flags CF_CALLBACK_DELETE_FLAGS
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchData_e__Struct struct {
+	Flags                 CF_CALLBACK_FETCH_DATA_FLAGS
+	RequiredFileOffset    int64
+	RequiredLength        int64
+	OptionalFileOffset    int64
+	OptionalLength        int64
+	LastDehydrationTime   int64
+	LastDehydrationReason CF_CALLBACK_DEHYDRATION_REASON
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchPlaceholders_e__Struct struct {
+	Flags   CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS
+	Pattern foundation.PWSTR
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_OpenCompletion_e__Struct struct {
+	Flags CF_CALLBACK_OPEN_COMPLETION_FLAGS
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_RenameCompletion_e__Struct struct {
+	Flags      CF_CALLBACK_RENAME_COMPLETION_FLAGS
+	SourcePath foundation.PWSTR
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Rename_e__Struct struct {
+	Flags      CF_CALLBACK_RENAME_FLAGS
+	TargetPath foundation.PWSTR
+}
+
+type CF_CALLBACK_PARAMETERS_Anonymous_e__Union_ValidateData_e__Struct struct {
+	Flags              CF_CALLBACK_VALIDATE_DATA_FLAGS
+	RequiredFileOffset int64
+	RequiredLength     int64
+}
+
 // CF_CALLBACK_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CF_CALLBACK_PARAMETERS_Anonymous_e__Union struct {
 	Data [7]uint64
+}
+
+// Cancel reinterprets the union as its Cancel member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) Cancel() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Cancel_e__Struct)(unsafe.Pointer(u))
+}
+
+// FetchData reinterprets the union as its FetchData member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) FetchData() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchData_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchData_e__Struct)(unsafe.Pointer(u))
+}
+
+// ValidateData reinterprets the union as its ValidateData member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) ValidateData() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_ValidateData_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_ValidateData_e__Struct)(unsafe.Pointer(u))
+}
+
+// FetchPlaceholders reinterprets the union as its FetchPlaceholders member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) FetchPlaceholders() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchPlaceholders_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_FetchPlaceholders_e__Struct)(unsafe.Pointer(u))
+}
+
+// OpenCompletion reinterprets the union as its OpenCompletion member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) OpenCompletion() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_OpenCompletion_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_OpenCompletion_e__Struct)(unsafe.Pointer(u))
+}
+
+// CloseCompletion reinterprets the union as its CloseCompletion member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) CloseCompletion() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_CloseCompletion_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_CloseCompletion_e__Struct)(unsafe.Pointer(u))
+}
+
+// Dehydrate reinterprets the union as its Dehydrate member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) Dehydrate() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Dehydrate_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Dehydrate_e__Struct)(unsafe.Pointer(u))
+}
+
+// DehydrateCompletion reinterprets the union as its DehydrateCompletion member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) DehydrateCompletion() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DehydrateCompletion_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DehydrateCompletion_e__Struct)(unsafe.Pointer(u))
+}
+
+// Delete reinterprets the union as its Delete member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) Delete() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Delete_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Delete_e__Struct)(unsafe.Pointer(u))
+}
+
+// DeleteCompletion reinterprets the union as its DeleteCompletion member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) DeleteCompletion() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DeleteCompletion_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_DeleteCompletion_e__Struct)(unsafe.Pointer(u))
+}
+
+// Rename reinterprets the union as its Rename member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) Rename() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Rename_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_Rename_e__Struct)(unsafe.Pointer(u))
+}
+
+// RenameCompletion reinterprets the union as its RenameCompletion member.
+func (u *CF_CALLBACK_PARAMETERS_Anonymous_e__Union) RenameCompletion() *CF_CALLBACK_PARAMETERS_Anonymous_e__Union_RenameCompletion_e__Struct {
+	return (*CF_CALLBACK_PARAMETERS_Anonymous_e__Union_RenameCompletion_e__Struct)(unsafe.Pointer(u))
 }
 
 // CF_CALLBACK_PARAMETERS: https://learn.microsoft.com/windows/win32/api/cfapi/ns-cfapi-cf_callback_parameters
@@ -83,10 +223,107 @@ type CF_OPERATION_INFO struct {
 	RequestKey        int64
 }
 
+type CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckData_e__Struct struct {
+	Flags            CF_OPERATION_ACK_DATA_FLAGS
+	CompletionStatus foundation.NTSTATUS
+	Offset           int64
+	Length           int64
+}
+
+type CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDehydrate_e__Struct struct {
+	Flags              CF_OPERATION_ACK_DEHYDRATE_FLAGS
+	CompletionStatus   foundation.NTSTATUS
+	FileIdentity       unsafe.Pointer
+	FileIdentityLength uint32
+}
+
+type CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDelete_e__Struct struct {
+	Flags            CF_OPERATION_ACK_DELETE_FLAGS
+	CompletionStatus foundation.NTSTATUS
+}
+
+type CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckRename_e__Struct struct {
+	Flags            CF_OPERATION_ACK_RENAME_FLAGS
+	CompletionStatus foundation.NTSTATUS
+}
+
+type CF_OPERATION_PARAMETERS_Anonymous_e__Union_RestartHydration_e__Struct struct {
+	Flags              CF_OPERATION_RESTART_HYDRATION_FLAGS
+	FsMetadata         *CF_FS_METADATA
+	FileIdentity       unsafe.Pointer
+	FileIdentityLength uint32
+}
+
+type CF_OPERATION_PARAMETERS_Anonymous_e__Union_RetrieveData_e__Struct struct {
+	Flags          CF_OPERATION_RETRIEVE_DATA_FLAGS
+	Buffer         unsafe.Pointer
+	Offset         int64
+	Length         int64
+	ReturnedLength int64
+}
+
+type CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferData_e__Struct struct {
+	Flags            CF_OPERATION_TRANSFER_DATA_FLAGS
+	CompletionStatus foundation.NTSTATUS
+	Buffer           unsafe.Pointer
+	Offset           int64
+	Length           int64
+}
+
+type CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferPlaceholders_e__Struct struct {
+	Flags                 CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS
+	CompletionStatus      foundation.NTSTATUS
+	PlaceholderTotalCount int64
+	PlaceholderArray      *CF_PLACEHOLDER_CREATE_INFO
+	PlaceholderCount      uint32
+	EntriesProcessed      uint32
+}
+
 // CF_OPERATION_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type CF_OPERATION_PARAMETERS_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// TransferData reinterprets the union as its TransferData member.
+func (u *CF_OPERATION_PARAMETERS_Anonymous_e__Union) TransferData() *CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferData_e__Struct {
+	return (*CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferData_e__Struct)(unsafe.Pointer(u))
+}
+
+// RetrieveData reinterprets the union as its RetrieveData member.
+func (u *CF_OPERATION_PARAMETERS_Anonymous_e__Union) RetrieveData() *CF_OPERATION_PARAMETERS_Anonymous_e__Union_RetrieveData_e__Struct {
+	return (*CF_OPERATION_PARAMETERS_Anonymous_e__Union_RetrieveData_e__Struct)(unsafe.Pointer(u))
+}
+
+// AckData reinterprets the union as its AckData member.
+func (u *CF_OPERATION_PARAMETERS_Anonymous_e__Union) AckData() *CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckData_e__Struct {
+	return (*CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckData_e__Struct)(unsafe.Pointer(u))
+}
+
+// RestartHydration reinterprets the union as its RestartHydration member.
+func (u *CF_OPERATION_PARAMETERS_Anonymous_e__Union) RestartHydration() *CF_OPERATION_PARAMETERS_Anonymous_e__Union_RestartHydration_e__Struct {
+	return (*CF_OPERATION_PARAMETERS_Anonymous_e__Union_RestartHydration_e__Struct)(unsafe.Pointer(u))
+}
+
+// TransferPlaceholders reinterprets the union as its TransferPlaceholders member.
+func (u *CF_OPERATION_PARAMETERS_Anonymous_e__Union) TransferPlaceholders() *CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferPlaceholders_e__Struct {
+	return (*CF_OPERATION_PARAMETERS_Anonymous_e__Union_TransferPlaceholders_e__Struct)(unsafe.Pointer(u))
+}
+
+// AckDehydrate reinterprets the union as its AckDehydrate member.
+func (u *CF_OPERATION_PARAMETERS_Anonymous_e__Union) AckDehydrate() *CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDehydrate_e__Struct {
+	return (*CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDehydrate_e__Struct)(unsafe.Pointer(u))
+}
+
+// AckRename reinterprets the union as its AckRename member.
+func (u *CF_OPERATION_PARAMETERS_Anonymous_e__Union) AckRename() *CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckRename_e__Struct {
+	return (*CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckRename_e__Struct)(unsafe.Pointer(u))
+}
+
+// AckDelete reinterprets the union as its AckDelete member.
+func (u *CF_OPERATION_PARAMETERS_Anonymous_e__Union) AckDelete() *CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDelete_e__Struct {
+	return (*CF_OPERATION_PARAMETERS_Anonymous_e__Union_AckDelete_e__Struct)(unsafe.Pointer(u))
 }
 
 // CF_OPERATION_PARAMETERS: https://learn.microsoft.com/windows/win32/api/cfapi/ns-cfapi-cf_operation_parameters

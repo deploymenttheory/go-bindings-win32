@@ -203,11 +203,42 @@ type INSTALLDATA struct {
 	Spec INSTALLSPEC
 }
 
+type INSTALLSPEC_AppName_e__Struct struct {
+	Name  foundation.PWSTR
+	GPOId win32.GUID
+}
+
+type INSTALLSPEC_COMClass_e__Struct struct {
+	Clsid  win32.GUID
+	ClsCtx uint32
+}
+
 // INSTALLSPEC: https://learn.microsoft.com/windows/win32/api/appmgmt/ns-appmgmt-installspec
 // INSTALLSPEC is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INSTALLSPEC struct {
 	Data [3]uint64
+}
+
+// AppName reinterprets the union as its AppName member.
+func (u *INSTALLSPEC) AppName() *INSTALLSPEC_AppName_e__Struct {
+	return (*INSTALLSPEC_AppName_e__Struct)(unsafe.Pointer(u))
+}
+
+// FileExt reinterprets the union as its FileExt member.
+func (u *INSTALLSPEC) FileExt() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// ProgId reinterprets the union as its ProgId member.
+func (u *INSTALLSPEC) ProgId() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
+}
+
+// COMClass reinterprets the union as its COMClass member.
+func (u *INSTALLSPEC) COMClass() *INSTALLSPEC_COMClass_e__Struct {
+	return (*INSTALLSPEC_COMClass_e__Struct)(unsafe.Pointer(u))
 }
 
 // LOCALMANAGEDAPPLICATION: https://learn.microsoft.com/windows/win32/api/appmgmt/ns-appmgmt-localmanagedapplication

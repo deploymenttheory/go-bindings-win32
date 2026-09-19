@@ -212,16 +212,19 @@ func (g *Generator) buildStructTree(meta *win32meta.NamespaceMeta, name string, 
 	var models []view.StructModel
 	model := view.StructModel{TypeName: name, DocURL: definition.Availability.DocURL}
 
+	// A union has no single field layout Go can express, so the type itself
+	// is an opaque, correctly sized and aligned blob. Its members are still
+	// emitted, as typed accessors: every C union member starts at offset 0,
+	// so each is one pointer reinterpretation of that backing storage.
+	var unionBlob []view.StructFieldModel
 	if definition.IsUnion {
 		blob, ok := g.opaqueBlobFields(definition, name, "union")
 		if !ok {
 			g.unclaimName(name)
 			return nil
 		}
+		unionBlob = blob
 		model.IsUnionBlob = true
-		model.Fields = blob
-		g.recordABI(meta.Namespace, name, definition, nil)
-		return []view.StructModel{model}
 	}
 
 	// A struct whose packed C layout differs from Go's natural layout of the
@@ -232,7 +235,7 @@ func (g *Generator) buildStructTree(meta *win32meta.NamespaceMeta, name string, 
 	// (FOO / *FOO) instead of degrading to unsafe.Pointer or being skipped.
 	packedLayout := g.structLayoutOf(definition, true)
 	naturalLayout := g.structLayoutOf(definition, false)
-	if packedLayout.ok && naturalLayout.ok && !sameLayout(packedLayout, naturalLayout) {
+	if !definition.IsUnion && packedLayout.ok && naturalLayout.ok && !sameLayout(packedLayout, naturalLayout) {
 		blob, ok := g.opaqueBlobFields(definition, name, "packed struct")
 		if !ok {
 			g.unclaimName(name)
@@ -263,6 +266,13 @@ func (g *Generator) buildStructTree(meta *win32meta.NamespaceMeta, name string, 
 		}
 	}
 
+	if definition.IsUnion {
+		model.Fields = unionBlob
+		model.Accessors = g.unionAccessors(meta, name, definition, emittedNested, imports)
+		g.recordABI(meta.Namespace, name, definition, nil)
+		return append(models, model)
+	}
+
 	fieldNames := map[string]bool{}
 	for i := range definition.Fields {
 		field := &definition.Fields[i]
@@ -287,6 +297,49 @@ func (g *Generator) buildStructTree(meta *win32meta.NamespaceMeta, name string, 
 
 	g.recordABI(meta.Namespace, name, definition, model.Fields)
 	return append(models, model)
+}
+
+// unionAccessors builds one typed member view per union member. A C union
+// overlays every member at offset 0, so an accessor is a single pointer
+// reinterpretation of the backing blob — no offset arithmetic, and the
+// returned pointer reads and writes the member in place.
+//
+// Member types resolve through fieldGoType, so an anonymous nested member
+// maps onto its emitted sibling type and a severed or skipped one degrades
+// exactly as a struct field would. A member whose type does not resolve at
+// all is dropped with a diagnostic rather than silently omitted.
+func (g *Generator) unionAccessors(meta *win32meta.NamespaceMeta, name string, definition *win32meta.Struct, emittedNested map[string]bool, imports typemap.ImportSet) []view.UnionAccessorModel {
+	// Seeded with the backing field's name: Go forbids a method and a field
+	// sharing a name, and a C member called "data" would collide.
+	taken := map[string]bool{"Data": true}
+	accessors := make([]view.UnionAccessorModel, 0, len(definition.Fields))
+	for i := range definition.Fields {
+		field := &definition.Fields[i]
+		// A bitfield member has no single type to view; its backing word is
+		// reachable through the sibling members like any other overlay.
+		if len(field.Bitfields) > 0 {
+			continue
+		}
+		goType, ok := g.fieldGoType(meta, name, definition, &field.Type, emittedNested, imports)
+		if !ok {
+			g.diag("union %s: member %s type unresolved, accessor skipped", name, field.Name)
+			continue
+		}
+		accessorName := exportName(field.Name)
+		for taken[accessorName] {
+			accessorName += "_"
+		}
+		taken[accessorName] = true
+		accessors = append(accessors, view.UnionAccessorModel{
+			Name:   accessorName,
+			GoType: goType,
+			Member: field.Name,
+		})
+	}
+	if len(accessors) == 0 {
+		return nil
+	}
+	return accessors
 }
 
 // sameLayout compares size, alignment, and every field offset.

@@ -464,6 +464,8 @@ var abiStorage_IscsiDisc = []abiCase{
 	{"storageiscsidisc.NV_SEP_CACHE_PARAMETER.WriteCacheTypeEffective", unsafe.Offsetof(storageiscsidisc.NV_SEP_CACHE_PARAMETER{}.WriteCacheTypeEffective), 10},
 	{"storageiscsidisc.NV_SEP_CACHE_PARAMETER.ParameterReserve1", unsafe.Offsetof(storageiscsidisc.NV_SEP_CACHE_PARAMETER{}.ParameterReserve1), 11},
 	{"storageiscsidisc.NV_SEP_CACHE_PARAMETER_Flags_e__Union size", unsafe.Sizeof(storageiscsidisc.NV_SEP_CACHE_PARAMETER_Flags_e__Union{}), 1},
+	{"storageiscsidisc.NV_SEP_CACHE_PARAMETER_Flags_e__Union_CacheFlags_e__Struct size", unsafe.Sizeof(storageiscsidisc.NV_SEP_CACHE_PARAMETER_Flags_e__Union_CacheFlags_e__Struct{}), 1},
+	{"storageiscsidisc.NV_SEP_CACHE_PARAMETER_Flags_e__Union_CacheFlags_e__Struct.Bitfield", unsafe.Offsetof(storageiscsidisc.NV_SEP_CACHE_PARAMETER_Flags_e__Union_CacheFlags_e__Struct{}.Bitfield), 0},
 	{"storageiscsidisc.PERSISTENT_ISCSI_LOGIN_INFOA size", unsafe.Sizeof(storageiscsidisc.PERSISTENT_ISCSI_LOGIN_INFOA{}), 1088},
 	{"storageiscsidisc.PERSISTENT_ISCSI_LOGIN_INFOA.TargetName", unsafe.Offsetof(storageiscsidisc.PERSISTENT_ISCSI_LOGIN_INFOA{}.TargetName), 0},
 	{"storageiscsidisc.PERSISTENT_ISCSI_LOGIN_INFOA.IsInformationalSession", unsafe.Offsetof(storageiscsidisc.PERSISTENT_ISCSI_LOGIN_INFOA{}.IsInformationalSession), 224},

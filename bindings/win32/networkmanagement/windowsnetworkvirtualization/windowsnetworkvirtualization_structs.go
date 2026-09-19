@@ -5,6 +5,8 @@
 package windowsnetworkvirtualization
 
 import (
+	"unsafe"
+
 	networkingwinsock "github.com/deploymenttheory/go-bindings-win32/bindings/win32/networking/winsock"
 )
 
@@ -19,9 +21,25 @@ type WNV_CUSTOMER_ADDRESS_CHANGE_PARAM struct {
 }
 
 // WNV_IP_ADDRESS_IP_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WNV_IP_ADDRESS_IP_e__Union struct {
 	Data [4]uint32
+}
+
+// V4 reinterprets the union as its v4 member.
+func (u *WNV_IP_ADDRESS_IP_e__Union) V4() *networkingwinsock.IN_ADDR {
+	return (*networkingwinsock.IN_ADDR)(unsafe.Pointer(u))
+}
+
+// V6 reinterprets the union as its v6 member.
+func (u *WNV_IP_ADDRESS_IP_e__Union) V6() *networkingwinsock.IN6_ADDR {
+	return (*networkingwinsock.IN6_ADDR)(unsafe.Pointer(u))
+}
+
+// Addr reinterprets the union as its Addr member.
+func (u *WNV_IP_ADDRESS_IP_e__Union) Addr() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
 }
 
 // WNV_IP_ADDRESS: https://learn.microsoft.com/windows/win32/api/wnvapi/ns-wnvapi-wnv_ip_address
@@ -38,9 +56,20 @@ type WNV_NOTIFICATION_PARAM struct {
 }
 
 // WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union struct {
 	Data [13]uint32
+}
+
+// ProviderAddressChange reinterprets the union as its ProviderAddressChange member.
+func (u *WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union) ProviderAddressChange() *WNV_PROVIDER_ADDRESS_CHANGE_PARAM {
+	return (*WNV_PROVIDER_ADDRESS_CHANGE_PARAM)(unsafe.Pointer(u))
+}
+
+// CustomerAddressChange reinterprets the union as its CustomerAddressChange member.
+func (u *WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union) CustomerAddressChange() *WNV_CUSTOMER_ADDRESS_CHANGE_PARAM {
+	return (*WNV_CUSTOMER_ADDRESS_CHANGE_PARAM)(unsafe.Pointer(u))
 }
 
 // WNV_OBJECT_CHANGE_PARAM: https://learn.microsoft.com/windows/win32/api/wnvapi/ns-wnvapi-wnv_object_change_param

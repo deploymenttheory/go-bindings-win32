@@ -5,6 +5,8 @@
 package virtualdosmachines
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemkernel "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/kernel"
 )
@@ -101,10 +103,32 @@ type VDMCONTEXT_WITHOUT_XSAVE struct {
 	SegSs        uint32
 }
 
+type VDMLDT_ENTRY_HighWord_e__Union_Bits_e__Struct struct {
+	Bitfield uint32
+}
+
+type VDMLDT_ENTRY_HighWord_e__Union_Bytes_e__Struct struct {
+	BaseMid byte
+	Flags1  byte
+	Flags2  byte
+	BaseHi  byte
+}
+
 // VDMLDT_ENTRY_HighWord_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VDMLDT_ENTRY_HighWord_e__Union struct {
 	Data [1]uint32
+}
+
+// Bytes reinterprets the union as its Bytes member.
+func (u *VDMLDT_ENTRY_HighWord_e__Union) Bytes() *VDMLDT_ENTRY_HighWord_e__Union_Bytes_e__Struct {
+	return (*VDMLDT_ENTRY_HighWord_e__Union_Bytes_e__Struct)(unsafe.Pointer(u))
+}
+
+// Bits reinterprets the union as its Bits member.
+func (u *VDMLDT_ENTRY_HighWord_e__Union) Bits() *VDMLDT_ENTRY_HighWord_e__Union_Bits_e__Struct {
+	return (*VDMLDT_ENTRY_HighWord_e__Union_Bits_e__Struct)(unsafe.Pointer(u))
 }
 
 type VDMLDT_ENTRY struct {

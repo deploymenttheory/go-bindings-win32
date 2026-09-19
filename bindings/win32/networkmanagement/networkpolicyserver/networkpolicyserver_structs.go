@@ -4,10 +4,25 @@
 
 package networkpolicyserver
 
+import (
+	"unsafe"
+)
+
 // RADIUS_ATTRIBUTE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type RADIUS_ATTRIBUTE_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// DwValue reinterprets the union as its dwValue member.
+func (u *RADIUS_ATTRIBUTE_Anonymous_e__Union) DwValue() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpValue reinterprets the union as its lpValue member.
+func (u *RADIUS_ATTRIBUTE_Anonymous_e__Union) LpValue() **byte {
+	return (**byte)(unsafe.Pointer(u))
 }
 
 // RADIUS_ATTRIBUTE: https://learn.microsoft.com/windows/win32/api/authif/ns-authif-radius_attribute

@@ -59,33 +59,98 @@ type DDBLTBATCH struct {
 }
 
 // DDBLTFX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDBLTFX_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// DwZDestConst reinterprets the union as its dwZDestConst member.
+func (u *DDBLTFX_Anonymous1_e__Union) DwZDestConst() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpDDSZBufferDest reinterprets the union as its lpDDSZBufferDest member.
+func (u *DDBLTFX_Anonymous1_e__Union) LpDDSZBufferDest() **IDirectDrawSurface {
+	return (**IDirectDrawSurface)(unsafe.Pointer(u))
+}
+
 // DDBLTFX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDBLTFX_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
+// DwZSrcConst reinterprets the union as its dwZSrcConst member.
+func (u *DDBLTFX_Anonymous2_e__Union) DwZSrcConst() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpDDSZBufferSrc reinterprets the union as its lpDDSZBufferSrc member.
+func (u *DDBLTFX_Anonymous2_e__Union) LpDDSZBufferSrc() **IDirectDrawSurface {
+	return (**IDirectDrawSurface)(unsafe.Pointer(u))
+}
+
 // DDBLTFX_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDBLTFX_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
 
+// DwAlphaDestConst reinterprets the union as its dwAlphaDestConst member.
+func (u *DDBLTFX_Anonymous3_e__Union) DwAlphaDestConst() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpDDSAlphaDest reinterprets the union as its lpDDSAlphaDest member.
+func (u *DDBLTFX_Anonymous3_e__Union) LpDDSAlphaDest() **IDirectDrawSurface {
+	return (**IDirectDrawSurface)(unsafe.Pointer(u))
+}
+
 // DDBLTFX_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDBLTFX_Anonymous4_e__Union struct {
 	Data [1]uint64
 }
 
+// DwAlphaSrcConst reinterprets the union as its dwAlphaSrcConst member.
+func (u *DDBLTFX_Anonymous4_e__Union) DwAlphaSrcConst() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpDDSAlphaSrc reinterprets the union as its lpDDSAlphaSrc member.
+func (u *DDBLTFX_Anonymous4_e__Union) LpDDSAlphaSrc() **IDirectDrawSurface {
+	return (**IDirectDrawSurface)(unsafe.Pointer(u))
+}
+
 // DDBLTFX_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDBLTFX_Anonymous5_e__Union struct {
 	Data [1]uint64
+}
+
+// DwFillColor reinterprets the union as its dwFillColor member.
+func (u *DDBLTFX_Anonymous5_e__Union) DwFillColor() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwFillDepth reinterprets the union as its dwFillDepth member.
+func (u *DDBLTFX_Anonymous5_e__Union) DwFillDepth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwFillPixel reinterprets the union as its dwFillPixel member.
+func (u *DDBLTFX_Anonymous5_e__Union) DwFillPixel() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpDDSPattern reinterprets the union as its lpDDSPattern member.
+func (u *DDBLTFX_Anonymous5_e__Union) LpDDSPattern() **IDirectDrawSurface {
+	return (**IDirectDrawSurface)(unsafe.Pointer(u))
 }
 
 // DDBLTFX: https://learn.microsoft.com/windows/win32/api/ddraw/ns-ddraw-ddbltfx
@@ -986,9 +1051,15 @@ type DDHAL_GETDRIVERINFODATA struct {
 }
 
 // DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// DwhContext reinterprets the union as its dwhContext member.
+func (u *DDHAL_GETDRIVERSTATEDATA_Anonymous_e__Union) DwhContext() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }
 
 type DDHAL_GETDRIVERSTATEDATA struct {
@@ -1491,15 +1562,37 @@ type DDOSCAPS struct {
 }
 
 // DDOVERLAYFX_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDOVERLAYFX_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// DwAlphaDestConst reinterprets the union as its dwAlphaDestConst member.
+func (u *DDOVERLAYFX_Anonymous1_e__Union) DwAlphaDestConst() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpDDSAlphaDest reinterprets the union as its lpDDSAlphaDest member.
+func (u *DDOVERLAYFX_Anonymous1_e__Union) LpDDSAlphaDest() **IDirectDrawSurface {
+	return (**IDirectDrawSurface)(unsafe.Pointer(u))
+}
+
 // DDOVERLAYFX_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDOVERLAYFX_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// DwAlphaSrcConst reinterprets the union as its dwAlphaSrcConst member.
+func (u *DDOVERLAYFX_Anonymous2_e__Union) DwAlphaSrcConst() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LpDDSAlphaSrc reinterprets the union as its lpDDSAlphaSrc member.
+func (u *DDOVERLAYFX_Anonymous2_e__Union) LpDDSAlphaSrc() **IDirectDrawSurface {
+	return (**IDirectDrawSurface)(unsafe.Pointer(u))
 }
 
 // DDOVERLAYFX: https://learn.microsoft.com/windows/win32/api/ddraw/ns-ddraw-ddoverlayfx
@@ -1519,33 +1612,178 @@ type DDOVERLAYFX struct {
 }
 
 // DDPIXELFORMAT_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDPIXELFORMAT_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// DwRGBBitCount reinterprets the union as its dwRGBBitCount member.
+func (u *DDPIXELFORMAT_Anonymous1_e__Union) DwRGBBitCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwYUVBitCount reinterprets the union as its dwYUVBitCount member.
+func (u *DDPIXELFORMAT_Anonymous1_e__Union) DwYUVBitCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwZBufferBitDepth reinterprets the union as its dwZBufferBitDepth member.
+func (u *DDPIXELFORMAT_Anonymous1_e__Union) DwZBufferBitDepth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwAlphaBitDepth reinterprets the union as its dwAlphaBitDepth member.
+func (u *DDPIXELFORMAT_Anonymous1_e__Union) DwAlphaBitDepth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwLuminanceBitCount reinterprets the union as its dwLuminanceBitCount member.
+func (u *DDPIXELFORMAT_Anonymous1_e__Union) DwLuminanceBitCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwBumpBitCount reinterprets the union as its dwBumpBitCount member.
+func (u *DDPIXELFORMAT_Anonymous1_e__Union) DwBumpBitCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwPrivateFormatBitCount reinterprets the union as its dwPrivateFormatBitCount member.
+func (u *DDPIXELFORMAT_Anonymous1_e__Union) DwPrivateFormatBitCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // DDPIXELFORMAT_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDPIXELFORMAT_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// DwRBitMask reinterprets the union as its dwRBitMask member.
+func (u *DDPIXELFORMAT_Anonymous2_e__Union) DwRBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwYBitMask reinterprets the union as its dwYBitMask member.
+func (u *DDPIXELFORMAT_Anonymous2_e__Union) DwYBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwStencilBitDepth reinterprets the union as its dwStencilBitDepth member.
+func (u *DDPIXELFORMAT_Anonymous2_e__Union) DwStencilBitDepth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwLuminanceBitMask reinterprets the union as its dwLuminanceBitMask member.
+func (u *DDPIXELFORMAT_Anonymous2_e__Union) DwLuminanceBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwBumpDuBitMask reinterprets the union as its dwBumpDuBitMask member.
+func (u *DDPIXELFORMAT_Anonymous2_e__Union) DwBumpDuBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwOperations reinterprets the union as its dwOperations member.
+func (u *DDPIXELFORMAT_Anonymous2_e__Union) DwOperations() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+type DDPIXELFORMAT_Anonymous3_e__Union_MultiSampleCaps_e__Struct struct {
+	WFlipMSTypes uint16
+	WBltMSTypes  uint16
+}
+
 // DDPIXELFORMAT_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDPIXELFORMAT_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
+// DwGBitMask reinterprets the union as its dwGBitMask member.
+func (u *DDPIXELFORMAT_Anonymous3_e__Union) DwGBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwUBitMask reinterprets the union as its dwUBitMask member.
+func (u *DDPIXELFORMAT_Anonymous3_e__Union) DwUBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwZBitMask reinterprets the union as its dwZBitMask member.
+func (u *DDPIXELFORMAT_Anonymous3_e__Union) DwZBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwBumpDvBitMask reinterprets the union as its dwBumpDvBitMask member.
+func (u *DDPIXELFORMAT_Anonymous3_e__Union) DwBumpDvBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// MultiSampleCaps reinterprets the union as its MultiSampleCaps member.
+func (u *DDPIXELFORMAT_Anonymous3_e__Union) MultiSampleCaps() *DDPIXELFORMAT_Anonymous3_e__Union_MultiSampleCaps_e__Struct {
+	return (*DDPIXELFORMAT_Anonymous3_e__Union_MultiSampleCaps_e__Struct)(unsafe.Pointer(u))
+}
+
 // DDPIXELFORMAT_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDPIXELFORMAT_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
 
+// DwBBitMask reinterprets the union as its dwBBitMask member.
+func (u *DDPIXELFORMAT_Anonymous4_e__Union) DwBBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwVBitMask reinterprets the union as its dwVBitMask member.
+func (u *DDPIXELFORMAT_Anonymous4_e__Union) DwVBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwStencilBitMask reinterprets the union as its dwStencilBitMask member.
+func (u *DDPIXELFORMAT_Anonymous4_e__Union) DwStencilBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwBumpLuminanceBitMask reinterprets the union as its dwBumpLuminanceBitMask member.
+func (u *DDPIXELFORMAT_Anonymous4_e__Union) DwBumpLuminanceBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // DDPIXELFORMAT_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDPIXELFORMAT_Anonymous5_e__Union struct {
 	Data [1]uint32
+}
+
+// DwRGBAlphaBitMask reinterprets the union as its dwRGBAlphaBitMask member.
+func (u *DDPIXELFORMAT_Anonymous5_e__Union) DwRGBAlphaBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwYUVAlphaBitMask reinterprets the union as its dwYUVAlphaBitMask member.
+func (u *DDPIXELFORMAT_Anonymous5_e__Union) DwYUVAlphaBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwLuminanceAlphaBitMask reinterprets the union as its dwLuminanceAlphaBitMask member.
+func (u *DDPIXELFORMAT_Anonymous5_e__Union) DwLuminanceAlphaBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwRGBZBitMask reinterprets the union as its dwRGBZBitMask member.
+func (u *DDPIXELFORMAT_Anonymous5_e__Union) DwRGBZBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwYUVZBitMask reinterprets the union as its dwYUVZBitMask member.
+func (u *DDPIXELFORMAT_Anonymous5_e__Union) DwYUVZBitMask() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DDPIXELFORMAT: https://learn.microsoft.com/windows/win32/api/ddraw/ns-ddraw-ddpixelformat
@@ -1614,9 +1852,20 @@ type DDRAWI_DDRAWCLIPPER_LCL struct {
 }
 
 // DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// DwReserved1 reinterprets the union as its dwReserved1 member.
+func (u *DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union) DwReserved1() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// HHELGDIPalette reinterprets the union as its hHELGDIPalette member.
+func (u *DDRAWI_DDRAWPALETTE_GBL_Anonymous_e__Union) HHELGDIPalette() *graphicsgdi.HPALETTE {
+	return (*graphicsgdi.HPALETTE)(unsafe.Pointer(u))
 }
 
 type DDRAWI_DDRAWPALETTE_GBL struct {
@@ -1653,27 +1902,76 @@ type DDRAWI_DDRAWPALETTE_LCL struct {
 }
 
 // DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// LpRectList reinterprets the union as its lpRectList member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union) LpRectList() **ACCESSRECTLIST {
+	return (**ACCESSRECTLIST)(unsafe.Pointer(u))
+}
+
+// DwBlockSizeY reinterprets the union as its dwBlockSizeY member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union) DwBlockSizeY() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LSlicePitch reinterprets the union as its lSlicePitch member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_Anonymous1_e__Union) LSlicePitch() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
 // DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
+// LpVidMemHeap reinterprets the union as its lpVidMemHeap member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union) LpVidMemHeap() **VMEMHEAP {
+	return (**VMEMHEAP)(unsafe.Pointer(u))
+}
+
+// DwBlockSizeX reinterprets the union as its dwBlockSizeX member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_Anonymous2_e__Union) DwBlockSizeX() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
 
+// LpDD reinterprets the union as its lpDD member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union) LpDD() **DDRAWI_DIRECTDRAW_GBL {
+	return (**DDRAWI_DIRECTDRAW_GBL)(unsafe.Pointer(u))
+}
+
+// LpDDHandle reinterprets the union as its lpDDHandle member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_Anonymous3_e__Union) LpDDHandle() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
 // DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union struct {
 	Data [1]uint32
+}
+
+// LPitch reinterprets the union as its lPitch member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union) LPitch() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// DwLinearSize reinterprets the union as its dwLinearSize member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_Anonymous4_e__Union) DwLinearSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DDRAWI_DDRAWSURFACE_GBL struct {
@@ -1692,9 +1990,20 @@ type DDRAWI_DDRAWSURFACE_GBL struct {
 }
 
 // DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// DwPhysicalPageTable reinterprets the union as its dwPhysicalPageTable member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union) DwPhysicalPageTable() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// FpPhysicalVidMem reinterprets the union as its fpPhysicalVidMem member.
+func (u *DDRAWI_DDRAWSURFACE_GBL_MORE_Anonymous_e__Union) FpPhysicalVidMem() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }
 
 type DDRAWI_DDRAWSURFACE_GBL_MORE struct {
@@ -1727,15 +2036,37 @@ type DDRAWI_DDRAWSURFACE_INT struct {
 }
 
 // DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// LpDDPalette reinterprets the union as its lpDDPalette member.
+func (u *DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union) LpDDPalette() **DDRAWI_DDRAWPALETTE_INT {
+	return (**DDRAWI_DDRAWPALETTE_INT)(unsafe.Pointer(u))
+}
+
+// Lp16DDPalette reinterprets the union as its lp16DDPalette member.
+func (u *DDRAWI_DDRAWSURFACE_LCL_Anonymous1_e__Union) Lp16DDPalette() **DDRAWI_DDRAWPALETTE_INT {
+	return (**DDRAWI_DDRAWPALETTE_INT)(unsafe.Pointer(u))
+}
+
 // DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// LpDDClipper reinterprets the union as its lpDDClipper member.
+func (u *DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union) LpDDClipper() **DDRAWI_DDRAWCLIPPER_LCL {
+	return (**DDRAWI_DDRAWCLIPPER_LCL)(unsafe.Pointer(u))
+}
+
+// Lp16DDClipper reinterprets the union as its lp16DDClipper member.
+func (u *DDRAWI_DDRAWSURFACE_LCL_Anonymous2_e__Union) Lp16DDClipper() **DDRAWI_DDRAWCLIPPER_INT {
+	return (**DDRAWI_DDRAWCLIPPER_INT)(unsafe.Pointer(u))
 }
 
 type DDRAWI_DDRAWSURFACE_LCL struct {
@@ -1957,9 +2288,20 @@ type DDSCAPS struct {
 }
 
 // DDSCAPS2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDSCAPS2_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwCaps4 reinterprets the union as its dwCaps4 member.
+func (u *DDSCAPS2_Anonymous_e__Union) DwCaps4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwVolumeDepth reinterprets the union as its dwVolumeDepth member.
+func (u *DDSCAPS2_Anonymous_e__Union) DwVolumeDepth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DDSCAPS2: https://learn.microsoft.com/windows/win32/api/ddraw/ns-ddraw-ddscaps2
@@ -1971,9 +2313,20 @@ type DDSCAPS2 struct {
 }
 
 // DDSCAPSEX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDSCAPSEX_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// DwCaps4 reinterprets the union as its dwCaps4 member.
+func (u *DDSCAPSEX_Anonymous_e__Union) DwCaps4() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwVolumeDepth reinterprets the union as its dwVolumeDepth member.
+func (u *DDSCAPSEX_Anonymous_e__Union) DwVolumeDepth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DDSCAPSEX struct {
@@ -2038,15 +2391,42 @@ type DDSURFACEDATA struct {
 }
 
 // DDSURFACEDESC_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDSURFACEDESC_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// LPitch reinterprets the union as its lPitch member.
+func (u *DDSURFACEDESC_Anonymous1_e__Union) LPitch() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// DwLinearSize reinterprets the union as its dwLinearSize member.
+func (u *DDSURFACEDESC_Anonymous1_e__Union) DwLinearSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // DDSURFACEDESC_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDSURFACEDESC_Anonymous2_e__Union struct {
 	Data [1]uint32
+}
+
+// DwMipMapCount reinterprets the union as its dwMipMapCount member.
+func (u *DDSURFACEDESC_Anonymous2_e__Union) DwMipMapCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwZBufferBitDepth reinterprets the union as its dwZBufferBitDepth member.
+func (u *DDSURFACEDESC_Anonymous2_e__Union) DwZBufferBitDepth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwRefreshRate reinterprets the union as its dwRefreshRate member.
+func (u *DDSURFACEDESC_Anonymous2_e__Union) DwRefreshRate() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DDSURFACEDESC: https://learn.microsoft.com/windows/win32/api/ddraw/ns-ddraw-ddsurfacedesc
@@ -2070,33 +2450,93 @@ type DDSURFACEDESC struct {
 }
 
 // DDSURFACEDESC2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDSURFACEDESC2_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// LPitch reinterprets the union as its lPitch member.
+func (u *DDSURFACEDESC2_Anonymous1_e__Union) LPitch() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// DwLinearSize reinterprets the union as its dwLinearSize member.
+func (u *DDSURFACEDESC2_Anonymous1_e__Union) DwLinearSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // DDSURFACEDESC2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDSURFACEDESC2_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
+// DwBackBufferCount reinterprets the union as its dwBackBufferCount member.
+func (u *DDSURFACEDESC2_Anonymous2_e__Union) DwBackBufferCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwDepth reinterprets the union as its dwDepth member.
+func (u *DDSURFACEDESC2_Anonymous2_e__Union) DwDepth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // DDSURFACEDESC2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDSURFACEDESC2_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
 
+// DwMipMapCount reinterprets the union as its dwMipMapCount member.
+func (u *DDSURFACEDESC2_Anonymous3_e__Union) DwMipMapCount() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwRefreshRate reinterprets the union as its dwRefreshRate member.
+func (u *DDSURFACEDESC2_Anonymous3_e__Union) DwRefreshRate() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwSrcVBHandle reinterprets the union as its dwSrcVBHandle member.
+func (u *DDSURFACEDESC2_Anonymous3_e__Union) DwSrcVBHandle() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // DDSURFACEDESC2_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDSURFACEDESC2_Anonymous4_e__Union struct {
 	Data [2]uint32
 }
 
+// DdckCKDestOverlay reinterprets the union as its ddckCKDestOverlay member.
+func (u *DDSURFACEDESC2_Anonymous4_e__Union) DdckCKDestOverlay() *DDCOLORKEY {
+	return (*DDCOLORKEY)(unsafe.Pointer(u))
+}
+
+// DwEmptyFaceColor reinterprets the union as its dwEmptyFaceColor member.
+func (u *DDSURFACEDESC2_Anonymous4_e__Union) DwEmptyFaceColor() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // DDSURFACEDESC2_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DDSURFACEDESC2_Anonymous5_e__Union struct {
 	Data [8]uint32
+}
+
+// DdpfPixelFormat reinterprets the union as its ddpfPixelFormat member.
+func (u *DDSURFACEDESC2_Anonymous5_e__Union) DdpfPixelFormat() *DDPIXELFORMAT {
+	return (*DDPIXELFORMAT)(unsafe.Pointer(u))
+}
+
+// DwFVF reinterprets the union as its dwFVF member.
+func (u *DDSURFACEDESC2_Anonymous5_e__Union) DwFVF() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DDSURFACEDESC2: https://learn.microsoft.com/windows/win32/api/ddraw/ns-ddraw-ddsurfacedesc2
@@ -2551,9 +2991,20 @@ type DD_GETDRIVERINFODATA struct {
 }
 
 // DD_GETDRIVERSTATEDATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DD_GETDRIVERSTATEDATA_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// LpDD reinterprets the union as its lpDD member.
+func (u *DD_GETDRIVERSTATEDATA_Anonymous_e__Union) LpDD() **DD_DIRECTDRAW_GLOBAL {
+	return (**DD_DIRECTDRAW_GLOBAL)(unsafe.Pointer(u))
+}
+
+// DwhContext reinterprets the union as its dwhContext member.
+func (u *DD_GETDRIVERSTATEDATA_Anonymous_e__Union) DwhContext() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
 }
 
 // DD_GETDRIVERSTATEDATA: https://learn.microsoft.com/windows/win32/api/ddrawint/ns-ddrawint-dd_getdriverstatedata
@@ -2990,21 +3441,59 @@ type DD_SURFACECALLBACKS struct {
 }
 
 // DD_SURFACE_GLOBAL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DD_SURFACE_GLOBAL_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
+// DwBlockSizeY reinterprets the union as its dwBlockSizeY member.
+func (u *DD_SURFACE_GLOBAL_Anonymous1_e__Union) DwBlockSizeY() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// LSlicePitch reinterprets the union as its lSlicePitch member.
+func (u *DD_SURFACE_GLOBAL_Anonymous1_e__Union) LSlicePitch() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
 // DD_SURFACE_GLOBAL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DD_SURFACE_GLOBAL_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
+// LpVidMemHeap reinterprets the union as its lpVidMemHeap member.
+func (u *DD_SURFACE_GLOBAL_Anonymous2_e__Union) LpVidMemHeap() **VIDEOMEMORY {
+	return (**VIDEOMEMORY)(unsafe.Pointer(u))
+}
+
+// DwBlockSizeX reinterprets the union as its dwBlockSizeX member.
+func (u *DD_SURFACE_GLOBAL_Anonymous2_e__Union) DwBlockSizeX() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// DwUserMemSize reinterprets the union as its dwUserMemSize member.
+func (u *DD_SURFACE_GLOBAL_Anonymous2_e__Union) DwUserMemSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // DD_SURFACE_GLOBAL_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DD_SURFACE_GLOBAL_Anonymous3_e__Union struct {
 	Data [1]uint32
+}
+
+// LPitch reinterprets the union as its lPitch member.
+func (u *DD_SURFACE_GLOBAL_Anonymous3_e__Union) LPitch() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// DwLinearSize reinterprets the union as its dwLinearSize member.
+func (u *DD_SURFACE_GLOBAL_Anonymous3_e__Union) DwLinearSize() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // DD_SURFACE_GLOBAL: https://learn.microsoft.com/windows/win32/api/ddrawint/ns-ddrawint-dd_surface_global
@@ -3029,15 +3518,37 @@ type DD_SURFACE_INT struct {
 }
 
 // DD_SURFACE_LOCAL_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DD_SURFACE_LOCAL_Anonymous1_e__Union struct {
 	Data [2]uint32
 }
 
+// DdckCKSrcOverlay reinterprets the union as its ddckCKSrcOverlay member.
+func (u *DD_SURFACE_LOCAL_Anonymous1_e__Union) DdckCKSrcOverlay() *DDCOLORKEY {
+	return (*DDCOLORKEY)(unsafe.Pointer(u))
+}
+
+// DdckCKSrcBlt reinterprets the union as its ddckCKSrcBlt member.
+func (u *DD_SURFACE_LOCAL_Anonymous1_e__Union) DdckCKSrcBlt() *DDCOLORKEY {
+	return (*DDCOLORKEY)(unsafe.Pointer(u))
+}
+
 // DD_SURFACE_LOCAL_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DD_SURFACE_LOCAL_Anonymous2_e__Union struct {
 	Data [2]uint32
+}
+
+// DdckCKDestOverlay reinterprets the union as its ddckCKDestOverlay member.
+func (u *DD_SURFACE_LOCAL_Anonymous2_e__Union) DdckCKDestOverlay() *DDCOLORKEY {
+	return (*DDCOLORKEY)(unsafe.Pointer(u))
+}
+
+// DdckCKDestBlt reinterprets the union as its ddckCKDestBlt member.
+func (u *DD_SURFACE_LOCAL_Anonymous2_e__Union) DdckCKDestBlt() *DDCOLORKEY {
+	return (*DDCOLORKEY)(unsafe.Pointer(u))
 }
 
 // DD_SURFACE_LOCAL: https://learn.microsoft.com/windows/win32/api/ddrawint/ns-ddrawint-dd_surface_local
@@ -3272,10 +3783,35 @@ type PROCESS_LIST struct {
 	DwZDepth     uint32
 }
 
+type SURFACEALIGNMENT_Anonymous_e__Union_Linear_e__Struct struct {
+	DwStartAlignment uint32
+	DwPitchAlignment uint32
+	DwFlags          uint32
+	DwReserved2      uint32
+}
+
+type SURFACEALIGNMENT_Anonymous_e__Union_Rectangular_e__Struct struct {
+	DwXAlignment uint32
+	DwYAlignment uint32
+	DwFlags      uint32
+	DwReserved2  uint32
+}
+
 // SURFACEALIGNMENT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SURFACEALIGNMENT_Anonymous_e__Union struct {
 	Data [4]uint32
+}
+
+// Linear reinterprets the union as its Linear member.
+func (u *SURFACEALIGNMENT_Anonymous_e__Union) Linear() *SURFACEALIGNMENT_Anonymous_e__Union_Linear_e__Struct {
+	return (*SURFACEALIGNMENT_Anonymous_e__Union_Linear_e__Struct)(unsafe.Pointer(u))
+}
+
+// Rectangular reinterprets the union as its Rectangular member.
+func (u *SURFACEALIGNMENT_Anonymous_e__Union) Rectangular() *SURFACEALIGNMENT_Anonymous_e__Union_Rectangular_e__Struct {
+	return (*SURFACEALIGNMENT_Anonymous_e__Union_Rectangular_e__Struct)(unsafe.Pointer(u))
 }
 
 // SURFACEALIGNMENT: https://learn.microsoft.com/windows/win32/api/dmemmgr/ns-dmemmgr-surfacealignment
@@ -3284,15 +3820,37 @@ type SURFACEALIGNMENT struct {
 }
 
 // VIDEOMEMORY_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VIDEOMEMORY_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// FpEnd reinterprets the union as its fpEnd member.
+func (u *VIDEOMEMORY_Anonymous1_e__Union) FpEnd() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// DwWidth reinterprets the union as its dwWidth member.
+func (u *VIDEOMEMORY_Anonymous1_e__Union) DwWidth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // VIDEOMEMORY_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VIDEOMEMORY_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// LpHeap reinterprets the union as its lpHeap member.
+func (u *VIDEOMEMORY_Anonymous2_e__Union) LpHeap() **VMEMHEAP {
+	return (**VMEMHEAP)(unsafe.Pointer(u))
+}
+
+// DwHeight reinterprets the union as its dwHeight member.
+func (u *VIDEOMEMORY_Anonymous2_e__Union) DwHeight() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // VIDEOMEMORY: https://learn.microsoft.com/windows/win32/api/ddrawint/ns-ddrawint-videomemory
@@ -3322,15 +3880,37 @@ type VIDEOMEMORYINFO struct {
 }
 
 // VIDMEM_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VIDMEM_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
+// FpEnd reinterprets the union as its fpEnd member.
+func (u *VIDMEM_Anonymous1_e__Union) FpEnd() *uintptr {
+	return (*uintptr)(unsafe.Pointer(u))
+}
+
+// DwWidth reinterprets the union as its dwWidth member.
+func (u *VIDMEM_Anonymous1_e__Union) DwWidth() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
 // VIDMEM_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VIDMEM_Anonymous2_e__Union struct {
 	Data [1]uint64
+}
+
+// LpHeap reinterprets the union as its lpHeap member.
+func (u *VIDMEM_Anonymous2_e__Union) LpHeap() **VMEMHEAP {
+	return (**VMEMHEAP)(unsafe.Pointer(u))
+}
+
+// DwHeight reinterprets the union as its dwHeight member.
+func (u *VIDMEM_Anonymous2_e__Union) DwHeight() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type VIDMEM struct {

@@ -4,6 +4,10 @@
 
 package taskscheduler
 
+import (
+	"unsafe"
+)
+
 // DAILY: https://learn.microsoft.com/windows/win32/api/mstask/ns-mstask-daily
 type DAILY struct {
 	DaysInterval uint16
@@ -45,9 +49,30 @@ type TASK_TRIGGER struct {
 
 // TRIGGER_TYPE_UNION: https://learn.microsoft.com/windows/win32/api/mstask/ns-mstask-trigger_type_union
 // TRIGGER_TYPE_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type TRIGGER_TYPE_UNION struct {
 	Data [2]uint32
+}
+
+// Daily reinterprets the union as its Daily member.
+func (u *TRIGGER_TYPE_UNION) Daily() *DAILY {
+	return (*DAILY)(unsafe.Pointer(u))
+}
+
+// Weekly reinterprets the union as its Weekly member.
+func (u *TRIGGER_TYPE_UNION) Weekly() *WEEKLY {
+	return (*WEEKLY)(unsafe.Pointer(u))
+}
+
+// MonthlyDate reinterprets the union as its MonthlyDate member.
+func (u *TRIGGER_TYPE_UNION) MonthlyDate() *MONTHLYDATE {
+	return (*MONTHLYDATE)(unsafe.Pointer(u))
+}
+
+// MonthlyDOW reinterprets the union as its MonthlyDOW member.
+func (u *TRIGGER_TYPE_UNION) MonthlyDOW() *MONTHLYDOW {
+	return (*MONTHLYDOW)(unsafe.Pointer(u))
 }
 
 type TaskHandlerPS struct {

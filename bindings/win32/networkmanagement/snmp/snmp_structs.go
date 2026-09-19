@@ -5,13 +5,76 @@
 package snmp
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 // AsnAny_asnValue_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type AsnAny_asnValue_e__Union struct {
 	Data [4]uint32
+}
+
+// Number reinterprets the union as its number member.
+func (u *AsnAny_asnValue_e__Union) Number() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// Unsigned32 reinterprets the union as its unsigned32 member.
+func (u *AsnAny_asnValue_e__Union) Unsigned32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Counter64 reinterprets the union as its counter64 member.
+func (u *AsnAny_asnValue_e__Union) Counter64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
+}
+
+// String reinterprets the union as its string member.
+func (u *AsnAny_asnValue_e__Union) String() *AsnOctetString {
+	return (*AsnOctetString)(unsafe.Pointer(u))
+}
+
+// Bits reinterprets the union as its bits member.
+func (u *AsnAny_asnValue_e__Union) Bits() *AsnOctetString {
+	return (*AsnOctetString)(unsafe.Pointer(u))
+}
+
+// Object reinterprets the union as its object member.
+func (u *AsnAny_asnValue_e__Union) Object() *AsnObjectIdentifier {
+	return (*AsnObjectIdentifier)(unsafe.Pointer(u))
+}
+
+// Sequence reinterprets the union as its sequence member.
+func (u *AsnAny_asnValue_e__Union) Sequence() *AsnOctetString {
+	return (*AsnOctetString)(unsafe.Pointer(u))
+}
+
+// Address reinterprets the union as its address member.
+func (u *AsnAny_asnValue_e__Union) Address() *AsnOctetString {
+	return (*AsnOctetString)(unsafe.Pointer(u))
+}
+
+// Counter reinterprets the union as its counter member.
+func (u *AsnAny_asnValue_e__Union) Counter() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Gauge reinterprets the union as its gauge member.
+func (u *AsnAny_asnValue_e__Union) Gauge() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Ticks reinterprets the union as its ticks member.
+func (u *AsnAny_asnValue_e__Union) Ticks() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Arbitrary reinterprets the union as its arbitrary member.
+func (u *AsnAny_asnValue_e__Union) Arbitrary() *AsnOctetString {
+	return (*AsnOctetString)(unsafe.Pointer(u))
 }
 
 // AsnAny: https://learn.microsoft.com/windows/win32/api/snmp/ns-snmp-asnany
@@ -69,9 +132,40 @@ type SmiOID struct {
 }
 
 // SmiVALUE_value_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SmiVALUE_value_e__Union struct {
 	Data [2]uint64
+}
+
+// SNumber reinterprets the union as its sNumber member.
+func (u *SmiVALUE_value_e__Union) SNumber() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// UNumber reinterprets the union as its uNumber member.
+func (u *SmiVALUE_value_e__Union) UNumber() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// HNumber reinterprets the union as its hNumber member.
+func (u *SmiVALUE_value_e__Union) HNumber() *SmiCNTR64 {
+	return (*SmiCNTR64)(unsafe.Pointer(u))
+}
+
+// String reinterprets the union as its string member.
+func (u *SmiVALUE_value_e__Union) String() *SmiOCTETS {
+	return (*SmiOCTETS)(unsafe.Pointer(u))
+}
+
+// Oid reinterprets the union as its oid member.
+func (u *SmiVALUE_value_e__Union) Oid() *SmiOID {
+	return (*SmiOID)(unsafe.Pointer(u))
+}
+
+// Empty reinterprets the union as its empty member.
+func (u *SmiVALUE_value_e__Union) Empty() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 // SmiVALUE: https://learn.microsoft.com/windows/win32/api/winsnmp/ns-winsnmp-smivalue

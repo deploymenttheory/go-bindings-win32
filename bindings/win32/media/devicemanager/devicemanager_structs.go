@@ -5,6 +5,8 @@
 package devicemanager
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
@@ -56,9 +58,420 @@ type WMDMDATETIME struct {
 }
 
 // WMDMDetermineMaxPropStringLen is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WMDMDetermineMaxPropStringLen struct {
 	Data [36]uint16
+}
+
+// Sz001 reinterprets the union as its sz001 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz001() *[27]uint16 {
+	return (*[27]uint16)(unsafe.Pointer(u))
+}
+
+// Sz002 reinterprets the union as its sz002 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz002() *[31]uint16 {
+	return (*[31]uint16)(unsafe.Pointer(u))
+}
+
+// Sz003 reinterprets the union as its sz003 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz003() *[14]uint16 {
+	return (*[14]uint16)(unsafe.Pointer(u))
+}
+
+// Sz004 reinterprets the union as its sz004 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz004() *[16]uint16 {
+	return (*[16]uint16)(unsafe.Pointer(u))
+}
+
+// Sz005 reinterprets the union as its sz005 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz005() *[22]uint16 {
+	return (*[22]uint16)(unsafe.Pointer(u))
+}
+
+// Sz006 reinterprets the union as its sz006 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz006() *[14]uint16 {
+	return (*[14]uint16)(unsafe.Pointer(u))
+}
+
+// Sz007 reinterprets the union as its sz007 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz007() *[20]uint16 {
+	return (*[20]uint16)(unsafe.Pointer(u))
+}
+
+// Sz008 reinterprets the union as its sz008 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz008() *[20]uint16 {
+	return (*[20]uint16)(unsafe.Pointer(u))
+}
+
+// Sz009 reinterprets the union as its sz009 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz009() *[22]uint16 {
+	return (*[22]uint16)(unsafe.Pointer(u))
+}
+
+// Sz010 reinterprets the union as its sz010 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz010() *[11]uint16 {
+	return (*[11]uint16)(unsafe.Pointer(u))
+}
+
+// Sz011 reinterprets the union as its sz011 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz011() *[12]uint16 {
+	return (*[12]uint16)(unsafe.Pointer(u))
+}
+
+// Sz012 reinterprets the union as its sz012 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz012() *[17]uint16 {
+	return (*[17]uint16)(unsafe.Pointer(u))
+}
+
+// Sz013 reinterprets the union as its sz013 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz013() *[17]uint16 {
+	return (*[17]uint16)(unsafe.Pointer(u))
+}
+
+// Sz014 reinterprets the union as its sz014 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz014() *[16]uint16 {
+	return (*[16]uint16)(unsafe.Pointer(u))
+}
+
+// Sz015 reinterprets the union as its sz015 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz015() *[17]uint16 {
+	return (*[17]uint16)(unsafe.Pointer(u))
+}
+
+// Sz016 reinterprets the union as its sz016 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz016() *[11]uint16 {
+	return (*[11]uint16)(unsafe.Pointer(u))
+}
+
+// Sz017 reinterprets the union as its sz017 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz017() *[11]uint16 {
+	return (*[11]uint16)(unsafe.Pointer(u))
+}
+
+// Sz018 reinterprets the union as its sz018 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz018() *[15]uint16 {
+	return (*[15]uint16)(unsafe.Pointer(u))
+}
+
+// Sz019 reinterprets the union as its sz019 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz019() *[22]uint16 {
+	return (*[22]uint16)(unsafe.Pointer(u))
+}
+
+// Sz020 reinterprets the union as its sz020 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz020() *[20]uint16 {
+	return (*[20]uint16)(unsafe.Pointer(u))
+}
+
+// Sz021 reinterprets the union as its sz021 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz021() *[22]uint16 {
+	return (*[22]uint16)(unsafe.Pointer(u))
+}
+
+// Sz022 reinterprets the union as its sz022 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz022() *[21]uint16 {
+	return (*[21]uint16)(unsafe.Pointer(u))
+}
+
+// Sz023 reinterprets the union as its sz023 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz023() *[24]uint16 {
+	return (*[24]uint16)(unsafe.Pointer(u))
+}
+
+// Sz024 reinterprets the union as its sz024 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz024() *[20]uint16 {
+	return (*[20]uint16)(unsafe.Pointer(u))
+}
+
+// Sz025 reinterprets the union as its sz025 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz025() *[10]uint16 {
+	return (*[10]uint16)(unsafe.Pointer(u))
+}
+
+// Sz026 reinterprets the union as its sz026 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz026() *[14]uint16 {
+	return (*[14]uint16)(unsafe.Pointer(u))
+}
+
+// Sz027 reinterprets the union as its sz027 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz027() *[11]uint16 {
+	return (*[11]uint16)(unsafe.Pointer(u))
+}
+
+// Sz028 reinterprets the union as its sz028 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz028() *[11]uint16 {
+	return (*[11]uint16)(unsafe.Pointer(u))
+}
+
+// Sz029 reinterprets the union as its sz029 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz029() *[13]uint16 {
+	return (*[13]uint16)(unsafe.Pointer(u))
+}
+
+// Sz030 reinterprets the union as its sz030 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz030() *[17]uint16 {
+	return (*[17]uint16)(unsafe.Pointer(u))
+}
+
+// Sz031 reinterprets the union as its sz031 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz031() *[16]uint16 {
+	return (*[16]uint16)(unsafe.Pointer(u))
+}
+
+// Sz032 reinterprets the union as its sz032 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz032() *[17]uint16 {
+	return (*[17]uint16)(unsafe.Pointer(u))
+}
+
+// Sz033 reinterprets the union as its sz033 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz033() *[20]uint16 {
+	return (*[20]uint16)(unsafe.Pointer(u))
+}
+
+// Sz034 reinterprets the union as its sz034 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz034() *[19]uint16 {
+	return (*[19]uint16)(unsafe.Pointer(u))
+}
+
+// Sz035 reinterprets the union as its sz035 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz035() *[18]uint16 {
+	return (*[18]uint16)(unsafe.Pointer(u))
+}
+
+// Sz036 reinterprets the union as its sz036 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz036() *[18]uint16 {
+	return (*[18]uint16)(unsafe.Pointer(u))
+}
+
+// Sz037 reinterprets the union as its sz037 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz037() *[15]uint16 {
+	return (*[15]uint16)(unsafe.Pointer(u))
+}
+
+// Sz041 reinterprets the union as its sz041 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz041() *[14]uint16 {
+	return (*[14]uint16)(unsafe.Pointer(u))
+}
+
+// Sz043 reinterprets the union as its sz043 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz043() *[22]uint16 {
+	return (*[22]uint16)(unsafe.Pointer(u))
+}
+
+// Sz044 reinterprets the union as its sz044 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz044() *[16]uint16 {
+	return (*[16]uint16)(unsafe.Pointer(u))
+}
+
+// Sz045 reinterprets the union as its sz045 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz045() *[20]uint16 {
+	return (*[20]uint16)(unsafe.Pointer(u))
+}
+
+// Sz046 reinterprets the union as its sz046 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz046() *[14]uint16 {
+	return (*[14]uint16)(unsafe.Pointer(u))
+}
+
+// Sz047 reinterprets the union as its sz047 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz047() *[14]uint16 {
+	return (*[14]uint16)(unsafe.Pointer(u))
+}
+
+// Sz048 reinterprets the union as its sz048 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz048() *[12]uint16 {
+	return (*[12]uint16)(unsafe.Pointer(u))
+}
+
+// Sz049 reinterprets the union as its sz049 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz049() *[25]uint16 {
+	return (*[25]uint16)(unsafe.Pointer(u))
+}
+
+// Sz050 reinterprets the union as its sz050 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz050() *[26]uint16 {
+	return (*[26]uint16)(unsafe.Pointer(u))
+}
+
+// Sz051 reinterprets the union as its sz051 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz051() *[25]uint16 {
+	return (*[25]uint16)(unsafe.Pointer(u))
+}
+
+// Sz052 reinterprets the union as its sz052 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz052() *[16]uint16 {
+	return (*[16]uint16)(unsafe.Pointer(u))
+}
+
+// Sz053 reinterprets the union as its sz053 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz053() *[24]uint16 {
+	return (*[24]uint16)(unsafe.Pointer(u))
+}
+
+// Sz054 reinterprets the union as its sz054 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz054() *[15]uint16 {
+	return (*[15]uint16)(unsafe.Pointer(u))
+}
+
+// Sz055 reinterprets the union as its sz055 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz055() *[21]uint16 {
+	return (*[21]uint16)(unsafe.Pointer(u))
+}
+
+// Sz056 reinterprets the union as its sz056 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz056() *[16]uint16 {
+	return (*[16]uint16)(unsafe.Pointer(u))
+}
+
+// Sz057 reinterprets the union as its sz057 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz057() *[22]uint16 {
+	return (*[22]uint16)(unsafe.Pointer(u))
+}
+
+// Sz058 reinterprets the union as its sz058 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz058() *[14]uint16 {
+	return (*[14]uint16)(unsafe.Pointer(u))
+}
+
+// Sz059 reinterprets the union as its sz059 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz059() *[25]uint16 {
+	return (*[25]uint16)(unsafe.Pointer(u))
+}
+
+// Sz060 reinterprets the union as its sz060 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz060() *[18]uint16 {
+	return (*[18]uint16)(unsafe.Pointer(u))
+}
+
+// Sz061 reinterprets the union as its sz061 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz061() *[22]uint16 {
+	return (*[22]uint16)(unsafe.Pointer(u))
+}
+
+// Sz062 reinterprets the union as its sz062 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz062() *[26]uint16 {
+	return (*[26]uint16)(unsafe.Pointer(u))
+}
+
+// Sz063 reinterprets the union as its sz063 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz063() *[36]uint16 {
+	return (*[36]uint16)(unsafe.Pointer(u))
+}
+
+// Sz064 reinterprets the union as its sz064 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz064() *[23]uint16 {
+	return (*[23]uint16)(unsafe.Pointer(u))
+}
+
+// Sz065 reinterprets the union as its sz065 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz065() *[12]uint16 {
+	return (*[12]uint16)(unsafe.Pointer(u))
+}
+
+// Sz066 reinterprets the union as its sz066 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz066() *[24]uint16 {
+	return (*[24]uint16)(unsafe.Pointer(u))
+}
+
+// Sz067 reinterprets the union as its sz067 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz067() *[11]uint16 {
+	return (*[11]uint16)(unsafe.Pointer(u))
+}
+
+// Sz068 reinterprets the union as its sz068 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz068() *[12]uint16 {
+	return (*[12]uint16)(unsafe.Pointer(u))
+}
+
+// Sz069 reinterprets the union as its sz069 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz069() *[14]uint16 {
+	return (*[14]uint16)(unsafe.Pointer(u))
+}
+
+// Sz070 reinterprets the union as its sz070 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz070() *[20]uint16 {
+	return (*[20]uint16)(unsafe.Pointer(u))
+}
+
+// Sz071 reinterprets the union as its sz071 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz071() *[15]uint16 {
+	return (*[15]uint16)(unsafe.Pointer(u))
+}
+
+// Sz072 reinterprets the union as its sz072 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz072() *[14]uint16 {
+	return (*[14]uint16)(unsafe.Pointer(u))
+}
+
+// Sz073 reinterprets the union as its sz073 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz073() *[31]uint16 {
+	return (*[31]uint16)(unsafe.Pointer(u))
+}
+
+// Sz074 reinterprets the union as its sz074 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz074() *[24]uint16 {
+	return (*[24]uint16)(unsafe.Pointer(u))
+}
+
+// Sz075 reinterprets the union as its sz075 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz075() *[22]uint16 {
+	return (*[22]uint16)(unsafe.Pointer(u))
+}
+
+// Sz076 reinterprets the union as its sz076 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz076() *[24]uint16 {
+	return (*[24]uint16)(unsafe.Pointer(u))
+}
+
+// Sz077 reinterprets the union as its sz077 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz077() *[21]uint16 {
+	return (*[21]uint16)(unsafe.Pointer(u))
+}
+
+// Sz078 reinterprets the union as its sz078 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz078() *[27]uint16 {
+	return (*[27]uint16)(unsafe.Pointer(u))
+}
+
+// Sz079 reinterprets the union as its sz079 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz079() *[27]uint16 {
+	return (*[27]uint16)(unsafe.Pointer(u))
+}
+
+// Sz080 reinterprets the union as its sz080 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz080() *[20]uint16 {
+	return (*[20]uint16)(unsafe.Pointer(u))
+}
+
+// Sz081 reinterprets the union as its sz081 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz081() *[33]uint16 {
+	return (*[33]uint16)(unsafe.Pointer(u))
+}
+
+// Sz082 reinterprets the union as its sz082 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz082() *[21]uint16 {
+	return (*[21]uint16)(unsafe.Pointer(u))
+}
+
+// Sz083 reinterprets the union as its sz083 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz083() *[32]uint16 {
+	return (*[32]uint16)(unsafe.Pointer(u))
+}
+
+// Sz084 reinterprets the union as its sz084 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz084() *[26]uint16 {
+	return (*[26]uint16)(unsafe.Pointer(u))
+}
+
+// Sz085 reinterprets the union as its sz085 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz085() *[18]uint16 {
+	return (*[18]uint16)(unsafe.Pointer(u))
+}
+
+// Sz086 reinterprets the union as its sz086 member.
+func (u *WMDMDetermineMaxPropStringLen) Sz086() *[30]uint16 {
+	return (*[30]uint16)(unsafe.Pointer(u))
 }
 
 type WMDMDevice struct {
@@ -119,9 +532,20 @@ type WMDM_PROP_CONFIG struct {
 }
 
 // WMDM_PROP_DESC_ValidValues_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WMDM_PROP_DESC_ValidValues_e__Union struct {
 	Data [9]uint64
+}
+
+// ValidValuesRange reinterprets the union as its ValidValuesRange member.
+func (u *WMDM_PROP_DESC_ValidValues_e__Union) ValidValuesRange() *WMDM_PROP_VALUES_RANGE {
+	return (*WMDM_PROP_VALUES_RANGE)(unsafe.Pointer(u))
+}
+
+// EnumeratedValidValues reinterprets the union as its EnumeratedValidValues member.
+func (u *WMDM_PROP_DESC_ValidValues_e__Union) EnumeratedValidValues() *WMDM_PROP_VALUES_ENUM {
+	return (*WMDM_PROP_VALUES_ENUM)(unsafe.Pointer(u))
 }
 
 // WMDM_PROP_DESC: https://learn.microsoft.com/windows/win32/WMDM/wmdm-prop-desc

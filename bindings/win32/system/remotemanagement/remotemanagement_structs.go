@@ -11,9 +11,20 @@ import (
 )
 
 // WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// UserAccount reinterprets the union as its userAccount member.
+func (u *WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union) UserAccount() *WSMAN_USERNAME_PASSWORD_CREDS {
+	return (*WSMAN_USERNAME_PASSWORD_CREDS)(unsafe.Pointer(u))
+}
+
+// CertificateThumbprint reinterprets the union as its certificateThumbprint member.
+func (u *WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union) CertificateThumbprint() *foundation.PWSTR {
+	return (*foundation.PWSTR)(unsafe.Pointer(u))
 }
 
 // WSMAN_AUTHENTICATION_CREDENTIALS: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_authentication_credentials
@@ -53,9 +64,25 @@ type WSMAN_CREATE_SHELL_DATA struct {
 }
 
 // WSMAN_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WSMAN_DATA_Anonymous_e__Union struct {
 	Data [2]uint64
+}
+
+// Text reinterprets the union as its text member.
+func (u *WSMAN_DATA_Anonymous_e__Union) Text() *WSMAN_DATA_TEXT {
+	return (*WSMAN_DATA_TEXT)(unsafe.Pointer(u))
+}
+
+// BinaryData reinterprets the union as its binaryData member.
+func (u *WSMAN_DATA_Anonymous_e__Union) BinaryData() *WSMAN_DATA_BINARY {
+	return (*WSMAN_DATA_BINARY)(unsafe.Pointer(u))
+}
+
+// Number reinterprets the union as its number member.
+func (u *WSMAN_DATA_Anonymous_e__Union) Number() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 // WSMAN_DATA: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_data
@@ -183,9 +210,25 @@ type WSMAN_RECEIVE_DATA_RESULT struct {
 
 // WSMAN_RESPONSE_DATA: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_response_data
 // WSMAN_RESPONSE_DATA is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WSMAN_RESPONSE_DATA struct {
 	Data [6]uint64
+}
+
+// ReceiveData reinterprets the union as its receiveData member.
+func (u *WSMAN_RESPONSE_DATA) ReceiveData() *WSMAN_RECEIVE_DATA_RESULT {
+	return (*WSMAN_RECEIVE_DATA_RESULT)(unsafe.Pointer(u))
+}
+
+// ConnectData reinterprets the union as its connectData member.
+func (u *WSMAN_RESPONSE_DATA) ConnectData() *WSMAN_CONNECT_DATA {
+	return (*WSMAN_CONNECT_DATA)(unsafe.Pointer(u))
+}
+
+// CreateData reinterprets the union as its createData member.
+func (u *WSMAN_RESPONSE_DATA) CreateData() *WSMAN_CREATE_SHELL_DATA {
+	return (*WSMAN_CREATE_SHELL_DATA)(unsafe.Pointer(u))
 }
 
 // WSMAN_SELECTOR_SET: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_selector_set

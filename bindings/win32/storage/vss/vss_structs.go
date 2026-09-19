@@ -5,6 +5,8 @@
 package vss
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
@@ -55,9 +57,25 @@ type VSS_MGMT_OBJECT_PROP struct {
 }
 
 // VSS_MGMT_OBJECT_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VSS_MGMT_OBJECT_UNION struct {
 	Data [5]uint64
+}
+
+// Vol reinterprets the union as its Vol member.
+func (u *VSS_MGMT_OBJECT_UNION) Vol() *VSS_VOLUME_PROP {
+	return (*VSS_VOLUME_PROP)(unsafe.Pointer(u))
+}
+
+// DiffVol reinterprets the union as its DiffVol member.
+func (u *VSS_MGMT_OBJECT_UNION) DiffVol() *VSS_DIFF_VOLUME_PROP {
+	return (*VSS_DIFF_VOLUME_PROP)(unsafe.Pointer(u))
+}
+
+// DiffArea reinterprets the union as its DiffArea member.
+func (u *VSS_MGMT_OBJECT_UNION) DiffArea() *VSS_DIFF_AREA_PROP {
+	return (*VSS_DIFF_AREA_PROP)(unsafe.Pointer(u))
 }
 
 // VSS_OBJECT_PROP: https://learn.microsoft.com/windows/win32/api/vss/ns-vss-vss_object_prop
@@ -67,9 +85,20 @@ type VSS_OBJECT_PROP struct {
 }
 
 // VSS_OBJECT_UNION is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type VSS_OBJECT_UNION struct {
 	Data [16]uint64
+}
+
+// Snap reinterprets the union as its Snap member.
+func (u *VSS_OBJECT_UNION) Snap() *VSS_SNAPSHOT_PROP {
+	return (*VSS_SNAPSHOT_PROP)(unsafe.Pointer(u))
+}
+
+// Prov reinterprets the union as its Prov member.
+func (u *VSS_OBJECT_UNION) Prov() *VSS_PROVIDER_PROP {
+	return (*VSS_PROVIDER_PROP)(unsafe.Pointer(u))
 }
 
 // VSS_PROVIDER_PROP: https://learn.microsoft.com/windows/win32/api/vss/ns-vss-vss_provider_prop

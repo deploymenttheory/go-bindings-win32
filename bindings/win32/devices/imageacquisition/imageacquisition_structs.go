@@ -142,15 +142,57 @@ type VAL struct {
 }
 
 // WIAS_CHANGED_VALUE_INFO_Current_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WIAS_CHANGED_VALUE_INFO_Current_e__Union struct {
 	Data [2]uint64
 }
 
+// LVal reinterprets the union as its lVal member.
+func (u *WIAS_CHANGED_VALUE_INFO_Current_e__Union) LVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// FltVal reinterprets the union as its fltVal member.
+func (u *WIAS_CHANGED_VALUE_INFO_Current_e__Union) FltVal() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// BstrVal reinterprets the union as its bstrVal member.
+func (u *WIAS_CHANGED_VALUE_INFO_Current_e__Union) BstrVal() *foundation.BSTR {
+	return (*foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// GuidVal reinterprets the union as its guidVal member.
+func (u *WIAS_CHANGED_VALUE_INFO_Current_e__Union) GuidVal() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
+}
+
 // WIAS_CHANGED_VALUE_INFO_Old_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WIAS_CHANGED_VALUE_INFO_Old_e__Union struct {
 	Data [2]uint64
+}
+
+// LVal reinterprets the union as its lVal member.
+func (u *WIAS_CHANGED_VALUE_INFO_Old_e__Union) LVal() *int32 {
+	return (*int32)(unsafe.Pointer(u))
+}
+
+// FltVal reinterprets the union as its fltVal member.
+func (u *WIAS_CHANGED_VALUE_INFO_Old_e__Union) FltVal() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// BstrVal reinterprets the union as its bstrVal member.
+func (u *WIAS_CHANGED_VALUE_INFO_Old_e__Union) BstrVal() *foundation.BSTR {
+	return (*foundation.BSTR)(unsafe.Pointer(u))
+}
+
+// GuidVal reinterprets the union as its guidVal member.
+func (u *WIAS_CHANGED_VALUE_INFO_Old_e__Union) GuidVal() *win32.GUID {
+	return (*win32.GUID)(unsafe.Pointer(u))
 }
 
 type WIAS_CHANGED_VALUE_INFO struct {
@@ -303,10 +345,98 @@ type WIA_PROPERTY_CONTEXT struct {
 	PChanged *foundation.BOOL
 }
 
+type WIA_PROPERTY_INFO_ValidVal_e__Union_Flag_e__Struct struct {
+	Nom       int32
+	ValidBits int32
+}
+
+type WIA_PROPERTY_INFO_ValidVal_e__Union_ListBStr_e__Struct struct {
+	CNumList int32
+	Nom      foundation.BSTR
+	PList    *foundation.BSTR
+}
+
+type WIA_PROPERTY_INFO_ValidVal_e__Union_ListFloat_e__Struct struct {
+	CNumList int32
+	Nom      float64
+	PList    *byte
+}
+
+type WIA_PROPERTY_INFO_ValidVal_e__Union_ListGuid_e__Struct struct {
+	CNumList int32
+	Nom      win32.GUID
+	PList    *win32.GUID
+}
+
+type WIA_PROPERTY_INFO_ValidVal_e__Union_List_e__Struct struct {
+	CNumList int32
+	Nom      int32
+	PList    *byte
+}
+
+type WIA_PROPERTY_INFO_ValidVal_e__Union_None_e__Struct struct {
+	Dummy int32
+}
+
+type WIA_PROPERTY_INFO_ValidVal_e__Union_RangeFloat_e__Struct struct {
+	Min float64
+	Nom float64
+	Max float64
+	Inc float64
+}
+
+type WIA_PROPERTY_INFO_ValidVal_e__Union_Range_e__Struct struct {
+	Min int32
+	Nom int32
+	Max int32
+	Inc int32
+}
+
 // WIA_PROPERTY_INFO_ValidVal_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type WIA_PROPERTY_INFO_ValidVal_e__Union struct {
 	Data [4]uint64
+}
+
+// Range reinterprets the union as its Range member.
+func (u *WIA_PROPERTY_INFO_ValidVal_e__Union) Range() *WIA_PROPERTY_INFO_ValidVal_e__Union_Range_e__Struct {
+	return (*WIA_PROPERTY_INFO_ValidVal_e__Union_Range_e__Struct)(unsafe.Pointer(u))
+}
+
+// RangeFloat reinterprets the union as its RangeFloat member.
+func (u *WIA_PROPERTY_INFO_ValidVal_e__Union) RangeFloat() *WIA_PROPERTY_INFO_ValidVal_e__Union_RangeFloat_e__Struct {
+	return (*WIA_PROPERTY_INFO_ValidVal_e__Union_RangeFloat_e__Struct)(unsafe.Pointer(u))
+}
+
+// List reinterprets the union as its List member.
+func (u *WIA_PROPERTY_INFO_ValidVal_e__Union) List() *WIA_PROPERTY_INFO_ValidVal_e__Union_List_e__Struct {
+	return (*WIA_PROPERTY_INFO_ValidVal_e__Union_List_e__Struct)(unsafe.Pointer(u))
+}
+
+// ListFloat reinterprets the union as its ListFloat member.
+func (u *WIA_PROPERTY_INFO_ValidVal_e__Union) ListFloat() *WIA_PROPERTY_INFO_ValidVal_e__Union_ListFloat_e__Struct {
+	return (*WIA_PROPERTY_INFO_ValidVal_e__Union_ListFloat_e__Struct)(unsafe.Pointer(u))
+}
+
+// ListGuid reinterprets the union as its ListGuid member.
+func (u *WIA_PROPERTY_INFO_ValidVal_e__Union) ListGuid() *WIA_PROPERTY_INFO_ValidVal_e__Union_ListGuid_e__Struct {
+	return (*WIA_PROPERTY_INFO_ValidVal_e__Union_ListGuid_e__Struct)(unsafe.Pointer(u))
+}
+
+// ListBStr reinterprets the union as its ListBStr member.
+func (u *WIA_PROPERTY_INFO_ValidVal_e__Union) ListBStr() *WIA_PROPERTY_INFO_ValidVal_e__Union_ListBStr_e__Struct {
+	return (*WIA_PROPERTY_INFO_ValidVal_e__Union_ListBStr_e__Struct)(unsafe.Pointer(u))
+}
+
+// Flag reinterprets the union as its Flag member.
+func (u *WIA_PROPERTY_INFO_ValidVal_e__Union) Flag() *WIA_PROPERTY_INFO_ValidVal_e__Union_Flag_e__Struct {
+	return (*WIA_PROPERTY_INFO_ValidVal_e__Union_Flag_e__Struct)(unsafe.Pointer(u))
+}
+
+// None reinterprets the union as its None member.
+func (u *WIA_PROPERTY_INFO_ValidVal_e__Union) None() *WIA_PROPERTY_INFO_ValidVal_e__Union_None_e__Struct {
+	return (*WIA_PROPERTY_INFO_ValidVal_e__Union_None_e__Struct)(unsafe.Pointer(u))
 }
 
 type WIA_PROPERTY_INFO struct {

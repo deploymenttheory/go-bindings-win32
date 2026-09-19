@@ -212,9 +212,15 @@ type IDE_IO_CONTROL struct {
 }
 
 // IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union struct {
 	Data [5]uint64
+}
+
+// PsKey reinterprets the union as its PsKey member.
+func (u *IKE_AUTHENTICATION_INFORMATION_Anonymous_e__Union) PsKey() *IKE_AUTHENTICATION_PRESHARED_KEY {
+	return (*IKE_AUTHENTICATION_PRESHARED_KEY)(unsafe.Pointer(u))
 }
 
 // IKE_AUTHENTICATION_INFORMATION: https://learn.microsoft.com/windows/win32/api/iscsidsc/ns-iscsidsc-ike_authentication_information
@@ -594,10 +600,25 @@ type NV_FEATURE_PARAMETER struct {
 	DeviceSpinUpTime   uint32
 }
 
+type NV_SEP_CACHE_PARAMETER_Flags_e__Union_CacheFlags_e__Struct struct {
+	Bitfield byte
+}
+
 // NV_SEP_CACHE_PARAMETER_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type NV_SEP_CACHE_PARAMETER_Flags_e__Union struct {
 	Data [1]byte
+}
+
+// CacheFlags reinterprets the union as its CacheFlags member.
+func (u *NV_SEP_CACHE_PARAMETER_Flags_e__Union) CacheFlags() *NV_SEP_CACHE_PARAMETER_Flags_e__Union_CacheFlags_e__Struct {
+	return (*NV_SEP_CACHE_PARAMETER_Flags_e__Union_CacheFlags_e__Struct)(unsafe.Pointer(u))
+}
+
+// CacheFlagsSet reinterprets the union as its CacheFlagsSet member.
+func (u *NV_SEP_CACHE_PARAMETER_Flags_e__Union) CacheFlagsSet() *byte {
+	return (*byte)(unsafe.Pointer(u))
 }
 
 type NV_SEP_CACHE_PARAMETER struct {
@@ -899,9 +920,20 @@ type STORAGE_FIRMWARE_INFO_V2 struct {
 }
 
 // STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union struct {
 	Data [1]uint64
+}
+
+// Info reinterprets the union as its Info member.
+func (u *STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union) Info() *[8]byte {
+	return (*[8]byte)(unsafe.Pointer(u))
+}
+
+// AsUlonglong reinterprets the union as its AsUlonglong member.
+func (u *STORAGE_FIRMWARE_SLOT_INFO_Revision_e__Union) AsUlonglong() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type STORAGE_FIRMWARE_SLOT_INFO struct {

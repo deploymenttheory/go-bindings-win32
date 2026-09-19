@@ -5,6 +5,8 @@
 package geolocation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
@@ -24,9 +26,25 @@ type DispLatLongReport struct {
 }
 
 // GNSS_AGNSS_INJECT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GNSS_AGNSS_INJECT_Anonymous_e__Union struct {
 	Data [16]uint64
+}
+
+// Time reinterprets the union as its Time member.
+func (u *GNSS_AGNSS_INJECT_Anonymous_e__Union) Time() *GNSS_AGNSS_INJECTTIME {
+	return (*GNSS_AGNSS_INJECTTIME)(unsafe.Pointer(u))
+}
+
+// Position reinterprets the union as its Position member.
+func (u *GNSS_AGNSS_INJECT_Anonymous_e__Union) Position() *GNSS_AGNSS_INJECTPOSITION {
+	return (*GNSS_AGNSS_INJECTPOSITION)(unsafe.Pointer(u))
+}
+
+// BlobData reinterprets the union as its BlobData member.
+func (u *GNSS_AGNSS_INJECT_Anonymous_e__Union) BlobData() *GNSS_AGNSS_INJECTBLOB {
+	return (*GNSS_AGNSS_INJECTBLOB)(unsafe.Pointer(u))
 }
 
 type GNSS_AGNSS_INJECT struct {
@@ -87,9 +105,15 @@ type GNSS_BREADCRUMBING_PARAM struct {
 }
 
 // GNSS_BREADCRUMB_LIST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GNSS_BREADCRUMB_LIST_Anonymous_e__Union struct {
 	Data [250]uint64
+}
+
+// V1 reinterprets the union as its v1 member.
+func (u *GNSS_BREADCRUMB_LIST_Anonymous_e__Union) V1() *[50]GNSS_BREADCRUMB_V1 {
+	return (*[50]GNSS_BREADCRUMB_V1)(unsafe.Pointer(u))
 }
 
 type GNSS_BREADCRUMB_LIST struct {
@@ -207,9 +231,60 @@ type GNSS_ERRORINFO struct {
 }
 
 // GNSS_EVENT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GNSS_EVENT_Anonymous_e__Union struct {
 	Data [276]uint64
+}
+
+// FixData reinterprets the union as its FixData member.
+func (u *GNSS_EVENT_Anonymous_e__Union) FixData() *GNSS_FIXDATA {
+	return (*GNSS_FIXDATA)(unsafe.Pointer(u))
+}
+
+// AgnssRequest reinterprets the union as its AgnssRequest member.
+func (u *GNSS_EVENT_Anonymous_e__Union) AgnssRequest() *GNSS_AGNSS_REQUEST_PARAM {
+	return (*GNSS_AGNSS_REQUEST_PARAM)(unsafe.Pointer(u))
+}
+
+// NiRequest reinterprets the union as its NiRequest member.
+func (u *GNSS_EVENT_Anonymous_e__Union) NiRequest() *GNSS_NI_REQUEST_PARAM {
+	return (*GNSS_NI_REQUEST_PARAM)(unsafe.Pointer(u))
+}
+
+// ErrorInformation reinterprets the union as its ErrorInformation member.
+func (u *GNSS_EVENT_Anonymous_e__Union) ErrorInformation() *GNSS_ERRORINFO {
+	return (*GNSS_ERRORINFO)(unsafe.Pointer(u))
+}
+
+// NmeaData reinterprets the union as its NmeaData member.
+func (u *GNSS_EVENT_Anonymous_e__Union) NmeaData() *GNSS_NMEA_DATA {
+	return (*GNSS_NMEA_DATA)(unsafe.Pointer(u))
+}
+
+// GeofenceAlertData reinterprets the union as its GeofenceAlertData member.
+func (u *GNSS_EVENT_Anonymous_e__Union) GeofenceAlertData() *GNSS_GEOFENCE_ALERT_DATA {
+	return (*GNSS_GEOFENCE_ALERT_DATA)(unsafe.Pointer(u))
+}
+
+// BreadcrumbAlertData reinterprets the union as its BreadcrumbAlertData member.
+func (u *GNSS_EVENT_Anonymous_e__Union) BreadcrumbAlertData() *GNSS_BREADCRUMBING_ALERT_DATA {
+	return (*GNSS_BREADCRUMBING_ALERT_DATA)(unsafe.Pointer(u))
+}
+
+// GeofencesTrackingStatus reinterprets the union as its GeofencesTrackingStatus member.
+func (u *GNSS_EVENT_Anonymous_e__Union) GeofencesTrackingStatus() *GNSS_GEOFENCES_TRACKINGSTATUS_DATA {
+	return (*GNSS_GEOFENCES_TRACKINGSTATUS_DATA)(unsafe.Pointer(u))
+}
+
+// DriverRequestData reinterprets the union as its DriverRequestData member.
+func (u *GNSS_EVENT_Anonymous_e__Union) DriverRequestData() *GNSS_DRIVER_REQUEST_DATA {
+	return (*GNSS_DRIVER_REQUEST_DATA)(unsafe.Pointer(u))
+}
+
+// CustomData reinterprets the union as its CustomData member.
+func (u *GNSS_EVENT_Anonymous_e__Union) CustomData() *[1]byte {
+	return (*[1]byte)(unsafe.Pointer(u))
 }
 
 type GNSS_EVENT struct {
@@ -222,9 +297,65 @@ type GNSS_EVENT struct {
 }
 
 // GNSS_EVENT_2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GNSS_EVENT_2_Anonymous_e__Union struct {
 	Data [284]uint64
+}
+
+// FixData reinterprets the union as its FixData member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) FixData() *GNSS_FIXDATA {
+	return (*GNSS_FIXDATA)(unsafe.Pointer(u))
+}
+
+// FixData2 reinterprets the union as its FixData2 member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) FixData2() *GNSS_FIXDATA_2 {
+	return (*GNSS_FIXDATA_2)(unsafe.Pointer(u))
+}
+
+// AgnssRequest reinterprets the union as its AgnssRequest member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) AgnssRequest() *GNSS_AGNSS_REQUEST_PARAM {
+	return (*GNSS_AGNSS_REQUEST_PARAM)(unsafe.Pointer(u))
+}
+
+// NiRequest reinterprets the union as its NiRequest member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) NiRequest() *GNSS_NI_REQUEST_PARAM {
+	return (*GNSS_NI_REQUEST_PARAM)(unsafe.Pointer(u))
+}
+
+// ErrorInformation reinterprets the union as its ErrorInformation member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) ErrorInformation() *GNSS_ERRORINFO {
+	return (*GNSS_ERRORINFO)(unsafe.Pointer(u))
+}
+
+// NmeaData reinterprets the union as its NmeaData member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) NmeaData() *GNSS_NMEA_DATA {
+	return (*GNSS_NMEA_DATA)(unsafe.Pointer(u))
+}
+
+// GeofenceAlertData reinterprets the union as its GeofenceAlertData member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) GeofenceAlertData() *GNSS_GEOFENCE_ALERT_DATA {
+	return (*GNSS_GEOFENCE_ALERT_DATA)(unsafe.Pointer(u))
+}
+
+// BreadcrumbAlertData reinterprets the union as its BreadcrumbAlertData member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) BreadcrumbAlertData() *GNSS_BREADCRUMBING_ALERT_DATA {
+	return (*GNSS_BREADCRUMBING_ALERT_DATA)(unsafe.Pointer(u))
+}
+
+// GeofencesTrackingStatus reinterprets the union as its GeofencesTrackingStatus member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) GeofencesTrackingStatus() *GNSS_GEOFENCES_TRACKINGSTATUS_DATA {
+	return (*GNSS_GEOFENCES_TRACKINGSTATUS_DATA)(unsafe.Pointer(u))
+}
+
+// DriverRequestData reinterprets the union as its DriverRequestData member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) DriverRequestData() *GNSS_DRIVER_REQUEST_DATA {
+	return (*GNSS_DRIVER_REQUEST_DATA)(unsafe.Pointer(u))
+}
+
+// CustomData reinterprets the union as its CustomData member.
+func (u *GNSS_EVENT_2_Anonymous_e__Union) CustomData() *[1]byte {
+	return (*[1]byte)(unsafe.Pointer(u))
 }
 
 type GNSS_EVENT_2 struct {
@@ -331,9 +462,35 @@ type GNSS_FIXDATA_SATELLITE struct {
 }
 
 // GNSS_FIXSESSION_PARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GNSS_FIXSESSION_PARAM_Anonymous_e__Union struct {
 	Data [67]uint32
+}
+
+// SingleShotParam reinterprets the union as its SingleShotParam member.
+func (u *GNSS_FIXSESSION_PARAM_Anonymous_e__Union) SingleShotParam() *GNSS_SINGLESHOT_PARAM {
+	return (*GNSS_SINGLESHOT_PARAM)(unsafe.Pointer(u))
+}
+
+// DistanceParam reinterprets the union as its DistanceParam member.
+func (u *GNSS_FIXSESSION_PARAM_Anonymous_e__Union) DistanceParam() *GNSS_DISTANCETRACKING_PARAM {
+	return (*GNSS_DISTANCETRACKING_PARAM)(unsafe.Pointer(u))
+}
+
+// ContinuousParam reinterprets the union as its ContinuousParam member.
+func (u *GNSS_FIXSESSION_PARAM_Anonymous_e__Union) ContinuousParam() *GNSS_CONTINUOUSTRACKING_PARAM {
+	return (*GNSS_CONTINUOUSTRACKING_PARAM)(unsafe.Pointer(u))
+}
+
+// LkgFixParam reinterprets the union as its LkgFixParam member.
+func (u *GNSS_FIXSESSION_PARAM_Anonymous_e__Union) LkgFixParam() *GNSS_LKGFIX_PARAM {
+	return (*GNSS_LKGFIX_PARAM)(unsafe.Pointer(u))
+}
+
+// UnusedParam reinterprets the union as its UnusedParam member.
+func (u *GNSS_FIXSESSION_PARAM_Anonymous_e__Union) UnusedParam() *[268]byte {
+	return (*[268]byte)(unsafe.Pointer(u))
 }
 
 type GNSS_FIXSESSION_PARAM struct {
@@ -392,9 +549,20 @@ type GNSS_GEOFENCE_DELETE_PARAM struct {
 }
 
 // GNSS_GEOREGION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GNSS_GEOREGION_Anonymous_e__Union struct {
 	Data [64]uint64
+}
+
+// Circle reinterprets the union as its Circle member.
+func (u *GNSS_GEOREGION_Anonymous_e__Union) Circle() *GNSS_GEOREGION_CIRCLE {
+	return (*GNSS_GEOREGION_CIRCLE)(unsafe.Pointer(u))
+}
+
+// Unused reinterprets the union as its Unused member.
+func (u *GNSS_GEOREGION_Anonymous_e__Union) Unused() *[512]byte {
+	return (*[512]byte)(unsafe.Pointer(u))
 }
 
 type GNSS_GEOREGION struct {
@@ -416,9 +584,25 @@ type GNSS_LKGFIX_PARAM struct {
 }
 
 // GNSS_NI_REQUEST_PARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type GNSS_NI_REQUEST_PARAM_Anonymous_e__Union struct {
 	Data [327]uint32
+}
+
+// SuplNiInfo reinterprets the union as its SuplNiInfo member.
+func (u *GNSS_NI_REQUEST_PARAM_Anonymous_e__Union) SuplNiInfo() *GNSS_SUPL_NI_INFO {
+	return (*GNSS_SUPL_NI_INFO)(unsafe.Pointer(u))
+}
+
+// CpNiInfo reinterprets the union as its CpNiInfo member.
+func (u *GNSS_NI_REQUEST_PARAM_Anonymous_e__Union) CpNiInfo() *GNSS_CP_NI_INFO {
+	return (*GNSS_CP_NI_INFO)(unsafe.Pointer(u))
+}
+
+// V2UplNiInfo reinterprets the union as its V2UplNiInfo member.
+func (u *GNSS_NI_REQUEST_PARAM_Anonymous_e__Union) V2UplNiInfo() *GNSS_V2UPL_NI_INFO {
+	return (*GNSS_V2UPL_NI_INFO)(unsafe.Pointer(u))
 }
 
 type GNSS_NI_REQUEST_PARAM struct {

@@ -371,10 +371,25 @@ type DEBUG_POOLTAG_DESCRIPTION struct {
 	Owner        [32]foundation.CHAR
 }
 
+type DEBUG_POOL_DATA_Anonymous_e__Union_Anonymous_e__Struct struct {
+	Bitfield uint32
+}
+
 // DEBUG_POOL_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEBUG_POOL_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DEBUG_POOL_DATA_Anonymous_e__Union) Anonymous() *DEBUG_POOL_DATA_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DEBUG_POOL_DATA_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// AsUlong reinterprets the union as its AsUlong member.
+func (u *DEBUG_POOL_DATA_Anonymous_e__Union) AsUlong() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type DEBUG_POOL_DATA struct {
@@ -391,9 +406,40 @@ type DEBUG_POOL_DATA struct {
 }
 
 // DEBUG_PROCESSOR_IDENTIFICATION_ALL is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEBUG_PROCESSOR_IDENTIFICATION_ALL struct {
 	Data [8]uint32
+}
+
+// Alpha reinterprets the union as its Alpha member.
+func (u *DEBUG_PROCESSOR_IDENTIFICATION_ALL) Alpha() *DEBUG_PROCESSOR_IDENTIFICATION_ALPHA {
+	return (*DEBUG_PROCESSOR_IDENTIFICATION_ALPHA)(unsafe.Pointer(u))
+}
+
+// Amd64 reinterprets the union as its Amd64 member.
+func (u *DEBUG_PROCESSOR_IDENTIFICATION_ALL) Amd64() *DEBUG_PROCESSOR_IDENTIFICATION_AMD64 {
+	return (*DEBUG_PROCESSOR_IDENTIFICATION_AMD64)(unsafe.Pointer(u))
+}
+
+// Ia64 reinterprets the union as its Ia64 member.
+func (u *DEBUG_PROCESSOR_IDENTIFICATION_ALL) Ia64() *DEBUG_PROCESSOR_IDENTIFICATION_IA64 {
+	return (*DEBUG_PROCESSOR_IDENTIFICATION_IA64)(unsafe.Pointer(u))
+}
+
+// X86 reinterprets the union as its X86 member.
+func (u *DEBUG_PROCESSOR_IDENTIFICATION_ALL) X86() *DEBUG_PROCESSOR_IDENTIFICATION_X86 {
+	return (*DEBUG_PROCESSOR_IDENTIFICATION_X86)(unsafe.Pointer(u))
+}
+
+// Arm reinterprets the union as its Arm member.
+func (u *DEBUG_PROCESSOR_IDENTIFICATION_ALL) Arm() *DEBUG_PROCESSOR_IDENTIFICATION_ARM {
+	return (*DEBUG_PROCESSOR_IDENTIFICATION_ARM)(unsafe.Pointer(u))
+}
+
+// Arm64 reinterprets the union as its Arm64 member.
+func (u *DEBUG_PROCESSOR_IDENTIFICATION_ALL) Arm64() *DEBUG_PROCESSOR_IDENTIFICATION_ARM64 {
+	return (*DEBUG_PROCESSOR_IDENTIFICATION_ARM64)(unsafe.Pointer(u))
 }
 
 type DEBUG_PROCESSOR_IDENTIFICATION_ALPHA struct {
@@ -591,10 +637,116 @@ type DEBUG_TYPED_DATA struct {
 	Internal     [9]uint64
 }
 
+type DEBUG_VALUE_Anonymous_e__Union_Anonymous_e__Struct struct {
+	I64 uint64
+	Nat foundation.BOOL
+}
+
+type DEBUG_VALUE_Anonymous_e__Union_F128Parts64_e__Struct struct {
+	LowPart  uint64
+	HighPart int64
+}
+
+type DEBUG_VALUE_Anonymous_e__Union_I64Parts32_e__Struct struct {
+	LowPart  uint32
+	HighPart uint32
+}
+
 // DEBUG_VALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type DEBUG_VALUE_Anonymous_e__Union struct {
 	Data [3]uint64
+}
+
+// I8 reinterprets the union as its I8 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) I8() *byte {
+	return (*byte)(unsafe.Pointer(u))
+}
+
+// I16 reinterprets the union as its I16 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) I16() *uint16 {
+	return (*uint16)(unsafe.Pointer(u))
+}
+
+// I32 reinterprets the union as its I32 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) I32() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) Anonymous() *DEBUG_VALUE_Anonymous_e__Union_Anonymous_e__Struct {
+	return (*DEBUG_VALUE_Anonymous_e__Union_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// F32 reinterprets the union as its F32 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) F32() *float32 {
+	return (*float32)(unsafe.Pointer(u))
+}
+
+// F64 reinterprets the union as its F64 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) F64() *float64 {
+	return (*float64)(unsafe.Pointer(u))
+}
+
+// F80Bytes reinterprets the union as its F80Bytes member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) F80Bytes() *[10]byte {
+	return (*[10]byte)(unsafe.Pointer(u))
+}
+
+// F82Bytes reinterprets the union as its F82Bytes member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) F82Bytes() *[11]byte {
+	return (*[11]byte)(unsafe.Pointer(u))
+}
+
+// F128Bytes reinterprets the union as its F128Bytes member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) F128Bytes() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
+// VI8 reinterprets the union as its VI8 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) VI8() *[16]byte {
+	return (*[16]byte)(unsafe.Pointer(u))
+}
+
+// VI16 reinterprets the union as its VI16 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) VI16() *[8]uint16 {
+	return (*[8]uint16)(unsafe.Pointer(u))
+}
+
+// VI32 reinterprets the union as its VI32 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) VI32() *[4]uint32 {
+	return (*[4]uint32)(unsafe.Pointer(u))
+}
+
+// VI64 reinterprets the union as its VI64 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) VI64() *[2]uint64 {
+	return (*[2]uint64)(unsafe.Pointer(u))
+}
+
+// VF32 reinterprets the union as its VF32 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) VF32() *[4]float32 {
+	return (*[4]float32)(unsafe.Pointer(u))
+}
+
+// VF64 reinterprets the union as its VF64 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) VF64() *[2]float64 {
+	return (*[2]float64)(unsafe.Pointer(u))
+}
+
+// I64Parts32 reinterprets the union as its I64Parts32 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) I64Parts32() *DEBUG_VALUE_Anonymous_e__Union_I64Parts32_e__Struct {
+	return (*DEBUG_VALUE_Anonymous_e__Union_I64Parts32_e__Struct)(unsafe.Pointer(u))
+}
+
+// F128Parts64 reinterprets the union as its F128Parts64 member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) F128Parts64() *DEBUG_VALUE_Anonymous_e__Union_F128Parts64_e__Struct {
+	return (*DEBUG_VALUE_Anonymous_e__Union_F128Parts64_e__Struct)(unsafe.Pointer(u))
+}
+
+// RawBytes reinterprets the union as its RawBytes member.
+func (u *DEBUG_VALUE_Anonymous_e__Union) RawBytes() *[24]byte {
+	return (*[24]byte)(unsafe.Pointer(u))
 }
 
 type DEBUG_VALUE struct {
@@ -702,9 +854,20 @@ type FA_ENTRY struct {
 }
 
 // FIELD_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type FIELD_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// FieldCallBack reinterprets the union as its fieldCallBack member.
+func (u *FIELD_INFO_Anonymous_e__Union) FieldCallBack() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PBuffer reinterprets the union as its pBuffer member.
+func (u *FIELD_INFO_Anonymous_e__Union) PBuffer() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type FIELD_INFO_BitField struct {
@@ -771,10 +934,27 @@ type GET_TEB_ADDRESS struct {
 	Address uint64
 }
 
+type INLINE_FRAME_CONTEXT_Anonymous_e__Struct struct {
+	FrameId        byte
+	FrameType      byte
+	FrameSignature uint16
+}
+
 // INLINE_FRAME_CONTEXT is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type INLINE_FRAME_CONTEXT struct {
 	Data [1]uint32
+}
+
+// ContextValue reinterprets the union as its ContextValue member.
+func (u *INLINE_FRAME_CONTEXT) ContextValue() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *INLINE_FRAME_CONTEXT) Anonymous() *INLINE_FRAME_CONTEXT_Anonymous_e__Struct {
+	return (*INLINE_FRAME_CONTEXT_Anonymous_e__Struct)(unsafe.Pointer(u))
 }
 
 type IOSPACE struct {
@@ -1145,10 +1325,26 @@ type OS_INFO struct {
 	ServicePackString [64]foundation.CHAR
 }
 
+type OS_INFO_v1_Anonymous_e__Union_Version_e__Struct struct {
+	Major uint32
+	Minor uint32
+}
+
 // OS_INFO_v1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type OS_INFO_v1_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Version reinterprets the union as its Version member.
+func (u *OS_INFO_v1_Anonymous_e__Union) Version() *OS_INFO_v1_Anonymous_e__Union_Version_e__Struct {
+	return (*OS_INFO_v1_Anonymous_e__Union_Version_e__Struct)(unsafe.Pointer(u))
+}
+
+// Ver64 reinterprets the union as its Ver64 member.
+func (u *OS_INFO_v1_Anonymous_e__Union) Ver64() *uint64 {
+	return (*uint64)(unsafe.Pointer(u))
 }
 
 type OS_INFO_v1_s_e__Struct struct {
@@ -1197,10 +1393,28 @@ type POINTER_SEARCH_PHYSICAL struct {
 	MatchOffsetsCount uint32
 }
 
+type POOL_HEADER_SIZE_64_Anonymous_e__Struct struct {
+	UnsafePrevSize byte
+	Unused1        byte
+	UnsafeSize     byte
+	UnsafePoolType byte
+}
+
 // POOL_HEADER_SIZE_64 is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type POOL_HEADER_SIZE_64 struct {
 	Data [1]uint32
+}
+
+// Anonymous reinterprets the union as its Anonymous member.
+func (u *POOL_HEADER_SIZE_64) Anonymous() *POOL_HEADER_SIZE_64_Anonymous_e__Struct {
+	return (*POOL_HEADER_SIZE_64_Anonymous_e__Struct)(unsafe.Pointer(u))
+}
+
+// Ulong1 reinterprets the union as its Ulong1 member.
+func (u *POOL_HEADER_SIZE_64) Ulong1() *uint32 {
+	return (*uint32)(unsafe.Pointer(u))
 }
 
 type PROCESSORINFO struct {
@@ -1283,9 +1497,20 @@ type SYMBOL_INFO_EX struct {
 }
 
 // SYM_DUMP_PARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type SYM_DUMP_PARAM_Anonymous_e__Union struct {
 	Data [1]uint64
+}
+
+// Context reinterprets the union as its Context member.
+func (u *SYM_DUMP_PARAM_Anonymous_e__Union) Context() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
+}
+
+// PBuffer reinterprets the union as its pBuffer member.
+func (u *SYM_DUMP_PARAM_Anonymous_e__Union) PBuffer() *unsafe.Pointer {
+	return (*unsafe.Pointer)(unsafe.Pointer(u))
 }
 
 type SYM_DUMP_PARAM struct {
@@ -1305,10 +1530,29 @@ type SYM_DUMP_PARAM struct {
 	Bitfield        uint32
 }
 
+type ScriptDebugEventInformation_u_e__Union_BreakpointInformation_e__Struct struct {
+	BreakpointId uint64
+}
+
+type ScriptDebugEventInformation_u_e__Union_ExceptionInformation_e__Struct struct {
+	IsUncaught byte
+}
+
 // ScriptDebugEventInformation_u_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type ScriptDebugEventInformation_u_e__Union struct {
 	Data [1]uint64
+}
+
+// ExceptionInformation reinterprets the union as its ExceptionInformation member.
+func (u *ScriptDebugEventInformation_u_e__Union) ExceptionInformation() *ScriptDebugEventInformation_u_e__Union_ExceptionInformation_e__Struct {
+	return (*ScriptDebugEventInformation_u_e__Union_ExceptionInformation_e__Struct)(unsafe.Pointer(u))
+}
+
+// BreakpointInformation reinterprets the union as its BreakpointInformation member.
+func (u *ScriptDebugEventInformation_u_e__Union) BreakpointInformation() *ScriptDebugEventInformation_u_e__Union_BreakpointInformation_e__Struct {
+	return (*ScriptDebugEventInformation_u_e__Union_BreakpointInformation_e__Struct)(unsafe.Pointer(u))
 }
 
 type ScriptDebugEventInformation struct {

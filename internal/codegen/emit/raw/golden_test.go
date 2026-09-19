@@ -257,6 +257,33 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 	fpair := win32meta.Struct{Fields: []win32meta.StructField{field("x", native("Single")), field("y", native("Single"))}}
 	packed := win32meta.Struct{PackingSize: 1, Fields: []win32meta.StructField{field("tag", native("Byte")), field("value", native("Int32"))}}
 	union := win32meta.Struct{IsUnion: true, Fields: []win32meta.StructField{field("i", native("Int32")), field("q", native("Int64"))}}
+	// A VARIANT-shaped union: the type is a blob, but its members — including
+	// the nested struct carrying the discriminant and the nested union of
+	// payloads — are still reachable through generated accessors. "data"
+	// exercises the collision with the blob's own backing field.
+	variantLike := win32meta.Struct{
+		IsUnion: true,
+		Fields: []win32meta.StructField{
+			field("Anonymous", win32meta.TypeRef{Kind: "ApiRef", Name: "_Anonymous_e__Struct"}),
+			field("data", native("Int64")),
+		},
+		NestedTypes: map[string]win32meta.Struct{
+			"_Anonymous_e__Struct": {
+				Fields: []win32meta.StructField{
+					field("vt", native("UInt16")),
+					field("reserved", native("UInt16")),
+					field("Anonymous", win32meta.TypeRef{Kind: "ApiRef", Name: "_Anonymous_e__Union"}),
+				},
+				NestedTypes: map[string]win32meta.Struct{
+					"_Anonymous_e__Union": {IsUnion: true, Fields: []win32meta.StructField{
+						field("lVal", native("Int32")),
+						field("pwszVal", pointerTo(native("UInt16"))),
+						field("small", apiRef("Test.Shapes", "SMALL", "Struct")),
+					}},
+				},
+			},
+		},
+	}
 	withNested := win32meta.Struct{
 		Fields: []win32meta.StructField{
 			field("kind", native("Int32")),
@@ -300,7 +327,7 @@ func syntheticNamespaces() []*win32meta.NamespaceMeta {
 		},
 		Structs: map[string]win32meta.Struct{
 			"SMALL": small, "MEDIUM": medium, "BIG": big, "FPAIR": fpair,
-			"PACKED": packed, "UNI": union, "WITHNESTED": withNested, "Taken": taken,
+			"PACKED": packed, "UNI": union, "VARIANTLIKE": variantLike, "WITHNESTED": withNested, "Taken": taken,
 			"ARCHCTX": archSpecific, "CONTAINER": container, "X86ONLY": x86Only,
 		},
 		Enums: map[string]win32meta.Enum{

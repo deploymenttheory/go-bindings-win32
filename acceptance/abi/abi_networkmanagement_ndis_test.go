@@ -714,6 +714,8 @@ var abiNetworkManagement_Ndis = []abiCase{
 	{"networkmanagementndis.NET_IF_RCV_ADDRESS_LH.IfRcvAddressLength", unsafe.Offsetof(networkmanagementndis.NET_IF_RCV_ADDRESS_LH{}.IfRcvAddressLength), 4},
 	{"networkmanagementndis.NET_IF_RCV_ADDRESS_LH.IfRcvAddressOffset", unsafe.Offsetof(networkmanagementndis.NET_IF_RCV_ADDRESS_LH{}.IfRcvAddressOffset), 6},
 	{"networkmanagementndis.NET_LUID_LH size", unsafe.Sizeof(networkmanagementndis.NET_LUID_LH{}), 8},
+	{"networkmanagementndis.NET_LUID_LH_Info_e__Struct size", unsafe.Sizeof(networkmanagementndis.NET_LUID_LH_Info_e__Struct{}), 8},
+	{"networkmanagementndis.NET_LUID_LH_Info_e__Struct.Bitfield", unsafe.Offsetof(networkmanagementndis.NET_LUID_LH_Info_e__Struct{}.Bitfield), 0},
 	{"networkmanagementndis.NET_PHYSICAL_LOCATION_LH size", unsafe.Sizeof(networkmanagementndis.NET_PHYSICAL_LOCATION_LH{}), 12},
 	{"networkmanagementndis.NET_PHYSICAL_LOCATION_LH.BusNumber", unsafe.Offsetof(networkmanagementndis.NET_PHYSICAL_LOCATION_LH{}.BusNumber), 0},
 	{"networkmanagementndis.NET_PHYSICAL_LOCATION_LH.SlotNumber", unsafe.Offsetof(networkmanagementndis.NET_PHYSICAL_LOCATION_LH{}.SlotNumber), 4},

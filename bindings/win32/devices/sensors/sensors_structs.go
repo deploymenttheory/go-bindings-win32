@@ -5,14 +5,50 @@
 package sensors
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 )
 
+type MATRIX3X3_Anonymous_e__Union_Anonymous1_e__Struct struct {
+	A11 float32
+	A12 float32
+	A13 float32
+	A21 float32
+	A22 float32
+	A23 float32
+	A31 float32
+	A32 float32
+	A33 float32
+}
+
+type MATRIX3X3_Anonymous_e__Union_Anonymous2_e__Struct struct {
+	V1 VEC3D
+	V2 VEC3D
+	V3 VEC3D
+}
+
 // MATRIX3X3_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
-// storage; read or write a specific member through an unsafe.Pointer cast.
+// storage. Every member overlays that storage from offset 0; read or write one
+// through its accessor.
 type MATRIX3X3_Anonymous_e__Union struct {
 	Data [9]uint32
+}
+
+// Anonymous1 reinterprets the union as its Anonymous1 member.
+func (u *MATRIX3X3_Anonymous_e__Union) Anonymous1() *MATRIX3X3_Anonymous_e__Union_Anonymous1_e__Struct {
+	return (*MATRIX3X3_Anonymous_e__Union_Anonymous1_e__Struct)(unsafe.Pointer(u))
+}
+
+// Anonymous2 reinterprets the union as its Anonymous2 member.
+func (u *MATRIX3X3_Anonymous_e__Union) Anonymous2() *MATRIX3X3_Anonymous_e__Union_Anonymous2_e__Struct {
+	return (*MATRIX3X3_Anonymous_e__Union_Anonymous2_e__Struct)(unsafe.Pointer(u))
+}
+
+// M reinterprets the union as its M member.
+func (u *MATRIX3X3_Anonymous_e__Union) M() *[9]float32 {
+	return (*[9]float32)(unsafe.Pointer(u))
 }
 
 type MATRIX3X3 struct {
